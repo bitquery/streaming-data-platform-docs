@@ -1,2 +1,5 @@
-# streaming-data-platform-docs
-Documentation on the streaming data platform
+# Streaming Data Platform Documentation
+
+Documentation source to build a web site documenting Streaming Data Platform.
+
+
