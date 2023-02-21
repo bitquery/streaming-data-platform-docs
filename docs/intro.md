@@ -2,46 +2,68 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Bitquery data platform gives access to the blockchain data in a different ways.
+Depending on your usage preferences or application you are building, you may find
+one or more methods more appropriate.
 
-## Getting Started
 
-Get started by **creating a new site**.
+## GraphQL Query API
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Get started use the API in a minute by building **[your first query](docs/start/first-query.md)**.
 
-### What you'll need
+You can query archive, real-time data in different slices using metrics you select.
+After the query is built you can save it and embed it in your application using pre-cooked 
+code samples in any popular programming language.
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+```graphql
+query {
+  EVM(dataset: archive network: bsc) {
+    Transactions {
+      Block {
+        Date
+      }
+      count
+    }
+  }
+}
+```
+## Integrated Development Environment
 
-## Generate a new site
+Integrated Development Environment ( **[IDE](https://grapqhl.bitquery.io)** ) helps you to manage your query,
+share them with other developers and generate a code to use the queries in your applications.
 
-Generate a new Docusaurus site using the **classic template**.
+![IDE screen](/img/ide_screen.png)
 
-The classic template will automatically be added to your project after you run the command:
+## Subscription WebSocket API
 
-```bash
-npm init docusaurus@latest my-website classic
+Subscription WebSocket API is an extension of GraphQL API. It allows to subscribe on the updates
+in the data in real-time and receive the new data changes using WebSocket protocol.
+
+Protocols subscriptions-transport-ws and graphql-transport-ws are supported.
+
+```graphql
+subscription {
+  EVM(trigger_on: head) {
+    Transactions {
+      Block {
+        Hash
+        Number
+        Date
+      }
+      count
+    }
+  }
+}
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+## Cloud Data Storage
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+If you build your applications in cloud or you need raw data for deep investigations or even 
+machine learning algorithms, use the cloud data storage.
 
-## Start your site
+It contains optimized data for applications on different levels - from the raw data from blockchain nodes
+to the parsed protocols as DEX ( decentralized exchanges ) or NFT ( non-fungible tokens ).
 
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+![AWS S3 bucket](/img/aws_s3_bucket.png)

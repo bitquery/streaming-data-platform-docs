@@ -4,32 +4,31 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    //Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Data Streaming Platform',
+    Svg: require('@site/static/img/BitqueryBW.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Subscribe on the real-time data and build winning blockchain
+          applications.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-   // Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'GraphQL API',
+    Svg: require('@site/static/img/BitqueryBW.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Build effective GraphQL queries to any blockchain data in minutes and embed them in your applications.
+        Now with Websockets and subscription features!
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    //Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Cloud Data Sets',
+    Svg: require('@site/static/img/BitqueryBW.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Develop cloud applications using precise comprehensive archive datasets of all major blockchain networks.
       </>
     ),
   },
