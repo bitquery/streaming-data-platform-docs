@@ -39,3 +39,14 @@ $ GIT_USER=<Your GitHub username> yarn deploy
 ```
 
 If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+
+### Generate PDF
+
+```
+yarn build
+
+yarn serve
+
+npx docusaurus-prince-pdf -u http://localhost:3000/docs/intro
+
+```
