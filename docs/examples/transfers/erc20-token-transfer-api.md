@@ -1,4 +1,4 @@
-## ERC20 Token Transfers API
+# ERC20 Token Transfers API
 
 One of the most common types of transfers on Ethereum is ERC20 transfers. Let's see an example to get the latest ERC20 transfers using our API. Today we are taking an example of USDT token transfers. The contract address for the USDT token is [0xdac17f958d2ee523a2206206994597c13d831ec7](https://explorer.bitquery.io/ethereum/token/0xdac17f958d2ee523a2206206994597c13d831ec7)
 
