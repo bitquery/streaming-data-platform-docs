@@ -12,6 +12,8 @@ This is a very high-level view, it does not cover all corner cases. If we accumu
 capabilities that application may use from our graphql endpoints, it can be summarized
 as the following distinct cases.
 
+<a name="Query+Fact+Records"></a>
+
 ## Query Fact Records
 
 This is the simplest type of query. You just define the attributes which you need in the results,
@@ -80,8 +82,26 @@ query {
 }
 ```
 
+```maximum: Transfer_Amount``` calculates maximum amount of transfer in the scope of
+defined dimensions, namely ```Date```.
 
-## Susbcription on Facts
+## Subscription on Facts
 
-## Susbcription on Aggregate Updates
+It is a subscription to the results of [Query Fact Records](#Query+Fact+Records).
+Query can be convereted to subscription by replacing ```query``` word with 
+```subscription```. 
+
+Every new block on the blockchain will send the data to this 
+subscription if it contains the data for the query. It can be one or more records.
+If the block does not contain data that you query, it will not trigger the results.
+
+This subscription is appropriate when:
+
+1. application is capable to process raw stream of the data;
+2. minimum delay required between the data in the blockhain and the application;
+3. notification is required on trigger, defined on some specific conditions.
+
+## Subscription on Aggregate Updates
+
+
 
