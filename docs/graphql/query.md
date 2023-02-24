@@ -19,11 +19,16 @@ see it full. You only need a portion of it related to your needs typically.
 
 ## Query vs Subscription
 
-Query is used to query the data. When you need get updated results, you query the
-endpoint again with the query. 
+Query is used to query the data. When you need get updated results, you must query the
+endpoint again with the same or another query. 
 
 Subscription is used to get data updates. You define a [subscription](subscription), 
-and after the new da
+and after the new data appear, it will delivered to you without any actions from your side.
+
+This defines the cases when to use one or another:
+
+* use queries when you need data once, or the data not likely changed during its usage period
+* use subscriptions for the "live" data, or when data may be changed while using it
 
 
 Queries and [subscriptions](subscription) use identical schemas, except some attributes of the top
