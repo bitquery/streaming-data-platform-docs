@@ -25,7 +25,7 @@ endpoint again with the same or another query.
 Subscription is used to get data updates. You define a [subscription](subscription), 
 and after the new data appear, it will delivered to you without any actions from your side.
 
-This defines the cases when to use one or another:
+This defines the cases, when to use one or another:
 
 * use queries when you need data once, or the data not likely changed during its usage period
 * use subscriptions for the "live" data, or when data may be changed while using it
@@ -157,6 +157,7 @@ There are several types of attributes, described in the sections:
 
 * [limits](limits)
 * [ordering](ordering)
+* [filters](filters)
 * [calculations](calculations)
 
 
