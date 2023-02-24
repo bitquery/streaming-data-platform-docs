@@ -13,7 +13,7 @@ Bitquery's APIs allows you to retrieve information about trades that have occurr
 
 ```
 query MyQuery {
-  EVM(dataset: archive, network: eth) {
+  EVM(dataset: realtime, network: eth) {
     DEXTrades(
       where: {Trade: {Dex: {OwnerAddress: {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}}}}
       limit: {count: 10}
