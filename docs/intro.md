@@ -34,7 +34,7 @@ query {
 Integrated Development Environment ( **[IDE](https://grapqhl.bitquery.io)** ) helps you to manage your query,
 share them with other developers and generate a code to use the queries in your applications.
 
-![IDE screen](/img/ide_screen.png)
+![IDE screen](/img/ide/screen.png)
 
 ## Subscription WebSocket API
 
@@ -66,4 +66,4 @@ machine learning algorithms, use the cloud data storage.
 It contains optimized data for applications on different levels - from the raw data from blockchain nodes
 to the parsed protocols as DEX ( decentralized exchanges ) or NFT ( non-fungible tokens ).
 
-![AWS S3 bucket](/img/aws_s3_bucket.png)
+![AWS S3 bucket](/img/aws/s3_bucket.png)
