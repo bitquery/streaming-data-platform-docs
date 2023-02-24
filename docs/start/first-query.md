@@ -33,7 +33,7 @@ query {
 }
 ```
 
-After you created a query, the play button will appear to be green, 
+After you created a query, the run triangle button will appear to be green, 
 and you can press it now to see the results:
 
 ![IDE query execution](/img/ide/query_execution.png)
