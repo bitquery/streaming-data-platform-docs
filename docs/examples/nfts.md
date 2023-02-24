@@ -37,6 +37,8 @@ query MyQuery {
 
 ```
 
+In this query, you'll need to replace "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270" with the address you'd like to retrieve the balances for.
+
 -   `dataset` specifies the type of data that will be queried. In this case, we are using `realtime`, which means that the query will retrieve the most up-to-date data available.
 -   `network` specifies the Ethereum network that will be queried. In this case, we are using `eth` for the Ethereum Mainnet.
 -   `BalanceUpdates` is the field that is being queried, and it returns an array of balance update objects that match the specified criteria.
