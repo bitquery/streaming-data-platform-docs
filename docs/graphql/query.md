@@ -31,7 +31,7 @@ This defines the cases when to use one or another:
 * use subscriptions for the "live" data, or when data may be changed while using it
 
 
-Queries and [subscriptions](subscription) use identical schemas, except some attributes of the top
+Good news, that queries and [subscriptions](subscription) use identical schemas, except some attributes of the top
 element, to define the [dataset](datasets) usage. It allows your applications to 
 switch between pull and push modes of operation with a minimal changes of the code
 and queries.
