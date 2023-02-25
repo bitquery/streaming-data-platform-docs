@@ -32,7 +32,7 @@ This defines the cases, when to use one or another:
 
 
 Good news, that queries and [subscriptions](subscription) use identical schemas, except some attributes of the top
-element, to define the [dataset](datasets) usage. It allows your applications to 
+element, to define the [dataset](dataset/options.md) usage. It allows your applications to 
 switch between pull and push modes of operation with a minimal changes of the code
 and queries.
 
@@ -71,9 +71,9 @@ Top element of the query is
 which defines the type of schema used ( ```EVM``` , Ethereum Virtual Machine ). For different types of blockchains
 we use different schema. 
 
-```dataset: archive network: bsc``` is an attribute, defining how we query the [dataset](datasets).
+```dataset: archive network: bsc``` is an attribute, defining how we query the [dataset](dataset/options.md).
 In this case, we query just archive ( delayed ) data on BSC ( Binance Smart Chain ) network. 
-Refer to the [dataset](datasets) documentation for possible options to apply on this level.
+Refer to the [dataset](dataset/options.md) documentation for possible options to apply on this level.
 
 By selecting the top element ``` EVM ``` we completely define what we can query below this element.
 Apparently, Bitcoin and Ethereum have different schema and data, so we can not query them exactly the same way.
