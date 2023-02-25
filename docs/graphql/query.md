@@ -156,7 +156,7 @@ Refer to the [metric](metrics) tutorial for more details how you can use them.
 There are several types of attributes, described in the sections:
 
 * [limits](limits)
-* [ordering](ordering)
+* [ordering](sorting)
 * [filters](filters)
 * [calculations](calculations)
 
