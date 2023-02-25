@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Limiting
+# Limits
 
 Results are limited by using attributes ```limit``` and ```limitBy```
 
