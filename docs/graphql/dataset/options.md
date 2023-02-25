@@ -20,5 +20,7 @@ Top level element of the query has 3 attributes, defining what is the source for
 
 ![Dataset options](/img/ide/dataset_options.png)
 
-Note that [subscription](subscription) has a different set of top level elements. 
+:::note
+[subscription](subscription) has a different set of top level elements. 
 For example, the dataset for subscription is always realtime and not controlled.
+:::

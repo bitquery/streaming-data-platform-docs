@@ -15,8 +15,10 @@ Note that the last blocks in the realtime database are not finalized and may be 
 later recorded to the archive data. [Select Block](select_blocks) attribute controls
 how you can query the trunk or branch block updates  in realtime database.
 
+:::tip
 Realtime Database features:
 
 * contains the latest data available ( up to the last second );
 * includes all blocks, including trunk, branches. Some of these blocks can be removed when archived. Use [Select Block](select_blocks) attribute for better control;
 * fast to query
+:::

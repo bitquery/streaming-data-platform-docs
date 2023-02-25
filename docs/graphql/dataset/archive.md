@@ -13,6 +13,7 @@ You need to query it when you need:
 * all the blocks including the blockchain
 * aggegated queries, like balances, counts, volumes
 
+:::tip
 Realtime Database features:
 
 * includes all blocks from the genesis ( first one )
@@ -20,3 +21,5 @@ Realtime Database features:
 * only trunk blocks included
 * has significant delay of data ( from tens of minutes to hours )
 * queries need to be optimized, as the archive size quite significant
+
+:::
