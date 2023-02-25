@@ -83,7 +83,7 @@ Apparently, Bitcoin and Ethereum have different schema and data, so we can not q
 
 ```Blocks(limit: {count: 10})``` is what we call "Cube", particulary because we
 use  [OLAP](https://wikipedia.org/wiki/OLAP) methodology, applying
-[metrics](metrics/metrics). Cube defines what kind of facts we want to query, in this case
+[metrics](metrics/). Cube defines what kind of facts we want to query, in this case
 we interested in blocks. Cubes are generally different for different types of blockchains.
 
 
@@ -122,10 +122,10 @@ block **date** __AND__ by transaction **hash**:
 
 ### Metric Element
 
-```count``` is a [metric](metrics/metrics/metrics). It is optional, defines "what we want to measure".
+```count``` is a [metric](metrics/metrics/). It is optional, defines "what we want to measure".
 If it is missing, the results will give all data with the selected dimensions.
 
-Note that the presence of at least one [metric](metrics/metrics) changes the way how query operates.
+Note that the presence of at least one [metric](metrics/) changes the way how query operates.
 Compare these two queries:
 
 The following query returns as many entries as blocks we have, with the date for each block:
@@ -145,7 +145,7 @@ Block {
       count
 ```
 
-Refer to the [metric](metrics/metrics) tutorial for more details how you can use them.
+Refer to the [metric](metrics/) tutorial for more details how you can use them.
 
 
 
