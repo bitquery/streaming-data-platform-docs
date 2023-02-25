@@ -23,4 +23,6 @@ When we are going to pass the variables we have to define what type they are, so
 - `Float`
 - `Boolean`
 
-> TIP: You can make the variable required by adding an exclamation mark (`!`) at the end, if the variable is not defined, it will be counted as `null`.
+:::tip
+You can make the variable required by adding an exclamation mark (`!`) at the end, if the variable is not defined, it will be counted as `null`.
+:::
