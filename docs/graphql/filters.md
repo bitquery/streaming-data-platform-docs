@@ -113,3 +113,8 @@ For string data, the following operators applicable:
 
 * ```is``` equals to
 * ```not``` not equals to
+
+:::danger
+```not``` and ```ne``` filters do not prevent to query large amount of data, consider use them only with 
+some other filters
+:::
