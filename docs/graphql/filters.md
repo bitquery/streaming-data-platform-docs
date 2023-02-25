@@ -114,6 +114,19 @@ For string data, the following operators applicable:
 * ```is``` equals to
 * ```not``` not equals to
 
+
+### Date and Time Filter Types
+
+For date and timestamp data, the following operators applicable:
+
+* ```is``` date equals to
+* ```not``` date not equals to
+* ```after``` after certain date ( not including it )
+* ```since``` after including date
+* ```till``` before including date
+* ```before``` before not including date
+
+
 :::danger
 ```not``` and ```ne``` filters do not prevent to query large amount of data, consider use them only with 
 some other filters
