@@ -14,5 +14,5 @@ subscription {
 }
 ```
 
-Almost any query cqn be converted to subscription just by replacing ```query``` type to ```subscription```.
+Almost any query can be converted to subscription just by replacing ```query``` type to ```subscription```.
 
