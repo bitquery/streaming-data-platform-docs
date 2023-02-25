@@ -3,7 +3,7 @@
 You can integrate both queries and subscriptions in your application on any programming language and framework.
 First you create a query or subscription in [IDE](/docs/ide/login), and then you embed this query
 and some client code in your application. The client code depends on the programming language
-and set of libraries you prefer to use, try search google on "graphql libraies" keyword to start with.
+and set of libraries you prefer to use, try search google on "graphql YOUR-LANGUAGE library" keyword to start with.
 
 
 [IDE](/docs/ide/login) provides an example code templates to your queries 

@@ -32,7 +32,7 @@ This defines the cases, when to use one or another:
 
 
 Good news, that queries and [subscriptions](subscription) use identical schemas, except some attributes of the top
-element, to define the [dataset](datasets) usage. It allows your applications to 
+element, to define the [dataset](dataset/options.md) usage. It allows your applications to 
 switch between pull and push modes of operation with a minimal changes of the code
 and queries.
 
@@ -71,9 +71,9 @@ Top element of the query is
 which defines the type of schema used ( ```EVM``` , Ethereum Virtual Machine ). For different types of blockchains
 we use different schema. 
 
-```dataset: archive network: bsc``` is an attribute, defining how we query the [dataset](datasets).
+```dataset: archive network: bsc``` is an attribute, defining how we query the [dataset](dataset/options.md).
 In this case, we query just archive ( delayed ) data on BSC ( Binance Smart Chain ) network. 
-Refer to the [dataset](datasets) documentation for possible options to apply on this level.
+Refer to the [dataset](dataset/options.md) documentation for possible options to apply on this level.
 
 By selecting the top element ``` EVM ``` we completely define what we can query below this element.
 Apparently, Bitcoin and Ethereum have different schema and data, so we can not query them exactly the same way.
@@ -83,7 +83,7 @@ Apparently, Bitcoin and Ethereum have different schema and data, so we can not q
 
 ```Blocks(limit: {count: 10})``` is what we call "Cube", particulary because we
 use  [OLAP](https://wikipedia.org/wiki/OLAP) methodology, applying
-[metrics](metrics). Cube defines what kind of facts we want to query, in this case
+[metrics](metrics/). Cube defines what kind of facts we want to query, in this case
 we interested in blocks. Cubes are generally different for different types of blockchains.
 
 
@@ -122,10 +122,10 @@ block **date** __AND__ by transaction **hash**:
 
 ### Metric Element
 
-```count``` is a [metric](metrics). It is optional, defines "what we want to measure".
+```count``` is a [metric](metrics/metrics/). It is optional, defines "what we want to measure".
 If it is missing, the results will give all data with the selected dimensions.
 
-Note that the presence of at least one [metric](metrics) changes the way how query operates.
+Note that the presence of at least one [metric](metrics/) changes the way how query operates.
 Compare these two queries:
 
 The following query returns as many entries as blocks we have, with the date for each block:
@@ -145,7 +145,7 @@ Block {
       count
 ```
 
-Refer to the [metric](metrics) tutorial for more details how you can use them.
+Refer to the [metric](metrics/) tutorial for more details how you can use them.
 
 
 
@@ -156,7 +156,7 @@ Refer to the [metric](metrics) tutorial for more details how you can use them.
 There are several types of attributes, described in the sections:
 
 * [limits](limits)
-* [ordering](ordering)
+* [ordering](sorting)
 * [filters](filters)
 * [calculations](calculations)
 

@@ -6,7 +6,7 @@ sidebar_position: 3
 
 This is the most effective query.
 If you consider to query the large dataset in one query, you have to use aggregation. To use aggregation in
-GraphQL, you define one or several [metrics](metrics).
+GraphQL, you define one or several [metrics](/docs/graphql/metrics/).
 
 This type of query is useful in the following cases:
 
