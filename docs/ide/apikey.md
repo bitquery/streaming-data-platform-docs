@@ -4,10 +4,12 @@ sidebar_position: 2
 
 # API Key
 
+The API Key is a string that we provide so that you can authenticate yourself to Bitquery services, both in the IDE and in your applications the same API Key is used. In order to get your API Key you must go here [User API Key](https://graphql.bitquery.io/user/api_key), there you can see all the API Keys you have created, you can also re-generate your API Key by clicking the `Regenerate API-KEY` button.
 
-In order to get your API Key you must go here [User API Key](https://graphql.bitquery.io/user/api_key), there you can see all the API Keys you have created, you can also re-generate your API Key by clicking the `Regenerate API-KEY` button.
+:::caution Delay on Re-Generate 
 
-> Note that your active API Key will always be the first one.
+When regenerating an API Key it may take 5-10 minutes for your old API Key to be disabled, during this time the old and new keys will work, the old API Key will be disabled during this time.
+:::
 
 ## How to use
 
