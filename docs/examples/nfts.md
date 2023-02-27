@@ -8,7 +8,7 @@ Non-Fungible Tokens (NFTs) are digital assets with unique identification codes t
 
 Bitquery's  APIs help you extract and analyze NFT data from various blockchain networks. Below are some examples of NFT queries that can be performed using Bitquery's platform:
 
-## 1. Querying NFT Balance
+## 1. NFT Balance API
 One of the most common queries for NFTs is to track the ownership in a wallet.
 
 ```
