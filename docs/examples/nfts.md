@@ -37,7 +37,7 @@ query MyQuery {
 
 ```
 
-In this query, you'll need to replace "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270" with the address you'd like to retrieve the balances for. Find the GraphQl link [here](https://graphql.bitquery.io/ide/Wallets-with-Art-Blocks-BLOCKS-NFT)
+In this query, you'll need to replace "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270" with the address you'd like to retrieve the balances for. Find the GraphQL link [here](https://graphql.bitquery.io/ide/Wallets-with-Art-Blocks-BLOCKS-NFT)
 
 -   `dataset` specifies the type of data that will be queried. In this case, we are using `realtime`, which means that the query will retrieve the most up-to-date data available.
 -   `network` specifies the Ethereum network that will be queried. In this case, we are using `eth` for the Ethereum Mainnet.
