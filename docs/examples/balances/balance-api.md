@@ -9,7 +9,7 @@ The BalanceUpdates API provides information on the balance updates of a specific
 
 You can use BalanceUpdates API to get latest balance for an address.
 
-** Balance of an address
+## Balance of an address
 
 
 ``` graphql
@@ -31,7 +31,7 @@ query MyQuery {
 Open above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/balance-of-an-address---new-dataset).
 
 
-** Balance for an address for a specific currency
+## Balance for an address for a specific currency
 
 You can also get a balance for a specific currency for a given address just by adding Currency Filer. As you know, names on blockchains are not unique; however, addresses are. Therefore, while mentioning currencies, always use their currency address.
 
@@ -55,7 +55,7 @@ query MyQuery {
 Open above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Balance-for-an-address-for-an-specific-currency_1).
 
 
-** Balance updates of an address
+## Balance updates of an address
 
 Here's the query to retrieve the balance updates for a particular address for a specific token on the Ethereum Mainnet blockchain:
 
