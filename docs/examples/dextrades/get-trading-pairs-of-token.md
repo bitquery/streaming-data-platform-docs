@@ -2,8 +2,10 @@
 sidebar_position: 2
 ---
 
+# Trading Pairs API
+
 If you want to get all trades of a token, you might want to know all its trading pairs.
-Protocols like uniswap have pairs or pools. Today we will see how we can get all pairs of currency for DEXs.
+Protocols like uniswap have pairs or pools. In this section we will see how we can get all pairs of currency for DEXs.
 
 ## Get all pairs of a token across different DEXs
 
