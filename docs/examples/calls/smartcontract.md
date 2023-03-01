@@ -36,6 +36,9 @@ sidebar_position: 2
   }
 }
 ```
+
+**Parameters**
+
 - `Calls`: This is a GraphQL method that retrieves data about smart contract calls on the specified blockchain network.
 
 - `limit`: This parameter specifies the number of entries to return. In this example, we are setting the limit to 10, which means we will get the 10 most recent smart contract calls on the BSC network.
@@ -43,6 +46,8 @@ sidebar_position: 2
 - `orderBy`: This parameter specifies how to order the result. In this example, we are ordering the result by the Block_Date field in descending order, which means that the most recent calls will be returned first.
 
 - `where`: This parameter specifies a filter condition to apply to the result. In this example, we are filtering the result to only include calls made after February 27th, 2023, using the after operator.
+
+**Returned Data**
 
 - `Call`: This is a GraphQL field that retrieves data about the smart contract call itself, such as the log count and internal calls.
 
