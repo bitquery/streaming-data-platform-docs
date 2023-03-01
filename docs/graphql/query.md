@@ -22,7 +22,7 @@ see it full. You only need a portion of it related to your needs typically.
 Query is used to query the data. When you need get updated results, you must query the
 endpoint again with the same or another query. 
 
-Subscription is used to get data updates. You define a [subscription](subscription), 
+Subscription is used to get data updates. You define a [subscription](subscription/subsciption), 
 and after the new data appear, it will delivered to you without any actions from your side.
 
 This defines the cases, when to use one or another:
@@ -31,8 +31,8 @@ This defines the cases, when to use one or another:
 * use subscriptions for the "live" data, or when data may be changed while using it
 
 
-Good news, that queries and [subscriptions](subscription) use identical schemas, except some attributes of the top
-element, to define the [dataset](dataset/options.md) usage. It allows your applications to 
+Good news, that queries and [subscriptions](subscription/subsciption) use identical schemas, except some attributes of the top
+element, to define the [dataset](dataset/options) usage. It allows your applications to 
 switch between pull and push modes of operation with a minimal changes of the code
 and queries.
 
@@ -41,7 +41,7 @@ Compare the code in [the first query](/docs/start/first-query) and
 
 This section describes principles that applies to subscriptions
 as well as to queries. We will show examples for queries, but remember that they applied to
-[subscriptions](subscription) as well.
+[subscriptions](subscription/subsciption) as well.
 
 ## Query Elements
 
@@ -71,9 +71,9 @@ Top element of the query is
 which defines the type of schema used ( ```EVM``` , Ethereum Virtual Machine ). For different types of blockchains
 we use different schema. 
 
-```dataset: archive network: bsc``` is an attribute, defining how we query the [dataset](dataset/options.md).
+```dataset: archive network: bsc``` is an attribute, defining how we query the [dataset](dataset/options).
 In this case, we query just archive ( delayed ) data on BSC ( Binance Smart Chain ) network. 
-Refer to the [dataset](dataset/options.md) documentation for possible options to apply on this level.
+Refer to the [dataset](dataset/options) documentation for possible options to apply on this level.
 
 By selecting the top element ``` EVM ``` we completely define what we can query below this element.
 Apparently, Bitcoin and Ethereum have different schema and data, so we can not query them exactly the same way.
@@ -83,7 +83,7 @@ Apparently, Bitcoin and Ethereum have different schema and data, so we can not q
 
 ```Blocks(limit: {count: 10})``` is what we call "Cube", particulary because we
 use  [OLAP](https://wikipedia.org/wiki/OLAP) methodology, applying
-[metrics](metrics/). Cube defines what kind of facts we want to query, in this case
+[metrics](metrics). Cube defines what kind of facts we want to query, in this case
 we interested in blocks. Cubes are generally different for different types of blockchains.
 
 
@@ -122,10 +122,10 @@ block **date** __AND__ by transaction **hash**:
 
 ### Metric Element
 
-```count``` is a [metric](metrics/metrics/). It is optional, defines "what we want to measure".
+```count``` is a [metric](metrics). It is optional, defines "what we want to measure".
 If it is missing, the results will give all data with the selected dimensions.
 
-Note that the presence of at least one [metric](metrics/) changes the way how query operates.
+Note that the presence of at least one [metric](metrics) changes the way how query operates.
 Compare these two queries:
 
 The following query returns as many entries as blocks we have, with the date for each block:
@@ -145,7 +145,7 @@ Block {
       count
 ```
 
-Refer to the [metric](metrics/) tutorial for more details how you can use them.
+Refer to the [metric](metrics) tutorial for more details how you can use them.
 
 
 
