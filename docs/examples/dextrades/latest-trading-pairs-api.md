@@ -1,3 +1,9 @@
+---
+sidebar_position: 4
+---
+
+# Getting Latest Pairs
+
 ## Latest Trading Pairs for a DEX
 
 Let's see how we can get latest trading pairs created on DEXs. In this example we use Smart Contract Events to track PoolCreated event for [Uniswap v3 factory contract](https://explorer.bitquery.io/ethereum/smart_contract/0x1f98431c8ad98523631ae4a59f267346ea31f984/events). Because whenever a new pool gets created Uniswap v3 factory contract emits a PoolCreated event with the details of the pool. 
