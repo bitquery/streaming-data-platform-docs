@@ -8,7 +8,10 @@ The simplest way to create and run a quey is to use the IDE: [https://graphql.bi
 You first have to [register](../ide/login), and the IDE window will open.
 
 If IDE points to the default endpoint https://graphql.bitquery.io, you have to change it to the new endpoint
-https://streaming.bitquery.io/graphql. If you done everything correctly, you will 
+https://streaming.bitquery.io/graphql. Bookmark the link to open IDE with the
+correct URL: [https://graphql.bitquery.io/ide?endpoint=https://streaming.bitquery.io/graphql](https://graphql.bitquery.io/ide?endpoint=https://streaming.bitquery.io/graphql)
+
+If you did everything correctly, you will 
 see the grey triangle in the middle of the screen to run the query.
 
 Query editor is in the center of the screen, and you can use handy Ctrl-Space key
