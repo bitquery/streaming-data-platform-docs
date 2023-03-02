@@ -32,6 +32,21 @@ const config = {
     locales: ['en'],
   },
 
+    plugins: [
+    [
+      "@graphql-markdown/docusaurus",
+      {
+        schema: "https://streaming.bitquery.io/graphql",
+        rootPath: "./docs/graphql-reference/", // docs will be generated under './docs/graphql-reference'
+        baseURL: ".",
+        linkRoot: "/tutorial/graphql-reference/",
+        homepage: "./docs/intro.md",
+        loaders: {
+          UrlLoader: "@graphql-tools/url-loader"
+        },
+      },
+    ],
+  ],
   presets: [
     [
       'classic',
