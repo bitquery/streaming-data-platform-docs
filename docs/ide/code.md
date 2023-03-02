@@ -2,4 +2,8 @@
 sidebar_position: 4
 ---
 
-# Checkout Application Code
+# Export Code
+
+![Export code](/img/ide/Code_export.png)
+
+
