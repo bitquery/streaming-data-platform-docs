@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <Layout
       title={`Tutorial`}
-      description="Using ${siteConfig.title}">
+      description="Using GraphQL, Cloud Storage and IDE">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
