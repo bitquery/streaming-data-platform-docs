@@ -11,10 +11,10 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://bitquery.io',
+  url: 'https://streaming.bitquery.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/tutorial/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -72,7 +72,7 @@ const config = {
             position: 'left',
             label: 'Tutorial',
           },
-          {to: '/blog', label: 'News', position: 'left'},
+          {to: 'blog', label: 'News', position: 'left'},
         ],
       },
       footer: {
@@ -87,11 +87,11 @@ const config = {
               },
               {
                 label: 'Tutorial',
-                to: '/docs/intro',
+                to: 'docs/intro',
               },
               {
                 label: 'News',
-                to: '/blog',
+                to: 'blog',
               },
             ],
           },
