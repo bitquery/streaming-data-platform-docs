@@ -19,6 +19,7 @@ This command starts a local development server and opens up a browser window. Mo
 ### Build
 
 ```
+$ export NODE_OPTIONS=--max_old_space_size=16000
 $ yarn build
 ```
 
