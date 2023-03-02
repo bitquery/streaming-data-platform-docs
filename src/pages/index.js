@@ -30,7 +30,7 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`${siteConfig.title} Tutorial`}
+      title={`Tutorial`}
       description="Using ${siteConfig.title}">
       <HomepageHeader />
       <main>
