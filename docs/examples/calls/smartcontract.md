@@ -104,7 +104,7 @@ query MyQuery {
 - `Call` object is used to filter based on the call itself.
 - `Create` field within the Call object is filtered to only include calls that were contract creation calls (i.e., with a true value).
 
-** Returned Data**
+**Returned Data**
 
 - `LogCount`: The number of logs associated with the call.
 - `InternalCalls`: The number of internal calls made within the call.
