@@ -14,9 +14,11 @@ RUN yarn install && yarn build
 
 FROM nginx:stable-alpine
 
+ENV PROJECT_NAME=tutorial
+
 WORKDIR /app
 
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html/${PROJECT_NAME}
 
 EXPOSE 80
 
