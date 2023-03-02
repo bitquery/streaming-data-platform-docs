@@ -1,7 +1,7 @@
 ---
 slug: documentation-started
 title: Started documenting data platform
-authors: [astudnev,gaurav,crox-safe,Spendil,dmitrybitquery,Olerinskaia]
+authors: [astudnev,gaurav,crox-safe,Divyasshree]
 tags: [bitquery]
 ---
 
