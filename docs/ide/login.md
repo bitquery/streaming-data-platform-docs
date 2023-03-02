@@ -8,7 +8,7 @@ To register in our IDE you must go to the following link [GraphQL IDE](https://g
 Once inside you must click on Not registered? and fill in the following fields:
 - Email
 - Password
-- Passoword Confirmation
+- Password Confirmation
 - Name
 - Company Name
 
