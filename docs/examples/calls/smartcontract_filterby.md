@@ -11,12 +11,6 @@ sidebar_position: 1
 This query retrieves the 10 most recent smart contract calls that match a specific function signature (harvest()) on the Binance Smart Chain (BSC) network. It also includes transaction and block data associated with each call. 
 You can find the GraphQL query [here](https://graphql.bitquery.io/ide/Calls-by-Method-Signature)
 
-**Parameters**
-- `EVM(dataset: combined, network: bsc)`: This parameter specifies the blockchain network and dataset to query. In this case, we are querying the Binance Smart Chain network with the combined dataset.
-- `Calls`: This parameter retrieves the list of smart contract calls that match the specified conditions.
-- `limit`: {count: 10}: This parameter limits the number of results returned to 10.
-- `orderBy`: {descending: Block_Date}: This parameter orders the results in descending order based on the block date of the calls.
-- `where: {Call: {Signature: {Signature: {is: "harvest()"}}}, Block: {Date: {after: "2023-01-01"}}}:` This parameter specifies the conditions to filter the smart contract calls. In this case, we filter calls based on the function signature harvest() and a block date after January 1, 2023.
 
 ```
 query MyQuery {
@@ -45,6 +39,13 @@ query MyQuery {
   }
 }
 ```
+
+**Parameters**
+- `EVM(dataset: combined, network: bsc)`: This parameter specifies the blockchain network and dataset to query. In this case, we are querying the Binance Smart Chain network with the combined dataset.
+- `Calls`: This parameter retrieves the list of smart contract calls that match the specified conditions.
+- `limit`: {count: 10}: This parameter limits the number of results returned to 10.
+- `orderBy`: {descending: Block_Date}: This parameter orders the results in descending order based on the block date of the calls.
+- `where: {Call: {Signature: {Signature: {is: "harvest()"}}}, Block: {Date: {after: "2023-01-01"}}}:` This parameter specifies the conditions to filter the smart contract calls. In this case, we filter calls based on the function signature harvest() and a block date after January 1, 2023.
 
 **Returned Data**
 
