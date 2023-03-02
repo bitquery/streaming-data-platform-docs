@@ -54,3 +54,60 @@ sidebar_position: 2
 - `Transaction`: This is a GraphQL field that retrieves data about the transaction that initiated the smart contract call, such as the gas used, hash, sender and receiver addresses, type, and index.
 
 - `Block`: This is a GraphQL field that retrieves data about the block in which the smart contract call was included, such as the date and time of the block.
+
+
+## Recent Smart Contract Creation Calls
+
+This GraphQL query fetches data from the EVM (Ethereum Virtual Machine) dataset in the "eth" network about the 10 most recent calls made in Ethereum that were created after February 1st, 2023, that were contract creation calls.
+
+```
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    Calls(
+      limit: {count: 10}
+      orderBy: {descending: Block_Date}
+      where: {Block: {Date: {after: "2023-02-01"}}, Call: {Create: true}}
+    ) {
+      Call {
+        LogCount
+        InternalCalls
+        Create
+        EnterIndex
+        ExitIndex
+      }
+      Transaction {
+        Gas
+        Hash
+        From
+        To
+        Type
+        Index
+      }
+      Block {
+        Date
+      }
+    }
+  }
+}
+
+```
+
+**Parameters**
+
+- `network` argument is set to eth, which specifies that only data from the Ethereum network should be included.
+- `Calls` field specifies that information about calls should be retrieved.
+- `limit` argument is set to {count: 10}, which specifies that only the 10 most recent calls should be returned.
+- `orderBy` argument is set to {descending: Block_Date}, which specifies that the calls should be ordered in descending order based on their associated block date.
+- `where` argument is used to filter the results based on certain criteria:
+- `Block` object is used to filter based on the associated block.
+- `Date` field within the Block object is filtered using the after operator to only include blocks created after February 1st, 2023.
+- `Call` object is used to filter based on the call itself.
+- `Create` field within the Call object is filtered to only include calls that were contract creation calls (i.e., with a true value).
+
+** Returned Data**
+
+- `LogCount`: The number of logs associated with the call.
+- `InternalCalls`: The number of internal calls made within the call.
+- `Create`: A boolean value indicating whether the call was a contract creation call (i.e., with a value of true).
+- `EnterIndex`: The index of the call in the list of calls made within the associated transaction.
+- `ExitIndex`: The index of the call in the list of calls made within the associated transaction.
