@@ -10,8 +10,8 @@ defines simple rules how the schema is defined, and how to query the data using 
 ## Schema
 
 Schema defines what data you can query and which options ( arguments ) you can apply to the query.
-Schema allows [IDE](/docs/ide/login) to create hints to build the query interactively.
-[IDE](/docs/ide/login) also shows the schema on query builder and in Document section.
+Schema allows [IDE](../ide/login) to create hints to build the query interactively.
+[IDE](../ide/login) also shows the schema on query builder and in Document section.
 Only queries matching schema can be successfully executed.
 
 Schema for blockchain data is pretty complicated, but for your queries you do not need to
@@ -36,8 +36,8 @@ element, to define the [dataset](dataset/options) usage. It allows your applicat
 switch between pull and push modes of operation with a minimal changes of the code
 and queries.
 
-Compare the code in [the first query](/docs/start/first-query) and
-[the first subscription](/docs/start/getting-updates) to see the difference.
+Compare the code in [the first query](../start/first-query) and
+[the first subscription](../start/getting-updates) to see the difference.
 
 This section describes principles that applies to subscriptions
 as well as to queries. We will show examples for queries, but remember that they applied to
@@ -165,7 +165,7 @@ There are several types of attributes, described in the sections:
 
 To be correctly executed, the query must conform with the following requirements:
 
-1. query must conform the schema. When you build query in the [IDE](/docs/ide/login), it will highlight all errors according to schema
+1. query must conform the schema. When you build query in the [IDE](../ide/login), it will highlight all errors according to schema
 2. query should not violate principles described above and some natural limitations of the database capabilities. For example, you can not fetch a million result in one query, you have to use offset and limits.
 3. query should not consume more than available resources on the server. We use points to calculate consumed resources.
 
