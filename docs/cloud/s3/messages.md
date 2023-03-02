@@ -74,6 +74,6 @@ It is signed with ECDSA private key of the node owner.
 Message metadata attribute ```x-amz-meta-auth-signer``` shows the owner of the node, which 
 generated the message. Message can be validated with ```x-amz-meta-auth-signature``` attribute.
 
-:::note
+:::caution
 As descriptor is not a part of the message metadata, you can not validate the signature against the body content.
 :::
