@@ -191,7 +191,7 @@ Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.i
 
 If you are looking for token trades on a specific dex, use the following API as an example. Here we are getting [WETH Token](https://explorer.bitquery.io/ethereum/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) trades from the Uniswap V3 DEX. You can also use the factory contract of Uniswap-like protocols in the DEX ->  OwnerAddress filter to get trades for that DEX.
 
-If you want to check the list of supported DEX, please check this [API](/list-of-supported-dexs-api.md)
+If you want to check the list of supported DEX, please check this [API](list-of-supported-dexs-api)
 
 ```graphql
 {
