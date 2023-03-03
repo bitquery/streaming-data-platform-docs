@@ -8,4 +8,6 @@ In the IDE you can share your queries, this way you can allow other people to se
 
 ![IDE Query Share](/img/ide/query_share.png)
 
-> Tags are very useful to organize queries, this way it is easier to find them, try to use them!
+:::tip
+Tags are very useful to organize queries, this way it is easier to find them, try to use them!
+:::
