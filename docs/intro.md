@@ -13,7 +13,7 @@ Get started with our APIs in a minute by building **[your first query](start/fir
 
 You can query [archive](graphql/dataset/archive), [real-time](graphql/dataset/realtime) or [combined](graphql/dataset/combined) dataset based on your requirements.
 
-After the query is built you can [save](graphql/ide/private) it and embed it in your application using [pre-cooked code snippet](graphql/ide/code) in any popular programming language.
+After the query is built you can [save](ide/private) it and embed it in your application using [pre-cooked code snippet](ide/code) in any popular programming language.
 
 ```graphql
 query {
