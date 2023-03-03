@@ -6,6 +6,7 @@ Bitquery's  APIs help you extract and analyze NFT data from various blockchain n
 
 ## NFT Holders for a project
 
+This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens associated with that smart contract, ordered by the sum of the token balances in descending order.
 
 ```graphql 
 {
@@ -24,6 +25,19 @@ Bitquery's  APIs help you extract and analyze NFT data from various blockchain n
 }
 
 ```
+
+**Parameters**
+
+-   `network`: This specifies the Ethereum network to use. In this case, the network is "eth".
+-   `dataset`: This specifies the dataset to use. In this case, the dataset is "combined".
+-   `limit`: This parameter specifies the maximum number of results to return. In this query, the limit is set to 100.
+-   `orderBy`: This parameter specifies the field to order the results by. In this query, the results are ordered in descending order of balance.
+-   `where`: This parameter specifies the conditions to filter the results by. In this query, the filter condition is that the Currency is a Smart Contract with the address "0xf5b0a3efb8e8e4c201e2a935f110eaaf3ffecb8d".
+
+** Returned Data**
+
+-   `Address`: This field returns the Ethereum wallet address holding the NFT
+-   `balance`: This field returns the sum of the token balances associated with the Ethereum address.
 
 ## NFT owned by an address
 
@@ -83,6 +97,31 @@ Bitquery's  APIs help you extract and analyze NFT data from various blockchain n
 
 ## All the NFT collections owned by an address
 
+```
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    Transfers(
+      orderBy: {descending: Block_Time}
+      where: {Block: {Number: {eq: "16747554"}}, Transfer: {Currency: {Fungible: false}}}
+    ) {
+      Block {
+        Hash
+        Number
+      }
+      Transfer {
+        Amount
+        Currency {
+          Name
+          Symbol
+          Native
+        }
+        Sender
+        Receiver
+      }
+    }
+  }
+}
+```
 
 ## All NFT transfers in a block
 
