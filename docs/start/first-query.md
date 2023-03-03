@@ -21,12 +21,12 @@ editor, it will show the drop-down list:
 ![IDE context menu](/img/ide/context_menu.png)
 
 So you can type the query using hints from IDE. As example, you can
-query the latest blocks on ETH network:
+query the latest 10 blocks on ETH network:
 
 ```graphql
-query {
-	EVM {
-    Blocks {
+{
+  EVM(network: eth) {
+    Blocks(limit: {count: 10}) {
       Block {
         Number
         Time

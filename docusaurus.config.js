@@ -97,7 +97,7 @@ const config = {
             title: 'Links',
             items: [
               {
-                label: 'Web site',
+                label: 'Website',
                 to: 'https://bitquery.io',
               },
               {
@@ -118,6 +118,10 @@ const config = {
                 href: 'https://t.me/Bloxy_info',
               },
               {
+                label: 'Discord',
+                href: 'https://discord.gg/EEBVTQnb2E',
+              },
+              {
                 label: 'Twitter',
                 href: 'https://twitter.com/Bitquery_io',
               },
@@ -127,9 +131,13 @@ const config = {
             title: 'More',
             items: [
               {
+                label: 'Forum',
+                href: 'https://community.bitquery.io/',
+              },
+              {
                 label: 'GitHub',
                 href: 'https://github.com/bitquery',
-              },
+              }
             ],
           },
         ],
