@@ -9,11 +9,11 @@ Bitquery 's infrastructure provides you access to historical and real-time block
 
 ## GraphQL Query API
 
-Get started with our APIs in a minute by building **[your first query](docs/start/first-query.md)**.
+Get started with our APIs in a minute by building **[your first query](start/first-query)**.
 
-You can query [archive](docs/graphql/dataset/archive.md)), [real-time](docs/graphql/dataset/realtime.md)) or [combined](docs/graphql/dataset/combined.md) dataset based on your requirements.
+You can query [archive](graphql/dataset/archive), [real-time](graphql/dataset/realtime) or [combined](graphql/dataset/combined) dataset based on your requirements.
 
-After the query is built you can [save](docs/graphql/ide/private.md) it and embed it in your application using [pre-cooked code snippet](docs/graphql/ide/code.md) in any popular programming language.
+After the query is built you can [save](graphql/ide/private) it and embed it in your application using [pre-cooked code snippet](graphql/ide/code) in any popular programming language.
 
 ```graphql
 query {
