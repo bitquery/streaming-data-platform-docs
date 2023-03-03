@@ -7,8 +7,6 @@ sidebar_position: 11
 To view your account details, you can go to [Account](https://graphql.bitquery.io/user/account), in this dashboard you will see the following
 
 
-
-
 ## Account 
 
 In this section you can see your account information.
