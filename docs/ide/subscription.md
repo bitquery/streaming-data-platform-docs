@@ -8,7 +8,7 @@ Real-time subscriptions are supported in the IDE, this will allow us to get the 
 
 ![Export code](/img/ide/ide_subscription.gif)
 
-> Query used: [Real Time Subscription | BSC](https://graphql.bitquery.io/ide/Real-Time-Blocks-Subscription--BSC)
+> Query used: [Real Time Blocks Subscription | BSC](https://graphql.bitquery.io/ide/Real-Time-Blocks-Subscription--BSC)
 
 Once you click on Play you can stop it by clicking on the circle again.
 
