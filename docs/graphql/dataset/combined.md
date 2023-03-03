@@ -19,3 +19,6 @@ how you can query the trunk or branch block updates **ONLY for realtime database
 Typically you should avoid using this type of query, as it is slower than realtime and archive
 and does not give full consistency of the data.
 :::
+
+
+Also Check [Archive](archive) and [RealTime](realtime) dataset.

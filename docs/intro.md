@@ -4,18 +4,16 @@ sidebar_position: 1
 
 # Introduction
 
-Bitquery data platform gives access to the blockchain data in a different ways.
-Depending on your usage preferences or application you are building, you may find
-one or more methods more appropriate.
+Bitquery 's infrastructure provides you access to historical and real-time blockchain data through various interfaces such as GraphQL APIs.
 
 
 ## GraphQL Query API
 
-Get started use the API in a minute by building **[your first query](docs/start/first-query.md)**.
+Get started with our APIs in a minute by building **[your first query](docs/start/first-query.md)**.
 
-You can query archive, real-time data in different slices using metrics you select.
-After the query is built you can save it and embed it in your application using pre-cooked 
-code samples in any popular programming language.
+You can query [archive](docs/graphql/dataset/archive.md)), [real-time](docs/graphql/dataset/realtime.md)) or [combined](docs/graphql/dataset/combined.md) dataset based on your requirements.
+
+After the query is built you can [save](docs/graphql/ide/private.md) it and embed it in your application using [pre-cooked code snippet](docs/graphql/ide/code.md) in any popular programming language.
 
 ```graphql
 query {
@@ -29,16 +27,16 @@ query {
   }
 }
 ```
-## Integrated Development Environment
+## Integrated Development Environment (IDE)
 
-Integrated Development Environment ( **[IDE](https://grapqhl.bitquery.io)** ) helps you to manage your query,
+Integrated Development Environment ( **[IDE](https://graphql.bitquery.io/ide?endpoint=https://streaming.bitquery.io/graphql)** ) helps you to manage your query,
 share them with other developers and generate a code to use the queries in your applications.
 
 ![IDE screen](/img/ide/screen.png)
 
-## Subscription WebSocket API
+## GraphQL Subscription (WebSocket) API
 
-Subscription WebSocket API is an extension of GraphQL API. It allows to subscribe on the updates
+Subscription (WebSocket) is an extension of GraphQL API. It allows to subscribe on the updates
 in the data in real-time and receive the new data changes using WebSocket protocol.
 
 Protocols subscriptions-transport-ws and graphql-transport-ws are supported.
@@ -67,3 +65,18 @@ It contains optimized data for applications on different levels - from the raw d
 to the parsed protocols as DEX ( decentralized exchanges ) or NFT ( non-fungible tokens ).
 
 ![AWS S3 bucket](/img/aws/s3_bucket.png)
+
+
+
+## SQL Like Interface
+
+We also provide SQL like interface on our Enterprise plan, if you want to explore that, please send us email at [hello@bitquery.io](mailto:hello@bitquery.io)
+
+
+## Bitquery Support Channels
+
+We highly encourage you to dig into our docs first; however, you can contact us on the following platforms if you still have any queries.
+
+1. [Telegram](https://t.me/bloxy_info) & [Discord](https://discord.gg/EEBVTQnb2E) - For quick questions and doubts
+2. [Community Forum](https://community.bitquery.io/) - For how to questions, features requests that can also help wider community
+3. [Support Desk](https://support.bitquery.io/hc/en-us/requests/new) - For data problems, bugs 
