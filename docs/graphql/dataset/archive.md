@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Archive Database
 
-Archive database contains the data with the delay from tens of minutes to several hours,
+Archive database contains the data with the **delay from tens of minutes to several hours**,
 depening on the blockchain. It contains the data from the first ( genesis ).
 
 You need to query it when you need:
@@ -14,7 +14,7 @@ You need to query it when you need:
 * aggegated queries, like balances, counts, volumes
 
 :::tip
-Realtime Database features:
+Archive Database features:
 
 * includes all blocks from the genesis ( first one )
 * has a strong consistency of the data
@@ -23,3 +23,6 @@ Realtime Database features:
 * queries need to be optimized, as the archive size quite significant
 
 :::
+
+
+Also Check [Combined](combined) and [RealTime](realtime) dataset.
