@@ -1,4 +1,7 @@
-## Historical Token Trades
+## Historical Token Trades & Price API
+
+DEXTrades API can give you historical trades. Let's see an example where we get trades of [BLUR Token](https://explorer.bitquery.io/ethereum/token/0x5283d291dbcf85356a21ba090e6db59121208b44) in the past. As you can see, we are using Block -> Time filter, which includes the time. If you want to filter by date, then use Block -> Date. You can also use Block -> Number if you want to filter based on block height.
+
 
 ```graphql
 {
@@ -6,7 +9,7 @@
     buyside: DEXTrades(
       limit: {count: 10}
       orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}}}, Block: {Time: {since: "2023-03-03T01:00:00", till: "2023-03-05T05:15:23"}}}
+      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}}}, Block: {Time: {since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z"}}}
     ) {
       Block {
         Number
@@ -45,7 +48,7 @@
     sellside: DEXTrades(
       limit: {count: 10}
       orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}}}, Block: {Time: {since: "2023-03-03T01:00:00", till: "2023-03-05T05:15:23"}}}
+      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}}}, Block: {Time: {since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z"}}}
     ) {
       Block {
         Number
@@ -86,64 +89,13 @@
 
 ```
 
-https://graphql.bitquery.io/ide/token-trades-bw-a-time_1
-
-
-## Token price using trades at a given past day/time
+Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/token-trades-bw-a-time_1).
 
 
 
+## Latest Token Trades
 
-```graphql
-{
-  EVM(dataset: combined, network: eth) {
-    buyside: DEXTrades(
-      limit: {count: 1}
-      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}, Sell: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}, Block: {Time: {since: "2023-02-01T01:00:00Z", till: "2023-02-01T01:15:23Z"}}}
-    ) {
-      Block {
-        Number
-        Time
-      }
-      Transaction {
-        From
-        To
-        Hash
-      }
-      Trade {
-        Buy {
-          Amount
-          Buyer
-          Currency {
-            Name
-            Symbol
-            SmartContract
-          }
-          Seller
-          Price
-        }
-        Sell {
-          Amount
-          Buyer
-          Currency {
-            Name
-            SmartContract
-            Symbol
-          }
-          Seller
-          Price
-        }
-      }
-    }
-  }
-}
-
-
-```
-
-https://graphql.bitquery.io/ide/WETH-price-against-USDT-at-a-specific-time_1
-
-## Latest Token Trades 
+To get the latest token trades you just need to sort by Block -> Time.
 
 ```
 {
@@ -231,11 +183,14 @@ https://graphql.bitquery.io/ide/WETH-price-against-USDT-at-a-specific-time_1
 
 ```
 
-https://graphql.bitquery.io/ide/latest-trades-for-a-token---both-buy-and-sell
+Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/latest-trades-for-a-token---both-buy-and-sell)
 
 
 
 ## Token trade from a specific DEX
+
+If you are looking for token trades on a specific dex, use the following API as an example. Here we are getting [WETH Token](https://explorer.bitquery.io/ethereum/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) trades from the Uniswap V3 DEX. You can also use the factory contract of Uniswap-like protocols in the DEX ->  OwnerAddress filter to get trades for that DEX.
+
 
 ```graphql
 {
@@ -292,12 +247,16 @@ https://graphql.bitquery.io/ide/latest-trades-for-a-token---both-buy-and-sell
 
 ```
 
-https://graphql.bitquery.io/ide/token-trades-for-a-specific-DEX_1
+Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/token-trades-for-a-specific-DEX_1).
 
 
 
 
-## Subscribe to new token trades
+## Subscribe to new token trades (Webhook)
+
+You can use Graphql subscription (Webhook) to subscribe to latest trades. In the following example we are subscribing to latest trades for [WETH Token](https://explorer.bitquery.io/ethereum/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).
+
+
 
 ```graphql
 subscription {
@@ -383,4 +342,4 @@ subscription {
 
 ```
 
-https://graphql.bitquery.io/ide/latest-token-trades-subscription
+Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/latest-token-trades-subscription)
