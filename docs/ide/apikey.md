@@ -18,3 +18,8 @@ To make use of the API Key will depend on your application, usually this is pass
 ## Why
 
 The use of the API Key is strictly related to the use of the account, this will allow you to register the points you have consumed and the metrics associated to your account.
+
+:::caution Don't share your API Key
+
+Your API Key is your identity in the system, you have to be very careful to whom and where you place your API Key, as this will directly impact the performance of your account.
+:::
