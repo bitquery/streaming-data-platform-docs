@@ -4,11 +4,14 @@ sidebar_position: 6
 
 # Smart Contract Calls
 
-Calls API provide details about smart contracts call, arguments etc. 
+Calls API provides details about smart contract calls, arguments, callers, etc.
 
-This api gives detailed information about the smart contract calls including raw data and It also support [Opcodes](https://github.com/crytic/evm-opcodes).
+This api gives detailed information about the smart contract calls, including raw data, and supports [Opcodes](https://github.com/crytic/evm-opcodes).
+
+The API allows different filters to query the Smart contract calls details from different dimensions. 
 
 Let's see an example.
+
 
 ```graphql
 {
@@ -66,4 +69,4 @@ Let's see an example.
 
 ```
 
-You can see more example of BalanceUpdates api in [here](docs/examples/balances/balance-api.md) and [here](docs/examples/nft/nft-api.md)
+You can see more example of Calls api in [here](docs/examples/calls/smartcontract.md).
