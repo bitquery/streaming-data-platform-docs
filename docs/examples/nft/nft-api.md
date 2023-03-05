@@ -36,7 +36,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 **Parameters**
 
 -   `network`: This specifies the Ethereum network to use. In this case, the network is "eth".
--   `dataset`: This specifies the dataset to use. In this case, the dataset is "combined".
+-   `dataset`: This specifies the dataset to use. In this case, the dataset is [combined](/docs/graphql/dataset/combined). 
 -   `limit`: This parameter specifies the maximum number of results to return. In this query, the limit is set to 100.
 -   `orderBy`: This parameter specifies the field to order the results by. In this query, the results are ordered in descending order of balance.
 -   `where`: This parameter specifies the conditions to filter the results by. In this query, the filter condition is that the Currency is a Smart Contract with the address "0xf5b0a3efb8e8e4c201e2a935f110eaaf3ffecb8d".
@@ -76,7 +76,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 
 ```
 **Parameters**
--   `EVM(network: eth, dataset: combined)`: specifies that we want to query the combined dataset of the Ethereum blockchain.
+-   `EVM(network: eth, dataset: combined)`: specifies that we want to query the [combined](/docs/graphql/dataset/combined) dataset of the Ethereum blockchain.
 -   `BalanceUpdates`: specifies that we want to retrieve balance updates for a specific smart contract.
 -   `where: { Currency: { SmartContract: { is: "0xBE223020724CC3e2999f5dCeDA3120484FdBfef7" } }, BalanceUpdate: { Address: { is: "0xb92505a3364B7C7E333c05B44cE1E55377fC43cA" }, Amount: { gt: "0" } } }`: specifies the filter condition to retrieve balance updates for a specific smart contract with address "0xBE223020724CC3e2999f5dCeDA3120484FdBfef7" and a specific address "0xb92505a3364B7C7E333c05B44cE1E55377fC43cA" which has a balance greater than 0.
 
@@ -120,7 +120,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 
 **Parameters**
 -   `network: eth` specifies that the Ethereum network is being queried.
--   `dataset: combined` specifies that the combined dataset is being used.
+-   `dataset: combined` specifies that the [combined](/docs/graphql/dataset/combined) dataset is being used.
 -   `BalanceUpdates` retrieves information about balance updates.
 -   `limit: {count: 100}` specifies that up to 100 results will be returned.
 -   `orderBy: {descendingByField: "balance"}` sorts the results in descending order by the token balance.
@@ -165,7 +165,7 @@ This query retrieves all NFT token transfers on the Ethereum network within a sp
 
 The EVM Transfers query takes in the following parameters:
 
--   `dataset`: This specifies the dataset to use. In this case, the dataset is "combined".
+-   `dataset`: This specifies the dataset to use. In this case, the dataset is [combined](/docs/graphql/dataset/combined)
 -   `network`: This specifies the Ethereum network to use. In this case, the network is "eth".
 -   `orderBy`: This parameter specifies the field to order the results by. In this query, the results are ordered in descending order of block time.
 -   `where`: This parameter specifies the conditions to filter the results by. In this query, the filter condition is that the transfer is non-fungible and occurred within a specific block identified by the block number.
