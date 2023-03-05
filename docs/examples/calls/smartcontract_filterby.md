@@ -41,7 +41,7 @@ query MyQuery {
 ```
 
 **Parameters**
-- `EVM(dataset: combined, network: bsc)`: This parameter specifies the blockchain network and dataset to query. In this case, we are querying the Binance Smart Chain network with the combined dataset.
+- `EVM(dataset: combined, network: bsc)`: This parameter specifies the blockchain network and dataset to query. In this case, we are querying the Binance Smart Chain network with the [combined](/docs/graphql/dataset/combined) dataset.
 - `Calls`: This parameter retrieves the list of smart contract calls that match the specified conditions.
 - `limit`: {count: 10}: This parameter limits the number of results returned to 10.
 - `orderBy`: {descending: Block_Date}: This parameter orders the results in descending order based on the block date of the calls.
@@ -101,20 +101,14 @@ query MyQuery {
 **Parameters**
 
 - `dataset` parameter specifies the dataset to be queried, which is set to combined.
-
 - `network` parameter specifies the network to be queried, which is set to bsc.
-
 - `limit` parameter is used to limit the number of results returned and is set to 10.
-
 - `orderBy` parameter is used to sort the results by the Block_Date field in descending order.
-
 - `where` parameter is used to filter the results based on certain conditions. In this case, the where parameter filters the results to include only STATICCALL calls made after January 1st, 2023.
 
 
 **Returned Data**
 
 - `Call`: Returns information about the STATICCALL call, including the number of logs generated, internal calls made, and the name of the opcode used.
-
 - `Transaction`: Returns information about the transaction that contains the STATICCALL call, including the gas used, transaction hash, sender address, recipient address, transaction type, and transaction index.
-
 - `Block`: Returns the date of the block in which the STATICCALL call was made.
