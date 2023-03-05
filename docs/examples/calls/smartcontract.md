@@ -9,7 +9,7 @@ sidebar_position: 2
 
  ##  Recent Smart Contract Calls
 
- ```
+ ```graphql
  query MyQuery {
   EVM(dataset: combined, network: bsc) {
     Calls(
