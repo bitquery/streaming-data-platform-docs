@@ -26,7 +26,7 @@ To retrieve data on token and currency transfers using Bitquery, users can utili
     }
 ```
 
-`Transfers`: Returns an array of the top 10 token transfers on the specified blockchain network.
+`Transfers`: The top level method that returns tranfer information
 
 - `Transfer`: Returns information on the token transfer.
 
