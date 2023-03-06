@@ -62,7 +62,7 @@ query MyQuery {
 This query retrieves the date and number of unique event calls for the date. 
 You can find the query [here](https://graphql.bitquery.io/ide/Daily-Unique-Call-Count)
 
-```grapql
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: bsc) {
     Events(
