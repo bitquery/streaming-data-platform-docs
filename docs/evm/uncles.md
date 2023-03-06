@@ -8,7 +8,7 @@ sidebar_position: 4
 
 Uncle blocks, also known as "orphan blocks", are blocks on the blockchain that are not included in the main blockchain. Uncle blocks are still valid blocks, but they were not selected to be included in the main blockchain by the network consensus algorithm.
 
-Please note after the September 2022 merge of PoS Ethereum, validators will be pre-selected to validate the blocks. Hence, there will be no uncle blocks created. 
+Please note that after the September 2022 merge of PoS Ethereum, validators will be pre-selected to validate the blocks. Hence, there will be no uncle blocks created. 
 
 ### Why do Uncle Blocks occur?
 
