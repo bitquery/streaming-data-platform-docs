@@ -23,7 +23,7 @@ You can access Uncle Blocks data using our API. Here's an example GraphQL query 
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
-    MinerRewards(limit: {count: 10}, orderBy: {descending: Uncle_Block_Time}) {
+    Uncles(limit: {count: 10}, orderBy: {descending: Uncle_Block_Time}) {
       Block {
         Time
       }
@@ -43,7 +43,7 @@ query MyQuery {
 }
 ```
 
-`MinerRewards`: Returns an array of the top 10 Ethereum miner rewards that included uncle blocks.
+
 
 - `Block`: Returns the details of the block that included the uncle block.
 
