@@ -22,7 +22,7 @@ You can access Uncle Blocks data using our API. Here's an example GraphQL query 
 
 ```graphql
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     Uncles(limit: {count: 10}, orderBy: {descending: Uncle_Block_Time}) {
       Block {
         Time
