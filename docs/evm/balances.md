@@ -7,9 +7,9 @@ sidebar_position: 9
 
 BalanceUpdates API provides details related to balance. For example, it can provide current and historical balances. As the name suggests, this api can provide historical balance updates to build a portfolio-like application.
 
-It also has a lot of flexibility and supports ERC20 tokens and NFTs, including (ERC-1155). It can also provide the token holder's details. It allows you different [filters](docs/graphql/filters.md) to query data from different dimensions.
+It also has a lot of flexibility and supports ERC20 tokens and NFTs, including (ERC-1155). It can also provide the token holder's details. It allows you different [filters](docs/graphql/filters.md) to query data from different dimensions. You can find more examples [here](/docs/category/balances)
 
-Let's see an example of BalanceUpdates API to get the balance of a given address.
+Here's a query to get started.
 
 ```graphql
 {
