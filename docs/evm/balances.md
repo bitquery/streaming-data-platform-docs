@@ -30,4 +30,4 @@ Here's a query to get started.
 
 ```
 
-You can see more example of BalanceUpdates api in [here](docs/examples/balances/balance-api.md) and [here](docs/examples/nft/nft-api.md)
+
