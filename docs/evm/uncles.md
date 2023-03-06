@@ -3,3 +3,60 @@ sidebar_position: 4
 ---
 
 # Uncle Blocks
+
+### What are Uncle Blocks?
+
+Uncle blocks, also known as "orphan blocks", are blocks on the Ethereum blockchain that are not included in the main blockchain. Uncle blocks are still valid blocks, but they were not selected to be included in the main blockchain by the network consensus algorithm.
+
+### Why do Uncle Blocks occur?
+
+Uncle blocks occur due to network latency issues or network forks that can cause two or more miners to solve a block at the same time. Only one of these blocks can be included in the main blockchain, while the others become uncle blocks.
+
+### What is the significance of Uncle Blocks?
+
+Uncle blocks are significant because they can have an impact on the security and efficiency of the Ethereum blockchain. When uncle blocks are created, they reduce the rewards that miners receive for their work, and can also reduce the overall efficiency of the blockchain.
+
+### How can I access Uncle Blocks data?
+
+You can access Uncle Blocks data using our API. Here's an example GraphQL query to retrieve Uncle Blocks data:
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    MinerRewards(limit: {count: 10}, orderBy: {descending: Uncle_Block_Time}) {
+      Block {
+        Time
+      }
+      Uncle {
+        Index
+        Block {
+          TxHash
+          Time
+          Number
+          ParentHash
+          Bloom
+          Date
+        }
+      }
+    }
+  }
+}
+```
+
+`MinerRewards`: Returns an array of the top 10 Ethereum miner rewards that included uncle blocks.
+
+- `Block`: Returns the details of the block that included the uncle block.
+
+  - `Time`: Returns the time that the block was created.
+
+- `Uncle`: Returns the details of the uncle block.
+
+  - `Index`: Returns the index of the uncle block.
+  - `Block`: Returns the details of the uncle block itself.
+
+    - `TxHash`: Returns the hash of the uncle block's transaction.
+    - `Time`: Returns the time that the uncle block was created.
+    - `Number`: Returns the number of the uncle block.
+    - `ParentHash`: Returns the hash of the uncle block's parent block.
+    - `Bloom`: Returns the bloom filter of the uncle block.
+    - `Date`: Returns the date that the uncle block was created.
