@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Transactions
 
-The Transactions API provides detailed information on transactions including call count, gas, hash, type, and sender and recipient addresses etc. Here's a sample query to get started. You can see more examples [here](/docs/examples/transfers)
+The Transactions API provides detailed information on transactions including call count, gas, hash, type, and sender and recipient addresses etc. Here's a sample query to get started. You can see more examples [here](/docs/category/transfers)
 
 
 
