@@ -2,9 +2,9 @@
 sidebar_position: 7
 ---
 
-# Smart Contract Calls and Logs
+# Smart Contract Events and Logs
 
-Smart contract calls and logs are an important feature of Ethereum smart contracts that allow developers to track and record specific actions or data on the blockchain.
+Smart contract events and logs are an important feature of Ethereum smart contracts that allow developers to track and record specific actions or data on the blockchain.
 You can retrieve data on blockchain calls and logs from the blockchain network.
 
 ```graphql
