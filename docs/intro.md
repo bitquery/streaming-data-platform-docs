@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Introduction
+# Overview
 
 Bitquery 's infrastructure provides you access to historical and real-time blockchain data through various interfaces such as GraphQL APIs.
 
