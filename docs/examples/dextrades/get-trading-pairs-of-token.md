@@ -5,7 +5,7 @@ sidebar_position: 2
 # Trading Pairs API
 
 If you want to get all trades of a token, you might want to know all its trading pairs.
-Protocols like uniswap have pairs or pools. In this section we will see how we can get all pairs of currency for DEXs.
+Protocols like Uniswap have pairs or pools. In this section we will see how we can get all pairs of currency for DEXs.
 
 ## Get all pairs of a token across different DEXs
 
@@ -49,7 +49,25 @@ We are just providing the BLUR token as buy currency.
 }
 
 ```
+
 Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Pair-tokens-for-BLUR-token-for-all-DEXs_1)
+
+**Parameters**
+-   `dataset: combined`: specifies that the data should be retrieved from a combined dataset, which includes both historical and realtime data.
+-   `network: eth`: specifies that the data should be retrieved from the Ethereum network.
+-   `DEXTrades`: specifies that we want to retrieve information on DEX trades.
+-   `where`: specifies a filter to apply to the results. In this case, we're filtering by the buy currency's smart contract address, which is set to "0x5283d291dbcf85356a21ba090e6db59121208b44".
+-   `limit`: specifies the maximum number of results to return. In this case, we're limiting the results to 10.
+-   `limitBy`: specifies how to limit the results. In this case, we're limiting the results by the smart contract address of the sell currency, and we're only returning 1 result per smart contract.
+
+**Returned Data**
+
+-   `Trade`: represents the DEX trade, which includes information about the DEX itself (e.g. owner address, protocol version), the currency pair being traded (e.g. smart contract address, name, symbol), and the buy and sell currencies being exchanged (each represented as an object containing the currency's name and smart contract address).
+-   `Dex`: represents the DEX itself, including the protocol name, owner address, and protocol version.
+-   `Buy`: represents the currency being bought in the trade, including the currency's name and smart contract address.
+-   `Sell`: represents the currency being sold in the trade, including the currency's name and smart contract address.
+
+
 
 ## Get all pairs of a token from a specific DEX
 
@@ -88,3 +106,27 @@ Now, let's see an example of getting all pairs of a token for a specific DEX. In
 
 Open the above query on GraphQL IDE using this [link](
 https://graphql.bitquery.io/ide/pairs-of-blur-token-new-dataset_1)
+
+
+**Parameters**:
+
+-   `dataset`: The dataset to use for the query, in this case `combined` which retrieves data from both historical and real-time sources.
+    
+-   `network`: The blockchain network to retrieve data from, in this case `eth` for Ethereum.
+    
+-   `where`: A filter object to narrow down the results to only the trades that match the specified criteria. In this case, the filter object is used to retrieve trades where the buy currency smart contract address is "0x5283d291dbcf85356a21ba090e6db59121208b44" and the DEX owner address is "0x1f98431c8ad98523631ae4a59f267346ea31f984".
+    
+-   `limit`: The maximum number of results to return, in this case set to 10.
+    
+-   `limitBy`: A grouping option to limit the number of results per group, in this case set to 1 for the smart contract address of the sell currency.
+    
+
+**Returned Data:**
+
+The query returns an object containing a list of DEX trades, each with the following fields:
+
+-   `Dex`: An object containing information about the DEX, including the protocol name and owner address.
+    
+-   `Buy`: An object containing information about the buy currency, including the name and smart contract address.
+    
+-   `Sell`: An object containing information about the sell currency, including the name and smart contract address.
