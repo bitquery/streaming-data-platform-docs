@@ -53,7 +53,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 
 ## NFT owned by an address
 
-```
+```graphql
 {
   EVM(network: eth, dataset: combined) {
     BalanceUpdates(
@@ -99,7 +99,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 
 ## Latest NFT trades for given project
 
-```
+```graphql
 {
   EVM(network: eth, dataset: combined) {
     BalanceUpdates(
@@ -140,7 +140,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 ## All NFT transfers in a block
 This query retrieves all NFT token transfers on the Ethereum network within a specific block, and returns information about the block, transfer amount, token currency, sender, and receiver.
 
-```
+```graphql
  {
   EVM(dataset: combined, network: eth) {
     Transfers(
@@ -192,7 +192,7 @@ The EVM Transfers query returns the following fields:
 This query retrieves the most recent transfers of a specific non-fungible token (NFT) on the Ethereum network.
 You can find the GraphQL query [here](https://graphql.bitquery.io/ide/All-transfers-of-an-NFT)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     Transfers(
@@ -230,7 +230,7 @@ query MyQuery {
 -   `Block.Number`: The number of the block in which the transfer occurred.
 -   `Amount`: The amount of the NFT that was transferred.
 -   `Currency.Name`: The name of the NFT's currency.
--   `.Currency.Symbol`: The symbol of the NFT's currency.
+-   `Currency.Symbol`: The symbol of the NFT's currency.
 -   `Currency.Native`: The native type of the NFT's currency.
 -   `Sender`: The address of the sender of the transfer.
 -   `Receiver`: The address of the receiver of the transfer.
