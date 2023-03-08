@@ -65,6 +65,12 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 1,
+          ignorePatterns: ['/tutorial/docs/graphql-reference/**'],
+          filename: 'sitemap.xml',
+			  },
       }),
     ],
   ],
