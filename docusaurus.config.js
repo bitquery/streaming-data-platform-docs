@@ -70,7 +70,7 @@ const config = {
           priority: 1,
           ignorePatterns: ['/tutorial/docs/graphql-reference/**'],
           filename: 'sitemap.xml',
-			  },
+	},
       }),
     ],
   ],
