@@ -6,8 +6,8 @@ sidebar_position: 5
 
 The mapping between Solana streams of messages and protobuf schemas:
 
-* ```BLOCKCHAIN.blocks.s3``` -> **BlockMessage** of [block_message.proto](https://github.com/bitquery/streaming_protobuf/blob/main/protos/solana/block_message.proto)
-* ```BLOCKCHAIN.transactions.s3``` -> **InstructionsParsedBlockMessage** of [instructions_parsed_message.proto](https://github.com/bitquery/streaming_protobuf/blob/main/protos/solana/instructions_parsed_message.proto)
+* ```BLOCKCHAIN.blocks.s3``` -> **BlockMessage** of [block_message.proto](https://github.com/bitquery/streaming_protobuf/blob/main/solana/block_message.proto)
+* ```BLOCKCHAIN.transactions.s3``` -> **InstructionsParsedBlockMessage** of [instructions_parsed_message.proto](https://github.com/bitquery/streaming_protobuf/blob/main/solana/instructions_parsed_message.proto)
 
 where ```BLOCKCHAIN``` stands for the short blockchain name:
 
