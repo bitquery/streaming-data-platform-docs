@@ -38,7 +38,7 @@ Here is the [link](https://graphql.bitquery.io/ide/Cryptokitties-Token-Transfers
 
 ## Subscribe to the latest NFT token transfers
 
-Let's see an example of NFT token transfers using Graphql Subscription (Webhook). In the following API, we will be subscribing to Axie Infinity (AXS) token transfers.
+Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to Axie Infinity (AXS) token transfers.
 
 ```graphql
 subscription {
@@ -67,4 +67,4 @@ subscription {
 }
 ```
 
-You can open this API on our Graphql IDE using this [link](https://graphql.bitquery.io/ide/Subscribe-to-latest-Axie-infinity-token-transfers_1).
+You can open this API on our GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Subscribe-to-latest-Axie-infinity-token-transfers_1).

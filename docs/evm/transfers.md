@@ -26,7 +26,7 @@ To retrieve data on token and currency transfers using Bitquery, users can utili
     }
 ```
 
-`Transfers`: The top level method that returns tranfer information
+`Transfers`: The top level method that returns transfer information
 
 - `Transfer`: Returns information on the token transfer.
 
@@ -43,4 +43,4 @@ To retrieve data on token and currency transfers using Bitquery, users can utili
   - `Receiver`: Returns the address of the token receiver.
   - `Sender`: Returns the address of the token sender.
   - `Success`: Returns a Boolean value indicating whether the token transfer was successful.
-  - `Type`: Returns the type of token transfer. e.g call.
+  - `Type`: Returns the type of token transfer. e.g. call.

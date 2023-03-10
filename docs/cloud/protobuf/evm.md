@@ -16,4 +16,4 @@ where ```BLOCKCHAIN``` stands for the short blockchain name:
 * ```eth``` for Ethereum Mainnet
 * ```bsc``` for Binance Smart Chain Mainnet
 
-( more chains may be added in the future )
+(more chains may be added in the future)

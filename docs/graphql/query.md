@@ -9,7 +9,7 @@ defines simple rules how the schema is defined, and how to query the data using 
 
 ## Schema
 
-Schema defines what data you can query and which options ( arguments ) you can apply to the query.
+Schema defines what data you can query and which options (arguments) you can apply to the query.
 Schema allows [IDE](../ide/login) to create hints to build the query interactively.
 [IDE](../ide/login) also shows the schema on query builder and in Document section.
 Only queries matching schema can be successfully executed.
@@ -19,11 +19,11 @@ see it full. You only need a portion of it related to your needs typically.
 
 ## Query vs Subscription
 
-Query is used to query the data. When you need get updated results, you must query the
+Query is used to query the data. When you need to get updated results, you must query the
 endpoint again with the same or another query. 
 
 Subscription is used to get data updates. You define a [subscription](subscription/subsciption), 
-and after the new data appear, it will delivered to you without any actions from your side.
+and after the new data appear, it will be delivered to you without any actions from your side.
 
 This defines the cases, when to use one or another:
 
@@ -68,11 +68,11 @@ Top element of the query is
   EVM(dataset: archive network: bsc) {
 ```
 
-which defines the type of schema used ( ```EVM``` , Ethereum Virtual Machine ). For different types of blockchains
+which defines the type of schema used (```EVM```, Ethereum Virtual Machine). For different types of blockchains
 we use different schema. 
 
 ```dataset: archive network: bsc``` is an attribute, defining how we query the [dataset](dataset/options).
-In this case, we query just archive ( delayed ) data on BSC ( Binance Smart Chain ) network. 
+In this case, we query just archive (delayed) data on BSC (Binance Smart Chain) network. 
 Refer to the [dataset](dataset/options) documentation for possible options to apply on this level.
 
 By selecting the top element ``` EVM ``` we completely define what we can query below this element.
@@ -82,7 +82,7 @@ Apparently, Bitcoin and Ethereum have different schema and data, so we can not q
 ### Cube Element
 
 ```Blocks(limit: {count: 10})``` is what we call "Cube", particulary because we
-use  [OLAP](https://wikipedia.org/wiki/OLAP) methodology, applying
+use [OLAP](https://wikipedia.org/wiki/OLAP) methodology, applying
 [metrics](metrics). Cube defines what kind of facts we want to query, in this case
 we interested in blocks. Cubes are generally different for different types of blockchains.
 
@@ -106,7 +106,7 @@ Block {
 ```
 
 Query can make many dimensions. Result will have granularity combined from all dimensions used.
-Query for transactions by block date and transaction hash will group all resuls by 
+Query for transactions by block date and transaction hash will group all result by 
 block **date** __AND__ by transaction **hash**:
 
 ```graphql
@@ -136,7 +136,7 @@ Block {
       }
 ```
 
-This returns counts of blocks **per every date**  (aggregated by all blocks) :
+This return counts of blocks **per every date** (aggregated by all blocks) :
 
 ```graphql
 Block {

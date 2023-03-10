@@ -28,7 +28,7 @@ Example of the full path to the message is ```eth.dextrades.s3/000001881000/0000
 # Identity
 
 Message object in S3 is naturally identified by the full path. It includes blockchain-related attributes, as 
-block hash and block number ( or height ).
+block hash and block number (or height).
 
 Message content is identified by the message body hash, also included in the S3 path. 
 As many nodes can write to the same stream, the messages may contain several messages for the same blockchain block
@@ -47,17 +47,17 @@ There are atttributes common for all messages:
 * ```x-amz-meta-auth-message-id``` message unique identifier
 * ```x-amz-meta-auth-signature``` message signature
 * ```x-amz-meta-auth-signer``` signer of the message
-* ```x-amz-meta-size``` size of the body ( uncompressed )
+* ```x-amz-meta-size``` size of the body (uncompressed)
 
-There are specific attributes for the blockchain ( depending on schema ):
+There are specific attributes for the blockchain (depending on schema):
 
 * ```x-amz-meta-descriptor-chain-id``` [blockchain identifier](../../graphql/dataset/network)
 * ```x-amz-meta-descriptor-block-hash``` block hash
 * ```x-amz-meta-descriptor-parent-hash``` block parent hash
-* ```x-amz-meta-descriptor-block-number``` block number ( height )
+* ```x-amz-meta-descriptor-block-number``` block number (height)
 
 
-There are specific attributes for the type of message ( depending on schema ):
+There are specific attributes for the type of message (depending on schema):
 
 * ```x-amz-meta-descriptor-trades-count``` dex trade count inside the message
 
@@ -67,7 +67,7 @@ Message identifier is generated as a concatenation of:
 
 * message body hash
 * timestamp
-* descriptor of message, json serialized ( not included in S3 metadata )
+* descriptor of message, json serialized (not included in S3 metadata)
 
 It is signed with ECDSA private key of the node owner. 
 

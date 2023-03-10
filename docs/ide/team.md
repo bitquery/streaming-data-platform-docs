@@ -6,7 +6,7 @@ sidebar_position: 7
 
 Bitquery IDE is built for Teams. You can invite team members and share the same billing account.
 
-You can invite upto 3 members for free, then $30 per team member.
+You can invite up to 3 members for free, then $30 per team member.
 
 To invite your team, use the dropdown menu in our IDE.
 

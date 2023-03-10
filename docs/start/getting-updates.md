@@ -23,7 +23,7 @@ subscription RealTimeBlocks {
 ```
 
 The run button now again becomes green. But now when you press it, you will not 
-immedeately get results, as it will wait for the new block to come. In BSC network
+immediately get results, as it will wait for the new block to come. In BSC network
 blocks typically come in 3-4 seconds, so you will see this sequence after some time
 on the result panel:
 

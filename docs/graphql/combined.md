@@ -35,5 +35,5 @@ Use [Aliases](metrics/alias) to name the elements if needed
 :::
 
 :::danger
-Subscriptions and queries can not be combined together
+Subscriptions and queries can not be combined
 :::

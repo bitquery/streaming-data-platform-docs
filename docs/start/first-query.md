@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Your First Query
 
-The simplest way to create and run a quey is to use the IDE: [https://graphql.bitquery.io/ide](https://graphql.bitquery.io/ide).
+The simplest way to create and run a query is to use the IDE: [https://graphql.bitquery.io/ide](https://graphql.bitquery.io/ide).
 You first have to [register](../ide/login), and the IDE window will open.
 
 If IDE points to the default endpoint https://graphql.bitquery.io, you have to change it to the new endpoint

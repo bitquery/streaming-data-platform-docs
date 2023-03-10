@@ -13,4 +13,4 @@ where ```BLOCKCHAIN``` stands for the short blockchain name:
 
 * ```solana``` for Solana Mainnet
 
-( more chains may be added in the future )
+(more chains may be added in the future)

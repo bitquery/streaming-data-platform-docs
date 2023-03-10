@@ -10,12 +10,12 @@ Elements that calculate different statistics with the self-descriptive names:
 
 * ```average``` calculates the arithmetic mean.
 * ```standard_deviation``` square root of dispersion for a set of values
-* ```dispersion``` dispersion for a set of values ( Σ((x - x̅)^2) / n ), , where n is the sample size and x̅is the average value of x
+* ```dispersion``` dispersion for a set of values (Σ((x - x̅)^2) / n), , where n is the sample size and x̅ is the average value of x
 * ```median``` median of a numeric data sample
-* ```entropy```  calculates [Shannon entropy](https://en.wikipedia.org/wiki/Entropy_(information_theory)) of a set of values
+* ```entropy``` calculates [Shannon entropy](https://en.wikipedia.org/wiki/Entropy_(information_theory)) of a set of values
 * ```skew``` [skewness](https://en.wikipedia.org/wiki/Skewness) of a set of values
 * ```kurtosis``` [kurtosis](https://en.wikipedia.org/wiki/Kurtosis) of a set of values
-* ```quantile```approximate [quantile](https://en.wikipedia.org/wiki/Quantile) of a numeric data sequence ( have ```level``` argument from 0 to 1, 0.5 is median)
+* ```quantile```approximate [quantile](https://en.wikipedia.org/wiki/Quantile) of a numeric data sequence (have ```level``` argument from 0 to 1, 0.5 is median)
 
 For example to calculate average reward:
 

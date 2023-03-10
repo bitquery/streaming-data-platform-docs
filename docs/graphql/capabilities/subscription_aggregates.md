@@ -5,7 +5,7 @@ sidebar_position: 5
 # Subscription on Aggregated Metrics
 
 It is a subscription to the results of [Query Aggregated Metrics](aggregated_metrics).
-Query can be convereted to subscription by replacing ```query``` word with
+Query can be converted to subscription by replacing ```query``` word with
 ```subscription```.
 
 With every new block the aggregate will be calculated over the new data 

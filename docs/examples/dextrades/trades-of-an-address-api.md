@@ -211,7 +211,7 @@ The "sellside" sub-query retrieves the 10 most recent DEX trades where the speci
 
 - `limit`: retrieve only 10 trades
 - `orderBy`: sort the trades by Block_Time in descending order
-- `where`: retrieve trades where the Buyer's address matches "0x1f77dfeb0e6fed1ecf0b41d4c81330df6a6fb167" and SmartContract address is  "0x497a9a79e82e6fc0ff10a16f6f75e6fcd5ae65a8"
+- `where`: retrieve trades where the Buyer's address matches "0x1f77dfeb0e6fed1ecf0b41d4c81330df6a6fb167" and SmartContract address is "0x497a9a79e82e6fc0ff10a16f6f75e6fcd5ae65a8"
 
 **Returned Data**
 

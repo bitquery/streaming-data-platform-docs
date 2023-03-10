@@ -84,7 +84,7 @@ query MyQuery {
 -   `dataset`: This parameter specifies the dataset to use. In this case, the "combined" dataset is being used.
 -   `network`: This parameter specifies the network to query. In this case, the Binance Smart Chain (BSC) network is being queried.
 - `where`: Filters the results to only include blocks that occurred after a specific date. 
- - `orderBy`: Orders the results in descending order based on the number of unique event call signatures in  each block. 
+ - `orderBy`: Orders the results in descending order based on the number of unique event call signatures in each block. 
 - `descendingByField`: Specifies that we want to sort the results in descending order.
 
 

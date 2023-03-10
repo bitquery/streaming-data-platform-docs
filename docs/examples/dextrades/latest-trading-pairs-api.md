@@ -45,7 +45,7 @@ Let's see how we can get latest trading pairs created on DEXs. In this example w
 
 ```
 
-Open this query on our Graphql IDE using this [link](https://graphql.bitquery.io/ide/Latest-pools-created-uniswap-v3_1).
+Open this query on our GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Latest-pools-created-uniswap-v3_1).
 
 ## Subscribe to the Latest Pairs for Uniswap V3
 
@@ -87,4 +87,4 @@ subscription {
 }
 ```
 
-Open this query on our Graphql IDE using this [link](https://graphql.bitquery.io/ide/Subscription-to-Latest-pools-created-uniswap-v3)
+Open this query on our GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Subscription-to-Latest-pools-created-uniswap-v3)

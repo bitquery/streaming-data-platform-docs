@@ -31,7 +31,7 @@ query MyQuery {
 In this query, you'll need to replace "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47" with the contract address of the token you'd like to retrieve balance updates for.
 
 **Parameters**
--   `dataset: realtime`: This parameter specifies that the realtime dataset is being used.
+-   `dataset: realtime`: This parameter specifies that the real time dataset is being used.
 -   `network: bsc`: This parameter specifies that the Binance Smart Chain (BSC) network is being queried.
 -   `orderBy: {descending: BalanceUpdate_Amount}`: This parameter orders the results of the query by the `BalanceUpdate_Amount` field in descending order, meaning the highest balances will appear first.
 -   `limit: {count: 10}`: This parameter limits the number of results returned to 10.

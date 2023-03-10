@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ##  Latest blocks in the Ethereum network
 
-This GraphQL query retrieves the latest blocks in realtime on the ethereum network that were mined after March 3rd, 2023. It includes information on the block number, hash, mix digest, date, base fee, coinbase, transaction hash, transaction count, and result (including gas and errors). You can find the query [here](https://graphql.bitquery.io/ide/Latest-blocks-in-the-Ethereum-network_1)
+This GraphQL query retrieves the latest blocks in real time on the ethereum network that were mined after March 3rd, 2023. It includes information on the block number, hash, mix digest, date, base fee, coinbase, transaction hash, transaction count, and result (including gas and errors). You can find the query [here](https://graphql.bitquery.io/ide/Latest-blocks-in-the-Ethereum-network_1)
 
 ```
 subscription {

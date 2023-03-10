@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Trigger
 
-The new data pushed to subscription on receiving the new block in the realtime database assuming that the  criteria,
+The new data pushed to subscription on receiving the new block in the real time database assuming that the criteria,
 defined in the query are met:
 
 * ```trigger_on``` attribute matches the block
@@ -16,10 +16,10 @@ defined in the query are met:
 ```trigger_on``` attribute controls on which blocks the update of data is triggered for the subscription.
 It has the following options:
 
-* ```head``` - (default ) **new** blocks on the trunk ( with the highest tip ) triggers data update
+* ```head``` - (default) **new** blocks on the trunk (with the highest tip) triggers data update
 * ```all``` - **any** block triggers data update
-* ```head_updates``` - **any** blocks on the trunk ( with the highest tip ) triggers data update
-* ```branches_updates``` - **any** blocks on the branch ( not with the highest tip ) triggers data update
+* ```head_updates``` - **any** blocks on the trunk (with the highest tip) triggers data update
+* ```branches_updates``` - **any** blocks on the branch (not with the highest tip) triggers data update
 
 [Blockchain Reorg Tree](../dataset/select_blocks) describes how the tree is represented in the databases.
 

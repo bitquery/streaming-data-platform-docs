@@ -6,8 +6,8 @@ sidebar_position: 2
 
 Network attribute is a selection of the blockchain:
 
-* ```eth```  for Ethereum Mainnet
-* ```bsc```  for Binance Smart Chain
+* ```eth``` for Ethereum Mainnet
+* ```bsc``` for Binance Smart Chain
 * other blockchains are in progress to add to dataset
 
 If the attribute is missing, the default blockchain ```eth``` is used.

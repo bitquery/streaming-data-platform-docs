@@ -41,7 +41,7 @@ this is not the same as:
 If you use [metrics](metrics/) or [calculations](calculations) in the query, you can sort by them
 using ```descendingByField``` and ```ascendingByField``` attributes.
 
-You must write the name of the **metric** ( ```count``` ) or **alias** of the metric ( ```txCount``` ) as shown on this example:
+You must write the name of the **metric** (```count```) or **alias** of the metric (```txCount```) as shown on this example:
 
 ```graphql
 {

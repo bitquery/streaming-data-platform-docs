@@ -16,7 +16,7 @@ Filtering can be applied to queries and subscriptions:
 Use filters in subscription for notification services on specific type of events matching filter criteria
 :::
 
-Filters are defined on the cube element level ( Blocks, Transactions, so on) as a ```where``` attribute.
+Filters are defined on the cube element level (Blocks, Transactions, so on) as a ```where``` attribute.
 
 ## Examples
 
@@ -121,7 +121,7 @@ For date and timestamp data, the following operators applicable:
 
 * ```is``` date equals to
 * ```not``` date not equals to
-* ```after``` after certain date ( not including it )
+* ```after``` after certain date (not including it)
 * ```since``` after including date
 * ```till``` before including date
 * ```before``` before not including date

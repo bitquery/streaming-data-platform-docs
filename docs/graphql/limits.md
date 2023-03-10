@@ -18,7 +18,7 @@ if you do not specify ```limit```, some pre-defined system limit anyway will be 
 ```limit``` attribute has a structure:
 
 * ```count``` is the maximum count of results returned
-* ```offset``` is the offset ( 0-based ) of the results ( default is 0 )
+* ```offset``` is the offset (0-based) of the results (default is 0)
 
 :::danger
 do not use ```offset``` for pagination of the result, unless you sure that the results are not 

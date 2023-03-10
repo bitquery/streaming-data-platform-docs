@@ -10,7 +10,7 @@ The IDE supports real-time subscriptions, allowing us to get results instantly.
 
 > Query used: [Real Time Blocks Subscription | BSC](https://graphql.bitquery.io/ide/Real-Time-Blocks-Subscription--BSC)
 
-Once you click on the "Play" button, you are initiating a real-time query of the data. If you want to pause this , you can click on the button again. 
+Once you click on the "Play" button, you are initiating a real-time query of the data. If you want to pause this, you can click on the button again. 
 
 Additionally, you may be able to see the refresh seconds or intervals in the IDE.
 

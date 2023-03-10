@@ -37,7 +37,7 @@ Number of the block with the maximum gas used in specific date:
 Number(maximum: Block_GasUsed where: {Block: {Date:{is: "2022-01-01"}}})
 ```
 :::tip
-Use ```where``` with some always-true condition ( say, Chaind equal 1) to get **any** value of element
+Use ```where``` with some always-true condition (say, ChainId equal 1) to get **any** value of element
 :::
 
 :::tip 

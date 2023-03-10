@@ -5,7 +5,7 @@ sidebar_position: 2
 #  Aliases
 
 Aliases is a part of the GraphQL [standard](https://spec.graphql.org/draft/#sec-Field-Alias)
-They become usefull when you have the need to have two fields in the query **with the same name**.
+They become useful when you have the need to have two fields in the query **with the same name**.
 
 Most probable you will come to the following problem with metrics:
 

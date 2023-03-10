@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # ERC20 Token Transfers API
 
-One of the most common types of transfers on Ethereum is ERC20 transfers. Let's see an example to get the latest ERC20 transfers using our API. Today we are taking an example of USDT token transfers. The contract address for the USDT token is [0xdac17f958d2ee523a2206206994597c13d831ec7](https://explorer.bitquery.io/ethereum/token/0xdac17f958d2ee523a2206206994597c13d831ec7)
+One of the most common types of transfers on Ethereum are ERC20 transfers. Let's see an example to get the latest ERC20 transfers using our API. Today we are taking an example of USDT token transfers. The contract address for the USDT token is [0xdac17f958d2ee523a2206206994597c13d831ec7](https://explorer.bitquery.io/ethereum/token/0xdac17f958d2ee523a2206206994597c13d831ec7)
 
 
 ```graphql
@@ -35,7 +35,7 @@ Open this query on IDE using this [link](https://graphql.bitquery.io/ide/UDST-To
 
 ## Subscribe to the latest ERC20 token transfers
 
-Using our Graphql interface, you can also subscribe to the latest ERC20 token transfers using Graphql subscriptions (Webhook). Let's see an example of how to subscribe to the latest WETH token ([0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2](https://explorer.bitquery.io/ethereum/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)) transfers.
+Using our GraphQL interface, you can also subscribe to the latest ERC20 token transfers using GraphQL subscriptions (Webhook). Let's see an example of how to subscribe to the latest WETH token ([0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2](https://explorer.bitquery.io/ethereum/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)) transfers.
 
 ```graphql
 subscription {
@@ -62,4 +62,4 @@ subscription {
 }
 ```
 
-Open this query on our Graphql IDE using this [link](https://graphql.bitquery.io/ide/Subscribe-to-Latest-WETH-token-transfers).
+Open this query on our GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Subscribe-to-Latest-WETH-token-transfers).
