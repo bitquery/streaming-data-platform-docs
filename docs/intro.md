@@ -1,6 +1,5 @@
 ---
 sidebar_position: 1
-image: "/img/heroImage4.png"
 ---
 
 # Overview
