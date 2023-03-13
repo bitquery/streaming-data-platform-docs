@@ -79,7 +79,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/bitquery_logo_w.jpg',
+      image: 'img/heroImage4.png',
       navbar: {
         title: 'Blockchain Data Platform',
         logo: {
