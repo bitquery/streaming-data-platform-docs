@@ -8,7 +8,7 @@ With the Pools API, developers can easily retrieve information about liquidity p
 
 ## Latest pools for a specific DEX
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -68,7 +68,7 @@ Based on the arguments used we can query the latest pools using [this query belo
 
 The following GraphQL query retrieves data on the latest 50 PairCreated events on the Ethereum network, along with their associated block timestamp, token0 address and name. It uses the ethereum network and the arguments from the query above to filter events based on specific criteria.
 
-```
+```graphql
 {
   ethereum(network: ethereum) {
     arguments(
@@ -105,7 +105,7 @@ The following GraphQL query retrieves data on the latest 50 PairCreated events o
 ## Trade Stats for a particular Pool on a specific DEX
 
 Here's an example GraphQL query that retrieves the sum of sell amounts for trades between WETH and USDT made on the Uniswap V3 exchange .
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     DEXTrades(
