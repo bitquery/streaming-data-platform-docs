@@ -10,6 +10,10 @@ S3 buckets are named after the blockchain name with ```streaming-``` prefix:
 * ```streaming-bsc``` for Binance Smart Chain Mainnet
 * ```streaming-solana``` for Solana Mainnet
 
+:::note
+For public access the [Demo buckets](demo) are available.
+:::
+
 The bucket contain the top level folder by the name of the data stream.
 The stream is a sequence of [messages](messages) with the same [data schema](../protobuf).
 
