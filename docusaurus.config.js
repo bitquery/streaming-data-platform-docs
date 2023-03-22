@@ -11,10 +11,10 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://streaming.bitquery.io',
+  url: 'https://docs.bitquery.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/tutorial/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -39,7 +39,7 @@ const config = {
         schema: "https://streaming.bitquery.io/graphql",
         rootPath: "./docs/graphql-reference/", // docs will be generated under './docs/graphql-reference'
         baseURL: ".",
-        linkRoot: "/tutorial/docs/graphql-reference/",
+        linkRoot: "/docs/graphql-reference/",
         homepage: "./docs/graphql-reference/intro.md",
         loaders: {
           UrlLoader: "@graphql-tools/url-loader"
@@ -68,7 +68,7 @@ const config = {
         sitemap: {
           changefreq: 'weekly',
           priority: 1,
-          ignorePatterns: ['/tutorial/docs/graphql-reference/**'],
+          ignorePatterns: ['/docs/graphql-reference/**'],
           filename: 'sitemap.xml',
 	},
       }),
