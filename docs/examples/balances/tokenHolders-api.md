@@ -19,14 +19,16 @@ query MyQuery {
     ) {
       BalanceUpdate {
         Address
-        Amount
+        
       }
+      Balance: sum(of: BalanceUpdate_Amount)
       Currency {
         Name
       }
     }
   }
 }
+
 ```
 In this query, you'll need to replace "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47" with the contract address of the token you'd like to retrieve balance updates for.
 
@@ -38,7 +40,7 @@ In this query, you'll need to replace "0x3ee2200efb3400fabb9aacf31297cbdd1d435d4
 -   `where: {Currency: {SmartContract: {is: "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47"}}, Block: {Date: {after: "2023-02-01"}}}`: This parameter filters the results of the query based on the smart contract address "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47" and the block date after "2023-02-01". The `Currency` field specifies the currency to filter by, and the `SmartContract` field specifies the smart contract address to filter by. The `Block` field specifies the block to filter by, and the `Date` field specifies the date to filter by.
 
 **Returned Data**
--   `BalanceUpdate { Address, Amount }`: This field specifies the address and amount of each balance update in the results.
+-   `Balance: sum(of: BalanceUpdate_Amount)`: This field specifies the address and the balance amount in the results.
 -   `Currency { Name }`: This field specifies the currency in which the balance is expressed. In this case, the `Name` of the currency is retrieved.
 
 Here's a sample of the response:
@@ -75,4 +77,4 @@ Here's a sample of the response:
       }, 
 
 ```
-You can find the graphql query [here](https://graphql.bitquery.io/ide/Top-10-Cardano-Wallets-on-BSC).
+You can find the graphql query [here](https://ide.bitquery.io/Top-10-Cardano-Wallets-on-BSC_1).
