@@ -9,7 +9,7 @@ sidebar_position: 3
 
 
 ## Tutorial 
-This is a tutorial to build a NFT Dashboard using Python code that connects to the Bitquery API and retrieves data on a particular NFT for a specific contract on the Ethereum network. The code then displays the data on a user-friendly interface built using Python and Streamlit.
+This is a tutorial to build a NFT Dashboard using Python code that connects to the Bitquery API and retrieves data for a particular NFT on the Ethereum network. The code then displays the data on a user-friendly interface built using Python and Streamlit.
 
 ## Required Libraries
 The code uses the following libraries:
