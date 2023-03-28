@@ -2,44 +2,123 @@
 sidebar_position: 3
 ---
 
-# NFT Analytics
+# NFT Analytics Dashboard - Tutorial
 
-
-To implement a user-friendly interface for NFT analytics, you can follow these steps:
-
-1.  Choose a suitable platform or framework to develop the interface. Some popular options for web development include React, Angular, and Vue.
-    
-2.  Use an NFT data provider like Bitquery to fetch NFT data such as sales volume, price, creator, and other relevant information.
-    
-3.  Design a user interface that is easy to navigate and intuitive to use. You can use tools like Figma or Sketch to create wireframes and mockups of the interface.
-    
-4.  Implement search and filtering functionality to allow users to search for NFTs based on various criteria such as sales volume, price, creator, and category. Bitquery's APIs can help you with that.
-
-5.  Provide detailed information about each NFT, including its image, description, creator, sales history, and other relevant data.
-    
-6.  Add features to enable users to save, bookmark, or share their favorite NFTs.
-    
-7.  Ensure the interface is responsive and compatible with different devices and screen sizes.
-    
-8.  Test the interface thoroughly to ensure it is user-friendly and free of bugs or errors.
-    
-
- ## Marketplace Analysis
+ ### Marketplace Analysis
  Bitquery's queries can help NFT marketplace builders analyze the performance of different NFTs on various blockchain networks. By providing real-time data on  transaction volume, and other key metrics, Bitquery can help builders optimize their marketplace's offerings and improve trading conditions for users.
 
-## Price Analysis
- Bitquery's queries can help NFT marketplace builders monitor [NFT prices in real-time](https://ide.bitquery.io/latest-trades-for-a-MOONBIRDS-NFT---both-buy-and-sell), enabling them to identify trends and patterns. This can help builders make informed decisions when setting prices for NFTs and adjusting them in response to market changes.
 
-## Transaction Monitoring 
+## Tutorial 
+This is a tutorial to build a NFT Dashboard using Python code that connects to the Bitquery API and retrieves data on a particular NFT for a specific contract on the Ethereum network. The code then displays the data on a user-friendly interface built using Python and Streamlit.
 
-Bitquery's queries can help NFT marketplace builders monitor and analyze transaction data on different blockchain networks. This can help them identify potential issues, such as failed transactions or delays, and take proactive measures to address them.
+## Required Libraries
+The code uses the following libraries:
 
-## Token Analysis
- One important feature for an NFT marketplace dApp is the ability to filter and search for NFTs based on various criteria such as the sales volume, price, artist, and category. This can help buyers and sellers find and evaluate NFTs based on their specific preferences and needs. Using the NFT API, developers can receive real-time updates on key filters like [NFT sales volume](https://ide.bitquery.io/NFT-Sales-Volume-on-Opensea). 
+streamlit: A Python library for building web apps and visualizations
+http.client: A Python library for making HTTP requests
+json: A Python library for working with JSON data
+pandas: A Python library for data manipulation and analysis
+
+## Step by Step Code Implementation
+### Importing the Required Libraries
+The first step in the code is to import the required libraries using the import statement:
+
+```python
+import streamlit as st
+import http.client
+import json
+import pandas as pd
+```
+
+### Establishing Connection with the Bitquery API
+Next, the code connects to the Bitquery API using the http.client library and retrieves data on NFT transactions for a specific contract on the Ethereum network using a GraphQL query. The query is passed as a JSON payload to the request() method, along with the necessary headers and API key.
+
+```python
+
+conn = http.client.HTTPSConnection("streaming.bitquery.io")
+payload = json.dumps({
+   "query": "{\n  EVM(dataset: combined) {\n    DEXTrades(\n      where: {Trade: {Dex: {ProtocolFamily: {is: \"OpenSea\"}}, Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Count_NFTS_bought: sum(of: Trade_Buy_Amount)\n    }\n  }\n}\n",
+   "variables": "{}"
+})
+headers = {
+   'Content-Type': 'application/json',
+   'X-API-KEY': 'YOUR API KEY'
+}
+conn.request("POST", "/graphql", payload, headers)
+res = conn.getresponse()
+data = res.read()
+resp= json.loads( data.decode("utf-8"))
+
+count_nfts_bought = resp['data']['EVM']['DEXTrades'][0]['Count_NFTS_bought']
+```
+
+The code retrieves the count of NFTs bought from the response data and stores it in the count_nfts_bought variable.
+
+###  Creating the Streamlit App
+The code then displays the retrieved data in a Streamlit dashboard using the streamlit library. The dashboard includes a title, a header, a metric, a table, and a line chart.
+
+```python
+st.title ("NFT Dashboard")
+st.header("Punk Evil Rabbit NFT")
+st.metric("Count of Punk Evil Rabbit NFTS Bought",count_nfts_bought)
+```
+The title() and header() methods are used to display the title and header of the dashboard, respectively. The metric() method is used to display the count of NFTs bought as a metric.
+
+
+### Adding a Table
+
+This code snippet retrieves the latest DEX trades for a specific NFT token from the Ethereum blockchain using The Graph API, and displays them in a data table using the streamlit library.
+
+```python
+payload_table = json.dumps({
+    "query": "{\n  EVM(dataset: combined, network: eth) {\n    buyside: DEXTrades(\n      limit: {count: 10}\n      orderBy: {descending: Block_Time}\n      where: {Trade: {Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Block {\n        Number\n        Time\n      }\n      Transaction {\n        From\n        To\n        Hash\n      }\n      Trade {\n        Buy {\n          Amount\n          Buyer\n          Currency {\n            Name\n            Symbol\n            SmartContract\n          }\n          Seller\n          Price\n        }\n        Sell {\n          Amount\n          Buyer\n          Currency {\n            Name\n            SmartContract\n            Symbol\n          }\n          Seller\n          Price\n        }\n      }\n    }\n    sellside: DEXTrades(\n      limit: {count: 10}\n      orderBy: {descending: Block_Time}\n      where: {Trade: {Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Block {\n        Number\n        Time\n      }\n      Transaction {\n        From\n        To\n        Hash\n      }\n      Trade {\n        Buy {\n          Amount\n          Buyer\n          Currency {\n            Name\n            Symbol\n            SmartContract\n          }\n          Seller\n          Price\n        }\n        Sell {\n          Amount\n          Buyer\n          Currency {\n            Name\n            SmartContract\n            Symbol\n          }\n          Seller\n          Price\n        }\n      }\n    }\n  }\n}\n",
+   "variables": "{}"
+})
+
+conn.request("POST", "/graphql", payload_table, headers)
+res1 = conn.getresponse()
+data1 = res1.read()
+resp1= json.loads( data1.decode("utf-8"))
+
+st.subheader("Latest DEX Trades")
+
+data_table= resp1['data']['EVM']['buyside']
+df = pd.json_normalize(data_table)
+st.dataframe(df)
+```
+
+### Adding a Chart
+
+The chart section of the code creates a line chart using the streamlit library. The chart displays the number of NFTs bought on a daily basis on the OpenSea protocol on the Ethereum blockchain.
+
+
+```python
+## chart
+payload3 = json.dumps({
+   "query": "{\n  EVM(dataset: combined) {\n    DEXTrades(\n      where: {Trade: {Dex: {ProtocolFamily: {is: \"OpenSea\"}}, Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Count_NFTS_bought: sum(of: Trade_Buy_Amount)\n      Block {\n        Date\n      }\n    }\n  }\n}\n",
+   "variables": "{}"
+})
+
+conn.request("POST", "/graphql", payload3, headers)
+res3 = conn.getresponse()
+data3 = res3.read()
+
+chart_data=json.loads(data3)['data']['EVM']['DEXTrades']
+
+df_chart = pd.json_normalize(chart_data)
+df_chart.columns = ['Count_NFTS_bought', 'Block_Date']
+# Convert the 'Count_NFTS_bought' column to integer data type
+df_chart['Count_NFTS_bought'] = df_chart['Count_NFTS_bought'].astype(int)
+df_chart['Block_Date'] = pd.to_datetime(df_chart['Block_Date'])
+
+st.subheader('Daily Metrics')
+st.line_chart(df_chart,x='Block_Date',y='Count_NFTS_bought')
+```
+
+#### Here's how it looks ![finally](/img/nft_dashboard.gif)
+
+
+If you want to build up query from scratch you are welcome or you can use the [premade examples](https://ide.bitquery.io/explore/All%20queries) as well.
 
  ## Setting Up Subscriptions
 Lastly, we also have the three [“subscribe”](https://ide.bitquery.io/Subscribe-to-Latest-MOONBIRDS-nft-transfers) functions of the dApp. These functions are important as they allow us to continuously update the dApp for our users in real-time whenever a transaction of digital collectibles occurs in the marketplace.
-
-
-#### You can visualize the data in charts with [Gephi](https://community.bitquery.io/t/visualize-money-flow-using-graphql-and-gephi/1349?u=divya) or [Tradingview chart APIs](https://community.bitquery.io/t/tradingview-charts-integration-with-bitquery-apis-lightweight-charting/211?u=divya)
-
