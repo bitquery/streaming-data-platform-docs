@@ -54,7 +54,7 @@ count_nfts_bought = resp['data']['EVM']['DEXTrades'][0]['Count_NFTS_bought']
 
 The code retrieves the count of NFTs bought from the response data and stores it in the count_nfts_bought variable.
 
-###  Creating the Streamlit App
+###  Displaying the Metric
 The code then displays the retrieved data in a Streamlit dashboard using the streamlit library. The dashboard includes a title, a header, a metric, a table, and a line chart.
 
 ```python
