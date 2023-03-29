@@ -121,4 +121,4 @@ st.line_chart(df_chart,x='Block_Date',y='Count_NFTS_bought')
 If you want to build up query from scratch you are welcome or you can use the [premade examples](https://ide.bitquery.io/explore/All%20queries) as well.
 
  ## Setting Up Subscriptions
-Lastly, we also have the three [“subscribe”](https://ide.bitquery.io/Subscribe-to-Latest-MOONBIRDS-nft-transfers) functions of the dApp. These functions are important as they allow us to continuously update the dApp for our users in real-time whenever a transaction of digital collectibles occurs in the marketplace.
+Lastly, we also have the the [“subscribe”]([https://ide.bitquery.io/Subscribe-to-Latest-MOONBIRDS-nft-transfers](https://docs.bitquery.io/docs/usecases/nft_Analytics) feature of the dApp. These functions are important as they allow us to continuously update the dApp for our users in real-time whenever a transaction of digital collectibles occurs in the marketplace.
