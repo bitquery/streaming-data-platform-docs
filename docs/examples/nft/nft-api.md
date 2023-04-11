@@ -51,7 +51,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 -   `balance`: This field returns the sum of the token balances associated with the Ethereum address.
 
 
-## NFT owned by an address
+## All NFTs owned by an address
 
 ```graphql
 {
@@ -59,7 +59,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
     BalanceUpdates(
       limit: {count: 100}
       orderBy: {descending: BalanceUpdate_Amount}
-      where: {Currency: {SmartContract: {is: "0xBE223020724CC3e2999f5dCeDA3120484FdBfef7"}}, BalanceUpdate: {Address: {is: "0xb92505a3364B7C7E333c05B44cE1E55377fC43cA"}, Amount: {gt: "0"}}}
+      where: {BalanceUpdate: {Address: {is: "0xaba7161a7fb69c88e16ed9f455ce62b791ee4d03"}}, Currency: {Fungible: false}}
     ) {
       Currency {
         Fungible
@@ -68,16 +68,17 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
         Name
         HasURI
         Delegated
+        Decimals
       }
       BalanceUpdate {
         Id
         Amount
         Address
+        URI
       }
     }
   }
 }
-
 ```
 **Parameters**
 -   `EVM(network: eth, dataset: combined)`: specifies that we want to query the [combined](/docs/graphql/dataset/combined) dataset of the Ethereum blockchain.
