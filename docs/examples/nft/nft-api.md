@@ -58,7 +58,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
   EVM(network: eth, dataset: combined) {
     BalanceUpdates(
       limit: {count: 100}
-      orderBy: {descendingByField: "balance"}
+      orderBy: {descending: BalanceUpdate_Amount}
       where: {Currency: {SmartContract: {is: "0xBE223020724CC3e2999f5dCeDA3120484FdBfef7"}}, BalanceUpdate: {Address: {is: "0xb92505a3364B7C7E333c05B44cE1E55377fC43cA"}, Amount: {gt: "0"}}}
     ) {
       Currency {
