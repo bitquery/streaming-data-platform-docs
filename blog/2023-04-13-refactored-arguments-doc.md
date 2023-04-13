@@ -1,6 +1,6 @@
 ---
 slug: arguments-calls-events
-title: Started documenting data platform
+title: Arguments for Calls and Events refactored
 authors: [astudnev]
 tags: [arguments]
 ---
