@@ -70,3 +70,5 @@ Here's a sample query to get started.
 
 ```
 
+Calls contain the arguments and return values as arrays, refer to [arguments](./arguments) for data structure.
+
