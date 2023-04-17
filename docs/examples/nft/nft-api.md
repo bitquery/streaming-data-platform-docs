@@ -8,13 +8,6 @@ Non-Fungible Tokens (NFTs) are digital assets with unique identification codes t
 
 Bitquery's APIs help you extract and analyze NFT data from various blockchain networks. Below are some examples of NFT queries that can be performed using Bitquery's platform:
 
-## NFT Metadata
-
-
-You can type the address in the [Explorer](https://explorer.bitquery.io/) and view the details of any currency
-
-![NFT explorer](/img/ide/NFT_1.png)
-
 ## NFT Holders for a project
 
 This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens associated with that smart contract, ordered by the sum of the token balances in descending order.
