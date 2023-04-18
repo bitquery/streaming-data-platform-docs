@@ -9,7 +9,9 @@ const config = {
   title: 'Data streaming platform',
   tagline: 'How to query data and build applications on Bitquery blockchain data platform',
   favicon: 'img/favicon.ico',
-
+ // ...
+  trailingSlash: true,
+  // ...
   // Set the production url of your site here
   url: 'https://docs.bitquery.io',
   // Set the /<baseUrl>/ pathname under which your site is served
