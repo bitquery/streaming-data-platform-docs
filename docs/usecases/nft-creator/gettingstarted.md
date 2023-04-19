@@ -12,7 +12,7 @@ Users of the app can view each creator's collection of NFTs and learn more about
 
 In addition to browsing and purchasing NFTs, users can also view the files associated with each NFT. 
 
-**The full code is available in this [Github repo.](https://github.com/divyasshree-BQ/nft-creator-portfolio)**
+**The full code is available in this [Github repo.](https://github.com/bitquery/nft-creator-portfolio)**
 
 
 ## Installation
