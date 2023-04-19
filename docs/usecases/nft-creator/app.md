@@ -168,6 +168,6 @@ export default App;
 
 ## CSS
 
-Use the css file in this [Github repo.](https://github.com/divyasshree-BQ/nft-creator-portfolio/blob/main/src/pages/style.css)
+Use the css file in this [Github repo.](https://github.com/bitquery/nft-creator-portfolio/blob/main/src/pages/style.css)
 
 
