@@ -95,21 +95,45 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 
 ```graphql
 {
-  EVM(network: eth, dataset: combined) {
-    BalanceUpdates(
-      limit: {count: 100}
-      orderBy: {descendingByField: "balance"}
-      where: {Currency: {Fungible: false}, BalanceUpdate: {Address: {is: "0xb92505a3364b7c7e333c05b44ce1e55377fc43ca"}, Amount: {gt: "0"}}}
-    ) {
-      Currency {
-        Fungible
-        Symbol
-        SmartContract
-        Name
-        HasURI
-        Delegated
+  EVM(network: eth){
+    DEXTrades(
+      orderBy: {descending: Block_Number}
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {SmartContract: {is: "0x0fcbd68251819928c8f6d182fc04be733fa94170" }}
+          }
+        }
       }
-      total_token: sum(of: BalanceUpdate_Amount)
+    ){
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Dex {
+          ProtocolFamily
+          ProtocolName
+          ProtocolVersion
+          SmartContract
+        }
+        Buy {
+	  Price
+          Buyer
+          Ids
+          URIs
+        }
+        Sell {
+          Seller
+          Amount
+          Currency {
+            Symbol
+            SmartContract
+          }        
+        }
+      }
     }
   }
 }
@@ -118,17 +142,10 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 
 **Parameters**
 -   `network: eth` specifies that the Ethereum network is being queried.
--   `dataset: combined` specifies that the [combined](/docs/graphql/dataset/combined) dataset is being used.
--   `BalanceUpdates` retrieves information about balance updates.
+-   `dexTrade` retrieves information about trades on DEXs and NFT marketplace for all type of tokens (Fungible or Non-fungible).
 -   `limit: {count: 100}` specifies that up to 100 results will be returned.
--   `orderBy: {descendingByField: "balance"}` sorts the results in descending order by the token balance.
--   `where` filters the results based on certain criteria. In this case, the results are filtered to only include NFTs held by the address "0xb92505a3364b7c7e333c05b44ce1e55377fc43ca" with a balance greater than 0.
--   `Currency` specifies that the token is non-fungible.
-
-**Returned Data**
--  `Currency`: This field is an object that contains information about the currency being queried, including whether it is fungible or not, its symbol, name, URI, whether it has been delegated, and the address of the smart contract that created it.
-    
--  `total_token`: This field is the sum of the `Amount` field from all the `BalanceUpdate` objects that meet the criteria specified in the `where` clause of the query. It represents the total amount of non-fungible tokens owned by the address specified in the `where` clause.
+-   `orderBy: {descending: Block_Number}` sorts the results in descending order by the block number (height).
+-   `where` filters the results based on certain criteria. In this case, the results are filtered based on buyCurrency token address "0x0fcbd68251819928c8f6d182fc04be733fa94170" .
 
 
 ## All NFT transfers in a block

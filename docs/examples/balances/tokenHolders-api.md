@@ -11,15 +11,14 @@ Here's an example query to retrieve the top 10 balance updates for a specific to
 
 ```graphql
 query MyQuery {
-  EVM(dataset: realtime, network: bsc) {
+  EVM(dataset: archive, network: bsc) {
     BalanceUpdates(
       orderBy: {descending: BalanceUpdate_Amount}
       limit: {count: 10}
-      where: {Currency: {SmartContract: {is: "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47"}}, Block: {Date: {after: "2023-02-01"}}}
+      where: {Currency: {SmartContract: {is: "0xb82beb6ee0063abd5fc8e544c852237aa62cbb14"}}}
     ) {
       BalanceUpdate {
         Address
-        
       }
       Balance: sum(of: BalanceUpdate_Amount)
       Currency {
@@ -28,7 +27,6 @@ query MyQuery {
     }
   }
 }
-
 ```
 In this query, you'll need to replace "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47" with the contract address of the token you'd like to retrieve balance updates for.
 
