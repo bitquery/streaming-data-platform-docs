@@ -95,7 +95,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 
 ```graphql
 {
-  EVM(network: eth dataset: combined){
+  EVM(network: eth){
     DEXTrades(
       orderBy: {descending: Block_Number}
       where: {
@@ -142,7 +142,6 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 
 **Parameters**
 -   `network: eth` specifies that the Ethereum network is being queried.
--   `dataset: combined` specifies that the [combined](/docs/graphql/dataset/combined) dataset is being used.
 -   `dexTrade` retrieves information about trades on DEXs and NFT marketplace for all type of tokens (Fungible or Non-fungible).
 -   `limit: {count: 100}` specifies that up to 100 results will be returned.
 -   `orderBy: {descending: Block_Number}` sorts the results in descending order by the block number (height).
