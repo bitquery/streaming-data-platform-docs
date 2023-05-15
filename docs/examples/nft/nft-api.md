@@ -120,7 +120,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
           SmartContract
         }
         Buy {
-					Price
+	  Price
           Buyer
           Ids
           URIs
