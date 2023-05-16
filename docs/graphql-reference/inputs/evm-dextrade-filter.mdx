@@ -40,14 +40,14 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 ```graphql
 input EVM_DEXTrade_Filter {
   Trade: EVM_DEXTrade_Input_Trade_InputType
-  TransactionStatus: EVM_DEXTrade_Input_TransactionStatus_InputType
-  Call: EVM_DEXTrade_Input_Call_InputType
   ChainId: OLAP_BigInteger
   Receipt: EVM_DEXTrade_Input_Receipt_InputType
   Fee: EVM_DEXTrade_Input_Fee_InputType
   Block: EVM_DEXTrade_Input_Block_InputType
   Transaction: EVM_DEXTrade_Input_Transaction_InputType
   Log: EVM_DEXTrade_Input_Log_InputType
+  TransactionStatus: EVM_DEXTrade_Input_TransactionStatus_InputType
+  Call: EVM_DEXTrade_Input_Call_InputType
 }
 ```
 
@@ -58,14 +58,6 @@ input EVM_DEXTrade_Filter {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>Trade</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-input-type) <Badge class="secondary" text="input"/>
 > Select by Trade
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>TransactionStatus</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_TransactionStatus_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-transaction-status-input-type) <Badge class="secondary" text="input"/>
-> Select by TransactionStatus
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>Call</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-call-input-type) <Badge class="secondary" text="input"/>
-> Select by Call
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>ChainId</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
@@ -90,6 +82,14 @@ input EVM_DEXTrade_Filter {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>Log</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Log_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-log-input-type) <Badge class="secondary" text="input"/>
 > Select by Log
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>TransactionStatus</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_TransactionStatus_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-transaction-status-input-type) <Badge class="secondary" text="input"/>
+> Select by TransactionStatus
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>Call</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-call-input-type) <Badge class="secondary" text="input"/>
+> Select by Call
 > 
 
 

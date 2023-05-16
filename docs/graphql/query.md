@@ -10,8 +10,8 @@ defines simple rules how the schema is defined, and how to query the data using 
 ## Schema
 
 Schema defines what data you can query and which options (arguments) you can apply to the query.
-Schema allows [IDE](../ide/login) to create hints to build the query interactively.
-[IDE](../ide/login) also shows the schema on query builder and in Document section.
+Schema allows [IDE](/docs/ide/login) to create hints to build the query interactively.
+[IDE](/docs/ide/login) also shows the schema on query builder and in Document section.
 Only queries matching schema can be successfully executed.
 
 Schema for blockchain data is pretty complicated, but for your queries you do not need to

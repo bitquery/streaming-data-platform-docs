@@ -39,13 +39,13 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 input EVM_Call_Filter {
+  Transaction: EVM_Call_Input_Transaction_InputType
   Block: EVM_Call_Input_Block_InputType
   ChainId: OLAP_BigInteger
   Receipt: EVM_Call_Input_Receipt_InputType
   TransactionStatus: EVM_Call_Input_TransactionStatus_InputType
   Fee: EVM_Call_Input_Fee_InputType
   Call: EVM_Call_Input_Call_InputType
-  Transaction: EVM_Call_Input_Transaction_InputType
 }
 ```
 
@@ -53,6 +53,10 @@ input EVM_Call_Filter {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Transaction</b></code>](#)<Bullet />[`EVM_Call_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-call-input-transaction-input-type) <Badge class="secondary" text="input"/>
+> Select by Transaction
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_Call_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-call-input-block-input-type) <Badge class="secondary" text="input"/>
 > Select by Block
@@ -76,10 +80,6 @@ input EVM_Call_Filter {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Call</b></code>](#)<Bullet />[`EVM_Call_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-call-input-call-input-type) <Badge class="secondary" text="input"/>
 > Select by Call
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Transaction</b></code>](#)<Bullet />[`EVM_Call_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-call-input-transaction-input-type) <Badge class="secondary" text="input"/>
-> Select by Transaction
 > 
 
 

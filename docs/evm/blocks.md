@@ -6,7 +6,7 @@ sidebar_position: 2
 
 Blocks API provide details on blocks. 
 
-You can use different [filters](docs/graphql/filters.md) to query data from different dimensions. You can find more examples [here](../examples/blocks/blocks-api)
+You can use different [filters](docs/graphql/filters.md) to query data from different dimensions. You can find more examples [here](/docs/examples/blocks/blocks-api)
 
 Let's see an example of Blocks API to get the latest 10 blocks on Ethereum blockchain.
 

@@ -39,14 +39,14 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 input EVM_BalanceUpdate_Filter {
+  Block: EVM_BalanceUpdate_Input_Block_InputType
+  Call: EVM_BalanceUpdate_Input_Call_InputType
   BalanceUpdate: EVM_BalanceUpdate_Input_BalanceUpdate_InputType
   Currency: EVM_BalanceUpdate_Input_Currency_InputType
   ChainId: OLAP_BigInteger
   Uncle: EVM_BalanceUpdate_Input_Uncle_InputType
   Transaction: EVM_BalanceUpdate_Input_Transaction_InputType
   Log: EVM_BalanceUpdate_Input_Log_InputType
-  Block: EVM_BalanceUpdate_Input_Block_InputType
-  Call: EVM_BalanceUpdate_Input_Call_InputType
 }
 ```
 
@@ -54,6 +54,14 @@ input EVM_BalanceUpdate_Filter {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-block-input-type) <Badge class="secondary" text="input"/>
+> Select by Block
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Filter.<b>Call</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-call-input-type) <Badge class="secondary" text="input"/>
+> Select by Call
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Filter.<b>BalanceUpdate</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_BalanceUpdate_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-balance-update-input-type) <Badge class="secondary" text="input"/>
 > Select by BalanceUpdate
@@ -77,14 +85,6 @@ input EVM_BalanceUpdate_Filter {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Filter.<b>Log</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_Log_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-log-input-type) <Badge class="secondary" text="input"/>
 > Select by Log
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-block-input-type) <Badge class="secondary" text="input"/>
-> Select by Block
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Filter.<b>Call</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-call-input-type) <Badge class="secondary" text="input"/>
-> Select by Call
 > 
 
 

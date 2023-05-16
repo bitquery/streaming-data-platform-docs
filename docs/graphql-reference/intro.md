@@ -10,6 +10,6 @@ Start from the following top-level elements:
 
 ## Ethereum-like blockchains ( EVM )
 
-* [Query top-level](queries/evm) 
-* [Subscription top level](subscriptions/evm)
-* [EVM Data type](objects/evm)
+* [Query top-level](/docs/graphql-reference/queries/evm) 
+* [Subscription top level](/docs/graphql-reference/subscriptions/evm)
+* [EVM Data type](/docs/graphql-reference/objects/evm)

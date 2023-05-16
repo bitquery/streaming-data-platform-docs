@@ -39,23 +39,23 @@ Select by Call
 
 ```graphql
 input EVM_Event_Input_Call_InputType {
-  GasUsed: OLAP_BigInteger
-  From: OLAP_String
-  InternalCalls: OLAP_Integer
-  Create: Boolean
-  Success: Boolean
-  CallerIndex: OLAP_Integer
-  To: OLAP_String
-  Value: EVM_Amount_With_Decimals
+  Output: OLAP_String
+  SelfDestruct: Boolean
   Delegated: Boolean
   Error: OLAP_String
   Index: OLAP_Integer
-  Output: OLAP_String
-  SelfDestruct: Boolean
-  Gas: OLAP_BigInteger
-  Input: OLAP_String
   Signature: EVM_Event_Input_Call_Signature_InputType
   Reverted: Boolean
+  Gas: OLAP_BigInteger
+  Input: OLAP_String
+  Create: Boolean
+  Success: Boolean
+  GasUsed: OLAP_BigInteger
+  From: OLAP_String
+  InternalCalls: OLAP_Integer
+  To: OLAP_String
+  Value: EVM_Amount_With_Decimals
+  CallerIndex: OLAP_Integer
 }
 ```
 
@@ -64,35 +64,11 @@ input EVM_Event_Input_Call_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Output</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>From</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>InternalCalls</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Create</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Success</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>CallerIndex</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>To</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Value</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>SelfDestruct</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > 
 > 
 
@@ -108,11 +84,11 @@ input EVM_Event_Input_Call_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Output</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Signature</b></code>](#)<Bullet />[`EVM_Event_Input_Call_Signature_InputType`](/docs/graphql-reference/inputs/evm-event-input-call-signature-input-type) <Badge class="secondary" text="input"/>
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>SelfDestruct</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Reverted</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > 
 > 
 
@@ -124,11 +100,35 @@ input EVM_Event_Input_Call_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Signature</b></code>](#)<Bullet />[`EVM_Event_Input_Call_Signature_InputType`](/docs/graphql-reference/inputs/evm-event-input-call-signature-input-type) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Create</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Reverted</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Success</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>From</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>InternalCalls</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>To</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>Value</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Call_InputType.<b>CallerIndex</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > 
 > 
 

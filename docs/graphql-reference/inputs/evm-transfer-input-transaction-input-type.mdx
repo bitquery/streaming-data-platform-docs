@@ -39,7 +39,11 @@ Select by Transaction
 
 ```graphql
 input EVM_Transfer_Input_Transaction_InputType {
-  Cost: OLAP_BigInteger
+  Value: EVM_Amount_With_Decimals
+  Gas: OLAP_BigInteger
+  To: OLAP_String
+  Type: OLAP_Integer
+  Protected: Boolean
   GasPrice: OLAP_BigInteger
   Nonce: OLAP_BigInteger
   GasFeeCap: OLAP_BigInteger
@@ -47,11 +51,7 @@ input EVM_Transfer_Input_Transaction_InputType {
   Hash: OLAP_String
   Index: OLAP_Integer
   From: OLAP_String
-  Protected: Boolean
-  Value: EVM_Amount_With_Decimals
-  Gas: OLAP_BigInteger
-  To: OLAP_String
-  Type: OLAP_Integer
+  Cost: OLAP_BigInteger
 }
 ```
 
@@ -60,7 +60,23 @@ input EVM_Transfer_Input_Transaction_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>Cost</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>Value</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>Gas</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>To</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>Type</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>Protected</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > 
 > 
 
@@ -92,23 +108,7 @@ input EVM_Transfer_Input_Transaction_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>Protected</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>Value</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>Gas</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>To</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>Type</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transaction_InputType.<b>Cost</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > 
 > 
 
