@@ -14,11 +14,11 @@ count(distinct: Block_Number where: {Block: {GasUsed: {gt: "0"}}})
 
 :::note
 ```where``` attribute is universally applied to all metrics ad have the same structure as
-[filters](../filters)
+[filters](/docs/graphql/filters)
 :::
 
 :::tip
-Use [Aliases](alias) to name these metrics
+Use [Aliases](/docs/graphql/metrics/alias) to name these metrics
 :::
 
 

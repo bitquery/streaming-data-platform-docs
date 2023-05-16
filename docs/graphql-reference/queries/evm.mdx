@@ -1,0 +1,72 @@
+---
+id: evm
+title: EVM
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+```graphql
+EVM(
+  network: evm_network
+  select_blocks: blocks_query_arg_enum
+  dataset: dataset_arg_enum
+): EVM
+```
+
+
+
+
+### Arguments
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>network</b></code>](#)<Bullet />[`evm_network`](/docs/graphql-reference/enums/evm-network) <Badge class="secondary" text="enum"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>select_blocks</b></code>](#)<Bullet />[`blocks_query_arg_enum`](/docs/graphql-reference/enums/blocks-query-arg-enum) <Badge class="secondary" text="enum"/>
+> Controls which blocks are included in query results. Note that this field is ignored to query archive data
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>dataset</b></code>](#)<Bullet />[`dataset_arg_enum`](/docs/graphql-reference/enums/dataset-arg-enum) <Badge class="secondary" text="enum"/>
+> Controls which dataset used to get results
+> 
+
+### Type
+
+#### [`EVM`](/docs/graphql-reference/objects/evm) <Badge class="secondary" text="object"/>
+> EVM type blockchain schema
+> 
+
+
+

@@ -1,0 +1,52 @@
+---
+id: int
+title: Int
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+
+
+```graphql
+scalar Int
+```
+
+
+
+
+
+
+### Member of
+
+[`EVM_ABI_Integer_Value_Arg`](/docs/graphql-reference/objects/evm-abi-integer-value-arg)  <Badge class="secondary" text="object"/><Bullet />[`EVM_BalanceUpdate_Fields_Call`](/docs/graphql-reference/objects/evm-balance-update-fields-call)  <Badge class="secondary" text="object"/><Bullet />[`EVM_BalanceUpdate_Fields_Currency`](/docs/graphql-reference/objects/evm-balance-update-fields-currency)  <Badge class="secondary" text="object"/><Bullet />[`EVM_BalanceUpdate_Fields_Log`](/docs/graphql-reference/objects/evm-balance-update-fields-log)  <Badge class="secondary" text="object"/><Bullet />[`EVM_BalanceUpdate_Fields_Uncle`](/docs/graphql-reference/objects/evm-balance-update-fields-uncle)  <Badge class="secondary" text="object"/><Bullet />[`EVM_BalanceUpdate_Limit`](/docs/graphql-reference/inputs/evm-balance-update-limit)  <Badge class="secondary" text="input"/><Bullet />[`EVM_BalanceUpdate_LimitBy`](/docs/graphql-reference/inputs/evm-balance-update-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Block_Fields_Block`](/docs/graphql-reference/objects/evm-block-fields-block)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Block_Limit`](/docs/graphql-reference/inputs/evm-block-limit)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Block_LimitBy`](/docs/graphql-reference/inputs/evm-block-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Call_Fields_Arguments_Path`](/docs/graphql-reference/objects/evm-call-fields-arguments-path)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Call_Fields_Arguments`](/docs/graphql-reference/objects/evm-call-fields-arguments)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Call_Fields_Call_Opcode`](/docs/graphql-reference/objects/evm-call-fields-call-opcode)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Call_Fields_Call`](/docs/graphql-reference/objects/evm-call-fields-call)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Call_Fields_Receipt`](/docs/graphql-reference/objects/evm-call-fields-receipt)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Call_Fields_Returns_Path`](/docs/graphql-reference/objects/evm-call-fields-returns-path)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Call_Fields_Returns`](/docs/graphql-reference/objects/evm-call-fields-returns)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Call_Fields_StateChanges`](/docs/graphql-reference/objects/evm-call-fields-state-changes)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Call_Fields_Transaction`](/docs/graphql-reference/objects/evm-call-fields-transaction)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Call_Limit`](/docs/graphql-reference/inputs/evm-call-limit)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Call_LimitBy`](/docs/graphql-reference/inputs/evm-call-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`EVM_DEXTrade_Fields_Call`](/docs/graphql-reference/objects/evm-dextrade-fields-call)  <Badge class="secondary" text="object"/><Bullet />[`EVM_DEXTrade_Fields_Log_Signature`](/docs/graphql-reference/objects/evm-dextrade-fields-log-signature)  <Badge class="secondary" text="object"/><Bullet />[`EVM_DEXTrade_Fields_Log`](/docs/graphql-reference/objects/evm-dextrade-fields-log)  <Badge class="secondary" text="object"/><Bullet />[`EVM_DEXTrade_Fields_Receipt`](/docs/graphql-reference/objects/evm-dextrade-fields-receipt)  <Badge class="secondary" text="object"/><Bullet />[`EVM_DEXTrade_Fields_Trade_Buy_Currency`](/docs/graphql-reference/objects/evm-dextrade-fields-trade-buy-currency)  <Badge class="secondary" text="object"/><Bullet />[`EVM_DEXTrade_Fields_Trade_Dex_Pair`](/docs/graphql-reference/objects/evm-dextrade-fields-trade-dex-pair)  <Badge class="secondary" text="object"/><Bullet />[`EVM_DEXTrade_Fields_Trade_Sell_Currency`](/docs/graphql-reference/objects/evm-dextrade-fields-trade-sell-currency)  <Badge class="secondary" text="object"/><Bullet />[`EVM_DEXTrade_Fields_Trade_Trade_Fees_Currency`](/docs/graphql-reference/objects/evm-dextrade-fields-trade-trade-fees-currency)  <Badge class="secondary" text="object"/><Bullet />[`EVM_DEXTrade_Fields_Transaction`](/docs/graphql-reference/objects/evm-dextrade-fields-transaction)  <Badge class="secondary" text="object"/><Bullet />[`EVM_DEXTrade_Limit`](/docs/graphql-reference/inputs/evm-dextrade-limit)  <Badge class="secondary" text="input"/><Bullet />[`EVM_DEXTrade_LimitBy`](/docs/graphql-reference/inputs/evm-dextrade-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Event_Fields_Arguments_Path`](/docs/graphql-reference/objects/evm-event-fields-arguments-path)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Event_Fields_Arguments`](/docs/graphql-reference/objects/evm-event-fields-arguments)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Event_Fields_Call`](/docs/graphql-reference/objects/evm-event-fields-call)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Event_Fields_Log`](/docs/graphql-reference/objects/evm-event-fields-log)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Event_Fields_Receipt`](/docs/graphql-reference/objects/evm-event-fields-receipt)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Event_Fields_Transaction`](/docs/graphql-reference/objects/evm-event-fields-transaction)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Event_Limit`](/docs/graphql-reference/inputs/evm-event-limit)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Event_LimitBy`](/docs/graphql-reference/inputs/evm-event-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`EVM_MinerReward_Fields_Block`](/docs/graphql-reference/objects/evm-miner-reward-fields-block)  <Badge class="secondary" text="object"/><Bullet />[`EVM_MinerReward_Fields_Uncle`](/docs/graphql-reference/objects/evm-miner-reward-fields-uncle)  <Badge class="secondary" text="object"/><Bullet />[`EVM_MinerReward_Limit`](/docs/graphql-reference/inputs/evm-miner-reward-limit)  <Badge class="secondary" text="input"/><Bullet />[`EVM_MinerReward_LimitBy`](/docs/graphql-reference/inputs/evm-miner-reward-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transaction_Fields_Receipt_ContractAddressCode`](/docs/graphql-reference/objects/evm-transaction-fields-receipt-contract-address-code)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Transaction_Fields_Receipt`](/docs/graphql-reference/objects/evm-transaction-fields-receipt)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Transaction_Fields_Transaction_ToCode`](/docs/graphql-reference/objects/evm-transaction-fields-transaction-to-code)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Transaction_Fields_Transaction`](/docs/graphql-reference/objects/evm-transaction-fields-transaction)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Transaction_Limit`](/docs/graphql-reference/inputs/evm-transaction-limit)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transaction_LimitBy`](/docs/graphql-reference/inputs/evm-transaction-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transfer_Fields_Call`](/docs/graphql-reference/objects/evm-transfer-fields-call)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Transfer_Fields_Log_Signature`](/docs/graphql-reference/objects/evm-transfer-fields-log-signature)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Transfer_Fields_Log`](/docs/graphql-reference/objects/evm-transfer-fields-log)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Transfer_Fields_Receipt`](/docs/graphql-reference/objects/evm-transfer-fields-receipt)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Transfer_Fields_Transaction`](/docs/graphql-reference/objects/evm-transfer-fields-transaction)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Transfer_Fields_Transfer_Currency`](/docs/graphql-reference/objects/evm-transfer-fields-transfer-currency)  <Badge class="secondary" text="object"/><Bullet />[`EVM_Transfer_Limit`](/docs/graphql-reference/inputs/evm-transfer-limit)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transfer_LimitBy`](/docs/graphql-reference/inputs/evm-transfer-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`EVM_WasOnBranch_Fields_Block`](/docs/graphql-reference/objects/evm-was-on-branch-fields-block)  <Badge class="secondary" text="object"/><Bullet />[`EVM_WasOnBranch_Fields_Uncle`](/docs/graphql-reference/objects/evm-was-on-branch-fields-uncle)  <Badge class="secondary" text="object"/><Bullet />[`EVM_WasOnBranch_Limit`](/docs/graphql-reference/inputs/evm-was-on-branch-limit)  <Badge class="secondary" text="input"/><Bullet />[`EVM_WasOnBranch_LimitBy`](/docs/graphql-reference/inputs/evm-was-on-branch-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer)  <Badge class="secondary" text="input"/>
+

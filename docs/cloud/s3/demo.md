@@ -16,7 +16,7 @@ The easiest way to try them is just download the content using HTTP URLs below.
 AWS S3 region for these buckets is ```us-east-1```
 :::
 
-For full access you will need to use AWS S3 API or use [AWS CLI command line interface](awscli)
+For full access you will need to use AWS S3 API or use [AWS CLI command line interface](/docs/cloud/s3/awscli)
 
 
 ## demo-streaming-eth
@@ -25,7 +25,7 @@ The bucket with Amazon Resource Name (ARN): arn:aws:s3:::demo-streaming-eth has 
 to list objects in the bucket and get any object in it. It contains data about 1000 blocks of
 Ethereum Mainnet from 16780000 to 16780999.
 
-Refer to [EVM data schema](../protobuf/evm) to instructions on decoding the data in the objects.
+Refer to [EVM data schema](/docs/cloud/protobuf/evm) to instructions on decoding the data in the objects.
 
 Bucket has the following folders:
 
@@ -76,7 +76,7 @@ The bucket with Amazon Resource Name (ARN): arn:aws:s3:::demo-streaming-bsc has 
 to list objects in the bucket and get any object in it. It contains data about 1000 blocks of
 Binance Smart Chain Mainnet from 26400000 to 26400999.
 
-Refer to [EVM data schema](../protobuf/evm) to instructions on decoding the data in the objects.
+Refer to [EVM data schema](/docs/cloud/protobuf/evm) to instructions on decoding the data in the objects.
 
 
 Bucket has the following folders:

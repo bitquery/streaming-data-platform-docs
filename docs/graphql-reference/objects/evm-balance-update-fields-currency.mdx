@@ -1,0 +1,245 @@
+---
+id: evm-balance-update-fields-currency
+title: EVM_BalanceUpdate_Fields_Currency
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+Currency fields
+
+
+```graphql
+type EVM_BalanceUpdate_Fields_Currency {
+  Decimals(
+    where: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
+  ): Int
+  Delegated(
+    where: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
+  ): Boolean
+  DelegatedTo(
+    where: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
+  ): String
+  Fungible(
+    where: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
+  ): Boolean
+  HasURI(
+    where: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
+  ): Boolean
+  Name(
+    where: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
+  ): String
+  Native(
+    where: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
+  ): Boolean
+  ProtocolName(
+    where: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
+  ): String
+  SmartContract(
+    where: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
+  ): String
+  Symbol(
+    where: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
+  ): String
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>Decimals</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
+> Decimals value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Decimals.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Decimals.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Decimals.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>Delegated</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+> Delegated value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Delegated.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Delegated.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Delegated.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>DelegatedTo</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> DelegatedTo value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.DelegatedTo.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.DelegatedTo.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.DelegatedTo.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>Fungible</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+> Fungible value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Fungible.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Fungible.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Fungible.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>HasURI</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+> HasURI value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.HasURI.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.HasURI.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.HasURI.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>Name</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Name value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Name.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Name.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Name.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>Native</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+> Native value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Native.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Native.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Native.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>ProtocolName</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> ProtocolName value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.ProtocolName.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.ProtocolName.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.ProtocolName.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>SmartContract</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> SmartContract value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.SmartContract.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.SmartContract.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.SmartContract.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>Symbol</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Symbol value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Symbol.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Symbol.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Symbol.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+
+
+### Member of
+
+[`EVM_BalanceUpdate_Cube`](/docs/graphql-reference/objects/evm-balance-update-cube)  <Badge class="secondary" text="object"/>
+

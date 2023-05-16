@@ -5,7 +5,7 @@ sidebar_position: 2
 # Messages
 
 
-Messages are the files encoded in [protobuf data schema](../protobuf) and compressed using 
+Messages are the files encoded in protobuf data schema and compressed using 
 [lz4](https://github.com/lz4/lz4) utility.
 
 So the file has extention of ```.lz4```.Before decoding with protobuf, you have to de-compress it
@@ -18,7 +18,7 @@ is padded with vertain number of '0-s', that enable you to sort blocks using S3 
 
 Example of the full path to the message is ```eth.dextrades.s3/000001881000/000001881143_0x6076a99f05633913f4746a0b64fbf516c96f528107ba9d10c28919ecbbb50133_d0687720be3358b36f07209d080c3b9600f2ee4300f5abd16e74a4bf539c53d6.block.lz4```
 
-* ```eth.dextrades.s3``` is the name of the [bucket](buckets) containing EVM DEX trade messages
+* ```eth.dextrades.s3``` is the name of the [bucket](/docs/cloud/s3/buckets) containing EVM DEX trade messages
 * ```000001881000``` contains messages for blocks between 1881000 and 1881999
 * ```000001881143``` is the number of the block
 * ```0x6076a99f05633913f4746a0b64fbf516c96f528107ba9d10c28919ecbbb50133``` is the block hash
@@ -51,7 +51,7 @@ There are atttributes common for all messages:
 
 There are specific attributes for the blockchain (depending on schema):
 
-* ```x-amz-meta-descriptor-chain-id``` [blockchain identifier](../../graphql/dataset/network)
+* ```x-amz-meta-descriptor-chain-id``` [blockchain identifier](/docs/graphql/dataset/network)
 * ```x-amz-meta-descriptor-block-hash``` block hash
 * ```x-amz-meta-descriptor-parent-hash``` block parent hash
 * ```x-amz-meta-descriptor-block-number``` block number (height)
