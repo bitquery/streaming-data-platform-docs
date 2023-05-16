@@ -39,12 +39,12 @@ Date and time in ISO8601 (2006-01-02T15:04:05Z) format
 
 ```graphql
 input OLAP_DateTime {
-  since: DateTime
   is: DateTime
   not: DateTime
   before: DateTime
   after: DateTime
   till: DateTime
+  since: DateTime
 }
 ```
 
@@ -52,10 +52,6 @@ input OLAP_DateTime {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>since</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
-> After this time and including it
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>is</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
 > Exact match the time
@@ -75,6 +71,10 @@ input OLAP_DateTime {
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>till</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
 > Before this time and including it
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>since</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
+> After this time and including it
 > 
 
 

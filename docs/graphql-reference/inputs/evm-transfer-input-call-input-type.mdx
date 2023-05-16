@@ -39,21 +39,21 @@ Select by Call
 
 ```graphql
 input EVM_Transfer_Input_Call_InputType {
-  Value: OLAP_BigInteger
-  CallerIndex: OLAP_Integer
+  To: OLAP_String
   Error: OLAP_String
   Delegated: Boolean
   From: OLAP_String
   SelfDestruct: Boolean
-  Index: OLAP_Integer
+  Value: OLAP_BigInteger
+  CallerIndex: OLAP_Integer
   Create: Boolean
   Reverted: Boolean
   InternalCalls: OLAP_Integer
   Signature: EVM_Transfer_Input_Call_Signature_InputType
-  Success: Boolean
+  Index: OLAP_Integer
   GasUsed: OLAP_BigInteger
   Gas: OLAP_BigInteger
-  To: OLAP_String
+  Success: Boolean
 }
 ```
 
@@ -62,11 +62,7 @@ input EVM_Transfer_Input_Call_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Call_InputType.<b>Value</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Call_InputType.<b>CallerIndex</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Call_InputType.<b>To</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -86,7 +82,11 @@ input EVM_Transfer_Input_Call_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Call_InputType.<b>Index</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Call_InputType.<b>Value</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Call_InputType.<b>CallerIndex</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -106,7 +106,7 @@ input EVM_Transfer_Input_Call_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Call_InputType.<b>Success</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Call_InputType.<b>Index</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -118,7 +118,7 @@ input EVM_Transfer_Input_Call_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Call_InputType.<b>To</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Call_InputType.<b>Success</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > 
 > 
 

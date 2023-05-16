@@ -24,5 +24,5 @@ Use aliases to make the query valid and also more readable:
 ```
 
 :::tip
-Aliases can also be used in [sorting](../sorting)
+Aliases can also be used in [sorting](/docs/graphql/sorting)
 :::

@@ -6,8 +6,8 @@ sidebar_position: 2
 # Query Fact Records
 
 This is the simplest type of query. You just define the attributes which you need in the results,
-and you get all records directly from the database matching [limits](../limits), [sorting](../sorting)
-and [filters](../filters).
+and you get all records directly from the database matching [limits](/docs/graphql/limits), [sorting](/docs/graphql/sorting)
+and [filters](/docs/graphql/filters).
 
 Note that fact tables are typically long beasts, and querying the complete content of them not possible at all.
 So in reality you can query only a small portion of data, and there is no good way to get the complete
