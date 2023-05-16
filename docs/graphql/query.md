@@ -41,7 +41,7 @@ Compare the code in [the first query](/docs/start/first-query) and
 
 This section describes principles that applies to subscriptions
 as well as to queries. We will show examples for queries, but remember that they applied to
-[subscriptions](subscription/subsciption) as well.
+[subscriptions](/docs/graphql/subscription/subsciption) as well.
 
 ## Query Elements
 
@@ -71,9 +71,9 @@ Top element of the query is
 which defines the type of schema used (```EVM```, Ethereum Virtual Machine). For different types of blockchains
 we use different schema. 
 
-```dataset: archive network: bsc``` is an attribute, defining how we query the [dataset](dataset/options).
+```dataset: archive network: bsc``` is an attribute, defining how we query the [dataset](/docs/graphql/dataset/options).
 In this case, we query just archive (delayed) data on BSC (Binance Smart Chain) network. 
-Refer to the [dataset](dataset/options) documentation for possible options to apply on this level.
+Refer to the [dataset](/docs/graphql/dataset/options) documentation for possible options to apply on this level.
 
 By selecting the top element ``` EVM ``` we completely define what we can query below this element.
 Apparently, Bitcoin and Ethereum have different schema and data, so we can not query them exactly the same way.

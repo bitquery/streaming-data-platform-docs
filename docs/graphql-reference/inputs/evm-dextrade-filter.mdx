@@ -39,6 +39,8 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 input EVM_DEXTrade_Filter {
+  Trade: EVM_DEXTrade_Input_Trade_InputType
+  Transaction: EVM_DEXTrade_Input_Transaction_InputType
   Log: EVM_DEXTrade_Input_Log_InputType
   TransactionStatus: EVM_DEXTrade_Input_TransactionStatus_InputType
   Call: EVM_DEXTrade_Input_Call_InputType
@@ -46,8 +48,6 @@ input EVM_DEXTrade_Filter {
   Receipt: EVM_DEXTrade_Input_Receipt_InputType
   Fee: EVM_DEXTrade_Input_Fee_InputType
   Block: EVM_DEXTrade_Input_Block_InputType
-  Transaction: EVM_DEXTrade_Input_Transaction_InputType
-  Trade: EVM_DEXTrade_Input_Trade_InputType
 }
 ```
 
@@ -55,6 +55,14 @@ input EVM_DEXTrade_Filter {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>Trade</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-input-type) <Badge class="secondary" text="input"/>
+> Select by Trade
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>Transaction</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-transaction-input-type) <Badge class="secondary" text="input"/>
+> Select by Transaction
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>Log</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Log_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-log-input-type) <Badge class="secondary" text="input"/>
 > Select by Log
@@ -82,14 +90,6 @@ input EVM_DEXTrade_Filter {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-block-input-type) <Badge class="secondary" text="input"/>
 > Select by Block
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>Transaction</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-transaction-input-type) <Badge class="secondary" text="input"/>
-> Select by Transaction
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Filter.<b>Trade</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-input-type) <Badge class="secondary" text="input"/>
-> Select by Trade
 > 
 
 

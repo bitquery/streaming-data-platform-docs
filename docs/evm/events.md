@@ -43,4 +43,4 @@ query MyQuery {
 
 The query includes the Call and Log objects, which are parts of the events. The Call object contains information about the function calls made in the event, including the path, sender address, gas used, receiver address, and the name and signature of the function. The Log object contains information about the event logs, including the enter and exit indexes, log index, log after call index, the smart contract address, and the name and signature of the event.
 
-Events contain the arguments as array, refer to [arguments](./arguments)
+Events contain the arguments as array, refer to [arguments](/docs/evm/arguments)

@@ -15,12 +15,12 @@ For public access the [Demo buckets](/docs/cloud/s3/demo) are available.
 :::
 
 The bucket contain the top level folder by the name of the data stream.
-The stream is a sequence of [messages](/docs/cloud/s3/messages) with the same [data schema](/docs/cloud/protobuf/protobuf).
+The stream is a sequence of [messages](/docs/cloud/s3/messages) with the same data schema.
 
 This is example of the stream folders in the ```streaming-eth``` bucket:
 
 ![AWS S3 bucket](/img/aws/s3_bucket.png)
 
-Mapping between the stream and protobuf data format defined in the [data schema](/docs/cloud/protobuf/protobuf).
+Mapping between the stream and protobuf data format defined in the data schema.
 
 
