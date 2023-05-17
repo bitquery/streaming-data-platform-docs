@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Subscription on Aggregated Metrics
 
-It is a subscription to the results of [Query Aggregated Metrics](aggregated_metrics).
+It is a subscription to the results of [Query Aggregated Metrics](/docs/graphql/capabilities/aggregated_metrics).
 Query can be converted to subscription by replacing ```query``` word with
 ```subscription```.
 

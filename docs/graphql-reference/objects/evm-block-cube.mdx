@@ -41,9 +41,9 @@ Block of transactions in EVM Blockchain
 type EVM_Block_Cube {
   Block: EVM_Block_Fields_Block
   ChainId(
-    where: EVM_Block_Filter
     maximum: EVM_Block_CompareFields
     minimum: EVM_Block_CompareFields
+    where: EVM_Block_Filter
   ): String
   average(
     where: EVM_Block_Filter
@@ -60,8 +60,8 @@ type EVM_Block_Cube {
     where: EVM_Block_Filter
   ): Float
   count(
-    where: EVM_Block_Filter
     distinct: [EVM_Block_EnumFields]
+    where: EVM_Block_Filter
   ): String
   covariance(
     of: EVM_Block_NumFields
@@ -74,9 +74,9 @@ type EVM_Block_Cube {
     where: EVM_Block_Filter
   ): Float
   cramers_bias_corrected(
-    where: EVM_Block_Filter
     of: EVM_Block_NumFields
     with: EVM_Block_NumFields
+    where: EVM_Block_Filter
   ): Float
   dispersion(
     of: EVM_Block_NumFields
@@ -87,18 +87,18 @@ type EVM_Block_Cube {
     where: EVM_Block_Filter
   ): Float
   kurtosis(
-    where: EVM_Block_Filter
     of: EVM_Block_NumFields
+    where: EVM_Block_Filter
   ): Float
   median(
     of: EVM_Block_NumFields
     where: EVM_Block_Filter
   ): Float
   quantile(
-    level: Float = 0.5
     where: EVM_Block_Filter
     method: OLAP_Metric_Calculation_Method_Exact
     of: EVM_Block_NumFields
+    level: Float = 0.5
   ): Float
   rank_correlation(
     of: EVM_Block_NumFields
@@ -118,14 +118,14 @@ type EVM_Block_Cube {
     where: EVM_Block_Filter
   ): String
   theils(
-    of: EVM_Block_NumFields
     with: EVM_Block_NumFields
     where: EVM_Block_Filter
+    of: EVM_Block_NumFields
   ): Float
   uniq(
-    of: [EVM_Block_EnumFields]
     where: EVM_Block_Filter
     method: OLAP_Metric_Calculation_Method_Exact
+    of: [EVM_Block_EnumFields]
   ): String
 }
 ```
@@ -141,16 +141,16 @@ type EVM_Block_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>ChainId</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ChainId value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.ChainId.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.ChainId.<b>maximum</b></code>](#)<Bullet />[`EVM_Block_CompareFields`](/docs/graphql-reference/enums/evm-block-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.ChainId.<b>maximum</b></code>](#)<Bullet />[`EVM_Block_CompareFields`](/docs/graphql-reference/enums/evm-block-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.ChainId.<b>minimum</b></code>](#)<Bullet />[`EVM_Block_CompareFields`](/docs/graphql-reference/enums/evm-block-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.ChainId.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>average</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -193,12 +193,12 @@ type EVM_Block_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Count records or uniques of arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.count.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Block_EnumFields]`](/docs/graphql-reference/enums/evm-block-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> Count distinct values of the field
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Block_EnumFields]`](/docs/graphql-reference/enums/evm-block-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
-> Count distinct values of the field
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.count.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>covariance</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -231,16 +231,16 @@ type EVM_Block_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Cramér's phi coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.cramers_bias_corrected.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Block_NumFields`](/docs/graphql-reference/enums/evm-block-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Block_NumFields`](/docs/graphql-reference/enums/evm-block-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Cramér's phi coefficient with bias correction between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Block_NumFields`](/docs/graphql-reference/enums/evm-block-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Cramér's phi coefficient with bias correction between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.cramers_bias_corrected.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>dispersion</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -265,12 +265,12 @@ type EVM_Block_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>kurtosis</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Kurtosis for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.kurtosis.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_Block_NumFields`](/docs/graphql-reference/enums/evm-block-num-fields) <Badge class="secondary" text="enum"/>
+> Argument for Kurtosis for a set of values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_Block_NumFields`](/docs/graphql-reference/enums/evm-block-num-fields) <Badge class="secondary" text="enum"/>
-> Argument for Kurtosis for a set of values
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.kurtosis.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>median</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -285,11 +285,7 @@ type EVM_Block_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>quantile</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Approximate quantile of a numeric data sequence
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.quantile.<b>level</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Level of quantile. Optional parameter. Constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]. Default value: 0.5. At level=0.5 the function calculates median.
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.quantile.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.quantile.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -299,6 +295,10 @@ type EVM_Block_Cube {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_Block_NumFields`](/docs/graphql-reference/enums/evm-block-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for quantile
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.quantile.<b>level</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+> Level of quantile. Optional parameter. Constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]. Default value: 0.5. At level=0.5 the function calculates median.
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -347,11 +347,7 @@ type EVM_Block_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>theils</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.theils.<b>of</b></code>](#)<Bullet />[`EVM_Block_NumFields`](/docs/graphql-reference/enums/evm-block-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.theils.<b>with</b></code>](#)<Bullet />[`EVM_Block_NumFields`](/docs/graphql-reference/enums/evm-block-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.theils.<b>with</b></code>](#)<Bullet />[`EVM_Block_NumFields`](/docs/graphql-reference/enums/evm-block-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
 > 
 
@@ -359,18 +355,22 @@ type EVM_Block_Cube {
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Count unique records
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Block_EnumFields]`](/docs/graphql-reference/enums/evm-block-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
-> Uniq values of the field
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.theils.<b>of</b></code>](#)<Bullet />[`EVM_Block_NumFields`](/docs/graphql-reference/enums/evm-block-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.uniq.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Count unique records
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.uniq.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
 > Method used to calculate metric values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Block_EnumFields]`](/docs/graphql-reference/enums/evm-block-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> Uniq values of the field
 > 
 
 

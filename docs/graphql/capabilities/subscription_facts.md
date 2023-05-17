@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Subscription on Facts
 
-It is a subscription to the results of [Query Fact Records](query_fact_records).
+It is a subscription to the results of [Query Fact Records](/docs/graphql/capabilities/query_fact_records).
 Query can be converted to subscription by replacing ```query``` word with
 ```subscription```.
 

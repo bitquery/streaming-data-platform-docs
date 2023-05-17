@@ -41,5 +41,5 @@ Use ```where``` with some always-true condition (say, ChainId equal 1) to get **
 :::
 
 :::tip 
-Use [Aliases](metrics/alias) to name the elements if needed
+Use [Aliases](/docs/graphql/metrics/alias) to name the elements if needed
 :::

@@ -11,7 +11,7 @@ and [filters](/docs/graphql/filters).
 
 Note that fact tables are typically long beasts, and querying the complete content of them not possible at all.
 So in reality you can query only a small portion of data, and there is no good way to get the complete
-dataset just by querying the fact tables, even using [limits](../limits) and offsets.
+dataset just by querying the fact tables, even using [limits](/docs/graphql/limits) and offsets.
 
 This type of query is useful in the following cases:
 

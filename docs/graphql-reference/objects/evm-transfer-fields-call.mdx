@@ -45,14 +45,14 @@ type EVM_Transfer_Fields_Call {
     minimum: EVM_Transfer_CompareFields
   ): [Int]
   CallerIndex(
+    where: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
-    where: EVM_Transfer_Filter
   ): Int
   Create(
-    maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
     where: EVM_Transfer_Filter
+    maximum: EVM_Transfer_CompareFields
   ): Boolean
   Delegated(
     where: EVM_Transfer_Filter
@@ -60,9 +60,9 @@ type EVM_Transfer_Fields_Call {
     minimum: EVM_Transfer_CompareFields
   ): Boolean
   Error(
-    minimum: EVM_Transfer_CompareFields
     where: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
+    minimum: EVM_Transfer_CompareFields
   ): String
   From(
     where: EVM_Transfer_Filter
@@ -90,9 +90,9 @@ type EVM_Transfer_Fields_Call {
     minimum: EVM_Transfer_CompareFields
   ): Int
   Reverted(
+    where: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
-    where: EVM_Transfer_Filter
   ): Boolean
   SelfDestruct(
     where: EVM_Transfer_Filter
@@ -139,7 +139,11 @@ type EVM_Transfer_Fields_Call {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.<b>CallerIndex</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > CallerIndex value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.CallerIndex.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.CallerIndex.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.CallerIndex.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -147,22 +151,18 @@ type EVM_Transfer_Fields_Call {
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.CallerIndex.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.<b>Create</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Create value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Create.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Create.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Create.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Create.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Create.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.<b>Delegated</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
@@ -181,16 +181,16 @@ type EVM_Transfer_Fields_Call {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.<b>Error</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Error value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Error.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Error.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Error.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Error.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Error.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.<b>From</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -265,16 +265,16 @@ type EVM_Transfer_Fields_Call {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.<b>Reverted</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Reverted value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Reverted.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Reverted.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Reverted.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Reverted.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.Reverted.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Call.<b>SelfDestruct</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>

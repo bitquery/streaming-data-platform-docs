@@ -50,14 +50,14 @@ type EVM_DEXTrade_Fields_Fee {
     minimum: EVM_DEXTrade_CompareFields
   ): String
   GasRefund(
+    minimum: EVM_DEXTrade_CompareFields
     where: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
-    minimum: EVM_DEXTrade_CompareFields
   ): String
   MinerReward(
+    where: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
     minimum: EVM_DEXTrade_CompareFields
-    where: EVM_DEXTrade_Filter
   ): String
   PriorityFeePerGas(
     where: EVM_DEXTrade_Filter
@@ -65,9 +65,9 @@ type EVM_DEXTrade_Fields_Fee {
     minimum: EVM_DEXTrade_CompareFields
   ): String
   Savings(
+    where: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
     minimum: EVM_DEXTrade_CompareFields
-    where: EVM_DEXTrade_Filter
   ): String
   SenderFee(
     where: EVM_DEXTrade_Filter
@@ -112,7 +112,11 @@ type EVM_DEXTrade_Fields_Fee {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.<b>GasRefund</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > GasRefund value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.GasRefund.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.GasRefund.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.GasRefund.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -120,22 +124,18 @@ type EVM_DEXTrade_Fields_Fee {
 > Return value when the argument is maximum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.GasRefund.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.<b>MinerReward</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > MinerReward value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.MinerReward.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.MinerReward.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.MinerReward.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.MinerReward.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.MinerReward.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.<b>PriorityFeePerGas</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -154,16 +154,16 @@ type EVM_DEXTrade_Fields_Fee {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.<b>Savings</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Savings value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.Savings.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.Savings.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.Savings.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.Savings.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.Savings.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Fee.<b>SenderFee</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>

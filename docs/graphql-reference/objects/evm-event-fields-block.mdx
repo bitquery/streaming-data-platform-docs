@@ -65,9 +65,9 @@ type EVM_Event_Fields_Block {
     minimum: EVM_Event_CompareFields
   ): String
   GasUsed(
-    minimum: EVM_Event_CompareFields
     where: EVM_Event_Filter
     maximum: EVM_Event_CompareFields
+    minimum: EVM_Event_CompareFields
   ): String
   Hash(
     where: EVM_Event_Filter
@@ -75,9 +75,9 @@ type EVM_Event_Fields_Block {
     minimum: EVM_Event_CompareFields
   ): String
   Nonce(
-    where: EVM_Event_Filter
     maximum: EVM_Event_CompareFields
     minimum: EVM_Event_CompareFields
+    where: EVM_Event_Filter
   ): String
   Number(
     where: EVM_Event_Filter
@@ -85,9 +85,9 @@ type EVM_Event_Fields_Block {
     minimum: EVM_Event_CompareFields
   ): String
   ParentHash(
+    where: EVM_Event_Filter
     maximum: EVM_Event_CompareFields
     minimum: EVM_Event_CompareFields
-    where: EVM_Event_Filter
   ): String
   Time(
     where: EVM_Event_Filter
@@ -174,16 +174,16 @@ type EVM_Event_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.<b>GasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > GasUsed value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.GasUsed.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.GasUsed.<b>where</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.GasUsed.<b>where</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.GasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.GasUsed.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.<b>Hash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -202,16 +202,16 @@ type EVM_Event_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.<b>Nonce</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Nonce value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.Nonce.<b>where</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.Nonce.<b>maximum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.Nonce.<b>maximum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.Nonce.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.Nonce.<b>where</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.<b>Number</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -230,16 +230,16 @@ type EVM_Event_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.<b>ParentHash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ParentHash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.ParentHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.ParentHash.<b>where</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.ParentHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.ParentHash.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.ParentHash.<b>where</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Block.<b>Time</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>

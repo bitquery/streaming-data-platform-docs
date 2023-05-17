@@ -39,11 +39,11 @@ Select by Trade
 
 ```graphql
 input EVM_DEXTrade_Input_Trade_InputType {
+  Sell: EVM_DEXTrade_Input_Trade_Sell_InputType
+  Dex: EVM_DEXTrade_Input_Trade_Dex_InputType
+  Sender: OLAP_String
   Success: Boolean
   Buy: EVM_DEXTrade_Input_Trade_Buy_InputType
-  Sell: EVM_DEXTrade_Input_Trade_Sell_InputType
-  Sender: OLAP_String
-  Dex: EVM_DEXTrade_Input_Trade_Dex_InputType
 }
 ```
 
@@ -52,15 +52,11 @@ input EVM_DEXTrade_Input_Trade_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_InputType.<b>Success</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_InputType.<b>Buy</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_Buy_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-buy-input-type) <Badge class="secondary" text="input"/>
-> 
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_InputType.<b>Sell</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_Sell_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-sell-input-type) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_InputType.<b>Dex</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_Dex_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-dex-input-type) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -68,7 +64,11 @@ input EVM_DEXTrade_Input_Trade_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_InputType.<b>Dex</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_Dex_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-dex-input-type) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_InputType.<b>Success</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_InputType.<b>Buy</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_Buy_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-buy-input-type) <Badge class="secondary" text="input"/>
 > 
 > 
 

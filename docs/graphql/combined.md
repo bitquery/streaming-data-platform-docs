@@ -31,7 +31,7 @@ query {
 ```
 
 :::tip
-Use [Aliases](metrics/alias) to name the elements if needed
+Use [Aliases](/docs/graphql/metrics/alias) to name the elements if needed
 :::
 
 :::danger

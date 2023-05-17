@@ -40,14 +40,14 @@ Block fields
 ```graphql
 type EVM_WasOnBranch_Fields_Uncle_Block {
   BaseFee(
-    minimum: EVM_WasOnBranch_CompareFields
     where: EVM_WasOnBranch_Filter
     maximum: EVM_WasOnBranch_CompareFields
+    minimum: EVM_WasOnBranch_CompareFields
   ): String
   Bloom(
+    where: EVM_WasOnBranch_Filter
     maximum: EVM_WasOnBranch_CompareFields
     minimum: EVM_WasOnBranch_CompareFields
-    where: EVM_WasOnBranch_Filter
   ): String
   Coinbase(
     where: EVM_WasOnBranch_Filter
@@ -110,14 +110,14 @@ type EVM_WasOnBranch_Fields_Uncle_Block {
     minimum: EVM_WasOnBranch_CompareFields
   ): String
   Root(
-    minimum: EVM_WasOnBranch_CompareFields
     where: EVM_WasOnBranch_Filter
     maximum: EVM_WasOnBranch_CompareFields
+    minimum: EVM_WasOnBranch_CompareFields
   ): String
   Time(
+    where: EVM_WasOnBranch_Filter
     maximum: EVM_WasOnBranch_CompareFields
     minimum: EVM_WasOnBranch_CompareFields
-    where: EVM_WasOnBranch_Filter
   ): DateTime
   TxHash(
     where: EVM_WasOnBranch_Filter
@@ -139,11 +139,7 @@ type EVM_WasOnBranch_Fields_Uncle_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.<b>BaseFee</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > BaseFee value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.BaseFee.<b>minimum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.BaseFee.<b>where</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.BaseFee.<b>where</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -151,18 +147,22 @@ type EVM_WasOnBranch_Fields_Uncle_Block {
 > Return value when the argument is maximum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.BaseFee.<b>minimum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.<b>Bloom</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Bloom value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Bloom.<b>maximum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Bloom.<b>where</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Bloom.<b>maximum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Bloom.<b>minimum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Bloom.<b>where</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.<b>Coinbase</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -335,11 +335,7 @@ type EVM_WasOnBranch_Fields_Uncle_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.<b>Root</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Root value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Root.<b>minimum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Root.<b>where</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Root.<b>where</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -347,18 +343,22 @@ type EVM_WasOnBranch_Fields_Uncle_Block {
 > Return value when the argument is maximum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Root.<b>minimum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.<b>Time</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
 > Time value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Time.<b>maximum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Time.<b>where</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Time.<b>maximum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Time.<b>minimum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.Time.<b>where</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle_Block.<b>TxHash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>

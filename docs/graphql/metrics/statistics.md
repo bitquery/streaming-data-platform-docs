@@ -44,5 +44,5 @@ Elements that calculate different statistics with the self-descriptive names:
 * ```theils``` calculates the [Theil's U uncertainty coefficient](https://en.wikipedia.org/wiki/Contingency_table#Uncertainty_coefficient), a value that measures the association between two columns in a table. Its values range from −1.0 (100% negative association, or perfect inversion) to +1.0 (100% positive association, or perfect agreement). A value of 0.0 indicates the absence of association.
 
 :::tip
-You can use [condition](where) to any of these metrics
+You can use [condition](/docs/graphql/metrics/where) to any of these metrics
 :::

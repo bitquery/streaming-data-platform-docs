@@ -4,7 +4,7 @@ sidebar_position: 8
 
 # Token and Currency Transfers
 
-To retrieve data on token and currency transfers using Bitquery, users can utilize the platform's GraphQL API. The Bitquery API allows users to construct custom queries to retrieve data on a wide range of blockchain events and transactions, including token transfers. You can find more examples [here](../examples/transfers/erc20-token-transfer-api)
+To retrieve data on token and currency transfers using Bitquery, users can utilize the platform's GraphQL API. The Bitquery API allows users to construct custom queries to retrieve data on a wide range of blockchain events and transactions, including token transfers. You can find more examples [here](/docs/examples/transfers/erc20-token-transfer-api)
 
 ```graphql
  Transfers(limit: {count: 10}, orderBy: {descending: Block_Time}) {

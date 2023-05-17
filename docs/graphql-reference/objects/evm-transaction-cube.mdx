@@ -60,9 +60,9 @@ type EVM_Transaction_Cube {
     where: EVM_Transaction_Filter
   ): Float
   correlation(
+    of: EVM_Transaction_NumFields
     with: EVM_Transaction_NumFields
     where: EVM_Transaction_Filter
-    of: EVM_Transaction_NumFields
   ): Float
   count(
     distinct: [EVM_Transaction_EnumFields]
@@ -79,9 +79,9 @@ type EVM_Transaction_Cube {
     where: EVM_Transaction_Filter
   ): Float
   cramers_bias_corrected(
+    where: EVM_Transaction_Filter
     of: EVM_Transaction_NumFields
     with: EVM_Transaction_NumFields
-    where: EVM_Transaction_Filter
   ): Float
   dispersion(
     of: EVM_Transaction_NumFields
@@ -106,17 +106,17 @@ type EVM_Transaction_Cube {
     method: OLAP_Metric_Calculation_Method_Exact
   ): Float
   rank_correlation(
-    where: EVM_Transaction_Filter
     of: EVM_Transaction_NumFields
     with: EVM_Transaction_NumFields
+    where: EVM_Transaction_Filter
   ): Float
   skew(
     of: EVM_Transaction_NumFields
     where: EVM_Transaction_Filter
   ): Float
   standard_deviation(
-    where: EVM_Transaction_Filter
     of: EVM_Transaction_NumFields
+    where: EVM_Transaction_Filter
   ): Float
   sum(
     of: EVM_Transaction_NumFields
@@ -128,9 +128,9 @@ type EVM_Transaction_Cube {
     where: EVM_Transaction_Filter
   ): Float
   uniq(
-    of: [EVM_Transaction_EnumFields]
     where: EVM_Transaction_Filter
     method: OLAP_Metric_Calculation_Method_Exact
+    of: [EVM_Transaction_EnumFields]
   ): String
 }
 ```
@@ -204,16 +204,16 @@ type EVM_Transaction_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Pearson correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.correlation.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Pearson correlation coefficient between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.correlation.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Pearson correlation coefficient between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.correlation.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Pearson correlation coefficient between two arguments
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -256,16 +256,16 @@ type EVM_Transaction_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Cramér's phi coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Cramér's phi coefficient with bias correction between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Cramér's phi coefficient with bias correction between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>dispersion</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -328,16 +328,16 @@ type EVM_Transaction_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Rank correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.rank_correlation.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.rank_correlation.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.rank_correlation.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Rank correlation coefficient between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.rank_correlation.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Rank correlation coefficient between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.rank_correlation.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -352,12 +352,12 @@ type EVM_Transaction_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>standard_deviation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Standard deviation of the values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.standard_deviation.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
+> Argument for Standard deviation of the values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="secondary" text="enum"/>
-> Argument for Standard deviation of the values
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.standard_deviation.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>sum</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -386,16 +386,16 @@ type EVM_Transaction_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Count unique records
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Transaction_EnumFields]`](/docs/graphql-reference/enums/evm-transaction-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
-> Uniq values of the field
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
 > Method used to calculate metric values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Transaction_EnumFields]`](/docs/graphql-reference/enums/evm-transaction-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> Uniq values of the field
 > 
 
 

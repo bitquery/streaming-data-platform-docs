@@ -25,4 +25,4 @@ Archive Database features:
 :::
 
 
-Also Check [Combined](combined) and [RealTime](realtime) dataset.
+Also Check [Combined](/docs/graphql/dataset/combined) and [RealTime](/docs/graphql/dataset/realtime) dataset.

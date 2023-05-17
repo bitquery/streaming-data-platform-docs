@@ -51,14 +51,14 @@ type EVM_DEXTrade_Fields_Trade_Buy {
   ): String
   Currency: EVM_DEXTrade_Fields_Trade_Buy_Currency
   Ids(
+    maximum: EVM_DEXTrade_CompareFields
     minimum: EVM_DEXTrade_CompareFields
     where: EVM_DEXTrade_Filter
-    maximum: EVM_DEXTrade_CompareFields
   ): [String]
   OrderId(
+    minimum: EVM_DEXTrade_CompareFields
     where: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
-    minimum: EVM_DEXTrade_CompareFields
   ): String
   Price(
     where: EVM_DEXTrade_Filter
@@ -117,7 +117,11 @@ type EVM_DEXTrade_Fields_Trade_Buy {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.<b>Ids</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
 > Ids value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.Ids.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.Ids.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.Ids.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
@@ -125,22 +129,18 @@ type EVM_DEXTrade_Fields_Trade_Buy {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.Ids.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.<b>OrderId</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > OrderId value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.<b>Price</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>

@@ -40,9 +40,9 @@ Smart contract calls in EVM Blockchain
 ```graphql
 type EVM_Call_Cube {
   Arguments(
-    where: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
+    where: EVM_Call_Filter
   ): [EVM_Call_Fields_Arguments]
   Block: EVM_Call_Fields_Block
   Call: EVM_Call_Fields_Call
@@ -70,9 +70,9 @@ type EVM_Call_Cube {
     where: EVM_Call_Filter
   ): Float
   contingency(
+    of: EVM_Call_NumFields
     with: EVM_Call_NumFields
     where: EVM_Call_Filter
-    of: EVM_Call_NumFields
   ): Float
   correlation(
     with: EVM_Call_NumFields
@@ -80,8 +80,8 @@ type EVM_Call_Cube {
     of: EVM_Call_NumFields
   ): Float
   count(
-    distinct: [EVM_Call_EnumFields]
     where: EVM_Call_Filter
+    distinct: [EVM_Call_EnumFields]
   ): String
   covariance(
     of: EVM_Call_NumFields
@@ -103,8 +103,8 @@ type EVM_Call_Cube {
     where: EVM_Call_Filter
   ): Float
   entropy(
-    where: EVM_Call_Filter
     of: EVM_Call_NumFields
+    where: EVM_Call_Filter
   ): Float
   kurtosis(
     of: EVM_Call_NumFields
@@ -121,9 +121,9 @@ type EVM_Call_Cube {
     method: OLAP_Metric_Calculation_Method_Exact
   ): Float
   rank_correlation(
+    where: EVM_Call_Filter
     of: EVM_Call_NumFields
     with: EVM_Call_NumFields
-    where: EVM_Call_Filter
   ): Float
   skew(
     of: EVM_Call_NumFields
@@ -157,16 +157,16 @@ type EVM_Call_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Arguments</b></code>](#)<Bullet />[`[EVM_Call_Fields_Arguments]`](/docs/graphql-reference/objects/evm-call-fields-arguments) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 > Arguments value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Block</b></code>](#)<Bullet />[`EVM_Call_Fields_Block`](/docs/graphql-reference/objects/evm-call-fields-block) <Badge class="secondary" text="object"/>
@@ -247,16 +247,16 @@ type EVM_Call_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>contingency</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Contingency coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Contingency coefficient between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Contingency coefficient between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Contingency coefficient between two arguments
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -275,12 +275,12 @@ type EVM_Call_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Count records or uniques of arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Call_EnumFields]`](/docs/graphql-reference/enums/evm-call-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
-> Count distinct values of the field
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.count.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.count.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Call_EnumFields]`](/docs/graphql-reference/enums/evm-call-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> Count distinct values of the field
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>covariance</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -337,12 +337,12 @@ type EVM_Call_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>entropy</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Entropy for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.entropy.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.entropy.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+> Argument for Entropy for a set of values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.entropy.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
-> Argument for Entropy for a set of values
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.entropy.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>kurtosis</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -385,16 +385,16 @@ type EVM_Call_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Rank correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Rank correlation coefficient between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Rank correlation coefficient between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>

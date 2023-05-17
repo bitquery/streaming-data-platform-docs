@@ -40,14 +40,14 @@ BalanceUpdate fields
 ```graphql
 type EVM_BalanceUpdate_Fields_BalanceUpdate {
   Address(
-    where: EVM_BalanceUpdate_Filter
     maximum: EVM_BalanceUpdate_CompareFields
     minimum: EVM_BalanceUpdate_CompareFields
+    where: EVM_BalanceUpdate_Filter
   ): String
   Amount(
+    minimum: EVM_BalanceUpdate_CompareFields
     where: EVM_BalanceUpdate_Filter
     maximum: EVM_BalanceUpdate_CompareFields
-    minimum: EVM_BalanceUpdate_CompareFields
   ): String
   Id(
     where: EVM_BalanceUpdate_Filter
@@ -74,11 +74,7 @@ type EVM_BalanceUpdate_Fields_BalanceUpdate {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.<b>Address</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Address value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.Address.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.Address.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.Address.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -86,18 +82,22 @@ type EVM_BalanceUpdate_Fields_BalanceUpdate {
 > Return value when the argument is minimum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.Address.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.<b>Amount</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Amount value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.Amount.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.Amount.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.Amount.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.Amount.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.Amount.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate.<b>Id</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>

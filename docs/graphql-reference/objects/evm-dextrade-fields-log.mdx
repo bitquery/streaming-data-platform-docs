@@ -45,9 +45,9 @@ type EVM_DEXTrade_Fields_Log {
     minimum: EVM_DEXTrade_CompareFields
   ): Int
   LogAfterCallIndex(
+    minimum: EVM_DEXTrade_CompareFields
     where: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
-    minimum: EVM_DEXTrade_CompareFields
   ): Int
   Signature: EVM_DEXTrade_Fields_Log_Signature
   SmartContract(
@@ -79,16 +79,16 @@ type EVM_DEXTrade_Fields_Log {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Log.<b>LogAfterCallIndex</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > LogAfterCallIndex value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Log.LogAfterCallIndex.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Log.LogAfterCallIndex.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Log.LogAfterCallIndex.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Log.LogAfterCallIndex.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Log.LogAfterCallIndex.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Log.<b>Signature</b></code>](#)<Bullet />[`EVM_DEXTrade_Fields_Log_Signature`](/docs/graphql-reference/objects/evm-dextrade-fields-log-signature) <Badge class="secondary" text="object"/>

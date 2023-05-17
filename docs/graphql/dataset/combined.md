@@ -11,7 +11,7 @@ and then the results are joined together.
 That's why this is the combination of features of these databases.
 
 :::note
-[Select Block](select_blocks) attributes for combined database controls
+[Select Block](/docs/graphql/dataset/select_blocks) attributes for combined database controls
 how you can query the trunk or branch block updates **ONLY for real time database data part**.
 :::
 
@@ -21,4 +21,4 @@ and does not give full consistency of the data.
 :::
 
 
-Also Check [Archive](archive) and [RealTime](realtime) dataset.
+Also Check [Archive](/docs/graphql/dataset/archive) and [RealTime](/docs/graphql/dataset/realtime) dataset.

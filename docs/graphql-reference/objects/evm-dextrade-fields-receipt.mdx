@@ -50,9 +50,9 @@ type EVM_DEXTrade_Fields_Receipt {
     minimum: EVM_DEXTrade_CompareFields
   ): String
   GasUsed(
+    where: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
     minimum: EVM_DEXTrade_CompareFields
-    where: EVM_DEXTrade_Filter
   ): String
   Status(
     minimum: EVM_DEXTrade_CompareFields
@@ -102,16 +102,16 @@ type EVM_DEXTrade_Fields_Receipt {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.<b>GasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > GasUsed value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.GasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.GasUsed.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.GasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.GasUsed.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.GasUsed.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.<b>Status</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
