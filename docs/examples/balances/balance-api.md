@@ -11,28 +11,33 @@ You can use BalanceUpdates API to get latest balance for an address.
 
 ## Balance of an address
 
-Open the query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/balance-of-an-address---new-dataset).
+Open the query on GraphQL IDE using this [link](https://ide.bitquery.io/balance-of-a-wallet_1).
 
 ```graphql 
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "0x3416cf6c708da44db2624d63ea0aaef7113527c6"}}}
+      where: {BalanceUpdate: {Address: {is: "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6"}}}
+      orderBy: {descendingByField: "balance"}
     ) {
       Currency {
         Name
       }
-      balance: sum(of: BalanceUpdate_Amount)
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      BalanceUpdate {
+        Address
+      }
     }
   }
 }
+
 
 ```
 
 **Parameters**
 -   `dataset: combined`: This parameter specifies that the [combined](/docs/graphql/dataset/combined) dataset is being used.
 -   `network: eth`: This parameter specifies that the Ethereum network is being queried.
--   `where: {BalanceUpdate: {Address: {is: "0x3416cf6c708da44db2624d63ea0aaef7113527c6"}}}`: This parameter filters the results of the query based on the Ethereum address "0x3416cf6c708da44db2624d63ea0aaef7113527c6".
+-   `where: {BalanceUpdate: {Address: {is: "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6"}}}`: This parameter filters the results of the query based on the Ethereum address "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6".
 
 **Returned Data**
 -   `Currency { Name }`: This field specifies the currency in which the balance is expressed. In this case, the `Name` of the currency is retrieved.
