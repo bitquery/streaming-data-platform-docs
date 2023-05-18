@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://docs.bitquery.io/blog</id>
+    <title>Data streaming platform Blog</title>
+    <updated>2023-05-18T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://docs.bitquery.io/blog"/>
+    <subtitle>Data streaming platform Blog</subtitle>
+    <icon>https://docs.bitquery.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Added conditional select by metric]]></title>
+        <id>https://docs.bitquery.io/blog/added-conditional-metric</id>
+        <link href="https://docs.bitquery.io/blog/added-conditional-metric"/>
+        <updated>2023-05-18T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[There is the modification in the today release of Graphql:]]></summary>
+        <content type="html"><![CDATA[<p>There is the modification in the today release of Graphql:</p><ol><li><a href="/docs/graphql/metrics/selectWhere/">selectWhere</a> for details</li><li>renamed <code>where</code> attribute on metrics to <a href="/docs/graphql/metrics/if/">if</a></li></ol>]]></content>
+        <author>
+            <name>Aleksey Studnev</name>
+            <uri>https://github.com/astudnev</uri>
+        </author>
+        <category label="metrics" term="metrics"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Arguments for Calls and Events refactored]]></title>
+        <id>https://docs.bitquery.io/blog/arguments-calls-events</id>
+        <link href="https://docs.bitquery.io/blog/arguments-calls-events"/>
+        <updated>2023-04-13T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[There is the major modification in the today release of Graphql:]]></summary>
+        <content type="html"><![CDATA[<p>There is the major modification in the today release of Graphql:</p><ol><li>Arguments and return value for Calls and Events are now represented as arrays of structures. Use union to read values of arguments. Refer to <a href="/docs/evm/arguments/">arguments</a> for details on data structures.</li><li>Names of objects in GraphQL schema are simplified and no more contain UUID identifiers. It simplifies working with schema and allows to use fragments easier</li><li>Set of bug fixed for using arrays, fragments and others</li></ol>]]></content>
+        <author>
+            <name>Aleksey Studnev</name>
+            <uri>https://github.com/astudnev</uri>
+        </author>
+        <category label="arguments" term="arguments"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Started documenting data platform]]></title>
+        <id>https://docs.bitquery.io/blog/documentation-started</id>
+        <link href="https://docs.bitquery.io/blog/documentation-started"/>
+        <updated>2023-02-21T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We are happy to start this project, documenting the new Bitquery data platform.]]></summary>
+        <content type="html"><![CDATA[<p>We are happy to start this project, documenting the new Bitquery data platform.</p><p>The first authors will be Bitquery developers, and later all our users and clients are
+welcome to participate.</p>]]></content>
+        <author>
+            <name>Aleksey Studnev</name>
+            <uri>https://github.com/astudnev</uri>
+        </author>
+        <author>
+            <name>Gaurav</name>
+            <uri>https://github.com/buddies2705</uri>
+        </author>
+        <author>
+            <name>Lucas</name>
+            <uri>https://github.com/crox-safe</uri>
+        </author>
+        <author>
+            <name>Divyasshree</name>
+            <uri>https://github.com/divyasshree-BQ</uri>
+        </author>
+        <category label="bitquery" term="bitquery"/>
+    </entry>
+</feed>

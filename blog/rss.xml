@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Data streaming platform Blog</title>
+        <link>https://docs.bitquery.io/blog</link>
+        <description>Data streaming platform Blog</description>
+        <lastBuildDate>Thu, 18 May 2023 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Added conditional select by metric]]></title>
+            <link>https://docs.bitquery.io/blog/added-conditional-metric</link>
+            <guid>https://docs.bitquery.io/blog/added-conditional-metric</guid>
+            <pubDate>Thu, 18 May 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[There is the modification in the today release of Graphql:]]></description>
+            <content:encoded><![CDATA[<p>There is the modification in the today release of Graphql:</p><ol><li><a href="/docs/graphql/metrics/selectWhere/">selectWhere</a> for details</li><li>renamed <code>where</code> attribute on metrics to <a href="/docs/graphql/metrics/if/">if</a></li></ol>]]></content:encoded>
+            <category>metrics</category>
+        </item>
+        <item>
+            <title><![CDATA[Arguments for Calls and Events refactored]]></title>
+            <link>https://docs.bitquery.io/blog/arguments-calls-events</link>
+            <guid>https://docs.bitquery.io/blog/arguments-calls-events</guid>
+            <pubDate>Thu, 13 Apr 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[There is the major modification in the today release of Graphql:]]></description>
+            <content:encoded><![CDATA[<p>There is the major modification in the today release of Graphql:</p><ol><li>Arguments and return value for Calls and Events are now represented as arrays of structures. Use union to read values of arguments. Refer to <a href="/docs/evm/arguments/">arguments</a> for details on data structures.</li><li>Names of objects in GraphQL schema are simplified and no more contain UUID identifiers. It simplifies working with schema and allows to use fragments easier</li><li>Set of bug fixed for using arrays, fragments and others</li></ol>]]></content:encoded>
+            <category>arguments</category>
+        </item>
+        <item>
+            <title><![CDATA[Started documenting data platform]]></title>
+            <link>https://docs.bitquery.io/blog/documentation-started</link>
+            <guid>https://docs.bitquery.io/blog/documentation-started</guid>
+            <pubDate>Tue, 21 Feb 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[We are happy to start this project, documenting the new Bitquery data platform.]]></description>
+            <content:encoded><![CDATA[<p>We are happy to start this project, documenting the new Bitquery data platform.</p><p>The first authors will be Bitquery developers, and later all our users and clients are
+welcome to participate.</p>]]></content:encoded>
+            <category>bitquery</category>
+        </item>
+    </channel>
+</rss>
