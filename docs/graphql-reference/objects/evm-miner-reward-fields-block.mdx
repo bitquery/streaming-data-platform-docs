@@ -40,103 +40,104 @@ Block fields
 ```graphql
 type EVM_MinerReward_Fields_Block {
   BaseFee(
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
-    where: EVM_MinerReward_Filter
   ): String
   Bloom(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
   Coinbase(
-    where: EVM_MinerReward_Filter
-    maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
+    if: EVM_MinerReward_Filter
+    maximum: EVM_MinerReward_CompareFields
   ): String
   Date(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
   Difficulty(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
   Extra(
-    where: EVM_MinerReward_Filter
-    maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
+    if: EVM_MinerReward_Filter
+    maximum: EVM_MinerReward_CompareFields
   ): String
   GasLimit(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
   GasUsed(
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
-    where: EVM_MinerReward_Filter
   ): String
   Hash(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
+  L1: EVM_MinerReward_Fields_Block_L1
   MixDigest(
-    where: EVM_MinerReward_Filter
-    maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
+    if: EVM_MinerReward_Filter
+    maximum: EVM_MinerReward_CompareFields
   ): String
   Nonce(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
   Number(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
   ParentHash(
-    maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
+    maximum: EVM_MinerReward_CompareFields
   ): String
   ReceiptHash(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
   Result: EVM_MinerReward_Fields_Block_Result
   Root(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
   Time(
-    where: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
+    if: EVM_MinerReward_Filter
   ): DateTime
   TxCount(
-    minimum: EVM_MinerReward_CompareFields
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
+    minimum: EVM_MinerReward_CompareFields
   ): Int
   TxHash(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
   UncleHash(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): String
   UnclesCount(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): Int
@@ -150,7 +151,11 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>BaseFee</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > BaseFee value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.BaseFee.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.BaseFee.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.BaseFee.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -158,13 +163,9 @@ type EVM_MinerReward_Fields_Block {
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.BaseFee.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>Bloom</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Bloom value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Bloom.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Bloom.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -178,7 +179,11 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>Coinbase</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Coinbase value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Coinbase.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Coinbase.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Coinbase.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -186,13 +191,9 @@ type EVM_MinerReward_Fields_Block {
 > Return value when the argument is maximum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Coinbase.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>Date</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Date value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Date.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Date.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -206,7 +207,7 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>Difficulty</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Difficulty value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Difficulty.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Difficulty.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -220,7 +221,11 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>Extra</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Extra value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Extra.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Extra.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Extra.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -228,13 +233,9 @@ type EVM_MinerReward_Fields_Block {
 > Return value when the argument is maximum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Extra.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>GasLimit</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > GasLimit value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.GasLimit.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.GasLimit.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -248,7 +249,11 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>GasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > GasUsed value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.GasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.GasUsed.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.GasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -256,13 +261,9 @@ type EVM_MinerReward_Fields_Block {
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.GasUsed.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>Hash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Hash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Hash.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Hash.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -274,9 +275,17 @@ type EVM_MinerReward_Fields_Block {
 > Return value when the argument is minimum
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>L1</b></code>](#)<Bullet />[`EVM_MinerReward_Fields_Block_L1`](/docs/graphql-reference/objects/evm-miner-reward-fields-block-l1) <Badge class="secondary" text="object"/>
+> L1 fields
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>MixDigest</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > MixDigest value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.MixDigest.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.MixDigest.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.MixDigest.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -284,13 +293,9 @@ type EVM_MinerReward_Fields_Block {
 > Return value when the argument is maximum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.MixDigest.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>Nonce</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Nonce value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Nonce.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Nonce.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -304,7 +309,7 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>Number</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Number value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Number.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Number.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -318,21 +323,21 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>ParentHash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ParentHash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.ParentHash.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.ParentHash.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.ParentHash.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.ParentHash.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.ParentHash.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.ParentHash.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>ReceiptHash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ReceiptHash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.ReceiptHash.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.ReceiptHash.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -350,7 +355,7 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>Root</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Root value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Root.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Root.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -364,11 +369,7 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>Time</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
 > Time value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Time.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Time.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Time.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -376,13 +377,13 @@ type EVM_MinerReward_Fields_Block {
 > Return value when the argument is minimum
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>TxCount</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
-> TxCount value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.TxCount.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.Time.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.TxCount.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>TxCount</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
+> TxCount value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.TxCount.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -390,9 +391,13 @@ type EVM_MinerReward_Fields_Block {
 > Return value when the argument is maximum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.TxCount.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>TxHash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > TxHash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.TxHash.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.TxHash.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -406,7 +411,7 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>UncleHash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > UncleHash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.UncleHash.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.UncleHash.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -420,7 +425,7 @@ type EVM_MinerReward_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.<b>UnclesCount</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > UnclesCount value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.UnclesCount.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block.UnclesCount.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 

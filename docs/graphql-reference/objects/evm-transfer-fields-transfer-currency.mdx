@@ -40,52 +40,52 @@ Currency fields
 ```graphql
 type EVM_Transfer_Fields_Transfer_Currency {
   Decimals(
-    where: EVM_Transfer_Filter
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
   ): Int
   Delegated(
-    where: EVM_Transfer_Filter
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
   ): Boolean
   DelegatedTo(
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
-    where: EVM_Transfer_Filter
   ): String
   Fungible(
-    where: EVM_Transfer_Filter
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
   ): Boolean
   HasURI(
-    minimum: EVM_Transfer_CompareFields
-    where: EVM_Transfer_Filter
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
+    minimum: EVM_Transfer_CompareFields
   ): Boolean
   Name(
-    where: EVM_Transfer_Filter
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
   ): String
   Native(
-    where: EVM_Transfer_Filter
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
   ): Boolean
   ProtocolName(
-    where: EVM_Transfer_Filter
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
   ): String
   SmartContract(
-    where: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
+    if: EVM_Transfer_Filter
   ): String
   Symbol(
-    where: EVM_Transfer_Filter
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
   ): String
@@ -99,7 +99,7 @@ type EVM_Transfer_Fields_Transfer_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.<b>Decimals</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Decimals value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Decimals.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Decimals.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -113,7 +113,7 @@ type EVM_Transfer_Fields_Transfer_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.<b>Delegated</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Delegated value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Delegated.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Delegated.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -127,7 +127,11 @@ type EVM_Transfer_Fields_Transfer_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.<b>DelegatedTo</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > DelegatedTo value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.DelegatedTo.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.DelegatedTo.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.DelegatedTo.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -135,13 +139,9 @@ type EVM_Transfer_Fields_Transfer_Currency {
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.DelegatedTo.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.<b>Fungible</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Fungible value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Fungible.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Fungible.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -155,11 +155,7 @@ type EVM_Transfer_Fields_Transfer_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.<b>HasURI</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > HasURI value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.HasURI.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.HasURI.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.HasURI.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -167,9 +163,13 @@ type EVM_Transfer_Fields_Transfer_Currency {
 > Return value when the argument is maximum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.HasURI.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.<b>Name</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Name value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Name.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Name.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -183,7 +183,7 @@ type EVM_Transfer_Fields_Transfer_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.<b>Native</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Native value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Native.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Native.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -197,7 +197,7 @@ type EVM_Transfer_Fields_Transfer_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.<b>ProtocolName</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ProtocolName value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.ProtocolName.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.ProtocolName.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -211,11 +211,7 @@ type EVM_Transfer_Fields_Transfer_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.<b>SmartContract</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > SmartContract value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.SmartContract.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.SmartContract.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.SmartContract.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -223,9 +219,13 @@ type EVM_Transfer_Fields_Transfer_Currency {
 > Return value when the argument is minimum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.SmartContract.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.<b>Symbol</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Symbol value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Symbol.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Currency.Symbol.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 

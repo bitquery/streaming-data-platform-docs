@@ -39,11 +39,11 @@ Select by Buy
 
 ```graphql
 input EVM_DEXTrade_Input_Trade_Buy_InputType {
-  Seller: OLAP_String
   Currency: EVM_DEXTrade_Input_Trade_Buy_Currency_InputType
-  Price: OLAP_Float
-  Amount: EVM_Amount_With_Decimals
   Buyer: OLAP_String
+  Amount: EVM_Amount_With_Decimals
+  Price: OLAP_Float
+  Seller: OLAP_String
   OrderId: OLAP_String
 }
 ```
@@ -53,15 +53,11 @@ input EVM_DEXTrade_Input_Trade_Buy_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_InputType.<b>Seller</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_InputType.<b>Currency</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_Buy_Currency_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-buy-currency-input-type) <Badge class="secondary" text="input"/>
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_InputType.<b>Price</b></code>](#)<Bullet />[`OLAP_Float`](/docs/graphql-reference/inputs/olap-float) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_InputType.<b>Buyer</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -69,7 +65,11 @@ input EVM_DEXTrade_Input_Trade_Buy_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_InputType.<b>Buyer</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_InputType.<b>Price</b></code>](#)<Bullet />[`OLAP_Float`](/docs/graphql-reference/inputs/olap-float) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_InputType.<b>Seller</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > 
 > 
 

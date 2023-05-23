@@ -40,12 +40,12 @@ Opcode fields
 ```graphql
 type EVM_Call_Fields_Call_Opcode {
   Code(
-    where: EVM_Call_Filter
+    if: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
   ): Int
   Name(
-    where: EVM_Call_Filter
+    if: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
   ): String
@@ -59,7 +59,7 @@ type EVM_Call_Fields_Call_Opcode {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Call_Opcode.<b>Code</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Code value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Call_Opcode.Code.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Call_Opcode.Code.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -73,7 +73,7 @@ type EVM_Call_Fields_Call_Opcode {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Call_Opcode.<b>Name</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Name value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Call_Opcode.Name.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Call_Opcode.Name.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 

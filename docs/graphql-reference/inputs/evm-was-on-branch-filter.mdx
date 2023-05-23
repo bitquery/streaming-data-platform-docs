@@ -40,8 +40,8 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 ```graphql
 input EVM_WasOnBranch_Filter {
   Uncle: EVM_WasOnBranch_Input_Uncle_InputType
-  ChainId: OLAP_BigInteger
   Block: EVM_WasOnBranch_Input_Block_InputType
+  ChainId: OLAP_BigInteger
 }
 ```
 
@@ -54,12 +54,12 @@ input EVM_WasOnBranch_Filter {
 > Select by Uncle
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Filter.<b>ChainId</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> Big Integer ( more than 32 bits precision), including negative numbers
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_WasOnBranch_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-was-on-branch-input-block-input-type) <Badge class="secondary" text="input"/>
 > Select by Block
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Filter.<b>ChainId</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> Big Integer ( more than 32 bits precision), including negative numbers
 > 
 
 

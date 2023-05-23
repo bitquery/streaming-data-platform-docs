@@ -39,12 +39,14 @@ Integer 32-bit signed
 
 ```graphql
 input OLAP_Integer {
+  notIn: [Int]
   ge: Int
   le: Int
   gt: Int
   lt: Int
   eq: Int
   ne: Int
+  in: [Int]
 }
 ```
 
@@ -52,6 +54,10 @@ input OLAP_Integer {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_Integer.<b>notIn</b></code>](#)<Bullet />[`[Int]`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
+> Number is not in the provided list
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_Integer.<b>ge</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Greater than the value
@@ -75,6 +81,10 @@ input OLAP_Integer {
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_Integer.<b>ne</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Not equal to value
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_Integer.<b>in</b></code>](#)<Bullet />[`[Int]`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
+> Number in the provided list
 > 
 
 

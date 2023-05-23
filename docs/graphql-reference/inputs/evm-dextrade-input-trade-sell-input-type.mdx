@@ -39,12 +39,12 @@ Select by Sell
 
 ```graphql
 input EVM_DEXTrade_Input_Trade_Sell_InputType {
-  OrderId: OLAP_String
-  Currency: EVM_DEXTrade_Input_Trade_Sell_Currency_InputType
-  Price: OLAP_Float
-  Buyer: OLAP_String
-  Amount: EVM_Amount_With_Decimals
   Seller: OLAP_String
+  Price: OLAP_Float
+  Amount: EVM_Amount_With_Decimals
+  Currency: EVM_DEXTrade_Input_Trade_Sell_Currency_InputType
+  Buyer: OLAP_String
+  OrderId: OLAP_String
 }
 ```
 
@@ -53,11 +53,7 @@ input EVM_DEXTrade_Input_Trade_Sell_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_InputType.<b>OrderId</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_InputType.<b>Currency</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_Sell_Currency_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-sell-currency-input-type) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_InputType.<b>Seller</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -65,15 +61,19 @@ input EVM_DEXTrade_Input_Trade_Sell_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_InputType.<b>Buyer</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_InputType.<b>Amount</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_InputType.<b>Seller</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_InputType.<b>Currency</b></code>](#)<Bullet />[`EVM_DEXTrade_Input_Trade_Sell_Currency_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-sell-currency-input-type) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_InputType.<b>Buyer</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_InputType.<b>OrderId</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > 
 > 
 

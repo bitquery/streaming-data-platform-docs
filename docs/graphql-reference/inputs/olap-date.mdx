@@ -42,6 +42,8 @@ input OLAP_Date {
   since: String
   is: String
   not: String
+  in: [String]
+  notIn: [String]
   before: String
   after: String
   till: String
@@ -63,6 +65,14 @@ input OLAP_Date {
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>not</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Not this date
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>in</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
+> Date in the provided list
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>notIn</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
+> Date is not in the provided list
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>before</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>

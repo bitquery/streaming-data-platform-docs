@@ -41,7 +41,7 @@ Uncle fields
 type EVM_MinerReward_Fields_Uncle {
   Block: EVM_MinerReward_Fields_Uncle_Block
   Index(
-    where: EVM_MinerReward_Filter
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
   ): Int
@@ -59,7 +59,7 @@ type EVM_MinerReward_Fields_Uncle {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Uncle.<b>Index</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Index value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Uncle.Index.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Uncle.Index.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 

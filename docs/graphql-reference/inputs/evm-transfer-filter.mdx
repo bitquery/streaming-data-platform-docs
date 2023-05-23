@@ -39,15 +39,15 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 input EVM_Transfer_Filter {
-  Fee: EVM_Transfer_Input_Fee_InputType
   Transfer: EVM_Transfer_Input_Transfer_InputType
   TransactionStatus: EVM_Transfer_Input_TransactionStatus_InputType
-  ChainId: OLAP_BigInteger
-  Receipt: EVM_Transfer_Input_Receipt_InputType
-  Log: EVM_Transfer_Input_Log_InputType
-  Transaction: EVM_Transfer_Input_Transaction_InputType
   Call: EVM_Transfer_Input_Call_InputType
+  Log: EVM_Transfer_Input_Log_InputType
+  Receipt: EVM_Transfer_Input_Receipt_InputType
   Block: EVM_Transfer_Input_Block_InputType
+  Fee: EVM_Transfer_Input_Fee_InputType
+  Transaction: EVM_Transfer_Input_Transaction_InputType
+  ChainId: OLAP_BigInteger
 }
 ```
 
@@ -55,10 +55,6 @@ input EVM_Transfer_Filter {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Fee</b></code>](#)<Bullet />[`EVM_Transfer_Input_Fee_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-fee-input-type) <Badge class="secondary" text="input"/>
-> Select by Fee
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Transfer</b></code>](#)<Bullet />[`EVM_Transfer_Input_Transfer_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-transfer-input-type) <Badge class="secondary" text="input"/>
 > Select by Transfer
@@ -68,28 +64,32 @@ input EVM_Transfer_Filter {
 > Select by TransactionStatus
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>ChainId</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> Big Integer ( more than 32 bits precision), including negative numbers
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Receipt</b></code>](#)<Bullet />[`EVM_Transfer_Input_Receipt_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-receipt-input-type) <Badge class="secondary" text="input"/>
-> Select by Receipt
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Call</b></code>](#)<Bullet />[`EVM_Transfer_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-call-input-type) <Badge class="secondary" text="input"/>
+> Select by Call
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Log</b></code>](#)<Bullet />[`EVM_Transfer_Input_Log_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-log-input-type) <Badge class="secondary" text="input"/>
 > Select by Log
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Transaction</b></code>](#)<Bullet />[`EVM_Transfer_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-transaction-input-type) <Badge class="secondary" text="input"/>
-> Select by Transaction
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Call</b></code>](#)<Bullet />[`EVM_Transfer_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-call-input-type) <Badge class="secondary" text="input"/>
-> Select by Call
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Receipt</b></code>](#)<Bullet />[`EVM_Transfer_Input_Receipt_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-receipt-input-type) <Badge class="secondary" text="input"/>
+> Select by Receipt
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_Transfer_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-block-input-type) <Badge class="secondary" text="input"/>
 > Select by Block
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Fee</b></code>](#)<Bullet />[`EVM_Transfer_Input_Fee_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-fee-input-type) <Badge class="secondary" text="input"/>
+> Select by Fee
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>Transaction</b></code>](#)<Bullet />[`EVM_Transfer_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-transaction-input-type) <Badge class="secondary" text="input"/>
+> Select by Transaction
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Filter.<b>ChainId</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> Big Integer ( more than 32 bits precision), including negative numbers
 > 
 
 

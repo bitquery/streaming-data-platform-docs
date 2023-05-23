@@ -39,8 +39,10 @@ Select filters for BalanceUpdate_Type
 
 ```graphql
 input EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type {
-  not: EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input
   is: EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input
+  not: EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input
+  in: [EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input]
+  notIn: [EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input]
 }
 ```
 
@@ -49,12 +51,20 @@ input EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type {
 
 ### Fields
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>is</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="secondary" text="enum"/>
+> Exact match
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>not</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="secondary" text="enum"/>
 > Not this
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>is</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="secondary" text="enum"/>
-> Exact match
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>in</b></code>](#)<Bullet />[`[EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input]`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> One of the values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>notIn</b></code>](#)<Bullet />[`[EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input]`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> Not one of the values
 > 
 
 
