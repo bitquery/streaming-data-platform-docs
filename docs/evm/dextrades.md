@@ -9,7 +9,90 @@ DEXTrades api gives trading-related data from different DEXs such as Uniswap, Pa
 API provides historical and real-time trades and pricing information for tokens. The API allows different filters to query the Smart contract calls details from different dimensions, such as from different DEXs, protocols, tokens, trades, pools, etc. 
 You can find more examples [here](/docs/examples/dextrades/get-trading-pairs-of-token)
 
-Here's a sample query to get started.
+
+## DEX Trades Cube
+
+Dex Trades represent every swap of tokens on decentralised exchange. Every trade has
+two sides, represented by currencies ( tokens or native currency ), which are exchanged.
+Buyer and seller side in some cases are selected related to the "maker" side of the trade if
+the DEX is limit orders type. In case of automated trading ( uniswap, balancer and others)
+the trade is related to the pool smart contract, executing the trade.
+
+Use DEX Trades Cube in case when you need to build query based on protocol or smart contracts, for example:
+
+* total count of trades by protocols or smart contracts or oter dimensions
+* gas spending on trades
+* dynamics in time of DEX usage
+
+## DEX Trades By Tokens
+
+DEX Trades By Tokens exposes trades relative to the token. So every trade is represented by 2 records - by every token
+participating in trade. This allows to build queries by tokens which take into account all orders for token
+(buy side and sell side).
+
+Use DEX Trades Cube in case when you need to build query based on token or pair of tokens, for example:
+
+* query every pair the token is involved
+* price of trading the token
+* open-high-low-close OHLC graph building ( see example below )
+
+:::caution
+DEX Trades By Tokens has twice as much records for dex trades. Always use at least one filter by token
+to query correctly! 
+:::
+
+:::tip
+Use interval argument for date/time to build OHLC graph by time interval
+:::
+
+## Examples
+
+Here are the sample queries to get started:
+
+Query price OHLC data for token pairs using DEX Trades By Tokens
+
+```graphql
+query {
+  EVM(dataset: realtime) {
+    DEXTradeByTokens(
+      orderBy: {ascendingByField: "Block_Time"}
+      where: {
+        Trade: {
+          Side: {
+            Currency: {
+              SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}
+            }
+          }
+          Currency: {SmartContract: {
+          is: "0xdac17f958d2ee523a2206206994597c13d831ec7"
+        }}}
+      }
+    ) {
+      
+      Block {
+        Time(interval: {in: minutes count: 10})
+      }
+      
+      volume: sum(of: Trade_Amount)
+      
+      Trade {
+      	high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Number)
+        close: Price(maximum: Block_Number)
+      }
+      
+      count
+    }
+  }
+}
+```
+
+:::note
+we applied filter by tokens, used [interval](/docs/graphql/datetime) and actual numbers 
+calculated by  aggregated [metrics ( max/min )](/docs/graphql/calculations)
+:::
+
 
 ```graphql
 {
