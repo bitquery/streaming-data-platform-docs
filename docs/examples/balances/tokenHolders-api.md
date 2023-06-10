@@ -89,7 +89,7 @@ query MyQuery {
 
 **Returned Data**
 -   `No_Holders: count(distinct: BalanceUpdate_Address)`: This field specifies the number of holders of token in the results.
--   `Currency { Name SmartContract }`: This field specifies the currency ( token ). In this case, the `Name` represents the name of the currency  and the `SmartContract` field, which contains the address of the currency's smart contract is retrieved
+-   `Currency { Name SmartContract }`: This field specifies the Currency details. In this case, the `Name` represents the name of the currency  and the `SmartContract` field, which contains the address of the currency's smart contract.
 
 Here's a sample of the response:
 
