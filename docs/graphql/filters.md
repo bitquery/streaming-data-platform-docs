@@ -114,6 +114,11 @@ For string data, the following operators applicable:
 * ```is``` equals to
 * ```not``` not equals to
 
+:::danger
+```not``` and ```ne``` filters do not prevent to query large amount of data, consider use them only with
+some other filters
+:::
+
 
 ### Date and Time Filter Types
 
@@ -126,8 +131,80 @@ For date and timestamp data, the following operators applicable:
 * ```till``` before including date
 * ```before``` before not including date
 
+### Array Filter Types
 
-:::danger
-```not``` and ```ne``` filters do not prevent to query large amount of data, consider use them only with 
-some other filters
+Array fields can be filtered using the following conditions:
+
+* ```length``` condition on array length;
+* ```includes``` if array include  item defined by the condition; 
+* ```excludes``` if array exclude  item defined by the condition;
+* ```startsWith``` if array starts with the item defined by the condition;
+* ```endsWith``` if array ends with the item defined by the condition;
+* ```notStartsWith``` if array does not start with the item defined by the condition;
+* ```notEndsWith``` if array does not end with the item defined by the condition;
+
+:::note
+Note that all conditions on items can be a list, they all applied to selecting the item in AND manner.
 :::
+
+Example of the condition is the following:
+
+```
+{
+  EVM {
+    Calls(
+      where: {
+        Arguments: {
+					length: {eq: 2}
+          includes: {
+            Index: {eq: 0}
+            Name: {is: "recipient"}
+          }
+        }
+      }
+      limit: {count: 10}) {
+      Arguments {
+        Index
+        Name
+        Type
+      }
+      Call {
+        Signature {
+          Signature
+        }
+      }
+    }
+  }
+}
+
+```
+
+Filter selects calls which have 2 arguments, and the first argument name is "recipient"
+
+Condition can combine conditions on the items:
+
+```
+Arguments: {
+          includes: [
+            {
+            Index: {eq: 0}
+            Name: {is: "recipient"}
+            Value: {Address: {is: "0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969"}}
+           }
+           {
+            Name: {is: "amount"}
+            Value: {BigInteger: {ge: "1000000000"}}
+           }
+          ]
+        }
+      }
+```
+
+It extends the previous example, selecting only calls that have all 4 conditions:
+* the first argument named 'recipient' 
+* the first argument  value of type address equal to '0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969'
+* any argument called "amount"
+* argument named "amount" having value bigger than 1000000000
+
+
+

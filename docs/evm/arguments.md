@@ -105,3 +105,87 @@ Data types are mapped to this values by the following rules:
 2. bytes and byte array of any pre-defined size ( such as byte[24]) mapped to hex bytes (EVM_ABI_Bytes_Value_Arg)
 3. integers of size int8,16,32 and uint8,16 are mapped to integer (EVM_ABI_Integer_Value_Arg)
 4. all other integers mapped to big integer represented as string ( possible negative ) (EVM_ABI_BigInt_Value_Arg)
+
+## Filters on arguments
+
+Arguments and returns are arrays, and this enables to use filtering on them as described on
+[filters](/docs/graphql/filters/#array-filter-types).
+
+For example, this query selects specific calls by applying filter to argument length
+and to specific values of arguments.
+Combining argument filters with signature filters on events and calls gives you the power
+to analyse the arguments used in smart contracts in specific context.
+
+```
+{
+  EVM {
+    Calls(
+      where: {
+        Arguments: {
+		  length: {eq: 2}
+          includes: [
+            {
+            Index: {eq: 0}
+            Name: {is: "recipient"}
+            Value: {Address: {is: "0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969"}}
+           }
+           {
+            Name: {is: "amount"}
+            Value: {BigInteger: {ge: "1000000000"}}
+           }
+          ]
+        }
+      }
+      limit: {count: 10}) {
+      Arguments {
+        Index
+        Name
+        Type
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+      Call {
+        Signature {
+          Signature
+        }
+      }
+    }
+  }
+}
+
+```
+
+The value of argument filter must be defined depending on the expected argument type.
+There are the following options:
+
+* BigInteger - for uint256/int256/int64/uint64 arguments
+* Address - for addresses, 0x prefixed
+* String - for strings
+* Boolean - for boolean, just true/false
+* UnsignedInteger - for uint8/16/32
+* SignedInteger - int8/16/32
+* Bytes - for bytes, 0x prefixed optional
+
+
+:::note
+filters affect the whole query to calls / events, so you anyway can query all arguments,
+not just which pass the filter.
+:::
