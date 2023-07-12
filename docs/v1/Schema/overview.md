@@ -2,4 +2,4 @@
 sidebar_position: 1
 ---
 
-# V1 documentation
+# V1 Schema
