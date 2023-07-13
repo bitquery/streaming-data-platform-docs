@@ -2,11 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://docs.bitquery.io/blog</id>
     <title>Data streaming platform Blog</title>
-    <updated>2023-05-18T00:00:00.000Z</updated>
+    <updated>2023-06-30T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://docs.bitquery.io/blog"/>
     <subtitle>Data streaming platform Blog</subtitle>
     <icon>https://docs.bitquery.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Added filtering on event and call arguments and returns]]></title>
+        <id>https://docs.bitquery.io/blog/added-arguments-events-array-filters</id>
+        <link href="https://docs.bitquery.io/blog/added-arguments-events-array-filters"/>
+        <updated>2023-06-30T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[There is the additions in the today release of Graphql:]]></summary>
+        <content type="html"><![CDATA[<p>There is the additions in the today release of Graphql:</p><ol><li><a href="/docs/graphql/filters/#array-filter-types">Filtering of arrays</a> introduced filtering by arrays</li><li><a href="/docs/evm/arguments/#filters-on-arguments">Arguments / Returns usage in filters</a> added</li></ol>]]></content>
+        <author>
+            <name>Aleksey Studnev</name>
+            <uri>https://github.com/astudnev</uri>
+        </author>
+        <category label="metrics" term="metrics"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[OHLC DEX Graph Query, Time interval, DEX Trades By Token]]></title>
+        <id>https://docs.bitquery.io/blog/added-dex-trades-by-tokens-intervals</id>
+        <link href="https://docs.bitquery.io/blog/added-dex-trades-by-tokens-intervals"/>
+        <updated>2023-06-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[There is the additions in the today release of Graphql:]]></summary>
+        <content type="html"><![CDATA[<p>There is the additions in the today release of Graphql:</p><ol><li><a href="/docs/evm/dextrades/">DEX Trades By Token</a> introduced with OHLC example</li><li><a href="/docs/graphql/datetime/">Time/Date interval</a> added</li></ol>]]></content>
+        <author>
+            <name>Aleksey Studnev</name>
+            <uri>https://github.com/astudnev</uri>
+        </author>
+        <category label="metrics" term="metrics"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Added conditional select by metric]]></title>
         <id>https://docs.bitquery.io/blog/added-conditional-metric</id>

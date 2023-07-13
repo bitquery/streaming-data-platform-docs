@@ -4,10 +4,28 @@
         <title>Data streaming platform Blog</title>
         <link>https://docs.bitquery.io/blog</link>
         <description>Data streaming platform Blog</description>
-        <lastBuildDate>Thu, 18 May 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 30 Jun 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Added filtering on event and call arguments and returns]]></title>
+            <link>https://docs.bitquery.io/blog/added-arguments-events-array-filters</link>
+            <guid>https://docs.bitquery.io/blog/added-arguments-events-array-filters</guid>
+            <pubDate>Fri, 30 Jun 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[There is the additions in the today release of Graphql:]]></description>
+            <content:encoded><![CDATA[<p>There is the additions in the today release of Graphql:</p><ol><li><a href="/docs/graphql/filters/#array-filter-types">Filtering of arrays</a> introduced filtering by arrays</li><li><a href="/docs/evm/arguments/#filters-on-arguments">Arguments / Returns usage in filters</a> added</li></ol>]]></content:encoded>
+            <category>metrics</category>
+        </item>
+        <item>
+            <title><![CDATA[OHLC DEX Graph Query, Time interval, DEX Trades By Token]]></title>
+            <link>https://docs.bitquery.io/blog/added-dex-trades-by-tokens-intervals</link>
+            <guid>https://docs.bitquery.io/blog/added-dex-trades-by-tokens-intervals</guid>
+            <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[There is the additions in the today release of Graphql:]]></description>
+            <content:encoded><![CDATA[<p>There is the additions in the today release of Graphql:</p><ol><li><a href="/docs/evm/dextrades/">DEX Trades By Token</a> introduced with OHLC example</li><li><a href="/docs/graphql/datetime/">Time/Date interval</a> added</li></ol>]]></content:encoded>
+            <category>metrics</category>
+        </item>
         <item>
             <title><![CDATA[Added conditional select by metric]]></title>
             <link>https://docs.bitquery.io/blog/added-conditional-metric</link>
