@@ -1,0 +1,90 @@
+---
+id: evm-dextrade-input-trade-sell-uris-input-trade-sell-uris
+title: EVM_DEXTrade_Input_Trade_Sell_URIs_Input_Trade_Sell_URIs
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+Array of Trade_Sell_URIs includes or excludes provided value
+
+
+```graphql
+input EVM_DEXTrade_Input_Trade_Sell_URIs_Input_Trade_Sell_URIs {
+  length: OLAP_Integer
+  includes: [OLAP_String]
+  excludes: [OLAP_String]
+  startsWith: [OLAP_String]
+  endsWith: [OLAP_String]
+  notStartsWith: [OLAP_String]
+  notEndsWith: [OLAP_String]
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_URIs_Input_Trade_Sell_URIs.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+> Length of the array
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_URIs_Input_Trade_Sell_URIs.<b>includes</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Includes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_URIs_Input_Trade_Sell_URIs.<b>excludes</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Excludes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_URIs_Input_Trade_Sell_URIs.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Starts with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_URIs_Input_Trade_Sell_URIs.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Ends with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_URIs_Input_Trade_Sell_URIs.<b>notStartsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Does not start with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Sell_URIs_Input_Trade_Sell_URIs.<b>notEndsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Does not End with this element
+> 
+
+
+
+### Member of
+
+[`EVM_DEXTrade_Input_Trade_Sell_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-sell-input-type)  <Badge class="secondary" text="input"/>
+

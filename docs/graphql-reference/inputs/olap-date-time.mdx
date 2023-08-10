@@ -39,14 +39,14 @@ Date and time in ISO8601 (2006-01-02T15:04:05Z) format
 
 ```graphql
 input OLAP_DateTime {
-  after: DateTime
-  till: DateTime
-  since: DateTime
-  is: DateTime
   not: DateTime
   in: [DateTime]
   notIn: [DateTime]
   before: DateTime
+  after: DateTime
+  till: DateTime
+  since: DateTime
+  is: DateTime
 }
 ```
 
@@ -54,22 +54,6 @@ input OLAP_DateTime {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>after</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
-> Strictly after this time
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>till</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
-> Before this time and including it
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>since</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
-> After this time and including it
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>is</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
-> Exact match the time
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>not</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
 > Not this time
@@ -87,9 +71,25 @@ input OLAP_DateTime {
 > Strictly before this time
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>after</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
+> Strictly after this time
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>till</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
+> Before this time and including it
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>since</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
+> After this time and including it
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTime.<b>is</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
+> Exact match the time
+> 
+
 
 
 ### Member of
 
-[`EVM_BalanceUpdate_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_BalanceUpdate_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Block_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-block-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Block_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-block-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Call_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-call-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Call_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-call-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_DEXTrade_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_DEXTrade_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Event_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-event-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Event_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-event-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_MinerReward_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_MinerReward_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_MinerReward_Input_Uncle_Block_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-uncle-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transaction_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transaction_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transfer_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transfer_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_WasOnBranch_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-was-on-branch-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_WasOnBranch_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-was-on-branch-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_WasOnBranch_Input_Uncle_Block_InputType`](/docs/graphql-reference/inputs/evm-was-on-branch-input-uncle-block-input-type)  <Badge class="secondary" text="input"/>
+[`EVM_BalanceUpdate_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_BalanceUpdate_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Block_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-block-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Block_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-block-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Call_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-call-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Call_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-call-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_DEXTrade_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_DEXTrade_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_DEXTradeByToken_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_DEXTradeByToken_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Event_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-event-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Event_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-event-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_MinerReward_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_MinerReward_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_MinerReward_Input_Uncle_Block_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-uncle-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transaction_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transaction_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transfer_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Transfer_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_WasOnBranch_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-was-on-branch-input-block-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_WasOnBranch_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-was-on-branch-input-block-l1-input-type)  <Badge class="secondary" text="input"/><Bullet />[`EVM_WasOnBranch_Input_Uncle_Block_InputType`](/docs/graphql-reference/inputs/evm-was-on-branch-input-uncle-block-input-type)  <Badge class="secondary" text="input"/>
 

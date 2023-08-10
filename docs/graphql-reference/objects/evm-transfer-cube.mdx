@@ -45,6 +45,7 @@ type EVM_Transfer_Cube {
     if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
+    selectWhere: OLAP_BigInteger
   ): String
   Fee: EVM_Transfer_Fields_Fee
   Log: EVM_Transfer_Fields_Log
@@ -53,25 +54,25 @@ type EVM_Transfer_Cube {
   TransactionStatus: EVM_Transfer_Fields_TransactionStatus
   Transfer: EVM_Transfer_Fields_Transfer
   average(
-    selectWhere: Metric_filter_Float
     if: EVM_Transfer_Filter
+    selectWhere: Metric_filter_Float
     of: EVM_Transfer_NumFields
   ): Float
   contingency(
-    selectWhere: Metric_filter_Float
     if: EVM_Transfer_Filter
+    selectWhere: Metric_filter_Float
     of: EVM_Transfer_NumFields
     with: EVM_Transfer_NumFields
   ): Float
   correlation(
-    if: EVM_Transfer_Filter
-    selectWhere: Metric_filter_Float
     of: EVM_Transfer_NumFields
     with: EVM_Transfer_NumFields
+    if: EVM_Transfer_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   count(
-    if: EVM_Transfer_Filter
     selectWhere: Metric_filter_String
+    if: EVM_Transfer_Filter
     distinct: [EVM_Transfer_EnumFields]
   ): String
   covariance(
@@ -81,21 +82,21 @@ type EVM_Transfer_Cube {
     if: EVM_Transfer_Filter
   ): Float
   cramers(
-    selectWhere: Metric_filter_Float
     of: EVM_Transfer_NumFields
     with: EVM_Transfer_NumFields
     if: EVM_Transfer_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   cramers_bias_corrected(
-    selectWhere: Metric_filter_Float
     of: EVM_Transfer_NumFields
     with: EVM_Transfer_NumFields
     if: EVM_Transfer_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   dispersion(
+    selectWhere: Metric_filter_Float
     of: EVM_Transfer_NumFields
     if: EVM_Transfer_Filter
-    selectWhere: Metric_filter_Float
   ): Float
   entropy(
     selectWhere: Metric_filter_Float
@@ -113,11 +114,11 @@ type EVM_Transfer_Cube {
     if: EVM_Transfer_Filter
   ): Float
   quantile(
-    selectWhere: Metric_filter_Float
-    if: EVM_Transfer_Filter
-    method: OLAP_Metric_Calculation_Method_Exact
     of: EVM_Transfer_NumFields
     level: Float = 0.5
+    if: EVM_Transfer_Filter
+    method: OLAP_Metric_Calculation_Method_Exact
+    selectWhere: Metric_filter_Float
   ): Float
   rank_correlation(
     selectWhere: Metric_filter_Float
@@ -126,14 +127,14 @@ type EVM_Transfer_Cube {
     if: EVM_Transfer_Filter
   ): Float
   skew(
-    selectWhere: Metric_filter_Float
-    of: EVM_Transfer_NumFields
     if: EVM_Transfer_Filter
+    of: EVM_Transfer_NumFields
+    selectWhere: Metric_filter_Float
   ): Float
   standard_deviation(
-    selectWhere: Metric_filter_Float
     of: EVM_Transfer_NumFields
     if: EVM_Transfer_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   sum(
     selectWhere: Metric_filter_String
@@ -147,10 +148,10 @@ type EVM_Transfer_Cube {
     if: EVM_Transfer_Filter
   ): Float
   uniq(
-    of: [EVM_Transfer_EnumFields]
-    if: EVM_Transfer_Filter
     method: OLAP_Metric_Calculation_Method_Exact
     selectWhere: Metric_filter_String
+    of: [EVM_Transfer_EnumFields]
+    if: EVM_Transfer_Filter
   ): String
 }
 ```
@@ -182,6 +183,10 @@ type EVM_Transfer_Cube {
 > Return value when the argument is minimum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.ChainId.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>Fee</b></code>](#)<Bullet />[`EVM_Transfer_Fields_Fee`](/docs/graphql-reference/objects/evm-transfer-fields-fee) <Badge class="secondary" text="object"/>
 > Fee fields
 > 
@@ -208,12 +213,12 @@ type EVM_Transfer_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>average</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Average of the values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.average.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.average.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.average.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.average.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.average.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
@@ -222,12 +227,12 @@ type EVM_Transfer_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>contingency</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Contingency coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.contingency.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.contingency.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.contingency.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
@@ -240,15 +245,7 @@ type EVM_Transfer_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Pearson correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Pearson correlation coefficient between two arguments
 > 
 
@@ -256,14 +253,22 @@ type EVM_Transfer_Cube {
 > Second argument for Pearson correlation coefficient between two arguments
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Count records or uniques of arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.count.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.count.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Count records or uniques of arguments
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.count.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.count.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Transfer_EnumFields]`](/docs/graphql-reference/enums/evm-transfer-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
@@ -290,11 +295,7 @@ type EVM_Transfer_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>cramers</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Cramér's phi coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.cramers.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.cramers.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Cramér's phi coefficient between two arguments
 > 
 
@@ -306,13 +307,13 @@ type EVM_Transfer_Cube {
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Cramér's phi coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+> Cramér's phi coefficient with bias correction between two arguments
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Cramér's phi coefficient with bias correction between two arguments
 > 
 
@@ -324,18 +325,22 @@ type EVM_Transfer_Cube {
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>dispersion</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Dispersion for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.dispersion.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.dispersion.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Dispersion for a set of values
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.dispersion.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>entropy</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -382,8 +387,12 @@ type EVM_Transfer_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>quantile</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Approximate quantile of a numeric data sequence
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
+> Argument for quantile
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.quantile.<b>level</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+> Level of quantile. Optional parameter. Constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]. Default value: 0.5. At level=0.5 the function calculates median.
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.quantile.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
@@ -394,12 +403,8 @@ type EVM_Transfer_Cube {
 > Method used to calculate metric values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
-> Argument for quantile
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.quantile.<b>level</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Level of quantile. Optional parameter. Constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]. Default value: 0.5. At level=0.5 the function calculates median.
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -422,30 +427,30 @@ type EVM_Transfer_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Skew for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.skew.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Skew for a set of values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>standard_deviation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Standard deviation of the values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.standard_deviation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_Transfer_NumFields`](/docs/graphql-reference/enums/evm-transfer-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Standard deviation of the values
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.standard_deviation.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.standard_deviation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>sum</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -482,20 +487,20 @@ type EVM_Transfer_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Count unique records
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Transfer_EnumFields]`](/docs/graphql-reference/enums/evm-transfer-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
-> Uniq values of the field
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
 > Method used to calculate metric values
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Transfer_EnumFields]`](/docs/graphql-reference/enums/evm-transfer-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> Uniq values of the field
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 

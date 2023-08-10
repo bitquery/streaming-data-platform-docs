@@ -40,52 +40,58 @@ EVM type blockchain schema
 ```graphql
 type EVM {
   BalanceUpdates(
-    limitBy: EVM_BalanceUpdate_LimitBy
-    limit: EVM_BalanceUpdate_Limit
     where: EVM_BalanceUpdate_Filter
     orderBy: [EVM_BalanceUpdate_Ordering]
+    limitBy: EVM_BalanceUpdate_LimitBy
+    limit: EVM_BalanceUpdate_Limit
   ): [EVM_BalanceUpdate_Cube]
   Blocks(
+    limit: EVM_Block_Limit
     where: EVM_Block_Filter
     orderBy: [EVM_Block_Ordering]
     limitBy: EVM_Block_LimitBy
-    limit: EVM_Block_Limit
   ): [EVM_Block_Cube]
   Calls(
+    where: EVM_Call_Filter
     orderBy: [EVM_Call_Ordering]
     limitBy: EVM_Call_LimitBy
     limit: EVM_Call_Limit
-    where: EVM_Call_Filter
   ): [EVM_Call_Cube]
+  DEXTradeByTokens(
+    limitBy: EVM_DEXTradeByToken_LimitBy
+    limit: EVM_DEXTradeByToken_Limit
+    where: EVM_DEXTradeByToken_Filter
+    orderBy: [EVM_DEXTradeByToken_Ordering]
+  ): [EVM_DEXTradeByToken_Cube]
   DEXTrades(
+    where: EVM_DEXTrade_Filter
     orderBy: [EVM_DEXTrade_Ordering]
     limitBy: EVM_DEXTrade_LimitBy
     limit: EVM_DEXTrade_Limit
-    where: EVM_DEXTrade_Filter
   ): [EVM_DEXTrade_Cube]
   Events(
+    limit: EVM_Event_Limit
     where: EVM_Event_Filter
     orderBy: [EVM_Event_Ordering]
     limitBy: EVM_Event_LimitBy
-    limit: EVM_Event_Limit
   ): [EVM_Event_Cube]
   MinerRewards(
-    where: EVM_MinerReward_Filter
     orderBy: [EVM_MinerReward_Ordering]
     limitBy: EVM_MinerReward_LimitBy
     limit: EVM_MinerReward_Limit
+    where: EVM_MinerReward_Filter
   ): [EVM_MinerReward_Cube]
   Transactions(
-    where: EVM_Transaction_Filter
     orderBy: [EVM_Transaction_Ordering]
     limitBy: EVM_Transaction_LimitBy
     limit: EVM_Transaction_Limit
+    where: EVM_Transaction_Filter
   ): [EVM_Transaction_Cube]
   Transfers(
+    where: EVM_Transfer_Filter
     orderBy: [EVM_Transfer_Ordering]
     limitBy: EVM_Transfer_LimitBy
     limit: EVM_Transfer_Limit
-    where: EVM_Transfer_Filter
   ): [EVM_Transfer_Cube]
   WasOnBranchs(
     where: EVM_WasOnBranch_Filter
@@ -103,15 +109,7 @@ type EVM {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>BalanceUpdates</b></code>](#)<Bullet />[`[EVM_BalanceUpdate_Cube]`](/docs/graphql-reference/objects/evm-balance-update-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 > 
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM.BalanceUpdates.<b>limitBy</b></code>](#)<Bullet />[`EVM_BalanceUpdate_LimitBy`](/docs/graphql-reference/inputs/evm-balance-update-limit-by) <Badge class="secondary" text="input"/>
-> Response limits by specified field
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM.BalanceUpdates.<b>limit</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Limit`](/docs/graphql-reference/inputs/evm-balance-update-limit) <Badge class="secondary" text="input"/>
-> Response limits
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM.BalanceUpdates.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM.BalanceUpdates.<b>where</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
 > Conditions on query to filter results
 > 
 
@@ -119,9 +117,21 @@ type EVM {
 > Field ordering
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM.BalanceUpdates.<b>limitBy</b></code>](#)<Bullet />[`EVM_BalanceUpdate_LimitBy`](/docs/graphql-reference/inputs/evm-balance-update-limit-by) <Badge class="secondary" text="input"/>
+> Response limits by specified field
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM.BalanceUpdates.<b>limit</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Limit`](/docs/graphql-reference/inputs/evm-balance-update-limit) <Badge class="secondary" text="input"/>
+> Response limits
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>Blocks</b></code>](#)<Bullet />[`[EVM_Block_Cube]`](/docs/graphql-reference/objects/evm-block-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 > 
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM.Blocks.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM.Blocks.<b>limit</b></code>](#)<Bullet />[`EVM_Block_Limit`](/docs/graphql-reference/inputs/evm-block-limit) <Badge class="secondary" text="input"/>
+> Response limits
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM.Blocks.<b>where</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
 > Conditions on query to filter results
 > 
 
@@ -133,13 +143,13 @@ type EVM {
 > Response limits by specified field
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM.Blocks.<b>limit</b></code>](#)<Bullet />[`EVM_Block_Limit`](/docs/graphql-reference/inputs/evm-block-limit) <Badge class="secondary" text="input"/>
-> Response limits
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>Calls</b></code>](#)<Bullet />[`[EVM_Call_Cube]`](/docs/graphql-reference/objects/evm-call-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 > 
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM.Calls.<b>orderBy</b></code>](#)<Bullet />[`[EVM_Call_Ordering]`](/docs/graphql-reference/inputs/evm-call-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM.Calls.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> Conditions on query to filter results
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM.Calls.<b>orderBy</b></code>](#)<Bullet />[`[EVM_Call_Ordering]`](/docs/graphql-reference/inputs/evm-call-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Field ordering
 > 
 
@@ -151,13 +161,31 @@ type EVM {
 > Response limits
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM.Calls.<b>where</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>DEXTradeByTokens</b></code>](#)<Bullet />[`[EVM_DEXTradeByToken_Cube]`](/docs/graphql-reference/objects/evm-dextrade-by-token-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
+> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM.DEXTradeByTokens.<b>limitBy</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_LimitBy`](/docs/graphql-reference/inputs/evm-dextrade-by-token-limit-by) <Badge class="secondary" text="input"/>
+> Response limits by specified field
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM.DEXTradeByTokens.<b>limit</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Limit`](/docs/graphql-reference/inputs/evm-dextrade-by-token-limit) <Badge class="secondary" text="input"/>
+> Response limits
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM.DEXTradeByTokens.<b>where</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
 > Conditions on query to filter results
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM.DEXTradeByTokens.<b>orderBy</b></code>](#)<Bullet />[`[EVM_DEXTradeByToken_Ordering]`](/docs/graphql-reference/inputs/evm-dextrade-by-token-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Field ordering
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>DEXTrades</b></code>](#)<Bullet />[`[EVM_DEXTrade_Cube]`](/docs/graphql-reference/objects/evm-dextrade-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 > 
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM.DEXTrades.<b>orderBy</b></code>](#)<Bullet />[`[EVM_DEXTrade_Ordering]`](/docs/graphql-reference/inputs/evm-dextrade-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM.DEXTrades.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Conditions on query to filter results
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM.DEXTrades.<b>orderBy</b></code>](#)<Bullet />[`[EVM_DEXTrade_Ordering]`](/docs/graphql-reference/inputs/evm-dextrade-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Field ordering
 > 
 
@@ -169,13 +197,13 @@ type EVM {
 > Response limits
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM.DEXTrades.<b>where</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Conditions on query to filter results
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>Events</b></code>](#)<Bullet />[`[EVM_Event_Cube]`](/docs/graphql-reference/objects/evm-event-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 > 
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM.Events.<b>where</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM.Events.<b>limit</b></code>](#)<Bullet />[`EVM_Event_Limit`](/docs/graphql-reference/inputs/evm-event-limit) <Badge class="secondary" text="input"/>
+> Response limits
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM.Events.<b>where</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
 > Conditions on query to filter results
 > 
 
@@ -187,17 +215,9 @@ type EVM {
 > Response limits by specified field
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM.Events.<b>limit</b></code>](#)<Bullet />[`EVM_Event_Limit`](/docs/graphql-reference/inputs/evm-event-limit) <Badge class="secondary" text="input"/>
-> Response limits
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>MinerRewards</b></code>](#)<Bullet />[`[EVM_MinerReward_Cube]`](/docs/graphql-reference/objects/evm-miner-reward-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 > 
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM.MinerRewards.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
-> Conditions on query to filter results
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM.MinerRewards.<b>orderBy</b></code>](#)<Bullet />[`[EVM_MinerReward_Ordering]`](/docs/graphql-reference/inputs/evm-miner-reward-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM.MinerRewards.<b>orderBy</b></code>](#)<Bullet />[`[EVM_MinerReward_Ordering]`](/docs/graphql-reference/inputs/evm-miner-reward-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Field ordering
 > 
 
@@ -209,13 +229,13 @@ type EVM {
 > Response limits
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>Transactions</b></code>](#)<Bullet />[`[EVM_Transaction_Cube]`](/docs/graphql-reference/objects/evm-transaction-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
-> 
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM.Transactions.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM.MinerRewards.<b>where</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Conditions on query to filter results
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM.Transactions.<b>orderBy</b></code>](#)<Bullet />[`[EVM_Transaction_Ordering]`](/docs/graphql-reference/inputs/evm-transaction-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>Transactions</b></code>](#)<Bullet />[`[EVM_Transaction_Cube]`](/docs/graphql-reference/objects/evm-transaction-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
+> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM.Transactions.<b>orderBy</b></code>](#)<Bullet />[`[EVM_Transaction_Ordering]`](/docs/graphql-reference/inputs/evm-transaction-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Field ordering
 > 
 
@@ -227,9 +247,17 @@ type EVM {
 > Response limits
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM.Transactions.<b>where</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
+> Conditions on query to filter results
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>Transfers</b></code>](#)<Bullet />[`[EVM_Transfer_Cube]`](/docs/graphql-reference/objects/evm-transfer-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 > 
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM.Transfers.<b>orderBy</b></code>](#)<Bullet />[`[EVM_Transfer_Ordering]`](/docs/graphql-reference/inputs/evm-transfer-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM.Transfers.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Conditions on query to filter results
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM.Transfers.<b>orderBy</b></code>](#)<Bullet />[`[EVM_Transfer_Ordering]`](/docs/graphql-reference/inputs/evm-transfer-ordering) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Field ordering
 > 
 
@@ -239,10 +267,6 @@ type EVM {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM.Transfers.<b>limit</b></code>](#)<Bullet />[`EVM_Transfer_Limit`](/docs/graphql-reference/inputs/evm-transfer-limit) <Badge class="secondary" text="input"/>
 > Response limits
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM.Transfers.<b>where</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Conditions on query to filter results
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>WasOnBranchs</b></code>](#)<Bullet />[`[EVM_WasOnBranch_Cube]`](/docs/graphql-reference/objects/evm-was-on-branch-cube) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>

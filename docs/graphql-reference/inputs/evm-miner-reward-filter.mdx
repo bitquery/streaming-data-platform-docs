@@ -39,10 +39,10 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 input EVM_MinerReward_Filter {
-  Uncle: EVM_MinerReward_Input_Uncle_InputType
   ChainId: OLAP_BigInteger
-  Reward: EVM_MinerReward_Input_Reward_InputType
   Block: EVM_MinerReward_Input_Block_InputType
+  Uncle: EVM_MinerReward_Input_Uncle_InputType
+  Reward: EVM_MinerReward_Input_Reward_InputType
 }
 ```
 
@@ -51,20 +51,20 @@ input EVM_MinerReward_Filter {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Filter.<b>Uncle</b></code>](#)<Bullet />[`EVM_MinerReward_Input_Uncle_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-uncle-input-type) <Badge class="secondary" text="input"/>
-> Select by Uncle
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Filter.<b>ChainId</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > Big Integer ( more than 32 bits precision), including negative numbers
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Filter.<b>Reward</b></code>](#)<Bullet />[`EVM_MinerReward_Input_Reward_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-reward-input-type) <Badge class="secondary" text="input"/>
-> Select by Reward
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_MinerReward_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-block-input-type) <Badge class="secondary" text="input"/>
 > Select by Block
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Filter.<b>Uncle</b></code>](#)<Bullet />[`EVM_MinerReward_Input_Uncle_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-uncle-input-type) <Badge class="secondary" text="input"/>
+> Select by Uncle
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Filter.<b>Reward</b></code>](#)<Bullet />[`EVM_MinerReward_Input_Reward_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-reward-input-type) <Badge class="secondary" text="input"/>
+> Select by Reward
 > 
 
 

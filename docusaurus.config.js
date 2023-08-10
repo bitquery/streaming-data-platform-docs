@@ -114,12 +114,21 @@ const config = {
         },
         items: [
           {
+            to: "https://docs.bitquery.io/v1/",
+            label: "V1 Docs",
+            position: "left",
+          },
+          {
             type: "doc",
             docId: "intro",
             position: "left",
-            label: "Tutorial",
+            label: "V2 Docs",
           },
-          { to: "blog", label: "News", position: "left" },
+          {
+            to: "https://community.bitquery.io",
+            label: "Forum",
+            position: "left"
+          },
         ],
       },
       footer: {
@@ -133,12 +142,16 @@ const config = {
                 to: "https://bitquery.io",
               },
               {
-                label: "Tutorial",
+                label: "V1 Docs",
+                to: "https://docs.bitquery.io/v1/",
+              },
+              {
+                label: "V2 Docs",
                 to: "docs/intro",
               },
               {
-                label: "News",
-                to: "blog",
+                label: "Blog",
+                to: "https://bitquery.io/blog",
               },
             ],
           },

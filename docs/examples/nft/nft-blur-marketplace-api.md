@@ -931,7 +931,7 @@ The response contains details about the block, transaction, log, and arguments, 
 
 ## Auction Events
 
-The 'StartAuction' event is triggered when an NFT auction starts on the  Blur : [Blend Contract](https://explorer.bitquery.io/ethereum/smart_contract/0x29469395eaf6f95920e59f858042f0e28d98a20b/events). The following [query]((https://ide.bitquery.io/Auction-on-blur-marketplace)) monitors these events. If you want to track auctions for a specific NFT, modify the [query]([query](https://ide.bitquery.io/Auctions-for-specific-lienID)) to filter for a specific LienID in the 'Arguments' field.
+The 'StartAuction' event is triggered when an NFT auction starts on the  Blur : [Blend Contract](https://explorer.bitquery.io/ethereum/smart_contract/0x29469395eaf6f95920e59f858042f0e28d98a20b/events). The following [query](https://ide.bitquery.io/Auction-on-blur-marketplace) monitors these events. If you want to track auctions for a specific NFT, modify the [query](https://ide.bitquery.io/Auctions-for-specific-lienID) to filter for a specific LienID in the 'Arguments' field.
 
 ```
 {

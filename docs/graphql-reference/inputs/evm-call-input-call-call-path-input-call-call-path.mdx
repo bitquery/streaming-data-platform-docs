@@ -1,0 +1,90 @@
+---
+id: evm-call-input-call-call-path-input-call-call-path
+title: EVM_Call_Input_Call_CallPath_Input_Call_CallPath
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+Array of Call_CallPath includes or excludes provided value
+
+
+```graphql
+input EVM_Call_Input_Call_CallPath_Input_Call_CallPath {
+  endsWith: [OLAP_Integer]
+  notStartsWith: [OLAP_Integer]
+  notEndsWith: [OLAP_Integer]
+  length: OLAP_Integer
+  includes: [OLAP_Integer]
+  excludes: [OLAP_Integer]
+  startsWith: [OLAP_Integer]
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Ends with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>notStartsWith</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Does not start with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>notEndsWith</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Does not End with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+> Length of the array
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>includes</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Includes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>excludes</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Excludes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Starts with this element
+> 
+
+
+
+### Member of
+
+[`EVM_Call_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-call-input-call-input-type)  <Badge class="secondary" text="input"/>
+

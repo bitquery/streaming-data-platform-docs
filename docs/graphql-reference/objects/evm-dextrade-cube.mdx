@@ -42,9 +42,10 @@ type EVM_DEXTrade_Cube {
   Block: EVM_DEXTrade_Fields_Block
   Call: EVM_DEXTrade_Fields_Call
   ChainId(
+    if: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
     minimum: EVM_DEXTrade_CompareFields
-    if: EVM_DEXTrade_Filter
+    selectWhere: OLAP_BigInteger
   ): String
   Fee: EVM_DEXTrade_Fields_Fee
   Log: EVM_DEXTrade_Fields_Log
@@ -58,16 +59,16 @@ type EVM_DEXTrade_Cube {
     if: EVM_DEXTrade_Filter
   ): Float
   contingency(
+    if: EVM_DEXTrade_Filter
     selectWhere: Metric_filter_Float
     of: EVM_DEXTrade_NumFields
     with: EVM_DEXTrade_NumFields
-    if: EVM_DEXTrade_Filter
   ): Float
   correlation(
     selectWhere: Metric_filter_Float
+    if: EVM_DEXTrade_Filter
     of: EVM_DEXTrade_NumFields
     with: EVM_DEXTrade_NumFields
-    if: EVM_DEXTrade_Filter
   ): Float
   count(
     distinct: [EVM_DEXTrade_EnumFields]
@@ -81,15 +82,15 @@ type EVM_DEXTrade_Cube {
     with: EVM_DEXTrade_NumFields
   ): Float
   cramers(
-    if: EVM_DEXTrade_Filter
     selectWhere: Metric_filter_Float
     of: EVM_DEXTrade_NumFields
     with: EVM_DEXTrade_NumFields
+    if: EVM_DEXTrade_Filter
   ): Float
   cramers_bias_corrected(
-    if: EVM_DEXTrade_Filter
     of: EVM_DEXTrade_NumFields
     with: EVM_DEXTrade_NumFields
+    if: EVM_DEXTrade_Filter
     selectWhere: Metric_filter_Float
   ): Float
   dispersion(
@@ -104,41 +105,41 @@ type EVM_DEXTrade_Cube {
   ): Float
   kurtosis(
     selectWhere: Metric_filter_Float
-    of: EVM_DEXTrade_NumFields
     if: EVM_DEXTrade_Filter
+    of: EVM_DEXTrade_NumFields
   ): Float
   median(
-    selectWhere: Metric_filter_Float
     of: EVM_DEXTrade_NumFields
     if: EVM_DEXTrade_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   quantile(
-    if: EVM_DEXTrade_Filter
-    method: OLAP_Metric_Calculation_Method_Exact
     selectWhere: Metric_filter_Float
     of: EVM_DEXTrade_NumFields
     level: Float = 0.5
+    if: EVM_DEXTrade_Filter
+    method: OLAP_Metric_Calculation_Method_Exact
   ): Float
   rank_correlation(
     selectWhere: Metric_filter_Float
-    if: EVM_DEXTrade_Filter
     of: EVM_DEXTrade_NumFields
     with: EVM_DEXTrade_NumFields
+    if: EVM_DEXTrade_Filter
   ): Float
   skew(
     selectWhere: Metric_filter_Float
-    if: EVM_DEXTrade_Filter
     of: EVM_DEXTrade_NumFields
+    if: EVM_DEXTrade_Filter
   ): Float
   standard_deviation(
-    selectWhere: Metric_filter_Float
     of: EVM_DEXTrade_NumFields
     if: EVM_DEXTrade_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   sum(
+    if: EVM_DEXTrade_Filter
     selectWhere: Metric_filter_String
     of: EVM_DEXTrade_NumFields
-    if: EVM_DEXTrade_Filter
   ): String
   theils(
     selectWhere: Metric_filter_Float
@@ -170,7 +171,11 @@ type EVM_DEXTrade_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>ChainId</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ChainId value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.ChainId.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.ChainId.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.ChainId.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -178,8 +183,8 @@ type EVM_DEXTrade_Cube {
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.ChainId.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.ChainId.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>Fee</b></code>](#)<Bullet />[`EVM_DEXTrade_Fields_Fee`](/docs/graphql-reference/objects/evm-dextrade-fields-fee) <Badge class="secondary" text="object"/>
@@ -222,7 +227,11 @@ type EVM_DEXTrade_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>contingency</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Contingency coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.contingency.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -234,14 +243,14 @@ type EVM_DEXTrade_Cube {
 > Second argument for Contingency coefficient between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.contingency.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Pearson correlation coefficient between two arguments
 > ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
@@ -250,10 +259,6 @@ type EVM_DEXTrade_Cube {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.correlation.<b>with</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Pearson correlation coefficient between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -290,11 +295,7 @@ type EVM_DEXTrade_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>cramers</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Cramér's phi coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -306,18 +307,22 @@ type EVM_DEXTrade_Cube {
 > Second argument for Cramér's phi coefficient between two arguments
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Cramér's phi coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.cramers_bias_corrected.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+> Cramér's phi coefficient with bias correction between two arguments
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Cramér's phi coefficient with bias correction between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Cramér's phi coefficient with bias correction between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.cramers_bias_corrected.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
@@ -358,21 +363,17 @@ type EVM_DEXTrade_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
-> Argument for Kurtosis for a set of values
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.kurtosis.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>median</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Median for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.median.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
+> Argument for Kurtosis for a set of values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.median.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>median</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+> Median for a set of values
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.median.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Median for a set of values
 > 
 
@@ -380,17 +381,13 @@ type EVM_DEXTrade_Cube {
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.median.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>quantile</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Approximate quantile of a numeric data sequence
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.quantile.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.quantile.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
-> Method used to calculate metric values
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -402,14 +399,18 @@ type EVM_DEXTrade_Cube {
 > Level of quantile. Optional parameter. Constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]. Default value: 0.5. At level=0.5 the function calculates median.
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.quantile.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.quantile.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
+> Method used to calculate metric values
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Rank correlation coefficient between two arguments
 > ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.rank_correlation.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
@@ -420,27 +421,27 @@ type EVM_DEXTrade_Cube {
 > Second argument for Rank correlation coefficient between two arguments
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Skew for a set of values
 > ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.skew.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Skew for a set of values
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>standard_deviation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Standard deviation of the values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.standard_deviation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>standard_deviation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+> Standard deviation of the values
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Standard deviation of the values
 > 
 
@@ -448,18 +449,22 @@ type EVM_DEXTrade_Cube {
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.standard_deviation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>sum</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Sum values of argument
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.sum.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.sum.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.sum.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.sum.<b>of</b></code>](#)<Bullet />[`EVM_DEXTrade_NumFields`](/docs/graphql-reference/enums/evm-dextrade-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for sum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.sum.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Cube.<b>theils</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>

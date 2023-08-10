@@ -1,0 +1,95 @@
+---
+id: evm-dextrade-by-token-input-trade-side-input-type
+title: EVM_DEXTradeByToken_Input_Trade_Side_InputType
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+Select by Side
+
+
+```graphql
+input EVM_DEXTradeByToken_Input_Trade_Side_InputType {
+  Ids: EVM_DEXTradeByToken_Input_Trade_Side_Ids_Input_Trade_Side_Ids
+  URIs: EVM_DEXTradeByToken_Input_Trade_Side_URIs_Input_Trade_Side_URIs
+  Seller: OLAP_String
+  Amount: EVM_Amount_With_Decimals
+  Currency: EVM_DEXTradeByToken_Input_Trade_Side_Currency_InputType
+  OrderId: OLAP_String
+  Buyer: OLAP_String
+  Type: EVM_DEXTradeByToken_Input_Trade_Side_Type_Input_Trade_Side
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Side_InputType.<b>Ids</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Input_Trade_Side_Ids_Input_Trade_Side_Ids`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-trade-side-ids-input-trade-side-ids) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Side_InputType.<b>URIs</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Input_Trade_Side_URIs_Input_Trade_Side_URIs`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-trade-side-uris-input-trade-side-uris) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Side_InputType.<b>Seller</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Side_InputType.<b>Amount</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Side_InputType.<b>Currency</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Input_Trade_Side_Currency_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-trade-side-currency-input-type) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Side_InputType.<b>OrderId</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Side_InputType.<b>Buyer</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Side_InputType.<b>Type</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Input_Trade_Side_Type_Input_Trade_Side`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-trade-side-type-input-trade-side) <Badge class="secondary" text="input"/>
+> 
+> 
+
+
+
+### Member of
+
+[`EVM_DEXTradeByToken_Input_Trade_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-trade-input-type)  <Badge class="secondary" text="input"/>
+
