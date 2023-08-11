@@ -46,10 +46,10 @@ type EVM_BalanceUpdate_Fields_Transaction {
     selectWhere: OLAP_String
   ): String
   Index(
-    maximum: EVM_BalanceUpdate_CompareFields
     minimum: EVM_BalanceUpdate_CompareFields
     selectWhere: OLAP_BigInteger
     if: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
   ): String
 }
 ```
@@ -79,11 +79,7 @@ type EVM_BalanceUpdate_Fields_Transaction {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Transaction.<b>Index</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Index value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Transaction.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Transaction.Index.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Transaction.Index.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
@@ -93,6 +89,10 @@ type EVM_BalanceUpdate_Fields_Transaction {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Transaction.Index.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Transaction.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 

@@ -39,66 +39,66 @@ Listed names of comparable fields in a cube
 
 ```graphql
 enum EVM_Event_CompareFields {
-  Receipt_Type
-  Transaction_GasPrice
-  Transaction_Gas
-  Call_SelfDestruct
-  Transaction_Cost
-  Block_L1_GasLimit
+  Block_GasUsed
+  LogHeader_Index
+  Call_Value
+  Receipt_CumulativeGasUsed
   LogHeader_Removed
-  Block_L1_Nonce
-  Block_L1_Time
-  Call_Index
-  Block_BaseFee
-  Log_Index
-  Fee_PriorityFeePerGas
-  Block_L1_Difficulty
-  Transaction_Value
-  TransactionStatus_Success
-  Log_ExitIndex
-  Call_Success
-  Call_GasUsed
-  Fee_Savings
-  Transaction_Protected
-  Log_Signature_Parsed
-  Call_Delegated
-  Receipt_Status
   Fee_SenderFee
-  Call_Gas
-  Transaction_GasFeeCap
-  Block_L1_Number
+  Block_L1_GasUsed
+  Call_SelfDestruct
+  Call_Signature_SignatureType
+  Log_Index
+  Block_L1_GasLimit
   Receipt_GasUsed
-  Transaction_GasTipCap
+  Call_Signature_Parsed
+  Receipt_Status
+  Transaction_Cost
+  Transaction_GasFeeCap
+  Fee_Savings
+  Block_GasLimit
+  Transaction_GasPrice
+  Block_L1_Nonce
+  Call_Delegated
+  Block_L1_Difficulty
+  Transaction_Gas
+  Transaction_Protected
+  Block_L1_Number
+  TransactionStatus_Success
+  Call_Gas
+  Log_ExitIndex
+  Block_L1_BaseFee
   Log_LogAfterCallIndex
-  Block_Number
+  Block_Time
+  Fee_EffectiveGasPrice
+  Transaction_GasTipCap
   Call_Reverted
   ChainId
-  Call_Signature_SignatureType
-  Fee_EffectiveGasPrice
-  Transaction_Nonce
-  Log_EnterIndex
-  Fee_Burnt
-  Block_L1_BaseFee
-  LogHeader_Index
-  Call_Signature_Parsed
-  Call_InternalCalls
-  Block_Time
-  Transaction_Index
-  Call_Create
-  Block_L1_GasUsed
+  Call_Success
+  Log_Signature_Parsed
+  Block_L1_Time
+  Log_Signature_SignatureType
+  Call_GasUsed
+  Block_Number
   Block_Date
   Block_Nonce
-  Block_GasLimit
-  Call_Value
-  Log_Signature_SignatureType
-  Block_GasUsed
-  Log_Pc
+  Call_InternalCalls
   Transaction_Type
+  Log_Pc
+  Fee_Burnt
+  Block_BaseFee
+  Call_Index
+  Call_Create
   Fee_GasRefund
-  Block_Difficulty
-  Receipt_CumulativeGasUsed
+  Fee_PriorityFeePerGas
+  Transaction_Value
+  Log_EnterIndex
   Call_CallerIndex
+  Receipt_Type
   Fee_MinerReward
+  Block_Difficulty
+  Transaction_Index
+  Transaction_Nonce
 }
 ```
 
@@ -107,27 +107,19 @@ enum EVM_Event_CompareFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Receipt_Type</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_GasUsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_GasPrice</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>LogHeader_Index</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Gas</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Value</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_SelfDestruct</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Cost</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_GasLimit</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Receipt_CumulativeGasUsed</b></code>](#) 
 > 
 > 
 
@@ -135,19 +127,19 @@ enum EVM_Event_CompareFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_Nonce</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_SenderFee</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_Time</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_GasUsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Index</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_SelfDestruct</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_BaseFee</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Signature_SignatureType</b></code>](#) 
 > 
 > 
 
@@ -155,67 +147,7 @@ enum EVM_Event_CompareFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_PriorityFeePerGas</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_Difficulty</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Value</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>TransactionStatus_Success</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Log_ExitIndex</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Success</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_GasUsed</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_Savings</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Protected</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Log_Signature_Parsed</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Delegated</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Receipt_Status</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_SenderFee</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Gas</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_GasFeeCap</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_Number</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_GasLimit</b></code>](#) 
 > 
 > 
 
@@ -223,7 +155,71 @@ enum EVM_Event_CompareFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_GasTipCap</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Signature_Parsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Receipt_Status</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Cost</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_GasFeeCap</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_Savings</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_GasLimit</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_GasPrice</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_Nonce</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Delegated</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_Difficulty</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Gas</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Protected</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_Number</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>TransactionStatus_Success</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Gas</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Log_ExitIndex</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_BaseFee</b></code>](#) 
 > 
 > 
 
@@ -231,7 +227,15 @@ enum EVM_Event_CompareFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_Number</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_Time</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_EffectiveGasPrice</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_GasTipCap</b></code>](#) 
 > 
 > 
 
@@ -243,55 +247,27 @@ enum EVM_Event_CompareFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Signature_SignatureType</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Success</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_EffectiveGasPrice</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Log_Signature_Parsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Nonce</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_Time</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Log_EnterIndex</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Log_Signature_SignatureType</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_Burnt</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_GasUsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_BaseFee</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>LogHeader_Index</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Signature_Parsed</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_InternalCalls</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_Time</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Index</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Create</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_L1_GasUsed</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_Number</b></code>](#) 
 > 
 > 
 
@@ -303,23 +279,7 @@ enum EVM_Event_CompareFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_GasLimit</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Value</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Log_Signature_SignatureType</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_GasUsed</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Log_Pc</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_InternalCalls</b></code>](#) 
 > 
 > 
 
@@ -327,15 +287,39 @@ enum EVM_Event_CompareFields {
 > 
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Log_Pc</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_Burnt</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_BaseFee</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Index</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Call_Create</b></code>](#) 
+> 
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_GasRefund</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_Difficulty</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_PriorityFeePerGas</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Receipt_CumulativeGasUsed</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Value</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Log_EnterIndex</b></code>](#) 
 > 
 > 
 
@@ -343,7 +327,23 @@ enum EVM_Event_CompareFields {
 > 
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Receipt_Type</b></code>](#) 
+> 
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Fee_MinerReward</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Block_Difficulty</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Index</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_CompareFields.<b>Transaction_Nonce</b></code>](#) 
 > 
 > 
 

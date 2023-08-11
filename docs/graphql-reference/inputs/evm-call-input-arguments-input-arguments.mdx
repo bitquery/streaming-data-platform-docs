@@ -39,13 +39,13 @@ Array of Arguments includes or excludes provided value
 
 ```graphql
 input EVM_Call_Input_Arguments_Input_Arguments {
-  length: OLAP_Integer
-  includes: [EVM_Call_Input_Arguments_Input_FieldSelector]
-  excludes: [EVM_Call_Input_Arguments_Input_FieldSelector]
   startsWith: [EVM_Call_Input_Arguments_Input_FieldSelector]
   endsWith: [EVM_Call_Input_Arguments_Input_FieldSelector]
   notStartsWith: [EVM_Call_Input_Arguments_Input_FieldSelector]
   notEndsWith: [EVM_Call_Input_Arguments_Input_FieldSelector]
+  length: OLAP_Integer
+  includes: [EVM_Call_Input_Arguments_Input_FieldSelector]
+  excludes: [EVM_Call_Input_Arguments_Input_FieldSelector]
 }
 ```
 
@@ -53,18 +53,6 @@ input EVM_Call_Input_Arguments_Input_Arguments {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Arguments_Input_Arguments.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
-> Length of the array
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Arguments_Input_Arguments.<b>includes</b></code>](#)<Bullet />[`[EVM_Call_Input_Arguments_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-arguments-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Includes this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Arguments_Input_Arguments.<b>excludes</b></code>](#)<Bullet />[`[EVM_Call_Input_Arguments_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-arguments-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Excludes this element
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Arguments_Input_Arguments.<b>startsWith</b></code>](#)<Bullet />[`[EVM_Call_Input_Arguments_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-arguments-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Starts with this element
@@ -80,6 +68,18 @@ input EVM_Call_Input_Arguments_Input_Arguments {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Arguments_Input_Arguments.<b>notEndsWith</b></code>](#)<Bullet />[`[EVM_Call_Input_Arguments_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-arguments-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Does not End with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Arguments_Input_Arguments.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+> Length of the array
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Arguments_Input_Arguments.<b>includes</b></code>](#)<Bullet />[`[EVM_Call_Input_Arguments_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-arguments-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Includes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Arguments_Input_Arguments.<b>excludes</b></code>](#)<Bullet />[`[EVM_Call_Input_Arguments_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-arguments-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Excludes this element
 > 
 
 

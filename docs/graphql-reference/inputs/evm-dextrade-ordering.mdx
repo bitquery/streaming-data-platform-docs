@@ -39,10 +39,10 @@ Order by
 
 ```graphql
 input EVM_DEXTrade_Ordering {
-  descendingByField: String
   ascending: EVM_DEXTrade_EnumFields
   descending: EVM_DEXTrade_EnumFields
   ascendingByField: String
+  descendingByField: String
 }
 ```
 
@@ -50,10 +50,6 @@ input EVM_DEXTrade_Ordering {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Ordering.<b>descendingByField</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> MetricName ( or alias ) of the field in the query to sort descending
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Ordering.<b>ascending</b></code>](#)<Bullet />[`EVM_DEXTrade_EnumFields`](/docs/graphql-reference/enums/evm-dextrade-enum-fields) <Badge class="secondary" text="enum"/>
 > Select a field to sort ascending
@@ -65,6 +61,10 @@ input EVM_DEXTrade_Ordering {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Ordering.<b>ascendingByField</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > MetricName ( or alias ) of the field in the query to sort ascending
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Ordering.<b>descendingByField</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> MetricName ( or alias ) of the field in the query to sort descending
 > 
 
 

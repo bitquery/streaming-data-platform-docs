@@ -39,13 +39,13 @@ Array of StateChanges includes or excludes provided value
 
 ```graphql
 input EVM_Call_Fields_StateChanges_Select_StateChanges {
+  startsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
   endsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
   notStartsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
   notEndsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
   length: OLAP_Integer
   includes: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
   excludes: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
-  startsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
 }
 ```
 
@@ -53,6 +53,10 @@ input EVM_Call_Fields_StateChanges_Select_StateChanges {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>startsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Starts with this element
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>endsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Ends with this element
@@ -76,10 +80,6 @@ input EVM_Call_Fields_StateChanges_Select_StateChanges {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>excludes</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Excludes this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>startsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Starts with this element
 > 
 
 

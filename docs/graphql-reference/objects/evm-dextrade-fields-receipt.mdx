@@ -40,16 +40,16 @@ Receipt fields
 ```graphql
 type EVM_DEXTrade_Fields_Receipt {
   ContractAddress(
-    if: EVM_DEXTrade_Filter
-    maximum: EVM_DEXTrade_CompareFields
     minimum: EVM_DEXTrade_CompareFields
     selectWhere: OLAP_String
-  ): String
-  CumulativeGasUsed(
-    minimum: EVM_DEXTrade_CompareFields
-    selectWhere: OLAP_BigInteger
     if: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
+  ): String
+  CumulativeGasUsed(
+    if: EVM_DEXTrade_Filter
+    maximum: EVM_DEXTrade_CompareFields
+    minimum: EVM_DEXTrade_CompareFields
+    selectWhere: OLAP_BigInteger
   ): String
   GasUsed(
     if: EVM_DEXTrade_Filter
@@ -58,16 +58,16 @@ type EVM_DEXTrade_Fields_Receipt {
     selectWhere: OLAP_BigInteger
   ): String
   Status(
-    if: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
     minimum: EVM_DEXTrade_CompareFields
     selectWhere: OLAP_BigInteger
+    if: EVM_DEXTrade_Filter
   ): String
   Type(
-    minimum: EVM_DEXTrade_CompareFields
-    selectWhere: OLAP_Integer
     if: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
+    minimum: EVM_DEXTrade_CompareFields
+    selectWhere: OLAP_Integer
   ): Int
 }
 ```
@@ -79,15 +79,7 @@ type EVM_DEXTrade_Fields_Receipt {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.<b>ContractAddress</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ContractAddress value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.ContractAddress.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.ContractAddress.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.ContractAddress.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.ContractAddress.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
@@ -95,22 +87,30 @@ type EVM_DEXTrade_Fields_Receipt {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.ContractAddress.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.ContractAddress.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.<b>CumulativeGasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > CumulativeGasUsed value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.CumulativeGasUsed.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.CumulativeGasUsed.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.CumulativeGasUsed.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.CumulativeGasUsed.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.CumulativeGasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.CumulativeGasUsed.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.CumulativeGasUsed.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.<b>GasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -133,11 +133,7 @@ type EVM_DEXTrade_Fields_Receipt {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.<b>Status</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Status value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Status.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Status.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Status.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -149,22 +145,26 @@ type EVM_DEXTrade_Fields_Receipt {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Status.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.<b>Type</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Type value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Type.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Type.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Type.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Type.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Type.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Type.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Receipt.Type.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 

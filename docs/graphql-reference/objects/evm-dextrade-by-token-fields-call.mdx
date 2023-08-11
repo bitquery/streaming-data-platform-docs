@@ -40,10 +40,10 @@ Call fields
 ```graphql
 type EVM_DEXTradeByToken_Fields_Call {
   CallPath(
-    if: EVM_DEXTradeByToken_Filter
-    maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: EVM_DEXTradeByToken_Fields_Call_CallPath_Select_Call_CallPath
+    if: EVM_DEXTradeByToken_Filter
+    maximum: EVM_DEXTradeByToken_CompareFields
   ): [Int]
   CallerIndex(
     selectWhere: OLAP_Integer
@@ -52,22 +52,22 @@ type EVM_DEXTradeByToken_Fields_Call {
     minimum: EVM_DEXTradeByToken_CompareFields
   ): Int
   Create(
+    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: Boolean
-    if: EVM_DEXTradeByToken_Filter
   ): Boolean
   Delegated(
-    if: EVM_DEXTradeByToken_Filter
-    maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: Boolean
+    if: EVM_DEXTradeByToken_Filter
+    maximum: EVM_DEXTradeByToken_CompareFields
   ): Boolean
   Error(
+    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: OLAP_String
-    if: EVM_DEXTradeByToken_Filter
   ): String
   From(
     if: EVM_DEXTradeByToken_Filter
@@ -88,16 +88,16 @@ type EVM_DEXTradeByToken_Fields_Call {
     selectWhere: OLAP_BigInteger
   ): String
   Index(
-    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: OLAP_Integer
+    if: EVM_DEXTradeByToken_Filter
   ): Int
   InternalCalls(
+    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: OLAP_Integer
-    if: EVM_DEXTradeByToken_Filter
   ): Int
   Reverted(
     if: EVM_DEXTradeByToken_Filter
@@ -106,23 +106,23 @@ type EVM_DEXTradeByToken_Fields_Call {
     selectWhere: Boolean
   ): Boolean
   SelfDestruct(
-    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: Boolean
+    if: EVM_DEXTradeByToken_Filter
   ): Boolean
   Signature: EVM_DEXTradeByToken_Fields_Call_Signature
   Success(
-    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: Boolean
+    if: EVM_DEXTradeByToken_Filter
   ): Boolean
   To(
-    minimum: EVM_DEXTradeByToken_CompareFields
-    selectWhere: OLAP_String
     if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
+    minimum: EVM_DEXTradeByToken_CompareFields
+    selectWhere: OLAP_String
   ): String
   Value(
     if: EVM_DEXTradeByToken_Filter
@@ -140,20 +140,20 @@ type EVM_DEXTradeByToken_Fields_Call {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>CallPath</b></code>](#)<Bullet />[`[Int]`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
 > CallPath value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.CallPath.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.CallPath.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.CallPath.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.CallPath.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.CallPath.<b>selectWhere</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Call_CallPath_Select_Call_CallPath`](/docs/graphql-reference/inputs/evm-dextrade-by-token-fields-call-call-path-select-call-call-path) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.CallPath.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.CallPath.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>CallerIndex</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
@@ -176,7 +176,11 @@ type EVM_DEXTradeByToken_Fields_Call {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>Create</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Create value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Create.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Create.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Create.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -188,21 +192,9 @@ type EVM_DEXTradeByToken_Fields_Call {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Create.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>Delegated</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Delegated value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Delegated.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Delegated.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Delegated.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Delegated.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
@@ -210,9 +202,21 @@ type EVM_DEXTradeByToken_Fields_Call {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Delegated.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Delegated.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>Error</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Error value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Error.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Error.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Error.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -222,10 +226,6 @@ type EVM_DEXTradeByToken_Fields_Call {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Error.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Error.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>From</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -284,11 +284,7 @@ type EVM_DEXTradeByToken_Fields_Call {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>Index</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Index value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Index.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -300,9 +296,17 @@ type EVM_DEXTradeByToken_Fields_Call {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Index.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>InternalCalls</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > InternalCalls value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.InternalCalls.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.InternalCalls.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.InternalCalls.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -312,10 +316,6 @@ type EVM_DEXTradeByToken_Fields_Call {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.InternalCalls.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.InternalCalls.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>Reverted</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
@@ -338,11 +338,7 @@ type EVM_DEXTradeByToken_Fields_Call {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>SelfDestruct</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > SelfDestruct value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.SelfDestruct.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.SelfDestruct.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.SelfDestruct.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -354,17 +350,17 @@ type EVM_DEXTradeByToken_Fields_Call {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.SelfDestruct.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>Signature</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Call_Signature`](/docs/graphql-reference/objects/evm-dextrade-by-token-fields-call-signature) <Badge class="secondary" text="object"/>
 > Signature fields
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>Success</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Success value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Success.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Success.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Success.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -376,22 +372,26 @@ type EVM_DEXTradeByToken_Fields_Call {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.Success.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>To</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > To value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.To.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.To.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.To.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.To.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.To.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.To.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.To.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Call.<b>Value</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>

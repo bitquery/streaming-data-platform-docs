@@ -40,28 +40,28 @@ Currency fields
 ```graphql
 type EVM_BalanceUpdate_Fields_Currency {
   Decimals(
+    if: EVM_BalanceUpdate_Filter
     maximum: EVM_BalanceUpdate_CompareFields
     minimum: EVM_BalanceUpdate_CompareFields
     selectWhere: OLAP_Integer
-    if: EVM_BalanceUpdate_Filter
   ): Int
   Delegated(
-    if: EVM_BalanceUpdate_Filter
     maximum: EVM_BalanceUpdate_CompareFields
     minimum: EVM_BalanceUpdate_CompareFields
     selectWhere: Boolean
+    if: EVM_BalanceUpdate_Filter
   ): Boolean
   DelegatedTo(
+    if: EVM_BalanceUpdate_Filter
+    maximum: EVM_BalanceUpdate_CompareFields
     minimum: EVM_BalanceUpdate_CompareFields
     selectWhere: OLAP_String
-    if: EVM_BalanceUpdate_Filter
-    maximum: EVM_BalanceUpdate_CompareFields
   ): String
   Fungible(
+    selectWhere: Boolean
     if: EVM_BalanceUpdate_Filter
     maximum: EVM_BalanceUpdate_CompareFields
     minimum: EVM_BalanceUpdate_CompareFields
-    selectWhere: Boolean
   ): Boolean
   HasURI(
     if: EVM_BalanceUpdate_Filter
@@ -109,7 +109,11 @@ type EVM_BalanceUpdate_Fields_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>Decimals</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Decimals value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Decimals.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Decimals.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Decimals.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -121,17 +125,9 @@ type EVM_BalanceUpdate_Fields_Currency {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Decimals.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>Delegated</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Delegated value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Delegated.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Delegated.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Delegated.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -143,17 +139,13 @@ type EVM_BalanceUpdate_Fields_Currency {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Delegated.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>DelegatedTo</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > DelegatedTo value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.DelegatedTo.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.DelegatedTo.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.DelegatedTo.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.DelegatedTo.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -161,9 +153,21 @@ type EVM_BalanceUpdate_Fields_Currency {
 > Return value when the argument is maximum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.DelegatedTo.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.DelegatedTo.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>Fungible</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Fungible value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Fungible.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Fungible.<b>selectWhere</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Fungible.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -173,10 +177,6 @@ type EVM_BalanceUpdate_Fields_Currency {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Fungible.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.Fungible.<b>selectWhere</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
-> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Currency.<b>HasURI</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>

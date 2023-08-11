@@ -52,10 +52,10 @@ type EVM_Transaction_Fields_Fee {
     selectWhere: EVM_Amount_With_Decimals
   ): String
   GasRefund(
-    if: EVM_Transaction_Filter
-    maximum: EVM_Transaction_CompareFields
     minimum: EVM_Transaction_CompareFields
     selectWhere: OLAP_BigInteger
+    if: EVM_Transaction_Filter
+    maximum: EVM_Transaction_CompareFields
   ): String
   MinerReward(
     if: EVM_Transaction_Filter
@@ -64,10 +64,10 @@ type EVM_Transaction_Fields_Fee {
     selectWhere: EVM_Amount_With_Decimals
   ): String
   PriorityFeePerGas(
+    minimum: EVM_Transaction_CompareFields
     selectWhere: EVM_Amount_With_Decimals
     if: EVM_Transaction_Filter
     maximum: EVM_Transaction_CompareFields
-    minimum: EVM_Transaction_CompareFields
   ): String
   Savings(
     if: EVM_Transaction_Filter
@@ -127,20 +127,20 @@ type EVM_Transaction_Fields_Fee {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.<b>GasRefund</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > GasRefund value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>maximum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>minimum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>minimum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>maximum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.<b>MinerReward</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -163,7 +163,11 @@ type EVM_Transaction_Fields_Fee {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.<b>PriorityFeePerGas</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > PriorityFeePerGas value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.PriorityFeePerGas.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.PriorityFeePerGas.<b>minimum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.PriorityFeePerGas.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -173,10 +177,6 @@ type EVM_Transaction_Fields_Fee {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.PriorityFeePerGas.<b>maximum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.PriorityFeePerGas.<b>minimum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.<b>Savings</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>

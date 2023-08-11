@@ -41,10 +41,10 @@ Uncle fields
 type EVM_WasOnBranch_Fields_Uncle {
   Block: EVM_WasOnBranch_Fields_Uncle_Block
   Index(
-    maximum: EVM_WasOnBranch_CompareFields
     minimum: EVM_WasOnBranch_CompareFields
     selectWhere: OLAP_Integer
     if: EVM_WasOnBranch_Filter
+    maximum: EVM_WasOnBranch_CompareFields
   ): Int
 }
 ```
@@ -60,11 +60,7 @@ type EVM_WasOnBranch_Fields_Uncle {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle.<b>Index</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Index value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle.Index.<b>minimum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle.Index.<b>minimum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
@@ -74,6 +70,10 @@ type EVM_WasOnBranch_Fields_Uncle {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle.Index.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Fields_Uncle.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_WasOnBranch_CompareFields`](/docs/graphql-reference/enums/evm-was-on-branch-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 

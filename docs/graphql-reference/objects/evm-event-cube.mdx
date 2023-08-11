@@ -40,10 +40,10 @@ Smart contract log events in EVM Blockchain
 ```graphql
 type EVM_Event_Cube {
   Arguments(
-    if: EVM_Event_Filter
-    maximum: EVM_Event_CompareFields
     minimum: EVM_Event_CompareFields
     selectWhere: EVM_Event_Fields_Arguments_Select_Arguments
+    if: EVM_Event_Filter
+    maximum: EVM_Event_CompareFields
   ): [EVM_Event_Fields_Arguments]
   Block: EVM_Event_Fields_Block
   Call: EVM_Event_Fields_Call
@@ -58,10 +58,10 @@ type EVM_Event_Cube {
   LogHeader: EVM_Event_Fields_LogHeader
   Receipt: EVM_Event_Fields_Receipt
   Topics(
-    selectWhere: EVM_Event_Fields_Topics_Select_Topics
     if: EVM_Event_Filter
     maximum: EVM_Event_CompareFields
     minimum: EVM_Event_CompareFields
+    selectWhere: EVM_Event_Fields_Topics_Select_Topics
   ): [EVM_Event_Fields_Topics]
   Transaction: EVM_Event_Fields_Transaction
   TransactionStatus: EVM_Event_Fields_TransactionStatus
@@ -71,21 +71,21 @@ type EVM_Event_Cube {
     if: EVM_Event_Filter
   ): Float
   contingency(
-    with: EVM_Event_NumFields
-    if: EVM_Event_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Event_NumFields
+    with: EVM_Event_NumFields
+    if: EVM_Event_Filter
   ): Float
   correlation(
-    if: EVM_Event_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Event_NumFields
     with: EVM_Event_NumFields
+    if: EVM_Event_Filter
   ): Float
   count(
+    selectWhere: Metric_filter_String
     distinct: [EVM_Event_EnumFields]
     if: EVM_Event_Filter
-    selectWhere: Metric_filter_String
   ): String
   covariance(
     with: EVM_Event_NumFields
@@ -94,21 +94,21 @@ type EVM_Event_Cube {
     of: EVM_Event_NumFields
   ): Float
   cramers(
-    if: EVM_Event_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Event_NumFields
     with: EVM_Event_NumFields
+    if: EVM_Event_Filter
   ): Float
   cramers_bias_corrected(
-    of: EVM_Event_NumFields
     with: EVM_Event_NumFields
-    selectWhere: Metric_filter_Float
     if: EVM_Event_Filter
+    selectWhere: Metric_filter_Float
+    of: EVM_Event_NumFields
   ): Float
   dispersion(
-    if: EVM_Event_Filter
-    selectWhere: Metric_filter_Float
     of: EVM_Event_NumFields
+    selectWhere: Metric_filter_Float
+    if: EVM_Event_Filter
   ): Float
   entropy(
     selectWhere: Metric_filter_Float
@@ -116,9 +116,9 @@ type EVM_Event_Cube {
     if: EVM_Event_Filter
   ): Float
   kurtosis(
+    selectWhere: Metric_filter_Float
     of: EVM_Event_NumFields
     if: EVM_Event_Filter
-    selectWhere: Metric_filter_Float
   ): Float
   median(
     if: EVM_Event_Filter
@@ -128,25 +128,25 @@ type EVM_Event_Cube {
   quantile(
     level: Float = 0.5
     if: EVM_Event_Filter
-    selectWhere: Metric_filter_Float
     method: OLAP_Metric_Calculation_Method_Exact
+    selectWhere: Metric_filter_Float
     of: EVM_Event_NumFields
   ): Float
   rank_correlation(
-    of: EVM_Event_NumFields
+    selectWhere: Metric_filter_Float
     with: EVM_Event_NumFields
     if: EVM_Event_Filter
-    selectWhere: Metric_filter_Float
+    of: EVM_Event_NumFields
   ): Float
   skew(
-    of: EVM_Event_NumFields
     if: EVM_Event_Filter
     selectWhere: Metric_filter_Float
+    of: EVM_Event_NumFields
   ): Float
   standard_deviation(
     selectWhere: Metric_filter_Float
-    if: EVM_Event_Filter
     of: EVM_Event_NumFields
+    if: EVM_Event_Filter
   ): Float
   sum(
     selectWhere: Metric_filter_String
@@ -155,15 +155,15 @@ type EVM_Event_Cube {
   ): String
   theils(
     selectWhere: Metric_filter_Float
-    of: EVM_Event_NumFields
     with: EVM_Event_NumFields
     if: EVM_Event_Filter
+    of: EVM_Event_NumFields
   ): Float
   uniq(
     of: [EVM_Event_EnumFields]
-    selectWhere: Metric_filter_String
     if: EVM_Event_Filter
     method: OLAP_Metric_Calculation_Method_Exact
+    selectWhere: Metric_filter_String
   ): String
 }
 ```
@@ -175,20 +175,20 @@ type EVM_Event_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>Arguments</b></code>](#)<Bullet />[`[EVM_Event_Fields_Arguments]`](/docs/graphql-reference/objects/evm-event-fields-arguments) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 > Arguments value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Arguments.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Arguments.<b>maximum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Arguments.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Arguments.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Arguments.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Event_Fields_Arguments_Select_Arguments`](/docs/graphql-reference/inputs/evm-event-fields-arguments-select-arguments) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Arguments.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Arguments.<b>maximum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>Block</b></code>](#)<Bullet />[`EVM_Event_Fields_Block`](/docs/graphql-reference/objects/evm-event-fields-block) <Badge class="secondary" text="object"/>
@@ -235,11 +235,7 @@ type EVM_Event_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>Topics</b></code>](#)<Bullet />[`[EVM_Event_Fields_Topics]`](/docs/graphql-reference/objects/evm-event-fields-topics) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 > Topics value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Topics.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Event_Fields_Topics_Select_Topics`](/docs/graphql-reference/inputs/evm-event-fields-topics-select-topics) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Topics.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Topics.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -249,6 +245,10 @@ type EVM_Event_Cube {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Topics.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.Topics.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Event_Fields_Topics_Select_Topics`](/docs/graphql-reference/inputs/evm-event-fields-topics-select-topics) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>Transaction</b></code>](#)<Bullet />[`EVM_Event_Fields_Transaction`](/docs/graphql-reference/objects/evm-event-fields-transaction) <Badge class="secondary" text="object"/>
@@ -275,15 +275,7 @@ type EVM_Event_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>contingency</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Contingency coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.contingency.<b>with</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
-> Second argument for Contingency coefficient between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.contingency.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -291,13 +283,17 @@ type EVM_Event_Cube {
 > First argument for Contingency coefficient between two arguments
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Pearson correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.contingency.<b>with</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
+> Second argument for Contingency coefficient between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.contingency.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+> Pearson correlation coefficient between two arguments
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -309,18 +305,22 @@ type EVM_Event_Cube {
 > Second argument for Pearson correlation coefficient between two arguments
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Count records or uniques of arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Event_EnumFields]`](/docs/graphql-reference/enums/evm-event-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.count.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Event_EnumFields]`](/docs/graphql-reference/enums/evm-event-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
 > Count distinct values of the field
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.count.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.count.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>covariance</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -343,11 +343,7 @@ type EVM_Event_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>cramers</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Cramér's phi coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -359,36 +355,40 @@ type EVM_Event_Cube {
 > Second argument for Cramér's phi coefficient between two arguments
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Cramér's phi coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Cramér's phi coefficient with bias correction between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Cramér's phi coefficient with bias correction between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers_bias_corrected.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Cramér's phi coefficient with bias correction between two arguments
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>dispersion</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Dispersion for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.dispersion.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.dispersion.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
+> Argument for Dispersion for a set of values
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.dispersion.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
-> Argument for Dispersion for a set of values
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.dispersion.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>entropy</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -407,16 +407,16 @@ type EVM_Event_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>kurtosis</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Kurtosis for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.kurtosis.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Kurtosis for a set of values
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.kurtosis.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.kurtosis.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>median</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -443,12 +443,12 @@ type EVM_Event_Cube {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.quantile.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
 > Method used to calculate metric values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
@@ -457,8 +457,8 @@ type EVM_Event_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Rank correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.rank_correlation.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Rank correlation coefficient between two arguments
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.rank_correlation.<b>with</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
@@ -469,22 +469,22 @@ type EVM_Event_Cube {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.rank_correlation.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Rank correlation coefficient between two arguments
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Skew for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.skew.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
-> Argument for Skew for a set of values
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.skew.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
+> Argument for Skew for a set of values
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>standard_deviation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -493,12 +493,12 @@ type EVM_Event_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.standard_deviation.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Standard deviation of the values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.standard_deviation.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>sum</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -521,10 +521,6 @@ type EVM_Event_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.theils.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.theils.<b>with</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
 > 
@@ -533,14 +529,14 @@ type EVM_Event_Cube {
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.theils.<b>of</b></code>](#)<Bullet />[`EVM_Event_NumFields`](/docs/graphql-reference/enums/evm-event-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Count unique records
 > ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Event_EnumFields]`](/docs/graphql-reference/enums/evm-event-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
 > Uniq values of the field
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
@@ -549,6 +545,10 @@ type EVM_Event_Cube {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
 > Method used to calculate metric values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 

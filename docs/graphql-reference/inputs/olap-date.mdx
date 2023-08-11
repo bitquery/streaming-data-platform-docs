@@ -39,7 +39,6 @@ Date represention YYYY-MM-DD format
 
 ```graphql
 input OLAP_Date {
-  before: String
   after: String
   till: String
   since: String
@@ -47,6 +46,7 @@ input OLAP_Date {
   not: String
   in: [String]
   notIn: [String]
+  before: String
 }
 ```
 
@@ -54,10 +54,6 @@ input OLAP_Date {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>before</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Strictly before this date
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>after</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Strictly after this date
@@ -85,6 +81,10 @@ input OLAP_Date {
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>notIn</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
 > Date is not in the provided list
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>before</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Strictly before this date
 > 
 
 

@@ -43,10 +43,10 @@ type EVM_BalanceUpdate_Cube {
   Block: EVM_BalanceUpdate_Fields_Block
   Call: EVM_BalanceUpdate_Fields_Call
   ChainId(
-    minimum: EVM_BalanceUpdate_CompareFields
     selectWhere: OLAP_BigInteger
     if: EVM_BalanceUpdate_Filter
     maximum: EVM_BalanceUpdate_CompareFields
+    minimum: EVM_BalanceUpdate_CompareFields
   ): String
   Currency: EVM_BalanceUpdate_Fields_Currency
   Log: EVM_BalanceUpdate_Fields_Log
@@ -58,16 +58,16 @@ type EVM_BalanceUpdate_Cube {
     if: EVM_BalanceUpdate_Filter
   ): Float
   contingency(
-    selectWhere: Metric_filter_Float
     of: EVM_BalanceUpdate_NumFields
+    selectWhere: Metric_filter_Float
     with: EVM_BalanceUpdate_NumFields
     if: EVM_BalanceUpdate_Filter
   ): Float
   correlation(
     selectWhere: Metric_filter_Float
-    if: EVM_BalanceUpdate_Filter
     of: EVM_BalanceUpdate_NumFields
     with: EVM_BalanceUpdate_NumFields
+    if: EVM_BalanceUpdate_Filter
   ): Float
   count(
     selectWhere: Metric_filter_String
@@ -76,9 +76,9 @@ type EVM_BalanceUpdate_Cube {
   ): String
   covariance(
     selectWhere: Metric_filter_Float
-    of: EVM_BalanceUpdate_NumFields
     with: EVM_BalanceUpdate_NumFields
     if: EVM_BalanceUpdate_Filter
+    of: EVM_BalanceUpdate_NumFields
   ): Float
   cramers(
     selectWhere: Metric_filter_Float
@@ -87,15 +87,15 @@ type EVM_BalanceUpdate_Cube {
     if: EVM_BalanceUpdate_Filter
   ): Float
   cramers_bias_corrected(
+    selectWhere: Metric_filter_Float
     of: EVM_BalanceUpdate_NumFields
     with: EVM_BalanceUpdate_NumFields
     if: EVM_BalanceUpdate_Filter
-    selectWhere: Metric_filter_Float
   ): Float
   dispersion(
-    selectWhere: Metric_filter_Float
     of: EVM_BalanceUpdate_NumFields
     if: EVM_BalanceUpdate_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   entropy(
     selectWhere: Metric_filter_Float
@@ -103,21 +103,21 @@ type EVM_BalanceUpdate_Cube {
     if: EVM_BalanceUpdate_Filter
   ): Float
   kurtosis(
-    selectWhere: Metric_filter_Float
-    if: EVM_BalanceUpdate_Filter
     of: EVM_BalanceUpdate_NumFields
+    if: EVM_BalanceUpdate_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   median(
+    selectWhere: Metric_filter_Float
     of: EVM_BalanceUpdate_NumFields
     if: EVM_BalanceUpdate_Filter
-    selectWhere: Metric_filter_Float
   ): Float
   quantile(
-    level: Float = 0.5
-    if: EVM_BalanceUpdate_Filter
     method: OLAP_Metric_Calculation_Method_Exact
     of: EVM_BalanceUpdate_NumFields
+    level: Float = 0.5
     selectWhere: Metric_filter_Float
+    if: EVM_BalanceUpdate_Filter
   ): Float
   rank_correlation(
     selectWhere: Metric_filter_Float
@@ -127,18 +127,18 @@ type EVM_BalanceUpdate_Cube {
   ): Float
   skew(
     of: EVM_BalanceUpdate_NumFields
-    if: EVM_BalanceUpdate_Filter
     selectWhere: Metric_filter_Float
+    if: EVM_BalanceUpdate_Filter
   ): Float
   standard_deviation(
+    if: EVM_BalanceUpdate_Filter
     selectWhere: Metric_filter_Float
     of: EVM_BalanceUpdate_NumFields
-    if: EVM_BalanceUpdate_Filter
   ): Float
   sum(
-    selectWhere: Metric_filter_String
     of: EVM_BalanceUpdate_NumFields
     if: EVM_BalanceUpdate_Filter
+    selectWhere: Metric_filter_String
   ): String
   theils(
     selectWhere: Metric_filter_Float
@@ -147,10 +147,10 @@ type EVM_BalanceUpdate_Cube {
     if: EVM_BalanceUpdate_Filter
   ): Float
   uniq(
-    if: EVM_BalanceUpdate_Filter
-    method: OLAP_Metric_Calculation_Method_Exact
     selectWhere: Metric_filter_String
     of: [EVM_BalanceUpdate_EnumFields]
+    if: EVM_BalanceUpdate_Filter
+    method: OLAP_Metric_Calculation_Method_Exact
   ): String
 }
 ```
@@ -174,11 +174,7 @@ type EVM_BalanceUpdate_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>ChainId</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ChainId value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.ChainId.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.ChainId.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.ChainId.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -188,6 +184,10 @@ type EVM_BalanceUpdate_Cube {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.ChainId.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.ChainId.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>Currency</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Fields_Currency`](/docs/graphql-reference/objects/evm-balance-update-fields-currency) <Badge class="secondary" text="object"/>
@@ -222,12 +222,12 @@ type EVM_BalanceUpdate_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>contingency</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Contingency coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.contingency.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Contingency coefficient between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.contingency.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Contingency coefficient between two arguments
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.contingency.<b>with</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
@@ -244,16 +244,16 @@ type EVM_BalanceUpdate_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Pearson correlation coefficient between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.correlation.<b>with</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Pearson correlation coefficient between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -276,16 +276,16 @@ type EVM_BalanceUpdate_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.covariance.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Covariance between two arguments
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.covariance.<b>with</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Covariance between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.covariance.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.covariance.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Covariance between two arguments
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>cramers</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -308,7 +308,11 @@ type EVM_BalanceUpdate_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Cramér's phi coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Cramér's phi coefficient with bias correction between two arguments
 > 
 
@@ -320,22 +324,18 @@ type EVM_BalanceUpdate_Cube {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>dispersion</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Dispersion for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.dispersion.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.dispersion.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Dispersion for a set of values
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.dispersion.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>entropy</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -354,21 +354,25 @@ type EVM_BalanceUpdate_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>kurtosis</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Kurtosis for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.kurtosis.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
+> Argument for Kurtosis for a set of values
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.kurtosis.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
-> Argument for Kurtosis for a set of values
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.kurtosis.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>median</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Median for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.median.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.median.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.median.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Median for a set of values
 > 
 
@@ -376,21 +380,9 @@ type EVM_BalanceUpdate_Cube {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.median.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>quantile</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Approximate quantile of a numeric data sequence
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.quantile.<b>level</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Level of quantile. Optional parameter. Constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]. Default value: 0.5. At level=0.5 the function calculates median.
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.quantile.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.quantile.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.quantile.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
 > Method used to calculate metric values
 > 
 
@@ -398,8 +390,16 @@ type EVM_BalanceUpdate_Cube {
 > Argument for quantile
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.quantile.<b>level</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+> Level of quantile. Optional parameter. Constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]. Default value: 0.5. At level=0.5 the function calculates median.
+> 
+
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.quantile.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -426,17 +426,21 @@ type EVM_BalanceUpdate_Cube {
 > Argument for Skew for a set of values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>standard_deviation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Standard deviation of the values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.standard_deviation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.standard_deviation.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.standard_deviation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -444,22 +448,18 @@ type EVM_BalanceUpdate_Cube {
 > Argument for Standard deviation of the values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.standard_deviation.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>sum</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Sum values of argument
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.sum.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.sum.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.sum.<b>of</b></code>](#)<Bullet />[`EVM_BalanceUpdate_NumFields`](/docs/graphql-reference/enums/evm-balance-update-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for sum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.sum.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.sum.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>theils</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -482,20 +482,20 @@ type EVM_BalanceUpdate_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Count unique records
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
-> Method used to calculate metric values
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_BalanceUpdate_EnumFields]`](/docs/graphql-reference/enums/evm-balance-update-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
 > Uniq values of the field
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
+> Method used to calculate metric values
 > 
 
 

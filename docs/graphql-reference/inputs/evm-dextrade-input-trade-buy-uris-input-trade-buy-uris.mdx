@@ -39,13 +39,13 @@ Array of Trade_Buy_URIs includes or excludes provided value
 
 ```graphql
 input EVM_DEXTrade_Input_Trade_Buy_URIs_Input_Trade_Buy_URIs {
-  startsWith: [OLAP_String]
-  endsWith: [OLAP_String]
   notStartsWith: [OLAP_String]
   notEndsWith: [OLAP_String]
   length: OLAP_Integer
   includes: [OLAP_String]
   excludes: [OLAP_String]
+  startsWith: [OLAP_String]
+  endsWith: [OLAP_String]
 }
 ```
 
@@ -53,14 +53,6 @@ input EVM_DEXTrade_Input_Trade_Buy_URIs_Input_Trade_Buy_URIs {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_URIs_Input_Trade_Buy_URIs.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Starts with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_URIs_Input_Trade_Buy_URIs.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Ends with this element
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_URIs_Input_Trade_Buy_URIs.<b>notStartsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Does not start with this element
@@ -80,6 +72,14 @@ input EVM_DEXTrade_Input_Trade_Buy_URIs_Input_Trade_Buy_URIs {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_URIs_Input_Trade_Buy_URIs.<b>excludes</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Excludes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_URIs_Input_Trade_Buy_URIs.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Starts with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Buy_URIs_Input_Trade_Buy_URIs.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Ends with this element
 > 
 
 

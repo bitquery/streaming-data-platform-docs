@@ -39,13 +39,13 @@ Array of Call_CallPath includes or excludes provided value
 
 ```graphql
 input EVM_Call_Input_Call_CallPath_Input_Call_CallPath {
+  excludes: [OLAP_Integer]
+  startsWith: [OLAP_Integer]
   endsWith: [OLAP_Integer]
   notStartsWith: [OLAP_Integer]
   notEndsWith: [OLAP_Integer]
   length: OLAP_Integer
   includes: [OLAP_Integer]
-  excludes: [OLAP_Integer]
-  startsWith: [OLAP_Integer]
 }
 ```
 
@@ -53,6 +53,14 @@ input EVM_Call_Input_Call_CallPath_Input_Call_CallPath {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>excludes</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Excludes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Starts with this element
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Ends with this element
@@ -72,14 +80,6 @@ input EVM_Call_Input_Call_CallPath_Input_Call_CallPath {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>includes</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Includes this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>excludes</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Excludes this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Call_CallPath_Input_Call_CallPath.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_Integer]`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Starts with this element
 > 
 
 

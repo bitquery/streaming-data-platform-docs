@@ -40,10 +40,10 @@ L1 fields
 ```graphql
 type EVM_Call_Fields_Block_L1 {
   BaseFee(
+    if: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
     selectWhere: OLAP_BigInteger
-    if: EVM_Call_Filter
   ): String
   Coinbase(
     if: EVM_Call_Filter
@@ -52,16 +52,16 @@ type EVM_Call_Fields_Block_L1 {
     selectWhere: OLAP_String
   ): String
   Difficulty(
-    minimum: EVM_Call_CompareFields
-    selectWhere: OLAP_BigInteger
     if: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
+    minimum: EVM_Call_CompareFields
+    selectWhere: OLAP_BigInteger
   ): String
   GasLimit(
+    maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
     selectWhere: OLAP_BigInteger
     if: EVM_Call_Filter
-    maximum: EVM_Call_CompareFields
   ): String
   GasUsed(
     if: EVM_Call_Filter
@@ -76,29 +76,29 @@ type EVM_Call_Fields_Block_L1 {
     selectWhere: OLAP_String
   ): String
   Nonce(
+    if: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
     selectWhere: OLAP_BigInteger
-    if: EVM_Call_Filter
   ): String
   Number(
+    if: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
     selectWhere: OLAP_BigInteger
-    if: EVM_Call_Filter
   ): String
   ParentHash(
-    maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
     selectWhere: OLAP_String
     if: EVM_Call_Filter
+    maximum: EVM_Call_CompareFields
   ): String
   Time(
+    maximum: EVM_Call_CompareFields
+    minimum: EVM_Call_CompareFields
     selectWhere: OLAP_DateTime
     interval: OLAP_DateTimeInterval
     if: EVM_Call_Filter
-    maximum: EVM_Call_CompareFields
-    minimum: EVM_Call_CompareFields
   ): DateTime
 }
 ```
@@ -110,7 +110,11 @@ type EVM_Call_Fields_Block_L1 {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.<b>BaseFee</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > BaseFee value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.BaseFee.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.BaseFee.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.BaseFee.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -120,10 +124,6 @@ type EVM_Call_Fields_Block_L1 {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.BaseFee.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.BaseFee.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.<b>Coinbase</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -146,15 +146,7 @@ type EVM_Call_Fields_Block_L1 {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.<b>Difficulty</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Difficulty value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Difficulty.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Difficulty.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Difficulty.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Difficulty.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -162,9 +154,21 @@ type EVM_Call_Fields_Block_L1 {
 > Return value when the argument is maximum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Difficulty.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Difficulty.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.<b>GasLimit</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > GasLimit value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.GasLimit.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.GasLimit.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.GasLimit.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
@@ -174,10 +178,6 @@ type EVM_Call_Fields_Block_L1 {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.GasLimit.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.GasLimit.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.<b>GasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -218,7 +218,11 @@ type EVM_Call_Fields_Block_L1 {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.<b>Nonce</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Nonce value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Nonce.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Nonce.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Nonce.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -230,13 +234,13 @@ type EVM_Call_Fields_Block_L1 {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Nonce.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.<b>Number</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Number value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Number.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.<b>Number</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Number value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Number.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Number.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -248,17 +252,9 @@ type EVM_Call_Fields_Block_L1 {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Number.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.<b>ParentHash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ParentHash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.ParentHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.ParentHash.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.ParentHash.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
@@ -270,9 +266,21 @@ type EVM_Call_Fields_Block_L1 {
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.ParentHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.<b>Time</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
 > Time value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Time.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_DateTime`](/docs/graphql-reference/inputs/olap-date-time) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Time.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Time.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Time.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_DateTime`](/docs/graphql-reference/inputs/olap-date-time) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -282,14 +290,6 @@ type EVM_Call_Fields_Block_L1 {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Time.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Time.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Block_L1.Time.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
 > 
 
 

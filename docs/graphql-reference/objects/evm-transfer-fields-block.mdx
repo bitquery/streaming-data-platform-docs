@@ -52,11 +52,11 @@ type EVM_Transfer_Fields_Block {
     selectWhere: OLAP_String
   ): String
   Date(
+    selectWhere: OLAP_Date
+    interval: OLAP_DateInterval
     if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
-    selectWhere: OLAP_Date
-    interval: OLAP_DateInterval
   ): String
   Difficulty(
     if: EVM_Transfer_Filter
@@ -71,10 +71,10 @@ type EVM_Transfer_Fields_Block {
     selectWhere: OLAP_BigInteger
   ): String
   GasUsed(
-    if: EVM_Transfer_Filter
-    maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
     selectWhere: OLAP_BigInteger
+    if: EVM_Transfer_Filter
+    maximum: EVM_Transfer_CompareFields
   ): String
   Hash(
     if: EVM_Transfer_Filter
@@ -102,11 +102,11 @@ type EVM_Transfer_Fields_Block {
     selectWhere: OLAP_String
   ): String
   Time(
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
     selectWhere: OLAP_DateTime
     interval: OLAP_DateTimeInterval
-    if: EVM_Transfer_Filter
   ): DateTime
 }
 ```
@@ -154,7 +154,15 @@ type EVM_Transfer_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.<b>Date</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Date value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Date.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Date.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Date`](/docs/graphql-reference/inputs/olap-date) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Date.<b>interval</b></code>](#)<Bullet />[`OLAP_DateInterval`](/docs/graphql-reference/inputs/olap-date-interval) <Badge class="secondary" text="input"/>
+> Date interval in specified units
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Date.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -164,14 +172,6 @@ type EVM_Transfer_Fields_Block {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Date.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Date.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Date`](/docs/graphql-reference/inputs/olap-date) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Date.<b>interval</b></code>](#)<Bullet />[`OLAP_DateInterval`](/docs/graphql-reference/inputs/olap-date-interval) <Badge class="secondary" text="input"/>
-> Date interval in specified units
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.<b>Difficulty</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -212,20 +212,20 @@ type EVM_Transfer_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.<b>GasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > GasUsed value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.GasUsed.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.GasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.GasUsed.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.GasUsed.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.GasUsed.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.GasUsed.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.GasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.<b>Hash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -306,7 +306,11 @@ type EVM_Transfer_Fields_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.<b>Time</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="secondary" text="scalar"/>
 > Time value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Time.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Time.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Time.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -320,10 +324,6 @@ type EVM_Transfer_Fields_Block {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Time.<b>interval</b></code>](#)<Bullet />[`OLAP_DateTimeInterval`](/docs/graphql-reference/inputs/olap-date-time-interval) <Badge class="secondary" text="input"/>
 > Time interval in specified units
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Block.Time.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 

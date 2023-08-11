@@ -40,16 +40,16 @@ Currency fields
 ```graphql
 type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
   Decimals(
+    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: OLAP_Integer
-    if: EVM_DEXTradeByToken_Filter
   ): Int
   Fungible(
+    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: Boolean
-    if: EVM_DEXTradeByToken_Filter
   ): Boolean
   HasURI(
     if: EVM_DEXTradeByToken_Filter
@@ -58,10 +58,10 @@ type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
     selectWhere: Boolean
   ): Boolean
   Name(
+    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: OLAP_String
-    if: EVM_DEXTradeByToken_Filter
   ): String
   ProtocolName(
     if: EVM_DEXTradeByToken_Filter
@@ -70,16 +70,16 @@ type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
     selectWhere: OLAP_String
   ): String
   SmartContract(
+    maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: OLAP_String
     if: EVM_DEXTradeByToken_Filter
-    maximum: EVM_DEXTradeByToken_CompareFields
   ): String
   Symbol(
-    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: OLAP_String
+    if: EVM_DEXTradeByToken_Filter
   ): String
 }
 ```
@@ -91,7 +91,11 @@ type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.<b>Decimals</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Decimals value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Decimals.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Decimals.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Decimals.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -103,13 +107,13 @@ type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Decimals.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.<b>Fungible</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+> Fungible value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Fungible.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.<b>Fungible</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
-> Fungible value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Fungible.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Fungible.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -119,10 +123,6 @@ type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Fungible.<b>selectWhere</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Fungible.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.<b>HasURI</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
@@ -145,7 +145,11 @@ type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.<b>Name</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Name value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Name.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Name.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Name.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -155,10 +159,6 @@ type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Name.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Name.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.<b>ProtocolName</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -181,7 +181,11 @@ type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.<b>SmartContract</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > SmartContract value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.SmartContract.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.SmartContract.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.SmartContract.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
@@ -193,17 +197,9 @@ type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.SmartContract.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.<b>Symbol</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Symbol value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Symbol.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Symbol.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Symbol.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -213,6 +209,10 @@ type EVM_DEXTradeByToken_Fields_Trade_Side_Currency {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Symbol.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Currency.Symbol.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 
