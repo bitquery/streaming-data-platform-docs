@@ -4,12 +4,11 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Data Streaming Platform',
+    title: 'Real time blockchain data',
     Svg: require('@site/static/img/BitqueryBW.svg').default,
     description: (
       <>
-        Subscribe on the real-time data and build winning blockchain
-          applications.
+       Get access to real-time (without delay) blockchain data through the GraphQL subscription (WebSocket).
       </>
     ),
   },
@@ -18,8 +17,7 @@ const FeatureList = [
     Svg: require('@site/static/img/BitqueryBW.svg').default,
     description: (
       <>
-        Build effective GraphQL queries to any blockchain data in minutes and embed them in your applications.
-        Now with Websockets and subscription features!
+Access tokens transfers, trades, NFTs, and other historical data through Bitquery GraphQL APIs, including mempool data.
       </>
     ),
   },
@@ -28,8 +26,7 @@ const FeatureList = [
     Svg: require('@site/static/img/BitqueryBW.svg').default,
     description: (
       <>
-        Develop cloud applications using precise comprehensive archive datasets of all major blockchain networks.
-      </>
+Access to blockchain data through cloud infra such as AWS S3, Microsoft Azure, Snowflake, Google BigQuery, etc.      </>
     ),
   },
 ];
