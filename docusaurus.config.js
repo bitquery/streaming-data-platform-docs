@@ -110,7 +110,8 @@ const config = {
         title: "Blockchain Data Platform",
         logo: {
           alt: "Bitquery.io",
-          src: "img/bitquery_logo_w.jpg",
+          src: "img/logoBitqueryDark.png",
+          srcDark: "img/logoBitqueryWhite.png",
         },
         items: [
           {
@@ -127,7 +128,7 @@ const config = {
           {
             to: "https://community.bitquery.io",
             label: "Forum",
-            position: "left"
+            position: "left",
           },
         ],
       },
