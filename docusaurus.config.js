@@ -6,7 +6,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Data streaming platform",
+  title: "Streaming API (V2  API Docs)",
   tagline:
     "How to query data and build applications on Bitquery blockchain data platform",
   favicon: "img/favicon.ico",
@@ -124,6 +124,7 @@ const config = {
             docId: "intro",
             position: "left",
             label: "V2 Docs",
+            className: "v2-highlight",
           },
           {
             to: "https://community.bitquery.io",
