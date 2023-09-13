@@ -109,5 +109,5 @@ The `DEXTrades` API contains the following information about each trade:
 
 -   `Dex`: The details of the decentralized exchange where the trade was executed, including the protocol family and the protocol name.
 -   `Sender`: The address of the sender of the trade.
--   `Buy`: The details of the buy order, including the amount of cryptocurrency bought, the buyer's address, the token's symbol, and the price of the trade.
+-   `Buy`: The details of the buy order, including the amount of token bought, the buyer's address, the token's symbol, and the price of the trade.
 -   `Sell`: The details of the sell order, including the amount of token sold, the seller's address, the token's symbol, and the price of the trade.
