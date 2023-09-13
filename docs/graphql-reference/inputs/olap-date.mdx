@@ -39,14 +39,14 @@ Date represention YYYY-MM-DD format
 
 ```graphql
 input OLAP_Date {
-  after: String
-  till: String
-  since: String
   is: String
   not: String
   in: [String]
   notIn: [String]
   before: String
+  after: String
+  till: String
+  since: String
 }
 ```
 
@@ -54,18 +54,6 @@ input OLAP_Date {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>after</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Strictly after this date
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>till</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Before this date and including it
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>since</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> After this date and including it
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>is</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Exact match the date
@@ -85,6 +73,18 @@ input OLAP_Date {
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>before</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Strictly before this date
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>after</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Strictly after this date
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>till</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Before this date and including it
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_Date.<b>since</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> After this date and including it
 > 
 
 

@@ -40,22 +40,22 @@ Receipt fields
 ```graphql
 type EVM_Transfer_Fields_Receipt {
   ContractAddress(
+    selectWhere: OLAP_String
     if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
-    selectWhere: OLAP_String
   ): String
   CumulativeGasUsed(
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
     selectWhere: OLAP_BigInteger
-    if: EVM_Transfer_Filter
   ): String
   GasUsed(
-    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
     selectWhere: OLAP_BigInteger
+    if: EVM_Transfer_Filter
   ): String
   Status(
     selectWhere: OLAP_BigInteger
@@ -79,7 +79,11 @@ type EVM_Transfer_Fields_Receipt {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.<b>ContractAddress</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ContractAddress value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.ContractAddress.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.ContractAddress.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.ContractAddress.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -91,13 +95,13 @@ type EVM_Transfer_Fields_Receipt {
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.ContractAddress.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.<b>CumulativeGasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > CumulativeGasUsed value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.CumulativeGasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.CumulativeGasUsed.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.CumulativeGasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -109,17 +113,9 @@ type EVM_Transfer_Fields_Receipt {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.CumulativeGasUsed.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.<b>GasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > GasUsed value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.GasUsed.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.GasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.GasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -129,6 +125,10 @@ type EVM_Transfer_Fields_Receipt {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.GasUsed.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.GasUsed.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Receipt.<b>Status</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>

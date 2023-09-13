@@ -48,36 +48,36 @@ type EVM_WasOnBranch_Cube {
   ): String
   Uncle: EVM_WasOnBranch_Fields_Uncle
   average(
+    selectWhere: Metric_filter_Float
     of: EVM_WasOnBranch_NumFields
     if: EVM_WasOnBranch_Filter
-    selectWhere: Metric_filter_Float
   ): Float
   contingency(
     selectWhere: Metric_filter_Float
+    of: EVM_WasOnBranch_NumFields
     with: EVM_WasOnBranch_NumFields
     if: EVM_WasOnBranch_Filter
-    of: EVM_WasOnBranch_NumFields
   ): Float
   correlation(
+    selectWhere: Metric_filter_Float
+    with: EVM_WasOnBranch_NumFields
     if: EVM_WasOnBranch_Filter
     of: EVM_WasOnBranch_NumFields
-    with: EVM_WasOnBranch_NumFields
-    selectWhere: Metric_filter_Float
   ): Float
   count(
     selectWhere: Metric_filter_String
-    distinct: [EVM_WasOnBranch_EnumFields]
     if: EVM_WasOnBranch_Filter
+    distinct: [EVM_WasOnBranch_EnumFields]
   ): String
   covariance(
-    selectWhere: Metric_filter_Float
-    with: EVM_WasOnBranch_NumFields
     if: EVM_WasOnBranch_Filter
     of: EVM_WasOnBranch_NumFields
+    selectWhere: Metric_filter_Float
+    with: EVM_WasOnBranch_NumFields
   ): Float
   cramers(
-    selectWhere: Metric_filter_Float
     of: EVM_WasOnBranch_NumFields
+    selectWhere: Metric_filter_Float
     with: EVM_WasOnBranch_NumFields
     if: EVM_WasOnBranch_Filter
   ): Float
@@ -88,14 +88,14 @@ type EVM_WasOnBranch_Cube {
     of: EVM_WasOnBranch_NumFields
   ): Float
   dispersion(
+    if: EVM_WasOnBranch_Filter
     selectWhere: Metric_filter_Float
     of: EVM_WasOnBranch_NumFields
-    if: EVM_WasOnBranch_Filter
   ): Float
   entropy(
-    selectWhere: Metric_filter_Float
     of: EVM_WasOnBranch_NumFields
     if: EVM_WasOnBranch_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   kurtosis(
     selectWhere: Metric_filter_Float
@@ -108,17 +108,17 @@ type EVM_WasOnBranch_Cube {
     if: EVM_WasOnBranch_Filter
   ): Float
   quantile(
-    selectWhere: Metric_filter_Float
     if: EVM_WasOnBranch_Filter
     method: OLAP_Metric_Calculation_Method_Exact
+    selectWhere: Metric_filter_Float
     of: EVM_WasOnBranch_NumFields
     level: Float = 0.5
   ): Float
   rank_correlation(
+    if: EVM_WasOnBranch_Filter
     selectWhere: Metric_filter_Float
     of: EVM_WasOnBranch_NumFields
     with: EVM_WasOnBranch_NumFields
-    if: EVM_WasOnBranch_Filter
   ): Float
   skew(
     selectWhere: Metric_filter_Float
@@ -136,16 +136,16 @@ type EVM_WasOnBranch_Cube {
     if: EVM_WasOnBranch_Filter
   ): String
   theils(
-    selectWhere: Metric_filter_Float
-    of: EVM_WasOnBranch_NumFields
     with: EVM_WasOnBranch_NumFields
+    selectWhere: Metric_filter_Float
     if: EVM_WasOnBranch_Filter
+    of: EVM_WasOnBranch_NumFields
   ): Float
   uniq(
-    method: OLAP_Metric_Calculation_Method_Exact
-    selectWhere: Metric_filter_String
     of: [EVM_WasOnBranch_EnumFields]
     if: EVM_WasOnBranch_Filter
+    method: OLAP_Metric_Calculation_Method_Exact
+    selectWhere: Metric_filter_String
   ): String
 }
 ```
@@ -183,7 +183,11 @@ type EVM_WasOnBranch_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>average</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Average of the values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.average.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.average.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.average.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Average of the values
 > 
 
@@ -191,14 +195,14 @@ type EVM_WasOnBranch_Cube {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.average.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>contingency</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Contingency coefficient between two arguments
 > ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.contingency.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Contingency coefficient between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.contingency.<b>with</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
@@ -209,26 +213,22 @@ type EVM_WasOnBranch_Cube {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.contingency.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Contingency coefficient between two arguments
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Pearson correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Pearson correlation coefficient between two arguments
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.correlation.<b>with</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Pearson correlation coefficient between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Pearson correlation coefficient between two arguments
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -237,25 +237,17 @@ type EVM_WasOnBranch_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_WasOnBranch_EnumFields]`](/docs/graphql-reference/enums/evm-was-on-branch-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
-> Count distinct values of the field
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.count.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_WasOnBranch_EnumFields]`](/docs/graphql-reference/enums/evm-was-on-branch-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> Count distinct values of the field
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>covariance</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Covariance between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.covariance.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.covariance.<b>with</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
-> Second argument for Covariance between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.covariance.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.covariance.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -263,14 +255,22 @@ type EVM_WasOnBranch_Cube {
 > First argument for Covariance between two arguments
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>cramers</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Cramér's phi coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.covariance.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.cramers.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.covariance.<b>with</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
+> Second argument for Covariance between two arguments
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>cramers</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+> Cramér's phi coefficient between two arguments
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.cramers.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Cramér's phi coefficient between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.cramers.<b>with</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
@@ -301,7 +301,11 @@ type EVM_WasOnBranch_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>dispersion</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Dispersion for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.dispersion.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -309,22 +313,18 @@ type EVM_WasOnBranch_Cube {
 > Argument for Dispersion for a set of values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.dispersion.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>entropy</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Entropy for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.entropy.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.entropy.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.entropy.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Entropy for a set of values
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.entropy.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.entropy.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>kurtosis</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -357,16 +357,16 @@ type EVM_WasOnBranch_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>quantile</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Approximate quantile of a numeric data sequence
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.quantile.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.quantile.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.quantile.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
 > Method used to calculate metric values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
@@ -379,7 +379,11 @@ type EVM_WasOnBranch_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Rank correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -389,10 +393,6 @@ type EVM_WasOnBranch_Cube {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.rank_correlation.<b>with</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Rank correlation coefficient between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -439,38 +439,38 @@ type EVM_WasOnBranch_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>theils</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.theils.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.theils.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.theils.<b>with</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.theils.<b>with</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.theils.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.theils.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.theils.<b>of</b></code>](#)<Bullet />[`EVM_WasOnBranch_NumFields`](/docs/graphql-reference/enums/evm-was-on-branch-num-fields) <Badge class="secondary" text="enum"/>
+> First argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Count unique records
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
-> Method used to calculate metric values
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_WasOnBranch_EnumFields]`](/docs/graphql-reference/enums/evm-was-on-branch-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_WasOnBranch_EnumFields]`](/docs/graphql-reference/enums/evm-was-on-branch-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
 > Uniq values of the field
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_WasOnBranch_Filter`](/docs/graphql-reference/inputs/evm-was-on-branch-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
+> Method used to calculate metric values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_WasOnBranch_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 

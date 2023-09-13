@@ -39,13 +39,13 @@ Array of Trade_Ids includes or excludes provided value
 
 ```graphql
 input EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids {
-  startsWith: [OLAP_BigInteger]
-  endsWith: [OLAP_BigInteger]
-  notStartsWith: [OLAP_BigInteger]
   notEndsWith: [OLAP_BigInteger]
   length: OLAP_Integer
   includes: [OLAP_BigInteger]
   excludes: [OLAP_BigInteger]
+  startsWith: [OLAP_BigInteger]
+  endsWith: [OLAP_BigInteger]
+  notStartsWith: [OLAP_BigInteger]
 }
 ```
 
@@ -53,18 +53,6 @@ input EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_BigInteger]`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Starts with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_BigInteger]`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Ends with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids.<b>notStartsWith</b></code>](#)<Bullet />[`[OLAP_BigInteger]`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Does not start with this element
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids.<b>notEndsWith</b></code>](#)<Bullet />[`[OLAP_BigInteger]`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Does not End with this element
@@ -80,6 +68,18 @@ input EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids.<b>excludes</b></code>](#)<Bullet />[`[OLAP_BigInteger]`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Excludes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_BigInteger]`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Starts with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_BigInteger]`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Ends with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_Ids_Input_Trade_Ids.<b>notStartsWith</b></code>](#)<Bullet />[`[OLAP_BigInteger]`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Does not start with this element
 > 
 
 

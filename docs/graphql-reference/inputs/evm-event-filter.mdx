@@ -39,17 +39,17 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 input EVM_Event_Filter {
-  Transaction: EVM_Event_Input_Transaction_InputType
-  Call: EVM_Event_Input_Call_InputType
-  Arguments: EVM_Event_Input_Arguments_Input_Arguments
   TransactionStatus: EVM_Event_Input_TransactionStatus_InputType
-  Log: EVM_Event_Input_Log_InputType
-  Topics: EVM_Event_Input_Topics_Input_Topics
-  LogHeader: EVM_Event_Input_LogHeader_InputType
-  ChainId: OLAP_BigInteger
-  Fee: EVM_Event_Input_Fee_InputType
-  Block: EVM_Event_Input_Block_InputType
   Receipt: EVM_Event_Input_Receipt_InputType
+  ChainId: OLAP_BigInteger
+  Call: EVM_Event_Input_Call_InputType
+  Fee: EVM_Event_Input_Fee_InputType
+  LogHeader: EVM_Event_Input_LogHeader_InputType
+  Topics: EVM_Event_Input_Topics_Input_Topics
+  Block: EVM_Event_Input_Block_InputType
+  Transaction: EVM_Event_Input_Transaction_InputType
+  Arguments: EVM_Event_Input_Arguments_Input_Arguments
+  Log: EVM_Event_Input_Log_InputType
 }
 ```
 
@@ -58,48 +58,48 @@ input EVM_Event_Filter {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Transaction</b></code>](#)<Bullet />[`EVM_Event_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-event-input-transaction-input-type) <Badge class="secondary" text="input"/>
-> Select by Transaction
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Call</b></code>](#)<Bullet />[`EVM_Event_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-event-input-call-input-type) <Badge class="secondary" text="input"/>
-> Select by Call
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Arguments</b></code>](#)<Bullet />[`EVM_Event_Input_Arguments_Input_Arguments`](/docs/graphql-reference/inputs/evm-event-input-arguments-input-arguments) <Badge class="secondary" text="input"/>
-> Array of Arguments includes or excludes provided value
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>TransactionStatus</b></code>](#)<Bullet />[`EVM_Event_Input_TransactionStatus_InputType`](/docs/graphql-reference/inputs/evm-event-input-transaction-status-input-type) <Badge class="secondary" text="input"/>
 > Select by TransactionStatus
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Log</b></code>](#)<Bullet />[`EVM_Event_Input_Log_InputType`](/docs/graphql-reference/inputs/evm-event-input-log-input-type) <Badge class="secondary" text="input"/>
-> Select by Log
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Topics</b></code>](#)<Bullet />[`EVM_Event_Input_Topics_Input_Topics`](/docs/graphql-reference/inputs/evm-event-input-topics-input-topics) <Badge class="secondary" text="input"/>
-> Array of Topics includes or excludes provided value
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>LogHeader</b></code>](#)<Bullet />[`EVM_Event_Input_LogHeader_InputType`](/docs/graphql-reference/inputs/evm-event-input-log-header-input-type) <Badge class="secondary" text="input"/>
-> Select by LogHeader
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Receipt</b></code>](#)<Bullet />[`EVM_Event_Input_Receipt_InputType`](/docs/graphql-reference/inputs/evm-event-input-receipt-input-type) <Badge class="secondary" text="input"/>
+> Select by Receipt
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>ChainId</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > Big Integer ( more than 32 bits precision), including negative numbers
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Call</b></code>](#)<Bullet />[`EVM_Event_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-event-input-call-input-type) <Badge class="secondary" text="input"/>
+> Select by Call
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Fee</b></code>](#)<Bullet />[`EVM_Event_Input_Fee_InputType`](/docs/graphql-reference/inputs/evm-event-input-fee-input-type) <Badge class="secondary" text="input"/>
 > Select by Fee
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>LogHeader</b></code>](#)<Bullet />[`EVM_Event_Input_LogHeader_InputType`](/docs/graphql-reference/inputs/evm-event-input-log-header-input-type) <Badge class="secondary" text="input"/>
+> Select by LogHeader
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Topics</b></code>](#)<Bullet />[`EVM_Event_Input_Topics_Input_Topics`](/docs/graphql-reference/inputs/evm-event-input-topics-input-topics) <Badge class="secondary" text="input"/>
+> Array of Topics includes or excludes provided value
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_Event_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-event-input-block-input-type) <Badge class="secondary" text="input"/>
 > Select by Block
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Receipt</b></code>](#)<Bullet />[`EVM_Event_Input_Receipt_InputType`](/docs/graphql-reference/inputs/evm-event-input-receipt-input-type) <Badge class="secondary" text="input"/>
-> Select by Receipt
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Transaction</b></code>](#)<Bullet />[`EVM_Event_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-event-input-transaction-input-type) <Badge class="secondary" text="input"/>
+> Select by Transaction
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Arguments</b></code>](#)<Bullet />[`EVM_Event_Input_Arguments_Input_Arguments`](/docs/graphql-reference/inputs/evm-event-input-arguments-input-arguments) <Badge class="secondary" text="input"/>
+> Array of Arguments includes or excludes provided value
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Filter.<b>Log</b></code>](#)<Bullet />[`EVM_Event_Input_Log_InputType`](/docs/graphql-reference/inputs/evm-event-input-log-input-type) <Badge class="secondary" text="input"/>
+> Select by Log
 > 
 
 

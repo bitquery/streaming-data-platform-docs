@@ -39,13 +39,13 @@ Array of Transaction_AccessList_StorageKeys includes or excludes provided value
 
 ```graphql
 input EVM_Transaction_Fields_Transaction_AccessList_Select_FieldSelector_Transaction_AccessList_StorageKeys {
+  notStartsWith: [OLAP_String]
+  notEndsWith: [OLAP_String]
   length: OLAP_Integer
   includes: [OLAP_String]
   excludes: [OLAP_String]
   startsWith: [OLAP_String]
   endsWith: [OLAP_String]
-  notStartsWith: [OLAP_String]
-  notEndsWith: [OLAP_String]
 }
 ```
 
@@ -53,6 +53,14 @@ input EVM_Transaction_Fields_Transaction_AccessList_Select_FieldSelector_Transac
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Transaction_AccessList_Select_FieldSelector_Transaction_AccessList_StorageKeys.<b>notStartsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Does not start with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Transaction_AccessList_Select_FieldSelector_Transaction_AccessList_StorageKeys.<b>notEndsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Does not End with this element
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Transaction_AccessList_Select_FieldSelector_Transaction_AccessList_StorageKeys.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > Length of the array
@@ -72,14 +80,6 @@ input EVM_Transaction_Fields_Transaction_AccessList_Select_FieldSelector_Transac
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Transaction_AccessList_Select_FieldSelector_Transaction_AccessList_StorageKeys.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Ends with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Transaction_AccessList_Select_FieldSelector_Transaction_AccessList_StorageKeys.<b>notStartsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Does not start with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Transaction_AccessList_Select_FieldSelector_Transaction_AccessList_StorageKeys.<b>notEndsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Does not End with this element
 > 
 
 

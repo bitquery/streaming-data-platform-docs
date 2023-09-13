@@ -39,13 +39,13 @@ Array of Returns_Path includes or excludes provided value
 
 ```graphql
 input EVM_Call_Fields_Returns_Select_FieldSelector_Returns_Path {
-  notStartsWith: [EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]
   notEndsWith: [EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]
   length: OLAP_Integer
   includes: [EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]
   excludes: [EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]
   startsWith: [EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]
   endsWith: [EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]
+  notStartsWith: [EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]
 }
 ```
 
@@ -53,10 +53,6 @@ input EVM_Call_Fields_Returns_Select_FieldSelector_Returns_Path {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Returns_Select_FieldSelector_Returns_Path.<b>notStartsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-returns-select-field-selector-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Does not start with this element
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Returns_Select_FieldSelector_Returns_Path.<b>notEndsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-returns-select-field-selector-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Does not End with this element
@@ -80,6 +76,10 @@ input EVM_Call_Fields_Returns_Select_FieldSelector_Returns_Path {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Returns_Select_FieldSelector_Returns_Path.<b>endsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-returns-select-field-selector-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Ends with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Returns_Select_FieldSelector_Returns_Path.<b>notStartsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_Returns_Select_FieldSelector_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-returns-select-field-selector-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Does not start with this element
 > 
 
 

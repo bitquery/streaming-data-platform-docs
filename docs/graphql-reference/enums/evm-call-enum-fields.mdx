@@ -39,87 +39,87 @@ Listed names of fields in a cube
 
 ```graphql
 enum EVM_Call_EnumFields {
-  Block_L1_Coinbase
-  Call_Create
-  Transaction_Type
-  StateChanges
-  Transaction_GasTipCap
-  Block_Difficulty
-  Block_Number
-  Fee_EffectiveGasPrice
-  Block_Time
-  Transaction_From
-  Call_Opcode_Code
-  Call_Output
-  Call_CallerIndex
-  Receipt_CumulativeGasUsed
-  TransactionStatus_EndError
-  Fee_GasRefund
-  Call_ExitIndex
-  Call_Signature_Parsed
-  TransactionStatus_Success
-  Call_Delegated
-  Call_CallPath
-  Fee_PriorityFeePerGas
-  Block_L1_Number
-  Transaction_GasFeeCap
-  Block_L1_GasLimit
-  Call_Error
-  Block_L1_GasUsed
-  Block_Coinbase
-  Call_Signature_Name
-  Receipt_ContractAddress
-  Call_Success
-  Call_Signature_Abi
-  Call_Input
-  Block_L1_Time
-  Block_Hash
-  Transaction_Index
-  Block_L1_BaseFee
-  Call_Depth
-  Fee_Savings
   Receipt_Status
-  ChainId
-  Returns
-  Block_ParentHash
-  Transaction_Cost
-  Call_SelfDestruct
-  Transaction_Hash
-  Block_L1_Difficulty
-  Call_Signature_Signature
-  Transaction_Gas
-  Transaction_To
-  Call_Index
-  Fee_Burnt
-  Block_L1_Nonce
+  Block_BaseFee
   Transaction_Value
-  Call_GasUsed
-  Call_Opcode_Name
-  Block_L1_Hash
-  Call_From
-  Call_LogCount
+  Block_Number
+  Block_Coinbase
+  Call_Error
+  Call_Delegated
   Call_Value
   Block_Date
-  Call_Gas
-  Call_Signature_SignatureHash
-  Block_Nonce
+  Call_From
+  TransactionStatus_FaultError
+  Returns
+  Call_Signature_Name
+  Transaction_Type
+  Block_L1_Coinbase
+  Call_Index
+  Call_ExitIndex
+  Fee_PriorityFeePerGas
+  StateChanges
+  Block_ParentHash
+  Transaction_To
+  Call_Output
+  TransactionStatus_EndError
+  Call_SelfDestruct
+  Fee_Savings
+  TransactionStatus_Success
+  Call_Opcode_Name
+  Call_InternalCalls
   Block_L1_ParentHash
+  Fee_Burnt
+  Call_Create
+  Transaction_GasFeeCap
+  Transaction_Gas
+  Transaction_From
+  Receipt_CumulativeGasUsed
+  Block_Hash
+  Call_Signature_Signature
+  Block_Nonce
+  Call_Signature_Parsed
+  Call_Signature_Abi
+  Call_EnterIndex
+  Receipt_ContractAddress
+  Transaction_Cost
+  Call_Signature_SignatureType
+  Call_Signature_SignatureHash
+  Call_Reverted
+  Block_L1_Time
+  Block_Time
+  Fee_MinerReward
+  Transaction_Protected
+  Call_CallerIndex
+  Block_L1_BaseFee
+  Block_L1_Number
+  Call_Input
+  Transaction_Nonce
+  Block_GasLimit
+  Fee_EffectiveGasPrice
+  Call_Depth
+  Call_Gas
+  Call_CallPath
+  Transaction_Hash
+  Transaction_GasTipCap
+  Call_Opcode_Code
+  Block_L1_Nonce
+  Block_L1_GasUsed
+  Block_Difficulty
+  ChainId
+  Call_To
+  Fee_GasRefund
+  Block_L1_GasLimit
   Fee_SenderFee
   Block_GasUsed
-  Call_InternalCalls
-  Transaction_Protected
-  Transaction_GasPrice
-  Transaction_Nonce
-  Call_To
-  Block_GasLimit
-  Fee_MinerReward
-  Call_Signature_SignatureType
+  Block_L1_Difficulty
+  Call_LogCount
+  Call_GasUsed
+  Call_Success
   Receipt_Type
-  Block_BaseFee
-  Call_EnterIndex
-  TransactionStatus_FaultError
+  Transaction_Index
+  Block_L1_Hash
   Receipt_GasUsed
-  Call_Reverted
+  Transaction_GasPrice
   Arguments
 }
 ```
@@ -129,215 +129,11 @@ enum EVM_Call_EnumFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Coinbase</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Create</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Type</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>StateChanges</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_GasTipCap</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_Difficulty</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_Number</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_EffectiveGasPrice</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_Time</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_From</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Opcode_Code</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Output</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_CallerIndex</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Receipt_CumulativeGasUsed</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>TransactionStatus_EndError</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_GasRefund</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_ExitIndex</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_Parsed</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>TransactionStatus_Success</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Delegated</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_CallPath</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_PriorityFeePerGas</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Number</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_GasFeeCap</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_GasLimit</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Error</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_GasUsed</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_Coinbase</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_Name</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Receipt_ContractAddress</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Success</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_Abi</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Input</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Time</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_Hash</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Index</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_BaseFee</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Depth</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_Savings</b></code>](#) 
-> 
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Receipt_Status</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>ChainId</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Returns</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_ParentHash</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Cost</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_SelfDestruct</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Hash</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Difficulty</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_Signature</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Gas</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_To</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Index</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_Burnt</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Nonce</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_BaseFee</b></code>](#) 
 > 
 > 
 
@@ -345,23 +141,19 @@ enum EVM_Call_EnumFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_GasUsed</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_Number</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Opcode_Name</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_Coinbase</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Hash</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Error</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_From</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_LogCount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Delegated</b></code>](#) 
 > 
 > 
 
@@ -373,11 +165,115 @@ enum EVM_Call_EnumFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Gas</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_From</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_SignatureHash</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>TransactionStatus_FaultError</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Returns</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_Name</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Type</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Coinbase</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Index</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_ExitIndex</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_PriorityFeePerGas</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>StateChanges</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_ParentHash</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_To</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Output</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>TransactionStatus_EndError</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_SelfDestruct</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_Savings</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>TransactionStatus_Success</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Opcode_Name</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_InternalCalls</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_ParentHash</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_Burnt</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Create</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_GasFeeCap</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Gas</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_From</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Receipt_CumulativeGasUsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_Hash</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_Signature</b></code>](#) 
 > 
 > 
 
@@ -385,7 +281,131 @@ enum EVM_Call_EnumFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_ParentHash</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_Parsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_Abi</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_EnterIndex</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Receipt_ContractAddress</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Cost</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_SignatureType</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_SignatureHash</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Reverted</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Time</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_Time</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_MinerReward</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Protected</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_CallerIndex</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_BaseFee</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Number</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Input</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Nonce</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_GasLimit</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_EffectiveGasPrice</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Depth</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Gas</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_CallPath</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Hash</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_GasTipCap</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Opcode_Code</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Nonce</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_GasUsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_Difficulty</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>ChainId</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_To</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_GasRefund</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_GasLimit</b></code>](#) 
 > 
 > 
 
@@ -397,35 +417,19 @@ enum EVM_Call_EnumFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_InternalCalls</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Difficulty</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Protected</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_LogCount</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_GasPrice</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_GasUsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Nonce</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_To</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_GasLimit</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Fee_MinerReward</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Signature_SignatureType</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Success</b></code>](#) 
 > 
 > 
 
@@ -433,15 +437,11 @@ enum EVM_Call_EnumFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_BaseFee</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_Index</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_EnterIndex</b></code>](#) 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>TransactionStatus_FaultError</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Block_L1_Hash</b></code>](#) 
 > 
 > 
 
@@ -449,7 +449,7 @@ enum EVM_Call_EnumFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Call_Reverted</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_EnumFields.<b>Transaction_GasPrice</b></code>](#) 
 > 
 > 
 

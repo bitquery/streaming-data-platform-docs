@@ -52,10 +52,10 @@ type EVM_Transfer_Fields_Transaction {
     maximum: EVM_Transfer_CompareFields
   ): String
   Gas(
-    minimum: EVM_Transfer_CompareFields
-    selectWhere: OLAP_BigInteger
     if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
+    minimum: EVM_Transfer_CompareFields
+    selectWhere: OLAP_BigInteger
   ): String
   GasFeeCap(
     if: EVM_Transfer_Filter
@@ -64,10 +64,10 @@ type EVM_Transfer_Fields_Transaction {
     selectWhere: EVM_Amount_With_Decimals
   ): String
   GasPrice(
-    selectWhere: EVM_Amount_With_Decimals
     if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
+    selectWhere: EVM_Amount_With_Decimals
   ): String
   GasTipCap(
     if: EVM_Transfer_Filter
@@ -94,10 +94,10 @@ type EVM_Transfer_Fields_Transaction {
     selectWhere: OLAP_BigInteger
   ): String
   Protected(
-    if: EVM_Transfer_Filter
-    maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
     selectWhere: Boolean
+    if: EVM_Transfer_Filter
+    maximum: EVM_Transfer_CompareFields
   ): Boolean
   To(
     if: EVM_Transfer_Filter
@@ -106,16 +106,16 @@ type EVM_Transfer_Fields_Transaction {
     selectWhere: OLAP_String
   ): String
   Type(
+    minimum: EVM_Transfer_CompareFields
     selectWhere: OLAP_Integer
     if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
-    minimum: EVM_Transfer_CompareFields
   ): Int
   Value(
-    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
     selectWhere: EVM_Amount_With_Decimals
+    if: EVM_Transfer_Filter
   ): String
 }
 ```
@@ -163,20 +163,20 @@ type EVM_Transfer_Fields_Transaction {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.<b>Gas</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Gas value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Gas.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Gas.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Gas.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Gas.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Gas.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Gas.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Gas.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.<b>GasFeeCap</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -199,11 +199,7 @@ type EVM_Transfer_Fields_Transaction {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.<b>GasPrice</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > GasPrice value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.GasPrice.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.GasPrice.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.GasPrice.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -213,6 +209,10 @@ type EVM_Transfer_Fields_Transaction {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.GasPrice.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.GasPrice.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.<b>GasTipCap</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -289,20 +289,20 @@ type EVM_Transfer_Fields_Transaction {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.<b>Protected</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Protected value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Protected.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Protected.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Protected.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Protected.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Protected.<b>selectWhere</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Protected.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Protected.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.<b>To</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -325,7 +325,11 @@ type EVM_Transfer_Fields_Transaction {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.<b>Type</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Type value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Type.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Type.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Type.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -337,17 +341,9 @@ type EVM_Transfer_Fields_Transaction {
 > Return value when the argument is maximum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Type.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.<b>Value</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Value value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Value.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Value.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Value.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -357,6 +353,10 @@ type EVM_Transfer_Fields_Transaction {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Value.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transaction.Value.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 

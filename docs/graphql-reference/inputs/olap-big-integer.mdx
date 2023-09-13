@@ -39,14 +39,14 @@ Big Integer ( more than 32 bits precision), including negative numbers
 
 ```graphql
 input OLAP_BigInteger {
+  lt: String
+  eq: String
+  ne: String
   in: [String]
   notIn: [String]
   ge: String
   le: String
   gt: String
-  lt: String
-  eq: String
-  ne: String
 }
 ```
 
@@ -54,6 +54,18 @@ input OLAP_BigInteger {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>lt</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Less or equal the value
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>eq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Equal to value
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>ne</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Not equal to value
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>in</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
 > Number in the provided list
@@ -73,18 +85,6 @@ input OLAP_BigInteger {
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>gt</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Greater or equal the value
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>lt</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Less or equal the value
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>eq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Equal to value
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>ne</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Not equal to value
 > 
 
 

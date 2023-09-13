@@ -46,10 +46,10 @@ type EVM_Call_Fields_Receipt {
     selectWhere: OLAP_String
   ): String
   CumulativeGasUsed(
-    if: EVM_Call_Filter
-    maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
     selectWhere: OLAP_BigInteger
+    if: EVM_Call_Filter
+    maximum: EVM_Call_CompareFields
   ): String
   GasUsed(
     minimum: EVM_Call_CompareFields
@@ -64,10 +64,10 @@ type EVM_Call_Fields_Receipt {
     selectWhere: OLAP_BigInteger
   ): String
   Type(
+    if: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
     selectWhere: OLAP_Integer
-    if: EVM_Call_Filter
   ): Int
 }
 ```
@@ -97,20 +97,20 @@ type EVM_Call_Fields_Receipt {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.<b>CumulativeGasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > CumulativeGasUsed value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.<b>GasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
@@ -151,7 +151,11 @@ type EVM_Call_Fields_Receipt {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.<b>Type</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Type value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.Type.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.Type.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.Type.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -161,10 +165,6 @@ type EVM_Call_Fields_Receipt {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.Type.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.Type.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 
