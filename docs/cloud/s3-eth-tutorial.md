@@ -2,6 +2,8 @@
 sidebar_position: 3
 ---
 
+# Getting Ethereum Data from AWS Marketplace- Tutorial
+
 We are now offering raw blockchain data on Amazon S3, taking a step towards providing a faster way to build dApps.
 
 Data on S3 uses the `Protobuf` scheme that allows for more efficient data transfer and storage. To make things easier, I'll walk you through how to access the storage and parse the data in Python.
