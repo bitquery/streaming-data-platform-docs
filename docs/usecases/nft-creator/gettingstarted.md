@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Begin Here
+# Build Your Own NFT Portfolio Tracker with Bitquery NFT API - Begin Here
 
 ## What's the App?
 
