@@ -3,9 +3,9 @@ sidebar_position: 4
 ---
 # Accessing Streaming Data via WebSocket
 
-Bitquery also provides data using Websockets, enabling bidirectional data exchange between your application and a server. Our WebSocket endpoint leverages the GraphQL WebSocket protocol, providing a means to query data via GraphQL requests while ensuring real-time updates.
+In the previous section, we learned how to get live data in Bitquery IDE by creating subscription queries. Now, let's take a closer look at how these live updates actually work and what happens behind the scenes to provide you with this real-time data.
 
-To query our data using WebSocket, you can use the following WebSocket endpoint:
+Bitquery makes real-time data available using WebSockets. We use a specific WebSocket protocol called the "GraphQL WebSocket" to make sure you receive real-time updates. To get data in real-time for your application, you can connect to the following WebSocket endpoint:
 
 ```
 wss://streaming.bitquery.io/graphql
