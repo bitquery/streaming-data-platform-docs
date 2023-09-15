@@ -74,3 +74,28 @@ Each balance update contains the following information:
 - `BalanceUpdate`: The amount of cryptocurrency that was added or subtracted from the balance.
 
 The `orderBy` clause is used to sort the list of balance updates in descending order by the `Block_Time` field.
+
+## Holders of a Token on Arbitrum
+
+This query returns the top 10 holders of a token on Arbitrum, sorted by descending balance. The token is specified by the `Currency` field, which is set to the smart contract address of the token (ARB, 0x912ce59144191c1204e64559fe8253a0e49e6548).
+
+The balance is calculated by summing up all balance updates for each address.
+You can find the query [here](https://ide.bitquery.io/ARB-Streaming-Get-Top-Holders-of-Arbitrum-Token)
+
+```
+{
+  EVM(dataset: combined, network: arbitrum) {
+    BalanceUpdates(
+      orderBy: {descendingByField: "Balance"}
+      limit: {count: 10}
+      where: {Currency: {SmartContract: {is: "0x912ce59144191c1204e64559fe8253a0e49e6548"}}}
+    ) {
+      Balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      BalanceUpdate {
+        Address
+      }
+    }
+  }
+}
+
+```
