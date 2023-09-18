@@ -131,6 +131,11 @@ const config = {
             label: "Forum",
             position: "left",
           },
+          {
+            to: "https://bitquery.io/forms/api",
+            label: "Book Demo",
+            position: "left",
+          },
         ],
       },
       footer: {
