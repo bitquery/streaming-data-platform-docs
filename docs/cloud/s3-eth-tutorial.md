@@ -6,7 +6,7 @@ sidebar_position: 3
 
 We are now offering raw blockchain data on Amazon S3, taking a step towards providing a faster way to build dApps.
 
-Data on S3 uses the `Protobuf` scheme that allows for more efficient data transfer and storage. To make things easier, I'll walk you through how to access the storage and parse the data in Python.
+Data on S3 uses the `Protobuf` schema that allows for more efficient data transfer and storage. To make things easier, I'll walk you through how to access the storage and parse the data in Python.
 
 You can access the product on the AWS Marketplace here: https://aws.amazon.com/marketplace/pp/prodview-oi4sbdu6zro3i
 
