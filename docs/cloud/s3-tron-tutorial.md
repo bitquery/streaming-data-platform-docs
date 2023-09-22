@@ -57,7 +57,7 @@ block_object_key = 'tron.blocks.s3/000054886000/000054886487_0000000003458057278
 **4. Define the local path where you want to save the downloaded file.**
 
 ```
-blocks_local_path = 'C:/Users/divyn/OneDrive/Documents/GitHub/Tron-S3-Sample-Code/s3downloadblocks.tar.lz4'
+blocks_local_path = 'C:/Your Path/s3downloadblocks.tar.lz4'
 
 ```
 
@@ -94,4 +94,58 @@ decompressed_file = io.BytesIO(decompressed_data)
 ```
 decompressed_file = tarfile.TarFile(fileobj=decompressed_file)
 decompressed_file.extractall()
+```
+
+## Parsing data from the file
+
+In this section we will decode a base64-encoded hash from a BlockHeader proto message:
+
+**Prerequisites**:
+
+- block_message_pb2 proto message file (available in the repo)
+
+
+1.  **Import the necessary libraries.**
+
+```
+import block_message_pb2
+import base64
+import binascii
+
+```
+
+2.  **Read the proto message from the file.**
+
+```
+with open("block_proto_message", "rb") as f:
+    message_data = f.read()
+
+```
+
+3.  **Create a BlockHeader object from the proto message data.**
+
+```
+block_message = block_message_pb2.BlockHeader()
+block_message.ParseFromString(message_data)
+
+```
+
+4.  **Decode the base64-encoded hash.**
+
+```
+decoded_hash = base64.b64decode(block_message.Hash)
+
+```
+
+5.  **Convert the decoded hash to hexadecimal format.**
+
+```
+hex_hash = binascii.hexlify(decoded_hash)
+
+```
+
+6.  **Print the hexadecimal hash to the console.**
+
+```
+print(hex_hash)
 ```
