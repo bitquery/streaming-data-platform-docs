@@ -8,12 +8,13 @@ We are now offering raw blockchain data on Amazon S3, taking a step towards prov
 
 Data on S3 uses the `Protobuf` schema that allows for more efficient data transfer and storage. To make things easier, I'll walk you through how to access the storage and parse the data in Python.
 
-For this tutorial, we'll be using readily available sample datasets. So, let's get started!
+For this tutorial, we'll be using readily available sample datasets. The complete code repo is available [here](https://github.com/bitquery/AWS-Tron-Sample). So, let's get started!
 
 There are two parts to this :
 
 - We first download the file, decompress and untar it
 - Next we use the proto file to extract specific data
+
 
 ## Downloading from AWS and extracting the file
 
