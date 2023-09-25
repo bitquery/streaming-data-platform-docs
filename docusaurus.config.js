@@ -97,6 +97,10 @@ const config = {
           ignorePatterns: ["/docs/graphql-reference/**"],
           filename: "sitemap.xml",
         },
+        gtag: {
+          trackingID: 'G-HM9CPME5Z9',
+          anonymizeIP: true,
+        },
       }),
     ],
   ],
