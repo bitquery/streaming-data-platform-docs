@@ -101,6 +101,9 @@ const config = {
           trackingID: 'G-ZWB80TDH9J',
           anonymizeIP: true,
         },
+        googleTagManager: {
+          containerId: 'GTM-5GC69JH6',
+        }
       }),
     ],
   ],
