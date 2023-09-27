@@ -41,6 +41,9 @@ query ($network: evm_network, $token: String!, $token2: String!) {
     }
   }
 }
+{
+  "network":"eth","token":"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", "token2":"0x20561172f791f915323241e885b4f7d5187c36e1"
+}
 
 ```
 
