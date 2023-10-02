@@ -6,7 +6,7 @@ sidebar_position: 5
 
 ## Historical Token Trades & Price API
 
-DEXTrades API can give you historical trades. Let's see an example where we get trades of [BLUR Token](https://explorer.bitquery.io/ethereum/token/0x5283d291dbcf85356a21ba090e6db59121208b44) in the past. As you can see, we are using Block -> Time filter, which includes the time. If you want to filter by date, then use Block -> Date. You can also use Block -> Number if you want to filter based on block height. We are setting the seller and buyer to 1inch router to get both buys and sells of the BLUR token. 
+DEXTrades API can give you historical trades. Let's see an example where we get trades of [BLUR Token](https://explorer.bitquery.io/ethereum/token/0x5283d291dbcf85356a21ba090e6db59121208b44) in the past. As you can see, we are using Block -> Time filter, which includes the time. If you want to filter by date, then use Block -> Date. You can also use Block -> Number if you want to filter based on block height. We are setting the `seller` and `buyer` to 1inch router [0x1111111254eeb25477b68fb85ed929f73a960582] to get both buys and sells of the BLUR token. 
 
 
 ```graphql
