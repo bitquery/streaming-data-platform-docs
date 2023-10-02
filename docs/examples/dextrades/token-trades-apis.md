@@ -6,7 +6,7 @@ sidebar_position: 5
 
 ## Historical Token Trades & Price API
 
-DEXTrades API can give you historical trades. Let's see an example where we get trades of [BLUR Token](https://explorer.bitquery.io/ethereum/token/0x5283d291dbcf85356a21ba090e6db59121208b44) in the past. As you can see, we are using Block -> Time filter, which includes the time. If you want to filter by date, then use Block -> Date. You can also use Block -> Number if you want to filter based on block height.
+DEXTrades API can give you historical trades. Let's see an example where we get trades of [BLUR Token](https://explorer.bitquery.io/ethereum/token/0x5283d291dbcf85356a21ba090e6db59121208b44) in the past. As you can see, we are using Block -> Time filter, which includes the time. If you want to filter by date, then use Block -> Date. You can also use Block -> Number if you want to filter based on block height. We are setting the seller and buyer to 1inch router to get both buys and sells of the BLUR token. 
 
 
 ```graphql
@@ -15,7 +15,7 @@ DEXTrades API can give you historical trades. Let's see an example where we get 
     buyside: DEXTrades(
       limit: {count: 10}
       orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}}}, Block: {Time: {since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z"}}}
+      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}, Seller: {is: "0x1111111254eeb25477b68fb85ed929f73a960582"}}}, Block: {Time: {since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z"}}}
     ) {
       Block {
         Number
@@ -54,7 +54,7 @@ DEXTrades API can give you historical trades. Let's see an example where we get 
     sellside: DEXTrades(
       limit: {count: 10}
       orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}}}, Block: {Time: {since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z"}}}
+      where: {Trade: {Sell: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}, Buyer: {is: "0x1111111254eeb25477b68fb85ed929f73a960582"}}}, Block: {Time: {since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z"}}}
     ) {
       Block {
         Number
@@ -93,9 +93,10 @@ DEXTrades API can give you historical trades. Let's see an example where we get 
   }
 }
 
+
 ```
 
-Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/token-trades-bw-a-time_1).
+Open the above query on GraphQL IDE using this [link](https://ide.bitquery.io/token-trades-both-buy-sell-1-inch).
 
 
 
