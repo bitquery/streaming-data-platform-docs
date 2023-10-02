@@ -1,8 +1,26 @@
 ---
-sidebar_position: 10
+title: DEX Trades API
 ---
 
-# DEX Trades
+<head>
+<meta name="title" content="DEX Trades API"/>
+<meta name="description" content="Get address balance and history on the DEX Trades blockchain. Also, get address balance and history for tokens or NFTs on the DEX Trades blockchain."/>
+<meta name="keywords" content="DEX Trades api, DEX Trades python api, DEX Trades nft api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,matic network api"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="DEX Trades, address balance and history API" />
+<meta property="og:description" content="Get DEX trades data for EVM chains. Also, get address balance and history for tokens or NFTs on the EVM chain." />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="DEX Trades API" />
+<meta property="twitter:description" content="Get DEX trades data for EVM chains. Also, get address balance and history for tokens or NFTs on the EVM chain." />
+</head>
+
 
 DEXTrades api gives trading-related data from different DEXs such as Uniswap, Pancakeswap, 0x, etc.
 
