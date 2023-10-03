@@ -76,3 +76,33 @@ query {
 }
 
 ```
+
+## Get Code of the Token Contract
+
+This query will return the most recent transaction that created the token contract. The `Output` field of the Call object in the transaction contains the encoded bytecode of the contract. Replace `0xc923D39fA2d97fb4B660Fc66DAdB1421605975E0` with the token contract address that you want to get the code for.
+You can find the query [here](https://ide.bitquery.io/ByteCode-of-A-Token)
+
+```
+{
+  eth_creates: EVM(dataset: combined, network: eth) {
+    creates: Calls(
+      where: {Call: {Create: true, To: {is: "0xc923D39fA2d97fb4B660Fc66DAdB1421605975E0"}}}
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Call {
+        Output
+      }
+    }
+  }
+}
+
+```
