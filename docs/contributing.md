@@ -52,7 +52,7 @@ If you need help contributing to the Bitquery documentation, please feel free to
 
 ### Additional tips
 
-• Be sure to test your changes before submitting a pull request. You can use the [Bitquery GraphQL IDE](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql) to test your queries.
+• Be sure to test your changes before submitting a pull request. Please use the [Bitquery GraphQL IDE](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql) to test your queries.
 
 • Be sure to write descriptive commit messages.
 
