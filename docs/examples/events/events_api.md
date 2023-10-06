@@ -1,3 +1,4 @@
+
 ---
 sidebar_position: 2
 ---
@@ -92,3 +93,48 @@ query MyQuery {
  - `Date`: Returns the date
  - `count_unique_calls`: Returns the number of unique event calls
 
+
+### Track all AAVE V3 Events
+The query below shows latest 10 events emitted by the AAVE V3 contract. The `Log` field in the results will contain information about the event, including its signature, smart contract address, and transaction hash. The `Arguments` field will contain the values of any arguments that were passed to the event.
+You can find the query [here](https://ide.bitquery.io/All-aave-v3-events)
+```
+{
+  EVM(dataset: combined, network: eth) {
+    Events(
+      orderBy: {descending: Block_Number}
+      limit: {count: 10}
+      where: {Transaction: {To: {is: "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2"}}}
+    ) {
+      Log {
+        Signature {
+          Name
+          Parsed
+          Signature
+        }
+        SmartContract
+      }
+      Transaction {
+        Hash
+        From
+      }
+      Block {
+        Date
+        Number
+        Hash
+        Time
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+        }
+      }
+    }
+  }
+}
+```
