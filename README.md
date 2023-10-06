@@ -51,3 +51,7 @@ yarn serve
 npx docusaurus-prince-pdf -u http://localhost:3000/docs/intro
 
 ```
+
+### Contributing to Docs
+
+Read contribution guidlines [here]() 
