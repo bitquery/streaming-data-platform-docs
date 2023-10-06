@@ -39,13 +39,13 @@ Array of Transaction_AccessList includes or excludes provided value
 
 ```graphql
 input EVM_Transaction_Input_Transaction_AccessList_Input_Transaction_AccessList {
+  includes: [EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]
+  excludes: [EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]
   startsWith: [EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]
   endsWith: [EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]
   notStartsWith: [EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]
   notEndsWith: [EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]
   length: OLAP_Integer
-  includes: [EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]
-  excludes: [EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]
 }
 ```
 
@@ -53,6 +53,14 @@ input EVM_Transaction_Input_Transaction_AccessList_Input_Transaction_AccessList 
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_Transaction_AccessList.<b>includes</b></code>](#)<Bullet />[`[EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-transaction-input-transaction-access-list-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Includes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_Transaction_AccessList.<b>excludes</b></code>](#)<Bullet />[`[EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-transaction-input-transaction-access-list-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Excludes this element
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_Transaction_AccessList.<b>startsWith</b></code>](#)<Bullet />[`[EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-transaction-input-transaction-access-list-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Starts with this element
@@ -72,14 +80,6 @@ input EVM_Transaction_Input_Transaction_AccessList_Input_Transaction_AccessList 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_Transaction_AccessList.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > Length of the array
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_Transaction_AccessList.<b>includes</b></code>](#)<Bullet />[`[EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-transaction-input-transaction-access-list-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Includes this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_Transaction_AccessList.<b>excludes</b></code>](#)<Bullet />[`[EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-transaction-input-transaction-access-list-input-field-selector) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
-> Excludes this element
 > 
 
 

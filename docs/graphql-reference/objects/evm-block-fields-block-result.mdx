@@ -40,16 +40,16 @@ Result fields
 ```graphql
 type EVM_Block_Fields_Block_Result {
   Errors(
-    minimum: EVM_Block_CompareFields
     selectWhere: OLAP_String
     if: EVM_Block_Filter
     maximum: EVM_Block_CompareFields
+    minimum: EVM_Block_CompareFields
   ): String
   Gas(
-    if: EVM_Block_Filter
     maximum: EVM_Block_CompareFields
     minimum: EVM_Block_CompareFields
     selectWhere: OLAP_BigInteger
+    if: EVM_Block_Filter
   ): String
 }
 ```
@@ -61,11 +61,7 @@ type EVM_Block_Fields_Block_Result {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.<b>Errors</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Errors value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.Errors.<b>minimum</b></code>](#)<Bullet />[`EVM_Block_CompareFields`](/docs/graphql-reference/enums/evm-block-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.Errors.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.Errors.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -77,13 +73,13 @@ type EVM_Block_Fields_Block_Result {
 > Return value when the argument is maximum
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.<b>Gas</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Gas value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.Gas.<b>if</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.Errors.<b>minimum</b></code>](#)<Bullet />[`EVM_Block_CompareFields`](/docs/graphql-reference/enums/evm-block-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.Gas.<b>maximum</b></code>](#)<Bullet />[`EVM_Block_CompareFields`](/docs/graphql-reference/enums/evm-block-compare-fields) <Badge class="secondary" text="enum"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.<b>Gas</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Gas value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.Gas.<b>maximum</b></code>](#)<Bullet />[`EVM_Block_CompareFields`](/docs/graphql-reference/enums/evm-block-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
@@ -93,6 +89,10 @@ type EVM_Block_Fields_Block_Result {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.Gas.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Fields_Block_Result.Gas.<b>if</b></code>](#)<Bullet />[`EVM_Block_Filter`](/docs/graphql-reference/inputs/evm-block-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 

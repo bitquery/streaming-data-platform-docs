@@ -39,9 +39,9 @@ Type of algorithm to filter block updates
 
 ```graphql
 enum blocks_query_arg_enum {
-  trunk
   branches
   tree
+  trunk
 }
 ```
 
@@ -50,16 +50,16 @@ enum blocks_query_arg_enum {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>blocks_query_arg_enum.<b>trunk</b></code>](#) 
-> Blocks from the current head and down the reorg tree
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>blocks_query_arg_enum.<b>branches</b></code>](#) 
 > WasOnBranch blocks on the branches of the reorg tree
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>blocks_query_arg_enum.<b>tree</b></code>](#) 
 > All blocks ( trunk and uncles ) of the reorg tree
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>blocks_query_arg_enum.<b>trunk</b></code>](#) 
+> Blocks from the current head and down the reorg tree
 > 
 
 

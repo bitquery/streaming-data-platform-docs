@@ -52,16 +52,16 @@ type EVM_Event_Fields_Log {
     selectWhere: OLAP_Integer
   ): Int
   Index(
+    selectWhere: OLAP_Integer
     if: EVM_Event_Filter
     maximum: EVM_Event_CompareFields
     minimum: EVM_Event_CompareFields
-    selectWhere: OLAP_Integer
   ): Int
   LogAfterCallIndex(
-    if: EVM_Event_Filter
-    maximum: EVM_Event_CompareFields
     minimum: EVM_Event_CompareFields
     selectWhere: OLAP_Integer
+    if: EVM_Event_Filter
+    maximum: EVM_Event_CompareFields
   ): Int
   Pc(
     selectWhere: OLAP_BigInteger
@@ -122,7 +122,11 @@ type EVM_Event_Fields_Log {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.<b>Index</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Index value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.Index.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.Index.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.Index.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
@@ -134,26 +138,22 @@ type EVM_Event_Fields_Log {
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.Index.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.<b>LogAfterCallIndex</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > LogAfterCallIndex value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.LogAfterCallIndex.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.LogAfterCallIndex.<b>maximum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.LogAfterCallIndex.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.LogAfterCallIndex.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.LogAfterCallIndex.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.LogAfterCallIndex.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.LogAfterCallIndex.<b>maximum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Log.<b>Pc</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>

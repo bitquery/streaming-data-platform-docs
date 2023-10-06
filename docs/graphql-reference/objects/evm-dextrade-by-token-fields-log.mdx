@@ -46,10 +46,10 @@ type EVM_DEXTradeByToken_Fields_Log {
     selectWhere: OLAP_Integer
   ): Int
   LogAfterCallIndex(
-    minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: OLAP_Integer
     if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
+    minimum: EVM_DEXTradeByToken_CompareFields
   ): Int
   Signature: EVM_DEXTradeByToken_Fields_Log_Signature
   SmartContract(
@@ -86,11 +86,7 @@ type EVM_DEXTradeByToken_Fields_Log {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Log.<b>LogAfterCallIndex</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > LogAfterCallIndex value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Log.LogAfterCallIndex.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Log.LogAfterCallIndex.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Log.LogAfterCallIndex.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -100,6 +96,10 @@ type EVM_DEXTradeByToken_Fields_Log {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Log.LogAfterCallIndex.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Log.LogAfterCallIndex.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Log.<b>Signature</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Log_Signature`](/docs/graphql-reference/objects/evm-dextrade-by-token-fields-log-signature) <Badge class="secondary" text="object"/>

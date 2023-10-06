@@ -39,10 +39,10 @@ Type of algorithm to filter block updates
 
 ```graphql
 enum blocks_update_arg_enum {
-  branches_updates
   head
   all
   head_updates
+  branches_updates
 }
 ```
 
@@ -50,10 +50,6 @@ enum blocks_update_arg_enum {
 
 
 ### Values
-
-#### [<code style={{ fontWeight: 'normal' }}>blocks_update_arg_enum.<b>branches_updates</b></code>](#) 
-> Blocks added as uncles to the branches of the reorg tree, duplicates possible due to reorg. Can be used together with head_updates.
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>blocks_update_arg_enum.<b>head</b></code>](#) 
 > Blocks added to the head of the reorgtree, no duplicates
@@ -65,6 +61,10 @@ enum blocks_update_arg_enum {
 
 #### [<code style={{ fontWeight: 'normal' }}>blocks_update_arg_enum.<b>head_updates</b></code>](#) 
 > Blocks added to the head of the reorg tree, duplicates possible due to reorg. Can be used together with uncles_updates.
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>blocks_update_arg_enum.<b>branches_updates</b></code>](#) 
+> Blocks added as uncles to the branches of the reorg tree, duplicates possible due to reorg. Can be used together with head_updates.
 > 
 
 

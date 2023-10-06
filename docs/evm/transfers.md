@@ -19,6 +19,7 @@ title: "EVM Token Transfers API"
 <meta property="og:title" content="EVM Token Transfers API" />
 
 <meta property="og:description" content="Get EVM token transfers with detailed infromation using the transfers API. Filter, sort, and analyze ERC-20 token flow easily."/>
+</head>
 
 To retrieve data on token and currency transfers using Bitquery, users can utilize the platform's GraphQL API. The Bitquery API allows users to construct custom queries to retrieve data on a wide range of blockchain events and transactions, including token transfers. You can find more examples [here](/docs/examples/transfers/erc20-token-transfer-api)
 

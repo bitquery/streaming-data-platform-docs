@@ -41,17 +41,17 @@ Miner reward for blocks in EVM Blockchain
 type EVM_MinerReward_Cube {
   Block: EVM_MinerReward_Fields_Block
   ChainId(
+    maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
     selectWhere: OLAP_BigInteger
     if: EVM_MinerReward_Filter
-    maximum: EVM_MinerReward_CompareFields
   ): String
   Reward: EVM_MinerReward_Fields_Reward
   Uncle: EVM_MinerReward_Fields_Uncle
   average(
     selectWhere: Metric_filter_Float
-    if: EVM_MinerReward_Filter
     of: EVM_MinerReward_NumFields
+    if: EVM_MinerReward_Filter
   ): Float
   contingency(
     selectWhere: Metric_filter_Float
@@ -60,15 +60,15 @@ type EVM_MinerReward_Cube {
     if: EVM_MinerReward_Filter
   ): Float
   correlation(
-    selectWhere: Metric_filter_Float
     of: EVM_MinerReward_NumFields
     with: EVM_MinerReward_NumFields
     if: EVM_MinerReward_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   count(
-    selectWhere: Metric_filter_String
-    if: EVM_MinerReward_Filter
     distinct: [EVM_MinerReward_EnumFields]
+    if: EVM_MinerReward_Filter
+    selectWhere: Metric_filter_String
   ): String
   covariance(
     selectWhere: Metric_filter_Float
@@ -78,9 +78,9 @@ type EVM_MinerReward_Cube {
   ): Float
   cramers(
     selectWhere: Metric_filter_Float
+    if: EVM_MinerReward_Filter
     of: EVM_MinerReward_NumFields
     with: EVM_MinerReward_NumFields
-    if: EVM_MinerReward_Filter
   ): Float
   cramers_bias_corrected(
     selectWhere: Metric_filter_Float
@@ -117,13 +117,13 @@ type EVM_MinerReward_Cube {
   ): Float
   rank_correlation(
     selectWhere: Metric_filter_Float
-    if: EVM_MinerReward_Filter
     of: EVM_MinerReward_NumFields
     with: EVM_MinerReward_NumFields
+    if: EVM_MinerReward_Filter
   ): Float
   skew(
-    selectWhere: Metric_filter_Float
     if: EVM_MinerReward_Filter
+    selectWhere: Metric_filter_Float
     of: EVM_MinerReward_NumFields
   ): Float
   standard_deviation(
@@ -137,16 +137,16 @@ type EVM_MinerReward_Cube {
     of: EVM_MinerReward_NumFields
   ): String
   theils(
-    with: EVM_MinerReward_NumFields
-    if: EVM_MinerReward_Filter
     selectWhere: Metric_filter_Float
     of: EVM_MinerReward_NumFields
+    with: EVM_MinerReward_NumFields
+    if: EVM_MinerReward_Filter
   ): Float
   uniq(
-    if: EVM_MinerReward_Filter
     method: OLAP_Metric_Calculation_Method_Exact
     of: [EVM_MinerReward_EnumFields]
     selectWhere: Metric_filter_String
+    if: EVM_MinerReward_Filter
   ): String
 }
 ```
@@ -162,7 +162,11 @@ type EVM_MinerReward_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>ChainId</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > ChainId value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.ChainId.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.ChainId.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.ChainId.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
 > 
 
@@ -172,10 +176,6 @@ type EVM_MinerReward_Cube {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.ChainId.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.ChainId.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>Reward</b></code>](#)<Bullet />[`EVM_MinerReward_Fields_Reward`](/docs/graphql-reference/objects/evm-miner-reward-fields-reward) <Badge class="secondary" text="object"/>
@@ -192,12 +192,12 @@ type EVM_MinerReward_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.average.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.average.<b>of</b></code>](#)<Bullet />[`EVM_MinerReward_NumFields`](/docs/graphql-reference/enums/evm-miner-reward-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Average of the values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.average.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>contingency</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -220,11 +220,7 @@ type EVM_MinerReward_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Pearson correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_MinerReward_NumFields`](/docs/graphql-reference/enums/evm-miner-reward-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_MinerReward_NumFields`](/docs/graphql-reference/enums/evm-miner-reward-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Pearson correlation coefficient between two arguments
 > 
 
@@ -236,18 +232,22 @@ type EVM_MinerReward_Cube {
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Count records or uniques of arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.count.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_MinerReward_EnumFields]`](/docs/graphql-reference/enums/evm-miner-reward-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+> Count distinct values of the field
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.count.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_MinerReward_EnumFields]`](/docs/graphql-reference/enums/evm-miner-reward-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
-> Count distinct values of the field
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.count.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>covariance</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -274,16 +274,16 @@ type EVM_MinerReward_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
+> 
+
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.cramers.<b>of</b></code>](#)<Bullet />[`EVM_MinerReward_NumFields`](/docs/graphql-reference/enums/evm-miner-reward-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Cramér's phi coefficient between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.cramers.<b>with</b></code>](#)<Bullet />[`EVM_MinerReward_NumFields`](/docs/graphql-reference/enums/evm-miner-reward-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Cramér's phi coefficient between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
@@ -388,10 +388,6 @@ type EVM_MinerReward_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.rank_correlation.<b>of</b></code>](#)<Bullet />[`EVM_MinerReward_NumFields`](/docs/graphql-reference/enums/evm-miner-reward-num-fields) <Badge class="secondary" text="enum"/>
 > First argument for Rank correlation coefficient between two arguments
 > 
@@ -400,14 +396,18 @@ type EVM_MinerReward_Cube {
 > Second argument for Rank correlation coefficient between two arguments
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Skew for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+> Skew for a set of values
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.skew.<b>of</b></code>](#)<Bullet />[`EVM_MinerReward_NumFields`](/docs/graphql-reference/enums/evm-miner-reward-num-fields) <Badge class="secondary" text="enum"/>
@@ -444,15 +444,7 @@ type EVM_MinerReward_Cube {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>theils</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.theils.<b>with</b></code>](#)<Bullet />[`EVM_MinerReward_NumFields`](/docs/graphql-reference/enums/evm-miner-reward-num-fields) <Badge class="secondary" text="enum"/>
-> Second argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.theils.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.theils.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.theils.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
@@ -460,13 +452,17 @@ type EVM_MinerReward_Cube {
 > First argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Count unique records
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.theils.<b>with</b></code>](#)<Bullet />[`EVM_MinerReward_NumFields`](/docs/graphql-reference/enums/evm-miner-reward-num-fields) <Badge class="secondary" text="enum"/>
+> Second argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.theils.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+> Count unique records
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
 > Method used to calculate metric values
 > 
 
@@ -476,6 +472,10 @@ type EVM_MinerReward_Cube {
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 

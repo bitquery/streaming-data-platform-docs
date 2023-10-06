@@ -20,6 +20,8 @@ title: "EVM Uncle Blocks API"
 
 <meta property="og:description" content="Get information on uncle blocks including historical and realtime blocks, bloom, hash and more "/>
 
+</head>
+
 ### What are Uncle Blocks?
 
 Uncle blocks, also known as "orphan blocks", are blocks on the blockchain that are not included in the main blockchain. Uncle blocks are still valid blocks, but they were not selected to be included in the main blockchain by the network consensus algorithm.

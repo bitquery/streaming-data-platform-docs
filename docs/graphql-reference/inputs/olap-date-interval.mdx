@@ -39,9 +39,9 @@ Interval for date rounding
 
 ```graphql
 input OLAP_DateInterval {
+  in: OLAP_DateIntervalUnits
   count: Int
   offset: Int
-  in: OLAP_DateIntervalUnits
 }
 ```
 
@@ -50,16 +50,16 @@ input OLAP_DateInterval {
 
 ### Fields
 
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateInterval.<b>in</b></code>](#)<Bullet />[`OLAP_DateIntervalUnits`](/docs/graphql-reference/enums/olap-date-interval-units) <Badge class="secondary" text="enum"/>
+> Interval units ( default is second )
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_DateInterval.<b>count</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Interval size in specified units ( default is day )
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_DateInterval.<b>offset</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Offset in specified units ( default is day )
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateInterval.<b>in</b></code>](#)<Bullet />[`OLAP_DateIntervalUnits`](/docs/graphql-reference/enums/olap-date-interval-units) <Badge class="secondary" text="enum"/>
-> Interval units ( default is second )
 > 
 
 

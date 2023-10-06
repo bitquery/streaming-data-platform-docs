@@ -46,10 +46,10 @@ type EVM_BalanceUpdate_Fields_Uncle_Block {
     selectWhere: OLAP_String
   ): String
   Number(
-    selectWhere: OLAP_BigInteger
-    if: EVM_BalanceUpdate_Filter
     maximum: EVM_BalanceUpdate_CompareFields
     minimum: EVM_BalanceUpdate_CompareFields
+    selectWhere: OLAP_BigInteger
+    if: EVM_BalanceUpdate_Filter
   ): String
 }
 ```
@@ -79,20 +79,20 @@ type EVM_BalanceUpdate_Fields_Uncle_Block {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Uncle_Block.<b>Number</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Number value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Uncle_Block.Number.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Uncle_Block.Number.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Uncle_Block.Number.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Uncle_Block.Number.<b>maximum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is maximum
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Uncle_Block.Number.<b>minimum</b></code>](#)<Bullet />[`EVM_BalanceUpdate_CompareFields`](/docs/graphql-reference/enums/evm-balance-update-compare-fields) <Badge class="secondary" text="enum"/>
 > Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Uncle_Block.Number.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Uncle_Block.Number.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="secondary" text="input"/>
+> Apply a condition to a metric calculation
 > 
 
 

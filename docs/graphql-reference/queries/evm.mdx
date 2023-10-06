@@ -39,9 +39,10 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 EVM(
+  network: evm_network
   select_blocks: blocks_query_arg_enum
   dataset: dataset_arg_enum
-  network: evm_network
+  mempool: Boolean = false
 ): EVM
 ```
 
@@ -49,6 +50,10 @@ EVM(
 
 
 ### Arguments
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>network</b></code>](#)<Bullet />[`evm_network`](/docs/graphql-reference/enums/evm-network) <Badge class="secondary" text="enum"/>
+> 
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>select_blocks</b></code>](#)<Bullet />[`blocks_query_arg_enum`](/docs/graphql-reference/enums/blocks-query-arg-enum) <Badge class="secondary" text="enum"/>
 > Controls which blocks are included in query results. Note that this field is ignored to query archive data
@@ -58,8 +63,8 @@ EVM(
 > Controls which dataset used to get results
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>network</b></code>](#)<Bullet />[`evm_network`](/docs/graphql-reference/enums/evm-network) <Badge class="secondary" text="enum"/>
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>mempool</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+> Controls which dataset used to get results
 > 
 
 ### Type

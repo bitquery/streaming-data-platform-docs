@@ -39,10 +39,10 @@ Order by
 
 ```graphql
 input EVM_Event_Ordering {
+  ascending: EVM_Event_EnumFields
   descending: EVM_Event_EnumFields
   ascendingByField: String
   descendingByField: String
-  ascending: EVM_Event_EnumFields
 }
 ```
 
@@ -50,6 +50,10 @@ input EVM_Event_Ordering {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Ordering.<b>ascending</b></code>](#)<Bullet />[`EVM_Event_EnumFields`](/docs/graphql-reference/enums/evm-event-enum-fields) <Badge class="secondary" text="enum"/>
+> Select a field to sort ascending
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Ordering.<b>descending</b></code>](#)<Bullet />[`EVM_Event_EnumFields`](/docs/graphql-reference/enums/evm-event-enum-fields) <Badge class="secondary" text="enum"/>
 > Select a field to sort descending
@@ -61,10 +65,6 @@ input EVM_Event_Ordering {
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Ordering.<b>descendingByField</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > MetricName ( or alias ) of the field in the query to sort descending
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Ordering.<b>ascending</b></code>](#)<Bullet />[`EVM_Event_EnumFields`](/docs/graphql-reference/enums/evm-event-enum-fields) <Badge class="secondary" text="enum"/>
-> Select a field to sort ascending
 > 
 
 

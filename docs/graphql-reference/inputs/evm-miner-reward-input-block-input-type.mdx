@@ -39,28 +39,28 @@ Select by Block
 
 ```graphql
 input EVM_MinerReward_Input_Block_InputType {
-  TxHash: OLAP_String
-  UncleHash: OLAP_String
-  Hash: OLAP_String
-  Bloom: OLAP_String
-  MixDigest: OLAP_String
-  Root: OLAP_String
-  ParentHash: OLAP_String
-  Extra: OLAP_String
-  Date: OLAP_Date
-  Difficulty: OLAP_BigInteger
-  UnclesCount: OLAP_Integer
-  Result: EVM_MinerReward_Input_Block_Result_InputType
   BaseFee: EVM_Amount_With_Decimals
+  Result: EVM_MinerReward_Input_Block_Result_InputType
+  Hash: OLAP_String
   GasLimit: OLAP_BigInteger
-  GasUsed: OLAP_BigInteger
-  L1: EVM_MinerReward_Input_Block_L1_InputType
-  Nonce: OLAP_BigInteger
-  ReceiptHash: OLAP_String
-  Coinbase: OLAP_String
-  Time: OLAP_DateTime
-  TxCount: OLAP_Integer
+  Root: OLAP_String
+  Difficulty: OLAP_BigInteger
+  Extra: OLAP_String
   Number: OLAP_BigInteger
+  Date: OLAP_Date
+  L1: EVM_MinerReward_Input_Block_L1_InputType
+  Bloom: OLAP_String
+  Nonce: OLAP_BigInteger
+  ParentHash: OLAP_String
+  GasUsed: OLAP_BigInteger
+  ReceiptHash: OLAP_String
+  TxCount: OLAP_Integer
+  Time: OLAP_DateTime
+  UncleHash: OLAP_String
+  Coinbase: OLAP_String
+  UnclesCount: OLAP_Integer
+  TxHash: OLAP_String
+  MixDigest: OLAP_String
 }
 ```
 
@@ -69,47 +69,7 @@ input EVM_MinerReward_Input_Block_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>TxHash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>UncleHash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Hash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Bloom</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>MixDigest</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Root</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>ParentHash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Extra</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Date</b></code>](#)<Bullet />[`OLAP_Date`](/docs/graphql-reference/inputs/olap-date) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Difficulty</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>UnclesCount</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>BaseFee</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -117,7 +77,7 @@ input EVM_MinerReward_Input_Block_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>BaseFee</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Hash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -125,7 +85,23 @@ input EVM_MinerReward_Input_Block_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Root</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Difficulty</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Extra</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Number</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Date</b></code>](#)<Bullet />[`OLAP_Date`](/docs/graphql-reference/inputs/olap-date) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -133,7 +109,19 @@ input EVM_MinerReward_Input_Block_InputType {
 > 
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Bloom</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Nonce</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>ParentHash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -141,7 +129,7 @@ input EVM_MinerReward_Input_Block_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Coinbase</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>TxCount</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -149,11 +137,23 @@ input EVM_MinerReward_Input_Block_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>TxCount</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>UncleHash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Number</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>Coinbase</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>UnclesCount</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>TxHash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Block_InputType.<b>MixDigest</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > 
 > 
 

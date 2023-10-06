@@ -39,15 +39,15 @@ Select by L1
 
 ```graphql
 input EVM_Transfer_Input_Block_L1_InputType {
+  BaseFee: OLAP_BigInteger
+  GasLimit: OLAP_BigInteger
+  Hash: OLAP_String
+  GasUsed: OLAP_BigInteger
   Time: OLAP_DateTime
-  Number: OLAP_BigInteger
   Nonce: OLAP_BigInteger
   Coinbase: OLAP_String
-  GasLimit: OLAP_BigInteger
-  GasUsed: OLAP_BigInteger
+  Number: OLAP_BigInteger
   ParentHash: OLAP_String
-  BaseFee: OLAP_BigInteger
-  Hash: OLAP_String
   Difficulty: OLAP_BigInteger
 }
 ```
@@ -57,11 +57,23 @@ input EVM_Transfer_Input_Block_L1_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>Time</b></code>](#)<Bullet />[`OLAP_DateTime`](/docs/graphql-reference/inputs/olap-date-time) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>BaseFee</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>Number</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>GasLimit</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>Hash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>Time</b></code>](#)<Bullet />[`OLAP_DateTime`](/docs/graphql-reference/inputs/olap-date-time) <Badge class="secondary" text="input"/>
 > 
 > 
 
@@ -73,23 +85,11 @@ input EVM_Transfer_Input_Block_L1_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>GasLimit</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>Number</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
 > 
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>ParentHash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>BaseFee</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Block_L1_InputType.<b>Hash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > 
 > 
 

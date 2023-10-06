@@ -41,6 +41,7 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 EVM(
   network: evm_network
   trigger_on: blocks_update_arg_enum
+  mempool: Boolean = false
 ): EVM
 ```
 
@@ -55,6 +56,10 @@ EVM(
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>trigger_on</b></code>](#)<Bullet />[`blocks_update_arg_enum`](/docs/graphql-reference/enums/blocks-update-arg-enum) <Badge class="secondary" text="enum"/>
 > Controls which blocks are included into update of the subscription data
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>mempool</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
+> Controls which dataset used to get results
 > 
 
 ### Type
