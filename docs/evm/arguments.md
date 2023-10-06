@@ -1,28 +1,43 @@
 ---
-sidebar_position: 7
+title: "EVM Arguments and Returns API"
 ---
 
-# Arguments and Returns
+<head>
+<meta name="title" content="EVM Arguments and Returns API"/>
 
+<meta name="description" content="Get EVM Arguments and Returns with detailed information using the arguments API. Filter, sort, and analyze ERC-20 token flow easily."/>
+
+<meta name="keywords" content="EVM Arguments and Returns, EVM Arguments and Returns per second, EVM arguments analysis, ERC-20 Arguments and Returns, EVM token transaction data, EVM arguments history, EVM arguments API, EVM arguments tracking, EVM arguments monitoring, ERC-20 arguments analytics"/>
+
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+
+<meta property="og:title" content="EVM Arguments and Returns API" />
+
+<meta property="og:description" content="Get EVM Arguments and Returns with detailed information using the arguments API. Filter, sort, and analyze ERC-20 token flow easily."/>
+</head>
 
 Smart contract calls and events have arguments. In case the call or event signature is parsed against ABI,
 the arguments are showing the values, types and names passed to call or event.
 
 In addition, returns shows the return values from the smart contract calls.
 
-Arguments and returns are represented by the same data structure. It is array, 
+Arguments and returns are represented by the same data structure. It is array,
 containing entries for each argument value. In case when the data type of argument
-is array or emedded structure, the argument will have separate object for every 
+is array or emedded structure, the argument will have separate object for every
 value of array or structure.
 
-It means that all argument values are flattened. To represent all possible cases, the following 
+It means that all argument values are flattened. To represent all possible cases, the following
 additional information is provided:
 
-* Index - sequential index of argument value inside an array or strucutre
-* Name - name of the argument or the name of the element of structure
-* Type - the type of the argument
-* Path - the array of top-level elements where the argument value is used. Each element of path have Name, Index, Type
-
+- Index - sequential index of argument value inside an array or strucutre
+- Name - name of the argument or the name of the element of structure
+- Type - the type of the argument
+- Path - the array of top-level elements where the argument value is used. Each element of path have Name, Index, Type
 
 As example, the following data means the array of size 2 of addresses:
 
@@ -61,7 +76,7 @@ As example, the following data means the array of size 2 of addresses:
           },
 ```
 
-meaning ```['0x6c812ab49f4b350b9d115e3f367302cd4fb58bbf','0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2']```
+meaning `['0x6c812ab49f4b350b9d115e3f367302cd4fb58bbf','0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2']`
 
 To query attribute values, use union as shown:
 
@@ -176,14 +191,13 @@ to analyse the arguments used in smart contracts in specific context.
 The value of argument filter must be defined depending on the expected argument type.
 There are the following options:
 
-* BigInteger - for uint256/int256/int64/uint64 arguments
-* Address - for addresses, 0x prefixed
-* String - for strings
-* Boolean - for boolean, just true/false
-* UnsignedInteger - for uint8/16/32
-* SignedInteger - int8/16/32
-* Bytes - for bytes, 0x prefixed optional
-
+- BigInteger - for uint256/int256/int64/uint64 arguments
+- Address - for addresses, 0x prefixed
+- String - for strings
+- Boolean - for boolean, just true/false
+- UnsignedInteger - for uint8/16/32
+- SignedInteger - int8/16/32
+- Bytes - for bytes, 0x prefixed optional
 
 :::note
 filters affect the whole query to calls / events, so you anyway can query all arguments,
