@@ -5,7 +5,7 @@ This is how it will look ![chat](/img/ApplicationExamples/telegram_bot.gif)
 
 You can find the complete code [here](https://github.com/divyasshree-BQ/telegram-bot/blob/main/getTransfer_WS.py)
 
-## Step by Step Tutorial
+## Step-by-Step Tutorial
 
 1.  Install the required Python libraries:
 
@@ -13,7 +13,12 @@ You can find the complete code [here](https://github.com/divyasshree-BQ/telegram
 pip install asyncio json websockets tracemalloc telegram-bot-api
 ```
 
-**Step 2: Define Your Token and Keys** You need to provide your Telegram bot token from the BotFather, which you obtained when creating your Telegram bot. Replace `'tokenn'` with your actual bot token.
+**Step 2: Define Your Token and Keys** You need to provide your Telegram bot token from the BotFather. For this step you need to create a new Telegram bot. Check official tutorial [here](https://core.telegram.org/bots/tutorial)
+
+![bot](/img/ApplicationExamples/telegram_bot.png)
+
+
+Replace `'tokenn'` with your actual bot token.
 
     BOT_TOKEN = 'YOUR_BOT_TOKEN'
 
