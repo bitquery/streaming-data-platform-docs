@@ -28,12 +28,93 @@ title: "EVM Token Holders API"
 <meta property="twitter:description" content="Explore token holder information include holders of a token, metrics like nakamoto coefficient, gini factor and theil index. Discover balance, attributes, and more information effortlessly." />
 </head>
 
-
-
 ## Indexes and Factors
+
+Indexes and factors are calculations that can be used to analyze data in the TokenHolders cube. They can be used to calculate a variety of metrics, such as the Gini coefficient, Nakamoto coefficient, and Thiel index.
 
 ### Gini Factor
 
+The Gini coefficient is a measure of inequality in a distribution. It is a number between 0 and 1, with 0 representing perfect equality and 1 representing perfect inequality.
+This query will calculate the Gini coefficient for the distribution of balances among all holders of the specified token.You can find the query [here](https://ide.bitquery.io/Thiel-index-for-USDT)
+```
+query($currency: String! $date: String!) {
+  EVM(dataset: archive) {
+    TokenHolders(
+      tokenSmartContract: $currency
+      date: $date
+      where: {
+        Balance: {
+          Amount: {
+            gt: "0"
+          }
+        }
+      }
+    ) {
+    	gini(of: Balance_Amount)
+    }
+	}
+}
+{
+  "currency": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+  "date": "2022-10-01"
+}
+```
+
 ### Nakamoto Index
 
+The Nakamoto coefficient is a measure of the centralization of a blockchain network. It is calculated by counting the number of holders that together control more than 51% of the total supply of a token an so the default value is 0.51.
+
+It can be used to compare the decentralization of different blockchain networks. It can also be used to track the changes in decentralization of a blockchain network over time.
+The below query gives number of holders having 99% of the supply of USDT.You can find the query [here](https://ide.bitquery.io/USDT-holders-having-99-of-all-supply-of-USDT-together)
+
+```
+query($currency: String! $date: String!) {
+  EVM(dataset: archive) {
+    TokenHolders(   
+      tokenSmartContract: $currency
+      date: $date
+      where: {
+        Balance: {
+          Amount: {
+            gt: "0"
+          }
+        }
+      }
+    ) {
+    	nakamoto(of: Balance_Amount ratio: 0.99)
+    }
+	}
+}
+{
+  "currency": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+  "date": "2022-10-01"
+}
+```
+
 ### Theil Index
+
+The Thiel index is another measure of inequality in a distribution. It is calculated by taking the square of the sum of the market shares of all participants in a market. You can find the query [here](https://ide.bitquery.io/Thiel-index-for-USDT)
+
+```
+query($currency: String! $date: String!) {
+  EVM(dataset: archive) {
+    TokenHolders(
+      tokenSmartContract: $currency
+      date: $date
+      where: {
+        Balance: {
+          Amount: {
+            gt: "0"
+          }
+        }
+      }
+    ) {
+    	theil_index(of: Balance_Amount)
+    }
+	}
+}
+{
+  "currency": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+  "date": "2022-10-01"
+}
+```
