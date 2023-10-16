@@ -27,3 +27,13 @@ title: "EVM Token Holders API"
 
 <meta property="twitter:description" content="Explore token holder information include holders of a token, metrics like nakamoto coefficient, gini factor and theil index. Discover balance, attributes, and more information effortlessly." />
 </head>
+
+
+
+## Indexes and Factors
+
+### Gini Factor
+
+### Nakamoto Index
+
+### Theil Index
