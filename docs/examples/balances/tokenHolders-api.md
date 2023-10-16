@@ -7,37 +7,45 @@ sidebar_position: 4
 The Token Holders API provides information on the holders of a specific token on a supported blockchain. This API enables developers to retrieve a list of addresses that hold a particular token, as well as additional information about each holder.
 
 ## Top 10 Token Holders
+
 Here's an example query to retrieve the top 10 balance updates for a specific token contract on the Ethereum network:
 
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     BalanceUpdates(
-      orderBy: {descendingByField: "Balance"}
-      limit: {count: 10}
-      where: {Currency: {SmartContract: {is: "0x5Af0D9827E0c53E4799BB226655A1de152A425a5"}}, Block: {Date: {after: "2023-02-01"}}}
+      orderBy: { descendingByField: "Balance" }
+      limit: { count: 10 }
+      where: {
+        Currency: {
+          SmartContract: { is: "0x5Af0D9827E0c53E4799BB226655A1de152A425a5" }
+        }
+        Block: { Date: { after: "2023-02-01" } }
+      }
     ) {
       BalanceUpdate {
         Address
       }
-      Balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      Balance: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
     }
   }
 }
-
 ```
+
 In this query, you'll need to replace "0x5Af0D9827E0c53E4799BB226655A1de152A425a5" with the contract address of the token you'd like to retrieve balance updates for.
 
 **Parameters**
--   `dataset: combined`: This parameter specifies that the dataset has both realtime and archive data
--   `network: eth`: This parameter specifies that the Ethereum network is being queried.
--   `orderBy: {descendingByField: "Balance"}`: This parameter orders the results of the query by the `Balance` field in descending order, meaning the highest balances will appear first.
--   `limit: {count: 10}`: This parameter limits the number of results returned to 10.
--   `where: {Currency: {SmartContract: {is: "0x5Af0D9827E0c53E4799BB226655A1de152A425a5"}}, Block: {Date: {after: "2023-02-01"}}}`: This parameter filters the results of the query based on the smart contract address "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47" and the block date after "2023-02-01". The `Currency` field specifies the currency to filter by, and the `SmartContract` field specifies the smart contract address to filter by. The `Block` field specifies the block to filter by, and the `Date` field specifies the date to filter by.
+
+- `dataset: combined`: This parameter specifies that the dataset has both realtime and archive data
+- `network: eth`: This parameter specifies that the Ethereum network is being queried.
+- `orderBy: {descendingByField: "Balance"}`: This parameter orders the results of the query by the `Balance` field in descending order, meaning the highest balances will appear first.
+- `limit: {count: 10}`: This parameter limits the number of results returned to 10.
+- `where: {Currency: {SmartContract: {is: "0x5Af0D9827E0c53E4799BB226655A1de152A425a5"}}, Block: {Date: {after: "2023-02-01"}}}`: This parameter filters the results of the query based on the smart contract address "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47" and the block date after "2023-02-01". The `Currency` field specifies the currency to filter by, and the `SmartContract` field specifies the smart contract address to filter by. The `Block` field specifies the block to filter by, and the `Date` field specifies the date to filter by.
 
 **Returned Data**
--   `Balance: sum(of: BalanceUpdate_Amount)`: This field specifies the address and the balance amount in the results.
--   `Currency { Name }`: This field specifies the currency in which the balance is expressed. In this case, the `Name` of the currency is retrieved.
+
+- `Balance: sum(of: BalanceUpdate_Amount)`: This field specifies the address and the balance amount in the results.
+- `Currency { Name }`: This field specifies the currency in which the balance is expressed. In this case, the `Name` of the currency is retrieved.
 
 Here's a sample of the response:
 
@@ -56,18 +64,23 @@ Here's a sample of the response:
         }
       },
 ```
+
 You can find the graphql query [here](https://ide.bitquery.io/top-MILADY-MAKER-NFT-holders).
 
 ## Top Trending tokens based on Token holders
+
 Here's an example query to fetch the top 10 trending tokens based on their holders on the Ethereum network:
 
 ```graphql
 query MyQuery {
   EVM(network: eth, dataset: combined) {
     BalanceUpdates(
-      where: { Block: {Date: {since: "2023-06-01"}}, BalanceUpdate: {Amount: {gt: "0"}}}
-      orderBy: {descendingByField: "No_Holders"}
-      limit: {count: 10}
+      where: {
+        Block: { Date: { since: "2023-06-01" } }
+        BalanceUpdate: { Amount: { gt: "0" } }
+      }
+      orderBy: { descendingByField: "No_Holders" }
+      limit: { count: 10 }
     ) {
       No_Holders: count(distinct: BalanceUpdate_Address)
       Currency {
@@ -77,19 +90,20 @@ query MyQuery {
     }
   }
 }
-
 ```
 
 **Parameters**
--   `dataset: combined`: This parameter specifies that the dataset has both realtime and archive data.
--   `network: eth`: This parameter specifies that the Ethereum network is being queried.
--   `orderBy: {descendingByField: "No_Holders"}`: This parameter orders the results of the query by the `No_Holders` field in descending order, meaning the currency with the highest number of holders will appear first in the results.
--   `limit: {count: 10}`: This parameter limits the number of results returned to 10.
--   `where: { Block: {Date: {since: "2023-06-01"}}, BalanceUpdate: {Amount: {gt: "0"}}}`: The where parameter in the query filters the results based on mentioned conditions. The `Block` field specifies the block to filter by, and the `Date` field specifies the date to filter by. `BalanceUpdate: {Amount: {gt: "0"}}` filters the results to include only balance updates with amounts greater than zero.
+
+- `dataset: combined`: This parameter specifies that the dataset has both realtime and archive data.
+- `network: eth`: This parameter specifies that the Ethereum network is being queried.
+- `orderBy: {descendingByField: "No_Holders"}`: This parameter orders the results of the query by the `No_Holders` field in descending order, meaning the currency with the highest number of holders will appear first in the results.
+- `limit: {count: 10}`: This parameter limits the number of results returned to 10.
+- `where: { Block: {Date: {since: "2023-06-01"}}, BalanceUpdate: {Amount: {gt: "0"}}}`: The where parameter in the query filters the results based on mentioned conditions. The `Block` field specifies the block to filter by, and the `Date` field specifies the date to filter by. `BalanceUpdate: {Amount: {gt: "0"}}` filters the results to include only balance updates with amounts greater than zero.
 
 **Returned Data**
--   `No_Holders: count(distinct: BalanceUpdate_Address)`: This field specifies the number of holders of token in the results.
--   `Currency { Name SmartContract }`: This field specifies the Currency details. In this case, the `Name` represents the name of the currency  and the `SmartContract` field, which contains the address of the currency's smart contract.
+
+- `No_Holders: count(distinct: BalanceUpdate_Address)`: This field specifies the number of holders of token in the results.
+- `Currency { Name SmartContract }`: This field specifies the Currency details. In this case, the `Name` represents the name of the currency and the `SmartContract` field, which contains the address of the currency's smart contract.
 
 Here's a sample of the response:
 
@@ -110,18 +124,24 @@ Here's a sample of the response:
           "No_Holders": "3307186"
         },
 ```
+
 You can find the graphql query [here](https://ide.bitquery.io/Trending_Token_based_on_holders).
 
 ## Top NFT tokens based on holders
+
 Here's an example query to fetch the Top 10 NFT tokens based on their holders on the Ethereum network:
 
 ```graphql
 query MyQuery {
   EVM(network: eth, dataset: combined) {
     BalanceUpdates(
-      where: {Currency: {Fungible: false}, Block: {Date: {since: "2023-06-01"}}, BalanceUpdate: {Amount: {gt: "0"}}}
-      orderBy: {descendingByField: "No_Holders"}
-      limit: {count: 10}
+      where: {
+        Currency: { Fungible: false }
+        Block: { Date: { since: "2023-06-01" } }
+        BalanceUpdate: { Amount: { gt: "0" } }
+      }
+      orderBy: { descendingByField: "No_Holders" }
+      limit: { count: 10 }
     ) {
       No_Holders: count(distinct: BalanceUpdate_Address)
       Currency {
@@ -134,15 +154,17 @@ query MyQuery {
 ```
 
 **Parameters**
--   `dataset: combined`: This parameter specifies that the dataset has both realtime and archive data
--   `network: eth`: This parameter specifies that the Ethereum network is being queried.
--   `orderBy: {descendingByField: "No_Holders"}`: This parameter orders the results of the query by the `No_Holders` field in descending order, meaning the currency with the highest number of holders will appear first.
--   `limit: {count: 10}`: This parameter limits the number of results returned to 10.
--   `where: {Currency: {Fungible: false}, Block: {Date: {since: "2023-06-01"}}, BalanceUpdate: {Amount: {gt: "0"}}}`: It filters the results based on specific conditions. `Currency: { Fungible: false }` filters out fungible currencies, indicating only non-fungible tokens to be included. The `Block` field specifies the block to filter by, and the `Date` field specifies the date to filter by. `BalanceUpdate: {Amount: {gt: "0"}}` filters the results to include only balance updates with amounts greater than zero.
+
+- `dataset: combined`: This parameter specifies that the dataset has both realtime and archive data
+- `network: eth`: This parameter specifies that the Ethereum network is being queried.
+- `orderBy: {descendingByField: "No_Holders"}`: This parameter orders the results of the query by the `No_Holders` field in descending order, meaning the currency with the highest number of holders will appear first.
+- `limit: {count: 10}`: This parameter limits the number of results returned to 10.
+- `where: {Currency: {Fungible: false}, Block: {Date: {since: "2023-06-01"}}, BalanceUpdate: {Amount: {gt: "0"}}}`: It filters the results based on specific conditions. `Currency: { Fungible: false }` filters out fungible currencies, indicating only non-fungible tokens to be included. The `Block` field specifies the block to filter by, and the `Date` field specifies the date to filter by. `BalanceUpdate: {Amount: {gt: "0"}}` filters the results to include only balance updates with amounts greater than zero.
 
 **Returned Data**
--   `No_Holders: count(distinct: BalanceUpdate_Address)`: This field specifies the number of holders of particular token in the results.
--   `Currency { Name SmartContract }`: This field specifies the currency. In this case, the `Name` represents the name of the currency  and the `SmartContract` field, represents the address of the currency's smart contract.
+
+- `No_Holders: count(distinct: BalanceUpdate_Address)`: This field specifies the number of holders of particular token in the results.
+- `Currency { Name SmartContract }`: This field specifies the currency. In this case, the `Name` represents the name of the currency and the `SmartContract` field, represents the address of the currency's smart contract.
 
 Here's a sample of the response:
 
@@ -163,5 +185,81 @@ Here's a sample of the response:
           "No_Holders": "29118"
         },
 ```
+
 You can find the graphql query [here](https://ide.bitquery.io/Top_NFTs_based_on_token_holder).
 
+## Get Count of Token Holders
+
+To get the count of token holders for a specific token contract address and date, you can use the following query:
+The `currency` variable is the token contract address, and the date variable is the `date` for which you want to get the count of token holders.
+You can find the query [here](https://ide.bitquery.io/token-holder-count)
+
+```
+query($currency: String! $date: String!) {
+  EVM(dataset: archive) {
+    TokenHolders(
+      tokenSmartContract: $currency
+      date: $date
+      where: {
+        Balance: {
+          Amount: {
+            gt: "0"
+          }
+        }
+      }
+    ) {
+    	count
+    }
+	}
+}
+{
+  "currency": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+  "date": "2023-03-22"
+}
+```
+
+## Addresses that transferred complete holdings of a Token / Liquidating their holdings of a particular token
+
+The following example shows how to use the query to find addresses that transferred complete holdings of the DAI token on March 22, 2023.You can find the query [here](https://ide.bitquery.io/addresses-that-transferred-out-all-of-their-holdings-for-this-particular-token-on-a-given-day)
+Identifying users who are liquidating their holdings of a particular token.
+
+```
+query($currency: String! $date: String!) {
+  EVM(dataset: archive) {
+    TokenHolders(
+      limit: {count: 100}
+      tokenSmartContract: $currency
+      date: $date
+      where: {
+        BalanceUpdate: {
+          LastDate: {
+            is: $date
+          }
+          OutAmount: {
+            gt: "0"
+          }
+        }
+        Balance: {
+          Amount: {
+            eq: "0"
+          }
+        }
+      }
+    ) {
+    	Holder {
+        Address
+      }
+      BalanceUpdate {
+        OutAmount
+      }
+    }
+	}
+}
+{
+  "currency": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+  "date": "2023-03-22"
+}
+```
+
+`Holder`: The address that transferred complete holdings of the token.
+`BalanceUpdate:OutAmount`: The amount of the token that was transferred.
