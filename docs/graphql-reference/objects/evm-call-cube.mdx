@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,16 +34,20 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 Smart contract calls in EVM Blockchain
 
 
 ```graphql
 type EVM_Call_Cube {
   Arguments(
-    if: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
     selectWhere: EVM_Call_Fields_Arguments_Select_Arguments
+    if: EVM_Call_Filter
   ): [EVM_Call_Fields_Arguments]
   Block: EVM_Call_Fields_Block
   Call: EVM_Call_Fields_Call
@@ -70,21 +74,21 @@ type EVM_Call_Cube {
   Transaction: EVM_Call_Fields_Transaction
   TransactionStatus: EVM_Call_Fields_TransactionStatus
   average(
-    selectWhere: Metric_filter_Float
-    of: EVM_Call_NumFields
+    of: EVM_Call_NumFields!
     if: EVM_Call_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   contingency(
     selectWhere: Metric_filter_Float
-    if: EVM_Call_Filter
     of: EVM_Call_NumFields
     with: EVM_Call_NumFields
+    if: EVM_Call_Filter
   ): Float
   correlation(
-    selectWhere: Metric_filter_Float
-    of: EVM_Call_NumFields
     with: EVM_Call_NumFields
     if: EVM_Call_Filter
+    selectWhere: Metric_filter_Float
+    of: EVM_Call_NumFields
   ): Float
   count(
     selectWhere: Metric_filter_String
@@ -93,9 +97,9 @@ type EVM_Call_Cube {
   ): String
   covariance(
     selectWhere: Metric_filter_Float
-    if: EVM_Call_Filter
     of: EVM_Call_NumFields
     with: EVM_Call_NumFields
+    if: EVM_Call_Filter
   ): Float
   cramers(
     selectWhere: Metric_filter_Float
@@ -105,69 +109,82 @@ type EVM_Call_Cube {
   ): Float
   cramers_bias_corrected(
     selectWhere: Metric_filter_Float
-    of: EVM_Call_NumFields
     with: EVM_Call_NumFields
     if: EVM_Call_Filter
+    of: EVM_Call_NumFields
   ): Float
   dispersion(
     selectWhere: Metric_filter_Float
-    of: EVM_Call_NumFields
+    of: EVM_Call_NumFields!
     if: EVM_Call_Filter
   ): Float
   entropy(
-    selectWhere: Metric_filter_Float
+    of: EVM_Call_NumFields!
     if: EVM_Call_Filter
-    of: EVM_Call_NumFields
+    selectWhere: Metric_filter_Float
+  ): Float
+  gini(
+    selectWhere: Metric_filter_Float
+    of: EVM_Call_NumFields!
   ): Float
   kurtosis(
-    if: EVM_Call_Filter
     selectWhere: Metric_filter_Float
-    of: EVM_Call_NumFields
+    of: EVM_Call_NumFields!
+    if: EVM_Call_Filter
   ): Float
   median(
-    selectWhere: Metric_filter_Float
-    of: EVM_Call_NumFields
     if: EVM_Call_Filter
+    selectWhere: Metric_filter_Float
+    of: EVM_Call_NumFields!
+  ): Float
+  nakamoto(
+    ratio: Float = 0.51
+    selectWhere: Metric_filter_Float
+    of: EVM_Call_NumFields!
   ): Float
   quantile(
-    selectWhere: Metric_filter_Float
-    of: EVM_Call_NumFields
-    level: Float = 0.5
     if: EVM_Call_Filter
     method: OLAP_Metric_Calculation_Method_Exact
+    selectWhere: Metric_filter_Float
+    of: EVM_Call_NumFields!
+    level: Float = 0.5
   ): Float
   rank_correlation(
-    selectWhere: Metric_filter_Float
-    of: EVM_Call_NumFields
     with: EVM_Call_NumFields
     if: EVM_Call_Filter
+    of: EVM_Call_NumFields
+    selectWhere: Metric_filter_Float
   ): Float
   skew(
-    if: EVM_Call_Filter
     selectWhere: Metric_filter_Float
-    of: EVM_Call_NumFields
+    if: EVM_Call_Filter
+    of: EVM_Call_NumFields!
   ): Float
   standard_deviation(
-    of: EVM_Call_NumFields
     if: EVM_Call_Filter
     selectWhere: Metric_filter_Float
+    of: EVM_Call_NumFields!
   ): Float
   sum(
-    if: EVM_Call_Filter
     selectWhere: Metric_filter_String
-    of: EVM_Call_NumFields
+    if: EVM_Call_Filter
+    of: EVM_Call_NumFields!
   ): String
-  theils(
+  theil_index(
+    selectWhere: Metric_filter_Float
+    of: EVM_Call_NumFields!
+  ): Float
+  theils_corrected(
     selectWhere: Metric_filter_Float
     of: EVM_Call_NumFields
     with: EVM_Call_NumFields
     if: EVM_Call_Filter
   ): Float
   uniq(
-    selectWhere: Metric_filter_String
-    if: EVM_Call_Filter
     method: OLAP_Metric_Calculation_Method_Exact
-    of: [EVM_Call_EnumFields]
+    selectWhere: Metric_filter_String
+    of: [EVM_Call_EnumFields]!
+    if: EVM_Call_Filter
   ): String
 }
 ```
@@ -177,397 +194,667 @@ type EVM_Call_Cube {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Arguments</b></code>](#)<Bullet />[`[EVM_Call_Fields_Arguments]`](/docs/graphql-reference/objects/evm-call-fields-arguments) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
-> Arguments value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Arguments</b></code>](#)<Bullet />[`[EVM_Call_Fields_Arguments]`](/docs/graphql-reference/objects/evm-call-fields-arguments) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="object"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> 
+> Arguments value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Return value when the argument is maximum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Call_Fields_Arguments_Select_Arguments`](/docs/graphql-reference/inputs/evm-call-fields-arguments-select-arguments) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Call_Fields_Arguments_Select_Arguments`](/docs/graphql-reference/inputs/evm-call-fields-arguments-select-arguments) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Block</b></code>](#)<Bullet />[`EVM_Call_Fields_Block`](/docs/graphql-reference/objects/evm-call-fields-block) <Badge class="secondary" text="object"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Arguments.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Block</b></code>](#)<Bullet />[`EVM_Call_Fields_Block`](/docs/graphql-reference/objects/evm-call-fields-block) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
 > Block fields
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Call</b></code>](#)<Bullet />[`EVM_Call_Fields_Call`](/docs/graphql-reference/objects/evm-call-fields-call) <Badge class="secondary" text="object"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Call</b></code>](#)<Bullet />[`EVM_Call_Fields_Call`](/docs/graphql-reference/objects/evm-call-fields-call) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
 > Call fields
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>ChainId</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>ChainId</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > ChainId value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.ChainId.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.ChainId.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.ChainId.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.ChainId.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Return value when the argument is maximum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.ChainId.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.ChainId.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.ChainId.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.ChainId.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Fee</b></code>](#)<Bullet />[`EVM_Call_Fields_Fee`](/docs/graphql-reference/objects/evm-call-fields-fee) <Badge class="secondary" text="object"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Fee</b></code>](#)<Bullet />[`EVM_Call_Fields_Fee`](/docs/graphql-reference/objects/evm-call-fields-fee) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
 > Fee fields
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Receipt</b></code>](#)<Bullet />[`EVM_Call_Fields_Receipt`](/docs/graphql-reference/objects/evm-call-fields-receipt) <Badge class="secondary" text="object"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Receipt</b></code>](#)<Bullet />[`EVM_Call_Fields_Receipt`](/docs/graphql-reference/objects/evm-call-fields-receipt) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
 > Receipt fields
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Returns</b></code>](#)<Bullet />[`[EVM_Call_Fields_Returns]`](/docs/graphql-reference/objects/evm-call-fields-returns) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Returns</b></code>](#)<Bullet />[`[EVM_Call_Fields_Returns]`](/docs/graphql-reference/objects/evm-call-fields-returns) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
 > Returns value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Returns.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Returns.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Return value when the argument is maximum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Returns.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Returns.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Returns.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Call_Fields_Returns_Select_Returns`](/docs/graphql-reference/inputs/evm-call-fields-returns-select-returns) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Returns.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Call_Fields_Returns_Select_Returns`](/docs/graphql-reference/inputs/evm-call-fields-returns-select-returns) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Returns.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.Returns.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>StateChanges</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges]`](/docs/graphql-reference/objects/evm-call-fields-state-changes) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>StateChanges</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges]`](/docs/graphql-reference/objects/evm-call-fields-state-changes) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
 > StateChanges value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.StateChanges.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.StateChanges.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.StateChanges.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.StateChanges.<b>maximum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Return value when the argument is maximum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.StateChanges.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.StateChanges.<b>minimum</b></code>](#)<Bullet />[`EVM_Call_CompareFields`](/docs/graphql-reference/enums/evm-call-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.StateChanges.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Call_Fields_StateChanges_Select_StateChanges`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-state-changes) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.StateChanges.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Call_Fields_StateChanges_Select_StateChanges`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-state-changes) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Transaction</b></code>](#)<Bullet />[`EVM_Call_Fields_Transaction`](/docs/graphql-reference/objects/evm-call-fields-transaction) <Badge class="secondary" text="object"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>Transaction</b></code>](#)<Bullet />[`EVM_Call_Fields_Transaction`](/docs/graphql-reference/objects/evm-call-fields-transaction) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
 > Transaction fields
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>TransactionStatus</b></code>](#)<Bullet />[`EVM_Call_Fields_TransactionStatus`](/docs/graphql-reference/objects/evm-call-fields-transaction-status) <Badge class="secondary" text="object"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>TransactionStatus</b></code>](#)<Bullet />[`EVM_Call_Fields_TransactionStatus`](/docs/graphql-reference/objects/evm-call-fields-transaction-status) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
 > TransactionStatus fields
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>average</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Average of the values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.average.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>average</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.average.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+> 
+> Average of the values
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.average.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Argument for Average of the values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.average.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.average.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>contingency</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Contingency coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.average.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>contingency</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Contingency coefficient between two arguments
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > First argument for Contingency coefficient between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Second argument for Contingency coefficient between two arguments
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.contingency.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Pearson correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.correlation.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Pearson correlation coefficient between two arguments
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.correlation.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Pearson correlation coefficient between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
-> Count records or uniques of arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.count.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Call_EnumFields]`](/docs/graphql-reference/enums/evm-call-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> First argument for Pearson correlation coefficient between two arguments
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Count records or uniques of arguments
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.count.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Call_EnumFields]`](/docs/graphql-reference/enums/evm-call-enum-fields) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Count distinct values of the field
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.count.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.count.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>covariance</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>covariance</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Covariance between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.covariance.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.covariance.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.covariance.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.covariance.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.covariance.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+> 
 > First argument for Covariance between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.covariance.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.covariance.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Second argument for Covariance between two arguments
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>cramers</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.covariance.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>cramers</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Cramér's phi coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > First argument for Cramér's phi coefficient between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Second argument for Cramér's phi coefficient between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Cramér's phi coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Cramér's phi coefficient with bias correction between two arguments
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+> 
 > Second argument for Cramér's phi coefficient with bias correction between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers_bias_corrected.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers_bias_corrected.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>dispersion</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> First argument for Cramér's phi coefficient with bias correction between two arguments
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>dispersion</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Dispersion for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.dispersion.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.dispersion.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Argument for Dispersion for a set of values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.dispersion.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.dispersion.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>entropy</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>entropy</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Entropy for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.entropy.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.entropy.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.entropy.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.entropy.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
 > Argument for Entropy for a set of values
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>kurtosis</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Kurtosis for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.kurtosis.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.entropy.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.kurtosis.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.entropy.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>gini</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Gini factor of argument
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.gini.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.gini.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Argument for gini
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>kurtosis</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Kurtosis for a set of values
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.kurtosis.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Argument for Kurtosis for a set of values
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>median</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.kurtosis.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>median</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Median for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.median.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.median.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.median.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.median.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.median.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Argument for Median for a set of values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.median.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>nakamoto</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Nakamoto index of argument. Count of values more than 0.51 of the range. Ratio (0.51) can be specified as optional parameter
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.nakamoto.<b>ratio</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Ratio for nakamoto index ( default is 0.51, can be from 0 to 1 )
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>quantile</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Approximate quantile of a numeric data sequence
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.nakamoto.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.nakamoto.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Argument for nakamoto index
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>quantile</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Approximate quantile of a numeric data sequence
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.quantile.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.quantile.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Method used to calculate metric values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Argument for quantile
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.quantile.<b>level</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.quantile.<b>level</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Level of quantile. Optional parameter. Constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]. Default value: 0.5. At level=0.5 the function calculates median.
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.quantile.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.quantile.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
-> Method used to calculate metric values
 > 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
 > Rank correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
-> First argument for Rank correlation coefficient between two arguments
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
 > Second argument for Rank correlation coefficient between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Skew for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> First argument for Rank correlation coefficient between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.skew.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Skew for a set of values
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.skew.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Argument for Skew for a set of values
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>standard_deviation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>standard_deviation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Standard deviation of the values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.standard_deviation.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.standard_deviation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Argument for Standard deviation of the values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.standard_deviation.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>sum</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.standard_deviation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
 > 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>sum</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > Sum values of argument
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.sum.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.sum.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.sum.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.sum.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.sum.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.sum.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Argument for sum
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>theils</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="secondary" text="scalar"/>
-> Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.theils.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>theil_index</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Theil index of argument
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.theil_index.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.theils.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.theil_index.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields!`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Argument for Theil index
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>theils_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.theils_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.theils_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > First argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.theils.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.theils_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Call_NumFields`](/docs/graphql-reference/enums/evm-call-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Second argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.theils.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.theils_corrected.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Count unique records
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="badge badge--secondary" text="enum"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="secondary" text="enum"/>
 > Method used to calculate metric values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Call_EnumFields]`](/docs/graphql-reference/enums/evm-call-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Call_EnumFields]!`](/docs/graphql-reference/enums/evm-call-enum-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Uniq values of the field
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
 > 
 
 
 
 ### Member of
 
-[`EVM`](/docs/graphql-reference/objects/evm)  <Badge class="secondary" text="object"/>
+[`EVM_Subscription`](/docs/graphql-reference/objects/evm-subscription)  <Badge class="badge badge--secondary" text="object"/><Bullet />[`EVM`](/docs/graphql-reference/objects/evm)  <Badge class="badge badge--secondary" text="object"/>
 

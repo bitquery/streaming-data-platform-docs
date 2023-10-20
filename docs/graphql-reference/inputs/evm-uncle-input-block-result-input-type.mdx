@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,6 +34,10 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 Select by Result
 
 
@@ -49,11 +53,15 @@ input EVM_Uncle_Input_Block_Result_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Input_Block_Result_InputType.<b>Errors</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Input_Block_Result_InputType.<b>Errors</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Input_Block_Result_InputType.<b>Gas</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Input_Block_Result_InputType.<b>Gas</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
@@ -61,5 +69,5 @@ input EVM_Uncle_Input_Block_Result_InputType {
 
 ### Member of
 
-[`EVM_Uncle_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-uncle-input-block-input-type)  <Badge class="secondary" text="input"/>
+[`EVM_Uncle_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-uncle-input-block-input-type)  <Badge class="badge badge--secondary" text="input"/>
 

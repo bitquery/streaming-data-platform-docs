@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,35 +34,39 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 Listed names of comparable fields in a cube
 
 
 ```graphql
 enum EVM_BalanceUpdate_CompareFields {
-  Log_Index
   Block_L1_Difficulty
-  Log_LogAfterCallIndex
   Block_L1_Number
-  Transaction_Index
-  BalanceUpdate_Id
-  Call_Index
-  Currency_Native
   Block_Date
-  Currency_Delegated
-  Block_L1_Nonce
-  ChainId
-  Currency_Decimals
-  Block_L1_Time
   Block_L1_GasLimit
-  Block_Number
-  Uncle_Index
-  Block_Time
-  Uncle_Block_Number
+  ChainId
   Currency_HasURI
-  Currency_Fungible
+  Log_LogAfterCallIndex
+  Block_L1_Nonce
   Block_L1_GasUsed
+  Currency_Delegated
+  Block_L1_Time
+  Block_Number
+  Log_Index
+  Currency_Fungible
+  Uncle_Index
+  Transaction_Index
   BalanceUpdate_Amount
+  Currency_Native
+  Uncle_Block_Number
+  Block_Time
   Block_L1_BaseFee
+  BalanceUpdate_Id
+  Currency_Decimals
+  Call_Index
 }
 ```
 
@@ -71,99 +75,147 @@ enum EVM_BalanceUpdate_CompareFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Log_Index</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_Difficulty</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_Difficulty</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_Number</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Log_LogAfterCallIndex</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_Date</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_Number</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_GasLimit</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Transaction_Index</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>ChainId</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>BalanceUpdate_Id</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Currency_HasURI</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Call_Index</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Log_LogAfterCallIndex</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Currency_Native</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_Nonce</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_Date</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_GasUsed</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Currency_Delegated</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Currency_Delegated</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_Nonce</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_Time</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>ChainId</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_Number</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Currency_Decimals</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Log_Index</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_Time</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Currency_Fungible</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_GasLimit</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Uncle_Index</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_Number</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Transaction_Index</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Uncle_Index</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>BalanceUpdate_Amount</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_Time</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Currency_Native</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Uncle_Block_Number</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Uncle_Block_Number</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Currency_HasURI</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_Time</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Currency_Fungible</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_BaseFee</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_GasUsed</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>BalanceUpdate_Id</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>BalanceUpdate_Amount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Currency_Decimals</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Block_L1_BaseFee</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_CompareFields.<b>Call_Index</b></code>](#)  
+> 
+> 
 > 
 > 
 
