@@ -1,6 +1,6 @@
 ---
 slug: added-token-holders-api-other-changes
-title: Added 
+title: Added Token Holders API and Other Changes
 authors: [Divyasshree]
 tags: [new api]
 ---
