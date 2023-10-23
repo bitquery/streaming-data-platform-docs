@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -37,10 +37,6 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
-
-
-
-
 ```graphql
 type EVM_ABI_BigInt_Value_Arg {
   bigInteger: String
@@ -52,9 +48,7 @@ type EVM_ABI_BigInt_Value_Arg {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ABI_BigInt_Value_Arg.<b>bigInteger</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ABI_BigInt_Value_Arg.<b>bigInteger</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > 
 > 
 
@@ -62,5 +56,5 @@ type EVM_ABI_BigInt_Value_Arg {
 
 ### Implemented by
 
-[`EVM_ABI_Value_Union`](/docs/graphql-reference/unions/evm-abi-value-union)  <Badge class="badge badge--secondary" text="union"/>
+[`EVM_ABI_Value_Union`](/docs/graphql-reference/unions/evm-abi-value-union)  <Badge class="secondary" text="union"/>
 

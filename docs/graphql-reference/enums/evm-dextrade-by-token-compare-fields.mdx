@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,82 +34,78 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
-
-
-
-
 Listed names of comparable fields in a cube
 
 
 ```graphql
 enum EVM_DEXTradeByToken_CompareFields {
-  Block_Time
-  Call_Signature_Parsed
-  Call_Reverted
-  Log_LogAfterCallIndex
-  Block_Date
-  Call_Create
-  Log_Index
-  Fee_Savings
   Block_L1_Nonce
-  Trade_Currency_Fungible
-  Block_L1_Difficulty
-  ChainId
+  Transaction_Nonce
+  Block_GasUsed
+  Call_Index
+  Call_Delegated
+  Fee_GasRefund
+  Transaction_Cost
+  Call_Value
+  Trade_Dex_Delegated
+  Transaction_Type
+  Receipt_Type
+  Call_Signature_Parsed
+  Transaction_Protected
+  Call_InternalCalls
+  Fee_MinerReward
+  Transaction_Value
+  Trade_Success
+  Transaction_Gas
+  Block_Date
+  Trade_Currency_HasURI
+  Fee_Savings
+  Fee_EffectiveGasPrice
+  Call_GasUsed
+  TransactionStatus_Success
+  Fee_SenderFee
+  Log_Signature_Parsed
+  Call_SelfDestruct
   Transaction_GasTipCap
   Transaction_GasFeeCap
-  Receipt_Status
-  Block_L1_BaseFee
-  Block_L1_GasLimit
-  Transaction_Type
-  Block_L1_GasUsed
-  Fee_EffectiveGasPrice
-  Block_Number
-  Fee_SenderFee
-  Call_Value
-  Block_L1_Number
   Receipt_CumulativeGasUsed
-  Block_GasLimit
+  Trade_Side_Amount
+  Trade_Side_Currency_Decimals
+  Call_Create
+  Block_Number
+  Block_L1_GasUsed
+  Trade_Price
+  Trade_Currency_Fungible
+  Trade_Side_Currency_HasURI
+  Block_Time
+  Block_L1_GasLimit
   Trade_Dex_Pair_Decimals
+  Log_Index
+  Block_GasLimit
+  ChainId
+  Block_L1_Number
+  Fee_PriorityFeePerGas
+  Block_L1_Time
+  Receipt_GasUsed
+  Block_Difficulty
+  Call_Success
+  Transaction_GasPrice
+  Receipt_Status
+  Trade_Side_Currency_Fungible
+  Log_LogAfterCallIndex
+  Trade_Amount
+  Fee_Burnt
+  Call_Gas
+  Call_CallerIndex
+  Block_Nonce
+  Call_Signature_SignatureType
+  Block_L1_Difficulty
+  Call_Reverted
   Log_Signature_SignatureType
   Trade_Currency_Decimals
-  Call_Signature_SignatureType
-  Fee_Burnt
-  Transaction_Cost
-  Trade_Side_Currency_Fungible
-  Call_Gas
-  Transaction_Value
-  TransactionStatus_Success
-  Receipt_GasUsed
-  Fee_GasRefund
-  Block_Nonce
-  Transaction_Protected
-  Trade_Dex_Delegated
-  Trade_Side_Amount
-  Call_Delegated
-  Trade_Side_Currency_HasURI
-  Log_Signature_Parsed
-  Trade_Currency_HasURI
-  Trade_Amount
-  Transaction_Gas
-  Receipt_Type
-  Transaction_Nonce
-  Trade_Price
-  Call_SelfDestruct
-  Transaction_GasPrice
-  Block_L1_Time
-  Call_CallerIndex
-  Fee_MinerReward
   Block_BaseFee
   Transaction_Index
-  Call_Success
-  Trade_Success
-  Call_InternalCalls
-  Trade_Side_Currency_Decimals
-  Call_Index
-  Block_Difficulty
-  Fee_PriorityFeePerGas
-  Call_GasUsed
-  Block_GasUsed
+  Block_L1_BaseFee
 }
 ```
 
@@ -118,405 +114,271 @@ enum EVM_DEXTradeByToken_CompareFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_Time</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_Nonce</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Signature_Parsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Nonce</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Reverted</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_GasUsed</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Log_LogAfterCallIndex</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Index</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_Date</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Delegated</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Create</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_GasRefund</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Log_Index</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Cost</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_Savings</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Value</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_Nonce</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Dex_Delegated</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Currency_Fungible</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Type</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_Difficulty</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Receipt_Type</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>ChainId</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Signature_Parsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_GasTipCap</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Protected</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_GasFeeCap</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_InternalCalls</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Receipt_Status</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_MinerReward</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_BaseFee</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Value</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_GasLimit</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Success</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Type</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Gas</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_GasUsed</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_Date</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_EffectiveGasPrice</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Currency_HasURI</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_Number</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_Savings</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_SenderFee</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_EffectiveGasPrice</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Value</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_GasUsed</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_Number</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>TransactionStatus_Success</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Receipt_CumulativeGasUsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_SenderFee</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_GasLimit</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Log_Signature_Parsed</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Dex_Pair_Decimals</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_SelfDestruct</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Log_Signature_SignatureType</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_GasTipCap</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Currency_Decimals</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_GasFeeCap</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Signature_SignatureType</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Receipt_CumulativeGasUsed</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_Burnt</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Side_Amount</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Cost</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Side_Currency_Decimals</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Side_Currency_Fungible</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Create</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Gas</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_Number</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Value</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_GasUsed</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>TransactionStatus_Success</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Price</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Receipt_GasUsed</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Currency_Fungible</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_GasRefund</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Side_Currency_HasURI</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_Nonce</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_Time</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Protected</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_GasLimit</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Dex_Delegated</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Dex_Pair_Decimals</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Side_Amount</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Log_Index</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Delegated</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_GasLimit</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Side_Currency_HasURI</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>ChainId</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Log_Signature_Parsed</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_Number</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Currency_HasURI</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_PriorityFeePerGas</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Amount</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_Time</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Gas</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Receipt_GasUsed</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Receipt_Type</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_Difficulty</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Nonce</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Success</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Price</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_GasPrice</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_SelfDestruct</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Receipt_Status</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_GasPrice</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Side_Currency_Fungible</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_Time</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Log_LogAfterCallIndex</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_CallerIndex</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Amount</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_MinerReward</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_Burnt</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_BaseFee</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Gas</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Index</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_CallerIndex</b></code>](#) 
 > 
 > 
-> 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Success</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_Nonce</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Success</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Signature_SignatureType</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_InternalCalls</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_Difficulty</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Side_Currency_Decimals</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Reverted</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_Index</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Log_Signature_SignatureType</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_Difficulty</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Trade_Currency_Decimals</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Fee_PriorityFeePerGas</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_BaseFee</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Call_GasUsed</b></code>](#)  
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Transaction_Index</b></code>](#) 
 > 
 > 
-> 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_GasUsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_CompareFields.<b>Block_L1_BaseFee</b></code>](#) 
 > 
 > 
 

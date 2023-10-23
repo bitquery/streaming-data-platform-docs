@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,22 +34,18 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
-
-
-
-
 Array of Trade_URIs includes or excludes provided value
 
 
 ```graphql
 input EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs {
-  startsWith: [OLAP_String]
-  endsWith: [OLAP_String]
-  notStartsWith: [OLAP_String]
   notEndsWith: [OLAP_String]
   length: OLAP_Integer
   includes: [OLAP_String]
   excludes: [OLAP_String]
+  startsWith: [OLAP_String]
+  endsWith: [OLAP_String]
+  notStartsWith: [OLAP_String]
 }
 ```
 
@@ -58,51 +54,37 @@ input EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Starts with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Ends with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>notStartsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Does not start with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>notEndsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>notEndsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Does not End with this element
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > Length of the array
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>includes</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>includes</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Includes this element
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>excludes</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>excludes</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
 > Excludes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Starts with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Ends with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Input_Trade_URIs_Input_Trade_URIs.<b>notStartsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="input"/>
+> Does not start with this element
 > 
 
 
 
 ### Member of
 
-[`EVM_DEXTradeByToken_Input_Trade_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-trade-input-type)  <Badge class="badge badge--secondary" text="input"/>
+[`EVM_DEXTradeByToken_Input_Trade_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-trade-input-type)  <Badge class="secondary" text="input"/>
 

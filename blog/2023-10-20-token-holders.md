@@ -1,7 +1,7 @@
 ---
 slug: added-token-holders-api-other-changes
 title: Added 
-authors: [divyasshree]
+authors: [Divyasshree]
 tags: [new api]
 ---
 

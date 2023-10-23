@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,10 +34,6 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
-
-
-
-
 Arguments_Path fields
 
 
@@ -54,21 +50,15 @@ type EVM_Call_Fields_Arguments_Path {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Arguments_Path.<b>Index</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Arguments_Path.<b>Name</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Arguments_Path.<b>Index</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Arguments_Path.<b>Type</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Arguments_Path.<b>Name</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > 
 > 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Arguments_Path.<b>Type</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
 > 
 > 
 
@@ -76,5 +66,5 @@ type EVM_Call_Fields_Arguments_Path {
 
 ### Member of
 
-[`EVM_Call_Fields_Arguments`](/docs/graphql-reference/objects/evm-call-fields-arguments)  <Badge class="badge badge--secondary" text="object"/>
+[`EVM_Call_Fields_Arguments`](/docs/graphql-reference/objects/evm-call-fields-arguments)  <Badge class="secondary" text="object"/>
 

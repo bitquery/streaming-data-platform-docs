@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,18 +34,14 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
-
-
-
-
 Type of algorithm to filter block updates
 
 
 ```graphql
 enum blocks_query_arg_enum {
+  tree
   trunk
   branches
-  tree
 }
 ```
 
@@ -54,27 +50,21 @@ enum blocks_query_arg_enum {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>blocks_query_arg_enum.<b>trunk</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>blocks_query_arg_enum.<b>tree</b></code>](#) 
+> All blocks ( trunk and uncles ) of the reorg tree
 > 
-> 
+
+#### [<code style={{ fontWeight: 'normal' }}>blocks_query_arg_enum.<b>trunk</b></code>](#) 
 > Blocks from the current head and down the reorg tree
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>blocks_query_arg_enum.<b>branches</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>blocks_query_arg_enum.<b>branches</b></code>](#) 
 > WasOnBranch blocks on the branches of the reorg tree
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>blocks_query_arg_enum.<b>tree</b></code>](#)  
-> 
-> 
-> All blocks ( trunk and uncles ) of the reorg tree
 > 
 
 
 
 ### Member of
 
-[`EVM`](/docs/graphql-reference/queries/evm)  <Badge class="badge badge--secondary" text="query"/>
+[`EVM`](/docs/graphql-reference/queries/evm)  <Badge class="secondary" text="query"/>
 
