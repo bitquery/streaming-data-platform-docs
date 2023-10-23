@@ -59,8 +59,8 @@ Token holder of a token refers to any wallet which holds that particular token. 
 
 Token Holder API allows you to narrow down your results using these parameters:
 
-- `date`: Choose the date after which you want the token holders' data. It's required for all token holder queries.
-- `tokenSmartContract`: Specify the token's address. It's required for all token holder queries.
+- `date`: Choose the date after which you want the token holders' data. **It's required for all token holder queries**.
+- `tokenSmartContract`: Specify the token's address. **It's required for all token holder queries**.
 - `limit`: Limit the results to a specified number of token holders.
 - `limitBy`: Limit results based on a specific field's value.
 - `orderBy`: Order results according to a field's value.
