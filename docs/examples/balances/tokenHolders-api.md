@@ -295,3 +295,35 @@ query($currency: String! $date: String!) {
 
 `Holder`: The address that transferred complete holdings of the token.
 `BalanceUpdate:OutAmount`: The amount of the token that was transferred.
+
+
+## Token holders Millionaires
+
+TokenHolder API is very flexible and help you get token holder holding any specific balance range. For example if you want to know how many addresses holding more than 1 million USDT, you can use following query. 
+
+You can find the query [here](https://ide.bitquery.io/USDT-token-holder-distribution)
+
+
+```{
+  EVM(dataset: archive, network: eth) {
+    TokenHolders(
+      date: "2023-10-22"
+      tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+      where: {Balance: {Amount: {ge: "0"}}}
+    ) {
+      classic: count(
+        distinct: Holder_Address
+        if: {Balance: {Amount: {gt: "1000000"}}}
+      )
+      pro: count(
+        distinct: Holder_Address
+        if: {Balance: {Amount: {gt: "100000", le: "1000000"}}}
+      )
+      growing: count(
+        distinct: Holder_Address
+        if: {Balance: {Amount: {gt: "1000", le: "100000"}}}
+      )
+    }
+  }
+}
+```
