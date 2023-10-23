@@ -28,6 +28,53 @@ title: "EVM Token Holders API"
 <meta property="twitter:description" content="Explore token holder information include holders of a token, metrics like nakamoto coefficient, gini factor and theil index. Discover balance, attributes, and more information effortlessly." />
 </head>
 
+## Token Holders
+
+Token holder of a token refers to any wallet which holds that particular token. With Bitquery's TokenHolders API, you can get details related to the holders of any token.
+
+```graphql
+{
+  EVM(dataset: archive) {
+    TokenHolders(
+      tokenSmartContract: "0x514910771af9ca656af840dff83e8264ecf986ca"
+      date: "2023-10-04"
+      where: {Balance: {Amount: {gt: "0"}}, BalanceUpdate: {FirstDate: {is: "2023-10-04"}}}
+    ) {
+      Balance {
+        Amount
+      }
+      Holder {
+        Address
+      }
+      Currency {
+        Name
+        Symbol
+      }
+    }
+  }
+}
+```
+
+### Filter Parameters
+
+Token Holder API allows you to narrow down your results using these parameters:
+
+- `date`: Choose the date after which you want the token holders' data. It's required for all token holder queries.
+- `tokenSmartContract`: Specify the token's address. It's required for all token holder queries.
+- `limit`: Limit the results to a specified number of token holders.
+- `limitBy`: Limit results based on a specific field's value.
+- `orderBy`: Order results according to a field's value.
+- `where`: Filter results based on specific criteria related to the value of the returned field.
+
+### Return Fields
+
+The Token Holder API offers access to the following fields:
+
+- `Balance`: Provides the token balance.
+- `BalanceUpdate`: Offers a range of aggregated data related to balance updates, including count, first date, last date, and more.
+- `Currency`: Fetches details related to the currency, such as smart contract and address.
+- `Holder`: Retrieves the holder's address.
+
 ## Indexes and Factors
 
 Indexes and factors are calculations that can be used to analyze data in the TokenHolders cube. They can be used to calculate a variety of metrics, such as the Gini coefficient, Nakamoto coefficient, and Thiel index.

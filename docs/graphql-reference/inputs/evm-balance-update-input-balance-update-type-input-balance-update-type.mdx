@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,15 +34,19 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 Select filters for BalanceUpdate_Type
 
 
 ```graphql
 input EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type {
+  is: EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input
   not: EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input
   in: [EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input]
   notIn: [EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input]
-  is: EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input
 }
 ```
 
@@ -51,25 +55,33 @@ input EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>not</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="secondary" text="enum"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>is</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Exact match
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>not</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Not this
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>in</b></code>](#)<Bullet />[`[EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input]`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>in</b></code>](#)<Bullet />[`[EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input]`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > One of the values
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>notIn</b></code>](#)<Bullet />[`[EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input]`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
-> Not one of the values
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>notIn</b></code>](#)<Bullet />[`[EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input]`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type.<b>is</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input`](/docs/graphql-reference/enums/evm-balance-update-input-balance-update-type-input-balance-update-type-input) <Badge class="secondary" text="enum"/>
-> Exact match
+> 
+> Not one of the values
 > 
 
 
 
 ### Member of
 
-[`EVM_BalanceUpdate_Input_BalanceUpdate_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-balance-update-input-type)  <Badge class="secondary" text="input"/>
+[`EVM_BalanceUpdate_Input_BalanceUpdate_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-balance-update-input-type)  <Badge class="badge badge--secondary" text="input"/>
 

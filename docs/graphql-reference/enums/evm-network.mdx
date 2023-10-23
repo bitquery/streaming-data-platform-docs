@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,14 +34,18 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 Blockchain network selection
 
 
 ```graphql
 enum evm_network {
+  arbitrum
   bsc
   eth
-  arbitrum
 }
 ```
 
@@ -50,21 +54,27 @@ enum evm_network {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>evm_network.<b>bsc</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>evm_network.<b>arbitrum</b></code>](#)  
+> 
+> 
+> Arbitrum Mainnet
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>evm_network.<b>bsc</b></code>](#)  
+> 
+> 
 > Binance Smart Chain Mainnet
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>evm_network.<b>eth</b></code>](#) 
-> Ethereum Mainnet
+#### [<code style={{ fontWeight: 'normal' }}>evm_network.<b>eth</b></code>](#)  
 > 
-
-#### [<code style={{ fontWeight: 'normal' }}>evm_network.<b>arbitrum</b></code>](#) 
-> Arbitrum Mainnet
+> 
+> Ethereum Mainnet
 > 
 
 
 
 ### Member of
 
-[`EVM`](/docs/graphql-reference/queries/evm)  <Badge class="secondary" text="query"/><Bullet />[`EVM`](/docs/graphql-reference/subscriptions/evm)  <Badge class="secondary" text="subscription"/>
+[`EVM`](/docs/graphql-reference/queries/evm)  <Badge class="badge badge--secondary" text="query"/><Bullet />[`EVM`](/docs/graphql-reference/subscriptions/evm)  <Badge class="badge badge--secondary" text="subscription"/>
 

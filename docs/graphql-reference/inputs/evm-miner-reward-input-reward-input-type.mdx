@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,16 +34,20 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 Select by Reward
 
 
 ```graphql
 input EVM_MinerReward_Input_Reward_InputType {
+  TxFees: EVM_Amount_With_Decimals
+  BurntFees: EVM_Amount_With_Decimals
   Uncle: EVM_Amount_With_Decimals
   Total: EVM_Amount_With_Decimals
-  TxFees: EVM_Amount_With_Decimals
   Static: EVM_Amount_With_Decimals
-  BurntFees: EVM_Amount_With_Decimals
   Dynamic: EVM_Amount_With_Decimals
 }
 ```
@@ -53,27 +57,39 @@ input EVM_MinerReward_Input_Reward_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>Uncle</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>TxFees</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>Total</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>BurntFees</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>TxFees</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>Uncle</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>Static</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>Total</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>BurntFees</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>Static</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>Dynamic</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Input_Reward_InputType.<b>Dynamic</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
@@ -81,5 +97,5 @@ input EVM_MinerReward_Input_Reward_InputType {
 
 ### Member of
 
-[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter)  <Badge class="secondary" text="input"/>
+[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter)  <Badge class="badge badge--secondary" text="input"/>
 
