@@ -218,6 +218,38 @@ query($currency: String! $date: String!) {
 }
 ```
 
+## Common token holders of two tokens
+
+Let's say if we want to know common tokens holders of two tokens, we can use `BalanceUpdate` API. In the following example we will get common token holder of [Bored Ape Yacht](https://boredapeyachtclub.com/#/) and [Mutant Ape Yacht Club](https://opensea.io/collection/mutant-ape-yacht-club) NFT tokens.
+
+You can find the query [here](https://ide.bitquery.io/Common-token-holder-Bored-Ape-Yacht-Club-and-Mutant-Ape-Yacht-Club)
+
+```
+{
+  EVM(dataset: archive) {
+    BalanceUpdates(
+      orderBy: {descendingByField: "token1"}
+      limit: {count: 1000}
+      where: {Currency: {SmartContract: {in: ["0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d", "0x60e4d786628fea6478f785a6d7e704777c86a7c6"]}}}
+    ) {
+      BalanceUpdate {
+        Address
+      }
+      token1: sum(
+        of: BalanceUpdate_Amount
+        if: {Currency: {SmartContract: {is: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"}}}
+        selectWhere: {gt: "0"}
+      )
+      token2: sum(
+        of: BalanceUpdate_Amount
+        if: {Currency: {SmartContract: {is: "0x60e4d786628fea6478f785a6d7e704777c86a7c6"}}}
+        selectWhere: {gt: "0"}
+      )
+    }
+  }
+}
+```
+
 ## Addresses that transferred complete holdings of a Token / Liquidating their holdings of a particular token
 
 The following example shows how to use the query to find addresses that transferred complete holdings of the DAI token on March 22, 2023.You can find the query [here](https://ide.bitquery.io/addresses-that-transferred-out-all-of-their-holdings-for-this-particular-token-on-a-given-day)
