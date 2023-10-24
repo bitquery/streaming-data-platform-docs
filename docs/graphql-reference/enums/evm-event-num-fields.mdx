@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,60 +34,56 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
-
-
-
-
 Listed names of numeric fields in a cube
 
 
 ```graphql
 enum EVM_Event_NumFields {
-  Block_L1_GasLimit
-  Fee_EffectiveGasPrice
-  Fee_Savings
+  Block_Number
+  Transaction_Nonce
+  Transaction_GasTipCap
   Block_BaseFee
-  Log_LogAfterCallIndex
-  Block_L1_Difficulty
-  Log_Index
-  Block_Difficulty
+  Call_Gas
+  Transaction_Value
+  Receipt_GasUsed
   Block_L1_Nonce
-  Transaction_Index
+  Block_GasLimit
+  Call_GasUsed
+  Fee_PriorityFeePerGas
+  Call_Value
+  Block_L1_GasUsed
+  LogHeader_Index
+  Transaction_Cost
+  Receipt_Status
+  Call_Index
+  Receipt_CumulativeGasUsed
+  Log_Index
+  Call_InternalCalls
+  Fee_EffectiveGasPrice
+  Log_Pc
+  Log_ExitIndex
+  Log_EnterIndex
+  Block_L1_Difficulty
   Transaction_Type
   Block_L1_BaseFee
-  Receipt_Type
-  Call_GasUsed
-  Transaction_GasTipCap
-  Receipt_Status
-  Transaction_Gas
-  Call_Gas
-  Call_Index
-  Log_Pc
-  Fee_MinerReward
-  Block_GasLimit
-  Block_L1_GasUsed
-  Receipt_CumulativeGasUsed
-  Block_Number
-  Fee_PriorityFeePerGas
-  Log_ExitIndex
-  Block_L1_Number
-  Transaction_Nonce
-  Call_InternalCalls
-  Receipt_GasUsed
-  Transaction_GasPrice
-  Block_Nonce
-  Fee_SenderFee
+  Block_Difficulty
+  Transaction_Index
   Block_GasUsed
+  Receipt_Type
+  Log_LogAfterCallIndex
+  Block_Nonce
   ChainId
+  Fee_MinerReward
+  Call_CallerIndex
+  Block_L1_GasLimit
+  Transaction_GasPrice
+  Fee_SenderFee
+  Block_L1_Number
+  Fee_Savings
+  Fee_Burnt
+  Transaction_Gas
   Transaction_GasFeeCap
   Fee_GasRefund
-  Log_EnterIndex
-  Fee_Burnt
-  Transaction_Value
-  Transaction_Cost
-  Call_Value
-  Call_CallerIndex
-  LogHeader_Index
 }
 ```
 
@@ -96,273 +92,183 @@ enum EVM_Event_NumFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_GasLimit</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_EffectiveGasPrice</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_Number</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_Savings</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_BaseFee</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Nonce</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Log_LogAfterCallIndex</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_Difficulty</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_GasTipCap</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Log_Index</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_Difficulty</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_BaseFee</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_Nonce</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Index</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_Gas</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Type</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_BaseFee</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Value</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Receipt_Type</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_GasUsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Receipt_GasUsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_GasTipCap</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Receipt_Status</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_Nonce</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Gas</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_Gas</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_GasLimit</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_Index</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Log_Pc</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_GasUsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_MinerReward</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_GasLimit</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_PriorityFeePerGas</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_GasUsed</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Receipt_CumulativeGasUsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_Value</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_Number</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_PriorityFeePerGas</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_GasUsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Log_ExitIndex</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_Number</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>LogHeader_Index</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Nonce</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_InternalCalls</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Cost</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Receipt_GasUsed</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_GasPrice</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Receipt_Status</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_Nonce</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_SenderFee</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_Index</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_GasUsed</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>ChainId</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Receipt_CumulativeGasUsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_GasFeeCap</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_GasRefund</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Log_Index</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Log_EnterIndex</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_Burnt</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_InternalCalls</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Value</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Cost</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_EffectiveGasPrice</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_Value</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_CallerIndex</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Log_Pc</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>LogHeader_Index</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Log_ExitIndex</b></code>](#) 
 > 
 > 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Log_EnterIndex</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_Difficulty</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Type</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_BaseFee</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_Difficulty</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Index</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_GasUsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Receipt_Type</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Log_LogAfterCallIndex</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_Nonce</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>ChainId</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_MinerReward</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Call_CallerIndex</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_GasLimit</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_GasPrice</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_SenderFee</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Block_L1_Number</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_Savings</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_Burnt</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_Gas</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Transaction_GasFeeCap</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_NumFields.<b>Fee_GasRefund</b></code>](#) 
 > 
 > 
 

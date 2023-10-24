@@ -72,6 +72,18 @@ const config = {
         },
       },
     ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          // /docs/oldDoc -> /docs/newDoc
+          {
+            to: '/docs/examples/token-holders/token-holder-api/',
+            from: '/docs/examples/balances/tokenHolders-api/',
+          },
+        ],
+      },
+    ],
   ],
   presets: [
     [

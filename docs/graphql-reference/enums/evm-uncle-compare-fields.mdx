@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,42 +34,38 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
-
-
-
-
 Listed names of comparable fields in a cube
 
 
 ```graphql
 enum EVM_Uncle_CompareFields {
-  Block_Date
-  Uncle_Block_Date
-  Block_GasLimit
-  Uncle_Block_Number
-  Block_UnclesCount
-  Block_L1_GasLimit
-  Uncle_Block_GasLimit
-  Uncle_Block_Difficulty
-  Block_L1_Time
-  Block_Time
-  ChainId
-  Block_Nonce
-  Block_L1_Number
-  Block_L1_GasUsed
   Uncle_Block_Time
-  Block_BaseFee
-  Block_Number
-  Uncle_Block_GasUsed
-  Block_Result_Gas
-  Block_L1_Difficulty
-  Uncle_Block_Nonce
-  Uncle_Block_BaseFee
-  Block_Difficulty
-  Block_GasUsed
   Block_TxCount
+  Block_L1_Time
+  Uncle_Block_BaseFee
+  ChainId
+  Block_GasUsed
+  Block_L1_GasLimit
+  Block_Number
+  Block_Time
+  Block_UnclesCount
+  Uncle_Block_Difficulty
+  Block_BaseFee
+  Block_L1_Number
+  Block_GasLimit
+  Block_Result_Gas
   Uncle_Index
+  Block_L1_GasUsed
+  Uncle_Block_Number
+  Block_L1_Difficulty
+  Uncle_Block_Date
+  Block_Nonce
+  Uncle_Block_GasUsed
   Block_L1_BaseFee
+  Uncle_Block_Nonce
+  Block_Date
+  Block_Difficulty
+  Uncle_Block_GasLimit
   Block_L1_Nonce
 }
 ```
@@ -79,171 +75,115 @@ enum EVM_Uncle_CompareFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Date</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_Date</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_Time</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_GasLimit</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_Number</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_TxCount</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_UnclesCount</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_GasLimit</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_Time</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_GasLimit</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_Difficulty</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_BaseFee</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_Time</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Time</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>ChainId</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>ChainId</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Nonce</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_GasUsed</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_Number</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_GasUsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_GasLimit</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_Time</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_BaseFee</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Number</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Number</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_GasUsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Time</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Result_Gas</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_Difficulty</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_UnclesCount</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_Nonce</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_BaseFee</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_Difficulty</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Difficulty</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_GasUsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_BaseFee</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_TxCount</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Index</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_Number</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_BaseFee</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_GasLimit</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_Nonce</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Result_Gas</b></code>](#) 
 > 
 > 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Index</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_GasUsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_Number</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_Difficulty</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_Date</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Nonce</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_GasUsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_BaseFee</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_Nonce</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Date</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_Difficulty</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Uncle_Block_GasLimit</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_CompareFields.<b>Block_L1_Nonce</b></code>](#) 
 > 
 > 
 

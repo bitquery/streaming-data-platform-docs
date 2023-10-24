@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,18 +34,14 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
-
-
-
-
 LimitBy definition
 
 
 ```graphql
 input EVM_Block_LimitBy {
-  count: Int
   offset: Int
   by: [EVM_Block_EnumFields]
+  count: Int
 }
 ```
 
@@ -54,22 +50,16 @@ input EVM_Block_LimitBy {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_LimitBy.<b>count</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Max count in results
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_LimitBy.<b>offset</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_LimitBy.<b>offset</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
 > Offset of results
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_LimitBy.<b>by</b></code>](#)<Bullet />[`[EVM_Block_EnumFields]`](/docs/graphql-reference/enums/evm-block-enum-fields) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_LimitBy.<b>by</b></code>](#)<Bullet />[`[EVM_Block_EnumFields]`](/docs/graphql-reference/enums/evm-block-enum-fields) <Badge class="secondary" text="list"/> <Badge class="secondary" text="enum"/>
 > Limit by specific field
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_LimitBy.<b>count</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
+> Max count in results
 > 
 
 

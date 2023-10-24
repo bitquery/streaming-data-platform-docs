@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,61 +34,57 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
-
-
-
-
 Listed names of comparable fields in a cube
 
 
 ```graphql
 enum EVM_Transaction_CompareFields {
-  Transaction_Protected
-  Transaction_GasFeeCap
-  Transaction_Type
-  TransactionStatus_Success
-  Fee_MinerReward
-  Signature_V
-  Transaction_Cost
-  Transaction_ToCode_Suicided
-  Fee_EffectiveGasPrice
-  Fee_PriorityFeePerGas
-  Receipt_Type
-  Receipt_Status
-  Block_L1_BaseFee
-  Fee_GasRefund
-  Transaction_Index
-  Block_L1_Nonce
-  Transaction_Nonce
-  Block_L1_Difficulty
-  Block_L1_GasUsed
-  Receipt_CumulativeGasUsed
-  Signature_R
-  Fee_Burnt
-  Block_Date
-  Receipt_GasUsed
-  Transaction_ToCode_Size
-  Signature_S
-  Transaction_Gas
-  Fee_SenderFee
-  Fee_Savings
-  Transaction_Value
-  Block_Difficulty
-  Block_Nonce
-  Block_Time
-  ChainId
-  Receipt_ContractAddressCode_Size
-  Block_L1_GasLimit
   Receipt_ContractAddressCode_Suicided
-  Transaction_GasTipCap
-  Block_BaseFee
-  Block_Number
-  Block_L1_Time
+  Block_L1_BaseFee
+  Transaction_Type
   Block_L1_Number
-  Transaction_CallCount
-  Transaction_GasPrice
-  Block_GasUsed
+  Block_L1_GasLimit
+  Fee_PriorityFeePerGas
+  Signature_R
+  Signature_V
+  Signature_S
+  Transaction_Protected
+  Transaction_GasTipCap
+  Fee_Burnt
+  Fee_Savings
+  Receipt_Status
   Block_GasLimit
+  Block_BaseFee
+  Transaction_GasFeeCap
+  Receipt_Type
+  Transaction_GasPrice
+  TransactionStatus_Success
+  Block_Date
+  Fee_SenderFee
+  Block_L1_Difficulty
+  Transaction_Nonce
+  Transaction_Value
+  Receipt_ContractAddressCode_Size
+  Transaction_ToCode_Size
+  Transaction_Index
+  Block_Number
+  Block_GasUsed
+  Transaction_Cost
+  Block_L1_GasUsed
+  Fee_EffectiveGasPrice
+  Transaction_Gas
+  ChainId
+  Block_Nonce
+  Receipt_CumulativeGasUsed
+  Block_Difficulty
+  Receipt_GasUsed
+  Block_L1_Nonce
+  Transaction_CallCount
+  Fee_GasRefund
+  Fee_MinerReward
+  Block_Time
+  Block_L1_Time
+  Transaction_ToCode_Suicided
 }
 ```
 
@@ -97,279 +93,187 @@ enum EVM_Transaction_CompareFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Protected</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_GasFeeCap</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_ContractAddressCode_Suicided</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Type</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>TransactionStatus_Success</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_BaseFee</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_MinerReward</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Signature_V</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Type</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Cost</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_ToCode_Suicided</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_Number</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_EffectiveGasPrice</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_PriorityFeePerGas</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_GasLimit</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_Type</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_Status</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_PriorityFeePerGas</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_BaseFee</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_GasRefund</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Signature_R</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Index</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_Nonce</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Signature_V</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Nonce</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_Difficulty</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Signature_S</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_GasUsed</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_CumulativeGasUsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Protected</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Signature_R</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_Burnt</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_GasTipCap</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_Date</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_GasUsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_Burnt</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_ToCode_Size</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Signature_S</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_Savings</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Gas</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_SenderFee</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_Status</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_Savings</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Value</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_GasLimit</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_Difficulty</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_Nonce</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_BaseFee</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_Time</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>ChainId</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_GasFeeCap</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_ContractAddressCode_Size</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_GasLimit</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_Type</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_ContractAddressCode_Suicided</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_GasTipCap</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_GasPrice</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_BaseFee</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_Number</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>TransactionStatus_Success</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_Time</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_Number</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_Date</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_CallCount</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_GasPrice</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_SenderFee</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_GasUsed</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_Difficulty</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_GasLimit</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Nonce</b></code>](#) 
 > 
 > 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Value</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_ContractAddressCode_Size</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_ToCode_Size</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Index</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_Number</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_GasUsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Cost</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_GasUsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_EffectiveGasPrice</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_Gas</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>ChainId</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_Nonce</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_CumulativeGasUsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_Difficulty</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Receipt_GasUsed</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_Nonce</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_CallCount</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_GasRefund</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Fee_MinerReward</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_Time</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Block_L1_Time</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_CompareFields.<b>Transaction_ToCode_Suicided</b></code>](#) 
 > 
 > 
 

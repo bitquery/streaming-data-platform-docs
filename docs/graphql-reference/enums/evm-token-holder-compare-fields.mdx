@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,10 +34,6 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
-
-
-
-
 Listed names of comparable fields in a cube
 
 
@@ -45,17 +41,17 @@ Listed names of comparable fields in a cube
 enum EVM_TokenHolder_CompareFields {
   Currency_Native
   BalanceUpdate_FirstDate
-  Balance_Amount
-  Currency_Delegated
-  Currency_Decimals
-  BalanceUpdate_Count
-  BalanceUpdate_InCount
   Currency_Fungible
-  Currency_HasURI
-  BalanceUpdate_OutCount
+  BalanceUpdate_InCount
   BalanceUpdate_InAmount
+  Currency_Delegated
+  Currency_HasURI
+  BalanceUpdate_Count
+  BalanceUpdate_OutCount
+  Currency_Decimals
   BalanceUpdate_OutAmount
   BalanceUpdate_LastDate
+  Balance_Amount
 }
 ```
 
@@ -64,81 +60,55 @@ enum EVM_TokenHolder_CompareFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Currency_Native</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_FirstDate</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Currency_Native</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Balance_Amount</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Currency_Delegated</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_FirstDate</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Currency_Decimals</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_Count</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Currency_Fungible</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_InCount</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Currency_Fungible</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_InCount</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Currency_HasURI</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_OutCount</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_InAmount</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_InAmount</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_OutAmount</b></code>](#)  
-> 
-> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Currency_Delegated</b></code>](#) 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_LastDate</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Currency_HasURI</b></code>](#) 
 > 
 > 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_Count</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_OutCount</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Currency_Decimals</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_OutAmount</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>BalanceUpdate_LastDate</b></code>](#) 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_CompareFields.<b>Balance_Amount</b></code>](#) 
 > 
 > 
 
