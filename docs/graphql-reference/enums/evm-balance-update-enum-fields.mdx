@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,51 +34,55 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 Listed names of fields in a cube
 
 
 ```graphql
 enum EVM_BalanceUpdate_EnumFields {
-  Currency_Name
   Uncle_Index
-  Currency_Native
-  Transaction_Index
-  Transaction_Hash
-  Currency_SmartContract
-  Log_LogAfterCallIndex
-  BalanceUpdate_Type
   Currency_Fungible
-  Block_L1_GasLimit
-  Block_L1_Coinbase
-  BalanceUpdate_Address
-  Currency_ProtocolName
-  Block_L1_GasUsed
-  Block_L1_Difficulty
   Uncle_Block_Number
-  Currency_Symbol
-  Block_L1_ParentHash
-  Block_Hash
-  Block_Time
-  Block_L1_Hash
-  Block_L1_Number
-  Block_L1_BaseFee
-  BalanceUpdate_URI
-  Block_ParentHash
-  Block_L1_Time
-  Block_Date
-  Call_Index
-  BalanceUpdate_Amount
+  BalanceUpdate_Type
+  Currency_Native
   Currency_HasURI
-  Currency_DelegatedTo
-  Log_Index
-  Uncle_Block_Hash
-  Currency_Decimals
-  Currency_Delegated
-  Call_CallPath
   ChainId
-  Block_Number
+  Block_Time
+  Currency_Decimals
   BalanceUpdate_Id
+  Transaction_Index
+  Currency_ProtocolName
+  Call_CallPath
+  BalanceUpdate_Address
+  Block_L1_Time
+  Uncle_Block_Hash
+  Block_L1_Difficulty
+  Block_Date
+  Currency_Name
+  Block_Number
+  Block_L1_Hash
+  Transaction_Hash
+  Block_L1_Coinbase
+  Block_L1_GasLimit
+  Block_L1_BaseFee
   Block_L1_Nonce
+  Block_Hash
+  Currency_DelegatedTo
+  Block_L1_Number
+  Block_ParentHash
+  Call_Index
+  Block_L1_ParentHash
+  Block_L1_GasUsed
+  Log_Index
+  BalanceUpdate_URI
+  Currency_SmartContract
+  BalanceUpdate_Amount
+  Log_LogAfterCallIndex
+  Currency_Symbol
+  Currency_Delegated
 }
 ```
 
@@ -87,163 +91,243 @@ enum EVM_BalanceUpdate_EnumFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Name</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Uncle_Index</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Uncle_Index</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Fungible</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Native</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Uncle_Block_Number</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Transaction_Index</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>BalanceUpdate_Type</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Transaction_Hash</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Native</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_SmartContract</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_HasURI</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Log_LogAfterCallIndex</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>ChainId</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>BalanceUpdate_Type</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_Time</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Fungible</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Decimals</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_GasLimit</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>BalanceUpdate_Id</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Coinbase</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Transaction_Index</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>BalanceUpdate_Address</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_ProtocolName</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_ProtocolName</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Call_CallPath</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_GasUsed</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>BalanceUpdate_Address</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Difficulty</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Time</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Uncle_Block_Number</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Uncle_Block_Hash</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Symbol</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Difficulty</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_ParentHash</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_Date</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_Hash</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Name</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_Time</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_Number</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Hash</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Hash</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Number</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Transaction_Hash</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_BaseFee</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Coinbase</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>BalanceUpdate_URI</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_GasLimit</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_ParentHash</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_BaseFee</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Time</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Nonce</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_Date</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_Hash</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Call_Index</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_DelegatedTo</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>BalanceUpdate_Amount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Number</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_HasURI</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_ParentHash</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_DelegatedTo</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Call_Index</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Log_Index</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_ParentHash</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Uncle_Block_Hash</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_GasUsed</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Decimals</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Log_Index</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Delegated</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>BalanceUpdate_URI</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Call_CallPath</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_SmartContract</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>ChainId</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>BalanceUpdate_Amount</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_Number</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Log_LogAfterCallIndex</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>BalanceUpdate_Id</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Symbol</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Block_L1_Nonce</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_EnumFields.<b>Currency_Delegated</b></code>](#)  
+> 
+> 
 > 
 > 
 
@@ -251,5 +335,5 @@ enum EVM_BalanceUpdate_EnumFields {
 
 ### Member of
 
-[`EVM_BalanceUpdate_LimitBy`](/docs/graphql-reference/inputs/evm-balance-update-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`EVM_BalanceUpdate_Ordering`](/docs/graphql-reference/inputs/evm-balance-update-ordering)  <Badge class="secondary" text="input"/>
+[`EVM_BalanceUpdate_LimitBy`](/docs/graphql-reference/inputs/evm-balance-update-limit-by)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_BalanceUpdate_Ordering`](/docs/graphql-reference/inputs/evm-balance-update-ordering)  <Badge class="badge badge--secondary" text="input"/>
 

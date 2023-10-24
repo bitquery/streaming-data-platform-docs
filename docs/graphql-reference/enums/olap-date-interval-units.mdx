@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -37,6 +37,10 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 ```graphql
 enum OLAP_DateIntervalUnits {
   days
@@ -51,19 +55,27 @@ enum OLAP_DateIntervalUnits {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateIntervalUnits.<b>days</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateIntervalUnits.<b>days</b></code>](#)  
+> 
+> 
 > Interval in days
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateIntervalUnits.<b>weeks</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateIntervalUnits.<b>weeks</b></code>](#)  
+> 
+> 
 > Interval in weeks
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateIntervalUnits.<b>months</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateIntervalUnits.<b>months</b></code>](#)  
+> 
+> 
 > Interval in months
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateIntervalUnits.<b>years</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateIntervalUnits.<b>years</b></code>](#)  
+> 
+> 
 > Interval in years
 > 
 
@@ -71,5 +83,5 @@ enum OLAP_DateIntervalUnits {
 
 ### Member of
 
-[`OLAP_DateInterval`](/docs/graphql-reference/inputs/olap-date-interval)  <Badge class="secondary" text="input"/>
+[`OLAP_DateInterval`](/docs/graphql-reference/inputs/olap-date-interval)  <Badge class="badge badge--secondary" text="input"/>
 

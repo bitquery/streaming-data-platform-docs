@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,18 +34,22 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 Select by Fee
 
 
 ```graphql
 input EVM_Call_Input_Fee_InputType {
-  GasRefund: OLAP_BigInteger
-  Savings: EVM_Amount_With_Decimals
-  EffectiveGasPrice: EVM_Amount_With_Decimals
   Burnt: EVM_Amount_With_Decimals
+  Savings: EVM_Amount_With_Decimals
+  GasRefund: OLAP_BigInteger
+  EffectiveGasPrice: EVM_Amount_With_Decimals
+  MinerReward: EVM_Amount_With_Decimals
   SenderFee: EVM_Amount_With_Decimals
   PriorityFeePerGas: EVM_Amount_With_Decimals
-  MinerReward: EVM_Amount_With_Decimals
 }
 ```
 
@@ -54,31 +58,45 @@ input EVM_Call_Input_Fee_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>GasRefund</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>Burnt</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>Savings</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>Savings</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>EffectiveGasPrice</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>GasRefund</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>Burnt</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>EffectiveGasPrice</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>SenderFee</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>MinerReward</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>PriorityFeePerGas</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>SenderFee</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>MinerReward</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Fee_InputType.<b>PriorityFeePerGas</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
@@ -86,5 +104,5 @@ input EVM_Call_Input_Fee_InputType {
 
 ### Member of
 
-[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter)  <Badge class="secondary" text="input"/>
+[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter)  <Badge class="badge badge--secondary" text="input"/>
 

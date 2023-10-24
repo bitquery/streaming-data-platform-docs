@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,15 +34,19 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 Select by Pair
 
 
 ```graphql
 input EVM_DEXTrade_Input_Trade_Dex_Pair_InputType {
-  Name: OLAP_String
   Symbol: OLAP_String
   Decimals: OLAP_Integer
   SmartContract: OLAP_String
+  Name: OLAP_String
 }
 ```
 
@@ -51,19 +55,27 @@ input EVM_DEXTrade_Input_Trade_Dex_Pair_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Dex_Pair_InputType.<b>Name</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Dex_Pair_InputType.<b>Symbol</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Dex_Pair_InputType.<b>Symbol</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Dex_Pair_InputType.<b>Decimals</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Dex_Pair_InputType.<b>Decimals</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Dex_Pair_InputType.<b>SmartContract</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Dex_Pair_InputType.<b>SmartContract</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Input_Trade_Dex_Pair_InputType.<b>Name</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > 
 > 
 
@@ -71,5 +83,5 @@ input EVM_DEXTrade_Input_Trade_Dex_Pair_InputType {
 
 ### Member of
 
-[`EVM_DEXTrade_Input_Trade_Dex_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-dex-input-type)  <Badge class="secondary" text="input"/>
+[`EVM_DEXTrade_Input_Trade_Dex_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-dex-input-type)  <Badge class="badge badge--secondary" text="input"/>
 

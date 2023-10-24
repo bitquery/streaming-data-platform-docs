@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,30 +34,34 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
 Listed names of fields in a cube
 
 
 ```graphql
 enum EVM_TokenHolder_EnumFields {
+  Currency_ProtocolName
+  BalanceUpdate_Count
+  Currency_Decimals
+  Currency_Native
+  BalanceUpdate_FirstDate
   Currency_SmartContract
   Currency_Delegated
   Holder_Address
-  Currency_Native
+  BalanceUpdate_OutAmount
   BalanceUpdate_InCount
-  BalanceUpdate_Count
-  Currency_HasURI
-  Currency_Symbol
   Balance_Amount
+  Currency_Symbol
+  Currency_Name
   BalanceUpdate_InAmount
   Currency_DelegatedTo
-  Currency_ProtocolName
-  Currency_Decimals
   BalanceUpdate_LastDate
-  BalanceUpdate_FirstDate
   Currency_Fungible
-  BalanceUpdate_OutAmount
+  Currency_HasURI
   BalanceUpdate_OutCount
-  Currency_Name
 }
 ```
 
@@ -66,79 +70,117 @@ enum EVM_TokenHolder_EnumFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_SmartContract</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_ProtocolName</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Delegated</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_Count</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Holder_Address</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Decimals</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Native</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Native</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_InCount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_FirstDate</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_Count</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_SmartContract</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_HasURI</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Delegated</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Symbol</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Holder_Address</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Balance_Amount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_OutAmount</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_InAmount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_InCount</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_DelegatedTo</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Balance_Amount</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_ProtocolName</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Symbol</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Decimals</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Name</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_LastDate</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_InAmount</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_FirstDate</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_DelegatedTo</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Fungible</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_LastDate</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_OutAmount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Fungible</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_OutCount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_HasURI</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>Currency_Name</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_EnumFields.<b>BalanceUpdate_OutCount</b></code>](#)  
+> 
+> 
 > 
 > 
 
@@ -146,5 +188,5 @@ enum EVM_TokenHolder_EnumFields {
 
 ### Member of
 
-[`EVM_TokenHolder_LimitBy`](/docs/graphql-reference/inputs/evm-token-holder-limit-by)  <Badge class="secondary" text="input"/><Bullet />[`EVM_TokenHolder_Ordering`](/docs/graphql-reference/inputs/evm-token-holder-ordering)  <Badge class="secondary" text="input"/>
+[`EVM_TokenHolder_LimitBy`](/docs/graphql-reference/inputs/evm-token-holder-limit-by)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_TokenHolder_Ordering`](/docs/graphql-reference/inputs/evm-token-holder-ordering)  <Badge class="badge badge--secondary" text="input"/>
 
