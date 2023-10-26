@@ -81,6 +81,46 @@ const config = {
             to: '/docs/examples/token-holders/token-holder-api/',
             from: '/docs/examples/balances/tokenHolders-api/',
           },
+          {
+            to: '/docs/contribution-guidelines/',
+            from: '/docs/contribution_guidelines/',
+          },
+          {
+            to: '/docs/examples/calls/contract-creation/',
+            from: '/docs/examples/calls/Contract%20_creation/',
+          },
+          {
+            to: '/docs/examples/calls/smartcontract-filterby/',
+            from: '/docs/examples/calls/smartcontract_filterby/',
+          },
+          {
+            to: '/docs/examples/events/events-api/',
+            from: '/docs/examples/events/events_api/',
+          },
+          {
+            to: '/docs/evm/token-holders/',
+            from: '/docs/evm/token_holders/',
+          },
+          {
+            to: '/docs/graphql/dataset/select-blocks/',
+            from: '/docs/graphql/dataset/select_blocks/',
+          },
+          {
+            to: '/docs/usecases/nft-analytics/',
+            from: '/docs/usecases/nft_Analytics/',
+          },
+          {
+            to: '/docs/usecases/crypto-dashboard/',
+            from: '/docs/usecases/crypto_dashboard/',
+          },
+          {
+            to: '/docs/usecases/telegram-bot/',
+            from: '/docs/usecases/Telegram_bot/',
+          },
+          {
+            to: '/docs/usecases/dapps/',
+            from: '/docs/usecases/dApps/',
+          },
         ],
       },
     ],
