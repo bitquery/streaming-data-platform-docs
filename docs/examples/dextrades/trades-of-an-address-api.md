@@ -1,3 +1,8 @@
+---
+sidebar_position: 7
+---
+
+
 # Address Trades API
 
 ## Latest Trades for a given address
