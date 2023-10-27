@@ -17,4 +17,4 @@ change_in_price = final_price - initial_price
 pnl = change_in_balance * change_in_price
 ```
 
-Go to https://docs.bitquery.io/docs/usecases/p-l-product/balanceUpdates to get started
+Go to https://docs.bitquery.io/docs/usecases/p-l-product/balanceUpdates to get started with the project.
