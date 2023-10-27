@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Calculating Balance Change Over Time
 
 This is the first step, where we calculate
