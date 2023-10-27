@@ -2,6 +2,8 @@
 sidebar_position: 4
 ---
 
+# Final Step: Profit & Loss Calculation
+
 In this final step, this code snippet will calculate the P&L for the specified token over the specified time period. You can modify the code to calculate the P&L for multiple tokens, different time periods, or to use a different P&L calculation formula.
 
 1.  Import the necessary libraries:
