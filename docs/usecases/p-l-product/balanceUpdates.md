@@ -5,6 +5,7 @@ This is the first step, where we calculate
 ```
 change_in_balance = final_balance - initial_balance
 ```
+We get the daily balance for the entire period so that we don't have to query the API repeatedly to calculate change in balance between other time periods. If you don't need it, then you can use `BalanceUpdates` directly.
 
 
 1.  Import the necessary libraries:

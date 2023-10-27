@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Getting Prices for the Period of P&L Calculation
 
 This code will extract the price of the specified token on the first and last day of the period for which you need the PL. You can modify the query and parameters to get the prices for a different token, time period, or multiple tokens.
