@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,16 +34,22 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
+
+
 Log fields
 
 
 ```graphql
 type EVM_Transfer_Fields_Log {
   Index(
+    selectWhere: OLAP_Integer
     if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
-    selectWhere: OLAP_Integer
   ): Int
   LogAfterCallIndex(
     if: EVM_Transfer_Filter
@@ -53,10 +59,10 @@ type EVM_Transfer_Fields_Log {
   ): Int
   Signature: EVM_Transfer_Fields_Log_Signature
   SmartContract(
+    if: EVM_Transfer_Filter
     maximum: EVM_Transfer_CompareFields
     minimum: EVM_Transfer_CompareFields
     selectWhere: OLAP_String
-    if: EVM_Transfer_Filter
   ): String
 }
 ```
@@ -66,67 +72,99 @@ type EVM_Transfer_Fields_Log {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.<b>Index</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.<b>Index</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Index value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.Index.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
-> Apply a condition to a metric calculation
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.Index.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.Index.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.Index.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
 > Defines the condition to filter the results by the value of this metric
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.<b>LogAfterCallIndex</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.Index.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.Index.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.<b>LogAfterCallIndex</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > LogAfterCallIndex value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.LogAfterCallIndex.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.LogAfterCallIndex.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.LogAfterCallIndex.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.LogAfterCallIndex.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Return value when the argument is maximum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.LogAfterCallIndex.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.LogAfterCallIndex.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.LogAfterCallIndex.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.LogAfterCallIndex.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.<b>Signature</b></code>](#)<Bullet />[`EVM_Transfer_Fields_Log_Signature`](/docs/graphql-reference/objects/evm-transfer-fields-log-signature) <Badge class="secondary" text="object"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.<b>Signature</b></code>](#)<Bullet />[`EVM_Transfer_Fields_Log_Signature`](/docs/graphql-reference/objects/evm-transfer-fields-log-signature) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
 > Signature fields
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.<b>SmartContract</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.<b>SmartContract</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > SmartContract value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.SmartContract.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is maximum
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.SmartContract.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.SmartContract.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="secondary" text="enum"/>
-> Return value when the argument is minimum
 > 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.SmartContract.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.SmartContract.<b>if</b></code>](#)<Bullet />[`EVM_Transfer_Filter`](/docs/graphql-reference/inputs/evm-transfer-filter) <Badge class="secondary" text="input"/>
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.SmartContract.<b>maximum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.SmartContract.<b>minimum</b></code>](#)<Bullet />[`EVM_Transfer_CompareFields`](/docs/graphql-reference/enums/evm-transfer-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Log.SmartContract.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
 
 
-### Member of
 
-[`EVM_Transfer_Cube`](/docs/graphql-reference/objects/evm-transfer-cube)  <Badge class="secondary" text="object"/>
+### Member Of
+
+[`EVM_Transfer_Cube`](/docs/graphql-reference/objects/evm-transfer-cube)  <Badge class="badge badge--secondary" text="object"/>
 

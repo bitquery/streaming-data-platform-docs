@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,18 +34,24 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
+
+
 Listed names of numeric fields in a cube
 
 
 ```graphql
 enum EVM_TokenHolder_NumFields {
-  BalanceUpdate_Count
-  BalanceUpdate_OutCount
-  Currency_Decimals
-  BalanceUpdate_InCount
   BalanceUpdate_InAmount
+  BalanceUpdate_Count
   BalanceUpdate_OutAmount
   Balance_Amount
+  BalanceUpdate_InCount
+  Currency_Decimals
+  BalanceUpdate_OutCount
 }
 ```
 
@@ -54,31 +60,45 @@ enum EVM_TokenHolder_NumFields {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>BalanceUpdate_Count</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>BalanceUpdate_InAmount</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>BalanceUpdate_OutCount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>BalanceUpdate_Count</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>Currency_Decimals</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>BalanceUpdate_OutAmount</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>BalanceUpdate_InCount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>Balance_Amount</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>BalanceUpdate_InAmount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>BalanceUpdate_InCount</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>BalanceUpdate_OutAmount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>Currency_Decimals</b></code>](#)  
+> 
+> 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>Balance_Amount</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_NumFields.<b>BalanceUpdate_OutCount</b></code>](#)  
+> 
+> 
 > 
 > 
 

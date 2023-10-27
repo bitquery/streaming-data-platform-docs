@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,14 +34,20 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
+
+
 Interval for time rounding
 
 
 ```graphql
 input OLAP_DateTimeInterval {
+  in: OLAP_DateTimeIntervalUnits
   count: Int
   offset: Int
-  in: OLAP_DateTimeIntervalUnits
 }
 ```
 
@@ -50,16 +56,22 @@ input OLAP_DateTimeInterval {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeInterval.<b>count</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeInterval.<b>in</b></code>](#)<Bullet />[`OLAP_DateTimeIntervalUnits`](/docs/graphql-reference/enums/olap-date-time-interval-units) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Interval units ( default is second )
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeInterval.<b>count</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
 > Interval size in specified units ( default is second )
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeInterval.<b>offset</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="secondary" text="scalar"/>
-> Offset in specified units ( default is second )
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeInterval.<b>offset</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeInterval.<b>in</b></code>](#)<Bullet />[`OLAP_DateTimeIntervalUnits`](/docs/graphql-reference/enums/olap-date-time-interval-units) <Badge class="secondary" text="enum"/>
-> Interval units ( default is second )
+> 
+> Offset in specified units ( default is second )
 > 
 
 

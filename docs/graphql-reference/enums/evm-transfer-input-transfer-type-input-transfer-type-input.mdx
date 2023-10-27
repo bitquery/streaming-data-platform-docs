@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,6 +34,12 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
+
+
 Enumeration for Transfer_Type
 
 
@@ -50,21 +56,27 @@ enum EVM_Transfer_Input_Transfer_Type_Input_Transfer_Type_Input {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_Type_Input_Transfer_Type_Input.<b>token</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_Type_Input_Transfer_Type_Input.<b>token</b></code>](#)  
+> 
+> 
 > Transfer_Type token
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_Type_Input_Transfer_Type_Input.<b>transaction</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_Type_Input_Transfer_Type_Input.<b>transaction</b></code>](#)  
+> 
+> 
 > Transfer_Type transaction
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_Type_Input_Transfer_Type_Input.<b>call</b></code>](#) 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_Type_Input_Transfer_Type_Input.<b>call</b></code>](#)  
+> 
+> 
 > Transfer_Type call
 > 
 
 
 
-### Member of
+### Member Of
 
-[`EVM_Transfer_Input_Transfer_Type_Input_Transfer_Type`](/docs/graphql-reference/inputs/evm-transfer-input-transfer-type-input-transfer-type)  <Badge class="secondary" text="input"/>
+[`EVM_Transfer_Input_Transfer_Type_Input_Transfer_Type`](/docs/graphql-reference/inputs/evm-transfer-input-transfer-type-input-transfer-type)  <Badge class="badge badge--secondary" text="input"/>
 

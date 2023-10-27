@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,18 +34,24 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
+
+
 Select value of attributes
 
 
 ```graphql
 input EVM_ValueUnionSelector {
+  String: OLAP_String
   Boolean: Boolean
   UnsignedInteger: OLAP_Integer
   SignedInteger: OLAP_Integer
   Bytes: OLAP_String
   BigInteger: OLAP_BigInteger
   Address: OLAP_String
-  String: OLAP_String
 }
 ```
 
@@ -54,37 +60,51 @@ input EVM_ValueUnionSelector {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>Boolean</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="secondary" text="scalar"/>
-> Selector of Boolean values
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>String</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>UnsignedInteger</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
-> Selector of Unsigned Integer values
 > 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>SignedInteger</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="secondary" text="input"/>
-> Selector of Signed Integer values
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>Bytes</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> Selector of Bytes values
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>BigInteger</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> Selector of BigInteger values
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>Address</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
-> Selector of Address values
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>String</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="secondary" text="input"/>
 > Selector of String values
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>Boolean</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Selector of Boolean values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>UnsignedInteger</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Selector of Unsigned Integer values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>SignedInteger</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Selector of Signed Integer values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>Bytes</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Selector of Bytes values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>BigInteger</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Selector of BigInteger values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>Address</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Selector of Address values
+> 
 
 
-### Member of
 
-[`EVM_Call_Fields_Arguments_Select_FieldSelector`](/docs/graphql-reference/inputs/evm-call-fields-arguments-select-field-selector)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Call_Fields_Returns_Select_FieldSelector`](/docs/graphql-reference/inputs/evm-call-fields-returns-select-field-selector)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Call_Input_Arguments_Input_FieldSelector`](/docs/graphql-reference/inputs/evm-call-input-arguments-input-field-selector)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Call_Input_Returns_Input_FieldSelector`](/docs/graphql-reference/inputs/evm-call-input-returns-input-field-selector)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Event_Fields_Arguments_Select_FieldSelector`](/docs/graphql-reference/inputs/evm-event-fields-arguments-select-field-selector)  <Badge class="secondary" text="input"/><Bullet />[`EVM_Event_Input_Arguments_Input_FieldSelector`](/docs/graphql-reference/inputs/evm-event-input-arguments-input-field-selector)  <Badge class="secondary" text="input"/>
+### Member Of
+
+[`EVM_Call_Fields_Arguments_Select_FieldSelector`](/docs/graphql-reference/inputs/evm-call-fields-arguments-select-field-selector)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Call_Fields_Returns_Select_FieldSelector`](/docs/graphql-reference/inputs/evm-call-fields-returns-select-field-selector)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Call_Input_Arguments_Input_FieldSelector`](/docs/graphql-reference/inputs/evm-call-input-arguments-input-field-selector)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Call_Input_Returns_Input_FieldSelector`](/docs/graphql-reference/inputs/evm-call-input-returns-input-field-selector)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Event_Fields_Arguments_Select_FieldSelector`](/docs/graphql-reference/inputs/evm-event-fields-arguments-select-field-selector)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Event_Input_Arguments_Input_FieldSelector`](/docs/graphql-reference/inputs/evm-event-input-arguments-input-field-selector)  <Badge class="badge badge--secondary" text="input"/>
 

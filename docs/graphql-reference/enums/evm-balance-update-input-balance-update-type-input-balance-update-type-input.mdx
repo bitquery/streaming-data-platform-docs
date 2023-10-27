@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -34,17 +34,23 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
+
+
 Enumeration for BalanceUpdate_Type
 
 
 ```graphql
 enum EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input {
+  genesis
   other
   transfer
   fee
   block_reward
   uncle_reward
-  genesis
 }
 ```
 
@@ -53,33 +59,45 @@ enum EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input {
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>other</b></code>](#) 
-> BalanceUpdate_Type other
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>genesis</b></code>](#)  
 > 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>transfer</b></code>](#) 
-> BalanceUpdate_Type transfer
 > 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>fee</b></code>](#) 
-> BalanceUpdate_Type fee
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>block_reward</b></code>](#) 
-> BalanceUpdate_Type block_reward
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>uncle_reward</b></code>](#) 
-> BalanceUpdate_Type uncle_reward
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>genesis</b></code>](#) 
 > BalanceUpdate_Type genesis
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>other</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type other
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>transfer</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type transfer
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>fee</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type fee
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>block_reward</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type block_reward
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type_Input.<b>uncle_reward</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type uncle_reward
+> 
 
 
-### Member of
 
-[`EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type`](/docs/graphql-reference/inputs/evm-balance-update-input-balance-update-type-input-balance-update-type)  <Badge class="secondary" text="input"/>
+### Member Of
+
+[`EVM_BalanceUpdate_Input_BalanceUpdate_Type_Input_BalanceUpdate_Type`](/docs/graphql-reference/inputs/evm-balance-update-input-balance-update-type-input-balance-update-type)  <Badge class="badge badge--secondary" text="input"/>
 

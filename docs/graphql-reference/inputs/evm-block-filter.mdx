@@ -9,7 +9,7 @@ export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5
 
 export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
 
-export const Badge = (props) => <><span className={'badge badge--' + props.class}>{props.text}</span></>
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
 
 import { useState } from 'react';
 
@@ -37,10 +37,16 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 
 
+
+
+
+
+
+
 ```graphql
 input EVM_Block_Filter {
-  ChainId: OLAP_BigInteger
   Block: EVM_Block_Input_Block_InputType
+  ChainId: OLAP_BigInteger
 }
 ```
 
@@ -49,12 +55,16 @@ input EVM_Block_Filter {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Filter.<b>ChainId</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="secondary" text="input"/>
-> Big Integer ( more than 32 bits precision), including negative numbers
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_Block_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-block-input-block-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Block
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_Block_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-block-input-block-input-type) <Badge class="secondary" text="input"/>
-> Select by Block
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Filter.<b>ChainId</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Big Integer ( more than 32 bits precision), including negative numbers
 > 
 
 
