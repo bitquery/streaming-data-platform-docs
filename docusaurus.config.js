@@ -11,7 +11,7 @@ const config = {
     "How to query data and build applications on Bitquery blockchain data platform",
   favicon: "img/favicon.ico",
   // ...
-  trailingSlash: false,
+  trailingSlash: true,
   // ...
   // Set the production url of your site here
   url: "https://docs.bitquery.io",
