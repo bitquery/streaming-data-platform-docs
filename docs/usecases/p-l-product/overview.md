@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Overview
 
-PnL in crypto is not easy to build. But is is important metric while evaluating the financial performance of an asset. In this tutorial we will see how to build a simple profit and loss calculator in Python using Bitquery's [balanceUpdates API](https://docs.bitquery.io/docs/examples/balances/balance-api/)
+Profit and Loss calculation in crypto is not easy to build. However, it is an important metric while evaluating the financial performance of an asset. In this tutorial, we will see how to build a simple profit and loss calculator in Python using Bitquery's [balanceUpdates API](https://docs.bitquery.io/docs/examples/balances/balance-api/)
 
 ## Realized PnL
 We will be calculating realised profit and loss. Realized PnL is calculated after traders have sold their holdings of a token. Only the executed price of the orders is taken into account in realized PnL.

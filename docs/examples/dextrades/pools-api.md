@@ -32,23 +32,37 @@ With the Pools API, developers can easily retrieve information about liquidity p
         Number
       }
       Arguments {
-        Path {
-          Name
-        }
-        Type {
-          Name
-        }
+        Type
         Value {
-          String
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
         }
+        Name
       }
     }
   }
 }
+
 ```
 
 
-You can find the query [here](https://graphql.bitquery.io/ide/Latest-pools-created-uniswap-v3)
+You can find the query [here](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_4)
 
  **Parameters**
 -   `dataset`: Specifies the dataset used for the query. In this case, it is set to "combined".
