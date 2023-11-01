@@ -1,6 +1,6 @@
 # Tutorial to build TradingView chart with real-time blockchain data (Streaming API version)
 
-We will be building the demo in React using the [lightweight-charts library](https://tradingview.github.io/lightweight-charts/) in react.
+We will be building the demo in React using the [lightweight-charts library](https://tradingview.github.io/lightweight-charts/).
 
 This is how it will look finally.
 
