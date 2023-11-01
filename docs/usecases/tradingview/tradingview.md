@@ -181,6 +181,29 @@ if (response.status === 200) {
 
   // Create candlestick and volume series on the chart
   // ...
+  const candlestickSeries = chart.current.addCandlestickSeries({
+          upColor: "#008000",
+          downColor: "#FF0000",
+          borderDownColor: "#FF0000",
+          borderUpColor: "#008000",
+          wickDownColor: "#FF0000",
+          wickUpColor: "#f2e9e9",
+        });
+  candlestickSeries.setData(extractedData);
+  const volumeSeries = chart.current.addHistogramSeries({
+          priceFormat: {
+            type: 'volume',
+          },
+          scaleMargins: {
+            top: 0.8,
+            bottom: 0,
+          },
+          overlay: true,
+          priceScaleId: '',
+          color:"#f4cccc"
+        });
+
+   volumeSeries.setData(extractedvol);
 } else {
   console.log("error");
 }
