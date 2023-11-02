@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Tracing Transactions on Explorer
 
-There is a `Tracing` tab available for every transaction in ETH, BSC, and Arbitrum. This feature shows the entire tree of traces, with icons next to each trace item to indicate what type of transaction occurred. 
+There is a `Tracing` tab available for every transaction in ETH, BSC, and Arbitrum with links to the corresponding v2 API. This feature shows the entire tree of traces, with icons next to each trace item to indicate what type of transaction occurred. 
 
 **Usage:**
 
@@ -24,6 +24,8 @@ Below the Transaction trace, you will see a `Money Flow Diagram` indicating the 
 ![flow](/img/flow.png)
 
 If you click on `Get History API` at the bottom you will be taken to the IDE with the corresponding [Events API](https://docs.bitquery.io/docs/examples/events/events_api/) query prewritten. 
+
+
 In this picture, the funds are first transferred from `0xcd531ae9efcce479654c4926dec5f6209531ca7b` to `0x96f68837877fd0414b55050c9e794aecdbcfca59`. This is a delegated transfer, which means that the funds are still under the control of `0xcd531ae9efcce479654c4926dec5f6209531ca7b`, but they are temporarily being used by `0x96f68837877fd0414b55050c9e794aecdbcfca59`.
 
 `0xcd531ae9efcce479654c4926dec5f6209531ca7b` splits them into two equal parts. One part is used to delegate power to `0x2e7896f7c65ad0a3f98c38a76f32e6b1dbed1ee3`, and the other part is used to undelegate power from `0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9 `.
