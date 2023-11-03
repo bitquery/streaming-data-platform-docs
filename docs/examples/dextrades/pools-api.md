@@ -144,3 +144,50 @@ You can find the query [here](https://graphql.bitquery.io/ide/Daily-Trade-Amount
 
 -   `sum` : Calculates the sum of a specific field, which in this case is "Trade_Sell_Amount".
 -   `Block` : Returns information about the block in which the trade was executed, including the date of the block in the "Date" subfield.
+
+
+## Tokens in the Pair
+
+If you have the address of a smart contract for a liquidity pool (aka a trading pair), and you want to find out which tokens are part of this pool, you can use the following query. 
+
+This query will provide you with information about the tokens used in the pool, including their name, symbol, smart contract address, and other details such as the token type (erc20 or erc1155) and much more.
+
+You can run [this query](https://ide.bitquery.io/details-of-tokens-in-a-pair) in our IDE to check out the results.
+
+```graphql
+{
+  EVM(dataset: archive, network: arbitrum) {
+    DEXTrades(
+      limit: {count: 1, offset: 0}
+      orderBy: {descending: Block_Time}
+      where: {Trade: {Dex: {SmartContract: {is: "0xcda53b1f66614552f834ceef361a8d12a0b8dad8"}}}}
+    ) {
+      Trade {
+        Dex {
+          OwnerAddress
+          SmartContract
+          Pair {
+            SmartContract
+          }
+        }
+        Buy {
+          Currency {
+            SmartContract
+            Symbol
+            Name
+            ProtocolName
+          }
+        }
+        Sell {
+          Currency {
+            SmartContract
+            Symbol
+            Name
+            ProtocolName
+          }
+        }
+      }
+    }
+  }
+}
+```
