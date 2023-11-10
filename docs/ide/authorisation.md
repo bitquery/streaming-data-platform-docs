@@ -99,7 +99,7 @@ client_secret = "YOUR_CLIENT_SECRET"
 
 # Get a token
 response = requests.post(
-    "https://streaming.graphql.com/oauth/token",
+    "https://oauth2.bitquery.io/oauth2/token",
     auth=(client_id, client_secret),
     data={
         "grant_type": "client_credentials",
@@ -109,7 +109,7 @@ token = response.json()["access_token"]
 
 # Generate a short-term token
 response = requests.post(
-    "https://streaming.graphql.com/tokens",
+    "https://streaming.bitquery.io/graphql",
     headers={"Authorization": f"Bearer {token}"},
     json={"expires_in": 3600},
 )
