@@ -117,10 +117,7 @@ const config = {
             to: '/docs/usecases/telegram-bot/',
             from: '/docs/usecases/Telegram_bot/',
           },
-          {
-            to: '/docs/usecases/dapps/',
-            from: '/docs/usecases/dApps/',
-          },
+         
         ],
       },
     ],
