@@ -89,7 +89,9 @@ If you no longer need an application, you can delete it by clicking **Delete** o
 
 **Short-term Access Tokens**
 
-If you want to use short-term access tokens, you will need to generate them programmatically in your app and handle the expiration time yourself. Here is an example of how to generate a short-term access token using the Python SDK:
+If you want to use short-term access tokens, you will need to generate them programmatically in your app and handle the expiration time yourself. Read more on access tokens and refresh tokens [here](https://oauth.net/2/access-tokens/)
+
+Here is an example of how to generate a short-term access token using the Python SDK:
 
 
 
@@ -99,7 +101,7 @@ import requests
 client_id = "YOUR_CLIENT_ID"
 client_secret = "YOUR_CLIENT_SECRET"
 
-# Get a token
+# Get a refresh token
 response = requests.post(
     "https://oauth2.bitquery.io/oauth2/token",
     auth=(client_id, client_secret),
