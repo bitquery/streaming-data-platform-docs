@@ -4,6 +4,8 @@ sidebar_position: 2
 
 ### Guide for Managing OAuth2 Authorization Headers in Streaming API
 
+Starting December 16, 2023, access to the V2 APIs will be restricted without the OAuth token.
+
 **Introduction**
 
 There are two primary approaches for managing OAuth2 authorization headers in the Streaming API: Simple Approach and Secure Approach.
@@ -16,7 +18,7 @@ This approach is straightforward but less secure since the token remains static 
 
 **Steps:**
 
-1.  Create a new application record with an unlimited expiration time.
+1.  Create a new application record with a validity of a maximum of 1 year.
 2.  Generate an access token.
 3.  Embed the access token directly into your application.
 4.  Utilize the code generation feature in the IDE to obtain the code with the embedded token for your chosen programming language.
