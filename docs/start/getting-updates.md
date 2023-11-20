@@ -7,8 +7,8 @@ sidebar_position: 2
 After you created and successfully run [your first query](/docs/start/first-query), it is time to
 get updates on the new data coming.
 
-It is just as easy as replace "query" with "subscription" on the first line in editor,
-here we will edit a little the query to use the BSC network, so it will read now as:
+It is just as easy as replacing "query" with "subscription" on the first line in the editor.
+Here, we will edit the query to use the BSC network so that it will now read as:
 
 ```graphql
 subscription RealTimeBlocks {
@@ -22,9 +22,8 @@ subscription RealTimeBlocks {
 }
 ```
 
-The run button now again becomes green. But now when you press it, you will not 
-immediately get results, as it will wait for the new block to come. In BSC network
-blocks typically come in 3-4 seconds, so you will see this sequence after some time
+The run button now again becomes green. But now, when you press it, you will not 
+immediately get results, as it will wait for a new block to be formed. In the BSC network, blocks typically come in 3-4 seconds. Hence, you will see this sequence after some time
 on the result panel:
 
 ![IDE subscription execution](/img/ide/ide_subscription.gif)
