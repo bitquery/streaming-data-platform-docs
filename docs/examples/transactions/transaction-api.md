@@ -43,3 +43,31 @@ query {
 
 -   `Block`: The block information of each transaction, including the block number and timestamp.
 -   `Transaction`: The transaction hash and cost (gas used multiplied by the gas price
+
+
+## Get Transaction Details using Hash
+
+The below query retrieves transaction details using the transaction hash. The `where` clause filters transactions based on the `Hash` field, which is set to `0xc3684c0ea63c0e081fb779bb8feaa5e5109ccc70ef30f17f4eea041ec5ea0bc7`.
+You can find the query [here](https://ide.bitquery.io/Get-a-transaction-by-hash)
+
+```
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    Transactions(
+      where: {Transaction: {Hash: {is: "0xc3684c0ea63c0e081fb779bb8feaa5e5109ccc70ef30f17f4eea041ec5ea0bc7"}}}
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        From
+        To
+        Hash
+        Value
+      }
+    }
+  }
+}
+
+```
