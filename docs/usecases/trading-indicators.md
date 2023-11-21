@@ -1,6 +1,6 @@
 # Build Trading Indicators for Crypto Data
 
-Technical indicators are a vital tool for cryptocurrency traders, as they can help to identify trends, predict price movements, and make informed trading decisions. In this tutorial, we will discuss how to calculate popular trading indicators easily with Bitquery APIs in Python.
+Technical indicators are a vital tool for cryptocurrency traders, as they can help to identify trends, predict price movements, and make informed trading decisions. In this tutorial, we will discuss how to calculate popular trading indicators easily with Bitquery APIs in Python. You can do the same in a language of your choice.
 
 
 **Step 1: Import Libraries**
