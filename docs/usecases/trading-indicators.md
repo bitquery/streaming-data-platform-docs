@@ -120,11 +120,11 @@ print(volatility)
 
 The RSI is calculated using the following steps:
 
-2.  Calculate the difference between consecutive closing prices.
-3.  Separate the price differences into positive gains and negative losses.
-4.  Calculate the average gain and average loss over a specified window length (9 in this case).
-5.  Calculate the relative strength (RS) as the average gain divided by the average loss.
-6.  Calculate the RSI as 100 minus (100 divided by (1 plus RS)).
+1.  Calculate the difference between consecutive closing prices.
+2.  Separate the price differences into positive gains and negative losses.
+3.  Calculate the average gain and average loss over a specified window length (9 in this case).
+4.  Calculate the relative strength (RS) as the average gain divided by the average loss.
+5.  Calculate the RSI as 100 minus (100 divided by (1 plus RS)).
 
 The RSI is then printed for the last trade in the
 
