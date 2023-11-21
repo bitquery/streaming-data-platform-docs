@@ -83,6 +83,8 @@ Authorization: Bearer <access_token>
 
 If you believe that your access token has been compromised, you can revoke it by clicking **Revoke** on the **Applications** page.
 
+![revoke](/img/v2Access/revoke.png)
+
 **Deleting an Application**
 
 If you no longer need an application, you can delete it by clicking **Delete** on the **Applications** page.
