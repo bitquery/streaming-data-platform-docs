@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Create Query
 
-Creating a query in IDE is very easy, on the left you can see the endpoint schema, which will help you to create a query quickly and easily.
+Creating a query on the IDE has been made easy. On the left bar, you can see the endpoint schema, which will help you create a query quickly and easily.
 
 ![Create Query](/img/ide/ide_schema.png)
 
