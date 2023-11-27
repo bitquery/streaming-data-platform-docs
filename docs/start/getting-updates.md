@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Real-Time Subscription
 
-After you created and successfully run [your first query](/docs/start/first-query), it is time to
+After you have created and successfully run [your first query](/docs/start/first-query), it is time to
 get updates on the new data coming.
 
 It is just as easy as replacing "query" with "subscription" on the first line in the editor.
