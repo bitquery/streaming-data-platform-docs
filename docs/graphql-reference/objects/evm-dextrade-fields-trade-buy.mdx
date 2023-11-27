@@ -59,16 +59,16 @@ type EVM_DEXTrade_Fields_Trade_Buy {
   ): String
   Currency: EVM_DEXTrade_Fields_Trade_Buy_Currency
   Ids(
-    selectWhere: EVM_DEXTrade_Fields_Trade_Buy_Ids_Select_Trade_Buy_Ids
     if: EVM_DEXTrade_Filter
     maximum: EVM_DEXTrade_CompareFields
     minimum: EVM_DEXTrade_CompareFields
+    selectWhere: EVM_DEXTrade_Fields_Trade_Buy_Ids_Select_Trade_Buy_Ids
   ): [String]
   OrderId(
-    maximum: EVM_DEXTrade_CompareFields
-    minimum: EVM_DEXTrade_CompareFields
     selectWhere: OLAP_String
     if: EVM_DEXTrade_Filter
+    maximum: EVM_DEXTrade_CompareFields
+    minimum: EVM_DEXTrade_CompareFields
   ): String
   Price(
     if: EVM_DEXTrade_Filter
@@ -162,13 +162,7 @@ type EVM_DEXTrade_Fields_Trade_Buy {
 > 
 > 
 > Ids value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.Ids.<b>selectWhere</b></code>](#)<Bullet />[`EVM_DEXTrade_Fields_Trade_Buy_Ids_Select_Trade_Buy_Ids`](/docs/graphql-reference/inputs/evm-dextrade-fields-trade-buy-ids-select-trade-buy-ids) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.Ids.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.Ids.<b>if</b></code>](#)<Bullet />[`EVM_DEXTrade_Filter`](/docs/graphql-reference/inputs/evm-dextrade-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -186,23 +180,17 @@ type EVM_DEXTrade_Fields_Trade_Buy {
 > Return value when the argument is minimum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.Ids.<b>selectWhere</b></code>](#)<Bullet />[`EVM_DEXTrade_Fields_Trade_Buy_Ids_Select_Trade_Buy_Ids`](/docs/graphql-reference/inputs/evm-dextrade-fields-trade-buy-ids-select-trade-buy-ids) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.<b>OrderId</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > OrderId value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -212,6 +200,18 @@ type EVM_DEXTrade_Fields_Trade_Buy {
 > 
 > 
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.OrderId.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTrade_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Buy.<b>Price</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 

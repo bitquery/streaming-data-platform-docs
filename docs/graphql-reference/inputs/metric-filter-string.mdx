@@ -45,12 +45,12 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 input Metric_filter_String {
+  ne: String
   ge: String
   le: String
   gt: String
   lt: String
   eq: String
-  ne: String
 }
 ```
 
@@ -58,6 +58,12 @@ input Metric_filter_String {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>Metric_filter_String.<b>ne</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Not equal to value
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>Metric_filter_String.<b>ge</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
@@ -87,12 +93,6 @@ input Metric_filter_String {
 > 
 > 
 > Equal to value
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>Metric_filter_String.<b>ne</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Not equal to value
 > 
 
 

@@ -58,9 +58,9 @@ type EVM_Transaction_Cube {
   Transaction: EVM_Transaction_Fields_Transaction
   TransactionStatus: EVM_Transaction_Fields_TransactionStatus
   average(
-    selectWhere: Metric_filter_Float
     of: EVM_Transaction_NumFields!
     if: EVM_Transaction_Filter
+    selectWhere: Metric_filter_Float
   ): Float
   contingency(
     of: EVM_Transaction_NumFields
@@ -70,41 +70,41 @@ type EVM_Transaction_Cube {
   ): Float
   correlation(
     selectWhere: Metric_filter_Float
-    if: EVM_Transaction_Filter
     of: EVM_Transaction_NumFields
     with: EVM_Transaction_NumFields
+    if: EVM_Transaction_Filter
   ): Float
   count(
     selectWhere: Metric_filter_String
-    distinct: [EVM_Transaction_EnumFields]
     if: EVM_Transaction_Filter
+    distinct: [EVM_Transaction_EnumFields]
   ): String
   covariance(
     selectWhere: Metric_filter_Float
+    of: EVM_Transaction_NumFields
     with: EVM_Transaction_NumFields
     if: EVM_Transaction_Filter
-    of: EVM_Transaction_NumFields
   ): Float
   cramers(
-    with: EVM_Transaction_NumFields
-    if: EVM_Transaction_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Transaction_NumFields
+    with: EVM_Transaction_NumFields
+    if: EVM_Transaction_Filter
   ): Float
   cramers_bias_corrected(
-    with: EVM_Transaction_NumFields
     selectWhere: Metric_filter_Float
-    if: EVM_Transaction_Filter
     of: EVM_Transaction_NumFields
+    with: EVM_Transaction_NumFields
+    if: EVM_Transaction_Filter
   ): Float
   dispersion(
+    of: EVM_Transaction_NumFields!
     selectWhere: Metric_filter_Float
     if: EVM_Transaction_Filter
-    of: EVM_Transaction_NumFields!
   ): Float
   entropy(
-    selectWhere: Metric_filter_Float
     of: EVM_Transaction_NumFields!
+    selectWhere: Metric_filter_Float
     if: EVM_Transaction_Filter
   ): Float
   gini(
@@ -112,32 +112,32 @@ type EVM_Transaction_Cube {
     of: EVM_Transaction_NumFields!
   ): Float
   kurtosis(
-    if: EVM_Transaction_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Transaction_NumFields!
+    if: EVM_Transaction_Filter
   ): Float
   median(
+    if: EVM_Transaction_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Transaction_NumFields!
-    if: EVM_Transaction_Filter
   ): Float
   nakamoto(
+    ratio: Float = 0.51
     selectWhere: Metric_filter_Float
     of: EVM_Transaction_NumFields!
-    ratio: Float = 0.51
   ): Float
   quantile(
-    selectWhere: Metric_filter_Float
     of: EVM_Transaction_NumFields!
     level: Float = 0.5
     if: EVM_Transaction_Filter
     method: OLAP_Metric_Calculation_Method_Exact
+    selectWhere: Metric_filter_Float
   ): Float
   rank_correlation(
+    if: EVM_Transaction_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Transaction_NumFields
     with: EVM_Transaction_NumFields
-    if: EVM_Transaction_Filter
   ): Float
   skew(
     selectWhere: Metric_filter_Float
@@ -150,25 +150,25 @@ type EVM_Transaction_Cube {
     if: EVM_Transaction_Filter
   ): Float
   sum(
-    selectWhere: Metric_filter_String
     of: EVM_Transaction_NumFields!
     if: EVM_Transaction_Filter
+    selectWhere: Metric_filter_String
   ): String
   theil_index(
     of: EVM_Transaction_NumFields!
     selectWhere: Metric_filter_Float
   ): Float
   theils_corrected(
-    of: EVM_Transaction_NumFields
     with: EVM_Transaction_NumFields
     if: EVM_Transaction_Filter
     selectWhere: Metric_filter_Float
+    of: EVM_Transaction_NumFields
   ): Float
   uniq(
-    if: EVM_Transaction_Filter
-    method: OLAP_Metric_Calculation_Method_Exact
     selectWhere: Metric_filter_String
+    method: OLAP_Metric_Calculation_Method_Exact
     of: [EVM_Transaction_EnumFields]!
+    if: EVM_Transaction_Filter
   ): String
 }
 ```
@@ -246,13 +246,7 @@ type EVM_Transaction_Cube {
 > 
 > 
 > Average of the values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.average.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.average.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields!`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.average.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields!`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Argument for Average of the values
@@ -262,6 +256,12 @@ type EVM_Transaction_Cube {
 > 
 > 
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.average.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>contingency</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -302,12 +302,6 @@ type EVM_Transaction_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.correlation.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
@@ -320,6 +314,12 @@ type EVM_Transaction_Cube {
 > Second argument for Pearson correlation coefficient between two arguments
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
@@ -330,16 +330,16 @@ type EVM_Transaction_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Transaction_EnumFields]`](/docs/graphql-reference/enums/evm-transaction-enum-fields) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Count distinct values of the field
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.count.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Transaction_EnumFields]`](/docs/graphql-reference/enums/evm-transaction-enum-fields) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Count distinct values of the field
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>covariance</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -350,6 +350,12 @@ type EVM_Transaction_Cube {
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.covariance.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> First argument for Covariance between two arguments
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.covariance.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
@@ -364,29 +370,11 @@ type EVM_Transaction_Cube {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.covariance.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> First argument for Covariance between two arguments
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>cramers</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Cramér's phi coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Second argument for Cramér's phi coefficient between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -398,26 +386,26 @@ type EVM_Transaction_Cube {
 > First argument for Cramér's phi coefficient between two arguments
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Second argument for Cramér's phi coefficient between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Cramér's phi coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Second argument for Cramér's phi coefficient with bias correction between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
@@ -426,11 +414,29 @@ type EVM_Transaction_Cube {
 > First argument for Cramér's phi coefficient with bias correction between two arguments
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Second argument for Cramér's phi coefficient with bias correction between two arguments
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.cramers_bias_corrected.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>dispersion</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Dispersion for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.dispersion.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields!`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Argument for Dispersion for a set of values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -442,26 +448,20 @@ type EVM_Transaction_Cube {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.dispersion.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields!`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Argument for Dispersion for a set of values
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>entropy</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Entropy for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.entropy.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.entropy.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields!`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.entropy.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields!`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Argument for Entropy for a set of values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.entropy.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.entropy.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
@@ -490,13 +490,7 @@ type EVM_Transaction_Cube {
 > 
 > 
 > Kurtosis for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.kurtosis.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.kurtosis.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.kurtosis.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -508,11 +502,23 @@ type EVM_Transaction_Cube {
 > Argument for Kurtosis for a set of values
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.kurtosis.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>median</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Median for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.median.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.median.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.median.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -524,17 +530,17 @@ type EVM_Transaction_Cube {
 > Argument for Median for a set of values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.median.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>nakamoto</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Nakamoto index of argument. Count of values more than 0.51 of the range. Ratio (0.51) can be specified as optional parameter
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.nakamoto.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.nakamoto.<b>ratio</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Ratio for nakamoto index ( default is 0.51, can be from 0 to 1 )
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.nakamoto.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -546,23 +552,11 @@ type EVM_Transaction_Cube {
 > Argument for nakamoto index
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.nakamoto.<b>ratio</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Ratio for nakamoto index ( default is 0.51, can be from 0 to 1 )
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>quantile</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Approximate quantile of a numeric data sequence
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields!`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields!`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Argument for quantile
@@ -586,11 +580,23 @@ type EVM_Transaction_Cube {
 > Method used to calculate metric values
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Rank correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -606,12 +612,6 @@ type EVM_Transaction_Cube {
 > 
 > 
 > Second argument for Rank correlation coefficient between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -662,13 +662,7 @@ type EVM_Transaction_Cube {
 > 
 > 
 > Sum values of argument
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.sum.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.sum.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields!`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.sum.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields!`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Argument for sum
@@ -678,6 +672,12 @@ type EVM_Transaction_Cube {
 > 
 > 
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.sum.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>theil_index</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -700,13 +700,7 @@ type EVM_Transaction_Cube {
 > 
 > 
 > Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.theils_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> First argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.theils_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.theils_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Second argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
@@ -724,14 +718,20 @@ type EVM_Transaction_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.theils_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Transaction_NumFields`](/docs/graphql-reference/enums/evm-transaction-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> First argument for Theil's U uncertainty coefficient, coefficient with bias correction between two arguments
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.<b>uniq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Count unique records
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
-> Apply a condition to a metric calculation
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="badge badge--secondary" text="enum"/> 
@@ -740,16 +740,16 @@ type EVM_Transaction_Cube {
 > Method used to calculate metric values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_String`](/docs/graphql-reference/inputs/metric-filter-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Transaction_EnumFields]!`](/docs/graphql-reference/enums/evm-transaction-enum-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Uniq values of the field
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Cube.uniq.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
 > 
 
 

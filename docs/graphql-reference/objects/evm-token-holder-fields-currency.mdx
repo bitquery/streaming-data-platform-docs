@@ -52,22 +52,22 @@ type EVM_TokenHolder_Fields_Currency {
     minimum: EVM_TokenHolder_CompareFields
   ): Int
   Delegated(
+    if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
     selectWhere: Boolean
-    if: EVM_TokenHolder_Filter
   ): Boolean
   DelegatedTo(
+    selectWhere: OLAP_String
     if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
-    selectWhere: OLAP_String
   ): String
   Fungible(
-    minimum: EVM_TokenHolder_CompareFields
-    selectWhere: Boolean
     if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
+    minimum: EVM_TokenHolder_CompareFields
+    selectWhere: Boolean
   ): Boolean
   HasURI(
     if: EVM_TokenHolder_Filter
@@ -82,16 +82,16 @@ type EVM_TokenHolder_Fields_Currency {
     maximum: EVM_TokenHolder_CompareFields
   ): String
   Native(
-    if: EVM_TokenHolder_Filter
-    maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
     selectWhere: Boolean
+    if: EVM_TokenHolder_Filter
+    maximum: EVM_TokenHolder_CompareFields
   ): Boolean
   ProtocolName(
+    if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
     selectWhere: OLAP_String
-    if: EVM_TokenHolder_Filter
   ): String
   SmartContract(
     if: EVM_TokenHolder_Filter
@@ -100,10 +100,10 @@ type EVM_TokenHolder_Fields_Currency {
     selectWhere: OLAP_String
   ): String
   Symbol(
-    if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
     selectWhere: OLAP_String
+    if: EVM_TokenHolder_Filter
   ): String
 }
 ```
@@ -145,7 +145,13 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Delegated value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Delegated.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Delegated.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Delegated.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -163,17 +169,17 @@ type EVM_TokenHolder_Fields_Currency {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Delegated.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.<b>DelegatedTo</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > DelegatedTo value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.DelegatedTo.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.DelegatedTo.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.DelegatedTo.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -191,29 +197,11 @@ type EVM_TokenHolder_Fields_Currency {
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.DelegatedTo.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.<b>Fungible</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Fungible value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Fungible.<b>minimum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Fungible.<b>selectWhere</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Fungible.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Fungible.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -223,6 +211,18 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Fungible.<b>minimum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Fungible.<b>selectWhere</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.<b>HasURI</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -285,19 +285,7 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Native value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Native.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Native.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Native.<b>minimum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Native.<b>minimum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is minimum
@@ -309,11 +297,29 @@ type EVM_TokenHolder_Fields_Currency {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Native.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Native.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.<b>ProtocolName</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > ProtocolName value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.ProtocolName.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.ProtocolName.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.ProtocolName.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -329,12 +335,6 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.ProtocolName.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.<b>SmartContract</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -369,13 +369,7 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Symbol value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Symbol.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Symbol.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Symbol.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -391,6 +385,12 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Symbol.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
 > 
 
 

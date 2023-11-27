@@ -45,16 +45,16 @@ Select by L1
 
 ```graphql
 input EVM_BalanceUpdate_Input_Block_L1_InputType {
-  Coinbase: OLAP_String
-  Difficulty: OLAP_BigInteger
-  Time: OLAP_DateTime
-  GasUsed: OLAP_BigInteger
-  Hash: OLAP_String
-  Number: OLAP_BigInteger
-  GasLimit: OLAP_BigInteger
-  ParentHash: OLAP_String
   BaseFee: OLAP_BigInteger
+  GasLimit: OLAP_BigInteger
+  Difficulty: OLAP_BigInteger
   Nonce: OLAP_BigInteger
+  Hash: OLAP_String
+  ParentHash: OLAP_String
+  GasUsed: OLAP_BigInteger
+  Number: OLAP_BigInteger
+  Coinbase: OLAP_String
+  Time: OLAP_DateTime
 }
 ```
 
@@ -63,37 +63,7 @@ input EVM_BalanceUpdate_Input_Block_L1_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Coinbase</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Difficulty</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Time</b></code>](#)<Bullet />[`OLAP_DateTime`](/docs/graphql-reference/inputs/olap-date-time) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Hash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Number</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>BaseFee</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 
@@ -105,19 +75,49 @@ input EVM_BalanceUpdate_Input_Block_L1_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>ParentHash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>BaseFee</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Difficulty</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Nonce</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Hash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>ParentHash</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Number</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Coinbase</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Input_Block_L1_InputType.<b>Time</b></code>](#)<Bullet />[`OLAP_DateTime`](/docs/graphql-reference/inputs/olap-date-time) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 

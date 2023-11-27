@@ -46,16 +46,16 @@ Block fields
 ```graphql
 type EVM_Uncle_Fields_Block {
   BaseFee(
-    if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: EVM_Amount_With_Decimals
+    if: EVM_Uncle_Filter
   ): String
   Bloom(
+    minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_String
     if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
-    minimum: EVM_Uncle_CompareFields
   ): String
   Coinbase(
     if: EVM_Uncle_Filter
@@ -64,11 +64,11 @@ type EVM_Uncle_Fields_Block {
     selectWhere: OLAP_String
   ): String
   Date(
-    maximum: EVM_Uncle_CompareFields
-    minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_Date
     interval: OLAP_DateInterval
     if: EVM_Uncle_Filter
+    maximum: EVM_Uncle_CompareFields
+    minimum: EVM_Uncle_CompareFields
   ): String
   Difficulty(
     if: EVM_Uncle_Filter
@@ -77,16 +77,16 @@ type EVM_Uncle_Fields_Block {
     selectWhere: OLAP_BigInteger
   ): String
   Extra(
-    selectWhere: OLAP_String
     if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
+    selectWhere: OLAP_String
   ): String
   GasLimit(
+    if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_BigInteger
-    if: EVM_Uncle_Filter
   ): String
   GasUsed(
     if: EVM_Uncle_Filter
@@ -95,23 +95,23 @@ type EVM_Uncle_Fields_Block {
     selectWhere: OLAP_BigInteger
   ): String
   Hash(
-    if: EVM_Uncle_Filter
-    maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_String
+    if: EVM_Uncle_Filter
+    maximum: EVM_Uncle_CompareFields
   ): String
   L1: EVM_Uncle_Fields_Block_L1
   MixDigest(
+    if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_String
-    if: EVM_Uncle_Filter
   ): String
   Nonce(
-    if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_BigInteger
+    if: EVM_Uncle_Filter
   ): String
   Number(
     if: EVM_Uncle_Filter
@@ -120,30 +120,30 @@ type EVM_Uncle_Fields_Block {
     selectWhere: OLAP_BigInteger
   ): String
   ParentHash(
+    if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_String
-    if: EVM_Uncle_Filter
   ): String
   ReceiptHash(
+    maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_String
     if: EVM_Uncle_Filter
-    maximum: EVM_Uncle_CompareFields
   ): String
   Result: EVM_Uncle_Fields_Block_Result
   Root(
-    if: EVM_Uncle_Filter
-    maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_String
+    if: EVM_Uncle_Filter
+    maximum: EVM_Uncle_CompareFields
   ): String
   Time(
+    if: EVM_Uncle_Filter
+    maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_DateTime
     interval: OLAP_DateTimeInterval
-    if: EVM_Uncle_Filter
-    maximum: EVM_Uncle_CompareFields
   ): DateTime
   TxCount(
     if: EVM_Uncle_Filter
@@ -152,22 +152,22 @@ type EVM_Uncle_Fields_Block {
     selectWhere: OLAP_Integer
   ): Int
   TxHash(
-    if: EVM_Uncle_Filter
-    maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_String
+    if: EVM_Uncle_Filter
+    maximum: EVM_Uncle_CompareFields
   ): String
   UncleHash(
-    if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_String
+    if: EVM_Uncle_Filter
   ): String
   UnclesCount(
+    minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_Integer
     if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
-    minimum: EVM_Uncle_CompareFields
   ): Int
 }
 ```
@@ -181,13 +181,7 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > BaseFee value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.BaseFee.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.BaseFee.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.BaseFee.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -205,11 +199,23 @@ type EVM_Uncle_Fields_Block {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.BaseFee.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>Bloom</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Bloom value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Bloom.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Bloom.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Bloom.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -225,12 +231,6 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Bloom.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>Coinbase</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -265,19 +265,7 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Date value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Date.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Date.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Date.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Date`](/docs/graphql-reference/inputs/olap-date) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Date.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Date`](/docs/graphql-reference/inputs/olap-date) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -293,6 +281,18 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Date.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Date.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>Difficulty</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -327,13 +327,7 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Extra value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Extra.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Extra.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Extra.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -351,11 +345,23 @@ type EVM_Uncle_Fields_Block {
 > Return value when the argument is minimum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Extra.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>GasLimit</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > GasLimit value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.GasLimit.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.GasLimit.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.GasLimit.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -371,12 +377,6 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.GasLimit.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>GasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -411,19 +411,7 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Hash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Hash.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Hash.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Hash.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Hash.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is minimum
@@ -433,6 +421,18 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Hash.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Hash.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>L1</b></code>](#)<Bullet />[`EVM_Uncle_Fields_Block_L1`](/docs/graphql-reference/objects/evm-uncle-fields-block-l1) <Badge class="badge badge--secondary" text="object"/> 
@@ -445,7 +445,13 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > MixDigest value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.MixDigest.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.MixDigest.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.MixDigest.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -463,23 +469,11 @@ type EVM_Uncle_Fields_Block {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.MixDigest.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>Nonce</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Nonce value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Nonce.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Nonce.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Nonce.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -495,6 +489,12 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Nonce.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>Number</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -529,7 +529,13 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > ParentHash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.ParentHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.ParentHash.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.ParentHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -547,17 +553,17 @@ type EVM_Uncle_Fields_Block {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.ParentHash.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>ReceiptHash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > ReceiptHash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.ReceiptHash.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.ReceiptHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.ReceiptHash.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is minimum
@@ -575,12 +581,6 @@ type EVM_Uncle_Fields_Block {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.ReceiptHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>Result</b></code>](#)<Bullet />[`EVM_Uncle_Fields_Block_Result`](/docs/graphql-reference/objects/evm-uncle-fields-block-result) <Badge class="badge badge--secondary" text="object"/> 
 > 
 > 
@@ -591,19 +591,7 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Root value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Root.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Root.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Root.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Root.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is minimum
@@ -615,11 +603,35 @@ type EVM_Uncle_Fields_Block {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Root.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Root.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>Time</b></code>](#)<Bullet />[`DateTime`](/docs/graphql-reference/scalars/date-time) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Time value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Time.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Time.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Time.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Time.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is minimum
@@ -635,18 +647,6 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Time interval in specified units
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Time.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.Time.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>TxCount</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -681,19 +681,7 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > TxHash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.TxHash.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.TxHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.TxHash.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.TxHash.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is minimum
@@ -705,17 +693,23 @@ type EVM_Uncle_Fields_Block {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>UncleHash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> UncleHash value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.UncleHash.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.TxHash.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.UncleHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.TxHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>UncleHash</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> UncleHash value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.UncleHash.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -733,11 +727,23 @@ type EVM_Uncle_Fields_Block {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.UncleHash.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.<b>UnclesCount</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > UnclesCount value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.UnclesCount.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.UnclesCount.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.UnclesCount.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -753,12 +759,6 @@ type EVM_Uncle_Fields_Block {
 > 
 > 
 > Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Block.UnclesCount.<b>minimum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
 > 
 
 

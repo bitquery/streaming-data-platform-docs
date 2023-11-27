@@ -47,10 +47,10 @@ Uncle fields
 type EVM_MinerReward_Fields_Uncle {
   Block: EVM_MinerReward_Fields_Uncle_Block
   Index(
+    maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
     selectWhere: OLAP_Integer
     if: EVM_MinerReward_Filter
-    maximum: EVM_MinerReward_CompareFields
   ): Int
 }
 ```
@@ -70,7 +70,13 @@ type EVM_MinerReward_Fields_Uncle {
 > 
 > 
 > Index value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Uncle.Index.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Uncle.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Uncle.Index.<b>minimum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is minimum
@@ -86,12 +92,6 @@ type EVM_MinerReward_Fields_Uncle {
 > 
 > 
 > Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Uncle.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
 > 
 
 

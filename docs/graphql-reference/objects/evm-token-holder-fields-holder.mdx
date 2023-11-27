@@ -46,10 +46,10 @@ Holder fields
 ```graphql
 type EVM_TokenHolder_Fields_Holder {
   Address(
-    if: EVM_TokenHolder_Filter
-    maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
     selectWhere: OLAP_String
+    if: EVM_TokenHolder_Filter
+    maximum: EVM_TokenHolder_CompareFields
   ): String
 }
 ```
@@ -63,19 +63,7 @@ type EVM_TokenHolder_Fields_Holder {
 > 
 > 
 > Address value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Holder.Address.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Holder.Address.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Holder.Address.<b>minimum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Holder.Address.<b>minimum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is minimum
@@ -85,6 +73,18 @@ type EVM_TokenHolder_Fields_Holder {
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Holder.Address.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Holder.Address.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
 > 
 
 

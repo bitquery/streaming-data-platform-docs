@@ -46,22 +46,22 @@ Fee fields
 ```graphql
 type EVM_Transaction_Fields_Fee {
   Burnt(
+    maximum: EVM_Transaction_CompareFields
     minimum: EVM_Transaction_CompareFields
     selectWhere: EVM_Amount_With_Decimals
     if: EVM_Transaction_Filter
-    maximum: EVM_Transaction_CompareFields
   ): String
   EffectiveGasPrice(
-    selectWhere: EVM_Amount_With_Decimals
     if: EVM_Transaction_Filter
     maximum: EVM_Transaction_CompareFields
     minimum: EVM_Transaction_CompareFields
+    selectWhere: EVM_Amount_With_Decimals
   ): String
   GasRefund(
-    selectWhere: OLAP_BigInteger
     if: EVM_Transaction_Filter
     maximum: EVM_Transaction_CompareFields
     minimum: EVM_Transaction_CompareFields
+    selectWhere: OLAP_BigInteger
   ): String
   MinerReward(
     if: EVM_Transaction_Filter
@@ -82,10 +82,10 @@ type EVM_Transaction_Fields_Fee {
     selectWhere: EVM_Amount_With_Decimals
   ): String
   SenderFee(
+    minimum: EVM_Transaction_CompareFields
     selectWhere: EVM_Amount_With_Decimals
     if: EVM_Transaction_Filter
     maximum: EVM_Transaction_CompareFields
-    minimum: EVM_Transaction_CompareFields
   ): String
 }
 ```
@@ -99,7 +99,13 @@ type EVM_Transaction_Fields_Fee {
 > 
 > 
 > Burnt value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.Burnt.<b>minimum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.Burnt.<b>maximum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.Burnt.<b>minimum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is minimum
@@ -117,23 +123,11 @@ type EVM_Transaction_Fields_Fee {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.Burnt.<b>maximum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is maximum
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.<b>EffectiveGasPrice</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > EffectiveGasPrice value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.EffectiveGasPrice.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.EffectiveGasPrice.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.EffectiveGasPrice.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -151,17 +145,17 @@ type EVM_Transaction_Fields_Fee {
 > Return value when the argument is minimum
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.<b>GasRefund</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> GasRefund value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.EffectiveGasPrice.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.<b>GasRefund</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> GasRefund value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -177,6 +171,12 @@ type EVM_Transaction_Fields_Fee {
 > 
 > 
 > Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.GasRefund.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.<b>MinerReward</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -267,7 +267,13 @@ type EVM_Transaction_Fields_Fee {
 > 
 > 
 > SenderFee value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.SenderFee.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.SenderFee.<b>minimum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.SenderFee.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -283,12 +289,6 @@ type EVM_Transaction_Fields_Fee {
 > 
 > 
 > Return value when the argument is maximum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Fee.SenderFee.<b>minimum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
 > 
 
 

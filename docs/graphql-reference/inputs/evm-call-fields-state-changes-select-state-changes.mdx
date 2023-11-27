@@ -45,13 +45,13 @@ Array of StateChanges includes or excludes provided value
 
 ```graphql
 input EVM_Call_Fields_StateChanges_Select_StateChanges {
+  notStartsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
+  notEndsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
+  length: OLAP_Integer
   includes: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
   excludes: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
   startsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
   endsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
-  notStartsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
-  notEndsWith: [EVM_Call_Fields_StateChanges_Select_FieldSelector]
-  length: OLAP_Integer
 }
 ```
 
@@ -59,6 +59,24 @@ input EVM_Call_Fields_StateChanges_Select_StateChanges {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>notStartsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Does not start with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>notEndsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Does not End with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Length of the array
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>includes</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
 > 
@@ -82,24 +100,6 @@ input EVM_Call_Fields_StateChanges_Select_StateChanges {
 > 
 > 
 > Ends with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>notStartsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Does not start with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>notEndsWith</b></code>](#)<Bullet />[`[EVM_Call_Fields_StateChanges_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-fields-state-changes-select-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Does not End with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_StateChanges_Select_StateChanges.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Length of the array
 > 
 
 

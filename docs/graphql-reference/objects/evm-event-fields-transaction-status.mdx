@@ -52,10 +52,10 @@ type EVM_Event_Fields_TransactionStatus {
     selectWhere: OLAP_String
   ): String
   FaultError(
-    minimum: EVM_Event_CompareFields
-    selectWhere: OLAP_String
     if: EVM_Event_Filter
     maximum: EVM_Event_CompareFields
+    minimum: EVM_Event_CompareFields
+    selectWhere: OLAP_String
   ): String
   Success(
     if: EVM_Event_Filter
@@ -103,19 +103,7 @@ type EVM_Event_Fields_TransactionStatus {
 > 
 > 
 > FaultError value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_TransactionStatus.FaultError.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_TransactionStatus.FaultError.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_TransactionStatus.FaultError.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_TransactionStatus.FaultError.<b>if</b></code>](#)<Bullet />[`EVM_Event_Filter`](/docs/graphql-reference/inputs/evm-event-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -125,6 +113,18 @@ type EVM_Event_Fields_TransactionStatus {
 > 
 > 
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_TransactionStatus.FaultError.<b>minimum</b></code>](#)<Bullet />[`EVM_Event_CompareFields`](/docs/graphql-reference/enums/evm-event-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_TransactionStatus.FaultError.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_TransactionStatus.<b>Success</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 

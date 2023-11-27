@@ -45,14 +45,14 @@ Select by Receipt
 
 ```graphql
 input EVM_Transaction_Input_Receipt_InputType {
-  Type: OLAP_Integer
   PostState: OLAP_String
   Bloom: OLAP_String
-  ContractAddress: OLAP_String
-  ContractAddressCode: EVM_Transaction_Input_Receipt_ContractAddressCode_InputType
-  Status: OLAP_BigInteger
-  GasUsed: OLAP_BigInteger
   CumulativeGasUsed: OLAP_BigInteger
+  Status: OLAP_BigInteger
+  Type: OLAP_Integer
+  GasUsed: OLAP_BigInteger
+  ContractAddressCode: EVM_Transaction_Input_Receipt_ContractAddressCode_InputType
+  ContractAddress: OLAP_String
 }
 ```
 
@@ -60,12 +60,6 @@ input EVM_Transaction_Input_Receipt_InputType {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Receipt_InputType.<b>Type</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Receipt_InputType.<b>PostState</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
@@ -79,13 +73,7 @@ input EVM_Transaction_Input_Receipt_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Receipt_InputType.<b>ContractAddress</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Receipt_InputType.<b>ContractAddressCode</b></code>](#)<Bullet />[`EVM_Transaction_Input_Receipt_ContractAddressCode_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-receipt-contract-address-code-input-type) <Badge class="badge badge--secondary" text="input"/> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Receipt_InputType.<b>CumulativeGasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 
@@ -97,13 +85,25 @@ input EVM_Transaction_Input_Receipt_InputType {
 > 
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Receipt_InputType.<b>Type</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Receipt_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Receipt_InputType.<b>CumulativeGasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Receipt_InputType.<b>ContractAddressCode</b></code>](#)<Bullet />[`EVM_Transaction_Input_Receipt_ContractAddressCode_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-receipt-contract-address-code-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Receipt_InputType.<b>ContractAddress</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 

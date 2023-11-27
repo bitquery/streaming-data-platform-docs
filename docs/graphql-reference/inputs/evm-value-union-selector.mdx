@@ -45,13 +45,13 @@ Select value of attributes
 
 ```graphql
 input EVM_ValueUnionSelector {
-  String: OLAP_String
-  Boolean: Boolean
-  UnsignedInteger: OLAP_Integer
   SignedInteger: OLAP_Integer
   Bytes: OLAP_String
   BigInteger: OLAP_BigInteger
   Address: OLAP_String
+  String: OLAP_String
+  Boolean: Boolean
+  UnsignedInteger: OLAP_Integer
 }
 ```
 
@@ -59,24 +59,6 @@ input EVM_ValueUnionSelector {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>String</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Selector of String values
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>Boolean</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Selector of Boolean values
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>UnsignedInteger</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Selector of Unsigned Integer values
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>SignedInteger</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
@@ -100,6 +82,24 @@ input EVM_ValueUnionSelector {
 > 
 > 
 > Selector of Address values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>String</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Selector of String values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>Boolean</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Selector of Boolean values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ValueUnionSelector.<b>UnsignedInteger</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Selector of Unsigned Integer values
 > 
 
 

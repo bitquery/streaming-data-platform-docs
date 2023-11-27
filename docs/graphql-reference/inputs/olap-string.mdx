@@ -45,10 +45,10 @@ String value
 
 ```graphql
 input OLAP_String {
-  is: String
-  not: String
   in: [String]
   notIn: [String]
+  is: String
+  not: String
 }
 ```
 
@@ -56,18 +56,6 @@ input OLAP_String {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_String.<b>is</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Exact match the string
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_String.<b>not</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Not this string
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_String.<b>in</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="scalar"/> 
 > 
@@ -79,6 +67,18 @@ input OLAP_String {
 > 
 > 
 > String is not in the provided list
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_String.<b>is</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Exact match the string
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_String.<b>not</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Not this string
 > 
 
 

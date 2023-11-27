@@ -45,11 +45,11 @@ Select by Receipt
 
 ```graphql
 input EVM_Event_Input_Receipt_InputType {
-  CumulativeGasUsed: OLAP_BigInteger
-  GasUsed: OLAP_BigInteger
   ContractAddress: OLAP_String
   Type: OLAP_Integer
+  CumulativeGasUsed: OLAP_BigInteger
   Status: OLAP_BigInteger
+  GasUsed: OLAP_BigInteger
 }
 ```
 
@@ -57,18 +57,6 @@ input EVM_Event_Input_Receipt_InputType {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Receipt_InputType.<b>CumulativeGasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Receipt_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Receipt_InputType.<b>ContractAddress</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
@@ -82,7 +70,19 @@ input EVM_Event_Input_Receipt_InputType {
 > 
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Receipt_InputType.<b>CumulativeGasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Receipt_InputType.<b>Status</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Input_Receipt_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 

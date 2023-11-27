@@ -45,13 +45,13 @@ Array of Trade_Sell_URIs includes or excludes provided value
 
 ```graphql
 input EVM_DEXTrade_Fields_Trade_Sell_URIs_Select_Trade_Sell_URIs {
+  notEndsWith: [OLAP_String]
+  length: OLAP_Integer
   includes: [OLAP_String]
   excludes: [OLAP_String]
   startsWith: [OLAP_String]
   endsWith: [OLAP_String]
   notStartsWith: [OLAP_String]
-  notEndsWith: [OLAP_String]
-  length: OLAP_Integer
 }
 ```
 
@@ -59,6 +59,18 @@ input EVM_DEXTrade_Fields_Trade_Sell_URIs_Select_Trade_Sell_URIs {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Sell_URIs_Select_Trade_Sell_URIs.<b>notEndsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Does not End with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Sell_URIs_Select_Trade_Sell_URIs.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Length of the array
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Sell_URIs_Select_Trade_Sell_URIs.<b>includes</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
 > 
@@ -88,18 +100,6 @@ input EVM_DEXTrade_Fields_Trade_Sell_URIs_Select_Trade_Sell_URIs {
 > 
 > 
 > Does not start with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Sell_URIs_Select_Trade_Sell_URIs.<b>notEndsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Does not End with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Sell_URIs_Select_Trade_Sell_URIs.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Length of the array
 > 
 
 

@@ -45,7 +45,6 @@ Big Integer ( more than 32 bits precision), including negative numbers
 
 ```graphql
 input OLAP_BigInteger {
-  in: [String]
   notIn: [String]
   ge: String
   le: String
@@ -53,6 +52,7 @@ input OLAP_BigInteger {
   lt: String
   eq: String
   ne: String
+  in: [String]
 }
 ```
 
@@ -60,12 +60,6 @@ input OLAP_BigInteger {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>in</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Number in the provided list
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>notIn</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="scalar"/> 
 > 
@@ -107,6 +101,12 @@ input OLAP_BigInteger {
 > 
 > 
 > Not equal to value
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_BigInteger.<b>in</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Number in the provided list
 > 
 
 

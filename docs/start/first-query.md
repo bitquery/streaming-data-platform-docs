@@ -14,7 +14,6 @@ If IDE points to the default endpoint https://graphql.bitquery.io, change it to 
 https://streaming.bitquery.io/graphql. 
 Bookmark the link to open IDE with the correct URL: [https://graphql.bitquery.io/ide?endpoint=https://streaming.bitquery.io/graphql](https://graphql.bitquery.io/ide?endpoint=https://streaming.bitquery.io/graphql)
 
-![Uploading streaming-bitquery endpoint.png…]()
 
 If you do everything correctly, you will see the grey triangle in the middle of the screen to run the query.
 

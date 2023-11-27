@@ -46,23 +46,23 @@ Side fields
 ```graphql
 type EVM_DEXTradeByToken_Fields_Trade_Side {
   Amount(
+    selectWhere: EVM_Amount_With_Decimals
     if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
-    selectWhere: EVM_Amount_With_Decimals
   ): String
   Buyer(
-    if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: OLAP_String
+    if: EVM_DEXTradeByToken_Filter
   ): String
   Currency: EVM_DEXTradeByToken_Fields_Trade_Side_Currency
   Ids(
-    minimum: EVM_DEXTradeByToken_CompareFields
-    selectWhere: EVM_DEXTradeByToken_Fields_Trade_Side_Ids_Select_Trade_Side_Ids
     if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
+    minimum: EVM_DEXTradeByToken_CompareFields
+    selectWhere: EVM_DEXTradeByToken_Fields_Trade_Side_Ids_Select_Trade_Side_Ids
   ): [String]
   OrderId(
     minimum: EVM_DEXTradeByToken_CompareFields
@@ -71,22 +71,22 @@ type EVM_DEXTradeByToken_Fields_Trade_Side {
     maximum: EVM_DEXTradeByToken_CompareFields
   ): String
   Seller(
+    if: EVM_DEXTradeByToken_Filter
+    maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
     selectWhere: OLAP_String
-    if: EVM_DEXTradeByToken_Filter
-    maximum: EVM_DEXTradeByToken_CompareFields
   ): String
   Type(
+    selectWhere: EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side
     if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
-    selectWhere: EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side
   ): EVM_DEXTradeByToken_Fields_Trade_Side_Trade_Side_Output
   URIs(
+    selectWhere: EVM_DEXTradeByToken_Fields_Trade_Side_URIs_Select_Trade_Side_URIs
     if: EVM_DEXTradeByToken_Filter
     maximum: EVM_DEXTradeByToken_CompareFields
     minimum: EVM_DEXTradeByToken_CompareFields
-    selectWhere: EVM_DEXTradeByToken_Fields_Trade_Side_URIs_Select_Trade_Side_URIs
   ): [String]
 }
 ```
@@ -100,7 +100,13 @@ type EVM_DEXTradeByToken_Fields_Trade_Side {
 > 
 > 
 > Amount value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Amount.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Amount.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Amount.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -118,23 +124,11 @@ type EVM_DEXTradeByToken_Fields_Trade_Side {
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Amount.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.<b>Buyer</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Buyer value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Buyer.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Buyer.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Buyer.<b>maximum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -152,6 +146,12 @@ type EVM_DEXTradeByToken_Fields_Trade_Side {
 > Defines the condition to filter the results by the value of this metric
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Buyer.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.<b>Currency</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Side_Currency`](/docs/graphql-reference/objects/evm-dextrade-by-token-fields-trade-side-currency) <Badge class="badge badge--secondary" text="object"/> 
 > 
 > 
@@ -162,19 +162,7 @@ type EVM_DEXTradeByToken_Fields_Trade_Side {
 > 
 > 
 > Ids value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Ids.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Ids.<b>selectWhere</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Side_Ids_Select_Trade_Side_Ids`](/docs/graphql-reference/inputs/evm-dextrade-by-token-fields-trade-side-ids-select-trade-side-ids) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Ids.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Ids.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -184,6 +172,18 @@ type EVM_DEXTradeByToken_Fields_Trade_Side {
 > 
 > 
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Ids.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Ids.<b>selectWhere</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Side_Ids_Select_Trade_Side_Ids`](/docs/graphql-reference/inputs/evm-dextrade-by-token-fields-trade-side-ids-select-trade-side-ids) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.<b>OrderId</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -218,19 +218,7 @@ type EVM_DEXTradeByToken_Fields_Trade_Side {
 > 
 > 
 > Seller value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Seller.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Seller.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Seller.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Seller.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -242,11 +230,29 @@ type EVM_DEXTradeByToken_Fields_Trade_Side {
 > Return value when the argument is maximum
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Seller.<b>minimum</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_CompareFields`](/docs/graphql-reference/enums/evm-dextrade-by-token-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Seller.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.<b>Type</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Side_Trade_Side_Output`](/docs/graphql-reference/enums/evm-dextrade-by-token-fields-trade-side-trade-side-output) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Type value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Type.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Type.<b>selectWhere</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side`](/docs/graphql-reference/inputs/evm-dextrade-by-token-fields-trade-side-type-select-trade-side) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Type.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -264,17 +270,17 @@ type EVM_DEXTradeByToken_Fields_Trade_Side {
 > Return value when the argument is minimum
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.Type.<b>selectWhere</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side`](/docs/graphql-reference/inputs/evm-dextrade-by-token-fields-trade-side-type-select-trade-side) <Badge class="badge badge--secondary" text="input"/> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.<b>URIs</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> URIs value
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.URIs.<b>selectWhere</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Side_URIs_Select_Trade_Side_URIs`](/docs/graphql-reference/inputs/evm-dextrade-by-token-fields-trade-side-uris-select-trade-side-uris) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.<b>URIs</b></code>](#)<Bullet />[`[String]`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> URIs value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.URIs.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.URIs.<b>if</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Filter`](/docs/graphql-reference/inputs/evm-dextrade-by-token-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -290,12 +296,6 @@ type EVM_DEXTradeByToken_Fields_Trade_Side {
 > 
 > 
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side.URIs.<b>selectWhere</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Side_URIs_Select_Trade_Side_URIs`](/docs/graphql-reference/inputs/evm-dextrade-by-token-fields-trade-side-uris-select-trade-side-uris) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
 > 
 
 

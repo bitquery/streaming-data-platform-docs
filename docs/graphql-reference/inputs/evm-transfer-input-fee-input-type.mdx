@@ -45,13 +45,13 @@ Select by Fee
 
 ```graphql
 input EVM_Transfer_Input_Fee_InputType {
-  GasRefund: OLAP_BigInteger
-  MinerReward: EVM_Amount_With_Decimals
   SenderFee: EVM_Amount_With_Decimals
-  EffectiveGasPrice: EVM_Amount_With_Decimals
-  Burnt: EVM_Amount_With_Decimals
   PriorityFeePerGas: EVM_Amount_With_Decimals
   Savings: EVM_Amount_With_Decimals
+  Burnt: EVM_Amount_With_Decimals
+  EffectiveGasPrice: EVM_Amount_With_Decimals
+  MinerReward: EVM_Amount_With_Decimals
+  GasRefund: OLAP_BigInteger
 }
 ```
 
@@ -60,31 +60,7 @@ input EVM_Transfer_Input_Fee_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Fee_InputType.<b>GasRefund</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Fee_InputType.<b>MinerReward</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Fee_InputType.<b>SenderFee</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Fee_InputType.<b>EffectiveGasPrice</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Fee_InputType.<b>Burnt</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 
@@ -97,6 +73,30 @@ input EVM_Transfer_Input_Fee_InputType {
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Fee_InputType.<b>Savings</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Fee_InputType.<b>Burnt</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Fee_InputType.<b>EffectiveGasPrice</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Fee_InputType.<b>MinerReward</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Fee_InputType.<b>GasRefund</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 

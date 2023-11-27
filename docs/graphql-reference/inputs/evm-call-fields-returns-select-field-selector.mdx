@@ -45,11 +45,11 @@ Selector for Returns
 
 ```graphql
 input EVM_Call_Fields_Returns_Select_FieldSelector {
+  Value: EVM_ValueUnionSelector
+  Name: OLAP_String
   Type: OLAP_String
   Index: OLAP_Integer
   Path: EVM_Call_Fields_Returns_Select_FieldSelector_Returns_Path
-  Value: EVM_ValueUnionSelector
-  Name: OLAP_String
 }
 ```
 
@@ -57,6 +57,18 @@ input EVM_Call_Fields_Returns_Select_FieldSelector {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Returns_Select_FieldSelector.<b>Value</b></code>](#)<Bullet />[`EVM_ValueUnionSelector`](/docs/graphql-reference/inputs/evm-value-union-selector) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select value for Value
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Returns_Select_FieldSelector.<b>Name</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select value for Name
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Returns_Select_FieldSelector.<b>Type</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
@@ -74,18 +86,6 @@ input EVM_Call_Fields_Returns_Select_FieldSelector {
 > 
 > 
 > Select value for Path
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Returns_Select_FieldSelector.<b>Value</b></code>](#)<Bullet />[`EVM_ValueUnionSelector`](/docs/graphql-reference/inputs/evm-value-union-selector) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Select value for Value
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Returns_Select_FieldSelector.<b>Name</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Select value for Name
 > 
 
 

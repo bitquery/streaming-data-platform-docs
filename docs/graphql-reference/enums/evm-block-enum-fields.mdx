@@ -45,39 +45,39 @@ Listed names of fields in a cube
 
 ```graphql
 enum EVM_Block_EnumFields {
+  Block_L1_Coinbase
   Block_L1_Number
-  Block_TxHash
-  Block_Number
+  Block_Root
+  Block_Coinbase
+  Block_Result_Gas
+  Block_GasLimit
+  Block_Bloom
+  Block_Time
+  Block_ParentHash
+  Block_MixDigest
+  Block_BaseFee
+  Block_Hash
   ChainId
-  Block_ReceiptHash
+  Block_UncleHash
+  Block_L1_GasLimit
+  Block_L1_ParentHash
+  Block_Extra
+  Block_L1_GasUsed
+  Block_L1_BaseFee
+  Block_L1_Hash
+  Block_Result_Errors
+  Block_TxHash
+  Block_TxCount
+  Block_GasUsed
   Block_L1_Difficulty
   Block_L1_Nonce
-  Block_L1_Hash
-  Block_MixDigest
-  Block_L1_ParentHash
-  Block_Nonce
-  Block_UncleHash
-  Block_L1_GasUsed
-  Block_L1_Time
-  Block_Bloom
-  Block_Date
-  Block_ParentHash
-  Block_BaseFee
-  Block_L1_GasLimit
-  Block_GasUsed
-  Block_TxCount
-  Block_UnclesCount
-  Block_Result_Gas
-  Block_Coinbase
-  Block_Extra
-  Block_Hash
-  Block_Result_Errors
-  Block_Time
-  Block_L1_BaseFee
-  Block_GasLimit
-  Block_Root
   Block_Difficulty
-  Block_L1_Coinbase
+  Block_Number
+  Block_Date
+  Block_ReceiptHash
+  Block_UnclesCount
+  Block_Nonce
+  Block_L1_Time
 }
 ```
 
@@ -86,19 +86,73 @@ enum EVM_Block_EnumFields {
 
 ### Values
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_Coinbase</b></code>](#)  
+> 
+> 
+> 
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_Number</b></code>](#)  
 > 
 > 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_TxHash</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Root</b></code>](#)  
 > 
 > 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Number</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Coinbase</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Result_Gas</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_GasLimit</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Bloom</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Time</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_ParentHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_MixDigest</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_BaseFee</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Hash</b></code>](#)  
 > 
 > 
 > 
@@ -110,7 +164,67 @@ enum EVM_Block_EnumFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_ReceiptHash</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_UncleHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_GasLimit</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_ParentHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Extra</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_GasUsed</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_BaseFee</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_Hash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Result_Errors</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_TxHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_TxCount</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_GasUsed</b></code>](#)  
 > 
 > 
 > 
@@ -128,49 +242,13 @@ enum EVM_Block_EnumFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_Hash</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Difficulty</b></code>](#)  
 > 
 > 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_MixDigest</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_ParentHash</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Nonce</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_UncleHash</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_GasUsed</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_Time</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Bloom</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Number</b></code>](#)  
 > 
 > 
 > 
@@ -182,31 +260,7 @@ enum EVM_Block_EnumFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_ParentHash</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_BaseFee</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_GasLimit</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_GasUsed</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_TxCount</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_ReceiptHash</b></code>](#)  
 > 
 > 
 > 
@@ -218,67 +272,13 @@ enum EVM_Block_EnumFields {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Result_Gas</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Nonce</b></code>](#)  
 > 
 > 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Coinbase</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Extra</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Hash</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Result_Errors</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Time</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_BaseFee</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_GasLimit</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Root</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_Difficulty</b></code>](#)  
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_Coinbase</b></code>](#)  
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_EnumFields.<b>Block_L1_Time</b></code>](#)  
 > 
 > 
 > 

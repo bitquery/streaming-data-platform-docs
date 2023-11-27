@@ -71,11 +71,11 @@ type EVM_TokenHolder_Fields_BalanceUpdate {
     selectWhere: OLAP_BigInteger
   ): String
   LastDate(
-    if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
     selectWhere: OLAP_Date
     interval: OLAP_DateInterval
+    if: EVM_TokenHolder_Filter
   ): String
   OutAmount(
     if: EVM_TokenHolder_Filter
@@ -84,10 +84,10 @@ type EVM_TokenHolder_Fields_BalanceUpdate {
     selectWhere: EVM_Amount_With_Decimals
   ): String
   OutCount(
-    if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
     selectWhere: OLAP_BigInteger
+    if: EVM_TokenHolder_Filter
   ): String
 }
 ```
@@ -219,13 +219,7 @@ type EVM_TokenHolder_Fields_BalanceUpdate {
 > 
 > 
 > LastDate value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_BalanceUpdate.LastDate.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_BalanceUpdate.LastDate.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_BalanceUpdate.LastDate.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -247,6 +241,12 @@ type EVM_TokenHolder_Fields_BalanceUpdate {
 > 
 > 
 > Date interval in specified units
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_BalanceUpdate.LastDate.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_BalanceUpdate.<b>OutAmount</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -281,13 +281,7 @@ type EVM_TokenHolder_Fields_BalanceUpdate {
 > 
 > 
 > OutCount value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_BalanceUpdate.OutCount.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_BalanceUpdate.OutCount.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_BalanceUpdate.OutCount.<b>maximum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -303,6 +297,12 @@ type EVM_TokenHolder_Fields_BalanceUpdate {
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_BalanceUpdate.OutCount.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
 > 
 
 

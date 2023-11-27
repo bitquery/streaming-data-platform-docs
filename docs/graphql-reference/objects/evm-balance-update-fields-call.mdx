@@ -52,10 +52,10 @@ type EVM_BalanceUpdate_Fields_Call {
     selectWhere: EVM_BalanceUpdate_Fields_Call_CallPath_Select_Call_CallPath
   ): [Int]
   Index(
+    selectWhere: OLAP_Integer
     if: EVM_BalanceUpdate_Filter
     maximum: EVM_BalanceUpdate_CompareFields
     minimum: EVM_BalanceUpdate_CompareFields
-    selectWhere: OLAP_Integer
   ): Int
 }
 ```
@@ -97,7 +97,13 @@ type EVM_BalanceUpdate_Fields_Call {
 > 
 > 
 > Index value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Call.Index.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Call.Index.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Call.Index.<b>if</b></code>](#)<Bullet />[`EVM_BalanceUpdate_Filter`](/docs/graphql-reference/inputs/evm-balance-update-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -113,12 +119,6 @@ type EVM_BalanceUpdate_Fields_Call {
 > 
 > 
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_Call.Index.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
 > 
 
 

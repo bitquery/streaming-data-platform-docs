@@ -47,10 +47,10 @@ Uncle fields
 type EVM_Uncle_Fields_Uncle {
   Block: EVM_Uncle_Fields_Uncle_Block
   Index(
-    if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
     selectWhere: OLAP_Integer
+    if: EVM_Uncle_Filter
   ): Int
 }
 ```
@@ -70,13 +70,7 @@ type EVM_Uncle_Fields_Uncle {
 > 
 > 
 > Index value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Uncle.Index.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Uncle.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Uncle.Index.<b>maximum</b></code>](#)<Bullet />[`EVM_Uncle_CompareFields`](/docs/graphql-reference/enums/evm-uncle-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -92,6 +86,12 @@ type EVM_Uncle_Fields_Uncle {
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Fields_Uncle.Index.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
 > 
 
 

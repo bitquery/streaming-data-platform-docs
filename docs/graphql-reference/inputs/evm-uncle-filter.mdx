@@ -45,9 +45,9 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 input EVM_Uncle_Filter {
+  Block: EVM_Uncle_Input_Block_InputType
   Uncle: EVM_Uncle_Input_Uncle_InputType
   ChainId: OLAP_BigInteger
-  Block: EVM_Uncle_Input_Block_InputType
 }
 ```
 
@@ -55,6 +55,12 @@ input EVM_Uncle_Filter {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_Uncle_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-uncle-input-block-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Block
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Filter.<b>Uncle</b></code>](#)<Bullet />[`EVM_Uncle_Input_Uncle_InputType`](/docs/graphql-reference/inputs/evm-uncle-input-uncle-input-type) <Badge class="badge badge--secondary" text="input"/> 
 > 
@@ -66,12 +72,6 @@ input EVM_Uncle_Filter {
 > 
 > 
 > Big Integer ( more than 32 bits precision), including negative numbers
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_Uncle_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-uncle-input-block-input-type) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Select by Block
 > 
 
 

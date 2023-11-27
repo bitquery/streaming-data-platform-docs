@@ -45,9 +45,9 @@ LimitBy definition
 
 ```graphql
 input EVM_Call_LimitBy {
+  count: Int
   offset: Int
   by: [EVM_Call_EnumFields]
-  count: Int
 }
 ```
 
@@ -55,6 +55,12 @@ input EVM_Call_LimitBy {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_LimitBy.<b>count</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Max count in results
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_LimitBy.<b>offset</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
@@ -66,12 +72,6 @@ input EVM_Call_LimitBy {
 > 
 > 
 > Limit by specific field
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_LimitBy.<b>count</b></code>](#)<Bullet />[`Int`](/docs/graphql-reference/scalars/int) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Max count in results
 > 
 
 

@@ -192,6 +192,11 @@ const config = {
             label: "Book Demo",
             position: "left",
           },
+          {
+            to: "https://ide.bitquery.io",
+            label: "Get your free API Key",
+            position: "right"
+          }
         ],
       },
       footer: {
