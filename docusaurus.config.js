@@ -163,7 +163,6 @@ const config = {
       // Replace with your project's social card
       image: "img/heroImage4.png",
       navbar: {
-        title: "Blockchain Data Platform",
         logo: {
           alt: "Bitquery.io",
           src: "img/logoBitqueryDark.png",
