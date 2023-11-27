@@ -4,3 +4,21 @@ sidebar_position: 1
 
 # Getting Started
 
+In this tutorial we will see how to use [TradingView's Advanced Charts API](https://in.tradingview.com/advanced-charts/) and plot DEX trading data with Bitquery APIs.
+
+The final chart will look like ![this](/img/ApplicationExamples/advanced-charts.png)
+
+- To do that you need to get access to TradingView's private Advanced Charts API library by filling the form.
+- Next create a new React project.
+- Once done, follow the steps on their [tutorial](https://www.tradingview.com/charting-library-docs/latest/tutorials/First-Run-Tutorial) to add to your new React project.
+
+- Now we will write different parts of the logic
+
+        - The component to call Bitquery API
+        - The main App
+        - The widget code
+        - The custom [datafeed](https://www.tradingview.com/charting-library-docs/latest/api/modules/Datafeed?_highlight=datafeed) object
+
+
+- Next, go to [Component Page](https://docs.bitquery.io/docs/usecases/tradingview-advanced-charts/component/) to start building.
+
