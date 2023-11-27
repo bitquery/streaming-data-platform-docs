@@ -193,7 +193,7 @@ const config = {
           },
           {
             to: "https://ide.bitquery.io",
-            label: "Get your free API Key",
+            label: "Get your free API key",
             position: "right"
           }
         ],
