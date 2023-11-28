@@ -51,3 +51,5 @@ export const TOKEN_DETAILS = `
 ```
 
 This query retrieves Open, High, Low, and Close (OHLC) data for the USDT-WETH pair from the earliest 300 records available . You can also retrieve the the data for any period you wish.
+
+- Next, go to [App Page](https://docs.bitquery.io/docs/usecases/tradingview-advanced-charts/app/) to start building
