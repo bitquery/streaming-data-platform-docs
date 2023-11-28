@@ -17,7 +17,7 @@ The final chart will look like ![this](/img/ApplicationExamples/advanced-charts.
         - The main App
         - The component to call Bitquery API
         - The widget code
-        - The custom [datafeed](https://www.tradingview.com/charting-library-docs/latest/api/modules/Datafeed?_highlight=datafeed) object
+        - The custom datafeed object
         - Building candlestick bars
 
 
