@@ -2,9 +2,92 @@
 sidebar_position: 4
 ---
 
-Create a file called datafeed_custom.js that will have the implementation for the default datafeed object for the data we will be importing to the charts.This defines a custom data feed for charting purposes.
+# Custom Datafeed Object
 
-### Step-by-Step
+Create a file called `datafeed_custom.js` that will have the implementation for the default datafeed object for the data we will be importing to the charts.This defines a custom data feed for charting purposes.
+
+To build the datafeed object, we need to first setup a custom implementation of `onReady` and `resolveSymbol`. Continue reading below to see how to do it.
+
+## Setup OnReady
+
+Before configuring the custom data feed object, override the default `onReady` implementation by creating a file named `onReady.js` and defining the `onReady` function.
+
+```javascript
+const configurationData = {
+  supported_resolutions: ["1", "5", "15", "30", "60", "1D", "1W", "1M"],
+  // ... other configuration data
+};
+
+export const onReady = (callback) => {
+  // console.log('[onReady]: Method call');
+  setTimeout(() => callback(configurationData));
+};
+```
+
+## Setup resolveSymbol
+
+### Resolving Symbol Information
+
+The `resolveSymbol.js` file contains a function responsible for resolving symbol information required by the charting library. It determines and provides details about the symbol to be displayed on the chart.
+You can read more about this [here](https://www.tradingview.com/charting-library-docs/latest/connecting_data/Datafeed-API?_highlight=resolvesymbol#resolvesymbol)
+
+
+#### Step by Step Code
+
+Add the below code to the file. The `resolveSymbol` function is used to fetch and resolve symbol information based on the provided `symbolName`. It takes callback functions to handle successful symbol resolution (`onSymbolResolvedCallback`) and errors (`onResolveErrorCallback`).
+
+```javascript
+export const resolveSymbol = (
+  symbolName,
+  onSymbolResolvedCallback,
+  onResolveErrorCallback,
+  extension
+) => {
+  // Can be retrieved from query or hardcoded
+   const tokenSymbol = "USDT";
+
+  // Check if token symbol is available
+  if (!tokenSymbol) {
+    onResolveErrorCallback();
+  } else {
+    // Symbol information for the resolved token
+    const symbolInfo = {
+      ticker: tokenSymbol,
+      name: `${tokenSymbol}/WETH`,
+      session: "24x7",
+      timezone: "Etc/UTC",
+      minmov: 1,
+      pricescale: 1000, // Adjust as needed
+      has_intraday: true,
+      intraday_multipliers: ["1", "5", "15", "30", "60"],
+      has_empty_bars: false,
+      has_weekly_and_monthly: false,
+      supported_resolutions: ["1", "5", "15", "30", "60", "1D", "1W", "1M"],
+      supported_intervals: ["1", "5", "15", "30", "60", "1D", "1W", "1M"],
+      volume_precision: 1,
+      data_status: "streaming",
+      countBack: 30,
+    };
+
+    // Callback with the resolved symbol information
+    onSymbolResolvedCallback(symbolInfo);
+};
+```
+
+#### Resolving Symbol Details
+
+The function extracts the `tokenSymbol` information, in this case, `"USDT"`. If `tokenSymbol` exists, it constructs and provides symbol information, otherwise, it triggers an error callback.
+
+
+#### Usage
+
+This function is used within the charting system to obtain detailed information about the specified symbol, allowing the charting library to render the symbol correctly with the appropriate settings.
+
+Next we will use `onReady` and `resolveSymbol` in datafeed object creation.
+
+## Step-by-Step Guide for Datafeed Object
+
+Now in the `datafeed_custom.js` file, add the following code:
 
 #### 1. Importing Functions
 

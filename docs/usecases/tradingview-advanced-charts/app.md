@@ -6,7 +6,7 @@ sidebar_position: 3
 
 This code sets up a React component (`App`) that serves as the entry point for the application. It imports styles, the `TVChartContainer` component, and then renders the `TVChartContainer` component within a div with the class name "App."
 
-### Step-by-Step 
+### Step-by-Step Guide
 
 #### 1. Importing Styles
 

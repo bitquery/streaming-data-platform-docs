@@ -7,7 +7,7 @@ sidebar_position: 5
 Create a file names getBars.js to override the default implementation. This part of the code, focuses on fetching candlestick bars using the Bitquery API, and providing placeholders for subscription logic for real-time data updates.
 
 
-### Step-by-Step 
+### Step-by-Step Guide
 
 #### 1. Importing Dependencies and Constants
 
@@ -146,3 +146,5 @@ export const unsubscribeBars = (subscriberUID) => {
 
 These functions `subscribeBars` and `unsubscribeBars` are placeholders for implementing subscription and unsubscription logic . When you use the [websocket](https://docs.bitquery.io/docs/start/websocket/), implement these functions.
 
+
+- Next, go to [Chart Setup Page](https://docs.bitquery.io/docs/usecases/tradingview-advanced-charts/advancedChart/) to start building
