@@ -137,3 +137,63 @@ You can find the query [here](https://ide.bitquery.io/All-aave-v3-events)
   }
 }
 ```
+
+## Staking and Rewards
+
+To get Staking-related information, we will be using the "Staked" signature to filter the events and logs. Each event contains information about the block number, transaction details (sender, receiver, hash, and type), log signature, smart contract involved, and specific arguments related to the staking actions, such as user addresses and staked amounts.
+
+You can find the query [here](https://ide.bitquery.io/Latest-Token-Stake-Events)
+
+```
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    Events(
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+      where: {Block: {Date: {after: "2023-11-16"}}, Log: {Signature: {Name: {is: "Staked"}}}}
+    ) {
+      Block {
+        Number
+      }
+      Transaction {
+        From
+        To
+        Type
+        Hash
+      }
+      Log {
+        Signature {
+          Name
+          SignatureHash
+          Signature
+        }
+        SmartContract
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+
+```
