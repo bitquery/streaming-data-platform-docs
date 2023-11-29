@@ -350,3 +350,78 @@ subscription {
 ```
 
 Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/latest-token-trades-subscription)
+
+
+## Getting OHLC and Distinct Buys/Sells 
+
+The below query retrieve OHLC (Open, High, Low, Close) data and distinct buy/sell information on the Binance Smart Chain (BSC) on a daily basis. Adjust the parameters within the `where` and `Block` sections to customize the query for your specific needs, such as changing the token smart contract addresses or modifying the date range. 
+In this query we have set trade currency pair to `0xfb6115445bff7b52feb98650c87f44907e58f802`( AAVE ) and `0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c`(WBNB), i.e AAVE/WBNB.
+
+```
+{
+  EVM(dataset: combined, network: bsc) {
+    buyside: DEXTradeByTokens(
+      limit: {count: 30}
+      orderBy: {descending: Block_Time}
+      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xfb6115445bff7b52feb98650c87f44907e58f802"}}, Amount: {ge: "0"}}, Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}}, Block: {Date: {since: "2023-07-01", till: "2023-08-01"}}}
+    ) {
+      Block {
+        Time(interval: {in: days, count: 1})
+      }
+      volume: sum(of: Trade_Amount)
+      distinctBuyer: count(distinct: Trade_Buyer)
+      distinctSeller: count(distinct: Trade_Seller)
+      distinctSender: count(distinct: Trade_Sender)
+      distinctTransactions: count(distinct: Transaction_Hash)
+      total_sales: count(
+        if: {Trade: {Side: {Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}}}}
+      )
+      total_buys: count(
+        if: {Trade: {Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}}}
+      )
+      total_count: count
+      Trade {
+        Currency {
+          Name
+        }
+        Side {
+          Currency {
+            Name
+          }
+        }
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Number)
+        close: Price(maximum: Block_Number)
+      }
+    }
+  }
+}
+
+
+```
+
+## Get Least Traded Token
+
+The below query gets least traded tokens within a specified time frame on the Ethereum network. By querying the DEX trades and sorting them based on the least number of trades, it provides insights into tokens with minimal trading activity during the designated period.
+
+```
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    DEXTradeByTokens(
+      limit: {count: 10}
+      where: {Block: {Time: {after: "2023-11-20T00:00:00Z", before: "2023-11-27T00:00:00Z"}}}
+      orderBy: {ascendingByField: "count"}
+    ) {
+      Trade {
+        Currency {
+          Name
+          SmartContract
+        }
+      }
+      count
+    }
+  }
+}
+
+```
