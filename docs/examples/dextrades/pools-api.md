@@ -191,3 +191,28 @@ You can run [this query](https://ide.bitquery.io/details-of-tokens-in-a-pair) in
   }
 }
 ```
+
+
+## Liquidity of a Pool
+
+The below query finds the liquidity of USDT-WBTC-WETH pool on Curve.Fi using the pool address `0xD51a44d3FaE010294C616388b506AcdA1bfAAE46`. With this query we can get what tokens are in the pool and in what proportions in the pool.
+You can find the query [here](https://ide.bitquery.io/Curvefi-USDTWBTCWETH-Pool-liquidity)
+```
+query MyQuery {
+  EVM(dataset: combined, network: bsc) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "0xD51a44d3FaE010294C616388b506AcdA1bfAAE46"}}}
+      orderBy: {descendingByField: "balance"}
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      BalanceUpdate {
+        Address
+      }
+    }
+  }
+}
+
+```
