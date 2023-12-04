@@ -67,43 +67,50 @@ Use interval argument for date/time to build OHLC graph by time interval
 
 Here are the sample queries to get started:
 
+### OHLC API
+
 Query price OHLC data for token pairs using DEX Trades By Tokens
 
 ```graphql
-query {
-  EVM(dataset: realtime) {
+
+query MyQuery {
+  EVM(dataset: combined) {
     DEXTradeByTokens(
-      orderBy: {ascendingByField: "Block_Time"}
-      where: {
-        Trade: {
-          Side: {
-            Currency: {
-              SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}
-            }
-          }
-          Currency: {SmartContract: {
-          is: "0xdac17f958d2ee523a2206206994597c13d831ec7"
-        }}}
-      }
+      orderBy: {descending: Block_Date}
+      #WETH-USDT trades on Uniswap V3
+      where: {Trade: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, 
+        Side: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}, 
+        Dex: {SmartContract: {is: "0x4e68ccd3e89f51c3074ca5072bbac773960dfa36"}}}}
+      limit: {count: 10}
     ) {
-      
       Block {
-        Time(interval: {in: minutes count: 10})
+        Date(interval: {in: days, count: 1})
       }
-      
       volume: sum(of: Trade_Amount)
-      
       Trade {
-      	high: Price(maximum: Trade_Price)
+        high: Price(maximum: Trade_Price)
         low: Price(minimum: Trade_Price)
         open: Price(minimum: Block_Number)
         close: Price(maximum: Block_Number)
+        Currency {
+          Name
+        }
+        Dex {
+          ProtocolName
+          SmartContract
+        }
+        Side {
+          Currency {
+            Name
+            SmartContract
+          }
+        }
       }
-      
       count
     }
   }
 }
+
 ```
 
 :::note
