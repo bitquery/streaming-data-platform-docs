@@ -54,7 +54,7 @@ query = """
 
 **Step 3: Set Up Request Payload and Headers**
 
-The API request payload and headers are prepared using the URL, query, and API key. Starting December 16,2023 we will move to OAuth. Read more [here](https://docs.bitquery.io/docs/ide/authorisation/)
+The API request payload and headers are prepared using the URL, query, and API key. Starting December 18, 2023 we will move to OAuth. Read more [here](https://docs.bitquery.io/docs/ide/authorisation/)
 
 ```Python
 url = "https://streaming.bitquery.io/graphql"

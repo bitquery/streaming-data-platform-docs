@@ -73,7 +73,7 @@ This function `getBars` is an asynchronous function that fetches historical bar 
     // ... (Continues below)
 ```
 
-This section utilizes Axios to make a POST request to the Bitquery API using the specified endpoint (`Bitquery.endpoint`) and the `BITQUERY_API` key as a header for authentication. Starting December 16,2023 OAuth 2.0 has to be used. Read more [here](https://docs.bitquery.io/docs/ide/authorisation/).
+This section utilizes Axios to make a POST request to the Bitquery API using the specified endpoint (`Bitquery.endpoint`) and the `BITQUERY_API` key as a header for authentication. Starting December 18, 2023 OAuth 2.0 has to be used. Read more [here](https://docs.bitquery.io/docs/ide/authorisation/).
 
 #### 4. Processing and Formatting Data
 
