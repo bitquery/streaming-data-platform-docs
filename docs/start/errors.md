@@ -1,9 +1,6 @@
+# Interpreting Errors and Limits with Queries
 
-# Errors
-
-## Interpreting Errors
-
-This section will guide you through the interpretation of common error messages encountered within Bitquery APIs.  It will help you decide when to escalate issues by filing a ticket at [Bitquery Support](https://support.bitquery.io/).
+This section will guide you through the interpretation of common error messages encountered within Bitquery APIs. It will help you decide when to escalate issues by filing a ticket at [Bitquery Support](https://support.bitquery.io/).
 
 ### ClickHouse Error: 400 Bad Request
 
@@ -26,7 +23,6 @@ This error typically arises due to incorrect query construction involving limits
 
 ---
 
-
 ### Empty Response Returned
 
 If no trades/transfers are found for the queried period, compare with public explorers. If issues persist, contact support through the public Telegram group.
@@ -36,7 +32,6 @@ If no trades/transfers are found for the queried period, compare with public exp
 ![symbol](/img/ide/symbol_error.png)
 
 This is an issue with indexing the token, please create a ticket at [support.bitquery.io](https://support.bitquery.io/hc/en-us)
-
 
 ### ActiveRecordError : Memory Exceeded
 
@@ -52,5 +47,41 @@ This error occurs due to excessive data retrieved in a single query. Limit resul
 
 This is likely an infrastructure issue. Contact support via Telegram for assistance.
 
-
 ---
+
+## Limits
+
+### Default Limit
+
+By default, if you do not specify a limit in your query, there is an implicit limit applied. This default limit restricts the number of records returned to 10,000. This is a safeguard to prevent excessive resource usage and to ensure that queries are processed efficiently.
+
+### Setting Custom Limits
+
+To specify a custom limit in your query, you can use the `limit` parameter. This parameter allows you to define the maximum number of records you want to retrieve. When you set a custom limit, the query will return the specified number of records based on your criteria.
+
+### Example Query
+
+Here's an example query demonstrating the use of the `limit` parameter:
+
+```graphql
+{
+  EVM(network: eth) {
+    Blocks(
+      limit: { count: 30000 }
+      orderBy: { descending: Block_Time }
+      where: { Block: { Date: { after: "2023-01-03" } } }
+    ) {
+      Block {
+        Number
+        Date
+      }
+    }
+  }
+}
+```
+
+### Important Notes
+
+- **Resource Consideration**: Be cautious when setting high limits, as large queries might consume significant resources and impact performance.
+- **Pagination**: For large datasets, consider implementing pagination with `offset` to retrieve data in smaller chunks for better efficiency. 
+- **Optimization**: Always aim to optimize your queries to retrieve the necessary data efficiently without exceeding resource limits.
