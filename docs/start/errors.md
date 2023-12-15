@@ -83,5 +83,5 @@ Here's an example query demonstrating the use of the `limit` parameter:
 ### Important Notes
 
 - **Resource Consideration**: Be cautious when setting high limits, as large queries might consume significant resources and impact performance.
-- **Pagination**: For large datasets, consider implementing pagination with `offset` to retrieve data in smaller chunks for better efficiency. 
+- **Pagination**: For large datasets, consider implementing pagination with `offset` to retrieve data in smaller chunks for better efficiency. Read more on limits and offsets [here](/docs/graphql/limits)
 - **Optimization**: Always aim to optimize your queries to retrieve the necessary data efficiently without exceeding resource limits.
