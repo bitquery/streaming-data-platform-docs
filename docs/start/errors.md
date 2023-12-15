@@ -35,7 +35,7 @@ If no trades/transfers are found for the queried period, compare with public exp
 
 ![symbol](/img/ide/symbol_error.png)
 
-This is an issue with indexing the token, please create a ticket at [support.bitquery.io](support.bitquery.io)
+This is an issue with indexing the token, please create a ticket at [support.bitquery.io](https://support.bitquery.io/hc/en-us)
 
 
 ### ActiveRecordError : Memory Exceeded
