@@ -425,3 +425,45 @@ query MyQuery {
 }
 
 ```
+
+## First X Buyers of a Token
+
+This query retrieves the first X number of buyers for a specific token within the Ethereum network. Replace the token address of the token you want in the Currency `SmartContract` field.
+You can find the query [here](https://ide.bitquery.io/first-x-number-of-buyers-of-a-token)
+
+```
+{
+  EVM(dataset: combined, network: eth) {
+    buyside: DEXTrades(
+      limit: {count: 10}
+      limitBy: {by: Transaction_From, count: 1}
+      orderBy: {ascending: Block_Time}
+      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}}}}
+    ) {
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        From
+        To
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          Buyer
+          Currency {
+            Name
+            Symbol
+          }
+          Seller
+          Price
+        }
+      }
+    }
+  }
+}
+
+
+```
