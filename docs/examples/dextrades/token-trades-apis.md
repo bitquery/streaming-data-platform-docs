@@ -363,7 +363,7 @@ In this query we have set trade currency pair to `0xfb6115445bff7b52feb98650c87f
     buyside: DEXTradeByTokens(
       limit: {count: 30}
       orderBy: {descending: Block_Time}
-      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xfb6115445bff7b52feb98650c87f44907e58f802"}}, Amount: {ge: "0"}}, Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}}, Block: {Date: {since: "2023-07-01", till: "2023-08-01"}}}
+      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xfb6115445bff7b52feb98650c87f44907e58f802"}}, Amount: {ge: "0"}, Type: {is: buy}}, Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}}, Block: {Date: {since: "2023-07-01", till: "2023-08-01"}}}
     ) {
       Block {
         Time(interval: {in: days, count: 1})
@@ -397,6 +397,7 @@ In this query we have set trade currency pair to `0xfb6115445bff7b52feb98650c87f
     }
   }
 }
+
 
 
 ```
