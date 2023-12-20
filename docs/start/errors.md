@@ -19,7 +19,7 @@ This error typically arises due to incorrect query construction involving limits
 - **Review Query Parameters:** Ensure that the query adheres to the specified limits, sorting criteria, and filters as required in a standard [query](/docs/start/first-query.md).
 - **Validate Syntax:** Double-check the syntax of the query to identify any mistakes or discrepancies.
 - **Consult Documentation:** Refer to Bitquery documentation for similar examples.
-- **Escalation:** If the issue persists or requires further assistance, consider filing a detailed ticket on [Bitquery Support](https://support.bitquery.io/) for specialized help and resolution.
+- **Escalation:** If the issue persists or requires further assistance, consider filing a detailed ticket on [Bitquery Support](https://support.bitquery.io/) for help and resolution.
 
 ---
 
@@ -46,6 +46,48 @@ This error occurs due to excessive data retrieved in a single query. Limit resul
 ### Too many simultaneous queries
 
 This is likely an infrastructure issue. Contact support via Telegram for assistance.
+
+
+### Error Status 500
+
+#### Probable Cause:
+
+The error with status 500 is a generic internal server error that could result from various issues within the system.
+
+#### Resolution Steps:
+
+- **Review Query and Syntax:** Double-check the query and its syntax for any errors or discrepancies.
+- **Check Server Status:** Verify the [server status](https://account.bitquery.io/user/system_status) to ensure it is operational and not experiencing downtime.
+- **Escalation:** Contact support on the [telegram channel](https://t.me/Bloxy_info).
+
+
+
+### ActiveRecord::ActiveRecordError: Response code: 500
+
+If you see this text `DB::Exception: Too many simultaneous queries`, this is an issue with the instance in the backend
+
+Its server issue mostly.
+In such case, we assign the issue to ops team with query
+
+
+### DB::Exception : Memory limit (total) exceeded
+
+`"message":"ActiveRecord::ActiveRecordError: Response code: 500:\nCode: 241, e.displayText() = DB::Exception: Memory limit (total) exceeded: would use 78.01 GiB (attempt to allocate chunk of 134658600 bytes), maximum: 78.01 GiB: ...`
+
+
+This error occurs when a query lacks a limit or requests an excessive number of records. To resolve it, consider adding filters to refine the query parameters. If issue still persists, please contact the support team on telegram with your query.
+
+
+### Timeout TCP socket
+
+[{"message":"Net::ReadTimeout ...}]
+
+This error occurs when the query is complex and takes too long to respond to a request. Check if you can optimize the query, if not please contact the support team on telegram with your query.
+
+
+### Error: Failed to fetch ERROR http 424
+
+Please retry the query in a few minutes, this is a temporary issue. If repeats please create a ticket at [support.bitquery.io](https://support.bitquery.io/hc/en-us)
 
 ---
 
