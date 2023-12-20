@@ -62,12 +62,9 @@ The error with status 500 is a generic internal server error that could result f
 
 
 
-### ActiveRecord::ActiveRecordError: Response code: 500
+### ActiveRecord::ActiveRecordError: Response code: 500 DB::Exception: Too many simultaneous queries
 
-If you see this text `DB::Exception: Too many simultaneous queries`, this is an issue with the instance in the backend
-
-Its server issue mostly.
-In such case, we assign the issue to ops team with query
+If you see this text `DB::Exception: Too many simultaneous queries`, this is an issue with the instance in the backend server, please reach out to support on telegram.
 
 
 ### DB::Exception : Memory limit (total) exceeded
