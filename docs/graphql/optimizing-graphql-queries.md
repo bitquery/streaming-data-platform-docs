@@ -14,7 +14,6 @@ In this section, we will see how to optimize your V2 API queries.
 
 Query optimization is crucial for achieving optimal performance in any application that processes data through APIs. By optimizing queries, you can significantly reduce the amount of time and resources required to retrieve the data you need. This helps to improve performance, reduce latency, and ensure that your applications are fast, responsive, and reliable. With the right query optimization techniques, you can make the most of API resources and deliver a superior user experience.
 
-The objectives of query optimization in GraphQL
 
 The key objectives of query optimization in GraphQL are to improve the performance and efficiency of API requests, reduce network latency, prevent server overload, and deliver a better user experience.
 
