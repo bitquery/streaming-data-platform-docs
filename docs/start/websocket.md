@@ -51,3 +51,79 @@ subscription MyQuery {
 
 asyncio.run(ws.subscribe(query=query, handle=print))
 ```
+
+
+## Example: Using WebSocket Using JavaScript
+
+Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](/docs/ide/authorisation)
+
+
+```
+const { WebSocket, WebSocketServer } = require("ws");
+
+
+const BQ_API_KEY = 'keyy';
+const BITQUERY_WS_URL = "wss://streaming.bitquery.io/graphql";
+
+const bitqueryConnection = new WebSocket(BITQUERY_WS_URL, ["graphql-ws"], {
+  headers: {
+    "X-API-KEY": `Bearer ${BQ_API_KEY}`
+  }
+});
+
+const lps = ["0xc74b026fab49d2380ffc6f53908c2ae6d14aa3b6"];
+
+bitqueryConnection.on("open", () => {
+  console.log("Connected to Bitquery.");
+
+  // Send initialization message
+  const initMessage = JSON.stringify({ type: 'connection_init' });
+  bitqueryConnection.send(initMessage);
+
+  // After initialization, send the actual subscription message
+  setTimeout(() => {
+    const message = JSON.stringify({
+      type: "start",
+      id: "1",
+      payload: {
+        query: `
+                subscription RealTimeLP($lps: [String!]) {
+                    EVM(network: eth) {
+                        BalanceUpdates(
+                            where: {
+                                BalanceUpdate: { Address: { in: $lps } },
+                                Currency: { SmartContract: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" }}
+                            }
+                        ) {
+                            balance: sum(of: BalanceUpdate_Amount)
+                            Address: BalanceUpdate {
+                                Address
+                            }
+                        }
+                    }
+                }
+                `,
+        variables: { lps },
+      }
+    });
+
+    bitqueryConnection.send(message);
+  }, 1000);
+});
+
+bitqueryConnection.on("message", (data) => {
+  const response = JSON.parse(data);
+  if (response.type === "data") {
+    // Broadcast the data to all connected clients of your local server
+    console.log("Received data from Bitquery: ", response.payload.data);
+  }
+});
+
+bitqueryConnection.on("close", () => {
+  console.log("Disconnected from Bitquery.");
+});
+
+bitqueryConnection.on('error', (error) => {
+  console.error('WebSocket Error:', error);
+});
+```
