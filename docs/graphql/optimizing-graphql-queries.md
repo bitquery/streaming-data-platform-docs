@@ -1,3 +1,7 @@
+---
+sidebar_position: 9
+---
+
 # GraphQL query optimization for APIs
 
 GraphQL is an open-source query language for APIs. It allows clients to define the required data structure, and the server responds with only that data. This allows for more efficient and flexible communication between the client and server, as well as enabling better performance and easier development of APIs.
