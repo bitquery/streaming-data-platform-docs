@@ -3,7 +3,7 @@ sidebar_position: 1
 ---
 
 
-# Managing OAuth2 Authorization Headers in Streaming API - Simple Approach
+# Managing Authorization Headers in Streaming API - Simple Approach
 
 Starting January 9, 2024, access to the V2 APIs will be restricted without the OAuth token.
 
