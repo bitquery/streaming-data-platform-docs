@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 
 # Managing OAuth2 Authorization Headers in Streaming API - Simple Approach
 
