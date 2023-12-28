@@ -216,3 +216,56 @@ query MyQuery {
 }
 
 ```
+
+
+## Initial Liquidity, Current Liquidity and Trade Volume for a given pair
+
+The below query finds the inital liquidity, current liquidity and trade volume of USDT-WETH pool on Uniswap using the pool address `0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852`.
+
+You can find the query [here](https://ide.bitquery.io/Pools-details_1)
+```
+{
+  EVM(dataset: combined, network: eth) {
+    Initaial_liquidity: Transfers(
+      limit: {count: 2}
+      orderBy: {ascending: Block_Time}
+      where: {Transfer: {Receiver: {is: "0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Transfer {
+        Amount
+        Currency {
+          SmartContract
+          Name
+          Symbol
+        }
+      }
+    }
+    Current_lquidity: BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"}}, Currency: {SmartContract: {in: ["0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", "0xdac17f958d2ee523a2206206994597c13d831ec7"]}}}
+      orderBy: {descendingByField: "balance"}
+    ) {
+      Currency {
+        Name
+        SmartContract
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      BalanceUpdate {
+        Address
+      }
+    }
+    volume: DEXTrades(
+      where: {Block: {Time: {since: "2023-12-28T10:01:55.000Z"}}, Trade: {Dex: {Pair: {SmartContract: {is: "0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"}}}}}
+    ) {
+      token1_vol: sum(of: Trade_Buy_Amount)
+      token2_vol: sum(of: Trade_Sell_Amount)
+    }
+  }
+}
+
+
+```
+
+
