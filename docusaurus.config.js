@@ -117,6 +117,12 @@ const config = {
             to: '/docs/usecases/telegram-bot/',
             from: '/docs/usecases/Telegram_bot/',
           },
+
+          // {
+          //   to:'',
+          //   from:'/docs/ide/authorisation/'
+          // },
+
          
         ],
       },
