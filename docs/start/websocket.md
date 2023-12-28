@@ -55,7 +55,7 @@ asyncio.run(ws.subscribe(query=query, handle=print))
 
 ## Example: Using WebSocket Using JavaScript
 
-Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](/docs/ide/authorisation)
+Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](/docs/ide/authorisation/simple.md)
 
 
 ```
