@@ -259,9 +259,9 @@ Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.i
 
 
 
-## Subscribe to new token trades (Webhook)
+## Subscribe to new token trades (WebSocket)
 
-You can use GraphQL subscription (Webhook) to subscribe to latest trades. In the following example we are subscribing to latest trades for [WETH Token](https://explorer.bitquery.io/ethereum/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).
+You can use GraphQL subscription (WebSocket) to subscribe to latest trades. In the following example we are subscribing to latest trades for [WETH Token](https://explorer.bitquery.io/ethereum/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).
 
 
 
