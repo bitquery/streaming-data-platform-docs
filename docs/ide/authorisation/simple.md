@@ -34,16 +34,6 @@ This approach is straightforward but less secure since the token remains static 
 2.  Click **Generate Access Token**.
 3.  Copy the access token and store it in a secure location.
 
-**Revoking an Access Token**
-
-If you believe that your access token has been compromised, you can revoke it by clicking **Revoke** on the **Applications** page.
-
-![revoke](/img/v2Access/revoke.png)
-
-**Deleting an Application**
-
-If you no longer need an application, you can delete it by clicking **Delete** on the **Applications** page.
-
 **Using the token:**
 
 1.  Embed the access token directly into your application. You can find the access token on IDE, as shown below
@@ -59,9 +49,19 @@ Authorization: Bearer <access_token>
 
 ```
 
+> **If you have no applications created, the `Bearer` token changes every 12 hours.**
+
+**Revoking an Access Token**
+
+If you believe that your access token has been compromised, you can revoke it by clicking **Revoke** on the **Applications** page.
+
+![revoke](/img/v2Access/revoke.png)
+
+**Deleting an Application**
+
+If you no longer need an application, you can delete it by clicking **Delete** on the **Applications** page.
+
 **Billing Considerations**
 
 - Billing remains consistent across API v1 and v2.
 - Purchase points once and utilize them for either v1 or v2 in any combination.
-
-> **If you have no applications created, the `Bearer` token changes every 12 hours.**
