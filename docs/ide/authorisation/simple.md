@@ -2,7 +2,6 @@
 sidebar_position: 1
 ---
 
-
 # Managing Authorization Headers in Streaming API - Simple Approach
 
 Starting January 9, 2024, access to the V2 APIs will be restricted without the OAuth token.
@@ -25,16 +24,10 @@ This approach is straightforward but less secure since the token remains static 
 
 2.  Utilize the code generation feature in the IDE to obtain the code with the embedded token for your chosen programming language.
 
-
-
-if you have no applications created, the `Bearer` token changes every 12 hours. 
-
 **Billing Considerations**
 
 - Billing remains consistent across API v1 and v2.
 - Purchase points once and utilize them for either v1 or v2 in any combination.
-
-
 
 **Using an Access Token**
 
@@ -45,5 +38,4 @@ Authorization: Bearer <access_token>
 
 ```
 
-
-
+> **If you have no applications created, the `Bearer` token changes every 12 hours.**
