@@ -45,8 +45,10 @@ If you no longer need an application, you can delete it by clicking **Delete** o
 
 
 ```
+import requests
+import json
 def oAuth_example():
-    import requests
+    
 
     url = "https://oauth2.bitquery.io/oauth2/token"
 
