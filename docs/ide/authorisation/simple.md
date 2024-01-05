@@ -38,7 +38,7 @@ This approach is straightforward but less secure since the token remains static 
 
 1.  Embed the access token directly into your application. You can find the access token on IDE, as shown below
 
-![token example](/static/img/v2Access/token_example.png)
+![token example](/img/v2Access/token_example.png)
 
 2.  Utilize the code generation feature in the IDE to obtain the code with the embedded token for your chosen programming language.
 
