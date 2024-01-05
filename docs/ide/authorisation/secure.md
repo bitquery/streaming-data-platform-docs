@@ -47,20 +47,22 @@ If you no longer need an application, you can delete it by clicking **Delete** o
 ```
 import requests
 import json
+
+
 def oAuth_example():
-    
 
-    url = "https://oauth2.bitquery.io/oauth2/token"
+  url = "https://oauth2.bitquery.io/oauth2/token"
 
-    payload = 'grant_type=client_credentials&client_id=YOUR_ID_HEREclient_secret=YOUR_SECRET-HERE&scope=api'
-    headers = {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    }
+  payload = 'grant_type=client_credentials&client_id=YOUR_ID_HERE&client_secret=YOUR_SECRET_HERE&scope=api'
 
-    response = requests.request("POST", url, headers=headers, data=payload)
-    resp = json.loads(response.text)
+  headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 
-    print(resp['access_token'])
+  response = requests.request("POST", url, headers=headers, data=payload)
+  resp = json.loads(response.text)
+  print(resp)
+
+
+oAuth_example()
 ```
 
 
