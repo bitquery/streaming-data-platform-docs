@@ -27,6 +27,8 @@ This approach is straightforward but less secure since the token remains static 
 
 
 
+if you have no applications created, the `Bearer` token changes every 12 hours. 
+
 **Billing Considerations**
 
 - Billing remains consistent across API v1 and v2.

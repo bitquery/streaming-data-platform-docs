@@ -44,34 +44,21 @@ If you believe that your access token has been compromised, you can revoke it by
 If you no longer need an application, you can delete it by clicking **Delete** on the **Applications** page.
 
 
-**Short-term Access Tokens**
-
-If you want to use short-term access tokens, you will need to generate them programmatically in your app and handle the expiration time yourself. Read more on access tokens and refresh tokens [here](https://oauth.net/2/access-tokens/)
-
-Here is an example of how to generate a short-term access token using the Python SDK:
-
-```Python
-import requests
-
-client_id = "YOUR_CLIENT_ID"
-client_secret = "YOUR_CLIENT_SECRET"
-
-# Get a refresh token
-response = requests.post(
-    "https://oauth2.bitquery.io/oauth2/token",
-    auth=(client_id, client_secret),
-    data={
-        "grant_type": "client_credentials",
-    },
-)
-token = response.json()["access_token"]
-
-# Generate a short-term token
-response = requests.post(
-    "https://streaming.bitquery.io/graphql",
-    headers={"Authorization": f"Bearer {token}"},
-    json={"expires_in": 3600},
-)
-short_term_token = response.json()["token"]
-
 ```
+def oAuth_example():
+    import requests
+
+    url = "https://oauth2.bitquery.io/oauth2/token"
+
+    payload = 'grant_type=client_credentials&client_id=your_id_hereclient_secret=your_client-secret&scope=api'
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    resp = json.loads(response.text)
+
+    print(resp['access_token'])
+```
+
+
