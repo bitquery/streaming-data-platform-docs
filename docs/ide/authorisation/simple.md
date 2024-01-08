@@ -34,15 +34,15 @@ This approach is straightforward but less secure since the token remains static 
 2.  Click **Generate Access Token**.
 3.  Copy the access token and store it in a secure location.
 
+![copy](/img/v2Access/copytoken.png)
+
 **Using the token:**
 
-1.  Embed the access token directly into your application. You can find the access token on IDE, as shown below
+To utilize the token you've copied from the API-KEY tab, use the code generation feature on your IDE to obtain the code in your preferred programming language. However, **remember to paste the token you've copied from the API-Key page**. This is necessary because the IDE code generator only displays temporary tokens.
 
-![token example](/img/v2Access/token_example.png)
+![temporary](/img/v2Access/temporarytoken.png)
 
-2.  Utilize the code generation feature in the IDE to obtain the code with the embedded token for your chosen programming language.
-
-Include it in the `Authorization` header of your API requests. For example:
+For example, you can include the token in the header as shown below:
 
 ```
 Authorization: Bearer <access_token>
