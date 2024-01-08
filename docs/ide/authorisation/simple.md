@@ -18,7 +18,7 @@ This approach is straightforward but less secure since the token remains static 
 
 **Creating an Application**
 
-1.  Go to the **Api-Key** page and click **Create application**.
+1.  Go to the [Applications](https://account.bitquery.io/user/applications) page and click **Create application**.
 
     ![new](/img/v2Access/newApplication.png)
 
@@ -27,7 +27,7 @@ This approach is straightforward but less secure since the token remains static 
 
 **Generating an Access Token**
 
-1.  Go to the **Applications** page and select the application for which you want to generate an access token.
+1.  Go to the [Applications](https://account.bitquery.io/user/applications) page and select the application for which you want to generate an access token.
 
     ![generate](/img/v2Access/generate.png)
 
