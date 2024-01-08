@@ -59,7 +59,7 @@ If you believe that your access token has been compromised, you can revoke it by
 
 **Deleting an Application**
 
-If you no longer need an application, you can delete it by clicking **Delete** on the **Applications** page.
+If you no longer need an application, you can delete it by clicking **Delete** on the **Applications** page. All the tokens associated with the application will no longer work.
 
 **Billing Considerations**
 
