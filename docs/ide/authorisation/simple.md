@@ -27,7 +27,7 @@ This approach is straightforward but less secure since the token remains static 
 
 **Generating an Access Token**
 
-1.  Go to the [Applications](https://account.bitquery.io/user/applications) page and select the application for which you want to generate an access token.
+1.  Go to the [API- Key](https://account.bitquery.io/user/api_key) page and select the application for which you want to generate an access token.
 
     ![generate](/img/v2Access/generate.png)
 
