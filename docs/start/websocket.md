@@ -11,11 +11,14 @@ Bitquery makes real-time data available using WebSockets. We use a specific WebS
 wss://streaming.bitquery.io/graphql
 ```
 
+
 ## What Is the Difference Between WebSocket and GraphQL WebSocket?
 
 WebSocket provides a general-purpose protocol for real-time bidirectional communication over a single, long-lived connection. However, one drawback is that developers must implement their own messaging and data structure when using WebSocket.
 
 On the other hand, GraphQL WebSocket standardizes communication over WebSocket as defined by the GraphQL specifications. GraphQL WebSocket is a specific protocol and implementation designed to enable real-time communication for GraphQL APIs. 
+
+Read [here](https://docs.bitquery.io/docs/ide/authorisation/websocket/) on how to use websockets with OAuth.
 
 Here is the link to a Postman collection with samples demonstrating how to use the wss endpoint:
 
@@ -30,7 +33,8 @@ Here is an example which uses GrapqhQL WebSocket Using Python and `python_graphq
 from python_graphql_client import GraphqlClient
 import asyncio
 
-ws = GraphqlClient(endpoint="wss://streaming.bitquery.io/graphql")
+ws = GraphqlClient(endpoint="wss://streaming.bitquery.io/graphql", headers={"Authorization": "Bearer ory_...", "Sec-WebSocket-Protocol": "graphql-ws", "Content-Type": "application/json"})
+
 
 query = """
 subscription MyQuery {
@@ -62,12 +66,12 @@ Open any online code editor and use this JavaScript code to use the websocket. S
 const { WebSocket, WebSocketServer } = require("ws");
 
 
-const BQ_API_KEY = 'keyy';
 const BITQUERY_WS_URL = "wss://streaming.bitquery.io/graphql";
 
-const bitqueryConnection = new WebSocket(BITQUERY_WS_URL, ["graphql-ws"], {
+const bitqueryConnection = new WebSocket("wss://streaming.bitquery.io/graphql?token=ory*at*..", ["graphql-ws"], {
   headers: {
-    "X-API-KEY": `Bearer ${BQ_API_KEY}`
+    "Sec-WebSocket-Protocol": "graphql-ws",
+    "Content-Type": "application/json"
   }
 });
 
