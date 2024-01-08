@@ -19,6 +19,7 @@ The secure approach expects you to programmatically generate an access token usi
 
 Below is a code snippet in Python that shows you how to programmatically generate a token, replace the placeholders with actual information.
 
+Ensure that `scope=api` is mentioned in the payload,
 
 ```
 import requests
