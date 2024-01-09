@@ -18,7 +18,7 @@ WebSocket provides a general-purpose protocol for real-time bidirectional commun
 
 On the other hand, GraphQL WebSocket standardizes communication over WebSocket as defined by the GraphQL specifications. GraphQL WebSocket is a specific protocol and implementation designed to enable real-time communication for GraphQL APIs. 
 
-Read [here](https://docs.bitquery.io/docs/ide/authorisation/websocket/) on how to use websockets with OAuth.
+Read [here](https://docs.bitquery.io/docs/start/authorisation/websocket/) on how to use websockets with OAuth.
 
 Here is the link to a Postman collection with samples demonstrating how to use the wss endpoint:
 
@@ -59,7 +59,7 @@ asyncio.run(ws.subscribe(query=query, handle=print))
 
 ## Example: Using WebSocket Using JavaScript
 
-Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](/docs/ide/authorisation/simple.md)
+Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](/docs/start/authorisation/websocket.md)
 
 
 ```
