@@ -122,8 +122,9 @@ const config = {
             from:'/docs/ide/authorisation/'
           },
           {
-            to: '/docs/ide/authorisation/simple',
-            from:'/docs/start/authorisation/simple'
+            to:'/docs/start/authorisation/simple',
+            from: '/docs/ide/authorisation/simple',
+           
           }
         ],
       },
