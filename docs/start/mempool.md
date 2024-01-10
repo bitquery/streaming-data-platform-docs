@@ -13,7 +13,7 @@ By using the following query format, you can access a wide range of mempool info
 query{
   EVM(mempool: true){
 
-}
+    }
 }
 
 ```
