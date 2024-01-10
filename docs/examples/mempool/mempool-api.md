@@ -6,6 +6,42 @@ sidebar_position: 1
 
 The Mempool API allows you to access real-time data from the mempool for EVM chains including Ethereum, Arbitrum and BNB chains. You can use this API to monitor transactions, token trades, transfers and any data stored in the mempool.
 
+
+## Get Recommended Fees 
+
+The Recommended Fees API provides real-time data from the mempool. It returns fields such as block time, block number, transaction hash, transaction cost, sender address, recipient address, base fee, burnt fees, sender fees, priority fees per gas, miner rewards, gas refunds, effective gas prices, and potential savings. You can use it to build applications that require up-to-date information about recommended transaction fees. 
+
+You can run the query [here](https://ide.bitquery.io/Get-Mempool-Fees)
+```
+subscription {
+  EVM(mempool: true) {
+    Transactions(limit: {count: 100}, where: {}) {
+      Block {
+        Time
+        Number
+        BaseFee
+      }
+      Transaction {
+        Hash
+        Cost
+        To
+        From
+      }
+      Fee {
+        Burnt
+        SenderFee
+        PriorityFeePerGas
+        MinerReward
+        GasRefund
+        EffectiveGasPrice
+        Savings
+      }
+    }
+  }
+}
+
+```
+
 ## PairCreated Events
 
 This query returns information about transactions that have triggered the `PairCreated` event in the mempool, including the transaction hash, log signature, and argument values. You can run the query [here](https://ide.bitquery.io/PairCreated-in-Mempool)
