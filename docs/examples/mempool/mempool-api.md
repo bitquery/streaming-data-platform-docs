@@ -13,9 +13,9 @@ The Recommended Fees API provides real-time data from the mempool. It returns fi
 
 You can run the query [here](https://ide.bitquery.io/Get-Mempool-Fees)
 ```
-subscription {
+{
   EVM(mempool: true) {
-    Transactions(limit: {count: 100}, where: {}) {
+    Transactions(limit: {count: 100}) {
       Block {
         Time
         Number
@@ -39,6 +39,7 @@ subscription {
     }
   }
 }
+
 
 ```
 
