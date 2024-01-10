@@ -52,10 +52,10 @@ type EVM_Call_Fields_Receipt {
     selectWhere: OLAP_String
   ): String
   CumulativeGasUsed(
+    selectWhere: OLAP_BigInteger
     if: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
     minimum: EVM_Call_CompareFields
-    selectWhere: OLAP_BigInteger
   ): String
   GasUsed(
     maximum: EVM_Call_CompareFields
@@ -63,6 +63,7 @@ type EVM_Call_Fields_Receipt {
     selectWhere: OLAP_BigInteger
     if: EVM_Call_Filter
   ): String
+  L1: EVM_Call_Fields_Receipt_L1
   Status(
     if: EVM_Call_Filter
     maximum: EVM_Call_CompareFields
@@ -115,7 +116,13 @@ type EVM_Call_Fields_Receipt {
 > 
 > 
 > CumulativeGasUsed value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>if</b></code>](#)<Bullet />[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -131,12 +138,6 @@ type EVM_Call_Fields_Receipt {
 > 
 > 
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.CumulativeGasUsed.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.<b>GasUsed</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -165,6 +166,12 @@ type EVM_Call_Fields_Receipt {
 > 
 > 
 > Apply a condition to a metric calculation
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.<b>L1</b></code>](#)<Bullet />[`EVM_Call_Fields_Receipt_L1`](/docs/graphql-reference/objects/evm-call-fields-receipt-l1) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
+> L1 fields
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Fields_Receipt.<b>Status</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 

@@ -47,10 +47,10 @@ Uncle blocks in EVM Blockchain
 type EVM_Uncle_Cube {
   Block: EVM_Uncle_Fields_Block
   ChainId(
+    selectWhere: OLAP_BigInteger
     if: EVM_Uncle_Filter
     maximum: EVM_Uncle_CompareFields
     minimum: EVM_Uncle_CompareFields
-    selectWhere: OLAP_BigInteger
   ): String
   Uncle: EVM_Uncle_Fields_Uncle
   average(
@@ -59,44 +59,44 @@ type EVM_Uncle_Cube {
     if: EVM_Uncle_Filter
   ): Float
   contingency(
-    with: EVM_Uncle_NumFields
-    if: EVM_Uncle_Filter
     selectWhere: Metric_filter_Float
+    if: EVM_Uncle_Filter
     of: EVM_Uncle_NumFields
+    with: EVM_Uncle_NumFields
   ): Float
   correlation(
-    selectWhere: Metric_filter_Float
     if: EVM_Uncle_Filter
     of: EVM_Uncle_NumFields
     with: EVM_Uncle_NumFields
+    selectWhere: Metric_filter_Float
   ): Float
   count(
+    distinct: [EVM_Uncle_EnumFields]
     if: EVM_Uncle_Filter
     selectWhere: Metric_filter_String
-    distinct: [EVM_Uncle_EnumFields]
   ): String
   covariance(
+    if: EVM_Uncle_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Uncle_NumFields
     with: EVM_Uncle_NumFields
-    if: EVM_Uncle_Filter
   ): Float
   cramers(
-    if: EVM_Uncle_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Uncle_NumFields
     with: EVM_Uncle_NumFields
+    if: EVM_Uncle_Filter
   ): Float
   cramers_bias_corrected(
-    selectWhere: Metric_filter_Float
-    of: EVM_Uncle_NumFields
     with: EVM_Uncle_NumFields
     if: EVM_Uncle_Filter
+    selectWhere: Metric_filter_Float
+    of: EVM_Uncle_NumFields
   ): Float
   dispersion(
+    if: EVM_Uncle_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Uncle_NumFields!
-    if: EVM_Uncle_Filter
   ): Float
   entropy(
     selectWhere: Metric_filter_Float
@@ -109,8 +109,8 @@ type EVM_Uncle_Cube {
   ): Float
   kurtosis(
     selectWhere: Metric_filter_Float
-    if: EVM_Uncle_Filter
     of: EVM_Uncle_NumFields!
+    if: EVM_Uncle_Filter
   ): Float
   median(
     selectWhere: Metric_filter_Float
@@ -118,32 +118,32 @@ type EVM_Uncle_Cube {
     if: EVM_Uncle_Filter
   ): Float
   nakamoto(
-    ratio: Float = 0.51
     selectWhere: Metric_filter_Float
     of: EVM_Uncle_NumFields!
+    ratio: Float = 0.51
   ): Float
   quantile(
-    of: EVM_Uncle_NumFields!
-    level: Float = 0.5
+    selectWhere: Metric_filter_Float
     if: EVM_Uncle_Filter
     method: OLAP_Metric_Calculation_Method_Exact
-    selectWhere: Metric_filter_Float
+    of: EVM_Uncle_NumFields!
+    level: Float = 0.5
   ): Float
   rank_correlation(
-    selectWhere: Metric_filter_Float
     if: EVM_Uncle_Filter
     of: EVM_Uncle_NumFields
     with: EVM_Uncle_NumFields
+    selectWhere: Metric_filter_Float
   ): Float
   skew(
+    if: EVM_Uncle_Filter
     selectWhere: Metric_filter_Float
     of: EVM_Uncle_NumFields!
-    if: EVM_Uncle_Filter
   ): Float
   standard_deviation(
-    of: EVM_Uncle_NumFields!
-    if: EVM_Uncle_Filter
     selectWhere: Metric_filter_Float
+    if: EVM_Uncle_Filter
+    of: EVM_Uncle_NumFields!
   ): Float
   sum(
     selectWhere: Metric_filter_String
@@ -151,8 +151,8 @@ type EVM_Uncle_Cube {
     if: EVM_Uncle_Filter
   ): String
   theil_index(
-    of: EVM_Uncle_NumFields!
     selectWhere: Metric_filter_Float
+    of: EVM_Uncle_NumFields!
   ): Float
   theils_corrected(
     selectWhere: Metric_filter_Float
@@ -162,9 +162,9 @@ type EVM_Uncle_Cube {
   ): Float
   uniq(
     selectWhere: Metric_filter_String
-    method: OLAP_Metric_Calculation_Method_Exact
     of: [EVM_Uncle_EnumFields]!
     if: EVM_Uncle_Filter
+    method: OLAP_Metric_Calculation_Method_Exact
   ): String
 }
 ```
@@ -184,7 +184,13 @@ type EVM_Uncle_Cube {
 > 
 > 
 > ChainId value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.ChainId.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.ChainId.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.ChainId.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -200,12 +206,6 @@ type EVM_Uncle_Cube {
 > 
 > 
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.ChainId.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>Uncle</b></code>](#)<Bullet />[`EVM_Uncle_Fields_Uncle`](/docs/graphql-reference/objects/evm-uncle-fields-uncle) <Badge class="badge badge--secondary" text="object"/> 
@@ -240,10 +240,10 @@ type EVM_Uncle_Cube {
 > 
 > 
 > Contingency coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.contingency.<b>with</b></code>](#)<Bullet />[`EVM_Uncle_NumFields`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
-> Second argument for Contingency coefficient between two arguments
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.contingency.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
@@ -252,29 +252,23 @@ type EVM_Uncle_Cube {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.contingency.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.contingency.<b>of</b></code>](#)<Bullet />[`EVM_Uncle_NumFields`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > First argument for Contingency coefficient between two arguments
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.contingency.<b>with</b></code>](#)<Bullet />[`EVM_Uncle_NumFields`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Second argument for Contingency coefficient between two arguments
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Pearson correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.correlation.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -292,11 +286,23 @@ type EVM_Uncle_Cube {
 > Second argument for Pearson correlation coefficient between two arguments
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>count</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Count records or uniques of arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.count.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Uncle_EnumFields]`](/docs/graphql-reference/enums/evm-uncle-enum-fields) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Count distinct values of the field
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.count.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -308,17 +314,17 @@ type EVM_Uncle_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.count.<b>distinct</b></code>](#)<Bullet />[`[EVM_Uncle_EnumFields]`](/docs/graphql-reference/enums/evm-uncle-enum-fields) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Count distinct values of the field
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>covariance</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Covariance between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.covariance.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.covariance.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.covariance.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -336,23 +342,11 @@ type EVM_Uncle_Cube {
 > Second argument for Covariance between two arguments
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.covariance.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>cramers</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Cramér's phi coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.cramers.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -370,23 +364,17 @@ type EVM_Uncle_Cube {
 > Second argument for Cramér's phi coefficient between two arguments
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.cramers.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>cramers_bias_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Cramér's phi coefficient with bias correction between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Uncle_NumFields`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> First argument for Cramér's phi coefficient with bias correction between two arguments
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Uncle_NumFields`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.cramers_bias_corrected.<b>with</b></code>](#)<Bullet />[`EVM_Uncle_NumFields`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Second argument for Cramér's phi coefficient with bias correction between two arguments
@@ -398,11 +386,29 @@ type EVM_Uncle_Cube {
 > Apply a condition to a metric calculation
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.cramers_bias_corrected.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.cramers_bias_corrected.<b>of</b></code>](#)<Bullet />[`EVM_Uncle_NumFields`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> First argument for Cramér's phi coefficient with bias correction between two arguments
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>dispersion</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Dispersion for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.dispersion.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.dispersion.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -412,12 +418,6 @@ type EVM_Uncle_Cube {
 > 
 > 
 > Argument for Dispersion for a set of values
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.dispersion.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>entropy</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -468,16 +468,16 @@ type EVM_Uncle_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.kurtosis.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.kurtosis.<b>of</b></code>](#)<Bullet />[`EVM_Uncle_NumFields!`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Argument for Kurtosis for a set of values
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.kurtosis.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>median</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -506,13 +506,7 @@ type EVM_Uncle_Cube {
 > 
 > 
 > Nakamoto index of argument. Count of values more than 0.51 of the range. Ratio (0.51) can be specified as optional parameter
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.nakamoto.<b>ratio</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Ratio for nakamoto index ( default is 0.51, can be from 0 to 1 )
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.nakamoto.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.nakamoto.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -524,20 +518,20 @@ type EVM_Uncle_Cube {
 > Argument for nakamoto index
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.nakamoto.<b>ratio</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Ratio for nakamoto index ( default is 0.51, can be from 0 to 1 )
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>quantile</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Approximate quantile of a numeric data sequence
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_Uncle_NumFields!`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
-> Argument for quantile
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.quantile.<b>level</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Level of quantile. Optional parameter. Constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]. Default value: 0.5. At level=0.5 the function calculates median.
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.quantile.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
@@ -552,23 +546,23 @@ type EVM_Uncle_Cube {
 > Method used to calculate metric values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.quantile.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.quantile.<b>of</b></code>](#)<Bullet />[`EVM_Uncle_NumFields!`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
-> Defines the condition to filter the results by the value of this metric
+> Argument for quantile
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.quantile.<b>level</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Level of quantile. Optional parameter. Constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]. Default value: 0.5. At level=0.5 the function calculates median.
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>rank_correlation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Rank correlation coefficient between two arguments
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.rank_correlation.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -586,11 +580,23 @@ type EVM_Uncle_Cube {
 > Second argument for Rank correlation coefficient between two arguments
 > 
 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.rank_correlation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>skew</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Skew for a set of values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.skew.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
@@ -602,20 +608,14 @@ type EVM_Uncle_Cube {
 > Argument for Skew for a set of values
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.skew.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>standard_deviation</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Standard deviation of the values
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_Uncle_NumFields!`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.standard_deviation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
-> Argument for Standard deviation of the values
+> Defines the condition to filter the results by the value of this metric
 > 
 
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.standard_deviation.<b>if</b></code>](#)<Bullet />[`EVM_Uncle_Filter`](/docs/graphql-reference/inputs/evm-uncle-filter) <Badge class="badge badge--secondary" text="input"/> 
@@ -624,10 +624,10 @@ type EVM_Uncle_Cube {
 > Apply a condition to a metric calculation
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.standard_deviation.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.standard_deviation.<b>of</b></code>](#)<Bullet />[`EVM_Uncle_NumFields!`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
-> Defines the condition to filter the results by the value of this metric
+> Argument for Standard deviation of the values
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>sum</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -656,16 +656,16 @@ type EVM_Uncle_Cube {
 > 
 > 
 > Theil index of argument
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.theil_index.<b>of</b></code>](#)<Bullet />[`EVM_Uncle_NumFields!`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Argument for Theil index
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.theil_index.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.theil_index.<b>selectWhere</b></code>](#)<Bullet />[`Metric_filter_Float`](/docs/graphql-reference/inputs/metric-filter-float) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.theil_index.<b>of</b></code>](#)<Bullet />[`EVM_Uncle_NumFields!`](/docs/graphql-reference/enums/evm-uncle-num-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Argument for Theil index
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.<b>theils_corrected</b></code>](#)<Bullet />[`Float`](/docs/graphql-reference/scalars/float) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -706,12 +706,6 @@ type EVM_Uncle_Cube {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Method used to calculate metric values
-> 
-
 ##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.uniq.<b>of</b></code>](#)<Bullet />[`[EVM_Uncle_EnumFields]!`](/docs/graphql-reference/enums/evm-uncle-enum-fields) <Badge class="badge badge--secondary" text="non-null"/> <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
@@ -722,6 +716,12 @@ type EVM_Uncle_Cube {
 > 
 > 
 > Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Uncle_Cube.uniq.<b>method</b></code>](#)<Bullet />[`OLAP_Metric_Calculation_Method_Exact`](/docs/graphql-reference/enums/olap-metric-calculation-method-exact) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Method used to calculate metric values
 > 
 
 

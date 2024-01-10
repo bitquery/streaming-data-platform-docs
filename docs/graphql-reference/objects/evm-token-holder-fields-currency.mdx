@@ -46,10 +46,10 @@ Currency fields
 ```graphql
 type EVM_TokenHolder_Fields_Currency {
   Decimals(
-    selectWhere: OLAP_Integer
     if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
+    selectWhere: OLAP_Integer
   ): Int
   Delegated(
     if: EVM_TokenHolder_Filter
@@ -58,10 +58,10 @@ type EVM_TokenHolder_Fields_Currency {
     selectWhere: Boolean
   ): Boolean
   DelegatedTo(
-    selectWhere: OLAP_String
     if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
+    selectWhere: OLAP_String
   ): String
   Fungible(
     if: EVM_TokenHolder_Filter
@@ -76,10 +76,10 @@ type EVM_TokenHolder_Fields_Currency {
     selectWhere: Boolean
   ): Boolean
   Name(
-    minimum: EVM_TokenHolder_CompareFields
-    selectWhere: OLAP_String
     if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
+    minimum: EVM_TokenHolder_CompareFields
+    selectWhere: OLAP_String
   ): String
   Native(
     minimum: EVM_TokenHolder_CompareFields
@@ -117,13 +117,7 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Decimals value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Decimals.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Decimals.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Decimals.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -139,6 +133,12 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Decimals.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.<b>Delegated</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -173,13 +173,7 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > DelegatedTo value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.DelegatedTo.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.DelegatedTo.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.DelegatedTo.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -195,6 +189,12 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.DelegatedTo.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.<b>Fungible</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
@@ -257,19 +257,7 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Name value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Name.<b>minimum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Name.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Name.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Name.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -279,6 +267,18 @@ type EVM_TokenHolder_Fields_Currency {
 > 
 > 
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Name.<b>minimum</b></code>](#)<Bullet />[`EVM_TokenHolder_CompareFields`](/docs/graphql-reference/enums/evm-token-holder-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.Name.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Currency.<b>Native</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 

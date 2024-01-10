@@ -58,10 +58,10 @@ type EVM_Transaction_Fields_Receipt_ContractAddressCode {
     selectWhere: OLAP_Integer
   ): Int
   Suicided(
-    minimum: EVM_Transaction_CompareFields
-    selectWhere: Boolean
     if: EVM_Transaction_Filter
     maximum: EVM_Transaction_CompareFields
+    minimum: EVM_Transaction_CompareFields
+    selectWhere: Boolean
   ): Boolean
 }
 ```
@@ -131,19 +131,7 @@ type EVM_Transaction_Fields_Receipt_ContractAddressCode {
 > 
 > 
 > Suicided value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Receipt_ContractAddressCode.Suicided.<b>minimum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Receipt_ContractAddressCode.Suicided.<b>selectWhere</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Receipt_ContractAddressCode.Suicided.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Receipt_ContractAddressCode.Suicided.<b>if</b></code>](#)<Bullet />[`EVM_Transaction_Filter`](/docs/graphql-reference/inputs/evm-transaction-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -153,6 +141,18 @@ type EVM_Transaction_Fields_Receipt_ContractAddressCode {
 > 
 > 
 > Return value when the argument is maximum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Receipt_ContractAddressCode.Suicided.<b>minimum</b></code>](#)<Bullet />[`EVM_Transaction_CompareFields`](/docs/graphql-reference/enums/evm-transaction-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Return value when the argument is minimum
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Fields_Receipt_ContractAddressCode.Suicided.<b>selectWhere</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
 > 
 
 

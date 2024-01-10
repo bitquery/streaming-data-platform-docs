@@ -45,14 +45,14 @@ Select by Transfer
 
 ```graphql
 input EVM_Transfer_Input_Transfer_InputType {
-  Sender: OLAP_String
-  Data: OLAP_String
-  Id: OLAP_BigInteger
-  Amount: EVM_Amount_With_Decimals
   Currency: EVM_Transfer_Input_Transfer_Currency_InputType
-  URI: OLAP_String
   Type: EVM_Transfer_Input_Transfer_Type_Input_Transfer_Type
+  Sender: OLAP_String
   Receiver: OLAP_String
+  URI: OLAP_String
+  Data: OLAP_String
+  Amount: EVM_Amount_With_Decimals
+  Id: OLAP_BigInteger
   Success: Boolean
 }
 ```
@@ -62,37 +62,7 @@ input EVM_Transfer_Input_Transfer_InputType {
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>Sender</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>Data</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>Id</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>Amount</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>Currency</b></code>](#)<Bullet />[`EVM_Transfer_Input_Transfer_Currency_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-transfer-currency-input-type) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> 
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>URI</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 
@@ -104,7 +74,37 @@ input EVM_Transfer_Input_Transfer_InputType {
 > 
 > 
 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>Sender</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>Receiver</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>URI</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>Data</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>Amount</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Transfer_InputType.<b>Id</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 

@@ -45,10 +45,10 @@ Order by
 
 ```graphql
 input EVM_Transaction_Ordering {
+  ascendingByField: String
   descendingByField: String
   ascending: EVM_Transaction_EnumFields
   descending: EVM_Transaction_EnumFields
-  ascendingByField: String
 }
 ```
 
@@ -56,6 +56,12 @@ input EVM_Transaction_Ordering {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Ordering.<b>ascendingByField</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> MetricName ( or alias ) of the field in the query to sort ascending
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Ordering.<b>descendingByField</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
@@ -73,12 +79,6 @@ input EVM_Transaction_Ordering {
 > 
 > 
 > Select a field to sort descending
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Ordering.<b>ascendingByField</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> MetricName ( or alias ) of the field in the query to sort ascending
 > 
 
 

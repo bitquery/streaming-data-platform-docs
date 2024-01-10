@@ -46,10 +46,11 @@ Select by Receipt
 ```graphql
 input EVM_Transfer_Input_Receipt_InputType {
   Status: OLAP_BigInteger
-  ContractAddress: OLAP_String
-  Type: OLAP_Integer
   CumulativeGasUsed: OLAP_BigInteger
+  Type: OLAP_Integer
   GasUsed: OLAP_BigInteger
+  L1: EVM_Transfer_Input_Receipt_L1_InputType
+  ContractAddress: OLAP_String
 }
 ```
 
@@ -64,7 +65,7 @@ input EVM_Transfer_Input_Receipt_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Receipt_InputType.<b>ContractAddress</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Receipt_InputType.<b>CumulativeGasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 
@@ -76,13 +77,19 @@ input EVM_Transfer_Input_Receipt_InputType {
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Receipt_InputType.<b>CumulativeGasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Receipt_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 
 > 
 
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Receipt_InputType.<b>GasUsed</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Receipt_InputType.<b>L1</b></code>](#)<Bullet />[`EVM_Transfer_Input_Receipt_L1_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-receipt-l1-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Input_Receipt_InputType.<b>ContractAddress</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > 

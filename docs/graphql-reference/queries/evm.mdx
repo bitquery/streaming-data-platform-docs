@@ -45,10 +45,10 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 EVM(
+  mempool: Boolean = false
   network: evm_network
   select_blocks: blocks_query_arg_enum
   dataset: dataset_arg_enum
-  mempool: Boolean = false
 ): EVM
 ```
 
@@ -56,6 +56,12 @@ EVM(
 
 
 ### Arguments
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>mempool</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Controls which dataset used to get results
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>network</b></code>](#)<Bullet />[`evm_network`](/docs/graphql-reference/enums/evm-network) <Badge class="badge badge--secondary" text="enum"/> 
 > 
@@ -70,12 +76,6 @@ EVM(
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM.<b>dataset</b></code>](#)<Bullet />[`dataset_arg_enum`](/docs/graphql-reference/enums/dataset-arg-enum) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Controls which dataset used to get results
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM.<b>mempool</b></code>](#)<Bullet />[`Boolean`](/docs/graphql-reference/scalars/boolean) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Controls which dataset used to get results

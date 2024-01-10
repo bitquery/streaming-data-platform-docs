@@ -45,10 +45,10 @@ Order by
 
 ```graphql
 input EVM_Block_Ordering {
-  descending: EVM_Block_EnumFields
-  ascendingByField: String
   descendingByField: String
   ascending: EVM_Block_EnumFields
+  descending: EVM_Block_EnumFields
+  ascendingByField: String
 }
 ```
 
@@ -56,18 +56,6 @@ input EVM_Block_Ordering {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Ordering.<b>descending</b></code>](#)<Bullet />[`EVM_Block_EnumFields`](/docs/graphql-reference/enums/evm-block-enum-fields) <Badge class="badge badge--secondary" text="enum"/> 
-> 
-> 
-> Select a field to sort descending
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Ordering.<b>ascendingByField</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
-> 
-> 
-> MetricName ( or alias ) of the field in the query to sort ascending
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Ordering.<b>descendingByField</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
@@ -79,6 +67,18 @@ input EVM_Block_Ordering {
 > 
 > 
 > Select a field to sort ascending
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Ordering.<b>descending</b></code>](#)<Bullet />[`EVM_Block_EnumFields`](/docs/graphql-reference/enums/evm-block-enum-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Select a field to sort descending
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Block_Ordering.<b>ascendingByField</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> MetricName ( or alias ) of the field in the query to sort ascending
 > 
 
 

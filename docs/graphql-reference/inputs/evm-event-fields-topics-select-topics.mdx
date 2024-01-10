@@ -45,13 +45,13 @@ Array of Topics includes or excludes provided value
 
 ```graphql
 input EVM_Event_Fields_Topics_Select_Topics {
+  notStartsWith: [EVM_Event_Fields_Topics_Select_FieldSelector]
   notEndsWith: [EVM_Event_Fields_Topics_Select_FieldSelector]
   length: OLAP_Integer
   includes: [EVM_Event_Fields_Topics_Select_FieldSelector]
   excludes: [EVM_Event_Fields_Topics_Select_FieldSelector]
   startsWith: [EVM_Event_Fields_Topics_Select_FieldSelector]
   endsWith: [EVM_Event_Fields_Topics_Select_FieldSelector]
-  notStartsWith: [EVM_Event_Fields_Topics_Select_FieldSelector]
 }
 ```
 
@@ -59,6 +59,12 @@ input EVM_Event_Fields_Topics_Select_Topics {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Topics_Select_Topics.<b>notStartsWith</b></code>](#)<Bullet />[`[EVM_Event_Fields_Topics_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-event-fields-topics-select-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Does not start with this element
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Topics_Select_Topics.<b>notEndsWith</b></code>](#)<Bullet />[`[EVM_Event_Fields_Topics_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-event-fields-topics-select-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
 > 
@@ -94,12 +100,6 @@ input EVM_Event_Fields_Topics_Select_Topics {
 > 
 > 
 > Ends with this element
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Event_Fields_Topics_Select_Topics.<b>notStartsWith</b></code>](#)<Bullet />[`[EVM_Event_Fields_Topics_Select_FieldSelector]`](/docs/graphql-reference/inputs/evm-event-fields-topics-select-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Does not start with this element
 > 
 
 

@@ -45,10 +45,10 @@ Selector for Trade_Fees
 
 ```graphql
 input EVM_DEXTrade_Fields_Trade_Fees_Select_FieldSelector {
+  Payer: OLAP_String
   Recipient: OLAP_String
   Currency: EVM_DEXTrade_Fields_Trade_Fees_Select_FieldSelector_FieldSelector
   Amount: EVM_Amount_With_Decimals
-  Payer: OLAP_String
 }
 ```
 
@@ -56,6 +56,12 @@ input EVM_DEXTrade_Fields_Trade_Fees_Select_FieldSelector {
 
 
 ### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Fees_Select_FieldSelector.<b>Payer</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select value for Payer
+> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Fees_Select_FieldSelector.<b>Recipient</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
 > 
@@ -73,12 +79,6 @@ input EVM_DEXTrade_Fields_Trade_Fees_Select_FieldSelector {
 > 
 > 
 > Select value for Amount
-> 
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTrade_Fields_Trade_Fees_Select_FieldSelector.<b>Payer</b></code>](#)<Bullet />[`OLAP_String`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Select value for Payer
 > 
 
 

@@ -45,12 +45,12 @@ export const Details = ({ dataOpen, dataClose, children, startOpen = false }) =>
 
 ```graphql
 input EVM_Transaction_Filter {
-  Block: EVM_Transaction_Input_Block_InputType
   TransactionStatus: EVM_Transaction_Input_TransactionStatus_InputType
   Signature: EVM_Transaction_Input_Signature_InputType
   ChainId: OLAP_BigInteger
   Receipt: EVM_Transaction_Input_Receipt_InputType
   Fee: EVM_Transaction_Input_Fee_InputType
+  Block: EVM_Transaction_Input_Block_InputType
   Transaction: EVM_Transaction_Input_Transaction_InputType
 }
 ```
@@ -59,12 +59,6 @@ input EVM_Transaction_Filter {
 
 
 ### Fields
-
-#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_Transaction_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-block-input-type) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Select by Block
-> 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Filter.<b>TransactionStatus</b></code>](#)<Bullet />[`EVM_Transaction_Input_TransactionStatus_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-transaction-status-input-type) <Badge class="badge badge--secondary" text="input"/> 
 > 
@@ -94,6 +88,12 @@ input EVM_Transaction_Filter {
 > 
 > 
 > Select by Fee
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_Transaction_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-block-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Block
 > 
 
 #### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Filter.<b>Transaction</b></code>](#)<Bullet />[`EVM_Transaction_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-transaction-input-type) <Badge class="badge badge--secondary" text="input"/> 

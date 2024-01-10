@@ -46,16 +46,16 @@ Result fields
 ```graphql
 type EVM_MinerReward_Fields_Block_Result {
   Errors(
+    if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
     selectWhere: OLAP_String
-    if: EVM_MinerReward_Filter
   ): String
   Gas(
+    selectWhere: OLAP_BigInteger
     if: EVM_MinerReward_Filter
     maximum: EVM_MinerReward_CompareFields
     minimum: EVM_MinerReward_CompareFields
-    selectWhere: OLAP_BigInteger
   ): String
 }
 ```
@@ -69,7 +69,13 @@ type EVM_MinerReward_Fields_Block_Result {
 > 
 > 
 > Errors value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block_Result.Errors.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block_Result.Errors.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Apply a condition to a metric calculation
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block_Result.Errors.<b>maximum</b></code>](#)<Bullet />[`EVM_MinerReward_CompareFields`](/docs/graphql-reference/enums/evm-miner-reward-compare-fields) <Badge class="badge badge--secondary" text="enum"/> 
 > 
 > 
 > Return value when the argument is maximum
@@ -87,17 +93,17 @@ type EVM_MinerReward_Fields_Block_Result {
 > Defines the condition to filter the results by the value of this metric
 > 
 
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block_Result.Errors.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Apply a condition to a metric calculation
-> 
-
 #### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block_Result.<b>Gas</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
 > 
 > 
 > Gas value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block_Result.Gas.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block_Result.Gas.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block_Result.Gas.<b>if</b></code>](#)<Bullet />[`EVM_MinerReward_Filter`](/docs/graphql-reference/inputs/evm-miner-reward-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -113,12 +119,6 @@ type EVM_MinerReward_Fields_Block_Result {
 > 
 > 
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_Fields_Block_Result.Gas.<b>selectWhere</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
 > 
 
 

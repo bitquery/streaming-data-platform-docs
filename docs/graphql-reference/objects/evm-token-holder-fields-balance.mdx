@@ -46,10 +46,10 @@ Balance fields
 ```graphql
 type EVM_TokenHolder_Fields_Balance {
   Amount(
+    selectWhere: EVM_Amount_With_Decimals
     if: EVM_TokenHolder_Filter
     maximum: EVM_TokenHolder_CompareFields
     minimum: EVM_TokenHolder_CompareFields
-    selectWhere: EVM_Amount_With_Decimals
   ): String
 }
 ```
@@ -63,7 +63,13 @@ type EVM_TokenHolder_Fields_Balance {
 > 
 > 
 > Amount value
-> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Balance.Amount.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
+> ##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Balance.Amount.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Defines the condition to filter the results by the value of this metric
+> 
+
+##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Balance.Amount.<b>if</b></code>](#)<Bullet />[`EVM_TokenHolder_Filter`](/docs/graphql-reference/inputs/evm-token-holder-filter) <Badge class="badge badge--secondary" text="input"/> 
 > 
 > 
 > Apply a condition to a metric calculation
@@ -79,12 +85,6 @@ type EVM_TokenHolder_Fields_Balance {
 > 
 > 
 > Return value when the argument is minimum
-> 
-
-##### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Fields_Balance.Amount.<b>selectWhere</b></code>](#)<Bullet />[`EVM_Amount_With_Decimals`](/docs/graphql-reference/inputs/evm-amount-with-decimals) <Badge class="badge badge--secondary" text="input"/> 
-> 
-> 
-> Defines the condition to filter the results by the value of this metric
 > 
 
 
