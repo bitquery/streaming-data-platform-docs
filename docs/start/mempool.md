@@ -9,6 +9,17 @@ Before any information can be written on a block, it must first go through the m
 By using the following query format, you can access a wide range of mempool information, including events, trades, and balances:
 
 ```
+
+query{
+  EVM(mempool: true){
+
+}
+}
+
+```
+And below format for subscriptions
+
+```
 subscription {
   EVM(mempool: true) {
   }
