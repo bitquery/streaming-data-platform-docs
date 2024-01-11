@@ -6,12 +6,12 @@ sidebar_position: 1
 
 The Mempool API allows you to access real-time data from the mempool for EVM chains including Ethereum, Arbitrum, and BNB chains. You can use this API to monitor transactions, token trades, transfers, and any data stored in the mempool.
 
+## Get Recommended Fees
 
-## Get Recommended Fees 
-
-The Recommended Fees API provides real-time data from the mempool. It returns fields such as block time, block number, transaction hash, transaction cost, sender address, recipient address, base fee, burnt fees, sender fees, priority fees per gas, miner rewards, gas refunds, effective gas prices, and potential savings. You can use it to build applications that require up-to-date information about recommended transaction fees. 
+The Recommended Fees API provides real-time data from the mempool. It returns fields such as block time, block number, transaction hash, transaction cost, sender address, recipient address, base fee, burnt fees, sender fees, priority fees per gas, miner rewards, gas refunds, effective gas prices, and potential savings. You can use it to build applications that require up-to-date information about recommended transaction fees.
 
 You can run the query [here](https://ide.bitquery.io/Get-Mempool-Fees)
+
 ```
 {
   EVM(mempool: true) {
@@ -85,6 +85,49 @@ subscription {
     }
   }
 }
+
+```
+
+## Simulating Pending Transactions
+
+The below query retrieves information about in-flight transactions, helping you simulate the most recent state.
+You can find query [here](https://ide.bitquery.io/Simulating-Pending-Transactions)
+
+```
+subscription{
+  EVM(mempool: true) {
+    Transfers(limit: {count: 100}, orderBy: {descending: Block_Time}) {
+      Log {
+        Index
+      }
+      Transaction {
+        Time
+        Type
+        To
+        Gas
+        From
+        Cost
+        Hash
+      }
+      Transfer {
+        Amount
+        Currency {
+          Name
+        }
+        Type
+      }
+      TransactionStatus {
+        Success
+        FaultError
+        EndError
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+
 
 ```
 
