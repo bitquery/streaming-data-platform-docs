@@ -78,49 +78,13 @@ def oAuth_example():
   print(resp)
   access_token=resp['access_token']
 
-
-  # Step 2: Make Streaming API query
   url_graphql = "https://streaming.bitquery.io/graphql"
   headers_graphql = {
       'Content-Type': 'application/json',
       'Authorization': f'Bearer {access_token}'
   }
 
-  graphql_query = '''
-  {
-    EVM(mempool: true, network: eth) {
-      DEXTrades(limit: {count: 10}) {
-        Transaction {
-          Hash
-        }
-        Trade {
-          Buy {
-            Amount
-            Currency {
-              Name
-            }
-            Buyer
-          }
-          Sell {
-            Amount
-            Currency {
-              Name
-            }
-            Buyer
-          }
-        }
-      }
-    }
-  }
-  '''
-
-  payload_graphql = json.dumps({'query': graphql_query})
-
-  # Step 3: Make request to Streaming API
-  response_graphql = requests.post(url_graphql, headers=headers_graphql, data=payload_graphql)
-
-  # Print the response
-  print(response_graphql.text)
+  //use the token to send a request
 
 
 oAuth_example()

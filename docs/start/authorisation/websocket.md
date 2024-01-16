@@ -4,9 +4,9 @@ sidebar_position: 3
 
 # Authenticating Websockets
 
-When it comes to authenticating websockets, a different approach is required. The token can be included in the following manner:
+When it comes to authenticating websockets the token can be included only in the following manner:
 
- `wss://streaming.bitquery.io/graphql?token=ory*at*..` with the token attached and include only two headers:
+ `wss://streaming.bitquery.io/graphql?token=ory*at*..` with the token attached to the URL. The request should include only two headers:
 
 ```
 Sec-WebSocket-Protocol: graphql-ws
