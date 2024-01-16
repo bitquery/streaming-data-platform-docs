@@ -33,8 +33,13 @@ Here is an example which uses GrapqhQL WebSocket Using Python and `python_graphq
 from python_graphql_client import GraphqlClient
 import asyncio
 
-ws = GraphqlClient(endpoint="wss://streaming.bitquery.io/graphql", headers={"Authorization": "Bearer ory_...", "Sec-WebSocket-Protocol": "graphql-ws", "Content-Type": "application/json"})
-
+ws = GraphqlClient(
+    endpoint=
+    "wss://streaming.bitquery.io/graphql?token=ory_at_QkA....",
+    headers={
+        "Sec-WebSocket-Protocol": "graphql-ws",
+        "Content-Type": "application/json"
+    })
 
 query = """
 subscription MyQuery {
@@ -54,6 +59,7 @@ subscription MyQuery {
 """
 
 asyncio.run(ws.subscribe(query=query, handle=print))
+
 ```
 
 
