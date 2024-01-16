@@ -1,0 +1,137 @@
+---
+sidebar_position: 1
+---
+
+# How to Generate a Token
+
+In this section we will see how OAuth is used to generate a token. The first step is to create an application
+![Page](/img/v2Access/tab.png)
+
+1.  **Create an Application**: Navigate to the [Applications](https://account.bitquery.io/user/applications) page and click `Create application`. Enter a name for your application and select an expiration time for the access tokens. Click `Create`.
+
+2.  **Generate Access Token**:
+
+We provide two methods to generate a token:
+
+- You can generate a token for your application with a set expiration time.
+- Or you can use your client id-secret from your application to make a POST request to https://oauth2.bitquery.io/oauth2/token and get a token programmatically.
+
+> **If you have no applications created, the `Bearer` token changes every 12 hours.**
+
+## Generating a Token with Set Expiration Time
+
+1.  Go to the [API- Key](https://account.bitquery.io/user/api_key) page and select the application for which you want to generate an access token.
+
+    ![generate](/img/v2Access/generate.png)
+
+2.  Click **Generate Access Token**.
+3.  Copy the access token and store it in a secure location.
+
+![copy](/img/v2Access/copytoken.png)
+
+**Using the token:**
+
+To utilize the token you've copied from the API-KEY tab, use the code generation feature on your IDE to obtain the code in your preferred programming language. However, **remember to paste the token you've copied from the API-Key page**. This is necessary because the IDE code generator only displays temporary tokens.
+
+![temporary](/img/v2Access/temporarytoken.png)
+
+For example, you can include the token in the header as shown below:
+
+```
+Authorization: Bearer <access_token>
+
+```
+
+Refer Postman examples [here](https://www.postman.com/spacecraft-geologist-86385692/workspace/bitquery/collection/27392958-a162bd5f-3574-4033-8ea7-8e9947e08b54?action=share&creator=27392958)
+
+**Revoking an Access Token**
+
+If you believe that your access token has been compromised, you can revoke it by clicking **Revoke** on the **Applications** page.
+
+![revoke](/img/v2Access/revoke.png)
+
+## Generating a Token Programmatically
+
+Remember that this approach requires more effort to implement. It is suitable for applications with a high risk of token theft or misuse. This approach expects you to programmatically generate an access token using your client ID and client secret of an application.
+
+![client](/img/v2Access/clientid_secret.png)
+
+Below is a code snippet in Python that shows you how to programmatically generate a token and use the API, replace the placeholders with actual information.
+
+Ensure that `scope=api` is mentioned in the payload,
+
+```
+import requests
+import json
+
+
+def oAuth_example():
+
+  url = "https://oauth2.bitquery.io/oauth2/token"
+
+  payload = 'grant_type=client_credentials&client_id=YOUR_ID_HERE&client_secret=YOUR_SECRET_HERE&scope=api'
+
+  headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+
+  response = requests.request("POST", url, headers=headers, data=payload)
+  resp = json.loads(response.text)
+  print(resp)
+  access_token=resp['access_token']
+
+
+  # Step 2: Make Streaming API query
+  url_graphql = "https://streaming.bitquery.io/graphql"
+  headers_graphql = {
+      'Content-Type': 'application/json',
+      'Authorization': f'Bearer {access_token}'
+  }
+
+  graphql_query = '''
+  {
+    EVM(mempool: true, network: eth) {
+      DEXTrades(limit: {count: 10}) {
+        Transaction {
+          Hash
+        }
+        Trade {
+          Buy {
+            Amount
+            Currency {
+              Name
+            }
+            Buyer
+          }
+          Sell {
+            Amount
+            Currency {
+              Name
+            }
+            Buyer
+          }
+        }
+      }
+    }
+  }
+  '''
+
+  payload_graphql = json.dumps({'query': graphql_query})
+
+  # Step 3: Make request to Streaming API
+  response_graphql = requests.post(url_graphql, headers=headers_graphql, data=payload_graphql)
+
+  # Print the response
+  print(response_graphql.text)
+
+
+oAuth_example()
+```
+
+**Deleting an Application**
+
+If you no longer need an application, you can delete it by clicking **Delete** on the **Applications** page. All the tokens associated with the application will no longer work.
+
+**Billing Considerations**
+
+- Billing remains consistent across API v1 and v2.
+- Purchase points once and utilize them for either v1 or v2 in any combination.
+- Currently you are not charged for usage of V2 APIs. The exact billing date will be informed soon.
