@@ -64,7 +64,8 @@ This function `getBars` is an asynchronous function that fetches historical bar 
       {
         headers: {
           "Content-Type": "application/json",
-          "X-API-KEY": BITQUERY_API,
+          Authorization:
+            "Bearer ory_at..",
         },
       }
     );
@@ -88,13 +89,19 @@ This section utilizes Axios to make a POST request to the Bitquery API using the
         
         // Storing retrieved bars in the 'bars' array
         bars[i] = {
-          // time: time.getTime(),
-          time: new Date(data.Block.Time),
-          open: Number(data.Trade.open.toFixed(18)),
-          high: Number(data.Trade.high.toFixed(18)),
-          low: Number(data.Trade.low.toFixed(18)),
-          close: Number(data.Trade.close.toFixed(18)),
-          volume: data.Trade.volume,
+          const open = Number(data.Trade.open.toFixed(18));
+          const close = Number(data.Trade.close.toFixed(18));
+          let high = Number(data.Trade.high.toFixed(18));
+          let low = Number(data.Trade.low.toFixed(18));
+          const resdate = new Date(data.Block.Time);
+        };
+         bars[i] = {
+          time: resdate,
+          open: open,
+          high: high,
+          low: low,
+          close: close,
+          volume: Number(data.volume),
         };
       } else {
         // Handling cases where data might be missing for a specific date
