@@ -100,4 +100,4 @@ If you no longer need an application, you can delete it by clicking **Delete** o
 
 - Billing remains consistent across API v1 and v2.
 - Purchase points once and utilize them for either v1 or v2 in any combination.
-- Currently you are not charged for usage of V2 APIs. The exact billing date will be informed soon.
+
