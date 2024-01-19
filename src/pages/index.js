@@ -30,7 +30,7 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Blockchain Streaming API (V2 Graphql Docs)`}
+      title={`Bitquery V2 API Docs`}
       description= "Blockchain Streaming APIs docs (V2 docs) to query real-time and historical transactions, balances, transfers, NFTs, tokens, Dex trades, Smart contract calls, events, etc. We support 40+ blockchains, including Bitcoin, Etheruem, Solana, Polygon, Arbitrum, Optimism, etc.">
       <HomepageHeader />
       <main>
