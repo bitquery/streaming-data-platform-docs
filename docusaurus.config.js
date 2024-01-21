@@ -129,6 +129,13 @@ const config = {
           },
 
           {
+             to:'/docs/start/authorisation/how-to-generate' ,
+            from:'/docs/start/authorisation/secure/'
+
+          },
+
+
+          {
             to:'/docs/start/authorisation/how-to-generate',
             from: '/docs/start/authorisation/',
            
