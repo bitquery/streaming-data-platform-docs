@@ -24,26 +24,25 @@ export const TOKEN_DETAILS = `
 {
   EVM(network: eth, dataset: combined) {
     DEXTradeByTokens(
-      orderBy: {ascending: Block_Time}
+      orderBy: {ascendingByField: "Block_OHLC_interval"}
       where: {Trade: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}, 
-      Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}},Type: {is: buy}}
+      Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}
     }
+      Block:{Time:{since:"2023-12-05T00:00:40Z", till:"2024-01-05T00:00:40Z"}}
   
   }
       limit: {count: 15000}
     ) {
-      OHLC_interval:Block {
-        Time(interval: {in: minutes})
+    Block {
+         OHLC_interval: Time(interval: {in: minutes, count:1})
       }
-      Block{
-        Time
-      }
+     
       volume: sum(of: Trade_Amount)
       Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Number)
-        close: Price(maximum: Block_Number)
+        high: Price(maximum: Trade_Price, selectWhere:{lt:20000})
+        low: Price(minimum: Trade_Price, selectWhere:{lt:20000})
+        open: Price(minimum: Block_Number, selectWhere:{lt:20000})
+        close: Price(maximum: Block_Number, selectWhere:{lt:20000})
       }
       count
     }
@@ -52,6 +51,8 @@ export const TOKEN_DETAILS = `
 `;
 ```
 
-This query retrieves Open, High, Low, and Close (OHLC) data for the USDT-WETH pair from the earliest 300 records available . You can also retrieve the the data for any period you wish.
+This query retrieves Open, High, Low, and Close (OHLC) data for the USDT-WETH pair from the earliest 300 records available . You can also retrieve the the data for any period you wish. To avoid outliers we filter prices using `less than ` filter, `selectWhere:{lt:20000}` since WETH-USDT price at the period was much lesser. 
+
+**You can add code snippets to dynamically filter records based on the price range.**
 
 - Next, go to [App Page](https://docs.bitquery.io/docs/usecases/tradingview-advanced-charts/app/) to start building
