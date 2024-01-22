@@ -19,6 +19,12 @@ export const endpoint = "https://streaming.bitquery.io/graphql";
 
 #### 2. GraphQL Query for Token Details
 
+The OHLC calculation on the IDE provides OHLC data only for time slots with trades. To obtain continuous OHLC data in cases where there are no trades in certain time slots, you can follow either of the following approaches: 
+
+- Retrieve all trades locally and calculate the OHLC. 
+
+- Alternatively, retrieve the OHLC data from a query and fill in the gaps.
+
 ```javascript
 export const TOKEN_DETAILS = `
 {
@@ -51,7 +57,7 @@ export const TOKEN_DETAILS = `
 `;
 ```
 
-This query retrieves Open, High, Low, and Close (OHLC) data for the USDT-WETH pair from the earliest 300 records available . You can also retrieve the the data for any period you wish. To avoid outliers we filter prices using `less than ` filter, `selectWhere:{lt:20000}` since WETH-USDT price at the period was much lesser. 
+This query retrieves Open, High, Low, and Close (OHLC) data for the USDT-WETH pair from the earliest 300 records available . You can also retrieve the the data for any period you wish. To avoid outliers we filter prices using `less than ` filter, `selectWhere:{lt:20000}` since WETH-USDT price at the period was much lesser.
 
 **You can add code snippets to dynamically filter records based on the price range.**
 
