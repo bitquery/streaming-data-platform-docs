@@ -61,7 +61,7 @@ url = "https://streaming.bitquery.io/graphql"
 payload = json.dumps({"query": query, "variables": "{}"})
 headers = {
   'Content-Type': 'application/json',
-  'X-API-KEY': 'keyy'
+   Authorization: "Bearer your_access_token_here",
 }
 
 ```

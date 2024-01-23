@@ -131,7 +131,7 @@ def fetch_nft_data(wallet_address, api_key, block_chain):
     # API headers
     headers = {
         'Content-Type': 'application/json',
-        'X-API-KEY': api_key  # Replace with your actual API key
+         Authorization: "Bearer your_access_token_here",
     }
 
     # Make the API request

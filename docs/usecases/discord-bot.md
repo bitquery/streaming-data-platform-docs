@@ -78,13 +78,12 @@ const client = new Client({
 
 ### Step 4: Adding Bot Token and API Key
 
-Retrieve your Discord bot token and Bitquery API key. Replace the placeholders in the following code with your actual tokens:
+Retrieve your Discord bot token and Bitquery OAuth token. Replace the placeholders in the following code with your actual tokens:
 
   
 
 ```
 const CLIENT_TOKEN = "<YOUR_DISCORD_BOT_TOKEN>";
-const API_KEY = "<YOUR_BITQUERY_API_KEY>";
 
 ```
 

@@ -75,7 +75,7 @@ function App() {
       url: 'https://streaming.bitquery.io/graphql',
       headers: {
         'Content-Type': 'application/json',
-        'X-API-KEY': 'YOUR KEY'
+         Authorization: "Bearer your_access_token_here",
       },
       data: data
     };

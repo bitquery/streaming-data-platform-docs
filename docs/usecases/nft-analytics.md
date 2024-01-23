@@ -42,7 +42,7 @@ payload = json.dumps({
 })
 headers = {
    'Content-Type': 'application/json',
-   'X-API-KEY': 'YOUR API KEY'
+    Authorization: "Bearer your_access_token_here",
 }
 conn.request("POST", "/graphql", payload, headers)
 res = conn.getresponse()

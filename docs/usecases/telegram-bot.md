@@ -65,7 +65,7 @@ Put your API key from Bitquery in
             "variables": {}
         },
         "headers": {
-            "X-API-KEY": "keyy"
+             Authorization: "Bearer your_access_token_here",
         }
         })
 
