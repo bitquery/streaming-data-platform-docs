@@ -11,7 +11,7 @@ DEXTrades API can give you historical trades. Let's see an example where we get 
 
 ```graphql
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     buyside: DEXTrades(
       limit: {count: 10}
       orderBy: {descending: Block_Time}
@@ -106,7 +106,7 @@ To get the latest token trades you just need to sort by Block -> Time.
 
 ```
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     buyside: DEXTrades(
       limit: {count: 10}
       orderBy: {descending: Block_Time}
@@ -201,7 +201,7 @@ If you are looking for token trades on a specific dex, use the following API as 
 
 ```graphql
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     buyside: DEXTrades(
       limit: {count: 5}
       orderBy: {descending: Block_Time}
@@ -359,7 +359,7 @@ In this query we have set trade currency pair to `0xfb6115445bff7b52feb98650c87f
 
 ```
 {
-  EVM(dataset: combined, network: bsc) {
+  EVM(dataset: archive, network: bsc) {
     buyside: DEXTradeByTokens(
       limit: {count: 30}
       orderBy: {descending: Block_Time}
@@ -408,7 +408,7 @@ The below query gets least traded tokens within a specified time frame on the Et
 
 ```
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     DEXTradeByTokens(
       limit: {count: 10}
       where: {Block: {Time: {after: "2023-11-20T00:00:00Z", before: "2023-11-27T00:00:00Z"}}}
@@ -434,7 +434,7 @@ You can find the query [here](https://ide.bitquery.io/first-x-number-of-buyers-o
 
 ```
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     buyside: DEXTrades(
       limit: {count: 10}
       limitBy: {by: Transaction_From, count: 1}

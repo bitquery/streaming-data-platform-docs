@@ -51,7 +51,7 @@ You can find the query [here](https://ide.bitquery.io/ETHBSC-SC-creates-count-ov
 
 ```
 query {
-  eth_creates: EVM(dataset: combined network: eth) {
+  eth_creates: EVM(dataset: archive network: eth) {
     creates: Calls(
       where: {
         Block: {Date: {after: "2023-06-01"}}
@@ -62,7 +62,7 @@ query {
       }
     }
   }
-  bsc_creates: EVM(dataset: combined network: bsc) {
+  bsc_creates: EVM(dataset: archive network: bsc) {
     creates: Calls(
       where: {
         Block: {Date: {after: "2023-06-01"}}
@@ -84,7 +84,7 @@ You can find the query [here](https://ide.bitquery.io/ByteCode-of-A-Token)
 
 ```
 {
-  eth_creates: EVM(dataset: combined, network: eth) {
+  eth_creates: EVM(dataset: archive, network: eth) {
     creates: Calls(
       where: {Call: {Create: true, To: {is: "0xc923D39fA2d97fb4B660Fc66DAdB1421605975E0"}}}
       limit: {count: 1}

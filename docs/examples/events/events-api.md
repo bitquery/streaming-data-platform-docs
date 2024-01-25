@@ -12,7 +12,7 @@ The Event API gives you access real-time blockchain event data. Events represent
 
 ```graphql
 query MyQuery {
-  EVM(dataset: combined, network: bsc) {
+  EVM(dataset: archive, network: bsc) {
     Events(
       limit: {count: 10}
       orderBy: {descending: Block_Time}
@@ -64,7 +64,7 @@ You can find the query [here](https://graphql.bitquery.io/ide/Daily-Unique-Call-
 
 ```graphql
 query MyQuery {
-  EVM(dataset: combined, network: bsc) {
+  EVM(dataset: archive, network: bsc) {
     Events(
       where: {Block: {Date: {after: "2023-01-10"}}}
       orderBy: {descendingByField: "count(distinct: Call_Signature_Signature)"}
@@ -98,7 +98,7 @@ The query below shows latest 10 events emitted by the AAVE V3 contract. The `Log
 You can find the query [here](https://ide.bitquery.io/All-aave-v3-events)
 ```
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     Events(
       orderBy: {descending: Block_Number}
       limit: {count: 10}
@@ -146,7 +146,7 @@ You can find the query [here](https://ide.bitquery.io/Latest-Token-Stake-Events)
 
 ```
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     Events(
       limit: {count: 10}
       orderBy: {descending: Block_Time}

@@ -10,7 +10,7 @@ With the Pools API, developers can easily retrieve information about liquidity p
 
 ```graphql
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     Events(
       orderBy: {descending: Block_Number}
       limit: {count: 10}
@@ -121,7 +121,7 @@ The following GraphQL query retrieves data on the latest 50 PairCreated events o
 Here's an example GraphQL query that retrieves the sum of sell amounts for trades between WETH and USDT made on the Uniswap V3 exchange .
 ```graphql
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     DEXTrades(
       where: {Block: {Date: {after: "2023-03-12"}}, Trade: {Dex: {SmartContract: {is: "0x11b815efB8f581194ae79006d24E0d814B7697F6"}}}} ##Uniswap V3 pool to exchange between WETH and USDT.
     ) {
@@ -199,7 +199,7 @@ The below query finds the liquidity of USDT-WBTC-WETH pool on Curve.Fi using the
 You can find the query [here](https://ide.bitquery.io/Curvefi-USDTWBTCWETH-Pool-liquidity)
 ```
 query MyQuery {
-  EVM(dataset: combined, network: bsc) {
+  EVM(dataset: archive, network: bsc) {
     BalanceUpdates(
       where: {BalanceUpdate: {Address: {is: "0xD51a44d3FaE010294C616388b506AcdA1bfAAE46"}}}
       orderBy: {descendingByField: "balance"}
@@ -225,7 +225,7 @@ The below query finds the inital liquidity, current liquidity and trade volume o
 You can find the query [here](https://ide.bitquery.io/Pools-details_1)
 ```
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     Initaial_liquidity: Transfers(
       limit: {count: 2}
       orderBy: {ascending: Block_Time}
