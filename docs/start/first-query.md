@@ -6,7 +6,7 @@ sidebar_position: 1
 
 Create and run your first query on Bitquery IDE by visiting  [https://graphql.bitquery.io/ide](https://graphql.bitquery.io/ide). 
 
-### Create an account
+## Create an account
 
 To continue, you must first [register](/docs/ide/login) an account to access the IDE window.
 
@@ -43,5 +43,35 @@ After you create a query, the run triangle button will appear to be green,
 and you can press it now to see the results:
 
 ![IDE query execution](/img/ide/query_execution.png)
+
+
+## Selecting the Dataset
+
+When choosing a dataset from the dropdown menu, you have three options: "realtime," "archive," and "combined." Based on your needs, pick an option.
+
+- `realtime`: provides data in real-time as it is published onchain, usually used for data obtained through subscriptions.
+- `archive`: contains non-real-time data.
+- `combined`: includes both types of data, but it's advisable not to use it for complex queries.
+
+For example,
+
+```graphql
+{
+  EVM(network: eth, dataset:archive) {
+    Blocks(limit: {count: 10}) {
+      Block {
+        Number
+        Time
+      }
+    }
+  }
+}
+```
+
+
+
+
+
+
 
 

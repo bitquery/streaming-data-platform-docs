@@ -14,7 +14,7 @@ You can find the GraphQL query [here](https://graphql.bitquery.io/ide/Calls-by-M
 
 ```
 query MyQuery {
-  EVM(dataset: combined, network: bsc) {
+  EVM(dataset: archive, network: bsc) {
     Calls(
       limit: {count: 10}
       orderBy: {descending: Block_Date}
@@ -41,7 +41,7 @@ query MyQuery {
 ```
 
 **Parameters**
-- `EVM(dataset: combined, network: bsc)`: This parameter specifies the blockchain network and dataset to query. In this case, we are querying the Binance Smart Chain network with the [combined](/docs/graphql/dataset/combined) dataset.
+- `EVM(dataset: archive, network: bsc)`: This parameter specifies the blockchain network and dataset to query. In this case, we are querying the Binance Smart Chain network with the [combined](/docs/graphql/dataset/combined) dataset.
 - `Calls`: This parameter retrieves the list of smart contract calls that match the specified conditions.
 - `limit`: {count: 10}: This parameter limits the number of results returned to 10.
 - `orderBy`: {descending: Block_Date}: This parameter orders the results in descending order based on the block date of the calls.
@@ -69,7 +69,7 @@ You can find the GraphQL query [here](https://graphql.bitquery.io/ide/Smart-Cont
 
 ```
 query MyQuery {
-  EVM(dataset: combined, network: bsc) {
+  EVM(dataset: archive, network: bsc) {
     Calls(
       limit: {count: 10}
       orderBy: {descending: Block_Date}
@@ -124,7 +124,7 @@ This [query](https://ide.bitquery.io/smart_contract_argument_transfer) demonstra
 
 ```
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     Calls(
       where: {Call: {Signature: {Name: {is: "transfer"}}, To: {is: "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0"}}, Arguments: {includes: {Index: {eq: 0}, Name: {is: "to"}, Type: {is: "address"}, Value: {Address: {is: "0xB53E1f6322629b9435E95AeC13eC34aF9C8fB8bA"}}}}}
       limit: {count: 10}
@@ -199,7 +199,7 @@ By [this](https://ide.bitquery.io/addLiquidityETH_function) query, We can track 
 
 ```
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     Calls(
       where: {Transaction: {Hash: {is: "0x60ce9acd0053f20092e7871868afe5187c95ff6d7750ad65a8d4ff99a052c357"}}, Call: {Signature: {Name: {is: "addLiquidityETH"}}}, Arguments: {length: {eq: 6}, includes: [{Index: {eq: 0}, Value: {Address: {is: "0x9cbc0be914e480beee4014e190fdbfc48ed5a4a8"}}}, {Index: {eq: 3}, Value: {BigInteger: {ge: "1000000000000000000"}}}, {Index: {eq: 5}, Value: {BigInteger: {ge: "1690878863"}}}]}}
       limit: {count: 10}

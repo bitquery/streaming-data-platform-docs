@@ -8,7 +8,7 @@ By using GraphQL Aliasing and Fragments to combine queries for multiple blockcha
 ```
 
 query MyQuery {
-  binance: EVM(network: bsc, dataset: combined) {
+  binance: EVM(network: bsc, dataset: archive) {
     BalanceUpdates(
       limit: {count: 10}
       orderBy: {descending: BalanceUpdate_Amount}
@@ -31,7 +31,7 @@ query MyQuery {
       }
     }
   }
-  eth: EVM(network: eth, dataset: combined) {
+  eth: EVM(network: eth, dataset: archive) {
     BalanceUpdates(
       limit: {count: 10}
       orderBy: {descending: BalanceUpdate_Amount}
@@ -54,7 +54,7 @@ query MyQuery {
       }
     }
   }
-  arbitrum: EVM(network: arbitrum, dataset: combined) {
+  arbitrum: EVM(network: arbitrum, dataset: archive) {
     BalanceUpdates(
       limit: {count: 10}
       orderBy: {descending: BalanceUpdate_Amount}
@@ -77,7 +77,7 @@ query MyQuery {
       }
     }
   }
-  optimism: EVM(network: optimism, dataset: combined) {
+  optimism: EVM(network: optimism, dataset: archive) {
     BalanceUpdates(
       limit: {count: 10}
       orderBy: {descending: BalanceUpdate_Amount}

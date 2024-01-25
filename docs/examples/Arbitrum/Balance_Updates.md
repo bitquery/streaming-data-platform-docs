@@ -12,7 +12,7 @@ You can find the query [here](https://ide.bitquery.io/Address-balance-on-Arbitru
 
 ```
 query ($network: evm_network, $address: String!, $limit: Int) {
-  EVM(network: $network, dataset: combined) {
+  EVM(network: $network, dataset: archive) {
     BalanceUpdates(
       orderBy: {descendingByField: "sum"}
       where: {BalanceUpdate: {Address: {is: $address}}}
@@ -45,7 +45,7 @@ You can find the query [here](https://ide.bitquery.io/balance-updates-by-address
 
 ```
 {
-  EVM(dataset: combined, network: arbitrum) {
+  EVM(dataset: archive, network: arbitrum) {
     BalanceUpdates(
       orderBy: {descending: Block_Time}
       where: {BalanceUpdate: {Address: {is: "0xd292c50842fe5e52adfa20d9fe5dd18d00008fe5"}}}
@@ -84,7 +84,7 @@ You can find the query [here](https://ide.bitquery.io/ARB-Streaming-Get-Top-Hold
 
 ```
 {
-  EVM(dataset: combined, network: arbitrum) {
+  EVM(dataset: archive, network: arbitrum) {
     BalanceUpdates(
       orderBy: {descendingByField: "Balance"}
       limit: {count: 10}

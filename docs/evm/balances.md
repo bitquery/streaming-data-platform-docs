@@ -37,7 +37,7 @@ Here's a query to get started.
 
 ```graphql
 {
-  EVM (dataset: combined) {
+  EVM (dataset: archive) {
     BalanceUpdates(
       where: {BalanceUpdate: {Address: {is: "0xdfd5293d8e347dfe59e90efd55b2956a1343963d"}}}
     ) {

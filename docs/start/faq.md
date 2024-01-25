@@ -10,7 +10,7 @@ Take this example trade: https://ide.bitquery.io/Buyside-SellSide-Explanation
 
 ```
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     DEXTrades(
       where: {Transaction: {Hash: {is: "0x317679edc38c33e5e8810e72978503b0db37c3279be7581f664d7114d6ef8115"}}}
     ) {

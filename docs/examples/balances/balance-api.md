@@ -15,7 +15,7 @@ Open the query on GraphQL IDE using this [link](https://ide.bitquery.io/balance-
 
 ```graphql 
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     BalanceUpdates(
       where: {BalanceUpdate: {Address: {is: "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6"}}}
       orderBy: {descendingByField: "balance"}
@@ -35,7 +35,7 @@ query MyQuery {
 ```
 
 **Parameters**
--   `dataset: combined`: This parameter specifies that the [combined](/docs/graphql/dataset/combined) dataset is being used.
+-   `dataset: archive`: This parameter specifies that the [combined](/docs/graphql/dataset/combined) dataset is being used.
 -   `network: eth`: This parameter specifies that the Ethereum network is being queried.
 -   `where: {BalanceUpdate: {Address: {is: "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6"}}}`: This parameter filters the results of the query based on the Ethereum address "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6".
 
@@ -49,7 +49,7 @@ You can also get a balance for a specific currency for a given address just by a
 
 ```graphql
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     BalanceUpdates(
       where: {BalanceUpdate: {Address: {is: "0x3416cf6c708da44db2624d63ea0aaef7113527c6"}}, Currency: {SmartContract: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}}}
     ) {
@@ -64,7 +64,7 @@ query MyQuery {
 
 ```
 **Parameters**
--   `dataset: combined`: This parameter specifies that the [combined](/docs/graphql/dataset/combined) dataset is being used.
+-   `dataset: archive`: This parameter specifies that the [combined](/docs/graphql/dataset/combined) dataset is being used.
 -   `network: eth`: This parameter specifies that the Ethereum network is being queried.
 -   `where: {BalanceUpdate: {Address: {is: "0x3416cf6c708da44db2624d63ea0aaef7113527c6"}}, Currency: {SmartContract: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}}}`: This parameter filters the results of the query based on the Ethereum address "0x3416cf6c708da44db2624d63ea0aaef7113527c6" and the smart contract address "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48". The `Currency` field specifies the currency to filter by, and the `SmartContract` field specifies the smart contract address to filter by.
 
@@ -80,7 +80,7 @@ Here's the query to retrieve the balance updates for a particular address for a 
 
 ``` graphql
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     BalanceUpdates(
       where: {BalanceUpdate: {Address: {is: "0x3416cf6c708da44db2624d63ea0aaef7113527c6"}}, Block: {Date: {after: "2023-02-15"}}}
       orderBy: {descending: BalanceUpdate_Amount}

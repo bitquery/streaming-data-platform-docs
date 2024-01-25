@@ -74,7 +74,7 @@ Query price OHLC data for token pairs using DEX Trades By Tokens
 ```graphql
 
 query MyQuery {
-  EVM(dataset: combined) {
+  EVM(dataset: archive) {
     DEXTradeByTokens(
       orderBy: {descending: Block_Date}
       #WETH-USDT trades on Uniswap V3
@@ -121,7 +121,7 @@ calculated by  aggregated [metrics ( max/min )](/docs/graphql/calculations)
 
 ```graphql
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     buyside: DEXTrades(
       limit: {count: 10}
       orderBy: {descending: Block_Time}

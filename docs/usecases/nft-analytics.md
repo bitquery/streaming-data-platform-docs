@@ -37,7 +37,7 @@ Next, the code connects to the Bitquery API using the http.client library and re
 
 conn = http.client.HTTPSConnection("streaming.bitquery.io")
 payload = json.dumps({
-   "query": "{\n  EVM(dataset: combined) {\n    DEXTrades(\n      where: {Trade: {Dex: {ProtocolFamily: {is: \"OpenSea\"}}, Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Count_NFTS_bought: sum(of: Trade_Buy_Amount)\n    }\n  }\n}\n",
+   "query": "{\n  EVM(dataset: archive) {\n    DEXTrades(\n      where: {Trade: {Dex: {ProtocolFamily: {is: \"OpenSea\"}}, Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Count_NFTS_bought: sum(of: Trade_Buy_Amount)\n    }\n  }\n}\n",
    "variables": "{}"
 })
 headers = {
@@ -71,7 +71,7 @@ This code snippet retrieves the latest DEX trades for a specific NFT token from 
 
 ```python
 payload_table = json.dumps({
-    "query": "{\n  EVM(dataset: combined, network: eth) {\n    buyside: DEXTrades(\n      limit: {count: 10}\n      orderBy: {descending: Block_Time}\n      where: {Trade: {Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Block {\n        Number\n        Time\n      }\n      Transaction {\n        From\n        To\n        Hash\n      }\n      Trade {\n        Buy {\n          Amount\n          Buyer\n          Currency {\n            Name\n            Symbol\n            SmartContract\n          }\n          Seller\n          Price\n        }\n        Sell {\n          Amount\n          Buyer\n          Currency {\n            Name\n            SmartContract\n            Symbol\n          }\n          Seller\n          Price\n        }\n      }\n    }\n    sellside: DEXTrades(\n      limit: {count: 10}\n      orderBy: {descending: Block_Time}\n      where: {Trade: {Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Block {\n        Number\n        Time\n      }\n      Transaction {\n        From\n        To\n        Hash\n      }\n      Trade {\n        Buy {\n          Amount\n          Buyer\n          Currency {\n            Name\n            Symbol\n            SmartContract\n          }\n          Seller\n          Price\n        }\n        Sell {\n          Amount\n          Buyer\n          Currency {\n            Name\n            SmartContract\n            Symbol\n          }\n          Seller\n          Price\n        }\n      }\n    }\n  }\n}\n",
+    "query": "{\n  EVM(dataset: archive, network: eth) {\n    buyside: DEXTrades(\n      limit: {count: 10}\n      orderBy: {descending: Block_Time}\n      where: {Trade: {Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Block {\n        Number\n        Time\n      }\n      Transaction {\n        From\n        To\n        Hash\n      }\n      Trade {\n        Buy {\n          Amount\n          Buyer\n          Currency {\n            Name\n            Symbol\n            SmartContract\n          }\n          Seller\n          Price\n        }\n        Sell {\n          Amount\n          Buyer\n          Currency {\n            Name\n            SmartContract\n            Symbol\n          }\n          Seller\n          Price\n        }\n      }\n    }\n    sellside: DEXTrades(\n      limit: {count: 10}\n      orderBy: {descending: Block_Time}\n      where: {Trade: {Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Block {\n        Number\n        Time\n      }\n      Transaction {\n        From\n        To\n        Hash\n      }\n      Trade {\n        Buy {\n          Amount\n          Buyer\n          Currency {\n            Name\n            Symbol\n            SmartContract\n          }\n          Seller\n          Price\n        }\n        Sell {\n          Amount\n          Buyer\n          Currency {\n            Name\n            SmartContract\n            Symbol\n          }\n          Seller\n          Price\n        }\n      }\n    }\n  }\n}\n",
    "variables": "{}"
 })
 
@@ -95,7 +95,7 @@ The chart section of the code creates a line chart using the streamlit library. 
 ```python
 ## chart
 payload3 = json.dumps({
-   "query": "{\n  EVM(dataset: combined) {\n    DEXTrades(\n      where: {Trade: {Dex: {ProtocolFamily: {is: \"OpenSea\"}}, Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Count_NFTS_bought: sum(of: Trade_Buy_Amount)\n      Block {\n        Date\n      }\n    }\n  }\n}\n",
+   "query": "{\n  EVM(dataset: archive) {\n    DEXTrades(\n      where: {Trade: {Dex: {ProtocolFamily: {is: \"OpenSea\"}}, Buy: {Currency: {SmartContract: {is: \"0x322e2741c792c1f2666d159bcc6d3a816f98d954\"}}}}}\n    ) {\n      Count_NFTS_bought: sum(of: Trade_Buy_Amount)\n      Block {\n        Date\n      }\n    }\n  }\n}\n",
    "variables": "{}"
 })
 

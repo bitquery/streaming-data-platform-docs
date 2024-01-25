@@ -36,7 +36,7 @@ Let's see an example of Blocks API to get the latest 10 blocks on Ethereum block
 
 ```graphql
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     Blocks(limit: { count: 10 }, orderBy: { descending: Block_Number }) {
       Block {
         Time
