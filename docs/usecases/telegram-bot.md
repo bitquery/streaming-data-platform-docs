@@ -17,7 +17,6 @@ pip install asyncio json websockets tracemalloc telegram-bot-api
 
 ![bot](/img/ApplicationExamples/telegram_bot.png)
 
-
 Replace `'tokenn'` with your actual bot token.
 
     BOT_TOKEN = 'YOUR_BOT_TOKEN'
@@ -90,19 +89,30 @@ Put your API key from Bitquery in
 
 **Step 6: Start WebSocket and Send Updates to Telegram** The `start_websocket_and_send_updates` function initiates the WebSocket connection defined in `my_component`. It also handles exceptions if the connection encounters any issues.
 
+```python
+
     async def start_websocket_and_send_updates(update):
         try:
             await my_component(update)
         except Exception as e:
             print(str(e))
 
+```
+
 **Step 7: Command Handler to Start WebSocket Connection** The `start` function is a command handler that responds to the `/start` command on Telegram. It sends a message indicating that it's starting the WebSocket connection and then calls `start_websocket_and_send_updates` to begin the WebSocket connection.
+
+```python
 
     def start(update: Update, context: CallbackContext):
         update.message.reply_text("Starting WebSocket connection...")
         asyncio.run(start_websocket_and_send_updates(update))
 
+
+```
+
 **Step 8: Create and Configure the Telegram Bot** In the `main` function, the Telegram bot is created and configured. It registers the `/start` command handler. It then starts the bot and waits for updates.
+
+```python
 
     def main():
         tracemalloc.start()
@@ -118,3 +128,5 @@ Put your API key from Bitquery in
 
     if __name__ == "__main__":
         main()
+
+```
