@@ -4,33 +4,54 @@ sidebar_position: 3
 
 # Filtering
 
-In most cases you do not need the full dataset, but just a portion, related to the 
+In most cases you do not need the full dataset, but just a portion, related to the
 entity or range you are interested in.
 
 Filtering can be applied to queries and subscriptions:
 
-* in query, filter defines what part of the dataset you need in results
-* with subscription, filter also determine when the updated data will be sent to you. If the new data does not match filter, update will not be triggered
+- in query, filter defines what part of the dataset you need in results
+- with subscription, filter also determine when the updated data will be sent to you. If the new data does not match filter, update will not be triggered
 
 :::tip
 Use filters in subscription for notification services on specific type of events matching filter criteria
 :::
 
-Filters are defined on the cube element level (Blocks, Transactions, so on) as a ```where``` attribute.
+Filters are defined on the cube element level (Blocks, Transactions, so on) as a `where` attribute.
+
+## Using the OR Condition
+
+In certain cases, you might want to execute a query that filters results based on one condition **OR** another. This type of query can be particularly useful when you need to retrieve records that meet at least one of multiple criteria.
+This can be achieved with the `any` operator.
+
+The below query for example, retrieves blocks from the Ethereum archive dataset where the block number is greater than `19111970` **OR** the transaction count within a block is greater than `100`.
+You can run the query (here)[https://ide.bitquery.io/using-OR-condition-example-V2]
+
+```
+{
+  EVM(dataset: archive, network: eth) {
+    Blocks(
+      where: {any: [{Block: {Number: {gt: "19111970"}}}, {Block: {TxCount: {gt: 100}}}]}
+      limit: {count: 10}
+    ) {
+      Block {
+        Bloom
+        Date
+        Time
+        Root
+        TxCount
+      }
+    }
+  }
+}
+
+```
 
 ## Examples
-
 
 ```graphql
 {
   EVM {
-    Blocks(where: {
-      	Block: {
-          GasUsed: {
-            ge: "14628560"
-          }
-        }
-    }) {
+    Blocks(where: { Block: { GasUsed: { ge: "14628560" } } }) {
       Block {
         Number
       }
@@ -39,60 +60,52 @@ Filters are defined on the cube element level (Blocks, Transactions, so on) as a
 }
 ```
 
-returns block numbers with gas used exceeding certain level. ```where``` attribute is structured,
+returns block numbers with gas used exceeding certain level. `where` attribute is structured,
 with the same levels as the query schema. This allows to build complex filters by combining criteria,
 as in the following example:
 
 ```graphql
 {
   EVM {
-    Transactions(where: {
-      	Block: {
-          GasUsed: {
-            ge: "26000000"
-          }
-        }
-      Transaction: {
-        Gas: {
-          ge: "16000000"
-        }
+    Transactions(
+      where: {
+        Block: { GasUsed: { ge: "26000000" } }
+        Transaction: { Gas: { ge: "16000000" } }
       }
-    }) {
+    ) {
       Block {
         GasUsed
       }
       Transaction {
         Gas
-
       }
     }
   }
 }
-
 ```
 
 :::note
 filters are combined by **AND** principles, result set is an intersection of all criteria defined in the
-```where``` attribute
+`where` attribute
 :::
 
 ## Filter Types
 
-Depending on the data type of the element used in ```where``` filter, different operators can be applied.
+Depending on the data type of the element used in `where` filter, different operators can be applied.
 
 ### Numeric Filter Types
 
 For numeric data, the following operators applicable:
 
-* ```eq``` equals to
-* ```ne``` not equals to
-* ```ge``` greater or equal
-* ```gt``` greater than
-* ```le``` less or equal
-* ```lt``` less than
+- `eq` equals to
+- `ne` not equals to
+- `ge` greater or equal
+- `gt` greater than
+- `le` less or equal
+- `lt` less than
 
 :::tip
-If you need to define the range of value, use ```ge``` and ```le``` together:
+If you need to define the range of value, use `ge` and `le` together:
 
 ```
           GasUsed: {
@@ -100,6 +113,7 @@ If you need to define the range of value, use ```ge``` and ```le``` together:
             le: "60000000"
           }
 ```
+
 :::tip
 
 :::note
@@ -111,37 +125,36 @@ and JSON. So the string values used instead to define any number with not limite
 
 For string data, the following operators applicable:
 
-* ```is``` equals to
-* ```not``` not equals to
+- `is` equals to
+- `not` not equals to
 
 :::danger
-```not``` and ```ne``` filters do not prevent to query large amount of data, consider use them only with
+`not` and `ne` filters do not prevent to query large amount of data, consider use them only with
 some other filters
 :::
-
 
 ### Date and Time Filter Types
 
 For date and timestamp data, the following operators applicable:
 
-* ```is``` date equals to
-* ```not``` date not equals to
-* ```after``` after certain date (not including it)
-* ```since``` after including date
-* ```till``` before including date
-* ```before``` before not including date
+- `is` date equals to
+- `not` date not equals to
+- `after` after certain date (not including it)
+- `since` after including date
+- `till` before including date
+- `before` before not including date
 
 ### Array Filter Types
 
 Array fields can be filtered using the following conditions:
 
-* ```length``` condition on array length;
-* ```includes``` if array include  item defined by the condition; 
-* ```excludes``` if array exclude  item defined by the condition;
-* ```startsWith``` if array starts with the item defined by the condition;
-* ```endsWith``` if array ends with the item defined by the condition;
-* ```notStartsWith``` if array does not start with the item defined by the condition;
-* ```notEndsWith``` if array does not end with the item defined by the condition;
+- `length` condition on array length;
+- `includes` if array include item defined by the condition;
+- `excludes` if array exclude item defined by the condition;
+- `startsWith` if array starts with the item defined by the condition;
+- `endsWith` if array ends with the item defined by the condition;
+- `notStartsWith` if array does not start with the item defined by the condition;
+- `notEndsWith` if array does not end with the item defined by the condition;
 
 :::note
 Note that all conditions on items can be a list, they all applied to selecting the item in AND manner.
@@ -201,10 +214,8 @@ Arguments: {
 ```
 
 It extends the previous example, selecting only calls that have all 4 conditions:
-* the first argument named 'recipient' 
-* the first argument  value of type address equal to '0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969'
-* any argument called "amount"
-* argument named "amount" having value bigger than 1000000000
 
-
-
+- the first argument named 'recipient'
+- the first argument value of type address equal to '0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969'
+- any argument called "amount"
+- argument named "amount" having value bigger than 1000000000
