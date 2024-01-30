@@ -1,4 +1,3 @@
-
 # Token Holders API
 
 The Token Holders API allows you to access information regarding token holders for both fungible (ERC20) and non-fungible (ERC721) tokens. This API provides access to current token holder data for a specific token, as well as historical information about token holders.
@@ -21,7 +20,7 @@ In this example, we will obtain the token holder count for the [USDT token](http
     TokenHolders(
       date: "2023-10-21"
       tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-      where: {Balance: {Amount: {gt: "0"}}}
+      where: { Balance: { Amount: { gt: "0" } } }
     ) {
       uniq(of: Holder_Address)
     }
@@ -39,7 +38,11 @@ You can find out how many tokens a specific token holder had on a specific date.
     TokenHolders(
       date: "2023-10-01"
       tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
-      where: {Holder: {Address: {is: "0x50d9090d6ce6307b7ec8904cd3dca17b4da56353"}}}
+      where: {
+        Holder: {
+          Address: { is: "0x50d9090d6ce6307b7ec8904cd3dca17b4da56353" }
+        }
+      }
     ) {
       Holder {
         Address
@@ -72,7 +75,11 @@ You can see the results by running [this query](https://ide.bitquery.io/Number-o
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
-      where: {Holder: {Address: {is: "0x18f024244d0c41534c4fb77f958912f3aa403719"}}}
+      where: {
+        Holder: {
+          Address: { is: "0x18f024244d0c41534c4fb77f958912f3aa403719" }
+        }
+      }
     ) {
       BalanceUpdate {
         transactions: Count
@@ -97,7 +104,11 @@ You can access the results by running [this query](https://ide.bitquery.io/first
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
-      where: {Holder: {Address: {is: "0x18f024244d0c41534c4fb77f958912f3aa403719"}}}
+      where: {
+        Holder: {
+          Address: { is: "0x18f024244d0c41534c4fb77f958912f3aa403719" }
+        }
+      }
     ) {
       BalanceUpdate {
         FirstDate
@@ -121,7 +132,11 @@ You can also find out the number of tokens that have been received by a wallet a
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
-      where: {Holder: {Address: {is: "0x18f024244d0c41534c4fb77f958912f3aa403719"}}}
+      where: {
+        Holder: {
+          Address: { is: "0x18f024244d0c41534c4fb77f958912f3aa403719" }
+        }
+      }
     ) {
       BalanceUpdate {
         InAmount
@@ -147,8 +162,8 @@ In this example, we are going to find the top 10 token holders for the Mutant Ap
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
-      limit: {count: 10}
-      orderBy: {descending: Balance_Amount}
+      limit: { count: 10 }
+      orderBy: { descending: Balance_Amount }
     ) {
       Holder {
         Address
@@ -171,7 +186,7 @@ You can use the Balance filter to find token holders who hold a specific value o
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0x23581767a106ae21c074b2276D25e5C3e136a68b"
-      where: {Balance: {Amount: {ge: "50"}}}
+      where: { Balance: { Amount: { ge: "50" } } }
     ) {
       uniq(of: Holder_Address)
     }
@@ -182,6 +197,7 @@ You can use the Balance filter to find token holders who hold a specific value o
 Here's another example. In this case, we are getting the number of token holders whose token balance exceeds 1 million USDT tokens (~ $1 million). We used aliases to categorize token holders based on the tokens stored in their wallets. For further information on aliases, you can refer to [this page](/docs/graphql/metrics/alias/).
 
 Feel free to execute [this query](https://ide.bitquery.io/USDT-token-holder-distribution) in the IDE to delve into the data.
+
 ```
 {
   EVM(dataset: archive, network: eth) {
@@ -264,7 +280,7 @@ Let's say if we want to know common tokens holders of two tokens, we can use Bal
 
 ## Token Holder Statistics
 
-The Token Holders API provides statistics about token holders. To explore the various statistics available, please visit [this page](/docs/graphql/metrics/statistics/). 
+The Token Holders API provides statistics about token holders. To explore the various statistics available, please visit [this page](/docs/graphql/metrics/statistics/).
 
 ### Average Balance of Token Holder
 
@@ -276,7 +292,7 @@ To calculate the average balance of USDT token holders, you can use the Token Ho
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-      where: {Balance: {Amount: {ge: "0"}}}
+      where: { Balance: { Amount: { ge: "0" } } }
     ) {
       average(of: Balance_Amount)
     }
@@ -294,7 +310,7 @@ To find the median balance, use the median function and select Balance_Amount. T
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-      where: {Balance: {Amount: {ge: "0"}}}
+      where: { Balance: { Amount: { ge: "0" } } }
     ) {
       median(of: Balance_Amount)
     }
@@ -351,7 +367,7 @@ With the Token Holders API, you can calculate the Gini coefficient for a token. 
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-      where: {Balance: {Amount: {gt: "0"}}}
+      where: { Balance: { Amount: { gt: "0" } } }
     ) {
       gini(of: Balance_Amount)
     }
@@ -369,7 +385,7 @@ You can also calculate the Nakamoto Coefficient using the Token Holders API for 
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
-      where: {Balance: {Amount: {gt: "0"}}}
+      where: { Balance: { Amount: { gt: "0" } } }
     ) {
       nakamoto(of: Balance_Amount, ratio: 0.99)
     }
@@ -387,7 +403,7 @@ If you need the Thiel index of a token, you can obtain it using the Token Holder
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
-      where: {Balance: {Amount: {gt: "0"}}}
+      where: { Balance: { Amount: { gt: "0" } } }
     ) {
       theil_index(of: Balance_Amount)
     }
@@ -395,3 +411,33 @@ If you need the Thiel index of a token, you can obtain it using the Token Holder
 }
 ```
 
+## Find Token Holders Outside a Certain Range
+
+This query filters out the token holders of a specific smart contract token who hold either more than a certain amount or less than another specified amount. This could be useful for understanding the distribution of tokens among holders, particularly identifying large and small stakeholders.
+You can find the query [here](https://ide.bitquery.io/Find-holders-outside-a-range)
+
+```
+{
+  EVM(dataset: archive) {
+    TokenHolders(
+      tokenSmartContract: "0x0fcbd68251819928c8f6d182fc04be733fa94170"
+      date: "2024-01-29"
+      where: {any: [{Balance: {Amount: {gt:"100"}}},
+      {Balance: {Amount: {lt: "20"}}}], Balance: {Amount: {gt: "0"}}}
+      orderBy: {descending: Balance_Amount}
+      limit: {count: 10}
+    ) {
+      Balance {
+        Amount
+      }
+      Holder {
+        Address
+      }
+      Currency {
+        Name
+        Symbol
+      }
+    }
+  }
+}
+```
