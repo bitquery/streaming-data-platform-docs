@@ -21,21 +21,15 @@ import pandas as pd
 ```Python
 query = """
 {
-  EVM(dataset: combined) {
+  EVM(dataset: archive) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_Time"},
-      where: {
-        Trade: {
-          Side: {
-            Currency: { SmartContract: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" } }
-          },
-          Currency: { SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" } }
-        }
-      },
-      limit: { count: 10 }
+      orderBy: {descendingByField: "Block_Time"}
+      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}, 
+      Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}
+      limit: {count: 10}
     ) {
       Block {
-        Time(interval: { in: minutes, count: 10 })
+        Time(interval: {in: minutes, count: 10})
       }
       volume: sum(of: Trade_Amount)
       Trade {
@@ -48,6 +42,7 @@ query = """
     }
   }
 }
+
 """
 
 ```

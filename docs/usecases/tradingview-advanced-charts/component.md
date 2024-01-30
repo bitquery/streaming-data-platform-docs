@@ -28,7 +28,7 @@ The OHLC calculation on the IDE provides OHLC data only for time slots with trad
 ```javascript
 export const TOKEN_DETAILS = `
 {
-  EVM(network: eth, dataset: combined) {
+  EVM(network: eth, dataset: archive) {
     DEXTradeByTokens(
       orderBy: {ascendingByField: "Block_OHLC_interval"}
       where: {Trade: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}, 
