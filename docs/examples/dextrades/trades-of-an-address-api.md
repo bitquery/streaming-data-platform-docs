@@ -2,7 +2,6 @@
 sidebar_position: 7
 ---
 
-
 # Address Trades API
 
 ## Latest Trades for a given address
@@ -95,6 +94,7 @@ You can view the query in the IDE [here](https://graphql.bitquery.io/ide/Buy-and
 }
 
 ```
+
 There are two sub-queries specified within the "EVM" field: "buyside" and "sellside".
 
 The "buyside" sub-query retrieves the 10 most recent DEX trades where the specified address was the buyer. The results are ordered by the block time in descending order.
@@ -206,6 +206,7 @@ You can view the query in the IDE [here](https://graphql.bitquery.io/ide/Trades-
 }
 
 ```
+
 There are two sub-queries specified within the "EVM" field: "buyside" and "sellside".
 
 The "buyside" sub-query retrieves the 10 most recent DEX trades where the specified address was the buyer of a specific ERC20 token. The results are ordered by the block time in descending order.
@@ -228,21 +229,18 @@ For each trade, the query retrieves the following data:
 
 - `Trade`: details of the trade, including the amount of the currency bought and sold, the buyer and seller addresses, the currency name, symbol, and smart contract address, and the price of the trade.
 
-
-
-
-
-
-
 ## Subscribe to latest trades for a given address
-
 
 ```graphql
 subscription {
   EVM(network: eth, trigger_on: head) {
     buyside: DEXTrades(
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Buyer: {is: "0x1f77dfeb0e6fed1ecf0b41d4c81330df6a6fb167"}}}}
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: { Buyer: { is: "0x1f77dfeb0e6fed1ecf0b41d4c81330df6a6fb167" } }
+        }
+      }
     ) {
       Block {
         Number
@@ -279,8 +277,12 @@ subscription {
       }
     }
     sellside: DEXTrades(
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Seller: {is: "0x1f77dfeb0e6fed1ecf0b41d4c81330df6a6fb167"}}}}
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: { Seller: { is: "0x1f77dfeb0e6fed1ecf0b41d4c81330df6a6fb167" } }
+        }
+      }
     ) {
       Block {
         Number
@@ -318,8 +320,48 @@ subscription {
     }
   }
 }
-
 ```
 
 https://graphql.bitquery.io/ide/subscribe-to-trades-for-a-given-address
 
+## Trades Where the Address is Buyer OR Seller
+
+The below query gives you trades where the specified address is either as a buyer or a seller. This is achieved by utilizing the `any` filter, which acts as an OR condition to encompass both buyer and seller roles in the results.
+You can find the query [here](https://ide.bitquery.io/Address-is-Buyer-or-Seller-V2)
+
+```
+query MyQuery {
+  EVM(dataset: archive, network: eth) {
+    DEXTrades(
+      where: {any: [{Trade: {Buy: {Buyer: {is: "0xacefce78e31332cf2d1b9e770d609c31d26afc09"}}}},
+      {Trade: {Buy: {Seller: {is: "0xacefce78e31332cf2d1b9e770d609c31d26afc09"}}}}]}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ) {
+      Trade {
+        Buy {
+          Buyer
+          Amount
+          Currency {
+            Name
+          }
+        }
+        Dex {
+          ProtocolName
+        }
+        Sell {
+          Buyer
+          Price
+          Currency {
+            Name
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+
+```
