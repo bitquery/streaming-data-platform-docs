@@ -9,7 +9,7 @@ One of the most common types of transfers on Ethereum are ERC20 transfers. Let's
 
 ```graphql
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     Transfers(
       where: {Transfer: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}
       limit: {count: 10}
