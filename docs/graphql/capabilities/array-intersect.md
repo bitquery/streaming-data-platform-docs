@@ -60,3 +60,22 @@ query($addresses: [String!]) {
 }
 
 ```
+
+This query will return a response in this format ; as an  array consisting of elements found in both side1 and side2 that also exist within the intersectWith array. If no common elements are detected, the result will be an empty array.
+
+```
+{
+  "EVM": {
+    "Transfers": [
+      {
+        "array_intersect": [
+          "0xba5a64df95acba7c0f43e830f5622cbd389cfc4d",
+          "0x74374f95e4630df9b7f70b2d45e64da6437885c7",
+          "0x3f1f6f2537d095b6f5650b371c11dcc8bc90b0f3"]
+      }
+    ]
+  }
+}
+    
+
+```
