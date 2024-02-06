@@ -4,7 +4,9 @@ sidebar_position: 6
 
 # Array Intersection
 
-In this section we will see how to use the `array_intersect` to get relationship between two addresses or two contracts.
+The `array_intersect` feature is an advanced query format that generates an intersection of addresses from specified datasets. You can use the `where` clause to introduce filters that refine your results according to desired criteria. The output is a list of addresses that share a common link to the two datasets. 
+
+In the following section, we'll explore how to use `array_intersect` to reveal the associations between pairs of addresses or contracts.
 
 ### Syntax
 
