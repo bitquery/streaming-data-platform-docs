@@ -6,14 +6,19 @@ sidebar_position: 1
 
 One of the most common types of transfers on Ethereum are ERC20 transfers. Let's see an example to get the latest ERC20 transfers using our API. Today we are taking an example of USDT token transfers. The contract address for the USDT token is [0xdac17f958d2ee523a2206206994597c13d831ec7](https://explorer.bitquery.io/ethereum/token/0xdac17f958d2ee523a2206206994597c13d831ec7)
 
-
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
     Transfers(
-      where: {Transfer: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}
-      limit: {count: 10}
-      orderBy: {descending: Block_Time}
+      where: {
+        Transfer: {
+          Currency: {
+            SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" }
+          }
+        }
+      }
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
     ) {
       Transfer {
         Amount
@@ -30,7 +35,6 @@ One of the most common types of transfers on Ethereum are ERC20 transfers. Let's
 }
 ```
 
-
 Open this query on IDE using this [link](https://graphql.bitquery.io/ide/UDST-Token-Transfers-on-Ethereum).
 
 ## Subscribe to the latest ERC20 token transfers
@@ -41,8 +45,14 @@ Using our GraphQL interface, you can also subscribe to the latest ERC20 token tr
 subscription {
   EVM(network: eth, trigger_on: head) {
     Transfers(
-      where: {Transfer: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}}
-      orderBy: {descending: Block_Time}
+      where: {
+        Transfer: {
+          Currency: {
+            SmartContract: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" }
+          }
+        }
+      }
+      orderBy: { descending: Block_Time }
     ) {
       Transaction {
         Hash
@@ -64,7 +74,6 @@ subscription {
 
 Open this query on our GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Subscribe-to-Latest-WETH-token-transfers).
 
-
 ## Sender or Receiver is a particular address
 
 This query retrieves transfers where the sender or receiver is a particular address. To implement the OR logic, we utilize the `any` option and specify the two conditions within `[]` that should be combined using the OR operator. In this case we mention either the sender OR receiver should be `0x881d40237659c251811cec9c364ef91dc08d300c`.
@@ -74,7 +83,7 @@ You can find the query [here](https://ide.bitquery.io/Sender-OR-Receiver-Transfe
 ```
 query MyQuery {
   EVM(dataset: archive, network: eth) {
-    Transfers( where: {any: [{Transfer: {Sender: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}, 
+    Transfers( where: {any: [{Transfer: {Sender: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}},
  {Transfer: {Receiver: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}]}) {
       Transfer {
         Amount
@@ -89,4 +98,53 @@ query MyQuery {
   }
 }
 
+```
+
+## Addresses that received or sent money from given list of of addresses
+
+In this query we use `$addresses` which is a list of addresses to which funds have been sent/received.
+An `any` filter is used to establish an OR condition, targeting two scenarios:
+
+1.  Addresses that acted as senders but not as receivers.
+2.  Addresses that acted as receivers but not as senders.
+
+The query retrieves two subsets of addresses based on their roles in transfers:
+
+- `Transfer_Sender`: A list of addresses that have sent funds.
+- `Transfer_Receiver`: A list of addresses that have received funds.
+
+It then applies the `array_intersect` function to find common addresses between these two subsets that has sent/received funds to **every** address in the list of `$addresses`.
+
+You can run the query [here](https://ide.bitquery.io/array_intersect-example-for-2-addresses)
+
+```
+query($addresses: [String!]) {
+  EVM(dataset: archive){
+    Transfers(
+      where: {
+        any: [
+          {
+        	  Transfer: {Sender: {in: $addresses} Receiver: {notIn: $addresses}}
+
+          },
+          {
+            Transfer: {Receiver: {in: $addresses} Sender: {notIn: $addresses}}
+          },
+        ]
+      }
+
+    ) {
+
+      array_intersect(
+        side1: Transfer_Sender
+        side2: Transfer_Receiver
+        intersectWith: $addresses
+      )
+
+    }
+  }
+}
+{
+  "addresses": ["0x21743a2efb926033f8c6e0c3554b13a0c669f63f","0x107f308d85d5481f5b729cfb1710532500e40217"]
+}
 ```
