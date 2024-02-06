@@ -61,7 +61,7 @@ query($addresses: [String!]) {
 
 ```
 
-This query will return a response in this format ; as an  array consisting of elements found in both side1 and side2 that also exist within the intersectWith array. If no common elements are detected, the result will be an empty array.
+This query will return a response in this format ; as an  array consisting of elements found in both side1 and side2 that have interacted with **all the addresses** in the  intersectWith array. If no common elements are detected, the result will be an empty array.
 
 ```
 {
