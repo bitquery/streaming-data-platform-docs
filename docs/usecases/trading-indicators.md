@@ -9,6 +9,8 @@ The list of indicators we will be calculating
 - Volatility
 - Relative Strength Index (RSI)
 
+  
+
 
 **Step 1: Import Libraries**
 
