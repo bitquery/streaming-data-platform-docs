@@ -8,7 +8,7 @@ The Mempool API allows you to access real-time data from the mempool for EVM cha
 
 ## Simulating Pending Transactions
 
-The below query retrieves information about in-flight transactions, helping you simulate the most recent state. It is a way to simulate transactions before sending them on-chain. The `Success` field tells you if your mempool tranaction is successful and `FaultError` and `FaultError` indicate otherwise.
+The below query retrieves information about in-flight transactions, helping you simulate the most recent state. It is a way to see if they will succeed without sending them on-chain. The `Success` field tells you if your mempool tranaction is successful and `FaultError` and `FaultError` indicate otherwise.
 You can find query [here](https://ide.bitquery.io/Simulating-Pending-Transactions)
 
 ```
