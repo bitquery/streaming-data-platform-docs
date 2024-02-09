@@ -217,7 +217,12 @@ const config = {
             to: "https://ide.bitquery.io",
             label: "Get your free API key",
             position: "right"
-          }
+          },
+          {
+            to: "/blog/",
+            label: "New Releases",
+            position: "left",
+          },
         ],
       },
       footer: {
