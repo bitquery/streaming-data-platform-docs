@@ -2,32 +2,8 @@
 sidebar_position: 2
 ---
 
-<head>
 
-<meta name="description" content="Address balance api, balance history, and other balance related details, such as the USDT token balance, using Bitquery's address query. Discover crypto balance, blockchain balance, and more using our GraphQL APIs."/>
-
-<meta name="keywords" content="Token Balance, ERC20, USDT Balance, USDC Balance, ETH Balance, Ethereum, Ethereum Address"/>
-
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-
-<meta property="og:title" content="EVM Balance Updates API - Ethereum Address Balance History" />
-
-<meta property="og:description" content="Address balance api, balance history, and other balance related details, such as the USDT token balance, using Bitquery's address query. Discover crypto balance, blockchain balance, and more using our GraphQL APIs" />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-
-<meta property="twitter:title" content="EVM Balance Updates API" />
-
-<meta property="twitter:description" content="Address balance api, balance history, and other balance related details, such as the USDT token balance, using Bitquery's address query. Discover crypto balance, blockchain balance, and more using our GraphQL APIs" />
-</head>
-
-# Ethereum Address Balance History API
+# Address Balance History API
 
 The BalanceUpdates API provides information on the balance updates of a specific address for a particular token on a supported blockchain. This API enables developers to retrieve a list of balance updates for a particular token and address, as well as additional information about each balance update.
 
