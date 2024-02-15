@@ -1,13 +1,9 @@
 ---
 sidebar_position: 2
----
-
----
-title: "Blockchain Address Balance History API"
+title: "Ethereum Address Balance History API"
 ---
 
 <head>
-<meta name="title" content="EVM Balance Updates API - Ethereum Address Balance History"/>
 
 <meta name="description" content="Address balance api, balance history, and other balance related details, such as the USDT token balance, using Bitquery's address query. Discover crypto balance, blockchain balance, and more using our GraphQL APIs."/>
 
