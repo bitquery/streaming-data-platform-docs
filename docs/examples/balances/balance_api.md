@@ -162,3 +162,27 @@ Here's an example response for the query:
       },
 
 ```
+
+## Balance of a Pool : Uniswap V3
+
+In the below query, we will get the balance of the Uniswap V3: WBTC-USDT Pool. To do this, we will set the filter`{Address: {is: "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"}` and pass the smart contract `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`.
+You can run the query [here](https://ide.bitquery.io/Uniswap-V3-WBTC-USDT-balance)
+
+```
+query MyQuery {
+  EVM(dataset: archive, network: eth) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"}}}
+      orderBy: {descendingByField: "balance"}
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      BalanceUpdate {
+        Address
+      }
+    }
+  }
+}
+```
