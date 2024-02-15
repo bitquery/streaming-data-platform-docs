@@ -1,6 +1,5 @@
 ---
 sidebar_position: 2
-title: "Ethereum Address Balance History API"
 ---
 
 <head>
@@ -28,10 +27,7 @@ title: "Ethereum Address Balance History API"
 <meta property="twitter:description" content="Address balance api, balance history, and other balance related details, such as the USDT token balance, using Bitquery's address query. Discover crypto balance, blockchain balance, and more using our GraphQL APIs" />
 </head>
 
-
-
-# BalanceUpdates API
-
+# Ethereum Address Balance History API
 
 The BalanceUpdates API provides information on the balance updates of a specific address for a particular token on a supported blockchain. This API enables developers to retrieve a list of balance updates for a particular token and address, as well as additional information about each balance update.
 
