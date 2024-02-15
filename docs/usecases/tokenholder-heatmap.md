@@ -2,9 +2,6 @@
 
 In this tutorial we will see how to visualize top token holders in a heatmap using the [Token Holder APIs](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api/) with Python.
 
-This is how it will look finally, you can change the ehatmap palette based on your design.
-![heatmap](/img/ApplicationExamples/heatmap.png)
-
 1. **Import libraries**: Necessary Python libraries are imported including `requests` for making HTTP requests, `json` for parsing JSON data, `pandas` for data manipulation and analysis, `seaborn` and `matplotlib` for data visualization.
 
    ```python
@@ -88,3 +85,5 @@ This is how it will look finally, you can change the ehatmap palette based on yo
 
 Please note that you will need to replace the placeholder values in the script with your actual authorization token, and the smart contract address of the token you are interested in. Also, the reshaping dimensions (a=10, b=5) might need to be adjusted based on the number of token holders.
 
+This is how it will look finally, you can change the heatmap palette based on your design.
+![heatmap](/img/ApplicationExamples/heatmap.png)
