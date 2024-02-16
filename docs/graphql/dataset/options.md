@@ -21,6 +21,6 @@ Top level element of the query has 3 attributes, defining what is the source for
 ![Dataset options](/img/ide/dataset_options.png)
 
 :::note
-[subscription](/docs/graphql/subscription/subsciption) has a different set of top level elements. 
+[subscription](/docs/graphql/subscription/subscription.md) has a different set of top level elements. 
 For example, the dataset for subscription is always real time and not controlled.
 :::

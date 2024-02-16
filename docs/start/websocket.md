@@ -25,4 +25,4 @@ Here is the link to a Postman collection with samples demonstrating how to use t
 > [Postman Collection for Examples](https://www.postman.com/spacecraft-geologist-86385692/workspace/bitquery/collection/645e69d97aa179eb6799e1d6)
 
 
-Continue reading about how to create and use websockets in this [section](/docs/graphql/subscription/subsciption.md)
+Continue reading about how to create and use websockets in this [section](/docs/graphql/subscription/subscription.md)
