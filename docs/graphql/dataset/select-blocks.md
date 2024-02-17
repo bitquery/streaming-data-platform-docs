@@ -32,11 +32,12 @@ to include in the result set.
 
 It has the following options:
 
-* ```trunk``` (default) will include only blocks that are on the main current trunk (having the maximum height on tip)
+* ```tree``` (default) all tree, combining trunk and branches
+* ```trunk```  will include only blocks that are on the main current trunk (having the maximum height on tip)
 * ```branches``` for only branched blocks (not on trunk)
-* ```tree``` all tree, combining trunk and branches
+
 
 :::tip
-You need ```tree``` and ```branches``` only in a very special case, when you need to analyze the reorganization tree
-of the blockchain.
+You need ```trunk``` and ```branches``` only in a very special case, when you need to analyze the reorganization tree
+of the blockchain, or your application heed only head blocks.
 :::
