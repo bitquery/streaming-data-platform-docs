@@ -10,7 +10,6 @@ tags: [new capability]
 The following changes applied to the schema:
 
 1. ```trigger_on``` attribute for subscription default value set now to ```all```.
-2. ```select_blocks``` attribute for query default value set now to ```tree```.
-3. ```Transaction_Time``` field for mempool ```Transaction``` now returns the transaction time not in numeric, but in ISO8601 format up to 1 nanaosecond ( 9 digits after the seconds ), 
+2```Transaction_Time``` field for mempool ```Transaction``` now returns the transaction time not in numeric, but in ISO8601 format up to 1 nanaosecond ( 9 digits after the seconds ), 
 
 ```"2006-01-02T15:04:05.999999999Z"```

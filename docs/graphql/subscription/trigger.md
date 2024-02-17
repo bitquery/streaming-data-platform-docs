@@ -16,7 +16,7 @@ defined in the query are met:
 ```trigger_on``` attribute controls on which blocks the update of data is triggered for the subscription.
 It has the following options:
 
-* ```all``` - (default) **any** block triggers data update
+* ```all``` - **any** block triggers data update
 * ```head``` -  **new** blocks on the trunk (with the highest tip) triggers data update
 * ```head_updates``` - **any** blocks on the trunk (with the highest tip) triggers data update
 * ```branches_updates``` - **any** blocks on the branch (not with the highest tip) triggers data update
