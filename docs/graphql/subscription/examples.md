@@ -79,19 +79,14 @@ ws = GraphqlClient(
 
 query = """
 subscription MyQuery {
-  EVM(network: eth) {
-    count: Blocks {
-      Block {
-        TxCount
-      }
-    }
-    hash: Blocks {
-      Block{
-        TxHash
-      }
-    }
-  }
-}
+                  EVM(network: eth) {
+                    count: Blocks {
+                      Block {
+                        TxCount
+                      }
+                    }
+                  }
+                }
 """
 
 asyncio.run(ws.subscribe(query=query, handle=print))
@@ -108,7 +103,7 @@ const { WebSocket, WebSocketServer } = require("ws");
 const BITQUERY_WS_URL = "wss://streaming.bitquery.io/graphql";
 
 const bitqueryConnection = new WebSocket(
-  "wss://streaming.bitquery.io/graphql?token=ory*at*..",
+  "wss://streaming.bitquery.io/graphql?token=ory_at_..",
   ["graphql-ws"],
   {
     headers: {
@@ -134,20 +129,14 @@ bitqueryConnection.on("open", () => {
       id: "1",
       payload: {
         query: `
-                subscription RealTimeLP($lps: [String!]) {
-                    EVM(network: eth) {
-                        BalanceUpdates(
-                            where: {
-                                BalanceUpdate: { Address: { in: $lps } },
-                                Currency: { SmartContract: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" }}
-                            }
-                        ) {
-                            balance: sum(of: BalanceUpdate_Amount)
-                            Address: BalanceUpdate {
-                                Address
-                            }
-                        }
+               subscription MyQuery {
+                  EVM(network: eth) {
+                    count: Blocks {
+                      Block {
+                        TxCount
+                      }
                     }
+                  }
                 }
                 `,
         variables: { lps },
@@ -163,6 +152,9 @@ bitqueryConnection.on("message", (data) => {
   if (response.type === "data") {
     // Broadcast the data to all connected clients of your local server
     console.log("Received data from Bitquery: ", response.payload.data);
+
+    // Close the connection after receiving data
+    bitqueryConnection.close();
   }
 });
 
@@ -174,3 +166,17 @@ bitqueryConnection.on("error", (error) => {
   console.error("WebSocket Error:", error);
 });
 ```
+
+This script opens a WebSocket connection to the streaming API, sends an initialization message, starts a subscription with a GraphQL query, handles incoming data, and then closes the connection after data is received.
+
+The WebSocket connection is managed using a series of event handlers:
+
+To start the WebSocket connection, we use the `open` event. To stop or close the WebSocket connection, we use the `close` method. The `message` event is used for handling incoming data. Errors during the process are handled by the `error` event.
+
+- **Start Connection:** The connection is started or opened when `bitqueryConnection.on("open", () => {...})` is triggered. This event is fired when the WebSocket connection is established successfully. Inside this event handler, an initialization message (`connection_init`) is first sent to the server, followed by the actual subscription message (`start`) after a delay of 1 second.
+
+- **Stop Connection:** The connection is stopped or closed when `bitqueryConnection.close();` is called. In the given code, this happens within the `message` event handler, right after data is received from the server. This means that the WebSocket connection closes immediately after receiving the first batch of data.
+
+- Also, when the connection is closed either due to calling `bitqueryConnection.close();` or due to some network error or server-side closure, the `close` event is fired.
+
+Please note that this is a basic implementation of starting and stopping a WebSocket connection. Depending on your application's needs, you might want to add more logic to manage the connection, handle errors, or deal with different types of data.
