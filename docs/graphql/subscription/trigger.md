@@ -16,14 +16,14 @@ defined in the query are met:
 ```trigger_on``` attribute controls on which blocks the update of data is triggered for the subscription.
 It has the following options:
 
-* ```head``` - (default) **new** blocks on the trunk (with the highest tip) triggers data update
 * ```all``` - **any** block triggers data update
+* ```head``` -  **new** blocks on the trunk (with the highest tip) triggers data update
 * ```head_updates``` - **any** blocks on the trunk (with the highest tip) triggers data update
 * ```branches_updates``` - **any** blocks on the branch (not with the highest tip) triggers data update
 
 [Blockchain Reorg Tree](/docs/graphql/dataset/select_blocks) describes how the tree is represented in the databases.
 
-In most cases you just not specify this attribute, assuming head option is what you need. Other options are suitable
+In most cases you just not specify this attribute, assuming all option is what you need. Other options are suitable
 for event-driven applications:
 
 :::tip
@@ -31,5 +31,6 @@ Use ```head_updates``` together with ```branches_updates``` when you need to acc
 :::
 
 :::tip
-Use ```all``` if you need to handle re-orgs of the tree in your application
+Use ```head``` if you need to listen only head blocks in your application. This can slightly delay the data however, as the new block 
+may need the other block to wait to be detected that it is on the tree.
 :::
