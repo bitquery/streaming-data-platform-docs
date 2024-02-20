@@ -15,6 +15,11 @@ wss://streaming.bitquery.io/graphql
 
 Keep in mind, there are limits applied to the number of subscriptions a user can have active at one time. Currently, this limit is set at 8 per user; however, these limits are subject to change in the future. For the most up-to-date information on pricing and limits, please refer to the [pricing page on our website](https://bitquery.io/pricing).
 
+
+### How Does it Work
+
+![flow](/img/diagrams/wss_flowchart.png)
+
 ## What Is the Difference Between WebSocket and GraphQL WebSocket?
 
 WebSocket provides a general-purpose protocol for real-time bidirectional communication over a single, long-lived connection. However, one drawback is that developers must implement their own messaging and data structure when using WebSocket.
