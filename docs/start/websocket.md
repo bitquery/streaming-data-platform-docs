@@ -1,6 +1,7 @@
 ---
 sidebar_position: 4
 ---
+
 # Accessing Streaming Data via WebSocket
 
 In the previous section, we learned how to get live data in Bitquery IDE by creating subscription queries. Now, let's take a closer look at how these live updates actually work and what happens behind the scenes to provide you with this real-time data.
@@ -15,6 +16,9 @@ wss://streaming.bitquery.io/graphql
 
 Keep in mind, there are limits applied to the number of subscriptions a user can have active at one time. Currently, this limit is set at 8 per user; however, these limits are subject to change in the future. For the most up-to-date information on pricing and limits, please refer to the [pricing page on our website](https://bitquery.io/pricing).
 
+### Data Handling
+
+It's important to note that for committed blocks, data will come in portions (by block), and for the mempool, data will come by transactions (or set of transactions). You do not have control over the sequence in which this data will arrive. Therefore, ensure your application is designed to handle data in this manner.
 
 ### How Does it Work
 
@@ -24,13 +28,12 @@ Keep in mind, there are limits applied to the number of subscriptions a user can
 
 WebSocket provides a general-purpose protocol for real-time bidirectional communication over a single, long-lived connection. However, one drawback is that developers must implement their own messaging and data structure when using WebSocket.
 
-On the other hand, GraphQL WebSocket standardizes communication over WebSocket as defined by the GraphQL specifications. GraphQL WebSocket is a specific protocol and implementation designed to enable real-time communication for GraphQL APIs. 
+On the other hand, GraphQL WebSocket standardizes communication over WebSocket as defined by the GraphQL specifications. GraphQL WebSocket is a specific protocol and implementation designed to enable real-time communication for GraphQL APIs.
 
 Read [here](https://docs.bitquery.io/docs/start/authorisation/websocket/) on how to use websockets with OAuth.
 
 Here is the link to a Postman collection with samples demonstrating how to use the wss endpoint:
 
 > [Postman Collection for Examples](https://www.postman.com/spacecraft-geologist-86385692/workspace/bitquery/collection/645e69d97aa179eb6799e1d6)
-
 
 Continue reading about how to create and use websockets in this [section](/docs/graphql/subscription/subscription.md)
