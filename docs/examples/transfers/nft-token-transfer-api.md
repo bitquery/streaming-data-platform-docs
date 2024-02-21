@@ -40,7 +40,7 @@ Let's see how to get the latest NFT token transfers. We are taking Cryptokitties
 
 Here is the [link](https://graphql.bitquery.io/ide/Cryptokitties-Token-Transfers) to the query on IDE.
 
-## Subscribe to the latest NFT token transfers
+## Subscribe to the latest ERC721 token transfers
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to Axie Infinity (AXS) token transfers.
 
