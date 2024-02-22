@@ -6,6 +6,9 @@ sidebar_position: 6
 
 The `array_intersect` feature is an advanced query format that generates an intersection of addresses from specified datasets. You can use the `where` clause to introduce filters that refine your results according to desired criteria. The output is a list of addresses that share a common link to the two datasets. 
 
+![flow](/img/diagrams/array_intersect.png)
+
+
 In the following section, we'll explore how to use `array_intersect` to reveal the associations between pairs of addresses or contracts.
 
 ### Syntax
