@@ -63,35 +63,71 @@ subscription ($token: String!, $minamount: String!, $mempool: Boolean, $network:
 
 ## Implementation Example: Using WebSocket Using Python
 
-In this example, we'll use the python_graphql_client library to create a GraphQL client that connects to a WebSocket endpoint. This client will subscribe to a query and print the results.
+This example demonstrates how to use the `gql` library in Python to create a client that connects to a WebSocket endpoint, subscribes to a query, and prints the results. The script also uses the `asyncio` library to wait for results from the wss endpoint and all asynchronous operations.
 
 ```python
-from python_graphql_client import GraphqlClient
 import asyncio
 
-ws = GraphqlClient(
-    endpoint=
-    "wss://streaming.bitquery.io/graphql?token=ory_at_QkA....",
-    headers={
-        "Sec-WebSocket-Protocol": "graphql-ws",
-        "Content-Type": "application/json"
-    })
+from gql import Client, gql
+from gql.transport.websockets import WebsocketsTransport
 
-query = """
-subscription MyQuery {
-                  EVM(network: eth) {
-                    count: Blocks {
-                      Block {
-                        TxCount
-                      }
+
+async def subscribe_to_graphql(transport):
+  async with Client(transport=transport,
+                    fetch_schema_from_transport=True) as session:
+    async for result in session.subscribe(
+        gql("""
+                subscription MyQuery {
+                    EVM(network: eth) {
+                        count: Blocks {
+                            Block {
+                                TxCount
+                            }
+                        }
                     }
-                  }
                 }
-"""
+            """)):
+      print(result)
 
-asyncio.run(ws.subscribe(query=query, handle=print))
+
+async def main():
+  transport = WebsocketsTransport(
+      url=
+      "wss://streaming.bitquery.io/graphql?token=ory_at_cap...",
+      headers={"Sec-WebSocket-Protocol": "graphql-ws"})
+
+  await transport.connect()
+  print("connected")
+
+  # # Close the connection
+  try:
+    # await subscribe_to_graphql(transport)
+    async for result in transport.subscribe(
+        gql("""
+              subscription MyQuery {
+                  EVM(network: eth) {
+                      count: Blocks {
+                          Block {
+                              TxCount
+                          }
+                      }
+                  }
+              }
+          """)):
+      print(result)
+  except:
+    print("Transport is already connected!")
+  await transport.close()
+
+
+# Run the asyncio event loop
+asyncio.run(main())
+
 
 ```
+
+
+The `transport.connect()` function is used to establish a connection to the WebSocket server and start the subscription. Similarly, `transport.close()` is used to close the connection and stop the subscription.
 
 ## Implementation Example:Using WebSocket Using JavaScript
 
