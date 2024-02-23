@@ -42,20 +42,14 @@ Here is the [link](https://graphql.bitquery.io/ide/Cryptokitties-Token-Transfers
 
 ## Subscribe to the latest ERC721 token transfers
 
-Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to Axie Infinity (AXS) token transfers.
+Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to all NFT token transfers. You can run the query [here](https://ide.bitquery.io/ERC721-token-transfers)
 
 ```graphql
 subscription {
-  EVM(network: eth, trigger_on: head) {
+  EVM(network: eth) {
     Transfers(
-      where: {
-        Transfer: {
-          Currency: {
-            SmartContract: { is: "0xf5b0a3efb8e8e4c201e2a935f110eaaf3ffecb8d" }
-          }
-        }
-      }
-      orderBy: { descending: Block_Time }
+      where: {Transfer: {Currency: {Fungible: false}}}
+      orderBy: {descending: Block_Time}
     ) {
       Transaction {
         Hash
@@ -75,6 +69,7 @@ subscription {
     }
   }
 }
+
 ```
 
 You can open this API on our GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Subscribe-to-latest-Axie-infinity-token-transfers_1).
