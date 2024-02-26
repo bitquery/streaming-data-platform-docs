@@ -226,7 +226,7 @@ You can find the query [here](https://ide.bitquery.io/Pools-details_1)
 ```
 {
   EVM(dataset: archive, network: eth) {
-    Initaial_liquidity: Transfers(
+    Initial_liquidity: Transfers(
       limit: {count: 2}
       orderBy: {ascending: Block_Time}
       where: {Transfer: {Receiver: {is: "0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"}}}
@@ -243,7 +243,7 @@ You can find the query [here](https://ide.bitquery.io/Pools-details_1)
         }
       }
     }
-    Current_lquidity: BalanceUpdates(
+    Current_liquidity: BalanceUpdates(
       where: {BalanceUpdate: {Address: {is: "0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"}}, Currency: {SmartContract: {in: ["0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", "0xdac17f958d2ee523a2206206994597c13d831ec7"]}}}
       orderBy: {descendingByField: "balance"}
     ) {
