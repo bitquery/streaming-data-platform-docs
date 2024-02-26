@@ -234,11 +234,11 @@ subscription {
 
 ```
 
-### Understanding Mempool Queries
+## Understanding Mempool Queries
 
 When querying the mempool using the parameter `mempool: true`, it's important to know that the results do not directly reflect the live state of the mempool. Instead, this query returns transactions that have been broadcasted but may already be included in confirmed blocks.
 
-#### Advanced Query Strategies
+### Advanced Query Strategies
 
 To distinguish between pending and confirmed transactions, use a two-step approach combining `mempool: true` for unconfirmed transactions and `mempool: false` for confirmed ones.
 
