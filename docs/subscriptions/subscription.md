@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Subscription
+# What is a Subscription?
 
 Subscription is defined by the subscription type of GraphQL request:
 

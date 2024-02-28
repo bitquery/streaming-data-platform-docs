@@ -14,7 +14,7 @@ Once you click on the "Play" button, you are initiating a real-time query of the
 
 Additionally, you may be able to see the refresh seconds or intervals in the IDE. 
 
-Read more about how to use subscription and websockets [here](/docs/graphql/subscription/subscription.md).
+Read more about how to use subscription and websockets [here](/docs/subscriptions/subscription.md).
 
 :::caution Resources usage
 

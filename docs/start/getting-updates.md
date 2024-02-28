@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Real-Time Subscription
+# Subscribing to Real-Time Data
 
 After you have created and successfully run [your first query](/docs/start/first-query), it is time to
 get updates on the new data coming.

@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Trigger
+# What is a Trigger?
 
 The new data pushed to subscription on receiving the new block in the real time database assuming that the criteria,
 defined in the query are met:

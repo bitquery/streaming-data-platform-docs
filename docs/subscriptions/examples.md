@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Examples
+# Building with WebSockets: Code Samples
 
 This section provides examples of how to implement subscription queries in your code.
 
@@ -131,7 +131,7 @@ The `transport.connect()` function is used to establish a connection to the WebS
 
 ## Implementation Example:Using WebSocket Using JavaScript
 
-Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](/docs/start/authorisation/websocket.md)
+Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](/docs/authorisation/websocket.md)
 
 ```javascript
 const { WebSocket, WebSocketServer } = require("ws");

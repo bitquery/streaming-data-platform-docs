@@ -22,7 +22,7 @@ see it full. You only need a portion of it related to your needs typically.
 Query is used to query the data. When you need to get updated results, you must query the
 endpoint again with the same or another query. 
 
-Subscription is used to get data updates. You define a [subscription](/docs/graphql/subscription/subscription.md), 
+Subscription is used to get data updates. You define a [subscription](/docs/subscriptions/subscription.md), 
 and after the new data appear, it will be delivered to you without any actions from your side.
 
 This defines the cases, when to use one or another:
@@ -31,7 +31,7 @@ This defines the cases, when to use one or another:
 * use subscriptions for the "live" data, or when data may be changed while using it
 
 
-Good news, that queries and [subscriptions](/docs/graphql/subscription/subscription.md) use identical schemas, except some attributes of the top
+Good news, that queries and [subscriptions](/docs/subscriptions/subscription.md) use identical schemas, except some attributes of the top
 element, to define the [dataset](/docs/graphql/dataset/options) usage. It allows your applications to 
 switch between pull and push modes of operation with a minimal changes of the code
 and queries.
@@ -41,7 +41,7 @@ Compare the code in [the first query](/docs/start/first-query) and
 
 This section describes principles that applies to subscriptions
 as well as to queries. We will show examples for queries, but remember that they applied to
-[subscriptions](/docs/graphql/subscription/subscription.md) as well.
+[subscriptions](/docs/subscriptions/subscription.md) as well.
 
 ## Query Elements
 

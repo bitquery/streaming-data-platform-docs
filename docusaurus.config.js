@@ -73,72 +73,80 @@ const config = {
       },
     ],
     [
-      '@docusaurus/plugin-client-redirects',
+      "@docusaurus/plugin-client-redirects",
       {
         redirects: [
           // /docs/oldDoc -> /docs/newDoc
           {
-            to: '/docs/examples/token-holders/token-holder-api/',
-            from: '/docs/examples/balances/tokenHolders-api/',
+            to: "/docs/examples/token-holders/token-holder-api/",
+            from: "/docs/examples/balances/tokenHolders-api/",
           },
           {
-            to: '/docs/contribution-guidelines/',
-            from: '/docs/contribution_guidelines/',
+            to: "/docs/contribution-guidelines/",
+            from: "/docs/contribution_guidelines/",
           },
           {
-            to: '/docs/examples/calls/contract-creation/',
-            from: '/docs/examples/calls/Contract%20_creation/',
+            to: "/docs/examples/calls/contract-creation/",
+            from: "/docs/examples/calls/Contract%20_creation/",
           },
           {
-            to: '/docs/examples/calls/smartcontract-filterby/',
-            from: '/docs/examples/calls/smartcontract_filterby/',
+            to: "/docs/examples/calls/smartcontract-filterby/",
+            from: "/docs/examples/calls/smartcontract_filterby/",
           },
           {
-            to: '/docs/examples/events/events-api/',
-            from: '/docs/examples/events/events_api/',
+            to: "/docs/examples/events/events-api/",
+            from: "/docs/examples/events/events_api/",
           },
           {
-            to: '/docs/evm/token-holders/',
-            from: '/docs/evm/token_holders/',
+            to: "/docs/evm/token-holders/",
+            from: "/docs/evm/token_holders/",
           },
           {
-            to: '/docs/graphql/dataset/select-blocks/',
-            from: '/docs/graphql/dataset/select_blocks/',
+            to: "/docs/graphql/dataset/select-blocks/",
+            from: "/docs/graphql/dataset/select_blocks/",
           },
           {
-            to: '/docs/usecases/nft-analytics/',
-            from: '/docs/usecases/nft_Analytics/',
+            to: "/docs/usecases/nft-analytics/",
+            from: "/docs/usecases/nft_Analytics/",
           },
           {
-            to: '/docs/usecases/crypto-dashboard/',
-            from: '/docs/usecases/crypto_dashboard/',
+            to: "/docs/usecases/crypto-dashboard/",
+            from: "/docs/usecases/crypto_dashboard/",
           },
           {
-            to: '/docs/usecases/telegram-bot/',
-            from: '/docs/usecases/Telegram_bot/',
+            to: "/docs/usecases/telegram-bot/",
+            from: "/docs/usecases/Telegram_bot/",
           },
           {
-            to: '/docs/start/authorisation/how-to-generate',
-            from:'/docs/ide/authorisation/'
-          },
-          
-          {
-            to:'/docs/start/authorisation/how-to-generate',
-            from: '/docs/ide/authorisation/simple',
-           
+            to: "/docs/authorisation/how-to-generate",
+            from: "/docs/ide/authorisation/",
           },
 
           {
-             to:'/docs/start/authorisation/how-to-generate' ,
-            from:'/docs/start/authorisation/secure/'
-
+            to: "/docs/authorisation/how-to-generate",
+            from: "/docs/ide/authorisation/simple",
           },
 
+          {
+            to: "/docs/authorisation/how-to-generate",
+            from: "/docs/start/authorisation/secure/",
+          },
 
           {
-            to:'/docs/start/authorisation/how-to-generate',
-            from: '/docs/start/authorisation/',
-           
+            to: "/docs/authorisation/how-to-generate",
+            from: "/docs/start/authorisation/",
+          },
+          {
+            to: "/docs/authorisation/how-to-generate",
+            from: "/docs/start/authorisation/how-to-generate",
+          },
+          {
+            to:"/docs/subscriptions/subscription",
+            from:"/docs/graphql/subscription/"
+          },
+          {
+            to:"/docs/start/first-query/",
+            from:"/docs/ide/login/"
           }
         ],
       },
@@ -169,12 +177,12 @@ const config = {
           filename: "sitemap.xml",
         },
         gtag: {
-          trackingID: 'G-ZWB80TDH9J',
+          trackingID: "G-ZWB80TDH9J",
           anonymizeIP: true,
         },
         googleTagManager: {
-          containerId: 'GTM-5GC69JH6',
-        }
+          containerId: "GTM-5GC69JH6",
+        },
       }),
     ],
   ],
@@ -216,7 +224,7 @@ const config = {
           {
             to: "https://ide.bitquery.io",
             label: "Get your free API key",
-            position: "right"
+            position: "right",
           },
           {
             to: "/blog/",

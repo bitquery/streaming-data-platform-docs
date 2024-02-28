@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 # Accessing Streaming Data via WebSocket
@@ -20,20 +20,33 @@ Keep in mind, there are limits applied to the number of subscriptions a user can
 
 It's important to note that for committed blocks, data will come in portions (by block), and for the mempool, data will come by transactions (or set of transactions). You do not have control over the sequence in which this data will arrive. Therefore, ensure your application is designed to handle data in this manner.
 
-### How Does it Work
-
-![flow](/img/diagrams/wss_flowchart.png)
-
-## What Is the Difference Between WebSocket and GraphQL WebSocket?
+## Technical Considerations
 
 WebSocket provides a general-purpose protocol for real-time bidirectional communication over a single, long-lived connection. However, one drawback is that developers must implement their own messaging and data structure when using WebSocket.
 
-On the other hand, GraphQL WebSocket standardizes communication over WebSocket as defined by the GraphQL specifications. GraphQL WebSocket is a specific protocol and implementation designed to enable real-time communication for GraphQL APIs.
+### Workflow
 
-Read [here](https://docs.bitquery.io/docs/start/authorisation/websocket/) on how to use websockets with OAuth.
+![flow](/img/diagrams/wss_flowchart.png)
+
+## Authorising Websockets
+
+Read [here](https://docs.bitquery.io/docs/authorisation/websocket/) on how to use websockets with OAuth.
 
 Here is the link to a Postman collection with samples demonstrating how to use the wss endpoint:
 
 > [Postman Collection for Examples](https://www.postman.com/spacecraft-geologist-86385692/workspace/bitquery/collection/645e69d97aa179eb6799e1d6)
 
-Continue reading about how to create and use websockets in this [section](/docs/graphql/subscription/subscription.md)
+Continue reading about how to create and use websockets in this [section](/docs/subscriptions/subscription.md)
+
+## Supported Standards
+
+GraphQL supports 2 standards to deliver the data updates:
+
+- `graphql-transport-ws`
+- `graphql-ws`
+
+Essentially they are the same, differ only in details. Typically, you use some library,
+which already implement one of these. we support both of them. We adhere to the standard logic for ping, pong, and disconnect actions.
+We adhere to the standard logic for ping, pong, and disconnect actions. Once the socket is open, the server sends a 'ka' message if you're using graphql-ws. Alternatively, if you're using graphql-transport-ws, the server will send a 'pong' message. This process ensures that the connection remains active and healthy.
+
+You can find examples of how to use it in your code [here](/docs/subscriptions/examples.md)
