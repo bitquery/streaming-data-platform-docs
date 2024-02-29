@@ -14,7 +14,9 @@ wss://streaming.bitquery.io/graphql
 
 ### Limits
 
-Keep in mind, there are limits applied to the number of subscriptions a user can have active at one time. Currently, this limit is set at 8 per user; however, these limits are subject to change in the future. For the most up-to-date information on pricing and limits, please refer to the [pricing page on our website](https://bitquery.io/pricing).
+> **Warning:** There are no limits to the number of websockets you can create, however, it is best to create multiple subscriptions using one websocket. Refer to the example [here](/docs/subscriptions/subscription.md) on how to do it.
+
+ For the most up-to-date information on pricing and limits, please refer to the [pricing page on our website](https://bitquery.io/pricing).
 
 ### Data Handling
 

@@ -14,9 +14,9 @@ subscription {
 }
 ```
 
-Almost any query can be converted to subscription just by replacing `query` type to `subscription`.
+![Export code](/img/ide/ide_subscription.gif)
 
-Keep in mind, there are limits applied to the number of subscriptions a user can have active at one time. Currently, this limit is set at 8 per user; however, these limits are subject to change in the future. For the most up-to-date information on pricing and limits, please refer to the [pricing page on our website](https://bitquery.io/pricing).
+Almost any query can be converted to subscription just by replacing `query` type to `subscription`.
 
 When creating queries for GraphQL subscriptions, here are some tips to consider:
 
@@ -27,3 +27,76 @@ When creating queries for GraphQL subscriptions, here are some tips to consider:
 3.  **Test Your Queries:** Before deploying your application, make sure to thoroughly test your subscription queries to ensure they return the data you expect and can handle high volumes of data.
 
 In addition, optimizing your queries can significantly enhance the performance of your subscriptions. For more insights on how to optimize your websocket queries, go [here](/docs/graphql/optimizing-graphql-queries.md).
+
+## Creating Multiple Subscriptions in one Websocket
+
+It is possible—and often more efficient—to manage multiple subscriptions over a single WebSocket connection. This approach allows you to bundle various subscriptions, such as DEX Trades, Transactions, Blocks, and Transfers, into a single Websocket stream. However, it's important to note that your top-level element must be only one.
+
+```
+subscription{
+  EVM{
+    Transfers{
+
+    }
+    Transactions{
+
+    }
+  }
+}
+
+```
+
+### Example: Tracking USDT Transfers on Ethereum
+
+In this query, we see how to run multiple queries with a single WebSocket.
+
+This query will return two sets of transfer data for USDT on the Ethereum network: `transfers_above_10K` and `transfers_below_10K`. The `transfers_above_10K` data set includes all transfers with an amount greater than or equal to 10,000 USDT. The `transfers_below_10K` data set includes all transfers with an amount less than 10,000 USDT. Both data sets include the transaction hash, sender, receiver, and amount of each transfer.
+
+You can run the query [here](https://ide.bitquery.io/USDT-transfers-of-different-amounts-mempool)
+
+```
+subscription ($token: String!, $minamount: String!, $mempool: Boolean, $network: evm_network!) {
+  usdt: EVM(network: $network, mempool: $mempool) {
+    transfers_above_10K: Transfers(
+      where: {Transfer: {Amount: {ge: $minamount}, Currency: {SmartContract: {is: $token}}}}
+    ) {
+      Transaction {
+        Hash
+        From
+        Gas
+      }
+      Receipt {
+        GasUsed
+      }
+      Transfer {
+        Sender
+        Receiver
+        Amount
+      }
+    }
+    transfers_below_10K: Transfers(
+      where: {Transfer: {Amount: {lt: $minamount}, Currency: {SmartContract: {is: $token}}}}
+    ) {
+      Transaction {
+        Hash
+        From
+        Gas
+      }
+      Receipt {
+        GasUsed
+      }
+      Transfer {
+        Sender
+        Receiver
+        Amount
+      }
+    }
+  }
+}
+{
+  "token": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+  "minamount": "10000",
+  "mempool": true,
+  "network": "eth"
+}
+```

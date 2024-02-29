@@ -37,3 +37,5 @@ To stop updates, press the run button again.
 
 Please note that as long as data is being received, the box on the right will continue to populate, which has no text limit, so make sure you don't waste your resources!
 :::
+
+Read more about subscriptions and creating websockets [here](/docs/subscriptions/subscription.md)

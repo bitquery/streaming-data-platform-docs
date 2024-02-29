@@ -6,61 +6,6 @@ sidebar_position: 4
 
 This section provides examples of how to implement subscription queries in your code.
 
-## Example of Multiple Queries with one Websocket
-
-In this query, we see how to run multiple queries with a single WebSocket. It's important to note that your top-level element must be only one.
-
-This query will return two sets of transfer data for USDT on the Ethereum network: `transfers_above_10K` and `transfers_below_10K`. The `transfers_above_10K` data set includes all transfers with an amount greater than or equal to 10,000 USDT. The `transfers_below_10K` data set includes all transfers with an amount less than 10,000 USDT. Both data sets include the transaction hash, sender, receiver, and amount of each transfer.
-
-You can run the query [here](https://ide.bitquery.io/USDT-transfers-of-different-amounts-mempool)
-
-```
-subscription ($token: String!, $minamount: String!, $mempool: Boolean, $network: evm_network!) {
-  usdt: EVM(network: $network, mempool: $mempool) {
-    transfers_above_10K: Transfers(
-      where: {Transfer: {Amount: {ge: $minamount}, Currency: {SmartContract: {is: $token}}}}
-    ) {
-      Transaction {
-        Hash
-        From
-        Gas
-      }
-      Receipt {
-        GasUsed
-      }
-      Transfer {
-        Sender
-        Receiver
-        Amount
-      }
-    }
-    transfers_below_10K: Transfers(
-      where: {Transfer: {Amount: {lt: $minamount}, Currency: {SmartContract: {is: $token}}}}
-    ) {
-      Transaction {
-        Hash
-        From
-        Gas
-      }
-      Receipt {
-        GasUsed
-      }
-      Transfer {
-        Sender
-        Receiver
-        Amount
-      }
-    }
-  }
-}
-{
-  "token": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-  "minamount": "10000",
-  "mempool": true,
-  "network": "eth"
-}
-```
-
 ## Implementation Example: Using WebSocket Using Python
 
 This example demonstrates how to use the `gql` library in Python to create a client that connects to a WebSocket endpoint, subscribes to a query, and prints the results. The script also uses the `asyncio` library to wait for results from the wss endpoint and all asynchronous operations.
@@ -125,7 +70,6 @@ asyncio.run(main())
 
 
 ```
-
 
 The `transport.connect()` function is used to establish a connection to the WebSocket server and start the subscription. Similarly, `transport.close()` is used to close the connection and stop the subscription.
 
