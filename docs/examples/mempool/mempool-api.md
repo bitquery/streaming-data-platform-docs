@@ -4,6 +4,8 @@ sidebar_position: 2
 
 # Examples of Mempool API
 
+In this section we will look at some examples of how to write mempool queries to extract the necessary data from broadcasted transactions. To read more about how we offer mempool data, read the introduction [here](/docs/subscriptions/mempool-subscriptions.md)
+
 ## Simulating Pending Transactions
 
 The below query retrieves information about in-flight transactions, helping you simulate the most recent state. It is a way to see if they will succeed without sending them on-chain. The `Success` field tells you if your mempool tranaction is successful and `FaultError` and `FaultError` indicate otherwise.

@@ -18,10 +18,8 @@ To continue, you must first [register](/docs/ide/login) an account to access the
 - Complete the CAPTCHA challenge and click the Submit button to proceed.
 - After submitting your registration form, check your email for a confirmation message. Click the link within this email to verify your account. Once your email is successfully verified, you will receive a notification, confirming your account creation is complete.
 
-If IDE points to the default endpoint https://graphql.bitquery.io, change it to the new endpoint
-https://streaming.bitquery.io/graphql.
-
-Bookmark the link to open IDE with the correct URL: [https://graphql.bitquery.io/ide?endpoint=https://streaming.bitquery.io/graphql](https://graphql.bitquery.io/ide?endpoint=https://streaming.bitquery.io/graphql)
+If IDE points to the default endpoint https://graphql.bitquery.io, use the dropdown to change it to the new endpoint
+https://streaming.bitquery.io/graphql which is labelled as "V2".
 
 If you do everything correctly, you will see the grey triangle in the middle of the screen to run the query.
 
