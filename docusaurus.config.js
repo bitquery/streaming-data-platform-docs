@@ -147,6 +147,10 @@ const config = {
           {
             to:"/docs/start/first-query/",
             from:"/docs/ide/login/"
+          },
+          {
+            to:"/docs/subscriptions/websockets/",
+            from:"/docs/start/websocket/"
           }
         ],
       },
