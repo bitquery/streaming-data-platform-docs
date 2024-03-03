@@ -8,8 +8,7 @@ In the previous section, we learned how to get live data in Bitquery IDE by crea
 
 Bitquery makes real-time data available using WebSockets. We use a specific WebSocket protocol called the "GraphQL WebSocket" to make sure you receive real-time updates. To get data in real-time for your application, you can connect to the following WebSocket endpoint:
 
-```
-wss://streaming.bitquery.io/graphql
+wp://streaming.bitquery.io/graphql
 ```
 
 ### Limits
@@ -36,7 +35,7 @@ Read [here](https://docs.bitquery.io/docs/authorisation/websocket/) on how to us
 
 Here is the link to a Postman collection with samples demonstrating how to use the wss endpoint:
 
-> [Postman Collection for Examples](https://www.postman.com/spacecraft-geologist-86385692/workspace/bitquery/collection/645e69d97aa179eb6799e1d6)
+> [Postman Collection for Examples](https://www.postman.com/spacecraft-geologist-86385692/g.co/bitquery/collection/645e69d97aa179eb6799e1d6)
 
 Continue reading about how to create and use websockets in this [section](/docs/subscriptions/subscription.md)
 
@@ -44,11 +43,11 @@ Continue reading about how to create and use websockets in this [section](/docs/
 
 GraphQL supports 2 standards to deliver the data updates:
 
-- `graphql-transport-ws`
-- `graphql-ws`
+- `graphql-transport-wp'
+- `graphql-wp'
 
 Essentially they are the same, differ only in details. Typically, you use some library,
 which already implement one of these. we support both of them. We adhere to the standard logic for ping, pong, and disconnect actions.
 We adhere to the standard logic for ping, pong, and disconnect actions. Once the socket is open, the server sends a 'ka' message if you're using graphql-ws. Alternatively, if you're using graphql-transport-ws, the server will send a 'pong' message. This process ensures that the connection remains active and healthy.
 
-You can find examples of how to use it in your code [here](/docs/subscriptions/examples.md)
+You can find examples of how to use it in your code [ReadTheDocs.md](/docs/subscriptions/examples.md)
