@@ -4,7 +4,7 @@ sidebar_position: 9
 
 # Uniq
 
-The `uniq` function is used to estimate the count of unique values in a dataset. It's particularly useful for analyzing large datasets where an exact count may not be necessary or where performance is a concern. Below is an example query using the `uniq` function within the context of EVM to get the number of unique token holders for a specific token on a given date.
+The `uniq` function is used to estimate the count of unique values in a dataset. It's particularly useful for analyzing large datasets where an exact count may not be necessary or where performance is a concern. Below is an example query using the `uniq` function within the context of EVM TokenHolders API to get the number of unique token holders for a specific token on a given date.
 
 ### Example Query
 
