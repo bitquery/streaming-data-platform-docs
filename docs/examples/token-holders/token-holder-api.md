@@ -28,6 +28,30 @@ In this example, we will obtain the token holder count for the [USDT token](http
 }
 ```
 
+# Token holders of a token
+
+You can use following [query](https://ide.bitquery.io/token-holder-api_1) to get all token holders of a given token on a given date. You can change `limit` to get more or less token holders.
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    TokenHolders(
+      date: "2024-03-01"
+      tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
+      limit: {count: 100}
+      orderBy: {descending: Balance_Amount}
+    ) {
+      Holder {
+        Address
+      }
+      Balance {
+        Amount
+      }
+    }
+  }
+}
+```
+
 ## Token Balance of an address on particular date
 
 You can find out how many tokens a specific token holder had on a specific date. To do this, simply update the `date` value with the date you're interested in. Run [this query](https://ide.bitquery.io/balance-of-token-holder-for-a-token-on-particular-date-using-token-holders-api) in the IDE to view the result.
