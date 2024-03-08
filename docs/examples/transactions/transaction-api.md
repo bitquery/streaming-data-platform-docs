@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Transaction API
+# Token Transaction API
 
 The Transaction API provides access to transaction data on the blockchain. Transactions are the fundamental unit of account on a blockchain and represent the transfer of value from one address to another.
 
@@ -15,9 +15,11 @@ You can find the query [here](https://graphql.bitquery.io/ide/Last-transactions-
 
 ```graphql
 query {
-  EVM(dataset: realtime network: bsc) {
-    Transactions(limit: {count: 100}
-    orderBy: [{descending: Block_Number} {descending: Transaction_Index}]) {
+  EVM(dataset: realtime, network: bsc) {
+    Transactions(
+      limit: { count: 100 }
+      orderBy: [{ descending: Block_Number }, { descending: Transaction_Index }]
+    ) {
       Block {
         Time
         Number
@@ -31,19 +33,47 @@ query {
 }
 ```
 
-
 **Parameters:**
 
--   `dataset`: The data source to be used by the query (in this case, "realtime")
--   `network`: The blockchain network to be queried (in this case, "bsc")
--   `limit`: Limits the number of returned results to 100.
--   `orderBy`: Sorts the results by two fields, in descending order: `Block_Number` and `Transaction_Index`.
+- `dataset`: The data source to be used by the query (in this case, "realtime")
+- `network`: The blockchain network to be queried (in this case, "bsc")
+- `limit`: Limits the number of returned results to 100.
+- `orderBy`: Sorts the results by two fields, in descending order: `Block_Number` and `Transaction_Index`.
 
 **Results:**
 
--   `Block`: The block information of each transaction, including the block number and timestamp.
--   `Transaction`: The transaction hash and cost (gas used multiplied by the gas price
+- `Block`: The block information of each transaction, including the block number and timestamp.
+- `Transaction`: The transaction hash and cost (gas used multiplied by the gas price)
 
+## Latest Transactions From or To an Address
+
+This query retrieves 100 recent transactions where the specified address is either the sender (`From`) or the receiver (`To`). It is achieved by using the `any` filter which serves as the OR condition. It can help monitor incoming and outgoing transactions of a particular address.
+
+You can run the query [here](https://ide.bitquery.io/Latest-Transactions-fromto-address)
+
+```
+{
+  EVM(dataset: archive, network: eth) {
+    Transactions(
+      limit: {count: 100}
+      where: {any: [{Transaction: {From: {is: "0x21a31ee1afc51d94c2efccaa2092ad1028285549"}}}, {Transaction: {To: {is: "0x21a31ee1afc51d94c2efccaa2092ad1028285549"}}}]}
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+        Cost
+        To
+        From
+      }
+    }
+  }
+}
+
+
+```
 
 ## Get Transaction Details using Hash
 
