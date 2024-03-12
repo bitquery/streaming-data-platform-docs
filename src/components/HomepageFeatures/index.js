@@ -47,6 +47,15 @@ Capture all broadcasted transactions to obtain real-time data for easy transacti
 </>
     ),
   },
+  {
+    title: 'DeFi APIs',
+    // Svg: require('@site/static/img/BitqueryBW.svg').default,
+    description: (
+      <>
+Explore DEX trades, LPs, DAOs, lending, and borrowing info across different networks.
+</>
+    ),
+  },
 ];
 
 function Feature({Svg, title, description}) {
