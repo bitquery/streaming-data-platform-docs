@@ -1,4 +1,6 @@
-
+---
+title: "EVM Balance API"
+---
 
 BalanceUpdates API provides details related to balance. For example, it can provide current and historical balances. As the name suggests, this api can provide historical balance updates to build a portfolio-like application.
 
