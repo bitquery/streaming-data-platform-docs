@@ -57,6 +57,6 @@ For more detailed information about subscriptions and best practices, please ref
 
 ## How do you check points for your account?
 
-You can check points consumed under your [account](https://account.bitquery.io/user/statistics).
+You can check points consumed under your [account](https://account.bitquery.io/user/billing).
 
 ![points_in_account](/img/ide/points_in_account.png)

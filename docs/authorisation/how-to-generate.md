@@ -9,7 +9,7 @@ In this section, we will see how OAuth is used to generate a token.
 The first step is to create an application:
 
 
-1.  **Create an Application**: Navigate to the [Applications](https://account.bitquery.io/user/applications) page and click `Create application`. Enter a name for your application and select an expiration time for the access tokens. Click `Create`.
+1.  **Create an Application**: Navigate to the [Applications](https://account.bitquery.io/user/api_v2/applications) page and click `Create application`. Enter a name for your application and select an expiration time for the access tokens. Click `Create`.
 
 ![Page](/img/v2Access/tab.png)
 
@@ -22,7 +22,7 @@ The first step is to create an application:
 
 ## Generating a Token with Set Expiration Time
 
-1.  Go to the [API- Key](https://account.bitquery.io/user/api_key) page and select the application for which you want to generate an access token.
+1.  Go to the [Access Token](https://account.bitquery.io/user/api_v2/access_tokens) page and select the application for which you want to generate an access token.
 
     ![generate](/img/v2Access/generate.png)
 
