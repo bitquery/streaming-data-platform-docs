@@ -28,6 +28,8 @@ When creating queries for GraphQL subscriptions, here are some tips to consider:
 
 In addition, optimizing your queries can significantly enhance the performance of your subscriptions. For more insights on how to optimize your websocket queries, go [here](/docs/graphql/optimizing-graphql-queries.md).
 
+Subscriptions are also priced using our point-based system. Read about it [here](/docs/ide/points.md)
+
 ## Creating Multiple Subscriptions in one Websocket
 
 It is possible—and often more efficient—to manage multiple subscriptions over a single WebSocket connection. This approach allows you to bundle various subscriptions, such as DEX Trades, Transactions, Blocks, and Transfers, into a single Websocket stream. However, it's important to note that your top-level element must be only one.

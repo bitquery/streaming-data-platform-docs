@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-#  Use Metrics
+#  Using Metrics
 
 Use metrics if you want to:
 
