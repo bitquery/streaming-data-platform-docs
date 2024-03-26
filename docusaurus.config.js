@@ -232,7 +232,7 @@ const config = {
           },
           {
             to: "/blog/",
-            label: "New Releases",
+            label: "What's New? 🔥",
             position: "left",
           },
         ],
