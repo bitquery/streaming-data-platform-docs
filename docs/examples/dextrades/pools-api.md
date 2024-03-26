@@ -84,8 +84,6 @@ You can find the query [here](https://ide.bitquery.io/Latest-pools-created-Unisw
 
 Based on the arguments used we can query the latest pools using [this query below](https://graphql.bitquery.io/ide/Latest-Pair-Created-by-timeStamp-after) in the https://graphql.bitquery.io endpoint.
 
-
-
 ## Trending Pools
 
 The query results will provide a list of the top 10 trending liquidity pools based on the number of unique buyers for the specified date. Each entry in the list includes the count of buyers and sellers, along with detailed information about the trading pair and the smart contract address.
@@ -237,6 +235,38 @@ query MyQuery {
 }
 
 ```
+
+## Get Liquidity of Multiple Pools
+
+The query fetches the balance updates for specified liquidity pool addresses on the BSC network. It returns the currency name, the sum of positive balance updates (which can be interpreted as the liquidity), and the address of each pool. It can be adapted for other EVM compatible networks by changing the network parameter.
+
+You can find the query [here](https://ide.bitquery.io/multiple-pool-liquidity)
+
+```
+query MyQuery {
+  EVM(dataset: archive, network: bsc) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {in: ["0xD51a44d3FaE010294C616388b506AcdA1bfAAE46","0x60594a405d53811d3bc4766596efd80fd545a270","0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640"]}}}
+      orderBy: {descendingByField: "balance"}
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      BalanceUpdate {
+        Address
+      }
+    }
+  }
+}
+
+```
+
+**Returned Data**
+
+- **Currency.Name**: The name of the currency in each liquidity pool.
+- **balance**: Represents the total liquidity in the pool, calculated as the sum of all positive balance updates.
+- **BalanceUpdate.Address**: The address of the liquidity pool.
 
 ## Initial Liquidity, Current Liquidity and Trade Volume for a given pair
 
