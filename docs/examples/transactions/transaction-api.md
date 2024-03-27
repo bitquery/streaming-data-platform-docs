@@ -101,3 +101,22 @@ query MyQuery {
 }
 
 ```
+
+## Next available nonce
+
+The following query helps you determine the next available nonce for an Ethereum account by getting the latest transaction in the mempool (broadcasted transactions). The returned nonce is the highest nonce used by the account in the mempool. To get the next available nonce for a new transaction, you should increment this value by 1.
+You can find the query [here](https://ide.bitquery.io/get-next-available-nonce)
+
+```
+query MyQuery {
+  EVM(mempool: true, network: eth) {
+    Transactions(limit: {count: 1}, orderBy: {descending: Block_Time}) {
+      Transaction {
+        Nonce
+      }
+    }
+  }
+}
+
+
+```
