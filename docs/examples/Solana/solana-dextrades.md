@@ -1,10 +1,12 @@
 ---
-sidebar_position: 7
+sidebar_position: 2
 ---
 
 # Solana Dex Trades
 
-In this section we will see how to get Solana Decentralized Exchange (DEX) trades using our API. This feature is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+In this section we will see how to get Solana DEX trades information using our API. 
+
+This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 ## Subscribe to Latest Solana Trades
 
