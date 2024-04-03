@@ -24,3 +24,5 @@ Top level element of the query has 3 attributes, defining what is the source for
 [subscription](/docs/subscriptions/subscription.md) has a different set of top level elements. 
 For example, the dataset for subscription is always real time and not controlled.
 :::
+
+
