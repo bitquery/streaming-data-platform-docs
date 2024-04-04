@@ -26,6 +26,29 @@ For instance, if you include additional addresses, the points will be calculated
 
 ## How are points calculated for the realtime dataset?
 
+When you select `dataset:realtime` you are charged at 5 points per cube irrespective of the number of records you query.
+
+Here's how it works:
+
+- **Rate**: Each cube is charged at the rate of 5 points per cube. If multiple cubes are used within a single query, each is billed individually.
+
+### Example
+
+```
+{
+  EVM(network: eth, dataset: realtime) {
+    Transactions {
+      Block {
+        Hash
+      }
+    }
+  }
+}
+
+```
+
+In the example above, querying the `Transactions` data cube within the Ethereum (`eth`) network consumes 5 points. The complexity of the query or the volume of data requested does not affect the points charged. 
+
 ## How are points calculated for subscriptions?
 
 Points are calculated based on a simple formula that takes into account the number of subscriptions you have and the time for which they are active. Here's how it works:
@@ -56,8 +79,6 @@ For instance:
 - **Multiple Subscriptions**: If you use both `Transfers` and `DEXTrades` in the same WebSocket, it counts as two subscriptions. Keeping these active for 10 minutes would result in 800 points being charged (2 subscriptions _ 10 minutes _ 40 points per minute).
 
 For more detailed information about subscriptions and best practices, please refer to the [documentation on subscriptions](/docs/subscriptions/subscription.md).
-
-
 
 ## How do you check points for your account?
 
