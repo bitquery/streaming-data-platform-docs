@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 ---
-# Solana Balance Updates
+# Solana Balance Updates API
 
 In thise section we will see how to monitor real-time balance changes across the Solana blockchain
 

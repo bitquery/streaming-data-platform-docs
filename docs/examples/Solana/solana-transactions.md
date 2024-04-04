@@ -1,8 +1,12 @@
-# Solana Transactions
+# Solana Transactions API
 
+In this section we'll have a look at some examples using the Solana Transactions API.
+This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 # Subscribe to Recent Transactions
 
+The subscription query below fetches the most recent transactions on the Solana blockchain
 You can find the query [here](https://ide.bitquery.io/Realtime-Solana-Transactions)
 
 ```

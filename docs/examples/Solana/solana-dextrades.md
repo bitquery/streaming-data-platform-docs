@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Solana DEX Trades
+# Solana DEX Trades API
 
 In this section we will see how to get Solana DEX trades information using our API. 
 
