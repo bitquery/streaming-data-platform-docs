@@ -24,6 +24,8 @@ The number of points can vary for various reasons. Even the same query can produ
 
 For instance, if you include additional addresses, the points will be calculated considering the resources occupied by those addresses. To optimize this query, there are a few approaches you can consider. Firstly, narrowing down the date range can help to refine the results. Secondly, reducing the list of addresses may also be beneficial. However, the effectiveness of these strategies will depend on your specific goal.
 
+## How are points calculated for the realtime dataset?
+
 ## How are points calculated for subscriptions?
 
 Points are calculated based on a simple formula that takes into account the number of subscriptions you have and the time for which they are active. Here's how it works:
@@ -54,6 +56,8 @@ For instance:
 - **Multiple Subscriptions**: If you use both `Transfers` and `DEXTrades` in the same WebSocket, it counts as two subscriptions. Keeping these active for 10 minutes would result in 800 points being charged (2 subscriptions _ 10 minutes _ 40 points per minute).
 
 For more detailed information about subscriptions and best practices, please refer to the [documentation on subscriptions](/docs/subscriptions/subscription.md).
+
+
 
 ## How do you check points for your account?
 
