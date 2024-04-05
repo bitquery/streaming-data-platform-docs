@@ -11,7 +11,7 @@ This Solana API is part of our Early Access Program (EAP), which is intended for
 ## Subscribe to Latest Solana Trades
 
 This subscription will return information about the most recent trades executed on Solana's DEX platforms. 
-You can find the query [here](https://ide.bitquery.io/Get-Latest-Solana-DEX-Trades)
+You can find the query [here](https://ide.bitquery.io/Get-Latest-Solana-DEX-Trades-in-Realtime)
 
 ```
 subscription {
@@ -28,7 +28,7 @@ subscription {
           Account {
             Address
           }
-          Asset {
+          Currency {
             MetadataAddress
             Key
             IsMutable
