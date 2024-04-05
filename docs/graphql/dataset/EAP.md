@@ -6,11 +6,7 @@ The Early Access Program (EAP) is a feature designed to provide users with acces
 
 ## How to Access EAP
 
-Accessing the EAP is straightforward and involves a simple selection process within the Bitquery IDE interface. Follow these steps to get started:
-
-1.  Navigate to [Bitquery IDE](https://ide.bitquery.io/).
-2.  Locate the endpoint dropdown menu at the top of the page next to the buttons "Prettify" and "Fork".
-3.  From the dropdown options, select **EAP**.
+Accessing the EAP is straightforward and involves a simple selection process within the Bitquery IDE interface. Navigate to [Bitquery IDE]([https://ide.bitquery.io/](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/eap)) to get started.
 
 ![](/img/ide/eap.png)
 
