@@ -26,11 +26,25 @@ subscription {
         }
         Side {
           Amount
+          Type
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          ProgramAddress
+        }
+      }
+      Transaction {
+        Index
+        Result {
+          Success
+          ErrorMessage
         }
       }
     }
   }
 }
+
 
 
 ```
