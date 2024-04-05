@@ -4,6 +4,13 @@ sidebar_position: 5
 
 # Token Trades API
 
+We have two main APIs to get DEX trading data.
+
+- DEXTrades
+- DEXTradeByTokens
+
+To learn the difference between two APIs, please check [this doc](https://docs.bitquery.io/docs/evm/dextrades/).
+
 ## Historical Token Trades & Price API
 
 DEXTrades API can give you historical trades. Let's see an example where we get trades of [BLUR Token](https://explorer.bitquery.io/ethereum/token/0x5283d291dbcf85356a21ba090e6db59121208b44) in the past. As you can see, we are using Block -> Time filter, which includes the time. If you want to filter by date, then use Block -> Date. You can also use Block -> Number if you want to filter based on block height. We are setting the `seller` and `buyer` to 1inch router [0x1111111254eeb25477b68fb85ed929f73a960582] to get both buys and sells of the BLUR token. 
@@ -363,7 +370,7 @@ In this query we have set trade currency pair to `0xfb6115445bff7b52feb98650c87f
     buyside: DEXTradeByTokens(
       limit: {count: 30}
       orderBy: {descending: Block_Time}
-      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xfb6115445bff7b52feb98650c87f44907e58f802"}}, Amount: {ge: "0"}, Type: {is: buy}}, Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}}, Block: {Date: {since: "2023-07-01", till: "2023-08-01"}}}
+      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}, Amount: {ge: "0"}, Type: {is: buy}}, Currency: {SmartContract: {is: "0xfb6115445bff7b52feb98650c87f44907e58f802"}}}, Block: {Date: {since: "2023-07-01", till: "2023-08-01"}}}
     ) {
       Block {
         Time(interval: {in: days, count: 1})
