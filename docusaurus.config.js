@@ -141,17 +141,17 @@ const config = {
             from: "/docs/start/authorisation/how-to-generate",
           },
           {
-            to:"/docs/subscriptions/subscription",
-            from:"/docs/graphql/subscription/"
+            to: "/docs/subscriptions/subscription",
+            from: "/docs/graphql/subscription/",
           },
           {
-            to:"/docs/start/first-query/",
-            from:"/docs/ide/login/"
+            to: "/docs/start/first-query/",
+            from: "/docs/ide/login/",
           },
           {
-            to:"/docs/subscriptions/websockets/",
-            from:"/docs/start/websocket/"
-          }
+            to: "/docs/subscriptions/websockets/",
+            from: "/docs/start/websocket/",
+          },
         ],
       },
     ],
@@ -299,6 +299,13 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+  // scripts: [
+  //   {
+  //     src: "https://s3-us-west-2.amazonaws.com/b2bjsstore/b/YE63P0H58WOW/reb2b.js.gz",
+  //     async: true,
+  //   },
+  // ],
+  clientModules: [require.resolve("./reb2bScript.js")],
 };
 
 module.exports = config;
