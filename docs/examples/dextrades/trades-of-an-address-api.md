@@ -79,92 +79,79 @@ For each trade, the query retrieves the following data:
 
 ## Token trades for an specific address for a specific currency
 
-You can view the query in the IDE [here](https://graphql.bitquery.io/ide/Trades-for-a-given-address-for-an-specific-currency)
+You can view the query in the IDE [here](https://ide.bitquery.io/Trades-of-an-address-for-a-currency_1)
 
 ```
 {
-  EVM(dataset: combined, network: eth) {
-    buyside: DEXTrades(
-      limit: {count: 10}
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Buyer: {is: "0x1f77dfeb0e6fed1ecf0b41d4c81330df6a6fb167"}, Currency: {SmartContract: {is: "0x497a9a79e82e6fc0ff10a16f6f75e6fcd5ae65a8"}}}}}
+  EVM(network: eth, dataset: archive) {
+    DEXTradeByTokens(
+      where: {
+        
+        Trade: {
+          Currency: {
+          	SmartContract: {
+              is: "0xcdf7028ceab81fa0c6971208e83fa7872994bee5"
+            }
+          }
+        }
+        
+        any: [
+      		{
+            Transaction: {
+              From: {
+                is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"
+              }
+            }
+          }
+          {
+            Trade: {
+              Buyer: {
+                is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"
+              }
+            }
+          }
+          {
+            Trade: {
+              Seller: {
+                is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"
+              }
+            }
+          }
+        ]}
+    limit: {count: 10}
     ) {
-      Block {
-        Number
-        Time
-      }
       Transaction {
         From
-        To
         Hash
       }
       Trade {
-        Buy {
-          Amount
-          Buyer
-          Currency {
-            Name
-            Symbol
-            SmartContract
-          }
-          Seller
-          Price
+        Amount
+        Buyer
+        Currency {
+          Name
+          Symbol
+          SmartContract
         }
-        Sell {
-          Amount
-          Buyer
-          Currency {
-            Name
-            SmartContract
-            Symbol
-          }
-          Seller
-          Price
+        Seller
+        Price
+        Dex {
+          ProtocolName
+          ProtocolVersion
+          ProtocolFamily
+          OwnerAddress
         }
-      }
-    }
-    sellside: DEXTrades(
-      limit: {count: 10}
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Seller: {is: "0x1f77dfeb0e6fed1ecf0b41d4c81330df6a6fb167"}, Currency: {SmartContract: {is: "0x497a9a79e82e6fc0ff10a16f6f75e6fcd5ae65a8"}}}}}
-    ) {
-      Block {
-        Number
-        Time
-      }
-      Transaction {
-        From
-        To
-        Hash
-      }
-      Trade {
-        Buy {
-          Amount
-          Buyer
+        Side {
           Currency {
-            Name
-            Symbol
-            SmartContract
-          }
-          Seller
-          Price
-        }
-        Sell {
-          Amount
-          Buyer
-          Currency {
-            Name
             SmartContract
             Symbol
+            Name
           }
-          Seller
-          Price
+          Buyer
         }
       }
     }
   }
 }
-
 
 ```
 
