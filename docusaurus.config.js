@@ -152,6 +152,11 @@ const config = {
             to: "/docs/subscriptions/websockets/",
             from: "/docs/start/websocket/",
           },
+
+          {
+            to:'/docs/authorisation/how-to-generate',
+            from:'/docs/start/authorisation/simple/'
+          }
         ],
       },
     ],
