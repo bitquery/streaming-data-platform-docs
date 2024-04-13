@@ -1,3 +1,7 @@
+---
+sidebar_position: 6
+---
+
 # Solana Transactions API
 
 In this section we'll have a look at some examples using the Solana Transactions API.

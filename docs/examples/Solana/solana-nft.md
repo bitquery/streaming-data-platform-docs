@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # Solana NFT API
 
 In this section we'll have a look at some examples using the Solana NFT API.
