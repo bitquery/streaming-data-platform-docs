@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Solana Instructions API
 
 This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.

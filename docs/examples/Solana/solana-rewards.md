@@ -1,3 +1,7 @@
+---
+sidebar_position: 5
+---
+
 # Solana Rewards API
 
 Solana rewards are incentives given to investors and validators for staking their SOL tokens to secure the network.This section covers how to access information about the latest Solana rewards among other examples.
