@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Matic Balance Updates API
+# Polygon (MATIC) Balance Updates API
 
 In thise section we will see how to monitor real-time balance changes across the Matic blockchain
 

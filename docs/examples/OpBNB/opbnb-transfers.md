@@ -6,8 +6,7 @@ This program allows you to test the data and its integration into your applicati
 
 # Subscribe to Recent Whale Transactions of a particular currency
 
-The subscription query below fetches the whale transactions on the OpBNB network. We have used USDT address `0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f3`
-You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDT-on-opBNB_2)
+The subscription query below fetches the whale transactions on the OpBNB network. We have used USDT address `0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f3`. You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDT-on-opBNB_2)
 
 ```
 subscription{

@@ -6,8 +6,7 @@ This program allows you to test the data and its integration into your applicati
 
 # Subscribe to Recent Whale Transactions of a particular currency
 
-The subscription query below fetches the whale transactions on the MATIC network. We have used USDC address `0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359`
-You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDC-on-matic)
+The subscription query below fetches the whale transactions on the MATIC network. We have used USDC address `0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359`. You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDC-on-matic)
 
 ```
 subscription{
