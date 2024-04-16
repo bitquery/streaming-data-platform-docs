@@ -2,8 +2,6 @@
 sidebar_position: 7
 ---
 
-# Raydium API
-
 ## New Liquidity Pools Created on Solana Raydium DEX (Using Websocket)
 
 
