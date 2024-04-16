@@ -1,4 +1,4 @@
-# Base NFT API
+# Base Chain NFT API
 
 In this section we'll have a look at some examples using the Base NFT API.
 This Base API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
