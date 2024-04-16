@@ -1,12 +1,54 @@
 # Optimism NFT API
 
-In this section we'll have a look at some examples using the Optimism NFT API.
-This Optimism API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+In this section we'll have a look at some examples using the Optimism NFT data API.
 
-## Track all transfers of an NFT
+Optimism APIs is part of our Early Access Program (EAP), which is intended for evaluation purposes.
 
-This query subscribes you to the real time transfers of a specific non-fungible token (NFT) on the Optimism network.
+EAP allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
+
+## Track all transfers of an NFT on Optimism
+
+To monitor all NFT transfers on the Optimism blockchain, you can use the following GraphQL subscription (WebSocket).
+
+You can find the query [here](https://ide.bitquery.io/Transfers-of-a-particular-NFT#)
+
+```
+subscription {
+  EVM(network: optimism) {
+    Transfers(
+      where: {
+        Transfer: {
+          Currency: {
+            Fungible: false
+          }
+        }
+      }
+    ) {
+      Block {
+        Hash
+        Number
+      }
+      Transfer {
+        Amount
+        Currency {
+          Name
+          Symbol
+          Native
+        }
+        Sender
+        Receiver
+      }
+    }
+  }
+}
+
+```
+
+## Track all transfers of an NFT on Optimism
+
+This query subscribes you to the real time transfers of a specific non-fungible token (NFT) on the Optimism blockchain.
+
 You can find the query [here](https://ide.bitquery.io/Transfers-of-a-particular-NFT#)
 
 ```
