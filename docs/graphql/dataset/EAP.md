@@ -11,4 +11,4 @@ Accessing the EAP is straightforward and involves a simple selection process wit
 ![](/img/ide/eap.png)
 
 
-You can find examples on [Solana DEX Trades](/docs/examples/Solana/solana-dextrades.md) and Matic in our examples section.
+You can find examples on [Solana DEX Trades](/docs/examples/Solana/solana-dextrades.mdx) and Matic in our examples section.
