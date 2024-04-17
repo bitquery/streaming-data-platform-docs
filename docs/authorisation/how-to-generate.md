@@ -18,7 +18,8 @@ The first step is to create an application:
 - You can generate a token for your application with a set expiration time.
 - Or you can use your client ID-secret from your application to make a POST request to https://oauth2.bitquery.io/oauth2/token and get a token programmatically.
 
-> **If you have no applications created, the `Bearer` token changes every 12 hours.**
+
+> **If you have no applications created, the `Bearer` token changes every 12 hours. If the token is invalid, you get "Unauthorized"  message.**
 
 ## Generating a Token with Set Expiration Time
 
