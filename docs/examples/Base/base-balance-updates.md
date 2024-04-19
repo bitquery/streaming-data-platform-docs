@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Base Balance Updates API
+# Base Chain Balance API
 
 In thise section we will see how to monitor real-time balance changes across the Base blockchain
 

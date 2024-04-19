@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Base DEX Trades API
+# Base Chain DEX Trades API
 
 In this section we will see how to get Base DEX trades information using our API.
 

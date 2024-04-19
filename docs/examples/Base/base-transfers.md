@@ -1,4 +1,4 @@
-# Base Transfers API
+# Base Chain Token Transfers API
 
 In this section we'll have a look at some examples using the Base Transfers API.
 This Base API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
