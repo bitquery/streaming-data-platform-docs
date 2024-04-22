@@ -2,12 +2,11 @@
 sidebar_position: 2
 ---
 
-If you were using Optimism RPC till now to get data, forget about it. 
+# Optimism DEX Trades API
+
+If you were using Optimism RPC till now to get data, forget about it.
 
 Our Optimism real time streams are perfect alternative for Optimism web3 subscribe.
-
-
-# Optimism DEX Trades API
 
 In this section we will see how to get Optimism DEX trades information using our GraphQL APIs.
 
