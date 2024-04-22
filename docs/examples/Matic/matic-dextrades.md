@@ -105,3 +105,54 @@ subscription {
 
 
 ```
+
+## Latest USD Price of a Token
+
+The below query retrieves the USD price of a token on Matic by setting `SmartContract: {is: "0xe06bd4f5aac8d0aa337d13ec88db6defc6eaeefe"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Latest-USD-Price-of-a-Token-on-Matic).
+
+```
+subscription {
+  EVM(network: matic) {
+    DEXTrades(
+      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0xe06bd4f5aac8d0aa337d13ec88db6defc6eaeefe"}}}}}
+    ) {
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        From
+        To
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          Buyer
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          Seller
+          Price
+          PriceInUSD
+        }
+        Sell {
+          Amount
+          Buyer
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+          Seller
+          Price
+        }
+        PriceAsymmetry(selectWhere: {lt: 1})
+      }
+    }
+  }
+}
+
+```
