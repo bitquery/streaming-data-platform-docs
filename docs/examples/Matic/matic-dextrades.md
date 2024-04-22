@@ -2,6 +2,33 @@
 sidebar_position: 2
 ---
 
+<head>
+<meta name="title" content="How to Get Polygon (MATIC) Decentralized Exchange Data with DEX Trades API"/>
+<meta name="description" content="Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API."/>
+<meta name="keywords" content="Polygon (MATIC) DEX Trades api,Polygon (MATIC) DEX Trades python api,Polygon (MATIC) DEX Trades token api,Polygon (MATIC) Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,Polygon (MATIC) network api, Polygon (MATIC) web3 api"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="How to Get Polygon (MATIC) Decentralized Exchange Data with DEX Trades API"
+/>
+<meta
+  property="og:description"
+  content="Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API."
+/>
+
+<!-- Twitter -->
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="How to Get Polygon (MATIC) Decentralized Exchange Data with DEX Trades API" />
+<meta property="twitter:description" content="Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API." />
+</head>
+
 # Polygon (MATIC) DEX Trades API
 
 In this section we will see how to get Matic DEX trades information using our API.

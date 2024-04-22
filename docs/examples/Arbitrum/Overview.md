@@ -11,6 +11,7 @@ The Arbitrum Explorer [explorer](https://explorer.bitquery.io/arbitrum) is a vis
 ![chains](/img/ide/arbitrum.png)
 
 This is the basic structure of a query:
+
 ```
 query {
  EVM(network: arbitrum){

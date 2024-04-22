@@ -2,40 +2,74 @@
 sidebar_position: 7
 ---
 
+<head>
+<meta name="title" content="Solana Raydium API"/>
+<meta name="description" content="Get on-chain data of Solana based DEX Raydium using Bitquery's Solana API."/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="Solana Raydium API"
+/>
+<meta
+  property="og:description"
+  content="Get on-chain data of Solana based DEX Raydium using Bitquery's Solana API."
+/>
+
+<!-- Twitter -->
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="" />
+<meta property="twitter:description" content="Get on-chain data of Solana based DEX Raydium using Bitquery's Solana API." />
+</head>
+
 # Solana Raydium API
 
 ## New Liquidity Pools Created on Solana Raydium DEX (Using Websocket)
 
-
 You can subscribe to newly created Solana Raydium liquidity pools using the GraphQL subscription (WebSocket).
 You can try this GraphQL subscription [using this link](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_1).
 
-In the results, you can get pool and token details using instructions. 
+In the results, you can get pool and token details using instructions.
 
 ### Pool Address
 
 You can find the pool address using the following result: Note that the array index starts from 0. Therefore, it will be the 5th entry.
 
-Instructions -> Instruction -> Accounts[4] -> Address 
+Instructions -> Instruction -> Accounts[4] -> Address
 
 ### Token A
+
 You can get the 1st token address using the following result: Note that the array index starts from 0. Therefore, it will be the 9th entry.
 
 Instructions -> Instruction -> Accounts[8] -> Address
 
 ### Token B
+
 You can get the 2nd token address using the following result.
 
 Instructions -> Instruction -> Accounts[9] ->. Address
 
-
-You can run the following query at [Bitquery IDE](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_1). 
+You can run the following query at [Bitquery IDE](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_1).
 
 ```graphql
 subscription {
   Solana {
     Instructions(
-      where: {Transaction: {Result: {Success: true}}, Instruction: {Program: {Method: {is: "initializeUserWithNonce"}, Address: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
+      where: {
+        Transaction: { Result: { Success: true } }
+        Instruction: {
+          Program: {
+            Method: { is: "initializeUserWithNonce" }
+            Address: { is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8" }
+          }
+        }
+      }
     ) {
       Block {
         Time
@@ -106,7 +140,6 @@ subscription {
 }
 ```
 
-
 ## Latest Trades on Solana Raydium DEX
 
 To subscribe to the real-time trades stream for Solana Raydium DEX, [try this GraphQL subscription (WebSocket)](https://ide.bitquery.io/Updated-Real-time-trades-on-Raydium-DEX-on-Solana_1).
@@ -115,7 +148,15 @@ To subscribe to the real-time trades stream for Solana Raydium DEX, [try this Gr
 subscription {
   Solana {
     DEXTrades(
-      where: {Trade: {Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
+      where: {
+        Trade: {
+          Dex: {
+            ProgramAddress: {
+              is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
+            }
+          }
+        }
+      }
     ) {
       Trade {
         Dex {
@@ -178,7 +219,22 @@ Run this query [using this link](https://ide.bitquery.io/Updated-Real-time-buy-a
 subscription {
   Solana {
     Buyside: DEXTrades(
-      where: {Trade: {Buy: {Currency: {MintAddress: {is: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              MintAddress: {
+                is: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"
+              }
+            }
+          }
+          Dex: {
+            ProgramAddress: {
+              is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
+            }
+          }
+        }
+      }
     ) {
       Trade {
         Dex {
@@ -224,8 +280,23 @@ subscription {
       }
     }
     Sellside: DEXTrades(
-      limit: {count: 10}
-      where: {Trade: {Sell: {Currency: {MintAddress: {is: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
+      limit: { count: 10 }
+      where: {
+        Trade: {
+          Sell: {
+            Currency: {
+              MintAddress: {
+                is: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"
+              }
+            }
+          }
+          Dex: {
+            ProgramAddress: {
+              is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
+            }
+          }
+        }
+      }
     ) {
       Trade {
         Dex {

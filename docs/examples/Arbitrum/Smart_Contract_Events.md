@@ -2,6 +2,32 @@
 sidebar_position: 4
 ---
 
+<head>
+<meta name="title" content="Arbitrum Smart Contract Events & logs API"/>
+
+<meta name="description" content="Get Arbitrum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events."/>
+
+<meta name="keywords" content="Arbitrum, Smart contract events, USDT contract, Arbitrum event monitoring, Event signature, event timestamp, event tracking, Contract signature, Arbitrum event"/>
+
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+
+<meta property="og:title" content="Arbitrum Smart Contract Events & logs API" />
+
+<meta property="og:description" content="Get Arbitrum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events."/>
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+
+<meta property="twitter:title" content="Arbitrum Smart Contract Events & logs API" />
+
+<meta property="twitter:description" content="Get Arbitrum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events." />
+</head>
+
 # Arbitrum Smart Contract Events
 
 ## Tracking Swap Events on Arbitrum

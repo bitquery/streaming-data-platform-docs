@@ -2,10 +2,36 @@
 sidebar_position: 2
 ---
 
-If you were using Optimism RPC till now to get data, forget about it. 
+<head>
+<meta name="title" content="How to Get Optimism Decentralized Exchange Data with Optimism DEX Trades API"/>
+<meta name="description" content="Get on-chain data of any Optimism based DEX through our DEX Trades API."/>
+<meta name="keywords" content="Optimism DEX Trades api,Optimism DEX Trades python api,Optimism DEX Trades token api,Optimism Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,Optimism network api, Optimism web3 api"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="How to Get Optimism Decentralized Exchange Data with Optimism DEX Trades API"
+/>
+<meta
+  property="og:description"
+  content="Get on-chain data of any Optimism based DEX through our DEX Trades API."
+/>
+
+<!-- Twitter -->
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="How to Get Optimism Decentralized Exchange Data with Optimism DEX Trades API" />
+<meta property="twitter:description" content="Get on-chain data of any Optimism based DEX through our DEX Trades API." />
+</head>
+
+If you were using Optimism RPC till now to get data, forget about it.
 
 Our Optimism real time streams are perfect alternative for Optimism web3 subscribe.
-
 
 # Optimism DEX Trades API
 

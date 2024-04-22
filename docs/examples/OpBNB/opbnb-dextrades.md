@@ -2,6 +2,33 @@
 sidebar_position: 2
 ---
 
+<head>
+<meta name="title" content="How to Get OpBNB Decentralized Exchange Data with DEX Trades API"/>
+<meta name="description" content="Get on-chain data of any OpBNB based DEX through our DEX Trades API."/>
+<meta name="keywords" content="OpBNB DEX Trades api,OpBNB DEX Trades python api,OpBNB DEX Trades token api,OpBNB Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,OpBNB network api, OpBNB web3 api"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="How to Get OpBNB Decentralized Exchange Data with DEX Trades API"
+/>
+<meta
+  property="og:description"
+  content="Get on-chain data of any OpBNB based DEX through our DEX Trades API."
+/>
+
+<!-- Twitter -->
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="How to Get OpBNB Decentralized Exchange Data with DEX Trades API" />
+<meta property="twitter:description" content="Get on-chain data of any OpBNB based DEX through our DEX Trades API." />
+</head>
+
 # OpBNB DEX Trades API
 
 In this section we will see how to get OpBNB DEX trades information using our API.
