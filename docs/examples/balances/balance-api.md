@@ -24,9 +24,6 @@ query MyQuery {
         Name
       }
       balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
-      BalanceUpdate {
-        Address
-      }
     }
   }
 }
