@@ -2,6 +2,8 @@
 sidebar_position: 2
 ---
 
+# Optimism DEX Trades API
+
 <head>
 <meta name="title" content="How to Get Optimism Decentralized Exchange Data with Optimism DEX Trades API"/>
 <meta name="description" content="Get on-chain data of any Optimism based DEX through our DEX Trades API."/>
@@ -33,7 +35,7 @@ If you were using Optimism RPC till now to get data, forget about it.
 
 Our Optimism real time streams are perfect alternative for Optimism web3 subscribe.
 
-# Optimism DEX Trades API
+
 
 In this section we will see how to get Optimism DEX trades information using our GraphQL APIs.
 
