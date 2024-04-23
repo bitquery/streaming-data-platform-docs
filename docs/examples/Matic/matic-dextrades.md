@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+# Polygon (MATIC) DEX Trades API
 
 <head>
 <meta name="title" content="How to Get Polygon (MATIC) Decentralized Exchange Data with DEX Trades API"/>
@@ -29,7 +30,7 @@ sidebar_position: 2
 <meta property="twitter:description" content="Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API." />
 </head>
 
-# Polygon (MATIC) DEX Trades API
+
 
 In this section we will see how to get Matic DEX trades information using our API.
 

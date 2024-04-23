@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 ---
+# Polygon (MATIC) Balance Updates API
 
 <head>
 <meta name="title" content="How to get Polygon (MATIC) Balance Updates of an address"/>
@@ -29,7 +30,7 @@ sidebar_position: 1
 <meta property="twitter:description" content="Learn how to get real time balance & balance updates of a Polygon (MATIC) address using Bitquery's Balance Updates API." />
 </head>
 
-# Polygon (MATIC) Balance Updates API
+
 
 In thise section we will see how to monitor real-time balance changes across the Polygon (MATIC) blockchain
 

@@ -1,3 +1,5 @@
+# Polygon (MATIC) Transfers API
+
 <head>
 <meta name="title" content="Polygon (MATIC) Transfers API"/>
 <meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
@@ -25,7 +27,7 @@
 <meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
 </head>
 
-# Polygon (MATIC) Transfers API
+
 
 In this section we'll have a look at some examples using the Matic Transfers API.
 This Matic API is part of our Early Access Program (EAP), which is intended for evaluation purposes.

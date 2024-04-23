@@ -1,3 +1,5 @@
+# Polygon (MATIC) NFT API
+
 <head>
 <meta name="title" content="Polygon (MATIC) NFT API - The Ultimate Solution to get your NFT data"/>
 <meta name="description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades."/>
@@ -25,7 +27,7 @@
 <meta property="twitter:description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades." />
 </head>
 
-# Polygon (MATIC) NFT API
+
 
 In this section we'll have a look at some examples using the Matic NFT API.
 This Matic API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
