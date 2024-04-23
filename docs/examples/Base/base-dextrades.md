@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+# Base Chain DEX Trades API
 
 <head>
 <meta name="title" content="How to Get Base Decentralized Exchange Data with Base DEX Trades API"/>
@@ -29,7 +30,7 @@ sidebar_position: 2
 <meta property="twitter:description" content="Get on-chain data of any Base based DEX through our DEX Trades API." />
 </head>
 
-# Base Chain DEX Trades API
+
 
 In this section we will see how to get Base DEX trades information using our API.
 

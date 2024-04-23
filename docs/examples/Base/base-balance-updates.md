@@ -2,6 +2,8 @@
 sidebar_position: 1
 ---
 
+# Base Chain Balance API
+
 <head>
 <meta name="title" content="How to get Base Balance Updates of an address"/>
 <meta name="description" content="Learn how to get real time balance & balance updates of a Base address using Bitquery's Base Balance Updates API."/>
@@ -29,7 +31,7 @@ sidebar_position: 1
 <meta property="twitter:description" content="Learn how to get real time balance & balance updates of a Base address using Bitquery's Base Balance Updates API." />
 </head>
 
-# Base Chain Balance API
+
 
 In thise section we will see how to monitor real-time balance changes across the Base blockchain
 

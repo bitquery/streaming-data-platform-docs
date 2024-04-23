@@ -1,3 +1,5 @@
+# Base Chain Token Transfers API
+
 <head>
 <meta name="title" content="Base Transfers API"/>
 <meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
@@ -25,7 +27,7 @@
 <meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
 </head>
 
-# Base Chain Token Transfers API
+
 
 In this section we'll have a look at some examples using the Base Transfers API.
 This Base API is part of our Early Access Program (EAP), which is intended for evaluation purposes.

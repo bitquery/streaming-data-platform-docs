@@ -2,6 +2,8 @@
 sidebar_position: 1
 ---
 
+# OpBNB Balance Updates API
+
 <head>
 <meta name="title" content="How to get OpBNB Balance Updates of an address"/>
 <meta name="description" content="Learn how to get real time balance & balance updates of a OpBNB address using Bitquery's OpBNB Balance Updates API."/>
@@ -29,7 +31,7 @@ sidebar_position: 1
 <meta property="twitter:description" content="Learn how to get real time balance & balance updates of a OpBNB address using Bitquery's OpBNB Balance Updates API." />
 </head>
 
-# OpBNB Balance Updates API
+
 
 In thise section we will see how to monitor real-time balance changes across the OpBNB network.
 

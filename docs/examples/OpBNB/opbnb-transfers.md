@@ -1,3 +1,5 @@
+# OpBNB Transfers API
+
 <head>
 <meta name="title" content="OpBNB Transfers API"/>
 <meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
@@ -25,7 +27,7 @@
 <meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
 </head>
 
-# OpBNB Transfers API
+
 
 In this section we'll have a look at some examples using the OpBNB Transfers API.
 This OpBNB API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
