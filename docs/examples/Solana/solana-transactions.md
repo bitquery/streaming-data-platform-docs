@@ -1,6 +1,7 @@
 ---
 sidebar_position: 6
 ---
+# Solana Transactions API
 
 <head>
 <meta name="title" content="How to get all Transaction details on Solana using Solana Transactions API"/>
@@ -21,7 +22,7 @@ sidebar_position: 6
 <meta property="twitter:description" content="The Solana transactions API allows you to query for transactions on the Solana blockchain. You can use this API to get information about specific transactions, such as the signature, block, transaction fee, success, fee payer, inner instructions count, instructions count, signer, and transaction index." />
 </head>
 
-# Solana Transactions API
+
 
 In this section we'll have a look at some examples using the Solana Transactions API.
 This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.

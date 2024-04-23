@@ -2,6 +2,8 @@
 sidebar_position: 7
 ---
 
+# Solana Raydium API
+
 <head>
 <meta name="title" content="Solana Raydium API"/>
 <meta name="description" content="Get on-chain data of Solana based DEX Raydium using Bitquery's Solana API."/>
@@ -28,7 +30,6 @@ sidebar_position: 7
 <meta property="twitter:description" content="Get on-chain data of Solana based DEX Raydium using Bitquery's Solana API." />
 </head>
 
-# Solana Raydium API
 
 
 In this section, we will see how to get Raydium information using Bitquery APIs. This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)

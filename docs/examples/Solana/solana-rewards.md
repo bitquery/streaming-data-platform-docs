@@ -1,6 +1,7 @@
 ---
 sidebar_position: 5
 ---
+# Solana Rewards API
 
 <head>
 <meta name="title" content="How to track Solana Staking Rewards using Solana Rewards API"/>
@@ -29,7 +30,7 @@ sidebar_position: 5
 <meta property="twitter:description" content="Easy-to-use API to track Solana Rewards of an Address using Bitquery's Solana Rewards API." />
 </head>
 
-# Solana Rewards API
+
 
 Solana rewards are incentives given to investors and validators for staking their SOL tokens to secure the network.This section covers how to access information about the latest Solana rewards among other examples.
 

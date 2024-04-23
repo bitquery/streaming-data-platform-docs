@@ -1,6 +1,7 @@
 ---
 sidebar_position: 4
 ---
+# Solana NFT API
 
 <head>
 <meta name="title" content="Solana NFT API - The Ultimate Solution to get your NFT data"/>
@@ -29,7 +30,7 @@ sidebar_position: 4
 <meta property="twitter:description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades." />
 </head>
 
-# Solana NFT API
+
 
 In this section we'll have a look at some examples using the Solana NFT API.
 This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
