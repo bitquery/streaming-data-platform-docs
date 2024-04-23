@@ -2,6 +2,8 @@
 sidebar_position: 2
 ---
 
+# Arbitrum DEX Trades Examples
+
 <head>
 <meta name="title" content="How to Get Arbitrum Decentralized Exchange Data with Arbitrum DEX Trades API"/>
 <meta name="description" content="Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API."/>
@@ -28,8 +30,6 @@ sidebar_position: 2
 <meta property="twitter:title" content="How to Get Arbitrum Decentralized Exchange Data with Arbitrum DEX Trades API" />
 <meta property="twitter:description" content="Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API." />
 </head>
-
-# Arbitrum DEX Trades Examples
 
 ## Latest Trades for a Token Pair on Arbitrum
 

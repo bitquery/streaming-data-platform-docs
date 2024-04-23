@@ -2,6 +2,8 @@
 sidebar_position: 6
 ---
 
+# Arbitrum Blocks and Transactions Examples
+
 <head>
 <meta name="title" content="How to get all Transaction details on Arbitrum using Arbitrum Transactions API"/>
 <meta name="description" content="The Arbitrum transactions API allows you to query for transactions on the Arbitrum blockchain. You can use this API to get information about specific transactions, such as the signature, block, transaction fee, success, fee payer, inner instructions count, instructions count, signer, and transaction index."/>
@@ -20,8 +22,6 @@ sidebar_position: 6
 <meta property="twitter:title" content="How to get all Transaction details on Arbitrum using Arbitrum Transactions API" />
 <meta property="twitter:description" content="The Arbitrum transactions API allows you to query for transactions on the Arbitrum blockchain. You can use this API to get information about specific transactions, such as the signature, block, transaction fee, success, fee payer, inner instructions count, instructions count, signer, and transaction index." />
 </head>
-
-# Arbitrum Blocks and Transactions Examples
 
 ## Latest Blocks
 
