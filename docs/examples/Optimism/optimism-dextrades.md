@@ -35,8 +35,6 @@ If you were using Optimism RPC till now to get data, forget about it.
 
 Our Optimism real time streams are perfect alternative for Optimism web3 subscribe.
 
-
-
 In this section we will see how to get Optimism DEX trades information using our GraphQL APIs.
 
 This Optimism API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
@@ -120,5 +118,55 @@ subscription {
     }
   }
 }
+
+```
+
+## Latest USD Price of a Token
+
+The below query retrieves the USD price of a token on Optimism by setting `SmartContract: {is: "0x68f180fcCe6836688e9084f035309E29Bf0A2095"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-latest-price-of-WBTC-in-USD-on-optimism#).
+
+```
+subscription {
+  EVM(network: optimism) {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: "0x68f180fcCe6836688e9084f035309E29Bf0A2095"}}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Trade {
+        Buyer
+        AmountInUSD
+        Amount
+        Price
+        PriceInUSD
+        Seller
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        Dex {
+          ProtocolFamily
+          SmartContract
+          ProtocolName
+        }
+        Side {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+        }
+      }
+    }
+  }
+}
+
+
 
 ```

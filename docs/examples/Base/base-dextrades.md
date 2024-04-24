@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+
 # Base Chain DEX Trades API
 
 <head>
@@ -29,8 +30,6 @@ sidebar_position: 2
 <meta property="twitter:title" content="How to Get Base Decentralized Exchange Data with Base DEX Trades API" />
 <meta property="twitter:description" content="Get on-chain data of any Base based DEX through our DEX Trades API." />
 </head>
-
-
 
 In this section we will see how to get Base DEX trades information using our API.
 
@@ -124,6 +123,55 @@ subscription {
   }
 }
 
+
+
+```
+
+## Latest USD Price of a Token
+
+The below query retrieves the USD price of a token on Base chain by setting `SmartContract: {is: "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-latest-price-of-DAI-in-USD-on-Base#).
+
+```
+subscription {
+  EVM(network: base) {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb"}}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Trade {
+        Buyer
+        AmountInUSD
+        Amount
+        Price
+        PriceInUSD
+        Seller
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        Dex {
+          ProtocolFamily
+          SmartContract
+          ProtocolName
+        }
+        Side {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+        }
+      }
+    }
+  }
+}
 
 
 ```

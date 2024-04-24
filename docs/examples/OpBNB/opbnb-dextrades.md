@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+
 # OpBNB DEX Trades API
 
 <head>
@@ -29,8 +30,6 @@ sidebar_position: 2
 <meta property="twitter:title" content="How to Get OpBNB Decentralized Exchange Data with DEX Trades API" />
 <meta property="twitter:description" content="Get on-chain data of any OpBNB based DEX through our DEX Trades API." />
 </head>
-
-
 
 In this section we will see how to get OpBNB DEX trades information using our API.
 
@@ -121,6 +120,55 @@ subscription {
   }
 }
 
+
+
+```
+
+## Latest USD Price of a Token
+
+The below query retrieves the USD price of a token on OpBNB by setting `SmartContract: {is: "0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f3"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Latest-price-of-a-USDT-in-USD-on-opBNB#).
+
+```
+subscription {
+  EVM(network: opbnb) {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: "0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f3"}}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Trade {
+        Buyer
+        AmountInUSD
+        Amount
+        Price
+        PriceInUSD
+        Seller
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        Dex {
+          ProtocolFamily
+          SmartContract
+          ProtocolName
+        }
+        Side {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+        }
+      }
+    }
+  }
+}
 
 
 ```

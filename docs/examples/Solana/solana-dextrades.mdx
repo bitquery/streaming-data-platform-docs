@@ -242,6 +242,53 @@ subscription {
 
 ```
 
+## Latest USD Price of a Token
+
+The below query retrieves the USD price of a token on Solana by setting `SmartContract: {is: "So11111111111111111111111111111111111111112"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-Latest-Price-of-SOL-in--USD-Real-time#).
+
+```
+subscription {
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}
+    ) {
+      Transaction {
+        Signature
+      }
+      Trade {
+        AmountInUSD
+        Amount
+        Currency {
+          MintAddress
+          Name
+        }
+        Dex {
+          ProgramAddress
+          ProtocolName
+        }
+        Price
+        PriceInUSD
+        Side {
+          Account {
+            Address
+          }
+          AmountInUSD
+          Amount
+          Currency {
+            Name
+            MintAddress
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+```
+
 ## Video Tutorial on Solana
 
 <VideoPlayer url="https://www.youtube.com/watch?v=PVHB9Z8v-Cc" />
