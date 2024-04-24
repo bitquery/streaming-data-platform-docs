@@ -2,6 +2,8 @@
 sidebar_position: 3
 ---
 
+# Arbitrum Smart Contract Calls
+
 <head>
 <meta name="title" content="Arbitrum Smart Contract Calls API"/>
 
@@ -27,8 +29,6 @@ sidebar_position: 3
 
 <meta property="twitter:description" content="Explore Arbitrum smart contract call data. Analyze smart contract calls with detailed information." />
 </head>
-
-# Arbitrum Smart Contract Calls
 
 ## Transaction Call Trace for a Arbitrum Transaction
 

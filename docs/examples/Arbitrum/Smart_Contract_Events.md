@@ -2,6 +2,8 @@
 sidebar_position: 4
 ---
 
+# Arbitrum Smart Contract Events
+
 <head>
 <meta name="title" content="Arbitrum Smart Contract Events & logs API"/>
 
@@ -27,8 +29,6 @@ sidebar_position: 4
 
 <meta property="twitter:description" content="Get Arbitrum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events." />
 </head>
-
-# Arbitrum Smart Contract Events
 
 ## Tracking Swap Events on Arbitrum
 

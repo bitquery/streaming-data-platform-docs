@@ -2,6 +2,8 @@
 sidebar_position: 5
 ---
 
+# Balances and Balance Update Examples
+
 <head>
 <meta name="title" content="How to get Arbitrum Balance Updates of an address"/>
 <meta name="description" content="Learn how to get real time balance & balance updates of a Arbitrum address using Bitquery's Arbitrum Balance Updates API."/>
@@ -28,8 +30,6 @@ sidebar_position: 5
 <meta property="twitter:title" content="How to get Arbitrum Balance Updates of an address" />
 <meta property="twitter:description" content="Learn how to get real time balance & balance updates of a Arbitrum address using Bitquery's Arbitrum Balance Updates API." />
 </head>
-
-# Balances and Balance Update Examples
 
 ## Latest Balance of an Address on Arbitrum
 
