@@ -5,8 +5,8 @@ sidebar_position: 7
 # Solana Raydium API
 
 <head>
-<meta name="title" content="Solana Raydium API"/>
-<meta name="description" content="Get on-chain data of Solana based DEX Raydium using Bitquery's Solana API."/>
+<meta name="title" content="Solana Raydium API  | Get Latest Liquidity Pools and Trades"/>
+<meta name="description" content="Get on-chain data of latest liquidity pools created and latest trades on Solana based DEX Raydium using Bitquery's Solana API."/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
@@ -16,21 +16,19 @@ sidebar_position: 7
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Solana Raydium API"
+  content="Solana Raydium API  | Get Latest Liquidity Pools and Trades"
 />
 <meta
   property="og:description"
-  content="Get on-chain data of Solana based DEX Raydium using Bitquery's Solana API."
+  content="Get on-chain data of latest liquidity pools created and latest trades on Solana based DEX Raydium using Bitquery's Solana API."
 />
 
 <!-- Twitter -->
 
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="" />
-<meta property="twitter:description" content="Get on-chain data of Solana based DEX Raydium using Bitquery's Solana API." />
+<meta property="twitter:title" content="Solana Raydium API  | Get Latest Liquidity Pools and Trades" />
+<meta property="twitter:description" content="Get on-chain data of latest liquidity pools created and latest trades on Solana based DEX Raydium using Bitquery's Solana API." />
 </head>
-
-
 
 In this section, we will see how to get Raydium information using Bitquery APIs. This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 

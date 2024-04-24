@@ -1,11 +1,12 @@
 ---
 sidebar_position: 4
 ---
+
 # Solana NFT API
 
 <head>
-<meta name="title" content="Solana NFT API - The Ultimate Solution to get your NFT data"/>
-<meta name="description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades."/>
+<meta name="title" content="Solana NFT API | Get NFT metadata, trades, pricing history"/>
+<meta name="description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, NFT metadata and NFT trades."/>
 <meta name="keywords" content="Solana NFT API, NFT trades API, NFT balance api, NFT pricing history api, nft python api, nft api, rarible api, opensea api, nft api docs, nft crypto api, nft blockchain api,solana network api, solana web3 api"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -16,7 +17,7 @@ sidebar_position: 4
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Solana NFT API - The Ultimate Solution to get your NFT data"
+  content="Solana NFT API | Get NFT metadata, trades, pricing history"
 />
 <meta
   property="og:description"
@@ -26,11 +27,9 @@ sidebar_position: 4
 <!-- Twitter -->
 
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana NFT API - The Ultimate Solution to get your NFT data"/>
+<meta property="twitter:title" content="Solana NFT API | Get NFT metadata, trades, pricing history"/>
 <meta property="twitter:description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades." />
 </head>
-
-
 
 In this section we'll have a look at some examples using the Solana NFT API.
 This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.

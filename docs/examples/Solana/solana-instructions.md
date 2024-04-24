@@ -3,8 +3,8 @@ sidebar_position: 3
 ---
 
 <head>
-<meta name="title" content="Solana Instructions API"/>
-<meta name="description" content="Get data on instructions executed on the Solana blockchain including details like indices of preceding instructions signer, signature, balance updates, and program details etc."/>
+<meta name="title" content="Solana Instructions API | Get decoded Instructions data"/>
+<meta name="description" content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc."/>
 <meta name="keywords" content="instructions api, instructions python api, instructions scan api, instructions api docs, DEX Trades crypto api, instructions blockchain api,solana network api"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -15,18 +15,18 @@ sidebar_position: 3
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Solana Instructions API"
+  content="Solana Instructions API | Get decoded Instructions data"
 />
 <meta
   property="og:description"
-  content="Get data on instructions executed on the Solana blockchain including details like indices of preceding instructions signer, signature, balance updates, and program details etc."
+  content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc."
 />
 
 <!-- Twitter -->
 
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana Instructions API" />
-<meta property="twitter:description" content="Get data on instructions executed on the Solana blockchain including details like indices of preceding instructions signer, signature, balance updates, and program details etc." />
+<meta property="twitter:title" content="Solana Instructions API | Get decoded Instructions data" />
+<meta property="twitter:description" content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc." />
 </head>
 
 # Solana Instructions API
