@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+
 # Polygon (MATIC) DEX Trades API
 
 <head>
@@ -30,8 +31,6 @@ sidebar_position: 2
 <meta property="twitter:description" content="Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API." />
 </head>
 
-
-
 In this section we will see how to get Matic DEX trades information using our API.
 
 This Matic API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
@@ -39,7 +38,7 @@ This Matic API is part of our Early Access Program (EAP), which is intended for 
 ## Subscribe to Latest Matic Trades
 
 This subscription will return information about the most recent trades executed on Matic's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/Latest-trades-on-matic_4)
+You can find the query [here](https://ide.bitquery.io/Realtime-matic-dex-trades-websocket)
 
 ```
 subscription {
@@ -72,6 +71,15 @@ subscription {
         Sell {
           Buyer
           Seller
+          Currency {
+            Decimals
+            Fungible
+            HasURI
+            Name
+            ProtocolName
+            SmartContract
+            Symbol
+          }
         }
       }
     }

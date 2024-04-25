@@ -38,12 +38,12 @@ This OpBNB API is part of our Early Access Program (EAP), which is intended for 
 ## Subscribe to Latest OpBNB Trades
 
 This subscription will return information about the most recent trades executed on OpBNB's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/Latest-trades-on-opBNB_2)
+You can find the query [here](https://ide.bitquery.io/Realtime-opbnb-dex-trades-websocket)
 
 ```
 subscription {
   EVM(network: opbnb) {
-    DEXTrades{
+    DEXTrades {
       Block {
         Time
       }
@@ -71,6 +71,15 @@ subscription {
         Sell {
           Buyer
           Seller
+          Currency {
+            Decimals
+            Fungible
+            HasURI
+            Name
+            ProtocolName
+            SmartContract
+            Symbol
+          }
         }
       }
     }

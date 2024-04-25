@@ -38,7 +38,7 @@ This Base API is part of our Early Access Program (EAP), which is intended for e
 ## Subscribe to Latest Base Trades
 
 This subscription will return information about the most recent trades executed on Base's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/Latest-trades-on-base#)
+You can find the query [here](https://ide.bitquery.io/Realtime-base-dex-trades-websocket)
 
 ```
 subscription {
@@ -71,6 +71,15 @@ subscription {
         Sell {
           Buyer
           Seller
+          Currency {
+            Decimals
+            Fungible
+            HasURI
+            Name
+            ProtocolName
+            SmartContract
+            Symbol
+          }
         }
       }
     }

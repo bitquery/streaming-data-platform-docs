@@ -27,53 +27,13 @@
 <meta property="twitter:description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades." />
 </head>
 
-
-
 In this section we'll have a look at some examples using the Optimism NFT data API.
 
 Optimism APIs is part of our Early Access Program (EAP), which is intended for evaluation purposes.
 
 EAP allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
-## Track all transfers of an NFT on Optimism
-
-To monitor all NFT transfers on the Optimism blockchain, you can use the following GraphQL subscription (WebSocket).
-
-You can find the query [here](https://ide.bitquery.io/Transfers-of-a-particular-NFT#)
-
-```
-subscription {
-  EVM(network: optimism) {
-    Transfers(
-      where: {
-        Transfer: {
-          Currency: {
-            Fungible: false
-          }
-        }
-      }
-    ) {
-      Block {
-        Hash
-        Number
-      }
-      Transfer {
-        Amount
-        Currency {
-          Name
-          Symbol
-          Native
-        }
-        Sender
-        Receiver
-      }
-    }
-  }
-}
-
-```
-
-## Track all transfers of an NFT on Optimism
+## Track transfers of an NFT in Realtime on Optimism
 
 This query subscribes you to the real time transfers of a specific non-fungible token (NFT) on the Optimism blockchain.
 
