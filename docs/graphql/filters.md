@@ -89,6 +89,39 @@ filters are combined by **AND** principles, result set is an intersection of all
 `where` attribute
 :::
 
+## Dynamic Where Filter
+
+You can pass the WHERE clause as a parameter to set dynamic conditions for filtering the response. In the below example, we are passing the WHERE clause as a parameter, where we use 'currency' as a filter.
+
+```
+query ($where: EVM_DEXTradeByToken_Filter) {
+  EVM(dataset: archive) {
+    DEXTradeByTokens(
+      limit: {count: 10}
+      where: $where
+      orderBy: {descending: Block_Date}
+    ) {
+      Block {
+        Date
+      }
+      sum(of: Trade_PriceInUSD)
+    }
+  }
+}
+<!-- Parameters -->
+{
+  "where": {
+    "Trade": {
+      "Currency": {
+        "Symbol": {
+          "is": "PEPE"
+        }
+      }
+    }
+  }
+}
+```
+
 ## Filter Types
 
 Depending on the data type of the element used in `where` filter, different operators can be applied.
