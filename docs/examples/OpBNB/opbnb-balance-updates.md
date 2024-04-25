@@ -4,6 +4,12 @@ sidebar_position: 1
 
 # OpBNB Balance Updates API
 
+In thise section we will see how to monitor real-time balance changes across the OpBNB network.
+
+This OpBNB API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="How to get OpBNB Balance Updates of an address"/>
 <meta name="description" content="Learn how to get real time balance & balance updates of a OpBNB address using Bitquery's OpBNB Balance Updates API."/>
@@ -30,12 +36,6 @@ sidebar_position: 1
 <meta property="twitter:title" content="How to get OpBNB Balance Updates of an address" />
 <meta property="twitter:description" content="Learn how to get real time balance & balance updates of a OpBNB address using Bitquery's OpBNB Balance Updates API." />
 </head>
-
-
-
-In thise section we will see how to monitor real-time balance changes across the OpBNB network.
-
-This OpBNB API is part of our Early Access Program (EAP), which is intended for evaluation purposes.This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 ## Get Balance Updates of a Particular Address
 

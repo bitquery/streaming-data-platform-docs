@@ -4,6 +4,10 @@ sidebar_position: 3
 
 # Solana Instructions API
 
+This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="Solana Instructions API | Get decoded Instructions data"/>
 <meta name="description" content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc."/>
@@ -30,11 +34,6 @@ sidebar_position: 3
 <meta property="twitter:title" content="Solana Instructions API | Get decoded Instructions data" />
 <meta property="twitter:description" content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc." />
 </head>
-
-
-
-This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 ## Latest Solana Instructions
 

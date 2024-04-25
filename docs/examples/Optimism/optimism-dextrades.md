@@ -4,7 +4,6 @@ sidebar_position: 2
 
 # Optimism DEX Trades API
 
-
 If you were using Optimism RPC till now to get data, forget about it.
 
 Our Optimism real time streams are perfect alternative for Optimism web3 subscribe.
@@ -39,8 +38,6 @@ This Optimism API is part of our Early Access Program (EAP), which is intended f
 <meta property="twitter:title" content="How to Get Optimism Decentralized Exchange Data with Optimism DEX Trades API" />
 <meta property="twitter:description" content="Get on-chain data of any Optimism based DEX through our DEX Trades API." />
 </head>
-
-
 
 ## Subscribe to Latest Optimism Trades
 

@@ -1,7 +1,14 @@
 ---
 sidebar_position: 1
 ---
+
 # Polygon (MATIC) Balance Updates API
+
+In thise section we will see how to monitor real-time balance changes across the Polygon (MATIC) blockchain
+
+This Polygon (MATIC) API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 <head>
 <meta name="title" content="How to get Polygon (MATIC) Balance Updates of an address"/>
@@ -29,12 +36,6 @@ sidebar_position: 1
 <meta property="twitter:title" content="How to get Polygon (MATIC) Balance Updates of an address" />
 <meta property="twitter:description" content="Learn how to get real time balance & balance updates of a Polygon (MATIC) address using Bitquery's Balance Updates API." />
 </head>
-
-
-
-In thise section we will see how to monitor real-time balance changes across the Polygon (MATIC) blockchain
-
-This Polygon (MATIC) API is part of our Early Access Program (EAP), which is intended for evaluation purposes.This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 ## Subscribe to Balance Updates of a Particular Wallet
 

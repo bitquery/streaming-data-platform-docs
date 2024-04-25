@@ -4,6 +4,12 @@ sidebar_position: 7
 
 # Solana Raydium API
 
+In this section, we will see how to get Raydium information using Bitquery APIs.
+
+This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="Solana Raydium API  | Get Latest Liquidity Pools and Trades"/>
 <meta name="description" content="Get on-chain data of latest liquidity pools created and latest trades on Solana based DEX Raydium using Bitquery's Solana API."/>
@@ -29,8 +35,6 @@ sidebar_position: 7
 <meta property="twitter:title" content="Solana Raydium API  | Get Latest Liquidity Pools and Trades" />
 <meta property="twitter:description" content="Get on-chain data of latest liquidity pools created and latest trades on Solana based DEX Raydium using Bitquery's Solana API." />
 </head>
-
-In this section, we will see how to get Raydium information using Bitquery APIs. This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 ## New Liquidity Pools Created on Solana Raydium DEX (Using Websocket)
 

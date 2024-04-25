@@ -4,6 +4,12 @@ sidebar_position: 4
 
 # Solana NFT API
 
+In this section we'll have a look at some examples using the Solana NFT API.
+
+This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="Solana NFT API | Get NFT metadata, trades, pricing history"/>
 <meta name="description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, NFT metadata and NFT trades."/>
@@ -30,10 +36,6 @@ sidebar_position: 4
 <meta property="twitter:title" content="Solana NFT API | Get NFT metadata, trades, pricing history"/>
 <meta property="twitter:description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades." />
 </head>
-
-In this section we'll have a look at some examples using the Solana NFT API.
-This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 ## Track Latest NFT Trades
 

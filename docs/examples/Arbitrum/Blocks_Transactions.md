@@ -4,6 +4,12 @@ sidebar_position: 6
 
 # Arbitrum Blocks and Transactions Examples
 
+In this section we'll have a look at some examples using the Arbitrum Transactions API.
+
+This Arbitrum API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="How to get all Transaction details on Arbitrum using Arbitrum Transactions API"/>
 <meta name="description" content="The Arbitrum transactions API allows you to query for transactions on the Arbitrum blockchain. You can use this API to get information about specific transactions, such as the signature, block, transaction fee, success, fee payer, inner instructions count, instructions count, signer, and transaction index."/>

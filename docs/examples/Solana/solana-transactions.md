@@ -4,6 +4,12 @@ sidebar_position: 6
 
 # Solana Transactions API
 
+In this section we'll have a look at some examples using the Solana Transactions API.
+
+This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="Solana Transactions API | Get all Transaction details"/>
 <meta name="description" content="Get information about specific transactions such as signature, block, transaction fee, success, fee payer, instructions count, signer, and transaction index."/>
@@ -22,10 +28,6 @@ sidebar_position: 6
 <meta property="twitter:title" content="Solana Transactions API | Get all Transaction details" />
 <meta property="twitter:description" content="Get information about specific transactions such as signature, block, transaction fee, success, fee payer, instructions count, signer, and transaction index." />
 </head>
-
-In this section we'll have a look at some examples using the Solana Transactions API.
-This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 # Subscribe to Recent Transactions
 
