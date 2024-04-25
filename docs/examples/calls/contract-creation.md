@@ -106,3 +106,29 @@ You can find the query [here](https://ide.bitquery.io/ByteCode-of-A-Token)
 }
 
 ```
+
+
+## Creator/Deployer of a smart contract 
+
+You can use calls api to get smart contract creator or deployer of a smart contract. In the following example, where we getting deployer of deployer of `0xcd80c916b1194beb48abf007d0b79a7238436d56`.
+
+Try this query [here](https://ide.bitquery.io/creator--deployer-of-an-address_1).
+
+```
+{
+  EVM(dataset: combined) {
+    Calls(
+      where: {Call: {Create: true}, Receipt: {ContractAddress: {is: "0xcd80c916b1194beb48abf007d0b79a7238436d56"}}}
+    ) {
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Block {
+        Time
+        Number
+      }
+    }
+  }
+}
