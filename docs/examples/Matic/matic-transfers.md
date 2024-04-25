@@ -27,9 +27,7 @@
 <meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
 </head>
 
-
-
-In this section we'll have a look at some examples using the Matic Transfers API.
+In this section we'll have a look at some examples using the Polygon (MATIC) Transfers API.
 This Matic API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
 This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
@@ -59,6 +57,74 @@ subscription{
           Native
         }
         Id
+      }
+    }
+  }
+}
+
+
+```
+
+# Sender is a particular address
+
+This websocket retrieves transfers where the sender is a particular address `0x1A8f43e01B78979EB4Ef7feBEC60F32c9A72f58E`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {is: "0x1A8f43e01B78979EB4Ef7feBEC60F32c9A72f58E"}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/Sender-is-a-particular-address_2)
+
+```
+subscription {
+  EVM(network: matic) {
+    Transfers(
+      where: {Transfer: {Sender: {is: "0x1A8f43e01B78979EB4Ef7feBEC60F32c9A72f58E"}}}
+    ) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          SmartContract
+          Native
+          Symbol
+          Fungible
+        }
+        Receiver
+        Sender
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+
+
+
+
+```
+
+# Subscribe to the latest NFT token transfers on Polygon (MATIC)
+
+Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on Polygon (MATIC) network. You can run the query [here](https://ide.bitquery.io/NFT-Token-Transfers-API_3)
+
+```
+subscription {
+  EVM(network: matic) {
+    Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          SmartContract
+          Symbol
+          Fungible
+          HasURI
+          Decimals
+        }
+        URI
+        Sender
+        Receiver
+      }
+      Transaction {
+        Hash
       }
     }
   }

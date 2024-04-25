@@ -35,7 +35,7 @@ This program allows you to test the data and its integration into your applicati
 
 # SPL Token Transfers API
 
-One of the most common types of transfers on Solana are SPL token transfers. Let's see an example to get the latest SPL token transfers using our API. Today we are taking an example of JUPITER token transfers. The contract address for the USDT token is `JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN`. You can find the query [here](https://ide.bitquery.io/SPL-transfers-websocket_1)
+One of the most common types of transfers on Solana are SPL token transfers. Let's see an example to get the latest SPL token transfers using our API. Today we are taking an example of JUPITER token transfers. The contract address for the JUPITER token is `JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN`. You can find the query [here](https://ide.bitquery.io/SPL-transfers-websocket_1)
 
 ```
 subscription {
@@ -64,6 +64,75 @@ subscription {
   }
 }
 
+
+
+```
+
+# Sender is a particular address
+
+This websocket retrieves transfers where the sender is a particular address `2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {Address: {is: "2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc"}}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/transfers-where-sender-is-the-specified-address_1)
+
+```
+subscription {
+  Solana {
+    Transfers(
+      where: {Transfer: {Sender: {Address: {is: "2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc"}}}}
+    ) {
+      Transaction {
+        Signature
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender {
+          Address
+        }
+        Receiver {
+          Address
+        }
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+      }
+    }
+  }
+}
+
+```
+
+# Subscribe to the latest NFT token transfers on Solana
+
+Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to all NFT token transfers. You can run the query [here](https://ide.bitquery.io/Subscribe-to-the-latest-NFT-transfers-on-Solana)
+
+```
+subscription {
+  Solana {
+    Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          MintAddress
+          Fungible
+          Symbol
+          Uri
+        }
+        Receiver {
+          Address
+        }
+        Sender {
+          Address
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
 
 
 ```
