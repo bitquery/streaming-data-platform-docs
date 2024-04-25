@@ -1,5 +1,12 @@
 # Optimism Transfers API
 
+
+In this section we'll have a look at some examples using the Optimism Transfers API.
+
+This Optimism API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="Optimism Transfers API"/>
 <meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
@@ -27,11 +34,7 @@
 <meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
 </head>
 
-In this section we'll have a look at some examples using the Optimism Transfers API.
 
-This Optimism API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 # Subscribe to Recent Whale Transactions of a particular currency
 
