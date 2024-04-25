@@ -4,7 +4,6 @@ sidebar_position: 2
 
 # Optimism DEX Trades API
 
-
 If you were using Optimism RPC till now to get data, forget about it.
 
 Our Optimism real time streams are perfect alternative for Optimism web3 subscribe.
@@ -40,39 +39,52 @@ This Optimism API is part of our Early Access Program (EAP), which is intended f
 <meta property="twitter:description" content="Get on-chain data of any Optimism based DEX through our DEX Trades API." />
 </head>
 
-
-
 ## Subscribe to Latest Optimism Trades
 
 This subscription will return information about the most recent trades executed on Optimism's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/Latest-trades-on-optimism#)
+You can find the query [here](https://ide.bitquery.io/Realtime-optimism-dex-trades-websocket)
 
 ```
 subscription {
   EVM(network: optimism) {
-    Transfers(
-      where: {
-        Transfer: {
-          Currency: {
-            Fungible: false
-            SmartContract: { is: "0x57aDd45EA2818fb327C740d123B366955E27d321" }
+    DEXTrades {
+      Block {
+        Time
+      }
+      Trade {
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          SmartContract
+        }
+        Buy {
+          Amount
+          Buyer
+          Seller
+          Currency {
+            Decimals
+            Fungible
+            HasURI
+            Name
+            ProtocolName
+            SmartContract
+            Symbol
+          }
+          OrderId
+        }
+        Sell {
+          Buyer
+          Seller
+          Currency {
+            Decimals
+            Fungible
+            HasURI
+            Name
+            ProtocolName
+            SmartContract
+            Symbol
           }
         }
-      }
-    ) {
-      Block {
-        Hash
-        Number
-      }
-      Transfer {
-        Amount
-        Currency {
-          Name
-          Symbol
-          Native
-        }
-        Sender
-        Receiver
       }
     }
   }

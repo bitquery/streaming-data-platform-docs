@@ -4,6 +4,12 @@ sidebar_position: 2
 
 # Base Chain DEX Trades API
 
+In this section we will see how to get Base DEX trades information using our API.
+
+This Base API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="How to Get Base Decentralized Exchange Data with Base DEX Trades API"/>
 <meta name="description" content="Get on-chain data of any Base based DEX through our DEX Trades API."/>
@@ -31,14 +37,10 @@ sidebar_position: 2
 <meta property="twitter:description" content="Get on-chain data of any Base based DEX through our DEX Trades API." />
 </head>
 
-In this section we will see how to get Base DEX trades information using our API.
-
-This Base API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
 ## Subscribe to Latest Base Trades
 
 This subscription will return information about the most recent trades executed on Base's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/Latest-trades-on-base#)
+You can find the query [here](https://ide.bitquery.io/Realtime-base-dex-trades-websocket)
 
 ```
 subscription {
@@ -71,6 +73,15 @@ subscription {
         Sell {
           Buyer
           Seller
+          Currency {
+            Decimals
+            Fungible
+            HasURI
+            Name
+            ProtocolName
+            SmartContract
+            Symbol
+          }
         }
       }
     }

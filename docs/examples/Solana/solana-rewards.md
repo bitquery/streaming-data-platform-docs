@@ -4,6 +4,11 @@ sidebar_position: 5
 
 # Solana Rewards API
 
+Solana rewards are incentives given to investors and validators for staking their SOL tokens to secure the network.This section covers how to access information about the latest Solana rewards among other examples.
+
+This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="Solana Rewards API | Track Solana Staking Rewards"/>
 <meta name="description" content="Easy-to-use API to track historical and realtime Solana Rewards of an Address using Bitquery's Solana Rewards API."/>
@@ -30,11 +35,6 @@ sidebar_position: 5
 <meta property="twitter:title" content="Solana Rewards API | Track Solana Staking Rewards" />
 <meta property="twitter:description" content="Easy-to-use API to track historical and realtime Solana Rewards of an Address using Bitquery's Solana Rewards API." />
 </head>
-
-Solana rewards are incentives given to investors and validators for staking their SOL tokens to secure the network.This section covers how to access information about the latest Solana rewards among other examples.
-
-This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 ## Latest Rewards
 

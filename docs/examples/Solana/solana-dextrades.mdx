@@ -4,6 +4,10 @@ sidebar_position: 2
 
 # Solana DEX Trades API
 
+In this section we will see how to get Solana DEX trades information using our API.
+
+This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="Solana DEX Trades API | Get Raydium, Jupiter data"/>
 <meta name="description" content="Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, etc through our DEX Trades API."/>
@@ -33,19 +37,15 @@ sidebar_position: 2
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this section we will see how to get Solana DEX trades information using our API.
-
-This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
 ## Subscribe to Latest Solana Trades
 
 This subscription will return information about the most recent trades executed on Solana's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/Get-Latest-Solana-DEX-Trades-in-Realtime)
+You can find the query [here](https://ide.bitquery.io/Realtime-solana-dex-trades-websocket)
 
 ```
 subscription {
   Solana {
-    DEXTrades(limit: {count: 10}) {
+    DEXTrades {
       Trade {
         Dex {
           ProgramAddress
@@ -81,6 +81,18 @@ subscription {
         Sell {
           Account {
             Address
+          }
+          Currency {
+            MetadataAddress
+            Key
+            IsMutable
+            EditionNonce
+            Decimals
+            CollectionAddress
+            Fungible
+            Symbol
+            Native
+            Name
           }
         }
       }

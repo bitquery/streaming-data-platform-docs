@@ -1,5 +1,11 @@
 # OpBNB NFT API
 
+In this section we'll have a look at some examples using the OpBNB NFT API.
+
+This OpBNB API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
 <head>
 <meta name="title" content="OpBNB NFT API - The Ultimate Solution to get your NFT data"/>
 <meta name="description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades."/>
@@ -27,15 +33,9 @@
 <meta property="twitter:description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades." />
 </head>
 
+## Track transfers of an NFT in Realtime
 
-
-In this section we'll have a look at some examples using the OpBNB NFT API.
-This OpBNB API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
-## Track all transfers of an NFT
-
-This query subscribes you to the real time transfers of a specific non-fungible token (NFT) on the Matic network.
+This query subscribes you to the real time transfers of a specific non-fungible token (NFT) on the OpBNB network.
 You can find the query [here](https://ide.bitquery.io/Real-time-transfer-websocket-for-NFT-token_1)
 
 ```
