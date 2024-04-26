@@ -1,0 +1,239 @@
+# Monitoring the Solana Blockchain in Real Time - Easy Tutorial
+
+Monitoring blockchain activities is crucial for various stakeholders, including developers, investors, and regulatory bodies to ensure compliance, track transactions, and gain insights into market dynamics. This is where blockchain data providers like [Bitquery](https://bitquery.io) come in, offering tools that enable efficient and accurate monitoring of blockchain activities.
+
+In this tutorial, we'll focus on leveraging the [Bitquery Solana APIs](https://bitquery.io/blockchains/solana-blockchain-api) combined with Python to monitor blockchain activities effectively. We'll explore how to access and use these tools to retrieve valuable data from the Solana blockchain.
+
+**The [Bitquery Solana APIs](https://docs.bitquery.io/docs/category/solana/) specifically cater to the Solana blockchain, providing access to a range of data points such as [real-time transactions](https://docs.bitquery.io/docs/examples/Solana/solana-transactions/), [wallet balances,](https://docs.bitquery.io/docs/examples/Solana/solana-balance-updates/) and smart contract interactions**
+
+## Building a Simple Solana DEX Trade Monitoring Dashboard
+
+In this section, we’ll build a real-time Solana dashboard for monitoring Solana General DEX trade and Solana DEX Raydium Trades Data. Here is a step-by-step tutorial with code to build this simple dashboard:
+
+## Prerequisites
+
+To build this project, you will need to make sure you have Python installed and pip configured correctly. After running this command, you should be able to import these libraries into your Python environment without any issues.
+
+```python
+pip install asyncio pandas streamlit gql
+
+```
+
+### Step 1: Importing Necessary Libraries
+
+First, you import all necessary libraries that the script requires. This includes libraries for asynchronous programming (asyncio), data manipulation (pandas), creating the web interface (streamlit), and handling GraphQL queries over WebSockets (gql and related classes).
+
+```python
+import asyncio
+import pandas as pd
+import streamlit as st
+from gql import Client, gql
+from gql.transport.websockets import WebsocketsTransport
+```
+
+### Step 2: Define the Asynchronous Function to Subscribe to the Data
+
+This function run_subscription will handle the setup and management of WebSocket connections to subscribe to real-time data from a GraphQL server.
+
+Here is the code to define the function to run the subscription:
+
+```python
+async def run_subscription():
+    # Setup WebSocket connection
+    transport = WebsocketsTransport(
+        url="wss://streaming.bitquery.io/eap?token=<YOUR TOKEN HERE>",
+        headers={"Sec-WebSocket-Protocol": "graphql-ws"}
+    )
+
+    # Establish the connection
+    await transport.connect()
+    print("Connected to WebSocket")
+```
+
+### Step 3: Handling Data Based on User Input
+
+Use Streamlit to create a sidebar allowing users to select between different datasets ('General' or 'Raydium'). Initialize empty pandas DataFrames to store the data fetched from subscriptions.
+
+Here is the code to handle the data based on the user’s radio button click:
+
+```python
+   try:
+        general_df = pd.DataFrame()
+        raydium_df = pd.DataFrame()
+        page = st.sidebar.radio("Select Page", ["General", "Raydium"])
+```
+
+### Step 4: GraphQL Subscription and Data Processing
+
+Based on your selection, subscribe to the appropriate GraphQL query and continuously update the data in real-time. This involves processing incoming data and updating the Streamlit dashboard accordingly.
+
+We have two subqueries within the `Solana` schema:
+
+- DEXTradeByTokens which gets all trades on Solana
+
+- DEXTrades which filters trades using the Raydium Liquidity Pool AMM address `675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8`
+
+For All Solana DEX Trades:
+
+```python
+ if page == "General":
+            st.subheader("General Table")
+            table = st.table(general_df)
+            while True:
+                async for result in transport.subscribe(
+                    gql("""
+                    subscription {
+                        Solana {
+                            General: DEXTradeByTokens {
+                                Block {
+                                    Time
+                                }
+                                Trade {
+                                    Amount
+                                    Price
+                                    Currency {
+                                        Symbol
+                                        Name
+                                    }
+                                    Side {
+                                        Amount
+                                        Currency {
+                                            Symbol
+                                            Name
+                                            MetadataAddress
+                                        }
+                                    }
+                                    Dex {
+                                        ProgramAddress
+                                        ProtocolFamily
+                                        ProtocolName
+                                    }
+                                    Market {
+                                        MarketAddress
+                                    }
+                                    Order {
+                                        LimitAmount
+                                        LimitPrice
+                                        OrderId
+                                    }
+                                    PriceInUSD
+                                }
+                            }
+                        }
+                    }
+                    """)
+                ):
+                    if result.data:
+                        new_data = pd.json_normalize(result.data['Solana']['General'])
+                        general_df = pd.concat([general_df, new_data], ignore_index=True)
+                        with st.spinner('Updating data...'):
+                            table.table(general_df)
+```
+
+For "Raydium" DEX Trades:
+
+```python
+   elif page == "Raydium":
+            st.subheader("Raydium Table")
+            table = st.table(raydium_df)
+            while True:
+                async for result in transport.subscribe(
+                    gql("""
+                    subscription {
+                        Solana {
+                            Raydium: DEXTrades(
+                                where: {Trade: {Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
+                            ) {
+                                Trade {
+                                    Dex {
+                                        ProgramAddress
+                                        ProtocolName
+                                    }
+                                    Buy {
+                                        Account {
+                                            Address
+                                        }
+                                        Amount
+                                        Currency {
+                                            Symbol
+                                            Name
+                                        }
+                                        PriceAgaistSellCurrency: Price
+                                        PriceInUSD
+                                    }
+                                    Sell {
+                                        Account {
+                                            Address
+                                        }
+                                        Amount
+                                        Currency {
+                                            Symbol
+                                            Name
+                                        }
+                                        PriceAgaistBuyCurrency: Price
+                                        PriceInUSD
+                                    }
+                                }
+                                Block {
+                                    Time
+                                    Height
+                                }
+                                Transaction {
+                                    Signature
+                                }
+                            }
+                        }
+                    }
+                    """)
+                ):
+                    if result.data:
+                        new_data = pd.json_normalize(result.data['Solana']['Raydium'])
+                        raydium_df = pd.concat([raydium_df, new_data], ignore_index=True)
+                        with st.spinner('Updating data...'):
+                            table.table(raydium_df)
+```
+
+### Step 5: Clean up and Close the WebSocket Connection
+
+Always ensure to close the WebSocket connection properly to free up resources.
+
+```python
+  finally:
+        await transport.close()
+
+```
+
+### Step 6: Define the Main Function and Run the App
+
+This code snippet defines the entry point for a Python script that runs a Streamlit application titled "Solana DEX General & Raydium Data Dashboard."
+
+It uses the asyncio.run() function to start an asynchronous operation run_subscription() which manages a WebSocket connection for real-time data streaming when the script is executed directly.
+
+```
+def main():
+    st.title("Solana DEX General & Raydium Data Dashboard")
+    asyncio.run(run_subscription())
+if __name__ == "__main__":
+    main()
+
+```
+
+## The Final Result
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+<VideoPlayer url="https://youtu.be/18xWAzo0p7k" />
+
+### Future Enhancements:
+
+- Add More Metrics: Include additional data such as trading volume, average trade size, and price trends.
+- Improve Real-Time Capabilities: Optimize data processing and update methods to boost dashboard responsiveness.
+- Expand Data Sources: Integrate data from other decentralized exchanges (DEXs) and blockchains for a broader market perspective.
+- Implement Alerts: Develop an alert system for significant trading events like large trades or notable price shifts.
+- Enhance Customization: Provide options for users to tailor the dashboard views to their specific interests and needs.
+
+## Conclusion
+
+We integrated essential libraries like asyncio for handling asynchronous tasks, pandas for data operations, streamlit for dashboard creation, and gql for GraphQL communication.
+
+Then, we implemented a user-friendly interface for the Solana DEX Trades dashboard with Streamlit that allows users to select and view specific datasets (General or Raydium) from Solana's decentralized exchanges.
