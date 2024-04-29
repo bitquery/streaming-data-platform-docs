@@ -33,7 +33,42 @@ This program allows you to test the data and its integration into your applicati
 <meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
 </head>
 
-# SPL Token Transfers API
+# Subscribe to the latest NFT token transfers on Solana
+
+Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to all NFT token transfers. You can run the query [here](https://ide.bitquery.io/Subscribe-to-the-latest-NFT-transfers-on-Solana)
+
+```
+subscription {
+  Solana {
+    Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          MintAddress
+          Fungible
+          Symbol
+          Uri
+        }
+        Receiver {
+          Address
+        }
+        Sender {
+          Address
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+
+
+```
+
+# SPL Token Transfers API | Token transfers of a particular token on Solana
 
 One of the most common types of transfers on Solana are SPL token transfers. Let's see an example to get the latest SPL token transfers using our API. Today we are taking an example of JUPITER token transfers. The contract address for the JUPITER token is `JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN`. You can find the query [here](https://ide.bitquery.io/SPL-transfers-websocket_1)
 
@@ -99,40 +134,5 @@ subscription {
     }
   }
 }
-
-```
-
-# Subscribe to the latest NFT token transfers on Solana
-
-Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to all NFT token transfers. You can run the query [here](https://ide.bitquery.io/Subscribe-to-the-latest-NFT-transfers-on-Solana)
-
-```
-subscription {
-  Solana {
-    Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {
-      Transfer {
-        Amount
-        AmountInUSD
-        Currency {
-          Name
-          MintAddress
-          Fungible
-          Symbol
-          Uri
-        }
-        Receiver {
-          Address
-        }
-        Sender {
-          Address
-        }
-      }
-      Transaction {
-        Signature
-      }
-    }
-  }
-}
-
 
 ```
