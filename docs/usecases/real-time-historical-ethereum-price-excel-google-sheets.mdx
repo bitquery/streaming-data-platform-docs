@@ -1,0 +1,175 @@
+import VideoPlayer from "../../src/components/videoplayer.js";
+
+# How to Track Ethereum Price in USD with Google Sheets
+
+Below is a step-by-step tutorial on how to use Bitquery APIs to get token price information into a Google Sheets spreadsheet using Python. 
+
+In this we code will authenticate with Google Sheets, create a new spreadsheet, fetch data from Bitquery, and then populate the spreadsheet with that data. 
+Adjust the query and data fields according to your specific requirements.
+
+### Prerequisites:
+- Google Developers account.
+- Bitquery API access token.
+- Python installed on your system.
+- Libraries: `gspread`, `oauth2client`, and `requests`.
+
+### Step 1: Set up your Google Cloud project and service account
+1. **Create a Google Cloud Project**: Go to https://console.cloud.google.com/ and create a new project.
+2. **Enable the Google Sheets API**: In the API & Services section, enable the Google Sheets API and Google Drive API.
+3. **Create a Service Account**: Create a new service account in the IAM & Admin section.
+4. **Create and download a JSON key**: Generate a new JSON key for the service account and download it. Save this file as `google_sheets.json`.
+
+You will be able to download the JSON file on cloud console as shown Below
+
+![](/img/ApplicationExamples/google_cloud_console.png)
+
+### Step 1: Install Required Libraries
+
+First, you need to install the necessary Python libraries if you haven't already:
+
+```
+pip install gspread oauth2client requests
+```
+
+### Step 2: Authenticate and Set Up Google Sheets
+
+Create a Python function to authenticate and set up Google Sheets:
+
+```python
+from oauth2client.service_account import ServiceAccountCredentials
+import gspread
+
+def authenticate_gsheets():
+    # Define the scope of the application
+    scope = [
+        "https://spreadsheets.google.com/feeds",
+        'https://www.googleapis.com/auth/spreadsheets',
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+    ]
+    # Authenticate using the service account JSON key file
+    creds = ServiceAccountCredentials.from_json_keyfile_name('google_sheets.json', scope)
+    client = gspread.authorize(creds)
+    # Create a new spreadsheet
+    spreadsheet = client.create("test_bitquery_DEXTrades")
+    worksheet = spreadsheet.sheet1
+    # Share the spreadsheet with your email
+    spreadsheet.share('your-email@example.com', perm_type='user', role='writer')
+    print(f"Spreadsheet URL: {spreadsheet.url}")
+    return worksheet
+```
+
+### Step 3: Fetch USD Price Data from Bitquery DEX Trades API
+
+Set up a function to fetch data from the Bitquery API using OAuth. In this query we fetch latest DEX Trades along with USD Price information.
+
+```python
+import requests
+import json
+
+def fetch_bitquery_data():
+    url = "https://streaming.bitquery.io/graphql"
+    headers = {
+        'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+        'Content-Type': 'application/json'
+    }
+    # GraphQL query
+    query = """
+    {
+      EVM(dataset: archive, network: eth) {
+        DEXTrades(limit: {count: 10}, orderBy: {descending: Block_Time}) {
+          Block {
+            Number
+            Time
+          }
+          Transaction {
+            From
+            To
+            Hash
+          }
+          Trade {
+            Buy {
+              Amount
+              Buyer
+              Currency {
+                Name
+                Symbol
+                SmartContract
+              }
+              Seller
+              Price
+              PriceInUSD
+            }
+            Sell {
+              Amount
+              Buyer
+              Currency {
+                Name
+                SmartContract
+                Symbol
+              }
+              Seller
+              Price
+            }
+            Dex {
+              ProtocolFamily
+              ProtocolName
+              SmartContract
+              Pair {
+                SmartContract
+              }
+            }
+          }
+        }
+      }
+    }
+    """
+    response = requests.post(url, json={'query': query}, headers=headers)
+    if response.status_code == 200:
+        return json.loads(response.text)
+    else:
+        raise Exception(f"Query failed and return code is {response.status_code}. {response.text}")
+```
+
+### Step 4: Write Data to Google Sheets
+
+Create a function to update the Google Sheet with the fetched data:
+
+```python
+def update_sheet(worksheet, data):
+    headers = [
+        "Block Time", "Transaction Hash", "Buy Price", "Buy Amount", "Buy Currency Symbol",
+        "Sell Amount", "Sell Currency Symbol", "Dex Protocol Name"
+    ]
+    worksheet.update(['A1:H1'], [headers])
+    trades = data['data']['EVM']['DEXTrades']
+    for i, trade in enumerate(trades, start=2):
+        values = [
+            trade['Block']['Time'],
+            trade['Transaction']['Hash'],
+            # Additional fields from your data
+        ]
+        worksheet.update(f'A{i}:H{i}', [values])
+```
+
+### Step 5: Run the Main Function
+
+Finally, set up your main function to orchestrate the flow:
+
+```python
+def main():
+    worksheet = authenticate_gsheets()
+    data = fetch_bitquery_data()
+    update_sheet(worksheet, data)
+
+if __name__ == "__main__":
+    main()
+```
+
+
+### Final Output
+
+
+
+<VideoPlayer url="https://youtu.be/qsg86xlfnhM" />
+
