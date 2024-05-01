@@ -267,3 +267,35 @@ query MyQuery {
 }
 
 ```
+
+
+## Top Trader for a given token for a pair (Trade's PnL analysis)
+
+To get top traders of a given token and analyze their profit and loss, you can use the following query. 
+
+Run this query [using this link](https://ide.bitquery.io/Top-traders-of-a-given-token-in-a-pair).
+
+```graphql
+{
+  EVM(dataset: combined network:eth) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "count"}
+      limitBy: {count: 1, by: Trade_Buyer}
+      limit: {count: 10}
+      where: {Trade: {Currency: {SmartContract: {is: "0xb624960aaad05d433075a5c9e760adec26036934"}}, Dex: {SmartContract: {is: "0x62220cca3fa08e9b35bb2c775d20cf63a8de7ac5"}}}}
+    ) {
+      buy: sum(of: Trade_AmountInUSD)
+      sell: sum(of: Trade_Side_AmountInUSD)
+      count
+      Trade {
+        Buyer
+        Currency {
+          SmartContract
+          Symbol
+          Name
+        }
+      }
+    }
+  }
+}
+```
