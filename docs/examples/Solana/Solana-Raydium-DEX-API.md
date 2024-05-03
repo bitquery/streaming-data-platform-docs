@@ -350,3 +350,61 @@ subscription {
   }
 }
 ```
+
+
+## Raydium OHLC API
+
+You can also query OHLC data in real time from Raydium DEX.
+
+[Here](https://ide.bitquery.io/Raydium-OHLC-query) is Websocket to get OHLC data for all currencies, however, if you want to get OHLC data for any specific currency pair, you can use [this Websocket api](https://ide.bitquery.io/Raydium-OHLC-Specific-pair).
+
+```graphql
+subscription {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      where: {Trade: {Currency: {
+        MintAddress: 
+        {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}
+        Side:{
+          Currency:{
+            MintAddress:{
+              is:"So11111111111111111111111111111111111111112"
+            }
+          }
+        }
+        , Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
+    ) {
+      Block {
+        Time(interval: {in: seconds, count: 15})
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        Amount
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Account {
+          Address
+        }
+        Price
+        Side {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+          Amount
+        }
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
+      }
+      count
+    }
+  }
+}
+```
