@@ -64,3 +64,54 @@ subscription {
 }
 
 ```
+
+## Filtering Solana Transactions Based on Dynamic Criteria
+
+In this subscription query we will see how to set dynamic filters for the transactions to be retrieved based on various transaction properties. Developers can monitor specific types of transactions on the Solana network, such as high-volume or high-fee transactions.
+
+You can run the query [here](https://ide.bitquery.io/Solana-tx-dynamic-filter)
+
+#### Variables
+
+- **`$network`**: Specifies the Solana network.
+- **`$tx_filter`**: A filter object used to specify the criteria for transactions to retrieve.
+
+```
+subscription(
+   $network: solana_network
+   $tx_filter: Solana_Transaction_Filter
+) {
+  Solana(network: $network) {
+    Transactions(where:$tx_filter) {
+      Block {
+        Time
+        Hash
+      }
+      Transaction {
+        BalanceUpdatesCount
+        Accounts {
+          Address
+          IsWritable
+        }
+        Signer
+        Signature
+        Result {
+          Success
+          ErrorMessage
+        }
+        Index
+        Fee
+        TokenBalanceUpdatesCount
+        InstructionsCount
+      }
+    }
+  }
+}
+<!-- Parameters -->
+
+{
+  "network": "solana",
+  "tx_filter":{"Transaction": {"TokenBalanceUpdatesCount": {"gt": 10}, "FeeInUSD": {"ge": "0.0010"}}}
+}
+
+```

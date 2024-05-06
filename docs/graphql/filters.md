@@ -91,7 +91,7 @@ filters are combined by **AND** principles, result set is an intersection of all
 
 ## Dynamic Where Filter
 
-You can pass the WHERE clause as a parameter to set dynamic conditions for filtering the response. In the below example, we are passing the WHERE clause as a parameter, where we use 'currency' as a filter.
+You can pass the WHERE clause as a parameter to set dynamic conditions for filtering the response. In the below example, we are passing the WHERE clause as a parameter, where we use 'currency' as a filter. 
 
 ```
 query ($where: EVM_DEXTradeByToken_Filter) {
@@ -121,6 +121,8 @@ query ($where: EVM_DEXTradeByToken_Filter) {
   }
 }
 ```
+
+> Note: This currently works for chains on EAP. 
 
 ## Filter Types
 
