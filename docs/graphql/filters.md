@@ -122,7 +122,7 @@ query ($where: EVM_DEXTradeByToken_Filter) {
 }
 ```
 
-> Note: This currently works for chains on EAP.
+> Note: This currently works only for chains on EAP.
 
 ### Passing Each Criterion as a Filter
 
