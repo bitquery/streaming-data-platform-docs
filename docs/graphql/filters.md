@@ -91,7 +91,7 @@ filters are combined by **AND** principles, result set is an intersection of all
 
 ## Dynamic Where Filter
 
-You can pass the WHERE clause as a parameter to set dynamic conditions for filtering the response. In the below example, we are passing the WHERE clause as a parameter, where we use 'currency' as a filter. 
+You can pass the WHERE clause as a parameter to set dynamic conditions for filtering the response. In the below example, we are passing the WHERE clause as a parameter, where we use 'currency' as a filter.
 
 ```
 query ($where: EVM_DEXTradeByToken_Filter) {
@@ -122,7 +122,91 @@ query ($where: EVM_DEXTradeByToken_Filter) {
 }
 ```
 
-> Note: This currently works for chains on EAP. 
+> Note: This currently works for chains on EAP.
+
+### Passing Each Criterion as a Filter
+
+Each condition can be passed as a parameter to allow for highly customizable queries.
+
+For example, in the below query:
+
+```
+query(
+  $network: evm_network
+  $mempool: Boolean
+	$currency_filter: EVM_DEXTradeByToken_Input_Trade_Currency_InputType
+  $amount_usd_filter: EVM_Amount_With_Decimals
+  $price_usd_filter: OLAP_Float
+  $price_assymetry_filter: OLAP_Float
+) {
+  EVM(network: $network mempool: $mempool) {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Number}
+      limit: {count: 35}
+
+      where: {
+
+        Trade: {
+          Currency: $currency_filter
+          AmountInUSD: $amount_usd_filter
+          PriceInUSD: $price_usd_filter
+          PriceAsymmetry: $price_assymetry_filter
+        }
+
+      }
+
+    ) {
+
+      Block {
+        Time
+      }
+
+      Transaction {
+        Hash
+      }
+
+      Trade {
+        Buyer
+        Seller
+        Amount
+        AmountInUSD
+        Currency {
+          Symbol
+          SmartContract
+        }
+        Price
+        PriceInUSD
+        PriceAsymmetry
+        Side {
+          Currency {
+            SmartContract
+            Symbol
+          }
+        }
+
+      }
+
+    }
+  }
+}
+<!-- Parameter -->
+
+{
+  "network": "matic",
+  "mempool": false,
+  "currency_filter": { "SmartContract": { "is": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39"}},
+  "amount_usd_filter": {"ge": "2000.0"},
+  "price_usd_filter": {"ge": 13.59},
+  "price_assymetry_filter": {"ge": 0.001}
+}
+```
+
+we have the following filters:
+
+- **`$currency_filter`**: Filters trades by the currency involved using criteria based on the smart contract address.
+- **`$amount_usd_filter`**: Filters trades by the amount in USD.
+- **`$price_usd_filter`**: Filters trades by the price of the currency in USD.
+- **`$price_assymetry_filter`**: Filters trades by the price asymmetry value.
 
 ## Filter Types
 
