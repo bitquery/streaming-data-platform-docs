@@ -68,7 +68,7 @@ subscription {
 
 ## Rewards for a Wallet Address
 
-If you're interested in tracking the rewards for a specific wallet address, you can modify the query to filter results based on the address. This allows stakeholders to monitor their own rewards or analyze rewards distribution to specific addresses over time.
+If you're interested in tracking the rewards for a specific wallet address, you can modify the query to filter results based on the address. This allows stakeholders to monitor their own rewards or analyze rewards distribution to specific addresses over time. You can find the query [here](https://ide.bitquery.io/Rewards-for-a-wallet-address)
 
 ```
 subscription {
