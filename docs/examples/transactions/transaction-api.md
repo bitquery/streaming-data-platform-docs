@@ -120,3 +120,22 @@ query MyQuery {
 
 
 ```
+
+## Transaction Value in USD
+
+In the below query we will use the field `Transaction_ValueInUSD` to get the total amount sent to a particular address in USD.
+
+You can find the query [here](https://ide.bitquery.io/Transaction-value-in-USD)
+
+```
+query MyQuery {
+  EVM(network: eth) {
+    in_txs: Transactions(
+      where: {Transaction: {To: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}
+    ) {
+      sum(of: Transaction_ValueInUSD)
+    }
+  }
+}
+
+```

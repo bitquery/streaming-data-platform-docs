@@ -11,8 +11,8 @@ This Solana API is part of our Early Access Program (EAP), which is intended for
 This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 <head>
-<meta name="title" content="Solana Raydium API  | Get Latest Liquidity Pools and Trades"/>
-<meta name="description" content="Get on-chain data of latest liquidity pools created and latest trades on Solana based DEX Raydium using Bitquery's Solana API."/>
+<meta name="title" content="Solana Raydium API - Latest Liquidity Pools & Trades"/>
+<meta name="description" content="Get top Raydium liquidity pools created and trades on Solana based DEX Raydium using Bitquery's Solana Raydium Websockets API."/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
@@ -22,18 +22,18 @@ This program allows you to test the data and its integration into your applicati
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Solana Raydium API  | Get Latest Liquidity Pools and Trades"
+  content="Solana Raydium API - Get Latest Liquidity Pools and Trades"
 />
 <meta
   property="og:description"
-  content="Get on-chain data of latest liquidity pools created and latest trades on Solana based DEX Raydium using Bitquery's Solana API."
+  content="Get top Raydium liquidity pools created and trades on Solana based DEX Raydium using Bitquery's Solana Raydium Websockets API."
 />
 
 <!-- Twitter -->
 
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana Raydium API  | Get Latest Liquidity Pools and Trades" />
-<meta property="twitter:description" content="Get on-chain data of latest liquidity pools created and latest trades on Solana based DEX Raydium using Bitquery's Solana API." />
+<meta property="twitter:title" content="Solana Raydium API - Latest Liquidity Pools & Trades" />
+<meta property="twitter:description" content="Get top Raydium liquidity pools created and trades on Solana based DEX Raydium using Bitquery's Solana Raydium Websockets API." />
 </head>
 
 ## New Liquidity Pools Created on Solana Raydium DEX (Using Websocket)
@@ -346,6 +346,64 @@ subscription {
         FeePayer
         Signer
       }
+    }
+  }
+}
+```
+
+
+## Raydium OHLC API
+
+You can also query OHLC data in real time from Raydium DEX.
+
+[Here](https://ide.bitquery.io/Raydium-OHLC-query) is Websocket to get OHLC data for all currencies, however, if you want to get OHLC data for any specific currency pair, you can use [this Websocket api](https://ide.bitquery.io/Raydium-OHLC-Specific-pair).
+
+```graphql
+subscription {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      where: {Trade: {Currency: {
+        MintAddress: 
+        {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}
+        Side:{
+          Currency:{
+            MintAddress:{
+              is:"So11111111111111111111111111111111111111112"
+            }
+          }
+        }
+        , Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
+    ) {
+      Block {
+        Time(interval: {in: seconds, count: 15})
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        Amount
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Account {
+          Address
+        }
+        Price
+        Side {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+          Amount
+        }
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
+      }
+      count
     }
   }
 }
