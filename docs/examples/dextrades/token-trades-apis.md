@@ -454,18 +454,18 @@ query ($network: evm_network, $interval: Int, $limit: Int, $from: String, $quote
 ## Getting OHLC and Distinct Buys/Sells
 
 The below query retrieve OHLC (Open, High, Low, Close) data and distinct buy/sell information on the Binance Smart Chain (BSC) on a daily basis. Adjust the parameters within the `where` and `Block` sections to customize the query for your specific needs, such as changing the token smart contract addresses or modifying the date range.
-In this query we have set trade currency pair to `0xfb6115445bff7b52feb98650c87f44907e58f802`( AAVE ) and `0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c`(WBNB), i.e AAVE/WBNB.
+In this query we have set the trade currency pair to `0xfb6115445bff7b52feb98650c87f44907e58f802`( AAVE ) and `0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c`(WBNB), i.e AAVE/WBNB.
 
 ```
 {
   EVM(dataset: archive, network: bsc) {
     buyside: DEXTradeByTokens(
       limit: {count: 30}
-      orderBy: {descending: Block_Time}
+      orderBy: {descendingByField:"Block_time_field"}
       where: {Trade: {Side: {Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}, Amount: {ge: "0"}, Type: {is: buy}}, Currency: {SmartContract: {is: "0xfb6115445bff7b52feb98650c87f44907e58f802"}}}, Block: {Date: {since: "2023-07-01", till: "2023-08-01"}}}
     ) {
       Block {
-        Time(interval: {in: days, count: 1})
+        time_field:Time(interval: {in: days, count: 1})
       }
       volume: sum(of: Trade_Amount)
       distinctBuyer: count(distinct: Trade_Buyer)
@@ -496,6 +496,8 @@ In this query we have set trade currency pair to `0xfb6115445bff7b52feb98650c87f
     }
   }
 }
+
+
 
 
 
