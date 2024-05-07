@@ -154,9 +154,9 @@ const config = {
           },
 
           {
-            to:'/docs/authorisation/how-to-generate',
-            from:'/docs/start/authorisation/simple/'
-          }
+            to: "/docs/authorisation/how-to-generate",
+            from: "/docs/start/authorisation/simple/",
+          },
         ],
       },
     ],
@@ -304,13 +304,6 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
-  // scripts: [
-  //   {
-  //     src: "https://s3-us-west-2.amazonaws.com/b2bjsstore/b/YE63P0H58WOW/reb2b.js.gz",
-  //     async: true,
-  //   },
-  // ],
-  clientModules: [require.resolve("./reb2bScript.js")],
 };
 
 module.exports = config;
