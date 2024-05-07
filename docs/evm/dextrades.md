@@ -73,10 +73,11 @@ Query price OHLC data for token pairs using DEX Trades By Tokens
 
 ```graphql
 
+
 query MyQuery {
   EVM(dataset: archive) {
     DEXTradeByTokens(
-      orderBy: {descending: Block_Date}
+      orderBy: {descendingByField: "Block_datefield"}
       #WETH-USDT trades on Uniswap V3
       where: {Trade: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, 
         Side: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}, 
@@ -84,7 +85,7 @@ query MyQuery {
       limit: {count: 10}
     ) {
       Block {
-        Date(interval: {in: days, count: 1})
+       datefield: Date(interval: {in: days, count: 1})
       }
       volume: sum(of: Trade_Amount)
       Trade {
@@ -110,6 +111,7 @@ query MyQuery {
     }
   }
 }
+
 
 ```
 
