@@ -36,6 +36,8 @@ This program allows you to test the data and its integration into your applicati
 <meta property="twitter:description" content="Get top Raydium liquidity pools created and trades on Solana based DEX Raydium using Bitquery's Solana Raydium Websockets API." />
 </head>
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 ## New Liquidity Pools Created on Solana Raydium DEX (Using Websocket)
 
 You can subscribe to newly created Solana Raydium liquidity pools using the GraphQL subscription (WebSocket).
@@ -351,7 +353,6 @@ subscription {
 }
 ```
 
-
 ## Raydium OHLC API
 
 You can also query OHLC data in real time from Raydium DEX.
@@ -362,21 +363,27 @@ You can also query OHLC data in real time from Raydium DEX.
 subscription {
   Solana {
     DEXTradeByTokens(
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Currency: {
-        MintAddress: 
-        {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}
-        Side:{
-          Currency:{
-            MintAddress:{
-              is:"So11111111111111111111111111111111111111112"
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui" }
+          }
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
+          Dex: {
+            ProgramAddress: {
+              is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
             }
           }
         }
-        , Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
+      }
     ) {
       Block {
-        Time(interval: {in: seconds, count: 15})
+        Time(interval: { in: seconds, count: 15 })
       }
       volume: sum(of: Trade_Amount)
       Trade {
@@ -408,3 +415,7 @@ subscription {
   }
 }
 ```
+
+## Video Tutorial on how to Track Latest Trades, Latest Price of a Token on Solana Raydium DEX
+
+<VideoPlayer url="https://www.youtube.com/watch?v=T1AVFL7weBI" />
