@@ -76,6 +76,106 @@ subscription {
 
 ```
 
-## Video Tutorial on Solana Instructions API
+## Latest Created Tokens on Solana
+
+The query below fetches the latest created tokens on the Solana blockchain including details like newly created token address which is the 1st entry in the Accounts array. We are querying Solana Token Program here with address `TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA` and filtering for latest created tokens using `Method: {in: ["initializeMint", "initializeMint2", "initializeMint3"]}`.
+
+You can run the query [here](https://ide.bitquery.io/Get-newly-created-tokens-on-Solana_1)
+
+```
+subscription {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}, Method: {in: ["initializeMint", "initializeMint2"]}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+
+
+
+```
+
+## Number of Latest Created Tokens on Solana
+
+The query below fetches the count of the latest created tokens on the Solana blockchain which were created using `initializeMint` method.
+
+You can run the query [here](https://ide.bitquery.io/Count---Tokens-created-on-Solana)
+
+```
+query MyQuery {
+  Solana(dataset: realtime, network: solana) {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}, Method: {is: "initializeMint"}}}}
+      limit: {count: 10}
+    ) {
+      count
+      Block {
+        latest: Time(maximum: Block_Time)
+        oldest: Time(minimum: Block_Time)
+      }
+    }
+  }
+}
+
+
+```
+
+## Get Authorities of tokens on Solana
+
+The query below fetches all the authorities such as mint authority, freeze authority and update authority and also the token address on the Solana blockchain in realtime. The 1st entry in the Accounts array is the mint and the freeze authority, 2nd entry in the Accounts array is the token address, and 3rd entry in the Accounts array is the update authority.
+
+You can run the query [here](https://ide.bitquery.io/get-authorities-of-tokens-on-solana_2)
+
+```
+subscription{
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"}, Method: {is: "CreateMasterEditionV3"}}}}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+        }
+        Program {
+          Method
+          AccountNames
+          Address
+          Name
+        }
+      }
+    }
+  }
+}
+
+
+
+
+```
+
+## Video Tutorial on Solana Instructions API | How to track New Liquidity Pools Created on Solana Raydium & Orca DEX
 
 <VideoPlayer url="https://youtu.be/FO4-sYHgF-k?si=xBI9j4gnFxmuzQrU" />
+
+## Video Tutorial on Solana Instructions API | How to get newly created tokens on Solana Blockchain in realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=P8BMl0X5d8o" />
