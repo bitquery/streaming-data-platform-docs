@@ -173,7 +173,6 @@ You can run this query using [this link](https://ide.bitquery.io/Live-price-of-a
 
 ```
 
-
 ## Latest Trades on Solana Raydium DEX
 
 To subscribe to the real-time trades stream for Solana Raydium DEX, [try this GraphQL subscription (WebSocket)](https://ide.bitquery.io/Updated-Real-time-trades-on-Raydium-DEX-on-Solana_1).
@@ -383,7 +382,7 @@ subscription {
 
 You can also query OHLC data in real time from Raydium DEX.
 
-[Here](https://ide.bitquery.io/Raydium-ohlc-query-for-a-specific-pair) is Websocket to get OHLC data for all currencies, however, if you want to get OHLC data for any specific currency pair, you can use [this Websocket api](https://ide.bitquery.io/Raydium-OHLC-Specific-pair).
+[Here](https://ide.bitquery.io/Orca-OHLC-for-all-currencies) is Websocket to get OHLC data for all currencies, however, if you want to get OHLC data for any specific currency pair, you can use [this Websocket api](https://ide.bitquery.io/Raydium-OHLC-for-specific-pair_3).
 
 ```graphql
 subscription {
@@ -409,28 +408,10 @@ subscription {
       }
     ) {
       Block {
-        Timefield: Time(interval: { in: seconds, count: 15 })
+        Timefield: Time(interval: { in: minutes, count: 1 })
       }
       volume: sum(of: Trade_Amount)
       Trade {
-        Amount
-        Currency {
-          Name
-          Symbol
-          MintAddress
-        }
-        Account {
-          Address
-        }
-        Price
-        Side {
-          Currency {
-            Name
-            Symbol
-            MintAddress
-          }
-          Amount
-        }
         high: Price(maximum: Trade_Price)
         low: Price(minimum: Trade_Price)
         open: Price(minimum: Block_Slot)

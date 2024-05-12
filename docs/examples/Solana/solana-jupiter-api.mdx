@@ -1,0 +1,90 @@
+---
+sidebar_position: 7
+---
+
+# Jupiter API
+
+In this section, we'll show you how to access information about Jupiter data using Bitquery APIs.
+
+This Solana API is part of our Early Access Program (EAP).
+
+You can use this program to try out the data and see how it works with your applications before you fully integrate it. You can learn more about this [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/).
+
+<head>
+<meta name="title" content="Jupiter API - Get Data on Swaps of Jupiter Aggregator"/>
+<meta name="description" content="Use our Solana API & Websockets, designed for developers, to get SPL token trading data on Jupiter DEX. Get Tokens involved in Swap, Addresses and details on the route of the swap."/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="Jupiter API - Get Data on Swaps of Jupiter Aggregator"
+/>
+<meta
+  property="og:description"
+  content="Use our Solana API & Websockets, designed for developers, to get SPL token trading data on Jupiter DEX. Get Tokens involved in Swap, Addresses and details on the route of the swap."
+/>
+
+<!-- Twitter -->
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="Jupiter API - Get Data on Swaps of Jupiter Aggregator" />
+<meta property="twitter:description" content="Use our Solana API & Websockets, designed for developers, to get SPL token trading data on Jupiter DEX. Get Tokens involved in Swap, Addresses and details on the route of the swap." />
+</head>
+
+## Latest Swaps on Jupiter
+
+To retrieve the newest swaps happened on Jupiter Aggregator, we will utilize the Solana instructions API/Websocket.
+
+We will specifically look for the latest instructions from Jupiter's program, identified by the program ID `JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4`. 
+Whenever a new swap is on Jupiter, it triggers the `sharedAccountsRoute` instructions. The tokens involved in the swap and adderesses to which tokens belong initially and the accounts involved in the route of the swap can be obtained from the Instructions API.
+
+For instance, Index 7 and 8 represent the tokens A and B respectively involved in the swap, while Index 1 and 2 are the addresses to which the tokens B and A belong initially. Note that the indexing starts from 0.
+
+You can run this query using this [link](https://ide.bitquery.io/Tokens-involved-in-Jupiter-swap-source-address-destination-address-DEX-involved_2#).
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4" }
+            Method: { is: "sharedAccountsRoute" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Transaction {
+        Signature
+      }
+      Instruction {
+        Program {
+          Method
+          AccountNames
+          Address
+        }
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Video Tutorial | How to Track Swaps on Jupiter Aggregator on Solana
+
+<VideoPlayer url="https://www.youtube.com/watch?v=NqWzQm1zoZ8" />
