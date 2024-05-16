@@ -409,14 +409,13 @@ This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a s
 You can find the query [here](https://ide.bitquery.io/DAI-OHLC-in-USD)
 
 ```
-query ($network: evm_network, $interval: Int, $limit: Int, $from: String, $quoteCurrency: String, $timeframe: OLAP_DateTimeIntervalUnits) {
+query ($network: evm_network, $interval: Int, $limit: Int, $from: String, $quoteCurrency: String,$buyCurrency: String, $timeframe: OLAP_DateTimeIntervalUnits) {
   EVM(network: $network, dataset: archive) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "Block_Time"}
       limit: {count: $limit}
-      where: {Trade: {PriceAsymmetry: {le: 0.01}, Side: {Currency: {SmartContract: {is: $quoteCurrency}, Symbol: {}}}, Price: {gt: 0}, Amount: {gt: "0.000000000000000001"}}, Block: {Date: {since: $from}}}
+      where: {Trade: {PriceAsymmetry: {le: 0.01}, Side: {Currency: {SmartContract: {is: $quoteCurrency}, Symbol: {}}}, Price: {gt: 0}, Amount: {gt: "0.000000000000000001"}, Currency: {SmartContract: {is: $buyCurrency}}}, Block: {Date: {since: $from}}}
     ) {
-      ChainId
       Block {
         Time(interval: {in: $timeframe, count: $interval})
       }
@@ -433,6 +432,7 @@ query ($network: evm_network, $interval: Int, $limit: Int, $from: String, $quote
         }
         Currency {
           Symbol
+          SmartContract
         }
       }
       count
@@ -440,10 +440,12 @@ query ($network: evm_network, $interval: Int, $limit: Int, $from: String, $quote
   }
 }
 
+
 <!-- parameters -->
 {
   "network": "bsc",
   "quoteCurrency": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+  "buyCurrency":"0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
   "interval": 1,
   "timeframe": "days",
   "limit": 500,

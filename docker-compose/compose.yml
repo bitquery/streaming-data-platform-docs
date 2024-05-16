@@ -20,11 +20,7 @@ services:
     image: ${LC_COMPOSE_IMAGE}:${LC_COMPOSE_IMAGE_TAG} 
     ports:
       - ${LC_COMPOSE_IPADDR}:${LC_COMPOSE_WEB_PORT}:80
-    <<: *common-network
-    <<: *common-dns
-    <<: *common-restart
-    <<: *common-logging 
-
+    <<: [*common-network, *common-dns, *common-restart, *common-logging]
 
 networks:
   common:

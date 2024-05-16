@@ -1,0 +1,246 @@
+# Tutorial for Building a Solana Sniper Bot Using Bitquery Real-Time Solana Subscriptions and Jupiter Swap API
+
+This tutorial will guide you through building a Solana sniper bot using Bitquery for real-time Solana subscriptions and the Jupiter Swap API for executing swaps.
+
+import VideoPlayer from "../../src/components/videoplayer.js";
+
+## Tutorial Video
+
+<VideoPlayer url="https://youtu.be/_74wKjMBwOU" />
+
+
+## Tutorial
+
+### Prerequisites
+1. **Node.js** and **npm** installed on your system.
+2. **Bitquery Free Developer Account** with OAuth token (follow instructions [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+3. **Solana Wallet** with some SOL for transaction fees.
+
+### Step 1: Setting Up the Environment
+
+1. **Initialize a new Node.js project:**
+
+    ```bash
+    mkdir solana-sniper-bot
+    cd solana-sniper-bot
+    npm init -y
+    ```
+
+2. **Install the necessary dependencies:**
+
+    ```bash
+    npm install @solana/web3.js cross-fetch lodash @project-serum/anchor bs58
+    ```
+
+### Step 2: Creating the Bot
+
+1. **Create a new file `index.js`:**
+
+    ```bash
+    touch index.js
+    ```
+
+2. **Add the necessary imports:**
+
+    ```javascript
+    const {
+      Connection,
+      PublicKey,
+      VersionedTransaction,
+      Keypair,
+    } = require("@solana/web3.js");
+    const fetch = require("cross-fetch");
+    const lodash = require("lodash");
+    const { Wallet } = require("@project-serum/anchor");
+    const bs58 = require("bs58");
+    ```
+
+3. **Define the Solana Instructions GraphQL query for Bitquery:**
+
+In this step we get new Liquidity Pools created on Solana Raydium DEX along with the token information. 
+To see detailed information on Raydium API, check examples [here](https://docs.bitquery.io/docs/examples/Solana/Solana-Raydium-DEX-API/)
+
+```javascript
+    const gql = (strings, ...values) =>
+      strings.reduce((final, str, i) => final + str + (values[i] || ""), "");
+
+    const query = gql`
+      {
+        Solana {
+          Instructions(
+            where: {
+              Transaction: { Result: { Success: true } }
+              Instruction: {
+                Program: {
+                  Method: { is: "initializeUserWithNonce" }
+                  Address: { is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8" }
+                }
+              }
+            }
+            limit: { count: 1 }
+            orderBy: { ascending: Block_Date }
+          ) {
+            Instruction {
+              Accounts {
+                Address
+              }
+            }
+          }
+        }
+      }
+    `;
+```
+
+For the sake of the demo we have used a query, to **track new tokens in real-time** use the below subscriptions. 
+
+```javascript   
+ subscription {
+      Solana {
+        Instructions(
+          where: {Transaction: {Result: {Success: true}}, Instruction: {Program: {Method: {is: "initializeUserWithNonce"}, Address: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
+        ) {
+          Instruction {
+            Accounts {
+              Address
+            }
+          }
+        }
+      }
+    }
+```
+
+4. **Set up the Solana connection and wallet:**
+
+    ```javascript
+    const connection = new Connection("https://api.mainnet-beta.solana.com");
+    const walletPublicKey = new PublicKey("YOUR_PUBLIC_KEY");
+    const secretKeyUint8Array = new Uint8Array([/* YOUR_SECRET_KEY_ARRAY */]);
+    const wallet = new Wallet(Keypair.fromSecretKey(secretKeyUint8Array));
+    ```
+
+5. **Define a function to fetch data from Bitquery:**
+
+    ```javascript
+    async function fetchGraphQL(query) {
+      const response = await fetch("https://streaming.bitquery.io/eap", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer YOUR_BITQUERY_OAUTH_TOKEN",
+        },
+        body: JSON.stringify({ query }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return await response.json();
+    }
+    ```
+
+6. **Fetch pool addresses from Bitquery:**
+
+    ```javascript
+    async function getPoolAddresses() {
+      try {
+        const data = await fetchGraphQL(query);
+        const instructions = lodash.get(data, "data.Solana.Instructions", []);
+
+        return instructions.map(({ Instruction: { Accounts } }) => ({
+          poolAddress: Accounts.length > 4 ? Accounts[4].Address : undefined,
+          tokenA: Accounts.length > 8 ? Accounts[8].Address : undefined,
+          tokenB: Accounts.length > 9 ? Accounts[9].Address : undefined,
+        }))[0];
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return { poolAddress: "", tokenA: "", tokenB: "" };
+      }
+    }
+    ```
+
+7. **Execute a token swap using Jupiter API:**
+
+This code has been derived from sample mentioned in the official docs [here](https://station.jup.ag/docs/apis/swap-api). 
+We add the if-check for "TOKEN_NOT_TRADABLE" and "COULD_NOT_FIND_ANY_ROUTE" to accomodate for delays in Jupiter Swap API.
+
+```javascript
+    async function swapTokens(tokenA, tokenB) {
+      try {
+        const quoteUrl = `https://quote-api.jup.ag/v6/quote?inputMint=${tokenB}&outputMint=${tokenA}&amount=10000&slippageBps=150`;
+        console.log("quote url ", quoteUrl);
+        const quoteResponse = await fetch(quoteUrl);
+        const quoteData = await quoteResponse.json();
+        if (
+          quoteData["errorCode"] != "TOKEN_NOT_TRADABLE" &&
+          quoteData["errorCode"] != "COULD_NOT_FIND_ANY_ROUTE"
+        ) {
+          const swapTransactionResponse = await fetch(
+            "https://quote-api.jup.ag/v6/swap",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                quoteResponse: quoteData,
+                userPublicKey: wallet.publicKey.toString(),
+                wrapAndUnwrapSol: true,
+              }),
+            }
+          );
+
+          const { swapTransaction } = await swapTransactionResponse.json();
+
+          const swapTransactionBuf = Buffer.from(swapTransaction, "base64");
+          console.log("swapTransactionBuf ", swapTransactionBuf);
+          const transaction = VersionedTransaction.deserialize(swapTransactionBuf);
+          transaction.sign([wallet.payer]);
+          const rawTransaction = transaction.serialize();
+          const txid = await connection.sendRawTransaction(rawTransaction, {
+            skipPreflight: false,
+            maxRetries: 4,
+            preflightCommitment: "confirmed",
+            commitment: "confirmed",
+          });
+
+          const confirmation = await connection.confirmTransaction(
+            txid,
+            "confirmed"
+          );
+          console.log(
+            `Transaction confirmed: ${confirmation.value.err ? "Error" : "Success"}`
+          );
+          console.log(`Transaction successful: https://solscan.io/tx/${txid}`);
+        }
+      } catch (error) {
+        console.error("Error during token swap:", error);
+      }
+    }
+```
+
+8. **Define the main function to coordinate the steps:**
+
+```javascript
+    async function main() {
+      const { tokenA, tokenB } = await getPoolAddresses();
+      await swapTokens(tokenA, tokenB);
+    }
+
+    main();
+```
+
+### Step 3: Running the Bot
+
+1. **Replace placeholders:**
+   - Replace `YOUR_PUBLIC_KEY` with your actual Solana wallet public key.
+   - Replace `YOUR_SECRET_KEY_ARRAY` with your wallet's secret key array.
+   - Replace `YOUR_BITQUERY_OAUTH_TOKEN` with your actual Bitquery OAuth token.
+
+2. **Run the bot:**
+
+    ```bash
+    node index.js
+    ```
+
+### Conclusion
+
+You've successfully set up a Solana sniper bot using Bitquery for real-time Solana subscriptions and Jupiter Swap API for executing swaps. 
+This bot listens for specific on-chain instructions and performs swaps based on the detected instructions. Ensure your bot is monitored and managed appropriately, especially when running on the mainnet with real funds.
