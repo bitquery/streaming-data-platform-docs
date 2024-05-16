@@ -339,6 +339,188 @@ subscription {
 }
 ```
 
+## Track Latest Add Liquidity Transactions on Orca DEX
+
+You can also track Add Liquidity transactions in real time on Orca DEX from Orca API using instructions. Firstly, you can use this [query](https://ide.bitquery.io/Get-all-methods-of-Orca-Program#) to get all the methods of Orca program to deduce which program method is responsible for add liquidity transactions. The method we want to filter for turns out to be `increaseLiquidity`.
+
+If you want to track latest liquidity additions in Orca pools, you can use [this Websocket api](https://ide.bitquery.io/Websocket-for-add-Liquidity-instruction-on-Solana-Orca-DEX_2#).
+
+In the response, mint under 6th and 7th addresses in the Accounts array gives you the Token A and Token B respectively of the pool in which liquidity is added.
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      orderBy: { descending: Block_Time }
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc" }
+            Method: { is: "increaseLiquidity" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        AncestorIndexes
+        InternalSeqNumber
+        Index
+        ExternalSeqNumber
+        Depth
+        CallerIndex
+        Data
+        CallPath
+        BalanceUpdatesCount
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+          Name
+          Method
+          Parsed
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Track Latest Remove Liquidity Transactions on Orca DEX
+
+You can also track Remove Liquidity transactions in real time on Orca DEX from Orca API using instructions. Firstly, you can use this [query](https://ide.bitquery.io/Get-all-methods-of-Orca-Program#) to get all the methods of Orca program to deduce which program method is responsible for remove liquidity transactions. The method we want to filter for turns out to be `decreaseLiquidity`.
+
+If you want to track latest liquidity removals in Orca pools, you can use [this Websocket api](https://ide.bitquery.io/Websocket-for-remove-Liquidity-instruction-on-Solana-Orca-DEX_1#).
+
+In the response, mint under 6th and 7th addresses in the Accounts array gives you the Token A and Token B respectively of the pool in which liquidity is removed.
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      orderBy: { descending: Block_Time }
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc" }
+            Method: { is: "decreaseLiquidity" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        AncestorIndexes
+        InternalSeqNumber
+        Index
+        ExternalSeqNumber
+        Depth
+        CallerIndex
+        Data
+        CallPath
+        BalanceUpdatesCount
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+          Name
+          Method
+          Parsed
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
 ## Video Tutorial | How to Track Latest Trades, Latest Price of a Token on Solana Orca DEX
 
 <VideoPlayer url="https://youtu.be/IWgf37jTUuc?si=T4Sl4Np1lXrVqY5J" />
@@ -346,3 +528,7 @@ subscription {
 ## Video Tutorial | How to Track Latest Created Liquidity Pools, OHLC data of a specific pair on Solana Orca DEX
 
 <VideoPlayer url="https://youtu.be/7gwT9fbWl9M?si=zS14U2FV4wG1PoGf" />
+
+## Video Tutorial | How to Track Add Liquidity and Remove Liquidity Transactions on Solana Orca DEX
+
+<VideoPlayer url="https://www.youtube.com/watch?v=X3rhSAROCu0" />
