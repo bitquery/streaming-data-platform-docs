@@ -25,6 +25,8 @@ This program allows you to test the data and its integration into your applicati
   property="og:description"
   content="Get Mempool data through our powerful and highly scalabe Mempool API. Access all information about pricing history, Mempool balances, and Mempool trades."
 />
+</head>
+
 
 ## Latest Mempool Transfers
 
