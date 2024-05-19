@@ -42,7 +42,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 To retrieve the newest swaps happened on Jupiter Aggregator, we will utilize the Solana instructions API/Websocket.
 
-We will specifically look for the latest instructions from Jupiter's program, identified by the program ID `JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4`. 
+We will specifically look for the latest instructions from Jupiter's program, identified by the program address `JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4`. 
 Whenever a new swap is on Jupiter, it triggers the `sharedAccountsRoute` instructions. The tokens involved in the swap and adderesses to which tokens belong initially and the accounts involved in the route of the swap can be obtained from the Instructions API.
 
 For instance, Index 7 and 8 represent the tokens A and B respectively involved in the swap, while Index 1 and 2 are the addresses to which the tokens B and A belong initially. Note that the indexing starts from 0.
@@ -87,6 +87,278 @@ subscription {
 }
 ```
 
+## Track Latest Created Limit Orders on Jupiter
+
+To track the latest created limit orders happened on Jupiter Limit Order Program, we will utilize the Solana instructions API/Websocket.
+
+To know which instruction method is used for creating limit orders, [we use this API](https://ide.bitquery.io/Get-all-methods-of-Jupiter-Limit-Order-Program#).
+We will specifically look for the latest instructions from Jupiter's Limit Order program, identified by the program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu`. 
+Whenever a limit order is created on Jupiter, it triggers the `initializeOrder` instructions. The input mint token address, output mint token address, base address, maker address, reserve address, maker input account and makeroutput address involved in the transaction can be obtained from the Instructions API.
+
+The above mentioned addresses can be seen in the response in Program Account Names and the addresses to these ordered names maps directly to addresses in the Accounts array.
+You can run this query using this [link](https://ide.bitquery.io/Latest-created-Limit-Order-on-Jupiter-in-realtime#).
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Method: { is: "initializeOrder" }
+            Address: { is: "jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Transaction {
+        Signature
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        AncestorIndexes
+        BalanceUpdatesCount
+        CallPath
+        CallerIndex
+        Data
+        Depth
+        ExternalSeqNumber
+        InternalSeqNumber
+        Index
+        Logs
+        Program {
+          AccountNames
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+        }
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
+## Track Latest Cancel Limit Order Transactions on Jupiter
+
+To track the latest cancel limit order transactions happened on Jupiter Limit Order Program, we will utilize the Solana instructions API/Websocket.
+
+To know which instruction method is used for canceling limit orders, [we use this API](https://ide.bitquery.io/Get-all-methods-of-Jupiter-Limit-Order-Program#).
+We will specifically look for the latest instructions from Jupiter's Limit Order program, identified by the program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu`. 
+Whenever a limit order is canceled on Jupiter, it triggers the `cancelOrder` instructions. The input mint token address, maker address, reserve address and maker input account involved in the transaction can be obtained from the Instructions API.
+
+The above mentioned addresses can be seen in the response in Program Account Names and the addresses to these ordered names maps directly to addresses in the Accounts array.
+You can run this query using this [link](https://ide.bitquery.io/Latest-Cancel-Limit-Order-Transactions-on-Jupiter-in-realtime#).
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Method: { is: "cancelOrder" }
+            Address: { is: "jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Transaction {
+        Signature
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        AncestorIndexes
+        BalanceUpdatesCount
+        CallPath
+        CallerIndex
+        Data
+        Depth
+        ExternalSeqNumber
+        InternalSeqNumber
+        Index
+        Logs
+        Program {
+          AccountNames
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+        }
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
+## Track Latest Cancel Expired Limit Order Transactions on Jupiter
+
+To track the latest cancel expired limit order transactions happened on Jupiter Limit Order Program, we will utilize the Solana instructions API/Websocket.
+
+To know which instruction method is used for canceling expired limit orders, [we use this API](https://ide.bitquery.io/Get-all-methods-of-Jupiter-Limit-Order-Program#).
+We will specifically look for the latest instructions from Jupiter's Limit Order program, identified by the program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu`. 
+Whenever a expired limit order is canceled on Jupiter, it triggers the `cancelExpiredOrder` instructions.
+You can run this query using this [link](https://ide.bitquery.io/Latest-Cancel-Expired-Order-Transactions-on-Jupiter-in-realtime_1#).
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Method: { is: "cancelExpiredOrder" }
+            Address: { is: "jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Transaction {
+        Signature
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        AncestorIndexes
+        BalanceUpdatesCount
+        CallPath
+        CallerIndex
+        Data
+        Depth
+        ExternalSeqNumber
+        InternalSeqNumber
+        Index
+        Logs
+        Program {
+          AccountNames
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+        }
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
 ## Video Tutorial | How to Track Swaps on Jupiter Aggregator on Solana in Realtime
 
 <VideoPlayer url="https://www.youtube.com/watch?v=NqWzQm1zoZ8" />
+
+## Video Tutorial | How to Track Create Limit Order, Cancel Limit Order and Cancel Expired Limit Order Transactions on Jupiter
+
+<VideoPlayer url="https://www.youtube.com/watch?v=AUNu97LRTKc" />
