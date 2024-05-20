@@ -423,6 +423,184 @@ subscription {
 }
 ```
 
+## Track Latest Add Liquidity Transactions on Raydium DEX
+
+You can also track Add Liquidity transactions in real time on Raydium DEX from Raydium API using instructions. Firstly, you can use this [query](https://ide.bitquery.io/Get-all-methods-of-Raydium-V4-Program#) to get all the methods of Raydium V4 program to deduce which program method is triggered for add liquidity transactions. The method we want to filter for turns out to be `setPositionStopLoss`.
+
+If you want to track latest liquidity additions in Raydium pools, you can use [this Websocket api](https://ide.bitquery.io/Track-Add-Liquidity-Transactions-on-Solana-Raydium-DEX).
+
+In the response, mint under 7th and 8th addresses in the Accounts array gives you the Token A and Token B respectively of the pool in which liquidity is added.
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8" }
+            Method: { is: "setPositionStopLoss" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Transaction {
+        Signature
+      }
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            ProgramId
+            Owner
+            Mint
+          }
+        }
+        AncestorIndexes
+        BalanceUpdatesCount
+        CallPath
+        CallerIndex
+        Data
+        Depth
+        Logs
+        InternalSeqNumber
+        Index
+        ExternalSeqNumber
+        Program {
+          Address
+          AccountNames
+          Method
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Track Latest Remove Liquidity Transactions on Raydium DEX
+
+You can also track Remove Liquidity transactions in real time on Raydium DEX from Raydium API using instructions. Firstly, you can use this [query](https://ide.bitquery.io/Get-all-methods-of-Raydium-V4-Program#) to get all the methods of Raydium V4 program to deduce which program method is triggered for remove liquidity transactions. The method we want to filter for turns out to be `setPositionRangeStop`.
+
+If you want to track latest liquidity removals in Raydium pools, you can use [this Websocket api](https://ide.bitquery.io/Track-Remove-Liquidity-Transactions-on-Solana-Raydium-DEX#).
+
+In the response, mint under 7th and 8th addresses in the Accounts array gives you the Token A and Token B respectively of the pool in which liquidity is removed.
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8" }
+            Method: { is: "setPositionRangeStop" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Transaction {
+        Signature
+      }
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            ProgramId
+            Owner
+            Mint
+          }
+        }
+        AncestorIndexes
+        BalanceUpdatesCount
+        CallPath
+        CallerIndex
+        Data
+        Depth
+        Logs
+        InternalSeqNumber
+        Index
+        ExternalSeqNumber
+        Program {
+          Address
+          AccountNames
+          Method
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Video Tutorial | How to Track Latest Trades, Latest Price of a Token on Solana Raydium DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=T1AVFL7weBI" />
@@ -430,3 +608,7 @@ subscription {
 ## Video Tutorial | How to Track Latest Created Liquidity Pools, OHLC data of a specific pair on Solana Raydium DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=gqG5NW17mm0" />
+
+## Video Tutorial | How to Track Add Liquidity and Remove Liquidity Transactions on Raydium DEX
+
+<VideoPlayer url="https://www.youtube.com/watch?v=s3VfsMiRRVM" />
