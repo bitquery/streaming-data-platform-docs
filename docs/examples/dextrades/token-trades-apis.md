@@ -406,51 +406,31 @@ Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.i
 
 This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a specific token traded on DEXes over a defined time period and interval. You can use the `quoteCurrency` to input the contract address of the currency used for quoting the token prices.
 
-You can find the query [here](https://ide.bitquery.io/DAI-OHLC-in-USD)
+You can find the query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum)
 
 ```
-query ($network: evm_network, $interval: Int, $limit: Int, $from: String, $quoteCurrency: String,$buyCurrency: String, $timeframe: OLAP_DateTimeIntervalUnits) {
-  EVM(network: $network, dataset: archive) {
+{
+  EVM(network: eth, dataset: archive) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_Time"}
-      limit: {count: $limit}
-      where: {Trade: {PriceAsymmetry: {le: 0.01}, Side: {Currency: {SmartContract: {is: $quoteCurrency}, Symbol: {}}}, Price: {gt: 0}, Amount: {gt: "0.000000000000000001"}, Currency: {SmartContract: {is: $buyCurrency}}}, Block: {Date: {since: $from}}}
+      orderBy: {descendingByField: "Block_testfield"}
+      where: {Trade: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}, Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, Type: {is: buy}}}}
+      limit: {count: 10}
     ) {
       Block {
-        Time(interval: {in: $timeframe, count: $interval})
+        testfield: Time(interval: {in: hours, count: 1})
       }
       volume: sum(of: Trade_Amount)
       Trade {
-        high: PriceInUSD(maximum: Trade_PriceInUSD)
-        low: PriceInUSD(minimum: Trade_PriceInUSD)
-        open: PriceInUSD(minimum: Block_Number)
-        close: PriceInUSD(maximum: Block_Number)
-        Side {
-          Currency {
-            Symbol
-          }
-        }
-        Currency {
-          Symbol
-          SmartContract
-        }
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Number)
+        close: Price(maximum: Block_Number)
       }
       count
     }
   }
 }
 
-
-<!-- parameters -->
-{
-  "network": "bsc",
-  "quoteCurrency": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
-  "buyCurrency":"0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
-  "interval": 1,
-  "timeframe": "days",
-  "limit": 500,
-  "from": "2022-04-21"
-}
 ```
 
 ## Getting OHLC and Distinct Buys/Sells
