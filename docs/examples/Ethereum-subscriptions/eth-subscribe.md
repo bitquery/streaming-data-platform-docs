@@ -39,20 +39,44 @@ subscription {
 
 
 
-## eth_subscribe(“newBlockHeaders”)
+## eth_subscribe("logs")
 
-To subscribe to incoming block headers use the below query. 
-
-```
+You can subscribe to all incoming logs filtered by any of the fields including method signature, tx value,sender , receiver and so on. In the below example we are tracking only logs where the method name is `transfer`. You can run it [here](https://ide.bitquery.io/eth_subscribelogs)
 
 ```
+subscription {
+  EVM(mempool: true) {
+    Events(where: {Log: {Signature: {Name: {is: "Transfer"}}}}) {
+      Log {
+        SmartContract
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Block {
+        Number
+        Hash
+        Time
+      }
+      Transaction {
+        Hash
+        From
+        ValueInUSD
+        Value
+        To
+        Type
+      }
+      LogHeader {
+        Data
+        Address
+        Index
+        Removed
+      }
+    }
+  }
+}
 
 
-
-
-## eth_subscribe(logs)
-
-
-## eth_subscibe("syncing")
-
+```
 
