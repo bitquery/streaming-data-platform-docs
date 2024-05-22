@@ -10,15 +10,15 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 ## Tutorial
 
-Github Code Repository - https://github.com/Akshat-cs/Base-sniper-bot
+Github Code Repository - [Repository Link](https://github.com/Akshat-cs/Base-sniper-bot)
 
 ### Prerequisites
 
 1. **Node.js** and **npm** installed on your system.
 2. **Bitquery Free Developer Account** with OAuth token (follow instructions [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
-3. **Any Base Chain supported Wallet** with some Base ETH for transaction fees and also some WETH as I have used WETH in the video tutorial to make swap. I have used the Bitquery to get the latest created pool which has Token A as WETH with Token Addres `0x4200000000000000000000000000000000000006`.
+3. **Any Base Chain supported Wallet** with some Base ETH for transaction fees and also some WETH as I have used WETH in the video tutorial to make swap. I have used the Bitquery Base Events API to get the latest created pool which has Token A as WETH with Token Addres `0x4200000000000000000000000000000000000006`.
 
-- If want to make swap with different Token then you can change the address in this `Arguments: {startsWith: {Value: {Address: {is: "0x4200000000000000000000000000000000000006"}}}}` in tokens.ts file to your Token Address that you want to make swaps with.
+- If you want to conduct the swap using different Token then you can change the address in this `Arguments: {startsWith: {Value: {Address: {is: "0x4200000000000000000000000000000000000006"}}}}` in tokens.ts file to your Token Address that you want to conduct swaps with.
 
 ### Step 1: Setting Up the Environment
 
@@ -40,7 +40,7 @@ Github Code Repository - https://github.com/Akshat-cs/Base-sniper-bot
 
 1. **Create a `.env` file :**
 
-   This file will contain all the environment variable.
+   This file will contain all the environment variables. Put in your Wallet private key that you are using to conduct swap. And also put in the Bitquery OAuth Token, follow the instructions on how to get it [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
 
    ```javascript
    # BASE MAINNET
@@ -55,7 +55,7 @@ Github Code Repository - https://github.com/Akshat-cs/Base-sniper-bot
 
 2. **Create a `config.ts` file:**
 
-   This is a basic configuration file which helps us to expose our environment variables and we are also using Ethers to set provider and signer.
+   This is a basic configuration file which helps us to expose our environment variables to our application and we are also using Ethers to set provider and signer.
 
    ```javascript
    import { Percent } from "@uniswap/sdk-core";
@@ -86,7 +86,7 @@ Github Code Repository - https://github.com/Akshat-cs/Base-sniper-bot
 
 3. **Create a `tokens.ts` file:**
 
-In this step we are importing necessary modules then loading environment variables and also setting ERC20 ABI as we are going to interact with Token Contracts and call different functions on the Token Contract.
+In this step we are importing necessary modules then loading environment variables and also setting ERC20 ABI as we are going to need it to make the token contract instance from token address.
 
 ```javascript
 import { Token } from "@uniswap/sdk-core";
