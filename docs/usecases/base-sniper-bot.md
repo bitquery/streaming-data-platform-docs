@@ -1,0 +1,445 @@
+# Tutorial : Building a Base Sniper Bot Using Bitquery Base Events API and Uniswap SDK
+
+This tutorial will guide you through building a Base sniper bot using Bitquery Events API and the Uniswap SDK for executing swaps.
+
+import VideoPlayer from "../../src/components/videoplayer.js";
+
+## Tutorial Video
+
+<VideoPlayer url="https://www.youtube.com/watch?v=0T_v2nctLmA" />
+
+## Tutorial
+
+Github Code Repository - https://github.com/Akshat-cs/Base-sniper-bot
+
+### Prerequisites
+
+1. **Node.js** and **npm** installed on your system.
+2. **Bitquery Free Developer Account** with OAuth token (follow instructions [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+3. **Any Base Chain supported Wallet** with some Base ETH for transaction fees and also some WETH as I have used WETH in the video tutorial to make swap. I have used the Bitquery to get the latest created pool which has Token A as WETH with Token Addres `0x4200000000000000000000000000000000000006`.
+
+- If want to make swap with different Token then you can change the address in this `Arguments: {startsWith: {Value: {Address: {is: "0x4200000000000000000000000000000000000006"}}}}` in tokens.ts file to your Token Address that you want to make swaps with.
+
+### Step 1: Setting Up the Environment
+
+1. **Initialize a new Node.js project:**
+
+   ```bash
+   mkdir base-sniper-bot
+   cd base-sniper-bot
+   npm init -y
+   ```
+
+2. **Install the necessary dependencies:**
+
+   ```bash
+   npm install @types/node @uniswap/sdk-core @uniswap/smart-order-router @uniswap/v3-sdk axios dotenv ethers ts-node tslib typescript
+   ```
+
+### Step 2: Creating the Bot
+
+1. **Create a `.env` file :**
+
+   This file will contain all the environment variable.
+
+   ```javascript
+   # BASE MAINNET
+   RPC=https://mainnet.base.org
+   WALLET_PRIVATE_KEY=
+   CHAIN_ID=8453
+   SWAP_ROUTER_ADDRESS=0x2626664c2603336E57B271c5C0b26F421741e481
+   SLIPPAGE_TOLERANCE=5
+   DEADLINE_IN_MINUTES=30
+   BITQUERY_TOKEN=
+   ```
+
+2. **Create a `config.ts` file:**
+
+   This is a basic configuration file which helps us to expose our environment variables and we are also using Ethers to set provider and signer.
+
+   ```javascript
+   import { Percent } from "@uniswap/sdk-core";
+   import { ethers, providers, Wallet } from "ethers";
+   import { config as loadEnvironmentVariables } from "dotenv";
+
+    loadEnvironmentVariables();
+
+    export const WALLET_PRIVATE_KEY = process.env.WALLET_PRIVATE_KEY || "";
+    export const SWAP_ROUTER_ADDRESS = process.env.SWAP_ROUTER_ADDRESS || "";
+
+    export const CHAIN_ID = parseInt(process.env.CHAIN_ID || "1");
+
+    export const DEADLINE = Math.floor(
+    (Date.now() / 1000) _ (parseInt(process.env.DEADLINE_IN_MINUTES || "30") _ 60)
+    );
+
+    export const SLIPPAGE_TOLERANCE = new Percent(
+    process.env.SLIPPAGE_TOLERANCE || 5,
+    100
+    );
+
+    const RPC = process.env.RPC;
+    export const provider = ethers.providers.getDefaultProvider(RPC);
+
+    export const signer = new Wallet(WALLET_PRIVATE_KEY, provider);
+   ```
+
+3. **Create a `tokens.ts` file:**
+
+In this step we are importing necessary modules then loading environment variables and also setting ERC20 ABI as we are going to interact with Token Contracts and call different functions on the Token Contract.
+
+```javascript
+import { Token } from "@uniswap/sdk-core";
+import { Signer, BigNumber, BigNumberish, Contract, providers } from "ethers";
+import { CHAIN_ID } from "./config";
+import { Provider } from "@ethersproject/providers";
+import axios, { AxiosRequestConfig } from "axios";
+import { config as loadEnvironmentVariables } from "dotenv";
+
+loadEnvironmentVariables();
+
+const ERC20_ABI = [
+  "function name() view returns (string)",
+  "function symbol() view returns (string)",
+  "function decimals() view returns (uint8)",
+  "function allowance(address, address) external view returns (uint256)",
+  "function approve(address, uint) external returns (bool)",
+  "function balanceOf(address) external view returns(uint256)",
+];
+```
+
+We are going to need Token Contract to call different functions like `balanceOf`, `decimals` and `symbol`. So we are building Token Contract using `buildERC20TokenWithContract` function by providing the token address and the provider.
+
+```javascript
+type TokenWithContract = {
+  contract: Contract,
+  walletHas: (signer: Signer, requiredAmount: BigNumberish) => Promise<boolean>,
+  token: Token,
+};
+
+const buildERC20TokenWithContract = async (
+  address: string,
+  provider: Provider
+): Promise<TokenWithContract | null> => {
+  try {
+    const contract = new Contract(address, ERC20_ABI, provider);
+
+    const [name, symbol, decimals] = await Promise.all([
+      contract.name(),
+      contract.symbol(),
+      contract.decimals(),
+    ]);
+
+    return {
+      contract: contract,
+
+      walletHas: async (signer, requiredAmount) => {
+        const signerBalance = await contract
+          .connect(signer)
+          .balanceOf(await signer.getAddress());
+
+        return signerBalance.gte(BigNumber.from(requiredAmount));
+      },
+
+      token: new Token(CHAIN_ID, address, decimals, symbol, name),
+    };
+  } catch (error) {
+    console.error(
+      `Failed to fetch token details for address ${address}:`,
+      error
+    );
+    return null;
+  }
+};
+```
+
+Setting provider and type of Tokens here as we are using Typescript. Then we built a function `getTokens` which makes an API call and gets the address of Tokens 0 and 1 in the latest created liquidity pool. This function finally returns the Token Contract for the fetched Token 0 and Token 1 addresses using `buildERC20TokenWithContract`. Keep in mind we have set the Token 0 address as WETH token address. In the `index.ts` file we are going to swap this WETH with the other token i.e token 1 in the pool.
+
+```javascript
+// Example usage for BASE
+const provider = new providers.JsonRpcProvider(process.env.RPC);
+
+type Tokens = {
+  Token0: TokenWithContract | null,
+  Token1: TokenWithContract | null,
+};
+
+export const getTokens = async (): Promise<Tokens> => {
+  try {
+    let data = JSON.stringify({
+      query:
+        'query {\n  EVM(network: base) {\n    Events(\n      limit: {count: 1}\n      orderBy: {descending: Block_Time}\n      where: {Log: {Signature: {Name: {is: "PoolCreated"}}, SmartContract: {is: "0x33128a8fC17869897dcE68Ed026d694621f6FDfD"}}, Arguments: {startsWith: {Value: {Address: {is: "0x4200000000000000000000000000000000000006"}}}}}\n    ) {\n      Transaction {\n        Hash\n      }\n      Block {\n        Time\n      }\n      Log {\n        Signature {\n          Name\n        }\n      }\n      Arguments {\n        Name\n        Type\n        Value {\n          ... on EVM_ABI_Integer_Value_Arg {\n            integer\n          }\n          ... on EVM_ABI_String_Value_Arg {\n            string\n          }\n          ... on EVM_ABI_Address_Value_Arg {\n            address\n          }\n          ... on EVM_ABI_BigInt_Value_Arg {\n            bigInteger\n          }\n          ... on EVM_ABI_Bytes_Value_Arg {\n            hex\n          }\n          ... on EVM_ABI_Boolean_Value_Arg {\n            bool\n          }\n        }\n      }\n    }\n  }\n}\n',
+      variables: "{}",
+    });
+    const axiosConfig: AxiosRequestConfig = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "https://streaming.bitquery.io/eap",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.BITQUERY_TOKEN}`, // put your oauth token here
+      },
+      data: data,
+    };
+
+    const response = await axios.request(axiosConfig);
+
+    const token0Address =
+      response.data.data.EVM.Events[0].Arguments[0].Value.address;
+    const token1Address =
+      response.data.data.EVM.Events[0].Arguments[1].Value.address;
+    console.log(token0Address);
+    console.log(token1Address);
+
+    const Token0 = await buildERC20TokenWithContract(token0Address, provider);
+    const Token1 = await buildERC20TokenWithContract(token1Address, provider);
+
+    return { Token0, Token1 };
+  } catch (error) {
+    console.error("Error fetching tokens:", error);
+    return { Token0: null, Token1: null };
+  }
+};
+```
+
+For the sake of the demo we have used a query, to **track new tokens in real-time** use the below subscriptions ([link](https://ide.bitquery.io/Subscription-Latest-created-pool-on-uniswap-V3-on-Base-chain-with-Token0-as-WETH)).
+
+```javascript
+ subscription {
+  EVM(network: base) {
+    Events(
+      orderBy: {descending: Block_Time}
+      where: {Log: {Signature: {Name: {is: "PoolCreated"}}, SmartContract: {is: "0x33128a8fC17869897dcE68Ed026d694621f6FDfD"}}, Arguments: {startsWith: {Value: {Address: {is: "0x4200000000000000000000000000000000000006"}}}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Block {
+        Time
+      }
+      Log {
+        Signature {
+          Name
+        }
+      }
+      Arguments {
+        Name
+        Type
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+
+```
+
+4. **Create a `index.ts` file:**
+
+   a. **Doing the necessary imports**
+
+   ```javascript
+   import { BigNumber, ethers } from "ethers";
+   import {
+     AlphaRouter,
+     SwapType,
+     SwapRoute,
+   } from "@uniswap/smart-order-router";
+   import { CurrencyAmount, TradeType } from "@uniswap/sdk-core";
+   import type { TransactionRequest } from "@ethersproject/abstract-provider";
+   import { getTokens } from "./tokens";
+   import {
+     provider,
+     signer,
+     CHAIN_ID,
+     SWAP_ROUTER_ADDRESS,
+     SLIPPAGE_TOLERANCE,
+     DEADLINE,
+   } from "./config";
+   ```
+
+   b. **Building the main function**
+
+   All of the code covered under this section b is going to be in the main function.
+
+   1. Firstly it calls the `getTokens` function and fetches the Token0 and Token1 token contracts. And then set `tokenFrom` and `tokenTo` tokens and `tokenFromContract` to call functions on tokenFrom token.
+
+   ```javascript
+   // Wait for the getTokens function to resolve
+   const { Token0, Token1 } = await getTokens();
+
+   // Ensure tokens are not null
+   if (!Token0 || !Token1) {
+     throw new Error("Tokens are not initialized.");
+   }
+
+   const tokenFrom = Token0.token;
+   const tokenFromContract = Token0.contract;
+   const tokenTo = Token1.token;
+   ```
+
+   2. Then we check if we have passed the argument in the terminal while running the bot. This means that if we have not passed the amount of WETH we want to swap with then throw error. Then we are checking if we have enough amount of the TokenFrom token or not. It must be grater than the passed argument in the terminal.
+
+   ```javascript
+   if (typeof process.argv[2] === "undefined") {
+     throw new Error(`Pass in the amount of ${tokenFrom.symbol} to swap.`);
+   }
+
+   const walletAddress = await signer.getAddress();
+   const amountIn = ethers.utils.parseUnits(
+     process.argv[2],
+     tokenFrom.decimals
+   );
+   const balance = await tokenFromContract.balanceOf(walletAddress);
+
+   if (!(await Token0.walletHas(signer, amountIn))) {
+     throw new Error(
+       `Not enough ${tokenFrom.symbol}. Needs ${amountIn}, but balance is ${balance}.`
+     );
+   }
+   ```
+
+   3. We are using `AlphaRouter` here from Uniswap to swap tokens on Uniswap efficiently. Then we use this router object to create a route which takes the specific details of our swap. If no route is found then it throws error.
+
+   ```javascript
+   const router = new AlphaRouter({ chainId: CHAIN_ID, provider });
+   const route = await router.route(
+     CurrencyAmount.fromRawAmount(tokenFrom, amountIn.toString()),
+     tokenTo,
+     TradeType.EXACT_INPUT,
+     {
+       recipient: walletAddress,
+       slippageTolerance: SLIPPAGE_TOLERANCE,
+       deadline: DEADLINE,
+       type: SwapType.SWAP_ROUTER_02,
+     }
+   );
+
+   if (!route) {
+     throw new Error("No route found for the swap.");
+   }
+
+   console.log(
+     `Swapping ${amountIn} ${tokenFrom.symbol} for ${route.quote.toFixed(
+       tokenTo.decimals
+     )} ${tokenTo.symbol}.`
+   );
+   ```
+
+   4. Then we check the allowance. We are just defining here `buildSwapTransaction` and then also using `swapTransaction` to populate the `buildSwapTransaction`. Then we have also defined `attemptSwapTransaction` which sends the transaction to the network.
+
+   ```javascript
+   const allowance: BigNumber = await tokenFromContract.allowance(
+     walletAddress,
+     SWAP_ROUTER_ADDRESS
+   );
+
+   const buildSwapTransaction = (
+     walletAddress: string,
+     routerAddress: string,
+     route: SwapRoute
+   ): TransactionRequest => {
+     return {
+       data: route.methodParameters?.calldata,
+       to: routerAddress,
+       value: BigNumber.from(route.methodParameters?.value),
+       from: walletAddress,
+       gasLimit: BigNumber.from("2000000"), // Set your desired gas limit here
+       // Optionally, you can specify gasPrice here if needed
+       // gasPrice: YOUR_GAS_PRICE_IN_WEI
+     };
+   };
+
+   const swapTransaction = buildSwapTransaction(
+     walletAddress,
+     SWAP_ROUTER_ADDRESS,
+     route
+   );
+
+   const attemptSwapTransaction = async (
+     signer: ethers.Wallet,
+     transaction: TransactionRequest
+   ) => {
+     const signerBalance = await signer.getBalance();
+
+     if (!signerBalance.gte(transaction.gasLimit || "0")) {
+       throw new Error(`Not enough ETH to cover gas: ${transaction.gasLimit}`);
+     }
+
+     // Send the transaction with the specified gas-related parameters
+     signer.sendTransaction(transaction).then((tx) => {
+       tx.wait().then((receipt) => {
+         console.log("Completed swap transaction:", receipt.transactionHash);
+       });
+     });
+   };
+   ```
+
+   5. Here we finally call the before defined functions. Firstly we check if there is enough WETH allowance. And if there is not then we send an approve transaction to the network with the `AmountIn` amount of WETH. Then we call the `attemptSwapTransaction` which des the actual swap.
+
+   ```javascript
+   if (allowance.lt(amountIn)) {
+     console.log(`Requesting ${tokenFrom.symbol} approval…`);
+
+     const approvalTx = await tokenFromContract
+       .connect(signer)
+       .approve(
+         SWAP_ROUTER_ADDRESS,
+         ethers.utils.parseUnits(amountIn.mul(1000).toString(), 18)
+       );
+
+     approvalTx.wait(3).then(() => {
+       attemptSwapTransaction(signer, swapTransaction);
+     });
+   } else {
+     console.log(
+       `Sufficient ${tokenFrom.symbol} allowance, no need for approval.`
+     );
+     attemptSwapTransaction(signer, swapTransaction);
+   }
+   ```
+
+   c. **Calling the main function with some error handling**
+
+   ```javascript
+   main().catch((error) => {
+     console.error(error);
+     process.exit(1);
+   });
+   ```
+
+### Step 3: Running the Bot
+
+1. **Check the .env:**
+
+   - Make sure that you have replace `PRIVATE_KEY` with your actual BASE account public key.
+   - Make sure that you have replace `BITQUERY_TOKEN` with your actual Bitquery OAuth token.
+
+2. **Run the bot:**
+   0.001 in the below script is the amount of WETH that I want to use for the swap.
+
+   ```bash
+   ts-node index.ts 0.001
+   ```
+
+### Conclusion
+
+You've successfully set up a Base sniper bot using Bitquery for Base Events API and Uniswap SDK for executing swaps. You need to change the query in tokens.ts file into subscription if you want to use it to listen for on-chain events and then buy the token B from each new pool that gets created on Uniswap. But you will need to make some necessary changes before that. This tutorial just shows you how you can get the recently created pool on uniswap and which token B it has as token A we have already set as WETH in the query and swap a token in that pool. Ensure your bot is monitored and managed appropriately, as we are running on the mainnet with real funds.
