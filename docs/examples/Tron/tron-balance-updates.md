@@ -12,7 +12,7 @@ This program allows you to test the data and its integration into your applicati
 <head>
 <meta name="title" content="How to get Tron Balance Updates of an address"/>
 <meta name="description" content="Learn how to get real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API."/>
-<meta name="keywords" content="balance api, balance updates api, balance updates python api, Tron Balance python api, NFT balance api, Balance scan api, Balance api docs, Tron Balance crypto api, balance blockchain api,Tron network api, Tron web3 api"/>
+<meta name="keywords" content="balance api, balance updates api, balance updates python api, Tron Balance python api, NFT balance api, Balance scan api, Balance api docs, Tron Balance crypto api, balance blockchain api,Tron network api, Tron web3 api, tronscan api"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
