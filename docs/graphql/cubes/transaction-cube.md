@@ -10,6 +10,8 @@ Efficient blockchain filtering is one of the main strengths of our infrastructur
 
 Therefore, Transaction Cube can filter transactions based on transaction hash, value, fee, status, transaction sender, receiver, block details, receipt, signature, etc.
 
+By default all filters are `AND` operator. We will see example of `Or` operator later in examples.
+
 ### Transaction Filtering Examples
 
 Using the `From` filter in Transaction Cube, you can get all transactions sent by a specific address. Check [this query](https://ide.bitquery.io/Transactions-of-an-address) for an example.
