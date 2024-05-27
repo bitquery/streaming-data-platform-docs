@@ -1,4 +1,4 @@
-## Transfers
+# Transfers
 
 Our Transfer dataset contains all asset (token/NFT/coin) transfers.
 
