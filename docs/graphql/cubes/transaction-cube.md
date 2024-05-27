@@ -1,4 +1,4 @@
-## Transaction Cube
+# Transaction Cube
 
 Transaction Cube provides comprehensive information about transactions, blocks, receipts, fees, transaction status, signatures, and more. You can check all the fields in [this query](https://ide.bitquery.io/transaction-cube-with-all-fields).
 
@@ -9,6 +9,8 @@ Transaction Cube provides comprehensive information about transactions, blocks, 
 Efficient blockchain filtering is one of the main strengths of our infrastructure. All cubes offer the ability to filter by any field available in the result. For example, if you can retrieve the transaction hash in the result, you can filter transactions based on it.
 
 Therefore, Transaction Cube can filter transactions based on transaction hash, value, fee, status, transaction sender, receiver, block details, receipt, signature, etc.
+
+By default all filters are `AND` operator. We will see example of `Or` operator later in examples.
 
 ### Transaction Filtering Examples
 

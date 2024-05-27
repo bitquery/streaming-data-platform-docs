@@ -1,4 +1,4 @@
-## OLAP
+# OLAP
 
 We use OLAP system to optimize performance and provide a highly efficient system.
 
