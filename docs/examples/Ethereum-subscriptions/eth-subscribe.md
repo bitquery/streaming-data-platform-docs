@@ -4,7 +4,6 @@ Ethereum Subscription API allows developers to build websockets that receive rea
 
 ## eth_subscribe(“pendingTransactions”)
 
-
 To subscribe to incoming pending transactions, use the below subscription. You can run it [here](https://ide.bitquery.io/eth_subscribependingTransactions)
 
 ```
@@ -35,9 +34,6 @@ subscription {
 }
 
 ```
-
-
-
 
 ## eth_subscribe("logs")
 
@@ -80,3 +76,23 @@ subscription {
 
 ```
 
+## eth_subscribe("newBlockHeaders")
+
+You can subscribe to new blocks as they arrive in real-time. This includes information about the new block, such as its block number, hash,transaction count and timestamp.
+
+```
+subscription {
+  EVM {
+    Blocks {
+      Block {
+        Number
+        ParentHash
+        Hash
+        TxCount
+        Time
+      }
+    }
+  }
+}
+
+```
