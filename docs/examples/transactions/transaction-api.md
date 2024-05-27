@@ -139,3 +139,52 @@ query MyQuery {
 }
 
 ```
+
+## Internal Transactions
+
+A single transaction on a smart contract can result in multiple internal transactions, which interact with different smart contracts.
+The below query gets all internal transactions for a particular tx filtered using hash.
+
+You can run the query [here](https://ide.bitquery.io/internal-transactions-for-a-particular-tx)
+
+```
+query MyQuery {
+  EVM(network: eth) {
+    Calls(
+      where: {Transaction: {Hash: {is: "0xd1a49976cb217c92eea2bf897d8fe760333047fb555c261f7d2c96ea52901434"}}}
+    ) {
+      Call {
+        Create
+        Index
+        From
+        To
+        ValueInUSD
+        Value
+        Output
+        Signature {
+          Signature
+          Name
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+
+```
+
+**Response**
+
+- **Call**
+  - **Create**: Indicates if the call created a contract.
+  - **Index**: The index of the call within the transaction.
+  - **From**: The address from which the internal transaction was sent.
+  - **To**: The recipient address of the internal transaction.
+  - **Output**: The output data of the call.
+  - **Signature**: Contains signature information.
+    - **Signature**: The signature of the call.
+    - **Name**: The name of the function called.
+- **Transaction**
+  - **Hash**: The hash of the main transaction.
