@@ -17,24 +17,6 @@ from gql import Client, gql
 from gql.transport.websockets import WebsocketsTransport
 
 
-async def subscribe_to_graphql(transport):
-  async with Client(transport=transport,
-                    fetch_schema_from_transport=True) as session:
-    async for result in session.subscribe(
-        gql("""
-                subscription MyQuery {
-                    EVM(network: eth) {
-                        count: Blocks {
-                            Block {
-                                TxCount
-                            }
-                        }
-                    }
-                }
-            """)):
-      print(result)
-
-
 async def main():
   transport = WebsocketsTransport(
       url=
@@ -46,7 +28,7 @@ async def main():
 
   # # Close the connection
   try:
-    # await subscribe_to_graphql(transport)
+ 
     async for result in transport.subscribe(
         gql("""
               subscription MyQuery {
