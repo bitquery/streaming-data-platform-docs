@@ -10,7 +10,7 @@ The final chart will look like ![this](/img/ApplicationExamples/advanced-charts.
 
 - To do that you need to get access to TradingView's private Advanced Charts API library by filling out the form.
 - Next create a new React project.
-- Once done, follow the steps on their [tutorial](https://www.tradingview.com/charting-library-docs/latest/tutorials/First-Run-Tutorial) to add  *charting_library* and *datafeeds* library to your new React project.
+- Once done, follow the first 2 steps on their [tutorial](https://www.tradingview.com/charting-library-docs/latest/tutorials/First-Run-Tutorial) to add  **charting_library** and **datafeeds** library to your new React project folder. For this tutorial **I have added the folders in the parent directory**.
 
 - Now we will write different parts of the logic
 
