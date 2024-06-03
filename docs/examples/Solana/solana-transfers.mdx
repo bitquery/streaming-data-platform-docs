@@ -35,7 +35,7 @@ This program allows you to test the data and its integration into your applicati
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-# Subscribe to the latest NFT token transfers on Solana
+## Subscribe to the latest NFT token transfers on Solana
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to all NFT token transfers. You can run the query [here](https://ide.bitquery.io/Subscribe-to-the-latest-NFT-transfers-on-Solana)
 
@@ -70,7 +70,7 @@ subscription {
 
 ```
 
-# SPL Token Transfers API | Token transfers of a particular token on Solana
+## SPL Token Transfers API | Token transfers of a particular token on Solana
 
 One of the most common types of transfers on Solana are SPL token transfers. Let's see an example to get the latest SPL token transfers using our API. Today we are taking an example of JUPITER token transfers. The contract address for the JUPITER token is `JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN`. You can find the query [here](https://ide.bitquery.io/SPL-transfers-websocket_1)
 
@@ -105,7 +105,7 @@ subscription {
 
 ```
 
-# Sender is a particular address
+## Transfers sent by specific address
 
 This websocket retrieves transfers where the sender is a particular address `2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {Address: {is: "2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc"}}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/transfers-where-sender-is-the-specified-address_1)
 
@@ -138,6 +138,54 @@ subscription {
 }
 
 ```
+
+## Monitor multiple solana wallets transfers in real time using Websocket
+
+You can also monitor multiple wallet addresses using Bitquery's GraphQL subscription via WebSocket. The following query listens to real-time transfers sent or received by the specified wallet addresses.
+
+You can include around 100 addresses in a single subscription, potentially more, as we typically do not throttle this on our end.
+
+However, if you need to track thousands of addresses, you can subscribe to all transfers and filter them on your side.
+
+Websockets are priced based on their running time, not the amount of data delivered.
+
+Run query using [this link](https://ide.bitquery.io/Solana-Websocket---Subscribe-to-all-transfers-of-specific-addresses-in-realtime)
+
+
+```graphql
+subscription {
+  Solana {
+    Transfers(
+      where: {any: [{Transfer: {Sender: {Address: {in: ["7Ppgch9d4XRAygVNJP4bDkc7V6htYXGfghX4zzG9r4cH", "G6xptnrkj4bxg9H9ZyPzmAnNsGghSxZ7oBCL1KNKJUza"]}}}}, {Transfer: {Receiver: {Address: {in: ["7Ppgch9d4XRAygVNJP4bDkc7V6htYXGfghX4zzG9r4cH", "G6xptnrkj4bxg9H9ZyPzmAnNsGghSxZ7oBCL1KNKJUza"]}}}}]}
+    ) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Authority {
+          Address
+        }
+        Currency {
+          Decimals
+          CollectionAddress
+          Fungible
+          MetadataAddress
+          MintAddress
+          Name
+          Native
+          Symbol
+        }
+        Receiver {
+          Address
+        }
+        Sender {
+          Address
+        }
+      }
+    }
+  }
+}
+```
+
 
 ## Video Tutorial on Solana Transfers API | How to get NFT, SPL Transfers data on Solana in Realtime
 
