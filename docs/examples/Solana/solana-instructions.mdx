@@ -172,6 +172,46 @@ subscription{
 
 ```
 
+## Track Real-time Token Burn on Solana
+
+Receive real-time updates on token burn events on the Solana blockchain. The below query applies a filter to only include instructions where:
+Program Method includes `burn`, indicating that the instruction is related to token burning.
+
+```
+
+subscription {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Method: {includes: "burn"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+          Name
+          Method
+        }
+        Logs
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+
+```
+
 ## Video Tutorial on Solana Instructions API | How to track New Liquidity Pools Created on Solana Raydium & Orca DEX
 
 <VideoPlayer url="https://youtu.be/FO4-sYHgF-k?si=xBI9j4gnFxmuzQrU" />
