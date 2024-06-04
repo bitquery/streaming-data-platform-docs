@@ -1,0 +1,163 @@
+---
+sidebar_position: 1
+---
+
+# Use Bitquery API to get all types of DEXScreener Data
+
+This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair and many more just like how DEXScreener shows.
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+## Get Trade Transactions for a particular pair in realtime
+
+The query will subscribe you to real-time trade transactions for a pair, providing a continuous stream of data as new trades are processed and recorded.
+You can find the query [here](https://ide.bitquery.io/Get-pair-trades-data-just-like-dexcsreener)
+
+```
+subscription{
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      orderBy: {ascending: Block_Time}
+      where: {Trade: {Currency: {SmartContract: {is: "0x382ea807A61a418479318Efd96F1EFbC5c1F2C21"}}, Side: {Currency: {SmartContract: {is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"}}}}}
+    ) {
+      Block{
+        Time
+      }
+      Trade {
+        Amount
+        Currency {
+          Symbol
+        }
+        PriceInUSD
+        Dex {
+          ProtocolName
+          SmartContract
+        }
+        Side {
+          Amount
+          AmountInUSD
+          Currency {
+            Symbol
+          }
+          Buyer
+          Seller
+        }
+        Buyer
+        Seller
+      }
+      Transaction {
+        Maker: From
+        Hash
+        Type
+      }
+    }
+  }
+}
+
+
+```
+
+## Get Price of a Token
+
+This query will give you the latest Price of a specified token using DEXTrades API. Here we have calculated the price of a token in USD and also against the sell currency. Here is the [saved query link](https://ide.bitquery.io/Price-of-a-token-in-realtime)
+
+```
+query MyQuery {
+  EVM(network: eth, dataset: realtime) {
+    DEXTrades(
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a"}}}, Sell: {Currency: {SmartContract: {is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"}}}, Dex: {Pair: {SmartContract: {is: "0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d"}}}}, TransactionStatus: {Success: true}}
+    ) {
+      Trade {
+        Buy {
+          Currency {
+            Symbol
+          }
+          Price_In_USD: PriceInUSD
+          Price_against_sell_currency: Price
+        }
+        Sell {
+          Currency {
+            Symbol
+          }
+        }
+      }
+    }
+  }
+}
+
+
+```
+
+## Get Liquidity of a specific pair by using its Pair Address
+
+The below query finds the liquidity of a pool using the pool address `0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d`. With this query we can get balance of the pool tokens. And to get the USD Liquidity you can multiply the balances of both the tokens to their respective USD prices and then sum it up.
+
+You can find the query [here](https://ide.bitquery.io/Get-liquidity-of-a-pair_1)
+
+```
+query MyQuery {
+  EVM(dataset: archive, network: eth) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d"}}, Currency: {SmartContract: {in: ["0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"]}}}
+      orderBy: {descendingByField: "balance"}
+  ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount)
+    }
+  }
+}
+
+
+```
+
+## Get the Buys, Sells, Buy Volume, Sell Volume and Makers
+
+The query will fetch you the buys, sells, buy volume, sell volume and also the number of makers for a particular pair just like how DEXScreener shows in its UI. We are getting these trade metrics for this particular pool address `0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d`. You can check out the video tutorial [here](https://www.youtube.com/watch?v=f052KzAsqnQ) to understand the query better.
+
+You can find the query [here](https://ide.bitquery.io/Trade-metrics-just-like-dexscreener_4)
+
+```
+query MyQuery {
+  EVM(network: eth, dataset: combined) {
+    DEXTrades(
+      limit: {count: 1}
+      where: {Block: {Time: {since: "2024-05-29T09:15:00Z", till: "2024-05-30T09:15:00Z"}}, TransactionStatus: {Success: true}, Trade: {Dex: {Pair: {SmartContract: {is: "0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d"}}}}}
+    ) {
+      Makers: count(distinct: Transaction_From)
+      buys: count(
+        if: {Trade: {Sell: {Currency: {SmartContract: {is: "0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a"}}}}}
+      )
+      buy_vol: sum(
+        of: Trade_Buy_AmountInUSD
+        if: {Trade: {Buy: {Currency: {SmartContract: {is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"}}}}}
+      )
+      sells: count(
+        if: {Trade: {Buy: {Currency: {SmartContract: {is: "0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a"}}}}}
+      )
+      sell_vol: sum(
+        of: Trade_Sell_AmountInUSD
+        if: {Trade: {Sell: {Currency: {SmartContract: {is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"}}}}}
+      )
+    }
+  }
+}
+
+
+
+```
+
+## Video Tutorial on How to Get EVM Chains Trades Data just like DEXScreener from Bitquery API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=sdQxnuRftaw" />
+
+## Video Tutorial on How to Get USD Price of a pool Token and Liquidity of the Pool just like DEXScreener shows
+
+<VideoPlayer url="https://www.youtube.com/watch?v=xw8eezkFejI" />
+
+## Video Tutorial on How to Get Buys, Sells, Buy Volume, Sell Volume, and Makers for EVM Chains just like DEXScreener
+
+<VideoPlayer url="https://www.youtube.com/watch?v=f052KzAsqnQ" />
