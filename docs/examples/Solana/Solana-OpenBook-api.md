@@ -5,7 +5,7 @@
 The below query gets real-time information whenever there's a new trade on the OpenBook DEX including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics.
 You can run the query [here](https://ide.bitquery.io/Real-time-trades-on-OpenBook-DEX-on-Solana)
 
-```
+```graphql
 query SolanaOpenBookDexTrades {
   Solana {
     DEXTrades(
@@ -58,8 +58,6 @@ query SolanaOpenBookDexTrades {
 ```
 
 ## Price Average of Pair on OpenBook
-
-You can also query OHLC data in real time from Raydium DEX.
 
 [Here](https://ide.bitquery.io/Average-Price-for-24-hours-of-a-token-on-OpenBook-DEX-on-Solana_1) is the query to get average price of a selected pair on a selected day.
 
