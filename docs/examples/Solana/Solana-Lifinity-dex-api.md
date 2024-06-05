@@ -2,7 +2,7 @@
 
 ## Lifinity Trades in Real-Time
 
-The below query gets real-time information whenever there's a new trade on the OpenBook DEX including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics.
+The below query gets real-time information whenever there's a new trade on the Lifinity DEX including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics.
 You can run the query [here](https://ide.bitquery.io/Real-time-trades-on-Lifinity-DEX-on-Solana_1)
 
 ```graphql
@@ -55,7 +55,7 @@ subscription {
 
 ## Average Price and Trade Volume of a Token on Lifinity
 
-Tarding parameters like the average and volume are important factors for determining entry and exit points of a trade.
+Trading parameters like the average and volume are important factors for determining entry and exit points of a trade.
 
 [Here](https://ide.bitquery.io/Average-Price-and-Total-Volume-Traded-for-24-hours-for-WSOL-on-Lifinity-DEX-on-Solana) is the query to get these parameters for a selected token based on the last 24 hours activity.
 
