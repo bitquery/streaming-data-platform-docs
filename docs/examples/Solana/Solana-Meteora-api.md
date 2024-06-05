@@ -1,0 +1,84 @@
+# Meteora DEX API
+
+## Meteora Trades in Real-Time
+
+The below query gets real-time information whenever there's a new trade on the Meteora DEX including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics.
+You can run the query [here](https://ide.bitquery.io/Real-time-trades-on-Meteora-DEX-on-Solana#)
+
+```graphql
+subscription {
+  Solana {
+    DEXTrades(
+      orderBy: {descending: Block_Time}
+      where: {Trade: {Dex: {ProtocolFamily: {is: "Meteora"}}}}
+    ) {
+      Trade {
+        Dex {
+          ProgramAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        Buy {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+          Amount
+          Account {
+            Address
+          }
+          PriceAgainstSellCurrency:Price
+        }
+        Sell {
+          Account {
+            Address
+          }
+          Amount
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+          PriceAgainstBuyCurrency: Price
+        }
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+
+```
+
+## Volatility of a Pair on Meteora
+
+Volatility is an important factor in trading world as it determines the fluctuation in price that implies the possibility of profit and risk of loss. Lesser volatility denotes that the pair is stable.  
+
+[Here](https://ide.bitquery.io/Volatility-of-WSOL-USDC-Pair-on-Meteora-Dex-on-Solana_3) is the query to get the volatility for a selected pair in the last 24 hours.
+
+```graphql
+query VolatilityonMeteora {
+  Solana {
+    DEXTrades(
+      where: {
+        Trade: {
+          Dex: {ProtocolFamily: {is: "Meteora"}},
+          Buy: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}},
+          Sell: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}
+        },
+        Block: {
+          Time: {
+            after: "2024-06-04T00:00:00Z", 
+            before: "2024-06-05T00:00:00Z"
+          }
+        }
+      }
+    ) {
+      volatility:standard_deviation(of: Trade_Buy_Price)
+    }
+  }
+}
+
+```
