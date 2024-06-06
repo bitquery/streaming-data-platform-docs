@@ -46,7 +46,7 @@ Use Bitquery APIs to see when large amounts of tokens are added to pools. This c
 
 #### Example Query
 
-To track liquidity events, you can use a query similar to the one for tracking token unlocks, but focusing on transactions related to liquidity pools. Here’s a sample query to track liquidity additions on the Ethereum network:
+To track liquidity events, you can use a query similar to the one for tracking token unlocks, but focusing on transactions related to liquidity pools. Here’s a sample query to track [liquidity additions](https://ide.bitquery.io/liquidity-additions) on the Ethereum network:
 
 ```graphql
 {
@@ -112,7 +112,7 @@ In order to see when large amounts of tokens are taken out of pools, we can use 
 
 #### Example Query
 
-To track liquidity removal events, use a query similar to the one for tracking liquidity additions, but focus on transactions related to liquidity removals. Here’s a sample query to track liquidity removals on the Ethereum network:
+To track liquidity removal events, use a query similar to the one for tracking liquidity additions, but focus on transactions related to liquidity removals. Here’s a sample query to [track liquidity removals](https://ide.bitquery.io/liquidity-removals) on the Ethereum network:
 
 ```graphql
 {
@@ -172,7 +172,7 @@ This query helps identify significant liquidity removals, providing insights int
 
 - Query the Lockup Transactions
 
-In order to search for transactions that lock tokens, we can use Bitquery APIs. Here’s a sample query for locked tokens on the Ethereum network:
+In order to search for transactions that lock tokens, we can use Bitquery APIs. Here’s a sample query for [locked tokens](https://ide.bitquery.io/locked-tokens) on the Ethereum network:
 
 ```graphql
 {
@@ -208,7 +208,7 @@ This query fetches transactions related to the lockup, providing details such as
 
 ### Monitor Unlock Events
 
-Set up a query to keep an eye on upcoming token unlock events. For example:
+Set up a query to keep an eye on upcoming [token unlock events](https://ide.bitquery.io/token-unlock). For example:
 
 ```graphql
 {
@@ -288,16 +288,11 @@ query ($network: evm_network, $limit: Int, $method: String) {
 }
 ```
 
-### Optimism Token Unlock
-
-Optimism, another solution to make Ethereum faster and cheaper, also has a token release schedule. Watching these events can provide insights into market liquidity and investor sentiment. Keeping an eye on Optimism's token unlocks helps investors stay informed about potential changes in market conditions and plan their trades effectively.
 
 
 ### Solana Token Unlock Schedule
 
-Solana, known for its fast and cheap transactions, has important token unlock events. Tracking these can help understand its market dynamics and potential price movements.
-
-Link: https://ide.bitquery.io/Solana-Token
+Solana, known for its fast and cheap transactions, has important token unlock events. Tracking these can help understand its market dynamics and potential price movements. You can run the query [here](https://ide.bitquery.io/Solana-Token)
 
 ```graphql
 {
