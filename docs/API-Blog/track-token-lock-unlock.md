@@ -49,17 +49,10 @@ Use Bitquery APIs to see when large amounts of tokens are added to pools. This c
 To track liquidity events, you can use a query similar to the one for tracking token unlocks, but focusing on transactions related to liquidity pools. Here’s a sample query to track [liquidity additions](https://ide.bitquery.io/liquidity-additions) on the Ethereum network:
 
 ```graphql
-{
-  EVM(dataset: combined, network: eth) {
+subscription {
+  EVM(network: eth) {
     Events(
-      where: {
-        LogHeader: {
-          Address: { is: "0x663A5C229c09b049E36dCc11a9B0d4a8Eb9db214" }
-        }
-        Log: { Signature: { Name: { is: "onDeposit" } } }
-      }
-      limit: { count: 50 }
-      orderBy: { descending: Block_Time }
+      where: {LogHeader: {Address: {is: "0x663A5C229c09b049E36dCc11a9B0d4a8Eb9db214"}}, Log: {Signature: {Name: {is: "onDeposit"}}}}
     ) {
       Block {
         Number
@@ -94,6 +87,7 @@ To track liquidity events, you can use a query similar to the one for tracking t
     }
   }
 }
+
 ```
 
 This query helps identify significant liquidity additions, providing insights into market dynamics.
@@ -172,19 +166,12 @@ This query helps identify significant liquidity removals, providing insights int
 
 - Query the Lockup Transactions
 
-In order to search for transactions that lock tokens, we can use Bitquery APIs. Here’s a sample query for [locked tokens](https://ide.bitquery.io/locked-tokens) on the Ethereum network:
+In order to search for transactions that lock tokens, we can use Bitquery real-time APIs to get alerts in realtime. Here’s a sample query for [locked tokens](https://ide.bitquery.io/realtime-token-lock) on the Ethereum network:
 
 ```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    Calls(
-      limit: { count: 10 }
-      orderBy: { descending: Block_Date }
-      where: {
-        Call: { Signature: { Signature: { is: "lock()" } } }
-        Block: { Date: { after: "2023-01-01" } }
-      }
-    ) {
+subscription {
+  EVM( network: eth) {
+    Calls(where: {Call: {Signature: {Signature: {is: "lock()"}}}}) {
       Call {
         LogCount
         InternalCalls
@@ -202,6 +189,7 @@ In order to search for transactions that lock tokens, we can use Bitquery APIs. 
     }
   }
 }
+
 ```
 
 This query fetches transactions related to the lockup, providing details such as the date, transaction hash, gas price, and gas used. It helps in understanding the initial lockup conditions and timelines.
@@ -211,16 +199,9 @@ This query fetches transactions related to the lockup, providing details such as
 Set up a query to keep an eye on upcoming [token unlock events](https://ide.bitquery.io/token-unlock). For example:
 
 ```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    Calls(
-      limit: { count: 10 }
-      orderBy: { descending: Block_Date }
-      where: {
-        Call: { Signature: { Signature: { is: "unlock()" } } }
-        Block: { Date: { after: "2023-01-01" } }
-      }
-    ) {
+subscription {
+  EVM(network: eth) {
+    Calls(where: {Call: {Signature: {Signature: {is: "unlock()"}}}}) {
       Call {
         LogCount
         InternalCalls
@@ -238,11 +219,12 @@ Set up a query to keep an eye on upcoming [token unlock events](https://ide.bitq
     }
   }
 }
+
 ```
 
-This query tracks transactions that signal token unlocks, providing details about the dates, transaction hash, gas price, and gas used. It helps in predicting when tokens will become available for trading. 4. Set Up Notifications
+This subscription query tracks transactions that signal token unlocks, providing details about the dates, transaction hash, gas price, and gas used. It helps in predicting when tokens will become available for trading. 4. Set Up Notifications
 
-Create notifications to alert you when tokens are about to be unlocked. You can use email alerts, webhooks, or messaging platforms like Slack. Setting up notifications ensures you stay informed about important events and can react promptly to market changes.
+[Create notifications to alert](https://docs.bitquery.io/docs/usecases/monitoring-solana-blockchain-real-time-tutorial/) you when tokens are about to be unlocked. You can use email alerts, websockets, or messaging platforms like Slack. Setting up notifications ensures you stay informed about important events and can react promptly to market changes.
 
 
 ### Tracking Token Lock/ Unlock Without Knowing Log Signatures
