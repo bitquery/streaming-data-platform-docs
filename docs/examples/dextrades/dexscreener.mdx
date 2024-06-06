@@ -8,6 +8,49 @@ This section will guide you through different APIs which will tell you how to ge
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
+## Get the Top Trading Pairs
+
+The query will fetch you the Top Trading Pairs in desceneding order of the total number of trades took place in them just like how DEXScreener shows in its UI. You can check out the video tutorial [here](https://www.youtube.com/watch?v=qAJ2SPFaO-k) to understand the query better.
+
+You can find the query [here](https://ide.bitquery.io/List-of-trading-pairs-in-descending-order-of-trxns-in-last-24-hours)
+
+```
+query TrendingPairs {
+  EVM(dataset: combined, network: eth) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "TradeCount"}
+      where: {Block: {Time: {since: "2024-06-05T08:08:00Z"}}, TransactionStatus: {Success: true}}
+      limit: {count: 10}
+      limitBy: {by: Trade_Dex_Pair_SmartContract, count: 1}
+    ) {
+      TradeCount: count
+      Trade {
+        Dex {
+          SmartContract
+          ProtocolName
+          ProtocolFamily
+          Pair {
+            SmartContract
+          }
+        }
+        Currency {
+          Symbol
+          SmartContract
+        }
+        Side {
+          Currency {
+            Symbol
+            SmartContract
+          }
+        }
+      }
+    }
+  }
+}
+
+
+```
+
 ## Get Trade Transactions for a particular pair in realtime
 
 The query will subscribe you to real-time trade transactions for a pair, providing a continuous stream of data as new trades are processed and recorded.
@@ -146,8 +189,6 @@ query MyQuery {
   }
 }
 
-
-
 ```
 
 ## Video Tutorial on How to Get EVM Chains Trades Data just like DEXScreener from Bitquery API
@@ -161,3 +202,7 @@ query MyQuery {
 ## Video Tutorial on How to Get Buys, Sells, Buy Volume, Sell Volume, and Makers for EVM Chains just like DEXScreener
 
 <VideoPlayer url="https://www.youtube.com/watch?v=f052KzAsqnQ" />
+
+## Video Tutorial on How to Get Top Trading Pairs for EVM Chains just like DEXScreener
+
+<VideoPlayer url="https://www.youtube.com/watch?v=qAJ2SPFaO-k" />
