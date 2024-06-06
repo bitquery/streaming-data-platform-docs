@@ -108,7 +108,7 @@ Removing a lot of liquidity can make the market less stable and cause price swin
 
 #### How to Track
 
-In order to see when large amounts of tokens are taken out of pools, we can use Bitquery APIs. This can help predict potential market changes. By monitoring these events, you can stay ahead of market movements and adjust your strategies accordingly.
+In order to see when large amounts of tokens are taken out of pools, we can use Bitquery Event APIs. This can help predict potential market changes. By monitoring these events, you can stay ahead of market movements and adjust your strategies accordingly.
 
 #### Example Query
 
@@ -288,7 +288,40 @@ query ($network: evm_network, $limit: Int, $method: String) {
 }
 ```
 
+### Arbitrum Token Lock/ Unlock
 
+In any query if you are not sure about the event name or signature, use the `includes` filter to filter the events. In the below example, let's track latest token lock and unlock events on Arbitrum by using `includes: "locked"` filter for Log Signatures. You can run the query [here](https://ide.bitquery.io/Lockunlock-Events-Arbitrum)
+
+```
+{
+  EVM(dataset: archive, network: arbitrum) {
+    Events(
+      where: {Log: {Signature: {Name: {includes: "locked"}}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ) {
+      ChainId
+      Transaction {
+        Hash
+      }
+      Log {
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Fee {
+        SenderFee
+      }
+      Block {
+        Time
+        Number
+      }
+    }
+  }
+}
+
+```
 
 ### Solana Token Unlock Schedule
 
