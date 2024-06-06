@@ -248,10 +248,44 @@ Create notifications to alert you when tokens are about to be unlocked. You can 
 
 Use tools to visualize and analyze the data. This helps you see trends and make informed decisions about when tokens will be unlocked. Visualization tools can help you identify patterns and potential impacts on the market, aiding in strategic decision-making. In this section we will see how to track token unlock events for specific chains.
 
+### Tracking Token Lock/ Unlock Without Knowing Log Signatures
+
+In any query if you are not sure about the event name or signature, use the `includes` filter to filter the events. In the below example, let's track latest token lock and unlock events on Optimism by using `includes: "locked"` filter for Log Signatures. You can run the query [here](https://ide.bitquery.io/Optimism-token-unlocked)
+
+```
+{
+  EVM(dataset: archive, network: optimism) {
+    Events(
+      where: {Log: {Signature: {Name: {includes: "locked"}}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ) {
+      ChainId
+      Transaction {
+        Hash
+      }
+      Log {
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Fee {
+        SenderFee
+      }
+      Block {
+        Time
+        Number
+      }
+    }
+  }
+}
+
+```
+
 ### Arbitrum Token Unlock
 
-Arbitrum, a solution to help Ethereum scale better, has a schedule for when its tokens will be unlocked. Tracking these events helps investors predict market behavior and price impacts. By monitoring Arbitrum's token unlock schedule, investors can anticipate changes in token supply and adjust their strategies accordingly.
-Link: https://ide.bitquery.io/Arbitrum-Token-Unlock_1
+Arbitrum, a solution to help Ethereum scale better, has a schedule for when its tokens will be unlocked. Tracking these events helps investors predict market behavior and price impacts. By monitoring Arbitrum's token unlock schedule, investors can anticipate changes in token supply and adjust their strategies accordingly. You can run the query [here](https://ide.bitquery.io/Arbitrum-Token-Unlock_1)
 
 ```graphql
 
@@ -288,40 +322,7 @@ query ($network: evm_network, $limit: Int, $method: String) {
 }
 ```
 
-### Arbitrum Token Lock/ Unlock
 
-In any query if you are not sure about the event name or signature, use the `includes` filter to filter the events. In the below example, let's track latest token lock and unlock events on Arbitrum by using `includes: "locked"` filter for Log Signatures. You can run the query [here](https://ide.bitquery.io/Lockunlock-Events-Arbitrum)
-
-```
-{
-  EVM(dataset: archive, network: arbitrum) {
-    Events(
-      where: {Log: {Signature: {Name: {includes: "locked"}}}}
-      limit: {count: 10}
-      orderBy: {descending: Block_Time}
-    ) {
-      ChainId
-      Transaction {
-        Hash
-      }
-      Log {
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Fee {
-        SenderFee
-      }
-      Block {
-        Time
-        Number
-      }
-    }
-  }
-}
-
-```
 
 ### Solana Token Unlock Schedule
 
