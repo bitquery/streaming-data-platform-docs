@@ -244,9 +244,6 @@ This query tracks transactions that signal token unlocks, providing details abou
 
 Create notifications to alert you when tokens are about to be unlocked. You can use email alerts, webhooks, or messaging platforms like Slack. Setting up notifications ensures you stay informed about important events and can react promptly to market changes.
 
-##  Analyze and Visualize Data
-
-Use tools to visualize and analyze the data. This helps you see trends and make informed decisions about when tokens will be unlocked. Visualization tools can help you identify patterns and potential impacts on the market, aiding in strategic decision-making. In this section we will see how to track token unlock events for specific chains.
 
 ### Tracking Token Lock/ Unlock Without Knowing Log Signatures
 
