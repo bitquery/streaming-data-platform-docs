@@ -3,7 +3,7 @@
 ## Lifinity Trades in Real-Time
 
 The below query gets real-time information whenever there's a new trade on the Lifinity DEX including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics.
-You can run the query [here](https://ide.bitquery.io/Real-time-trades-on-Lifinity-DEX-on-Solana_1)
+You can run the query [here](https://ide.bitquery.io/Real-time-trades-on-Lifinity-DEX-on-Solana_2)
 
 ```graphql
 subscription {

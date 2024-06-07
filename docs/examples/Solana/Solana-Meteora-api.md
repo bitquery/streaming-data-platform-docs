@@ -3,13 +3,12 @@
 ## Meteora Trades in Real-Time
 
 The below query gets real-time information whenever there's a new trade on the Meteora DEX including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics.
-You can run the query [here](https://ide.bitquery.io/Real-time-trades-on-Meteora-DEX-on-Solana#)
+You can run the query [here](https://ide.bitquery.io/Real-time-trades-on-Meteora-DEX-on-Solana_1)
 
 ```graphql
 subscription {
   Solana {
     DEXTrades(
-      orderBy: {descending: Block_Time}
       where: {Trade: {Dex: {ProtocolFamily: {is: "Meteora"}}}}
     ) {
       Trade {
