@@ -601,6 +601,71 @@ subscription {
 }
 ```
 
+## Track Raydium DEXTrades enabled by OpenBook Protocol
+
+You can track Raydium DEXTrades which are enabled by OpenBook Protocol in real time on Raydium DEX from Raydium API using instructions. So OpenBook is an Order Book Protocol which Raydium has integrated in its constant product amm. If you want a full explaination of this API, watch our [Youtube Video](https://www.youtube.com/watch?v=aYARyvvItHA).
+
+If you want to track latest Raydium DEXTrades enabled by OpenBook order book Protocol, you can use [this Websocket api](https://ide.bitquery.io/Raydium-dextrades-through-OpenBook-order-book#).
+
+```graphql
+subscription {
+  Solana {
+    DEXTrades(
+      where: {
+        Trade: { Dex: { ProtocolFamily: { is: "Raydium" } } }
+        Instruction: {
+          Accounts: {
+            includes: {
+              Address: { is: "srmqPvymJeFKQ4zGQed1GFppgkRHL9kaELCbyksJtPX" }
+            }
+          }
+        }
+      }
+    ) {
+      Trade {
+        Buy {
+          Account {
+            Address
+          }
+          Amount
+          AmountInUSD
+          Currency {
+            MintAddress
+            Symbol
+          }
+          Price
+          PriceInUSD
+        }
+        Market {
+          MarketAddress
+        }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+          ProgramAddress
+        }
+        Sell {
+          Account {
+            Address
+          }
+          Amount
+          AmountInUSD
+          Currency {
+            MintAddress
+            Symbol
+          }
+          Price
+          PriceInUSD
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
 ## Video Tutorial | How to Track Latest Trades, Latest Price of a Token on Solana Raydium DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=T1AVFL7weBI" />
@@ -612,3 +677,7 @@ subscription {
 ## Video Tutorial | How to Track Add Liquidity and Remove Liquidity Transactions on Raydium DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=s3VfsMiRRVM" />
+
+## Video Tutorial | How to track Raydium DEXTrades enabled by OpenBook Protocol using Bitquery API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=aYARyvvItHA" />
