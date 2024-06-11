@@ -38,8 +38,8 @@ You can use following [query](https://ide.bitquery.io/token-holder-api_1) to get
     TokenHolders(
       date: "2024-03-01"
       tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
-      limit: {count: 100}
-      orderBy: {descending: Balance_Amount}
+      limit: { count: 100 }
+      orderBy: { descending: Balance_Amount }
     ) {
       Holder {
         Address
@@ -270,6 +270,33 @@ query MyQuery {
     }
   }
 }
+```
+
+## Top Token Holders of a specific Token
+
+To get data related to top token holders, you can also use the Balance Updates API. In this example, we will write a query to get the top 10 token holders with the most number of Tokens of a speific Token. We have retreived here top 10 token holders for this currency `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`. You can see the results by running [this query](https://ide.bitquery.io/Top-10-token-holders-of-a-specific-token_1#) in the IDE.
+
+```
+query MyQuery {
+  EVM(network: eth, dataset: combined) {
+    BalanceUpdates(
+      limit: {count: 10}
+      orderBy:{descendingByField: "Balance"}
+      where: {Currency: {SmartContract: {is: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"}}}
+    ) {
+      Balance: sum(of: BalanceUpdate_Amount)
+      Currency{
+        SmartContract
+        Name
+        Symbol
+      }
+      BalanceUpdate{
+        Address
+      }
+    }
+  }
+}
+
 ```
 
 ## Common Token Holders of Two Tokens
