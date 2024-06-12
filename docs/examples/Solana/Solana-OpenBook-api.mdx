@@ -5,15 +5,13 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 ## OpenBook Trades in Real-Time
 
 The below query gets real-time information whenever there's a new trade on the OpenBook DEX including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics.
-You can run the query [here](https://ide.bitquery.io/Real-time-trades-on-OpenBook-DEX-on-Solana)
+You can run the query [here](https://ide.bitquery.io/Real-time-trades-on-OpenBook-DEX-on-Solana_1)
 
 ```graphql
-query SolanaOpenBookDexTrades {
+subscription {
   Solana {
     DEXTrades(
-      limit: { count: 10 }
-      orderBy: { descending: Block_Time }
-      where: { Trade: { Dex: { ProtocolFamily: { is: "OpenBook" } } } }
+      where: {Trade: {Dex: {ProtocolFamily: {is: "OpenBook"}}}}
     ) {
       Trade {
         Dex {
@@ -25,15 +23,13 @@ query SolanaOpenBookDexTrades {
           Currency {
             Name
             Symbol
-            ProgramAddress
             MintAddress
           }
           Amount
           Account {
             Address
           }
-          Price
-          AmountInUSD
+          PriceAgainstSellCurrency:Price
         }
         Sell {
           Account {
@@ -43,11 +39,9 @@ query SolanaOpenBookDexTrades {
           Currency {
             Name
             Symbol
-            ProgramAddress
             MintAddress
           }
-          PriceAgainstSellCurrency: Price
-          AmountInUSD
+          PriceAgainstBuyCurrency: Price
         }
       }
       Block {
