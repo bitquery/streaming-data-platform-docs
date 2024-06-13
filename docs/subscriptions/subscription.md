@@ -102,3 +102,5 @@ subscription ($token: String!, $minamount: String!, $mempool: Boolean, $network:
   "network": "eth"
 }
 ```
+## How to Close a Subscription?
+
