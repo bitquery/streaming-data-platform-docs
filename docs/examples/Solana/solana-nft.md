@@ -40,7 +40,7 @@ This program allows you to test the data and its integration into your applicati
 ## Track Latest NFT Trades
 
 The subscription query provided below fetches the most recent NFT trades on the Solana blockchain.
-You can find the query [here](https://ide.bitquery.io/Latest-Solana-NFT-Trades)
+You can find the query [here](https://ide.bitquery.io/Latest-Solana-NFT-Trades). In this query you will also get failed transactions. To get only successful transactions, set `Transaction: {Result: {Success: true}}`
 
 ```
 subscription {
