@@ -45,18 +45,20 @@ You can find the query [here](https://ide.bitquery.io/Latest-Solana-NFT-Trades)
 ```
 subscription {
   Solana {
-    DEXTradeByTokens(where: {Trade: {Side: {Currency: {Fungible: false}}}}) {
-      Block {
-        Time
-      }
+    DEXTradeByTokens(where: {Trade: {Currency: {Fungible: false}}}) {
       Trade {
-        Amount
-        Price
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
         Currency {
           Symbol
-          Name
         }
+        Amount
         Side {
+          Currency {
+            Symbol
+          }
           Amount
         }
       }
