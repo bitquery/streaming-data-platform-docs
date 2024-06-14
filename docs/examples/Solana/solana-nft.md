@@ -114,3 +114,33 @@ subscription {
 
 
 ```
+
+## Get Most Traded NFTs Recently
+
+The subscription query provided fetches the most-traded NFTs in the last few hours. Since Solana information on v2 endpoint is part of the EAP, only realtime information is available, the aggregate might not be accurate beyond a few hours.
+You can find the query [here](https://ide.bitquery.io/NFT-currencies-on-Solana-by-DEXes_1)
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "amt"}
+      where: {Trade: {Currency: {Fungible: false}}}
+    ) {
+      amt: sum(of: Trade_Amount)
+      Trade {
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Currency {
+          Symbol
+          MintAddress
+        }
+      }
+      count
+    }
+  }
+}
+
+```
