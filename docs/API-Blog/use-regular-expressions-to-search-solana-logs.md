@@ -168,5 +168,6 @@ query {
 This query will return the Solana Instructions Logs and transaction signature to double check the results and get more info.  
 
 ## Conclusion​
-Token lockups are becoming common in the cryptocurrency world. They help prevent price volatility and ensure long-term success for projects. This builds trust between investors and development teams.
-However, choosing the right lockup structure is crucial. It should fit the project's goals and objectives. Tracking token locks and unlocks is essential for managing cryptocurrencies effectively. Bitquery APIs offer powerful tools to monitor these events, providing detailed data and customizable queries. By using Bitquery, investors and project teams can stay informed about token movements, make well-informed decisions, and maintain market confidence.
+Token minting and burning are common in the cryptocurrency world. They help to reward the project stakeholders and add value to the projects. This builds trust between investors and development teams.
+
+However, choosing the right timing for both is crucial. It should fit the project's goals and objectives. Tracking token mint and burn is essential for managing cryptocurrencies effectively. Bitquery APIs offer powerful tools to monitor these events, providing detailed data and customizable queries. By using Bitquery, investors and project teams can stay informed about token movements, make well-informed decisions, and maintain market confidence.
