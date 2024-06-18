@@ -134,3 +134,25 @@ To find instructions based on logs that contain specific patterns or keywords, s
 }
 
 ```
+## Searching Logs using a Particular Keyword
+
+To find instructions based on logs that contain specific patterns or keywords, such as an ZETA market log, you can use the `includes` filter which searches for the presence of the keyword as a whole in the log. 
+You can run the query [here](https://ide.bitquery.io/Solana-Zeta-Market-logs)
+
+```
+{
+  Solana {
+    Instructions(
+      where: {Instruction: {Logs: {includes: {includes: "ZETA"}}}}
+      limit: {count: 10}
+    ) {
+      Transaction {
+        Signature
+      }
+      Instruction {
+        Logs
+      }
+    }
+  }
+}
+```

@@ -42,44 +42,31 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 ## Track Latest NFT Trades
 
 The subscription query provided below fetches the most recent NFT trades on the Solana blockchain.
-You can find the query [here](https://ide.bitquery.io/Latest-Solana-NFT-Trades)
+You can find the query [here](https://ide.bitquery.io/Latest-Solana-NFT-Trades). In this query you will also get failed transactions. To get only successful transactions, set `Transaction: {Result: {Success: true}}`
 
 ```
 subscription {
   Solana {
     DEXTradeByTokens(where: {Trade: {Currency: {Fungible: false}}}) {
-      Block {
-        Time
-      }
       Trade {
-        Amount
-        Price
-        Currency {
-          Symbol
-          Name
-        }
-        Side {
-          Amount
-          Type
-        }
         Dex {
           ProtocolName
           ProtocolFamily
-          ProgramAddress
         }
-      }
-      Transaction {
-        Index
-        Result {
-          Success
-          ErrorMessage
+        Currency {
+          Symbol
+        }
+        Amount
+        Side {
+          Currency {
+            Symbol
+          }
+          Amount
         }
       }
     }
   }
 }
-
-
 
 ```
 
@@ -114,6 +101,36 @@ subscription {
 }
 
 
+
+```
+
+## Get Most Traded NFTs Recently
+
+The subscription query provided fetches the most-traded NFTs in the last few hours. Since Solana information on v2 endpoint is part of the EAP, only realtime information is available, the aggregate might not be accurate beyond a few hours.
+You can find the query [here](https://ide.bitquery.io/NFT-currencies-on-Solana-by-DEXes_1)
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "amt"}
+      where: {Trade: {Currency: {Fungible: false}}}
+    ) {
+      amt: sum(of: Trade_Amount)
+      Trade {
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Currency {
+          Symbol
+          MintAddress
+        }
+      }
+      count
+    }
+  }
+}
 
 ```
 
