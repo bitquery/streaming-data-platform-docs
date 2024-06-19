@@ -1,0 +1,251 @@
+---
+sidebar_position: 7
+---
+
+# ZETA DEX API
+
+In this section, we'll show you how to access information about Zeta DEX data using Bitquery APIs.
+
+This Solana API is part of our Early Access Program (EAP).
+
+You can use this program to try out the data and see how it works with your applications before you fully integrate it. You can learn more about this [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/).
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+## Track Order placed on Zeta in Realtime
+
+To retrieve the latest orders placed on Zeta DEX, we will utilize the Solana instructions API/Websocket.
+
+We will specifically look for the latest instructions from Zeta's program, identified by the program ID `ZETAxsqBRek56DhiGXrn75yj2NHU3aYUnxvHXpkf3aD`, [using this query](https://ide.bitquery.io/Get-all-the-Zeta-Program-methods#). And then we can see in the response that the method with the largest count is an empty string which should be the method to place orders. We will filter for this method to get the orders placed on Zeta in realtime.
+
+You can run this query using this [link](https://ide.bitquery.io/Track-orders-placed-on-Zeta-in-realtime#).
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "ZETAxsqBRek56DhiGXrn75yj2NHU3aYUnxvHXpkf3aD" }
+            Method: { is: "" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Owner
+            Mint
+            ProgramId
+          }
+        }
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+            }
+          }
+          Name
+          Method
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Track Liquidations happening on Zeta in Realtime
+
+To track the latest Liquidations on Zeta DEX, we will utilize the Solana instructions API/Websocket.
+
+We will specifically look for the latest instructions from Zeta's program, identified by the program ID `ZETAxsqBRek56DhiGXrn75yj2NHU3aYUnxvHXpkf3aD`, [using this query](https://ide.bitquery.io/Get-all-the-Zeta-Program-methods#). And then we can see in the response `liquidateV2` method which is called to initialize a liquidation. We will filter for this method to get the liquidations on Zeta in realtime.
+
+You can run this query using this [link](https://ide.bitquery.io/Track-Liquidations-on-Zeta-in-realtime).
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "ZETAxsqBRek56DhiGXrn75yj2NHU3aYUnxvHXpkf3aD" }
+            Method: { is: "liquidateV2" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Owner
+            Mint
+            ProgramId
+          }
+        }
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+            }
+          }
+          Name
+          Method
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Track Settling of Funds on Zeta in Realtime
+
+To retrieve the latest settling of funds transactions on Zeta DEX, we will utilize the Solana instructions API/Websocket.
+
+We will specifically look for the latest instructions from Zeta's program, identified by the program ID `ZETAxsqBRek56DhiGXrn75yj2NHU3aYUnxvHXpkf3aD`, [using this query](https://ide.bitquery.io/Get-all-the-Zeta-Program-methods#). And then we can see in the response `settleDEXFunds` method which is called to initialize a settlement. We will filter for this method to track the settlements on Zeta in realtime.
+
+You can run this query using this [link](https://ide.bitquery.io/Track-settling-of-funds-on-Zeta-in-realtime).
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "ZETAxsqBRek56DhiGXrn75yj2NHU3aYUnxvHXpkf3aD" }
+            Method: { is: "settleDexFunds" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Owner
+            Mint
+            ProgramId
+          }
+        }
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+            }
+          }
+          Name
+          Method
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Video Tutorial | How to Track Zeta Placed Orders, Liquidations and Settling of Funds
+
+<VideoPlayer url="https://www.youtube.com/watch?v=YjJsr4cY_U4" />
