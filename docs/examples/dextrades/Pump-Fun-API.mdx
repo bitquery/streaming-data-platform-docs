@@ -77,24 +77,69 @@ Get notified about the newly created token and its information on Pump Fun DEX f
 ### Get Pump Program Address and Method
 
 To run our desired query we need two parameters, that are Program Address and Method Name. To get these parameters, we can run 
-the [following query](https://ide.bitquery.io/Get-Pump-Address-and-Method-Name).
+the [following query](https://ide.bitquery.io/Track-new-token-launches-on-Pump-Fun-in-realtime).
 
 ```graphql
-query MyQuery {
+subscription {
   Solana {
     Instructions(
-      where: {Instruction: {Program: {Name: {is: "pump"}}}}
+      where: {Instruction: {Program: {Method: {is: "create"}, Name: {is: "pump"}}}}
     ) {
       Instruction {
-        Program {
-          Method
+        Accounts {
           Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+          }
+          Method
+          Name
         }
       }
-      count
+      Transaction {
+        Signature
+      }
     }
   }
 }
+
 
 ```
 
@@ -128,3 +173,9 @@ subscription {
 }
 
 ```
+
+## Video Tutorial on Getting Pump Fun Trades
+
+<VideoPlayer url="https://www.youtube.com/watch?v=QV8zBnmDFxY" />
+
+
