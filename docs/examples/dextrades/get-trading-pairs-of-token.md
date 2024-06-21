@@ -190,3 +190,67 @@ The query returns an object containing a list of DEX trades, each with the follo
 - `Dex`: An object containing information about the DEX, including the protocol name and owner address.
 - `Buy`: An object containing information about the buy currency, including the name and smart contract address.
 - `Sell`: An object containing information about the sell currency, including the name and smart contract address.
+
+
+
+## Get liquidity of token pool/pair
+
+To get liquidity of token pairs you need 2 things. 1. Pair address 2. Addresses of tokens in the pair.
+
+Here is an example of USDC-USDT token pair on Uniswap v3 with.
+
+Here pair address - `0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf`
+
+USDT address - `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+
+USDC address - `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
+
+
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf"}}, Currency: {SmartContract: {in: ["0xdAC17F958D2ee523a2206206994597C13D831ec7", "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"]}}}
+      orderBy: {descendingByField: "balance"}
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+    }
+  }
+}
+```
+
+You can run this query using [this link](https://ide.bitquery.io/liquidity-of-token-pair-on-ethereum)
+
+To know what are two tokens in a pair address, you can use [this query](https://ide.bitquery.io/tokens-in-a-given-pair-token).
+
+```graphql
+{
+  EVM(dataset: combined) {
+    DEXTrades(
+      limit: {count: 1}
+      where: {Trade: {Dex: {SmartContract: {is: "0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf"}}}}
+    ) {
+      Trade {
+        Buy {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+        Sell {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+      }
+    }
+  }
+}
+```
