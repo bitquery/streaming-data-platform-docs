@@ -347,3 +347,46 @@ It extends the previous example, selecting only calls that have all 4 conditions
 - the first argument value of type address equal to '0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969'
 - any argument called "amount"
 - argument named "amount" having value bigger than 1000000000
+
+
+## Filtering: Where vx selectWhere
+
+The `selectWhere` parameter functions similarly to the `HAVING` clause in SQL, allowing users to filter on aggregated data.
+
+To demonstrate the use of  `selectWhere`, consider the following query that retrieves blocks from the EVM dataset and filters based on a transaction count greater than 1,500,000.
+
+```
+query {
+  EVM(dataset: archive) {
+    Blocks {
+      Block {
+        Date
+      }
+      sum(of: Block_TxCount selectWhere: {gt: "1500000"})
+    }
+  }
+}
+```
+**sum(of: Block_TxCount selectWhere: {gt: "1500000"})**: Applies the `sum` aggregate function to `Block_TxCount` and filters for sums greater than 1,500,000.
+
+In this example, the query retrieves block data and applies a filter on the sum of transaction counts to include only those blocks where the transaction count exceeds 1,500,000.
+
+
+
+This is different from the  `where`  clause , which is used to filter the blocks based on the transaction count:
+
+```
+query {
+  EVM(dataset: archive) {
+    Blocks(where: {Block: {TxCount: {gt: 1500000}}}) {
+      Block {
+        Date
+      }
+    }
+  }
+}
+```
+-   **Blocks(where: {Block: {TxCount: {gt: 1500000}}})**: Filters blocks directly where  `TxCount`  is greater than 1,500,000 before aggregation.
+
+In this query, the  `where`  clause directly filters blocks with transaction counts greater than 1,500,000 before any aggregation occurs.
+
