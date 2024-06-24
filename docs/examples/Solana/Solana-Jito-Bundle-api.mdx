@@ -1,0 +1,134 @@
+# Jito Bundle API
+
+In this section, we will show you how to access information about Jito Bundles using Bitquery APIs.
+
+This Solana API is part of our Early Access Program (EAP).
+
+You can use this program to try out the data and see how it works with your applications 
+before you fully integrate it. You can learn more about this [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/).
+
+## Transfers to the Tip Payment Accounts
+
+Jito foundation has  Tip Payment Program that allows users to transfer tips to a set of 
+static public keys (compared to signing the transaction with the next N leaders) and ensure that 
+the incentives are distributed to the correct block leader, while enabling bundles to execute in upto 8 parallel threads.
+
+The subscription that provides you the transfer data of one of these addresses is [writen below](https://ide.bitquery.io/Transfers-of-Tip-Payment-Accounts-on-Solana_1#). 
+To get the data of all addresses you can use the [this](https://ide.bitquery.io/Transfers-of-All-Tip-Payment-Accounts-on-Solana) query.
+
+```graphql
+subscription {
+  Solana {
+    Recieved: Transfers(
+      where: {Transfer: {Receiver: {Address: {is: "HFqU5x63VTqvQss8hp11i4wVV8bD44PvwucfZ2bU7gRe"}}}}
+    ) {
+      Transfer {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        AmountInUSD
+        Sender {
+          Address
+        }
+      }
+      Transaction {
+        Signature
+      }
+      Block {
+        Time
+        Slot
+      }
+    }
+  }
+}
+```
+
+## List of methods for Jito Merkle Upload Authority
+Jito Merkle Upload Autjority account is the block builder that uploads the root of Merkle
+tree created by processing the MEV data in an offchain setting.
+
+The [below query](https://ide.bitquery.io/All-Methods-for-Jito-Bundles-on-Solana_1) returns all the methods that are accessible to this account.
+
+```graphql
+{
+  Solana {
+    Instructions(
+      where: {Transaction: {Signer: {is: "GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib"}}}
+    ) {
+      Instruction {
+        Program {
+          Address
+          Method
+          Name
+        }
+      }
+      count
+    }
+  }
+}
+
+```
+## More information on Transfer Method
+From the above query, we'll get a list of methods that the account is signing. One of those 
+method is "Transfer".
+
+To get more info on the "Tranfer" method we can run the query given [below](https://ide.bitquery.io/Transfer-Function-Call-Event-Alert-for-Jito-Bundles-on-Solana_1).
+
+```graphql
+{
+  Solana {
+    Instructions(
+      limit: {count:10},
+      where: {Transaction: {Signer: {is: "GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib"}, Result: {Success: true}}, Instruction: {Program: {Method: {is: "Transfer"}}}}
+    ) {
+      Instruction {
+        Program {
+          Address
+          Method
+          Name
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+            }
+          }
+        }
+      }
+      Block {
+        Slot,
+        Time
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+
+```
