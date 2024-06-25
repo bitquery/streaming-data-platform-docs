@@ -73,9 +73,21 @@ To run our desired query we need two parameters, that are Program Address and Me
 the [following query](https://ide.bitquery.io/Get-Pump-Address-and-Method-Name?_gl=1*ygo5vg*_ga*MTQwMzE3MzI0My4xNzEyNjUzNzMw*_ga_ZWB80TDH9J*MTcxODg4MTYwOS4xMzMuMS4xNzE4ODgxNzg3LjAuMC4w).
 
 ```graphql
-https://ide.bitquery.io/Get-Pump-Address-and-Method-Name?_gl=1*ygo5vg*_ga*MTQwMzE3MzI0My4xNzEyNjUzNzMw*_ga_ZWB80TDH9J*MTcxODg4MTYwOS4xMzMuMS4xNzE4ODgxNzg3LjAuMC4w
-
-
+query MyQuery {
+  Solana {
+    Instructions(
+      where: { Instruction: { Program: { Name: { is: "pump" } } } }
+    ) {
+      Instruction {
+        Program {
+          Method
+          Address
+        }
+      }
+      count
+    }
+  }
+}
 ```
 
 [Here](https://ide.bitquery.io/Track-new-token-launches-on-Pump-Fun-in-realtime) is the subscription to get the notification of new token creation event on Pump Fun.
