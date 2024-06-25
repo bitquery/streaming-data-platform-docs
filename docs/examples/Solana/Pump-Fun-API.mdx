@@ -12,16 +12,10 @@ subscription MyQuery {
   Solana {
     DEXTrades(
       where: {
-        Trade: {
-          Dex: {
-            ProtocolName: {
-              is: "pump"
-            }
-          }
-        } 
-        Transaction: {Result: {Success: true}}}
+        Trade: { Dex: { ProtocolName: { is: "pump" } } }
+        Transaction: { Result: { Success: true } }
+      }
     ) {
-      
       Instruction {
         Program {
           Method
@@ -67,102 +61,147 @@ subscription MyQuery {
     }
   }
 }
-
 ```
 
 ## Track New Token Creation on Pump Fun
 
-Get notified about the newly created token and its information on Pump Fun DEX for getting early bird benefits. 
+Get notified about the newly created token and its information on Pump Fun DEX for getting early bird benefits.
 
 ### Get Pump Program Address and Method
 
-To run our desired query we need two parameters, that are Program Address and Method Name. To get these parameters, we can run 
-the [following query](https://ide.bitquery.io/Track-new-token-launches-on-Pump-Fun-in-realtime).
+To run our desired query we need two parameters, that are Program Address and Method Name. To get these parameters, we can run
+the [following query](https://ide.bitquery.io/Get-Pump-Address-and-Method-Name?_gl=1*ygo5vg*_ga*MTQwMzE3MzI0My4xNzEyNjUzNzMw*_ga_ZWB80TDH9J*MTcxODg4MTYwOS4xMzMuMS4xNzE4ODgxNzg3LjAuMC4w).
 
 ```graphql
-subscription {
-  Solana {
-    Instructions(
-      where: {Instruction: {Program: {Method: {is: "create"}, Name: {is: "pump"}}}}
-    ) {
-      Instruction {
-        Accounts {
-          Address
-          IsWritable
-          Token {
-            Mint
-            Owner
-            ProgramId
-          }
-        }
-        Logs
-        Program {
-          AccountNames
-          Address
-          Arguments {
-            Name
-            Type
-            Value {
-              ... on Solana_ABI_Json_Value_Arg {
-                json
-              }
-              ... on Solana_ABI_Float_Value_Arg {
-                float
-              }
-              ... on Solana_ABI_Boolean_Value_Arg {
-                bool
-              }
-              ... on Solana_ABI_Bytes_Value_Arg {
-                hex
-              }
-              ... on Solana_ABI_BigInt_Value_Arg {
-                bigInteger
-              }
-              ... on Solana_ABI_Address_Value_Arg {
-                address
-              }
-              ... on Solana_ABI_String_Value_Arg {
-                string
-              }
-              ... on Solana_ABI_Integer_Value_Arg {
-                integer
-              }
-            }
-          }
-          Method
-          Name
-        }
-      }
-      Transaction {
-        Signature
-      }
-    }
-  }
-}
+https://ide.bitquery.io/Get-Pump-Address-and-Method-Name?_gl=1*ygo5vg*_ga*MTQwMzE3MzI0My4xNzEyNjUzNzMw*_ga_ZWB80TDH9J*MTcxODg4MTYwOS4xMzMuMS4xNzE4ODgxNzg3LjAuMC4w
 
 
 ```
 
-[Here](https://ide.bitquery.io/PumpFun-New-Token-Addition_2#) is the subscription to get the notification of new token creation event on Pump Fun.
+[Here](https://ide.bitquery.io/Track-new-token-launches-on-Pump-Fun-in-realtime) is the subscription to get the notification of new token creation event on Pump Fun.
 
 ```graphql
-subscription {
+query MyQuery {
   Solana {
     Instructions(
-      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}, Transaction: {Result: {Success: true}}}
+      where: { Instruction: { Program: { Name: { is: "pump" } } } }
     ) {
       Instruction {
         Program {
           Method
-          Arguments {
-            Name
-            Type
-            Value {
-              ... on Solana_ABI_String_Value_Arg {
-                string
+          Address
+        }
+      }
+      count
+    }
+  }
+}
+```
+
+## Get OHLC Data of a Token on Pump Fun
+
+The below query gets OHLC data of the specified Token `66VR6bjEV5DPSDhYSQyPAxNsY3dgmH6Lwgi5cyf2pump` for 1 minute time interval on Pump Fun DEX.
+You can run the query [here](https://ide.bitquery.io/OHLC-for-a-token-on-Pump-Fun_1)
+
+```graphql
+subscription {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "Block_Timefield" }
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "66VR6bjEV5DPSDhYSQyPAxNsY3dgmH6Lwgi5cyf2pump" }
+          }
+          Dex: {
+            ProgramAddress: {
+              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
+            }
+          }
+        }
+      }
+    ) {
+      Block {
+        Timefield: Time(interval: { in: minutes, count: 1 })
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
+      }
+      count
+    }
+  }
+}
+```
+
+## Track Price of a Token in Realtime on Pump Fun
+
+The below query gets real-time price of the specified Token `JDm62GykLKugcWiW8wKNEXurhyGk3meE8hM8v7Ytpump` on the Pump Fun DEX.
+You can run the query [here](https://ide.bitquery.io/Realtime-Price-of-a-token#)
+
+```graphql
+subscription {
+  Solana {
+    DEXTrades(
+      where: {
+        Trade: {
+          Dex: {
+            ProgramAddress: {
+              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
+            }
+          }
+          Buy: {
+            Currency: {
+              MintAddress: {
+                is: "JDm62GykLKugcWiW8wKNEXurhyGk3meE8hM8v7Ytpump"
               }
             }
           }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Buy {
+          Account {
+            Address
+          }
+          Amount
+          AmountInUSD
+          Currency {
+            MintAddress
+            Name
+            Symbol
+          }
+          Price
+          PriceInUSD
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          ProgramAddress
+        }
+        Market {
+          MarketAddress
+        }
+        Sell {
+          Account {
+            Address
+          }
+          Amount
+          AmountInUSD
+          Currency {
+            MintAddress
+            Name
+            Symbol
+          }
+          Price
+          PriceInUSD
         }
       }
       Transaction {
@@ -171,11 +210,12 @@ subscription {
     }
   }
 }
-
 ```
 
 ## Video Tutorial on Getting Pump Fun Trades
 
 <VideoPlayer url="https://www.youtube.com/watch?v=QV8zBnmDFxY" />
 
+## Video Tutorial | How to Get the OHLC Data & Price of a Token on Pump Fun DEX in Realtime
 
+<VideoPlayer url="https://www.youtube.com/watch?v=ct42PtC1y3s" />
