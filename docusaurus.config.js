@@ -161,6 +161,10 @@ const config = {
           {
             to:"/docs/examples/Solana/Pump-Fun-API/",
             from:"/docs/examples/dextrades/Pump-Fun-API/"
+          },
+          {
+            to:'/docs/category/how-to-guides/',
+            from:'/docs/category/use-cases/'
           }
         ],
       },
