@@ -6,9 +6,8 @@ sidebar_position: 3
 
 ## Overview
 
-V2 APIs are designed to provide real-time blockchain data without any delay.
-
-It combines both real-time and historical data. Below, you'll find key changes and instructions on how to adapt your existing v1 queries to the v2 format.
+V2 APIs are designed to provide real-time blockchain data without any delay. It combines both real-time and historical data. You can read more on the differences [here](https://docs.bitquery.io/v1/docs/graphql-ide/v1-and-v2)
+Below, you'll find key changes and instructions on how to adapt your existing v1 queries to the v2 format.
 
 
 ## Authentication in v1 vs v2
@@ -238,5 +237,6 @@ Buy{
 ```
 
 The nested schema in v2 requires accessing fields through specific paths, e.g., `Trade.Buy.Currency.SmartContract`.
+
 
 
