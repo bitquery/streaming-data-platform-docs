@@ -173,6 +173,61 @@ orderBy: {descending: Block_Number}
 where: {Trade: {Buy: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}}
 ```
 
-Notice we use `.` in v1 to access inner fields while we use `_` in v2.
+There is no separate filter called `options`
 
+**Notice we use `.` in v1 to access inner fields while we use `_` in v2.**
 
+Next, we select the fields in the response
+
+```
+{
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        From
+        To
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          AmountInUSD
+          Buyer
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          Seller
+          Price
+          PriceInUSD
+        }
+        Sell {
+          Amount
+          AmountInUSD
+          Buyer
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+          Seller
+          Price
+          PriceInUSD
+        }
+      }
+    }
+```
+
+In v1, we had fields labelled as `buyCurrency`, `sellAmount` and so on but in v2 we have nested schema, where we choose
+
+```
+Buy{
+   Currency
+   {}
+}
+```
+
+The nested schema in v2 requires accessing fields through specific paths, e.g., `Trade.Buy.Currency.SmartContract`.
