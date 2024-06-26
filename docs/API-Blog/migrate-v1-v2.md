@@ -52,6 +52,12 @@ And in v2, you use OAuth token mentioned as `Bearer ory_...yourtoken` and authen
 
 The v2 API maintains a similar schema structure but integrates new data cubes such as `balanceUpdates`, `tokenHolders`, and `DexTradeByTokens`. The ability to click-select in the schema builder is still available in v2, facilitating easier transition and query building.
 
+If you're new to v2, check more examples on:
+
+[TokenHolder APIs](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api/)
+[balanceUpdates](https://docs.bitquery.io/docs/examples/balances/balance-api/)
+[DexTradeByTokens](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/)
+
 ## Smart Contract Interactions
 
 - **v1:** Data is accessed through `smartContractCalls` and `smartContractEvents`.
