@@ -48,7 +48,7 @@ The v2 API maintains a similar schema structure but integrates new data cubes su
 
 ## Smart Contract Interactions
 
-- **v1:** Accessed through `smartContractCalls` and `smartContractEvents`.
+- **v1:** Data is accessed through `smartContractCalls` and `smartContractEvents`.
 - **v2:** Simplified to `Calls` and `Events`.
 
 ## Handling Arguments and Values
@@ -87,3 +87,33 @@ One of the major differences in v2 is how arguments and their values are handled
   }
   ```
 
+## Aggregation : From v1 to v2
+
+Let's take this query in v1, where we get total number of unique currencies traded on Ethereum on a particular day. The `count` and `sum` aggregation is available in both v1 and v2.
+
+```
+query MyQuery {
+  ethereum(network: ethereum) {
+    dexTrades(date: {is: "2024-01-01"}) {
+      Unique_tokens_bought: count(uniq: buy_currency)
+      Unique_tokens_sold: count(uniq: sell_currency)
+    }
+  }
+}
+
+```
+
+-   **Date Filtering**: Instead of a separate `date` field, v2 uses `Block.Date` for date filtering.
+-   **Field Mapping**: The `buy_currency` and `sell_currency` fields in v1 are mapped to `Trade_Buy_Currency_SmartContract` and `Trade_Sell_Currency_SmartContract` respectively in v2.
+
+```
+query MyQuery {
+  EVM(network: eth, dataset: combined) {
+    DEXTrades(where: {Block: {Date: {is: "2024-01-01"}}}) {
+      Unique_tokens_bought:count(distinct: Trade_Buy_Currency_SmartContract)
+      Unique_tokens_sold:count(distinct:Trade_Sell_Currency_SmartContract)
+    }
+  }
+}
+
+```
