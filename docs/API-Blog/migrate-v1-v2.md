@@ -10,7 +10,6 @@ V2 APIs are designed to provide real-time blockchain data without any delay.
 
 It combines both real-time and historical data. Below, you'll find key changes and instructions on how to adapt your existing v1 queries to the v2 format.
 
-
 ## Changes in Network Specification
 
 ### EVM Chains
@@ -21,6 +20,7 @@ It combines both real-time and historical data. Below, you'll find key changes a
 **Example Conversion:**
 
 - **v1 Query:**
+
   ```graphql
   query MyQuery {
     ethereum(network: ethereum) {
@@ -56,6 +56,7 @@ The v2 API maintains a similar schema structure but integrates new data cubes su
 One of the major differences in v2 is how arguments and their values are handled and accessed.
 
 - **v1:** Arguments and values are accessed using filters based on the argument name.
+
   ```graphql
   token0: any(of: argument_value, argument: { is: "token0" })
   ```
@@ -103,8 +104,8 @@ query MyQuery {
 
 ```
 
--   **Date Filtering**: Instead of a separate `date` field, v2 uses `Block.Date` for date filtering.
--   **Field Mapping**: The `buy_currency` and `sell_currency` fields in v1 are mapped to `Trade_Buy_Currency_SmartContract` and `Trade_Sell_Currency_SmartContract` respectively in v2.
+- **Date Filtering**: Instead of a separate `date` field, v2 uses `Block.Date` for date filtering.
+- **Field Mapping**: The `buy_currency` and `sell_currency` fields in v1 are mapped to `Trade_Buy_Currency_SmartContract` and `Trade_Sell_Currency_SmartContract` respectively in v2.
 
 ```
 query MyQuery {
@@ -117,3 +118,61 @@ query MyQuery {
 }
 
 ```
+
+## Migrating Complex Queries from v1 to v2
+
+Let's take the below query which fetches the latest token details including USD values.
+
+```
+{
+  ethereum(network: ethereum) {
+    dexTrades(
+      options: {desc: ["block.height", "tradeIndex"], limit: 1, offset: 0}
+      buyCurrency: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}
+    ) {
+      block {
+        timestamp {
+          time(format: "%Y-%m-%d %H:%M:%S")
+        }
+        height
+      }
+      tradeIndex
+      protocol
+      exchange {
+        fullName
+      }
+      buyAmount
+      buyCurrency {
+        symbol
+      }
+      buy_amount_usd: buyAmount(in: USD)
+      sellAmount
+      sellCurrency {
+        symbol
+      }
+      sell_amount_usd: sellAmount(in: USD)
+      priceInUSD: expression(get: "buy_amount_usd / buyAmount")
+    }
+  }
+}
+
+```
+
+Now to convert this to v2, let's first tackle the filters.
+
+```
+ options: {desc: ["block.height", "tradeIndex"], limit: 1, offset: 0}
+ buyCurrency: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}
+```
+
+In v2, the same filters would be:
+
+```
+limit: {count: 1}
+orderBy: {descending: Block_Number}
+where: {Trade: {Buy: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}}
+```
+
+Notice we use `.` in v1 to access inner fields while we use `_` in v2.
+
+
