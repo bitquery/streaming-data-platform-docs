@@ -6,7 +6,7 @@ sidebar_position: 3
 
 ## Overview
 
-V2 APIs are designed to provide  [real-time blockchain data without any delay](https://bitquery.io/blog/analysis-of-blockchain-availabilitybased-on-block-lag).
+V2 APIs are designed to provide real-time blockchain data without any delay.
 
 It combines both real-time and historical data. Below, you'll find key changes and instructions on how to adapt your existing v1 queries to the v2 format.
 
