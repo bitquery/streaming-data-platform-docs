@@ -18,10 +18,12 @@ And in v2, you use OAuth token mentioned as `Bearer ory_...yourtoken` and authen
 
 ## Changes in Network Specification
 
-### EVM Chains
 
 - **v1:** Specified using a generic identifier within a function, e.g., `ethereum(network: ethereum)`.
 - **v2:** Now requires a more specific `network` identifier and inclusion of a `dataset`. Example: `EVM(network: eth, dataset: combined)`.
+
+In the case of chains on [EAP endpoint](https://docs.bitquery.io/docs/graphql/dataset/EAP/), you need not mention the `dataset` as it includes only realtime information.
+
 
 **Example Conversion:**
 
