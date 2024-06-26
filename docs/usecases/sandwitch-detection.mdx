@@ -13,10 +13,55 @@ sidebar_position: 3
 This is a tutorial to build a simple webpage using PHP code that connects to the Bitquery API and retrieves data for sandwitch attack opportunities on the Ethereum network. 
 The code then displays the data on a webpage built using PHP and HTML.
 
+## GraphQL query
+
+For this tutorial, we will use [this](https://ide.bitquery.io/Sandwitch-Opportunity_1) query given below. The sandwitch attack observes the DEX Trade transaction in Mempool with a large purchase
+amount as it will highly influence the price of the token. 
+
+For this tutorial, the logic is that any transaction with a 'Buy Amount' greater than 
+1000 USD would influence the price of the token in the pool, hence we will place two transactions around the target transaction, so that we could
+get an instantaneous profit on the same.
+
+```graphql
+subscription {
+  EVM(mempool: true) {
+    DEXTrades(where: {Trade: {Buy: {AmountInUSD: {gt: "1000"}}}}) {
+      Trade {
+        Buy {
+          AmountInUSD
+          Buyer
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+        Dex {
+          OwnerAddress
+          SmartContract
+          ProtocolFamily
+        }
+        Sell {
+          AmountInUSD
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
 ## Required Libraries
 The code uses the following libraries:
 
-HTTP_Request2: A PHP library for building interacting with APIs 
+HTTP_Request2: A PHP library for interacting with APIs 
 
 ## Step by Step Code Implementation
 
@@ -117,7 +162,7 @@ function flattenArray($array, $prefix = '') {
 }
 ```
 
-Finally this code snippet takes up the latest DEX trades with large purchase amount from the EVM chains, and displays them in a data table using simple HTML.
+Finally this code snippet takes up the latest DEX trades with large purchase amount from the EVM chains, and displays them in a table using simple HTML.
 
 ```php
 function formatArrayAsTable($data) {
