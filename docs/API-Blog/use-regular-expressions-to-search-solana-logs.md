@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # How to Filter Events from Solana Logs Using Bitquery APIs and Regular Expressions
 
 In this article, we are going to understand how we can track events like token lock and burn, which are necessary for investors and project teams in the quickly changing crypto space.
