@@ -227,6 +227,77 @@ subscription {
 }
 ```
 
+## Get the Token Holders of a specific Token
+
+The below query gets top 10 token holders of the specified Token `HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump` on the Pump Fun DEX. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
+You can run the query [here](https://ide.bitquery.io/top-10-holders-for-a-pump-fun-token_3)
+
+```graphql
+query MyQuery {
+  Solana {
+    BalanceUpdates(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "TotalHolding" }
+      where: {
+        BalanceUpdate: {
+          Currency: {
+            MintAddress: { is: "HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump" }
+          }
+        }
+      }
+    ) {
+      BalanceUpdate {
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        Account {
+          Address
+        }
+      }
+      TotalHolding: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
+    }
+  }
+}
+```
+
+## Get the Trading Volume of a specific Token on Pump Fun DEX
+
+The below query gets the Trading volume of the specified Token `HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump` on the Pump Fun DEX in the past 1 hour. You will have to change the time in this `Block: { Time: { since: "2024-06-27T06:46:00Z" } }` when you try the query yourself. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
+You can run the query [here](https://ide.bitquery.io/Realtime-Price-of-a-token#)
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump" }
+          }
+          Dex: { ProtocolName: { is: "pump" } }
+        }
+        Block: { Time: { since: "2024-06-27T06:46:00Z" } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+      }
+      TradeVolume: sum(of: Trade_Amount)
+    }
+  }
+}
+```
+
 ## Video Tutorial on Getting Pump Fun Trades
 
 <VideoPlayer url="https://www.youtube.com/watch?v=QV8zBnmDFxY" />
@@ -234,3 +305,7 @@ subscription {
 ## Video Tutorial | How to Get the OHLC Data & Price of a Token on Pump Fun DEX in Realtime
 
 <VideoPlayer url="https://youtu.be/vixWQ1fzY3M" />
+
+## Video Tutorial | How to get Top Token Holders and Trading Volume for a Pump Fun Token
+
+<VideoPlayer url="https://www.youtube.com/watch?v=yGgKbv853SA" />
