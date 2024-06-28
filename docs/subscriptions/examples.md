@@ -75,8 +75,6 @@ const bitqueryConnection = new WebSocket(
   }
 );
 
-const lps = ["0xc74b026fab49d2380ffc6f53908c2ae6d14aa3b6"];
-
 bitqueryConnection.on("open", () => {
   console.log("Connected to Bitquery.");
 
@@ -100,8 +98,7 @@ bitqueryConnection.on("open", () => {
                     }
                   }
                 }
-                `,
-        variables: { lps },
+                `
       },
     });
 
