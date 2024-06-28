@@ -79,7 +79,7 @@ When we run the DEXTrades API, DEXTrades results appear with buy-side and sell-s
 
 The buy side contains the pool address `0x92560c178ce069cc014138ed3c2f5221ba71f58a` and currency bought by it.
 
-## Filtering in DexTrades Cube
+## Filtering in DEXTrades Cube
 
 Filtering helps you retrieve the data you are looking for. DexTrades Cube can filter trades based on buy currency, sell currency, buyer, seller, dex, pool, sender, receiver, transaction, time, etc.
 
@@ -204,7 +204,7 @@ Next, we retrieve trade currency details on a particular dex in the ethereum net
 
 Run this API to retrieve the trade activities of WETH (“0xc02….”) in the Uniswap v3 factory “ 0x1f98..”
 
-## Aggregation in DexTrades Cube
+## Aggregation in DEXTrades Cube
 
 DexTrades cube aggregation helps aggregate data based on time, amount, address, currency, type, buyer, seller, dex (dex owner address), pool address (dex smart contract), block time, etc.
 
@@ -250,7 +250,7 @@ query {
 
 ```
 
-## Metrics in DexTrades Cube
+## Metrics in DEXTrades Cube
 
 Metrics allow for sum, count, average, median, maximum, minimum, and more calculations
 
