@@ -178,7 +178,6 @@ def get_volume():
 
 ```
 
-
 ### Step 6: Check for Volume Surge
 
 In this step, you’ll create the check_volume_surge function to check if there is a surge in trading volume.
@@ -186,3 +185,85 @@ In this step, you’ll create the check_volume_surge function to check if there 
 The function determines if there is a significant surge in the trading volume of the specified token by comparing the initial volume to the current volume. If the increase in volume exceeds a predefined threshold, it indicates a volume surge.
 
 In the case of this demo, if the increase in volume is equal to or greater than the VOLUME_SURGE_THRESHOLD (which in this case is 0.1), it indicates the volume surge or otherwise returns FALSE.
+
+```python
+# Function to check if there is a volume surge
+def check_volume_surge(initial_volume, current_volume):
+    print("Checking volume surge condition...")
+    if initial_volume > 0:
+        increase_percentage = ((current_volume - initial_volume) / initial_volume) * 100
+        print(f"For Time: {PREDEFINED_SINCE_DATE}" + " the " + f"increase percentage is: {increase_percentage}%")
+        return increase_percentage >= VOLUME_SURGE_THRESHOLD
+    return False
+```
+
+### Step 7: Execute a Buy Order
+
+This execute_buy_order function is designed to execute a buy order for the token address specified as the parameter on the Ethereum Sepolia test network. It creates and executes a transaction using the provided Ethereum address, Private Key, and Token address.
+
+1.  Initialize Web3 and Fetch the Transaction Nonce
+
+The function initializes web3 by creating an instance of Web3 connected to the Ethereum Sepolia test network using the testnet URL you provided above. It also retrieves the transaction nonce for the wallet address the transaction will be executed.
+
+```python
+# Function to execute a buy order on the testnet
+def execute_buy_order(token_address):
+    try:
+        print("Executing buy order...")
+        web3 = Web3(Web3.HTTPProvider(TESTNET_URL))
+        nonce = web3.eth.get_transaction_count(ADDRESS)
+```
+
+2.  Define the Transaction Parameter
+
+This block of code defines the parameter needed to execute the transactions. For the case of this demo, the transaction value, 0.1 ETH was converted to wei (the smallest unit of ETH). The gas price of 50gwei was converted to wei.
+
+A transaction dictionary, which contains parameters to execute the transactions :
+
+- the nonce of the originating address (nonce),
+- the smart contract address of the token you want to buy(to),
+- The amount of ETH to send(value), the gas limit for the transaction(gas),
+- and the gas price for the transaction (gasPrice).
+
+```
+
+value = Web3.to_wei(0.1, 'ether')
+        gas_price = Web3.to_wei('50', 'gwei')  # Convert 50 Gwei to Wei
+
+        transaction = {
+            'nonce': nonce,
+            'to': token_address,
+            'value': value,
+            'gas': 2000000,
+            'gasPrice': gas_price
+        }
+
+```
+
+3.  Sign and Send the Transaction
+
+This section of the execute_buy_order function signs the transaction with the private key of the originating address. In the case of this demo, the private key you provided in the script configuration step above.
+
+The transaction signed above with the private key will be sent to the Ethereum Sepolia Testnet network. The transaction hash for the executed transaction will be printed and returned as a hexadecimal string for confirmation.
+
+```python
+signed_tx = web3.eth.account.sign_transaction(transaction, PRIVATE_KEY)
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        print(f"Transaction sent. Hash: {web3.toHex(tx_hash)}")
+        return web3.toHex(tx_hash)
+    except Exception as e:
+        print(f"Error in execute_buy_order: {str(e)}")
+        return None
+```
+
+### Step 8: Setting Up the Main Function to Run the Bot
+
+The main function code snippet below is the entry point for running the Volume surge detection MEV bot.
+
+This bot continuously monitors the trading volume for the specified token and executes a buy order if a significant volume surge is detected. In the case of this demo, a buy order will be executed if the surge is greater than 10% of the previous trade volume.
+
+According to this demo:
+
+- The main function initializes the trading bot by fetching the initial trading volume of the specified token.
+- It then enters an infinite loop where it continuously fetches the current trading volume, checks for significant volume surges, and executes buy orders if a surge is detected.
+- The loop runs every minute, ensuring the bot operates in real time. Any exceptions during the execution are caught and logged to avoid crashes.
