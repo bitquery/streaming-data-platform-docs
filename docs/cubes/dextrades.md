@@ -4,7 +4,7 @@ The DEXTrades cube provides comprehensive information about the dex trading data
 
 > Import Note: If there is a trade between 2 addresses, then one of them must be a pool, and the information displayed in the DEXTrades cube is from the pool's perspective.
 
-![](https://lh7-us.googleusercontent.com/docsz/AD_4nXfcC9oHK_UC9szzJfDAo3CL37VypW0g3hZi-xgatCLJqIyfda-Xv_rxeNFQd_hGIqwNIvi0HFgiYstzYN3ORxx_jA2RakCQnPKwCGPxTf-QMvqMxWDXEby9Jg0FAV71l2lL2zXmvP9lubgdn4j__LraErPP?key=tRJ7Fh7sjAJgMlTNbDPF3A)
+![](/img/tokenAB.png)
 
 Let's understand the concept of buyer and seller. Token X and token Y swap as above.
 
@@ -76,7 +76,6 @@ When we run the DEXTrades API, DEXTrades results appear with buy-side and sell-s
 
 ```
 
-![](https://lh7-us.googleusercontent.com/docsz/AD_4nXdKhcnKVl1z7bVZBZuvhE43nC7KvRuEwiZ6O1O7c7QkUy1r07wIYBUQq2D5zamm6s7M2yolHi1xKzmgDLCD_R5dXU_-MUKszAJybVa1cEWKP8DSXsF_EdE17t0k_8ckfmxAsQNsLKvtPLrrwJJZzwsKfFY?key=tRJ7Fh7sjAJgMlTNbDPF3A)
 
 The buy side contains the pool address `0x92560c178ce069cc014138ed3c2f5221ba71f58a` and currency bought by it.
 
