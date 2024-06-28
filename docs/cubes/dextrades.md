@@ -1,0 +1,287 @@
+# DEXTrades Cube
+
+The DEXTrades cube provides comprehensive information about the dex trading data, such as buyer, seller, token prices, pairs, transactions, etc.
+
+> Import Note: If there is a trade between 2 addresses, then one of them must be a pool, and the information displayed in the DEXTrades cube is from the pool's perspective.
+
+![](https://lh7-us.googleusercontent.com/docsz/AD_4nXfcC9oHK_UC9szzJfDAo3CL37VypW0g3hZi-xgatCLJqIyfda-Xv_rxeNFQd_hGIqwNIvi0HFgiYstzYN3ORxx_jA2RakCQnPKwCGPxTf-QMvqMxWDXEby9Jg0FAV71l2lL2zXmvP9lubgdn4j__LraErPP?key=tRJ7Fh7sjAJgMlTNbDPF3A)
+
+Let's understand the concept of buyer and seller. Token X and token Y swap as above.
+
+If we see the trade from user A's side, then we get the following:
+
+- User A becomes the seller of token X.
+- User A becomes the buyer of token Y.
+
+Now, if we see the trade from a user B side, we get the following.
+
+- User B becomes the seller of token Y.
+- User B becomes the buyer of token X.
+
+Therefore, buyers and sellers change relatively when the trade sides change.
+
+It is important to note that a pool is always involved; whenever any trade occurs between two traders, one must be a pool. Thus, we are considering User B as a pool.
+
+Next, we understand how the Dextrades Cube displays the result:
+
+When we run the DEXTrades API, DEXTrades results appear with buy-side and sell-side details. Buy-side details always contain the pool’s (User B) details and currency bought by the pool. The sell-side always contains the pool's other side details (User A), which may not be the pool and currency bought by User A.
+
+[Run this API using this link](https://ide.bitquery.io/DEXTrades-api) for better understanding.
+
+```
+
+{
+  EVM(dataset: archive, network: eth) {
+    DEXTrades(limit: {count: 2}
+    where:{
+      Transaction:{
+        Hash:{
+          is:"0x672b64a68f612667111fb2e1329dc1b47279042e1b84d894aa64119ae34a989f"
+        }
+      }
+    }
+    ) {
+      Transaction {
+        Hash
+      }
+      Trade {
+        Buy {
+          AmountInUSD
+          Buyer
+          Currency {
+            Name
+          }
+          Seller
+          Currency {
+            Name
+          }
+          AmountInUSD
+        }
+        Sell {
+          AmountInUSD
+          Buyer
+          Currency {
+            Name
+          }
+          Seller
+          Currency {
+            Name
+          }
+          AmountInUSD
+        }
+      }
+    }
+  }
+}
+
+```
+
+![](https://lh7-us.googleusercontent.com/docsz/AD_4nXdKhcnKVl1z7bVZBZuvhE43nC7KvRuEwiZ6O1O7c7QkUy1r07wIYBUQq2D5zamm6s7M2yolHi1xKzmgDLCD_R5dXU_-MUKszAJybVa1cEWKP8DSXsF_EdE17t0k_8ckfmxAsQNsLKvtPLrrwJJZzwsKfFY?key=tRJ7Fh7sjAJgMlTNbDPF3A)
+
+The buy side contains the pool address `0x92560c178ce069cc014138ed3c2f5221ba71f58a` and currency bought by it.
+
+## Filtering in DexTrades Cube
+
+Filtering helps you retrieve the data you are looking for. DexTrades Cube can filter trades based on buy currency, sell currency, buyer, seller, dex, pool, sender, receiver, transaction, time, etc.
+
+Everything inside the “where” clause acts as a filter; it uses the ‘AND’ condition by default.
+
+In this example, we retrieve the trade currencies and their trader's details in the ethereum network. Therefore, we use the Trade Buy currency SmartContract filter to specify the buy “currency address” and the Trade Buy Seller to specify the “seller address.” We can extract trade information from the buy and sell sides using these filters. [Use this link to execute the following API.](https://ide.bitquery.io/seller-buyer-block-time-as-filters)
+
+```
+{
+  EVM(dataset: archive, network: eth) {
+    buyside: DEXTrades(
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
+              }
+            }
+            Seller: { is: "0x1111111254eeb25477b68fb85ed929f73a960582" }
+          }
+        }
+        Block: {
+          Time: { since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z" }
+        }
+      }
+    ) {
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        From
+        To
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          Buyer
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          Seller
+          Price
+        }
+        Sell {
+          Amount
+          Buyer
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+          Seller
+          Price
+        }
+      }
+    }
+    sellside: DEXTrades(
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Sell: {
+            Currency: {
+            SmartContract: {
+                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
+              }
+            }
+            Buyer: { is: "0x1111111254eeb25477b68fb85ed929f73a960582" }
+          }
+        }
+        Block: {
+          Time: { since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z" }
+        }
+      }
+    ) {
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        From
+        To
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          Buyer
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          Seller
+          Price
+        }
+        Sell {
+          Amount
+          Buyer
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+          Seller
+          Price
+        }
+      }
+    }
+  }
+}
+```
+
+Next, we retrieve trade currency details on a particular dex in the ethereum network. Therefore, we use the Trade Buy Currency filter to specify the “currency address” and the Trade Dex OwnerAddress filter to specify the “Dex address.”
+
+Run this API to retrieve the trade activities of WETH (“0xc02….”) in the Uniswap v3 factory “ 0x1f98..”
+
+## Aggregation in DexTrades Cube
+
+DexTrades cube aggregation helps aggregate data based on time, amount, address, currency, type, buyer, seller, dex (dex owner address), pool address (dex smart contract), block time, etc.
+
+Through aggregation, we can extract trade details for specific tokens. For example, in the following API, we retrieve the total trade volume by summing all the trade amounts to obtain the top traded NFT in the ethereum network.
+
+We use the Trade Buy Currency fungible filter and set fungible to false to retrieve the NFT token data. Run the following API [using this link](https://ide.bitquery.io/Top-traders-of-a-given-token-in-a-pair_1).
+
+```
+
+
+query {
+  EVM(dataset: combined, network: eth) {
+    DEXTrades(
+      orderBy: {descendingByField: "count"}
+      limit: {offset: 0, count: 10}
+      where: {Block: {Date: {since: "2023-05-02", till: "2023-05-09"}},
+        Trade: {Buy: {Currency: {Fungible: false}},
+          Sell: {Currency: {Fungible: true}}}}
+    ) {
+      Trade {
+        Buy {
+          Currency {
+            Symbol
+            SmartContract
+          }
+          min_price: Price(minimum: Trade_Buy_Price)
+          max_price: Price(maximum: Trade_Buy_Price)
+        }
+        Sell {
+          Currency {
+            Symbol
+            SmartContract
+          }
+        }
+      }
+      buy_amount: sum(of: Trade_Buy_Amount)
+      sell_amount: sum(of: Trade_Sell_Amount)
+      count
+
+    }
+  }
+}
+
+```
+
+## Metrics in DexTrades Cube
+
+Metrics allow for sum, count, average, median, maximum, minimum, and more calculations
+
+The count metric can easily retrieve a specific token's total number of trades. [Run this API](https://ide.bitquery.io/Count-of-trade-on-Uniswap-of-pepe) to find the total trades of [PEPE](https://explorer.bitquery.io/ethereum/token/0x6982508145454ce325ddbe47a25d4ec3d2311933) “0x698…” tokens in the [Uniswap v3 factory](https://explorer.bitquery.io/ethereum/token/0x6982508145454ce325ddbe47a25d4ec3d2311933) “0x1f984…” in the ethereum network.
+
+```
+query MyQuery {
+  EVM(dataset: archive, network: eth) {
+    DEXTradeByTokens(
+      where: {TransactionStatus: {Success: true},
+        Trade: {Currency:
+          {SmartContract:
+            {is: "0x6982508145454ce325ddbe47a25d4ec3d2311933"}},
+          Dex:
+          {OwnerAddress:
+            {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}}},
+        Block: {Date:
+          {since: "2024-01-01", till: "2024-06-02"}}}
+    ) {
+      total_trades: count
+    }
+  }
+}
+
+```
+
+The DEXTrades cube also helps to retrieve the number of pools created in any DEX over a given period using the uniq metric.
+
+In the following example, we count the number of pools created on Uniswap v2 Dex before “2024-04-01” in the ethereum network.
+
+We use the Trade Dex OwnerAddress filter to specify the “Dex address” and uniq metic to count the distinct pool in [Uniswap v2 Dex](https://explorer.bitquery.io/ethereum/smart_contract/0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f) "0x5c6…”.
+
+[Run this](https://ide.bitquery.io/Pool-created-metrix) query to extract the 292381 pool created before 2024-04-01 in the ethereum network.
