@@ -55,4 +55,134 @@ import os
 
 ```
 
+### Step 2: Script Configurations
 
+Here, you need to configure your scripts by setting up all the necessary variables and API keys. As seen in the query below, you set up the:
+
+- BITQUERY_AUTH_TOKEN: generated from Bitquery. Learn how to generate an API token here
+- TOKEN_ADDRESS: is the address of the token you want the MEV bot to track
+- TESTNET_URL: URL gotten from alchemy needed to connect to the Ethereum Sepolia testnet
+- PRIVATE_KEY: is the private key of the wallet address where the transaction will be executed
+- ADDRESS: is your the wallet address you’ll be using
+- VOLUME_SURGE_THRESHOLD: is the volume percentage that triggers the MEV bot to execute a trade
+- TIME_WINDOW_MINUTES: is the time-frequency to check the data for executing a trade
+
+```python
+# Configuration
+BITQUERY_AUTH_TOKEN = "ory_at_"
+TOKEN_ADDRESS = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'  # Address of the token to track
+TESTNET_URL = 'https://eth-sepolia.g.alchemy.com/v2/YTg4XGDZmgtjMXggnHyrKLzeLUhQ4eiO'  # Sepolia testnet URL
+PRIVATE_KEY = 'e70988a08cb793b15634ad838c3fb7be4056cef220ea521d42c5428a286f77f4'  # Private key for transactions
+ADDRESS = '0xF4a86386e0297E1D53Ece30541091dda8098Ead5'  # Address from which transactions will originate
+VOLUME_SURGE_THRESHOLD = 0.1  # Threshold for volume surge detection (0.1% increase)
+TIME_WINDOW_MINUTES = 60  # Time window in minutes for historical data fetching
+```
+
+### Step 3: Setting Up the Predefined Time Range
+
+The script sets up and prints the start (PREDEFINED_SINCE_DATE) and end (PREDEFINED_TILL_DATE) timestamps for a historical data query.
+
+These timestamps are in ISO 8601 format and represent the range from the current time minus a predefined number of minutes (specified by TIME_WINDOW_MINUTES) to the current time.
+
+This time range can then be used to fetch historical data from a database or an API, ensuring that the data falls within the specified period.
+
+```python
+# Predefined time range for historical data query
+PREDEFINED_SINCE_DATE = (datetime.now(timezone.utc) - timedelta(minutes=TIME_WINDOW_MINUTES)).strftime("%Y-%m-%dT%H:%M:%SZ")
+PREDEFINED_TILL_DATE = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+print(f"PREDEFINED_SINCE_DATE: {PREDEFINED_SINCE_DATE}")
+print(f"PREDEFINED_TILL_DATE: {PREDEFINED_TILL_DATE}")
+```
+
+### Step 4: Fetch the Historical Volume Data
+
+At this step, you create the fetch_volume_data function to fetch historical trading volume data from Bitquery.
+
+The fetch_volume_data function below takes the token_address parameter and uses the [DEXTradeByTokens API](https://docs.bitquery.io/docs/evm/dextrades/) to retrieve the count of trade, sell, and buy amounts from the blockchain using the variables you set up in Step2 (Script configuration) above.
+
+```python
+# Function to fetch historical volume data from Bitquery
+def fetch_volume_data(token_address):
+    print("Fetching volume data...")
+    query = """
+    {
+      EVM(dataset: realtime, network: eth) {
+        DEXTradeByTokens(
+          where: {Trade: {Currency: {SmartContract: {is: "%s"}}}, Side: {Currency: {SmartContract: {is: “0xdac17f958d2ee523a2206206994597c13d831ec7”}}}}, Block: {Time: {since: "%s", till: "%s"}}}
+        ) {
+          buy: sum(of: Trade_AmountInUSD)
+          sell: sum(of: Trade_Side_AmountInUSD)
+          count
+        }
+      }
+    }
+    """ % (token_address, PREDEFINED_SINCE_DATE, PREDEFINED_TILL_DATE)
+
+```
+
+The function also send the POST request, which includes an authorization header to the Bitquery API.
+
+```python
+print("Querying Bitquery API...")
+    try:
+        response = requests.post(
+            'https://streaming.bitquery.io/graphql',
+            json={'query': query},
+            headers={'Authorization': f'Bearer {BITQUERY_AUTH_TOKEN}'}
+        )
+
+
+        if response.status_code == 200:
+            print("Data successfully fetched.")
+            data = response.json()
+            trades = data['data']['EVM']['DEXTradeByTokens']
+            if not trades:
+                print("No trades found.")
+            else:
+                print("Fetched trades:")
+                for trade in trades:
+                    print(f" Buy Volume: {trade['buy']} USD, Sell Volume: {trade['sell']} USD")
+            return trades
+        else:
+            raise Exception(f"Failed to fetch data: {response.text}")
+
+
+    except Exception as e:
+        print(f"Error in fetch_volume_data: {str(e)}")
+        return None
+```
+
+### Step 5: Calculate the Total Volume Traded
+
+Create a get_volume() function to calculate the total volume traded for the specified token.
+
+This function calculates the total trading volume for the specified token by summing up the buy and sell volumes retrieved from the Bitquery API. If there are no trades or an error occurs, it returns 0.
+
+```python
+
+# Function to calculate total volume traded for the token
+def get_volume():
+    try:
+        print("Calculating token volume...")
+        trades = fetch_volume_data(TOKEN_ADDRESS)
+        if trades is None:
+            return 0  # No trades, so volume is 0
+
+
+        total_volume = sum(float(trade['buy']) + float(trade['sell']) for trade in trades)
+        print(f"Total volume: {total_volume}")
+        return total_volume
+    except Exception as e:
+        print(f"Error in get_volume: {str(e)}")
+        return 0  # Return 0 volume on error
+
+```
+
+
+### Step 6: Check for Volume Surge
+
+In this step, you’ll create the check_volume_surge function to check if there is a surge in trading volume.
+
+The function determines if there is a significant surge in the trading volume of the specified token by comparing the initial volume to the current volume. If the increase in volume exceeds a predefined threshold, it indicates a volume surge.
+
+In the case of this demo, if the increase in volume is equal to or greater than the VOLUME_SURGE_THRESHOLD (which in this case is 0.1), it indicates the volume surge or otherwise returns FALSE.
