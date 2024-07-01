@@ -1,0 +1,46 @@
+---
+sidebar_position: 2
+---
+
+# Get Supply of a Token
+
+Let's see how to get the supply of a Token. We are taking TONCOIN token example in the following query. The token address for TONCOIN token is [0x582d872A1B094FC48F5DE31D3B73F2D9bE47def1](https://etherscan.io/token/0x582d872a1b094fc48f5de31d3b73f2d9be47def1)
+You can check out the query [here](https://ide.bitquery.io/Total-supply-of-a-token-on-ethereum-mainnet_1).
+
+```graphql
+query MyQuery {
+  EVM(network: eth, dataset: combined) {
+    Transfers(
+      where: {
+        Transfer: {
+          Currency: {
+            SmartContract: { is: "0x58 2d872A1B094FC48F5DE31D3B73F2D9bE47def1" }
+          }
+          Success: true
+        }
+      }
+    ) {
+      minted: sum(
+        of: Transfer_Amount
+        if: {
+          Transfer: {
+            Sender: { is: "0x0000000000000000000000000000000000000000" }
+          }
+        }
+      )
+      burned: sum(
+        of: Transfer_Amount
+        if: {
+          Transfer: {
+            Receiver: { is: "0x0000000000000000000000000000000000000000" }
+          }
+        }
+      )
+    }
+  }
+}
+```
+
+## Video Tutorial | How to get Supply and Market Cap of a Token
+
+<VideoPlayer url="https://www.youtube.com/watch?v=O6GAYu8Belk" />
