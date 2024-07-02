@@ -227,6 +227,119 @@ subscription {
 }
 ```
 
+## Get the Token Holders of a specific Token
+
+The below query gets top 10 token holders of the specified Token `HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump` on the Pump Fun DEX. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
+You can run the query [here](https://ide.bitquery.io/top-10-holders-for-a-pump-fun-token_3)
+
+```graphql
+query MyQuery {
+  Solana {
+    BalanceUpdates(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "TotalHolding" }
+      where: {
+        BalanceUpdate: {
+          Currency: {
+            MintAddress: { is: "HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump" }
+          }
+        }
+      }
+    ) {
+      BalanceUpdate {
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        Account {
+          Address
+        }
+      }
+      TotalHolding: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
+    }
+  }
+}
+```
+
+## Get the Trading Volume of a specific Token on Pump Fun DEX
+
+The below query gets the Trading volume of the specified Token `HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump` on the Pump Fun DEX in the past 1 hour. You will have to change the time in this `Block: { Time: { since: "2024-06-27T06:46:00Z" } }` when you try the query yourself. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
+You can run the query [here](https://ide.bitquery.io/Realtime-Price-of-a-token#)
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump" }
+          }
+          Dex: { ProtocolName: { is: "pump" } }
+        }
+        Block: { Time: { since: "2024-06-27T06:46:00Z" } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+      }
+      TradeVolume: sum(of: Trade_Amount)
+    }
+  }
+}
+```
+
+## Get the Top Traders of a specific Token on Pump Fun DEX
+
+The below query gets the Top Traders of the specified Token `DMHoACmnNwBniSwsFFZKVhs21DHwQaUaDRn998W4vW5V` which was launched on pump fun. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
+You can run the query [here](https://ide.bitquery.io/Top-Traders_2)
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "volume" }
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "DMHoACmnNwBniSwsFFZKVhs21DHwQaUaDRn998W4vW5V" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Trade {
+        Account {
+          Address
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          ProgramAddress
+        }
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+      }
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+```
+
 ## Video Tutorial on Getting Pump Fun Trades
 
 <VideoPlayer url="https://www.youtube.com/watch?v=QV8zBnmDFxY" />
@@ -234,3 +347,11 @@ subscription {
 ## Video Tutorial | How to Get the OHLC Data & Price of a Token on Pump Fun DEX in Realtime
 
 <VideoPlayer url="https://youtu.be/vixWQ1fzY3M" />
+
+## Video Tutorial | How to get Top Token Holders and Trading Volume for a Pump Fun Token
+
+<VideoPlayer url="https://www.youtube.com/watch?v=yGgKbv853SA" />
+
+## Video Tutorial | How to get Top Traders of a Token on Solana Pump Fun DEX
+
+<VideoPlayer url="https://www.youtube.com/watch?v=Ga0RbD7H_OY" />
