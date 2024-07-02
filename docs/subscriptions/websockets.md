@@ -12,6 +12,12 @@ Bitquery makes real-time data available using WebSockets. We use a specific WebS
 wss://streaming.bitquery.io/graphql
 ```
 
+Note for chains on the [EAP endpoint](https://streaming.bitquery.io/eap), the url is
+
+```
+wss://streaming.bitquery.io/eap
+```
+
 ### Limits
 
 > **Warning:** There are no limits to the number of websockets you can create, however, it is best to create multiple subscriptions using one websocket. Refer to the example [here](/docs/subscriptions/subscription.md) on how to do it.
