@@ -298,6 +298,48 @@ query MyQuery {
 }
 ```
 
+## Get the Top Traders of a specific Token on Pump Fun DEX
+
+The below query gets the Top Traders of the specified Token `DMHoACmnNwBniSwsFFZKVhs21DHwQaUaDRn998W4vW5V` which was launched on pump fun. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
+You can run the query [here](https://ide.bitquery.io/Top-Traders_2)
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "volume" }
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "DMHoACmnNwBniSwsFFZKVhs21DHwQaUaDRn998W4vW5V" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Trade {
+        Account {
+          Address
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          ProgramAddress
+        }
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+      }
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+```
+
 ## Video Tutorial on Getting Pump Fun Trades
 
 <VideoPlayer url="https://www.youtube.com/watch?v=QV8zBnmDFxY" />
@@ -309,3 +351,7 @@ query MyQuery {
 ## Video Tutorial | How to get Top Token Holders and Trading Volume for a Pump Fun Token
 
 <VideoPlayer url="https://www.youtube.com/watch?v=yGgKbv853SA" />
+
+## Video Tutorial | How to get Top Traders of a Token on Solana Pump Fun DEX
+
+<VideoPlayer url="https://www.youtube.com/watch?v=Ga0RbD7H_OY" />
