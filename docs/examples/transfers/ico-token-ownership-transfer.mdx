@@ -1,6 +1,8 @@
 ---
 sidebar_position: 1
 ---
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 
 # Analysing Token ICO with Transfers APIs
 
@@ -10,7 +12,7 @@ In this segment we will learn how you can analyse a project's ICO performance, t
 
 In most of the ICOs, the token is minted to a smart contract that contains various methods for distributing the token whenever the conditions set by project owners are satisfied.
 
-[Here](https://ide.bitquery.io/Get-Minted-Address-of-the-ICO-Token_2) is the query to find if the token in question also follows a similiar procedure, and if yes, then contract address of the distributer. 
+[Here](https://ide.bitquery.io/Get-Minted-Address-of-the-ICO-Token) is the query to find if the token in question also follows a similiar procedure, and if yes, then contract address of the distributer. 
 
 ```graphql
 query MyQuery {
@@ -25,10 +27,8 @@ query MyQuery {
           Symbol
           SmartContract
         }
+        Receiver
         Sender
-      }
-      Receipt {
-        ContractAddress
       }
     }
   }
@@ -89,3 +89,7 @@ query MyQuery {
 }
 
 ```
+
+## Video Tutorial on How to Analyse ICO of PEPU Token
+
+<VideoPlayer url="https://youtu.be/cz6SaVawUm8" />
