@@ -303,30 +303,15 @@ You can also query OHLC data in real time from Orca DEX.
 [Here](https://ide.bitquery.io/Orca-OHLC-for-all-currencies) is Websocket to get OHLC data for all currencies, however, if you want to get OHLC data for any specific currency pair, you can use [this Websocket api](https://ide.bitquery.io/Orca-OHLC-for-specific-pair_3).
 
 ```graphql
-subscription {
+query {
   Solana {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "Block_Timefield" }
-      where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui" }
-          }
-          Side: {
-            Currency: {
-              MintAddress: { is: "So11111111111111111111111111111111111111112" }
-            }
-          }
-          Dex: {
-            ProgramAddress: {
-              is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"
-            }
-          }
-        }
-      }
+      orderBy: {descendingByField: "Block_Timefield"}
+      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"}}}}
+      limit: {count: 10}
     ) {
       Block {
-        Timefield: Time(interval: { in: minutes, count: 1 })
+        Timefield: Time(interval: {in: minutes, count: 1})
       }
       volume: sum(of: Trade_Amount)
       Trade {
@@ -339,6 +324,7 @@ subscription {
     }
   }
 }
+
 ```
 
 ## Track Latest Add Liquidity Transactions on Orca DEX
