@@ -303,7 +303,8 @@ subscription {
 
 ## Solana OHLC API
 
-You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair Shark Cat-SOL by using the smart contract addresses in the `MintAddress` filter.
+You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair Shark Cat-SOL by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
+You can run and test the [saved query here](https://ide.bitquery.io/Solana-OHLC-Query).
 
 ```
 {
@@ -328,7 +329,6 @@ You can query OHLC data in for any Solana token. In the below query we are fetch
   }
 }
 ```
-
 
 ## Video Tutorial on Solana DEXTrades API | How to get Decentralized Exchange Data with DEX Trades API
 

@@ -20,10 +20,7 @@ You can use this program to try out the data and see how it works with your appl
 <!-- Open Graph / Facebook -->
 
 <meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Orca DEX API - Liquidity Pools & Trades"
-/>
+<meta property="og:title" content="Orca DEX API - Liquidity Pools & Trades" />
 <meta
   property="og:description"
   content="Use our Solana API & Websockets, designed for developers, to get SPL token trading data on Orca DEX. Access details on pools, as well as adding and removing liquidity."
@@ -296,22 +293,37 @@ You can run this query using [this link](https://ide.bitquery.io/Price-of-a-toke
 
 ```
 
-## Orca OHLC API
+## Orca OHLC APIs
 
-You can also query OHLC data in real time from Orca DEX.
-
-[Here](https://ide.bitquery.io/Orca-OHLC-for-all-currencies) is Websocket to get OHLC data for all currencies, however, if you want to get OHLC data for any specific currency pair, you can use [this Websocket api](https://ide.bitquery.io/Orca-OHLC-for-specific-pair_3).
+If you want to get OHLC data for any specific currency pair on Orca DEX, you can use [this api](https://ide.bitquery.io/Orca-OHLC-for-specific-pair_4).
+Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
 
 ```graphql
 query {
   Solana {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"}}}}
-      limit: {count: 10}
+      orderBy: { descendingByField: "Block_Timefield" }
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui" }
+          }
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
+          Dex: {
+            ProgramAddress: {
+              is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"
+            }
+          }
+        }
+      }
+      limit: { count: 10 }
     ) {
       Block {
-        Timefield: Time(interval: {in: minutes, count: 1})
+        Timefield: Time(interval: { in: minutes, count: 1 })
       }
       volume: sum(of: Trade_Amount)
       Trade {
@@ -324,7 +336,6 @@ query {
     }
   }
 }
-
 ```
 
 ## Track Latest Add Liquidity Transactions on Orca DEX
