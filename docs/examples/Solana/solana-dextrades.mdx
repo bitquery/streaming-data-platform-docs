@@ -301,6 +301,35 @@ subscription {
 
 ```
 
+## Solana OHLC API
+
+You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair Shark Cat-SOL by using the smart contract addresses in the `MintAddress` filter.
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "Block_Timefield"}
+      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
+      limit: {count: 10}
+    ) {
+      Block {
+        Timefield: Time(interval: {in: minutes, count: 1})
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
+      }
+      count
+    }
+  }
+}
+```
+
+
 ## Video Tutorial on Solana DEXTrades API | How to get Decentralized Exchange Data with DEX Trades API
 
 <VideoPlayer url="https://youtu.be/PVHB9Z8v-Cc?si=IyiU9C1WxoHBBHTv" />
