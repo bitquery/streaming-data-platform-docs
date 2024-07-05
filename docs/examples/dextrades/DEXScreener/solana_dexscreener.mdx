@@ -1,0 +1,54 @@
+---
+sidebar_position: 1
+---
+
+# DEXScreener Solana Data
+
+This section will guide you through different APIs which will tell you how to get data like realtime trades just like how DEXScreener shows for Solana.
+
+import VideoPlayer from "../../../../src/components/videoplayer.js";
+
+## Get Trade Transactions for a particular pair in realtime
+
+The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
+You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-dexcsreener#)
+
+```
+subscription MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {MintAddress: {is: "3B5wuUrMEi5yATD7on46hKfej3pfmd7t1RKgrsN3pump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Currency {
+          Name
+          Symbol
+        }
+        Amount
+        PriceAgainstSideCurrency: Price
+        PriceInUSD
+        Side {
+          Currency {
+            Name
+            Symbol
+          }
+          Amount
+          Type
+        }
+      }
+      Transaction {
+        Maker: Signer
+        Signature
+      }
+    }
+  }
+}
+
+```
+
+## Video Tutorial on How to Get Solana DEXTrades Data just like DEXScreener from Bitquery API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=t-qdemV4Yo0" />
