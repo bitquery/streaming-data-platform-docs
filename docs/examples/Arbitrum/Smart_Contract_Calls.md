@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Arbitrum Smart Contract Calls
+# Arbitrum Smart Contract Calls API
 
 In this section we will see how to get Arbitrum Smart contract calls information using our API.
 

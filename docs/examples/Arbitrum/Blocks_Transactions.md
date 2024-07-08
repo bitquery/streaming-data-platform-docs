@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-# Arbitrum Blocks and Transactions Examples
+# Arbitrum Transactions API
 
 In this section we'll have a look at some examples using the Arbitrum Transactions API.
 

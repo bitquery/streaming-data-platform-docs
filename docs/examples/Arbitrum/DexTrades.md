@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Arbitrum DEX Trades Examples
+# Arbitrum DEX Trades API
 
 In this section we will see how to get Arbitrum DEX trades information using our API.
 

@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Arbitrum Smart Contract Events
+# Arbitrum Smart Contract Events API
 
 In this section we will see how to get Arbitrum Smart Contract Events information using our API.
 
