@@ -148,6 +148,30 @@ subscription {
 }
 ```
 
+## Pair Creation time for a specific pair
+
+You can use the following query to get the pair creation time for a specific pair on Raydium DEX on Solana. But you need to use keyword `query` obviously.
+
+You can run this query using [this link](https://ide.bitquery.io/Specific-pair-creation-time-on-Raydium-Solana_1).
+
+```{
+  Solana {
+    Instructions(
+      where: {Transaction: {Result: {Success: true}}, Instruction: {Program: {Method: {is: "initializeUserWithNonce"}, Address: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}, Accounts: {includes: {Address: {is: "CSyP9JXCVuVoobWrdtBqQeq7s7VWwNAJ7FFBhLnLFUCE"}}}}}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+
+
+```
+
 ## Latest price of a token
 
 You can use the following query to get the latest price of a token on Raydium DEX on Solana.
