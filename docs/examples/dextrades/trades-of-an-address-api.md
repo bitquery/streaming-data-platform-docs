@@ -86,7 +86,7 @@ You can view the query in the IDE [here](https://ide.bitquery.io/Trades-of-an-ad
   EVM(network: eth, dataset: archive) {
     DEXTradeByTokens(
       where: {
-        
+
         Trade: {
           Currency: {
           	SmartContract: {
@@ -94,7 +94,7 @@ You can view the query in the IDE [here](https://ide.bitquery.io/Trades-of-an-ad
             }
           }
         }
-        
+
         any: [
       		{
             Transaction: {
@@ -184,9 +184,31 @@ You can check this query [here](https://ide.bitquery.io/Real-time-trades-of-an-e
 ```graphql
 subscription {
   EVM(network: eth) {
-     DEXTrades(
-      orderBy: {descending: Block_Time}
-      where: {any: [{Trade: {Buy: {Buyer: {is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"}}}}, {Trade: {Buy: {Seller: {is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"}}}}, {Transaction: {From: {is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"}}}]}
+    DEXTrades(
+      orderBy: { descending: Block_Time }
+      where: {
+        any: [
+          {
+            Trade: {
+              Buy: {
+                Buyer: { is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d" }
+              }
+            }
+          }
+          {
+            Trade: {
+              Buy: {
+                Seller: { is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d" }
+              }
+            }
+          }
+          {
+            Transaction: {
+              From: { is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d" }
+            }
+          }
+        ]
+      }
     ) {
       Block {
         Number
@@ -222,9 +244,7 @@ subscription {
     }
   }
 }
-
 ```
-
 
 ## Trades Where the Address is Buyer OR Seller
 
@@ -268,34 +288,58 @@ query MyQuery {
 
 ```
 
-
 ## Top Trader for a given token for a pair (Trade's PnL analysis)
 
-To get top traders of a given token and analyze their profit and loss, you can use the following query. 
+To get top traders of a given token and analyze their profit and loss, you can use the following query.
 
-Run this query [using this link](https://ide.bitquery.io/Top-traders-of-a-given-token-in-a-pair).
+Run this query [using this link](https://ide.bitquery.io/Top-traders-in-eth_1).
 
 ```graphql
-{
-  EVM(dataset: combined network:eth) {
+query TopTraders($token: String) {
+  EVM(network: eth, dataset: combined) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "count"}
-      limitBy: {count: 1, by: Trade_Buyer}
-      limit: {count: 10}
-      where: {Trade: {Currency: {SmartContract: {is: "0xb624960aaad05d433075a5c9e760adec26036934"}}, Dex: {SmartContract: {is: "0x62220cca3fa08e9b35bb2c775d20cf63a8de7ac5"}}}}
+      orderBy: {descendingByField: "volume"}
+      limit: {count: 20}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}}, TransactionStatus: {Success: true}}
     ) {
-      buy: sum(of: Trade_AmountInUSD)
-      sell: sum(of: Trade_Side_AmountInUSD)
-      count
+      Transaction {
+        From
+      }
       Trade {
-        Buyer
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
         Currency {
-          SmartContract
           Symbol
           Name
+          SmartContract
+        }
+        Side {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
         }
       }
+      bought: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: sell}}}}
+        selectWhere: {gt: "0"}
+      )
+      sold: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: buy}}}}
+        selectWhere: {gt: "0"}
+      )
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
   }
+}
+variables:
+{
+  "token": "0xC90242Cd9959b7Be6EC01B5e99702Ee21161f3Ad"
 }
 ```
