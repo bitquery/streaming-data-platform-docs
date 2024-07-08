@@ -25,6 +25,79 @@ In this section we'll have a look at some examples using the Arbitrum Transactio
 <meta property="twitter:description" content="The Arbitrum transactions API allows you to query for transactions on the Arbitrum blockchain. You can use this API to get information about specific transactions, such as the signature, block, transaction fee, success, fee payer, inner instructions count, instructions count, signer, and transaction index." />
 </head>
 
+## Latest Transactions
+
+The query below retrieves the latest 10 transactions on the Arbitrum network.
+You can find the query [here](https://ide.bitquery.io/Latest-Transactions_3)
+
+```
+{
+  EVM(network: arbitrum, dataset: archive) {
+    Transactions(
+      limit: {count: 10, offset: 0}
+      orderBy: {descending: Block_Time}
+      where: {Block: {Date: {since: "2023-07-01", till: "2023-07-15"}}}
+    ) {
+      ChainId
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        To
+        From
+        Hash
+        Value
+      }
+      Receipt {
+        GasUsed
+      }
+      Fee {
+        EffectiveGasPrice
+        SenderFee
+      }
+    }
+  }
+}
+```
+
+## Latest Transactions From/To a Wallet
+
+To retrieve the latest transactions from or to a specific wallet address we will be using the `any` filter which acts as the OR condition. This query fetches the 10 most recent transactions from/to the specified wallet address, ordered by the block time in descending order.
+
+```
+{
+  EVM(network: arbitrum, dataset: archive) {
+    Transactions(
+      limit: {count: 10}
+      where: {any: {Transaction: {From: {is: "0x16a92c43b270fbb1916501470f70c42cf6f00326"}, To: {is: "0x16a92c43b270fbb1916501470f70c42cf6f00326"}}}}
+      orderBy: {descending: Block_Time}
+    ) {
+      ChainId
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        To
+        From
+        Hash
+        Value
+      }
+      Receipt {
+        GasUsed
+      }
+      Fee {
+        EffectiveGasPrice
+        SenderFee
+      }
+    }
+  }
+}
+
+
+```
+
 ## Latest Blocks
 
 The query below retrieves the latest 10 blocks on the Arbitrum network.
@@ -46,46 +119,4 @@ query MyQuery {
 }
 
 
-```
-
-## Latest Transactions
-
-The query below retrieves the latest 10 transactions on the Arbitrum network.
-You can find the query [here](https://ide.bitquery.io/Latest-Transactions_3)
-
-```
-query ($network: evm_network, $limit: Int!, $offset: Int!, $from: String, $till: String) {
-  EVM(network: $network, dataset: archive) {
-    Transactions(
-      limit: {count: $limit, offset: $offset}
-      orderBy: {descending: Block_Time}
-      where: {Block: {Date: {since: $from, till: $till}}}
-    ) {
-      ChainId
-      Block {
-        Number
-        Time
-      }
-      Transaction {
-        To
-        Hash
-        Value
-      }
-      Receipt {
-        GasUsed
-      }
-      Fee {
-        EffectiveGasPrice
-        SenderFee
-      }
-    }
-  }
-}
-{
-  "network": "arbitrum",
-  "limit": 10,
-  "offset": 0,
-  "from": "2023-07-01",
-  "till": "2023-07-15"
-}
 ```
