@@ -301,38 +301,48 @@ query MyQuery {
 ## Get the Top Traders of a specific Token on Pump Fun DEX
 
 The below query gets the Top Traders of the specified Token `DMHoACmnNwBniSwsFFZKVhs21DHwQaUaDRn998W4vW5V` which was launched on pump fun. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
-You can run the query [here](https://ide.bitquery.io/Top-Traders_2)
+You can run the query [here](https://ide.bitquery.io/Top-traders-with-their-bought-sold-and-total-volume_1)
 
 ```graphql
-query MyQuery {
+query TopTraders {
   Solana {
     DEXTradeByTokens(
-      limit: { count: 10 }
       orderBy: { descendingByField: "volume" }
+      limit: { count: 5 }
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "DMHoACmnNwBniSwsFFZKVhs21DHwQaUaDRn998W4vW5V" }
+            MintAddress: { is: "CowdtFAhTn9CMFtRnYJj5h9ep1Y1EMQj7j7RhH54pump" }
           }
         }
         Transaction: { Result: { Success: true } }
       }
     ) {
       Trade {
-        Account {
-          Address
-        }
         Dex {
           ProtocolName
           ProtocolFamily
           ProgramAddress
         }
         Currency {
-          MintAddress
-          Name
           Symbol
+          Name
+          MintAddress
+        }
+
+        Account {
+          Address
         }
       }
+
+      bought: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sold: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
