@@ -6,9 +6,6 @@ sidebar_position: 5
 
 In thise section we will see how to monitor real-time balance changes across the Arbitrum blockchain
 
-This Arbitrum API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 <head>
 <meta name="title" content="How to get Arbitrum Balance Updates of an address"/>
