@@ -4,7 +4,9 @@ sidebar_position: 5
 
 # Balances and Balance Update API
 
-In thise section we will see how to monitor real-time balance changes across the Arbitrum blockchain
+In thise section we will see how to monitor real-time balance changes across the Arbitrum blockchain.
+
+The balance update does not inherently include transaction fees. Therefore, to get the actual balance after all transactions and fees, you need to subtract the total transaction fees from the balance updates.
 
 
 <head>
