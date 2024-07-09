@@ -41,6 +41,10 @@ This program allows you to test the data and its integration into your applicati
 
 The query will subscribe you to real-time updates for balance changes on the Base blockchain, providing a continuous stream of data as new transactions are processed and recorded. Here we have used address `0x4200000000000000000000000000000000000006`. You can find the query [here](https://ide.bitquery.io/Get-real-time-balance-updates_1#)
 
+
+>The balance update does not inherently include transaction fees. Therefore, to get the actual balance after all transactions and fees, you need to subtract the total transaction fees from the balance updates.
+
+
 ```
 subscription {
   EVM(network: base) {
