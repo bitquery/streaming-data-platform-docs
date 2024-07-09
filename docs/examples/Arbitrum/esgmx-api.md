@@ -6,7 +6,7 @@ When a wallet stakes GMX tokens in the GMX protocol, they are escrowed and earn 
 
 The GLP pool is where all trades on the platform are settled. Regardless of trading outcomes, GLP holders are rewarded with 70% of platform fees, offering a substantial yield opportunity based on revenue rather than token emissions.
 
-This section covers how to retrieve staking information on GMX.
+This section covers how to retrieve staking information on esGMX and vGLP.
 
 ## Latest esGMX Transfers
 
