@@ -283,10 +283,6 @@ const config = {
                 href: "https://t.me/Bloxy_info",
               },
               {
-                label: "Discord",
-                href: "https://discord.gg/EEBVTQnb2E",
-              },
-              {
                 label: "Twitter",
                 href: "https://twitter.com/Bitquery_io",
               },
