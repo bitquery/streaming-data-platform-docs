@@ -1,0 +1,238 @@
+---
+sidebar_position: 7
+---
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+# AeroDrome API
+
+This section provides you with a set of queries that provides an insight about the AeroDrome DEX ecosystem.
+
+Aerodrome Finance (AERO) is a next-generation Automated Market Maker (AMM) designed to serve as the central liquidity hub on the Base network.
+
+## Subscribe to Latest Trades on Aerodrome Finance
+
+[This query](https://ide.bitquery.io/Latest-Trades-on-Aerodrome) subscribes to the latest DEX Trades on AeroDrome Finance. We are filtering out the Aerodrome DEX Trades by applying the `where` condition on `OwnerAddress` of the DEX.
+`0x420dd381b31aef6683db6b902084cb0ffece40da` is the `OwnerAddress` in this case.
+
+```graphql
+subscription {
+  EVM(network: base) {
+    DEXTrades(
+      where: {
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x420dd381b31aef6683db6b902084cb0ffece40da" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Buy {
+          AmountInUSD(selectWhere: { gt: "0" })
+          Buyer
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          PriceInUSD
+          Seller
+        }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Sell {
+          Currency {
+            SmartContract
+            Symbol
+            Name
+          }
+          Seller
+          Buyer
+          AmountInUSD
+        }
+      }
+    }
+  }
+}
+```
+
+This subscription allows user to listen to the latest DEX Trades on `base` network involving the Aerodrome Finance.
+
+## Most Traded Tokens on AeroDrome Finance
+
+You can check the most traded token on AeroDrome Finance for the previous month using the [following query](https://ide.bitquery.io/Most-Traded-Tokens-on-Aerodome-Last-Month).
+This query takes into account all the DEX Trades after `2024-06-10T00:00:00Z` and before `2024-07-10T00:00:00Z`, and returns the top `10` most traded tokens on AeroDrome Finance for the mentioned time period.
+
+```graphql
+query MyQuery {
+  EVM(dataset: archive, network: base) {
+    DEXTradeByTokens(
+      limit: { count: 10 }
+      where: {
+        Block: {
+          Time: {
+            after: "2024-06-10T00:00:00Z"
+            before: "2024-07-10T00:00:00Z"
+          }
+        }
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x420dd381b31aef6683db6b902084cb0ffece40da" }
+          }
+        }
+      }
+      orderBy: { descendingByField: "count" }
+    ) {
+      Trade {
+        Currency {
+          Name
+          SmartContract
+        }
+      }
+      count
+    }
+  }
+}
+```
+
+You can checkout more examples on [Token Trades](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/) for reference.
+
+## Latest Liquidity Pools on AeroDrome Finance
+
+Recently created liquidity pools are a good earning opportunity, where one can utilize this opportunity in one way or the other like providing liquidity for a token, and so on.
+[This](https://ide.bitquery.io/Latest-Liquidity-Pools-on-Aerodome) query returns the latest liquidity pools created on the Aerodrome Finance.
+
+```graphql
+{
+  EVM(dataset: combined, network: base) {
+    Events(
+      orderBy: { descending: Block_Number }
+      limit: { count: 10 }
+      where: {
+        Log: {
+          SmartContract: { is: "0x420dd381b31aef6683db6b902084cb0ffece40da" }
+          Signature: { Name: { is: "PoolCreated" } }
+        }
+      }
+    ) {
+      Log {
+        Signature {
+          Name
+          Parsed
+          Signature
+        }
+        SmartContract
+      }
+      Transaction {
+        Hash
+      }
+      Block {
+        Date
+        Number
+      }
+      Arguments {
+        Value {
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The above query will return an object of the following structure.
+
+```json
+{
+  "Arguments": [
+    {
+      "Value": {
+        "address": "0x02f92800f57bcd74066f5709f1daa1a4302df875"
+      }
+    },
+    {
+      "Value": {
+        "address": "0xf564f589f58ced0127e48e1a02093ba53c2856ed"
+      }
+    },
+    {
+      "Value": {
+        "bool": false
+      }
+    },
+    {
+      "Value": {
+        "address": "0xa187378f0f3613e42b6ad5cc063a01060f82763f"
+      }
+    },
+    {
+      "Value": {
+        "bigInteger": "1539"
+      }
+    }
+  ],
+  "Block": {
+    "Date": "2024-07-10",
+    "Number": "16894743"
+  },
+  "Log": {
+    "Signature": {
+      "Name": "PoolCreated",
+      "Parsed": true,
+      "Signature": "PoolCreated(address,address,bool,address,uint256)"
+    },
+    "SmartContract": "0x420dd381b31aef6683db6b902084cb0ffece40da"
+  },
+  "Transaction": {
+    "Hash": "0xc5049804074b77ccb975b9617974ee40533634b8d6d8cabf2865cebb94c462a4"
+  }
+}
+
+```
+
+where `0x02f92800f57bcd74066f5709f1daa1a4302df875` and `0xf564f589f58ced0127e48e1a02093ba53c2856ed` are the token addresses, 
+and `0xa187378f0f3613e42b6ad5cc063a01060f82763f` is the pool address.
+
+## Get Liquidity of a Pool
+
+The [following](https://ide.bitquery.io/Liquidity-of-a-Pool_2) query returns the Liquidity of the Pool in the Aerodrome Finance DEX with `0x1e039aade407a94df380649b33b52cb8ad41c755` as the Pool Address, and `0x4200000000000000000000000000000000000006` and `0xa999542c71febba77602fbc2f784ba9ba0c850f6` are the token addresses.
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: base) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "0x1e039aade407a94df380649b33b52cb8ad41c755"}}, Currency: {SmartContract: {in: ["0x4200000000000000000000000000000000000006", "0xa999542c71febba77602fbc2f784ba9ba0c850f6"]}}}
+      orderBy: {descendingByField: "balance"}
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+    }
+  }
+}
+
+```
