@@ -207,7 +207,11 @@ subscription {
 
 ## Get Latest Price of a Token in Real-time
 
-This query provides real-time updates on price, including details about the DEX, market, and order specifics. Find the query [here](https://ide.bitquery.io/Latest-price-of-Ansems-cat-token-on-Solana_2)
+This query provides real-time trade, including details about the DEX, market, and order specifics. 
+Find the query [here](https://ide.bitquery.io/Latest-price-of-Ansems-cat-token-on-Solana_2)
+
+To get the most real-time price, you can [use this query](https://ide.bitquery.io/latest-price-of-a-token-on-solana_6), which orders transactions based on the transaction_index. 
+Since a block can have multiple trades of the same pair, using the latest transaction based on the transaction_index will provide the most current price.
 
 ```
 subscription {
