@@ -4,7 +4,7 @@ sidebar_position: 7
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-# AeroDrome API
+# AeroDrome API Endpoints
 
 This section provides you with a set of queries that provides an insight about the AeroDrome DEX ecosystem.
 
@@ -210,29 +210,44 @@ The above query will return an object of the following structure.
     "Hash": "0xc5049804074b77ccb975b9617974ee40533634b8d6d8cabf2865cebb94c462a4"
   }
 }
-
 ```
 
-where `0x02f92800f57bcd74066f5709f1daa1a4302df875` and `0xf564f589f58ced0127e48e1a02093ba53c2856ed` are the token addresses, 
-and `0xa187378f0f3613e42b6ad5cc063a01060f82763f` is the pool address.
+where
+
+- `0x02f92800f57bcd74066f5709f1daa1a4302df875` and
+  `0xf564f589f58ced0127e48e1a02093ba53c2856ed` are the token addresses.
+- `0xa187378f0f3613e42b6ad5cc063a01060f82763f` is the pool address.
 
 ## Get Liquidity of a Pool
 
-The [following](https://ide.bitquery.io/Liquidity-of-a-Pool_2) query returns the Liquidity of the Pool in the Aerodrome Finance DEX with `0x1e039aade407a94df380649b33b52cb8ad41c755` as the Pool Address, and `0x4200000000000000000000000000000000000006` and `0xa999542c71febba77602fbc2f784ba9ba0c850f6` are the token addresses.
+The [following](https://ide.bitquery.io/Liquidity-of-a-Pool_2) query returns the Liquidity of the Pool in the Aerodrome Finance DEX with `0x1e039aade407a94df380649b33b52cb8ad41c755` as the Pool Address.
 
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: base) {
     BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "0x1e039aade407a94df380649b33b52cb8ad41c755"}}, Currency: {SmartContract: {in: ["0x4200000000000000000000000000000000000006", "0xa999542c71febba77602fbc2f784ba9ba0c850f6"]}}}
-      orderBy: {descendingByField: "balance"}
+      where: {
+        BalanceUpdate: {
+          Address: { is: "0x1e039aade407a94df380649b33b52cb8ad41c755" }
+        }
+        Currency: {
+          SmartContract: {
+            in: [
+              "0x4200000000000000000000000000000000000006"
+              "0xa999542c71febba77602fbc2f784ba9ba0c850f6"
+            ]
+          }
+        }
+      }
+      orderBy: { descendingByField: "balance" }
     ) {
       Currency {
         Name
       }
-      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
     }
   }
 }
-
 ```
+
+You can checkout more queries around Liquidity Pool [here](https://docs.bitquery.io/docs/examples/dextrades/pools-api/).

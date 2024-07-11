@@ -1,0 +1,240 @@
+---
+sidebar_position: 7
+---
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+# Base Network Coins
+
+In the recent times, base network has seen rise of many Memecoins and token based ecosystems.
+In this guide, we will see some queries that could provide beneficial information about these coins, for people to take informed investment decisions.
+
+## Latest Coins Created on Base
+
+[This](https://ide.bitquery.io/Latest-Coin-on-Base-Coin_2) query returns the details of all the tokens and Memecoins created on the Base Network for a particular day.
+
+```graphql
+query LatestCoins {
+  EVM(network: base) {
+    Calls(
+      where: {
+        Call: { Create: true }
+        Arguments: { length: { ne: 0 } }
+        Receipt: {
+          ContractAddress: { not: "0x0000000000000000000000000000000000000000" }
+        }
+        Block: {
+          Time: {
+            after: "2024-07-10T00:00:00Z"
+            before: "2024-07-10T23:59:59Z"
+          }
+        }
+      }
+    ) {
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
+The `Receipt{ ContractAddress }` field returns the contract address of the newly created token or Memecoin.
+
+## Analysis of AERO Coin
+
+In this section, we have a list of queries that returns data that affects investment decisions.
+
+For this part, we have chosen AERO token as the token is currently trending and have high trade volume.
+
+### Latest DEX Trades with AERO coin
+
+[This](https://ide.bitquery.io/Subscription-for-Latest-Trades-for-AERO_1) subscription returns the information on latest trades involving AERO coins like `timestamp`, `PriceInUSD`, `buyer`, `seller` and details about `side currency`, where `0x940181a94A35A4569E4529A3CDfB74e38FD98631` is the smart contract address of AERO Coin.
+
+```graphql
+subscription {
+  EVM(network: base) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x940181a94A35A4569E4529A3CDfB74e38FD98631" }
+          }
+          AmountInUSD: { gt: "0" }
+          Success: true
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        AmountInUSD
+        Buyer
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        PriceInUSD
+        Seller
+        Side {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
+
+### Top Ten Holders of AERO Coin
+
+Using the following [query](https://ide.bitquery.io/Top-Holders-for-Aero-Token) we can get the list of Top 10 token holders for AERO Coins, where `0x940181a94A35A4569E4529A3CDfB74e38FD98631` is the contract address of the AERO coin.
+
+```graphql
+query MyQuery {
+  EVM(network: base) {
+    BalanceUpdates(
+      where: {
+        Currency: {
+          SmartContract: { is: "0x940181a94A35A4569E4529A3CDfB74e38FD98631" }
+        }
+      }
+      orderBy: { descendingByField: "balance" }
+      limit: { count: 10 }
+    ) {
+      BalanceUpdate {
+        Address
+      }
+      balance: sum(of: BalanceUpdate_AmountInUSD, selectWhere: { ne: "0" })
+      Currency {
+        Name
+        Symbol
+        SmartContract
+      }
+    }
+  }
+}
+```
+
+### OHLC Data for AERO/USDC Pair
+
+[This](https://ide.bitquery.io/OHLC-of-AERO-Coin) query returns the OHLC parameters and `volume` for the AERO/USDC trade pair for a one hour window.
+
+```graphql
+{
+  EVM(network: base, dataset: combined) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "Block_testfield" }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x940181a94A35A4569E4529A3CDfB74e38FD98631" }
+          }
+          Side: {
+            Currency: {
+              SmartContract: {
+                is: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+              }
+            }
+            Type: { is: buy }
+          }
+        }
+      }
+      limit: { count: 10 }
+    ) {
+      Block {
+        testfield: Time(interval: { in: hours, count: 1 })
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Number)
+        close: Price(maximum: Block_Number)
+      }
+      count
+    }
+  }
+}
+```
+
+### Total Supply of AERO Coin
+
+[This](https://ide.bitquery.io/Total-supply-of-a-AERO-on-Base) query returns the total supply of a token, which is an important parameter to consider from the investment perspective. Also, it is an important parameter for Market Cap calculation.
+
+```graphql
+query MyQuery {
+  EVM(network: base, dataset: combined) {
+    Transfers(
+      where: {
+        Transfer: {
+          Currency: {
+            SmartContract: { is: "0x940181a94A35A4569E4529A3CDfB74e38FD98631" }
+          }
+          Success: true
+        }
+      }
+    ) {
+      minted: sum(
+        of: Transfer_Amount
+        if: {
+          Transfer: {
+            Sender: { is: "0x0000000000000000000000000000000000000000" }
+          }
+        }
+      )
+      burned: sum(
+        of: Transfer_Amount
+        if: {
+          Transfer: {
+            Receiver: { is: "0x0000000000000000000000000000000000000000" }
+          }
+        }
+      )
+    }
+  }
+}
+```
+
+You can checkout more queries related to tokens and token trades [here](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/#ohlc-in-usd-of-a-token).
