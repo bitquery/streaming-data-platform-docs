@@ -234,7 +234,7 @@ subscription {
 ```
 
 ## Latest Liquidity Removal on Uniswap
-This query retrieves the most recent liquidity removal events (Burn events) on Uniswap. It includes details about the transaction, block, log, and arguments.
+This query retrieves the most recent liquidity removal events (Burn events) on Uniswap. It includes details about the transaction, block, log, and arguments. You can run the query [here](https://ide.bitquery.io/uniswap-v2-liquidity-removed)
 
 ```
 {
