@@ -131,6 +131,28 @@ query MyQuery {
 }
 ```
 
+
+## Top Token Creators on Pump Fun
+
+The below query fetches details about token creators filtering using the `pump` program and `create` method. 
+The `descendingByField: "tokens_count":` Orders the results in descending order based on the count of tokens created.
+You can run the query [here](https://ide.bitquery.io/Top-pump-fun-token-creators)
+```
+query MyQuery {
+  Solana(network: solana) {
+    Instructions(
+      where: {Instruction: {Program: {Name: {is: "pump"}, Method: {is: "create"}}}}
+      orderBy: {descendingByField: "tokens_count"}
+    ) {
+      tokens_count: count
+      Transaction {
+        Signer
+      }
+    }
+  }
+}
+```
+
 ## Get OHLC Data of a Token on Pump Fun
 
 The below query gets OHLC data of the specified Token `66VR6bjEV5DPSDhYSQyPAxNsY3dgmH6Lwgi5cyf2pump` for 1 minute time interval for last 10 minutes on Pump Fun DEX.
