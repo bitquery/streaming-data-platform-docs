@@ -11,25 +11,22 @@ In this guide, we will see some queries that could provide beneficial informatio
 
 ## Latest Coins Created on Base
 
-[This](https://ide.bitquery.io/Latest-Coin-on-Base-Coin_2) query returns the details of all the tokens and Memecoins created on the Base Network for a particular day.
+[This](https://ide.bitquery.io/Latest-Coin-on-Base-Coin_3) query returns the details of all the tokens and Memecoins created on the Base Network for a particular day.
 
 ```graphql
 query LatestCoins {
   EVM(network: base) {
     Calls(
       where: {
-        Call: { Create: true }
-        Arguments: { length: { ne: 0 } }
+        Call: {Create: true},
+        Arguments: {length: {ne: 0}},
         Receipt: {
-          ContractAddress: { not: "0x0000000000000000000000000000000000000000" }
-        }
-        Block: {
-          Time: {
-            after: "2024-07-10T00:00:00Z"
-            before: "2024-07-10T23:59:59Z"
+          ContractAddress: {
+            not: "0x0000000000000000000000000000000000000000"
           }
         }
       }
+      orderBy: {descending: Block_Time}
     ) {
       Arguments {
         Name
@@ -66,6 +63,7 @@ query LatestCoins {
     }
   }
 }
+
 ```
 
 The `Receipt{ ContractAddress }` field returns the contract address of the newly created token or Memecoin.
@@ -238,3 +236,8 @@ query MyQuery {
 ```
 
 You can checkout more queries related to tokens and token trades [here](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/#ohlc-in-usd-of-a-token).
+
+
+## Video Tutorial to Get Latest Memecoins on Base
+
+<VideoPlayer url="https://youtu.be/jArOBPZpTFQ"  />
