@@ -232,3 +232,65 @@ subscription {
 
 
 ```
+
+## Latest Liquidity Removal on Uniswap
+This query retrieves the most recent liquidity removal events (Burn events) on Uniswap. It includes details about the transaction, block, log, and arguments. You can run the query [here](https://ide.bitquery.io/uniswap-v2-liquidity-removed)
+
+```
+{
+  EVM(network: eth, dataset: combined) {
+    Events(
+      limit: {count: 100}
+      where: {Transaction: {To: {is: "0x7a250d5630b4cf539739df2c5dacb4c659f2488d"}}, Log: {Signature: {Name: {in: ["Burn"]}}}}
+    ) {
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Block {
+        Number
+      }
+      Log {
+        Signature {
+          Name
+        }
+        SmartContract
+      }
+      Transaction {
+        From
+        To
+        Type
+      }
+      LogHeader {
+        Address
+        Index
+      }
+      Arguments {
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+        }
+        Name
+      }
+    }
+  }
+}
+
+```

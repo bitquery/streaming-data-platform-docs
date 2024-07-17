@@ -53,7 +53,7 @@ The following query retrieves the latest esGMX transfers on the Arbitrum network
 
 ## Latest esGMX Claims
 
-The following query retrieves the latest esGMX claims on the Arbitrum network:
+By tracking the "claim" smartcontract calls, you can get info on any pending GMX tokens from esGMX that have been vested and converted to GMX tokens. The following query retrieves the latest esGMX claims on the Arbitrum network:
 
 [Run the query here](https://ide.bitquery.io/latest-esGMX-Claims)
 

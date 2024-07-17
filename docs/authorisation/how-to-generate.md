@@ -93,6 +93,13 @@ def oAuth_example():
 oAuth_example()
 ```
 
+The response will include details on `scope` and `expiration time` of the token. A sample response looks like this:
+
+```
+{'access_token': 'ory_at_sKK8sSq8', 'expires_in': 2627999, 'scope': 'api', 'token_type': 'bearer'}
+
+```
+
 **Deleting an Application**
 
 If you no longer need an application, you can delete it by clicking **Delete** on the **Applications** page. All the tokens associated with the application will no longer work.
