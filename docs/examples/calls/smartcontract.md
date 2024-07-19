@@ -10,16 +10,19 @@ sidebar_position: 2
  ##  Recent Smart Contract Calls
 
  ```graphql
- query MyQuery {
-  EVM(dataset: combined, network: bsc) {
+query MyQuery {
+  EVM(dataset: archive, network: bsc) {
     Calls(
       limit: {count: 10}
-      orderBy: {descending: Block_Date}
-      where: {Block: {Date: {after: "2023-02-27"}}}
+      orderBy: {descending: Block_Time}
+      where: {Block: {Date: {after: "2024-07-12"}}}
     ) {
       Call {
         LogCount
         InternalCalls
+        Signature {
+          Name
+        }
       }
       Transaction {
         Gas
@@ -32,9 +35,33 @@ sidebar_position: 2
       Block {
         Date
       }
+      Arguments {
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+        }
+        Name
+      }
     }
   }
 }
+
 ```
 
 **Parameters**
