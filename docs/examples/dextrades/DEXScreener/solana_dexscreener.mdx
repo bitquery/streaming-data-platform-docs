@@ -49,6 +49,45 @@ subscription MyQuery {
 
 ```
 
+## Get Top Pairs on Solana
+
+The query will give the top 10 pairs on Solana network in descending order of their total traded volume. Keep in mind you cannot use this as a websocket subscription becuase aggregate functions like `sum` doesn't work well in `subscription`.
+You can find the query [here](https://ide.bitquery.io/Top-10-pairs-on-Solana-as-per-volume)
+
+```
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      limit: {count: 10}
+      orderBy:{descendingByField:"volume"}
+      where: {Block: {Time: {since: "2024-07-27T06:33:00Z"}}, Trade: {Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+        }
+        Side {
+          Currency {
+            Name
+            Symbol
+          }
+        }
+        Dex{
+          ProtocolName
+          ProgramAddress
+        }
+        Market {
+          MarketAddress
+        }
+      }
+      volume: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+```
+
 ## Video Tutorial on How to Get Solana DEXTrades Data just like DEXScreener from Bitquery API
 
 <VideoPlayer url="https://www.youtube.com/watch?v=t-qdemV4Yo0" />
