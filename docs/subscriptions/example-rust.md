@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Building with WebSockets: Code Samples in Rust
+# Building with WebSockets: Code Sample in Rust
 
 In this section we will see how to use bitquery subscriptions in Rust. The final output will look something like this
 
