@@ -2,7 +2,7 @@
 
 You can run the queries and subscriptions on Postman as well. Below is the link to the collection:
 
-[Postman Collection for Examples](https://www.postman.com/spacecraft-geologist-86385692/workspace/bitquery/collection/645e69d97aa179eb6799e1d6)
+[Postman Collection for Examples](https://www.postman.com/interstellar-eclipse-270749/workspace/bitquery)
 
 ![](/img/postman.png)
 

@@ -45,7 +45,7 @@ Authorization: Bearer <access_token>
 
 ```
 
-Refer Postman examples [here](https://www.postman.com/spacecraft-geologist-86385692/workspace/bitquery/collection/27392958-a162bd5f-3574-4033-8ea7-8e9947e08b54?action=share&creator=27392958)
+Refer Postman examples [here](https://www.postman.com/interstellar-eclipse-270749/workspace/bitquery)
 
 **Revoking an Access Token**
 
