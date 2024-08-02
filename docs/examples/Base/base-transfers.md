@@ -2,10 +2,6 @@
 
 In this section we'll have a look at some examples using the Base Transfers API.
 
-This Base API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
 <head>
 <meta name="title" content="Base Transfers API"/>
 <meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
