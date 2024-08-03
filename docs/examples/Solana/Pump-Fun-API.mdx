@@ -10,8 +10,6 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="language" content="English"/>
 
-{" "}
-
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
@@ -469,6 +467,62 @@ query TopTraders {
   }
 }
 ```
+
+## All tokens crated by an address
+To get all pump fun tokens created by address use [this query](https://ide.bitquery.io/pump-fun-tokens-created-by-specific-address).
+
+```
+query MyQuery {
+  Solana(network: solana) {
+    Instructions(
+      where: {Transaction: {Signer: {is: "DEQV8Lc2JcLpuzETfsCfAozqwjPVVGoXbJk2e32jZy6p"}},
+        Instruction: {Program: {Name: {is: "pump"}, Method: {is: "create"}}}}
+    ) {
+      Transaction {
+        Signer
+        Signature
+      }
+      Instruction {
+        Accounts {
+          Address
+        }
+      }
+    }
+  }
+}
+```
+
+## Check who created a specific pump fun token
+
+To check who created a pump fun token, use this query. Add token address in Accounts -> Address and transction signer will be token creator.
+
+You can also run this query using [this link](https://ide.bitquery.io/pump-fun-token-creator).
+
+```
+query MyQuery {
+  Solana(network: solana) {
+    Instructions(
+      where: {Instruction: {Accounts: {includes: {Address: {is: "CAYFGvtXQ2djbbdJaUgdfLehx5x73i6ugDWTD82fpump"}}}, Program: {Name: {is: "pump"}, Method: {is: "create"}}}}
+    ) {
+      Transaction {
+        Signer
+        Signature
+      }
+      Instruction {
+        Accounts {
+          Address
+        }
+      }
+    }
+  }
+}
+```
+
+
+https://ide.bitquery.io/pump-fun-tokens-created-by-specific-address
+
+```
+
 
 ## Video Tutorial on Getting Pump Fun Trades
 

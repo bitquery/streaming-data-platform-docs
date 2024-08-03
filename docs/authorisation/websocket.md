@@ -14,4 +14,4 @@ Content-Type: application/json
 
 ```
 
-Refer this [this](https://www.postman.com/spacecraft-geologist-86385692/workspace/bitquery/ws-raw-request/659811c95188ca95c7b9e569) link for postman example of how to use OAuth with websockets.
+Refer this [this](https://www.postman.com/interstellar-eclipse-270749/workspace/bitquery/ws-raw-request/659811c95188ca95c7b9e569?action=share&creator=27392958&ctx=documentation) link for postman example of how to use OAuth with websockets.
