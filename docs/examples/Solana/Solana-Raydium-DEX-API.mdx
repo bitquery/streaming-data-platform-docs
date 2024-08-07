@@ -176,14 +176,15 @@ You can run this query using [this link](https://ide.bitquery.io/Specific-pair-c
 
 You can use the following query to get the latest price of a token on Raydium DEX on Solana.
 
-You can run this query using [this link](https://ide.bitquery.io/Live-price-of-a-token).
+You can run this query using [this link](https://ide.bitquery.io/live-price-of-token-on-raydium).
 
-```subscription {
+```
+subscription {
   Solana {
     DEXTradeByTokens(
       limit: {count: 1}
       orderBy: {descending: Block_Time}
-      where: {Trade: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}, Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}}
+      where: {Trade: {Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}, Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}, Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}}
     ) {
       Block {
         Time
@@ -194,7 +195,6 @@ You can run this query using [this link](https://ide.bitquery.io/Live-price-of-a
     }
   }
 }
-
 ```
 
 ## Latest Trades on Solana Raydium DEX
