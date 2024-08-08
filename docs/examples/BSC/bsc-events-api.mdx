@@ -1,0 +1,95 @@
+---
+sidebar_position: 4
+---
+
+# BSC Smart Contract Events API
+
+In this section we will see how to get BSC Smart Contract Events information using our API.
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+<head>
+<meta name="title" content="BSC Smart Contract Events & logs API"/>
+
+<meta name="description" content="Get BSC Smart Contract Event data using Events API. Explore events in-depth using detailed information of events."/>
+
+<meta name="keywords" content="BSC, Smart contract events, USDT contract, BSC event monitoring, Event signature, event timestamp, event tracking, Contract signature, BSC event"/>
+
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+
+<meta property="og:title" content="BSC Smart Contract Events & logs API" />
+
+<meta property="og:description" content="Get BSC Smart Contract Event data using Events API. Explore events in-depth using detailed information of events."/>
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+
+<meta property="twitter:title" content="BSC Smart Contract Events & logs API" />
+
+<meta property="twitter:description" content="Get BSC Smart Contract Event data using Events API. Explore events in-depth using detailed information of events." />
+</head>
+
+## Track Newly Created Pools on BSC
+
+This subscription websocket lets you track the newly created pools on Uniswap V3 `0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7`. And we are listening for a particular event here named as `PoolCreated` because whenever a new pool is created on Uniswap V3 this event is fired. You can get the newly created pool address in the response in `arguments`.
+You can find the query [here](https://ide.bitquery.io/Newly-Created-Pools-on-Uniswap-v3-on-BSC-network_3#)
+
+```
+subscription {
+  EVM(network: bsc) {
+    Events(
+      where: {Log: {SmartContract: {is: "0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7"}, Signature: {Name: {is: "PoolCreated"}}}, TransactionStatus: {Success: true}}
+    ) {
+      Log {
+        Signature {
+          Name
+          Parsed
+          Signature
+        }
+        SmartContract
+      }
+      Transaction {
+        Hash
+      }
+      Block {
+        Date
+        Number
+      }
+      Arguments {
+        Type
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+        }
+        Name
+      }
+    }
+  }
+}
+
+```
+
+## Video Tutorial on BSC API | How to Track Newly Created Tokens & Pools in Realtime on BSC
+
+<VideoPlayer url="https://www.youtube.com/watch?v=j5M7-xLQWHk" />
