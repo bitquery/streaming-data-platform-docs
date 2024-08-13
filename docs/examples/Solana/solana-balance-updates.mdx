@@ -6,10 +6,9 @@ sidebar_position: 1
 
 In this section we will see how to monitor real-time balance changes across the Solana blockchain using our BalanceUpdates API.
 
-Solana APIs is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more  [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+Solana APIs is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 Note - Our [V1 APIs](https://docs.bitquery.io/v1/docs/category/examples) do support solana and you can get balances from there. However they do not have historical balance.
-
 
 <head>
 <meta name="title" content="Solana Balance API | Get Balance of a Solana address"/>
@@ -247,6 +246,39 @@ subscription {
 
 ```
 
+## Using Pre-Made Aggregates in Solana Balance Updates
+
+When querying Solana balance updates, you can use pre-made aggregates to optimize performance. The `aggregates` flag provides three options to control the use of these aggregates:
+
+- **`aggregates: only`**: This option uses only the pre-made aggregates, which can significantly increase the speed of the response.
+- **`aggregates: yes`**: This option uses both pre-made aggregates and individual transaction data.
+- **`aggregates: no`**: This option does not use any pre-made aggregates.
+  > When using the aggregates: only option, you need to include the Owner field in the response to ensure proper aggregation and filtering.
+
+```
+{
+  Solana(aggregates: only) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Account: {Address: {is: "HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU"}}}}
+    ) {
+      BalanceUpdate {
+        Account {
+          Owner
+        }
+        Currency {
+          Decimals
+          CollectionAddress
+          Name
+          Key
+          IsMutable
+          Symbol
+        }
+      }
+      sum(of: BalanceUpdate_AmountInUSD)
+    }
+  }
+}
+```
 
 ## Video Tutorial on How to get Balance Updates for Wallets on Solana in Realtime
 
