@@ -1,6 +1,7 @@
 # eth_getBalance
 
-Ethereum getBalance is an API that retrieves the balance for a particular address for any given currency on the Ethereum blockchain. In this section we will see how to create subscription for the eth_getB.alance JSON RPC method and how to customize it to get data we need.
+Ethereum getBalance is an API endpoint that retrieves the balance for a particular address for any given currency on the Ethereum blockchain. In this section we will see how to create queries that serves as an alternative for the eth_getBalance JSON RPC method and
+how to customize it to get data we need.
 
 ## eth_getBalance for One Address
 
@@ -8,7 +9,7 @@ Ethereum getBalance is an API that retrieves the balance for a particular addres
 
 You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_1#) query to get the current balance of a particular address. 
 
-```
+``` graphql
 {
   EVM {
     BalanceUpdates(
@@ -36,7 +37,7 @@ You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_1#) qu
 
 [This](https://ide.bitquery.io/eth_getBalance-for-one-address-for-eth) query returns the balance of the mentioned address for a selected currency. The currency in question is Ethereum with `SmartContract` as `0x`.
 
-```
+``` graphql
 {
   EVM {
     BalanceUpdates(
@@ -64,11 +65,11 @@ You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_1#) qu
 }
 ```
 
-## eth_getBalance for Multiple Address
+## eth_getBalance for Multiple Addresses
 
 To get the balance of multiple addresses, [this](https://ide.bitquery.io/eth_getBalance-for-multiple-address) query can be used. 
 
-```
+``` graphql
 {
   EVM {
     BalanceUpdates(
