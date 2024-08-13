@@ -1,0 +1,221 @@
+---
+sidebar_position: 2
+---
+
+# BSC DEX Trades API
+
+In this section we will see how to get BSC DEX trades information using our API.
+
+<head>
+<meta name="title" content="BSC Decentralized Exchange Data with DEX Trades API"/>
+<meta name="description" content="Get on-chain data of any BSC based DEX through our DEX Trades API."/>
+<meta name="keywords" content="BSC DEX Trades api,BSC DEX Trades python api,BSC DEX Trades token api,BSC Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,BSC network api, BSC web3 api"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="BSC Decentralized Exchange Data with DEX Trades API"
+/>
+<meta
+  property="og:description"
+  content="Get on-chain data of any BSC based DEX through our DEX Trades API."
+/>
+
+<!-- Twitter -->
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="BSC Decentralized Exchange Data with DEX Trades API" />
+<meta property="twitter:description" content="Get on-chain data of any BSC based DEX through our DEX Trades API." />
+</head>
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+## Subscribe to Latest BSC Trades
+
+This subscription will return information about the most recent trades executed on BSC's DEX platforms.
+You can find the query [here](https://ide.bitquery.io/subscribe-to-bsc-dex-trades)
+
+```
+subscription {
+  EVM(network: bsc) {
+    DEXTrades {
+      Block {
+        Time
+      }
+      Trade {
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          SmartContract
+        }
+        Buy {
+          Amount
+          Buyer
+          Seller
+          Currency {
+            Decimals
+            Fungible
+            HasURI
+            Name
+            ProtocolName
+            SmartContract
+            Symbol
+          }
+          OrderId
+        }
+        Sell {
+          Buyer
+          Seller
+          Currency {
+            Decimals
+            Fungible
+            HasURI
+            Name
+            ProtocolName
+            SmartContract
+            Symbol
+          }
+        }
+      }
+    }
+  }
+}
+
+
+```
+
+## Get all DEXs on BSC Network
+
+This query retrieves all the DEXes operating on BSC network and gives info such as `ProtocolName` , `ProtocolVersion` and `ProtocolFamily`.
+Find the query [here](https://ide.bitquery.io/Get-all-the-DEXs-on-BSC-network).
+
+```
+query MyQuery {
+  EVM(network: bsc, dataset: realtime) {
+    DEXTrades {
+      Trade {
+        Dex {
+          ProtocolName
+          ProtocolVersion
+          ProtocolFamily
+        }
+      }
+      count
+    }
+  }
+}
+
+```
+
+## Subscribe to Latest Price of a Token in Real-time on BSC
+
+This query provides real-time updates on price of ETH `0x2170Ed0880ac9A755fd29B2688956BD959F933F8` in terms of WBNB `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`, including details about the DEX, market, and order specifics. Find the query [here](https://ide.bitquery.io/realtime-price-of-a-ETH-in-terms-of-WBNB)
+
+```
+subscription {
+  EVM(network: bsc) {
+    DEXTrades(
+      where: {Trade: {Sell: {Currency: {SmartContract: {is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"}}}, Buy: {Currency: {SmartContract: {is: "0x2170Ed0880ac9A755fd29B2688956BD959F933F8"}}}}}
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Buy {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Price_in_terms_of_sell_currency: Price
+          PriceInUSD
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          OrderId
+        }
+        Sell {
+          Amount
+          Buyer
+          Seller
+          Price_in_terms_of_buy_currency: Price
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          OrderId
+        }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+          SmartContract
+          ProtocolVersion
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Latest USD Price of a Token
+
+The below query retrieves the USD price of a token on BSC by setting `{Trade: {Buy: {Currency: {SmartContract: {is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"}}}}}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/realtime-usd-price-of-a-WBNB).
+
+```
+subscription {
+  EVM(network: bsc) {
+    DEXTrades(
+      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"}}}}}
+    ) {
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        From
+        To
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          Buyer
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          Seller
+          Price
+          PriceInUSD
+        }
+        Sell {
+          Amount
+          Buyer
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+          Seller
+          Price
+        }
+        PriceAsymmetry(selectWhere: {lt: 1})
+      }
+    }
+  }
+}
+
+```
+
+## Video Tutorial on BSC DEXTrades API | How to get BSC Decentralized Exchange Data with DEX Trades API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=LDs5vrM07zs" />

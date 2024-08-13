@@ -23,6 +23,26 @@ This error typically arises due to incorrect query construction involving limits
 
 ---
 
+### Too Many Sessions: 429 Error
+
+#### Error Message:
+
+    "Too Many Sessions: 429"
+
+#### Probable Cause:
+
+This error occurs when you exceed certain limits set by ClickHouse or the Bitquery API. These limits may include:
+
+- **Rate Limit**: The maximum number of queries allowed per minute (e.g., 180 queries per minute).
+- **Session Limit**: The maximum number of active sessions allowed at any given time.
+- **Streams Limit**: The maximum number of streams you can open simultaneously.
+
+#### Resolution Steps:
+
+If the error persists or you believe it is occurring in error, contact the support team for further assistance.
+
+---
+
 ### Empty Response Returned
 
 If no trades/transfers are found for the queried period, compare with public explorers. If issues persist, contact support through the public Telegram group.
@@ -45,8 +65,7 @@ This error occurs due to excessive data retrieved in a single query. Limit resul
 
 ### Too many simultaneous queries
 
-This is likely an infrastructure issue. Contact support via Telegram for assistance.
-
+This happens when you hit the number of requests for your plan. Please contact the support team. Contact support via Telegram for assistance.
 
 ### Error Status 500
 
@@ -60,27 +79,21 @@ The error with status 500 is a generic internal server error that could result f
 - **Check Server Status:** Verify the [server status](https://account.bitquery.io/user/system_status) to ensure it is operational and not experiencing downtime.
 - **Escalation:** Contact support on the [telegram channel](https://t.me/Bloxy_info).
 
-
-
 ### ActiveRecord::ActiveRecordError: Response code: 500 DB::Exception: Too many simultaneous queries
 
-If you see this text `DB::Exception: Too many simultaneous queries`, this is an issue with the instance in the backend server, please reach out to support on telegram.
-
+If you see this text `DB::Exception: Too many simultaneous queries`, this happens when you hit the number of requests for your plan. Please contact the support team.
 
 ### DB::Exception : Memory limit (total) exceeded
 
 `"message":"ActiveRecord::ActiveRecordError: Response code: 500:\nCode: 241, e.displayText() = DB::Exception: Memory limit (total) exceeded: would use 78.01 GiB (attempt to allocate chunk of 134658600 bytes), maximum: 78.01 GiB: ...`
 
-
 This error occurs when a query lacks a limit or requests an excessive number of records. To resolve it, consider adding filters to refine the query parameters. If issue still persists, please contact the support team on telegram with your query.
-
 
 ### Timeout TCP socket
 
 [{"message":"Net::ReadTimeout ...}]
 
 This error occurs when the query is complex and takes too long to respond to a request. Check if you can optimize the query, if not please contact the support team on telegram with your query.
-
 
 ### Error: Failed to fetch ERROR http 424
 

@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Building with WebSockets: Code Samples
+# Building with WebSockets: Code Samples in Python & JavaScript
 
 This section provides examples of how to implement subscription queries in your code.
 
@@ -139,3 +139,5 @@ To start the WebSocket connection, we use the `open` event. To stop or close the
 - Also, when the connection is closed either due to calling `bitqueryConnection.close();` or due to some network error or server-side closure, the `close` event is fired.
 
 Please note that this is a basic implementation of starting and stopping a WebSocket connection. Depending on your application's needs, you might want to add more logic to manage the connection, handle errors, or deal with different types of data.
+
+

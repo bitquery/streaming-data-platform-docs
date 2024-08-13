@@ -42,7 +42,7 @@ Read [here](https://docs.bitquery.io/docs/authorisation/websocket/) on how to us
 
 Here is the link to a Postman collection with samples demonstrating how to use the wss endpoint:
 
-> [Postman Collection for Examples](https://www.postman.com/spacecraft-geologist-86385692/workspace/bitquery/collection/645e69d97aa179eb6799e1d6)
+> [Postman Collection for Examples](https://www.postman.com/interstellar-eclipse-270749/workspace/bitquery)
 
 Continue reading about how to create and use websockets in this [section](/docs/subscriptions/subscription.md)
 

@@ -233,3 +233,28 @@ subscription {
 
 ```
 
+## V, R, S Signature of Mempool Transactions
+
+The following subscription query retrieves real-time mempool transactions and includes key details such as the block time, block number, transaction hash, transaction cost, and the V, R, S components of the transaction signature. You can run it [here](https://ide.bitquery.io/vrs-signature)
+```
+subscription {
+  EVM(network: eth, mempool: true) {
+    Transactions {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+        Cost
+      }
+      Signature {
+        V
+        S
+        R
+      }
+    }
+  }
+}
+```
+

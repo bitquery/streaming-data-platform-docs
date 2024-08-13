@@ -1,0 +1,99 @@
+---
+sidebar_position: 3
+---
+
+# BSC Smart Contract Calls API
+
+In this section we will see how to get BSC Smart contract calls information using our API.
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+<head>
+<meta name="title" content="BSC Smart Contract Calls API"/>
+
+<meta
+  name="description"
+  content="Explore BSC smart contract call data. Analyze smart contract calls with detailed information."
+/>
+
+<meta
+  name="keywords"
+  content="BSC, smart contract, BSC smart contracts, blockchain transactions, blockchain analysis, smart contract calls, DApps, cryptocurrency, token transfers, crypto transactions, BSC transactions, blockchain analytics, BSC data"
+/>
+
+<meta name="robots" content="index, follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="English" />
+
+<!-- Open Graph / Facebook -->
+
+<meta property="og:type" content="website" />
+
+<meta property="og:title" content="BSC Smart Contract Calls API" />
+
+<meta
+  property="og:description"
+  content="Explore BSC smart contract call data. Analyze smart contract calls with detailed information."
+/>
+
+<!-- Twitter -->
+
+<meta property="twitter:card" content="summary_large_image" />
+
+<meta property="twitter:title" content="BSC Smart Contract Calls API" />
+
+<meta property="twitter:description" content="Explore BSC smart contract call data. Analyze smart contract calls with detailed information." />
+</head>
+
+## Track Latest Created Tokens on BSC
+
+This subscription websocket lets you track the newly created tokens on BSC network. You will find the newly created token contract address in the response under `Receipt: ContractAddress` field.
+You can find the query [here](https://ide.bitquery.io/Newly-Created-Tokens-on-BSC-network_2#)
+
+```
+subscription {
+  EVM(network: bsc) {
+    Calls(
+      where: {Call: {Create: true}, Arguments: {length: {ne: 0}}, Receipt: {ContractAddress: {not: "0x0000000000000000000000000000000000000000"}}, TransactionStatus: {Success: true}}
+    ) {
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+
+```
+
+## Video Tutorial on BSC API | How to Track Newly Created Tokens & Pools in Realtime on BSC
+
+<VideoPlayer url="https://www.youtube.com/watch?v=j5M7-xLQWHk" />
