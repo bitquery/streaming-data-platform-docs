@@ -450,7 +450,7 @@ query TopTraders {
 }
 ```
 
-## All tokens crated by an address
+## All tokens created by an address
 
 To get all pump fun tokens created by address use [this query](https://ide.bitquery.io/pump-fun-tokens-created-by-specific-address).
 
@@ -475,36 +475,6 @@ query MyQuery {
 }
 ```
 
-## Check who created a specific pump fun token
-
-To check who created a pump fun token, use this query. Add token address in Accounts -> Address and transction signer will be token creator.
-
-You can also run this query using [this link](https://ide.bitquery.io/pump-fun-token-creator).
-
-```
-query MyQuery {
-  Solana(network: solana) {
-    Instructions(
-      where: {Instruction: {Accounts: {includes: {Address: {is: "CAYFGvtXQ2djbbdJaUgdfLehx5x73i6ugDWTD82fpump"}}}, Program: {Name: {is: "pump"}, Method: {is: "create"}}}}
-    ) {
-      Transaction {
-        Signer
-        Signature
-      }
-      Instruction {
-        Accounts {
-          Address
-        }
-      }
-    }
-  }
-}
-```
-
-https://ide.bitquery.io/pump-fun-tokens-created-by-specific-address
-
-```
-
 ## Pump Fun Token first and last price
 
 To check the first and last price to calculate the price change in the last X minutes, use [this query](https://ide.bitquery.io/Pumpfun-coins-with-price--mc-with-limit-and-delta-from-10-min-back-simple_1).
@@ -516,7 +486,7 @@ query PumpFunRecentTrades {
     DEXTradeByTokens(
       limit: {count: 100}
       orderBy: {descendingByField: "Trade_lastPrice_maximum"}
-      where: {Block: {Time: {since: "2024-08-07T06:50:00Z"}}, 
+      where: {Block: {Time: {since: "2024-08-07T06:50:00Z"}},
         Trade: {Currency: {Native: false},
           Dex: {ProtocolName: {is: "pump"}}}, Transaction: {Result: {Success: true}}}
     ) {
@@ -570,7 +540,7 @@ To get Liquidity of tokens, we will get balance of pools for pool tokens. You ca
 {
   Solana {
     BalanceUpdates(
-      where: {Block: {Time: {since: "2024-06-25T07:00:00Z"}}, 
+      where: {Block: {Time: {since: "2024-06-25T07:00:00Z"}},
         BalanceUpdate: {Account: {Token: {Owner: {in: [
     "BesTLFfCP9tAuUDWnqPdtDXZRu5xK6XD8TrABXGBECuf",
     "62dvmMKAfnt8jSdT3ToZtxAasx7Ud1tJ6xWsjwwhfaEQ",
@@ -578,7 +548,7 @@ To get Liquidity of tokens, we will get balance of pools for pool tokens. You ca
     "DwPwU1PAjTXtYNYkeR6awYMDBdSEk12npKzJWKbDHMta",
     "FJ4P2a2FqaWmqYpBw9eEfWD6cXV3F2qLPHvAA5jozscS",
     "6crUHiCoxZsQuxdMAB18VATKrg7ToyTVxt7MbLYmtugu"
-  ]}}}, 
+  ]}}},
           Currency: {Native: false}}}
     ) {
       BalanceUpdate {
@@ -634,7 +604,7 @@ To get OHLC price in SOL and USD and to get volume use [following query](https:/
     }
   }
 }
- 
+
 ```
 
 ## Holders of Pumpfun Token
@@ -666,9 +636,6 @@ Check [this query](https://ide.bitquery.io/Token-holders-memcoin_1)
 }
 ```
 
-
-
-
 ## Video Tutorial on Getting Pump Fun Trades
 
 <VideoPlayer url="https://www.youtube.com/watch?v=QV8zBnmDFxY" />
@@ -684,4 +651,3 @@ Check [this query](https://ide.bitquery.io/Token-holders-memcoin_1)
 ## Video Tutorial | How to get Top Traders of a Token on Solana Pump Fun DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=Ga0RbD7H_OY" />
-```
