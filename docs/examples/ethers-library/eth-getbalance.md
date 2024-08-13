@@ -4,7 +4,7 @@ Ethereum getBalance is an API that retrieves the balance for a particular addres
 
 ## eth_getBalance for One Address
 
-### Get balance of all currencies
+### Get balance for all currencies
 
 You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_1#) query to get the current balance of a particular address. 
 
@@ -32,9 +32,9 @@ You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_1#) qu
 
 ```
 
-### Get balance of one currency
+### Get balance for one currency
 
-[This](https://ide.bitquery.io/eth_getBalance-for-one-address-for-eth) query returns the balance of the mentioned address for a selected currency. The currency in question is Ethereum with `smart Contract` as `0x`.
+[This](https://ide.bitquery.io/eth_getBalance-for-one-address-for-eth) query returns the balance of the mentioned address for a selected currency. The currency in question is Ethereum with `SmartContract` as `0x`.
 
 ```
 {
