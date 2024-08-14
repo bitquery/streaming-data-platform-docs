@@ -332,6 +332,8 @@ subscription MyQuery {
 ## Get the Token Holders of a specific Token
 
 The below query gets top 10 token holders of the specified Token `HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump` on the Pump Fun DEX. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
+At the time of wtiting,we have only 10 hour data. So results might not be correct if token is older than 10 hours and might not show any data if token is 10 hour old
+
 You can run the query [here](https://ide.bitquery.io/top-10-holders-for-a-pump-fun-token_3)
 
 ```graphql
