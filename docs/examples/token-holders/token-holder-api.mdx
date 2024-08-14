@@ -301,6 +301,29 @@ query MyQuery {
 
 ```
 
+Or, you can get the **top holders of a token, say native ETH** on a particular date using below query
+
+```
+{
+  EVM(dataset: archive, network: eth) {
+    TokenHolders(
+      date: "2024-03-01"
+      limit: {count: 100}
+      orderBy: {descending: Balance_Amount}
+      where: {Currency: {Native: true}}
+      tokenSmartContract: "0x"
+    ) {
+      Holder {
+        Address
+      }
+      Balance {
+        Amount
+      }
+    }
+  }
+}
+```
+
 ## Common Token Holders of Two Tokens
 
 Let's say if we want to know common tokens holders of two tokens, we can use BalanceUpdate API. In the following example we will get common token holder of [Bored Ape Yacht Club](https://boredapeyachtclub.com/#/) and [Mutant Ape Yacht Club](https://opensea.io/collection/mutant-ape-yacht-club) NFT tokens. You can run [this query](https://ide.bitquery.io/Common-token-holder-Bored-Ape-Yacht-Club-and-Mutant-Ape-Yacht-Club) in the IDE to see the result.
