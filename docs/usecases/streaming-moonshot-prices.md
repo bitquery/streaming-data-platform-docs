@@ -167,7 +167,7 @@ This file contains the main React component that uses the `useWebSocket` hook to
 
   ```javascript
   const query = `
-    subscription MyQuery {
+   subscription MyQuery {
       Solana {
         DEXTrades(
           where: {
@@ -175,7 +175,48 @@ This file contains the main React component that uses the `useWebSocket` hook to
             Transaction: { Result: { Success: true } }
           }
         ) {
-          ...
+          Instruction {
+            Program {
+              Method
+            }
+          }
+          Trade {
+            Dex {
+              ProtocolFamily
+              ProtocolName
+            }
+            Buy {
+              Amount
+              Account {
+                Address
+              }
+              Currency {
+                Name
+                Symbol
+                MintAddress
+                Decimals
+                Fungible
+                Uri
+              }
+            }
+            Sell {
+              Amount
+              Account {
+                Address
+              }
+              Currency {
+                Name
+                Symbol
+                MintAddress
+                Decimals
+                Fungible
+                Uri
+              }
+            }
+          }
+          Transaction {
+            Signature
+          }
         }
       }
     }
