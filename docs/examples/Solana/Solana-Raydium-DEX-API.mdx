@@ -63,18 +63,26 @@ You can get the 2nd token address using the following result.
 
 Instructions -> Instruction -> Accounts[9] ->. Address
 
-You can run the following query at [Bitquery IDE](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_1).
+You can run the following query at [Bitquery IDE](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_5).
 
 ```graphql
-subscription {
+subscription{
   Solana {
     Instructions(
       where: {
-        Transaction: { Result: { Success: true } }
+        Transaction: {
+          Result: {
+            Success: true
+          }
+        },
         Instruction: {
           Program: {
-            Method: { is: "initializeUserWithNonce" }
-            Address: { is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8" }
+            Method: {
+              is: "initialize2"
+            },
+            Address: {
+              is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
+            }
           }
         }
       }
@@ -146,6 +154,7 @@ subscription {
     }
   }
 }
+
 ```
 
 ## Pair Creation time for a specific pair
