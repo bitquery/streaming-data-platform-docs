@@ -10,17 +10,17 @@ Let's see an example.
 In this example, we are getting the [WETH](https://ide.bitquery.io/exploreapi/WETH/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) price against [USDT](https://ide.bitquery.io/exploreapi/USDT/0x7dd5f67a25afb9e73d4966b1ac578dabd9ccc986) on [Ethereum blockchain](https://bitquery.io/blockchains/ethereum-blockchain-api), aggregating different DEXs.
 
 
-Open this API on our [GraphQL IDE](https://ide.bitquery.io/Coin-Ticker-API_1).
+Open this API on our [GraphQL IDE](https://ide.bitquery.io/Coin-ticker-api_3).
 
 ```
 {
   EVM(dataset: realtime) {
     DEXTradeByTokens(
-      orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}, Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}
+      orderBy: {descendingByField: "Block_Timefield"}
+      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}, Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}}
     ) {
       Block {
-        Time(interval: {in: minutes, count: 10})
+        Timefield: Time(interval: {in: minutes, count: 10})
         lastTradeTime: Time(maximum: Block_Time)
         FirstTradeTime: Time(minimum: Block_Time)
         LastTradeBlock: Number(maximum: Block_Number)
@@ -28,21 +28,15 @@ Open this API on our [GraphQL IDE](https://ide.bitquery.io/Coin-Ticker-API_1).
       }
       volume: sum(of: Trade_Amount)
       Trade {
-        Buyer
-        Amount
         Currency {
           Name
           Symbol
         }
-        Seller
-        Price
-        Sender
         Side {
           Currency {
             Name
             Symbol
           }
-          Amount
         }
         high: Price(maximum: Trade_Price)
         low: Price(minimum: Trade_Price)

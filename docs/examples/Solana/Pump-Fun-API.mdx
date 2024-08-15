@@ -25,6 +25,57 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
   <meta property="twitter:description" content="Get on-chain data of any Pump.fun based token through our Pump.fun API."/>
 </head>
 
+In this document, we will explore several examples related to pump fund data. Additionally, we have the Moonshot API available, and you can access its documentation [here](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/).
+
+## Pump Fun token based on Marketcap
+
+The PumpFun token has a total supply of 1 billion tokens. Therefore, the maximum price is directly related to the market cap, as market cap = Price * 1 billion (for PumpFun).
+
+Here’s [the query](https://ide.bitquery.io/pumpfun-token-sorted-by-marketcap_1) to retrieve the top tokens based on their price.
+
+
+```graphql
+{
+  Solana {
+    DEXTrades(
+      limitBy:{
+        by:Trade_Buy_Currency_MintAddress
+        count:1
+      }
+      orderBy: {descending: Trade_Buy_Price}
+      where: {Trade: {Dex: {ProtocolName: {is: "pump"}}
+      Buy:{
+        Currency:{
+          MintAddress:{
+            notIn:["11111111111111111111111111111111"]
+          }
+        }
+      }
+      },
+        Transaction: {Result: {Success: true}}}
+    ) {
+      # All pump fun token has 1 billion supply, 
+      # so multiply price * 1 billion to get marketcap
+      # results are already sorted by price
+      Trade {
+        Buy {
+          Price
+          PriceInUSD
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Pump Fun Trades in Real-Time
 
 The below query gets real-time information whenever there's a new trade on the Pump.fun including program method called , buy and sell details, details of the currencies involved, and the transaction specifics like signature.
@@ -330,6 +381,8 @@ subscription MyQuery {
 ## Get the Token Holders of a specific Token
 
 The below query gets top 10 token holders of the specified Token `HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump` on the Pump Fun DEX. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
+At the time of wtiting,we have only 10 hour data. So results might not be correct if token is older than 10 hours and might not show any data if token is 10 hour old
+
 You can run the query [here](https://ide.bitquery.io/top-10-holders-for-a-pump-fun-token_3)
 
 ```graphql
