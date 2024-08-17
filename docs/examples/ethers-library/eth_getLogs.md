@@ -2,6 +2,29 @@
 
 In this section, we will see how we can use Bitquery APIs as an alternative to the eth_getLogs JSON RPC method and return an array of `Logs` object matching the filter object(*optional). 
 
+<head>
+  <meta name="title" content="eth_getLogs API - Ethereum - Transaction Logs and Events"/>
+  <meta name="description" content="Retrieve logs and events from transactions on the Ethereum blockchain using the eth_getLogs API."/>
+  <meta name="keywords" content="eth_getLogs API,Ethereum logs API,Ethereum transaction logs API,eth_getLogs documentation,blockchain events,smart contract events,blockchain API,Ethereum web3 API,transaction data"/>
+  <meta name="robots" content="index, follow"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="language" content="English"/>
+
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:title"
+    content="How to Retrieve Ethereum Transaction Logs and Events with eth_getLogs API"
+  />
+  <meta
+    property="og:description"
+    content="Retrieve logs and events from transactions on the Ethereum blockchain using the eth_getLogs API."
+  />
+
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:title" content="How to Retrieve Ethereum Transaction Logs and Events with eth_getLogs API"/>
+  <meta property="twitter:description" content="Retrieve logs and events from transactions on the Ethereum blockchain using the eth_getLogs API."/>
+</head>
+
 The Logs object consist of the following data.
 
 - `removed`: (boolean) true when the log was removed, due to a chain reorganization. false if it's a valid log.
@@ -47,7 +70,7 @@ subscription {
 
 ## Get Logs with Filteration
 
-Now, just like the orignal eth_getLogs mehod, Bitquery APIs provides the option to filter out the `Logs` based on the following parameeters.
+Now, just like the orignal eth_getLogs method, Bitquery APIs provides the option to filter out the `Logs` based on the following parameeters.
 
 - `address`: (optional) Contract address (20 bytes) or a list of addresses from which logs should originate.
 - `topics`: (optional) Array of 32 bytes DATA topics. Topics are order-dependent.

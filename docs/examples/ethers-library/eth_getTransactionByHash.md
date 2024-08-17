@@ -2,6 +2,29 @@
 
 In this section we will discuss how we can build eth_getTransactionByHash alternatives using Bitquery APIs.
 
+<head>
+  <meta name="title" content="eth_getTransactionByHash API - Ethereum - Transaction Details by Hash"/>
+  <meta name="description" content="Retrieve detailed information about a specific Ethereum transaction using its hash with the eth_getTransactionByHash API."/>
+  <meta name="keywords" content="eth_getTransactionByHash API,Ethereum transaction API,Ethereum transaction details API,eth_getTransactionByHash documentation,transaction hash,blockchain API,Ethereum web3 API,transaction data"/>
+  <meta name="robots" content="index, follow"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="language" content="English"/>
+
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:title"
+    content="How to Retrieve Ethereum Transaction Details by Hash with eth_getTransactionByHash API"
+  />
+  <meta
+    property="og:description"
+    content="Retrieve detailed information about a specific Ethereum transaction using its hash with the eth_getTransactionByHash API."
+  />
+
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:title" content="How to Retrieve Ethereum Transaction Details by Hash with eth_getTransactionByHash API"/>
+  <meta property="twitter:description" content="Retrieve detailed information about a specific Ethereum transaction using its hash with the eth_getTransactionByHash API."/>
+</head>
+
 ## Get Transaction Hash
 
 We will use [this](https://ide.bitquery.io/Get-Transaction-Hash) stream to get the latest transactions hash. We will use this transaction hash as an input for the eth_getTransactionByHash alternative API. 
