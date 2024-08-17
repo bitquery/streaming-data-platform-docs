@@ -2,6 +2,29 @@
 
 Ethereum Subscription API allows developers to build websockets that receive real-time notifications about the Ethereum blockchain. In this section we will see how to create subscription for each eth_subscribe JSON RPC method and how to customize it to get data we need.
 
+<head>
+  <meta name="title" content="eth_subscribe API - Ethereum - Real-Time Blockchain Event Subscription"/>
+  <meta name="description" content="Subscribe to real-time Ethereum blockchain events, including new blocks, pending transactions, and logs, using the eth_subscribe API."/>
+  <meta name="keywords" content="eth_subscribe API,Ethereum subscription API,Ethereum real-time data API,blockchain event subscription,Ethereum logs subscription,eth_subscribe documentation,Ethereum blockchain API,Ethereum web3 API,real-time blockchain data,crypto event subscription,new blocks,pending transactions"/>
+  <meta name="robots" content="index, follow"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="language" content="English"/>
+
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:title"
+    content="How to Subscribe to Real-Time Ethereum Events with eth_subscribe API"
+  />
+  <meta
+    property="og:description"
+    content="Subscribe to real-time Ethereum blockchain events, including new blocks, pending transactions, and logs, using the eth_subscribe API."
+  />
+
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:title" content="How to Subscribe to Real-Time Ethereum Events with eth_subscribe API"/>
+  <meta property="twitter:description" content="Subscribe to real-time Ethereum blockchain events, including new blocks, pending transactions, and logs, using the eth_subscribe API."/>
+</head>
+
 ## eth_subscribe(“pendingTransactions”)
 
 To subscribe to incoming pending transactions, use the below subscription. You can run it [here](https://ide.bitquery.io/eth_subscribependingTransactions)

@@ -2,6 +2,29 @@
 
 In this section, we will discuss how we can use Bitquery APIs as an alternative to the debug_traceCall JSON RPC method, which runs an eth_call within the context of the given block execution using the final state of parent block as the base.
 
+<head>
+  <meta name="title" content="debug_traceCall API - Ethereum - Transaction Execution Tracing"/>
+  <meta name="description" content="Trace the execution of a smart contract function call on the Ethereum blockchain using the debug_traceCall API."/>
+  <meta name="keywords" content="debug_traceCall API,Ethereum transaction tracing API,Ethereum smart contract tracing API,debug_traceCall documentation,smart contract execution,blockchain API,Ethereum web3 API,execution trace"/>
+  <meta name="robots" content="index, follow"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="language" content="English"/>
+
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:title"
+    content="How to Trace Ethereum Smart Contract Execution with debug_traceCall API"
+  />
+  <meta
+    property="og:description"
+    content="Trace the execution of a smart contract function call on the Ethereum blockchain using the debug_traceCall API."
+  />
+
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:title" content="How to Trace Ethereum Smart Contract Execution with debug_traceCall API"/>
+  <meta property="twitter:description" content="Trace the execution of a smart contract function call on the Ethereum blockchain using the debug_traceCall API."/>
+</head>
+
 ## Trace Calls with Reciever Address
 Using [this](https://ide.bitquery.io/debug_traceCall) query, you can trace all the calls sent to the address, and get details like the following.
 - Chain ID

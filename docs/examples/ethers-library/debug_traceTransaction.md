@@ -2,6 +2,28 @@
 
 debug_traceTransaction is a JSON RPC method that returns tracing results for the specified transaction. In this section, we are looking for a way to build an alternative for the same using Bitquery API.
 
+<head>
+  <meta name="title" content="debug_traceTransaction API - Ethereum - Transaction Execution Trace"/>
+  <meta name="description" content="Trace the execution of a specific transaction on the Ethereum blockchain using the debug_traceTransaction API."/>
+  <meta name="keywords" content="debug_traceTransaction API,Ethereum transaction trace API,Ethereum smart contract trace API,debug_traceTransaction documentation,transaction execution trace,blockchain API,Ethereum web3 API,trace data"/>
+  <meta name="robots" content="index, follow"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="language" content="English"/>
+
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:title"
+    content="How to Trace Ethereum Transaction Execution with debug_traceTransaction API"
+  />
+  <meta
+    property="og:description"
+    content="Trace the execution of a specific transaction on the Ethereum blockchain using the debug_traceTransaction API."
+  />
+
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:title" content="How to Trace Ethereum Transaction Execution with debug_traceTransaction API"/>
+  <meta property="twitter:description" content="Trace the execution of a specific transaction on the Ethereum blockchain using the debug_traceTransaction API."/>
+</head>
 
 # Debug Trace Transaction
 
