@@ -70,7 +70,7 @@ subscription {
 
 ## Get Logs with Filteration
 
-Now, just like the orignal eth_getLogs mehod, Bitquery APIs provides the option to filter out the `Logs` based on the following parameeters.
+Now, just like the orignal eth_getLogs method, Bitquery APIs provides the option to filter out the `Logs` based on the following parameeters.
 
 - `address`: (optional) Contract address (20 bytes) or a list of addresses from which logs should originate.
 - `topics`: (optional) Array of 32 bytes DATA topics. Topics are order-dependent.
