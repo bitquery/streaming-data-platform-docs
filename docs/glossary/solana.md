@@ -21,7 +21,7 @@ Solana API allows you to narrow down your results using these parameters:
 
 - `Account`: The specific Solana account that the balance update pertains to.
 - `Amount`: The quantity of tokens that were added to or subtracted from the account.
-- `AmountInUSD`: The equivalent value of the Amount in US dollars at the time of the transaction.
+- `AmountInUSD`: AmountInUSD will always be calculated based on the USD value of an asset pulled from centralized exchanges. If it is 0, it means we don't have a USD value. In such cases, you can use counterparty AmountInUSD. For example, if token A is traded against WSOL, and we are showing 0 for token A's AmountInUSD, it means we don't have token A's USD value, but you can use the AmountInUSD of WSOL.
 - `Currency`: The type of token or cryptocurrency involved in the balance update.
 - `PostBalance`: The account's balance after the update has been applied.
 - `PostBalanceInUSD`: The equivalent value of the PostBalance in US dollars at the time of the transaction.
