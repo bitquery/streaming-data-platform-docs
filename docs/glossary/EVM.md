@@ -29,7 +29,7 @@ EVM API allows you to narrow down your results using these parameters:
 
 - `Address`: The wallet address where the balance update occurred.
 - `Amount`: The quantity of token involved in the balance update.
-- `AmountInUSD`: The equivalent value of the balance update in US dollars.
+- `AmountInUSD`: AmountInUSD will always be calculated based on the USD value of an asset pulled from centralized exchanges. If it is 0, it means we don't have a USD value.
 - `Id`: The unique identifier for the balance update event.
 - `Type`: The nature of the balance update, such as `transfer` or `block_reward`.
 - `URI`: The link to additional information or metadata about the balance update.
@@ -118,7 +118,7 @@ DEXTradeByTokens API contains Trade field which has below attributes:
 
 - **Trade**
   - `Amount`: Quantity of tokens traded.
-  - `AmountInUSD`: Equivalent value of traded tokens in USD.
+  - `AmountInUSD`: AmountInUSD will always be calculated based on the USD value of an asset pulled from centralized exchanges. If it is 0, it means we don't have a USD value. In such cases, you can use counterparty AmountInUSD. For example, if token A is traded against WETH, and we are showing 0 for token A's AmountInUSD, it means we don't have token A's USD value, but you can use the AmountInUSD of WETH.
   - `Buyer`: Address of the buyer.
   - `Fees`
     - `Amount`: Amount of fees paid.
@@ -154,7 +154,7 @@ DEXTradeByTokens API contains Trade field which has below attributes:
     - `Seller`: Address of the seller.
     - `OrderId`: Identifier for the order related to the side.
     - `Ids`: IDs related to the trade side.
-    - `AmountInUSD`: Equivalent value of tokens in USD.
+    - `AmountInUSD`:AmountInUSD will always be calculated based on the USD value of an asset pulled from centralized exchanges. If it is 0, it means we don't have a USD value. In such cases, you can use counterparty AmountInUSD. For example, if token A is traded against WETH, and we are showing 0 for token A's AmountInUSD, it means we don't have token A's USD value, but you can use the AmountInUSD of WETH.
     - `Amount`: Quantity of side tokens traded.
     - `Currency`: Side Currency Details.
 
@@ -263,7 +263,7 @@ Using DEXTrades API, you will be able to get the trades and will easily be able 
       - `Name`: Name of the token transferred.
       - `Symbol`: Symbol of the token transferred.
     - `Amount`: Quantity of tokens transferred.
-    - `AmountInUSD`: Equivalent value of tokens transferred in USD.
+    - `AmountInUSD`: AmountInUSD will always be calculated based on the USD value of an asset pulled from centralized exchanges. If it is 0, it means we don't have a USD value.
 
 ### Currency Field Attributes Explained
 
