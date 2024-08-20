@@ -173,11 +173,12 @@ This is an example of an ETH transaction on the Bitquery Explorer using the trac
 
 [https://explorer.bitquery.io/ethereum/tx/0x26960e8c31dde5d76b69ba68201bfea5186555a7b44383f515d109ded74f3ac8/tracing](https://explorer.bitquery.io/ethereum/tx/0x26960e8c31dde5d76b69ba68201bfea5186555a7b44383f515d109ded74f3ac8/tracing)
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeH2KyRwitZjl_MRG_rjArInn527wYHNGfB05mE1tAHezKaTEFG4HW_eEJal_IDHuPP7f2sAkUIp0gjT_Rig4cwzYH4FPfhHGOMFVNFmZEeI2vXsbfK-lbJ4cMzNa1i9f_Oj3PugAUE5c1Jbanim0EBipxm?key=5ttYeo2nskIw9kc9CkTdTA)
+![](/img/ApplicationExamples/eth_tree.png)
 
 Below is a graphical view that shows how funds flow between different addresses
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeOx95Of3_eiQHKrtTMgGGSUULyDm7UKe53DkmIi4sEzBtuL7SatqEoJtn3YL4s2uoxJChgQ0LmtNf0x1q5Bo6PHPoOwuPDabWefy8TKtRpYz4Yx_pH6Q86wM7a92YxzSCJhNcteE6Cav_oWsrdJiyFkHZ7?key=5ttYeo2nskIw9kc9CkTdTA)
+
+![](/img/ApplicationExamples/eth_trace.png)
 
 #### Binance (BNB) Smart Chain
 
@@ -185,11 +186,11 @@ This is an example of a BSC transaction on the Bitquery Explorer using the traci
 
 [https://explorer.bitquery.io/bsc/tx/0x9c78b80a02c882db9d3d9add2d98243e4aeadb035fe9aacf82d04d51092db7fc/tracing](https://explorer.bitquery.io/bsc/tx/0x9c78b80a02c882db9d3d9add2d98243e4aeadb035fe9aacf82d04d51092db7fc/tracing)
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXf5z0FkIcT9dxZH4kPqCZmT6aGaMO82tFcGXNvIfHdRpSEaYVqoaaw00P1imMLIkwTgA1Z-bJewHIvp8SitvOqvbSq11SJfEOkpeesf6112qVDwUq0TWiZsDhSvJ1iaqd1QRZ_IGi2WnWUd7g7N5aY-3gXM?key=5ttYeo2nskIw9kc9CkTdTA)
+![](/img/ApplicationExamples/bnb_tree.png)
 
 Below is a graphical view that shows how funds flow between different addresses
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdOBqdLchJsxwN61h19WQ1ERejVwwAb2VUejhTn-eYIwv7Jf9LWdERhMPIgUvw3ayGDFGtMtioGvOT8seYe5Tfj5LIpezgHpySGyvmYmdQ33_sfLTlwyZuB8PnOJKd8XHWWyHi3Tl9qyCo5LXAJaTeblGdA?key=5ttYeo2nskIw9kc9CkTdTA)
+![](/img/ApplicationExamples/bnb_trace.png)
 
 #### ARBITRUM
 
@@ -197,11 +198,11 @@ This is an example of an Arbitrum transaction on the Bitquery Explorer using the
 
 [https://explorer.bitquery.io/arbitrum/tx/0x9346cd8afb33598d6ab57c3c83f5267ea96765e63e16b04e8dee7e599151c938/tracing](https://explorer.bitquery.io/arbitrum/tx/0x9346cd8afb33598d6ab57c3c83f5267ea96765e63e16b04e8dee7e599151c938/tracing)
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeDerEgA-arZyXoaIY7E9jDPj-_-8FvPVJuzBtJIyFyL_18r25oNrwAQhC4WiPoCqtKISIF1XS7HtuOnLbSbRxLCwlOoS62lWaWXh6IJGQ9vhW8kmw2gA2Mzq-qBNPZVvPJkMAeaQJ2EJ4-bOdyEONSZBk?key=5ttYeo2nskIw9kc9CkTdTA)
+![](/img/ApplicationExamples/arb_tree.png)
 
 Below is a graphical view that shows how funds flow between different addresses
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeV0RVj7xWGgxFaNMTph6Vi797mz1LOJL7_nJIKlJy-xF389pELwXjimtPss4M1eM1aTEj4TjpRc1gDptS_A3ghwufxjfg-5vt2vEgd2mJfpOwbgCryisSzSFF4-2NIy6lih30G1ueHxz37__r6ZwZKtpUB?key=5ttYeo2nskIw9kc9CkTdTA)
+![](/img/ApplicationExamples/arb_trace.png)
 
 Here’s a practical example to help people understand the importance of tracing internal transactions:
 
