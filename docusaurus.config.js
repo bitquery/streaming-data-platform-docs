@@ -165,6 +165,10 @@ const config = {
           {
             to:'/docs/category/how-to-guides/',
             from:'/docs/category/use-cases/'
+          },
+          {
+            to:'/docs/examples/ethers-library/eth_subscribe.md',
+            from:'/docs/category/ethsubscribe-alternatives/'
           }
         ],
       },
