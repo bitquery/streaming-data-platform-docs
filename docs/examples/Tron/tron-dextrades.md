@@ -91,47 +91,44 @@ subscription {
 
 ## Subscribe to Latest Price of a Token in Real-time
 
-This query provides real-time updates on price of WIN `TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7` in terms of USDT `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t`, including details about the DEX, market, and order specifics. Find the query [here](https://ide.bitquery.io/Price-of-WIN-in-terms-of-USDT-on-Tron)
+This query provides real-time updates on price of token `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t` in terms of USDT `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t`, including details about the DEX. Find the query [here](https://ide.bitquery.io/Track-price-of-a-tron-token-in-realtime)
 
 ```
-subscription {
+subscription MyQuery {
   Tron {
-    DEXTrades(
-      where: {Trade: {Sell: {Currency: {SmartContract: {is: "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7"}}}, Buy: {Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}}}
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}, TransactionStatus: {Success: true}}
     ) {
       Block {
         Time
       }
       Trade {
-        Buy {
-          Amount
-          Buyer
-          Seller
-          Price_in_terms_of_sell_currency: Price
-          Currency {
-            Name
-            Symbol
-            SmartContract
-          }
-          OrderId
-        }
-        Sell {
-          Amount
-          Buyer
-          Seller
-          Price_in_terms_of_buy_currency: Price
-          Currency {
-            Symbol
-            SmartContract
-            Name
-          }
-          OrderId
+        Amount
+        AmountInUSD
+        Buyer
+        Price
+        PriceInUSD
+        Seller
+        Currency {
+          Symbol
+          SmartContract
+          Name
         }
         Dex {
-          ProtocolFamily
-          ProtocolName
           SmartContract
-          ProtocolVersion
+          ProtocolName
+          ProtocolFamily
+        }
+        Side {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
         }
       }
     }
