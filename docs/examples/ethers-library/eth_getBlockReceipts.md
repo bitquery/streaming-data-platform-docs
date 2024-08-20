@@ -2,6 +2,29 @@
 
 In this section we will build an API that serves as an alternative to the eth_getBlockReceipts JSON RPC method that takes `Block Number` as an input and returns all transaction receipts for the given block.
 
+<head>
+  <meta name="title" content="eth_getBlockReceipt API - Ethereum - Block Receipt Information"/>
+  <meta name="description" content="Retrieve detailed receipt information for a specific block on the Ethereum blockchain using the eth_getBlockReceipt API."/>
+  <meta name="keywords" content="eth_getBlockReceipt API,Ethereum block receipt API,Ethereum block details API,eth_getBlockReceipt documentation,block receipt,blockchain API,Ethereum web3 API,block data"/>
+  <meta name="robots" content="index, follow"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="language" content="English"/>
+
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:title"
+    content="How to Retrieve Ethereum Block Receipt Information with eth_getBlockReceipt API"
+  />
+  <meta
+    property="og:description"
+    content="Retrieve detailed receipt information for a specific block on the Ethereum blockchain using the eth_getBlockReceipt API."
+  />
+
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:title" content="How to Retrieve Ethereum Block Receipt Information with eth_getBlockReceipt API"/>
+  <meta property="twitter:description" content="Retrieve detailed receipt information for a specific block on the Ethereum blockchain using the eth_getBlockReceipt API."/>
+</head>
+
 ## Get Block Receipts
 
 [This](https://ide.bitquery.io/eth_getBlockReceipt) query serves as an alternative to the eth_getBlockReceipts method with `Block Number` as `20525804`.

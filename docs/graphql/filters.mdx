@@ -26,7 +26,9 @@ In certain cases, you might want to execute a query that filters results based o
 This can be achieved with the `any` operator.
 
 The below query for example, retrieves blocks from the Ethereum archive dataset where the block number is greater than `19111970` **OR** the transaction count within a block is greater than `100`.
-You can run the query (here)[https://ide.bitquery.io/using-OR-condition-example-V2]
+You can run the query [here](https://ide.bitquery.io/using-OR-condition-example-V2)
+
+> Note: The `any` filter must always be an array.
 
 ```
 {

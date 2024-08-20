@@ -51,10 +51,11 @@ In the example above, querying the `Transactions` data cube within the Ethereum 
 
 ## How are points calculated for subscriptions?
 
-Points are calculated based on a simple formula that takes into account the number of subscriptions you have and the time for which they are active. Here's how it works:
+Under [new pricing](https://bitquery.io/blog/new-pricing-june-2024), we charge per simultaneous streams, instead of points.
 
-- **Rate**: Each subscription is charged at the rate of 40 points per minute.
-- **Subscriptions Count**: Each data cube (e.g., Transfers, DEXTrades, or Blocks) activated counts as a separate subscription. If multiple cubes are used within a single WebSocket connection, each is billed as an individual subscription.
+However internally Points are still calculated based on points, Each subscription is charged at the rate of 40 points per minute. However when we sell simultaneous streams, we add enough points that it runs 24*7 for whole month.
+
+**Note**: Each data cube (e.g., Transfers, DEXTrades, or Blocks) activated counts as a separate subscription. If multiple cubes are used within a single WebSocket connection, each is billed as an individual subscription.
 
 ### Example
 
@@ -82,6 +83,6 @@ For more detailed information about subscriptions and best practices, please ref
 
 ## How do you check points for your account?
 
-You can check points consumed under your [account](https://account.bitquery.io/user/billing).
+You can check points consumed via streams under your [account](https://account.bitquery.io/user/api_v2/subscriptions).
 
-![points_in_account](/img/ide/points_in_account.png)
+![stream_points](/img/ide/stream_points.png)
