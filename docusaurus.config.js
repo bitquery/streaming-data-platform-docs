@@ -167,7 +167,7 @@ const config = {
             from:'/docs/category/use-cases/'
           },
           {
-            to:'/docs/examples/ethers-library/eth_subscribe.md',
+            to:'/docs/examples/ethers-library/eth_subscribe',
             from:'/docs/category/ethsubscribe-alternatives/'
           }
         ],
