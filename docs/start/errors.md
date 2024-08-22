@@ -101,6 +101,23 @@ Please retry the query in a few minutes, this is a temporary issue. If repeats p
 
 ---
 
+### WebSocket Errors: 1009, Message Too Big, PayloadTooBig, etc.
+
+#### Probable Cause:
+
+These errors typically occur due to how the WebSocket client is configured in `websockets.client.connect()`. In Python, the default maximum size for incoming messages is set to `2**20` (1048576 bytes). When this limit is exceeded, errors like `1009`, `message too big`, or `PayloadTooBig` may occur.
+
+#### Resolution Steps:
+
+- **Adjust WebSocket Client Settings:** You can either pass `None` to disable the limit or increase the default value to accommodate larger payloads.
+
+  `websockets.client.WebSocketClientProtocol(_*_, _origin=None_, _extensions=None_, _subprotocols=None_, _extra_headers=None_, _**kwargs_)`
+
+- **Memory Usage Consideration:** Since Python can use up to 4 bytes of memory to represent a single character, each connection may use up to `4 * max_size * max_queue` bytes of memory to store incoming messages. By default, this can amount to 128 MiB. Depending on your application’s requirements, you may want to lower these limits to optimize performance.
+  Read more [here](https://websockets.readthedocs.io/en/9.1/api/client.html#using-a-connection_
+
+---
+
 ## Limits
 
 ### Default Limit
