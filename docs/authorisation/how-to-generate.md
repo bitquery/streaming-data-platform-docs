@@ -34,7 +34,7 @@ The first step is to create an application:
 
 **Using the token:**
 
-To utilize the token you've copied from the API-KEY tab, use the code generation feature on your IDE to obtain the code in your preferred programming language. However, **remember to paste the token you've copied from the API-Key page**. This is necessary because the IDE code generator only displays temporary tokens.
+To utilize the token you've copied from the api_v2/access_tokens page, use the code generation feature on your IDE to obtain the code in your preferred programming language. However, **remember to paste the token you've copied from the api_v2/access_tokens page**. This is necessary because the IDE code generator only displays temporary tokens.
 
 ![temporary](/img/v2Access/temporarytoken.png)
 
