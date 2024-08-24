@@ -2,7 +2,6 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-
 In this document, we will explore several examples related to pump fund data. Additionally, we have the Moonshot API available, and you can access its documentation [here](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/).
 
 <head>
@@ -30,32 +29,29 @@ In this document, we will explore several examples related to pump fund data. Ad
 
 ## Pump Fun token based on Marketcap
 
-The PumpFun token has a total supply of 1 billion tokens. Therefore, the maximum price is directly related to the market cap, as market cap = Price * 1 billion (for PumpFun).
+The PumpFun token has a total supply of 1 billion tokens. Therefore, the maximum price is directly related to the market cap, as market cap = Price \* 1 billion (for PumpFun).
 
 Here’s [the query](https://ide.bitquery.io/pumpfun-token-sorted-by-marketcap_1) to retrieve the top tokens based on their price.
-
 
 ```graphql
 {
   Solana {
     DEXTrades(
-      limitBy:{
-        by:Trade_Buy_Currency_MintAddress
-        count:1
-      }
-      orderBy: {descending: Trade_Buy_Price}
-      where: {Trade: {Dex: {ProtocolName: {is: "pump"}}
-      Buy:{
-        Currency:{
-          MintAddress:{
-            notIn:["11111111111111111111111111111111"]
+      limitBy: { by: Trade_Buy_Currency_MintAddress, count: 1 }
+      orderBy: { descending: Trade_Buy_Price }
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "pump" } }
+          Buy: {
+            Currency: {
+              MintAddress: { notIn: ["11111111111111111111111111111111"] }
+            }
           }
         }
+        Transaction: { Result: { Success: true } }
       }
-      },
-        Transaction: {Result: {Success: true}}}
     ) {
-      # All pump fun token has 1 billion supply, 
+      # All pump fun token has 1 billion supply,
       # so multiply price * 1 billion to get marketcap
       # results are already sorted by price
       Trade {
@@ -379,25 +375,24 @@ subscription MyQuery {
 }
 ```
 
-## Get the Token Holders of a specific Token
+## Get the Top Token Holders of a specific Token
 
-The below query gets top 10 token holders of the specified Token `HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump` on the Pump Fun DEX. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
-At the time of wtiting,we have only 10 hour data. So results might not be correct if token is older than 10 hours and might not show any data if token is 10 hour old
-
-You can run the query [here](https://ide.bitquery.io/top-10-holders-for-a-pump-fun-token_3)
+THis query gives you Top 10 Token Holders for this specific token `GuqAC33o88dabjEuh3tx73xSjdLQBRbWSoicgboCpump`. The query provides you the top 10 holders addresses and also their balances of this token. You can change the token address in query as per your needs.
+You can run the query [here](https://ide.bitquery.io/top-10-holders-for-a-pump-fun-token_6)
 
 ```graphql
 query MyQuery {
   Solana {
     BalanceUpdates(
       limit: { count: 10 }
-      orderBy: { descendingByField: "TotalHolding" }
+      orderBy: { descendingByField: "BalanceUpdate_Holding_maximum" }
       where: {
         BalanceUpdate: {
           Currency: {
-            MintAddress: { is: "HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump" }
+            MintAddress: { is: "GuqAC33o88dabjEuh3tx73xSjdLQBRbWSoicgboCpump" }
           }
         }
+        Transaction: { Result: { Success: true } }
       }
     ) {
       BalanceUpdate {
@@ -409,8 +404,8 @@ query MyQuery {
         Account {
           Address
         }
+        Holding: PostBalance(maximum: Block_Slot)
       }
-      TotalHolding: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
     }
   }
 }
@@ -659,35 +654,6 @@ To get OHLC price in SOL and USD and to get volume use [following query](https:/
   }
 }
 
-```
-
-## Holders of Pumpfun Token
-
-At the time of writing this doc, we had only last 10 hour data on solana, so token holder results will be affected if token is trading for more than 10 hours.
-
-Check [this query](https://ide.bitquery.io/Token-holders-memcoin_1)
-
-```
-{
-  Solana {
-    BalanceUpdates(
-      orderBy: {descendingByField: "BalanceUpdate_balance_maximum"}
-      limit: {count: 100}
-      where: {BalanceUpdate: {Currency: {MintAddress: {is: "HnixX5WvZ67Sdnx5cjyAmWV71GdxFZtYHWyt3d1pump"}}}}
-    ) {
-      BalanceUpdate {
-        Account {
-          Address
-        }
-        Currency {
-          Name
-          Symbol
-        }
-        balance: PostBalance(maximum: Block_Slot)
-      }
-    }
-  }
-}
 ```
 
 ## Video Tutorial on Getting Pump Fun Trades
