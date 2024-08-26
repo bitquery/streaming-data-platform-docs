@@ -80,3 +80,174 @@ query GetLatestLiquidityForPool {
 }
 
 ```
+## Subscribe to Latest Pumpfun Pools
+
+In this query, you can subscribe to the latest liquidity data for pools related to the "Pump" protocol on Solana. This subscription provides real-time updates about the liquidity in pools under this protocol, including details about the base and quote currencies.
+
+```
+subscription {
+  Solana {
+    DexPools(
+      where: {Pool: {Dex: {ProtocolName: {is: "pump"}}}}
+    ) {
+      Pool {
+        Market {
+          MarketAddress
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+        }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+        Base {
+          PostAmount
+        }
+      }
+    }
+  }
+}
+
+```
+## Get Top Pools Based on Liquidity
+
+This query retrieves the top liquidity pools on the Solana blockchain, sorted by their total liquidity (PostAmount). The query is filtered for pools that have been active since a specific time period, ensuring that only recent data is considered. The results are limited to the top 10 pools based on their liquidity.
+
+
+```
+query GetTopPoolsByDex {
+  Solana {
+    DexPools(
+      orderBy: {descending: Pool_Quote_PostAmount}
+      where: {Block: {Time: {after: "2024-08-25T10:00:00Z"}}}
+      limit: {count: 10}
+    ) {
+      Pool {
+        Market {
+          MarketAddress
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Quote {
+          PostAmount
+          PostAmountInUSD
+          PriceInUSD
+        }
+        Base {
+          PostAmount
+        }
+      }
+    }
+  }
+}
+
+
+```
+
+## Subscribe to Liquidity Removal from a Pool for a Token
+
+This query allows you to subscribe to updates on liquidity removal from a specific pool on the Solana network. The subscription is filtered by a particular token, identified by the base currency name or smart contract. It returns information on the amount of liquidity removed and the remaining balance.
+
+
+```
+{
+  Solana(network: solana) {
+    DexPools(
+      where: {Pool: {Base: {ChangeAmount: {lt: "0"}}, Market: {BaseCurrency: {Name: {is: "reddit dog"}}}}}
+    ) {
+      Pool {
+        Market {
+          MarketAddress
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+        }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+          ChangeAmount
+        }
+        Base {
+          PostAmount
+          ChangeAmount
+        }
+      }
+    }
+  }
+}
+
+```
+
+Sample response:
+
+```
+"DexPools": [
+      {
+        "Pool": {
+          "Base": {
+            "ChangeAmount": "-376244.182137",
+            "PostAmount": "3772354.489708"
+          },
+          "Dex": {
+            "ProtocolFamily": "Meteora",
+            "ProtocolName": "lb_clmm"
+          },
+          "Market": {
+            "BaseCurrency": {
+              "MintAddress": "7M9KJcPNC65ShLDmJmTNhVFcuY95Y1VMeYngKgt67D1t",
+              "Name": "reddit dog",
+              "Symbol": "r/snoofi"
+            },
+            "MarketAddress": "3D46aZhV4AKpK22V7yvxSMdFWSUpAHKsSqJMYPPzxukJ",
+            "QuoteCurrency": {
+              "MintAddress": "So11111111111111111111111111111111111111112",
+              "Name": "Wrapped Solana",
+              "Symbol": "WSOL"
+            }
+          },
+          "Quote": {
+            "ChangeAmount": "23.000000000",
+            "PostAmount": "653.473238088",
+            "PostAmountInUSD": "104870.58897286942",
+            "PriceInUSD": 0.02779977047729333
+          }
+        }
+      },
+```
