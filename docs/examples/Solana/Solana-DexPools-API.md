@@ -124,7 +124,7 @@ subscription {
 ```
 ## Get Top Pools Based on Liquidity
 
-This query retrieves the top liquidity pools on the Solana blockchain, sorted by their total liquidity (PostAmount). The query is filtered for pools that have been active since a specific time period, ensuring that only recent data is considered. The results are limited to the top 10 pools based on their liquidity.
+This query retrieves the top liquidity pools on the Solana blockchain, sorted by their total liquidity (PostAmount). The query is filtered for pools that have been active since a specific time period. The results are limited to the top 10 pools based on their liquidity.
 
 
 ```
