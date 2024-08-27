@@ -80,48 +80,8 @@ query GetLatestLiquidityForPool {
 }
 
 ```
-## Subscribe to Latest Pumpfun Pools
 
-In this query, you can subscribe to the latest liquidity data for pools related to the "Pump" protocol on Solana. This subscription provides real-time updates about the liquidity in pools under this protocol, including details about the base and quote currencies.
 
-```
-subscription {
-  Solana {
-    DexPools(
-      where: {Pool: {Dex: {ProtocolName: {is: "pump"}}}}
-    ) {
-      Pool {
-        Market {
-          MarketAddress
-          BaseCurrency {
-            MintAddress
-            Symbol
-            Name
-          }
-          QuoteCurrency {
-            MintAddress
-            Symbol
-            Name
-          }
-        }
-        Dex {
-          ProtocolFamily
-          ProtocolName
-        }
-        Quote {
-          PostAmount
-          PriceInUSD
-          PostAmountInUSD
-        }
-        Base {
-          PostAmount
-        }
-      }
-    }
-  }
-}
-
-```
 ## Get Top Pools Based on Liquidity
 
 This query retrieves the top liquidity pools on the Solana blockchain, sorted by their total liquidity (PostAmount). The query is filtered for pools that have been active since a specific time period. The results are limited to the top 10 pools based on their liquidity.
@@ -215,39 +175,13 @@ This query allows you to subscribe to updates on liquidity removal from a specif
 
 ```
 
-Sample response:
 
-```
-"DexPools": [
-      {
-        "Pool": {
-          "Base": {
-            "ChangeAmount": "-376244.182137",
-            "PostAmount": "3772354.489708"
-          },
-          "Dex": {
-            "ProtocolFamily": "Meteora",
-            "ProtocolName": "lb_clmm"
-          },
-          "Market": {
-            "BaseCurrency": {
-              "MintAddress": "7M9KJcPNC65ShLDmJmTNhVFcuY95Y1VMeYngKgt67D1t",
-              "Name": "reddit dog",
-              "Symbol": "r/snoofi"
-            },
-            "MarketAddress": "3D46aZhV4AKpK22V7yvxSMdFWSUpAHKsSqJMYPPzxukJ",
-            "QuoteCurrency": {
-              "MintAddress": "So11111111111111111111111111111111111111112",
-              "Name": "Wrapped Solana",
-              "Symbol": "WSOL"
-            }
-          },
-          "Quote": {
-            "ChangeAmount": "23.000000000",
-            "PostAmount": "653.473238088",
-            "PostAmountInUSD": "104870.58897286942",
-            "PriceInUSD": 0.02779977047729333
-          }
-        }
-      },
-```
+## Pump fun pool liquidity add
+## pump fun pool liquidity burn
+## Liquidity added and removed by specific addresses
+## Latest Price of token based on liqudity (put this on top)
+## Top 10 liquidity providers
+## All liquidity related changes for a pair
+## Liquidity add and remove for Raydium pairs
+## Liquidity add and remove for Whirlpool pairs
+## Liquidity add and remove for Orca pairs
