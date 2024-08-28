@@ -260,7 +260,7 @@ query GetTopPoolsByDex {
 ```
 
 
-## Pump fun pool liquidity add
+## Pump Fun Pool Liquidity Addition
 [This](https://ide.bitquery.io/add-liquidity-pump-fun_1) query returns the instances where liquidity was added to the pools related to the `Pump` protocol on `Solana`.
 
 ``` graphql
@@ -309,7 +309,7 @@ query GetTopPoolsByDex {
 }
 ```
 
-## Pump fun pool liquidity burn
+## Pump Fun Pool Liquidity Removal
 [This](https://ide.bitquery.io/remove-liquidity-from-pump_1) query returns the liquidity removal/ token burning instances for the `Pump` protocol on `Solana`.
 
 ``` graphql
@@ -358,7 +358,7 @@ query GetTopPoolsByDex {
 }
 ```
 
-## Liquidity added and removed by specific addresses
+## Liquidity Added and Removed by Specific Address
 
 [This](https://ide.bitquery.io/liquidity-added-and-removed-by-particular-address_2) query returns the events of liquidity addition and liquidity removal by a particular address, which is `bgrXcQpyAhQ5MGcew8EB8tbz4oBJ5whahorrobfRVBQ` for this example. 
 
@@ -413,7 +413,7 @@ query MyQuery {
 }
 ```
 
-## Top 10 liquidity providers
+## Top 10 Liquidity Providers
 [This](https://ide.bitquery.io/top-ten-liquidity-providers-for-a-pair_1) query given below, returns the top `10` liquidity providers for a given liquidity pool. 
 
 For this example:
@@ -458,7 +458,7 @@ query MyQuery {
 }
 ```
 
-## All liquidity related changes for a pair
+## All Liquidity Events for a Pair
 
 In this section, we will discuss how we can get all the liquidity related changes like liquidity addition and liquidity removal for a specified pair, which is, for this example, given below.
 
