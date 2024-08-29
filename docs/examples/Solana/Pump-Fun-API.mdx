@@ -656,6 +656,64 @@ To get OHLC price in SOL and USD and to get volume use [following query](https:/
 
 ```
 
+## Last Pumpfun Trade before Token gradute to Raydium
+
+You can use following query to get last trade before token graduate to Raydium.
+
+You can also run this query [using this link](https://ide.bitquery.io/Last-trade-before-pump-fun-token-graduate).
+
+
+```graphql
+{
+  Solana {
+    DexPools(
+      where: {Pool: {Dex: {ProtocolName: {is: "pump"}}, Base: {PostAmount: {eq: "206900000"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Transaction {
+        Signer
+        Signature
+      }
+      Instruction {
+        Program {
+          Method
+        }
+      }
+      Pool {
+        Base {
+          ChangeAmount
+          PostAmount
+        }
+        Quote {
+          ChangeAmount
+          ChangeAmountInUSD
+          PostAmount
+          PostAmountInUSD
+          Price
+          PriceInUSD
+        }
+        Dex {
+          ProgramAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        Market {
+          BaseCurrency {
+            Name
+            Symbol
+          }
+          MarketAddress
+          QuoteCurrency {
+            Name
+            Symbol
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+
 ## Video Tutorial on Getting Pump Fun Trades
 
 <VideoPlayer url="https://www.youtube.com/watch?v=QV8zBnmDFxY" />

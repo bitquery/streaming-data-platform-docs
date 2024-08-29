@@ -29,7 +29,7 @@ In this document, we will explore examples to get marketcap, bonding curve progr
 
 You can get the marketcap of a pump fun token by this formulae `marketcap = 1000000000 * Latest USD Price` because all the pump fun tokens have 1 Billion supply.
 
-You can get the latest USD price of the desired token (here I have used this token `9qzvgUMrrL5Xyadk2gyWxCWgTds8crkwGwgfjeN5JYLS`) from the below query and multiply it with 1 Billion and you will get the latest marketcap of the specified token. You can test the query [here]().
+You can get the latest USD price of the desired token (here I have used this token `9qzvgUMrrL5Xyadk2gyWxCWgTds8crkwGwgfjeN5JYLS`) from the below query and multiply it with 1 Billion and you will get the latest marketcap of the specified token.
 
 ```graphql
 query MyQuery {
