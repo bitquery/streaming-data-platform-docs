@@ -70,6 +70,43 @@ subscription {
 
 ```
 
+## Track Latest Created NFTs
+
+The subscription query provided below fetches the latest created NFTs on the Solana blockchain.
+You can find the query [here](https://ide.bitquery.io/Get-newly-created-NFTs-on-Solana_1). We are specifically looking for transactions where method called were any of these `["initializeMint", "initializeMint2"]` and then we again filter according to `AccountNames` because for transactions where new NFT is minted accountNames will be equal to 2.
+
+```
+subscription MyQuery {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}, Method: {in: ["initializeMint", "initializeMint2"]}, AccountNames: {length: {eq: 2}}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+
+
+```
+
 ## Track all NFT balance updates across the Solana Ecosystem
 
 The subscription query provided below fetches the real time nft balance updates of addressses across Solana Ecosystem. This query also gives us NFT balance of the wallets using `PreBalance` and `PostBalance`.
