@@ -1,6 +1,6 @@
 # Raydium CLMM API
 
-In this section we will see how to get data on Raydium CLMM trades in real-time. According to the official docs available [here](https://docs.raydium.io/raydium/liquidity-providers/providing-concentrated-liquidity-clmm/intro-on-concentrated-liquidity), 
+In this section we will see how to get data on Raydium CLMM trades in real-time. According to the official docs available [here](https://docs.raydium.io/raydium/liquidity-providers/providing-concentrated-liquidity-clmm/intro-on-concentrated-liquidity),
 
 "Concentrated Liquidity Market Maker (CLMM) pools allow liquidity providers to select a specific price range at which liquidity is active for trades within a pool. "
 
@@ -36,6 +36,7 @@ This program allows you to test the data and its integration into your applicati
 
 ## Subscribe to Realtime CLMM Trades
 
+This query subscribes to real-time trades on the Raydium CLMM (Concentrated Liquidity Market Maker) on the Solana blockchain by filtering using `{Program: {Address: {is: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"}}}:`.
 You can run the query [here](https://ide.bitquery.io/Raydium-CLMM-DEX-Trades)
 
 ```
