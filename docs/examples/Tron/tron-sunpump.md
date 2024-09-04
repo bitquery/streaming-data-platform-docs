@@ -197,3 +197,65 @@ subscription {
   }
 }
 ```
+
+# Tron DEX Trade API
+
+Currently Tron DEX trade API doesn't have Sunpump for now, but it has other DEXs including Sunswap and we are in process of adding Sunpump in DEX trades api.
+
+You can try [this API on our IDE](https://ide.bitquery.io/Tron-dex-trades).
+
+```
+subscription {
+  Tron(mempool: false) {
+    DEXTrades(where: {Transaction: {Result: {Success: true}}}) {
+      Trade {
+        Dex {
+          ProtocolName
+          SmartContract
+          OwnerAddress
+          Pair {
+            Name
+            SmartContract
+          }
+        }
+        Buy {
+          Currency {
+            AssetId
+            SmartContract
+            Symbol
+            Fungible
+          }
+          Amount
+          Buyer
+          Seller
+          Price
+          Ids
+          OrderId
+        }
+        Sell {
+          Currency {
+            AssetId
+            SmartContract
+            Symbol
+            Fungible
+          }
+          Price
+          Amount
+        }
+        Success
+      }
+      Transaction {
+        Hash
+        Index
+        Result {
+          Success
+        }
+        Timestamp
+      }
+      Block {
+        Number
+      }
+    }
+  }
+}
+```
