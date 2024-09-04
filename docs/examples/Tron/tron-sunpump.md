@@ -27,11 +27,15 @@ In this document, we will explore several examples related to Sun Pump data.
   <meta property="twitter:description" content="Get on-chain data of any Sun Pump based token through our Sun Pump API."/>
 </head>
 
-## Top Sun Pump tokens based on Marketcap
+We are parsing Sunpump DEX, meanwhile you can try following APIs/Streams.
 
-THis query will subscribe you to the latest created sun pump tokens. You will find the newly created token address in `Log { SmartContract }`.
+## Latest Created Sunpump token
+
+This query will subscribe you to the latest created sun pump tokens. You will find the newly created token address in `Log { SmartContract }`.
 
 Here’s [the query](https://ide.bitquery.io/New-tokens-on-sunpump_1#) to retrieve the latest tokens created on Sun Pump.
+
+If you remove `subscription` from the below GraphQL query it will become API, for example check [this api](https://ide.bitquery.io/latest-created-Sunpump-tokens).
 
 ```graphql
 subscription MyQuery {
@@ -59,6 +63,135 @@ subscription MyQuery {
       Transaction {
         Hash
         FeePayer
+      }
+    }
+  }
+}
+```
+
+## Latest Buy events on SunPump Tron
+
+You can use following stream to get latest buys on Sunpump. You can try [this stream on IDE](https://ide.bitquery.io/latest-Buy-on-SunPump).
+
+As I mentioned above, we are parsing Sunpump and then we will replace APIs.
+
+
+```graphql
+subscription {
+  Tron(mempool: false) {
+    BuyEvents: Events(
+      where: {Transaction: {Data: {includes: "1cc2c911"}, Result: {Success: true}}, Contract: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}}
+    ) {
+      Log {
+        SmartContract
+        Signature {
+          Name
+          SignatureHash
+        }
+      }
+      Contract {
+        Address
+      }
+      Transaction {
+        Hash
+        Timestamp
+        Index
+        FeePayer
+      }
+      LogHeader {
+        Data
+      }
+      Block {
+        Number
+      }
+      Topics {
+        Hash
+      }
+    }
+  }
+}
+```
+
+## Latest Sell events on SunPump Tron
+
+You can use following stream to get latest sells on Sunpump. You can try [this stream on IDE](https://ide.bitquery.io/sunpump-sell-event).
+
+
+```graphql
+subscription {
+  Tron(mempool: false) {
+    SellEvents: Events(
+      where: {Transaction: {Data: {includes: "d19aa2b9"}, Result: {Success: true}}, Contract: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}}
+    ) {
+      Log {
+        SmartContract
+        Signature {
+          Name
+          SignatureHash
+        }
+      }
+      Contract {
+        Address
+      }
+      Transaction {
+        Hash
+        Timestamp
+        Index
+        FeePayer
+      }
+      LogHeader {
+        Data
+      }
+      Block {
+        Number
+      }
+      Topics {
+        Hash
+      }
+    }
+  }
+}
+```
+
+
+## First Time Buy Event on Sunpump
+
+You can use follow stream to get stream of first time buy event for any new token.
+
+You can try [this stream on IDE](https://ide.bitquery.io/Tron-sunpump-first-time-buy-event_1).
+
+
+```graphql
+subscription {
+  Tron(mempool: false) {
+    BuyEventsFirstTime: Events(
+      where: {Transaction: {Data: {includes: "2f70d762"}, Result: {Success: true}}, 
+        Contract: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}}
+    ) {
+      Log {
+        SmartContract
+        Signature {
+          Name
+          SignatureHash
+        }
+      }
+      Contract {
+        Address
+      }
+      Transaction {
+        Hash
+        Timestamp
+        Index
+        FeePayer
+      }
+      LogHeader {
+        Data
+      }
+      Block {
+        Number
+      }
+      Topics {
+        Hash
       }
     }
   }
