@@ -324,3 +324,123 @@ query MyQuery {
 }
 
 ```
+
+## Track Token Create Events on Sunpump
+
+This query allows you to track `TokenPurchased` events on SunPump. It retrieves the 10 most recent token purchase events, showing important details such as the token address, buyer information, transaction hash, and token amount involved.
+The arguments has key event parameters like the token address, buyer, transaction amount, fees, and token reserve values.
+
+You can run the query [here](https://ide.bitquery.io/TokenPurchased-on-Sunpump)
+
+```
+{
+  Tron {
+    Events(
+      where: {Log: {Signature: {Name: {is: "TokenPurchased"}}}}
+      limit: {count: 10}
+    ) {
+      Log {
+        Signature {
+          Name
+          SignatureHash
+        }
+      }
+      Transaction {
+        Hash
+        Timestamp
+      }
+      Topics {
+        Hash
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+      }
+      Call {
+        From
+        To
+      }
+    }
+  }
+}
+
+```
+
+## Track Token Creation on Sunpump in Realtime
+
+This subscription allows you to track new tokens being created on SunPump in real time. It captures the latest `TokenCreate` events, providing important details such as the token address, creator, and transaction information.
+
+The `Arguments` include the token address, creator, and token index.
+You can run it [here](https://ide.bitquery.io/Latest-tokens-created-on-Sunpump_2)
+
+```
+subscription{
+  Tron {
+    Events(
+      where: {Log: {Signature: {Name: {is: "TokenCreate"}}}}
+
+    ) {
+      Log {
+        Signature {
+          Name
+          SignatureHash
+        }
+      }
+      Transaction {
+        Hash
+        Timestamp
+      }
+      Topics {
+        Hash
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+      }
+      Call {
+        From
+        To
+      }
+    }
+  }
+}
+
+```
