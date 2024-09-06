@@ -25,8 +25,6 @@ In this section, we will explore several examples related to Sun Pump data. Thes
   <meta property="twitter:description" content="Get on-chain data of any Sun Pump based token through our Sun Pump API."/>
 </head>
 
-
-
 ## Latest Created Sunpump token
 
 This query will subscribe you to the latest created sun pump tokens. You will find the newly created token address in `Log { SmartContract }`.
@@ -73,12 +71,17 @@ You can use following stream to get latest buys on Sunpump. You can try [this st
 
 As I mentioned above, we are parsing Sunpump and then we will replace APIs.
 
-
 ```graphql
 subscription {
   Tron(mempool: false) {
     BuyEvents: Events(
-      where: {Transaction: {Data: {includes: "1cc2c911"}, Result: {Success: true}}, Contract: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}}
+      where: {
+        Transaction: {
+          Data: { includes: "1cc2c911" }
+          Result: { Success: true }
+        }
+        Contract: { Address: { is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw" } }
+      }
     ) {
       Log {
         SmartContract
@@ -114,12 +117,17 @@ subscription {
 
 You can use following stream to get latest sells on Sunpump. You can try [this stream on IDE](https://ide.bitquery.io/sunpump-sell-event).
 
-
 ```graphql
 subscription {
   Tron(mempool: false) {
     SellEvents: Events(
-      where: {Transaction: {Data: {includes: "d19aa2b9"}, Result: {Success: true}}, Contract: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}}
+      where: {
+        Transaction: {
+          Data: { includes: "d19aa2b9" }
+          Result: { Success: true }
+        }
+        Contract: { Address: { is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw" } }
+      }
     ) {
       Log {
         SmartContract
@@ -151,20 +159,23 @@ subscription {
 }
 ```
 
-
 ## First Time Buy Event on Sunpump
 
 You can use follow stream to get stream of first time buy event for any new token.
 
 You can try [this stream on IDE](https://ide.bitquery.io/Tron-sunpump-first-time-buy-event_1).
 
-
 ```graphql
 subscription {
   Tron(mempool: false) {
     BuyEventsFirstTime: Events(
-      where: {Transaction: {Data: {includes: "2f70d762"}, Result: {Success: true}}, 
-        Contract: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}}
+      where: {
+        Transaction: {
+          Data: { includes: "2f70d762" }
+          Result: { Success: true }
+        }
+        Contract: { Address: { is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw" } }
+      }
     ) {
       Log {
         SmartContract
@@ -256,4 +267,60 @@ subscription {
     }
   }
 }
+```
+
+## Track Token Launch to Sunswap
+
+This query allows you to track when tokens are launched on SunSwap using the `launchToDEX` function. It returns the most recent 10 token launches, displaying details such as the token address, transaction hash, block timestamp, and the method call signature.
+
+**Arguments**: Includes the `token` address and any other relevant parameters passed during the `launchToDEX` method call.
+You can use the **token** argument to get the address of the token that was launched.
+You can run the query [here](https://ide.bitquery.io/sunmpump-launchtoDEX_1)
+
+```
+query MyQuery {
+  Tron(network: tron, dataset: realtime) {
+    Calls(
+      where: {Call: {To: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}, Signature: {Name: {is: "launchToDEX"}}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ) {
+      Call {
+        Signature {
+          Name
+        }
+      }
+      Arguments {
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+        }
+        Name
+      }
+      Transaction {
+        Hash
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+
 ```
