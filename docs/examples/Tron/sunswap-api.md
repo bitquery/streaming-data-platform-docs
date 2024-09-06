@@ -63,3 +63,48 @@ query MyQuery {
 
 
 ```
+
+
+## Latest Trades of a Token on Sunswap
+
+You can run the query [here](https://ide.bitquery.io/sunswap-latest-Trades-of-token)
+```
+query MyQuery {
+  Tron(dataset: realtime, network: tron) {
+    DEXTrades(
+      where: {Contract: {Address: {is: "TKzxdSv2FZKQrEqkKVgp5DcwEXBEKMg2Ax"}},
+        any:[ {Trade: {Buy: {Currency: {SmartContract: {is: "TM3k1FoDYhn3Yadaeqb5aCyvWo7ZbHWjng"}}}}},{Trade: {Sell: {Currency: {SmartContract: {is: "TM3k1FoDYhn3Yadaeqb5aCyvWo7ZbHWjng"}}}}}]}
+      limit: {count: 100}
+      orderBy: {descending: Block_Time}
+    ) {
+      Trade {
+        Buy {
+          Amount
+          Currency {
+            Name
+            SmartContract
+          }
+          Buyer
+          Price
+        }
+        Dex {
+          ProtocolName
+          Pair {
+            SmartContract
+            Name
+          }
+        }
+        Sell {
+          Amount
+          Price
+          Currency {
+            Name
+            SmartContract
+          }
+        }
+      }
+    }
+  }
+}
+
+```

@@ -1,8 +1,6 @@
 # Sun Pump API
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
-
-In this document, we will explore several examples related to Sun Pump data.
+In this section, we will explore several examples related to Sun Pump data. These APIs provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
 
 <head>
   <meta name="title" content="Sun Pump API - Tron - Tokens, Trades, Live Prices"/>
@@ -27,7 +25,7 @@ In this document, we will explore several examples related to Sun Pump data.
   <meta property="twitter:description" content="Get on-chain data of any Sun Pump based token through our Sun Pump API."/>
 </head>
 
-We are parsing Sunpump DEX, meanwhile you can try following APIs/Streams.
+
 
 ## Latest Created Sunpump token
 
