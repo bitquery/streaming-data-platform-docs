@@ -1,6 +1,6 @@
 # Sun Pump API
 
-In this section, we will explore several examples related to Sun Pump data. These APIs provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
+In this section, we will explore several examples related to Sun Pump data. These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
 
 <head>
   <meta name="title" content="Sun Pump API - Tron - Tokens, Trades, Live Prices"/>
