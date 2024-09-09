@@ -15,7 +15,7 @@ You can view the query in the IDE [here](https://ide.bitquery.io/Trades-if-an-ad
      DEXTrades(
       limit: {count: 10}
       orderBy: {descending: Block_Time}
-      where: {any: [{Trade: {Buy: {Buyer: {is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"}}}}, {Trade: {Buy: {Seller: {is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"}}}}, {Transaction: {From: {is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"}}}]}
+      where: {any: [{Trade: {Buy: {Buyer: {is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"}}}}, {Trade: {Buy: {Seller: {is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"}}}}]}
     ) {
       Block {
         Number
