@@ -159,6 +159,9 @@ This script opens a WebSocket connection to the Streaming API, sends an initiali
 -   **Stop Connection**:
     
     -   The connection is closed by calling  `bitqueryConnection.close()`  when necessary. This code currently keeps the connection open indefinitely, allowing for continuous data streaming. The  `close`  event logs when the connection is terminated, either by the client or the server.
+
+> To close a subscription, you have to close the websocket.
+
 -   **Error Handling**:
     
     -   If any WebSocket errors occur during the connection, they are caught and logged using the  `bitqueryConnection.on("error", (error) => {...})`  event handler.
