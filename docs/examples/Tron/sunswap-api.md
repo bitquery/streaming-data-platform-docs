@@ -17,6 +17,57 @@
   <meta property="twitter:description" content="Retrieve token data, trades, and prices for SunSwap tokens on the Tron network using the SunSwap API."/>
 </head>
 
+
+If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
+
+## New Tokens on Sunpump and Sell event in Ton Mempool
+
+You can use following query to get new tokens and sell event using following stream.
+
+Here is [link]( https://ide.bitquery.io/Events-with-argumens) using which you can run it on our IDE.
+
+```
+subscription {
+  Tron(mempool: true) {
+    NewTokenEvents: Events(
+      where: {Log: {SmartContract: {not: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}, Transaction: {Result: {Success: true}, Data: {includes: "2f70d762"}}, Topics: {includes: {Hash: {in: ["8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"]}}}, Contract: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}}
+      orderBy: {descending: Block_Time}
+    ) {
+      Log {
+        SmartContract
+      }
+      Transaction {
+        FeePayer
+      }
+    }
+    SellEvents: Events(
+      where: {Log: {SmartContract: {not: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}, Transaction: {Data: {includes: "d19aa2b9"}, Result: {Success: true}}, Contract: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}}
+      orderBy: {descending: Block_Time}
+    ) {
+      Log {
+        SmartContract
+        Signature {
+          Signature
+        }
+      }
+      Transaction {
+        FeePayer
+      }
+      Arguments {
+        Value {
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Latest Trades on Sunswap
 
 To fetch the most recent trades on SunSwap, you can filter the trades by using the SunSwap router address `TKzxdSv2FZKQrEqkKVgp5DcwEXBEKMg2Ax`. This query will return the latest 100 trades most recent first.
