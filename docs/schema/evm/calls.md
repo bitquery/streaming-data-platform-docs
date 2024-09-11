@@ -97,4 +97,4 @@ Here's a sample query to get started.
 }
 ```
 
-Calls contain the arguments and return values as arrays, refer to [arguments](/docs/evm/arguments) for data structure.
+Calls contain the arguments and return values as arrays, refer to [arguments](/docs/schema/evm/arguments) for data structure.

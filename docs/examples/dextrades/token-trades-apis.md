@@ -9,7 +9,7 @@ We have two main APIs to get DEX trading data.
 - DEXTrades
 - DEXTradeByTokens
 
-To learn the difference between two APIs, please check [this doc](https://docs.bitquery.io/docs/evm/dextrades/).
+To learn the difference between two APIs, please check [this doc](https://docs.bitquery.io/docs/schema/evm/dextrades/).
 
 ## Historical Token Trades & Price API
 

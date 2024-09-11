@@ -7,5 +7,5 @@ tags: [metrics]
 
 There is the additions in the today release of Graphql:
 
-1. [DEX Trades By Token](/docs/evm/dextrades) introduced with OHLC example
+1. [DEX Trades By Token](/docs/schema/evm/dextrades) introduced with OHLC example
 2. [Time/Date interval](/docs/graphql/datetime) added

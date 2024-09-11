@@ -8,7 +8,7 @@ tags: [new api]
 # Changes in APIs and Metrics
 
 In this update we have
-- Added a new [Token Holder API](https://docs.bitquery.io/docs/evm/token_holders/) for `archive` dataset
+- Added a new [Token Holder API](https://docs.bitquery.io/docs/schema/evm/token_holders/) for `archive` dataset
 - Added new indexes Gini Coefficient, Nakamoto Index, Theil Index
 - Removed `distinctBy` filter to avoid any confusions over its usage.
 - Compulsorily require field in `sum` aggregation , for example: `sum(of: Balance_Amount)`

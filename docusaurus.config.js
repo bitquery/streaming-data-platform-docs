@@ -98,7 +98,7 @@ const config = {
             from: "/docs/examples/events/events_api/",
           },
           {
-            to: "/docs/evm/token-holders/",
+            to: "/docs/schema/evm/token-holders/",
             from: "/docs/evm/token_holders/",
           },
           {
@@ -173,7 +173,12 @@ const config = {
           {
             to:'/docs/examples/ethers-library/eth_subscribe/',
             from:'/docs/examples/Ethereum-subscriptions/eth-subscribe/'
+          },
+          {
+            to:'/docs/schema/schema-intro/',
+            from:'/docs/evm/'
           }
+         
         ],
       },
     ],

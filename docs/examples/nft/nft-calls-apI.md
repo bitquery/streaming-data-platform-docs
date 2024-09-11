@@ -69,6 +69,6 @@ Here's an example query that retrieve the most recent smart contract calls made 
       * `GasUsed`: The amount of gas used during the call.
       * `To` : The address of the NFT token contract that received the call.
       * `Value` : The amount of Ether transferred in the call.
--   `Arguments { Name Value {....} }` : Retrieves Array of arguments passed in the smart contract call, including their names and values, refer to [arguments](/docs/evm/arguments) for data structure.
+-   `Arguments { Name Value {....} }` : Retrieves Array of arguments passed in the smart contract call, including their names and values, refer to [arguments](/docs/schema/evm/arguments) for data structure.
 
 You can find the graphql query [here](https://ide.bitquery.io/Smart-contract-calls-to-an-nft-contract).

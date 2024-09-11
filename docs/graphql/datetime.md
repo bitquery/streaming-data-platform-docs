@@ -10,7 +10,7 @@ We use the UTC timezone for both date and time. In Graphql, time is represented 
 
 ## Interval
 
-When aggregating data over time, use the interval argument for `Date` and `Time` fields. For example, in an OHLC query for [DEX trade](/docs/evm/dextrades):
+When aggregating data over time, use the interval argument for `Date` and `Time` fields. For example, in an OHLC query for [DEX trade](/docs/schema/evm/dextrades):
 
 ```graphql
 Time(interval: {in: minutes, count: 10})

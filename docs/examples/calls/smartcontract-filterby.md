@@ -116,7 +116,7 @@ query MyQuery {
 ## Smart Contract Calls by Arguments
 
 
-The Array-like structure of [Arguments and Returns](https://docs.bitquery.io/docs/evm/arguments/) in Smart Contract Calls allows us to insert specific filters, enabling us to effectively narrow down our search. Further we can better understand the details of smart contract interactions in specific contexts.
+The Array-like structure of [Arguments and Returns](https://docs.bitquery.io/docs/schema/evm/arguments/) in Smart Contract Calls allows us to insert specific filters, enabling us to effectively narrow down our search. Further we can better understand the details of smart contract interactions in specific contexts.
 
 **Example 1**
 

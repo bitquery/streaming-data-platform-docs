@@ -10,13 +10,13 @@ The EVM-based schema contains different types of queries, such as block, transac
 
 Here's a list of different sections in this documentation:
 
- 1. [Blocks](/docs/evm/blocks)
- 2.  [Miner Rewards](/docs/evm/miners)
- 3.  [Uncle Blocks](/docs/evm/uncles)
- 4.  [Balances](/docs/evm/balances)
- 5.  [Transfers](/docs/evm/transfers)
- 6.  [Transactions](/docs/evm/transactions)
- 7. [Events](/docs/evm/events)
- 8. [Dex Trades](/docs/evm/dextrades)
- 9. [Calls](/docs/evm/calls)
+ 1. [Blocks](/docs/schema/evm/blocks)
+ 2.  [Miner Rewards](/docs/schema/evm/miners)
+ 3.  [Uncle Blocks](/docs/schema/evm/uncles)
+ 4.  [Balances](/docs/schema/evm/balances)
+ 5.  [Transfers](/docs/schema/evm/transfers)
+ 6.  [Transactions](/docs/schema/evm/transactions)
+ 7. [Events](/docs/schema/evm/events)
+ 8. [Dex Trades](/docs/schema/evm/dextrades)
+ 9. [Calls](/docs/schema/evm/calls)
  
