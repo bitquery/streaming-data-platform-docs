@@ -2,6 +2,8 @@
 
 In this document, we will explore examples to get marketcap, bonding curve progress and whether the token migrated to Raydium or not yet. We have the fully exhaustive Pump Fun API documentation [here](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/). Additionally, we have the Moonshot API available, and you can access its documentation [here](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/).
 
+These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
+
 <head>
   <meta name="title" content="Pump Fun API - Solana - Tokens, Trades, Live Prices"/>
   <meta name="description" content="Get Bonding Curve Data of any Pump.fun based token through our Pump.fun API."/>

@@ -169,6 +169,10 @@ const config = {
           {
             to:'/docs/examples/ethers-library/eth_subscribe',
             from:'/docs/category/ethsubscribe-alternatives/'
+          },
+          {
+            to:'/docs/examples/ethers-library/eth_subscribe/',
+            from:'/docs/examples/Ethereum-subscriptions/eth-subscribe/'
           }
         ],
       },

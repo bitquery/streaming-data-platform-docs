@@ -88,3 +88,217 @@ subscription MyQuery {
 }
 
 ```
+
+## Latest Pool Creation on Raydium CLMM
+
+The below query tracks latest pool creation on raydium CLMM.
+
+The `"Program": {"AccountNames"}` includes the order in which account addresses are mentioned in `Accounts` list.
+
+This includes `poolCreator`, token vaults (`tokenVault0`, `tokenVault1`) and token mints (`tokenMint0`, `tokenMint1`). 
+
+The mint addresses for the tokens being used in the pool are listed for example `tokenMint1` could be any newly deployed token and `tokenMint0` can be WSOL , indicating which tokens the CLMM pool will support.
+
+You can run the query [here](https://ide.bitquery.io/Raydium-CLMM-Pool-Creation)
+
+```
+{
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"}, Method: {is: "createPool"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Name
+          }
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+
+```
+
+## Latest Positions Closed
+
+The below query tracks latest position closes on raydium CLMM by filtering using `Method: {is: "closePosition"}`. The `personalPosition` account which is the 4th in the list of `Accounts` includes the address of account to store personal position.
+
+```
+{
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"}, Method: {is: "closePosition"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Name
+          }
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+
+```
+
+## Latest Positions Created
+
+The below query tracks latest position created on raydium CLMM by filtering using `Method: {is: "openPositionV2"}`. 
+
+This is where various accounts like NFTs, tokens, and program states are updated. The parameters define liquidity and token amounts involved in the position.
+
+-   **amount0Max** corresponds to **tokenVault0** and **tokenAccount0**.
+-   **amount1Max** corresponds to **tokenVault1** and **tokenAccount1**.
+
+-   **amount0Max**: The maximum amount of **Token 0** to be added to the position. 
+-   **amount1Max**: The maximum amount of **Token 1** to be added to the position. 
+
+```
+{
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"}, Method: {is: "openPositionV2"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Name
+          }
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+
+```
