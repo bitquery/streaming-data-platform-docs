@@ -1,6 +1,6 @@
 {
   "label": "EVM-based Schema",
-  "position": 1,
+  "position": 2,
   "link": {
     "type": "generated-index",
     "description": "EVM-like blockchain schema as Ethereum, BSC, Polygon and many others"
