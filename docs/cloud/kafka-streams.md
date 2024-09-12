@@ -197,14 +197,6 @@ You can customize the consumer by changing the following parameters:
 
 Improve error handling logic for Kafka consumer connection and message processing.
 
-### Additional Compression Support
-
-Support for other compression algorithms (like **gzip**, **snappy**, etc.) can be added if required.
-
 ### Message Filtering
 
 Implement logic to filter messages based on content or metadata (e.g., filtering by `partition` or `offset`).
-
-### Metrics and Monitoring
-
-Integrate logging libraries or external monitoring systems (e.g., **Prometheus** or **Grafana**) to monitor Kafka consumer metrics.
