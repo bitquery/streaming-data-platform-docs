@@ -2,7 +2,7 @@
 sidebar_position: 7
 ---
 
-# KafkaJS Client with LZ4 Decompression: Documentation & Usage Guide
+# KafkaJS Stream to Get Real-time Data
 
 ## Overview
 
