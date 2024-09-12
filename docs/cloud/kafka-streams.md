@@ -10,7 +10,7 @@ This guide explains a Node.js Kafka consumer implementation to get [onchain data
 
 In this example, we subscribe to a Kafka topic, decompress messages using **LZ4** if necessary, and log them to the console. The consumer is secured with SSL and uses certificates for authentication. Additionally, the script generates a unique **groupId** for each run, ensuring that the consumer receives messages independently.
 
-The complete code is available [here]()
+The complete code is available [here](https://github.com/bitquery/kafka-consumer-example)
 
 ## Table of Contents
 
