@@ -63,11 +63,7 @@ The Kafka client is initialized using the `Kafka` class from the **KafkaJS** lib
 ```javascript
 const kafka = new Kafka({
   clientId: "client-id-anonymized", // Replaced with anonymized clientId
-  brokers: [
-    "rpk0.bitquery.io:A",
-    "rpk1.bitquery.io:B",
-    "rpk2.bitquery.io:C",
-  ],
+  brokers: ["rpk0.bitquery.io:A", "rpk1.bitquery.io:B", "rpk2.bitquery.io:C"],
   ssl: {
     rejectUnauthorized: false, // Disables server certificate validation
     ca: [fs.readFileSync("server.cer.pem", "utf-8")], // Load server certificate
@@ -105,6 +101,27 @@ const consumer = kafka.consumer({
 
 - **sessionTimeout**: The time (in milliseconds) after which, if the consumer has not sent a heartbeat, it will be considered dead.
 
+```javascript
+const run = async () => {
+  await consumer.connect();
+  await consumer.subscribe({ topic, fromBeginning: false });
+
+  await consumer.run({
+    autoCommit: false,
+    eachMessage: async ({ partition, message }) => {
+      try {
+        //processing code continued below
+        console.log(logEntry);
+      } catch (err) {
+        console.error("Error processing message:", err);
+      }
+    },
+  });
+};
+
+run().catch(console.error);
+```
+
 ### LZ4 Decompression
 
 Kafka messages are sometimes compressed using LZ4. The script attempts to decompress each message. If decompression fails, it assumes the message is not compressed and handles it as a regular UTF-8 string.
@@ -126,7 +143,7 @@ try {
 
 ### Message Logging
 
-Messages are logged into the console in the format `{ partition, offset, value }` in the `console.log(logEntry);` line.
+Messages are logged into the console in the format `{ partition, offset, value }` using `console.log(logEntry);`.
 
 ```javascript
 const logEntry = {
@@ -147,9 +164,13 @@ The following sequence of operations occurs when the script runs:
 2. **Group ID Generation**: A unique groupId is generated using UUID, ensuring no collision with other consumers.
 3. **Kafka Consumer Connection**: The consumer connects to the Kafka brokers and subscribes to the specified topic.
 4. **Message Processing**:
-   - For each message received, the consumer attempts to decompress it using LZ4.
-   - If decompression fails, the message is treated as plain text.
-5. **Logging**: Messages are logged to the console and optionally written to a file.
+   - The `run` function is responsible for the main consumer logic:
+     - **Connecting the Consumer**: Establishes the connection with Kafka. When you set `autoCommit` to false, you disable the automatic committing of message offsets.
+     - **Subscribing to the Topic**: Begins listening to the specified Kafka topic.
+     - **Running the Consumer**: Starts consuming messages with the `eachMessage` handler.
+       - **Message Handling**: Attempts to decompress messages using LZ4. If decompression fails, treats the message as plain text.
+       - **Logging**: Logs the message's partition, offset, and content to the console.
+5. **Error Handling**: Errors during message processing are caught and logged.
 
 ---
 
