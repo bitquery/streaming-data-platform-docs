@@ -69,7 +69,9 @@ This decision sometimes not straightforward, consult our sales and support team,
 
 * Stream is not filtered, it contains all the messages with a compleet data for every topic. It means you need to have a good throughput network, fast server and code to efficently consume and parse it;
 * Granularity of data message is different in topics, depending on the nature of the data. Topic that 
-* It is **not** guranteed that the message will come in sequence 
+* It is **not** guaranteed that the message will come in sequence of the block number, time or any other attribute. 
+* Messages in topic **may have** duplicates. If this makes a problem, your code must have a storage or the cache to remember which messages are already processed to avoid double processing.
+* Large messages can be separated on smaller ones, as Kafka does not allow pass more than 1 Mbyte in one message. For example, first 1200 transaction may come in one message, and the remaining 1000 will follow in another.
 
 ## Consuming Messages
 
@@ -78,6 +80,89 @@ Your application must implement the code:
 * Connect to Kafka server;
 * Subscribe to particular topic(s);
 * Read and parse messages;
+
+### Connect to Kafka server
+
+You need the following to connect:
+
+1. server list for connection is  "kfk0.bitquery.io:9093,kfk1.bitquery.io:9093,kfk2.bitquery.io:9093"
+2. username and password for SASL over SSL authentication, that you will receive from our team
+
+Example of connection config looks as:
+
+```
+sasl_conf = {
+     'bootstrap.servers': 'kfk0.bitquery.io:9093,kfk1.bitquery.io:9093,kfk2.bitquery.io:9093',
+     'security.protocol': 'SASL_SSL',
+     'sasl.mechanism': 'SCRAM-SHA-512',
+     'sasl.username': '<YOUR USERNAME HERE>',
+     'sasl.password': '<YOUR PASSWORD HERE>'
+}
+```
+
+### Subscribe to particular topic(s)
+
+To receive messages you first create consumer and subscribe it to a topic or list of topics.
+Topic contains messages of the same type, for example:
+
+* tron.transactions contains messages with transactions, smart contract calls and events in Tron blockchain
+* tron.broadcasted.transactions contains messages from mempool broadcasted channel ( before they included in blocks )
+* tron.dextrades contains trades happen on Tron blockchain
+* solana.dextrades contains trades happen on Solana blockchain
+* and so on...
+
+General pattern of the topic name is:
+
+```
+<BLOCKCHAIN_NAME>.<MESSAGE_TYPE>
+<BLOCKCHAIN_NAME>.broadcasted.<MESSAGE_TYPE>
+```
+
+MESSAGE_TYPE is specific on blockchain, most blockchain has topics for:
+
+* dextrades - events from DEX trading 
+* dexorders - events on creation / chaing status of DEX orders
+* dexpools - events on creation / chaing status of DEX pools
+* transactions - events, calls, transactions
+* transfers - token and coin transfers events
+* blocks - new blocks
+
+Contact our support team for the topics that you can connect to for your specific needs.
+
+When subscribing, you also specify some important properties:
+
+* Configuration for offset management. It is done a bit differently in Kafka libraries, but the idea is that you have a choice of:
+  1. receiving only latest messages, the next time you re-connect it will re-wing to the last one. It is controlled by config: ```autoCommit: false, fromBeginning: false, auto.offset.reset: latest```
+  2. or you want to consume all messages and do not lose any. Note that in this case when you re-start your server you will have a gap as it starts reading from the last message you received!
+  You have to configure it as: ```autoCommit: true, fromBeginning: false, auto.offset.reset: latest```.
+     Check https://docs.confluent.io/platform/current/clients/consumer.html#offset-management-configuration for more info.
+
+* Group ID. Group ID you have to specify when creating a consumer. It **must** start with your username. In most cases you need just one group ID that can be set the same as username.
+You may need several group IDs in an advanced configuration when you using multiple independent applications consuming same stream.
+
+
+Note that you can deploy many instances of your application with same Group ID for fault tolerance and better performance.
+Then only one instance will receive the message from the topic, automatically re-distributing the load across your servers.
+
+Typicaly you need setup of one consumer per one topic, as the message parsing for them anyway will need different code.
+
+### Read and parse messages
+
+Your consumer will read messages from the topic, and you will be able to parse them. Depending on the setting you used
+to subscribe to topic, you will read the last message, or some message on the past that is the net message to read.
+If you do not read messages fast enough, the lag will be accumulated, and the latency will grow.
+
+Message in topic is JSON, compressed using lz4 method. You first need to decompress using any of lz4 library, and then parse
+using JSON parser. This code is specific for prgramming language that you use, but should be very simple.
+
+Message contains the list of objects on the top level. Structure of objects corresponds to the topic that you consume. 
+General schema is described in https://github.com/bitquery/streaming_protobuf. The top level element depends on which stream 
+of which blockchain you use. For example, for DEX Trades on Solana you will have JSON structure as:
+
+
+*	Trade of type [solana_messages.DexTradeEvent](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/dex_block_message.proto#L79)
+*	Transaction of type [solana_messages.ParsedDexTransaction](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/dex_block_message.proto#L89)
+*	Block of type    [solana_messages.BlockHeader](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/block_message.proto#L79)
 
 ### Documentation References
 
@@ -94,19 +179,19 @@ In addition, you may need a reference to Bitquery schema for messages:
 
 * [Schemas for Streaming](https://github.com/bitquery/streaming_protobuf)
 
-## Prerequisites
+
+##  Example of Javascript Code
+
+### Prerequisites
 
 Ensure that you have the following components in place before running the code:
 
 1. **Kafka Cluster**: Accessible Kafka brokers.
-2. **SSL Certificates**: Server certificate (`server.cer.pem`), client private key (`client.key.pem`), and client certificate (`client.cer.pem`).
-3. **Node.js**: Version >= 12.
-4. **KafkaJS**: Kafka client library for Node.js.
-5. **LZ4**: Compression library for decompression of Kafka messages.
-
----
-
-## Code Components
+2. **Username and Password**: to connect to brokers
+3. **topic names(s)** that you will use
+4. **Node.js**: Version >= 12.
+5. **KafkaJS**: Kafka client library for Node.js.
+6. **LZ4**: Compression library for decompression of Kafka messages.
 
 ### Dependencies
 
@@ -127,31 +212,21 @@ The Kafka client is initialized using the `Kafka` class from the **KafkaJS** lib
 
 ```javascript
 const kafka = new Kafka({
-  clientId: "client-id-anonymized", // Replaced with anonymized clientId
-  brokers: ["rpk0.bitquery.io:A", "rpk1.bitquery.io:B", "rpk2.bitquery.io:C"],
-  ssl: {
-    rejectUnauthorized: false, // Disables server certificate validation
-    ca: [fs.readFileSync("server.cer.pem", "utf-8")], // Load server certificate
-    key: fs.readFileSync("client.key.pem", "utf-8"), // Load client private key
-    cert: fs.readFileSync("client.cer.pem", "utf-8"), // Load client certificate
-  },
+  clientId: "my-client-id", // Replace with the name of your company
+  brokers: ["kfk0.bitquery.io:9093", "kfk1.bitquery.io:9093", "kfk2.bitquery.io:9093"], 
+  ssl: true, 
+  sasl: {
+    mechanism: 'scram-sha-512',
+    username: '<YOUR USERNAME>',
+    password: '<YOUR PASSWORD>'
+  }
 });
 ```
 
 - **clientId**: Identifies the Kafka client. This is anonymized in the documentation for security purposes.
 - **brokers**: Kafka broker addresses that the client connects to.
-- **ssl**: SSL/TLS configuration to secure communication between the client and brokers. Certificates are loaded from local files.
+- **ssl/sasl**: SSL/SASL configuration to secure and authenticate communication between the client and brokers.
 
-### Group ID Generation
-
-A unique **groupId** is generated for every execution using the `uuid` library. This allows the consumer to consume messages independently of other consumers.
-
-```javascript
-const uniqueGroupId = `client-id-test-${uuidv4()}`; // Generate a unique groupId
-console.log(`Generated Group ID: ${uniqueGroupId}`);
-```
-
-- **groupId**: Used by Kafka to manage message consumption. Each groupId represents a distinct consumer group.
 
 ### Kafka Consumer Setup
 
@@ -159,10 +234,12 @@ The Kafka consumer is created and configured to consume from a specific topic. I
 
 ```javascript
 const consumer = kafka.consumer({
-  groupId: uniqueGroupId,
+  groupId: '<YOUR USERNAME>-group',
   sessionTimeout: 30000,
 });
 ```
+
+- **groupId**: can use any groupId starting with your username
 
 - **sessionTimeout**: The time (in milliseconds) after which, if the consumer has not sent a heartbeat, it will be considered dead.
 
@@ -221,7 +298,7 @@ console.log(logEntry);
 
 ---
 
-## Execution Workflow
+### Execution Workflow
 
 The following sequence of operations occurs when the script runs:
 
@@ -237,31 +314,4 @@ The following sequence of operations occurs when the script runs:
        - **Logging**: Logs the message's partition, offset, and content to the console.
 5. **Error Handling**: Errors during message processing are caught and logged.
 
----
 
-## Security Considerations
-
-- **SSL Certificates**: Ensure that the SSL certificates are kept secure. The private key, especially, should not be exposed.
-- **Certificate Validation**: In the example, `rejectUnauthorized: false` disables server certificate validation, which is not recommended for production environments. For secure deployments, ensure that server certificates are properly validated.
-
----
-
-## Configuring the Kafka Consumer
-
-You can customize the consumer by changing the following parameters:
-
-- **Topic**: Modify the `topic` variable to subscribe to a different Kafka topic.
-- **Max Messages**: Change the `maxMessages` variable to control how many messages are saved to the log file.
-- **Auto-Commit**: The script currently has `autoCommit: false`, meaning offsets are not automatically committed after message processing.
-
----
-
-## Further Customization
-
-### Error Handling
-
-Improve error handling logic for Kafka consumer connection and message processing.
-
-### Message Filtering
-
-Implement logic to filter messages based on content or metadata (e.g., filtering by `partition` or `offset`).

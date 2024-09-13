@@ -11,7 +11,7 @@ In this tutorial we will see how to write a Lambda function to retrieve ethereum
 1. An AWS account with appropriate permissions to create Lambda functions and S3 bucket access.
 2. Access to the Ethereum data in the specified S3 bucket. View demo buckets [here](/docs/cloud/s3/demo).
 
-### Step by Step Guide:
+### Step-by-Step Guide:
 
 #### 1. Navigating to Lambda Functions Page
 
