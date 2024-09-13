@@ -76,6 +76,49 @@ Here’s [the query](https://ide.bitquery.io/pumpfun-token-sorted-by-marketcap_1
 }
 ```
 
+## All Pumpfun Tokens crossed 10k Marketcap
+
+As all Pump Fun tokens have a 1 billion supply, based on the price itself, you can get all Pump Fun tokens that have crossed a sure market cap.
+Here is a [query](https://ide.bitquery.io/All-pumpfun-tokens-which-crossed-10k-marketcap_1) that gives all tokens that crossed the 10k marketcap.
+
+
+```
+{
+  Solana {
+    DEXTrades(
+      limitBy: {count: 1, by: Trade_Buy_Currency_MintAddress}
+      limit: {count: 10}
+      orderBy: {descending: Trade_Buy_Price}
+      where: {Trade: {Buy: {Price: {gt: 0.000001}, Currency: {MintAddress: {notIn: ["11111111111111111111111111111111"]}}}, Dex: {ProtocolName: {is: "pump"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Trade {
+        Buy {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+        Sell {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+
 ## Pump Fun Trades in Real-Time
 
 The below query gets real-time information whenever there's a new trade on the Pump.fun including program method called , buy and sell details, details of the currencies involved, and the transaction specifics like signature.
