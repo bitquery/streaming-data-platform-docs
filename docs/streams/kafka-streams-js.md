@@ -46,7 +46,7 @@ const kafka = new Kafka({
   brokers: [
     "kfk0.bitquery.io:9093",
     "kfk1.bitquery.io:9093",
-    "kfk2.bitquery.io:9093",
+    "kfk2.bitquery.io:9093"
   ],
   ssl: {
     rejectUnauthorized: false,
@@ -57,8 +57,8 @@ const kafka = new Kafka({
   sasl: {
     mechanism: "scram-sha-512",
     username: "<YOUR USERNAME>",
-    password: "<YOUR PASSWORD>",
-  },
+    password: "<YOUR PASSWORD>"
+  }
 });
 ```
 
