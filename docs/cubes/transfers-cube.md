@@ -1,8 +1,4 @@
-# Transfers
-
-Our Transfer dataset contains all asset (token/NFT/coin) transfers.
-
-### Transfer Cube
+# Transfer Cube
 
 The Transfer cube provides details on asset transfers, blocks, contract calls, fees, event logs, receipts, transaction details, and transaction status.
 
