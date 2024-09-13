@@ -49,7 +49,10 @@ const kafka = new Kafka({
     "kfk2.bitquery.io:9093",
   ],
   ssl: {
-    ca: [fs.readFileSync('server.cer.pem', 'utf-8')]
+    rejectUnauthorized: false,
+    ca: [fs.readFileSync('server.cer.pem', 'utf-8')],
+    key: fs.readFileSync('client.key.pem', 'utf-8'),
+    cert: fs.readFileSync('client.cer.pem', 'utf-8')
   },
   sasl: {
     mechanism: "scram-sha-512",
@@ -62,31 +65,8 @@ const kafka = new Kafka({
 - **clientId**: Identifies the Kafka client. This is anonymized in the documentation for security purposes.
 - **brokers**: Kafka broker addresses that the client connects to.
 - **ssl/sasl**: SSL/SASL configuration to secure and authenticate communication between the client and brokers.
-- **server.cer.pem** is a certificate file, it must contain the following content:
+- **server.cer.pem**, **client.key.pem** and **client.cer.pem** are files that you receive from our support team
 
-```
------BEGIN CERTIFICATE-----
-MIIDdTCCAl0CFD9T3wqZLLgQ052O7CmOYn/ittw8MA0GCSqGSIb3DQEBCwUAMHcx
-CzAJBgNVBAYTAlVTMQswCQYDVQQIDAJOWTERMA8GA1UECgwIQml0cXVlcnkxDDAK
-BgNVBAsMA09QUzEYMBYGA1UEAwwPcnBrLmJpdHF1ZXJ5LmlvMSAwHgYJKoZIhvcN
-AQkBFhFoZWxsb0BiaXRxdWVyeS5pbzAeFw0yNDA0MjUxMjEwMjdaFw0zNDA0MjMx
-MjEwMjdaMHcxCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJOWTERMA8GA1UECgwIQml0
-cXVlcnkxDDAKBgNVBAsMA09QUzEYMBYGA1UEAwwPcnBrLmJpdHF1ZXJ5LmlvMSAw
-HgYJKoZIhvcNAQkBFhFoZWxsb0BiaXRxdWVyeS5pbzCCASIwDQYJKoZIhvcNAQEB
-BQADggEPADCCAQoCggEBAJS4hjb9/PijNgqJbF4vG9hs4n22vVMk4cjvN5CDB06P
-+8Zo4lNIO0Ts2CFmkRDTNpTTHzwVoi5/G4OCSyXq2y7/09ucSksZ1gWnRpNeYWFF
-Oqw2K0nJ/0b/IlmGeCUuCVXdEUyyWTOu4LZ9fUYsq7GG4Vwt4qBeD6JPG48nwpKr
-IiWtZKEPPilkiQrllnj+/fcbe1PmXy6bgGTpMN9WkOd1/iE55G/n8FdTUy7hm2FL
-lcCSpZMQJ8rvjvEFH/mvVjnipLMWpFBCi9yrdyhaueS4XQiCXQRjIvNglC3eYDGe
-YaTulgWDGw0LHpAra9VQ+JlfD28OVnn1oai1nC9dfIECAwEAATANBgkqhkiG9w0B
-AQsFAAOCAQEAI8jWaZ4qjMevFjGKZVkjqngr8Y9yGExIZ6JGsK30LyrCpGTx06Hn
-fkVdijylPuWQY2abbnIv2F6FSfypbgAAMdcmCWfFHESSJWGl49SCrV5Ka12NhPdK
-gIZZ7tfbQ2z0ruEo84+4EwP/dAsub3agR7tkC7c9WzIM+J5TuBQxwaFrqU1gW0OU
-7CFu8X57VC4uUBgC4tP5/aMu7vTncXYSNm8PwSKe5Zxd2SAJdNfnvfyhm+45RJ+f
-V2w9W0bP6THKUNgk5+N0D+jGhWdvgrOEAKbUKD2l7ZrNyBbCPU6+uGf/VDkMbGcr
-TSW29hzb5zJX69VimgKabmrZjduf6cYrzA==
------END CERTIFICATE-----
-```
 
 ### Kafka Consumer Setup
 
