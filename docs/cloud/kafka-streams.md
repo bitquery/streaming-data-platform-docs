@@ -29,6 +29,71 @@ The complete code is available [here](https://github.com/bitquery/kafka-consumer
 
 ---
 
+
+## Kafka Streaming Concepts
+
+### Pro and Cons
+
+Kafka provides faster and more reliable streams comparing to GraphQL subscriptions due to the following advantages:
+
+1. It has lower lattency due to the shorter data pipeline, as GraphQL subscriptions involve custom databases and additional logic to process, filter and format the data
+2. Better reliabilty of the connection protocol compared to WebSocket interface, better optimised for persistent connections
+3. Messages from Kafka topic can be read from the latest offset, it is possible to create consumers that have all messages without gaps and interuptions
+4. Scalability is better as multiple consumers may split the load to consume one topic, automaticlly redistributing load on them
+
+There are some disadvantages however compared to GraphQL subscriptions:
+
+1. There is no way to consume Kafka streams in browser. You can only use it only on server side.
+2. It is not possible to pre-filter or re-format messages on Kafka streams, as schema is pre-defined, and you need to make all post-processing in your code. Some calculations, as usd vlue of trade have to be executed on client side as well
+3. IDE does not support Kafka streams yet, debugging the code have to be done on consumer side
+
+Kafka streams contains same set of data as GraphQL subscriptions, and the decision which one to use dependent more on your application type.
+Consider the following factors when selecting which technology to use.
+
+### Consider using GraphQL if:
+
+* You are building a prototype and the speed of development is a primary factor for you. Integrating GraphQL is easier, IDE helps to de-bug queries and see the data you receive in application;
+* Your application uses archive and real-time data altogether. GraphQL has a unified interface to query and subscribe the data streams, that makes such application easier to build and maintain;
+* Your application provides different data on web pages, for example show price diagrams for trading. Then GraphQL makes simpler to filter the data and make queries based on page content;
+* There is no server side for your application, or it is minimal. Then GraphQL can be integrated directlty to JS client code;
+
+### Consider using Kafka if:
+
+* Latency is the most important factor and you building fast scalable application in cloud or on dedicated servers;
+* It is not acceptable to lose any single message from the stream, you need persistent reliability;
+* You have a complex calculations, filtering or formatting of the data that GraphQL does not deliver. Then instead of consuming unfiltered stream from GraphQL consider switch to Kafka.
+
+This decision sometimes not straightforward, consult our sales and support team, we will help you find optimal solution.
+
+### Important Notes about Kafka Streams
+
+* Stream is not filtered, it contains all the messages with a compleet data for every topic. It means you need to have a good throughput network, fast server and code to efficently consume and parse it;
+* Granularity of data message is different in topics, depending on the nature of the data. Topic that 
+* It is **not** guranteed that the message will come in sequence 
+
+## Consuming Messages
+
+Your application must implement the code:
+
+* Connect to Kafka server;
+* Subscribe to particular topic(s);
+* Read and parse messages;
+
+### Documentation References
+
+Kafka has a lot of documentation in public access, generic and programming-language-specific.
+
+Some useful links that you may find useful are:
+
+* [General Intro to Kafka and Concepts](https://docs.confluent.io/kafka/introduction.html)
+* [Javascript Guild Connecting To Kafka using KafkaJS](https://kafka.js.org/)
+* [Golang Client Library](https://github.com/confluentinc/confluent-kafka-go)
+* [Python Client Library](https://github.com/confluentinc/confluent-kafka-python)
+
+In addition, you may need a reference to Bitquery schema for messages: 
+
+* [Schemas for Streaming](https://github.com/bitquery/streaming_protobuf)
+
 ## Prerequisites
 
 Ensure that you have the following components in place before running the code:
