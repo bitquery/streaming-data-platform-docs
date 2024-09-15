@@ -131,8 +131,7 @@ Your consumer will read messages from the topic, and you will be able to parse t
 to subscribe to topic, you will read the last message, or some message on the past that is the net message to read.
 If you do not read messages fast enough, the lag will be accumulated, and the latency will grow.
 
-Message in topic is JSON, compressed using lz4 method. You first need to decompress using any of lz4 library, and then parse
-using JSON parser. This code is specific for prgramming language that you use, but should be very simple.
+Message in topic is JSON. Parse json code is specific for prgramming language that you use, but should be very simple.
 
 Message contains the list of objects on the top level. Structure of objects corresponds to the topic that you consume.
 General schema is described in https://github.com/bitquery/streaming_protobuf. The top level element depends on which stream
