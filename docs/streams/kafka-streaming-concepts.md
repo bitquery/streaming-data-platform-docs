@@ -10,13 +10,13 @@ Kafka provides faster and more reliable streams comparing to GraphQL subscriptio
 
 1. It has lower lattency due to the shorter data pipeline, as GraphQL subscriptions involve custom databases and additional logic to process, filter and format the data
 2. Better reliabilty of the connection protocol compared to WebSocket interface, better optimised for persistent connections
-3. Messages from Kafka topic can be read from the latest offset, it is possible to create consumers that have all messages without gaps and interuptions
+3. Messages from Kafka topic can be read from the latest offset, it is possible to create consumers that have all messages without gaps and interruption.
 4. Scalability is better as multiple consumers may split the load to consume one topic, automaticlly redistributing load on them
 
 There are some disadvantages however compared to GraphQL subscriptions:
 
 1. There is no way to consume Kafka streams in browser. You can only use it only on server side.
-2. It is not possible to pre-filter or re-format messages on Kafka streams, as schema is pre-defined, and you need to make all post-processing in your code. Some calculations, as usd vlue of trade have to be executed on client side as well
+2. It is not possible to pre-filter or re-format messages on Kafka streams, as schema is pre-defined, and you need to make all post-processing in your code. Some calculations, as usd value of trade have to be executed on client side as well
 3. IDE does not support Kafka streams yet, debugging the code have to be done on consumer side
 
 Kafka streams contains same set of data as GraphQL subscriptions, and the decision which one to use dependent more on your application type.
@@ -39,7 +39,7 @@ This decision sometimes not straightforward, consult our sales and support team,
 
 ### Important Notes about Kafka Streams
 
-- Stream is not filtered, it contains all the messages with a compleet data for every topic. It means you need to have a good throughput network, fast server and code to efficently consume and parse it;
+- Stream is not filtered, it contains all the messages with a complete data for every topic. It means you need to have a good throughput network, fast server and code to efficently consume and parse it;
 - Granularity of data message is different in topics, depending on the nature of the data. Topic that
 - It is **not** guaranteed that the message will come in sequence of the block number, time or any other attribute.
 - Messages in topic **may have** duplicates. If this makes a problem, your code must have a storage or the cache to remember which messages are already processed to avoid double processing.
@@ -59,7 +59,7 @@ You need the following to connect:
 
 1. server list for connection is "kfk0.bitquery.io:9093,kfk1.bitquery.io:9093,kfk2.bitquery.io:9093"
 2. username and password for SASL over SSL authentication, that you will receive from our team
-3. certificate files for SSL ( client.key.pem, client.cer.pem, server.cer.pem ), you receive them from support team
+3. certificate files for SSL ( client.key.pem, client.cer.pem, server.cer.pem ), you receive them from support team.
 
 Example of connection config looks as:
 
@@ -76,8 +76,6 @@ sasl_conf = {
      'ssl.endpoint.identification.algorithm': 'none'
 }
 ```
-
-
 
 ### Subscribe to particular topic(s)
 
