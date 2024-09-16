@@ -143,7 +143,7 @@ of which blockchain you use. For example, for DEX Trades on Solana you will have
 
 Kafka has a lot of documentation in public access, generic and programming-language-specific.
 
-Some useful links that you may find useful are:
+Some links that you may find useful are:
 
 - [General Intro to Kafka and Concepts](https://docs.confluent.io/kafka/introduction.html)
 - [Javascript Guild Connecting To Kafka using KafkaJS](https://kafka.js.org/)
