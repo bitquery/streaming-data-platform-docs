@@ -8,7 +8,7 @@ sidebar_position: 3
 
 This guide explains how to implement a Python Kafka consumer to receive [onchain data streams from Bitquery](https://bitquery.io/products/streaming) in real-time using the Confluent Kafka library. The consumer is secured with SSL and uses certificates for authentication, subscribing to a Kafka topic and logging messages to the console.
 
-The complete code is available [here](https://github.com/bitquery/kafka-consumer-example-python).
+The complete code is available [here](https://github.com/bitquery/kafka-consumer-example).
 
 ### Prerequisites
 
@@ -54,7 +54,7 @@ conf = {
     'sasl.mechanisms': 'SCRAM-SHA-512',
     'sasl.username': 'username',
     'sasl.password': 'passwrod',
-    'auto.offset.reset': 'earliest'
+   'auto.offset.reset': 'latest'
 }
 ```
 
