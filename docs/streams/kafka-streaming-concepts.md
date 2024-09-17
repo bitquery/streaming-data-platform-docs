@@ -45,6 +45,18 @@ This decision sometimes not straightforward, consult our sales and support team,
 - Messages in topic **may have** duplicates. If this makes a problem, your code must have a storage or the cache to remember which messages are already processed to avoid double processing.
 - Large messages can be separated on smaller ones, as Kafka does not allow pass more than 1 Mbyte in one message. For example, first 1200 transaction may come in one message, and the remaining 1000 will follow in another.
 
+### Kafka Streams Lattency 
+
+Topics for the same blockchain are not equal by lattency. If you have requirements on lattency, consider to select the proper stream for your application:
+
+1. Broadcasted topics are available for most blockchains. They can be faster, as the transactions are not waiting till include and commit the block in the chain
+2. Streams are chained while they are parsing, the closer the topic to the original blockchain node, the less is the lattency. Consider selecting the closest topic that you can effectively parse. Every transformation introduces 100-1000 msec latency in the overall topic delay.
+
+The diagram shows the data pipeline of the streams on the way to KAFKA topics. Broadcasted and committed transaction
+datapipelines are identical:
+
+![Topic Data Pipeline](/img/streams/latency.png)
+
 ## Consuming Messages
 
 Your application must implement the code:
