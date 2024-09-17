@@ -86,6 +86,50 @@ if err != nil {
     os.Exit(1)
 }
 ```
+### Subscribing and Polling
+
+The consumer subscribes to the topic and polls for new messages. Messages are processed in a loop, and the program listens for system signals to gracefully shut down the consumer.
+
+```go
+// Set up a channel to handle shutdown
+sigchan := make(chan os.Signal, 1)
+signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
+
+// Poll messages and process them
+run := true
+for run {
+    select {
+    case sig := <-sigchan:
+        fmt.Printf("Caught signal %v: terminating\n", sig)
+        run = false
+    default:
+        ev := consumer.Poll(100)
+        if ev == nil {
+            continue
+        }
+
+        switch e := ev.(type) {
+        case *kafka.Message:
+            processMessage(e)
+
+        case kafka.Error:
+            fmt.Printf("Error: %v\n", e)
+            if e.Code() == kafka.ErrAllBrokersDown {
+                run = false
+            }
+        default:
+            fmt.Printf("Ignored %v\n", e)
+        }
+    }
+}
+
+// Close down consumer
+consumer.Close()
+```
+
+- **Signal Handling**: The program listens for OS signals (like `SIGINT` or `SIGTERM`) and gracefully shuts down the consumer when interrupted.
+- **Polling**: The Kafka consumer polls for new messages every 100ms and processes them using the `processMessage` function.
+- **Error Handling**: Kafka errors are caught and logged, and the consumer closes down if all brokers are down.
 
 ### Message Processing
 
@@ -131,50 +175,7 @@ func processMessage(msg *kafka.Message) {
 - **Pretty Print**: The JSON is formatted using `MarshalIndent` for easier readability.
 - **Logging**: The topic, partition, offset, key, and message value are logged.
 
-### Subscribing and Polling
 
-The consumer subscribes to the topic and polls for new messages. Messages are processed in a loop, and the program listens for system signals to gracefully shut down the consumer.
-
-```go
-// Set up a channel to handle shutdown
-sigchan := make(chan os.Signal, 1)
-signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
-
-// Poll messages and process them
-run := true
-for run {
-    select {
-    case sig := <-sigchan:
-        fmt.Printf("Caught signal %v: terminating\n", sig)
-        run = false
-    default:
-        ev := consumer.Poll(100)
-        if ev == nil {
-            continue
-        }
-
-        switch e := ev.(type) {
-        case *kafka.Message:
-            processMessage(e)
-
-        case kafka.Error:
-            fmt.Printf("Error: %v\n", e)
-            if e.Code() == kafka.ErrAllBrokersDown {
-                run = false
-            }
-        default:
-            fmt.Printf("Ignored %v\n", e)
-        }
-    }
-}
-
-// Close down consumer
-consumer.Close()
-```
-
-- **Signal Handling**: The program listens for OS signals (like `SIGINT` or `SIGTERM`) and gracefully shuts down the consumer when interrupted.
-- **Polling**: The Kafka consumer polls for new messages every 100ms and processes them using the `processMessage` function.
-- **Error Handling**: Kafka errors are caught and logged, and the consumer closes down if all brokers are down.
 
 ### Running the Go Kafka Consumer
 
