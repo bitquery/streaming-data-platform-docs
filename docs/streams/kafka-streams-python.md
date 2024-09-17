@@ -54,7 +54,7 @@ conf = {
     'sasl.mechanisms': 'SCRAM-SHA-512',
     'sasl.username': 'username',
     'sasl.password': 'passwrod',
-   'auto.offset.reset': 'latest'
+    'auto.offset.reset': 'latest'
 }
 ```
 
