@@ -1,4 +1,8 @@
-# EVM Builder Terms Explaination
+---
+sidebar_position: 1
+---
+
+# EVM Builder Terms Explanation
 
 ### Dataset Parameters
 

@@ -1,4 +1,8 @@
-# Solana Builder Terms Explaination
+---
+sidebar_position: 2
+---
+
+# Solana Builder Terms Explanation
 
 ### Dataset Parameters
 
