@@ -28,6 +28,36 @@ If multiple sorting conditions are used, they applied in the order you define th
 
 First results will be sorted by Transaction_Value and after that by Block_Number.
 
+
+Another way to sort on multiple condition is following 
+
+```
+{
+  EVM {
+    Events(
+      orderBy: [{ascending: Transaction_Index},
+        {ascending: Call_Index}, 
+        {ascending: Log_Index}]
+    ) {
+      Transaction {
+        Index
+      }
+      Call {
+        Index
+      }
+      Log {
+        Index
+        Signature {
+          Signature
+        }
+      }
+    }
+  }
+}
+```
+
+
+
 :::note
 this is not the same as:
 
