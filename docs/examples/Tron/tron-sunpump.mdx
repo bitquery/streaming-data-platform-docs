@@ -67,6 +67,137 @@ subscription MyQuery {
 }
 ```
 
+
+
+## Latest Trades on Sunpump Tron
+
+To subscribe to latest Sunpump trades you can use [the following stream](https://ide.bitquery.io/Sunpump-trades).
+
+```
+subscription {
+  Tron {
+    DEXTrades(where: {Trade: {Dex: {ProtocolFamily: {is: "SunPump"}}}}) {
+      Transaction {
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Amount
+          AmountInUSD
+          Currency {
+            SmartContract
+            Symbol
+            Name
+          }
+        }
+        Sell {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Amount
+          AmountInUSD
+          Currency {
+            SmartContract
+            Symbol
+            Name
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Sunpump Trades in mempool
+
+We simulate transactions in mempool, therefore you can also get trades directly from mempool using [following stream](https://ide.bitquery.io/Sunpump-trades-mempool).
+
+```
+subscription {
+  Tron (mempool:true) {
+    DEXTrades(where: {Trade: {Dex: {ProtocolFamily: {is: "SunPump"}}}}) {
+      Transaction {
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Amount
+          AmountInUSD
+          Currency {
+            SmartContract
+            Symbol
+            Name
+          }
+        }
+        Sell {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Amount
+          AmountInUSD
+          Currency {
+            SmartContract
+            Symbol
+            Name
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## DEX Trades for specific token on SunPump
+
+You can also get trades for specific token using DEXTradeByTokens API. Here is [an example](https://ide.bitquery.io/Sunpump-trades-by-token).
+
+To learn the difference between DEXTrades and DEXTradeByTokens API, read [this](https://docs.bitquery.io/docs/cubes/dextrades/) and [this](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/) doc.
+
+```
+{
+  Tron {
+    DEXTradeByTokens(
+      where: {Trade: {Side: {Type: {is: buy}}, Currency: {SmartContract: {is: "TN7DUvYaAf9RfZiYjup7KvvC9bJDRH48vj"}}}}
+    ) {
+      Trade {
+        Amount
+        AmountInUSD
+        Buyer
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        Price
+        PriceInUSD
+        Side {
+          Amount
+          AmountInUSD
+          Buyer
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          Type
+        }
+      }
+    }
+  }
+}
+```
+
+
 ## Latest Buy events on SunPump Tron
 
 You can use following stream to get latest buys on Sunpump. You can try [this stream on IDE](https://ide.bitquery.io/latest-Buy-on-SunPump).
