@@ -112,6 +112,427 @@ subscription {
 
 ```
 
+## Get Latest Trades of a token
+
+This query will return information about the most recent trades executed for this token `59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN` on Solana's DEX platforms.
+You can find the query [here](https://ide.bitquery.io/latest-trades-of-a-token_1)
+
+```
+query LatestTrades($token: String, $base: String) {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {MintAddress: {is: $base}}}, Currency: {MintAddress: {is: $token}}, Price: {gt: 0}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Block {
+        allTime: Time
+      }
+      Trade {
+        Dex {
+          ProgramAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        Account {
+          Owner
+        }
+        Side {
+          Type
+          Account {
+            Address
+            Owner
+          }
+        }
+        Price
+        Amount
+        Side {
+          Currency {
+            Symbol
+            MintAddress
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+{
+  "token": "59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN",
+  "base": "So11111111111111111111111111111111111111112"
+}
+```
+
+![image](https://github.com/user-attachments/assets/f076d3d5-b40e-4b84-b0a0-2603db456bcc)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_latest_trades).
+
+## Top Traders of a token
+
+This query will give you top traders for this token `59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN` on Solana's DEX platforms.
+You can find the query [here](https://ide.bitquery.io/top-traders-of-a-token)
+
+```
+query TopTraders($token: String, $base: String) {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {MintAddress: {is: $token}}, Side: {Amount: {gt: "0"}, Currency: {MintAddress: {is: $base}}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Trade {
+        Account {
+          Owner
+        }
+        Dex {
+          ProgramAddress
+          ProtocolFamily
+          ProtocolName
+        }
+      }
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+{
+  "token": "59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN",
+  "base": "So11111111111111111111111111111111111111112"
+}
+```
+
+![image](https://github.com/user-attachments/assets/d2f6cc5d-b6ed-4ca2-b6aa-0b15f10d378a)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_top_traders).
+
+## Top Traders of a token
+
+This query will give you top traders on Solana network.
+You can find the query [here](https://ide.bitquery.io/top-traders-on-Solana)
+
+```
+query DexMarkets {
+  Solana {
+    DEXTradeByTokens(orderBy: {descendingByField: "trades"}, limit: {count: 100}) {
+      Trade {
+        Account {
+          Owner
+        }
+      }
+      trades: count(if: {Trade: {Side: {Type: {is: buy}}}})
+      tokens: uniq(of: Trade_Currency_MintAddress)
+    }
+  }
+}
+```
+
+![image](https://github.com/user-attachments/assets/eb8d5f3b-80c2-4aa4-a2e1-204d979025c0)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana/trader).
+
+## Get DEX Markets for a Token
+
+This query will give you Solana DEXs on which the token `59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN` is getting traded.
+You can find the query [here](https://ide.bitquery.io/DEX-Markets-for-a-token)
+
+```
+query ($token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "amount"}
+      where: {Trade: {Currency: {MintAddress: {is: $token}}, Side: {Amount: {gt: "0"}, Currency: {MintAddress: {is: $base}}}}, Transaction: {Result: {Success: true}}, Block: {Time: {after: $time_3h_ago}}}
+    ) {
+      Trade {
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        price_last: PriceInUSD(maximum: Block_Slot)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: $time_10min_ago}}}
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: $time_1h_ago}}}
+        )
+        price_3h_ago: PriceInUSD(minimum: Block_Slot)
+      }
+      amount: sum(of: Trade_Side_Amount)
+      pairs: uniq(of: Trade_Side_Currency_MintAddress)
+      trades: count
+    }
+  }
+}
+{
+  "token": "59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN",
+  "base": "So11111111111111111111111111111111111111112",
+  "time_10min_ago": "2024-09-19T10:45:46Z",
+  "time_1h_ago": "2024-09-19T09:55:46Z",
+  "time_3h_ago": "2024-09-19T07:55:46Z"
+}
+```
+
+![image](https://github.com/user-attachments/assets/c7d15b15-d0b4-4fcd-9fda-c7cfc5a39732)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_dex_list).
+
+## Get Top Bought Tokens on Solana
+
+This query will give you most bought Solana Tokens on Raydium.
+You can find the query [here](https://ide.bitquery.io/Top-Bought-Solana-Tokens)
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "buy"}
+      where: {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]}}, Dex: {ProtocolFamily: {is: "Raydium"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+      }
+      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
+      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+    }
+  }
+}
+```
+
+![image](https://github.com/user-attachments/assets/20872a56-f02a-4323-889a-605ff7947a13)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana).
+
+## Get Top Sold Tokens on Solana
+
+This query will give you most sold Solana Tokens on Raydium.
+You can find the query [here](https://ide.bitquery.io/Top-sold-Solana-Tokens)
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "sell"}
+      where: {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]}}, Dex: {ProtocolFamily: {is: "Raydium"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+      }
+      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
+      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+    }
+  }
+}
+```
+
+![image](https://github.com/user-attachments/assets/216bfb28-d365-4a9e-b280-ae19562d7600)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana).
+
+## Get Top Traded Pairs
+
+This query will give you top traded pairs data.
+You can find the query [here](https://ide.bitquery.io/top-trading-pairs)
+
+```
+query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
+  Solana {
+    DEXTradeByTokens(
+      where: {Transaction: {Result: {Success: true}}, Block: {Time: {after: $time_3h_ago}}, any: [{Trade: {Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}}, {Trade: {Currency: {MintAddress: {not: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}, {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]}}, Side: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]}}}}}]}
+      orderBy: {descendingByField: "usd"}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            MintAddress
+          }
+        }
+        price_last: PriceInUSD(maximum: Block_Slot)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: $time_10min_ago}}}
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: $time_1h_ago}}}
+        )
+        price_3h_ago: PriceInUSD(minimum: Block_Slot)
+      }
+      dexes: uniq(of: Trade_Dex_ProgramAddress)
+      amount: sum(of: Trade_Side_Amount)
+      usd: sum(of: Trade_Side_AmountInUSD)
+      traders: uniq(of: Trade_Account_Owner)
+      count(selectWhere: {ge: "100"})
+    }
+  }
+}
+{
+  "time_10min_ago": "2024-09-19T12:26:17Z",
+  "time_1h_ago": "2024-09-19T11:36:17Z",
+  "time_3h_ago": "2024-09-19T09:36:17Z"
+}
+```
+
+![image](https://github.com/user-attachments/assets/4678a3a8-f4a2-476a-92ae-91e3462de2df)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair).
+
+## Get Top DEXs information
+
+This query will give you top DEXs info.
+You can find the query [here](https://ide.bitquery.io/top-dexs)
+
+```
+query DexMarkets {
+  Solana {
+    DEXTradeByTokens {
+      Trade {
+        Dex {
+          ProtocolFamily
+        }
+      }
+      traders: uniq(of: Trade_Account_Owner)
+      count(if: {Trade: {Side: {Type: {is: buy}}}})
+    }
+    DEXPools {
+      Pool {
+        Dex {
+          ProtocolFamily
+        }
+      }
+      pools: uniq(of: Pool_Market_MarketAddress)
+    }
+  }
+}
+```
+
+![image](https://github.com/user-attachments/assets/09caf85d-6930-4c24-91d1-7f40f878287e)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana/dex_market).
+
+## Get All Traded Pairs Info of a Token
+
+This query will give you the information on all the traded pairs of a particular token `EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm`.
+You can find the query [here](https://ide.bitquery.io/traded-pairs-of-a-token)
+
+```
+query ($token: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "usd"}
+      where: {Trade: {Currency: {MintAddress: {is: $token}}}, Transaction: {Result: {Success: true}}, Block: {Time: {after: $time_3h_ago}}}
+      limit: {count: 200}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          MintAddress
+          Fungible
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            MintAddress
+          }
+        }
+        price_usd: PriceInUSD(maximum: Block_Slot)
+        price_last: Price(maximum: Block_Slot)
+        price_10min_ago: Price(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: $time_10min_ago}}}
+        )
+        price_1h_ago: Price(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: $time_1h_ago}}}
+        )
+        price_3h_ago: PriceInUSD(minimum: Block_Slot)
+      }
+      usd: sum(of: Trade_AmountInUSD)
+      count
+    }
+  }
+}
+{
+  "token": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+  "time_10min_ago": "2024-09-19T12:02:23Z",
+  "time_1h_ago": "2024-09-19T11:12:23Z",
+  "time_3h_ago": "2024-09-19T09:12:23Z"
+}
+```
+
+![image](https://github.com/user-attachments/assets/ba2381ce-422d-4120-a873-61fbc4f4124c)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm).
+
+## Get All Liquidity Pools info for a particular token
+
+This query will give you the information on all the liquidity pools of a particular token `EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm`.
+You can find the query [here](https://ide.bitquery.io/get-all-the-liquidity-pools-info-for-a-particular-token_1)
+
+```
+query ($token: String) {
+  Solana {
+    DEXPools(
+      orderBy: {descendingByField: "Pool_Quote_PostAmountInUSD_maximum"}
+      where: {Pool: {Market: {BaseCurrency: {MintAddress: {is: $token}}}}}
+    ) {
+      Pool {
+        Market {
+          QuoteCurrency {
+            Symbol
+            Name
+            MintAddress
+          }
+          MarketAddress
+        }
+        Dex {
+          ProtocolFamily
+        }
+        Base {
+          PostAmount(maximum: Block_Slot)
+          PostAmountInUSD(maximum: Block_Slot)
+        }
+        Quote {
+          PostAmount(maximum: Block_Slot)
+          PostAmountInUSD(maximum: Block_Slot)
+        }
+      }
+    }
+  }
+}
+{
+  "token": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
+}
+```
+
+![image](https://github.com/user-attachments/assets/21882e2a-e769-4703-be56-15b7924b6318)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm#pools).
+
 ## Get all DEXes
 
 To get the list of all DEXes operating within the Solana ecosystem, use the following query.
@@ -334,6 +755,10 @@ You can run and test the [saved query here](https://ide.bitquery.io/Solana-OHLC-
 }
 ```
 
+![image](https://github.com/user-attachments/assets/1d5c2004-b8a5-4822-bda8-9f920dbf8715)
+
+Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/9Fv7n7HuA5EzjCRSvprBMx2Qhd1VL3hPEXKhTUKPm1Qh/So11111111111111111111111111111111111111112).
+
 ## Solana Real time prices from multiple Markets
 
 You can retrieve data from multiple Solana DEX markets using our APIs or streams.
@@ -367,12 +792,11 @@ subscription {
 
 When querying Solana DEXTradeByTokens, you can use pre-made aggregates to optimize performance. The `aggregates` flag provides three options to control the use of these aggregates:
 
--   **`aggregates: only`**: This option uses only the pre-made aggregates, which can significantly increase the speed of the response. 
--   **`aggregates: yes`**: This option uses both pre-made aggregates and individual transaction data. 
--   **`aggregates: no`**: This option does not use any pre-made aggregates.
+- **`aggregates: only`**: This option uses only the pre-made aggregates, which can significantly increase the speed of the response.
+- **`aggregates: yes`**: This option uses both pre-made aggregates and individual transaction data.
+- **`aggregates: no`**: This option does not use any pre-made aggregates.
 
 > When using the aggregates: only option, you need to include the mintaddress field in the response to ensure proper aggregation and filtering.
-
 
 ```
 
