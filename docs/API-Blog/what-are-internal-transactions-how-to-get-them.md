@@ -1,6 +1,6 @@
 # What are Internal Transactions & How to Get Them?
 
- In blockchain a transaction is the transfer of value between two participants, recorded on a digital ledger. Not all transactions involve the direct sending of funds from one wallet to another, some transactions occur within smart contracts. These transactions are known as internal transactions.
+In blockchain a transaction is the transfer of value between two participants, recorded on a digital ledger. Not all transactions involve the direct sending of funds from one wallet to another, some transactions occur within smart contracts. These transactions are known as internal transactions.
 
 Internal transactions are important in smart contract interactions, and having an understanding of how they work and how to trace them is essential for ensuring the transparency and security of smart contracts.
 
@@ -8,7 +8,7 @@ This article will explain what internal transactions are, how to trace them usin
 
 ## What are Internal Transactions?
 
-Internal transactions are different from regular transactions as they happen between smart contracts. These transactions are not visible on the blockchain as they occur when a smart contract calls another smart contract or sends funds within itself.
+Internal transactions are different from regular transactions as they happen between smart contracts. These transactions are not visible directly as they occur when a smart contract calls another smart contract or sends funds within itself.
 
 Some use cases of internal transactions are:
 
@@ -18,6 +18,34 @@ Some use cases of internal transactions are:
 - Fee Management: Internal transactions can also assist in fee management, allowing smart contracts to automatically deduct and transfer fees for services or transactions, thereby automating fee collection and distribution.
 
 The outcomes of internal transactions are recorded on the blockchain, but the transactions themselves are not directly traceable. Special tools and methods are required to track these outcomes.
+
+## What are Internal Transfers?
+
+Internal transfers occur as part of the execution of smart contract functions rather than through external transactions. There is no difference between tokens received via an internal transfer and those received through a standard token transfer. The transfer of funds is reflected in the account's overall balance.
+
+## Tracing Internal Transfer with APIs
+
+In this example we are querying all transfers happening as a part of this `0x9c78b80a02c882db9d3d9add2d98243e4aeadb035fe9aacf82d04d51092db7fc` transaction by using the `Transfers` cube and setting `Call-> Index` to greater than 0.
+Run the query [here](https://ide.bitquery.io/Get-internal-transfers-of-tx)
+
+```
+query MyQuery {
+  EVM(dataset: archive, network: bsc) {
+    Transfers(
+      where: {Call: {Index: {gt: 0}}, Transaction: {Hash: {is: "0x9c78b80a02c882db9d3d9add2d98243e4aeadb035fe9aacf82d04d51092db7fc"}}}
+    ) {
+      Transfer {
+        Amount
+        Currency {
+          Name
+        }
+        AmountInUSD
+      }
+    }
+  }
+}
+
+```
 
 ## Tracing Internal Transactions with APIs
 
@@ -67,6 +95,7 @@ Explaining the query data
 - The Calls all have different purposes based on the amount of Ether they transfer. For example, some transfer a small amount of Ether like 0.000380422043696798 ETH, while others transfer 0 ETH. This means some calls execute functions without transferring value or performing complex operations that require several steps.
 
 ### BNB
+
 ```
 query MyQuery {
   EVM(dataset: combined, network: bsc) {
@@ -87,6 +116,7 @@ query MyQuery {
 }
 
 ```
+
 [https://ide.bitquery.io/internal-tx-bnb](https://ide.bitquery.io/internal-tx-bnb)
 
 This query is aimed at analyzing the execution flow of a transaction, showing all the internal calls, their success, and the interactions between different addresses in the same transaction.
@@ -176,7 +206,6 @@ This is an example of an ETH transaction on the Bitquery Explorer using the trac
 ![](/img/ApplicationExamples/eth_tree.png)
 
 Below is a graphical view that shows how funds flow between different addresses
-
 
 ![](/img/ApplicationExamples/eth_trace.png)
 
