@@ -22,6 +22,7 @@ Ensure that you have the following components in place before running the code:
 
 ### Additional Files
 
+- Create a new Java Project
 - Download all the certificates and store them in the `src/main/resources/` folder:
   - `keystore.jks`: SSL keystore file
   - `clienttruststore.jks`: SSL truststore file
