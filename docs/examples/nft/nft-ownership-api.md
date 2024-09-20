@@ -167,7 +167,7 @@ Check past (churned) token holders of a NFT token [using following query](https:
           if: {Currency: {SmartContract: {is: "0x364c828ee171616a39897688a831c2499ad972ec"}}}
         )
         fistHoldingDate: Time(
-          maximum: Block_Time
+          minimum: Block_Time
           if: {Currency: {SmartContract: {is: "0x364c828ee171616a39897688a831c2499ad972ec"}}}
         )
       }
