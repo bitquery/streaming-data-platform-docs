@@ -144,3 +144,35 @@ query MyQuery {
 
 
 ```
+
+
+## Past (churned) holders of tokens
+
+Check past (churned) token holders of a NFT token [using following query](https://ide.bitquery.io/past-token-holder-of-a-token_1).
+
+
+```
+{
+  EVM(dataset: combined) {
+    BalanceUpdates(
+      limit: {count: 10}
+      where: {Currency: {Fungible: false, SmartContract: {is: "0x364c828ee171616a39897688a831c2499ad972ec"}}}
+    ) {
+      BalanceUpdate {
+        Address
+      }
+      Block {
+        lastHoldingDate: Time(
+          maximum: Block_Time
+          if: {Currency: {SmartContract: {is: "0x364c828ee171616a39897688a831c2499ad972ec"}}}
+        )
+        fistHoldingDate: Time(
+          maximum: Block_Time
+          if: {Currency: {SmartContract: {is: "0x364c828ee171616a39897688a831c2499ad972ec"}}}
+        )
+      }
+      sum(of: BalanceUpdate_Amount, selectWhere: {le: "0"})
+    }
+  }
+}
+```

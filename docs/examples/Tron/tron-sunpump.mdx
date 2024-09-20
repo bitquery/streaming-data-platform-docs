@@ -74,7 +74,7 @@ To subscribe to latest Sunpump trades you can use [the following stream](https:/
 ```
 subscription {
   Tron {
-    DEXTrades(where: {Trade: {Dex: {ProtocolFamily: {is: "SunPump"}}}}) {
+    DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "sun_pump_v1"}}}}) {
       Transaction {
         Hash
       }
@@ -111,14 +111,39 @@ subscription {
 }
 ```
 
-## Sunpump Trades in mempool
+## Get all Pairs in Virtual Liquidity Pool
+
+Sun Pump does not use a dedicated pool for each pair; instead, all liquidity is managed within a single contract.
+You can query the virtual liquidity pools directly by running the following query
+
+```
+query SunPumpTokenPools {
+  Tron {
+    DexPools: BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw}}}
+    ) {
+      totalLiquidity: sum(of: BalanceUpdate_Amount)
+      Currency {
+        SmartContract
+        Name
+        Symbol
+        Decimals
+      }
+    }
+  }
+}
+```
+
+Find the query [here](https://ide.bitquery.io/Sun-Pump-Virtual-Liquidity-Pools_1)
+
+## Sunpump Trades in Mempool
 
 We simulate transactions in mempool, therefore you can also get trades directly from mempool using [following stream](https://ide.bitquery.io/Sunpump-trades-mempool).
 
 ```
 subscription {
   Tron (mempool:true) {
-    DEXTrades(where: {Trade: {Dex: {ProtocolFamily: {is: "SunPump"}}}}) {
+    DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "sun_pump_v1"}}}}) {
       Transaction {
         Hash
       }
@@ -209,7 +234,7 @@ query TokenOHLC($token: String) {
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/sunpump/TMaQT6QWTaTxuorH7Aa898Gmt7ibJKc6Ti).
 
-## DEX Trades for specific token on SunPump
+## Latest Trades for specific token on SunPump
 
 You can also get trades for specific token using DEXTradeByTokens API. Here is [an example](https://ide.bitquery.io/trades-for-a-particular-sunpump-token).
 
