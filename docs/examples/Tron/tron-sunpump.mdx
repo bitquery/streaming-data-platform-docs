@@ -67,8 +67,6 @@ subscription MyQuery {
 }
 ```
 
-
-
 ## Latest Trades on Sunpump Tron
 
 To subscribe to latest Sunpump trades you can use [the following stream](https://ide.bitquery.io/Sunpump-trades).
@@ -112,6 +110,31 @@ subscription {
   }
 }
 ```
+
+## Get all Pairs in Virtual Liquidity Pool
+
+Sun Pump does not use a dedicated pool for each pair; instead, all liquidity is managed within a single contract.
+You can query the virtual liquidity pools directly by running the following query
+
+```
+query SunPumpTokenPools {
+  Tron {
+    DexPools: BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw}}}
+    ) {
+      totalLiquidity: sum(of: BalanceUpdate_Amount)
+      Currency {
+        SmartContract
+        Name
+        Symbol
+        Decimals
+      }
+    }
+  }
+}
+```
+
+Find the query [here](https://ide.bitquery.io/Sun-Pump-Virtual-Liquidity-Pools_1)
 
 ## Sunpump Trades in Mempool
 
@@ -197,7 +220,6 @@ To learn the difference between DEXTrades and DEXTradeByTokens API, read [this](
 }
 ```
 
-
 :::note
 
 Getting SunPump data using transactions API instead of Trades as shown in following examples.
@@ -207,7 +229,6 @@ Getting SunPump data using transactions API instead of Trades as shown in follow
 ## Latest Buy events on SunPump Tron
 
 You can use following stream to get latest buys on Sunpump. You can try [this stream on IDE](https://ide.bitquery.io/latest-Buy-on-SunPump).
-
 
 ```graphql
 subscription {
@@ -583,8 +604,6 @@ subscription{
 
 ```
 
-
 ## Video Tutorial on How to get Newly Created Tokens on Sun Pump
 
-
-<VideoPlayer url = "https://youtu.be/hgVeqSz0Mew" />
+<VideoPlayer url="https://youtu.be/hgVeqSz0Mew" />
