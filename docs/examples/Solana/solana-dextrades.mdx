@@ -308,6 +308,8 @@ You can find the query [here](https://ide.bitquery.io/Top-Bought-Solana-Tokens)
 }
 ```
 
+Arranged in the descending order of `bought - sold` on [DEXrabbit](https://dexrabbit.com/solana).
+
 ![image](https://github.com/user-attachments/assets/20872a56-f02a-4323-889a-605ff7947a13)
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana).
@@ -338,6 +340,8 @@ You can find the query [here](https://ide.bitquery.io/Top-sold-Solana-Tokens)
   }
 }
 ```
+
+Arranged in the descending order of `sold - bought` on [DEXrabbit](https://dexrabbit.com/solana).
 
 ![image](https://github.com/user-attachments/assets/216bfb28-d365-4a9e-b280-ae19562d7600)
 
@@ -487,51 +491,6 @@ query ($token: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_
 ![image](https://github.com/user-attachments/assets/ba2381ce-422d-4120-a873-61fbc4f4124c)
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm).
-
-## Get All Liquidity Pools info for a particular token
-
-This query will give you the information on all the liquidity pools of a particular token `EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm`.
-You can find the query [here](https://ide.bitquery.io/get-all-the-liquidity-pools-info-for-a-particular-token_1)
-
-```
-query ($token: String) {
-  Solana {
-    DEXPools(
-      orderBy: {descendingByField: "Pool_Quote_PostAmountInUSD_maximum"}
-      where: {Pool: {Market: {BaseCurrency: {MintAddress: {is: $token}}}}}
-    ) {
-      Pool {
-        Market {
-          QuoteCurrency {
-            Symbol
-            Name
-            MintAddress
-          }
-          MarketAddress
-        }
-        Dex {
-          ProtocolFamily
-        }
-        Base {
-          PostAmount(maximum: Block_Slot)
-          PostAmountInUSD(maximum: Block_Slot)
-        }
-        Quote {
-          PostAmount(maximum: Block_Slot)
-          PostAmountInUSD(maximum: Block_Slot)
-        }
-      }
-    }
-  }
-}
-{
-  "token": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
-}
-```
-
-![image](https://github.com/user-attachments/assets/21882e2a-e769-4703-be56-15b7924b6318)
-
-Check data here on [DEXrabbit](https://dexrabbit.com/solana/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm#pools).
 
 ## Get all DEXes
 
