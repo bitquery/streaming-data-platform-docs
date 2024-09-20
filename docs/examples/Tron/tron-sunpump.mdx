@@ -76,7 +76,7 @@ To subscribe to latest Sunpump trades you can use [the following stream](https:/
 ```
 subscription {
   Tron {
-    DEXTrades(where: {Trade: {Dex: {ProtocolFamily: {is: "SunPump"}}}}) {
+    DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "sun_pump_v1"}}}}) {
       Transaction {
         Hash
       }
@@ -113,14 +113,14 @@ subscription {
 }
 ```
 
-## Sunpump Trades in mempool
+## Sunpump Trades in Mempool
 
 We simulate transactions in mempool, therefore you can also get trades directly from mempool using [following stream](https://ide.bitquery.io/Sunpump-trades-mempool).
 
 ```
 subscription {
   Tron (mempool:true) {
-    DEXTrades(where: {Trade: {Dex: {ProtocolFamily: {is: "SunPump"}}}}) {
+    DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "sun_pump_v1"}}}}) {
       Transaction {
         Hash
       }
@@ -157,7 +157,7 @@ subscription {
 }
 ```
 
-## DEX Trades for specific token on SunPump
+## Latest Trades for specific token on SunPump
 
 You can also get trades for specific token using DEXTradeByTokens API. Here is [an example](https://ide.bitquery.io/Sunpump-trades-by-token).
 
