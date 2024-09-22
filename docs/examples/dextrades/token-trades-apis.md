@@ -348,42 +348,6 @@ query tradingView($network: evm_network, $token: String) {
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599).
 
-## Get OHLC data for a particular token pair
-
-This query will fetch you the OHLC of a token pair for the selected network.
-You can test the query [here](https://ide.bitquery.io/ohlc0_2).
-
-```
-query tradingViewPairs($network: evm_network, $token: String, $base: String) {
-  EVM(network: $network) {
-    DEXTradeByTokens(
-      orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}}}
-    ) {
-      Block {
-        Time(interval: {count: 5, in: minutes})
-      }
-      Trade {
-        open: PriceInUSD(minimum: Block_Number)
-        close: PriceInUSD(maximum: Block_Number)
-        max: PriceInUSD(maximum: Trade_PriceInUSD)
-        min: PriceInUSD(minimum: Trade_PriceInUSD)
-      }
-      volume: sum(of: Trade_Side_Amount)
-    }
-  }
-}
-{
-  "network": "eth",
-  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-  "base": "0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098"
-}
-```
-
-![image](https://github.com/user-attachments/assets/33af35df-4a9b-4ec8-a26b-d4770c2e7c96)
-
-You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098).
-
 ## Latest Trades of a Token pair
 
 This query will fetch you latest trades for a token pair for the selected network.
@@ -438,6 +402,42 @@ query LatestTrades($network: evm_network, $token: String, $base: String) {
 ![image](https://github.com/user-attachments/assets/b06fe6ff-e8ba-43f7-b9de-22666dde7bc6)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098#pair_latest_trades).
+
+## Get OHLC data for a particular token pair
+
+This query will fetch you the OHLC of a token pair for the selected network.
+You can test the query [here](https://ide.bitquery.io/ohlc0_2).
+
+```
+query tradingViewPairs($network: evm_network, $token: String, $base: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {ascendingByField: "Block_Time"}
+      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}}}
+    ) {
+      Block {
+        Time(interval: {count: 5, in: minutes})
+      }
+      Trade {
+        open: PriceInUSD(minimum: Block_Number)
+        close: PriceInUSD(maximum: Block_Number)
+        max: PriceInUSD(maximum: Trade_PriceInUSD)
+        min: PriceInUSD(minimum: Trade_PriceInUSD)
+      }
+      volume: sum(of: Trade_Side_Amount)
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "base": "0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098"
+}
+```
+
+![image](https://github.com/user-attachments/assets/33af35df-4a9b-4ec8-a26b-d4770c2e7c96)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098).
 
 ## Top Traders of a token pair
 
@@ -570,7 +570,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/eth).
 
 ## Top Bought tokens
 
-This query will fetch you top bought tokens for the selected network.
+This query will fetch you top bought tokens for the selected network. Arranged in descending order of `bought - sold`.
 You can test the query [here](https://ide.bitquery.io/top-bought_1).
 
 ```
@@ -600,7 +600,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/eth).
 
 ## Top Sold tokens
 
-This query will fetch you top sold tokens for the selected network.
+This query will fetch you top sold tokens for the selected network. Arranged in descending order of `sold - bought`.
 You can test the query [here](https://ide.bitquery.io/top-sold_1).
 
 ```
