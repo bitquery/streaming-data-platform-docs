@@ -130,6 +130,504 @@ DEXTrades API can give you historical trades. Let's see an example where we get 
 
 Open the above query on GraphQL IDE using this [link](https://ide.bitquery.io/token-trades-both-buy-sell-1-inch).
 
+## Latest Trades of a Token
+
+This query will fetch you latest trades for a token for the selected network.
+You can test the query [here](https://ide.bitquery.io/latest-trades_4).
+
+```
+query LatestTrades($network: evm_network, $token: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}, Price: {gt: 0}}}
+    ) {
+      Block {
+        allTime: Time
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        AmountInUSD
+        Buyer
+        Seller
+        Side {
+          Type
+          Buyer
+          Seller
+        }
+        Price
+        Amount
+        Side {
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+}
+```
+
+![image](https://github.com/user-attachments/assets/e4273aea-bf8d-41e4-80e8-b676005e0ce7)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#last_trades).
+
+## Top Traders of a token
+
+This query will fetch you top traders of a token for the selected network.
+You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token_1).
+
+```
+query topTraders($network: evm_network, $token: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}}}
+    ) {
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+      }
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+}
+```
+
+![image](https://github.com/user-attachments/assets/302c2be2-5ebe-4fa3-8fe4-c7e8f3bc6e23)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#top_traders).
+
+## Get all Trading Pairs data of a specific token
+
+This query will fetch you all the trading pairs of a token for the selected network.
+You can test the query [here](https://ide.bitquery.io/Get-all-trading-pairs-for-a-token).
+
+```
+query tokenTrades($network: evm_network, $token: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "usd"}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}}, Block: {Time: {after: $time_3h_ago}}}
+      limit: {count: 200}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+          Fungible
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+        price_usd: PriceInUSD(maximum: Block_Number)
+        price_last: Price(maximum: Block_Number)
+        price_10min_ago: Price(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_10min_ago}}}
+        )
+        price_1h_ago: Price(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_1h_ago}}}
+        )
+        price_3h_ago: PriceInUSD(minimum: Block_Number)
+      }
+      usd: sum(of: Trade_AmountInUSD)
+      count
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+  "time_10min_ago": "2024-09-22T12:39:26Z",
+  "time_1h_ago": "2024-09-22T11:49:26Z",
+  "time_3h_ago": "2024-09-22T09:49:26Z"
+}
+```
+
+![image](https://github.com/user-attachments/assets/dfe5ad4b-cb32-4a53-a52c-3985d438da2b)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#token_trades).
+
+## Get all DEXs where a specific token is listed
+
+This query will fetch you all the DEXs where a token is listed for the selected network.
+You can test the query [here](https://ide.bitquery.io/Get-all-the-dexs-a-specific-token-is-listed-on).
+
+```
+query tokenDexMarkets($network: evm_network, $token: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "amount"}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}}}
+    ) {
+      Trade {
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+      }
+      amount: sum(of: Trade_Amount)
+      pairs: uniq(of: Trade_Side_Currency_SmartContract)
+      trades: count
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+}
+```
+
+![image](https://github.com/user-attachments/assets/f0de1013-b634-4058-8423-78d7130fcc10)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#token_dex_list).
+
+## Get OHLC data of a token
+
+This query will fetch you the OHLC of a token for the selected network.
+You can test the query [here](https://ide.bitquery.io/ohlc_10_1).
+
+```
+query tradingView($network: evm_network, $token: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {ascendingByField: "Block_Time"}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}}}
+    ) {
+      Block {
+        Time(interval: {count: 5, in: minutes})
+      }
+      Trade {
+        open: PriceInUSD(minimum: Block_Number)
+        close: PriceInUSD(maximum: Block_Number)
+        max: PriceInUSD(maximum: Trade_PriceInUSD)
+        min: PriceInUSD(minimum: Trade_PriceInUSD)
+      }
+      volume: sum(of: Trade_Side_AmountInUSD, selectWhere: {gt: "0"})
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+}
+```
+
+![image](https://github.com/user-attachments/assets/561382a8-1f70-4bc3-aa22-76987427d56b)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599).
+
+## Get OHLC data for a particular token pair
+
+This query will fetch you the OHLC of a token pair for the selected network.
+You can test the query [here](https://ide.bitquery.io/ohlc0_2).
+
+```
+query tradingViewPairs($network: evm_network, $token: String, $base: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {ascendingByField: "Block_Time"}
+      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}}}
+    ) {
+      Block {
+        Time(interval: {count: 5, in: minutes})
+      }
+      Trade {
+        open: PriceInUSD(minimum: Block_Number)
+        close: PriceInUSD(maximum: Block_Number)
+        max: PriceInUSD(maximum: Trade_PriceInUSD)
+        min: PriceInUSD(minimum: Trade_PriceInUSD)
+      }
+      volume: sum(of: Trade_Side_Amount)
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "base": "0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098"
+}
+```
+
+![image](https://github.com/user-attachments/assets/33af35df-4a9b-4ec8-a26b-d4770c2e7c96)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098).
+
+## Latest Trades of a Token pair
+
+This query will fetch you latest trades for a token pair for the selected network.
+You can test the query [here](https://ide.bitquery.io/latest-trades-of-a-pair).
+
+```
+query LatestTrades($network: evm_network, $token: String, $base: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}, Price: {gt: 0}}}
+    ) {
+      Block {
+        allTime: Time
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        Currency {
+          Symbol
+          SmartContract
+          Name
+        }
+        Price
+        AmountInUSD
+        Amount
+        Side {
+          Type
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "base": "0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098"
+}
+```
+
+![image](https://github.com/user-attachments/assets/b06fe6ff-e8ba-43f7-b9de-22666dde7bc6)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098#pair_latest_trades).
+
+## Top Traders of a token pair
+
+This query will fetch you top traders of a token pair for the selected network.
+You can test the query [here](https://ide.bitquery.io/pair-top-traders).
+
+```
+query pairTopTraders($network: evm_network, $token: String, $base: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}, Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}}}
+    ) {
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+      }
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "base": "0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098"
+}
+```
+
+![image](https://github.com/user-attachments/assets/baaf62ee-9cbe-4d3b-bf53-c29a196a46bb)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098#pair_top_traders).
+
+## Get all DEXs where a specific token pair is listed
+
+This query will fetch you all the DEXs where a token pair is listed for the selected network.
+You can test the query [here](https://ide.bitquery.io/pair-dex-list_4).
+
+```
+query pairDexList($network: evm_network, $token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "amount"}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}, Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}}, Block: {Time: {after: $time_3h_ago}}}
+    ) {
+      Trade {
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        price_last: PriceInUSD(maximum: Block_Number)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_10min_ago}}}
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_1h_ago}}}
+        )
+        price_3h_ago: PriceInUSD(minimum: Block_Number)
+      }
+      amount: sum(of: Trade_Side_Amount)
+      pairs: uniq(of: Trade_Side_Currency_SmartContract)
+      trades: count
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "base": "0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098",
+  "time_10min_ago": "2024-09-22T13:10:42Z",
+  "time_1h_ago": "2024-09-22T12:20:42Z",
+  "time_3h_ago": "2024-09-22T10:20:42Z"
+}
+```
+
+![image](https://github.com/user-attachments/assets/a652f6de-1066-49b6-87f7-b05e481565bf)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098#pair_dex_list).
+
+## Top Gainers
+
+This query will fetch you top gainers for the selected network.
+You can test the query [here](https://ide.bitquery.io/top-gainers_2).
+
+```
+query ($network: evm_network) {
+  EVM(network: $network) {
+    DEXTradeByTokens(orderBy: {descendingByField: "usd"}, limit: {count: 100}) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+        price_last: PriceInUSD(maximum: Block_Number)
+        price_1h_ago: PriceInUSD(minimum: Block_Number)
+      }
+      dexes: uniq(of: Trade_Dex_OwnerAddress)
+      amount: sum(of: Trade_Side_Amount)
+      usd: sum(of: Trade_Side_AmountInUSD)
+      buyers: uniq(of: Trade_Buyer)
+      sellers: uniq(of: Trade_Seller)
+      count(selectWhere: {ge: "100"})
+    }
+  }
+}
+{
+  "network": "eth"
+}
+```
+
+![image](https://github.com/user-attachments/assets/9b501fe8-fb44-4796-a3d4-4084f230e626)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth).
+
+## Top Bought tokens
+
+This query will fetch you top bought tokens for the selected network.
+You can test the query [here](https://ide.bitquery.io/top-bought_1).
+
+```
+query timeDiagram($network: evm_network) {
+  EVM(network: $network) {
+    DEXTradeByTokens(orderBy: {descendingByField: "buy"}, limit: {count: 100}) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
+      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+    }
+  }
+}
+{
+  "network": "eth"
+}
+```
+
+![image](https://github.com/user-attachments/assets/ef9e8091-0460-4208-841e-4595269d5b84)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth).
+
+## Top Sold tokens
+
+This query will fetch you top sold tokens for the selected network.
+You can test the query [here](https://ide.bitquery.io/top-sold_1).
+
+```
+query timeDiagram($network: evm_network) {
+  EVM(network: $network) {
+    DEXTradeByTokens(orderBy: {descendingByField: "sell"}, limit: {count: 100}) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
+      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+    }
+  }
+}
+{
+  "network": "eth"
+}
+```
+
+![image](https://github.com/user-attachments/assets/2940bea4-b27f-4e74-afc4-1d433a45a31b)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth).
+
 ## Latest Token Trades
 
 To get the latest token trades you just need to sort by Block -> Time.

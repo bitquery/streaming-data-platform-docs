@@ -133,50 +133,6 @@ You can try the query [here](https://ide.bitquery.io/top-gainers_1).
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron).
 
-## Get Top loser tokens on Tron Network
-
-This query fetches you the top loser tokens on Tron network.
-You can try the query [here](https://ide.bitquery.io/top-losers).
-
-```
-{
-  Tron {
-    DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}}
-      orderBy: {ascendingByField: "usd"}
-      limit: {count: 100}
-    ) {
-      Trade {
-        Currency {
-          Symbol
-          Name
-          SmartContract
-        }
-        Side {
-          Currency {
-            Symbol
-            Name
-            SmartContract
-          }
-        }
-        price_last: PriceInUSD(maximum: Block_Number)
-        price_1h_ago: PriceInUSD(minimum: Block_Number)
-      }
-      dexes: uniq(of: Trade_Dex_OwnerAddress)
-      amount: sum(of: Trade_Side_Amount)
-      usd: sum(of: Trade_Side_AmountInUSD)
-      buyers: uniq(of: Trade_Buyer)
-      sellers: uniq(of: Trade_Seller)
-      count(selectWhere: {ge: "100"})
-    }
-  }
-}
-```
-
-![image](https://github.com/user-attachments/assets/67d6b503-1232-42d3-94da-05f1d3737b80)
-
-You can check the data here on [DEXrabbit](https://dexrabbit.com/tron).
-
 ## Get Top bought tokens on Tron Network
 
 This query fetches you the top bought tokens on Tron network.
