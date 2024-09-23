@@ -337,6 +337,63 @@ subscription {
 }
 ```
 
+
+## Sunpump Bonding Curve using TRX balance
+
+TRX balance in bonding curve based on dex trades. Calculated as balance = in_sum - out_sum
+
+Try [this query](
+https://ide.bitquery.io/SunPump-Bonding-Curve-TRX-Balance).
+
+```
+{
+  Tron {
+    in: DEXTrades(
+      where: {Trade: {Dex: {SmartContract: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}, Buy: {Currency: {SmartContract: {is: "TWnCdRpXc7RUPiM24T744rkux1t5VZt7TH"}}}}}
+    ) {
+      sum(of: Trade_Sell_Amount)
+    }
+    out: DEXTrades(
+      where: {Trade: {Dex: {SmartContract: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}, Sell: {Currency: {SmartContract: {is: "TWnCdRpXc7RUPiM24T744rkux1t5VZt7TH"}}}}}
+    ) {
+      sum(of: Trade_Buy_Amount)
+    }
+  }
+}
+```
+
+
+Historical TRX balance in bonding curve based on dex trades. Calculated as balance = in_sum - out_sum
+
+Use following [query](https://ide.bitquery.io/SunPump-Historical-Bonding-Curve-TRX-Balance).
+
+```
+{
+  Tron {
+    in: DEXTrades(
+      where: {Trade: {Dex: {SmartContract: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}, Buy: {Currency: {SmartContract: {is: "TWnCdRpXc7RUPiM24T744rkux1t5VZt7TH"}}}}}
+    ) {
+      Block {
+        Time(interval: {count: 5, in: minutes})
+        allTime: Time
+      }
+      sum(of: Trade_Sell_Amount)
+    }
+    out: DEXTrades(
+      where: {Trade: {Dex: {SmartContract: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}, Sell: {Currency: {SmartContract: {is: "TWnCdRpXc7RUPiM24T744rkux1t5VZt7TH"}}}}}
+    ) {
+      Block {
+        Time(interval: {count: 5, in: minutes})
+        allTime: Time
+      }
+      sum(of: Trade_Buy_Amount)
+    }
+  }
+}
+```
+
+
+
 ## Latest Sell events on SunPump Tron
 
 You can use following stream to get latest sells on Sunpump. You can try [this stream on IDE](https://ide.bitquery.io/sunpump-sell-event).
