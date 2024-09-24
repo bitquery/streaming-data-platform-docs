@@ -237,6 +237,72 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'How-To Guides',
+      items: [
+        {
+          type: 'category',
+          label: 'NFT Creator Portfolio',
+          items: [
+            
+            'usecases/nft-creator/gettingstarted',
+            'usecases/nft-creator/pages',
+            'usecases/nft-creator/app',
+            'usecases/nft-creator/components',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'P&L Calculator',
+          items: [
+            'usecases/p-l-product/overview',
+            
+            'usecases/p-l-product/balanceUpdates',
+            'usecases/p-l-product/price',
+            'usecases/p-l-product/pl',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'TradingView Advanced Charts',
+          items: [
+            
+            'usecases/tradingview-advanced-charts/getting-started',
+            'usecases/tradingview-advanced-charts/datafeed',
+            'usecases/tradingview-advanced-charts/getBars',
+            'usecases/tradingview-advanced-charts/advancedChart',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'TradingView',
+          items: [
+            'usecases/tradingview/tradingview',
+          ],
+        },
+        'usecases/Top-10-ethereum-tokens',
+        'usecases/arbitrum-sniper-bot',
+        'usecases/automated-trading-ethereum-volume-surge-bot',
+        'usecases/base-sniper-bot',
+        'usecases/crypto-dashboard',
+        'usecases/dapps',
+        'usecases/discord-bot',
+        'usecases/mempool-transaction-fee',
+        'usecases/monitoring-solana-blockchain-real-time-tutorial',
+        'usecases/nft-analytics',
+        'usecases/nft-scanner',
+        'usecases/real-time-historical-ethereum-price-excel-google-sheets',
+        'usecases/sandwitch-detection',
+        'usecases/solana-arbitrage-dashboard',
+        'usecases/solana-sniper-bot',
+        'usecases/streaming-moonshot-prices',
+        'usecases/telegram-bot',
+        'usecases/tokenholder-heatmap',
+        'usecases/trading-indicators',
+      ],
+    },
+    
+    {
+      type: 'category',
       label: 'Data in Cloud',
       items: [
         'cloud/appsync',
