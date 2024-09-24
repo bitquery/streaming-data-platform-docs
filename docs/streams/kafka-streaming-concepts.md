@@ -114,7 +114,7 @@ MESSAGE_TYPE is specific on blockchain, most blockchain has topics for:
 - dexpools - events on creation / chaing status of DEX pools
 - transactions - events, calls, transactions
 - transfers - token and coin transfers events
-- blocks - new blocks
+- raw - blocks or transactions directly from node
 
 Contact our support team for the topics that you can connect to for your specific needs.
 
