@@ -28,6 +28,27 @@ const sidebars = {
     ,
     {
       type: 'category',
+      label: 'Understanding Cubes',
+      items: [
+        {
+          type: 'category',
+          label: 'EVM Cube',
+          items: [
+            'cubes/EVM',
+            'cubes/balance-updates-cube',
+            'cubes/dextrades-dextradesbyTokens',
+            'cubes/dextrades',
+            'cubes/dextradesbyTokens',
+            'cubes/transaction-cube',
+            'cubes/transfers-cube',
+          ],
+        },
+        'cubes/solana',  // Solana cube remains separate
+      ],
+    },
+    
+    {
+      type: 'category',
       label: 'L1 Chains',
       items: [
         {
