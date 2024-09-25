@@ -25,11 +25,11 @@ how to customize it to get data we need.
 
 ### Get balance for all currencies
 
-You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_1#) query to get the current balance of a particular address. 
+You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_2#) query to get the current balance of a particular address. 
 
 ``` graphql
 {
-  EVM {
+  EVM(dataset: combined){
     BalanceUpdates(
       where: {
         BalanceUpdate: {
@@ -53,11 +53,11 @@ You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_1#) qu
 
 ### Get balance for one currency
 
-[This](https://ide.bitquery.io/eth_getBalance-for-one-address-for-eth) query returns the balance of the mentioned address for a selected currency. The currency in question is Ethereum with `SmartContract` as `0x`.
+[This](https://ide.bitquery.io/eth_getBalance-for-one-address-for-eth_1) query returns the balance of the mentioned address for a selected currency. The currency in question is Ethereum with `SmartContract` as `0x`.
 
 ``` graphql
 {
-  EVM {
+  EVM(dataset: combined){
     BalanceUpdates(
       where: {
         BalanceUpdate: {
@@ -85,11 +85,11 @@ You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_1#) qu
 
 ## eth_getBalance for Multiple Addresses
 
-To get the balance of multiple addresses, [this](https://ide.bitquery.io/eth_getBalance-for-multiple-address) query can be used. 
+To get the balance of multiple addresses, [this](https://ide.bitquery.io/eth_getBalance-for-multiple-address_1) query can be used. 
 
 ``` graphql
 {
-  EVM {
+  EVM(dataset: combined) {
     BalanceUpdates(
       where: {
         BalanceUpdate: {

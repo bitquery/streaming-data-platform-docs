@@ -133,6 +133,11 @@ query MyQuery {
 
 ```
 
+## Decimal Precision 
+
+The V1 APIs encounter issues with decimal precision beyond a few decimal places, but V2 completely resolves this problem and maintains full precision.
+
+
 ## Migrating Complex Queries from v1 to v2
 
 Let's take the below query which fetches the latest token details including USD values.
