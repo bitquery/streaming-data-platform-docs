@@ -111,18 +111,7 @@ const sidebars = {
             },
           ],
         },
-        {
-          type: 'category',
-          label: 'Base',
-          items: [
-            'examples/Base/aerodrome-base-api',
-            'examples/Base/base-balance-updates',
-            'examples/Base/base-coins-api',
-            'examples/Base/base-dextrades',
-            'examples/Base/base-nft',
-            'examples/Base/base-transfers',
-          ],
-        },
+        
         {
           type: 'category',
           label: 'BSC',
@@ -236,6 +225,18 @@ const sidebars = {
             'examples/Arbitrum/DexTrades',
             'examples/Arbitrum/Smart_Contract_Calls',
             'examples/Arbitrum/Smart_Contract_Events',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Base',
+          items: [
+            'examples/Base/aerodrome-base-api',
+            'examples/Base/base-balance-updates',
+            'examples/Base/base-coins-api',
+            'examples/Base/base-dextrades',
+            'examples/Base/base-nft',
+            'examples/Base/base-transfers',
           ],
         },
         {
