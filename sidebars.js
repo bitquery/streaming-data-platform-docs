@@ -28,6 +28,24 @@ const sidebars = {
     ,
     {
       type: 'category',
+      label: 'Using the IDE',
+      items: [
+        'ide/account',
+        'ide/code',
+        'ide/paid',
+        'ide/points',
+        'ide/private',
+        'ide/query',
+        'ide/search',
+        'ide/share',
+        'ide/team',
+        'ide/tradingview',
+        'ide/variables',
+      ],
+    },
+    
+    {
+      type: 'category',
       label: 'Streaming via Subscription',
       items: [
         'subscriptions/examples',
@@ -354,6 +372,17 @@ const sidebars = {
         'streams/kafka-streams-python',
       ],
     },
+    {
+      type: 'category',
+      label: 'API Blog',
+      items: [
+        'API-Blog/migrate-v1-v2',
+        'API-Blog/track-token-lock-unlock',
+        'API-Blog/use-regular-expressions-to-search-solana-logs',
+        'API-Blog/what-are-internal-transactions-how-to-get-them',
+      ],
+    },
+    
     
     
   ],
