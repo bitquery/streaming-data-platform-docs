@@ -46,7 +46,7 @@ const sidebars = {
     
     {
       type: 'category',
-      label: 'Streaming via Subscription',
+      label: 'Streaming via Subscriptions',
       items: [
         'subscriptions/examples',
         'subscriptions/example-rust',
