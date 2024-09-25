@@ -91,6 +91,7 @@ const sidebars = {
             'examples/calls/smartcontract-filterby',
             'examples/transfers/erc20-token-transfer-api',
             'examples/token-holders/token-holder-api',
+            'examples/realtimetrades',
             {
               type: 'category',
               label: 'Ethers Library',
