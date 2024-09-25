@@ -306,7 +306,7 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'TradingView',
+          label: 'Build Lightweight TradingView Chart with Real-time Data',
           items: [
             'usecases/tradingview/tradingview',
           ],
@@ -337,10 +337,7 @@ const sidebars = {
       type: 'category',
       label: 'Data in Cloud',
       items: [
-        'cloud/appsync',
-        'cloud/lambda-functions',
-        'cloud/s3-eth-tutorial',
-        'cloud/s3-tron-tutorial',
+       
         {
           type: 'category',
           label: 'Protobuf',
@@ -360,6 +357,10 @@ const sidebars = {
             'cloud/s3/messages',
           ],
         },
+        'cloud/appsync',
+        'cloud/lambda-functions',
+        'cloud/s3-eth-tutorial',
+        'cloud/s3-tron-tutorial',
       ],
     },
     {
