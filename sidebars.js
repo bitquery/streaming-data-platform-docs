@@ -28,6 +28,58 @@ const sidebars = {
     ,
     {
       type: 'category',
+      label: 'Using the IDE',
+      items: [
+        'ide/account',
+        'ide/code',
+        'ide/paid',
+        'ide/points',
+        'ide/private',
+        'ide/query',
+        'ide/search',
+        'ide/share',
+        'ide/team',
+        'ide/tradingview',
+        'ide/variables',
+      ],
+    },
+    
+    {
+      type: 'category',
+      label: 'Streaming via Subscription',
+      items: [
+        'subscriptions/examples',
+        'subscriptions/example-rust',
+        'subscriptions/mempool-subscriptions',
+        'subscriptions/subscription',
+        'subscriptions/trigger',
+        'subscriptions/websockets',
+      ],
+    },
+    
+    {
+      type: 'category',
+      label: 'Understanding Cubes',
+      items: [
+        {
+          type: 'category',
+          label: 'EVM Cube',
+          items: [
+            'cubes/EVM',
+            'cubes/balance-updates-cube',
+            'cubes/dextrades-dextradesbyTokens',
+            'cubes/dextrades',
+            'cubes/dextradesbyTokens',
+            'cubes/transaction-cube',
+            'cubes/transfers-cube',
+          ],
+        },
+        'cubes/solana',  // Solana cube remains separate
+      ],
+    },
+    
+    {
+      type: 'category',
       label: 'L1 Chains',
       items: [
         {
@@ -87,14 +139,32 @@ const sidebars = {
           label: 'Solana',
           items: [
             'examples/Solana/Moonshot-API',
+            'examples/Solana/Pump-Fun-API',
+            'examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API',
             'examples/Solana/Solana-AldrinAmm-api',
+            'examples/Solana/Solana-DexPools-API',
+            'examples/Solana/Solana-Jito-Bundle-api',
+            'examples/Solana/Solana-Lifinity-dex-api',
+            'examples/Solana/Solana-Meteora-api',
+            'examples/Solana/Solana-OpenBook-api',
+            'examples/Solana/Solana-Phoenix-api',
+            'examples/Solana/Solana-Raydium-DEX-API',
+            'examples/Solana/raydium-clmm-API',
             'examples/Solana/solana-balance-updates',
             'examples/Solana/solana-dextrades',
+            'examples/Solana/solana-instructions',
+            'examples/Solana/solana-jupiter-api',
+            'examples/Solana/solana-logs',
+            'examples/Solana/solana-nft',
+            'examples/Solana/solana-orca-dex-api',
+            'examples/Solana/solana-rewards',
+            'examples/Solana/solana-search-tokens',
             'examples/Solana/solana-transactions',
             'examples/Solana/solana-transfers',
-            'examples/Solana/solana-nft',
+            'examples/Solana/solana-zeta',
           ],
         },
+        
         {
           type: 'category',
           label: 'Tron',
@@ -198,6 +268,72 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'How-To Guides',
+      items: [
+        {
+          type: 'category',
+          label: 'NFT Creator Portfolio',
+          items: [
+            
+            'usecases/nft-creator/gettingstarted',
+            'usecases/nft-creator/pages',
+            'usecases/nft-creator/app',
+            'usecases/nft-creator/components',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'P&L Calculator',
+          items: [
+            'usecases/p-l-product/overview',
+            
+            'usecases/p-l-product/balanceUpdates',
+            'usecases/p-l-product/price',
+            'usecases/p-l-product/pl',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'TradingView Advanced Charts',
+          items: [
+            
+            'usecases/tradingview-advanced-charts/getting-started',
+            'usecases/tradingview-advanced-charts/datafeed',
+            'usecases/tradingview-advanced-charts/getBars',
+            'usecases/tradingview-advanced-charts/advancedChart',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'TradingView',
+          items: [
+            'usecases/tradingview/tradingview',
+          ],
+        },
+        'usecases/Top-10-ethereum-tokens',
+        'usecases/arbitrum-sniper-bot',
+        'usecases/automated-trading-ethereum-volume-surge-bot',
+        'usecases/base-sniper-bot',
+        'usecases/crypto-dashboard',
+        'usecases/dapps',
+        'usecases/discord-bot',
+        'usecases/mempool-transaction-fee',
+        'usecases/monitoring-solana-blockchain-real-time-tutorial',
+        'usecases/nft-analytics',
+        'usecases/nft-scanner',
+        'usecases/real-time-historical-ethereum-price-excel-google-sheets',
+        'usecases/sandwitch-detection',
+        'usecases/solana-arbitrage-dashboard',
+        'usecases/solana-sniper-bot',
+        'usecases/streaming-moonshot-prices',
+        'usecases/telegram-bot',
+        'usecases/tokenholder-heatmap',
+        'usecases/trading-indicators',
+      ],
+    },
+    
+    {
+      type: 'category',
       label: 'Data in Cloud',
       items: [
         'cloud/appsync',
@@ -236,6 +372,17 @@ const sidebars = {
         'streams/kafka-streams-python',
       ],
     },
+    {
+      type: 'category',
+      label: 'API Blog',
+      items: [
+        'API-Blog/migrate-v1-v2',
+        'API-Blog/track-token-lock-unlock',
+        'API-Blog/use-regular-expressions-to-search-solana-logs',
+        'API-Blog/what-are-internal-transactions-how-to-get-them',
+      ],
+    },
+    
     
     
   ],
