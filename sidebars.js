@@ -28,6 +28,19 @@ const sidebars = {
     ,
     {
       type: 'category',
+      label: 'Streaming via Subscription',
+      items: [
+        'subscriptions/examples',
+        'subscriptions/example-rust',
+        'subscriptions/mempool-subscriptions',
+        'subscriptions/subscription',
+        'subscriptions/trigger',
+        'subscriptions/websockets',
+      ],
+    },
+    
+    {
+      type: 'category',
       label: 'Understanding Cubes',
       items: [
         {
