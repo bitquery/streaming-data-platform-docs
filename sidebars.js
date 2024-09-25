@@ -46,16 +46,34 @@ const sidebars = {
     
     {
       type: 'category',
-      label: 'Streaming via Subscriptions',
+      label: 'Streaming',
       items: [
-        'subscriptions/examples',
-        'subscriptions/example-rust',
-        'subscriptions/mempool-subscriptions',
-        'subscriptions/subscription',
-        'subscriptions/trigger',
-        'subscriptions/websockets',
+        {
+          type: 'category',
+          label: 'Streaming via Subscriptions',
+          items: [
+            'subscriptions/examples',
+            'subscriptions/example-rust',
+            'subscriptions/mempool-subscriptions',
+            'subscriptions/subscription',
+            'subscriptions/trigger',
+            'subscriptions/websockets',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Data Streams',
+          items: [
+            'streams/kafka-streaming-concepts',
+            'streams/kafka-streams-go',
+            'streams/kafka-streams-java',
+            'streams/kafka-streams-js',
+            'streams/kafka-streams-python',
+          ],
+        },
       ],
     },
+    
     
     {
       type: 'category',
@@ -364,17 +382,7 @@ const sidebars = {
         'cloud/s3-tron-tutorial',
       ],
     },
-    {
-      type: 'category',
-      label: 'Data Streams',
-      items: [
-        'streams/kafka-streaming-concepts',
-        'streams/kafka-streams-go',
-        'streams/kafka-streams-java',
-        'streams/kafka-streams-js',
-        'streams/kafka-streams-python',
-      ],
-    },
+    
     {
       type: 'category',
       label: 'API Blog',
