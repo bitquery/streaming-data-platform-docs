@@ -71,7 +71,8 @@ query MyQuery {
 
 ## Uniswap v2 Pair Trade Stats
 
-In this query, we will get the trade statistics of the Chefdotfun (CHEF) and WETH pair using `0x4ba1970f8d2dda96ebfbc466943fb0dfaab18c75` on Uniswap V2. The results provide insights into how much was bought, sold, and the total trading volume in both CHEF and USD.
+In this query, we will get the trade statistics of the ChefDog (CHEF) and WETH pair using `0x4ba1970f8d2dda96ebfbc466943fb0dfaab18c75` on Uniswap V2. The results provide insights into how much was bought, sold, and the total trading volume in both CHEF and USD.
+You can run the query [here](https://ide.bitquery.io/chefdog-weth-trade-stats)
 
 ```
 query pairTopTraders {
