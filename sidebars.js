@@ -330,6 +330,7 @@ const sidebars = {
             
             'usecases/real-time-balance-tracker/overview',
             'usecases/real-time-balance-tracker/scripts',
+            'usecases/real-time-balance-tracker/ui'
             
           ],
         },
