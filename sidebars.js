@@ -325,6 +325,16 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: 'Build your Own Real-Time Balance Checker',
+          items: [
+            
+            'usecases/real-time-balance-tracker/overview',
+            'usecases/real-time-balance-tracker/scripts',
+            
+          ],
+        },
+        {
+          type: 'category',
           label: 'Build Lightweight TradingView Chart with Real-time Data',
           items: [
             'usecases/tradingview/tradingview',
