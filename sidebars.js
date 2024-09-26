@@ -180,9 +180,12 @@ const sidebars = {
             'examples/Tron/sunswap-api',
             'examples/Tron/tron-balance-updates',
             'examples/Tron/tron-dextrades',
+            'examples/Tron/tron-mempool',
             'examples/Tron/tron-nft',
+            'examples/Tron/tron-sunpump',
             'examples/Tron/tron-transactions-api',
             'examples/Tron/tron-transfers',
+            'examples/Tron/usdt-trc20-api',
           ],
         },
         {
