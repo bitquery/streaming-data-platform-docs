@@ -10,6 +10,8 @@ This guide explains a Node.js Kafka consumer implementation to get [onchain data
 
 The complete code is available [here](https://github.com/bitquery/kafka-consumer-example).
 
+> It is better to use kafka streams with Python, Java or Golang instead of JS.
+
 ### Prerequisites
 
 Ensure that you have the following components before running the code:
@@ -27,8 +29,11 @@ Ensure that you have the following components before running the code:
 The script relies on several dependencies, which can be installed using npm:
 
 ```bash
-npm install kafkajs uuid fs kafkajs-lz4
+npm install kafkajs@2.2.3 uuid fs@0.0.1-security kafkajs-lz4@1.2.1 lz4@0.6.5 lz4-asm@0.4.2
+
 ```
+
+**Ensure that you install these exact versions, as they are necessary for the script to work correctly with your current setup.**
 
 - **KafkaJS**: A Kafka client library for Node.js.
 - **uuid**: A utility to generate unique group IDs.
