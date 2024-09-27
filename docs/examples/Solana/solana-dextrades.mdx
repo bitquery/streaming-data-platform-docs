@@ -169,6 +169,33 @@ query LatestTrades($token: String, $base: String) {
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_latest_trades).
 
+## Top 10 Trending Solana Tokens
+
+[This](https://ide.bitquery.io/Trending-tokens-on--Solana_2) query returns the top 10 trending tokens on Solana across all DEXs based on the number of trades with unique traders.
+[This](https://ide.bitquery.io/Trending-tokens-on--Solana-for-one-hour) query returns the trending list of tokens for a particular time period, `1 hour` in this case.
+
+``` graphql
+query TrendingTokens {
+  Solana {
+    DEXTradeByTokens(limit: {count: 10}, orderBy: {descendingByField: "tradesCountWithUniqueTraders"}) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+      }
+      tradesCountWithUniqueTraders: count(distinct: Transaction_Signer)
+    }
+  }
+}
+```
+
+You can also checkout how such queries are used as a base to completed features such as [DEXrabbit Solana Trends](https://dexrabbit.com/solana/token) as shown in the image below.
+
+![Trending Pairs on DEXrabbit](../../../static/img/dexrabbit/trending_tokens_solana.png)
+
+
 ## Top Traders of a token
 
 This query will give you top traders for this token `59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN` on Solana's DEX platforms.
