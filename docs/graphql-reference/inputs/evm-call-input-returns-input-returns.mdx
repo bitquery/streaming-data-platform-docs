@@ -1,0 +1,110 @@
+---
+id: evm-call-input-returns-input-returns
+title: EVM_Call_Input_Returns_Input_Returns
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+Array of Returns includes or excludes provided value
+
+
+```graphql
+input EVM_Call_Input_Returns_Input_Returns {
+  notStartsWith: [EVM_Call_Input_Returns_Input_FieldSelector]
+  notEndsWith: [EVM_Call_Input_Returns_Input_FieldSelector]
+  length: OLAP_Integer
+  includes: [EVM_Call_Input_Returns_Input_FieldSelector]
+  excludes: [EVM_Call_Input_Returns_Input_FieldSelector]
+  startsWith: [EVM_Call_Input_Returns_Input_FieldSelector]
+  endsWith: [EVM_Call_Input_Returns_Input_FieldSelector]
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Returns_Input_Returns.<b>notStartsWith</b></code>](#)<Bullet />[`[EVM_Call_Input_Returns_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-returns-input-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Does not start with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Returns_Input_Returns.<b>notEndsWith</b></code>](#)<Bullet />[`[EVM_Call_Input_Returns_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-returns-input-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Does not End with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Returns_Input_Returns.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Length of the array
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Returns_Input_Returns.<b>includes</b></code>](#)<Bullet />[`[EVM_Call_Input_Returns_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-returns-input-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Includes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Returns_Input_Returns.<b>excludes</b></code>](#)<Bullet />[`[EVM_Call_Input_Returns_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-returns-input-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Excludes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Returns_Input_Returns.<b>startsWith</b></code>](#)<Bullet />[`[EVM_Call_Input_Returns_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-returns-input-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Starts with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Input_Returns_Input_Returns.<b>endsWith</b></code>](#)<Bullet />[`[EVM_Call_Input_Returns_Input_FieldSelector]`](/docs/graphql-reference/inputs/evm-call-input-returns-input-field-selector) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Ends with this element
+> 
+
+
+
+### Member Of
+
+[`EVM_Call_Filter`](/docs/graphql-reference/inputs/evm-call-filter)  <Badge class="badge badge--secondary" text="input"/>
+

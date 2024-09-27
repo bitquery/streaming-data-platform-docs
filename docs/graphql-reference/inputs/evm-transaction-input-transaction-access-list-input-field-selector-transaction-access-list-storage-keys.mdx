@@ -1,0 +1,110 @@
+---
+id: evm-transaction-input-transaction-access-list-input-field-selector-transaction-access-list-storage-keys
+title: EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector_Transaction_AccessList_StorageKeys
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+Array of Transaction_AccessList_StorageKeys includes or excludes provided value
+
+
+```graphql
+input EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector_Transaction_AccessList_StorageKeys {
+  excludes: [OLAP_String]
+  startsWith: [OLAP_String]
+  endsWith: [OLAP_String]
+  notStartsWith: [OLAP_String]
+  notEndsWith: [OLAP_String]
+  length: OLAP_Integer
+  includes: [OLAP_String]
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector_Transaction_AccessList_StorageKeys.<b>excludes</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Excludes this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector_Transaction_AccessList_StorageKeys.<b>startsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Starts with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector_Transaction_AccessList_StorageKeys.<b>endsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Ends with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector_Transaction_AccessList_StorageKeys.<b>notStartsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Does not start with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector_Transaction_AccessList_StorageKeys.<b>notEndsWith</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Does not End with this element
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector_Transaction_AccessList_StorageKeys.<b>length</b></code>](#)<Bullet />[`OLAP_Integer`](/docs/graphql-reference/inputs/olap-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Length of the array
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector_Transaction_AccessList_StorageKeys.<b>includes</b></code>](#)<Bullet />[`[OLAP_String]`](/docs/graphql-reference/inputs/olap-string) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Includes this element
+> 
+
+
+
+### Member Of
+
+[`EVM_Transaction_Input_Transaction_AccessList_Input_FieldSelector`](/docs/graphql-reference/inputs/evm-transaction-input-transaction-access-list-input-field-selector)  <Badge class="badge badge--secondary" text="input"/>
+

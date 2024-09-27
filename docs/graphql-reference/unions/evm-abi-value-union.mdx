@@ -1,0 +1,96 @@
+---
+id: evm-abi-value-union
+title: EVM_ABI_Value_Union
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+Union Type for argument values
+
+
+```graphql
+union EVM_ABI_Value_Union = EVM_ABI_Integer_Value_Arg | EVM_ABI_String_Value_Arg | EVM_ABI_Address_Value_Arg | EVM_ABI_BigInt_Value_Arg | EVM_ABI_Bytes_Value_Arg | EVM_ABI_Boolean_Value_Arg
+```
+
+
+
+
+### Possible types
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ABI_Value_Union.<b>EVM_ABI_Integer_Value_Arg</b></code>](/docs/graphql-reference/objects/evm-abi-integer-value-arg) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ABI_Value_Union.<b>EVM_ABI_String_Value_Arg</b></code>](/docs/graphql-reference/objects/evm-abi-string-value-arg) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ABI_Value_Union.<b>EVM_ABI_Address_Value_Arg</b></code>](/docs/graphql-reference/objects/evm-abi-address-value-arg) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ABI_Value_Union.<b>EVM_ABI_BigInt_Value_Arg</b></code>](/docs/graphql-reference/objects/evm-abi-big-int-value-arg) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ABI_Value_Union.<b>EVM_ABI_Bytes_Value_Arg</b></code>](/docs/graphql-reference/objects/evm-abi-bytes-value-arg) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_ABI_Value_Union.<b>EVM_ABI_Boolean_Value_Arg</b></code>](/docs/graphql-reference/objects/evm-abi-boolean-value-arg) <Badge class="badge badge--secondary" text="object"/> 
+> 
+> 
+> 
+> 
+
+
+
+### Member Of
+
+[`EVM_Call_Fields_Arguments`](/docs/graphql-reference/objects/evm-call-fields-arguments)  <Badge class="badge badge--secondary" text="object"/><Bullet />[`EVM_Call_Fields_Returns`](/docs/graphql-reference/objects/evm-call-fields-returns)  <Badge class="badge badge--secondary" text="object"/><Bullet />[`EVM_Event_Fields_Arguments`](/docs/graphql-reference/objects/evm-event-fields-arguments)  <Badge class="badge badge--secondary" text="object"/>
+

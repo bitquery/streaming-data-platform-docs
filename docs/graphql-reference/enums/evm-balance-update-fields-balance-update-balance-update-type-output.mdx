@@ -1,0 +1,103 @@
+---
+id: evm-balance-update-fields-balance-update-balance-update-type-output
+title: EVM_BalanceUpdate_Fields_BalanceUpdate_BalanceUpdate_Type_Output
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+Enumeration for BalanceUpdate_Type
+
+
+```graphql
+enum EVM_BalanceUpdate_Fields_BalanceUpdate_BalanceUpdate_Type_Output {
+  transfer
+  fee
+  block_reward
+  uncle_reward
+  genesis
+  other
+}
+```
+
+
+
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate_BalanceUpdate_Type_Output.<b>transfer</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type transfer
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate_BalanceUpdate_Type_Output.<b>fee</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type fee
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate_BalanceUpdate_Type_Output.<b>block_reward</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type block_reward
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate_BalanceUpdate_Type_Output.<b>uncle_reward</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type uncle_reward
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate_BalanceUpdate_Type_Output.<b>genesis</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type genesis
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_BalanceUpdate_Fields_BalanceUpdate_BalanceUpdate_Type_Output.<b>other</b></code>](#)  
+> 
+> 
+> BalanceUpdate_Type other
+> 
+
+
+
+### Member Of
+
+[`EVM_BalanceUpdate_Fields_BalanceUpdate`](/docs/graphql-reference/objects/evm-balance-update-fields-balance-update)  <Badge class="badge badge--secondary" text="object"/>
+

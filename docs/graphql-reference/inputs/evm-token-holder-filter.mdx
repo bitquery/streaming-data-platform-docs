@@ -1,0 +1,85 @@
+---
+id: evm-token-holder-filter
+title: EVM_TokenHolder_Filter
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+```graphql
+input EVM_TokenHolder_Filter {
+  Balance: EVM_TokenHolder_Input_Balance_InputType
+  BalanceUpdate: EVM_TokenHolder_Input_BalanceUpdate_InputType
+  Holder: EVM_TokenHolder_Input_Holder_InputType
+  Currency: EVM_TokenHolder_Input_Currency_InputType
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Filter.<b>Balance</b></code>](#)<Bullet />[`EVM_TokenHolder_Input_Balance_InputType`](/docs/graphql-reference/inputs/evm-token-holder-input-balance-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Balance
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Filter.<b>BalanceUpdate</b></code>](#)<Bullet />[`EVM_TokenHolder_Input_BalanceUpdate_InputType`](/docs/graphql-reference/inputs/evm-token-holder-input-balance-update-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by BalanceUpdate
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Filter.<b>Holder</b></code>](#)<Bullet />[`EVM_TokenHolder_Input_Holder_InputType`](/docs/graphql-reference/inputs/evm-token-holder-input-holder-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Holder
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_TokenHolder_Filter.<b>Currency</b></code>](#)<Bullet />[`EVM_TokenHolder_Input_Currency_InputType`](/docs/graphql-reference/inputs/evm-token-holder-input-currency-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Currency
+> 
+
+
+

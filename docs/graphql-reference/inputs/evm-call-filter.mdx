@@ -1,0 +1,127 @@
+---
+id: evm-call-filter
+title: EVM_Call_Filter
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+```graphql
+input EVM_Call_Filter {
+  Transaction: EVM_Call_Input_Transaction_InputType
+  Block: EVM_Call_Input_Block_InputType
+  Fee: EVM_Call_Input_Fee_InputType
+  Arguments: EVM_Call_Input_Arguments_Input_Arguments
+  StateChanges: EVM_Call_Input_StateChanges_Input_StateChanges
+  TransactionStatus: EVM_Call_Input_TransactionStatus_InputType
+  Call: EVM_Call_Input_Call_InputType
+  Receipt: EVM_Call_Input_Receipt_InputType
+  Returns: EVM_Call_Input_Returns_Input_Returns
+  ChainId: OLAP_BigInteger
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Transaction</b></code>](#)<Bullet />[`EVM_Call_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-call-input-transaction-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Transaction
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Block</b></code>](#)<Bullet />[`EVM_Call_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-call-input-block-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Block
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Fee</b></code>](#)<Bullet />[`EVM_Call_Input_Fee_InputType`](/docs/graphql-reference/inputs/evm-call-input-fee-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Fee
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Arguments</b></code>](#)<Bullet />[`EVM_Call_Input_Arguments_Input_Arguments`](/docs/graphql-reference/inputs/evm-call-input-arguments-input-arguments) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Array of Arguments includes or excludes provided value
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>StateChanges</b></code>](#)<Bullet />[`EVM_Call_Input_StateChanges_Input_StateChanges`](/docs/graphql-reference/inputs/evm-call-input-state-changes-input-state-changes) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Array of StateChanges includes or excludes provided value
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>TransactionStatus</b></code>](#)<Bullet />[`EVM_Call_Input_TransactionStatus_InputType`](/docs/graphql-reference/inputs/evm-call-input-transaction-status-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by TransactionStatus
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Call</b></code>](#)<Bullet />[`EVM_Call_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-call-input-call-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Call
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Receipt</b></code>](#)<Bullet />[`EVM_Call_Input_Receipt_InputType`](/docs/graphql-reference/inputs/evm-call-input-receipt-input-type) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Select by Receipt
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>Returns</b></code>](#)<Bullet />[`EVM_Call_Input_Returns_Input_Returns`](/docs/graphql-reference/inputs/evm-call-input-returns-input-returns) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Array of Returns includes or excludes provided value
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Call_Filter.<b>ChainId</b></code>](#)<Bullet />[`OLAP_BigInteger`](/docs/graphql-reference/inputs/olap-big-integer) <Badge class="badge badge--secondary" text="input"/> 
+> 
+> 
+> Big Integer ( more than 32 bits precision), including negative numbers
+> 
+
+
+

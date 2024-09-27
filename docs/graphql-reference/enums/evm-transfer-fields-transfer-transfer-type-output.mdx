@@ -1,0 +1,82 @@
+---
+id: evm-transfer-fields-transfer-transfer-type-output
+title: EVM_Transfer_Fields_Transfer_Transfer_Type_Output
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+Enumeration for Transfer_Type
+
+
+```graphql
+enum EVM_Transfer_Fields_Transfer_Transfer_Type_Output {
+  transaction
+  call
+  token
+}
+```
+
+
+
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Transfer_Type_Output.<b>transaction</b></code>](#)  
+> 
+> 
+> Transfer_Type transaction
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Transfer_Type_Output.<b>call</b></code>](#)  
+> 
+> 
+> Transfer_Type call
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Transfer_Fields_Transfer_Transfer_Type_Output.<b>token</b></code>](#)  
+> 
+> 
+> Transfer_Type token
+> 
+
+
+
+### Member Of
+
+[`EVM_Transfer_Fields_Transfer`](/docs/graphql-reference/objects/evm-transfer-fields-transfer)  <Badge class="badge badge--secondary" text="object"/>
+

@@ -1,0 +1,103 @@
+---
+id: evm-amount-with-decimals
+title: EVM_Amount_With_Decimals
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+Amount with decimals
+
+
+```graphql
+input EVM_Amount_With_Decimals {
+  gt: String
+  lt: String
+  eq: String
+  ne: String
+  ge: String
+  le: String
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Amount_With_Decimals.<b>gt</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Greater or equal the amount
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Amount_With_Decimals.<b>lt</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Less or equal the amount
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Amount_With_Decimals.<b>eq</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Equal to amount
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Amount_With_Decimals.<b>ne</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Not equal to amount
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Amount_With_Decimals.<b>ge</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Greater than the amount
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_Amount_With_Decimals.<b>le</b></code>](#)<Bullet />[`String`](/docs/graphql-reference/scalars/string) <Badge class="badge badge--secondary" text="scalar"/> 
+> 
+> 
+> Less than the amount
+> 
+
+
+
+### Member Of
+
+[`EVM_BalanceUpdate_Input_BalanceUpdate_InputType`](/docs/graphql-reference/inputs/evm-balance-update-input-balance-update-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Block_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-block-input-block-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Block_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-block-input-block-l1-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Call_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-call-input-call-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Call_Input_Fee_InputType`](/docs/graphql-reference/inputs/evm-call-input-fee-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Call_Input_Receipt_L1_InputType`](/docs/graphql-reference/inputs/evm-call-input-receipt-l1-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Call_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-call-input-transaction-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTrade_Fields_Trade_Fees_Select_FieldSelector`](/docs/graphql-reference/inputs/evm-dextrade-fields-trade-fees-select-field-selector)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTrade_Input_Fee_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-fee-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTrade_Input_Receipt_L1_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-receipt-l1-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTrade_Input_Trade_Buy_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-buy-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTrade_Input_Trade_Fees_Input_FieldSelector`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-fees-input-field-selector)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTrade_Input_Trade_Sell_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-trade-sell-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTrade_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-dextrade-input-transaction-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Fees_Select_FieldSelector`](/docs/graphql-reference/inputs/evm-dextrade-by-token-fields-trade-fees-select-field-selector)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTradeByToken_Input_Fee_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-fee-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTradeByToken_Input_Receipt_L1_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-receipt-l1-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTradeByToken_Input_Trade_Fees_Input_FieldSelector`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-trade-fees-input-field-selector)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTradeByToken_Input_Trade_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-trade-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTradeByToken_Input_Trade_Side_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-trade-side-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_DEXTradeByToken_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-dextrade-by-token-input-transaction-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Event_Input_Call_InputType`](/docs/graphql-reference/inputs/evm-event-input-call-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Event_Input_Fee_InputType`](/docs/graphql-reference/inputs/evm-event-input-fee-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Event_Input_Receipt_L1_InputType`](/docs/graphql-reference/inputs/evm-event-input-receipt-l1-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Event_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-event-input-transaction-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_MinerReward_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-block-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_MinerReward_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-block-l1-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_MinerReward_Input_Reward_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-reward-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_MinerReward_Input_Uncle_Block_InputType`](/docs/graphql-reference/inputs/evm-miner-reward-input-uncle-block-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_TokenHolder_Input_Balance_InputType`](/docs/graphql-reference/inputs/evm-token-holder-input-balance-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_TokenHolder_Input_BalanceUpdate_InputType`](/docs/graphql-reference/inputs/evm-token-holder-input-balance-update-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Transaction_Input_Fee_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-fee-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Transaction_Input_Receipt_L1_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-receipt-l1-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Transaction_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-transaction-input-transaction-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Transfer_Input_Fee_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-fee-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Transfer_Input_Receipt_L1_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-receipt-l1-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Transfer_Input_Transaction_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-transaction-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Transfer_Input_Transfer_InputType`](/docs/graphql-reference/inputs/evm-transfer-input-transfer-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Uncle_Input_Block_InputType`](/docs/graphql-reference/inputs/evm-uncle-input-block-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Uncle_Input_Block_L1_InputType`](/docs/graphql-reference/inputs/evm-uncle-input-block-l1-input-type)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_Uncle_Input_Uncle_Block_InputType`](/docs/graphql-reference/inputs/evm-uncle-input-uncle-block-input-type)  <Badge class="badge badge--secondary" text="input"/>
+

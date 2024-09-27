@@ -1,0 +1,89 @@
+---
+id: blocks-update-arg-enum
+title: blocks_update_arg_enum
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+Type of algorithm to filter block updates
+
+
+```graphql
+enum blocks_update_arg_enum {
+  all
+  head_updates
+  branches_updates
+  head
+}
+```
+
+
+
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>blocks_update_arg_enum.<b>all</b></code>](#)  
+> 
+> 
+> Blocks added to the head of the reorg tree and all uncle added on branches, no duplicates
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>blocks_update_arg_enum.<b>head_updates</b></code>](#)  
+> 
+> 
+> Blocks added to the head of the reorg tree, duplicates possible due to reorg. Can be used together with uncles_updates.
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>blocks_update_arg_enum.<b>branches_updates</b></code>](#)  
+> 
+> 
+> Blocks added as uncles to the branches of the reorg tree, duplicates possible due to reorg. Can be used together with head_updates.
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>blocks_update_arg_enum.<b>head</b></code>](#)  
+> 
+> 
+> Blocks added to the head of the reorgtree, no duplicates
+> 
+
+
+
+### Member Of
+
+[`EVM`](/docs/graphql-reference/subscriptions/evm)  <Badge class="badge badge--secondary" text="subscription"/>
+

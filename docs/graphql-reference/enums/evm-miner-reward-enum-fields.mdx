@@ -1,0 +1,425 @@
+---
+id: evm-miner-reward-enum-fields
+title: EVM_MinerReward_EnumFields
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+Listed names of fields in a cube
+
+
+```graphql
+enum EVM_MinerReward_EnumFields {
+  Block_MixDigest
+  Block_L1_ParentHash
+  Uncle_Index
+  Uncle_Block_UncleHash
+  Uncle_Block_GasUsed
+  Block_Number
+  Block_UnclesCount
+  Block_Coinbase
+  Block_ParentHash
+  Block_Difficulty
+  Uncle_Block_ParentHash
+  Uncle_Block_Nonce
+  Uncle_Block_Extra
+  Block_UncleHash
+  ChainId
+  Reward_Dynamic
+  Uncle_Block_ReceiptHash
+  Block_ReceiptHash
+  Block_TxCount
+  Block_Date
+  Block_Bloom
+  Block_BaseFee
+  Uncle_Block_Coinbase
+  Reward_Static
+  Block_Hash
+  Reward_TxFees
+  Uncle_Block_BaseFee
+  Block_TxHash
+  Reward_BurntFees
+  Uncle_Block_Root
+  Block_Root
+  Block_GasLimit
+  Uncle_Block_Difficulty
+  Block_Result_Errors
+  Block_Result_Gas
+  Uncle_Block_Time
+  Block_L1_Hash
+  Block_Time
+  Block_Extra
+  Block_Nonce
+  Uncle_Block_Date
+  Uncle_Block_Number
+  Uncle_Block_Hash
+  Uncle_Block_TxHash
+  Uncle_Block_GasLimit
+  Reward_Uncle
+  Block_L1_BaseFee
+  Block_GasUsed
+  Uncle_Block_Bloom
+  Block_L1_Coinbase
+  Reward_Total
+  Uncle_Block_MixDigest
+}
+```
+
+
+
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_MixDigest</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_L1_ParentHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Index</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_UncleHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_GasUsed</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Number</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_UnclesCount</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Coinbase</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_ParentHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Difficulty</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_ParentHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_Nonce</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_Extra</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_UncleHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>ChainId</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Reward_Dynamic</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_ReceiptHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_ReceiptHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_TxCount</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Date</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Bloom</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_BaseFee</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_Coinbase</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Reward_Static</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Hash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Reward_TxFees</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_BaseFee</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_TxHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Reward_BurntFees</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_Root</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Root</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_GasLimit</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_Difficulty</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Result_Errors</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Result_Gas</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_Time</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_L1_Hash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Time</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Extra</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_Nonce</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_Date</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_Number</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_Hash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_TxHash</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_GasLimit</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Reward_Uncle</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_L1_BaseFee</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_GasUsed</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_Bloom</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Block_L1_Coinbase</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Reward_Total</b></code>](#)  
+> 
+> 
+> 
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_MinerReward_EnumFields.<b>Uncle_Block_MixDigest</b></code>](#)  
+> 
+> 
+> 
+> 
+
+
+
+### Member Of
+
+[`EVM_MinerReward_LimitBy`](/docs/graphql-reference/inputs/evm-miner-reward-limit-by)  <Badge class="badge badge--secondary" text="input"/><Bullet />[`EVM_MinerReward_Ordering`](/docs/graphql-reference/inputs/evm-miner-reward-ordering)  <Badge class="badge badge--secondary" text="input"/>
+

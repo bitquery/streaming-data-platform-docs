@@ -1,0 +1,85 @@
+---
+id: evm-dextrade-by-token-fields-trade-side-type-select-trade-side
+title: EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+Select filters for Trade_Side
+
+
+```graphql
+input EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side {
+  in: [EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side_Input]
+  notIn: [EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side_Input]
+  is: EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side_Input
+  not: EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side_Input
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side.<b>in</b></code>](#)<Bullet />[`[EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side_Input]`](/docs/graphql-reference/enums/evm-dextrade-by-token-fields-trade-side-type-select-trade-side-input) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> One of the values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side.<b>notIn</b></code>](#)<Bullet />[`[EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side_Input]`](/docs/graphql-reference/enums/evm-dextrade-by-token-fields-trade-side-type-select-trade-side-input) <Badge class="badge badge--secondary" text="list"/> <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Not one of the values
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side.<b>is</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side_Input`](/docs/graphql-reference/enums/evm-dextrade-by-token-fields-trade-side-type-select-trade-side-input) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Exact match
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side.<b>not</b></code>](#)<Bullet />[`EVM_DEXTradeByToken_Fields_Trade_Side_Type_Select_Trade_Side_Input`](/docs/graphql-reference/enums/evm-dextrade-by-token-fields-trade-side-type-select-trade-side-input) <Badge class="badge badge--secondary" text="enum"/> 
+> 
+> 
+> Not this
+> 
+
+
+

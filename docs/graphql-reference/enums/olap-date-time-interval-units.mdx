@@ -1,0 +1,110 @@
+---
+id: olap-date-time-interval-units
+title: OLAP_DateTimeIntervalUnits
+hide_table_of_contents: false
+---
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+```graphql
+enum OLAP_DateTimeIntervalUnits {
+  minutes
+  hours
+  days
+  weeks
+  months
+  years
+  seconds
+}
+```
+
+
+
+
+### Values
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeIntervalUnits.<b>minutes</b></code>](#)  
+> 
+> 
+> Interval in minutes
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeIntervalUnits.<b>hours</b></code>](#)  
+> 
+> 
+> Interval in hours
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeIntervalUnits.<b>days</b></code>](#)  
+> 
+> 
+> Interval in days
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeIntervalUnits.<b>weeks</b></code>](#)  
+> 
+> 
+> Interval in weeks
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeIntervalUnits.<b>months</b></code>](#)  
+> 
+> 
+> Interval in months
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeIntervalUnits.<b>years</b></code>](#)  
+> 
+> 
+> Interval in years
+> 
+
+#### [<code style={{ fontWeight: 'normal' }}>OLAP_DateTimeIntervalUnits.<b>seconds</b></code>](#)  
+> 
+> 
+> Interval in seconds
+> 
+
+
+
+### Member Of
+
+[`OLAP_DateTimeInterval`](/docs/graphql-reference/inputs/olap-date-time-interval)  <Badge class="badge badge--secondary" text="input"/>
+
