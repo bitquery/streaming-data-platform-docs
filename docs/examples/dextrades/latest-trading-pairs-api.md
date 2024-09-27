@@ -10,7 +10,7 @@ Let's see how we can get latest trading pairs created on DEXs. In this example w
 
 ```graphql
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: realtime, network: eth) {
     Events(
       orderBy: {descending: Block_Number}
       limit: {count: 10}
@@ -32,20 +32,37 @@ Let's see how we can get latest trading pairs created on DEXs. In this example w
         Number
       }
       Arguments {
-        Type {
-          Name
-        }
+        Name
         Value {
-          String
+          __typename
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
         }
       }
     }
   }
 }
 
+
 ```
 
-Open this query on our GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Latest-pools-created-uniswap-v3_1).
+Open this query on our GraphQL IDE using this [link](https://ide.bitquery.io/uniswap-v3-pairs).
 
 ## Subscribe to the Latest Pairs for Uniswap V3
 
@@ -53,10 +70,8 @@ You can use our GraphQL Subscription (Webhook) to subscribe to these events in c
 
 ```graphql
 subscription {
-  EVM(network: eth, trigger_on: head) {
+  EVM {
     Events(
-      orderBy: {descending: Block_Number}
-      limit: {count: 10}
       where: {Log: {SmartContract: {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}, Signature: {Name: {is: "PoolCreated"}}}}
     ) {
       Log {
@@ -75,16 +90,33 @@ subscription {
         Number
       }
       Arguments {
-        Type {
-          Name
-        }
+        Name
         Value {
-          String
+          __typename
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
         }
       }
     }
   }
 }
+
 ```
 
-Open this query on our GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Subscription-to-Latest-pools-created-uniswap-v3)
+Open this query on our GraphQL IDE using this [link](https://ide.bitquery.io/uniswap-v3-pairs-websocket)

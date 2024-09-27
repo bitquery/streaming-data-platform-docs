@@ -185,6 +185,53 @@ query LatestTrades($network: evm_network, $token: String) {
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#last_trades).
 
+
+## Token Trade analytics 
+
+Check following [query](https://ide.bitquery.io/token-trade-analytics) for analytics related to token trades on DEX
+
+
+```
+ {
+  EVM(network: bsc dataset:combined) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: {
+              is: "0xc342774492b54ce5f8ac662113ed702fc1b34972"
+            }
+          }
+        }
+      }
+      orderBy: {descendingByField: "usd"}, limit: {count: 1000}) {
+      Trade {
+        Currency {
+          Decimals
+          Symbol
+          SmartContract
+          Fungible
+          Name
+        }
+        Amount(maximum: Block_Number)
+        AmountInUSD(maximum: Block_Number)
+      }
+      pairs: uniq(of: Trade_Side_Currency_SmartContract)
+      dexes: uniq(of: Trade_Dex_SmartContract)
+      amount: sum(of: Trade_Amount)
+      usd: sum(of: Trade_AmountInUSD)
+      usd2: sum(of: Trade_Side_AmountInUSD)
+      buyers: uniq(of: Trade_Buyer)
+      sellers: uniq(of: Trade_Sender)
+      count
+    }
+  }
+}
+```
+
+
+
+
 ## Top Traders of a token
 
 This query will fetch you top traders of a token for the selected network.

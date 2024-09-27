@@ -159,26 +159,22 @@ const config = {
           },
 
           {
-            to:"/docs/examples/Solana/Pump-Fun-API/",
-            from:"/docs/examples/dextrades/Pump-Fun-API/"
+            to: "/docs/examples/Solana/Pump-Fun-API/",
+            from: "/docs/examples/dextrades/Pump-Fun-API/",
+          },
+
+          {
+            to: "/docs/examples/ethers-library/eth_subscribe",
+            from: "/docs/category/ethsubscribe-alternatives/",
           },
           {
-            to:'/docs/category/how-to-guides/',
-            from:'/docs/category/use-cases/'
+            to: "/docs/examples/ethers-library/eth_subscribe/",
+            from: "/docs/examples/Ethereum-subscriptions/eth-subscribe/",
           },
           {
-            to:'/docs/examples/ethers-library/eth_subscribe',
-            from:'/docs/category/ethsubscribe-alternatives/'
+            to: "/docs/schema/schema-intro/",
+            from: "/docs/evm/",
           },
-          {
-            to:'/docs/examples/ethers-library/eth_subscribe/',
-            from:'/docs/examples/Ethereum-subscriptions/eth-subscribe/'
-          },
-          {
-            to:'/docs/schema/schema-intro/',
-            from:'/docs/evm/'
-          }
-         
         ],
       },
     ],

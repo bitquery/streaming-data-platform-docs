@@ -55,11 +55,11 @@ You can view the query in the IDE [here](https://ide.bitquery.io/Trades-if-an-ad
 
 ```
 
-There are two sub-queries specified within the "EVM" field: "buyside" and "sellside".
+We use the `any` filter two handle two scenarios:
 
-The "buyside" sub-query retrieves the 10 most recent DEX trades where the specified address was the buyer. The results are ordered by the block time in descending order.
+- Most recent DEX trades where the specified address was the buyer. The results are ordered by the block time in descending order.
 
-The "sellside" sub-query retrieves the 10 most recent DEX trades where the specified address was the seller. The results are also ordered by the block time in descending order.
+- Most recent DEX trades where the specified address was the seller. The results are also ordered by the block time in descending order.
 
 **Parameters**
 

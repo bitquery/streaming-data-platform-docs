@@ -9,21 +9,18 @@ sidebar_position: 3
 V2 APIs are designed to provide real-time blockchain data without any delay. It combines both real-time and historical data. You can read more on the differences [here](https://docs.bitquery.io/v1/docs/graphql-ide/v1-and-v2)
 Below, you'll find key changes and instructions on how to adapt your existing v1 queries to the v2 format.
 
-
 ## Authentication in v1 vs v2
 
-One of the major differences between v1 and v2 is the way API is authenticated. In v1, you use a API-KEY to authenticate your requests to `graphql.bitquery.io`. 
+One of the major differences between v1 and v2 is the way API is authenticated. In v1, you use a API-KEY to authenticate your requests to `graphql.bitquery.io`.
 
 And in v2, you use OAuth token mentioned as `Bearer ory_...yourtoken` and authenticate your requests to `streaming.bitquery.io/graphql` or `streaming.bitquery.io/eap`. Read more on how to generate token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
 
 ## Changes in Network Specification
 
-
 - **v1:** Specified using a generic identifier within a function, e.g., `ethereum(network: ethereum)`.
 - **v2:** Now requires a more specific `network` identifier and inclusion of a `dataset`. Example: `EVM(network: eth, dataset: combined)`.
 
 In the case of chains on [EAP endpoint](https://docs.bitquery.io/docs/graphql/dataset/EAP/), you need not mention the `dataset` as it includes only realtime information.
-
 
 **Example Conversion:**
 
@@ -132,6 +129,12 @@ query MyQuery {
 }
 
 ```
+
+## Decimals & Precision
+
+In API v1, the decimal precision was low at the GraphQL layer. While the data was saved accurately with all decimals, it would lose precision when processed through GraphQL.
+
+To avoid this issue, in API v2, values are now represented as strings, allowing for exact precision up to 18 decimal places without any loss of accuracy.
 
 ## Migrating Complex Queries from v1 to v2
 
@@ -245,6 +248,3 @@ Buy{
 ```
 
 The nested schema in v2 requires accessing fields through specific paths, e.g., `Trade.Buy.Currency.SmartContract`.
-
-
-
