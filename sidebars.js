@@ -130,6 +130,7 @@ const sidebars = {
                 "examples/dextrades/pair-creation-time",
                 "examples/dextrades/crypto-coin-ticker",
                 "examples/realtimetrades",
+                'examples/dextrades/DEXScreener/evm_dexscreener',
               ],
             },
             {
@@ -201,6 +202,7 @@ const sidebars = {
             "examples/Solana/solana-transactions",
             "examples/Solana/solana-transfers",
             "examples/Solana/solana-zeta",
+            'examples/dextrades/DEXScreener/solana_dexscreener',
           ],
         },
 
