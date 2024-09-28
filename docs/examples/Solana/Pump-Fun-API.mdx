@@ -178,6 +178,130 @@ subscription MyQuery {
 }
 ```
 
+## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token
+
+The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
+You can run the query [here](https://ide.bitquery.io/buyers-sellers-buys-sells-makers-trades-trade-volumeall-in-5min-1H)
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Transaction: { Result: { Success: true } }
+        Trade: {
+          Currency: {
+            MintAddress: { is: "HBk9uuhJzVpCKAFj8tALc2g8iXvHgAuEKLj5JZSBpump" }
+          }
+        }
+        Block: { Time: { since: "2024-09-24T08:03:00Z" } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        start: PriceInUSD(minimum: Block_Time)
+        min5: PriceInUSD(
+          minimum: Block_Time
+          if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+        )
+        end: PriceInUSD(maximum: Block_Time)
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          ProgramAddress
+        }
+        Market {
+          MarketAddress
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            MintAddress
+          }
+        }
+      }
+      makers: count(distinct: Transaction_Signer)
+      makers_5min: count(
+        distinct: Transaction_Signer
+        if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+      )
+      buyers: count(
+        distinct: Transaction_Signer
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      buyers_5min: count(
+        distinct: Transaction_Signer
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+      sellers: count(
+        distinct: Transaction_Signer
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      sellers_5min: count(
+        distinct: Transaction_Signer
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+      trades: count
+      trades_5min: count(
+        if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+      )
+      traded_volume: sum(of: Trade_Side_AmountInUSD)
+      traded_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+      )
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      buy_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      sell_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+      buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      buys_5min: count(
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+      sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      sells_5min: count(
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+    }
+  }
+}
+```
+
 ## Get Latest Trades for a Pump Fun Token
 
 The below query gets latest trades data of the specified Token `FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93`.
@@ -547,6 +671,77 @@ query MyQuery {
     }
   }
 }
+```
+
+## Get the Dev's holdings of a token
+
+The below query retrieves the developer's holdings of the specified Token. To get the dev address first [check this out](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#get-the-creation-time--creator-of-a-pump-fun-token).
+You can run the query [here](https://ide.bitquery.io/trading-volume-of-a-token-pump-fun)
+
+```graphql
+query MyQuery ($dev: String, $token:String){
+  Solana {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Account: {Owner: {is: $dev}}, Currency: {MintAddress: {is: $token}}}}
+    ){
+      BalanceUpdate{
+        balance:PostBalance(maximum:Block_Slot)
+      }
+    }
+  }
+}
+{
+  "dev":"8oTWME5BPpudMksqEKfn562pGobrtnEpNsG66hBBgx92",
+  "token":"Edazh5SW6ts7PocPvPgjrdKyqqszcRcqdB22B8tapump"
+}
+```
+
+## Get the First 100 buyers of a Pump Fun Token
+
+The below query retrieves the first 100 buyers of a secified token.
+You can run the query [here](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1)
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTrades(
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              MintAddress: {
+                is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump"
+              }
+            }
+          }
+        }
+      }
+      limit: { count: 100 }
+      orderBy: { ascending: Block_Time }
+    ) {
+      Trade {
+        Buy {
+          Amount
+          Account {
+            Token {
+              Owner
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Check if first 100 buyers still Holding, Sold all, Bought more
+
+The below query will give you token holdings for a particular account address but you can pass the array of addresses that you got from just [above query](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1). Now you will be able to check if the first 100 buyers still holding their tokens, sold all or bought more. To check if they bought more you can compare with the above [first 100 buyers query's](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1) `amount` field.
+
+You can run the query [here](https://ide.bitquery.io/balance-of-a-specific-token-at-the-specific-account-address)
+
+```graphql
+
 ```
 
 ## Get the Top Traders of a specific Token on Pump Fun DEX
