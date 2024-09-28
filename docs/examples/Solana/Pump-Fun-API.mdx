@@ -741,7 +741,119 @@ The below query will give you token holdings for a particular account address bu
 You can run the query [here](https://ide.bitquery.io/balance-of-a-specific-token-at-the-specific-account-address)
 
 ```graphql
+query MyQuery {
+  Solana {
+    BalanceUpdates(
+      where: {
+        BalanceUpdate: {
+          Account: {
+            Token: {
+              Owner: {
+                in: [
+                  "ApRJBQEKfmcrViQkH94BkzRFUGWtA8uC71DXu6USdd3n"
+                  "9nG4zw1jVJFpEtSLmbGQpTnpG2TiKfLXWkkTyyRvxTt6"
+                ]
+              }
+            }
+          }
+          Currency: {
+            MintAddress: { is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump" }
+          }
+        }
+      }
+    ) {
+      BalanceUpdate {
+        Account {
+          Token {
+            Owner
+          }
+        }
+        balance: PostBalance(maximum: Block_Slot)
+      }
+    }
+  }
+}
+```
 
+## Get Token Metadata
+
+The below query will get you token metadata. You can use the below query if currency{name, symbol, uri} data fields from query builder gives you empty result for pump fun token metadata.
+The below query gets the arguments passed during creation of this specific token `2CAETyBJk83aGsmU65uLP3s78pigdUNJv3uRWamFpump` which are `name`, `symbol` and `uri` using Bitquery's Solana Instructions API.
+
+You can run the query [here](https://ide.bitquery.io/Pump-fun-token-metadata_1)
+
+```graphql
+{
+  Solana {
+    Instructions(
+      limit: { count: 10 }
+      where: {
+        Instruction: {
+          Program: {
+            Method: { is: "create" }
+            AccountNames: { includes: { is: "mint" } }
+          }
+          Accounts: {
+            includes: {
+              Address: { in: ["2CAETyBJk83aGsmU65uLP3s78pigdUNJv3uRWamFpump"] }
+            }
+          }
+        }
+      }
+    ) {
+      Transaction {
+        Signature
+      }
+      Instruction {
+        Data
+        Logs
+        Accounts {
+          Address
+          Token {
+            Mint
+            ProgramId
+            Owner
+          }
+        }
+        Program {
+          AccountNames
+          Json
+          Method
+          Arguments {
+            Name
+            Value {
+              __typename
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ## Get the Top Traders of a specific Token on Pump Fun DEX
