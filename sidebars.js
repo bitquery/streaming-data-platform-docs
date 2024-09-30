@@ -51,12 +51,13 @@ const sidebars = {
           type: "category",
           label: "Streaming via Subscriptions",
           items: [
-            "subscriptions/examples",
-            "subscriptions/example-rust",
-            "subscriptions/mempool-subscriptions",
+           
             "subscriptions/subscription",
             "subscriptions/trigger",
             "subscriptions/websockets",
+            "subscriptions/examples",
+            "subscriptions/example-rust",
+            "subscriptions/mempool-subscriptions",
           ],
         },
         {
