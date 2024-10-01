@@ -20,4 +20,4 @@ The final chart will look like ![this](/img/ApplicationExamples/tv_subscription.
   - The custom datafeed object
   - The widget code
 
-- Next, go to the  to start building.
+- We will start by building the historical OHLC data.
