@@ -146,11 +146,11 @@ client.subscribe(
   setInterval(() => {
     if (dataBuffer.length > 0) {
       processBuffer(onRealtimeCallback);
-      console.log("dataBuffer", dataBuffer) // Emit the last processed bar
-      dataBuffer = []; // Clear the buffer
+      dataBuffer = lastBar ? [lastBar] : []; // Clear the buffer
     }
   }, BUFFER_TIMEOUT);
 }
+
 ```
 
 - **setInterval**: Every minute (`BUFFER_TIMEOUT`), the buffer is processed, and the finalized OHLC bars are emitted using the `onRealtimeCallback` function. After processing, the buffer is cleared to prepare for the next interval.
