@@ -51,7 +51,6 @@ const sidebars = {
           type: "category",
           label: "Streaming via Subscriptions",
           items: [
-           
             "subscriptions/subscription",
             "subscriptions/trigger",
             "subscriptions/websockets",
@@ -131,7 +130,7 @@ const sidebars = {
                 "examples/dextrades/pair-creation-time",
                 "examples/dextrades/crypto-coin-ticker",
                 "examples/realtimetrades",
-                'examples/dextrades/DEXScreener/evm_dexscreener',
+                "examples/dextrades/DEXScreener/evm_dexscreener",
               ],
             },
             {
@@ -203,7 +202,7 @@ const sidebars = {
             "examples/Solana/solana-transactions",
             "examples/Solana/solana-transfers",
             "examples/Solana/solana-zeta",
-            'examples/dextrades/DEXScreener/solana_dexscreener',
+            "examples/dextrades/DEXScreener/solana_dexscreener",
           ],
         },
 
@@ -337,6 +336,21 @@ const sidebars = {
           label: "Build Lightweight TradingView Chart with Real-time Data",
           items: ["usecases/tradingview/tradingview"],
         },
+        {
+          type: "category",
+          label:
+            "Subscribing to Realtime OHLC with TradingView Advanced Charts",
+          items: [
+            "usecases/tradingview-subscription-realtime/getting-started",
+            "usecases/tradingview-subscription-realtime/historical_OHLC",
+            "usecases/tradingview-subscription-realtime/realtime_OHLC",
+
+            "usecases/tradingview-subscription-realtime/custom_datafeed",
+            "usecases/tradingview-subscription-realtime/widget",
+            "usecases/tradingview-subscription-realtime/final-step",
+          ],
+        },
+
         "usecases/Top-10-ethereum-tokens",
         "usecases/arbitrum-sniper-bot",
         "usecases/automated-trading-ethereum-volume-surge-bot",
