@@ -153,6 +153,4 @@ export default TVChartContainer;
 
 - The component renders a `div` where the TradingView chart will be displayed, with the specified height and width.
 
----
 
-This documentation should provide a clear understanding of the `TVChartContainer` component's functionality. Let me know if you'd like to add or change anything!
