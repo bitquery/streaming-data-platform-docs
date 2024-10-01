@@ -47,7 +47,7 @@ console.log("TVChartContainer called.");
 
 ```javascript
 const widgetOptions = {
-  symbol: "POPCAT",
+  symbol: "WIF",
   datafeed: Datafeed,
   interval: ["1"],
   container: chartContainerRef.current,
