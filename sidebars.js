@@ -60,16 +60,42 @@ const sidebars = {
           ],
         },
         {
-          type: "category",
-          label: "Data Streams",
+          type: 'category',
+          label: 'Data Streams',
           items: [
-            "streams/kafka-streaming-concepts",
-            "streams/kafka-streams-go",
-            "streams/kafka-streams-java",
-            "streams/kafka-streams-js",
-            "streams/kafka-streams-python",
+            'streams/kafka-streaming-concepts',
+            {
+              type: 'category',
+              label: 'Go Example',
+              items: [
+                'streams/kafka-streams-go',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Java Example',
+              items: [
+                'streams/kafka-streams-java',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'JavaScript Example',
+              items: [
+                'streams/kafka-streams-js',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Python Example',
+              items: [
+                'streams/kafka-streams-python',
+              ],
+            },
+            
           ],
         },
+        
       ],
     },
 
