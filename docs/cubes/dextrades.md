@@ -284,3 +284,26 @@ In the following example, we count the number of pools created on Uniswap v2 Dex
 We use the Trade Dex OwnerAddress filter to specify the “Dex address” and uniq metic to count the distinct pool in [Uniswap v2 Dex](https://explorer.bitquery.io/ethereum/smart_contract/0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f) "0x5c6…”.
 
 [Run this](https://ide.bitquery.io/Pool-created-metrix) query to extract the 292381 pool created before 2024-04-01 in the ethereum network.
+
+## How Does Bitquery Calculate USD Price for a Token?
+
+Bitquery calculates the token price using a simple formula:
+
+**Price = amount1 / amount2**
+
+If either of these amounts is missing, the price cannot be determined. To better understand token prices, one must first examine the trade amounts involved.
+
+It’s important to note that this “price” is not the actual market price of the token, but rather a derivative based on the trade amounts.
+
+**Example: BAR/WETH Pair**  
+**BAR Price in USD = WETH amount in USD / Amount of BAR tokens**  
+**WETH Price in USD = BAR amount in USD / Amount of WETH tokens**
+
+In this example, the second calculation (WETH Price) may not be accurate because the **BAR amount in USD is unknown**.
+
+**Example: WETH/USDT Pair**  
+**USDT Price in USD = WETH amount in USD / Amount of USDT tokens**  
+**WETH Price in USD = USDT amount in USD / Amount of WETH tokens**
+
+In this case, both values make sense, as both **WETH** and **USDT** can be valued in USD directly.
+
