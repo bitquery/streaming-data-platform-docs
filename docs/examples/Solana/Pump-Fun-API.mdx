@@ -1021,12 +1021,12 @@ To get Liquidity of tokens, we will get balance of pools for pool tokens. You ca
 
 You can use following query to get last trade before token graduate to Raydium.
 
-You can also run this query [using this link](https://ide.bitquery.io/Last-trade-before-pump-fun-token-graduate).
+You can also run this query [using this link](https://ide.bitquery.io/Last-trade-before-pump-fun-token-graduate_1).
 
 ```graphql
 {
   Solana {
-    DexPools(
+    DEXPools(
       where: {
         Pool: {
           Dex: { ProtocolName: { is: "pump" } }
