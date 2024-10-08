@@ -45,6 +45,65 @@ const sidebars = {
 
     {
       type: "category",
+      label: "Building Queries",
+      items: [
+        {
+          type: "category",
+          label: "Capabilities",
+          items: [
+            "graphql/datetime",
+            "graphql/calculations",
+            "graphql/combined",
+
+            "graphql/filters",
+            "graphql/limits",
+            "graphql/capabilities/aggregated_metrics",
+            "graphql/capabilities/array-intersect",
+            "graphql/capabilities/patterns",
+            "graphql/capabilities/query_fact_records",
+            "graphql/capabilities/subscription_aggregates",
+            "graphql/capabilities/subscription_facts",
+            "graphql/optimizing-graphql-queries",
+            "graphql/postman",
+            "graphql/query",
+            "graphql/sorting",
+          ],
+        },
+        {
+          type: "category",
+          label: "Dataset",
+          items: [
+            "graphql/dataset/archive",
+            "graphql/dataset/combined",
+            "graphql/dataset/database",
+            "graphql/dataset/EAP",
+            "graphql/dataset/network",
+            "graphql/dataset/options",
+            "graphql/dataset/realtime",
+            "graphql/dataset/select-blocks",
+          ],
+        },
+        {
+          type: "category",
+          label: "Metrics",
+          items: [
+            "graphql/metrics/alias",
+            "graphql/metrics/count",
+            "graphql/metrics/distinct",
+            "graphql/metrics/if",
+            "graphql/metrics/metrics",
+            "graphql/metrics/priceAsymmetry",
+            "graphql/metrics/selectWhere",
+            "graphql/metrics/statistics",
+            "graphql/metrics/sum",
+            "graphql/metrics/uniq",
+          ],
+        },
+      ],
+    },
+
+    {
+      type: "category",
       label: "Streaming",
       items: [
         {
@@ -60,42 +119,32 @@ const sidebars = {
           ],
         },
         {
-          type: 'category',
-          label: 'Data Streams',
+          type: "category",
+          label: "Data Streams",
           items: [
-            'streams/kafka-streaming-concepts',
+            "streams/kafka-streaming-concepts",
             {
-              type: 'category',
-              label: 'Go Example',
-              items: [
-                'streams/kafka-streams-go',
-              ],
+              type: "category",
+              label: "Go Example",
+              items: ["streams/kafka-streams-go"],
             },
             {
-              type: 'category',
-              label: 'Java Example',
-              items: [
-                'streams/kafka-streams-java',
-              ],
+              type: "category",
+              label: "Java Example",
+              items: ["streams/kafka-streams-java"],
             },
             {
-              type: 'category',
-              label: 'JavaScript Example',
-              items: [
-                'streams/kafka-streams-js',
-              ],
+              type: "category",
+              label: "JavaScript Example",
+              items: ["streams/kafka-streams-js"],
             },
             {
-              type: 'category',
-              label: 'Python Example',
-              items: [
-                'streams/kafka-streams-python',
-              ],
+              type: "category",
+              label: "Python Example",
+              items: ["streams/kafka-streams-python"],
             },
-            
           ],
         },
-        
       ],
     },
 
