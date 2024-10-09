@@ -11,6 +11,123 @@ We have two main APIs to get DEX trading data.
 
 To learn the difference between two APIs, please check [this doc](https://docs.bitquery.io/docs/schema/evm/dextrades/).
 
+## Subscribe to realtime DEXTrades on Ethereum Mainnet
+
+The below query will get you the realtime dex trades happening on Ethereum Mainnet. Open the below query in graphQL IDE using this [link](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet).
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    buyside: DEXTrades(
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
+              }
+            }
+            Seller: { is: "0x1111111254eeb25477b68fb85ed929f73a960582" }
+          }
+        }
+        Block: {
+          Time: { since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z" }
+        }
+      }
+    ) {
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        From
+        To
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          Buyer
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          Seller
+          Price
+        }
+        Sell {
+          Amount
+          Buyer
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+          Seller
+          Price
+        }
+      }
+    }
+    sellside: DEXTrades(
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Sell: {
+            Currency: {
+              SmartContract: {
+                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
+              }
+            }
+            Buyer: { is: "0x1111111254eeb25477b68fb85ed929f73a960582" }
+          }
+        }
+        Block: {
+          Time: { since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z" }
+        }
+      }
+    ) {
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        From
+        To
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          Buyer
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          Seller
+          Price
+        }
+        Sell {
+          Amount
+          Buyer
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+          Seller
+          Price
+        }
+      }
+    }
+  }
+}
+```
+
 ## Historical Token Trades & Price API
 
 DEXTrades API can give you historical trades. Let's see an example where we get trades of [BLUR Token](https://explorer.bitquery.io/ethereum/token/0x5283d291dbcf85356a21ba090e6db59121208b44) in the past. As you can see, we are using Block -> Time filter, which includes the time. If you want to filter by date, then use Block -> Date. You can also use Block -> Number if you want to filter based on block height. We are setting the `seller` and `buyer` to 1inch router [0x1111111254eeb25477b68fb85ed929f73a960582] to get both buys and sells of the BLUR token.
@@ -185,11 +302,9 @@ query LatestTrades($network: evm_network, $token: String) {
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#last_trades).
 
-
-## Token Trade analytics 
+## Token Trade analytics
 
 Check following [query](https://ide.bitquery.io/token-trade-analytics) for analytics related to token trades on DEX
-
 
 ```
  {
@@ -228,9 +343,6 @@ Check following [query](https://ide.bitquery.io/token-trade-analytics) for analy
   }
 }
 ```
-
-
-
 
 ## Top Traders of a token
 
