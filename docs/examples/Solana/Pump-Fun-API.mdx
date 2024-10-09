@@ -1017,23 +1017,18 @@ To get Liquidity of tokens, we will get balance of pools for pool tokens. You ca
 
 ```
 
-## Last Pumpfun Trade before Token gradute to Raydium
+## Last Pumpfun Trade before Token Graduate to Raydium
 
-You can use following query to get last trade before token graduate to Raydium.
+You can use the following query to get the last trade before token graduates to Raydium.
 
-You can also run this query [using this link](https://ide.bitquery.io/Last-trade-before-pump-fun-token-graduate).
+You can also run this query [using this link](https://ide.bitquery.io/pump-fun-token-graduating-to-raydium).
 
 ```graphql
 {
   Solana {
-    DexPools(
-      where: {
-        Pool: {
-          Dex: { ProtocolName: { is: "pump" } }
-          Base: { PostAmount: { eq: "206900000" } }
-        }
-        Transaction: { Result: { Success: true } }
-      }
+    DEXPools(
+      where: {Pool: {Dex: {ProtocolName: {is: "pump"}}, Base: {PostAmount: {eq: "206900000"}}}, Transaction: {Result: {Success: true}}}
+      orderBy: {descending: Block_Time}
     ) {
       Transaction {
         Signer
@@ -1077,6 +1072,7 @@ You can also run this query [using this link](https://ide.bitquery.io/Last-trade
     }
   }
 }
+
 ```
 
 ## Video Tutorial on Getting Pump Fun Trades

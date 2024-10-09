@@ -45,18 +45,77 @@ const sidebars = {
 
     {
       type: "category",
+      label: "Building Queries",
+      items: [
+        {
+          type: "category",
+          label: "Capabilities",
+          items: [
+            "graphql/datetime",
+            "graphql/calculations",
+            "graphql/combined",
+
+            "graphql/filters",
+            "graphql/limits",
+            "graphql/capabilities/aggregated_metrics",
+            "graphql/capabilities/array-intersect",
+            "graphql/capabilities/patterns",
+            "graphql/capabilities/query_fact_records",
+            "graphql/capabilities/subscription_aggregates",
+            "graphql/capabilities/subscription_facts",
+            "graphql/optimizing-graphql-queries",
+            "graphql/postman",
+            "graphql/query",
+            "graphql/sorting",
+          ],
+        },
+        {
+          type: "category",
+          label: "Dataset",
+          items: [
+            "graphql/dataset/archive",
+            "graphql/dataset/combined",
+            "graphql/dataset/database",
+            "graphql/dataset/EAP",
+            "graphql/dataset/network",
+            "graphql/dataset/options",
+            "graphql/dataset/realtime",
+            "graphql/dataset/select-blocks",
+          ],
+        },
+        {
+          type: "category",
+          label: "Metrics",
+          items: [
+            "graphql/metrics/alias",
+            "graphql/metrics/count",
+            "graphql/metrics/distinct",
+            "graphql/metrics/if",
+            "graphql/metrics/metrics",
+            "graphql/metrics/priceAsymmetry",
+            "graphql/metrics/selectWhere",
+            "graphql/metrics/statistics",
+            "graphql/metrics/sum",
+            "graphql/metrics/uniq",
+          ],
+        },
+      ],
+    },
+
+    {
+      type: "category",
       label: "Streaming",
       items: [
         {
           type: "category",
           label: "Streaming via Subscriptions",
           items: [
-            "subscriptions/examples",
-            "subscriptions/example-rust",
-            "subscriptions/mempool-subscriptions",
             "subscriptions/subscription",
             "subscriptions/trigger",
             "subscriptions/websockets",
+            "subscriptions/examples",
+            "subscriptions/example-rust",
+            "subscriptions/mempool-subscriptions",
           ],
         },
         {
@@ -64,10 +123,26 @@ const sidebars = {
           label: "Data Streams",
           items: [
             "streams/kafka-streaming-concepts",
-            "streams/kafka-streams-go",
-            "streams/kafka-streams-java",
-            "streams/kafka-streams-js",
-            "streams/kafka-streams-python",
+            {
+              type: "category",
+              label: "Go Example",
+              items: ["streams/kafka-streams-go"],
+            },
+            {
+              type: "category",
+              label: "Java Example",
+              items: ["streams/kafka-streams-java"],
+            },
+            {
+              type: "category",
+              label: "JavaScript Example",
+              items: ["streams/kafka-streams-js"],
+            },
+            {
+              type: "category",
+              label: "Python Example",
+              items: ["streams/kafka-streams-python"],
+            },
           ],
         },
       ],
@@ -130,7 +205,7 @@ const sidebars = {
                 "examples/dextrades/pair-creation-time",
                 "examples/dextrades/crypto-coin-ticker",
                 "examples/realtimetrades",
-                'examples/dextrades/DEXScreener/evm_dexscreener',
+                "examples/dextrades/DEXScreener/evm_dexscreener",
               ],
             },
             {
@@ -202,7 +277,7 @@ const sidebars = {
             "examples/Solana/solana-transactions",
             "examples/Solana/solana-transfers",
             "examples/Solana/solana-zeta",
-            'examples/dextrades/DEXScreener/solana_dexscreener',
+            "examples/dextrades/DEXScreener/solana_dexscreener",
           ],
         },
 
@@ -336,6 +411,21 @@ const sidebars = {
           label: "Build Lightweight TradingView Chart with Real-time Data",
           items: ["usecases/tradingview/tradingview"],
         },
+        {
+          type: "category",
+          label:
+            "Subscribing to Realtime OHLC with TradingView Advanced Charts",
+          items: [
+            "usecases/tradingview-subscription-realtime/getting-started",
+            "usecases/tradingview-subscription-realtime/historical_OHLC",
+            "usecases/tradingview-subscription-realtime/realtime_OHLC",
+
+            "usecases/tradingview-subscription-realtime/custom_datafeed",
+            "usecases/tradingview-subscription-realtime/widget",
+            "usecases/tradingview-subscription-realtime/final-step",
+          ],
+        },
+
         "usecases/Top-10-ethereum-tokens",
         "usecases/arbitrum-sniper-bot",
         "usecases/automated-trading-ethereum-volume-surge-bot",
@@ -369,22 +459,20 @@ const sidebars = {
             "cloud/protobuf/evm",
             "cloud/protobuf/protobuf",
             "cloud/protobuf/solana",
+            "cloud/protobuf/tron",
+            "cloud/protobuf/objects",
           ],
         },
         {
           type: "category",
-          label: "S3",
+          label: "Examples",
           items: [
-            "cloud/s3/awscli",
-            "cloud/s3/buckets",
-            "cloud/s3/demo",
-            "cloud/s3/messages",
+            "cloud/examples/appsync",
+            "cloud/examples/lambda-functions",
+            "cloud/examples/s3-eth-tutorial",
           ],
         },
-        "cloud/appsync",
-        "cloud/lambda-functions",
-        "cloud/s3-eth-tutorial",
-        "cloud/s3-tron-tutorial",
+
       ],
     },
 

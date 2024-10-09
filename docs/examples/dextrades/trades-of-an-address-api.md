@@ -4,68 +4,60 @@ sidebar_position: 7
 
 # Address Trades API
 
-## Latest Trades for a given address
+## Latest Trades by Maker Address
 
-This GraphQL query retrieves the latest 10 buy-side and sell-side trades from the DEXTrades dataset on the Ethereum network for a specific buyer/seller.
-You can view the query in the IDE [here](https://ide.bitquery.io/Trades-if-an-address)
-
+This GraphQL query retrieves the latest trades executed by a particular maker on the Ethereum network. You can view the query in the IDE [here](https://ide.bitquery.io/latest_trades_by_maker)
 ```
-{
+query MyQuery {
   EVM(dataset: combined, network: eth) {
-     DEXTrades(
+    DEXTrades(
+      where: {Transaction: {From: {is: "0x9d6581468F04e5E55876a2660b5AeAbC12e3EFa0"}}}
       limit: {count: 10}
-      orderBy: {descending: Block_Time}
-      where: {any: [{Trade: {Buy: {Buyer: {is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"}}}}, {Trade: {Buy: {Seller: {is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"}}}}]}
+      orderBy: {descending: Block_Number}
     ) {
-      Block {
-        Number
-        Time
-      }
       Transaction {
+        Hash
         From
         To
-        Hash
       }
       Trade {
+        Sender
         Buy {
-          Amount
           Buyer
+          Seller
           Currency {
             Name
-            Symbol
             SmartContract
           }
-          Seller
+          Amount
           Price
         }
         Sell {
-          Amount
           Currency {
             Name
             SmartContract
-            Symbol
           }
+          Buyer
+          Amount
+          Seller
           Price
         }
+      }
+      Block {
+        Number
+        Time
       }
     }
   }
 }
 
-
 ```
-
-We use the `any` filter two handle two scenarios:
-
-- Most recent DEX trades where the specified address was the buyer. The results are ordered by the block time in descending order.
-
-- Most recent DEX trades where the specified address was the seller. The results are also ordered by the block time in descending order.
 
 **Parameters**
 
 - `limit`: retrieve only 10 trades
-- `orderBy`: sort the trades by Block_Time in descending order
-- `where`: retrieve trades where the Buyer's address matches "0x1f77dfeb0e6fed1ecf0b41d4c81330df6a6fb167"
+- `orderBy`: sort the trades by Block Number in descending order
+- `where`: retrieve trades where the address was a maker
 
 **Returned Data**
 
@@ -77,76 +69,63 @@ For each trade, the query retrieves the following data:
 
 - `Trade`: details of the trade, including the amount of the currency bought and sold, the buyer and seller addresses, the currency name, symbol, and smart contract address, and the price of the trade.
 
-## Token trades for an specific address for a specific currency
+##  Buys and Sells of a Specific Token Pair by an Address
 
-You can view the query in the IDE [here](https://ide.bitquery.io/Trades-of-an-address-for-a-currency_1)
+You can view the query in the IDE [here](https://ide.bitquery.io/latest_buys_and_sell_)
 
 ```
-{
-  EVM(network: eth, dataset: archive) {
-    DEXTradeByTokens(
-      where: {
-
-        Trade: {
-          Currency: {
-          	SmartContract: {
-              is: "0xcdf7028ceab81fa0c6971208e83fa7872994bee5"
-            }
-          }
-        }
-
-        any: [
-      		{
-            Transaction: {
-              From: {
-                is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"
-              }
-            }
-          }
-          {
-            Trade: {
-              Buyer: {
-                is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"
-              }
-            }
-          }
-          {
-            Trade: {
-              Seller: {
-                is: "0x152a04d9fde2396c01c5f065a00bd5f6edf5c88d"
-              }
-            }
-          }
-        ]}
-    limit: {count: 10}
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    Sells: DEXTrades(
+      where: {Transaction: {From: {is: "0x9d6581468F04e5E55876a2660b5AeAbC12e3EFa0"}}, Trade: {Buy: {Currency: {SmartContract: {is: "0x7E744BBB1a49A44dfCC795014a4BA618E418FbBE"}}}, Dex: {SmartContract: {is: "0x8C13d5a6635216513EbFB4483397bE14D494aD76"}}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Number}
     ) {
       Transaction {
-        From
         Hash
+        From
+        To
+      }
+      Block{
+        Time
+        Number
       }
       Trade {
-        Amount
-        Buyer
-        Currency {
-          Name
-          Symbol
-          SmartContract
-        }
-        Seller
-        Price
-        Dex {
-          ProtocolName
-          ProtocolVersion
-          ProtocolFamily
-          OwnerAddress
-        }
-        Side {
-          Currency {
-            SmartContract
-            Symbol
-            Name
-          }
+        Sender
+        Buy {
           Buyer
+          Seller
+          Currency {
+            Name
+            SmartContract
+          }
+          Amount
+        }
+      }
+    }
+    Buys: DEXTrades(
+      where: {Transaction: {From: {is: "0x9d6581468F04e5E55876a2660b5AeAbC12e3EFa0"}}, Trade: {Sell: {Currency: {SmartContract: {is: "0x7E744BBB1a49A44dfCC795014a4BA618E418FbBE"}}}, Dex: {SmartContract: {is: "0x8C13d5a6635216513EbFB4483397bE14D494aD76"}}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Number}
+    ) {
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Block{
+        Time
+        Number
+      }
+      Trade {
+        Sell {
+          Buyer
+          Seller
+          Currency {
+            Name
+            SmartContract
+          }
+          Amount
         }
       }
     }
@@ -155,17 +134,18 @@ You can view the query in the IDE [here](https://ide.bitquery.io/Trades-of-an-ad
 
 ```
 
-There are two sub-queries specified within the "EVM" field: "buyside" and "sellside".
 
-The "buyside" sub-query retrieves the 10 most recent DEX trades where the specified address was the buyer of a specific ERC20 token. The results are ordered by the block time in descending order.
+The "EVM" field contains two sub-queries: "Buys" and "Sells."
 
-The "sellside" sub-query retrieves the 10 most recent DEX trades where the specified address was the seller of a specific ERC20 token. The results are also ordered by the block time in descending order.
+The "Buys" sub-query retrieves the 10 most recent trades where the specified address was the maker and the token was purchased.
+
+The "Sells" sub-query retrieves the 10 most recent trades where the specified address was the maker and the token was sold.
 
 **Parameters**
 
 - `limit`: retrieve only 10 trades
-- `orderBy`: sort the trades by Block_Time in descending order
-- `where`: retrieve trades where the Buyer's address matches "0x1f77dfeb0e6fed1ecf0b41d4c81330df6a6fb167" and SmartContract address is "0x497a9a79e82e6fc0ff10a16f6f75e6fcd5ae65a8"
+- `orderBy`: sort the trades by Block_Number in descending order
+- `where`: retrieve trades where the maker address matches "0x9d6581468F04e5E55876a2660b5AeAbC12e3EFa0" and token SmartContract and pair address is "0x7E744BBB1a49A44dfCC795014a4BA618E418FbBE" and "0x8C13d5a6635216513EbFB4483397bE14D494aD76" respectively
 
 **Returned Data**
 
@@ -173,7 +153,7 @@ For each trade, the query retrieves the following data:
 
 - `Block`: block number and timestamp of the block in which the trade occurred.
 
-- `Transaction`: addresses of the transaction sender and receiver, and the transaction hash.
+- `Transaction`:  The sender, reciever and the transaction hash
 
 - `Trade`: details of the trade, including the amount of the currency bought and sold, the buyer and seller addresses, the currency name, symbol, and smart contract address, and the price of the trade.
 

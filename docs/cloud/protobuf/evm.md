@@ -2,18 +2,33 @@
 sidebar_position: 4
 ---
 
-# EVM Streams
+# EVM Data Buckets
 
-The mapping between EVM streams of messages and protobuf schemas:
+Data buckets are created per-blockchain with the following names:
 
-* ```BLOCKCHAIN.blocks.s3``` -> **BlockMessage** of [block_message.proto](https://github.com/bitquery/streaming_protobuf/blob/main/evm/block_message.proto) 
-* ```BLOCKCHAIN.dextrades.s3``` -> **DexBlockMessage** of [dex_block_message.proto](https://github.com/bitquery/streaming_protobuf/blob/main/evm/dex_block_message.proto)
-* ```BLOCKCHAIN.transactions.s3``` -> **ParsedAbiBlockMessage** of [parsed_abi_block_message.proto](https://github.com/bitquery/streaming_protobuf/blob/main/evm/parsed_abi_block_message.proto)
-* ```BLOCKCHAIN.tokens.s3``` -> **TokenBlockMessage** of [token_block_message.proto](https://github.com/bitquery/streaming_protobuf/blob/main/evm/token_block_message.proto)
+* ```streaming-eth``` for Ethereum Mainnet
+* ```streaming-bsc``` for Binance Smart Chain Mainnet
+* ```streaming-matic``` for Matic (Polygon) Mainnet
+* ```streaming-arbitrum``` for Arbitrum Mainnet
+* ```streaming-optimism``` for Optimism Mainnet
+* ```streaming-opbnb``` for Binance OpBNB Mainnet
+* ```streaming-base``` for Base Mainnet
 
-where ```BLOCKCHAIN``` stands for the short blockchain name:
+Buckets contain the files with path
 
-* ```eth``` for Ethereum Mainnet
-* ```bsc``` for Binance Smart Chain Mainnet
+```
+<EVM_CHAIN>.blocks.s3/<FOLDER>/<BLOCK>_<BLOCK_HASH>_<CONTENT_HASH>.block.lz4
+```
 
-(more chains may be added in the future)
+where:
+
+* ```<EVM_CHAIN>``` is the name of the chain ( same as in bucket name )
+* ```<FOLDER>``` is the folder of block number, rounded to 1000, padded with zeroes up to 12 digites, e.g. 000000001000
+* ```<BLOCK>``` is the block number, padded with zeroes up to 12 digites, e.g. 000000001234
+* ```<BLOCK_HASH>``` block hash, hex, 0x prefixed
+* ```<CONTENT_HASH>``` content hash
+
+The content is Protobuf encoded and LZ4 compressed file of the raw block from the blockchain node, with all traces.
+
+Schema for Protobuf is **BlockMessage** of [block_message.proto](https://github.com/bitquery/streaming_protobuf/blob/main/evm/block_message.proto)
+

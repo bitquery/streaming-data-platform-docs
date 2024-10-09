@@ -13,7 +13,7 @@ To calculate or monitor the real time balance of a wallet, we will need a GraphQ
 This is the simplified formula we will use in this example:
 
 ```
-Current Balance = sum(all_balance_updates) + steam_balance_updates
+Current Balance = sum(all_balance_updates) + stream_balance_updates
 ``` 
 
 If during the building of project you are stuck, you can refer to the following [Github Repository](https://github.com/Kshitij0O7/real-time-balance).
