@@ -18,7 +18,7 @@ is padded with vertain number of '0-s', that enable you to sort blocks using S3 
 
 Example of the full path to the Object is ```eth.blocks.s3/000001881000/000001881143_0x6076a99f05633913f4746a0b64fbf516c96f528107ba9d10c28919ecbbb50133_d0687720be3358b36f07209d080c3b9600f2ee4300f5abd16e74a4bf539c53d6.block.lz4```
 
-* ```eth.blocks.s3``` is the name of the [bucket](/docs/cloud/s3/buckets) containing EVM Block Objects
+* ```eth.blocks.s3``` is the name of the bucket](/docs/cloud/protobuf/evm) containing EVM Block Objects
 * ```000001881000``` contains Objects for blocks between 1881000 and 1881999
 * ```000001881143``` is the number of the block
 * ```0x6076a99f05633913f4746a0b64fbf516c96f528107ba9d10c28919ecbbb50133``` is the block hash

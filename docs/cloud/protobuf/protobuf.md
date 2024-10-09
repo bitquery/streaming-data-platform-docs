@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Protobuf Format
 
-[Message](/docs/cloud/s3/messages) is encoded using [protobuf](https://protobuf.dev/) schema and compressed with
+[Object](/docs/cloud/s3/objects) is encoded using [protobuf](https://protobuf.dev/) schema and compressed with
 [lz4](https://github.com/lz4/lz4) utility.
 
 [Protobuf](https://protobuf.dev/) schema is defined at the
