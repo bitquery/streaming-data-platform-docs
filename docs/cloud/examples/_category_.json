@@ -1,0 +1,8 @@
+{
+  "label": "Examples Using the Cloud Data",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "Using data and streams in cloud"
+  }
+}

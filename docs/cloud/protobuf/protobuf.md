@@ -7,9 +7,13 @@ sidebar_position: 3
 [Message](/docs/cloud/s3/messages) is encoded using [protobuf](https://protobuf.dev/) schema and compressed with
 [lz4](https://github.com/lz4/lz4) utility.
 
-[Protobuf](https://protobuf.dev/) schema corresponds to the stream ( folder in [bucket](/docs/cloud/s3/buckets) ).
-Refer to the below sections for the exact mapping of different types of the blockchain.
+[Protobuf](https://protobuf.dev/) schema is defined at the
+[streaming_protobuf](https://github.com/bitquery/streaming_protobuf) project
+according to the blockchain type.
 
-Github project [streaming_protobuf](https://github.com/bitquery/streaming_protobuf)
-contains the schema for the streams.
+Refer to the blockchain sections for the exact mapping of different types of the blockchain.
 
+To decode the file content you have to:
+
+1. de-compress the object using LZ4 library
+2. decode the content using appropriate schema from [streaming_protobuf](https://github.com/bitquery/streaming_protobuf) project
