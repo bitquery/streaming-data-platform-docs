@@ -19,45 +19,46 @@ export const endpoint = "https://streaming.bitquery.io/graphql";
 
 #### 2. GraphQL Query for Token Details
 
-The OHLC calculation on the IDE provides OHLC data only for time slots with trades. To obtain continuous OHLC data in cases where there are no trades in certain time slots, you can follow either of the following approaches: 
+The OHLC calculation on the IDE provides OHLC data only for time slots with trades. To obtain continuous OHLC data in cases where there are no trades in certain time slots, you can follow either of the following approaches:
 
-- Retrieve all trades locally and calculate the OHLC. 
+- Retrieve all trades locally and calculate the OHLC.
 
 - Alternatively, retrieve the OHLC data from a query and fill in the gaps.
 
 ```javascript
 export const TOKEN_DETAILS = `
 {
-  EVM(network: eth, dataset: archive) {
+  EVM(network: eth, dataset: combined) {
     DEXTradeByTokens(
       orderBy: {ascendingByField: "Block_OHLC_interval"}
       where: {Trade: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}, 
-      Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}
-    }
-      Block:{Time:{since:"2023-12-05T00:00:40Z", till:"2024-01-05T00:00:40Z"}}
-  
-  }
+      Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}},
+      Block: {Time: {since: "2023-12-05T00:00:40Z", till: "2024-01-05T00:00:40Z"}}}
       limit: {count: 15000}
     ) {
-    Block {
-         OHLC_interval: Time(interval: {in: minutes, count:1})
+      Block {
+        OHLC_interval: Time(interval: {in: minutes, count: 1})
       }
-     
       volume: sum(of: Trade_Amount)
       Trade {
-        high: Price(maximum: Trade_Price, selectWhere:{lt:20000})
-        low: Price(minimum: Trade_Price, selectWhere:{lt:20000})
-        open: Price(minimum: Block_Number, selectWhere:{lt:20000})
-        close: Price(maximum: Block_Number, selectWhere:{lt:20000})
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Number)
+        close: Price(maximum: Block_Number)
       }
       count
     }
   }
 }
+
 `;
 ```
 
-This query retrieves Open, High, Low, and Close (OHLC) data for the USDT-WETH pair from the earliest 300 records available . You can also retrieve the the data for any period you wish. To avoid outliers we filter prices using `less than ` filter, `selectWhere:{lt:20000}` since WETH-USDT price at the period was much lesser.
+This query retrieves Open, High, Low, and Close (OHLC) data for the USDT-WETH pair from the earliest 300 records available . You can also retrieve the the data for any period you wish.
+
+**Outliers**
+
+To avoid outliers, use `priceAsymmetry` to filter values. Read more [here](https://docs.bitquery.io/docs/graphql/metrics/priceAsymmetry/#how-to-use-priceasymmetry-to-filter-anomalies-and-outliers-in-trades-)
 
 **You can add code snippets to dynamically filter records based on the price range.**
 
