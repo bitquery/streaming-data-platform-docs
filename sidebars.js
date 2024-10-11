@@ -247,6 +247,7 @@ const sidebars = {
             "examples/BSC/bsc-events-api",
             "examples/BSC/bsc-nft",
             "examples/BSC/bsc-transfers",
+            "examples/BSC/gra-fun-api"
           ],
         },
         {

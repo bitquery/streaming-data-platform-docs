@@ -29,7 +29,7 @@ In this section we'll have a look at some examples using the BSC Transfers API.
 <meta property="twitter:description" content="Get Meme coins trade from GRA.fun on BSC blockchain. Get buy, sell, redeem trades both real time and historical." />
 </head>
 
-## 1. New Token Created
+## New Token Created
 
 Retrieve newly created tokens on the gra.fun platform using [query below](https://ide.bitquery.io/grafun-new-token-created-api).
 
