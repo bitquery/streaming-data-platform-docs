@@ -16,116 +16,54 @@ To learn the difference between two APIs, please check [this doc](https://docs.b
 The below query will get you the realtime dex trades happening on Ethereum Mainnet. Open the below query in graphQL IDE using this [link](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet).
 
 ```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    buyside: DEXTrades(
-      limit: { count: 10 }
-      orderBy: { descending: Block_Time }
-      where: {
-        Trade: {
-          Buy: {
-            Currency: {
-              SmartContract: {
-                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
-              }
-            }
-            Seller: { is: "0x1111111254eeb25477b68fb85ed929f73a960582" }
-          }
-        }
-        Block: {
-          Time: { since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z" }
-        }
-      }
-    ) {
+
+ subscription MyQuery {
+  EVM(network: eth) {
+    DEXTrades {
       Block {
-        Number
         Time
       }
       Transaction {
-        From
-        To
         Hash
       }
       Trade {
         Buy {
-          Amount
           Buyer
+          AmountInUSD
+          Amount
+          Seller
+          PriceInUSD
+          Price
           Currency {
             Name
             Symbol
             SmartContract
           }
-          Seller
-          Price
+        }
+        Dex {
+          SmartContract
+          ProtocolName
+          ProtocolVersion
         }
         Sell {
-          Amount
           Buyer
-          Currency {
-            Name
-            SmartContract
-            Symbol
-          }
+          AmountInUSD
+          Amount
           Seller
+          PriceInUSD
           Price
-        }
-      }
-    }
-    sellside: DEXTrades(
-      limit: { count: 10 }
-      orderBy: { descending: Block_Time }
-      where: {
-        Trade: {
-          Sell: {
-            Currency: {
-              SmartContract: {
-                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
-              }
-            }
-            Buyer: { is: "0x1111111254eeb25477b68fb85ed929f73a960582" }
-          }
-        }
-        Block: {
-          Time: { since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z" }
-        }
-      }
-    ) {
-      Block {
-        Number
-        Time
-      }
-      Transaction {
-        From
-        To
-        Hash
-      }
-      Trade {
-        Buy {
-          Amount
-          Buyer
           Currency {
             Name
             Symbol
             SmartContract
           }
-          Seller
-          Price
-        }
-        Sell {
-          Amount
-          Buyer
-          Currency {
-            Name
-            SmartContract
-            Symbol
-          }
-          Seller
-          Price
         }
       }
     }
   }
 }
+
+ 
 ```
 
 ## Historical Token Trades & Price API

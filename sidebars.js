@@ -392,6 +392,7 @@ const sidebars = {
           label: "TradingView Advanced Charts",
           items: [
             "usecases/tradingview-advanced-charts/getting-started",
+            "usecases/tradingview-advanced-charts/component",
             "usecases/tradingview-advanced-charts/datafeed",
             "usecases/tradingview-advanced-charts/getBars",
             "usecases/tradingview-advanced-charts/advancedChart",
