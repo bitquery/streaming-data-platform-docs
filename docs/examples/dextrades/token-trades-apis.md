@@ -16,8 +16,7 @@ To learn the difference between two APIs, please check [this doc](https://docs.b
 The below query will get you the realtime dex trades happening on Ethereum Mainnet. Open the below query in graphQL IDE using this [link](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet).
 
 ```graphql
-
- subscription MyQuery {
+subscription MyQuery {
   EVM(network: eth) {
     DEXTrades {
       Block {
@@ -62,8 +61,105 @@ The below query will get you the realtime dex trades happening on Ethereum Mainn
     }
   }
 }
+```
 
- 
+## Get the Buys, Sells, Buy Volume, Sell Volume and Makers
+
+The query will fetch you the buys, sells, buy volume, sell volume and also the number of makers for a particular token just like how DEXScreener shows in its UI. We are getting these trade metrics for this particular pool address `0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`.
+
+You can find the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD_1)
+
+```
+query MyQuery($network: evm_network, $token: String, $min5_timestamp: DateTime ) {
+  EVM(dataset: realtime, network: $network) {
+    DEXTradeByTokens(
+      where: {TransactionStatus: {Success: true}, Trade: {Currency: {SmartContract: {is: $token}}}, Block: {Time: {since: "2024-10-11T09:30:00Z"}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          SmartContract
+          Symbol
+        }
+        startPrice: PriceInUSD(minimum: Block_Time)
+        Price_at_min5: PriceInUSD(
+          minimum: Block_Time
+          if: {Block: {Time: {after: $min5_timestamp}}}
+        )
+        current_price: PriceInUSD(maximum: Block_Time)
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          SmartContract
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+      }
+      makers: count(distinct: Transaction_From)
+      makers_5min: count(
+        distinct: Transaction_From
+        if: {Block: {Time: {after: $min5_timestamp}}}
+      )
+      buyers: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: sell}}}}
+      )
+      buyers_5min: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      sellers: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: buy}}}}
+      )
+      sellers_5min: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      trades: count
+      trades_5min: count(if: {Block: {Time: {after: $min5_timestamp}}})
+      traded_volume: sum(of: Trade_Side_AmountInUSD)
+      traded_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {after: $min5_timestamp}}}
+      )
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: sell}}}}
+      )
+      buy_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: buy}}}}
+      )
+      sell_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      buys: count(if: {Trade: {Side: {Type: {is: sell}}}})
+      buys_5min: count(
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      sells: count(if: {Trade: {Side: {Type: {is: buy}}}})
+      sells_5min: count(
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+    }
+  }
+}
+{
+  "network": "eth",
+  "token": "0x842293fa6ee0642bf61ebf8310e7e546039ba7f4",
+  "min5_timestamp": "2024-10-11T09:30:00Z"
+}
 ```
 
 ## Historical Token Trades & Price API
