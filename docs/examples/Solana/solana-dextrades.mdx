@@ -169,15 +169,142 @@ query LatestTrades($token: String, $base: String) {
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_latest_trades).
 
+## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token
+
+The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
+You can run the query [here](https://ide.bitquery.io/buyers-sellers-buys-sells-makers-trades-trade-volumeall-in-5min-1H)
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Transaction: { Result: { Success: true } }
+        Trade: {
+          Currency: {
+            MintAddress: { is: "HBk9uuhJzVpCKAFj8tALc2g8iXvHgAuEKLj5JZSBpump" }
+          }
+        }
+        Block: { Time: { since: "2024-09-24T08:03:00Z" } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        start: PriceInUSD(minimum: Block_Time)
+        min5: PriceInUSD(
+          minimum: Block_Time
+          if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+        )
+        end: PriceInUSD(maximum: Block_Time)
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          ProgramAddress
+        }
+        Market {
+          MarketAddress
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            MintAddress
+          }
+        }
+      }
+      makers: count(distinct: Transaction_Signer)
+      makers_5min: count(
+        distinct: Transaction_Signer
+        if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+      )
+      buyers: count(
+        distinct: Transaction_Signer
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      buyers_5min: count(
+        distinct: Transaction_Signer
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+      sellers: count(
+        distinct: Transaction_Signer
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      sellers_5min: count(
+        distinct: Transaction_Signer
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+      trades: count
+      trades_5min: count(
+        if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+      )
+      traded_volume: sum(of: Trade_Side_AmountInUSD)
+      traded_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+      )
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      buy_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      sell_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+      buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      buys_5min: count(
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+      sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      sells_5min: count(
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
+        }
+      )
+    }
+  }
+}
+```
+
 ## Top 10 Trending Solana Tokens
 
 [This](https://ide.bitquery.io/Trending-tokens-on--Solana_2) query returns the top 10 trending tokens on Solana across all DEXs based on the number of trades with unique traders.
 [This](https://ide.bitquery.io/Trending-tokens-on--Solana-for-one-hour) query returns the trending list of tokens for a particular time period, `1 hour` in this case.
 
-``` graphql
+```graphql
 query TrendingTokens {
   Solana {
-    DEXTradeByTokens(limit: {count: 10}, orderBy: {descendingByField: "tradesCountWithUniqueTraders"}) {
+    DEXTradeByTokens(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "tradesCountWithUniqueTraders" }
+    ) {
       Trade {
         Currency {
           Name
@@ -194,7 +321,6 @@ query TrendingTokens {
 You can also checkout how such queries are used as a base to completed features such as [DEXrabbit Solana Trends](https://dexrabbit.com/solana/token) as shown in the image below.
 
 ![Trending Pairs on DEXrabbit](../../../static/img/dexrabbit/trending_tokens_solana.png)
-
 
 ## Top Traders of a token
 
