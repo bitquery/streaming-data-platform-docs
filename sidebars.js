@@ -116,6 +116,7 @@ const sidebars = {
             "subscriptions/examples",
             "subscriptions/example-rust",
             "subscriptions/mempool-subscriptions",
+            "subscriptions/backfilling-subscription"
           ],
         },
         {
