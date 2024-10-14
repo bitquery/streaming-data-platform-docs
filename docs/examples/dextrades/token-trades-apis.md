@@ -506,40 +506,6 @@ query tokenDexMarkets($network: evm_network, $token: String) {
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#token_dex_list).
 
-## Get OHLC data of a token
-
-This query will fetch you the OHLC of a token for the selected network.
-You can test the query [here](https://ide.bitquery.io/ohlc_10_1).
-
-```
-query tradingView($network: evm_network, $token: String) {
-  EVM(network: $network) {
-    DEXTradeByTokens(
-      orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Currency: {SmartContract: {is: $token}}}}
-    ) {
-      Block {
-        Time(interval: {count: 5, in: minutes})
-      }
-      Trade {
-        open: PriceInUSD(minimum: Block_Number)
-        close: PriceInUSD(maximum: Block_Number)
-        max: PriceInUSD(maximum: Trade_PriceInUSD)
-        min: PriceInUSD(minimum: Trade_PriceInUSD)
-      }
-      volume: sum(of: Trade_Side_AmountInUSD, selectWhere: {gt: "0"})
-    }
-  }
-}
-{
-  "network": "eth",
-  "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
-}
-```
-
-![image](https://github.com/user-attachments/assets/561382a8-1f70-4bc3-aa22-76987427d56b)
-
-You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599).
 
 ## Latest Trades of a Token pair
 

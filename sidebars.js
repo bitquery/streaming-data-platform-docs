@@ -206,6 +206,7 @@ const sidebars = {
                 "examples/dextrades/crypto-coin-ticker",
                 "examples/realtimetrades",
                 "examples/dextrades/DEXScreener/evm_dexscreener",
+                "examples/dextrades/pools-api"
               ],
             },
             {
