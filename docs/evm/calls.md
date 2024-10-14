@@ -98,3 +98,55 @@ Here's a sample query to get started.
 ```
 
 Calls contain the arguments and return values as arrays, refer to [arguments](/docs/evm/arguments) for data structure.
+
+
+# New tokens created on EVM chain
+
+To get new token created on EVM chains such as Etheruem or BSC, please use [this query](https://ide.bitquery.io/Newly-Created-Tokens-on-BSC-network_4).
+Change the network according to your requirements.
+
+```graphql
+{
+  EVM(network: bsc) {
+    Calls(
+      orderBy: {descending: Block_Time}
+      limit: {count: 10}
+      where: {Call: {Create: true}, Arguments: {length: {ne: 0}}, Receipt: {ContractAddress: {not: "0x0000000000000000000000000000000000000000"}}, TransactionStatus: {Success: true}}
+    ) {
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+````
+
