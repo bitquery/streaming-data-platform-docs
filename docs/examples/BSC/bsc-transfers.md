@@ -29,7 +29,7 @@ In this section we'll have a look at some examples using the BSC Transfers API.
 <meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
 </head>
 
-# Subscribe to Recent Whale Transactions of a particular currency
+## Subscribe to Recent Whale Transactions of a particular currency
 
 The subscription query below fetches the whale transactions on the BSC network. We have used WBNB address `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`. You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDC-on-BSC)
 
@@ -63,7 +63,7 @@ subscription{
 
 ```
 
-# Sender is a particular address
+## Sender is a particular address
 
 This websocket retrieves transfers where the sender is a particular address `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/Transfers-where-sender-is-a-particular-address)
 
@@ -95,7 +95,7 @@ subscription {
 
 ```
 
-# Subscribe to the latest NFT token transfers on BSC
+## Subscribe to the latest NFT token transfers on BSC
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on BSC network. You can run the query [here](https://ide.bitquery.io/Track-realtime-NFT-Transfers-on-BSC-chain)
 
