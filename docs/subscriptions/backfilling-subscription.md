@@ -264,7 +264,7 @@ async def backfill_data(start_time, end_time):
 
 **Explanation**:
 
-1. **GraphQL Query**: The query fetches `DEXTrades` within the specified `start_time` and `end_time`. It retrieves relevant fields such as transaction hashes, trade details, and currency information.
+1. **GraphQL Query**: The query fetches `DEXTrades` within the specified `start_time` and `end_time`. 
 
 2. **HTTP Request**: Sends the query to the Bitquery API using an HTTP POST request with the necessary headers, including the authorization token.
 
