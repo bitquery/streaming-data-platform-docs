@@ -15,7 +15,10 @@ In this tutorial, we'll build a system that:
 3. **Backfills any missing data during downtime by querying historical data.**
 4. **Ensures the WebSocket connection is gracefully closed when necessary.**
 
+![flow](/img/diagrams/backfill.png)
+
 We'll use Python's `asyncio` for asynchronous operations, the `gql` library for GraphQL interactions, and the `requests` library for HTTP requests.
+
 
 ## Prerequisites
 
