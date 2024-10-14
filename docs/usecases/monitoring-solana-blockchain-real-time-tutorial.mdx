@@ -1,6 +1,6 @@
 # Monitoring the Solana Blockchain in Real Time - Easy Tutorial
 
-Monitoring blockchain activities is crucial for developers, investors, and regulatory bodies. Tools like [Bitquery](https://bitquery.io) offer the infrastructure to monitor blockchain activities effectively. In this tutorial, we'll use [Bitquery Solana real-time data](https://bitquery.io/blockchains/solana-blockchain-api) and Python to build a real-time Solana DEX monitoring dashboard.
+Monitoring blockchain activities is crucial for developers, investors, and regulatory bodies. [Bitquery](https://bitquery.io) offers the infrastructure to monitor blockchain activities effectively. In this tutorial, we'll use [Bitquery Solana real-time data](https://bitquery.io/blockchains/solana-blockchain-api) and Python to build a real-time Solana DEX monitoring dashboard.
 
 We will create a dashboard that monitors **Solana DEX trades** and **Raydium DEX trades**. Here is a step-by-step guide to build this system.
 The code can be found [here on GitHub](https://gist.github.com/divyasshree-BQ/84bc875bf1c3c3e9088653d5c9b5d7eb).
@@ -27,6 +27,8 @@ from gql.transport.websockets import WebsocketsTransport
 
 ## Step 2: Set Up the WebSocket Connection
 
+To generate a token to run the subscription, check [the guide here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+
 Define the asynchronous function `run_subscription` to establish and manage the WebSocket connection with Bitquery. This function will handle subscribing to the real-time data streams.
 
 ```python
@@ -44,11 +46,11 @@ async def run_subscription():
 
 ## Step 3: Handle User Input
 
-Use Streamlit's sidebar to allow users to choose between different datasets ('' or 'Raydium'):
+Use Streamlit's sidebar to allow users to choose between different datasets ('General' or 'Raydium'):
 
 ```python
-page = st.sidebar.radio("Select Page", ["", "Raydium"])
-_df = pd.DataFrame()
+page = st.sidebar.radio("Select Page", ["General", "Raydium"])
+general_df = pd.DataFrame()
 raydium_df = pd.DataFrame()
 ```
 
@@ -56,18 +58,18 @@ raydium_df = pd.DataFrame()
 
 Based on user selection, subscribe to the respective GraphQL queries to receive real-time data. Process the incoming data and update the dashboard accordingly.
 
-##  DEX Trades:
+## All DEX Trades:
 
 ```python
-if page == "":
-    st.subheader(" Table")
-    table = st.table(_df)
+if page == "General":
+    st.subheader("General Table")
+    table = st.table(general_df)
     while True:
         async for result in transport.subscribe(
             gql("""
             subscription {
                 Solana {
-                    : DEXTradeByTokens {
+                    General: DEXTradeByTokens {
                         Block { Time }
                         Trade {
                             Amount
@@ -85,10 +87,10 @@ if page == "":
             """)
         ):
             if result.data:
-                new_data = pd.json_normalize(result.data['Solana'][''])
-                _df = pd.concat([_df, new_data], ignore_index=True)
+                new_data = pd.json_normalize(result.data['Solana']['General'])
+                general_df = pd.concat([general_df, new_data], ignore_index=True)
                 with st.spinner('Updating data...'):
-                    table.table(_df)
+                    table.table(general_df)
 ```
 
 ## Raydium DEX Trades:
@@ -149,12 +151,14 @@ Define the main entry point for your Streamlit application:
 
 ```python
 def main():
-    st.title("Solana DEX  & Raydium Data Dashboard")
+    st.title("Solana DEX General & Raydium Data Dashboard")
     asyncio.run(run_subscription())
 
 if __name__ == "__main__":
     main()
 ```
+
+
 
 ## The Final Result
 
