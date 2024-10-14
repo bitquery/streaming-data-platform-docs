@@ -71,30 +71,160 @@ query MyQuery {
 
 ## Check if the Pump Fun Token has migrated to Raydium
 
-You can be sure that a pump Fun Token has migrated to Raydium if it is being traded on Raydium DEX also. So this below query will check on which DEXes a particular token is getting traded. And if you only see `PumpFun` as the DEX Protocol Family that means it hasn't completed its bonding curve yet.
-You can find the saved query [here](https://ide.bitquery.io/PumpFUn-Token-migrated-to-Raydum-or-not).
+To check if a Pump Fun Token has migrated to Raydium, we can use Instructions API to check which methods does Pump Fun Migration Account `39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg` calls. We will see in the response of this query `mintTo` method which is responsible for the migration.
+You can find the saved query [here](https://ide.bitquery.io/check-all-the-methods-that-pump-fun-migration-account-calls).
 
 ```graphql
 query MyQuery {
-  Solana {
-    DEXTradeByTokens(
+  Solana(network: solana) {
+    Instructions(
       where: {
-        Transaction: { Result: { Success: true } }
-        Trade: {
-          Currency: {
-            MintAddress: { is: "74cWLXXDfQmwxBNPbgYu5mZ6javKDAdptgtYF5Rn41rY" }
+        Transaction: {
+          Signer: { is: "39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg" }
+        }
+      }
+      orderBy: { descendingByField: "txc" }
+    ) {
+      Instruction {
+        Program {
+          Name
+          Method
+          AccountNames
+        }
+      }
+      txc: count
+    }
+  }
+}
+```
+
+Below query can be directly used to check if a Pump Fun Token has migrated to Raydium. We are checking if the Pump Fun: Raydium Migration Account `39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg` successfully called the method `mintTo` for this token address `HFmde4zjyzGN3cBdAmqzjdH7EcdCun432WPbquKmzmJU`. You can run the query [here](https://ide.bitquery.io/check-if-a-pump-token-migrated-to-raydium).
+
+```graphql
+query MyQuery {
+  Solana(network: solana) {
+    Instructions(
+      where: {
+        Transaction: {
+          Signer: { is: "39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg" }
+        }
+        Instruction: {
+          Program: { Method: { is: "mintTo" } }
+          Accounts: {
+            includes: {
+              Address: { is: "HFmde4zjyzGN3cBdAmqzjdH7EcdCun432WPbquKmzmJU" }
+            }
           }
         }
       }
     ) {
-      Trade {
-        Dex {
-          ProtocolName
-          ProtocolFamily
-          ProgramAddress
+      Instruction {
+        Program {
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Name
+          }
+          Address
+          AccountNames
+        }
+        Accounts {
+          Address
         }
       }
-      count
+      Transaction {
+        Signer
+      }
+    }
+  }
+}
+```
+
+## Track Pump Fun Token Migration to Raydium
+
+Use the below query to track Pump Fun token migrations to Raydium in realtime. You can test the query [here](https://ide.bitquery.io/track-pump-to-raydium-LP-mint).
+
+```graphql
+query MyQuery {
+  Solana(network: solana) {
+    Instructions(
+      where: {
+        Transaction: {
+          Signer: { is: "39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg" }
+        }
+        Instruction: { Program: { Method: { is: "mintTo" } } }
+      }
+      limit: { count: 100 }
+    ) {
+      Instruction {
+        Program {
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Name
+          }
+          Address
+          AccountNames
+        }
+        Accounts {
+          Address
+        }
+      }
+      Transaction {
+        Signer
+      }
     }
   }
 }
