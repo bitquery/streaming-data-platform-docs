@@ -516,17 +516,16 @@ Connection lost. Backfilling data from 2024-10-14T12:00:00+00:00 to 2024-10-14T1
 Backfilled Data: {...}  # Historical data fetched to fill the gap
 ```
 
+## Alternative Approach: Using Block Heights to Backfill Data
+You can implement an alternative approach that uses block heights instead of relying on time periods. 
+
+
+1.  **Track the Last Processed Block Height**: Continuously update and save the latest block height received from the live data stream.
+2.  **Detect Disconnections**: Monitor the WebSocket connection for any interruptions.
+3.  **Backfill Missing Data**: Using historical query, use the last saved block height to query and retrieve data from the missed blocks.
+4.  **Update the Last Processed Block Height**: After successful backfilling, update the saved block height to reflect the latest processed block.
+
 ## Conclusion
 
 In this tutorial, we built a resilient real-time data streaming system using Python. The system effectively manages live data subscriptions, handles errors and disconnections, backfills any missing data to maintain data integrity, and ensures that connections are gracefully closed when necessary.
 
-This architecture is highly adaptable and can be extended to various applications requiring real-time data processing with reliability. By implementing such mechanisms, you ensure that your data pipeline remains robust, accurate, and efficient even in the face of network instability or other unforeseen issues.
-
-You can enhance the system by adding features such as:
-
-- **Logging**: Integrate a logging library for better monitoring and debugging.
-- **Retry Mechanisms**: Implement retries for transient errors during connection or backfilling.
-- **Data Storage**: Store live and backfilled data in databases for persistent storage and further analysis.
-- **Alerting**: Set up alerts to notify when disconnections or errors occur.
-
-With these improvements, you'll have a comprehensive and dependable real-time data streaming solution.
