@@ -97,6 +97,7 @@ const sidebars = {
             "graphql/metrics/statistics",
             "graphql/metrics/sum",
             "graphql/metrics/uniq",
+            "graphql/metrics/quantile"
           ],
         },
       ],
