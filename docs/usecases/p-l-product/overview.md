@@ -4,17 +4,16 @@ sidebar_position: 1
 
 # Overview
 
-Profit and Loss calculation in crypto is not easy to build. However, it is an important metric while evaluating the financial performance of an asset. In this tutorial, we will see how to build a simple profit and loss calculator in Python using Bitquery's [balanceUpdates API](https://docs.bitquery.io/docs/examples/balances/balance-api/)
+Profit and Loss calculation in crypto is not easy to build. However, it is an important metric while evaluating the financial performance of an asset. In this tutorial, we will see how to build a simple profit and loss calculator in Javascript using Bitquery's [DEXTrades API](https://docs.bitquery.io/docs/examples/dextrades/dex-api/)
 
 ## Realized PnL
-We will be calculating realised profit and loss. Realized PnL is calculated after traders have sold their holdings of a token. Only the executed price of the orders is taken into account in realized PnL.
+We will be calculating realised profit and loss. Realized PnL is calculated after traders have sold their holdings of a token. Only the executed price of the orders is taken into account in realized PnL. For this purpose, we will the weighted average of the buy price(WABP) in USD.
 
 This is the formula we will be using:
 
 ```
-change_in_balance = final_balance - initial_balance
-change_in_price = final_price - initial_price
-pnl = change_in_balance * change_in_price
+WABP = sum(buyAmount*buyPriceInUSD)/sum(buyAmount)
+pnl = sum(sellPriceInUSD-WABP)
 ```
 
-Go to https://docs.bitquery.io/docs/usecases/p-l-product/balanceUpdates to get started with the project.
+Click  [here](https://docs.bitquery.io/docs/usecases/p-l-product/pnl) to get started with the project.
