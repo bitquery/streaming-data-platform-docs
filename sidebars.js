@@ -503,9 +503,9 @@ const sidebars = {
           },
           items: [
             "usecases/p-l-product/overview",
-            "usecases/p-l-product/balanceUpdates",
-            "usecases/p-l-product/price",
-            "usecases/p-l-product/pl",
+
+            "usecases/p-l-product/pnl",
+
           ],
         },
         {
