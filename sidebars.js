@@ -243,6 +243,7 @@ const sidebars = {
             "examples/blocks/blocks-api",
             "examples/calls/smartcontract",
             "examples/calls/smartcontract-filterby",
+            "examples/events/events-api",
             "examples/mempool/mempool-api",
             {
               type: "category",
