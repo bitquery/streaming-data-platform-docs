@@ -5,7 +5,7 @@ sidebar_position: 2
 # Calculating Profit or Loss Over Time
 
 This is the first step, where we calculate the Weighted Average of Buy Price(WABP) by getting all the `buy` trades of the token.
-For this tutorial, we are getting the PnL of the `0xae2fc483527b8ef99eb5d9b44875f005ba1fae13` address for the following token `0x6982508145454ce325ddbe47a25d4ec3d2311933`.
+For this tutorial, we are getting the PnL of the `0x2107662b0eb1f95a42f47f667c6d4622fe1c9231` address for the following token `0x6982508145454ce325ddbe47a25d4ec3d2311933`.
 
 ```
 WABP = sum(buyAmount*buyPriceInUSD)/sum(buyAmount)
@@ -158,7 +158,7 @@ console.log(pnl);
 15. Run the function inside the `JS` script:
 
 ```javascript
-getPnL("0x6982508145454ce325ddbe47a25d4ec3d2311933", "0xae2fc483527b8ef99eb5d9b44875f005ba1fae13"); // (token address, wallet address)
+getPnL("0x6982508145454ce325ddbe47a25d4ec3d2311933", "0x2107662b0eb1f95a42f47f667c6d4622fe1c9231"); // (token address, wallet address)
 ```
 
 You can change the token address and wallet address as per your requirements, or even use these functions for creating a pipeline in a bigger application.
