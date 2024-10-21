@@ -239,11 +239,6 @@ const config = {
             className: "v2-highlight",
           },
           {
-            to: "https://community.bitquery.io",
-            label: "Forum",
-            position: "left",
-          },
-          {
             to: "https://bitquery.io/forms/api",
             label: "Book Demo",
             position: "left",
@@ -256,6 +251,11 @@ const config = {
           {
             to: "https://chatgpt.com/g/g-DJ8174VfH-bitquery-query-creator",
             label: "Query GPT 🌐",
+            position: "left",
+          },
+          {
+            to: "https://dexrabbit.com/",
+            label: "DEX Data Showcase",
             position: "left",
           },
         ],
@@ -277,10 +277,6 @@ const config = {
               {
                 label: "V2 Docs",
                 to: "docs/intro",
-              },
-              {
-                label: "Blog",
-                to: "https://bitquery.io/blog",
               },
             ],
           },
@@ -307,6 +303,10 @@ const config = {
               {
                 label: "GitHub",
                 href: "https://github.com/bitquery",
+              },
+              {
+                label: "Blog",
+                to: "https://bitquery.io/blog",
               },
             ],
           },
