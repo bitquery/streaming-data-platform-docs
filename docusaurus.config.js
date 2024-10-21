@@ -254,8 +254,8 @@ const config = {
             position: "right",
           },
           {
-            to: "/blog/",
-            label: "What's New? 🔥",
+            to: "https://chatgpt.com/g/g-DJ8174VfH-bitquery-query-creator",
+            label: "Query GPT 🌐",
             position: "left",
           },
         ],
