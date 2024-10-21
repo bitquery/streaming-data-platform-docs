@@ -243,6 +243,7 @@ const sidebars = {
             "examples/blocks/blocks-api",
             "examples/calls/smartcontract",
             "examples/calls/smartcontract-filterby",
+            "examples/mempool/mempool-api",
             {
               type: "category",
               label: "Balances",
@@ -259,6 +260,10 @@ const sidebars = {
             {
               type: "category",
               label: "DEX Trades",
+              link: {
+                type: 'generated-index',
+                title: 'DEX Trades',
+              },
               items: [
                 "examples/dextrades/dex-api",
                 "examples/dextrades/token-trades-apis",
