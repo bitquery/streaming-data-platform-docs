@@ -161,4 +161,4 @@ console.log(pnl);
 getPnL("0x6982508145454ce325ddbe47a25d4ec3d2311933", "0x2107662b0eb1f95a42f47f667c6d4622fe1c9231"); // (token address, wallet address)
 ```
 
-You can change the token address and wallet address as per your requirements, or even use these functions for creating a pipeline in a bigger application.
+You can change the token address and wallet address as per your requirements, or even use these functions for creating a pipeline in a bigger application. The realised Profit for this account by trading this token as of `2024-10-21` is around `4 USD`.
