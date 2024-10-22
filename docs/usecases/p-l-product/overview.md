@@ -30,7 +30,6 @@ An account buys and sells a token as follows:
 2. **Sell Transaction**:
    - Sells 15 tokens at $7 each.
 
-### Step-by-Step Calculation:
 
 #### Step 1: Calculate the Weighted Average Buy Price (WABP)
 
