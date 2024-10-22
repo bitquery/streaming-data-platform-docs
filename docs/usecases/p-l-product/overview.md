@@ -17,9 +17,8 @@ WABP = sum(buyAmount*buyPriceInUSD)/sum(buyAmount)
 pnl = sum(sellAmount*(sellPriceInUSD-WABP))
 ```
 
-Here's a simple example to calculate realized PnL using your provided formula:
 
-### Scenario:
+### Example Scenario:
 
 An account buys and sells a token as follows:
 
