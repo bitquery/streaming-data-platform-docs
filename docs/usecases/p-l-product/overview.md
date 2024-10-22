@@ -13,7 +13,7 @@ This is the formula we will be using:
 
 ```
 WABP = sum(buyAmount*buyPriceInUSD)/sum(buyAmount)
-pnl = sum(sellPriceInUSD-WABP)
+pnl = sum(sellAmount*(sellPriceInUSD-WABP))
 ```
 
 Click  [here](https://docs.bitquery.io/docs/usecases/p-l-product/pnl) to get started with the project.
