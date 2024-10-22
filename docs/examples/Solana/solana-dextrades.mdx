@@ -40,7 +40,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 ## Subscribe to Latest Solana Trades
 
 This subscription will return information about the most recent trades executed on Solana's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/Realtime-solana-dex-trades-websocket)
+You can find the query [here](https://ide.bitquery.io/solana-trades-subscription_1)
 
 ```
 subscription {
@@ -74,6 +74,7 @@ subscription {
             LimitAmount
             OrderId
           }
+          Price
         }
         Market {
           MarketAddress
@@ -83,10 +84,7 @@ subscription {
             Address
           }
           Currency {
-            MetadataAddress
-            Key
             IsMutable
-            EditionNonce
             Decimals
             CollectionAddress
             Fungible
@@ -94,15 +92,7 @@ subscription {
             Native
             Name
           }
-        }
-      }
-      Instruction {
-        Program {
-          Address
-          AccountNames
-          Method
-          Parsed
-          Name
+          Price
         }
       }
     }
