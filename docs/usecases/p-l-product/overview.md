@@ -16,6 +16,6 @@ WABP = sum(buyAmount*buyPriceInUSD)/sum(buyAmount)
 pnl = sum(sellAmount*(sellPriceInUSD-WABP))
 ```
 
-![Example](https://files.oaiusercontent.com/file-1nIzzD1ZGpoCrLAyWS219QD2?se=2024-10-22T10%3A47%3A22Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D85d6ea28-86bd-4e1a-9a12-a7eb5f4a9cfd.webp&sig=2iik69vD68j7G0RX9qgaB4a20oxAkmCXkYXmYLkaxeY%3D)
+![Example](../../../static/img/usecases/pnl/image.png)
 
 Click  [here](https://docs.bitquery.io/docs/usecases/p-l-product/pnl) to get started with the project.
