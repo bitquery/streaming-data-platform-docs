@@ -7,6 +7,7 @@ sidebar_position: 1
 Profit and Loss calculation in crypto is not easy to build. However, it is an important metric while evaluating the financial performance of an asset. In this tutorial, we will see how to build a simple profit and loss calculator in Javascript using Bitquery's [DEXTrades API](https://docs.bitquery.io/docs/examples/dextrades/dex-api/)
 
 ## Realized PnL
+
 We will be calculating realised profit and loss. Realized PnL is calculated after traders have sold their holdings of a token. Only the executed price of the orders is taken into account in realized PnL. For this purpose, we will the weighted average of the buy price(WABP) in USD.
 
 This is the formula we will be using:
@@ -16,6 +17,62 @@ WABP = sum(buyAmount*buyPriceInUSD)/sum(buyAmount)
 pnl = sum(sellAmount*(sellPriceInUSD-WABP))
 ```
 
-![Example](../../../static/img/usecases/pnl/image.png)
+Here's a simple example to calculate realized PnL using your provided formula:
 
-Click  [here](https://docs.bitquery.io/docs/usecases/p-l-product/pnl) to get started with the project.
+### Scenario:
+
+An account buys and sells a token as follows:
+
+1. **Buy Transactions**:
+
+   - Buys 10 tokens at $5 each.
+   - Buys 20 tokens at $6 each.
+
+2. **Sell Transaction**:
+   - Sells 15 tokens at $7 each.
+
+### Step-by-Step Calculation:
+
+#### Step 1: Calculate the Weighted Average Buy Price (WABP)
+
+Using the formula:
+
+WABP = (Sum of each buy amount multiplied by its buy price in USD) divided by (Sum of all buy amounts).
+
+```
+
+WABP = ( (10 * 5) + (20 * 6) ) / (10 + 20)
+
+WABP = (50 + 120) / 30
+
+WABP = 170 / 30
+
+WABP = 5.67
+
+```
+
+So, the weighted average buy price (WABP) is $5.67.
+
+#### Step 2: Calculate Realized PnL
+
+Using the formula:
+
+For the sell of 15 tokens at $7 each:
+
+```
+
+Realized PnL = Sum of each sell amount multiplied by (sell price in USD minus WABP).
+
+Realized PnL = 15 * (7 - 5.67)
+
+Realized PnL = 15 * 1.33
+
+Realized PnL = 19.95
+
+```
+
+### Result:
+
+The realized PnL for this transaction is $19.95.
+
+Click [here](https://docs.bitquery.io/docs/usecases/p-l-product/pnl) to get started with the project.
