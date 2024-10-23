@@ -580,6 +580,7 @@ const sidebars = {
         "usecases/solana-arbitrage-dashboard",
         "usecases/solana-sniper-bot",
         "usecases/streaming-moonshot-prices",
+        "usecases/monitoring-solana-at-scale-managing-hundreds-of-addresses",
         "usecases/telegram-bot",
         "usecases/tokenholder-heatmap",
         "usecases/trading-indicators",
