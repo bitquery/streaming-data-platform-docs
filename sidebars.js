@@ -391,6 +391,17 @@ const sidebars = {
             "examples/Optimism/optimism-transfers",
           ],
         },
+        {
+          type: "category",
+          label: "TON",
+          link: {
+            type: 'generated-index',
+            title: 'TON Documentation',
+          },
+          items: [
+            "examples/ton/ton-dex-trades",
+          ],
+        },
       ],
     },
 
