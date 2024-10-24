@@ -1,0 +1,311 @@
+# Ton DEX Trades API
+
+In this section we'll have a look at some examples using the TON DEX Trades API.
+
+This TON API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
+
+This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+
+## Latest Trades
+
+This API fetches the most recent trades on the TON blockchain.
+You can run the query [here](https://ide.bitquery.io/Latest-Trades-on-TON)
+
+```javascript
+query MyQuery {
+  Ton(network: ton) {
+    DEXTrades(orderBy: {descending: Block_Time}, limit: {count: 100}) {
+      Block {
+        Time
+        Shard
+      }
+      Trade {
+        Buy {
+          Amount
+          Currency {
+            Name
+            SmartContract {
+              Address
+            }
+          }
+          Buyer {
+            Address
+            Workchain
+          }
+        }
+        Dex {
+          ProtocolName
+          SmartContract {
+            Address
+          }
+        }
+        Sell {
+          Amount
+          Currency {
+            Name
+          }
+          Seller {
+            Address
+            Workchain
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+
+```
+
+## Latest Trades of a Token
+
+This API retrieves the most recent trades for a specific token on the TON blockchain by specifying the token's smart contract address.
+You can run the query [here](https://ide.bitquery.io/Latest-Trades-of-a-Token-on-TON)
+
+```javascript
+query MyQuery {
+  Ton(network: ton) {
+    DEXTrades(
+      orderBy: {descending: Block_Time}
+      limit: {count: 100}
+      where: {any: [{Trade: {Buy: {Currency: {SmartContract: {Address: {is: "EQDEI9826MxJmFwVQaIugojr4a-6cmeAWOk5g86HdCgap2dK"}}}}}}, {Trade: {Sell: {Currency: {SmartContract: {Address: {is: "EQDEI9826MxJmFwVQaIugojr4a-6cmeAWOk5g86HdCgap2dK"}}}}}}]}
+    ) {
+      Block {
+        Time
+        Shard
+      }
+      Trade {
+        Buy {
+          Amount
+          Currency {
+            Name
+            SmartContract {
+              Address
+            }
+          }
+          Buyer {
+            Address
+            Workchain
+          }
+        }
+        Dex {
+          ProtocolName
+          SmartContract {
+            Address
+          }
+        }
+        Sell {
+          Amount
+          Currency {
+            Name
+          }
+          Seller {
+            Address
+            Workchain
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+
+
+```
+
+## Subscribing to Trades in Real-Time
+
+This subscription API allows users to receive real-time updates for trades occurring on the TON blockchain. It provides instant trade data including buyer, seller, and currency details, as soon as new trades happen.
+You can run the subscription [here](https://ide.bitquery.io/subscribe-to-trades-on-TON)
+
+```javascript
+subscription {
+  Ton(network: ton) {
+    DEXTrades {
+      Block {
+        Time
+        Shard
+      }
+      Trade {
+        Buy {
+          Amount
+          Currency {
+            Name
+            SmartContract {
+              Address
+            }
+          }
+          Buyer {
+            Address
+            Workchain
+          }
+        }
+        Dex {
+          ProtocolName
+          SmartContract {
+            Address
+          }
+        }
+        Sell {
+          Amount
+          Currency {
+            Name
+          }
+          Seller {
+            Address
+            Workchain
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+
+```
+
+## Top Traders
+
+This API retrieves the top traders in a specific period based on the number of trades. You can adjust the filter to use any other metric as well.
+You can run the query [here](https://ide.bitquery.io/Ton-Top-Traders)
+
+```javascript
+query DexMarkets {
+  Ton {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "trades"}
+      limit: {count: 100}
+      where: {Block: {Time: {since: "2024-10-21T05:36:05Z"}}}
+    ) {
+      Trade {
+        Seller {
+          Address
+          Workchain
+        }
+        Buyer {
+          Address
+          Workchain
+        }
+      }
+      trades: count(if: {Trade: {Side: {Type: {is: buy}}}})
+      tokens: uniq(of: Trade_Currency_SmartContract_Address)
+    }
+  }
+}
+
+```
+
+## Top Toncoin Ecosystem Tokens
+
+This API fetches the top tokens traded on the TON blockchain by counting the number of trades within a specified time period.
+You can run the query [here](https://ide.bitquery.io/Ton-Top-Tokens_1)
+
+```javascript
+query TopTokens {
+  Ton {
+    DEXTradeByTokens(
+      where: {Block: {Time: {after: "2024-10-21T05:41:31Z"}}, Trade: {Success: true}}
+      orderBy: {descendingByField: "count"}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          SmartContract {
+            Address
+            Workchain
+          }
+          Fungible
+          Name
+        }
+        Amount(maximum: Block_Number)
+        AmountInUSD(maximum: Block_Number)
+      }
+      pairs: uniq(of: Trade_Side_Currency_SmartContract_Address)
+      dexes: uniq(of: Trade_Dex_SmartContract_Address)
+      amount: sum(of: Trade_Amount)
+      usd: sum(of: Trade_AmountInUSD)
+      buyers: uniq(of: Trade_Buyer_Address)
+      sellers: uniq(of: Trade_Sender_Address)
+      count
+    }
+  }
+}
+
+```
+
+## Top Toncoin Ecosystem Token Pairs
+
+This query retrieves the top trading pairs within the Toncoin ecosystem based on their USD value.
+
+It focuses on token pairs that involve Toncoin or other tokens (such as USDT) traded on TON’s DEX platforms.
+
+It also provides details about token prices, including their price changes over specific time intervals (last price, 10 minutes ago, 1 hour ago, and 3 hours ago).
+You can run the query [here](https://ide.bitquery.io/Top-Toncoin-Ecosystem-Token-Pairs)
+
+```javascript
+query {
+  Ton {
+    DEXTradeByTokens(
+      where: {Block: {Time: {since: "2024-10-21T06:04:54Z"}},
+
+      any: [{Trade: {Side: {Currency: {Native: true}}}}, {Trade: {Side: {Currency: {SmartContract: {Address: {is: "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs"}}}, Currency: {Native: false}}}, {Trade: {Side: {Currency: {SmartContract: {Address: {is: "EQCM3B12QK1e4yZSf8GtBRT0aLMNyEsBc_DhVfRRtOEffLez"}}}, Currency: {SmartContract: {Address: {notIn: ["EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs"]}}}}}, {Trade: {Side: {Currency: {Native: false, SmartContract: {Address: {notIn: ["EQCM3B12QK1e4yZSf8GtBRT0aLMNyEsBc_DhVfRRtOEffLez", "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs"]}}}}, Currency: {Native: false, SmartContract: {Address: {notIn: ["EQCM3B12QK1e4yZSf8GtBRT0aLMNyEsBc_DhVfRRtOEffLez", "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs"]}}}}}]}
+
+      orderBy: {descendingByField: "usd"}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract {
+            Address
+            Workchain
+          }
+          Native
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract {
+              Address
+              Workchain
+            }
+            Native
+          }
+        }
+        price_last: PriceInUSD(maximum: Block_Number)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: "2024-10-24T05:54:54Z"}}}
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: "2024-10-24T05:04:54Z"}}}
+        )
+        price_3h_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: "2024-10-24T03:04:54Z"}}}
+        )
+      }
+      Block {
+        min_time: Time(minimum: Block_Time)
+        max_time: Time(maximum: Block_Time)
+      }
+      dexes: uniq(of: Trade_Dex_SmartContract_Address)
+      amount: sum(of: Trade_Side_Amount)
+      usd: sum(of: Trade_Side_AmountInUSD)
+      sellers: uniq(of: Trade_Seller_Address)
+      buyers: uniq(of: Trade_Buyer_Address)
+      count(selectWhere: {ge: "10"})
+    }
+  }
+}
+```
