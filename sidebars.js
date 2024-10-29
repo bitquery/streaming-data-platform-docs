@@ -218,6 +218,7 @@ const sidebars = {
             "cubes/dextradesbyTokens",
             "cubes/transaction-cube",
             "cubes/transfers-cube",
+            "evm/token-holders"
           ],
         },
         "cubes/solana",
