@@ -8,9 +8,9 @@ const sidebars = {
       type: "category",
       label: "Start",
       link: {
-        type: 'generated-index',
-        title: 'Start',
-        description: 'Learn how to get started with the platform',
+        type: "generated-index",
+        title: "Start",
+        description: "Learn how to get started with the platform",
       },
       items: [
         "start/embed",
@@ -25,9 +25,9 @@ const sidebars = {
       type: "category",
       label: "Authorisation",
       link: {
-        type: 'generated-index',
-        title: 'Authorisation Documentation',
-        description: 'Learn about how to generate and use authorisation tokens',
+        type: "generated-index",
+        title: "Authorisation Documentation",
+        description: "Learn about how to generate and use authorisation tokens",
       },
       items: [
         "authorisation/how-to-generate",
@@ -40,9 +40,9 @@ const sidebars = {
       type: "category",
       label: "Using the IDE",
       link: {
-        type: 'generated-index',
-        title: 'Using the IDE',
-        description: 'Explore all functionalities of the platform\'s IDE',
+        type: "generated-index",
+        title: "Using the IDE",
+        description: "Explore all functionalities of the platform's IDE",
       },
       items: [
         "ide/account",
@@ -63,18 +63,18 @@ const sidebars = {
       type: "category",
       label: "Building Queries",
       link: {
-        type: 'generated-index',
-        title: 'Building Queries Documentation',
-        description: 'Learn how to build powerful queries',
+        type: "generated-index",
+        title: "Building Queries Documentation",
+        description: "Learn how to build powerful queries",
       },
       items: [
         {
           type: "category",
           label: "Capabilities",
           link: {
-            type: 'generated-index',
-            title: 'Capabilities',
-            description: 'Explore the platform\'s query capabilities',
+            type: "generated-index",
+            title: "Capabilities",
+            description: "Explore the platform's query capabilities",
           },
           items: [
             "graphql/datetime",
@@ -98,8 +98,8 @@ const sidebars = {
           type: "category",
           label: "Dataset",
           link: {
-            type: 'generated-index',
-            title: 'Dataset Overview',
+            type: "generated-index",
+            title: "Dataset Overview",
           },
           items: [
             "graphql/dataset/archive",
@@ -116,8 +116,8 @@ const sidebars = {
           type: "category",
           label: "Metrics",
           link: {
-            type: 'generated-index',
-            title: 'Metrics',
+            type: "generated-index",
+            title: "Metrics",
           },
           items: [
             "graphql/metrics/alias",
@@ -130,7 +130,7 @@ const sidebars = {
             "graphql/metrics/statistics",
             "graphql/metrics/sum",
             "graphql/metrics/uniq",
-            "graphql/metrics/quantile"
+            "graphql/metrics/quantile",
           ],
         },
       ],
@@ -140,16 +140,16 @@ const sidebars = {
       type: "category",
       label: "Streaming",
       link: {
-        type: 'generated-index',
-        title: 'Streaming Overview',
+        type: "generated-index",
+        title: "Streaming Overview",
       },
       items: [
         {
           type: "category",
           label: "Streaming via Subscriptions",
           link: {
-            type: 'generated-index',
-            title: 'Streaming via Subscriptions',
+            type: "generated-index",
+            title: "Streaming via Subscriptions",
           },
           items: [
             "subscriptions/subscription",
@@ -158,15 +158,15 @@ const sidebars = {
             "subscriptions/examples",
             "subscriptions/example-rust",
             "subscriptions/mempool-subscriptions",
-            "subscriptions/backfilling-subscription"
+            "subscriptions/backfilling-subscription",
           ],
         },
         {
           type: "category",
           label: "Data Streams",
           link: {
-            type: 'generated-index',
-            title: 'Data Streams Overview',
+            type: "generated-index",
+            title: "Data Streams Overview",
           },
           items: [
             "streams/kafka-streaming-concepts",
@@ -199,16 +199,16 @@ const sidebars = {
       type: "category",
       label: "Understanding Cubes",
       link: {
-        type: 'generated-index',
-        title: 'Understanding Cubes Overview',
+        type: "generated-index",
+        title: "Understanding Cubes Overview",
       },
       items: [
         {
           type: "category",
           label: "EVM Cube",
           link: {
-            type: 'generated-index',
-            title: 'EVM Cube Overview',
+            type: "generated-index",
+            title: "EVM Cube Overview",
           },
           items: [
             "cubes/EVM",
@@ -218,7 +218,7 @@ const sidebars = {
             "cubes/dextradesbyTokens",
             "cubes/transaction-cube",
             "cubes/transfers-cube",
-            "evm/token-holders"
+            "evm/token-holders",
           ],
         },
         "cubes/solana",
@@ -229,16 +229,16 @@ const sidebars = {
       type: "category",
       label: "L1 Chains",
       link: {
-        type: 'generated-index',
-        title: 'L1 Chains Overview',
+        type: "generated-index",
+        title: "L1 Chains Overview",
       },
       items: [
         {
           type: "category",
           label: "Ethereum",
           link: {
-            type: 'generated-index',
-            title: 'Ethereum Overview',
+            type: "generated-index",
+            title: "Ethereum Overview",
           },
           items: [
             "examples/blocks/blocks-api",
@@ -263,8 +263,8 @@ const sidebars = {
               type: "category",
               label: "DEX Trades",
               link: {
-                type: 'generated-index',
-                title: 'DEX Trades',
+                type: "generated-index",
+                title: "DEX Trades",
               },
               items: [
                 "examples/dextrades/dex-api",
@@ -274,7 +274,7 @@ const sidebars = {
                 "examples/dextrades/crypto-coin-ticker",
                 "examples/realtimetrades",
                 "examples/dextrades/DEXScreener/evm_dexscreener",
-                "examples/dextrades/pools-api"
+                "examples/dextrades/pools-api",
               ],
             },
             {
@@ -310,8 +310,8 @@ const sidebars = {
           type: "category",
           label: "BSC",
           link: {
-            type: 'generated-index',
-            title: 'BSC Overview',
+            type: "generated-index",
+            title: "BSC Overview",
           },
           items: [
             "examples/Base/apestore-base-api",
@@ -323,15 +323,15 @@ const sidebars = {
             "examples/BSC/bsc-events-api",
             "examples/BSC/bsc-nft",
             "examples/BSC/bsc-transfers",
-            "examples/BSC/gra-fun-api"
+            "examples/BSC/gra-fun-api",
           ],
         },
         {
           type: "category",
           label: "Solana",
           link: {
-            type: 'generated-index',
-            title: 'Solana API Documentation',
+            type: "generated-index",
+            title: "Solana API Documentation",
           },
           items: [
             "examples/Solana/Moonshot-API",
@@ -366,8 +366,8 @@ const sidebars = {
           type: "category",
           label: "Tron",
           link: {
-            type: 'generated-index',
-            title: 'Tron Overview',
+            type: "generated-index",
+            title: "Tron Overview",
           },
           items: [
             "examples/Tron/sunswap-api",
@@ -385,8 +385,8 @@ const sidebars = {
           type: "category",
           label: "Optimism",
           link: {
-            type: 'generated-index',
-            title: 'Optimism Overview',
+            type: "generated-index",
+            title: "Optimism Overview",
           },
           items: [
             "examples/Optimism/optimism-balance-updates",
@@ -399,12 +399,10 @@ const sidebars = {
           type: "category",
           label: "TON",
           link: {
-            type: 'generated-index',
-            title: 'TON Documentation',
+            type: "generated-index",
+            title: "TON Documentation",
           },
-          items: [
-            "examples/ton/ton-dex-trades",
-          ],
+          items: ["examples/ton/ton-dex-trades"],
         },
       ],
     },
@@ -413,16 +411,16 @@ const sidebars = {
       type: "category",
       label: "L2 Chains",
       link: {
-        type: 'generated-index',
-        title: 'L2 Chains Overview',
+        type: "generated-index",
+        title: "L2 Chains Overview",
       },
       items: [
         {
           type: "category",
           label: "Arbitrum",
           link: {
-            type: 'generated-index',
-            title: 'Arbitrum Overview',
+            type: "generated-index",
+            title: "Arbitrum Overview",
           },
           items: [
             "examples/Arbitrum/Balance_Updates",
@@ -436,8 +434,8 @@ const sidebars = {
           type: "category",
           label: "Base",
           link: {
-            type: 'generated-index',
-            title: 'Base Overview',
+            type: "generated-index",
+            title: "Base Overview",
           },
           items: [
             "examples/Base/aerodrome-base-api",
@@ -452,8 +450,8 @@ const sidebars = {
           type: "category",
           label: "Matic (Polygon)",
           link: {
-            type: 'generated-index',
-            title: 'Matic Overview',
+            type: "generated-index",
+            title: "Matic Overview",
           },
           items: [
             "examples/Matic/matic-balance-updates",
@@ -466,8 +464,8 @@ const sidebars = {
           type: "category",
           label: "OpBNB",
           link: {
-            type: 'generated-index',
-            title: 'OpBNB Overview',
+            type: "generated-index",
+            title: "OpBNB Overview",
           },
           items: [
             "examples/OpBNB/opbnb-balance-updates",
@@ -480,8 +478,8 @@ const sidebars = {
           type: "category",
           label: "Cross-Chain",
           link: {
-            type: 'generated-index',
-            title: 'Cross-Chain API',
+            type: "generated-index",
+            title: "Cross-Chain API",
           },
           items: ["examples/cross-chain/cross-chain-api"],
         },
@@ -492,16 +490,16 @@ const sidebars = {
       type: "category",
       label: "How-To Guides",
       link: {
-        type: 'generated-index',
-        title: 'How-To Guides Overview',
+        type: "generated-index",
+        title: "How-To Guides Overview",
       },
       items: [
         {
           type: "category",
           label: "NFT Creator Portfolio",
           link: {
-            type: 'generated-index',
-            title: 'NFT Creator Portfolio',
+            type: "generated-index",
+            title: "NFT Creator Portfolio",
           },
           items: [
             "usecases/nft-creator/gettingstarted",
@@ -514,22 +512,17 @@ const sidebars = {
           type: "category",
           label: "P&L Calculator",
           link: {
-            type: 'generated-index',
-            title: 'P&L Calculator Overview',
+            type: "generated-index",
+            title: "P&L Calculator Overview",
           },
-          items: [
-            "usecases/p-l-product/overview",
-
-            "usecases/p-l-product/pnl",
-
-          ],
+          items: ["usecases/p-l-product/overview", "usecases/p-l-product/pnl"],
         },
         {
           type: "category",
           label: "TradingView Advanced Charts",
           link: {
-            type: 'generated-index',
-            title: 'TradingView Advanced Charts Overview',
+            type: "generated-index",
+            title: "TradingView Advanced Charts Overview",
           },
           items: [
             "usecases/tradingview-advanced-charts/getting-started",
@@ -543,8 +536,8 @@ const sidebars = {
           type: "category",
           label: "Build your Own Real-Time Balance Checker",
           link: {
-            type: 'generated-index',
-            title: 'Real-Time Balance Checker',
+            type: "generated-index",
+            title: "Real-Time Balance Checker",
           },
           items: [
             "usecases/real-time-balance-tracker/overview",
@@ -556,8 +549,8 @@ const sidebars = {
           type: "category",
           label: "Build Lightweight TradingView Chart with Real-time Data",
           link: {
-            type: 'generated-index',
-            title: 'TradingView Chart with Real-Time Data',
+            type: "generated-index",
+            title: "TradingView Chart with Real-Time Data",
           },
           items: ["usecases/tradingview/tradingview"],
         },
@@ -566,8 +559,8 @@ const sidebars = {
           label:
             "Subscribing to Realtime OHLC with TradingView Advanced Charts",
           link: {
-            type: 'generated-index',
-            title: 'Realtime OHLC with TradingView',
+            type: "generated-index",
+            title: "Realtime OHLC with TradingView",
           },
           items: [
             "usecases/tradingview-subscription-realtime/getting-started",
@@ -580,6 +573,7 @@ const sidebars = {
         },
 
         "usecases/Top-10-ethereum-tokens",
+        "usecases/price-change-signal-bot",
         "usecases/arbitrum-sniper-bot",
         "usecases/automated-trading-ethereum-volume-surge-bot",
         "usecases/base-sniper-bot",
@@ -606,16 +600,16 @@ const sidebars = {
       type: "category",
       label: "Data in Cloud",
       link: {
-        type: 'generated-index',
-        title: 'Data in Cloud',
+        type: "generated-index",
+        title: "Data in Cloud",
       },
       items: [
         {
           type: "category",
           label: "Protobuf",
           link: {
-            type: 'generated-index',
-            title: 'Protobuf Overview',
+            type: "generated-index",
+            title: "Protobuf Overview",
           },
           items: [
             "cloud/protobuf/evm",
@@ -629,8 +623,8 @@ const sidebars = {
           type: "category",
           label: "Examples",
           link: {
-            type: 'generated-index',
-            title: 'Cloud Examples',
+            type: "generated-index",
+            title: "Cloud Examples",
           },
           items: [
             "cloud/examples/appsync",
@@ -638,7 +632,6 @@ const sidebars = {
             "cloud/examples/s3-eth-tutorial",
           ],
         },
-
       ],
     },
 
@@ -646,8 +639,8 @@ const sidebars = {
       type: "category",
       label: "API Blog",
       link: {
-        type: 'generated-index',
-        title: 'API Blog',
+        type: "generated-index",
+        title: "API Blog",
       },
       items: [
         "API-Blog/migrate-v1-v2",
