@@ -314,6 +314,9 @@ const sidebars = {
             title: 'BSC Overview',
           },
           items: [
+            "examples/Base/apestore-base-api",
+            "examples/Base/base-jump-base-api",
+            "examples/Base/aerodrome-base-api",
             "examples/BSC/bsc-balance-updates",
             "examples/BSC/bsc-calls-api",
             "examples/BSC/bsc-dextrades",
