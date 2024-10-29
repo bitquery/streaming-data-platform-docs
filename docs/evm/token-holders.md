@@ -38,7 +38,10 @@ Token holder of a token refers to any wallet which holds that particular token. 
     TokenHolders(
       tokenSmartContract: "0x514910771af9ca656af840dff83e8264ecf986ca"
       date: "2023-10-04"
-      where: {Balance: {Amount: {gt: "0"}}, BalanceUpdate: {FirstDate: {is: "2023-10-04"}}}
+      where: {
+        Balance: { Amount: { gt: "0" } }
+        BalanceUpdate: { FirstDate: { is: "2023-10-04" } }
+      }
     ) {
       Balance {
         Amount
@@ -68,12 +71,18 @@ Token Holder API allows you to narrow down your results using these parameters:
 
 ### Return Fields
 
-The Token Holder API offers access to the following fields:
+The Token Holder API provides access to the following fields:
 
-- `Balance`: Provides the token balance.
-- `BalanceUpdate`: Offers a range of aggregated data related to balance updates, including count, first date, last date, and more.
-- `Currency`: Fetches details related to the currency, such as smart contract and address.
-- `Holder`: Retrieves the holder's address.
+- `Balance`: Shows the token balance.
+- `BalanceUpdate`: Offers a range of aggregated data related to balance updates, including:
+  - `FirstDate`: The date of the holder’s first interaction with the token.
+  - `LastDate`: The date of the holder’s most recent interaction with the token.
+  - `InAmount`: The total amount of the token the holder received.
+  - `OutAmount`: The total amount of the token the holder sent.
+  - `InCount`: The number of transactions in which the holder received the token.
+  - `OutCount`: The number of transactions in which the holder sent out the token.
+- `Currency`: Provides currency-specific details, such as the smart contract and address.
+- `Holder`: Retrieves the holder’s address.
 
 ## Indexes and Factors
 
@@ -83,6 +92,7 @@ Indexes and factors are calculations that can be used to analyze data in the Tok
 
 The Gini coefficient is a measure of inequality in a distribution. It is a number between 0 and 1, with 0 representing perfect equality and 1 representing perfect inequality.
 This query will calculate the Gini coefficient for the distribution of balances among all holders of the specified token.You can find the query [here](https://ide.bitquery.io/Thiel-index-for-USDT)
+
 ```
 query($currency: String! $date: String!) {
   EVM(dataset: archive) {
@@ -117,7 +127,7 @@ The below query gives number of holders having 99% of the supply of USDT.You can
 ```
 query($currency: String! $date: String!) {
   EVM(dataset: archive) {
-    TokenHolders(   
+    TokenHolders(
       tokenSmartContract: $currency
       date: $date
       where: {
