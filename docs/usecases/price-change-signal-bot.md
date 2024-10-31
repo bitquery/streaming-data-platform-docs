@@ -94,7 +94,7 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 1. **Clone the Repository**
 
    ```bash
-   git clone bitquery/Price-Change-Signal-Telegram-Bot
+   git clone https://github.com/bitquery/Price-Change-Signal-Telegram-Bot.git
    ```
 
 2. **Set up virtual environment**
