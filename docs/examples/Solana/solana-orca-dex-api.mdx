@@ -105,8 +105,29 @@ subscription {
 }
 ```
 
+## Pair Creation time for a specific pair
 
-## Latest Trades on Orca DEX API Websocket
+You can use the following query to get the pair creation time for a specific pair on Orca DEX on Solana. But you need to use the keyword `query`.
+You can run this query using [this link](https://ide.bitquery.io/pair-creation-time-for-a-specific-pair-on-Orca).
+```
+{
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Method: {is: "initializePool"}, Address: {is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"}}, Accounts: {includes: {Address: {is: "Bg8rob51iTgMBi1hmRhZV8hzaHU5zP77Pd61UpbzyzGd"}}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Transaction {
+        Signature
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
+
+## Realtime Trades on Orca DEX API 
 
 To access a real-time stream of trades for Solana Orca DEX, [check out this GraphQL subscription (WebSocket)](https://ide.bitquery.io/Orca-DEX-Trades-Websocket).
 
