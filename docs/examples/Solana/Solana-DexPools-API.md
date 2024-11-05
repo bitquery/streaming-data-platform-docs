@@ -81,7 +81,7 @@ subscription {
     }
   }
 }
-
+```
 
 ## Get All Liquidity Pools info for a particular token
 

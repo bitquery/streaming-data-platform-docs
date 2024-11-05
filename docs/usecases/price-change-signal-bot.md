@@ -1,8 +1,8 @@
-# How to build a Crypto Price Change Signal Bot
+# How to build a Crypto Price Change Signal Bot on Telegram
 
 This bot fetches real-time trading data from Bitquery and sends alerts on significant token price changes. The bot is built using the `python-telegram-bot` library to handle interactions with Telegram users and `aiohttp` for making asynchronous API requests.
 
-Github Repository Link - [here](https://github.com/Akshat-cs/Price-Change-Signal-Telegram-Bot.git)
+Github Repository Link - [here](https://github.com/bitquery/Price-Change-Signal-Telegram-Bot/tree/main)
 
 import VideoPlayer from "../../src/components/videoplayer.js";
 
@@ -94,7 +94,7 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/Akshat-cs/Price-Change-Signal-Telegram-Bot.git .
+   git clone https://github.com/bitquery/Price-Change-Signal-Telegram-Bot.git
    ```
 
 2. **Set up virtual environment**

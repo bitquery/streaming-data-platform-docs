@@ -1,0 +1,120 @@
+# Historical Solana Data
+
+Historical data for Solana has finally been added for the `EAP` option, where we are providing data as old as  three months.
+However the options to use the historical data are quite limited and currently only works for the aggregate data on 
+`DEXTradeByTokens`. In this section, we will see some working examples for the same.
+
+## Historical OHLC on Solana
+[This](https://ide.bitquery.io/historical-ohlc-for-solana) query returns the historical OHLC data for a given pair along with volume
+and number of trades in the given interval.
+
+For this example the pair between the tokens listed below is considered.
+1. `6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui`
+2. `So11111111111111111111111111111111111111112`
+``` graphql
+
+{
+  Solana(dataset: archive) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "Block_Timefield"}
+      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
+      limit: {count: 10}
+    ) {
+      Block {
+        Timefield: Time(interval: {in: minutes, count: 1})
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
+      }
+      count
+    }
+  }
+}
+
+```
+
+## Top 10 token traders
+[This](https://ide.bitquery.io/top-10-traders-of-the-token) query returns the all time top 10 token traders for a particular token,
+which is `6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui` in this case.
+
+``` graphql
+
+query MyQuery {
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      limit: {count: 10}
+      orderBy: {descendingByField: "tokens"}
+      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}}}
+    ) {
+      Trade {
+        Account {
+          Owner
+        }
+      }
+      tokens: sum(of: Trade_Amount)
+      trades: count
+    }
+  }
+}
+
+```
+
+## Change in Liquidity Over a Month
+[This](https://ide.bitquery.io/liquidity-change-in-recent-month) query returns the change in `liquidity` for a particular token 
+pair over the last month. For this example the parameters listed below are used.
+
+1. Primary Token - `6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui`.
+2. Secondary Token - `So11111111111111111111111111111111111111112`,
+3. Pool Address - `BSzedbEvWRqVksaF558epPWCM16avEpyhm2HgSq9WZyy`
+
+``` graphql
+
+query MyQuery {
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: {
+              is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"
+            }
+          },
+          Side: {
+            Currency: {
+              MintAddress: {
+                is: "So11111111111111111111111111111111111111112"
+              }
+            }
+          },
+          Market: {
+            MarketAddress: {
+              is: "BSzedbEvWRqVksaF558epPWCM16avEpyhm2HgSq9WZyy"
+            }
+          }
+        }
+      }
+      orderBy: {descendingByField: "Block_Timefield"}
+      limit: {count: 1}
+    ) {
+      tokenLiquidity: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      wsolLiquidity: sum(
+        of: Trade_Side_Amount
+        if: {Trade: {Side: {Type: {is: sell}}}}
+      )
+      Block {
+        Timefield: Time(interval: {in: months, count: 1})
+      }
+      Trade {
+        Market {
+          MarketAddress
+        }
+      }
+    }
+  }
+}
+
+```

@@ -337,6 +337,7 @@ const sidebars = {
             "examples/Solana/Moonshot-API",
             "examples/Solana/Pump-Fun-API",
             "examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API",
+            "examples/Solana/historical-aggregate-data",
             "examples/Solana/Solana-AldrinAmm-api",
             "examples/Solana/Solana-DexPools-API",
             "examples/Solana/Solana-Jito-Bundle-api",
