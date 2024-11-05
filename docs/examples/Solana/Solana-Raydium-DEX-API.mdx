@@ -66,23 +66,15 @@ Instructions -> Instruction -> Accounts[9] ->. Address
 You can run the following query at [Bitquery IDE](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_5).
 
 ```graphql
-subscription{
+subscription {
   Solana {
     Instructions(
       where: {
-        Transaction: {
-          Result: {
-            Success: true
-          }
-        },
+        Transaction: { Result: { Success: true } }
         Instruction: {
           Program: {
-            Method: {
-              is: "initialize2"
-            },
-            Address: {
-              is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
-            }
+            Method: { is: "initialize2" }
+            Address: { is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8" }
           }
         }
       }
@@ -154,7 +146,6 @@ subscription{
     }
   }
 }
-
 ```
 
 ## Pair Creation time for a specific pair
@@ -179,6 +170,57 @@ You can run this query using [this link](https://ide.bitquery.io/Specific-pair-c
 }
 
 
+```
+
+## Get the historical Created pairs on any Solana DEX
+
+This query will return information about the historical created pairs according to the selected date frame.
+You can find the query [here](https://ide.bitquery.io/Solana-Raydium-New-Pairs_2)
+
+```
+query{
+  Solana(dataset: archive) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Dex: {
+            ProtocolFamily: {
+              is: "Raydium"
+            }
+					}
+        }
+      }
+      limit: {
+      count: 100
+    }) {
+      Block {
+        Date(minimum: Block_Date
+        selectWhere: {
+          since: "2024-10-01"
+          till: "2024-11-01"
+        })
+      }
+      Trade {
+        Dex {
+          ProtocolFamily
+        }
+        Market{
+          MarketAddress
+        }
+        Currency {
+          Symbol
+          MintAddress
+        }
+        Side {
+          Currency {
+            Symbol
+            MintAddress
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ## Latest price of a token

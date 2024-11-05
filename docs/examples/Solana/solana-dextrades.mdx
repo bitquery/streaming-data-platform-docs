@@ -159,6 +159,57 @@ query LatestTrades($token: String, $base: String) {
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_latest_trades).
 
+## Get the historical Created pairs on any Solana DEX
+
+This query will return information about the historical created pairs according to the selected date frame.
+You can find the query [here](https://ide.bitquery.io/Solana-Raydium-New-Pairs_2)
+
+```
+query{
+  Solana(dataset: archive) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Dex: {
+            ProtocolFamily: {
+              is: "Raydium"
+            }
+					}
+        }
+      }
+      limit: {
+      count: 100
+    }) {
+      Block {
+        Date(minimum: Block_Date
+        selectWhere: {
+          since: "2024-10-01"
+          till: "2024-11-01"
+        })
+      }
+      Trade {
+        Dex {
+          ProtocolFamily
+        }
+        Market{
+          MarketAddress
+        }
+        Currency {
+          Symbol
+          MintAddress
+        }
+        Side {
+          Currency {
+            Symbol
+            MintAddress
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token
 
 The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
