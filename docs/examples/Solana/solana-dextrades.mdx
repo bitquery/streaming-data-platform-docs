@@ -687,12 +687,12 @@ query MyQuery {
 
 ## Get Solana DEX Orders in Real-Time
 
-This query provides real-time updates on order events, including details about the DEX, market, and order specifics.
+This query provides real-time updates on order events, including details about the DEX, market, and order specifics. You can run the query [here](https://ide.bitquery.io/Copy-of-Solana-DEX-trades-API)
 
 ```
 subscription {
   Solana {
-    DEXOrders(limit: {count: 10}) {
+    DEXOrders {
       Instruction {
         Index
         Program {
