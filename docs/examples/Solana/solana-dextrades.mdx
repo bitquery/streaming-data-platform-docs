@@ -213,21 +213,13 @@ query{
 ## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token
 
 The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
-You can run the query [here](https://ide.bitquery.io/buyers-sellers-buys-sells-makers-trades-trade-volumeall-in-5min-1H)
+You can run the query [here](https://ide.bitquery.io/buyers-sellers-buys-sells-makers-trades-trade-volumeall-in-5min-1H_2)
 
 ```graphql
-query MyQuery {
-  Solana {
+query MyQuery($token: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime!) {
+  Solana(dataset: realtime) {
     DEXTradeByTokens(
-      where: {
-        Transaction: { Result: { Success: true } }
-        Trade: {
-          Currency: {
-            MintAddress: { is: "HBk9uuhJzVpCKAFj8tALc2g8iXvHgAuEKLj5JZSBpump" }
-          }
-        }
-        Block: { Time: { since: "2024-09-24T08:03:00Z" } }
-      }
+      where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: $token}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Market: {MarketAddress: {is: "4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i"}}}, Block: {Time: {since: $time_1h_ago}}}
     ) {
       Trade {
         Currency {
@@ -238,7 +230,7 @@ query MyQuery {
         start: PriceInUSD(minimum: Block_Time)
         min5: PriceInUSD(
           minimum: Block_Time
-          if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+          if: {Block: {Time: {after: $time_5min_ago}}}
         )
         end: PriceInUSD(maximum: Block_Time)
         Dex {
@@ -260,77 +252,62 @@ query MyQuery {
       makers: count(distinct: Transaction_Signer)
       makers_5min: count(
         distinct: Transaction_Signer
-        if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+        if: {Block: {Time: {after: $time_5min_ago}}}
       )
       buyers: count(
         distinct: Transaction_Signer
-        if: { Trade: { Side: { Type: { is: buy } } } }
+        if: {Trade: {Side: {Type: {is: buy}}}}
       )
       buyers_5min: count(
         distinct: Transaction_Signer
-        if: {
-          Trade: { Side: { Type: { is: buy } } }
-          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
-        }
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
       )
       sellers: count(
         distinct: Transaction_Signer
-        if: { Trade: { Side: { Type: { is: sell } } } }
+        if: {Trade: {Side: {Type: {is: sell}}}}
       )
       sellers_5min: count(
         distinct: Transaction_Signer
-        if: {
-          Trade: { Side: { Type: { is: sell } } }
-          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
-        }
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
       )
       trades: count
-      trades_5min: count(
-        if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
-      )
+      trades_5min: count(if: {Block: {Time: {after: $time_5min_ago}}})
       traded_volume: sum(of: Trade_Side_AmountInUSD)
       traded_volume_5min: sum(
         of: Trade_Side_AmountInUSD
-        if: { Block: { Time: { after: "2024-09-24T08:58:00Z" } } }
+        if: {Block: {Time: {after: $time_5min_ago}}}
       )
       buy_volume: sum(
         of: Trade_Side_AmountInUSD
-        if: { Trade: { Side: { Type: { is: buy } } } }
+        if: {Trade: {Side: {Type: {is: buy}}}}
       )
       buy_volume_5min: sum(
         of: Trade_Side_AmountInUSD
-        if: {
-          Trade: { Side: { Type: { is: buy } } }
-          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
-        }
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
       )
       sell_volume: sum(
         of: Trade_Side_AmountInUSD
-        if: { Trade: { Side: { Type: { is: sell } } } }
+        if: {Trade: {Side: {Type: {is: sell}}}}
       )
       sell_volume_5min: sum(
         of: Trade_Side_AmountInUSD
-        if: {
-          Trade: { Side: { Type: { is: sell } } }
-          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
-        }
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
       )
-      buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      buys: count(if: {Trade: {Side: {Type: {is: buy}}}})
       buys_5min: count(
-        if: {
-          Trade: { Side: { Type: { is: buy } } }
-          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
-        }
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
       )
-      sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      sells: count(if: {Trade: {Side: {Type: {is: sell}}}})
       sells_5min: count(
-        if: {
-          Trade: { Side: { Type: { is: sell } } }
-          Block: { Time: { after: "2024-09-24T08:58:00Z" } }
-        }
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
       )
     }
   }
+}
+{
+  "token":"2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+  "time_5min_ago":"2024-11-06T15:13:00Z",
+  "time_1h_ago": "2024-11-06T14:18:00Z"
 }
 ```
 
