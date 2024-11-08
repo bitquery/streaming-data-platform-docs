@@ -33,9 +33,6 @@ export default function Home() {
     <Layout
       title={`Bitquery V2 API Docs`}
       description= "Blockchain Streaming APIs docs (V2 docs) to query real-time and historical transactions, balances, transfers, NFTs, tokens, Dex trades, Smart contract calls, events, etc. We support 40+ blockchains, including Bitcoin, Ethereum, Solana, Polygon, Arbitrum, Optimism, etc.">
-         <Helmet>
-        <meta name="baidu-site-verification" content="codeva-3D7wc6GZVP" />
-      </Helmet>
       <HomepageHeader />
       <main>
         <HomepageFeatures />
