@@ -111,18 +111,9 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
 {
   EVM(network: eth) {
     DEXTrades(
-      orderBy: { descending: Block_Number }
-      where: {
-        Trade: {
-          Buy: {
-            Currency: {
-              SmartContract: {
-                is: "0x0fcbd68251819928c8f6d182fc04be733fa94170"
-              }
-            }
-          }
-        }
-      }
+      orderBy: {descending: Block_Number}
+      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x0fcbd68251819928c8f6d182fc04be733fa94170"}}}}}
+      limit: {count: 10}
     ) {
       Block {
         Time
@@ -155,6 +146,7 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
     }
   }
 }
+
 ```
 
 **Parameters**
