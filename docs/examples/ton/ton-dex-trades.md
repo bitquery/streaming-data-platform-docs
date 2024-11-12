@@ -173,21 +173,17 @@ subscription {
 ## Top Traders
 
 This API retrieves the top traders in a specific period based on the number of trades. You can adjust the filter to use any other metric as well.
-You can run the query [here](https://ide.bitquery.io/Ton-Top-Traders)
+You can run the query [here](https://ide.bitquery.io/Top-Traders-on-Ton)
 
 ```javascript
-query DexMarkets {
+query DexMarkets($time_ago: DateTime) {
   Ton {
     DEXTradeByTokens(
       orderBy: {descendingByField: "trades"}
       limit: {count: 100}
-      where: {Block: {Time: {since: "2024-10-21T05:36:05Z"}}}
+      where: {Block: {Time: {since: $time_ago}}}
     ) {
       Trade {
-        Seller {
-          Address
-          Workchain
-        }
         Buyer {
           Address
           Workchain
@@ -198,6 +194,7 @@ query DexMarkets {
     }
   }
 }
+
 
 ```
 
