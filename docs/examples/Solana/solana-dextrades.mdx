@@ -159,6 +159,159 @@ query LatestTrades($token: String, $base: String) {
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_latest_trades).
 
+## Get Trade Summary of a Trade
+
+A lot of times a trade is implemented using multiple swaps. The summary of these trades are the token originally sold and the token finally purchased.
+To get the summary for such trades use [this](https://ide.bitquery.io/trade-summary_1) query.
+
+``` graphql
+
+{
+  Solana {
+    DEXTrades(
+      where: {Transaction: {Signer: {is: "9B4okPpQcz1MSt8cLLb7YGo2NKvgsw82pEhHqKsKW9uS"}, Result: {Success: true}}}
+      orderBy: {descending: Block_Time}
+    ) {
+      Trade {
+        Buy {
+          Amount
+          PriceInUSD
+          Currency {
+            Decimals
+            Name
+            MintAddress
+            Symbol
+          }
+          Account {
+            Address
+            Owner
+          }
+        }
+        Dex {
+          ProgramAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        Sell {
+          Amount
+          Price
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+          }
+        }
+        Index
+      }
+      Transaction {
+        Signature
+        Result {
+          Success
+        }
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+
+```
+
+The response of the query is given below. Given multiple trades with same `Block Time`, the summary is 
+given by the `sell currency` for the lowest Trade Index and the `buy currency` for the highest Trade Index. 
+
+``` json 
+
+{
+        "Block": {
+          "Time": "2024-11-12T05:56:55Z"
+        },
+        "Trade": {
+          "Buy": {
+            "Account": {
+              "Address": "FJnivW3jSXVuR2P6Z6e9iRkVHEyEzppHcnUdMgsLBSgY",
+              "Owner": "4xDsmeTWPNjgSVSS1VTfzFq3iHZhp77ffPkAmkZkdu71"
+            },
+            "Amount": "7599.73089",
+            "Currency": {
+              "Decimals": 5,
+              "MintAddress": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+              "Name": "Bonk",
+              "Symbol": "Bonk"
+            },
+            "PriceInUSD": 0.000028919810335657223
+          },
+          "Dex": {
+            "ProgramAddress": "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo",
+            "ProtocolFamily": "Meteora",
+            "ProtocolName": "lb_clmm"
+          },
+          "Index": 0,
+          "Sell": {
+            "Amount": "0.219833",
+            "Currency": {
+              "Decimals": 6,
+              "MintAddress": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+              "Name": "USD Coin",
+              "Symbol": "USDC"
+            },
+            "Price": 34570.47345030091
+          }
+        },
+        "Transaction": {
+          "Result": {
+            "Success": true
+          },
+          "Signature": "43aymSmr2op2aEnCiMfzkqqfpWwSofWk8EBcUWhKEUsHRrZV4KpTGW4iuxLxJyS1HKoLS7gTamzuqKiwi3e3z4Li"
+        }
+      },
+      {
+        "Block": {
+          "Time": "2024-11-12T05:56:55Z"
+        },
+        "Trade": {
+          "Buy": {
+            "Account": {
+              "Address": "6zAcFYmxkaH25qWZW5ek4dk4SyQNpSza3ydSoUxjTudD",
+              "Owner": "4xDsmeTWPNjgSVSS1VTfzFq3iHZhp77ffPkAmkZkdu71"
+            },
+            "Amount": "0.001015898",
+            "Currency": {
+              "Decimals": 9,
+              "MintAddress": "So11111111111111111111111111111111111111112",
+              "Name": "Wrapped Solana",
+              "Symbol": "WSOL"
+            },
+            "PriceInUSD": 210.759146972229
+          },
+          "Dex": {
+            "ProgramAddress": "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo",
+            "ProtocolFamily": "Meteora",
+            "ProtocolName": "lb_clmm"
+          },
+          "Index": 1,
+          "Sell": {
+            "Amount": "7599.73089",
+            "Currency": {
+              "Decimals": 5,
+              "MintAddress": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+              "Name": "Bonk",
+              "Symbol": "Bonk"
+            },
+            "Price": 1.336755228184139e-7
+          }
+        },
+        "Transaction": {
+          "Result": {
+            "Success": true
+          },
+          "Signature": "43aymSmr2op2aEnCiMfzkqqfpWwSofWk8EBcUWhKEUsHRrZV4KpTGW4iuxLxJyS1HKoLS7gTamzuqKiwi3e3z4Li"
+        }
+      }
+```
+
 ## Get the historical Created pairs on any Solana DEX
 
 This query will return information about the historical created pairs according to the selected date frame.
