@@ -246,6 +246,7 @@ const sidebars = {
             "examples/calls/smartcontract-filterby",
             "examples/events/events-api",
             "examples/mempool/mempool-api",
+            "examples/transfers/total-supply",
             {
               type: "category",
               label: "Balances",
