@@ -194,3 +194,75 @@ subscription {
 }
 
 ```
+
+## Get Top Gainers on Matic Network
+
+This query retrieves information about the top-performing tokens on the Matic network based on trade volume and price appreciation in USD. It aggregates data from DEXs to provide insights into price trends over different time intervals like 10 minutes, 1 hour and 3 hours ago, and the overall trading volume.
+
+We use `any` filter ( OR condition) to exclude `$wmatic`, `$weth`, `$usdc`, `$usdt`, `$usdcpos`, the smart contract addresses for common tokens on the Matic network from top tokens list.
+
+You can run this query [here](https://ide.bitquery.io/top-tokens-on-matic-stats)
+
+```
+query pairs($min_count: String, $network: evm_network, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime, $time_ago: DateTime, $wmatic: String!, $weth: String!, $usdc: String!, $usdt: String!, $usdcpos: String!) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      where: {Block: {Time: {since: $time_ago}}, any: [{Trade: {Side: {Currency: {SmartContract: {is: $usdt}}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $usdc}}}, Currency: {SmartContract: {notIn: [$usdt]}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $usdcpos}}}, Currency: {SmartContract: {notIn: [$usdt, $usdc]}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $weth}}}, Currency: {SmartContract: {notIn: [$usdc, $usdt, $usdcpos]}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $wmatic}}}, Currency: {SmartContract: {notIn: [$weth, $usdc, $usdt, $usdcpos]}}}}, {Trade: {Side: {Currency: {SmartContract: {notIn: [$usdc, $usdt, $weth, $wmatic]}}}, Currency: {SmartContract: {notIn: [$usdc, $usdt, $weth, $wmatic, $usdcpos]}}}}]}
+      orderBy: {descendingByField: "usd"}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+          ProtocolName
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+            ProtocolName
+          }
+        }
+        price_last: PriceInUSD(maximum: Block_Number)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_10min_ago}}}
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_1h_ago}}}
+        )
+        price_3h_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_3h_ago}}}
+        )
+      }
+      dexes: uniq(of: Trade_Dex_OwnerAddress)
+      amount: sum(of: Trade_Side_Amount)
+      usd: sum(of: Trade_Side_AmountInUSD)
+      sellers: uniq(of: Trade_Seller)
+      buyers: uniq(of: Trade_Buyer)
+      count(selectWhere: {ge: $min_count})
+    }
+  }
+}
+{
+  "network": "matic",
+  "time_10min_ago": "2024-11-13T03:49:19Z",
+  "time_1h_ago": "2024-11-13T02:59:19Z",
+  "time_3h_ago": "2024-11-13T00:59:19Z",
+  "usdc": "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+  "usdcpos": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+  "usdt": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+  "weth": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+  "wmatic": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
+  "min_count": "100"
+}
+
+```
+This query is available as a heatmap on [https://dexrabbit.com/matic](https://dexrabbit.com/matic)
+
+![](/img/dexrabbit/matic_toptokens.png)
