@@ -266,3 +266,42 @@ query pairs($min_count: String, $network: evm_network, $time_10min_ago: DateTime
 This query is available as a heatmap on [https://dexrabbit.com/matic](https://dexrabbit.com/matic)
 
 ![](/img/dexrabbit/matic_toptokens.png)
+
+
+## Top Traders of a Token
+
+This query retrieves data on the top traders of a specific token on the Matic network. It aggregates trade volumes and categorizes them into bought and sold amounts, along with the total trading volume in both native and USD terms.
+
+You can run the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-matic)
+```
+query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}}, Block: {Time: {since: $time_ago}}}
+    ) {
+      Trade {
+        Buyer
+        Seller
+        Dex {
+          ProtocolFamily
+        }
+      }
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+{
+  "network": "matic",
+  "token": "0x4dba7eb38ab96987b2b9c267f9d399da367194e0",
+  "time_ago": "2024-11-10T05:00:02Z"
+}
+```
+
+This query is available as a chart and table on [https://dexrabbit.com/matic](https://dexrabbit.com/matic)
+
+![](/img/dexrabbit/matic_toptraders.png)
