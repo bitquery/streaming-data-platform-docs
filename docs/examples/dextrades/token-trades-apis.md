@@ -67,13 +67,13 @@ subscription MyQuery {
 
 The query will fetch you the buys, sells, buy volume, sell volume and also the number of makers for a particular token just like how DEXScreener shows in its UI. We are getting these trade metrics for this particular pool address `0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`.
 
-You can find the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD_1)
+You can find the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-eth-pair#)
 
 ```
-query MyQuery($network: evm_network, $token: String, $min5_timestamp: DateTime ) {
+query MyQuery($network: evm_network, $token: String,$pairAddress: String , $min5_timestamp: DateTime, $hr1_timestamp: DateTime) {
   EVM(dataset: realtime, network: $network) {
     DEXTradeByTokens(
-      where: {TransactionStatus: {Success: true}, Trade: {Currency: {SmartContract: {is: $token}}}, Block: {Time: {since: "2024-10-11T09:30:00Z"}}}
+      where: {TransactionStatus: {Success: true}, Trade: {Currency: {SmartContract: {is: $token}}, Dex: {SmartContract: {is: $pairAddress}}}, Block: {Time: {since: $hr1_timestamp}}}
     ) {
       Trade {
         Currency {
@@ -157,8 +157,10 @@ query MyQuery($network: evm_network, $token: String, $min5_timestamp: DateTime )
 }
 {
   "network": "eth",
-  "token": "0x842293fa6ee0642bf61ebf8310e7e546039ba7f4",
-  "min5_timestamp": "2024-10-11T09:30:00Z"
+  "token": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
+  "pairAddress": "0xA43fe16908251ee70EF74718545e4FE6C5cCEc9f",
+  "hr1_timestamp": "2024-11-14T03:20:00Z",
+  "min5_timestamp": "2024-11-14T04:15:00Z"
 }
 ```
 
@@ -505,7 +507,6 @@ query tokenDexMarkets($network: evm_network, $token: String) {
 ![image](https://github.com/user-attachments/assets/f0de1013-b634-4058-8423-78d7130fcc10)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#token_dex_list).
-
 
 ## Latest Trades of a Token pair
 

@@ -164,10 +164,10 @@ The query will fetch you the buys, sells, buy volume, sell volume and also the n
 You can find the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD_1)
 
 ```
-query MyQuery($network: evm_network, $token: String, $min5_timestamp: DateTime ) {
+query MyQuery($network: evm_network, $token: String,$pairAddress: String , $min5_timestamp: DateTime, $hr1_timestamp: DateTime) {
   EVM(dataset: realtime, network: $network) {
     DEXTradeByTokens(
-      where: {TransactionStatus: {Success: true}, Trade: {Currency: {SmartContract: {is: $token}}}, Block: {Time: {since: "2024-10-11T09:30:00Z"}}}
+      where: {TransactionStatus: {Success: true}, Trade: {Currency: {SmartContract: {is: $token}}, Dex: {SmartContract: {is: $pairAddress}}}, Block: {Time: {since: $hr1_timestamp}}}
     ) {
       Trade {
         Currency {
@@ -251,8 +251,10 @@ query MyQuery($network: evm_network, $token: String, $min5_timestamp: DateTime )
 }
 {
   "network": "eth",
-  "token": "0x842293fa6ee0642bf61ebf8310e7e546039ba7f4",
-  "min5_timestamp": "2024-10-11T09:30:00Z"
+  "token": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
+  "pairAddress": "0xA43fe16908251ee70EF74718545e4FE6C5cCEc9f",
+  "hr1_timestamp": "2024-11-14T03:20:00Z",
+  "min5_timestamp": "2024-11-14T04:15:00Z"
 }
 ```
 

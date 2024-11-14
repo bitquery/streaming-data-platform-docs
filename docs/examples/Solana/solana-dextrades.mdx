@@ -213,13 +213,13 @@ query{
 ## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token
 
 The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
-You can run the query [here](https://ide.bitquery.io/buyers-sellers-buys-sells-makers-trades-trade-volumeall-in-5min-1H_2)
+You can run the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair)
 
 ```graphql
-query MyQuery($token: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime!) {
+query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime!) {
   Solana(dataset: realtime) {
     DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: $token}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Market: {MarketAddress: {is: "4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i"}}}, Block: {Time: {since: $time_1h_ago}}}
+      where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: $token}}, Side: {Currency: {MintAddress: {is: $side_token}}}, Market: {MarketAddress: {is: $pair_address}}}, Block: {Time: {since: $time_1h_ago}}}
     ) {
       Trade {
         Currency {
@@ -306,6 +306,8 @@ query MyQuery($token: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime
 }
 {
   "token":"2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+  "side_token": ""So11111111111111111111111111111111111111112",
+  "pair_address: "4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i",
   "time_5min_ago":"2024-11-06T15:13:00Z",
   "time_1h_ago": "2024-11-06T14:18:00Z"
 }
