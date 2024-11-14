@@ -1,3 +1,6 @@
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Historical Solana Data
 
 Historical data for Solana has finally been added for the `EAP` option, where we are providing data as old as  three months.
@@ -5,7 +8,7 @@ However the options to use the historical data are quite limited and currently o
 `DEXTradeByTokens`. In this section, we will see some working examples for the same.
 
 ## Historical OHLC on Solana
-[This](https://ide.bitquery.io/historical-ohlc-for-solana) query returns the historical OHLC data for a given pair along with volume
+[This](https://ide.bitquery.io/historical-ohlc-for-solana_1) query returns the historical OHLC data for a given pair along with volume
 and number of trades in the given interval.
 
 For this example the pair between the tokens listed below is considered.
@@ -21,7 +24,7 @@ For this example the pair between the tokens listed below is considered.
       limit: {count: 10}
     ) {
       Block {
-        Timefield: Time(interval: {in: minutes, count: 1})
+        Timefield: Time(interval: {in: days, count: 1})
       }
       volume: sum(of: Trade_Amount)
       Trade {
@@ -118,3 +121,7 @@ query MyQuery {
 }
 
 ```
+
+## Video Tutorial for Querring Historical Solana Data 
+
+<VideoPlayer url="https://youtu.be/qbSEPbHQb5k" />

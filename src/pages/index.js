@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { Helmet } from 'react-helmet'; // Import react-helmet
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
@@ -31,7 +32,7 @@ export default function Home() {
   return (
     <Layout
       title={`Bitquery V2 API Docs`}
-      description= "Blockchain Streaming APIs docs (V2 docs) to query real-time and historical transactions, balances, transfers, NFTs, tokens, Dex trades, Smart contract calls, events, etc. We support 40+ blockchains, including Bitcoin, Etheruem, Solana, Polygon, Arbitrum, Optimism, etc.">
+      description= "Blockchain Streaming APIs docs (V2 docs) to query real-time and historical transactions, balances, transfers, NFTs, tokens, Dex trades, Smart contract calls, events, etc. We support 40+ blockchains, including Bitcoin, Ethereum, Solana, Polygon, Arbitrum, Optimism, etc.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

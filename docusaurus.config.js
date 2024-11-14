@@ -217,6 +217,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+
+      // metadata: [
+      //   {
+      //     name: 'baidu-site-verification',
+      //     content: 'codeva-3D7wc6GZVP' // Replace with your actual content value
+      //   }, 
+      //   // ... other meta tags ...
+      // ],
       // Replace with your project's social card
       image: "img/heroImage4.png",
       navbar: {
