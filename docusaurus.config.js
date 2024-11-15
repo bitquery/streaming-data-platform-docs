@@ -121,6 +121,10 @@ const config = {
             to: "/docs/authorisation/how-to-generate",
             from: "/docs/ide/authorisation/",
           },
+          {
+            to:"/docs/authorisation/how-to-generate",
+            from:"/docs/category/authorization/"
+          },
 
           {
             to: "/docs/authorisation/how-to-generate",
