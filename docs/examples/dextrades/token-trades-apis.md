@@ -69,7 +69,7 @@ The query will fetch you the buys, sells, buy volume, sell volume and also the n
 
 You can find the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-eth-pair#)
 
-```
+```javascript
 query MyQuery($network: evm_network, $token: String,$pairAddress: String , $min5_timestamp: DateTime, $hr1_timestamp: DateTime) {
   EVM(dataset: realtime, network: $network) {
     DEXTradeByTokens(
@@ -513,7 +513,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x226
 This query will fetch you latest trades for a token pair for the selected network.
 You can test the query [here](https://ide.bitquery.io/latest-trades-of-a-pair).
 
-```
+```javascript
 query LatestTrades($network: evm_network, $token: String, $base: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -565,15 +565,15 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02a
 
 ## Get OHLC data for a particular token pair
 
-This query will fetch you the OHLC of a token pair for the selected network.
-You can test the query [here](https://ide.bitquery.io/ohlc0_2).
+This query will fetch you the OHLC of a token pair for the selected network. Use `PriceAsymmetry` to filter outliers and extremes, read more on it [here](https://docs.bitquery.io/docs/graphql/metrics/priceAsymmetry/#how-to-use-priceasymmetry-to-filter-anomalies-and-outliers-in-trades-)
+You can test the query [here](https://ide.bitquery.io/ohlc-priceAsymmetry-example).
 
-```
+```javascript
 query tradingViewPairs($network: evm_network, $token: String, $base: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
       orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}}}
+     where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}, PriceAsymmetry: {lt:0.5}}}
     ) {
       Block {
         Time(interval: {count: 5, in: minutes})
