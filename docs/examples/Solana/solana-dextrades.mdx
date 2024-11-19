@@ -535,30 +535,6 @@ query TopTraders($token: String, $base: String) {
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_top_traders).
 
-## Top Traders of a token
-
-This query will give you top traders on Solana network.
-You can find the query [here](https://ide.bitquery.io/top-traders-on-Solana)
-
-```
-query DexMarkets {
-  Solana {
-    DEXTradeByTokens(orderBy: {descendingByField: "trades"}, limit: {count: 100}) {
-      Trade {
-        Account {
-          Owner
-        }
-      }
-      trades: count(if: {Trade: {Side: {Type: {is: buy}}}})
-      tokens: uniq(of: Trade_Currency_MintAddress)
-    }
-  }
-}
-```
-
-![image](https://github.com/user-attachments/assets/eb8d5f3b-80c2-4aa4-a2e1-204d979025c0)
-
-Check data here on [DEXrabbit](https://dexrabbit.com/solana/trader).
 
 ## Get DEX Markets for a Token
 
