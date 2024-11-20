@@ -10,6 +10,13 @@ This guide explains how to implement a Python Kafka consumer to receive [onchain
 
 The complete code is available [here](https://github.com/bitquery/kafka-consumer-example).
 
+## Video Tutorial
+
+import VideoPlayer from "../../src/components/videoplayer.js";
+
+<VideoPlayer url="https://youtu.be/pNXq7H8_pfw" />
+
+
 ### Prerequisites
 
 Ensure that you have the following components in place before running the code:
