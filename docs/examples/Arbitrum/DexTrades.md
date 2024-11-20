@@ -34,6 +34,64 @@ In this section we will see how to get Arbitrum DEX trades information using our
 <meta property="twitter:description" content="Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API." />
 </head>
 
+## Top Trending Pairs on Arbitrum
+
+[This](https://ide.bitquery.io/trending-token-pairs-on-Arbitrum) query returns the top trending pairs traded on Arbitrum Chain based on the trade volume for the last 24 hours, and returns info such as latest price, number of buyers and sellers, number of trades in a day and much more.
+
+``` graphql
+
+query pairs($min_count: String, $network: evm_network, $time_ago: DateTime, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime, $weth: String!, $usdc: String!, $usdt: String!, $usdc2: String!) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      where: {Block: {Time: {since: $time_ago}}, any: [{Trade: {Side: {Currency: {SmartContract: {is: $usdt}}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $usdc}}}, Currency: {SmartContract: {notIn: [$usdt]}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $usdc2}}}, Currency: {SmartContract: {notIn: [$usdt, $usdc]}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $weth}}}, Currency: {SmartContract: {notIn: [$usdc, $usdt, $usdc2]}}}}, {Trade: {Side: {Currency: {SmartContract: {notIn: [$usdc, $usdt, $weth]}}}, Currency: {SmartContract: {notIn: [$usdc, $usdc2, $usdt, $weth]}}}}]}
+      orderBy: {descendingByField: "usd"}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+          ProtocolName
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+            ProtocolName
+          }
+        }
+        price_last: PriceInUSD(maximum: Block_Number)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_10min_ago}}}
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_1h_ago}}}
+        )
+        price_3h_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_3h_ago}}}
+        )
+      }
+      dexes: uniq(of: Trade_Dex_OwnerAddress)
+      amount: sum(of: Trade_Side_Amount)
+      usd: sum(of: Trade_Side_AmountInUSD)
+      sellers: uniq(of: Trade_Seller)
+      buyers: uniq(of: Trade_Buyer)
+      count(selectWhere: {ge: $min_count})
+    }
+  }
+}
+
+```
+
+Implementation of this data in a full scale project could be seen on [DEXRabbit](https://dexrabbit.com/arbitrum/pair).
+
+![Trending Pairs on Arbitrum](../../../static/img/dexrabbit/arbitrum/arbitrum_trending_pairs.png)
+
 ## Latest Trades for a Token Pair on Arbitrum
 
 This query retrieves all DEX trades on the arbitrum where the Arbitrum currency is `ArbitrumCurrency` and the quote currency is `quoteCurrency` that occurred between the specified dates.
@@ -92,6 +150,39 @@ query ($network: evm_network!, $ArbitrumCurrency: String!, $limit: Int, $quoteCu
 
 ```
 
+## OHLC for a Token Pair
+
+[This](https://ide.bitquery.io/ohlc-for-a-pair-on-Arbitrum) query returns the OHLC/K Line Data for a specified token pair. For this example we are considering the ARB `0x912ce59144191c1204e64559fe8253a0e49e6548` and USDC `0xff970a61a04b1ca14834a43f5de4533ebddb5cc8`
+pair.
+
+``` graphql
+
+query tradingViewPairs($network: evm_network, $dataset: dataset_arg_enum, $interval: Int, $token: String, $base: String, $time_ago: DateTime) {
+  EVM(network: $network, dataset: $dataset) {
+    DEXTradeByTokens(
+      orderBy: {ascendingByField: "Block_Time"}
+      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $token}}}, Currency: {SmartContract: {is: $base}}}, Block: {Time: {since: $time_ago}}}
+    ) {
+      Block {
+        Time(interval: {count: $interval, in: minutes})
+      }
+      Trade{
+        open: PriceInUSD(minimum: Block_Time)
+        close: PriceInUSD(maximum: Block_Time)
+        max: PriceInUSD(maximum: Trade_PriceInUSD)
+        min: PriceInUSD(minimum: Trade_PriceInUSD)
+      }
+      volume: sum(of: Trade_AmountInUSD)
+    }
+  }
+}
+
+```
+
+An example for the data visualisation of the data obtained could be seen on the [DEXRabbit](https://dexrabbit.com/arbitrum/pair/0x912ce59144191c1204e64559fe8253a0e49e6548/0xff970a61a04b1ca14834a43f5de4533ebddb5cc8).
+
+![OHLC/ K Line for a Pair on Arbitrum](../../../static/img/dexrabbit/arbitrum/arbitrum_ohlc_pair.png)
+
 ## Latest Trades in Realtime with Subscription
 
 This subscription query will return the latest DEX trades on the Arbitrum network in real time.
@@ -135,6 +226,40 @@ subscription {
 }
 
 ```
+
+## Top Traders of a Token on Arbitrum
+
+[This](https://ide.bitquery.io/top-traders-for-a-token-on-Arbitrum) query returns the top traders of a token on arbitrum based on the volume of trades involving the particular token. This query returns info such as buyers, sellers, DEX Protocol used, amount bought and sold.
+
+``` graphql
+
+query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}}, Block: {Time: {since: $time_ago}}}
+    ) {
+      Trade {
+        Buyer
+        Seller
+        Dex {
+          ProtocolFamily
+        }
+      }
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+```
+
+The implementation of this data could also be seen on the [DEXRabbit](https://dexrabbit.com/arbitrum/token/0x912ce59144191c1204e64559fe8253a0e49e6548#top_traders).
+
+![Top Traders for a token on Arbitrum](../../../static/img/dexrabbit/arbitrum/arbitrum_top_traders_token.png)
 
 The `DEXTrades` API contains the following information about each trade:
 
