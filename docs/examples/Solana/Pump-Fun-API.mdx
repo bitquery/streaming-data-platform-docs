@@ -599,23 +599,16 @@ subscription MyQuery {
 
 ## Get the Top Token Holders of a specific Token
 
-This query gives you Top 10 Token Holders for this specific token `GuqAC33o88dabjEuh3tx73xSjdLQBRbWSoicgboCpump`. The query provides you the top 10 holders addresses and also their balances of this token. You can change the token address in query as per your needs.
-You can run the query [here](https://ide.bitquery.io/top-10-holders-for-a-pump-fun-token_6)
+This query gives you Top 10 Token Holders for this specific token `2GxdEZQ5d9PsUqyGy43qv4fmNJWrnLp6qY4dTyNepump`. The query provides you the top 10 holders addresses and also their balances of this token. You can change the token address in query as per your needs.
+You can run the query [here](https://ide.bitquery.io/top-token-holders-for-a-pump-fun-token)
 
 ```graphql
 query MyQuery {
-  Solana {
+  Solana(dataset: realtime) {
     BalanceUpdates(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "BalanceUpdate_Holding_maximum" }
-      where: {
-        BalanceUpdate: {
-          Currency: {
-            MintAddress: { is: "GuqAC33o88dabjEuh3tx73xSjdLQBRbWSoicgboCpump" }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
+      limit: {count: 10}
+      orderBy: {descendingByField: "BalanceUpdate_Holding_maximum"}
+      where: {BalanceUpdate: {Currency: {MintAddress: {is: "2GxdEZQ5d9PsUqyGy43qv4fmNJWrnLp6qY4dTyNepump"}}}, Transaction: {Result: {Success: true}}}
     ) {
       BalanceUpdate {
         Currency {
@@ -631,6 +624,7 @@ query MyQuery {
     }
   }
 }
+
 ```
 
 ![image](https://github.com/user-attachments/assets/b7c307de-fce7-4cd2-8e89-b06c0af506e7)

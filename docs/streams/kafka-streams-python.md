@@ -44,7 +44,7 @@ from pathlib import Path
 # Kafka consumer configuration
 conf = {
     'bootstrap.servers': 'rpk0.bitquery.io:9093,rpk1.bitquery.io:9093,rpk2.bitquery.io:9093',
-    'group.id': 'trontest1-group-1',  # Unique group ID
+    'group.id': 'trontest1-group-1',  # the group id has to start with the username
     'session.timeout.ms': 30000,
     'security.protocol': 'SASL_SSL',
     'ssl.ca.location': 'server.cer.pem',
@@ -58,7 +58,7 @@ conf = {
 }
 ```
 
-- **group.id**: A unique identifier for the consumer group.
+- **group.id**: A unique identifier for the consumer group. It has to start with the username that was shared with you, for e.g. `trontest1-group-3`, `trontest1-group-5` etc.
 - **bootstrap.servers**: List of Kafka broker addresses.
 - **SSL configuration**: Paths to the CA, key, and certificate files are provided for SSL authentication.
 - **SASL configuration**: Username and password are used for secure communication.
