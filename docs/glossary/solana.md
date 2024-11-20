@@ -4,7 +4,7 @@
 
 Solana API allows you to narrow down your results using these parameters:
 
-- `archive`: Archive dataset contains the data from the first (genesis) block up until the realtime dataset(not including).
+- `archive`: Archive dataset contains the data from May 2024 up until the realtime dataset(not including).
 - `realtime`: Realtime dataset containing last set of blocks. Eg. only few hours recent data
 - `combined`: Combined dataset ( realtime and archive ).
 
