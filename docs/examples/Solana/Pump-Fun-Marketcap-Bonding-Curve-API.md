@@ -170,7 +170,7 @@ Use the below query to track Pump Fun token migrations to Raydium in realtime by
               "userLpTokenAccount"
 ```
 
- You can test the query [here](https://ide.bitquery.io/track-pump-to-raydium-LP-mint).
+ You can test the query [here](https://ide.bitquery.io/track-pump-to-raydium-LP-initialize2).
 
 ```graphql
 query MyQuery {
