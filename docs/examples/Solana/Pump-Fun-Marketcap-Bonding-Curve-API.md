@@ -241,7 +241,7 @@ TLDR (or not able to understand) then just apply this formulae `bondingCurveProg
 ```graphql
 query GetLatestLiquidityForPool {
   Solana {
-    DePools(
+    DEXPools(
       where: {
         Pool: {
           Market: {
