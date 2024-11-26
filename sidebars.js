@@ -382,20 +382,6 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Optimism",
-          link: {
-            type: "generated-index",
-            title: "Optimism Overview",
-          },
-          items: [
-            "examples/Optimism/optimism-balance-updates",
-            "examples/Optimism/optimism-dextrades",
-            "examples/Optimism/optimism-nft",
-            "examples/Optimism/optimism-transfers",
-          ],
-        },
-        {
-          type: "category",
           label: "TON",
           link: {
             type: "generated-index",
@@ -459,6 +445,20 @@ const sidebars = {
             "examples/Matic/matic-dextrades",
             "examples/Matic/matic-nft",
             "examples/Matic/matic-transfers",
+          ],
+        },
+        {
+          type: "category",
+          label: "Optimism",
+          link: {
+            type: "generated-index",
+            title: "Optimism Overview",
+          },
+          items: [
+            "examples/Optimism/optimism-balance-updates",
+            "examples/Optimism/optimism-dextrades",
+            "examples/Optimism/optimism-nft",
+            "examples/Optimism/optimism-transfers",
           ],
         },
         {
