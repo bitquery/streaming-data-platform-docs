@@ -164,13 +164,17 @@ Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTn
 A lot of times a trade is implemented using multiple swaps. The summary of these trades are the token originally sold and the token finally purchased.
 To get the summary for such trades use [this](https://ide.bitquery.io/trade-summary_1) query.
 
-``` graphql
-
+```graphql
 {
   Solana {
     DEXTrades(
-      where: {Transaction: {Signer: {is: "9B4okPpQcz1MSt8cLLb7YGo2NKvgsw82pEhHqKsKW9uS"}, Result: {Success: true}}}
-      orderBy: {descending: Block_Time}
+      where: {
+        Transaction: {
+          Signer: { is: "9B4okPpQcz1MSt8cLLb7YGo2NKvgsw82pEhHqKsKW9uS" }
+          Result: { Success: true }
+        }
+      }
+      orderBy: { descending: Block_Time }
     ) {
       Trade {
         Buy {
@@ -216,13 +220,12 @@ To get the summary for such trades use [this](https://ide.bitquery.io/trade-summ
     }
   }
 }
-
 ```
 
-The response of the query is given below. Given multiple trades with same `Block Time`, the summary is 
-given by the `sell currency` for the lowest Trade Index and the `buy currency` for the highest Trade Index. 
+The response of the query is given below. Given multiple trades with same `Block Time`, the summary is
+given by the `sell currency` for the lowest Trade Index and the `buy currency` for the highest Trade Index.
 
-``` json 
+```json
 
 {
         "Block": {
@@ -534,7 +537,6 @@ query TopTraders($token: String, $base: String) {
 ![image](https://github.com/user-attachments/assets/d2f6cc5d-b6ed-4ca2-b6aa-0b15f10d378a)
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_top_traders).
-
 
 ## Get DEX Markets for a Token
 
@@ -887,92 +889,31 @@ subscription {
 
 ```
 
-## Get Latest Price of a Token in Real-time
-
-This query provides real-time trade, including details about the DEX, market, and order specifics.
-Find the query [here](https://ide.bitquery.io/Latest-price-of-Ansems-cat-token-on-Solana_2)
-
-To get the most real-time price, you can [use this query](https://ide.bitquery.io/latest-price-of-a-token-on-solana_6), which orders transactions based on the transaction_index.
-Since a block can have multiple trades of the same pair, using the latest transaction based on the transaction_index will provide the most current price.
-
-```
-subscription {
-  Solana {
-    DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "6n7Janary9fqzxKaJVrhL9TG2F61VbAtwUMu1YZscaQS"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
-    ) {
-      Block {
-        Time
-      }
-      Trade {
-        Amount
-        Price
-        Currency {
-          Symbol
-          Name
-          MintAddress
-        }
-        Side {
-          Amount
-          Currency {
-            Symbol
-            Name
-            MintAddress
-          }
-        }
-        Dex {
-          ProgramAddress
-          ProtocolFamily
-          ProtocolName
-        }
-        Market {
-          MarketAddress
-        }
-        Order {
-          LimitAmount
-          LimitPrice
-          OrderId
-        }
-      }
-    }
-  }
-}
-
-```
-
 ## Latest USD Price of a Token
 
-The below query retrieves the USD price of a token on Solana by setting `SmartContract: {is: "So11111111111111111111111111111111111111112"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-Latest-Price-of-SOL-in--USD-Real-time#).
+The below query retrieves the USD price of a token on Solana by setting `MintAddress: {is: "J5FAZ6bV7CCGHcU4CTXWVG6nnKHcwD9Pn4DntY93pump"}` and `Side: {Currency: {MintAddress: {is: "11111111111111111111111111111111"}}}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-Latest-Price-of-SOL-in--USD-Real-time#).
 
 ```
-subscription {
+{
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}
+      orderBy: {descending: Block_Time}
+      where: {Trade: {Currency: {MintAddress: {is: "J5FAZ6bV7CCGHcU4CTXWVG6nnKHcwD9Pn4DntY93pump"}}, Side: {Currency: {MintAddress: {is: "11111111111111111111111111111111"}}}}}
+      limit: {count: 1}
     ) {
-      Transaction {
-        Signature
+      Block{
+        Time
       }
-      Trade {
-        AmountInUSD
-        Amount
-        Currency {
-          MintAddress
+      Trade{
+        Currency{
           Name
-        }
-        Dex {
-          ProgramAddress
-          ProtocolName
+          Symbol
+          MintAddress
         }
         Price
         PriceInUSD
-        Side {
-          Account {
-            Address
-          }
-          AmountInUSD
-          Amount
-          Currency {
+        Side{
+          Currency{
             Name
             MintAddress
           }
@@ -981,6 +922,7 @@ subscription {
     }
   }
 }
+
 ```
 
 ## Get all the Tokens owned by an address
