@@ -130,31 +130,6 @@ subscription MyQuery {
 ## Check if the Pump Fun Token has migrated to Raydium
 
 To check if a Pump Fun Token has migrated to Raydium, we can use Instructions API to check which methods does Pump Fun Migration Account `39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg` calls. We will see in the response of this query `mintTo` method which is responsible for the migration.
-You can find the saved query [here](https://ide.bitquery.io/check-all-the-methods-that-pump-fun-migration-account-calls).
-
-```graphql
-query MyQuery {
-  Solana(network: solana) {
-    Instructions(
-      where: {
-        Transaction: {
-          Signer: { is: "39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg" }
-        }
-      }
-      orderBy: { descendingByField: "txc" }
-    ) {
-      Instruction {
-        Program {
-          Name
-          Method
-          AccountNames
-        }
-      }
-      txc: count
-    }
-  }
-}
-```
 
 Below query can be directly used to check if a Pump Fun Token has migrated to Raydium. We are checking if the Pump Fun: Raydium Migration Account `39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg` successfully called the method `mintTo` for this token address `HFmde4zjyzGN3cBdAmqzjdH7EcdCun432WPbquKmzmJU`. You can run the query [here](https://ide.bitquery.io/check-if-a-pump-token-migrated-to-raydium).
 
@@ -226,7 +201,34 @@ query MyQuery {
 
 ## Track Pump Fun Token Migration to Raydium
 
-Use the below query to track Pump Fun token migrations to Raydium in realtime. You can test the query [here](https://ide.bitquery.io/track-pump-to-raydium-LP-mint).
+Use the below query to track Pump Fun token migrations to Raydium in realtime by tracking the method `initialize2` which gives you the following Account addresses.
+
+```
+
+              "tokenProgram",
+              "splAssociatedTokenAccount",
+              "systemProgram",
+              "rent",
+              "amm",
+              "ammAuthority",
+              "ammOpenOrders",
+              "lpMint",
+              "coinMint",
+              "pcMint",
+              "poolCoinTokenAccount",
+              "poolPcTokenAccount",
+              "poolWithdrawQueue",
+              "ammTargetOrders",
+              "poolTempLp",
+              "serumProgram",
+              "serumMarket",
+              "userWallet",
+              "userTokenCoin",
+              "userTokenPc",
+              "userLpTokenAccount"
+```
+
+ You can test the query [here](https://ide.bitquery.io/track-pump-to-raydium-LP-initialize2).
 
 ```graphql
 query MyQuery {
@@ -236,7 +238,7 @@ query MyQuery {
         Transaction: {
           Signer: { is: "39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg" }
         }
-        Instruction: { Program: { Method: { is: "mintTo" } } }
+        Instruction: { Program: { Method: { is: "initialize2" } } }
       }
       limit: { count: 100 }
     ) {
@@ -297,7 +299,7 @@ TLDR (or not able to understand) then just apply this formulae `bondingCurveProg
 ```graphql
 query GetLatestLiquidityForPool {
   Solana {
-    DePools(
+    DEXPools(
       where: {
         Pool: {
           Market: {
