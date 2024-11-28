@@ -69,6 +69,64 @@ query MyQuery {
 }
 ```
 
+## Get Tokens with a specific MarketCap
+
+You can get the marketcap of a pump fun token by this formulae `marketcap = 1000000000 * Latest USD Price` because all the pump fun tokens have 1 Billion supply.
+
+So to track the tokens with a specific marketcap, we just need to track their `PriceInUSD`. In the below example query we are tracking tokens in realtime using `subscription` keyword which are in marketcap range of $10K to $11K.
+Try it out using this [query link](https://ide.bitquery.io/Track-pump-fun-tokens-with-a-specific-mktcap).
+
+```graphql
+subscription MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          PriceInUSD: { gt: 0.00001, lt: 0.000011 }
+          Dex: {
+            ProgramAddress: {
+              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
+            }
+          }
+          Side: {
+            Currency: {
+              MintAddress: { is: "11111111111111111111111111111111" }
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Currency {
+          Name
+          Symbol
+          Decimals
+          MintAddress
+        }
+        Price
+        PriceInUSD
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          ProgramAddress
+        }
+        Side {
+          Currency {
+            MintAddress
+            Name
+            Symbol
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Check if the Pump Fun Token has migrated to Raydium
 
 To check if a Pump Fun Token has migrated to Raydium, we can use Instructions API to check which methods does Pump Fun Migration Account `39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg` calls. We will see in the response of this query `mintTo` method which is responsible for the migration.
