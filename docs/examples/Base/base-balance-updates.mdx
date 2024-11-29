@@ -6,7 +6,6 @@ sidebar_position: 1
 
 In this section we will see how to monitor real-time balance changes across the Base blockchain
 
-
 <head>
 <meta name="title" content="How to get Base Balance Updates of an address"/>
 <meta name="description" content="Learn how to get real time balance & balance updates of a Base address using Bitquery's Base Balance Updates API."/>
@@ -34,13 +33,13 @@ In this section we will see how to monitor real-time balance changes across the 
 <meta property="twitter:description" content="Learn how to get real time balance & balance updates of a Base address using Bitquery's Base Balance Updates API." />
 </head>
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 ## Subscribe to Balance Updates of a Particular Wallet
 
 The query will subscribe you to real-time updates for balance changes on the Base blockchain, providing a continuous stream of data as new transactions are processed and recorded. Here we have used address `0x4200000000000000000000000000000000000006`. You can find the query [here](https://ide.bitquery.io/Get-real-time-balance-updates_1#)
 
-
->The balance update does not inherently include transaction fees. Therefore, to get the actual balance after all transactions and fees, you need to subtract the total transaction fees from the balance updates.
-
+> The balance update does not inherently include transaction fees. Therefore, to get the actual balance after all transactions and fees, you need to subtract the total transaction fees from the balance updates.
 
 ```
 subscription {
@@ -67,3 +66,7 @@ subscription {
 }
 
 ```
+
+## Video Tutorial | How to get Balance of an Address on Base network
+
+<VideoPlayer url="https://www.youtube.com/watch?v=99ziGAZ9Pvw" />
