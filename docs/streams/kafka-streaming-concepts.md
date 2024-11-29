@@ -40,7 +40,7 @@ This decision sometimes not straightforward, consult our sales and support team,
 ### Important Notes about Kafka Streams
 
 - Stream is not filtered, it contains all the messages with a complete data for every topic. It means you need to have a good throughput network, fast server and code to efficently consume and parse it;
-- Granularity of data message is different in topics, depending on the nature of the data. Topic that
+- Granularity of data message is different in topics, depending on the nature of the data.
 - It is **not** guaranteed that the message will come in sequence of the block number, time or any other attribute.
 - Messages in topic **may have** duplicates. If this makes a problem, your code must have a storage or the cache to remember which messages are already processed to avoid double processing.
 - Large messages can be separated on smaller ones, as Kafka does not allow pass more than 1 Mbyte in one message. For example, first 1200 transaction may come in one message, and the remaining 1000 will follow in another.
