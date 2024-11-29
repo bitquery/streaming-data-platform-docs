@@ -338,6 +338,7 @@ const sidebars = {
             "examples/Solana/historical-aggregate-data",
             "examples/Solana/Solana-AldrinAmm-api",
             "examples/Solana/Solana-DexPools-API",
+            "examples/Solana/Solana-DEX-Orders-API",
             "examples/Solana/Solana-Jito-Bundle-api",
             "examples/Solana/Solana-Lifinity-dex-api",
             "examples/Solana/Solana-Meteora-api",
