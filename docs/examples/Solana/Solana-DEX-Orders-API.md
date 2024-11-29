@@ -185,3 +185,48 @@ You can run the query [here](https://ide.bitquery.io/LimitPrice-DEXOrders-for-to
 }
 
 ```
+
+## Latest Open Orders on Solana
+
+This query retrieves the latest open orders on Solana-based DEXs. Open orders are those that have been created but not yet executed or canceled.
+
+You can run the query [here](https://ide.bitquery.io/Latest-Open-DEX-Orders-Solana)
+
+```
+{
+  Solana(dataset: realtime) {
+    DEXOrders(
+      where: {OrderEvent: {Type: {is: Open}}}
+      orderBy: {descending: Block_Time}
+    ) {
+      OrderEvent {
+        Dex {
+          ProtocolName
+          ProgramAddress
+        }
+        Index
+        Market {
+          MarketAddress
+          QuoteCurrency {
+            Name
+            Symbol
+            MintAddress
+          }
+          BaseCurrency {
+            Name
+            MintAddress
+          }
+        }
+        Order {
+          Account
+          BuySide
+          LimitPrice
+          LimitAmount
+          OrderId
+        }
+      }
+    }
+  }
+}
+
+```
