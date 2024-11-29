@@ -6,7 +6,7 @@ sidebar_position: 2
 
 In this section we will see how to get Solana DEX trades information using our API.
 
-This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/).
 
 <head>
 <meta name="title" content="Solana DEX Trades API | Get Raydium, Jupiter data"/>
@@ -811,77 +811,6 @@ query MyQuery {
           ProtocolFamily
           ProtocolName
         }
-      }
-    }
-  }
-}
-
-```
-
-## Get Solana DEX Orders in Real-Time
-
-This query provides real-time updates on order events, including details about the DEX, market, and order specifics. You can run the query [here](https://ide.bitquery.io/Copy-of-Solana-DEX-trades-API)
-
-```
-subscription {
-  Solana {
-    DEXOrders {
-      Instruction {
-        Index
-        Program {
-          Address
-          AccountNames
-          Name
-          Method
-        }
-      }
-      OrderEvent {
-        Dex {
-          ProtocolName
-          ProtocolFamily
-          ProgramAddress
-        }
-        Index
-        Market {
-          MarketAddress
-          CoinToken {
-            Wrapped
-            VerifiedCollection
-            Uri
-            UpdateAuthority
-            TokenStandard
-            Symbol
-            TokenCreator {
-              Share
-              Address
-            }
-            Name
-            Key
-            Fungible
-            CollectionAddress
-          }
-          PriceToken {
-            Wrapped
-            VerifiedCollection
-            Uri
-            TokenStandard
-            Native
-            Name
-            MetadataAddress
-            Key
-            Fungible
-            Decimals
-            CollectionAddress
-          }
-        }
-        Order {
-          BuySide
-          Account
-          Payer
-          OrderId
-          Owner
-        }
-        Type
       }
     }
   }
