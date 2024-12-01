@@ -1,6 +1,6 @@
 # Price Asymmetry
 
-In this section, we will see how to use the `PriceAsymmetry` metric to filter results based on Price. This metric currently is part of our Early Access Program (EAP), which is intended for evaluation purposes.This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
+In this section, we will see how to use the `PriceAsymmetry` metric to filter results based on Price. 
 
 ## How to use PriceAsymmetry to filter anomalies and outliers in Trades ?
 
