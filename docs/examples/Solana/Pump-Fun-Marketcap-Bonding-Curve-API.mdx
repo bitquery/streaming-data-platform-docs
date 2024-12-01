@@ -27,6 +27,8 @@ These APIs can be provided through different streams including Kafka for zero la
   <meta property="twitter:description" content="Get on-chain data of any Pump.fun based token through our Pump.fun API."/>
 </head>
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 ## Get Latest Marketcap of a PumpFun Token
 
 You can get the marketcap of a pump fun token by this formulae `marketcap = 1000000000 * Latest USD Price` because all the pump fun tokens have 1 Billion supply.
@@ -228,7 +230,7 @@ Use the below query to track Pump Fun token migrations to Raydium in realtime by
               "userLpTokenAccount"
 ```
 
- You can test the query [here](https://ide.bitquery.io/track-pump-to-raydium-LP-initialize2).
+You can test the query [here](https://ide.bitquery.io/track-pump-to-raydium-LP-initialize2).
 
 ```graphql
 query MyQuery {
@@ -350,3 +352,11 @@ query GetLatestLiquidityForPool {
   }
 }
 ```
+
+## Video Tutorial | How to track Pump Fun Token Migrations to Raydium in realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=jjQ5jvxI_Zk" />
+
+## Video Tutorial | How to track Pump Fun Tokens with a specific MarketCap
+
+<VideoPlayer url="https://www.youtube.com/watch?v=QWSic0tM1f0" />
