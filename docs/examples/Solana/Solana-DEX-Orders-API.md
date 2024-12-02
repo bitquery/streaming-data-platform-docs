@@ -282,3 +282,6 @@ You can run the query [here](https://ide.bitquery.io/Latest-Openbook-DEX-Orders#
 }
 
 ```
+
+
+<VideoPlayer url="https://youtu.be/altkxftGzxU" />
