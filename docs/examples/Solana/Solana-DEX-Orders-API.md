@@ -283,5 +283,6 @@ You can run the query [here](https://ide.bitquery.io/Latest-Openbook-DEX-Orders#
 
 ```
 
+## Video Tutorials
 
 <VideoPlayer url="https://youtu.be/altkxftGzxU" />
