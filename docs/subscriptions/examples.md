@@ -23,12 +23,13 @@ async def main():
       "wss://streaming.bitquery.io/graphql?token=ory_at_cap...",
       headers={"Sec-WebSocket-Protocol": "graphql-ws"})
 
+  # Use use `/eap` instead of `/graphql` if you are using chains on EAP endpoint
   await transport.connect()
   print("connected")
 
   # # Close the connection
   try:
- 
+
     async for result in transport.subscribe(
         gql("""
               subscription MyQuery {
@@ -63,10 +64,10 @@ Open any online code editor and use this JavaScript code to use the websocket. S
 const { WebSocket } = require("ws");
 
 const token = "ory_at";
-
+//Use use `/eap` instead of `/graphql` if you are using chains on EAP endpoint
 const bitqueryConnection = new WebSocket(
   "wss://streaming.bitquery.io/eap?token=" + token,
-  ["graphql-ws"],
+  ["graphql-ws"]
 );
 
 bitqueryConnection.on("open", () => {
@@ -136,33 +137,34 @@ bitqueryConnection.on("close", () => {
 bitqueryConnection.on("error", (error) => {
   console.error("WebSocket Error:", error);
 });
-
 ```
 
-This script opens a WebSocket connection to the Streaming API, sends an initialization message (`connection_init`), starts a subscription with a  query (`start`), handles incoming data (`data`), keep-alive messages (`ka`), and errors, and finally closes the connection gracefully.
+This script opens a WebSocket connection to the Streaming API, sends an initialization message (`connection_init`), starts a subscription with a query (`start`), handles incoming data (`data`), keep-alive messages (`ka`), and errors, and finally closes the connection gracefully.
 
 **How the WebSocket Connection is Managed**:
 
--   **Start Connection**:
-    
-    -   The connection is initiated using the  `bitqueryConnection.on("open", () => {...})`  event handler. This event is triggered when the WebSocket connection is successfully established.
-    -   After the connection is opened, an initialization message (`connection_init`) is sent to the server. Once the server responds with a  `connection_ack`  message, a subscription request is sent containing a GraphQL query.
--   **Subscription**:
-    
-    -   The subscription message is sent only after receiving the  `connection_ack`  from the server, ensuring the connection is properly initialized. The subscription listens for new transfer events in the  `Tron`  blockchain.
--   **Handling Incoming Messages**:
-    
-    -   The  `bitqueryConnection.on("message", (data) => {...})`  handler processes all incoming messages.
-        -   **Data (`data`)**: When the server sends blockchain data, it is logged to the console.
-        -   **Keep-alive (`ka`)**: Keep-alive messages are logged but do not require any additional action. These messages are sent periodically by the server to ensure the connection remains active.
-        -   **Errors (`error`)**: If the server sends an error message, it is logged to the console, and appropriate action can be taken.
--   **Stop Connection**:
-    
-    -   The connection is closed by calling  `bitqueryConnection.close()`  when necessary. This code currently keeps the connection open indefinitely, allowing for continuous data streaming. The  `close`  event logs when the connection is terminated, either by the client or the server.
+- **Start Connection**:
+
+  - The connection is initiated using the `bitqueryConnection.on("open", () => {...})` event handler. This event is triggered when the WebSocket connection is successfully established.
+  - After the connection is opened, an initialization message (`connection_init`) is sent to the server. Once the server responds with a `connection_ack` message, a subscription request is sent containing a GraphQL query.
+
+- **Subscription**:
+
+  - The subscription message is sent only after receiving the `connection_ack` from the server, ensuring the connection is properly initialized. The subscription listens for new transfer events in the `Tron` blockchain.
+
+- **Handling Incoming Messages**:
+
+  - The `bitqueryConnection.on("message", (data) => {...})` handler processes all incoming messages.
+    - **Data (`data`)**: When the server sends blockchain data, it is logged to the console.
+    - **Keep-alive (`ka`)**: Keep-alive messages are logged but do not require any additional action. These messages are sent periodically by the server to ensure the connection remains active.
+    - **Errors (`error`)**: If the server sends an error message, it is logged to the console, and appropriate action can be taken.
+
+- **Stop Connection**:
+
+  - The connection is closed by calling `bitqueryConnection.close()` when necessary. This code currently keeps the connection open indefinitely, allowing for continuous data streaming. The `close` event logs when the connection is terminated, either by the client or the server.
 
 > To close a subscription, you have to close the websocket.
 
--   **Error Handling**:
-    
-    -   If any WebSocket errors occur during the connection, they are caught and logged using the  `bitqueryConnection.on("error", (error) => {...})`  event handler.
+- **Error Handling**:
 
+  - If any WebSocket errors occur during the connection, they are caught and logged using the `bitqueryConnection.on("error", (error) => {...})` event handler.

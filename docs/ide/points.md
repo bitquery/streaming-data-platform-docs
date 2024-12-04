@@ -47,13 +47,13 @@ Here's how it works:
 
 ```
 
-In the example above, querying the `Transactions` data cube within the Ethereum (`eth`) network consumes 5 points. The complexity of the query or the volume of data requested does not affect the points charged. 
+In the example above, querying the `Transactions` data cube within the Ethereum (`eth`) network consumes 5 points. The complexity of the query or the volume of data requested does not affect the points charged.
 
 ## How are points calculated for subscriptions?
 
 Under [new pricing](https://bitquery.io/blog/new-pricing-june-2024), we charge per simultaneous streams, instead of points.
 
-However internally Points are still calculated based on points, Each subscription is charged at the rate of 40 points per minute. However when we sell simultaneous streams, we add enough points that it runs 24*7 for whole month.
+However internally Points are still calculated based on points, Each subscription is charged at the rate of 40 points per minute. However when we sell simultaneous streams, we add enough points that it runs 24\*7 for whole month.
 
 **Note**: Each data cube (e.g., Transfers, DEXTrades, or Blocks) activated counts as a separate subscription. If multiple cubes are used within a single WebSocket connection, each is billed as an individual subscription.
 
@@ -73,6 +73,31 @@ subscription {
 ```
 
 In the example above, querying the `Transactions` data cube within the Ethereum (`eth`) network counts as a single subscription. The complexity of the query or the volume of data requested does not affect the points charged. You are billed solely based on the number of subscriptions and their duration.
+
+### What Counts as a Single Cube?
+
+When using the same method multiple times with different configurations or filters, each unique query counts as a separate cube.
+
+For instance, the following query uses the `Transactions` method twice with different filters, resulting in two cubes:
+
+```
+subscription {
+  EVM(network: eth) {
+    Cube1: Transactions(where: {#filters A}) {
+      Block {
+        Hash
+      }
+    }
+     Cube2: Transactions(where: {#filters B}) {
+      Block {
+        Hash
+      }
+    }
+  }
+}
+```
+
+## Example Calculation
 
 For instance:
 

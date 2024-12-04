@@ -230,3 +230,59 @@ You can run the query [here](https://ide.bitquery.io/Latest-Open-DEX-Orders-Sola
 }
 
 ```
+
+## Latest OpenBook DEX Orders
+
+This query fetches the latest orders from the OpenBook DEX on Solana, providing comprehensive information about the DEX protocol, market, order specifics, and transaction details. OpenBook is an exchange protocol offering central limit orderbook for top Solana DeFi protocols.
+You can run the query [here](https://ide.bitquery.io/Latest-Openbook-DEX-Orders#)
+
+```
+{
+  Solana(dataset: realtime) {
+    DEXOrders(
+      where: {OrderEvent: {Dex: {ProgramAddress: {is: "srmqPvymJeFKQ4zGQed1GFppgkRHL9kaELCbyksJtPX"}}}}
+      orderBy: {descending: Block_Time}
+    ) {
+      OrderEvent {
+        Dex {
+          ProtocolName
+          ProgramAddress
+        }
+        Type
+        Order {
+          Account
+          BuySide
+          LimitPrice
+          LimitAmount
+          OrderId
+        }
+        Market {
+          MarketAddress
+          QuoteCurrency {
+            Name
+            Symbol
+            MintAddress
+          }
+          BaseCurrency {
+            Name
+            MintAddress
+          }
+        }
+        Index
+      }
+      Transaction {
+        Signature
+      }
+      Block {
+        Time
+        Hash
+      }
+    }
+  }
+}
+
+```
+
+## Video Tutorials
+
+<VideoPlayer url="https://youtu.be/altkxftGzxU" />

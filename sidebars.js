@@ -247,6 +247,7 @@ const sidebars = {
             "examples/events/events-api",
             "examples/mempool/mempool-api",
             "examples/transfers/total-supply",
+            "examples/calls/contract-creation",
             {
               type: "category",
               label: "Balances",
