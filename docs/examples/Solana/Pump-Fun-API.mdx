@@ -606,9 +606,16 @@ You can run the query [here](https://ide.bitquery.io/top-token-holders-for-a-pum
 query MyQuery {
   Solana(dataset: realtime) {
     BalanceUpdates(
-      limit: {count: 10}
-      orderBy: {descendingByField: "BalanceUpdate_Holding_maximum"}
-      where: {BalanceUpdate: {Currency: {MintAddress: {is: "2GxdEZQ5d9PsUqyGy43qv4fmNJWrnLp6qY4dTyNepump"}}}, Transaction: {Result: {Success: true}}}
+      limit: { count: 10 }
+      orderBy: { descendingByField: "BalanceUpdate_Holding_maximum" }
+      where: {
+        BalanceUpdate: {
+          Currency: {
+            MintAddress: { is: "2GxdEZQ5d9PsUqyGy43qv4fmNJWrnLp6qY4dTyNepump" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
     ) {
       BalanceUpdate {
         Currency {
@@ -624,7 +631,6 @@ query MyQuery {
     }
   }
 }
-
 ```
 
 ![image](https://github.com/user-attachments/assets/b7c307de-fce7-4cd2-8e89-b06c0af506e7)
@@ -1021,8 +1027,14 @@ You can also run this query [using this link](https://ide.bitquery.io/pump-fun-t
 {
   Solana {
     DEXPools(
-      where: {Pool: {Dex: {ProtocolName: {is: "pump"}}, Base: {PostAmount: {eq: "206900000"}}}, Transaction: {Result: {Success: true}}}
-      orderBy: {descending: Block_Time}
+      where: {
+        Pool: {
+          Dex: { ProtocolName: { is: "pump" } }
+          Base: { PostAmount: { eq: "206900000" } }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+      orderBy: { descending: Block_Time }
     ) {
       Transaction {
         Signer
@@ -1066,7 +1078,6 @@ You can also run this query [using this link](https://ide.bitquery.io/pump-fun-t
     }
   }
 }
-
 ```
 
 ## Video Tutorial on Getting Pump Fun Trades
@@ -1084,3 +1095,7 @@ You can also run this query [using this link](https://ide.bitquery.io/pump-fun-t
 ## Video Tutorial | How to get Top Traders of a Token on Solana Pump Fun DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=Ga0RbD7H_OY" />
+
+## Video Tutorial | How to get first 100 Buyers of a Pump Fun Token
+
+<VideoPlayer url="https://www.youtube.com/watch?v=riuWRBnLaG0" />

@@ -2,6 +2,8 @@
 sidebar_position: 5
 ---
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Token Trades API
 
 We have two main APIs to get DEX trading data.
@@ -65,11 +67,11 @@ subscription MyQuery {
 
 ## Get the Buys, Sells, Buy Volume, Sell Volume and Makers
 
-The query will fetch you the buys, sells, buy volume, sell volume and also the number of makers for a particular token just like how DEXScreener shows in its UI. We are getting these trade metrics for this particular pool address `0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`.
+The query will fetch you the buys, sells, buy volume, sell volume and also the number of makers for a particular token just like how DEXScreener shows in its UI. We are getting these trade metrics for this particular pool address `0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`. You can also check out this video explaination at this [link](https://www.youtube.com/watch?v=K_H3to_nIdY)
 
 You can find the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-eth-pair#)
 
-```javascript
+```graphql
 query MyQuery($network: evm_network, $token: String,$pairAddress: String , $min5_timestamp: DateTime, $hr1_timestamp: DateTime) {
   EVM(dataset: realtime, network: $network) {
     DEXTradeByTokens(
@@ -1209,3 +1211,7 @@ You can find the query [here](https://ide.bitquery.io/first-x-number-of-buyers-o
 
 
 ```
+
+## Video Tutorial | How to get Token Trade Stats for EVM chains like DexScreener shows
+
+<VideoPlayer url="https://www.youtube.com/watch?v=K_H3to_nIdY" />

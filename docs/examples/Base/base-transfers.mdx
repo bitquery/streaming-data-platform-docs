@@ -125,6 +125,40 @@ subscription {
   }
 }
 
+```
+
+# Get all transfers of a particular NFT
+
+This below query will give you all the transfers of a particular NFT `0xb68CA010776B4584cf49893E75b66583eb884948`.
+
+You can test out the query [here](https://ide.bitquery.io/get-all-transfers-of-a-specific-nft).
+
+```
+query MyQuery {
+  EVM(network: base, dataset: realtime) {
+    Transfers(
+      where: {Transfer: {Currency: {Fungible: false, SmartContract: {is: "0xb68CA010776B4584cf49893E75b66583eb884948"}}}}
+    ) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          Native
+          SmartContract
+          Symbol
+        }
+        Id
+        Sender
+        Receiver
+      }
+      Transaction {
+        From
+        Hash
+      }
+    }
+  }
+}
 
 ```
 

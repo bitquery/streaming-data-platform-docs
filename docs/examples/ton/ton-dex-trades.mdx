@@ -1,3 +1,5 @@
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Ton DEX Trades API
 
 In this section we'll have a look at some examples using the TON DEX Trades API.
@@ -11,10 +13,10 @@ This program allows you to test the data and its integration into your applicati
 This API fetches the most recent trades on the TON blockchain.
 You can run the query [here](https://ide.bitquery.io/Latest-Trades-on-TON)
 
-```javascript
+```graphql
 query MyQuery {
   Ton(network: ton) {
-    DEXTrades(orderBy: {descending: Block_Time}, limit: {count: 100}) {
+    DEXTrades(orderBy: { descending: Block_Time }, limit: { count: 100 }) {
       Block {
         Time
         Shard
@@ -56,7 +58,6 @@ query MyQuery {
     }
   }
 }
-
 ```
 
 ## Latest Trades of a Token
@@ -64,13 +65,42 @@ query MyQuery {
 This API retrieves the most recent trades for a specific token on the TON blockchain by specifying the token's smart contract address.
 You can run the query [here](https://ide.bitquery.io/Latest-Trades-of-a-Token-on-TON)
 
-```javascript
+```graphql
 query MyQuery {
   Ton(network: ton) {
     DEXTrades(
-      orderBy: {descending: Block_Time}
-      limit: {count: 100}
-      where: {any: [{Trade: {Buy: {Currency: {SmartContract: {Address: {is: "EQDEI9826MxJmFwVQaIugojr4a-6cmeAWOk5g86HdCgap2dK"}}}}}}, {Trade: {Sell: {Currency: {SmartContract: {Address: {is: "EQDEI9826MxJmFwVQaIugojr4a-6cmeAWOk5g86HdCgap2dK"}}}}}}]}
+      orderBy: { descending: Block_Time }
+      limit: { count: 100 }
+      where: {
+        any: [
+          {
+            Trade: {
+              Buy: {
+                Currency: {
+                  SmartContract: {
+                    Address: {
+                      is: "EQDEI9826MxJmFwVQaIugojr4a-6cmeAWOk5g86HdCgap2dK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+          {
+            Trade: {
+              Sell: {
+                Currency: {
+                  SmartContract: {
+                    Address: {
+                      is: "EQDEI9826MxJmFwVQaIugojr4a-6cmeAWOk5g86HdCgap2dK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
     ) {
       Block {
         Time
@@ -113,8 +143,6 @@ query MyQuery {
     }
   }
 }
-
-
 ```
 
 ## Subscribing to Trades in Real-Time
@@ -122,7 +150,7 @@ query MyQuery {
 This subscription API allows users to receive real-time updates for trades occurring on the TON blockchain. It provides instant trade data including buyer, seller, and currency details, as soon as new trades happen.
 You can run the subscription [here](https://ide.bitquery.io/subscribe-to-trades-on-TON)
 
-```javascript
+```graphql
 subscription {
   Ton(network: ton) {
     DEXTrades {
@@ -167,7 +195,6 @@ subscription {
     }
   }
 }
-
 ```
 
 ## Top Traders
@@ -175,13 +202,13 @@ subscription {
 This API retrieves the top traders in a specific period based on the number of trades. You can adjust the filter to use any other metric as well.
 You can run the query [here](https://ide.bitquery.io/Top-Traders-on-Ton)
 
-```javascript
+```graphql
 query DexMarkets($time_ago: DateTime) {
   Ton {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "trades"}
-      limit: {count: 100}
-      where: {Block: {Time: {since: $time_ago}}}
+      orderBy: { descendingByField: "trades" }
+      limit: { count: 100 }
+      where: { Block: { Time: { since: $time_ago } } }
     ) {
       Trade {
         Buyer {
@@ -189,13 +216,11 @@ query DexMarkets($time_ago: DateTime) {
           Workchain
         }
       }
-      trades: count(if: {Trade: {Side: {Type: {is: buy}}}})
+      trades: count(if: { Trade: { Side: { Type: { is: buy } } } })
       tokens: uniq(of: Trade_Currency_SmartContract_Address)
     }
   }
 }
-
-
 ```
 
 ## Top Toncoin Ecosystem Tokens
@@ -203,13 +228,16 @@ query DexMarkets($time_ago: DateTime) {
 This API fetches the top tokens traded on the TON blockchain by counting the number of trades within a specified time period.
 You can run the query [here](https://ide.bitquery.io/Ton-Top-Tokens_1)
 
-```javascript
+```graphql
 query TopTokens {
   Ton {
     DEXTradeByTokens(
-      where: {Block: {Time: {after: "2024-10-21T05:41:31Z"}}, Trade: {Success: true}}
-      orderBy: {descendingByField: "count"}
-      limit: {count: 100}
+      where: {
+        Block: { Time: { after: "2024-10-21T05:41:31Z" } }
+        Trade: { Success: true }
+      }
+      orderBy: { descendingByField: "count" }
+      limit: { count: 100 }
     ) {
       Trade {
         Currency {
@@ -234,7 +262,6 @@ query TopTokens {
     }
   }
 }
-
 ```
 
 ## Top Toncoin Ecosystem Token Pairs
@@ -246,7 +273,7 @@ It focuses on token pairs that involve Toncoin or other tokens (such as USDT) tr
 It also provides details about token prices, including their price changes over specific time intervals (last price, 10 minutes ago, 1 hour ago, and 3 hours ago).
 You can run the query [here](https://ide.bitquery.io/Top-Toncoin-Ecosystem-Token-Pairs)
 
-```javascript
+```graphql
 query {
   Ton {
     DEXTradeByTokens(
@@ -306,3 +333,11 @@ query {
   }
 }
 ```
+
+## Video Tutorial | How to get TON Decentralized Exchange Data with DEX Trades API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=3o3dvzzISgM" />
+
+## Video Tutorial | How to get Top Traders & Top Tokens Data with TON DEX Trades API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=6jsMThLX9Vw" />
