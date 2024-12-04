@@ -97,7 +97,7 @@ subscription {
 }
 ```
 
-## Example Calculation:
+## Example Calculation
 
 For instance:
 
