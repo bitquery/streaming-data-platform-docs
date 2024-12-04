@@ -33,7 +33,7 @@ graphql-client = "0.10.0" # Adjust version as necessary
 
 This is the basic outline of what we will do
 
--   Establish a WebSocket connection to Bitquery's streaming endpoint.
+-   Establish a WebSocket connection to Bitquery's streaming endpoint. Use use `/eap` instead of `/graphql` if you are using chains on EAP endpoint.
 -  Set up up a GraphQL subscription to receive real-time DEX trades data.
 -   The `subscribe` function handles the connection setup and starts the streaming operation.
 -   The `main` function initializes the subscription and processes the incoming data.
