@@ -204,14 +204,14 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/tron).
 ## Get OHLC data of a token on Tron Network
 
 This query fetches you the OHLC data of a specific token on Tron network.
-You can try the query [here](https://ide.bitquery.io/ohlc_9).
+You can try the query [here](https://ide.bitquery.io/ohlc0_5).
 
 ```
 query tradingViewPairs($token: String, $base: String) {
   Tron {
     DEXTradeByTokens(
       orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}}}
+      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}, PriceAsymmetry: {lt: 0.1}}}
     ) {
       Block {
         Time(interval: {count: 5, in: minutes})

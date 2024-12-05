@@ -275,14 +275,14 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/token/0x713
 ## Get OHLC data of a token
 
 This query will fetch you the OHLC of a token for the BSC network.
-You can test the query [here](https://ide.bitquery.io/OHLC-for-a-token-on-bsc).
+You can test the query [here](https://ide.bitquery.io/OHLC-for-a-token-on-bsc_1).
 
 ```
 query tradingView($network: evm_network, $token: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
       orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Currency: {SmartContract: {is: $token}}}}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}, PriceAsymmetry: {lt: 0.1}}}
     ) {
       Block {
         Time(interval: {count: 5, in: minutes})
@@ -365,14 +365,14 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/pair/0x711b
 ## Get OHLC data for a particular token pair
 
 This query will fetch you the OHLC of a token pair for the BSC network.
-You can test the query [here](https://ide.bitquery.io/ohlc-for-a-token-pair-on-bsc).
+You can test the query [here](https://ide.bitquery.io/ohlc-for-a-token-pair-on-bsc_1).
 
 ```
 query tradingViewPairs($network: evm_network, $token: String, $base: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
       orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}}}
+      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}, PriceAsymmetry: {lt: 0.1}}}
     ) {
       Block {
         Time(interval: {count: 5, in: minutes})

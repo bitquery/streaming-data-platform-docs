@@ -18,15 +18,13 @@ query LatestCoins {
   EVM(network: base) {
     Calls(
       where: {
-        Call: {Create: true},
-        Arguments: {length: {ne: 0}},
+        Call: { Create: true }
+        Arguments: { length: { ne: 0 } }
         Receipt: {
-          ContractAddress: {
-            not: "0x0000000000000000000000000000000000000000"
-          }
+          ContractAddress: { not: "0x0000000000000000000000000000000000000000" }
         }
       }
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
     ) {
       Arguments {
         Name
@@ -63,7 +61,6 @@ query LatestCoins {
     }
   }
 }
-
 ```
 
 The `Receipt{ ContractAddress }` field returns the contract address of the newly created token or Memecoin.
@@ -157,7 +154,7 @@ query MyQuery {
 
 ### OHLC Data for AERO/USDC Pair
 
-[This](https://ide.bitquery.io/OHLC-of-AERO-Coin) query returns the OHLC parameters and `volume` for the AERO/USDC trade pair for a one hour window.
+[This](https://ide.bitquery.io/OHLC-of-AERO-Coin_1) query returns the OHLC parameters and `volume` for the AERO/USDC trade pair for a one hour window.
 
 ```graphql
 {
@@ -177,6 +174,7 @@ query MyQuery {
             }
             Type: { is: buy }
           }
+          PriceAsymmetry: { lt: 0.1 }
         }
       }
       limit: { count: 10 }
@@ -237,7 +235,6 @@ query MyQuery {
 
 You can checkout more queries related to tokens and token trades [here](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/#ohlc-in-usd-of-a-token).
 
-
 ## Video Tutorial to Get Latest Memecoins on Base
 
-<VideoPlayer url="https://youtu.be/jArOBPZpTFQ"  />
+<VideoPlayer url="https://youtu.be/jArOBPZpTFQ" />

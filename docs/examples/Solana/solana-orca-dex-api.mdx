@@ -109,6 +109,7 @@ subscription {
 
 You can use the following query to get the pair creation time for a specific pair on Orca DEX on Solana. But you need to use the keyword `query`.
 You can run this query using [this link](https://ide.bitquery.io/pair-creation-time-for-a-specific-pair-on-Orca).
+
 ```
 {
   Solana {
@@ -126,8 +127,7 @@ You can run this query using [this link](https://ide.bitquery.io/pair-creation-t
 }
 ```
 
-
-## Realtime Trades on Orca DEX API 
+## Realtime Trades on Orca DEX API
 
 To access a real-time stream of trades for Solana Orca DEX, [check out this GraphQL subscription (WebSocket)](https://ide.bitquery.io/Orca-DEX-Trades-Websocket).
 
@@ -317,11 +317,11 @@ You can run this query using [this link](https://ide.bitquery.io/Price-of-a-toke
 
 ## Orca OHLC APIs
 
-If you want to get OHLC data for any specific currency pair on Orca DEX, you can use [this api](https://ide.bitquery.io/Orca-OHLC-for-specific-pair_4).
+If you want to get OHLC data for any specific currency pair on Orca DEX, you can use [this api](https://ide.bitquery.io/Orca-OHLC-for-specific-pair_5).
 Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
 
 ```graphql
-query {
+{
   Solana {
     DEXTradeByTokens(
       orderBy: { descendingByField: "Block_Timefield" }
@@ -340,9 +340,9 @@ query {
               is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"
             }
           }
+          PriceAsymmetry: { lt: 0.1 }
         }
       }
-      limit: { count: 10 }
     ) {
       Block {
         Timefield: Time(interval: { in: minutes, count: 1 })

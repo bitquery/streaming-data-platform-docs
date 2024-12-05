@@ -497,12 +497,12 @@ query MyQuery {
 ## Get OHLC Data of a Token on Pump Fun
 
 The below query gets OHLC data of the specified Token `66VR6bjEV5DPSDhYSQyPAxNsY3dgmH6Lwgi5cyf2pump` for 1 minute time interval for last 10 minutes on Pump Fun DEX.
-You can run the query [here](https://ide.bitquery.io/OHLC-for-a-token-on-Pump-Fun_3)
+You can run the query [here](https://ide.bitquery.io/OHLC-for-a-token-on-Pump-Fun_10)
 
 Note - You can only use this API using `query` keyword, using this API as `subscription` will give wrong results because aggregation and interval don't work correctly together in `subscription`.
 
 ```graphql
-query {
+{
   Solana {
     DEXTradeByTokens(
       limit: { count: 10 }
@@ -517,6 +517,7 @@ query {
               is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
             }
           }
+          PriceAsymmetry: { lt: 0.1 }
         }
       }
     ) {

@@ -457,7 +457,7 @@ subscription {
 
 ## Raydium OHLC API
 
-If you want to get OHLC data for any specific currency pair on Raydium DEX, you can use [this api](hhttps://ide.bitquery.io/Raydium-OHLC-for-specific-pair_4).
+If you want to get OHLC data for any specific currency pair on Raydium DEX, you can use [this api](https://ide.bitquery.io/Raydium-OHLC-for-specific-pair_5).
 Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
 
 ```graphql
@@ -480,6 +480,7 @@ Only use this API as `query` and not `subscription` websocket as Aggregates and 
               is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
             }
           }
+          PriceAsymmetry: { lt: 0.1 }
         }
       }
       limit: { count: 10 }
