@@ -917,11 +917,11 @@ query MyQuery {
 
 ## Get the Token details like Update Authority, decimals, URI, is Mutable or not
 
-The below query retrieves the token details such as update authority for a particular token and also checks if a token's data is mutable or not. You can access the query [here](https://ide.bitquery.io/currency-details).
+The below query retrieves the token details such as update authority for a particular token and also checks if a token's data is mutable or not. You can access the query [here](https://ide.bitquery.io/Solana-currency-details).
 
 ```
 query MyQuery {
-  Solana {
+  Solana(dataset: archive) {
     DEXTradeByTokens(
       where: {Trade: {Currency: {MintAddress: {is: "AREn4LyUS4pNUGzwXcks7oefjT751G1XwYZ4GLTppump"}}}, Transaction: {Result: {Success: true}}}
       orderBy: {descending: Block_Time}
@@ -938,7 +938,11 @@ query MyQuery {
     }
   }
 }
+
 ```
+
+The `uri` field returns the following url - [`https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN`](https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN). 
+Offchain token metadata such as social urls and image could be accessed from this link. 
 
 ## Solana OHLC API
 
