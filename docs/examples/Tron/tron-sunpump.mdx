@@ -182,14 +182,14 @@ subscription {
 
 ## OHLC data for specific token on SunPump
 
-You can also get ohlc data for specific token using DEXTradeByTokens API. Here is [an example](https://ide.bitquery.io/OHLC_10).
+You can also get ohlc data for specific token using DEXTradeByTokens API. Here is [an example](https://ide.bitquery.io/OHLC0_6).
 
 ```
 query TokenOHLC($token: String) {
   Tron {
     DEXTradeByTokens(
       orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $token}}}, Transaction: {Result: {Success: true}}}
+      where: {Trade: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $token}}, PriceAsymmetry: {lt: 0.1}}, Transaction: {Result: {Success: true}}}
     ) {
       Block {
         Time(interval: {count: 5, in: minutes})

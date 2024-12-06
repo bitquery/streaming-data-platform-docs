@@ -21,12 +21,10 @@ title: DEX Trades API
 <meta property="twitter:description" content="Get DEX trades data for EVM chains. Also, get address balance and history for tokens or NFTs on the EVM chain." />
 </head>
 
-
 DEXTrades api gives trading-related data from different DEXs such as Uniswap, Pancakeswap, 0x, etc.
 
-API provides historical and real-time trades and pricing information for tokens. The API allows different filters to query the Smart contract calls details from different dimensions, such as from different DEXs, protocols, tokens, trades, pools, etc. 
+API provides historical and real-time trades and pricing information for tokens. The API allows different filters to query the Smart contract calls details from different dimensions, such as from different DEXs, protocols, tokens, trades, pools, etc.
 You can find more examples [here](/docs/examples/dextrades/get-trading-pairs-of-token)
-
 
 ## DEX Trades Cube
 
@@ -38,9 +36,9 @@ the trade is related to the pool smart contract, executing the trade.
 
 Use DEX Trades Cube in case when you need to build query based on protocol or smart contracts, for example:
 
-* total count of trades by protocols or smart contracts or oter dimensions
-* gas spending on trades
-* dynamics in time of DEX usage
+- total count of trades by protocols or smart contracts or oter dimensions
+- gas spending on trades
+- dynamics in time of DEX usage
 
 ## DEX Trades By Tokens
 
@@ -50,13 +48,13 @@ participating in trade. This allows to build queries by tokens which take into a
 
 Use DEX Trades Cube in case when you need to build query based on token or pair of tokens, for example:
 
-* query every pair the token is involved
-* price of trading the token
-* open-high-low-close OHLC graph building ( see example below )
+- query every pair the token is involved
+- price of trading the token
+- open-high-low-close OHLC graph building ( see example below )
 
 :::caution
 DEX Trades By Tokens has twice as much records for dex trades. Always use at least one filter by token
-to query correctly! 
+to query correctly!
 :::
 
 :::tip
@@ -72,20 +70,32 @@ Here are the sample queries to get started:
 Query price OHLC data for token pairs using DEX Trades By Tokens
 
 ```graphql
-
-
 query MyQuery {
   EVM(dataset: archive) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_datefield"}
-      #WETH-USDT trades on Uniswap V3
-      where: {Trade: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, 
-        Side: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}, 
-        Dex: {SmartContract: {is: "0x4e68ccd3e89f51c3074ca5072bbac773960dfa36"}}}}
-      limit: {count: 10}
+      orderBy: { descendingByField: "Block_datefield" }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" }
+          }
+          Side: {
+            Currency: {
+              SmartContract: {
+                is: "0xdac17f958d2ee523a2206206994597c13d831ec7"
+              }
+            }
+          }
+          Dex: {
+            SmartContract: { is: "0x4e68ccd3e89f51c3074ca5072bbac773960dfa36" }
+          }
+          PriceAsymmetry: { le: 0.1 }
+        }
+      }
+      limit: { count: 10 }
     ) {
       Block {
-       datefield: Date(interval: {in: days, count: 1})
+        datefield: Date(interval: { in: days, count: 1 })
       }
       volume: sum(of: Trade_Amount)
       Trade {
@@ -111,23 +121,33 @@ query MyQuery {
     }
   }
 }
-
-
 ```
 
 :::note
-we applied filter by tokens, used [interval](/docs/graphql/datetime) and actual numbers 
-calculated by  aggregated [metrics ( max/min )](/docs/graphql/calculations)
+we applied filter by tokens, used [interval](/docs/graphql/datetime) and actual numbers
+calculated by aggregated [metrics ( max/min )](/docs/graphql/calculations)
 :::
-
 
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
     buyside: DEXTrades(
-      limit: {count: 10}
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}}}, Block: {Time: {since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z"}}}
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
+              }
+            }
+          }
+        }
+        Block: {
+          Time: { since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z" }
+        }
+      }
     ) {
       Block {
         Number
@@ -164,9 +184,22 @@ calculated by  aggregated [metrics ( max/min )](/docs/graphql/calculations)
       }
     }
     sellside: DEXTrades(
-      limit: {count: 10}
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0x5283d291dbcf85356a21ba090e6db59121208b44"}}}}, Block: {Time: {since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z"}}}
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
+              }
+            }
+          }
+        }
+        Block: {
+          Time: { since: "2023-03-03T01:00:00Z", till: "2023-03-05T05:15:23Z" }
+        }
+      }
     ) {
       Block {
         Number
@@ -204,6 +237,4 @@ calculated by  aggregated [metrics ( max/min )](/docs/graphql/calculations)
     }
   }
 }
-
 ```
-

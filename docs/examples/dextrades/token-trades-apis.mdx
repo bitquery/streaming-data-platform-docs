@@ -1066,14 +1066,14 @@ Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.i
 
 This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a specific token traded on DEXes over a defined time period and interval. You can use the `quoteCurrency` to input the contract address of the currency used for quoting the token prices.
 
-You can find the query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum)
+You can find the query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum_1)
 
 ```
 {
   EVM(network: eth, dataset: archive) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "Block_testfield"}
-      where: {Trade: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}, Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, Type: {is: buy}}}}
+      where: {Trade: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}, Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, Type: {is: buy}}, PriceAsymmetry: {lt: 0.1}}}
       limit: {count: 10}
     ) {
       Block {
@@ -1090,24 +1090,24 @@ You can find the query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum
     }
   }
 }
-
 ```
 
 ## Getting OHLC and Distinct Buys/Sells
 
 The below query retrieve OHLC (Open, High, Low, Close) data and distinct buy/sell information on the Binance Smart Chain (BSC) on a daily basis. Adjust the parameters within the `where` and `Block` sections to customize the query for your specific needs, such as changing the token smart contract addresses or modifying the date range.
 In this query we have set the trade currency pair to `0xfb6115445bff7b52feb98650c87f44907e58f802`( AAVE ) and `0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c`(WBNB), i.e AAVE/WBNB.
+You can get the query [here](https://ide.bitquery.io/Getting-OHLC-and-Distinct-BuysSells).
 
 ```
 {
   EVM(dataset: archive, network: bsc) {
     buyside: DEXTradeByTokens(
       limit: {count: 30}
-      orderBy: {descendingByField:"Block_time_field"}
-      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}, Amount: {ge: "0"}, Type: {is: buy}}, Currency: {SmartContract: {is: "0xfb6115445bff7b52feb98650c87f44907e58f802"}}}, Block: {Date: {since: "2023-07-01", till: "2023-08-01"}}}
+      orderBy: {descendingByField: "Block_time_field"}
+      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}, Amount: {ge: "0"}, Type: {is: buy}}, Currency: {SmartContract: {is: "0xfb6115445bff7b52feb98650c87f44907e58f802"}}, PriceAsymmetry: {lt: 0.1}}, Block: {Date: {since: "2023-07-01", till: "2023-08-01"}}}
     ) {
       Block {
-        time_field:Time(interval: {in: days, count: 1})
+        time_field: Time(interval: {in: days, count: 1})
       }
       volume: sum(of: Trade_Amount)
       distinctBuyer: count(distinct: Trade_Buyer)
@@ -1138,11 +1138,6 @@ In this query we have set the trade currency pair to `0xfb6115445bff7b52feb98650
     }
   }
 }
-
-
-
-
-
 ```
 
 ## Get Least Traded Token

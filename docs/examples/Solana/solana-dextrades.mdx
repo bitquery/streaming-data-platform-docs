@@ -917,11 +917,11 @@ query MyQuery {
 
 ## Get the Token details like Update Authority, decimals, URI, is Mutable or not
 
-The below query retrieves the token details such as update authority for a particular token and also checks if a token's data is mutable or not. You can access the query [here](https://ide.bitquery.io/currency-details).
+The below query retrieves the token details such as update authority for a particular token and also checks if a token's data is mutable or not. You can access the query [here](https://ide.bitquery.io/Solana-currency-details).
 
 ```
 query MyQuery {
-  Solana {
+  Solana(dataset: archive) {
     DEXTradeByTokens(
       where: {Trade: {Currency: {MintAddress: {is: "AREn4LyUS4pNUGzwXcks7oefjT751G1XwYZ4GLTppump"}}}, Transaction: {Result: {Success: true}}}
       orderBy: {descending: Block_Time}
@@ -938,19 +938,23 @@ query MyQuery {
     }
   }
 }
+
 ```
+
+The `uri` field returns the following url - [`https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN`](https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN). 
+Offchain token metadata such as social urls and image could be accessed from this link. 
 
 ## Solana OHLC API
 
 You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair Shark Cat-SOL by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
-You can run and test the [saved query here](https://ide.bitquery.io/Solana-OHLC-Query).
+You can run and test the [saved query here](https://ide.bitquery.io/Solana-OHLC-Query_5).
 
 ```
 {
   Solana {
     DEXTradeByTokens(
       orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
+      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, PriceAsymmetry: {lt: 0.1}}}
       limit: {count: 10}
     ) {
       Block {
