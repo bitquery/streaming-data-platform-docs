@@ -1,6 +1,6 @@
 # Tutorial for Building a Solana Sniper Bot Using Bitquery Real-Time Solana Subscriptions and Jupiter Swap API
 
-This tutorial will guide you through building a Solana sniper bot using Bitquery for real-time Solana subscriptions and the Jupiter Swap API for executing swaps.
+This tutorial will guide you through building a Solana sniper bot using Bitquery for real-time Solana subscriptions and the Jupiter Swap API for executing swaps. By the end of this guide, you'll have a bot that listens for specific on-chain instructions and performs token swaps based on the detected instructions.
 
 import VideoPlayer from "../../src/components/videoplayer.js";
 
@@ -12,7 +12,9 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 ## Tutorial
 
 ### Prerequisites
-1. **Node.js** and **npm** installed on your system.
+
+Before you begin, ensure you have the following:
+1. **Node.js** and **npm** installed on your system (follow instructions [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)).
 2. **Bitquery Free Developer Account** with OAuth token (follow instructions [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
 3. **Solana Wallet** with some SOL for transaction fees.
 
@@ -57,8 +59,7 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 3. **Define the Solana Instructions GraphQL query for Bitquery:**
 
-In this step we get new Liquidity Pools created on Solana Raydium DEX along with the token information. 
-To see detailed information on Raydium API, check examples [here](https://docs.bitquery.io/docs/examples/Solana/Solana-Raydium-DEX-API/)
+This query fetches new liquidity pools created on the Solana Raydium DEX along with token information. For detailed information on the Raydium API, check examples [here](https://docs.bitquery.io/docs/examples/Solana/Solana-Raydium-DEX-API/)
 
 ```javascript
     const gql = (strings, ...values) =>
@@ -91,7 +92,7 @@ To see detailed information on Raydium API, check examples [here](https://docs.b
     `;
 ```
 
-For the sake of the demo we have used a query, to **track new tokens in real-time** use the below subscriptions. 
+Note: For real-time tracking of new tokens, use the subscription query below:
 
 ```javascript   
  subscription {
@@ -161,7 +162,7 @@ For the sake of the demo we have used a query, to **track new tokens in real-tim
 7. **Execute a token swap using Jupiter API:**
 
 This code has been derived from sample mentioned in the official docs [here](https://station.jup.ag/docs/apis/swap-api). 
-We add the if-check for "TOKEN_NOT_TRADABLE" and "COULD_NOT_FIND_ANY_ROUTE" to accomodate for delays in Jupiter Swap API.
+We add checks for "TOKEN_NOT_TRADABLE" and "COULD_NOT_FIND_ANY_ROUTE" to accommodate delays in the Jupiter Swap API.
 
 ```javascript
     async function swapTokens(tokenA, tokenB) {
@@ -242,5 +243,8 @@ We add the if-check for "TOKEN_NOT_TRADABLE" and "COULD_NOT_FIND_ANY_ROUTE" to a
 
 ### Conclusion
 
-You've successfully set up a Solana sniper bot using Bitquery for real-time Solana subscriptions and Jupiter Swap API for executing swaps. 
-This bot listens for specific on-chain instructions and performs swaps based on the detected instructions. Ensure your bot is monitored and managed appropriately, especially when running on the mainnet with real funds.
+Congratulations! You've successfully built a Solana sniper bot similar to [SOL Sniper Bot](https://solsniperbot.net/) using Bitquery for real-time Solana subscriptions and the Jupiter Swap API for executing swaps. This bot actively listens for specific on-chain instructions and performs swaps based on the detected activities. Remember to monitor and manage your bot diligently, especially when operating on the mainnet with real funds.
+
+### Disclaimer
+
+This tutorial is for educational purposes only. Trading cryptocurrencies involves significant risk, and you should consult with a professional advisor before making any investment decisions.
