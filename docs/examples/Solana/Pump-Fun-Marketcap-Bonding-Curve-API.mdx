@@ -296,7 +296,7 @@ query MyQuery {
 
 You can get the Bonding Curve Progress by this formulae, `BondingCurveProgress = 100 - ((leftTokens*100)/(initialRealTokenReserves))` where `initialRealTokenReserves = totalSupply - reservedTokens`, totalSupply is `1000000000` of a pump fun token and reservedTokens is `206900000`. So initialRealTokenReserves is `793100000`. We also need leftTokens to calculate bonding curve progress, it can be calculated like this `leftTokens = realTokenReserves - reservedTokens`. Here `realTokenReserves` is balance of the Token at the market address.
 
-TLDR (or not able to understand) then just apply this formulae `bondingCurveProgress= 100 - (((balance - 206900000)*100)/793100000)`. You can get the balance using this below query. You can run and test the saved query [here](https://ide.bitquery.io/Get-balance-of-a-pair-address).
+TLDR (or not able to understand) then just apply this formulae `bondingCurveProgress= 100 - (((balance - 206900000)*100)/793100000)`. You can get the balance using this below query. You can run and test the saved query [here](https://ide.bitquery.io/Get-balance-of-a-pair-address-on-solana).
 
 ```graphql
 query GetLatestLiquidityForPool {
