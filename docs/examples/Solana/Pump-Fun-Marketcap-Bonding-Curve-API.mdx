@@ -353,6 +353,63 @@ query GetLatestLiquidityForPool {
 }
 ```
 
+## Track Pump Fun Tokens above 95% Bonding Curve Progress
+
+We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/Pump-Fun-Tokens-between-95-and-100-bonding-curve-progress).
+
+```graphql
+subscription MyQuery {
+  Solana {
+    DEXPools(
+      where: {
+        Pool: {
+          Base: { PostAmount: { gt: "206900000", lt: "246555000" } }
+          Dex: {
+            ProgramAddress: {
+              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
+            }
+          }
+          Market: {
+            QuoteCurrency: {
+              MintAddress: { is: "11111111111111111111111111111111" }
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Pool {
+        Market {
+          BaseCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+          MarketAddress
+          QuoteCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Base {
+          PostAmount
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+      }
+    }
+  }
+}
+```
+
 ## Video Tutorial | How to track Pump Fun Token Migrations to Raydium in realtime
 
 <VideoPlayer url="https://www.youtube.com/watch?v=jjQ5jvxI_Zk" />
@@ -364,3 +421,7 @@ query GetLatestLiquidityForPool {
 ## Video Tutorial | How to get Bonding Curve Progress of any Pump Fun Token
 
 <VideoPlayer url="https://www.youtube.com/watch?v=0vBXsMBU2pQ" />
+
+## Video Tutorial | How to track the Pump Fun Tokens which are about to Graduate in Realtime
+
+<VideoPlayer url="https://youtu.be/ZB1Rir29Pnw" />
