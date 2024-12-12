@@ -73,18 +73,14 @@ We use the s3.download_file() method to download the file specified by block_obj
 s3.download_file(bucket_name, block_object_key, blocks_local_path)
 
 with open(blocks_local_path, 'rb') as f:
-
-compressed_data = f.read()
+    compressed_data = f.read()
 
 decompressed_data = lz4.frame.decompress(compressed_data)
-
 print('here')
-
 block_headers = block_message_pb2.BlockHeader()
-
 block_headers.ParseFromString(decompressed_data)
-
 print('here1')
+
 
 ```
 
@@ -94,10 +90,9 @@ The decompressed data is then parsed using the block_message_pb2.BlockHeader() m
 
 ```python
 
+# Write block_headers to a file
 with open('block_headers.json', 'w') as f:
-
-json_string = MessageToJson(block_headers)
-
-f.write(json_string)
+    json_string = MessageToJson(block_headers)
+    f.write(json_string)
 
 ```
