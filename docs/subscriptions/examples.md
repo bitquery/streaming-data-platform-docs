@@ -63,11 +63,12 @@ Open any online code editor and use this JavaScript code to use the websocket. S
 ```javascript
 const { WebSocket } = require("ws");
 
-const token = "ory_at";
+const token =
+  "ory_at_....";
 //Use use `/eap` instead of `/graphql` if you are using chains on EAP endpoint
 const bitqueryConnection = new WebSocket(
   "wss://streaming.bitquery.io/eap?token=" + token,
-  ["graphql-ws"]
+  ["graphql-ws"],
 );
 
 bitqueryConnection.on("open", () => {
@@ -112,6 +113,18 @@ bitqueryConnection.on("message", (data) => {
 
     bitqueryConnection.send(subscriptionMessage);
     console.log("Subscription message sent.");
+
+    //add stop logic
+    setTimeout(() => {
+      const stopMessage = JSON.stringify({ type: "stop", id: "1" });
+      bitqueryConnection.send(stopMessage);
+      console.log("Stop message sent after 10 seconds.");
+
+      setTimeout(() => {
+        console.log("Closing WebSocket connection.");
+        bitqueryConnection.close();
+      }, 1000);
+    }, 10000);
   }
 
   // Handle received data
@@ -137,9 +150,10 @@ bitqueryConnection.on("close", () => {
 bitqueryConnection.on("error", (error) => {
   console.error("WebSocket Error:", error);
 });
+
 ```
 
-This script opens a WebSocket connection to the Streaming API, sends an initialization message (`connection_init`), starts a subscription with a query (`start`), handles incoming data (`data`), keep-alive messages (`ka`), and errors, and finally closes the connection gracefully.
+This script opens a WebSocket connection to the Streaming API, sends an initialization message (`connection_init`), starts a subscription with a query (`start`), handles incoming data (`data`), keep-alive messages (`ka`), and errors, and finally closes the connection gracefully after 10 seconds with the (`stop`) message.
 
 **How the WebSocket Connection is Managed**:
 
@@ -161,7 +175,7 @@ This script opens a WebSocket connection to the Streaming API, sends an initiali
 
 - **Stop Connection**:
 
-  - The connection is closed by calling `bitqueryConnection.close()` when necessary. This code currently keeps the connection open indefinitely, allowing for continuous data streaming. The `close` event logs when the connection is terminated, either by the client or the server.
+  - The connection is closed by calling `bitqueryConnection.close()` after ten seconds. The `close` event logs when the connection is terminated, either by the client or the server.
 
 > To close a subscription, you have to close the websocket.
 
