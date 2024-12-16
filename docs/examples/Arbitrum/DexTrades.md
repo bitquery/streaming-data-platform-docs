@@ -318,6 +318,11 @@ query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
     }
   }
 }
+{
+  "network": "arbitrum",
+  "token": "0x912ce59144191c1204e64559fe8253a0e49e6548",
+  "time_ago": "2024-11-17T08:11:44Z"
+}
 ```
 
 The implementation of this data could also be seen on the [DEXRabbit](https://dexrabbit.com/arbitrum/token/0x912ce59144191c1204e64559fe8253a0e49e6548#top_traders).
