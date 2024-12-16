@@ -285,18 +285,15 @@ subscription {
 
 ## Top Traders of a Token on Arbitrum
 
-[This](https://ide.bitquery.io/top-traders-for-a-token-on-Arbitrum) query returns the top traders of a token on arbitrum based on the volume of trades involving the particular token. This query returns info such as buyers, sellers, DEX Protocol used, amount bought and sold.
+[This](https://ide.bitquery.io/top-traders-for-a-token-on-Arbitrum_1) query returns the top traders of a token on arbitrum based on the volume of trades involving the particular token. This query returns info such as buyers, sellers, DEX Protocol used, amount bought and sold.
 
 ```graphql
 query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "volumeUsd" }
-      limit: { count: 100 }
-      where: {
-        Trade: { Currency: { SmartContract: { is: $token } } }
-        Block: { Time: { since: $time_ago } }
-      }
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}}, Block: {Time: {since: $time_ago}}}
     ) {
       Trade {
         Buyer
@@ -305,14 +302,8 @@ query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
           ProtocolFamily
         }
       }
-      bought: sum(
-        of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: buy } } } }
-      )
-      sold: sum(
-        of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: sell } } } }
-      )
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
