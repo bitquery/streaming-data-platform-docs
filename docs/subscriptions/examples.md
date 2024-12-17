@@ -18,34 +18,43 @@ from gql.transport.websockets import WebsocketsTransport
 
 
 async def main():
-  transport = WebsocketsTransport(
-      url=
-      "wss://streaming.bitquery.io/graphql?token=ory_at_cap...",
-      headers={"Sec-WebSocket-Protocol": "graphql-ws"})
+    transport = WebsocketsTransport(
+        url="wss://streaming.bitquery.io/graphql?token=ory_at_...",
+        headers={"Sec-WebSocket-Protocol": "graphql-ws"})
 
-  # Use use `/eap` instead of `/graphql` if you are using chains on EAP endpoint
-  await transport.connect()
-  print("connected")
+    # Use `/eap` instead of `/graphql` if you are using chains on EAP endpoint
+    await transport.connect()
+    print("Connected")
 
-  # # Close the connection
-  try:
+    # Define the subscription query
+    query = gql("""
+        subscription MyQuery {
+            EVM(network: eth) {
+                count: Blocks {
+                    Block {
+                        TxCount
+                    }
+                }
+            }
+        }
+    """)
 
-    async for result in transport.subscribe(
-        gql("""
-              subscription MyQuery {
-                  EVM(network: eth) {
-                      count: Blocks {
-                          Block {
-                              TxCount
-                          }
-                      }
-                  }
-              }
-          """)):
-      print(result)
-  except:
-    print("Transport is already connected!")
-  await transport.close()
+    async def subscribe_and_print():
+        try:
+            async for result in transport.subscribe(query):
+                print(result)
+        except asyncio.CancelledError:
+            print("Subscription cancelled.")
+
+    # Run the subscription and stop after 100 seconds
+    try:
+        await asyncio.wait_for(subscribe_and_print(), timeout=100)
+    except asyncio.TimeoutError:
+        print("Stopping subscription after 100 seconds.")
+
+    # Close the connection
+    await transport.close()
+    print("Transport closed")
 
 
 # Run the asyncio event loop
@@ -54,7 +63,7 @@ asyncio.run(main())
 
 ```
 
-The `transport.connect()` function is used to establish a connection to the WebSocket server and start the subscription. Similarly, `transport.close()` is used to close the connection and stop the subscription.
+The `transport.connect()` function is used to establish a connection to the WebSocket server and start the subscription. Similarly, `transport.close()` is used to close the connection and stop the subscription after 100 seconds.
 
 ## Implementation Example:Using WebSocket Using JavaScript
 
@@ -63,7 +72,7 @@ Open any online code editor and use this JavaScript code to use the websocket. S
 ```javascript
 const { WebSocket } = require("ws");
 
-const token = "ory_at";
+const token = "ory_at_....";
 //Use use `/eap` instead of `/graphql` if you are using chains on EAP endpoint
 const bitqueryConnection = new WebSocket(
   "wss://streaming.bitquery.io/eap?token=" + token,
@@ -112,6 +121,18 @@ bitqueryConnection.on("message", (data) => {
 
     bitqueryConnection.send(subscriptionMessage);
     console.log("Subscription message sent.");
+
+    //add stop logic
+    setTimeout(() => {
+      const stopMessage = JSON.stringify({ type: "stop", id: "1" });
+      bitqueryConnection.send(stopMessage);
+      console.log("Stop message sent after 10 seconds.");
+
+      setTimeout(() => {
+        console.log("Closing WebSocket connection.");
+        bitqueryConnection.close();
+      }, 1000);
+    }, 10000);
   }
 
   // Handle received data
@@ -139,7 +160,7 @@ bitqueryConnection.on("error", (error) => {
 });
 ```
 
-This script opens a WebSocket connection to the Streaming API, sends an initialization message (`connection_init`), starts a subscription with a query (`start`), handles incoming data (`data`), keep-alive messages (`ka`), and errors, and finally closes the connection gracefully.
+This script opens a WebSocket connection to the Streaming API, sends an initialization message (`connection_init`), starts a subscription with a query (`start`), handles incoming data (`data`), keep-alive messages (`ka`), and errors, and finally closes the connection gracefully after 10 seconds with the (`stop`) message.
 
 **How the WebSocket Connection is Managed**:
 
@@ -161,7 +182,7 @@ This script opens a WebSocket connection to the Streaming API, sends an initiali
 
 - **Stop Connection**:
 
-  - The connection is closed by calling `bitqueryConnection.close()` when necessary. This code currently keeps the connection open indefinitely, allowing for continuous data streaming. The `close` event logs when the connection is terminated, either by the client or the server.
+  - The connection is closed by calling `bitqueryConnection.close()` after ten seconds. The `close` event logs when the connection is terminated, either by the client or the server.
 
 > To close a subscription, you have to close the websocket.
 

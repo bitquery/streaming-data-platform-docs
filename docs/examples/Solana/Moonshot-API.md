@@ -245,12 +245,12 @@ query MyQuery {
 ## Get OHLC Data of a Token on Moonshot
 
 The below query gets OHLC data of the specified Token `A1XqfcD1vMEhUNwEKvBVRWFV48ZLDL4oheFVCPEcM3Vk` for 1 minute time interval for last 10 minutes on Moonshot DEX.
-You can run the query [here](https://ide.bitquery.io/OHLC-for-a-token-on-Moonshot)
+You can run the query [here](https://ide.bitquery.io/OHLC-for-a-token-on-Moonshot_1)
 
 Note - You can only use this API using `query` keyword, using this API as `subscription` will give wrong results because aggregation and interval don't work correctly together in `subscription`.
 
 ```graphql
-query {
+{
   Solana {
     DEXTradeByTokens(
       limit: { count: 10 }
@@ -265,6 +265,7 @@ query {
               is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG"
             }
           }
+          PriceAsymmetry: { lt: 0.1 }
         }
       }
     ) {
@@ -573,14 +574,14 @@ query ($tokens: [String!]) {
 
 ## OHLC price in SOL and USD and Volume
 
-To get OHLC price in SOL and USD and to get volume use [following query](https://ide.bitquery.io/ohlc-in-sol-with-usd-price_3).
+To get OHLC price in SOL and USD and to get volume use [following query](https://ide.bitquery.io/ohlc-in-sol-with-usd-price_4).
 
 ```
 {
   Solana {
     DEXTradeByTokens(
       orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Currency: {MintAddress: {is: "D68YAXPZdGEBre4Esg61W7HbcRJFN7rmroKzGPXDR87T"}}, Dex: {ProgramAddress: {is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG"}}}, Transaction: {Result: {Success: true}}}
+      where: {Trade: {Currency: {MintAddress: {is: "D68YAXPZdGEBre4Esg61W7HbcRJFN7rmroKzGPXDR87T"}}, Dex: {ProgramAddress: {is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG"}}, PriceAsymmetry: {lt: 0.1}}, Transaction: {Result: {Success: true}}}
     ) {
       Block {
         Time(interval: {count: 5, in: minutes})

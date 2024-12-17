@@ -15,6 +15,10 @@ Different plans have different limits for points available. You can always reque
 
 Check pricing [here](https://bitquery.io/pricing)
 
+> **WARNING**  
+> Please do not send money or pay unless you receive an invoice from [bitquery.io](https://bitquery.io). Beware of scammers.
+
+
 ## How are points calculated?
 
 The number of points can vary for various reasons. Even the same query can produce different results. These points are dynamically calculated based on the following factors:

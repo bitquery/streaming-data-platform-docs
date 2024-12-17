@@ -110,8 +110,8 @@ General pattern of the topic name is:
 MESSAGE_TYPE is specific on blockchain, most blockchain has topics for:
 
 - dextrades - events from DEX trading
-- dexorders - events on creation / chaing status of DEX orders
-- dexpools - events on creation / chaing status of DEX pools
+- dexorders - events on creation / changing status of DEX orders
+- dexpools - events on creation / changing status of DEX pools
 - transactions - events, calls, transactions
 - transfers - token and coin transfers events
 - raw - blocks or transactions directly from node

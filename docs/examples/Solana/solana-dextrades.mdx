@@ -947,14 +947,14 @@ Offchain token metadata such as social urls and image could be accessed from thi
 ## Solana OHLC API
 
 You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair Shark Cat-SOL by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
-You can run and test the [saved query here](https://ide.bitquery.io/Solana-OHLC-Query).
+You can run and test the [saved query here](https://ide.bitquery.io/Solana-OHLC-Query_5).
 
 ```
 {
   Solana {
     DEXTradeByTokens(
       orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
+      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, PriceAsymmetry: {lt: 0.1}}}
       limit: {count: 10}
     ) {
       Block {
