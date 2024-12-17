@@ -83,6 +83,34 @@ query MyQuery {
 }
 ```
 
+## Tokens Traded by an Account
+[This](https://ide.bitquery.io/tokens-traded-by-an-address) query returns the list of tokens traded by the wallet address over a period 
+of time. The list is sorted by the amount of tokens traded, and returns token info such as mint address, name and symbol along with the 
+total amount of tokens traded and the number of trades involving that token.
+
+``` graphql
+
+query MyQuery {
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "tokens"}
+      where: {Trade: {Account: {Owner: {is: "3CgvbiM3op4vjrrjH2zcrQUwsqh5veNVRjFCB9N6sRoD"}}}}
+    ) {
+      Trade {
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+      }
+      tokens: sum(of: Trade_Amount)
+      trades: count
+    }
+  }
+}
+
+```
+
 ## Change in Liquidity Over a Month
 
 [This](https://ide.bitquery.io/liquidity-change-in-recent-month) query returns the change in `liquidity` for a particular token
