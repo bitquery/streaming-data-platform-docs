@@ -45,7 +45,7 @@ This decision sometimes not straightforward, consult our sales and support team,
 - Messages in topic **may have** duplicates. If this makes a problem, your code must have a storage or the cache to remember which messages are already processed to avoid double processing.
 - Large messages can be separated on smaller ones, as Kafka does not allow pass more than 1 Mbyte in one message. For example, first 1200 transaction may come in one message, and the remaining 1000 will follow in another.
 
-### Kafka Streams Lattency 
+### Kafka Streams Lattency
 
 Topics for the same blockchain are not equal by lattency. If you have requirements on lattency, consider to select the proper stream for your application:
 
@@ -134,6 +134,8 @@ Note that you can deploy many instances of your application with same Group ID f
 Then only one instance will receive the message from the topic, automatically re-distributing the load across your servers.
 
 Typicaly you need setup of one consumer per one topic, as the message parsing for them anyway will need different code.
+
+> Note: For Price of a Token in DEXTrades topic, you need to calculate it using the amounts.
 
 ### Read and parse messages
 
