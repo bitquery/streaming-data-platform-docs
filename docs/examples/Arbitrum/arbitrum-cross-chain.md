@@ -11,7 +11,7 @@ For detailed reference, visit the [official Arbitrum documentation](https://docs
 
 Additional information about migrating to the latest version of Across Protocol is available [here](https://docs.across.to/developer-docs/developers/migration-from-v2-to-v3#events).
 
-## Tracking Bridge Transfers Using SpokePool Events
+## Tracking Across Bridge Transfers Using SpokePool Events
 
 SpokePool events in Across Protocol can be used to monitor the status of bridge transfers effectively. Below are queries that retrieve the latest deposits and transfers related to the Arbitrum SpokePool.
 
