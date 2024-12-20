@@ -102,6 +102,59 @@ subscription {
 
 ```
 
+## Get Price of a Token Against WSOL
+
+This query retrieves the latest price of a token against Wrapped SOL (WSOL) on Solana.
+
+Specify the token pair:
+
+- MintAddress of the token to query: "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump"
+- MintAddress for WSOL: "So111111111111111111111111111111111111111
+
+You can run the query [here](https://ide.bitquery.io/Price-of-a-Token-Against-WSOL)
+
+```
+query LatestTrades {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 1}
+      where: {Trade: {Currency: {MintAddress: {is: "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
+    ) {
+      Block {
+        allTime: Time
+      }
+      Transaction {
+        Signature
+      }
+      Trade {
+        Market {
+          MarketAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        AmountInUSD
+        Price
+        PriceInUSD
+        Amount
+        Side {
+          Type
+          Currency {
+            Symbol
+            MintAddress
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+```
+
 ## Get Latest Trades of a token
 
 This query will return information about the most recent trades executed for this token `CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump` on Solana's DEX platforms.
@@ -941,8 +994,8 @@ query MyQuery {
 
 ```
 
-The `uri` field returns the following url - [`https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN`](https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN). 
-Offchain token metadata such as social urls and image could be accessed from this link. 
+The `uri` field returns the following url - [`https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN`](https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN).
+Offchain token metadata such as social urls and image could be accessed from this link.
 
 ## Solana OHLC API
 
