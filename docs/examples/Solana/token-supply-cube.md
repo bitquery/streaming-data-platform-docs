@@ -10,11 +10,12 @@ This Solana API is part of our Early Access Program (EAP), which is intended for
 
 <head>
 <meta name="title" content="Solana Token Supply API | Easiest way to get Solana Token supply"/>
-<meta name="description" content="Access real-time on-chain data for Solana token supply and liquidity pools from DEX platforms like Raydium, Jupiter, and more through our Solana Token Supply API."/>
+<meta name="description" content="Access real-time on-chain data for Solana token supply and more through our Solana Token Supply API."/>
 <meta name="keywords" content="Solana Token Supply API, Solana Token Supply python api, Solana Token Supply data api, Solana Token Supply blockchain api, token supply scan api, Solana web3 token supply api, Solana DEX token supply API, Solana network token supply API"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
+
 <!-- Open Graph / Facebook -->
 
 <meta property="og:type" content="website" />
@@ -24,14 +25,14 @@ This Solana API is part of our Early Access Program (EAP), which is intended for
 />
 <meta
   property="og:description"
-  content="Access real-time on-chain data for Solana token supply and liquidity pools from DEX platforms like Raydium, Jupiter, and more through our Solana Token Supply API."
+  content="Access real-time on-chain data for Solana token supply and more through our Solana Token Supply API."
 />
 
 <!-- Twitter -->
 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="Solana Token Supply API | Easiest way to get Solana Token supply" />
-<meta property="twitter:description" content="Access real-time on-chain data for Solana token supply and liquidity pools from DEX platforms like Raydium, Jupiter, and more through our Solana Token Supply API." />
+<meta property="twitter:description" content="Access real-time on-chain data for Solana token supply and more through our Solana Token Supply API." />
 </head>
 
 ## Subscribe to Token Supply Changes
