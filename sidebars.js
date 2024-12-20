@@ -333,6 +333,7 @@ const sidebars = {
             title: "Solana API Documentation",
           },
           items: [
+            "examples/Solana/token-supply-cube",
             "examples/Solana/Moonshot-API",
             "examples/Solana/Pump-Fun-API",
             "examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API",
