@@ -105,6 +105,47 @@ subscription {
 
 ```
 
+## Get transfers in a Transaction Signature
+
+This query will help you fetch transfers for a particular transaction signature `3x3fbg3zfTvcfwEiDee5Z5NnQP2Hr7cgZZ9bMxNYtYKi6fMN9gT6xpdUzRb2FjfCkGXMPvhkt3bW61CHCNaWwdQi`. Check the query [here](https://ide.bitquery.io/Query-transfer-by-sig)
+
+```
+{
+  Solana(dataset: realtime) {
+    Transfers(
+      limit: {count: 10}
+      orderBy: {descending: Block_Slot}
+      where: {Transaction: {Signature: {is: "3x3fbg3zfTvcfwEiDee5Z5NnQP2Hr7cgZZ9bMxNYtYKi6fMN9gT6xpdUzRb2FjfCkGXMPvhkt3bW61CHCNaWwdQi"}}}
+    ) {
+      Transaction {
+        Signature
+      }
+      Block {
+        Slot
+      }
+      count
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+        Receiver {
+          Address
+        }
+        Index
+        Sender {
+          Address
+        }
+      }
+    }
+  }
+}
+
+```
+
 ## Transfers sent by specific address
 
 This websocket retrieves transfers where the sender is a particular address `2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {Address: {is: "2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc"}}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/transfers-where-sender-is-the-specified-address_1)
@@ -151,12 +192,38 @@ Websockets are priced based on their running time, not the amount of data delive
 
 Run query using [this link](https://ide.bitquery.io/Solana-Websocket---Subscribe-to-all-transfers-of-specific-addresses-in-realtime)
 
-
 ```graphql
 subscription {
   Solana {
     Transfers(
-      where: {any: [{Transfer: {Sender: {Address: {in: ["7Ppgch9d4XRAygVNJP4bDkc7V6htYXGfghX4zzG9r4cH", "G6xptnrkj4bxg9H9ZyPzmAnNsGghSxZ7oBCL1KNKJUza"]}}}}, {Transfer: {Receiver: {Address: {in: ["7Ppgch9d4XRAygVNJP4bDkc7V6htYXGfghX4zzG9r4cH", "G6xptnrkj4bxg9H9ZyPzmAnNsGghSxZ7oBCL1KNKJUza"]}}}}]}
+      where: {
+        any: [
+          {
+            Transfer: {
+              Sender: {
+                Address: {
+                  in: [
+                    "7Ppgch9d4XRAygVNJP4bDkc7V6htYXGfghX4zzG9r4cH"
+                    "G6xptnrkj4bxg9H9ZyPzmAnNsGghSxZ7oBCL1KNKJUza"
+                  ]
+                }
+              }
+            }
+          }
+          {
+            Transfer: {
+              Receiver: {
+                Address: {
+                  in: [
+                    "7Ppgch9d4XRAygVNJP4bDkc7V6htYXGfghX4zzG9r4cH"
+                    "G6xptnrkj4bxg9H9ZyPzmAnNsGghSxZ7oBCL1KNKJUza"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
     ) {
       Transfer {
         Amount
@@ -185,7 +252,6 @@ subscription {
   }
 }
 ```
-
 
 ## Video Tutorial on Solana Transfers API | How to get NFT, SPL Transfers data on Solana in Realtime
 

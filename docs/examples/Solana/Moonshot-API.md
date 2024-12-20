@@ -88,6 +88,45 @@ subscription MyQuery {
 }
 ```
 
+## Get newly created Moonshot tokens and their Metadata
+
+Now you can track the newly created Moonshot Tokens along with their metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/Get-newly-created-Moonshot-tokens-with-metadata#)
+
+```
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {Instruction: {Program: {Address: {is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG"}, Method: {is: "tokenMint"}}}}
+    ) {
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Symbol
+          ProgramAddress
+          PrimarySaleHappened
+          Native
+          Name
+          MintAddress
+          MetadataAddress
+          Key
+          IsMutable
+          Fungible
+          EditionNonce
+          Decimals
+          Wrapped
+          VerifiedCollection
+          Uri
+          UpdateAuthority
+          TokenStandard
+        }
+        PostBalance
+      }
+    }
+  }
+}
+
+```
+
 ## Track New Token Creation on Moonshot
 
 Get notified about the newly created token and its information on Moonshot DEX for getting early bird benefits.
