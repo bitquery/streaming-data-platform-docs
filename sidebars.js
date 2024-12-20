@@ -405,18 +405,18 @@ const sidebars = {
         {
           type: "category",
           label: "Arbitrum",
-          link: {
-            type: "generated-index",
-            title: "Arbitrum Overview",
-          },
           items: [
-            "examples/Arbitrum/Balance_Updates",
-            "examples/Arbitrum/Blocks_Transactions",
-            "examples/Arbitrum/DexTrades",
-            "examples/Arbitrum/Smart_Contract_Calls",
-            "examples/Arbitrum/Smart_Contract_Events",
+            "Schema/Arbitrum/arbitrum-cross-chain",
+            "Schema/Arbitrum/Balance_Updates",
+            "Schema/Arbitrum/Blocks_Transactions",
+            "Schema/Arbitrum/DexTrades",
+            "Schema/Arbitrum/esgmx-api",
+            "Schema/Arbitrum/gmx-api",
+            "Schema/Arbitrum/Overview",
+            "Schema/Arbitrum/Smart_Contract_Calls",
+            "Schema/Arbitrum/Smart_Contract_Events",
           ],
-        },
+        },        
         {
           type: "category",
           label: "Base",
