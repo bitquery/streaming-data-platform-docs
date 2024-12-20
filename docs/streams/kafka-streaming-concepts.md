@@ -115,6 +115,7 @@ MESSAGE_TYPE is specific on blockchain, most blockchain has topics for:
 - transactions - events, calls, transactions
 - transfers - token and coin transfers events
 - raw - blocks or transactions directly from node
+- instruction_balance_updates - instruction-level information on balance updates for accounts and token supply updates ( for solana )
 
 Contact our support team for the topics that you can connect to for your specific needs.
 
