@@ -417,7 +417,7 @@ const sidebars = {
             "examples/Arbitrum/Smart_Contract_Calls",
             "examples/Arbitrum/Smart_Contract_Events",
           ],
-        },        
+        },
         {
           type: "category",
           label: "Base",
@@ -575,7 +575,8 @@ const sidebars = {
             "usecases/tradingview-subscription-realtime/final-step",
           ],
         },
-
+        "usecases/add-liquidity-signal-bot",
+        "usecases/solana-ohlc-calculator",
         "usecases/Top-10-ethereum-tokens",
         "usecases/price-change-signal-bot",
         "usecases/arbitrum-sniper-bot",
