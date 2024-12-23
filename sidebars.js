@@ -159,6 +159,22 @@ const sidebars = {
             "subscriptions/example-rust",
             "subscriptions/mempool-subscriptions",
             "subscriptions/backfilling-subscription",
+            {
+              type: "category",
+              label: "Data Pipeline: Writing to Google BigQuery",
+              link: {
+                type: "generated-index",
+                title: "Google BigQuery Integration",
+                description: "Learn how to use Google BigQuery for blockchain data insights.",
+              },
+              items: [
+                "subscriptions/google-bigquery/intro",
+                
+                "subscriptions/google-bigquery/pub-sub",
+                "subscriptions/google-bigquery/bigquery",
+              ],
+            },
+            
           ],
         },
         {
