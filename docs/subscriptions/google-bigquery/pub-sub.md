@@ -24,8 +24,9 @@ This tutorial walks through a process of subscribing to the Bitquery Streaming A
 
 ---
 
-### 2. Install Required Libraries
+### 2. Writing Code - Install Required Libraries
 
+Now we will setup the code to publish messages to the subscribers.
 Install the Python libraries needed for WebSocket communication and Pub/Sub interaction:
 
 ```bash
