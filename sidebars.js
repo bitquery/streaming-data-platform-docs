@@ -164,8 +164,8 @@ const sidebars = {
               label: "Data Pipeline: Writing to Google BigQuery",
               link: {
                 type: "generated-index",
-                title: "Google BigQuery Integration",
-                description: "Learn how to use Google BigQuery for blockchain data insights.",
+                title: "Data Pipeline: Writing to Google BigQuery",
+                description: "Learn how to use Bitquery Subscription to Build a Data Pipeline",
               },
               items: [
                 "subscriptions/google-bigquery/intro",
