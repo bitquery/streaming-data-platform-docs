@@ -417,7 +417,7 @@ const sidebars = {
            "examples/Arbitrum/Smart_Contract_Calls",
             "examples/Arbitrum/Smart_Contract_Events",
           ],
-        },        
+        },
         {
           type: "category",
           label: "Base",
