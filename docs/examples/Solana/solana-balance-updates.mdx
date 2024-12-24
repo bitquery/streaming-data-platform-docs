@@ -95,6 +95,30 @@ subscription {
 
 ```
 
+## Get Top 100 Token Holders of a Particular Token
+
+[This](https://ide.bitquery.io/solana-token-holders) query returns the top 100 token holders of a particular token after a
+given time.
+
+```
+query TopHolders($token: String, $time_ago: DateTime) {
+  Solana {
+    BalanceUpdates(
+      orderBy: {descendingByField: "BalanceUpdate_balance_maximum"}
+      limit: {count: 100}
+      where: {BalanceUpdate: {Currency: {MintAddress: {is: $token}}}, Block: {Time: {after: $time_ago}}}
+    ) {
+      BalanceUpdate {
+        Account {
+          Owner
+        }
+        balance: PostBalance(maximum: Block_Slot)
+      }
+    }
+  }
+}
+```
+
 ## Get Balance Updates of a Particular Wallet
 
 To focus on the balance changes of a particular Solana wallet, this query filters the data stream to include only those updates relevant to the specified address. This is especially useful for wallet owners or services tracking specific accounts.
@@ -283,3 +307,7 @@ When querying Solana balance updates, you can use pre-made aggregates to optimiz
 ## Video Tutorial on How to get Balance Updates for Wallets on Solana in Realtime
 
 <VideoPlayer url="https://www.youtube.com/watch?v=mc_BinmHjUo" />
+
+## Video Tutorial on Getting Top 100 Solana Token Holders
+
+<VideoPlayer url="https://youtu.be/GL-Yiq2nywY" />
