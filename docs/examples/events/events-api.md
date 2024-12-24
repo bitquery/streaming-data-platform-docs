@@ -295,6 +295,55 @@ This query retrieves the most recent liquidity removal events (Burn events) on U
 
 ```
 
+## Subscribe to All Swap Events
+
+This subscription provides information on the latest real-time swap events on Ethereum. You can run it [here](https://ide.bitquery.io/all-swap-events)
+
+```
+subscription {
+  EVM(network: eth) {
+    Events(where: {Log: {Signature: {Name: {in: ["swap", "Swap"]}}}}) {
+      Log {
+        SmartContract
+        Signature {
+          Name
+        }
+      }
+      Transaction {
+        From
+        To
+        ValueInUSD
+        Value
+        Type
+      }
+      Arguments {
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+        Name
+      }
+    }
+  }
+}
+```
+
 ## Get All Chef Fun Swaps
 
 Chefdotfun, similar to platforms like Pumpfun and Sunpump, is a token creation platform on the Ethereum network. This query retrieves the latest Chefdotfun swap transactions by filtering event logs related to the smart contract.
