@@ -165,16 +165,16 @@ const sidebars = {
               link: {
                 type: "generated-index",
                 title: "Data Pipeline: Writing to Google BigQuery",
-                description: "Learn how to use Bitquery Subscription to Build a Data Pipeline",
+                description:
+                  "Learn how to use Bitquery Subscription to Build a Data Pipeline",
               },
               items: [
                 "subscriptions/google-bigquery/intro",
-                
+
                 "subscriptions/google-bigquery/pub-sub",
                 "subscriptions/google-bigquery/bigquery",
               ],
             },
-            
           ],
         },
         {
@@ -430,7 +430,7 @@ const sidebars = {
             "examples/Arbitrum/DexTrades",
             "examples/Arbitrum/esgmx-api",
             "examples/Arbitrum/gmx-api",
-           "examples/Arbitrum/Smart_Contract_Calls",
+            "examples/Arbitrum/Smart_Contract_Calls",
             "examples/Arbitrum/Smart_Contract_Events",
           ],
         },
@@ -545,7 +545,6 @@ const sidebars = {
             title: "Trading and Automation",
           },
           items: [
-           
             {
               type: "category",
               label: "TradingView Advanced Charts",
@@ -570,7 +569,6 @@ const sidebars = {
               ],
             },
             "usecases/trading-indicators",
-           
           ],
         },
         {
@@ -585,6 +583,7 @@ const sidebars = {
             "usecases/monitoring-solana-blockchain-real-time-tutorial",
             "usecases/monitoring-solana-at-scale-managing-hundreds-of-addresses",
             "usecases/streaming-moonshot-prices",
+            "usecases/solana-ohlc-calculator",
             "usecases/real-time-historical-ethereum-price-excel-google-sheets",
             {
               type: "category",
@@ -598,7 +597,10 @@ const sidebars = {
             {
               type: "category",
               label: "P&L Calculator",
-              items: ["usecases/p-l-product/overview", "usecases/p-l-product/pnl"],
+              items: [
+                "usecases/p-l-product/overview",
+                "usecases/p-l-product/pnl",
+              ],
             },
           ],
         },
@@ -630,14 +632,13 @@ const sidebars = {
             "usecases/solana-sniper-bot",
             "usecases/automated-trading-ethereum-volume-surge-bot",
             "usecases/price-change-signal-bot",
+            "usecases/add-liquidity-signal-bot",
             "usecases/solana-arbitrage-dashboard",
             "usecases/sandwitch-detection",
           ],
         },
       ],
     },
-    
-    
 
     {
       type: "category",
