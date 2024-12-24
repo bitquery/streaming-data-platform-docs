@@ -166,6 +166,32 @@ subscription {
 
 ```
 
+## Marketcap of a Token
+
+[This](https://ide.bitquery.io/market-cap-of-token_1) query returns latest marketcap of a particular token.
+
+``` graphql
+
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      where: {TokenSupplyUpdate: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}}}
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+    ) {
+      TokenSupplyUpdate {
+        PostBalanceInUSD
+      }
+    }
+  }
+}
+
+```
+
 ## Video Tutorial on Streaming and Getting Total Supply of a Solana Token 
 
 <VideoPlayer url="https://youtu.be/U_fuHEow3fQ" />
+
+## Video Tutorial on Getting New Pump Fun Token Metadata
+
+<VideoPlayer url="https://youtu.be/GmJOEWxhlVM" />
