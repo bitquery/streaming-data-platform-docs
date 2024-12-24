@@ -33,6 +33,8 @@ In this section we will see how to get Arbitrum DEX trades information using our
 <meta property="twitter:description" content="Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API." />
 </head>
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 ## Top Trending Pairs on Arbitrum
 
 [This](https://ide.bitquery.io/trending-token-pairs-on-Arbitrum) query returns the top trending pairs traded on Arbitrum Chain based on the trade volume for the last 24 hours, and returns info such as latest price, number of buyers and sellers, number of trades in a day and much more.
@@ -283,6 +285,63 @@ subscription {
 
 ```
 
+## Top Bought Tokens on Arbitrum network
+
+This query will give you top bought tokens on Arbitrum network in last 1 hour. Change the timestamp in `{Block: {Time: {since: "2024-12-24T08:20:00Z"}}}` accordingly.
+You can find the query [here](https://ide.bitquery.io/top-bought-tokens-on-Arbitrum#)
+
+```
+query MyQuery {
+  EVM(network: arbitrum) {
+    DEXTradeByTokens(
+      where: {Block: {Time: {since: "2024-12-24T08:20:00Z"}}}
+      limit: {count: 100}
+      orderBy: {descendingByField: "total_bought"}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+      total_bought: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:buy}}}})
+            total_sold: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:sell}}}})
+
+    }
+  }
+}
+```
+
+## Top Sold Tokens on Arbitrum network
+
+This query will give you top sold tokens on Arbitrum network in last 1 hour. Change the timestamp in `{Block: {Time: {since: "2024-12-24T08:20:00Z"}}}` accordingly.
+You can find the query [here](https://ide.bitquery.io/Top-Sold-Tokens-on-Arbitrum#)
+
+```
+query MyQuery {
+  EVM(network: arbitrum) {
+    DEXTradeByTokens(
+      where: {Block: {Time: {since: "2024-12-24T08:20:00Z"}}}
+      limit: {count: 100}
+      orderBy: {descendingByField: "total_sold"}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+      total_bought: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:buy}}}})
+            total_sold: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:sell}}}})
+
+    }
+  }
+}
+
+```
+
 ## Top Traders of a Token on Arbitrum
 
 [This](https://ide.bitquery.io/top-traders-for-a-token-on-Arbitrum_1) query returns the top traders of a token on arbitrum based on the volume of trades involving the particular token. This query returns info such as buyers, sellers, DEX Protocol used, amount bought and sold.
@@ -326,3 +385,19 @@ The `DEXTrades` API contains the following information about each trade:
 - `Sender`: The address of the sender of the trade.
 - `Buy`: The details of the buy order, including the amount of token bought, the buyer's address, the token's symbol, and the price of the trade.
 - `Sell`: The details of the sell order, including the amount of token sold, the seller's address, the token's symbol, and the price of the trade.
+
+## Video Tutorial | How to get Top Traders of a Token on Arbitrum
+
+<VideoPlayer url="https://www.youtube.com/watch?v=57jDX4Pu1dA" />
+
+## Video Tutorial | How to track Realtime DEXTrades of a Token on Arbitrum
+
+<VideoPlayer url="https://www.youtube.com/watch?v=RpfxnBDzqng" />
+
+## Video Tutorial | How to get OHLC Data of a Token Pair on Arbitrum
+
+<VideoPlayer url="https://www.youtube.com/watch?v=nN2hyF0pQKQ" />
+
+## Video Tutorial | How to get Top Bought & Top Sold Tokens on Arbitrum network
+
+<VideoPlayer url="https://www.youtube.com/watch?v=AYR8uA1jSQQ" />
