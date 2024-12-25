@@ -871,6 +871,28 @@ query MyQuery {
 
 ```
 
+## Get count of Buys and Sells of a Trader
+
+To get the count of Buys and Sells of a specific trader after a certain `timestamp`, use the following query.
+Find the query [here](https://ide.bitquery.io/buys-and-sells-of-a-traders)
+
+```
+query MyQuery($timestamp: DateTime, $trader: String) {
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      where: {Block: {Time: {since: $timestamp}}, Trade: {Side: {Currency: {MintAddress: {in: ["So11111111111111111111111111111111111111112", "11111111111111111111111111111111"]}}}}, any: [{Trade: {Account: {Address: {is: $trader}}}}, {Trade: {Account: {Token: {Owner: {is: $trader}}}}}]}
+    ) {
+      buys: count(if: {Trade: {Side: {Type: {is: buy}}}})
+      sells: count(if: {Trade: {Side: {Type: {is: sell}}}})
+    }
+  }
+}
+{
+  "timestamp" : "2024-06-25T06:19:00Z",
+  "trader" : "FeWbDQ9SpgWS8grNrpFesVquJfxVkRu1WNZerKsrkcbY"
+}
+```
+
 ## Latest USD Price of a Token
 
 The below query retrieves the USD price of a token on Solana by setting `MintAddress: {is: "J5FAZ6bV7CCGHcU4CTXWVG6nnKHcwD9Pn4DntY93pump"}` and `Side: {Currency: {MintAddress: {is: "11111111111111111111111111111111"}}}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-Latest-Price-of-SOL-in--USD-Real-time#).
