@@ -539,10 +539,10 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "TradingView and Automation",
+          label: "TradingView Charting",
           link: {
             type: "generated-index",
-            title: "Trading and Automation",
+            title: "TradingView Charting",
           },
           items: [
             {
