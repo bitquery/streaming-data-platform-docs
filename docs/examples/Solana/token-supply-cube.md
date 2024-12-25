@@ -188,6 +188,94 @@ query MyQuery {
 
 ```
 
+## Top Solana Tokens By MarketCap
+
+[This](https://ide.bitquery.io/top-Solana-tokens-based-on-market-cap) query returns the top Solana tokens based on the latest MarketCap.
+
+``` graphql
+
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      orderBy: {descending: Block_Time, descendingByField: "TokenSupplyUpdate_Marketcap"}
+      limitBy: {by: TokenSupplyUpdate_Currency_MintAddress, count: 1}
+    ) {
+      TokenSupplyUpdate {
+        Marketcap: PostBalanceInUSD
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Fungible
+          Decimals
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Top 100 Pump Fun Tokens By MarketCap
+
+[This](https://ide.bitquery.io/top-pump-fun-tokens-based-on-market-cap_1) query returns the top Solana tokens based on the latest MarketCap.
+
+``` graphql
+
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      where: {TokenSupplyUpdate: {Currency: {MintAddress: {includes: "pump"}}}}
+      orderBy: {descending: Block_Time, descendingByField: "TokenSupplyUpdate_Marketcap"}
+      limitBy: {by: TokenSupplyUpdate_Currency_MintAddress, count: 1}
+      limit: {count: 100}
+    ) {
+      TokenSupplyUpdate {
+        Marketcap: PostBalanceInUSD
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Fungible
+          Decimals
+          Uri
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Get Solana Tokens With a Specific MarketCap
+
+Lets say we need to get the tokens whose marketcap has crossed the `1M USD` mark but is less than `2M USD` for various reasons like automated trading. We can get the token details that have crossed a particular marketcap using [this](https://ide.bitquery.io/tokens-with-market-cap-range) query.
+
+``` graphql
+
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      where: {TokenSupplyUpdate: {PostBalanceInUSD: {ge: "1000000", le: "2000000"}}}
+      orderBy: {descending: Block_Time}
+      limitBy: {by: TokenSupplyUpdate_Currency_MintAddress, count: 1}
+    ) {
+      TokenSupplyUpdate {
+        Marketcap: PostBalanceInUSD
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Decimals
+          Uri
+        }
+      }
+    }
+  }
+}
+
+```
+
 ## Video Tutorial on Streaming and Getting Total Supply of a Solana Token 
 
 <VideoPlayer url="https://youtu.be/U_fuHEow3fQ" />
