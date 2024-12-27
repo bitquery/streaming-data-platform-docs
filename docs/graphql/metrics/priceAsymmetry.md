@@ -1,6 +1,6 @@
 # Price Asymmetry
 
-In this section, we will see how to use the `PriceAsymmetry` metric to filter results based on Price. 
+In this section, we will see how to use the `PriceAsymmetry` metric to filter results based on Price.
 
 ## How to use PriceAsymmetry to filter anomalies and outliers in Trades ?
 
@@ -11,6 +11,8 @@ PriceAsymmetry measures how close the trade’s prices are to each other. If the
 This metric operates consistently across various datasets, including archive, subscriptions and mempool. For live data streams or mempool transactions, the latest available prices from both sides of the trade are used as benchmarks.
 
 Use the PriceAsymmetry metric to filter the response. By comparing two values derived from market data, it effectively identifies and exclude trades outside the specified range.
+
+> Note: : If we do not know exchange prices for BOTH tokens of a trade pair we can not calculate priceAsymmetry, we set it to 0.
 
 Here's an example [query on ethereum trades](https://ide.bitquery.io/Price-based-on-DEX-trades-in-USD).
 
@@ -41,8 +43,8 @@ subscription {
   }
 }
 ```
-Similarly, below is an example on solana trades.
 
+Similarly, below is an example on solana trades.
 
 ```
 subscription {
