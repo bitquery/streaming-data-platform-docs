@@ -182,7 +182,14 @@ const config = {
           {
             to: "/docs/schema/schema-intro/",
             from: "/docs/evm/",
+
           },
+          {
+            to:"/docs/category/how-to-guides/",
+            from:"/docs/category/use-cases/"
+
+          },
+
         ],
       },
     ],
