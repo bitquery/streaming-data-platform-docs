@@ -263,6 +263,7 @@ const sidebars = {
             "examples/events/events-api",
             "examples/mempool/mempool-api",
             "examples/transfers/total-supply",
+            "examples/transactions/transaction-api",
             "examples/calls/contract-creation",
             {
               type: "category",
