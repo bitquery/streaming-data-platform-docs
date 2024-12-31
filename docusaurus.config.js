@@ -189,6 +189,10 @@ const config = {
             from:"/docs/category/use-cases/"
 
           },
+          {
+            to:"/docs/examples/nft/nft-api/",
+            from:"/docs/category/nft/"
+          }
 
         ],
       },
