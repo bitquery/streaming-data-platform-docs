@@ -263,6 +263,7 @@ const sidebars = {
             "examples/events/events-api",
             "examples/mempool/mempool-api",
             "examples/transfers/total-supply",
+            "examples/transactions/transaction-api",
             "examples/calls/contract-creation",
             {
               type: "category",
@@ -539,10 +540,10 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "TradingView and Automation",
+          label: "TradingView Charting",
           link: {
             type: "generated-index",
-            title: "Trading and Automation",
+            title: "TradingView Charting",
           },
           items: [
             {

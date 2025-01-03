@@ -110,6 +110,10 @@ const config = {
             from: "/docs/usecases/nft_Analytics/",
           },
           {
+            to:"/docs/usecases/tradingview-advanced-charts/getting-started/",
+            from:"/docs/category/tradingview-advanced-charts/"
+          },
+          {
             to: "/docs/usecases/crypto-dashboard/",
             from: "/docs/usecases/crypto_dashboard/",
           },
@@ -178,7 +182,18 @@ const config = {
           {
             to: "/docs/schema/schema-intro/",
             from: "/docs/evm/",
+
           },
+          {
+            to:"/docs/category/how-to-guides/",
+            from:"/docs/category/use-cases/"
+
+          },
+          {
+            to:"/docs/examples/nft/nft-api/",
+            from:"/docs/category/nft/"
+          }
+
         ],
       },
     ],

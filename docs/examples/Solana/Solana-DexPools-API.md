@@ -178,24 +178,15 @@ subscription {
 ## Get Latest Liquidity of any Liquidity Pool
 
 This query gets you the liquidity/balance of the Quote Currency `WSOL` and Base Currency `SOLANADOG` for this particular pool address `BDQnwNhTWc3wK4hhsnsEaBBMj3sD4idGzvuidVqUw1vL`. THe liquidity value of the currencies will be in `Quote{PostAmount}` and `Base{PostAmount}`.
-You can find the query [here](https://ide.bitquery.io/Get-LP-Latest-liqudity_5)
+You can find the query [here](https://ide.bitquery.io/Get-LP-Latest-liqudity-on-Solana)
 
 ```graphql
 query GetLatestLiquidityForPool {
-  Solana {
+  Solana(dataset: realtime) {
     DEXPools(
-      where: {
-        Pool: {
-          Market: {
-            MarketAddress: {
-              is: "BDQnwNhTWc3wK4hhsnsEaBBMj3sD4idGzvuidVqUw1vL"
-            }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-      orderBy: { descending: Block_Slot }
-      limit: { count: 1 }
+      where: {Pool: {Market: {MarketAddress: {is: "HktfL7iwGKT5QHjywQkcDnZXScoh811k7akrMZJkCcEF"}}}, Transaction: {Result: {Success: true}}}
+      orderBy: {descending: Block_Slot}
+      limit: {count: 1}
     ) {
       Pool {
         Market {
@@ -217,7 +208,6 @@ query GetLatestLiquidityForPool {
         }
         Quote {
           PostAmount
-          PriceInUSD
           PostAmountInUSD
         }
         Base {
@@ -227,6 +217,7 @@ query GetLatestLiquidityForPool {
     }
   }
 }
+
 ```
 
 ## Get Top Pools Based on Liquidity
