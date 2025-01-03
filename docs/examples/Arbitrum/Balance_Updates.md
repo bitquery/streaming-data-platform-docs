@@ -8,7 +8,6 @@ In thise section we will see how to monitor real-time balance changes across the
 
 The balance update does not inherently include transaction fees. Therefore, to get the actual balance after all transactions and fees, you need to subtract the total transaction fees from the balance updates.
 
-
 <head>
 <meta name="title" content="How to get Arbitrum Balance Updates of an address"/>
 <meta name="description" content="Learn how to get real time balance & balance updates of a Arbitrum address using Bitquery's Arbitrum Balance Updates API."/>
@@ -36,37 +35,56 @@ The balance update does not inherently include transaction fees. Therefore, to g
 <meta property="twitter:description" content="Learn how to get real time balance & balance updates of a Arbitrum address using Bitquery's Arbitrum Balance Updates API." />
 </head>
 
-## Latest Balance of an Address on Arbitrum
+## Get Realtime BalanceUpdates on Arbitrum
 
-The query returns the 11 most recent balance updates for the address `0xdef1c0ded9bec7f1a1670819833240f027b25eff` on the Arbitrum network. The balance updates will be sorted in descending order by the amount of token in the address.
-The `sum` function is used to aggregate the `Amount` field for all balance updates in the list.
-You can find the query [here](https://ide.bitquery.io/Address-balance-on-Arbitrum)
+The query acts as a websocket and gives the realtime balance updates across all the addresses on Arbitrum chain.
+You can find the query [here](https://ide.bitquery.io/Get-realtime-balance-updates#)
 
 ```
-query ($network: evm_network, $address: String!, $limit: Int) {
-  EVM(network: $network, dataset: archive) {
-    BalanceUpdates(
-      orderBy: {descendingByField: "sum"}
-      where: {BalanceUpdate: {Address: {is: $address}}}
-      limit: {count: $limit}
-    ) {
-      ChainId
-      count
-      Currency {
-        Symbol
-        SmartContract
+subscription MyQuery {
+  EVM(network: arbitrum) {
+    BalanceUpdates {
+      BalanceUpdate {
+        Address
+        Amount
+        AmountInUSD
       }
-      sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0.0"})
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Currency {
+        SmartContract
+        Symbol
+        Name
+      }
     }
   }
 }
-{
-  "limit": 11,
-  "offset": 0,
-  "network": "arbitrum",
-  "address": "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
-}
+```
 
+## Latest Balance of an Address on Arbitrum
+
+The query will give the Balance for the address `0xDef1C0ded9bec7F1a1670819833240f027b25EfF` on the Arbitrum network. The balance updates will be summed and the resultant will be the current balance for the address.
+The `sum` function is used to aggregate the `Amount` field for all balance updates in the list.
+You can find the query [here](https://ide.bitquery.io/get-balance-of-an-address_1#)
+
+```
+query MyQuery {
+  EVM(network: arbitrum, dataset: combined) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF"}}}
+      orderBy: {descendingByField: "balance"}
+    ){
+      Currency{
+        Name
+      }
+      balance: sum(of:BalanceUpdate_Amount selectWhere: {gt: "0"})
+    }
+  }
+}
 ```
 
 ## Balance History of an Address on Arbitrum
