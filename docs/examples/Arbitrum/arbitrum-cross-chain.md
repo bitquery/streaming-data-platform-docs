@@ -4,6 +4,8 @@ sidebar_position: 7
 
 # Arbitrum Cross Chain API
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 ## Overview
 
 Explore the integration of the **Arbitrum Cross Chain API** to track bridge transfers, interact with smart contracts, and fetch detailed transaction data.  
@@ -124,3 +126,7 @@ Retrieve the latest transfers directed to the Arbitrum SpokePool.Get information
   }
 }
 ```
+
+## Video Tutorial | How to track Across Bridge Deposits on Arbitrum
+
+<VideoPlayer url="https://www.youtube.com/watch?v=ibI3OXhdxUQ" />
