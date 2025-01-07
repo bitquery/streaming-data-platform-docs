@@ -551,45 +551,7 @@ You can also checkout how such queries are used as a base to completed features 
 
 ![Trending Pairs on DEXrabbit](../../../static/img/dexrabbit/trending_tokens_solana.png)
 
-## Top Traders of a token
 
-This query will give you top traders for this token `59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN` on Solana's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/top-traders-of-a-token)
-
-```
-query TopTraders($token: String, $base: String) {
-  Solana {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "volumeUsd"}
-      limit: {count: 100}
-      where: {Trade: {Currency: {MintAddress: {is: $token}}, Side: {Amount: {gt: "0"}, Currency: {MintAddress: {is: $base}}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Trade {
-        Account {
-          Owner
-        }
-        Dex {
-          ProgramAddress
-          ProtocolFamily
-          ProtocolName
-        }
-      }
-      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
-      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
-      volume: sum(of: Trade_Amount)
-      volumeUsd: sum(of: Trade_Side_AmountInUSD)
-    }
-  }
-}
-{
-  "token": "59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN",
-  "base": "So11111111111111111111111111111111111111112"
-}
-```
-
-![image](https://github.com/user-attachments/assets/d2f6cc5d-b6ed-4ca2-b6aa-0b15f10d378a)
-
-Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_top_traders).
 
 ## Get DEX Markets for a Token
 
@@ -871,27 +833,7 @@ query MyQuery {
 
 ```
 
-## Get count of Buys and Sells of a Trader
 
-To get the count of Buys and Sells of a specific trader after a certain `timestamp`, use the following query.
-Find the query [here](https://ide.bitquery.io/buys-and-sells-of-a-traders)
-
-```
-query MyQuery($timestamp: DateTime, $trader: String) {
-  Solana(dataset: combined) {
-    DEXTradeByTokens(
-      where: {Block: {Time: {since: $timestamp}}, Trade: {Side: {Currency: {MintAddress: {in: ["So11111111111111111111111111111111111111112", "11111111111111111111111111111111"]}}}}, any: [{Trade: {Account: {Address: {is: $trader}}}}, {Trade: {Account: {Token: {Owner: {is: $trader}}}}}]}
-    ) {
-      buys: count(if: {Trade: {Side: {Type: {is: buy}}}})
-      sells: count(if: {Trade: {Side: {Type: {is: sell}}}})
-    }
-  }
-}
-{
-  "timestamp" : "2024-06-25T06:19:00Z",
-  "trader" : "FeWbDQ9SpgWS8grNrpFesVquJfxVkRu1WNZerKsrkcbY"
-}
-```
 
 ## Latest USD Price of a Token
 
@@ -929,66 +871,6 @@ The below query retrieves the USD price of a token on Solana by setting `MintAdd
 
 ```
 
-## Get all the Tokens owned by an address
-
-The below query retrieves the token addresses and their balances owned by a particular account address You can access the query [here](https://ide.bitquery.io/tokens-owned-by-an-address).
-
-```
-query MyQuery {
-  Solana {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Account: {Owner: {is: "61DR2QJRi47X4dzNPU626mJVWfMPKs5Rs5D7pHVjtXPt"}}}}
-      orderBy: {descendingByField: "BalanceUpdate_Balance_maximum"}
-    ) {
-      BalanceUpdate {
-        Balance: PostBalance(maximum: Block_Slot)
-        Currency {
-          Name
-          Symbol
-        }
-      }
-    }
-  }
-}
-```
-
-## Get the First 100 buyers of a Token
-
-The below query retrieves the first 100 buyers of a secified token.
-You can run the query [here](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1)
-
-```graphql
-query MyQuery {
-  Solana {
-    DEXTrades(
-      where: {
-        Trade: {
-          Buy: {
-            Currency: {
-              MintAddress: {
-                is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump"
-              }
-            }
-          }
-        }
-      }
-      limit: { count: 100 }
-      orderBy: { ascending: Block_Time }
-    ) {
-      Trade {
-        Buy {
-          Amount
-          Account {
-            Token {
-              Owner
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
 
 ## Get the Token details like Update Authority, decimals, URI, is Mutable or not
 

@@ -1,37 +1,42 @@
----
-sidebar_position: 4
----
-
 # Java Example to Use Kafka Streams for Real-time Data
 
 ## Overview
 
-This guide explains how to implement a Java Kafka consumer to receive [onchain data streams from Bitquery](https://bitquery.io/products/streaming) in real-time using the Apache Kafka library. The consumer is secured with SSL and SASL, subscribing to a Kafka topic and logging messages to the console. 
+This guide explains how to implement a Java Kafka consumer to receive [onchain data streams from Bitquery](https://bitquery.io/products/streaming) in real-time using the Apache Kafka library. The consumer is secured with SSL and SASL, subscribing to a Kafka topic and logging messages to the console.
 
 You can find the complete code [here](https://github.com/bitquery/kafka-consumer-example).
 
-### Prerequisites
+---
+
+## Quick Start
+
+1. **Create Your Java Project**: Set up a new Java project with the Apache Kafka client library.
+2. **Prepare SSL Certificates**: Convert your PEM certificates to JKS format for Java compatibility.
+3. **Configure Kafka Properties**: Update your Kafka properties file with SSL, SASL, and broker details.
+4. **Write the Consumer Code**: Use the provided Kafka consumer code to consume and process messages.
+
+---
+
+## Prerequisites
 
 Ensure that you have the following components in place before running the code:
 
 1. **Kafka Cluster**: Accessible Kafka brokers from Bitquery.
 2. **Username and Password**: For authentication with the Kafka brokers.
-3. **Topic name(s)** to subscribe to.
-4. **Java**: JDK 8 or higher.
-5. **Apache Kafka Client**: Kafka client library for Java.
+3. **Topic name(s)**: The topic you wish to subscribe to.
+4. **Java**: JDK 8 or higher installed.
+5. **Apache Kafka Client**: The Kafka client library for Java must be included in your project dependencies.
+6. **Certificates**: Client and server certificates to secure communication between your consumer and the Kafka cluster.
 
-### Additional Files
+---
 
-- Create a new Java Project
-- Download all the certificates and store them in the `src/main/resources/` folder:
-  - `keystore.jks`: SSL keystore file
-  - `clienttruststore.jks`: SSL truststore file
+## Step 1: Create Your Java Project
 
-Ensure that the paths and passwords in the configuration match your actual certificate files and credentials.
+To begin, create a new Java project in your preferred Integrated Development Environment (IDE) such as IntelliJ IDEA or Eclipse.
 
-### Dependencies
+### Add Kafka Client Library Dependency
 
-The script relies on the Apache Kafka client library. Make sure to include it in your project's dependencies. If you're using Maven, add the following to your `pom.xml`:
+Include the Kafka client library in your project. If you are using Maven for dependency management, add the following to your `pom.xml` file:
 
 ```xml
 <dependency>
@@ -41,29 +46,80 @@ The script relies on the Apache Kafka client library. Make sure to include it in
 </dependency>
 ```
 
-### Kafka Client Initialization
+Save the file, and Maven will download the required dependencies.
 
-The Kafka client is initialized using the `KafkaConsumer` class from the Apache Kafka library. The client is configured with SSL and SASL to authenticate communication with the Kafka brokers.
+---
+
+## Step 2: Prepare SSL Certificates for Kafka
+
+To enable secure communication between your Kafka consumer and the Kafka cluster, you need to convert your PEM certificates to Java-compatible JKS format.
+
+### Convert PEM to PKCS12 Format
+
+Use the `openssl` tool to convert your PEM certificates (`client.cer.pem` and `client.key.pem`) into a PKCS12 file.
+
+Run the following command in your terminal:
+
+```bash
+openssl pkcs12 -export -in client.cer.pem -inkey client.key.pem -out client.p12 -name mykey -CAfile ca.cer.pem -caname root -password pass:123456
+```
+
+This command creates a file named `client.p12` that contains the client certificates in PKCS12 format. The `-password` flag sets the password for the PKCS12 file.
+
+### Convert PKCS12 to JKS Format
+
+Now, use the `keytool` utility to convert the PKCS12 file into a JKS keystore:
+
+```bash
+keytool -importkeystore -deststorepass 123456 -destkeypass 123456 -destkeystore keystore.jks -srckeystore client.p12 -srcstoretype PKCS12 -srcstorepass 123456 -alias mykey
+```
+
+This creates a `keystore.jks` file, which is compatible with Java.
+
+### Create a Truststore Containing the Broker's CA Certificate
+
+1. **Retrieve the Broker's Certificate**:
+   Use `openssl` to retrieve the broker's certificate:
+
+   ```bash
+   echo | openssl s_client -connect rpk0.bitquery.io:9093 -servername rpk0.bitquery.io -showcerts > broker_certs.pem
+   ```
+
+   This saves the broker's certificates into a file named `broker_certs.pem`.
+
+2. **Import Certificates into Truststore**:
+   Use `keytool` to import the broker's certificates into a truststore:
+
+   ```bash
+   keytool -import -alias brokerCert -file broker_certs.pem -keystore clienttruststore.jks -storepass truststorepassword
+   ```
+
+This step creates a `clienttruststore.jks` file, which contains the broker's certificate.
+
+---
+
+## Step 3: Configure Kafka Properties
+
+In your Java application, configure the Kafka client properties to use the generated `keystore.jks` and `clienttruststore.jks` files for SSL authentication.
+
+Here’s an example configuration:
 
 ```java
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.config.SaslConfigs;
-import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 
 Properties props = new Properties();
 props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
         "rpk0.bitquery.io:9093,rpk1.bitquery.io:9093,rpk2.bitquery.io:9093");
-props.put(ConsumerConfig.GROUP_ID_CONFIG, "trontest1-group-1");
+props.put(ConsumerConfig.GROUP_ID_CONFIG, "consumer-group-1");
 props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
-props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
 props.put(SaslConfigs.SASL_MECHANISM, "SCRAM-SHA-512");
 props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
 props.put("ssl.endpoint.identification.algorithm", "");
 
 props.put(SaslConfigs.SASL_JAAS_CONFIG,
-        "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"ssss\" password=\"ssss\";");
+        "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"your-username\" password=\"your-password\";");
 
 props.put("ssl.keystore.location", "src/main/resources/keystore.jks");
 props.put("ssl.keystore.password", "123456");
@@ -72,25 +128,33 @@ props.put("ssl.truststore.location", "src/main/resources/clienttruststore.jks");
 props.put("ssl.truststore.password", "truststorepassword");
 ```
 
-- **group.id**: A unique identifier for the consumer group.
-- **bootstrap.servers**: List of Kafka broker addresses.
-- **SSL configuration**: Paths to the keystore and truststore files are provided for SSL authentication.
-- **SASL configuration**: Username and password are used for secure communication.
+Ensure the file paths and passwords match your setup.
 
-### Kafka Consumer Setup
+---
 
-The Kafka consumer is initialized to consume messages from a specified topic. In this case, the consumer listens to the `tron.broadcasted.transactions` topic.
+## Step 4: Write the Kafka Consumer Code
+
+Write the Kafka consumer code to connect to the Kafka topic and process messages.
+
+### Initialize the Kafka Consumer
+
+Create and configure a `KafkaConsumer` object:
 
 ```java
-String topic = "tron.broadcasted.transactions";
-KafkaConsumer<byte[], byte[]> consumer = new KafkaConsumer<>(props, new ByteArrayDeserializer(),
-        new ByteArrayDeserializer());
-consumer.subscribe(Collections.singletonList(topic));
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import java.time.Duration;
+import java.util.Collections;
+import java.util.Properties;
+
+KafkaConsumer<byte[], byte[]> consumer = new KafkaConsumer<>(props);
+consumer.subscribe(Collections.singletonList("tron.broadcasted.transactions"));
 ```
 
-### Message Processing
+### Poll and Process Messages
 
-The consumer polls for new messages and processes them in a loop. Each message is converted from bytes to a string and printed to the console.
+Use the `poll` method to retrieve messages from the Kafka topic and process them:
 
 ```java
 while (true) {
@@ -104,7 +168,7 @@ while (true) {
 
 ### Graceful Shutdown
 
-A shutdown hook is added to ensure the consumer closes gracefully when the application is terminated.
+Add a shutdown hook to close the consumer cleanly when the application is terminated:
 
 ```java
 Runtime.getRuntime().addShutdownHook(new Thread(consumer::wakeup));
@@ -118,16 +182,11 @@ try {
 }
 ```
 
-### Execution Workflow
+---
 
-The following sequence of operations occurs when the script runs:
+## Execution Workflow
 
-1. **Kafka Client Initialization**: The Kafka client is initialized with SSL and SASL configurations.
-2. **Group ID Assignment**: A unique `group.id` is used to ensure independent message processing.
-3. **Kafka Consumer Connection**: The consumer subscribes to a Kafka topic.
-4. **Message Processing**:
-   - **Polling**: The consumer polls messages from Kafka.
-   - **Logging**: The message content is logged to the console.
-5. **Graceful Shutdown**: A shutdown hook ensures the consumer closes cleanly upon termination.
-
-
+1. **Kafka Client Initialization**: The Kafka client is configured with SSL and SASL properties.
+2. **Subscribe to Kafka Topic**: The consumer connects to the specified topic.
+3. **Message Processing**: Messages are retrieved, processed, and logged to the console.
+4. **Graceful Shutdown**: The consumer shuts down cleanly when terminated.
