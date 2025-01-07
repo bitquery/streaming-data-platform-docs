@@ -1,6 +1,6 @@
 import VideoPlayer from "../../src/components/videoplayer.js";
 
-# Solana Copy Trading Bot Tutorial
+# How to Build a Solana Copy Trading Bot - Tutorial
 
 This project is a Solana copy trading bot that allows users to replicate trades executed by a specified account on the Solana blockchain. The bot fetches trading data using the Bitquery API. However since this is a tutorial project we don't execute a trade but rather store the trade info in an excel document. This is to provide an understanding on how Bitquery APIs  could be used to build a full product.
 

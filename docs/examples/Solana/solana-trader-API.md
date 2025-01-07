@@ -1,6 +1,6 @@
 # Solana Trader API
 
-In this section we will see how to get Solana trader information using our API. More queries on DEX trades including latest trades, OHLC, other data points can be found in the [Solana DEX Trades API page](https://docs.bitquery.io/docs/examples/Solana/solana-dextrades/)
+In this section we will see how to get Solana trader information using our API. More queries on DEX trades including latest trades, OHLC, and other data points can be found in the [Solana DEX Trades API page](https://docs.bitquery.io/docs/examples/Solana/solana-dextrades/)
 
 This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/).
 
