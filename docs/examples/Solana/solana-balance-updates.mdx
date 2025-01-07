@@ -39,6 +39,29 @@ Note - Our [V1 APIs](https://docs.bitquery.io/v1/docs/category/examples) do supp
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
+## Get all the Tokens owned by an address
+
+The below query retrieves the token addresses and their balances owned by a particular account address You can access the query [here](https://ide.bitquery.io/tokens-owned-by-an-address).
+
+```
+query MyQuery {
+  Solana {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Account: {Owner: {is: "61DR2QJRi47X4dzNPU626mJVWfMPKs5Rs5D7pHVjtXPt"}}}}
+      orderBy: {descendingByField: "BalanceUpdate_Balance_maximum"}
+    ) {
+      BalanceUpdate {
+        Balance: PostBalance(maximum: Block_Slot)
+        Currency {
+          Name
+          Symbol
+        }
+      }
+    }
+  }
+}
+```
+
 ## Get Latest Balance Updates
 
 The query will subscribe you to real-time updates for balance changes on the Solana blockchain, providing a continuous stream of data as new transactions are processed and recorded.
