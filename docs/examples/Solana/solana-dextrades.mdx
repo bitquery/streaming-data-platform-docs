@@ -872,44 +872,6 @@ The below query retrieves the USD price of a token on Solana by setting `MintAdd
 ```
 
 
-## Get the First 100 buyers of a Token
-
-The below query retrieves the first 100 buyers of a secified token.
-You can run the query [here](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1)
-
-```graphql
-query MyQuery {
-  Solana {
-    DEXTrades(
-      where: {
-        Trade: {
-          Buy: {
-            Currency: {
-              MintAddress: {
-                is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump"
-              }
-            }
-          }
-        }
-      }
-      limit: { count: 100 }
-      orderBy: { ascending: Block_Time }
-    ) {
-      Trade {
-        Buy {
-          Amount
-          Account {
-            Token {
-              Owner
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-
 ## Get the Token details like Update Authority, decimals, URI, is Mutable or not
 
 The below query retrieves the token details such as update authority for a particular token and also checks if a token's data is mutable or not. You can access the query [here](https://ide.bitquery.io/Solana-currency-details).

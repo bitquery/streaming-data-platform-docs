@@ -206,3 +206,41 @@ subscription {
 }
 
 ```
+
+## Get the First 100 buyers of a Token
+
+The below query retrieves the first 100 buyers of a secified token.
+You can run the query [here](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1)
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTrades(
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              MintAddress: {
+                is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump"
+              }
+            }
+          }
+        }
+      }
+      limit: { count: 100 }
+      orderBy: { ascending: Block_Time }
+    ) {
+      Trade {
+        Buy {
+          Amount
+          Account {
+            Token {
+              Owner
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
