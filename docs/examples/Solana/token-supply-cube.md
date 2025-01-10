@@ -188,6 +188,27 @@ query MyQuery {
 
 ```
 
+## Monitor Market Cap Metric for a Pump Fun Token
+
+The subscription given [below](https://ide.bitquery.io/pump-fun-token-mcap-monitoring) could be used to setup a [websocket](https://docs.bitquery.io/docs/subscriptions/websockets/) like solution that monitors market cap of a Pump Fun token in real time, where the `PostBalanceInUSD` is essentially the marketcap of the token.
+
+``` graphql
+
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {TokenSupplyUpdate: {Currency: {MintAddress: {is: "98mb39tPFKQJ4Bif8iVg9mYb9wsfPZgpgN1sxoVTpump"}}}}
+      limitBy: {by: TokenSupplyUpdate_Currency_MintAddress, count: 1}
+    ) {
+      TokenSupplyUpdate {
+        PostBalanceInUSD
+      }
+    }
+  }
+}
+
+```
+
 ## Top Solana Tokens By MarketCap
 
 [This](https://ide.bitquery.io/top-Solana-tokens-based-on-market-cap) query returns the top Solana tokens based on the latest MarketCap.
