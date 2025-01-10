@@ -248,3 +248,7 @@ Buy{
 ```
 
 The nested schema in v2 requires accessing fields through specific paths, e.g., `Trade.Buy.Currency.SmartContract`.
+
+## V1 vs V2 : Data Points
+
+![](/img/v1v2.png)
