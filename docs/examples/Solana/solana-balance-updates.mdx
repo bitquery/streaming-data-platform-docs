@@ -47,7 +47,7 @@ The below query retrieves the token addresses and their balances owned by a part
 query MyQuery {
   Solana {
     BalanceUpdates(
-      where: {BalanceUpdate: {Account: {Owner: {is: "61DR2QJRi47X4dzNPU626mJVWfMPKs5Rs5D7pHVjtXPt"}}}}
+      where: {BalanceUpdate: {Account: {Owner: {is: "AtTjQKXo1CYTa2MuxPARtr382ZyhPU5YX4wMMpvaa1oy"}}}}
       orderBy: {descendingByField: "BalanceUpdate_Balance_maximum"}
     ) {
       BalanceUpdate {
