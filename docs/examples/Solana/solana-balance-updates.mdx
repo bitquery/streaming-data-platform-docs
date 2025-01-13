@@ -47,7 +47,7 @@ The below query retrieves the token addresses and their balances owned by a part
 query MyQuery {
   Solana {
     BalanceUpdates(
-      where: {BalanceUpdate: {Account: {Owner: {is: "61DR2QJRi47X4dzNPU626mJVWfMPKs5Rs5D7pHVjtXPt"}}}}
+      where: {BalanceUpdate: {Account: {Owner: {is: "AtTjQKXo1CYTa2MuxPARtr382ZyhPU5YX4wMMpvaa1oy"}}}}
       orderBy: {descendingByField: "BalanceUpdate_Balance_maximum"}
     ) {
       BalanceUpdate {
@@ -65,56 +65,39 @@ query MyQuery {
 ## Get Latest Balance Updates
 
 The query will subscribe you to real-time updates for balance changes on the Solana blockchain, providing a continuous stream of data as new transactions are processed and recorded.
-You can find the query [here](https://ide.bitquery.io/Solana-Balance-Updates)
+You can find the query [here](https://ide.bitquery.io/active-address-balance-update)
 
 The balance update does not inherently include transaction fees. Therefore, to get the actual balance after all transactions and fees, you need to subtract the total transaction fees from the balance updates.
 
 ```
 subscription {
-  Solana {
-    InstructionBalanceUpdates(limit: {count: 10}) {
+  Solana(network: solana) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Account: {Address: {is: "DzYV9AFEbe9eGc8GRaNvsGjnt7coYiLDY7omCS1jykJU"}}}}
+    ) {
       Transaction {
-        Index
-        FeePayer
-        Fee
         Signature
-        Result {
-          Success
-          ErrorMessage
-        }
-      }
-      Instruction {
-        InternalSeqNumber
-        Index
-        CallPath
-        Program {
-          Address
-          Name
-          Parsed
-        }
-      }
-      Block {
-        Time
-        Hash
-        Height
       }
       BalanceUpdate {
+        Amount
+        Currency {
+          Name
+          MintAddress
+        }
+        PostBalance
+        PostBalanceInUSD
         Account {
           Address
         }
-        Amount
-        Currency {
-          Decimals
-          CollectionAddress
-          Name
-          Key
-          IsMutable
-          Symbol
-        }
+        Type
+      }
+      Block {
+        Slot
       }
     }
   }
 }
+
 
 ```
 
