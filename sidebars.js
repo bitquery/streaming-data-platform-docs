@@ -585,7 +585,7 @@ const sidebars = {
             "usecases/monitoring-solana-blockchain-real-time-tutorial",
             "usecases/monitoring-solana-at-scale-managing-hundreds-of-addresses",
             "usecases/streaming-moonshot-prices",
-            "usecases/how-to-filter-anomaly-prices"
+            "usecases/how-to-filter-anomaly-prices",
             "usecases/solana-ohlc-calculator",
             "usecases/real-time-historical-ethereum-price-excel-google-sheets",
             {
