@@ -633,6 +633,7 @@ const sidebars = {
             "usecases/base-sniper-bot",
             "usecases/solana-sniper-bot",
             "usecases/copy-trading-bot",
+            "usecases/how-to-filter-anomaly-prices",
             "usecases/automated-trading-ethereum-volume-surge-bot",
             "usecases/price-change-signal-bot",
             "usecases/add-liquidity-signal-bot",
