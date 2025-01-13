@@ -1,4 +1,4 @@
-# How to filter abnormal prices
+# How to Filter Abnormal Prices
 
 You might see abnormal prices when you fetch data from Bitquery APIs. There can be two possibilities as to why these abnormal prices associated with trades are appearing in your API response.
 
@@ -10,7 +10,9 @@ In the first case, we are going to see 3 different methods to filter anomaly tra
 
 3 ways to omit these types of anomaly trades:
 
-1. **PriceAsymmetry** - Price Asymmetry represents the difference in TradeAmount in USD of main currency and side currency. We want to include the optimal trades which have approximately the same Amounts in USD on both sides. We generally use priceAsymmetry: {lt: 0.1}
+## 1. Using PriceAsymmetry
+
+Price Asymmetry represents the difference in TradeAmount in USD of main currency and side currency. We want to include the optimal trades which have approximately the same Amounts in USD on both sides. We generally use priceAsymmetry: {lt: 0.1}
    as a filter in our APIs as this will filter out trades with more than 10% difference in their trade amounts.
    Also, filter out low AmountinUSD trades from this, say `{Trade: {AmountInUSD: {lt: "10"}}}`
 
@@ -37,8 +39,7 @@ subscription {
   }
 }
 ```
-
-**2. Quantile**
+## 2. Using Quantile
 
 Bitquery APIs have the quantile metric, that can be used to provide insights into gas consumption, transaction amounts, or any other measurable field.
 
@@ -100,7 +101,7 @@ query AllTimeHighTokenPriceQuery(
 }
 ```
 
-**3. Get all trades and filter on your end:**
+## 3. Get all trades and filter on your end
 Get all the trades from Bitquery API and then filter trades using your own custom logic so that you can remove the anomaly trades with abnormal prices.
 
 One such example we have shown [here](https://docs.bitquery.io/docs/usecases/solana-ohlc-calculator/) where custom logic is a very basic one, fetching quantile values of Trade USD Price with level: 0.05 and level: 0.95 and then only fetching trades between these 2 Trade Prices and thus removing extremes.
