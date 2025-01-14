@@ -35,6 +35,8 @@ You can get the marketcap of a pump fun token by this formulae `marketcap = 1000
 
 You can get the latest USD price of the desired token (here I have used this token `9qzvgUMrrL5Xyadk2gyWxCWgTds8crkwGwgfjeN5JYLS`) from the below query and multiply it with 1 Billion and you will get the latest marketcap of the specified token.
 
+Alternatively, you can use the `TokenSupplyUpdates` cube to find marketcap of Pump Fun Tokens, as shown [here](./token-supply-cube.md).
+
 ```graphql
 query MyQuery {
   Solana {
@@ -70,8 +72,6 @@ query MyQuery {
   }
 }
 ```
-
-Also, you can checkout the new alternative ways to find marketcap of Pump Fun Tokens [here](./token-supply-cube.md).
 
 ## Get Tokens with a specific MarketCap
 
