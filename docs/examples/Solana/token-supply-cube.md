@@ -90,7 +90,7 @@ This query will return the latest token supply of a specific token. We are getti
 
 ## Get newly created Pump Fun tokens and their Metadata
 
-Now you can track the newly created Pump Fun Tokens along with their metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/Get-newly-created-pump-fun-tokens-and-their-metadata#)
+Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
 
 ```
 subscription {
@@ -98,6 +98,12 @@ subscription {
     TokenSupplyUpdates(
       where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
     ) {
+      Block{
+        Time
+      }
+      Transaction{
+        Signer
+      }
       TokenSupplyUpdate {
         Amount
         Currency {
@@ -170,14 +176,19 @@ subscription {
 
 [This](https://ide.bitquery.io/market-cap-of-token_1) query returns latest marketcap of a particular token.
 
-``` graphql
-
+```graphql
 query MyQuery {
   Solana {
     TokenSupplyUpdates(
-      where: {TokenSupplyUpdate: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}}}
-      limit: {count: 1}
-      orderBy: {descending: Block_Time}
+      where: {
+        TokenSupplyUpdate: {
+          Currency: {
+            MintAddress: { is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui" }
+          }
+        }
+      }
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
     ) {
       TokenSupplyUpdate {
         PostBalanceInUSD
@@ -185,20 +196,24 @@ query MyQuery {
     }
   }
 }
-
 ```
 
 ## Monitor Market Cap Metric for a Pump Fun Token
 
 The subscription given [below](https://ide.bitquery.io/pump-fun-token-mcap-monitoring) could be used to setup a [websocket](https://docs.bitquery.io/docs/subscriptions/websockets/) like solution that monitors market cap of a Pump Fun token in real time, where the `PostBalanceInUSD` is essentially the marketcap of the token.
 
-``` graphql
-
+```graphql
 subscription {
   Solana {
     TokenSupplyUpdates(
-      where: {TokenSupplyUpdate: {Currency: {MintAddress: {is: "98mb39tPFKQJ4Bif8iVg9mYb9wsfPZgpgN1sxoVTpump"}}}}
-      limitBy: {by: TokenSupplyUpdate_Currency_MintAddress, count: 1}
+      where: {
+        TokenSupplyUpdate: {
+          Currency: {
+            MintAddress: { is: "98mb39tPFKQJ4Bif8iVg9mYb9wsfPZgpgN1sxoVTpump" }
+          }
+        }
+      }
+      limitBy: { by: TokenSupplyUpdate_Currency_MintAddress, count: 1 }
     ) {
       TokenSupplyUpdate {
         PostBalanceInUSD
@@ -206,20 +221,21 @@ subscription {
     }
   }
 }
-
 ```
 
 ## Top Solana Tokens By MarketCap
 
 [This](https://ide.bitquery.io/top-Solana-tokens-based-on-market-cap) query returns the top Solana tokens based on the latest MarketCap.
 
-``` graphql
-
+```graphql
 query MyQuery {
   Solana {
     TokenSupplyUpdates(
-      orderBy: {descending: Block_Time, descendingByField: "TokenSupplyUpdate_Marketcap"}
-      limitBy: {by: TokenSupplyUpdate_Currency_MintAddress, count: 1}
+      orderBy: {
+        descending: Block_Time
+        descendingByField: "TokenSupplyUpdate_Marketcap"
+      }
+      limitBy: { by: TokenSupplyUpdate_Currency_MintAddress, count: 1 }
     ) {
       TokenSupplyUpdate {
         Marketcap: PostBalanceInUSD
@@ -234,22 +250,25 @@ query MyQuery {
     }
   }
 }
-
 ```
 
 ## Top 100 Pump Fun Tokens By MarketCap
 
 [This](https://ide.bitquery.io/top-pump-fun-tokens-based-on-market-cap_1) query returns the top Solana tokens based on the latest MarketCap.
 
-``` graphql
-
+```graphql
 query MyQuery {
   Solana {
     TokenSupplyUpdates(
-      where: {TokenSupplyUpdate: {Currency: {MintAddress: {includes: "pump"}}}}
-      orderBy: {descending: Block_Time, descendingByField: "TokenSupplyUpdate_Marketcap"}
-      limitBy: {by: TokenSupplyUpdate_Currency_MintAddress, count: 1}
-      limit: {count: 100}
+      where: {
+        TokenSupplyUpdate: { Currency: { MintAddress: { includes: "pump" } } }
+      }
+      orderBy: {
+        descending: Block_Time
+        descendingByField: "TokenSupplyUpdate_Marketcap"
+      }
+      limitBy: { by: TokenSupplyUpdate_Currency_MintAddress, count: 1 }
+      limit: { count: 100 }
     ) {
       TokenSupplyUpdate {
         Marketcap: PostBalanceInUSD
@@ -265,21 +284,23 @@ query MyQuery {
     }
   }
 }
-
 ```
 
 ## Get Solana Tokens With a Specific MarketCap
 
 Lets say we need to get the tokens whose marketcap has crossed the `1M USD` mark but is less than `2M USD` for various reasons like automated trading. We can get the token details that have crossed a particular marketcap using [this](https://ide.bitquery.io/tokens-with-market-cap-range) query.
 
-``` graphql
-
+```graphql
 query MyQuery {
   Solana {
     TokenSupplyUpdates(
-      where: {TokenSupplyUpdate: {PostBalanceInUSD: {ge: "1000000", le: "2000000"}}}
-      orderBy: {descending: Block_Time}
-      limitBy: {by: TokenSupplyUpdate_Currency_MintAddress, count: 1}
+      where: {
+        TokenSupplyUpdate: {
+          PostBalanceInUSD: { ge: "1000000", le: "2000000" }
+        }
+      }
+      orderBy: { descending: Block_Time }
+      limitBy: { by: TokenSupplyUpdate_Currency_MintAddress, count: 1 }
     ) {
       TokenSupplyUpdate {
         Marketcap: PostBalanceInUSD
@@ -294,10 +315,9 @@ query MyQuery {
     }
   }
 }
-
 ```
 
-## Video Tutorial on Streaming and Getting Total Supply of a Solana Token 
+## Video Tutorial on Streaming and Getting Total Supply of a Solana Token
 
 <VideoPlayer url="https://youtu.be/U_fuHEow3fQ" />
 
