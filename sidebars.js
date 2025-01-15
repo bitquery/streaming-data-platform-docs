@@ -175,6 +175,7 @@ const sidebars = {
                 "subscriptions/google-bigquery/bigquery",
               ],
             },
+            "subscriptions/aws/s3_tutorial"
           ],
         },
         {

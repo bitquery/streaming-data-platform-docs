@@ -1,4 +1,4 @@
-# Using Bitquery Subscriptions to Load On-chain into S3
+# Using Bitquery Subscriptions to Load On-chain Data into S3
 
 In this tutorial we will use Bitquery Subscription queries to fetch latest Pumpfun information on Solana upload it to an S3 Bucket.
 
@@ -9,7 +9,7 @@ In this tutorial we will use Bitquery Subscription queries to fetch latest Pumpf
 Before diving into the tutorial, ensure you have:
 
 1. **AWS Account**: With access to an S3 bucket and all permissions configured for Write Access.
-2. **Bitquery Account**: For generating a token to access their WebSocket API. Follow [this link](https://docs.bitquery.io/docs/authorisation/how-to-generate/) for token generation.
+2. **Bitquery Account**: For generating a token to access the Streaming APIs. Follow [this link](https://docs.bitquery.io/docs/authorisation/how-to-generate/) for token generation.
 3. **Python Environment**: With required libraries installed.
 
 Install required libraries if not already done:
