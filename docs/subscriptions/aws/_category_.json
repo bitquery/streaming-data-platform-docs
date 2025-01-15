@@ -1,5 +1,5 @@
 {
-  "label": "Building a Data Pipeline with Google Pub-Sub",
+  "label": "Building a Data Pipeline and Storing in AWS S3",
   "position": 4,
   "link": {
     "type": "generated-index",
