@@ -81,7 +81,7 @@ topic = 'tron.broadcasted.transactions'
 
 ### Message Processing
 
-A function `process_message` is used to handle each incoming message. It first attempts to decompress the message using LZ4, falling back to plain text if decompression fails.
+A function `process_message` is used to handle each incoming message. It first attempts to decompress the message.
 
 ```python
 import lz4.frame
@@ -92,12 +92,10 @@ def process_message(message):
         decompressed_value = None
 
         try:
-            # Attempt to decompress LZ4 frame
+            # Attempt to decompress frame
             decompressed_value = buffer.decode('utf-8')
         except Exception as err:
             print(f'Decompression failed: {err}')
-            # Fallback to original UTF-8 value
-            decompressed_value = buffer.decode('utf-8')
 
         # Log message data
         log_entry = {
