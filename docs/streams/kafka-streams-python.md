@@ -93,9 +93,9 @@ def process_message(message):
 
         try:
             # Attempt to decompress LZ4 frame
-            decompressed_value = lz4.frame.decompress(buffer).decode('utf-8')
+            decompressed_value = buffer.decode('utf-8')
         except Exception as err:
-            print(f'LZ4 frame decompression failed: {err}')
+            print(f'Decompression failed: {err}')
             # Fallback to original UTF-8 value
             decompressed_value = buffer.decode('utf-8')
 
