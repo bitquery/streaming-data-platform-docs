@@ -212,6 +212,33 @@ query LatestTrades($token: String, $base: String) {
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_latest_trades).
 
+## Calculate Price Surge of a Token
+
+While the V2 API does not support expressions yet you can get the price data between two timestamps and compute the price surge in your system.
+
+Below query gets the price of a token at the starting and ending of a period ( open and close).
+You can run the query [here](https://ide.bitquery.io/Price-change-of-a-token-in-time-period-on-Solana)
+
+```
+query MyQuery {
+  Solana(dataset: realtime) {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {MintAddress: {is: "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Block: {Time: {since: "2025-01-21T04:00:00Z", till: "2025-01-21T08:00:00Z"}}}
+    ) {
+      Trade {
+        Dex {
+          ProtocolName
+        }
+        open: Price(minimum: Block_Time)
+        close: Price(maximum: Block_Time)
+      }
+    }
+  }
+}
+
+
+```
+
 ## Get Trade Summary of a Trade
 
 A lot of times a trade is implemented using multiple swaps. The summary of these trades are the token originally sold and the token finally purchased.
@@ -323,49 +350,7 @@ given by the `sell currency` for the lowest Trade Index and the `buy currency` f
           "Signature": "43aymSmr2op2aEnCiMfzkqqfpWwSofWk8EBcUWhKEUsHRrZV4KpTGW4iuxLxJyS1HKoLS7gTamzuqKiwi3e3z4Li"
         }
       },
-      {
-        "Block": {
-          "Time": "2024-11-12T05:56:55Z"
-        },
-        "Trade": {
-          "Buy": {
-            "Account": {
-              "Address": "6zAcFYmxkaH25qWZW5ek4dk4SyQNpSza3ydSoUxjTudD",
-              "Owner": "4xDsmeTWPNjgSVSS1VTfzFq3iHZhp77ffPkAmkZkdu71"
-            },
-            "Amount": "0.001015898",
-            "Currency": {
-              "Decimals": 9,
-              "MintAddress": "So11111111111111111111111111111111111111112",
-              "Name": "Wrapped Solana",
-              "Symbol": "WSOL"
-            },
-            "PriceInUSD": 210.759146972229
-          },
-          "Dex": {
-            "ProgramAddress": "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo",
-            "ProtocolFamily": "Meteora",
-            "ProtocolName": "lb_clmm"
-          },
-          "Index": 1,
-          "Sell": {
-            "Amount": "7599.73089",
-            "Currency": {
-              "Decimals": 5,
-              "MintAddress": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
-              "Name": "Bonk",
-              "Symbol": "Bonk"
-            },
-            "Price": 1.336755228184139e-7
-          }
-        },
-        "Transaction": {
-          "Result": {
-            "Success": true
-          },
-          "Signature": "43aymSmr2op2aEnCiMfzkqqfpWwSofWk8EBcUWhKEUsHRrZV4KpTGW4iuxLxJyS1HKoLS7gTamzuqKiwi3e3z4Li"
-        }
-      }
+
 ```
 
 ## Get the historical Created pairs on any Solana DEX
@@ -550,8 +535,6 @@ query TrendingTokens {
 You can also checkout how such queries are used as a base to completed features such as [DEXrabbit Solana Trends](https://dexrabbit.com/solana/token) as shown in the image below.
 
 ![Trending Pairs on DEXrabbit](../../../static/img/dexrabbit/trending_tokens_solana.png)
-
-
 
 ## Get DEX Markets for a Token
 
@@ -833,8 +816,6 @@ query MyQuery {
 
 ```
 
-
-
 ## Latest USD Price of a Token
 
 The below query retrieves the USD price of a token on Solana by setting `MintAddress: {is: "J5FAZ6bV7CCGHcU4CTXWVG6nnKHcwD9Pn4DntY93pump"}` and `Side: {Currency: {MintAddress: {is: "11111111111111111111111111111111"}}}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-Latest-Price-of-SOL-in--USD-Real-time#).
@@ -870,7 +851,6 @@ The below query retrieves the USD price of a token on Solana by setting `MintAdd
 }
 
 ```
-
 
 ## Get the Token details like Update Authority, decimals, URI, is Mutable or not
 
