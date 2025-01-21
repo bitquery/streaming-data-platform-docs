@@ -176,13 +176,13 @@ In this query we use the 99th percentile (`level: 0.99`) to find the highest pri
 We also use `PriceAsymmetry` and `AmountInUSD` in combination to filter outliers as much as possible.
 
 Read more about quantiles [here](https://docs.bitquery.io/docs/graphql/metrics/quantile/)
-You can run the query [here](https://ide.bitquery.io/ATH-using-quantile-on-Solana)
+You can run the query [here](https://ide.bitquery.io/ATH-of-token-using-quantile-on-Solana)
 
 ```
 {
   Solana(dataset: archive) {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "CboMcTUYUcy9E6B3yGdFn6aEsGUnYV6yWeoeukw6pump"}}, PriceAsymmetry: {lt: 0.01}, AmountInUSD: {gt: "10"}}}
+      where: {Trade: {Currency: {MintAddress: {is: "9dzSzFvPsKDoY2gdWErsuz2H1o4tbzvgBhrNZ9cvkD2j"}}, PriceAsymmetry: {lt: 0.01}, AmountInUSD: {gt: "10"}}}
       limit: {count: 1}
       orderBy: {descendingByField: "aATH"}
     ) {
