@@ -84,17 +84,23 @@ query MyQuery {
 ```
 
 ## Tokens Traded by an Account
-[This](https://ide.bitquery.io/tokens-traded-by-an-address) query returns the list of tokens traded by the wallet address over a period 
-of time. The list is sorted by the amount of tokens traded, and returns token info such as mint address, name and symbol along with the 
+
+[This](https://ide.bitquery.io/tokens-traded-by-an-address) query returns the list of tokens traded by the wallet address over a period
+of time. The list is sorted by the amount of tokens traded, and returns token info such as mint address, name and symbol along with the
 total amount of tokens traded and the number of trades involving that token.
 
-``` graphql
-
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "tokens"}
-      where: {Trade: {Account: {Owner: {is: "3CgvbiM3op4vjrrjH2zcrQUwsqh5veNVRjFCB9N6sRoD"}}}}
+      orderBy: { descendingByField: "tokens" }
+      where: {
+        Trade: {
+          Account: {
+            Owner: { is: "3CgvbiM3op4vjrrjH2zcrQUwsqh5veNVRjFCB9N6sRoD" }
+          }
+        }
+      }
     ) {
       Trade {
         Currency {
@@ -108,7 +114,6 @@ query MyQuery {
     }
   }
 }
-
 ```
 
 ## Change in Liquidity Over a Month
@@ -160,6 +165,28 @@ query MyQuery {
           MarketAddress
         }
       }
+    }
+  }
+}
+```
+
+## Get ATH (All-Time High of a Token)
+
+In this query we use the 99th percentile (`level: 0.99`) to find the highest price of a token.
+We also use `PriceAsymmetry` and `AmountInUSD` in combination to filter outliers as much as possible.
+
+Read more about quantiles [here](https://docs.bitquery.io/docs/graphql/metrics/quantile/)
+You can run the query [here](https://ide.bitquery.io/ATH-using-quantile-on-Solana)
+
+```
+{
+  Solana(dataset: archive) {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {MintAddress: {is: "CboMcTUYUcy9E6B3yGdFn6aEsGUnYV6yWeoeukw6pump"}}, PriceAsymmetry: {lt: 0.01}, AmountInUSD: {gt: "10"}}}
+      limit: {count: 1}
+      orderBy: {descendingByField: "aATH"}
+    ) {
+      aATH: quantile(of: Trade_PriceInUSD, level: 0.99)
     }
   }
 }
