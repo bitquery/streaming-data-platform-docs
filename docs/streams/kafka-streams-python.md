@@ -32,11 +32,10 @@ Ensure that you have the following components in place before running the code:
 The script relies on several dependencies, which must be installed using pip:
 
 ```bash
-pip install confluent_kafka lz4
+pip install confluent_kafka
 ```
 
 - **confluent_kafka**: A Python client for Apache Kafka.
-- **lz4**: A Python library for LZ4 compression, used to decompress messages.
 - **ssl** and **pathlib**: Standard Python libraries for SSL certificates and file path handling.
 
 ### Kafka Client Initialization
@@ -81,10 +80,9 @@ topic = 'tron.broadcasted.transactions'
 
 ### Message Processing
 
-A function `process_message` is used to handle each incoming message. It first attempts to decompress the message using LZ4, falling back to plain text if decompression fails.
+A function `process_message` is used to handle each incoming message. It first attempts to decompress the message.
 
 ```python
-import lz4.frame
 
 def process_message(message):
     try:
@@ -92,12 +90,10 @@ def process_message(message):
         decompressed_value = None
 
         try:
-            # Attempt to decompress LZ4 frame
-            decompressed_value = lz4.frame.decompress(buffer).decode('utf-8')
-        except Exception as err:
-            print(f'LZ4 frame decompression failed: {err}')
-            # Fallback to original UTF-8 value
+            # Attempt to decompress frame
             decompressed_value = buffer.decode('utf-8')
+        except Exception as err:
+            print(f'Decompression failed: {err}')
 
         # Log message data
         log_entry = {
@@ -111,7 +107,7 @@ def process_message(message):
         print(f'Error processing message: {err}')
 ```
 
-- **Decompression**: The message is decompressed using LZ4, or it falls back to standard UTF-8 decoding.
+- **Decompression**: The message is decompressed using UTF-8 decoding.
 - **Logging**: The partition, offset, and message content are printed to the console.
 
 ### Subscribing and Polling

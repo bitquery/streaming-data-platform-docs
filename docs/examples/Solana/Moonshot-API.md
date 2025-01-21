@@ -129,37 +129,6 @@ subscription {
 
 ## Track New Token Creation on Moonshot
 
-Get notified about the newly created token and its information on Moonshot DEX for getting early bird benefits.
-
-### Get Moonshot Program Methods
-
-To run our desired query we need Method Name which is called to mint a new token on Moonshot. To get these parameters, we can run
-the [following query](https://ide.bitquery.io/Get-Moonshot-program-methods).
-
-```graphql
-query MyQuery {
-  Solana {
-    Instructions(
-      where: {
-        Instruction: {
-          Program: {
-            Address: { is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG" }
-          }
-        }
-      }
-    ) {
-      Instruction {
-        Program {
-          Method
-          Address
-        }
-      }
-      count
-    }
-  }
-}
-```
-
 [Here](https://ide.bitquery.io/Track-new-token-launches-on-Moonshot-in-realtime) is the subscription to get the notification of new token creation event on Moonshot. Newly Minted Token Address will be 4th address in the Accounts array. You can also see the Name, Symbol, Supply and URI of the newly minted token in the arguments.
 
 ```graphql
@@ -230,6 +199,74 @@ subscription {
     }
   }
 }
+```
+
+## Track New Token Creation on Multiple Platforms : Moonshot and Pumpfun
+
+In this query we use the program addresses of Moonshot and Pumpfun and creation methods to track token creation in realtime. We use the `in` filter to pass multiple addresses.
+You can run the query [here](https://ide.bitquery.io/new-token-launches-on-Pump-Fun--Moonshot-in-realtime)
+
+```
+subscription{
+  Solana(network: solana) {
+    Instructions(
+      where: {Instruction: {Program: {Method: {in: ["tokenMint", "create"]}, Address: {in: ["6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P", "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG"]}}}}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+          }
+          Method
+          Name
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+
 ```
 
 ## Get the Creator of a Moonshot Token

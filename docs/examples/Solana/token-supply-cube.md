@@ -174,6 +174,7 @@ subscription {
 
 ## Marketcap of a Token
 
+We use `PostBalanceInUSD` field to get the marketcap. Since it is built on real-time data, you will get the Marketcap if the token was active in the past 8 hours or is being transacted in real-time.
 [This](https://ide.bitquery.io/market-cap-of-token_1) query returns latest marketcap of a particular token.
 
 ```graphql
