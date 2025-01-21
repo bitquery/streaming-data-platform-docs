@@ -1,5 +1,7 @@
 # DEXTrades Cube
 
+import VideoPlayer from "../../src/components/videoplayer.js";
+
 The DEXTrades cube provides comprehensive information about the dex trading data, such as buyer, seller, token prices, pairs, transactions, etc.
 
 > Import Note: If there is a trade between 2 addresses, then one of them must be a pool, and the information displayed in the DEXTrades cube is from the pool's perspective.
@@ -75,7 +77,6 @@ When we run the DEXTrades API, DEXTrades results appear with buy-side and sell-s
 }
 
 ```
-
 
 The buy side contains the pool address `0x92560c178ce069cc014138ed3c2f5221ba71f58a` and currency bought by it.
 
@@ -289,7 +290,8 @@ We use the Trade Dex OwnerAddress filter to specify the “Dex address” and un
 
 Bitquery calculates the token price using a simple formula:
 
-**Price = amount1 / amount2**
+**UsdPrice of token 1 = amount2 in USD / amount1**
+**UsdPrice of token 2 = amount1 in USD / amount2**
 
 If either of these amounts is missing, the price cannot be determined. To better understand token prices, one must first examine the trade amounts involved.
 
@@ -307,3 +309,6 @@ In this example, the second calculation (WETH Price) may not be accurate because
 
 In this case, both values make sense, as both **WETH** and **USDT** can be valued in USD directly.
 
+## Video Tutorial | Why PriceInUSD is 0 in Bitquery API response?
+
+<VideoPlayer url="https://www.youtube.com/watch?v=Jh-Z7jBAbXQ" />
