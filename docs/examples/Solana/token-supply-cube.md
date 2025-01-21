@@ -88,7 +88,7 @@ This query will return the latest token supply of a specific token. We are getti
 
 ```
 
-## Get newly created Pump Fun tokens and their Metadata
+## Get newly created Pump Fun tokens, Creation Time, Dev Address, Metadata
 
 Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
 
@@ -325,3 +325,7 @@ query MyQuery {
 ## Video Tutorial on Getting New Pump Fun Token Metadata
 
 <VideoPlayer url="https://youtu.be/GmJOEWxhlVM" />
+
+## Video Tutorial | How to get Newly Created Pump Fun Tokens, Dev Address, Creation Time, Metadata
+
+<VideoPlayer url="https://www.youtube.com/watch?v=tRAHHCqQDVA" />
