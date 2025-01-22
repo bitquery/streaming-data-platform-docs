@@ -92,7 +92,7 @@ Here is a [query](https://ide.bitquery.io/pumpfun-tokens-which-crossed-10k-marke
         Currency: {MintAddress: {notIn: ["11111111111111111111111111111111"]}}},
         Sell: {AmountInUSD: {gt: "10"}}, Dex: {ProtocolName: {is: "pump"}}}, Transaction: {Result: {Success: true}}}
     ) {
-     
+
       Trade {
         Buy {
           Currency {
@@ -119,7 +119,7 @@ Here is a [query](https://ide.bitquery.io/pumpfun-tokens-which-crossed-10k-marke
           }
         }
       }
-  
+
     }
   }
 }
@@ -184,6 +184,51 @@ subscription MyQuery {
     }
   }
 }
+```
+
+## Get newly created Pump Fun tokens, Creation Time, Dev Address, Metadata
+
+Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+
+```
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
+    ) {
+      Block{
+        Time
+      }
+      Transaction{
+        Signer
+      }
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Symbol
+          ProgramAddress
+          PrimarySaleHappened
+          Native
+          Name
+          MintAddress
+          MetadataAddress
+          Key
+          IsMutable
+          Fungible
+          EditionNonce
+          Decimals
+          Wrapped
+          VerifiedCollection
+          Uri
+          UpdateAuthority
+          TokenStandard
+        }
+        PostBalance
+      }
+    }
+  }
+}
+
 ```
 
 ## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token
@@ -291,24 +336,37 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
 
 ## Get Market Cap. Liquidity and Trade Volume for any Pump Fun Token
 
-[This](https://ide.bitquery.io/mcap-liquidity-volume-of-a-token-in-time-frame) query returns important trade metrics like marketcap, 
-liquidity and trade volume of a Pump Fun token for a time frame of one hour. This implies the results returns marketcap and liquidity 
-`1 hour` ago along with the traded volume in the last one hour. The volume and liquidity are returned against a token which is `USDC` 
+[This](https://ide.bitquery.io/mcap-liquidity-volume-of-a-token-in-time-frame) query returns important trade metrics like marketcap,
+liquidity and trade volume of a Pump Fun token for a time frame of one hour. This implies the results returns marketcap and liquidity
+`1 hour` ago along with the traded volume in the last one hour. The volume and liquidity are returned against a token which is `USDC`
 in this case.
 
-``` graphql
-
+```graphql
 query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
   Solana {
     volume: DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: $token}}, Side: {Currency: {MintAddress: {is: $side}}}}, Block: {Time: {since: $time_1h_ago}}}
+      where: {
+        Trade: {
+          Currency: { MintAddress: { is: $token } }
+          Side: { Currency: { MintAddress: { is: $side } } }
+        }
+        Block: { Time: { since: $time_1h_ago } }
+      }
     ) {
       sum(of: Trade_Side_AmountInUSD)
     }
     liquidity: DEXPools(
-      where: {Pool: {Market: {BaseCurrency: {MintAddress: {is: $token}}, QuoteCurrency: {MintAddress: {is: $side}}}}, Block: {Time: {till: $time_1h_ago}}}
-      limit: {count: 1}
-      orderBy: {descending: Block_Time}
+      where: {
+        Pool: {
+          Market: {
+            BaseCurrency: { MintAddress: { is: $token } }
+            QuoteCurrency: { MintAddress: { is: $side } }
+          }
+        }
+        Block: { Time: { till: $time_1h_ago } }
+      }
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
     ) {
       Pool {
         Base {
@@ -317,9 +375,12 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
       }
     }
     marketcap: TokenSupplyUpdates(
-      where: {TokenSupplyUpdate: {Currency: {MintAddress: {is: $token}}}, Block: {Time: {till: $time_1h_ago}}}
-      limitBy: {by: TokenSupplyUpdate_Currency_MintAddress, count: 1}
-      orderBy: {descending: Block_Time}
+      where: {
+        TokenSupplyUpdate: { Currency: { MintAddress: { is: $token } } }
+        Block: { Time: { till: $time_1h_ago } }
+      }
+      limitBy: { by: TokenSupplyUpdate_Currency_MintAddress, count: 1 }
+      orderBy: { descending: Block_Time }
     ) {
       TokenSupplyUpdate {
         PostBalanceInUSD
@@ -332,7 +393,6 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
     }
   }
 }
-
 ```
 
 These are the variables used for running this query.
@@ -1161,3 +1221,7 @@ You can also run this query [using this link](https://ide.bitquery.io/pump-fun-t
 ## Video Tutorial | How to get Top Token Creators on Pump Fun
 
 <VideoPlayer url="https://www.youtube.com/watch?v=J79xJyMCRXM" />
+
+## Video Tutorial | How to get Newly Created Pump Fun Tokens, Dev Address, Creation Time, Metadata
+
+<VideoPlayer url="https://www.youtube.com/watch?v=tRAHHCqQDVA" />
