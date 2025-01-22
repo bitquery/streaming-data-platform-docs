@@ -10,7 +10,7 @@ The Components are the heavy-lifters of the app and contain the code snippets fo
 The code for the Home component includes the following:
 
 -   Imports of necessary modules such as React, useState, useEffect, Container, Row, Col, Card, and Button from the React Bootstrap library, as well as axios for API requests.
--   Declaration of the API_KEY constant to store the Bitquery API key.
+-   Declaration of the oauth_token constant to store the Bitquery API key.
 -   The Home function that renders the homepage of the application.
 -   The useState hook is used to declare two states, balances and loading. The balances state is initialized as an empty array, and the loading state is initialized as true.
 -   The fetchdata function is declared, which is an asynchronous function that sends a GraphQL query request to the Bitquery API to get data related to NFT balances. If the API request is successful, the balances state is updated with the response data. If there is an error, the loading state is set to false.
@@ -44,13 +44,13 @@ This imports the following components and libraries:
 -   "Card" and "Button" from the "react-bootstrap" library
 -   "axios" library
 
-3.  Set API key:
+3.  Set API OAuth Token:
 
 
 
-`const API_KEY = 'YOUR KEY'` 
+`const oauth_token = 'YOUR KEY'` 
 
-This sets a constant variable "API_KEY" to the Bitquery API key.
+This sets a constant variable "oauth_token" to the Bitquery API OAuth Token.
 
 4.  Define function to fetch data from API:
 
@@ -147,7 +147,7 @@ import Button from "react-bootstrap/Button";
 
 import axios from "axios";
 
-const API_KEY = "YOUR KEY";
+const oauth_token = "YOUR KEY";
 
 function Home() {
   const [balances, setBalances] = useState([]);
@@ -175,7 +175,7 @@ function Home() {
         headers: {
           "Content-Type": "application/json",
 
-          "X-API-KEY": API_KEY,
+          "X-API-KEY": oauth_token,
         },
 
         data: data,

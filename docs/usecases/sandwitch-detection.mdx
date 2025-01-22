@@ -83,7 +83,7 @@ require_once 'HTTP/Request2.php';
 
 ### Establishing Connection with the Bitquery API
 Next, the code connects to the Bitquery API using the HTTP_Request2 library and retrieves data on the latest sandwitch opportunities across all EVM chains (in support) using a GraphQL query. 
-The query is passed as a JSON payload to the request() method, along with the necessary headers and API key.
+The query is passed as a JSON payload to the request() method, along with the necessary headers and oAuth Token.
 
 ```php
 $request = new HTTP_Request2();
@@ -96,7 +96,7 @@ $request->setConfig(array(
 $request->setHeader(array(
    'Content-Type' => 'application/json',
    'X-API-KEY' => 'BQYVRzw02D5V2rWpWFii1pEbgLWCdx1y',
-   'Authorization' => 'Your Bitquery API KEY'
+   'Authorization' => 'Your Bitquery oAuth Token'
 ));
 
 $request->setBody('{"query":"subscription {\\n  EVM(mempool: true) {\\n    DEXTrades(where: {Trade: {Buy: {AmountInUSD: {gt: \\"1000\\"}}}}) {\\n      Trade {\\n        Buy {\\n          AmountInUSD\\n          Buyer\\n          Currency {\\n            Name\\n            Symbol\\n            SmartContract\\n          }\\n        }\\n        Dex {\\n          OwnerAddress\\n          SmartContract\\n          ProtocolFamily\\n        }\\n        Sell {\\n          AmountInUSD\\n          Currency {\\n            Name\\n            Symbol\\n            SmartContract\\n          }\\n        }\\n      }\\n      Block {\\n        Time\\n      }\\n    }\\n  }\\n}\\n","variables":"{}"}');

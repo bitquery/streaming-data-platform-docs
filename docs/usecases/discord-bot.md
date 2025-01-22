@@ -12,7 +12,7 @@ Before we begin, make sure you have the following:
 
 -   Node.js installed on your machine
 -   A Discord account
--   A Bitquery API key (you can sign up for a free API key at [Bitquery](https://ide.bitquery.io/))
+-   A Bitquery API Token (you can sign up for a free API token at [Bitquery](https://ide.bitquery.io/))
 
 
 #### Setting up the Bot
@@ -76,7 +76,7 @@ const client = new Client({
 
 -   The `intents` property specifies which events the bot will listen to. In this case, we are listening for guild and message related events.
 
-### Step 4: Adding Bot Token and API Key
+### Step 4: Adding Bot Token and API OAuth Token
 
 Retrieve your Discord bot token and Bitquery OAuth token. Replace the placeholders in the following code with your actual tokens:
 
