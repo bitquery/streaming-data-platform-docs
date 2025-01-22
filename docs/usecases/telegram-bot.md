@@ -21,7 +21,7 @@ Replace `'tokenn'` with your actual bot token.
 
     BOT_TOKEN = 'YOUR_BOT_TOKEN'
 
-You also need to get your API key from Bitquery, you can get it for free by creating an account [here](https://account.bitquery.io/user/account)
+You also need to get your API OAuth Token from Bitquery, you can get it for free by creating an account [here](https://account.bitquery.io/user/account)
 
 **Step 3: Define a Function to Send Messages** A function named `send_message` is defined. It takes an `update` object and a `message` string as arguments and sends the message to the Telegram chat.
 
@@ -48,9 +48,6 @@ Two functions, `split_text` and `send_long_message`, are defined to handle long 
 
 The `my_component` function is an asynchronous function that handles the WebSocket connection to Bitquery. You can read more about how to use it [here](https://docs.bitquery.io/docs/start/websocket/)
 The below code sends a GraphQL subscription query that listens to server for latest transfers on the Ethereum chain, i.e. it subscribes to the `EVM.Transfers` event.
-Put your API key from Bitquery in
-
-`"X-API-KEY": "keyy"`
 
 ```python
 

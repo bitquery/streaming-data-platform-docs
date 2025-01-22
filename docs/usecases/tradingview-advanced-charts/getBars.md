@@ -16,7 +16,7 @@ import * as Bitquery from "./components/callBitquery";
 
 ```
 
-This section imports Axios for making HTTP requests and imports or requires the Bitquery module or file. It also sets the Bitquery API key as a constant. Remember to replace `"your key"` with the actual API key for Bitquery.
+This section imports Axios for making HTTP requests and imports or requires the Bitquery module or file. It also sets the Bitquery API Token as a constant. Remember to replace `"your key"` with the actual oAuth token for Bitquery.
 
 #### 2. Definition of `getBars` Function
 

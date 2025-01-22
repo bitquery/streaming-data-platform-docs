@@ -669,8 +669,6 @@ You can run the query [here](https://ide.bitquery.io/Price-of-a-pump-fun-token_1
 subscription MyQuery {
   Solana {
     DEXTradeByTokens(
-      orderBy: { descending: Block_Time }
-      limit: { count: 10 }
       where: {
         Trade: {
           Dex: {

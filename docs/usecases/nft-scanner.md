@@ -2,7 +2,6 @@
 
 In this guide, we will use Bitquery Streaming API for scanning NFTs (Non-Fungible Tokens) across various blockchains for the given address. We'll explore how to build an NFT scanner that works with a specific wallet address using Python.
 
-Additionally, we will delve into using the Bitquery Explorer and IDE for broadening your knowledge of blockchain exploration. To get started for free, please create an account on [Bitquery IDE](https://ide.bitquery.io/) with your email to get your API key and access to the bit query IDE.
 
 ## Why Bitquery for NFT Scanning?
 
