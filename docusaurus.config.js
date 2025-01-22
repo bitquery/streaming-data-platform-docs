@@ -35,6 +35,22 @@ const config = {
     locales: ["en"],
   },
 
+  scripts: [
+    {
+      src: "https://widget.kapa.ai/kapa-widget.bundle.js",
+      "data-website-id": "09a87c07-c1f9-4831-9349-7087e535dc3e",
+      "data-project-name": "Bitquery",
+      "data-project-color": "#2E8555",
+      "data-project-logo":
+        "https://explorer.bitquery.io/assets/bitqueryLogoicon-538ee00cce4394fd0477e388630363c66374a0f2f6f2d53a1750bd3201307905.png",
+      "data-modal-disclaimer":
+        "This is a custom LLM for BitQuery with access to [All V2 documentation](https://docs.bitquery.io/).",
+      "data-modal-example-questions":
+        "How to query using GraphQL?, What is BitQuery Explorer?, How to access blockchain data?, What APIs does BitQuery offer?",
+      async: true,
+    },
+  ],
+
   plugins: [
     // [
     //   "@graphql-markdown/docusaurus",
@@ -110,8 +126,8 @@ const config = {
             from: "/docs/usecases/nft_Analytics/",
           },
           {
-            to:"/docs/usecases/tradingview-advanced-charts/getting-started/",
-            from:"/docs/category/tradingview-advanced-charts/"
+            to: "/docs/usecases/tradingview-advanced-charts/getting-started/",
+            from: "/docs/category/tradingview-advanced-charts/",
           },
           {
             to: "/docs/usecases/crypto-dashboard/",
@@ -126,8 +142,8 @@ const config = {
             from: "/docs/ide/authorisation/",
           },
           {
-            to:"/docs/authorisation/how-to-generate",
-            from:"/docs/category/authorization/"
+            to: "/docs/authorisation/how-to-generate",
+            from: "/docs/category/authorization/",
           },
 
           {
@@ -182,18 +198,15 @@ const config = {
           {
             to: "/docs/schema/schema-intro/",
             from: "/docs/evm/",
-
           },
           {
-            to:"/docs/category/how-to-guides/",
-            from:"/docs/category/use-cases/"
-
+            to: "/docs/category/how-to-guides/",
+            from: "/docs/category/use-cases/",
           },
           {
-            to:"/docs/examples/nft/nft-api/",
-            from:"/docs/category/nft/"
-          }
-
+            to: "/docs/examples/nft/nft-api/",
+            from: "/docs/category/nft/",
+          },
         ],
       },
     ],
@@ -236,12 +249,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-
       // metadata: [
       //   {
       //     name: 'baidu-site-verification',
       //     content: 'codeva-3D7wc6GZVP' // Replace with your actual content value
-      //   }, 
+      //   },
       //   // ... other meta tags ...
       // ],
       // Replace with your project's social card
