@@ -21,7 +21,7 @@ Replace `'tokenn'` with your actual bot token.
 
     BOT_TOKEN = 'YOUR_BOT_TOKEN'
 
-You also need to get your API key from Bitquery, you can get it for free by creating an account [here](https://account.bitquery.io/user/account)
+You also need to get your API OAuth Token from Bitquery, you can get it for free by creating an account [here](https://account.bitquery.io/user/account)
 
 **Step 3: Define a Function to Send Messages** A function named `send_message` is defined. It takes an `update` object and a `message` string as arguments and sends the message to the Telegram chat.
 
