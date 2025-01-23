@@ -1017,27 +1017,39 @@ Check data here on [DEXrabbit](https://dexrabbit.com/solana/pumpfun/FbhypAF9LL93
 
 ## All tokens created by an address
 
-To get all pump fun tokens created by address use [this query](https://ide.bitquery.io/pump-fun-tokens-created-by-specific-address).
+To get all pump fun tokens created by address use [this query](https://ide.bitquery.io/all-Pump-fun-tokens-created-by-an-address).
 
 ```
 query MyQuery {
-  Solana(network: solana) {
-    Instructions(
-      where: {Transaction: {Signer: {is: "DEQV8Lc2JcLpuzETfsCfAozqwjPVVGoXbJk2e32jZy6p"}},
-        Instruction: {Program: {Name: {is: "pump"}, Method: {is: "create"}}}}
+  Solana {
+    TokenSupplyUpdates(
+      where: {Transaction: {Result: {Success: true}, Signer: {is: "8uydUdb3DiQijXPDfzwuJCNiqfFQzCzinFDXRFHQQgCB"}}, Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
     ) {
-      Transaction {
-        Signer
-        Signature
+      Block {
+        Time
       }
-      Instruction {
-        Accounts {
-          Address
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Uri
+          UpdateAuthority
+          Symbol
+          Name
+          MintAddress
+          MetadataAddress
+          Fungible
+          Decimals
         }
+        PostBalance
+      }
+      Transaction {
+        Signature
+        Signer
       }
     }
   }
 }
+
 ```
 
 ## Pump Fun Token first and last price
@@ -1225,3 +1237,7 @@ You can also run this query [using this link](https://ide.bitquery.io/pump-fun-t
 ## Video Tutorial | How to get Newly Created Pump Fun Tokens, Dev Address, Creation Time, Metadata
 
 <VideoPlayer url="https://www.youtube.com/watch?v=tRAHHCqQDVA" />
+
+## Video Tutorial | How to get all Pump Fun Tokens created by a Dev
+
+<VideoPlayer url="https://youtu.be/4YaJw7MExjw" />
