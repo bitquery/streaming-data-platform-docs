@@ -287,11 +287,11 @@ const config = {
             label: "Get your free API key",
             position: "right",
           },
-          {
-            to: "https://chatgpt.com/g/g-DJ8174VfH-bitquery-query-creator",
-            label: "Query GPT 🌐",
-            position: "left",
-          },
+          // {
+          //   to: "https://chatgpt.com/g/g-DJ8174VfH-bitquery-query-creator",
+          //   label: "Query GPT 🌐",
+          //   position: "left",
+          // },
           {
             to: "https://dexrabbit.com/",
             label: "DEX Data Showcase",
