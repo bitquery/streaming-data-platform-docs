@@ -170,7 +170,7 @@ query MyQuery {
 }
 ```
 
-## Get ATH (All-Time High of a Token)
+## Get ATH (All-Time High) of a Token
 
 In this query we use the 99th percentile (`level: 0.99`) to find the highest price of a token.
 We also use `PriceAsymmetry` and `AmountInUSD` in combination to filter outliers as much as possible.
@@ -190,6 +190,32 @@ You can run the query [here](https://ide.bitquery.io/ATH-of-token-using-quantile
     }
   }
 }
+```
+
+## Get ATH of Multiple Tokens
+
+You can run it [here](https://ide.bitquery.io/ATH-of-multiple-tokens-using-quantile-on-Solana)
+
+```
+{
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {MintAddress: {in: ["8SVVCGzYwnAkDwwvc5fSHZdCenUyhPccnGirWecVpump", "FeR8VBqNRSUD5NtXAj2n3j1dAHkZHfyDktKuLXD4pump"]}}, PriceAsymmetry: {lt: 0.01}, AmountInUSD: {gt: "10"}}}
+      limit: {count: 2}
+      orderBy: {descendingByField: "aATH"}
+      limitBy: {by: Trade_Currency_MintAddress, count: 1}
+    ) {
+      Trade {
+        Currency {
+          Name
+        }
+      }
+      aATH: quantile(of: Trade_PriceInUSD, level: 0.99)
+    }
+  }
+}
+
+
 ```
 
 ## Video Tutorial for Querring Historical Solana Data
