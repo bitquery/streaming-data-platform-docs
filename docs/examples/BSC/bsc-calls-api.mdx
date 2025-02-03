@@ -45,6 +45,61 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 <meta property="twitter:description" content="Explore BSC smart contract call data. Analyze smart contract calls with detailed information." />
 </head>
 
+## Track Latest Calls on BNB
+
+The below query retrieves the latest successful smart contract calls on the BNB Smart Chain (BSC). It fetches details about contract interactions, transaction metadata, and associated block information.
+
+You can run it [here](https://ide.bitquery.io/Latest-Calls-on-BSC-network)
+
+```
+{
+  EVM(network: bsc) {
+    Calls(
+      where: {Arguments: {length: {ne: 0}}, TransactionStatus: {Success: true}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ) {
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+      }
+      Transaction {
+        Hash
+        To
+        Type
+        From
+      }
+      Receipt {
+        ContractAddress
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+
+```
+
 ## Track Latest Created Tokens on BSC
 
 This subscription websocket lets you track the newly created tokens on BSC network. You will find the newly created token contract address in the response under `Receipt: ContractAddress` field.
