@@ -175,7 +175,7 @@ const sidebars = {
                 "subscriptions/google-bigquery/bigquery",
               ],
             },
-            "subscriptions/aws/s3_tutorial"
+            "subscriptions/aws/s3_tutorial",
           ],
         },
         {
@@ -259,13 +259,6 @@ const sidebars = {
           },
           items: [
             "examples/blocks/blocks-api",
-            "examples/calls/smartcontract",
-            "examples/calls/smartcontract-filterby",
-            "examples/events/events-api",
-            "examples/mempool/mempool-api",
-            "examples/transfers/total-supply",
-            "examples/transactions/transaction-api",
-            "examples/calls/contract-creation",
             {
               type: "category",
               label: "Balances",
@@ -274,6 +267,14 @@ const sidebars = {
                 "examples/token-holders/token-holder-api",
               ],
             },
+            "examples/calls/smartcontract",
+            "examples/calls/smartcontract-filterby",
+            "examples/events/events-api",
+            "examples/mempool/mempool-api",
+            "examples/transfers/total-supply",
+            "examples/transactions/transaction-api",
+            "examples/calls/contract-creation",
+
             {
               type: "category",
               label: "Token Transfers",
