@@ -436,6 +436,71 @@ subscription MyQuery {
 }
 ```
 
+## Track Pumpfun Tokens Which Are on Raydium in Real-time
+
+Using this query you can listen for **real-time DEX Trades** Pumpfun tokens on the Raydium protocol. It filters trades by:
+
+1.  **Token Update Authority** – Ensures the trades involve Pumpfun tokens by using the  `Pump.fun Token Mint Authority` address
+2.  **Raydium Program Address** – Restricts to the Raydium DEX (recognized by program address `675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8`).
+
+You can run the query [here](https://ide.bitquery.io/Tracking-pumpfun-tokens-which-are-on-raydium)
+
+```
+subscription {
+  Solana {
+    DEXTrades(
+      where: {Trade: {Buy: {Currency: {UpdateAuthority: {is: "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
+    ) {
+      Trade {
+        Dex {
+          ProgramAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        Buy {
+          Account {
+            Address
+          }
+          Amount
+          Currency {
+            MintAddress
+            Decimals
+            Symbol
+            ProgramAddress
+            Name
+          }
+          PriceAgaistSellCurrency: Price
+        }
+        Sell {
+          Account {
+            Address
+          }
+          Amount
+          Currency {
+            MintAddress
+            Decimals
+            Symbol
+            Name
+          }
+          PriceAgaistBuyCurrency: Price
+        }
+      }
+      Block {
+        Time
+        Height
+      }
+      Transaction {
+        Signature
+        FeePayer
+        Signer
+      }
+    }
+  }
+}
+
+
+```
+
 ## Video Tutorial | How to track Pump Fun Token Migrations to Raydium in realtime
 
 <VideoPlayer url="https://www.youtube.com/watch?v=jjQ5jvxI_Zk" />
