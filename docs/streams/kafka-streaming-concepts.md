@@ -155,6 +155,28 @@ of which blockchain you use. For example, for DEX Trades on Solana you will have
 - Transaction of type [solana_messages.ParsedDexTransaction](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/dex_block_message.proto#L89)
 - Block of type [solana_messages.BlockHeader](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/block_message.proto#L79)
 
+## Best Practises
+
+When working with Kafka streams, ensuring efficient message consumption and processing is crucial for maintaining low latency and high throughput. Here are the best practices to follow:
+
+### 1. Parallel Processing of Partitions
+
+Kafka topics are divided into partitions, and each partition must be read in parallel to maximize throughput and minimize latency.
+
+- **Always read all partitions in parallel** to prevent message lag.
+- Assign **one thread per partition** to ensure balanced load distribution.
+
+### 2. Continuous Message Consumption
+
+- Your consumer loop **should never stop** unless explicitly shutting down.
+- If message processing is needed, **process messages asynchronously** while keeping the reading loop running.
+- Avoid blocking the main consumption loop with heavy computations—delegate processing to worker threads.
+
+### 3. Efficient Message Processing
+
+- **Batch processing** can help reduce overhead but should be balanced with latency considerations.
+- Use **channels and worker groups** in Golang for concurrent processing.
+
 ### Documentation References
 
 Kafka has a lot of documentation in public access, generic and programming-language-specific.

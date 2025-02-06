@@ -205,7 +205,7 @@ const sidebars = {
             {
               type: "category",
               label: "Python Example",
-              items: ["streams/kafka-streams-python"],
+              items: ["streams/kafka-streams-python","streams/kafka-streams-python-thread"],
             },
           ],
         },
