@@ -107,8 +107,7 @@ You can find the query [here](https://ide.bitquery.io/ByteCode-of-A-Token)
 
 ```
 
-
-## Creator/Deployer of a smart contract 
+## Creator/Deployer of a smart contract
 
 You can use calls api to get smart contract creator or deployer of a smart contract. In the following example, where we getting deployer of deployer of `0xcd80c916b1194beb48abf007d0b79a7238436d56`.
 
@@ -132,3 +131,38 @@ Try this query [here](https://ide.bitquery.io/creator--deployer-of-an-address_1)
     }
   }
 }
+```
+
+## Get Contract Type of a Contract
+
+To determine the type of a contract and its details, we can use the Transfer API. By fetching the earliest transfer to the contract, we can get relevant details that indicate the contract type.
+
+`Abi`: Provides the contract function ABI, describing its inputs and structure.
+For example,
+`"Name": "swap",` tells us the given address has a **`swap`** function. This suggests the contract is likely a **DEX (Decentralized Exchange) or token swap contract**.
+
+You can run the query [here](https://ide.bitquery.io/Get-Contract-Type-in-v2)
+
+```
+ query MyQuery {
+  EVM(network: eth) {
+    Transfers(
+      limit: {count: 1}
+      orderBy: {ascending: Block_Time}
+      where: {Transfer: {Receiver: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}
+    ) {
+      Call {
+        Create
+        Signature {
+          SignatureType
+          Signature
+          Parsed
+          Name
+          Abi
+        }
+      }
+    }
+  }
+}
+
+```
