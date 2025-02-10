@@ -10,6 +10,10 @@ The schema is available [here](https://github.com/bitquery/streaming_protobuf/tr
 
 The complete code is available [here](https://github.com/bitquery/stream_protobuf_example).
 
+## Protobuf vs JSON
+
+To understand why Protobuf is better than JSON, you can read the comparison [here](/docs/streams/kafka-streaming-concepts/#protobuf-streams)
+
 ### Prerequisites
 
 Ensure you have the following components set up before running the Go Kafka consumer:
