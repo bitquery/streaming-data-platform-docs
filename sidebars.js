@@ -190,6 +190,11 @@ const sidebars = {
             "streams/kafka-streaming-concepts",
             {
               type: "category",
+              label: "Protobuf Data Streams",
+              items:["streams/protobuf/kafka-protobuf-go"]
+            },
+            {
+              type: "category",
               label: "Go Example",
               items: ["streams/kafka-streams-go"],
             },

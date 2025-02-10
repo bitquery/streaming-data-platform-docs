@@ -155,6 +155,23 @@ of which blockchain you use. For example, for DEX Trades on Solana you will have
 - Transaction of type [solana_messages.ParsedDexTransaction](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/dex_block_message.proto#L89)
 - Block of type [solana_messages.BlockHeader](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/block_message.proto#L79)
 
+## Protobuf Streams
+
+We also provide streams in the proto format, currently there are three topics that are available on Solana;
+
+- **solana.dextrades.proto**
+- **solana.tokens.proto**
+- **solana.transactions.proto**
+
+### What to Know About Protobuf Streams?
+
+- **Lower Latency:** These streams are delivered before the block closing message appears on the node, resulting in less lag from the transaction to the stream.
+- **Block Header Completeness:** The block header in messages may not be complete; only the `Slot` field is guaranteed to be correctly set.
+- **Compact Binary Format:** The streams use a binary protobuf format, which is more compact than JSON.
+- **Strict Schema:** Messages adhere to a strict schema defined in [Bitquery's Streaming Protobuf for Solana](https://github.com/bitquery/streaming_protobuf/tree/main/solana).
+- **Message Packing:** Transactions are packed in small chunks, with no more than 250 transactions per message.
+- **Message Expiration:** Topic messages expire after 24 hours in the stream.
+
 ## Best Practises
 
 When working with Kafka streams, ensuring efficient message consumption and processing is crucial for maintaining low latency and high throughput. Here are the best practices to follow:
