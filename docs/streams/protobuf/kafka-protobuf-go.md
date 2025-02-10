@@ -208,6 +208,7 @@ func (consumer *PartitionedConsumer) waitMessages(ctx context.Context, listener 
 - Uses **multiple workers** to process messages in parallel.
 - Different handlers for different **Protobuf topics**.
 - Reports statistics every **100 messages**.
+- Deduplication Check (isDuplicated function)
 
 **Key Functions**
 
@@ -215,6 +216,14 @@ func (consumer *PartitionedConsumer) waitMessages(ctx context.Context, listener 
 2.  `enqueue()`: Adds messages to the processing queue.
 3.  `start()`: Spins up worker goroutines to process messages.
 4.  `close()`: Waits for all workers to finish.
+5. `isDuplicated()`: Prevents the same message from being processed multiple times
+
+**How DeDeuplication Works**
+
+-   Each message is uniquely identified using **`slot` and `index`**.
+-   A **Least Recently Used (LRU) cache** stores recently processed messages.
+-   Messages are **discarded if already present in the cache**.
+-   Entries **expire after 240 seconds**, keeping memory usage optimized.
 
 ```go
 package main
@@ -333,6 +342,8 @@ func (dedup *dedupCache) isDuplicated(slot uint64, index uint32) bool {
 	return false
 }
 ```
+
+
 
 ### **`main.go` - Entry Point **
 
