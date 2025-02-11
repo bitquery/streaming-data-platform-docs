@@ -33,6 +33,35 @@ Ensure you have the following components set up before running the Go Kafka cons
 
 ## Step by Step Code
 
+### **`config.yml` - Kafka Config**
+
+**Purpose**: To setup server, login, reconnect and other configuration details
+
+Below is the sample config setup, modify it according to your requirements.
+
+```yaml
+kafka:
+  bootstrap.servers: "rpk0.bitquery.io:9093,rpk1.bitquery.io:9093,rpk2.bitquery.io:9093"
+  security.protocol: "SASL_SSL"
+  sasl.mechanism: "SCRAM-SHA-512"
+  sasl.username: "<your_username_here>"
+  sasl.password: "<your_password_here>"
+  group.id: "<username_group-number>"
+  ssl.key.location: "ssl/client.key.pem"
+  ssl.certificate.location: "ssl/client.cer.pem"
+  ssl.ca.location: "ssl/server.cer.pem"
+  ssl.endpoint.identification.algorithm: "none"
+  enable.auto.commit: false
+consumer:
+  topic: solana.dextrades.proto
+  partitioned: true
+processor:
+  buffer: 100V
+  workers: 8
+log_level: "debug"
+
+```
+
 ### **`consumer.go` - Kafka Consumer**
 
 **Purpose**: Connects to Kafka, subscribes to a topic, and receives messages.
@@ -220,14 +249,14 @@ func (consumer *PartitionedConsumer) waitMessages(ctx context.Context, listener 
 2.  `enqueue()`: Adds messages to the processing queue.
 3.  `start()`: Spins up worker goroutines to process messages.
 4.  `close()`: Waits for all workers to finish.
-5. `isDuplicated()`: Prevents the same message from being processed multiple times
+5.  `isDuplicated()`: Prevents the same message from being processed multiple times
 
 **How DeDeuplication Works**
 
--   Each message is uniquely identified using **`slot` and `index`**.
--   A **Least Recently Used (LRU) cache** stores recently processed messages.
--   Messages are **discarded if already present in the cache**.
--   Entries **expire after 240 seconds**, keeping memory usage optimized.
+- Each message is uniquely identified using **`slot` and `index`**.
+- A **Least Recently Used (LRU) cache** stores recently processed messages.
+- Messages are **discarded if already present in the cache**.
+- Entries **expire after 240 seconds**, keeping memory usage optimized.
 
 ```go
 package main
@@ -346,8 +375,6 @@ func (dedup *dedupCache) isDuplicated(slot uint64, index uint32) bool {
 	return false
 }
 ```
-
-
 
 ### **`main.go` - Entry Point **
 
