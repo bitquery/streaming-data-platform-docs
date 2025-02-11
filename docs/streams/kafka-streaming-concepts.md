@@ -65,6 +65,12 @@ Your application must implement the code:
 - Subscribe to particular topic(s);
 - Read and parse messages;
 
+## Retention Period of Messages
+
+- **Proto Streams**: Messages are retained for **24 hours**.
+- **DEX Trades (JSON)**: Messages are retained for **24 hours**.
+- **Other JSON Streams**: Messages are retained for **4 hours**.
+
 ### Connect to Kafka server
 
 You need the following to connect:
