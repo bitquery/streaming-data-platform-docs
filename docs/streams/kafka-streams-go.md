@@ -14,7 +14,7 @@ The complete code is available [here](https://github.com/bitquery/kafka-consumer
 
 Ensure you have the following components set up before running the Go Kafka consumer:
 
-1. **Kafka Cluster**: Access to Bitquery Kafka brokers.
+1. **Bitquery Kafka Server Access**: Access to Bitquery Kafka brokers.
 2. **Username and Password**: For authentication with the Kafka brokers.
 3. **Topic name(s)** to subscribe to.
 4. **Go**: Version >= 1.16.

@@ -49,6 +49,14 @@ const config = {
     //     "How to query using GraphQL?, What is BitQuery Explorer?, How to access blockchain data?, What APIs does BitQuery offer?",
     //   async: true,
     // },
+
+    {
+      src: "https://www.chatbase.co/embed.min.js",
+      async: true,
+      id: "Vz0cwoEYRJW6n5B2JeSeu",
+      domain: "www.chatbase.co",
+    },
+   
   ],
 
   plugins: [

@@ -65,6 +65,12 @@ Your application must implement the code:
 - Subscribe to particular topic(s);
 - Read and parse messages;
 
+## Retention Period of Messages
+
+- **Proto Streams**: Messages are retained for **24 hours**.
+- **DEX Trades (JSON)**: Messages are retained for **24 hours**.
+- **Other JSON Streams**: Messages are retained for **4 hours**.
+
 ### Connect to Kafka server
 
 You need the following to connect:
@@ -154,6 +160,45 @@ of which blockchain you use. For example, for DEX Trades on Solana you will have
 - Trade of type [solana_messages.DexTradeEvent](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/dex_block_message.proto#L79)
 - Transaction of type [solana_messages.ParsedDexTransaction](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/dex_block_message.proto#L89)
 - Block of type [solana_messages.BlockHeader](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/block_message.proto#L79)
+
+## Protobuf Streams
+
+We also provide streams in the proto format, currently there are three topics that are available on Solana;
+
+- **solana.dextrades.proto**
+- **solana.tokens.proto**
+- **solana.transactions.proto**
+
+### What to Know About Protobuf Streams?
+
+- **Lower Latency:** These streams are delivered before the block closing message appears on the node, resulting in less lag from the transaction to the stream.
+- **Block Header Completeness:** The block header in messages may not be complete; only the `Slot` field is guaranteed to be correctly set.
+- **Compact Binary Format:** The streams use a binary protobuf format, which is more compact than JSON.
+- **Strict Schema:** Messages adhere to a strict schema defined in [Bitquery's Streaming Protobuf for Solana](https://github.com/bitquery/streaming_protobuf/tree/main/solana).
+- **Message Packing:** Transactions are packed in small chunks, with no more than 250 transactions per message.
+- **Message Expiration:** Topic messages expire after 24 hours in the stream.
+
+## Best Practises
+
+When working with Kafka streams, ensuring efficient message consumption and processing is crucial for maintaining low latency and high throughput. Here are the best practices to follow:
+
+### 1. Parallel Processing of Partitions
+
+Kafka topics are divided into partitions, and each partition must be read in parallel to maximize throughput and minimize latency.
+
+- **Always read all partitions in parallel** to prevent message lag.
+- Assign **one thread per partition** to ensure balanced load distribution.
+
+### 2. Continuous Message Consumption
+
+- Your consumer loop **should never stop** unless explicitly shutting down.
+- If message processing is needed, **process messages asynchronously** while keeping the reading loop running.
+- Avoid blocking the main consumption loop with heavy computations—delegate processing to worker threads.
+
+### 3. Efficient Message Processing
+
+- **Batch processing** can help reduce overhead but should be balanced with latency considerations.
+- Use **channels and worker groups** in Golang for concurrent processing.
 
 ### Documentation References
 

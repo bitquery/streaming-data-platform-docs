@@ -89,6 +89,7 @@ const sidebars = {
             "graphql/capabilities/subscription_aggregates",
             "graphql/capabilities/subscription_facts",
             "graphql/optimizing-graphql-queries",
+            "usecases/how-to-filter-anomaly-prices",
             "graphql/postman",
             "graphql/query",
             "graphql/sorting",
@@ -189,6 +190,11 @@ const sidebars = {
             "streams/kafka-streaming-concepts",
             {
               type: "category",
+              label: "Protobuf Data Streams",
+              items:["streams/protobuf/kafka-protobuf-go"]
+            },
+            {
+              type: "category",
               label: "Go Example",
               items: ["streams/kafka-streams-go"],
             },
@@ -205,7 +211,7 @@ const sidebars = {
             {
               type: "category",
               label: "Python Example",
-              items: ["streams/kafka-streams-python"],
+              items: ["streams/kafka-streams-python","streams/kafka-streams-python-thread"],
             },
           ],
         },
@@ -587,7 +593,6 @@ const sidebars = {
             "usecases/monitoring-solana-blockchain-real-time-tutorial",
             "usecases/monitoring-solana-at-scale-managing-hundreds-of-addresses",
             "usecases/streaming-moonshot-prices",
-            "usecases/how-to-filter-anomaly-prices",
             "usecases/solana-ohlc-calculator",
             "usecases/real-time-historical-ethereum-price-excel-google-sheets",
             {
