@@ -305,6 +305,11 @@ const config = {
             label: "DEX Data Showcase",
             position: "left",
           },
+          {
+            to: "https://lite.bitquery.io/",
+            label: "Moneyflow Lite",
+            position: "left",
+          },
         ],
       },
       footer: {
