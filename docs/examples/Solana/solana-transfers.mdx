@@ -253,6 +253,37 @@ subscription {
 }
 ```
 
+## Transfers of a wallet address
+
+This query fetches you the recent 10 transfers of a specific wallet address `9nnLbotNTcUhvbrsA6Mdkx45Sm82G35zo28AqUvjExn8`. Try the query [here](https://ide.bitquery.io/Transfers-of-a-wallet_1).
+
+```
+{
+  Solana {
+    Transfers(
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+      where: {any: [{Transfer: {Sender: {Address: {is: "9nnLbotNTcUhvbrsA6Mdkx45Sm82G35zo28AqUvjExn8"}}}}, {Transfer: {Receiver: {Address:{is: "9nnLbotNTcUhvbrsA6Mdkx45Sm82G35zo28AqUvjExn8"}} }}]}
+    ) {
+      Transaction {
+        Signature
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender{
+          Address
+        }
+        Receiver{
+          Address
+        }
+      }
+    }
+  }
+}
+
+```
+
 ## Video Tutorial on Solana Transfers API | How to get NFT, SPL Transfers data on Solana in Realtime
 
 <VideoPlayer url="https://youtu.be/tzAeOv3oPKs?si=rlHBOkZWsBOill-j" />

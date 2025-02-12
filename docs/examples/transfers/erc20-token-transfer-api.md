@@ -148,3 +148,30 @@ query($addresses: [String!]) {
   "addresses": ["0x21743a2efb926033f8c6e0c3554b13a0c669f63f","0x107f308d85d5481f5b729cfb1710532500e40217"]
 }
 ```
+
+## Top Transfers of a token
+
+This query retrieves the top 10 transfers of the token `0xB8c77482e45F1F44dE1745F52C74426C631bDD52`. Try the query [here](https://ide.bitquery.io/top-transfers-of-a-token_1)
+
+```
+query MyQuery {
+  EVM {
+    Transfers(
+      where: {Transfer: {Currency: {SmartContract: {is: "0xB8c77482e45F1F44dE1745F52C74426C631bDD52"}}}, TransactionStatus: {Success: true}}
+      orderBy: {descending: Transfer_Amount}
+      limit: {count: 10}
+    ) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+    }
+  }
+}
+
+```

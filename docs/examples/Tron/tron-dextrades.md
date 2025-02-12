@@ -89,6 +89,104 @@ subscription {
 
 ```
 
+## Get Token Stats like buyers, sellers, makers, total trades, total volume, buy volume, sell volume
+
+This query fetches you all the important token statistics such as number of buyers, sellers, makers, total trades, total volume, buy volume, sell volume. Try the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-tron-pair)
+
+```
+query MyQuery( $token: String,$pairAddress: String , $min5_timestamp: DateTime, $hr1_timestamp: DateTime) {
+  Tron {
+    DEXTradeByTokens(
+      where: {TransactionStatus: {Success: true}, Trade: {Currency: {SmartContract: {is: $token}}, Dex: {SmartContract: {is: $pairAddress}}}, Block: {Time: {since: $hr1_timestamp}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          SmartContract
+          Symbol
+        }
+        startPrice: PriceInUSD(minimum: Block_Time)
+        Price_at_min5: PriceInUSD(
+          minimum: Block_Time
+          if: {Block: {Time: {after: $min5_timestamp}}}
+        )
+        current_price: PriceInUSD(maximum: Block_Time)
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          SmartContract
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+      }
+      makers: count(distinct: Transaction_From)
+      makers_5min: count(
+        distinct: Transaction_From
+        if: {Block: {Time: {after: $min5_timestamp}}}
+      )
+      buyers: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: sell}}}}
+      )
+      buyers_5min: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      sellers: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: buy}}}}
+      )
+      sellers_5min: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      trades: count
+      trades_5min: count(if: {Block: {Time: {after: $min5_timestamp}}})
+      traded_volume: sum(of: Trade_Side_AmountInUSD)
+      traded_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {after: $min5_timestamp}}}
+      )
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: sell}}}}
+      )
+      buy_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: buy}}}}
+      )
+      sell_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      buys: count(if: {Trade: {Side: {Type: {is: sell}}}})
+      buys_5min: count(
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      sells: count(if: {Trade: {Side: {Type: {is: buy}}}})
+      sells_5min: count(
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+    }
+  }
+}
+{
+  "token": "put token address here",
+  "pairAddress": "put pair address here",
+  "hr1_timestamp": "2024-11-14T03:20:00Z",
+  "min5_timestamp": "2024-11-14T04:15:00Z"
+}
+```
+
 ## Get Top gainer tokens on Tron Network
 
 This query fetches you the top gainer tokens on Tron network.
@@ -326,6 +424,60 @@ query TopTraders($token: String, $base: String) {
 ![image](https://github.com/user-attachments/assets/f40658bd-aa9f-4c32-bcf3-792c098ea66e)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TSig7sWzEL2K83mkJMQtbyPpiVSbR6pZnb/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR#pair_top_traders).
+
+## Get Top Buyers of a token on Tron Network
+
+This query fetches you the top 10 buyers of a specific token on Tron network.
+You can try the query [here](https://ide.bitquery.io/top-buyers-of-token---Tron_1).
+
+```
+{
+  Tron {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "bought"}
+      limit: {count: 10}
+      where: {Trade: {Currency: {SmartContract: {is: "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"}}}, TransactionStatus: {Success: true}}
+    ) {
+      Trade {
+        Buyer
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      bought: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+    }
+  }
+}
+```
+
+## Get Top Sellers of a token on Tron Network
+
+This query fetches you the top 10 sellers of a specific token on Tron network.
+You can try the query [here](https://ide.bitquery.io/top-sellers-of-token---Tron_3).
+
+```
+{
+  Tron {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "sold"}
+      limit: {count: 10}
+      where: {Trade: {Currency: {SmartContract: {is: "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"}}}, TransactionStatus: {Success: true}}
+    ) {
+      Trade {
+        Buyer
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      sold: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
+    }
+  }
+}
+```
 
 ## Get DEX markets for a specific Token
 

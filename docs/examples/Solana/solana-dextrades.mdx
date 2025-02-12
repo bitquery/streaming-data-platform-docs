@@ -881,6 +881,70 @@ query MyQuery {
 The `uri` field returns the following url - [`https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN`](https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN).
 Offchain token metadata such as social urls and image could be accessed from this link.
 
+## Top Buyers of a Token
+
+This query retrieves top buyers of the token `4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R`. Try the query [here](https://ide.bitquery.io/top-buyers-of-a-token_2).
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "buy"}
+      where: {Trade: {Currency: {MintAddress: {is: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 10}
+    ) {
+      Trade {
+        Account{
+          Address
+          Token{
+            Owner
+          }
+        }
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+      }
+      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
+      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+    }
+  }
+}
+```
+
+## Top Sellers of a Token
+
+This query retrieves top sellers of the token `4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R`. Try the query [here](https://ide.bitquery.io/top-sellers-of-a-token_2).
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "sell"}
+      where: {Trade: {Currency: {MintAddress: {is: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 10}
+    ) {
+      Trade {
+        Account{
+          Address
+          Token{
+            Owner
+          }
+        }
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+      }
+      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
+      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+    }
+  }
+}
+```
+
 ## Solana OHLC API
 
 You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair Shark Cat-SOL by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.

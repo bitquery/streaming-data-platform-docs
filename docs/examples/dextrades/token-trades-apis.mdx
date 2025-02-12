@@ -1121,6 +1121,58 @@ query MyQuery {
 }
 ```
 
+## Top Buyers of a Token
+
+This query retrieves top 10 buyers of a token `0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39`. Try the query [here](https://ide.bitquery.io/top-buyers-of-a-token_1).
+
+```
+{
+  EVM {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "bought"}
+      limit: {count: 10}
+      where: {Trade: {Currency: {SmartContract: {is: "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39"}}}}
+    ) {
+      Trade {
+        Buyer
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      bought: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+    }
+  }
+}
+```
+
+## Top Sellers of a Token
+
+This query retrieves top 10 sellers of a token `0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39`. Try the query [here](https://ide.bitquery.io/top-sellers-of-a-token).
+
+```
+{
+  EVM {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "sold"}
+      limit: {count: 10}
+      where: {Trade: {Currency: {SmartContract: {is: "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39"}}}}
+    ) {
+      Trade {
+        Buyer
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      sold: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
+    }
+  }
+}
+```
+
 ## Getting OHLC and Distinct Buys/Sells
 
 The below query retrieve OHLC (Open, High, Low, Close) data and distinct buy/sell information on the Binance Smart Chain (BSC) on a daily basis. Adjust the parameters within the `where` and `Block` sections to customize the query for your specific needs, such as changing the token smart contract addresses or modifying the date range.

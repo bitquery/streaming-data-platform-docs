@@ -65,3 +65,25 @@ subscription {
 }
 
 ```
+
+## Top Token Holders of a token
+
+This query fetches you the top 10 token holders of the token `TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT`. Check out the query [here](https://ide.bitquery.io/top-token-holders_2).
+
+```
+query MyQuery {
+  Tron(dataset: combined) {
+    BalanceUpdates(
+      limit: {count: 10}
+      orderBy: {descendingByField: "balance"}
+      where: {Currency: {SmartContract: {is: "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"}}}
+    ) {
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      BalanceUpdate {
+        Address
+      }
+    }
+  }
+}
+
+```
