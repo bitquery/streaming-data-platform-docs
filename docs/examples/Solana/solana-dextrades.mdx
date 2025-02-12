@@ -945,6 +945,37 @@ This query retrieves top sellers of the token `4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5i
 }
 ```
 
+## Get trading volume, buy volume, sell volume of a token
+
+This query fetches you the traded volume, buy volume and sell volume of a token `J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump`. Try out the API [here](https://ide.bitquery.io/trade_volume_Solana#).
+
+```
+query MyQuery {
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      where: {Block: {Time: {since: "2025-02-10T07:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
+    ) {
+      Trade {
+        Currency {
+          MintAddress
+          Decimals
+        }
+        Side {
+          Currency {
+            Name
+            MintAddress
+          }
+        }
+      }
+      traded_volume_USD: sum(of: Trade_Side_AmountInUSD)
+      traded_volume: sum(of: Trade_Amount)
+    buy_volume: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:buy}}}})
+      sell_volume: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:sell}}}})
+    }
+  }
+}
+```
+
 ## Solana OHLC API
 
 You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair Shark Cat-SOL by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.

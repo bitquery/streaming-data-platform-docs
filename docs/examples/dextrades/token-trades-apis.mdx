@@ -1173,6 +1173,37 @@ This query retrieves top 10 sellers of a token `0x53E0bca35eC356BD5ddDFebbD1Fc0f
 }
 ```
 
+## Get trading volume, buy volume, sell volume of a token
+
+This query fetches you the traded volume, buy volume and sell volume of a token `0xB8c77482e45F1F44dE1745F52C74426C631bDD52`. Try out the API [here](https://ide.bitquery.io/trade_volume_evm_3#).
+
+```
+query MyQuery {
+  EVM {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: "0xB8c77482e45F1F44dE1745F52C74426C631bDD52"}}}, TransactionStatus: {Success: true}, Block: {Time: {since: "2025-02-12T00:00:00Z"}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+      traded_volume_in_usd: sum(of: Trade_Side_AmountInUSD)
+      sell_volume_in_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: buy}}}}
+      )
+      buy_volume_in_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: sell}}}}
+      )
+    }
+  }
+}
+```
+
 ## Getting OHLC and Distinct Buys/Sells
 
 The below query retrieve OHLC (Open, High, Low, Close) data and distinct buy/sell information on the Binance Smart Chain (BSC) on a daily basis. Adjust the parameters within the `where` and `Block` sections to customize the query for your specific needs, such as changing the token smart contract addresses or modifying the date range.
