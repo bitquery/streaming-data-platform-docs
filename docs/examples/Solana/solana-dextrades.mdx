@@ -945,6 +945,59 @@ This query retrieves top sellers of the token `4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5i
 }
 ```
 
+## Trades of a wallet
+
+You can use this API to fetch trades of a specific wallet address `tRadEVu2Va7WsVHqmGSiRHspkBoDQ9Qnjp42TiJirYA`. Change the wallet address as per your needs. Try the query [here](https://ide.bitquery.io/trades-of-a-wallet_8)
+
+```
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {Transaction: {Signer: {is: "tRadEVu2Va7WsVHqmGSiRHspkBoDQ9Qnjp42TiJirYA"}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ){
+      Block{
+        Time
+      }
+      Trade{
+        Account{
+          Address
+          Token{
+            Owner
+          }
+        }
+        Currency{
+          MintAddress
+          Name
+          Symbol
+        }
+        Price
+        PriceInUSD
+        Side{
+          Account{
+            Address
+            Token{
+              Owner
+            }
+          }
+          Currency{
+            Name
+            Symbol
+        	MintAddress
+          }
+          Type
+        }
+      }
+      Transaction{
+        Signature
+        Signer
+      }
+    }
+  }
+}
+```
+
 ## Get trading volume, buy volume, sell volume of a token
 
 This query fetches you the traded volume, buy volume and sell volume of a token `J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump`. Try out the API [here](https://ide.bitquery.io/trade_volume_Solana#).
