@@ -292,7 +292,7 @@ const config = {
           },
           {
             to: "https://account.bitquery.io/user/api_v2/access_tokens",
-            label: "Get your free Access key",
+            label: "Get your free Access Token",
             position: "right",
           },
           // {
