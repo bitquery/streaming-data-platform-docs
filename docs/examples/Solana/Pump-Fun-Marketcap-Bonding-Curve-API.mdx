@@ -135,9 +135,7 @@ You can also observe the approach of using `TokenSupplyUpdate` block to get the 
 
 ## Check if the Pump Fun Token has migrated to Raydium
 
-To check if a Pump Fun Token has migrated to Raydium, we can use Instructions API to check which methods does Pump Fun Migration Account `39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg` calls. We will see in the response of this query `mintTo` method which is responsible for the migration.
-
-Below query can be directly used to check if a Pump Fun Token has migrated to Raydium. We are checking if the Pump Fun: Raydium Migration Account `39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg` successfully called the method `mintTo` for this token address `HFmde4zjyzGN3cBdAmqzjdH7EcdCun432WPbquKmzmJU`. You can run the query [here](https://ide.bitquery.io/check-if-a-pump-token-migrated-to-raydium).
+To check if a Pump Fun Token has migrated to Raydium, we can use the below query. In this query we are checking if this token `Cm55PcjVCqQZYiEsRt5ixtGLBbxt8DTYjJRJQwQHpump` has migrated to Raydium. You can run the query [here](https://ide.bitquery.io/check-if-a-pump-token-migrated-to-raydium).
 
 ```graphql
 query MyQuery {
@@ -148,10 +146,10 @@ query MyQuery {
           Signer: { is: "39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg" }
         }
         Instruction: {
-          Program: { Method: { is: "mintTo" } }
+          Program: { Method: { is: "initialize2" } }
           Accounts: {
             includes: {
-              Address: { is: "HFmde4zjyzGN3cBdAmqzjdH7EcdCun432WPbquKmzmJU" }
+              Address: { is: "Cm55PcjVCqQZYiEsRt5ixtGLBbxt8DTYjJRJQwQHpump" }
             }
           }
         }
@@ -440,7 +438,7 @@ subscription MyQuery {
 
 Using this query you can listen for **real-time DEX Trades** Pumpfun tokens on the Raydium protocol. It filters trades by:
 
-1.  **Token Update Authority** – Ensures the trades involve Pumpfun tokens by using the  `Pump.fun Token Mint Authority` address
+1.  **Token Update Authority** – Ensures the trades involve Pumpfun tokens by using the `Pump.fun Token Mint Authority` address
 2.  **Raydium Program Address** – Restricts to the Raydium DEX (recognized by program address `675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8`).
 
 You can run the query [here](https://ide.bitquery.io/Tracking-pumpfun-tokens-which-are-on-raydium)
