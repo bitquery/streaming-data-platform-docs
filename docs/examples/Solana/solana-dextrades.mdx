@@ -40,13 +40,25 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 ## Subscribe to Latest Solana Trades
 
 This subscription will return information about the most recent trades executed on Solana's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/solana-trades-subscription_1)
+You can find the query [here](https://ide.bitquery.io/solana-trades-subscription_2)
 
 ```
 subscription {
   Solana {
     DEXTrades {
+      Block{
+        Time
+        Slot
+      }
+      Transaction{
+        Signature
+        Index
+        Result{
+          Success
+        }
+      }
       Trade {
+        Index
         Dex {
           ProgramAddress
           ProtocolFamily
@@ -69,12 +81,14 @@ subscription {
             Native
             Name
           }
+          Price
+          PriceInUSD
           Order {
             LimitPrice
             LimitAmount
             OrderId
           }
-          Price
+
         }
         Market {
           MarketAddress
@@ -93,13 +107,12 @@ subscription {
             Name
           }
           Price
+          PriceInUSD
         }
       }
     }
   }
 }
-
-
 ```
 
 ## Get Price of a Token Against WSOL

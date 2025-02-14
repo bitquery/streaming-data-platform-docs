@@ -42,57 +42,70 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 ## Subscribe to Latest Base Trades
 
 This subscription will return information about the most recent trades executed on Base's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/Realtime-base-dex-trades-websocket)
+You can find the query [here](https://ide.bitquery.io/subscribe-to-dex-trades-on-base)
 
 ```
-subscription {
+subscription MyQuery {
   EVM(network: base) {
     DEXTrades {
       Block {
         Time
+        Number
+      }
+      Transaction {
+        Hash
+      }
+      Call {
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Log {
+        Index
+        SmartContract
+        Signature {
+          Signature
+          Name
+        }
       }
       Trade {
-        Dex {
-          ProtocolName
-          ProtocolFamily
-          SmartContract
-        }
+        Sender
         Buy {
-          Amount
           Buyer
+          AmountInUSD
+          Amount
           Seller
+          PriceInUSD
+          Price
           Currency {
-            Decimals
-            Fungible
-            HasURI
             Name
-            ProtocolName
-            SmartContract
             Symbol
+            SmartContract
           }
-          OrderId
+        }
+        Dex {
+          SmartContract
+          ProtocolName
+          ProtocolVersion
         }
         Sell {
           Buyer
+          AmountInUSD
+          Amount
           Seller
+          PriceInUSD
+          Price
           Currency {
-            Decimals
-            Fungible
-            HasURI
             Name
-            ProtocolName
-            SmartContract
             Symbol
+            SmartContract
           }
         }
       }
     }
   }
 }
-
-
-
-
 ```
 
 ## Subscribe to Latest Price of a Token in Real-time

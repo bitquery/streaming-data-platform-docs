@@ -15,7 +15,7 @@ To learn the difference between two APIs, please check [this doc](https://docs.b
 
 ## Subscribe to realtime DEXTrades on Ethereum Mainnet
 
-The below query will get you the realtime dex trades happening on Ethereum Mainnet. Open the below query in graphQL IDE using this [link](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet).
+The below query will get you the realtime dex trades happening on Ethereum Mainnet. Open the below query in graphQL IDE using this [link](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet_2).
 
 ```graphql
 subscription MyQuery {
@@ -23,11 +23,27 @@ subscription MyQuery {
     DEXTrades {
       Block {
         Time
+        Number
       }
       Transaction {
         Hash
       }
+      Call {
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Log {
+        Index
+        SmartContract
+        Signature {
+          Signature
+          Name
+        }
+      }
       Trade {
+        Sender
         Buy {
           Buyer
           AmountInUSD
@@ -46,6 +62,7 @@ subscription MyQuery {
           ProtocolName
           ProtocolVersion
         }
+
         Sell {
           Buyer
           AmountInUSD
