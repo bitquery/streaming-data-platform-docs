@@ -74,3 +74,29 @@ You can find the query [here](https://ide.bitquery.io/search-solana-tokens)
   }
 }
 ```
+
+## Search Tokens on Solana (Case Insensitive)
+
+You can search tokens on Solana using names or symbols case insensitively also using our APIs and get prices and other details.
+
+You can find the query [here](https://ide.bitquery.io/Currency-with-elon-inclusion).
+
+
+```graphql
+{
+  Solana {
+    Transfers(
+      where: {Transfer: {Currency: {Symbol: {includesCaseInsensitive: "elon"}}}}
+    ) {
+      Transfer {
+        Currency {
+          MintAddress
+          Symbol
+        }
+      }
+      count
+    }
+  }
+}
+
+```

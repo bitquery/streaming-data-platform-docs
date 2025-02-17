@@ -83,6 +83,71 @@ subscription {
 }
 ```
 
+## Get Tokens which have liquidity over 1 Million USD
+
+You can use the below query to get the tokens which are getting traded and have liquidity over 1 million USD. Try out the query [here](https://ide.bitquery.io/Search-tokens-with-liquidity-over-1-million#).
+
+```
+subscription MyQuery {
+  Solana {
+    DEXPools(
+      where: {Pool: {Base: {PostAmountInUSD: {ge: "1000000"}}, Market: {QuoteCurrency: {MintAddress: {in: ["11111111111111111111111111111111", "So11111111111111111111111111111111111111112"]}}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+      Pool {
+        Base {
+          PostAmount
+          PostAmountInUSD
+          Price
+          PriceInUSD
+        }
+        Quote{
+          PostAmount
+          PostAmountInUSD
+        }
+        Market {
+          MarketAddress
+          BaseCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+          QuoteCurrency {
+            Name
+            MintAddress
+            Symbol
+          }
+        }
+        Dex {
+          ProtocolFamily
+          ProgramAddress
+          ProtocolName
+        }
+        Market {
+          MarketAddress
+          BaseCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+          QuoteCurrency {
+            Name
+            MintAddress
+            Symbol
+          }
+        }
+      }
+    }
+  }
+}
+
+```
+
 ## Get All Liquidity Pools info for a particular token
 
 This query will give you the information on all the liquidity pools of a particular token `EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm`.
