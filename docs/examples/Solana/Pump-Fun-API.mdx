@@ -34,33 +34,21 @@ If you want fastest data without any latency, we can provide Kafka streams, plea
 
 The PumpFun token has a total supply of 1 billion tokens. Therefore, the maximum price is directly related to the market cap, as market cap = Price \* 1 billion (for PumpFun).
 
-Here’s [the query](https://ide.bitquery.io/pumpfun-token-sorted-by-marketcap_1) to retrieve the top tokens based on their price.
+Here’s [the query](https://ide.bitquery.io/top-tokens-by-mktcap-on-pump-fun-in-last-15-min) to retrieve the top tokens based on their price.
 
 ```graphql
 {
   Solana {
     DEXTrades(
-      limitBy: { by: Trade_Buy_Currency_MintAddress, count: 1 }
-      orderBy: { descending: Trade_Buy_Price }
-      where: {
-        Trade: {
-          Dex: { ProtocolName: { is: "pump" } }
-          Buy: {
-            Currency: {
-              MintAddress: { notIn: ["11111111111111111111111111111111"] }
-            }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
+      limitBy: {by: Trade_Buy_Currency_MintAddress, count: 1}
+      limit: {count: 10}
+      orderBy: {descending: Trade_Buy_Price}
+      where: {Trade: {Dex: {ProtocolName: {is: "pump"}}, Buy: {Currency: {MintAddress: {notIn: ["11111111111111111111111111111111"]}}}, PriceAsymmetry: {le: 0.1}, Sell: {AmountInUSD: {gt: "10"}}}, Transaction: {Result: {Success: true}}, Block: {Time: {since: "2025-02-21T05:05:00Z"}}}
     ) {
-      # All pump fun token has 1 billion supply,
-      # so multiply price * 1 billion to get marketcap
-      # results are already sorted by price
       Trade {
         Buy {
-          Price
-          PriceInUSD
+          Price(maximum: Block_Time)
+          PriceInUSD(maximum: Block_Time)
           Currency {
             Name
             Symbol
@@ -79,36 +67,21 @@ Here’s [the query](https://ide.bitquery.io/pumpfun-token-sorted-by-marketcap_1
 ## All Pumpfun Tokens crossed 10k Marketcap
 
 As all Pump Fun tokens have a 1 billion supply, based on the price itself, you can get all Pump Fun tokens that have crossed a sure market cap.
-Here is a [query](https://ide.bitquery.io/pumpfun-tokens-which-crossed-10k-marketcap) that gives all tokens that crossed the 10k marketcap.
+Here is a [query](https://ide.bitquery.io/top-tokens-above-10k-USD-mktcap-on-pump-fun-in-last-15-min) that gives all tokens that crossed the 10k marketcap.
 
 ```
 {
   Solana {
     DEXTrades(
-      limitBy: {count: 1, by: Trade_Buy_Currency_MintAddress}
+      limitBy: {by: Trade_Buy_Currency_MintAddress, count: 1}
       limit: {count: 10}
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {PriceInUSD: {gt: 0.00001},
-        Currency: {MintAddress: {notIn: ["11111111111111111111111111111111"]}}},
-        Sell: {AmountInUSD: {gt: "10"}}, Dex: {ProtocolName: {is: "pump"}}}, Transaction: {Result: {Success: true}}}
+      orderBy: {descending: Trade_Buy_Price}
+      where: {Trade: {Dex: {ProtocolName: {is: "pump"}}, Buy: {Currency: {MintAddress: {notIn: ["11111111111111111111111111111111"]}}, PriceInUSD: {gt: 0.00001}}, Sell: {AmountInUSD: {gt: "10"}}}, Transaction: {Result: {Success: true}}, Block: {Time: {since: "2025-02-21T05:05:00Z"}}}
     ) {
-
       Trade {
         Buy {
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
-          Price
-          PriceInUSD
-        }
-        Sell {
-          Amount
-          AmountInUSD
+          Price(maximum: Block_Time)
+          PriceInUSD(maximum: Block_Time)
           Currency {
             Name
             Symbol
@@ -119,10 +92,10 @@ Here is a [query](https://ide.bitquery.io/pumpfun-tokens-which-crossed-10k-marke
           }
         }
       }
-
     }
   }
 }
+
 ```
 
 ## Pump Fun Trades in Real-Time
