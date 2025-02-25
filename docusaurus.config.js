@@ -215,6 +215,10 @@ const config = {
             to: "/docs/examples/nft/nft-api/",
             from: "/docs/category/nft/",
           },
+          {
+            to:"/docs/examples/Arbitrum/Overview/",
+            from:"/docs/category/arbitrum/"
+          },
         ],
       },
     ],
