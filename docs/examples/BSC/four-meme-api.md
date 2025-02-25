@@ -218,7 +218,7 @@ You can run the query [here](https://ide.bitquery.io/Trades-of-a-fourmeme-token)
 }
 ```
 
-## Latest Trades of a Token on Four Meme
+## Latest Trades of a Token on Four Meme using Transfers
 
 [This](https://ide.bitquery.io/latest-trades-for-a-token-on-four-memes#) query returns latest trades for a particular token on Four Meme, with currency smart contract as `0x8863de06c617e75e7bbb453934bc04d0835eb87c` for this example.
 

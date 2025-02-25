@@ -167,7 +167,7 @@ We also provide streams in the proto format, currently there are three topics th
 
 - **solana.dextrades.proto**
 - **solana.tokens.proto**
-- **solana.transactions.proto**
+- **solana.transactions.proto** ( this includes unconfirmed transactions as well )
 
 ### What to Know About Protobuf Streams?
 
