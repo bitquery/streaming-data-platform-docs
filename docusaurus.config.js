@@ -56,7 +56,11 @@ const config = {
       id: "Vz0cwoEYRJW6n5B2JeSeu",
       domain: "www.chatbase.co",
     },
-   
+
+    {
+      src: "/js/chatbase-open.js", // Custom script to auto-open Chatbase
+      defer: true,
+    },
   ],
 
   plugins: [
