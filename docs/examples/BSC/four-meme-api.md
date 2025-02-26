@@ -1,4 +1,4 @@
-# Four.Meme API
+# Four Meme API
 
 In this section, we will see some APIs that return on-chain data related to Four Meme Exchange on BSC network. The exchange is relatively new and thus not listed as a DEX, hence we will use Transfers and Call APIs to get trade related or any other on chain activity related to the exchange.
 
