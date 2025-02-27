@@ -8,7 +8,7 @@ Using [this](https://ide.bitquery.io/FourMeme--Newly-Created-Token-by-Tracking-T
 
 ```graphql
 {
-  EVM(dataset: realtime, network: bsc) {
+  EVM(dataset: combined, network: bsc) {
     Transfers(
       orderBy: { descending: Block_Time }
       limit: { count: 10 }
@@ -74,14 +74,69 @@ Using [this](https://ide.bitquery.io/FourMeme--Newly-Created-Token-by-Tracking-T
 
 This query retrieves the most recent trades of a specific token on Four Meme Exchange. It tracks `TokenSale` events for the token using its smart contract address.
 
-You can run the query [here](https://ide.bitquery.io/Trades-of-a-fourmeme-token)
+You can run the query [here](https://ide.bitquery.io/Trades-of-a-four-meme-token-historical)
 
 ```
 {
-  EVM(dataset: realtime, network: bsc) {
+  EVM(dataset: combined, network: bsc) {
     Events(
       where: {Log: {Signature: {Name: {is: "TokenSale"}}}, Arguments: {includes: {Value: {Address: {is: "0xfe6edde870ff03c039cafc4dba96533acc34a19f"}}}}}
       orderBy: {descending: Block_Time}
+      limit: {count: 10}
+    ) {
+      Log {
+        Signature {
+          Name
+        }
+      }
+      Transaction {
+        From
+        To
+        Value
+        Type
+        Hash
+      }
+      Arguments {
+        Type
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+        Name
+      }
+    }
+  }
+}
+
+```
+
+## Track Four Meme Trades in Realtime
+
+We will use Events API and arguments emitted in TokenSale events on Four Meme Exchange to track trades in real-time. They include the token address, user account, **price**, **amount** of tokens traded, total cost, transaction fee, remaining offers, and funds involved in the trade.
+
+You can run the query [here](https://ide.bitquery.io/subscribe-to-latest-trades-on-four-meme#)
+
+```
+subscription {
+  EVM(network: bsc) {
+    Events(
+      where: {Log: {Signature: {Name: {is: "TokenSale"}}}, Arguments: {}, Transaction: {To: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}}
     ) {
       Log {
         Signature {
