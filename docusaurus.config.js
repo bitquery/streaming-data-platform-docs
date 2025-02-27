@@ -49,6 +49,7 @@ const config = {
     //     "How to query using GraphQL?, What is BitQuery Explorer?, How to access blockchain data?, What APIs does BitQuery offer?",
     //   async: true,
     // },
+    
 
     {
       src: "https://www.chatbase.co/embed.min.js",
@@ -265,6 +266,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
+      },
+      
       // metadata: [
       //   {
       //     name: 'baidu-site-verification',
