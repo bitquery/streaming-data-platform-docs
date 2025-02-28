@@ -103,30 +103,32 @@ subscription {
 
 ## Get Top 100 Token Holders of a Particular Token
 
-[This query](https://ide.bitquery.io/USDT-Solana-Top-100-holders) returns the top 100 token holders of a particular token after a
+[This query](https://ide.bitquery.io/top-100-holders-of-token-on-Solana) returns the top 100 token holders of a particular token after a
 given time.
 
 ```
-query {
+query MyQuery {
   Solana {
     BalanceUpdates(
-      orderBy: {descendingByField: "BalanceUpdate_balance_maximum"}
-      limit: {count: 100}
-      where: {
-        BalanceUpdate: {Currency: {MintAddress: {is: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}}}
-        Block: {Time: {after: "2024-12-31T03:33:33Z"}}
-      }
+      orderBy: {descendingByField: "BalanceUpdate_Holding_maximum"}
+      where: {BalanceUpdate: {Currency: {MintAddress: 
+        {is: "Hrt2MqJjGYSG1eL1dfAuLWJFsPUnjzRKqesyma3Gpump"}},
+        }, Transaction: {Result: {Success: true}}}
     ) {
       BalanceUpdate {
-        Account {
-          Owner
+        Currency {
+          Name
+          MintAddress
+          Symbol
         }
-        balance: PostBalance(maximum: Block_Slot)
+        Account {
+          Address
+        }
+        Holding: PostBalance(maximum: Block_Slot selectWhere:{gt:"0"})
       }
     }
   }
 }
-
 ```
 
 ## Get Balance Updates of a Particular Wallet

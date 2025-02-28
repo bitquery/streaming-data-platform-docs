@@ -357,3 +357,162 @@ subscription {
   }
 }
 ```
+
+## Track Liquidity Add Events for All Tokens on Four Meme
+
+This query tracks all liquidity addition events on the Four Meme Exchange. It listens for `LiquidityAdded` events emitted from the four meme exchange's smart contract (0x5c952063c7fc8610ffdb798152d69f0b9550762b)
+
+You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific-tokens-on-Four-meme)
+
+```
+{
+  EVM(dataset: realtime, network: bsc) {
+    Events(
+      limit: {count: 20}
+      where: {LogHeader: {Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}},
+        Log: {Signature: {Name: {is: "LiquidityAdded"}}}}
+    ) {
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Topics {
+        Hash
+      }
+      TransactionStatus {
+        Success
+      }
+      LogHeader {
+        Address
+        Index
+        Data
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Log {
+        EnterIndex
+        ExitIndex
+        Index
+        LogAfterCallIndex
+        Pc
+        SmartContract
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Track Liquidity Add Events for a Token on Four Meme
+
+This query tracks liquidity addition events for a specific token on the Four Meme Exchange. It listens for `LiquidityAdded` events emitted from the exchange's smart contract (`0x5c952063c7fc8610ffdb798152d69f0b9550762b`) BNB network
+
+In this example, the query monitors liquidity events for a specific token (`0x5a49ce64a1e44f6fce07e9ff38f54dde8a8a0e94`) by filtering the event arguments to only include actions related to this token.
+
+You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific-tokens-on-Four-meme)
+
+```
+{
+  EVM(dataset: realtime, network: bsc) {
+    Events(
+      limit: {count: 20}
+      where: {LogHeader: {Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Log: {Signature: {Name: {is: "LiquidityAdded"}}}, Arguments: {includes: {Name: {is: "token1"}, Value: {Address: {is: "0x5a49ce64a1e44f6fce07e9ff38f54dde8a8a0e94"}}}}}
+    ) {
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Topics {
+        Hash
+      }
+      TransactionStatus {
+        Success
+      }
+      LogHeader {
+        Address
+        Index
+        Data
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Log {
+        EnterIndex
+        ExitIndex
+        Index
+        LogAfterCallIndex
+        Pc
+        SmartContract
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+
+```
