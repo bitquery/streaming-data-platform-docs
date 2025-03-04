@@ -12,7 +12,11 @@ Block {
 }
 ```
 
-or
+```
+Block {
+  Time(interval: {count: 1, in: hours})
+}
+```
 
 ```graphql
 Block {
@@ -20,11 +24,15 @@ Block {
 }
 ```
 
-or
-
 ```
 Block {
   Time(interval: {count: 1, in: weeks})
+}
+```
+
+```
+Block {
+  Time(interval: {count: 1, in: months})
 }
 ```
 
@@ -355,16 +363,13 @@ If you compare the results of the two you see smoothening of spikes.
 **Example 1 (March 2, 2025)**
 
 - **Without quantile filtering:**
-  - `close`: 0.0003519213658176415
+
   - `high`: 0.00043009940205914187 (Very high)
   - `low`: 0.00034041182935594274
-  - `open`: 0.0004098994555996678
-  -
+
 - **With quantile filtering:**
-  - `close1`: 0.00038090972229838367 (Higher than raw close)
   - `max1`: 0.0004214320331811905 (Lower than raw high → filters extreme spike)
   - `min1`: 0.0003484918735921383 (Higher than raw low → removes low extremes)
-  - `open1`: 0.00038090972229838367
 
 _Effect:_ The high (`max1`) and low (`min1`) values are adjusted to remove extreme spikes.
 
@@ -386,13 +391,12 @@ _Effect:_ The low (`min1`) is adjusted upwards, likely removing an extreme drop.
 - Smoothing high price spikes (`max1` is lower than `high`)
 - Removing sharp downward price drops (`min1` is higher than `low`)
 
-
 ## **Alternative: Calculating OHLC from Trades Without Aggregating in GraphQL Query**
 
 ### Limitations of the OHLC API
 
 - The Solana OHLC API includes data starting from May 2024 to now only.
-- While you can add filters as shown above to filter only valuable trades, it is not fool-proof and might not work with all tokens especially memecoins. 
+- While you can add filters as shown above to filter only valuable trades, it is not fool-proof and might not work with all tokens especially memecoins.
 
 If you prefer not to use an aggregated GraphQL query, you can fetch raw trade data and manually compute OHLC values.
 
