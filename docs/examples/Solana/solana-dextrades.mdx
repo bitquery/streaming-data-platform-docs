@@ -597,6 +597,35 @@ query ($token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: D
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_dex_list).
 
+## Get Solana Price in Realtime
+
+You can use the below stream to get the Solana price. Try the query on ide [here](https://ide.bitquery.io/solana-price-stream)
+
+```
+subscription {
+  Solana {
+    DEXTrades(
+      where: {Trade: {Sell: {Currency: {MintAddress: {in: ["So11111111111111111111111111111111111111112", "11111111111111111111111111111111"]}}}}}
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Buy {
+          Price
+          PriceInUSD
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Get Top Bought Tokens on Solana
 
 This query will give you most bought Solana Tokens on Raydium.
