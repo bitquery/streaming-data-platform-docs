@@ -233,7 +233,7 @@ This GraphQL **subscription** query is fetching real-time **OHLC (Open, High, Lo
 - **`min`** → **5th percentile** price (`quantile(of: Trade_PriceInUSD, level: 0.05)`)
   - What is the price of the token for lowest 5% of the trades?
 - **`max`** → **95th percentile** price (`quantile(of: Trade_PriceInUSD, level: 0.95)`)
-  -  What is the price of the token for top 5% of the trades?
+  - What is the price of the token for top 5% of the trades?
 - **`close`** → The latest trade price (`PriceInUSD`).
 - **`volume`** → Total trade volume in USD (`sum(of: Trade_Side_AmountInUSD)`) over the interval.
 
@@ -307,9 +307,84 @@ If your OHLC data differs significantly from other providers, you should:
 - If there’s still a **huge discrepancy**, report the issue by creating a ticket at:  
   [Bitquery Support](https://support.bitquery.io).
 
-
 ### Example Scenario
 
+For example if you check the OHLC for this token `AYMzajW1bDKHzWGWAHDXwSUTcxv6QPKYD89rC68Apump` again WSOL,
+
+Take this query [https://ide.bitquery.io/quantile](https://ide.bitquery.io/quantile) which includes both OHLC using `maximum`, `minimum` and using `quantile` and removes outliers using `AmountinUSD`
+
+```
+{
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "Block_Timefield"}
+      where: {Trade: {Currency: {MintAddress: {is: "J3TqbUgHurQGNxWtT88UQPcMNVmrL875pToQZdrkpump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}, AmountInUSD: {gt: "10"}}}}
+      limit: {count: 10}
+    ) {
+      Block {
+        Timefield: Time(interval: {in: days, count: 1})
+      }
+      volume: sum(of: Trade_Side_AmountInUSD)
+      min1: quantile(of: Trade_PriceInUSD, level: 0.05)
+      max1: quantile(of: Trade_PriceInUSD, level: 0.95)
+      close1: median(of: Trade_PriceInUSD)
+      open1: median(of: Trade_PriceInUSD)
+      Trade {
+        Currency {
+          Name
+        }
+        high: PriceInUSD(maximum: Trade_Price)
+        low: PriceInUSD(minimum: Trade_Price)
+        open: PriceInUSD(minimum: Block_Slot)
+        close: PriceInUSD(maximum: Block_Slot)
+        Side {
+          Currency {
+            Name
+          }
+        }
+      }
+      count
+    }
+  }
+}
+
+```
+
+If you compare the results of the two you see smoothening of spikes.
+
+**Example 1 (March 2, 2025)**
+
+- **Without quantile filtering:**
+  - `close`: 0.0003519213658176415
+  - `high`: 0.00043009940205914187 (Very high)
+  - `low`: 0.00034041182935594274
+  - `open`: 0.0004098994555996678
+  -
+- **With quantile filtering:**
+  - `close1`: 0.00038090972229838367 (Higher than raw close)
+  - `max1`: 0.0004214320331811905 (Lower than raw high → filters extreme spike)
+  - `min1`: 0.0003484918735921383 (Higher than raw low → removes low extremes)
+  - `open1`: 0.00038090972229838367
+
+_Effect:_ The high (`max1`) and low (`min1`) values are adjusted to remove extreme spikes.
+
+**Example 2 (February 27, 2025)**
+
+- **Without quantile filtering:**
+  - `close`: 0.0003147996409415908
+  - `high`: 0.00033683591504094873
+  - `low`: 0.000254437945561626 (Low outlier)
+  - `open`: 0.00030726648293986935
+- **With quantile filtering:**
+  - `close1`: 0.0003042437473777681
+  - `max1`: 0.00032312784204259514
+  - `min1`: 0.00028326141997240487 (Higher than raw low, outlier removed)
+  - `open1`: 0.0003042437473777681
+
+_Effect:_ The low (`min1`) is adjusted upwards, likely removing an extreme drop.
+
+- Smoothing high price spikes (`max1` is lower than `high`)
+- Removing sharp downward price drops (`min1` is higher than `low`)
 
 
 ## **Alternative: Calculating OHLC from Trades Without Aggregating in GraphQL Query**
