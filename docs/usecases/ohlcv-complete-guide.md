@@ -27,6 +27,7 @@ Block {
   Time(interval: {count: 1, in: weeks})
 }
 ```
+
 and so on.
 
 ## **OHLC on EVM Chains**
@@ -175,7 +176,85 @@ query tradingViewPairs {
 
 ## Real-time OHLC
 
+In EVM and non-EVM chains you can also use `subscription` to get a high-low value of a token pair.
 
+Take this query below for example;
+
+```
+subscription LatestTrades {
+  Solana {
+    DEXTradeByTokens(
+      where: {Transaction: {Result: {Success: true}}, Trade: {Side: {Amount: {gt: "0"}, Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Currency: {MintAddress: {is: "AZyBFqNp2G7eVsyEKwYyWJnMgj2wcxxJA2ftQDqQpump"}}}}
+    ) {
+      min: quantile(of: Trade_PriceInUSD, level: 0.05)
+      max: quantile(of: Trade_PriceInUSD, level: 0.95)
+      volume: sum(of: Trade_Side_AmountInUSD)
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+      Trade {
+        Market {
+          MarketAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Side {
+          Type
+        }
+        PriceInUSD
+        close: PriceInUSD
+        Amount
+        Side {
+          Currency {
+            Symbol
+            MintAddress
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+
+
+```
+
+This GraphQL **subscription** query is fetching real-time **OHLC (Open, High, Low, Close)** data for Solana trades by continuously monitoring and streaming the latest trades.
+
+**Calculating OHLC-Like Metrics**
+
+- **`min`** → **5th percentile** price (`quantile(of: Trade_PriceInUSD, level: 0.05)`)
+  - What is the price of the token for lowest 5% of the trades?
+- **`max`** → **95th percentile** price (`quantile(of: Trade_PriceInUSD, level: 0.95)`)
+  -  What is the price of the token for top 5% of the trades?
+- **`close`** → The latest trade price (`PriceInUSD`).
+- **`volume`** → Total trade volume in USD (`sum(of: Trade_Side_AmountInUSD)`) over the interval.
+
+4.  **Streaming the Data Continuously**:
+
+    - Because this is a **subscription**, every time a new trade happens on Solana for this token pair, the latest price data is sent.
+    - The latest **closing price (`close`)** is updated dynamically as new trades occur.
+
+### **Why This Is "Real-Time" OHLC?**
+
+- The query continuously **monitors** the latest **trades** on Solana.
+- Each trade updates the **latest close price (`close`)**.
+- The **high (`max`) and low (`min`)** prices adjust dynamically based on the last 50 trades.
+- It provides **near real-time OHLC-like data** without waiting for the full candle interval.
+
+### **Limitations**
+
+- This is **not true OHLC** because:
+  - It does not aggregate price data strictly by time intervals (e.g., every 5 min, 1h).
+  - The **open price** (first trade of the interval) is missing.
+  - It works based on a **rolling window of the latest trades**, not fixed time slots.
 
 ## **Filtering Abnormal Prices**
 
@@ -227,6 +306,11 @@ If your OHLC data differs significantly from other providers, you should:
 - Check if **Price Asymmetry** and other filters (as discussed above) are applied.
 - If there’s still a **huge discrepancy**, report the issue by creating a ticket at:  
   [Bitquery Support](https://support.bitquery.io).
+
+
+### Example Scenario
+
+
 
 ## **Alternative: Calculating OHLC from Trades Without Aggregating in GraphQL Query**
 
