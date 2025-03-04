@@ -597,6 +597,24 @@ query ($token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: D
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_dex_list).
 
+## Get Token creation date
+
+You can use the below query to get any token's creation time. Note that we are providing first trade time which in most of the cases is around creation time only. Try the query on ide [here](https://ide.bitquery.io/Token-creation-time_1)
+
+```
+{
+ Solana(dataset: combined) {
+  DEXTradeByTokens(
+   where: {Trade: {Currency: {MintAddress: {is: "94vNH3HhLv42gfkF93n9EQq9vyHPKRZ5XG6U3HmDpump"}}}}
+  ) {
+   Block {
+    Time(minimum: Block_Time)
+   }
+  }
+ }
+}
+```
+
 ## Get Solana Price in Realtime
 
 You can use the below stream to get the Solana price. Try the query on ide [here](https://ide.bitquery.io/solana-price-stream)
