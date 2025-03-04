@@ -311,7 +311,7 @@ If your OHLC data differs significantly from other providers, you should:
 
 For example if you check the OHLC for this token `AYMzajW1bDKHzWGWAHDXwSUTcxv6QPKYD89rC68Apump` again WSOL,
 
-Take this query [https://ide.bitquery.io/quantile](https://ide.bitquery.io/quantile) which includes both OHLC using `maximum`, `minimum` and using `quantile` and removes outliers using `AmountinUSD`
+Take this query [https://ide.bitquery.io/quantile](https://ide.bitquery.io/quantile) which includes both OHLC using `maximum`, `minimum` and using `quantile` and removes small trades using `AmountinUSD >10` filter.
 
 ```
 {
@@ -388,6 +388,11 @@ _Effect:_ The low (`min1`) is adjusted upwards, likely removing an extreme drop.
 
 
 ## **Alternative: Calculating OHLC from Trades Without Aggregating in GraphQL Query**
+
+### Limitations of the OHLC API
+
+- The Solana OHLC API includes data starting from May 2024 to now only.
+- While you can add filters as shown above to filter only valuable trades, it is not fool-proof and might not work with all tokens especially memecoins. 
 
 If you prefer not to use an aggregated GraphQL query, you can fetch raw trade data and manually compute OHLC values.
 
