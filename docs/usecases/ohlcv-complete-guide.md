@@ -317,7 +317,7 @@ If your OHLC data differs significantly from other providers, you should:
 
 ### Example Scenario
 
-For example if you check the OHLC for this token `AYMzajW1bDKHzWGWAHDXwSUTcxv6QPKYD89rC68Apump` again WSOL,
+For example if you check the OHLC for this token `J3TqbUgHurQGNxWtT88UQPcMNVmrL875pToQZdrkpump` again WSOL,
 
 Take this query [https://ide.bitquery.io/quantile](https://ide.bitquery.io/quantile) which includes both OHLC using `maximum`, `minimum` and using `quantile` and removes small trades using `AmountinUSD >10` filter.
 
@@ -358,7 +358,7 @@ Take this query [https://ide.bitquery.io/quantile](https://ide.bitquery.io/quant
 
 ```
 
-If you compare the results of the two you see smoothening of spikes.
+If you compare the results of the two, you see smoothening of spikes.
 
 **Example 1 (March 2, 2025)**
 
