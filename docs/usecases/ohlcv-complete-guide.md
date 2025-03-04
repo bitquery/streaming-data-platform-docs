@@ -8,13 +8,30 @@ Bitquery’s OHLC APIs support multiple time intervals, including minutes, hours
 
 ```graphql
 Block {
-  Time(interval: {count: 1, in: weeks})
+  Time(interval: {count: 1, in: minutes})
 }
 ```
 
+or
+
+```graphql
+Block {
+  Time(interval: {count: 1, in: days})
+}
+```
+
+or
+
+```
+Block {
+  Time(interval: {count: 1, in: weeks})
+}
+```
+and so on.
+
 ## **OHLC on EVM Chains**
 
-To fetch OHLC (Open, High, Low, Close) data for a specific token pair on EVM-compatible chains like Ethereum, you can use Bitquery’s `DEXTrades` API. Supported networks include:
+To fetch OHLC (Open, High, Low, Close) data for a specific token pair on EVM-compatible chains like Ethereum, you can use Bitquery’s `DEXTradesbyTokens`API. Supported networks include:
 
 - **Ethereum** → `EVM(network: eth)`
 - **BNB Chain** → `EVM(network: bsc)`
@@ -85,8 +102,14 @@ For a detailed guide, visit:
       orderBy: { descendingByField: "Block_Timefield" }
       where: {
         Trade: {
-          Currency: { MintAddress: { is: "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN" } }
-          Side: { Currency: { MintAddress: { is: "So11111111111111111111111111111111111111112" } } }
+          Currency: {
+            MintAddress: { is: "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN" }
+          }
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
           PriceAsymmetry: { lt: 0.1 }
         }
       }
@@ -150,6 +173,10 @@ query tradingViewPairs {
 }
 ```
 
+## Real-time OHLC
+
+
+
 ## **Filtering Abnormal Prices**
 
 When fetching trade data from Bitquery APIs, you may encounter abnormal prices. These anomalies occur due to two primary reasons:
@@ -209,7 +236,7 @@ Complete guide to [using trades to calculate OHLC is available here](https://doc
 
 ## **Building TradingView Charts**
 
-To visualize OHLCV data on **TradingView**, refer to:
+To visualize OHLCV data using **TradingView Advanced Chart Library**, refer to:
 
 - [TradingView Advanced Charts Guide](https://docs.bitquery.io/docs/usecases/tradingview-advanced-charts/getting-started/)
 - [TradingView Real-Time Subscription](https://docs.bitquery.io/docs/usecases/tradingview-subscription-realtime/getting-started/)
