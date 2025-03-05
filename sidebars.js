@@ -527,7 +527,7 @@ const sidebars = {
       items: [
         {
           type: "category",
-          label: "NFT and Analytics",
+          label: "NFT Applications",
           link: {
             type: "generated-index",
             title: "NFT and Analytics",
@@ -590,12 +590,14 @@ const sidebars = {
             title: "Blockchain Monitoring",
           },
           items: [
+            "usecases/ohlcv-complete-guide",
             "usecases/mempool-transaction-fee",
             "usecases/monitoring-solana-blockchain-real-time-tutorial",
             "usecases/monitoring-solana-at-scale-managing-hundreds-of-addresses",
             "usecases/streaming-moonshot-prices",
             "usecases/solana-ohlc-calculator",
             "usecases/real-time-historical-ethereum-price-excel-google-sheets",
+          
             {
               type: "category",
               label: "Real-Time Balance Checker",
