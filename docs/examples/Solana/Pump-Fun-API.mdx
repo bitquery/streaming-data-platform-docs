@@ -40,10 +40,23 @@ Here’s [the query](https://ide.bitquery.io/top-tokens-by-mktcap-on-pump-fun-in
 {
   Solana {
     DEXTrades(
-      limitBy: {by: Trade_Buy_Currency_MintAddress, count: 1}
-      limit: {count: 10}
-      orderBy: {descending: Trade_Buy_Price}
-      where: {Trade: {Dex: {ProtocolName: {is: "pump"}}, Buy: {Currency: {MintAddress: {notIn: ["11111111111111111111111111111111"]}}}, PriceAsymmetry: {le: 0.1}, Sell: {AmountInUSD: {gt: "10"}}}, Transaction: {Result: {Success: true}}, Block: {Time: {since: "2025-02-21T05:05:00Z"}}}
+      limitBy: { by: Trade_Buy_Currency_MintAddress, count: 1 }
+      limit: { count: 10 }
+      orderBy: { descending: Trade_Buy_Price }
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "pump" } }
+          Buy: {
+            Currency: {
+              MintAddress: { notIn: ["11111111111111111111111111111111"] }
+            }
+          }
+          PriceAsymmetry: { le: 0.1 }
+          Sell: { AmountInUSD: { gt: "10" } }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since: "2025-02-21T05:05:00Z" } }
+      }
     ) {
       Trade {
         Buy {
@@ -546,6 +559,67 @@ query MyQuery {
 }
 ```
 
+## Get Token Details like Volume, OHLC, Dev Holding, Top Holders
+
+You can use the below query to get pump fun token related stats such as volume, OHLC, Dev holdings and top holders of the token. Try out query [here](https://ide.bitquery.io/solana-query-for-token-details)
+
+```
+query ($tokenAddress: String, $devAddress: String, $pairAddress: String) {
+  Solana {
+    volume: DEXTradeByTokens(
+      where: {Trade: {Currency: {MintAddress: {is: $tokenAddress}}}}
+    ) {
+      sum(of: Trade_Side_AmountInUSD)
+    }
+    chart: DEXTradeByTokens(
+      limit: {count: 50}
+      orderBy: {descendingByField: "Block_Timefield"}
+      where: {Trade: {Currency: {MintAddress: {is: $tokenAddress}}, Market: {MarketAddress: {is: $pairAddress}}}}
+    ) {
+      Block {
+        Timefield: Time(interval: {in: minutes, count: 1})
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
+      }
+      count
+    }
+    devHolding: BalanceUpdates(
+      where: {BalanceUpdate: {Account: {Owner: {is: $devAddress}}, Currency: {MintAddress: {is: $tokenAddress}}}}
+    ) {
+      BalanceUpdate {
+        balance: PostBalance(maximum: Block_Slot, selectWhere: {gt: "0"})
+      }
+    }
+    topHoldings: BalanceUpdates(
+      limit: {count: 10}
+      orderBy: {descendingByField: "BalanceUpdate_Holding_maximum"}
+      where: {BalanceUpdate: {Currency: {MintAddress: {is: $tokenAddress}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      BalanceUpdate {
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        Account {
+          Owner
+        }
+        Holding: PostBalance(maximum: Block_Slot, selectWhere: {gt: "0"})
+      }
+    }
+  }
+}
+{
+  "tokenAddress": "2MgQAUxR3KtRGXby9x86fYdZQT8KNjsJzq7atKjJpump",
+  "pairAddress": "HK2bpr3F1HPVuoqUb3QRAheSSMezyzGG6QhQGC2S1beu"
+}
+```
+
 ## Get OHLC Data of a Token on Pump Fun
 
 The below query gets OHLC data of the specified Token `66VR6bjEV5DPSDhYSQyPAxNsY3dgmH6Lwgi5cyf2pump` for 1 minute time interval for last 10 minutes on Pump Fun DEX.
@@ -657,9 +731,21 @@ You can run the query [here](https://ide.bitquery.io/Price-of-a-pump-fun-token_7
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      orderBy: {descending: Block_Time}
-      limit: {count: 10}
-      where: {Trade: {Dex: {ProgramAddress: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}, Currency: {MintAddress: {is: "3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog"}}}, Transaction: {Result: {Success: true}}}
+      orderBy: { descending: Block_Time }
+      limit: { count: 10 }
+      where: {
+        Trade: {
+          Dex: {
+            ProgramAddress: {
+              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
+            }
+          }
+          Currency: {
+            MintAddress: { is: "3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
     ) {
       Block {
         Time
@@ -882,13 +968,24 @@ You can run the query [here](https://ide.bitquery.io/get-PF-tokens-creation-time
 {
   Solana {
     TokenSupplyUpdates(
-      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}, TokenSupplyUpdate: {Currency: {MintAddress: {is: "3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog"}}}}
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+            Method: { is: "create" }
+          }
+        }
+        TokenSupplyUpdate: {
+          Currency: {
+            MintAddress: { is: "3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog" }
+          }
+        }
+      }
     ) {
       Block {
         Time
       }
       Transaction {
-        
         Signer
       }
       TokenSupplyUpdate {
@@ -917,7 +1014,6 @@ You can run the query [here](https://ide.bitquery.io/get-PF-tokens-creation-time
     }
   }
 }
-
 ```
 
 ## Get the Top Traders of a specific Token on Pump Fun DEX
