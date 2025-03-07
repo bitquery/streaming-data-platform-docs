@@ -65,18 +65,14 @@ subscription {
 
 ```
 
-## Recent Events
+## Recent Events with Logs on Ethereum
 
-This query is used to retrieve recent events' data on the Binance Smart Chain (BSC) network. You can find the query [here](https://graphql.bitquery.io/ide/Recents-Events). The query returns details on each event include transaction details like hash, sender, call trace and event logs.
+This query is used to retrieve recent events' data on the ETH network. You can find the query [here](https://ide.bitquery.io/Recents-Events-and-Logs-on-Ethereum). The query returns details on each event include transaction details like hash, sender, call trace and event logs.
 
 ```graphql
 query MyQuery {
-  EVM(dataset: archive, network: bsc) {
-    Events(
-      limit: { count: 10 }
-      orderBy: { descending: Block_Time }
-      where: { Block: { Date: { after: "2023-10-16" } } }
-    ) {
+  EVM(dataset: realtime, network: eth) {
+    Events(limit: { count: 10 }, orderBy: { descending: Block_Time }) {
       Block {
         Number
       }
@@ -95,24 +91,10 @@ query MyQuery {
         To
         Type
       }
-      Log {
-        Signature {
-          Signature
-        }
-        SmartContract
-      }
     }
   }
 }
 ```
-
-**Parameters**
-
-- `dataset`: This parameter specifies the dataset to use. In this case, the "combined" dataset is being used.
-- `network`: This parameter specifies the network to query. In this case, the Binance Smart Chain (BSC) network is being queried.
-- `limit`: This parameter limits the number of events to retrieve. In this case, a limit of 10 events is being requested.
-- `orderBy`: This parameter specifies the field and order to sort the events by. In this case, events are sorted in descending order by the block time.
-- `where`: This parameter specifies the conditions that events must meet to be included in the response. In this case, events are filtered to include only those that occurred after February 16th, 2023.
 
 ## Daily Stats on Calls
 
