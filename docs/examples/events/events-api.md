@@ -6,6 +6,8 @@ sidebar_position: 2
 
 The Event API gives you access real-time blockchain event data. Events represent changes to the state of a blockchain, such as transactions, token transfers, or contract creations.
 
+You can find the **Ethers Library equivalents** for these queries at **[Bitquery Ethers Library Documentation](https://docs.bitquery.io/docs/examples/ethers-library/)**.
+
 ## Mempool Events on Ethereum
 
 This query listens to real-time mempool events on the Ethereum (ETH) blockchain. The query is designed to capture details of transactions, logs, events, and arguments from the Ethereum Virtual Machine (EVM) before they are confirmed in a block.
