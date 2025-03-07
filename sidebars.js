@@ -305,13 +305,18 @@ const sidebars = {
               ],
             },
             {
-              type: "category",
-              label: "NFT",
-              items: [
+              "type": "category",
+              "label": "NFT",
+              "items": [
                 "examples/nft/nft-api",
+                "examples/nft/nft-blur-marketplace-api",
+                "examples/nft/nft-calls-api",
+                "examples/nft/nft-collection-api",
+                "examples/nft/nft-metadata-api",
                 "examples/nft/nft-ownership-api",
-                "examples/nft/nft-trades-apI",
-              ],
+                "examples/nft/nft-trades-api",
+                "examples/nft/nft-transfer-api"
+              ]
             },
             {
               type: "category",
