@@ -6,6 +6,65 @@ sidebar_position: 2
 
 The Event API gives you access real-time blockchain event data. Events represent changes to the state of a blockchain, such as transactions, token transfers, or contract creations.
 
+## Mempool Events on Ethereum
+
+This query listens to real-time mempool events on the Ethereum (ETH) blockchain. The query is designed to capture details of transactions, logs, events, and arguments from the Ethereum Virtual Machine (EVM) before they are confirmed in a block.
+You can run it [here](https://ide.bitquery.io/Mempool-event-stream)
+
+```
+subscription {
+  EVM(network: eth, mempool: true) {
+    Events {
+      Call {
+        CallPath
+        InternalCalls
+      }
+      Topics {
+        Hash
+      }
+      Receipt {
+        CumulativeGasUsed
+      }
+      Transaction {
+        From
+        To
+        Type
+      }
+      Log {
+        Signature {
+          Name
+        }
+        SmartContract
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+
+```
+
 ## Recent Events
 
 This query is used to retrieve recent events' data on the Binance Smart Chain (BSC) network. You can find the query [here](https://graphql.bitquery.io/ide/Recents-Events). The query returns details on each event include transaction details like hash, sender, call trace and event logs.
@@ -94,13 +153,13 @@ query MyQuery {
 ### Track all AAVE V3 Events
 
 The query below shows latest 10 events emitted by the AAVE V3 contract. The `Log` field in the results will contain information about the event, including its signature, smart contract address, and transaction hash. The `Arguments` field will contain the values of any arguments that were passed to the event.
-You can find the query [here](https://ide.bitquery.io/All-aave-v3-events)
+You can find the query [here](https://ide.bitquery.io/All-aave-v3-events-latest)
 
 ```
 {
-  EVM(dataset: archive, network: eth) {
+  EVM(dataset: realtime, network: eth) {
     Events(
-      orderBy: {descending: Block_Number}
+      orderBy: {descending: Block_Time}
       limit: {count: 10}
       where: {Transaction: {To: {is: "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2"}}}
     ) {
@@ -136,6 +195,7 @@ You can find the query [here](https://ide.bitquery.io/All-aave-v3-events)
     }
   }
 }
+
 ```
 
 ## Staking and Rewards
@@ -234,6 +294,7 @@ subscription {
 ```
 
 ## Latest Liquidity Removal on Uniswap
+
 This query retrieves the most recent liquidity removal events (Burn events) on Uniswap. It includes details about the transaction, block, log, and arguments. You can run the query [here](https://ide.bitquery.io/uniswap-v2-liquidity-removed)
 
 ```
