@@ -175,14 +175,14 @@ subscription{
 ## Track Real-time Token Burn on Solana
 
 Receive real-time updates on token burn events on the Solana blockchain. The below query applies a filter to only include instructions where
-Program Method includes `burn`, indicating that we filter instructions only related to token burning.
+Program Method includes `burn`, indicating that we filter instructions only related to token burning. You can run it [here](https://ide.bitquery.io/track-solana-token-burn-in-realtime_1)
 
 ```
 
 subscription {
   Solana {
     Instructions(
-      where: {Instruction: {Program: {Method: {includes: "burn"}}}, Transaction: {Result: {Success: true}}}
+      where: {Instruction: {Program: {Method: {is: "burn"}}}, Transaction: {Result: {Success: true}}}
     ) {
       Instruction {
         Accounts {

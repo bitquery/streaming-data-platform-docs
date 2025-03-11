@@ -95,7 +95,7 @@ The below query tracks latest pool creation on raydium CLMM.
 
 The `"Program": {"AccountNames"}` includes the order in which account addresses are mentioned in `Accounts` list.
 
-This includes `poolCreator`, token vaults (`tokenVault0`, `tokenVault1`) and token mints (`tokenMint0`, `tokenMint1`). 
+This includes `poolCreator`, token vaults (`tokenVault0`, `tokenVault1`) and token mints (`tokenMint0`, `tokenMint1`).
 
 The mint addresses for the tokens being used in the pool are listed for example `tokenMint1` could be any newly deployed token and `tokenMint0` can be WSOL , indicating which tokens the CLMM pool will support.
 
@@ -231,15 +231,15 @@ The below query tracks latest position closes on raydium CLMM by filtering using
 
 ## Latest Positions Created
 
-The below query tracks latest position created on raydium CLMM by filtering using `Method: {is: "openPositionV2"}`. 
+The below query tracks latest position created on raydium CLMM by filtering using `Method: {is: "openPositionV2"}`.
 
 This is where various accounts like NFTs, tokens, and program states are updated. The parameters define liquidity and token amounts involved in the position.
 
--   **amount0Max** corresponds to **tokenVault0** and **tokenAccount0**.
--   **amount1Max** corresponds to **tokenVault1** and **tokenAccount1**.
+- **amount0Max** corresponds to **tokenVault0** and **tokenAccount0**.
+- **amount1Max** corresponds to **tokenVault1** and **tokenAccount1**.
 
--   **amount0Max**: The maximum amount of **Token 0** to be added to the position. 
--   **amount1Max**: The maximum amount of **Token 1** to be added to the position. 
+- **amount0Max**: The maximum amount of **Token 0** to be added to the position.
+- **amount1Max**: The maximum amount of **Token 1** to be added to the position.
 
 ```
 {
@@ -292,6 +292,211 @@ This is where various accounts like NFTs, tokens, and program states are updated
             Name
           }
         }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+
+```
+
+## CLMM Position Line : Adding Liquidity at a Price
+
+This API fetches Increase Liquidity V2 transactions from the Raydium CLMM on Solana. It retrieves relevant data, including liquidity amounts, token accounts, execution logs, and transaction details.
+
+The arguments and account details include
+
+- `AccountNames`: List of accounts involved
+
+```
+ "nftOwner",
+ "nftAccount",
+ "poolState",
+ "protocolPosition",
+"personalPosition",
+"tickArrayLower",
+"tickArrayUpper",
+"tokenAccount0",
+"tokenAccount1",
+"tokenVault0",
+"tokenVault1",
+"tokenProgram",
+"tokenProgram2022",
+"vault0Mint",
+"vault1Mint"
+
+```
+
+- `Address`: Contract address of the program
+- `Arguments` (Liquidity & Token Values)
+  - `liquidity` → `{json}`
+  - `amount0Max` → The maximum amount of Token 0 (possibly SOL) added as liquidity.
+  - `amount1Max` → The maximum amount of Token 1 (SPL token) added as liquidity.
+
+You can run the query [here](https://ide.bitquery.io/increaseLiquidityV2-latest-raydium-clmm#)
+
+```
+{
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"}, Method: {is: "increaseLiquidityV2"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Name
+          }
+          Name
+          Method
+          Json
+          Parsed
+        }
+        Logs
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+
+```
+
+## CLMM Position Line : Removing Liquidity at a Price
+
+This API fetches **Decrease Liquidity V2** transactions from the **Raydium CLMM** on **Solana**. It retrieves relevant data, including liquidity amounts, token accounts, execution logs, and transaction details.
+
+### **Arguments and Account Details**
+
+- **`AccountNames`**: List of accounts involved
+
+```
+ "nftOwner",
+ "nftAccount",
+ "personalPosition",
+ "poolState",
+ "protocolPosition",
+ "tokenVault0",
+ "tokenVault1",
+ "tickArrayLower",
+ "tickArrayUpper",
+ "recipientTokenAccount0",
+ "recipientTokenAccount1",
+ "tokenProgram",
+ "tokenProgram2022",
+ "memoProgram",
+ "vault0Mint",
+ "vault1Mint"
+
+```
+
+- **`Address`**: Contract address of the program
+- **`Arguments` (Liquidity & Token Values)**
+  - `liquidity` → `{json}`
+  - `amount0Min` → The minimum amount of **Token 0** (possibly SOL) withdrawn from liquidity.
+  - `amount1Min` → The minimum amount of **Token 1** (SPL token) withdrawn from liquidity.
+
+You can run the query **[here](https://ide.bitquery.io/decreaseLiquidityV2-latest-raydium-clmm_1#)**
+
+```
+{
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"}, Method: {is: "decreaseLiquidityV2"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Name
+          }
+          Name
+          Method
+          Json
+          Parsed
+        }
+        Logs
       }
       Transaction {
         Signature
