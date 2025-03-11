@@ -57,7 +57,7 @@ In the example above, querying the `Transactions` data cube within the Ethereum 
 
 Under [new pricing](https://bitquery.io/blog/new-pricing-june-2024), we charge per simultaneous streams, instead of points.
 
-However internally Points are still calculated based on points, Each subscription is charged at the rate of 40 points per minute. However when we sell simultaneous streams, we add enough points that it runs 24\*7 for whole month.
+However internally each subscription is charged at the rate of 40 points per minute. However when we sell simultaneous streams, we add enough points that it runs 24\*7 for whole month.
 
 **Note**: Each data cube (e.g., Transfers, DEXTrades, or Blocks) activated counts as a separate subscription. If multiple cubes are used within a single WebSocket connection, each is billed as an individual subscription.
 
