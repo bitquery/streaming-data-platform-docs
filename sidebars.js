@@ -191,7 +191,7 @@ const sidebars = {
             {
               type: "category",
               label: "Protobuf Data Streams",
-              items:["streams/protobuf/kafka-protobuf-go"]
+              items: ["streams/protobuf/kafka-protobuf-go"],
             },
             {
               type: "category",
@@ -211,7 +211,10 @@ const sidebars = {
             {
               type: "category",
               label: "Python Example",
-              items: ["streams/kafka-streams-python","streams/kafka-streams-python-thread"],
+              items: [
+                "streams/kafka-streams-python",
+                "streams/kafka-streams-python-thread",
+              ],
             },
           ],
         },
@@ -348,7 +351,7 @@ const sidebars = {
             "examples/BSC/bsc-nft",
             "examples/BSC/bsc-transfers",
             "examples/BSC/gra-fun-api",
-            "examples/BSC/four-meme-api"
+            "examples/BSC/four-meme-api",
           ],
         },
         {
@@ -597,7 +600,7 @@ const sidebars = {
             "usecases/streaming-moonshot-prices",
             "usecases/solana-ohlc-calculator",
             "usecases/real-time-historical-ethereum-price-excel-google-sheets",
-          
+            "usecases/compare-websocket-kafka",
             {
               type: "category",
               label: "Real-Time Balance Checker",
