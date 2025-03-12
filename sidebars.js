@@ -216,6 +216,8 @@ const sidebars = {
                 "streams/kafka-streams-python-thread",
               ],
             },
+
+            "streams/compare-websocket-kafka"
           ],
         },
       ],
@@ -605,7 +607,6 @@ const sidebars = {
             "usecases/streaming-moonshot-prices",
             "usecases/solana-ohlc-calculator",
             "usecases/real-time-historical-ethereum-price-excel-google-sheets",
-            "usecases/compare-websocket-kafka",
             {
               type: "category",
               label: "Real-Time Balance Checker",
