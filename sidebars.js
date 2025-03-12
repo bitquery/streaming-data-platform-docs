@@ -217,7 +217,7 @@ const sidebars = {
               ],
             },
 
-            "streams/compare-websocket-kafka"
+            "streams/compare-websocket-kafka",
           ],
         },
       ],
@@ -310,9 +310,9 @@ const sidebars = {
               ],
             },
             {
-              "type": "category",
-              "label": "NFT",
-              "items": [
+              type: "category",
+              label: "NFT",
+              items: [
                 "examples/nft/nft-api",
                 "examples/nft/nft-blur-marketplace-api",
                 "examples/nft/nft-calls-apI",
@@ -320,8 +320,8 @@ const sidebars = {
                 "examples/nft/nft-metadata-api",
                 "examples/nft/nft-ownership-api",
                 "examples/nft/nft-trades-apI",
-                "examples/nft/nft-transfer-api"
-              ]
+                "examples/nft/nft-transfer-api",
+              ],
             },
             {
               type: "category",
@@ -464,6 +464,8 @@ const sidebars = {
           },
           items: [
             "examples/Base/aerodrome-base-api",
+            "examples/Base/base-uniswap-api",
+            "examples/Base/base-clanker-api",
             "examples/Base/apestore-base-api",
             "examples/Base/base-jump-base-api",
             "examples/Base/base-balance-updates",

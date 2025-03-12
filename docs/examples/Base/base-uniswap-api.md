@@ -171,6 +171,9 @@ query timeDiagram($network: evm_network) {
     }
   }
 }
+{
+  "network": "base"
+}
 ```
 
 ## Get top sold tokens on uniswap v3
