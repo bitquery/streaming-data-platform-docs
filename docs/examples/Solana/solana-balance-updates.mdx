@@ -103,7 +103,7 @@ subscription {
 
 ## Get Top 100 Token Holders of a Particular Token
 
-[This query](https://ide.bitquery.io/top-100-holders-of-token-on-Solana) returns the top 100 token holders of a particular token after a
+[This query](https://ide.bitquery.io/top-100-holders-of-USDC-token-on-Solana) returns the top 100 token holders of a particular token after a
 given time.
 
 ```
@@ -112,7 +112,7 @@ query MyQuery {
     BalanceUpdates(
       orderBy: {descendingByField: "BalanceUpdate_Holding_maximum"}
       where: {BalanceUpdate: {Currency: {MintAddress: 
-        {is: "Hrt2MqJjGYSG1eL1dfAuLWJFsPUnjzRKqesyma3Gpump"}},
+        {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}},
         }, Transaction: {Result: {Success: true}}}
     ) {
       BalanceUpdate {
