@@ -191,7 +191,7 @@ const sidebars = {
             {
               type: "category",
               label: "Protobuf Data Streams",
-              items: ["streams/protobuf/kafka-protobuf-go"],
+              items: ["streams/protobuf/kafka-protobuf-go","streams/protobuf/kafka-protobuf-python"],
             },
             {
               type: "category",
