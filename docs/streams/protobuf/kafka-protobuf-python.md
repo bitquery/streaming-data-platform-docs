@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Tutorial: Consuming Solana Transaction Protobuf Messages from Kafka Using Python
+# Python Tutorial to Consume Solana Transaction Protobuf Messages from Kafka
 
 This tutorial explains how to consume Solana transaction messages in protobuf format from Kafka using Python.
 
