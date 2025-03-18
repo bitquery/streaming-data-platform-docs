@@ -436,6 +436,56 @@ query pairTopTraders($network: evm_network, $token: String, $base: String) {
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/pair/0x711bfe972465a1e9182766ad67aff3c80a0cf308/0x55d398326f99059ff775485246999027b3197955#pair_top_traders).
 
+## Get Latest Trades on a specific DEX
+
+In this section, we will see how we can [subscribe](https://ide.bitquery.io/latest-trades-on-a-DEX-bsc) to the latest trades on particular DEX, 
+Pancakeswap V3 in this example, using the `OwnerAddress` which is the alias for the `Factory Address` of the DEX as seen in the example below.
+
+``` graphql
+
+subscription {
+  EVM(network: bsc) {
+    DEXTrades(
+      where: {Trade: {Dex: {OwnerAddress: {is: "0x0BFbCF9fa4f9C56B0F40a671Ad40E0805A091865"}}}}
+    ) {
+      Trade {
+        Buy {
+          Currency {
+            SmartContract
+            Name
+            Symbol
+          }
+          PriceInUSD
+          Price
+          AmountInUSD
+        }
+        Sell {
+          Buyer
+          Seller
+          Price
+          PriceInUSD
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+        }
+        Dex {
+          Pair {
+            SmartContract
+          }
+          ProtocolName
+          ProtocolFamily
+          ProtocolVersion
+        }
+      }
+    }
+  }
+}
+```
+
+Additionally we can also add filters and conditions on other parameters, such as `Currency SmartContract` to get latest trades of a token on a particular DEX as seen in this [example](https://ide.bitquery.io/latest-trades-of-a-token-on-a-DEX).
+
 ## Get all DEXs where a specific token pair is listed
 
 This query will fetch you all the DEXs where a token pair is listed for the BSC network.
