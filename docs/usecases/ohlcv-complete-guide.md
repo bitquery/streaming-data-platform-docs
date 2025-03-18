@@ -184,25 +184,19 @@ query tradingViewPairs {
 
 ## Real-time OHLC
 
-In EVM and non-EVM chains you can also use `subscription` to get a high-low value of a token pair.
+In EVM and non-EVM chains, you can also use `subscription` to get a token pair with a high or low value.
 
 Take this query below for example;
 
 ```
-subscription LatestTrades {
+subscription LatestTrades($token: String) {
   Solana {
     DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Trade: {Side: {Amount: {gt: "0"}, Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Currency: {MintAddress: {is: "AZyBFqNp2G7eVsyEKwYyWJnMgj2wcxxJA2ftQDqQpump"}}}}
+      where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: $token}}, Side: {Currency: {MintAddress: {in: ["11111111111111111111111111111111", "So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN", "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"]}}}}}
     ) {
       min: quantile(of: Trade_PriceInUSD, level: 0.05)
       max: quantile(of: Trade_PriceInUSD, level: 0.95)
       volume: sum(of: Trade_Side_AmountInUSD)
-      Block {
-        Time
-      }
-      Transaction {
-        Signature
-      }
       Trade {
         Market {
           MarketAddress
@@ -211,26 +205,22 @@ subscription LatestTrades {
           ProtocolName
           ProtocolFamily
         }
+        close: PriceInUSD
         Side {
           Type
-        }
-        PriceInUSD
-        close: PriceInUSD
-        Amount
-        Side {
           Currency {
             Symbol
             MintAddress
             Name
           }
-          AmountInUSD
-          Amount
         }
       }
     }
   }
 }
-
+{
+  "token": "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh"
+}
 
 ```
 
