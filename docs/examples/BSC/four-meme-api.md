@@ -126,6 +126,8 @@ You can run the query [here](https://ide.bitquery.io/Trades-of-a-four-meme-token
 
 ```
 
+You can also check if the token is listed on other DEX using this [example](./bsc-dextrades.mdx/#get-all-dexs-where-a-specific-token-is-listed).
+
 ## Track Four Meme Trades in Realtime
 
 We will use Events API and arguments emitted in TokenSale events on Four Meme Exchange to track trades in real-time. They include the token address, user account, **price**, **amount** of tokens traded, total cost, transaction fee, remaining offers, and funds involved in the trade.
@@ -179,6 +181,8 @@ subscription {
 }
 
 ```
+
+You can refer to this [example](./bsc-dextrades.mdx/#get-latest-trades-on-a-specific-dex) to track latest trades and latest trades of a token on other particular DEX's such as Pancake Swap.
 
 ## Track Trades by a Four Meme User
 

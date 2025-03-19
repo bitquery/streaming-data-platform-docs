@@ -246,6 +246,84 @@ subscription {
 }
 ```
 
+## Track Cancelling of orders on Zeta in Realtime
+
+To retrieve the latest cancelling of orders on Zeta DEX, we will utilize the Solana instructions API/Websocket.
+
+We will specifically look for the latest instructions from Zeta's program, identified by the program ID `ZETAxsqBRek56DhiGXrn75yj2NHU3aYUnxvHXpkf3aD`, [using this query](https://ide.bitquery.io/Get-all-the-Zeta-Program-methods#). And then we can see in the response `cancelOrder` method which is called to initialize a cancellation.
+
+You can run this query using this [link](https://ide.bitquery.io/Track-cancelling-of-Orders-on-Zeta-in-realtime).
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "ZETAxsqBRek56DhiGXrn75yj2NHU3aYUnxvHXpkf3aD" }
+            Method: { is: "cancelOrder" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Owner
+            Mint
+            ProgramId
+          }
+        }
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+            }
+          }
+          Name
+          Method
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
 ## Video Tutorial | How to Track Zeta Placed Orders, Liquidations and Settling of Funds
 
 <VideoPlayer url="https://www.youtube.com/watch?v=YjJsr4cY_U4" />
