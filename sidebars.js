@@ -93,6 +93,7 @@ const sidebars = {
             "graphql/postman",
             "graphql/query",
             "graphql/sorting",
+            "graphql/capabilities/joins",
           ],
         },
         {
