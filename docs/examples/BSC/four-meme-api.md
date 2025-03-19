@@ -70,17 +70,82 @@ Using [this](https://ide.bitquery.io/FourMeme--Newly-Created-Token-by-Tracking-T
 }
 ```
 
-## Get Latest Trades of a Four Meme Token
+You can refer to this [example](./bsc-dextrades.mdx/#get-latest-trades-on-a-specific-dex) to track latest trades of a token on other particular DEX's such as Pancake Swap.
 
-This query retrieves the most recent trades of a specific token on Four Meme Exchange. It tracks `TokenSale` events for the token using its smart contract address.
 
-You can run the query [here](https://ide.bitquery.io/Trades-of-a-four-meme-token-historical)
+## Latest Token Buy and Sell Trades Stream for Four Meme
+
+You can track TokenPurchase and TokenSale events to track all new buy and sell events on four meme.
+
+Here is the [stream](https://ide.bitquery.io/Latest-Token-Buy-and-Sell-Trades-Stream-for-Four-Meme) you can run to test it out.
+
+
+```
+subscription {
+  EVM(network: bsc) {
+    Events(
+      where: {LogHeader: {Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Log: {Signature: {Name: {in: ["TokenPurchase", "TokenSale"]}}}}
+    ) {
+      LogHeader {
+        Address
+      }
+      Log {
+        Signature {
+          Name
+        }
+      }
+      Transaction {
+        From
+        To
+        Value
+        Type
+        Hash
+      }
+      Arguments {
+        Type
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+        Name
+      }
+    }
+  }
+}
+```
+
+
+
+
+
+
+## Get Latest Buy of a Four Meme Token
+
+This query retrieves the most recent token buy trades of a specific token on Four Meme Exchange. It tracks `TokenPurchase` events for the token using its smart contract address.
+
+You can run the query [here](https://ide.bitquery.io/Get-Latest-Buy-of-a-Four-Meme-Token)
 
 ```
 {
   EVM(dataset: combined, network: bsc) {
     Events(
-      where: {Log: {Signature: {Name: {is: "TokenSale"}}}, Arguments: {includes: {Value: {Address: {is: "0xfe6edde870ff03c039cafc4dba96533acc34a19f"}}}}}
+      where: {Block: {Date: {is: "2025-03-19"}}, LogHeader: {Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Log: {Signature: {Name: {is: "TokenPurchase"}}}, Arguments: {includes: {Value: {Address: {is: "0xa6af9d9966de5568d7708e435cca19caec8fb84a"}}}}}
       orderBy: {descending: Block_Time}
       limit: {count: 10}
     ) {
@@ -128,17 +193,127 @@ You can run the query [here](https://ide.bitquery.io/Trades-of-a-four-meme-token
 
 You can also check if the token is listed on other DEX using this [example](./bsc-dextrades.mdx/#get-all-dexs-where-a-specific-token-is-listed).
 
-## Track Four Meme Trades in Realtime
+## Get Latest Sell of a Four Meme Token
 
-We will use Events API and arguments emitted in TokenSale events on Four Meme Exchange to track trades in real-time. They include the token address, user account, **price**, **amount** of tokens traded, total cost, transaction fee, remaining offers, and funds involved in the trade.
+This query retrieves the most recent sell trades of a specific token on Four Meme Exchange. It tracks `TokenSale` events for the token using its smart contract address.
 
-You can run the query [here](https://ide.bitquery.io/subscribe-to-latest-trades-on-four-meme#)
+You can run the query [here](https://ide.bitquery.io/Get-Latest-Sell-of-a-Four-Meme-Token)
+
+```
+{
+  EVM(dataset: combined, network: bsc) {
+    Events(
+      where: {LogHeader: {Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Log: {Signature: {Name: {is: "TokenSale"}}}, Arguments: {includes: {Value: {Address: {is: "0xfe6edde870ff03c039cafc4dba96533acc34a19f"}}}}}
+      orderBy: {descending: Block_Time}
+      limit: {count: 10}
+    ) {
+      Log {
+        Signature {
+          Name
+        }
+      }
+      Transaction {
+        From
+        To
+        Value
+        Type
+        Hash
+      }
+      Arguments {
+        Type
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+        Name
+      }
+    }
+  }
+}
+```
+
+You can also check if the token is listed on other DEX using this [example](./bsc-dextrades.mdx/#get-all-dexs-where-a-specific-token-is-listed).
+
+
+## Monitor trades of traders on Four meme
+
+You can use our streams to monitor real time trades of a trader, for example run [this stream](https://ide.bitquery.io/Monitor-trades-of-traders-on-Four-meme).
 
 ```
 subscription {
   EVM(network: bsc) {
     Events(
-      where: {Log: {Signature: {Name: {is: "TokenSale"}}}, Arguments: {}, Transaction: {To: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}}
+      where: {LogHeader: {Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Log: {Signature: {Name: {in: ["TokenSale", "TokePurchase"]}}}, Arguments: {includes: {Name: {is: "account"}, Value: {Address: {is: "0x8fdca747e60dd6f3c78fb607e24a30ca53a17336"}}}}}
+    ) {
+      Log {
+        Signature {
+          Name
+        }
+      }
+      Transaction {
+        From
+        To
+        Value
+        Type
+        Hash
+      }
+      Arguments {
+        Type
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+        Name
+      }
+    }
+  }
+}
+```
+
+## Track Trades by a Four Meme User using Events API Historical
+
+You can use event API to get trades of a user using our event API. Run [this query](https://ide.bitquery.io/Track-Trades-by-a-Four-Meme-User-using-Events-API) for example.
+
+
+```
+{
+  EVM(dataset: combined, network: bsc) {
+    Events(
+      where: {LogHeader: {Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Log: {Signature: {Name: {in: ["TokenSale", "TokePurchase"]}}}, Arguments: {includes: {Name: {is: "account"}, Value: {Address: {is: "0x8fdca747e60dd6f3c78fb607e24a30ca53a17336"}}}}}
+      orderBy: {descending: Block_Time}
+      limit: {count: 10}
     ) {
       Log {
         Signature {
@@ -182,9 +357,7 @@ subscription {
 
 ```
 
-You can refer to this [example](./bsc-dextrades.mdx/#get-latest-trades-on-a-specific-dex) to track latest trades and latest trades of a token on other particular DEX's such as Pancake Swap.
-
-## Track Trades by a Four Meme User
+## Track Trades by a Four Meme User using Transfers
 
 [This](https://ide.bitquery.io/trades-by-an-user-on-Four-Meme_1) query returns trade activities (buys and sells) of an user on Four Meme Exchange, with the user address as `0xf0C66cc94c7568F63d421be93eBdb1Ce7d163c74` for this example. Such data have a wide range of use cases from wallet trackers to copy trading bots.
 
