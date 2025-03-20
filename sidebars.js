@@ -198,35 +198,34 @@ const sidebars = {
               ],
             },
             {
-              "type": "category",
-              "label": "JSON Stream Tutorials",
-              "items": [
+              type: "category",
+              label: "JSON Stream Tutorials",
+              items: [
                 {
-                  "type": "category",
-                  "label": "Go Example",
-                  "items": ["streams/kafka-streams-go"]
+                  type: "category",
+                  label: "Go Example",
+                  items: ["streams/kafka-streams-go"],
                 },
                 {
-                  "type": "category",
-                  "label": "Java Example",
-                  "items": ["streams/kafka-streams-java"]
+                  type: "category",
+                  label: "Java Example",
+                  items: ["streams/kafka-streams-java"],
                 },
                 {
-                  "type": "category",
-                  "label": "JavaScript Example",
-                  "items": ["streams/kafka-streams-js"]
+                  type: "category",
+                  label: "JavaScript Example",
+                  items: ["streams/kafka-streams-js"],
                 },
                 {
-                  "type": "category",
-                  "label": "Python Example",
-                  "items": [
+                  type: "category",
+                  label: "Python Example",
+                  items: [
                     "streams/kafka-streams-python",
-                    "streams/kafka-streams-python-thread"
-                  ]
-                }
-              ]
+                    "streams/kafka-streams-python-thread",
+                  ],
+                },
+              ],
             },
-            
 
             "streams/compare-websocket-kafka",
           ],
@@ -317,6 +316,9 @@ const sidebars = {
                 "examples/dextrades/crypto-coin-ticker",
                 "examples/realtimetrades",
                 "examples/dextrades/DEXScreener/evm_dexscreener",
+                "examples/dextrades/evm-bullx-api",
+                "examples/dextrades/evm-gmgn-api",
+                "examples/dextrades/evm-photon-api",
                 "examples/dextrades/pools-api",
               ],
             },
