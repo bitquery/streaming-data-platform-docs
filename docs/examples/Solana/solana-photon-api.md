@@ -2,22 +2,18 @@
 sidebar_position: 1
 ---
 
-# DEXScreener Solana API
+# Photon Solana API
 
-This section will guide you through different APIs which will tell you how to get data like realtime trades just like how DEXScreener shows for Solana.
+This section will guide you through different APIs which will tell you how to get data like realtime trades just like how Photon shows for Solana.
 
-import VideoPlayer from "../../../../src/components/videoplayer.js";
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
-<img
-  width="1470"
-  alt="Image"
-  src="https://github.com/user-attachments/assets/0e3ca0b4-32d6-480e-853c-1e7334c286f0"
-/>
+<img width="1445" alt="Image" src="https://github.com/user-attachments/assets/5bc48dbf-6e72-488c-bfda-324d3ce025fe" />
 
-## Get Trade Transactions of DEXScreener for a particular pair in realtime
+## Get Trade Transactions of Photon for a particular pair in realtime
 
 The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
-You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-dexcsreener#)
+You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data)
 
 ```
 subscription MyQuery {
@@ -55,7 +51,7 @@ subscription MyQuery {
 
 ```
 
-## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token of DEXScrenner
+## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token of Photon
 
 The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
 You can run the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair)
@@ -158,12 +154,57 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
 }
 ```
 
-## Get Top Pairs on Solana on DEXScreener
+## Track newly created Pump Fun tokens, Creation Time, Dev Address, Metadata
+
+Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+
+```
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
+    ) {
+      Block{
+        Time
+      }
+      Transaction{
+        Signer
+      }
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Symbol
+          ProgramAddress
+          PrimarySaleHappened
+          Native
+          Name
+          MintAddress
+          MetadataAddress
+          Key
+          IsMutable
+          Fungible
+          EditionNonce
+          Decimals
+          Wrapped
+          VerifiedCollection
+          Uri
+          UpdateAuthority
+          TokenStandard
+        }
+        PostBalance
+      }
+    }
+  }
+}
+
+```
+
+## Get Top Pairs on Solana on Photon
 
 The query will give the top 10 pairs on Solana network in descending order of their total trades happened in their pools in last 1 hour. This query will get you all the data you need such as total trades, total buys, total sells, total traded volume, total buy volume
 Please change the `Block: {Time: {since: "2024-08-15T04:19:00Z"}}` accordingly when you try out the query.
 Keep in mind you cannot use this as a websocket subscription becuase aggregate functions like `sum` doesn't work well in `subscription`.
-You can find the query [here](https://ide.bitquery.io/Dexscreener--All-in-One-query_1)
+You can find the query [here](https://ide.bitquery.io/Photon--All-in-One-query_1)
 
 ```
 query MyQuery {
@@ -218,11 +259,3 @@ query MyQuery {
   }
 }
 ```
-
-## Video Tutorial on How to Get Solana DEXTrades Data just like DEXScreener from Bitquery API
-
-<VideoPlayer url="https://www.youtube.com/watch?v=t-qdemV4Yo0" />
-
-## Video Tutorial | How to get Buys, Sells, Buy Volume, Sell Volume, Makers & Trades for a specific Solana Token Pair
-
-<VideoPlayer url="https://www.youtube.com/watch?v=BmuE1pB9B3k" />

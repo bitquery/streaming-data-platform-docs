@@ -191,7 +191,10 @@ const sidebars = {
             {
               type: "category",
               label: "Protobuf Data Streams",
-              items: ["streams/protobuf/kafka-protobuf-go","streams/protobuf/kafka-protobuf-python"],
+              items: [
+                "streams/protobuf/kafka-protobuf-go",
+                "streams/protobuf/kafka-protobuf-python",
+              ],
             },
             {
               type: "category",
@@ -380,6 +383,9 @@ const sidebars = {
             "examples/Solana/Pump-Fun-API",
             "examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API",
             "examples/Solana/solana-jupiter-api",
+            "examples/Solana/solana-gmgn-api",
+            "examples/Solana/solana-bullx-api",
+            "examples/Solana/solana-photon-api",
             "examples/Solana/solana-logs",
             "examples/Solana/solana-nft",
             "examples/Solana/solana-orca-dex-api",

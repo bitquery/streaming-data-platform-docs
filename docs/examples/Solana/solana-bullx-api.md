@@ -2,22 +2,18 @@
 sidebar_position: 1
 ---
 
-# DEXScreener Solana API
+# BullX Solana API
 
-This section will guide you through different APIs which will tell you how to get data like realtime trades just like how DEXScreener shows for Solana.
+This section will guide you through different APIs which will tell you how to get data like realtime trades just like how BullX shows for Solana.
 
-import VideoPlayer from "../../../../src/components/videoplayer.js";
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
-<img
-  width="1470"
-  alt="Image"
-  src="https://github.com/user-attachments/assets/0e3ca0b4-32d6-480e-853c-1e7334c286f0"
-/>
+<img width="1111" alt="Image" src="https://github.com/user-attachments/assets/8bb8abe8-da7e-4445-8541-da2402dc3a24" />
 
-## Get Trade Transactions of DEXScreener for a particular pair in realtime
+## Get Trade Transactions of BullX for a particular pair in realtime
 
 The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
-You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-dexcsreener#)
+You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data)
 
 ```
 subscription MyQuery {
@@ -55,7 +51,7 @@ subscription MyQuery {
 
 ```
 
-## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token of DEXScrenner
+## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token of BullX
 
 The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
 You can run the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair)
@@ -158,12 +154,57 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
 }
 ```
 
-## Get Top Pairs on Solana on DEXScreener
+## Track newly created Pump Fun tokens, Creation Time, Dev Address, Metadata
+
+Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+
+```
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
+    ) {
+      Block{
+        Time
+      }
+      Transaction{
+        Signer
+      }
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Symbol
+          ProgramAddress
+          PrimarySaleHappened
+          Native
+          Name
+          MintAddress
+          MetadataAddress
+          Key
+          IsMutable
+          Fungible
+          EditionNonce
+          Decimals
+          Wrapped
+          VerifiedCollection
+          Uri
+          UpdateAuthority
+          TokenStandard
+        }
+        PostBalance
+      }
+    }
+  }
+}
+
+```
+
+## Get Top Pairs on Solana on BullX
 
 The query will give the top 10 pairs on Solana network in descending order of their total trades happened in their pools in last 1 hour. This query will get you all the data you need such as total trades, total buys, total sells, total traded volume, total buy volume
 Please change the `Block: {Time: {since: "2024-08-15T04:19:00Z"}}` accordingly when you try out the query.
 Keep in mind you cannot use this as a websocket subscription becuase aggregate functions like `sum` doesn't work well in `subscription`.
-You can find the query [here](https://ide.bitquery.io/Dexscreener--All-in-One-query_1)
+You can find the query [here](https://ide.bitquery.io/BullX--All-in-One-query_1)
 
 ```
 query MyQuery {
@@ -219,10 +260,112 @@ query MyQuery {
 }
 ```
 
-## Video Tutorial on How to Get Solana DEXTrades Data just like DEXScreener from Bitquery API
+## Get OHLC for a token pair
 
-<VideoPlayer url="https://www.youtube.com/watch?v=t-qdemV4Yo0" />
+You can use the below query to build charts like how you see on BullX. You will get OHLC data for a token pair using below query. Test the API [here](https://ide.bitquery.io/Solana-OHLC-Query_5?_gl=1*1simohi*_ga*MTU0ODE3ODUxMy4xNzM5Nzg0Njcw*_ga_ZWB80TDH9J*MTc0MjQ2MjAwNi43Ny4xLjE3NDI0NjIwNDQuMC4wLjA.)
 
-## Video Tutorial | How to get Buys, Sells, Buy Volume, Sell Volume, Makers & Trades for a specific Solana Token Pair
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "Block_Timefield"}
+      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, PriceAsymmetry: {lt: 0.1}}}
+      limit: {count: 10}
+    ) {
+      Block {
+        Timefield: Time(interval: {in: minutes, count: 1})
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
+      }
+      count
+    }
+  }
+}
+```
 
-<VideoPlayer url="https://www.youtube.com/watch?v=BmuE1pB9B3k" />
+## Get Top Traded Pairs
+
+This query will give you top traded pairs data. You can find the query [here](https://ide.bitquery.io/top-trading-pairs?_gl=1*131rbu4*_ga*MTU0ODE3ODUxMy4xNzM5Nzg0Njcw*_ga_ZWB80TDH9J*MTc0MjQ2MjAwNi43Ny4xLjE3NDI0NjIwNDQuMC4wLjA.).
+
+```
+query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
+  Solana {
+    DEXTradeByTokens(
+      where: {Transaction: {Result: {Success: true}}, Block: {Time: {after: $time_3h_ago}}, any: [{Trade: {Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}}, {Trade: {Currency: {MintAddress: {not: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}, {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]}}, Side: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]}}}}}]}
+      orderBy: {descendingByField: "usd"}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            MintAddress
+          }
+        }
+        price_last: PriceInUSD(maximum: Block_Slot)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: $time_10min_ago}}}
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: $time_1h_ago}}}
+        )
+        price_3h_ago: PriceInUSD(minimum: Block_Slot)
+      }
+      dexes: uniq(of: Trade_Dex_ProgramAddress)
+      amount: sum(of: Trade_Side_Amount)
+      usd: sum(of: Trade_Side_AmountInUSD)
+      traders: uniq(of: Trade_Account_Owner)
+      count(selectWhere: {ge: "100"})
+    }
+  }
+}
+{
+  "time_10min_ago": "2024-09-19T12:26:17Z",
+  "time_1h_ago": "2024-09-19T11:36:17Z",
+  "time_3h_ago": "2024-09-19T09:36:17Z"
+}
+```
+
+# Get trading volume, buy volume, sell volume of a token
+
+This query fetches you the traded volume, buy volume and sell volume of a token `J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump`. Try out the API [here](https://ide.bitquery.io/trade_volume_Solana#).
+
+```
+query MyQuery {
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      where: {Block: {Time: {since: "2025-02-10T07:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
+    ) {
+      Trade {
+        Currency {
+          MintAddress
+          Decimals
+        }
+        Side {
+          Currency {
+            Name
+            MintAddress
+          }
+        }
+      }
+      traded_volume_USD: sum(of: Trade_Side_AmountInUSD)
+      traded_volume: sum(of: Trade_Amount)
+    buy_volume: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:buy}}}})
+      sell_volume: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:sell}}}})
+    }
+  }
+}
+```
