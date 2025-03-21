@@ -8,7 +8,7 @@ sidebar_position: 2
 
 This guide explains a Node.js Kafka consumer implementation to get [onchain data streams](https://bitquery.io/products/streaming) in real-time. In this example, we subscribe to a Kafka topic, handle message compression with LZ4, and log the data to the console. The consumer is secured with SSL and uses certificates for authentication.
 
-The complete code is available [here](https://github.com/bitquery/kafka-consumer-example).
+The complete code is available [here](https://github.com/bitquery/kafka-consumer-example). You can also try the [npm](https://www.npmjs.com/package/bitquery-kafka) package that wraps the entire code for the ease of development.
 
 > It is better to use kafka streams with Python, Java or Golang instead of JS.
 
