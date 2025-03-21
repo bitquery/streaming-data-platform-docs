@@ -6,7 +6,9 @@ sidebar_position: 3
 
 ## Overview
 
-This guide explains how to implement a Python Kafka consumer to receive [onchain data streams from Bitquery](https://bitquery.io/products/streaming) in real-time using the Confluent Kafka library. The consumer is secured with SSL and uses certificates for authentication, subscribing to a Kafka topic and logging messages to the console.
+This guide explains how to implement a Python Kafka consumer to receive [onchain data streams from Bitquery](https://bitquery.io/products/streaming) in real-time using the Confluent Kafka library. 
+
+The consumer needs username and password for authentication and uses non-SSL authentication, subscribing to a Kafka topic and logging messages to the console.
 
 The complete code is available [here](https://github.com/bitquery/kafka-consumer-example).
 
@@ -17,7 +19,7 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 <VideoPlayer url="https://youtu.be/pNXq7H8_pfw" />
 
 
-### Prerequisites
+## Prerequisites
 
 Ensure that you have the following components in place before running the code:
 
@@ -27,7 +29,7 @@ Ensure that you have the following components in place before running the code:
 4. **Python**: Version >= 3.7.
 5. **Confluent Kafka Python Client**: Kafka client library for Python.
 
-### Dependencies
+## Dependencies
 
 The script relies on several dependencies, which must be installed using pip:
 
@@ -38,9 +40,38 @@ pip install confluent_kafka
 - **confluent_kafka**: A Python client for Apache Kafka.
 - **ssl** and **pathlib**: Standard Python libraries for SSL certificates and file path handling.
 
-### Kafka Client Initialization
+## Kafka Client Initialization - Non-SSL Version
 
-The Kafka client is initialized using the `Consumer` class from the **confluent_kafka** library. The client is configured with SSL to authenticate communication with the Kafka brokers.
+The Kafka client is initialized using the `Consumer` class from the **confluent_kafka** library.
+
+```python
+from confluent_kafka import Consumer, KafkaError, KafkaException
+from pathlib import Path
+
+# Kafka consumer configuration
+from confluent_kafka import Consumer, KafkaError, KafkaException
+
+# Kafka consumer configuration (Non-SSL)
+conf = {
+    'bootstrap.servers': 'rpk0.bitquery.io:9092,rpk1.bitquery.io:9092,rpk2.bitquery.io:9092',
+    'group.id': 'trontest1-group-1',  # the group id has to start with the username
+    'session.timeout.ms': 30000,
+    'security.protocol': 'SASL_PLAINTEXT',
+    'sasl.mechanisms': 'SCRAM-SHA-512',
+    'sasl.username': 'username',
+    'sasl.password': 'passwrod',
+    'auto.offset.reset': 'latest'
+}
+
+```
+
+- **group.id**: A unique identifier for the consumer group. It has to start with the username that was shared with you, for e.g. `trontest1-group-3`, `trontest1-group-5` etc.
+- **bootstrap.servers**: List of Kafka broker addresses.
+- **SASL configuration**: Username and password are used for secure communication.
+
+## Kafka Client Initialization - SSL Version
+
+You can also use the SSL configured brokers (if needed) to authenticate communication with the Kafka brokers. Notice that the **port numbers have changed to 9093**
 
 ```python
 from confluent_kafka import Consumer, KafkaError, KafkaException
@@ -48,28 +79,24 @@ import ssl
 from pathlib import Path
 
 # Kafka consumer configuration
+from confluent_kafka import Consumer, KafkaError, KafkaException
+
+# Kafka consumer configuration (SSL)
 conf = {
     'bootstrap.servers': 'rpk0.bitquery.io:9093,rpk1.bitquery.io:9093,rpk2.bitquery.io:9093',
     'group.id': 'trontest1-group-1',  # the group id has to start with the username
     'session.timeout.ms': 30000,
-    'security.protocol': 'SASL_SSL',
-    'ssl.ca.location': 'server.cer.pem',
-    'ssl.key.location': 'client.key.pem',
-    'ssl.certificate.location': 'client.cer.pem',
-    'ssl.endpoint.identification.algorithm': 'none',
+    'security.protocol': 'SASL_PLAINTEXT',
     'sasl.mechanisms': 'SCRAM-SHA-512',
     'sasl.username': 'username',
     'sasl.password': 'passwrod',
     'auto.offset.reset': 'latest'
 }
+
 ```
+In this version you need the **SSL certificates**. So we mention the paths to the CA, key, and certificate files.
 
-- **group.id**: A unique identifier for the consumer group. It has to start with the username that was shared with you, for e.g. `trontest1-group-3`, `trontest1-group-5` etc.
-- **bootstrap.servers**: List of Kafka broker addresses.
-- **SSL configuration**: Paths to the CA, key, and certificate files are provided for SSL authentication.
-- **SASL configuration**: Username and password are used for secure communication.
-
-### Kafka Consumer Setup
+## Kafka Consumer Setup
 
 The Kafka consumer is initialized to consume messages from a specified topic. In this case, the consumer listens to the `tron.broadcasted.transactions` topic.
 
@@ -78,7 +105,7 @@ consumer = Consumer(conf)
 topic = 'tron.broadcasted.transactions'
 ```
 
-### Message Processing
+## Message Processing
 
 A function `process_message` is used to handle each incoming message. It first attempts to decompress the message.
 
@@ -110,7 +137,7 @@ def process_message(message):
 - **Decompression**: The message is decompressed using UTF-8 decoding.
 - **Logging**: The partition, offset, and message content are printed to the console.
 
-### Subscribing and Polling
+## Subscribing and Polling
 
 The consumer subscribes to the topic and polls for new messages. Messages are processed in a loop until interrupted.
 
@@ -144,7 +171,7 @@ finally:
 
 ---
 
-### Execution Workflow
+## Execution Workflow
 
 The following sequence of operations occurs when the script runs:
 
