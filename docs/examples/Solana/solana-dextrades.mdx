@@ -1191,6 +1191,74 @@ When querying Solana DEXTradeByTokens, you can use pre-made aggregates to optimi
 
 ```
 
+## Finding Trades that Executed the Trade a Custom Program
+
+You want to track or filter DEX trades that interacted with a specific Solana program (e.g., one you deployed or are monitoring).
+
+This query uses the [graphQL joins](https://docs.bitquery.io/docs/graphql/capabilities/joins/) feature to join Solana DEX trades with instructions executed by a specific program address.
+Run this query [here](https://ide.bitquery.io/find-all-trades-interacting-with-a-program)
+
+```
+{
+  Solana {
+    DEXTrades(limit: {count: 100}) {
+      Trade {
+        Dex {
+          ProtocolName
+        }
+        Sell {
+          Currency {
+            Symbol
+          }
+        }
+        Buy {
+          Currency {
+            Symbol
+          }
+        }
+      }
+      Transaction {
+        Signature
+      }
+      Instruction {
+        ExternalSeqNumber
+        InternalSeqNumber
+      }
+
+      joinInstructions(
+        join: inner
+        Block_Slot: Block_Slot
+        Transaction_Signature: Transaction_Signature
+        where: {
+          Instruction: {
+            Program: {
+              Address: { is: "fat2dUTkypDNDT86LtLGmzJDK11FSJ72gfUW35igk7u" }
+            }
+          }
+        }
+      ) {
+        Instruction {
+          Program {
+            Address
+          }
+        }
+        Transaction {
+          Signature
+        }
+      }
+    }
+  }
+}
+
+```
+
+### How It Works
+
+- `DEXTrades`: Retrieves recent DEX trades on Solana.
+- `joinInstructions`: Performs an **inner join** between trades and instructions within the same **block slot** and **transaction signature**.
+- Filters are applied to the **Instruction.Program.Address**, targeting your custom program.
+- Ensures only trades where your program was involved are included.
+
 ## Video Tutorial on Solana DEXTrades API | How to get Decentralized Exchange Data with DEX Trades API
 
 <VideoPlayer url="https://youtu.be/PVHB9Z8v-Cc?si=IyiU9C1WxoHBBHTv" />
