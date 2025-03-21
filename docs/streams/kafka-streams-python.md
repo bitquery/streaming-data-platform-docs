@@ -86,7 +86,7 @@ conf = {
     'bootstrap.servers': 'rpk0.bitquery.io:9093,rpk1.bitquery.io:9093,rpk2.bitquery.io:9093',
     'group.id': 'trontest1-group-1',  # the group id has to start with the username
     'session.timeout.ms': 30000,
-    'security.protocol': 'SASL_PLAINTEXT',
+    'security.protocol': 'SASL_SSL',
     'sasl.mechanisms': 'SCRAM-SHA-512',
     'sasl.username': 'username',
     'sasl.password': 'passwrod',
