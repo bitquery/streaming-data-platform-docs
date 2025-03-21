@@ -71,29 +71,62 @@ Your application must implement the code:
 - **DEX Trades (JSON)**: Messages are retained for **24 hours**.
 - **Other JSON Streams**: Messages are retained for **4 hours**.
 
-### Connect to Kafka server
 
-You need the following to connect:
+## Connect to Kafka Server
 
-1. server list for connection is "kfk0.bitquery.io:9093,kfk1.bitquery.io:9093,kfk2.bitquery.io:9093"
-2. username and password for SASL over SSL authentication, that you will receive from our team
-3. certificate files for SSL ( client.key.pem, client.cer.pem, server.cer.pem ), you receive them from support team.
+To connect to Bitquery’s Kafka streaming service, you’ll need the following:
 
-Example of connection config looks as:
+1.  **Kafka Broker Addresses**  
+    Use the following server list:  
+    `kfk0.bitquery.io:9093,kfk1.bitquery.io:9093,kfk2.bitquery.io:9093`
+    
+2.  **Authentication Credentials**  
+    A **username** and **password** for **SASL over SSL authentication** – provided by the Bitquery support team.
+    
+3.  **SSL Certificates**  
+    You’ll receive the following certificate files from our support team:
+    
+    -   `client.key.pem` 
+    -   `client.cer.pem` 
+    -   `server.cer.pem` 
 
-```
+
+### Example: SSL Connection Configuration (SASL + SSL)
+
+```python
 sasl_conf = {
-     'bootstrap.servers': 'kfk0.bitquery.io:9093,kfk1.bitquery.io:9093,kfk2.bitquery.io:9093',
-     'security.protocol': 'SASL_SSL',
-     'sasl.mechanism': 'SCRAM-SHA-512',
-     'sasl.username': '<YOUR USERNAME HERE>',
-     'sasl.password': '<YOUR PASSWORD HERE>',
-     'ssl.key.location': 'client.key.pem',
-     'ssl.ca.location': 'server.cer.pem',
-     'ssl.certificate.location': 'client.cer.pem',
-     'ssl.endpoint.identification.algorithm': 'none'
+    'bootstrap.servers': 'rpk0.bitquery.io:9093,rpk1.bitquery.io:9093,rpk2.bitquery.io:9093',
+    'security.protocol': 'SASL_SSL',
+    'sasl.mechanism': 'SCRAM-SHA-512',
+    'sasl.username': '<YOUR USERNAME HERE>',
+    'sasl.password': '<YOUR PASSWORD HERE>',
+    'ssl.key.location': 'client.key.pem',
+    'ssl.ca.location': 'server.cer.pem',
+    'ssl.certificate.location': 'client.cer.pem',
+    'ssl.endpoint.identification.algorithm': 'none'  # Disable hostname verification for self-signed certs
 }
+
 ```
+
+
+### Optional: Non-SSL Connection (SASL_PLAINTEXT)
+
+If you prefer to connect without SSL (e.g., for testing), you can use **SASL_PLAINTEXT** on port `9092`. This does **not** require certificates:
+
+```python
+sasl_conf = {
+    'bootstrap.servers': 'rpk0.bitquery.io:9092,rpk1.bitquery.io:9092,rpk2.bitquery.io:9092',
+    'security.protocol': 'SASL_PLAINTEXT',
+    'sasl.mechanism': 'SCRAM-SHA-512',
+    'sasl.username': '<YOUR USERNAME HERE>',
+    'sasl.password': '<YOUR PASSWORD HERE>',
+}
+
+```
+
+> Use plaintext only in trusted or local environments, as the connection is not encrypted.
+
+
 
 ### Subscribe to particular topic(s)
 
