@@ -103,7 +103,7 @@ sasl_conf = {
     'ssl.key.location': 'client.key.pem',
     'ssl.ca.location': 'server.cer.pem',
     'ssl.certificate.location': 'client.cer.pem',
-    'ssl.endpoint.identification.algorithm': 'none'  # Disable hostname verification for self-signed certs
+    'ssl.endpoint.identification.algorithm': 'none' 
 }
 
 ```
