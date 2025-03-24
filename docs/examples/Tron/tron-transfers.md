@@ -33,7 +33,7 @@ This program allows you to test the data and its integration into your applicati
 <meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
 </head>
 
-# Subscribe to Recent Whale Transactions of a particular currency
+## Subscribe to Recent Whale Transactions of a particular currency
 
 The subscription query below fetches the whale transactions on the Tron network. We have used USDT address `TThzxNRLrW2Brp9DcTQU8i4Wd9udCWEdZ3`. You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDT-on-Tron)
 
@@ -66,7 +66,7 @@ subscription{
 
 ```
 
-# Top Transfers of a Token
+## Top Transfers of a Token
 
 This query retrieves the top 10 transfers by amount of the token `TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT`. Try the query [here](https://ide.bitquery.io/top-transfers-of-a-token_2).
 
@@ -92,7 +92,7 @@ query MyQuery {
 }
 ```
 
-# Transfers of a wallet address
+## Transfers of a wallet address
 
 This query fetches you the recent 10 transfers of a specific wallet address `TFXttAWURRrXrd9JvFPVLEh1esJK8NHxn7`. Try the query [here](https://ide.bitquery.io/Transfers-of-a-wallet).
 
@@ -119,7 +119,7 @@ This query fetches you the recent 10 transfers of a specific wallet address `TFX
 }
 ```
 
-# Sender is a particular address
+## Sender is a particular address
 
 This websocket retrieves transfers where the sender is a particular address `TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {is: "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf"}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/Sender-is-particular-address)
 
@@ -150,7 +150,7 @@ subscription {
 
 ```
 
-# Subscribe to the latest NFT token transfers on Tron
+## Subscribe to the latest NFT token transfers on Tron
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on Tron network. You can run the query [here](https://ide.bitquery.io/NFT-Token-Transfers-API_5)
 
