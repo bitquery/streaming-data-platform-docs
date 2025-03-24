@@ -391,6 +391,7 @@ const sidebars = {
             "examples/Solana/solana-transactions",
             "examples/Solana/solana-transfers",
             "examples/Solana/Pump-Fun-API",
+            "examples/Solana/pump-swap-api",
             "examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API",
             "examples/Solana/solana-jupiter-api",
             "examples/Solana/solana-gmgn-api",
