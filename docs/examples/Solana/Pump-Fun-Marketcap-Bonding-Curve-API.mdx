@@ -1,6 +1,6 @@
 # Pump Fun Marketcap & Bonding Curve API
 
-In this document, we will explore examples to get marketcap, bonding curve progress and whether the token migrated to Raydium or not yet. We have the fully exhaustive Pump Fun API documentation [here](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/). Additionally, we have the Moonshot API available, and you can access its documentation [here](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/).
+In this document, we will explore examples to get marketcap, bonding curve progress and whether the token migrated to PumpSwap or not yet. We have the fully exhaustive Pump Fun API documentation [here](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/). Additionally, we have the Moonshot API available, and you can access its documentation [here](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/).
 
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
 
@@ -133,23 +133,26 @@ subscription MyQuery {
 
 You can also observe the approach of using `TokenSupplyUpdate` block to get the similiar data [here](./token-supply-cube.md).
 
-## Check if the Pump Fun Token has migrated to Raydium
+## Check if the Pump Fun Token has migrated to PumpSwap - API
 
-To check if a Pump Fun Token has migrated to Raydium, we can use the below query. In this query we are checking if this token `Cm55PcjVCqQZYiEsRt5ixtGLBbxt8DTYjJRJQwQHpump` has migrated to Raydium. You can run the query [here](https://ide.bitquery.io/check-if-a-pump-token-migrated-to-raydium).
+To check if a Pump Fun Token has migrated to PumpSwap, we can use the below query. In this query we are checking if this token `7JsSjVLACA1V7SzTHHeE9XKCP3KJGUwUmqgDm5Hupump` has migrated to PumpSwap. You can run the query [here](https://ide.bitquery.io/check-if-a-pumpfun-token-has-migrated-to-PumpSwap).
 
 ```graphql
-query MyQuery {
-  Solana(network: solana) {
+{
+  Solana {
     Instructions(
       where: {
-        Transaction: {
-          Signer: { is: "39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg" }
-        }
         Instruction: {
-          Program: { Method: { is: "initialize2" } }
+          CallerIndex: { eq: 2 }
+          Depth: { eq: 1 }
+          CallPath: { includes: { eq: 2 } }
+          Program: {
+            Method: { is: "create_pool" }
+            Address: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
+          }
           Accounts: {
             includes: {
-              Address: { is: "Cm55PcjVCqQZYiEsRt5ixtGLBbxt8DTYjJRJQwQHpump" }
+              Address: { is: "7JsSjVLACA1V7SzTHHeE9XKCP3KJGUwUmqgDm5Hupump" }
             }
           }
         }
@@ -157,9 +160,12 @@ query MyQuery {
     ) {
       Instruction {
         Program {
+          Address
           Name
           Method
           Arguments {
+            Name
+            Type
             Value {
               ... on Solana_ABI_Json_Value_Arg {
                 json
@@ -186,71 +192,87 @@ query MyQuery {
                 integer
               }
             }
-            Name
           }
-          Address
           AccountNames
+          Json
         }
         Accounts {
           Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
         }
+        Logs
+        BalanceUpdatesCount
+        AncestorIndexes
+        CallPath
+        CallerIndex
+        Data
+        Depth
+        ExternalSeqNumber
+        Index
+        InternalSeqNumber
+        TokenBalanceUpdatesCount
       }
       Transaction {
+        Fee
+        FeeInUSD
+        Signature
         Signer
+        FeePayer
+        Result {
+          Success
+          ErrorMessage
+        }
+      }
+      Block {
+        Time
+        Height
       }
     }
   }
 }
 ```
 
-## Track Pump Fun Token Migration to Raydium
+## Track Pump Fun Token Migrations to PumpSwap
 
-Use the below query to track Pump Fun token migrations to Raydium in realtime by tracking the method `initialize2` which gives you the following Account addresses.
+Use the below query to track Pump Fun token migrations to PumpSwap in realtime. You will get the following account addresses information through the query's `Instruction Accounts[]` field and the amount of liquidity added through arguments' `Value` field
 
-```
+<img
+  width="1006"
+  alt="Image"
+  src="https://github.com/user-attachments/assets/1b4f22ab-e53d-4813-a2a5-c49e95958c92"
+/>
 
-              "tokenProgram",
-              "splAssociatedTokenAccount",
-              "systemProgram",
-              "rent",
-              "amm",
-              "ammAuthority",
-              "ammOpenOrders",
-              "lpMint",
-              "coinMint",
-              "pcMint",
-              "poolCoinTokenAccount",
-              "poolPcTokenAccount",
-              "poolWithdrawQueue",
-              "ammTargetOrders",
-              "poolTempLp",
-              "serumProgram",
-              "serumMarket",
-              "userWallet",
-              "userTokenCoin",
-              "userTokenPc",
-              "userLpTokenAccount"
-```
-
-You can test the query [here](https://ide.bitquery.io/track-pump-to-raydium-LP-initialize2).
+You can test the query [here](https://ide.bitquery.io/pumpfun-migration-stream_2#).
 
 ```graphql
-query MyQuery {
-  Solana(network: solana) {
+subscription {
+  Solana {
     Instructions(
       where: {
-        Transaction: {
-          Signer: { is: "39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg" }
+        Instruction: {
+          CallerIndex: { eq: 2 }
+          Depth: { eq: 1 }
+          CallPath: { includes: { eq: 2 } }
+          Program: {
+            Method: { is: "create_pool" }
+            Address: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
+          }
         }
-        Instruction: { Program: { Method: { is: "initialize2" } } }
       }
-      limit: { count: 100 }
     ) {
       Instruction {
         Program {
+          Address
           Name
           Method
           Arguments {
+            Name
+            Type
             Value {
               ... on Solana_ABI_Json_Value_Arg {
                 json
@@ -277,17 +299,45 @@ query MyQuery {
                 integer
               }
             }
-            Name
           }
-          Address
           AccountNames
+          Json
         }
         Accounts {
           Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
         }
+        Logs
+        BalanceUpdatesCount
+        AncestorIndexes
+        CallPath
+        CallerIndex
+        Data
+        Depth
+        ExternalSeqNumber
+        Index
+        InternalSeqNumber
+        TokenBalanceUpdatesCount
       }
       Transaction {
+        Fee
+        FeeInUSD
+        Signature
         Signer
+        FeePayer
+        Result {
+          Success
+          ErrorMessage
+        }
+      }
+      Block {
+        Time
+        Height
       }
     }
   }
@@ -433,75 +483,6 @@ subscription MyQuery {
   }
 }
 ```
-
-## Track Pumpfun Tokens Which Are on Raydium in Real-time
-
-Using this query you can listen for **real-time DEX Trades** Pumpfun tokens on the Raydium protocol. It filters trades by:
-
-1.  **Token Update Authority** – Ensures the trades involve Pumpfun tokens by using the `Pump.fun Token Mint Authority` address
-2.  **Raydium Program Address** – Restricts to the Raydium DEX (recognized by program address `675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8`).
-
-You can run the query [here](https://ide.bitquery.io/Tracking-pumpfun-tokens-which-are-on-raydium)
-
-```
-subscription {
-  Solana {
-    DEXTrades(
-      where: {Trade: {Buy: {Currency: {UpdateAuthority: {is: "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}}
-    ) {
-      Trade {
-        Dex {
-          ProgramAddress
-          ProtocolFamily
-          ProtocolName
-        }
-        Buy {
-          Account {
-            Address
-          }
-          Amount
-          Currency {
-            MintAddress
-            Decimals
-            Symbol
-            ProgramAddress
-            Name
-          }
-          PriceAgaistSellCurrency: Price
-        }
-        Sell {
-          Account {
-            Address
-          }
-          Amount
-          Currency {
-            MintAddress
-            Decimals
-            Symbol
-            Name
-          }
-          PriceAgaistBuyCurrency: Price
-        }
-      }
-      Block {
-        Time
-        Height
-      }
-      Transaction {
-        Signature
-        FeePayer
-        Signer
-      }
-    }
-  }
-}
-
-
-```
-
-## Video Tutorial | How to track Pump Fun Token Migrations to Raydium in realtime
-
-<VideoPlayer url="https://www.youtube.com/watch?v=jjQ5jvxI_Zk" />
 
 ## Video Tutorial | How to get Top Pump Fun Tokens by Marketcap Value
 
