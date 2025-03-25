@@ -15,16 +15,12 @@ These APIs can be provided through different streams including Kafka for zero la
 
 <meta property="og:type" content="website" />
 <meta
-  property="og:title"
-  content="How to Get Pump Swap On-Chain Data with Pump Swap API"
-/>
-<meta
   property="og:description"
   content="Get on-chain data of any Pump Swap based token through our Pump Swap API."
 />
 
   <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="How to Get Pump Swap On-Chain Data with Pump Swap API"/>
+  <meta property="twitter:title" content="Pump Swap On-Chain Data with Pump Swap API"/>
   <meta property="twitter:description" content="Get on-chain data of any Pump Swap based token through our Pump Swap API."/>
 </head>
 
