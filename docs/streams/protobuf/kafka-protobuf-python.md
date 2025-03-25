@@ -147,6 +147,22 @@ def process_message(message):
 
 ```
 
+### **Note**
+
+You can **easily adapt this script to any topic and Protobuf message type** — simply change the `topic` name and the corresponding **message class** in `process_message()`. The rest of the logic remains the same!
+
+For example, if you're consuming a different topic with a different `.proto` schema:
+
+```python
+# Change the topic name
+topic = 'other_topic.proto'
+
+# Change the message class in process_message
+your_message = your_other_pb2.YourOtherMessage()
+your_message.ParseFromString(buffer)
+
+```
+
 ## **4. Poll and Print Messages in Real Time**
 
 This is the main loop for consuming Kafka messages and printing parsed protobuf content.
