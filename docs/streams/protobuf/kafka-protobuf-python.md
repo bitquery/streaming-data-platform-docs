@@ -1,4 +1,6 @@
-
+---
+sidebar_position: 2
+---
 
 # Python Tutorial to Consume and Traverse Solana Protobuf Messages from Kafka
 
@@ -6,8 +8,6 @@ This tutorial explains how to consume Solana transaction messages in protobuf fo
 
 You can read more about **Bitquery Protobuf Streams** here:  
 [Bitquery Kafka Streaming Concepts - Protobuf Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#protobuf-streams).
-
-----------
 
 ## **Prerequisites**
 
@@ -19,8 +19,6 @@ pip install bitquery-pb2-kafka-package
 ```
 
 You’ll also need your **Kafka username/password** provided by the Bitquery team.
-
-
 
 ## **1. Setup Kafka Consumer Configuration**
 
@@ -80,7 +78,6 @@ consumer.subscribe([topic])
 
 ```
 
-
 ## **2. Define a Protobuf Traversal Print Function**
 
 This function **recursively walks** through any protobuf message and prints all its fields, converting `bytes` to **base58**.
@@ -126,7 +123,7 @@ def print_protobuf_message(msg, indent=0, encoding='base58'):
 
 ```
 
-----------
+---
 
 ## **3. Process Messages From Kafka**
 
@@ -149,7 +146,6 @@ def process_message(message):
         print(f"Error processing message: {err}")
 
 ```
-
 
 ## **4. Poll and Print Messages in Real Time**
 
@@ -175,5 +171,3 @@ finally:
     consumer.close()
 
 ```
-
-
