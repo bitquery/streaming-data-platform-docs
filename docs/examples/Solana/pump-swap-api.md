@@ -24,7 +24,7 @@ These APIs can be provided through different streams including Kafka for zero la
 />
 
   <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Pump Swap API - Solana - Tokens, Trades, Live Prices"/>
+  <meta property="twitter:title" content="Pump Swap On-Chain Data with Pump Swap API"/>
   <meta property="twitter:description" content="Get on-chain data of any Pump Swap based token through our Pump Swap API."/>
 </head>
 
