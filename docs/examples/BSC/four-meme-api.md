@@ -245,7 +245,7 @@ subscription {
 }
 ```
 
-## Track Latest and Historic Trades of a Four Meme User
+## Track Latest and Historical Trades of a Four Meme User
 
 You can use DEX Trades API with combined dataset to get latest and historic trades of a user. Run [this query](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme) for example.
 
