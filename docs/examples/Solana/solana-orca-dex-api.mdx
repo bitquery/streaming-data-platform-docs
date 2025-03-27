@@ -364,7 +364,7 @@ Only use this API as `query` and not `subscription` websocket as Aggregates and 
 
 You can also track Add Liquidity transactions in real time on Orca DEX from Orca API using instructions. Firstly, you can use this [query](https://ide.bitquery.io/Get-all-methods-of-Orca-Program#) to get all the methods of Orca program to deduce which program method is responsible for add liquidity transactions. The method we want to filter for turns out to be `increaseLiquidity`.
 
-If you want to track latest liquidity additions in Orca pools, you can use [this Websocket api](https://ide.bitquery.io/Websocket-for-add-Liquidity-instruction-on-Solana-Orca-DEX_2#).
+If you want to track latest liquidity additions in Orca pools, you can use [this Websocket api](https://ide.bitquery.io/Websocket-for-add-Liquidity-instruction-on-Solana-Orca-DEX_3).
 
 In the response, mint under 6th and 7th addresses in the Accounts array gives you the Token A and Token B respectively of the pool in which liquidity is added.
 
@@ -376,7 +376,12 @@ subscription {
       where: {
         Instruction: {
           Program: {
-            Address: { is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc" }
+            Address: {
+              in: [
+                "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"
+                "increaseLiquidityV2"
+              ]
+            }
             Method: { is: "increaseLiquidity" }
           }
         }
@@ -472,6 +477,264 @@ subscription {
           }
         }
       }
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        AncestorIndexes
+        InternalSeqNumber
+        Index
+        ExternalSeqNumber
+        Depth
+        CallerIndex
+        Data
+        CallPath
+        BalanceUpdatesCount
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+          Name
+          Method
+          Parsed
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Track Collect Fees Instruction Calls on Orca DEX
+
+Using below query you will be able to get the following image mentioned addresses in the `Instruction Accounts[]` array for the `Collect Fees` instruction calls on Orca DEX.
+You can test the query [here](https://ide.bitquery.io/Websocket-for-collect-fees-instruction-on-Solana-Orca-DEX_1).
+
+<img
+  width="1058"
+  alt="Image"
+  src="https://github.com/user-attachments/assets/6e8828b3-070c-4ea9-a3fc-bfd15753ee00"
+/>
+
+```
+subscription {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"}, Method: {is: "collectFees"}}}}
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        AncestorIndexes
+        InternalSeqNumber
+        Index
+        ExternalSeqNumber
+        Depth
+        CallerIndex
+        Data
+        CallPath
+        BalanceUpdatesCount
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+          Name
+          Method
+          Parsed
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Track Update Fees and Rewards Instruction Calls on Orca DEX
+
+Using below query you will be able to get the following image mentioned addresses in the `Instruction Accounts[]` array for the `Update Fees and Rewards` instruction calls on Orca DEX.
+You can test the query [here](https://ide.bitquery.io/Websocket-for-update-fees-and-rewards-instruction-on-Solana-Orca-DEX_1).
+
+<img
+  width="925"
+  alt="Image"
+  src="https://github.com/user-attachments/assets/be1454dd-5203-43fe-9b25-d7603e2ac63e"
+/>
+
+```
+subscription {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"}, Method: {is: "updateFeesAndRewards"}}}}
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        AncestorIndexes
+        InternalSeqNumber
+        Index
+        ExternalSeqNumber
+        Depth
+        CallerIndex
+        Data
+        CallPath
+        BalanceUpdatesCount
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+          Name
+          Method
+          Parsed
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Track Collect Reward Instruction Calls on Orca DEX
+
+Using below query you will be able to get the following image mentioned addresses in the `Instruction Accounts[]` array for the `Collect Reward` instruction calls on Orca DEX.
+You can test the query [here](https://ide.bitquery.io/Websocket-for-collectReward-and-rewards-instruction-on-Solana-Orca-DEX).
+
+<img
+  width="985"
+  alt="Image"
+  src="https://github.com/user-attachments/assets/8a75d538-c6e1-4472-b0c0-87bdd87a349f"
+/>
+
+```
+subscription {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"}, Method: {is: "collectReward"}}}}
     ) {
       Block {
         Time
