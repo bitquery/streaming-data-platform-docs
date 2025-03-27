@@ -40,9 +40,41 @@ npm install kafkajs@2.2.3 uuid fs@0.0.1-security kafkajs-lz4@1.2.1 lz4@0.6.5 lz4
 - **fs**: A Node.js core module used to read SSL certificates.
 - **kafkajs-lz4**: An LZ4 codec to handle compressed messages.
 
-### Kafka Client Initialization
+### Kafka Client Initialization - Non SSL Version
 
-The Kafka client is initialized using the `Kafka` class from the **KafkaJS** library. The client is configured with SSL for authentication via certificates and supports LZ4 message compression.
+The Kafka client is initialized using the `Kafka` class from the **KafkaJS** library.
+```javascript
+const { Kafka } = require("kafkajs");
+const fs = require("fs");
+const { CompressionTypes, CompressionCodecs } = require("kafkajs");
+const LZ4 = require("kafkajs-lz4");
+
+CompressionCodecs[CompressionTypes.LZ4] = new LZ4().codec;
+
+// Pre-requisites
+const username = "<USERNAME>";
+const password = "<PASSWORD>";
+const topic = "tron.broadcasted.transactions";
+// End of pre-requisites
+
+const kafka = new Kafka({
+  clientId: username,
+  brokers: [
+    "rpk0.bitquery.io:9093",
+    "rpk1.bitquery.io:9093",
+    "rpk2.bitquery.io:9093",
+  ],
+  sasl: {
+    mechanism: "scram-sha-512",
+    username: username,
+    password: password,
+  },
+});
+```
+
+### Kafka Client Initialization - SSL Version
+
+You can also use the SSL configured brokers (if needed) to authenticate communication with the Kafka brokers. Notice that the **port numbers have changed to 9093**
 
 ```javascript
 const { Kafka } = require("kafkajs");
@@ -78,6 +110,8 @@ const kafka = new Kafka({
   },
 });
 ```
+
+In this version you need the **SSL certificates**. So we mention the paths to the CA, key, and certificate files.
 
 ### Kafka Consumer Setup
 
