@@ -603,17 +603,17 @@ You can test out the query [here](https://ide.bitquery.io/Solana-trade-for-a-tok
 }
 ```
 
-## Latest Trades for a token on Pumpswap
+## Latest Trades for a token on Pumpswap - Websocket
 
 Below query can get you the latest trades of a token on Pumpswap in real time.
-You can test out the query [here](https://ide.bitquery.io/Solana-trade-for-a-token---stream).
+You can test out the query [here](https://ide.bitquery.io/Latest-Trades-for-a-token-on-Pumpswap).
 
 ```
 subscription {
   Solana {
     DEXTradeByTokens(
       where: {Trade: {Dex: {ProgramAddress:
-        {is: "63Fce97Uk5Ln1Y1F8Y73BJEN6iJL6p86AXmxTgZQpump"}},
+        {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}},
         Currency: {MintAddress:
           {is: "63Fce97Uk5Ln1Y1F8Y73BJEN6iJL6p86AXmxTgZQpump"}}}}
     ) {
@@ -948,3 +948,7 @@ query MyQuery {
   }
 }
 ```
+
+## Video Tutorial | How to get Trades, Trades of a token and Trades of a trader on PumpSwap DEX in realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=MMazeabdirM" />
