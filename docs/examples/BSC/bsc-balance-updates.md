@@ -59,3 +59,31 @@ subscription {
 }
 
 ```
+
+## Get Top Holders of a Token
+
+This query gets the top holders of a token filtered using `Currency: { SmartContract: { is: ` filter.
+
+You can run the query [here](https://ide.bitquery.io/Top-10-holders-of-a-token-on-BSC)
+
+```
+
+{
+  EVM(network: bsc, aggregates: yes, dataset: combined) {
+    BalanceUpdates(
+      orderBy: { descendingByField: "balance" }
+      limit: { count: 50 }
+      where: {
+        Currency: { SmartContract: { is: "0xdaf1695c41327b61b9b9965ac6a5843a3198cf07" } }
+        Block: { Time: { since: "2025-03-31T15:41:10Z" } }
+      }
+    ) {
+      BalanceUpdate {
+        Address
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
+    }
+  }
+}
+
+```
