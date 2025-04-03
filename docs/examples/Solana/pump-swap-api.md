@@ -357,30 +357,31 @@ subscription {
 ## OHLC for PumpSwap token
 
 Below API query can get you the OHLC of a given token pair on PumpSwap. You can use the OHLC to build charts.
-You can test out the query [here](https://ide.bitquery.io/historical-ohlc-for-pumpswap).
+You can test out the query [here](https://ide.bitquery.io/ohlc-for-pumpswap).
 
 ```
-{
-  Solana(dataset: archive) {
+query MyQuery {
+  Solana {
     DEXTradeByTokens(
+      where: {Trade: {Dex: {ProgramAddress: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}, Currency: {MintAddress: {is: "6qN87akZ3Ghs3JbGmnNMYP2rCHSBDwtiXttBV4Hspump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 100}
       orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "6qN87akZ3Ghs3JbGmnNMYP2rCHSBDwtiXttBV4Hspump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, PriceAsymmetry: {lt: 0.1}}, Instruction: {Program: {Address: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}}}
-      limit: {count: 10}
-    ) {
-      Block {
-        Timefield: Time(interval: {in: hours, count: 1})
+    ){
+      Block{
+        Timefield: Time(interval:{count:1 in:minutes})
       }
-      volume: sum(of: Trade_Amount)
-      Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Slot)
-        close: Price(maximum: Block_Slot)
+      Trade{
+        open: Price(minimum:Block_Slot)
+        high: Price(maximum:Trade_Price)
+        low: Price(minimum:Trade_Price)
+        close: Price(maximum:Block_Slot)
       }
+      volumeInUSD: sum(of:Trade_Side_AmountInUSD)
       count
     }
   }
 }
+
 ```
 
 ## Latest trades of a trader
@@ -603,17 +604,17 @@ You can test out the query [here](https://ide.bitquery.io/Solana-trade-for-a-tok
 }
 ```
 
-## Latest Trades for a token on Pumpswap
+## Latest Trades for a token on Pumpswap - Websocket
 
 Below query can get you the latest trades of a token on Pumpswap in real time.
-You can test out the query [here](https://ide.bitquery.io/Solana-trade-for-a-token---stream).
+You can test out the query [here](https://ide.bitquery.io/Latest-Trades-for-a-token-on-Pumpswap).
 
 ```
 subscription {
   Solana {
     DEXTradeByTokens(
       where: {Trade: {Dex: {ProgramAddress:
-        {is: "63Fce97Uk5Ln1Y1F8Y73BJEN6iJL6p86AXmxTgZQpump"}},
+        {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}},
         Currency: {MintAddress:
           {is: "63Fce97Uk5Ln1Y1F8Y73BJEN6iJL6p86AXmxTgZQpump"}}}}
     ) {
@@ -668,29 +669,22 @@ subscription {
 ## Top Trader on Pumpswap
 
 Below query can get you top traders on Pumpswap.
-You can test out the query [here](https://ide.bitquery.io/top-traders-on-pumpswap).
+You can test out the query [here](https://ide.bitquery.io/top-traders-on-pumpswap_2).
 
 ```
-{
-  Solana(network: solana) {
-    DEXTrades(
-      where: {Instruction: {Program: {Address: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}}}
-      orderBy: {descendingByField: "txc"}
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      limitBy: {count: 1, by: Transaction_Signature}
       limit: {count: 10}
+      where: {Trade: {Dex: {ProgramAddress: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Transaction: {Result: {Success: true}}}
+      orderBy: {descendingByField: "total_trades"}
     ) {
-      txc: count
-      trade_amount: sum(of: Trade_Buy_Amount)
-      Trade {
-        Buy {
-          Account {
-            Owner
-            Address
-            Token {
-              Owner
-            }
-          }
-        }
+      Transaction {
+        Signer
       }
+      total_trades: count
+      total_traded_volume: sum(of: Trade_Side_AmountInUSD)
     }
   }
 }
@@ -948,3 +942,7 @@ query MyQuery {
   }
 }
 ```
+
+## Video Tutorial | How to get Trades, Trades of a token and Trades of a trader on PumpSwap DEX in realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=MMazeabdirM" />
