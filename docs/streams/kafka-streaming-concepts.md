@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # Kafka Streaming Concepts
 
+Bitquery provides realtime data via Kafka as well in addition to GraphQL subscriptions. In this section, we'll see how Kafka-based streaming works and how to integrate it into your application using practical code examples.
+
 ### Pro and Cons
 
 Kafka provides faster and more reliable streams comparing to GraphQL subscriptions due to the following advantages:
@@ -71,7 +73,6 @@ Your application must implement the code:
 - **DEX Trades (JSON)**: Messages are retained for **24 hours**.
 - **Other JSON Streams**: Messages are retained for **4 hours**.
 
-
 ## Connect to Kafka Server
 
 To connect to Bitquery’s Kafka streaming service, you’ll need the following:
@@ -79,17 +80,14 @@ To connect to Bitquery’s Kafka streaming service, you’ll need the following:
 1.  **Kafka Broker Addresses**  
     Use the following server list:  
     `kfk0.bitquery.io:9093,kfk1.bitquery.io:9093,kfk2.bitquery.io:9093`
-    
 2.  **Authentication Credentials**  
     A **username** and **password** for **SASL over SSL authentication** – provided by the Bitquery support team.
-    
 3.  **SSL Certificates**  
     You’ll receive the following certificate files from our support team:
-    
-    -   `client.key.pem` 
-    -   `client.cer.pem` 
-    -   `server.cer.pem` 
 
+    - `client.key.pem`
+    - `client.cer.pem`
+    - `server.cer.pem`
 
 ### Example: SSL Connection Configuration (SASL + SSL)
 
@@ -103,11 +101,10 @@ sasl_conf = {
     'ssl.key.location': 'client.key.pem',
     'ssl.ca.location': 'server.cer.pem',
     'ssl.certificate.location': 'client.cer.pem',
-    'ssl.endpoint.identification.algorithm': 'none' 
+    'ssl.endpoint.identification.algorithm': 'none'
 }
 
 ```
-
 
 ### Optional: Non-SSL Connection (SASL_PLAINTEXT)
 
@@ -125,8 +122,6 @@ sasl_conf = {
 ```
 
 > Use plaintext only in trusted or local environments, as the connection is not encrypted.
-
-
 
 ### Subscribe to particular topic(s)
 
@@ -146,6 +141,9 @@ General pattern of the topic name is:
 <BLOCKCHAIN_NAME>.broadcasted.<MESSAGE_TYPE>
 ```
 
+
+### General Message Types
+
 MESSAGE_TYPE is specific on blockchain, most blockchain has topics for:
 
 - dextrades - events from DEX trading
@@ -156,6 +154,24 @@ MESSAGE_TYPE is specific on blockchain, most blockchain has topics for:
 - instructions - details on instructions and associated accounts, transaction details
 - raw - blocks or transactions directly from node
 - instruction_balance_updates - instruction-level information on balance updates for accounts and token supply updates ( for solana )
+
+Refer to [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf) schemas for structure.
+
+### EVM Chains
+
+**Broadcasted (Mempool-level):**
+
+- `*.broadcasted.transactions.proto` → `ParsedAbiBlockMessage`
+- `*.broadcasted.tokens.proto` → `TokenBlockMessage`
+- `*.broadcasted.dextrades.proto` → `DexBlockMessage`
+- `*.broadcasted.raw.proto` → `BlockMessage` ( Not yet deployed)
+
+**Committed Blocks:**
+
+- `*.transactions.proto`
+- `*.tokens.proto`
+- `*.dextrades.proto`
+- `*.raw.proto` (Coming soon)
 
 Contact our support team for the topics that you can connect to for your specific needs.
 
