@@ -946,3 +946,7 @@ query MyQuery {
 ## Video Tutorial | How to get Trades, Trades of a token and Trades of a trader on PumpSwap DEX in realtime
 
 <VideoPlayer url="https://www.youtube.com/watch?v=MMazeabdirM" />
+
+## Video Tutorial | How to get Top Traders on PumpSwap AMM
+
+<VideoPlayer url="https://www.youtube.com/watch?v=TwQoD5vybLI" />
