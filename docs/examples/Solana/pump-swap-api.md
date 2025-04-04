@@ -2,7 +2,7 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this document, we will explore several examples related to pump swap data. Additionally, we have the Pump Fun API available, and you can access its documentation [here](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/).
+In this document, we will explore several examples related to pump swap data. Additionally, access the [Pump Fun API documentation](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/).
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
 
 <head>
