@@ -195,6 +195,7 @@ const sidebars = {
               items: [
                 "streams/protobuf/kafka-protobuf-go",
                 "streams/protobuf/kafka-protobuf-python",
+                "streams/protobuf/kafka-protobuf-js"
               ],
             },
             {
