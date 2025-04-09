@@ -159,9 +159,9 @@ run().catch(console.error);
 
 ### Execution Workflow
 
-1. **Kafka Client Initialization**: The Kafka client is created and configured with SSL certificates and SASL authentication.
+1. **Kafka Client Initialization**: The Kafka client is created and configured with or without SSL certificates and SASL authentication.
 2. **Group ID Generation**: A groupId is created, ensuring no collision with other consumers.
-3. **Kafka Consumer Connection**: The consumer connects to the Kafka brokers and subscribes to the specified topic.
+3. **Kafka Consumer Connection**: The consumer connects to the Kafka brokers and subscribes to a specified topic.
 4. **Message Processing**:
    - **Connecting the Consumer**: Establishes the connection with Kafka.
    - **Subscribing to the Topic**: Begins listening to the specified Kafka topic.
