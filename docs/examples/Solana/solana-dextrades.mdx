@@ -1090,6 +1090,71 @@ query MyQuery {
 }
 ```
 
+## Solana Second-level OHLC / K-line API
+
+You can get OHLC for each second as a subscription query, which can then be monitored via websocket.
+Below is an example. You can read more on [quantiles here](https://docs.bitquery.io/docs/graphql/metrics/quantile/)
+
+Test the subscription query [here](https://ide.bitquery.io/seconds-oHLC-realtime-solana#)
+
+```
+subscription LatestTrades {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {
+        Transaction: {Result: {Success: true}},
+        Trade: {
+          Side: {
+            Amount: {gt: "0"},
+            Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}
+          },
+          Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}
+        }
+      }
+    ) {
+      min: quantile(of: Trade_PriceInUSD, level: 0.05)
+      max: quantile(of: Trade_PriceInUSD, level: 0.95)
+      volume: sum(of: Trade_Side_AmountInUSD)
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+      Trade {
+        Market {
+          MarketAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Side {
+          Type
+        }
+        PriceInUSD
+        close: PriceInUSD
+        Amount
+        Side {
+          Currency {
+            Symbol
+            MintAddress
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+
+
+
+```
+
 ## Solana OHLC API
 
 You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair Shark Cat-SOL by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
