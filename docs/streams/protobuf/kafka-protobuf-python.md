@@ -9,6 +9,8 @@ This tutorial explains how to consume Solana transaction messages in protobuf fo
 You can read more about **Bitquery Protobuf Streams** here:  
 [Bitquery Kafka Streaming Concepts - Protobuf Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#protobuf-streams).
 
+The complete code is available [here](https://github.com/bitquery/streaming-protobuf-python/blob/main/consumer.py).
+
 ## **Prerequisites**
 
 Before you begin, install the required Python package that includes the compiled `.pb2` files:
