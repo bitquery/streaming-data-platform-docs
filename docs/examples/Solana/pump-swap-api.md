@@ -470,7 +470,6 @@ You can test out the query [here](https://ide.bitquery.io/Pumpswap-latest-Trade-
 subscription {
   Solana {
     DEXTrades(
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Trade_Index}]
       where: {Transaction: {Signer: {is: "78mgMi3caj9CY5EdAW9FHhUoLcWB5suyfDF8dsQ2CNHR"}}, Trade: {Dex: {ProgramAddress: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}}}
     ) {
       Block {
