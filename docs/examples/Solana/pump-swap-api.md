@@ -384,7 +384,7 @@ query MyQuery {
 
 ```
 
-## Latest trades of a trader
+## Latest Trades by a Trader
 
 You can test out the query [here](https://ide.bitquery.io/Pumpswap-latest-Trade-for-a-trader-api_1).
 
@@ -461,7 +461,7 @@ You can test out the query [here](https://ide.bitquery.io/Pumpswap-latest-Trade-
 }
 ```
 
-## Latest trades of a trader websocket
+## Latest Trades by a Trader - Get Data in Real-time via a Websocket
 
 Below query can get you the latest trades of a trader in real time.
 You can test out the query [here](https://ide.bitquery.io/Pumpswap-latest-Trade-for-a-trader-stream_1).
