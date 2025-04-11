@@ -35,10 +35,9 @@ This Solana API is part of our Early Access Program (EAP), which is intended for
 <meta property="twitter:description" content="Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, Phoenix etc through our DEX Pools API." />
 </head>
 
-
 ## Get all Liquidity Pools updates on Solana
-To get all Liquidity pools updates on solana use [this stream](https://ide.bitquery.io/solana-dex-pools-update-stream).
 
+To get all Liquidity pools updates on solana use [this stream](https://ide.bitquery.io/solana-dex-pools-update-stream).
 
 ```graphql
 subscription {
@@ -249,9 +248,18 @@ You can find the query [here](https://ide.bitquery.io/Get-LP-Latest-liqudity-on-
 query GetLatestLiquidityForPool {
   Solana(dataset: realtime) {
     DEXPools(
-      where: {Pool: {Market: {MarketAddress: {is: "HktfL7iwGKT5QHjywQkcDnZXScoh811k7akrMZJkCcEF"}}}, Transaction: {Result: {Success: true}}}
-      orderBy: {descending: Block_Slot}
-      limit: {count: 1}
+      where: {
+        Pool: {
+          Market: {
+            MarketAddress: {
+              is: "HktfL7iwGKT5QHjywQkcDnZXScoh811k7akrMZJkCcEF"
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+      orderBy: { descending: Block_Slot }
+      limit: { count: 1 }
     ) {
       Pool {
         Market {
@@ -282,7 +290,6 @@ query GetLatestLiquidityForPool {
     }
   }
 }
-
 ```
 
 ## Get Top Pools Based on Liquidity

@@ -8,6 +8,10 @@ This Solana API is part of our Early Access Program (EAP), which is intended for
 
 This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
+:::note
+`Trade Side Account` field will not be available as aggregates in Archive and Combined Datasets
+:::
+
 <head>
 <meta name="title" content="Raydium CLMM API - Monitor Solana Liquidity Pools & Trading Activity"/>
 <meta name="description" content="Access real-time data on Raydium's concentrated liquidity market maker (CLMM) on Solana. Use our API to track liquidity pools, trades, and more."/>

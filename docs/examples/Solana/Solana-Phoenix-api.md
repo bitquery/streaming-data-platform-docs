@@ -1,5 +1,9 @@
 # Phoenix DEX API
 
+:::note
+`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+:::
+
 ## Phoenix Trades in Real-Time
 
 The below query gets real-time information whenever there's a new trade on the Phoenix DEX including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics.

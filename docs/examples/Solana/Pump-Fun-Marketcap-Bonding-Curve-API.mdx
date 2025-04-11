@@ -4,6 +4,10 @@ In this document, we will explore examples to get marketcap, bonding curve progr
 
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
 
+:::note
+`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+:::
+
 <head>
   <meta name="title" content="Pump Fun API - Solana - Tokens, Trades, Live Prices"/>
   <meta name="description" content="Get Bonding Curve Data of any Pump.fun based token through our Pump.fun API."/>
@@ -240,12 +244,6 @@ To check if a Pump Fun Token has migrated to PumpSwap, we can use the below quer
 ## Track Pump Fun Token Migrations to PumpSwap
 
 Use the below query to track Pump Fun token migrations to PumpSwap in realtime. You will get the following account addresses information through the query's `Instruction Accounts[]` field and the amount of liquidity added through arguments' `Value` field.
-
-<img
-  width="1006"
-  alt="Image"
-  src="https://github.com/user-attachments/assets/1b4f22ab-e53d-4813-a2a5-c49e95958c92"
-/>
 
 You can test the query [here](https://ide.bitquery.io/pumpfun-migration-stream_2#).
 

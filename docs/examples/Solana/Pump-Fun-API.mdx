@@ -6,6 +6,10 @@ In this document, we will explore several examples related to pump fun data. We 
 Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/).
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
 
+:::note
+`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+:::
+
 <head>
   <meta name="title" content="Pump Fun API - Solana - Tokens, Trades, Live Prices"/>
   <meta name="description" content="Get on-chain data of any Pump.fun based token through our Pump.fun API."/>
@@ -394,7 +398,7 @@ These are the variables used for running this query.
 ## Get Latest Trades for a Pump Fun Token
 
 The below query gets latest trades data of the specified Token `FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93`.
-You can run the query [here](https://ide.bitquery.io/get-latest-trades-of-a-pump-fun-token)
+You can run the query [here](https://ide.bitquery.io/get-latest-trades-of-a-pump-fun-token_6)
 
 ```graphql
 query pumpfunTokenLatestTrades($token: String) {
@@ -414,10 +418,6 @@ query pumpfunTokenLatestTrades($token: String) {
         }
         Side {
           Type
-          Account {
-            Address
-            Owner
-          }
         }
         Price
         Amount
@@ -1020,7 +1020,7 @@ You can run the query [here](https://ide.bitquery.io/get-PF-tokens-creation-time
 ## Get the Top Traders of a specific Token on Pump Fun DEX
 
 The below query gets the Top Traders of the specified Token `FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93` which was launched on pump fun. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
-You can run the query [here](https://ide.bitquery.io/top-traders-of-a-pump-fun-token)
+You can run the query [here](https://ide.bitquery.io/top-traders-of-a-pump-fun-token_2)
 
 ```graphql
 query TopTraders($token: String) {
@@ -1033,12 +1033,6 @@ query TopTraders($token: String) {
       Trade {
         Account {
           Owner
-        }
-        Side {
-          Account {
-            Address
-          }
-          Type
         }
       }
       bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})

@@ -6,9 +6,11 @@ sidebar_position: 1
 
 This section will guide you through different APIs which will tell you how to get data like realtime trades just like how Photon shows for Solana.
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
+:::note
+`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+:::
 
-<img width="1445" alt="Image" src="https://github.com/user-attachments/assets/5bc48dbf-6e72-488c-bfda-324d3ce025fe" />
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Get Trade Transactions of Photon for a particular pair in realtime
 

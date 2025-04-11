@@ -111,7 +111,7 @@ query MyQuery {
   Solana {
     BalanceUpdates(
       orderBy: {descendingByField: "BalanceUpdate_Holding_maximum"}
-      where: {BalanceUpdate: {Currency: {MintAddress: 
+      where: {BalanceUpdate: {Currency: {MintAddress:
         {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}},
         }, Transaction: {Result: {Success: true}}}
     ) {

@@ -8,8 +8,6 @@ This section will guide you through different APIs which will tell you how to ge
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-<img width="1316" alt="Image" src="https://github.com/user-attachments/assets/58351dc3-376b-4440-b997-1c3dc25b3ac8" />
-
 ## Get the Top Trading Pairs
 
 The query will fetch you the Top Trading Pairs in desceneding order of the total number of trades took place in them just like how BullX shows in its UI.

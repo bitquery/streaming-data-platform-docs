@@ -5,6 +5,10 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 In this document, we will explore several examples related to pump swap data. Additionally, access the [Pump Fun API documentation](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/).
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
 
+:::note
+`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+:::
+
 <head>
   <meta name="title" content="Pump Swap API - Solana - Tokens, Trades, Live Prices"/>
   <meta name="description" content="Get on-chain data of any Pump Swap based token through our Pump Swap API."/>

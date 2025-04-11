@@ -6,6 +6,10 @@ sidebar_position: 1
 
 This section will guide you through different APIs which will tell you how to get data like realtime trades just like how GMGN shows for Solana.
 
+:::note
+`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+:::
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <img width="1467" alt="Image" src="https://github.com/user-attachments/assets/bd1225d0-c464-44d1-a18c-c74661bbd83a" />

@@ -4,6 +4,10 @@ In this section we will see how to get Solana trader information using our API. 
 
 This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/).
 
+:::note
+`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+:::
+
 <head>
 <meta name="title" content="Solana Trader API | Real-Time Data for DEX Trades with Pumpfun Insights" />
 <meta name="description" content="Get detailed insights into Solana traders and their activities, including Pumpfun data, across DEX platforms like Raydium and Jupiter. Access on-chain trading pair details, liquidity pools, and transaction analytics through our comprehensive Solana Trader API." />
@@ -86,12 +90,14 @@ query MyQuery($timestamp: DateTime, $trader: String) {
   "trader" : "FeWbDQ9SpgWS8grNrpFesVquJfxVkRu1WNZerKsrkcbY"
 }
 ```
+
 ## Subscribe to a Trader in Real-time
+
 The below subscription query will fetch in real-time the trades done by a wallet. You can use websockets to build applications on this data. Read more [here](https://docs.bitquery.io/docs/subscriptions/websockets/)
 
-To filter trades by a wallet we will use the condition `Account: {Address: {is}}`.  Run the subscription query [here](https://ide.bitquery.io/trades-of-a-wallet_2)
+To filter trades by a wallet we will use the condition `Account: {Address: {is}}`. Run the subscription query [here](https://ide.bitquery.io/trades-of-a-wallet_2)
 
-You can convert this subscription to a `query` to get past trades of the wallet. 
+You can convert this subscription to a `query` to get past trades of the wallet.
 
 ```
 subscription {

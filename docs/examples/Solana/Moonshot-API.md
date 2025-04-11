@@ -2,6 +2,10 @@
 
 In this section we will see how to get real-time data on Moonshot trades, transactions and wallet updates. Similarly you can get [pump.fun data here](https://docs.bitquery.io/docs/examples/dextrades/Pump-Fun-API/)
 
+:::note
+`Trade Side Account` field will not be available as aggregates in Archive and Combined Datasets
+:::
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <head>

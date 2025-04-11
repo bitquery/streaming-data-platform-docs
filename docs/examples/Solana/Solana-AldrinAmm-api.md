@@ -1,5 +1,9 @@
 # AldrinAmm DEX API
 
+:::note
+`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+:::
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## AldrinAmm Trades in Real-Time
@@ -109,7 +113,7 @@ If you want to get OHLC data for any specific currency pair on AldrinAmm, you ca
 
 ## Get the Top Traders of a specific Token on AldrinAmm DEX
 
-The below query gets the Top Traders of the specified Token `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` on AldrinAmm. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-aldrinAmm)
+The below query gets the Top Traders of the specified Token `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` on AldrinAmm. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-aldrinAmm_2)
 
 ```
 query TopTraders($token: String) {
@@ -122,12 +126,6 @@ query TopTraders($token: String) {
       Trade {
         Account {
           Owner
-        }
-        Side {
-          Account {
-            Address
-          }
-          Type
         }
       }
       bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})

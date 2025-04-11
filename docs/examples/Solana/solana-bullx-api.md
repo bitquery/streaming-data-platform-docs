@@ -6,6 +6,10 @@ sidebar_position: 1
 
 This section will guide you through different APIs which will tell you how to get data like realtime trades just like how BullX shows for Solana.
 
+:::note
+`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+:::
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <img width="1111" alt="Image" src="https://github.com/user-attachments/assets/8bb8abe8-da7e-4445-8541-da2402dc3a24" />

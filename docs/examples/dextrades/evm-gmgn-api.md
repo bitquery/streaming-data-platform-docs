@@ -4,8 +4,6 @@ This section will guide you through different APIs which will tell you how to ge
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-<img width="1455" alt="Image" src="https://github.com/user-attachments/assets/9f1c8ba7-c8a6-4473-ae38-84da81543912" />
-
 ## Get the Top Trading Pairs
 
 The query will fetch you the Top Trading Pairs in desceneding order of the total number of trades took place in them just like how GMGN shows in its UI. You can check out the video tutorial [here](https://www.youtube.com/watch?v=qAJ2SPFaO-k) to understand the query better.
