@@ -195,6 +195,7 @@ const sidebars = {
               items: [
                 "streams/protobuf/kafka-protobuf-go",
                 "streams/protobuf/kafka-protobuf-python",
+                "streams/protobuf/kafka-protobuf-js"
               ],
             },
             {
@@ -372,6 +373,7 @@ const sidebars = {
             "examples/BSC/bsc-transfers",
             "examples/BSC/gra-fun-api",
             "examples/BSC/four-meme-api",
+            "examples/BSC/pancake-swap-api",
           ],
         },
         {
