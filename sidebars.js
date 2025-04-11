@@ -373,6 +373,7 @@ const sidebars = {
             "examples/BSC/bsc-transfers",
             "examples/BSC/gra-fun-api",
             "examples/BSC/four-meme-api",
+            "examples/BSC/pancake-swap-api",
           ],
         },
         {
