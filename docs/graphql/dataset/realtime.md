@@ -5,7 +5,7 @@ sidebar_position: 4
 # Realtime Database
 
 Realtime is the default database (if you omit the attribute, then it is used).
-The `realtime` database contains data from the past 48 hours, but with a limitation. When querying `realtime` data using the Streaming APIs, you will only receive data that is not in the `archive` dataset. For example, if the latest block in the archive is 2 hours old, you will only receive data that is more recent than this block.
+The `realtime` database contains data from the past 8 hours, but with a limitation. When querying `realtime` data using the Streaming APIs, you will only receive data that is not in the `archive` dataset. For example, if the latest block in the archive is 2 hours old, you will only receive data that is more recent than this block.
 
 The main cases when it is used is for:
 
