@@ -274,7 +274,7 @@ subscription {
 
 ## Latest Trades of a Token on Pancake Swap
 
-[This](https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-token) API endpoint returns the latest trades of a particular token on Pancake Swap. The token address is `0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82` for this example.
+[This](https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-token) API endpoint returns the latest trades of a particular token on Pancake Swap. The token address is `0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82` for this example. You could also stream the latest trades of the mentioned token using this [subscription](https://ide.bitquery.io/Stream---BSC-PancakeSwap-v3-Trades-for-a-token).
 
 ```graphql
 {
@@ -365,7 +365,7 @@ subscription {
 }
 ```
 
-You could also stream the latest trades of the mentioned token using this [subscription](https://ide.bitquery.io/Stream---BSC-PancakeSwap-v3-Trades-for-a-token).
+Also, checkout the [Four Meme](./four-meme-api.md) documentation for APIs related to Four Meme tokens and Four Meme Exchange.
 
 ## Latest Trades on Pancake Swap for a given trader
 
