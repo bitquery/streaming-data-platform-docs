@@ -56,6 +56,24 @@ For this example the pair between the tokens listed below is considered.
 }
 ```
 
+
+:::note Important Considerations
+
+- Each OHLC data point is calculated independently per time interval (e.g., daily). There’s no enforcement to make the `Close` of one candle match the `Open` of the next.
+    
+- **Gaps are possible**: Since the data is based on actual trades, if no trades occur exactly at the start or end of a day, the nearest trades before and after those timestamps will define the open and close. For instance:
+  
+  - Last trade on April 14: `23:58:12`  
+  - First trade on April 15: `00:03:45`  
+    These would represent the _close_ of April 14 and _open_ of April 15 respectively, leaving a gap in between.
+  
+- **Derived from block time**: All time-based grouping (daily, hourly, etc.) depends on block timestamps.
+
+**Alternative approach**: You can get all trades and calculate OHLC locally in your own system. Complete guide [here](https://docs.bitquery.io/docs/usecases/ohlcv-complete-guide/)
+
+:::
+
+
 ## Top 10 token traders
 
 [This](https://ide.bitquery.io/top-10-traders-of-the-token) query returns the all time top 10 token traders for a particular token,
@@ -221,6 +239,6 @@ You can run it [here](https://ide.bitquery.io/ATH-of-multiple-tokens-using-quant
 
 ```
 
-## Video Tutorial for Querring Historical Solana Data
+## Video Tutorial for Querying Historical Solana Data
 
 <VideoPlayer url="https://youtu.be/qbSEPbHQb5k" />

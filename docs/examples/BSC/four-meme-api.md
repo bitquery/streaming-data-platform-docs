@@ -245,6 +245,8 @@ subscription {
 }
 ```
 
+You can also get the trade activities of a user on Pancake Swap using our [Pancake Swap](./pancake-swap-api.md) APIs.
+
 ## Track Latest and Historical Trades of a Four Meme User
 
 You can use DEX Trades API with combined dataset to get latest and historic trades of a user. Run [this query](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme) for example.

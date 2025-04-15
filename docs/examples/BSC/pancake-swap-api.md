@@ -1,8 +1,31 @@
-# PancakeSwap API
+# Pancake Swap API
 
-In this section we will use our APIs to track and monitor on-chain data related to the trade activities on Pancake Swap DEX. To get the trade activities of the PamcakeSwap exclusively we have added a filter on `DEX_OwnerAddress`, and the owner address is `0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865` in this case for Pancake V3. To get the trades and trade related data for PancakeSwap V1 or V2 you would need their respective `Factory Contract` address.
+In this section we will use our APIs to track and monitor the on-chain data related to the trade activities on Pancake Swap DEX. To get the trade activities of the Pancake Swap exclusively we have added a filter on `DEX_OwnerAddress`, and the owner address is `0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865` in this case for Pancake Swap V3. To get the trades and trade related data for Pancake Swap V1 or V2 you would need their respective `Factory Contract` address.
 
-## All the Latest Trades on PancakeSwap
+<head>
+  <meta name="title" content="Pancake Swap API - BSC - Tokens, Trades, Live Prices, Liquidity"/>
+  <meta name="description" content="Get on-chain data of any Pancake Swap trade through our Pancake Swap API."/>
+  <meta name="keywords" content="Pancake Swap API,Pancake Swap on-chain data API,Pancake Swap token data API, Pancake Swap liquidity API, Pancake Swap blockchain API,Pancake Swap DEX data API,Pancake Swap API documentation,Pancake Swap crypto API,Pancake Swap web3 API,DEX Trades,Solana,Blast,Pancake Swap memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
+  <meta name="robots" content="index, follow"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="language" content="English"/>
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="How to Get Pancake Swap On-Chain Data with Pancake Swap API"
+/>
+<meta
+  property="og:description"
+  content="Get on-chain data of any Pancake Swap trades through our Pancake Swap API."
+/>
+
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:title" content="How to Get Pancake Swap On-Chain Data with Pancake Swap API"/>
+  <meta property="twitter:description" content="Get on-chain data of any Pancake Swap trades through our Pancake Swap API."/>
+</head>
+
+## Get Latest Trades on Pancake Swap
 
 Using [this](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades) API endpoint we could query the most recent trades on PancakeSwap.
 
@@ -89,7 +112,7 @@ Using [this](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades) API en
 
 ## Streaming Latest Trades on Pancake Swap
 
-[This](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream) subscription allows to subscribe to the latest trades on PancakeSwap.
+[This](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream) subscription allows to subscribe to the latest trades on Pancake Swap.
 
 ```graphql
 subscription {
@@ -168,9 +191,9 @@ subscription {
 }
 ```
 
-## Subscribe to Mempool Trades on PancakeSwap
+## Subscribe to Mempool Trades on Pancake Swap
 
-Using [this](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrades---Stream) subscription you could stream the latest trades in Mempool, that is streaming the unconfirmed trades.
+Using [this](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrades---Stream) subscription you could stream the latest trades in the Mempool, that is streaming the unconfirmed trades.
 
 ```graphql
 subscription {
@@ -249,9 +272,9 @@ subscription {
 }
 ```
 
-## Latest Trades of a Token on PancakeSwap
+## Latest Trades of a Token on Pancake Swap
 
-[This](https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-token) API endpoint returns the latest trades of a particular token on PancakeSwap. The token address is `0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82` for this example.
+[This](https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-token) API endpoint returns the latest trades of a particular token on Pancake Swap. The token address is `0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82` for this example. You could also stream the latest trades of the mentioned token using this [subscription](https://ide.bitquery.io/Stream---BSC-PancakeSwap-v3-Trades-for-a-token).
 
 ```graphql
 {
@@ -342,11 +365,11 @@ subscription {
 }
 ```
 
-You could also stream the latest trades of the mentioned token using this [subscription](https://ide.bitquery.io/Stream---BSC-PancakeSwap-v3-Trades-for-a-token).
+Also, checkout the [Four Meme](./four-meme-api.md) documentation for APIs related to Four Meme tokens and Four Meme Exchange.
 
-## Latest Trades on PancakeSwap for a given trader
+## Latest Trades on Pancake Swap for a given trader
 
-[This]( https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-trader) query returns the latest trades by a particular trader, with buyer wallet address as `0xafb2da14056725e3ba3a30dd846b6bbbd7886c56` in this case, on PancakeSwap. Also, you could subscribe to the same info using [this](https://ide.bitquery.io/Stream---BSC-PancakeSwap-v3-Trades-for-a-trader) stream.
+[This]( https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-trader) query returns the latest trades by a particular trader, with buyer wallet address as `0xafb2da14056725e3ba3a30dd846b6bbbd7886c56` in this case, on Pancake Swap. Also, you could subscribe to the same info using [this](https://ide.bitquery.io/Stream---BSC-PancakeSwap-v3-Trades-for-a-trader) stream.
 
 ```graphql
 {
@@ -441,9 +464,9 @@ You could also stream the latest trades of the mentioned token using this [subsc
 }
 ```
 
-## Latest Price of a Token on PancakeSwap
+## Latest Price of a Token on Pancake Swap
 
-Using [this](https://ide.bitquery.io/BSC-PancakeSwap-v3-Price-for-a-token) API endpoint we could retrieve the latest price of a token traded on PancakeSwap. The price is calculated for the currency with `SmartContract Address` as `0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82` when it is traded against the currency with `SmartContract Address` as `0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c`. This query returns both price against the currency and price in USD.
+Using [this](https://ide.bitquery.io/BSC-PancakeSwap-v3-Price-for-a-token) API endpoint we could retrieve the latest price of a token traded on Pancake Swap. The price is calculated for the currency with `SmartContract` as `0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82` when it is traded against the currency with `SmartContract` as `0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c`. This query returns both price against the currency and price in USD.
 
 ```graphql
 {
@@ -471,7 +494,7 @@ Using [this](https://ide.bitquery.io/BSC-PancakeSwap-v3-Price-for-a-token) API e
 
 The same info could be streamed via this [subscription](https://ide.bitquery.io/Stream--BSC-PancakeSwap-v3-Price-for-a-token_1).
 
-## OHLC of Token on PancakeSwap
+## OHLC of a Token on Pancake Swap
 
 [This](https://ide.bitquery.io/BSC-Pancake-V3-OHLC-data_1) API endpoint provides the OHLC/ K-Line data for a given token against other specified token. In the example below, we are calculating the OHLC for currency with address as `$base` against the token with the address as `$token`.
 
@@ -510,9 +533,9 @@ query tradingViewPairs($network: evm_network, $dataset: dataset_arg_enum, $inter
 }
 ```
 
-## New Liquidity Pools Created on PancakeSwap
+## New Liquidity Pools Created on Pancake Swap
 
-[This](https://ide.bitquery.io/New-pools-created-on-PancakeSwap-v3) query returns the latest liquidity pool creation events on PancakeSwap.The same event could be streamed using [this](https://ide.bitquery.io/Stream---New-pools-created-on-PancakeSwap-v3) subscription. To make sure that we are only getting newly created liquidity pools on PancakeSwap, we are applying the conditon that the `LogHeader` is the `DEX_OwnerAddress`.
+[This](https://ide.bitquery.io/New-pools-created-on-PancakeSwap-v3) query returns the latest liquidity pool creation events on Pancake Swap.The same event could be streamed using [this](https://ide.bitquery.io/Stream---New-pools-created-on-PancakeSwap-v3) subscription. To make sure that we are only getting newly created liquidity pools on Pancake Swap, we are applying the conditon that the `LogHeader` is `0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865`.
 
 ```graphql
 {
@@ -585,9 +608,9 @@ query tradingViewPairs($network: evm_network, $dataset: dataset_arg_enum, $inter
 }
 ```
 
-## Subscribe the Liquidity Addition Event on PancakeSwap
+## Subscribe the Liquidity Addition Event on Pancake Swap
 
-Liquidity addition is an important event related to any liquidity pool. Using [this](https://ide.bitquery.io/Stream---Liqiidity-add-for-all-tokens-on-PancakeSwap-v3) subscription we can subscribe to the liquidity addition event for liquidity pools on PancakeSwap and get the addition events in real time. To make sure that we are only getting liquidity addition events for PancakeSwap we are placing condition that the transaction is sent to `0x46A15B0b27311cedF172AB29E4f4766fbE7F4364` address.
+Liquidity addition is an important event related to any liquidity pool. Using [this](https://ide.bitquery.io/Stream---Liqiidity-add-for-all-tokens-on-PancakeSwap-v3) subscription we can subscribe to the liquidity addition event for liquidity pools on Pancake Swap and get the addition events in real time. To make sure that we are only getting liquidity addition events for Pancake Swap we are placing condition that the transaction is sent to `0x46A15B0b27311cedF172AB29E4f4766fbE7F4364` address.
 
 ```graphql
 subscription {
@@ -660,9 +683,9 @@ subscription {
 }
 ```
 
-## Subscribe the Liquidity Removal Event on PancakeSwap
+## Subscribe the Liquidity Removal Event on Pancake Swap
 
-Using [this](https://ide.bitquery.io/Stream---Liquidity-remove-for-all-tokens-on-PancakeSwap-v3) subscription, liquidity removal events could be streamed for PancakeSwap Exchange.
+Using [this](https://ide.bitquery.io/Stream---Liquidity-remove-for-all-tokens-on-PancakeSwap-v3) subscription, liquidity removal events could be streamed for Pancake Swap Exchange.
 
 ```graphql
 subscription {
@@ -735,9 +758,9 @@ subscription {
 }
 ```
 
-## Get the Latest Pool Reserves for a Pair on PancakeSwap
+## Get the Latest Pool Reserves for a Pair on Pancake Swap
 
-[This](https://ide.bitquery.io/Pool-reserves-on-Pancakeswap-v3-pool) endpoint returns the latest pool reserves for a PancakeSwap liquidity pool by filtering on the basis of `BalanceUpdate_Address`, which is `0xafb2da14056725e3ba3a30dd846b6bbbd7886c56`, that is the pair address for the mentioned currencies.
+[This](https://ide.bitquery.io/Pool-reserves-on-Pancakeswap-v3-pool) endpoint returns the latest pool reserves for a Pancake Swap liquidity pool by specifying the pair address of the currencies, which is `0xafb2da14056725e3ba3a30dd846b6bbbd7886c56` for this example.
 
 ```graphql
 {
@@ -757,9 +780,9 @@ subscription {
 }
 ```
 
-## All Pairs of a Token on PancakeSwap
+## All Pairs of a Token on Pancake Swap
 
-[This](https://ide.bitquery.io/All-pools-of-a-token-on-pancake-swap_2) query returns all the the token pairs for the specified currency on PancakeSwap. The contents returned included info of the liquidity pool such as currency details, trade amount, number of trades and price of token in USD in various time frames.
+[This](https://ide.bitquery.io/All-pools-of-a-token-on-pancake-swap_2) query returns all the the token pairs for the specified currency on Pancake Swap. The result contains info of the liquidity pool such as currency details, trade amount, number of trades and price of token in USD in various time frames.
 
 ```graphql
 query pairDexList($network: evm_network, $base: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime, $time_ago: DateTime, $owner: String) {
