@@ -82,6 +82,59 @@ Here’s [the query](https://ide.bitquery.io/top-tokens-by-mktcap-on-pump-fun-in
 }
 ```
 
+## PumpFun Tokens between 400K and 450K MarketCap with Creation Date, Dev Address
+
+Below query will give you pump fun tokens which are getting traded on PumpSwap in between the range of 400K and 450K USD Marketcap. Response will also contain the token's creation time and dev address. If you want to select your custom range of Marketcap, then change these prices accordingly `PriceInUSD: {gt: 0.0004, le: 0.00045}`.
+You can try out the query [here](https://ide.bitquery.io/pumpfun-tokens-between-400K-and-450K-MC-and-their-creation-date-dev-address_2)
+
+:::note
+Here we are only getting tokens which were created in last 8 hours.
+:::
+
+```
+{
+  Solana {
+    DEXTrades(
+      limitBy: {by: Trade_Buy_Currency_MintAddress, count: 1}
+      limit: {count: 10}
+      orderBy: {descending: Trade_Buy_Price}
+      where: {Trade: {Dex: {ProtocolName: {is: "pump_amm"}}, Buy: {Currency: {UpdateAuthority: {is: "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM"}}, PriceInUSD: {gt: 0.0004, le: 0.00045}}, Sell: {AmountInUSD: {gt: "10"}}}, Transaction: {Result: {Success: true}}, Block: {Time: {since: "2025-04-15T08:20:00Z"}}}
+    ) {
+      Trade {
+        Buy {
+          Price(maximum: Block_Time)
+          PriceInUSD(maximum: Block_Time)
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+        Market {
+          MarketAddress
+        }
+      }
+      joinTokenSupplyUpdates(
+        TokenSupplyUpdate_Currency_MintAddress: Trade_Buy_Currency_MintAddress
+        join: inner
+        where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
+      ) {
+        Block {
+          Time
+        }
+        Transaction{
+          Dev: Signer
+          Signature
+        }
+      }
+    }
+  }
+}
+```
+
 ## All Pumpfun Tokens crossed 10k Marketcap
 
 As all Pump Fun tokens have a 1 billion supply, based on the price itself, you can get all Pump Fun tokens that have crossed a sure market cap.
