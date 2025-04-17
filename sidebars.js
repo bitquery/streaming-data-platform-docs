@@ -615,6 +615,17 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Building Applications Using Kafka",
+          link: {
+            type: "generated-index",
+            title: "Building Applications Using Kafka",
+          },
+          items: [
+            "usecases/binance-exchange-wallet-monitoring"
+          ]
+        },
+        {
+          type: "category",
           label: "Blockchain Monitoring",
           link: {
             type: "generated-index",
