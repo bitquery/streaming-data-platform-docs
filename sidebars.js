@@ -195,7 +195,7 @@ const sidebars = {
               items: [
                 "streams/protobuf/kafka-protobuf-go",
                 "streams/protobuf/kafka-protobuf-python",
-                "streams/protobuf/kafka-protobuf-js"
+                "streams/protobuf/kafka-protobuf-js",
               ],
             },
             {
@@ -621,8 +621,9 @@ const sidebars = {
             title: "Building Applications Using Kafka",
           },
           items: [
-            "usecases/binance-exchange-wallet-monitoring"
-          ]
+            "usecases/binance-exchange-wallet-monitoring",
+            "usecases/track-millions-of-solana-wallets",
+          ],
         },
         {
           type: "category",
