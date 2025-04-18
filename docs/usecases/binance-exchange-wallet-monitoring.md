@@ -2,7 +2,7 @@
 
 In this guide we will utilize the [Protobuf Kafka streams](docs/streams/protobuf/kafka-protobuf-python.md) provided by Bitquery to monitor withdrawls and deposits for a large number of Binance Exchange Wallets on BSC network. Read [this](docs/streams/compare-websocket-kafka.md) document to know more about why Kafka streams are prefered for building scalable, enterprise grade solutions over other solutions by Bitquery such as Websocket streams and GraphQL API. You can read more about Kafka solution by Bitquery [here](docs/streams/kafka-streaming-concepts.md).
 
-Checkout the complete [codebase](https://github.com/Kshitij0O7/bsc-exchange-wallet-monitoring) for any issues in the tutorial.
+Checkout the complete [codebase](https://github.com/bitquery/bcs-exchange-wallets-monitoring) for any issues in the tutorial.
 
 ## Prerequisites
 
@@ -62,7 +62,7 @@ from helpers.print_protobuf_message import print_protobuf_message
 
 ## Creating Kafka Configuration
 
-The credentials such as `username` and `password` could be recieved by contacting the Bitquery team via - sales@bitquery.io
+The credentials such as `username` and `password` could be received by contacting the Bitquery team via - sales@bitquery.io
 
 ```python
 group_id_suffix = uuid.uuid4().hex
@@ -91,7 +91,7 @@ consumer.subscribe([topic])
 
 ## Creating Set of Binance Exchange Wallets
 
-For the purpose of tutorial we have directly created a set containing a bunch of Binance exchange wallets. When building an enterprise grade solution where the number of wallets ar in thousands or millions, the set could be saved in a seperate file. The wallets are stored in a set instead of list due to fast lookup in sets.
+For the purpose of tutorial we have directly created a set containing a bunch of Binance exchange wallet addresses. When building an enterprise grade solution where the number of wallets are in thousands or millions, the set could be saved in a seperate file. The wallets are stored in a set instead of list due to fast lookup in sets.
 
 ```python
 wallets = {
@@ -115,7 +115,7 @@ wallets = {
 
 ## Proccess Message Function
 
-This function receives the message from the stream as a paramter. The message contains a list of token transfers and the function checks if either of the `sender` or `receiver` are present in the set defined earlier. If either of the condition is satisfied then it prints the message displayed in the [Final Results](#final-result) section.
+This function receives the message from the stream as a parameter. The message contains a list of token transfers and the function checks if either of the `sender` or `receiver` are present in the set defined earlier. If either of the condition is satisfied then it prints the message displayed in the [Final Results](#final-result) section.
 
 ```python
 def process_message(message):
@@ -146,7 +146,7 @@ def process_message(message):
 
 ##  Poll and Monitor Activities in Real Time
 
-This is the main loop for consuming Kafka messages and monitor the exchange wallets activities in real time.
+This is the main loop for consuming Kafka messages and monitoring the exchange wallets activities in real time.
 
 ```python
 try:
