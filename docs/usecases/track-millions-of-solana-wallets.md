@@ -4,9 +4,23 @@ sidebar_position: 4
 
 # How to efficiently track millions of Solana Wallets Balance with BQ Kafka Streams
 
-In the high-stakes world of cryptocurrency, real-time wallet balance data isn't just a nice-to-have — it's mission-critical infrastructure. Whether you're running an exchange processing customer deposits, a DeFi protocol managing liquidations, or an analytics platform tracking whale movements, being able to monitor millions of wallet balances in real-time can be the difference between success and failure.
-This article showcases an implementation for monitoring Solana wallet balances using Bitquery's Kafka Streams, with code that demonstrates the core concepts needed to track wallet balances at scale.
-To get basic understanding of Kafka Streams, read [Kafka Streaming Concepts page](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+Accurate, real-time wallet balance data is mission-critical for crypto businesses. Whether it's exchanges and custodians monitoring incoming deposits, DeFi protocols watching collateral positions, or analytics platforms tracking whale movements—speed matters. Just a few milliseconds can mean the difference between a successful liquidation or a costly missed opportunity.
+But tracking wallet balances on Solana is uniquely challenging. As a high-throughput blockchain, Solana processes thousands of transactions per second across millions of wallets. This makes traditional polling-based methods both inefficient and costly. Check this [bitquery API](https://ide.bitquery.io/Transaction-in-1-hour_1) here, we are getting around 4000 TPS on Solana at the time of writing this article.
+
+### Why polling doesn't scale on Solana:
+
+- **High volume**: You risk missing updates due to polling intervals.
+
+- **Expensive**: RPC calls scale poorly and become cost-prohibitive at millions of wallets.
+
+- **Laggy**: Polling introduces delays between actual balance changes and detection.
+
+- **Unreliable**: Under heavy load, RPC nodes can time out or fail.
+
+Traditionally, teams rely on Remote Procedure Call (RPC) polling to query wallet balances. But as your tracking scales, that model breaks down—wasting resources, increasing latency, and burning through RPC limits.
+For a deeper dive into this problem space, check out our post on [Scalable Balance Tracking for Custodians: A Better Alternative to Node-Based Approaches](https://www.linkedin.com/pulse/scalable-balance-tracking-custodians-better-alternative-node-based-wiyuc).
+In this article, we’ll walk through a practical implementation of scalable Solana wallet balance tracking using Bitquery’s Kafka Streams. We'll share code examples, design insights, and explain how Kafka helps you stream balance changes in real time—without hammering RPC nodes.
+If you're new to Kafka, start with [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) on Bitquery to get a basic understanding before diving in.
 
 import VideoPlayer from "../../src/components/videoplayer.js";
 
