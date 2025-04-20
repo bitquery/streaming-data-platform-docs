@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# How to efficiently track millions of Solana Wallets Balance with BQ Kafka Streams
+# How to efficiently track millions of Solana Wallets Balance with Bitquery Kafka Streams
 
 Accurate, real-time wallet balance data is mission-critical for crypto businesses. Whether it's exchanges and custodians monitoring incoming deposits, DeFi protocols watching collateral positions, or analytics platforms tracking whale movements—speed matters. Just a few milliseconds can mean the difference between a successful liquidation or a costly missed opportunity.
 But tracking wallet balances on Solana is uniquely challenging. As a high-throughput blockchain, Solana processes thousands of transactions per second across millions of wallets. This makes traditional polling-based methods both inefficient and costly. Check this [bitquery API](https://ide.bitquery.io/Transaction-in-1-hour_1) here, we are getting around 4000 TPS on Solana at the time of writing this article.
