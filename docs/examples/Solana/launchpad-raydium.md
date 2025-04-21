@@ -80,3 +80,105 @@ You can run the query [here](https://ide.bitquery.io/Launchpad-latest-pool-creat
 }
 
 ```
+
+## Latest Trades on Launchpad
+
+This query fetches the most recent trades on the Raydium Launchpad.
+You can run the query [here](https://ide.bitquery.io/Latest-Trades-on-Launchpad)
+
+```
+query LatestTrades {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}}}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+      Trade {
+        Market {
+          MarketAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        AmountInUSD
+        PriceInUSD
+        Amount
+        Currency {
+          Name
+        }
+        Side {
+          Type
+          Currency {
+            Symbol
+            MintAddress
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+
+```
+
+Similarly, you can subscribe to trades on launchpad in real-time using [subscription query](https://ide.bitquery.io/Subscribe-to-Trades-on-Launchpad). The same can be tracked using [Bitquery Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
+
+## Latest Price of a Token on Launchpad
+
+This query provides the most recent price data for a specific token launched on Raydium Launchpad. You can filter by the token’s `MintAddress`, and the query will return the last recorded trade price
+You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-Launchpad)
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 1}
+      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}, Currency: {MintAddress: {is: "5SA3y1LSB55D36G6BYXwqpEXZferX5zosSdQuky7aray"}}}}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+      Trade {
+        Market {
+          MarketAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        AmountInUSD
+        PriceInUSD
+        Amount
+        Currency {
+          Name
+        }
+        Side {
+          Type
+          Currency {
+            Symbol
+            MintAddress
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+
+```
