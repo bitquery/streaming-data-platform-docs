@@ -135,7 +135,7 @@ Similarly, you can subscribe to trades on launchpad in real-time using [subscrip
 
 ## Latest Price of a Token on Launchpad
 
-This query provides the most recent price data for a specific token launched on Raydium Launchpad. You can filter by the token’s `MintAddress`, and the query will return the last recorded trade price
+This query provides the most recent price data for a specific token launched on Raydium Launchpad. You can filter by the token’s `MintAddress`, and the query will return the last recorded trade price.
 You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-Launchpad)
 
 ```
