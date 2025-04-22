@@ -182,3 +182,54 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-
 }
 
 ```
+
+## Top Tokens on Launchpad
+
+Get stats on top tokens that are trading on Launchpad. We use `any`( OR condition) and `notIn` to exclude trades involving WSOL, USDC, and USDT. These tokens are excluded to focus on new tokens, especially in markets like Raydium Launchpad where new projects launch.
+You can run the query [here](https://ide.bitquery.io/Top-Token-Stats-on-Launchpad)
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      where: {Transaction: {Result: {Success: true}}, Block: {Time: {after: "2025-04-22T01:48:43Z"}}, any: [{Trade: {Currency: {MintAddress: {notIn: ["EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}, {Trade: {Currency: {MintAddress: {not: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}, Side: {Currency: {MintAddress: {is: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}}}}}, {Trade: {Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}}, {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}, Side: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}}}}], Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}}}
+      orderBy: {descendingByField: "usd"}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            MintAddress
+          }
+        }
+        price_last: PriceInUSD(maximum: Block_Slot)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: "2025-04-22T09:38:43Z"}}}
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: "2025-04-22T08:48:43Z"}}}
+        )
+        price_3h_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: {Block: {Time: {before: "2025-04-22T06:48:43Z"}}}
+        )
+      }
+      dexes: uniq(of: Trade_Dex_ProgramAddress)
+      amount: sum(of: Trade_Side_Amount)
+      usd: sum(of: Trade_Side_AmountInUSD)
+      traders: uniq(of: Trade_Account_Owner)
+      count(selectWhere: {ge: "100"})
+    }
+  }
+}
+
+```
