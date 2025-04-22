@@ -50,29 +50,29 @@ The following function dynamically generates a GraphQL query to monitor token tr
 def create_transfer_subscription_query():
     address_list = ', '.join(f'"{addr}"' for addr in addresses)
     return gql(f"""
-        subscription {{
-            Solana {{
-                Transfers(
-                    where: {{any: [{{
-                        Transfer: {{Sender: {{Address: {{in: [{address_list}]}}}}}}
-                    }}]}}
-                ) {{
-                    Transfer {{
-                        Amount
-                        AmountInUSD
-                        Receiver {{
-                            Address
-                        }}
-                        Sender {{
-                            Address
-                        }}
-                        Currency {{
-                            Symbol
-                        }}
-                    }}
+   subscription {{
+    Solana {{
+        Transfers(
+            where: {{
+                Transfer: {{ Sender: {{ Address: {{ in: [ {address_list} ] }} }} }}
+            }}
+        ) {{
+            Transfer {{
+                Amount
+                AmountInUSD
+                Receiver {{
+                    Address
+                }}
+                Sender {{
+                    Address
+                }}
+                Currency {{
+                    Symbol
                 }}
             }}
         }}
+    }}
+}}
     """)
 ```
 
