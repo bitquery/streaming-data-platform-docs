@@ -14,6 +14,44 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <img width="1467" alt="Image" src="https://github.com/user-attachments/assets/bd1225d0-c464-44d1-a18c-c74661bbd83a" />
 
+## GMGN Trending API
+
+The query will give you the Top 10 trending tokens on GMGN in last 1 hour. Change the time in this `Block: {Time: {since: "2025-04-24T08:16:00Z"}}` to the time 1 hour ago timestamp whenever you test the query.
+You can find the query [here](https://ide.bitquery.io/gmgn-trending-api)
+
+```
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {Block: {Time: {since: "2025-04-24T08:16:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Side: {Currency: {MintAddress: {in: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v","Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}}, Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}}}
+      limit: {count: 10}
+      orderBy: {descendingByField: "trades_count"}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Side {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+        }
+      }
+      trades_count: count
+    }
+  }
+}
+
+```
+
 ## Get Trade Transactions of GMGN for a particular pair in realtime
 
 The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
