@@ -8,17 +8,11 @@ One of the most common types of transfers on Ethereum are ERC20 transfers. Let's
 
 ```graphql
 {
-  EVM(dataset: archive, network: eth) {
+  EVM(dataset: realtime, network: eth) {
     Transfers(
-      where: {
-        Transfer: {
-          Currency: {
-            SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" }
-          }
-        }
-      }
-      limit: { count: 10 }
-      orderBy: { descending: Block_Time }
+      where: {Transfer: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
     ) {
       Transfer {
         Amount
@@ -35,7 +29,7 @@ One of the most common types of transfers on Ethereum are ERC20 transfers. Let's
 }
 ```
 
-Open this query on IDE using this [link](https://graphql.bitquery.io/ide/UDST-Token-Transfers-on-Ethereum).
+Open this query on IDE using this [link](https://ide.bitquery.io/UDST-Token-Transfers-on-Ethereum_2).
 
 ## Subscribe to the latest ERC20 token transfers
 
@@ -78,13 +72,15 @@ Open this query on our GraphQL IDE using this [link](https://graphql.bitquery.io
 
 This query retrieves transfers where the sender or receiver is a particular address. To implement the OR logic, we utilize the `any` option and specify the two conditions within `[]` that should be combined using the OR operator. In this case we mention either the sender OR receiver should be `0x881d40237659c251811cec9c364ef91dc08d300c`.
 
-You can find the query [here](https://ide.bitquery.io/Sender-OR-Receiver-Transfer-Example-v2)
+You can find the query [here](https://ide.bitquery.io/Sender-OR-Receiver-Transfer-Example-v2_3)
 
 ```
 query MyQuery {
-  EVM(dataset: archive, network: eth) {
-    Transfers( where: {any: [{Transfer: {Sender: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}},
- {Transfer: {Receiver: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}]}) {
+  EVM(dataset: combined, network: eth) {
+    Transfers(
+      where: {any: [{Transfer: {Sender: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}, {Transfer: {Receiver: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}]}
+      limit: {count: 100}
+    ) {
       Transfer {
         Amount
         Sender
@@ -97,7 +93,6 @@ query MyQuery {
     }
   }
 }
-
 ```
 
 ## Addresses that received or sent money from given list of of addresses
@@ -115,32 +110,19 @@ The query retrieves two subsets of addresses based on their roles in transfers:
 
 It then applies the `array_intersect` function to find common addresses between these two subsets that has sent/received funds to **every** address in the list of `$addresses`.
 
-You can run the query [here](https://ide.bitquery.io/array_intersect-example-for-2-addresses)
+You can run the query [here](https://ide.bitquery.io/array_intersect-example-for-2-addresses_2)
 
 ```
-query($addresses: [String!]) {
-  EVM(dataset: archive){
+query ($addresses: [String!]) {
+  EVM(dataset: archive) {
     Transfers(
-      where: {
-        any: [
-          {
-        	  Transfer: {Sender: {in: $addresses} Receiver: {notIn: $addresses}}
-
-          },
-          {
-            Transfer: {Receiver: {in: $addresses} Sender: {notIn: $addresses}}
-          },
-        ]
-      }
-
+      where: {any: [{Transfer: {Sender: {in: $addresses}}}, {Transfer: {Receiver: {in: $addresses}}}], Block: {Date: {after: "2024-04-01"}}}
     ) {
-
       array_intersect(
         side1: Transfer_Sender
         side2: Transfer_Receiver
         intersectWith: $addresses
       )
-
     }
   }
 }
