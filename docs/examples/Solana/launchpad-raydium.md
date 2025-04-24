@@ -27,7 +27,7 @@ We will use the `PoolCreateEvent` method to filter latest pools on Launchpad. Th
 
 You can run the query [here](https://ide.bitquery.io/Launchpad-latest-pool-created)
 
-```
+```graphql
 
 {
   Solana(network: solana, dataset: realtime) {
@@ -86,7 +86,7 @@ You can run the query [here](https://ide.bitquery.io/Launchpad-latest-pool-creat
 This query fetches the most recent trades on the Raydium Launchpad.
 You can run the query [here](https://ide.bitquery.io/Latest-Trades-on-Launchpad)
 
-```
+```graphql
 query LatestTrades {
   Solana {
     DEXTradeByTokens(
@@ -138,7 +138,7 @@ Similarly, you can subscribe to trades on launchpad in real-time using [subscrip
 This query provides the most recent price data for a specific token launched on Raydium Launchpad. You can filter by the token’s `MintAddress`, and the query will return the last recorded trade price.
 You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-Launchpad)
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -183,53 +183,198 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-
 
 ```
 
-## Top Tokens on Launchpad
+## Latest Trades of an User on Launchpad
 
-Get stats on top tokens that are trading on Launchpad. We use `any`( OR condition) and `notIn` to exclude trades involving WSOL, USDC, and USDT. These tokens are excluded to focus on new tokens, especially in markets like Raydium Launchpad where new projects launch.
-You can run the query [here](https://ide.bitquery.io/Top-Token-Stats-on-Launchpad)
+[This](https://ide.bitquery.io/trades-by-user-on-launchpad_1) query returns the latest trades by a user on Launchpad by filtering on the basis of `Transaction_Signer`. [This](https://ide.bitquery.io/trades-by-user-on-launchpad-stream) stream of data allows to monitor the trade activities of the user on Launchpad in real time.
 
-```
-{
+```graphql
+query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Block: {Time: {after: "2025-04-22T01:48:43Z"}}, any: [{Trade: {Currency: {MintAddress: {notIn: ["EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}, {Trade: {Currency: {MintAddress: {not: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}, Side: {Currency: {MintAddress: {is: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}}}}}, {Trade: {Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}}, {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}, Side: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}}}}], Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}}}
-      orderBy: {descendingByField: "usd"}
+      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}}, Transaction: {Signer: {is: "8KjdBwz6Q3EYUDYmqfg33em3p9GFcP48v3ghJmw2KDNe"}}}
+      orderBy: {descending: Block_Time}
       limit: {count: 100}
     ) {
       Trade {
         Currency {
-          Symbol
-          Name
           MintAddress
+          Name
+          Symbol
         }
+        Market {
+          MarketAddress
+        }
+        usd_price: PriceInUSD
+        sol_price: Price
         Side {
           Currency {
             Symbol
             Name
             MintAddress
           }
+          Type
         }
-        price_last: PriceInUSD(maximum: Block_Slot)
-        price_10min_ago: PriceInUSD(
-          maximum: Block_Slot
-          if: {Block: {Time: {before: "2025-04-22T09:38:43Z"}}}
-        )
-        price_1h_ago: PriceInUSD(
-          maximum: Block_Slot
-          if: {Block: {Time: {before: "2025-04-22T08:48:43Z"}}}
-        )
-        price_3h_ago: PriceInUSD(
-          maximum: Block_Slot
-          if: {Block: {Time: {before: "2025-04-22T06:48:43Z"}}}
-        )
       }
-      dexes: uniq(of: Trade_Dex_ProgramAddress)
-      amount: sum(of: Trade_Side_Amount)
-      usd: sum(of: Trade_Side_AmountInUSD)
-      traders: uniq(of: Trade_Account_Owner)
-      count(selectWhere: {ge: "100"})
     }
   }
 }
-
 ```
+
+## Top Buyers of a Token on LaunchPad
+
+[This](https://ide.bitquery.io/top-buyers-of-a-token-on-launchpad) API endpoint returns the top 100 buyers for a token, which is `8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray` in this case.
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}, Currency: {MintAddress: {is: "8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray"}}, Side: {Type: {is: buy}}}}
+      orderBy: {descendingByField: "buy_volume"}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+      }
+      Transaction {
+        Signer
+      }
+      buy_volume:sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+```
+
+## Top Sellers of a Token on LaunchPad
+
+Using [this](https://ide.bitquery.io/top-sellers-of-a-token-on-launchpad_1) query top 100 sellers for the token with `Mint Address` as `8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray` could be retrieved.
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}, Currency: {MintAddress: {is: "8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray"}}, Side: {Type: {is: sell}}}}
+      orderBy: {descendingByField: "sell_volume"}
+      limit: {count: 100}
+    ) {
+      Trade {
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+      }
+      Transaction {
+        Signer
+      }
+      sell_volume: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+```
+
+## OHLCV for LaunchPad Tokens
+
+[This](https://ide.bitquery.io/ohlc-for-launchpad-token) API end point returns the OHLCV vlaues for a LaunchPad token with the currency `mint address` as `72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray` when traded against WSOL.
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}, Currency: {MintAddress: {is: "72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 100}
+      orderBy: {descendingByField: "Block_Timefield"}
+    ){
+      Block{
+        Timefield: Time(interval:{count:1 in:minutes})
+      }
+      Trade{
+        open: Price(minimum:Block_Slot)
+        high: Price(maximum:Trade_Price)
+        low: Price(minimum:Trade_Price)
+        close: Price(maximum:Block_Slot)
+      }
+      volumeInUSD: sum(of:Trade_Side_AmountInUSD)
+      count
+    }
+  }
+}
+```
+
+## Get Liquidity Pool Address for a LaunchPad Token
+
+[This](https://ide.bitquery.io/pool-address-for-launchpad-token) query returns the pair address for the LaunchPad token with `mint address` as `72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray` on the LaunchPad exchange. The liquidity pool address is denoted by `MarketAddress`.
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}, Currency: {MintAddress: {is: "72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray"}}}}
+    ) {
+      Trade {
+        Market {
+          MarketAddress
+        }
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Side {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+        }
+      }
+      count
+    }
+  }
+}
+```
+
+## Get Liquidity for a LaunchPad Token Pair Address
+
+Using [this](https://ide.bitquery.io/liquidity-for-a-launchpad-token-pair) query we can get the liquidity for a LaunchPad Token Pair, where `Base_PostBalance` is the amount of LaunchPad tokens present in the pool and `Quote_PostBalance` is the amount of WSOL present in the pool. For the purpose of filtering we are applying the condition that the `MarketAddress` is `H5875KoMLaWAovsjjXuTtHZv9otmH7EgJ2nXMovykZvp`.
+
+```graphql
+{
+  Solana {
+    DEXPools(
+      where: {
+        Pool: {Market: {MarketAddress: {is: "H5875KoMLaWAovsjjXuTtHZv9otmH7EgJ2nXMovykZvp"}}},
+        Transaction: {Result: {Success: true}}
+      }
+      orderBy: {descending: Block_Time}
+      limit: {count: 1}
+    ) {
+      Pool {
+        Base {
+          PostAmount
+        }
+        Quote {
+          PostAmount
+        }
+        Market {
+          BaseCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+          QuoteCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+[This](https://ide.bitquery.io/liquidity-for-a-launchpad-token-pair-stream) subscription could be utilised to monitor updates in liquidity pools in real time.

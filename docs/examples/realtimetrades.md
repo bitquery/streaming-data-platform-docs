@@ -2,11 +2,28 @@
 sidebar_position: 8
 ---
 
-# Uniswap Trades on Ethereum
+# Uniswap API
 
-Uniswap is a decentralized exchange built on the Ethereum blockchain that allows users to trade Ethereum-based tokens. Uniswap uses an automated market maker (AMM) model where trades are executed by a smart contract that pools liquidity from multiple parties and sets prices based on a mathematical algorithm.
+Uniswap is a decentralized exchange built on the Ethereum blockchain that allows users to trade Ethereum-based tokens.
 
 Bitquery's APIs allows you to retrieve information about trades that have occurred between two tokens on the Uniswap exchange. This endpoint returns a list of trades, along with various details about each trade, such as the amount of tokens exchanged, the price of the trade, and the timestamp of the trade.
+
+<head>
+  <meta name="title" content="Uniswap API - Ethereum On-Chain Token & Trade Data" />
+  <meta name="description" content="Access real-time on-chain data for Uniswap tokens using the Bitquery-powered Uniswap API. Track trades, liquidity, token prices, and more on Ethereum." />
+  <meta name="keywords" content="Uniswap API,Uniswap token data,Ethereum API,Uniswap on-chain data,Uniswap DEX API,Ethereum tokens,Bitquery API,crypto trading API,Uniswap blockchain data,token analytics API,DeFi analytics,Ethereum memecoins,Uniswap liquidity data" />
+  <meta name="robots" content="index, follow" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="language" content="English" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Uniswap API - Ethereum On-Chain Token & Trade Data" />
+  <meta property="og:description" content="Explore token analytics and real-time data from Uniswap projects on Ethereum with the Bitquery API." />
+
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="Uniswap API - Token & Trade Data on Ethereum" />
+  <meta property="twitter:description" content="Monitor token trades, prices, and liquidity for Uniswap tokens using Bitquery's on-chain API." />
+</head>
 
 ## Uniswap v3 Trades
 
@@ -93,6 +110,74 @@ query pairTopTraders {
       sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+```
+
+## Latest Pools Created on Uniswap V2
+
+We will track event logs to get newest pools created on Uniswap V2. You can Modify the same query to track Uniswap V3 pool creation using the factory address.
+You can run the query [here](https://ide.bitquery.io/Latest-pools-created-uniswap-v2)
+
+```
+
+{
+  EVM(dataset: combined, network: eth) {
+    Events(
+      orderBy: {descending: Block_Number}
+      limit: {count: 10}
+      where: {Log: {SmartContract: {is: "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"}, Signature: {Name: {is: "PairCreated"}}}}
+    ) {
+      Log {
+        Signature {
+          Name
+          Parsed
+          Signature
+        }
+        SmartContract
+      }
+      Transaction {
+        Hash
+      }
+      Block {
+        Date
+        Number
+      }
+      Arguments {
+        Type
+        Value {
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Active Traders on Uniswap in the Last 7 Days
+
+In this query we filter for Uniswap V3 trades using the factory address
+and include trades from the last 7 days. We then group results by trader address.
+You can run the query [here](https://ide.bitquery.io/Most-Active-Traders-on-Uniswap-v3)
+
+```
+query ActiveUniswapTraders {
+  EVM(dataset: archive, network: eth) {
+    DEXTradeByTokens(
+      where: {Trade: {Dex: {OwnerAddress: {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}}}, Block: {Date: {after: "2025-04-01"}}}
+      limit: {count: 100}
+      orderBy: {descendingByField: "tradeCount"}
+    ) {
+      Trader: Trade {
+        Seller
+      }
+      tradeCount: count
+      uniqueTokens: count(distinct: Trade_Currency_SmartContract)
     }
   }
 }
