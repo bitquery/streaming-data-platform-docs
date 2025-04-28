@@ -417,6 +417,7 @@ const sidebars = {
             "examples/Solana/Solana-Phoenix-api",
             "examples/Solana/Solana-Raydium-DEX-API",
             "examples/Solana/raydium-clmm-API",
+            "examples/Solana/raydium-cpmm-API",
             "examples/dextrades/DEXScreener/solana_dexscreener",
           ],
         },
