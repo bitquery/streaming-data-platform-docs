@@ -18,6 +18,7 @@ const sidebars = {
         "start/first-query",
         "start/getting-updates",
         "start/mempool",
+        "start/starter-queries"
       ],
     },
 
