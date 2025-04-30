@@ -21,3 +21,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem; /* space between buttons */
+  justify-content: center; /* optional: center them horizontally */
+  flex-wrap: wrap; /* optional: wrap on small screens */
+}
