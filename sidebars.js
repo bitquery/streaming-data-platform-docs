@@ -199,35 +199,35 @@ const sidebars = {
                 "streams/protobuf/kafka-protobuf-js",
               ],
             },
-            {
-              type: "category",
-              label: "JSON Stream Tutorials",
-              items: [
-                {
-                  type: "category",
-                  label: "Go Example",
-                  items: ["streams/kafka-streams-go"],
-                },
-                {
-                  type: "category",
-                  label: "Java Example",
-                  items: ["streams/kafka-streams-java"],
-                },
-                {
-                  type: "category",
-                  label: "JavaScript Example",
-                  items: ["streams/kafka-streams-js"],
-                },
-                {
-                  type: "category",
-                  label: "Python Example",
-                  items: [
-                    "streams/kafka-streams-python",
-                    "streams/kafka-streams-python-thread",
-                  ],
-                },
-              ],
-            },
+            // {
+            //   type: "category",
+            //   label: "JSON Stream Tutorials",
+            //   items: [
+            //     {
+            //       type: "category",
+            //       label: "Go Example",
+            //       items: ["streams/kafka-streams-go"],
+            //     },
+            //     {
+            //       type: "category",
+            //       label: "Java Example",
+            //       items: ["streams/kafka-streams-java"],
+            //     },
+            //     {
+            //       type: "category",
+            //       label: "JavaScript Example",
+            //       items: ["streams/kafka-streams-js"],
+            //     },
+            //     {
+            //       type: "category",
+            //       label: "Python Example",
+            //       items: [
+            //         "streams/kafka-streams-python",
+            //         "streams/kafka-streams-python-thread",
+            //       ],
+            //     },
+            //   ],
+            // },
 
             "streams/compare-websocket-kafka",
           ],
