@@ -52,6 +52,112 @@ subscription {
 }
 ```
 
+## Track Latest created pools on Meteora DYN
+
+Below query will give you the latest created Meteora DYN pools in realtime. You can test the query [here](https://ide.bitquery.io/Meteora-DYN-created-pools)
+
+```
+subscription MyQuery {
+  Solana {
+    DEXTrades(
+      where: {Instruction: {Program: {Address: {is: "Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB"}, Method: {is: ""}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Instruction {
+        Program {
+          Method
+        }
+      }
+      Trade {
+        Buy {
+          Amount
+          Account {
+            Address
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+        Sell {
+          Amount
+          Account {
+            Address
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Track Latest created pools on Meteora DLMM
+
+Below query will give you the latest created Meteora DLMM pools in realtime. You can test the query [here](https://ide.bitquery.io/Meteora-DLMM-created-pools-subscription)
+
+```
+subscription MyQuery {
+  Solana {
+    DEXTrades(
+      where: {Instruction: {Program: {Address: {is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo"}, Method: {is: "initializeLbPair2"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Instruction {
+        Program {
+          Method
+        }
+      }
+      Trade {
+        Buy {
+          Amount
+          Account {
+            Address
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+        Sell {
+          Amount
+          Account {
+            Address
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
 ## Latest Price of a Token on Meteora
 
 You can use the following query to get the latest price of a token on Meteora on Solana.
