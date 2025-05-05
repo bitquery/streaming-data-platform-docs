@@ -200,38 +200,6 @@ subscription {
 }
 ```
 
-## Get Authorities of tokens on Solana
-
-The query below fetches all the authorities such as mint authority, freeze authority and update authority and also the token address on the Solana blockchain in realtime. The 1st entry in the Accounts array is the mint and the freeze authority, 2nd entry in the Accounts array is the token address, and 3rd entry in the Accounts array is the update authority.
-
-You can run the query [here](https://ide.bitquery.io/get-authorities-of-tokens-on-solana_2)
-
-```
-subscription{
-  Solana {
-    Instructions(
-      where: {Instruction: {Program: {Address: {is: "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"}, Method: {is: "CreateMasterEditionV3"}}}}
-    ) {
-      Instruction {
-        Accounts {
-          Address
-        }
-        Program {
-          Method
-          AccountNames
-          Address
-          Name
-        }
-      }
-    }
-  }
-}
-
-
-
-
-```
-
 ## Track Real-time Token Burn on Solana
 
 Receive real-time updates on token burn events on the Solana blockchain. The below query applies a filter to only include instructions where
