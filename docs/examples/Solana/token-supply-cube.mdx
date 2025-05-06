@@ -318,6 +318,41 @@ query MyQuery {
 }
 ```
 
+## Get Latest Token Burn Events on Solana
+
+We will be using the token supply API to query recent token liquity removals ( token burn) .You can modify this query to track burn events of a specific token using `Currency` filter in real time or query it.
+
+You can run the query [here](https://ide.bitquery.io/burn-token-supply-updates)
+
+```
+query MyQuery {
+  Solana(network: solana) {
+    TokenSupplyUpdates(
+      where: {Instruction: {Program: {Method: {in: ["Burn"]}}}, TokenSupplyUpdate: {}}
+      limit: {count: 100}
+      orderBy: {descending: Block_Time}
+    ) {
+      TokenSupplyUpdate {
+        PostBalanceInUSD
+        PostBalance
+        Amount
+        Currency {
+          Name
+          MintAddress
+        }
+      }
+      Instruction {
+        Program {
+          Name
+          Method
+        }
+      }
+    }
+  }
+}
+
+```
+
 ## Video Tutorial on Streaming and Getting Total Supply of a Solana Token
 
 <VideoPlayer url="https://youtu.be/U_fuHEow3fQ" />
