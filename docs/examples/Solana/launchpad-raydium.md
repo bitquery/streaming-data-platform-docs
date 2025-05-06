@@ -1,5 +1,7 @@
 # Raydium Launchpad API
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 In this section we see how to get data on Launchpad by Raydium. This includes token creation, latest trades by trader, for a token etc.
 
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
@@ -28,12 +30,18 @@ We will use the `PoolCreateEvent` method to filter latest pools on Launchpad. Th
 You can run the query [here](https://ide.bitquery.io/Launchpad-latest-pool-created)
 
 ```graphql
-
 {
   Solana(network: solana, dataset: realtime) {
     Instructions(
-      where: {Instruction: {Program: {Address: {is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"}, Method: {is: "PoolCreateEvent"}}}}
-      orderBy: {descending: Block_Time}
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj" }
+            Method: { is: "PoolCreateEvent" }
+          }
+        }
+      }
+      orderBy: { descending: Block_Time }
     ) {
       Instruction {
         Accounts {
@@ -78,7 +86,100 @@ You can run the query [here](https://ide.bitquery.io/Launchpad-latest-pool-creat
     }
   }
 }
+```
 
+## Get all the instructions of Raydium LaunchLab
+
+Below query will get you all the instructions that the Raydium LaunchLab Program has. You can test the API [here](https://ide.bitquery.io/all-the-instructions-of-Raydium-LaunchLab).
+
+```
+query MyQuery {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"}}}}
+    ) {
+      Instruction {
+        Program {
+          Method
+        }
+      }
+      count
+    }
+  }
+}
+```
+
+## Track Token Migrations to Raydium DEX and Raydium CPMM in Realtime
+
+Using above `get all instructions` api, you will figure out that there are 2 instructions `migrate_to_amm`, `migrate_to_cpswap` whose invocations migrate the Raydium LaunchLab Token to Raydium V4 AMM and Raydium CPMM Dexs respectively.
+
+Thats why we have filtered for these 2 instructions in the below API, and tracking these.
+
+Test out the API [here](https://ide.bitquery.io/Track-Token-Migrations-to-Raydium-DEX-and-Raydium-CPMM-in-realtime).
+
+```
+subscription MyQuery {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"}, Method: {in: ["migrate_to_amm","migrate_to_cpswap"]}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Block{
+        Time
+      }
+      Instruction {
+        Program {
+          Method
+          AccountNames
+          Address
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+            }
+            Type
+            Name
+          }
+          Name
+        }
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            ProgramId
+            Owner
+            Mint
+          }
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
 ```
 
 ## Latest Trades on Launchpad
@@ -90,9 +191,9 @@ You can run the query [here](https://ide.bitquery.io/Latest-Trades-on-Launchpad)
 query LatestTrades {
   Solana {
     DEXTradeByTokens(
-      orderBy: {descending: Block_Time}
-      limit: {count: 50}
-      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}}}
+      orderBy: { descending: Block_Time }
+      limit: { count: 50 }
+      where: { Trade: { Dex: { ProtocolName: { is: "raydium_launchpad" } } } }
     ) {
       Block {
         Time
@@ -128,7 +229,6 @@ query LatestTrades {
     }
   }
 }
-
 ```
 
 Similarly, you can subscribe to trades on launchpad in real-time using [subscription query](https://ide.bitquery.io/Subscribe-to-Trades-on-Launchpad). The same can be tracked using [Bitquery Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
@@ -142,9 +242,16 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-
 {
   Solana {
     DEXTradeByTokens(
-      orderBy: {descending: Block_Time}
-      limit: {count: 1}
-      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}, Currency: {MintAddress: {is: "5SA3y1LSB55D36G6BYXwqpEXZferX5zosSdQuky7aray"}}}}
+      orderBy: { descending: Block_Time }
+      limit: { count: 1 }
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "raydium_launchpad" } }
+          Currency: {
+            MintAddress: { is: "5SA3y1LSB55D36G6BYXwqpEXZferX5zosSdQuky7aray" }
+          }
+        }
+      }
     ) {
       Block {
         Time
@@ -180,7 +287,6 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-
     }
   }
 }
-
 ```
 
 ## Latest Trades of an User on Launchpad
@@ -191,9 +297,14 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}}, Transaction: {Signer: {is: "8KjdBwz6Q3EYUDYmqfg33em3p9GFcP48v3ghJmw2KDNe"}}}
-      orderBy: {descending: Block_Time}
-      limit: {count: 100}
+      where: {
+        Trade: { Dex: { ProtocolName: { is: "raydium_launchpad" } } }
+        Transaction: {
+          Signer: { is: "8KjdBwz6Q3EYUDYmqfg33em3p9GFcP48v3ghJmw2KDNe" }
+        }
+      }
+      orderBy: { descending: Block_Time }
+      limit: { count: 100 }
     ) {
       Trade {
         Currency {
@@ -228,9 +339,17 @@ query MyQuery {
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}, Currency: {MintAddress: {is: "8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray"}}, Side: {Type: {is: buy}}}}
-      orderBy: {descendingByField: "buy_volume"}
-      limit: {count: 100}
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "raydium_launchpad" } }
+          Currency: {
+            MintAddress: { is: "8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray" }
+          }
+          Side: { Type: { is: buy } }
+        }
+      }
+      orderBy: { descendingByField: "buy_volume" }
+      limit: { count: 100 }
     ) {
       Trade {
         Currency {
@@ -242,7 +361,7 @@ query MyQuery {
       Transaction {
         Signer
       }
-      buy_volume:sum(of: Trade_Side_AmountInUSD)
+      buy_volume: sum(of: Trade_Side_AmountInUSD)
     }
   }
 }
@@ -256,9 +375,17 @@ Using [this](https://ide.bitquery.io/top-sellers-of-a-token-on-launchpad_1) quer
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}, Currency: {MintAddress: {is: "8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray"}}, Side: {Type: {is: sell}}}}
-      orderBy: {descendingByField: "sell_volume"}
-      limit: {count: 100}
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "raydium_launchpad" } }
+          Currency: {
+            MintAddress: { is: "8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray" }
+          }
+          Side: { Type: { is: sell } }
+        }
+      }
+      orderBy: { descendingByField: "sell_volume" }
+      limit: { count: 100 }
     ) {
       Trade {
         Currency {
@@ -284,20 +411,33 @@ query MyQuery {
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}, Currency: {MintAddress: {is: "72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Transaction: {Result: {Success: true}}}
-      limit: {count: 100}
-      orderBy: {descendingByField: "Block_Timefield"}
-    ){
-      Block{
-        Timefield: Time(interval:{count:1 in:minutes})
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "raydium_launchpad" } }
+          Currency: {
+            MintAddress: { is: "72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray" }
+          }
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
       }
-      Trade{
-        open: Price(minimum:Block_Slot)
-        high: Price(maximum:Trade_Price)
-        low: Price(minimum:Trade_Price)
-        close: Price(maximum:Block_Slot)
+      limit: { count: 100 }
+      orderBy: { descendingByField: "Block_Timefield" }
+    ) {
+      Block {
+        Timefield: Time(interval: { count: 1, in: minutes })
       }
-      volumeInUSD: sum(of:Trade_Side_AmountInUSD)
+      Trade {
+        open: Price(minimum: Block_Slot)
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        close: Price(maximum: Block_Slot)
+      }
+      volumeInUSD: sum(of: Trade_Side_AmountInUSD)
       count
     }
   }
@@ -312,7 +452,14 @@ query MyQuery {
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Dex: {ProtocolName: {is: "raydium_launchpad"}}, Currency: {MintAddress: {is: "72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray"}}}}
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "raydium_launchpad" } }
+          Currency: {
+            MintAddress: { is: "72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray" }
+          }
+        }
+      }
     ) {
       Trade {
         Market {
@@ -346,11 +493,17 @@ Using [this](https://ide.bitquery.io/liquidity-for-a-launchpad-token-pair) query
   Solana {
     DEXPools(
       where: {
-        Pool: {Market: {MarketAddress: {is: "H5875KoMLaWAovsjjXuTtHZv9otmH7EgJ2nXMovykZvp"}}},
-        Transaction: {Result: {Success: true}}
+        Pool: {
+          Market: {
+            MarketAddress: {
+              is: "H5875KoMLaWAovsjjXuTtHZv9otmH7EgJ2nXMovykZvp"
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
       }
-      orderBy: {descending: Block_Time}
-      limit: {count: 1}
+      orderBy: { descending: Block_Time }
+      limit: { count: 1 }
     ) {
       Pool {
         Base {
@@ -378,3 +531,23 @@ Using [this](https://ide.bitquery.io/liquidity-for-a-launchpad-token-pair) query
 ```
 
 [This](https://ide.bitquery.io/liquidity-for-a-launchpad-token-pair-stream) subscription could be utilised to monitor updates in liquidity pools in real time.
+
+## Video Tutorial | How to track Raydium LaunchPad Token Migrations to Raydium V4 and Raydium CPMM Dex
+
+<VideoPlayer url="https://www.youtube.com/watch?v=lp1V2uLAu3Q" />
+
+## Video Tutorial | How to Track Raydium Launchpad Newly Launched Tokens in Realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=2jQ4dyR_cqw" />
+
+## Video Tutorial | How to track Dex Trades of a Traders on Raydium LaunchPad in Realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=V1Fd8uXm6mc" />
+
+## Video Tutorial | How to get OHLCV of a token on Raydium LaunchLab
+
+<VideoPlayer url="https://www.youtube.com/watch?v=M9wSVqRE7_o" />
+
+## Video Tutorial | How to get Top Buyers and Sellers of a Raydium LaunchLab Token
+
+<VideoPlayer url="https://www.youtube.com/watch?v=it8xf3kdILo" />
