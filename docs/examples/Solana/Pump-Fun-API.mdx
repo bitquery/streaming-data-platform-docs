@@ -410,12 +410,14 @@ query MyQuery($token: String!, $pair_address: String!, $time_5min_ago: DateTime!
 }
 ```
 
-## Get Market Cap. Liquidity and Trade Volume for any Pump Fun Token
+## Get Market Cap, Price Liquidity, Bonding Curve, Trade Volume for any Pump Fun Token
 
-[This](https://ide.bitquery.io/mcap-liquidity-volume-of-a-token-in-time-frame) query returns important trade metrics like marketcap,
-liquidity and trade volume of a Pump Fun token for a time frame of one hour. This implies the results returns marketcap and liquidity
-`1 hour` ago along with the traded volume in the last one hour. The volume and liquidity are returned against a token which is `USDC`
-in this case.
+[This](https://ide.bitquery.io/mcap-liquidity-bonding-curve-volume-supply-of-a-token-in-time-frame) query returns important trade metrics like marketcap,
+liquidity, price, bonding curve and trade volume of a Pump Fun token for a time frame of one hour. Please note that the query is using `time_1h_ago` field only for the volume calculation other than that all the metrics will calculated for the current time.
+
+:::note
+Use this formulae to calculate Bonding curve, BondingCurveProgress = 100 - (((balance - 206900000) \* 100) / 793100000), `balance` here is the Balance of the Base Currency in the Pool.
+:::
 
 ```graphql
 query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
@@ -427,11 +429,12 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
           Side: { Currency: { MintAddress: { is: $side } } }
         }
         Block: { Time: { since: $time_1h_ago } }
+        Transaction: { Result: { Success: true } }
       }
     ) {
-      sum(of: Trade_Side_AmountInUSD)
+      VolumeInUSD: sum(of: Trade_Side_AmountInUSD)
     }
-    liquidity: DEXPools(
+    liquidity_and_BondingCurve: DEXPools(
       where: {
         Pool: {
           Market: {
@@ -439,32 +442,61 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
             QuoteCurrency: { MintAddress: { is: $side } }
           }
         }
-        Block: { Time: { till: $time_1h_ago } }
+        Transaction: { Result: { Success: true } }
       }
       limit: { count: 1 }
       orderBy: { descending: Block_Time }
     ) {
       Pool {
+        Market {
+          BaseCurrency {
+            Name
+            Symbol
+          }
+          QuoteCurrency {
+            Name
+            Symbol
+          }
+        }
         Base {
+          Balance: PostAmount
+          PostAmountInUSD
+        }
+        Quote {
+          PostAmount
           PostAmountInUSD
         }
       }
     }
-    marketcap: TokenSupplyUpdates(
+    marketcap_and_supply: TokenSupplyUpdates(
       where: {
         TokenSupplyUpdate: { Currency: { MintAddress: { is: $token } } }
-        Block: { Time: { till: $time_1h_ago } }
+        Transaction: { Result: { Success: true } }
       }
       limitBy: { by: TokenSupplyUpdate_Currency_MintAddress, count: 1 }
       orderBy: { descending: Block_Time }
     ) {
       TokenSupplyUpdate {
-        PostBalanceInUSD
+        MarketCap: PostBalanceInUSD
+        Supply: PostBalance
         Currency {
           Name
           MintAddress
           Symbol
         }
+      }
+    }
+    Price: DEXTradeByTokens(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Transaction: { Result: { Success: true } }
+        Trade: { Currency: { MintAddress: { is: $token } } }
+      }
+    ) {
+      Trade {
+        Price
+        PriceInUSD
       }
     }
   }
@@ -475,9 +507,9 @@ These are the variables used for running this query.
 
 ```json
 {
-  "time_1h_ago": "2025-01-10T10:07:00Z",
-  "token": "98mb39tPFKQJ4Bif8iVg9mYb9wsfPZgpgN1sxoVTpump",
-  "side": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+  "time_1h_ago": "2025-05-07T09:25:00Z",
+  "token": "BQ2H4iunQzbhMQaUf65J5N7qVASX9JWf8oytTM2Gpump",
+  "side": "11111111111111111111111111111111"
 }
 ```
 
