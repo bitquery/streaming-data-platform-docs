@@ -18,7 +18,7 @@ const sidebars = {
         "start/first-query",
         "start/getting-updates",
         "start/mempool",
-        "start/starter-queries"
+        "start/starter-queries",
       ],
     },
 
@@ -293,6 +293,7 @@ const sidebars = {
             "examples/calls/smartcontract",
             "examples/calls/smartcontract-filterby",
             "examples/events/events-api",
+            "examples/fees/fees-api",
             "examples/mempool/mempool-api",
             "examples/transfers/total-supply",
             "examples/transactions/transaction-api",
@@ -393,6 +394,7 @@ const sidebars = {
             "examples/Solana/solana-instructions",
             "examples/Solana/solana-transactions",
             "examples/Solana/solana-transfers",
+            "examples/Solana/solana_fees_api",
             "examples/Solana/Pump-Fun-API",
             "examples/Solana/pump-swap-api",
             "examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API",
