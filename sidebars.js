@@ -316,7 +316,7 @@ const sidebars = {
                 "examples/dextrades/trades-of-an-address-api",
                 "examples/dextrades/pair-creation-time",
                 "examples/dextrades/crypto-coin-ticker",
-                "examples/realtimetrades",
+                "examples/dextrades/uniswap-api",
                 "examples/dextrades/DEXScreener/evm_dexscreener",
                 "examples/dextrades/evm-bullx-api",
                 "examples/dextrades/evm-gmgn-api",
