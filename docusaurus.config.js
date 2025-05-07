@@ -224,6 +224,11 @@ const config = {
             to:"/docs/examples/Arbitrum/Overview/",
             from:"/docs/category/arbitrum/"
           },
+
+          {
+            to:"/docs/examples/dextrades/uniswap-api/",
+            from:"/docs/examples/realtimetrades/"
+          }
         ],
       },
     ],

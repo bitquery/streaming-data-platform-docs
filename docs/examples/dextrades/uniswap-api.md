@@ -25,66 +25,71 @@ Bitquery's APIs allows you to retrieve information about trades that have occurr
   <meta property="twitter:description" content="Monitor token trades, prices, and liquidity for Uniswap tokens using Bitquery's on-chain API." />
 </head>
 
-## Uniswap v3 Trades
+## Realtime Uniswap v1, v2, v3 Trades
+
+We track the latest trades on all Uniswap versions using the DEX protocol name filter.
+You can run the query [here](https://ide.bitquery.io/Realtime-Uniswap-v1-Uniswap-v2-Uniswap-V3-Trades)
 
 ```
-query MyQuery {
-  EVM(dataset: realtime, network: eth) {
-    DEXTrades(
-      where: {Trade: {Dex: {OwnerAddress: {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}}}}
-      limit: {count: 10}
-      orderBy: {descending: Fee_Burnt}
-    ) {
+subscription {
+  EVM(network: eth) {
+    DEXTrades(where: {Trade: {Dex: {ProtocolName: {in:["uniswap_v3","uniswap_v2","uniswap_v1"]}}}}) {
+      Block {
+        Number
+        Time
+      }
       Transaction {
         From
         To
+        Hash
       }
       Trade {
         Dex {
-          ProtocolName
-          SmartContract
-          Pair {
-            Name
-          }
+          Delegated
+          DelegatedTo
           OwnerAddress
+          Pair {
+            Decimals
+            Name
+            SmartContract
+          }
+          ProtocolFamily
+          ProtocolName
+          ProtocolVersion
+          SmartContract
         }
         Buy {
+          Amount
+          Buyer
           Currency {
             Name
+            Symbol
+            SmartContract
           }
+          Seller
           Price
-          Amount
         }
         Sell {
           Amount
+          Buyer
           Currency {
             Name
+            SmartContract
+            Symbol
           }
+          Seller
           Price
         }
-      }
-      Block {
-        Time
       }
     }
   }
 }
+
+     
 ```
 
-- `EVM`: The data set for Ethereum data.
-- `DEXTrades`: The endpoint that returns information about the trades on the DEX.
-- `where`: The condition to filter the trades by the DEX owner address. In this case, it's set to `0x1f98431c8ad98523631ae4a59f267346ea31f984`, which is the factory address of Uniswap V3.
-- `limit`: The maximum number of trades to return. In this case, it's set to 10.
-- `orderBy`: The field to order the results by. In this case, it's set to `Fee_Burnt` in descending order.
-- `Transaction`: The transaction object, which contains the `From` and `To` addresses of the trade.
-- `Trade`: The trade object, which contains information about the DEX, the tokens involved in the trade, and the prices.
-- `Dex`: The DEX object, which contains the name of the protocol, the smart contract address, the name of the pair, and the owner address.
-- `Buy`: The object that represents the token being bought in the trade.
-- `Sell`: The object that represents the token being sold in the trade.
-- `Currency`: The object that contains the name of the token.
-- `Amount`: The amount of the token being traded.
-- `Price`: The price of the token being traded.
-- `Block`: The block object, which contains the timestamp of the block in which the trade was executed.
+
+
 
 ## Uniswap v2 Pair Trade Stats
 
