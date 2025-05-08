@@ -23,7 +23,7 @@ title: EVM Fees API
 
 ## Get Trades with Transaction fees
 
-Get a list of successful DEX trades on EVM along with the transaction fee details for each trade.
+Get a list of successful DEX trades on EVM along with the transaction fee details for each trade. `SenderFee` and `SenderFeeInUSD` fields in query are the transaction fees in ETH and transaction fees in USD respectively.
 You can test the query [here](https://ide.bitquery.io/trades-with-the-transaction-fees_1#).
 
 ```
@@ -75,7 +75,7 @@ query MyQuery {
 
 ## Get Transfers by an address and Transaction fees paid for the transfer
 
-Track wallet token transfers and get the fees paid for each by the address.
+Track wallet token transfers and get the fees paid for each by the address. `SenderFee` and `SenderFeeInUSD` fields in query are the transaction fees in ETH and transaction fees in USD respectively.
 You can test the query [here](https://ide.bitquery.io/binancehot-wallet-transfers-with-transaction-fees).
 
 ```
@@ -109,7 +109,7 @@ query MyQuery {
 
 ## Total transaction fees paid by an account
 
-Get the total fees (in Eth and USD) paid by a specific EVM account across all transfers.
+Get the total fees (in Eth and USD) paid by a specific EVM account across all transfers. `SenderFee` and `SenderFeeInUSD` fields in query are the transaction fees in ETH and transaction fees in USD respectively.
 You can test the query [here](https://ide.bitquery.io/total-txn-fees-paid-by-binance-hot-wallet-in-a-day).
 
 ```
@@ -127,7 +127,7 @@ query MyQuery {
 
 ## Transaction fees paid by an account for each currency transfers
 
-Get total fees paid by a EVM account for transferring each type of token.
+Get total fees paid by a EVM account for transferring each type of token. `SenderFee` and `SenderFeeInUSD` fields in query are the transaction fees in ETH and transaction fees in USD respectively.
 You can test the query [here](https://ide.bitquery.io/Transaction-fees-paid-by-Binance-Hot-Wallet-aggregated-by-currency)
 
 ```
