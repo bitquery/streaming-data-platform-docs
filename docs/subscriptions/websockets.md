@@ -20,9 +20,8 @@ wss://streaming.bitquery.io/eap
 
 ### Limits
 
-> **Warning:** There are no limits to the number of websockets you can create, however, it is best to create multiple subscriptions using one websocket. Refer to the example [here](/docs/subscriptions/subscription.md) on how to do it.
+You are charged for the number of subscriptions (aka streams) and not for the number of websockets. Read more on pricing for streams [here](https://docs.bitquery.io/docs/ide/points/#how-are-points-calculated-for-subscriptions)
 
- For the most up-to-date information on pricing and limits, please refer to the [pricing page on our website](https://bitquery.io/pricing).
 
 ### Data Handling
 
