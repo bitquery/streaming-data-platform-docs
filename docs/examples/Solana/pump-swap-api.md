@@ -127,11 +127,6 @@ subscription {
 
 Use the below query to track Pump Fun token migrations to PumpSwap in realtime. You will get the following account addresses information through the query's `Instruction Accounts[]` field and the amount of liquidity added through arguments' `Value` field
 
-<img
-  width="1006"
-  alt="Image"
-  src="https://github.com/user-attachments/assets/1b4f22ab-e53d-4813-a2a5-c49e95958c92"
-/>
 
 You can test the query [here](https://ide.bitquery.io/pumpfun-migration-stream_2#).
 

@@ -26,6 +26,11 @@ function HomepageHeader() {
           to="/docs/start/starter-queries">
           Popular APIs 📂
         </Link>
+        <Link
+          className="button button--secondary button--lg"
+          to="/docs/start/starter-subscriptions">
+          Popular Streams 📂
+        </Link>
       </div>
     </div>
   </div>
