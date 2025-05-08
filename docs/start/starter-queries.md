@@ -1,10 +1,6 @@
 # Starter Queries
 
-Below is a set of queries that are curated for you to get started with Bitquery. You will find more APIs and detailed information about them in relevant sections.
-
-- [Querying Capabilities](https://docs.bitquery.io/docs/category/capabilities/)
-- [L1 Chains](https://docs.bitquery.io/docs/category/l1-chains/)
-- [L2 Chains](https://docs.bitquery.io/docs/category/l2-chains/)
+Below is a set of queries that are curated for you to get started with Bitquery.
 
 ## Table of Contents
 
@@ -15,6 +11,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [NFT APIs](#nft-apis)
 - [Uniswap V3 API](#uniswap-v3-api)
 - [TRON APIs](#tron)
+- [More APIs](#more-apis)
 
 ## Solana
 
@@ -202,3 +199,11 @@ This query returns the most recent transactions for the TRON network. It include
 
 This query returns the most recent events and logs for the TRON network. It includes arguments entered (if any), transaction details, log signatures, block info, and more.  
 ▶️ [TRON Events](https://ide.bitquery.io/Tron-Events)
+
+## More APIs
+
+You will find more APIs and detailed information about them in relevant sections.
+
+- [Querying Capabilities](https://docs.bitquery.io/docs/category/capabilities/)
+- [L1 Chains](https://docs.bitquery.io/docs/category/l1-chains/)
+- [L2 Chains](https://docs.bitquery.io/docs/category/l2-chains/)
