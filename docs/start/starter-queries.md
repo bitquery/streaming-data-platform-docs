@@ -6,6 +6,16 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [L1 Chains](https://docs.bitquery.io/docs/category/l1-chains/)
 - [L2 Chains](https://docs.bitquery.io/docs/category/l2-chains/)
 
+## Table of Contents
+
+- [Solana](#solana)
+- [PumpFun API](#pumpfun-api)
+- [Raydium API](#raydium-api)
+- [EVM](#evm)
+- [NFT APIs](#nft-apis)
+- [Uniswap V3 API](#uniswap-v3-api)
+- [TRON](#tron)
+
 ## Solana
 
 ### Solana Transfers
