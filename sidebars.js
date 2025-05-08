@@ -19,6 +19,7 @@ const sidebars = {
         "start/getting-updates",
         "start/mempool",
         "start/starter-queries",
+        "start/starter-subscriptions",
       ],
     },
 
