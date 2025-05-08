@@ -8,13 +8,13 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 ## Table of Contents
 
-- [Solana](#solana)
+- [Solana APIs](#solana)
 - [PumpFun API](#pumpfun-api)
 - [Raydium API](#raydium-api)
-- [EVM](#evm)
+- [EVM APIs](#evm)
 - [NFT APIs](#nft-apis)
 - [Uniswap V3 API](#uniswap-v3-api)
-- [TRON](#tron)
+- [TRON APIs](#tron)
 
 ## Solana
 
