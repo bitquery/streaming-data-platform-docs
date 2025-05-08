@@ -1,10 +1,17 @@
 # Starter Subscriptions
 
-Below is a set of queries that are curated for you to get started with Bitquery. You will find more detailed information on streams and subscriptions in the relevant sections.
+Below is a set of queries that are curated for you to get started with Bitquery.
 
-- [Understanding Subscription](https://docs.bitquery.io/docs/subscriptions/subscription/)
-- [Streaming Concepts](https://docs.bitquery.io/docs/category/streaming-via-subscriptions/)
-- [Streaming via Websocket](https://docs.bitquery.io/docs/subscriptions/examples/)
+## Table of Contents
+
+- [Solana Streams](#solana)
+- [PumpFun Streams](#pumpfun-streams)
+- [Pumpswap Streams](#pumpswap-streams)
+- [Raydium Streams](#raydium-streams)
+- [EVM Streams](#evm)
+- [Uniswap V3 Streams](#uniswap-v3-streams)
+- [NFT Streams](#nft-streams)
+- [TRON Streams](#tron)
 
 ## Solana
 
@@ -75,13 +82,6 @@ This stream lets you monitor all the token transfers for a particular token. You
  
 ▶️[Token Transfers Stream](https://graphql.bitquery.io/ide/Subscribe-to-Latest-WETH-token-transfers)
 
-
-### Pair Creation on Uniswap 
-
-This stream returns the real time liquidity pools/token pairs created on Uniswap V3. You could modify the stream to monitor newly created pools on a different protocol. 
-
-▶️[Pair Creation Stream](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9)
-
 ### DEX Trades
 
 This stream returns all the real time DEX trades happening on Ethereum mainnet. You can modify this stream to get DEX trades on a particular DEX or trades of a particular token or trades by a particular trader.
@@ -100,22 +100,33 @@ This subscription returns the real-time trades happening on Pancakeswap. You can
 
 ▶️[Pancakeswap Trades Stream](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream)
 
-### Real time Trades on Uniswap
-
-This subscription returns the real-time trades happening on Uniswap. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader.
-
-▶️[Uniswap Trades Stream](https://ide.bitquery.io/Realtime-Uniswap-v1-Uniswap-v2-Uniswap-V3-Trades)
-### NFT Trades on Opensea 
-
-This stream allows you to monitor real time NFT trades on OpenSea. It could also be modified to get trades of a particular NFT collection or NFTs traded by a particular trader.
-
-▶️[NFT Trades Stream](https://ide.bitquery.io/Latests-OpenSea-Trades--stream)
-
 ### Token Price Stream 
 
 This stream returns the real time trade price of a token against the token it is traded with and the price in USD. You could modify the stream to get the price of the token for a particular token pair or against a particular token.
 
 ▶️[Token Price Stream](https://ide.bitquery.io/token-price-stream)
+
+## Uniswap V3 Streams
+
+### Pair Creation on Uniswap 
+
+This stream returns the real time liquidity pools/token pairs created on Uniswap V3. You could modify the stream to monitor newly created pools on a different protocol. 
+
+▶️[Pair Creation Stream](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9)
+
+### Real time Trades on Uniswap
+
+This subscription returns the real-time trades happening on Uniswap V3. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader.
+
+▶️[Uniswap Trades Stream](https://ide.bitquery.io/Realtime-Uniswap-v1-Uniswap-v2-Uniswap-V3-Trades)
+
+## NFT Streams
+
+### NFT Trades on Opensea
+
+This stream allows you to monitor real time NFT trades on OpenSea. It could also be modified to get trades of a particular NFT collection or NFTs traded by a particular trader.
+
+▶️[NFT Trades Stream](https://ide.bitquery.io/Latests-OpenSea-Trades--stream)
 
 ## Tron
 
@@ -142,3 +153,11 @@ This subscription streams real-time large transactions (possible whale transacti
 This subscription streams the latest USDT (TRC20) transfers on the TRON network. You can modify the stream to monitor Transfers of USDT from or to a particular address.
 
 ▶️[Token Transfers Stream](https://ide.bitquery.io/usdt-trc20-transfers_1)
+
+## More on Streams
+
+You will find more detailed information on streams and subscriptions in the relevant sections.
+
+- [Understanding Subscription](https://docs.bitquery.io/docs/subscriptions/subscription/)
+- [Streaming Concepts](https://docs.bitquery.io/docs/category/streaming-via-subscriptions/)
+- [Streaming via Websocket](https://docs.bitquery.io/docs/subscriptions/examples/)
