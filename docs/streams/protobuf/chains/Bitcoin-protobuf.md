@@ -24,3 +24,5 @@ The stream provides detailed script information, including `ScriptPubKey` and `S
 ### Using This Stream in Python, JavaScript, and Go
 
 The same Python, JavaScript, and Go code samples can be used with this stream by simply changing the topic to `btc.transactions.proto` and using the `ParsedBlockMessage` schema, which can be found in the [Parsed Block Message Schema](https://github.com/bitquery/streaming_protobuf/blob/main/utxo/parsed_block_message.proto).
+
+The Python package [bitquery-pb2-kafka-package](https://pypi.org/project/bitquery-pb2-kafka-package/) includes all schema and is up to date so you don't have to manually install schema files.
