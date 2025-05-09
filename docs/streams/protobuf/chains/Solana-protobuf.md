@@ -4,6 +4,8 @@ You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tr
 
 Remember that Solana blocks are produced with a target block time of 400ms, in practice resulting in high throughput of approximately 4,000 transactions per second while achieving a theoretical maximum of 65,000 transactions per second (TPS).
 
+import VideoPlayer from "../../../../src/components/videoplayer.js";
+
 ## Structure of On-Chain Data
 
 The Solana Protobuf Streams provide three main message types for different use cases:
@@ -88,3 +90,12 @@ Python, JavaScript, and Go code samples can be used with these streams by changi
 - `solana.dextrades.proto`
 
 The Python package [bitquery-pb2-kafka-package](https://pypi.org/project/bitquery-pb2-kafka-package/) includes all schema and is up to date so you don't have to manually install schema files.
+
+
+## Video Tutorial to Get Low Latency Solana Data via Kafka
+
+<VideoPlayer url='https://youtu.be/8Qo3NNC1zec' />
+
+## Video Tutorial to Get Real-time PumpSwap Trades via Bitquery Kafka Streams
+
+<VideoPlayer url='https://youtu.be/UlqZ8DgzNLc' />
