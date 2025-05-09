@@ -1,0 +1,8 @@
+{
+  "label": "L1/L2 Chains - Protobuf Data Streams",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Using kafka streams"
+  }
+}
