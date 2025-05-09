@@ -4,6 +4,8 @@ You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tr
 
 EVM blockchains produce blocks at varying intervals depending on the network. Ethereum mainnet targets ~12 seconds per block, while other EVM chains may have different block times.
 
+import VideoPlayer from "../../../../src/components/videoplayer.js";
+
 ## Structure of On-Chain Data
 
 The EVM Protobuf Streams provide three main message types for different use cases:
@@ -118,3 +120,11 @@ Python, JavaScript, and Go code samples can be used with these streams by changi
 - `eth.broadcasted.raw.proto` (for raw broadcasted block data)
 
 The Python package [bitquery-pb2-kafka-package](https://pypi.org/project/bitquery-pb2-kafka-package/) includes all schema and is up to date so you don't have to manually install schema files.
+
+## Video Tutorial to Track Deposits and Withdrawals for Exchange Wallets Using Kafka
+
+<VideoPlayer url='https://youtu.be/XbE_9NAWJAs' />
+
+## Video Tutorial to Get Latest Four Meme Trades Using Kafka
+
+<VideoPlayer url='https://youtu.be/mR0JyfHG7AU' />
