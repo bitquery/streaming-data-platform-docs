@@ -192,28 +192,25 @@ const sidebars = {
           items: [
             "streams/kafka-streaming-concepts",
             {
-              "type": "category",
-              "label": "Protobuf Data Streams",
-              "items": [
+              type: "category",
+              label: "Protobuf Data Streams",
+              items: [
                 {
-                  "type": "category",
-                  "label": "L1/L2 Chains - Protobuf Data Streams",
-                  "items": [
+                  type: "category",
+                  label: "L1/L2 Chains - Protobuf Data Streams",
+                  items: [
                     "streams/protobuf/chains/Bitcoin-protobuf",
                     "streams/protobuf/chains/EVM-protobuf",
                     "streams/protobuf/chains/Solana-protobuf",
-                    "streams/protobuf/chains/Tron-protobuf"
-                  ]
+                    "streams/protobuf/chains/Tron-protobuf",
+                  ],
                 },
                 "streams/protobuf/kafka-protobuf-go",
                 "streams/protobuf/kafka-protobuf-python",
                 "streams/protobuf/kafka-protobuf-js",
-              ]
+              ],
             },
             "streams/compare-websocket-kafka",
-            
-            
-            
           ],
         },
       ],
