@@ -12,8 +12,6 @@ This section will guide you through different APIs which will tell you how to ge
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-<img width="1467" alt="Image" src="https://github.com/user-attachments/assets/bd1225d0-c464-44d1-a18c-c74661bbd83a" />
-
 ## GMGN Trending API
 
 The query will give you the Top 10 trending tokens on GMGN in last 1 hour. Change the time in this `Block: {Time: {since: "2025-04-24T08:16:00Z"}}` to the time 1 hour ago timestamp whenever you test the query.

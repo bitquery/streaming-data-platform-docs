@@ -12,8 +12,6 @@ This section will guide you through different APIs which will tell you how to ge
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-<img width="1111" alt="Image" src="https://github.com/user-attachments/assets/8bb8abe8-da7e-4445-8541-da2402dc3a24" />
-
 ## Get Trade Transactions of BullX for a particular pair in realtime
 
 The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
