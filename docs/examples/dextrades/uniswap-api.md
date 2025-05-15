@@ -85,11 +85,81 @@ subscription {
   }
 }
 
-     
+
 ```
 
+## Latest Trades of a Pair on Uniswap
 
+This query retrieves the latest trades of a specific token pair (WETH/USDC) on the Ethereum network, for the Uniswap protocol (all versions: v1, v2, and v3).
+You can run the query [here](https://ide.bitquery.io/latest-trades-of-pair-on-Uniswap)
 
+```
+query LatestTrades {
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}}}, Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, Dex: {ProtocolName: {in: ["uniswap_v3", "uniswap_v2", "uniswap_v1"]}}}}
+    ) {
+      Block {
+        allTime: Time
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        Currency {
+          Symbol
+          SmartContract
+          Name
+        }
+        Price
+        AmountInUSD
+        Amount
+        Side {
+          Type
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Top Traders of a Token
+
+This query identifies the top 100 traders of a specific token (USDC) on the Ethereum network, for the Uniswap protocol (all versions: v1, v2, and v3). It ranks traders by their total trading volume in USD.
+You can run the query [here](https://ide.bitquery.io/Top-Traders-of-a-token-on-Uniswap-on-ETH)
+
+```
+query topTraders {
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {SmartContract: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}}, Dex: {ProtocolName: {in: ["uniswap_v3", "uniswap_v2", "uniswap_v1"]}}}}
+    ) {
+      Trade {
+        Buyer
+      }
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+```
 
 ## Uniswap v2 Pair Trade Stats
 
