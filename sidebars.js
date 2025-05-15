@@ -351,6 +351,7 @@ const sidebars = {
             "examples/BSC/bsc-balance-updates",
             "examples/BSC/bsc-calls-api",
             "examples/BSC/bsc-dextrades",
+            "examples/BSC/bsc-uniswap-api",
             "examples/BSC/bsc-events-api",
             "examples/BSC/bsc-nft",
             "examples/BSC/bsc-transfers",
@@ -492,6 +493,7 @@ const sidebars = {
           items: [
             "examples/Matic/matic-balance-updates",
             "examples/Matic/matic-dextrades",
+            "examples/Matic/matic-uniswap-api",
             "examples/Matic/matic-nft",
             "examples/Matic/matic-transfers",
           ],
