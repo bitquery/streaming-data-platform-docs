@@ -402,7 +402,7 @@ Check following [query](https://ide.bitquery.io/token-trade-analytics) for analy
 ## Top Traders of a token
 
 This query will fetch you top traders of a token for the selected network.
-You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token_1).
+You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-ETH).
 
 ```
 query topTraders($network: evm_network, $token: String) {
@@ -413,11 +413,7 @@ query topTraders($network: evm_network, $token: String) {
       where: {Trade: {Currency: {SmartContract: {is: $token}}}}
     ) {
       Trade {
-        Dex {
-          OwnerAddress
-          ProtocolFamily
-          ProtocolName
-        }
+        Buyer
       }
       bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
       sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
@@ -621,7 +617,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02a
 ## Top Traders of a token pair
 
 This query will fetch you top traders of a token pair for the selected network.
-You can test the query [here](https://ide.bitquery.io/pair-top-traders).
+You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token-pair-on-ETH).
 
 ```
 query pairTopTraders($network: evm_network, $token: String, $base: String) {
@@ -632,11 +628,7 @@ query pairTopTraders($network: evm_network, $token: String, $base: String) {
       where: {Trade: {Currency: {SmartContract: {is: $token}}, Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}}}
     ) {
       Trade {
-        Dex {
-          OwnerAddress
-          ProtocolFamily
-          ProtocolName
-        }
+        Buyer
       }
       bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
       sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
@@ -1083,18 +1075,30 @@ Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.i
 
 This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a specific token traded on DEXes over a defined time period and interval. You can use the `quoteCurrency` to input the contract address of the currency used for quoting the token prices.
 
-You can find the query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum_1)
+You can find the query [here](https://ide.bitquery.io/OHLC0_8)
 
 ```
 {
-  EVM(network: eth, dataset: archive) {
+  EVM(network: eth, dataset: realtime) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_testfield"}
-      where: {Trade: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}, Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, Type: {is: buy}}, PriceAsymmetry: {lt: 0.1}}}
-      limit: {count: 10}
+      orderBy: { descendingByField: "Block_testfield" }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" }
+          }
+          PriceAsymmetry:{lt:0.1}
+          Side: {
+            Currency: {
+              SmartContract: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" }
+            }
+          }
+        }
+      }
+      limit: { count: 10 }
     ) {
       Block {
-        testfield: Time(interval: {in: hours, count: 1})
+        testfield: Time(interval: { in: hours, count: 1 })
       }
       volume: sum(of: Trade_Amount)
       Trade {

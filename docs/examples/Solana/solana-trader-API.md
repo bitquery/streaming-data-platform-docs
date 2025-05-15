@@ -69,6 +69,64 @@ query TopTraders($token: String, $base: String) {
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_top_traders).
 
+## Trades of Wallets in Realtime
+
+Below query will give you the trades of the wallets present in `addressList` in realtime. Try the query [here](https://ide.bitquery.io/Trades-of-wallets-in-realtime_1).
+
+```
+subscription MyQuery($addressList: [String!]) {
+  Solana {
+    DEXTrades(
+      where: {Transaction: {Result: {Success: true}}, any: [{Trade: {Buy: {Account: {Address: {in: $addressList}}}}}, {Trade: {Buy: {Account: {Token: {Owner: {in: $addressList}}}}}}, {Trade: {Sell: {Account: {Address: {in: $addressList}}}}}, {Trade: {Sell: {Account: {Token: {Owner: {in: $addressList}}}}}}]}
+    ) {
+      Instruction {
+        Program {
+          Method
+        }
+      }
+      Block {
+        Time
+      }
+      Trade {
+        Buy {
+          Amount
+          Account {
+            Address
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+          }
+          AmountInUSD
+        }
+        Sell {
+          Amount
+          Account {
+            Address
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+          }
+          AmountInUSD
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+{
+  "addressList": ["7eWHXZefGY98o9grrrt1Z3j7DcPDEhA4UviQ1pVNhTXX", "6LNdbvyb11JH8qxAsJoPSfkwK4zJDQKQ6LNp4mxt8VpR"]
+}
+```
+
 ## Get count of Buys and Sells of a Trader
 
 To get the count of Buys and Sells of a specific trader after a certain `timestamp`, use the following query.
