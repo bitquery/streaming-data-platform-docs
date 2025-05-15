@@ -8,6 +8,8 @@ Uniswap is a decentralized exchange built on the Ethereum blockchain that allows
 
 Bitquery's APIs allows you to retrieve information about trades that have occurred between two tokens on the Uniswap exchange. This endpoint returns a list of trades, along with various details about each trade, such as the amount of tokens exchanged, the price of the trade, and the timestamp of the trade.
 
+All the DEX Trade queries and streams mentioned in other sections can be modified to track solely for the Uniswap protocol.
+
 <head>
   <meta name="title" content="Uniswap API - Ethereum On-Chain Token & Trade Data" />
   <meta name="description" content="Access real-time on-chain data for Uniswap tokens using the Bitquery-powered Uniswap API. Track trades, liquidity, token prices, and more on Ethereum." />
