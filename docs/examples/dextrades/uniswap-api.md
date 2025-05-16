@@ -10,6 +10,8 @@ Bitquery's APIs allows you to retrieve information about trades that have occurr
 
 All the DEX Trade queries and streams mentioned in other sections can be modified to track solely for the Uniswap protocol.
 
+You can also check Uniswap APIs on other EVM Chains like [BNB](https://docs.bitquery.io/docs/examples/BSC/bsc-uniswap-api/),[Base](https://docs.bitquery.io/docs/examples/Base/base-uniswap-api/) and [Matic/Polygon](https://docs.bitquery.io/docs/examples/Matic/matic-uniswap-api/)
+
 <head>
   <meta name="title" content="Uniswap API - Ethereum On-Chain Token & Trade Data" />
   <meta name="description" content="Access real-time on-chain data for Uniswap tokens using the Bitquery-powered Uniswap API. Track trades, liquidity, token prices, and more on Ethereum." />

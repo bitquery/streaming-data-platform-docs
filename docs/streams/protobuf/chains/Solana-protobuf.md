@@ -60,6 +60,34 @@ The `TokenBlockMessage` stream provides detailed information about token transfe
   - `TokenCreators`: Original creators of the token
   - NFT properties like `SellerFeeBasisPoints` and `TokenStandard`
 
+
+The `solana.tokens.proto` topic uses this message type to share details of:
+
+#### Account Addresses
+
+* These are listed under the "Accounts" section of the transaction header.
+
+#### Balance Updates
+
+* These are listed under "BalanceUpdates", with each update linked to an account using the `AccountIndex`.
+* Each balance update has:
+
+  * **PreBalance:** The balance of the account before the transaction.
+  * **PostBalance:** The balance of the account after the transaction.
+  * **Currency Details:** Information about the currency type (e.g., Solana (SOL), Wrapped Solana (WSOL)).
+
+#### Balance Updates After Each Instruction
+
+* These updates are shown under the "BalanceUpdates" section within each instruction of the transaction.
+* These updates reflect the immediate effect of an instruction on the balance of the involved wallets.
+* For example, if an instruction transfers a certain amount from one wallet to another, the balance update directly after this instruction will reflect the new balances for both wallets.
+
+#### Balance Updates After the Entire Transaction
+
+* These updates are shown under the "BalanceUpdates" section at the transaction level.
+* They show the final state of the balances after all instructions in that transaction have been executed.
+* This is essentially the final balance state of all wallets involved in that transaction.
+
 ### DEX (Decentralized Exchange) Data
 
 The `DexParsedBlockMessage` stream is specialized for decentralized exchange activity:
