@@ -8,6 +8,10 @@ Uniswap is a decentralized exchange built on the Ethereum blockchain that allows
 
 Bitquery's APIs allows you to retrieve information about trades that have occurred between two tokens on the Uniswap exchange. This endpoint returns a list of trades, along with various details about each trade, such as the amount of tokens exchanged, the price of the trade, and the timestamp of the trade.
 
+All the DEX Trade queries and streams mentioned in other sections can be modified to track solely for the Uniswap protocol.
+
+You can also check Uniswap APIs on other EVM Chains like [BNB](https://docs.bitquery.io/docs/examples/BSC/bsc-uniswap-api/),[Base](https://docs.bitquery.io/docs/examples/Base/base-uniswap-api/) and [Matic/Polygon](https://docs.bitquery.io/docs/examples/Matic/matic-uniswap-api/)
+
 <head>
   <meta name="title" content="Uniswap API - Ethereum On-Chain Token & Trade Data" />
   <meta name="description" content="Access real-time on-chain data for Uniswap tokens using the Bitquery-powered Uniswap API. Track trades, liquidity, token prices, and more on Ethereum." />
@@ -85,11 +89,81 @@ subscription {
   }
 }
 
-     
+
 ```
 
+## Latest Trades of a Pair on Uniswap
 
+This query retrieves the latest trades of a specific token pair (WETH/USDC) on the Ethereum network, for the Uniswap protocol (all versions: v1, v2, and v3).
+You can run the query [here](https://ide.bitquery.io/latest-trades-of-pair-on-Uniswap)
 
+```
+query LatestTrades {
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}}}, Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, Dex: {ProtocolName: {in: ["uniswap_v3", "uniswap_v2", "uniswap_v1"]}}}}
+    ) {
+      Block {
+        allTime: Time
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        Currency {
+          Symbol
+          SmartContract
+          Name
+        }
+        Price
+        AmountInUSD
+        Amount
+        Side {
+          Type
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Top Traders of a Token
+
+This query identifies the top 100 traders of a specific token (USDC) on the Ethereum network, for the Uniswap protocol (all versions: v1, v2, and v3). It ranks traders by their total trading volume in USD.
+You can run the query [here](https://ide.bitquery.io/Top-Traders-of-a-token-on-Uniswap-on-ETH)
+
+```
+query topTraders {
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {SmartContract: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}}, Dex: {ProtocolName: {in: ["uniswap_v3", "uniswap_v2", "uniswap_v1"]}}}}
+    ) {
+      Trade {
+        Buyer
+      }
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+```
 
 ## Uniswap v2 Pair Trade Stats
 
