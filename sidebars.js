@@ -337,6 +337,7 @@ const sidebars = {
                 "examples/ethers-library/eth_subscribe",
               ],
             },
+            "examples/transfers/rwa-api",
           ],
         },
 
