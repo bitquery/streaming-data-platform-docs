@@ -4,7 +4,7 @@ In this section, we will explore some of the APIs that help us obtain informatio
 
 These APIs can be executed on any EVM chain simply by changing the `network: eth` parameter to the appropriate chain and using the correct address.
 
-We have written about analysing RWA data in the blos [here](https://bitquery.io/blog/real-world-asset-tracking-arbitrum-bitquery-apis) and how it has influenced tokenized real-estate [here](https://bitquery.io/blog/tokenized-real-estate-transforming-property-investment).
+We have written about analysing RWA data in the blogs [here](https://bitquery.io/blog/real-world-asset-tracking-arbitrum-bitquery-apis) and how it has influenced tokenized real-estate [here](https://bitquery.io/blog/tokenized-real-estate-transforming-property-investment).
 
 ### Top Holders of an RWA
 
