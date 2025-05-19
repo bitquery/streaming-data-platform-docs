@@ -1162,30 +1162,45 @@ subscription LatestTrades {
 
 ## Solana OHLC API
 
-You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair Shark Cat-SOL by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
-You can run and test the [saved query here](https://ide.bitquery.io/Solana-OHLC-Query_5).
+You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair WSOL-USDC by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
+You can run and test the [saved query here](https://ide.bitquery.io/query_ohlc_quantile___1).
 
 ```
-{
-  Solana {
+query TradesSolToken($ca: String!, $currencies: [String!], $dataset: dataset_arg_enum, $interval: Int) {
+  Solana(dataset: $dataset) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, PriceAsymmetry: {lt: 0.1}}}
-      limit: {count: 10}
+      limit:{count:10}
+      orderBy: {ascendingByField: "Block_Time"}
+      where: {Trade: {Amount: {gt: "0"}, Currency: {MintAddress: {is: $ca}}, Side: {Currency: {MintAddress: {in: $currencies}}}}, Transaction: {Result: {Success: true}}}
     ) {
       Block {
-        Timefield: Time(interval: {in: minutes, count: 1})
+        Time(interval: {count: $interval, in: days})
       }
-      volume: sum(of: Trade_Amount)
+      min: quantile(of: Trade_Price, level: 0.05)
+      max: quantile(of: Trade_Price, level: 0.95)
+      close: median(of: Trade_Price)
+      open: median(of: Trade_Price)
+      volume: sum(of: Trade_Side_Amount)
       Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Slot)
-        close: Price(maximum: Block_Slot)
+        Currency{
+          Name
+          Symbol
+        }
+        Side {
+          Currency {
+            Name
+            Symbol
+          }
+        }
       }
-      count
     }
   }
+}
+{
+  "interval": 1,
+  "dataset": "combined",
+  "ca": "So11111111111111111111111111111111111111112",
+  "currencies": ["EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]
 }
 ```
 
