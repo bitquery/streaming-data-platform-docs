@@ -114,7 +114,7 @@ This query returns the most recent balance updates that occurred on the Ethereum
 This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.  
 ▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-dextrades)
 
-### Ethereum DexTradeByTokens
+### Ethereum Dex Trade By Tokens
 
 This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
 ▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
