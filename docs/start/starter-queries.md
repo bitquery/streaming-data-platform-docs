@@ -180,7 +180,7 @@ This query returns the most recent balance updates that occurred on the TRON net
 This query returns the latest trades on the TRON network where the buy and sell sides are distinguished.  
 ▶️ [TRON DEX Trades](https://ide.bitquery.io/Tron-DEX-Trades_1)
 
-### Tron DexTradeByTokens
+### Tron Dex Trade By Tokens
 
 This query returns the latest token trades on the TRON network.  
 ▶️ [DexTrade By Tokens](https://ide.bitquery.io/Tron-DexTradeByTokens_1)
