@@ -424,6 +424,7 @@ const sidebars = {
             "examples/Tron/tron-nft",
             "examples/Tron/tron-sunpump",
             "examples/Tron/tron-transactions-api",
+            "examples/Tron/tron-fees-api",
             "examples/Tron/tron-transfers",
             "examples/Tron/usdt-trc20-api",
           ],
