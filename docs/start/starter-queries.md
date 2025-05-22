@@ -68,7 +68,7 @@ This query returns Solana network rewards info such as the address that receives
 This query returns Solana balance update info for any balance update event. It includes the address, amount, currency details, and the amount of tokens present in a particular address before and after the update.  
 ▶️ [Balance Update](https://ide.bitquery.io/solana-balance-update-stream)
 
-### Solana InstructionBalanceUpdates
+### Solana Instruction Balance Updates
 
 This query returns Solana balance update info for any balance update event, including the address, amount, currency details, and the details of the program responsible for this update.  
 ▶️ [Instruction Balance Updates](https://ide.bitquery.io/Solana-InstructionBalanceUpdates)
@@ -114,7 +114,7 @@ This query returns the most recent balance updates that occurred on the Ethereum
 This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.  
 ▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-dextrades)
 
-### Ethereum DexTradeByTokens
+### Ethereum Dex Trade By Tokens
 
 This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
 ▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
@@ -180,7 +180,7 @@ This query returns the most recent balance updates that occurred on the TRON net
 This query returns the latest trades on the TRON network where the buy and sell sides are distinguished.  
 ▶️ [TRON DEX Trades](https://ide.bitquery.io/Tron-DEX-Trades_1)
 
-### Tron DexTradeByTokens
+### Tron Dex Trade By Tokens
 
 This query returns the latest token trades on the TRON network.  
 ▶️ [DexTrade By Tokens](https://ide.bitquery.io/Tron-DexTradeByTokens_1)
