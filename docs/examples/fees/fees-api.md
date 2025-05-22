@@ -21,6 +21,8 @@ title: EVM Fees API
 <meta property="twitter:description" content="EVM balance API will help get the balance or balance history of any address or smart contract on the EVM blockchain." />
 </head>
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 ## Get Trades with Transaction fees
 
 Get a list of successful DEX trades on EVM along with the transaction fee details for each trade. `SenderFee` and `SenderFeeInUSD` fields in query are the transaction fees in ETH and transaction fees in USD respectively.
@@ -150,3 +152,7 @@ query MyQuery {
   }
 }
 ```
+
+## Video Tutorial | How to get Total Fees paid by a Account on EVM Network
+
+<VideoPlayer url="https://www.youtube.com/watch?v=JknNI5Je-M8" />

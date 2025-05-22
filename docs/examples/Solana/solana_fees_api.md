@@ -171,3 +171,7 @@ query MyQuery {
 	}
 }
 ```
+
+## Video Tutorial | How to get Total Fees paid by a Account on Solana
+
+<VideoPlayer url="https://www.youtube.com/watch?v=xzNQ8S8L0-Q" />

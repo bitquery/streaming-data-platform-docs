@@ -159,3 +159,7 @@ query MyQuery {
 	}
 }
 ```
+
+## Video Tutorial | How to get Total Fees paid by a Account on Tron Network
+
+<VideoPlayer url="https://www.youtube.com/watch?v=D-9Vp4zrPaU" />
