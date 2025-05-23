@@ -330,6 +330,11 @@ const config = {
             label: "Moneyflow Lite",
             position: "left",
           },
+          {
+            to:"https://bitquery.substack.com/",
+            label:"Newsletter",
+            position:"left",
+          }
         ],
       },
       footer: {
