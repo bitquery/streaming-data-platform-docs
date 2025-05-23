@@ -110,14 +110,14 @@ EVM Protobuf Streams provide dedicated fields for Layer 2 chains:
 
 Python, JavaScript, and Go code samples can be used with these streams by changing the topic to one of:
 
-- `eth.transactions.proto`
-- `eth.tokens.proto`
-- `eth.dextrades.proto`
-- `eth.raw.proto` (for raw block data)
-- `eth.broadcasted.transactions.proto` (for broadcasted transactions)
-- `eth.broadcasted.tokens.proto` (for broadcasted token transfers)
-- `eth.broadcasted.dextrades.proto` (for broadcasted DEX trades)
-- `eth.broadcasted.raw.proto` (for raw broadcasted block data)
+- `eth.transactions.proto` -> `ParsedAbiBlockMessage`
+- `eth.tokens.proto` -> `TokenBlockMessage`
+- `eth.dextrades.proto` -> `DexBlockMessage`
+- `eth.raw.proto` (for raw block data) -> `BlockMessage`
+- `eth.broadcasted.transactions.proto` (for broadcasted transactions) -> `ParsedAbiBlockMessage`
+- `eth.broadcasted.tokens.proto` (for broadcasted token transfers) -> `TokenBlockMessage`
+- `eth.broadcasted.dextrades.proto` (for broadcasted DEX trades) -> `DexBlockMessage`
+- `eth.broadcasted.raw.proto` (for raw broadcasted block data) -> `BlockMessage`
 
 The Python package [bitquery-pb2-kafka-package](https://pypi.org/project/bitquery-pb2-kafka-package/) includes all schema and is up to date so you don't have to manually install schema files.
 

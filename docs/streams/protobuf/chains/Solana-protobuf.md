@@ -60,33 +60,32 @@ The `TokenBlockMessage` stream provides detailed information about token transfe
   - `TokenCreators`: Original creators of the token
   - NFT properties like `SellerFeeBasisPoints` and `TokenStandard`
 
-
 The `solana.tokens.proto` topic uses this message type to share details of:
 
 #### Account Addresses
 
-* These are listed under the "Accounts" section of the transaction header.
+- These are listed under the "Accounts" section of the transaction header.
 
 #### Balance Updates
 
-* These are listed under "BalanceUpdates", with each update linked to an account using the `AccountIndex`.
-* Each balance update has:
+- These are listed under "BalanceUpdates", with each update linked to an account using the `AccountIndex`.
+- Each balance update has:
 
-  * **PreBalance:** The balance of the account before the transaction.
-  * **PostBalance:** The balance of the account after the transaction.
-  * **Currency Details:** Information about the currency type (e.g., Solana (SOL), Wrapped Solana (WSOL)).
+  - **PreBalance:** The balance of the account before the transaction.
+  - **PostBalance:** The balance of the account after the transaction.
+  - **Currency Details:** Information about the currency type (e.g., Solana (SOL), Wrapped Solana (WSOL)).
 
 #### Balance Updates After Each Instruction
 
-* These updates are shown under the "BalanceUpdates" section within each instruction of the transaction.
-* These updates reflect the immediate effect of an instruction on the balance of the involved wallets.
-* For example, if an instruction transfers a certain amount from one wallet to another, the balance update directly after this instruction will reflect the new balances for both wallets.
+- These updates are shown under the "BalanceUpdates" section within each instruction of the transaction.
+- These updates reflect the immediate effect of an instruction on the balance of the involved wallets.
+- For example, if an instruction transfers a certain amount from one wallet to another, the balance update directly after this instruction will reflect the new balances for both wallets.
 
 #### Balance Updates After the Entire Transaction
 
-* These updates are shown under the "BalanceUpdates" section at the transaction level.
-* They show the final state of the balances after all instructions in that transaction have been executed.
-* This is essentially the final balance state of all wallets involved in that transaction.
+- These updates are shown under the "BalanceUpdates" section at the transaction level.
+- They show the final state of the balances after all instructions in that transaction have been executed.
+- This is essentially the final balance state of all wallets involved in that transaction.
 
 ### DEX (Decentralized Exchange) Data
 
@@ -113,12 +112,13 @@ The `DexParsedBlockMessage` stream is specialized for decentralized exchange act
 
 Python, JavaScript, and Go code samples can be used with these streams by changing the topic to one of:
 
-- `solana.transactions.proto`
-- `solana.tokens.proto`
-- `solana.dextrades.proto`
+The below is the topic -> message mapping :
+
+- `solana.transactions.proto` -> `ParsedIdlBlockMessage`
+- `solana.tokens.proto` -> `TokenBlockMessage`
+- `solana.dextrades.proto` -> `DexParsedBlockMessage`
 
 The Python package [bitquery-pb2-kafka-package](https://pypi.org/project/bitquery-pb2-kafka-package/) includes all schema and is up to date so you don't have to manually install schema files.
-
 
 ## Video Tutorial to Get Low Latency Solana Data via Kafka
 
