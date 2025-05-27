@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Kafka Streaming Concepts
+# Bitquery Kafka Streams - Understanding Concepts
 
 Bitquery provides realtime data via Kafka as well in addition to GraphQL subscriptions. In this section, we'll see how Kafka-based streaming works and how to integrate it into your application using practical code examples.
 
@@ -140,7 +140,6 @@ General pattern of the topic name is:
 <BLOCKCHAIN_NAME>.<MESSAGE_TYPE>
 <BLOCKCHAIN_NAME>.broadcasted.<MESSAGE_TYPE>
 ```
-
 
 ### General Message Types
 
