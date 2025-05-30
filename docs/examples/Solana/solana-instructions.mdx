@@ -115,6 +115,78 @@ subscription {
 
 ```
 
+## Get Token Metadata using Metaplex of Newly Created Tokens
+
+This query retrieves metadata for newly created tokens on Solana using the Metaplex program. 
+The metadata is returned is the **JSON** field, which includes fields such as name, symbol, uri, and more.
+You can run the query [here](https://ide.bitquery.io/Get-newly-created-token-metadata-on-Solana)
+You can also add the keyword `subscription` and track it in real-time.
+
+```
+{
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"}, Method: {is: "CreateMetadataAccountV3"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Slot}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
+            Name
+          }
+          Name
+          Method
+        }
+        Data
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+```
+
 ## Number of Latest Created Tokens on Solana
 
 The query below fetches the count of the latest created tokens on the Solana blockchain which were created using `initializeMint` method.
