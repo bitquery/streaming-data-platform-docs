@@ -1,0 +1,292 @@
+# Believe Protocol API
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+In this document, we will explore several examples related to [Believe Protocol](https://believe.app/) Data. The Believe Protocol is a decentralized token launchpad built on the Solana blockchain, designed to simplify and democratize the creation and trading of tokens. It enables users to mint tokens directly through social media interactions, particularly on X (formerly Twitter), making it accessible even to those without technical expertise. Tokens are launched on Meteora DBC.
+
+We also have [Meteora Dynamic Bonding Curve API Docs](https://docs.bitquery.io/docs/examples/Solana/meteora-dynamic-bonding-curve-api/).
+Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/).
+These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on [telegram](https://t.me/Bloxy_info).
+
+:::note
+`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+:::
+
+<head>
+  <meta name="title" content="Believe API - Solana | Track Token Creations By Believe"/>
+  <meta name="description" content="Get on-chain data of Meteora DBC Token Creations and claims of Creator Fees by Believe"/>
+  <meta name="keywords" content="Believe Protocol data API, Beleive protocol token creations api, Beleive protocol token launch api, Solana token launch data, Bitquery Solana API, Meteora DBC API, token creation analytics, trading fee claim data, creator earnings API, Solana bonding curve data, Believe Protocol integration, token lifecycle Solana, crypto data API Solana, Bitquery Believe Protocol endpoints, token launch tracking, token metadata Solana, decentralized token data, real-time Solana token stats, Solana API for token creation, claim fee API Believe, Bitquery IDE API examples
+"/>
+  <meta name="robots" content="index, follow"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="language" content="English"/>
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="Believe API - Solana | Track Token Creations By Believe"
+/>
+<meta
+  property="og:description"
+  content="Get on-chain data of Meteora DBC Token Creations and claims of Creator Fees by Believe"
+/>
+
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:title" content="Believe API - Solana | Track Token Creations By Believe"/>
+  <meta property="twitter:description" content="Get on-chain data of Meteora DBC Token Creations and claims of Creator Fees by Believe"/>
+</head>
+
+If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
+
+## Track Token creation using Believe Protocol on Meteora DBC in realtime
+
+Using [this](https://ide.bitquery.io/track-Token-creation-using-Believe-Protocol-on-Meteora-DBC-in-realtime) query, we can get the 10 latest created Meteora DBC tokens using Believe Protocol. `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN` is the address of Meteora DBC and `5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE` is the Believe Token Authority address, the address which is responsible for calling the instructions on Meteora DBC Program.
+
+```graphql
+subscription MyQuery {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" }
+            Method: { is: "initialize_virtual_pool_with_spl_token" }
+          }
+        }
+        Transaction: {
+          Result: { Success: true }
+          Signer: { is: "5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE" }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Token {
+            ProgramId
+            Owner
+            Mint
+          }
+          IsWritable
+          Address
+        }
+        Program {
+          Parsed
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
+            Name
+          }
+          Address
+          AccountNames
+        }
+      }
+      Transaction {
+        Fee
+        FeeInUSD
+        FeePayer
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Get latest Meteora DBC Token Creations using Believe Protocol
+
+Using [this](https://ide.bitquery.io/Token-creation-using-Believe-Protocol-on-Meteora-DBC#) query, we can get the 10 latest created Meteora DBC tokens using Believe Protocol.
+
+```graphql
+query MyQuery {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" }
+            Method: { is: "initialize_virtual_pool_with_spl_token" }
+          }
+        }
+        Transaction: {
+          Result: { Success: true }
+          Signer: { is: "5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE" }
+        }
+      }
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Token {
+            ProgramId
+            Owner
+            Mint
+          }
+          IsWritable
+          Address
+        }
+        Program {
+          Parsed
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
+            Name
+          }
+          Address
+          AccountNames
+        }
+      }
+      Transaction {
+        Fee
+        FeeInUSD
+        FeePayer
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Get latest Claims of Creator Fees using Believe Protocol
+
+Using [this](https://ide.bitquery.io/Claim-creator-trading-fee-using-Believe-Protocol-on-Meteora-DBC#) query, we can get the latest claims of Creator Trading Fees using Believe Protocol.
+
+```graphql
+query MyQuery {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" }
+            Method: { is: "claim_creator_trading_fee" }
+          }
+        }
+        Transaction: {
+          Result: { Success: true }
+          Signer: { is: "5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE" }
+        }
+      }
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Token {
+            ProgramId
+            Owner
+            Mint
+          }
+          IsWritable
+          Address
+        }
+        Program {
+          Parsed
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
+            Name
+          }
+          Address
+          AccountNames
+        }
+      }
+      Transaction {
+        Fee
+        FeeInUSD
+        FeePayer
+        Signature
+      }
+    }
+  }
+}
+```

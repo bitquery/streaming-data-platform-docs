@@ -402,6 +402,7 @@ const sidebars = {
             "examples/Solana/Solana-Jito-Bundle-api",
             "examples/Solana/Solana-Lifinity-dex-api",
             "examples/Solana/Solana-Meteora-api",
+            "examples/Solana/Believe-API",
             "examples/Solana/meteora-dynamic-bonding-curve-api",
             "examples/Solana/Solana-OpenBook-api",
             "examples/Solana/Solana-Phoenix-api",
