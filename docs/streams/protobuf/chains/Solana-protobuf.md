@@ -1,5 +1,7 @@
 # Solana Shred Streams
 
+This section provides details about Bitquery's Solana Shred Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data.
+
 You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tree/main/solana).
 
 Remember that Solana blocks are produced with a target block time of 400ms, in practice resulting in high throughput of approximately 4,000 transactions per second while achieving a theoretical maximum of 65,000 transactions per second (TPS).
