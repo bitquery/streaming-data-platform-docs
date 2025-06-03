@@ -1,13 +1,17 @@
-# Pump Fun API
+# Pump Fun API Documentation
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
+In this document, we will explore several examples related to Pump Fun token data.
 
-In this document, we will explore several examples related to pump fun data. We also have [PumpSwap APIs](https://docs.bitquery.io/docs/examples/Solana/pump-swap-api/) if you want to track the token after it has been migrated to PumpSwap AMM.
-Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/).
-These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
+You may also be interested in:
+
+- [PumpSwap APIs ➤](https://docs.bitquery.io/docs/examples/Solana/pump-swap-api/)
+- [Moonshot APIs ➤](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/)
+- [FourMeme APIs ➤](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/)
+
+These APIs are also available through Kafka streams for zero latency. Contact us on our Telegram Channel.
 
 :::note
-`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+Trade Side Account field will not be available for aggregate queries in Archive and Combined Datasets
 :::
 
 <head>
@@ -33,222 +37,521 @@ These APIs can be provided through different streams including Kafka for zero la
   <meta property="twitter:description" content="Get on-chain data of any Pump.fun based token through our Pump.fun API."/>
 </head>
 
-If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
-## Top Pump Fun tokens based on Marketcap
+---
 
-The PumpFun token has a total supply of 1 billion tokens. Therefore, the maximum price is directly related to the market cap, as market cap = Price \* 1 billion (for PumpFun).
+### Table of Contents
 
-Here’s [the query](https://ide.bitquery.io/top-tokens-by-mktcap-on-pump-fun-in-last-15-min) to retrieve the top tokens based on their price.
+### 1. Token Creation and Metadata
+
+- [Track Newly Created Pump Fun Tokens ➤](#track-newly-created-pump-fun-tokens)
+- [Get Creation Time & Dev Address of a Token ➤](#get-creation-time--dev-address-of-a-token)
+- [Track New Token Launches in Realtime ➤](#track-new-token-launches-in-realtime)
+- [All Tokens Created by a Specific Address ➤](#all-tokens-created-by-a-specific-address)
+- [Get Token Metadata, Dev Address, Creation Time ➤](#get-token-metadata-dev-address-creation-time-for-specific-token)
+
+### 2. Token Pricing & Market Data
+
+- [Get Latest Price of a Token ➤](#get-latest-price-of-a-token)
+- [Track Price of a Token in Real-Time ➤](#track-price-of-a-token-in-real-time)
+- [Get OHLC Data of a Token ➤](#get-ohlc-data-of-a-token)
+- [Get ATH Market Cap of a Token ➤](#get-ath-market-cap-of-a-token)
+- [ATH Market Cap in a Specific Timeframe ➤](#ath-market-cap-in-a-specific-timeframe)
+- [Token Price Change Over Time ➤](#token-price-change-over-time-delta-from-x-minutes-back)
+
+### 3. Trade Activity & Volume
+
+- [Get Real-Time Trades on Pump Fun ➤](#get-real-time-trades-on-pump-fun)
+- [Get Latest Trades for a Token ➤](#get-latest-trades-for-a-token)
+- [Get Token’s Trading Volume ➤](#get-tokens-trading-volume)
+- [Detailed Trade Stats ➤](#get-detailed-trade-stats-volume-buys-sells-makers-buyers-sellers)
+- [Get First 100 Buyers of a Token ➤](#get-first-100-buyers-of-a-token)
+- [Check If First 100 Buyers Still Holding ➤](#check-if-first-100-buyers-still-holding)
+
+### 4. Token Liquidity, Pools & Pairs
+
+- [Get All Trading Pairs of a Token ➤](#get-all-trading-pairs-of-a-token)
+- [Get Liquidity of Pump Fun Tokens ➤](#get-liquidity-of-pump-fun-tokens)
+- [Market Cap, Price, Liquidity, Bonding Curve, Volume ➤](#get-market-cap-price-liquidity-bonding-curve-and-volume)
+- [Last Trade Before Token Graduates to Raydium ➤](#get-last-pump-fun-trade-before-token-graduates-to-raydium)
+
+### 5. Token Holder & Trader Insights
+
+- [Get Dev’s Holdings of a Token ➤](#get-devs-holdings-of-a-token)
+- [Get Top 10 Token Holders ➤](#get-top-10-token-holders)
+- [Get Top Traders of a Token ➤](#get-top-traders-of-a-token)
+- [Get Top Token Creators ➤](#get-top-token-creators)
+
+### 6. Token Rankings & Filters
+
+- [Top Pump Fun Tokens by Market Cap ➤](#top-pump-fun-tokens-by-market-cap)
+- [All Tokens Above 10K Market Cap ➤](#all-tokens-above-10k-market-cap)
+- [Track King of the Hill Tokens ➤](#track-king-of-the-hill-tokens-30k35k-market-cap)
+- [Tokens Between 400K–450K Market Cap ➤](#tokens-between-400k450k-market-cap-with-dev--creation-time)
+
+### 7.[ Video Tutorials](#video-tutorials)
+
+## Token Creation & Metadata
+
+### Track Newly Created Pump Fun Tokens
+
+Get metadata, supply, dev address of newly created tokens.
+[Run Query ➤](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+
+```graphql
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+            Method: { is: "create" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signer
+      }
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Symbol
+          ProgramAddress
+          PrimarySaleHappened
+          Native
+          Name
+          MintAddress
+          MetadataAddress
+          Key
+          IsMutable
+          Fungible
+          EditionNonce
+          Decimals
+          Wrapped
+          VerifiedCollection
+          Uri
+          UpdateAuthority
+          TokenStandard
+        }
+        PostBalance
+      }
+    }
+  }
+}
+```
+
+### Get Creation Time & Dev Address of a Token
+
+[Run Query ➤](https://ide.bitquery.io/PumpFun-Token-creation-time--creator)
+
+```graphql
+query MyQuery {
+  Solana(network: solana) {
+    Instructions(
+      where: {
+        Instruction: {
+          Accounts: {
+            includes: {
+              Address: { is: "Edazh5SW6ts7PocPvPgjrdKyqqszcRcqdB22B8tapump" }
+            }
+          }
+          Program: { Name: { is: "pump" }, Method: { is: "create" } }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signer
+        Signature
+      }
+      Instruction {
+        Accounts {
+          Address
+        }
+      }
+    }
+  }
+}
+```
+
+### Real-time New Token Launch Tracking
+
+[Run Stream ➤](https://ide.bitquery.io/Track-new-token-launches-on-Pump-Fun-in-realtime)
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: { Method: { is: "create" }, Name: { is: "pump" } }
+        }
+      }
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Logs
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+          }
+          Method
+          Name
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+### All Tokens Created by a Specific Address
+
+[Run Query ➤](https://ide.bitquery.io/all-Pump-fun-tokens-created-by-an-address)
+
+```graphql
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      where: {
+        Transaction: {
+          Result: { Success: true }
+          Signer: { is: "8uydUdb3DiQijXPDfzwuJCNiqfFQzCzinFDXRFHQQgCB" }
+        }
+        Instruction: {
+          Program: {
+            Address: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+            Method: { is: "create" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Uri
+          UpdateAuthority
+          Symbol
+          Name
+          MintAddress
+          MetadataAddress
+          Fungible
+          Decimals
+        }
+        PostBalance
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+```
+
+## Token Pricing & Market Data
+
+### Get Latest Price of a Token
+
+Fetches the most recent price data for a specified token
+[Run Query ➤](https://ide.bitquery.io/Price-of-a-pump-fun-token_7)
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limit: { count: 10 }
+      where: {
+        Trade: {
+          Dex: {
+            ProgramAddress: {
+              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
+            }
+          }
+          Currency: {
+            MintAddress: { is: "3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          ProgramAddress
+        }
+        Side {
+          Currency {
+            MintAddress
+            Symbol
+            Name
+          }
+        }
+        Price
+        PriceInUSD
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+### Track Price of a Token in Real-Time
+
+Live stream of token price updates on Pump Fun
+[Run Stream ➤](https://ide.bitquery.io/Price-of-a-pump-fun-token_1)
+
+```graphql
+subscription MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Dex: {
+            ProgramAddress: {
+              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
+            }
+          }
+          Currency: {
+            MintAddress: { is: "qXqLE8rNJ5zn4g5E5M6zddyhx5NbtrFqfHaBV4Zpump" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          ProgramAddress
+        }
+        Side {
+          Currency {
+            MintAddress
+            Symbol
+            Name
+          }
+        }
+        Price
+        PriceInUSD
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+### Get OHLC Data of a Token
+
+Fetches open-high-low-close data in 1-minute intervals for last 10 minutes
+[Run Query ➤](https://ide.bitquery.io/OHLC-for-a-token-on-Pump-Fun_10)
 
 ```graphql
 {
   Solana {
-    DEXTrades(
-      limitBy: { by: Trade_Buy_Currency_MintAddress, count: 1 }
+    DEXTradeByTokens(
       limit: { count: 10 }
-      orderBy: { descending: Trade_Buy_Price }
+      orderBy: { descendingByField: "Block_Timefield" }
       where: {
         Trade: {
-          Dex: { ProtocolName: { is: "pump" } }
-          Buy: {
-            Currency: {
-              MintAddress: { notIn: ["11111111111111111111111111111111"] }
+          Currency: {
+            MintAddress: { is: "66VR6bjEV5DPSDhYSQyPAxNsY3dgmH6Lwgi5cyf2pump" }
+          }
+          Dex: {
+            ProgramAddress: {
+              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
             }
           }
-          PriceAsymmetry: { le: 0.1 }
-          Sell: { AmountInUSD: { gt: "10" } }
+          PriceAsymmetry: { lt: 0.1 }
+        }
+      }
+    ) {
+      Block {
+        Timefield: Time(interval: { in: minutes, count: 1 })
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
+      }
+      count
+    }
+  }
+}
+```
+
+### Get ATH Market Cap of a Token
+
+Returns all-time-high price in SOL (marketcap = price \* 1B tokens)
+[Run Query ➤](https://ide.bitquery.io/ATH-MC_1#)
+
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "4sxfRwX5Dynqz5upN1Z5nbcSXYAAz51pVjbPFDMUpump" }
+          }
+        }
+      }
+      limit: { count: 1 }
+      orderBy: { descending: Trade_Price }
+    ) {
+      Trade {
+        PriceInSOL: Price
+      }
+    }
+  }
+}
+```
+
+### ATH Market Cap in a Specific Timeframe
+
+Same as above but within a given window
+[Run Query ➤](https://ide.bitquery.io/ATH-MC-till-2minutes-prior#)
+
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "4sxfRwX5Dynqz5upN1Z5nbcSXYAAz51pVjbPFDMUpump" }
+          }
+        }
+        Block: { Time: { till: "2025-06-03T06:37:00Z" } }
+      }
+      limit: { count: 1 }
+      orderBy: { descending: Trade_Price }
+    ) {
+      Trade {
+        PriceInSOL: Price
+      }
+    }
+  }
+}
+```
+
+### Token Price Change Over Time (Delta from X Minutes Back)
+
+Useful for tracking % change by comparing first/last prices
+[Run Query ➤](https://ide.bitquery.io/Pumpfun-coins-with-price--mc-with-limit-and-delta-from-10-min-back-simple_1)
+
+```graphql
+query PumpFunRecentTrades {
+  Solana {
+    DEXTradeByTokens(
+      limit: { count: 100 }
+      orderBy: { descendingByField: "Trade_lastPrice_maximum" }
+      where: {
+        Block: { Time: { since: "2024-08-07T06:50:00Z" } }
+        Trade: {
+          Currency: { Native: false }
+          Dex: { ProtocolName: { is: "pump" } }
         }
         Transaction: { Result: { Success: true } }
-        Block: { Time: { since: "2025-02-21T05:05:00Z" } }
       }
     ) {
       Trade {
-        Buy {
-          Price(maximum: Block_Time)
-          PriceInUSD(maximum: Block_Time)
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-## Track King of the Hill Tokens in realtime
-
-Below API will give you tokens that are getting traded in between 30K and 35K USD marketCap range in realtime. As King of the Hill tokens are the ones which just crossed the ~30K in marketcap as mentioned in this [official tweet](https://x.com/pumpdotfun/status/1760103287397793933?lang=en) by Pump Fun Team.
-You can try the API [here](https://ide.bitquery.io/track-King-of-the-hill-tokens).
-
-```
-subscription {
-  Solana {
-    DEXTrades(
-      where: {Trade: {Dex: {ProtocolName: {is: "pump_amm"}}, Buy: {PriceInUSD: {ge: 0.000030, le: 0.000035}}, Sell: {AmountInUSD: {gt: "10"}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Trade {
-        Buy {
-          Price
-          PriceInUSD
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
-        }
         Market {
           MarketAddress
         }
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+        lastPrice: Price(maximum: Block_Slot)
+        prePrice: Price(minimum: Block_Slot)
       }
     }
   }
 }
 ```
 
-## PumpFun Tokens between 400K and 450K MarketCap with Creation Date, Dev Address
+## Trade Activity & Volume
 
-Below query will give you pump fun tokens which are getting traded on PumpSwap in between the range of 400K and 450K USD Marketcap. Response will also contain the token's creation time and dev address. If you want to select your custom range of Marketcap, then change these prices accordingly `PriceInUSD: {gt: 0.0004, le: 0.00045}`.
-You can try out the query [here](https://ide.bitquery.io/pumpfun-tokens-between-400K-and-450K-MC-and-their-creation-date-dev-address_2)
+### Get Real-Time Trades on Pump Fun
 
-:::note
-Here we are only getting tokens which were created in last 8 hours.
-:::
-
-```
-{
-  Solana {
-    DEXTrades(
-      limitBy: {by: Trade_Buy_Currency_MintAddress, count: 1}
-      limit: {count: 10}
-      orderBy: {descending: Trade_Buy_Price}
-      where: {Trade: {Dex: {ProtocolName: {is: "pump_amm"}}, Buy: {Currency: {UpdateAuthority: {is: "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM"}}, PriceInUSD: {gt: 0.0004, le: 0.00045}}, Sell: {AmountInUSD: {gt: "10"}}}, Transaction: {Result: {Success: true}}, Block: {Time: {since: "2025-04-15T08:20:00Z"}}}
-    ) {
-      Trade {
-        Buy {
-          Price(maximum: Block_Time)
-          PriceInUSD(maximum: Block_Time)
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
-        }
-        Market {
-          MarketAddress
-        }
-      }
-      joinTokenSupplyUpdates(
-        TokenSupplyUpdate_Currency_MintAddress: Trade_Buy_Currency_MintAddress
-        join: inner
-        where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
-      ) {
-        Block {
-          Time
-        }
-        Transaction{
-          Dev: Signer
-          Signature
-        }
-      }
-    }
-  }
-}
-```
-
-## All Pumpfun Tokens crossed 10k Marketcap
-
-As all Pump Fun tokens have a 1 billion supply, based on the price itself, you can get all Pump Fun tokens that have crossed a sure market cap.
-Here is a [query](https://ide.bitquery.io/top-tokens-above-10k-USD-mktcap-on-pump-fun-in-last-15-min) that gives all tokens that crossed the 10k marketcap.
-
-```
-{
-  Solana {
-    DEXTrades(
-      limitBy: {by: Trade_Buy_Currency_MintAddress, count: 1}
-      limit: {count: 10}
-      orderBy: {descending: Trade_Buy_Price}
-      where: {Trade: {Dex: {ProtocolName: {is: "pump"}}, Buy: {Currency: {MintAddress: {notIn: ["11111111111111111111111111111111"]}}, PriceInUSD: {gt: 0.00001}}, Sell: {AmountInUSD: {gt: "10"}}}, Transaction: {Result: {Success: true}}, Block: {Time: {since: "2025-02-21T05:05:00Z"}}}
-    ) {
-      Trade {
-        Buy {
-          Price(maximum: Block_Time)
-          PriceInUSD(maximum: Block_Time)
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
-        }
-      }
-    }
-  }
-}
-
-```
-
-## ATH Marketcap of a Pumpfun Token
-
-As all Pump Fun tokens have a 1 billion supply, based on the ATH price itself, you can get the ATH MarketCap. Supply is fixed to 1 Billion. So marketcap can be calculated by multiplying supply to priceInUSD. Here we are getting price of the token in terms of `SOL`.
-Here is a [query](https://ide.bitquery.io/ATH-MC_1#) you can try out.
-
-```
-{
-  Solana {
-    DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "4sxfRwX5Dynqz5upN1Z5nbcSXYAAz51pVjbPFDMUpump"}}}}
-      limit: {count: 1}
-      orderBy: {descending: Trade_Price}
-    ) {
-      Trade {
-        PriceInSOL:Price
-      }
-    }
-  }
-}
-```
-
-## ATH Marketcap of a Pumpfun Token in a secific timeframe
-
-As all Pump Fun tokens have a 1 billion supply, based on the ATH price in a specific timeframe itself, you can get the ATH MarketCap in a specific timeframe. Supply is fixed to 1 Billion. So marketcap can be calculated by multiplying supply to priceInUSD. Here we are getting price of the token in terms of `SOL`.
-Here is a [query](https://ide.bitquery.io/ATH-MC-till-2minutes-prior#) you can try out.
-
-```
-{
-  Solana {
-    DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "4sxfRwX5Dynqz5upN1Z5nbcSXYAAz51pVjbPFDMUpump"}}}, Block: {Time: {till: "2025-06-03T06:37:00Z"}}}
-      limit: {count: 1}
-      orderBy: {descending: Trade_Price}
-    ) {
-      Trade {
-        PriceInSOL:Price
-      }
-    }
-  }
-}
-
-```
-
-## Pump Fun Trades in Real-Time
-
-The below query gets real-time information whenever there's a new trade on the Pump.fun including program method called , buy and sell details, details of the currencies involved, and the transaction specifics like signature.
-You can run the query [here](https://ide.bitquery.io/Pumpfun-DEX-Trades_1#)
+Streams live trades, including buy/sell sides, amounts, involved accounts, and methods
+[Run Stream ➤](https://ide.bitquery.io/Pumpfun-DEX-Trades_1#)
 
 ```graphql
 subscription MyQuery {
@@ -306,161 +609,293 @@ subscription MyQuery {
 }
 ```
 
-## Track newly created Pump Fun tokens, Creation Time, Dev Address, Metadata
+### Get Latest Trades for a Token
 
-Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+Retrieves recent trades with detailed price, amount, and sides
+[Run Query ➤](https://ide.bitquery.io/get-latest-trades-of-a-pump-fun-token_6)
 
-```
-subscription {
+```graphql
+query pumpfunTokenLatestTrades($token: String) {
   Solana {
-    TokenSupplyUpdates(
-      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
-    ) {
-      Block{
-        Time
-      }
-      Transaction{
-        Signer
-      }
-      TokenSupplyUpdate {
-        Amount
-        Currency {
-          Symbol
-          ProgramAddress
-          PrimarySaleHappened
-          Native
-          Name
-          MintAddress
-          MetadataAddress
-          Key
-          IsMutable
-          Fungible
-          EditionNonce
-          Decimals
-          Wrapped
-          VerifiedCollection
-          Uri
-          UpdateAuthority
-          TokenStandard
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limit: { count: 50 }
+      where: {
+        Trade: {
+          Currency: { MintAddress: { is: $token } }
+          Price: { gt: 0 }
+          Dex: { ProtocolName: { is: "pump" } }
         }
-        PostBalance
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Block {
+        allTime: Time
+      }
+      Trade {
+        Account {
+          Address
+          Owner
+        }
+        Side {
+          Type
+        }
+        Price
+        Amount
+        Side {
+          AmountInUSD
+          Amount
+        }
       }
     }
   }
 }
-
 ```
 
-## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token
+```json
+{
+  "token": "FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93"
+}
+```
 
-The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
-You can run the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair_10)
+### Get Token’s Trading Volume
+
+Get volume traded for a token since a specific time
+[Run Query ➤](https://ide.bitquery.io/trading-volume-of-a-token-pump-fun)
+
+```graphql
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump" }
+          }
+          Dex: { ProtocolName: { is: "pump" } }
+        }
+        Block: { Time: { since: "2024-06-27T06:46:00Z" } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+      }
+      TradeVolume: sum(of: Trade_Amount)
+    }
+  }
+}
+```
+
+### Get Detailed Trade Stats: Volume, Buys, Sells, Makers, Buyers, Sellers
+
+Includes 5-minute and 1-hour metrics for deep token analytics
+[Run Query ➤](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair_10)
 
 ```graphql
 query MyQuery($token: String!, $pair_address: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime!) {
   Solana(dataset: realtime) {
     DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}},Trade: {Currency: {MintAddress: {is: $token}}, Market: {MarketAddress: {is: $pair_address}}}, Block: {Time: {since: $time_1h_ago}}}
-    ) {
-      Trade {
-        Currency {
-          Name
-          MintAddress
-          Symbol
-        }
-        start: PriceInUSD(minimum: Block_Time)
-        min5: PriceInUSD(
-          minimum: Block_Time
-          if: {Block: {Time: {after: $time_5min_ago}}}
-        )
-        end: PriceInUSD(maximum: Block_Time)
-        Dex {
-          ProtocolName
-          ProtocolFamily
-          ProgramAddress
-        }
-        Market {
-          MarketAddress
-        }
-        Side {
-          Currency {
-            Symbol
-            Name
-            MintAddress
-          }
-        }
+      where: {
+        Transaction: { Result: { Success: true } },
+        Trade: {
+          Currency: { MintAddress: { is: $token } },
+          Market: { MarketAddress: { is: $pair_address } }
+        },
+        Block: { Time: { since: $time_1h_ago } }
       }
-      makers: count(distinct: Transaction_Signer)
-      makers_5min: count(
-        distinct: Transaction_Signer
-        if: {Block: {Time: {after: $time_5min_ago}}}
-      )
-      buyers: count(
-        distinct: Transaction_Signer
-        if: {Trade: {Side: {Type: {is: buy}}}}
-      )
-      buyers_5min: count(
-        distinct: Transaction_Signer
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
-      sellers: count(
-        distinct: Transaction_Signer
-        if: {Trade: {Side: {Type: {is: sell}}}}
-      )
-      sellers_5min: count(
-        distinct: Transaction_Signer
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
-      trades: count
-      trades_5min: count(if: {Block: {Time: {after: $time_5min_ago}}})
-      traded_volume: sum(of: Trade_Side_AmountInUSD)
-      traded_volume_5min: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Block: {Time: {after: $time_5min_ago}}}
-      )
-      buy_volume: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: buy}}}}
-      )
-      buy_volume_5min: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
-      sell_volume: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: sell}}}}
-      )
-      sell_volume_5min: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
-      buys: count(if: {Trade: {Side: {Type: {is: buy}}}})
-      buys_5min: count(
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
-      sells: count(if: {Trade: {Side: {Type: {is: sell}}}})
-      sells_5min: count(
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
+    ) {
+      ...
     }
   }
 }
+```
+
+```json
 {
-  "token":"3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog",
+  "token": "3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog",
   "pair_address": "7NhN7yzHkuttbA8JBqboRXTXmMi3DkJ61MN3SgEPg5VZ",
-  "time_5min_ago":"2025-02-18T10:10:00Z",
+  "time_5min_ago": "2025-02-18T10:10:00Z",
   "time_1h_ago": "2025-02-18T09:15:00Z"
 }
 ```
 
-## Get Market Cap, Price Liquidity, Bonding Curve, Trade Volume for any Pump Fun Token
+### Get First 100 Buyers of a Token
 
-[This](https://ide.bitquery.io/mcap-liquidity-bonding-curve-volume-supply-of-a-token-in-time-frame) query returns important trade metrics like marketcap,
-liquidity, price, bonding curve and trade volume of a Pump Fun token for a time frame of one hour. Please note that the query is using `time_1h_ago` field only for the volume calculation other than that all the metrics will calculated for the current time.
+Get wallet addresses of first 100 accounts who bought a token
+[Run Query ➤](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1)
 
-:::note
-Use this formulae to calculate Bonding curve, BondingCurveProgress = 100 - (((balance - 206900000) \* 100) / 793100000), `balance` here is the Balance of the Base Currency in the Pool.
-:::
+```graphql
+query MyQuery {
+  Solana {
+    DEXTrades(
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              MintAddress: {
+                is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump"
+              }
+            }
+          }
+        }
+      }
+      limit: { count: 100 }
+      orderBy: { ascending: Block_Time }
+    ) {
+      Trade {
+        Buy {
+          Amount
+          Account {
+            Token {
+              Owner
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Check If First 100 Buyers Still Holding
+
+Pass the owner addresses from the above query to evaluate holdings
+[Run Query ➤](https://ide.bitquery.io/balance-of-a-specific-token-at-the-specific-account-address)
+
+```graphql
+query MyQuery {
+  Solana {
+    BalanceUpdates(
+      where: {
+        BalanceUpdate: {
+          Account: {
+            Token: {
+              Owner: {
+                in: [
+                  "ApRJBQEKfmcrViQkH94BkzRFUGWtA8uC71DXu6USdd3n"
+                  "9nG4zw1jVJFpEtSLmbGQpTnpG2TiKfLXWkkTyyRvxTt6"
+                ]
+              }
+            }
+          }
+          Currency: {
+            MintAddress: { is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump" }
+          }
+        }
+      }
+    ) {
+      BalanceUpdate {
+        Account {
+          Token {
+            Owner
+          }
+        }
+        balance: PostBalance(maximum: Block_Slot)
+      }
+    }
+  }
+}
+```
+
+## Token Liquidity, Pools & Pairs
+
+### Get All Trading Pairs of a Token
+
+Lists all markets where the token is traded, including pair addresses
+[Run Query ➤](https://ide.bitquery.io/get-all-the-trading-pairs-of-a-specific-token)
+
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "FbwpvsuMbnik52wK3n9jMJ5MearZGJsavhLceVkNRVzY" }
+          }
+        }
+      }
+    ) {
+      count
+      Trade {
+        Market {
+          MarketAddress
+        }
+        Dex {
+          ProgramAddress
+          ProtocolName
+          ProtocolFamily
+        }
+        Currency {
+          MintAddress
+          Symbol
+        }
+      }
+    }
+  }
+}
+```
+
+### Get Liquidity of Pump Fun Tokens
+
+Gets pool token balances for liquidity estimation across multiple known pool accounts
+[Run Query ➤](https://ide.bitquery.io/Pumpfun-pools--token-balances)
+
+```graphql
+{
+  Solana {
+    BalanceUpdates(
+      where: {
+        Block: { Time: { since: "2024-06-25T07:00:00Z" } }
+        BalanceUpdate: {
+          Account: {
+            Token: {
+              Owner: {
+                in: [
+                  "BesTLFfCP9tAuUDWnqPdtDXZRu5xK6XD8TrABXGBECuf"
+                  "62dvmMKAfnt8jSdT3ToZtxAasx7Ud1tJ6xWsjwwhfaEQ"
+                  "73ZzSgNi27V9MdNQYyE39Vs9m1P9ZKgGPCHAJHin5gLd"
+                  "DwPwU1PAjTXtYNYkeR6awYMDBdSEk12npKzJWKbDHMta"
+                  "FJ4P2a2FqaWmqYpBw9eEfWD6cXV3F2qLPHvAA5jozscS"
+                  "6crUHiCoxZsQuxdMAB18VATKrg7ToyTVxt7MbLYmtugu"
+                ]
+              }
+            }
+          }
+          Currency: { Native: false }
+        }
+      }
+    ) {
+      BalanceUpdate {
+        Account {
+          Token {
+            Owner
+          }
+          Address
+        }
+        Currency {
+          MintAddress
+          Native
+        }
+        PostBalance(maximum: Block_Slot)
+      }
+    }
+  }
+}
+```
+
+### Get Market Cap, Price, Liquidity, Bonding Curve, and Volume
+
+Returns detailed token metrics including bonding curve status
+[Run Query ➤](https://ide.bitquery.io/mcap-liquidity-bonding-curve-volume-supply-of-a-token-in-time-frame)
 
 ```graphql
 query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
@@ -546,8 +981,6 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
 }
 ```
 
-These are the variables used for running this query.
-
 ```json
 {
   "time_1h_ago": "2025-05-07T09:25:00Z",
@@ -556,805 +989,10 @@ These are the variables used for running this query.
 }
 ```
 
-## Get Latest Trades for a Pump Fun Token
+### Get Last Pump Fun Trade Before Token Graduates to Raydium
 
-The below query gets latest trades data of the specified Token `FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93`.
-You can run the query [here](https://ide.bitquery.io/get-latest-trades-of-a-pump-fun-token_6)
-
-```graphql
-query pumpfunTokenLatestTrades($token: String) {
-  Solana {
-    DEXTradeByTokens(
-      orderBy: {descending: Block_Time}
-      limit: {count: 50}
-      where: {Trade: {Currency: {MintAddress: {is: $token}}, Price: {gt: 0}, Dex: {ProtocolName: {is: "pump"}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Block {
-        allTime: Time
-      }
-      Trade {
-        Account {
-          Address
-          Owner
-        }
-        Side {
-          Type
-        }
-        Price
-        Amount
-        Side {
-          AmountInUSD
-          Amount
-        }
-      }
-    }
-  }
-}
-{
-  "token": "FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93"
-}
-```
-
-![image](https://github.com/user-attachments/assets/cfee7e77-0de6-4b0a-a72d-54a460a4075a)
-
-Check data here on [DEXrabbit](https://dexrabbit.com/solana/pumpfun/FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93#latest_trades).
-
-## Track New Token Creation on Pump Fun
-
-Get notified about the newly created token and its information on Pump Fun DEX for getting early bird benefits.
-
-[Here](https://ide.bitquery.io/Track-new-token-launches-on-Pump-Fun-in-realtime) is the subscription to get the notification of a new token creation event on Pump Fun.
-
-```graphql
-subscription {
-  Solana {
-    Instructions(
-      where: {
-        Instruction: {
-          Program: { Method: { is: "create" }, Name: { is: "pump" } }
-        }
-      }
-    ) {
-      Instruction {
-        Accounts {
-          Address
-          IsWritable
-          Token {
-            Mint
-            Owner
-            ProgramId
-          }
-        }
-        Logs
-        Program {
-          AccountNames
-          Address
-          Arguments {
-            Name
-            Type
-            Value {
-              ... on Solana_ABI_Json_Value_Arg {
-                json
-              }
-              ... on Solana_ABI_Float_Value_Arg {
-                float
-              }
-              ... on Solana_ABI_Boolean_Value_Arg {
-                bool
-              }
-              ... on Solana_ABI_Bytes_Value_Arg {
-                hex
-              }
-              ... on Solana_ABI_BigInt_Value_Arg {
-                bigInteger
-              }
-              ... on Solana_ABI_Address_Value_Arg {
-                address
-              }
-              ... on Solana_ABI_String_Value_Arg {
-                string
-              }
-              ... on Solana_ABI_Integer_Value_Arg {
-                integer
-              }
-            }
-          }
-          Method
-          Name
-        }
-      }
-      Transaction {
-        Signature
-      }
-    }
-  }
-}
-```
-
-## Get the creation time & creator of a Pump Fun Token
-
-The below query fetches the details of Token creation time & Creator of a specific token `Edazh5SW6ts7PocPvPgjrdKyqqszcRcqdB22B8tapump`.
-Here you can find [saved query](https://ide.bitquery.io/PumpFun-Token-creation-time--creator).
-
-```
-query MyQuery {
-  Solana(network: solana) {
-    Instructions(
-      where: {Instruction: {Accounts: {includes: {Address: {is: "Edazh5SW6ts7PocPvPgjrdKyqqszcRcqdB22B8tapump"}}}, Program: {Name: {is: "pump"}, Method: {is: "create"}}}}
-    ) {
-      Block{
-        Time
-      }
-      Transaction {
-        Signer
-        Signature
-      }
-      Instruction {
-        Accounts {
-          Address
-        }
-      }
-    }
-  }
-}
-```
-
-## Top Token Creators on Pump Fun
-
-The below query fetches details about token creators filtering using the `pump` program and `create` method.
-The `descendingByField: "tokens_count":` Orders the results in descending order based on the count of tokens created.
-You can run the query [here](https://ide.bitquery.io/Top-pump-fun-token-creators)
-
-```
-query MyQuery {
-  Solana(network: solana) {
-    Instructions(
-      where: {Instruction: {Program: {Name: {is: "pump"}, Method: {is: "create"}}}}
-      orderBy: {descendingByField: "tokens_count"}
-    ) {
-      tokens_count: count
-      Transaction {
-        Signer
-      }
-    }
-  }
-}
-```
-
-## Get Token Details like Volume, OHLC, Dev Holding, Top Holders
-
-You can use the below query to get pump fun token related stats such as volume, OHLC, Dev holdings and top holders of the token. Try out query [here](https://ide.bitquery.io/solana-query-for-token-details)
-
-```
-query ($tokenAddress: String, $devAddress: String, $pairAddress: String) {
-  Solana {
-    volume: DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: $tokenAddress}}}}
-    ) {
-      sum(of: Trade_Side_AmountInUSD)
-    }
-    chart: DEXTradeByTokens(
-      limit: {count: 50}
-      orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: $tokenAddress}}, Market: {MarketAddress: {is: $pairAddress}}}}
-    ) {
-      Block {
-        Timefield: Time(interval: {in: minutes, count: 1})
-      }
-      volume: sum(of: Trade_Amount)
-      Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Slot)
-        close: Price(maximum: Block_Slot)
-      }
-      count
-    }
-    devHolding: BalanceUpdates(
-      where: {BalanceUpdate: {Account: {Owner: {is: $devAddress}}, Currency: {MintAddress: {is: $tokenAddress}}}}
-    ) {
-      BalanceUpdate {
-        balance: PostBalance(maximum: Block_Slot, selectWhere: {gt: "0"})
-      }
-    }
-    topHoldings: BalanceUpdates(
-      limit: {count: 10}
-      orderBy: {descendingByField: "BalanceUpdate_Holding_maximum"}
-      where: {BalanceUpdate: {Currency: {MintAddress: {is: $tokenAddress}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      BalanceUpdate {
-        Currency {
-          Name
-          MintAddress
-          Symbol
-        }
-        Account {
-          Owner
-        }
-        Holding: PostBalance(maximum: Block_Slot, selectWhere: {gt: "0"})
-      }
-    }
-  }
-}
-{
-  "tokenAddress": "2MgQAUxR3KtRGXby9x86fYdZQT8KNjsJzq7atKjJpump",
-  "pairAddress": "HK2bpr3F1HPVuoqUb3QRAheSSMezyzGG6QhQGC2S1beu"
-}
-```
-
-## Get OHLC Data of a Token on Pump Fun
-
-The below query gets OHLC data of the specified Token `66VR6bjEV5DPSDhYSQyPAxNsY3dgmH6Lwgi5cyf2pump` for 1 minute time interval for last 10 minutes on Pump Fun DEX.
-You can run the query [here](https://ide.bitquery.io/OHLC-for-a-token-on-Pump-Fun_10)
-
-Note - You can only use this API using `query` keyword, using this API as `subscription` will give wrong results because aggregation and interval don't work correctly together in `subscription`.
-
-```graphql
-{
-  Solana {
-    DEXTradeByTokens(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "Block_Timefield" }
-      where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "66VR6bjEV5DPSDhYSQyPAxNsY3dgmH6Lwgi5cyf2pump" }
-          }
-          Dex: {
-            ProgramAddress: {
-              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
-            }
-          }
-          PriceAsymmetry: { lt: 0.1 }
-        }
-      }
-    ) {
-      Block {
-        Timefield: Time(interval: { in: minutes, count: 1 })
-      }
-      volume: sum(of: Trade_Amount)
-      Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Slot)
-        close: Price(maximum: Block_Slot)
-      }
-      count
-    }
-  }
-}
-```
-
-![image](https://github.com/user-attachments/assets/cf89991b-3968-4775-9ee3-40c719577326)
-
-Check data here on [DEXrabbit](https://dexrabbit.com/solana/pumpfun/FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93).
-
-## Track Price of a Token in Realtime on Pump Fun
-
-The below query gets real-time price of the specified Token `qXqLE8rNJ5zn4g5E5M6zddyhx5NbtrFqfHaBV4Zpump` on the Pump Fun DEX.
-You can run the query [here](https://ide.bitquery.io/Price-of-a-pump-fun-token_1)
-
-```graphql
-subscription MyQuery {
-  Solana {
-    DEXTradeByTokens(
-      where: {
-        Trade: {
-          Dex: {
-            ProgramAddress: {
-              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
-            }
-          }
-          Currency: {
-            MintAddress: { is: "qXqLE8rNJ5zn4g5E5M6zddyhx5NbtrFqfHaBV4Zpump" }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Block {
-        Time
-      }
-      Trade {
-        Currency {
-          MintAddress
-          Name
-          Symbol
-        }
-        Dex {
-          ProtocolName
-          ProtocolFamily
-          ProgramAddress
-        }
-        Side {
-          Currency {
-            MintAddress
-            Symbol
-            Name
-          }
-        }
-        Price
-        PriceInUSD
-      }
-      Transaction {
-        Signature
-      }
-    }
-  }
-}
-```
-
-## Get Latest Price of a Token on Pump Fun
-
-The below query gets real-time price of the specified Token `qXqLE8rNJ5zn4g5E5M6zddyhx5NbtrFqfHaBV4Zpump` on the Pump Fun DEX.
-You can run the query [here](https://ide.bitquery.io/Price-of-a-pump-fun-token_7)
-
-```graphql
-query MyQuery {
-  Solana {
-    DEXTradeByTokens(
-      orderBy: { descending: Block_Time }
-      limit: { count: 10 }
-      where: {
-        Trade: {
-          Dex: {
-            ProgramAddress: {
-              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
-            }
-          }
-          Currency: {
-            MintAddress: { is: "3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog" }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Block {
-        Time
-      }
-      Trade {
-        Currency {
-          MintAddress
-          Name
-          Symbol
-        }
-        Dex {
-          ProtocolName
-          ProtocolFamily
-          ProgramAddress
-        }
-        Side {
-          Currency {
-            MintAddress
-            Symbol
-            Name
-          }
-        }
-        Price
-        PriceInUSD
-      }
-      Transaction {
-        Signature
-      }
-    }
-  }
-}
-```
-
-## Get the Top Token Holders of a specific Token
-
-This query gives you Top 10 Token Holders for this specific token `2GxdEZQ5d9PsUqyGy43qv4fmNJWrnLp6qY4dTyNepump`. The query provides you the top 10 holders addresses and also their balances of this token. You can change the token address in query as per your needs.
-You can run the query [here](https://ide.bitquery.io/top-token-holders-for-a-pump-fun-token)
-
-```graphql
-query MyQuery {
-  Solana(dataset: realtime) {
-    BalanceUpdates(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "BalanceUpdate_Holding_maximum" }
-      where: {
-        BalanceUpdate: {
-          Currency: {
-            MintAddress: { is: "2GxdEZQ5d9PsUqyGy43qv4fmNJWrnLp6qY4dTyNepump" }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      BalanceUpdate {
-        Currency {
-          Name
-          MintAddress
-          Symbol
-        }
-        Account {
-          Address
-        }
-        Holding: PostBalance(maximum: Block_Slot)
-      }
-    }
-  }
-}
-```
-
-![image](https://github.com/user-attachments/assets/b7c307de-fce7-4cd2-8e89-b06c0af506e7)
-
-Check data here on [DEXrabbit](https://dexrabbit.com/solana/pumpfun/FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93#holders).
-
-## Get the Trading Volume of a specific Token on Pump Fun DEX
-
-The below query gets the Trading volume of the specified Token `HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump` on the Pump Fun DEX. You will have to change the time in this `Block: { Time: { since: "2024-06-27T06:46:00Z" } }` when you try the query yourself. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
-You can run the query [here](https://ide.bitquery.io/trading-volume-of-a-token-pump-fun)
-
-```graphql
-query MyQuery {
-  Solana {
-    DEXTradeByTokens(
-      where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump" }
-          }
-          Dex: { ProtocolName: { is: "pump" } }
-        }
-        Block: { Time: { since: "2024-06-27T06:46:00Z" } }
-      }
-    ) {
-      Trade {
-        Currency {
-          Name
-          Symbol
-          MintAddress
-        }
-        Dex {
-          ProtocolName
-          ProtocolFamily
-        }
-      }
-      TradeVolume: sum(of: Trade_Amount)
-    }
-  }
-}
-```
-
-## Get the Dev's holdings of a token
-
-The below query retrieves the developer's holdings of the specified Token. To get the dev address first [check this out](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#get-the-creation-time--creator-of-a-pump-fun-token).
-You can run the query [here](https://ide.bitquery.io/trading-volume-of-a-token-pump-fun)
-
-```graphql
-query MyQuery ($dev: String, $token:String){
-  Solana {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Account: {Owner: {is: $dev}}, Currency: {MintAddress: {is: $token}}}}
-    ){
-      BalanceUpdate{
-        balance:PostBalance(maximum:Block_Slot)
-      }
-    }
-  }
-}
-{
-  "dev":"8oTWME5BPpudMksqEKfn562pGobrtnEpNsG66hBBgx92",
-  "token":"Edazh5SW6ts7PocPvPgjrdKyqqszcRcqdB22B8tapump"
-}
-```
-
-## Get the First 100 buyers of a Pump Fun Token
-
-The below query retrieves the first 100 buyers of a secified token.
-You can run the query [here](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1)
-
-```graphql
-query MyQuery {
-  Solana {
-    DEXTrades(
-      where: {
-        Trade: {
-          Buy: {
-            Currency: {
-              MintAddress: {
-                is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump"
-              }
-            }
-          }
-        }
-      }
-      limit: { count: 100 }
-      orderBy: { ascending: Block_Time }
-    ) {
-      Trade {
-        Buy {
-          Amount
-          Account {
-            Token {
-              Owner
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-## Check if first 100 buyers still Holding, Sold all, Bought more
-
-The below query will give you token holdings for a particular account address but you can pass the array of addresses that you got from just [above query](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1). Now you will be able to check if the first 100 buyers still holding their tokens, sold all or bought more. To check if they bought more you can compare with the above [first 100 buyers query's](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1) `amount` field.
-
-You can run the query [here](https://ide.bitquery.io/balance-of-a-specific-token-at-the-specific-account-address)
-
-```graphql
-query MyQuery {
-  Solana {
-    BalanceUpdates(
-      where: {
-        BalanceUpdate: {
-          Account: {
-            Token: {
-              Owner: {
-                in: [
-                  "ApRJBQEKfmcrViQkH94BkzRFUGWtA8uC71DXu6USdd3n"
-                  "9nG4zw1jVJFpEtSLmbGQpTnpG2TiKfLXWkkTyyRvxTt6"
-                ]
-              }
-            }
-          }
-          Currency: {
-            MintAddress: { is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump" }
-          }
-        }
-      }
-    ) {
-      BalanceUpdate {
-        Account {
-          Token {
-            Owner
-          }
-        }
-        balance: PostBalance(maximum: Block_Slot)
-      }
-    }
-  }
-}
-```
-
-## Get Token's creation time, Dev Address, Metadata
-
-The below query will get you specific token's dev address, creation time and metadata only if the token was created in the last 8 hours as we only have last 8 hours of Solana Data. You can use the below query if currency{name, symbol, uri} data fields from query builder gives you empty result for pump fun token metadata.
-The below query gets the arguments passed during creation of this specific token `2CAETyBJk83aGsmU65uLP3s78pigdUNJv3uRWamFpump` which are `name`, `symbol` and `uri` using Bitquery's Solana Instructions API.
-
-You can run the query [here](https://ide.bitquery.io/get-PF-tokens-creation-time-dev-address-metadata)
-
-```graphql
-{
-  Solana {
-    TokenSupplyUpdates(
-      where: {
-        Instruction: {
-          Program: {
-            Address: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
-            Method: { is: "create" }
-          }
-        }
-        TokenSupplyUpdate: {
-          Currency: {
-            MintAddress: { is: "3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog" }
-          }
-        }
-      }
-    ) {
-      Block {
-        Time
-      }
-      Transaction {
-        Signer
-      }
-      TokenSupplyUpdate {
-        Amount
-        Currency {
-          Symbol
-          ProgramAddress
-          PrimarySaleHappened
-          Native
-          Name
-          MintAddress
-          MetadataAddress
-          Key
-          IsMutable
-          Fungible
-          EditionNonce
-          Decimals
-          Wrapped
-          VerifiedCollection
-          Uri
-          UpdateAuthority
-          TokenStandard
-        }
-        PostBalance
-      }
-    }
-  }
-}
-```
-
-## Get the Top Traders of a specific Token on Pump Fun DEX
-
-The below query gets the Top Traders of the specified Token `FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93` which was launched on pump fun. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
-You can run the query [here](https://ide.bitquery.io/top-traders-of-a-pump-fun-token_2)
-
-```graphql
-query TopTraders($token: String) {
-  Solana {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "volumeUsd"}
-      limit: {count: 100}
-      where: {Trade: {Currency: {MintAddress: {is: $token}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Trade {
-        Account {
-          Owner
-        }
-      }
-      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
-      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
-      volume: sum(of: Trade_Amount)
-      volumeUsd: sum(of: Trade_Side_AmountInUSD)
-    }
-  }
-}
-{
-  "token": "FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93",
-  "pool": "5Ezr4oK1vTV4m8f7g8P1Be1uwtzczhf21AztwNxWcmwM"
-}
-```
-
-![image](https://github.com/user-attachments/assets/96057a8f-b884-4b6d-96d7-b3ac07924501)
-
-Check data here on [DEXrabbit](https://dexrabbit.com/solana/pumpfun/FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93#top_trades).
-
-## All tokens created by an address
-
-To get all pump fun tokens created by address use [this query](https://ide.bitquery.io/all-Pump-fun-tokens-created-by-an-address).
-
-```
-query MyQuery {
-  Solana {
-    TokenSupplyUpdates(
-      where: {Transaction: {Result: {Success: true}, Signer: {is: "8uydUdb3DiQijXPDfzwuJCNiqfFQzCzinFDXRFHQQgCB"}}, Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
-    ) {
-      Block {
-        Time
-      }
-      TokenSupplyUpdate {
-        Amount
-        Currency {
-          Uri
-          UpdateAuthority
-          Symbol
-          Name
-          MintAddress
-          MetadataAddress
-          Fungible
-          Decimals
-        }
-        PostBalance
-      }
-      Transaction {
-        Signature
-        Signer
-      }
-    }
-  }
-}
-
-```
-
-## Pump Fun Token first and last price
-
-To check the first and last price to calculate the price change in the last X minutes, use [this query](https://ide.bitquery.io/Pumpfun-coins-with-price--mc-with-limit-and-delta-from-10-min-back-simple_1).
-In this query, the `from` time should be when you need the price change. For example, if you want a price change for the last 10 minutes, then `from` should be 10 minutes before now.
-
-```
-query PumpFunRecentTrades {
-  Solana {
-    DEXTradeByTokens(
-      limit: {count: 100}
-      orderBy: {descendingByField: "Trade_lastPrice_maximum"}
-      where: {Block: {Time: {since: "2024-08-07T06:50:00Z"}},
-        Trade: {Currency: {Native: false},
-          Dex: {ProtocolName: {is: "pump"}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Trade {
-        Market {
-          MarketAddress
-        }
-        Currency {
-          Symbol
-          Name
-          MintAddress
-        }
-        lastPrice: Price(maximum: Block_Slot)
-        prePrice: Price(minimum: Block_Slot)
-      }
-    }
-  }
-}
-```
-
-## Get all the trading pairs of a token
-
-You can get all the trading pairs of the specific token. Use [this query](https://ide.bitquery.io/get-all-the-trading-pairs-of-a-specific-token).
-
-```
-{
-  Solana {
-    DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "FbwpvsuMbnik52wK3n9jMJ5MearZGJsavhLceVkNRVzY"}}}}
-    ) {
-      count
-      Trade {
-        Market {
-          MarketAddress
-        }
-        Dex{
-          ProgramAddress
-          ProtocolName
-          ProtocolFamily
-        }
-        Currency {
-          MintAddress
-          Symbol
-        }
-      }
-    }
-  }
-}
-```
-
-## Getting Liquidity for Pump fun tokens
-
-To get Liquidity of tokens, we will get balance of pools for pool tokens. You can check [this query](https://ide.bitquery.io/Pumpfun-pools--token-balances).
-
-```
-{
-  Solana {
-    BalanceUpdates(
-      where: {Block: {Time: {since: "2024-06-25T07:00:00Z"}},
-        BalanceUpdate: {Account: {Token: {Owner: {in: [
-    "BesTLFfCP9tAuUDWnqPdtDXZRu5xK6XD8TrABXGBECuf",
-    "62dvmMKAfnt8jSdT3ToZtxAasx7Ud1tJ6xWsjwwhfaEQ",
-    "73ZzSgNi27V9MdNQYyE39Vs9m1P9ZKgGPCHAJHin5gLd",
-    "DwPwU1PAjTXtYNYkeR6awYMDBdSEk12npKzJWKbDHMta",
-    "FJ4P2a2FqaWmqYpBw9eEfWD6cXV3F2qLPHvAA5jozscS",
-    "6crUHiCoxZsQuxdMAB18VATKrg7ToyTVxt7MbLYmtugu"
-  ]}}},
-          Currency: {Native: false}}}
-    ) {
-      BalanceUpdate {
-        Account {
-          Token {
-            Owner
-          }
-          Address
-        }
-        Currency {
-          MintAddress
-          Native
-        }
-        PostBalance(maximum: Block_Slot)
-      }
-    }
-  }
-}
-
-```
-
-## Last Pumpfun Trade before Token Graduate to Raydium
-
-You can use the following query to get the last trade before token graduates to Raydium.
-
-You can also run this query [using this link](https://ide.bitquery.io/pump-fun-token-graduating-to-raydium).
+Finds the final pool trade before a token transitions to Raydium
+[Run Query ➤](https://ide.bitquery.io/pump-fun-token-graduating-to-raydium)
 
 ```graphql
 {
@@ -1413,42 +1051,386 @@ You can also run this query [using this link](https://ide.bitquery.io/pump-fun-t
 }
 ```
 
-## Pump.Fun API | Get Live Prices, Metadata, OHLCV, Trading Pair Stats, Charts
+## Token Holder & Trader Insights
+
+### Get Dev’s Holdings of a Token
+
+Returns the developer’s current token holdings
+[Run Query ➤](https://ide.bitquery.io/trading-volume-of-a-token-pump-fun)
+
+```graphql
+query MyQuery($dev: String, $token: String) {
+  Solana {
+    BalanceUpdates(
+      where: {
+        BalanceUpdate: {
+          Account: { Owner: { is: $dev } }
+          Currency: { MintAddress: { is: $token } }
+        }
+      }
+    ) {
+      BalanceUpdate {
+        balance: PostBalance(maximum: Block_Slot)
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "dev": "8oTWME5BPpudMksqEKfn562pGobrtnEpNsG66hBBgx92",
+  "token": "Edazh5SW6ts7PocPvPgjrdKyqqszcRcqdB22B8tapump"
+}
+```
+
+### Get Top 10 Token Holders
+
+Returns wallet addresses and holdings of top 10 token holders
+[Run Query ➤](https://ide.bitquery.io/top-token-holders-for-a-pump-fun-token)
+
+```graphql
+query MyQuery {
+  Solana(dataset: realtime) {
+    BalanceUpdates(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "BalanceUpdate_Holding_maximum" }
+      where: {
+        BalanceUpdate: {
+          Currency: {
+            MintAddress: { is: "2GxdEZQ5d9PsUqyGy43qv4fmNJWrnLp6qY4dTyNepump" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      BalanceUpdate {
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        Account {
+          Address
+        }
+        Holding: PostBalance(maximum: Block_Slot)
+      }
+    }
+  }
+}
+```
+
+### Get Top Traders of a Token
+
+Returns top 100 wallets ranked by USD trade volume
+[Run Query ➤](https://ide.bitquery.io/top-traders-of-a-pump-fun-token_2)
+
+```graphql
+query TopTraders($token: String) {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 100 }
+      where: {
+        Trade: { Currency: { MintAddress: { is: $token } } }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Trade {
+        Account {
+          Owner
+        }
+      }
+      bought: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sold: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+```
+
+```json
+{
+  "token": "FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93",
+  "pool": "5Ezr4oK1vTV4m8f7g8P1Be1uwtzczhf21AztwNxWcmwM"
+}
+```
+
+### Get Top Token Creators
+
+Find wallet addresses of top creators by number of tokens launched
+[Run Query ➤](https://ide.bitquery.io/Top-pump-fun-token-creators)
+
+```graphql
+query MyQuery {
+  Solana(network: solana) {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: { Name: { is: "pump" }, Method: { is: "create" } }
+        }
+      }
+      orderBy: { descendingByField: "tokens_count" }
+    ) {
+      tokens_count: count
+      Transaction {
+        Signer
+      }
+    }
+  }
+}
+```
+
+## Token Rankings & Filters
+
+### Top Pump Fun Tokens by Market Cap
+
+Returns top tokens by price (1B supply = price × 1B = market cap)
+[Run Query ➤](https://ide.bitquery.io/top-tokens-by-mktcap-on-pump-fun-in-last-15-min)
+
+```graphql
+{
+  Solana {
+    DEXTrades(
+      limitBy: { by: Trade_Buy_Currency_MintAddress, count: 1 }
+      limit: { count: 10 }
+      orderBy: { descending: Trade_Buy_Price }
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "pump" } }
+          Buy: {
+            Currency: {
+              MintAddress: { notIn: ["11111111111111111111111111111111"] }
+            }
+          }
+          PriceAsymmetry: { le: 0.1 }
+          Sell: { AmountInUSD: { gt: "10" } }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since: "2025-02-21T05:05:00Z" } }
+      }
+    ) {
+      Trade {
+        Buy {
+          Price(maximum: Block_Time)
+          PriceInUSD(maximum: Block_Time)
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### All Tokens Above 10K Market Cap
+
+Returns tokens with price above 0.00001 (i.e., 10K+ market cap)
+[Run Query ➤](https://ide.bitquery.io/top-tokens-above-10k-USD-mktcap-on-pump-fun-in-last-15-min)
+
+```graphql
+{
+  Solana {
+    DEXTrades(
+      limitBy: { by: Trade_Buy_Currency_MintAddress, count: 1 }
+      limit: { count: 10 }
+      orderBy: { descending: Trade_Buy_Price }
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "pump" } }
+          Buy: {
+            Currency: {
+              MintAddress: { notIn: ["11111111111111111111111111111111"] }
+            }
+            PriceInUSD: { gt: 0.00001 }
+          }
+          Sell: { AmountInUSD: { gt: "10" } }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since: "2025-02-21T05:05:00Z" } }
+      }
+    ) {
+      Trade {
+        Buy {
+          Price(maximum: Block_Time)
+          PriceInUSD(maximum: Block_Time)
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Track “King of the Hill” Tokens (30K–35K Market Cap)
+
+Live tokens within the specific market cap range highlighted by Pump Fun
+[Run Query ➤](https://ide.bitquery.io/track-King-of-the-hill-tokens)
+
+```graphql
+subscription {
+  Solana {
+    DEXTrades(
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "pump_amm" } }
+          Buy: { PriceInUSD: { ge: 0.000030, le: 0.000035 } }
+          Sell: { AmountInUSD: { gt: "10" } }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Trade {
+        Buy {
+          Price
+          PriceInUSD
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+        Market {
+          MarketAddress
+        }
+      }
+    }
+  }
+}
+```
+
+### Tokens Between 400K–450K Market Cap with Dev & Creation Time
+
+Filters tokens in a specific cap range and adds metadata
+[Run Query ➤](https://ide.bitquery.io/pumpfun-tokens-between-400K-and-450K-MC-and-their-creation-date-dev-address_2)
+
+```graphql
+{
+  Solana {
+    DEXTrades(
+      limitBy: { by: Trade_Buy_Currency_MintAddress, count: 1 }
+      limit: { count: 10 }
+      orderBy: { descending: Trade_Buy_Price }
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "pump_amm" } }
+          Buy: {
+            Currency: {
+              UpdateAuthority: {
+                is: "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM"
+              }
+            }
+            PriceInUSD: { gt: 0.0004, le: 0.00045 }
+          }
+          Sell: { AmountInUSD: { gt: "10" } }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since: "2025-04-15T08:20:00Z" } }
+      }
+    ) {
+      Trade {
+        Buy {
+          Price(maximum: Block_Time)
+          PriceInUSD(maximum: Block_Time)
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+        Market {
+          MarketAddress
+        }
+      }
+      joinTokenSupplyUpdates(
+        TokenSupplyUpdate_Currency_MintAddress: Trade_Buy_Currency_MintAddress
+        join: inner
+        where: {
+          Instruction: {
+            Program: {
+              Address: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+              Method: { is: "create" }
+            }
+          }
+        }
+      ) {
+        Block {
+          Time
+        }
+        Transaction {
+          Dev: Signer
+          Signature
+        }
+      }
+    }
+  }
+}
+```
+
+## Video Tutorials
+
+### Pump.Fun API | Get Live Prices, Metadata, OHLCV, Trading Pair Stats, Charts
 
 <VideoPlayer url="https://www.youtube.com/watch?v=SWqDSKHFJGI" />
 
-## Video Tutorial on Getting Pump Fun Trades
+### Video Tutorial on Getting Pump Fun Trades
 
 <VideoPlayer url="https://www.youtube.com/watch?v=QV8zBnmDFxY" />
 
-## Video Tutorial | How to Get the OHLC Data & Price of a Token on Pump Fun DEX in Realtime
+### Video Tutorial | How to Get the OHLC Data & Price of a Token on Pump Fun DEX in Realtime
 
 <VideoPlayer url="https://youtu.be/vixWQ1fzY3M" />
 
-## Video Tutorial | How to get Top Token Holders and Trading Volume for a Pump Fun Token
+### Video Tutorial | How to get Top Token Holders and Trading Volume for a Pump Fun Token
 
 <VideoPlayer url="https://www.youtube.com/watch?v=yGgKbv853SA" />
 
-## Video Tutorial | How to get Top Traders of a Token on Solana Pump Fun DEX
+### Video Tutorial | How to get Top Traders of a Token on Solana Pump Fun DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=Ga0RbD7H_OY" />
 
-## Video Tutorial | How to get first 100 Buyers of a Pump Fun Token
+### Video Tutorial | How to get first 100 Buyers of a Pump Fun Token
 
 <VideoPlayer url="https://www.youtube.com/watch?v=riuWRBnLaG0" />
 
-## Video Tutorial | How to get Top Token Creators on Pump Fun
+### Video Tutorial | How to get Top Token Creators on Pump Fun
 
 <VideoPlayer url="https://www.youtube.com/watch?v=J79xJyMCRXM" />
 
-## Video Tutorial | How to get Newly Created Pump Fun Tokens, Dev Address, Creation Time, Metadata
+### Video Tutorial | How to get Newly Created Pump Fun Tokens, Dev Address, Creation Time, Metadata
 
 <VideoPlayer url="https://www.youtube.com/watch?v=tRAHHCqQDVA" />
 
-## Video Tutorial | How to get all Pump Fun Tokens created by a Dev
+### Video Tutorial | How to get all Pump Fun Tokens created by a Dev
 
 <VideoPlayer url="https://youtu.be/4YaJw7MExjw" />
 
-## Video Tutorial | How to get Liquidity of a Pump Fun Token
+### Video Tutorial | How to get Liquidity of a Pump Fun Token
 
 <VideoPlayer url="https://www.youtube.com/watch?v=vQV1EaX0aBg" />
