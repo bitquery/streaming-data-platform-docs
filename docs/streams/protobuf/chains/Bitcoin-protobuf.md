@@ -1,4 +1,6 @@
-# Bitcoin Protobuf Streams
+# Bitcoin Streams
+
+This section provides details about Bitquery's Bitcoin Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data.
 
 You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tree/main/utxo).
 

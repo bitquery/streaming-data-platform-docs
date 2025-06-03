@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Javascript Tutorial to Setup Solana Protobuf Kafka Stream
+# Javascript Tutorial to Setup Solana Kafka Shred Stream
 
 This tutorial explains how to consume Solana transaction messages in protobuf format from Kafka using Javascript (Common JS), and print them efficiently with decoded `bytes` fields in **base58** format.
 

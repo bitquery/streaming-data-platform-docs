@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Python Tutorial to Consume and Traverse Solana Protobuf Messages from Kafka
+# Python Tutorial to use Solana Shreds from Kafka
 
 This tutorial explains how to consume Solana transaction messages in protobuf format from Kafka using Python, and print them efficiently with decoded `bytes` fields in **base58** format.
 
