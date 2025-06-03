@@ -82,7 +82,24 @@ consumer.subscribe([topic])
 
 ## **2. Define a Protobuf Traversal Print Function**
 
-This function **recursively walks** through any protobuf message and prints all its fields, converting `bytes` to **base58**.
+This function **recursively walks** through any protobuf message and prints all its fields, converting `bytes` to **base58** or **hex**.
+
+> 💡 **Solana vs EVM Encoding Tip**
+> 
+> Protobuf `bytes` fields should be decoded differently depending on the blockchain:
+> 
+> - ✅ **Solana**: Use `base58` (e.g. account addresses, signatures)
+> - ✅ **EVM (Ethereum, BSC, etc.)**: Use `hex` with a `0x` prefix
+> 
+> This tutorial uses `base58` decoding, appropriate for Solana.  
+> If you're consuming EVM Protobuf messages instead, update:
+> 
+> ```python
+> print_protobuf_message(msg, encoding='hex')
+> ```
+> 
+> and set `convert_bytes()` to return `'0x' + value.hex()`.
+
 
 ```python
 def convert_bytes(value, encoding='base58'):
