@@ -1,4 +1,4 @@
-# Pump Fun API 
+# Pump Fun API
 
 In this document, we will explore several examples related to Pump Fun token data.
 
@@ -182,7 +182,7 @@ query MyQuery {
 }
 ```
 
-### Real-time New Token Launch Tracking
+### Track New Token Launches in Realtime
 
 [Run Stream ➤](https://ide.bitquery.io/Track-new-token-launches-on-Pump-Fun-in-realtime)
 
@@ -297,6 +297,54 @@ query MyQuery {
     }
   }
 }
+```
+
+### Get Token Metadata, Dev Address, Creation Time For Specific Token 
+
+Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply.
+`PostBalance` will give you the current supply for the token.
+[Run Stream ➤](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+
+```
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
+    ) {
+      Block{
+        Time
+      }
+      Transaction{
+        Signer
+      }
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Symbol
+          ProgramAddress
+          PrimarySaleHappened
+          Native
+          Name
+          MintAddress
+          MetadataAddress
+          Key
+          IsMutable
+          Fungible
+          EditionNonce
+          Decimals
+          Wrapped
+          VerifiedCollection
+          Uri
+          UpdateAuthority
+          TokenStandard
+        }
+        PostBalance
+      }
+    }
+  }
+}
+
+
 ```
 
 ## Token Pricing & Market Data
