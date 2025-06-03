@@ -202,6 +202,49 @@ Here is a [query](https://ide.bitquery.io/top-tokens-above-10k-USD-mktcap-on-pum
 
 ```
 
+## ATH Marketcap of a Pumpfun Token
+
+As all Pump Fun tokens have a 1 billion supply, based on the ATH price itself, you can get the ATH MarketCap. Supply is fixed to 1 Billion. So marketcap can be calculated by multiplying supply to priceInUSD. Here we are getting price of the token in terms of `SOL`.
+Here is a [query](https://ide.bitquery.io/ATH-MC_1#) you can try out.
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {MintAddress: {is: "4sxfRwX5Dynqz5upN1Z5nbcSXYAAz51pVjbPFDMUpump"}}}}
+      limit: {count: 1}
+      orderBy: {descending: Trade_Price}
+    ) {
+      Trade {
+        PriceInSOL:Price
+      }
+    }
+  }
+}
+```
+
+## ATH Marketcap of a Pumpfun Token in a secific timeframe
+
+As all Pump Fun tokens have a 1 billion supply, based on the ATH price in a specific timeframe itself, you can get the ATH MarketCap in a specific timeframe. Supply is fixed to 1 Billion. So marketcap can be calculated by multiplying supply to priceInUSD. Here we are getting price of the token in terms of `SOL`.
+Here is a [query](https://ide.bitquery.io/ATH-MC-till-2minutes-prior#) you can try out.
+
+```
+{
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {MintAddress: {is: "4sxfRwX5Dynqz5upN1Z5nbcSXYAAz51pVjbPFDMUpump"}}}, Block: {Time: {till: "2025-06-03T06:37:00Z"}}}
+      limit: {count: 1}
+      orderBy: {descending: Trade_Price}
+    ) {
+      Trade {
+        PriceInSOL:Price
+      }
+    }
+  }
+}
+
+```
+
 ## Pump Fun Trades in Real-Time
 
 The below query gets real-time information whenever there's a new trade on the Pump.fun including program method called , buy and sell details, details of the currencies involved, and the transaction specifics like signature.
