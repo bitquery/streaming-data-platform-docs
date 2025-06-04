@@ -15,7 +15,7 @@ The complete code is available [here](https://github.com/bitquery/bitquery-proto
 
 To avoid the hastle of manually downloading `proto` files containing schemas and writing code for loading and compiling those files, install the required npm package.
 
-``` shell
+```shell
 npm install bitquery-protobuf-schema
 ```
 
@@ -32,47 +32,51 @@ You’ll also need your **Kafka username/password** provided by the Bitquery tea
 ### Kafka Client Initialization - Non SSL Version
 
 ```js
-const { Kafka } = require('kafkajs');
-const bs58 = require('bs58');
-const {loadProto} = require('bitquery-protobuf-schema');
+const { Kafka } = require("kafkajs");
+const bs58 = require("bs58");
+const { loadProto } = require("bitquery-protobuf-schema");
 const { CompressionTypes, CompressionCodecs } = require("kafkajs");
 const LZ4 = require("kafkajs-lz4");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 
 CompressionCodecs[CompressionTypes.LZ4] = new LZ4().codec;
 
-const username = '<username>';
-const password = '<password>';
-const topic = 'solana.transactions.proto';
+const username = "<username>";
+const password = "<password>";
+const topic = "solana.transactions.proto";
 const id = uuidv4();
 
 const kafka = new Kafka({
-    clientId: username,
-    brokers: ['rpk0.bitquery.io:9092', 'rpk1.bitquery.io:9092', 'rpk2.bitquery.io:9092'],
-    sasl: {
-        mechanism: "scram-sha-512",
-        username: username,
-        password: password
-    }
+  clientId: username,
+  brokers: [
+    "rpk0.bitquery.io:9092",
+    "rpk1.bitquery.io:9092",
+    "rpk2.bitquery.io:9092",
+  ],
+  sasl: {
+    mechanism: "scram-sha-512",
+    username: username,
+    password: password,
+  },
 });
 ```
 
 ### Kafka Client Initialization - SSL Version
 
 ```js
-const { Kafka } = require('kafkajs');
-const bs58 = require('bs58');
+const { Kafka } = require("kafkajs");
+const bs58 = require("bs58");
 const fs = require("fs");
-const {loadProto} = require('bitquery-protobuf-schema');
+const { loadProto } = require("bitquery-protobuf-schema");
 const { CompressionTypes, CompressionCodecs } = require("kafkajs");
 const LZ4 = require("kafkajs-lz4");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 
 CompressionCodecs[CompressionTypes.LZ4] = new LZ4().codec;
 
-const username = '<username>';
-const password = '<password>';
-const topic = 'solana.transactions.proto';
+const username = "<username>";
+const password = "<password>";
+const topic = "solana.transactions.proto";
 const id = uuidv4();
 
 const kafka = new Kafka({
@@ -98,72 +102,89 @@ const kafka = new Kafka({
 
 ## **2. Define a Protobuf Traversal Print Function**
 
-This function **recursively walks** through any protobuf message and prints all its fields, converting `bytes` to **base58**.
+This function **recursively walks** through any protobuf message and prints all its fields, converting `bytes` to **base58** or **hex**.
+
+> 💡 **Solana vs EVM Encoding Tip**
+>
+> Protobuf `bytes` fields represent things like public keys, signatures, and hashes — and must be decoded according to the target blockchain:
+>
+> - ✅ **Solana**: Decode as `base58` (e.g. account addresses, signatures)
+> - ✅ **EVM (Ethereum, BSC, etc.)**: Decode as `hex` with a `0x` prefix
+>
+> This tutorial uses `base58` decoding for Solana.  
+> If you're consuming **EVM data**, update your decoder to:
+>
+> ```js
+> const convertBytes = (buffer, encoding = "hex") => {
+>   return "0x" + buffer.toString("hex");
+> };
+> ```
 
 ```js
-const convertBytes = (buffer, encoding = 'base58') => {
-    if (encoding === 'base58') {
-        return bs58.default.encode(buffer);
-    }
-    return buffer.toString('hex');
-}
+const convertBytes = (buffer, encoding = "base58") => {
+  if (encoding === "base58") {
+    return bs58.default.encode(buffer);
+  }
+  return buffer.toString("hex");
+};
 
-const printProtobufMessage = (msg, indent = 0, encoding = 'base58') => {
-    const prefix = ' '.repeat(indent);
-    for (const [key, value] of Object.entries(msg)) {
-        if (Array.isArray(value)) {
-            console.log(`${prefix}${key} (repeated):`);
-            value.forEach((item, idx) => {
-                if (typeof item === 'object' && item !== null) {
-                    console.log(`${prefix}  [${idx}]:`);
-                    printProtobufMessage(item, indent + 4, encoding);
-                } else {
-                    console.log(`${prefix}  [${idx}]: ${item}`);
-                }
-            });
-        } else if (value && typeof value === 'object' && Buffer.isBuffer(value)) {
-            console.log(`${prefix}${key}: ${convertBytes(value, encoding)}`);
-        } else if (value && typeof value === 'object') {
-            console.log(`${prefix}${key}:`);
-            printProtobufMessage(value, indent + 4, encoding);
+const printProtobufMessage = (msg, indent = 0, encoding = "base58") => {
+  const prefix = " ".repeat(indent);
+  for (const [key, value] of Object.entries(msg)) {
+    if (Array.isArray(value)) {
+      console.log(`${prefix}${key} (repeated):`);
+      value.forEach((item, idx) => {
+        if (typeof item === "object" && item !== null) {
+          console.log(`${prefix}  [${idx}]:`);
+          printProtobufMessage(item, indent + 4, encoding);
         } else {
-            console.log(`${prefix}${key}: ${value}`);
+          console.log(`${prefix}  [${idx}]: ${item}`);
         }
+      });
+    } else if (value && typeof value === "object" && Buffer.isBuffer(value)) {
+      console.log(`${prefix}${key}: ${convertBytes(value, encoding)}`);
+    } else if (value && typeof value === "object") {
+      console.log(`${prefix}${key}:`);
+      printProtobufMessage(value, indent + 4, encoding);
+    } else {
+      console.log(`${prefix}${key}: ${value}`);
     }
-}
+  }
+};
 ```
 
 ## **3. Initialize Consumer**
 
 ```js
-const consumer = kafka.consumer({ groupId: username + '-' + id});
+const consumer = kafka.consumer({ groupId: username + "-" + id });
 ```
+
 ## **4. Consumer Running Stream and Getting Messages**
 
 The consumer subscribes to the topic and processes messages. LZ4 compression is supported, and message content is logged to the console.
 
 ```js
-
 const run = async () => {
-    let ParsedIdlBlockMessage = await loadProto(topic); // Load proto before starting Kafka
-    await consumer.connect();
-    await consumer.subscribe({ topic, fromBeginning: false });
+  let ParsedIdlBlockMessage = await loadProto(topic); // Load proto before starting Kafka
+  await consumer.connect();
+  await consumer.subscribe({ topic, fromBeginning: false });
 
-    await consumer.run({
-        autoCommit: false,
-        eachMessage: async ({ partition, message }) => {
-            try {
-                const buffer = message.value;
-                const decoded = ParsedIdlBlockMessage.decode(buffer);
-                const msgObj = ParsedIdlBlockMessage.toObject(decoded, { bytes: Buffer });
-                printProtobufMessage(msgObj);
-
-            } catch (err) {
-                console.error('Error decoding Protobuf message:', err);
-            }
-        },
-    });
-}
+  await consumer.run({
+    autoCommit: false,
+    eachMessage: async ({ partition, message }) => {
+      try {
+        const buffer = message.value;
+        const decoded = ParsedIdlBlockMessage.decode(buffer);
+        const msgObj = ParsedIdlBlockMessage.toObject(decoded, {
+          bytes: Buffer,
+        });
+        printProtobufMessage(msgObj);
+      } catch (err) {
+        console.error("Error decoding Protobuf message:", err);
+      }
+    },
+  });
+};
 
 run().catch(console.error);
 ```
@@ -182,4 +203,3 @@ run().catch(console.error);
 5. **Error Handling**: Any errors during message processing are caught and logged.
 
 By following this guide, you can set up a Node.js Kafka consumer using KafkaJS, secure it with SSL, and handle message compression using LZ4.
-

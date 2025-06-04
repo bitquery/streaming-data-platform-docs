@@ -51,7 +51,7 @@ This query retrieves the latest changes to liquidity pools on Solana, including 
 ### Solana Token Supply Updates
 
 This query tracks the latest token supply updates to a particular token pair. You can modify the same query to a subscription and track these changes in real time.  
-▶️ [Token Supply Updates](https://ide.bitquery.io/Solana-token-supply-updates)
+▶️ [Token Supply Updates](https://ide.bitquery.io/Solana-token-supply-updates_1)
 
 ### Solana Transactions
 
