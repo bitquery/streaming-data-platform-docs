@@ -121,6 +121,164 @@ subscription MyQuery {
 }
 ```
 
+## Get the Believe tokens which are graduated to Meteora
+
+For checking which Believe tokens graduated, we need to get all the tokens created by Believe on Meteora DBC using this [API](https://docs.bitquery.io/docs/examples/Solana/Believe-API/#get-latest-meteora-dbc-token-creations-using-believe-protocol) and then after getting all the token addresses put them in [this query](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1) to check which of them graduated to Meteora.
+
+```
+query MyQuery {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" }
+            Method: { is: "initialize_virtual_pool_with_spl_token" }
+          }
+        }
+        Transaction: {
+          Result: { Success: true }
+          Signer: { is: "5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE" }
+        }
+      }
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Token {
+            ProgramId
+            Owner
+            Mint
+          }
+          IsWritable
+          Address
+        }
+        Program {
+          Parsed
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
+            Name
+          }
+          Address
+          AccountNames
+        }
+      }
+      Transaction {
+        Fee
+        FeeInUSD
+        FeePayer
+        Signature
+      }
+    }
+  }
+}
+```
+
+then put all the token addresses in the `$tokenAddresses` variable you get in the following query which you can test [here](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1).
+
+```
+query MyQuery($tokenAddresses: [String!]) {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}, Method: {in: ["migrate_meteora_damm", "migration_damm_v2"]}}, Accounts: {includes: {Address: {in: $tokenAddresses}}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Token {
+            ProgramId
+            Owner
+            Mint
+          }
+          IsWritable
+          Address
+        }
+        Program {
+          Parsed
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
+            Name
+          }
+          Address
+          AccountNames
+        }
+      }
+      Transaction {
+        Fee
+        FeeInUSD
+        FeePayer
+        Signature
+      }
+    }
+  }
+}
+{
+  "tokenAddresses":["3EX4yHYs25RXaNMBgaNtpGxPKvX73P9QWVw8fpNEhnow","2bzXpTCu3faGocjBKZvxv63yV3gnWDZYfH6mRVfGzbh8","Dpz6knqUSTfV2ESXqQvbiWVznzRPYSYivUtXT3TVpWkA"]
+}
+```
+
 ## Get latest Meteora DBC Token Creations using Believe Protocol
 
 Using [this](https://ide.bitquery.io/Token-creation-using-Believe-Protocol-on-Meteora-DBC#) query, we can get the 10 latest created Meteora DBC tokens using Believe Protocol.

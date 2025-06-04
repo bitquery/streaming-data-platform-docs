@@ -62,50 +62,79 @@ subscription {
 
 ## Track Latest created pools on Meteora DBC
 
-Below query will give you the latest created Meteora DBC in realtime. You can test the query [here](https://ide.bitquery.io/Track-Latest-created-pools-on-Meteora-DBC)
+Below query will give you the latest created Meteora DBC in realtime. You can test the query [here](https://ide.bitquery.io/token-creations-on-meteora-DBC)
 
 ```
 subscription MyQuery {
   Solana {
-    DEXTrades(
-      where: {Instruction: {Program: {Address: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}, Method: {is: "EvtInitializePool"}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Instruction {
-        Program {
-          Method
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" }
+            Method: { is: "initialize_virtual_pool_with_spl_token" }
+          }
+        }
+        Transaction: {
+          Result: { Success: true }
         }
       }
-      Trade {
-        Buy {
-          Amount
-          Account {
-            Address
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Token {
+            ProgramId
+            Owner
+            Mint
           }
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
+          IsWritable
+          Address
         }
-        Sell {
-          Amount
-          Account {
-            Address
-          }
-          Currency {
+        Program {
+          Parsed
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
             Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
           }
+          Address
+          AccountNames
         }
       }
       Transaction {
+        Fee
+        FeeInUSD
+        FeePayer
         Signature
       }
     }
@@ -115,54 +144,158 @@ subscription MyQuery {
 
 ## Track latest migrated Meteora DBC tokens
 
-Below query will give you the latest migrated tokens Meteora DBC in realtime. You can test the query [here](https://ide.bitquery.io/Track-migration-of-Meteora-DBC-tokens)
+Below query will give you the latest migrated tokens Meteora DBC in realtime. You can test the query [here](https://ide.bitquery.io/meteora-DBC-token-migrations-to-Meteors-DEX)
 
 ```
 subscription MyQuery {
   Solana {
-    DEXTrades(
-      where: {Instruction: {Program: {Address: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}, Method: {is: "migrate_meteora_damm"}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Instruction {
-        Program {
-          Method
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" }
+            Method: { in: ["migrate_meteora_damm","migration_damm_v2"] }
+          }
+        }
+        Transaction: {
+          Result: { Success: true }
         }
       }
-      Trade {
-        Buy {
-          Amount
-          Account {
-            Address
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Token {
+            ProgramId
+            Owner
+            Mint
           }
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
+          IsWritable
+          Address
         }
-        Sell {
-          Amount
-          Account {
-            Address
-          }
-          Currency {
+        Program {
+          Parsed
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
             Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
           }
+          Address
+          AccountNames
         }
       }
       Transaction {
+        Fee
+        FeeInUSD
+        FeePayer
         Signature
       }
     }
   }
+}
+```
+
+## Check if the list of tokens has migrated from Meteora DBC
+
+Below query will give you the response for each token in the list if the token has graduated from Meteora DBC. Try out the query [here](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1).
+
+```
+query MyQuery($tokenAddresses: [String!]) {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}, Method: {in: ["migrate_meteora_damm", "migration_damm_v2"]}}, Accounts: {includes: {Address: {in: $tokenAddresses}}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Token {
+            ProgramId
+            Owner
+            Mint
+          }
+          IsWritable
+          Address
+        }
+        Program {
+          Parsed
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
+            Name
+          }
+          Address
+          AccountNames
+        }
+      }
+      Transaction {
+        Fee
+        FeeInUSD
+        FeePayer
+        Signature
+      }
+    }
+  }
+}
+{
+  "tokenAddresses":["3EX4yHYs25RXaNMBgaNtpGxPKvX73P9QWVw8fpNEhnow","2bzXpTCu3faGocjBKZvxv63yV3gnWDZYfH6mRVfGzbh8","Dpz6knqUSTfV2ESXqQvbiWVznzRPYSYivUtXT3TVpWkA"]
 }
 ```
 

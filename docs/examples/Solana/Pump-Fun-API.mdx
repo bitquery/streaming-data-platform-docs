@@ -85,13 +85,13 @@ Here’s [the query](https://ide.bitquery.io/top-tokens-by-mktcap-on-pump-fun-in
 ## Track King of the Hill Tokens in realtime
 
 Below API will give you tokens that are getting traded in between 30K and 35K USD marketCap range in realtime. As King of the Hill tokens are the ones which just crossed the ~30K in marketcap as mentioned in this [official tweet](https://x.com/pumpdotfun/status/1760103287397793933?lang=en) by Pump Fun Team.
-You can try the API [here](https://ide.bitquery.io/track-King-of-the-hill-tokens).
+You can try the API [here](https://ide.bitquery.io/track-King-of-the-hill-tokens-in-realtime).
 
 ```
 subscription {
   Solana {
     DEXTrades(
-      where: {Trade: {Dex: {ProtocolName: {is: "pump_amm"}}, Buy: {PriceInUSD: {ge: 0.000030, le: 0.000035}}, Sell: {AmountInUSD: {gt: "10"}}}, Transaction: {Result: {Success: true}}}
+      where: {Trade: {Dex: {ProtocolName: {is: "pump"}}, Buy: {PriceInUSD: {ge: 0.000030, le: 0.000035}}, Sell: {AmountInUSD: {gt: "10"}}}, Transaction: {Result: {Success: true}}}
     ) {
       Trade {
         Buy {
