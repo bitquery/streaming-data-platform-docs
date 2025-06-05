@@ -41,7 +41,7 @@ This program allows you to test the data and its integration into your applicati
 ## Subscribe to Realtime CLMM Trades
 
 This query subscribes to real-time trades on the Raydium CLMM (Concentrated Liquidity Market Maker) on the Solana blockchain by filtering using `{Program: {Address: {is: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"}}}:`.
-You can run the query [here](https://ide.bitquery.io/Raydium-CLMM-DEX-Trades)
+You can run the query [here](https://ide.bitquery.io/Raydium-CLMM-DEX-Trades-with-AccountNames)
 
 ```
 subscription MyQuery {
@@ -52,6 +52,7 @@ subscription MyQuery {
       Instruction {
         Program {
           Method
+          AccountNames
         }
       }
       Trade {
