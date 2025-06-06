@@ -344,7 +344,7 @@ query MyQuery {
 
 ## Top Traders of a Token on Arbitrum
 
-[This](https://ide.bitquery.io/top-traders-for-a-token-on-Arbitrum_1) query returns the top traders of a token on arbitrum based on the volume of trades involving the particular token. This query returns info such as buyers, sellers, DEX Protocol used, amount bought and sold.
+[This](https://ide.bitquery.io/top-traders-for-a-token-on-Arbitrum_3) query returns the top traders of a token on arbitrum based on the volume of trades involving the particular token. This query returns info such as buyers, sellers, DEX Protocol used, amount bought and sold.
 
 ```graphql
 query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
@@ -356,7 +356,6 @@ query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
     ) {
       Trade {
         Buyer
-        Seller
         Dex {
           ProtocolFamily
         }

@@ -401,7 +401,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/pair/0x711b
 ## Top Traders of a token pair
 
 This query will fetch you top traders of a token pair for the BSC network.
-You can test the query [here](https://ide.bitquery.io/pair-top-traders_1).
+You can test the query [here](https://ide.bitquery.io/pair-top-traders_2).
 
 ```
 query pairTopTraders($network: evm_network, $token: String, $base: String) {
@@ -412,6 +412,7 @@ query pairTopTraders($network: evm_network, $token: String, $base: String) {
       where: {Trade: {Currency: {SmartContract: {is: $token}}, Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}}}
     ) {
       Trade {
+        Buyer
         Dex {
           OwnerAddress
           ProtocolFamily
@@ -438,15 +439,20 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/pair/0x711b
 
 ## Get Latest Trades on a specific DEX
 
-In this section, we will see how we can [subscribe](https://ide.bitquery.io/latest-trades-on-a-DEX-bsc) to the latest trades on particular DEX, 
+In this section, we will see how we can [subscribe](https://ide.bitquery.io/latest-trades-on-a-DEX-bsc) to the latest trades on particular DEX,
 Pancakeswap V3 in this example, using the `OwnerAddress` which is the alias for the `Factory Address` of the DEX as seen in the example below.
 
-``` graphql
-
+```graphql
 subscription {
   EVM(network: bsc) {
     DEXTrades(
-      where: {Trade: {Dex: {OwnerAddress: {is: "0x0BFbCF9fa4f9C56B0F40a671Ad40E0805A091865"}}}}
+      where: {
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x0BFbCF9fa4f9C56B0F40a671Ad40E0805A091865" }
+          }
+        }
+      }
     ) {
       Trade {
         Buy {
@@ -885,7 +891,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/dex_market/
 ## Top Traders on a DEX
 
 This query will fetch you Top Traders on a particular DEX for the BSC network.
-You can test the query [here](https://ide.bitquery.io/top-traders-on-a-specific-dex).
+You can test the query [here](https://ide.bitquery.io/top-traders-on-a-specific-dex_1).
 
 ```
 query DexMarkets($network: evm_network, $market: String) {
@@ -896,6 +902,7 @@ query DexMarkets($network: evm_network, $market: String) {
       where: {Trade: {Dex: {ProtocolFamily: {is: $market}}}}
     ) {
       Trade {
+        Buyer
         Dex {
           OwnerAddress
           ProtocolFamily

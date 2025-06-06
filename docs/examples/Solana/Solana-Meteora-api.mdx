@@ -54,104 +54,137 @@ subscription {
 
 ## Track Latest created pools on Meteora DYN
 
-Below query will give you the latest created Meteora DYN pools in realtime. You can test the query [here](https://ide.bitquery.io/Meteora-DYN-created-pools)
+Below query will give you the latest created Meteora DYN pools in realtime. You can test the query [here](https://ide.bitquery.io/Track-Latest-created-pools-on-MeteoraDYN)
 
 ```
 subscription MyQuery {
   Solana {
-    DEXTrades(
-      where: {Instruction: {Program: {Address: {is: "Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB"}, Method: {is: ""}}}, Transaction: {Result: {Success: true}}}
+    Instructions(
+      where: {Transaction: {Result: {Success: true}}, Instruction: {Program: {Method: {is: "initializePermissionlessConstantProductPoolWithConfig2"}, Address: {is: "Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB"}}}}
     ) {
-      Instruction {
-        Program {
-          Method
-        }
+      Block {
+        Time
       }
-      Trade {
-        Buy {
-          Amount
-          Account {
-            Address
-          }
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
           }
         }
-        Sell {
-          Amount
-          Account {
-            Address
-          }
-          Currency {
+        Program {
+          AccountNames
+          Address
+          Arguments {
             Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
           }
+          Method
+          Name
         }
       }
       Transaction {
         Signature
+        Signer
       }
     }
   }
 }
+
 ```
 
 ## Track Latest created pools on Meteora DLMM
 
-Below query will give you the latest created Meteora DLMM pools in realtime. You can test the query [here](https://ide.bitquery.io/Meteora-DLMM-created-pools-subscription)
+Below query will give you the latest created Meteora DLMM pools in realtime. You can test the query [here](https://ide.bitquery.io/Track-Latest-created-pools-on-Meteora-DLMM_1)
 
 ```
 subscription MyQuery {
   Solana {
-    DEXTrades(
-      where: {Instruction: {Program: {Address: {is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo"}, Method: {is: "initializeLbPair2"}}}, Transaction: {Result: {Success: true}}}
+    Instructions(
+      where: {Transaction: {Result: {Success: true}}, Instruction: {Program: {Method: {is: "initializeLbPair2"}, Address: {is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo"}}}}
     ) {
-      Instruction {
-        Program {
-          Method
-        }
+      Block {
+        Time
       }
-      Trade {
-        Buy {
-          Amount
-          Account {
-            Address
-          }
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
           }
         }
-        Sell {
-          Amount
-          Account {
-            Address
-          }
-          Currency {
+        Program {
+          AccountNames
+          Address
+          Arguments {
             Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
           }
+          Method
+          Name
         }
       }
       Transaction {
         Signature
+        Signer
       }
     }
   }
@@ -214,7 +247,7 @@ If you want to get OHLC data for any specific currency pair on Meteora, you can 
 
 ## Get the Top Traders of a specific Token on Meteora DEX
 
-The below query gets the Top Traders of the specified Token `J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump` on Meteora. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-meteora)
+The below query gets the Top Traders of the specified Token `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` on Meteora. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-meteora_2)
 
 ```
 query TopTraders($token: String) {
@@ -243,7 +276,7 @@ query TopTraders($token: String) {
   }
 }
 {
-  "token": "J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump",
+  "token": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
 }
 ```
 

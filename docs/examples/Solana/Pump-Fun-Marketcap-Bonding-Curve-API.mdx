@@ -243,25 +243,35 @@ To check if a Pump Fun Token has migrated to PumpSwap, we can use the below quer
 
 ## Track Pump Fun Token Migrations to PumpSwap
 
-Use the below query to track Pump Fun token migrations to PumpSwap in realtime. You will get the following account addresses information through the query's `Instruction Accounts[]` field and the amount of liquidity added through arguments' `Value` field.
+You will need to use two queries to get the realtime migrations data, 2 instructions should be presnt in a transaction `migrate` and `create_pool` then only the transaction is a successfull migration of a pump fun token to pump swap.
 
-You can test the query [here](https://ide.bitquery.io/pumpfun-migration-stream_2#).
+Use [query 1](https://ide.bitquery.io/track-migrations-of-pump-token-in-realtime) to get the transactions where pumpfun:migrate instruction is invoked in realtime. We specifically need to get trxn signature and block slot of migrations in realtime.
 
-```graphql
+```
 subscription {
   Solana {
     Instructions(
-      where: {
-        Instruction: {
-          CallerIndex: { eq: 2 }
-          Depth: { eq: 1 }
-          CallPath: { includes: { eq: 2 } }
-          Program: {
-            Method: { is: "create_pool" }
-            Address: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
-          }
-        }
+      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}, Logs: {includes: {includes: "Migrate"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Transaction {
+        Signature
       }
+      Block {
+        Time
+        Slot
+      }
+    }
+  }
+}
+```
+
+and then use this [query 2](https://ide.bitquery.io/check-if-the-token-migrated-to-pump-swap_2) on the transaction signature and block slot that you received to check if it also includes `create_pool` instruction.
+
+```
+query ($transactionSignature: String, $blockSlot: String){
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Method: {is: "create_pool"}, Address: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}}, Transaction: {Signature: {is: $transactionSignature}}, Block: {Slot: {eq: $blockSlot}}}
     ) {
       Instruction {
         Program {
@@ -335,10 +345,14 @@ subscription {
       }
       Block {
         Time
-        Height
+        Slot
       }
     }
   }
+}
+{
+  "transactionSignature": "3dr3mP58MQsFroBpz3iVgrwV89yhufxyKTpHd9HiKXsW8EPtx73u1rTDxZuMVA8Z5SnX4sZwyTji7UNUpweCKMCX",
+  "blockSlot": "344520645"
 }
 ```
 
