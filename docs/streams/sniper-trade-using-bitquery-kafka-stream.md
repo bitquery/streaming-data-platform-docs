@@ -35,6 +35,10 @@ In this section, we will explore the code logic behind the important functions u
 - `sellTokenViaLaunchpad`
 - `sendTxWithNonce`
 
+This is how the folder structure looks.
+
+<img src="/img/usecases/kafka-examples/evm_sniper_tutorial_folder.png" />
+
 The code snippet below includes all the imports for the `executeTrade.js` file and setup wallet and provider for trade execution.
 
 ```js
@@ -165,7 +169,7 @@ async function sendTxWithNonce(txRequest, maxRetries = 3) {
 }
 ```
 
-## Buy Token Functionality
+## Buy Token Functionality via Launchpad
 
 In this section we will how to automate the buy functionality using etherjs.
 
@@ -232,7 +236,7 @@ export async function buyViaLaunchpad(
 }
 ```
 
-## Sell Token Functionality
+## Sell Token Functionality via Launchpad
 
 1. Defining Constants
 
