@@ -2,14 +2,18 @@
 
 Bitquery provides PumpSwap data via APIs, streams, and real-time subscriptions. These endpoints let you track liquidity, trades, prices, token activity, and more on the PumpSwap AMM DEX. If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
+:::note
+To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
+
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+:::
+
+
 - You can also explore [Pump Fun Data documentation ➤](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/)
-- Need zero-latency PumpSwap data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/) to request access to Kafka streams.
+- Need zero-latency PumpSwap data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
 Join us on [Telegram](https://t.me/Bloxy_info) for support and integration help.
 
-:::note
-Note: The `Trade Side Account` field is **not available** in aggregate queries across archive or combined datasets.
-:::
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -382,10 +386,16 @@ subscription {
 }
 ```
 
+
 ## OHLC for PumpSwap token
 
 Below API query can get you the OHLC of a given token pair on PumpSwap. You can use the OHLC to build charts.
 You can test out the query [here](https://ide.bitquery.io/ohlc-for-pumpswap).
+
+
+:::note
+Note: The `Trade Side Account` field is **not available** in aggregate queries across archive or combined datasets.
+:::
 
 ```
 query MyQuery {

@@ -4,16 +4,18 @@ Bitquery provides Pumpfun data through APIs, Streams and Data Dumps.
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery.
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
+Need zero-latency Pumpfun data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+
 You may also be interested in:
 
 - [PumpSwap APIs ➤](https://docs.bitquery.io/docs/examples/Solana/pump-swap-api/)
 - [Moonshot APIs ➤](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/)
 - [FourMeme APIs ➤](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/)
 
-These APIs are also available through [Kafka streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) for zero latency. Contact us on our Telegram Channel.
-
 :::note
-Trade Side Account field will not be available for aggregate queries in Archive and Combined Datasets
+To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
+
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
 
 <head>
@@ -467,6 +469,12 @@ subscription MyQuery {
 
 Fetches open-high-low-close data in 1-minute intervals for last 10 minutes
 [Run Query ➤](https://ide.bitquery.io/OHLC-for-a-token-on-Pump-Fun_10)
+
+
+:::note
+Trade Side Account field will not be available for aggregate queries in Archive and Combined Datasets
+:::
+
 
 ```graphql
 {
