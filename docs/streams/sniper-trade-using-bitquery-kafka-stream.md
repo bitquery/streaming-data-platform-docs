@@ -1,4 +1,4 @@
-# Building a Trading Bot Using Bitquery Shred Streams
+# Building a Trading Bot Using Bitquery Kafka Streams
 
 A fast, automated BSC (Binance Smart Chain) sniper bot for trading newly launched Four Meme tokens. The bot **detects new token launches in real time via [Bitquery’s Shred streams](https://docs.bitquery.io/docs/streams/real-time-solana-data/)**, buys them instantly using the Four Meme Launchpad contract, and sells them after 1 minute—aiming to capitalize on rapid price movements.
 
