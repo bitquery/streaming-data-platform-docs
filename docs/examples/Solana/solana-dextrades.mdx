@@ -4,14 +4,28 @@ sidebar_position: 2
 
 # Solana DEX Trades API
 
-In this section we will see how to get Solana DEX trades information using our API.
+Bitquery provides Solana DEX trade data through APIs, Streams, and Data Dumps.  
+The GraphQL APIs and subscriptions below are examples of the real-time and historical trade data you can access across [Raydium](https://docs.bitquery.io/docs/examples/Solana/Solana-Raydium-DEX-API/), [Orca](https://docs.bitquery.io/docs/examples/Solana/solana-orca-dex-api/), [Phoenix](https://docs.bitquery.io/docs/examples/Solana/Solana-Phoenix-api/), and other Solana-based DEXs.
 
-This Solana API is part of our Early Access Program (EAP). This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/).
+If you have questions or need custom data, reach out to [support](https://t.me/Bloxy_info).
 
-**Individual trades are currently only supported for the real-time dataset, which includes real-time information and approximately 8 hours of historical trades. Aggregates like OHLC are available for historical data.**
+Need zero-latency Solana DEX trade data?  
+[Read about our Shred Streams and contact us for a trial ➤](https://docs.bitquery.io/docs/streams/real-time-solana-data/)
+
+You may also be interested in:
+
+- [PumpSwap APIs ➤](https://docs.bitquery.io/docs/examples/Solana/pump-swap-api/)
+- [Moonshot APIs ➤](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/)
+- [FourMeme APIs ➤](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/)
+
 :::note
-`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.
+
+Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
+
+
+
 
 <head>
 <meta name="title" content="Solana DEX Trades API | Get Raydium, Jupiter data"/>
@@ -1164,6 +1178,10 @@ subscription LatestTrades {
 
 You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair WSOL-USDC by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
 You can run and test the [saved query here](https://ide.bitquery.io/query_ohlc_quantile___1).
+
+:::note
+The `Trade Side Account` field is **not available** in aggregate queries across archive or combined datasets.
+:::
 
 ```
 query TradesSolToken($ca: String!, $currencies: [String!], $dataset: dataset_arg_enum, $interval: Int) {
