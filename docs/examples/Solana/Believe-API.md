@@ -2,7 +2,7 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this document, we will explore several examples related to [Believe Protocol](https://believe.app/) Data. The Believe Protocol is a decentralized token launchpad built on the Solana blockchain, designed to simplify and democratize the creation and trading of tokens. It enables users to mint tokens directly through social media interactions, particularly on X (formerly Twitter), making it accessible even to those without technical expertise. Tokens are launched on Meteora DBC.
+In this document, we will explore several examples related to Believe Protocol Data. The Believe Protocol is a decentralized token launchpad built on the Solana blockchain, designed to simplify and democratize the creation and trading of tokens. It enables users to mint tokens directly through social media interactions, particularly on X (formerly Twitter), making it accessible even to those without technical expertise. Tokens are launched on Meteora DBC.
 
 We also have [Meteora Dynamic Bonding Curve API Docs](https://docs.bitquery.io/docs/examples/Solana/meteora-dynamic-bonding-curve-api/).
 Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/).
