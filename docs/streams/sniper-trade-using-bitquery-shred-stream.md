@@ -1,6 +1,6 @@
-# Building Trading Bot Using Kafka Streams
+# Building a Trading Bot Using Bitquery Shred Streams
 
-A fast, automated BSC (Binance Smart Chain) sniper bot for trading newly launched Four Meme tokens. The bot **detects new token launches in real time via Bitquery’s Protobuf Kafka streams**, buys them instantly using the Four Meme Launchpad contract, and sells them after 1 minute—aiming to capitalize on rapid price movements.
+A fast, automated BSC (Binance Smart Chain) sniper bot for trading newly launched Four Meme tokens. The bot **detects new token launches in real time via [Bitquery’s Shred streams](https://docs.bitquery.io/docs/streams/real-time-solana-data/)**, buys them instantly using the Four Meme Launchpad contract, and sells them after 1 minute—aiming to capitalize on rapid price movements.
 
 ---
 
@@ -15,16 +15,17 @@ A fast, automated BSC (Binance Smart Chain) sniper bot for trading newly launche
 
 ---
 
-Note: Use a wallet/private key with only test funds at your own risk as this bot is highly experimental and is for educational use only!
+:::note
+Use a wallet/private key with only test funds **at your own risk** as this bot is highly experimental and is for **educational use only**!
+:::
 
 ## Creating `.env` File
 Create a `.env` file and define these variables.
 
 - PRIVATE_KEY1: Private key of your custodial wallet.
-- KAFKA_USERNAME: Bitquery Protobuf Kafka stream password.
+- KAFKA_USERNAME: Bitquery Protobuf Kafka stream username. Contact us on our [Telegram Channel](https://t.me/Bloxy_info)
 - KAFKA_PASSWORD: Bitquery Protobuf Kafka stream password.
 
-To get the Kafka credentials contact [Bitquery Team](mailto:sales@bitquery.io).
 ## Understanding the Functions
 
 In this section, we will explore the code logic behind the important functions used in our trading bot that are written in `executeTrade.js` file, namely:
@@ -46,7 +47,7 @@ const privateKey = process.env.PRIVATE_KEY1
 const wallet = new Wallet(privateKey, provider);
 ```
 
-### Send Transacaction with Nonce Functionality
+### Send Transaction with Nonce Functionality
 
 The main purpose of this function is to make the overall trade execution of the bot less prone to errors due to transaction failure/revert. This would avoid scenarios where a token might be purchased but not sold due to transaction failure, which could lead to losses.
 
@@ -291,6 +292,8 @@ const convertBytes = (value, encoding = 'hex') => {
 ### Defining the `run` Function
 
 This is the main function for this script, where the kafka consumer instance is ran, newly created Four Meme tokens are checked and trades are executed. All the code snippets under this sub-section are written under the `run` function.
+
+
 
 ```js
 const run = async () => {
