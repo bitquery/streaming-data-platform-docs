@@ -289,7 +289,7 @@ You can find the query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum
 ## Top Traders of a token
 
 This query will fetch you top traders of a token for the selected network.
-You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token_1).
+You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token_7).
 
 ```
 query topTraders($network: evm_network, $token: String) {
@@ -300,6 +300,7 @@ query topTraders($network: evm_network, $token: String) {
       where: {Trade: {Currency: {SmartContract: {is: $token}}}}
     ) {
       Trade {
+        Buyer
         Dex {
           OwnerAddress
           ProtocolFamily

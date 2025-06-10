@@ -128,7 +128,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market/
 ## Top Traders on a DEX
 
 This query will fetch you Top Traders on a particular DEX for the selected network.
-You can test the query [here](https://ide.bitquery.io/top-traders-on-a-DEX).
+You can test the query [here](https://ide.bitquery.io/top-traders-on-a-DEX_1).
 
 ```
 query DexMarkets($network: evm_network, $market: String) {
@@ -139,6 +139,7 @@ query DexMarkets($network: evm_network, $market: String) {
       where: {Trade: {Dex: {ProtocolFamily: {is: $market}}}}
     ) {
       Trade {
+        Buyer
         Dex {
           OwnerAddress
           ProtocolFamily

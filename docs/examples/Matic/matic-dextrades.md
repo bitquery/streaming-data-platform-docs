@@ -263,16 +263,17 @@ query pairs($min_count: String, $network: evm_network, $time_10min_ago: DateTime
 }
 
 ```
+
 This query is available as a heatmap on [https://dexrabbit.com/matic](https://dexrabbit.com/matic)
 
 ![](/img/dexrabbit/matic_toptokens.png)
-
 
 ## Top Traders of a Token
 
 This query retrieves data on the top traders of a specific token on the Matic network. It aggregates trade volumes and categorizes them into bought and sold amounts, along with the total trading volume in both native and USD terms.
 
-You can run the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-matic)
+You can run the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-matic_1)
+
 ```
 query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
   EVM(network: $network) {
@@ -283,7 +284,6 @@ query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
     ) {
       Trade {
         Buyer
-        Seller
         Dex {
           ProtocolFamily
         }

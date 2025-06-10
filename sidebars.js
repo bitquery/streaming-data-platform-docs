@@ -407,6 +407,7 @@ const sidebars = {
             "examples/Solana/meteora-dynamic-bonding-curve-api",
             "examples/Solana/Solana-OpenBook-api",
             "examples/Solana/Solana-Phoenix-api",
+            "examples/Solana/SolFi-api",
             "examples/Solana/Solana-Raydium-DEX-API",
             "examples/Solana/raydium-clmm-API",
             "examples/Solana/raydium-cpmm-API",

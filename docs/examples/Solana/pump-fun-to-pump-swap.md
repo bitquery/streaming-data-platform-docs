@@ -132,7 +132,9 @@ Post-migration, tokens trade as standard AMM pairs. Bitquery continues to offer 
 
 Bitquery’s Kafka streams offer ultra-low-latency access to blockchain data by tapping directly into Solana’s Shred-level architecture. On Solana, a shred is the smallest fragment of a block — and it’s the first unit of data propagated between validators.
 
-Bitquery’s Shred Streams capture transactions as they’re broadcast to validators, often before the block is finalized and even before timestamps are attached. This means you receive transaction data faster than any traditional block-based solution — giving you a true edge in latency-sensitive use cases like arbitrage, sniping, and real-time analytics.
+Bitquery’s Shred Streams capture transactions as they’re broadcast to validators, often before the block is finalized and even before timestamps are attached. This means you receive transaction data faster than any traditional block-based solution, giving you a true edge in latency-sensitive use cases such as arbitrage, sniping, and real-time analytics.
+
+**You can use this to track pumpfun tokens as shown in [this tutorial](https://youtu.be/UlqZ8DgzNLc).**
 
 Bitquery offers three main Kafka topics for Solana:
 
