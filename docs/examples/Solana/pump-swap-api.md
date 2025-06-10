@@ -1,13 +1,17 @@
 # Pump Swap API
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
+Bitquery provides PumpSwap data via APIs, streams, and real-time subscriptions. These endpoints let you track liquidity, trades, prices, token activity, and more on the PumpSwap AMM DEX. If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
-In this document, we will explore several examples related to pump swap data. Additionally, access the [Pump Fun API documentation](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/).
-These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
+- You can also explore [Pump Fun Data documentation ➤](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/)
+- Need zero-latency PumpSwap data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/) to request access to Kafka streams.
+
+Join us on [Telegram](https://t.me/Bloxy_info) for support and integration help.
 
 :::note
-`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+Note: The `Trade Side Account` field is **not available** in aggregate queries across archive or combined datasets.
 :::
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <head>
   <meta name="title" content="Pump Swap API - Solana - Tokens, Trades, Live Prices"/>
@@ -32,7 +36,33 @@ These APIs can be provided through different streams including Kafka for zero la
   <meta property="twitter:description" content="Get on-chain data of any Pump Swap based token through our Pump Swap API."/>
 </head>
 
-If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
+---------------------
+
+### Table of Contents
+
+### 1. Pool Creation & Migration
+- [Get Newly Created Pools in Real-time ➤](#get-newly-created-pools-on-pumpswap-dex-in-realtime)
+- [Track Pools Migrated to PumpSwap ➤](#track-pools-that-are-migrated-to-pumpswap)
+
+### 2. Trade Activity & Price Data
+- [Latest Trades on PumpSwap ➤](#latest-trades-on-pumpswap)
+- [Real-Time Trades (WebSocket) ➤](#latest-trades-on-pumpswap-websocket)
+- [Latest Trades for a Token ➤](#latest-trades-for-a-token-on-pumpswap)
+- [Track Price in Real-Time ➤](#track-price-of-a-token-in-realtime-on-pumpswap)
+- [Get OHLC Data ➤](#ohlc-for-pumpswap-token)
+- [Get Trading Volume ➤](#get-the-trading-volume-of-a-specific-token-on-pumpswap-dex)
+
+### 3. Trader Insights
+- [Latest Trades by a Trader ➤](#latest-trades-by-a-trader)
+- [Real-Time Trades by a Trader ➤](#latest-trades-by-a-trader---get-data-in-real-time-via-a-websocket)
+- [Top Traders on PumpSwap ➤](#top-trader-on-pumpswap)
+
+### 4. Token Analytics
+- [Token Stats: Buys, Sells, Volume, Makers ➤](#get-buy-volume-sell-volume-buys-sells-makers-total-trade-volume-buyers-sellers-of-a-specific-token)
+
+### 5. Video Tutorials
+- [Watch PumpSwap Tutorials ➤](#pumpswap-video-tutorials)
+
 
 ## Get Newly created pools on PumpSwap DEX in realtime
 
@@ -126,7 +156,6 @@ subscription {
 ## Track Pools that are migrated to PumpSwap
 
 Use the below query to track Pump Fun token migrations to PumpSwap in realtime. You will get the following account addresses information through the query's `Instruction Accounts[]` field and the amount of liquidity added through arguments' `Value` field
-
 
 You can test the query [here](https://ide.bitquery.io/pumpfun-migration-stream_2#).
 
@@ -941,10 +970,12 @@ query MyQuery {
 }
 ```
 
-## Video Tutorial | How to get Trades, Trades of a token and Trades of a trader on PumpSwap DEX in realtime
+## PumpSwap Video Tutorials
+
+### Video Tutorial | How to get Trades, Trades of a token and Trades of a trader on PumpSwap DEX in realtime
 
 <VideoPlayer url="https://www.youtube.com/watch?v=MMazeabdirM" />
 
-## Video Tutorial | How to get Top Traders on PumpSwap AMM
+### Video Tutorial | How to get Top Traders on PumpSwap AMM
 
 <VideoPlayer url="https://www.youtube.com/watch?v=TwQoD5vybLI" />
