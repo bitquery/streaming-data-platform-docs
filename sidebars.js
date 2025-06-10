@@ -212,7 +212,7 @@ const sidebars = {
             },
             "streams/compare-websocket-kafka",
             "streams/real-time-solana-data",
-            "streams/trade-using-kafka",
+            "streams/sniper-trade-using-bitquery-kafka-stream",
           ],
         },
       ],
