@@ -2,7 +2,7 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this document, we will explore several examples related to Bonk fun and Bonk Swap data.
+In this document, we will explore several examples related to Bonk fun and BonkSwap data.
 
 Need zero-latency Bonk fun data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
@@ -11,6 +11,14 @@ To query or stream data via graphQL **outside the Bitquery IDE**, you need to ge
 
 Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
+
+## Table of Contents
+
+- [Track Bonk.fun Token Creation](#track-bonkfun-token-creation)
+- [BonkSwap Examples](#bonkswap-examples)
+  - [Latest Trades on BonkSwap](#latest-trades-on-bonkswap)
+  - [Get Top Traders on BonkSwap](#get-top-traders-on-bonkswap)
+  - [Get Latest Trades By Trader on BonkSwap](#get-latest-trades-by-trader-on-bonkswap)
 
 <head>
   <meta name="title" content="Bonk Fun API - Solana - Tokens, Trades, Live Prices"/>
@@ -82,6 +90,8 @@ Using [this](https://ide.bitquery.io/latest-token-created-on-bonk-fun) query, we
   }
 }
 ```
+
+## BonkSwap Examples
 
 ## Latest Trades on BonkSwap
 
@@ -202,6 +212,82 @@ query TopTraders {
         }
       }
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+```
+
+## Get Latest Trades By Trader on BonkSwap
+
+The below API fetches recent trades by a particular trader. We use the `Transaction->Signer` field to set this criteria.
+
+[Run Query ➤](https://ide.bitquery.io/Bonkswap-Trades-by-Trader-API)
+
+```
+{
+  Solana(network: solana, dataset: realtime) {
+    DEXTrades(
+      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Trade_Index}]
+      limit: {count: 10}
+      where: {Transaction: {Signer: {is: "EATeN8nptyVmydeDGD6966Sgw14BXdbLwxKXr19UH9q8"}}, Trade: {Dex: {ProtocolName: {is: "bonkswap"}}}}
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Program {
+          Method
+        }
+      }
+      Trade {
+        Dex {
+          ProtocolFamily
+          ProtocolName
+          ProgramAddress
+        }
+        Buy {
+          Price
+          PriceInUSD
+          Amount
+          AmountInUSD
+          Account {
+            Address
+            Owner
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+        Sell {
+          Price
+          PriceInUSD
+          Amount
+          AmountInUSD
+          Account {
+            Owner
+            Address
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+        FeePayer
+      }
     }
   }
 }
