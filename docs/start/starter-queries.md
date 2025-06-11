@@ -15,6 +15,112 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 ## Solana
 
+### Get Token Metadata
+
+Get the token metadata for contract (mint, standard, name, symbol).
+▶️ [Get Token Metadata](https://ide.bitquery.io/Solana-currency-details)
+
+### Get Native and SPL Token Balance by Wallet
+
+Gets the portfolio for an address.
+▶️ [Get Native and SPL Token Balance by Wallet](https://ide.bitquery.io/tokens-owned-by-an-address)
+
+### Get Native Token Balance by Wallet
+
+Gets the native balance owned by an address.
+▶️ [Get Native Token Balance by Wallet](https://ide.bitquery.io/native-token-balance-for-an-address)
+
+### Get SPL Token Balances by Wallet
+
+Gets the token balances owned by a given network and address.
+▶️ [Get SPL Token Balances by Wallet](https://ide.bitquery.io/spl-token-balance-for-an-address)
+
+### Get New Tokens for PumpFun
+
+Returns a list of newly created tokens on the Pump Fun.
+▶️ [Get New Tokens for PumpFun](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+
+### Get Bonding Curve Progress of a Token on Pump Fun
+
+Returns Bonding Curve Percentage of a Token on the Pump Fun.
+▶️ [Bonding Curve Percentage of a Token on Pump Fun](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/#bonding-curve-progress-api)
+
+### Get Graduated Tokens by Exchange
+
+Returns a list of tokens that have graduated (completed bonding phase) on Pump Fun to PumpSwap.
+▶️ [Get Graduated Tokens by Exchange](https://ide.bitquery.io/track-Pump-fun-migration-using-joins_3)
+
+### Get Top Token Holders
+
+Get a list of top token holders for a specific Solana token address.
+▶️ [Get Top Token Holders](https://ide.bitquery.io/top-100-holders-of-USDC-token-on-Solana)
+
+### Get Swaps by Pair Address
+
+Get all swap related transactions for a specific pair address.
+▶️ [Get Swaps by Pair Address](https://ide.bitquery.io/Get-Swaps-by-Pair-Address)
+
+### Get Swaps by Token Address
+
+Get all swap related transactions (buy, sell) for a specific token address.
+▶️ [Get Swaps by Token Address](https://ide.bitquery.io/Latest-Trades-of-Trump-COin)
+
+### Get Swaps by Wallet Address
+
+Get all swap related transactions (buy, sell) for a specific wallet address.
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/Trades-of-wallets-in-realtime_1)
+
+### Get Token Pairs by Address
+
+Get the supported pairs for a specific token address.
+▶️ [Get Token Pairs by Address](https://ide.bitquery.io/traded-pairs-of-a-token_2)
+
+### Get Token Pair Stats
+
+Get the pair stats by using pair address.
+▶️ [Get Token Pair Stats](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair)
+
+### Get Aggregated Token Pair Stats
+
+Get aggregated statistics across supported pairs of a token.
+▶️ [Get Aggregated Token Pair Stats](https://ide.bitquery.io/traded-pairs-stats-of-a-token)
+
+### Get Token Analytics
+
+Get analytics for a token by token address.
+▶️ [Get Token Analytics](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-solana-token)
+
+### Get Multiple Token Analytics
+
+Returns analytics data for multiple token addresses.
+▶️ [Get Multiple Token Analytics](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-multiple-solana-tokens)
+
+### Get Volume Stats for Solana Chain
+
+Returns volume statistics, active wallets, and total transactions for Solana.
+▶️ [Get Volume Stats By Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets)
+
+### Get Token Price
+
+Gets the token price (usd and native) for a given contract address.
+▶️ [Get Token Price](https://ide.bitquery.io/Get-Token-Price_1)
+
+### Get Multiple Token Prices on Solana
+
+Returns price information for multiple Solana tokens in a single request.
+▶️ [Get Multiple Token Prices on Solana](https://ide.bitquery.io/Get-multiple-Token-Prices)
+
+### Get OHLCV by Pair Address
+
+You can get charting data easily with this query. Adjust the intervals as necessary. This query supports historical data.  
+▶️ [Get OHLCV by Pair Address](https://ide.bitquery.io/OHLC-for-a-token_1)
+
+### Search Tokens
+
+Search for tokens based on contract address, token name or token symbol.
+▶️ [Search Tokens based on token symbol](https://ide.bitquery.io/Token-Search-API---trump-symbol)
+▶️ [Search Tokens based on token name](https://ide.bitquery.io/Token-search-api-in-mint-address)
+
 ### Solana Transfers
 
 This query gets the latest 10 transfers on Solana. You can increase the limit to get more transfers. This query only uses real-time data.  
@@ -32,11 +138,6 @@ The same query, when modified, streams real-time trades:
 
 With this, you can query the trades of a token against another currency like WSOL or USDC.  
 ▶️ [Trades of a Token](https://ide.bitquery.io/Latest-Trades-of-Trump-COin)
-
-### Solana OHLC / K-line
-
-You can get charting data easily with this query. Adjust the intervals as necessary. This query supports historical data.  
-▶️ [Solana OHLC](https://ide.bitquery.io/historical-ohlc-for-solana_3)
 
 ### Solana Instructions
 
@@ -103,6 +204,156 @@ This query returns the latest price of a token when traded against another token
 ▶️ [Live Token Price](https://ide.bitquery.io/live-price-of-token-on-raydium---updated)
 
 ## EVM
+
+### Get Wallet Transaction History
+
+Retrieve the full transaction history of a specified wallet address, including sends, receives, token and NFT transfers..
+▶️ [Get Wallet Transaction History](https://ide.bitquery.io/Get-Wallet-Transaction-History_1)
+
+### Get native transactions by wallet
+
+Get native transactions ordered by block number in descending order.
+▶️ [Get native transactions by wallet](https://ide.bitquery.io/Get-native-transactions-by-wallet_1)
+
+### Get ERC20 token transfers by wallet
+
+Get ERC20 token transactions ordered by block number in descending order.
+▶️ [Get ERC20 token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_2)
+
+### Get NFT transfers by wallet
+
+Get transfers of NFTs given the wallet and other parameters.
+▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/Get-NFT-transfers-by-wallet_2)
+
+### Get NFT trades by wallet
+
+Get trades of NFTs for a given wallet.
+▶️ [Get NFT trades by wallet](https://ide.bitquery.io/NFT-trades-of-an-address)
+
+### Get Native & ERC20 Token Balances by Wallet
+
+Get token balances for a specific wallet address.
+▶️ [Get Native & ERC20 Token Balances by Wallet](https://ide.bitquery.io/balance-of-a-wallet_1)
+
+### Get ERC20 Token Balance by Wallet
+
+Get token balances for a specific wallet address.
+▶️ [Get ERC20 Token Balance by Wallet](https://ide.bitquery.io/Get-ERC20-Token-Balance-by-Wallet)
+
+### Get Native Balance by Wallet
+
+Get the native balance for a specific wallet address.
+▶️ [Get Native Balance by Wallet](https://ide.bitquery.io/Get-Native-Balance-by-Wallet)
+
+### Get Native Balance for Multiple Wallets
+
+Get the native balances for a set of specific addresses.
+▶️ [Get Native Balance for Multiple Wallets](https://ide.bitquery.io/Get-Native-Balance-for-multiple-Wallet)
+
+### Get NFTs by wallet
+
+Get NFTs owned by a given address.
+▶️ [Get NFTs by wallet](https://ide.bitquery.io/Get-NFTs-by-wallet)
+
+### Get Swaps by Wallet Address
+
+Get all swap related transactions (buy, sell).
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest_trades_by_maker)
+
+### Get wallet net worth
+
+Get the net worth of a wallet in USD.
+▶️ [Get wallet net worth](https://ide.bitquery.io/balance-of-a-wallet-in-USD_2)
+
+### Get NFTs a specific wallet holds
+
+Get NFTs owned by a given address.
+▶️ [Get NFTs by wallet](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
+
+### Get NFTs a contract holds
+
+Get NFTs for a given contract address, including metadata for all NFTs (where available).
+▶️ [Get NFTs by contract](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
+
+### Get NFT metadata
+
+Get NFT data, including metadata (where available), for the given NFT contract address.
+▶️ [Get NFT metadata](https://ide.bitquery.io/Get-NFT-metadata)
+
+### Get Metadata for Multiple NFT Contracts
+
+Get the metadata for a given list of contract addresses.
+▶️ [Get Metadata for Multiple NFT Contracts](https://ide.bitquery.io/Get-Metadata-for-Multiple-NFT-Contracts_1)
+
+### Get NFT transfers by wallet
+
+Get transfers of NFTs given the wallet.
+▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/latest-nft-transfers-by-a-user)
+
+### Get NFT owners by contract
+
+Get owners of NFTs for a given contract.
+▶️ [Get NFT owners by contract](https://ide.bitquery.io/top-token-holders-of-Moonwalker-NFT)
+
+### Get NFT owners by token ID
+
+Get owners of a specific NFT given the contract address and token ID.
+▶️ [Get NFT owners by token ID](https://ide.bitquery.io/Who-owns-specific-NFT)
+
+### Get NFT trades for a specific NFT contract on specific marketplace
+
+Get trades of NFTs for a given contract and marketplace.
+▶️ [Get NFT trades by contract](https://ide.bitquery.io/Get-NFT-trades-by-contract)
+
+### Get NFT trades for a specific NFT contract and token ID
+
+Get trades of NFTs for a given contract and token ID.
+▶️ [Get NFT trades by token](hhttps://ide.bitquery.io/Get-NFT-trades-by-token)
+
+### Get NFT trades by wallet
+
+Get trades of NFTs for a given wallet.
+▶️ [Get NFT trades by wallet](https://ide.bitquery.io/Get-trades-of-NFTs-for-a-given-wallet)
+
+### Get all NFTs in a collection
+
+Get all NFTs in a collection.
+▶️ [Get all NFTs in a collection](https://ide.bitquery.io/Get-all-NFTs-for-a-collection)
+
+### Get ERC20 Token Price
+
+Get the token price denominated in the blockchain's native token and USD.
+▶️ [Get ERC20 Token Prices](https://ide.bitquery.io/Price-of-a-token-in-realtime_2)
+
+### Get Multiple ERC20 Token Prices
+
+Returns an array of token prices denominated in the blockchain's native token and USD for a given token contract address
+▶️ [Get Multiple ERC20 Token Prices](https://ide.bitquery.io/Price-of-multiple-tokens-in-realtime)
+
+### Get OHLCV by Pair Address
+
+Get the OHLCV candle stick by using pair address
+▶️ [Get OHLCV by Pair Address](https://ide.bitquery.io/OHLC0_8)
+
+### Get blocks on a specific date
+
+Get the blocks given the date.
+▶️ [Get block by date](https://ide.bitquery.io/Get-blocks-on-a-specific-date)
+
+### Get transaction by hash
+
+Get the contents of a transaction by the given transaction hash.
+▶️ [Get transaction by hash](https://ide.bitquery.io/Get-transaction-by-hash_1)
+
+### Get transactions by wallet
+
+Get transactions ordered by block number in descending order.
+▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet)
+
+### Get Latest Block Number
+
+Returns the latest block number.
+▶️ [Get Latest Block Number](https://ide.bitquery.io/latest-block-number_1)
 
 ### Ethereum Balance Update
 
