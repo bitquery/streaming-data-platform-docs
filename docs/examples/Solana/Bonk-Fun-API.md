@@ -19,6 +19,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
   - [Latest Trades on BonkSwap](#latest-trades-on-bonkswap)
   - [Get Top Traders on BonkSwap](#get-top-traders-on-bonkswap)
   - [Get Latest Trades By Trader on BonkSwap](#get-latest-trades-by-trader-on-bonkswap)
+  - [OHLC of a token on BonkSwap](#get-ohlc-for-a-bonkswap-token)
 
 <head>
   <meta name="title" content="Bonk Fun API - Solana - Tokens, Trades, Live Prices"/>
@@ -291,5 +292,35 @@ The below API fetches recent trades by a particular trader. We use the `Transact
     }
   }
 }
+
+```
+
+## Get OHLC for a BonkSwap Token
+
+[Run Query ➤](https://ide.bitquery.io/ohlc-for-bonkswap-token)
+
+```
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Dex: {ProtocolName: {is: "bonkswap"}}, Currency: {MintAddress: {is: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 100}
+      orderBy: {descendingByField: "Block_Timefield"}
+    ){
+      Block{
+        Timefield: Time(interval:{count:1 in:minutes})
+      }
+      Trade{
+        open: Price(minimum:Block_Slot)
+        high: Price(maximum:Trade_Price)
+        low: Price(minimum:Trade_Price)
+        close: Price(maximum:Block_Slot)
+      }
+      volumeInUSD: sum(of:Trade_Side_AmountInUSD)
+      count
+    }
+  }
+}
+
 
 ```
