@@ -6,7 +6,22 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Base Uniswap API
 
-This section provides you with a set of queries that provides an insight about the Uniswap DEX on Base.
+Bitquery provides Uniswap data through APIs, Streams and Data Dumps.
+The below graphQL APIs and Streams are examples of data points you can get with Bitquery for Uniswap on Base.
+If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
+
+Need zero-latency Base data? [Read about our Kafka Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+
+You may also be interested in:
+
+- [Clanker APIs ➤](https://docs.bitquery.io/docs/examples/Base/base-clanker-api/)
+- [Base DEX Trade APIs ➤](https://docs.bitquery.io/docs/examples/Base/base-dextrades/)
+
+:::note
+To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
+
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+:::
 
 <head>
   <meta name="title" content="Base Uniswap API - Base - Tokens, Trades, Live Prices"/>
@@ -39,9 +54,9 @@ Below query will subscribe you to the latest DEX Trades on Uniswap v3. Try out t
 query MyQuery {
   EVM(dataset: realtime, network: base) {
     DEXTrades(
-      where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v3"}}}}
-      limit: {count: 10}
-      orderBy:{descending:Block_Time}
+      where: { Trade: { Dex: { ProtocolName: { is: "uniswap_v3" } } } }
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
     ) {
       Transaction {
         From
@@ -116,12 +131,28 @@ This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a s
 {
   EVM(network: base, dataset: realtime) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_testfield"}
-      where: {Trade: {Currency: {SmartContract: {is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b"}}, Side: {Currency: {SmartContract: {is: "0x4200000000000000000000000000000000000006"}}, Type: {is: buy}}, PriceAsymmetry: {lt: 0.1}, Dex: {ProtocolName: {is: "uniswap_v3"}}}}
-      limit: {count: 10}
+      orderBy: { descendingByField: "Block_testfield" }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b" }
+          }
+          Side: {
+            Currency: {
+              SmartContract: {
+                is: "0x4200000000000000000000000000000000000006"
+              }
+            }
+            Type: { is: buy }
+          }
+          PriceAsymmetry: { lt: 0.1 }
+          Dex: { ProtocolName: { is: "uniswap_v3" } }
+        }
+      }
+      limit: { count: 10 }
     ) {
       Block {
-        testfield: Time(interval: {in: hours, count: 1})
+        testfield: Time(interval: { in: hours, count: 1 })
       }
       volume: sum(of: Trade_Amount)
       Trade {
@@ -144,7 +175,15 @@ This query fetches you the traded volume, buy volume and sell volume of a token 
 query MyQuery {
   EVM(network: base) {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {SmartContract: {is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b"}}}, TransactionStatus: {Success: true}, Block: {Time: {since: "2025-02-12T00:00:00Z"}}}
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b" }
+          }
+        }
+        TransactionStatus: { Success: true }
+        Block: { Time: { since: "2025-02-12T00:00:00Z" } }
+      }
     ) {
       Trade {
         Currency {
@@ -157,11 +196,11 @@ query MyQuery {
       traded_volume_in_usd: sum(of: Trade_Side_AmountInUSD)
       sell_volume_in_usd: sum(
         of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: buy}}}}
+        if: { Trade: { Side: { Type: { is: buy } } } }
       )
       buy_volume_in_usd: sum(
         of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: sell}}}}
+        if: { Trade: { Side: { Type: { is: sell } } } }
       )
     }
   }
@@ -240,9 +279,16 @@ Use the below query to get Token's metadata like `Name`, `symbol`, `SmartContrac
 query MyQuery {
   EVM(network: base, dataset: realtime) {
     DEXTradeByTokens(
-      limit: {count: 1}
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Currency: {SmartContract: {is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b"}}, Dex: {ProtocolName: {is: "uniswap_v3"}}}}
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b" }
+          }
+          Dex: { ProtocolName: { is: "uniswap_v3" } }
+        }
+      }
     ) {
       Trade {
         Currency {
@@ -258,7 +304,6 @@ query MyQuery {
     }
   }
 }
-
 ```
 
 ## Building with Bitquery and Uniswap API
