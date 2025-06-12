@@ -373,7 +373,7 @@ This query returns the latest trades on the Ethereum network. This is useful whe
 ### Ethereum Transfers
 
 This query returns transfers that occurred on the Ethereum network, including info such as amount of tokens transferred, sender, receiver, and currency details.  
-▶️ [Ethereum Transfers](https://ide.bitquery.io/ethereum-transfers_5)
+▶️ [Ethereum Transfers](https://ide.bitquery.io/ethereum-transfers_10)
 
 ### Ethereum Events
 
