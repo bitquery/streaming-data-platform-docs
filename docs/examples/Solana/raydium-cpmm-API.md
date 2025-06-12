@@ -2,9 +2,7 @@
 
 In this section we will see how to get data on Raydium CPMM trades in real-time. You can check out our [Pump Fun docs](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/), [Raydium v4 docs](https://docs.bitquery.io/docs/examples/Solana/Solana-Raydium-DEX-API/) and [Raydium LaunchPad docs](https://docs.bitquery.io/docs/examples/Solana/launchpad-raydium/) too.
 
-This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
 
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 :::note
 `Trade Side Account` field will not be available as aggregates in Archive and Combined Datasets

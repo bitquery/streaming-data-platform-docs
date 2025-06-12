@@ -2,9 +2,7 @@
 
 Solana Logs API helps you filter program instruction logs using regular expressions.
 
-This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
 
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
 
 # Finding Instructions with Log Matching
 
