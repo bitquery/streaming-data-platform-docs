@@ -167,7 +167,7 @@ This query returns Solana network rewards info such as the address that receives
 ### Solana Balance Update
 
 This query returns Solana balance update info for any balance update event. It includes the address, amount, currency details, and the amount of tokens present in a particular address before and after the update.  
-▶️ [Balance Update](https://ide.bitquery.io/solana-balance-update-stream)
+▶️ [Balance Update](https://ide.bitquery.io/solana-balance-update)
 
 ### Solana Instruction Balance Updates
 
