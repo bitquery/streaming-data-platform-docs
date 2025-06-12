@@ -2,10 +2,6 @@
 
 In this section we'll have a look at some examples using the Tron Mempool API.
 
-This Tron API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
 <head>
 <meta name="title" content="Tron Mempool API - The Ultimate Solution to get your Mempool data"/>
 <meta name="description" content="Get Mempool data through our powerful and highly scalabe Mempool API. Access all information about pricing history, Tron Mempool transactions, and Mempool trades."/>
@@ -26,7 +22,6 @@ This program allows you to test the data and its integration into your applicati
   content="Get Mempool data through our powerful and highly scalabe Mempool API. Access all information about pricing history, Mempool balances, and Mempool trades."
 />
 </head>
-
 
 ## Latest Mempool Transfers
 

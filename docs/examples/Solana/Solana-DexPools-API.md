@@ -6,8 +6,6 @@ sidebar_position: 2
 
 In this section we will see how to get Solana DEX Pools information using our API.
 
-This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes. This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
 <head>
 <meta name="title" content="Solana DEX Pools API | Get Liquidity Data of the Pools"/>
 <meta name="description" content="Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, Phoenix etc through our DEX Pools API."/>

@@ -4,10 +4,6 @@ sidebar_position: 20
 
 # Solana Token Search API
 
-
-This Solana API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
 <head>
 <meta name="title" content="Solana Token Search API"/>
 <meta name="description" content="Search tokens on solana blockchain with their name or symbol and get their latest price and other details."/>
@@ -19,10 +15,7 @@ This program allows you to test the data and its integration into your applicati
 <!-- Open Graph / Facebook -->
 
 <meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Solana Token Search API"
-/>
+<meta property="og:title" content="Solana Token Search API" />
 <meta
   property="og:description"
   content="Search tokens on solana blockchain with their name or symbol and get their latest price and other details."
@@ -37,22 +30,20 @@ This program allows you to test the data and its integration into your applicati
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-
 ## Search Tokens on Solana
 
 You can search tokens on Solana using names or symbols using our APIs and get prices and other details.
 
 You can find the query [here](https://ide.bitquery.io/search-solana-tokens)
 
-
 ```graphql
 {
   Solana {
     DEXTrades(
-      orderBy: {descending: Block_Time}
-      limit: {count: 100}
-      limitBy: {by: Trade_Buy_Currency_MintAddress, count: 1}
-      where: {Trade: {Buy: {Currency: {Name: {includes: "pe"}}}}}
+      orderBy: { descending: Block_Time }
+      limit: { count: 100 }
+      limitBy: { by: Trade_Buy_Currency_MintAddress, count: 1 }
+      where: { Trade: { Buy: { Currency: { Name: { includes: "pe" } } } } }
     ) {
       Trade {
         Buy {
@@ -83,12 +74,13 @@ You can search tokens on Solana using names or symbols case insensitively also u
 
 You can find the query [here](https://ide.bitquery.io/Currency-with-elon-inclusion).
 
-
 ```graphql
 {
   Solana {
     Transfers(
-      where: {Transfer: {Currency: {Symbol: {includesCaseInsensitive: "elon"}}}}
+      where: {
+        Transfer: { Currency: { Symbol: { includesCaseInsensitive: "elon" } } }
+      }
     ) {
       Transfer {
         Currency {
@@ -100,7 +92,6 @@ You can find the query [here](https://ide.bitquery.io/Currency-with-elon-inclusi
     }
   }
 }
-
 ```
 
 ## Search Tokens with Symbol on Solana using likeCaseInsensitive (Case Insensitive)
@@ -108,14 +99,17 @@ You can find the query [here](https://ide.bitquery.io/Currency-with-elon-inclusi
 Get tokens which have a certain specific symbol. This API is case insensitive. In this API we are getting tokens in descending order of their trade volume in last hour which has symbol `trump`.
 You can find the query [here](https://ide.bitquery.io/Token-Search-API---trump-symbol#).
 
-
 ```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Block: {Time: {since: "2025-02-28T07:00:00Z"}}, Trade: {Currency: {Symbol: {likeCaseInsensitive: "trump"}}}, Transaction: {Result: {Success: true}}}
-      limit: {count: 50}
-      orderBy:{descendingByField:"trade_volume"}
+      where: {
+        Block: { Time: { since: "2025-02-28T07:00:00Z" } }
+        Trade: { Currency: { Symbol: { likeCaseInsensitive: "trump" } } }
+        Transaction: { Result: { Success: true } }
+      }
+      limit: { count: 50 }
+      orderBy: { descendingByField: "trade_volume" }
     ) {
       Trade {
         Currency {
@@ -137,7 +131,7 @@ query MyQuery {
           }
         }
       }
-      trade_volume: sum(of:Trade_Side_AmountInUSD)
+      trade_volume: sum(of: Trade_Side_AmountInUSD)
       trades: count
     }
   }
@@ -149,14 +143,17 @@ query MyQuery {
 Get tokens which have a certain specific symbol `%pump` where "%" can replace any number of characters, its basically a placeholder. This API is case insensitive. In this API we are getting tokens in descending order of their trade volume in last hour which has symbol ending with "pump".
 You can find the query [here](https://ide.bitquery.io/token-search-api--pump-wildcard#).
 
-
 ```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Block: {Time: {since: "2025-02-28T07:00:00Z"}}, Trade: {Currency: {Symbol: {likeCaseInsensitive: "%pump"}}}, Transaction: {Result: {Success: true}}}
-      limit: {count: 50}
-      orderBy:{descendingByField:"trade_volume"}
+      where: {
+        Block: { Time: { since: "2025-02-28T07:00:00Z" } }
+        Trade: { Currency: { Symbol: { likeCaseInsensitive: "%pump" } } }
+        Transaction: { Result: { Success: true } }
+      }
+      limit: { count: 50 }
+      orderBy: { descendingByField: "trade_volume" }
     ) {
       Trade {
         Currency {
@@ -178,27 +175,29 @@ query MyQuery {
           }
         }
       }
-      trade_volume: sum(of:Trade_Side_AmountInUSD)
+      trade_volume: sum(of: Trade_Side_AmountInUSD)
       trades: count
     }
   }
 }
-
 ```
 
-## Search Tokens with Symbol on Solana using likeCaseInsensitive plus wildcard(_) (Case Insensitive)
+## Search Tokens with Symbol on Solana using likeCaseInsensitive plus wildcard(\_) (Case Insensitive)
 
-Get tokens which have a certain specific symbol `p_e` where "_" will replace 1 character, its basically a placeholder for 1 character. This API is case insensitive. In this API we are getting tokens in descending order of their trade volume in last hour.
+Get tokens which have a certain specific symbol `p_e` where "\_" will replace 1 character, its basically a placeholder for 1 character. This API is case insensitive. In this API we are getting tokens in descending order of their trade volume in last hour.
 You can find the query [here](https://ide.bitquery.io/Token-Search-API-for-symbol---p_e-wildcard#).
-
 
 ```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Block: {Time: {since: "2025-02-28T07:00:00Z"}}, Trade: {Currency: {Symbol: {likeCaseInsensitive: "p_e"}}}, Transaction: {Result: {Success: true}}}
-      limit: {count: 50}
-      orderBy:{descendingByField:"trade_volume"}
+      where: {
+        Block: { Time: { since: "2025-02-28T07:00:00Z" } }
+        Trade: { Currency: { Symbol: { likeCaseInsensitive: "p_e" } } }
+        Transaction: { Result: { Success: true } }
+      }
+      limit: { count: 50 }
+      orderBy: { descendingByField: "trade_volume" }
     ) {
       Trade {
         Currency {
@@ -220,7 +219,7 @@ query MyQuery {
           }
         }
       }
-      trade_volume: sum(of:Trade_Side_AmountInUSD)
+      trade_volume: sum(of: Trade_Side_AmountInUSD)
       trades: count
     }
   }
@@ -232,14 +231,17 @@ query MyQuery {
 Get tokens which have a certain specific address `%pump` where "%" can replace any number of characters, its basically a placeholder. This API is case insensitive. In this API we are getting tokens in descending order of their trade volume in last hour which has mint address ending with "pump".
 You can find the query [here](https://ide.bitquery.io/Token-search-api-in-mint-address#).
 
-
 ```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Block: {Time: {since: "2025-02-28T07:00:00Z"}}, Trade: {Currency: {MintAddress: {likeCaseInsensitive: "%pump"}}}, Transaction: {Result: {Success: true}}}
-      limit: {count: 50}
-      orderBy:{descendingByField:"trade_volume"}
+      where: {
+        Block: { Time: { since: "2025-02-28T07:00:00Z" } }
+        Trade: { Currency: { MintAddress: { likeCaseInsensitive: "%pump" } } }
+        Transaction: { Result: { Success: true } }
+      }
+      limit: { count: 50 }
+      orderBy: { descendingByField: "trade_volume" }
     ) {
       Trade {
         Currency {
@@ -261,12 +263,13 @@ query MyQuery {
           }
         }
       }
-      trade_volume: sum(of:Trade_Side_AmountInUSD)
+      trade_volume: sum(of: Trade_Side_AmountInUSD)
       trades: count
     }
   }
 }
 ```
+
 ## Video Tutorial | Token Search API Overview | Search Tokens efficiently using symbol, address, etc
 
 <VideoPlayer url="https://www.youtube.com/watch?v=dSFFhMiokRA" />
