@@ -6,7 +6,7 @@ sidebar_position: 1
 
 To choose the right Bitquery API offering, it helps to understand their differences. The table below summarizes key features and capabilities of GraphQL Query vs GraphQL Subscription vs Kafka Streams:
 
-| Feature / Method                  | GraphQL Query                                | GraphQL Subscription (WebSocket)               | Kafka Streams (JSON or Protobuf)                          |
+| Feature / Method                  | GraphQL Query                                | GraphQL Subscription (WebSocket)               | Kafka Streams (Protobuf)                          |
 | --------------------------------- | -------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------- |
 | **Use case**                      | On‑demand historical + real‑time via polling | Real-time pushes for new on-chain events       | High‑throughput, event-driven pipelines                   |
 | **Data model**                    | Flexible GraphQL with filtering, aggregation | Same GraphQL query syntax, live updates        | Topic-based structured streams with JSON or Protobuf      |
