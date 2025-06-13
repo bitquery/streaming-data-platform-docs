@@ -4,6 +4,7 @@
 const sidebars = {
   tutorialSidebar: [
     "intro",
+    "api-comparison",
     {
       type: "category",
       label: "Start",

@@ -4,9 +4,7 @@ sidebar_position: 1
 
 # Polygon (MATIC) Balance Updates API
 
-In thise section we will see how to monitor real-time balance changes across the Polygon (MATIC) blockchain
-
-
+In thise section we will see how to monitor real-time balance changes across the Polygon (MATIC) blockchain.
 
 <head>
 <meta name="title" content="How to get Polygon (MATIC) Balance Updates of an address"/>
