@@ -205,16 +205,6 @@ Get native transactions ordered by block number in descending order.
 Get ERC20 token transactions ordered by block number in descending order.
 ▶️ [Get ERC20 token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_2)
 
-### Get NFT transfers by wallet
-
-Get transfers of NFTs given the wallet and other parameters.
-▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/Get-NFT-transfers-by-wallet_2)
-
-### Get NFT trades by wallet
-
-Get trades of NFTs for a given wallet.
-▶️ [Get NFT trades by wallet](https://ide.bitquery.io/NFT-trades-of-an-address)
-
 ### Get Native & ERC20 Token Balances by Wallet
 
 Get token balances for a specific wallet address.
@@ -249,61 +239,6 @@ Get all swap related transactions (buy, sell).
 
 Get the net worth of a wallet in USD.
 ▶️ [Get wallet net worth](https://ide.bitquery.io/balance-of-a-wallet-in-USD_2)
-
-### Get NFTs a specific wallet holds
-
-Get NFTs owned by a given address.
-▶️ [Get NFTs by wallet](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
-
-### Get NFTs a contract holds
-
-Get NFTs for a given contract address, including metadata for all NFTs (where available).
-▶️ [Get NFTs by contract](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
-
-### Get NFT metadata
-
-Get NFT data, including metadata (where available), for the given NFT contract address.
-▶️ [Get NFT metadata](https://ide.bitquery.io/Get-NFT-metadata)
-
-### Get Metadata for Multiple NFT Contracts
-
-Get the metadata for a given list of contract addresses.
-▶️ [Get Metadata for Multiple NFT Contracts](https://ide.bitquery.io/Get-Metadata-for-Multiple-NFT-Contracts_1)
-
-### Get NFT transfers by wallet
-
-Get transfers of NFTs given the wallet.
-▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/latest-nft-transfers-by-a-user)
-
-### Get NFT owners by contract
-
-Get owners of NFTs for a given contract.
-▶️ [Get NFT owners by contract](https://ide.bitquery.io/top-token-holders-of-Moonwalker-NFT)
-
-### Get NFT owners by token ID
-
-Get owners of a specific NFT given the contract address and token ID.
-▶️ [Get NFT owners by token ID](https://ide.bitquery.io/Who-owns-specific-NFT)
-
-### Get NFT trades for a specific NFT contract on specific marketplace
-
-Get trades of NFTs for a given contract and marketplace.
-▶️ [Get NFT trades by contract](https://ide.bitquery.io/Get-NFT-trades-by-contract)
-
-### Get NFT trades for a specific NFT contract and token ID
-
-Get trades of NFTs for a given contract and token ID.
-▶️ [Get NFT trades by token](hhttps://ide.bitquery.io/Get-NFT-trades-by-token)
-
-### Get NFT trades by wallet
-
-Get trades of NFTs for a given wallet.
-▶️ [Get NFT trades by wallet](https://ide.bitquery.io/Get-trades-of-NFTs-for-a-given-wallet)
-
-### Get all NFTs in a collection
-
-Get all NFTs in a collection.
-▶️ [Get all NFTs in a collection](https://ide.bitquery.io/Get-all-NFTs-for-a-collection)
 
 ### Get ERC20 Token Price
 
@@ -387,7 +322,62 @@ This query returns mining rewards info for Ethereum, including transaction fees,
 
 ## NFT APIs
 
-### Latest Trades
+### Get NFTs a specific wallet holds
+
+Get NFTs owned by a given address.
+▶️ [Get NFTs by wallet](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
+
+### Get NFTs a contract holds
+
+Get NFTs for a given contract address, including metadata for all NFTs (where available).
+▶️ [Get NFTs by contract](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
+
+### Get NFT metadata
+
+Get NFT data, including metadata (where available), for the given NFT contract address.
+▶️ [Get NFT metadata](https://ide.bitquery.io/Get-NFT-metadata)
+
+### Get Metadata for Multiple NFT Contracts
+
+Get the metadata for a given list of contract addresses.
+▶️ [Get Metadata for Multiple NFT Contracts](https://ide.bitquery.io/Get-Metadata-for-Multiple-NFT-Contracts_1)
+
+### Get NFT transfers by wallet
+
+Get transfers of NFTs given the wallet.
+▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/latest-nft-transfers-by-a-user)
+
+### Get NFT owners by contract
+
+Get owners of NFTs for a given contract.
+▶️ [Get NFT owners by contract](https://ide.bitquery.io/top-token-holders-of-Moonwalker-NFT)
+
+### Get NFT owners by token ID
+
+Get owners of a specific NFT given the contract address and token ID.
+▶️ [Get NFT owners by token ID](https://ide.bitquery.io/Who-owns-specific-NFT)
+
+### Get NFT trades for a specific NFT contract on specific marketplace
+
+Get trades of NFTs for a given contract and marketplace.
+▶️ [Get NFT trades by contract](https://ide.bitquery.io/Get-NFT-trades-by-contract)
+
+### Get NFT trades for a specific NFT contract and token ID
+
+Get trades of NFTs for a given contract and token ID.
+▶️ [Get NFT trades by token](hhttps://ide.bitquery.io/Get-NFT-trades-by-token)
+
+### Get NFT trades by wallet
+
+Get trades of NFTs for a given wallet.
+▶️ [Get NFT trades by wallet](https://ide.bitquery.io/Get-trades-of-NFTs-for-a-given-wallet)
+
+### Get all NFTs in a collection
+
+Get all NFTs in a collection.
+▶️ [Get all NFTs in a collection](https://ide.bitquery.io/Get-all-NFTs-for-a-collection)
+
+### Latest NFT Trades
 
 This query gets the latest 10 NFT trades on Ethereum mainnet. You can increase the limit to whatever you like, up to 25,000. Currently, it only retrieves data from the real-time database. To include historical data, use `dataset: combined`.  
 ▶️ [Latest NFT Trades](https://ide.bitquery.io/Latest-NFT-trades-on-ETH)
