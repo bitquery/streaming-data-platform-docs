@@ -64,6 +64,11 @@ This query returns Solana balance update info for any balance update event. It i
 
 ## Solana Pools API
 
+### All Token Pairs Across DEXs with Current Liquidity
+
+This query retrieves all instances of a specific token pair across decentralized exchanges (DEXs) on Solana, along with their current liquidity.
+▶️ [All Token Pairs Across DEXs with Current Liquidity](https://ide.bitquery.io/All-Liquidity-pairs-of-a-token-and-current-liquidity-on-solana)
+
 ### Solana Pool Liquidity Changes
 
 This query retrieves the latest changes to liquidity pools on Solana, including the change amount and the price at which the change happened. This query also uses only the real-time data set.  
