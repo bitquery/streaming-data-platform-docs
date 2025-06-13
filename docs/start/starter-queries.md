@@ -230,11 +230,6 @@ Get the native balance for a specific wallet address.
 Get the native balances for a set of specific addresses.
 ▶️ [Get Native Balance for Multiple Wallets](https://ide.bitquery.io/Get-Native-Balance-for-multiple-Wallet)
 
-### Get NFTs by wallet
-
-Get NFTs owned by a given address.
-▶️ [Get NFTs by wallet](https://ide.bitquery.io/Get-NFTs-by-wallet)
-
 ### Get Swaps by Wallet Address
 
 Get all swap related transactions (buy, sell).
