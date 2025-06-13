@@ -40,6 +40,11 @@ Get all trades related transactions (buy, sell) for a specific wallet address.
 Get all trades related transactions for a specific pair address.
 ▶️ [Get Swaps by Pair Address](https://ide.bitquery.io/Get-Swaps-by-Pair-Address)
 
+### Get Volume Stats for Solana Chain
+
+Returns volume statistics, active wallets, and total transactions for Solana.
+▶️ [Get Volume Stats By Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets)
+
 ## Solana Balance API
 
 ### Get SPL Token Balances by Wallet
@@ -101,16 +106,13 @@ Get aggregated statistics across supported pairs of a token.
 Returns analytics data for multiple token addresses.
 ▶️ [Get Multiple Token Analytics](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-multiple-solana-tokens)
 
-### Get Volume Stats for Solana Chain
-
-Returns volume statistics, active wallets, and total transactions for Solana.
-▶️ [Get Volume Stats By Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets)
-
 ### Search Tokens
 
 Search for tokens based on contract address, token name or token symbol.
 ▶️ [Search Tokens based on token symbol](https://ide.bitquery.io/Token-Search-API---trump-symbol)
 ▶️ [Search Tokens based on token name](https://ide.bitquery.io/Token-search-api-in-mint-address)
+
+## Other Solana API 
 
 ### Solana Transfers
 
