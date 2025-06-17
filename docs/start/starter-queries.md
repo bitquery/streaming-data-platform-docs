@@ -12,6 +12,8 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Uniswap V3 API](#uniswap-v3-api)
 - [TRON APIs](#tron)
 - [Bitcoin APIs](#bitcoin)
+- [Cardano APIs](#cardano)
+- [Ripple APIs](#ripple)
 - [More APIs](#more-apis)
 
 ## Solana Trade API
@@ -118,7 +120,7 @@ Search for tokens based on contract address, token name or token symbol.
 ▶️ [Search Tokens based on token symbol](https://ide.bitquery.io/Token-Search-API---trump-symbol)
 ▶️ [Search Tokens based on token name](https://ide.bitquery.io/Token-search-api-in-mint-address)
 
-## Other Solana API 
+## Other Solana API
 
 ### Solana Transfers
 
@@ -430,14 +432,22 @@ This query returns the most recent events and logs for the TRON network. It incl
 ## Bitcoin
 
 ### Bitcoin Balance API
-Retrieve the total incoming and outgoing transactions for a specific Bitcoin wallet. The balance is calculated as:  Balance = Total Output - Total Input. You can also specify a date to get the historical balance.
+
+Retrieve the total incoming and outgoing transactions for a specific Bitcoin wallet. The balance is calculated as: Balance = Total Output - Total Input. You can also specify a date to get the historical balance.
 
 ▶️ [Bitcoin Balance API](https://ide.bitquery.io/Bitcoin-balance-using-input-outputs)
 
 ### Bitcoin Balance for multiple addresses
+
 This query calculates the combined balance of multiple Bitcoin wallet addresses by summing their total inflows and outflows: Balance = Total Output - Total Input. You can also set a date to get balances as of a specific point in time.
 
 ▶️ [Bitcoin Balance for multiple addresses](https://ide.bitquery.io/BTC-balance-api-for-multiple-addresses)
+
+### Latest Bitcoin Price
+
+You can get price of Bitcoin on a particular day or period using this API.
+
+▶️ [Bitcoin Balance for multiple addresses](https://ide.bitquery.io/btc-price-in-2016)
 
 ### Inflows and Outflows of a wallet
 
@@ -481,7 +491,7 @@ This query returns the latest currencies minted on Cardano network.
 This query returns the latest transactions on Cardano network, including details such as transaction fees and hash.    
 ▶️ [Cardano Transactions](https://ide.bitquery.io/cardano-transactions_1)
 
-## Ripple/XRPL
+## Ripple
 
 ### Ripple Balance
 
