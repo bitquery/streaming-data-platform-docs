@@ -11,6 +11,9 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [NFT APIs](#nft-apis)
 - [Uniswap V3 API](#uniswap-v3-api)
 - [TRON APIs](#tron)
+- [Bitcoin APIs](#bitcoin)
+- [Cardano APIs](#cardano)
+- [Ripple APIs](#ripple)
 - [More APIs](#more-apis)
 
 ## Solana Trade API
@@ -40,6 +43,11 @@ Get all trades related transactions (buy, sell) for a specific wallet address.
 Get all trades related transactions for a specific pair address.
 ▶️ [Get Swaps by Pair Address](https://ide.bitquery.io/Get-Swaps-by-Pair-Address)
 
+### Get Volume Stats for Solana Chain
+
+Returns volume statistics, active wallets, and total transactions for Solana.
+▶️ [Get Volume Stats By Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets)
+
 ## Solana Balance API
 
 ### Get SPL Token Balances by Wallet
@@ -58,6 +66,11 @@ This query returns Solana balance update info for any balance update event. It i
 ▶️ [Balance Update](https://ide.bitquery.io/solana-balance-update)
 
 ## Solana Pools API
+
+### All Token Pairs Across DEXs with Current Liquidity
+
+This query retrieves all instances of a specific token pair across decentralized exchanges (DEXs) on Solana, along with their current liquidity.
+▶️ [All Token Pairs Across DEXs with Current Liquidity](https://ide.bitquery.io/All-Liquidity-pairs-of-a-token-and-current-liquidity-on-solana)
 
 ### Solana Pool Liquidity Changes
 
@@ -101,16 +114,13 @@ Get aggregated statistics across supported pairs of a token.
 Returns analytics data for multiple token addresses.
 ▶️ [Get Multiple Token Analytics](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-multiple-solana-tokens)
 
-### Get Volume Stats for Solana Chain
-
-Returns volume statistics, active wallets, and total transactions for Solana.
-▶️ [Get Volume Stats By Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets)
-
 ### Search Tokens
 
 Search for tokens based on contract address, token name or token symbol.
 ▶️ [Search Tokens based on token symbol](https://ide.bitquery.io/Token-Search-API---trump-symbol)
 ▶️ [Search Tokens based on token name](https://ide.bitquery.io/Token-search-api-in-mint-address)
+
+## Other Solana API
 
 ### Solana Transfers
 
@@ -203,16 +213,6 @@ Get native transactions ordered by block number in descending order.
 Get ERC20 token transactions ordered by block number in descending order.
 ▶️ [Get ERC20 token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_2)
 
-### Get NFT transfers by wallet
-
-Get transfers of NFTs given the wallet and other parameters.
-▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/Get-NFT-transfers-by-wallet_2)
-
-### Get NFT trades by wallet
-
-Get trades of NFTs for a given wallet.
-▶️ [Get NFT trades by wallet](https://ide.bitquery.io/NFT-trades-of-an-address)
-
 ### Get Native & ERC20 Token Balances by Wallet
 
 Get token balances for a specific wallet address.
@@ -233,11 +233,6 @@ Get the native balance for a specific wallet address.
 Get the native balances for a set of specific addresses.
 ▶️ [Get Native Balance for Multiple Wallets](https://ide.bitquery.io/Get-Native-Balance-for-multiple-Wallet)
 
-### Get NFTs by wallet
-
-Get NFTs owned by a given address.
-▶️ [Get NFTs by wallet](https://ide.bitquery.io/Get-NFTs-by-wallet)
-
 ### Get Swaps by Wallet Address
 
 Get all swap related transactions (buy, sell).
@@ -247,61 +242,6 @@ Get all swap related transactions (buy, sell).
 
 Get the net worth of a wallet in USD.
 ▶️ [Get wallet net worth](https://ide.bitquery.io/balance-of-a-wallet-in-USD_2)
-
-### Get NFTs a specific wallet holds
-
-Get NFTs owned by a given address.
-▶️ [Get NFTs by wallet](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
-
-### Get NFTs a contract holds
-
-Get NFTs for a given contract address, including metadata for all NFTs (where available).
-▶️ [Get NFTs by contract](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
-
-### Get NFT metadata
-
-Get NFT data, including metadata (where available), for the given NFT contract address.
-▶️ [Get NFT metadata](https://ide.bitquery.io/Get-NFT-metadata)
-
-### Get Metadata for Multiple NFT Contracts
-
-Get the metadata for a given list of contract addresses.
-▶️ [Get Metadata for Multiple NFT Contracts](https://ide.bitquery.io/Get-Metadata-for-Multiple-NFT-Contracts_1)
-
-### Get NFT transfers by wallet
-
-Get transfers of NFTs given the wallet.
-▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/latest-nft-transfers-by-a-user)
-
-### Get NFT owners by contract
-
-Get owners of NFTs for a given contract.
-▶️ [Get NFT owners by contract](https://ide.bitquery.io/top-token-holders-of-Moonwalker-NFT)
-
-### Get NFT owners by token ID
-
-Get owners of a specific NFT given the contract address and token ID.
-▶️ [Get NFT owners by token ID](https://ide.bitquery.io/Who-owns-specific-NFT)
-
-### Get NFT trades for a specific NFT contract on specific marketplace
-
-Get trades of NFTs for a given contract and marketplace.
-▶️ [Get NFT trades by contract](https://ide.bitquery.io/Get-NFT-trades-by-contract)
-
-### Get NFT trades for a specific NFT contract and token ID
-
-Get trades of NFTs for a given contract and token ID.
-▶️ [Get NFT trades by token](hhttps://ide.bitquery.io/Get-NFT-trades-by-token)
-
-### Get NFT trades by wallet
-
-Get trades of NFTs for a given wallet.
-▶️ [Get NFT trades by wallet](https://ide.bitquery.io/Get-trades-of-NFTs-for-a-given-wallet)
-
-### Get all NFTs in a collection
-
-Get all NFTs in a collection.
-▶️ [Get all NFTs in a collection](https://ide.bitquery.io/Get-all-NFTs-for-a-collection)
 
 ### Get ERC20 Token Price
 
@@ -385,7 +325,62 @@ This query returns mining rewards info for Ethereum, including transaction fees,
 
 ## NFT APIs
 
-### Latest Trades
+### Get NFTs a specific wallet holds
+
+Get NFTs owned by a given address.
+▶️ [Get NFTs by wallet](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
+
+### Get NFTs a contract holds
+
+Get NFTs for a given contract address, including metadata for all NFTs (where available).
+▶️ [Get NFTs by contract](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
+
+### Get NFT metadata
+
+Get NFT data, including metadata (where available), for the given NFT contract address.
+▶️ [Get NFT metadata](https://ide.bitquery.io/Get-NFT-metadata)
+
+### Get Metadata for Multiple NFT Contracts
+
+Get the metadata for a given list of contract addresses.
+▶️ [Get Metadata for Multiple NFT Contracts](https://ide.bitquery.io/Get-Metadata-for-Multiple-NFT-Contracts_1)
+
+### Get NFT transfers by wallet
+
+Get transfers of NFTs given the wallet.
+▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/latest-nft-transfers-by-a-user)
+
+### Get NFT owners by contract
+
+Get owners of NFTs for a given contract.
+▶️ [Get NFT owners by contract](https://ide.bitquery.io/top-token-holders-of-Moonwalker-NFT)
+
+### Get NFT owners by token ID
+
+Get owners of a specific NFT given the contract address and token ID.
+▶️ [Get NFT owners by token ID](https://ide.bitquery.io/Who-owns-specific-NFT)
+
+### Get NFT trades for a specific NFT contract on specific marketplace
+
+Get trades of NFTs for a given contract and marketplace.
+▶️ [Get NFT trades by contract](https://ide.bitquery.io/Get-NFT-trades-by-contract)
+
+### Get NFT trades for a specific NFT contract and token ID
+
+Get trades of NFTs for a given contract and token ID.
+▶️ [Get NFT trades by token](hhttps://ide.bitquery.io/Get-NFT-trades-by-token)
+
+### Get NFT trades by wallet
+
+Get trades of NFTs for a given wallet.
+▶️ [Get NFT trades by wallet](https://ide.bitquery.io/Get-trades-of-NFTs-for-a-given-wallet)
+
+### Get all NFTs in a collection
+
+Get all NFTs in a collection.
+▶️ [Get all NFTs in a collection](https://ide.bitquery.io/Get-all-NFTs-for-a-collection)
+
+### Latest NFT Trades
 
 This query gets the latest 10 NFT trades on Ethereum mainnet. You can increase the limit to whatever you like, up to 25,000. Currently, it only retrieves data from the real-time database. To include historical data, use `dataset: combined`.  
 ▶️ [Latest NFT Trades](https://ide.bitquery.io/Latest-NFT-trades-on-ETH)
@@ -433,6 +428,90 @@ This query returns the most recent transactions for the TRON network. It include
 
 This query returns the most recent events and logs for the TRON network. It includes arguments entered (if any), transaction details, log signatures, block info, and more.  
 ▶️ [TRON Events](https://ide.bitquery.io/Tron-Events)
+
+## Bitcoin
+
+### Bitcoin Balance API
+
+Retrieve the total incoming and outgoing transactions for a specific Bitcoin wallet. The balance is calculated as: Balance = Total Output - Total Input. You can also specify a date to get the historical balance.
+
+▶️ [Bitcoin Balance API](https://ide.bitquery.io/Bitcoin-balance-using-input-outputs)
+
+### Bitcoin Balance for multiple addresses
+
+This query calculates the combined balance of multiple Bitcoin wallet addresses by summing their total inflows and outflows: Balance = Total Output - Total Input. You can also set a date to get balances as of a specific point in time.
+
+▶️ [Bitcoin Balance for multiple addresses](https://ide.bitquery.io/BTC-balance-api-for-multiple-addresses)
+
+### Latest Bitcoin Price
+
+You can get price of Bitcoin on a particular day or period using this API.
+
+▶️ [Bitcoin Balance for multiple addresses](https://ide.bitquery.io/btc-price-in-2016)
+
+### Inflows and Outflows of a wallet
+
+This API returns all incoming and outgoing transactions for a specific Bitcoin wallet address.
+
+▶️ [Inflows and Outflows of a wallet](https://ide.bitquery.io/Inflows-and-Outflow-of-a-bitcoin-wallet)
+
+### Details of Bitcoin Transaction
+
+This API provides comprehensive details of a specific Bitcoin transaction in a single query.
+
+▶️ [Details of Bitcoin Transaction](https://ide.bitquery.io/Details-of-Bitcoin-Transaction)
+
+## Cardano
+
+### Cardano Transfers
+This query returns the latest transfers on Cardano network.
+▶️ [Cardano Transfers](https://ide.bitquery.io/Cardano-Transfers_1)
+
+### Cardano User Transfers
+This query returns the latest transfers for a useron Cardano network.      
+▶️ [Cardano User Transfers](https://ide.bitquery.io/cardano-transfers-of-a-wallet)
+
+### Cardano Balance
+This query returns the current balance of a user on Cardano network.      
+▶️ [Cardano Balance](https://ide.bitquery.io/cardano-address-balance_1)
+
+### Cardano Staking
+This query returns the amount staked by a user on Cardano network.       
+▶️ [Cardano Transfers](https://ide.bitquery.io/cardano-staking-balance)
+
+### Cardano Price
+This query returns the latest price of Cardano on Cardano Network.        
+▶️ [Cardano Price](https://ide.bitquery.io/latest-cardano-price) 
+
+### Cardano Minting
+This query returns the latest currencies minted on Cardano network.     
+▶️ [Cardano Miniting](https://ide.bitquery.io/currency-minted-on-cardano)
+
+### Cardano Transactions
+This query returns the latest transactions on Cardano network, including details such as transaction fees and hash.    
+▶️ [Cardano Transactions](https://ide.bitquery.io/cardano-transactions_1)
+
+## Ripple
+
+### Ripple Balance
+
+This query returns all historical balances of a wallet on Ripple network.  
+▶️ [Ripple Balance](https://ide.bitquery.io/historical-balances-of-a-ripple-address)
+
+### Ripple DEX Trades
+
+This query returns the latest trades on the Ripple network.  
+▶️ [TRON DEX Trades](https://ide.bitquery.io/get-latest-trades-on-ripple)
+
+### Ripple Payments
+
+This query returns the latest payments on Ripple network.  
+▶️ [Ripple Payments](https://ide.bitquery.io/Latest-payments-on-ripple-blockchain)
+
+### Ripple Transfers
+
+This query returns the most recent transfers on the Ripple network.  
+▶️ [Ripple Transfers](https://ide.bitquery.io/get-latest-transfer-on-ripple)
 
 ## More APIs
 

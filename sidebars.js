@@ -372,10 +372,34 @@ const sidebars = {
             title: "Solana API Documentation",
           },
           items: [
-            "examples/Solana/Pump-Fun-API",
-            "examples/Solana/pump-swap-api",
-            "examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API",
-            "examples/Solana/pump-fun-to-pump-swap",
+            {
+              type: "category",
+              label: "PumpFun",
+              items: [
+                "examples/Solana/Pump-Fun-API",
+                "examples/Solana/pump-swap-api",
+                "examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API",
+                "examples/Solana/pump-fun-to-pump-swap",
+              ]
+            },
+            {
+              type: "category",
+              label: "Raydium",
+              items: [
+                "examples/Solana/launchpad-raydium",
+                "examples/Solana/Solana-Raydium-DEX-API",
+                "examples/Solana/raydium-clmm-API",
+                "examples/Solana/raydium-cpmm-API"
+              ]
+            },
+            {
+              type: "category",
+              label: "Meteora",
+              items: [
+                "examples/Solana/Solana-Meteora-api",
+                "examples/Solana/meteora-dynamic-bonding-curve-api"
+              ]
+            },
             "examples/Solana/solana-balance-updates",
             "examples/Solana/solana-dextrades",
             "examples/Solana/solana-trader-API",
@@ -385,7 +409,6 @@ const sidebars = {
             "examples/Solana/solana-transactions",
             "examples/Solana/solana-transfers",
             "examples/Solana/solana_fees_api",
-            "examples/Solana/launchpad-raydium",
             "examples/Solana/Boop-Fun-API",
             "examples/Solana/Bonk-Fun-API",
             "examples/Solana/solana-jupiter-api",
@@ -404,18 +427,14 @@ const sidebars = {
             "examples/Solana/Solana-DexPools-API",
             "examples/Solana/Solana-Jito-Bundle-api",
             "examples/Solana/Solana-Lifinity-dex-api",
-            "examples/Solana/Solana-Meteora-api",
             "examples/Solana/Believe-API",
-            "examples/Solana/meteora-dynamic-bonding-curve-api",
             "examples/Solana/Solana-OpenBook-api",
             "examples/Solana/Solana-Phoenix-api",
             "examples/Solana/SolFi-api",
-            "examples/Solana/Solana-Raydium-DEX-API",
-            "examples/Solana/raydium-clmm-API",
-            "examples/Solana/raydium-cpmm-API",
-            "examples/dextrades/DEXScreener/solana_dexscreener",
+            "examples/dextrades/DEXScreener/solana_dexscreener"
           ],
         },
+        
 
         {
           type: "category",

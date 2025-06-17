@@ -87,13 +87,15 @@ Use Bitquery APIs to see when methods that include “burn” are called from th
 
 ### Example Query​
 
-To track token burning, you can use a query shared below. Here’s a sample query to track [token burning](https://ide.bitquery.io/Burn-Token-Tracking-on-Solana-Logs) on the Solana network:
+To track token liquidity burn, you can use a query shared below. Here’s a sample query to track [token LP burn](https://ide.bitquery.io/Copy-of-Copy-of-Burn-Token-Tracking-on-Solana-Logs) on the Solana network:
 
 ```gql
-subscription{
-  Solana {
+{
+  Solana(network: solana) {
     Instructions(
       where: {Instruction: {Program: {Method: {includes: "burn"}}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
     ) {
       Transaction {
         Signature
@@ -109,10 +111,17 @@ subscription{
           Name
           Address
         }
+        Accounts {
+          Address
+          Token {
+            Mint
+          }
+        }
       }
     }
   }
 }
+
 ```
 
 This query helps identify token burning events, providing insights about the project team's next move and the progress of the project.
@@ -171,7 +180,4 @@ query {
 
 This query will return the Solana Instructions Logs and transaction signature to double check the results and get more info.  
 
-## Conclusion​
-Token minting and burning are common in the cryptocurrency world. They help to reward the project stakeholders and add value to the projects. This builds trust between investors and development teams.
 
-However, choosing the right timing for both is crucial. It should fit the project's goals and objectives. Tracking token mint and burn is essential for managing cryptocurrencies effectively. Bitquery APIs offer powerful tools to monitor these events, providing detailed data and customizable queries. By using Bitquery, investors and project teams can stay informed about token movements, make well-informed decisions, and maintain market confidence.
