@@ -459,6 +459,26 @@ This API provides comprehensive details of a specific Bitcoin transaction in a s
 
 ▶️ [Details of Bitcoin Transaction](https://ide.bitquery.io/Details-of-Bitcoin-Transaction)
 
+## Cardano
+
+### Cardano Balance and Staking rewards of an address
+
+This API provides current balance and staking details of a cardano address
+
+▶️ [Cardano Balance and Staking rewards of an address](https://ide.bitquery.io/Cardano-Balance-and-Staking-rewards-of-an-address)
+
+### Cardano Historical balance using input and output
+
+This API calculates the historical balance of any Cardano address by using its inputs and outputs. The balance is determined by subtracting total inputs from total outputs
+
+▶️ [Cardano Historical balance using input and output](https://ide.bitquery.io/cardano-historical-balance-of-an-address)
+
+### All inputs and outputs of a Cardano address
+
+This API provides all inputs and outputs of a Cardano address
+
+▶️ [All inputs and outputs of a Cardano address](https://ide.bitquery.io/All-inputs-and-outputs-of-an-address_2)
+
 ## More APIs
 
 You will find more APIs and detailed information about them in relevant sections.
