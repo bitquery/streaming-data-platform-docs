@@ -478,31 +478,27 @@ This query returns the latest price of Cardano on Cardano Network.
 This query returns the latest currencies minted on Cardano network.     
 ▶️ [Cardano Miniting](https://ide.bitquery.io/currency-minted-on-cardano)
 
-### Cardano Transactions
-This query returns the latest transactions on Cardano network, including details such as transaction fees and hash.    
-▶️ [Cardano Transactions](https://ide.bitquery.io/cardano-transactions_1)
-
 ## Ripple
 
-### Ripple Balance
+### Ripple Historical Balance
 
-This query returns all historical balances of a wallet on Ripple network.  
+This query returns all historical balance of an address on Ripple network.  
 ▶️ [Ripple Balance](https://ide.bitquery.io/historical-balances-of-a-ripple-address)
 
-### Ripple DEX Trades
+### Ripple Token DEX Trades
 
-This query returns the latest trades on the Ripple network.  
-▶️ [TRON DEX Trades](https://ide.bitquery.io/get-latest-trades-on-ripple)
+This query returns the latest trades of a currency on the Ripple network.  
+▶️ [Ripple Token DEX Trades](https://ide.bitquery.io/trades-for-CNY-on-ripple)
 
 ### Ripple Payments
 
 This query returns the latest payments on Ripple network.  
 ▶️ [Ripple Payments](https://ide.bitquery.io/Latest-payments-on-ripple-blockchain)
 
-### Ripple Transfers
+### Ripple Historical Transfers
 
-This query returns the most recent transfers on the Ripple network.  
-▶️ [Ripple Transfers](https://ide.bitquery.io/get-latest-transfer-on-ripple)
+This query returns all the historical transfers done by a specific address on the Ripple network.  
+▶️ [Ripple Transfers](https://ide.bitquery.io/All-historical-transfers-of-an-individual-address)
 
 ## More APIs
 
