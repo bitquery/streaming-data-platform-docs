@@ -380,7 +380,7 @@ const sidebars = {
                 "examples/Solana/pump-swap-api",
                 "examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API",
                 "examples/Solana/pump-fun-to-pump-swap",
-              ]
+              ],
             },
             {
               type: "category",
@@ -389,16 +389,18 @@ const sidebars = {
                 "examples/Solana/launchpad-raydium",
                 "examples/Solana/Solana-Raydium-DEX-API",
                 "examples/Solana/raydium-clmm-API",
-                "examples/Solana/raydium-cpmm-API"
-              ]
+                "examples/Solana/raydium-cpmm-API",
+              ],
             },
             {
               type: "category",
               label: "Meteora",
               items: [
-                "examples/Solana/Solana-Meteora-api",
-                "examples/Solana/meteora-dynamic-bonding-curve-api"
-              ]
+                "examples/Solana/Meteora-DAMM-v2-API",
+                "examples/Solana/Meteora-DLMM-API",
+                "examples/Solana/Meteora-DYN-API",
+                "examples/Solana/meteora-dynamic-bonding-curve-api",
+              ],
             },
             "examples/Solana/solana-balance-updates",
             "examples/Solana/solana-dextrades",
@@ -431,10 +433,10 @@ const sidebars = {
             "examples/Solana/Solana-OpenBook-api",
             "examples/Solana/Solana-Phoenix-api",
             "examples/Solana/SolFi-api",
-            "examples/dextrades/DEXScreener/solana_dexscreener"
+            "examples/Solana/Orbic-API",
+            "examples/dextrades/DEXScreener/solana_dexscreener",
           ],
         },
-        
 
         {
           type: "category",
