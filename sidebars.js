@@ -367,9 +367,9 @@ const sidebars = {
         {
           type: "category",
           label: "Solana",
-          link: {
-            type: "generated-index",
-            title: "Solana API Documentation",
+          "link": {
+            "type": "doc",
+            "id": "examples/Solana/index"
           },
           items: [
             {
