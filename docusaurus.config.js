@@ -231,7 +231,7 @@ const config = {
           },
           {
             to: '/docs/examples/Solana/', // new target
-            from: '/docs/category/Solana/' // old category URL
+            from: '/docs/category/solana/' // old category URL
           }
         ],
       },

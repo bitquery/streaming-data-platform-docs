@@ -1,6 +1,7 @@
 ---
 title: Solana API Documentation
 description: Collection of Solana APIs organized by project.
+slug: /examples/Solana/
 ---
 
 # Solana API Documentation

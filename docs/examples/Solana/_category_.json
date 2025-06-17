@@ -1,7 +1,7 @@
 {
   "label": "Solana",
   "link": {
-    "type": "generated-index",
-    "description": "Examples and Guidelines on Queries and Subscriptions"
+    "type": "doc",
+    "id": "/index"
   }
 }
