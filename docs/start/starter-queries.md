@@ -11,6 +11,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [NFT APIs](#nft-apis)
 - [Uniswap V3 API](#uniswap-v3-api)
 - [TRON APIs](#tron)
+- [Bitcoin APIs](#bitcoin)
 - [More APIs](#more-apis)
 
 ## Solana Trade API
@@ -430,20 +431,24 @@ This query returns the most recent events and logs for the TRON network. It incl
 
 ### Bitcoin Balance API
 Retrieve the total incoming and outgoing transactions for a specific Bitcoin wallet. The balance is calculated as:  Balance = Total Output - Total Input. You can also specify a date to get the historical balance.
+
 ▶️ [Bitcoin Balance API](https://ide.bitquery.io/Bitcoin-balance-using-input-outputs)
 
 ### Bitcoin Balance for multiple addresses
 This query calculates the combined balance of multiple Bitcoin wallet addresses by summing their total inflows and outflows: Balance = Total Output - Total Input. You can also set a date to get balances as of a specific point in time.
+
 ▶️ [Bitcoin Balance for multiple addresses](https://ide.bitquery.io/BTC-balance-api-for-multiple-addresses)
 
 ### Inflows and Outflows of a wallet
 
 This API returns all incoming and outgoing transactions for a specific Bitcoin wallet address.
+
 ▶️ [Inflows and Outflows of a wallet](https://ide.bitquery.io/Inflows-and-Outflow-of-a-bitcoin-wallet)
 
 ### Details of Bitcoin Transaction
 
 This API provides comprehensive details of a specific Bitcoin transaction in a single query.
+
 ▶️ [Details of Bitcoin Transaction](https://ide.bitquery.io/Details-of-Bitcoin-Transaction)
 
 ## More APIs
