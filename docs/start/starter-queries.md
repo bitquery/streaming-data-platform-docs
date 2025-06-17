@@ -200,6 +200,54 @@ This query returns the most recent transactions for the TRON network. It include
 This query returns the most recent events and logs for the TRON network. It includes arguments entered (if any), transaction details, log signatures, block info, and more.  
 ▶️ [TRON Events](https://ide.bitquery.io/Tron-Events)
 
+## Cardano
+
+### Cardano Transfers
+This query returns the latest transfers on Cardano network.
+▶️ [Cardano Transfers](https://ide.bitquery.io/Cardano-Transfers_1)
+
+### Cardano User Transfers
+This query returns the latest transfers for a useron Cardano network.      
+▶️ [Cardano User Transfers](https://ide.bitquery.io/cardano-transfers-of-a-wallet)
+
+### Cardano Balance
+This query returns the current balance of a user on Cardano network.      
+▶️ [Cardano Balance](https://ide.bitquery.io/cardano-address-balance_1)
+
+### Cardano Staking
+This query returns the amount staked by a user on Cardano network.       
+▶️ [Cardano Transfers](https://ide.bitquery.io/cardano-staking-balance)
+
+### Cardano Minting
+This query returns the latest currencies minted on Cardano network.     
+▶️ [Cardano Miniting](https://ide.bitquery.io/currency-minted-on-cardano)
+
+### Cardano Transactions
+This query returns the latest transactions on Cardano network, including details such as transaction fees and hash.    
+▶️ [Cardano Transactions](https://ide.bitquery.io/cardano-transactions_1)
+
+## Ripple/XRPL
+
+### Ripple Balance
+
+This query returns all historical balances of a wallet on Ripple network.  
+▶️ [Ripple Balance](https://ide.bitquery.io/historical-balances-of-a-ripple-address)
+
+### Ripple DEX Trades
+
+This query returns the latest trades on the Ripple network.  
+▶️ [TRON DEX Trades](https://ide.bitquery.io/get-latest-trades-on-ripple)
+
+### Ripple Payments
+
+This query returns the latest payments on Ripple network.  
+▶️ [Ripple Payments](https://ide.bitquery.io/Latest-payments-on-ripple-blockchain)
+
+### Ripple Transfers
+
+This query returns the most recent transfers on the Ripple network.  
+▶️ [Ripple Transfers](https://ide.bitquery.io/get-latest-transfer-on-ripple)
+
 ## More APIs
 
 You will find more APIs and detailed information about them in relevant sections.
