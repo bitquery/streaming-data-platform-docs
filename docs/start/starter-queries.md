@@ -12,6 +12,8 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Uniswap V3 API](#uniswap-v3-api)
 - [TRON APIs](#tron)
 - [Bitcoin APIs](#bitcoin)
+- [Cardano APIs](#cardano)
+- [Ripple APIs](#ripple)
 - [More APIs](#more-apis)
 
 ## Solana Trade API
@@ -461,23 +463,55 @@ This API provides comprehensive details of a specific Bitcoin transaction in a s
 
 ## Cardano
 
-### Cardano Balance and Staking rewards of an address
+### Cardano Transfers
+This query returns the latest transfers on Cardano network.
+▶️ [Cardano Transfers](https://ide.bitquery.io/Cardano-Transfers_1)
 
-This API provides current balance and staking details of a cardano address
+### Cardano User Transfers
+This query returns the latest transfers for a useron Cardano network.      
+▶️ [Cardano User Transfers](https://ide.bitquery.io/cardano-transfers-of-a-wallet)
 
-▶️ [Cardano Balance and Staking rewards of an address](https://ide.bitquery.io/Cardano-Balance-and-Staking-rewards-of-an-address)
+### Cardano Balance
+This query returns the current balance of a user on Cardano network.      
+▶️ [Cardano Balance](https://ide.bitquery.io/cardano-address-balance_1)
 
-### Cardano Historical balance using input and output
+### Cardano Staking
+This query returns the amount staked by a user on Cardano network.       
+▶️ [Cardano Transfers](https://ide.bitquery.io/cardano-staking-balance)
 
-This API calculates the historical balance of any Cardano address by using its inputs and outputs. The balance is determined by subtracting total inputs from total outputs
+### Cardano Price
+This query returns the latest price of Cardano on Cardano Network.        
+▶️ [Cardano Price](https://ide.bitquery.io/latest-cardano-price) 
 
-▶️ [Cardano Historical balance using input and output](https://ide.bitquery.io/cardano-historical-balance-of-an-address)
+### Cardano Minting
+This query returns the latest currencies minted on Cardano network.     
+▶️ [Cardano Miniting](https://ide.bitquery.io/currency-minted-on-cardano)
 
-### All inputs and outputs of a Cardano address
+### Cardano Transactions
+This query returns the latest transactions on Cardano network, including details such as transaction fees and hash.    
+▶️ [Cardano Transactions](https://ide.bitquery.io/cardano-transactions_1)
 
-This API provides all inputs and outputs of a Cardano address
+## Ripple
 
-▶️ [All inputs and outputs of a Cardano address](https://ide.bitquery.io/All-inputs-and-outputs-of-an-address_2)
+### Ripple Balance
+
+This query returns all historical balances of a wallet on Ripple network.  
+▶️ [Ripple Balance](https://ide.bitquery.io/historical-balances-of-a-ripple-address)
+
+### Ripple DEX Trades
+
+This query returns the latest trades on the Ripple network.  
+▶️ [TRON DEX Trades](https://ide.bitquery.io/get-latest-trades-on-ripple)
+
+### Ripple Payments
+
+This query returns the latest payments on Ripple network.  
+▶️ [Ripple Payments](https://ide.bitquery.io/Latest-payments-on-ripple-blockchain)
+
+### Ripple Transfers
+
+This query returns the most recent transfers on the Ripple network.  
+▶️ [Ripple Transfers](https://ide.bitquery.io/get-latest-transfer-on-ripple)
 
 ## More APIs
 
