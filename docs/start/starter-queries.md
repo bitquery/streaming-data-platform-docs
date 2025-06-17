@@ -271,11 +271,6 @@ Get the contents of a transaction by the given transaction hash.
 Get transactions ordered by block number in descending order.
 ▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet)
 
-### Get Latest Block Number
-
-Returns the latest block number.
-▶️ [Get Latest Block Number](https://ide.bitquery.io/latest-block-number_1)
-
 ### Ethereum Balance Update
 
 This query returns the most recent balance updates that occurred on the Ethereum network.  
@@ -306,10 +301,6 @@ This query returns event info and logs for the Ethereum network. It includes arg
 This query returns the top 100 token holders of a specific token on a particular date, sorted by the amount of tokens held. Note that this query uses the archive dataset and cannot retrieve current holders.  
 ▶️ [Token Holders](https://ide.bitquery.io/ethereum-token-holders_1)
 
-### Ethereum Transactions
-
-This query returns transaction info for the Ethereum network.  
-▶️ [Ethereum Transactions](https://ide.bitquery.io/Ethereum-transactions_1)
 
 ### Ethereum Calls
 
