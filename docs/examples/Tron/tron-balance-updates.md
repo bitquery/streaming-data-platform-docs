@@ -6,9 +6,6 @@ sidebar_position: 1
 
 In thise section we will see how to monitor real-time balance changes across the Tron blockchain
 
-This Tron API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
 <head>
 <meta name="title" content="How to get Tron Balance Updates of an address"/>
 <meta name="description" content="Learn how to get real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API."/>

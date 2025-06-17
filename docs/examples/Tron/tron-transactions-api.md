@@ -29,12 +29,10 @@ In this section we'll have a look at some examples using the Tron Transactions A
 <meta property="twitter:description" content="Retrieve comprehensive details of historical and realtime Tron transactions, including internal transactions, external transactions, and token transfers for any address or contract." />
 </head>
 
-This Tron API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
 ## Monitor Real-time Transactions by Wallet
+
 The subscription query below fetches the transactions on the Tron network for the wallet address `TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf`.
+
 ```
 subscription {
   Tron {

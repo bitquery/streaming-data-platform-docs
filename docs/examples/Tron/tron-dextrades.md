@@ -6,9 +6,6 @@ sidebar_position: 2
 
 In this section we will see how to get Tron DEX trades information using our API.
 
-This Tron API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
 <head>
 <meta name="title" content="How to Get Tron Decentralized Exchange Data with DEX Trades API"/>
 <meta name="description" content="Get on-chain data of any Tron based DEX through our DEX Trades API."/>

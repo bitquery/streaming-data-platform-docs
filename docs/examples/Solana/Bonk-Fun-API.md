@@ -2,13 +2,24 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this document, we will explore several examples related to Bonk fun data. We also have [Raydium Launchpad APIs](https://docs.bitquery.io/docs/examples/Solana/launchpad-raydium/).
-Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/).
-These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on [telegram](https://t.me/Bloxy_info).
+In this document, we will explore several examples related to Bonk fun and BonkSwap data.
+
+Need zero-latency Bonk fun data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
 :::note
-`Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
+To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
+
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
+
+## Table of Contents
+
+- [Track Bonk.fun Token Creation](#track-bonkfun-token-creation)
+- [BonkSwap Examples](#bonkswap-examples)
+  - [Latest Trades on BonkSwap](#latest-trades-on-bonkswap)
+  - [Get Top Traders on BonkSwap](#get-top-traders-on-bonkswap)
+  - [Get Latest Trades By Trader on BonkSwap](#get-latest-trades-by-trader-on-bonkswap)
+  - [OHLC of a token on BonkSwap](#get-ohlc-for-a-bonkswap-token)
 
 <head>
   <meta name="title" content="Bonk Fun API - Solana - Tokens, Trades, Live Prices"/>
@@ -43,8 +54,17 @@ Using [this](https://ide.bitquery.io/latest-token-created-on-bonk-fun) query, we
 {
   Solana {
     InstructionBalanceUpdates(
-      where: {BalanceUpdate: {Currency: {MintAddress: {endsWith: "bonk"}}}, Instruction: {Program: {Address: {is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"}, Method: {is: "initialize"}}}, Transaction: {Result: {Success: true}}}
-      orderBy: {descending: Block_Time}
+      where: {
+        BalanceUpdate: { Currency: { MintAddress: { endsWith: "bonk" } } }
+        Instruction: {
+          Program: {
+            Address: { is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj" }
+            Method: { is: "initialize" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+      orderBy: { descending: Block_Time }
     ) {
       BalanceUpdate {
         Currency {
@@ -72,147 +92,235 @@ Using [this](https://ide.bitquery.io/latest-token-created-on-bonk-fun) query, we
 }
 ```
 
-## Streaming Bonk.fun Trades for a Token
+## BonkSwap Examples
 
-[This](https://ide.bitquery.io/bonkfun-token-trade-stream) subscription allows us to stream the latest trades for a Bonk.fun tokens in real time.
+## Latest Trades on BonkSwap
 
-```graphql
-subscription {
+This is a graphQL query that fetches latest swaps on BonkSwap, you can convert this to a stream by changing the word `query` to `subscription`.
+
+[Run Query ➤](https://ide.bitquery.io/Latest-Trades-on-BonkSwap)
+
+```
+query LatestTrades {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "6r3dLonVjdFgbexHMKoMtiiAXCzVYBmoUrmixER9bonk"}}}}
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {
+        Transaction: {Result: {Success: true}},
+        Trade: {Dex: {ProtocolName: {is: "bonkswap"}}}
+      }
     ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
       Trade {
         Dex {
-          ProgramAddress
           ProtocolFamily
           ProtocolName
         }
-        Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-        }
-        Amount
-        AmountInUSD
         Account {
           Owner
         }
-        Market {
-          MarketAddress
+        Side {
+          Type
+          Account {
+            Address
+            Owner
+          }
         }
-        Price
+        AmountInUSD
         PriceInUSD
+        Amount
         Side {
           Currency {
-            Name
             Symbol
             MintAddress
-            Decimals
+            Name
           }
-          Type
-        }
-      }
-    }
-  }
-}
-```
-
-## Get Latest Buys for a Bonk.fun Token
-
-[This](https://ide.bitquery.io/bonkfun-token-buys) API returns the latest buys for a Bonk.fun token.
-
-```graphql
-{
-  Solana {
-    DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "6r3dLonVjdFgbexHMKoMtiiAXCzVYBmoUrmixER9bonk"}}, Side: {Type: {is: buy}}}, Transaction: {Result: {Success: true}}}
-      orderBy: {descending: Block_Time}
-      limit: {count: 10}
-    ) {
-      Trade {
-        Dex {
-          ProgramAddress
-          ProtocolFamily
-          ProtocolName
+          AmountInUSD
+          Amount
         }
         Currency {
-          Name
           Symbol
           MintAddress
-          Decimals
-        }
-        Amount
-        AmountInUSD
-        Account {
-          Owner
-        }
-        Market {
-          MarketAddress
-        }
-        Price
-        PriceInUSD
-        Side {
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-          }
-          Type
+          Name
         }
       }
     }
   }
 }
+
 ```
 
-## Get Latest Sells for a Bonk.fun Token
+## Get Top Traders on BonkSwap
 
-[This](https://ide.bitquery.io/bonkfun-token-sells) API returns the latest sells for a Bonk.fun token.
+The below API fetches top traders on BonkSwap using recent trading volume of the trader.
 
-```graphql
-{
+[Run Query ➤](https://ide.bitquery.io/Top-Traders-on-BonkSwap)
+
+```
+query TopTraders {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "6r3dLonVjdFgbexHMKoMtiiAXCzVYBmoUrmixER9bonk"}}, Side: {Type: {is: sell}}}, Transaction: {Result: {Success: true}}}
-      orderBy: {descending: Block_Time}
-      limit: {count: 10}
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 70}
+      where: {
+        Transaction: {Result: {Success: true}},
+        Trade: {Dex: {ProtocolName: {is: "bonkswap"}}},
+        Block: {Time: {after: "2025-06-10T09:07:39Z"}},
+        any: [
+          {Trade: {Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}},
+          {Trade: {
+            Currency: {MintAddress: {not: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}},
+            Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}
+          }},
+          {Trade: {
+            Currency: {MintAddress: {notIn: [
+              "So11111111111111111111111111111111111111112",
+              "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+            ]}},
+            Side: {Currency: {MintAddress: {notIn: [
+              "So11111111111111111111111111111111111111112",
+              "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+            ]}}}
+          }}
+        ]
+      }
     ) {
       Trade {
+        Account {
+          Owner
+        }
         Dex {
-          ProgramAddress
           ProtocolFamily
           ProtocolName
         }
         Currency {
-          Name
-          Symbol
           MintAddress
-          Decimals
+          Symbol
+          Name
         }
-        Amount
-        AmountInUSD
-        Account {
-          Owner
-        }
-        Market {
-          MarketAddress
-        }
-        Price
-        PriceInUSD
         Side {
+          Currency {
+            MintAddress
+            Symbol
+            Name
+          }
+        }
+      }
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+```
+
+## Get Latest Trades By Trader on BonkSwap
+
+The below API fetches recent trades by a particular trader. We use the `Transaction->Signer` field to set this criteria.
+
+[Run Query ➤](https://ide.bitquery.io/Bonkswap-Trades-by-Trader-API)
+
+```
+{
+  Solana(network: solana, dataset: realtime) {
+    DEXTrades(
+      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Trade_Index}]
+      limit: {count: 10}
+      where: {Transaction: {Signer: {is: "EATeN8nptyVmydeDGD6966Sgw14BXdbLwxKXr19UH9q8"}}, Trade: {Dex: {ProtocolName: {is: "bonkswap"}}}}
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Program {
+          Method
+        }
+      }
+      Trade {
+        Dex {
+          ProtocolFamily
+          ProtocolName
+          ProgramAddress
+        }
+        Buy {
+          Price
+          PriceInUSD
+          Amount
+          AmountInUSD
+          Account {
+            Address
+            Owner
+          }
           Currency {
             Name
             Symbol
             MintAddress
             Decimals
+            Fungible
+            Uri
           }
-          Type
         }
+        Sell {
+          Price
+          PriceInUSD
+          Amount
+          AmountInUSD
+          Account {
+            Owner
+            Address
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+            Fungible
+            Uri
+          }
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+        FeePayer
       }
     }
   }
 }
+
+```
+
+## Get OHLC for a BonkSwap Token
+
+[Run Query ➤](https://ide.bitquery.io/ohlc-for-bonkswap-token)
+
+```
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Dex: {ProtocolName: {is: "bonkswap"}}, Currency: {MintAddress: {is: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 100}
+      orderBy: {descendingByField: "Block_Timefield"}
+    ){
+      Block{
+        Timefield: Time(interval:{count:1 in:minutes})
+      }
+      Trade{
+        open: Price(minimum:Block_Slot)
+        high: Price(maximum:Trade_Price)
+        low: Price(minimum:Trade_Price)
+        close: Price(maximum:Block_Slot)
+      }
+      volumeInUSD: sum(of:Trade_Side_AmountInUSD)
+      count
+    }
+  }
+}
+
+
 ```

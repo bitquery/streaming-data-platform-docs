@@ -2,10 +2,6 @@
 
 In this section we'll have a look at some examples using the OpBNB NFT API.
 
-This OpBNB API is part of our Early Access Program (EAP), which is intended for evaluation purposes.
-
-This program allows you to test the data and its integration into your applications before full-scale implementation. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/)
-
 <head>
 <meta name="title" content="OpBNB NFT API - The Ultimate Solution to get your NFT data"/>
 <meta name="description" content="Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades."/>

@@ -2,8 +2,6 @@
 
 In this section, you'll learn how to access Solana-based decentralized exchange (DEX) trading data using our DEX Orders API.
 
-This API is part of our Early Access Program (EAP), designed for evaluation purposes. The EAP enables you to explore the data and integrate it into your applications for testing before full-scale deployment. Read more [here](https://docs.bitquery.io/docs/graphql/dataset/EAP/).
-
 <head>
 <meta name="title" content="Solana DEX Orders API | Access Raydium, Jupiter Data"/>
 <meta name="description" content="Retrieve on-chain liquidity pool and trading pair data from Solana-based DEXs like Raydium and Jupiter using our DEX Orders API."/>
