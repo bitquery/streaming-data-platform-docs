@@ -469,6 +469,10 @@ This query returns the current balance of a user on Cardano network.
 This query returns the amount staked by a user on Cardano network.       
 ▶️ [Cardano Transfers](https://ide.bitquery.io/cardano-staking-balance)
 
+### Cardano Price
+This query returns the latest price of Cardano on Cardano Network.        
+▶️ [Cardano Price](https://ide.bitquery.io/latest-cardano-price) 
+
 ### Cardano Minting
 This query returns the latest currencies minted on Cardano network.     
 ▶️ [Cardano Miniting](https://ide.bitquery.io/currency-minted-on-cardano)
