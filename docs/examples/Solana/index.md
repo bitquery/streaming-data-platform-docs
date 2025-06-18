@@ -22,7 +22,7 @@ In this section we will see how to fetch data on different tokens, transactions,
 
 If you need help getting data on Solana,reach out to [support](https://t.me/Bloxy_info)
 
-### What is Solana API?
+#### What is Solana API?
 
 Bitquery Solana APIs help you fetch onchain data by writing a graphQL query.
 
@@ -54,11 +54,13 @@ Bitquery Solana APIs are very flexible, you can fetch trade, transaction, balanc
 **Bitquery Kafka Stream**
 
 - **Data & Protocol**: Provides fully managed Kafka topics—`solana.dextrades.proto`, `solana.tokens.proto`, and `solana.transactions.proto`—delivering pre-parsed, enriched Protocol-Buffers events (DEX trades, token transfers, supply/balance updates, instructions, blocks, etc.).
-- **Infra & Maintenance**: Enterprise-grade, auto-scaling Kafka streams with sub-second latency, schema-based filtering, instruction-level balance updates, built-in replication/failover—no node ops or custom parsing needed. 
+- **Infra & Maintenance**: Enterprise-grade, auto-scaling Kafka streams with sub-second latency, schema-based filtering, instruction-level balance updates, built-in replication/failover—no node ops or custom parsing needed.
 
 Read more [here](https://docs.bitquery.io/docs/streams/real-time-solana-data/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
 
 ### Does Bitquery support Solana Websocket and Solana Webhooks?
+
+Bitquery supports websocket, you can convert most of the graphQL APIs into graphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More and [code samples available here](https://docs.bitquery.io/docs/subscriptions/websockets/)
 
 ## PumpFun
 
@@ -81,29 +83,16 @@ Read more [here](https://docs.bitquery.io/docs/streams/real-time-solana-data/) a
 - [Meteora DYN API](./Meteora-DYN-API)
 - [Meteora Dynamic Bonding Curve API](./meteora-dynamic-bonding-curve-api)
 
-## Other Solana APIs
+## Solana DEX APIs
 
-- [Solana Balance Updates](./solana-balance-updates)
 - [Solana Dex Trades](./solana-dextrades)
 - [Solana Trader API](./solana-trader-API)
 - [Historical Aggregate Data](./historical-aggregate-data)
-- [Token Supply Cube](./token-supply-cube)
-- [Solana Instructions](./solana-instructions)
-- [Solana Transactions](./solana-transactions)
-- [Solana Transfers](./solana-transfers)
-- [Solana Fees API](./solana_fees_api)
-- [Boop Fun API](./Boop-Fun-API)
-- [Bonk Fun API](./Bonk-Fun-API)
+- [Solana Zeta](./solana-zeta)
 - [Solana Jupiter API](./solana-jupiter-api)
 - [Solana GMGN API](./solana-gmgn-api)
 - [Solana BullX API](./solana-bullx-api)
 - [Solana Photon API](./solana-photon-api)
-- [Solana Logs](./solana-logs)
-- [Solana NFT](./solana-nft)
-- [Solana Orca DEX API](./solana-orca-dex-api)
-- [Solana Rewards](./solana-rewards)
-- [Solana Search Tokens](./solana-search-tokens)
-- [Solana Zeta](./solana-zeta)
 - [Moonshot API](./Moonshot-API)
 - [Solana Aldrin AMM API](./Solana-AldrinAmm-api)
 - [Solana DEX Orders API](./Solana-DEX-Orders-API)
@@ -116,3 +105,19 @@ Read more [here](https://docs.bitquery.io/docs/streams/real-time-solana-data/) a
 - [SolFi API](./SolFi-api)
 - [Orbic API](./Orbic-API)
 - [DEX Screener (Solana)](../dextrades/DEXScreener/solana_dexscreener)
+
+## Other Solana APIs
+
+- [Solana Balance Updates](./solana-balance-updates)
+- [Token Supply Cube](./token-supply-cube)
+- [Solana Instructions](./solana-instructions)
+- [Solana Transactions](./solana-transactions)
+- [Solana Transfers](./solana-transfers)
+- [Solana Fees API](./solana_fees_api)
+- [Boop Fun API](./Boop-Fun-API)
+- [Bonk Fun API](./Bonk-Fun-API)
+- [Solana Logs](./solana-logs)
+- [Solana NFT](./solana-nft)
+- [Solana Orca DEX API](./solana-orca-dex-api)
+- [Solana Rewards](./solana-rewards)
+- [Solana Search Tokens](./solana-search-tokens)
