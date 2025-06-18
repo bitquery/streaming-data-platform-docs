@@ -500,6 +500,13 @@ This query returns the latest payments on Ripple network.
 This query returns all the historical transfers done by a specific address on the Ripple network.  
 ▶️ [Ripple Transfers](https://ide.bitquery.io/All-historical-transfers-of-an-individual-address)
 
+## Cosmos
+
+### Cosmos address balance and staking reward details
+
+This query provides balance and staking reward information for the Cosmos blockchain.
+▶️ [Cosmos address balance and staking reward details](https://ide.bitquery.io/Cosmos-balance-staking-rewards-of-an-address)
+
 ## More APIs
 
 You will find more APIs and detailed information about them in relevant sections.
