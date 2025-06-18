@@ -196,7 +196,33 @@ This query returns the 50 most recent trades on the Raydium launchpad. You can i
 This query returns the latest price of a token when traded against another token on the Raydium launchpad.  
 ▶️ [Live Token Price](https://ide.bitquery.io/live-price-of-token-on-raydium---updated)
 
-## EVM
+## EVM Token Holder API
+
+### Token Holder Count on a Specific Date
+
+This API returns the total number of holders for a specific token on a given date.
+▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_3)
+
+
+### Token Holders and Stats on a Specific Date
+
+This API provides a list of all holders along with relevant statistics for a given token on a specific date.
+▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_3)
+
+
+### Real-Time Holders of Multiple Tokens
+
+This API leverages the balanceUpdate endpoint to deliver real-time holder data for multiple tokens.
+▶️ [ Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-BSC)
+
+
+### Common Holders Across Multiple Tokens
+
+This API identifies addresses that hold multiple specified tokens
+▶️ [Common Holders Across Multiple Tokens](https://ide.bitquery.io/common-token-holders)
+
+
+## EVM API
 
 ### Get Wallet Transaction History
 
@@ -223,11 +249,6 @@ Get token balances for a specific wallet address.
 Get token balances for a specific wallet address.
 ▶️ [Get ERC20 Token Balance by Wallet](https://ide.bitquery.io/Get-ERC20-Token-Balance-by-Wallet)
 
-### Get Native Balance by Wallet
-
-Get the native balance for a specific wallet address.
-▶️ [Get Native Balance by Wallet](https://ide.bitquery.io/Get-Native-Balance-by-Wallet)
-
 ### Get Native Balance for Multiple Wallets
 
 Get the native balances for a set of specific addresses.
@@ -242,11 +263,6 @@ Get all swap related transactions (buy, sell).
 
 Get the net worth of a wallet in USD.
 ▶️ [Get wallet net worth](https://ide.bitquery.io/balance-of-a-wallet-in-USD_2)
-
-### Get ERC20 Token Price
-
-Get the token price denominated in the blockchain's native token and USD.
-▶️ [Get ERC20 Token Prices](https://ide.bitquery.io/Price-of-a-token-in-realtime_2)
 
 ### Get Multiple ERC20 Token Prices
 
@@ -297,12 +313,6 @@ This query returns transfers that occurred on the Ethereum network, including in
 
 This query returns event info and logs for the Ethereum network. It includes arguments passed, transaction details, log info, block info, and more.  
 ▶️ [Ethereum Events](https://ide.bitquery.io/ethereum-events-api)
-
-### Ethereum Tokenholders
-
-This query returns the top 100 token holders of a specific token on a particular date, sorted by the amount of tokens held. Note that this query uses the archive dataset and cannot retrieve current holders.  
-▶️ [Token Holders](https://ide.bitquery.io/ethereum-token-holders_1)
-
 
 ### Ethereum Calls
 
