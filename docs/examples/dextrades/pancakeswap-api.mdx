@@ -1,0 +1,168 @@
+# PancakeSwap API
+
+Bitquery provides PancakeSwap data through APIs, Streams and Data Dumps.
+The below graphQL APIs and Streams are examples of data points you can get with Bitquery.
+If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
+
+Need zero-latency Pumpfun data? [Read about our Kafka Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/).
+
+## Latest Trades on PancakeSwap V3 on Ethereum
+
+> Note : You can change the network from "eth" to "bsc" to PancakeSwap data on BNB
+
+[Run Query ➤](https://ide.bitquery.io/Latest-Trades-on-PancakeSwap-V3-ETH)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+query LatestTrades {
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {TransactionStatus: {Success: true}, Trade: {Dex: {ProtocolName: {is: "pancake_swap_v3"}}}, Block: {Time: {since: "2025-06-17T09:50:13Z"}}}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        AmountInUSD
+        Price
+        Amount
+        Side {
+          Type
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+        Currency {
+          Symbol
+          SmartContract
+          Name
+        }
+      }
+    }
+  }
+}
+
+```
+
+</details>
+
+## Top Traded Pairs on PancakeSwap V3 on ETH
+
+[Run Query ➤](https://ide.bitquery.io/Top-token-pairs-on-PancakeSwap-v3)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+query pairs($min_count: String, $market: String, $network: evm_network, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime, $time_ago: DateTime, $eth: String!, $weth: String!, $usdc: String!, $usdt: String!) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      where: {TransactionStatus: {Success: true}, Block: {Time: {since: $time_ago}}, any: [{Trade: {Side: {Currency: {SmartContract: {is: $eth}}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $usdt}}}, Currency: {SmartContract: {notIn: [$eth]}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $usdc}}}, Currency: {SmartContract: {notIn: [$eth, $usdt]}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $weth}}}, Currency: {SmartContract: {notIn: [$eth, $usdc, $usdt]}}}}, {Trade: {Side: {Currency: {SmartContract: {notIn: [$usdc, $usdt, $weth, $eth]}}}, Currency: {SmartContract: {notIn: [$usdc, $usdt, $weth, $eth]}}}}], Trade: {Success: true, Dex: {ProtocolName: {is: $market}}}}
+      orderBy: {descendingByField: "usd"}
+      limit: {count: 70}
+    ) {
+      Block {
+        Time(maximum: Block_Time, selectWhere: {after: $time_1h_ago})
+      }
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+          ProtocolName
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+            ProtocolName
+          }
+        }
+        price_last: PriceInUSD(maximum: Block_Number)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_10min_ago}}}
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_1h_ago}}}
+        )
+        price_3h_ago: PriceInUSD(
+          maximum: Block_Number
+          if: {Block: {Time: {before: $time_3h_ago}}}
+        )
+      }
+      dexes: uniq(of: Trade_Dex_OwnerAddress)
+      amount: sum(of: Trade_Side_Amount)
+      usd: sum(of: Trade_Side_AmountInUSD)
+      sellers: uniq(of: Trade_Seller)
+      buyers: uniq(of: Trade_Buyer)
+      count(selectWhere: {ge: $min_count})
+    }
+  }
+}
+{
+  "network": "eth",
+  "market": "pancake_swap_v3",
+  "eth": "0x",
+  "usdc": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+  "usdt": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+  "weth": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "min_count": "100",
+  "time_10min_ago": "2025-06-18T09:43:37Z",
+  "time_1h_ago": "2025-06-18T08:53:37Z",
+  "time_3h_ago": "2025-06-18T06:53:37Z",
+  "time_ago": "2025-06-17T09:53:37Z"
+}
+
+```
+
+</details>
+
+## Top Traders on PancakeSwap V3 on ETH
+
+[Run Query ➤](https://ide.bitquery.io/Top-Traders-of-a-token-on-PancakeSwap-on-ETH)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+query topTraders {
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {SmartContract: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}}, Dex: {ProtocolName: {is:"pancake_swap_v3"}}}}
+    ) {
+      Trade {
+        Buyer
+      }
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+
+```
+
+</details>

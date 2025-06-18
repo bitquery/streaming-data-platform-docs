@@ -302,6 +302,7 @@ const sidebars = {
                 "examples/dextrades/pair-creation-time",
                 "examples/dextrades/crypto-coin-ticker",
                 "examples/dextrades/uniswap-api",
+                "examples/dextrades/pancakeswap-api",
                 "examples/dextrades/DEXScreener/evm_dexscreener",
                 "examples/dextrades/evm-bullx-api",
                 "examples/dextrades/evm-gmgn-api",
