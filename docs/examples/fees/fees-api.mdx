@@ -25,10 +25,13 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Get Trades with Transaction fees
 
-Get a list of successful DEX trades on EVM along with the transaction fee details for each trade. `SenderFee` and `SenderFeeInUSD` fields in query are the transaction fees in ETH and transaction fees in USD respectively.
+Get a list of successful DEX trades on EVM along with the transaction fee details for each trade. `SenderFee` and `SenderFeeInUSD` fields in query are the transaction fees in ETH and transaction fees in USD respectively.  
 You can test the query [here](https://ide.bitquery.io/trades-with-the-transaction-fees_1#).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query MyQuery {
   EVM {
     DEXTradeByTokens(
@@ -73,14 +76,19 @@ query MyQuery {
     }
   }
 }
-```
+````
+
+</details>
 
 ## Get Transfers by an address and Transaction fees paid for the transfer
 
 Track wallet token transfers and get the fees paid for each by the address. `SenderFee` and `SenderFeeInUSD` fields in query are the transaction fees in ETH and transaction fees in USD respectively.
 You can test the query [here](https://ide.bitquery.io/binancehot-wallet-transfers-with-transaction-fees).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query MyQuery {
   EVM {
     Transfers(
@@ -109,12 +117,17 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Total transaction fees paid by an account
 
 Get the total fees (in Eth and USD) paid by a specific EVM account across all transfers. `SenderFee` and `SenderFeeInUSD` fields in query are the transaction fees in ETH and transaction fees in USD respectively.
 You can test the query [here](https://ide.bitquery.io/total-txn-fees-paid-by-binance-hot-wallet-in-a-day).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query MyQuery {
   EVM(dataset: combined, aggregates: yes) {
     Transfers(
@@ -127,12 +140,17 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Transaction fees paid by an account for each currency transfers
 
 Get total fees paid by a EVM account for transferring each type of token. `SenderFee` and `SenderFeeInUSD` fields in query are the transaction fees in ETH and transaction fees in USD respectively.
-You can test the query [here](https://ide.bitquery.io/Transaction-fees-paid-by-Binance-Hot-Wallet-aggregated-by-currency)
+You can test the query [here](https://ide.bitquery.io/Transaction-fees-paid-by-Binance-Hot-Wallet-aggregated-by-currency).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query MyQuery {
   EVM(dataset: combined, aggregates: yes) {
     Transfers(
@@ -153,6 +171,9 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Video Tutorial | How to get Total Fees paid by a Account on EVM Network
 
 <VideoPlayer url="https://www.youtube.com/watch?v=JknNI5Je-M8" />
+```
