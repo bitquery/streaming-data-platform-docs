@@ -2,11 +2,63 @@
 title: Solana API Documentation
 description: Collection of Solana APIs organized by project.
 slug: /examples/Solana/
+keywords:
+  - Solana API
+  - Solana RPC
+  - Solana RPC API
+  - Best Solana API
+  - Solana Explorer API
+  - solana wallet transaction monitoring api
+  - solana api docs
+  - solana websocket api
+  - solana blockchain api
+  - solana token api
+  - solana transaction api
 ---
 
 # Solana API Documentation
 
-In this section we will see how to fetch data on different tokens, transactions, DEXs like Pumpfun, Raydium, Meteora etc via APIs and Streams. 
+In this section we will see how to fetch data on different tokens, transactions, DEXs like Pumpfun, Raydium, Meteora etc via APIs and Streams.
+
+If you need help getting data on Solana,reach out to [support](https://t.me/Bloxy_info)
+
+### What is Solana API?
+
+Bitquery Solana APIs help you fetch onchain data by writing a graphQL query.
+
+### What are capabilities of Bitquery Solana API?
+
+Bitquery Solana APIs are very flexible, you can fetch trade, transaction, balance information for a period, for a specific wallet and join with other information.
+
+### Difference between Solana RPC and Bitquery Solana API?
+
+**Solana RPC**
+
+- JSON-RPC endpoint exposing raw on-chain state & transactions
+- No built-in history or analytics—any indexing/aggregation you build or outsource
+- Ideal for submitting transactions
+
+**Bitquery Solana API**
+
+- GraphQL endpoint over pre-indexed, parsed Solana data (token transfers, DEX trades, NFTs, etc.)
+- Historical data, joins, aggregations & real-time subscriptions
+- Great for real-time data and historical backtesting without running your own indexer
+
+### Difference between Solana Geyser stream and Bitquery Kafka Stream?
+
+**Solana Geyser stream**
+
+- **Data & Protocol**: Runs as a plugin in your own Solana validator, emitting raw on-chain events (account updates, slot status changes, processed transactions, block metadata) over binary or gRPC feeds.
+- **Infra & Maintenance**: You must host, scale, and secure the node yourself, parse and index all raw data client-side, and deal with only basic filtering—latency and reliability depend entirely on your setup; no built-in historical querying.
+
+**Bitquery Kafka Stream**
+
+- **Data & Protocol**: Provides fully managed Kafka topics—`solana.dextrades.proto`, `solana.tokens.proto`, and `solana.transactions.proto`—delivering pre-parsed, enriched Protocol-Buffers events (DEX trades, token transfers, supply/balance updates, instructions, blocks, etc.).
+- **Infra & Maintenance**: Enterprise-grade, auto-scaling Kafka streams with sub-second latency, schema-based filtering, instruction-level balance updates, built-in replication/failover—no node ops or custom parsing needed. 
+
+Read more [here](https://docs.bitquery.io/docs/streams/real-time-solana-data/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
+
+### Does Bitquery support Solana Websocket and Solana Webhooks?
 
 ## PumpFun
 
@@ -28,7 +80,6 @@ In this section we will see how to fetch data on different tokens, transactions,
 - [Meteora DLMM API](./Meteora-DLMM-API)
 - [Meteora DYN API](./Meteora-DYN-API)
 - [Meteora Dynamic Bonding Curve API](./meteora-dynamic-bonding-curve-api)
-
 
 ## Other Solana APIs
 
