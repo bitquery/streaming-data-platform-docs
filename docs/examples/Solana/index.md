@@ -60,7 +60,7 @@ Read more [here](https://docs.bitquery.io/docs/streams/real-time-solana-data/) a
 
 ### Does Bitquery support Solana Websocket and Solana Webhooks?
 
-Bitquery supports websocket, you can convert most of the graphQL APIs into graphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More and [code samples available here](https://docs.bitquery.io/docs/subscriptions/websockets/)
+Bitquery supports websocket and webhooks, you can convert most of the graphQL APIs into graphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More and [code samples available here](https://docs.bitquery.io/docs/subscriptions/websockets/)
 
 ## PumpFun
 
