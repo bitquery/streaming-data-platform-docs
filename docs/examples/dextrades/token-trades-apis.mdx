@@ -183,6 +183,108 @@ query MyQuery($network: evm_network, $token: String,$pairAddress: String , $min5
 }
 ```
 
+## Get the Buys, Sells, Buy Volume, Sell Volume and Makers of Multiple tokens
+
+The query will fetch you the buys, sells, buy volume, sell volume and also the number of makers for multiple token pairs. We are getting these trade metrics for this particular pool address `0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`. You can also check out this video explaination at this [link](https://www.youtube.com/watch?v=K_H3to_nIdY)
+
+You can find the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-eth-pair_2)
+
+```graphql
+query MyQuery($network: evm_network, $token: String, $pairAddress: [String!], $min5_timestamp: DateTime, $hr1_timestamp: DateTime) {
+  EVM(dataset: realtime, network: $network) {
+    DEXTradeByTokens(
+      where: {TransactionStatus: {Success: true}, Trade: { Dex: {SmartContract: {in: $pairAddress}}, Side: {Currency: {SmartContract: {is: $token}}}}, Block: {Time: {since: $hr1_timestamp}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          SmartContract
+          Symbol
+        }
+        startPrice: PriceInUSD(minimum: Block_Time)
+        Price_at_min5: PriceInUSD(
+          minimum: Block_Time
+          if: {Block: {Time: {after: $min5_timestamp}}}
+        )
+        current_price: PriceInUSD(maximum: Block_Time)
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          SmartContract
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+      }
+      makers: count(distinct: Transaction_From)
+      makers_5min: count(
+        distinct: Transaction_From
+        if: {Block: {Time: {after: $min5_timestamp}}}
+      )
+      buyers: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: sell}}}}
+      )
+      buyers_5min: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      sellers: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: buy}}}}
+      )
+      sellers_5min: count(
+        distinct: Transaction_From
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      trades: count
+      trades_5min: count(if: {Block: {Time: {after: $min5_timestamp}}})
+      traded_volume: sum(of: Trade_Side_AmountInUSD)
+      traded_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {after: $min5_timestamp}}}
+      )
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: sell}}}}
+      )
+      buy_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: buy}}}}
+      )
+      sell_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      buys: count(if: {Trade: {Side: {Type: {is: sell}}}})
+      buys_5min: count(
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+      sells: count(if: {Trade: {Side: {Type: {is: buy}}}})
+      sells_5min: count(
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
+      )
+    }
+  }
+}
+
+{
+  "network": "eth",
+  "token": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+  "pairAddress": ["0x055FB841Cce69000FBAFF2691Ad39Fa6E23826a1","0x8d345583C9289D69d4a55797CcadC5A1eA150A44"],
+  "hr1_timestamp": "2025-06-18T07:34:00Z",
+  "min5_timestamp": "2025-06-18T08:28:00Z"
+}
+```
+
 ## Historical Token Trades & Price API
 
 DEXTrades API can give you historical trades. Let's see an example where we get trades of [BLUR Token](https://explorer.bitquery.io/ethereum/token/0x5283d291dbcf85356a21ba090e6db59121208b44) in the past. As you can see, we are using Block -> Time filter, which includes the time. If you want to filter by date, then use Block -> Date. You can also use Block -> Number if you want to filter based on block height. We are setting the `seller` and `buyer` to 1inch router [0x1111111254eeb25477b68fb85ed929f73a960582] to get both buys and sells of the BLUR token.

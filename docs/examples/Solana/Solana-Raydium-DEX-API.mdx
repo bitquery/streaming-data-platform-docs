@@ -6,8 +6,6 @@ sidebar_position: 7
 
 In this section, we will see how to get Raydium information using Bitquery APIs.
 
-
-
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
 :::
@@ -66,6 +64,9 @@ You can get the 2nd token address using the following result.
 Instructions -> Instruction -> Accounts[9] ->. Address
 
 You can run the following query at [Bitquery IDE](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_5).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -150,11 +151,16 @@ subscription {
 }
 ```
 
+</details>
+
 ## Pair Creation time for a specific pair
 
 You can use the following query to get the pair creation time for a specific pair on Raydium DEX on Solana. But you need to use keyword `query` obviously.
 
 You can run this query using [this link](https://ide.bitquery.io/Specific-pair-creation-time-on-Raydium-Solana_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```{
   Solana {
@@ -174,10 +180,15 @@ You can run this query using [this link](https://ide.bitquery.io/Specific-pair-c
 
 ```
 
+</details>
+
 ## Get the historical Created pairs on any Solana DEX
 
 This query will return information about the historical created pairs according to the selected date frame.
 You can find the query [here](https://ide.bitquery.io/Solana-Raydium-New-Pairs_2)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query{
@@ -225,11 +236,16 @@ query{
 }
 ```
 
+</details>
+
 ## Latest price of a token
 
 You can use the following query to get the latest price of a token on Raydium DEX on Solana.
 
 You can run this query using [this link](https://ide.bitquery.io/live-price-of-token-on-raydium---updated).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -252,9 +268,14 @@ You can run this query using [this link](https://ide.bitquery.io/live-price-of-t
 
 ```
 
+</details>
+
 ## Latest Trades on Solana Raydium DEX
 
 To subscribe to the real-time trades stream for Solana Raydium DEX, [try this GraphQL subscription (WebSocket)](https://ide.bitquery.io/Updated-Real-time-trades-on-Raydium-DEX-on-Solana_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -318,6 +339,8 @@ subscription {
 }
 ```
 
+</details>
+
 ## Latest Trades for a specific currency on Solana Raydium DEX
 
 Let's say you want to receive [trades only for a specific currency on Raydium DEX](https://ide.bitquery.io/Updated-Real-time-buy-and-sell-of-specific-currency-on-Raydium-DEX-on-Solana_1). You can use the following stream.
@@ -326,6 +349,9 @@ Use currency's mint address; for example, in the following query, we are using R
 If you limit it to 1, you will get the latest price of the token because the latest trade = the Latest Price.
 
 Run this query [using this link](https://ide.bitquery.io/Updated-Real-time-buy-and-sell-of-specific-currency-on-Raydium-DEX-on-Solana_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -457,10 +483,15 @@ subscription {
 }
 ```
 
+</details>
+
 ## Raydium OHLC API
 
 If you want to get OHLC data for any specific currency pair on Raydium DEX, you can use [this api](https://ide.bitquery.io/Raydium-OHLC-for-specific-pair_5).
 Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -503,6 +534,8 @@ Only use this API as `query` and not `subscription` websocket as Aggregates and 
 }
 ```
 
+</details>
+
 ## Track Latest Add Liquidity Transactions on Raydium DEX
 
 You can also track Add Liquidity transactions in real time on Raydium DEX from Raydium API using instructions. Firstly, you can use this [query](https://ide.bitquery.io/Get-all-methods-of-Raydium-V4-Program#) to get all the methods of Raydium V4 program to deduce which program method is triggered for add liquidity transactions. The method we want to filter for turns out to be `setPositionStopLoss`.
@@ -510,6 +543,9 @@ You can also track Add Liquidity transactions in real time on Raydium DEX from R
 If you want to track latest liquidity additions in Raydium pools, you can use [this Websocket api](https://ide.bitquery.io/Track-Add-Liquidity-Transactions-on-Solana-Raydium-DEX).
 
 In the response, mint under 7th and 8th addresses in the Accounts array gives you the Token A and Token B respectively of the pool in which liquidity is added.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -592,6 +628,8 @@ subscription {
 }
 ```
 
+</details>
+
 ## Track Latest Remove Liquidity Transactions on Raydium DEX
 
 You can also track Remove Liquidity transactions in real time on Raydium DEX from Raydium API using instructions. Firstly, you can use this [query](https://ide.bitquery.io/Get-all-methods-of-Raydium-V4-Program#) to get all the methods of Raydium V4 program to deduce which program method is triggered for remove liquidity transactions. The method we want to filter for turns out to be `setPositionRangeStop`.
@@ -599,6 +637,9 @@ You can also track Remove Liquidity transactions in real time on Raydium DEX fro
 If you want to track latest liquidity removals in Raydium pools, you can use [this Websocket api](https://ide.bitquery.io/Track-Remove-Liquidity-Transactions-on-Solana-Raydium-DEX#).
 
 In the response, mint under 7th and 8th addresses in the Accounts array gives you the Token A and Token B respectively of the pool in which liquidity is removed.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -681,11 +722,16 @@ subscription {
 }
 ```
 
+</details>
+
 ## Track Raydium DEXTrades enabled by OpenBook Protocol
 
 You can track Raydium DEXTrades which are enabled by OpenBook Protocol in real time on Raydium DEX from Raydium API using instructions. So OpenBook is an Order Book Protocol which Raydium has integrated in its constant product amm. If you want a full explaination of this API, watch our [Youtube Video](https://www.youtube.com/watch?v=aYARyvvItHA).
 
 If you want to track latest Raydium DEXTrades enabled by OpenBook order book Protocol, you can use [this Websocket api](https://ide.bitquery.io/Raydium-dextrades-through-OpenBook-order-book#).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -745,6 +791,8 @@ subscription {
   }
 }
 ```
+
+</details>
 
 ## Video Tutorial | How to Track Latest Trades, Latest Price of a Token on Solana Raydium DEX
 

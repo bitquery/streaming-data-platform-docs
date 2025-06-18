@@ -37,6 +37,9 @@ In this section we will see how to get Solana DEX Pools information using our AP
 
 To get all Liquidity pools updates on solana use [this stream](https://ide.bitquery.io/solana-dex-pools-update-stream).
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 subscription {
   Solana {
@@ -80,9 +83,14 @@ subscription {
 }
 ```
 
+</details>
+
 ## Get Tokens which have liquidity over 1 Million USD
 
 You can use the below query to get the tokens which are getting traded and have liquidity over 1 million USD. Try out the query [here](https://ide.bitquery.io/Search-tokens-with-liquidity-over-1-million#).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription MyQuery {
@@ -145,10 +153,15 @@ subscription MyQuery {
 
 ```
 
+</details>
+
 ## Get All Liquidity Pools info for a particular token
 
 This query will give you the information on all the liquidity pools of a particular token `EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm`.
 You can find the query [here](https://ide.bitquery.io/get-all-the-liquidity-pools-info-for-a-particular-token_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query ($token: String) {
@@ -186,6 +199,8 @@ query ($token: String) {
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/21882e2a-e769-4703-be56-15b7924b6318)
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm#pools).
@@ -193,6 +208,9 @@ Check data here on [DEXrabbit](https://dexrabbit.com/solana/token/EKpQGSJtjMFqKZ
 ## Latest Price of Token Based on Liqudity
 
 [This](https://ide.bitquery.io/latest-price-based-on-liquidity_2) subscription given below returns the latest and real-time price and other info related to the token, DEX and market for the following token `LMFzmYL6y1FX8HsEmZ6yNKNzercBmtmpg2ZoLwuUboU`.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -237,10 +255,15 @@ subscription {
 }
 ```
 
+</details>
+
 ## Get Latest Liquidity of any Liquidity Pool
 
 This query gets you the liquidity/balance of the Quote Currency `WSOL` and Base Currency `SOLANADOG` for this particular pool address `BDQnwNhTWc3wK4hhsnsEaBBMj3sD4idGzvuidVqUw1vL`. THe liquidity value of the currencies will be in `Quote{PostAmount}` and `Base{PostAmount}`.
 You can find the query [here](https://ide.bitquery.io/Get-LP-Latest-liqudity-on-Solana)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query GetLatestLiquidityForPool {
@@ -290,9 +313,14 @@ query GetLatestLiquidityForPool {
 }
 ```
 
+</details>
+
 ## Get Top Pools Based on Liquidity
 
 [This](https://ide.bitquery.io/top-10-liquidity-pools_1) query retrieves the top liquidity pools on the Solana blockchain, sorted by their total liquidity (PostAmount). The query is filtered for pools that have been active since a specific time period. The results are limited to the top 10 pools based on their liquidity.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query GetTopPoolsByDex {
@@ -337,9 +365,14 @@ query GetTopPoolsByDex {
 }
 ```
 
+</details>
+
 ## Liquidity Removal from a Pool for a Token
 
 [This](https://ide.bitquery.io/liquidity-removal_1) query allows you to subscribe to updates on liquidity removal from a specific pool on the Solana network. The subscription is filtered by a particular token, identified by the base currency name or smart contract. It returns information on the amount of liquidity removed and the remaining balance.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -392,9 +425,14 @@ query GetTopPoolsByDex {
 }
 ```
 
+</details>
+
 ## Pump Fun Pool Liquidity Addition
 
 [This](https://ide.bitquery.io/add-liquidity-pump-fun_2) query returns the instances where liquidity was added to the pools related to the `Pump` protocol on `Solana`.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -440,9 +478,14 @@ query GetTopPoolsByDex {
 }
 ```
 
+</details>
+
 ## Pump Fun Pool Liquidity Removal
 
 [This](https://ide.bitquery.io/remove-liquidity-from-pump_2) query returns the liquidity removal/ token burning instances for the `Pump` protocol on `Solana`.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -488,11 +531,16 @@ query GetTopPoolsByDex {
 }
 ```
 
+</details>
+
 ## Liquidity Added and Removed by Specific Address
 
 [This](https://ide.bitquery.io/liquidity-added-and-removed-by-particular-address_3) query returns the events of liquidity addition and liquidity removal by a particular address, which is `bgrXcQpyAhQ5MGcew8EB8tbz4oBJ5whahorrobfRVBQ` for this example.
 
 Please note that Solana for `EAP` only has the real time data with archive data for recent 10 hours. It could be possible that the query returns an empty array if the address is not recently active.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -541,6 +589,8 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Top 10 Liquidity Providers
 
 [This](https://ide.bitquery.io/top-ten-liquidity-providers-for-a-pair_3) query given below, returns the top `10` liquidity providers for a given liquidity pool.
@@ -549,6 +599,9 @@ For this example:
 
 - baseCurrency: `5FGULyTir641wnz7gr2p2kiYYpWboVYE83qos1r9pump`
 - quoteCurrency: `11111111111111111111111111111111`
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -582,6 +635,8 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## All Liquidity Events for a Pair
 
 In this section, we will discuss how we can get all the liquidity related changes like liquidity addition and liquidity removal for a specified pair, which is, for this example, given below.
@@ -593,6 +648,9 @@ In this section, we will discuss how we can get all the liquidity related change
 
 [This](https://ide.bitquery.io/liquidity-addition-for-a-pair_2) query returns the instances of liquidity addition, that is events where `baseCurrencyChange` is greater than `0`.
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 {
   Solana {
@@ -647,9 +705,14 @@ In this section, we will discuss how we can get all the liquidity related change
 }
 ```
 
+</details>
+
 ### Liquidity Removal Event
 
 Now, to get the instances of liquidity removal, you can run [this](https://ide.bitquery.io/liquidity-removal-for-a-pair_4) query.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -704,6 +767,8 @@ Now, to get the instances of liquidity removal, you can run [this](https://ide.b
   }
 }
 ```
+
+</details>
 
 If the segregation shown above is not required, you can remove the `Base{ChangeAmount}` filter from either of the query and get the desired result.
 
@@ -715,6 +780,9 @@ In this section, we will discover data streams that provides us with the real ti
 
 [This](https://ide.bitquery.io/liquidity-addition-for-radium_1) subscription returns the real-time liquidity addition event details for the Radium Pairs.
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 subscription {
   Solana {
@@ -763,9 +831,14 @@ subscription {
 }
 ```
 
+</details>
+
 ### Liquidity removal for Radium Pairs
 
 [This](https://ide.bitquery.io/liquidity-removal-for-radium_1) subscription returns the real-time liquidity addition event details for the Radium Pairs.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -814,6 +887,8 @@ subscription {
   }
 }
 ```
+
+</details>
 
 ## Liquidity Events for Orca Whirlpool Pairs
 
@@ -823,6 +898,9 @@ In this section, we will discover data streams that provides us with the real ti
 
 [This](https://ide.bitquery.io/liquidity-addition-for-orca-whirlpool_1) subscription returns the real-time liquidity addition event details for the Orca Whirlpool Pairs.
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 subscription {
   Solana {
@@ -871,9 +949,14 @@ subscription {
 }
 ```
 
+</details>
+
 ### Liquidity removal for Orca Whirlpool Pairs
 
 [This](https://ide.bitquery.io/liquidity-removal-for-orca-whirlpool_1) subscription returns the real-time liquidity addition event details for the Orca Whirlpool Pairs.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -922,6 +1005,8 @@ subscription {
   }
 }
 ```
+
+</details>
 
 ## Liquidity Events for Meteora Pairs
 
@@ -931,6 +1016,9 @@ In this section, we will discover data streams that provides us with the real ti
 
 [This](https://ide.bitquery.io/liquidity-addition-for-meteora_1) subscription returns the real-time liquidity addition event details for the Meteora Pairs.
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 subscription {
   Solana {
@@ -975,9 +1063,14 @@ subscription {
 }
 ```
 
+</details>
+
 ### Liquidity removal for Meteora Pairs
 
 [This](https://ide.bitquery.io/liquidity-removal-for-meteora_1) subscription returns the real-time liquidity addition event details for the Meteora Pairs.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -1022,3 +1115,5 @@ subscription {
   }
 }
 ```
+
+</details>

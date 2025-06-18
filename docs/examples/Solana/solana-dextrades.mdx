@@ -24,9 +24,6 @@ To query or stream data via GraphQL **outside the Bitquery IDE**, you need to ge
 Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
 
-
-
-
 <head>
 <meta name="title" content="Solana DEX Trades API | Get Raydium, Jupiter data"/>
 <meta name="description" content="Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, etc through our DEX Trades API."/>
@@ -60,6 +57,9 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 This subscription will return information about the most recent trades executed on Solana's DEX platforms.
 You can find the query [here](https://ide.bitquery.io/solana-trades-subscription_3)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription {
@@ -135,6 +135,8 @@ subscription {
 }
 ```
 
+</details>
+
 ## Get Price of a Token Against WSOL
 
 This query retrieves the latest price of a token against Wrapped SOL (WSOL) on Solana.
@@ -145,6 +147,9 @@ Specify the token pair:
 - MintAddress for WSOL: "So111111111111111111111111111111111111111
 
 You can run the query [here](https://ide.bitquery.io/Price-of-a-Token-Against-WSOL)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query LatestTrades {
@@ -188,10 +193,15 @@ query LatestTrades {
 }
 ```
 
+</details>
+
 ## Get Latest Trades of a token
 
 This query will return information about the most recent trades executed for this token `CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump` on Solana's DEX platforms.
 You can find the query [here](https://ide.bitquery.io/Latest-Trades-of-Trump-COin)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query LatestTrades($token: String, $base: String) {
@@ -241,6 +251,8 @@ query LatestTrades($token: String, $base: String) {
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/f076d3d5-b40e-4b84-b0a0-2603db456bcc)
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_latest_trades).
@@ -251,6 +263,9 @@ While the V2 API does not support expressions yet you can get the price data bet
 
 Below query gets the price of a token at the starting and ending of a period ( open and close).
 You can run the query [here](https://ide.bitquery.io/Price-change-of-a-token-in-time-period-on-Solana)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query MyQuery {
@@ -272,10 +287,15 @@ query MyQuery {
 
 ```
 
+</details>
+
 ## Get Trade Summary of a Trade
 
 A lot of times a trade is implemented using multiple swaps. The summary of these trades are the token originally sold and the token finally purchased.
 To get the summary for such trades use [this](https://ide.bitquery.io/trade-summary_1) query.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -335,8 +355,13 @@ To get the summary for such trades use [this](https://ide.bitquery.io/trade-summ
 }
 ```
 
+</details>
+
 The response of the query is given below. Given multiple trades with same `Block Time`, the summary is
 given by the `sell currency` for the lowest Trade Index and the `buy currency` for the highest Trade Index.
+
+<details>
+  <summary>Click to expand query JSON response</summary>
 
 ```json
 
@@ -386,10 +411,15 @@ given by the `sell currency` for the lowest Trade Index and the `buy currency` f
 
 ```
 
+</details>
+
 ## Get the historical Created pairs on any Solana DEX
 
 This query will return information about the historical created pairs according to the selected date frame.
 You can find the query [here](https://ide.bitquery.io/Solana-Raydium-New-Pairs_2)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query{
@@ -437,10 +467,15 @@ query{
 }
 ```
 
+</details>
+
 ## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token
 
 The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
 You can run the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime!) {
@@ -540,10 +575,15 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
 }
 ```
 
+</details>
+
 ## Top 10 Trending Solana Tokens
 
 [This](https://ide.bitquery.io/Trending-tokens-on--Solana_2) query returns the top 10 trending tokens on Solana across all DEXs based on the number of trades with unique traders.
 [This](https://ide.bitquery.io/Trending-tokens-on--Solana-for-one-hour) query returns the trending list of tokens for a particular time period, `1 hour` in this case.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query TrendingTokens {
@@ -565,6 +605,8 @@ query TrendingTokens {
 }
 ```
 
+</details>
+
 You can also checkout how such queries are used as a base to completed features such as [DEXrabbit Solana Trends](https://dexrabbit.com/solana/token) as shown in the image below.
 
 ![Trending Pairs on DEXrabbit](../../../static/img/dexrabbit/trending_tokens_solana.png)
@@ -573,6 +615,9 @@ You can also checkout how such queries are used as a base to completed features 
 
 This query will give you Solana DEXs on which the token `59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN` is getting traded.
 You can find the query [here](https://ide.bitquery.io/DEX-Markets-for-a-token)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query ($token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
@@ -612,6 +657,8 @@ query ($token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: D
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/c7d15b15-d0b4-4fcd-9fda-c7cfc5a39732)
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_dex_list).
@@ -619,6 +666,9 @@ Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTn
 ## Get Token creation date
 
 You can use the below query to get any token's creation time. Note that we are providing first trade time which in most of the cases is around creation time only. Try the query on ide [here](https://ide.bitquery.io/Token-creation-time_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -634,9 +684,14 @@ You can use the below query to get any token's creation time. Note that we are p
 }
 ```
 
+</details>
+
 ## Get Solana Price in Realtime
 
 You can use the below stream to get the Solana price. Try the query on ide [here](https://ide.bitquery.io/solana-price-stream)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription {
@@ -663,10 +718,15 @@ subscription {
 }
 ```
 
+</details>
+
 ## Get Top Bought Tokens on Solana
 
 This query will give you most bought Solana Tokens on Raydium.
 You can find the query [here](https://ide.bitquery.io/Top-Bought-Solana-Tokens)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -690,6 +750,8 @@ You can find the query [here](https://ide.bitquery.io/Top-Bought-Solana-Tokens)
 }
 ```
 
+</details>
+
 Arranged in the descending order of `bought - sold` on [DEXrabbit](https://dexrabbit.com/solana).
 
 ![image](https://github.com/user-attachments/assets/20872a56-f02a-4323-889a-605ff7947a13)
@@ -700,6 +762,9 @@ Check data here on [DEXrabbit](https://dexrabbit.com/solana).
 
 This query will give you most sold Solana Tokens on Raydium.
 You can find the query [here](https://ide.bitquery.io/Top-sold-Solana-Tokens)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -723,6 +788,8 @@ You can find the query [here](https://ide.bitquery.io/Top-sold-Solana-Tokens)
 }
 ```
 
+</details>
+
 Arranged in the descending order of `sold - bought` on [DEXrabbit](https://dexrabbit.com/solana).
 
 ![image](https://github.com/user-attachments/assets/216bfb28-d365-4a9e-b280-ae19562d7600)
@@ -733,6 +800,9 @@ Check data here on [DEXrabbit](https://dexrabbit.com/solana).
 
 This query will give you top traded pairs data.
 You can find the query [here](https://ide.bitquery.io/top-trading-pairs)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
@@ -781,6 +851,8 @@ query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/4678a3a8-f4a2-476a-92ae-91e3462de2df)
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair).
@@ -789,6 +861,9 @@ Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair).
 
 This query will give you top DEXs info.
 You can find the query [here](https://ide.bitquery.io/top-dexs)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query DexMarkets {
@@ -814,6 +889,8 @@ query DexMarkets {
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/09caf85d-6930-4c24-91d1-7f40f878287e)
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/dex_market).
@@ -822,6 +899,9 @@ Check data here on [DEXrabbit](https://dexrabbit.com/solana/dex_market).
 
 This query will give you the information on all the traded pairs of a particular token `EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm`.
 You can find the query [here](https://ide.bitquery.io/traded-pairs-of-a-token)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query ($token: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
@@ -870,6 +950,8 @@ query ($token: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/ba2381ce-422d-4120-a873-61fbc4f4124c)
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm).
@@ -878,6 +960,9 @@ Check data here on [DEXrabbit](https://dexrabbit.com/solana/token/EKpQGSJtjMFqKZ
 
 To get the list of all DEXes operating within the Solana ecosystem, use the following query.
 Find the query [here](https://ide.bitquery.io/Solana-DEXs)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query MyQuery {
@@ -896,9 +981,14 @@ query MyQuery {
 
 ```
 
+</details>
+
 ## Latest USD Price of a Token
 
 The below query retrieves the USD price of a token on Solana by setting `MintAddress: {is: "J5FAZ6bV7CCGHcU4CTXWVG6nnKHcwD9Pn4DntY93pump"}` and `Side: {Currency: {MintAddress: {is: "11111111111111111111111111111111"}}}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-Latest-Price-of-SOL-in--USD-Real-time#).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -932,9 +1022,14 @@ The below query retrieves the USD price of a token on Solana by setting `MintAdd
 
 ```
 
+</details>
+
 ## Get the Token details like Update Authority, decimals, URI, is Mutable or not
 
 The below query retrieves the token details such as update authority for a particular token and also checks if a token's data is mutable or not. You can access the query [here](https://ide.bitquery.io/Solana-currency-details).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query MyQuery {
@@ -958,12 +1053,17 @@ query MyQuery {
 
 ```
 
+</details>
+
 The `uri` field returns the following url - [`https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN`](https://ipfs.io/ipfs/QmXGGo38devA7Ghw6dT4rXfL8sREsEdv3FzkPdziE9V4oN).
 Offchain token metadata such as social urls and image could be accessed from this link.
 
 ## Top Buyers of a Token
 
 This query retrieves top buyers of the token `4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R`. Try the query [here](https://ide.bitquery.io/top-buyers-of-a-token_2).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -993,9 +1093,14 @@ This query retrieves top buyers of the token `4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iC
 }
 ```
 
+</details>
+
 ## Top Sellers of a Token
 
 This query retrieves top sellers of the token `4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R`. Try the query [here](https://ide.bitquery.io/top-sellers-of-a-token_2).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -1025,9 +1130,14 @@ This query retrieves top sellers of the token `4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5i
 }
 ```
 
+</details>
+
 ## Trades of a wallet
 
 You can use this API to fetch trades of a specific wallet address `tRadEVu2Va7WsVHqmGSiRHspkBoDQ9Qnjp42TiJirYA`. Change the wallet address as per your needs. Try the query [here](https://ide.bitquery.io/trades-of-a-wallet_8)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query MyQuery {
@@ -1078,9 +1188,14 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Get trading volume, buy volume, sell volume of a token
 
 This query fetches you the traded volume, buy volume and sell volume of a token `J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump`. Try out the API [here](https://ide.bitquery.io/trade_volume_Solana#).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query MyQuery {
@@ -1109,12 +1224,17 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Solana Second-level OHLC / K-line API
 
 You can get OHLC for each second as a subscription query, which can then be monitored via websocket.
 Below is an example. You can read more on [quantiles here](https://docs.bitquery.io/docs/graphql/metrics/quantile/)
 
 Test the subscription query [here](https://ide.bitquery.io/seconds-oHLC-realtime-solana#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription LatestTrades {
@@ -1174,6 +1294,8 @@ subscription LatestTrades {
 
 ```
 
+</details>
+
 ## Solana OHLC API
 
 You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair WSOL-USDC by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
@@ -1182,6 +1304,9 @@ You can run and test the [saved query here](https://ide.bitquery.io/query_ohlc_q
 :::note
 The `Trade Side Account` field is **not available** in aggregate queries across archive or combined datasets.
 :::
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query TradesSolToken($ca: String!, $currencies: [String!], $dataset: dataset_arg_enum, $interval: Int) {
@@ -1222,6 +1347,8 @@ query TradesSolToken($ca: String!, $currencies: [String!], $dataset: dataset_arg
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/1d5c2004-b8a5-4822-bda8-9f920dbf8715)
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/9Fv7n7HuA5EzjCRSvprBMx2Qhd1VL3hPEXKhTUKPm1Qh/So11111111111111111111111111111111111111112).
@@ -1233,6 +1360,9 @@ The [following query](https://ide.bitquery.io/latest-price-for-more-than-1-marke
 However, there's a caveat: since we are not specifying the buy or sell currency in the filters, the query will display both currencies on the buy side (or sell side).
 This happens because both currencies are traded within the pool. If you want the price of only one asset, you can define it in the filter.
 ere is [an example](https://ide.bitquery.io/latest-price-for-more-than-1-markets-on-solana-for-specific-currencies) from the same markets, where we specified that we need trades when the buy currency is defined.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription {
@@ -1255,6 +1385,8 @@ subscription {
 }
 ```
 
+</details>
+
 ## Using Pre-Made Aggregates in Solana DEX Trades
 
 When querying Solana DEXTradeByTokens, you can use pre-made aggregates to optimize performance. The `aggregates` flag provides three options to control the use of these aggregates:
@@ -1264,6 +1396,9 @@ When querying Solana DEXTradeByTokens, you can use pre-made aggregates to optimi
 - **`aggregates: no`**: This option does not use any pre-made aggregates.
 
 > When using the aggregates: only option, you need to include the mintaddress field in the response to ensure proper aggregation and filtering.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 
@@ -1294,12 +1429,17 @@ When querying Solana DEXTradeByTokens, you can use pre-made aggregates to optimi
 
 ```
 
+</details>
+
 ## Finding Trades that Executed the Trade a Custom Program
 
 You want to track or filter DEX trades that interacted with a specific Solana program (e.g., one you deployed or are monitoring).
 
 This query uses the [graphQL joins](https://docs.bitquery.io/docs/graphql/capabilities/joins/) feature to join Solana DEX trades with instructions executed by a specific program address.
 Run this query [here](https://ide.bitquery.io/find-all-trades-interacting-with-a-program)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -1354,6 +1494,8 @@ Run this query [here](https://ide.bitquery.io/find-all-trades-interacting-with-a
 }
 
 ```
+
+</details>
 
 ### How It Works
 
