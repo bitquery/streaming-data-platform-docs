@@ -2,6 +2,37 @@
 
 In this section, we will see some APIs that return on-chain data related to Four Meme Exchange on BSC network. We will be using DEX Trades API to get insightful trades and trading activity related data.
 
+## Track Four Meme Token Migrations
+
+Use the below query track four meme token migrations in realtime. Test it [here](https://ide.bitquery.io/four-meme-migration-to-pancakeswap).
+
+```graphql
+subscription {
+  EVM(network: bsc) {
+    Events(
+      where: {
+        Log: { Signature: { Name: { in: ["PairCreated", "PoolCreated"] } } }
+        Transaction: {
+          To: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
+        }
+      }
+    ) {
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
+
 ## Get Newly Created Tokens on Four Meme
 
 Using [this](https://ide.bitquery.io/FourMeme--Newly-Created-Token-by-Tracking-Transfer#) query we could get newly created tokens that are listed on the exchange.
@@ -72,23 +103,16 @@ Using [this](https://ide.bitquery.io/FourMeme--Newly-Created-Token-by-Tracking-T
 
 You can refer to this [example](./bsc-dextrades.mdx/#get-latest-trades-on-a-specific-dex) to track latest trades of a token on other particular DEX's such as Pancake Swap.
 
-
 ## Subscribe the Latest Trades on Four Meme
 
 Using subscriptions you can subscribe to the latest trades on Four Meme as shown in this [example](https://ide.bitquery.io/Latest-trades-on-fourmeme). The subscription returns latest trade info such as buyers and sellers, buy and sell currency details and amount of currency.
 
 ```graphql
 subscription {
-  EVM(network: bsc){
-    DEXTrades(where: {
-      Trade: {
-        Dex: {
-          ProtocolName: {
-            is: "fourmeme_v1"
-          }
-        }
-      }
-    }){
+  EVM(network: bsc) {
+    DEXTrades(
+      where: { Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } } } }
+    ) {
       Trade {
         Buy {
           Buyer
@@ -122,18 +146,17 @@ subscription {
 [This](https://ide.bitquery.io/Latest-buys-and-sells-for-a-four-meme-coin_1) query retrieves the most recent token buy and sell trades of a specific token on Four Meme Exchange.
 
 ```graphql
-
 query MyQuery($currency: String) {
   EVM(network: bsc, dataset: combined) {
     buys: DEXTrades(
       where: {
         Trade: {
-          Buy: {Currency: {SmartContract: {is: $currency}}},
-          Success: true,
-          Dex: {ProtocolName: {is: "fourmeme_v1"}}
+          Buy: { Currency: { SmartContract: { is: $currency } } }
+          Success: true
+          Dex: { ProtocolName: { is: "fourmeme_v1" } }
         }
       }
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
     ) {
       Block {
         Time
@@ -158,12 +181,12 @@ query MyQuery($currency: String) {
     sells: DEXTrades(
       where: {
         Trade: {
-          Sell: {Currency: {SmartContract: {is: $currency}}},
-          Success: true,
-          Dex: {ProtocolName: {is: "fourmeme_v1"}}
+          Sell: { Currency: { SmartContract: { is: $currency } } }
+          Success: true
+          Dex: { ProtocolName: { is: "fourmeme_v1" } }
         }
       }
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
     ) {
       Block {
         Time
@@ -194,8 +217,8 @@ query MyQuery($currency: String) {
   "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
 }
 ```
-You can also check if the token is listed on other DEX using this [example](./bsc-dextrades.mdx/#get-all-dexs-where-a-specific-token-is-listed).
 
+You can also check if the token is listed on other DEX using this [example](./bsc-dextrades.mdx/#get-all-dexs-where-a-specific-token-is-listed).
 
 ## Monitor trades of traders on Four meme
 
@@ -206,12 +229,9 @@ subscription {
   EVM(network: bsc) {
     DEXTrades(
       where: {
-        Trade: {
-          Dex: {ProtocolName: {is: "fourmeme_v1"}},
-          Success: true
-        },
+        Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } }, Success: true }
         Transaction: {
-          From: {is: "0x7db00d1f5b8855d40827f34bb17f95d31990306e"}
+          From: { is: "0x7db00d1f5b8855d40827f34bb17f95d31990306e" }
         }
       }
     ) {
@@ -251,21 +271,17 @@ You can also get the trade activities of a user on Pancake Swap using our [Panca
 
 You can use DEX Trades API with combined dataset to get latest and historic trades of a user. Run [this query](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme) for example.
 
-
 ```graphql
 query MyQuery($address: String) {
-  EVM(dataset:combined, network: bsc) {
+  EVM(dataset: combined, network: bsc) {
     DEXTrades(
       where: {
-        Trade: {
-          Dex: {ProtocolName: {is: "fourmeme_v1"}},
-          Success: true
-        }, 
-        Transaction: {From: {is: $address}}
+        Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } }, Success: true }
+        Transaction: { From: { is: $address } }
       }
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
     ) {
-      Block{
+      Block {
         Time
       }
       Trade {
@@ -314,12 +330,12 @@ query MyQuery($currency: String) {
     DEXTrades(
       where: {
         Trade: {
-          Buy: {Currency: {SmartContract: {is: $currency}}},
-          Success: true,
-          Dex: {ProtocolName: {is: "fourmeme_v1"}}
+          Buy: { Currency: { SmartContract: { is: $currency } } }
+          Success: true
+          Dex: { ProtocolName: { is: "fourmeme_v1" } }
         }
       }
-      limit: {count: 100}
+      limit: { count: 100 }
     ) {
       Trade {
         Buy {
@@ -329,7 +345,7 @@ query MyQuery($currency: String) {
       trades: count
       bought: sum(of: Trade_Buy_Amount)
     }
-	}
+  }
 }
 ```
 
@@ -344,30 +360,38 @@ query MyQuery($currency: String) {
 [This](https://ide.bitquery.io/volume-and-trades-for-a-token-in-different-time-frames_1) query returns the traded volume and number of trades for a particular Four Meme token in different time frames, namely 24 hours, 1 hour and 5 minutes.
 
 ```graphql
-query MyQuery($currency: String, $time_24hr_ago: DateTime, $time_1hr_ago: DateTime, $time_5min_ago: DateTime) {
+query MyQuery(
+  $currency: String
+  $time_24hr_ago: DateTime
+  $time_1hr_ago: DateTime
+  $time_5min_ago: DateTime
+) {
   EVM(network: bsc) {
     DEXTradeByTokens(
       where: {
-        Trade: {
-          Currency: {SmartContract: {is: $currency}},
-          Success: true
-        }, 
-        Block: {Time: {since: $time_24hr_ago}}
+        Trade: { Currency: { SmartContract: { is: $currency } }, Success: true }
+        Block: { Time: { since: $time_24hr_ago } }
       }
-    ){
-      Trade{
-        Currency{
+    ) {
+      Trade {
+        Currency {
           Name
           Symbol
           SmartContract
         }
       }
       volume_24hr: sum(of: Trade_Side_AmountInUSD)
-      volume_1hr: sum(of: Trade_Side_AmountInUSD, if: {Block: {Time: {since: $time_1hr_ago}}})
-      volume_5min: sum(of: Trade_Side_AmountInUSD, if: {Block: {Time: {since: $time_5min_ago}}})
+      volume_1hr: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Block: { Time: { since: $time_1hr_ago } } }
+      )
+      volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Block: { Time: { since: $time_5min_ago } } }
+      )
       trades_24hr: count
-      trades_1hr: count(if: {Block: {Time: {since: $time_1hr_ago}}})
-      trades_5min: count(if: {Block: {Time: {since: $time_5min_ago}}})
+      trades_1hr: count(if: { Block: { Time: { since: $time_1hr_ago } } })
+      trades_5min: count(if: { Block: { Time: { since: $time_5min_ago } } })
     }
   }
 }
@@ -378,7 +402,7 @@ query MyQuery($currency: String, $time_24hr_ago: DateTime, $time_1hr_ago: DateTi
   "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40",
   "time_24hr_ago": "2024-03-23T15:00:00Z",
   "time_1hr_ago": "2024-03-24T14:00:00Z",
-  "time_5min_ago": "2024-03-24T15:55:00Z",
+  "time_5min_ago": "2024-03-24T15:55:00Z"
 }
 ```
 
@@ -390,11 +414,11 @@ To get the market cap of a token we need two things, the latest `PriceInUSD` and
 query MyQuery($currency: String) {
   EVM(network: bsc) {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {SmartContract: {is: $currency}}}}
-      orderBy: {descending: Block_Time}
-      limit: {count:1}
-    ){
-      Trade{
+      where: { Trade: { Currency: { SmartContract: { is: $currency } } } }
+      orderBy: { descending: Block_Time }
+      limit: { count: 1 }
+    ) {
+      Trade {
         PriceInUSD
       }
     }
@@ -414,12 +438,28 @@ Also, [this](https://ide.bitquery.io/Total-supply-of-a-four-meme-token) query re
 query MyQuery($currency: String) {
   EVM(network: bsc, dataset: combined) {
     Transfers(
-      where: {Transfer: {Currency: {SmartContract: {is: $currency}}, Success: true}}
+      where: {
+        Transfer: {
+          Currency: { SmartContract: { is: $currency } }
+          Success: true
+        }
+      }
     ) {
-      minted: sum(of: Transfer_Amount, if: {Transfer: {Sender: {is: "0x0000000000000000000000000000000000000000"}}})
+      minted: sum(
+        of: Transfer_Amount
+        if: {
+          Transfer: {
+            Sender: { is: "0x0000000000000000000000000000000000000000" }
+          }
+        }
+      )
       burned: sum(
         of: Transfer_Amount
-        if: {Transfer: {Receiver: {is: "0x0000000000000000000000000000000000000000"}}}
+        if: {
+          Transfer: {
+            Receiver: { is: "0x0000000000000000000000000000000000000000" }
+          }
+        }
       )
     }
   }
@@ -596,7 +636,6 @@ You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific
 }
 
 ```
-
 
 ## Building a Four Meme Dashboard
 
