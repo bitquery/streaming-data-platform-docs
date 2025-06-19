@@ -1,6 +1,6 @@
 # Pump Fun API
 
-Bitquery provides Pumpfun data through APIs, Streams and Data Dumps. 
+Bitquery provides Pumpfun data through APIs, Streams and Data Dumps.
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery.
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
@@ -103,6 +103,9 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 Get metadata, supply, dev address of newly created tokens.
 [Run Query ➤](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 subscription {
   Solana {
@@ -150,9 +153,14 @@ subscription {
 }
 ```
 
+</details>
+
 ### Get Creation Time & Dev Address of a Token
 
 [Run Query ➤](https://ide.bitquery.io/PumpFun-Token-creation-time--creator)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -186,9 +194,14 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ### Track New Token Launches in Realtime
 
 [Run Stream ➤](https://ide.bitquery.io/Track-new-token-launches-on-Pump-Fun-in-realtime)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -256,9 +269,14 @@ subscription {
 }
 ```
 
+</details>
+
 ### All Tokens Created by a Specific Address
 
 [Run Query ➤](https://ide.bitquery.io/all-Pump-fun-tokens-created-by-an-address)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -303,11 +321,16 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ### Get Token Metadata, Dev Address, Creation Time For Specific Token
 
 Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply.
 `PostBalance` will give you the current supply for the token.
 [Run Stream ➤](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription {
@@ -347,9 +370,9 @@ subscription {
     }
   }
 }
-
-
 ```
+
+</details>
 
 ## Token Pricing & Market Data
 
@@ -357,6 +380,9 @@ subscription {
 
 Fetches the most recent price data for a specified token
 [Run Query ➤](https://ide.bitquery.io/Price-of-a-pump-fun-token_7)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -410,10 +436,15 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ### Track Price of a Token in Real-Time
 
 Live stream of token price updates on Pump Fun
 [Run Stream ➤](https://ide.bitquery.io/Price-of-a-pump-fun-token_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription MyQuery {
@@ -465,16 +496,19 @@ subscription MyQuery {
 }
 ```
 
+</details>
+
 ### Get OHLC Data of a Token
 
 Fetches open-high-low-close data in 1-minute intervals for last 10 minutes
 [Run Query ➤](https://ide.bitquery.io/OHLC-for-a-token-on-Pump-Fun_10)
 
-
 :::note
 Trade Side Account field will not be available for aggregate queries in Archive and Combined Datasets
 :::
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -512,10 +546,15 @@ Trade Side Account field will not be available for aggregate queries in Archive 
 }
 ```
 
+</details>
+
 ### Get ATH Market Cap of a Token
 
 Returns all-time-high price in SOL (marketcap = price \* 1B tokens)
 [Run Query ➤](https://ide.bitquery.io/ATH-MC_1#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -539,10 +578,15 @@ Returns all-time-high price in SOL (marketcap = price \* 1B tokens)
 }
 ```
 
+</details>
+
 ### ATH Market Cap in a Specific Timeframe
 
 Same as above but within a given window
 [Run Query ➤](https://ide.bitquery.io/ATH-MC-till-2minutes-prior#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -567,10 +611,15 @@ Same as above but within a given window
 }
 ```
 
+</details>
+
 ### Token Price Change Over Time (Delta from X Minutes Back)
 
 Useful for tracking % change by comparing first/last prices
 [Run Query ➤](https://ide.bitquery.io/Pumpfun-coins-with-price--mc-with-limit-and-delta-from-10-min-back-simple_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query PumpFunRecentTrades {
@@ -604,12 +653,17 @@ query PumpFunRecentTrades {
 }
 ```
 
+</details>
+
 ## Trade Activity & Volume
 
 ### Get Real-Time Trades on Pump Fun
 
 Streams live trades, including buy/sell sides, amounts, involved accounts, and methods
 [Run Stream ➤](https://ide.bitquery.io/Pumpfun-DEX-Trades_1#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription MyQuery {
@@ -667,10 +721,15 @@ subscription MyQuery {
 }
 ```
 
+</details>
+
 ### Get Latest Trades for a Token
 
 Retrieves recent trades with detailed price, amount, and sides
 [Run Query ➤](https://ide.bitquery.io/get-latest-trades-of-a-pump-fun-token_6)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query pumpfunTokenLatestTrades($token: String) {
@@ -716,10 +775,15 @@ query pumpfunTokenLatestTrades($token: String) {
 }
 ```
 
+</details>
+
 ### Get Token’s Trading Volume
 
 Get volume traded for a token since a specific time
 [Run Query ➤](https://ide.bitquery.io/trading-volume-of-a-token-pump-fun)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -752,10 +816,15 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ### Get Detailed Trade Stats: Volume, Buys, Sells, Makers, Buyers, Sellers
 
 Includes 5-minute and 1-hour metrics for deep token analytics
 [Run Query ➤](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair_10)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($token: String!, $pair_address: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime!) {
@@ -785,10 +854,15 @@ query MyQuery($token: String!, $pair_address: String!, $time_5min_ago: DateTime!
 }
 ```
 
+</details>
+
 ### Get First 100 Buyers of a Token
 
 Get wallet addresses of first 100 accounts who bought a token
 [Run Query ➤](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -823,10 +897,15 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ### Check If First 100 Buyers Still Holding
 
 Pass the owner addresses from the above query to evaluate holdings
 [Run Query ➤](https://ide.bitquery.io/balance-of-a-specific-token-at-the-specific-account-address)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -863,12 +942,17 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Token Liquidity, Pools & Pairs
 
 ### Get All Trading Pairs of a Token
 
 Lists all markets where the token is traded, including pair addresses
 [Run Query ➤](https://ide.bitquery.io/get-all-the-trading-pairs-of-a-specific-token)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -902,10 +986,15 @@ Lists all markets where the token is traded, including pair addresses
 }
 ```
 
+</details>
+
 ### Get Liquidity of Pump Fun Tokens
 
 Gets pool token balances for liquidity estimation across multiple known pool accounts
 [Run Query ➤](https://ide.bitquery.io/Pumpfun-pools--token-balances)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -950,10 +1039,15 @@ Gets pool token balances for liquidity estimation across multiple known pool acc
 }
 ```
 
+</details>
+
 ### Get Market Cap, Price, Liquidity, Bonding Curve, and Volume
 
 Returns detailed token metrics including bonding curve status
 [Run Query ➤](https://ide.bitquery.io/mcap-liquidity-bonding-curve-volume-supply-of-a-token-in-time-frame)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
@@ -1047,10 +1141,15 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
 }
 ```
 
+</details>
+
 ### Get Last Pump Fun Trade Before Token Graduates to Raydium
 
 Finds the final pool trade before a token transitions to Raydium
 [Run Query ➤](https://ide.bitquery.io/pump-fun-token-graduating-to-raydium)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -1109,12 +1208,17 @@ Finds the final pool trade before a token transitions to Raydium
 }
 ```
 
+</details>
+
 ## Token Holder & Trader Insights
 
 ### Get Dev’s Holdings of a Token
 
 Returns the developer’s current token holdings
 [Run Query ➤](https://ide.bitquery.io/trading-volume-of-a-token-pump-fun)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($dev: String, $token: String) {
@@ -1142,10 +1246,15 @@ query MyQuery($dev: String, $token: String) {
 }
 ```
 
+</details>
+
 ### Get Top 10 Token Holders
 
 Returns wallet addresses and holdings of top 10 token holders
 [Run Query ➤](https://ide.bitquery.io/top-token-holders-for-a-pump-fun-token)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -1178,10 +1287,15 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ### Get Top Traders of a Token
 
 Returns top 100 wallets ranked by USD trade volume
 [Run Query ➤](https://ide.bitquery.io/top-traders-of-a-pump-fun-token_2)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query TopTraders($token: String) {
@@ -1221,10 +1335,15 @@ query TopTraders($token: String) {
 }
 ```
 
+</details>
+
 ### Get Top Token Creators
 
 Find wallet addresses of top creators by number of tokens launched
 [Run Query ➤](https://ide.bitquery.io/Top-pump-fun-token-creators)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -1246,12 +1365,17 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Token Rankings & Filters
 
 ### Top Pump Fun Tokens by Market Cap
 
 Returns top tokens by price (1B supply = price × 1B = market cap)
 [Run Query ➤](https://ide.bitquery.io/top-tokens-by-mktcap-on-pump-fun-in-last-15-min)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -1294,10 +1418,15 @@ Returns top tokens by price (1B supply = price × 1B = market cap)
 }
 ```
 
+</details>
+
 ### All Tokens Above 10K Market Cap
 
 Returns tokens with price above 0.00001 (i.e., 10K+ market cap)
 [Run Query ➤](https://ide.bitquery.io/top-tokens-above-10k-USD-mktcap-on-pump-fun-in-last-15-min)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -1340,10 +1469,15 @@ Returns tokens with price above 0.00001 (i.e., 10K+ market cap)
 }
 ```
 
+</details>
+
 ### Track “King of the Hill” Tokens (30K–35K Market Cap)
 
 Live tokens within the specific market cap range highlighted by Pump Fun. [Here](https://x.com/pumpdotfun/status/1760103287397793933) checkout the official announcement by Pump.Fun team mentioning that a Pump Fun token reaches to King of the Hill if it crosses 30K USD Marketcap.
 [Run Query ➤](https://ide.bitquery.io/track-King-of-the-hill-tokens-in-realtime)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -1380,10 +1514,15 @@ subscription {
 }
 ```
 
+</details>
+
 ### Tokens Between 400K–450K Market Cap with Dev & Creation Time
 
 Filters tokens in a specific cap range and adds metadata
 [Run Query ➤](https://ide.bitquery.io/pumpfun-tokens-between-400K-and-450K-MC-and-their-creation-date-dev-address_2)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -1450,6 +1589,8 @@ Filters tokens in a specific cap range and adds metadata
   }
 }
 ```
+
+</details>
 
 ## Video Tutorials
 

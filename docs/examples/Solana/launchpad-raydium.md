@@ -29,6 +29,9 @@ We will use the `PoolCreateEvent` method to filter latest pools on Launchpad. Th
 
 You can run the query [here](https://ide.bitquery.io/Launchpad-latest-pool-created)
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 {
   Solana(network: solana, dataset: realtime) {
@@ -88,9 +91,14 @@ You can run the query [here](https://ide.bitquery.io/Launchpad-latest-pool-creat
 }
 ```
 
+</details>
+
 ## Get all the instructions of Raydium LaunchLab
 
 Below query will get you all the instructions that the Raydium LaunchLab Program has. You can test the API [here](https://ide.bitquery.io/all-the-instructions-of-Raydium-LaunchLab).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query MyQuery {
@@ -109,6 +117,8 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Track Token Migrations to Raydium DEX and Raydium CPMM in Realtime
 
 Using above `get all instructions` api, you will figure out that there are 2 instructions `migrate_to_amm`, `migrate_to_cpswap` whose invocations migrate the Raydium LaunchLab Token to Raydium V4 AMM and Raydium CPMM Dexs respectively.
@@ -116,6 +126,9 @@ Using above `get all instructions` api, you will figure out that there are 2 ins
 Thats why we have filtered for these 2 instructions in the below API, and tracking these.
 
 Test out the API [here](https://ide.bitquery.io/Track-Token-Migrations-to-Raydium-DEX-and-Raydium-CPMM-in-realtime).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription MyQuery {
@@ -182,10 +195,15 @@ subscription MyQuery {
 }
 ```
 
+</details>
+
 ## Latest Trades on Launchpad
 
 This query fetches the most recent trades on the Raydium Launchpad.
 You can run the query [here](https://ide.bitquery.io/Latest-Trades-on-Launchpad)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query LatestTrades {
@@ -231,12 +249,17 @@ query LatestTrades {
 }
 ```
 
+</details>
+
 Similarly, you can subscribe to trades on launchpad in real-time using [subscription query](https://ide.bitquery.io/Subscribe-to-Trades-on-Launchpad). The same can be tracked using [Bitquery Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
 
 ## Latest Price of a Token on Launchpad
 
 This query provides the most recent price data for a specific token launched on Raydium Launchpad. You can filter by the token’s `MintAddress`, and the query will return the last recorded trade price.
 You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-Launchpad)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -289,9 +312,14 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-
 }
 ```
 
+</details>
+
 ## Latest Trades of an User on Launchpad
 
 [This](https://ide.bitquery.io/trades-by-user-on-launchpad_1) query returns the latest trades by a user on Launchpad by filtering on the basis of `Transaction_Signer`. [This](https://ide.bitquery.io/trades-by-user-on-launchpad-stream) stream of data allows to monitor the trade activities of the user on Launchpad in real time.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -331,9 +359,14 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Top Buyers of a Token on LaunchPad
 
 [This](https://ide.bitquery.io/top-buyers-of-a-token-on-launchpad) API endpoint returns the top 100 buyers for a token, which is `8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray` in this case.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -367,9 +400,14 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Top Sellers of a Token on LaunchPad
 
 Using [this](https://ide.bitquery.io/top-sellers-of-a-token-on-launchpad_1) query top 100 sellers for the token with `Mint Address` as `8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray` could be retrieved.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -403,9 +441,14 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## OHLCV for LaunchPad Tokens
 
 [This](https://ide.bitquery.io/ohlc-for-launchpad-token) API end point returns the OHLCV vlaues for a LaunchPad token with the currency `mint address` as `72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray` when traded against WSOL.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -444,9 +487,14 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Get Liquidity Pool Address for a LaunchPad Token
 
 [This](https://ide.bitquery.io/pool-address-for-launchpad-token) query returns the pair address for the LaunchPad token with `mint address` as `72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray` on the LaunchPad exchange. The liquidity pool address is denoted by `MarketAddress`.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -484,9 +532,14 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Get Liquidity for a LaunchPad Token Pair Address
 
 Using [this](https://ide.bitquery.io/liquidity-for-a-launchpad-token-pair) query we can get the liquidity for a LaunchPad Token Pair, where `Base_PostBalance` is the amount of LaunchPad tokens present in the pool and `Quote_PostBalance` is the amount of WSOL present in the pool. For the purpose of filtering we are applying the condition that the `MarketAddress` is `H5875KoMLaWAovsjjXuTtHZv9otmH7EgJ2nXMovykZvp`.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -529,6 +582,8 @@ Using [this](https://ide.bitquery.io/liquidity-for-a-launchpad-token-pair) query
   }
 }
 ```
+
+</details>
 
 [This](https://ide.bitquery.io/liquidity-for-a-launchpad-token-pair-stream) subscription could be utilised to monitor updates in liquidity pools in real time.
 

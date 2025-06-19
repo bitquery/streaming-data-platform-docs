@@ -271,7 +271,7 @@ subscription {
 
 ## Get the First 100 buyers of a Token
 
-The below query retrieves the first 100 buyers of a secified token.
+The below query retrieves the first 100 buyers of a specified token.
 You can run the query [here](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1)
 
 ```graphql

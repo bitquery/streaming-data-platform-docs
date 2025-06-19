@@ -8,12 +8,10 @@ To query or stream data via graphQL **outside the Bitquery IDE**, you need to ge
 Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
 
-
 - You can also explore [Pump Fun Data documentation ➤](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/)
 - Need zero-latency PumpSwap data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
 Join us on [Telegram](https://t.me/Bloxy_info) for support and integration help.
-
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -40,15 +38,17 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
   <meta property="twitter:description" content="Get on-chain data of any Pump Swap based token through our Pump Swap API."/>
 </head>
 
----------------------
+---
 
 ### Table of Contents
 
 ### 1. Pool Creation & Migration
+
 - [Get Newly Created Pools in Real-time ➤](#get-newly-created-pools-on-pumpswap-dex-in-realtime)
 - [Track Pools Migrated to PumpSwap ➤](#track-pools-that-are-migrated-to-pumpswap)
 
 ### 2. Trade Activity & Price Data
+
 - [Latest Trades on PumpSwap ➤](#latest-trades-on-pumpswap)
 - [Real-Time Trades (WebSocket) ➤](#latest-trades-on-pumpswap-websocket)
 - [Latest Trades for a Token ➤](#latest-trades-for-a-token-on-pumpswap)
@@ -57,20 +57,25 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 - [Get Trading Volume ➤](#get-the-trading-volume-of-a-specific-token-on-pumpswap-dex)
 
 ### 3. Trader Insights
+
 - [Latest Trades by a Trader ➤](#latest-trades-by-a-trader)
 - [Real-Time Trades by a Trader ➤](#latest-trades-by-a-trader---get-data-in-real-time-via-a-websocket)
 - [Top Traders on PumpSwap ➤](#top-trader-on-pumpswap)
 
 ### 4. Token Analytics
+
 - [Token Stats: Buys, Sells, Volume, Makers ➤](#get-buy-volume-sell-volume-buys-sells-makers-total-trade-volume-buyers-sellers-of-a-specific-token)
 
 ### 5. Video Tutorials
-- [Watch PumpSwap Tutorials ➤](#pumpswap-video-tutorials)
 
+- [Watch PumpSwap Tutorials ➤](#pumpswap-video-tutorials)
 
 ## Get Newly created pools on PumpSwap DEX in realtime
 
 Use the below query to get the latest created pools on PumpSwap. You can test the query [here](https://ide.bitquery.io/pumpSwap-new-pools-Stream)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription {
@@ -157,11 +162,16 @@ subscription {
 }
 ```
 
+</details>
+
 ## Track Pools that are migrated to PumpSwap
 
 Use the below query to track Pump Fun token migrations to PumpSwap in realtime. You will get the following account addresses information through the query's `Instruction Accounts[]` field and the amount of liquidity added through arguments' `Value` field
 
 You can test the query [here](https://ide.bitquery.io/pumpfun-migration-stream_2#).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -258,10 +268,15 @@ subscription {
 }
 ```
 
+</details>
+
 ## Latest trades on PumpSwap
 
 Below query returns latest trades on PumpSwap
 You can test out the query [here](https://ide.bitquery.io/Pumpswap-latest-Trades-API).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -340,10 +355,15 @@ You can test out the query [here](https://ide.bitquery.io/Pumpswap-latest-Trades
 }
 ```
 
+</details>
+
 ## Latest trades on PumpSwap websocket
 
 Below query can help you get real-time trades on PumpSwap using `subscription`.
 You can test out the query [here](https://ide.bitquery.io/pumpswap-trades).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -386,16 +406,19 @@ subscription {
 }
 ```
 
+</details>
 
 ## OHLC for PumpSwap token
 
 Below API query can get you the OHLC of a given token pair on PumpSwap. You can use the OHLC to build charts.
 You can test out the query [here](https://ide.bitquery.io/ohlc-for-pumpswap).
 
-
 :::note
 Note: The `Trade Side Account` field is **not available** in aggregate queries across archive or combined datasets.
 :::
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query MyQuery {
@@ -422,9 +445,14 @@ query MyQuery {
 
 ```
 
+</details>
+
 ## Latest Trades by a Trader
 
 You can test out the query [here](https://ide.bitquery.io/Pumpswap-latest-Trade-for-a-trader-api_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -499,10 +527,15 @@ You can test out the query [here](https://ide.bitquery.io/Pumpswap-latest-Trade-
 }
 ```
 
+</details>
+
 ## Latest Trades by a Trader - Get Data in Real-time via a Websocket
 
 Below query can get you the latest trades of a trader in real time.
 You can test out the query [here](https://ide.bitquery.io/Pumpswap-latest-Trade-for-a-trader-stream_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription {
@@ -571,10 +604,15 @@ subscription {
 }
 ```
 
+</details>
+
 ## Latest Trades for a token on Pumpswap
 
 Below query can get you the latest trades of a token on Pumpswap.
 You can test out the query [here](https://ide.bitquery.io/Solana-trade-for-a-token_2).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -641,10 +679,15 @@ You can test out the query [here](https://ide.bitquery.io/Solana-trade-for-a-tok
 }
 ```
 
+</details>
+
 ## Latest Trades for a token on Pumpswap - Websocket
 
 Below query can get you the latest trades of a token on Pumpswap in real time.
 You can test out the query [here](https://ide.bitquery.io/Latest-Trades-for-a-token-on-Pumpswap).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription {
@@ -703,10 +746,15 @@ subscription {
 }
 ```
 
+</details>
+
 ## Top Trader on Pumpswap
 
 Below query can get you top traders on Pumpswap.
 You can test out the query [here](https://ide.bitquery.io/top-traders-on-pumpswap_2).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query MyQuery {
@@ -727,10 +775,15 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token
 
 The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
 You can run the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair0_4)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($token: String!, $pair_address: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime!) {
@@ -829,10 +882,15 @@ query MyQuery($token: String!, $pair_address: String!, $time_5min_ago: DateTime!
 }
 ```
 
+</details>
+
 ## Track Price of a Token in Realtime on PumpSwap
 
 The below query gets real-time price of the specified Token `EQf2LYaw4zV3hb2UK5kCUSgFrLRJqUAaeVA9rMypump` on the PumpSwap DEX.
-You can run the query [here](https://ide.bitquery.io/realtime-price-of-a-pumpswap-token)
+You can run the query [here](https://ide.bitquery.io/realtime-price-of-a-pumpswap-token).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription MyQuery {
@@ -884,10 +942,15 @@ subscription MyQuery {
 }
 ```
 
+</details>
+
 ## Get Latest Price of a Token on PumpSwap
 
 The below query gets real-time price of the specified Token `EQf2LYaw4zV3hb2UK5kCUSgFrLRJqUAaeVA9rMypump` on the PumpSwap DEX.
 You can run the query [here](https://ide.bitquery.io/Price-of-a-pumpswap-token_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -941,10 +1004,15 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Get the Trading Volume of a specific Token on PumpSwap DEX
 
 The below query gets the Trading volume of the specified Token `EQf2LYaw4zV3hb2UK5kCUSgFrLRJqUAaeVA9rMypump` on PumpSwap DEX. You will have to change the time in this `Block: { Time: { since: "2025-03-25T09:30:00Z" till: "2025-03-25T10:30:00Z" } }` when you try the query yourself. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
 You can run the query [here](https://ide.bitquery.io/trading-volume-of-a-token-pumpSwap)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -979,6 +1047,8 @@ query MyQuery {
   }
 }
 ```
+
+</details>
 
 ## PumpSwap Video Tutorials
 

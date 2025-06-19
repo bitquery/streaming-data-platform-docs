@@ -86,3 +86,39 @@ You can run the query [here](https://ide.bitquery.io/Top-10-holders-of-a-token-o
 }
 
 ```
+
+## Get Top Holder of Multiple Tokens on BNB
+
+We will aggregate balance update data for this API.
+
+[Run Query ➤](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-BSC)
+
+```
+query {
+  EVM(network: bsc, aggregates: yes, dataset: combined) {
+    BalanceUpdates(
+      orderBy: {descendingByField: "balance"}
+      limit: {count: 50}
+      where: {
+        Currency: {
+          SmartContract: {
+            in: [
+              "0xff7d6a96ae471bbcd7713af9cb1feeb16cf56b41",
+              "0x3f160760535eb715d5809a26cf55408a2d9844c1"
+            ]
+          }
+        }
+      }
+    ) {
+      BalanceUpdate {
+        Address
+      }
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+    }
+  }
+}
+
+```

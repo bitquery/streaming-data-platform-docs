@@ -228,6 +228,10 @@ const config = {
           {
             to:"/docs/examples/dextrades/uniswap-api/",
             from:"/docs/examples/realtimetrades/"
+          },
+          {
+            to: '/docs/examples/Solana/', // new target
+            from: '/docs/category/solana/' // old category URL
           }
         ],
       },

@@ -41,6 +41,9 @@ You can get the latest USD price of the desired token (here I have used this tok
 
 Alternatively, you can use the `TokenSupplyUpdates` cube to find marketcap of Pump Fun Tokens, as shown [here](https://docs.bitquery.io/docs/examples/Solana/token-supply-cube/).
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 query MyQuery {
   Solana {
@@ -77,12 +80,17 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Get Tokens with a specific MarketCap
 
 You can get the marketcap of a pump fun token by this formulae `marketcap = 1000000000 * Latest USD Price` because all the pump fun tokens have 1 Billion supply.
 
 So to track the tokens with a specific marketcap, we just need to track their `PriceInUSD`. In the below example query we are tracking tokens in realtime using `subscription` keyword which are in marketcap range of $10K to $11K.
 Try it out using this [query link](https://ide.bitquery.io/Track-pump-fun-tokens-with-a-specific-mktcap).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription MyQuery {
@@ -135,11 +143,16 @@ subscription MyQuery {
 }
 ```
 
+</details>
+
 You can also observe the approach of using `TokenSupplyUpdate` block to get the similiar data [here](https://docs.bitquery.io/docs/examples/Solana/token-supply-cube/).
 
 ## Check if the Pump Fun Token has migrated to PumpSwap - API
 
 To check if a Pump Fun Token has migrated to PumpSwap, we can use the below query. In this query we are checking if this token `7JsSjVLACA1V7SzTHHeE9XKCP3KJGUwUmqgDm5Hupump` has migrated to PumpSwap. You can run the query [here](https://ide.bitquery.io/check-if-a-pumpfun-token-has-migrated-to-PumpSwap).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -241,11 +254,16 @@ To check if a Pump Fun Token has migrated to PumpSwap, we can use the below quer
 }
 ```
 
+</details>
+
 ## Track Pump Fun Token Migrations to PumpSwap
 
 You will need to use two queries to get the realtime migrations data, 2 instructions should be presnt in a transaction `migrate` and `create_pool` then only the transaction is a successfull migration of a pump fun token to pump swap.
 
 Use [query 1](https://ide.bitquery.io/track-migrations-of-pump-token-in-realtime) to get the transactions where pumpfun:migrate instruction is invoked in realtime. We specifically need to get trxn signature and block slot of migrations in realtime.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 subscription {
@@ -356,11 +374,16 @@ query ($transactionSignature: String, $blockSlot: String){
 }
 ```
 
+</details>
+
 ## Get All Pump Fun Token Migrations to PumpSwap
 
 Use the below query to get 50 latest Pump Fun token migrations to PumpSwap. The Token Pair details which is migrated will be in Accounts[] array.
 
 You can test the query [here](https://ide.bitquery.io/track-Pump-fun-migration-using-joins_3).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -502,6 +525,8 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Bonding Curve Progress API
 
 ### Bonding Curve Progress Formula
@@ -532,6 +557,9 @@ BondingCurveProgress = 100 - (((balance - 206900000) \* 100) / 793100000)
 - **Balance Retrieval**:
   - The `balance` is the token balance at the market address.
   - Use this query to fetch the balance: [Query Link](https://ide.bitquery.io/Get-balance-of-a-pair-address-on-solana).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query GetLatestLiquidityForPool {
@@ -588,9 +616,14 @@ query GetLatestLiquidityForPool {
 }
 ```
 
+</details>
+
 ## Track Pump Fun Tokens above 95% Bonding Curve Progress
 
 We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/Pump-Fun-Tokens-between-95-and-100-bonding-curve-progress).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription MyQuery {
@@ -644,6 +677,8 @@ subscription MyQuery {
   }
 }
 ```
+
+</details>
 
 ## Video Tutorial | How to track Pump Fun Token Migrations to PumpSwap in realtime
 

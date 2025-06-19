@@ -1,20 +1,22 @@
+---
+sidebar_position: 1
+---
+
 # Token Holders API
 
 The Token Holders API allows you to access information regarding token holders for both fungible (ERC20) and non-fungible (ERC721) tokens. This API provides access to current token holder data for a specific token, as well as historical information about token holders.
 
 Let's explore some examples and discover how to use the Token Holders API.
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
-
-## NFT Holders
-
-If you need information about the holders of a specific NFTs, you can simply enter the contract address of the NFT in `tokenSmartContract` field. This will provide you with all the necessary details about the token holders.
 
 ## Total Token Holder Count
 
-With the Token Holder API, you can retrieve the total number of token holders. By using the `uniq` field and getting unique `Holder_Address` values, you can find the number of token holders on a specific date.
+With the Token Holders API, you can retrieve the total number of token holders by using the `uniq` field on `Holder_Address`. In this example, we query the USDT holders on Ethereum as of October 21, 2023:
 
-In this example, we will obtain the token holder count for the [USDT token](https://explorer.bitquery.io/ethereum/token/0xdac17f958d2ee523a2206206994597c13d831ec7) on the [Ethereum](https://bitquery.io/blockchains/ethereum-blockchain-api). You can run this query directly within [our IDE](https://ide.bitquery.io/usdt-token-holder-count-using-token-holders-api).
+You can run this query in our IDE: [USDT token holder count](https://ide.bitquery.io/usdt-token-holder-count-using-token-holders-api)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -30,9 +32,16 @@ In this example, we will obtain the token holder count for the [USDT token](http
 }
 ```
 
-# Token holders of a token
+</details>
 
-You can use following [query](https://ide.bitquery.io/token-holder-api_1) to get all token holders of a given token on a given date. You can change `limit` to get more or less token holders.
+## Token holders of a token
+
+Get all token holders for a given token on a specific date. Adjust `limit` as needed:
+
+Run in IDE: [Token holder API](https://ide.bitquery.io/token-holder-api_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -54,9 +63,16 @@ You can use following [query](https://ide.bitquery.io/token-holder-api_1) to get
 }
 ```
 
-## Token Balance of an address on particular date
+</details>
 
-You can find out how many tokens a specific token holder had on a specific date. To do this, simply update the `date` value with the date you're interested in. Run [this query](https://ide.bitquery.io/balance-of-token-holder-for-a-token-on-particular-date-using-token-holders-api) in the IDE to view the result.
+## Token Balance of an address on a particular date
+
+Find how many tokens a specific address held on a given date:
+
+Run in IDE: [Balance of token holder](https://ide.bitquery.io/balance-of-token-holder-for-a-token-on-particular-date-using-token-holders-api)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -81,19 +97,22 @@ You can find out how many tokens a specific token holder had on a specific date.
 }
 ```
 
+</details>
+
 ## Token Holders Over Time
 
-As talked about earlier, the Token Holders API enables us to access token holder data for a specific token on any desired date. However, if you need to obtain token holder data over a range of dates or a specific timeframe, you'll need to make separate API calls, adjusting the date parameter accordingly. This way, you can get token holder information for the entire period you're interested in.
+To track holder counts over a range of dates, repeat the `TokenHolders` query with different `date` values to build your time series.
 
 ## Token Holder Activity
 
-The Token Holders API offers the functionality to get information about the activity of token holders related to a specific token. Let's explore these activities which will give us insight into token holders behaviour.
-
 ### Count of Transactions for a Token from a Token Holder
 
-If you're interested about how frequently an address has participated in transactions with a specific token, you can utilize the Token Holder API. For instance, here's an example that reveals the number of transactions involving Mutant Ape Yacht Club (MAYC NFT) from a specific wallet.
+See how many on-chain transactions a given address made involving a specific token:
 
-You can see the results by running [this query](https://ide.bitquery.io/Number-of-token-transaction-for-a-wallet) in the IDE.
+Run in IDE: [Number of token transactions for a wallet](https://ide.bitquery.io/Number-of-token-transaction-for-a-wallet)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -118,11 +137,16 @@ You can see the results by running [this query](https://ide.bitquery.io/Number-o
 }
 ```
 
+</details>
+
 ### First & Last Date of Transfer for a Token Holder
 
-You can also retrieve the dates of the first and most recent times a token holder transferred a particular token using this API. The last date will be the most recent date when the holder made a transfer with that token.
+Retrieve the first and most recent transfer dates for a holder:
 
-You can access the results by running [this query](https://ide.bitquery.io/first-and-last-date-of-transfer-for-token-of-a-token-holder) in our IDE.
+Run in IDE: [First & last date of transfer](https://ide.bitquery.io/first-and-last-date-of-transfer-for-token-of-a-token-holder)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -148,9 +172,16 @@ You can access the results by running [this query](https://ide.bitquery.io/first
 }
 ```
 
+</details>
+
 ### Amount In & Out for a Wallet
 
-You can also find out the number of tokens that have been received by a wallet and the number of tokens that have been sent from it. Give [this query](https://ide.bitquery.io/Number-of-received-and-sent-tokens) a try in the IDE.
+Check total tokens received and sent by a holder:
+
+Run in IDE: [Received and sent tokens](https://ide.bitquery.io/Number-of-received-and-sent-tokens)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -176,11 +207,16 @@ You can also find out the number of tokens that have been received by a wallet a
 }
 ```
 
+</details>
+
 ## Top Token Holders for a Token
 
-To find the top token holders, you can use the Token Holders API. This allows you to sort the data based on the token balance in descending order. You can achieve this by using the `orderBy` filter and sorting by the value of `Balance_Amount` in descending order.
+Find the top 10 holders by balance:
 
-In this example, we are going to find the top 10 token holders for the Mutant Ape Yacht Club (MAYC) NFT collection. Run [this query](https://ide.bitquery.io/top-token-holder-for-a-token-using-token-holders-api) on the IDE to see the result.
+Run in IDE: [Top token holders](https://ide.bitquery.io/top-token-holder-for-a-token-using-token-holders-api)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -202,9 +238,16 @@ In this example, we are going to find the top 10 token holders for the Mutant Ap
 }
 ```
 
+</details>
+
 ## Token Holder with Certain Number of Tokens
 
-You can use the Balance filter to find token holders who hold a specific value of tokens. For example, you can find Moonbirds NFT token holders who hold more than 50 NFTs in their wallet. To see the results, try [this query](https://ide.bitquery.io/count-of-token-holders-above-certain-value-using-token-holders-api) in the IDE.
+Find how many holders exceed a threshold:
+
+Run in IDE: [Count of holders above certain value](https://ide.bitquery.io/count-of-token-holders-above-certain-value-using-token-holders-api)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -220,40 +263,52 @@ You can use the Balance filter to find token holders who hold a specific value o
 }
 ```
 
-Here's another example. In this case, we are getting the number of token holders whose token balance exceeds 1 million USDT tokens (~ $1 million). We used aliases to categorize token holders based on the tokens stored in their wallets. For further information on aliases, you can refer to [this page](/docs/graphql/metrics/alias/).
+</details>
 
-Feel free to execute [this query](https://ide.bitquery.io/USDT-token-holder-distribution) in the IDE to delve into the data.
+Here’s another example grouping USDT holders into tiers using aliases:
 
-```
+Run in IDE: [USDT token holder distribution](https://ide.bitquery.io/USDT-token-holder-distribution)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   EVM(dataset: archive, network: eth) {
     TokenHolders(
       date: "2023-10-22"
       tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-      where: {Balance: {Amount: {ge: "0"}}}
+      where: { Balance: { Amount: { ge: "0" } } }
     ) {
       classic: count(
         distinct: Holder_Address
-        if: {Balance: {Amount: {gt: "1000000"}}}
+        if: { Balance: { Amount: { gt: "1000000" } } }
       )
       pro: count(
         distinct: Holder_Address
-        if: {Balance: {Amount: {gt: "100000", le: "1000000"}}}
+        if: { Balance: { Amount: { gt: "100000", le: "1000000" } } }
       )
       growing: count(
         distinct: Holder_Address
-        if: {Balance: {Amount: {gt: "1000", le: "100000"}}}
+        if: { Balance: { Amount: { gt: "1000", le: "100000" } } }
       )
     }
   }
 }
 ```
 
+</details>
+
 ## Top Trending Tokens Based on Token Holders using BalanceUpdates API
 
-To get data related to token holders, you can also the Balance Updates API. In this example, we will write a query to get the top 10 trending tokens based on their holders on the Ethereum network. You can see the results by running [this query](https://ide.bitquery.io/Trending_Token_based_on_holders) in the IDE.
+Identify the top 10 trending tokens by holder growth:
 
-```
+Run in IDE: [Trending tokens by holders](https://ide.bitquery.io/Trending_Token_based_on_holders)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query MyQuery {
   EVM(network: eth, dataset: combined) {
     BalanceUpdates(
@@ -274,43 +329,60 @@ query MyQuery {
 }
 ```
 
+</details>
+
 ## Top Token Holders of a specific Token using BalanceUpdates API
 
-To get data related to top token holders, you can also use the Balance Updates API. In this example, we will write a query to get the top 10 token holders with the most number of Tokens of a speific Token. We have retreived here top 10 token holders for this currency `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`. You can see the results by running [this query](https://ide.bitquery.io/Top-10-token-holders-of-a-specific-token_1#) in the IDE.
+Get the top 10 holders for a particular token via the BalanceUpdates API:
 
-```
+Run in IDE: [Top 10 token holders of a specific token](https://ide.bitquery.io/Top-10-token-holders-of-a-specific-token_1#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query MyQuery {
   EVM(network: eth, dataset: combined) {
     BalanceUpdates(
-      limit: {count: 10}
-      orderBy:{descendingByField: "Balance"}
-      where: {Currency: {SmartContract: {is: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"}}}
+      limit: { count: 10 }
+      orderBy: { descendingByField: "Balance" }
+      where: {
+        Currency: {
+          SmartContract: { is: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" }
+        }
+      }
     ) {
       Balance: sum(of: BalanceUpdate_Amount)
-      Currency{
+      Currency {
         SmartContract
         Name
         Symbol
       }
-      BalanceUpdate{
+      BalanceUpdate {
         Address
       }
     }
   }
 }
-
 ```
 
-Or, you can get the **top holders of a token, say native ETH** on a particular date using below query
+</details>
 
-```
+Or get native ETH top holders on a particular date:
+
+Run in IDE: [Top native ETH holders](https://ide.bitquery.io/Top-10-token-holders-of-a-specific-token_1#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   EVM(dataset: archive, network: eth) {
     TokenHolders(
       date: "2024-03-01"
-      limit: {count: 100}
-      orderBy: {descending: Balance_Amount}
-      where: {Currency: {Native: true}}
+      limit: { count: 100 }
+      orderBy: { descending: Balance_Amount }
+      where: { Currency: { Native: true } }
       tokenSmartContract: "0x"
     ) {
       Holder {
@@ -324,43 +396,74 @@ Or, you can get the **top holders of a token, say native ETH** on a particular d
 }
 ```
 
+</details>
+
 ## Common Token Holders of Two Tokens
 
-Let's say if we want to know common tokens holders of two tokens, we can use BalanceUpdate API. In the following example we will get common token holder of [Bored Ape Yacht Club](https://boredapeyachtclub.com/#/) and [Mutant Ape Yacht Club](https://opensea.io/collection/mutant-ape-yacht-club) NFT tokens. You can run [this query](https://ide.bitquery.io/Common-token-holder-Bored-Ape-Yacht-Club-and-Mutant-Ape-Yacht-Club) in the IDE to see the result.
+Find addresses holding both BAYC and MAYC NFTs:
 
-```
+Run in IDE: [Common token holder – BAYC & MAYC](https://ide.bitquery.io/Common-token-holder-Bored-Ape-Yacht-Club-and-Mutant-Ape-Yacht-Club)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   EVM(dataset: archive) {
     BalanceUpdates(
-      orderBy: {descendingByField: "token1"}
-      limit: {count: 1000}
-      where: {Currency: {SmartContract: {in: ["0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d", "0x60e4d786628fea6478f785a6d7e704777c86a7c6"]}}}
+      orderBy: { descendingByField: "token1" }
+      limit: { count: 1000 }
+      where: {
+        Currency: {
+          SmartContract: {
+            in: [
+              "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+              "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+            ]
+          }
+        }
+      }
     ) {
       BalanceUpdate {
         Address
       }
       token1: sum(
         of: BalanceUpdate_Amount
-        if: {Currency: {SmartContract: {is: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"}}}
-        selectWhere: {gt: "0"}
+        if: {
+          Currency: {
+            SmartContract: { is: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d" }
+          }
+        }
+        selectWhere: { gt: "0" }
       )
       token2: sum(
         of: BalanceUpdate_Amount
-        if: {Currency: {SmartContract: {is: "0x60e4d786628fea6478f785a6d7e704777c86a7c6"}}}
-        selectWhere: {gt: "0"}
+        if: {
+          Currency: {
+            SmartContract: { is: "0x60e4d786628fea6478f785a6d7e704777c86a7c6" }
+          }
+        }
+        selectWhere: { gt: "0" }
       )
     }
   }
 }
 ```
 
+</details>
+
 ## Token Holder Statistics
 
-The Token Holders API provides statistics about token holders. To explore the various statistics available, please visit [this page](/docs/graphql/metrics/statistics/).
+The Token Holders API provides built-in metrics. See [statistics docs](/docs/graphql/metrics/statistics/) for the full list.
 
 ### Average Balance of Token Holder
 
-To calculate the average balance of USDT token holders, you can use the Token Holders API. Use the `average` field and select `Balance_Amount`. You can test [this query](https://ide.bitquery.io/avg-usdt-balance-on-ethereum-using-token-holders-api) in the IDE.
+Calculate the average USDT balance across all holders on October 22, 2023:
+
+Run in IDE: [Average USDT balance](https://ide.bitquery.io/avg-usdt-balance-on-ethereum-using-token-holders-api)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -376,9 +479,16 @@ To calculate the average balance of USDT token holders, you can use the Token Ho
 }
 ```
 
+</details>
+
 ### Median Balance of Token Holder
 
-To find the median balance, use the median function and select Balance_Amount. Test [this query](https://ide.bitquery.io/median-balance-of-usdt-holders-on-ethereum-with-token-holders-api) in the IDE.
+Compute the median balance for USDT holders on the same date:
+
+Run in IDE: [Median USDT balance](https://ide.bitquery.io/median-balance-of-usdt-holders-on-ethereum-with-token-holders-api)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -394,48 +504,53 @@ To find the median balance, use the median function and select Balance_Amount. T
 }
 ```
 
+</details>
+
 ## Token Liquidation: Finding Complete Holdings Transfers
 
-Here's an example that demonstrates how to use the query to identify users who have completely transferred all of their DAI token holdings on March 22, 2023. You can access the query [here](https://ide.bitquery.io/addresses-that-transferred-out-all-of-their-holdings-for-this-particular-token-on-a-given-day)
-Identifying users who are liquidating their holdings of a particular token.
+Identify users who transferred out all of their DAI on March 22, 2023:
 
-```
+Run in IDE: [Liquidated all DAI holdings](https://ide.bitquery.io/addresses-that-transferred-out-all-of-their-holdings-for-this-particular-token-on-a-given-day)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   EVM(dataset: archive, network: eth) {
     TokenHolders(
-      limit: {count: 100}
+      limit: { count: 100 }
       tokenSmartContract: "0xdac17f958d2ee523a2206206994597c13d831ec7"
       date: "2023-03-22"
       where: {
         BalanceUpdate: {
-          LastDate: {
-            is: "2023-03-22"
-          }
-          OutAmount: {
-            gt: "0"
-          }
+          LastDate: { is: "2023-03-22" }
+          OutAmount: { gt: "0" }
         }
-        Balance: {
-          Amount: {
-            eq: "0"
-          }
-        }
+        Balance: { Amount: { eq: "0" } }
       }
     ) {
-    	Holder {
+      Holder {
         Address
       }
       BalanceUpdate {
         OutAmount
       }
     }
-	}
+  }
 }
 ```
 
+</details>
+
 ## Gini Coefficient
 
-With the Token Holders API, you can calculate the Gini coefficient for a token. For example, you can find the Gini coefficient for the USDC token using [this query](https://ide.bitquery.io/gini-coefficient-for-usdc-token-on-ethereum-with-token-holders-api) in the IDE.
+Compute the Gini coefficient for USDC distribution:
+
+Run in IDE: [Gini coefficient – USDC](https://ide.bitquery.io/gini-coefficient-for-usdc-token-on-ethereum-with-token-holders-api)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -451,9 +566,16 @@ With the Token Holders API, you can calculate the Gini coefficient for a token. 
 }
 ```
 
+</details>
+
 ## Nakamoto Coefficient
 
-You can also calculate the Nakamoto Coefficient using the Token Holders API for any token. As an example, you can find the Nakamoto coefficient for the stETH token by trying [this query](https://ide.bitquery.io/nakamoto-coefficient-for-steth-token-on-ethereum-with-token-holders-api) in the IDE.
+Calculate the Nakamoto coefficient (99%) for stETH:
+
+Run in IDE: [Nakamoto coefficient – stETH](https://ide.bitquery.io/nakamoto-coefficient-for-steth-token-on-ethereum-with-token-holders-api)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -469,9 +591,16 @@ You can also calculate the Nakamoto Coefficient using the Token Holders API for 
 }
 ```
 
+</details>
+
 ## Thiel Index
 
-If you need the Thiel index of a token, you can obtain it using the Token Holders API. Experiment with [this query](https://ide.bitquery.io/thiel-index-for-steth-token-on-ethereum-with-token-holders-api) in your IDE.
+Obtain the Thiel index for stETH:
+
+Run in IDE: [Thiel index – stETH](https://ide.bitquery.io/thiel-index-for-steth-token-on-ethereum-with-token-holders-api)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -487,21 +616,32 @@ If you need the Thiel index of a token, you can obtain it using the Token Holder
 }
 ```
 
+</details>
+
 ## Find Token Holders Outside a Certain Range
 
-This query filters out the token holders of a specific smart contract token who hold either more than a certain amount or less than another specified amount. This could be useful for understanding the distribution of tokens among holders, particularly identifying large and small stakeholders.
-You can find the query [here](https://ide.bitquery.io/Find-holders-outside-a-range)
+Filter for holders with very large or very small balances:
 
-```
+Run in IDE: [Find holders outside a range](https://ide.bitquery.io/Find-holders-outside-a-range)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   EVM(dataset: archive) {
     TokenHolders(
       tokenSmartContract: "0x0fcbd68251819928c8f6d182fc04be733fa94170"
       date: "2024-01-29"
-      where: {any: [{Balance: {Amount: {gt:"100"}}},
-      {Balance: {Amount: {lt: "20"}}}], Balance: {Amount: {gt: "0"}}}
-      orderBy: {descending: Balance_Amount}
-      limit: {count: 10}
+      where: {
+        any: [
+          { Balance: { Amount: { gt: "100" } } }
+          { Balance: { Amount: { lt: "20" } } }
+        ]
+        Balance: { Amount: { gt: "0" } }
+      }
+      orderBy: { descending: Balance_Amount }
+      limit: { count: 10 }
     ) {
       Balance {
         Amount
@@ -517,6 +657,10 @@ You can find the query [here](https://ide.bitquery.io/Find-holders-outside-a-ran
   }
 }
 ```
+
+</details>
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Video Tutorial on How to Identify Top Token Holders for Any Cryptocurrency
 

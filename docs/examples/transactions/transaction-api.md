@@ -13,6 +13,9 @@ The Transaction API allows users to query for transaction data by specifying fil
 This query is using the Transactions API to retrieve transaction data from the Binance Smart Chain (BSC) blockchain network in real-time.
 You can find the query [here](https://graphql.bitquery.io/ide/Last-transactions-with-cost)
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 query {
   EVM(dataset: realtime, network: bsc) {
@@ -33,6 +36,8 @@ query {
 }
 ```
 
+</details>
+
 **Parameters:**
 
 - `dataset`: The data source to be used by the query (in this case, "realtime")
@@ -50,6 +55,9 @@ query {
 This query retrieves 100 recent transactions where the specified address is either the sender (`From`) or the receiver (`To`). It is achieved by using the `any` filter which serves as the OR condition. It can help monitor incoming and outgoing transactions of a particular address.
 
 You can run the query [here](https://ide.bitquery.io/Latest-Transactions-fromto-address)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -74,6 +82,8 @@ You can run the query [here](https://ide.bitquery.io/Latest-Transactions-fromto-
 
 
 ```
+
+</details>
 
 ## Get Transaction Details using Hash
 
