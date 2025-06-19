@@ -46,6 +46,7 @@ This decision sometimes not straightforward, consult our sales and support team,
 - It is **not** guaranteed that the message will come in sequence of the block number, time or any other attribute.
 - Messages in topic **may have** duplicates. If this makes a problem, your code must have a storage or the cache to remember which messages are already processed to avoid double processing.
 - Large messages can be separated on smaller ones, as Kafka does not allow pass more than 1 Mbyte in one message. For example, first 1200 transaction may come in one message, and the remaining 1000 will follow in another.
+- **Transactions themselves will never be split**: each transaction record is always delivered in full. If a single transaction payload exceeds Kafka’s maximum message size, the producer will receive an error—Kafka will not peek inside the payload to automatically fragment it into multiple messages.
 
 ### Kafka Streams Lattency
 
