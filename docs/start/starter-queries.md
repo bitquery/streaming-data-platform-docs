@@ -15,146 +15,143 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Cardano APIs](#cardano)
 - [Ripple APIs](#ripple)
 - [More APIs](#more-apis)
+## Solana Trade API
 
-## Solana API
-
-### Solana Trade API
-
-#### Solana Trades
+### Solana Trades
 
 This query gets the latest 10 trades on Solana. You can increase the limit to get more trades. This query only uses real-time data.  
 ▶️ [Solana Trades](https://ide.bitquery.io/Solana-dextrades)
 
-#### Solana Trades of a Token
+### Solana Trades of a Token
 
 With this, you can query the trades of a token against another currency like WSOL or USDC.  
 ▶️ [Trades of a Token](https://ide.bitquery.io/Latest-Trades-of-Trump-COin)
 
-#### Get OHLCV by Pair Address
+### Get OHLCV by Pair Address
 
 You can get charting data easily with this query. Adjust the intervals as necessary. This query supports historical data.  
 ▶️ [Get OHLCV by Pair Address](https://ide.bitquery.io/OHLC-for-a-token_1)
 
-#### Get Trades by Wallet Address
+### Get Trades by Wallet Address
 
 Get all trades related transactions (buy, sell) for a specific wallet address.
 ▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/Trades-of-wallets-in-realtime_1)
 
-#### Get Swaps by Pair Address
+### Get Swaps by Pair Address
 
 Get all trades related transactions for a specific pair address.
 ▶️ [Get Swaps by Pair Address](https://ide.bitquery.io/Get-Swaps-by-Pair-Address)
 
-#### Get Volume Stats for Solana Chain
+### Get Volume Stats for Solana Chain
 
 Returns volume statistics, active wallets, and total transactions for Solana.
 ▶️ [Get Volume Stats By Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets)
 
-### Solana Balance API
+## Solana Balance API
 
-#### Get SPL Token Balances by Wallet
+### Get SPL Token Balances by Wallet
 
 Gets the token balances owned by a given network and address.
 ▶️ [Get SPL Token Balances by Wallet](https://ide.bitquery.io/spl-token-balance-for-an-address)
 
-#### Get Native and SPL Token Balance by Wallet
+### Get Native and SPL Token Balance by Wallet
 
 Gets the portfolio for an address.
 ▶️ [Get Native and SPL Token Balance by Wallet](https://ide.bitquery.io/tokens-owned-by-an-address)
 
-#### Solana Balance Update
+### Solana Balance Update
 
 This query returns Solana balance update info for any balance update event. It includes the address, amount, currency details, and the amount of tokens present in a particular address before and after the update.  
 ▶️ [Balance Update](https://ide.bitquery.io/solana-balance-update)
 
-### Solana Pools API
+## Solana Pools API
 
-#### All Token Pairs Across DEXs with Current Liquidity
+### All Token Pairs Across DEXs with Current Liquidity
 
 This query retrieves all instances of a specific token pair across decentralized exchanges (DEXs) on Solana, along with their current liquidity.
 ▶️ [All Token Pairs Across DEXs with Current Liquidity](https://ide.bitquery.io/All-Liquidity-pairs-of-a-token-and-current-liquidity-on-solana)
 
-#### Solana Pool Liquidity Changes
+### Solana Pool Liquidity Changes
 
 This query retrieves the latest changes to liquidity pools on Solana, including the change amount and the price at which the change happened. This query also uses only the real-time data set.  
 ▶️ [Solana Liquidity Changes](https://ide.bitquery.io/Solana-DEXPools)
 
-### Solana Token API
+## Solana Token API
 
-#### Get Token Prices on Solana
+### Get Token Prices on Solana
 
 Returns price information for multiple Solana tokens in a single request.
 ▶️ [Get Multiple Token Prices on Solana](https://ide.bitquery.io/Get-multiple-Token-Prices)
 
-#### Get Token Metadata
+### Get Token Metadata
 
 Get the token metadata for contract (mint, standard, name, symbol).
 ▶️ [Get Token Metadata](https://ide.bitquery.io/Solana-currency-details)
 
-#### Get Top Token Holders
+### Get Top Token Holders
 
 Get a list of top token holders for a specific Solana token address.
 ▶️ [Get Top Token Holders](https://ide.bitquery.io/top-100-holders-of-USDC-token-on-Solana)
 
-#### Get Token Pairs by Address
+### Get Token Pairs by Address
 
 Get the supported pairs for a specific token address.
 ▶️ [Get Token Pairs by Address](https://ide.bitquery.io/traded-pairs-of-a-token_2)
 
-#### Get Token Pair Stats
+### Get Token Pair Stats
 
 Get the pair stats by using pair address.
 ▶️ [Get Token Pair Stats](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair)
 
-#### Get Aggregated Token Pair Stats
+### Get Aggregated Token Pair Stats
 
 Get aggregated statistics across supported pairs of a token.
 ▶️ [Get Aggregated Token Pair Stats](https://ide.bitquery.io/traded-pairs-stats-of-a-token)
 
-#### Get Multiple Token Analytics
+### Get Multiple Token Analytics
 
 Returns analytics data for multiple token addresses.
 ▶️ [Get Multiple Token Analytics](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-multiple-solana-tokens)
 
-#### Search Tokens
+### Search Tokens
 
 Search for tokens based on contract address, token name or token symbol.
 ▶️ [Search Tokens based on token symbol](https://ide.bitquery.io/Token-Search-API---trump-symbol)
 ▶️ [Search Tokens based on token name](https://ide.bitquery.io/Token-search-api-in-mint-address)
 
-### Other Solana API
+## Other Solana API
 
-#### Solana Transfers
+### Solana Transfers
 
 This query gets the latest 10 transfers on Solana. You can increase the limit to get more transfers. This query only uses real-time data.  
 ▶️ [Solana Transfers](https://ide.bitquery.io/Solana-transfers0_5)
 
-#### Solana Instructions
+### Solana Instructions
 
 This query gets the latest 10 instructions executed on Solana. You can increase the limit to get more instructions. This query only uses the real-time dataset.  
 ▶️ [Solana Instructions](https://ide.bitquery.io/solana-instructions_7)
 
-#### Solana Token Supply Updates
+### Solana Token Supply Updates
 
 This query tracks the latest token supply updates to a particular token pair. You can modify the same query to a subscription and track these changes in real time.  
 ▶️ [Token Supply Updates](https://ide.bitquery.io/Solana-token-supply-updates_1)
 
-#### Solana Transactions
+### Solana Transactions
 
 This query returns the Solana transaction info such as signature, signer, success, fees, time, etc.  
 ▶️ [Solana Transactions](https://ide.bitquery.io/Solana-transaction_4)
 
-#### Solana Rewards
+### Solana Rewards
 
 This query returns Solana network rewards info such as the address that receives the reward, reward amount, type, and the time when the reward was received.  
 ▶️ [Solana Rewards](https://ide.bitquery.io/Solana-Rewards_1)
 
-#### Solana Instruction Balance Updates
+### Solana Instruction Balance Updates
 
 This query returns Solana balance update info for any balance update event, including the address, amount, currency details, and the details of the program responsible for this update.  
 ▶️ [Instruction Balance Updates](https://ide.bitquery.io/Solana-InstructionBalanceUpdates)
 
-#### Solana Blocks
+### Solana Blocks
 
 This query returns Solana block info such as block number, time, slot, rewards, and so on.  
 ▶️ [Solana Blocks](https://ide.bitquery.io/Solana-blocks)
