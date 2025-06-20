@@ -151,10 +151,9 @@ This query returns Solana network rewards info such as the address that receives
 This query returns Solana balance update info for any balance update event, including the address, amount, currency details, and the details of the program responsible for this update.  
 ▶️ [Instruction Balance Updates](https://ide.bitquery.io/Solana-InstructionBalanceUpdates)
 
-### Solana Blocks
+### Solana Historical Transfers
 
-This query returns Solana block info such as block number, time, slot, rewards, and so on.  
-▶️ [Solana Blocks](https://ide.bitquery.io/Solana-blocks)
+▶️ [Solana Historical Transfers](https://ide.bitquery.io/solana-historical-transfers_1)
 
 ## PumpFun - Pumpswap API
 
