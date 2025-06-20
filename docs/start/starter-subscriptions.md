@@ -106,6 +106,33 @@ This stream returns the real time trade price of a token against the token it is
 
 ▶️[Token Price Stream](https://ide.bitquery.io/token-price-stream)
 
+## Pancakeswap Streams
+
+### Real time trades on Pancakeswap
+
+Get real time trades on Pancakeswap, using the given stream.        
+▶️[Pancakeswap Trades](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream)
+
+### Real time Memepool trades on Pancakeswap
+
+Get real time unconfirmed trades on Pancakeswap, using the given stream.        
+▶️[Pancakeswap Trades](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrades---Stream)
+
+### Tracking real time Liquidity Pool Creation
+
+Get liquidity pools created on Pancakeswap in real time using the given stream.     
+▶️[Liquidity Pool Creation](https://ide.bitquery.io/Stream---New-pools-created-on-PancakeSwap-v3)
+
+### Track Liquidity Additions in Real Time
+
+Trace liquidity addition events on Pancakeswap in real time for a particular liquidity pool.        
+▶️[Liquidity Addition](https://ide.bitquery.io/Stream---Liqiidity-add-for-all-tokens-on-PancakeSwap-v3)
+
+### Track Liquidity Removal in Real Time
+
+Trace liquidity removal events on Pancakeswap in real time for a particular liquidity pool.        
+▶️[Liquidity Addition](https://ide.bitquery.io/Stream---Liquidity-remove-for-all-tokens-on-PancakeSwap-v3)
+
 ## Uniswap V3 Streams
 
 ### Pair Creation on Uniswap 
@@ -119,6 +146,28 @@ This stream returns the real time liquidity pools/token pairs created on Uniswap
 This subscription returns the real-time trades happening on Uniswap V3. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader.
 
 ▶️[Uniswap Trades Stream](https://ide.bitquery.io/Realtime-Uniswap-v1-Uniswap-v2-Uniswap-V3-Trades)
+
+## BSC
+
+### New Token Creation
+
+This stream tracks the creation of BEP-20 tokens on BSC network in real time.        
+▶️[BEP-20 Token Creation](https://ide.bitquery.io/Newly-Created-Tokens-on-BSC-network_2)
+
+### Real time Trades on BSC
+
+This subscription returns the real-time trades happening on BSC Network. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader.   
+▶️[BSC Dex Trades](https://ide.bitquery.io/Newly-Created-Tokens-on-BSC-network_2)
+
+## Four Meme
+
+### Four Meme Trades
+This stream returns the latest trades happening on `Four Meme` on BSC Network in real time.   
+▶️[Trades on Four Meme](https://ide.bitquery.io/Latest-trades-on-fourmeme)
+
+### Four Meme User Trades
+This stream helps in monitoring the trades of a Four Meme user in real time.    
+▶️[Four Meme User Trades](https://ide.bitquery.io/monitor-trades-of-a-trader-on-four-meme)
 
 ## NFT Streams
 
