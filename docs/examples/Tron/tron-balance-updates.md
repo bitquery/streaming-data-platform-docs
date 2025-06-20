@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Tron Balance Updates API
+# Tron Balance & Balance Updates API
 
 In thise section we will see how to monitor real-time balance changes across the Tron blockchain
 
@@ -57,6 +57,27 @@ subscription {
       Transaction {
         Hash
       }
+    }
+  }
+}
+
+```
+
+## Balance of an Address on Tron
+
+[Run Query ➤](https://ide.bitquery.io/balance-of-an-address-on-tron)
+
+```
+{
+  Tron(dataset: combined, aggregates: yes) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf"}}}
+      orderBy: {descendingByField: "balance"}
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
     }
   }
 }
