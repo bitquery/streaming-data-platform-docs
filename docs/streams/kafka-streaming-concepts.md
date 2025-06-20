@@ -70,9 +70,7 @@ Your application must implement the code:
 
 ## Retention Period of Messages
 
-- **Proto Streams**: Messages are retained for **24 hours**.
-- **DEX Trades (JSON)**: Messages are retained for **24 hours**.
-- **Other JSON Streams**: Messages are retained for **4 hours**.
+**Proto Streams**: Messages are retained for **24 hours**.
 
 ## Connect to Kafka Server
 
