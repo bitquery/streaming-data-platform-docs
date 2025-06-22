@@ -105,7 +105,7 @@ sasl_conf = {
 
 ```
 
-### Non-SSL Connection (SASL_PLAINTEXT , Preffered Method)
+### Non-SSL Connection (SASL_PLAINTEXT , Prefered Method)
 
 If you prefer to connect without SSL, you can use **SASL_PLAINTEXT** on port `9092`. This does **not** require certificates:
 
