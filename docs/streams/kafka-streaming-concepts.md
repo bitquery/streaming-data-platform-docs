@@ -105,9 +105,9 @@ sasl_conf = {
 
 ```
 
-### Optional: Non-SSL Connection (SASL_PLAINTEXT)
+### Non-SSL Connection (SASL_PLAINTEXT , Preffered Method)
 
-If you prefer to connect without SSL (e.g., for testing), you can use **SASL_PLAINTEXT** on port `9092`. This does **not** require certificates:
+If you prefer to connect without SSL, you can use **SASL_PLAINTEXT** on port `9092`. This does **not** require certificates:
 
 ```python
 sasl_conf = {
