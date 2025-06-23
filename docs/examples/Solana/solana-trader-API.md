@@ -125,6 +125,81 @@ subscription MyQuery($addressList: [String!]) {
 }
 ```
 
+## Trades of Wallets with PreBalance, PostBalance
+
+Below query will give you the trades of the wallets present in `addressList` along with the balance updates happened in those trades.. Try the query [here](https://ide.bitquery.io/Trades-of-wallets-with-balance-Updates-in-that-trades).
+
+```
+query MyQuery($addressList: [String!]) {
+  Solana {
+    DEXTrades(
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+      where: {Transaction: {Result: {Success: true}}, any: [{Trade: {Buy: {Account: {Address: {in: $addressList}}}}}, {Trade: {Buy: {Account: {Token: {Owner: {in: $addressList}}}}}}, {Trade: {Sell: {Account: {Address: {in: $addressList}}}}}, {Trade: {Sell: {Account: {Token: {Owner: {in: $addressList}}}}}}]}
+    ) {
+      Instruction {
+        Program {
+          Method
+        }
+      }
+      Block {
+        Time
+      }
+      Trade {
+        Buy {
+          Amount
+          Account {
+            Address
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+          }
+          AmountInUSD
+        }
+        Sell {
+          Amount
+          Account {
+            Address
+          }
+          Currency {
+            Name
+            Symbol
+            MintAddress
+            Decimals
+          }
+          AmountInUSD
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+      joinBalanceUpdates(join: left, Transaction_Signature: Transaction_Signature) {
+        Block{
+          Time
+        }
+        BalanceUpdate {
+          PreBalance
+          PostBalance
+          Account {
+            Address
+            Token {
+              Owner
+            }
+          }
+        }
+      }
+    }
+  }
+}
+{
+  "addressList": ["HevtGooXxDjLfvLM1vUY2y7b9gyu59whR4ycnQj3UjUT"]
+}
+```
+
 ## Get count of Buys and Sells of a Trader
 
 To get the count of Buys and Sells of a specific trader after a certain `timestamp`, use the following query.

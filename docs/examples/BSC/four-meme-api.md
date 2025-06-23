@@ -33,6 +33,68 @@ subscription {
 }
 ```
 
+## Bonding Curve Progress API
+
+### Bonding Curve Progress Formula
+
+- **Formula**:
+  BondingCurveProgress = 100 - ((leftTokens \* 100) / initialRealTokenReserves)
+
+Where:
+
+- leftTokens = realTokenReserves - reservedTokens
+- initialRealTokenReserves = totalSupply - reservedTokens
+
+- **Definitions**:
+  - `initialRealTokenReserves` = `totalSupply` - `reservedTokens`
+    - `totalSupply`: 1,000,000,000 (Four meme Token)
+    - `reservedTokens`: 200,000,000
+    - Therefore, `initialRealTokenReserves`: 800,000,000
+  - `leftTokens` = `realTokenReserves` - `reservedTokens`
+    - `realTokenReserves`: Token balance at the market address.
+
+:::note
+**Simplified Formula**:
+BondingCurveProgress = 100 - (((balance - 200000000) \* 100) / 800000000)
+:::
+
+### Additional Notes
+
+- **Balance Retrieval**:
+  - The `balance` is the four meme token balance at this Four Meme: Proxy address (0x5c952063c7fc8610FFDB798152D69F0B9550762b).
+  - Use this query to fetch the balance: [Query Link](https://ide.bitquery.io/Get-balance-of-an-address-for-a-specified-currency).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: bsc) {
+    BalanceUpdates(
+      where: {
+        BalanceUpdate: {
+          Address: { is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b" }
+        }
+        Currency: {
+          SmartContract: { is: "0x366f446d2583fa4e703aa24721c820d5e5424444" }
+        }
+      }
+      orderBy: { descendingByField: "balance" }
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount)
+      BalanceUpdate {
+        Address
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Get Newly Created Tokens on Four Meme
 
 Using [this](https://ide.bitquery.io/FourMeme--Newly-Created-Token-by-Tracking-Transfer#) query we could get newly created tokens that are listed on the exchange.
