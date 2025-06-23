@@ -184,15 +184,22 @@ query tradingViewPairs {
 
 ## Real-time OHLC
 
-In EVM and non-EVM chains, you can also use `subscription` to get a token pair with a high or low value.
+In EVM and non-EVM chains, you can also use `subscription` to get a token pair with a high or low value. 
+[Run Stream ➤](https://ide.bitquery.io/seconds-oHLC-realtime-solana-example)
 
 Take this query below for example;
 
 ```
-subscription LatestTrades($token: String) {
+subscription LatestTrades {
   Solana {
     DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: $token}}, Side: {Currency: {MintAddress: {in: ["11111111111111111111111111111111", "So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN", "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"]}}}}}
+      where: {
+        Transaction: { Result: { Success: true } }
+        Trade: { 
+          Currency: { MintAddress: { is: "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh" } }
+          Side: { Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } } }
+        }
+      }
     ) {
       min: quantile(of: Trade_PriceInUSD, level: 0.05)
       max: quantile(of: Trade_PriceInUSD, level: 0.95)
@@ -215,12 +222,13 @@ subscription LatestTrades($token: String) {
           }
         }
       }
+      Block {
+        Time(interval: { count: 1, in: seconds })
+      }
     }
   }
 }
-{
-  "token": "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh"
-}
+
 
 ```
 
