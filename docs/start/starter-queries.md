@@ -294,6 +294,10 @@ This query returns mining rewards info for Ethereum, including transaction fees,
 This query returns the top `50` holders of a given BEP-20 token.        
 ▶️[BSC Token Holders](https://ide.bitquery.io/Top-10-holders-of-a-token-on-BSC)
 
+### Buys of a Token on BNB
+This query returns the latest `50` buys of a given BEP-20 token. 
+▶️[BSC Token Buys](https://ide.bitquery.io/BNB-Token-Buys)
+
 ### OHLC for a BEP-20 Token
 
 Get OHLC statistics for a BEP-20 token on BSC network.              
