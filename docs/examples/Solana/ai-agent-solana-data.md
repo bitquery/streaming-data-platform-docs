@@ -377,6 +377,20 @@ Your AI Trading Agent should monitor **bot activity** on DEXs. Bots can cause **
 
 You can SMA, EMA, RSI etc with Bitquery data. A tutorial is available [here](https://docs.bitquery.io/docs/usecases/trading-indicators/)
 
+Your AI Agent can reconstruct price charts and calculate:
+
+- SMA 50: Simple Moving Average over last 50 data points (could be trades, time intervals, etc.).
+
+- SMA 200: Simple Moving Average over last 200 data points.
+
+Detect crossovers:
+
+- SMA 50 crosses above SMA 200 → Consider Buy.
+
+- SMA 50 crosses below SMA 200 → Consider Sell.
+
+This logic can be integrated into the AI Trading Loop along with the on-chain analysis.
+
 ## Building the AI Trading Loop
 
 Your AI Trading Agent combines the above streams as follows:
