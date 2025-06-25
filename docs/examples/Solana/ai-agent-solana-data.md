@@ -6,9 +6,9 @@ In this section, we will explore how to use **Bitquery APIs and real-time stream
 
 > You are a specialized trading agent operating on the Solana blockchain, you will optimize an existing portfolio by analyzing and trading trending tokens. Your primary goal is to identify profitable tokens in the market, assess wallet balances, and execute calculated swap decisions to enhance portfolio value.
 
-### Investment Decision Process
+### Trading Decision Process
 
-Follow these steps when making portfolio optimization decisions:
+This is a rough draft of a AI agent can do using on-chain and off-chain data:
 
 1. Use trending data to identify promising tokens with potential profit.
 2. For each trending token, retrieve detailed information to evaluate its market cap, liquidity, volatility, and security.
@@ -20,9 +20,9 @@ Follow these steps when making portfolio optimization decisions:
 
 Your code sets up a flexible AI trading agent framework, handling:
 
-- backtest mode: historical simulation.
+- backtesting : historical simulation.
 - live mode: real-time trading/decision making
-- Portfolio tracking (cash, margin, positions, realized gains)
+- Portfolio tracking (cash, positions, realized gains)
 - Integration with an AI model (likely LLM) to guide trading decisions
 - where the AI agent makes data-driven trading decisions based on Bitquery Solana data.
 
@@ -225,35 +225,84 @@ query MyQuery {
 
 **Use:** Determine available assets and calculate safe investment amounts for token swaps.
 
-## 5. DEX Trade Streams for Real-Time Insights
+## 5. DEX Trade Streams for Real-Time Trades
 
 Subscribe to continuous streams of Solana DEX trades for live market intelligence.
 
-**Docs:** [DEX Trades on Solana](https://docs.bitquery.io/docs/examples/Solana/solana-dextrades)
+[Solana Trade Stream Run](https://ide.bitquery.io/solana-trades-subscription_3)
+
+The same stream can be obtained with lower latency via [Kafka containing Solana Shreds](https://docs.bitquery.io/docs/streams/protobuf/chains/Solana-protobuf/).
 
 <details>
   <summary>Click to expand GraphQL Stream</summary>
 
 ```graphql
-subscription LiveTrades {
+subscription {
   Solana {
     DEXTrades {
-      Trade {
-        Buy {
-          Currency {
-            Symbol
-          }
-          Amount
-        }
-        Sell {
-          Currency {
-            Symbol
-          }
-          Amount
-        }
+      Block {
+        Time
+        Slot
       }
       Transaction {
-        Timestamp
+        Signature
+        Index
+        Result {
+          Success
+        }
+      }
+      Trade {
+        Index
+        Dex {
+          ProgramAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        Buy {
+          Amount
+          Account {
+            Address
+          }
+          Currency {
+            MetadataAddress
+            Key
+            MintAddress
+            IsMutable
+            EditionNonce
+            Decimals
+            CollectionAddress
+            Fungible
+            Symbol
+            Native
+            Name
+          }
+          Price
+          PriceInUSD
+          Order {
+            LimitPrice
+            LimitAmount
+            OrderId
+          }
+        }
+        Market {
+          MarketAddress
+        }
+        Sell {
+          Account {
+            Address
+          }
+          Currency {
+            IsMutable
+            Decimals
+            CollectionAddress
+            Fungible
+            Symbol
+            Native
+            Name
+          }
+          Price
+          PriceInUSD
+        }
       }
     }
   }
@@ -262,29 +311,42 @@ subscription LiveTrades {
 
 </details>
 
-**Use:** React instantly to market movements and execute time-sensitive trades.
+**Use:** React instantly to time-sensitive trades.
 
 ## 6. Token Holders Distribution (Security Check)
 
 Check token decentralization to avoid risky, whale-dominated assets.
 
-**Docs:** [Token Holders on Solana](https://docs.bitquery.io/docs/examples/Solana/solana-tokenholders)
+[Run Query](https://ide.bitquery.io/top-100-holders-of-USDC-token-on-Solana)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query TokenHolders {
+query MyQuery {
   Solana {
-    TokenHolders(
-      where: { Currency: { MintAddress: { is: "TOKEN_MINT_ADDRESS" } } }
-      limit: { count: 10 }
-      orderBy: { descendingByField: "Balance" }
-    ) {
-      Holder {
-        Address
+    BalanceUpdates(
+      orderBy: { descendingByField: "BalanceUpdate_Holding_maximum" }
+      where: {
+        BalanceUpdate: {
+          Currency: {
+            MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
       }
-      Balance
+    ) {
+      BalanceUpdate {
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        Account {
+          Address
+        }
+        Holding: PostBalance(maximum: Block_Slot, selectWhere: { gt: "0" })
+      }
     }
   }
 }
