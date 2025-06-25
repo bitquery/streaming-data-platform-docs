@@ -6,6 +6,9 @@ In this section, we will see some APIs that return on-chain data related to Four
 
 Use the below query track four meme token migrations in realtime. Test it [here](https://ide.bitquery.io/four-meme-migration-to-pancakeswap).
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 subscription {
   EVM(network: bsc) {
@@ -32,6 +35,8 @@ subscription {
   }
 }
 ```
+
+</details>
 
 ## Bonding Curve Progress API
 
@@ -95,9 +100,49 @@ query MyQuery {
 
 </details>
 
+## Get Four Meme Tokens which are above 95% Bonding Curve Progress
+
+Using the above Bonding Curve formula, we can calculate the token balances for the Four Meme Proxy contract (0x5c952063c7fc8610FFDB798152D69F0B9550762b) corresponding to approximately 95% to 100% progress along the bonding curve, that comes out to be `200,000,000` to `240,000,000`. The tokens in the response are arranged in the ascending order of Bonding Curve Percentage, i.e., 95% to 100%. You can run and test the saved query [here](https://ide.bitquery.io/Four-Meme-Tokens-between-95-and-100-bonding-curve-progress).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: bsc) {
+    BalanceUpdates(
+      limit: { count: 10 }
+      where: {
+        BalanceUpdate: {
+          Address: { is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b" }
+        }
+      }
+      orderBy: { descendingByField: "balance" }
+    ) {
+      Currency {
+        SmartContract
+        Name
+      }
+      balance: sum(
+        of: BalanceUpdate_Amount
+        selectWhere: { ge: "200000000", le: "240000000" }
+      )
+      BalanceUpdate {
+        Address
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Get Newly Created Tokens on Four Meme
 
 Using [this](https://ide.bitquery.io/FourMeme--Newly-Created-Token-by-Tracking-Transfer#) query we could get newly created tokens that are listed on the exchange.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -163,11 +208,16 @@ Using [this](https://ide.bitquery.io/FourMeme--Newly-Created-Token-by-Tracking-T
 }
 ```
 
+</details>
+
 You can refer to this [example](./bsc-dextrades.mdx/#get-latest-trades-on-a-specific-dex) to track latest trades of a token on other particular DEX's such as Pancake Swap.
 
 ## Subscribe the Latest Trades on Four Meme
 
 Using subscriptions you can subscribe to the latest trades on Four Meme as shown in this [example](https://ide.bitquery.io/Latest-trades-on-fourmeme). The subscription returns latest trade info such as buyers and sellers, buy and sell currency details and amount of currency.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -203,9 +253,14 @@ subscription {
 }
 ```
 
+</details>
+
 ## Get Latest Buys and Sells for a Four Meme Token
 
 [This](https://ide.bitquery.io/Latest-buys-and-sells-for-a-four-meme-coin_1) query retrieves the most recent token buy and sell trades of a specific token on Four Meme Exchange.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($currency: String) {
@@ -280,11 +335,16 @@ query MyQuery($currency: String) {
 }
 ```
 
+</details>
+
 You can also check if the token is listed on other DEX using this [example](./bsc-dextrades.mdx/#get-all-dexs-where-a-specific-token-is-listed).
 
 ## Monitor trades of traders on Four meme
 
 You can use our streams to monitor real time trades of a trader on Four Meme, for example run [this stream](https://ide.bitquery.io/monitor-trades-of-a-trader-on-four-meme).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -327,11 +387,16 @@ subscription {
 }
 ```
 
+</details>
+
 You can also get the trade activities of a user on Pancake Swap using our [Pancake Swap](./pancake-swap-api.md) APIs.
 
 ## Track Latest and Historical Trades of a Four Meme User
 
 You can use DEX Trades API with combined dataset to get latest and historic trades of a user. Run [this query](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme) for example.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($address: String) {
@@ -382,9 +447,14 @@ query MyQuery($address: String) {
 }
 ```
 
+</details>
+
 ## Top Buyers for a Token on Four Meme
 
 [This](https://ide.bitquery.io/Top-buyers-of-a-four-meme-token) query returns top buyers of a particular token on Four Meme, with currency smart contract as `0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40` for this example.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($currency: String) {
@@ -417,9 +487,14 @@ query MyQuery($currency: String) {
 }
 ```
 
+</details>
+
 ## Get Trade Volume and Number of Trades for a Four Meme Token
 
 [This](https://ide.bitquery.io/volume-and-trades-for-a-token-in-different-time-frames_1) query returns the traded volume and number of trades for a particular Four Meme token in different time frames, namely 24 hours, 1 hour and 5 minutes.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery(
@@ -468,9 +543,14 @@ query MyQuery(
 }
 ```
 
+</details>
+
 ## Get Market Cap of a Four Meme Token
 
 To get the market cap of a token we need two things, the latest `PriceInUSD` and `total supply` of the token. [This](https://ide.bitquery.io/latest-token-price-in-usd) query helps with getting the latest USD price of a token.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($currency: String) {
@@ -494,7 +574,12 @@ query MyQuery($currency: String) {
 }
 ```
 
+</details>
+
 Also, [this](https://ide.bitquery.io/Total-supply-of-a-four-meme-token) query returns the total supply of a token.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($currency: String) {
@@ -534,6 +619,8 @@ query MyQuery($currency: String) {
 }
 ```
 
+</details>
+
 Now, to get market cap we need to multiply the total supply and price, that is:
 
 ```
@@ -545,6 +632,9 @@ Market Cap = Total Supply * PriceInUSD
 This query tracks all liquidity addition events on the Four Meme Exchange. It listens for `LiquidityAdded` events emitted from the four meme exchange's smart contract (0x5c952063c7fc8610ffdb798152d69f0b9550762b)
 
 You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific-tokens-on-Four-meme)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -619,6 +709,8 @@ You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific
 
 ```
 
+</details>
+
 ## Track Liquidity Add Events for a Token on Four Meme
 
 This query tracks liquidity addition events for a specific token on the Four Meme Exchange. It listens for `LiquidityAdded` events emitted from the exchange's smart contract (`0x5c952063c7fc8610ffdb798152d69f0b9550762b`) BNB network
@@ -626,6 +718,9 @@ This query tracks liquidity addition events for a specific token on the Four Mem
 In this example, the query monitors liquidity events for a specific token (`0x5a49ce64a1e44f6fce07e9ff38f54dde8a8a0e94`) by filtering the event arguments to only include actions related to this token.
 
 You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific-tokens-on-Four-meme)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 {
@@ -698,6 +793,8 @@ You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific
 }
 
 ```
+
+</details>
 
 ## Building a Four Meme Dashboard
 
