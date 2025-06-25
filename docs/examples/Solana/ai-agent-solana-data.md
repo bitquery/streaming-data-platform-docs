@@ -107,29 +107,50 @@ query Volatility {
 
 Evaluate token liquidity to avoid low-volume or illiquid tokens.
 
-**Docs:** [DEX Pools on Solana](https://docs.bitquery.io/docs/examples/Solana/solana-dexpools)
+**Docs:** [Top Pools based on Liquidity](https://docs.bitquery.io/docs/examples/Solana/Solana-DexPools-API/#get-top-pools-based-on-liquidity)
+
+[Run Query](https://ide.bitquery.io/top-10-liquidity-pools_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query LiquidityPools {
+query GetTopPoolsByDex {
   Solana {
     DEXPools(
+      orderBy: { descending: Pool_Quote_PostAmount }
+      where: {
+        Block: { Time: { after: "2024-08-27T12:00:00Z" } }
+        Transaction: { Result: { Success: true } }
+      }
       limit: { count: 10 }
-      orderBy: { descendingByField: "liquidityUSD" }
     ) {
       Pool {
-        Address
-      }
-      liquidityUSD: sum(of: Reserve_USD)
-      Token0 {
-        Symbol
-        MintAddress
-      }
-      Token1 {
-        Symbol
-        MintAddress
+        Market {
+          MarketAddress
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Quote {
+          PostAmount
+          PostAmountInUSD
+          PriceInUSD
+        }
+        Base {
+          PostAmount
+        }
       }
     }
   }
@@ -138,7 +159,7 @@ query LiquidityPools {
 
 </details>
 
-### Marketcap
+### Marketcap of a token
 
 You can fetch Marketcap of a token using below query.
 
