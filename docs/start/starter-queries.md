@@ -156,6 +156,24 @@ This query returns Solana balance update info for any balance update event, incl
 
 ▶️ [Solana Historical Transfers](https://ide.bitquery.io/solana-historical-transfers_1)
 
+## Solana historical data
+
+### Solana Historical Token Transfers Over Time
+
+This API provides historical data on all Solana token transfers that occurred within a specified time range.
+▶️ [Solana Historical Token Transfers Over Time](https://ide.bitquery.io/Solana-historical-token-transfers-between-a-time_2)
+
+
+### Solana Token Transfers for a Specific Address
+This API retrieves the history of token transfers (both sent and received) for a specific Solana address within a defined time period.
+▶️ [Solana Token Transfers for a Specific Address](https://ide.bitquery.io/Solana-historical-token-transfers-of-an-address-between-a-time)
+ 
+
+### Solana Token Inflows and Outflows for Balance Calculation
+This API returns all token inflows and outflows for a Solana address within a specified timeframe, enabling balance calculation based on transaction history.
+▶️ [Solana Token Inflows and Outflows for Balance Calculation](https://ide.bitquery.io/currency-sent-and-received-by-an-address-between-a-time_1)
+
+
 ## PumpFun - Pumpswap API
 
 ### Get New Tokens for PumpFun
@@ -293,6 +311,10 @@ This query returns mining rewards info for Ethereum, including transaction fees,
 
 This query returns the top `50` holders of a given BEP-20 token.        
 ▶️[BSC Token Holders](https://ide.bitquery.io/Top-10-holders-of-a-token-on-BSC)
+
+### Buys of a Token on BNB
+This query returns the latest `100` buys of a given BEP-20 token. 
+▶️[BSC Token Buys](https://ide.bitquery.io/BNB-Token-Buys)
 
 ### OHLC for a BEP-20 Token
 

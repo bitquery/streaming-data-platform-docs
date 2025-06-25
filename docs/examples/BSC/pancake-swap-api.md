@@ -365,7 +365,7 @@ subscription {
 }
 ```
 
-Also, checkout the [Four Meme](./four-meme-api.md) documentation for APIs related to Four Meme tokens and Four Meme Exchange.
+Also, checkout the [Four Meme](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/) documentation for APIs related to Four Meme tokens and Four Meme Exchange.
 
 ## Latest Trades on Pancake Swap for a given trader
 

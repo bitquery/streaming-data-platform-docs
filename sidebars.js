@@ -436,6 +436,7 @@ const sidebars = {
             "examples/Solana/SolFi-api",
             "examples/Solana/Orbic-API",
             "examples/dextrades/DEXScreener/solana_dexscreener",
+            "examples/Solana/ai-agent-solana-data",
           ],
         },
 
