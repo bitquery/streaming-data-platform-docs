@@ -16,6 +16,16 @@ Follow these steps when making portfolio optimization decisions:
 4. Execute swaps to acquire trending tokens, ensuring the chosen amount.
 5. Continuously monitor token performance and adjust holdings to maximize profits. For this you can use [Bitquery Shred Streams](https://docs.bitquery.io/docs/streams/real-time-solana-data/#kafka-stream-by-bitquery) to monitor token prices, new token creation and other activities with sub-second latency.
 
+## Code Structure and Logic: A Good Starting Point
+
+Your code sets up a flexible AI trading agent framework, handling:
+
+- backtest mode: historical simulation.
+- live mode: real-time trading/decision making
+- Portfolio tracking (cash, margin, positions, realized gains)
+- Integration with an AI model (likely LLM) to guide trading decisions
+- where the AI agent makes data-driven trading decisions based on Bitquery Solana data.
+
 # Key Bitquery Streams and Queries for Trading Agents
 
 ## 1. Top Trending Tokens
@@ -93,7 +103,7 @@ query Volatility {
 
 **Use:** High volatility can indicate short-term profit opportunities but also increased risk.
 
-## 3. Liquidity Pool Analysis
+## 3. Marketcap & Liquidity Pool Analysis
 
 Evaluate token liquidity to avoid low-volume or illiquid tokens.
 
@@ -127,6 +137,36 @@ query LiquidityPools {
 ```
 
 </details>
+
+### Marketcap
+
+You can fetch Marketcap of a token using below query.
+
+[Run Query](https://ide.bitquery.io/market-cap-of-token_1)
+[Docs](https://docs.bitquery.io/docs/examples/Solana/token-supply-cube/#marketcap-of-a-token)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+query MyQuery {
+Solana {
+  TokenSupplyUpdates(
+    where: {TokenSupplyUpdate: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}}}
+    limit: {count: 1}
+    orderBy: {descending: Block_Time}
+  ) {
+    TokenSupplyUpdate {
+      PostBalanceInUSD
+    }
+  }
+}
+}
+
+
+```
+
+ </details>
 
 **Use:** Focus on tokens with strong liquidity to ensure reliable entry and exit points.
 
@@ -243,7 +283,6 @@ Your AI Trading Agent should monitor **bot activity** on DEXs. Bots can cause **
 
 ![DexRabbit Bot Detection using Charts](/img/usecases/gopher_bot.png)
 
-
 | Indicator                              | Description                                                           |
 | -------------------------------------- | --------------------------------------------------------------------- |
 | **Highly repetitive trade patterns**   | Identical trades happening in short intervals suggest bot activity.   |
@@ -251,7 +290,9 @@ Your AI Trading Agent should monitor **bot activity** on DEXs. Bots can cause **
 | **Frequent pump-and-dump patterns**    | Sharp price surges followed by rapid sell-offs indicate manipulation. |
 | **Unusual token holder concentration** | Bots may use multiple wallets to appear as unique traders.            |
 
+## Calculating Trading Indicators
 
+You can SMA, EMA, RSI etc with Bitquery data. A tutorial is available [here](https://docs.bitquery.io/docs/usecases/trading-indicators/)
 
 ## Building the AI Trading Loop
 
@@ -281,8 +322,6 @@ You can also integrate off-chain information like Twitter feeds to decide if a t
 - Monitor tweets from key influencers and trigger trades based on their content.
 - Use Twitter data as a factor in your **AI models' decision-making**.
 
+---
 
------
-
-*This material is for educational and informational purposes only and is not intended as investment advice. The content reflects the author's personal research and understanding. While specific investments and strategies are mentioned, no endorsement or association with these entities is implied. Readers should conduct their own research and consult with qualified professionals before making any investment decisions. Bitquery is not liable for any losses or damages resulting from the application of this information.*
-
+_This material is for educational and informational purposes only and is not intended as investment advice. The content reflects the author's personal research and understanding. While specific investments and strategies are mentioned, no endorsement or association with these entities is implied. Readers should conduct their own research and consult with qualified professionals before making any investment decisions. Bitquery is not liable for any losses or damages resulting from the application of this information._
