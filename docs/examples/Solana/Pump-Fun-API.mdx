@@ -660,7 +660,7 @@ query PumpFunRecentTrades {
 ### Get Real-Time Trades on Pump Fun
 
 Streams live trades, including buy/sell sides, amounts, involved accounts, and methods
-[Run Stream ➤](https://ide.bitquery.io/Pumpfun-DEX-Trades_1#)
+[Run Stream ➤](https://ide.bitquery.io/Pumpfun-DEX-Trades-stream)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -669,10 +669,7 @@ Streams live trades, including buy/sell sides, amounts, involved accounts, and m
 subscription MyQuery {
   Solana {
     DEXTrades(
-      where: {
-        Trade: { Dex: { ProtocolName: { is: "pump" } } }
-        Transaction: { Result: { Success: true } }
-      }
+      where: {Trade: {Dex: {ProtocolName: {is: "pump"}}}, Transaction: {Result: {Success: true}}}
     ) {
       Instruction {
         Program {
@@ -697,6 +694,7 @@ subscription MyQuery {
             Fungible
             Uri
           }
+          Price
         }
         Sell {
           Amount
@@ -711,6 +709,8 @@ subscription MyQuery {
             Fungible
             Uri
           }
+          PriceInUSD
+          Price
         }
       }
       Transaction {
@@ -719,6 +719,7 @@ subscription MyQuery {
     }
   }
 }
+
 ```
 
 </details>
