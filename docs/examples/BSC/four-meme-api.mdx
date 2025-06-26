@@ -841,6 +841,34 @@ You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific
 
 </details>
 
+## Get liquidity of a Four Meme token
+
+Using below API you can get the liquidity of a four meme token. Subtract `200000000` from the Balance that this query returns because 200M tokens are reserved which gets transferred to pancakeswap when this fourmeme token graduates. Test the API [here](https://ide.bitquery.io/Get-liquidity-of-a-fourmeme-token).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+query MyQuery {
+  EVM(dataset: combined, network: bsc) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b"}}, Currency: {SmartContract: {is: "0x87c5b3da05b062480b55c2dbf374ccd084f74444"}}}
+      orderBy: {descendingByField: "balance"}
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount)
+      BalanceUpdate {
+        Address
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Building a Four Meme Dashboard
 
 [Chinese Tutorial](https://learnblockchain.cn/article/12532)
@@ -852,3 +880,7 @@ You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific
 ## Video Tutorial | How to track the Four Meme Tokens which are about to Graduate in Realtime
 
 <VideoPlayer url="https://youtu.be/vbDxtoOGLm4" />
+
+## Video Tutorial | How to get Liquidity of a Four Meme Token
+
+<VideoPlayer url="https://www.youtube.com/watch?v=nD1oVaJtwWo" />
