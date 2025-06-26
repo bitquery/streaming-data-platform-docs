@@ -1,14 +1,14 @@
 # Build AI Trading Agents with Bitquery Solana Data
 
-In this section, we will explore how to use **Bitquery APIs and real-time streams** to build AI-powered trading agents for the **Solana blockchain**.
+In this section, we will explore how to use **Bitquery APIs and real-time streams** to build AI-enabled trading agents for the **Solana blockchain**.
 
 **Your AI Trading Agent's Mission:**
 
-> You are a specialized trading agent operating on the Solana blockchain, you will optimize an existing portfolio by analyzing and trading trending tokens. Your primary goal is to identify profitable tokens in the market, assess wallet balances, and execute calculated swap decisions to enhance portfolio value.
+> You are a specialized trading agent operating on the Solana blockchain, you will optimize an existing portfolio by analyzing and trading trending tokens using Bitquery data. Your primary goal is to identify profitable tokens in the market, assess wallet balances, and execute calculated swap decisions to enhance portfolio value.
 
 ### Trading Decision Process
 
-This is a rough draft of a AI agent can do using on-chain and off-chain data:
+This is a rough draft of what an AI agent can do using on-chain and off-chain data:
 
 1. Use trending data to identify promising tokens with potential profit.
 2. For each trending token, retrieve detailed information to evaluate its market cap, liquidity, volatility, and security.
@@ -376,6 +376,20 @@ Your AI Trading Agent should monitor **bot activity** on DEXs. Bots can cause **
 ## Calculating Trading Indicators
 
 You can SMA, EMA, RSI etc with Bitquery data. A tutorial is available [here](https://docs.bitquery.io/docs/usecases/trading-indicators/)
+
+Your AI Agent can reconstruct price charts and calculate:
+
+- SMA 50: Simple Moving Average over last 50 data points (could be trades, time intervals, etc.).
+
+- SMA 200: Simple Moving Average over last 200 data points.
+
+Detect crossovers:
+
+- SMA 50 crosses above SMA 200 → Consider Buy.
+
+- SMA 50 crosses below SMA 200 → Consider Sell.
+
+This logic can be integrated into the AI Trading Loop along with the on-chain analysis.
 
 ## Building the AI Trading Loop
 
