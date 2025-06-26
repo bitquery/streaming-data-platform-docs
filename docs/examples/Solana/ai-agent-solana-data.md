@@ -39,10 +39,11 @@ Detect tokens with rising popularity and trader activity.
 
 ```graphql
 query TrendingTokens {
-  Solana {
+  Solana(network: solana, dataset: realtime) {
     DEXTradeByTokens(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "tradesCountWithUniqueTraders" }
+      limit: {count: 10}
+      orderBy: {descendingByField: "tradesCountWithUniqueTraders"}
+      where: {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112","11111111111111111111111111111111"]}}}}
     ) {
       Trade {
         Currency {
@@ -55,6 +56,7 @@ query TrendingTokens {
     }
   }
 }
+
 ```
 
 </details>
