@@ -93,6 +93,11 @@ This stream gives info about the real time trades on Raydium exchange. You can m
 
 ## EVM
 
+### Real time price stream for tokens on Ethereum
+
+This stream provides real time price stream for all tokens on Ethereum based on trades.
+
+[Real time price stream for tokens on Ethereum](https://ide.bitquery.io/Real-time-price-stream-for-tokens-on-Ethereum)
 
 ### Ethereum Mempool Events
 
