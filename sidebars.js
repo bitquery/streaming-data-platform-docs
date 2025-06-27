@@ -262,7 +262,7 @@ const sidebars = {
           label: "Ethereum",
           link: {
             type: "generated-index",
-            title: "Ethereum Overview",
+            title: "Ethereum API Documentation",
           },
           items: [
             "examples/blocks/blocks-api",
@@ -350,7 +350,7 @@ const sidebars = {
           label: "BSC",
           link: {
             type: "generated-index",
-            title: "BSC Overview",
+            title: "BSC API Documentation",
           },
           items: [
             "examples/BSC/bsc-balance-updates",
@@ -445,7 +445,7 @@ const sidebars = {
           label: "Tron",
           link: {
             type: "generated-index",
-            title: "Tron Overview",
+            title: "Tron API Documentation",
           },
           items: [
             "examples/Tron/sunswap-api",
@@ -465,7 +465,7 @@ const sidebars = {
           label: "TON",
           link: {
             type: "generated-index",
-            title: "TON Documentation",
+            title: "TON API Documentation",
           },
           items: ["examples/ton/ton-dex-trades"],
         },
@@ -500,7 +500,7 @@ const sidebars = {
           label: "Base",
           link: {
             type: "generated-index",
-            title: "Base Overview",
+            title: "Base API Documentation",
           },
           items: [
             "examples/Base/aerodrome-base-api",
@@ -520,7 +520,7 @@ const sidebars = {
           label: "Matic (Polygon)",
           link: {
             type: "generated-index",
-            title: "Matic Overview",
+            title: "Matic API Documentation",
           },
           items: [
             "examples/Matic/matic-balance-updates",
@@ -535,7 +535,7 @@ const sidebars = {
           label: "Optimism",
           link: {
             type: "generated-index",
-            title: "Optimism Overview",
+            title: "Optimism API Documentation",
           },
           items: [
             "examples/Optimism/optimism-balance-updates",
@@ -549,7 +549,7 @@ const sidebars = {
           label: "OpBNB",
           link: {
             type: "generated-index",
-            title: "OpBNB Overview",
+            title: "OpBNB API Documentation",
           },
           items: [
             "examples/OpBNB/opbnb-balance-updates",
