@@ -22,7 +22,7 @@ npm install bitquery-protobuf-schema
 Also, install other dependencies using the following command line.
 
 ```shell
-npm install kafkajs@2.2.3 uuid fs@0.0.1-security kafkajs-lz4@1.2.1 lz4@0.6.5 lz4-asm@0.4.2 bs58 bitquery-protobuf-schema
+npm install kafkajs@2.2.3 uuid fs@0.0.1-security kafkajs-lz4@1.2.1 lz4@0.6.5 lz4-asm@0.4.2 bs58 
 ```
 
 You’ll also need your **Kafka username/password** provided by the Bitquery team.
