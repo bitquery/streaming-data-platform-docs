@@ -3,6 +3,7 @@ sidebar_position: 2
 ---
 
 # BNB DEX Trades API
+
 Bitquery provides BSC DEX trade data through APIs, Streams, and Data Dumps.  
 The examples below show how to access real-time and historical trade data across BSC-based DEXs using GraphQL APIs and subscriptions.
 
@@ -22,7 +23,6 @@ To query or stream data via GraphQL **outside the Bitquery IDE**, you must gener
 
 Follow these steps: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
-
 
 <head>
 <meta name="title" content="BSC Decentralized Exchange Data with DEX Trades API"/>
@@ -165,7 +165,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/token/0x713
 ## Top Traders of a token
 
 This query will fetch you top traders of a token for the BSC network.
-You can test the query [here](https://ide.bitquery.io/top-traders--token-bsc).
+You can test the query [here](https://ide.bitquery.io/top-traders--token-bsc_3).
 
 ```
 query topTraders($network: evm_network, $token: String) {
@@ -176,6 +176,7 @@ query topTraders($network: evm_network, $token: String) {
       where: {Trade: {Currency: {SmartContract: {is: $token}}}}
     ) {
       Trade {
+        Buyer
         Dex {
           OwnerAddress
           ProtocolFamily

@@ -841,6 +841,45 @@ You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific
 
 </details>
 
+## Top Traders of a token
+
+This query will fetch you top traders of a Four Meme token for the BSC network.
+You can test the query [here](https://ide.bitquery.io/top-traders-of-a-four-meme-token_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+query topTraders($network: evm_network, $token: String) {
+  EVM(network: $network, dataset: combined) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}, Dex: {ProtocolName: {is: "fourmeme_v1"}}}}
+    ) {
+      Trade {
+        Buyer
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+      }
+      buyVolume: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      sellVolume: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+{
+  "network": "bsc",
+  "token": "0x37e3a59843b056e063780402ef25e12dca394444"
+}
+```
+
+</details>
+
 ## Get liquidity of a Four Meme token
 
 Using below API you can get the liquidity of a four meme token. Subtract `200000000` from the Balance that this query returns because 200M tokens are reserved which gets transferred to pancakeswap when this fourmeme token graduates. Test the API [here](https://ide.bitquery.io/Get-liquidity-of-a-fourmeme-token).
@@ -884,3 +923,7 @@ query MyQuery {
 ## Video Tutorial | How to get Liquidity of a Four Meme Token
 
 <VideoPlayer url="https://www.youtube.com/watch?v=nD1oVaJtwWo" />
+
+## Video Tutorial | How to get Top Traders of a Four Meme Token on Solana Four Meme DEX
+
+<VideoPlayer url="https://www.youtube.com/watch?v=EE7wsFKj6n0" />
