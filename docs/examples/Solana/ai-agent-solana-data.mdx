@@ -4,7 +4,21 @@ In this section, we will explore how to use **Bitquery APIs and real-time stream
 
 **Your AI Trading Agent's Mission:**
 
-> You are a specialized trading agent operating on the Solana blockchain, you will optimize an existing portfolio by analyzing and trading trending tokens using Bitquery data. Your primary goal is to identify profitable tokens in the market, assess wallet balances, and execute calculated swap decisions to enhance portfolio value.
+
+>You are a specialized trading agent operating on the Solana blockchain, you will optimize an existing portfolio by analyzing and trading trending tokens using Bitquery data. Your primary goal is to identify profitable tokens in the market, assess wallet balances, and execute calculated swap decisions to enhance portfolio value.
+
+```
+prompt = (
+        f"Analyze the following Solana token:\n"
+        f"Name: {token_data['name']}\n"
+        f"Symbol: {token_data['symbol']}\n"
+        f"Market Cap: {token_data['market_cap']}\n"
+        f"Liquidity (USD): {token_data['liquidity_usd']}\n"
+        f"Volatility: {token_data['volatility']}\n"
+        f"Top Holder Concentration (%): {token_data['holder_concentration']}\n"
+        "\nBased on this data, decide whether to 'Buy', 'Avoid', or 'Hold'. Only reply with one word: Buy, Avoid, or Hold."
+    )
+```
 
 ### Trading Decision Process
 
@@ -26,9 +40,27 @@ Your code sets up a flexible AI trading agent framework, handling:
 - Integration with an AI model (likely LLM) to guide trading decisions
 - where the AI agent makes data-driven trading decisions based on Bitquery Solana data.
 
-# Key Bitquery Streams and Queries for Trading Agents
+Below is a sample project structure:
 
-## 1. Top Trending Tokens
+```
+ai_trading_agent/
+├── main.py               # Entry point for agent
+├── bitquery_utils.py     # Bitquery API functions
+├── ai_decision.py        # AI model logic for trade decisions
+├── wallet_utils.py       # Wallet balance + transaction logic
+├── config.env            # Store API keys securely
+
+```
+
+## Video Tutorial
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+<VideoPlayer url="https://youtu.be/ACf3s9vgYMY" />
+
+## Key Bitquery Streams and Queries for Trading Agents
+
+### 1. Top Trending Tokens
 
 Detect tokens with rising popularity and trader activity.
 
@@ -39,10 +71,11 @@ Detect tokens with rising popularity and trader activity.
 
 ```graphql
 query TrendingTokens {
-  Solana {
+  Solana(network: solana, dataset: realtime) {
     DEXTradeByTokens(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "tradesCountWithUniqueTraders" }
+      limit: {count: 10}
+      orderBy: {descendingByField: "tradesCountWithUniqueTraders"}
+      where: {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112","11111111111111111111111111111111"]}}}}
     ) {
       Trade {
         Currency {
@@ -55,55 +88,14 @@ query TrendingTokens {
     }
   }
 }
+
 ```
 
 </details>
 
 **Use:** Filter tokens with rising trader activity to shortlist tokens to buy.
 
-## 2. Volatility of a Token
-
-Measure short-term price fluctuations to assess risk and profit potential.
-
-**Query Link:** [Volatility of a Pair on Solana](https://ide.bitquery.io/Volatility-of-a-Pair-on-Solana)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query Volatility {
-  Solana(dataset: realtime, network: solana) {
-    DEXTrades(
-      where: {
-        Trade: {
-          Buy: {
-            Currency: {
-              MintAddress: {
-                is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN"
-              }
-            }
-          }
-          Sell: {
-            Currency: {
-              MintAddress: {
-                is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
-              }
-            }
-          }
-        }
-      }
-    ) {
-      volatility: standard_deviation(of: Trade_Buy_Price)
-    }
-  }
-}
-```
-
-</details>
-
-**Use:** High volatility can indicate short-term profit opportunities but also increased risk.
-
-## 3. Marketcap & Liquidity Pool Analysis
+### 3. Marketcap & Liquidity Pool Analysis
 
 Evaluate token liquidity to avoid low-volume or illiquid tokens.
 
@@ -159,7 +151,7 @@ query GetTopPoolsByDex {
 
 </details>
 
-### Marketcap of a token
+#### Marketcap of a token
 
 You can fetch Marketcap of a token using below query.
 
@@ -191,7 +183,7 @@ Solana {
 
 **Use:** Focus on tokens with strong liquidity to ensure reliable entry and exit points.
 
-## 4. Wallet Balances Monitoring
+### 4. Wallet Balances Monitoring
 
 Review current portfolio composition before making swaps.
 
@@ -225,7 +217,7 @@ query MyQuery {
 
 **Use:** Determine available assets and calculate safe investment amounts for token swaps.
 
-## 5. DEX Trade Streams for Real-Time Trades
+### 5. DEX Trade Streams for Real-Time Trades
 
 Subscribe to continuous streams of Solana DEX trades for live market intelligence.
 
@@ -313,7 +305,7 @@ subscription {
 
 **Use:** React instantly to time-sensitive trades.
 
-## 6. Token Holders Distribution (Security Check)
+### 6. Token Holders Distribution (Security Check)
 
 Check token decentralization to avoid risky, whale-dominated assets.
 
@@ -356,7 +348,7 @@ query MyQuery {
 
 **Use:** Avoid tokens with highly concentrated ownership that may be vulnerable to manipulation.
 
-## 7. Avoiding Bots with DEXRabbit (Built by Bitquery)
+### 7. Avoiding Bots with DEXRabbit (Built by Bitquery)
 
 Your AI Trading Agent should monitor **bot activity** on DEXs. Bots can cause **sudden price spikes**, **wash trading**, or manipulate token prices, posing risks to human traders.
 
@@ -404,6 +396,7 @@ Your AI Trading Agent combines the above streams as follows:
 4. Use Real-Time Trade Streams to time the market entry.
 5. Execute Swaps on high-potential tokens.
 6. Continuously monitor market data and adjust holdings as needed.
+
 
 ## Next Steps
 

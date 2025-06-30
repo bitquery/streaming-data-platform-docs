@@ -579,7 +579,7 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
 
 ## Top 10 Trending Solana Tokens
 
-[This](https://ide.bitquery.io/Trending-tokens-on--Solana_2) query returns the top 10 trending tokens on Solana across all DEXs based on the number of trades with unique traders.
+[This](https://ide.bitquery.io/Trending-tokens-on--Solana_6) query returns the top 10 trending tokens on Solana across all DEXs based on the number of trades with unique traders.
 [This](https://ide.bitquery.io/Trending-tokens-on--Solana-for-one-hour) query returns the trending list of tokens for a particular time period, `1 hour` in this case.
 
 <details>
@@ -587,10 +587,11 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
 
 ```graphql
 query TrendingTokens {
-  Solana {
+  Solana(network: solana, dataset: realtime) {
     DEXTradeByTokens(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "tradesCountWithUniqueTraders" }
+      limit: {count: 10}
+      orderBy: {descendingByField: "tradesCountWithUniqueTraders"}
+      where: {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112","11111111111111111111111111111111"]}}}}
     ) {
       Trade {
         Currency {
@@ -603,6 +604,7 @@ query TrendingTokens {
     }
   }
 }
+
 ```
 
 </details>
