@@ -163,16 +163,15 @@ This query returns Solana balance update info for any balance update event, incl
 This API provides historical data on all Solana token transfers that occurred within a specified time range.
 ▶️ [Solana Historical Token Transfers Over Time](https://ide.bitquery.io/Solana-historical-token-transfers-between-a-time_2)
 
-
 ### Solana Token Transfers for a Specific Address
+
 This API retrieves the history of token transfers (both sent and received) for a specific Solana address within a defined time period.
 ▶️ [Solana Token Transfers for a Specific Address](https://ide.bitquery.io/Solana-historical-token-transfers-of-an-address-between-a-time)
- 
 
 ### Solana Token Inflows and Outflows for Balance Calculation
+
 This API returns all token inflows and outflows for a Solana address within a specified timeframe, enabling balance calculation based on transaction history.
 ▶️ [Solana Token Inflows and Outflows for Balance Calculation](https://ide.bitquery.io/currency-sent-and-received-by-an-address-between-a-time_1)
-
 
 ## PumpFun - Pumpswap API
 
@@ -220,18 +219,15 @@ This query returns the latest price of a token when traded against another token
 This API returns the total number of holders for a specific token on a given date.
 ▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_3)
 
-
 ### Token Holders and Stats on a Specific Date
 
 This API provides a list of all holders along with relevant statistics for a given token on a specific date.
 ▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_3)
 
-
 ### Real-Time Holders of Multiple Tokens
 
 This API leverages the balanceUpdate endpoint to deliver real-time holder data for multiple tokens.
 ▶️ [ Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-BSC)
-
 
 ### Common Holders Across Multiple Tokens
 
@@ -242,142 +238,143 @@ This API identifies addresses that hold multiple specified tokens
 
 ### Get ERC20 token transfers by wallet
 
-Get ERC20 token transactions ordered by block number in descending order.       
+Get ERC20 token transactions ordered by block number in descending order.  
 ▶️ [Get ERC20 token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_2)
 
 ### Get Native & ERC20 Token Balances by Wallet
 
-Get token balances for a specific wallet address.       
+Get token balances for a specific wallet address.  
 ▶️ [Get Native & ERC20 Token Balances by Wallet](https://ide.bitquery.io/balance-of-a-wallet_1)
 
 ### Get ERC20 Token Balance by Wallet
 
-Get token balances for a specific wallet address.       
+Get token balances for a specific wallet address.  
 ▶️ [Get ERC20 Token Balance by Wallet](https://ide.bitquery.io/Get-ERC20-Token-Balance-by-Wallet)
 
 ### Get Swaps by Wallet Address
 
-Get all swap related transactions (buy, sell).      
+Get all swap related transactions (buy, sell).  
 ▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest_trades_by_maker)
 
 ### Get wallet net worth
 
-Get the net worth of a wallet in USD.       
+Get the net worth of a wallet in USD.  
 ▶️ [Get wallet net worth](https://ide.bitquery.io/balance-of-a-wallet-in-USD_2)
 
 ### Get Multiple ERC20 Token Prices
 
-Returns an array of token prices denominated in the blockchain's native token and USD for a given token contract address.       
+Returns an array of token prices denominated in the blockchain's native token and USD for a given token contract address.  
 ▶️ [Get Multiple ERC20 Token Prices](https://ide.bitquery.io/Price-of-multiple-tokens-in-realtime)
 
 ### Get OHLCV by Pair Address
 
-Get the OHLCV candle stick by using pair address.       
+Get the OHLCV candle stick by using pair address.  
 ▶️ [Get OHLCV by Pair Address](https://ide.bitquery.io/OHLC0_8)
 
 ### Get transactions by wallet
 
-Get transactions ordered by block number in descending order.       
+Get transactions ordered by block number in descending order.  
 ▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet)
 
 ### Ethereum DEX Trades
 
-This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.        
+This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.  
 ▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-dextrades)
 
 ### Ethereum Dex Trade By Tokens
 
-This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.        
+This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
 ▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
 
 ### Ethereum Events
 
-This query returns event info and logs for the Ethereum network. It includes arguments passed, transaction details, log info, block info, and more.         
+This query returns event info and logs for the Ethereum network. It includes arguments passed, transaction details, log info, block info, and more.  
 ▶️ [Ethereum Events](https://ide.bitquery.io/ethereum-events-api)
 
 ### Ethereum Calls
 
-Every interaction with any EVM network, from contract creation to fund transfer, is denoted by a call. This query returns the call data for the Ethereum network.       
+Every interaction with any EVM network, from contract creation to fund transfer, is denoted by a call. This query returns the call data for the Ethereum network.  
 ▶️ [Ethereum Calls](https://ide.bitquery.io/Ethereum-calls-query)
 
 ### Ethereum Miner Rewards
 
-This query returns mining rewards info for Ethereum, including transaction fees, fees burnt, rewards received, and more.        
+This query returns mining rewards info for Ethereum, including transaction fees, fees burnt, rewards received, and more.  
 ▶️ [Miner Rewards](https://ide.bitquery.io/Ethereum-miner-rewards)
 
 ## BSC API
 
 ### BSC Token Holders
 
-This query returns the top `50` holders of a given BEP-20 token.        
+This query returns the top `50` holders of a given BEP-20 token.  
 ▶️[BSC Token Holders](https://ide.bitquery.io/Top-10-holders-of-a-token-on-BSC)
 
 ### Buys of a Token on BNB
-This query returns the latest `100` buys of a given BEP-20 token. 
+
+This query returns the latest `100` buys of a given BEP-20 token.
 ▶️[BSC Token Buys](https://ide.bitquery.io/BNB-Token-Buys)
 
 ### OHLC for a BEP-20 Token
 
-Get OHLC statistics for a BEP-20 token on BSC network.              
+Get OHLC statistics for a BEP-20 token on BSC network.  
 ▶️[OHLC of a Token](https://ide.bitquery.io/OHLC-for-a-token-on-bsc_1)
 
 ### Top Gainers on BSC
 
-Get Top Gainers for the BSC network.        
+Get Top Gainers for the BSC network.  
 ▶️[Top Gainers](https://ide.bitquery.io/bsc-top-gainers)
 
 ### Top Gainers on BSC
 
-Get Top Gainers for the BSC network.        
+Get Top Gainers for the BSC network.  
 ▶️[Top Gainers](https://ide.bitquery.io/bsc-top-gainers)
 
 ### BEP-20 Token Price
 
-Get the latest price of a BEP-20 token on BSC network.      
+Get the latest price of a BEP-20 token on BSC network.  
 ▶️[Token Price](https://ide.bitquery.io/realtime-usd-price-of-a-token)
 
 ### Trading Pairs on a BSC DEX
 
-Get all trading pairs present on a BSC network DEX.      
+Get all trading pairs present on a BSC network DEX.  
 ▶️[Trading Pairs](https://ide.bitquery.io/trading-pairs-on-a-specific-dex_1)
 
 ## Four Meme API
 
 ### Trade Metrics of a Four Meme Token
 
-This query returns the traded volume and number of trades for a particular Four Meme token in different time frames, namely 24 hours, 1 hour and 5 minutes.     
+This query returns the traded volume and number of trades for a particular Four Meme token in different time frames, namely 24 hours, 1 hour and 5 minutes.  
 ▶️[Token Trade Metrics](https://ide.bitquery.io/volume-and-trades-for-a-token-in-different-time-frames_1)
 
 ### Latest and Historical Trades of a User
 
-Get the latest and historical trades by a user on `Four Meme` platform.     
+Get the latest and historical trades by a user on `Four Meme` platform.  
 ▶️[User Trades](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme)
 
 ### Liquidity Addition for Four Meme Token
 
-Get the liquidity addition events for a specific token on the Four Meme Exchange.       
+Get the liquidity addition events for a specific token on the Four Meme Exchange.  
 ▶️[Liquidity Addition](https://ide.bitquery.io/Liquidity-Added-to-specific-tokens-on-Four-meme)
 
 ## Pancakeswap APIs
 
 ### Latest Token Trades
 
-Get the latest trades of a token on Pancakeswap.        
+Get the latest trades of a token on Pancakeswap.  
 ▶️[Token Trades](https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-token)
 
 ### Price of a Token
 
-Get the latest price of a token traded on Pancakeswap.      
+Get the latest price of a token traded on Pancakeswap.  
 ▶️[Token Price on Pancakeswap](https://ide.bitquery.io/BSC-PancakeSwap-v3-Price-for-a-token)
 
 ### OHLC of a Token
 
-Get the OHLC stats of a token traded on Pancakeswap.        
+Get the OHLC stats of a token traded on Pancakeswap.  
 ▶️[Token OHLC](https://ide.bitquery.io/BSC-Pancake-V3-OHLC-data_1)
 
 ### Trades by User on Pancakeswap
 
-Get the latest trades by a user on Pancakeswap.      
+Get the latest trades by a user on Pancakeswap.  
 ▶️[User Trades](https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-trader)
 
 ## NFT APIs
@@ -514,30 +511,42 @@ This API provides comprehensive details of a specific Bitcoin transaction in a s
 ## Cardano
 
 ### Cardano Transfers
+
 This query returns the latest transfers on Cardano network.
 ▶️ [Cardano Transfers](https://ide.bitquery.io/Cardano-Transfers_1)
 
 ### Cardano User Transfers
-This query returns the latest transfers for a useron Cardano network.      
+
+This query returns the latest transfers for a useron Cardano network.  
 ▶️ [Cardano User Transfers](https://ide.bitquery.io/cardano-transfers-of-a-wallet)
 
 ### Cardano Balance
-This query returns the current balance of a user on Cardano network.      
+
+This query returns the current balance of a user on Cardano network.  
 ▶️ [Cardano Balance](https://ide.bitquery.io/cardano-address-balance_1)
 
 ### Cardano Staking
-This query returns the amount staked by a user on Cardano network.       
+
+This query returns the amount staked by a user on Cardano network.  
 ▶️ [Cardano Transfers](https://ide.bitquery.io/cardano-staking-balance)
 
 ### Cardano Price
-This query returns the latest price of Cardano on Cardano Network.        
-▶️ [Cardano Price](https://ide.bitquery.io/latest-cardano-price) 
+
+This query returns the latest price of Cardano on Cardano Network.  
+▶️ [Cardano Price](https://ide.bitquery.io/latest-cardano-price)
 
 ### Cardano Minting
-This query returns the latest currencies minted on Cardano network.     
+
+This query returns the latest currencies minted on Cardano network.  
 ▶️ [Cardano Miniting](https://ide.bitquery.io/currency-minted-on-cardano)
 
 ## Ripple
+
+### Transaction Details using Hash
+
+This query uses transaction hash and date range as filter to fetch tx details.
+
+▶️ [XRPL Transaction Details](https://ide.bitquery.io/xrpl-search-tx-details)
 
 ### Ripple Historical Balance
 
