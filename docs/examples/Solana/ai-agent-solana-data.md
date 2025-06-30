@@ -4,7 +4,21 @@ In this section, we will explore how to use **Bitquery APIs and real-time stream
 
 **Your AI Trading Agent's Mission:**
 
-> You are a specialized trading agent operating on the Solana blockchain, you will optimize an existing portfolio by analyzing and trading trending tokens using Bitquery data. Your primary goal is to identify profitable tokens in the market, assess wallet balances, and execute calculated swap decisions to enhance portfolio value.
+
+>You are a specialized trading agent operating on the Solana blockchain, you will optimize an existing portfolio by analyzing and trading trending tokens using Bitquery data. Your primary goal is to identify profitable tokens in the market, assess wallet balances, and execute calculated swap decisions to enhance portfolio value.
+
+```
+prompt = (
+        f"Analyze the following Solana token:\n"
+        f"Name: {token_data['name']}\n"
+        f"Symbol: {token_data['symbol']}\n"
+        f"Market Cap: {token_data['market_cap']}\n"
+        f"Liquidity (USD): {token_data['liquidity_usd']}\n"
+        f"Volatility: {token_data['volatility']}\n"
+        f"Top Holder Concentration (%): {token_data['holder_concentration']}\n"
+        "\nBased on this data, decide whether to 'Buy', 'Avoid', or 'Hold'. Only reply with one word: Buy, Avoid, or Hold."
+    )
+```
 
 ### Trading Decision Process
 
@@ -25,6 +39,17 @@ Your code sets up a flexible AI trading agent framework, handling:
 - Portfolio tracking (cash, positions, realized gains)
 - Integration with an AI model (likely LLM) to guide trading decisions
 - where the AI agent makes data-driven trading decisions based on Bitquery Solana data.
+
+Below is a sample project structure:
+
+```
+ai_trading_agent/
+├── main.py               # Entry point for agent
+├── bitquery_utils.py     # Bitquery API functions
+├── ai_decision.py        # AI model logic for trade decisions
+├── wallet_utils.py       # Wallet balance + transaction logic
+├── config.env            # Store API keys securely
+```
 
 # Key Bitquery Streams and Queries for Trading Agents
 
@@ -404,6 +429,7 @@ Your AI Trading Agent combines the above streams as follows:
 4. Use Real-Time Trade Streams to time the market entry.
 5. Execute Swaps on high-potential tokens.
 6. Continuously monitor market data and adjust holdings as needed.
+
 
 ## Next Steps
 
