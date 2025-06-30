@@ -4,8 +4,6 @@ sidebar_position: 3
 
 # Solana Instructions Balance Updates API
 
-
-
 <head>
 <meta name="title" content="Solana Instructions Balance Updates API | Get decoded Instructions Balance Updates data"/>
 <meta name="description" content="Get real time balance & balance updates of a Solana address associated with instruction invocation using Bitquery's Solana Instruction Balance Updates API."/>
@@ -51,6 +49,68 @@ query {
         }
         PreBalance
         PostBalance
+      }
+    }
+  }
+}
+```
+
+## Latest liquidity locks on Streamflow
+
+Using the below query, you can retrieve latest liquidity locks made using streamflow. Test the query [here](https://ide.bitquery.io/Liquidity-lock-using-instructions-balance-update)
+
+```
+{
+  Solana {
+    InstructionBalanceUpdates(limit: {count: 20}
+    where:{
+      BalanceUpdate:{
+        Currency:{
+          Native:false
+        }
+        Amount:{gt:"0"}
+      }
+      Instruction:{
+        Program:{
+          Method:{is:"create"}
+          Address:{is:"strmRqUCoQUgGUan5YhzUZa6KqdzwX5L6FpUxfmKg5m"}
+        }
+      }
+    }
+    ) {
+      BalanceUpdate {
+        Account {
+          Address
+          Owner
+        }
+        Amount
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Decimals
+        }
+        Index
+        Amount
+        AmountInUSD
+        PreBalance
+        PreBalanceInUSD
+        PostBalance
+        PostBalanceInUSD
+      }
+      Instruction {
+        Program {
+          Method
+          Address
+        }
+      }
+      Transaction {
+        Signature
+        FeePayer
+      }
+      Block {
+        Time
+        Height
       }
     }
   }

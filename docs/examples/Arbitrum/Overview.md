@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Overview of Arbitrum Data
+# Arbitrum API Documentation
 
 Bitquery API offers access to indexed data from the Arbitrum blockchain via GraphQL API and GraphQl Subscriptions for developers.
 

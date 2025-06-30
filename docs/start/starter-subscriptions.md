@@ -15,6 +15,12 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 ## Solana
 
+### Real Time token prices on solana
+
+This stream delivers real-time token prices on Solana based on the latest trades.
+
+[Real Time token prices on solana](https://ide.bitquery.io/Real-time-price-stream-for-tokens-on-solana)
+
 ### Trades in Real-time
 
 This subscription streams real-time Solana trades, which you can modify this to track real-time trades of a particular token pair.
@@ -25,7 +31,31 @@ This subscription streams real-time Solana trades, which you can modify this to 
 
 This subscription generates a real-time OHLC (Open, High, Low, Close) K-line chart for Solana in real-time, useful for Tradingview charting in real-time
 
-▶️[Seconds OHLC Stream](https://ide.bitquery.io/seconds-oHLC-realtime-solana#)
+▶️ [Seconds OHLC Stream](https://ide.bitquery.io/seconds-oHLC-realtime-solana#)
+
+### Balance Update Stream
+
+This streams provide all balance updates on the Solana blockchain.
+
+▶️ [Balance Update Stream](https://ide.bitquery.io/solana-balance-update-stream_3)
+
+### Token Transfers
+
+This stream provides all token transfers on the Solana blockchain, including SOL transfers.
+
+▶️ [Token Transfer Stream](https://ide.bitquery.io/Solana-transfers-stream_3)
+
+### Instructions stream
+
+This stream provides all instructions on solana.
+
+▶️ [Instructions Stream](https://ide.bitquery.io/solana-instructions-streams)
+
+### DEXPool Liquidity Changes
+
+This stream provides real time liquidity details for all pools on Solana.
+
+[DEXPool Liquidity Changes](https://ide.bitquery.io/Solana-DEXPools-stream_2)
 
 ## Pumpfun Streams
 
@@ -63,6 +93,11 @@ This stream gives info about the real time trades on Raydium exchange. You can m
 
 ## EVM
 
+### Real time price stream for tokens on Ethereum
+
+This stream provides real time price stream for all tokens on Ethereum based on trades.
+
+[Real time price stream for tokens on Ethereum](https://ide.bitquery.io/Real-time-price-stream-for-tokens-on-Ethereum)
 
 ### Ethereum Mempool Events
 
