@@ -384,6 +384,51 @@ query MyQuery($currency: String) {
 
 You can also check if the token is listed on other DEX using this [example](./bsc-dextrades.mdx/#get-all-dexs-where-a-specific-token-is-listed).
 
+## Get OHLCV data of a Four Meme Token
+
+Use the below query to get four meme token OHLCV data. Test it [here](https://ide.bitquery.io/OHLC-for-a-four-meme-token).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query tradingView($network: evm_network, $token: String) {
+  EVM(network: $network, dataset: combined) {
+    DEXTradeByTokens(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "Block_Time" }
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: $token } }
+          PriceAsymmetry: { lt: 0.1 }
+          Dex: { ProtocolName: { is: "fourmeme_v1" } }
+        }
+      }
+    ) {
+      Block {
+        Time(interval: { count: 5, in: minutes })
+      }
+      Trade {
+        open: PriceInUSD(minimum: Block_Number)
+        close: PriceInUSD(maximum: Block_Number)
+        max: PriceInUSD(maximum: Trade_PriceInUSD)
+        min: PriceInUSD(minimum: Trade_PriceInUSD)
+      }
+      volumeUSD: sum(of: Trade_Side_AmountInUSD, selectWhere: { gt: "0" })
+    }
+  }
+}
+```
+
+```json
+{
+  "network": "bsc",
+  "token": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
+}
+```
+
+</details>
+
 ## Monitor trades of traders on Four meme
 
 You can use our streams to monitor real time trades of a trader on Four Meme, for example run [this stream](https://ide.bitquery.io/monitor-trades-of-a-trader-on-four-meme).
@@ -927,3 +972,7 @@ query MyQuery {
 ## Video Tutorial | How to get Top Traders of a Four Meme Token on Solana Four Meme DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=EE7wsFKj6n0" />
+
+## Video Tutorial | How to Get the OHLCV Data of a token on Four Meme DEX
+
+<VideoPlayer url="https://www.youtube.com/watch?v=ZqTKDgSaYaQ" />
