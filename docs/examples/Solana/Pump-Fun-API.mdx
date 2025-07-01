@@ -669,7 +669,10 @@ Streams live trades, including buy/sell sides, amounts, involved accounts, and m
 subscription MyQuery {
   Solana {
     DEXTrades(
-      where: {Trade: {Dex: {ProtocolName: {is: "pump"}}}, Transaction: {Result: {Success: true}}}
+      where: {
+        Trade: { Dex: { ProtocolName: { is: "pump" } } }
+        Transaction: { Result: { Success: true } }
+      }
     ) {
       Instruction {
         Program {
@@ -719,7 +722,6 @@ subscription MyQuery {
     }
   }
 }
-
 ```
 
 </details>
@@ -1045,19 +1047,19 @@ Gets pool token balances for liquidity estimation across multiple known pool acc
 ### Get Market Cap, Price, Liquidity, Bonding Curve, and Volume
 
 Returns detailed token metrics including bonding curve status
-[Run Query ➤](https://ide.bitquery.io/mcap-liquidity-bonding-curve-volume-supply-of-a-token-in-time-frame)
+[Run Query ➤](https://ide.bitquery.io/mcap-liquidity-bonding-curve-volume-supply-of-a-token-in-time-frame_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
+query MyQuery($time_1h_ago: DateTime, $token: String, $pairAddress: String) {
   Solana {
     volume: DEXTradeByTokens(
       where: {
         Trade: {
           Currency: { MintAddress: { is: $token } }
-          Side: { Currency: { MintAddress: { is: $side } } }
+          Market: { MarketAddress: { is: $pairAddress } }
         }
         Block: { Time: { since: $time_1h_ago } }
         Transaction: { Result: { Success: true } }
@@ -1067,12 +1069,7 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
     }
     liquidity_and_BondingCurve: DEXPools(
       where: {
-        Pool: {
-          Market: {
-            BaseCurrency: { MintAddress: { is: $token } }
-            QuoteCurrency: { MintAddress: { is: $side } }
-          }
-        }
+        Pool: { Market: { MarketAddress: { is: $pairAddress } } }
         Transaction: { Result: { Success: true } }
       }
       limit: { count: 1 }
@@ -1122,7 +1119,10 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
       orderBy: { descending: Block_Time }
       where: {
         Transaction: { Result: { Success: true } }
-        Trade: { Currency: { MintAddress: { is: $token } } }
+        Trade: {
+          Currency: { MintAddress: { is: $token } }
+          Market: { MarketAddress: { is: $pairAddress } }
+        }
       }
     ) {
       Trade {
@@ -1136,9 +1136,9 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $side: String) {
 
 ```json
 {
-  "time_1h_ago": "2025-05-07T09:25:00Z",
-  "token": "BQ2H4iunQzbhMQaUf65J5N7qVASX9JWf8oytTM2Gpump",
-  "side": "11111111111111111111111111111111"
+  "time_1h_ago": "2025-06-01T11:00:00Z",
+  "token": "EskuW9PhydSiMTxnWbvYBLVvwWV9pKhG4yYM9SwFPump",
+  "pairAddress": "BkivJgUrXRQtJyePt5MzJJe9Y2JXhUaFhpCJcgxkisD"
 }
 ```
 
