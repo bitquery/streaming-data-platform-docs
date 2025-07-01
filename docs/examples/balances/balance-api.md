@@ -43,6 +43,30 @@ query MyQuery {
 - `Currency { Name }`: This field specifies the currency in which the balance is expressed. In this case, the `Name` of the currency is retrieved.
 - `balance: sum(of: BalanceUpdate_Amount)`: This field retrieves the total balance of the specified Ethereum address, broken down by currency. The `sum` function is used to calculate the total amount, and the `of` parameter specifies the field to sum, which is `BalanceUpdate_Amount`. The alias `balance` is used to rename the field to `balance` for readability.
 
+## Balance of a wallet address at a specific Block Height
+
+Use the below API to get the balance of a wallet address at a specific Block Height. Test the query [here](https://ide.bitquery.io/balance-of-a-wallet-at-a-block-height_1).
+
+```
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "0x8e29b04a9A470cA2B95c5CF32C1d54BAe3cCC931"}}, Block: {Number: {le: "21525890"}}}
+      orderBy: {descendingByField: "balance"}
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      BalanceUpdate {
+        Address
+      }
+    }
+  }
+}
+
+```
+
 ## Balance for an address for a specific currency
 
 You can also get a balance for a specific currency for a given address just by adding Currency Filer. As you know, names on blockchains are not unique; however, addresses are. Therefore, while mentioning currencies, always use their currency address. Open the query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Balance-for-an-address-for-an-specific-currency_1).
