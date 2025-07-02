@@ -260,6 +260,70 @@ query pairTopTraders {
 
 </details>
 
+## Stream Latest Pool Creation on Uniswap V2, V3
+
+[Run Stream ➤](https://ide.bitquery.io/stream-pool-and-pair-creation-on-ethereum#)
+[Run Query ➤](https://ide.bitquery.io/query-pool-and-pair-creation-on-ethereum#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  EVM(network: eth) {
+    Events(
+      where: {
+        Log: {
+          SmartContract: {
+            in: [
+              "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+              "0x1f98431c8ad98523631ae4a59f267346ea31f984"
+            ]
+          }
+          Signature: { Name: { in: ["PoolCreated", "PairCreated"] } }
+        }
+      }
+    ) {
+      Log {
+        SmartContract
+      }
+      Transaction {
+        Hash
+      }
+      Arguments {
+        Type
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+        }
+        Name
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Latest Pools Created on Uniswap V2
 
 Track the last 10 `PairCreated` events from the Uniswap V2 factory:
