@@ -55,7 +55,13 @@ This stream provides all instructions on solana.
 
 This stream provides real time liquidity details for all pools on Solana.
 
-[DEXPool Liquidity Changes](https://ide.bitquery.io/Solana-DEXPools-stream_2)
+▶️ [DEXPool Liquidity Changes](https://ide.bitquery.io/Solana-DEXPools-stream_2)
+
+### Large token buys and sells on Solana DEX
+
+This stream provides real-time large buy and sell on Solana DEXs.
+
+▶️ [Large token buys and sells on Solana DEX](https://ide.bitquery.io/big-trades-on-solana)
 
 ## Pumpfun Streams
 
