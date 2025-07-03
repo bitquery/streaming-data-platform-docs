@@ -326,12 +326,12 @@ const config = {
           // },
           {
             to: "https://dexrabbit.com/",
-            label: "DEX Data Showcase",
+            label: "DEX Dashboard",
             position: "left",
           },
           {
             to: "https://lite.bitquery.io/",
-            label: "Moneyflow Lite",
+            label: "Free Investigation Tool",
             position: "left",
           },
           {

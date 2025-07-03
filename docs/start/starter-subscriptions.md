@@ -15,17 +15,17 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 ## Solana
 
-### Real Time token prices on solana
-
-This stream delivers real-time token prices on Solana based on the latest trades.
-
-[Real Time token prices on solana](https://ide.bitquery.io/Real-time-price-stream-for-tokens-on-solana)
-
 ### Trades in Real-time
 
 This subscription streams real-time Solana trades, which you can modify this to track real-time trades of a particular token pair.
 
 ▶️ [Solana Trades Stream](https://ide.bitquery.io/solana-trades-subscription_3)
+
+### Real-time token prices on solana
+
+This stream delivers real-time token prices on Solana based on the latest trades.
+
+▶️ [Real Time token prices on solana](https://ide.bitquery.io/Real-time-price-stream-for-tokens-on-solana)
 
 ### Seconds K-Line Chart
 
@@ -55,7 +55,13 @@ This stream provides all instructions on solana.
 
 This stream provides real time liquidity details for all pools on Solana.
 
-[DEXPool Liquidity Changes](https://ide.bitquery.io/Solana-DEXPools-stream_2)
+▶️ [DEXPool Liquidity Changes](https://ide.bitquery.io/Solana-DEXPools-stream_2)
+
+### Large token buys and sells on Solana DEX
+
+This stream provides real-time large buy and sell on Solana DEXs.
+
+▶️ [Large token buys and sells on Solana DEX](https://ide.bitquery.io/big-trades-on-solana)
 
 ## Pumpfun Streams
 
