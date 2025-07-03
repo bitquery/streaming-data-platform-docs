@@ -577,34 +577,164 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
 
 </details>
 
-## Top 10 Trending Solana Tokens
+## Top 50 Trending Solana Token Pairs with all the data
 
-[This](https://ide.bitquery.io/Trending-tokens-on--Solana_6) query returns the top 10 trending tokens on Solana across all DEXs based on the number of trades with unique traders.
-[This](https://ide.bitquery.io/Trending-tokens-on--Solana-for-one-hour) query returns the trending list of tokens for a particular time period, `1 hour` in this case.
+[This](https://ide.bitquery.io/top-50-trading-pairs-with-trades-count-volume-buys-sells-makers-marketcap-supply-and-liquidity_1) query returns the top 10 trending token pairs on Solana across all DEXs based on the number of trades happened in the last hour. Along with token pair info you will also get latest price, total traded volume, buy volume, sell volume, buys, sells, buyers, sellers, makers, marketcap, liquidity, supply.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query TrendingTokens {
-  Solana(network: solana, dataset: realtime) {
+query ($time_1h_ago: DateTime) {
+  Solana {
     DEXTradeByTokens(
-      limit: {count: 10}
-      orderBy: {descendingByField: "tradesCountWithUniqueTraders"}
-      where: {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112","11111111111111111111111111111111"]}}}}
+      where: {
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since: $time_1h_ago } }
+        any: [
+          {
+            Trade: {
+              Side: {
+                Currency: {
+                  MintAddress: {
+                    is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+                  }
+                }
+              }
+            }
+          }
+          {
+            Trade: {
+              Currency: {
+                MintAddress: {
+                  not: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+                }
+              }
+              Side: {
+                Currency: {
+                  MintAddress: {
+                    is: "So11111111111111111111111111111111111111112"
+                  }
+                }
+              }
+            }
+          }
+          {
+            Trade: {
+              Currency: {
+                MintAddress: {
+                  notIn: [
+                    "So11111111111111111111111111111111111111112"
+                    "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+                  ]
+                }
+              }
+              Side: {
+                Currency: {
+                  MintAddress: {
+                    notIn: [
+                      "So11111111111111111111111111111111111111112"
+                      "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+      orderBy: { descendingByField: "trades_count_1h" }
+      limit: { count: 50 }
     ) {
       Trade {
         Currency {
-          Name
           Symbol
+          Name
           MintAddress
         }
+        Latest_Price: PriceInUSD(maximum: Block_Time)
+        Market {
+          MarketAddress
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            MintAddress
+          }
+        }
       }
-      tradesCountWithUniqueTraders: count(distinct: Transaction_Signer)
+      makers: count(distinct: Transaction_Signer)
+      buyers: count(
+        distinct: Transaction_Signer
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sellers: count(
+        distinct: Transaction_Signer
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      traded_volume: sum(of: Trade_Side_AmountInUSD)
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      trades_count_1h: count
+      liquidity: joinDEXPools(
+        join: inner
+        Pool_Market_MarketAddress: Trade_Market_MarketAddress
+        where: { Transaction: { Result: { Success: true } } }
+      ) {
+        Pool {
+          Market {
+            BaseCurrency {
+              Name
+              Symbol
+            }
+            QuoteCurrency {
+              Name
+              Symbol
+            }
+          }
+          Base {
+            Balance: PostAmount(maximum: Block_Slot)
+            Base_Liquidity_USD: PostAmountInUSD(maximum: Block_Slot)
+          }
+          Quote {
+            PostAmount(maximum: Block_Slot)
+            Quote_Liquidity_USD: PostAmountInUSD(maximum: Block_Slot)
+          }
+        }
+      }
+      marketcap_and_supply: joinTokenSupplyUpdates(
+        join: inner
+        TokenSupplyUpdate_Currency_MintAddress: Trade_Currency_MintAddress
+        where: { Transaction: { Result: { Success: true } } }
+      ) {
+        TokenSupplyUpdate {
+          MarketCap: PostBalanceInUSD(maximum: Block_Slot)
+          Supply: PostBalance(maximum: Block_Slot)
+          Currency {
+            Name
+            MintAddress
+            Symbol
+          }
+        }
+      }
     }
   }
 }
+```
 
+```json
+{
+  "time_1h_ago": "2025-07-03T08:05:00Z"
+}
 ```
 
 </details>
@@ -798,7 +928,7 @@ Arranged in the descending order of `sold - bought` on [DEXrabbit](https://dexra
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana).
 
-## Get Top Traded Pairs
+## Get Top Traded Pairs in terms of volume
 
 This query will give you top traded pairs data.
 You can find the query [here](https://ide.bitquery.io/top-trading-pairs)

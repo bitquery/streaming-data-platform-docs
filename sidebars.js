@@ -368,9 +368,9 @@ const sidebars = {
         {
           type: "category",
           label: "Solana",
-          "link": {
-            "type": "doc",
-            "id": "examples/Solana/index"
+          link: {
+            type: "doc",
+            id: "examples/Solana/index",
           },
           items: [
             {
@@ -435,6 +435,7 @@ const sidebars = {
             "examples/Solana/Solana-Phoenix-api",
             "examples/Solana/SolFi-api",
             "examples/Solana/Orbic-API",
+            "examples/Solana/xstocks-api",
             "examples/dextrades/DEXScreener/solana_dexscreener",
             "examples/Solana/ai-agent-solana-data",
           ],
