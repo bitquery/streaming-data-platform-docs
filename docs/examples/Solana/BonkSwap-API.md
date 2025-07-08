@@ -1,8 +1,8 @@
-# Bonk Fun API
+# BonkSwap API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this document, we will explore several examples related to Bonk fun and BonkSwap data.
+In this document, we will explore several examples related to BonkSwap data.
 
 Need zero-latency Bonk fun data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
@@ -14,7 +14,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 
 ## Table of Contents
 
-- [Track Bonk.fun Token Creation](#track-bonkfun-token-creation)
+- [Track BonkSwap Token Creation](#track-bonkfun-token-creation)
 - [BonkSwap Examples](#bonkswap-examples)
   - [Latest Trades on BonkSwap](#latest-trades-on-bonkswap)
   - [Get Top Traders on BonkSwap](#get-top-traders-on-bonkswap)
@@ -23,8 +23,8 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 
 <head>
   <meta name="title" content="Bonk Fun API - Solana - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get on-chain data of any Bonk.fun based token through our Bonk.fun API."/>
-  <meta name="keywords" content="Bonk.fun API,Bonk.fun on-chain data API,Bonk.fun token data API,Bonk.fun blockchain API,Bonk.fun DEX data API,Bonk.fun API documentation,Bonk.fun crypto API,Bonk.fun web3 API,DEX Trades,Solana,Blast,Bonk.fun memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
+  <meta name="description" content="Get on-chain data of any BonkSwap based token through our BonkSwap API."/>
+  <meta name="keywords" content="BonkSwap API,BonkSwap on-chain data API,BonkSwap token data API,BonkSwap blockchain API,BonkSwap DEX data API,BonkSwap API documentation,BonkSwap crypto API,BonkSwap web3 API,DEX Trades,Solana,Blast,BonkSwap memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
   <meta name="robots" content="index, follow"/>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="language" content="English"/>
@@ -36,19 +36,19 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 />
 <meta
   property="og:description"
-  content="Get on-chain data of any Bonk.fun based token through our Bonk.fun API."
+  content="Get on-chain data of any BonkSwap based token through our BonkSwap API."
 />
 
   <meta property="twitter:card" content="summary_large_image"/>
   <meta property="twitter:title" content="Bonk Fun API - Solana - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any Bonk.fun based token through our Bonk.fun API."/>
+  <meta property="twitter:description" content="Get on-chain data of any BonkSwap based token through our BonkSwap API."/>
 </head>
 
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 
-## Track Bonk.fun Token Creation
+## Track BonkSwap Token Creation
 
-Using [this](https://ide.bitquery.io/latest-token-created-on-bonk-fun) query, we can get the most recently created Bonk Fun tokens.
+Using [this](https://ide.bitquery.io/latest-token-created-on-bonk-fun) query, we can get the most recently created BonkSwap tokens.
 
 ```graphql
 {
