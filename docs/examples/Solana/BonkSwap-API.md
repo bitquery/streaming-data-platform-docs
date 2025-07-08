@@ -46,52 +46,6 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 
-## Track BonkSwap Token Creation
-
-Using [this](https://ide.bitquery.io/latest-token-created-on-bonk-fun) query, we can get the most recently created BonkSwap tokens.
-
-```graphql
-{
-  Solana {
-    InstructionBalanceUpdates(
-      where: {
-        BalanceUpdate: { Currency: { MintAddress: { endsWith: "bonk" } } }
-        Instruction: {
-          Program: {
-            Address: { is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj" }
-            Method: { is: "initialize" }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-      orderBy: { descending: Block_Time }
-    ) {
-      BalanceUpdate {
-        Currency {
-          MintAddress
-          Name
-          Symbol
-          Decimals
-          UpdateAuthority
-          Uri
-          VerifiedCollection
-          Wrapped
-          ProgramAddress
-        }
-        PostBalance
-      }
-      Block {
-        Time
-      }
-      Transaction {
-        Signature
-        Signer
-      }
-    }
-  }
-}
-```
-
 ## BonkSwap Examples
 
 ## Latest Trades on BonkSwap

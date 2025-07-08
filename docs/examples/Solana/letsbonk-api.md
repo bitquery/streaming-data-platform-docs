@@ -42,64 +42,47 @@ If you want fastest data without any latency, we can provide Kafka streams, plea
 
 ## Track LetsBonk.fun Token Creation
 
-Using [this](https://ide.bitquery.io/Launchpad-latest-pool-created) query, we can get the most recently created LetsBonk.fun tokens.
+Using [this](https://ide.bitquery.io/latest-token-created-on-bonk-fun) query, we can get the most recently created LetsBonk.fun tokens.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
-  Solana(network: solana, dataset: realtime) {
-    Instructions(
+  Solana {
+    InstructionBalanceUpdates(
       where: {
+        BalanceUpdate: { Currency: { MintAddress: { endsWith: "bonk" } } }
         Instruction: {
           Program: {
             Address: { is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj" }
-            Method: { is: "PoolCreateEvent" }
+            Method: { is: "initialize" }
           }
         }
+        Transaction: { Result: { Success: true } }
       }
       orderBy: { descending: Block_Time }
     ) {
-      Instruction {
-        Accounts {
-          Address
-        }
-        Program {
+      BalanceUpdate {
+        Currency {
+          MintAddress
           Name
-          Method
-          AccountNames
-          Arguments {
-            Name
-            Type
-            Value {
-              ... on Solana_ABI_Integer_Value_Arg {
-                integer
-              }
-              ... on Solana_ABI_String_Value_Arg {
-                string
-              }
-              ... on Solana_ABI_Address_Value_Arg {
-                address
-              }
-              ... on Solana_ABI_BigInt_Value_Arg {
-                bigInteger
-              }
-              ... on Solana_ABI_Bytes_Value_Arg {
-                hex
-              }
-              ... on Solana_ABI_Boolean_Value_Arg {
-                bool
-              }
-              ... on Solana_ABI_Float_Value_Arg {
-                float
-              }
-              ... on Solana_ABI_Json_Value_Arg {
-                json
-              }
-            }
-          }
+          Symbol
+          Decimals
+          UpdateAuthority
+          Uri
+          VerifiedCollection
+          Wrapped
+          ProgramAddress
         }
+        PostBalance
+      }
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+        Signer
       }
     }
   }
