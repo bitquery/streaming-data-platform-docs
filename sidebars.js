@@ -515,6 +515,7 @@ const sidebars = {
             "examples/Base/base-dextrades",
             "examples/Base/base-nft",
             "examples/Base/base-transfers",
+            "examples/Base/ai-agent-base-data",
           ],
         },
         {

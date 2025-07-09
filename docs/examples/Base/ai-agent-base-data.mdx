@@ -1,0 +1,401 @@
+# Build AI Trading Agents with Bitquery Base Chain Data
+
+In this section, we will explore how to use Bitquery APIs and real-time streams to build AI-enabled trading agents for the Base blockchain.
+
+## Your AI Trading Agent's Mission:
+
+You are a specialized trading agent operating on the Base blockchain, you will optimize an existing portfolio by analyzing and trading trending tokens using Bitquery data. Your primary goal is to identify profitable tokens in the Base ecosystem, assess wallet balances, and execute calculated swap decisions to enhance portfolio value.
+
+```python
+prompt = (
+   f"Analyze the following Base chain token:\n"
+   f"Name: {token_data['name']}\n"
+   f"Symbol: {token_data['symbol']}\n"
+   f"Market Cap: {token_data['market_cap']}\n"
+   f"Liquidity (USD): {token_data['liquidity_usd']}\n"
+   f"Volatility: {token_data['volatility']}\n"
+   f"Top Holder Concentration (%): {token_data['holder_concentration']}\n"
+   f"Current Price: {token_data['current_price']}\n"
+   f"Trading Volume (24h): {token_data['trading_volume']}\n"
+   "\nBased on this data and Base ecosystem considerations, decide whether to 'Buy', 'Sell', 'Hold', or 'Avoid'. Only reply with one word: Buy, Sell, Hold, or Avoid."
+)
+```
+
+## Trading Decision Process
+
+This is a rough draft of what an AI agent can do using Base chain on-chain and off-chain data:
+
+- Use trending data to identify promising Base tokens with potential profit.
+- For each trending token, retrieve detailed information to evaluate its market cap, liquidity, volatility, and security.
+- Check the wallet balance to understand the available assets and decide on a safe percentage to invest.
+- Execute swaps to acquire trending tokens on Base DEXs (Uniswap V3, PancakeSwap), ensuring the chosen amount.
+- Continuously monitor token performance and adjust holdings to maximize profits. For this you can use Bitquery Real-time Streams to monitor Base token prices, new token creation and other activities with sub-second latency.
+
+## Code Structure and Logic: A Good Starting Point
+
+Your code sets up a flexible AI trading agent framework for Base chain, handling:
+
+- **backtesting**: historical simulation on Base chain data.
+- **live mode**: real-time trading/decision making on Base DEXs
+- **Integration with Claude AI** to guide trading decisions based on Base chain fundamentals
+- **Base ecosystem analysis** where the AI agent makes data-driven trading decisions using Bitquery Base data.
+
+Below is a sample project structure:
+
+```
+base_ai_trading_agent/
+├── base_main.py           # Entry point for Base agent
+├── base_bitquery_utils.py # Bitquery API functions for Base
+├── ai_decision.py         # Claude AI logic for trade decisions
+├── base_config.py         # Base chain configuration
+├── .env                   # Store API keys securely
+└── requirements.txt       # Python dependencies
+```
+
+## Video Tutorial
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+<VideoPlayer url="https://youtu.be/ZIKi8jCrhvA" />
+
+## How to Run the Base Chain AI Agent
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Akshat-cs/Base-onchain-aiagent
+cd Base-onchain-aiagent
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Environment Setup
+
+Create a `.env` file in the project root:
+
+```bash
+# Required API Keys
+CLAUDE_API_KEY=your_claude_api_key
+BITQUERY_TOKEN=your-bitquery-token-here
+WALLET_ADDRESS=your-wallet-address
+```
+
+### 4. Run the Trading Agent
+
+```bash
+python base_main.py
+```
+
+## Key Bitquery Streams and Queries for Base Trading Agents
+
+### 1. Top Trending Tokens on Base
+
+Detect Base tokens with rising popularity and trader activity.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query TrendingBaseTokens {
+  EVM(network: base, dataset: realtime) {
+    DEXTradeByTokens(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "buyers" }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: {
+              notIn: [
+                "0x4200000000000000000000000000000000000006"
+                "0x0000000000000000000000000000000000000000"
+              ]
+            }
+          }
+        }
+        Block: { Time: { since: "2024-12-01T00:00:00Z" } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+      buyers: uniq(of: Trade_Buyer)
+      sellers: uniq(of: Trade_Seller)
+      trades: count
+      volume: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+```
+
+</details>
+
+### 2. Token Volatility Analysis on Base
+
+Evaluate price stability and trading patterns for Base tokens.
+
+<details>
+    <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query BaseTokenVolatility($tokenAddress: String!) {
+  EVM(network: base, dataset: realtime) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: $tokenAddress } }
+          Side: {
+            Currency: {
+              SmartContract: {
+                is: "0x4200000000000000000000000000000000000006"
+              }
+            }
+            AmountInUSD: { gt: "100" }
+          }
+        }
+      }
+    ) {
+      volatility: standard_deviation(of: Trade_PriceInUSD)
+      avg_price: average(of: Trade_PriceInUSD)
+      Trade {
+        max_price: PriceInUSD(maximum: Trade_PriceInUSD)
+        min_price: PriceInUSD(minimum: Trade_PriceInUSD)
+      }
+    }
+  }
+}
+```
+
+</details>
+
+**Use**: Assess price stability before entering positions on Base tokens.
+
+### 3. Market Cap of a Base Token
+
+You can fetch Market Cap of a Base token using the below query.
+
+<details>
+    <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query BaseTokenMarketCap($tokenAddress: String!) {
+  EVM(network: base, dataset: realtime) {
+    DEXTradeByTokens(
+      where: { Trade: { Currency: { SmartContract: { is: $tokenAddress } } } }
+      orderBy: { descending: Block_Time }
+      limit: { count: 1 }
+    ) {
+      Trade {
+        PriceInUSD
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+**Use**: Focus on Base tokens with strong liquidity to ensure reliable entry and exit points.
+
+### 4. Base Token Supply Analysis (also helps in calculation of marketcap)
+
+Get comprehensive supply metrics for Base tokens.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query BaseTokenSupply($tokenAddress: String!) {
+  EVM(network: base, dataset: combined) {
+    Transfers(
+      where: {
+        Transfer: {
+          Currency: { SmartContract: { is: $tokenAddress } }
+          Success: true
+        }
+      }
+    ) {
+      minted: sum(
+        of: Transfer_Amount
+        if: {
+          Transfer: {
+            Sender: { is: "0x0000000000000000000000000000000000000000" }
+          }
+        }
+      )
+      burned: sum(
+        of: Transfer_Amount
+        if: {
+          Transfer: {
+            Receiver: { is: "0x0000000000000000000000000000000000000000" }
+          }
+        }
+      )
+    }
+  }
+}
+```
+
+</details>
+
+**Use**: Calculate circulating supply and assess tokenomics for Base tokens.
+
+### 5. Base Token Holders Distribution (Security Check)
+
+Check token decentralization on Base to avoid risky, whale-dominated assets.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query BaseTokenHolders($tokenAddress: String!) {
+  EVM(network: base, dataset: combined, aggregates: yes) {
+    BalanceUpdates(
+      orderBy: { descendingByField: "balance" }
+      limit: { count: 50 }
+      where: { Currency: { SmartContract: { is: $tokenAddress } } }
+    ) {
+      BalanceUpdate {
+        Address
+      }
+      Currency {
+        Name
+        Symbol
+        SmartContract
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
+    }
+  }
+}
+```
+
+</details>
+
+**Use**: Avoid Base tokens with highly concentrated ownership that may be vulnerable to manipulation.
+
+### 6. Base Wallet Balances Monitoring
+
+Review current portfolio composition on Base before making swaps.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query BaseWalletBalances($walletAddress: String!) {
+  EVM(network: base, dataset: combined, aggregates: yes) {
+    BalanceUpdates(
+      where: { BalanceUpdate: { Address: { is: $walletAddress } } }
+      orderBy: { descendingByField: "balance" }
+    ) {
+      BalanceUpdate {
+        Address
+      }
+      Currency {
+        Name
+        Symbol
+        SmartContract
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
+    }
+  }
+}
+```
+
+</details>
+
+**Use**: Determine available Base assets and calculate safe investment amounts for token swaps.
+
+### 7. Base DEX Trade Streams for Real-Time Trades
+
+Subscribe to continuous streams of Base DEX trades for live market intelligence.
+
+<details>
+  <summary>Click to expand GraphQL Stream</summary>
+
+```graphql
+subscription BaseTradesStream {
+  EVM(network: base) {
+    DEXTrades {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          PriceInUSD
+          Currency {
+            Symbol
+            SmartContract
+          }
+          Buyer
+        }
+        Sell {
+          Amount
+          PriceInUSD
+          Currency {
+            Symbol
+            SmartContract
+          }
+          Seller
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+**Use**: React instantly to time-sensitive trades on Base DEXs.
+
+## Calculating Trading Indicators for Base
+
+You can calculate SMA, EMA, RSI etc with Bitquery Base data.
+
+Your AI Agent can reconstruct Base token price charts and calculate:
+
+- **SMA 50**: Simple Moving Average over last 50 data points
+- **SMA 200**: Simple Moving Average over last 200 data points
+
+**Detect crossovers**:
+
+- SMA 50 crosses above SMA 200 → Consider Buy
+- SMA 50 crosses below SMA 200 → Consider Sell
+
+This logic can be integrated into the AI Trading Loop along with the Base on-chain analysis.
+
+## Building the Base AI Trading Loop
+
+Your Base AI Trading Agent combines the above streams as follows:
+
+1. **Fetch Top Trending Base Tokens** to shortlist candidates
+2. **For each token**:
+
+- Analyze Liquidity, Volatility, and Holders Distribution
+- Check Supply metrics and tokenomics
+- Evaluate Base ecosystem fit
+
+3. **Check Base Wallet Balances** to calculate possible investment amount
+4. **Use Real-Time Base Trade Streams** to time the market entry
+5. **Execute Swaps** on Base DEXs for high-potential tokens (not implemented, you can implement this)
+6. **Continuously monitor** Base market data and adjust holdings as needed
