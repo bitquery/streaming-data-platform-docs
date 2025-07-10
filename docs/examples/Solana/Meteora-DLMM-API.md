@@ -1,11 +1,11 @@
-# Meteora DLMM API
+# Meteora API - DLMM
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <head>
-  <meta name="title" content="Meteora DLMM API - Solana - Real-time Pools, Trades, Prices, OHLC" />
+  <meta name="title" content="Meteora API - DLMM - Solana - Real-time Pools, Trades, Prices, OHLC" />
   <meta name="description" content="Access real-time and historical data for Meteora DLMM on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders." />
-  <meta name="keywords" content="Meteora DLMM,Solana DEX,Meteora API,Solana on-chain API,real-time Solana trades,Meteora pool data,Solana token prices,OHLC data Solana,DEX trading API,crypto trading API,web3 Solana API,Bitquery GraphQL,Meteora v2 API,Solana blockchain data" />
+  <meta name="keywords" content="Meteora API DLMM,Solana DEX,Meteora API,Solana on-chain API,real-time Solana trades,Meteora pool data,Solana token prices,OHLC data Solana,DEX trading API,crypto trading API,web3 Solana API,Bitquery GraphQL,Meteora v2 API,Solana blockchain data" />
   <meta name="robots" content="index, follow" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="language" content="English" />
@@ -13,13 +13,13 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Meteora DLMM API - Solana - Real-time Pools, Trades, Prices, OHLC"
+  content="Meteora API - DLMM - Solana - Real-time Pools, Trades, Prices, OHLC"
 />
 <meta property="og:description" content="Explore real-time DEX trades, latest pool creations, token prices, OHLC, and volume insights on Meteora DLMM using our Solana API." />
 
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="Meteora DLMM API - Solana - Real-time Pools, Trades, Prices, OHLC" />
-  <meta property="twitter:description" content="Get rich on-chain insights into Meteora DLMM pools, trades, and tokens with our real-time Solana API." />
+  <meta property="twitter:title" content="Meteora API - DLMM - Solana - Real-time Pools, Trades, Prices, OHLC" />
+  <meta property="twitter:description" content="Get rich on-chain insights into Meteora DLMM pools, trades, and tokens with our real-time Solana Meteora API ." />
 </head>
 
 ## Track Latest created pools on Meteora DLMM
