@@ -2,7 +2,8 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this document, we will explore several examples related to LetsBonk.fun.
+In this document, we will explore several examples related to LetsBonk.fun. You can also check out our [Pump Fun API Docs](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/) and [FourMeme API Docs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/).
+
 :::note
 **LetsBonk.fun tokens are created and traded on Raydium Launchlab.**
 :::
@@ -83,6 +84,166 @@ Using [this](https://ide.bitquery.io/latest-token-created-on-bonk-fun) query, we
       Transaction {
         Signature
         Signer
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Bonding Curve Progress API for LetsBonk.fun token
+
+Below query will give you amount of `left tokens` put it in the below given simplied formulae and you will get Bonding Curve progress for the token.
+
+### Bonding Curve Progress Formula
+
+- **Formula**:
+  BondingCurveProgress = 100 - ((leftTokens \* 100) / initialRealTokenReserves)
+
+Where:
+
+- leftTokens = realTokenReserves - reservedTokens
+- initialRealTokenReserves = totalSupply - reservedTokens
+
+- **Definitions**:
+  - `initialRealTokenReserves` = `totalSupply` - `reservedTokens`
+    - `totalSupply`: 1,000,000,000 (LetsBonk.fun Token)
+    - `reservedTokens`: 206,900,000
+    - Therefore, `initialRealTokenReserves`: 793,100,000
+  - `leftTokens` = `realTokenReserves` - `reservedTokens`
+    - `realTokenReserves`: Token balance at the market address.
+
+:::note
+**Simplified Formula**:
+BondingCurveProgress = 100 - (((balance - 206900000) \* 100) / 793100000)
+:::
+
+### Additional Notes
+
+- **Balance Retrieval**:
+  - The `balance` is the token balance at the market address.
+  - Use this query to fetch the balance: [Query Link](https://ide.bitquery.io/Get-balance-of-a-pair-address-on-solana_2).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query GetLatestLiquidityForPool {
+  Solana {
+    DEXPools(
+      where: {
+        Pool: {
+          Market: {
+            BaseCurrency: {
+              MintAddress: {
+                is: "6L44XFFqEuRA67vfzmCooACN97eDk57Ab8ycwrZJbonk"
+              }
+            }
+          }
+          Dex: {
+            ProgramAddress: {
+              is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"
+            }
+          }
+        }
+      }
+      orderBy: { descending: Block_Slot }
+      limit: { count: 1 }
+    ) {
+      Pool {
+        Market {
+          MarketAddress
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+        }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+        Base {
+          PostAmount
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Track LetsBonk.fun Tokens above 95% Bonding Curve Progress
+
+We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription MyQuery {
+  Solana {
+    DEXPools(
+      where: {
+        Pool: {
+          Base: { PostAmount: { gt: "206900000", lt: "246555000" } }
+          Dex: {
+            ProgramAddress: {
+              is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"
+            }
+          }
+          Market: {
+            QuoteCurrency: {
+              MintAddress: {
+                in: [
+                  "11111111111111111111111111111111"
+                  "So11111111111111111111111111111111111111112"
+                ]
+              }
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Pool {
+        Market {
+          BaseCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+          MarketAddress
+          QuoteCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Base {
+          PostAmount
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
       }
     }
   }

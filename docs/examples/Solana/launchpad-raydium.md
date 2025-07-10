@@ -197,6 +197,166 @@ subscription MyQuery {
 
 </details>
 
+## Bonding Curve Progress API for Raydium Launchpad token
+
+Below query will give you amount of `left tokens` put it in the below given simplied formulae and you will get Bonding Curve progress for the token.
+
+### Bonding Curve Progress Formula
+
+- **Formula**:
+  BondingCurveProgress = 100 - ((leftTokens \* 100) / initialRealTokenReserves)
+
+Where:
+
+- leftTokens = realTokenReserves - reservedTokens
+- initialRealTokenReserves = totalSupply - reservedTokens
+
+- **Definitions**:
+  - `initialRealTokenReserves` = `totalSupply` - `reservedTokens`
+    - `totalSupply`: 1,000,000,000 (Raydium Launchpad Token)
+    - `reservedTokens`: 206,900,000
+    - Therefore, `initialRealTokenReserves`: 793,100,000
+  - `leftTokens` = `realTokenReserves` - `reservedTokens`
+    - `realTokenReserves`: Token balance at the market address.
+
+:::note
+**Simplified Formula**:
+BondingCurveProgress = 100 - (((balance - 206900000) \* 100) / 793100000)
+:::
+
+### Additional Notes
+
+- **Balance Retrieval**:
+  - The `balance` is the token balance at the market address.
+  - Use this query to fetch the balance: [Query Link](https://ide.bitquery.io/Get-balance-of-a-pair-address-on-solana_2).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query GetLatestLiquidityForPool {
+  Solana {
+    DEXPools(
+      where: {
+        Pool: {
+          Market: {
+            BaseCurrency: {
+              MintAddress: {
+                is: "6L44XFFqEuRA67vfzmCooACN97eDk57Ab8ycwrZJbonk"
+              }
+            }
+          }
+          Dex: {
+            ProgramAddress: {
+              is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"
+            }
+          }
+        }
+      }
+      orderBy: { descending: Block_Slot }
+      limit: { count: 1 }
+    ) {
+      Pool {
+        Market {
+          MarketAddress
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+        }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+        Base {
+          PostAmount
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Track Raydium Launchpad Tokens above 95% Bonding Curve Progress
+
+We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/raydium-launchpad-Tokens-between-95-and-100-bonding-curve-progress).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription MyQuery {
+  Solana {
+    DEXPools(
+      where: {
+        Pool: {
+          Base: { PostAmount: { gt: "206900000", lt: "246555000" } }
+          Dex: {
+            ProgramAddress: {
+              is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"
+            }
+          }
+          Market: {
+            QuoteCurrency: {
+              MintAddress: {
+                in: [
+                  "11111111111111111111111111111111"
+                  "So11111111111111111111111111111111111111112"
+                ]
+              }
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Pool {
+        Market {
+          BaseCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+          MarketAddress
+          QuoteCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Base {
+          PostAmount
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Latest Trades on Launchpad
 
 This query fetches the most recent trades on the Raydium Launchpad.
