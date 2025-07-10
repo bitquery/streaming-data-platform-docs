@@ -1,6 +1,6 @@
 # BonkSwap API
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
+
 
 In this document, we will explore several examples related to BonkSwap data.
 
@@ -11,6 +11,8 @@ To query or stream data via graphQL **outside the Bitquery IDE**, you need to ge
 
 Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Table of Contents
 

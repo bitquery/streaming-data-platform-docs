@@ -1,24 +1,47 @@
 # Meteora Dynamic Bonding Curve API
 
+In this section we will see some API examples on tracking tokens on Meteora's dynamic bonding curve.
+
+:::note
+To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
+
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+:::
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <head>
-  <meta name="title" content="Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume" />
-  <meta name="description" content="Get real-time and historical on-chain data for Meteora's Dynamic Bonding Curve (DBC) on Solana using Bitquery's GraphQL API. Track trades, pools, token prices, OHLC, migrations, and top traders with developer-ready queries." />
-  <meta name="keywords" content="Meteora DBC API,Meteora Dynamic Bonding Curve API,Solana DEX API, real-time Solana trades, Meteora pool data, DBC token migration, OHLC Solana,Solana token prices, Solana GraphQL API, Bitquery Solana API, web3 DEX analytics, on-chain trading data, crypto API" />
-  <meta name="robots" content="index, follow" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="language" content="English" />
+  <meta name="robots" content="index, follow" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume" />
-  <meta property="og:description" content="Explore token price movements, pool creation, DEX trade flows, and volume metrics on Meteora DBC using our Solana GraphQL API." />
+<title>Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume</title>
+<meta
+  name="title"
+  content="Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume"
+/>
+<meta
+  name="description"
+  content="Get real-time and historical on-chain data for Meteora's Dynamic Bonding Curve (DBC) on Solana using Bitquery's GraphQL API. Track trades, pools, token prices, OHLC data, migrations, and top traders with developer-ready queries."
+/>
+<meta
+  name="keywords"
+  content="Meteora DBC API, Dynamic Bonding Curve, Solana DEX API, real-time Solana trades, Meteora pools, DBC migration, OHLC Solana, token prices, Solana GraphQL, Bitquery API, Web3 analytics, crypto trading data"
+/>
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume" />
-  <meta property="twitter:description" content="Monitor token migrations, trades, and volumes on Meteora DBC with developer-friendly Solana APIs by Bitquery." />
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume"
+/>
+<meta
+  property="og:description"
+  content="Explore token price movements, pool creation, DEX trade flows, and volume metrics on Meteora DBC using our Solana GraphQL API."
+/>
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume" />
+  <meta name="twitter:description" content="Monitor token migrations, trades, and volumes on Meteora DBC with developer-friendly Solana APIs by Bitquery." />
 </head>
 
 ## Meteora DBC Trades in Real-Time
