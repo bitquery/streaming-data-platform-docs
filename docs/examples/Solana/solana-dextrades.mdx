@@ -818,6 +818,48 @@ You can use the below query to get any token's creation time. Note that we are p
 
 </details>
 
+## Get Volume changes for trading pairs in last 2mins
+
+You can use the below stream to get the volume changes in last 2 minutes. Try the query on ide [here](https://ide.bitquery.io/volume-change-in-last-2-minutes)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+{
+  Solana(dataset: realtime) {
+    DEXTradeByTokens(
+      limitBy: {by: Trade_Market_MarketAddress, count: 2}
+      orderBy: [{descending:Trade_Market_MarketAddress} {descendingByField: "Block_Time"} ]
+      where: {Trade: {Side: {Currency: {MintAddress:
+        {in: ["11111111111111111111111111111111",
+          "So11111111111111111111111111111111111111112",
+          "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+          "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+          "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+          "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"]}}}}, Block: {Time: {since: "2025-07-08T09:38:52.000Z"}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Block {
+        Time(interval: {count: 2, in: minutes})
+      }
+      Trade {
+        Currency {
+          MintAddress
+          Symbol
+          Name
+        }
+        Market {
+          MarketAddress
+        }
+      }
+      volume: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+```
+
+</details>
+
 ## Get Solana Price in Realtime
 
 You can use the below stream to get the Solana price. Try the query on ide [here](https://ide.bitquery.io/solana-price-stream)
