@@ -185,7 +185,7 @@ query GetLatestLiquidityForPool {
 
 </details>
 
-## Track LetsBonk.fun Tokens above 95% Bonding Curve Progress
+## Track LetsBonk.fun Tokens above 95% Bonding Curve Progress in realtime
 
 We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_1).
 
@@ -238,6 +238,77 @@ subscription MyQuery {
         }
         Base {
           PostAmount
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Top 100 About to Graduate LetsBonk.fun Tokens
+
+We can use below query to get top 100 About to Graduate LetsBonk.fun Tokens. You can run and test the saved query [here](https://ide.bitquery.io/Top-100-graduating-tokens-in-last-5-minutes_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Solana {
+    DEXPools(
+      limitBy: { by: Pool_Market_BaseCurrency_MintAddress, count: 1 }
+      limit: { count: 100 }
+      orderBy: { ascending: Pool_Base_PostAmount }
+      where: {
+        Pool: {
+          Base: { PostAmount: { gt: "206900000" } }
+          Dex: {
+            ProgramAddress: {
+              is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"
+            }
+          }
+          Market: {
+            QuoteCurrency: {
+              MintAddress: {
+                in: [
+                  "11111111111111111111111111111111"
+                  "So11111111111111111111111111111111111111112"
+                ]
+              }
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since: "2025-07-11T13:45:00Z" } }
+      }
+    ) {
+      Pool {
+        Market {
+          BaseCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+          MarketAddress
+          QuoteCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Base {
+          PostAmount(maximum: Block_Time)
         }
         Quote {
           PostAmount
