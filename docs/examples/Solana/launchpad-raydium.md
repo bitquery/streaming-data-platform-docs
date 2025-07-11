@@ -357,6 +357,77 @@ subscription MyQuery {
 
 </details>
 
+## Top 100 About to Graduate Raydium Launchpad Tokens
+
+We can use below query to get top 100 About to Graduate Raydium Launchpad Tokens. You can run and test the saved query [here](https://ide.bitquery.io/Top-100-graduating-tokens-in-last-5-minutes_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Solana {
+    DEXPools(
+      limitBy: { by: Pool_Market_BaseCurrency_MintAddress, count: 1 }
+      limit: { count: 100 }
+      orderBy: { ascending: Pool_Base_PostAmount }
+      where: {
+        Pool: {
+          Base: { PostAmount: { gt: "206900000" } }
+          Dex: {
+            ProgramAddress: {
+              is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"
+            }
+          }
+          Market: {
+            QuoteCurrency: {
+              MintAddress: {
+                in: [
+                  "11111111111111111111111111111111"
+                  "So11111111111111111111111111111111111111112"
+                ]
+              }
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since: "2025-07-11T13:45:00Z" } }
+      }
+    ) {
+      Pool {
+        Market {
+          BaseCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+          MarketAddress
+          QuoteCurrency {
+            MintAddress
+            Name
+            Symbol
+          }
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Base {
+          PostAmount(maximum: Block_Time)
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Latest Trades on Launchpad
 
 This query fetches the most recent trades on the Raydium Launchpad.
