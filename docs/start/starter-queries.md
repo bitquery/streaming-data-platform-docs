@@ -202,15 +202,54 @@ This subscription query returns the latest PumpFun trades in real time.
 
 ## Raydium API
 
-### Latest Trades on Launchpad
+### Latest Pools Created on Raydium
 
-This query returns the 50 most recent trades on the Raydium launchpad. You can increase the limit to get more trades.  
-▶️ [Launchpad Trades](https://ide.bitquery.io/Latest-Trades-on-Launchpad)
+This query returns the latest created pools on Raydium. You can set the limit here also.  
+▶️ [Raydium Latest Created Pools](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_1)
 
-### Latest Price of a Token on Raydium
+### Latest Trades for a specific currency on Raydium
 
-This query returns the latest price of a token when traded against another token on the Raydium launchpad.  
-▶️ [Live Token Price](https://ide.bitquery.io/live-price-of-token-on-raydium---updated)
+This query returns the latest created pools on Raydium. You can set the limit here also.
+▶️ [Latest trades of a token on Raydium](https://ide.bitquery.io/Latest-buy-and-sell-of-specific-currency-on-Raydium-DEX-on-Solana)
+
+## Raydium Launchpad API
+
+### Latest Pools Created on Launchpad
+
+This query returns the latest created pools on Raydium launchpad. You can set the limit here also.  
+▶️ [Launchpad Latest Created Pools](https://ide.bitquery.io/Launchpad-latest-pool-created)
+
+### Latest Price of a Token on Raydium Launchpad
+
+This query returns the latest price of a token on the Raydium launchpad.  
+▶️ [Latest Token Price on Launchpad](https://ide.bitquery.io/Latest-Price-of-a-Token-on-Launchpad)
+
+### Graduating Tokens on Raydium Launchpad
+
+This query gives you tokens which are about to graduate on Raydium Launchpad. We essentially get this data by getting tokens which are between 95% to 100% bonding curve progress.
+▶️ [About to graduate tokens on Launchpad](https://ide.bitquery.io/Latest-Price-of-a-Token-on-Launchpad)
+
+### Graduated Tokens
+
+This query gives you tokens which are graduated from Raydium Launchpad to Raydium.
+▶️ [Graduated Tokens from Launchpad](https://ide.bitquery.io/Track-Token-Migrations-to-Raydium-DEX-and-Raydium-CPMM-in-realtime)
+
+## LetsBonk.fun API
+
+### Latest Price of a LetsBonk.fun
+
+This query returns the latest price of a LetsBonk.fun token.  
+▶️ [Latest LetsBonk.fun Token Price](https://ide.bitquery.io/Latest-Price-of-a-LetsBonkfun-Token-on-Launchpad?)
+
+### Graduating LetsBonk.fun Tokens
+
+This query gives you LetsBonk.fun tokens which are about to graduate. We essentially get this data by getting tokens which are between 95% to 100% bonding curve progress.
+▶️ [About to graduate LetsBonk.fun tokens](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_1)
+
+### Graduated Tokens
+
+This query gives you LetsBonk.fun tokens which are graduated from Raydium Launchpad to Raydium.
+▶️ [Graduated LetsBonk.fun Tokens](https://ide.bitquery.io/Track-Token-Migrations-to-Raydium-DEX-and-Raydium-CPMM-in-realtime)
 
 ## EVM Token Holder API
 

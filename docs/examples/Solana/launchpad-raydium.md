@@ -2,7 +2,7 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this section we see how to get data on Launchpad by Raydium. This includes token creation, latest trades by trader, for a token etc.
+In this section we see how to get data on Launchpad by Raydium. This includes token creation, latest trades by trader, for a token etc. You can also check out our [Pump Fun API Docs](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/) and [LetsBonk.fun API Docs](https://docs.bitquery.io/docs/examples/Solana/letsbonk-api/).
 
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
 

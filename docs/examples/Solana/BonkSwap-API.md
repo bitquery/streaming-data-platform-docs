@@ -4,7 +4,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 In this document, we will explore several examples related to BonkSwap data.
 
-Need zero-latency Bonk fun data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+Need zero-latency BonkSwap data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
@@ -22,7 +22,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
   - [OHLC of a token on BonkSwap](#get-ohlc-for-a-bonkswap-token)
 
 <head>
-  <meta name="title" content="Bonk Fun API - Solana - Tokens, Trades, Live Prices"/>
+  <meta name="title" content="BonkSwap API - Solana - Tokens, Trades, Live Prices"/>
   <meta name="description" content="Get on-chain data of any BonkSwap based token through our BonkSwap API."/>
   <meta name="keywords" content="BonkSwap API,BonkSwap on-chain data API,BonkSwap token data API,BonkSwap blockchain API,BonkSwap DEX data API,BonkSwap API documentation,BonkSwap crypto API,BonkSwap web3 API,DEX Trades,Solana,Blast,BonkSwap memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
   <meta name="robots" content="index, follow"/>
@@ -32,7 +32,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Bonk Fun API - Solana - Tokens, Trades, Live Prices"
+  content="BonkSwap API - Solana - Tokens, Trades, Live Prices"
 />
 <meta
   property="og:description"
@@ -40,7 +40,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 />
 
   <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Bonk Fun API - Solana - Tokens, Trades, Live Prices"/>
+  <meta property="twitter:title" content="BonkSwap API - Solana - Tokens, Trades, Live Prices"/>
   <meta property="twitter:description" content="Get on-chain data of any BonkSwap based token through our BonkSwap API."/>
 </head>
 
