@@ -232,7 +232,11 @@ const config = {
           {
             to: '/docs/examples/Solana/', // new target
             from: '/docs/category/solana/' // old category URL
-          }
+          },
+          {
+            to: "/docs/examples/Solana/letsbonk-api/",
+            from: "/docs/examples/Solana/Bonk-Fun-API/",
+          },
         ],
       },
     ],

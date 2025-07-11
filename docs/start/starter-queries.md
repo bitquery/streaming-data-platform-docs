@@ -333,7 +333,7 @@ This query returns event info and logs for the Ethereum network. It includes arg
 ### Ethereum Calls
 
 Every interaction with any EVM network, from contract creation to fund transfer, is denoted by a call. This query returns the call data for the Ethereum network.  
-▶️ [Ethereum Calls](https://ide.bitquery.io/Ethereum-calls-query)
+▶️ [Ethereum Calls](https://ide.bitquery.io/Ethereum-calls-query_1)
 
 ### Ethereum Miner Rewards
 
