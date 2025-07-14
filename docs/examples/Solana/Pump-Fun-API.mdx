@@ -8,6 +8,7 @@ Need zero-latency Pumpfun data? [Read about our Shred Streams and Contact us for
 
 You may also be interested in:
 
+- [LetsBonk.fun APIs ➤](https://docs.bitquery.io/docs/examples/Solana/letsbonk-api/)
 - [PumpSwap APIs ➤](https://docs.bitquery.io/docs/examples/Solana/pump-swap-api/)
 - [Moonshot APIs ➤](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/)
 - [FourMeme APIs ➤](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/)
@@ -168,11 +169,7 @@ query MyQuery {
     Instructions(
       where: {
         Instruction: {
-          Accounts: {
-            includes: {
-              Address: { is: "token mint address" }
-            }
-          }
+          Accounts: { includes: { Address: { is: "token mint address" } } }
           Program: { Name: { is: "pump" }, Method: { is: "create" } }
         }
       }
@@ -397,9 +394,7 @@ query MyQuery {
               is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
             }
           }
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
         }
         Transaction: { Result: { Success: true } }
       }
@@ -561,11 +556,7 @@ Returns all-time-high price in SOL (marketcap = price \* 1B tokens)
   Solana {
     DEXTradeByTokens(
       where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
-        }
+        Trade: { Currency: { MintAddress: { is: "token mint address" } } }
       }
       limit: { count: 1 }
       orderBy: { descending: Trade_Price }
@@ -593,11 +584,7 @@ Same as above but within a given window
   Solana {
     DEXTradeByTokens(
       where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
-        }
+        Trade: { Currency: { MintAddress: { is: "token mint address" } } }
         Block: { Time: { till: "2025-06-03T06:37:00Z" } }
       }
       limit: { count: 1 }
@@ -794,9 +781,7 @@ query MyQuery {
     DEXTradeByTokens(
       where: {
         Trade: {
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
           Dex: { ProtocolName: { is: "pump" } }
         }
         Block: { Time: { since: "2024-06-27T06:46:00Z" } }
@@ -926,9 +911,7 @@ query MyQuery {
               }
             }
           }
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
         }
       }
     ) {
@@ -962,11 +945,7 @@ Lists all markets where the token is traded, including pair addresses
   Solana {
     DEXTradeByTokens(
       where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
-        }
+        Trade: { Currency: { MintAddress: { is: "token mint address" } } }
       }
     ) {
       count
@@ -1265,9 +1244,7 @@ query MyQuery {
       orderBy: { descendingByField: "BalanceUpdate_Holding_maximum" }
       where: {
         BalanceUpdate: {
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
         }
         Transaction: { Result: { Success: true } }
       }

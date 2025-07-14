@@ -11,37 +11,23 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="language" content="English" />
+  <meta name="title" content="Meteora DBC API - Solana - Real-time Pools, Trades, Prices, OHLC" />
+  <meta name="description" content="Access real-time and historical data for Meteora DBC on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders." />
+  <meta name="keywords" content="Meteora DBC,Meteora Dynamic Bonding Curve API,Dynamic Bonding Curve,Solana DEX,Meteora API,Solana on-chain API,real-time Solana trades,Meteora pool data,Solana token prices,OHLC data Solana,DEX trading API,crypto trading API,web3 Solana API,Bitquery GraphQL,Meteora v2 API,Solana blockchain data" />
   <meta name="robots" content="index, follow" />
-
-<title>Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume</title>
-<meta
-  name="title"
-  content="Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume"
-/>
-<meta
-  name="description"
-  content="Get real-time and historical on-chain data for Meteora's Dynamic Bonding Curve (DBC) on Solana using Bitquery's GraphQL API. Track trades, pools, token prices, OHLC data, migrations, and top traders with developer-ready queries."
-/>
-<meta
-  name="keywords"
-  content="Meteora DBC API, Dynamic Bonding Curve, Solana DEX API, real-time Solana trades, Meteora pools, DBC migration, OHLC Solana, token prices, Solana GraphQL, Bitquery API, Web3 analytics, crypto trading data"
-/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="language" content="English" />
 
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume"
+  content="Meteora DBC API - Solana - Real-time Pools, Trades, Prices, OHLC"
 />
-<meta
-  property="og:description"
-  content="Explore token price movements, pool creation, DEX trade flows, and volume metrics on Meteora DBC using our Solana GraphQL API."
-/>
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Meteora DBC API - Real-time Solana Trades, Pools, Prices & Volume" />
-  <meta name="twitter:description" content="Monitor token migrations, trades, and volumes on Meteora DBC with developer-friendly Solana APIs by Bitquery." />
+<meta property="og:description" content="Explore real-time DEX trades, latest pool creations, token prices, OHLC, and volume insights on Meteora DBC using our Solana API." />
+
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="Meteora DBC API - Solana - Real-time Pools, Trades, Prices, OHLC" />
+  <meta property="twitter:description" content="Get rich on-chain insights into Meteora DBC pools, trades, and tokens with our real-time Solana API." />
 </head>
 
 ## Meteora DBC Trades in Real-Time
@@ -337,7 +323,7 @@ query MyQuery($tokenAddresses: [String!]) {
   }
 }
 {
-  "tokenAddresses":["3EX4yHYs25RXaNMBgaNtpGxPKvX73P9QWVw8fpNEhnow","2bzXpTCu3faGocjBKZvxv63yV3gnWDZYfH6mRVfGzbh8","Dpz6knqUSTfV2ESXqQvbiWVznzRPYSYivUtXT3TVpWkA"]
+  "tokenAddresses":["token mint address-1","token mint address-2","token mint address-3"]
 }
 ```
 
@@ -353,7 +339,7 @@ You can run this query using this [link](https://ide.bitquery.io/latest-price-of
     DEXTradeByTokens(
       limit: {count: 1}
       orderBy: {descending: Block_Time}
-      where: {Trade: {Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}, Currency: {MintAddress: {is: "4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm"}}}}
+      where: {Trade: {Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}, Currency: {MintAddress: {is: "token mint address"}}}}
     ) {
       Block {
         Time
@@ -376,7 +362,7 @@ If you want to get OHLC data for any specific currency pair on Meteora DBC, you 
   Solana {
     DEXTradeByTokens(
       orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}, PriceAsymmetry: {lt: 0.1}}}
+      where: {Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}, PriceAsymmetry: {lt: 0.1}}}
       limit: {count: 10}
     ) {
       Block {
@@ -426,7 +412,7 @@ query TopTraders($token: String) {
   }
 }
 {
-  "token": "4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm"
+  "token": "token mint address"
 }
 ```
 
@@ -438,7 +424,7 @@ This query fetches you the traded volume, buy volume and sell volume of a token 
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      where: {Block: {Time: {since: "2025-05-23T09:00:00Z", till: "2025-05-23T11:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}}}
+      where: {Block: {Time: {since: "2025-05-23T09:00:00Z", till: "2025-05-23T11:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}}}
     ) {
       Trade {
         Currency {
@@ -488,7 +474,7 @@ query Volatility {
           Buy: {
             Currency: {
               MintAddress: {
-                is: "4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm"
+                is: "token mint address"
               }
             }
           }

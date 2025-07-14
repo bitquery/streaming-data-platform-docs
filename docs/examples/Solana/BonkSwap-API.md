@@ -259,7 +259,7 @@ The below API fetches recent trades by a particular trader. We use the `Transact
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Dex: {ProtocolName: {is: "bonkswap"}}, Currency: {MintAddress: {is: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Transaction: {Result: {Success: true}}}
+      where: {Trade: {Dex: {ProtocolName: {is: "bonkswap"}}, Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Transaction: {Result: {Success: true}}}
       limit: {count: 100}
       orderBy: {descendingByField: "Block_Timefield"}
     ){

@@ -9,6 +9,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 :::
 
 - You can also explore [Pump Fun Data documentation ➤](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/)
+- Also check out [LetsBonk.fun APIs ➤](https://docs.bitquery.io/docs/examples/Solana/letsbonk-api/)
 - Need zero-latency PumpSwap data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
 Join us on [Telegram](https://t.me/Bloxy_info) for support and integration help.
@@ -903,9 +904,7 @@ subscription MyQuery {
               is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"
             }
           }
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
         }
         Transaction: { Result: { Success: true } }
       }
@@ -965,9 +964,7 @@ query MyQuery {
               is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"
             }
           }
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
         }
         Transaction: { Result: { Success: true } }
       }
@@ -1020,9 +1017,7 @@ query MyQuery {
     DEXTradeByTokens(
       where: {
         Trade: {
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
           Dex: { ProtocolFamily: { is: "Pumpswap" } }
         }
         Block: {

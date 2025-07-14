@@ -39,7 +39,7 @@ In this section we will see how to get Solana Token Supply information using our
 
 This subscription will return the token supply changes in realtime. `PostBalance` will give you the current supply. Check the query [here](https://ide.bitquery.io/token-supply-updates-sub)
 
-```
+``` graphql
 subscription {
   Solana{
     TokenSupplyUpdates {
@@ -63,13 +63,13 @@ subscription {
 
 This query will return the latest token supply of a specific token. We are getting here supply for this `6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui` token `PostBalance` will give you the current supply for this token. Check the query [here](https://ide.bitquery.io/token-supply_2)
 
-```
+``` graphql
 {
   Solana {
     TokenSupplyUpdates(
       limit:{count:1}
       orderBy:{descending:Block_Time}
-      where: {TokenSupplyUpdate: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}}}
+      where: {TokenSupplyUpdate: {Currency: {MintAddress: {is: "token mint address"}}}}
     ) {
       TokenSupplyUpdate {
         Amount
@@ -90,7 +90,7 @@ This query will return the latest token supply of a specific token. We are getti
 
 Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
 
-```
+``` graphql
 subscription {
   Solana {
     TokenSupplyUpdates(
@@ -135,7 +135,7 @@ subscription {
 
 Now you can track the newly created Moonshot Tokens along with their metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/Get-newly-created-Moonshot-tokens-with-metadata#)
 
-```
+``` graphql
 subscription {
   Solana {
     TokenSupplyUpdates(
@@ -182,7 +182,7 @@ query MyQuery {
       where: {
         TokenSupplyUpdate: {
           Currency: {
-            MintAddress: { is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui" }
+            MintAddress: { is: "token mint address" }
           }
         }
       }
@@ -208,7 +208,7 @@ subscription {
       where: {
         TokenSupplyUpdate: {
           Currency: {
-            MintAddress: { is: "98mb39tPFKQJ4Bif8iVg9mYb9wsfPZgpgN1sxoVTpump" }
+            MintAddress: { is: "token mint address" }
           }
         }
       }
@@ -322,7 +322,7 @@ We will be using the token supply API to query recent token liquity removals ( t
 
 You can run the query [here](https://ide.bitquery.io/burn-token-supply-updates)
 
-```
+``` graphql
 query MyQuery {
   Solana(network: solana) {
     TokenSupplyUpdates(
