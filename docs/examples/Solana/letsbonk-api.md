@@ -137,7 +137,7 @@ query GetLatestLiquidityForPool {
           Market: {
             BaseCurrency: {
               MintAddress: {
-                is: "6L44XFFqEuRA67vfzmCooACN97eDk57Ab8ycwrZJbonk"
+                is: "token Mint Address"
               }
             }
           }
@@ -429,7 +429,7 @@ subscription MyQuery {
 
 ## Latest Trades of a LetsBonk.fun token on Launchpad
 
-This query fetches the most recent trades of a LetsBonk.fun Token `6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk` on the Raydium Launchpad.
+This query fetches the most recent trades of a LetsBonk.fun Token `token Mint Address` on the Raydium Launchpad.
 You can run the query [here](https://ide.bitquery.io/Latest-Trades-of-a-letsbonkfun-token-on-Launchpad)
 
 <details>
@@ -445,7 +445,7 @@ query LatestTrades {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk" }
+            MintAddress: { is: "token Mint Address" }
           }
         }
       }
@@ -492,7 +492,7 @@ Similarly, you can subscribe to trades on launchpad in real-time using [subscrip
 
 ## Latest Price of a LetsBonk.fun Token on Raydium Lanchlab
 
-This query provides the most recent price data for a specific LetsBonk.fun token `6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk` launched on Raydium Launchpad. You can filter by the token’s `MintAddress`, and the query will return the last recorded trade price.
+This query provides the most recent price data for a specific LetsBonk.fun token `token Mint Address` launched on Raydium Launchpad. You can filter by the token’s `MintAddress`, and the query will return the last recorded trade price.
 You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-LetsBonkfun-Token-on-Launchpad)
 
 <details>
@@ -508,7 +508,7 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-LetsBonkf
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk" }
+            MintAddress: { is: "token Mint Address" }
           }
         }
       }
@@ -553,7 +553,7 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-LetsBonkf
 
 ## Top Buyers of a LetsBonk.fun Token on LaunchPad
 
-[This](https://ide.bitquery.io/top-buyers-of-a-letsbonkfun-token-on-launchpad) API endpoint returns the top 100 buyers for a token, which is `6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk` in this case.
+[This](https://ide.bitquery.io/top-buyers-of-a-letsbonkfun-token-on-launchpad) API endpoint returns the top 100 buyers for a token, which is `token Mint Address` in this case.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -566,7 +566,7 @@ query MyQuery {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk" }
+            MintAddress: { is: "token Mint Address" }
           }
           Side: { Type: { is: buy } }
         }
@@ -594,7 +594,7 @@ query MyQuery {
 
 ## Top Sellers of a Token on LaunchPad
 
-Using [this](https://ide.bitquery.io/top-sellers-of-a-letsbonkfun-token-on-launchpad_1) query top 100 sellers for the token with `Mint Address` as `6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk` could be retrieved.
+Using [this](https://ide.bitquery.io/top-sellers-of-a-letsbonkfun-token-on-launchpad_1) query top 100 sellers for the token with `Mint Address` as `token Mint Address` could be retrieved.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -607,7 +607,7 @@ query MyQuery {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk" }
+            MintAddress: { is: "token Mint Address" }
           }
           Side: { Type: { is: sell } }
         }
@@ -635,7 +635,7 @@ query MyQuery {
 
 ## OHLCV for specific LetsBonk.fun Token on Raydium Launchlab
 
-[This](https://ide.bitquery.io/ohlc-for-letsbonkfun-token) API end point returns the OHLCV vlaues for a LetsBonk.fun token with the currency `mint address` as `72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray` when traded against WSOL.
+[This](https://ide.bitquery.io/ohlc-for-letsbonkfun-token) API end point returns the OHLCV vlaues for a LetsBonk.fun token with the currency `mint address` as `token mint address` when traded against WSOL.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -648,7 +648,7 @@ query MyQuery {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk" }
+            MintAddress: { is: "token Mint Address" }
           }
           Side: {
             Currency: {
@@ -681,7 +681,7 @@ query MyQuery {
 
 ## Get Pair Address for a LetsBonk.fun Token
 
-[This](https://ide.bitquery.io/pool-address-for-letsbonkfun-token_1) query returns the pair address for the LetsBonk.fun token with `mint address` as `6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk` on the LaunchPad exchange. The liquidity pool address is denoted by `MarketAddress`.
+[This](https://ide.bitquery.io/pool-address-for-letsbonkfun-token_1) query returns the pair address for the LetsBonk.fun token with `mint address` as `token Mint Address` on the LaunchPad exchange. The liquidity pool address is denoted by `MarketAddress`.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -694,7 +694,7 @@ query MyQuery {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "6dCG3QhvCrJ2rJPY41s8UjTVFTWhyEnFJkDSkmBrbonk" }
+            MintAddress: { is: "token Mint Address" }
           }
         }
       }
@@ -726,7 +726,7 @@ query MyQuery {
 
 ## Get Liquidity for a LetsBonk.fun Token Pair Address
 
-Using [this](https://ide.bitquery.io/liquidity-for-a-Letsbonkfun-token-pair_2) query we can get the liquidity for a LaunchPad Token Pair, where `Base_PostBalance` is the amount of LaunchPad tokens present in the pool and `Quote_PostBalance` is the amount of WSOL present in the pool. For the purpose of filtering we are applying the condition that the `MarketAddress` is `2NhS34gTq87kjXq1hikmEkwzbBFs5Er3gCAMjVGv1kS4`.
+Using [this](https://ide.bitquery.io/liquidity-for-a-Letsbonkfun-token-pair_2) query we can get the liquidity for a LaunchPad Token Pair, where `Base_PostBalance` is the amount of LaunchPad tokens present in the pool and `Quote_PostBalance` is the amount of WSOL present in the pool. For the purpose of filtering we are applying the condition that the `MarketAddress` is `insert pool address`.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -739,7 +739,7 @@ Using [this](https://ide.bitquery.io/liquidity-for-a-Letsbonkfun-token-pair_2) q
         Pool: {
           Market: {
             MarketAddress: {
-              is: "2NhS34gTq87kjXq1hikmEkwzbBFs5Er3gCAMjVGv1kS4"
+              is: "token pool address"
             }
           }
         }

@@ -627,7 +627,7 @@ You can test out the query [here](https://ide.bitquery.io/Solana-trade-for-a-tok
             }
           }
           Currency:
-        {MintAddress: {is: "63Fce97Uk5Ln1Y1F8Y73BJEN6iJL6p86AXmxTgZQpump"}}}}
+        {MintAddress: {is: "token mint address"}}}}
       limit: {count: 20}
       orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Trade_Index}]
     ) {
@@ -696,7 +696,7 @@ subscription {
       where: {Trade: {Dex: {ProgramAddress:
         {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}},
         Currency: {MintAddress:
-          {is: "63Fce97Uk5Ln1Y1F8Y73BJEN6iJL6p86AXmxTgZQpump"}}}}
+          {is: "token mint address"}}}}
     ) {
       Instruction {
         Program {
@@ -875,7 +875,7 @@ query MyQuery($token: String!, $pair_address: String!, $time_5min_ago: DateTime!
   }
 }
 {
-  "token":"EQf2LYaw4zV3hb2UK5kCUSgFrLRJqUAaeVA9rMypump",
+  "token":"token mint address",
   "pair_address": "48oGgzAdYJ5nzMmNz2Jvv5qvX4HXhNgp27tmdEM5n2EF",
   "time_5min_ago":"2025-03-25T09:14:00Z",
   "time_1h_ago": "2025-03-25T08:19:00Z"
@@ -886,7 +886,7 @@ query MyQuery($token: String!, $pair_address: String!, $time_5min_ago: DateTime!
 
 ## Track Price of a Token in Realtime on PumpSwap
 
-The below query gets real-time price of the specified Token `EQf2LYaw4zV3hb2UK5kCUSgFrLRJqUAaeVA9rMypump` on the PumpSwap DEX.
+The below query gets real-time price of the specified Token `token mint address` on the PumpSwap DEX.
 You can run the query [here](https://ide.bitquery.io/realtime-price-of-a-pumpswap-token).
 
 <details>
@@ -904,7 +904,7 @@ subscription MyQuery {
             }
           }
           Currency: {
-            MintAddress: { is: "EQf2LYaw4zV3hb2UK5kCUSgFrLRJqUAaeVA9rMypump" }
+            MintAddress: { is: "token mint address" }
           }
         }
         Transaction: { Result: { Success: true } }
@@ -946,7 +946,7 @@ subscription MyQuery {
 
 ## Get Latest Price of a Token on PumpSwap
 
-The below query gets real-time price of the specified Token `EQf2LYaw4zV3hb2UK5kCUSgFrLRJqUAaeVA9rMypump` on the PumpSwap DEX.
+The below query gets real-time price of the specified Token `token mint address` on the PumpSwap DEX.
 You can run the query [here](https://ide.bitquery.io/Price-of-a-pumpswap-token_1)
 
 <details>
@@ -966,7 +966,7 @@ query MyQuery {
             }
           }
           Currency: {
-            MintAddress: { is: "EQf2LYaw4zV3hb2UK5kCUSgFrLRJqUAaeVA9rMypump" }
+            MintAddress: { is: "token mint address" }
           }
         }
         Transaction: { Result: { Success: true } }
@@ -1008,7 +1008,7 @@ query MyQuery {
 
 ## Get the Trading Volume of a specific Token on PumpSwap DEX
 
-The below query gets the Trading volume of the specified Token `EQf2LYaw4zV3hb2UK5kCUSgFrLRJqUAaeVA9rMypump` on PumpSwap DEX. You will have to change the time in this `Block: { Time: { since: "2025-03-25T09:30:00Z" till: "2025-03-25T10:30:00Z" } }` when you try the query yourself. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
+The below query gets the Trading volume of the specified Token `token mint address` on PumpSwap DEX. You will have to change the time in this `Block: { Time: { since: "2025-03-25T09:30:00Z" till: "2025-03-25T10:30:00Z" } }` when you try the query yourself. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results.
 You can run the query [here](https://ide.bitquery.io/trading-volume-of-a-token-pumpSwap)
 
 <details>
@@ -1021,7 +1021,7 @@ query MyQuery {
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "EQf2LYaw4zV3hb2UK5kCUSgFrLRJqUAaeVA9rMypump" }
+            MintAddress: { is: "token mint address" }
           }
           Dex: { ProtocolFamily: { is: "Pumpswap" } }
         }

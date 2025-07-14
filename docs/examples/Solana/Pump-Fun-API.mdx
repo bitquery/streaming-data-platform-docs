@@ -170,7 +170,7 @@ query MyQuery {
         Instruction: {
           Accounts: {
             includes: {
-              Address: { is: "Edazh5SW6ts7PocPvPgjrdKyqqszcRcqdB22B8tapump" }
+              Address: { is: "token mint address" }
             }
           }
           Program: { Name: { is: "pump" }, Method: { is: "create" } }
@@ -398,7 +398,7 @@ query MyQuery {
             }
           }
           Currency: {
-            MintAddress: { is: "3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog" }
+            MintAddress: { is: "token mint address" }
           }
         }
         Transaction: { Result: { Success: true } }
@@ -563,7 +563,7 @@ Returns all-time-high price in SOL (marketcap = price \* 1B tokens)
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "4sxfRwX5Dynqz5upN1Z5nbcSXYAAz51pVjbPFDMUpump" }
+            MintAddress: { is: "token mint address" }
           }
         }
       }
@@ -595,7 +595,7 @@ Same as above but within a given window
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "4sxfRwX5Dynqz5upN1Z5nbcSXYAAz51pVjbPFDMUpump" }
+            MintAddress: { is: "token mint address" }
           }
         }
         Block: { Time: { till: "2025-06-03T06:37:00Z" } }
@@ -795,7 +795,7 @@ query MyQuery {
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump" }
+            MintAddress: { is: "token mint address" }
           }
           Dex: { ProtocolName: { is: "pump" } }
         }
@@ -927,7 +927,7 @@ query MyQuery {
             }
           }
           Currency: {
-            MintAddress: { is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump" }
+            MintAddress: { is: "token mint address" }
           }
         }
       }
@@ -964,7 +964,7 @@ Lists all markets where the token is traded, including pair addresses
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "FbwpvsuMbnik52wK3n9jMJ5MearZGJsavhLceVkNRVzY" }
+            MintAddress: { is: "token mint address" }
           }
         }
       }
@@ -1243,7 +1243,7 @@ query MyQuery($dev: String, $token: String) {
 ```json
 {
   "dev": "8oTWME5BPpudMksqEKfn562pGobrtnEpNsG66hBBgx92",
-  "token": "Edazh5SW6ts7PocPvPgjrdKyqqszcRcqdB22B8tapump"
+  "token": "token mint address"
 }
 ```
 
@@ -1266,7 +1266,7 @@ query MyQuery {
       where: {
         BalanceUpdate: {
           Currency: {
-            MintAddress: { is: "2GxdEZQ5d9PsUqyGy43qv4fmNJWrnLp6qY4dTyNepump" }
+            MintAddress: { is: "token mint address" }
           }
         }
         Transaction: { Result: { Success: true } }
