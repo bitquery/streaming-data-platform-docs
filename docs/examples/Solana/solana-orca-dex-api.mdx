@@ -110,7 +110,7 @@ subscription {
 You can use the following query to get the pair creation time for a specific pair on Orca DEX on Solana. But you need to use the keyword `query`.
 You can run this query using [this link](https://ide.bitquery.io/pair-creation-time-for-a-specific-pair-on-Orca).
 
-```
+```graphql
 {
   Solana {
     Instructions(
@@ -270,7 +270,8 @@ You can use the following query to get the latest price of a token, we have used
 
 You can run this query using [this link](https://ide.bitquery.io/Price-of-a-token-on-Orca).
 
-```subscription{
+```graphql
+subscription{
   Solana {
     DEXTradeByTokens(
       where: {Trade: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}, Dex: {ProgramAddress: {is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"}}}}
@@ -328,7 +329,7 @@ Only use this API as `query` and not `subscription` websocket as Aggregates and 
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui" }
+            MintAddress: { is: "token mint address" }
           }
           Side: {
             Currency: {
@@ -558,7 +559,7 @@ You can test the query [here](https://ide.bitquery.io/Websocket-for-collect-fees
   src="https://github.com/user-attachments/assets/6e8828b3-070c-4ea9-a3fc-bfd15753ee00"
 />
 
-```
+```graphql
 subscription {
   Solana {
     Instructions(
@@ -644,7 +645,7 @@ You can test the query [here](https://ide.bitquery.io/Websocket-for-update-fees-
   src="https://github.com/user-attachments/assets/be1454dd-5203-43fe-9b25-d7603e2ac63e"
 />
 
-```
+```graphql
 subscription {
   Solana {
     Instructions(
@@ -730,7 +731,7 @@ You can test the query [here](https://ide.bitquery.io/Websocket-for-collectRewar
   src="https://github.com/user-attachments/assets/8a75d538-c6e1-4472-b0c0-87bdd87a349f"
 />
 
-```
+```graphql
 subscription {
   Solana {
     Instructions(

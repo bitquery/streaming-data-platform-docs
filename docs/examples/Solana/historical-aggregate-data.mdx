@@ -28,7 +28,7 @@ For this example the pair between the tokens listed below is considered.
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui" }
+            MintAddress: { is: "token mint address" }
           }
           Side: {
             Currency: {
@@ -85,7 +85,7 @@ query MyQuery {
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui" }
+            MintAddress: { is: "token mint address" }
           }
         }
       }
@@ -151,7 +151,7 @@ query MyQuery {
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui" }
+            MintAddress: { is: "token mint address" }
           }
           Side: {
             Currency: {
@@ -201,7 +201,7 @@ You can run the query [here](https://ide.bitquery.io/Copy-of-ATH-of-token-using-
 {
   Solana(dataset: archive) {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "9dzSzFvPsKDoY2gdWErsuz2H1o4tbzvgBhrNZ9cvkD2j"}}}}
+      where: {Trade: {Currency: {MintAddress: {is: "token mint address"}}}}
       limit: {count: 1}
       orderBy: {descendingByField: "aATH"}
     ) {
@@ -212,15 +212,46 @@ You can run the query [here](https://ide.bitquery.io/Copy-of-ATH-of-token-using-
 
 ```
 
+## Get First 100 buyers of a Token
+[This](https://ide.bitquery.io/first-100-buyer-of-a-token) API returns the first 100 buyers for a particular token.
+
+```graphql
+{
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      orderBy:{
+        ascending:Block_Time
+      }
+      limit:{count:100}
+      limitBy:{count:1 by:Trade_Account_Owner}
+      where: {
+        Block:{
+          Date:{since:"2025-04-01"}
+        }
+        Trade: {
+          Side:{Type:{is:sell}}
+          Currency: {MintAddress:
+        {is: "pumpeALaQHVP7mCdjmhFkAnesZj3vXMJhD4rFffYDfn"}}}}
+    ) {
+      Trade {
+        Account {
+          Owner
+        }
+      }
+    }
+  }
+}
+```
+
 ## Get ATH of Multiple Tokens
 
 You can run it [here](https://ide.bitquery.io/ATH-of-multiple-tokens-using-quantile-on-Solana)
 
-```
+``` graphql
 {
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {in: ["8SVVCGzYwnAkDwwvc5fSHZdCenUyhPccnGirWecVpump", "FeR8VBqNRSUD5NtXAj2n3j1dAHkZHfyDktKuLXD4pump"]}}, PriceAsymmetry: {lt: 0.01}, AmountInUSD: {gt: "10"}}}
+      where: {Trade: {Currency: {MintAddress: {in: ["token mint address-1", "token mint address-2"]}}, PriceAsymmetry: {lt: 0.01}, AmountInUSD: {gt: "10"}}}
       limit: {count: 2}
       orderBy: {descendingByField: "aATH"}
       limitBy: {by: Trade_Currency_MintAddress, count: 1}

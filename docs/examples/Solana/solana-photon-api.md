@@ -17,11 +17,11 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
 You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data)
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "3B5wuUrMEi5yATD7on46hKfej3pfmd7t1RKgrsN3pump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}, Transaction: {Result: {Success: true}}}
+      where: {Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}, Transaction: {Result: {Success: true}}}
     ) {
       Block {
         Time
@@ -148,57 +148,12 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
   }
 }
 {
-  "token":"2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+  "token":"token mint address",
   "side_token": ""So11111111111111111111111111111111111111112",
   "pair_address: "4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i",
   "time_5min_ago":"2024-11-06T15:13:00Z",
   "time_1h_ago": "2024-11-06T14:18:00Z"
 }
-```
-
-## Track newly created Pump Fun tokens, Creation Time, Dev Address, Metadata
-
-Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
-
-```
-subscription {
-  Solana {
-    TokenSupplyUpdates(
-      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
-    ) {
-      Block{
-        Time
-      }
-      Transaction{
-        Signer
-      }
-      TokenSupplyUpdate {
-        Amount
-        Currency {
-          Symbol
-          ProgramAddress
-          PrimarySaleHappened
-          Native
-          Name
-          MintAddress
-          MetadataAddress
-          Key
-          IsMutable
-          Fungible
-          EditionNonce
-          Decimals
-          Wrapped
-          VerifiedCollection
-          Uri
-          UpdateAuthority
-          TokenStandard
-        }
-        PostBalance
-      }
-    }
-  }
-}
-
 ```
 
 ## Get Top Pairs on Solana on Photon
@@ -208,7 +163,7 @@ Please change the `Block: {Time: {since: "2024-08-15T04:19:00Z"}}` accordingly w
 Keep in mind you cannot use this as a websocket subscription becuase aggregate functions like `sum` doesn't work well in `subscription`.
 You can find the query [here](https://ide.bitquery.io/Photon--All-in-One-query_1)
 
-```
+```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
