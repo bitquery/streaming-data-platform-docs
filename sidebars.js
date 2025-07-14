@@ -209,6 +209,7 @@ const sidebars = {
                 "streams/protobuf/kafka-protobuf-go",
                 "streams/protobuf/kafka-protobuf-python",
                 "streams/protobuf/kafka-protobuf-js",
+                "streams/protobuf/filtering_kafka_streams"
               ],
             },
             "streams/compare-websocket-kafka",
