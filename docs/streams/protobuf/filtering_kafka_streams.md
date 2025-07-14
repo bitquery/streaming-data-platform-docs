@@ -77,6 +77,6 @@ def process_message(message):
                 print("Full Transaction Data:\n")
 ```
 
-## Filtering Mempool Streams on EVM Chains
+
 
 
