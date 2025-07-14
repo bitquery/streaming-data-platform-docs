@@ -253,7 +253,7 @@ You can run this query using [this link](https://ide.bitquery.io/live-price-of-t
     DEXTradeByTokens(
       limit: {count: 1}
       orderBy: {descending: Block_Time}
-      where: {Trade: {Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}, Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
+      where: {Trade: {Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}, Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
     ) {
       Block {
         Time
@@ -362,7 +362,7 @@ subscription {
           Buy: {
             Currency: {
               MintAddress: {
-                is: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"
+                is: "token mint address"
               }
             }
           }
@@ -424,7 +424,7 @@ subscription {
           Sell: {
             Currency: {
               MintAddress: {
-                is: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"
+                is: "token mint address"
               }
             }
           }
@@ -501,7 +501,7 @@ Only use this API as `query` and not `subscription` websocket as Aggregates and 
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui" }
+            MintAddress: { is: "token mint address" }
           }
           Side: {
             Currency: {

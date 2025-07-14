@@ -53,7 +53,7 @@ query MyQuery {
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "9qzvgUMrrL5Xyadk2gyWxCWgTds8crkwGwgfjeN5JYLS" }
+            MintAddress: { is: "token mint address" }
           }
           Dex: {
             ProgramAddress: {
@@ -169,7 +169,7 @@ To check if a Pump Fun Token has migrated to PumpSwap, we can use the below quer
           }
           Accounts: {
             includes: {
-              Address: { is: "7JsSjVLACA1V7SzTHHeE9XKCP3KJGUwUmqgDm5Hupump" }
+              Address: { is: "token mint address" }
             }
           }
         }
@@ -572,7 +572,7 @@ query GetLatestLiquidityForPool {
           Market: {
             BaseCurrency: {
               MintAddress: {
-                is: "Eh81Ci2S8ty5M4z9Z3pqHmJmkorvf9XJiJLGksF6pump"
+                is: "token mint address"
               }
             }
           }

@@ -242,7 +242,7 @@ query GetLatestLiquidityForPool {
           Market: {
             BaseCurrency: {
               MintAddress: {
-                is: "6L44XFFqEuRA67vfzmCooACN97eDk57Ab8ycwrZJbonk"
+                is: "token mint address"
               }
             }
           }
@@ -502,7 +502,7 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "5SA3y1LSB55D36G6BYXwqpEXZferX5zosSdQuky7aray" }
+            MintAddress: { is: "token mint address" }
           }
         }
       }
@@ -607,7 +607,7 @@ query MyQuery {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray" }
+            MintAddress: { is: "token mint address" }
           }
           Side: { Type: { is: buy } }
         }
@@ -648,7 +648,7 @@ query MyQuery {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "8CgTj1bVFPVFN9AgY47ZfXkMZDRwXawQ2vckp1ziqray" }
+            MintAddress: { is: "token mint address" }
           }
           Side: { Type: { is: sell } }
         }
@@ -689,7 +689,7 @@ query MyQuery {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray" }
+            MintAddress: { is: "token mint address" }
           }
           Side: {
             Currency: {
@@ -735,7 +735,7 @@ query MyQuery {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
           Currency: {
-            MintAddress: { is: "72j7mBkX54KNH7djeJ2mUz5L8VoDToPbSQTd24Sdhray" }
+            MintAddress: { is: "token mint address" }
           }
         }
       }

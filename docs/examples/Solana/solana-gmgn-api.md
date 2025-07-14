@@ -17,7 +17,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 The query will give you the Top 10 trending tokens on GMGN in last 1 hour. Change the time in this `Block: {Time: {since: "2025-04-24T08:16:00Z"}}` to the time 1 hour ago timestamp whenever you test the query.
 You can find the query [here](https://ide.bitquery.io/gmgn-trending-api)
 
-```
+``` graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
@@ -55,11 +55,11 @@ query MyQuery {
 The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
 You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data)
 
-```
+``` graphql
 subscription MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "3B5wuUrMEi5yATD7on46hKfej3pfmd7t1RKgrsN3pump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}, Transaction: {Result: {Success: true}}}
+      where: {Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}, Transaction: {Result: {Success: true}}}
     ) {
       Block {
         Time
@@ -186,7 +186,7 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
   }
 }
 {
-  "token":"2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+  "token":"token mint address",
   "side_token": ""So11111111111111111111111111111111111111112",
   "pair_address: "4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i",
   "time_5min_ago":"2024-11-06T15:13:00Z",
@@ -201,7 +201,7 @@ Please change the `Block: {Time: {since: "2024-08-15T04:19:00Z"}}` accordingly w
 Keep in mind you cannot use this as a websocket subscription becuase aggregate functions like `sum` doesn't work well in `subscription`.
 You can find the query [here](https://ide.bitquery.io/GMGN--All-in-One-query_1)
 
-```
+``` graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
@@ -257,14 +257,14 @@ query MyQuery {
 
 ## Get OHLC for a token pair
 
-You can use the below query to build charts like how you see on BullX. You will get OHLC data for a token pair using below query. Test the API [here](https://ide.bitquery.io/Solana-OHLC-Query_5?_gl=1*1simohi*_ga*MTU0ODE3ODUxMy4xNzM5Nzg0Njcw*_ga_ZWB80TDH9J*MTc0MjQ2MjAwNi43Ny4xLjE3NDI0NjIwNDQuMC4wLjA.)
+You can use the below query to build charts like how you see on BullX. You will get OHLC data for a token pair using below query. Test the API [here](https://ide.bitquery.io/Solana-OHLC-Query_5)
 
-```
+``` graphql
 {
   Solana {
     DEXTradeByTokens(
       orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, PriceAsymmetry: {lt: 0.1}}}
+      where: {Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, PriceAsymmetry: {lt: 0.1}}}
       limit: {count: 10}
     ) {
       Block {
@@ -287,7 +287,7 @@ You can use the below query to build charts like how you see on BullX. You will 
 
 This query will give you top traded pairs data. You can find the query [here](https://ide.bitquery.io/top-trading-pairs?_gl=1*131rbu4*_ga*MTU0ODE3ODUxMy4xNzM5Nzg0Njcw*_ga_ZWB80TDH9J*MTc0MjQ2MjAwNi43Ny4xLjE3NDI0NjIwNDQuMC4wLjA.).
 
-```
+``` graphql
 query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
   Solana {
     DEXTradeByTokens(
@@ -334,170 +334,15 @@ query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime
 }
 ```
 
-## Track newly created Pump Fun tokens, Creation Time, Dev Address, Metadata
-
-Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
-
-```
-subscription {
-  Solana {
-    TokenSupplyUpdates(
-      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {is: "create"}}}}
-    ) {
-      Block{
-        Time
-      }
-      Transaction{
-        Signer
-      }
-      TokenSupplyUpdate {
-        Amount
-        Currency {
-          Symbol
-          ProgramAddress
-          PrimarySaleHappened
-          Native
-          Name
-          MintAddress
-          MetadataAddress
-          Key
-          IsMutable
-          Fungible
-          EditionNonce
-          Decimals
-          Wrapped
-          VerifiedCollection
-          Uri
-          UpdateAuthority
-          TokenStandard
-        }
-        PostBalance
-      }
-    }
-  }
-}
-
-```
-
-# Get trading volume, buy volume, sell volume of a token
+## Get trading volume, buy volume, sell volume of a token
 
 This query fetches you the traded volume, buy volume and sell volume of a token `J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump`. Try out the API [here](https://ide.bitquery.io/trade_volume_Solana#).
 
-```
+``` graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      where: {Block: {Time: {since: "2025-02-10T07:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
-    ) {
-      Trade {
-        Currency {
-          MintAddress
-          Decimals
-        }
-        Side {
-          Currency {
-            Name
-            MintAddress
-          }
-        }
-      }
-      traded_volume_USD: sum(of: Trade_Side_AmountInUSD)
-      traded_volume: sum(of: Trade_Amount)
-    buy_volume: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:buy}}}})
-      sell_volume: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:sell}}}})
-    }
-  }
-}
-```
-
-## Get OHLC for a token pair
-
-You can use the below query to build charts like how you see on BullX. You will get OHLC data for a token pair using below query. Test the API [here](https://ide.bitquery.io/Solana-OHLC-Query_5?_gl=1*1simohi*_ga*MTU0ODE3ODUxMy4xNzM5Nzg0Njcw*_ga_ZWB80TDH9J*MTc0MjQ2MjAwNi43Ny4xLjE3NDI0NjIwNDQuMC4wLjA.)
-
-```
-{
-  Solana {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, PriceAsymmetry: {lt: 0.1}}}
-      limit: {count: 10}
-    ) {
-      Block {
-        Timefield: Time(interval: {in: minutes, count: 1})
-      }
-      volume: sum(of: Trade_Amount)
-      Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Slot)
-        close: Price(maximum: Block_Slot)
-      }
-      count
-    }
-  }
-}
-```
-
-## Get Top Traded Pairs
-
-This query will give you top traded pairs data. You can find the query [here](https://ide.bitquery.io/top-trading-pairs?_gl=1*131rbu4*_ga*MTU0ODE3ODUxMy4xNzM5Nzg0Njcw*_ga_ZWB80TDH9J*MTc0MjQ2MjAwNi43Ny4xLjE3NDI0NjIwNDQuMC4wLjA.).
-
-```
-query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
-  Solana {
-    DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Block: {Time: {after: $time_3h_ago}}, any: [{Trade: {Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}}, {Trade: {Currency: {MintAddress: {not: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}, {Trade: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]}}, Side: {Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]}}}}}]}
-      orderBy: {descendingByField: "usd"}
-      limit: {count: 100}
-    ) {
-      Trade {
-        Currency {
-          Symbol
-          Name
-          MintAddress
-        }
-        Side {
-          Currency {
-            Symbol
-            Name
-            MintAddress
-          }
-        }
-        price_last: PriceInUSD(maximum: Block_Slot)
-        price_10min_ago: PriceInUSD(
-          maximum: Block_Slot
-          if: {Block: {Time: {before: $time_10min_ago}}}
-        )
-        price_1h_ago: PriceInUSD(
-          maximum: Block_Slot
-          if: {Block: {Time: {before: $time_1h_ago}}}
-        )
-        price_3h_ago: PriceInUSD(minimum: Block_Slot)
-      }
-      dexes: uniq(of: Trade_Dex_ProgramAddress)
-      amount: sum(of: Trade_Side_Amount)
-      usd: sum(of: Trade_Side_AmountInUSD)
-      traders: uniq(of: Trade_Account_Owner)
-      count(selectWhere: {ge: "100"})
-    }
-  }
-}
-{
-  "time_10min_ago": "2024-09-19T12:26:17Z",
-  "time_1h_ago": "2024-09-19T11:36:17Z",
-  "time_3h_ago": "2024-09-19T09:36:17Z"
-}
-```
-
-# Get trading volume, buy volume, sell volume of a token
-
-This query fetches you the traded volume, buy volume and sell volume of a token `J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump`. Try out the API [here](https://ide.bitquery.io/trade_volume_Solana#).
-
-```
-query MyQuery {
-  Solana(dataset: combined) {
-    DEXTradeByTokens(
-      where: {Block: {Time: {since: "2025-02-10T07:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
+      where: {Block: {Time: {since: "2025-02-10T07:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
     ) {
       Trade {
         Currency {
