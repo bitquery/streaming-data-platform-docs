@@ -135,11 +135,7 @@ query GetLatestLiquidityForPool {
       where: {
         Pool: {
           Market: {
-            BaseCurrency: {
-              MintAddress: {
-                is: "token Mint Address"
-              }
-            }
+            BaseCurrency: { MintAddress: { is: "token Mint Address" } }
           }
           Dex: {
             ProgramAddress: {
@@ -444,9 +440,7 @@ query LatestTrades {
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token Mint Address" }
-          }
+          Currency: { MintAddress: { is: "token Mint Address" } }
         }
       }
     ) {
@@ -507,9 +501,7 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-LetsBonkf
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token Mint Address" }
-          }
+          Currency: { MintAddress: { is: "token Mint Address" } }
         }
       }
     ) {
@@ -565,9 +557,7 @@ query MyQuery {
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token Mint Address" }
-          }
+          Currency: { MintAddress: { is: "token Mint Address" } }
           Side: { Type: { is: buy } }
         }
       }
@@ -606,9 +596,7 @@ query MyQuery {
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token Mint Address" }
-          }
+          Currency: { MintAddress: { is: "token Mint Address" } }
           Side: { Type: { is: sell } }
         }
       }
@@ -647,9 +635,7 @@ query MyQuery {
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token Mint Address" }
-          }
+          Currency: { MintAddress: { is: "token Mint Address" } }
           Side: {
             Currency: {
               MintAddress: { is: "So11111111111111111111111111111111111111112" }
@@ -693,9 +679,7 @@ query MyQuery {
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token Mint Address" }
-          }
+          Currency: { MintAddress: { is: "token Mint Address" } }
         }
       }
     ) {
@@ -736,13 +720,7 @@ Using [this](https://ide.bitquery.io/liquidity-for-a-Letsbonkfun-token-pair_2) q
   Solana {
     DEXPools(
       where: {
-        Pool: {
-          Market: {
-            MarketAddress: {
-              is: "token pool address"
-            }
-          }
-        }
+        Pool: { Market: { MarketAddress: { is: "token pool address" } } }
         Transaction: { Result: { Success: true } }
       }
       orderBy: { descending: Block_Time }
@@ -774,3 +752,7 @@ Using [this](https://ide.bitquery.io/liquidity-for-a-Letsbonkfun-token-pair_2) q
 ```
 
 </details>
+
+### Video Tutorial | How to get Bonding Curve Progress of any LetsBonk.fun Token
+
+<VideoPlayer url="https://www.youtube.com/watch?v=fCA5Pts4LbE" />
