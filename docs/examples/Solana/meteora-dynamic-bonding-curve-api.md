@@ -1,5 +1,13 @@
 # Meteora Dynamic Bonding Curve API
 
+In this section we will see some API examples on tracking tokens on Meteora's dynamic bonding curve.
+
+:::note
+To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
+
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+:::
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <head>
@@ -315,7 +323,7 @@ query MyQuery($tokenAddresses: [String!]) {
   }
 }
 {
-  "tokenAddresses":["3EX4yHYs25RXaNMBgaNtpGxPKvX73P9QWVw8fpNEhnow","2bzXpTCu3faGocjBKZvxv63yV3gnWDZYfH6mRVfGzbh8","Dpz6knqUSTfV2ESXqQvbiWVznzRPYSYivUtXT3TVpWkA"]
+  "tokenAddresses":["token mint address-1","token mint address-2","token mint address-3"]
 }
 ```
 
@@ -331,7 +339,7 @@ You can run this query using this [link](https://ide.bitquery.io/latest-price-of
     DEXTradeByTokens(
       limit: {count: 1}
       orderBy: {descending: Block_Time}
-      where: {Trade: {Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}, Currency: {MintAddress: {is: "4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm"}}}}
+      where: {Trade: {Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}, Currency: {MintAddress: {is: "token mint address"}}}}
     ) {
       Block {
         Time
@@ -354,7 +362,7 @@ If you want to get OHLC data for any specific currency pair on Meteora DBC, you 
   Solana {
     DEXTradeByTokens(
       orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}, PriceAsymmetry: {lt: 0.1}}}
+      where: {Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}, PriceAsymmetry: {lt: 0.1}}}
       limit: {count: 10}
     ) {
       Block {
@@ -404,7 +412,7 @@ query TopTraders($token: String) {
   }
 }
 {
-  "token": "4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm"
+  "token": "token mint address"
 }
 ```
 
@@ -416,7 +424,7 @@ This query fetches you the traded volume, buy volume and sell volume of a token 
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      where: {Block: {Time: {since: "2025-05-23T09:00:00Z", till: "2025-05-23T11:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}}}
+      where: {Block: {Time: {since: "2025-05-23T09:00:00Z", till: "2025-05-23T11:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}}}
     ) {
       Trade {
         Currency {
@@ -466,7 +474,7 @@ query Volatility {
           Buy: {
             Currency: {
               MintAddress: {
-                is: "4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm"
+                is: "token mint address"
               }
             }
           }

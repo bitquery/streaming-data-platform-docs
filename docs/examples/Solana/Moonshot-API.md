@@ -96,7 +96,7 @@ subscription MyQuery {
 
 Now you can track the newly created Moonshot Tokens along with their metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/Get-newly-created-Moonshot-tokens-with-metadata#)
 
-```
+```graphql
 subscription {
   Solana {
     TokenSupplyUpdates(
@@ -210,7 +210,7 @@ subscription {
 In this query we use the program addresses of Moonshot and Pumpfun and creation methods to track token creation in realtime. We use the `in` filter to pass multiple addresses.
 You can run the query [here](https://ide.bitquery.io/new-token-launches-on-Pump-Fun--Moonshot-in-realtime)
 
-```
+```graphql
 subscription{
   Solana(network: solana) {
     Instructions(
@@ -278,11 +278,11 @@ subscription{
 The below query fetches the details of Token Creator of a specific token `D68YAXPZdGEBre4Esg61W7HbcRJFN7rmroKzGPXDR87T`.
 Here you can find [saved query](https://ide.bitquery.io/Moonshot-token-creator).
 
-```
+```graphql
 query MyQuery {
   Solana(network: solana) {
     Instructions(
-      where: {Instruction: {Accounts: {includes: {Address: {is: "D68YAXPZdGEBre4Esg61W7HbcRJFN7rmroKzGPXDR87T"}}}, Program: {Address: {is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG"}, Method: {is: "tokenMint"}}}}
+      where: {Instruction: {Accounts: {includes: {Address: {is: "token mint address"}}}, Program: {Address: {is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG"}, Method: {is: "tokenMint"}}}}
     ) {
       Transaction {
         Signer
@@ -305,7 +305,7 @@ The below query fetches details about token creators filtering using the `MoonCV
 The `descendingByField: "tokens_count":` Orders the results in descending order based on the count of tokens created.
 You can run the query [here](https://ide.bitquery.io/Top-moonshot-token-creators)
 
-```
+```graphql
 query MyQuery {
   Solana(network: solana) {
     Instructions(
@@ -338,7 +338,7 @@ Note - You can only use this API using `query` keyword, using this API as `subsc
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "A1XqfcD1vMEhUNwEKvBVRWFV48ZLDL4oheFVCPEcM3Vk" }
+            MintAddress: { is: "token mint address" }
           }
           Dex: {
             ProgramAddress: {
@@ -382,7 +382,7 @@ subscription MyQuery {
             }
           }
           Currency: {
-            MintAddress: { is: "A1XqfcD1vMEhUNwEKvBVRWFV48ZLDL4oheFVCPEcM3Vk" }
+            MintAddress: { is: "token mint address" }
           }
         }
         Transaction: { Result: { Success: true } }
@@ -434,7 +434,7 @@ query MyQuery {
       where: {
         BalanceUpdate: {
           Currency: {
-            MintAddress: { is: "A1XqfcD1vMEhUNwEKvBVRWFV48ZLDL4oheFVCPEcM3Vk" }
+            MintAddress: { is: "token mint address" }
           }
         }
       }
@@ -470,7 +470,7 @@ query MyQuery {
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "A1XqfcD1vMEhUNwEKvBVRWFV48ZLDL4oheFVCPEcM3Vk" }
+            MintAddress: { is: "token mint address" }
           }
           Dex: {
             ProgramAddress: {
@@ -520,7 +520,7 @@ query TopTraders {
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "A1XqfcD1vMEhUNwEKvBVRWFV48ZLDL4oheFVCPEcM3Vk" }
+            MintAddress: { is: "token mint address" }
           }
           Dex: {
             ProgramAddress: {
@@ -564,7 +564,7 @@ query TopTraders {
 
 To get all Moonshot tokens created by address use [this query](https://ide.bitquery.io/moonshot-tokens-created-by-a-specific-address).
 
-```
+```graphql
 query MyQuery {
   Solana(network: solana) {
     Instructions(
@@ -589,7 +589,7 @@ query MyQuery {
 To check the first and last price to calculate the price change in the last X minutes, use [this query](https://ide.bitquery.io/Moonshot-coins-with-price--mc-with-limit-and-delta-from-10-min-back-simple).
 In this query, the `from` time should be when you need the price change. For example, if you want a price change for the last 10 minutes, then `from` should be 10 minutes before now.
 
-```
+```graphql
 query MoonshotRecentTrades($from: DateTime) {
   Solana {
     DEXTradeByTokens(
@@ -623,7 +623,7 @@ query MoonshotRecentTrades($from: DateTime) {
 
 To get pool details (Market address) for Moonshot token use [this query](https://ide.bitquery.io/Market-info-on-moonshot-by-tokens).
 
-```
+```graphql
 query ($tokens: [String!]) {
   Solana {
     DEXTradeByTokens(
@@ -647,7 +647,7 @@ query ($tokens: [String!]) {
 ```
 {
   "tokens": [
-    "A1XqfcD1vMEhUNwEKvBVRWFV48ZLDL4oheFVCPEcM3Vk"
+    "token mint address"
   ]
 }
 ```
@@ -656,12 +656,12 @@ query ($tokens: [String!]) {
 
 To get OHLC price in SOL and USD and to get volume use [following query](https://ide.bitquery.io/ohlc-in-sol-with-usd-price_4).
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
       orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Currency: {MintAddress: {is: "D68YAXPZdGEBre4Esg61W7HbcRJFN7rmroKzGPXDR87T"}}, Dex: {ProgramAddress: {is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG"}}, PriceAsymmetry: {lt: 0.1}}, Transaction: {Result: {Success: true}}}
+      where: {Trade: {Currency: {MintAddress: {is: "token mint address"}}, Dex: {ProgramAddress: {is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG"}}, PriceAsymmetry: {lt: 0.1}}, Transaction: {Result: {Success: true}}}
     ) {
       Block {
         Time(interval: {count: 5, in: minutes})
