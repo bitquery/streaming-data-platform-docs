@@ -364,6 +364,7 @@ const sidebars = {
             "examples/BSC/gra-fun-api",
             "examples/BSC/four-meme-api",
             "examples/BSC/pancake-swap-api",
+            "examples/BSC/bsc-mempool-stream"
           ],
         },
         {
