@@ -36,7 +36,7 @@ def process_message(message):
 
                      if (
                         program_address == TARGET_PROGRAM_ADDRESS
-                        and method_name in TARGET_METHODS
+                        and method_name in TARGET_METHODS #list of methods
                     ):
                         include_transaction = True
                         break  # Found matching instruction, no need to check further

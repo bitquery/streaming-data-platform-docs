@@ -209,6 +209,7 @@ const sidebars = {
                 "streams/protobuf/kafka-protobuf-go",
                 "streams/protobuf/kafka-protobuf-python",
                 "streams/protobuf/kafka-protobuf-js",
+                "streams/protobuf/filtering_kafka_streams"
               ],
             },
             "streams/compare-websocket-kafka",
@@ -363,6 +364,7 @@ const sidebars = {
             "examples/BSC/gra-fun-api",
             "examples/BSC/four-meme-api",
             "examples/BSC/pancake-swap-api",
+            "examples/BSC/bsc-mempool-stream"
           ],
         },
         {

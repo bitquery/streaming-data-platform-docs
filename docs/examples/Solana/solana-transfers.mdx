@@ -33,6 +33,41 @@ In this section we'll have a look at some examples using the Solana Transfers AP
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
+## Subscribe to all transfers on Solana
+
+This includes all types of transactions; transfers, swaps, and other types of transactions on Solana
+
+[Run Stream >](https://ide.bitquery.io/Subscribe-to-the-all-transfers-on-Solana)
+
+```
+subscription {
+  Solana(network: solana) {
+    Transfers {
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          MintAddress
+          Fungible
+          Symbol
+          Uri
+        }
+        Receiver {
+          Address
+        }
+        Sender {
+          Address
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
 ## Subscribe to the latest NFT token transfers on Solana
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to all NFT token transfers. You can run the query [here](https://ide.bitquery.io/Subscribe-to-the-latest-NFT-transfers-on-Solana)
