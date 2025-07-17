@@ -27,9 +27,7 @@ For this example the pair between the tokens listed below is considered.
       orderBy: { descendingByField: "Block_Timefield" }
       where: {
         Trade: {
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
           Side: {
             Currency: {
               MintAddress: { is: "So11111111111111111111111111111111111111112" }
@@ -83,11 +81,7 @@ query MyQuery {
       limit: { count: 10 }
       orderBy: { descendingByField: "tokens" }
       where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
-        }
+        Trade: { Currency: { MintAddress: { is: "token mint address" } } }
       }
     ) {
       Trade {
@@ -150,9 +144,7 @@ query MyQuery {
     DEXTradeByTokens(
       where: {
         Trade: {
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
           Side: {
             Currency: {
               MintAddress: { is: "So11111111111111111111111111111111111111112" }
@@ -191,47 +183,46 @@ query MyQuery {
 
 ## Get ATH (All-Time High) of a Token
 
-In this query we use the 99th percentile (`level: 0.99`) to find the highest price of a token.
+In this query we use the 95th percentile (`level: 0.95`) to find the highest price of a token.
 We also use `PriceAsymmetry` and `AmountInUSD` in combination to filter outliers as much as possible.
 
 Read more about quantiles [here](https://docs.bitquery.io/docs/graphql/metrics/quantile/)
-You can run the query [here](https://ide.bitquery.io/Copy-of-ATH-of-token-using-quantile-on-Solana)
+You can run the query [here](https://ide.bitquery.io/Price-ATH-query)
 
 ```
 {
-  Solana(dataset: archive) {
+  Solana(dataset: combined) {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "token mint address"}}}}
+      where: {Trade: {Side: {Currency: {MintAddress: {in: ["11111111111111111111111111111111", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", "So11111111111111111111111111111111111111112"]}}, AmountInUSD: {gt: "10"}}, Currency: {MintAddress: {is: "2tnA2ZmwmgUZLyYLi97zbwsFBXAqpMEcHu9Cv9JW6m26"}}, PriceAsymmetry: {lt: 0.01}}}
       limit: {count: 1}
       orderBy: {descendingByField: "aATH"}
     ) {
-      aATH: quantile(of: Trade_PriceInUSD, level: 0.99)
+      aATH: quantile(of: Trade_PriceInUSD, level: 0.95)
     }
   }
 }
-
 ```
 
 ## Get First 100 buyers of a Token
+
 [This](https://ide.bitquery.io/first-100-buyer-of-a-token) API returns the first 100 buyers for a particular token.
 
 ```graphql
 {
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      orderBy:{
-        ascending:Block_Time
-      }
-      limit:{count:100}
-      limitBy:{count:1 by:Trade_Account_Owner}
+      orderBy: { ascending: Block_Time }
+      limit: { count: 100 }
+      limitBy: { count: 1, by: Trade_Account_Owner }
       where: {
-        Block:{
-          Date:{since:"2025-04-01"}
-        }
+        Block: { Date: { since: "2025-04-01" } }
         Trade: {
-          Side:{Type:{is:sell}}
-          Currency: {MintAddress:
-        {is: "pumpeALaQHVP7mCdjmhFkAnesZj3vXMJhD4rFffYDfn"}}}}
+          Side: { Type: { is: sell } }
+          Currency: {
+            MintAddress: { is: "pumpeALaQHVP7mCdjmhFkAnesZj3vXMJhD4rFffYDfn" }
+          }
+        }
+      }
     ) {
       Trade {
         Account {
@@ -247,14 +238,24 @@ You can run the query [here](https://ide.bitquery.io/Copy-of-ATH-of-token-using-
 
 You can run it [here](https://ide.bitquery.io/ATH-of-multiple-tokens-using-quantile-on-Solana)
 
-``` graphql
+```graphql
 {
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {in: ["token mint address-1", "token mint address-2"]}}, PriceAsymmetry: {lt: 0.01}, AmountInUSD: {gt: "10"}}}
-      limit: {count: 2}
-      orderBy: {descendingByField: "aATH"}
-      limitBy: {by: Trade_Currency_MintAddress, count: 1}
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: {
+              in: ["token mint address-1", "token mint address-2"]
+            }
+          }
+          PriceAsymmetry: { lt: 0.01 }
+          AmountInUSD: { gt: "10" }
+        }
+      }
+      limit: { count: 2 }
+      orderBy: { descendingByField: "aATH" }
+      limitBy: { by: Trade_Currency_MintAddress, count: 1 }
     ) {
       Trade {
         Currency {
@@ -265,7 +266,6 @@ You can run it [here](https://ide.bitquery.io/ATH-of-multiple-tokens-using-quant
     }
   }
 }
-
 ```
 
 ## Video Tutorial for Querying Historical Solana Data
