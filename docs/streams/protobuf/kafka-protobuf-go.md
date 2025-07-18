@@ -10,9 +10,6 @@ The schema is available [here](https://github.com/bitquery/streaming_protobuf/tr
 
 The complete code is available [here](https://github.com/bitquery/stream_protobuf_example).
 
-## Protobuf vs JSON
-
-To understand why Protobuf is better than JSON, you can read the comparison [here](/docs/streams/kafka-streaming-concepts/#protobuf-streams)
 
 ### Prerequisites
 
@@ -41,15 +38,12 @@ Below is the sample config setup, modify it according to your requirements.
 
 ```yaml
 kafka:
-  bootstrap.servers: "rpk0.bitquery.io:9093,rpk1.bitquery.io:9093,rpk2.bitquery.io:9093"
-  security.protocol: "SASL_SSL"
+  bootstrap.servers: "rpk0.bitquery.io:9092,rpk1.bitquery.io:9092,rpk2.bitquery.io:9092"
+  security.protocol: "SASL_PLAINTEXT"
   sasl.mechanism: "SCRAM-SHA-512"
   sasl.username: "<your_username_here>"
   sasl.password: "<your_password_here>"
   group.id: "<username_group-number>"
-  ssl.key.location: "ssl/client.key.pem"
-  ssl.certificate.location: "ssl/client.cer.pem"
-  ssl.ca.location: "ssl/server.cer.pem"
   ssl.endpoint.identification.algorithm: "none"
   enable.auto.commit: false
 consumer:

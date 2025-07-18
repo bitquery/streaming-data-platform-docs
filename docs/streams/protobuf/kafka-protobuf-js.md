@@ -61,45 +61,6 @@ const kafka = new Kafka({
 });
 ```
 
-### Kafka Client Initialization - SSL Version
-
-```js
-const { Kafka } = require("kafkajs");
-const bs58 = require("bs58");
-const fs = require("fs");
-const { loadProto } = require("bitquery-protobuf-schema");
-const { CompressionTypes, CompressionCodecs } = require("kafkajs");
-const LZ4 = require("kafkajs-lz4");
-const { v4: uuidv4 } = require("uuid");
-
-CompressionCodecs[CompressionTypes.LZ4] = new LZ4().codec;
-
-const username = "<username>";
-const password = "<password>";
-const topic = "solana.transactions.proto";
-const id = uuidv4();
-
-const kafka = new Kafka({
-  clientId: username,
-  brokers: [
-    "rpk0.bitquery.io:9093",
-    "rpk1.bitquery.io:9093",
-    "rpk2.bitquery.io:9093",
-  ],
-  ssl: {
-    rejectUnauthorized: false,
-    ca: [fs.readFileSync("server.cer.pem", "utf-8")],
-    key: fs.readFileSync("client.key.pem", "utf-8"),
-    cert: fs.readFileSync("client.cer.pem", "utf-8"),
-  },
-  sasl: {
-    mechanism: "scram-sha-512",
-    username: username,
-    password: password,
-  },
-});
-```
-
 ## **2. Define a Protobuf Traversal Print Function**
 
 This function **recursively walks** through any protobuf message and prints all its fields, converting `bytes` to **base58** or **hex**.
