@@ -209,7 +209,7 @@ const sidebars = {
                 "streams/protobuf/kafka-protobuf-go",
                 "streams/protobuf/kafka-protobuf-python",
                 "streams/protobuf/kafka-protobuf-js",
-                "streams/protobuf/filtering_kafka_streams"
+                "streams/protobuf/filtering_kafka_streams",
               ],
             },
             "streams/compare-websocket-kafka",
@@ -364,7 +364,7 @@ const sidebars = {
             "examples/BSC/gra-fun-api",
             "examples/BSC/four-meme-api",
             "examples/BSC/pancake-swap-api",
-            "examples/BSC/bsc-mempool-stream"
+            "examples/BSC/bsc-mempool-stream",
           ],
         },
         {
@@ -406,6 +406,7 @@ const sidebars = {
               ],
             },
             "examples/Solana/letsbonk-api",
+            "examples/Solana/jupiter-studio-api",
             "examples/Solana/solana-balance-updates",
             "examples/Solana/solana-dextrades",
             "examples/Solana/solana-trader-API",
@@ -583,7 +584,6 @@ const sidebars = {
         title: "How-To Guides Overview",
       },
       items: [
-
         "usecases/MCP",
         {
           type: "category",
