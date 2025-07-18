@@ -78,34 +78,11 @@ To connect to Bitquery’s Kafka streaming service, you’ll need the following:
 
 1.  **Kafka Broker Addresses**  
     Use the following server list:  
-    `kfk0.bitquery.io:9093,kfk1.bitquery.io:9093,kfk2.bitquery.io:9093`
+    `rpk0.bitquery.io:9092,rpk1.bitquery.io:9092,rpk2.bitquery.io:9092`
 2.  **Authentication Credentials**  
-    A **username** and **password** for **SASL over SSL authentication** – provided by the Bitquery support team.
-3.  **SSL Certificates**  
-    You’ll receive the following certificate files from our support team:
+    A **username** and **password** for **SASL over PLAINTEXT authentication** – provided by the Bitquery support team.
 
-    - `client.key.pem`
-    - `client.cer.pem`
-    - `server.cer.pem`
-
-### Example: SSL Connection Configuration (SASL + SSL)
-
-```python
-sasl_conf = {
-    'bootstrap.servers': 'rpk0.bitquery.io:9093,rpk1.bitquery.io:9093,rpk2.bitquery.io:9093',
-    'security.protocol': 'SASL_SSL',
-    'sasl.mechanism': 'SCRAM-SHA-512',
-    'sasl.username': '<YOUR USERNAME HERE>',
-    'sasl.password': '<YOUR PASSWORD HERE>',
-    'ssl.key.location': 'client.key.pem',
-    'ssl.ca.location': 'server.cer.pem',
-    'ssl.certificate.location': 'client.cer.pem',
-    'ssl.endpoint.identification.algorithm': 'none'
-}
-
-```
-
-### Non-SSL Connection (SASL_PLAINTEXT , Prefered Method)
+### Non-SSL Connection (SASL_PLAINTEXT )
 
 If you prefer to connect without SSL, you can use **SASL_PLAINTEXT** on port `9092`. This does **not** require certificates:
 

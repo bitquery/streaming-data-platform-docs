@@ -43,15 +43,7 @@ group_id_suffix = uuid.uuid4().hex
 
 ### Define your Kafka config:
 
-You can use either SSL:
-
-```python
-'bootstrap.servers': 'rpk0.bitquery.io:9093,rpk1.bitquery.io:9093,rpk2.bitquery.io:9093',
-'security.protocol': 'SASL_SSL',
-
-```
-
-Or non-SSL:
+ non-SSL:
 
 ```python
 'bootstrap.servers': 'rpk0.bitquery.io:9092,rpk1.bitquery.io:9092,rpk2.bitquery.io:9092',
