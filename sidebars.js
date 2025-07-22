@@ -610,6 +610,28 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Wash Trading Detector",
+          link: {
+            type: "generated-index",
+            title: "Detecting Wash Trades on Solana"
+          },
+          items:[
+            "usecases/wash-trading-detector/overview",
+            {
+              type: "category",
+              label: "Data Preparations",
+              items: [
+                "usecases/wash-trading-detector/prepare-data/getTrades",
+                "usecases/wash-trading-detector/prepare-data/rules",
+                "usecases/wash-trading-detector/prepare-data/label"
+              ],
+            },
+            "usecases/wash-trading-detector/training",
+            "usecases/wash-trading-detector/app"
+          ]
+        },
+        {
+          type: "category",
           label: "TradingView Charting",
           link: {
             type: "generated-index",
