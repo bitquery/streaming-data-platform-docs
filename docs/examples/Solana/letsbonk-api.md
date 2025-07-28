@@ -43,13 +43,13 @@ If you want fastest data without any latency, we can provide Kafka streams, plea
 
 ## Track LetsBonk.fun Token Creation
 
-Using [this](https://ide.bitquery.io/latest-token-created-on-bonk-fun) query, we can get the most recently created LetsBonk.fun tokens.
+Using [this](https://ide.bitquery.io/latest-token-created-on-letsbonk-fun-in-realtime) query, we can get the realtime created LetsBonk.fun tokens.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-{
+subscription {
   Solana {
     InstructionBalanceUpdates(
       where: {
@@ -62,7 +62,6 @@ Using [this](https://ide.bitquery.io/latest-token-created-on-bonk-fun) query, we
         }
         Transaction: { Result: { Success: true } }
       }
-      orderBy: { descending: Block_Time }
     ) {
       BalanceUpdate {
         Currency {
