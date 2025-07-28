@@ -4,7 +4,15 @@ Starting July 2025, we have introduced separate chain-agnostic price APIs and St
 
 ![](/img/trade_api/api.png)
 
+This stream has premade-OHLC in the response which you feed directly to your charting solution without having to calculate it.
+
 > Note: All queries can be converted to a graphQL stream by changing the keyword `query` to `subscription`
+
+The Price APIs have three core data cubes:
+
+- **Tokens**: Price data for a specific token on a specific chain. Use this when you care about chain-specific prices like USDT on Solana.
+- **Currencies**: Aggregated view of a token across chains — e.g., BTC across Bitcoin, Ethereum (as WBTC), Solana, etc.
+- **Pairs**: Price and volume data for token pairs on specific markets/protocols. E.g., SOL/USDC on Raydium (Solana) or ETH/USDT on Uniswap (Ethereum).
 
 ## Currencies
 
@@ -127,7 +135,9 @@ Let's say you don't want a chain agnostic view, but want to focus on aparticular
 }
 
 ```
+
 We filter for specific tokens using the token `Address` and `Network`. If you need to stream all token prices on say Solana, simply set `Network` to `solana`.
+
 ```
 subscription {
   Trading {
@@ -184,3 +194,84 @@ subscription {
 ```
 
 ## Pairs
+
+This is the 3rd cube in these set of APIs. The Pairs cube gives you price, volume, and market-level trading data between two tokens — a base token and a quote token.
+We will breakdown in detail how base token and Quote are chosen in the next section.
+
+```
+subscription {
+  Trading {
+    Pairs(
+      where: {Market: {Network: {is: "Base"}}, QuoteToken: {Address: {is: "0x4200000000000000000000000000000000000006"}}, Token: {Address: {is: "0x940181a94a35a4569e4529a3cdfb74e38fd98631"}}}
+    ) {
+      Currency {
+        Symbol
+        Name
+        Id
+      }
+      Market {
+        Protocol
+        Program
+        Network
+        Name
+        Address
+      }
+      Token {
+        Address
+        Id
+        Name
+        Symbol
+        TokenId
+      }
+      Volume {
+        Usd
+        Base
+        Quote
+        BaseQuotedInUsd
+      }
+      QuoteToken {
+        TokenId
+        Name
+        Id
+        Address
+        Symbol
+      }
+      QuoteCurrency {
+        Id
+      }
+      Price {
+        Ohlc {
+          Open
+          Low
+          High
+          Close
+        }
+        Average {
+          WeightedSimpleMoving
+          SimpleMoving
+          Mean
+          ExponentialMoving
+        }
+      }
+    }
+  }
+}
+
+
+```
+
+## Understanding Intervals
+
+Unlike DEXtrades APIs, the intervals here are fixed and cannot be arbitrary.
+
+### Supported Time Intervals
+
+The following durations (in seconds) are supported for querying or streaming historical and real-time data:
+
+`1,  3,  5,  10,  30,  60,  300,  900,  1800,  3600`
+
+### Supported Volume Aggregation Levels
+
+Use `TargetVolume` to get price intervals aggregated over a volume threshold:
+
+`1000, 10000, 100000, 1000000 (USD)`
