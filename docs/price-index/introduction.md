@@ -77,7 +77,7 @@ It takes amounts and prices from all chains that use BTC and wrapped versions (i
 
 ## Tokens
 
-Let's say you don't want a chain agnostic view, but want to focus on aparticular chain. How to stream or query prices for it? This is where tokens come in.
+Let's say you don't want a chain agnostic view, but want to focus on a particular chain. How to stream or query prices for it? This is where tokens come in.
 
 ```
 {
@@ -197,6 +197,8 @@ subscription {
 
 This is the 3rd cube in these set of APIs. The Pairs cube gives you price, volume, and market-level trading data between two tokens — a base token and a quote token.
 We will breakdown in detail how base token and Quote are chosen in the next section.
+
+> **Tip**: Use `TokenId` instead of `Token.Address` to fetch all variants of the same token (e.g., ETH, WETH, bridged ETH) across multiple chains.
 
 ```
 subscription {
