@@ -575,6 +575,18 @@ const sidebars = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Price Index for Trading",
+      link: {
+        type: "generated-index",
+        title: "Start",
+        description: "Using Price Streams for Tokens & Currencies Across Chains",
+      },
+      items: [
+       "price-index/introduction"
+      ],
+    },
 
     {
       type: "category",
