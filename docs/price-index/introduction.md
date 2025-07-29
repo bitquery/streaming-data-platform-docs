@@ -1,6 +1,9 @@
-# Price API - Introduction
+# Price Index API - Introduction
 
 Starting July 2025, we have introduced separate chain-agnostic price APIs and Streams via graphQL and Kafka. They allow you to stream and query price, OHLC, statistics for all tokens on Bitcoin,EVM, Solana, Tron chains.
+
+## What is the Price Index API and Why Does It Matter?
+This API is the foundational layer of our trading-focused data suite. We're actively expanding our trading dataset, with much more to come in the months and years ahead
 
 ![](/img/trade_api/api.png)
 
@@ -268,7 +271,7 @@ Unlike DEXtrades APIs, the intervals here are fixed and cannot be arbitrary.
 
 ### Supported Time Intervals
 
-The following durations (in seconds) are supported for querying or streaming historical and real-time data:
+The following durations (in seconds) are supported for querying or streaming historical and real-time data, unlike DEX APIs, these intervals are fixed, other values are not supported.
 
 `1,  3,  5,  10,  30,  60,  300,  900,  1800,  3600`
 
