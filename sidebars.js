@@ -97,6 +97,7 @@ const sidebars = {
             "graphql/query",
             "graphql/sorting",
             "graphql/capabilities/joins",
+            "graphql/capabilities/expression",
           ],
         },
         {
@@ -573,6 +574,18 @@ const sidebars = {
           },
           items: ["examples/cross-chain/cross-chain-api"],
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Price Index for Trading",
+      link: {
+        type: "generated-index",
+        title: "Start",
+        description: "Using Price Streams for Tokens & Currencies Across Chains",
+      },
+      items: [
+       "price-index/introduction"
       ],
     },
 

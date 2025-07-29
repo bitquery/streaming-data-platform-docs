@@ -33,7 +33,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Moonit Trades in Real-Time
 
-The below query gets real-time information whenever there's a new trade on the Moonit including program method called , buy and sell details, details of the currencies involved, and the transaction specifics like signature.
+The below query gets real-time information whenever there's a new trade on the Moonshot including program method called , buy and sell details, details of the currencies involved, and the transaction specifics like signature.
 You can run the query [here](https://ide.bitquery.io/Moonshot-DEX-Trades_2)
 
 ```graphql
