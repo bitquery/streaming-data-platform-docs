@@ -97,6 +97,7 @@ const sidebars = {
             "graphql/query",
             "graphql/sorting",
             "graphql/capabilities/joins",
+            "graphql/capabilities/expression",
           ],
         },
         {
