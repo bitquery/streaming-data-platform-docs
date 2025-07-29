@@ -415,6 +415,46 @@ query ActiveUniswapTraders {
 
 </details>
 
+## Get OHLC for a Pair on Uniswap
+
+[Run Query](https://ide.bitquery.io/OHLC-of-a-pair-on-all-Uniswap-versions)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+
+query tradingViewPairs($network: evm_network, $dataset: dataset_arg_enum, $interval: Int, $token: String, $base: String, $from: DateTime, $to: DateTime) {
+  EVM(network: $network, dataset: $dataset) {
+    DEXTradeByTokens(
+      orderBy: {ascendingByField: "Block_Time"}
+      where: {TransactionStatus: {Success: true}, Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $token}}}, Currency: {SmartContract: {is: $base}}, Success: true, Dex: {ProtocolName: {in: ["uniswap_v3", "uniswap_v2", "uniswap_v1"]}}}, Block: {Time: {since: $from, till: $to}}}
+    ) {
+      Block {
+        Time(interval: {count: $interval, in: seconds})
+      }
+      min: quantile(of: Trade_PriceInUSD, level: 0.1)
+      max: quantile(of: Trade_PriceInUSD, level: 0.9)
+      close: average(of: Trade_PriceInUSD)
+      open: average(of: Trade_PriceInUSD)
+      volume: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+{
+  "network": "eth",
+  "base": "0x2653cd00ceb854efb65b1bb4cbf19c760f66cc3e",
+  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "dataset": "realtime",
+  "interval": 60,
+  "from": "2025-07-26T06:41:38.000Z",
+  "to": "2025-07-29T06:41:38.000Z"
+}
+
+```
+
+</details>
+
 ## Uniswap Kafka Streams
 
 You can get Uniswap data with sub-second latency via Kafka Streams. Read more [here](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
@@ -422,3 +462,4 @@ You can get Uniswap data with sub-second latency via Kafka Streams. Read more [h
 Contact us on our telegram channel for a trial credentials.
 
 <VideoPlayer url="https://youtu.be/xcW_Na7YwSk" />
+```
