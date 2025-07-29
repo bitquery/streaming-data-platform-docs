@@ -3,7 +3,12 @@
 Starting July 2025, we have introduced separate chain-agnostic price APIs and Streams via graphQL and Kafka. They allow you to stream and query price, OHLC, statistics for all tokens on Bitcoin,EVM, Solana, Tron chains.
 
 ## What is the Price Index API and Why Does It Matter?
-This API is the foundational layer of our trading-focused data suite. We're actively expanding our trading dataset, with much more to come in the months and years ahead
+
+This API is the foundational layer of our trading-focused data suite. We're actively expanding our trading dataset, with much more to come in the months and years ahead.
+
+The focus of this product suite is to help traders win. As we receive feedback, we will improve the dataset quality, add more metrics and APIs.
+
+## Accessing the API
 
 ![](/img/trade_api/api.png)
 
