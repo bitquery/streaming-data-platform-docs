@@ -10,6 +10,22 @@ The focus of this product suite is to help traders win. As we receive feedback, 
 
 ## How is this API different from DEXTrades and DEXTRadesByToken APIs?
 
+The Price Index API is a chain-agnostic, pre-aggregated price feed designed specifically for trading,futures, charting, and analytics. Here's how it differs from the existing **DEXTrades** and **DEXTradesByToken** APIs:
+
+- **Granularity**:
+
+  - **DEXTrades / DEXTradesByToken** provide **raw transaction-level data**, showing every trade on supported DEXs for each chain.
+  - **Price Index API** offers **pre-aggregated price metrics** like OHLC, average prices, and volume at fixed time or volume intervals.
+
+- **Aggregation**:
+
+  - In DEX APIs, you had to **aggregate trades** to calculate OHLC or moving averages.
+  - The Price Index API provides **ready-to-use OHLC and price statistics** out of the box , no need to calculate anything.
+
+- **Chain Perspective**:
+
+  - DEX APIs are **chain-specific**: each query targets a specific network (e.g., Ethereum, Solana, Tron).
+  - The Price Index API is **chain-agnostic**: you can get price data across all chains for a given token or token representation (e.g., WBTC on Ethereum, native BTC on Bitcoin, etc.).
 
 ## Accessing the API
 
@@ -290,3 +306,5 @@ The following durations (in seconds) are supported for querying or streaming his
 Use `TargetVolume` to get price intervals aggregated over a volume threshold:
 
 `1000, 10000, 100000, 1000000 (USD)`
+
+## When to Choose Which Cube (Token, Currency, Pair)?
