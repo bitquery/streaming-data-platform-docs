@@ -1,4 +1,4 @@
-# Calculate Expression
+# Expressions
 
 ## What is a Calculate Expression?
 
@@ -46,7 +46,7 @@ query MyQuery {
 }
 ```
 
-Click **here** to checkout the list of all available operators.
+Click **[here](https://clickhouse.com/docs/sql-reference/functions/regular-functions)** to check the list of all available operators.
 
 ### Expression Nesting
 
@@ -68,7 +68,7 @@ query MyQuery {
 Note that the `expression` using `calculate()` could be nested even further.
 
 :::note
-The time interval is derived using `after_relative` keyword with the option of `hours_ago` set as `1` to get all trades of the token in the last one hour. Click **here** to read more about the `after_relative` keyword
+The time interval is derived using `after_relative` keyword with the option of `hours_ago` set as `1` to get all trades of the token in the last one hour.
 :::
 
 ## Expressions in Streams
