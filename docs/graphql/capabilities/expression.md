@@ -6,7 +6,7 @@ An expression is a mathematical function that can be applied to metrics in a Gra
 
 You can create an expression in a query using `calculate()` function.
 
-## Expressions Through Examples
+## Expressions API Examples
 
 ### Price Change Percentage of a Token
 
@@ -29,6 +29,43 @@ query MyQuery {
   }
 }
 ```
+### Multiple Operators Inside Expression
+
+This example shows how multiple operators could be utilised inside expression at the same time.
+
+```graphql
+query MyQuery {
+  Trading {
+    Currencies {
+      a1:sum(of: Price_Average_WeightedSimpleMoving)
+      a2:count
+      a3:uniq(of: Currency_Id)
+      a4:calculate(expression:"( 10 * ($a2 - $a1) + $a3 * $a1 ) / $a2")
+    }
+  }
+}
+```
+
+Click **here** to checkout the list of all available operators.
+
+### Expression Nesting
+
+You can also use an expression inside an expression as shown in the example below.
+
+```graphql
+query MyQuery {
+  Trading {
+    Currencies {
+      a1:sum(of: Price_Average_WeightedSimpleMoving)
+      a2:count
+      a3:uniq(of: Currency_Id)
+      a4:calculate(expression:"$a1 - $a2")
+      a5: calculate(expression:"$a4 * $a3 / 100")
+    }
+  }
+}
+```
+Note that the `expression` using `calculate()` could be nested even further.
 
 :::note
 The time interval is derived using `after_relative` keyword with the option of `hours_ago` set as `1` to get all trades of the token in the last one hour. Click **here** to read more about the `after_relative` keyword
