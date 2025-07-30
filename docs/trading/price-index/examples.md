@@ -1,18 +1,16 @@
+
 # Quick Start Examples
 
-## OHLC Stream on A Chain
+## OHLC Stream on a Chain
 
-Mention the chain/network using the `Token: {Network}` filter. Available values are: `Ethereum`,`Solana`
-, `Base`, `Optimism`, `Opbnb`, `Matic`, `Arbitrum`, `Binance Smart Chain`,`Tron`.
+Mention the chain/network using the `Token: {Network}` filter.  
+Available values: `Ethereum`, `Solana`, `Base`, `Optimism`, `Opbnb`, `Matic`, `Arbitrum`, `Binance Smart Chain`, `Tron`.
 
-The available duration intervals are listed [here](https://docs.bitquery.io/docs/trading/price-index/introduction/#understanding-intervals)
+The available duration intervals are listed [here](https://docs.bitquery.io/docs/trading/price-index/introduction/#understanding-intervals).
 
 [Run Stream ➤](https://ide.bitquery.io/Aggregated-Price-of-all-tokens-in-real-time-on-one-chain_1)
 
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```
+```graphql
 subscription {
   Trading {
     Tokens(
@@ -24,7 +22,6 @@ subscription {
         IsNative
         Name
         Network
-        Name
         Symbol
         TokenId
       }
@@ -66,23 +63,25 @@ subscription {
 
 ```
 
-</details>
+
 
 ## OHLC of a Token Pair Across Chains
 
-This subscription fetches real-time OHLC (Open, High, Low, Close) price data for a token pair across different blockchains.
+This subscription fetches real-time OHLC (Open, High, Low, Close) price data for a token pair across different blockchains.  
 For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ETH).
 
 [Run Stream ➤](https://ide.bitquery.io/Copy-of-Pair-OHLC-Stream)
 
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```
-subscription{
+```graphql
+subscription {
   Trading {
     Pairs(
-      where: {Price: {IsQuotedInUsd: false}, Interval: {Time: {Duration: {eq: 60}}}, Token: {Address: {is: "0xc0634090f2fe6c6d75e61be2b949464abb498973"}}, QuoteCurrency: {Id: {is: "bid:eth"}}}
+      where: {
+        Price: {IsQuotedInUsd: false}
+        Interval: {Time: {Duration: {eq: 60}}}
+        Token: {Address: {is: "0xc0634090f2fe6c6d75e61be2b949464abb498973"}}
+        QuoteCurrency: {Id: {is: "bid:eth"}}
+      }
     ) {
       Token {
         Id
@@ -118,23 +117,22 @@ subscription{
   }
 }
 
-
 ```
 
-</details>
 
-## Find Price Arbitrage Opportunity Of Pair Across Chains
+
+## Find Price Arbitrage Opportunity of Pair Across Chains
 
 [Run Stream ➤](https://ide.bitquery.io/Find-arbitrage-opportunity-with-same-token-across-chains)
 
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```
+```graphql
 {
   Trading {
     Pairs(
-      where: {Currency: {Id: {is: "bid:bitcoin"}}, QuoteCurrency: {Id: {is: "usdt"}}}
+      where: {
+        Currency: {Id: {is: "bid:bitcoin"}}
+        QuoteCurrency: {Id: {is: "usdt"}}
+      }
       limit: {count: 10}
       orderBy: {descending: Block_Time}
       limitBy: {by: Market_Address, count: 1}
@@ -177,6 +175,195 @@ subscription{
     }
   }
 }
+
 ```
 
-</details>
+
+## 5 Minute Price Change API
+
+This stream uses [expressions](http://docs.bitquery.io/docs/graphql/capabilities/expression/)
+
+[Run Stream ➤](http://ide.bitquery.io/5-minute-price-change-api)
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: {count: 10}
+      orderBy: {descendingByField: "change"}
+      where: {
+        Volume: {Usd: {gt: 100000}}
+        Interval: {Time: {Duration: {eq: 300}}}
+      }
+    ) {
+      Token {
+        Address
+        Did
+        Id
+        IsNative
+        Name
+        Network
+        Symbol
+        TokenId
+      }
+      Currency {
+        Symbol
+        Id
+        Name
+      }
+      Interval {
+        VolumeBased
+        Time {
+          Start
+          End
+        }
+      }
+      Volume {
+        Base
+        BaseQuotedInUsd
+        Quote
+        Usd
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+        Average {
+          Estimate
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+      }
+      diff: calculate(expression: "Price_Ohlc_Close - Price_Ohlc_Open")
+      change: calculate(expression: "round(($diff / Price_Ohlc_Open), 3) * 100")
+    }
+  }
+}
+
+```
+
+## 5 Minute Price Change Stream on Solana
+
+This stream uses [expressions](http://docs.bitquery.io/docs/graphql/capabilities/expression/)
+
+[Run Stream ➤](https://ide.bitquery.io/5-minute-price-change-api-on-solana)
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: {count: 10}
+      limitBy: {count: 1 by: Token_Id}
+      orderBy: [{descending: Block_Time}, {descendingByField: "change"}]
+      where: {
+        Token: {Network: {is: "Solana"}}
+        Volume: {Usd: {gt: 100000}}
+        Interval: {Time: {Duration: {eq: 300}}}
+      }
+    ) {
+      Token {
+        Address
+        Did
+        Id
+        IsNative
+        Name
+        Network
+        Symbol
+        TokenId
+      }
+      Currency {
+        Symbol
+        Id
+        Name
+      }
+      Interval {
+        VolumeBased
+        Time {
+          Start
+          End
+        }
+      }
+      Volume {
+        Base
+        BaseQuotedInUsd
+        Quote
+        Usd
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+        Average {
+          Estimate
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+      }
+      diff: calculate(expression: "Price_Ohlc_Close - Price_Ohlc_Open")
+      change: calculate(expression: "round(($diff / Price_Ohlc_Open), 3) * 100")
+    }
+  }
+}
+
+```
+
+
+
+## Volume-Based Bitcoin Price Stream
+
+[Run Stream ➤](https://ide.bitquery.io/5-minute-price-change-api-on-solana)
+
+```graphql
+subscription {
+  Trading {
+    Currencies(
+      where: {
+        Interval: {
+          VolumeBased: true
+          TargetVolume: {eq: 1000000}
+        }
+        Currency: {Id: {is: "bid:bitcoin"}}
+      }
+    ) {
+      Currency {
+        Symbol
+        Id
+        Name
+      }
+      Interval {
+        VolumeBased
+        Time {
+          Start
+          End
+        }
+      }
+      Volume {
+        Base
+        BaseQuotedInUsd
+        Quote
+        Usd
+      }
+      Price {
+        IsQuotedInUsd
+        Average {
+          Mean
+        }
+      }
+    }
+  }
+}
+
+```
+
