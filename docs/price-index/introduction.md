@@ -22,6 +22,8 @@ The Price APIs have three core data cubes:
 - **Currencies**: Aggregated view of a token across chains — e.g., BTC across Bitcoin, Ethereum (as WBTC), Solana, etc.
 - **Pairs**: Price and volume data for token pairs on specific markets/protocols. E.g., SOL/USDC on Raydium (Solana) or ETH/USDT on Uniswap (Ethereum).
 
+> Note: Expressions are supported in this API.
+
 ## Currencies
 
 Currencies are representation of all tokens on different chains. For example, take the case of Bitcoin, while it is a native token on Bitcoin chain, it is also traded on EVM chains as WBTC ( wrapped BTC). Now all these representations of BTC are represented as a single currency.
