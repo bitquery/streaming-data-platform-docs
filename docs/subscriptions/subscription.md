@@ -50,7 +50,7 @@ subscription{
 
 ### Example: Tracking USDT Transfers on Ethereum
 
-In this query, we see how to run multiple queries with a single WebSocket.
+In this graphQL stream, we see how to run multiple streams with a single WebSocket.
 
 This query will return two sets of transfer data for USDT on the Ethereum network: `transfers_above_10K` and `transfers_below_10K`. The `transfers_above_10K` data set includes all transfers with an amount greater than or equal to 10,000 USDT. The `transfers_below_10K` data set includes all transfers with an amount less than 10,000 USDT. Both data sets include the transaction hash, sender, receiver, and amount of each transfer.
 
