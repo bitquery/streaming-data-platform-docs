@@ -23,6 +23,16 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 This query gets the latest 10 trades on Solana. You can increase the limit to get more trades. This query only uses real-time data.  
 ▶️ [Solana Trades](https://ide.bitquery.io/Solana-dextrades)
 
+### Price change 5min, 1hr, 6hr precentage of a specific token
+
+With this, you can get the price change 5min, 1hr, 6hr precentage of a specific token.
+▶️ [Price change 5min, 1hr, 6hr precentage](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token)
+
+### Top 10 solana tokens by price change in last 1 hr
+
+With this, you can get top 10 solana tokens by price change in last 1 hr.
+▶️ [Top 10 solana tokens by price change in last 1 hr](https://ide.bitquery.io/Top-10-solana-tokens-by-price-change-in-last-1-hr#)
+
 ### Solana Trades of a Token
 
 With this, you can query the trades of a token against another currency like WSOL or USDC.  
@@ -71,6 +81,11 @@ This query returns Solana balance update info for any balance update event. It i
 
 This query retrieves all instances of a specific token pair across decentralized exchanges (DEXs) on Solana, along with their current liquidity.
 ▶️ [All Token Pairs Across DEXs with Current Liquidity](https://ide.bitquery.io/All-Liquidity-pairs-of-a-token-and-current-liquidity-on-solana)
+
+### Top 10 marketcap jump tokens in last 1hr
+
+This query retrieves top 10 marketcap jump tokens in last 1hr.
+▶️ [Top 10 marketcap jump tokens in last 1hr](https://ide.bitquery.io/top-10-marketcap-jump-tokens-in-last-1hr#)
 
 ### Solana Pool Liquidity Changes
 
@@ -183,7 +198,17 @@ Returns a list of newly created tokens on the Pump Fun.
 ### Get Bonding Curve Progress of a Token on Pump Fun
 
 Returns Bonding Curve Percentage of a Token on the Pump Fun.
-▶️ [Bonding Curve Percentage of a Token on Pump Fun](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/#bonding-curve-progress-api)
+▶️ [Bonding Curve Percentage of a Token on Pump Fun](https://ide.bitquery.io/get-the-bonding-curve-progress-percentage_1)
+
+### Track Pump Fun Tokens above 95% Bonding Curve Progress in realtime
+
+Returns Pump fun tokens which have more than 95% bonding curve progress.
+▶️ [Pump Fun Tokens above 95% Bonding Curve Progress](https://ide.bitquery.io/Pump-Fun-Tokens-between-95-and-100-bonding-curve-progress_3)
+
+### Top 100 About to Graduate Pump Fun Tokens
+
+Returns top 100 About to Graduate Pump Fun Tokens.
+▶️ [Top 100 About to Graduate Pump Fun Tokens](https://ide.bitquery.io/Top-100-graduating-pump-fun-tokens-in-last-5-minutes_2)
 
 ### Get Graduated Tokens by Exchange
 
@@ -194,6 +219,11 @@ Returns a list of tokens that have graduated (completed bonding phase) on Pump F
 
 This query returns the top 10 PumpFun tokens based on market cap. You can increase the limit to get more tokens.  
 ▶️ [Top Tokens by Marketcap](https://ide.bitquery.io/top-tokens-by-mktcap-on-pump-fun-in-last-15-min)
+
+### Top 10 pump fun tokens by Price change in last 5mins
+
+This query returns the top 10 pump fun tokens by Price change in last 5mins. You can increase the limit to get more tokens.  
+▶️ [Top 10 pump fun tokens by Price change in last 5mins](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Price-change-in-last-5mins)
 
 ### Latest Trades in Real Time
 
@@ -224,10 +254,20 @@ This query returns the latest created pools on Raydium launchpad. You can set th
 This query returns the latest price of a token on the Raydium launchpad.  
 ▶️ [Latest Token Price on Launchpad](https://ide.bitquery.io/Latest-Price-of-a-Token-on-Launchpad)
 
-### Graduating Tokens on Raydium Launchpad
+### Get Bonding Curve Progress of a Raydium Launchpad Token
 
-This query gives you tokens which are about to graduate on Raydium Launchpad. We essentially get this data by getting tokens which are between 95% to 100% bonding curve progress.
-▶️ [About to graduate tokens on Launchpad](https://ide.bitquery.io/Latest-Price-of-a-Token-on-Launchpad)
+Returns Bonding Curve Percentage of a Raydium Launchpad Token.
+▶️ [Bonding Curve Percentage of a Raydium Launchpad Token](https://ide.bitquery.io/bonding-curve-progress-percentage-of-a-letsbonkfun-token)
+
+### Track Raydium Launchpad tokens above 95% Bonding Curve Progress in realtime
+
+Returns Raydium Launchpad tokens which have more than 95% bonding curve progress.
+▶️ [Raydium Launchpad Tokens above 95% Bonding Curve Progress](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_2)
+
+### Top 100 About to Graduate Raydium Launchpad Tokens
+
+Returns top 100 About to Graduate Raydium Launchpadn Tokens.
+▶️ [Top 100 About to Graduate Raydium Launchpad Tokens](https://ide.bitquery.io/Top-100-graduating-raydium-launchlab-tokens-in-last-5-minutes)
 
 ### Graduated Tokens
 
@@ -241,15 +281,20 @@ This query gives you tokens which are graduated from Raydium Launchpad to Raydiu
 This query returns the latest price of a LetsBonk.fun token.  
 ▶️ [Latest LetsBonk.fun Token Price](https://ide.bitquery.io/Latest-Price-of-a-LetsBonkfun-Token-on-Launchpad?)
 
-### Graduating LetsBonk.fun Tokens
+### Get Bonding Curve Progress of a LetsBonk.fun Token
 
-This query gives you LetsBonk.fun tokens which are about to graduate. We essentially get this data by getting tokens which are between 95% to 100% bonding curve progress.
-▶️ [About to graduate LetsBonk.fun tokens](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_1)
+Returns Bonding Curve Percentage of a LetsBonk.fun Token.
+▶️ [Bonding Curve Percentage of a LetsBonk.fun Token](https://ide.bitquery.io/bonding-curve-progress-percentage-of-a-letsbonkfun-token)
 
-### Graduated Tokens
+### Track LetsBonk.fun tokens above 95% Bonding Curve Progress in realtime
 
-This query gives you LetsBonk.fun tokens which are graduated from Raydium Launchpad to Raydium.
-▶️ [Graduated LetsBonk.fun Tokens](https://ide.bitquery.io/Track-Token-Migrations-to-Raydium-DEX-and-Raydium-CPMM-in-realtime)
+Returns LetsBonk.fun tokens which have more than 95% bonding curve progress.
+▶️ [LetsBonk.fun Tokens above 95% Bonding Curve Progress](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_2)
+
+### Top 100 About to Graduate LetsBonk.fun Tokens
+
+Returns top 100 About to Graduate LetsBonk.fun Tokens.
+▶️ [Top 100 About to Graduate LetsBonk.fun Tokens](https://ide.bitquery.io/Top-100-graduating-raydium-launchlab-tokens-in-last-5-minutes)
 
 ## EVM Token Holder API
 

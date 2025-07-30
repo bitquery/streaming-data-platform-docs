@@ -52,9 +52,7 @@ query MyQuery {
       orderBy: { descending: Block_Time }
       where: {
         Trade: {
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
           Dex: {
             ProgramAddress: {
               is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
@@ -147,6 +145,49 @@ subscription MyQuery {
 
 You can also observe the approach of using `TokenSupplyUpdate` block to get the similiar data [here](https://docs.bitquery.io/docs/examples/Solana/token-supply-cube/).
 
+## Top 10 pump fun tokens by Marketcap change in last 5mins
+
+Use the below query to get top 10 pump fun tokens by Marketcap change in last 5mins. Test the query [here](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Marketcap-change-in-last-5mins).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      limit: {count: 10}
+      orderBy:{descendingByField:"Marketcap_Change_5min"}
+      where: {Trade: {Dex: {ProgramAddress: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}}, Transaction: {Result: {Success: true}}, Block: {Time: {since_relative: {hours_ago: 6}}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Price_5min_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{minutes_ago:5}}}})
+				Price_1h_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{hours_ago:1}}}})
+        Price_6h_ago: PriceInUSD(minimum: Block_Time)
+        CurrentPrice: PriceInUSD(maximum: Block_Time)
+        Side {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+        }
+      }
+      Marketcap_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_6h_ago) * 100")
+      Marketcap_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_6h_ago) * 100")
+      Marketcap_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100")
+    }
+  }
+}
+```
+
+</details>
+
 ## Check if the Pump Fun Token has migrated to PumpSwap - API
 
 To check if a Pump Fun Token has migrated to PumpSwap, we can use the below query. In this query we are checking if this token `7JsSjVLACA1V7SzTHHeE9XKCP3KJGUwUmqgDm5Hupump` has migrated to PumpSwap. You can run the query [here](https://ide.bitquery.io/check-if-a-pumpfun-token-has-migrated-to-PumpSwap).
@@ -167,11 +208,7 @@ To check if a Pump Fun Token has migrated to PumpSwap, we can use the below quer
             Method: { is: "create_pool" }
             Address: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
           }
-          Accounts: {
-            includes: {
-              Address: { is: "token mint address" }
-            }
-          }
+          Accounts: { includes: { Address: { is: "token mint address" } } }
         }
       }
     ) {
@@ -529,7 +566,7 @@ query MyQuery {
 
 ## Bonding Curve Progress API
 
-Below query will give you amount of `left tokens` put it in the below given simplied formulae and you will get Bonding Curve progress for the token.
+Below query will give you the Bonding curve progress percentage of a specific Pump Fun Token.
 
 ### Bonding Curve Progress Formula
 
@@ -558,21 +595,23 @@ BondingCurveProgress = 100 - (((balance - 206900000) \* 100) / 793100000)
 
 - **Balance Retrieval**:
   - The `balance` is the token balance at the market address.
-  - Use this query to fetch the balance: [Query Link](https://ide.bitquery.io/Get-balance-of-a-pair-address-on-solana).
+  - Use this query to fetch the balance and then we use `espressions` to calculate the bonding curve progress percentage in the query itself: [Query Link](https://ide.bitquery.io/get-the-bonding-curve-progress-percentage_1).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query GetLatestLiquidityForPool {
+query GetBondingCurveProgressPercentage {
   Solana {
     DEXPools(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Slot }
       where: {
         Pool: {
           Market: {
             BaseCurrency: {
               MintAddress: {
-                is: "token mint address"
+                is: "3j3fKH9Nw9cPZsZSPvE5qNgLWnxGk6tBHM9kX3qopump"
               }
             }
           }
@@ -583,9 +622,10 @@ query GetLatestLiquidityForPool {
           }
         }
       }
-      orderBy: { descending: Block_Slot }
-      limit: { count: 1 }
     ) {
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100 - ((($Pool_Base_Balance - 206900000) * 100) / 793100000)"
+      )
       Pool {
         Market {
           MarketAddress
@@ -610,7 +650,7 @@ query GetLatestLiquidityForPool {
           PostAmountInUSD
         }
         Base {
-          PostAmount
+          Balance: PostAmount
         }
       }
     }
@@ -622,7 +662,7 @@ query GetLatestLiquidityForPool {
 
 ## Track Pump Fun Tokens above 95% Bonding Curve Progress in realtime
 
-We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/Pump-Fun-Tokens-between-95-and-100-bonding-curve-progress).
+We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/Pump-Fun-Tokens-between-95-and-100-bonding-curve-progress_3).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -641,13 +681,21 @@ subscription MyQuery {
           }
           Market: {
             QuoteCurrency: {
-              MintAddress: { is: "11111111111111111111111111111111" }
+              MintAddress: {
+                in: [
+                  "11111111111111111111111111111111"
+                  "So11111111111111111111111111111111111111112"
+                ]
+              }
             }
           }
         }
         Transaction: { Result: { Success: true } }
       }
     ) {
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100 - ((($Pool_Base_Balance - 206900000) * 100) / 793100000)"
+      )
       Pool {
         Market {
           BaseCurrency {
@@ -667,7 +715,7 @@ subscription MyQuery {
           ProtocolFamily
         }
         Base {
-          PostAmount
+          Balance: PostAmount
         }
         Quote {
           PostAmount
@@ -684,7 +732,7 @@ subscription MyQuery {
 
 ## Top 100 About to Graduate Pump Fun Tokens
 
-We can use below query to get top 100 About to Graduate Pump Fun Tokens. You can run and test the saved query [here](https://ide.bitquery.io/Top-100-graduating-pump-fun-tokens-in-last-5-minutes_1).
+We can use below query to get top 100 About to Graduate Pump Fun Tokens. You can run and test the saved query [here](https://ide.bitquery.io/Top-100-graduating-pump-fun-tokens-in-last-5-minutes_2).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -716,9 +764,12 @@ We can use below query to get top 100 About to Graduate Pump Fun Tokens. You can
           }
         }
         Transaction: { Result: { Success: true } }
-        Block: { Time: { since: "2025-07-11T13:45:00Z" } }
+        Block: { Time: { since_relative: { minutes_ago: 5 } } }
       }
     ) {
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100 - ((($Pool_Base_Balance - 206900000) * 100) / 793100000)"
+      )
       Pool {
         Market {
           BaseCurrency {
@@ -738,7 +789,7 @@ We can use below query to get top 100 About to Graduate Pump Fun Tokens. You can
           ProtocolFamily
         }
         Base {
-          PostAmount(maximum: Block_Time)
+          Balance: PostAmount(maximum: Block_Time)
         }
         Quote {
           PostAmount

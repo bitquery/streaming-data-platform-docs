@@ -27,14 +27,14 @@ These APIs can be provided through different streams including Kafka for zero la
 
 We will use the `PoolCreateEvent` method to filter latest pools on Launchpad. The `Argument` filed includes more information about the pool like `base_mint_param`( token details), `curve_param`( bonding curve details) and `vesting_param` ( cliff period, amount locked etc).
 
-You can run the query [here](https://ide.bitquery.io/Launchpad-latest-pool-created)
+You can run the query [here](https://ide.bitquery.io/Launchpad-realtime--pool-creations_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-{
-  Solana(network: solana, dataset: realtime) {
+subscription {
+  Solana(network: solana) {
     Instructions(
       where: {
         Instruction: {
@@ -44,8 +44,14 @@ You can run the query [here](https://ide.bitquery.io/Launchpad-latest-pool-creat
           }
         }
       }
-      orderBy: { descending: Block_Time }
     ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signer
+        Signature
+      }
       Instruction {
         Accounts {
           Address
@@ -197,9 +203,9 @@ subscription MyQuery {
 
 </details>
 
-## Bonding Curve Progress API for Raydium Launchpad token
+## Bonding Curve Progress API
 
-Below query will give you amount of `left tokens` put it in the below given simplied formulae and you will get Bonding Curve progress for the token.
+Below query will give you the Bonding curve progress percentage of a specific Raydium Launchlab Token.
 
 ### Bonding Curve Progress Formula
 
@@ -213,7 +219,7 @@ Where:
 
 - **Definitions**:
   - `initialRealTokenReserves` = `totalSupply` - `reservedTokens`
-    - `totalSupply`: 1,000,000,000 (Raydium Launchpad Token)
+    - `totalSupply`: 1,000,000,000 (Raydium Launchlab Token)
     - `reservedTokens`: 206,900,000
     - Therefore, `initialRealTokenReserves`: 793,100,000
   - `leftTokens` = `realTokenReserves` - `reservedTokens`
@@ -228,21 +234,23 @@ BondingCurveProgress = 100 - (((balance - 206900000) \* 100) / 793100000)
 
 - **Balance Retrieval**:
   - The `balance` is the token balance at the market address.
-  - Use this query to fetch the balance: [Query Link](https://ide.bitquery.io/Get-balance-of-a-pair-address-on-solana_2).
+  - Use this query to fetch the balance and then we use `espressions` to calculate the bonding curve progress percentage in the query itself: [Query Link](https://ide.bitquery.io/bonding-curve-progress-percentage-of-a-letsbonkfun-token).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query GetLatestLiquidityForPool {
+query GetBondingCurveProgressPercentage {
   Solana {
     DEXPools(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Slot }
       where: {
         Pool: {
           Market: {
             BaseCurrency: {
               MintAddress: {
-                is: "token mint address"
+                is: "CctsjizSC6pwf2T8bhdHdZTEV4PEcfXoumjeK7FBbonk"
               }
             }
           }
@@ -253,9 +261,10 @@ query GetLatestLiquidityForPool {
           }
         }
       }
-      orderBy: { descending: Block_Slot }
-      limit: { count: 1 }
     ) {
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100-((($Pool_Base_Balance - 206900000) * 100) / 793100000)"
+      )
       Pool {
         Market {
           MarketAddress
@@ -280,7 +289,7 @@ query GetLatestLiquidityForPool {
           PostAmountInUSD
         }
         Base {
-          PostAmount
+          Balance: PostAmount
         }
       }
     }
@@ -290,9 +299,9 @@ query GetLatestLiquidityForPool {
 
 </details>
 
-## Track Raydium Launchpad Tokens above 95% Bonding Curve Progress
+## Track Raydium Launchlab Tokens above 95% Bonding Curve Progress in realtime
 
-We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/raydium-launchpad-Tokens-between-95-and-100-bonding-curve-progress).
+We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_2).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -323,6 +332,9 @@ subscription MyQuery {
         Transaction: { Result: { Success: true } }
       }
     ) {
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100 - ((($Pool_Base_Balance - 206900000) * 100) / 793100000)"
+      )
       Pool {
         Market {
           BaseCurrency {
@@ -342,7 +354,7 @@ subscription MyQuery {
           ProtocolFamily
         }
         Base {
-          PostAmount
+          Balance: PostAmount
         }
         Quote {
           PostAmount
@@ -357,9 +369,9 @@ subscription MyQuery {
 
 </details>
 
-## Top 100 About to Graduate Raydium Launchpad Tokens
+## Top 100 About to Graduate Raydium Launchlab Tokens
 
-We can use below query to get top 100 About to Graduate Raydium Launchpad Tokens. You can run and test the saved query [here](https://ide.bitquery.io/Top-100-graduating-tokens-in-last-5-minutes_1).
+We can use below query to get top 100 About to Graduate Raydium Launchlab Tokens. You can run and test the saved query [here](https://ide.bitquery.io/Top-100-graduating-raydium-launchlab-tokens-in-last-5-minutes).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -391,9 +403,12 @@ We can use below query to get top 100 About to Graduate Raydium Launchpad Tokens
           }
         }
         Transaction: { Result: { Success: true } }
-        Block: { Time: { since: "2025-07-11T13:45:00Z" } }
+        Block: { Time: { since_relative: { minutes_ago: 5 } } }
       }
     ) {
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100 - ((($Pool_Base_Balance - 206900000) * 100) / 793100000)"
+      )
       Pool {
         Market {
           BaseCurrency {
@@ -413,7 +428,7 @@ We can use below query to get top 100 About to Graduate Raydium Launchpad Tokens
           ProtocolFamily
         }
         Base {
-          PostAmount(maximum: Block_Time)
+          Balance: PostAmount(maximum: Block_Time)
         }
         Quote {
           PostAmount
@@ -501,9 +516,7 @@ You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-Token-on-
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
         }
       }
     ) {
@@ -606,9 +619,7 @@ query MyQuery {
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
           Side: { Type: { is: buy } }
         }
       }
@@ -647,9 +658,7 @@ query MyQuery {
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
           Side: { Type: { is: sell } }
         }
       }
@@ -688,9 +697,7 @@ query MyQuery {
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
           Side: {
             Currency: {
               MintAddress: { is: "So11111111111111111111111111111111111111112" }
@@ -734,9 +741,7 @@ query MyQuery {
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: {
-            MintAddress: { is: "token mint address" }
-          }
+          Currency: { MintAddress: { is: "token mint address" } }
         }
       }
     ) {

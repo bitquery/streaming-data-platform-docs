@@ -91,9 +91,9 @@ subscription {
 
 </details>
 
-## Bonding Curve Progress API for LetsBonk.fun token
+## Bonding Curve Progress API
 
-Below query will give you amount of `left tokens` put it in the below given simplied formulae and you will get Bonding Curve progress for the token.
+Below query will give you the Bonding curve progress percentage of a specific LetsBonk.fun Token.
 
 ### Bonding Curve Progress Formula
 
@@ -122,19 +122,25 @@ BondingCurveProgress = 100 - (((balance - 206900000) \* 100) / 793100000)
 
 - **Balance Retrieval**:
   - The `balance` is the token balance at the market address.
-  - Use this query to fetch the balance: [Query Link](https://ide.bitquery.io/Get-balance-of-a-pair-address-on-solana_2).
+  - Use this query to fetch the balance and then we use `espressions` to calculate the bonding curve progress percentage in the query itself: [Query Link](https://ide.bitquery.io/bonding-curve-progress-percentage-of-a-letsbonkfun-token).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query GetLatestLiquidityForPool {
+query GetBondingCurveProgressPercentage {
   Solana {
     DEXPools(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Slot }
       where: {
         Pool: {
           Market: {
-            BaseCurrency: { MintAddress: { is: "token Mint Address" } }
+            BaseCurrency: {
+              MintAddress: {
+                is: "CctsjizSC6pwf2T8bhdHdZTEV4PEcfXoumjeK7FBbonk"
+              }
+            }
           }
           Dex: {
             ProgramAddress: {
@@ -143,9 +149,10 @@ query GetLatestLiquidityForPool {
           }
         }
       }
-      orderBy: { descending: Block_Slot }
-      limit: { count: 1 }
     ) {
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100-((($Pool_Base_Balance - 206900000) * 100) / 793100000)"
+      )
       Pool {
         Market {
           MarketAddress
@@ -170,7 +177,7 @@ query GetLatestLiquidityForPool {
           PostAmountInUSD
         }
         Base {
-          PostAmount
+          Balance: PostAmount
         }
       }
     }
@@ -182,7 +189,7 @@ query GetLatestLiquidityForPool {
 
 ## Track LetsBonk.fun Tokens above 95% Bonding Curve Progress in realtime
 
-We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_1).
+We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_2).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -213,6 +220,9 @@ subscription MyQuery {
         Transaction: { Result: { Success: true } }
       }
     ) {
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100 - ((($Pool_Base_Balance - 206900000) * 100) / 793100000)"
+      )
       Pool {
         Market {
           BaseCurrency {
@@ -232,7 +242,7 @@ subscription MyQuery {
           ProtocolFamily
         }
         Base {
-          PostAmount
+          Balance: PostAmount
         }
         Quote {
           PostAmount
@@ -249,7 +259,7 @@ subscription MyQuery {
 
 ## Top 100 About to Graduate LetsBonk.fun Tokens
 
-We can use below query to get top 100 About to Graduate LetsBonk.fun Tokens. You can run and test the saved query [here](https://ide.bitquery.io/Top-100-graduating-tokens-in-last-5-minutes_1).
+We can use below query to get top 100 About to Graduate LetsBonk.fun Tokens. You can run and test the saved query [here](https://ide.bitquery.io/Top-100-graduating-raydium-launchlab-tokens-in-last-5-minutes).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -281,9 +291,12 @@ We can use below query to get top 100 About to Graduate LetsBonk.fun Tokens. You
           }
         }
         Transaction: { Result: { Success: true } }
-        Block: { Time: { since: "2025-07-11T13:45:00Z" } }
+        Block: { Time: { since_relative: { minutes_ago: 5 } } }
       }
     ) {
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100 - ((($Pool_Base_Balance - 206900000) * 100) / 793100000)"
+      )
       Pool {
         Market {
           BaseCurrency {
@@ -303,7 +316,7 @@ We can use below query to get top 100 About to Graduate LetsBonk.fun Tokens. You
           ProtocolFamily
         }
         Base {
-          PostAmount(maximum: Block_Time)
+          Balance: PostAmount(maximum: Block_Time)
         }
         Quote {
           PostAmount
@@ -755,3 +768,11 @@ Using [this](https://ide.bitquery.io/liquidity-for-a-Letsbonkfun-token-pair_2) q
 ### Video Tutorial | How to get Bonding Curve Progress of any LetsBonk.fun Token
 
 <VideoPlayer url="https://www.youtube.com/watch?v=fCA5Pts4LbE" />
+
+### Video Tutorial | How to track LetsBonk.fun Token Migrations to Raydium in realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=t_gYK89kQzI" />
+
+### Video Tutorial | How to get Top 100 About to Graduate LetsBonk.fun tokens
+
+<VideoPlayer url="https://www.youtube.com/watch?v=g3SVPcbUxX0" />

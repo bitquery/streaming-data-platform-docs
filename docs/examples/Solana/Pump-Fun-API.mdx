@@ -493,6 +493,49 @@ subscription MyQuery {
 
 </details>
 
+### Top 10 pump fun tokens by Price change in last 5mins
+
+Use the below query to get Top 10 pump fun tokens by Price change in last 5mins. Test the query [here](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Price-change-in-last-5mins).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+query MyQuery {
+  Solana {
+    DEXTradeByTokens(
+      limit: {count: 10}
+      orderBy:{descendingByField:"Price_Change_5min"}
+      where: {Trade: {Dex: {ProgramAddress: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}}, Transaction: {Result: {Success: true}}, Block: {Time: {since_relative: {hours_ago: 6}}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Price_5min_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{minutes_ago:5}}}})
+				Price_1h_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{hours_ago:1}}}})
+        Price_6h_ago: PriceInUSD(minimum: Block_Time)
+        CurrentPrice: PriceInUSD(maximum: Block_Time)
+        Side {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+        }
+      }
+      Price_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_6h_ago) * 100")
+      Price_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_6h_ago) * 100")
+      Price_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100")
+    }
+  }
+}
+```
+
+</details>
+
 ### Get OHLC Data of a Token
 
 Fetches open-high-low-close data in 1-minute intervals for last 10 minutes
