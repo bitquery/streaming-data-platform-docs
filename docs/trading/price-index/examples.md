@@ -1,6 +1,11 @@
 # Quick Start Examples
 
-## Get OHLC Stream
+## OHLC Stream on A Chain
+
+Mention the chain/network using the `Token: {Network}` filter. Available values are: `Ethereum`,`Solana`
+, `Base`, `Optimism`, `Opbnb`, `Matic`, `Arbitrum`, `Binance Smart Chain`. 
+
+The available duration intervals are listed [here](https://docs.bitquery.io/docs/trading/price-index/introduction/#understanding-intervals)
 
 [Run Stream ➤](https://ide.bitquery.io/Aggregated-Price-of-all-tokens-in-real-time-on-one-chain_1)
 
