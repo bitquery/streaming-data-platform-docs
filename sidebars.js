@@ -578,14 +578,14 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Price Index for Trading",
+      label: "Trading APIs",
       link: {
         type: "generated-index",
         title: "Start",
         description: "Using Price Streams for Tokens & Currencies Across Chains",
       },
       items: [
-       "price-index/introduction"
+       "trading/price-index/introduction"
       ],
     },
 
