@@ -311,5 +311,21 @@ Use `TargetVolume` to get price intervals aggregated over a volume threshold:
 
 ## When to Choose Which Cube (Token, Currency, Pair)?
 
-- OHLC, Volume, Trade Stats of Pair? -  Pairs
-- Price Metrics of a Token Across chains? - Currency
+### Use the **`Tokens`** cube when:
+
+- You want token price data **on a specific blockchain**.
+- You're interested in metrics like OHLC, volume, and moving averages **for one network** (e.g., USDC on Solana or ETH on Arbitrum).
+- You want to stream or query **chain-specific** price movements.
+
+### Use the **`Currencies`** cube when:
+
+- You want a **chain-agnostic view** of a token (e.g., BTC across Bitcoin, Ethereum (WBTC), Solana, etc.).
+- You need a **global price** for a currency, combining its various representations.
+- You're looking for **aggregated OHLC and average prices** for a token across chains.
+
+### Use the **`Pairs`** cube when:
+
+- You want **pair-level trading data** (e.g., SOL/USDC, ETH/DAI).
+- You’re analyzing trading activity **on a specific market or DEX** (e.g., Uniswap, PancakeSwap, Raydium).
+- You need **OHLC, volume, liquidity**, and market-specific pricing between two tokens.
+- You're exploring **price arbitrage** or spreads across chains or platforms.
