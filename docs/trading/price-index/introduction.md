@@ -310,3 +310,6 @@ Use `TargetVolume` to get price intervals aggregated over a volume threshold:
 `1000, 10000, 100000, 1000000 (USD)`
 
 ## When to Choose Which Cube (Token, Currency, Pair)?
+
+- OHLC, Volume, Trade Stats of Pair? -  Pairs
+- Price Metrics of a Token Across chains? - Currency

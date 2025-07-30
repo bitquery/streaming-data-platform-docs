@@ -3,7 +3,7 @@
 ## OHLC Stream on A Chain
 
 Mention the chain/network using the `Token: {Network}` filter. Available values are: `Ethereum`,`Solana`
-, `Base`, `Optimism`, `Opbnb`, `Matic`, `Arbitrum`, `Binance Smart Chain`.
+, `Base`, `Optimism`, `Opbnb`, `Matic`, `Arbitrum`, `Binance Smart Chain`,`Tron`.
 
 The available duration intervals are listed [here](https://docs.bitquery.io/docs/trading/price-index/introduction/#understanding-intervals)
 
