@@ -1,6 +1,35 @@
-# Price API - Introduction
+# Price Index API - Introduction
 
-Starting July 2025, we have introduced separate chain-agnostic price APIs and Streams via graphQL and Kafka. They allow you to stream and query price, OHLC, statistics for all tokens on Bitcoin,EVM, Solana, Tron chains.
+Starting July 2025, we have introduced separate chain-agnostic price APIs and Streams via graphQL and Kafka. They allow you to stream and query price, OHLC, statistics for all tokens on Bitcoin,EVM, Solana, Tron chains. **This is a "multi-chain" or rather "chain-agnostic" API.**
+
+These APIs are available on the **[EAP Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/eap)** and **[Streaming Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql)**
+
+## What is the Price Index API and Why Does It Matter?
+
+This API is the foundational layer of our trading-focused data suite. We're actively expanding our trading dataset, with much more to come in the months and years ahead.
+
+The focus of this product suite is to help traders win. As we receive feedback, we will improve the dataset quality, add more metrics and APIs.
+
+## How is this API different from DEXTrades and DEXTRadesByToken APIs?
+
+The Price Index API is a chain-agnostic, pre-aggregated price feed designed specifically for trading,futures, charting, and analytics. Here's how it differs from the existing **DEXTrades** and **DEXTradesByToken** APIs:
+
+- **Granularity**:
+
+  - **DEXTrades / DEXTradesByToken** provide **transaction-level data**, showing every trade on supported DEXs for each chain.
+  - **Price Index API** offers **pre-aggregated price metrics** like OHLC, average prices, and volume at fixed time or volume intervals.
+
+- **Aggregation**:
+
+  - In DEX APIs, you had to **aggregate trades** to calculate OHLC or moving averages.
+  - The Price Index API provides **ready-to-use OHLC and price statistics** out of the box , no need to calculate anything.
+
+- **Chain Perspective**:
+
+  - DEX APIs are **chain-specific**: each query targets a specific network (e.g., Ethereum, Solana, Tron).
+  - The Price Index API is **chain-agnostic**: you can get price data across all chains for a given token or token representation (e.g., WBTC on Ethereum, native BTC on Bitcoin, etc.).
+
+## Accessing the API
 
 ![](/img/trade_api/api.png)
 
@@ -13,6 +42,8 @@ The Price APIs have three core data cubes:
 - **Tokens**: Price data for a specific token on a specific chain. Use this when you care about chain-specific prices like USDT on Solana.
 - **Currencies**: Aggregated view of a token across chains — e.g., BTC across Bitcoin, Ethereum (as WBTC), Solana, etc.
 - **Pairs**: Price and volume data for token pairs on specific markets/protocols. E.g., SOL/USDC on Raydium (Solana) or ETH/USDT on Uniswap (Ethereum).
+
+> Note: Expressions are supported in this API.
 
 ## Currencies
 
@@ -268,7 +299,7 @@ Unlike DEXtrades APIs, the intervals here are fixed and cannot be arbitrary.
 
 ### Supported Time Intervals
 
-The following durations (in seconds) are supported for querying or streaming historical and real-time data:
+The following durations (in seconds) are supported for querying or streaming historical and real-time data, unlike DEX APIs, these intervals are fixed, other values are not supported.
 
 `1,  3,  5,  10,  30,  60,  300,  900,  1800,  3600`
 
@@ -277,3 +308,24 @@ The following durations (in seconds) are supported for querying or streaming his
 Use `TargetVolume` to get price intervals aggregated over a volume threshold:
 
 `1000, 10000, 100000, 1000000 (USD)`
+
+## When to Choose Which Cube (Token, Currency, Pair)?
+
+### Use the **`Tokens`** cube when:
+
+- You want token price data **on a specific blockchain**.
+- You're interested in metrics like OHLC, volume, and moving averages **for one network** (e.g., USDC on Solana or ETH on Arbitrum).
+- You want to stream or query **chain-specific** price movements.
+
+### Use the **`Currencies`** cube when:
+
+- You want a **chain-agnostic view** of a token (e.g., BTC across Bitcoin, Ethereum (WBTC), Solana, etc.).
+- You need a **global price** for a currency, combining its various representations.
+- You're looking for **aggregated OHLC and average prices** for a token across chains.
+
+### Use the **`Pairs`** cube when:
+
+- You want **pair-level trading data** (e.g., SOL/USDC, ETH/DAI).
+- You’re analyzing trading activity **on a specific market or DEX** (e.g., Uniswap, PancakeSwap, Raydium).
+- You need **OHLC, volume, liquidity**, and market-specific pricing between two tokens.
+- You're exploring **price arbitrage** or spreads across chains or platforms.

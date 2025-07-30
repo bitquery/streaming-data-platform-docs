@@ -578,16 +578,33 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Price Index for Trading",
+      label: "Trading APIs",
       link: {
         type: "generated-index",
-        title: "Start",
+        title: "Trading APIs",
         description: "Using Price Streams for Tokens & Currencies Across Chains",
       },
       items: [
-       "price-index/introduction"
+        {
+          type: "category",
+          label: "Price Index",
+          link: {
+            type: "generated-index",
+            title: "Price Index",
+            description: "Access token and currency pricing data across chains.",
+          },
+          items: [
+            "trading/price-index/introduction",
+            // "trading/price-index/tokens",
+            // "trading/price-index/currency",
+            // "trading/price-index/pairs",
+            "trading/price-index/in-depth",
+            "trading/price-index/examples"
+          ],
+        }
       ],
-    },
+    }
+,    
 
     {
       type: "category",
