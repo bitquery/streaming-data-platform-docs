@@ -16,7 +16,7 @@ The Price Index API is a chain-agnostic, pre-aggregated price feed designed spec
 
 - **Granularity**:
 
-  - **DEXTrades / DEXTradesByToken** provide **raw transaction-level data**, showing every trade on supported DEXs for each chain.
+  - **DEXTrades / DEXTradesByToken** provide **transaction-level data**, showing every trade on supported DEXs for each chain.
   - **Price Index API** offers **pre-aggregated price metrics** like OHLC, average prices, and volume at fixed time or volume intervals.
 
 - **Aggregation**:
