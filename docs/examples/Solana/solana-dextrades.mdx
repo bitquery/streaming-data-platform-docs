@@ -291,7 +291,7 @@ query MyQuery {
 
 ## Price change 5min, 1hr, 6hr precentage of a specific token
 
-Use below query to calculate the price change percentage for a specific token in last 5 min, 1 hr, 6hr. Test the query [here](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token).
+Use below query to calculate the price change percentage for a specific token in last 5 min, 1 hr, 6hr. Test the query [here](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_2).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -320,8 +320,8 @@ query MyQuery {
         of: Trade_Side_AmountInUSD
         if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
       )
-      Price_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_6h_ago) * 100")
-      Price_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_6h_ago) * 100")
+      Price_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100")
+      Price_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100")
       Price_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100")
     }
   }
@@ -332,7 +332,7 @@ query MyQuery {
 
 ## Top 10 solana tokens by price change in last 1 hr
 
-Use the below query to get top 10 solana tokens by price change in last 1 hr. Test the query [here](https://ide.bitquery.io/Top-10-solana-tokens-by-price-change-in-last-1-hr#)
+Use the below query to get top 10 solana tokens by price change in last 1 hr. Test the query [here](https://ide.bitquery.io/Top-10-solana-tokens-by-price-change-in-last-1-hr_3)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -340,8 +340,8 @@ Use the below query to get top 10 solana tokens by price change in last 1 hr. Te
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      limit:{count:10}
-      orderBy:{descendingByField:"Price_Change_1h"}
+      limit: {count: 10}
+      orderBy: {descendingByField: "Price_Change_1h"}
       where: {Block: {Time: {since_relative: {hours_ago: 6}}}, Transaction: {Result: {Success: true}}}
     ) {
       Trade {
@@ -350,25 +350,41 @@ query MyQuery {
           Symbol
           MintAddress
         }
-        Price_5min_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{minutes_ago:5}}}})
-				Price_1h_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{hours_ago:1}}}})
+        Price_5min_ago: PriceInUSD(
+          minimum: Block_Time
+          if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+        )
+        Price_1h_ago: PriceInUSD(
+          minimum: Block_Time
+          if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+        )
         Price_6h_ago: PriceInUSD(minimum: Block_Time)
         CurrentPrice: PriceInUSD(maximum: Block_Time)
-        Side{
-          Currency{
+        Side {
+          Currency {
             Name
             Symbol
             MintAddress
           }
         }
+        Market {
+          MarketAddress
+        }
       }
-      Price_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_6h_ago) * 100")
-      Price_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_6h_ago) * 100")
-      Price_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100")
+      Price_Change_5min: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100"
+      )
+      Price_Change_1h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100"
+      )
+      Price_Change_6h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100"
+      )
     }
   }
 }
-```
+
+````
 
 </details>
 
@@ -436,7 +452,7 @@ To get the summary for such trades use [this](https://ide.bitquery.io/trade-summ
     }
   }
 }
-```
+````
 
 </details>
 

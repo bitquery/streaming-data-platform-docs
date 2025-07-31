@@ -313,6 +313,124 @@ query MyQuery {
 }
 ```
 
+## Get Price Change 5min, 1h, 6h and 24h of a specific token
+
+Use below query to get price change 5min, 1h, 6h and 24h of a specific token. Change the `Currency{SmartContract}` and `Dex{SmartContract}` according to your needs. Test the query [here]
+(https://ide.bitquery.io/Price-change-5min-1hr-6hr-24hr-precentage-of-a-specific-token_1).
+
+```
+query MyQuery {
+  EVM(dataset: combined network:arbitrum) {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: "0x30a538eFFD91ACeFb1b12CE9Bc0074eD18c9dFc9"}}, Dex: {SmartContract: {is: "0xdaAe914e4Bae2AAe4f536006C353117B90Fb37e3"}}}, TransactionStatus: {Success: true}, Block: {Time: {since_relative: {hours_ago: 24}}}}
+    ){
+      Trade {
+        Price_5min_ago: PriceInUSD(minimum:Block_Number if:{Block:{Time:{since_relative:{minutes_ago:5}}}})
+        Price_1h_ago: PriceInUSD(minimum:Block_Number if:{Block:{Time:{since_relative:{hours_ago:1}}}})
+        Price_6h_ago: PriceInUSD(minimum: Block_Number  if:{Block:{Time:{since_relative:{hours_ago:6}}}})
+        Price_24h_ago: PriceInUSD(minimum: Block_Number)
+        CurrentPrice: PriceInUSD(maximum: Block_Number)
+      }
+      volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+      )
+      volume_1h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+      )
+      volume_6h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+      )
+      volume_24h: sum(
+        of: Trade_Side_AmountInUSD
+      )
+      Price_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100")
+      Price_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100")
+      Price_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100")
+      Price_Change_24h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_24h_ago) / $Trade_Price_24h_ago) * 100")
+    }
+  }
+}
+```
+
+## Top 10 Arbitrum Tokens by Price Change in last 1h
+
+Use below query to get top 10 Arbitrum Tokens by Price Change in last 1h. Test the query [here]
+(https://ide.bitquery.io/Top-10-arb-tokens-by-price-change-in-last-1-hr).
+
+```
+query MyQuery {
+  EVM(dataset: combined network:arbitrum) {
+    DEXTradeByTokens(
+      limit:{count:10}
+      orderBy:{descendingByField:"Price_Change_1h"}
+      where: {TransactionStatus: {Success: true}, Block: {Time: {since_relative: {hours_ago: 24}}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        Price_5min_ago: PriceInUSD(
+          minimum: Block_Number
+          if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+        )
+        Price_1h_ago: PriceInUSD(
+          minimum: Block_Number
+          if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+        )
+        Price_6h_ago: PriceInUSD(
+          minimum: Block_Number
+          if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+        )
+        Price_24h_ago: PriceInUSD(minimum: Block_Number)
+        CurrentPrice: PriceInUSD(maximum: Block_Number)
+        Side {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+        Dex{
+          SmartContract
+        }
+      }
+
+      volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+      )
+      volume_1h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+      )
+      volume_6h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+      )
+      volume_24h: sum(of: Trade_Side_AmountInUSD)
+      Price_Change_5min: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100"
+      )
+      Price_Change_1h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100"
+      )
+      Price_Change_6h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100"
+      )
+      Price_Change_24h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_24h_ago) / $Trade_Price_24h_ago) * 100"
+      )
+    }
+  }
+}
+
+```
+
 ## Top Sold Tokens on Arbitrum network
 
 This query will give you top sold tokens on Arbitrum network in last 1 hour. Change the timestamp in `{Block: {Time: {since: "2024-12-24T08:20:00Z"}}}` accordingly.

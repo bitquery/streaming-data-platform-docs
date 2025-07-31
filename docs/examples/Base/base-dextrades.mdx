@@ -6,8 +6,6 @@ sidebar_position: 2
 
 In this section we will see how to get Base DEX trades information using our API.
 
-
-
 <head>
 <meta name="title" content="How to Get Base Decentralized Exchange Data with Base DEX Trades API"/>
 <meta name="description" content="Get on-chain data of any Base based DEX through our DEX Trades API."/>
@@ -197,6 +195,124 @@ subscription {
   }
 }
 
+
+```
+
+## Get Price Change 5min, 1h, 6h and 24h of a specific token
+
+Use below query to get price change 5min, 1h, 6h and 24h of a specific token. Change the `Currency{SmartContract}` and `Dex{SmartContract}` according to your needs. Test the query [here]
+(https://ide.bitquery.io/Price-change-5min-1hr-6hr-24h-precentage-of-a-specific-token).
+
+```
+query MyQuery {
+  EVM(dataset: combined network:base) {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: "0x1111111111166b7FE7bd91427724B487980aFc69"}}, Dex: {SmartContract: {is: "0xEdc625B74537eE3a10874f53D170E9c17A906B9c"}}}, TransactionStatus: {Success: true}, Block: {Time: {since_relative: {hours_ago: 24}}}}
+    ){
+      Trade {
+        Price_5min_ago: PriceInUSD(minimum:Block_Number if:{Block:{Time:{since_relative:{minutes_ago:5}}}})
+        Price_1h_ago: PriceInUSD(minimum:Block_Number if:{Block:{Time:{since_relative:{hours_ago:1}}}})
+        Price_6h_ago: PriceInUSD(minimum: Block_Number  if:{Block:{Time:{since_relative:{hours_ago:6}}}})
+        Price_24h_ago: PriceInUSD(minimum: Block_Number)
+        CurrentPrice: PriceInUSD(maximum: Block_Number)
+      }
+      volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+      )
+      volume_1h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+      )
+      volume_6h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+      )
+      volume_24h: sum(
+        of: Trade_Side_AmountInUSD
+      )
+      Price_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100")
+      Price_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100")
+      Price_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100")
+      Price_Change_24h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_24h_ago) / $Trade_Price_24h_ago) * 100")
+    }
+  }
+}
+```
+
+## Top 10 Base Tokens by Price Change in last 1h
+
+Use below query to get top 10 Base Tokens by Price Change in last 1h. Test the query [here]
+(https://ide.bitquery.io/Top-10-base-tokens-by-price-change-in-last-1-hr).
+
+```
+query MyQuery {
+  EVM(dataset: combined network:base) {
+    DEXTradeByTokens(
+      limit:{count:10}
+      orderBy:{descendingByField:"Price_Change_1h"}
+      where: {TransactionStatus: {Success: true}, Block: {Time: {since_relative: {hours_ago: 24}}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        Price_5min_ago: PriceInUSD(
+          minimum: Block_Number
+          if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+        )
+        Price_1h_ago: PriceInUSD(
+          minimum: Block_Number
+          if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+        )
+        Price_6h_ago: PriceInUSD(
+          minimum: Block_Number
+          if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+        )
+        Price_24h_ago: PriceInUSD(minimum: Block_Number)
+        CurrentPrice: PriceInUSD(maximum: Block_Number)
+        Side {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+        Dex{
+          SmartContract
+        }
+      }
+
+      volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+      )
+      volume_1h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+      )
+      volume_6h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+      )
+      volume_24h: sum(of: Trade_Side_AmountInUSD)
+      Price_Change_5min: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100"
+      )
+      Price_Change_1h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100"
+      )
+      Price_Change_6h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100"
+      )
+      Price_Change_24h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_24h_ago) / $Trade_Price_24h_ago) * 100"
+      )
+    }
+  }
+}
 
 ```
 

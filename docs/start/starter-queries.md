@@ -26,12 +26,12 @@ This query gets the latest 10 trades on Solana. You can increase the limit to ge
 ### Price change 5min, 1hr, 6hr precentage of a specific token
 
 With this, you can get the price change 5min, 1hr, 6hr precentage of a specific token.
-▶️ [Price change 5min, 1hr, 6hr precentage](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token)
+▶️ [Price change 5min, 1hr, 6hr precentage](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_2)
 
 ### Top 10 solana tokens by price change in last 1 hr
 
 With this, you can get top 10 solana tokens by price change in last 1 hr.
-▶️ [Top 10 solana tokens by price change in last 1 hr](https://ide.bitquery.io/Top-10-solana-tokens-by-price-change-in-last-1-hr#)
+▶️ [Top 10 solana tokens by price change in last 1 hr](https://ide.bitquery.io/Top-10-solana-tokens-by-price-change-in-last-1-hr_3)
 
 ### Solana Trades of a Token
 
@@ -223,7 +223,12 @@ This query returns the top 10 PumpFun tokens based on market cap. You can increa
 ### Top 10 pump fun tokens by Price change in last 5mins
 
 This query returns the top 10 pump fun tokens by Price change in last 5mins. You can increase the limit to get more tokens.  
-▶️ [Top 10 pump fun tokens by Price change in last 5mins](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Price-change-in-last-5mins)
+▶️ [Top 10 pump fun tokens by Price change in last 5mins](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Price-change-in-last-5mins_2)
+
+### Top 10 pump fun tokens by Marketcap change in last 5mins
+
+This query returns the top 10 pump fun tokens by Marketcap change in last 5mins. You can increase the limit to get more tokens.  
+▶️ [Top 10 pump fun tokens by Marketcap change in last 5mins](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Marketcap-change-in-last-5mins_1)
 
 ### Latest Trades in Real Time
 
@@ -370,6 +375,16 @@ This query returns the latest trades on the Ethereum network where distinction o
 This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
 ▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
 
+### Get Price Change 5min, 1h, 6h and 24h of a specific Eth token
+
+This query gets you Price Change 5min, 1h, 6h and 24h of a specific token on the Ethereum network.
+▶️ [Get Price Change 5min, 1h, 6h and 24h of a specific token](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_1#)
+
+### Top 10 Eth Tokens by Price Change in last 1h
+
+This query gets you top 10 Eth Tokens by Price Change in last 1h.
+▶️ [Top 10 Eth Tokens by Price Change in last 1h](https://ide.bitquery.io/Top-10-eth-tokens-by-price-change-in-last-1-hr_1#)
+
 ### Ethereum Events
 
 This query returns event info and logs for the Ethereum network. It includes arguments passed, transaction details, log info, block info, and more.  
@@ -396,6 +411,16 @@ This query returns the top `50` holders of a given BEP-20 token.
 
 This query returns the latest `100` buys of a given BEP-20 token.
 ▶️[BSC Token Buys](https://ide.bitquery.io/BNB-Token-Buys)
+
+### Get Price Change 5min, 1h, 6h and 24h of a specific BSC token
+
+This query gets you Price Change 5min, 1h, 6h and 24h of a specific token on the BSC network.
+▶️ [Get Price Change 5min, 1h, 6h and 24h of a specific token](ttps://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_3)
+
+### Top 10 BSC Tokens by Price Change in last 1h
+
+This query gets you top 10 BSC Tokens by Price Change in last 1h.
+▶️ [Top 10 BSC Tokens by Price Change in last 1h](https://ide.bitquery.io/Top-10-bsc-tokens-by-price-change-in-last-1-hr)
 
 ### OHLC for a BEP-20 Token
 

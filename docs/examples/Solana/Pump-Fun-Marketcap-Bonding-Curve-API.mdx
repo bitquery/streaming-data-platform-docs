@@ -147,7 +147,7 @@ You can also observe the approach of using `TokenSupplyUpdate` block to get the 
 
 ## Top 10 pump fun tokens by Marketcap change in last 5mins
 
-Use the below query to get top 10 pump fun tokens by Marketcap change in last 5mins. Test the query [here](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Marketcap-change-in-last-5mins).
+Use the below query to get top 10 pump fun tokens by Marketcap change in last 5mins. Test the query [here](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Marketcap-change-in-last-5mins_1).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -178,8 +178,8 @@ query MyQuery {
           }
         }
       }
-      Marketcap_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_6h_ago) * 100")
-      Marketcap_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_6h_ago) * 100")
+      Marketcap_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100")
+      Marketcap_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100")
       Marketcap_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100")
     }
   }
