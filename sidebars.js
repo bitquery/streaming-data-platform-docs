@@ -590,14 +590,30 @@ const sidebars = {
           label: "Price Index",
           link: {
             type: "generated-index",
-            title: "Price Index",
+            title: "Price Index API",
             description: "Access token and currency pricing data across chains.",
           },
           items: [
             "trading/price-index/introduction",
+
+            {
+              type: "category",
+              label: "Price Index Cubes",
+              link: {
+                type: "generated-index",
+                title: "Cubes Overview",
+                description: "Understanding each price index cube",
+              },
+              items: [
+               "trading/price-index/tokens",
+            // "trading/price-index/currency",
+            // "trading/price-index/pairs",
+              ],
+            },
             // "trading/price-index/tokens",
             // "trading/price-index/currency",
             // "trading/price-index/pairs",
+            
             "trading/price-index/in-depth",
             "trading/price-index/examples"
           ],

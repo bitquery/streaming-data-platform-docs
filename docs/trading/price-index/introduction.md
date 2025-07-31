@@ -1,6 +1,11 @@
 # Price Index API - Introduction
 
-Starting July 2025, we have introduced separate chain-agnostic price APIs and Streams via graphQL and Kafka. They allow you to stream and query price, OHLC, statistics for all tokens on Bitcoin,EVM, Solana, Tron chains. **This is a "multi-chain" or rather "chain-agnostic" API.**
+Starting July 2025, we have introduced separate multi-chain price APIs and Streams via graphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
+
+These tools let you stream and query aggregated price data—in USD or other paired currencies—based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains.
+
+The Price Index provides more than just pair prices—it also includes OHLCV (K-Line), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
+While you can access the aggregated price for a single trading pair, the Price Index also supports cross-chain and cross-DEX aggregation, giving you a unified view of token prices across multiple ecosystems.
 
 These APIs are available on the **[EAP Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/eap)** and **[Streaming Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql)**
 
@@ -36,6 +41,8 @@ The Price Index API is a chain-agnostic, pre-aggregated price feed designed spec
 This stream has premade-OHLC in the response which you feed directly to your charting solution without having to calculate it.
 
 > Note: All queries can be converted to a graphQL stream by changing the keyword `query` to `subscription`
+
+#### Kafka Topic for Price Index Stream: `trading_prices`
 
 The Price APIs have three core data cubes:
 
