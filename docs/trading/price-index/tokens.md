@@ -66,7 +66,6 @@ subscription {
   - `Base`: Volume of the token itself (the token in question) for all pairs.
   - `Usd`: Total base volume converted to USD.
 
-> Please ignore the other fields, they're for internal reference and will be removed later.
 
 - **IsQuotedInUsd**:  
   A boolean indicating whether the OHLC and average prices are expressed in USD (`true`) or in the quote token's value (`false`).

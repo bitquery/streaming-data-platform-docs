@@ -1,6 +1,6 @@
 # Price Index API - Introduction
 
-Starting July 2025, we have introduced separate multi-chain price APIs and Streams via graphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
+Starting July 2025, we have a introduced separate multi-chain price APIs and Streams via graphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
 
 These tools let you stream and query aggregated price data—in USD or other paired currencies—based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains.
 
