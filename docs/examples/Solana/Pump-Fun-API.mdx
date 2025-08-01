@@ -375,7 +375,125 @@ subscription {
 
 ### Get Latest Price of a Token
 
-Fetches the most recent price data for a specified token
+We launched the [Price Index](https://docs.bitquery.io/docs/category/price-index/) in August 2025, allowing you to track price of any token trading onchain.
+
+Here's an example of tracking PumpFun token prices.
+
+PumpFun Token prices against Sol Stream
+[Run Query ➤](https://ide.bitquery.io/Pumpfun-token-prices-against-sol_2)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Pairs(
+      where: {Price: {IsQuotedInUsd: false}, Market: {Network: {is: "Solana"},
+        Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}}
+    ) {
+      Market {
+        Address
+        Network
+        Program
+        Protocol
+        ProtocolFamily
+      }
+      Price {
+        Average {
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+      }
+      Token {
+        Address
+        Name
+        Symbol
+      }
+      QuoteToken {
+        Address
+        Name
+        Symbol
+      }
+      Volume {
+        Base
+        Usd
+      }
+    }
+  }
+}
+```
+
+</details>
+
+Graphql Stream for PumpFun Token prices against USD 
+
+[Run Query ➤](https://ide.bitquery.io/Pumpfun-token-prices-against-USD)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Pairs(
+      where: {
+        Price:{ IsQuotedInUsd:true}
+        Market: {Network: {is: "Solana"},
+        Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}}
+    ) {
+      Market {
+        Address
+        Network
+        Program
+        Protocol
+        ProtocolFamily
+      }
+      Price {
+        Average {
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+      }
+      Token {
+        Address
+        Name
+        Symbol
+      }
+      QuoteToken {
+        Address
+        Name
+        Symbol
+      }
+      Volume {
+        Base
+        Usd
+      }
+    }
+  }
+}
+```
+
+</details>
+
+
+Fetches the most recent price data for a specified token usdin DexTradeByTokens
 [Run Query ➤](https://ide.bitquery.io/Price-of-a-pump-fun-token_7)
 
 <details>
@@ -435,7 +553,62 @@ query MyQuery {
 
 ### Track Price of a Token in Real-Time
 
-Live stream of token price updates on Pump Fun
+Live stream of token price updates on Pump Fun using Price Index
+[Run Stream ➤](https://ide.bitquery.io/Price-of-a-pump-fun-token-using-price-index-in-usd)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Pairs(
+      where: {
+        Token:{Address:{is:"BUWg5Fhzvwn2xm4EYoaSFGNZXFRk8ThYe9h5R5GaXipE"}}
+        Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, 
+        Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}}
+    ) {
+      Market {
+        Address
+        Network
+        Program
+        Protocol
+        ProtocolFamily
+      }
+      Price {
+        Average {
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+      }
+      Token {
+        Address
+        Name
+        Symbol
+      }
+      QuoteToken {
+        Address
+        Name
+        Symbol
+      }
+      Volume {
+        Base
+        Usd
+      }
+    }
+  }
+}
+```
+
+Live stream of token price updates on Pump Fun using DexTradeByTokens
 [Run Stream ➤](https://ide.bitquery.io/Price-of-a-pump-fun-token_1)
 
 <details>
@@ -495,7 +668,66 @@ subscription MyQuery {
 
 ### Top 10 pump fun tokens by Price change in last 5mins
 
-Use the below query to get Top 10 pump fun tokens by Price change in last 5mins. Test the query [here](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Price-change-in-last-5mins_2).
+Following is the example of query using Price Index to get top coins based on price in last 5 minutes.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+{
+  Trading {
+    Pairs(
+      limit: {count: 10}
+      limitBy:{count:1 by:Token_Address}
+      orderBy:{descending:Price_Average_Mean}
+      where: {Block: {Time: {since_relative: {minutes_ago: 5}}}, 
+        Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, 
+          Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}}
+    ) {
+      Market {
+        Address
+        Network
+        Program
+        Protocol
+        ProtocolFamily
+      }
+      Price {
+        Average {
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+      }
+      Token {
+        Address
+        Name
+        Symbol
+      }
+      QuoteToken {
+        Address
+        Name
+        Symbol
+      }
+      Volume {
+        Base
+        Usd
+      }
+    }
+  }
+}
+```
+
+</details>
+
+
+Use the below query to get Top 10 pump fun tokens by Price change in last 5mins using DexTradingByTokens. Test the query [here](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Price-change-in-last-5mins_2).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
