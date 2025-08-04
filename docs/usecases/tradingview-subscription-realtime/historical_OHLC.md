@@ -4,56 +4,87 @@ sidebar_position: 2
 
 # Getting Historical Data
 
-In this section, we will write the code to get historical OHLC data to populate chart with candlesticks upto current timestamp. Create a new file called `histOHLC.js` and add the following code. Each part of the code is explained below.
+In this section, we will write the code to get historical OHLC data to populate a chart with candlesticks up to the current timestamp. Create a new file called `histOHLC.js` and add the following code. Each part of the code is explained below.
 
 ### Imports
 
 ```javascript
 import axios from "axios";
+import config from "./configs.json";
 ```
 
-- **axios**: Axios is used to make HTTP requests to the Bitquery API to fetch the required trading data.
+- **axios**: Axios is used to make HTTP requests to the Bitquery API.
+- **config**: A local JSON file storing your API token securely.
 
 ### API Endpoint and Query
 
+We are using the [Tokens Cube from the Price Index API](https://docs.bitquery.io/docs/trading/price-index/tokens/) which gives you price of a token on different chains in **USD**. You can use Pairs Cube as well to get price against specific currency.
+ 
 ```javascript
 const endpoint = "https://streaming.bitquery.io/eap";
 ```
 
-- **endpoint**: This is the API endpoint for Bitquery's event and analytics platform, which streams DEX trade data for the Solana blockchain.
-
 ```javascript
 const TOKEN_DETAILS = `
 {
-  Solana(dataset: combined) {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "4Yx39Hkci49fdtyUGmrkDqTnVei9tmzPK9aac952xniv"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
-      limit: {count: 1000}
+  Trading {
+    Tokens(
+      where: {
+        Token: {
+          Network: {is: "Solana"},
+          Address: {is: "6ft9XJZX7wYEH1aywspW5TiXDcshGc2W2SqBHN9SLAEJ"}
+        },
+        Interval: {Time: {Duration: {eq: 60}}}
+      },
+      orderBy: {descending: Block_Time},
+      limit: {count: 10000}
     ) {
+      Token {
+        Address
+        Name
+        Symbol
+        Network
+      }
       Block {
-        Timefield: Time(interval: {in: minutes, count: 1})
+        Date
+        Time
+        Timestamp
       }
-      volume: sum(of: Trade_Amount)
-      Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Slot)
-        close: Price(maximum: Block_Slot)
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
       }
-      count
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+        Average {
+          SimpleMoving
+          ExponentialMoving
+        }
+      }
     }
   }
 }
 `;
 ```
 
-- **TOKEN_DETAILS**: This GraphQL query is designed to fetch DEX trade data for a specific token pair on the Solana blockchain. It queries data such as the block time, trade volume, and OHLC prices for trades between:
+- **TOKEN_DETAILS**: This GraphQL query fetches token trading data on the Solana blockchain for 1-minute intervals (`Duration: {eq: 60}`), including OHLC prices in USD. It’s scoped to a specific token by address:
+  `6ft9XJZX7wYEH1aywspW5TiXDcshGc2W2SqBHN9SLAEJ` for the sake of this explanation. You can pass the variables `quote` from url and set it here.
 
-  - Token with mint address `4Yx39Hkci49fdtyUGmrkDqTnVei9tmzPK9aac952xniv` (the base token, in this case it is BCAT).
-  - Token with mint address `So11111111111111111111111111111111111111112` (the quote token).
 
-- The query is limited to one thousand trades and orders the results by the `Block_Timefield` in descending order.
 
 ### fetchHistoricalData Function
 
@@ -62,8 +93,7 @@ export async function fetchHistoricalData(from) {
   const requiredBars = 360; // Hardcoding the value
 ```
 
-- **fetchHistoricalData**: This function fetches historical OHLC data starting from the `from` timestamp, and is designed to return a minimum of three hundred sixty 1-minute bars.
-- **requiredBars**: The number of bars (data points) required for the chart is hardcoded to three hundred sixty.
+- **fetchHistoricalData**: Retrieves at least 360 one-minute OHLC bars, starting from the `from` timestamp.
 
 ### API Request
 
@@ -75,69 +105,61 @@ export async function fetchHistoricalData(from) {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "Bearer ory_at_...",
+          Authorization: `Bearer ${config.authtoken}`,
         },
       }
     );
     console.log("API called");
 ```
 
-- **axios.post**: The `axios` library is used to send a POST request to the `endpoint`. It sends the GraphQL query defined in `TOKEN_DETAILS` to fetch the historical OHLC data.
-- **Authorization**: The request includes an authorization token to access the Bitquery API. Ensure to replace this token with your own. More details on how to generate a token is available [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+- **axios.post**: Sends a POST request to Bitquery's streaming endpoint with the GraphQL query and an authorization token.
+- **Authorization**: Token is stored securely in `configs.json`. You can generate one by following [these instructions](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
 
 ### Data Processing
 
 ```javascript
-const trades = response.data.data.Solana.DEXTradeByTokens;
+const trades = response.data.data.Trading.Tokens;
 
-// Preprocess the bars data
 let bars = trades.map((trade) => {
-  // Parse and convert Block Timefield to Unix timestamp in milliseconds
-  const blockTime = new Date(trade.Block.Timefield).getTime();
+  const blockTime = new Date(trade.Block.Time).getTime();
 
   return {
-    time: blockTime, // Time in Unix timestamp (milliseconds)
-    open: trade.Trade.open || 0,
-    high: trade.Trade.high || 0,
-    low: trade.Trade.low || 0,
-    close: trade.Trade.close || 0,
-    volume: trade.volume || 0,
-    count: trade.count || 0, // Trade count for additional info
+    time: blockTime,
+    open: trade.Price.Ohlc.Open || 0,
+    high: trade.Price.Ohlc.High || 0,
+    low: trade.Price.Ohlc.Low || 0,
+    close: trade.Price.Ohlc.Close || 0,
+    volume: trade.Volume.Base || 0,
   };
 });
 ```
 
-- **Preprocessing the Data**: The raw data returned by the API is processed into an array of bar objects, where each bar contains the following properties:
-  - **time**: The block timestamp in Unix format (milliseconds).
-  - **open**: The opening price of the trade (minimum slot number).
-  - **high**: The highest price of the trade.
-  - **low**: The lowest price of the trade.
-  - **close**: The closing price of the trade (maximum slot number).
-  - **volume**: The total traded volume for that time period.
-  - **count**: The number of trades that occurred during that period.
+- **Preprocessing the Data**: Maps the raw response into `bars`, where each bar has:
+
+  - **time**: Unix timestamp in milliseconds.
+  - **open/high/low/close**: OHLC prices.
+  - **volume**: Trading volume in base tokens.
 
 ### Sorting the Data
 
 ```javascript
-// Sort bars in ascending order by time (since the API returned descending order)
 bars.sort((a, b) => a.time - b.time);
 ```
 
-- The bars are sorted in ascending order based on the `time` field, as the API returns data in descending order by default.
+Sorts the bars chronologically, as the API returns them in descending order by default. You can skip this step by changing query to return it in **ascending** order. 
 
 ### Handling Missing Bars
 
+The new price stream will handle all intervals, and this step can be skipped.
+
 ```javascript
-// Fill in missing bars if needed to reach 300 bars
 if (bars.length < requiredBars) {
   const earliestTime = bars[0]?.time || from;
   const missingBarsCount = requiredBars - bars.length;
 
-  // Generate missing bars before the earliest returned bar
   for (let i = 1; i <= missingBarsCount; i++) {
     bars.unshift({
-      time: earliestTime - i * 60000, // Assuming 1-minute bars (60000 ms)
+      time: earliestTime - i * 60000,
       open: 0,
       high: 0,
       low: 0,
@@ -149,7 +171,7 @@ if (bars.length < requiredBars) {
 }
 ```
 
-- **Filling in Missing Bars**: If fewer than the required three hundred sixty bars are returned, the function fills in the missing bars by creating new bars with zero values (open, high, low, close, volume, count) for each missing minute, starting from the earliest available bar.
+- **Missing Bar Padding**: If fewer than 360 bars are returned, the function backfills missing bars with zero values, maintaining continuity in the chart.
 
 ### Return the Processed Data
 
@@ -162,5 +184,4 @@ if (bars.length < requiredBars) {
 }
 ```
 
-- Finally, the function returns the array of processed OHLC bars, or logs an error if the API request fails.
-
+- Returns the final processed bar array or throws an error if the API request fails.
