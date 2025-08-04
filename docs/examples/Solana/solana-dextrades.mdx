@@ -264,7 +264,7 @@ Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTn
 While the V2 API does not support expressions yet you can get the price data between two timestamps and compute the price surge in your system.
 
 Below query gets the price of a token at the starting and ending of a period ( open and close).
-You can run the query [here](https://ide.bitquery.io/Price-change-of-a-token-in-time-period-on-Solana)
+You can run the query [here](https://ide.bitquery.io/Price-change-of-a-token-on-Solana)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -273,7 +273,7 @@ You can run the query [here](https://ide.bitquery.io/Price-change-of-a-token-in-
 query MyQuery {
   Solana(dataset: realtime) {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Block: {Time: {since: "2025-01-21T04:00:00Z", till: "2025-01-21T08:00:00Z"}}}
+      where: {Trade: {Currency: {MintAddress: {is: "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
     ) {
       Trade {
         Dex {
@@ -282,9 +282,11 @@ query MyQuery {
         open: Price(minimum: Block_Time)
         close: Price(maximum: Block_Time)
       }
+      surge: calculate(expression: "($Trade_open/$Trade_close)* 100")
     }
   }
 }
+
 
 
 ```
