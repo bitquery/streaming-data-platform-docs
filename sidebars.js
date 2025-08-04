@@ -582,7 +582,8 @@ const sidebars = {
       link: {
         type: "generated-index",
         title: "Trading APIs",
-        description: "Using Price Streams for Tokens & Currencies Across Chains",
+        description:
+          "Using Price Streams for Tokens & Currencies Across Chains",
       },
       items: [
         {
@@ -591,7 +592,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Price Index API",
-            description: "Access token and currency pricing data across chains.",
+            description:
+              "Access token and currency pricing data across chains.",
           },
           items: [
             "trading/price-index/introduction",
@@ -605,23 +607,21 @@ const sidebars = {
                 description: "Understanding each price index cube",
               },
               items: [
-               "trading/price-index/tokens",
-            // "trading/price-index/currency",
-          "trading/price-index/pairs",
+                "trading/price-index/tokens",
+                "trading/price-index/currency",
+                "trading/price-index/pairs",
               ],
             },
             // "trading/price-index/tokens",
             // "trading/price-index/currency",
             // "trading/price-index/pairs",
-            
-            "trading/price-index/in-depth",
-            "trading/price-index/examples"
-          ],
-        }
-      ],
-    }
-,    
 
+            "trading/price-index/in-depth",
+            "trading/price-index/examples",
+          ],
+        },
+      ],
+    },
     {
       type: "category",
       label: "How-To Guides",
@@ -659,9 +659,9 @@ const sidebars = {
           label: "Wash Trading Detector",
           link: {
             type: "generated-index",
-            title: "Detecting Wash Trades on Solana"
+            title: "Detecting Wash Trades on Solana",
           },
-          items:[
+          items: [
             "usecases/wash-trading-detector/overview",
             {
               type: "category",
@@ -669,12 +669,12 @@ const sidebars = {
               items: [
                 "usecases/wash-trading-detector/prepare-data/getTrades",
                 "usecases/wash-trading-detector/prepare-data/rules",
-                "usecases/wash-trading-detector/prepare-data/label"
+                "usecases/wash-trading-detector/prepare-data/label",
               ],
             },
             "usecases/wash-trading-detector/training",
-            "usecases/wash-trading-detector/app"
-          ]
+            "usecases/wash-trading-detector/app",
+          ],
         },
         {
           type: "category",
