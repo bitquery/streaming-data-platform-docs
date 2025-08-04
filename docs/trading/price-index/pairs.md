@@ -49,8 +49,6 @@ The Pairs cube provides trading data for a base token traded against a quote tok
 
 ```
 
-For an indepth breakdown of how quote and base are assigned, go [here](https://docs.bitquery.io/docs/trading/price-index/in-depth/).It is not a necessary read.
-
 - `Volume.Base`:  
   Total amount of base token traded during the interval.
 - `Volume.Quote`:  
@@ -73,3 +71,5 @@ if quoteInUsd {
   vol.AveragePrice.Price = vol.AveragePrice.Quote / vol.AveragePrice.Base
 }
 ```
+
+For an in-depth breakdown of how quote and base are assigned, go [here](https://docs.bitquery.io/docs/trading/price-index/in-depth/). It is not a necessary read.

@@ -607,7 +607,7 @@ const sidebars = {
               items: [
                "trading/price-index/tokens",
             // "trading/price-index/currency",
-            // "trading/price-index/pairs",
+          "trading/price-index/pairs",
               ],
             },
             // "trading/price-index/tokens",
