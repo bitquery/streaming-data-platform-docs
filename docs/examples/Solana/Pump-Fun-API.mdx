@@ -380,22 +380,19 @@ We launched the [Price Index](https://docs.bitquery.io/docs/category/price-index
 Here's an example of tracking PumpFun token prices.
 
 PumpFun Token prices against SOL Stream
-[Run Query ➤](https://ide.bitquery.io/Pumpfun-token-prices-against-sol_2)
+[Run Query ➤](https://ide.bitquery.io/Pumpfun-token-latest-price-against-sol_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-subscription {
+
+ {
   Trading {
     Pairs(
-      where: {
-        Price: { IsQuotedInUsd: false }
-        Market: {
-          Network: { is: "Solana" }
-          Program: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
-        }
-      }
+      where: {Price: {IsQuotedInUsd: false}, Market: {Network: {is: "Solana"}, Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}, Token: {Address: {is: "5cd1amZcopDYP3jBHZMfDCH5epWCGfsJvEXFJkgepump"}}, Interval: {Time: {Duration: {eq: 60}}}}
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
     ) {
       Market {
         Address
@@ -435,6 +432,7 @@ subscription {
     }
   }
 }
+
 ```
 
 </details>
