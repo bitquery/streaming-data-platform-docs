@@ -684,20 +684,20 @@ const sidebars = {
             title: "TradingView Charting",
           },
           items: [
+            // {
+            //   type: "category",
+            //   label: "TradingView Advanced Charts",
+            //   items: [
+            //     "usecases/tradingview-advanced-charts/getting-started",
+            //     "usecases/tradingview-advanced-charts/component",
+            //     "usecases/tradingview-advanced-charts/datafeed",
+            //     "usecases/tradingview-advanced-charts/getBars",
+            //     "usecases/tradingview-advanced-charts/advancedChart",
+            //   ],
+            // },
             {
               type: "category",
-              label: "TradingView Advanced Charts",
-              items: [
-                "usecases/tradingview-advanced-charts/getting-started",
-                "usecases/tradingview-advanced-charts/component",
-                "usecases/tradingview-advanced-charts/datafeed",
-                "usecases/tradingview-advanced-charts/getBars",
-                "usecases/tradingview-advanced-charts/advancedChart",
-              ],
-            },
-            {
-              type: "category",
-              label: "Realtime OHLC",
+              label: "TradingView Advance Charts with Realtime Data",
               items: [
                 "usecases/tradingview-subscription-realtime/getting-started",
                 "usecases/tradingview-subscription-realtime/historical_OHLC",

@@ -139,7 +139,7 @@ const config = {
             from: "/docs/usecases/nft_Analytics/",
           },
           {
-            to: "/docs/usecases/tradingview-advanced-charts/getting-started/",
+            to: '/docs/usecases/tradingview-subscription-realtime/getting-started',
             from: "/docs/category/tradingview-advanced-charts/",
           },
           {
@@ -236,6 +236,28 @@ const config = {
           {
             to: "/docs/examples/Solana/letsbonk-api/",
             from: "/docs/examples/Solana/Bonk-Fun-API/",
+          },
+
+          // tradingview redirects
+          {
+            from: '/docs/usecases/tradingview-advanced-charts/getting-started',
+            to: '/docs/usecases/tradingview-subscription-realtime/getting-started',
+          },
+          {
+            from: '/docs/usecases/tradingview-advanced-charts/component',
+            to: '/docs/usecases/tradingview-subscription-realtime/widget',
+          },
+          {
+            from: '/docs/usecases/tradingview-advanced-charts/datafeed',
+            to: '/docs/usecases/tradingview-subscription-realtime/custom_datafeed',
+          },
+          {
+            from: '/docs/usecases/tradingview-advanced-charts/getBars',
+            to: '/docs/usecases/tradingview-subscription-realtime/historical_OHLC',
+          },
+          {
+            from: '/docs/usecases/tradingview-advanced-charts/advancedChart',
+            to: '/docs/usecases/tradingview-subscription-realtime/final-step',
           },
         ],
       },
