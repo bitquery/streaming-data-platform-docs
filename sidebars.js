@@ -98,6 +98,7 @@ const sidebars = {
             "graphql/sorting",
             "graphql/capabilities/joins",
             "graphql/capabilities/expression",
+            "graphql/capabilities/relative-time"
           ],
         },
         {
