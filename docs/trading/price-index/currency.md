@@ -1,36 +1,26 @@
 # Currency Cube
 
-The Currency Cube provides a unified, chain-agnostic price for an asset, such as Bitcoin by aggregating prices and volumes from all its representations (e.g., WBTC, cbBTC, and other bridged or wrapped forms) across all supported chains.
+The Currency Cube provides a unified, chain-agnostic price for an asset in USD, such as Bitcoin by aggregating prices and volumes from all its representations (e.g., WBTC, cbBTC, and other bridged or wrapped forms) across all supported chains.
 
-### Key Points:
+### How OHLC is Calculated
 
-- The price is shown in USD (`IsQuotedInUsd: true` by default).
-- Price is weighted by the trade volume (in USD) of each token representation across chains.
-- This means: variants with higher trading volume have a greater impact on the final aggregated price.
+The OHLC values (Open, High, Low, Close) are determined across all chains and token representations of an asset for the selected interval (e.g., 60 seconds):
 
-### How Price is Calculated
-
-The aggregated price is computed using a volume-weighted formula:
-
-```
-Aggregated Price = (Σ (Price_i × Volume_i)) / Σ Volume_i
-
-```
-
-Where:
-
-- `Price_i` is the price of a variant (e.g., WBTC on Ethereum),
-- `Volume_i` is its trading volume in USD.
-
-The price in Currency cube reflects real trading activity, giving more influence to markets with deeper liquidity.
+- Open: The earliest price recorded in the interval, from any chain.
+- High: The highest price observed in the interval, from any chain.
+- Low: The lowest price observed in the interval, from any chain.
+- Close: The most recent/latest price recorded in the interval, from any chain.
 
 ```
 {
   Trading {
     Currencies(
-      where: {Currency: {Id: {is: "bid:bitcoin"}}, Interval: {Time: {Duration: {eq: 60}}}}
-      limit: {count: 1}
-      orderBy: {descending: Block_Time}
+      where: {
+        Currency: { Id: { is: "bid:bitcoin" } },
+        Interval: { Time: { Duration: { eq: 60 } } }
+      },
+      limit: { count: 1 },
+      orderBy: { descending: Block_Time }
     ) {
       Currency {
         Id
@@ -56,12 +46,12 @@ The price in Currency cube reflects real trading activity, giving more influence
         Usd
       }
       Price {
-        IsQuotedInUsd
+        IsQuotedInUsd #The price is shown in USD (`IsQuotedInUsd: true` by default).
         Ohlc {
-          Close
-          High
-          Low
-          Open
+          Open    # Earliest price across chains in the interval
+          High    # Highest price across chains in the interval
+          Low     # Lowest price across chains in the interval
+          Close   # Latest price across chains in the interval
         }
         Average {
           Estimate
