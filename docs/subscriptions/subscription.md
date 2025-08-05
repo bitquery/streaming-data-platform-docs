@@ -20,11 +20,13 @@ Almost any query can be converted to subscription just by replacing `query` type
 
 When creating queries for GraphQL subscriptions, here are some tips to consider:
 
-1.  **Avoid Limiting Results:** In most cases, you should avoid limiting the results of your subscription query. This is because subscriptions are meant to stream data in real-time and limiting the results could cause you to miss out on new data. However, there might be scenarios where limiting results makes sense. For instance, if you want to query "the top 10 transactions by block", a limit would be appropriate.
+1.  **Avoid Limiting Results:** In most cases, you should avoid limiting the results of your subscription query. This is because subscriptions are meant to stream data in real-time and limiting the results could cause you to miss out on new data.
 
 2.  **Ordering Might Not Be Necessary:** Given that subscriptions are meant to provide real-time data, ordering might not be necessary or even meaningful since data is sent as it becomes available.
 
 3.  **Test Your Queries:** Before deploying your application, make sure to thoroughly test your subscription queries to ensure they return the data you expect and can handle high volumes of data.
+
+4.  **Modifying Subscriptions Does Not Work**: If you try to modify a running subscription, it will end the subscription.
 
 In addition, optimizing your queries can significantly enhance the performance of your subscriptions. For more insights on how to optimize your websocket queries, go [here](/docs/graphql/optimizing-graphql-queries.md).
 
@@ -102,5 +104,3 @@ subscription ($token: String!, $minamount: String!, $mempool: Boolean, $network:
   "network": "eth"
 }
 ```
-
-
