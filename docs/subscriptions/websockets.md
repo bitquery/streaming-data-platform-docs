@@ -27,13 +27,8 @@ You are charged for the number of subscriptions (aka streams) and not for the nu
 
 It's important to note that for committed blocks, data will come in portions (by block), and for the mempool, data will come by transactions (or set of transactions). You do not have control over the sequence in which this data will arrive. Therefore, ensure your application is designed to handle data in this manner.
 
-## Technical Considerations
+**Websockets using Bitquery graphQL streams cannot send "close" messages, only way to end the subscription/stream is to close the websocket**
 
-WebSocket provides a general-purpose protocol for real-time bidirectional communication over a single, long-lived connection. However, one drawback is that developers must implement their own messaging and data structure when using WebSocket.
-
-### Workflow
-
-![flow](/img/diagrams/wss_flowchart.png)
 
 ## Authorising Websockets
 

@@ -342,17 +342,12 @@ const config = {
           },
           {
             to: "https://account.bitquery.io/user/api_v2/access_tokens",
-            label: "Get your free Access Token",
+            label: "Get Your Access Token",
             position: "right",
           },
-          // {
-          //   to: "https://chatgpt.com/g/g-DJ8174VfH-bitquery-query-creator",
-          //   label: "Query GPT 🌐",
-          //   position: "left",
-          // },
           {
             to: "https://dexrabbit.com/",
-            label: "DEX Dashboard",
+            label: "DEXRabbit",
             position: "left",
           },
           {
@@ -363,6 +358,11 @@ const config = {
           {
             to:"https://bitquery.substack.com/",
             label:"Newsletter",
+            position:"left",
+          },
+          {
+            to:"https://docs.bitquery.io/docs/trading/price-index/introduction/",
+            label:"Price Index API 🚀",
             position:"left",
           }
         ],
