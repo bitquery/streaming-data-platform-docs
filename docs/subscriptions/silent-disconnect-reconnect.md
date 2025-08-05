@@ -4,7 +4,6 @@ When you use graphQL streams via websocket, you need to implement reconnect logi
 
 **Bitquery's WebSocket server doesn’t allow mid-connection retries or re-inits, so once "ka" or data stops, you must fully close and re-establish the WebSocket connection**
 
-
 This is how it would look with below sample implemention of a silent disconnect-reconnect scenario.
 
 ![](/img/ApplicationExamples/disconnect.png)
@@ -154,3 +153,5 @@ function reconnect() {
 
 connectToBitquery();
 ```
+
+Consider implementing an exponential backoff logic (e.g., retry at 3s, 6s, 12s, up to a max) to avoid sending repeated subscription requests.
