@@ -163,6 +163,7 @@ const sidebars = {
             "subscriptions/trigger",
             "subscriptions/websockets",
             "subscriptions/examples",
+            "subscriptions/silent-disconnect-reconnect",
             "subscriptions/example-rust",
             "subscriptions/mempool-subscriptions",
             "subscriptions/backfilling-subscription",

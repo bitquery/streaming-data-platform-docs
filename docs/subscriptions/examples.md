@@ -5,7 +5,7 @@ sidebar_position: 4
 # Building with WebSockets: Code Samples in Python & JavaScript
 
 This section provides examples of how to implement subscription queries in your code.
-**Remember: You need to implement logic to handle silent disconnect( when no data or keep-alive is received for say X seconds) in your code.Sample [here](https://docs.bitquery.io/docs/subscriptions/silent-disconnect-reconnect/)**
+**Remember: You need to implement logic to handle silent disconnect( when no data or keep-alive is received for say X seconds) in your code. Sample [here](https://docs.bitquery.io/docs/subscriptions/silent-disconnect-reconnect/)**.
 
 ## Implementation Example: Using WebSocket Using Python
 

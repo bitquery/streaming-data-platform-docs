@@ -1,7 +1,6 @@
 # Reconnect Automatically After Disconnect
 
-When you use graphQL streams via websocket, you need to implement reconnect logic after you don't recieve data or "ka" for say 10 seconds.
-
+When using Bitquery GraphQL streams via WebSocket, you need to implement reconnect logic if you don't receive any data or a 'ka' message for, say, 10 seconds.
 **Bitquery's WebSocket server doesn’t allow mid-connection retries or re-inits, so once "ka" or data stops, you must fully close and re-establish the WebSocket connection**
 
 This is how it would look with below sample implemention of a silent disconnect-reconnect scenario.
