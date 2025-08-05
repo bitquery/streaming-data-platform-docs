@@ -100,7 +100,7 @@ export const resolveSymbol = (
       session: "24x7",
       timezone: "Etc/UTC",
       minmov: 1,
-      pricescale: 1000,
+      pricescale: 1000,// set it dynamically according to price range of token
       has_intraday: true,
       intraday_multipliers: ["1", "5", "15", "30", "60"],
       has_empty_bars: false,

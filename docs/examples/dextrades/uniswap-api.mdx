@@ -415,44 +415,145 @@ query ActiveUniswapTraders {
 
 </details>
 
+## Get Latest Trading Price for a Uniswap Token Pair
+
+We launched the [Price Index](https://docs.bitquery.io/docs/category/price-index/) in August 2025, allowing you to track price for any onchain token pair.
+
+Here's an example of tracking Uniswap token pair trading price.
+
+Uniswap Token Pair Price API
+[Run Query ➤](https://ide.bitquery.io/latest-trade-price-of-uniswap-pair#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  Trading(dataset:realtime) {
+    Pairs(
+      where: {
+        Token: {Address: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, 
+        QuoteToken: {Address: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}},
+        Market: {Network: {is: "Ethereum"} ProtocolFamily: {is: "Uniswap"}}
+        Interval: {Time: {Duration: {eq: 60}}}
+      }
+      orderBy: {descending: Block_Time}
+      limit: {count:1}
+    ) {
+      Block {
+        Time
+      }
+      Price{
+        Average{
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+          ExponentialMoving
+        }
+      }
+      Market{
+        Address
+        ProtocolFamily
+        Protocol
+        Program
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Get OHLC for a Pair on Uniswap
 
-[Run Query](https://ide.bitquery.io/OHLC-of-a-pair-on-all-Uniswap-versions)
+[Run Query](https://ide.bitquery.io/OHLC-price-of-an-uniswap-pair) to get `1 minute` OHLC data for a given pair of currencies
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 
-query tradingViewPairs($network: evm_network, $dataset: dataset_arg_enum, $interval: Int, $token: String, $base: String, $from: DateTime, $to: DateTime) {
-  EVM(network: $network, dataset: $dataset) {
-    DEXTradeByTokens(
-      orderBy: {ascendingByField: "Block_Time"}
-      where: {TransactionStatus: {Success: true}, Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $token}}}, Currency: {SmartContract: {is: $base}}, Success: true, Dex: {ProtocolName: {in: ["uniswap_v3", "uniswap_v2", "uniswap_v1"]}}}, Block: {Time: {since: $from, till: $to}}}
-    ) {
-      Block {
-        Time(interval: {count: $interval, in: seconds})
+query MyQuery {
+  Trading(dataset:realtime) {
+    Pairs(
+      where: {
+        Token: {Address: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, 
+        QuoteToken: {Address: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}},
+        Market: {Network: {is: "Ethereum"} ProtocolFamily: {is: "Uniswap"}}
+        Interval: {Time: {Duration: {eq: 60}}}
       }
-      min: quantile(of: Trade_PriceInUSD, level: 0.1)
-      max: quantile(of: Trade_PriceInUSD, level: 0.9)
-      close: average(of: Trade_PriceInUSD)
-      open: average(of: Trade_PriceInUSD)
-      volume: sum(of: Trade_Side_AmountInUSD)
+      orderBy: {descending: Interval_Time_End}
+    ) {
+      Interval{
+        Time{
+          Start
+          End
+        }
+      }
+      Price{
+        Ohlc{
+          Open
+          High
+          Low
+          Close
+        }
+      }
+      Market{
+        Address
+        ProtocolFamily
+        Protocol
+        Program
+      }
+      QuoteToken{
+        Address
+        Name
+        Symbol
+      }
+      Token{
+        Address
+        Name
+        Symbol
+      }
     }
   }
-}
-{
-  "network": "eth",
-  "base": "0x2653cd00ceb854efb65b1bb4cbf19c760f66cc3e",
-  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-  "dataset": "realtime",
-  "interval": 60,
-  "from": "2025-07-26T06:41:38.000Z",
-  "to": "2025-07-29T06:41:38.000Z"
 }
 
 ```
 
+</details>
+
+## Price Change for an Uniswap Pair
+
+[This](https://ide.bitquery.io/Price-change-percent-for-uniswap-pair-5-minutes) API endpoint returns the price change percentage for a token pair on `Uniswap` over a period of `5 minutes`.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  Trading(dataset: realtime) {
+    Pairs(
+      where: {Market: {Network: {is: "Ethereum"}, ProtocolFamily: {is: "Uniswap"}, Program: {is:"0xc90b20b897a17c28a98c03a8bbc62e03ceccb62b"}}, Interval: {Time: {Duration: {eq: 300}}}}
+      orderBy: {descending: Interval_Time_End}
+      limit: {count: 1}
+    ) {
+      Interval {
+        Time {
+          Start
+          End
+        }
+      }
+      Price {
+        Ohlc {
+          Open
+          Close
+        }
+      }
+      calculate(expression: "100 * ( $Price_Ohlc_Close - $Price_Ohlc_Open ) / $Price_Ohlc_Open")
+    }
+  }
+}
+```
 </details>
 
 ## Uniswap Kafka Streams

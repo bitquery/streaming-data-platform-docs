@@ -139,7 +139,7 @@ const config = {
             from: "/docs/usecases/nft_Analytics/",
           },
           {
-            to: "/docs/usecases/tradingview-advanced-charts/getting-started/",
+            to: '/docs/usecases/tradingview-subscription-realtime/getting-started',
             from: "/docs/category/tradingview-advanced-charts/",
           },
           {
@@ -237,6 +237,28 @@ const config = {
             to: "/docs/examples/Solana/letsbonk-api/",
             from: "/docs/examples/Solana/Bonk-Fun-API/",
           },
+
+          // tradingview redirects
+          {
+            from: '/docs/usecases/tradingview-advanced-charts/getting-started',
+            to: '/docs/usecases/tradingview-subscription-realtime/getting-started',
+          },
+          {
+            from: '/docs/usecases/tradingview-advanced-charts/component',
+            to: '/docs/usecases/tradingview-subscription-realtime/widget',
+          },
+          {
+            from: '/docs/usecases/tradingview-advanced-charts/datafeed',
+            to: '/docs/usecases/tradingview-subscription-realtime/custom_datafeed',
+          },
+          {
+            from: '/docs/usecases/tradingview-advanced-charts/getBars',
+            to: '/docs/usecases/tradingview-subscription-realtime/historical_OHLC',
+          },
+          {
+            from: '/docs/usecases/tradingview-advanced-charts/advancedChart',
+            to: '/docs/usecases/tradingview-subscription-realtime/final-step',
+          },
         ],
       },
     ],
@@ -320,17 +342,12 @@ const config = {
           },
           {
             to: "https://account.bitquery.io/user/api_v2/access_tokens",
-            label: "Get your free Access Token",
+            label: "Get Your Access Token",
             position: "right",
           },
-          // {
-          //   to: "https://chatgpt.com/g/g-DJ8174VfH-bitquery-query-creator",
-          //   label: "Query GPT 🌐",
-          //   position: "left",
-          // },
           {
             to: "https://dexrabbit.com/",
-            label: "DEX Dashboard",
+            label: "DEXRabbit",
             position: "left",
           },
           {
@@ -341,6 +358,11 @@ const config = {
           {
             to:"https://bitquery.substack.com/",
             label:"Newsletter",
+            position:"left",
+          },
+          {
+            to:"https://docs.bitquery.io/docs/trading/price-index/introduction/",
+            label:"Price Index API 🚀",
             position:"left",
           }
         ],

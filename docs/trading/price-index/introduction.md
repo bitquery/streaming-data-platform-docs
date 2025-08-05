@@ -1,6 +1,6 @@
 # Price Index API - Introduction
 
-Starting July 2025, we have introduced separate multi-chain price APIs and Streams via graphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
+Starting July 2025, we have a introduced separate multi-chain **Price index APIs and Streams** via graphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
 
 These tools let you stream and query aggregated price data—in USD or other paired currencies—based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains.
 
@@ -11,23 +11,30 @@ These APIs are available on the **[EAP Endpoint](https://ide.bitquery.io/?endpoi
 
 ## What is the Price Index API and Why Does It Matter?
 
+The Price Index API/Stream provides real-time, aggregated price data with ultra-low latency across multiple trading pairs, tokens, decentralized exchanges (DEXs), and blockchains. It’s the first product of its kind, designed to help developers access accurate, up-to-the-second prices for building financial applications.
+
 This API is the foundational layer of our trading-focused data suite. We're actively expanding our trading dataset, with much more to come in the months and years ahead.
 
 The focus of this product suite is to help traders win. As we receive feedback, we will improve the dataset quality, add more metrics and APIs.
 
-## How is this API different from DEXTrades and DEXTRadesByToken APIs?
+## How is this API different from our existing DEXTrades and DEXTRadesByToken APIs?
 
 The Price Index API is a chain-agnostic, pre-aggregated price feed designed specifically for trading,futures, charting, and analytics. Here's how it differs from the existing **DEXTrades** and **DEXTradesByToken** APIs:
 
 - **Granularity**:
 
   - **DEXTrades / DEXTradesByToken** provide **transaction-level data**, showing every trade on supported DEXs for each chain.
-  - **Price Index API** offers **pre-aggregated price metrics** like OHLC, average prices, and volume at fixed time or volume intervals.
+  - The **Price Index API** provides **pre-aggregated price metrics** such as OHLC (Open, High, Low, Close) and average prices, calculated over volume- or time-based intervals—as granular as 1 second.
 
 - **Aggregation**:
 
   - In DEX APIs, you had to **aggregate trades** to calculate OHLC or moving averages.
   - The Price Index API provides **ready-to-use OHLC and price statistics** out of the box , no need to calculate anything.
+
+- **Filtering Bad Trades**:
+
+  - DEX APIs provide all trade data, including every transaction. You can filter this data by trade amount and other parameters to exclude outliers or irrelevant trades that could distort price accuracy.
+  - The Price Index API does this automatically—filtering out bad or low-quality trades—to deliver a clean, reliable, and accurate price feed.
 
 - **Chain Perspective**:
 
@@ -40,21 +47,21 @@ The Price Index API is a chain-agnostic, pre-aggregated price feed designed spec
 
 This stream has premade-OHLC in the response which you feed directly to your charting solution without having to calculate it.
 
-> Note: All queries can be converted to a graphQL stream by changing the keyword `query` to `subscription`
+> Note: All queries can be converted to a graphQL stream (Websocket) by changing the keyword `query` to `subscription`
 
 #### Kafka Topic for Price Index Stream: `trading_prices`
 
 The Price APIs have three core data cubes:
 
 - **Tokens**: Price data for a specific token on a specific chain. Use this when you care about chain-specific prices like USDT on Solana.
-- **Currencies**: Aggregated view of a token across chains — e.g., BTC across Bitcoin, Ethereum (as WBTC), Solana, etc.
+- **Currencies**: An aggregated view of tokens that represent the same underlying asset. For example, tokens like cbBTC, WBTC, and other Bitcoin-wrapped tokens are all grouped under the Bitcoin currency.
 - **Pairs**: Price and volume data for token pairs on specific markets/protocols. E.g., SOL/USDC on Raydium (Solana) or ETH/USDT on Uniswap (Ethereum).
 
 > Note: Expressions are supported in this API.
 
 ## Currencies
 
-Currencies are representation of all tokens on different chains. For example, take the case of Bitcoin, while it is a native token on Bitcoin chain, it is also traded on EVM chains as WBTC ( wrapped BTC). Now all these representations of BTC are represented as a single currency.
+Currencies are representation of all tokens on various chains supported on Price Index. For example, take the case of Bitcoin, while it is a native token on Bitcoin chain, it is also traded on EVM chains as WBTC ( wrapped BTC). Now all these representations of BTC are represented as a single currency.
 
 ```
 
