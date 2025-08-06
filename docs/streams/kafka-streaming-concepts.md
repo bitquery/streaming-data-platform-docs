@@ -117,6 +117,10 @@ General pattern of the topic name is:
 <BLOCKCHAIN_NAME>.broadcasted.<MESSAGE_TYPE>
 ```
 
+#### Price Index Streams
+
+Our multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/price-index/introduction/) have the topic `trading_prices`, it is not tied to one particular network.
+
 ### General Message Types
 
 MESSAGE_TYPE is specific on blockchain, most blockchain has topics for:
