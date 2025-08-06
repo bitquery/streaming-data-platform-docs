@@ -155,42 +155,6 @@ subscription MyQuery {
 
 </details>
 
-## Top 10 marketcap jump tokens in last 1hr
-
-Use below query to get top 10 marketcap jump tokens in last 1hr. Test the query [here](https://ide.bitquery.io/top-10-marketcap-jump-tokens-in-last-1hr#)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```
-query MyQuery {
-  Solana {
-    TokenSupplyUpdates(
-      limit: {count: 10}
-      orderBy: {descendingByField: "marketcapJump"}
-      where: {Transaction: {Result: {Success: true}}, Block: {Time: {since_relative: {minutes_ago: 60}}}}
-    ) {
-      TokenSupplyUpdate {
-        AmountInUSD
-        pre: PreBalanceInUSD
-        post: PostBalanceInUSD
-        Currency {
-          MintAddress
-          Name
-          Symbol
-          Decimals
-        }
-      }
-      marketcapJump: calculate(
-        expression: "(($TokenSupplyUpdate_post - $TokenSupplyUpdate_pre) / $TokenSupplyUpdate_pre) * 100"
-      )
-    }
-  }
-}
-```
-
-</details>
-
 ## Get All Liquidity Pools info for a particular token
 
 This query will give you the information on all the liquidity pools of a particular token `EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm`.
