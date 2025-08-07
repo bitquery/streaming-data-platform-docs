@@ -31,7 +31,7 @@ This stream delivers real-time token prices on Solana based on the latest trades
 
 This subscription generates a real-time OHLC (Open, High, Low, Close) K-line chart for Solana in real-time, useful for Tradingview charting in real-time
 
-▶️ [Seconds OHLC Stream](https://ide.bitquery.io/seconds-oHLC-realtime-solana#)
+▶️ [Seconds OHLC Stream](https://ide.bitquery.io/1-second-OHLC-k-line-Solana)
 
 ### Balance Update Stream
 
