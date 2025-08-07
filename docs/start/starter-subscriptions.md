@@ -103,7 +103,7 @@ This stream gives info about the real time trades on Raydium exchange. You can m
 
 This stream provides real time price stream for all tokens on Ethereum based on trades.
 
-[Real time price stream for tokens on Ethereum](https://ide.bitquery.io/Real-time-price-stream-for-tokens-on-Ethereum)
+[Real time price stream for tokens on Ethereum](https://ide.bitquery.io/1-second-OHLC-k-line-Ethereum)
 
 ### Ethereum Mempool Events
 
