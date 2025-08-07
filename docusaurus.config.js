@@ -259,6 +259,11 @@ const config = {
             from: '/docs/usecases/tradingview-advanced-charts/advancedChart',
             to: '/docs/usecases/tradingview-subscription-realtime/final-step',
           },
+          {
+            from:'/docs/streams/kafka-streams-js',
+            to:'/docs/streams/protobuf/kafka-protobuf-js'
+          },
+
         ],
       },
     ],

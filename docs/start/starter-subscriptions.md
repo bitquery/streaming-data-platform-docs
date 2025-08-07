@@ -31,7 +31,7 @@ This stream delivers real-time token prices on Solana based on the latest trades
 
 This subscription generates a real-time OHLC (Open, High, Low, Close) K-line chart for Solana in real-time, useful for Tradingview charting in real-time
 
-▶️ [Seconds OHLC Stream](https://ide.bitquery.io/seconds-oHLC-realtime-solana#)
+▶️ [Seconds OHLC Stream](https://ide.bitquery.io/1-second-OHLC-k-line-Solana)
 
 ### Balance Update Stream
 
@@ -103,7 +103,7 @@ This stream gives info about the real time trades on Raydium exchange. You can m
 
 This stream provides real time price stream for all tokens on Ethereum based on trades.
 
-[Real time price stream for tokens on Ethereum](https://ide.bitquery.io/Real-time-price-stream-for-tokens-on-Ethereum)
+[Real time price stream for tokens on Ethereum](https://ide.bitquery.io/1-second-OHLC-k-line-Ethereum)
 
 ### Ethereum Mempool Events
 

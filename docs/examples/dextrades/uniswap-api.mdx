@@ -35,7 +35,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Realtime Uniswap v1, v2, v3 Trades
 
-Track live trades across all Uniswap versions:
+Track live trades across all Uniswap versions: [Run Stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream)
 
 <details>
   <summary>Click to expand GraphQL subscription</summary>
@@ -106,9 +106,70 @@ subscription {
 
 </details>
 
+## TradingView OHLC Stream on Uniswap Across Chains
+
+The new [Price Index Stream](https://docs.bitquery.io/docs/trading/price-index/introduction/) helps you get token-level, pair-level, and market-level OHLC data for 1 sec interval( or higher), in real-time across all chains.
+These also includes trading metrics like SMA, EMA, VWAP, and more.
+
+[Run Stream](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline)
+
+<details>
+
+  <summary>Click to expand GraphQL query</summary>
+
+```
+subscription {
+  Trading {
+    Pairs(
+      where: {Market: {Protocol: {in: ["uniswap_v3", "uniswap_v2"]}}, Interval: {Time: {Duration: {eq: 1}}}}
+    ) {
+      Currency {
+        Name
+        Id
+      }
+      Market {
+        Name
+        NetworkBid
+        Network
+        Address
+      }
+      Price {
+        IsQuotedInUsd
+        Average {
+          Mean
+        }
+      }
+      QuoteCurrency {
+        Id
+        Symbol
+        Name
+      }
+      QuoteToken {
+        Symbol
+        Name
+        Id
+        NetworkBid
+        Network
+        Did
+        Address
+      }
+      Token {
+        Name
+        Id
+        NetworkBid
+      }
+    }
+  }
+}
+
+```
+
+</details>
+
 ## Latest Trades of a Pair on Uniswap
 
 Retrieve the 50 most recent WETH/USDC trades on Uniswap v1–v3:
+
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -169,7 +230,7 @@ query LatestTrades {
     }
   }
 }
-```
+````
 
 </details>
 
@@ -429,29 +490,34 @@ Uniswap Token Pair Price API
 
 ```graphql
 query MyQuery {
-  Trading(dataset:realtime) {
+  Trading(dataset: realtime) {
     Pairs(
       where: {
-        Token: {Address: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, 
-        QuoteToken: {Address: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}},
-        Market: {Network: {is: "Ethereum"} ProtocolFamily: {is: "Uniswap"}}
-        Interval: {Time: {Duration: {eq: 60}}}
+        Token: { Address: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" } }
+        QuoteToken: {
+          Address: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" }
+        }
+        Market: {
+          Network: { is: "Ethereum" }
+          ProtocolFamily: { is: "Uniswap" }
+        }
+        Interval: { Time: { Duration: { eq: 60 } } }
       }
-      orderBy: {descending: Block_Time}
-      limit: {count:1}
+      orderBy: { descending: Block_Time }
+      limit: { count: 1 }
     ) {
       Block {
         Time
       }
-      Price{
-        Average{
+      Price {
+        Average {
           Mean
           SimpleMoving
           WeightedSimpleMoving
           ExponentialMoving
         }
       }
-      Market{
+      Market {
         Address
         ProtocolFamily
         Protocol
@@ -472,70 +538,21 @@ query MyQuery {
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-
-query MyQuery {
-  Trading(dataset:realtime) {
-    Pairs(
-      where: {
-        Token: {Address: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, 
-        QuoteToken: {Address: {is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"}},
-        Market: {Network: {is: "Ethereum"} ProtocolFamily: {is: "Uniswap"}}
-        Interval: {Time: {Duration: {eq: 60}}}
-      }
-      orderBy: {descending: Interval_Time_End}
-    ) {
-      Interval{
-        Time{
-          Start
-          End
-        }
-      }
-      Price{
-        Ohlc{
-          Open
-          High
-          Low
-          Close
-        }
-      }
-      Market{
-        Address
-        ProtocolFamily
-        Protocol
-        Program
-      }
-      QuoteToken{
-        Address
-        Name
-        Symbol
-      }
-      Token{
-        Address
-        Name
-        Symbol
-      }
-    }
-  }
-}
-
-```
-
-</details>
-
-## Price Change for an Uniswap Pair
-
-[This](https://ide.bitquery.io/Price-change-percent-for-uniswap-pair-5-minutes) API endpoint returns the price change percentage for a token pair on `Uniswap` over a period of `5 minutes`.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
 query MyQuery {
   Trading(dataset: realtime) {
     Pairs(
-      where: {Market: {Network: {is: "Ethereum"}, ProtocolFamily: {is: "Uniswap"}, Program: {is:"0xc90b20b897a17c28a98c03a8bbc62e03ceccb62b"}}, Interval: {Time: {Duration: {eq: 300}}}}
-      orderBy: {descending: Interval_Time_End}
-      limit: {count: 1}
+      where: {
+        Token: { Address: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" } }
+        QuoteToken: {
+          Address: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" }
+        }
+        Market: {
+          Network: { is: "Ethereum" }
+          ProtocolFamily: { is: "Uniswap" }
+        }
+        Interval: { Time: { Duration: { eq: 60 } } }
+      }
+      orderBy: { descending: Interval_Time_End }
     ) {
       Interval {
         Time {
@@ -546,14 +563,32 @@ query MyQuery {
       Price {
         Ohlc {
           Open
+          High
+          Low
           Close
         }
       }
-      calculate(expression: "100 * ( $Price_Ohlc_Close - $Price_Ohlc_Open ) / $Price_Ohlc_Open")
+      Market {
+        Address
+        ProtocolFamily
+        Protocol
+        Program
+      }
+      QuoteToken {
+        Address
+        Name
+        Symbol
+      }
+      Token {
+        Address
+        Name
+        Symbol
+      }
     }
   }
 }
 ```
+
 </details>
 
 ## Uniswap Kafka Streams
