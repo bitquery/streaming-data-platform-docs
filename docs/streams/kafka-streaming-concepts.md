@@ -119,7 +119,7 @@ General pattern of the topic name is:
 
 #### Price Index Streams
 
-Our multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/price-index/introduction/) have the topic `trading_prices`, it is not tied to one particular network.
+Our multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/price-index/introduction/) have the topic `trading.prices`, it is not tied to one particular network.
 
 ### General Message Types
 
