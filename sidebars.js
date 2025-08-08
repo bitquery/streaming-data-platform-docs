@@ -98,7 +98,7 @@ const sidebars = {
             "graphql/sorting",
             "graphql/capabilities/joins",
             "graphql/capabilities/expression",
-            "graphql/capabilities/relative-time"
+            "graphql/capabilities/relative-time",
           ],
         },
         {
@@ -528,8 +528,8 @@ const sidebars = {
           type: "category",
           label: "Matic (Polygon)",
           link: {
-            type: "generated-index",
-            title: "Matic API Documentation",
+            type: "doc",
+            id: "examples/Matic/index",
           },
           items: [
             "examples/Matic/matic-balance-updates",

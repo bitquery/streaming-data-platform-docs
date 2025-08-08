@@ -49,7 +49,6 @@ const config = {
     //     "How to query using GraphQL?, What is BitQuery Explorer?, How to access blockchain data?, What APIs does BitQuery offer?",
     //   async: true,
     // },
-    
 
     {
       src: "https://www.chatbase.co/embed.min.js",
@@ -217,17 +216,21 @@ const config = {
             from: "/docs/category/nft/",
           },
           {
-            to:"/docs/examples/Arbitrum/Overview/",
-            from:"/docs/category/arbitrum/"
+            to: "/docs/examples/Arbitrum/Overview/",
+            from: "/docs/category/arbitrum/",
           },
 
           {
-            to:"/docs/examples/dextrades/uniswap-api/",
-            from:"/docs/examples/realtimetrades/"
+            to: "/docs/examples/Matic/",
+            from: "/docs/category/matic/",
           },
           {
-            to: '/docs/examples/Solana/', // new target
-            from: '/docs/category/solana/' // old category URL
+            to: "/docs/examples/dextrades/uniswap-api/",
+            from: "/docs/examples/realtimetrades/",
+          },
+          {
+            to: "/docs/examples/Solana/", // new target
+            from: "/docs/category/solana/", // old category URL
           },
           {
             to: "/docs/examples/Solana/letsbonk-api/",
@@ -236,30 +239,29 @@ const config = {
 
           // tradingview redirects
           {
-            from: '/docs/usecases/tradingview-advanced-charts/getting-started',
-            to: '/docs/usecases/tradingview-subscription-realtime/getting-started',
+            from: "/docs/usecases/tradingview-advanced-charts/getting-started",
+            to: "/docs/usecases/tradingview-subscription-realtime/getting-started",
           },
           {
-            from: '/docs/usecases/tradingview-advanced-charts/component',
-            to: '/docs/usecases/tradingview-subscription-realtime/widget',
+            from: "/docs/usecases/tradingview-advanced-charts/component",
+            to: "/docs/usecases/tradingview-subscription-realtime/widget",
           },
           {
-            from: '/docs/usecases/tradingview-advanced-charts/datafeed',
-            to: '/docs/usecases/tradingview-subscription-realtime/custom_datafeed',
+            from: "/docs/usecases/tradingview-advanced-charts/datafeed",
+            to: "/docs/usecases/tradingview-subscription-realtime/custom_datafeed",
           },
           {
-            from: '/docs/usecases/tradingview-advanced-charts/getBars',
-            to: '/docs/usecases/tradingview-subscription-realtime/historical_OHLC',
+            from: "/docs/usecases/tradingview-advanced-charts/getBars",
+            to: "/docs/usecases/tradingview-subscription-realtime/historical_OHLC",
           },
           {
-            from: '/docs/usecases/tradingview-advanced-charts/advancedChart',
-            to: '/docs/usecases/tradingview-subscription-realtime/final-step',
+            from: "/docs/usecases/tradingview-advanced-charts/advancedChart",
+            to: "/docs/usecases/tradingview-subscription-realtime/final-step",
           },
           {
-            from:'/docs/streams/kafka-streams-js',
-            to:'/docs/streams/protobuf/kafka-protobuf-js'
+            from: "/docs/streams/kafka-streams-js",
+            to: "/docs/streams/protobuf/kafka-protobuf-js",
           },
-
         ],
       },
     ],
@@ -303,11 +305,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       colorMode: {
-        defaultMode: 'dark',
+        defaultMode: "dark",
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
-      
+
       // metadata: [
       //   {
       //     name: 'baidu-site-verification',
@@ -357,15 +359,15 @@ const config = {
             position: "left",
           },
           {
-            to:"https://bitquery.substack.com/",
-            label:"Newsletter",
-            position:"left",
+            to: "https://bitquery.substack.com/",
+            label: "Newsletter",
+            position: "left",
           },
           {
-            to:"https://docs.bitquery.io/docs/trading/price-index/introduction/",
-            label:"Price Index API 🚀",
-            position:"left",
-          }
+            to: "https://docs.bitquery.io/docs/trading/price-index/introduction/",
+            label: "Price Index API 🚀",
+            position: "left",
+          },
         ],
       },
       footer: {

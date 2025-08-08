@@ -1,0 +1,63 @@
+---
+title: Polygon (MATIC) API Documentation
+description: Collection of Polygon (MATIC) APIs organized by project.
+slug: /examples/Matic/
+keywords:
+  - API
+  - Polygon (MATIC) RPC
+  - Polygon (MATIC) RPC API
+  - Best Polygon (MATIC) API
+  - Polygon (MATIC) Explorer API
+  - Polygon (MATIC) wallet transaction monitoring api
+  - Polygon (MATIC) api docs
+  - Polygon (MATIC) websocket api
+  - Polygon (MATIC) blockchain api
+  - Polygon (MATIC) token api
+  - Polygon (MATIC) transaction api
+---
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+# Polygon (MATIC) API Documentation
+
+In this section we will see how to fetch data on different tokens, transactions, DEXs via APIs and Streams.
+
+If you need help getting data on Polygon (MATIC),reach out to [support](https://t.me/Bloxy_info).
+
+## What is Polygon (MATIC) API?
+
+Bitquery Polygon (MATIC) APIs help you fetch onchain data by writing a graphQL query.
+
+## What are capabilities of Bitquery Polygon (MATIC) API?
+
+Bitquery Polygon (MATIC) APIs are very flexible, you can fetch trade, transaction, balance information for a period, for a specific wallet and join with other information.
+
+## Difference between Polygon (MATIC) RPC and Bitquery Polygon (MATIC) API?
+
+**Polygon (MATIC) RPC**
+
+- JSON-RPC endpoint exposing raw on-chain state & transactions
+- No built-in history or analytics—any indexing/aggregation you build or outsource
+- Ideal for submitting transactions
+
+**Bitquery Polygon (MATIC) API**
+
+- GraphQL endpoint over pre-indexed, parsed Polygon (MATIC) data (token transfers, DEX trades, NFTs, etc.)
+- Historical data, joins, aggregations & real-time subscriptions
+- Great for real-time data and historical backtesting without running your own indexer
+
+## Does Bitquery support Polygon (MATIC) Websocket and Polygon (MATIC) Webhooks?
+
+Bitquery supports websocket and webhooks, you can convert most of the graphQL APIs into graphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More and [code samples available here](https://docs.bitquery.io/docs/subscriptions/websockets/).
+
+## Polygon (MATIC) APIs
+
+- [Polygon (MATIC) Dex Trades](./matic-dextrades)
+- [Polygon (MATIC) NFT API](./matic-nft)
+- [Polygon (MATIC) Balance Updates API](./matic-balance-updates)
+- [Polygon (MATIC) Transfers API](./matic-transfers)
+- [Polygon (MATIC) Uniswap API](./matic-uniswap-api)
+
+### Polygon (MATIC) API | How to Get Real-time & Historical Matic (Polygon) Data
+
+<VideoPlayer url="https://www.youtube.com/watch?v=L6OGxuuZEaw" />
