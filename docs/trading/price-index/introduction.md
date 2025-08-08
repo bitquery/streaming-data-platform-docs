@@ -49,7 +49,7 @@ This stream has premade-OHLC in the response which you feed directly to your cha
 
 > Note: All queries can be converted to a graphQL stream (Websocket) by changing the keyword `query` to `subscription`
 
-#### Kafka Topic for Price Index Stream: `trading_prices`
+#### Kafka Topic for Price Index Stream: `trading.prices`
 
 The Price APIs have three core data cubes:
 
