@@ -265,8 +265,8 @@ const sidebars = {
           type: "category",
           label: "Ethereum",
           link: {
-            type: "generated-index",
-            title: "Ethereum API Documentation",
+            type: "doc",
+            id: "examples/Ethereum/index",
           },
           items: [
             "examples/blocks/blocks-api",

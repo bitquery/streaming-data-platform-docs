@@ -233,6 +233,10 @@ const config = {
             from: "/docs/category/solana/", // old category URL
           },
           {
+            to: "/docs/examples/Ethereum/",
+            from: "/docs/category/ethereum/",
+          },
+          {
             to: "/docs/examples/Solana/letsbonk-api/",
             from: "/docs/examples/Solana/Bonk-Fun-API/",
           },
