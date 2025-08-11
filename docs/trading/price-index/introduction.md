@@ -49,7 +49,25 @@ This stream has premade-OHLC in the response which you feed directly to your cha
 
 > Note: All queries can be converted to a graphQL stream (Websocket) by changing the keyword `query` to `subscription`
 
-#### Kafka Topic for Price Index Stream: `trading.prices`
+### Kafka Topic for Price Index Stream: `trading.prices`
+
+This Kafka topic delivers **real-time, pre-aggregated price data** for tokens, currencies, and trading pairs across all supported blockchains. The data structure is a combination of all 3 cubes described in next section. 
+
+Schema for the proto topic is [here](https://github.com/bitquery/streaming_protobuf/tree/main/market).
+The [python package](https://pypi.org/project/bitquery-pb2-kafka-package/) and [npm package](https://www.npmjs.com/package/bitquery-protobuf-schema) already have all schema updated.
+
+Each message contains:
+
+- **Price metrics** – OHLC (Open, High, Low, Close), Mean Price, SMA, WMA, EMA in USD
+- **Volume data** – Base, Quote, and Base in USD
+- **Interval-based aggregation** – fixed durations (1s, 3s, 5s, 10s, etc.)
+- **Clean feed** – low-quality and outlier trades are filtered automatically for accuracy.
+
+> **Note on `"Quotes"`**:  
+> The `"Quotes": [...]` section in the Kafka stream shows how much was traded in the native token (e.g., SOL) and how the USD value was derived.  
+> All following price entries (`MeanPrice`, `SMA`, `OHLC`, etc.) are already expressed in USD and ready for direct use in charting, bots, or analytics.
+
+### Cubes in the API
 
 The Price APIs have three core data cubes:
 
