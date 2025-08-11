@@ -12,7 +12,7 @@ keywords:
 
 # Ethereum API Documentation
 
-This section contains Ethereum API examples and guides, organized into categories for easier navigation.
+This section contains Ethereum API/Streams examples and guides, organized into categories for easier navigation. This is not exhaustive, we will add more examples as users request different scenarios. If you need help writing any API/Stream, please reach out to us on [our telegram channel](https://t.me/Bloxy_info).
 
 ## Blocks
 
