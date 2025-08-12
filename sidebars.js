@@ -516,6 +516,7 @@ const sidebars = {
             "examples/Base/base-clanker-api",
             "examples/Base/apestore-base-api",
             "examples/Base/base-jump-base-api",
+            "examples/Base/base-zora-api",
             "examples/Base/base-balance-updates",
             "examples/Base/base-coins-api",
             "examples/Base/base-dextrades",
