@@ -7,7 +7,7 @@ sidebar_position: 1
 In this tutorial, we will see how to use [TradingView's Advanced Charts API](https://in.tradingview.com/advanced-charts/) and plot DEX trading data with Bitquery APIs. Additionally, this tutorial will show how to use TradingView subscriptions to calculate OHLC in real-time. You can find the complete code of the tutorial [here](https://github.com/bitquery/tradingview-subscription-realtime/tree/main).
 
 The final chart will look like this and will add new candlestick as data is updated.
- ![](/img/ApplicationExamples/charting.gif) 
+![](/img/ApplicationExamples/charting.gif)
 
 - To do that, you need to get access to TradingView's private Advanced Charts API library by filling out the form.
 - Next, create a new React project.

@@ -33,5 +33,12 @@ Now that you have set up `App.js`, you can run the application using the followi
 npm start
 ```
 
-This will start the development server, and your TradingView chart with both historical and real-time OHLC data should now be visible.
+#### Opening the URL
 
+The sample code uses the token address from the url, so you should pass it like this for example:
+
+```
+http://localhost:3000/?base=So11111111111111111111111111111111111111112&quote=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+```
+
+This will start the development server, and your TradingView chart with both historical and real-time OHLC data should now be visible.
