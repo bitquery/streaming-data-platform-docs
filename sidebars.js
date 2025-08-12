@@ -593,7 +593,7 @@ const sidebars = {
           label: "Price Index",
           link: {
             type: "generated-index",
-            title: "Price Index API",
+            title: "Crypto Price API",
             description:
               "Access token and currency pricing data across chains.",
           },

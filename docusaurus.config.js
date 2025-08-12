@@ -369,7 +369,7 @@ const config = {
           },
           {
             to: "https://docs.bitquery.io/docs/trading/price-index/introduction/",
-            label: "Price Index API 🚀",
+            label: "Crypto Price API 🚀",
             position: "left",
           },
         ],

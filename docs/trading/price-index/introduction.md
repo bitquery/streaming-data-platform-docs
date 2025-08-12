@@ -1,17 +1,17 @@
-# Price Index API - Introduction
+# Crypto Price API - Price Index - Introduction
 
-Starting July 2025, we have a introduced separate multi-chain **Price index APIs and Streams** via graphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
+Starting July 2025, we have a introduced separate multi-chain **Crypto Price API (Price index) and Streams** via graphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
 
 These tools let you stream and query aggregated price data—in USD or other paired currencies—based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains.
 
-The Price Index provides more than just pair prices—it also includes OHLCV (K-Line), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
+The Crypto Price API (Price Index) provides more than just pair prices—it also includes OHLCV (K-Line), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
 While you can access the aggregated price for a single trading pair, the Price Index also supports cross-chain and cross-DEX aggregation, giving you a unified view of token prices across multiple ecosystems.
 
 These APIs are available on the **[EAP Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/eap)** and **[Streaming Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql)**
 
-## What is the Price Index API and Why Does It Matter?
+## What is the Crypto Price API (Price Index) and Why Does It Matter?
 
-The Price Index API/Stream provides real-time, aggregated price data with ultra-low latency across multiple trading pairs, tokens, decentralized exchanges (DEXs), and blockchains. It’s the first product of its kind, designed to help developers access accurate, up-to-the-second prices for building financial applications.
+The Crypto price API/Stream (Price Index) provides real-time, aggregated price data with ultra-low latency across multiple trading pairs, tokens, decentralized exchanges (DEXs), and blockchains. It’s the first product of its kind, designed to help developers access accurate, up-to-the-second prices for building financial applications.
 
 This API is the foundational layer of our trading-focused data suite. We're actively expanding our trading dataset, with much more to come in the months and years ahead.
 
@@ -19,27 +19,27 @@ The focus of this product suite is to help traders win. As we receive feedback, 
 
 ## How is this API different from our existing DEXTrades and DEXTRadesByToken APIs?
 
-The Price Index API is a chain-agnostic, pre-aggregated price feed designed specifically for trading,futures, charting, and analytics. Here's how it differs from the existing **DEXTrades** and **DEXTradesByToken** APIs:
+The Crypto price API (Price Index) is a chain-agnostic, pre-aggregated price feed designed specifically for trading,futures, charting, and analytics. Here's how it differs from the existing **DEXTrades** and **DEXTradesByToken** APIs:
 
 - **Granularity**:
 
   - **DEXTrades / DEXTradesByToken** provide **transaction-level data**, showing every trade on supported DEXs for each chain.
-  - The **Price Index API** provides **pre-aggregated price metrics** such as OHLC (Open, High, Low, Close) and average prices, calculated over volume- or time-based intervals—as granular as 1 second.
+  - The **Crypto Price API (Price Index)** provides **pre-aggregated price metrics** such as OHLC (Open, High, Low, Close) and average prices, calculated over volume- or time-based intervals—as granular as 1 second.
 
 - **Aggregation**:
 
   - In DEX APIs, you had to **aggregate trades** to calculate OHLC or moving averages.
-  - The Price Index API provides **ready-to-use OHLC and price statistics** out of the box , no need to calculate anything.
+  - The Crypto Price API (Price Index) provides **ready-to-use OHLC and price statistics** out of the box , no need to calculate anything.
 
 - **Filtering Bad Trades**:
 
   - DEX APIs provide all trade data, including every transaction. You can filter this data by trade amount and other parameters to exclude outliers or irrelevant trades that could distort price accuracy.
-  - The Price Index API does this automatically—filtering out bad or low-quality trades—to deliver a clean, reliable, and accurate price feed.
+  - The Crypto Price API (Price Index) does this automatically—filtering out bad or low-quality trades—to deliver a clean, reliable, and accurate price feed.
 
 - **Chain Perspective**:
 
   - DEX APIs are **chain-specific**: each query targets a specific network (e.g., Ethereum, Solana, Tron).
-  - The Price Index API is **chain-agnostic**: you can get price data across all chains for a given token or token representation (e.g., WBTC on Ethereum, native BTC on Bitcoin, etc.).
+  - The Crypto Price API (Price Index) is **chain-agnostic**: you can get price data across all chains for a given token or token representation (e.g., WBTC on Ethereum, native BTC on Bitcoin, etc.).
 
 ## Accessing the API
 
@@ -49,7 +49,7 @@ This stream has premade-OHLC in the response which you feed directly to your cha
 
 > Note: All queries can be converted to a graphQL stream (Websocket) by changing the keyword `query` to `subscription`
 
-### Kafka Topic for Price Index Stream: `trading.prices`
+### Kafka Topic for Crypto Price (Price Index) Stream: `trading.prices`
 
 This Kafka topic delivers **real-time, pre-aggregated price data** for tokens, currencies, and trading pairs across all supported blockchains. The data structure is a combination of all 3 cubes described in next section. 
 
@@ -79,7 +79,7 @@ The Price APIs have three core data cubes:
 
 ## Currencies
 
-Currencies are representation of all tokens on various chains supported on Price Index. For example, take the case of Bitcoin, while it is a native token on Bitcoin chain, it is also traded on EVM chains as WBTC ( wrapped BTC). Now all these representations of BTC are represented as a single currency.
+Currencies are representation of all tokens on various chains supported in Crypto Price API(Price Index). For example, take the case of Bitcoin, while it is a native token on Bitcoin chain, it is also traded on EVM chains as WBTC ( wrapped BTC). Now all these representations of BTC are represented as a single currency.
 
 ```
 

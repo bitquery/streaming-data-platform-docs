@@ -16,7 +16,7 @@ The final chart will look like this and will add new candlestick as data is upda
 - Now we will write different parts of the logic:
 
   - The main App
-  - The logic to get historical OHLC using [Price Index API](https://docs.bitquery.io/docs/trading/price-index/introduction/)
+  - The logic to get historical OHLC using [Crypto Price API](https://docs.bitquery.io/docs/trading/price-index/introduction/)
   - The logic to subscribe to real-time OHLC using same APIs
   - The custom datafeed object setup
   - The widget code

@@ -1,4 +1,4 @@
-# LetsBonk.fun API
+# LetsBonk.Fun API - Solana - Tokens, Trades, Live Prices
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -18,7 +18,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 
 <head>
   <meta name="title" content="LetsBonk.Fun API - Solana - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get on-chain data of any LetsBonk.fun based token through our LetsBonk.fun API."/>
+  <meta name="description" content="Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our LetsBonk.fun API."/>
   <meta name="keywords" content="LetsBonk.fun API,LetsBonk.fun on-chain data API,LetsBonk.fun token data API,LetsBonk.fun blockchain API,LetsBonk.fun DEX data API,LetsBonk.fun API documentation,LetsBonk.fun crypto API,LetsBonk.fun web3 API,DEX Trades,Solana,Blast,LetsBonk.fun memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
   <meta name="robots" content="index, follow"/>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -31,7 +31,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 />
 <meta
   property="og:description"
-  content="Get on-chain data of any LetsBonk.fun based token through our LetsBonk.fun API."
+  content="Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our LetsBonk.fun API."
 />
 
   <meta property="twitter:card" content="summary_large_image"/>
