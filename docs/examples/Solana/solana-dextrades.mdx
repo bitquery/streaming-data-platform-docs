@@ -294,6 +294,64 @@ query MyQuery {
 
 </details>
 
+## Get Buy Pressure, Sell Pressure and Net Volume of a Pair
+
+[Run Query](https://ide.bitquery.io/Copy-of-vol-change-percent-of-a-pair)
+
+<details>
+
+<summary>Click to expand GraphQL query</summary>
+
+```
+query MyQuery {
+  Solana(dataset: realtime) {
+    DEXTradeByTokens(
+      where: {
+        Transaction: { Result: { Success: true } }
+        Trade: {
+          Currency: { MintAddress: { is: "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump" } }
+          Side: { Currency: { MintAddress: { is: "So11111111111111111111111111111111111111112" } } }
+          Market: { MarketAddress: { is: "4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i" } }
+        }
+        Block: { Time: { since: "2024-11-06T14:18:00Z" } }
+      }
+    ) {
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      buy_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { after: "2024-11-06T15:13:00Z" } }
+        }
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      sell_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { after: "2024-11-06T15:13:00Z" } }
+        }
+      )
+      vol_Change: calculate(
+        expression: "(($buy_volume - $sell_volume) / $buy_volume) * 100"
+      )
+      vol_Change_5min: calculate(
+        expression: "(($buy_volume_5min - $sell_volume_5min) / $buy_volume_5min) * 100"
+      )
+    }
+  }
+}
+
+```
+
+</details>
+
 ## Price change 5min, 1hr, 6hr precentage of a specific token
 
 Use below query to calculate the price change percentage for a specific token in last 5 min, 1 hr, 6hr. Test the query [here](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_2).
@@ -302,35 +360,37 @@ Use below query to calculate the price change percentage for a specific token in
   <summary>Click to expand GraphQL query</summary>
 
 ```
+
 query MyQuery {
-  Solana {
-    DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "vLieQF5eDqUuuk8RzRaqgAHkXr7bSEBZaWk9Zfibonk"}}, Market: {MarketAddress: {is: "9qppy1KXRTFEeWkFaysYHD7eu9GLg5pGXdLkdL51p7EX"}}}, Block: {Time: {since_relative: {hours_ago: 6}}}}
-    ) {
-      Trade {
-        Price_5min_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{minutes_ago:5}}}})
-				Price_1h_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{hours_ago:1}}}})
-        Price_6h_ago: PriceInUSD(minimum: Block_Time)
-        CurrentPrice: PriceInUSD(maximum: Block_Time)
-      }
-      volume_5min: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
-      )
-      volume_1h: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
-      )
-      volume_6h: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
-      )
-      Price_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100")
-      Price_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100")
-      Price_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100")
-    }
-  }
+Solana {
+DEXTradeByTokens(
+where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "vLieQF5eDqUuuk8RzRaqgAHkXr7bSEBZaWk9Zfibonk"}}, Market: {MarketAddress: {is: "9qppy1KXRTFEeWkFaysYHD7eu9GLg5pGXdLkdL51p7EX"}}}, Block: {Time: {since_relative: {hours_ago: 6}}}}
+) {
+Trade {
+Price_5min_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{minutes_ago:5}}}})
+Price_1h_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{hours_ago:1}}}})
+Price_6h_ago: PriceInUSD(minimum: Block_Time)
+CurrentPrice: PriceInUSD(maximum: Block_Time)
 }
+volume_5min: sum(
+of: Trade_Side_AmountInUSD
+if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+)
+volume_1h: sum(
+of: Trade_Side_AmountInUSD
+if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+)
+volume_6h: sum(
+of: Trade_Side_AmountInUSD
+if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+)
+Price_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100")
+      Price_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100")
+      Price_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) \* 100")
+}
+}
+}
+
 ```
 
 </details>
@@ -343,51 +403,52 @@ Use the below query to get top 10 solana tokens by price change in last 1 hr. Te
   <summary>Click to expand GraphQL query</summary>
 
 ```
+
 query MyQuery {
-  Solana {
-    DEXTradeByTokens(
-      limit: {count: 10}
-      orderBy: {descendingByField: "Price_Change_1h"}
-      where: {Block: {Time: {since_relative: {hours_ago: 6}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Trade {
-        Currency {
-          Name
-          Symbol
-          MintAddress
-        }
-        Price_5min_ago: PriceInUSD(
-          minimum: Block_Time
-          if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
-        )
-        Price_1h_ago: PriceInUSD(
-          minimum: Block_Time
-          if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
-        )
-        Price_6h_ago: PriceInUSD(minimum: Block_Time)
-        CurrentPrice: PriceInUSD(maximum: Block_Time)
-        Side {
-          Currency {
-            Name
-            Symbol
-            MintAddress
-          }
-        }
-        Market {
-          MarketAddress
-        }
-      }
-      Price_Change_5min: calculate(
-        expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100"
+Solana {
+DEXTradeByTokens(
+limit: {count: 10}
+orderBy: {descendingByField: "Price_Change_1h"}
+where: {Block: {Time: {since_relative: {hours_ago: 6}}}, Transaction: {Result: {Success: true}}}
+) {
+Trade {
+Currency {
+Name
+Symbol
+MintAddress
+}
+Price_5min_ago: PriceInUSD(
+minimum: Block_Time
+if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+)
+Price_1h_ago: PriceInUSD(
+minimum: Block_Time
+if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+)
+Price_6h_ago: PriceInUSD(minimum: Block_Time)
+CurrentPrice: PriceInUSD(maximum: Block_Time)
+Side {
+Currency {
+Name
+Symbol
+MintAddress
+}
+}
+Market {
+MarketAddress
+}
+}
+Price_Change_5min: calculate(
+expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100"
       )
       Price_Change_1h: calculate(
         expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100"
       )
       Price_Change_6h: calculate(
-        expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100"
-      )
-    }
-  }
+        expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) \* 100"
+)
+}
+}
 }
 
 ```
