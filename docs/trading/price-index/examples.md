@@ -70,29 +70,20 @@ subscription {
 This subscription fetches real-time OHLC (Open, High, Low, Close) price data for a token pair across different blockchains.  
 For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ETH).
 
-[Run Stream ➤](https://ide.bitquery.io/Copy-of-Pair-OHLC-Stream)
+[Run Stream ➤](https://ide.bitquery.io/Token-OHLC-Stream-1-second-Multi-Chains)
 
 ```graphql
 subscription {
   Trading {
     Pairs(
-      where: {
-        Price: {IsQuotedInUsd: false}
-        Interval: {Time: {Duration: {eq: 60}}}
-        Token: {Address: {is: "0xc0634090f2fe6c6d75e61be2b949464abb498973"}}
-        QuoteCurrency: {Id: {is: "bid:eth"}}
-      }
+      where: {Price: {}, Interval: {Time: {Duration: {eq: 1}}}, Currency: {Id: {is: "bid:eth"}}, QuoteCurrency: {Id: {is: "usdc"}}}
     ) {
       Token {
         Id
+        Symbol
       }
       QuoteToken {
         Id
-      }
-      Currency {
-        Symbol
-      }
-      QuoteCurrency {
         Symbol
       }
       Interval {
@@ -103,19 +94,23 @@ subscription {
       Volume {
         Usd
         Quote
-        BaseQuotedInUsd
+        Base
       }
       Price {
         Ohlc {
-          open
+          Open
           High
           Low
           Close
         }
       }
+      QuoteCurrency {
+        Id
+      }
     }
   }
 }
+
 
 ```
 
