@@ -1,4 +1,4 @@
-# Crypto Price API - Price Index - Introduction
+# Crypto Price API - Introduction
 
 Starting July 2025, we have a introduced separate multi-chain **Crypto Price API (Price index) and Streams** via graphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
 

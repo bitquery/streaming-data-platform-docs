@@ -591,7 +591,7 @@ const sidebars = {
       items: [
         {
           type: "category",
-          label: "Price Index",
+          label: "Crypto Price APIs",
           link: {
             type: "generated-index",
             title: "Crypto Price API",
@@ -599,7 +599,7 @@ const sidebars = {
               "Access token and currency pricing data across chains.",
           },
           items: [
-            "trading/price-index/introduction",
+            "trading/crypto-price-api/introduction",
 
             {
               type: "category",
@@ -610,17 +610,17 @@ const sidebars = {
                 description: "Understanding each price index cube",
               },
               items: [
-                "trading/price-index/tokens",
-                "trading/price-index/currency",
-                "trading/price-index/pairs",
+                "trading/crypto-price-api/tokens",
+                "trading/crypto-price-api/currency",
+                "trading/crypto-price-api/pairs",
               ],
             },
             // "trading/price-index/tokens",
             // "trading/price-index/currency",
             // "trading/price-index/pairs",
 
-            "trading/price-index/in-depth",
-            "trading/price-index/examples",
+            "trading/crypto-price-api/in-depth",
+            "trading/crypto-price-api/examples",
           ],
         },
       ],

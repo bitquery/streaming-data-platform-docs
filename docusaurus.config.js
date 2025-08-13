@@ -266,6 +266,32 @@ const config = {
             from: "/docs/streams/kafka-streams-js",
             to: "/docs/streams/protobuf/kafka-protobuf-js",
           },
+
+          //crypto price api redirects
+          {
+            from: "/docs/trading/price-index/introduction",
+            to: "/docs/trading/crypto-price-api/introduction",
+          },
+          {
+            from: "/docs/trading/price-index/in-depth",
+            to: "/docs/trading/crypto-price-api/in-depth",
+          },
+          {
+            from: "/docs/trading/price-index/examples",
+            to: "/docs/trading/crypto-price-api/examples",
+          },
+          {
+            from: "/docs/trading/price-index/tokens",
+            to: "/docs/trading/crypto-price-api/tokens",
+          },
+          {
+            from: "/docs/trading/price-index/currency",
+            to: "/docs/trading/crypto-price-api/currency",
+          },
+          {
+            from: "/docs/trading/price-index/pairs",
+            to: "/docs/trading/crypto-price-api/pairs",
+          },
         ],
       },
     ],
