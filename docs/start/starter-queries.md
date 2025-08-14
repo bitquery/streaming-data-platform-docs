@@ -173,6 +173,14 @@ This query returns Solana balance update info for any balance update event, incl
 
 ## Solana historical data
 
+### Find who funded the specific Solana wallet
+
+To determine who funded a specific Solana wallet with SOL, you can utilise the following API.
+▶️[Find who funded the specific Solana wallet](https://ide.bitquery.io/Who-funded-a-given-wallet)
+
+This API provides historical data on all Solana token transfers that occurred within a specified time range.
+▶️ [Solana Historical Token Transfers Over Time](https://ide.bitquery.io/Solana-historical-token-transfers-between-a-time_2)
+
 ### Solana Historical Token Transfers Over Time
 
 This API provides historical data on all Solana token transfers that occurred within a specified time range.
