@@ -28,7 +28,7 @@ In this section we'll have a look at some examples using the Base Transfers API.
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-# Subscribe to Recent Whale Transactions of a particular currency
+## Subscribe to Recent Whale Transactions of a particular currency
 
 The subscription query below fetches the whale transactions on the Base network. We have used USDC address `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`. You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDC-on-base#)
 
@@ -63,7 +63,7 @@ subscription {
 
 ```
 
-# Sender is a particular address
+## Sender is a particular address
 
 This websocket retrieves transfers where the sender is a particular address `0x3304E22DDaa22bCdC5fCa2269b418046aE7b566A`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {is: "0x3304E22DDaa22bCdC5fCa2269b418046aE7b566A"}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/Sender-is-a-particular-address_3#)
 
@@ -95,7 +95,7 @@ subscription {
 
 ```
 
-# Subscribe to the latest NFT token transfers on Base Chain
+## Subscribe to the latest NFT token transfers on Base Chain
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on Base network. You can run the query [here](https://ide.bitquery.io/NFT-Token-Transfers-API_4#)
 
@@ -127,7 +127,7 @@ subscription {
 
 ```
 
-# Get all transfers of a particular NFT
+## Get all transfers of a particular NFT
 
 This below query will give you all the transfers of a particular NFT `0xb68CA010776B4584cf49893E75b66583eb884948`.
 
@@ -155,6 +155,53 @@ query MyQuery {
       Transaction {
         From
         Hash
+      }
+    }
+  }
+}
+
+```
+
+## Transactions From or To an address
+
+We use the `any` filter [ OR condition] to get transactions from or to a wallet.
+
+[Run Query](https://ide.bitquery.io/tx-from-to-base-address)
+
+```
+query MyQuery {
+  EVM(dataset: archive, network: base) {
+    Transfers(
+      limit: {count: 100, offset: 0}
+      where: {
+        any: [
+          {Transaction: {From: {is: "0x0b2a7f1c6b7fae642a20434be47359e19bfadf4d"}, To: {is: "0x0b2a7f1c6b7fae642a20434be47359e19bfadf4d"}}}
+          {Block: {Date: {after: "2025-08-01"}}}
+        ]
+      }
+    ) {
+      Block {
+        Time
+        Number
+        Date
+      }
+      Transfer {
+        Receiver
+        Sender
+        Currency {
+          Decimals
+          Name
+          SmartContract
+          Symbol
+          ProtocolName
+        }
+        Amount
+        AmountInUSD
+      }
+      Transaction {
+        Hash
+        From
+        To
       }
     }
   }

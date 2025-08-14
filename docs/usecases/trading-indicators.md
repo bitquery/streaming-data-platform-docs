@@ -1,152 +1,137 @@
 # Build Trading Indicators for Crypto Data
 
-Technical indicators are a vital tool for cryptocurrency traders, as they can help to identify trends, predict price movements, and make informed trading decisions. In this tutorial, we will discuss how to calculate popular trading indicators easily with Bitquery APIs in Python. You can do the same in a language of your choice.
+Technical indicators are a vital tool for cryptocurrency traders, as they can help to identify trends, predict price movements, and make informed trading decisions.
+
+With our new [Crypto Price Stream](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) we can get real-time crypto market data with **Simple Moving Average (SMA)**, **Exponential Moving Average (EMA)**, and **Weighted Simple Moving Average (WSMA)** at 1-second interval precalculated.
+
+In this tutorial we will see how to stream them and calculate advanced trading indicators.
 
 The list of indicators we will be calculating
 
 - Simple Moving Average (SMA)
-- Daily Returns
-- Volatility
+- Exponential Moving Average (EMA)
+- Weighted Simple Moving Average
 - Relative Strength Index (RSI)
 
-  
+### Sample Output
 
+```
+Address 3ipDZF3NNHJHFNxkbTUMzv7ry5moPfeJyttEnu3MYRv8
+Simple Moving Average 0.061764553
+Exponential Moving Average 0.061790578
+Weighted Simple Moving Average 0.061803076
+RSI[14] 70.093  Close: 0.061927706  Time: 2025-08-13T12:10:02Z
+```
 
-**Step 1: Import Libraries**
+**Step 1: Setup WebSocket Connection**
 
-The code begins by importing the necessary libraries for making API requests, parsing JSON data, and data manipulation:
+```python
+from gql import gql
+from gql.transport.websockets import WebsocketsTransport
+import config  # oauth_token = "YOUR_TOKEN"
 
-```Python
-import requests
-import json
-import pandas as pd
+transport = WebsocketsTransport(
+    url=f"wss://streaming.bitquery.io/graphql?token={config.oauth_token}",
+    headers={"Sec-WebSocket-Protocol": "graphql-ws"}
+)
+await transport.connect()
+print("Connected")
 
 ```
 
-**Step 2: Define V2 Query**
+**Remember:** Replace `YOUR_TOKEN` with an OAuth token from your Bitquery account. You can generate it [here](https://account.bitquery.io/user/api_v2/access_tokens)
 
- We write a query to get OHLC data for the Uniswap pair ETH-DAI, filtering for trades in the past 10 minutes and returning the volume, trade details, and block timestamps. You can [extend the query to get data for longer duration of different periods like year/month/day](https://ide.bitquery.io/USDT-OHLC-Price-Data-V2_3).
+**Step 2: Subscribe to the Price Feed**
 
-```Python
-query = """
-{
-  EVM(dataset: archive) {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_Time"}
-      where: {Trade: {Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}, 
-      Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}
-      limit: {count: 10}
+We write a query to get OHLC data for the Uniswap pair ETH-DAI, filtering for trades in the past 10 minutes and returning the volume, trade details, and block timestamps. You can [extend the query to get data for longer duration of different periods like year/month/day](https://ide.bitquery.io/USDT-OHLC-Price-Data-V2_3).
+
+We’ll request **Solana token** prices in **1-minute intervals**, including SMA/EMA/WSMA.
+
+```python
+query = gql("""
+subscription {
+  Trading {
+    Tokens(
+      where: { Token: { Network: { is: "Solana" } },
+               Interval: { Time: { Duration: { eq: 1 } } } }
     ) {
-      Block {
-        Time(interval: {in: minutes, count: 10})
+      Token { Address Symbol }
+      Interval { Time { End } }
+      Price {
+        Ohlc { Close }
+        Average { SimpleMoving ExponentialMoving WeightedSimpleMoving }
       }
-      volume: sum(of: Trade_Amount)
-      Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Number)
-        close: Price(maximum: Block_Number)
-      }
-      count
     }
   }
 }
+""")
 
-"""
-
-```
-
-**Step 3: Set Up Request Payload and Headers**
-
-The API request payload and headers are prepared using the URL, query, and API key. Starting December 18, 2023 we will move to OAuth. Read more [here](https://docs.bitquery.io/docs/ide/authorisation/)
-
-```Python
-url = "https://streaming.bitquery.io/graphql"
-payload = json.dumps({"query": query, "variables": "{}"})
-headers = {
-  'Content-Type': 'application/json',
-   Authorization: "Bearer your_access_token_here",
-}
+async for data in transport.subscribe(query):
+    for t in data["Trading"]["Tokens"]:
+        close = t["Price"]["Ohlc"]["Close"]
+        sma = t["Price"]["Average"]["SimpleMoving"]
+        ema = t["Price"]["Average"]["ExponentialMoving"]
+        wsma = t["Price"]["Average"]["WeightedSimpleMoving"]
+        print(t["Token"]["Address"], sma, ema, wsma, close)
 
 ```
 
-**Step 4: Make API Request and Extract Trade Data**
+**Step 3: Calculate RSI in Real Time**
 
-The API request is sent using the `requests` library, and the JSON response is parsed to extract the relevant trade data:
-
-```Python
-response = requests.request("POST", url, headers=headers, data=payload)
-response_data_trades = json.loads(response.text)['data']['EVM']['DEXTradeByTokens']
-df = pd.DataFrame(response_data_trades)
-
-```
-
-**Step 5: Calculate Simple Moving Average (SMA)**
-
-The SMA is calculated for the closing price of the last 10 trades:
-
-```Python
-df_trade = pd.json_normalize(df['Trade'])
-sma = df_trade['close'].rolling(window=10).mean().iloc[9]
-print("SMA:", sma)
-
-```
-
-**Step 6: Calculate Daily Returns**
-
-Daily returns are calculated for each trade, representing the percentage change in closing price from the previous day:
-
-```Python
-daily_returns = []
-for i in range(1, len(df_trade)):
-  close_last = df_trade['close'].iloc[i]
-  close_last_1 = df_trade['close'].iloc[i - 1]
-  daily_return = (close_last - close_last_1) / close_last_1 * 100
-  daily_returns.append(daily_return)
-
-print(daily_returns)
-
-```
-
-**Step 7: Calculate Volatility**
-
-Volatility is calculated as the standard deviation of daily returns:
-
-```Python
-import numpy as np
-
-volatility = np.std(daily_returns)
-print(volatility)
-
-```
-
-**Step 8: Calculate Relative Strength Index (RSI)**
-
-The RSI is calculated using the following steps:
-
-1.  Calculate the difference between consecutive closing prices.
-2.  Separate the price differences into positive gains and negative losses.
-3.  Calculate the average gain and average loss over a specified window length (9 in this case).
-4.  Calculate the relative strength (RS) as the average gain divided by the average loss.
-5.  Calculate the RSI as 100 minus (100 divided by (1 plus RS)).
-
-The RSI is then printed for the last trade in the
+We’ll keep RSI state in memory for each token and update it with **Wilder’s smoothing**.
 
 ```python
-df_trade['diff_close'] = df_trade['close'].diff(1)
-df_trade['gain'] = df_trade['diff_close'].clip(lower=0).round(2)
-df_trade['loss'] = df_trade['diff_close'].clip(upper=0).abs().round(2)
+rsi_period = 14
+state = {}  # address → RSI state
 
-window_length = 9
-df_trade['avg_gain'] = df_trade['gain'].rolling(window=window_length, min_periods=window_length).mean()[:window_length+1]
-df_trade['avg_loss'] = df_trade['loss'].rolling(window=window_length, min_periods=window_length).mean()[:window_length+1]
+def update_rsi(address, close):
+    s = state.setdefault(address, {"prev_close": None, "avg_gain": 0, "avg_loss": 0, "count": 0, "initialized": False})
+    if s["prev_close"] is None:
+        s["prev_close"] = close
+        return None
 
-for i in range(window_length+1, len(df_trade)):
-    df_trade.loc[i, 'avg_gain'] = ((df_trade.loc[i-1, 'avg_gain'] * (window_length - 1)) + df_trade.loc[i, 'gain']) / window_length
-    df_trade.loc[i, 'avg_loss'] = ((df_trade.loc[i-1, 'avg_loss'] * (window_length - 1)) + df_trade.loc[i, 'loss']) / window_length
+    delta = close - s["prev_close"]
+    gain, loss = max(delta, 0), max(-delta, 0)
 
-df_trade['rs'] = df_trade['avg_gain'] / df_trade['avg_loss']
-df_trade['rsi'] = 100 - (100 / (1.0 + df_trade['rs']))
-print("RSI",df_trade['rsi'][window_length])
+    if not s["initialized"]:
+        s["avg_gain"] += gain
+        s["avg_loss"] += loss
+        s["count"] += 1
+        if s["count"] >= rsi_period:
+            s["avg_gain"] /= rsi_period
+            s["avg_loss"] /= rsi_period
+            s["initialized"] = True
+    else:
+        s["avg_gain"] = ((s["avg_gain"] * (rsi_period - 1)) + gain) / rsi_period
+        s["avg_loss"] = ((s["avg_loss"] * (rsi_period - 1)) + loss) / rsi_period
+
+    s["prev_close"] = close
+    if not s["initialized"]:
+        return None
+    return 100 if s["avg_loss"] == 0 else 100 - (100 / (1 + s["avg_gain"] / s["avg_loss"]))
 
 ```
+
+**Step 4: Putting It Together**
+
+Inside your subscription loop:
+
+```python
+for t in data["Trading"]["Tokens"]:
+    address = t["Token"]["Address"]
+    close = t["Price"]["Ohlc"]["Close"]
+    sma = t["Price"]["Average"]["SimpleMoving"]
+    ema = t["Price"]["Average"]["ExponentialMoving"]
+    wsma = t["Price"]["Average"]["WeightedSimpleMoving"]
+
+    rsi = update_rsi(address, close)
+    if rsi is not None:
+        print(f"{address} SMA:{sma} EMA:{ema} WSMA:{wsma} RSI:{rsi:.2f} Close:{close}")
+
+```
+
+**Advantages of this approach:**
+
+- **No polling** — prices are pushed to you as soon as they’re available.
+- **Built-in indicators** — SMA/EMA/WSMA come directly from Bitquery.
+- **Custom logic** — you can add advanced indicators like RSI without losing speed.
