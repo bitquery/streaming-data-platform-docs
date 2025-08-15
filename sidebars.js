@@ -620,6 +620,7 @@ const sidebars = {
             // "trading/price-index/pairs",
 
             "trading/crypto-price-api/in-depth",
+            "trading/crypto-price-api/stablecoin-api",
             "trading/crypto-price-api/examples",
           ],
         },
