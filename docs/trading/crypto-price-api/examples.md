@@ -362,3 +362,53 @@ subscription {
 
 ```
 
+## PumpAMM 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders
+
+[Run Stream ➤](https://ide.bitquery.io/PumpAMM-1-second-price-stream-with-OHLC)
+
+
+```
+subscription {
+  Trading {
+    Pairs(
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, Program: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}}
+    ) {
+      Market {
+        Protocol
+        Program
+        Network
+        Name
+        Address
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Price {
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+        IsQuotedInUsd
+      }
+    }
+  }
+}
+
+```
+
