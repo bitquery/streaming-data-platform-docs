@@ -10,6 +10,7 @@ The schema is available [here](https://github.com/bitquery/streaming_protobuf/tr
 
 The complete code is available [here](https://github.com/bitquery/stream_protobuf_example).
 
+This code is a sample to get it running. At scale, you have to implement queues and/or multiple consumers ( under same group) to read the messages with little effect to throughput.
 
 ### Prerequisites
 
@@ -53,7 +54,6 @@ processor:
   buffer: 100V
   workers: 8
 log_level: "debug"
-
 ```
 
 ### **`consumer.go` - Kafka Consumer**

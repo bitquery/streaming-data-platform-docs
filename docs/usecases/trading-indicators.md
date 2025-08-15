@@ -12,16 +12,11 @@ The list of indicators we will be calculating
 - Exponential Moving Average (EMA)
 - Weighted Simple Moving Average
 - Relative Strength Index (RSI)
+- Volume Weighted Average Price (VWAP)
 
 ### Sample Output
 
-```
-Address 3ipDZF3NNHJHFNxkbTUMzv7ry5moPfeJyttEnu3MYRv8
-Simple Moving Average 0.061764553
-Exponential Moving Average 0.061790578
-Weighted Simple Moving Average 0.061803076
-RSI[14] 70.093  Close: 0.061927706  Time: 2025-08-13T12:10:02Z
-```
+![](/img/trade_api/indicators.gif)
 
 **Step 1: Setup WebSocket Connection**
 
@@ -57,6 +52,7 @@ subscription {
     ) {
       Token { Address Symbol }
       Interval { Time { End } }
+      Volume { Base Quote Usd }
       Price {
         Ohlc { Close }
         Average { SimpleMoving ExponentialMoving WeightedSimpleMoving }
@@ -72,7 +68,12 @@ async for data in transport.subscribe(query):
         sma = t["Price"]["Average"]["SimpleMoving"]
         ema = t["Price"]["Average"]["ExponentialMoving"]
         wsma = t["Price"]["Average"]["WeightedSimpleMoving"]
-        print(t["Token"]["Address"], sma, ema, wsma, close)
+        # Choose a volume basis suitable for your use case
+        volume = (t.get("Volume", {}).get("Base")
+                  or t.get("Volume", {}).get("Quote")
+                  or t.get("Volume", {}).get("Usd")
+                  or 1.0)
+        print(t["Token"]["Address"], sma, ema, wsma, close, volume)
 
 ```
 
@@ -112,7 +113,31 @@ def update_rsi(address, close):
 
 ```
 
-**Step 4: Putting It Together**
+**Step 4: Calculate VWAP (rolling window)**
+
+We maintain a small rolling window of prices and volumes per token for a simple, streaming VWAP.
+
+```python
+from collections import defaultdict
+
+vwap_period = 20
+vwap_state = defaultdict(lambda: {"prices": [], "volumes": [], "pv_sum": 0.0, "vol_sum": 0.0})
+
+def update_vwap(address, price, volume):
+    s = vwap_state[address]
+    s["prices"].append(price)
+    s["volumes"].append(volume)
+    if len(s["prices"]) > vwap_period:
+        rp = s["prices"].pop(0)
+        rv = s["volumes"].pop(0)
+        s["pv_sum"] -= rp * rv
+        s["vol_sum"] -= rv
+    s["pv_sum"] += price * volume
+    s["vol_sum"] += volume
+    return s["pv_sum"] / s["vol_sum"] if s["vol_sum"] > 0 else price
+```
+
+**Step 5: Putting It Together**
 
 Inside your subscription loop:
 
@@ -123,10 +148,15 @@ for t in data["Trading"]["Tokens"]:
     sma = t["Price"]["Average"]["SimpleMoving"]
     ema = t["Price"]["Average"]["ExponentialMoving"]
     wsma = t["Price"]["Average"]["WeightedSimpleMoving"]
+    volume = (t.get("Volume", {}).get("Base")
+              or t.get("Volume", {}).get("Quote")
+              or t.get("Volume", {}).get("Usd")
+              or 1.0)
 
     rsi = update_rsi(address, close)
+    vwap = update_vwap(address, float(close), float(volume))
     if rsi is not None:
-        print(f"{address} SMA:{sma} EMA:{ema} WSMA:{wsma} RSI:{rsi:.2f} Close:{close}")
+        print(f"{address} SMA:{sma} EMA:{ema} WSMA:{wsma} VWAP:{vwap:.6f} RSI:{rsi:.2f} Close:{close}")
 
 ```
 
