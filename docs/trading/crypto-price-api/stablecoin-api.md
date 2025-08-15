@@ -186,7 +186,7 @@ query MyQuery {
 
 ## Stablecoin recieved and sent by an address
 
-Below query will give you `EURC` transfers from/to `cHxJ2uC6vgcCfoFSfupkfCWbKHAkekrGfG39DXRamXT` on Solana. Test the query [here]().
+Below query will give you `EURC` transfers from/to `cHxJ2uC6vgcCfoFSfupkfCWbKHAkekrGfG39DXRamXT` on Solana. Test the query [here](https://ide.bitquery.io/stablecoin-Transfers-fromto-an-address).
 
 ```
 {
