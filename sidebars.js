@@ -353,8 +353,8 @@ const sidebars = {
           type: "category",
           label: "BSC",
           link: {
-            type: "generated-index",
-            title: "BSC API Documentation",
+            type: "doc",
+            id: "examples/BSC/index",
           },
           items: [
             "examples/BSC/bsc-balance-updates",
