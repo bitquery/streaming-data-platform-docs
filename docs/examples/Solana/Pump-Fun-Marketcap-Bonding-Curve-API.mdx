@@ -37,9 +37,9 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 You can get the marketcap of a pump fun token by this formulae `marketcap = 1000000000 * Latest USD Price` because all the pump fun tokens have 1 Billion supply.
 
-You can get the latest USD price of the desired token (here I have used this token `9qzvgUMrrL5Xyadk2gyWxCWgTds8crkwGwgfjeN5JYLS`) from the below query and multiply it with 1 Billion and you will get the latest marketcap of the specified token.
+You can get the latest USD price of the desired token (here I have used this token `AaFi7r97BCirqrTGsCkAuLJ61Vavr3d2G8gWnFyApump`) from the below query and multiply it with 1 Billion and you will get the latest marketcap of the specified token.
 
-Alternatively, you can use the `TokenSupplyUpdates` cube to find marketcap of Pump Fun Tokens, as shown [here](https://docs.bitquery.io/docs/examples/Solana/token-supply-cube/).
+Test the query [here](https://ide.bitquery.io/marketcap-of-pump-fun-raydium-launchpad-token).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -51,28 +51,24 @@ query MyQuery {
       limit: { count: 1 }
       orderBy: { descending: Block_Time }
       where: {
+        Transaction: { Result: { Success: true } }
         Trade: {
-          Currency: { MintAddress: { is: "token mint address" } }
-          Dex: {
-            ProgramAddress: {
-              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
-            }
+          Currency: {
+            MintAddress: { is: "AaFi7r97BCirqrTGsCkAuLJ61Vavr3d2G8gWnFyApump" }
           }
         }
-        Transaction: { Result: { Success: true } }
       }
     ) {
       Trade {
+        Price
+        PriceInUSD
         Currency {
           Name
           MintAddress
           Symbol
         }
-        Amount
-        AmountInUSD
-        Price
-        PriceInUSD
       }
+      Marketcap: calculate(expression: "1000000000 * $Trade_PriceInUSD")
     }
   }
 }
@@ -426,9 +422,17 @@ You can test the query [here](https://ide.bitquery.io/track-Pump-fun_pumpswap-mi
 {
   Solana {
     Instructions(
-      limit: {count: 50}
-      orderBy: {descendingByField: "Migrate_Time_Time"}
-      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}, Logs: {includes: {includes: "Migrate"}}}, Transaction: {Result: {Success: true}}}
+      limit: { count: 50 }
+      orderBy: { descendingByField: "Migrate_Time_Time" }
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+          }
+          Logs: { includes: { includes: "Migrate" } }
+        }
+        Transaction: { Result: { Success: true } }
+      }
     ) {
       Migrate_Time: Block {
         Time
@@ -484,9 +488,16 @@ You can test the query [here](https://ide.bitquery.io/track-Pump-fun_pumpswap-mi
       }
       joinInstructions(
         join: any_inner
-        Transaction_Index:Transaction_Index
+        Transaction_Index: Transaction_Index
         Transaction_Signature: Transaction_Signature
-        where: {Instruction: {Program: {Address: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}, Method: {is: "create_pool"}}}}
+        where: {
+          Instruction: {
+            Program: {
+              Address: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
+              Method: { is: "create_pool" }
+            }
+          }
+        }
       ) {
         Instruction {
           Program {
@@ -518,7 +529,6 @@ You can test the query [here](https://ide.bitquery.io/track-Pump-fun_pumpswap-mi
     }
   }
 }
-
 ```
 
 </details>

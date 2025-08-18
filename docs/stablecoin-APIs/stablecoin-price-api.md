@@ -124,38 +124,3 @@ subscription {
 }
 
 ```
-
-## Stablecoin Realtime Transfers Stream
-
-Below stream will give you realtime transfers of `USDC` on Solana. Test the stream [here](https://ide.bitquery.io/stablecoin-transfers-websocket).
-
-```
-subscription {
-  Solana {
-    Transfers(
-      where: {Transfer: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}
-    ) {
-      Transfer {
-        Currency {
-          MintAddress
-          Symbol
-          Name
-          Fungible
-          Native
-        }
-        Receiver {
-          Address
-        }
-        Sender {
-          Address
-        }
-        Amount
-        AmountInUSD
-      }
-      Transaction{
-        Signature
-      }
-    }
-  }
-}
-```
