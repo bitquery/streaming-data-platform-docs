@@ -620,10 +620,20 @@ const sidebars = {
             // "trading/price-index/pairs",
 
             "trading/crypto-price-api/in-depth",
-            "trading/crypto-price-api/stablecoin-api",
             "trading/crypto-price-api/examples",
           ],
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Stablecoin APIs",
+      link: {
+        type: "generated-index",
+        title: "Stablecoin APIs",
+      },
+      items: [
+        "stablecoin-APIs/stablecoin-price-api",
       ],
     },
     {
