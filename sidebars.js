@@ -634,6 +634,9 @@ const sidebars = {
       },
       items: [
         "stablecoin-APIs/stablecoin-price-api",
+        "stablecoin-APIs/stablecoin-balance-api",
+        "stablecoin-APIs/stablecoin-trades-api",
+        "stablecoin-APIs/stablecoin-transfers-api"
       ],
     },
     {
