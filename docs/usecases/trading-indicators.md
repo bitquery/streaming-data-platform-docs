@@ -5,6 +5,7 @@ Technical indicators are a vital tool for cryptocurrency traders, as they can he
 With our new [Crypto Price Stream](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) we can get real-time crypto market data with **Simple Moving Average (SMA)**, **Exponential Moving Average (EMA)**, and **Weighted Simple Moving Average (WSMA)** at 1-second interval precalculated.
 
 In this tutorial we will see how to stream them and calculate advanced trading indicators.
+**This code is available readily as a Python package [here](https://pypi.org/project/bitquery-trading-indicators-stream/)**
 
 The list of indicators we will be calculating
 
