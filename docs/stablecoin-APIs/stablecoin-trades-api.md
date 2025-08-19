@@ -4,7 +4,9 @@ The Stablecoin API by Bitquery provides you the comprehensive set of APIs which 
 
 We are going to particularly deep-dive into how to get Stablecoin Trades data in this section.
 
-## Stablecoin trades
+## Solana
+
+### Stablecoin trades
 
 Below stream will give you realtime trades of `USDT` on Solana. Test the stream [here](https://ide.bitquery.io/solana-trades-subscription_10_1).
 
@@ -82,7 +84,7 @@ subscription {
 }
 ```
 
-## Real Time Stablecoin portfolio
+### Real Time Stablecoin portfolio
 
 Below stream will provide you the realtime portfolio updates for a particular address for a specific Stablecoin. In this query example, we are tracking portfolio updates for the address `3i51cKbLbaKAqvRJdCUaq9hsnvf9kqCfMujNgFj7nRKt` and for stablecoin `USDC`.
 Test the query [here](https://ide.bitquery.io/real-time-stablecoin-portfolio_2).
@@ -129,6 +131,50 @@ subscription MyQuery {
       Transaction {
         Signature
         Signer
+      }
+    }
+  }
+}
+```
+
+### Stablecoin Depeg tracking Stream
+
+Below stream will be able to track specific Stablecoin depeg. In this query example, we are tracking depeg for the stablecoin `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` which has a symbol `USDC`.
+Test the query [here](https://ide.bitquery.io/stablecoin-depeg-tracking-stream-for-USDC).
+
+```
+subscription {
+  Solana {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}, PriceInUSD: {lt:0.95 gt: 1.05}}}
+    ) {
+      Transaction {
+        Signature
+      }
+      Trade {
+        AmountInUSD
+        Amount
+        Currency {
+          MintAddress
+          Name
+        }
+        Dex {
+          ProgramAddress
+          ProtocolName
+        }
+        Price
+        PriceInUSD
+        Side {
+          Account {
+            Address
+          }
+          AmountInUSD
+          Amount
+          Currency {
+            Name
+            MintAddress
+          }
+        }
       }
     }
   }
