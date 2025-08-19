@@ -1,0 +1,114 @@
+---
+title: Arbitrum API Documentation
+description: Collection of Arbitrum APIs organized by topic.
+slug: /examples/Arbitrum/
+keywords:
+  - Arbitrum API
+  - Arbitrum RPC
+  - Arbitrum RPC API
+  - Best Arbitrum API
+  - Arbitrum Explorer API
+  - arbitrum wallet transaction monitoring api
+  - arbitrum api docs
+  - arbitrum websocket api
+  - arbitrum blockchain api
+  - arbitrum token api
+  - arbitrum transaction api
+  - GMX API
+  - DEX API
+---
+
+# Arbitrum API Documentation
+
+## Overview
+
+In this section we will see how to fetch data on different tokens, transactions, and DEXs like GMX on Arbitrum via APIs and Streams.
+
+If you need help getting data on Arbitrum, reach out to [support](https://t.me/Bloxy_info).
+
+### What is Arbitrum API?
+
+Bitquery Arbitrum APIs help you fetch onchain data like trades, transactions, balances, token holders etc using graphQL query.
+
+### What are capabilities of Bitquery Arbitrum API?
+
+Bitquery Arbitrum APIs are very flexible, you can fetch trade, transaction, and balance information for a period, for a specific wallet, and join with other information.
+
+### Difference between Arbitrum RPC and Bitquery Arbitrum API?
+
+| Arbitrum RPC | Bitquery Arbitrum API |
+| --- | --- |
+| JSON-RPC endpoint exposing raw EVM on-chain state and transactions | GraphQL endpoint over pre-indexed, parsed Arbitrum data (token transfers, DEX trades, logs, calls, etc.) |
+| No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions |
+| Ideal for submitting transactions | Great for real-time data and historical backtesting without running your own indexer |
+
+### Does Bitquery support Arbitrum Websocket and Webhooks?
+
+Bitquery supports websocket and webhooks; you can convert most GraphQL APIs into GraphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More docs and code samples are available [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
+
+## Quick start
+
+Run this minimal GraphQL query to fetch the latest 5 DEX trades on Arbitrum:
+
+```graphql
+query LatestArbitrumTrades {
+  EVM(network: arbitrum) {
+    DEXTrades(limit: { count: 5 }, orderBy: { descending: Block_Time }) {
+      Block { Time }
+      Trade {
+        Dex { ProtocolName }
+        Buy { AmountInUSD Currency { Symbol } }
+        Sell { AmountInUSD Currency { Symbol } }
+      }
+      Transaction { Hash }
+    }
+  }
+}
+```
+
+## DEX and Perp APIs
+
+- [Arbitrum Dex Trades](./DexTrades)
+- [GMX API](./gmx-api)
+- [esGMX API](./esgmx-api)
+
+## Core Arbitrum APIs
+
+- [Overview](./Overview)
+- [Blocks & Transactions](./Blocks_Transactions)
+- [Smart Contract Calls](./Smart_Contract_Calls)
+- [Smart Contract Events](./Smart_Contract_Events)
+- [Balance Updates](./Balance_Updates)
+
+## Cross-chain
+
+- [Arbitrum Cross Chain](./arbitrum-cross-chain)
+
+
+## Videos
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+### Video Tutorial | GMX and esGMX
+
+<VideoPlayer url="https://youtu.be/tEPknPDQgIU" />
+
+### Video Tutorial | Across Bridge Deposits on Arbitrum
+
+<VideoPlayer url="https://www.youtube.com/watch?v=ibI3OXhdxUQ" />
+
+### Video Tutorial | Top Traders of a Token on Arbitrum
+
+<VideoPlayer url="https://www.youtube.com/watch?v=57jDX4Pu1dA" />
+
+### Video Tutorial | Track Realtime DEXTrades of a Token on Arbitrum
+
+<VideoPlayer url="https://www.youtube.com/watch?v=RpfxnBDzqng" />
+
+### Video Tutorial | OHLC Data of a Token Pair on Arbitrum
+
+<VideoPlayer url="https://www.youtube.com/watch?v=nN2hyF0pQKQ" />
+
+### Video Tutorial | Top Bought & Top Sold Tokens on Arbitrum
+
+<VideoPlayer url="https://www.youtube.com/watch?v=AYR8uA1jSQQ" />

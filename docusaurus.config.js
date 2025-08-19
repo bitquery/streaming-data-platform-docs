@@ -219,6 +219,10 @@ const config = {
             to: "/docs/examples/Arbitrum/Overview/",
             from: "/docs/category/arbitrum/",
           },
+          {
+            to: "/docs/examples/Base/",
+            from: "/docs/category/base/",
+          },
 
           {
             to: "/docs/examples/Matic/",

@@ -491,6 +491,10 @@ const sidebars = {
         {
           type: "category",
           label: "Arbitrum",
+          link: {
+            type: "doc",
+            id: "examples/Arbitrum/index",
+          },
           items: [
             "examples/Arbitrum/Overview",
             "examples/Arbitrum/arbitrum-cross-chain",
@@ -507,8 +511,8 @@ const sidebars = {
           type: "category",
           label: "Base",
           link: {
-            type: "generated-index",
-            title: "Base API Documentation",
+            type: "doc",
+            id: "examples/Base/index",
           },
           items: [
             "examples/Base/aerodrome-base-api",
