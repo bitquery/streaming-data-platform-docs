@@ -624,6 +624,7 @@ const sidebars = {
 
             "trading/crypto-price-api/in-depth",
             "trading/crypto-price-api/examples",
+            "trading/crypto-price-api/crypto-market-data-api",
           ],
         },
       ],

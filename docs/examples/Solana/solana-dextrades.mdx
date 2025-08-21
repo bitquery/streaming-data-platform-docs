@@ -362,34 +362,56 @@ Use below query to calculate the price change percentage for a specific token in
 ```
 
 query MyQuery {
-Solana {
-DEXTradeByTokens(
-where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "vLieQF5eDqUuuk8RzRaqgAHkXr7bSEBZaWk9Zfibonk"}}, Market: {MarketAddress: {is: "9qppy1KXRTFEeWkFaysYHD7eu9GLg5pGXdLkdL51p7EX"}}}, Block: {Time: {since_relative: {hours_ago: 6}}}}
-) {
-Trade {
-Price_5min_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{minutes_ago:5}}}})
-Price_1h_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{hours_ago:1}}}})
-Price_6h_ago: PriceInUSD(minimum: Block_Time)
-CurrentPrice: PriceInUSD(maximum: Block_Time)
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Transaction: { Result: { Success: true } }
+        Trade: {
+          Currency: { MintAddress: { is: "vLieQF5eDqUuuk8RzRaqgAHkXr7bSEBZaWk9Zfibonk" } }
+          Market: { MarketAddress: { is: "9qppy1KXRTFEeWkFaysYHD7eu9GLg5pGXdLkdL51p7EX" } }
+        }
+        Block: { Time: { since_relative: { hours_ago: 6 } } }
+      }
+    ) {
+      Trade {
+        Price_5min_ago: PriceInUSD(
+          minimum: Block_Time
+          if: { Block: { Time: { since_relative: { minutes_ago: 5 } } } }
+        )
+        Price_1h_ago: PriceInUSD(
+          minimum: Block_Time
+          if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+        )
+        Price_6h_ago: PriceInUSD(minimum: Block_Time)
+        CurrentPrice: PriceInUSD(maximum: Block_Time)
+      }
+
+      volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Block: { Time: { since_relative: { minutes_ago: 5 } } } }
+      )
+      volume_1h: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+      )
+      volume_6h: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Block: { Time: { since_relative: { hours_ago: 6 } } } }
+      )
+
+      Price_Change_5min: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100"
+      )
+      Price_Change_1h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100"
+      )
+      Price_Change_6h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100"
+      )
+    }
+  }
 }
-volume_5min: sum(
-of: Trade_Side_AmountInUSD
-if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
-)
-volume_1h: sum(
-of: Trade_Side_AmountInUSD
-if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
-)
-volume_6h: sum(
-of: Trade_Side_AmountInUSD
-if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
-)
-Price_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100")
-      Price_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100")
-      Price_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) \* 100")
-}
-}
-}
+
 
 ```
 
