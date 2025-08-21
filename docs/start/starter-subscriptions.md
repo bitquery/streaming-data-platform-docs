@@ -4,6 +4,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 ## Table of Contents
 
+- [Crypto Price Stream]()
 - [Solana Streams](#solana)
 - [PumpFun Streams](#pumpfun-streams)
 - [Pumpswap Streams](#pumpswap-streams)
@@ -12,6 +13,20 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Uniswap V3 Streams](#uniswap-v3-streams)
 - [NFT Streams](#nft-streams)
 - [TRON Streams](#tron)
+
+## Crypto Price Stream
+
+### Crypto Price Stream
+
+This subscription gives you 1-second OHLC, mean price, averages for all tokens across Solana, Ethereum, BNB, Tron.
+
+▶️ [Crypto Price Stream](https://ide.bitquery.io/1-second-crypto-price-stream)
+
+### Stablecoin 1 sec Price Stream
+
+This subscription gives you 1-second OHLC, mean price, averages for all stablecoins including USDC, USDT, DAI, USDS etc.
+
+▶️ [Stablecoin Price Stream](https://ide.bitquery.io/stablecoin-1-second-price-stream)
 
 ## Solana
 
@@ -66,13 +81,14 @@ This stream provides real-time large buy and sell on Solana DEXs.
 ## Pumpfun Streams
 
 ### Pumpfun Token Creation
-This subscription tracks in real-time newly created Pumpfun tokens,   including their metadata and associated developer addresses.
+
+This subscription tracks in real-time newly created Pumpfun tokens, including their metadata and associated developer addresses.
 
 ▶️[Pumpfun Token Creation Stream](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
 
 ### Pumpfun Trades
 
-This stream returns the real time trades on Pumpfun platform. This stream could be modified to get real time trades for a particular token or trades by a particular trader. 
+This stream returns the real time trades on Pumpfun platform. This stream could be modified to get real time trades for a particular token or trades by a particular trader.
 
 ▶️[Pumpfun Trades Stream](https://ide.bitquery.io/Pumpfun-DEX-Trades_1)
 
@@ -93,6 +109,7 @@ This stream gives info about the real time liquidity pool creation on Raydium ex
 ▶️[Raydium Pool Creation Stream](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_5)
 
 ### Latest Trades on Raydium
+
 This stream gives info about the real time trades on Raydium exchange. You can modify this query to monitor trades on Raydium for a particular token or by a particular trader.
 
 ▶️[Raydium Trades](https://ide.bitquery.io/Updated-Real-time-trades-on-Raydium-DEX-on-Solana_1)
@@ -117,10 +134,10 @@ This subscription will return information on each new smart contract created on 
 
 ▶️[Smart Contract Creation Stream](https://ide.bitquery.io/track-new-smart-contract-creation-in-real-time)
 
-### Token Transfers 
+### Token Transfers
 
 This stream lets you monitor all the token transfers for a particular token. You can modify this subscription to track and monitor token transfers for a particular token from or to a particular address.
- 
+
 ▶️[Token Transfers Stream](https://graphql.bitquery.io/ide/Subscribe-to-Latest-WETH-token-transfers)
 
 ### DEX Trades
@@ -132,7 +149,7 @@ This stream returns all the real time DEX trades happening on Ethereum mainnet. 
 ### Real time Trades on Four Meme
 
 This subscription returns the real-time trades happening on the Four Meme exchange on BSC network. You can modify the stream to get real time trades for a particular token, a particular token pair, and even a particular trader.
-  
+
 ▶️[Four Meme Trades Stream](https://ide.bitquery.io/Latest-trades-on-fourmeme)
 
 ### Real time Trades on Pancakeswap
@@ -141,7 +158,7 @@ This subscription returns the real-time trades happening on Pancakeswap. You can
 
 ▶️[Pancakeswap Trades Stream](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream)
 
-### Token Price Stream 
+### Token Price Stream
 
 This stream returns the real time trade price of a token against the token it is traded with and the price in USD. You could modify the stream to get the price of the token for a particular token pair or against a particular token.
 
@@ -151,34 +168,34 @@ This stream returns the real time trade price of a token against the token it is
 
 ### Real time trades on Pancakeswap
 
-Get real time trades on Pancakeswap, using the given stream.        
+Get real time trades on Pancakeswap, using the given stream.  
 ▶️[Pancakeswap Trades](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream)
 
 ### Real time Memepool trades on Pancakeswap
 
-Get real time unconfirmed trades on Pancakeswap, using the given stream.        
+Get real time unconfirmed trades on Pancakeswap, using the given stream.  
 ▶️[Pancakeswap Trades](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrades---Stream)
 
 ### Tracking real time Liquidity Pool Creation
 
-Get liquidity pools created on Pancakeswap in real time using the given stream.     
+Get liquidity pools created on Pancakeswap in real time using the given stream.  
 ▶️[Liquidity Pool Creation](https://ide.bitquery.io/Stream---New-pools-created-on-PancakeSwap-v3)
 
 ### Track Liquidity Additions in Real Time
 
-Trace liquidity addition events on Pancakeswap in real time for a particular liquidity pool.        
+Trace liquidity addition events on Pancakeswap in real time for a particular liquidity pool.  
 ▶️[Liquidity Addition](https://ide.bitquery.io/Stream---Liqiidity-add-for-all-tokens-on-PancakeSwap-v3)
 
 ### Track Liquidity Removal in Real Time
 
-Trace liquidity removal events on Pancakeswap in real time for a particular liquidity pool.        
+Trace liquidity removal events on Pancakeswap in real time for a particular liquidity pool.  
 ▶️[Liquidity Addition](https://ide.bitquery.io/Stream---Liquidity-remove-for-all-tokens-on-PancakeSwap-v3)
 
 ## Uniswap V3 Streams
 
-### Pair Creation on Uniswap 
+### Pair Creation on Uniswap
 
-This stream returns the real time liquidity pools/token pairs created on Uniswap V3. You could modify the stream to monitor newly created pools on a different protocol. 
+This stream returns the real time liquidity pools/token pairs created on Uniswap V3. You could modify the stream to monitor newly created pools on a different protocol.
 
 ▶️[Pair Creation Stream](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9)
 
@@ -192,22 +209,24 @@ This subscription returns the real-time trades happening on Uniswap V3. You can 
 
 ### New Token Creation
 
-This stream tracks the creation of BEP-20 tokens on BSC network in real time.        
+This stream tracks the creation of BEP-20 tokens on BSC network in real time.  
 ▶️[BEP-20 Token Creation](https://ide.bitquery.io/Newly-Created-Tokens-on-BSC-network_2)
 
 ### Real time Trades on BSC
 
-This subscription returns the real-time trades happening on BSC Network. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader.   
+This subscription returns the real-time trades happening on BSC Network. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader.  
 ▶️[BSC Dex Trades](https://ide.bitquery.io/Newly-Created-Tokens-on-BSC-network_2)
 
 ## Four Meme
 
 ### Four Meme Trades
-This stream returns the latest trades happening on `Four Meme` on BSC Network in real time.   
+
+This stream returns the latest trades happening on `Four Meme` on BSC Network in real time.  
 ▶️[Trades on Four Meme](https://ide.bitquery.io/Latest-trades-on-fourmeme)
 
 ### Four Meme User Trades
-This stream helps in monitoring the trades of a Four Meme user in real time.    
+
+This stream helps in monitoring the trades of a Four Meme user in real time.  
 ▶️[Four Meme User Trades](https://ide.bitquery.io/monitor-trades-of-a-trader-on-four-meme)
 
 ## NFT Streams
@@ -220,25 +239,25 @@ This stream allows you to monitor real time NFT trades on OpenSea. It could also
 
 ## Tron
 
-### Real-time Trades on Tron 
+### Real-time Trades on Tron
 
 This stream returns all the real time DEX trades happening on the Tron network. You can modify this stream to get DEX trades on a particular DEX or trades of a particular token or trades by a particular trader.
 
 ▶️[DEX Trades Stream](https://ide.bitquery.io/Latest-trades-on-Tron)
 
-### Real-time Trades on Sunpump 
+### Real-time Trades on Sunpump
 
 This stream returns all the real time DEX trades happening on Sunpump exchange on the Tron network. You can modify this stream to get the trades of a particular token or trades by a particular trader.
 
 ▶️[Sunpump Trades Stream](https://ide.bitquery.io/real-time-sunswapTrades)
 
-### Real-time Whale Transaction Monitoring 
+### Real-time Whale Transaction Monitoring
 
 This subscription streams real-time large transactions (possible whale transactions) on the TRON network. You can modify it to track specific whale wallets and/or specific tokens.
 
 ▶️[Whale Transaction Monitoring](https://ide.bitquery.io/Whale-transactions-on-Tron)
 
-### Real-time Tether USDT Transfers 
+### Real-time Tether USDT Transfers
 
 This subscription streams the latest USDT (TRC20) transfers on the TRON network. You can modify the stream to monitor Transfers of USDT from or to a particular address.
 
