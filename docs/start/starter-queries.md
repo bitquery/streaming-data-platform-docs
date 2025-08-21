@@ -4,6 +4,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 ## Table of Contents
 
+- [Crypto Price APIs](#crypto-price-apis)
 - [Solana APIs](#solana-trade-api)
 - [PumpFun API](#pumpfun-api)
 - [Raydium API](#raydium-api)
@@ -15,6 +16,19 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Cardano APIs](#cardano)
 - [Ripple APIs](#ripple)
 - [More APIs](#more-apis)
+
+## Crypto Price APIs
+
+### Latest Price of Any Token
+
+▶️ [Latest Price of Token Across Chains](https://ide.bitquery.io/Latest-bitcoin-price-on-across-chains)
+
+### Crypto Price Change API
+
+This query gives you change in price ( Close-Open) of all tokens on Ethereum, BNB, Solana and Tron.
+You can adjust duration in `Duration: {eq: 300}` filter.
+
+▶️ [Crypto Price Change API](https://ide.bitquery.io/5-minute-price-change-api)
 
 ## Solana Trade API
 
