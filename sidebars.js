@@ -496,7 +496,6 @@ const sidebars = {
             id: "examples/Arbitrum/index",
           },
           items: [
-            "examples/Arbitrum/Overview",
             "examples/Arbitrum/arbitrum-cross-chain",
             "examples/Arbitrum/Balance_Updates",
             "examples/Arbitrum/Blocks_Transactions",
