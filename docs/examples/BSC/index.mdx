@@ -32,24 +32,13 @@ Bitquery BSC APIs are very flexible, you can fetch trade, transaction, balance i
 
 ### Difference between BSC RPC, Bitquery BSC API and Bitquery Kafka Stream?
 
-**BSC RPC**
+| BSC RPC | Bitquery BSC API | Bitquery Kafka Stream
+| --- | --- | --- |
+| JSON-RPC endpoint exposing raw EVM on-chain state and transactions | GraphQL endpoint over pre-indexed, parsed BSC chain data (token transfers, DEX trades, logs, calls, etc.) | Provides fully managed Kafka topics (bsc.dextrades.proto, bsc.tokens.proto, bsc.transactions.proto) |
+| No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions | Delivers pre-parsed, enriched Protocol-Buffers events (DEX trades, token transfers and transactions) |
+| Ideal for submitting transactions | Great for real-time data and historical backtesting without running your own indexer | Great for Enterprise usage with built-in replication/failover and no node ops or custom parsing needed |
 
-- JSON-RPC endpoint exposing raw on-chain state & transactions
-- No built-in history or analytics—any indexing/aggregation you build or outsource
-- Ideal for submitting transactions
-
-**Bitquery BSC API**
-
-- GraphQL endpoint over pre-indexed, parsed BSC data (token transfers, DEX trades, NFTs, etc.)
-- Historical data, joins, aggregations & real-time subscriptions
-- Great for real-time data and historical backtesting without running your own indexer
-
-**Bitquery Kafka Stream**
-
-- **Data & Protocol**: Provides fully managed Kafka topics—`bsc.dextrades.proto`, `bsc.tokens.proto`, and `bsc.transactions.proto`—delivering pre-parsed, enriched Protocol-Buffers events (DEX trades, token transfers, supply/balance updates, instructions, blocks, etc.).
-- **Infra & Maintenance**: Enterprise-grade, auto-scaling Kafka streams with sub-second latency, schema-based filtering, instruction-level balance updates, built-in replication/failover—no node ops or custom parsing needed.
-
-Read more [here](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
+Read more about Kafka streams [here](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
 
 ### Does Bitquery support BSC Websocket and BSC Webhooks?
 
