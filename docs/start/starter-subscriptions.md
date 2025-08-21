@@ -4,7 +4,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 ## Table of Contents
 
-- [Crypto Price Stream]()
+- [Crypto Price Stream](#crypto-price-stream)
 - [Solana Streams](#solana)
 - [PumpFun Streams](#pumpfun-streams)
 - [Pumpswap Streams](#pumpswap-streams)
