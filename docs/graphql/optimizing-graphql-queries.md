@@ -10,11 +10,28 @@ GraphQL query optimization is a crucial aspect of utilizing V2 APIs to their ful
 
 In this section, we will see how to optimize your V2 API queries.
 
-### Significance of query optimization for performance
+### Understanding Datasets
 
-Query optimization is crucial for achieving optimal performance in any application that processes data through APIs. By optimizing queries, you can significantly reduce the amount of time and resources required to retrieve the data you need. This helps to improve performance, reduce latency, and ensure that your applications are fast, responsive, and reliable. With the right query optimization techniques, you can make the most of API resources and deliver a superior user experience.
+Choosing the right dataset is critical for both correctness and performance. We offer three datasets with different guarantees and latency characteristics:
 
-The key objectives of query optimization in GraphQL are to improve the performance and efficiency of API requests, reduce network latency, prevent server overload, and deliver a better user experience.
+- **realtime**: Default if omitted. Contains the most recent data (roughly last ~8 hours) and is optimized for low-latency reads and subscriptions.
+- **archive**: Full historical data from genesis
+- **combined**: Executes the same query against both realtime and archive and merges results. Useful when you need a continuous view that spans “now” into history, but it’s slower.
+
+Practical guidance:
+
+Examples:
+
+```graphql
+# Latest trades with minimal delay
+EVM(dataset: realtime, network: eth) { DEXTrades(limit: { count: 100 }) { Trade { ... } } }
+
+# Historical holders snapshot
+EVM(dataset: archive, network: eth) { TokenHolders(date: "2024-01-01") { uniq(of: Holder_Address) } }
+
+# One-shot view spanning history and near-real-time
+EVM(dataset: combined, network: bsc) { BalanceUpdates(limit: { count: 1000 }) { ... } }
+```
 
 ### Understanding limits in GraphQL
 
@@ -28,7 +45,7 @@ Let's take an example, the below query retrieves information about calls on the 
 
 ```graphql
 query CustomLimitQuery {
-  EVM(dataset: combined, network: bsc) {
+  EVM(dataset: realtime, network: bsc) {
     Calls(limit: { count: 20 }) {
       Call {
         LogCount
@@ -68,7 +85,7 @@ Below is an example query that retrieves information about limitBy. For each cal
 
 ```graphql
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: realtime, network: eth) {
     DEXTrades(
       where: {
         Trade: {
