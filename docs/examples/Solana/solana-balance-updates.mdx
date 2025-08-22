@@ -8,6 +8,14 @@ In this section we will see how to monitor real-time balance changes across the 
 
 Note - Our [V1 APIs](https://docs.bitquery.io/v1/docs/category/examples) do support solana and you can get balances from there. However they do not have historical balance.
 
+## 🔗 Related Solana APIs
+
+- **[Solana Transfers API](solana-transfers.mdx)** - Track transfers that cause balance changes
+- **[Solana Instructions API](solana-instructions.mdx)** - Monitor instructions that affect balances
+- **[Solana DEX Trades API](solana-dextrades.mdx)** - Track trading activities that impact balances
+- **[Solana Fees API](solana_fees_api.md)** - Analyze fees that reduce balances
+- **[Solana Token Supply API](token-supply-cube.mdx)** - Monitor supply changes affecting balances
+
 <head>
 <meta name="title" content="Solana Balance API | Get Balance of a Solana address"/>
 <meta name="description" content="Get real time balance & balance updates of a Solana address using Bitquery's Solana Balance Updates API."/>
@@ -40,6 +48,8 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 ## Get all the Tokens owned by an address
 
 The below query retrieves the token addresses and their balances owned by a particular account address You can access the query [here](https://ide.bitquery.io/tokens-owned-by-an-address).
+
+For tracking the transfers that cause these balance changes, see our **[Solana Transfers API](solana-transfers.mdx)**.
 
 ```
 query MyQuery {

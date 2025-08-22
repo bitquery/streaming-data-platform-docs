@@ -5,12 +5,20 @@ sidebar_position: 2
 # Solana DEX Trades API
 
 Bitquery provides Solana DEX trade data through APIs, Streams, and Data Dumps.  
-The GraphQL APIs and subscriptions below are examples of the real-time and historical trade data you can access across [Raydium](https://docs.bitquery.io/docs/examples/Solana/Solana-Raydium-DEX-API/), [Orca](https://docs.bitquery.io/docs/examples/Solana/solana-orca-dex-api/), [Phoenix](https://docs.bitquery.io/docs/examples/Solana/Solana-Phoenix-api/), and other Solana-based DEXs.
+The GraphQL APIs and subscriptions below are examples of the real-time and historical trade data you can access across [Raydium](Solana-Raydium-DEX-API.mdx), [Orca](solana-orca-dex-api.mdx), [Phoenix](Solana-Phoenix-api.md), [Meteora](Meteora-DAMM-v2-API.md), [Jupiter](solana-jupiter-api.mdx), and other Solana-based DEXs.
 
 If you have questions or need custom data, reach out to [support](https://t.me/Bloxy_info).
 
 Need zero-latency Solana DEX trade data?  
 [Read about our Shred Streams and contact us for a trial ➤](https://docs.bitquery.io/docs/streams/real-time-solana-data/)
+
+## 🔗 Related Solana APIs
+
+- **[Solana Instructions API](solana-instructions.mdx)** - Track real-time instructions and token creation events
+- **[Solana Balance Updates API](solana-balance-updates.mdx)** - Monitor wallet balance changes from trades
+- **[Solana Transfers API](solana-transfers.mdx)** - Track token transfers and movements
+- **[Solana Fees API](solana_fees_api.md)** - Analyze trading fees and transaction costs
+- **[Solana Token Supply API](token-supply-cube.mdx)** - Monitor token supply changes from trading activities
 
 You may also be interested in:
 
@@ -56,6 +64,9 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 ## Subscribe to Latest Solana Trades
 
 This subscription will return information about the most recent trades executed on Solana's DEX platforms.
+
+For analyzing the transaction fees associated with these trades, see our **[Solana Fees API](solana_fees_api.md)**.
+
 You can find the query [here](https://ide.bitquery.io/solana-trades-subscription_3)
 
 <details>
@@ -144,7 +155,7 @@ This query retrieves the latest price of a token against Wrapped SOL (WSOL) on S
 Specify the token pair:
 
 - MintAddress of the token to query: "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump"
-- MintAddress for WSOL: "So111111111111111111111111111111111111111
+- MintAddress for WSOL: "So11111111111111111111111111111111111111112"
 
 You can run the query [here](https://ide.bitquery.io/Price-of-a-Token-Against-WSOL)
 

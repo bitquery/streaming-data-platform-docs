@@ -8,6 +8,14 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 In this section we will see how to get Solana Token Supply information using our API.
 
+## 🔗 Related Solana APIs
+
+- **[Solana Instructions API](solana-instructions.mdx)** - Track token creation and burn instructions
+- **[Solana Balance Updates API](solana-balance-updates.mdx)** - Monitor balance changes from supply updates
+- **[Solana Transfers API](solana-transfers.mdx)** - Track transfers that affect token supply
+- **[Solana DEX Trades API](solana-dextrades.mdx)** - Monitor trading activities impacting supply
+- **[Solana Fees API](solana_fees_api.md)** - Analyze fees from supply-related transactions
+
 <head>
 <meta name="title" content="Solana Token Supply API | Easiest way to get Solana Token supply"/>
 <meta name="description" content="Access real-time on-chain data for Solana token supply and more through our Solana Token Supply API."/>
@@ -38,6 +46,8 @@ In this section we will see how to get Solana Token Supply information using our
 ## Subscribe to Token Supply Changes
 
 This subscription will return the token supply changes in realtime. `PostBalance` will give you the current supply. Check the query [here](https://ide.bitquery.io/token-supply-updates-sub)
+
+For tracking the instructions that cause these supply changes (like token creation and burning), see our **[Solana Instructions API](solana-instructions.mdx)**.
 
 ```graphql
 subscription {

@@ -175,3 +175,11 @@ query MyQuery {
 ## Video Tutorial | How to get Total Fees paid by a Account on Solana
 
 <VideoPlayer url="https://www.youtube.com/watch?v=xzNQ8S8L0-Q" />
+
+## 🔗 Related Solana APIs
+
+- **[Solana DEX Trades API](solana-dextrades.mdx)** - Monitor trading activities and their fees
+- **[Solana Transfers API](solana-transfers.mdx)** - Track transfer fees and costs
+- **[Solana Balance Updates API](solana-balance-updates.mdx)** - Monitor balance changes including fees
+- **[Solana Instructions API](solana-instructions.mdx)** - Track instruction execution fees
+- **[Solana Token Supply API](token-supply-cube.mdx)** - Monitor supply-related transaction fees

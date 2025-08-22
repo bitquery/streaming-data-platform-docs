@@ -4,8 +4,6 @@ sidebar_position: 3
 
 # Solana Instructions API
 
-
-
 <head>
 <meta name="title" content="Solana Instructions API | Get decoded Instructions data"/>
 <meta name="description" content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc."/>
@@ -35,13 +33,36 @@ sidebar_position: 3
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
+## Overview
+
+The **Solana Instructions API** provides comprehensive access to decoded instruction data executed on the Solana blockchain. This API enables you to track real-time instructions, monitor token creation and burning events, and analyze program interactions with detailed information including signer details, transaction signatures, balance updates, and program metadata.
+
+## 📋 Table of Contents
+
+- **[Latest Solana Instructions](#latest-solana-instructions)** - Real-time instruction monitoring
+- **[Latest Created Tokens on Solana](#latest-created-tokens-on-solana)** - Token creation tracking
+- **[Track Real-time Token Burn on Solana](#track-real-time-token-burn-on-solana)** - Token burn monitoring
+- **[Video Tutorials](#video-tutorials)** - Step-by-step guides
+
+## 🔗 Related APIs
+
+- **[Solana Balance Updates API](solana-balance-updates.mdx)** - Monitor real-time balance changes
+- **[Solana Token Supply API](token-supply-cube.mdx)** - Track token supply and creation events
+- **[Solana DEX Trades API](solana-dextrades.mdx)** - Monitor trading activities across DEXs
+- **[Solana Transfers API](solana-transfers.mdx)** - Track token transfers and movements
+- **[Solana Fees API](solana_fees_api.md)** - Analyze transaction fees and costs
+
+---
+
 ## Latest Solana Instructions
 
-The subscription below fetches the latest instructions executed on the Solana blockchain including details like indices of preceding instructions signer, signature, balance updates, and program details
+The subscription below fetches the latest instructions executed on the Solana blockchain, including details like indices of preceding instructions, signer information, transaction signatures, balance updates, and program details.
+
+For monitoring the balance changes that result from these instructions, see our **[Solana Balance Updates API](solana-balance-updates.mdx)**.
 
 You can run the query [here](https://ide.bitquery.io/Latest-Solana-Instructions)
 
-```
+```graphql
 subscription {
   Solana(network: solana) {
     Instructions {
@@ -71,16 +92,17 @@ subscription {
     }
   }
 }
-
 ```
+
+---
 
 ## Latest Created Tokens on Solana
 
-The query below fetches the latest created tokens on the Solana blockchain including details like newly created token address which is the 1st entry in the Accounts array. We are querying Solana Token Program here with address `TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA` and filtering for latest created tokens using `Method: {in: ["initializeMint", "initializeMint2", "initializeMint3"]}`.
+The query below fetches the latest created tokens on the Solana blockchain, including details like newly created token addresses (which appear as the first entry in the Accounts array). We are querying the Solana Token Program with address `TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA` and filtering for the latest created tokens using `Method: {in: ["initializeMint", "initializeMint2", "initializeMint3"]}`.
 
 You can run the query [here](https://ide.bitquery.io/Get-newly-created-tokens-on-Solana_1)
 
-```
+```graphql
 subscription {
   Solana {
     Instructions(
@@ -270,13 +292,13 @@ subscription {
 }
 ```
 
+---
+
 ## Track Real-time Token Burn on Solana
 
-Receive real-time updates on token burn events on the Solana blockchain. The below query applies a filter to only include instructions where
-Program Method includes `burn`, indicating that we filter instructions only related to token burning. You can run it [here](https://ide.bitquery.io/track-solana-token-burn-in-realtime_1)
+Receive real-time updates on token burn events on the Solana blockchain. The query below applies a filter to only include instructions where the Program Method includes `burn`, indicating that we filter instructions related specifically to token burning. You can run it [here](https://ide.bitquery.io/track-solana-token-burn-in-realtime_1)
 
-```
-
+```graphql
 subscription {
   Solana {
     Instructions(
@@ -307,13 +329,72 @@ subscription {
     }
   }
 }
-
 ```
 
-## Video Tutorial on Solana Instructions API | How to track New Liquidity Pools Created on Solana Raydium & Orca DEX
+### Alternative: Token Burn Tracking via TokenSupplyUpdates API
+
+You can also track real-time token burn using the TokenSupplyUpdates API. Check out the [following example](https://ide.bitquery.io/token-burn-example-solana).
+
+For more comprehensive token supply tracking, see our **[Solana Token Supply API](token-supply-cube.mdx)** documentation.
+
+```graphql
+{
+  Solana {
+    TokenSupplyUpdates(
+      where: {TokenSupplyUpdate: {Amount: {lt: "0"}}}
+      limit: {count: 20}
+      orderBy: {descending: Block_Time}
+    ) {
+      TokenSupplyUpdate {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Decimals
+        }
+        Amount
+        AmountInUSD
+        PreBalance
+        PreBalanceInUSD
+        PostBalance
+        PostBalanceInUSD
+        Account {
+          Address
+          Owner
+          Token {
+            Owner
+          }
+        }
+      }
+      Block {
+        Time
+        Height
+      }
+      Instruction {
+        Program {
+          Address
+          Method
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+---
+
+## Video Tutorials
+
+### How to Track New Liquidity Pools Created on Solana Raydium & Orca DEX
 
 <VideoPlayer url="https://youtu.be/FO4-sYHgF-k?si=xBI9j4gnFxmuzQrU" />
 
-## Video Tutorial on Solana Instructions API | How to get newly created tokens on Solana Blockchain in realtime
+### How to Get Newly Created Tokens on Solana Blockchain in Real-time
 
 <VideoPlayer url="https://www.youtube.com/watch?v=P8BMl0X5d8o" />
+
+```
+
