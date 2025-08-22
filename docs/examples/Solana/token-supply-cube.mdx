@@ -8,6 +8,19 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 In this section we will see how to get Solana Token Supply information using our API.
 
+## Overview
+
+The **Solana Token Supply API** provides comprehensive access to real-time token supply data on the Solana blockchain. This API enables you to track token creation, monitor supply changes, calculate market capitalization, and analyze token burn events with detailed metadata and real-time updates.
+
+## 📋 Table of Contents
+
+- **[Subscribe to Token Supply Changes](#subscribe-to-token-supply-changes)** - Real-time supply monitoring
+- **[Get Supply of Specific Token](#get-supply-of-specific-token)** - Individual token supply tracking
+- **[Token Creation Tracking](#token-creation-tracking)** - New token creation events
+- **[Market Cap Analysis](#market-cap-analysis)** - Market capitalization queries
+- **[Token Burn Events](#token-burn-events)** - Burn event monitoring
+- **[Video Tutorials](#video-tutorials)** - Step-by-step guides
+
 ## 🔗 Related Solana APIs
 
 - **[Solana Instructions API](solana-instructions.mdx)** - Track token creation and burn instructions
@@ -98,7 +111,11 @@ This query will return the latest token supply of a specific token. We are getti
 }
 ```
 
-## Get newly created Pump Fun tokens, Creation Time, Dev Address, Metadata
+---
+
+## Token Creation Tracking
+
+### Get newly created Pump Fun tokens, Creation Time, Dev Address, Metadata
 
 Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
 
@@ -149,38 +166,7 @@ subscription {
 }
 ```
 
-## Top 10 Solana tokens with the highest marketcap increase in last 1hr
-
-Use below query to get top 10 marketcap jump tokens in last 1hr. Test the query [here](https://ide.bitquery.io/top-10-marketcap-jump-tokens-in-last-1hr#)
-
-```
-query MyQuery {
-  Solana {
-    TokenSupplyUpdates(
-      limit: {count: 10}
-      orderBy: {descendingByField: "marketcapJump"}
-      where: {Transaction: {Result: {Success: true}}, Block: {Time: {since_relative: {minutes_ago: 60}}}}
-    ) {
-      TokenSupplyUpdate {
-        AmountInUSD
-        pre: PreBalanceInUSD
-        post: PostBalanceInUSD
-        Currency {
-          MintAddress
-          Name
-          Symbol
-          Decimals
-        }
-      }
-      marketcapJump: calculate(
-        expression: "(($TokenSupplyUpdate_post - $TokenSupplyUpdate_pre) / $TokenSupplyUpdate_pre) * 100"
-      )
-    }
-  }
-}
-```
-
-## Get newly created Moonshot tokens and their Metadata
+### Get newly created Moonshot tokens and their Metadata
 
 Now you can track the newly created Moonshot Tokens along with their metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/Get-newly-created-Moonshot-tokens-with-metadata#)
 
@@ -225,6 +211,43 @@ subscription {
 }
 ```
 
+---
+
+## Market Cap Analysis
+
+### Top 10 Solana tokens with the highest marketcap increase in last 1hr
+
+Use below query to get top 10 marketcap jump tokens in last 1hr. Test the query [here](https://ide.bitquery.io/top-10-marketcap-jump-tokens-in-last-1hr#)
+
+```graphql
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      limit: {count: 10}
+      orderBy: {descendingByField: "marketcapJump"}
+      where: {Transaction: {Result: {Success: true}}, Block: {Time: {since_relative: {minutes_ago: 60}}}}
+    ) {
+      TokenSupplyUpdate {
+        AmountInUSD
+        pre: PreBalanceInUSD
+        post: PostBalanceInUSD
+        Currency {
+          MintAddress
+          Name
+          Symbol
+          Decimals
+        }
+      }
+      marketcapJump: calculate(
+        expression: "(($TokenSupplyUpdate_post - $TokenSupplyUpdate_pre) / $TokenSupplyUpdate_pre) * 100"
+      )
+    }
+  }
+}
+```
+
+
+
 ## Marketcap of a Token
 
 We use `PostBalanceInUSD` field to get the marketcap. Since it is built on real-time data, you will get the Marketcap if the token was active in the past 8 hours or is being transacted in real-time.
@@ -244,6 +267,49 @@ query MyQuery {
     ) {
       TokenSupplyUpdate {
         PostBalanceInUSD
+      }
+    }
+  }
+}
+```
+
+In case PostAmountInUSD is 0 then, you need to pull price from our Crypto price API.
+Here is an example which gets both supply and Price.
+
+[Run query](https://ide.bitquery.io/marketcap-query)
+
+```graphql
+{
+  Solana {
+    TokenSupplyUpdates(
+      where: {TokenSupplyUpdate: {Currency: {MintAddress: {is: "4iBhvT6bpCf92u12P1kpbejYrHDS6N3hJCNtAq6wpump"}}}}
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+    ) {
+      TokenSupplyUpdate {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Decimals
+        }
+        PostBalance
+        PostBalanceInUSD
+      }
+    }
+  }
+  Trading {
+    Tokens(
+      limit: {count: 1}
+      where: {Price: {IsQuotedInUsd: true}, Interval: {Time: {Duration: {eq: 1}}}, Token: {Address: {is: "4iBhvT6bpCf92u12P1kpbejYrHDS6N3hJCNtAq6wpump"}}}
+    ) {
+      Block {
+        Time(maximum: Block_Time)
+      }
+      Price {
+        Average {
+          Mean
+        }
       }
     }
   }
@@ -367,9 +433,13 @@ query MyQuery {
 }
 ```
 
-## Get Latest Token Burn Events on Solana
+---
 
-We will be using the token supply API to query recent token liquity removals ( token burn) .You can modify this query to track burn events of a specific token using `Currency` filter in real time or query it.
+## Token Burn Events
+
+### Get Latest Token Burn Events on Solana
+
+We will be using the token supply API to query recent token liquidity removals (token burn). You can modify this query to track burn events of a specific token using `Currency` filter in real time or query it.
 
 You can run the query [here](https://ide.bitquery.io/burn-token-supply-updates)
 
@@ -404,18 +474,22 @@ query MyQuery {
 }
 ```
 
-## Video Tutorial on Streaming and Getting Total Supply of a Solana Token
+---
+
+## Video Tutorials
+
+### Video Tutorial on Streaming and Getting Total Supply of a Solana Token
 
 <VideoPlayer url="https://youtu.be/U_fuHEow3fQ" />
 
-## Video Tutorial on Getting New Pump Fun Token Metadata
+### Video Tutorial on Getting New Pump Fun Token Metadata
 
 <VideoPlayer url="https://youtu.be/GmJOEWxhlVM" />
 
-## Video Tutorial | How to get Newly Created Pump Fun Tokens, Dev Address, Creation Time, Metadata
+### Video Tutorial | How to get Newly Created Pump Fun Tokens, Dev Address, Creation Time, Metadata
 
 <VideoPlayer url="https://www.youtube.com/watch?v=tRAHHCqQDVA" />
 
-## Video Tutorial | How to get Top Solana tokens by Marketcap increase in last 1 hr
+### Video Tutorial | How to get Top Solana tokens by Marketcap increase in last 1 hr
 
 <VideoPlayer url="https://youtu.be/zB6Hmeyt6tg" />
