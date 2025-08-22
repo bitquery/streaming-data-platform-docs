@@ -178,8 +178,8 @@ query MyQuery {
 
 ## 🔗 Related Solana APIs
 
-- **[Solana DEX Trades API](solana-dextrades.mdx)** - Monitor trading activities and their fees
-- **[Solana Transfers API](solana-transfers.mdx)** - Track transfer fees and costs
-- **[Solana Balance Updates API](solana-balance-updates.mdx)** - Monitor balance changes including fees
-- **[Solana Instructions API](solana-instructions.mdx)** - Track instruction execution fees
-- **[Solana Token Supply API](token-supply-cube.mdx)** - Monitor supply-related transaction fees
+- **[Solana DEX Trades API](https://docs.bitquery.io/docs/examples/Solana/solana-dextrades/)** - Monitor trading activities and their fees
+- **[Solana Transfers API](https://docs.bitquery.io/docs/examples/Solana/solana-transfers/)** - Track transfer fees and costs
+- **[Solana Balance Updates API](https://docs.bitquery.io/docs/examples/Solana/solana-balance-updates/)** - Monitor balance changes including fees
+- **[Solana Instructions API](https://docs.bitquery.io/docs/examples/Solana/solana-instructions/)** - Track instruction execution fees
+- **[Solana Token Supply API](https://docs.bitquery.io/docs/examples/Solana/token-supply-cube/)** - Monitor supply-related transaction fees
