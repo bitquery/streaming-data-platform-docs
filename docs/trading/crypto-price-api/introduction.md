@@ -364,7 +364,7 @@ Use `TargetVolume` to get price intervals aggregated over a volume threshold:
 
 ## Crypto Price API for TradingView
 
-With the new Price API, you can simply feed the stream to your custom datafeed object.
+With the new Price API, you can simply feed the stream to your custom datafeed object in the TradingView code and have it update charts in real-time.
 
 - A sample tutorial is available [here](https://docs.bitquery.io/docs/usecases/tradingview-subscription-realtime/getting-started/)
 - The stream is available ready-to-chart SDK [here](https://www.npmjs.com/package/@bitquery/tradingview-sdk). Simply copy paste the advanced charting library into the correct folder, add Bitquery access token and it is ready.
