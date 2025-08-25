@@ -453,8 +453,8 @@ const sidebars = {
           type: "category",
           label: "Tron",
           link: {
-            type: "generated-index",
-            title: "Tron API Documentation",
+            type: "doc",
+            id: "examples/Tron/index",
           },
           items: [
             "examples/Tron/sunswap-api",
@@ -548,8 +548,8 @@ const sidebars = {
           type: "category",
           label: "Optimism",
           link: {
-            type: "generated-index",
-            title: "Optimism API Documentation",
+            type: "doc",
+            id: "examples/Optimism/index",
           },
           items: [
             "examples/Optimism/optimism-balance-updates",

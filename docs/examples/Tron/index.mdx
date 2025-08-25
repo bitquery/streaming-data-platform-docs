@@ -1,0 +1,115 @@
+---
+title: Tron API Documentation
+description: Collection of Tron APIs organized by topic.
+slug: /examples/Tron/
+keywords:
+  - Tron API
+  - Tron RPC
+  - Tron RPC API
+  - Best Tron API
+  - Tron Explorer API
+  - tron wallet transaction monitoring api
+  - tron api docs
+  - tron websocket api
+  - tron blockchain api
+  - tron token api
+  - tron transaction api
+  - sunswap API
+  - tron DEX API
+---
+
+# Tron API Documentation
+
+## Overview
+
+In this section we will see how to fetch data on different tokens, transactions, and DEXs like Sunswap on Tron via APIs and Streams.
+
+If you need help getting data on Tron, reach out to [support](https://t.me/Bloxy_info).
+
+### What is Tron API?
+
+Bitquery Tron APIs help you fetch onchain data like trades, transactions, balances, etc using graphQL query.
+
+### What are capabilities of Bitquery Tron API?
+
+Bitquery Tron APIs are very flexible, you can fetch trade, transaction, and balance information for a period, for a specific wallet, and join with other information.
+
+### Difference between Tron RPC and Bitquery Tron API?
+
+| Tron RPC                                                                         | Bitquery Tron API                                                                                    |
+| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| JSON-RPC endpoint exposing raw Tron on-chain state and transactions              | GraphQL endpoint over pre-indexed, parsed Tron data (token transfers, DEX trades, logs, calls, etc.) |
+| No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions                                       |
+| Ideal for submitting transactions                                                | Great for real-time data and historical backtesting without running your own indexer                 |
+
+### Does Bitquery support Tron Websocket and Webhooks?
+
+Bitquery supports websocket and webhooks; you can convert most GraphQL APIs into GraphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More docs and code samples are available [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
+
+## Quick start
+
+Run this minimal GraphQL query to fetch the latest 5 DEX trades on Tron:
+
+```graphql
+query LatestTronTrades {
+  Tron {
+    DEXTrades(limit: { count: 5 }, orderBy: { descending: Block_Time }) {
+      Block {
+        Time
+      }
+      Trade {
+        Dex {
+          ProtocolName
+        }
+        Buy {
+          AmountInUSD
+          Currency {
+            Symbol
+          }
+        }
+        Sell {
+          AmountInUSD
+          Currency {
+            Symbol
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
+
+## DEX APIs
+
+- [Tron Dex Trades](https://docs.bitquery.io/docs/examples/Tron/tron-dextrades/)
+
+## Core Tron APIs
+
+- [Transactions](https://docs.bitquery.io/docs/examples/Tron/tron-transactions-api/)
+- [Transfers](https://docs.bitquery.io/docs/examples/Tron/tron-transfers/)
+- [Fees](https://docs.bitquery.io/docs/examples/Tron/tron-fees-api/)
+- [Mempool](https://docs.bitquery.io/docs/examples/Tron/tron-mempool/)
+- [Balance Updates](https://docs.bitquery.io/docs/examples/Tron/tron-balance-updates/)
+
+## Videos
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+### Video Tutorial | Comprehensive Guide to Real-Time Tron Data : Trades, NFTs, Mempool etc
+
+<VideoPlayer url="https://www.youtube.com/watch?v=vedTet6cYlM" />
+
+### Video Tutorial | How to get Total Fees paid by a Account on Tron Network
+
+<VideoPlayer url="https://www.youtube.com/watch?v=D-9Vp4zrPaU" />
+
+### Video Tutorial | How to get Realtime Trades and Liquidity data on Sun Pump
+
+<VideoPlayer url="https://www.youtube.com/watch?v=gL-9nUvvVhg" />
+
+### Video Tutorial | How to track SunPump Token launches to SunSwap
+
+<VideoPlayer url="https://www.youtube.com/watch?v=RLV0s-uyKrU" />

@@ -229,6 +229,14 @@ const config = {
             from: "/docs/category/matic/",
           },
           {
+            to: "/docs/examples/Tron/",
+            from: "/docs/category/Tron/",
+          },
+          {
+            to: "/docs/examples/Optimism/",
+            from: "/docs/category/Optimism/",
+          },
+          {
             to: "/docs/examples/dextrades/uniswap-api/",
             from: "/docs/examples/realtimetrades/",
           },
