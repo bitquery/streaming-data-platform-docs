@@ -51,7 +51,7 @@ This stream has premade-OHLC in the response which you feed directly to your cha
 
 ### Kafka Topic for Crypto Price (Price Index) Stream: `trading.prices`
 
-This Kafka topic delivers **real-time, pre-aggregated price data** for tokens, currencies, and trading pairs across all supported blockchains. The data structure is a combination of all 3 cubes described in next section. 
+This Kafka topic delivers **real-time, pre-aggregated price data** for tokens, currencies, and trading pairs across all supported blockchains. The data structure is a combination of all 3 cubes described in next section.
 
 Schema for the proto topic is [here](https://github.com/bitquery/streaming_protobuf/tree/main/market).
 The [python package](https://pypi.org/project/bitquery-pb2-kafka-package/) and [npm package](https://www.npmjs.com/package/bitquery-protobuf-schema) already have all schema updated.
@@ -361,3 +361,10 @@ Use `TargetVolume` to get price intervals aggregated over a volume threshold:
 - You’re analyzing trading activity **on a specific market or DEX** (e.g., Uniswap, PancakeSwap, Raydium).
 - You need **OHLC, volume, liquidity**, and market-specific pricing between two tokens.
 - You're exploring **price arbitrage** or spreads across chains or platforms.
+
+## Crypto Price API for TradingView
+
+With the new Price API, you can simply feed the stream to your custom datafeed object in the TradingView code and have it update charts in real-time.
+
+- A sample tutorial is available [here](https://docs.bitquery.io/docs/usecases/tradingview-subscription-realtime/getting-started/)
+- The stream is available ready-to-chart SDK [here](https://www.npmjs.com/package/@bitquery/tradingview-sdk). Simply copy paste the advanced charting library into the correct folder, add Bitquery access token and it is ready.
