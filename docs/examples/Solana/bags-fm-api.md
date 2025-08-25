@@ -13,11 +13,10 @@ You can use these APIs to integrate **real-time Bags FM data** into your applica
 
 The **Bitquery Bags FM API** provides comprehensive access to **Bags FM launchpad data**, including **Bags FM token creation API**, **Bags FM token transfers**, **Bags FM token trades**, and **real-time Bags FM price API** streams.
 
----
 
-## 📋 Table of Contents
+## Table of Contents
 
-### 📘 [API Endpoints](#-endpoints--queries)
+###  [API Endpoints](#-endpoints--queries)
 1. **[New Bags FM Token Created (Instructions API v1)](#1-new-bags-fm-token-created-instructions-api-v1)**
 
 2. **[New Bags FM Token Created (Instructions API v2)](#2-new-bags-fm-token-created-instructions-api-v2)**
@@ -34,9 +33,9 @@ The **Bitquery Bags FM API** provides comprehensive access to **Bags FM launchpa
 
 8. **[All Transfers of Bags FM Tokens (Token Transfers API)](#8-all-transfers-of-bags-fm-tokens-token-transfers-api)**
 
----
 
-## 🚀 Key Features
+
+##  Key Features
 - **Real-time Bags FM token creation tracking** via **Solana token creation API**
 - **Solana token supply updates** for Bags FM tokens
 - **Live USD price streams** for Bags FM tokens with **Bags FM token USD price stream**
@@ -46,7 +45,7 @@ The **Bitquery Bags FM API** provides comprehensive access to **Bags FM launchpa
 
 ---
 
-## 📘 Endpoints & Queries
+##  Endpoints & Queries
 
 ### 1. New Bags FM Token Created (Instructions API v1)
 Track **new Bags FM token creation** events on Solana using the **Instructions API**. This **Bags token creation API** endpoint provides real-time data on token launches by tracking the Bags.FM Creator program.
@@ -537,14 +536,14 @@ Track **all transfers of Bags FM tokens** across wallets. This **Bags FM token t
 }
 ```
 
----
+
 
 ## Use Cases
 - **Trading Platforms** – Integrate **Bags FM price feeds**, **Bags FM token trades**, and liquidity data using the **Bitquery Bags FM API**
 - **Analytics Dashboards** – Track creation, **Bags FM token transfers**, supply, and prices with comprehensive **Bags FM token data**
 - **Arbitrage Bots** – Monitor **Bags FM token USD price stream** differences in real time
 
----
+
 
 ## Why Use Bitquery for Bags FM API?
 - **Low-latency blockchain data** (sub-400ms, moving to <100ms) for **real-time Bags FM price API**
@@ -552,7 +551,7 @@ Track **all transfers of Bags FM tokens** across wallets. This **Bags FM token t
 - **Unified price index** for accurate token valuations via **Bags FM token USD price stream**
 - **Historical + real-time queries** for flexible use cases with **Bags FM token trades** and **Bags FM token transfers**
 
----
+
 
 ## Multi-Exchange Data
 The **Bags FM token trades** endpoints aggregate data from multiple Solana DEXs:
@@ -571,14 +570,12 @@ The **Bags FM token trades** endpoints aggregate data from multiple Solana DEXs:
 - **[Solana Balance Updates API](https://docs.bitquery.io/docs/examples/Solana/solana-balance-updates/)** - Monitor balance changes from trades and transfers
 - **[Solana Token Supply API](https://docs.bitquery.io/docs/examples/Solana/token-supply-cube/)** - Track token supply and creation events
 
----
 
 ## Conclusion
 The **Bags FM API (via Bitquery)** delivers **complete blockchain data access** for Bags FM tokens.  
-From **token creation** and **supply updates** to **real-time USD prices** through [crypto price API](https://docs.bitquery.io/docs/trading/price-index/introduction/), **DEX trades**, and **transfers**, it provides everything you need to build apps, dashboards, and trading systems.  
+From **token creation** and **supply updates** to **real-time USD prices** through [crypto price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/), **DEX trades**, and **transfers**, it provides everything you need to build apps, dashboards, and trading systems.
 
 The **Bitquery Bags FM API** is your comprehensive solution for accessing **Bags FM token data**, **Bags FM token transfers**, **Bags FM token trades**, and **real-time Bags FM price API** streams on the Solana blockchain.
 
-Start building with **Bags FM data today** using Bitquery's **blockchain API for Bags FM**.
 
----
+
