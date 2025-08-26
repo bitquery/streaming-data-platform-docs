@@ -12,7 +12,18 @@ keywords:
 
 # Ethereum API Documentation
 
+Bitquery's provides Ethereum historical (since genesis) and real-time data via graphQL APIs, streams, Kafka and cloud solutions like AWS, GCP and Snowflake.
+
 This section contains Ethereum API/Streams examples and guides, organized into categories for easier navigation. This is not exhaustive, we will add more examples as users request different scenarios. If you need help writing any API/Stream, please reach out to us on [our telegram channel](https://t.me/Bloxy_info).
+
+## Quick Start
+
+New to Bitquery? Get up and running in minutes:
+
+- **[Your First Query](https://docs.bitquery.io/docs/start/first-query)** - Learn how to create and run your first GraphQL query
+- **[Getting Updates with Subscriptions](https://docs.bitquery.io/docs/start/getting-updates)** - Subscribe to real-time Ethereum data streams
+- **[Starter Queries](https://docs.bitquery.io/docs/start/starter-queries)** - Ready-to-use example queries for common use cases
+- **[Starter Subscriptions](https://docs.bitquery.io/docs/start/starter-subscriptions)** - Popular real-time data streams to get you started
 
 ## Blocks
 
