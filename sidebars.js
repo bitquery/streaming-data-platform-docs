@@ -409,6 +409,7 @@ const sidebars = {
               ],
             },
             "examples/Solana/letsbonk-api",
+            "examples/Solana/heaven-dex-api",
             "examples/Solana/bags-fm-api",
             "examples/Solana/jupiter-studio-api",
             "examples/Solana/solana-balance-updates",
