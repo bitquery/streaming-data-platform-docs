@@ -1,72 +1,235 @@
+---
+title: "Stablecoin Payments API"
+description: "Comprehensive guide to Bitquery Stablecoin Payments API with real-time transfers, compliance checks, and multi-chain analytics."
+keywords: ["Stablecoin Payments API", "real-time stablecoin transfers", "USDT API", "USDC API", "crypto compliance API", "multi-chain payments", "Bitquery API"]
+---
+
 # Stablecoin Payments API
 
-The Stablecoin API by Bitquery provides you the comprehensive set of APIs which can provide you realtime transfers, realtime trades, realtime price, holder distribution of stablecoins across chains with a single API call.
+Stablecoins are becoming the backbone of **cross-border payments**, offering faster, cheaper, and more reliable transactions compared to traditional rails.
 
-We are going to particularly deep-dive into how to get Stablecoin Payments data in this section.
+## Benefits of Stablecoin Payments
+- **Instant Settlement** – no waiting days for clearing.  
+- **Lower Fees** – fewer intermediaries and reduced transaction costs.  
+- **Transparency** – payments are traceable in real time.  
+- **Liquidity & Automation** – smoother treasury management and payment flows.  
 
-## Ethereum
+High-speed networks like **Solana** and **Layer 2 chains (Arbitrum, Base)** make stablecoin payments even faster, cheaper, and more user-friendly.
 
-### Stablecoin Realtime Payments Stream on Eth Mainnet
+---
 
-Below stream will give you realtime payments of `USDC` on Eth mainnet. Test the stream [here](https://ide.bitquery.io/Stablecoin-Realtime-Payments-Stream-on-Eth-Mainnet).
+## Challenges in Stablecoin Payments
+Despite their advantages, stablecoin systems face critical challenges:
 
-```
-subscription {
-  EVM(network: eth) {
-    Transfers(
-      where: {Transfer: {Currency: {SmartContract: {is: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"}}}}
-    ) {
-      Transaction {
-        Hash
-      }
-      Transfer {
-        Amount
-        Currency {
-          Name
-          Symbol
-        }
-        Receiver
-        Sender
-        Type
-      }
-    }
-  }
-}
-```
+- **Global Scalability** – infrastructure must handle millions of transactions reliably.  
+- **Regulatory Compliance** – AML/KYC, fraud detection, and monitoring are mandatory.  
+- **Real-Time Visibility** – merchants need instant confirmation of payments.  
+- **Multi-Chain Complexity** – interoperability across multiple blockchains is essential.  
 
-## Solana
+---
 
-### Stablecoin Realtime Payments Stream on Solana
+## How Bitquery Powers Stablecoin Payments
+Bitquery provides **data infrastructure** that makes stablecoin payments practical and scalable:
 
-Below stream will give you realtime payments of `USDC` on Solana. Test the stream [here](https://ide.bitquery.io/stablecoin-transfers-websocket).
+- **Real-Time Payment Detection**  
+  Instantly identify incoming stablecoin transfers as they hit the blockchain.  
 
-```
+- **Mempool Visibility**  
+  See payments before they are confirmed, improving speed and user experience.  
+
+- **Multi-Chain Support**  
+  Expand payments to multiple blockchains without rebuilding infrastructure.  
+
+- **Scalable APIs & Streams**  
+  Serve thousands of merchants with reliable, production-grade infrastructure.  
+
+**👉 Bitquery’s Stablecoin APIs & Streams** deliver comprehensive real-time stablecoin transfer data.
+
+---
+
+## Stablecoin Payment API Examples
+
+### 1. Listening to All USDT and USDC Payments on Solana
+This GraphQL stream provides **live USDT and USDC stablecoin transfers** on Solana:  
+🔗 [Stream Example](https://ide.bitquery.io/USDT-and-USDC-token-Transfers-stream-on-solana)  
+🔗 [API Example](https://ide.bitquery.io/USDT-and-USDC-token-Transfers-api-on-solana)
+
+```graphql
 subscription {
   Solana {
     Transfers(
-      where: {Transfer: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}
+      where: {Transfer: {Currency: {MintAddress: {in: [
+        "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+        "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+      ]}}}}
     ) {
       Transfer {
-        Currency {
-          MintAddress
-          Symbol
-          Name
-          Fungible
-          Native
-        }
-        Receiver {
-          Address
-        }
-        Sender {
-          Address
-        }
         Amount
         AmountInUSD
+        Sender { Address Owner }
+        Receiver { Address Owner }
+        Currency { Symbol Name MintAddress }
       }
-      Transaction{
-        Signature
-      }
+      Instruction { Program { Method } }
+      Block { Time Height Slot }
+      Transaction { Signature Signer Fee FeeInUSD FeePayer }
     }
   }
 }
 ```
+
+---
+
+### 2. Multi-Chain Stablecoin Transfers
+You can listen to **stablecoin transfers across various blockchains**:  
+
+| Blockchain | API                                                                 | Stream                                                                 | Mempool                                                                 |
+|------------|---------------------------------------------------------------------|------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| **Tron**   | [API](https://ide.bitquery.io/Latest-Tron-USDT-Transfers)           | [Stream](https://ide.bitquery.io/Latest-Tron-USDT-Transfers-stream)    | [Mempool](https://ide.bitquery.io/Latest-Tron-USDT-Transfers-stream-in-Mempool) |
+| **Ethereum** | [API](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-api-on-ethereum) | [Stream](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-stream-on-ethereum) | [Mempool](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-stream-on-ethereum-in-Mempool) |
+| **BSC**    | [API](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-api-on-BSC_2) | [Stream](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-Stream-on-BSC) | [Mempool](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-Stream-on-BSC-on-Mempool) |
+| **Base**   | [API](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-api-on-base) | [Stream](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-stream-on-base) | Not Available                                                            |
+
+---
+
+We simulate transaction on top of current block to provide Mempool simulated Transactions.
+
+### 3. Listening to Transfers for Specific Addresses (BSC Example)
+🔗 [Example Query](https://ide.bitquery.io/USDT-and-USDC-transfers-on-bnb-chain)
+
+```graphql
+subscription {
+  EVM(network: bsc) {
+    Transfers (
+      where:{
+        Transfer:{
+          Receiver:{ in:["0x443fa7bbf35c09ee0ebb5e15f1ea3f0704b89d04"] }
+          Currency:{
+            SmartContract:{
+              in:["0x55d398326f99059ff775485246999027b3197955",
+                  "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d"]
+            }
+          }
+        }
+      }
+    ) {
+      Block { Time Number }
+      Transfer {
+        Sender Receiver Amount AmountInUSD
+        Currency { Name Symbol SmartContract }
+      }
+      Transaction { Hash From To }
+    }
+  }
+}
+```
+
+---
+
+### 4. Compliance & Risk Checks
+For **AML/KYC and risk monitoring**, you can analyze payment addresses.  
+🔗 [Example API](https://ide.bitquery.io/stats-for-an-adddress)
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    TokenHolders(
+      date: "2025-08-25"
+      tokenSmartContract: "0xdac17f958d2ee523a2206206994597c13d831ec7"
+      where: {Holder: {Address: {is: "0x72187db55473b693ded367983212fe2db3768829"}}}
+    ) {
+      Holder { Address }
+      BalanceUpdate {
+        InCount OutCount Count
+        InAmount OutAmount
+        FirstDate LastDate
+      }
+      Balance { Amount }
+    }
+  }
+}
+```
+
+---
+
+## Stablecoin Analytics with Bitquery APIs
+
+### 1. First-Time Stablecoin Receivers
+Identify addresses receiving stablecoins for the **first time**.  
+🔗 [Query Example](https://ide.bitquery.io/first-time-UDST-received-by-addresses-on-a-given-date)
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    TokenHolders(
+      limit: {count: 1000}
+      date: "2025-08-25"
+      tokenSmartContract: "0xdac17f958d2ee523a2206206994597c13d831ec7"
+      where: {BalanceUpdate: {FirstDate: {is: "2025-08-25"}}}
+    ) {
+      Holder { Address }
+    }
+  }
+}
+```
+
+---
+
+### 2. Last-Time Stablecoin Receivers
+Identify addresses that **last received USDT** on a specific date.  
+🔗 [Query Example](https://ide.bitquery.io/Address-which-received-USDT-on-a-given-date-last-time)
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    TokenHolders(
+      orderBy: {descending: Balance_Amount}
+      limit: {count: 1000}
+      date: "2025-08-25"
+      tokenSmartContract: "0xdac17f958d2ee523a2206206994597c13d831ec7"
+      where: {BalanceUpdate: {LastDate: {is: "2021-01-01"}}}
+    ) {
+      Holder { Address }
+      BalanceUpdate { FirstDate LastDate }
+      Balance { Amount }
+    }
+  }
+}
+```
+
+---
+
+### 3. Top Stablecoin Holders
+Find **top holders of USDT on Ethereum**, including inflows, outflows, and activity history.  
+🔗 [Query Example](https://ide.bitquery.io/Top-holders-of-usdt-on-specific-date)
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    TokenHolders(
+      orderBy: [{descending: Balance_Amount}]
+      limit: {count: 100}
+      date: "2025-08-25"
+      tokenSmartContract: "0xdac17f958d2ee523a2206206994597c13d831ec7"
+    ) {
+      Holder { Address }
+      BalanceUpdate {
+        InCount OutCount Count
+        InAmount OutAmount
+        FirstDate LastDate
+      }
+      Balance { Amount }
+    }
+  }
+}
+```
+
+---
+
+## Why Use Bitquery for Stablecoin Payments?
+- **Real-time streams (WebSocket & Kafka)** for instant detection.  
+- **Webhook support** to integrate with your payment systems.  
+- **Compliance-focused APIs** for AML/KYC and risk analysis.  
+- **Multi-chain coverage** across Solana, Ethereum, Tron, BSC, Base, Arbitrum, and more.  
+
+Bitquery enables **faster, compliant, and scalable stablecoin payment solutions** for businesses, fintechs, and governments.
