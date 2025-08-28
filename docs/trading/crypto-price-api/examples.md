@@ -364,7 +364,7 @@ subscription {
 
 ## PumpAMM 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders
 
-[Run Stream ➤](https://ide.bitquery.io/PumpAMM-1-second-price-stream-with-OHLC)
+[Run Stream ➤](https://ide.bitquery.io/PumpAMM-tokens-1-second-price-stream-with-OHLC)
 
 
 ```
@@ -405,6 +405,11 @@ subscription {
           Open
         }
         IsQuotedInUsd
+      }
+      Currency {
+        Symbol
+        Name
+        Id
       }
     }
   }
