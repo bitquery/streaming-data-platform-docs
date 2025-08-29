@@ -13,12 +13,34 @@ This page aggregates commonly used queries for market data across chains, pairs,
 subscription {
   Trading {
     Tokens(
-      where: {Token: {Network: {is: "Solana"}}, Interval: {Time: {Duration: {eq: 60}}}}
+      where: {
+        Token: { Network: { is: "Solana" } }
+        Interval: { Time: { Duration: { eq: 60 } } }
+      }
     ) {
-      Token { Id Symbol Network }
-      Interval { Time { Start Duration End } }
-      Volume { Usd }
-      Price { Ohlc { Open High Low Close } }
+      Token {
+        Id
+        Symbol
+        Network
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Usd
+      }
+      Price {
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
     }
   }
 }
@@ -37,13 +59,34 @@ subscription {
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Currency: {Id: {is: "bid:eth"}}, QuoteCurrency: {Id: {is: "usdc"}}}
+      where: {
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Currency: { Id: { is: "bid:eth" } }
+        QuoteCurrency: { Id: { is: "usdc" } }
+      }
     ) {
-      Token { Symbol }
-      QuoteToken { Symbol }
-      Interval { Time { Start } }
-      Volume { Usd }
-      Price { Ohlc { Open High Low Close } }
+      Token {
+        Symbol
+      }
+      QuoteToken {
+        Symbol
+      }
+      Interval {
+        Time {
+          Start
+        }
+      }
+      Volume {
+        Usd
+      }
+      Price {
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
     }
   }
 }
@@ -62,11 +105,11 @@ subscription {
 {
   Trading {
     Tokens(
-      limit: {count: 10}
-      orderBy: {descendingByField: "change"}
+      limit: { count: 10 }
+      orderBy: { descendingByField: "change" }
       where: {
-        Volume: {Usd: {gt: 100000}}
-        Interval: {Time: {Duration: {eq: 300}}}
+        Volume: { Usd: { gt: 100000 } }
+        Interval: { Time: { Duration: { eq: 300 } } }
       }
     ) {
       Token {
@@ -93,7 +136,7 @@ subscription {
       }
       Volume {
         Base
-        BaseQuotedInUsd
+        BaseAttributedToUsd
         Quote
         Usd
       }
@@ -133,11 +176,27 @@ subscription {
 subscription {
   Solana {
     DEXTrades {
-      Block { Time }
+      Block {
+        Time
+      }
       Trade {
-        Dex { ProtocolFamily ProtocolName }
-        Buy { Amount Currency { Symbol } PriceInUSD }
-        Sell { Amount Currency { Symbol } }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Buy {
+          Amount
+          Currency {
+            Symbol
+          }
+          PriceInUSD
+        }
+        Sell {
+          Amount
+          Currency {
+            Symbol
+          }
+        }
       }
     }
   }
@@ -157,14 +216,54 @@ subscription {
 subscription MyQuery {
   EVM(network: eth) {
     DEXTrades {
-      Block { Time Number }
-      Transaction { Hash }
-      Log { Index SmartContract Signature { Signature Name } }
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+      }
+      Log {
+        Index
+        SmartContract
+        Signature {
+          Signature
+          Name
+        }
+      }
       Trade {
         Sender
-        Buy { Buyer AmountInUSD Amount Seller PriceInUSD Price Currency { Name Symbol SmartContract } }
-        Dex { SmartContract ProtocolName ProtocolVersion }
-        Sell { Buyer AmountInUSD Amount Seller PriceInUSD Price Currency { Name Symbol SmartContract } }
+        Buy {
+          Buyer
+          AmountInUSD
+          Amount
+          Seller
+          PriceInUSD
+          Price
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+        Dex {
+          SmartContract
+          ProtocolName
+          ProtocolVersion
+        }
+        Sell {
+          Buyer
+          AmountInUSD
+          Amount
+          Seller
+          PriceInUSD
+          Price
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
       }
     }
   }
@@ -184,14 +283,48 @@ subscription MyQuery {
 subscription {
   EVM(network: bsc) {
     DEXTrades {
-      Block { Time Number }
-      Receipt { ContractAddress Status }
-      TransactionStatus { Success }
-      Log { Signature { Name } }
+      Block {
+        Time
+        Number
+      }
+      Receipt {
+        ContractAddress
+        Status
+      }
+      TransactionStatus {
+        Success
+      }
+      Log {
+        Signature {
+          Name
+        }
+      }
       Trade {
-        Dex { ProtocolName SmartContract OwnerAddress }
-        Buy { Amount PriceInUSD Price Currency { Name Symbol SmartContract } }
-        Sell { Amount PriceInUSD Price Currency { Name Symbol SmartContract } }
+        Dex {
+          ProtocolName
+          SmartContract
+          OwnerAddress
+        }
+        Buy {
+          Amount
+          PriceInUSD
+          Price
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+        Sell {
+          Amount
+          PriceInUSD
+          Price
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
       }
     }
   }
@@ -210,12 +343,34 @@ subscription {
 ```graphql
 subscription {
   EVM(network: eth) {
-    DEXTrades(where: {Trade: {Dex: {ProtocolName: {in: ["uniswap_v3","uniswap_v2","uniswap_v1"]}}}}) {
-      Block { Time }
+    DEXTrades(
+      where: {
+        Trade: {
+          Dex: {
+            ProtocolName: { in: ["uniswap_v3", "uniswap_v2", "uniswap_v1"] }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
       Trade {
-        Dex { ProtocolName }
-        Buy { Amount Currency { Symbol } }
-        Sell { Amount Currency { Symbol } }
+        Dex {
+          ProtocolName
+        }
+        Buy {
+          Amount
+          Currency {
+            Symbol
+          }
+        }
+        Sell {
+          Amount
+          Currency {
+            Symbol
+          }
+        }
       }
     }
   }
@@ -235,13 +390,34 @@ subscription {
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Currency: {Id: {is: "bid:bitcoin"}}, QuoteCurrency: {Id: {is: "usdt"}}}
+      where: {
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Currency: { Id: { is: "bid:bitcoin" } }
+        QuoteCurrency: { Id: { is: "usdt" } }
+      }
     ) {
-      Market { Name Network Address }
-      Token { Symbol }
-      QuoteToken { Symbol }
-      Volume { Usd }
-      Price { Ohlc { Open High Low Close } }
+      Market {
+        Name
+        Network
+        Address
+      }
+      Token {
+        Symbol
+      }
+      QuoteToken {
+        Symbol
+      }
+      Volume {
+        Usd
+      }
+      Price {
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
     }
   }
 }
@@ -308,6 +484,7 @@ subscription {
 }
 
 ```
+
 </details>
 
 ## Uniswap — Pairs OHLC (Seconds)
@@ -347,25 +524,75 @@ subscription {
 subscription {
   EVM(network: bsc) {
     Events(
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Log_Index}]
-      where: {Log: {Signature: {Name: {is: "Mint"}}}, Transaction: {To: {is: "0x46A15B0b27311cedF172AB29E4f4766fbE7F4364"}}}
+      orderBy: [
+        { descending: Block_Time }
+        { descending: Transaction_Index }
+        { descending: Log_Index }
+      ]
+      where: {
+        Log: { Signature: { Name: { is: "Mint" } } }
+        Transaction: {
+          To: { is: "0x46A15B0b27311cedF172AB29E4f4766fbE7F4364" }
+        }
+      }
     ) {
-      Block { Time Number Hash }
-      Receipt { ContractAddress }
-      Topics { Hash }
-      TransactionStatus { Success }
-      LogHeader { Address Index Data }
-      Transaction { Hash From To }
-      Log { EnterIndex ExitIndex Index LogAfterCallIndex Pc SmartContract Signature { Name Signature } }
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Topics {
+        Hash
+      }
+      TransactionStatus {
+        Success
+      }
+      LogHeader {
+        Address
+        Index
+        Data
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Log {
+        EnterIndex
+        ExitIndex
+        Index
+        LogAfterCallIndex
+        Pc
+        SmartContract
+        Signature {
+          Name
+          Signature
+        }
+      }
       Arguments {
         Name
         Value {
-          ... on EVM_ABI_Integer_Value_Arg { integer }
-          ... on EVM_ABI_Address_Value_Arg { address }
-          ... on EVM_ABI_String_Value_Arg { string }
-          ... on EVM_ABI_BigInt_Value_Arg { bigInteger }
-          ... on EVM_ABI_Bytes_Value_Arg { hex }
-          ... on EVM_ABI_Boolean_Value_Arg { bool }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
         }
       }
     }
@@ -386,25 +613,75 @@ subscription {
 subscription {
   EVM(network: bsc) {
     Events(
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Log_Index}]
-      where: {Log: {Signature: {Name: {is: "Burn"}}}, Transaction: {To: {is: "0x46A15B0b27311cedF172AB29E4f4766fbE7F4364"}}}
+      orderBy: [
+        { descending: Block_Time }
+        { descending: Transaction_Index }
+        { descending: Log_Index }
+      ]
+      where: {
+        Log: { Signature: { Name: { is: "Burn" } } }
+        Transaction: {
+          To: { is: "0x46A15B0b27311cedF172AB29E4f4766fbE7F4364" }
+        }
+      }
     ) {
-      Block { Time Number Hash }
-      Receipt { ContractAddress }
-      Topics { Hash }
-      TransactionStatus { Success }
-      LogHeader { Address Index Data }
-      Transaction { Hash From To }
-      Log { EnterIndex ExitIndex Index LogAfterCallIndex Pc SmartContract Signature { Name Signature } }
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Topics {
+        Hash
+      }
+      TransactionStatus {
+        Success
+      }
+      LogHeader {
+        Address
+        Index
+        Data
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Log {
+        EnterIndex
+        ExitIndex
+        Index
+        LogAfterCallIndex
+        Pc
+        SmartContract
+        Signature {
+          Name
+          Signature
+        }
+      }
       Arguments {
         Name
         Value {
-          ... on EVM_ABI_Integer_Value_Arg { integer }
-          ... on EVM_ABI_Address_Value_Arg { address }
-          ... on EVM_ABI_String_Value_Arg { string }
-          ... on EVM_ABI_BigInt_Value_Arg { bigInteger }
-          ... on EVM_ABI_Bytes_Value_Arg { hex }
-          ... on EVM_ABI_Boolean_Value_Arg { bool }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
         }
       }
     }
@@ -425,17 +702,44 @@ subscription {
 subscription {
   Solana {
     DEXPools(
-      where: { Pool: { Dex: { ProgramAddress: { is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8" } }, Base: { ChangeAmount: { gt: "0" } } } }
+      where: {
+        Pool: {
+          Dex: {
+            ProgramAddress: {
+              is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
+            }
+          }
+          Base: { ChangeAmount: { gt: "0" } }
+        }
+      }
     ) {
       Pool {
         Market {
           MarketAddress
-          BaseCurrency { MintAddress Symbol Name }
-          QuoteCurrency { MintAddress Symbol Name }
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
         }
-        Dex { ProtocolFamily ProtocolName }
-        Quote { PostAmount PriceInUSD PostAmountInUSD }
-        Base { ChangeAmount PostAmount }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+        Base {
+          ChangeAmount
+          PostAmount
+        }
       }
     }
   }
@@ -455,17 +759,44 @@ subscription {
 subscription {
   Solana {
     DEXPools(
-      where: { Pool: { Dex: { ProgramAddress: { is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8" } }, Base: { ChangeAmount: { lt: "0" } } } }
+      where: {
+        Pool: {
+          Dex: {
+            ProgramAddress: {
+              is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
+            }
+          }
+          Base: { ChangeAmount: { lt: "0" } }
+        }
+      }
     ) {
       Pool {
         Market {
           MarketAddress
-          BaseCurrency { MintAddress Symbol Name }
-          QuoteCurrency { MintAddress Symbol Name }
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
         }
-        Dex { ProtocolFamily ProtocolName }
-        Quote { PostAmount PriceInUSD PostAmountInUSD }
-        Base { ChangeAmount PostAmount }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+        Base {
+          ChangeAmount
+          PostAmount
+        }
       }
     }
   }
@@ -485,17 +816,44 @@ subscription {
 subscription {
   Solana {
     DEXPools(
-      where: { Pool: { Dex: { ProgramAddress: { is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc" } }, Base: { ChangeAmount: { gt: "0" } } } }
+      where: {
+        Pool: {
+          Dex: {
+            ProgramAddress: {
+              is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"
+            }
+          }
+          Base: { ChangeAmount: { gt: "0" } }
+        }
+      }
     ) {
       Pool {
         Market {
           MarketAddress
-          BaseCurrency { MintAddress Symbol Name }
-          QuoteCurrency { MintAddress Symbol Name }
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
         }
-        Dex { ProtocolFamily ProtocolName }
-        Quote { PostAmount PriceInUSD PostAmountInUSD }
-        Base { ChangeAmount PostAmount }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+        Base {
+          ChangeAmount
+          PostAmount
+        }
       }
     }
   }
@@ -515,17 +873,44 @@ subscription {
 subscription {
   Solana {
     DEXPools(
-      where: { Pool: { Dex: { ProgramAddress: { is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc" } }, Base: { ChangeAmount: { lt: "0" } } } }
+      where: {
+        Pool: {
+          Dex: {
+            ProgramAddress: {
+              is: "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"
+            }
+          }
+          Base: { ChangeAmount: { lt: "0" } }
+        }
+      }
     ) {
       Pool {
         Market {
           MarketAddress
-          BaseCurrency { MintAddress Symbol Name }
-          QuoteCurrency { MintAddress Symbol Name }
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
         }
-        Dex { ProtocolFamily ProtocolName }
-        Quote { PostAmount PriceInUSD PostAmountInUSD }
-        Base { ChangeAmount PostAmount }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Quote {
+          PostAmount
+          PriceInUSD
+          PostAmountInUSD
+        }
+        Base {
+          ChangeAmount
+          PostAmount
+        }
       }
     }
   }
@@ -569,6 +954,7 @@ subscription {
 }
 
 ```
+
 </details>
 
 ## Uniswap (EVM) — Track addLiquidityETH Calls
@@ -582,25 +968,69 @@ subscription {
 query MyQuery {
   EVM(dataset: archive, network: eth) {
     Calls(
-      where: {Transaction: {Hash: {is: "0x60ce9acd0053f20092e7871868afe5187c95ff6d7750ad65a8d4ff99a052c357"}}, Call: {Signature: {Name: {is: "addLiquidityETH"}}}, Arguments: {length: {eq: 6}, includes: [{Index: {eq: 0}, Value: {Address: {is: "0x9cbc0be914e480beee4014e190fdbfc48ed5a4a8"}}}, {Index: {eq: 3}, Value: {BigInteger: {ge: "1000000000000000000"}}}, {Index: {eq: 5}, Value: {BigInteger: {ge: "1690878863"}}}]}}
-      limit: {count: 10}
+      where: {
+        Transaction: {
+          Hash: {
+            is: "0x60ce9acd0053f20092e7871868afe5187c95ff6d7750ad65a8d4ff99a052c357"
+          }
+        }
+        Call: { Signature: { Name: { is: "addLiquidityETH" } } }
+        Arguments: {
+          length: { eq: 6 }
+          includes: [
+            {
+              Index: { eq: 0 }
+              Value: {
+                Address: { is: "0x9cbc0be914e480beee4014e190fdbfc48ed5a4a8" }
+              }
+            }
+            {
+              Index: { eq: 3 }
+              Value: { BigInteger: { ge: "1000000000000000000" } }
+            }
+            { Index: { eq: 5 }, Value: { BigInteger: { ge: "1690878863" } } }
+          ]
+        }
+      }
+      limit: { count: 10 }
     ) {
       Arguments {
         Index
         Name
         Type
-        Path { Name Index Type }
+        Path {
+          Name
+          Index
+          Type
+        }
         Name
         Value {
-          ... on EVM_ABI_Bytes_Value_Arg { hex }
-          ... on EVM_ABI_BigInt_Value_Arg { bigInteger }
-          ... on EVM_ABI_Integer_Value_Arg { integer }
-          ... on EVM_ABI_String_Value_Arg { string }
-          ... on EVM_ABI_Address_Value_Arg { address }
-          ... on EVM_ABI_Boolean_Value_Arg { bool }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
         }
       }
-      Call { Signature { Name Signature } }
+      Call {
+        Signature {
+          Name
+          Signature
+        }
+      }
     }
   }
 }

@@ -21,6 +21,8 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 ### Latest Price of Any Token
 
+This query gives you bitcoin currency 1-sec OHLC across different blockchains. You can adjust duration in `Duration: {eq: 1}` filter.
+
 ▶️ [Latest Price of Token Across Chains](https://ide.bitquery.io/Latest-bitcoin-price-on-across-chains)
 
 ### Crypto Price Change API
@@ -29,6 +31,61 @@ This query gives you change in price ( Close-Open) of all tokens on Ethereum, BN
 You can adjust duration in `Duration: {eq: 300}` filter.
 
 ▶️ [Crypto Price Change API](https://ide.bitquery.io/5-minute-price-change-api)
+
+### OHLC of a currency on multiple blockchains
+
+This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in this eg Bitcoin; it will include all sorts of currencies whose underlying asset is Bitcoin like cbBTC, WBTC, etc) across all supported blockchains, aggregated into a given time interval (e.g., 60 seconds in this example).
+
+▶️ [OHLC of a currency on multiple blockchains](https://ide.bitquery.io/OHLC-of-a-currency-on-multiple-blockchains)
+
+### Real-Time Token Prices in USD on Solana
+
+Stream live OHLC (Open, High, Low, Close) price and volume data for all tokens on Solana, quoted directly in USD. Useful for dashboards, analytics, or bots that need stable fiat-based prices.
+
+▶️ [Real-Time Token Prices in USD on Solana](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain)
+
+### Real-Time Token Prices in Quote Pair (USDC, USDT, etc.)
+
+Stream live OHLC prices for Solana tokens denominated in their trading pair token (e.g., USDC, USDT, or another crypto), instead of direct USD. Great for analyzing token behavior relative to stablecoins or other assets.
+
+▶️ [Real-Time Token Prices in Quote pair](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain-in-paired-token)
+
+### OHLC of a Token Pair Across Chains
+
+This subscription fetches real-time OHLC (Open, High, Low, Close) price data for a token pair across different blockchains.  
+For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ETH).
+
+▶️ [OHLC of a Token Pair Across Chains](https://ide.bitquery.io/Token-OHLC-Stream-1-second-Multi-Chains_1)
+
+### Find Price Arbitrage Opportunity of Pair Across Chains
+
+Compare token prices (e.g., BTC/USDT) across multiple markets and chains to identify arbitrage opportunities. Returns one latest price per market.
+
+▶️ [Find Price Arbitrage Opportunity of Pair Across Chains](https://ide.bitquery.io/Find-arbitrage-opportunity-with-same-token-across-chains_1)
+
+### PumpAMM 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders
+
+Real-time (1-second interval) price, OHLC, volume, and moving averages for Pump.fun AMM tokens on Solana. Useful for high-frequency trading bots.
+
+▶️ [PumpAMM 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders](https://ide.bitquery.io/PumpAMM-tokens-1-second-price-stream-with-OHLC_1)
+
+### Raydium Launchlab 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders
+
+Monitor Raydium Launchlab token listings on Solana with 1-second OHLC and volume streams. Perfect for tracking new token launches.
+
+▶️ [Raydium Launchlab 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders](https://ide.bitquery.io/Raydium-Launchpad-DEX-tokens-1-second-price-stream-with-OHLC)
+
+### Uniswap v3 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders
+
+1-second OHLC and volume stream for tokens traded on Uniswap v3 (Ethereum). Great for bot trading strategies.
+
+▶️ [Uniswap v3 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
+
+### FourMeme 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders
+
+Track token activity (OHLC, price, volume) every 1 second on FourMeme DEX (BSC).
+
+▶️ [FourMeme 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders](https://ide.bitquery.io/FourMeme-DEX-tokens-1-second-price-stream-with-OHLC)
 
 ## Solana Trade API
 

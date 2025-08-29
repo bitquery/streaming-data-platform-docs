@@ -41,7 +41,7 @@ The OHLC values (Open, High, Low, Close) are determined across all chains and to
       }
       Volume {
         Base
-        BaseQuotedInUsd
+        BaseAttributedToUsd
         Quote
         Usd
       }

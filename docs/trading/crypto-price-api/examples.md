@@ -1,5 +1,253 @@
 # Quick Start Examples
 
+## Real-Time Token Prices in USD on Solana
+
+Stream live OHLC (Open, High, Low, Close) price and volume data for all tokens on Solana, quoted directly in USD. Useful for dashboards, analytics, or bots that need stable fiat-based prices.
+
+Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them denominated in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
+
+[Run Stream ➤](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain)
+
+```
+subscription {
+  Trading {
+    Pairs(
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}}}
+    ) {
+      Token {
+        Name
+        Symbol
+        Address
+      }
+      Market {
+        Protocol
+        Program
+        Network
+        Name
+        Address
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Price {
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+      }
+    }
+  }
+}
+```
+
+## Real-Time Token Prices in Quote Pair (USDC, USDT, etc.)
+
+Stream live OHLC prices for Solana tokens denominated in their trading pair token (e.g., USDC, USDT, or another crypto), instead of direct USD. Great for analyzing token behavior relative to stablecoins or other assets.
+
+Here we have selected the filter `Price: {IsQuotedInUsd: false}`, this means that any price values such as OHLC or Average indicators will be in quote currency. If you want them denominated in USD, change the filter to `Price: {IsQuotedInUsd: true}`.
+
+[Run Stream ➤](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain-in-paired-token)
+
+```
+subscription {
+  Trading {
+    Pairs(
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: false}, Market: {Network: {is: "Solana"}}}
+    ) {
+      Token {
+        Name
+        Symbol
+        Address
+      }
+      QuoteToken {
+        Name
+        Symbol
+        Address
+      }
+      Market {
+        Protocol
+        Program
+        Network
+        Name
+        Address
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Price {
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+      }
+    }
+  }
+}
+```
+
+## Real-Time Token Prices Against SOL/WSOL
+
+Stream real-time OHLC and volume data for Solana tokens specifically paired against SOL or WSOL. Useful when building apps or bots that want token values expressed relative to Solana’s native currency.
+
+Here we have selected the filter `Price: {IsQuotedInUsd: false}`, this means that any price values such as OHLC or Average indicators will be in quote currency. If you want them denominated in USD, change the filter to `Price: {IsQuotedInUsd: true}`.
+
+[Run Stream ➤](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain-against-WSOLSOL)
+
+```
+subscription {
+  Trading {
+    Pairs(
+      where: {Interval: {Time: {Duration: {eq: 1}}},
+        Price: {IsQuotedInUsd: false},
+        QuoteToken:{
+          Address:{
+            in:["So11111111111111111111111111111111111111112"
+            ,"11111111111111111111111111111111"
+            ]
+          }
+        }
+        Market: {Network: {is: "Solana"}}}
+    ) {
+      Token {
+        Name
+        Symbol
+        Address
+      }
+      QuoteToken {
+        Name
+        Symbol
+        Address
+      }
+      Market {
+        Protocol
+        Program
+        Network
+        Name
+        Address
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Price {
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+      }
+    }
+  }
+}
+```
+
+## OHLC of a currency on multiple blockchains
+
+This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in this eg Bitcoin; it will include all sorts of currencies whose underlying asset is Bitcoin like cbBTC, WBTC, etc) across all supported blockchains, aggregated into a given time interval (e.g., 60 seconds in this example).
+
+[Run Stream ➤](https://ide.bitquery.io/OHLC-of-a-currency-on-multiple-blockchains)
+
+```
+{
+  Trading {
+    Currencies(
+      where: {
+        Currency: { Id: { is: "bid:bitcoin" } },
+        Interval: { Time: { Duration: { eq: 60 } } }
+      },
+      limit: { count: 1 },
+      orderBy: { descending: Block_Time }
+    ) {
+      Currency {
+        Id
+        Name
+        Symbol
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Base
+        BaseAttributedToUsd
+        Quote
+        Usd
+      }
+      Price {
+        IsQuotedInUsd #The price is shown in USD (`IsQuotedInUsd: true` by default).
+        Ohlc {
+          Open    # Earliest price across chains in the interval
+          High    # Highest price across chains in the interval
+          Low     # Lowest price across chains in the interval
+          Close   # Latest price across chains in the interval
+        }
+        Average {
+          Estimate
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+      }
+    }
+  }
+}
+```
+
 ## OHLC Stream on a Chain
 
 Mention the chain/network using the `Token: {Network}` filter.  
@@ -359,7 +607,7 @@ subscription{
 
 Stream Bitcoin price data (USD OHLC) with a focus on volume-based intervals, useful for detecting price action tied to trading activity rather than fixed time windows.
 
-Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
+Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them denominated in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
 [Run Stream ➤](https://ide.bitquery.io/5-minute-price-change-api-on-solana_5)
 

@@ -55,7 +55,7 @@ The Pairs cube provides trading data for a base token traded against a quote tok
   Total amount of quote token traded.
 - `Volume.Usd`:  
   Total trade volume converted into USD, using known quote token prices (if available).
-- `Volume.BaseQuotedInUsd`:  
+- `Volume.BaseAttributedToUsd`:  
   Portion of the `Volume.Base` that was traded against quote tokens with known USD prices. Used to accurately calculate average USD price.
 - `Price.Ohlc.*`:  
   OHLC candles (Open, High, Low, Close) for the interval, computed using only trades with known USD values.
@@ -66,7 +66,7 @@ A rough pseudo-code of how price is calculated:
 
 ```
 if quoteInUsd {
-  vol.AveragePrice.Price = vol.AveragePrice.Usd / vol.AveragePrice.BaseQuotedInUsd
+  vol.AveragePrice.Price = vol.AveragePrice.Usd / vol.AveragePrice.BaseAttributedToUsd
 } else {
   vol.AveragePrice.Price = vol.AveragePrice.Quote / vol.AveragePrice.Base
 }
