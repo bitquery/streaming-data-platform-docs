@@ -10,94 +10,116 @@ keywords:
   - EVM API
 ---
 
-# Ethereum API Documentation
+This page is your hub for Ethereum on‑chain analytics—transactions, token balances and holders, DEX trades/liquidity, blocks, events, fees, mempool, and NFTs—available via GraphQL APIs and real‑time streams.
 
-Bitquery's provides Ethereum historical (since genesis) and real-time data via graphQL APIs, streams, Kafka and cloud solutions like AWS, GCP and Snowflake.
+Need help crafting a query or subscription? Message us on [support](https://t.me/Bloxy_info).
 
-This section contains Ethereum API/Streams examples and guides, organized into categories for easier navigation. This is not exhaustive, we will add more examples as users request different scenarios. If you need help writing any API/Stream, please reach out to us on [our telegram channel](https://t.me/Bloxy_info).
+## What is the Bitquery Ethereum API?
 
-## Quick Start
+It’s a GraphQL interface over curated, indexed Ethereum data. Write concise queries instead of building and maintaining your own indexer.
 
-New to Bitquery? Get up and running in minutes:
+## What can you build with it?
 
-- **[Your First Query](https://docs.bitquery.io/docs/start/first-query)** - Learn how to create and run your first GraphQL query
-- **[Getting Updates with Subscriptions](https://docs.bitquery.io/docs/start/getting-updates)** - Subscribe to real-time Ethereum data streams
-- **[Starter Queries](https://docs.bitquery.io/docs/start/starter-queries)** - Ready-to-use example queries for common use cases
-- **[Starter Subscriptions](https://docs.bitquery.io/docs/start/starter-subscriptions)** - Popular real-time data streams to get you started
+Track wallet portfolios and token holders, monitor DEX price/volume and liquidity events, analyze gas and fees, stream mempool activity, compute KPIs over blocks/transactions, and power dashboards or trading systems with real‑time data.
 
-## Blocks
+## How is it different from raw Ethereum RPC?
 
-- [Blocks API](https://docs.bitquery.io/docs/examples/blocks/blocks-api)
+**Ethereum RPC**
 
-## Balances
+- Low‑level JSON‑RPC that returns raw node data
+- No historical indexing, joins, or analytics out of the box
+- Best for transaction submission and node-level introspection
 
-- [Balance API](https://docs.bitquery.io/docs/examples/balances/balance-api)
-- [Token Holder API](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api)
+**Bitquery Ethereum API**
 
-## Calls
+- Pre‑indexed, enriched datasets exposed via GraphQL
+- Powerful filtering, joins, aggregations, and subscriptions
+- Ideal for analytics, monitoring, dashboards, and backtesting without running infra
 
-- [Smart Contract](https://docs.bitquery.io/docs/examples/calls/smartcontract)
-- [Smart Contract Filter By](https://docs.bitquery.io/docs/examples/calls/smartcontract-filterby)
-- [Contract Creation](https://docs.bitquery.io/docs/examples/calls/contract-creation)
+## WebSockets and Webhooks
 
-## Events
-
-- [Events API](https://docs.bitquery.io/docs/examples/events/events-api)
-
-## Fees
-
-- [Fees API](https://docs.bitquery.io/docs/examples/fees/fees-api)
-
-## Mempool
-
-- [Mempool API](https://docs.bitquery.io/docs/examples/mempool/mempool-api)
-
-## Transfers
-
-- [Total Supply](https://docs.bitquery.io/docs/examples/transfers/total-supply)
-- [ERC20 Token Transfer API](https://docs.bitquery.io/docs/examples/transfers/erc20-token-transfer-api)
-- [RWA API](https://docs.bitquery.io/docs/examples/transfers/rwa-api)
-
-## Transactions
-
-- [Transaction API](https://docs.bitquery.io/docs/examples/transactions/transaction-api)
+Most queries can be turned into live streams by switching `query` to `subscription`, and consumed over WebSocket. See examples and code snippets [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
 
 ## DEX Trades
 
-- [DEX API](https://docs.bitquery.io/docs/examples/dextrades/dex-api)
-- [Token Trades APIs](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis)
-- [Trades of an Address API](https://docs.bitquery.io/docs/examples/dextrades/trades-of-an-address-api)
-- [Pair Creation Time](https://docs.bitquery.io/docs/examples/dextrades/pair-creation-time)
-- [Crypto Coin Ticker](https://docs.bitquery.io/docs/examples/dextrades/crypto-coin-ticker)
-- [Uniswap API](https://docs.bitquery.io/docs/examples/dextrades/uniswap-api)
-- [Pancakeswap API](https://docs.bitquery.io/docs/examples/dextrades/pancakeswap-api)
-- [DEXScreener (EVM)](https://docs.bitquery.io/docs/examples/dextrades/DEXScreener/evm_dexscreener)
-- [BullX API (EVM)](https://docs.bitquery.io/docs/examples/dextrades/evm-bullx-api)
-- [GMGN API (EVM)](https://docs.bitquery.io/docs/examples/dextrades/evm-gmgn-api)
-- [Photon API (EVM)](https://docs.bitquery.io/docs/examples/dextrades/evm-photon-api)
-- [Pools API](https://docs.bitquery.io/docs/examples/dextrades/pools-api)
+- [DEX API](../dextrades/dex-api)
+- [Token Trades APIs](../dextrades/token-trades-apis)
+- [Trades of an Address API](../dextrades/trades-of-an-address-api)
+- [Uniswap API](../dextrades/uniswap-api)
+- [Pancakeswap API](../dextrades/pancakeswap-api)
+- [DEXScreener (EVM)](../dextrades/DEXScreener/evm_dexscreener)
+
+Query and subscribe to on‑chain swaps, OHLCV, liquidity events, pools, and per‑wallet trading activity across major EVM DEXes.
+
+## Token Holders
+
+- [Token Holder API](../token-holders/token-holder-api)
+
+Identify top holders, concentration, new/active holders, and changes over time.
+
+## Transactions
+
+- [Transaction API](../transactions/transaction-api)
+
+Inspect transaction metadata, status, value flows, method signatures, and more.
+
+## Transfers
+
+- [ERC20 Token Transfer API](../transfers/erc20-token-transfer-api)
+- [Total Supply](../transfers/total-supply)
+
+Follow ERC‑20 token flows and compute supply‑side metrics.
+
+## Blocks
+
+- [Blocks API](../blocks/blocks-api)
+
+Build time‑series metrics from block headers, miner/validator stats, and base fee changes.
+
+## Balances
+
+- [Balance API](../balances/balance-api)
+
+Get real‑time and historical balances for addresses and tokens.
+
+## Events
+
+- [Events API](../events/events-api)
+
+Query decoded contract logs with precise filtering on topics and parameters.
+
+## Fees
+
+- [Fees API](../fees/fees-api)
+
+Analyze gas usage, base fee dynamics, and transaction cost distributions.
+
+## Mempool
+
+- [Mempool API](../mempool/mempool-api)
+
+Monitor pending transactions to react before inclusion.
 
 ## NFT
 
-- [NFT API](https://docs.bitquery.io/docs/examples/nft/nft-api)
-- [NFT Blur Marketplace API](https://docs.bitquery.io/docs/examples/nft/nft-blur-marketplace-api)
-- [NFT Calls API](https://docs.bitquery.io/docs/examples/nft/nft-calls-apI)
-- [NFT Collection API](https://docs.bitquery.io/docs/examples/nft/nft-collection-api)
-- [NFT Metadata API](https://docs.bitquery.io/docs/examples/nft/nft-metadata-api)
-- [NFT Ownership API](https://docs.bitquery.io/docs/examples/nft/nft-ownership-api)
-- [NFT Trades API](https://docs.bitquery.io/docs/examples/nft/nft-trades-apI)
-- [NFT Transfer API](https://docs.bitquery.io/docs/examples/nft/nft-transfer-api)
+- [NFT API](../nft/nft-api)
 
-## Ethers Library
+Fetch collections, ownership, transfers, trades, and metadata.
 
-- [debug_traceCall](https://docs.bitquery.io/docs/examples/ethers-library/debug_traceCall)
-- [debug_traceTransaction](https://docs.bitquery.io/docs/examples/ethers-library/debug_traceTransaction)
-- [eth_getBalance](https://docs.bitquery.io/docs/examples/ethers-library/eth-getbalance)
-- [eth_blockNumber](https://docs.bitquery.io/docs/examples/ethers-library/eth_blockNumber)
-- [eth_gasPrice](https://docs.bitquery.io/docs/examples/ethers-library/eth_gasPrice)
-- [eth_getBlockReceipts](https://docs.bitquery.io/docs/examples/ethers-library/eth_getBlockReceipts)
-- [eth_getCode](https://docs.bitquery.io/docs/examples/ethers-library/eth_getCode)
-- [eth_getLogs](https://docs.bitquery.io/docs/examples/ethers-library/eth_getLogs)
-- [eth_getTransactionByHash](https://docs.bitquery.io/docs/examples/ethers-library/eth_getTransactionByHash)
-- [eth_getTransactionReceipt](https://docs.bitquery.io/docs/examples/ethers-library/eth_getTransactionReceipt)
-- [eth_subscribe](https://docs.bitquery.io/docs/examples/ethers-library/eth_subscribe)
+## Videos
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+### DEX Trades on EVM (Uniswap, Aggregators, Screens)
+
+<VideoPlayer url="https://youtu.be/xcW_Na7YwSk" />
+
+<VideoPlayer url="https://www.youtube.com/watch?v=K_H3to_nIdY" />
+
+<VideoPlayer url="https://www.youtube.com/watch?v=sdQxnuRftaw" />
+
+<VideoPlayer url="https://www.youtube.com/watch?v=xw8eezkFejI" />
+
+### Ethereum Price & Balances
+
+<VideoPlayer url="https://youtu.be/qsg86xlfnhM" />
