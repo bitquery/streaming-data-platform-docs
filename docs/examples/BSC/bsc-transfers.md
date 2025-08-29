@@ -95,6 +95,42 @@ subscription {
 
 ```
 
+## Transactions From/To An Address with Transfer Details
+
+[Run Query](https://ide.bitquery.io/Sender-OR-Receiver-Transfer-Example-BSC)
+
+```
+query MyQuery {
+  EVM(dataset: archive, network: bsc) {
+    Transfers(
+      where: {any: [{Transaction: {From: {is: "0x2b9dfb290ad7b54a5b86da25c3a629bfc7152167"}}}, {Transaction: {To: {is: "0x2b9dfb290ad7b54a5b86da25c3a629bfc7152167"}}}], Transfer: {}, Block: {Date: {since: "2025-08-10", till: "2025-08-29"}}}
+      limit: {count: 10000}
+      orderBy: {descending: Block_Time}
+    ) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender
+        Receiver
+        Currency {
+          Symbol
+          Name
+        }
+        Index
+      }
+      Transaction {
+        Hash
+      }
+      Block {
+        Number
+        Time
+      }
+    }
+  }
+}
+
+```
+
 ## Subscribe to the latest NFT token transfers on BSC
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on BSC network. You can run the query [here](https://ide.bitquery.io/Track-realtime-NFT-Transfers-on-BSC-chain)
