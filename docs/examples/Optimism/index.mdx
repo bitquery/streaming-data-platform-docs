@@ -11,10 +11,12 @@ keywords:
   - Optimism wallet transaction monitoring api
   - Optimism api docs
   - Optimism websocket api
+  - Optimism streams
   - Optimism blockchain api
   - Optimism token api
   - Optimism transaction api
   - Optimism DEX API
+  - Optimism uniswap trades
 ---
 
 # Optimism API Documentation
@@ -23,7 +25,7 @@ keywords:
 
 In this section we will see how to fetch data on different tokens, transactions, and DEXs on Optimism via APIs and Streams.
 
-If you need help getting data on Optimism, reach out to [support](https://t.me/Bloxy_info).
+**[Create your account](https://account.bitquery.io/auth/signup)** to get started. If you need help getting data on Optimism, reach out to [support](https://t.me/Bloxy_info).
 
 ### What is Optimism API?
 
@@ -41,13 +43,15 @@ Bitquery Optimism APIs are very flexible, you can fetch trade, transaction, and 
 | No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions                                           |
 | Ideal for submitting transactions                                                | Great for real-time data and historical backtesting without running your own indexer                     |
 
+To access Bitquery Tron API you would require your own **[Access Token](https://account.bitquery.io/user/api_v2/access_tokens)** after signup.
+
 ### Does Bitquery support Optimism Websocket and Webhooks?
 
 Bitquery supports websocket and webhooks; you can convert most GraphQL APIs into GraphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More docs and code samples are available [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
 
 ## Quick start
 
-Run this minimal GraphQL query to fetch the latest 5 DEX trades on Optimism:
+Run this minimal GraphQL query on **[GraphQL IDE](http://ide.bitquery.io)** after signing up, to fetch the latest 5 DEX trades on Optimism:
 
 ```graphql
 query LatestOptimismTrades {
@@ -87,9 +91,10 @@ query LatestOptimismTrades {
 
 ## Core Optimism APIs
 
+- [Balance Updates](https://docs.bitquery.io/docs/examples/Optimism/optimism-balance-updates/)
+- [NFT](http://localhost:3000/docs/examples/Optimism/optimism-nft/)
 - [Transactions](https://docs.bitquery.io/docs/examples/Optimism/Optimism-transactions-api/)
 - [Transfers](https://docs.bitquery.io/docs/examples/Optimism/optimism-transfers/)
-- [Balance Updates](https://docs.bitquery.io/docs/examples/Optimism/optimism-balance-updates/)
 
 ## Videos
 
