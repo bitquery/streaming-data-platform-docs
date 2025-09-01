@@ -14,13 +14,14 @@ const sidebars = {
         description: "Learn how to get started with the platform",
       },
       items: [
-        "start/embed",
-        "start/errors",
+        "start/learning-path",
         "start/first-query",
-        "start/getting-updates",
-        "start/mempool",
         "start/starter-queries",
         "start/starter-subscriptions",
+        "start/embed",
+        "start/errors",
+        "start/getting-updates",
+        "start/mempool",
       ],
     },
 
