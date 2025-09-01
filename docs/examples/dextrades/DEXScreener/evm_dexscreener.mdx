@@ -4,7 +4,30 @@ sidebar_position: 1
 
 # DEXScreener EVM API
 
-This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair and many more just like how DEXScreener shows for EVM Chains.
+Everything you see on the DEXScreener EVM dashboard—live pairs, trades, prices, volumes, makers/buyers/sellers, and more—can be accessed via APIs/Streams with Bitquery.
+We expose the same on-chain data via GraphQL APIs, real-time WebSocket streams, and enterprise Kafka topics, with optional cloud connectors (AWS, GCP, Snowflake) for analytics pipelines.
+
+Checkout our [DEXScreener Solana API documentation](https://docs.bitquery.io/docs/examples/dextrades/DEXScreener/solana_dexscreener/) if you are interested in getting Solana data which DEXScreener shows.
+
+:::note
+DEXScreener EVM APIs include data apis for EVM chains like Ethereum, Binance Smart Chain(BSC), Arbitrum, Base, Matic, Optimism, etc
+:::
+
+## Bitquery EVM Data Access Options
+
+- **GraphQL APIs**: Query historical and real-time EVM data with flexible filtering and aggregation
+- **Real-time Streams**: Subscribe to live EVM blockchain events via WebSocket subscriptions
+- **Cloud Solutions**: Access EVM data through AWS, GCP, and Snowflake integrations
+- **Kafka Streams**: High-throughput data streaming for enterprise applications
+
+## Getting Started with EVM
+
+- **[EVM API Examples](https://docs.bitquery.io/docs/examples/Ethereum/)** - Complete collection of EVM API examples
+- **[EVM DEX Trades](https://docs.bitquery.io/docs/category/dex-trades/)** - Real-time DEX trading data and analytics
+- **[EVM Subscriptions](https://docs.bitquery.io/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
+- **[IDE for EVM](https://graphql.bitquery.io/ide)** - Interactive development environment for testing EVM queries
+
+This guide shows how to retrieve the same EVM DEX data that DEXScreener displays—real-time trades, pair stats, volumes, buyers/sellers, and more—using Bitquery APIs, streams, and Kafka.
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 

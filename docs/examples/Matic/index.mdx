@@ -18,45 +18,59 @@ keywords:
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-# Polygon (MATIC) API Documentation
+Discover everything you need to build powerful Polygon (MATIC) applications—from real-time DEX trading analytics and token holder insights to NFT tracking and transaction monitoring. This comprehensive guide provides ready-to-use GraphQL APIs, live streaming data, and step-by-step examples for tracking swaps, balances, transfers, and more across the Polygon ecosystem. Whether you're building trading bots, dashboards, or DeFi analytics tools, find all the Polygon data solutions you need right here.
 
-In this section we will see how to fetch data on different tokens, transactions, DEXs via APIs and Streams.
+Need help crafting a query or subscription? Message us on [support](https://t.me/Bloxy_info).
 
-If you need help getting data on Polygon (MATIC),reach out to [support](https://t.me/Bloxy_info).
+## What is the Bitquery Polygon (MATIC) API?
 
-## What is Polygon (MATIC) API?
+It's a GraphQL interface over curated, indexed Polygon (MATIC) data. Write concise queries instead of building and maintaining your own indexer.
 
-Bitquery Polygon (MATIC) APIs help you fetch onchain data by writing a graphQL query.
+## What can you build with it?
 
-## What are capabilities of Bitquery Polygon (MATIC) API?
+Track wallet portfolios and token holders, monitor DEX price/volume and liquidity events, analyze gas and fees, stream mempool activity, compute KPIs over blocks/transactions, and power dashboards or trading systems with real‑time data.
 
-Bitquery Polygon (MATIC) APIs are very flexible, you can fetch trade, transaction, balance information for a period, for a specific wallet and join with other information.
+## How is it different from raw Polygon (MATIC) RPC?
 
-## Difference between Polygon (MATIC) RPC and Bitquery Polygon (MATIC) API?
+| Feature             | Polygon (MATIC) RPC              | Bitquery Polygon (MATIC) API           |
+| ------------------- | -------------------------------- | -------------------------------------- |
+| **Data Format**     | Raw JSON-RPC responses           | Pre-indexed, enriched GraphQL          |
+| **Historical Data** | No built-in history              | Full historical data since genesis     |
+| **Analytics**       | Manual aggregation required      | Built-in joins, aggregations, and KPIs |
+| **Real-time**       | Basic subscription support       | Rich streaming with filtering          |
+| **Use Case**        | Transaction submission, node ops | Analytics, monitoring, dashboards      |
+| **Infrastructure**  | Run your own nodes               | Fully managed, auto-scaling            |
 
-**Polygon (MATIC) RPC**
+## WebSockets and Webhooks
 
-- JSON-RPC endpoint exposing raw on-chain state & transactions
-- No built-in history or analytics—any indexing/aggregation you build or outsource
-- Ideal for submitting transactions
+Most queries can be turned into live streams by switching `query` to `subscription`, and consumed over WebSocket. See examples and code snippets [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
 
-**Bitquery Polygon (MATIC) API**
-
-- GraphQL endpoint over pre-indexed, parsed Polygon (MATIC) data (token transfers, DEX trades, NFTs, etc.)
-- Historical data, joins, aggregations & real-time subscriptions
-- Great for real-time data and historical backtesting without running your own indexer
-
-## Does Bitquery support Polygon (MATIC) Websocket and Polygon (MATIC) Webhooks?
-
-Bitquery supports websocket and webhooks, you can convert most of the graphQL APIs into graphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More and [code samples available here](https://docs.bitquery.io/docs/subscriptions/websockets/).
-
-## Polygon (MATIC) APIs
+## DEX Trades
 
 - [Polygon (MATIC) Dex Trades](./matic-dextrades)
-- [Polygon (MATIC) NFT API](./matic-nft)
-- [Polygon (MATIC) Balance Updates API](./matic-balance-updates)
-- [Polygon (MATIC) Transfers API](./matic-transfers)
 - [Polygon (MATIC) Uniswap API](./matic-uniswap-api)
+
+Query and subscribe to on‑chain swaps, OHLCV, liquidity events, pools, and per‑wallet trading activity across major Polygon DEXes.
+
+## Transfers
+
+- [Polygon (MATIC) Transfers API](./matic-transfers)
+
+Follow ERC‑20 token flows and compute supply‑side metrics on Polygon.
+
+## Balances
+
+- [Polygon (MATIC) Balance Updates API](./matic-balance-updates)
+
+Get real‑time and historical balances for addresses and tokens on Polygon.
+
+## NFT
+
+- [Polygon (MATIC) NFT API](./matic-nft)
+
+Fetch collections, ownership, transfers, trades, and metadata on Polygon.
+
+## Videos
 
 ### Polygon (MATIC) API | How to Get Real-time & Historical Matic (Polygon) Data
 

@@ -18,59 +18,42 @@ keywords:
   - Arbitrum DEX API
 ---
 
-# Arbitrum API Documentation
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
-## Overview
+Unlock the full potential of Arbitrum with comprehensive blockchain data—from GMX perpetual trading analytics and DEX swaps to cross-chain bridge monitoring and smart contract interactions. This complete guide delivers production-ready GraphQL APIs, real-time streaming data, and practical examples for tracking trades, balances, events, and more across the Arbitrum ecosystem. Whether you're building DeFi dashboards, trading algorithms, or cross-chain applications, discover all the Arbitrum data solutions you need here.
 
-In this section we will see how to fetch data on different tokens, transactions, and DEXs like GMX on Arbitrum via APIs and Streams.
+Need help crafting a query or subscription? Message us on [support](https://t.me/Bloxy_info).
 
-If you need help getting data on Arbitrum, reach out to [support](https://t.me/Bloxy_info).
+## What is the Bitquery Arbitrum API?
 
-### What is Arbitrum API?
+It's a GraphQL interface over curated, indexed Arbitrum data. Write powerful queries instead of building and maintaining your own indexer for the fastest L2 solution.
 
-Bitquery Arbitrum APIs help you fetch onchain data like trades, transactions, balances, token holders etc using graphQL query.
+## What can you build with it?
 
-### What are capabilities of Bitquery Arbitrum API?
+Track GMX perpetual positions, monitor DEX liquidity and trading volumes, analyze cross-chain bridge flows, stream smart contract events, compute trading KPIs, and power real-time dashboards for the most active L2 ecosystem.
 
-Bitquery Arbitrum APIs are very flexible, you can fetch trade, transaction, and balance information for a period, for a specific wallet, and join with other information.
+## How is it different from raw Arbitrum RPC?
 
-### Difference between Arbitrum RPC and Bitquery Arbitrum API?
+| Feature             | Arbitrum RPC                     | Bitquery Arbitrum API          |
+| ------------------- | -------------------------------- | ------------------------------ |
+| **Data Format**     | Raw JSON-RPC responses           | Pre-indexed, enriched GraphQL  |
+| **Historical Data** | No built-in history              | Full historical data since L2  |
+| **Analytics**       | Manual aggregation required      | Built-in joins, aggregations   |
+| **Real-time**       | Basic subscription support       | Rich streaming with filtering  |
+| **Use Case**        | Transaction submission, node ops | Analytics, monitoring, trading |
+| **Infrastructure**  | Run your own nodes               | Fully managed, auto-scaling    |
 
-| Arbitrum RPC | Bitquery Arbitrum API |
-| --- | --- |
-| JSON-RPC endpoint exposing raw EVM on-chain state and transactions | GraphQL endpoint over pre-indexed, parsed Arbitrum data (token transfers, DEX trades, logs, calls, etc.) |
-| No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions |
-| Ideal for submitting transactions | Great for real-time data and historical backtesting without running your own indexer |
+## WebSockets and Webhooks
 
-### Does Bitquery support Arbitrum Websocket and Webhooks?
-
-Bitquery supports websocket and webhooks; you can convert most GraphQL APIs into GraphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More docs and code samples are available [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
-
-## Quick start
-
-Run this minimal GraphQL query to fetch the latest 5 DEX trades on Arbitrum:
-
-```graphql
-query LatestArbitrumTrades {
-  EVM(network: arbitrum) {
-    DEXTrades(limit: { count: 5 }, orderBy: { descending: Block_Time }) {
-      Block { Time }
-      Trade {
-        Dex { ProtocolName }
-        Buy { AmountInUSD Currency { Symbol } }
-        Sell { AmountInUSD Currency { Symbol } }
-      }
-      Transaction { Hash }
-    }
-  }
-}
-```
+Most queries can be turned into live streams by switching `query` to `subscription`, and consumed over WebSocket. See examples and code snippets [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
 
 ## DEX and Perp APIs
 
 - [Arbitrum Dex Trades](./DexTrades)
 - [GMX API](./gmx-api)
 - [esGMX API](./esgmx-api)
+
+Query and subscribe to perpetual trading data, DEX swaps, liquidity events, and trading analytics across Arbitrum's leading protocols.
 
 ## Core Arbitrum APIs
 
@@ -80,14 +63,15 @@ query LatestArbitrumTrades {
 - [Smart Contract Events](./Smart_Contract_Events)
 - [Balance Updates](./Balance_Updates)
 
+Access comprehensive blockchain data including blocks, transactions, contract interactions, and real-time balance updates.
+
 ## Cross-chain
 
 - [Arbitrum Cross Chain](./arbitrum-cross-chain)
 
+Monitor cross-chain bridge activities, deposits, withdrawals, and asset flows between Arbitrum and other networks.
 
 ## Videos
-
-import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ### Video Tutorial | GMX and esGMX
 
