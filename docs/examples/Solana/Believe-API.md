@@ -2,11 +2,23 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this section, we will explore several examples related to Believe Protocol Data. The Believe Protocol is a decentralized token launchpad built on the Solana blockchain, designed to simplify and democratize the creation and trading of tokens. It enables users to mint tokens directly through social media interactions, particularly on X (formerly Twitter), making it accessible even to those without technical expertise. Tokens are launched on Meteora DBC.
+## 🎯 What is Believe Protocol?
 
-We also have [Meteora Dynamic Bonding Curve API Docs](https://docs.bitquery.io/docs/examples/Solana/meteora-dynamic-bonding-curve-api/).
-Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/).
-These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on [telegram](https://t.me/Bloxy_info).
+The Believe Protocol is a decentralized token launchpad built on the Solana blockchain that simplifies token creation and trading. It allows users to mint tokens directly through social media interactions (especially X/Twitter), making token creation accessible to everyone, even without technical expertise.
+
+## Related APIs
+
+- **[Meteora Dynamic Bonding Curve API](https://docs.bitquery.io/docs/examples/Solana/meteora-dynamic-bonding-curve-api/)** - Core DBC functionality
+- **[Moonshot APIs](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/)** - Alternative launchpad
+- **[FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/)** - BSC-based token creation
+
+## Pro Tips
+
+- **Use the IDE**: The Bitquery IDE provides autocomplete and validation
+- **Start Simple**: Begin with basic queries and gradually add complexity
+- **Test Incrementally**: Build queries step by step, testing each addition
+- **Contact Support**: Get help on [Telegram](https://t.me/Bloxy_info) for specific issues
+
 
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
