@@ -680,9 +680,9 @@ This query calculates the combined balance of multiple Bitcoin wallet addresses 
 
 ### Latest Bitcoin Price
 
-You can get price of Bitcoin on a particular day or period using this API.
+You can stream Bitcoin price at 1-second interval using the Crypto Price APIs.
 
-▶️ [Bitcoin Balance for multiple addresses](https://ide.bitquery.io/btc-price-in-2016)
+▶️ [Bitcoin Price Stream](https://ide.bitquery.io/Stream-Bitcoin-Price-Across-Chains)
 
 ### Inflows and Outflows of a wallet
 
