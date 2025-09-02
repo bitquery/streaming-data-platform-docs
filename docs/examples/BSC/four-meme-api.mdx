@@ -2,7 +2,10 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Four Meme API
 
-In this section, we will see some APIs that return on-chain data related to Four Meme Exchange on BSC network. We will be using DEX Trades API to get insightful trades and trading activity related data.
+Every bit of onchain information related to the Four Meme Exchange on BSC, live trades, bonding curve progress, newly created tokens, prices, volumes, makers/buyers/sellers, 
+and more—can also be accessed directly through Bitquery APIs and streams. With our GraphQL APIs, real-time WebSocket feeds, 
+and enterprise-grade Kafka topics (plus optional cloud connectors like AWS, GCP, and Snowflake), you get seamless access to the 
+same on-chain data powering the exchange, ready for your analytics and trading workflows.
 
 <head>
 <meta name="title" content="Four Meme API - Real-time Meme Token Trading Data on BSC"/>
@@ -46,6 +49,20 @@ In this section, we will see some APIs that return on-chain data related to Four
 
 <meta property="twitter:description" content="Access Four Meme trading data on BNB Chain. Track memecoin creation, buys, sells, bonding curve progress, token stats, and more using Bitquery APIs." />
 </head>
+
+## Bitquery DEX Data Access Options
+
+- **GraphQL APIs**: Query historical and real-time EVM data with flexible filtering and aggregation
+- **Real-time Streams**: Subscribe to live EVM blockchain events via WebSocket subscriptions
+- **Cloud Solutions**: Access EVM data through AWS, GCP, and Snowflake integrations
+- **Kafka Streams**: High-throughput data streaming for enterprise applications
+
+## Getting Started with Bitquery:
+
+- [Learning Track](https://docs.bitquery.io/docs/start/learning-path/): Learning track to get started with Bitquery GraphQL APIs and streams.
+- [BSC DEX Trades](https://docs.bitquery.io/docs/examples/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
+- [BSC Uniswap APIs](https://docs.bitquery.io/docs/examples/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
+- [BSC Pancake swap APIs](https://docs.bitquery.io/docs/examples/BSC/pancake-swap-api/): Pancake swap Trades on BSC network with the help of examples.
 
 ## Track Four Meme Token Migrations
 
@@ -385,6 +402,111 @@ query MyQuery($currency: String) {
 </details>
 
 You can also check if the token is listed on other DEX using this [example](./bsc-dextrades.mdx/#get-all-dexs-where-a-specific-token-is-listed).
+
+## Get Trade Metrics of a Four Meme Token
+
+Use the below query to get trade metrics like volume and trades for a token in different time frames, such as `24 hours`, `1 hour` and `5 minutes`. Test it [here](https://ide.bitquery.io/volume-and-trades-for-a-token-in-different-time-frames_3).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery($currency: String) {
+  EVM(network: bsc) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: {is: $currency}
+          },
+          Success: true
+        }, 
+        Block: {
+          Time: {since_relative: {hours_ago: 24}}
+        }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+      volume_24hr: sum(of: Trade_Side_AmountInUSD)
+      volume_1hr: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago:1}}}}
+      )
+      volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative:{minutes_ago:5}}}}
+      )
+      trades_24hr: count
+      trades_1hr: count(if: {Block: {Time: {since_relative: {hours_ago:1}}}})
+      trades_5min: count(if: {Block: {Time: {since_relative:{minutes_ago:5}}}})
+    }
+  }
+}
+```
+
+```json
+{
+  "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
+}
+```
+
+</details>
+
+## Get Price Change Percentage for a Four Meme Token
+
+Use the below query to get the price change in percentage for various time fields including `24 hours`, `1 hour` and `5 minutes`. Try it [here](https://ide.bitquery.io/Percentage-price-change-for-a-token).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery($currency: String) {
+  EVM(network: bsc) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: {is: $currency}
+          },
+          Success: true
+        }, 
+        Block: {
+          Time: {since_relative: {hours_ago: 24}}
+        }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        price_24hr: PriceInUSD(minimum: Block_Time)
+        price_1hr: PriceInUSD(if: {Block: {Time: {is_relative: {hours_ago:1}}}})
+        price_5min: PriceInUSD(if: {Block: {Time: {is_relative: {minutes_ago:1}}}})
+        current: PriceInUSD
+      }
+      change_24hr: calculate(expression: "( $Trade_current - $Trade_price_24hr ) / $Trade_price_24hr * 100")
+      change_1hr: calculate(expression: "( $Trade_current - $Trade_price_1hr ) / $Trade_price_1hr * 100")
+      change_5min: calculate(expression: "( $Trade_current - $Trade_price_5min ) / $Trade_price_5min * 100")
+    }
+  }
+}
+```
+
+```json
+{
+  "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
+}
+```
+
+</details>
 
 ## Get OHLCV data of a Four Meme Token
 
