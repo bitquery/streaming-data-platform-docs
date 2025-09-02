@@ -35,7 +35,7 @@ In this section, we'll show you how to access information about Orca DEX data us
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-## Latest Pools created on Orca
+## Latest Pools Created On Orca
 
 To retrieve the newest pools created on Orca DEX, we will utilize the Solana instructions API/Websocket.
 
@@ -105,7 +105,7 @@ subscription {
 }
 ```
 
-## Pair Creation time for a specific pair
+## Pair Creation Time For A Specific Pair
 
 You can use the following query to get the pair creation time for a specific pair on Orca DEX on Solana. But you need to use the keyword `query`.
 You can run this query using [this link](https://ide.bitquery.io/pair-creation-time-for-a-specific-pair-on-Orca).
@@ -127,7 +127,7 @@ You can run this query using [this link](https://ide.bitquery.io/pair-creation-t
 }
 ```
 
-## Realtime Trades on Orca DEX API
+## Realtime Trades On Orca DEX API
 
 To access a real-time stream of trades for Solana Orca DEX, [check out this GraphQL subscription (WebSocket)](https://ide.bitquery.io/Orca-DEX-Trades-Websocket).
 
@@ -191,7 +191,7 @@ subscription {
 }
 ```
 
-## Latest Trades for a specific currency on Solana Orca DEX
+## Latest Trades For A Specific Currency On Solana Orca DEX
 
 If you want to monitor [trades for a specific currency on Orca DEX](https://ide.bitquery.io/Orca-DEX-Trades-for-a-specific-currency-Websocket), you can use the stream provided. Input the currency's mint address; for example, in the query below, we use the WSOL token's Mint address to fetch buys of the WSOL token.
 
@@ -264,7 +264,7 @@ subscription {
 }
 ```
 
-## Latest price of a token
+## Latest Price Of A Token
 
 You can use the following query to get the latest price of a token, we have used WSOL address here in the below example. We are getting realtime price of WSOL on Orca DEX on Solana in different pools.
 
@@ -361,7 +361,7 @@ Only use this API as `query` and not `subscription` websocket as Aggregates and 
 }
 ```
 
-## Track Latest Add Liquidity Transactions on Orca DEX
+## Track Latest Add Liquidity Transactions On Orca DEX
 
 You can also track Add Liquidity transactions in real time on Orca DEX from Orca API using instructions. Firstly, you can use this [query](https://ide.bitquery.io/Get-all-methods-of-Orca-Program#) to get all the methods of Orca program to deduce which program method is responsible for add liquidity transactions. The method we want to filter for turns out to be `increaseLiquidity`.
 
@@ -457,7 +457,7 @@ subscription {
 }
 ```
 
-## Track Latest Remove Liquidity Transactions on Orca DEX
+## Track Latest Remove Liquidity Transactions On Orca DEX
 
 You can also track Remove Liquidity transactions in real time on Orca DEX from Orca API using instructions. Firstly, you can use this [query](https://ide.bitquery.io/Get-all-methods-of-Orca-Program#) to get all the methods of Orca program to deduce which program method is responsible for remove liquidity transactions. The method we want to filter for turns out to be `decreaseLiquidity`.
 
@@ -548,7 +548,7 @@ subscription {
 }
 ```
 
-## Track Collect Fees Instruction Calls on Orca DEX
+## Track Collect Fees Instruction Calls On Orca DEX
 
 Using below query you will be able to get the following image mentioned addresses in the `Instruction Accounts[]` array for the `Collect Fees` instruction calls on Orca DEX.
 You can test the query [here](https://ide.bitquery.io/Websocket-for-collect-fees-instruction-on-Solana-Orca-DEX_1).
@@ -634,7 +634,7 @@ subscription {
 }
 ```
 
-## Track Update Fees and Rewards Instruction Calls on Orca DEX
+## Track Update Fees And Rewards Instruction Calls On Orca DEX
 
 Using below query you will be able to get the following image mentioned addresses in the `Instruction Accounts[]` array for the `Update Fees and Rewards` instruction calls on Orca DEX.
 You can test the query [here](https://ide.bitquery.io/Websocket-for-update-fees-and-rewards-instruction-on-Solana-Orca-DEX_1).
@@ -720,7 +720,7 @@ subscription {
 }
 ```
 
-## Track Collect Reward Instruction Calls on Orca DEX
+## Track Collect Reward Instruction Calls On Orca DEX
 
 Using below query you will be able to get the following image mentioned addresses in the `Instruction Accounts[]` array for the `Collect Reward` instruction calls on Orca DEX.
 You can test the query [here](https://ide.bitquery.io/Websocket-for-collectReward-and-rewards-instruction-on-Solana-Orca-DEX).
@@ -806,14 +806,14 @@ subscription {
 }
 ```
 
-## Video Tutorial | How to Track Latest Trades, Latest Price of a Token on Solana Orca DEX
+## Video Tutorial | How To Track Latest Trades, Latest Price Of A Token On Solana Orca DEX
 
 <VideoPlayer url="https://youtu.be/IWgf37jTUuc?si=T4Sl4Np1lXrVqY5J" />
 
-## Video Tutorial | How to Track Latest Created Liquidity Pools, OHLC data of a specific pair on Solana Orca DEX
+## Video Tutorial | How To Track Latest Created Liquidity Pools, OHLC Data Of A Specific Pair On Solana Orca DEX
 
 <VideoPlayer url="https://youtu.be/7gwT9fbWl9M?si=zS14U2FV4wG1PoGf" />
 
-## Video Tutorial | How to Track Add Liquidity and Remove Liquidity Transactions on Solana Orca DEX
+## Video Tutorial | How To Track Add Liquidity And Remove Liquidity Transactions On Solana Orca DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=X3rhSAROCu0" />
