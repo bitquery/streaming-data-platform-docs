@@ -42,67 +42,67 @@ Most queries can be turned into live streams by switching `query` to `subscripti
 
 ## DEX Trades
 
-- [DEX API](../dextrades/dex-api)
-- [Token Trades APIs](../dextrades/token-trades-apis)
-- [Trades of an Address API](../dextrades/trades-of-an-address-api)
-- [Uniswap API](../dextrades/uniswap-api)
-- [Pancakeswap API](../dextrades/pancakeswap-api)
-- [DEXScreener (EVM)](../dextrades/DEXScreener/evm_dexscreener)
+- [DEX API](https://docs.bitquery.io/docs/examples/dextrades/dex-api)
+- [Token Trades APIs](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis)
+- [Trades of an Address API](https://docs.bitquery.io/docs/examples/dextrades/trades-of-an-address-api)
+- [Uniswap API](https://docs.bitquery.io/docs/examples/dextrades/uniswap-api)
+- [Pancakeswap API](https://docs.bitquery.io/docs/examples/dextrades/pancakeswap-api)
+- [DEXScreener (EVM)](https://docs.bitquery.io/docs/examples/dextrades/DEXScreener/evm_dexscreener)
 
 Query and subscribe to on‑chain swaps, OHLCV, liquidity events, pools, and per‑wallet trading activity across major EVM DEXes.
 
 ## Token Holders
 
-- [Token Holder API](../token-holders/token-holder-api)
+- [Token Holder API](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api)
 
 Identify top holders, concentration, new/active holders, and changes over time.
 
 ## Transactions
 
-- [Transaction API](../transactions/transaction-api)
+- [Transaction API](https://docs.bitquery.io/docs/examples/transactions/transaction-api)
 
 Inspect transaction metadata, status, value flows, method signatures, and more.
 
 ## Transfers
 
-- [ERC20 Token Transfer API](../transfers/erc20-token-transfer-api)
-- [Total Supply](../transfers/total-supply)
+- [ERC20 Token Transfer API](https://docs.bitquery.io/docs/examples/transfers/erc20-token-transfer-api)
+- [Total Supply](https://docs.bitquery.io/docs/examples/transfers/total-supply)
 
 Follow ERC‑20 token flows and compute supply‑side metrics.
 
 ## Blocks
 
-- [Blocks API](../blocks/blocks-api)
+- [Blocks API](https://docs.bitquery.io/docs/examples/blocks/blocks-api)
 
 Build time‑series metrics from block headers, miner/validator stats, and base fee changes.
 
 ## Balances
 
-- [Balance API](../balances/balance-api)
+- [Balance API](https://docs.bitquery.io/docs/examples/balances/balance-api)
 
 Get real‑time and historical balances for addresses and tokens.
 
 ## Events
 
-- [Events API](../events/events-api)
+- [Events API](https://docs.bitquery.io/docs/examples/events/events-api)
 
 Query decoded contract logs with precise filtering on topics and parameters.
 
 ## Fees
 
-- [Fees API](../fees/fees-api)
+- [Fees API](https://docs.bitquery.io/docs/examples/fees/fees-api)
 
 Analyze gas usage, base fee dynamics, and transaction cost distributions.
 
 ## Mempool
 
-- [Mempool API](../mempool/mempool-api)
+- [Mempool API](https://docs.bitquery.io/docs/examples/mempool/mempool-api)
 
 Monitor pending transactions to react before inclusion.
 
 ## NFT
 
-- [NFT API](../nft/nft-api)
+- [NFT API](https://docs.bitquery.io/docs/examples/nft/nft-api)
 
 Fetch collections, ownership, transfers, trades, and metadata.
 
