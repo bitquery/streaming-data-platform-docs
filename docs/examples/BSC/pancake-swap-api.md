@@ -1,12 +1,13 @@
 # Pancake Swap API
 
-In this section we will use APIs from Bitquery to get the on-chain trade related data, trade metrics, trades for a token or a trader on the Pancake Swap DEX. To get the trade activities of the Pancake Swap exclusively we have added a filter out trades based on `Factory Contract` address, which is possible by applying condition on `DEX_OwnerAddress` to be `0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865` for the case of Pancake Swap V3. To get the trades and trade related data for Pancake Swap V1 or V2 you would need their respective addresses. Create your account and get started by following the [Quickstart instructions](https://docs.bitquery.io/docs/start/first-query/).
+In this section we will use APIs from Bitquery to get the on-chain trade related data, trade metrics, trades for a token or a trader on the Pancake Swap DEX.
+To get the trade activities of the Pancake Swap exclusively we have added a filter out trades based on `Factory Contract` address, `0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865` for the case of Pancake Swap V3. To get the trades and trade related data for Pancake Swap V1 or V2 you would need their respective addresses. Create your account and get started by following the [Quickstart instructions](https://docs.bitquery.io/docs/start/first-query/).
 
 ## Bitquery DEX Data Access Options
 
 - **GraphQL APIs**: Query historical and real-time EVM data with flexible filtering and aggregation
 - **Real-time Streams**: Subscribe to live EVM blockchain events via WebSocket subscriptions
-- **Cloud Solutions**: Access EVM data through AWS, GCP, and Snowflake integrations
+- **Cloud Solutions**: Access EVM data through AWS, GCP, and Snowflake or your custom cloud solution.
 - **Kafka Streams**: High-throughput data streaming for enterprise applications
 
 ## Getting Started with Bitquery:
@@ -14,7 +15,7 @@ In this section we will use APIs from Bitquery to get the on-chain trade related
 - [Learning Track](https://docs.bitquery.io/docs/start/learning-path/): Learning track to get started with Bitquery GraphQL APIs and streams.
 - [BSC DEX Trades](https://docs.bitquery.io/docs/examples/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
 - [BSC Uniswap APIs](https://docs.bitquery.io/docs/examples/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
-- [BSC Pancake swap APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/): Four Meme Trades on BSC network with the help of examples.
+- [BSC Four Meme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/): Four Meme Trades on BSC network with the help of examples.
 - [Trade APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/): Generic Trade API with the help of examples.
 
 <head>
@@ -51,9 +52,20 @@ Using [this](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades) API en
 {
   EVM(dataset: realtime, network: bsc) {
     DEXTrades(
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Trade_Index}]
-      where: {TransactionStatus: {Success: true}, Trade: {Dex: {OwnerAddress: {is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865"}}}}
-      limit: {count: 20}
+      orderBy: [
+        { descending: Block_Time }
+        { descending: Transaction_Index }
+        { descending: Trade_Index }
+      ]
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+          }
+        }
+      }
+      limit: { count: 20 }
     ) {
       Block {
         Time
@@ -225,7 +237,7 @@ Using [this](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrad
 
 ```graphql
 subscription {
-  EVM(network: bsc mempool:true) {
+  EVM(network: bsc, mempool: true) {
     DEXTrades {
       Block {
         Time
@@ -313,9 +325,22 @@ subscription {
 {
   EVM(dataset: realtime, network: bsc) {
     DEXTradeByTokens(
-      limit: {count: 20}
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Trade_Index}]
-      where: {Trade: {Dex: {OwnerAddress: {is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865"}}, Currency: {SmartContract: {is: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"}}}}
+      limit: { count: 20 }
+      orderBy: [
+        { descending: Block_Time }
+        { descending: Transaction_Index }
+        { descending: Trade_Index }
+      ]
+      where: {
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+          }
+          Currency: {
+            SmartContract: { is: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82" }
+          }
+        }
+      }
     ) {
       Block {
         Time
@@ -404,7 +429,7 @@ Also, checkout the [Four Meme](https://docs.bitquery.io/docs/examples/BSC/four-m
 
 ## Latest Trades on Pancake Swap for a given trader
 
-[This]( https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-trader) query returns the latest trades by a particular trader, with buyer wallet address as `0xafb2da14056725e3ba3a30dd846b6bbbd7886c56` in this case, on Pancake Swap. Also, you could subscribe to the same info using [this](https://ide.bitquery.io/Stream---BSC-PancakeSwap-v3-Trades-for-a-trader) stream.
+[This](https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-trader) query returns the latest trades by a particular trader, with buyer wallet address as `0xafb2da14056725e3ba3a30dd846b6bbbd7886c56` in this case, on Pancake Swap. Also, you could subscribe to the same info using [this](https://ide.bitquery.io/Stream---BSC-PancakeSwap-v3-Trades-for-a-trader) stream.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -413,13 +438,20 @@ Also, checkout the [Four Meme](https://docs.bitquery.io/docs/examples/BSC/four-m
 {
   EVM(dataset: realtime, network: bsc) {
     DEXTradeByTokens(
-      limit: {count: 20}
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Trade_Index}]
-      where: {Trade: {Dex: {OwnerAddress: {is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865"}}, 
-        Buyer:{
-          is:"0xafb2da14056725e3ba3a30dd846b6bbbd7886c56"
+      limit: { count: 20 }
+      orderBy: [
+        { descending: Block_Time }
+        { descending: Transaction_Index }
+        { descending: Trade_Index }
+      ]
+      where: {
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+          }
+          Buyer: { is: "0xafb2da14056725e3ba3a30dd846b6bbbd7886c56" }
         }
-        }}
+      }
     ) {
       Block {
         Time
@@ -515,9 +547,29 @@ Using [this](https://ide.bitquery.io/BSC-PancakeSwap-v3-Price-for-a-token) API e
 {
   EVM(dataset: realtime, network: bsc) {
     DEXTradeByTokens(
-      limit: {count: 20}
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Trade_Index}]
-      where: {Trade: {Dex: {OwnerAddress: {is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865"}}, Currency: {SmartContract: {is: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"}}, Side: {Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}}}}
+      limit: { count: 20 }
+      orderBy: [
+        { descending: Block_Time }
+        { descending: Transaction_Index }
+        { descending: Trade_Index }
+      ]
+      where: {
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+          }
+          Currency: {
+            SmartContract: { is: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82" }
+          }
+          Side: {
+            Currency: {
+              SmartContract: {
+                is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
+              }
+            }
+          }
+        }
+      }
     ) {
       Trade {
         Price
@@ -550,7 +602,16 @@ The same info could be streamed via this [subscription](https://ide.bitquery.io/
 query MyQuery($currency: String) {
   EVM(network: bsc) {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {SmartContract: {is: $currency}}, Dex: {OwnerAddress: {is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865"}}, Success: true}, Block: {Time: {since_relative: {hours_ago: 24}}}}
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: $currency } }
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+          }
+          Success: true
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
     ) {
       Trade {
         Currency {
@@ -561,9 +622,9 @@ query MyQuery($currency: String) {
       }
       volumer: sum(of: Trade_Side_AmountInUSD)
       trades: count
-      buyers: uniq(of: Trade_Buyer,)
+      buyers: uniq(of: Trade_Buyer)
       sellers: uniq(of: Trade_Seller)
-      volatility:standard_deviation(of: Trade_PriceInUSD)
+      volatility: standard_deviation(of: Trade_PriceInUSD)
       average_price: average(of: Trade_PriceInUSD)
     }
   }
@@ -586,14 +647,32 @@ query MyQuery($currency: String) {
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query tradingViewPairs($network: evm_network, $dataset: dataset_arg_enum, $interval: Int, $token: String, $base: String, $time_ago: DateTime) {
+query tradingViewPairs(
+  $network: evm_network
+  $dataset: dataset_arg_enum
+  $interval: Int
+  $token: String
+  $base: String
+  $time_ago: DateTime
+) {
   EVM(network: $network, dataset: $dataset) {
     DEXTradeByTokens(
-      orderBy: {ascendingByField: "Block_Time"}
-      where: {TransactionStatus: {Success: true}, Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $token}}}, Currency: {SmartContract: {is: $base}}, Success: true}, Block: {Time: {since: $time_ago}}}
+      orderBy: { ascendingByField: "Block_Time" }
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Side: {
+            Amount: { gt: "0" }
+            Currency: { SmartContract: { is: $token } }
+          }
+          Currency: { SmartContract: { is: $base } }
+          Success: true
+        }
+        Block: { Time: { since: $time_ago } }
+      }
     ) {
       Block {
-        Time(interval: {count: $interval, in: hours})
+        Time(interval: { count: $interval, in: hours })
       }
       low: quantile(of: Trade_PriceInUSD, level: 0.1)
       high: quantile(of: Trade_PriceInUSD, level: 0.9)
@@ -635,19 +714,13 @@ query MyQuery($currency: String) {
     DEXTradeByTokens(
       where: {
         Trade: {
-          Currency: {
-            SmartContract: {is: $currency}
-          },
+          Currency: { SmartContract: { is: $currency } }
           Dex: {
-            OwnerAddress:{
-              is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865"
-            }
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
           }
           Success: true
-        }, 
-        Block: {
-          Time: {since_relative: {hours_ago: 24}}
         }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
       Trade {
@@ -657,13 +730,23 @@ query MyQuery($currency: String) {
           SmartContract
         }
         price_24hr: PriceInUSD(minimum: Block_Time)
-        price_1hr: PriceInUSD(if: {Block: {Time: {is_relative: {hours_ago:1}}}})
-        price_5min: PriceInUSD(if: {Block: {Time: {is_relative: {minutes_ago:1}}}})
+        price_1hr: PriceInUSD(
+          if: { Block: { Time: { is_relative: { hours_ago: 1 } } } }
+        )
+        price_5min: PriceInUSD(
+          if: { Block: { Time: { is_relative: { minutes_ago: 1 } } } }
+        )
         current: PriceInUSD
       }
-      change_24hr: calculate(expression: "( $Trade_current - $Trade_price_24hr ) / $Trade_price_24hr * 100")
-      change_1hr: calculate(expression: "( $Trade_current - $Trade_price_1hr ) / $Trade_price_1hr * 100")
-      change_5min: calculate(expression: "( $Trade_current - $Trade_price_5min ) / $Trade_price_5min * 100")
+      change_24hr: calculate(
+        expression: "( $Trade_current - $Trade_price_24hr ) / $Trade_price_24hr * 100"
+      )
+      change_1hr: calculate(
+        expression: "( $Trade_current - $Trade_price_1hr ) / $Trade_price_1hr * 100"
+      )
+      change_5min: calculate(
+        expression: "( $Trade_current - $Trade_price_5min ) / $Trade_price_5min * 100"
+      )
     }
   }
 }
@@ -674,6 +757,7 @@ query MyQuery($currency: String) {
   "currency": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"
 }
 ```
+
 </details>
 
 ## New Liquidity Pools Created on Pancake Swap
@@ -687,8 +771,17 @@ query MyQuery($currency: String) {
 {
   EVM(dataset: realtime, network: bsc) {
     Events(
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Log_Index}]
-      where: {LogHeader: {Address: {is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865"}}, Log: {Signature: {Name: {is: "PoolCreated"}}}}
+      orderBy: [
+        { descending: Block_Time }
+        { descending: Transaction_Index }
+        { descending: Log_Index }
+      ]
+      where: {
+        LogHeader: {
+          Address: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+        }
+        Log: { Signature: { Name: { is: "PoolCreated" } } }
+      }
     ) {
       Block {
         Time
@@ -767,8 +860,17 @@ Liquidity addition is an important event related to any liquidity pool. Using [t
 subscription {
   EVM(network: bsc) {
     Events(
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Log_Index}]
-      where: {Log: {Signature: {Name: {is: "Mint"}}}, Transaction: {To: {is: "0x46A15B0b27311cedF172AB29E4f4766fbE7F4364"}}}
+      orderBy: [
+        { descending: Block_Time }
+        { descending: Transaction_Index }
+        { descending: Log_Index }
+      ]
+      where: {
+        Log: { Signature: { Name: { is: "Mint" } } }
+        Transaction: {
+          To: { is: "0x46A15B0b27311cedF172AB29E4f4766fbE7F4364" }
+        }
+      }
     ) {
       Block {
         Time
@@ -847,8 +949,17 @@ Using [this](https://ide.bitquery.io/Stream---Liquidity-remove-for-all-tokens-on
 subscription {
   EVM(network: bsc) {
     Events(
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Log_Index}]
-      where: {Log: {Signature: {Name: {is: "Burn"}}}, Transaction: {To: {is: "0x46A15B0b27311cedF172AB29E4f4766fbE7F4364"}}}
+      orderBy: [
+        { descending: Block_Time }
+        { descending: Transaction_Index }
+        { descending: Log_Index }
+      ]
+      where: {
+        Log: { Signature: { Name: { is: "Burn" } } }
+        Transaction: {
+          To: { is: "0x46A15B0b27311cedF172AB29E4f4766fbE7F4364" }
+        }
+      }
     ) {
       Block {
         Time
@@ -927,9 +1038,21 @@ subscription {
 {
   EVM(dataset: combined, network: bsc) {
     BalanceUpdates(
-      where: {Currency: {SmartContract: {in: ["0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"]}}, BalanceUpdate: {Address: {is: "0xafb2da14056725e3ba3a30dd846b6bbbd7886c56"}}}
+      where: {
+        Currency: {
+          SmartContract: {
+            in: [
+              "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"
+              "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
+            ]
+          }
+        }
+        BalanceUpdate: {
+          Address: { is: "0xafb2da14056725e3ba3a30dd846b6bbbd7886c56" }
+        }
+      }
     ) {
-      sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
       Currency {
         Name
         Symbol
@@ -951,11 +1074,27 @@ subscription {
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query pairDexList($network: evm_network, $base: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime, $time_ago: DateTime, $owner: String) {
+query pairDexList(
+  $network: evm_network
+  $base: String
+  $time_10min_ago: DateTime
+  $time_1h_ago: DateTime
+  $time_3h_ago: DateTime
+  $time_ago: DateTime
+  $owner: String
+) {
   EVM(network: $network) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "amount"}
-      where: {TransactionStatus: {Success: true}, Trade: {Currency: {SmartContract: {is: $base}}, Side: {Amount: {gt: "0"}}, Dex: {OwnerAddress: {is: $owner}}}, Block: {Time: {after: $time_ago}}}
+      orderBy: { descendingByField: "amount" }
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Currency: { SmartContract: { is: $base } }
+          Side: { Amount: { gt: "0" } }
+          Dex: { OwnerAddress: { is: $owner } }
+        }
+        Block: { Time: { after: $time_ago } }
+      }
     ) {
       Trade {
         Currency {
@@ -974,15 +1113,15 @@ query pairDexList($network: evm_network, $base: String, $time_10min_ago: DateTim
         price_last: PriceInUSD(maximum: Block_Number)
         price_10min_ago: PriceInUSD(
           maximum: Block_Number
-          if: {Block: {Time: {before: $time_10min_ago}}}
+          if: { Block: { Time: { before: $time_10min_ago } } }
         )
         price_1h_ago: PriceInUSD(
           maximum: Block_Number
-          if: {Block: {Time: {before: $time_1h_ago}}}
+          if: { Block: { Time: { before: $time_1h_ago } } }
         )
         price_3h_ago: PriceInUSD(
           maximum: Block_Number
-          if: {Block: {Time: {before: $time_3h_ago}}}
+          if: { Block: { Time: { before: $time_3h_ago } } }
         )
       }
       amount: sum(of: Trade_Side_AmountInUSD)
