@@ -16,7 +16,7 @@ To get the trade activities of the Pancake Swap exclusively we have added a filt
 - [BSC DEX Trades](https://docs.bitquery.io/docs/examples/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
 - [BSC Uniswap APIs](https://docs.bitquery.io/docs/examples/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
 - [BSC Four Meme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/): Four Meme Trades on BSC network with the help of examples.
-- [Trade APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/): Generic Trade API with the help of examples.
+- [Trade APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
 
 <head>
   <meta name="title" content="Pancake Swap API - BSC - Tokens, Trades, Live Prices, Liquidity"/>
