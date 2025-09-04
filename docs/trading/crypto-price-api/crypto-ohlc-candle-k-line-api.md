@@ -17,16 +17,16 @@ OHLC (Open, High, Low, Close) data, also known as candlestick or K-line data, is
 - **Low**: The lowest price reached during the interval
 - **Close**: The last price recorded in the interval
 
-Our Crypto Price API provides pre-aggregated OHLC data with ultra-low latency, perfect for building trading applications, charting libraries, and real-time analytics dashboards.
+Our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) provides pre-aggregated OHLC data with ultra-low latency, perfect for building trading applications, charting libraries, and real-time analytics dashboards.
 
-**Important Note**: The Crypto Price API currently provides real-time data and the last 7 days of price history. For full historical OHLC data beyond 7 days, you should use [DEXTradeByToken](https://docs.bitquery.io/docs/evm/dextradesbyTokens/), which supports both real-time and complete historical data.
+**Important Note**: The [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) currently provides real-time data and the last 7 days of price history. For full historical OHLC data beyond 7 days, you should use [DEXTradeByToken](https://docs.bitquery.io/docs/evm/dextradesbyTokens/), which supports both real-time and complete historical data.
 
 ## Getting Started
 
 ### **Quick Start Steps**
 
 1. **Get API Key**: Sign up at [Bitquery IDE](https://ide.bitquery.io) to get your API key
-2. **Choose Your Method**: 
+2. **Choose Your Method**: git s
    - **GraphQL Queries**: For APIs
    - **WebSocket Streams**: For real-time data feeds
    - **Kafka**: For high-throughput applications with high degree of relibility
@@ -131,7 +131,7 @@ Understanding the key differences between these two approaches for getting OHLC 
 
 ## Supported Time Intervals
 
-Our Crypto Price OHLC API supports fixed time intervals optimized for different trading strategies:
+Our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) OHLC API supports fixed time intervals optimized for different trading strategies:
 
 | Interval | Duration |
 |----------|----------|
@@ -157,7 +157,7 @@ For volume-driven analysis, we also support volume-based intervals:
 
 ## Choosing the Right Cube for OHLC Data
 
-The Crypto Price API offers three different cubes for accessing OHLC data. Understanding which cube to use is crucial for getting the right data for your specific use case:
+The [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) offers three different cubes for accessing OHLC data. Understanding which cube to use is crucial for getting the right data for your specific use case:
 
 Before we dive into the cubes, let's clarify the key terminology:
 
@@ -1020,7 +1020,7 @@ Our OHLC API supports all major blockchains:
 
 ## Best Practices
 
-1. **Choose the Right API**: Use Crypto Price API for real-time data and recent history (7 days), DEXTradeByToken for complete historical data
+1. **Choose the Right API**: Use [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) for real-time data and recent history (7 days), DEXTradeByToken for complete historical data
 2. **Choose the Right Interval**: Use 1s for high-frequency trading, 1m for standard charting
 3. **Use USD Quoting**: Set `IsQuotedInUsd: true` for consistent price comparison
 
