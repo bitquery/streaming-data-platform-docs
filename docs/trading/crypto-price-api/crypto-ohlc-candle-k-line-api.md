@@ -73,8 +73,7 @@ subscription {
 
 - **GraphQL Endpoint**: `https://streaming.bitquery.io/graphql`
 - **EAP Endpoint**: `https://streaming.bitquery.io/eap`
-- **Kafka Broker**: `streaming.bitquery.io:9092`
-- **Topic**: `trading.prices`
+- **Topic**: `trading.prices`. Please contact sales for a trial username, password.
 
 ## Why Use Our OHLC API?
 
