@@ -19,7 +19,6 @@ The Believe Protocol is a decentralized token launchpad built on the Solana bloc
 - **Test Incrementally**: Build queries step by step, testing each addition
 - **Contact Support**: Get help on [Telegram](https://t.me/Bloxy_info) for specific issues
 
-
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
 :::
@@ -52,7 +51,7 @@ If you want fastest data without any latency, we can provide Kafka streams, plea
 
 ## Track Token creation using Believe Protocol on Meteora DBC in realtime
 
-Using [this](https://ide.bitquery.io/track-Token-creation-using-Believe-Protocol-on-Meteora-DBC-in-realtime) query, we can get the 10 latest created Meteora DBC tokens using Believe Protocol. `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN` is the address of Meteora DBC and `5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE` is the Believe Token Authority address, the address which is responsible for calling the instructions on Meteora DBC Program.
+Using [this](https://ide.bitquery.io/track-Token-creation-using-Believe-Protocol-on-Meteora-DBC-in-realtime) stream, we can get the latest created Meteora DBC tokens using Believe Protocol in realtime. `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN` is the address of Meteora DBC and `5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE` is the Believe Token Authority address, the address which is responsible for calling the instructions on Meteora DBC Program.
 
 ```graphql
 subscription MyQuery {
@@ -130,6 +129,82 @@ subscription MyQuery {
       }
     }
   }
+}
+```
+
+## Check when a Believe protocol token was created on Meteora DBC
+
+Using below query, you can check when was a Believe protocol token created. Here we have taken the example of checking creation time and transaction signature of this token `GsVr8GdT57gBa6GxujrtAeRGmYbFfABGFk2eaG2DzBLV`. Note: we only have last 8 hours of Solana Instructions data so this query will not return anything for the Believe protocol token which was created more than 8 hours ago.
+Try out the [query](https://ide.bitquery.io/check-when-a-Believe-protocol-token-was-created-on-Meteora-DBC_1) on IDE.
+
+```
+query MyQuery($tokenAddress: String!) {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}, Method: {is: "initialize_virtual_pool_with_spl_token"}}, Accounts: {includes: {Address: {is: $tokenAddress }}}}, Transaction: {Result: {Success: true}, Signer: {is: "5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE"}}}
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Token {
+            ProgramId
+            Owner
+            Mint
+          }
+          IsWritable
+          Address
+        }
+        Program {
+          Parsed
+          Name
+          Method
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
+            Name
+          }
+          Address
+          AccountNames
+        }
+      }
+      Transaction {
+        Fee
+        FeeInUSD
+        FeePayer
+        Signature
+      }
+    }
+  }
+}
+{
+  "tokenAddress": "GsVr8GdT57gBa6GxujrtAeRGmYbFfABGFk2eaG2DzBLV"
 }
 ```
 
