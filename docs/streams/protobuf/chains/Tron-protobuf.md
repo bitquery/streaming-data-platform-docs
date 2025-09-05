@@ -1,4 +1,4 @@
-# TRON Protobuf Streams
+# TRON Streams
 
 You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tree/main/tron).
 
