@@ -1,6 +1,6 @@
 # Monitoring Withdrawals and Deposits for 1000s of Binance Exchange Wallets
 
-In this guide we will utilize the [Protobuf Kafka streams](docs/streams/protobuf/kafka-protobuf-python.md) provided by Bitquery to monitor withdrawls and deposits for a large number of Binance Exchange Wallets on BSC network. Read [this](docs/streams/compare-websocket-kafka.md) document to know more about why Kafka streams are prefered for building scalable, enterprise grade solutions over other solutions by Bitquery such as Websocket streams and GraphQL API. You can read more about Kafka solution by Bitquery [here](docs/streams/kafka-streaming-concepts.md).
+In this guide we will utilize the [Protobuf Kafka streams](docs/streams/protobuf/kafka-protobuf-python.md) provided by Bitquery to monitor withdrawls and deposits for a large number of Binance Exchange Wallets on BSC network.  You can read more about Kafka solution by Bitquery [here](docs/streams/kafka-streaming-concepts.md).
 
 Checkout the complete [codebase](https://github.com/bitquery/binance-exchange-wallets-monitoring) for any issues in the tutorial.
 
