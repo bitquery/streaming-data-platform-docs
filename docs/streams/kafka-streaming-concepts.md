@@ -175,19 +175,13 @@ Typicaly you need setup of one consumer per one topic, as the message parsing fo
 
 ### Read and parse messages
 
-Your consumer will read messages from the topic, and you will be able to parse them. Depending on the setting you used
-to subscribe to topic, you will read the last message, or some message on the past that is the net message to read.
-If you do not read messages fast enough, the lag will be accumulated, and the latency will grow.
+Your consumer will read messages from the topic, and you will be able to parse them.
 
-Message in topic is JSON. Parse json code is specific for prgramming language that you use, but should be very simple.
-
-Message contains the list of objects on the top level. Structure of objects corresponds to the topic that you consume.
-General schema is described in https://github.com/bitquery/streaming_protobuf. The top level element depends on which stream
-of which blockchain you use. For example, for DEX Trades on Solana you will have JSON structure as:
-
-- Trade of type [solana_messages.DexTradeEvent](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/dex_block_message.proto#L79)
-- Transaction of type [solana_messages.ParsedDexTransaction](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/dex_block_message.proto#L89)
-- Block of type [solana_messages.BlockHeader](https://github.com/bitquery/streaming_protobuf/blob/c76bf63ff3874b9a6f09a4cc1c9203fdde623565/solana/block_message.proto#L79)
+- Depending on the setting you used to subscribe to topic, you will read the last message, or some message on the past that is the net message to read.
+- If you do not read messages fast enough, the lag will be accumulated, and the latency will grow.
+- Message in topic is Protobuf. Parse proto code is specific for programming language that you use, but should be very simple.
+- Message contains the list of objects on the top level. Structure of objects corresponds to the topic that you consume.
+  General schema is described in https://github.com/bitquery/streaming_protobuf.
 
 ## Protobuf Streams
 
