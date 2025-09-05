@@ -6,8 +6,8 @@ sidebar_position: 11
 
 At Bitquery we use points system to calculate the cost for a query. Each query will use a different number of points, based on the complexity and size of the query requested. For a comprehensive understanding of the points system, please refer to [our detailed post](https://community.bitquery.io/t/introducing-points/874).
 
-Get started for free with the developer plan and use up to 10K points. Contact our sales team for a trial post that period.
-For every query you run, you can check the points in real time.
+When you first sign up, you’ll get 10K free points for the first month on the Developer plan. After that, you’ll need to upgrade or contact our sales team for a trial or paid plan to continue.
+For every query you run, you can check the points consumed in real time.
 
 ![points](/img/ide/points.png)
 
@@ -17,7 +17,6 @@ Check pricing [here](https://bitquery.io/pricing)
 
 > **WARNING**  
 > Please do not send money or pay unless you receive an invoice from [bitquery.io](https://bitquery.io). Beware of scammers.
-
 
 ## How are points calculated?
 
