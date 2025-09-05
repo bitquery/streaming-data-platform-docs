@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Bitquery Kafka Streams - Understanding Concepts
 
-Bitquery provides realtime data via Kafka as well in addition to GraphQL subscriptions. In this section, we'll see how Kafka-based streaming works and how to integrate it into your application using practical code examples.
+Bitquery provides realtime data via Kafka as well in addition to GraphQL subscriptions. In this section, we'll see how Kafka-based streaming works and how to integrate it into your application using practical code examples. For price data streams, check out our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) Kafka topic.
 
 ### Pro and Cons
 

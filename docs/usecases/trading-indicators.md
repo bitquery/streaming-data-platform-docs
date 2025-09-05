@@ -1,6 +1,6 @@
 # Build Trading Indicators for Crypto Data
 
-Technical indicators are a vital tool for cryptocurrency traders, as they can help to identify trends, predict price movements, and make informed trading decisions.
+Technical indicators are a vital tool for cryptocurrency traders, as they can help to identify trends, predict price movements, and make informed trading decisions. For real-time price data with pre-calculated indicators, use our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).
 
 With our new [Crypto Price Stream](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) we can get real-time crypto market data with **Simple Moving Average (SMA)**, **Exponential Moving Average (EMA)**, and **Weighted Simple Moving Average (WSMA)** at 1-second interval precalculated.
 

@@ -680,7 +680,7 @@ This query calculates the combined balance of multiple Bitcoin wallet addresses 
 
 ### Latest Bitcoin Price
 
-You can stream Bitcoin price at 1-second interval using the Crypto Price APIs.
+You can stream Bitcoin price at 1-second interval using the [Crypto Price APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).
 
 ▶️ [Bitcoin Price Stream](https://ide.bitquery.io/Stream-Bitcoin-Price-Across-Chains)
 
