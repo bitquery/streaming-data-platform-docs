@@ -1,6 +1,6 @@
 # Crypto Market Data API
 
-This page aggregates commonly used queries for market data across chains, pairs, and exchanges, linking to examples mentioned in other sections of our docs. You can also use the AI agent at the bottom to find an API, it is trained on our docs and IDE queries.
+This page aggregates commonly used queries for market data across chains, pairs, and exchanges, linking to examples mentioned in other sections of our docs. These examples demonstrate how to use our real-time crypto price API for multi-chain cryptocurrency price data across various trading scenarios. You can also use the AI agent at the bottom to find an API, it is trained on our docs and IDE queries.
 
 ## OHLC Stream on a Chain
 

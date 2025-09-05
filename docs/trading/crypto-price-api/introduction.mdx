@@ -1,4 +1,4 @@
-# Crypto Price API - Realtime Streams & Historical Data
+# Crypto Price API - Introduction
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -6,14 +6,14 @@ Starting July 2025, we have a introduced separate multi-chain **Crypto Price API
 
 These tools let you stream and query aggregated price data—in USD or other paired currencies—based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains.
 
-The Crypto Price API (Price Index) provides more than just pair prices—it also includes OHLCV (K-Line), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
+The Crypto Price API (Price Index) provides more than just pair prices—it also includes [OHLCV (K-Line)](../crypto-ohlc-candle-k-line-api/), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
 While you can access the aggregated price for a single trading pair, the Price Index also supports cross-chain and cross-DEX aggregation, giving you a unified view of token prices across multiple ecosystems.
 
 These APIs are available on the **[EAP Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/eap)** and **[Streaming Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql)**
 
 ## What is the Crypto Price API (Price Index) and Why Does It Matter?
 
-The Crypto price API/Stream (Price Index) provides real-time, aggregated price data with ultra-low latency across multiple trading pairs, tokens, decentralized exchanges (DEXs), and blockchains. It’s the first product of its kind, designed to help developers access accurate, up-to-the-second prices for building financial applications.
+The Crypto price API/Stream (Price Index) provides real-time, aggregated price data with ultra-low latency across multiple trading pairs, tokens, decentralized exchanges (DEXs), and blockchains. It's the first product of its kind, designed to help developers access accurate, up-to-the-second prices for building financial applications. This real-time crypto price API delivers multi-chain cryptocurrency price data essential for trading bots, DeFi protocols, and blockchain price feed applications.
 
 This API is the foundational layer of our trading-focused data suite. We're actively expanding our trading dataset, with much more to come in the months and years ahead.
 
@@ -26,12 +26,12 @@ The Crypto price API (Price Index) is a chain-agnostic, pre-aggregated price fee
 - **Granularity**:
 
   - **DEXTrades / DEXTradesByToken** provide **transaction-level data**, showing every trade on supported DEXs for each chain.
-  - The **Crypto Price API (Price Index)** provides **pre-aggregated price metrics** such as OHLC (Open, High, Low, Close) and average prices, calculated over volume- or time-based intervals—as granular as 1 second.
+  - The **Crypto Price API (Price Index)** provides **pre-aggregated price metrics** such as [OHLC (Open, High, Low, Close)](../crypto-ohlc-candle-k-line-api/) and average prices, calculated over volume- or time-based intervals—as granular as 1 second.
 
 - **Aggregation**:
 
   - In DEX APIs, you had to **aggregate trades** to calculate OHLC or moving averages.
-  - The Crypto Price API (Price Index) provides **ready-to-use OHLC and price statistics** out of the box , no need to calculate anything.
+  - The Crypto Price API (Price Index) provides **ready-to-use [OHLC and price statistics](../crypto-ohlc-candle-k-line-api/)** out of the box , no need to calculate anything.
 
 - **Filtering Bad Trades**:
 
