@@ -1,6 +1,6 @@
 # Currency Cube
 
-The Currency Cube provides a unified, chain-agnostic price for an asset in USD, such as Bitcoin by aggregating prices and volumes from all its representations (e.g., WBTC, cbBTC, and other bridged or wrapped forms) across all supported chains.
+The Currency Cube provides a unified, chain-agnostic price for an asset in USD, such as Bitcoin by aggregating prices and volumes from all its representations (e.g., WBTC, cbBTC, and other bridged or wrapped forms) across all supported chains. This multi-chain cryptocurrency price data approach ensures consistent pricing across different blockchain implementations.
 
 ### How OHLC is Calculated
 
