@@ -245,10 +245,6 @@ const config = {
             from: "/docs/category/solana/", // old category URL
           },
           {
-            to: "/docs/examples/BSC/", // new target
-            from: "/docs/category/bsc/", // old category URL
-          },
-          {
             to: "/docs/blockchain/Ethereum/",
             from: "/docs/category/ethereum/",
           },
@@ -575,6 +571,60 @@ const config = {
           {
             from: "/docs/trading/price-index/pairs",
             to: "/docs/trading/crypto-price-api/pairs",
+          },
+
+          // BSC redirects from old examples/BSC/ path to new blockchain/BSC/ path
+          {
+            to: "/docs/blockchain/BSC/",
+            from: "/docs/category/bsc/",
+          },
+          {
+            to: "/docs/blockchain/BSC/",
+            from: "/docs/examples/BSC/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-balance-updates/",
+            from: "/docs/examples/BSC/bsc-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-calls-api/",
+            from: "/docs/examples/BSC/bsc-calls-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-dextrades/",
+            from: "/docs/examples/BSC/bsc-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-uniswap-api/",
+            from: "/docs/examples/BSC/bsc-uniswap-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-events-api/",
+            from: "/docs/examples/BSC/bsc-events-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-nft/",
+            from: "/docs/examples/BSC/bsc-nft/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-transfers/",
+            from: "/docs/examples/BSC/bsc-transfers/",
+          },
+          {
+            to: "/docs/blockchain/BSC/gra-fun-api/",
+            from: "/docs/examples/BSC/gra-fun-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/four-meme-api/",
+            from: "/docs/examples/BSC/four-meme-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/pancake-swap-api/",
+            from: "/docs/examples/BSC/pancake-swap-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-mempool-stream/",
+            from: "/docs/examples/BSC/bsc-mempool-stream/",
           },
         ],
       },

@@ -13,9 +13,9 @@ To get the trade activities of the Pancake Swap exclusively we have added a filt
 ## Getting Started with Bitquery:
 
 - [Learning Track](https://docs.bitquery.io/docs/start/learning-path/): Learning track to get started with Bitquery GraphQL APIs and streams.
-- [BSC DEX Trades](https://docs.bitquery.io/docs/examples/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
-- [BSC Uniswap APIs](https://docs.bitquery.io/docs/examples/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
-- [BSC Four Meme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/): Four Meme Trades on BSC network with the help of examples.
+- [BSC DEX Trades](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
+- [BSC Uniswap APIs](https://docs.bitquery.io/docs/blockchain/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
+- [BSC Four Meme APIs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/): Four Meme Trades on BSC network with the help of examples.
 - [Trade APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
 
 <head>
@@ -425,7 +425,7 @@ subscription {
 
 </details>
 
-Also, checkout the [Four Meme](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/) documentation for APIs related to Four Meme tokens and Four Meme Exchange.
+Also, checkout the [Four Meme](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/) documentation for APIs related to Four Meme tokens and Four Meme Exchange.
 
 ## Latest Trades on Pancake Swap for a given trader
 

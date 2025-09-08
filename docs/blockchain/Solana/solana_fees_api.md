@@ -4,7 +4,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 In this document, we will explore several examples related to Solana Fees data.
 We also have [PumpFun APIs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) to track Pump Fun token swaps, [PumpSwap APIs](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api/) if you want to track the token after it has been migrated to PumpSwap AMM.
-Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/).
+Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/).
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
 
 <head>

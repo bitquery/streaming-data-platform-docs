@@ -10,7 +10,7 @@ The Believe Protocol is a decentralized token launchpad built on the Solana bloc
 
 - **[Meteora Dynamic Bonding Curve API](https://docs.bitquery.io/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/)** - Core DBC functionality
 - **[Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/)** - Alternative launchpad
-- **[FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/)** - BSC-based token creation
+- **[FourMeme APIs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)** - BSC-based token creation
 
 ## Pro Tips
 
