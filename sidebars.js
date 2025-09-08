@@ -477,7 +477,7 @@ const sidebars = {
             type: "generated-index",
             title: "TON API Documentation",
           },
-          items: ["examples/ton/ton-dex-trades"],
+          items: ["blockchain/TON/ton-dex-trades"],
         },
       ],
     },
