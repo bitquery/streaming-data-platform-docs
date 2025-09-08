@@ -216,24 +216,6 @@ const config = {
             from: "/docs/category/nft/",
           },
           {
-            to: "/docs/examples/Arbitrum/Overview/",
-            from: "/docs/category/arbitrum/",
-          },
-          {
-            to: "/docs/examples/Base/",
-            from: "/docs/category/base/",
-          },
-
-          {
-            to: "/docs/examples/Matic/",
-            from: "/docs/category/matic/",
-          },
-  
-          {
-            to: "/docs/examples/Optimism/",
-            from: "/docs/category/Optimism/",
-          },
-          {
             to: "/docs/blockchain/Ethereum/dextrades/uniswap-api/",
             from: "/docs/examples/realtimetrades/",
           },
