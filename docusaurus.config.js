@@ -813,6 +813,32 @@ const config = {
             to: "/docs/blockchain/Matic/matic-transfers/",
             from: "/docs/examples/Matic/matic-transfers/",
           },
+
+          // Optimism redirects from old examples/Optimism/ path to new blockchain/Optimism/ path
+          {
+            to: "/docs/blockchain/Optimism/",
+            from: "/docs/category/Optimism/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/",
+            from: "/docs/examples/Optimism/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/optimism-balance-updates/",
+            from: "/docs/examples/Optimism/optimism-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/optimism-dextrades/",
+            from: "/docs/examples/Optimism/optimism-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/optimism-nft/",
+            from: "/docs/examples/Optimism/optimism-nft/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/optimism-transfers/",
+            from: "/docs/examples/Optimism/optimism-transfers/",
+          },
         ],
       },
     ],

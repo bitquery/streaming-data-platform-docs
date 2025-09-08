@@ -550,13 +550,13 @@ const sidebars = {
           label: "Optimism",
           link: {
             type: "doc",
-            id: "examples/Optimism/index",
+            id: "blockchain/Optimism/index",
           },
           items: [
-            "examples/Optimism/optimism-balance-updates",
-            "examples/Optimism/optimism-dextrades",
-            "examples/Optimism/optimism-nft",
-            "examples/Optimism/optimism-transfers",
+            "blockchain/Optimism/optimism-balance-updates",
+            "blockchain/Optimism/optimism-dextrades",
+            "blockchain/Optimism/optimism-nft",
+            "blockchain/Optimism/optimism-transfers",
           ],
         },
         {
