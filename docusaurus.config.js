@@ -679,6 +679,52 @@ const config = {
             to: "/docs/blockchain/TON/ton-dex-trades/",
             from: "/docs/examples/ton/ton-dex-trades/",
           },
+
+          // Arbitrum redirects from old examples/Arbitrum/ path to new blockchain/Arbitrum/ path
+          {
+            to: "/docs/blockchain/Arbitrum/",
+            from: "/docs/category/arbitrum/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/",
+            from: "/docs/examples/Arbitrum/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/arbitrum-cross-chain/",
+            from: "/docs/examples/Arbitrum/arbitrum-cross-chain/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/Balance_Updates/",
+            from: "/docs/examples/Arbitrum/Balance_Updates/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/Blocks_Transactions/",
+            from: "/docs/examples/Arbitrum/Blocks_Transactions/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/DexTrades/",
+            from: "/docs/examples/Arbitrum/DexTrades/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/esgmx-api/",
+            from: "/docs/examples/Arbitrum/esgmx-api/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/gmx-api/",
+            from: "/docs/examples/Arbitrum/gmx-api/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/Smart_Contract_Calls/",
+            from: "/docs/examples/Arbitrum/Smart_Contract_Calls/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/Smart_Contract_Events/",
+            from: "/docs/examples/Arbitrum/Smart_Contract_Events/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/Overview",
+            from: "/docs/examples/Arbitrum/Overview",
+          },
         ],
       },
     ],
