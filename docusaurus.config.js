@@ -228,10 +228,7 @@ const config = {
             to: "/docs/examples/Matic/",
             from: "/docs/category/matic/",
           },
-          {
-            to: "/docs/examples/Tron/",
-            from: "/docs/category/Tron/",
-          },
+  
           {
             to: "/docs/examples/Optimism/",
             from: "/docs/category/Optimism/",
@@ -625,6 +622,56 @@ const config = {
           {
             to: "/docs/blockchain/BSC/bsc-mempool-stream/",
             from: "/docs/examples/BSC/bsc-mempool-stream/",
+          },
+
+          // Tron redirects from old examples/Tron/ path to new blockchain/Tron/ path
+          {
+            to: "/docs/blockchain/Tron/",
+            from: "/docs/category/Tron/",
+          },
+          {
+            to: "/docs/blockchain/Tron/",
+            from: "/docs/examples/Tron/",
+          },
+          {
+            to: "/docs/blockchain/Tron/sunswap-api/",
+            from: "/docs/examples/Tron/sunswap-api/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-balance-updates/",
+            from: "/docs/examples/Tron/tron-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-dextrades/",
+            from: "/docs/examples/Tron/tron-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-mempool/",
+            from: "/docs/examples/Tron/tron-mempool/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-nft/",
+            from: "/docs/examples/Tron/tron-nft/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-sunpump/",
+            from: "/docs/examples/Tron/tron-sunpump/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-transactions-api/",
+            from: "/docs/examples/Tron/tron-transactions-api/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-fees-api/",
+            from: "/docs/examples/Tron/tron-fees-api/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-transfers/",
+            from: "/docs/examples/Tron/tron-transfers/",
+          },
+          {
+            to: "/docs/blockchain/Tron/usdt-trc20-api/",
+            from: "/docs/examples/Tron/usdt-trc20-api/",
           },
         ],
       },

@@ -143,7 +143,7 @@ For a detailed guide, visit:
 ## **OHLC on Tron**
 
 For details, visit:  
-[OHLC Data on Tron](https://docs.bitquery.io/docs/examples/Tron/tron-dextrades/#get-ohlc-data-of-a-token-on-tron-network).
+[OHLC Data on Tron](https://docs.bitquery.io/docs/blockchain/Tron/tron-dextrades/#get-ohlc-data-of-a-token-on-tron-network).
 
 #### **Sample Query**
 
