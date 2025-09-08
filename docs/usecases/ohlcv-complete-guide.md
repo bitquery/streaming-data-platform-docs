@@ -100,7 +100,7 @@ Bitquery also supports non-EVM chains, such as **Solana** and **Tron**, enabling
 ## **OHLC on Solana**
 
 For a detailed guide, visit:  
-[Historical OHLC on Solana](https://docs.bitquery.io/docs/examples/Solana/historical-aggregate-data/#historical-ohlc-on-solana).
+[Historical OHLC on Solana](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/#historical-ohlc-on-solana).
 
 #### **Sample Query**
 

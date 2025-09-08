@@ -555,20 +555,20 @@ Track **all transfers of Bags FM tokens** across wallets. This **Bags FM token t
 
 ## Multi-Exchange Data
 The **Bags FM token trades** endpoints aggregate data from multiple Solana DEXs:
-- [Meteora API](https://docs.bitquery.io/docs/examples/Solana/Meteora-DAMM-v2-API/)
-- [Raydium API](https://docs.bitquery.io/docs/examples/Solana/Solana-Raydium-DEX-API/)
-- [Orca API](https://docs.bitquery.io/docs/examples/Solana/solana-orca-dex-api/)
-- [Jupiter API](https://docs.bitquery.io/docs/examples/Solana/solana-jupiter-api/)
-- [PumpFun API](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/)
-- [Letsbonk API](https://docs.bitquery.io/docs/examples/Solana/letsbonk-api/)
+- [Meteora API](https://docs.bitquery.io/docs/blockchain/Solana/Meteora-DAMM-v2-API/)
+- [Raydium API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
+- [Orca API](https://docs.bitquery.io/docs/blockchain/Solana/solana-orca-dex-api/)
+- [Jupiter API](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api/)
+- [PumpFun API](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/)
+- [Letsbonk API](https://docs.bitquery.io/docs/blockchain/Solana/letsbonk-api/)
 
 ## 🔗 Related Solana APIs
 
-- **[Solana Instructions API](https://docs.bitquery.io/docs/examples/Solana/solana-instructions/)** - Track token creation and burn instructions
-- **[Solana DEX Trades API](https://docs.bitquery.io/docs/examples/Solana/solana-dextrades/)** - Monitor trading activities across all DEXs
-- **[Solana Transfers API](https://docs.bitquery.io/docs/examples/Solana/solana-transfers/)** - Track token transfers and movements
-- **[Solana Balance Updates API](https://docs.bitquery.io/docs/examples/Solana/solana-balance-updates/)** - Monitor balance changes from trades and transfers
-- **[Solana Token Supply API](https://docs.bitquery.io/docs/examples/Solana/token-supply-cube/)** - Track token supply and creation events
+- **[Solana Instructions API](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/)** - Track token creation and burn instructions
+- **[Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities across all DEXs
+- **[Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/)** - Track token transfers and movements
+- **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)** - Monitor balance changes from trades and transfers
+- **[Solana Token Supply API](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/)** - Track token supply and creation events
 
 
 ## Conclusion

@@ -1,6 +1,6 @@
 # Solana Trader API
 
-In this section we will see how to get Solana trader information using our API. More queries on DEX trades including latest trades, OHLC, and other data points can be found in the [Solana DEX Trades API page](https://docs.bitquery.io/docs/examples/Solana/solana-dextrades/).
+In this section we will see how to get Solana trader information using our API. More queries on DEX trades including latest trades, OHLC, and other data points can be found in the [Solana DEX Trades API page](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/).
 
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets

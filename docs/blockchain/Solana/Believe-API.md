@@ -8,8 +8,8 @@ The Believe Protocol is a decentralized token launchpad built on the Solana bloc
 
 ## Related APIs
 
-- **[Meteora Dynamic Bonding Curve API](https://docs.bitquery.io/docs/examples/Solana/meteora-dynamic-bonding-curve-api/)** - Core DBC functionality
-- **[Moonshot APIs](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/)** - Alternative launchpad
+- **[Meteora Dynamic Bonding Curve API](https://docs.bitquery.io/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/)** - Core DBC functionality
+- **[Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/)** - Alternative launchpad
 - **[FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/)** - BSC-based token creation
 
 ## Pro Tips
@@ -210,7 +210,7 @@ query MyQuery($tokenAddress: String!) {
 
 ## Get the Believe tokens which are graduated to Meteora
 
-For checking which Believe tokens graduated, we need to get all the tokens created by Believe on Meteora DBC using this [API](https://docs.bitquery.io/docs/examples/Solana/Believe-API/#get-latest-meteora-dbc-token-creations-using-believe-protocol) and then after getting all the token addresses put them in [this query](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1) to check which of them graduated to Meteora.
+For checking which Believe tokens graduated, we need to get all the tokens created by Believe on Meteora DBC using this [API](https://docs.bitquery.io/docs/blockchain/Solana/Believe-API/#get-latest-meteora-dbc-token-creations-using-believe-protocol) and then after getting all the token addresses put them in [this query](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1) to check which of them graduated to Meteora.
 
 ```
 query MyQuery {

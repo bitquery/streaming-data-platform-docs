@@ -1,6 +1,6 @@
 # Raydium CPMM API
 
-In this section we will see how to get data on Raydium CPMM trades in real-time. You can check out our [Pump Fun docs](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/), [Raydium v4 docs](https://docs.bitquery.io/docs/examples/Solana/Solana-Raydium-DEX-API/) and [Raydium LaunchPad docs](https://docs.bitquery.io/docs/examples/Solana/launchpad-raydium/) too.
+In this section we will see how to get data on Raydium CPMM trades in real-time. You can check out our [Pump Fun docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/), [Raydium v4 docs](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/) and [Raydium LaunchPad docs](https://docs.bitquery.io/docs/blockchain/Solana/launchpad-raydium/) too.
 
 
 

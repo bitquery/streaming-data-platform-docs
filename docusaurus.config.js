@@ -191,7 +191,7 @@ const config = {
           },
 
           {
-            to: "/docs/examples/Solana/Pump-Fun-API/",
+            to: "/docs/blockchain/Solana/Pump-Fun-API/",
             from: "/docs/examples/dextrades/Pump-Fun-API/",
           },
 
@@ -241,7 +241,7 @@ const config = {
             from: "/docs/examples/realtimetrades/",
           },
           {
-            to: "/docs/examples/Solana/", // new target
+            to: "/docs/blockchain/Solana/", // new target
             from: "/docs/category/solana/", // old category URL
           },
           {
@@ -253,8 +253,214 @@ const config = {
             from: "/docs/category/ethereum/",
           },
           {
-            to: "/docs/examples/Solana/letsbonk-api/",
+            to: "/docs/blockchain/Solana/letsbonk-api/",
             from: "/docs/examples/Solana/Bonk-Fun-API/",
+          },
+
+          // Solana page redirects from old path to new blockchain path
+          {
+            to: "/docs/blockchain/Solana/ai-agent-solana-data/",
+            from: "/docs/examples/Solana/ai-agent-solana-data/",
+          },
+          {
+            to: "/docs/blockchain/Solana/bags-fm-api/",
+            from: "/docs/examples/Solana/bags-fm-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Believe-API/",
+            from: "/docs/examples/Solana/Believe-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/BonkSwap-API/",
+            from: "/docs/examples/Solana/BonkSwap-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Boop-Fun-API/",
+            from: "/docs/examples/Solana/Boop-Fun-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/heaven-dex-api/",
+            from: "/docs/examples/Solana/heaven-dex-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/historical-aggregate-data/",
+            from: "/docs/examples/Solana/historical-aggregate-data/",
+          },
+          {
+            to: "/docs/blockchain/Solana/jupiter-studio-api/",
+            from: "/docs/examples/Solana/jupiter-studio-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/launchpad-raydium/",
+            from: "/docs/examples/Solana/launchpad-raydium/",
+          },
+          {
+            to: "/docs/blockchain/Solana/letsbonk-api/",
+            from: "/docs/examples/Solana/letsbonk-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Meteora-DAMM-v2-API/",
+            from: "/docs/examples/Solana/Meteora-DAMM-v2-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Meteora-DLMM-API/",
+            from: "/docs/examples/Solana/Meteora-DLMM-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Meteora-DYN-API/",
+            from: "/docs/examples/Solana/Meteora-DYN-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/",
+            from: "/docs/examples/Solana/meteora-dynamic-bonding-curve-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Moonshot-API/",
+            from: "/docs/examples/Solana/Moonshot-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Orbic-API/",
+            from: "/docs/examples/Solana/Orbic-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Pump-Fun-API/",
+            from: "/docs/examples/Solana/Pump-Fun-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/",
+            from: "/docs/examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/pump-fun-to-pump-swap/",
+            from: "/docs/examples/Solana/pump-fun-to-pump-swap/",
+          },
+          {
+            to: "/docs/blockchain/Solana/pump-swap-api/",
+            from: "/docs/examples/Solana/pump-swap-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/raydium-clmm-API/",
+            from: "/docs/examples/Solana/raydium-clmm-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/raydium-cpmm-API/",
+            from: "/docs/examples/Solana/raydium-cpmm-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana_fees_api/",
+            from: "/docs/examples/Solana/solana_fees_api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-AldrinAmm-api/",
+            from: "/docs/examples/Solana/Solana-AldrinAmm-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-balance-updates/",
+            from: "/docs/examples/Solana/solana-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-bullx-api/",
+            from: "/docs/examples/Solana/solana-bullx-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-DEX-Orders-API/",
+            from: "/docs/examples/Solana/Solana-DEX-Orders-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-DexPools-API/",
+            from: "/docs/examples/Solana/Solana-DexPools-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-dextrades/",
+            from: "/docs/examples/Solana/solana-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-gmgn-api/",
+            from: "/docs/examples/Solana/solana-gmgn-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-instruction-balance-updates/",
+            from: "/docs/examples/Solana/solana-instruction-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-instructions/",
+            from: "/docs/examples/Solana/solana-instructions/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-Jito-Bundle-api/",
+            from: "/docs/examples/Solana/Solana-Jito-Bundle-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-jupiter-api/",
+            from: "/docs/examples/Solana/solana-jupiter-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-Lifinity-dex-api/",
+            from: "/docs/examples/Solana/Solana-Lifinity-dex-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-logs/",
+            from: "/docs/examples/Solana/solana-logs/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-nft/",
+            from: "/docs/examples/Solana/solana-nft/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-OpenBook-api/",
+            from: "/docs/examples/Solana/Solana-OpenBook-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-orca-dex-api/",
+            from: "/docs/examples/Solana/solana-orca-dex-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-Phoenix-api/",
+            from: "/docs/examples/Solana/Solana-Phoenix-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-photon-api/",
+            from: "/docs/examples/Solana/solana-photon-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-Raydium-DEX-API/",
+            from: "/docs/examples/Solana/Solana-Raydium-DEX-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-rewards/",
+            from: "/docs/examples/Solana/solana-rewards/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-search-tokens/",
+            from: "/docs/examples/Solana/solana-search-tokens/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-trader-API/",
+            from: "/docs/examples/Solana/solana-trader-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-transactions/",
+            from: "/docs/examples/Solana/solana-transactions/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-transfers/",
+            from: "/docs/examples/Solana/solana-transfers/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-zeta/",
+            from: "/docs/examples/Solana/solana-zeta/",
+          },
+          {
+            to: "/docs/blockchain/Solana/SolFi-api/",
+            from: "/docs/examples/Solana/SolFi-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/token-supply-cube/",
+            from: "/docs/examples/Solana/token-supply-cube/",
+          },
+          {
+            to: "/docs/blockchain/Solana/xstocks-api/",
+            from: "/docs/examples/Solana/xstocks-api/",
           },
 
           // tradingview redirects

@@ -2,8 +2,8 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this document, we will explore several examples related to Boop fun data. We also have [Raydium Launchpad APIs](https://docs.bitquery.io/docs/examples/Solana/launchpad-raydium/).
-Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/examples/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/).
+In this document, we will explore several examples related to Boop fun data. We also have [Raydium Launchpad APIs](https://docs.bitquery.io/docs/blockchain/Solana/launchpad-raydium/).
+Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/examples/BSC/four-meme-api/).
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on [telegram](https://t.me/Bloxy_info).
 
 :::note

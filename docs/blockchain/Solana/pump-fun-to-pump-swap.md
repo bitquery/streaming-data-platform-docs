@@ -38,7 +38,7 @@ To help developers, traders, and analysts follow this journey, Bitquery offers a
 
 Every token on Pump fun starts with a launch event. You can track these launches in real-time using a streaming API:
 
-- [Track Pump Fun Token Creations in Real-Time Using Subscription](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#track-newly-created-pump-fun-tokens)
+- [Track Pump Fun Token Creations in Real-Time Using Subscription](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#track-newly-created-pump-fun-tokens)
 
 This API streams metadata like token name, symbol, mint, creator address, and timestamp the moment a new token is created.
 
@@ -46,11 +46,11 @@ This API streams metadata like token name, symbol, mint, creator address, and ti
 
 Pumpfun tokens are actively traded while they climb the bonding curve. Traders need up-to-the-second price feeds and trade streams:
 
-- [Track Price of a Token in Real-Time](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#track-price-of-a-token-in-real-time)
+- [Track Price of a Token in Real-Time](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#track-price-of-a-token-in-real-time)
 
-- [Get Real-Time Trades on Pump Fun](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#get-real-time-trades-on-pump-fun)
+- [Get Real-Time Trades on Pump Fun](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#get-real-time-trades-on-pump-fun)
 
-- [Get OHLC Data of a Token](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#get-ohlc-data-of-a-token)
+- [Get OHLC Data of a Token](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#get-ohlc-data-of-a-token)
 
 These APIs provide:
 
@@ -66,13 +66,13 @@ These APIs provide:
 
 For deeper insights and analytics, developers can extract:
 
-- [Token Price Change Over Time (Delta from X Minutes Back)](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#token-price-change-over-time-delta-from-x-minutes-back)
+- [Token Price Change Over Time (Delta from X Minutes Back)](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#token-price-change-over-time-delta-from-x-minutes-back)
 
-- [ATH Market Cap in a Specific Timeframe](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#ath-market-cap-in-a-specific-timeframe)
+- [ATH Market Cap in a Specific Timeframe](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#ath-market-cap-in-a-specific-timeframe)
 
-- [Get Market Cap, Price, Liquidity, Bonding Curve, and Volume](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#get-market-cap-price-liquidity-bonding-curve-and-volume)
+- [Get Market Cap, Price, Liquidity, Bonding Curve, and Volume](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#get-market-cap-price-liquidity-bonding-curve-and-volume)
 
-- [Get Detailed Trade Stats: Volume, Buys, Sells, Makers, Buyers, Sellers](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#get-detailed-trade-stats-volume-buys-sells-makers-buyers-sellers)
+- [Get Detailed Trade Stats: Volume, Buys, Sells, Makers, Buyers, Sellers](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#get-detailed-trade-stats-volume-buys-sells-makers-buyers-sellers)
 
 These endpoints help answer questions like:
 
@@ -86,11 +86,11 @@ These endpoints help answer questions like:
 
 Traders constantly seek trending tokens or insider holds:
 
-- [Top Pump Fun Tokens by Market Cap](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#top-pump-fun-tokens-by-market-cap)
+- [Top Pump Fun Tokens by Market Cap](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#top-pump-fun-tokens-by-market-cap)
 
-- [Track “King of the Hill” Tokens (30K–35K Market Cap)](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#track-king-of-the-hill-tokens-30k35k-market-cap)
+- [Track “King of the Hill” Tokens (30K–35K Market Cap)](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#track-king-of-the-hill-tokens-30k35k-market-cap)
 
-- [Get Dev’s Holdings of a Token](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/#get-devs-holdings-of-a-token)
+- [Get Dev’s Holdings of a Token](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#get-devs-holdings-of-a-token)
 
 These tools surface:
 
@@ -120,13 +120,13 @@ Once graduated:
 
 You can track these graduation events in real-time using Bitquery’s API:
 
-- [Track Pump Fun Token Migrations to PumpSwap](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/#track-pump-fun-token-migrations-to-pumpswap)
+- [Track Pump Fun Token Migrations to PumpSwap](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/#track-pump-fun-token-migrations-to-pumpswap)
 
 Post-migration, tokens trade as standard AMM pairs. Bitquery continues to offer real-time data support:
 
-- [Latest Trades for a Token on Pumpswap - Websocket](https://docs.bitquery.io/docs/examples/Solana/pump-swap-api/#latest-trades-for-a-token-on-pumpswap---websocket)
+- [Latest Trades for a Token on Pumpswap - Websocket](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api/#latest-trades-for-a-token-on-pumpswap---websocket)
 
-- [Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a Specific Token](https://docs.bitquery.io/docs/examples/Solana/pump-swap-api/#get-buy-volume-sell-volume-buys-sells-makers-total-trade-volume-buyers-sellers-of-a-specific-token)
+- [Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a Specific Token](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api/#get-buy-volume-sell-volume-buys-sells-makers-total-trade-volume-buyers-sellers-of-a-specific-token)
 
 ## Tracking Pumpfun Token Journey With Bitquery Shred Stream
 
