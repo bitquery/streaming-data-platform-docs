@@ -1,7 +1,7 @@
 ---
 title: Ethereum API - Best Blockchain Data API for Developers | Bitquery
 description: Access comprehensive Ethereum API with real-time blockchain data, transactions, DEX trades, token balances, and more. Free tier available. GraphQL API with subscriptions and Kafka streaming.
-slug: /examples/Ethereum/
+slug: /blockchain/Ethereum/
 keywords:
   - Ethereum API
   - Ethereum RPC
@@ -92,69 +92,69 @@ See examples and code snippets [here](https://docs.bitquery.io/docs/subscription
 
 ## Ethereum DEX Trades APIs
 
-- [Ethereum DEX API](https://docs.bitquery.io/docs/examples/dextrades/dex-api)
-- [Ethereum Token Trades APIs](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis)
-- [Trades of an Ethereum Address API](https://docs.bitquery.io/docs/examples/dextrades/trades-of-an-address-api)
-- [Uniswap API](https://docs.bitquery.io/docs/examples/dextrades/uniswap-api)
-- [Pancakeswap API](https://docs.bitquery.io/docs/examples/dextrades/pancakeswap-api)
-- [DEXScreener (EVM)](https://docs.bitquery.io/docs/examples/dextrades/DEXScreener/evm_dexscreener)
+- [Ethereum DEX API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/dex-api)
+- [Ethereum Token Trades APIs](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/token-trades-apis)
+- [Trades of an Ethereum Address API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/trades-of-an-address-api)
+- [Uniswap API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/uniswap-api)
+- [Pancakeswap API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/pancakeswap-api)
+- [DEXScreener (EVM)](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener)
 
 Query and subscribe to on‑chain swaps, OHLCV, liquidity events, pools, and per‑wallet trading activity across major EVM DEXes.
 
 ## Ethereum Token Holders API
 
-- [Token Holder API](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api)
+- [Token Holder API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-holders/token-holder-api)
 
 Track and analyze token holder distributions with comprehensive historical and real-time data. Get top holders by balance, monitor holder count changes, calculate distribution metrics like Gini coefficient and Nakamoto coefficient for decentralization analysis, identify new and active holders, and track first/last activity dates for any ERC-20 token on Ethereum.
 
 
 ## Ethereum Balance API
 
-- [Balance API](https://docs.bitquery.io/docs/examples/balances/balance-api)
+- [Balance API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api)
 
 Get real‑time and historical token and native ETH balances for any Ethereum address. Track balance changes over time, calculate portfolio values in USD, and monitor wallet holdings across ERC20, ERC721, and ERC1155 tokens. Perfect for building portfolio trackers, tax tools, and wallet analytics.
 
 ## Ethereum Token Transfers API
 
-- [ERC20 Token Transfer API](https://docs.bitquery.io/docs/examples/transfers/erc20-token-transfer-api)
-- [Ethereum Token Total Supply API](https://docs.bitquery.io/docs/examples/transfers/total-supply)
+- [ERC20 Token Transfer API](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api)
+- [Ethereum Token Total Supply API](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/total-supply)
 
 Track comprehensive token transfer activity across Ethereum with support for all major ERC standards including ERC20, ERC721, ERC1155, and more. Monitor transfers for any Ethereum address or smart contract, analyze inflow and outflow patterns, and discover specific transfers across the entire blockchain for any token. Get enriched data with corresponding USD values, transfer volumes, and detailed transaction context to power portfolio tracking, Tax tools, compliance monitoring, and token analytics applications.
 
 ## Ethereum Blocks API
 
-- [Ethereum Blocks API](https://docs.bitquery.io/docs/examples/blocks/blocks-api)
+- [Ethereum Blocks API](https://docs.bitquery.io/docs/blockchain/Ethereum/blocks/blocks-api)
 
 Access comprehensive Ethereum block data including block headers, timestamps, gas usage, miner/validator information, base fees, and transaction counts. Build time‑series analytics, monitor network health, track block production patterns, analyze fee dynamics, and compute blockchain metrics. Perfect for building block explorers, network monitoring tools, and blockchain analytics dashboards.
 
 ## Ethereum Smart Contract Events API
 
-- [Ethereum Smart Contract Events API](https://docs.bitquery.io/docs/examples/events/events-api)
+- [Ethereum Smart Contract Events API](https://docs.bitquery.io/docs/blockchain/Ethereum/events/events-api)
 
 Access and analyze smart contract events across Ethereum with comprehensive filtering and decoding capabilities. Query contract logs by specific topics, parameters, addresses, and event signatures to track contract interactions, state changes, and protocol activity. Get decoded event data with parameter names and values, filter by block ranges or time periods, and monitor real-time contract events. Essential for building DeFi analytics, protocol monitoring tools, governance trackers, and smart contract auditing systems.
 
 ## Ethereum Transaction Fees API
 
-- [Ethereum Transaction Fees API](https://docs.bitquery.io/docs/examples/fees/fees-api)
+- [Ethereum Transaction Fees API](https://docs.bitquery.io/docs/blockchain/Ethereum/fees/fees-api)
 
 Analyze comprehensive transaction fee data across Ethereum including gas usage patterns, base fee dynamics, priority fees, and transaction cost distributions. Track gas consumption by transaction type, monitor EIP-1559 fee market mechanics, calculate average gas prices over time, and analyze fee optimization strategies. Get detailed gas usage statistics, fee predictions, and cost analysis to power gas estimation tools, transaction optimization services, and fee market analytics dashboards.
 
 ## Ethereum Mempool API
 
-- [Ethereum Mempool API](https://docs.bitquery.io/docs/examples/mempool/mempool-api)
+- [Ethereum Mempool API](https://docs.bitquery.io/docs/blockchain/Ethereum/mempool/mempool-api)
 
 Monitor and analyze Ethereum's mempool to track pending transactions before they are included in blocks. Get real-time insights into transaction queues, fee estimations, and network congestion patterns. Track pending transactions by address, value, gas price, and transaction type to build MEV strategies, optimize transaction timing, and provide better fee estimation services. Additionally, simulate mempool transactions to preview potential transfers, trades, and contract interactions before execution, enabling advanced analysis of transaction outcomes and state changes. Essential for building frontrunning protection, transaction monitoring tools, MEV detection systems, and advanced DeFi applications that need to react to pending on-chain activity.
 
 
 ## Ethereum NFT API
 
-- [Ethereum NFT API](https://docs.bitquery.io/docs/examples/nft/nft-api)
+- [Ethereum NFT API](https://docs.bitquery.io/docs/blockchain/Ethereum/nft/nft-api)
 
 Access comprehensive NFT data across Ethereum including collections, ownership tracking, transfer history, marketplace trades, and metadata. Query NFT collections by contract address, track ownership changes and holder distributions, monitor NFT transfers and sales across major marketplaces like OpenSea and LooksRare, and retrieve detailed token metadata including images, attributes, and rarity information. Get enriched trading data with USD values, floor prices, and volume metrics to power NFT analytics dashboards, portfolio trackers, rarity tools, and marketplace monitoring applications.
 
 ## Ethereum Transactions API
 
-- [Ethereum Transaction API](https://docs.bitquery.io/docs/examples/transactions/transaction-api)
+- [Ethereum Transaction API](https://docs.bitquery.io/docs/blockchain/Ethereum/transactions/transaction-api)
 
 Query detailed Ethereum transaction data including transaction hashes, from/to addresses, values transferred, gas prices, gas limits, gas used, nonce values, and transaction status. Access transaction input data, method signatures, internal transactions, and execution traces. Filter transactions by sender, receiver, value ranges, time periods, or transaction type to analyze payment flows, contract calls, and wallet behavior. Retrieve comprehensive transaction receipts with logs, events, and error details for both successful and failed transactions. Essential for transaction monitoring, forensic analysis, compliance reporting, and building comprehensive blockchain data applications.
 

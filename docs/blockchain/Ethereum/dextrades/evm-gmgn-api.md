@@ -1,14 +1,12 @@
-# Photon EVM API
+# GMGN EVM API
 
-This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair and many more just like how Photon shows for EVM Chains.
+This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair and many more just like how GMGN shows for EVM Chains.
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
-
-<img width="1445" alt="Image" src="https://github.com/user-attachments/assets/1dfb2ecc-419f-4154-98d1-6964a47e7b44" />
+import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 ## Get the Top Trading Pairs
 
-The query will fetch you the Top Trading Pairs in desceneding order of the total number of trades took place in them just like how Photon shows in its UI. You can check out the video tutorial [here](https://www.youtube.com/watch?v=qAJ2SPFaO-k) to understand the query better.
+The query will fetch you the Top Trading Pairs in desceneding order of the total number of trades took place in them just like how GMGN shows in its UI. You can check out the video tutorial [here](https://www.youtube.com/watch?v=qAJ2SPFaO-k) to understand the query better.
 
 You can find the query [here](https://ide.bitquery.io/List-of-trading-pairs-in-descending-order-of-trxns-in-last-24-hours)
 
@@ -157,7 +155,7 @@ query MyQuery {
 
 ## Get the Buys, Sells, Buy Volume, Sell Volume and Makers
 
-The query will fetch you the buys, sells, buy volume, sell volume and also the number of makers for a particular token just like how Photon shows in its UI. We are getting these trade metrics for this particular pool address `0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`.
+The query will fetch you the buys, sells, buy volume, sell volume and also the number of makers for a particular token just like how GMGN shows in its UI. We are getting these trade metrics for this particular pool address `0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`.
 
 You can find the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-eth-pair#)
 

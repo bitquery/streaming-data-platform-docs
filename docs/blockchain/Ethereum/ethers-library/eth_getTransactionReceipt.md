@@ -101,4 +101,4 @@ The response of the above API is given below.
 }
 ```
 
-Now, you may note that unlike the JSON RPC method, this API does'nt return any `log` object. However, if that is something you might need then checkout the following page for [eth_getLogs](https://docs.bitquery.io/docs/examples/ethers-library/eth_getLogs/). 
+Now, you may note that unlike the JSON RPC method, this API does'nt return any `log` object. However, if that is something you might need then checkout the following page for [eth_getLogs](https://docs.bitquery.io/docs/blockchain/Ethereum/ethers-library/eth_getLogs/). 

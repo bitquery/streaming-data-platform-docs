@@ -30,7 +30,7 @@ title: "EVM Blocks API"
 
 Blocks API provide details on blocks.
 
-You can use different [filters](docs/graphql/filters.mdx) to query data from different dimensions. You can find more examples [here](/docs/examples/blocks/blocks-api)
+You can use different [filters](docs/graphql/filters.mdx) to query data from different dimensions. You can find more examples [here](/docs/blockchain/Ethereum/blocks/blocks-api/)
 
 Let's see an example of Blocks API to get the latest 10 blocks on Ethereum blockchain.
 
@@ -49,4 +49,4 @@ Let's see an example of Blocks API to get the latest 10 blocks on Ethereum block
 }
 ```
 
-You can see more example of Blocks api in [here](docs/examples/blocks/blocks-api.md).
+You can see more example of Blocks api in [here](/docs/blockchain/Ethereum/blocks/blocks-api/).

@@ -106,7 +106,7 @@ const config = {
         redirects: [
           // /docs/oldDoc -> /docs/newDoc
           {
-            to: "/docs/examples/token-holders/token-holder-api/",
+            to: "/docs/blockchain/Ethereum/token-holders/token-holder-api/",
             from: "/docs/examples/balances/tokenHolders-api/",
           },
           {
@@ -114,15 +114,15 @@ const config = {
             from: "/docs/contribution_guidelines/",
           },
           {
-            to: "/docs/examples/calls/contract-creation/",
+            to: "/docs/blockchain/Ethereum/calls/contract-creation/",
             from: "/docs/examples/calls/Contract%20_creation/",
           },
           {
-            to: "/docs/examples/calls/smartcontract-filterby/",
+            to: "/docs/blockchain/Ethereum/calls/smartcontract-filterby/",
             from: "/docs/examples/calls/smartcontract_filterby/",
           },
           {
-            to: "/docs/examples/events/events-api/",
+            to: "/docs/blockchain/Ethereum/events/events-api/",
             from: "/docs/examples/events/events_api/",
           },
           {
@@ -196,11 +196,11 @@ const config = {
           },
 
           {
-            to: "/docs/examples/ethers-library/eth_subscribe",
+            to: "/docs/blockchain/Ethereum/ethers-library/eth_subscribe",
             from: "/docs/category/ethsubscribe-alternatives/",
           },
           {
-            to: "/docs/examples/ethers-library/eth_subscribe/",
+            to: "/docs/blockchain/Ethereum/ethers-library/eth_subscribe/",
             from: "/docs/examples/Ethereum-subscriptions/eth-subscribe/",
           },
           {
@@ -212,7 +212,7 @@ const config = {
             from: "/docs/category/use-cases/",
           },
           {
-            to: "/docs/examples/nft/nft-api/",
+            to: "/docs/blockchain/Ethereum/nft/nft-api/",
             from: "/docs/category/nft/",
           },
           {
@@ -237,7 +237,7 @@ const config = {
             from: "/docs/category/Optimism/",
           },
           {
-            to: "/docs/examples/dextrades/uniswap-api/",
+            to: "/docs/blockchain/Ethereum/dextrades/uniswap-api/",
             from: "/docs/examples/realtimetrades/",
           },
           {
@@ -249,12 +249,74 @@ const config = {
             from: "/docs/category/bsc/", // old category URL
           },
           {
-            to: "/docs/examples/Ethereum/",
+            to: "/docs/blockchain/Ethereum/",
             from: "/docs/category/ethereum/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/",
+            from: "/docs/examples/Ethereum/",
+          },
+
+          // Ethereum examples redirects from old examples/ path to new blockchain/Ethereum/ path
+          {
+            to: "/docs/blockchain/Ethereum/blocks/blocks-api/",
+            from: "/docs/examples/blocks/blocks-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/balances/balance-api/",
+            from: "/docs/examples/balances/balance-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/token-holders/token-holder-api/",
+            from: "/docs/examples/token-holders/token-holder-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/calls/smartcontract/",
+            from: "/docs/examples/calls/smartcontract/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/calls/smartcontract-filterby/",
+            from: "/docs/examples/calls/smartcontract-filterby/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/events/events-api/",
+            from: "/docs/examples/events/events-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/fees/fees-api/",
+            from: "/docs/examples/fees/fees-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/mempool/mempool-api/",
+            from: "/docs/examples/mempool/mempool-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/transfers/total-supply/",
+            from: "/docs/examples/transfers/total-supply/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/transactions/transaction-api/",
+            from: "/docs/examples/transactions/transaction-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/calls/contract-creation/",
+            from: "/docs/examples/calls/contract-creation/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api/",
+            from: "/docs/examples/transfers/erc20-token-transfer-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/transfers/rwa-api/",
+            from: "/docs/examples/transfers/rwa-api/",
           },
           {
             to: "/docs/blockchain/Solana/letsbonk-api/",
             from: "/docs/examples/Solana/Bonk-Fun-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/DEXScreener/solana_dexscreener/",
+            from: "/docs/blockchain/Ethereum/dextrades/DEXScreener/solana_dexscreener/",
           },
 
           // Solana page redirects from old path to new blockchain path

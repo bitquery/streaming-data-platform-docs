@@ -6,10 +6,10 @@ sidebar_position: 2
 
 The Event API gives you access real-time blockchain event data. Events represent changes to the state of a blockchain, such as transactions, token transfers, or contract creations.
 
-You can find the **Ethers Library equivalents** for these queries at **[Bitquery Ethers Library Section](https://docs.bitquery.io/docs/examples/ethers-library/debug_traceCall/)**.
+You can find the **Ethers Library equivalents** for these queries at **[Bitquery Ethers Library Section](https://docs.bitquery.io/docs/blockchain/Ethereum/ethers-library/debug_traceCall/)**.
 
 
-You can find the **NFT Events Examples** at **[Bitquery NFT API Section](https://docs.bitquery.io/docs/examples/nft/nft-blur-marketplace-api/)**.
+You can find the **NFT Events Examples** at **[Bitquery NFT API Section](https://docs.bitquery.io/docs/blockchain/Ethereum/nft/nft-blur-marketplace-api/)**.
 
 ## Mempool Events on Ethereum
 
