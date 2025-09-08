@@ -6,7 +6,7 @@ You might see abnormal prices when you fetch data from Bitquery APIs. There can 
 
 - In the second case, the Bitquery DB itself has incorrect trade data, then create a ticket [here](http://support.bitquery.io).
 
-In the first case, we are going to see 3 different methods to filter anomaly trades. Anomaly trades are the trades that result in abnormally high or low prices in USD. Bitquery provides raw trade data and does not omit any trades that are happening over the network. But this also results in some issues for the Bitquery data consumers if they are trying to build something around the Price of tokens, such as trying to get All time high price or building OHLC/K-line charts.
+In the first case, we are going to see 3 different methods to filter anomaly trades. Anomaly trades are the trades that result in abnormally high or low prices in USD. Bitquery provides raw trade data and does not omit any trades that are happening over the network. But this also results in some issues for the Bitquery data consumers if they are trying to build something around the Price of tokens, such as trying to get All time high price or building OHLC/K-line charts. For pre-filtered, clean price data, consider using our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).
 
 3 ways to omit these types of anomaly trades:
 
