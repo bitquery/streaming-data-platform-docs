@@ -725,6 +725,94 @@ const config = {
             to: "/docs/blockchain/Arbitrum/Overview",
             from: "/docs/examples/Arbitrum/Overview",
           },
+
+          // Base redirects from old examples/Base/ path to new blockchain/Base/ path
+          {
+            to: "/docs/blockchain/Base/",
+            from: "/docs/category/base/",
+          },
+          {
+            to: "/docs/blockchain/Base/",
+            from: "/docs/examples/Base/",
+          },
+          {
+            to: "/docs/blockchain/Base/aerodrome-base-api/",
+            from: "/docs/examples/Base/aerodrome-base-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-uniswap-api/",
+            from: "/docs/examples/Base/base-uniswap-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-clanker-api/",
+            from: "/docs/examples/Base/base-clanker-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/apestore-base-api/",
+            from: "/docs/examples/Base/apestore-base-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-jump-base-api/",
+            from: "/docs/examples/Base/base-jump-base-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-zora-api/",
+            from: "/docs/examples/Base/base-zora-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-balance-updates/",
+            from: "/docs/examples/Base/base-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-coins-api/",
+            from: "/docs/examples/Base/base-coins-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-dextrades/",
+            from: "/docs/examples/Base/base-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-nft/",
+            from: "/docs/examples/Base/base-nft/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-transfers/",
+            from: "/docs/examples/Base/base-transfers/",
+          },
+          {
+            to: "/docs/blockchain/Base/ai-agent-base-data/",
+            from: "/docs/examples/Base/ai-agent-base-data/",
+          },
+
+          // Matic redirects from old examples/Matic/ path to new blockchain/Matic/ path
+          {
+            to: "/docs/blockchain/Matic/",
+            from: "/docs/category/matic/",
+          },
+          {
+            to: "/docs/blockchain/Matic/",
+            from: "/docs/examples/Matic/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-balance-updates/",
+            from: "/docs/examples/Matic/matic-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-dextrades/",
+            from: "/docs/examples/Matic/matic-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-uniswap-api/",
+            from: "/docs/examples/Matic/matic-uniswap-api/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-nft/",
+            from: "/docs/examples/Matic/matic-nft/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-transfers/",
+            from: "/docs/examples/Matic/matic-transfers/",
+          },
         ],
       },
     ],
