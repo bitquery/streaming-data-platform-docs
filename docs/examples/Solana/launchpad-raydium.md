@@ -25,9 +25,9 @@ These APIs can be provided through different streams including Kafka for zero la
 
 ## Latest Pools Created on Launchpad
 
-We will use the `PoolCreateEvent` method to filter latest pools on Launchpad. The `Argument` filed includes more information about the pool like `base_mint_param`( token details), `curve_param`( bonding curve details) and `vesting_param` ( cliff period, amount locked etc).
+We will use the `PoolCreateEvent` method to filter latest pools on Launchpad. The `Argument` filed includes more information about the pool like `base_mint_param`( token details), `curve_param`( bonding curve details) and `vesting_param` ( cliff period, amount locked etc). Token address is at the 7th entry in Accounts Array.
 
-You can run the query [here](https://ide.bitquery.io/Launchpad-realtime--pool-creations_1)
+You can run the query [here](https://ide.bitquery.io/Raydium-Launchpad-pool-creations_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -40,9 +40,10 @@ subscription {
         Instruction: {
           Program: {
             Address: { is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj" }
-            Method: { is: "PoolCreateEvent" }
+            Method: { is: "initialize_v2" }
           }
         }
+        Transaction: { Result: { Success: true } }
       }
     ) {
       Block {
