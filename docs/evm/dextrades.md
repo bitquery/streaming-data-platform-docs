@@ -24,7 +24,7 @@ title: DEX Trades API
 DEXTrades api gives trading-related data from different DEXs such as Uniswap, Pancakeswap, 0x, etc.
 
 API provides historical and real-time trades and pricing information for tokens. The API allows different filters to query the Smart contract calls details from different dimensions, such as from different DEXs, protocols, tokens, trades, pools, etc.
-You can find more examples [here](/docs/examples/dextrades/get-trading-pairs-of-token)
+You can find more examples [here](/docs/blockchain/Ethereum/dextrades/get-trading-pairs-of-token/)
 
 ## DEX Trades Cube
 

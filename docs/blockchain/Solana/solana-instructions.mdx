@@ -1,0 +1,400 @@
+---
+sidebar_position: 3
+---
+
+# Solana Instructions API
+
+<head>
+<meta name="title" content="Solana Instructions API | Get decoded Instructions data"/>
+<meta name="description" content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc."/>
+<meta name="keywords" content="instructions api, instructions python api, instructions scan api, instructions api docs, DEX Trades crypto api, instructions blockchain api,solana network api"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="Solana Instructions API | Get decoded Instructions data"
+/>
+<meta
+  property="og:description"
+  content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc."
+/>
+
+<!-- Twitter -->
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="Solana Instructions API | Get decoded Instructions data" />
+<meta property="twitter:description" content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc." />
+</head>
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+## Overview
+
+The **Solana Instructions API** provides comprehensive access to decoded instruction data executed on the Solana blockchain. This API enables you to track real-time instructions, monitor token creation and burning events, and analyze program interactions with detailed information including signer details, transaction signatures, balance updates, and program metadata.
+
+## 📋 Table of Contents
+
+- **[Latest Solana Instructions](#latest-solana-instructions)** - Real-time instruction monitoring
+- **[Latest Created Tokens on Solana](#latest-created-tokens-on-solana)** - Token creation tracking
+- **[Track Real-time Token Burn on Solana](#track-real-time-token-burn-on-solana)** - Token burn monitoring
+- **[Video Tutorials](#video-tutorials)** - Step-by-step guides
+
+## 🔗 Related APIs
+
+- **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)** - Monitor real-time balance changes
+- **[Solana Token Supply API](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/)** - Track token supply and creation events
+- **[Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities across DEXs
+- **[Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/)** - Track token transfers and movements
+- **[Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api/)** - Analyze transaction fees and costs
+
+---
+
+## Latest Solana Instructions
+
+The subscription below fetches the latest instructions executed on the Solana blockchain, including details like indices of preceding instructions, signer information, transaction signatures, balance updates, and program details.
+
+For monitoring the balance changes that result from these instructions, see our **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)**.
+
+You can run the query [here](https://ide.bitquery.io/Latest-Solana-Instructions)
+
+```graphql
+subscription {
+  Solana(network: solana) {
+    Instructions {
+      Transaction {
+        Signer
+        Signature
+        Result {
+          Success
+          ErrorMessage
+        }
+        Index
+      }
+      Instruction {
+        Logs
+        BalanceUpdatesCount
+        AncestorIndexes
+        TokenBalanceUpdatesCount
+        Program {
+          Name
+          Method
+        }
+      }
+      Block {
+        Time
+        Hash
+      }
+    }
+  }
+}
+```
+
+---
+
+## Latest Created Tokens on Solana
+
+The query below fetches the latest created tokens on the Solana blockchain, including details like newly created token addresses (which appear as the first entry in the Accounts array). We are querying the Solana Token Program with address `TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA` and filtering for the latest created tokens using `Method: {in: ["initializeMint", "initializeMint2", "initializeMint3"]}`.
+
+You can run the query [here](https://ide.bitquery.io/Get-newly-created-tokens-on-Solana_1)
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}, Method: {in: ["initializeMint", "initializeMint2"]}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+
+
+
+```
+
+## Get Token Metadata using Metaplex of Newly Created Tokens
+
+This query retrieves metadata for newly created tokens on Solana using the Metaplex program. 
+The metadata is returned is the **JSON** field, which includes fields such as name, symbol, uri, and more.
+You can run the query [here](https://ide.bitquery.io/Get-newly-created-token-metadata-on-Solana)
+You can also add the keyword `subscription` and track it in real-time.
+
+```
+{
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"}, Method: {is: "CreateMetadataAccountV3"}}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 10}
+      orderBy: {descending: Block_Slot}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+          Arguments {
+            Value {
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+            }
+            Type
+            Name
+          }
+          Name
+          Method
+        }
+        Data
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+```
+
+## Number of Latest Created Tokens on Solana
+
+The query below fetches the count of the latest created tokens on the Solana blockchain which were created using `initializeMint` method.
+
+You can run the query [here](https://ide.bitquery.io/Count---Tokens-created-on-Solana)
+
+```
+query MyQuery {
+  Solana(dataset: realtime, network: solana) {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}, Method: {is: "initializeMint"}}}}
+      limit: {count: 10}
+    ) {
+      count
+      Block {
+        latest: Time(maximum: Block_Time)
+        oldest: Time(minimum: Block_Time)
+      }
+    }
+  }
+}
+
+
+```
+
+## Get Buyevent instruction details
+
+Use the below query to get the `BuyEvent` instruction details. Test the query [here](https://ide.bitquery.io/BuyEvent).
+
+```
+subscription {
+  Solana {
+    Instructions(where: {
+      Instruction: {
+        Program: {
+          Method: {
+            is: "BuyEvent"
+          }
+        }
+      }
+    }) {
+      Transaction {
+        Signature
+      }
+      Instruction {
+        Program {
+          Method
+          Name
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## Track Real-time Token Burn on Solana
+
+Receive real-time updates on token burn events on the Solana blockchain. The query below applies a filter to only include instructions where the Program Method includes `burn`, indicating that we filter instructions related specifically to token burning. You can run it [here](https://ide.bitquery.io/track-solana-token-burn-in-realtime_1)
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Method: {is: "burn"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          Address
+          Name
+          Method
+        }
+        Logs
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+```
+
+### Alternative: Token Burn Tracking via TokenSupplyUpdates API
+
+You can also track real-time token burn using the TokenSupplyUpdates API. Check out the [following example](https://ide.bitquery.io/token-burn-example-solana).
+
+For more comprehensive token supply tracking, see our **[Solana Token Supply API](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/)** documentation.
+
+```graphql
+{
+  Solana {
+    TokenSupplyUpdates(
+      where: {TokenSupplyUpdate: {Amount: {lt: "0"}}}
+      limit: {count: 20}
+      orderBy: {descending: Block_Time}
+    ) {
+      TokenSupplyUpdate {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Decimals
+        }
+        Amount
+        AmountInUSD
+        PreBalance
+        PreBalanceInUSD
+        PostBalance
+        PostBalanceInUSD
+        Account {
+          Address
+          Owner
+          Token {
+            Owner
+          }
+        }
+      }
+      Block {
+        Time
+        Height
+      }
+      Instruction {
+        Program {
+          Address
+          Method
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+---
+
+## Video Tutorials
+
+### How to Track New Liquidity Pools Created on Solana Raydium & Orca DEX
+
+<VideoPlayer url="https://youtu.be/FO4-sYHgF-k?si=xBI9j4gnFxmuzQrU" />
+
+### How to Get Newly Created Tokens on Solana Blockchain in Real-time
+
+<VideoPlayer url="https://www.youtube.com/watch?v=P8BMl0X5d8o" />
+
+```
+

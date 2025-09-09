@@ -1,0 +1,1626 @@
+# Token Trades API
+
+We have two main APIs to get DEX trading data.
+
+- DEXTrades
+- DEXTradeByTokens
+
+To learn the difference between the two, please check [this doc](https://docs.bitquery.io/docs/schema/evm/dextrades/).
+
+## Subscribe to realtime DEXTrades on Ethereum Mainnet
+
+The below query will get you the realtime DEX trades happening on Ethereum Mainnet. Open it in the GraphQL IDE using this [link](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet_2).
+
+<details>
+  <summary>Click to expand GraphQL subscription</summary>
+
+```graphql
+subscription MyQuery {
+  EVM(network: eth) {
+    DEXTrades {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+      }
+      Call {
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Log {
+        Index
+        SmartContract
+        Signature {
+          Signature
+          Name
+        }
+      }
+      Trade {
+        Sender
+        Buy {
+          Buyer
+          AmountInUSD
+          Amount
+          Seller
+          PriceInUSD
+          Price
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+        Dex {
+          SmartContract
+          ProtocolName
+          ProtocolVersion
+        }
+        Sell {
+          Buyer
+          AmountInUSD
+          Amount
+          Seller
+          PriceInUSD
+          Price
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Get the Buys, Sells, Buy Volume, Sell Volume and Makers
+
+Fetch buys, sells, volumes, and the number of makers for a specific pool (`0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`). See a video explanation [here](https://www.youtube.com/watch?v=K_H3to_nIdY).
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```graphql
+query MyQuery(
+  $network: evm_network
+  $token: String
+  $pairAddress: String
+  $min5_timestamp: DateTime
+  $hr1_timestamp: DateTime
+) {
+  EVM(dataset: realtime, network: $network) {
+    DEXTradeByTokens(
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Currency: { SmartContract: { is: $token } }
+          Dex: { SmartContract: { is: $pairAddress } }
+        }
+        Block: { Time: { since: $hr1_timestamp } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          SmartContract
+          Symbol
+        }
+        startPrice: PriceInUSD(minimum: Block_Time)
+        Price_at_min5: PriceInUSD(
+          minimum: Block_Time
+          if: { Block: { Time: { after: $min5_timestamp } } }
+        )
+        current_price: PriceInUSD(maximum: Block_Time)
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          SmartContract
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+      }
+      makers: count(distinct: Transaction_From)
+      makers_5min: count(
+        distinct: Transaction_From
+        if: { Block: { Time: { after: $min5_timestamp } } }
+      )
+      buyers: count(
+        distinct: Transaction_From
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      buyers_5min: count(
+        distinct: Transaction_From
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { after: $min5_timestamp } }
+        }
+      )
+      sellers: count(
+        distinct: Transaction_From
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sellers_5min: count(
+        distinct: Transaction_From
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { after: $min5_timestamp } }
+        }
+      )
+      trades: count
+      trades_5min: count(if: { Block: { Time: { after: $min5_timestamp } } })
+      traded_volume: sum(of: Trade_Side_AmountInUSD)
+      traded_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Block: { Time: { after: $min5_timestamp } } }
+      )
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      buy_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { after: $min5_timestamp } }
+        }
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { after: $min5_timestamp } }
+        }
+      )
+      buys: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      buys_5min: count(
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { after: $min5_timestamp } }
+        }
+      )
+      sells: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      sells_5min: count(
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { after: $min5_timestamp } }
+        }
+      )
+    }
+  }
+}
+```
+
+```json
+{
+  "network": "eth",
+  "token": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
+  "pairAddress": "0xA43fe16908251ee70EF74718545e4FE6C5cCEc9f",
+  "hr1_timestamp": "2024-11-14T03:20:00Z",
+  "min5_timestamp": "2024-11-14T04:15:00Z"
+}
+```
+
+</details>
+
+## Get the Buys, Sells, Buy Volume, Sell Volume and Makers of Multiple Tokens
+
+Same metrics as above, but for multiple pools at once.
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```graphql
+query MyQuery(
+  $network: evm_network,
+  $token: String,
+  $pairAddress: [String!],
+  $min5_timestamp: DateTime,
+  $hr1_timestamp: DateTime
+) {
+  EVM(dataset: realtime, network: $network) {
+    DEXTradeByTokens(
+      where: {
+        TransactionStatus: { Success: true },
+        Trade: {
+          Dex: { SmartContract: { in: $pairAddress } },
+          Side: { Currency: { SmartContract: { is: $token } } }
+        },
+        Block: { Time: { since: $hr1_timestamp } }
+      }
+    ) {
+      /* same fields as previous */
+    }
+  }
+}
+```
+
+```json
+{
+  "network": "eth",
+  "token": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+  "pairAddress": [
+    "0x055FB841Cce69000FBAFF2691Ad39Fa6E23826a1",
+    "0x8d345583C9289D69d4a55797CcadC5A1eA150A44"
+  ],
+  "hr1_timestamp": "2025-06-18T07:34:00Z",
+  "min5_timestamp": "2025-06-18T08:28:00Z"
+}
+```
+
+</details>
+
+## Historical Token Trades & Price API
+
+Use the DEXTrades API for historical buyside and sellside trades of BLUR token by the 1inch router.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    buyside: DEXTrades(
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: { SmartContract: { is: "0x5283d291dbcf85356a21ba090e6db59121208b44" } }
+            Seller: { is: "0x1111111254eeb25477b68fb85ed929f73a960582" }
+          }
+        }
+        Block: {
+          Time: {
+            since: "2023-03-03T01:00:00Z",
+            till: "2023-03-05T05:15:23Z"
+          }
+        }
+      }
+    ) {
+      /* buyside fields */
+    }
+    sellside: DEXTrades(
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Sell: {
+            Currency: { SmartContract: { is: "0x5283d291dbcf85356a21ba090e6db59121208b44" } }
+            Buyer: { is: "0x1111111254eeb25477b68fb85ed929f73a960582" }
+          }
+        }
+        Block: {
+          Time: {
+            since: "2023-03-03T01:00:00Z",
+            till: "2023-03-05T05:15:23Z"
+          }
+        }
+      }
+    ) {
+      /* sellside fields */
+    }
+  }
+}
+```
+
+</details>
+
+## Get Price Change 5min, 1h, 6h and 24h of a specific token
+
+Use below query to get price change 5min, 1h, 6h and 24h of a specific token. Change the `Currency{SmartContract}` and `Dex{SmartContract}` according to your needs. Test the query [here]
+(https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_1#).
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```
+query MyQuery {
+  EVM(dataset: combined) {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: "0x4393b54385e91824A2Ae5DFd35e226A3313A1a18"}}, Dex: {SmartContract: {is: "0x2bE4042B40359555b41C1A8b80bf604267DE0C5A"}}}, TransactionStatus: {Success: true}, Block: {Time: {since_relative: {hours_ago: 24}}}}
+    ){
+      Trade {
+        Price_5min_ago: PriceInUSD(minimum:Block_Number if:{Block:{Time:{since_relative:{minutes_ago:5}}}})
+        Price_1h_ago: PriceInUSD(minimum:Block_Number if:{Block:{Time:{since_relative:{hours_ago:1}}}})
+        Price_6h_ago: PriceInUSD(minimum: Block_Number  if:{Block:{Time:{since_relative:{hours_ago:6}}}})
+        Price_24h_ago: PriceInUSD(minimum: Block_Number)
+        CurrentPrice: PriceInUSD(maximum: Block_Number)
+      }
+      volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+      )
+      volume_1h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+      )
+      volume_6h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+      )
+      volume_24h: sum(
+        of: Trade_Side_AmountInUSD
+      )
+      Price_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100")
+      Price_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100")
+      Price_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100")
+      Price_Change_24h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_24h_ago) / $Trade_Price_24h_ago) * 100")
+    }
+  }
+}
+```
+
+</details>
+
+## Top 10 Eth Tokens by Price Change in last 1h
+
+Use below query to get top 10 Eth Tokens by Price Change in last 1h. Test the query [here]
+(https://ide.bitquery.io/Top-10-eth-tokens-by-price-change-in-last-1-hr_1#).
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```
+query MyQuery {
+  EVM(dataset: combined) {
+    DEXTradeByTokens(
+      limit:{count:10}
+      orderBy:{descendingByField:"Price_Change_1h"}
+      where: {TransactionStatus: {Success: true}, Block: {Time: {since_relative: {hours_ago: 24}}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        Price_5min_ago: PriceInUSD(
+          minimum: Block_Number
+          if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+        )
+        Price_1h_ago: PriceInUSD(
+          minimum: Block_Number
+          if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+        )
+        Price_6h_ago: PriceInUSD(
+          minimum: Block_Number
+          if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+        )
+        Price_24h_ago: PriceInUSD(minimum: Block_Number)
+        CurrentPrice: PriceInUSD(maximum: Block_Number)
+        Side {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+        Dex{
+          SmartContract
+        }
+      }
+
+      volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+      )
+      volume_1h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+      )
+      volume_6h: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+      )
+      volume_24h: sum(of: Trade_Side_AmountInUSD)
+      Price_Change_5min: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100"
+      )
+      Price_Change_1h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100"
+      )
+      Price_Change_6h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100"
+      )
+      Price_Change_24h: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_24h_ago) / $Trade_Price_24h_ago) * 100"
+      )
+    }
+  }
+}
+```
+
+</details>
+
+## Latest Trades of a Token
+
+Fetch the most recent 50 trades for a given token:
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```graphql
+query LatestTrades {
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limit: { count: 50 }
+      where: {
+        Trade: { 
+          Currency: { SmartContract: { is: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599" } }, 
+          Price: { gt: 0 } 
+        }
+      }
+    ) {
+      Block {
+        allTime: Time
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        AmountInUSD
+        Buyer
+        Seller
+        Side {
+          Type
+          Buyer
+          Seller
+        }
+        Price
+        Amount
+        Side {
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/e4273aea-bf8d-41e4-80e8-b676005e0ce7)
+
+Our DEX Dashboard gives you a easier way to check the data -> [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#last_trades).
+
+## Latest Trades of Multiple Tokens
+
+[Run Query](https://ide.bitquery.io/latest-trades-of-multiple-tokens-against-weth-usdt)
+
+<details>
+
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```
+query LatestTrades {
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limit: { count: 50 }
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Side: { 
+            Currency: { SmartContract: { in: [
+              "0x", 
+              "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", 
+              "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", 
+              "0xdac17f958d2ee523a2206206994597c13d831ec7"
+            ] } } 
+          }
+          Currency: { SmartContract: { in: [
+            "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+            "0x514910771af9ca656af840dff83e8264ecf986ca"
+          ] } }
+          Success: true
+        }
+        Block: { Time: { since: "2025-08-17T08:55:31Z" } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Dex {
+          SmartContract
+          ProtocolFamily
+          ProtocolName
+        }
+        AmountInUSD
+        Buyer
+        Seller
+        Side {
+          Type
+          Buyer
+          Seller
+        }
+        PriceInUSD
+        Amount
+        Side {
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+
+```
+
+</details>
+
+
+## Token Trade Analytics
+
+Run this for analytics related to token trades:
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(network: bsc, dataset: combined) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0xc342774492b54ce5f8ac662113ed702fc1b34972" }
+          }
+        }
+      }
+      orderBy: { descendingByField: "usd" }
+      limit: { count: 1000 }
+    ) {
+      Trade {
+        Currency {
+          Decimals
+          Symbol
+          SmartContract
+          Fungible
+          Name
+        }
+        Amount(maximum: Block_Number)
+        AmountInUSD(maximum: Block_Number)
+      }
+      pairs: uniq(of: Trade_Side_Currency_SmartContract)
+      dexes: uniq(of: Trade_Dex_SmartContract)
+      amount: sum(of: Trade_Amount)
+      usd: sum(of: Trade_AmountInUSD)
+      usd2: sum(of: Trade_Side_AmountInUSD)
+      buyers: uniq(of: Trade_Buyer)
+      sellers: uniq(of: Trade_Sender)
+      count
+    }
+  }
+}
+```
+
+</details>
+
+## Top Traders of a Token
+
+Fetch the top 100 traders by volume USD:
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```graphql
+query topTraders($network: evm_network, $token: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 100 }
+      where: { Trade: { Currency: { SmartContract: { is: $token } } } }
+    ) {
+      Trade {
+        Buyer
+      }
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+{
+  "network": "eth",
+  "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+}
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/302c2be2-5ebe-4fa3-8fe4-c7e8f3bc6e23)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#top_traders).
+
+## Get all Trading Pairs data of a specific token
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```graphql
+query tokenTrades(
+  $network: evm_network,
+  $token: String,
+  $time_10min_ago: DateTime,
+  $time_1h_ago: DateTime,
+  $time_3h_ago: DateTime
+) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "usd" }
+      where: { Trade: { Currency: { SmartContract: { is: $token } } }, Block: { Time: { after: $time_3h_ago } } }
+      limit: { count: 200 }
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+          Fungible
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+        price_usd: PriceInUSD(maximum: Block_Number)
+        price_last: Price(maximum: Block_Number)
+        price_10min_ago: Price(
+          maximum: Block_Number
+          if: { Block: { Time: { before: $time_10min_ago } } }
+        )
+        price_1h_ago: Price(
+          maximum: Block_Number
+          if: { Block: { Time: { before: $time_1h_ago } } }
+        )
+        price_3h_ago: PriceInUSD(minimum: Block_Number)
+      }
+      usd: sum(of: Trade_AmountInUSD)
+      count
+    }
+  }
+}
+
+{
+  "network": "eth",
+  "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+  "time_10min_ago": "2024-09-22T12:39:26Z",
+  "time_1h_ago": "2024-09-22T11:49:26Z",
+  "time_3h_ago": "2024-09-22T09:49:26Z"
+}
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/dfe5ad4b-cb32-4a53-a52c-3985d438da2b)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#token_trades).
+
+## Get all DEXs where a specific token is listed
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```graphql
+query tokenDexMarkets($network: evm_network, $token: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "amount" }
+      where: { Trade: { Currency: { SmartContract: { is: $token } } } }
+    ) {
+      Trade {
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+      }
+      amount: sum(of: Trade_Amount)
+      pairs: uniq(of: Trade_Side_Currency_SmartContract)
+      trades: count
+    }
+  }
+}
+
+{
+  "network": "eth",
+  "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+}
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/f0de1013-b634-4058-8423-78d7130fcc10)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#token_dex_list).
+
+## Latest Trades of a Token pair
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```graphql
+query LatestTrades($network: evm_network, $token: String, $base: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limit: { count: 50 }
+      where: {
+        Trade: {
+          Side: {
+            Amount: { gt: "0" },
+            Currency: { SmartContract: { is: $base } }
+          },
+          Currency: { SmartContract: { is: $token } },
+          Price: { gt: 0 }
+        }
+      }
+    ) {
+      Block {
+        allTime: Time
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        Currency {
+          Symbol
+          SmartContract
+          Name
+        }
+        Price
+        AmountInUSD
+        Amount
+        Side {
+          Type
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+
+{
+  "network": "eth",
+  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "base": "0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098"
+}
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/b06fe6ff-e8ba-43f7-b9de-22666dde7bc6)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098#pair_latest_trades).
+
+## Get OHLC data for a particular token pair
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query tradingViewPairs($network: evm_network, $token: String, $base: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { ascendingByField: "Block_Time" }
+      where: {
+        Trade: {
+          Side: { Amount: { gt: "0" }, Currency: { SmartContract: { is: $base } } },
+          Currency: { SmartContract: { is: $token } },
+          PriceAsymmetry: { lt: 0.5 }
+        }
+      }
+    ) {
+      Block {
+        Time(interval: { count: 5, in: minutes })
+      }
+      Trade {
+        open: PriceInUSD(minimum: Block_Number)
+        close: PriceInUSD(maximum: Block_Number)
+        max: PriceInUSD(maximum: Trade_PriceInUSD)
+        min: PriceInUSD(minimum: Trade_PriceInUSD)
+      }
+      volume: sum(of: Trade_Side_Amount)
+    }
+  }
+}
+
+{
+  "network": "eth",
+  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "base": "0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098"
+}
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/33af35df-4a9b-4ec8-a26b-d4770c2e7c96)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098).
+
+## Top Traders of a token pair
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```graphql
+query pairTopTraders($network: evm_network, $token: String, $base: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 100 }
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: $token } },
+          Side: { Amount: { gt: "0" }, Currency: { SmartContract: { is: $base } } }
+        }
+      }
+    ) {
+      Trade {
+        Buyer
+      }
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+{
+  "network": "eth",
+  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "base": "0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098"
+}
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/baaf62ee-9cbe-4d3b-bf53-c29a196a46bb)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098#pair_top_traders).
+
+## Get all DEXs where a specific token pair is listed
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```graphql
+query pairDexList(
+  $network: evm_network,
+  $token: String,
+  $base: String,
+  $time_10min_ago: DateTime,
+  $time_1h_ago: DateTime,
+  $time_3h_ago: DateTime
+) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "amount" }
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: $token } },
+          Side: { Amount: { gt: "0" }, Currency: { SmartContract: { is: $base } } }
+        },
+        Block: { Time: { after: $time_3h_ago } }
+      }
+    ) {
+      Trade {
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        price_last: PriceInUSD(maximum: Block_Number)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Number
+          if: { Block: { Time: { before: $time_10min_ago } } }
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Number
+          if: { Block: { Time: { before: $time_1h_ago } } }
+        )
+        price_3h_ago: PriceInUSD(minimum: Block_Number)
+      }
+      amount: sum(of: Trade_Side_Amount)
+      pairs: uniq(of: Trade_Side_Currency_SmartContract)
+      trades: count
+    }
+  }
+}
+
+{
+  "network": "eth",
+  "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "base": "0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098",
+  "time_10min_ago": "2024-09-22T13:10:42Z",
+  "time_1h_ago": "2024-09-22T12:20:42Z",
+  "time_3h_ago": "2024-09-22T10:20:42Z"
+}
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/a652f6de-1066-49b6-87f7-b05e481565bf)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098#pair_dex_list).
+
+## Top Gainers
+
+<details>
+  <summary>Click to expand GraphQL query and variables</summary>
+
+```graphql
+query ($network: evm_network) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "usd" }
+      limit: { count: 100 }
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+        price_last: PriceInUSD(maximum: Block_Number)
+        price_1h_ago: PriceInUSD(minimum: Block_Number)
+      }
+      dexes: uniq(of: Trade_Dex_OwnerAddress)
+      amount: sum(of: Trade_Side_Amount)
+      usd: sum(of: Trade_Side_AmountInUSD)
+      buyers: uniq(of: Trade_Buyer)
+      sellers: uniq(of: Trade_Seller)
+      count(selectWhere: { ge: "100" })
+    }
+  }
+}
+
+{ "network": "eth" }
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/9b501fe8-fb44-4796-a3d4-4084f230e626)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth).
+
+## Top Bought tokens
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query timeDiagram($network: evm_network) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "buy" }
+      limit: { count: 100 }
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      buy: sum(
+        of: Trade_Side_AmountInUSD,
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell: sum(
+        of: Trade_Side_AmountInUSD,
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+    }
+  }
+}
+
+{ "network": "eth" }
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/ef9e8091-0460-4208-841e-4595269d5b84)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth).
+
+## Top Sold tokens
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query timeDiagram($network: evm_network) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "sell" }
+      limit: { count: 100 }
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      buy: sum(
+        of: Trade_Side_AmountInUSD,
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell: sum(
+        of: Trade_Side_AmountInUSD,
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+    }
+  }
+}
+
+{ "network": "eth" }
+```
+
+</details>
+
+![image](https://github.com/user-attachments/assets/2940bea4-b27f-4e74-afc4-1d433a45a31b)
+
+You can check the data here on [DEXrabbit](https://dexrabbit.com/eth).
+
+## Latest Token Trades
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    buyside: DEXTrades(
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
+              }
+            }
+          }
+        }
+      }
+    ) {
+      /* fields */
+    }
+    sellside: DEXTrades(
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
+              }
+            }
+          }
+        }
+      }
+    ) {
+      /* fields */
+    }
+  }
+}
+```
+
+</details>
+
+Open it with this [link](https://graphql.bitquery.io/ide/latest-trades-for-a-token---both-buy-and-sell).
+
+## Token trade from a specific DEX
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    buyside: DEXTrades(
+      limit: { count: 5 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+              }
+            }
+          }
+          Dex: { ProtocolName: { is: "uniswap_v3" } }
+        }
+      }
+    ) {
+      /* fields */
+    }
+  }
+}
+```
+
+</details>
+
+Open it with this [link](https://graphql.bitquery.io/ide/token-trades-for-a-specific-DEX_1).
+
+## Subscribe to new token trades (WebSocket)
+
+<details>
+  <summary>Click to expand GraphQL subscription</summary>
+
+```graphql
+subscription {
+  EVM(network: eth, trigger_on: head) {
+    buyside: DEXTrades(
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+              }
+            }
+          }
+        }
+      }
+    ) {
+      /* fields */
+    }
+    sellside: DEXTrades(
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+              }
+            }
+          }
+        }
+      }
+    ) {
+      /* fields */
+    }
+  }
+}
+```
+
+</details>
+
+Open it with this [link](https://graphql.bitquery.io/ide/latest-token-trades-subscription).
+
+## OHLC in USD of a Token
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(network: eth, dataset: realtime) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "Block_testfield" }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" }
+          }
+          PriceAsymmetry: { lt: 0.1 }
+          Side: {
+            Currency: {
+              SmartContract: {
+                is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+              }
+            }
+          }
+        }
+      }
+      limit: { count: 10 }
+    ) {
+      Block {
+        testfield: Time(interval: { in: hours, count: 1 })
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Number)
+        close: Price(maximum: Block_Number)
+      }
+      count
+    }
+  }
+}
+```
+
+</details>
+
+## Get Token Metadata
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(network: eth, dataset: combined) {
+    DEXTradeByTokens(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE" }
+          }
+        }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+          ProtocolName
+          HasURI
+          Fungible
+          Decimals
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Top Buyers of a Token
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "bought" }
+      limit: { count: 10 }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39" }
+          }
+        }
+      }
+    ) {
+      Trade {
+        Buyer
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      bought: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+    }
+  }
+}
+```
+
+</details>
+
+## Top Sellers of a Token
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "sold" }
+      limit: { count: 10 }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39" }
+          }
+        }
+      }
+    ) {
+      Trade {
+        Buyer
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      sold: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+    }
+  }
+}
+```
+
+</details>
+
+## Get trading volume, buy volume, sell volume of a token
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0xB8c77482e45F1F44dE1745F52C74426C631bDD52" }
+          }
+        }
+        TransactionStatus: { Success: true }
+        Block: { Time: { since: "2025-02-12T00:00:00Z" } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+      traded_volume_in_usd: sum(of: Trade_Side_AmountInUSD)
+      sell_volume_in_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      buy_volume_in_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+    }
+  }
+}
+```
+
+</details>
+
+## Getting OHLC and Distinct Buys/Sells
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(dataset: archive, network: bsc) {
+    buyside: DEXTradeByTokens(
+      limit: { count: 30 }
+      orderBy: { descendingByField: "Block_time_field" }
+      where: {
+        Trade: {
+          Side: {
+            Currency: {
+              SmartContract: {
+                is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
+              }
+            }
+            Amount: { ge: "0" }
+            Type: { is: buy }
+          }
+          Currency: {
+            SmartContract: { is: "0xfb6115445bff7b52feb98650c87f44907e58f802" }
+          }
+          PriceAsymmetry: { lt: 0.1 }
+        }
+        Block: { Date: { since: "2023-07-01", till: "2023-08-01" } }
+      }
+    ) {
+      Block {
+        time_field: Time(interval: { in: days, count: 1 })
+      }
+      volume: sum(of: Trade_Amount)
+      distinctBuyer: count(distinct: Trade_Buyer)
+      distinctSeller: count(distinct: Trade_Seller)
+      distinctSender: count(distinct: Trade_Sender)
+      distinctTransactions: count(distinct: Transaction_Hash)
+      total_sales: count(
+        if: {
+          Trade: {
+            Side: {
+              Currency: {
+                SmartContract: {
+                  is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
+                }
+              }
+            }
+          }
+        }
+      )
+      total_buys: count(
+        if: {
+          Trade: {
+            Currency: {
+              SmartContract: {
+                is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
+              }
+            }
+          }
+        }
+      )
+      total_count: count
+      Trade {
+        Currency {
+          Name
+        }
+        Side {
+          Currency {
+            Name
+          }
+        }
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Number)
+        close: Price(maximum: Block_Number)
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Get Least Traded Token
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(dataset: archive, network: eth) {
+    DEXTradeByTokens(
+      limit: { count: 10 }
+      where: {
+        Block: {
+          Time: {
+            after: "2023-11-20T00:00:00Z"
+            before: "2023-11-27T00:00:00Z"
+          }
+        }
+      }
+      orderBy: { ascendingByField: "count" }
+    ) {
+      Trade {
+        Currency {
+          Name
+          SmartContract
+        }
+      }
+      count
+    }
+  }
+}
+```
+
+</details>
+
+## First X Buyers of a Token
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    buyside: DEXTrades(
+      limit: { count: 10 }
+      limitBy: { by: Transaction_From, count: 1 }
+      orderBy: { ascending: Block_Time }
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
+              }
+            }
+          }
+        }
+      }
+    ) {
+      Block {
+        Number
+        Time
+      }
+      Transaction {
+        From
+        To
+        Hash
+      }
+      Trade {
+        Buy {
+          Amount
+          Buyer
+          Currency {
+            Name
+            Symbol
+          }
+          Seller
+          Price
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+import VideoPlayer from "../../../../src/components/videoplayer.js";
+
+## Video Tutorial | How to get Token Trade Stats for EVM chains like DexScreener shows
+
+<VideoPlayer url="https://www.youtube.com/watch?v=K_H3to_nIdY" />

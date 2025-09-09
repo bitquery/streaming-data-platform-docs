@@ -1,55 +1,124 @@
-# Crypto Price API - Introduction
+# Real-Time Crypto Price API - Multi-Chain Data in Seconds
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
-
-Starting July 2025, we have a introduced separate multi-chain **Crypto Price API (Price index) and Streams** via graphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
+Starting July 2025, we have introduced separate multi-chain **Crypto Price API (Price index) and Streams** via GraphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
 
 These tools let you stream and query aggregated price data—in USD or other paired currencies—based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains.
 
 The Crypto Price API (Price Index) provides more than just pair prices—it also includes [OHLCV (K-Line)](../crypto-ohlc-candle-k-line-api/), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
 While you can access the aggregated price for a single trading pair, the Price Index also supports cross-chain and cross-DEX aggregation, giving you a unified view of token prices across multiple ecosystems.
 
-These APIs are available on the **[EAP Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/eap)** and **[Streaming Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql)**
+## Key Features
+
+- **Pre-aggregated data**: OHLC, SMA, WMA, EMA, and mean prices calculated automatically
+- **Real-time streaming**: 1-second granularity via GraphQL subscriptions and Kafka
+- **Multi-chain support**: Ethereum, Solana, BSC, Arbitrum, Base, Optimism, Polygon, and more
+- **Clean data**: Automatic filtering of low-quality trades and outliers
+- **Cross-chain aggregation**: Unified view of token prices across multiple ecosystems
+
+## Available Endpoints
+
+- **[EAP Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/eap)**
+- **[Streaming Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql)**
+
+## Quick Start
+
+[Run Stream >](https://ide.bitquery.io/1-second-crypto-price-stream)
+
+```
+subscription {
+  Trading {
+    Tokens(where: {Interval: {Time: {Duration: {eq: 1}}}}) {
+      Token {
+        Address
+        Id
+        IsNative
+        Name
+        Network
+        Name
+        Symbol
+        TokenId
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+        Average {
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+      }
+    }
+  }
+}
+
+```
 
 ## What is the Crypto Price API (Price Index) and Why Does It Matter?
 
 The Crypto price API/Stream (Price Index) provides real-time, aggregated price data with ultra-low latency across multiple trading pairs, tokens, decentralized exchanges (DEXs), and blockchains. It's the first product of its kind, designed to help developers access accurate, up-to-the-second prices for building financial applications. This real-time crypto price API delivers multi-chain cryptocurrency price data essential for trading bots, DeFi protocols, and blockchain price feed applications.
 
-This API is the foundational layer of our trading-focused data suite. We're actively expanding our trading dataset, with much more to come in the months and years ahead.
+### Data Processing Pipeline
 
-The focus of this product suite is to help traders win. As we receive feedback, we will improve the dataset quality, add more metrics and APIs.
+1. **Data Ingestion**: Onchain data is collected and parsed from supported DEXs across all chains
+2. **Quality Filtering**: Low-quality trades and outliers are automatically filtered out
+3. **Aggregation**: Price data is aggregated by time intervals (1s, 3s, 5s, etc.) and volume thresholds
+4. **Metric Calculation**: OHLC, moving averages, and other statistical measures are pre-calculated
+5. **Distribution**: Data is made available via GraphQL subscriptions and Kafka streams
 
-## How is this API different from our existing DEXTrades and DEXTRadesByToken APIs?
+### Supported Blockchains
 
-The Crypto price API (Price Index) is a chain-agnostic, pre-aggregated price feed designed specifically for trading,futures, charting, and analytics. Here's how it differs from the existing **DEXTrades** and **DEXTradesByToken** APIs:
+- **EVM Chains**: Ethereum, BSC, Polygon
+- **Non-EVM**: Solana, Tron
+- **Additional chains** are added regularly based on demand
 
-- **Granularity**:
+This API serves as the foundational layer of our trading-focused data suite, designed to provide developers with accurate, up-to-the-second prices for building financial applications.
 
-  - **DEXTrades / DEXTradesByToken** provide **transaction-level data**, showing every trade on supported DEXs for each chain.
-  - The **Crypto Price API (Price Index)** provides **pre-aggregated price metrics** such as [OHLC (Open, High, Low, Close)](../crypto-ohlc-candle-k-line-api/) and average prices, calculated over volume- or time-based intervals—as granular as 1 second.
+## Technical Specifications
 
-- **Aggregation**:
+### Data Format
 
-  - In DEX APIs, you had to **aggregate trades** to calculate OHLC or moving averages.
-  - The Crypto Price API (Price Index) provides **ready-to-use [OHLC and price statistics](../crypto-ohlc-candle-k-line-api/)** out of the box , no need to calculate anything.
+- **Response Format**: GraphQL JSON or Protobuf ( For Kafka)
+- **Streaming Protocol**: WebSocket (GraphQL subscriptions) or Kafka Stream in Protobuf
+- **Update Frequency**: Real-time with 1-second granularity
+- **Data Retention**: Historical data upto 1 week available for querying
 
-- **Filtering Bad Trades**:
+### Supported Price Metrics
 
-  - DEX APIs provide all trade data, including every transaction. You can filter this data by trade amount and other parameters to exclude outliers or irrelevant trades that could distort price accuracy.
-  - The Crypto Price API (Price Index) does this automatically—filtering out bad or low-quality trades—to deliver a clean, reliable, and accurate price feed.
-
-- **Chain Perspective**:
-
-  - DEX APIs are **chain-specific**: each query targets a specific network (e.g., Ethereum, Solana, Tron).
-  - The Crypto Price API (Price Index) is **chain-agnostic**: you can get price data across all chains for a given token or token representation (e.g., WBTC on Ethereum, native BTC on Bitcoin, etc.).
+- **OHLC**: Open, High, Low, Close prices
+- **Moving Averages**: Simple (SMA), Weighted (WMA), Exponential (EMA)
+- **Volume**: Base token, Quote token, USD equivalent
+- **Price Statistics**: Mean, median, weighted average
 
 ## Accessing the API
 
 ![](/img/trade_api/api.png)
 
-This stream has premade-OHLC in the response which you feed directly to your charting solution without having to calculate it.
+This stream has pre-calculated OHLC data in the response which you can feed directly to your charting solution without additional calculations.
 
-> Note: All queries can be converted to a graphQL stream (Websocket) by changing the keyword `query` to `subscription`
+> **Note**: All queries can be converted to a GraphQL stream (WebSocket) by changing the keyword `query` to `subscription`
 
 ### Kafka Topic for Crypto Price (Price Index) Stream: `trading.prices`
 
@@ -372,5 +441,7 @@ With the new Price API, you can simply feed the stream to your custom datafeed o
 - The stream is available ready-to-chart SDK [here](https://www.npmjs.com/package/@bitquery/tradingview-sdk). Simply copy paste the advanced charting library into the correct folder, add Bitquery access token and it is ready.
 
 ## Video Tutorial | Introduction to Crypto Price APIs
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://youtu.be/Lw7DordlJzg" />

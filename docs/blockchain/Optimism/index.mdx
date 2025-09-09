@@ -1,0 +1,117 @@
+---
+title: Optimism API Documentation
+description: Collection of Optimism APIs organized by topic.
+slug: /blockchain/Optimism/
+keywords:
+  - Optimism API
+  - Optimism RPC
+  - Optimism RPC API
+  - Best Optimism API
+  - Optimism Explorer API
+  - Optimism wallet transaction monitoring api
+  - Optimism api docs
+  - Optimism websocket api
+  - Optimism streams
+  - Optimism blockchain api
+  - Optimism token api
+  - Optimism transaction api
+  - Optimism DEX API
+  - Optimism uniswap trades
+---
+
+# Optimism API Documentation
+
+## Overview
+
+In this section we will see how to fetch data on different tokens, transactions, and DEXs on Optimism via APIs and Streams.
+
+**[Create your account](https://account.bitquery.io/auth/signup)** to get started. If you need help getting data on Optimism, reach out to [support](https://t.me/Bloxy_info).
+
+### What is Optimism API?
+
+Bitquery Optimism APIs help you fetch onchain data like trades, transactions, balances, etc using graphQL query.
+
+### What are capabilities of Bitquery Optimism API?
+
+Bitquery Optimism APIs are very flexible, you can fetch trade, transaction, and balance information for a period, for a specific wallet, and join with other information.
+
+### Difference between Optimism RPC and Bitquery Optimism API?
+
+| Optimism RPC                                                                     | Bitquery Optimism API                                                                                    |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| JSON-RPC endpoint exposing raw Optimism on-chain state and transactions          | GraphQL endpoint over pre-indexed, parsed Optimism data (token transfers, DEX trades, logs, calls, etc.) |
+| No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions                                           |
+| Ideal for submitting transactions                                                | Great for real-time data and historical backtesting without running your own indexer                     |
+
+To access Bitquery Tron API you would require your own **[Access Token](https://account.bitquery.io/user/api_v2/access_tokens)** after signup.
+
+### Does Bitquery support Optimism Websocket and Webhooks?
+
+Bitquery supports websocket and webhooks; you can convert most GraphQL APIs into GraphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More docs and code samples are available [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
+
+## Quick start
+
+Run this minimal GraphQL query on **[GraphQL IDE](http://ide.bitquery.io)** after signing up, to fetch the latest 5 DEX trades on Optimism:
+
+```graphql
+query LatestOptimismTrades {
+  EVM(network: optimism) {
+    DEXTrades(limit: { count: 5 }, orderBy: { descending: Block_Time }) {
+      Block {
+        Time
+      }
+      Trade {
+        Dex {
+          ProtocolName
+        }
+        Buy {
+          AmountInUSD
+          Currency {
+            Symbol
+          }
+        }
+        Sell {
+          AmountInUSD
+          Currency {
+            Symbol
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
+
+## DEX APIs
+
+- [Optimism Dex Trades](https://docs.bitquery.io/docs/examples/Optimism/optimism-dextrades/)
+
+## Core Optimism APIs
+
+- [Balance Updates](https://docs.bitquery.io/docs/examples/Optimism/optimism-balance-updates/)
+- [NFT](http://localhost:3000/docs/examples/Optimism/optimism-nft/)
+- [Transactions](https://docs.bitquery.io/docs/examples/Optimism/Optimism-transactions-api/)
+- [Transfers](https://docs.bitquery.io/docs/examples/Optimism/optimism-transfers/)
+
+## Videos
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+### Video Tutorial | Get Trending Optimism Tokens Using Bitquery API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=k-5iV7Rn1EA" />
+
+### Video Tutorial | Get Optimism DEX Trades Data Using Bitquery API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=GoaNZEcllIs" />
+
+### Video Tutorial | Get Top Traders on Optimism Using Bitquery API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=G0o_FAHF3uU" />
+
+### Video Tutorial | Get Latest Trades on Optimism Using Bitquery Subscriptions
+
+<VideoPlayer url="https://www.youtube.com/watch?v=xwKKt9DJstw" />

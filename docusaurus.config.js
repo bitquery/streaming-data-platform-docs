@@ -106,7 +106,7 @@ const config = {
         redirects: [
           // /docs/oldDoc -> /docs/newDoc
           {
-            to: "/docs/examples/token-holders/token-holder-api/",
+            to: "/docs/blockchain/Ethereum/token-holders/token-holder-api/",
             from: "/docs/examples/balances/tokenHolders-api/",
           },
           {
@@ -114,15 +114,15 @@ const config = {
             from: "/docs/contribution_guidelines/",
           },
           {
-            to: "/docs/examples/calls/contract-creation/",
+            to: "/docs/blockchain/Ethereum/calls/contract-creation/",
             from: "/docs/examples/calls/Contract%20_creation/",
           },
           {
-            to: "/docs/examples/calls/smartcontract-filterby/",
+            to: "/docs/blockchain/Ethereum/calls/smartcontract-filterby/",
             from: "/docs/examples/calls/smartcontract_filterby/",
           },
           {
-            to: "/docs/examples/events/events-api/",
+            to: "/docs/blockchain/Ethereum/events/events-api/",
             from: "/docs/examples/events/events_api/",
           },
           {
@@ -191,16 +191,16 @@ const config = {
           },
 
           {
-            to: "/docs/examples/Solana/Pump-Fun-API/",
+            to: "/docs/blockchain/Solana/Pump-Fun-API/",
             from: "/docs/examples/dextrades/Pump-Fun-API/",
           },
 
           {
-            to: "/docs/examples/ethers-library/eth_subscribe",
+            to: "/docs/blockchain/Ethereum/ethers-library/eth_subscribe",
             from: "/docs/category/ethsubscribe-alternatives/",
           },
           {
-            to: "/docs/examples/ethers-library/eth_subscribe/",
+            to: "/docs/blockchain/Ethereum/ethers-library/eth_subscribe/",
             from: "/docs/examples/Ethereum-subscriptions/eth-subscribe/",
           },
           {
@@ -212,49 +212,292 @@ const config = {
             from: "/docs/category/use-cases/",
           },
           {
-            to: "/docs/examples/nft/nft-api/",
+            to: "/docs/blockchain/Ethereum/nft/nft-api/",
             from: "/docs/category/nft/",
           },
           {
-            to: "/docs/examples/Arbitrum/Overview/",
-            from: "/docs/category/arbitrum/",
-          },
-          {
-            to: "/docs/examples/Base/",
-            from: "/docs/category/base/",
-          },
-
-          {
-            to: "/docs/examples/Matic/",
-            from: "/docs/category/matic/",
-          },
-          {
-            to: "/docs/examples/Tron/",
-            from: "/docs/category/Tron/",
-          },
-          {
-            to: "/docs/examples/Optimism/",
-            from: "/docs/category/Optimism/",
-          },
-          {
-            to: "/docs/examples/dextrades/uniswap-api/",
+            to: "/docs/blockchain/Ethereum/dextrades/uniswap-api/",
             from: "/docs/examples/realtimetrades/",
           },
           {
-            to: "/docs/examples/Solana/", // new target
+            to: "/docs/blockchain/Solana/", // new target
             from: "/docs/category/solana/", // old category URL
           },
           {
-            to: "/docs/examples/BSC/", // new target
-            from: "/docs/category/bsc/", // old category URL
-          },
-          {
-            to: "/docs/examples/Ethereum/",
+            to: "/docs/blockchain/Ethereum/",
             from: "/docs/category/ethereum/",
           },
           {
-            to: "/docs/examples/Solana/letsbonk-api/",
+            to: "/docs/blockchain/Ethereum/",
+            from: "/docs/examples/Ethereum/",
+          },
+
+          // Ethereum examples redirects from old examples/ path to new blockchain/Ethereum/ path
+          {
+            to: "/docs/blockchain/Ethereum/blocks/blocks-api/",
+            from: "/docs/examples/blocks/blocks-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/balances/balance-api/",
+            from: "/docs/examples/balances/balance-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/token-holders/token-holder-api/",
+            from: "/docs/examples/token-holders/token-holder-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/calls/smartcontract/",
+            from: "/docs/examples/calls/smartcontract/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/calls/smartcontract-filterby/",
+            from: "/docs/examples/calls/smartcontract-filterby/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/events/events-api/",
+            from: "/docs/examples/events/events-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/fees/fees-api/",
+            from: "/docs/examples/fees/fees-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/mempool/mempool-api/",
+            from: "/docs/examples/mempool/mempool-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/transfers/total-supply/",
+            from: "/docs/examples/transfers/total-supply/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/transactions/transaction-api/",
+            from: "/docs/examples/transactions/transaction-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/calls/contract-creation/",
+            from: "/docs/examples/calls/contract-creation/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api/",
+            from: "/docs/examples/transfers/erc20-token-transfer-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/transfers/rwa-api/",
+            from: "/docs/examples/transfers/rwa-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/letsbonk-api/",
             from: "/docs/examples/Solana/Bonk-Fun-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/DEXScreener/solana_dexscreener/",
+            from: "/docs/blockchain/Ethereum/dextrades/DEXScreener/solana_dexscreener/",
+          },
+
+          // Solana page redirects from old path to new blockchain path
+          {
+            to: "/docs/blockchain/Solana/ai-agent-solana-data/",
+            from: "/docs/examples/Solana/ai-agent-solana-data/",
+          },
+          {
+            to: "/docs/blockchain/Solana/bags-fm-api/",
+            from: "/docs/examples/Solana/bags-fm-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Believe-API/",
+            from: "/docs/examples/Solana/Believe-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/BonkSwap-API/",
+            from: "/docs/examples/Solana/BonkSwap-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Boop-Fun-API/",
+            from: "/docs/examples/Solana/Boop-Fun-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/heaven-dex-api/",
+            from: "/docs/examples/Solana/heaven-dex-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/historical-aggregate-data/",
+            from: "/docs/examples/Solana/historical-aggregate-data/",
+          },
+          {
+            to: "/docs/blockchain/Solana/jupiter-studio-api/",
+            from: "/docs/examples/Solana/jupiter-studio-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/launchpad-raydium/",
+            from: "/docs/examples/Solana/launchpad-raydium/",
+          },
+          {
+            to: "/docs/blockchain/Solana/letsbonk-api/",
+            from: "/docs/examples/Solana/letsbonk-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Meteora-DAMM-v2-API/",
+            from: "/docs/examples/Solana/Meteora-DAMM-v2-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Meteora-DLMM-API/",
+            from: "/docs/examples/Solana/Meteora-DLMM-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Meteora-DYN-API/",
+            from: "/docs/examples/Solana/Meteora-DYN-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/",
+            from: "/docs/examples/Solana/meteora-dynamic-bonding-curve-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Moonshot-API/",
+            from: "/docs/examples/Solana/Moonshot-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Orbic-API/",
+            from: "/docs/examples/Solana/Orbic-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Pump-Fun-API/",
+            from: "/docs/examples/Solana/Pump-Fun-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/",
+            from: "/docs/examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/pump-fun-to-pump-swap/",
+            from: "/docs/examples/Solana/pump-fun-to-pump-swap/",
+          },
+          {
+            to: "/docs/blockchain/Solana/pump-swap-api/",
+            from: "/docs/examples/Solana/pump-swap-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/raydium-clmm-API/",
+            from: "/docs/examples/Solana/raydium-clmm-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/raydium-cpmm-API/",
+            from: "/docs/examples/Solana/raydium-cpmm-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana_fees_api/",
+            from: "/docs/examples/Solana/solana_fees_api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-AldrinAmm-api/",
+            from: "/docs/examples/Solana/Solana-AldrinAmm-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-balance-updates/",
+            from: "/docs/examples/Solana/solana-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-bullx-api/",
+            from: "/docs/examples/Solana/solana-bullx-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-DEX-Orders-API/",
+            from: "/docs/examples/Solana/Solana-DEX-Orders-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-DexPools-API/",
+            from: "/docs/examples/Solana/Solana-DexPools-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-dextrades/",
+            from: "/docs/examples/Solana/solana-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-gmgn-api/",
+            from: "/docs/examples/Solana/solana-gmgn-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-instruction-balance-updates/",
+            from: "/docs/examples/Solana/solana-instruction-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-instructions/",
+            from: "/docs/examples/Solana/solana-instructions/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-Jito-Bundle-api/",
+            from: "/docs/examples/Solana/Solana-Jito-Bundle-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-jupiter-api/",
+            from: "/docs/examples/Solana/solana-jupiter-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-Lifinity-dex-api/",
+            from: "/docs/examples/Solana/Solana-Lifinity-dex-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-logs/",
+            from: "/docs/examples/Solana/solana-logs/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-nft/",
+            from: "/docs/examples/Solana/solana-nft/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-OpenBook-api/",
+            from: "/docs/examples/Solana/Solana-OpenBook-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-orca-dex-api/",
+            from: "/docs/examples/Solana/solana-orca-dex-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-Phoenix-api/",
+            from: "/docs/examples/Solana/Solana-Phoenix-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-photon-api/",
+            from: "/docs/examples/Solana/solana-photon-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/Solana-Raydium-DEX-API/",
+            from: "/docs/examples/Solana/Solana-Raydium-DEX-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-rewards/",
+            from: "/docs/examples/Solana/solana-rewards/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-search-tokens/",
+            from: "/docs/examples/Solana/solana-search-tokens/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-trader-API/",
+            from: "/docs/examples/Solana/solana-trader-API/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-transactions/",
+            from: "/docs/examples/Solana/solana-transactions/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-transfers/",
+            from: "/docs/examples/Solana/solana-transfers/",
+          },
+          {
+            to: "/docs/blockchain/Solana/solana-zeta/",
+            from: "/docs/examples/Solana/solana-zeta/",
+          },
+          {
+            to: "/docs/blockchain/Solana/SolFi-api/",
+            from: "/docs/examples/Solana/SolFi-api/",
+          },
+          {
+            to: "/docs/blockchain/Solana/token-supply-cube/",
+            from: "/docs/examples/Solana/token-supply-cube/",
+          },
+          {
+            to: "/docs/blockchain/Solana/xstocks-api/",
+            from: "/docs/examples/Solana/xstocks-api/",
           },
 
           // tradingview redirects
@@ -307,6 +550,276 @@ const config = {
           {
             from: "/docs/trading/price-index/pairs",
             to: "/docs/trading/crypto-price-api/pairs",
+          },
+
+          // BSC redirects from old examples/BSC/ path to new blockchain/BSC/ path
+          {
+            to: "/docs/blockchain/BSC/",
+            from: "/docs/category/bsc/",
+          },
+          {
+            to: "/docs/blockchain/BSC/",
+            from: "/docs/examples/BSC/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-balance-updates/",
+            from: "/docs/examples/BSC/bsc-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-calls-api/",
+            from: "/docs/examples/BSC/bsc-calls-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-dextrades/",
+            from: "/docs/examples/BSC/bsc-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-uniswap-api/",
+            from: "/docs/examples/BSC/bsc-uniswap-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-events-api/",
+            from: "/docs/examples/BSC/bsc-events-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-nft/",
+            from: "/docs/examples/BSC/bsc-nft/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-transfers/",
+            from: "/docs/examples/BSC/bsc-transfers/",
+          },
+          {
+            to: "/docs/blockchain/BSC/gra-fun-api/",
+            from: "/docs/examples/BSC/gra-fun-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/four-meme-api/",
+            from: "/docs/examples/BSC/four-meme-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/pancake-swap-api/",
+            from: "/docs/examples/BSC/pancake-swap-api/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-mempool-stream/",
+            from: "/docs/examples/BSC/bsc-mempool-stream/",
+          },
+
+          // Tron redirects from old examples/Tron/ path to new blockchain/Tron/ path
+          {
+            to: "/docs/blockchain/Tron/",
+            from: "/docs/category/Tron/",
+          },
+          {
+            to: "/docs/blockchain/Tron/",
+            from: "/docs/examples/Tron/",
+          },
+          {
+            to: "/docs/blockchain/Tron/sunswap-api/",
+            from: "/docs/examples/Tron/sunswap-api/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-balance-updates/",
+            from: "/docs/examples/Tron/tron-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-dextrades/",
+            from: "/docs/examples/Tron/tron-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-mempool/",
+            from: "/docs/examples/Tron/tron-mempool/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-nft/",
+            from: "/docs/examples/Tron/tron-nft/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-sunpump/",
+            from: "/docs/examples/Tron/tron-sunpump/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-transactions-api/",
+            from: "/docs/examples/Tron/tron-transactions-api/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-fees-api/",
+            from: "/docs/examples/Tron/tron-fees-api/",
+          },
+          {
+            to: "/docs/blockchain/Tron/tron-transfers/",
+            from: "/docs/examples/Tron/tron-transfers/",
+          },
+          {
+            to: "/docs/blockchain/Tron/usdt-trc20-api/",
+            from: "/docs/examples/Tron/usdt-trc20-api/",
+          },
+
+          // TON redirects from old examples/ton/ path to new blockchain/TON/ path
+          {
+            to: "/docs/blockchain/TON/ton-dex-trades/",
+            from: "/docs/examples/ton/ton-dex-trades/",
+          },
+
+          // Arbitrum redirects from old examples/Arbitrum/ path to new blockchain/Arbitrum/ path
+          {
+            to: "/docs/blockchain/Arbitrum/",
+            from: "/docs/category/arbitrum/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/",
+            from: "/docs/examples/Arbitrum/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/arbitrum-cross-chain/",
+            from: "/docs/examples/Arbitrum/arbitrum-cross-chain/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/Balance_Updates/",
+            from: "/docs/examples/Arbitrum/Balance_Updates/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/Blocks_Transactions/",
+            from: "/docs/examples/Arbitrum/Blocks_Transactions/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/DexTrades/",
+            from: "/docs/examples/Arbitrum/DexTrades/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/esgmx-api/",
+            from: "/docs/examples/Arbitrum/esgmx-api/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/gmx-api/",
+            from: "/docs/examples/Arbitrum/gmx-api/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/Smart_Contract_Calls/",
+            from: "/docs/examples/Arbitrum/Smart_Contract_Calls/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/Smart_Contract_Events/",
+            from: "/docs/examples/Arbitrum/Smart_Contract_Events/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/Overview",
+            from: "/docs/examples/Arbitrum/Overview",
+          },
+
+          // Base redirects from old examples/Base/ path to new blockchain/Base/ path
+          {
+            to: "/docs/blockchain/Base/",
+            from: "/docs/category/base/",
+          },
+          {
+            to: "/docs/blockchain/Base/",
+            from: "/docs/examples/Base/",
+          },
+          {
+            to: "/docs/blockchain/Base/aerodrome-base-api/",
+            from: "/docs/examples/Base/aerodrome-base-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-uniswap-api/",
+            from: "/docs/examples/Base/base-uniswap-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-clanker-api/",
+            from: "/docs/examples/Base/base-clanker-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/apestore-base-api/",
+            from: "/docs/examples/Base/apestore-base-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-jump-base-api/",
+            from: "/docs/examples/Base/base-jump-base-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-zora-api/",
+            from: "/docs/examples/Base/base-zora-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-balance-updates/",
+            from: "/docs/examples/Base/base-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-coins-api/",
+            from: "/docs/examples/Base/base-coins-api/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-dextrades/",
+            from: "/docs/examples/Base/base-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-nft/",
+            from: "/docs/examples/Base/base-nft/",
+          },
+          {
+            to: "/docs/blockchain/Base/base-transfers/",
+            from: "/docs/examples/Base/base-transfers/",
+          },
+          {
+            to: "/docs/blockchain/Base/ai-agent-base-data/",
+            from: "/docs/examples/Base/ai-agent-base-data/",
+          },
+
+          // Matic redirects from old examples/Matic/ path to new blockchain/Matic/ path
+          {
+            to: "/docs/blockchain/Matic/",
+            from: "/docs/category/matic/",
+          },
+          {
+            to: "/docs/blockchain/Matic/",
+            from: "/docs/examples/Matic/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-balance-updates/",
+            from: "/docs/examples/Matic/matic-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-dextrades/",
+            from: "/docs/examples/Matic/matic-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-uniswap-api/",
+            from: "/docs/examples/Matic/matic-uniswap-api/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-nft/",
+            from: "/docs/examples/Matic/matic-nft/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-transfers/",
+            from: "/docs/examples/Matic/matic-transfers/",
+          },
+
+          // Optimism redirects from old examples/Optimism/ path to new blockchain/Optimism/ path
+          {
+            to: "/docs/blockchain/Optimism/",
+            from: "/docs/category/Optimism/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/",
+            from: "/docs/examples/Optimism/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/optimism-balance-updates/",
+            from: "/docs/examples/Optimism/optimism-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/optimism-dextrades/",
+            from: "/docs/examples/Optimism/optimism-dextrades/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/optimism-nft/",
+            from: "/docs/examples/Optimism/optimism-nft/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/optimism-transfers/",
+            from: "/docs/examples/Optimism/optimism-transfers/",
           },
         ],
       },

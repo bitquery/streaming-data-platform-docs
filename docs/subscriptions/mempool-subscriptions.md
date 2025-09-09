@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # Subscribing to Mempool Updates
 
-The Mempool API allows you to access real-time data from the mempool for EVM chains including Ethereum, and BNB chains. You can use this API to monitor transactions, token trades, transfers, and any data stored in the mempool. Check examples [in this page](/docs/examples/mempool/mempool-api.md).
+The Mempool API allows you to access real-time data from the mempool for EVM chains including Ethereum, and BNB chains. You can use this API to monitor transactions, token trades, transfers, and any data stored in the mempool. Check examples [in this page](/docs/blockchain/Ethereum/mempool/mempool-api/).
 
 ## Understanding Mempool Queries
 

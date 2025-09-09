@@ -27,4 +27,4 @@ subscription {
 }
 ```
 
-You can find Mempool API examples [here](/docs/examples/mempool/mempool-api.md)
+You can find Mempool API examples [here](/docs/blockchain/Ethereum/mempool/mempool-api/)

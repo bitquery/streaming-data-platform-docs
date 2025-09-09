@@ -1,0 +1,126 @@
+---
+title: Tron API Documentation
+description: Collection of Tron APIs organized by topic.
+slug: /blockchain/Tron/
+keywords:
+  - Tron API
+  - Tron RPC
+  - Tron RPC API
+  - Sunpump API
+  - Best Tron API
+  - Tron Explorer API
+  - Tron wallet transaction monitoring api
+  - Tron api docs
+  - Tron websocket api
+  - Tron streams
+  - Tron blockchain api
+  - Tron token api
+  - Tron transaction api
+  - Sunswap api
+  - Tron DEX api
+  - Tron nft api
+  - Tron fees api
+  - Tron liquidity api
+---
+
+# Tron API Documentation
+
+## Overview
+
+In this section we will see how to fetch data on different tokens, transactions, and DEXs like SunPump and Sunswap on Tron via APIs and Streams.
+
+**[Create your account](https://account.bitquery.io/auth/signup)** to get started. If you need help getting data on Tron, reach out to [support](https://t.me/Bloxy_info).
+
+### What is Tron API?
+
+Bitquery Tron APIs help you fetch onchain data like trades, transactions, balances, etc using graphQL query.
+
+### What are capabilities of Bitquery Tron API?
+
+Bitquery Tron APIs are very flexible, you can fetch trade, transaction, and balance information for a period, for a specific wallet, and join with other information.
+
+### Difference between Tron RPC and Bitquery Tron API?
+
+| Tron RPC                                                                         | Bitquery Tron API                                                                                    |
+| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| JSON-RPC endpoint exposing raw Tron on-chain state and transactions              | GraphQL endpoint over pre-indexed, parsed Tron data (token transfers, DEX trades, logs, calls, etc.) |
+| No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions                                       |
+| Ideal for submitting transactions                                                | Great for real-time data and historical backtesting without running your own indexer                 |
+
+To access Bitquery Tron API you would require your own **[Access Token](https://account.bitquery.io/user/api_v2/access_tokens)** after signup.
+
+### Does Bitquery support Tron Websocket and Webhooks?
+
+Bitquery supports websocket and webhooks; you can convert most GraphQL APIs into GraphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More docs and code samples are available [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
+
+## Quick start
+
+Run this minimal GraphQL query on **[GraphQL IDE](http://ide.bitquery.io)** after signing up, to fetch the latest 5 DEX trades on Tron:
+
+```graphql
+query LatestTronTrades {
+  Tron {
+    DEXTrades(limit: { count: 5 }, orderBy: { descending: Block_Time }) {
+      Block {
+        Time
+      }
+      Trade {
+        Dex {
+          ProtocolName
+        }
+        Buy {
+          AmountInUSD
+          Currency {
+            Symbol
+          }
+        }
+        Sell {
+          AmountInUSD
+          Currency {
+            Symbol
+          }
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
+
+## DEX APIs
+
+- [SunPump API](https://docs.bitquery.io/docs/blockchain/Tron/tron-sunpump/)
+- [SunSwap API](https://docs.bitquery.io/docs/blockchain/Tron/sunswap-api/)
+- [Tron Dex Trades](https://docs.bitquery.io/docs/blockchain/Tron/tron-dextrades/)
+
+## Core Tron APIs
+
+- [Balance Updates](https://docs.bitquery.io/docs/blockchain/Tron/tron-balance-updates/)
+- [TRC20 Tokens](https://docs.bitquery.io/docs/blockchain/Tron/usdt-trc20-api/)
+- [NFT](https://docs.bitquery.io/docs/blockchain/Tron/tron-nft/)
+- [Mempool](https://docs.bitquery.io/docs/blockchain/Tron/tron-mempool/)
+- [Fees](https://docs.bitquery.io/docs/blockchain/Tron/tron-fees-api/)
+- [Transactions](https://docs.bitquery.io/docs/blockchain/Tron/tron-transactions-api/)
+- [Transfers](https://docs.bitquery.io/docs/blockchain/Tron/tron-transfers/)
+
+## Videos
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+### Video Tutorial | Comprehensive Guide to Real-Time Tron Data : Trades, NFTs, Mempool etc
+
+<VideoPlayer url="https://www.youtube.com/watch?v=vedTet6cYlM" />
+
+### Video Tutorial | How to get Total Fees paid by a Account on Tron Network
+
+<VideoPlayer url="https://www.youtube.com/watch?v=D-9Vp4zrPaU" />
+
+### Video Tutorial | How to get Realtime Trades and Liquidity data on Sun Pump
+
+<VideoPlayer url="https://www.youtube.com/watch?v=gL-9nUvvVhg" />
+
+### Video Tutorial | How to track SunPump Token launches to SunSwap
+
+<VideoPlayer url="https://www.youtube.com/watch?v=RLV0s-uyKrU" />

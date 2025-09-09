@@ -26,9 +26,8 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 
 ## Advanced (2-4 hours)
 
-1. **[Platform-Specific APIs](https://docs.bitquery.io/docs/examples/Solana/)** - Deep dive into Solana, Ethereum, etc.
-2. **[Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** - Real-time price data with OHLC
-3. **[Integration Examples](https://docs.bitquery.io/docs/usecases/)** - Real-world application examples
+1. **[Platform-Specific APIs](https://docs.bitquery.io/docs/blockchain/Solana/)** - Deep dive into Solana, Ethereum, etc.
+2. **[Integration Examples](https://docs.bitquery.io/docs/usecases/)** - Real-world application examples
 3. **[Performance Optimization](https://docs.bitquery.io/docs/graphql/performance)** - Optimize your queries for production
 4. **[Contributing](https://docs.bitquery.io/docs/contribution-guidelines)** - Help improve the documentation
 
@@ -38,7 +37,7 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 
 - Start with **[Crypto Price APIs](https://docs.bitquery.io/docs/start/starter-queries#crypto-price-apis)**
 - Learn **[Real-time Price Streams](https://docs.bitquery.io/docs/start/starter-subscriptions)**
-- Explore **[DEX Trading APIs](https://docs.bitquery.io/docs/examples/Solana/solana-dextrades)**
+- Explore **[DEX Trading APIs](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades)**
 
 ### For Developers
 

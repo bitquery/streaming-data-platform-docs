@@ -93,7 +93,7 @@ subscription MyQuery {
 """
 ```
 
-You can find more queries here: [Solana Pump Fun API](https://docs.bitquery.io/docs/examples/Solana/Pump-Fun-API/).
+You can find more queries here: [Solana Pump Fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/).
 
 #### **5. Fetching and Uploading Data**
 

@@ -1,0 +1,495 @@
+---
+sidebar_position: 2
+---
+
+# Solana Token Supply API
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+In this section we will see how to get Solana Token Supply information using our API.
+
+## Overview
+
+The **Solana Token Supply API** provides comprehensive access to real-time token supply data on the Solana blockchain. This API enables you to track token creation, monitor supply changes, calculate market capitalization, and analyze token burn events with detailed metadata and real-time updates.
+
+## 📋 Table of Contents
+
+- **[Subscribe to Token Supply Changes](#subscribe-to-token-supply-changes)** - Real-time supply monitoring
+- **[Get Supply of Specific Token](#get-supply-of-specific-token)** - Individual token supply tracking
+- **[Token Creation Tracking](#token-creation-tracking)** - New token creation events
+- **[Market Cap Analysis](#market-cap-analysis)** - Market capitalization queries
+- **[Token Burn Events](#token-burn-events)** - Burn event monitoring
+- **[Video Tutorials](#video-tutorials)** - Step-by-step guides
+
+## 🔗 Related Solana APIs
+
+- **[Solana Instructions API](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/)** - Track token creation and burn instructions
+- **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)** - Monitor balance changes from supply updates
+- **[Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/)** - Track transfers that affect token supply
+- **[Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities impacting supply
+- **[Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api/)** - Analyze fees from supply-related transactions
+
+<head>
+<meta name="title" content="Solana Token Supply API | Easiest way to get Solana Token supply"/>
+<meta name="description" content="Access real-time on-chain data for Solana token supply and more through our Solana Token Supply API."/>
+<meta name="keywords" content="Solana Token Supply API, Solana Token Supply python api, Solana Token Supply data api, Solana Token Supply blockchain api, token supply scan api, Solana web3 token supply api, Solana DEX token supply API, Solana network token supply API"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="Solana Token Supply API | Easiest way to get Solana Token supply"
+/>
+<meta
+  property="og:description"
+  content="Access real-time on-chain data for Solana token supply and more through our Solana Token Supply API."
+/>
+
+<!-- Twitter -->
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="Solana Token Supply API | Easiest way to get Solana Token supply" />
+<meta property="twitter:description" content="Access real-time on-chain data for Solana token supply and more through our Solana Token Supply API." />
+</head>
+
+## Subscribe to Token Supply Changes
+
+This subscription will return the token supply changes in realtime. `PostBalance` will give you the current supply. Check the query [here](https://ide.bitquery.io/token-supply-updates-sub)
+
+For tracking the instructions that cause these supply changes (like token creation and burning), see our **[Solana Instructions API](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/)**.
+
+```graphql
+subscription {
+  Solana {
+    TokenSupplyUpdates {
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          MintAddress
+          Name
+        }
+
+        PreBalance
+        PostBalance
+      }
+    }
+  }
+}
+```
+
+## Get Supply of specific Token
+
+This query will return the latest token supply of a specific token. We are getting here supply for this `6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui` token `PostBalance` will give you the current supply for this token. Check the query [here](https://ide.bitquery.io/token-supply_2)
+
+```graphql
+{
+  Solana {
+    TokenSupplyUpdates(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        TokenSupplyUpdate: {
+          Currency: { MintAddress: { is: "token mint address" } }
+        }
+      }
+    ) {
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          MintAddress
+          Name
+        }
+        PreBalance
+        PostBalance
+      }
+    }
+  }
+}
+```
+
+---
+
+## Token Creation Tracking
+
+### Get newly created Pump Fun tokens, Creation Time, Dev Address, Metadata
+
+Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+
+```graphql
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+            Method: { is: "create" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signer
+      }
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Symbol
+          ProgramAddress
+          PrimarySaleHappened
+          Native
+          Name
+          MintAddress
+          MetadataAddress
+          Key
+          IsMutable
+          Fungible
+          EditionNonce
+          Decimals
+          Wrapped
+          VerifiedCollection
+          Uri
+          UpdateAuthority
+          TokenStandard
+        }
+        PostBalance
+      }
+    }
+  }
+}
+```
+
+### Get newly created Moonshot tokens and their Metadata
+
+Now you can track the newly created Moonshot Tokens along with their metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here](https://ide.bitquery.io/Get-newly-created-Moonshot-tokens-with-metadata#)
+
+```graphql
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG" }
+            Method: { is: "tokenMint" }
+          }
+        }
+      }
+    ) {
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Symbol
+          ProgramAddress
+          PrimarySaleHappened
+          Native
+          Name
+          MintAddress
+          MetadataAddress
+          Key
+          IsMutable
+          Fungible
+          EditionNonce
+          Decimals
+          Wrapped
+          VerifiedCollection
+          Uri
+          UpdateAuthority
+          TokenStandard
+        }
+        PostBalance
+      }
+    }
+  }
+}
+```
+
+---
+
+## Market Cap Analysis
+
+### Top 10 Solana tokens with the highest marketcap increase in last 1hr
+
+Use below query to get top 10 marketcap jump tokens in last 1hr. Test the query [here](https://ide.bitquery.io/top-10-marketcap-jump-tokens-in-last-1hr#)
+
+```graphql
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      limit: {count: 10}
+      orderBy: {descendingByField: "marketcapJump"}
+      where: {Transaction: {Result: {Success: true}}, Block: {Time: {since_relative: {minutes_ago: 60}}}}
+    ) {
+      TokenSupplyUpdate {
+        AmountInUSD
+        pre: PreBalanceInUSD
+        post: PostBalanceInUSD
+        Currency {
+          MintAddress
+          Name
+          Symbol
+          Decimals
+        }
+      }
+      marketcapJump: calculate(
+        expression: "(($TokenSupplyUpdate_post - $TokenSupplyUpdate_pre) / $TokenSupplyUpdate_pre) * 100"
+      )
+    }
+  }
+}
+```
+
+
+
+## Marketcap of a Token
+
+We use `PostBalanceInUSD` field to get the marketcap. Since it is built on real-time data, you will get the Marketcap if the token was active in the past 8 hours or is being transacted in real-time.
+[This](https://ide.bitquery.io/market-cap-of-token_1) query returns latest marketcap of a particular token.
+
+```graphql
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      where: {
+        TokenSupplyUpdate: {
+          Currency: { MintAddress: { is: "token mint address" } }
+        }
+      }
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+    ) {
+      TokenSupplyUpdate {
+        PostBalanceInUSD
+      }
+    }
+  }
+}
+```
+
+In case PostAmountInUSD is 0 then, you need to pull price from our Crypto price API.
+Here is an example which gets both supply and Price.
+
+[Run query](https://ide.bitquery.io/marketcap-query)
+
+```graphql
+{
+  Solana {
+    TokenSupplyUpdates(
+      where: {TokenSupplyUpdate: {Currency: {MintAddress: {is: "4iBhvT6bpCf92u12P1kpbejYrHDS6N3hJCNtAq6wpump"}}}}
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+    ) {
+      TokenSupplyUpdate {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Decimals
+        }
+        PostBalance
+        PostBalanceInUSD
+      }
+    }
+  }
+  Trading {
+    Tokens(
+      limit: {count: 1}
+      where: {Price: {IsQuotedInUsd: true}, Interval: {Time: {Duration: {eq: 1}}}, Token: {Address: {is: "4iBhvT6bpCf92u12P1kpbejYrHDS6N3hJCNtAq6wpump"}}}
+    ) {
+      Block {
+        Time(maximum: Block_Time)
+      }
+      Price {
+        Average {
+          Mean
+        }
+      }
+    }
+  }
+}
+```
+
+## Monitor Market Cap Metric for a Pump Fun Token
+
+The subscription given [below](https://ide.bitquery.io/pump-fun-token-mcap-monitoring) could be used to setup a [websocket](https://docs.bitquery.io/docs/subscriptions/websockets/) like solution that monitors market cap of a Pump Fun token in real time, where the `PostBalanceInUSD` is essentially the marketcap of the token.
+
+```graphql
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {
+        TokenSupplyUpdate: {
+          Currency: { MintAddress: { is: "token mint address" } }
+        }
+      }
+      limitBy: { by: TokenSupplyUpdate_Currency_MintAddress, count: 1 }
+    ) {
+      TokenSupplyUpdate {
+        PostBalanceInUSD
+      }
+    }
+  }
+}
+```
+
+## Top Solana Tokens By MarketCap
+
+[This](https://ide.bitquery.io/top-Solana-tokens-based-on-market-cap) query returns the top Solana tokens based on the latest MarketCap.
+
+```graphql
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      orderBy: {
+        descending: Block_Time
+        descendingByField: "TokenSupplyUpdate_Marketcap"
+      }
+      limitBy: { by: TokenSupplyUpdate_Currency_MintAddress, count: 1 }
+    ) {
+      TokenSupplyUpdate {
+        Marketcap: PostBalanceInUSD
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Fungible
+          Decimals
+        }
+      }
+    }
+  }
+}
+```
+
+## Top 100 Pump Fun Tokens By MarketCap
+
+[This](https://ide.bitquery.io/top-pump-fun-tokens-based-on-market-cap_1) query returns the top Solana tokens based on the latest MarketCap.
+
+```graphql
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      where: {
+        TokenSupplyUpdate: { Currency: { MintAddress: { includes: "pump" } } }
+      }
+      orderBy: {
+        descending: Block_Time
+        descendingByField: "TokenSupplyUpdate_Marketcap"
+      }
+      limitBy: { by: TokenSupplyUpdate_Currency_MintAddress, count: 1 }
+      limit: { count: 100 }
+    ) {
+      TokenSupplyUpdate {
+        Marketcap: PostBalanceInUSD
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Fungible
+          Decimals
+          Uri
+        }
+      }
+    }
+  }
+}
+```
+
+## Get Solana Tokens With a Specific MarketCap
+
+Lets say we need to get the tokens whose marketcap has crossed the `1M USD` mark but is less than `2M USD` for various reasons like automated trading. We can get the token details that have crossed a particular marketcap using [this](https://ide.bitquery.io/tokens-with-market-cap-range) query.
+
+```graphql
+query MyQuery {
+  Solana {
+    TokenSupplyUpdates(
+      where: {
+        TokenSupplyUpdate: {
+          PostBalanceInUSD: { ge: "1000000", le: "2000000" }
+        }
+      }
+      orderBy: { descending: Block_Time }
+      limitBy: { by: TokenSupplyUpdate_Currency_MintAddress, count: 1 }
+    ) {
+      TokenSupplyUpdate {
+        Marketcap: PostBalanceInUSD
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Decimals
+          Uri
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## Token Burn Events
+
+### Get Latest Token Burn Events on Solana
+
+We will be using the token supply API to query recent token liquidity removals (token burn). You can modify this query to track burn events of a specific token using `Currency` filter in real time or query it.
+
+You can run the query [here](https://ide.bitquery.io/burn-token-supply-updates)
+
+```graphql
+query MyQuery {
+  Solana(network: solana) {
+    TokenSupplyUpdates(
+      where: {
+        Instruction: { Program: { Method: { in: ["Burn"] } } }
+        TokenSupplyUpdate: {}
+      }
+      limit: { count: 100 }
+      orderBy: { descending: Block_Time }
+    ) {
+      TokenSupplyUpdate {
+        PostBalanceInUSD
+        PostBalance
+        Amount
+        Currency {
+          Name
+          MintAddress
+        }
+      }
+      Instruction {
+        Program {
+          Name
+          Method
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## Video Tutorials
+
+### Video Tutorial on Streaming and Getting Total Supply of a Solana Token
+
+<VideoPlayer url="https://youtu.be/U_fuHEow3fQ" />
+
+### Video Tutorial on Getting New Pump Fun Token Metadata
+
+<VideoPlayer url="https://youtu.be/GmJOEWxhlVM" />
+
+### Video Tutorial | How to get Newly Created Pump Fun Tokens, Dev Address, Creation Time, Metadata
+
+<VideoPlayer url="https://www.youtube.com/watch?v=tRAHHCqQDVA" />
+
+### Video Tutorial | How to get Top Solana tokens by Marketcap increase in last 1 hr
+
+<VideoPlayer url="https://youtu.be/zB6Hmeyt6tg" />

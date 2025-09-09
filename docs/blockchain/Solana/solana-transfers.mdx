@@ -1,0 +1,331 @@
+# Solana Transfers API
+
+In this section we'll have a look at some examples using the Solana Transfers API.
+
+## 🔗 Related Solana APIs
+
+- **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)** - Monitor balance changes from transfers
+- **[Solana Instructions API](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/)** - Track transfer instructions and events
+- **[Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading transfers and swaps
+- **[Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api/)** - Analyze transfer fees and transaction costs
+- **[Solana Token Supply API](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/)** - Track supply changes from transfers
+
+
+<head>
+<meta name="title" content="Solana Transfers API | Get SPL Token Transfers"/>
+<meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
+<meta name="keywords" content="Solana transfers api, Solana transfers python api, Solana transfers scan api, Solana transfers api docs, transfers crypto api, transfers blockchain api, Solana network api"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+
+<!-- Open Graph / Facebook -->
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="Solana Transfers API | Get SPL Token Transfers"
+/>
+<meta
+  property="og:description"
+  content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers."
+/>
+
+<!-- Twitter -->
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="Solana Transfers API | Get SPL Token Transfers" />
+<meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
+</head>
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+## Subscribe to all transfers on Solana
+
+This includes all types of transactions; transfers, swaps, and other types of transactions on Solana
+
+For monitoring the balance changes that result from these transfers, see our **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)**.
+
+[Run Stream >](https://ide.bitquery.io/Subscribe-to-the-all-transfers-on-Solana)
+
+```
+subscription {
+  Solana(network: solana) {
+    Transfers {
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          MintAddress
+          Fungible
+          Symbol
+          Uri
+        }
+        Receiver {
+          Address
+        }
+        Sender {
+          Address
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Subscribe to the latest NFT token transfers on Solana
+
+Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to all NFT token transfers. You can run the query [here](https://ide.bitquery.io/Subscribe-to-the-latest-NFT-transfers-on-Solana)
+
+```
+subscription {
+  Solana {
+    Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          MintAddress
+          Fungible
+          Symbol
+          Uri
+        }
+        Receiver {
+          Address
+        }
+        Sender {
+          Address
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+
+
+```
+
+## SPL Token Transfers API | Token transfers of a particular token on Solana
+
+One of the most common types of transfers on Solana are SPL token transfers. Let's see an example to get the latest SPL token transfers using our API. Today we are taking an example of JUPITER token transfers. The contract address for the JUPITER token is `JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN`. You can find the query [here](https://ide.bitquery.io/SPL-transfers-websocket_1)
+
+```
+subscription {
+  Solana {
+    Transfers(
+      where: {Transfer: {Currency: {MintAddress: {is: "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN"}}}}
+    ) {
+      Transfer {
+        Currency {
+          MintAddress
+          Symbol
+          Name
+          Fungible
+          Native
+        }
+        Receiver {
+          Address
+        }
+        Sender {
+          Address
+        }
+        Amount
+        AmountInUSD
+      }
+    }
+  }
+}
+
+
+
+```
+
+## Get transfers in a Transaction Signature
+
+This query will help you fetch transfers for a particular transaction signature `3x3fbg3zfTvcfwEiDee5Z5NnQP2Hr7cgZZ9bMxNYtYKi6fMN9gT6xpdUzRb2FjfCkGXMPvhkt3bW61CHCNaWwdQi`. Check the query [here](https://ide.bitquery.io/Query-transfer-by-sig)
+
+```
+{
+  Solana(dataset: realtime) {
+    Transfers(
+      limit: {count: 10}
+      orderBy: {descending: Block_Slot}
+      where: {Transaction: {Signature: {is: "3x3fbg3zfTvcfwEiDee5Z5NnQP2Hr7cgZZ9bMxNYtYKi6fMN9gT6xpdUzRb2FjfCkGXMPvhkt3bW61CHCNaWwdQi"}}}
+    ) {
+      Transaction {
+        Signature
+      }
+      Block {
+        Slot
+      }
+      count
+      Transfer {
+        Amount
+        AmountInUSD
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+        Receiver {
+          Address
+        }
+        Index
+        Sender {
+          Address
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Transfers sent by specific address
+
+This websocket retrieves transfers where the sender is a particular address `2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {Address: {is: "2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc"}}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/transfers-where-sender-is-the-specified-address_1)
+
+```
+subscription {
+  Solana {
+    Transfers(
+      where: {Transfer: {Sender: {Address: {is: "2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc"}}}}
+    ) {
+      Transaction {
+        Signature
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender {
+          Address
+        }
+        Receiver {
+          Address
+        }
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Monitor multiple solana wallets transfers in real time using Websocket
+
+You can also monitor multiple wallet addresses using Bitquery's GraphQL subscription via WebSocket. The following query listens to real-time transfers sent or received by the specified wallet addresses.
+
+You can include around 100 addresses in a single subscription, potentially more, as we typically do not throttle this on our end.
+
+However, if you need to track thousands of addresses, you can subscribe to all transfers and filter them on your side.
+
+Websockets are priced based on their running time, not the amount of data delivered.
+
+Run query using [this link](https://ide.bitquery.io/Solana-Websocket---Subscribe-to-all-transfers-of-specific-addresses-in-realtime)
+
+```graphql
+subscription {
+  Solana {
+    Transfers(
+      where: {
+        any: [
+          {
+            Transfer: {
+              Sender: {
+                Address: {
+                  in: [
+                    "7Ppgch9d4XRAygVNJP4bDkc7V6htYXGfghX4zzG9r4cH"
+                    "G6xptnrkj4bxg9H9ZyPzmAnNsGghSxZ7oBCL1KNKJUza"
+                  ]
+                }
+              }
+            }
+          }
+          {
+            Transfer: {
+              Receiver: {
+                Address: {
+                  in: [
+                    "7Ppgch9d4XRAygVNJP4bDkc7V6htYXGfghX4zzG9r4cH"
+                    "G6xptnrkj4bxg9H9ZyPzmAnNsGghSxZ7oBCL1KNKJUza"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    ) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Authority {
+          Address
+        }
+        Currency {
+          Decimals
+          CollectionAddress
+          Fungible
+          MetadataAddress
+          MintAddress
+          Name
+          Native
+          Symbol
+        }
+        Receiver {
+          Address
+        }
+        Sender {
+          Address
+        }
+      }
+    }
+  }
+}
+```
+
+## Transfers of a wallet address
+
+This query fetches you the recent 10 transfers of a specific wallet address `9nnLbotNTcUhvbrsA6Mdkx45Sm82G35zo28AqUvjExn8`. Try the query [here](https://ide.bitquery.io/Transfers-of-a-wallet_1).
+
+```
+{
+  Solana {
+    Transfers(
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+      where: {any: [{Transfer: {Sender: {Address: {is: "9nnLbotNTcUhvbrsA6Mdkx45Sm82G35zo28AqUvjExn8"}}}}, {Transfer: {Receiver: {Address:{is: "9nnLbotNTcUhvbrsA6Mdkx45Sm82G35zo28AqUvjExn8"}} }}]}
+    ) {
+      Transaction {
+        Signature
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender{
+          Address
+        }
+        Receiver{
+          Address
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Video Tutorial on Solana Transfers API | How to get NFT, SPL Transfers data on Solana in Realtime
+
+<VideoPlayer url="https://youtu.be/tzAeOv3oPKs?si=rlHBOkZWsBOill-j" />

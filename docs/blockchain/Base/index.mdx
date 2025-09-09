@@ -1,0 +1,125 @@
+---
+title: Base API Documentation
+description: Collection of Base chain APIs organized by topic.
+slug: /blockchain/Base/
+keywords:
+  - Base API
+  - Base RPC
+  - Base RPC API
+  - Best Base API
+  - Base Explorer API
+  - base wallet transaction monitoring api
+  - base api docs
+  - base websocket api
+  - base blockchain api
+  - base token api
+  - base transaction api
+  - Aerodrome API
+  - Uniswap v3 Base API
+  - Zora API
+---
+
+# Base API Documentation
+
+## Overview
+
+In this section we will see how to fetch data on tokens, transactions, and DEXs like Aerodrome and Uniswap on Base via APIs and Streams.
+
+If you need help getting data on Base, reach out to [support](https://t.me/Bloxy_info).
+
+### What is Base API?
+
+Bitquery Base APIs help you fetch onchain data like trades, transactions, balances, token holders etc using graphQL query.
+
+### What are capabilities of Bitquery Base API?
+
+Bitquery Base APIs are very flexible; you can fetch trade, transaction, and balance information for a period, for a specific wallet, and join with other information.
+
+### Difference between Base RPC and Bitquery Base API?
+
+| Base RPC | Bitquery Base API |
+| --- | --- |
+| JSON-RPC endpoint exposing raw EVM on-chain state and transactions | GraphQL endpoint over pre-indexed, parsed Base chain data (token transfers, DEX trades, logs, calls, etc.) |
+| No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions |
+| Ideal for submitting transactions | Great for real-time data and historical backtesting without running your own indexer |
+
+### Does Bitquery support Base Websocket and Webhooks?
+
+Bitquery supports websocket and webhooks; you can convert most GraphQL APIs into GraphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More docs and code samples are available [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
+
+## Quick start
+
+Run this minimal GraphQL query to fetch the latest 5 DEX trades on Base:
+
+```graphql
+query LatestBaseTrades {
+  EVM(network: base) {
+    DEXTrades(limit: { count: 5 }, orderBy: { descending: Block_Time }) {
+      Block { Time }
+      Trade {
+        Dex { ProtocolName }
+        Buy { AmountInUSD Currency { Symbol } }
+        Sell { AmountInUSD Currency { Symbol } }
+      }
+      Transaction { Hash }
+    }
+  }
+}
+```
+
+## DEX and Protocol APIs
+
+- [Aerodrome API](./aerodrome-base-api)
+- [Uniswap v3 on Base API](./base-uniswap-api)
+- [Base Dex Trades](./base-dextrades)
+- [ApeStore API](./apestore-base-api)
+- [Clanker API](./base-clanker-api)
+- [Jump (Base) API](./base-jump-base-api)
+
+## Tokens, Transfers, Balances
+
+- [Base Coins API](./base-coins-api)
+- [Base Transfers](./base-transfers)
+- [Base Balance Updates](./base-balance-updates)
+
+## NFTs
+
+- [Base NFT](./base-nft)
+- [Zora on Base API](./base-zora-api)
+
+## AI Agent
+
+- [Building an AI Trading Agent on Base](./ai-agent-base-data)
+
+
+## Videos
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+### Video Tutorial | Aerodrome: Latest Trades & Most Purchased Tokens
+
+<VideoPlayer url="https://youtu.be/MZbepYijCng" />
+
+### Video Tutorial | Aerodrome: Latest Liquidity Pools & Pool Liquidity
+
+<VideoPlayer url="https://youtu.be/HvuD4Gtaonc" />
+
+### Video Tutorial | Base DEX Trades API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=RJJAo0yDf18" />
+
+### Video Tutorial | Base Transfers in Realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=KamFAWPsE-4" />
+
+### Video Tutorial | Latest Memecoins on Base
+
+<VideoPlayer url="https://youtu.be/jArOBPZpTFQ" />
+
+### Video Tutorial | Base Balance Updates
+
+<VideoPlayer url="https://www.youtube.com/watch?v=99ziGAZ9Pvw" />
+
+### Video Tutorial | Build AI Trading Agent on Base
+
+<VideoPlayer url="https://youtu.be/ZIKi8jCrhvA" />
