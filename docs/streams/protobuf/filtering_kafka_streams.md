@@ -48,7 +48,7 @@ def process_message(message):
 
 ```
 
-## Filtering for a Specific Token Trade on Solana
+## Filtering for a Specific DEX on Solana
 
 We will use the `solana.dextrades.proto` topic for this usecase.
 
