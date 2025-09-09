@@ -6,7 +6,7 @@ keywords: ["OHLC API", "crypto candle data", "K-line API", "real-time price data
 
 # Crypto Tokens OHLC Candle K-Line API - Real-Time & Historical Price Data
 
-Get real-time and historical OHLC (Open, High, Low, Close) candle data, K-line charts, and price analytics for crypto tokens across all supported blockchains including Ethereum, Solana, BSC, Polygon, Arbitrum, Optimism, Base, and more.
+Get real-time and historical OHLC (Open, High, Low, Close) candle data, K-line charts, and price analytics for crypto tokens across all supported blockchains including Ethereum, Solana, BSC, Polygon, and Tron.
 
 ## What is OHLC Data?
 
