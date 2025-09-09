@@ -51,7 +51,7 @@ If you want fastest data without any latency, we can provide Kafka streams, plea
 
 ## Track Token creation using Believe Protocol on Meteora DBC in realtime
 
-Using [this](https://ide.bitquery.io/track-Token-creation-using-Believe-Protocol-on-Meteora-DBC-in-realtime) stream, we can get the latest created Meteora DBC tokens using Believe Protocol in realtime. `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN` is the address of Meteora DBC and `5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE` is the Believe Token Authority address, the address which is responsible for calling the instructions on Meteora DBC Program.
+Using [this](https://ide.bitquery.io/track-Token-creation-using-Believe-Protocol-on-Meteora-DBC-in-realtime_2) stream, we can get the latest created Meteora DBC tokens using Believe Protocol in realtime. `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN` is the address of Meteora DBC and `5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE` is the Believe Token Authority address, the address which is responsible for calling the instructions on Meteora DBC Program.
 
 ```graphql
 subscription MyQuery {
@@ -63,11 +63,13 @@ subscription MyQuery {
             Address: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" }
             Method: { is: "initialize_virtual_pool_with_spl_token" }
           }
+          Accounts: {
+            includes: {
+              Address: { is: "5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE" }
+            }
+          }
         }
-        Transaction: {
-          Result: { Success: true }
-          Signer: { is: "5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE" }
-        }
+        Transaction: { Result: { Success: true } }
       }
     ) {
       Block {

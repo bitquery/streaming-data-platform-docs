@@ -321,3 +321,80 @@ query MyQuery {
 }
 
 ```
+
+## Track Boop.fun, Raydium Launchlab, Meteora DBC, LetsBonk.fun and Moonshot Token Migrations in a single subscription
+
+Use this single subscription to stream real-time token migration events across Boop.fun, Raydium Launchlab, Meteora DBC, and Moonshot. It filters by the respective program IDs and migration methods, returning block time, program details, involved accounts, and transaction signatures as events occur.
+
+Try out the [API](https://ide.bitquery.io/Raydium-Launchlab-Meteora-DBC-BoopFun-Moonshot-LetsBonkfun-token-migrations-in-realtime_2) here on IDE.
+
+```
+subscription{
+  Solana {
+    Instructions(
+      where: {any: [{Instruction: {Program: {Address: {is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"}, Method: {is: "initialize_v2"}}}}, {Instruction: {Program: {Address: {is: "boop8hVGQGqehUK2iVEMEnMrL5RbjywRzHKBmBE7ry4"}, Method: {is: "graduate"}}}}, {Instruction: {Program: {Address: {is: "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG"}, Method: {is: "migrateFunds"}}}}, {Instruction: {Program: {Address: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}, Method: {in: ["migrate_meteora_damm", "migration_damm_v2"]}}}}, {Instruction: {Program: {Address: {is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"}, Method: {in: ["migrate_to_amm", "migrate_to_cpswap"]}}, Accounts: {includes: {Address: {is: "FfYek5vEz23cMkWsdJwG2oa6EphsvXSHrGpdALN4g6W1"}}}}}], Transaction: {Result: {Success: true}}}
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        Program {
+          AccountNames
+          # LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj - Launchlab
+          # boop8hVGQGqehUK2iVEMEnMrL5RbjywRzHKBmBE7ry4 - boop.fun
+          # MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG - Moonshot/Moonit
+          # dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN - Meteora DBC
+          # LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj - Program Address and FfYek5vEz23cMkWsdJwG2oa6EphsvXSHrGpdALN4g6W1(letsbonk.fun platform config addr) is present in Accounts array then its Letsbonk.fun migration
+          Address
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+          Method
+          Name
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+
+```
