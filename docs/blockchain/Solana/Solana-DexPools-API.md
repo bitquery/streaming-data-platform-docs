@@ -367,418 +367,81 @@ query GetTopPoolsByDex {
 
 </details>
 
-## Liquidity Removal from a Pool for a Token
+## Liquidity Remove Events Tracked Using Withdraw Instruction
 
-[This](https://ide.bitquery.io/liquidity-removal_1) query allows you to subscribe to updates on liquidity removal from a specific pool on the Solana network. The subscription is filtered by a particular token, identified by the base currency name or smart contract. It returns information on the amount of liquidity removed and the remaining balance.
+This query tracks liquidity removal events on Solana DEX pools by monitoring withdraw instructions.
+
+[ Run query](https://ide.bitquery.io/Copy-of-Solana-DEXPools-withdraw)
 
 <details>
+
   <summary>Click to expand GraphQL query</summary>
 
-```graphql
+```
+
 {
   Solana(network: solana) {
     DEXPools(
-      where: {
-        Pool: {
-          Base: { ChangeAmount: { lt: "0" } }
-          Market: {
-            BaseCurrency: {
-              MintAddress: {
-                is: "7M9KJcPNC65ShLDmJmTNhVFcuY95Y1VMeYngKgt67D1t"
-              }
-            }
-          }
-        }
-      }
+      limit: {count: 20}
+      orderBy: {descending: Block_Time}
+      where: {Instruction: {Program: {Method: {is: "withdraw"}}}}
     ) {
       Pool {
         Market {
           MarketAddress
           BaseCurrency {
-            MintAddress
             Symbol
             Name
+            MintAddress
           }
           QuoteCurrency {
-            MintAddress
             Symbol
             Name
+            MintAddress
           }
         }
-        Dex {
-          ProtocolFamily
-          ProtocolName
-        }
-        Quote {
+        Base {
+          ChangeAmount
+          ChangeAmountInUSD
           PostAmount
-          PriceInUSD
           PostAmountInUSD
-          ChangeAmount
-        }
-        Base {
-          PostAmount
-          ChangeAmount
-        }
-      }
-    }
-  }
-}
-```
-
-</details>
-
-## Pump Fun Pool Liquidity Addition
-
-[This](https://ide.bitquery.io/add-liquidity-pump-fun_2) query returns the instances where liquidity was added to the pools related to the `Pump` protocol on `Solana`.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  Solana {
-    DEXPools(
-      where: {
-        Pool: {
-          Dex: { ProtocolName: { is: "pump" } }
-          Base: { ChangeAmount: { gt: "0" } }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Pool {
-        Market {
-          MarketAddress
-          BaseCurrency {
-            MintAddress
-            Symbol
-            Name
-          }
-          QuoteCurrency {
-            MintAddress
-            Symbol
-            Name
-          }
-        }
-        Dex {
-          ProtocolFamily
-          ProtocolName
-        }
-        Quote {
-          PostAmount
+          Price
           PriceInUSD
-          PostAmountInUSD
-        }
-        Base {
-          PostAmount
-        }
-      }
-    }
-  }
-}
-```
-
-</details>
-
-## Pump Fun Pool Liquidity Removal
-
-[This](https://ide.bitquery.io/remove-liquidity-from-pump_2) query returns the liquidity removal/ token burning instances for the `Pump` protocol on `Solana`.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  Solana {
-    DEXPools(
-      where: {
-        Pool: {
-          Dex: { ProtocolName: { is: "pump" } }
-          Base: { ChangeAmount: { lt: "0" } }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Pool {
-        Market {
-          MarketAddress
-          BaseCurrency {
-            MintAddress
-            Symbol
-            Name
-          }
-          QuoteCurrency {
-            MintAddress
-            Symbol
-            Name
-          }
-        }
-        Dex {
-          ProtocolFamily
-          ProtocolName
         }
         Quote {
+          ChangeAmount
+          ChangeAmountInUSD
           PostAmount
+          PostAmountInUSD
+          Price
           PriceInUSD
-          PostAmountInUSD
         }
-        Base {
-          PostAmount
-        }
-      }
-    }
-  }
-}
-```
-
-</details>
-
-## Liquidity Added and Removed by Specific Address
-
-[This](https://ide.bitquery.io/liquidity-added-and-removed-by-particular-address_3) query returns the events of liquidity addition and liquidity removal by a particular address, which is `bgrXcQpyAhQ5MGcew8EB8tbz4oBJ5whahorrobfRVBQ` for this example.
-
-Please note that Solana for `EAP` only has the real time data with archive data for recent 10 hours. It could be possible that the query returns an empty array if the address is not recently active.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query MyQuery {
-  Solana {
-    DEXPools(
-      where: {
-        Transaction: {
-          Signer: { is: "bgrXcQpyAhQ5MGcew8EB8tbz4oBJ5whahorrobfRVBQ" }
-          Result: { Success: true }
-        }
-        Pool: { Base: { ChangeAmount: { ne: "0" } } }
-      }
-    ) {
-      Pool {
         Dex {
-          ProgramAddress
-          ProtocolFamily
           ProtocolName
-        }
-        Market {
-          BaseCurrency {
-            Name
-            MintAddress
-            Symbol
-          }
-          QuoteCurrency {
-            Name
-            MintAddress
-            Symbol
-          }
-        }
-        Base {
-          ChangeAmount
-          PostAmount
-        }
-        Quote {
-          ChangeAmount
-          PostAmount
+          ProtocolFamily
         }
       }
       Block {
         Time
       }
-    }
-  }
-}
-```
-
-</details>
-
-## Top 10 Liquidity Providers
-
-[This](https://ide.bitquery.io/top-ten-liquidity-providers-for-a-pair_3) query given below, returns the top `10` liquidity providers for a given liquidity pool.
-
-For this example:
-
-- baseCurrency: `5FGULyTir641wnz7gr2p2kiYYpWboVYE83qos1r9pump`
-- quoteCurrency: `11111111111111111111111111111111`
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query MyQuery {
-  Solana {
-    DEXPools(
-      limit: { count: 10 }
-      where: {
-        Pool: {
-          Market: {
-            QuoteCurrency: {
-              MintAddress: {
-                is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
-              }
-            }
-            BaseCurrency: {
-              MintAddress: { is: "So11111111111111111111111111111111111111112" }
-            }
-          }
-          Base: { ChangeAmount: { gt: "0" } }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-      orderBy: { descendingByField: "liquidityAdded" }
-    ) {
       Transaction {
-        Signer
-      }
-      liquidityAdded: sum(of: Pool_Base_ChangeAmountInUSD)
-    }
-  }
-}
-```
-
-</details>
-
-## All Liquidity Events for a Pair
-
-In this section, we will discuss how we can get all the liquidity related changes like liquidity addition and liquidity removal for a specified pair, which is, for this example, given below.
-
-- baseCurrency: `5FGULyTir641wnz7gr2p2kiYYpWboVYE83qos1r9pump`
-- quoteCurrency: `11111111111111111111111111111111`
-
-### Liquidity Addition Event
-
-[This](https://ide.bitquery.io/liquidity-addition-for-a-pair_2) query returns the instances of liquidity addition, that is events where `baseCurrencyChange` is greater than `0`.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  Solana {
-    DEXPools(
-      where: {
-        Pool: {
-          Market: {
-            BaseCurrency: {
-              MintAddress: {
-                is: "5FGULyTir641wnz7gr2p2kiYYpWboVYE83qos1r9pump"
-              }
-            }
-            QuoteCurrency: {
-              MintAddress: { is: "11111111111111111111111111111111" }
-            }
-          }
-          Base: { ChangeAmount: { gt: "0" } }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Pool {
-        Market {
-          MarketAddress
-          BaseCurrency {
-            MintAddress
-            Symbol
-            Name
-          }
-          QuoteCurrency {
-            MintAddress
-            Symbol
-            Name
-          }
-        }
-        Dex {
-          ProtocolFamily
-          ProtocolName
-        }
-        Quote {
-          PostAmount
-          PriceInUSD
-          PostAmountInUSD
-        }
-        Base {
-          ChangeAmount
-          PostAmount
-        }
+        Signature
       }
     }
   }
 }
+
 ```
 
 </details>
-
-### Liquidity Removal Event
-
-Now, to get the instances of liquidity removal, you can run [this](https://ide.bitquery.io/liquidity-removal-for-a-pair_4) query.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  Solana {
-    DEXPools(
-      where: {
-        Pool: {
-          Market: {
-            BaseCurrency: {
-              MintAddress: {
-                is: "5FGULyTir641wnz7gr2p2kiYYpWboVYE83qos1r9pump"
-              }
-            }
-            QuoteCurrency: {
-              MintAddress: { is: "11111111111111111111111111111111" }
-            }
-          }
-          Base: { ChangeAmount: { lt: "0" } }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Pool {
-        Market {
-          MarketAddress
-          BaseCurrency {
-            MintAddress
-            Symbol
-            Name
-          }
-          QuoteCurrency {
-            MintAddress
-            Symbol
-            Name
-          }
-        }
-        Dex {
-          ProtocolFamily
-          ProtocolName
-        }
-        Quote {
-          PostAmount
-          PriceInUSD
-          PostAmountInUSD
-        }
-        Base {
-          ChangeAmount
-          PostAmount
-        }
-      }
-    }
-  }
-}
-```
-
-</details>
-
-If the segregation shown above is not required, you can remove the `Base{ChangeAmount}` filter from either of the query and get the desired result.
 
 ## Liquidity Events for Raydium Pairs
 
-In this section, we will discover data streams that provides us with the real time events of liquidity addition and liquidity removal for the Radium DEX, which has `675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8` as the Program Address.
+In this section, we will discover data streams that provides us with the real time events of liquidity addition and liquidity removal for the Raydium DEX, which has `675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8` as the Program Address.
 
-### Liquidity addition for Radium Pairs
+### Liquidity addition for Raydium Pairs
 
-[This](https://ide.bitquery.io/liquidity-addition-for-radium_1) subscription returns the real-time liquidity addition event details for the Radium Pairs.
+[This](https://ide.bitquery.io/liquidity-addition-for-Raydium_1) subscription returns the real-time liquidity addition event details for the Raydium Pairs.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -833,9 +496,9 @@ subscription {
 
 </details>
 
-### Liquidity removal for Radium Pairs
+### Liquidity removal for Raydium Pairs
 
-[This](https://ide.bitquery.io/liquidity-removal-for-radium_1) subscription returns the real-time liquidity addition event details for the Radium Pairs.
+[This](https://ide.bitquery.io/liquidity-removal-for-Raydium_1) subscription returns the real-time liquidity addition event details for the Raydium Pairs.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
