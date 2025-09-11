@@ -897,7 +897,7 @@ const config = {
           },
           {
             to: "https://lite.bitquery.io/",
-            label: "Free Investigation Tool",
+            label: "Investigation Tool",
             position: "left",
           },
           {
