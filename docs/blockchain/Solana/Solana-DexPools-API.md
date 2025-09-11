@@ -367,6 +367,73 @@ query GetTopPoolsByDex {
 
 </details>
 
+## Liquidity Add Events Tracked Using Instructions
+
+This query tracks liquidity addition events on Solana DEX pools by monitoring specific instructions.
+
+[ Run query](https://ide.bitquery.io/All-liquidity-add-instructions-track-on-Solana#)
+
+<details>
+
+  <summary>Click to expand GraphQL query</summary>
+
+```
+{
+  Solana(network: solana) {
+    DEXPools(
+      limit: {count: 20}
+      orderBy: {descending: Block_Time}
+      where: {Instruction: {Program: {Method: {in: ["add_liquidity", "addLiquidity", "increase_liquidity", "increaseLiquidity", "increase_liquidity_v2", "deposit", "depositAllTokenTypes", "join", "provide_liquidity"]}}}}
+    ) {
+      Pool {
+        Market {
+          MarketAddress
+          BaseCurrency {
+            Symbol
+            Name
+            MintAddress
+          }
+          QuoteCurrency {
+            Symbol
+            Name
+            MintAddress
+          }
+        }
+        Base {
+          ChangeAmount
+          ChangeAmountInUSD
+          PostAmount
+          PostAmountInUSD
+          Price
+          PriceInUSD
+        }
+        Quote {
+          ChangeAmount
+          ChangeAmountInUSD
+          PostAmount
+          PostAmountInUSD
+          Price
+          PriceInUSD
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+      }
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+
+```
+
+</details>
+
 ## Liquidity Remove Events Tracked Using Withdraw Instruction
 
 This query tracks liquidity removal events on Solana DEX pools by monitoring withdraw instructions.
