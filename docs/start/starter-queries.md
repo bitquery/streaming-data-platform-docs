@@ -8,9 +8,8 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Solana APIs](#solana-trade-api)
 - [PumpFun API](#pumpfun-api)
 - [Raydium API](#raydium-api)
-- [EVM APIs](#evm)
+- [EVM APIs](#evm-token-holder-api)
 - [NFT APIs](#nft-apis)
-- [Uniswap V3 API](#uniswap-v3-api)
 - [TRON APIs](#tron)
 - [Bitcoin APIs](#bitcoin)
 - [Cardano APIs](#cardano)
@@ -128,6 +127,12 @@ Get all trades related transactions for a specific pair address.
 
 Returns volume statistics, active wallets, and total transactions for Solana.
 ▶️ [Get Volume Stats By Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets)
+
+## Pumpfun API
+
+## Latest Pumpfun Trades
+
+▶️ [Stream Pumpfun Trades](https://ide.bitquery.io/Pumpfun-DEX-Trades-stream)
 
 ## Solana Balance API
 

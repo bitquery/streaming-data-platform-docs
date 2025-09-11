@@ -26,7 +26,7 @@ The **Bitquery Bags FM API** provides comprehensive access to **Bags FM launchpa
 
 ## Table of Contents
 
-### [API Endpoints](#-endpoints--queries)
+### [API Endpoints](#api-endpoints)
 
 1. **[New Bags FM Token Created (Instructions API v1)](#1-new-bags-fm-token-created-instructions-api-v1)**
 

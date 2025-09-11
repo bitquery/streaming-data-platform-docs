@@ -16,7 +16,6 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Table of Contents
 
-- [Track BonkSwap Token Creation](#track-bonkfun-token-creation)
 - [BonkSwap Examples](#bonkswap-examples)
   - [Latest Trades on BonkSwap](#latest-trades-on-bonkswap)
   - [Get Top Traders on BonkSwap](#get-top-traders-on-bonkswap)
