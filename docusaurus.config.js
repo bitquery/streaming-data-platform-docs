@@ -78,26 +78,9 @@ const config = {
     //   },
     // ],
     [
-      require.resolve("@cmfcmf/docusaurus-search-local"),
+      require.resolve("@easyops-cn/docusaurus-search-local"),
       {
-        indexDocs: true,
-        indexDocSidebarParentCategories: 0,
-        indexBlog: true,
-        indexPages: false,
-        language: "en",
-        style: undefined,
-        maxSearchResults: 8,
-
-        // lunr.js-specific settings
-        lunr: {
-          tokenizerSeparator: /[\s\-]+/,
-          b: 0.75,
-          k1: 1.2,
-          titleBoost: 5,
-          contentBoost: 1,
-          tagsBoost: 3,
-          parentCategoriesBoost: 2,
-        },
+        // minimal configuration
       },
     ],
     [
