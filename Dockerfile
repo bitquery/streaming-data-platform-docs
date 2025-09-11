@@ -1,4 +1,4 @@
-FROM node:16.19-alpine AS builder
+FROM node:18-alpine AS builder
 
 ENV NPM_CONFIG_LOGLEVEL=warn
 ENV NPM_CONFIG_COLOR=false
