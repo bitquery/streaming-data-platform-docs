@@ -69,18 +69,18 @@ with the same levels as the query schema. This allows to build complex filters b
 as in the following example:
 
 ```graphql
-{
-  EVM {
+\{
+  EVM \{
     Transactions(
-      where: {
-        Block: { GasUsed: { ge: "26000000" } }
-        Transaction: { Gas: { ge: "16000000" } }
+      where: \{
+        Block: \{ GasUsed: \{ ge: "26000000" \} \}
+        Transaction: \{ Gas: \{ ge: "16000000" \} \}
       }
-    ) {
-      Block {
+    ) \{
+      Block \{
         GasUsed
       }
-      Transaction {
+      Transaction \{
         Gas
       }
     }
@@ -98,14 +98,14 @@ filters are combined by **AND** principles, result set is an intersection of all
 You can pass the WHERE clause as a parameter to set dynamic conditions for filtering the response. In the below example, we are passing the WHERE clause as a parameter, where we use 'currency' as a filter.
 
 ```
-query ($where: EVM_DEXTradeByToken_Filter) {
-  EVM(dataset: archive) {
+query ($where: EVM_DEXTradeByToken_Filter) \{
+  EVM(dataset: archive) \{
     DEXTradeByTokens(
-      limit: {count: 10}
+      limit: \{count: 10\}
       where: $where
-      orderBy: {descending: Block_Date}
-    ) {
-      Block {
+      orderBy: \{descending: Block_Date\}
+    ) \{
+      Block \{
         Date
       }
       sum(of: Trade_PriceInUSD)
@@ -113,11 +113,11 @@ query ($where: EVM_DEXTradeByToken_Filter) {
   }
 }
 <!-- Parameters -->
-{
-  "where": {
-    "Trade": {
-      "Currency": {
-        "Symbol": {
+\{
+  "where": \{
+    "Trade": \{
+      "Currency": \{
+        "Symbol": \{
           "is": "PEPE"
         }
       }
@@ -142,15 +142,15 @@ query(
   $amount_usd_filter: EVM_Amount_With_Decimals
   $price_usd_filter: OLAP_Float
   $price_assymetry_filter: OLAP_Float
-) {
-  EVM(network: $network mempool: $mempool) {
+) \{
+  EVM(network: $network mempool: $mempool) \{
     DEXTradeByTokens(
-      orderBy: {descending: Block_Number}
-      limit: {count: 35}
+      orderBy: \{descending: Block_Number\}
+      limit: \{count: 35\}
 
-      where: {
+      where: \{
 
-        Trade: {
+        Trade: \{
           Currency: $currency_filter
           AmountInUSD: $amount_usd_filter
           PriceInUSD: $price_usd_filter
@@ -159,30 +159,30 @@ query(
 
       }
 
-    ) {
+    ) \{
 
-      Block {
+      Block \{
         Time
       }
 
-      Transaction {
+      Transaction \{
         Hash
       }
 
-      Trade {
+      Trade \{
         Buyer
         Seller
         Amount
         AmountInUSD
-        Currency {
+        Currency \{
           Symbol
           SmartContract
         }
         Price
         PriceInUSD
         PriceAsymmetry
-        Side {
-          Currency {
+        Side \{
+          Currency \{
             SmartContract
             Symbol
           }
@@ -195,13 +195,13 @@ query(
 }
 <!-- Parameter -->
 
-{
+\{
   "network": "matic",
   "mempool": false,
-  "currency_filter": { "SmartContract": { "is": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39"}},
-  "amount_usd_filter": {"ge": "2000.0"},
-  "price_usd_filter": {"ge": 13.59},
-  "price_assymetry_filter": {"ge": 0.001}
+  "currency_filter": \{ "SmartContract": \{ "is": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39"\}\},
+  "amount_usd_filter": \{"ge": "2000.0"\},
+  "price_usd_filter": \{"ge": 13.59\},
+  "price_assymetry_filter": \{"ge": 0.001\}
 }
 ```
 
@@ -233,7 +233,7 @@ For numeric data, the following operators applicable:
 If you need to define the range of value, use `ge` and `le` together:
 
 ```
-          GasUsed: {
+          GasUsed: \{
             ge: "26000000"
             le: "60000000"
           }
@@ -309,26 +309,26 @@ Note that all conditions on items can be a list, they all applied to selecting t
 Example of the condition is the following:
 
 ```
-{
-  EVM {
+\{
+  EVM \{
     Calls(
-      where: {
-        Arguments: {
-					length: {eq: 2}
-          includes: {
-            Index: {eq: 0}
-            Name: {is: "recipient"}
+      where: \{
+        Arguments: \{
+					length: \{eq: 2\}
+          includes: \{
+            Index: \{eq: 0\}
+            Name: \{is: "recipient"\}
           }
         }
       }
-      limit: {count: 10}) {
-      Arguments {
+      limit: \{count: 10\}) \{
+      Arguments \{
         Index
         Name
         Type
       }
-      Call {
-        Signature {
+      Call \{
+        Signature \{
           Signature
         }
       }
@@ -343,16 +343,16 @@ Filter selects calls which have 2 arguments, and the first argument name is "rec
 Condition can combine conditions on the items:
 
 ```
-Arguments: {
+Arguments: \{
           includes: [
-            {
-            Index: {eq: 0}
-            Name: {is: "recipient"}
-            Value: {Address: {is: "0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969"}}
+            \{
+            Index: \{eq: 0\}
+            Name: \{is: "recipient"\}
+            Value: \{Address: \{is: "0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969"\}\}
            }
-           {
-            Name: {is: "amount"}
-            Value: {BigInteger: {ge: "1000000000"}}
+           \{
+            Name: \{is: "amount"\}
+            Value: \{BigInteger: \{ge: "1000000000"\}\}
            }
           ]
         }
@@ -373,29 +373,29 @@ The `selectWhere` parameter functions similarly to the `HAVING` clause in SQL, a
 To demonstrate the use of `selectWhere`, consider the following query that retrieves blocks from the EVM dataset and filters based on a transaction count greater than 1,500,000.
 
 ```
-query {
-  EVM(dataset: archive) {
-    Blocks {
-      Block {
+query \{
+  EVM(dataset: archive) \{
+    Blocks \{
+      Block \{
         Date
       }
-      sum(of: Block_TxCount selectWhere: {gt: "1500000"})
+      sum(of: Block_TxCount selectWhere: \{gt: "1500000"\})
     }
   }
 }
 ```
 
-**sum(of: Block_TxCount selectWhere: {gt: "1500000"})**: Applies the `sum` aggregate function to `Block_TxCount` and filters for sums greater than 1,500,000.
+**sum(of: Block_TxCount selectWhere: \{gt: "1500000"\})**: Applies the `sum` aggregate function to `Block_TxCount` and filters for sums greater than 1,500,000.
 
 In this example, the query retrieves block data and applies a filter on the sum of transaction counts to include only those blocks where the transaction count exceeds 1,500,000.
 
 This is different from the `where` clause, which is used to filter the blocks based on the transaction count:
 
 ```
-query {
-  EVM(dataset: archive) {
-    Blocks(where: {Block: {TxCount: {gt: 1500000}}}) {
-      Block {
+query \{
+  EVM(dataset: archive) \{
+    Blocks(where: \{Block: \{TxCount: \{gt: 1500000\}\}}) \{
+      Block \{
         Date
       }
     }
@@ -403,6 +403,6 @@ query {
 }
 ```
 
-- **Blocks(where: {Block: {TxCount: {gt: 1500000}}})**: Filters blocks directly where `TxCount` is greater than 1,500,000 before aggregation.
+- **Blocks(where: \{Block: \{TxCount: \{gt: 1500000\}\}\})**: Filters blocks directly where `TxCount` is greater than 1,500,000 before aggregation.
 
 In this query, the `where` clause directly filters blocks with transaction counts greater than 1,500,000 before any aggregation occurs.

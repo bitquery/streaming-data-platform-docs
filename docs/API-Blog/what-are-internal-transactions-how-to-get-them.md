@@ -161,12 +161,12 @@ Details:
 
 - In: This array contains a series of transactions occurring within the bigger transaction.
 - where: This is used to filter the data based on certain conditions
-- Call: {Depth: {gt: 0}}: This was used to filter calls having Depth greater than 0.
+- Call: \{Depth: \{gt: 0\}\}: This was used to filter calls having Depth greater than 0.
 - From: This is the address that initiated the call.
 - Success: Shows if the call was successful (true) or not (false).
 - Value: This is the amount of tokens transferred during the call.
 - Hash: This is the unique identifier of the transaction.
-- Transaction:{Hash: {is: "0x85dc2c0eac54d090ac7e1b50bd47ec686ba764870b61714937b32524a96ed2b6"}}:'This filters for transactions with the specific hash mentioned. This means the query will only return data related to this transaction.
+- Transaction:\{Hash: \{is: "0x85dc2c0eac54d090ac7e1b50bd47ec686ba764870b61714937b32524a96ed2b6"\}\}:'This filters for transactions with the specific hash mentioned. This means the query will only return data related to this transaction.
 
 ## Tracing Internal Transactions on Bitquery Explorer
 

@@ -12,9 +12,9 @@ In the first case, we are going to see 3 different methods to filter anomaly tra
 
 ## 1. Using PriceAsymmetry
 
-Price Asymmetry represents the difference in TradeAmount in USD of main currency and side currency. We want to include the optimal trades which have approximately the same Amounts in USD on both sides. We generally use priceAsymmetry: {lt: 0.1}
+Price Asymmetry represents the difference in TradeAmount in USD of main currency and side currency. We want to include the optimal trades which have approximately the same Amounts in USD on both sides. We generally use priceAsymmetry: \{lt: 0.1\}
    as a filter in our APIs as this will filter out trades with more than 10% difference in their trade amounts.
-   Also, filter out low AmountinUSD trades from this, say `{Trade: {AmountInUSD: {lt: "10"}}}`
+   Also, filter out low AmountinUSD trades from this, say `{Trade: {AmountInUSD: \{lt: "10"\}}}`
 
 Read more about Price Asymmetry [here](https://docs.bitquery.io/docs/graphql/metrics/priceAsymmetry/).
 
@@ -70,12 +70,12 @@ query AllTimeHighTokenPriceQuery(
     DEXTradeByTokens(
       where: {
         Trade: {
-          Currency: { SmartContract: { is: $tokenAddress } }
-          Side: { AmountInUSD: { gt: "10" } }
+          Currency: { SmartContract: \{ is: $tokenAddress \} }
+          Side: { AmountInUSD: \{ gt: "10" \} }
         }
-        Block: { Time: { since: $startTime } }
+        Block: { Time: \{ since: $startTime \} }
       }
-      limit: { count: 1 }
+      limit: \{ count: 1 \}
     ) {
       quantile(of: Trade_PriceInUSD, level: 0.85)
       Trade {

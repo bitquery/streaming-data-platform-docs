@@ -91,7 +91,7 @@ This error occurs when a query lacks a limit or requests an excessive number of 
 
 ### Timeout TCP socket
 
-[{"message":"Net::ReadTimeout ...}]
+\[\{"message":"Net::ReadTimeout ..."\}\]
 
 This error occurs when the query is complex and takes too long to respond to a request. Check if you can optimize the query, if not please contact the support team on telegram with your query.
 

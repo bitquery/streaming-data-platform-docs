@@ -30,13 +30,13 @@ message BroadcastedTransactionsMessage {
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-      subscription{
-        EVM(mempool: true, network: bsc) {
-          Transfers {
-            Log {
+      subscription\{
+        EVM(mempool: true, network: bsc) \{
+          Transfers \{
+            Log \{
               Index
             }
-            Transaction {
+            Transaction \{
               Time
               Type
               To
@@ -45,23 +45,23 @@ message BroadcastedTransactionsMessage {
               Cost
               Hash
             }
-            Transfer {
+            Transfer \{
               Amount
-              Currency {
+              Currency \{
                 Name
               }
               Type
             }
-            TransactionStatus {
+            TransactionStatus \{
               Success
               FaultError
               EndError
             }
-            Block {
+            Block \{
               Time
             }
-            Call {
-              Signature {
+            Call \{
+              Signature \{
                 Name
               }
             }
@@ -80,32 +80,32 @@ message BroadcastedTransactionsMessage {
   <summary>Click to expand GraphQL query</summary>
   
 
-    subscription {
-      EVM(mempool: true, network: bsc) {
-        DEXTradeByTokens {
-          Block {
+    subscription \{
+      EVM(mempool: true, network: bsc) \{
+        DEXTradeByTokens \{
+          Block \{
             Number
           }
-          Transaction {
+          Transaction \{
             Hash
           }
-          Trade {
+          Trade \{
             Price
             PriceInUSD
-            Currency {
+            Currency \{
               Name
             }
             Amount
             Buyer
-            Dex {
+            Dex \{
               ProtocolName
             }
-            Side {
+            Side \{
               Seller
               Buyer
               AmountInUSD
               Amount
-              Currency {
+              Currency \{
                 Name
                 Symbol
               }

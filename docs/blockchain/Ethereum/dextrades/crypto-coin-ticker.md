@@ -51,12 +51,12 @@ Open this API on our [GraphQL IDE](https://ide.bitquery.io/Coin-ticker-api_4).
 We are getting OHLC (Open High Low Close) data, with the last trade details on 10-minute intervals.
 You can change this interval like the following.
 
-- Time(interval: {in: minutes, count: 5})
-- Time(interval: {in: seconds, count: 10})
-- Time(interval: {in: hours, count: 3})
-- Time(interval: {in: days, count: 14})
-- Time(interval: {in: weeks, count: 3})
-- Time(interval: {in: months, count: 1})
-- Time(interval: {in: years, count: 2})
+- Time(interval: \{in: minutes, count: 5\})
+- Time(interval: \{in: seconds, count: 10\})
+- Time(interval: \{in: hours, count: 3\})
+- Time(interval: \{in: days, count: 14\})
+- Time(interval: \{in: weeks, count: 3\})
+- Time(interval: \{in: months, count: 1\})
+- Time(interval: \{in: years, count: 2\})
 
 You can also add additional information if you want; there are many more fields available.

@@ -103,7 +103,7 @@ Bitquery’s Kafka streams are a unique product that provides ultra-low latency 
 | **Data Coverage**            | Raw on-chain data                      | All Onchain data parsed (DEX, pools, etc.) | All Onchain data parsed (DEX, pools, etc.)  |
 | **Unconfirmed Transactions** | Limited                                | Yes                                        | Yes (unconfirmed)                           |
 | **Historical Data**          | No                                     | Yes (queryable)                            | No (stream only)                            |
-| **Latency**                  | Low (depends on your infra)            | <2s (cloud-optimized)                      | Sub-second, ultra-low latency               |
+| **Latency**                  | Low (depends on your infra)            | &lt;2s (cloud-optimized)                      | Sub-second, ultra-low latency               |
 | **Scalability**              | You must scale/monitor infra           | Scales automatically (SaaS)                | Enterprise-grade, scales automatically      |
 | **Maintenance**              | High (updates, patches, uptime)        | None (managed by Bitquery)                 | None (managed by Bitquery)                  |
 | **Data Parsing**             | Developer must parse raw data          | Pre-parsed & enriched (USD values, etc.)   | Pre-parsed & enriched                       |

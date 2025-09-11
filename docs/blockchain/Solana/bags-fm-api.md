@@ -150,54 +150,54 @@ To convert this API into a stream, simply add `subscription` in front of the que
 🔗 [Try Query](https://ide.bitquery.io/Bagsfm-token-creation-using-instructions-stream-v2_5)
 
 ```graphql
-query {
-  Solana {
+query \{
+  Solana \{
     Instructions(
-      limit: { count: 100 }
-      orderBy: { descending: Block_Time }
-      where: {
-        Instruction: {
-          Program: {
-            Address: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" }
-            Method: { is: "initialize_virtual_pool_with_spl_token" }
+      limit: \{ count: 100 \}
+      orderBy: \{ descending: Block_Time \}
+      where: \{
+        Instruction: \{
+          Program: \{
+            Address: \{ is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" \}
+            Method: \{ is: "initialize_virtual_pool_with_spl_token" \}
           }
-          Accounts: {
-            includes: {
-              Address: { is: "BAGSB9TpGrZxQbEsrEznv5jXXdwyP6AXerN8aVRiAmcv" }
+          Accounts: \{
+            includes: \{
+              Address: \{ is: "BAGSB9TpGrZxQbEsrEznv5jXXdwyP6AXerN8aVRiAmcv" \}
             }
           }
         }
-        Transaction: { Result: { Success: true } }
+        Transaction: \{ Result: \{ Success: true \} \}
       }
-    ) {
-      Instruction {
-        Program {
-          Arguments {
+    ) \{
+      Instruction \{
+        Program \{
+          Arguments \{
             Name
-            Value {
+            Value \{
               __typename
-              ... on Solana_ABI_String_Value_Arg {
+              ... on Solana_ABI_String_Value_Arg \{
                 string
               }
-              ... on Solana_ABI_Integer_Value_Arg {
+              ... on Solana_ABI_Integer_Value_Arg \{
                 integer
               }
-              ... on Solana_ABI_Address_Value_Arg {
+              ... on Solana_ABI_Address_Value_Arg \{
                 address
               }
-              ... on Solana_ABI_BigInt_Value_Arg {
+              ... on Solana_ABI_BigInt_Value_Arg \{
                 bigInteger
               }
-              ... on Solana_ABI_Bytes_Value_Arg {
+              ... on Solana_ABI_Bytes_Value_Arg \{
                 hex
               }
-              ... on Solana_ABI_Boolean_Value_Arg {
+              ... on Solana_ABI_Boolean_Value_Arg \{
                 bool
               }
-              ... on Solana_ABI_Float_Value_Arg {
+              ... on Solana_ABI_Float_Value_Arg \{
                 float
               }
-              ... on Solana_ABI_Json_Value_Arg {
+              ... on Solana_ABI_Json_Value_Arg \{
                 json
               }
             }
@@ -207,7 +207,7 @@ query {
           Json
           Name
         }
-        Accounts {
+        Accounts \{
           Address
         }
         BalanceUpdatesCount
@@ -221,7 +221,7 @@ query {
         Logs
         TokenBalanceUpdatesCount
       }
-      Transaction {
+      Transaction \{
         Signature
         FeePayer
         Signer
@@ -366,43 +366,43 @@ Fetch **token-to-token prices** for all Bags FM tokens against their **quote tok
 🔗 [Try Query](https://ide.bitquery.io/Price-of-all-Bags-FM-token-against-their-relevant-quote-token-in-Stream)
 
 ```graphql
-subscription {
-  Trading {
+subscription \{
+  Trading \{
     Pairs(
-      where: {
-        Interval: { Time: { Duration: { eq: 1 } } }
-        Price: { IsQuotedInUsd: false }
-        Token: { Address: { endsWith: "BAGS" } }
+      where: \{
+        Interval: \{ Time: \{ Duration: \{ eq: 1 \} \} }
+        Price: \{ IsQuotedInUsd: false \}
+        Token: \{ Address: \{ endsWith: "BAGS" \} \}
       }
-    ) {
-      Token {
+    ) \{
+      Token \{
         Id
         Symbol
         Address
         Name
       }
-      QuoteToken {
+      QuoteToken \{
         Name
         Symbol
         Address
       }
-      Interval {
-        Time {
+      Interval \{
+        Time \{
           Start
           End
           Duration
         }
       }
-      Volume {
+      Volume \{
         Usd
         Quote
         Base
       }
-      Price {
-        Average {
+      Price \{
+        Average \{
           Mean
         }
-        Ohlc {
+        Ohlc \{
           Open
           High
           Low
@@ -588,44 +588,44 @@ Track **all transfers of Bags FM tokens** across wallets. This **Bags FM token t
 🔗 [Try Query](https://ide.bitquery.io/Solana-token-transfers-of-Bags-fm-tokens)
 
 ```graphql
-{
-  Solana {
+\{
+  Solana \{
     Transfers(
-      orderBy: { descending: Block_Time }
-      limit: { count: 10 }
-      where: {
-        Transfer: {
-          Currency: {
-            UpdateAuthority: {
+      orderBy: \{ descending: Block_Time \}
+      limit: \{ count: 10 \}
+      where: \{
+        Transfer: \{
+          Currency: \{
+            UpdateAuthority: \{
               is: "BAGSB9TpGrZxQbEsrEznv5jXXdwyP6AXerN8aVRiAmcv"
             }
           }
         }
       }
-    ) {
-      Block {
+    ) \{
+      Block \{
         Time
         Height
         Slot
       }
-      Transfer {
+      Transfer \{
         Amount
         AmountInUSD
-        Authority {
+        Authority \{
           Address
         }
-        Currency {
+        Currency \{
           UpdateAuthority
           Name
           Symbol
           MintAddress
         }
         Index
-        Receiver {
+        Receiver \{
           Address
           Owner
         }
-        Sender {
+        Sender \{
           Address
           Owner
         }
@@ -643,7 +643,7 @@ Track **all transfers of Bags FM tokens** across wallets. This **Bags FM token t
 
 ## Why Use Bitquery for Bags FM API?
 
-- **Low-latency blockchain data** (sub-400ms, moving to <100ms) for **real-time Bags FM price API**
+- **Low-latency blockchain data** (sub-400ms, moving to &lt;100ms) for **real-time Bags FM price API**
 - **Comprehensive Solana coverage** with real-time streams for **Bags FM token data**
 - **Unified price index** for accurate token valuations via **Bags FM token USD price stream**
 - **Historical + real-time queries** for flexible use cases with **Bags FM token trades** and **Bags FM token transfers**

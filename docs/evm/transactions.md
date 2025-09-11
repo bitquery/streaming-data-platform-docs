@@ -25,14 +25,14 @@ The Transactions API provides detailed information on transactions including cal
 
 
 
-    query MyQuery {
-      EVM(dataset: realtime, network: bsc) {
+    query MyQuery \{
+      EVM(dataset: realtime, network: bsc) \{
         Transactions(
-          limit: {count: 10}
-          orderBy: {descending: Block_Time}
-          where: {Block: {Date: {after: "2023-02-05"}}}
-        ) {
-          Transaction {
+          limit: \{count: 10\}
+          orderBy: \{descending: Block_Time\}
+          where: \{Block: \{Date: \{after: "2023-02-05"\}\}}
+        ) \{
+          Transaction \{
             CallCount
             Gas
             Hash
@@ -40,10 +40,10 @@ The Transactions API provides detailed information on transactions including cal
             To
             From
           }
-          Block {
+          Block \{
             Date
           }
-          TransactionStatus {
+          TransactionStatus \{
             Success
             FaultError
             EndError

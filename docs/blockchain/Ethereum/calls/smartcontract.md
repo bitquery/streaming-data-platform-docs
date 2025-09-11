@@ -10,21 +10,21 @@ sidebar_position: 2
  ##  Recent Smart Contract Calls
 
  ```graphql
-query MyQuery {
-  EVM(dataset: archive, network: bsc) {
+query MyQuery \{
+  EVM(dataset: archive, network: bsc) \{
     Calls(
-      limit: {count: 10}
-      orderBy: {descending: Block_Time}
-      where: {Block: {Date: {after: "2024-07-12"}}}
-    ) {
-      Call {
+      limit: \{count: 10\}
+      orderBy: \{descending: Block_Time\}
+      where: \{Block: \{Date: \{after: "2024-07-12"\}\}}
+    ) \{
+      Call \{
         LogCount
         InternalCalls
-        Signature {
+        Signature \{
           Name
         }
       }
-      Transaction {
+      Transaction \{
         Gas
         Hash
         From
@@ -32,27 +32,27 @@ query MyQuery {
         Type
         Index
       }
-      Block {
+      Block \{
         Date
       }
-      Arguments {
-        Value {
-          ... on EVM_ABI_Boolean_Value_Arg {
+      Arguments \{
+        Value \{
+          ... on EVM_ABI_Boolean_Value_Arg \{
             bool
           }
-          ... on EVM_ABI_Bytes_Value_Arg {
+          ... on EVM_ABI_Bytes_Value_Arg \{
             hex
           }
-          ... on EVM_ABI_BigInt_Value_Arg {
+          ... on EVM_ABI_BigInt_Value_Arg \{
             bigInteger
           }
-          ... on EVM_ABI_Address_Value_Arg {
+          ... on EVM_ABI_Address_Value_Arg \{
             address
           }
-          ... on EVM_ABI_String_Value_Arg {
+          ... on EVM_ABI_String_Value_Arg \{
             string
           }
-          ... on EVM_ABI_Integer_Value_Arg {
+          ... on EVM_ABI_Integer_Value_Arg \{
             integer
           }
         }
@@ -88,21 +88,21 @@ query MyQuery {
 This GraphQL query fetches data from the EVM (Ethereum Virtual Machine) dataset in the "eth" network about the 10 most recent calls made in Ethereum that were created after February 1st, 2023, that were contract creation calls.
 
 ```
-query MyQuery {
-  EVM(dataset: combined, network: eth) {
+query MyQuery \{
+  EVM(dataset: combined, network: eth) \{
     Calls(
-      limit: {count: 10}
-      orderBy: {descending: Block_Date}
-      where: {Block: {Date: {after: "2023-02-01"}}, Call: {Create: true}}
-    ) {
-      Call {
+      limit: \{count: 10\}
+      orderBy: \{descending: Block_Date\}
+      where: \{Block: \{Date: \{after: "2023-02-01"\}\}, Call: \{Create: true\}}
+    ) \{
+      Call \{
         LogCount
         InternalCalls
         Create
         EnterIndex
         ExitIndex
       }
-      Transaction {
+      Transaction \{
         Gas
         Hash
         From
@@ -110,7 +110,7 @@ query MyQuery {
         Type
         Index
       }
-      Block {
+      Block \{
         Date
       }
     }
@@ -123,8 +123,8 @@ query MyQuery {
 
 - `network` argument is set to eth, which specifies that only data from the Ethereum network should be included.
 - `Calls` field specifies that information about calls should be retrieved.
-- `limit` argument is set to {count: 10}, which specifies that only the 10 most recent calls should be returned.
-- `orderBy` argument is set to {descending: Block_Date}, which specifies that the calls should be ordered in descending order based on their associated block date.
+- `limit` argument is set to count: 10, which specifies that only the 10 most recent calls should be returned.
+- `orderBy` argument is set to descending: Block_Date, which specifies that the calls should be ordered in descending order based on their associated block date.
 - `where` argument is used to filter the results based on certain criteria:
 - `Block` object is used to filter based on the associated block.
 - `Date` field within the Block object is filtered using the after operator to only include blocks created after February 1st, 2023.
