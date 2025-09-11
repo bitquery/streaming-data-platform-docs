@@ -13,14 +13,14 @@ The main cases when it is used is for:
 - query the latest data available with minimum delay (up to the current block)
 
 Note that the last blocks in the real time database are not finalized and may be not
-later recorded to the archive data. [Select Block](/docs/graphql/dataset/select_blocks) attribute controls
+later recorded to the archive data. [Select Block](/docs/graphql/dataset/select-blocks/) attribute controls
 how you can query the trunk or branch block updates in real time database.
 
 :::tip
 Realtime Database features:
 
 - contains the latest data available (up to the last second);
-- includes all blocks, including trunk, branches. Some of these blocks can be removed when archived. Use [Select Block](/docs/graphql/dataset/select_blocks) attribute for better control;
+- includes all blocks, including trunk, branches. Some of these blocks can be removed when archived. Use [Select Block](/docs/graphql/dataset/select-blocks/) attribute for better control;
 - fast to query
   :::
 

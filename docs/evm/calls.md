@@ -33,7 +33,7 @@ Calls API provides details about smart contract calls, arguments, callers, etc.
 This api gives detailed information about the smart contract calls, including raw data, and supports [Opcodes](https://github.com/crytic/evm-opcodes).
 
 The API allows different filters to query the Smart contract calls details from different dimensions.
-You can find more examples [here](/docs/examples/calls/smartcontract)
+You can find more examples [here](https://docs.bitquery.io/docs/blockchain/Ethereum/calls/smartcontract/)
 
 Here's a sample query to get started.
 

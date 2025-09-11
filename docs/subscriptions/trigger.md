@@ -21,7 +21,7 @@ It has the following options:
 * ```head_updates``` - **any** blocks on the trunk (with the highest tip) triggers data update
 * ```branches_updates``` - **any** blocks on the branch (not with the highest tip) triggers data update
 
-[Blockchain Reorg Tree](/docs/graphql/dataset/select_blocks) describes how the tree is represented in the databases.
+[Blockchain Reorg Tree](/docs/graphql/dataset/select-blocks/) describes how the tree is represented in the databases.
 
 In most cases you just not specify this attribute, assuming all option is what you need. Other options are suitable
 for event-driven applications:

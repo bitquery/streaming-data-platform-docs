@@ -10,8 +10,8 @@ defines simple rules how the schema is defined, and how to query the data using 
 ## Schema
 
 Schema defines what data you can query and which options (arguments) you can apply to the query.
-Schema allows [IDE](/docs/ide/login) to create hints to build the query interactively.
-[IDE](/docs/ide/login) also shows the schema on query builder and in Document section.
+Schema allows [IDE](/docs/start/first-query/) to create hints to build the query interactively.
+[IDE](/docs/start/first-query/) also shows the schema on query builder and in Document section.
 Only queries matching schema can be successfully executed.
 
 Schema for blockchain data is pretty complicated, but for your queries you do not need to
@@ -165,7 +165,7 @@ There are several types of attributes, described in the sections:
 
 To be correctly executed, the query must conform with the following requirements:
 
-1. query must conform the schema. When you build query in the [IDE](/docs/ide/login), it will highlight all errors according to schema
+1. query must conform the schema. When you build query in the [IDE](/docs/start/first-query/), it will highlight all errors according to schema
 2. query should not violate principles described above and some natural limitations of the database capabilities. For example, you can not fetch a million result in one query, you have to use offset and limits.
 3. query should not consume more than available resources on the server. We use points to calculate consumed resources.
 

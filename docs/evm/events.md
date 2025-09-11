@@ -29,7 +29,7 @@ title: "EVM Smart Contract Events & logs API"
 </head>
 
 Smart contract events and logs are an important feature of Ethereum smart contracts that allow developers to track and record specific actions or data on the blockchain.
-You can retrieve data on blockchain calls and logs from the blockchain network. You can find more examples [here](/docs/examples/events/events_api)
+You can retrieve data on blockchain calls and logs from the blockchain network. You can find more examples [here](/docs/blockchain/Ethereum/events/events-api/)
 
 ```graphql
 query MyQuery {

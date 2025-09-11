@@ -21,7 +21,7 @@ title: Transactions API
 <meta property="twitter:description" content="Get information on transaction details and wallets on  blockchain. Also, get blocks information for tokens or NFTs on EVM chains." />
 </head>
 
-The Transactions API provides detailed information on transactions including call count, gas, hash, type, and sender and recipient addresses etc. Here's a sample query to get started. You can see more examples [here](/docs/examples/transactions/transaction-api)
+The Transactions API provides detailed information on transactions including call count, gas, hash, type, and sender and recipient addresses etc. Here's a sample query to get started. You can see more examples [here](/docs/blockchain/Ethereum/transactions/transaction-api/)
 
 
 
