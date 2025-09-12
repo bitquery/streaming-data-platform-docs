@@ -257,8 +257,8 @@ const sidebars = {
       type: "category",
       label: "Blockchains",
       link: {
-        type: "generated-index",
-        title: "Blockchains Overview",
+        type: "doc",
+        id: "blockchain/introduction",
       },
       items: [
         {
