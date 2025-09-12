@@ -255,10 +255,10 @@ const sidebars = {
 
     {
       type: "category",
-      label: "L1 Chains",
+      label: "Blockchains",
       link: {
         type: "generated-index",
-        title: "L1 Chains Overview",
+        title: "Blockchains Overview",
       },
       items: [
         {
@@ -479,17 +479,6 @@ const sidebars = {
           },
           items: ["blockchain/TON/ton-dex-trades"],
         },
-      ],
-    },
-
-    {
-      type: "category",
-      label: "L2 Chains",
-      link: {
-        type: "generated-index",
-        title: "L2 Chains Overview",
-      },
-      items: [
         {
           type: "category",
           label: "Arbitrum",
