@@ -289,7 +289,7 @@ To check if a Pump Fun Token has migrated to PumpSwap, we can use the below quer
 
 </details>
 
-## Track Pump Fun Token Migrations to PumpSwap
+## Track Pump Fun Token Migrations to PumpSwap in Realtime - Subscription
 
 You will need to use two queries to get the realtime migrations data, 2 instructions should be presnt in a transaction `migrate` and `create_pool` then only the transaction is a successfull migration of a pump fun token to pump swap.
 
@@ -409,7 +409,7 @@ query ($transactionSignature: String, $blockSlot: String){
 
 </details>
 
-## Get All Pump Fun Token Migrations to PumpSwap
+## Latest Pump Fun Token Migrations to PumpSwap - Query
 
 Use the below query to get 50 latest Pump Fun token migrations to PumpSwap. The Token Pair details which is migrated will be in Accounts[] array.
 
