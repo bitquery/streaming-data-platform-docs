@@ -6,7 +6,7 @@ Bitquery provides comprehensive real-time and historical data APIs and Streams f
 
 ### Can I monitor Raydium CLMM trades in real-time?
 
-Yes, you can subscribe to real-time Raydium CLMM trades using GraphQL subscriptions. The API filters trades by the Raydium CLMM program address `CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK` and provides trade data as it happens on-chain. Examples available below
+Yes, you can subscribe to real-time Raydium CLMM trades using GraphQL subscriptions. The API filters trades by the Raydium CLMM program address `CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK` and provides trade data as it happens on-chain. Examples available below.
 
 ### What data can I get from the Raydium CLMM API?
 
@@ -18,7 +18,7 @@ The API provides data for:
 
 ### How do I use Bitquery's Solana APIs?
 
-Bitquery provides GraphQL APIs for Solana data. You can test queries using the IDE at ide.bitquery.io or convert queries to subscriptions for real-time data via WebSocket connections. For enterprise users, we also offer Kafka streams for high-throughput data processing.
+Bitquery provides GraphQL APIs for Solana data. You can test queries using the IDE at ide.bitquery.io or convert queries to subscriptions for real-time data via WebSocket connections. To access API outside the IDE, you need to use your OAuth token, generate one [here](https://account.bitquery.io/user/api_v2/access_tokens). For enterprise users, we also offer Kafka streams for high-throughput data processing.
 
 ### What Kafka streams are available for Solana?
 
