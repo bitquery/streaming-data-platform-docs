@@ -1,5 +1,5 @@
 ---
-title: "Blockchain Data APIs - Multi-Chain Developer Platform | Bitquery"
+title: "Blockchain Data APIs - Multi-Chain Developer Platform"
 description: "Access comprehensive blockchain data across Ethereum, Solana, BSC, Arbitrum, Base, Polygon, Tron, and more. Real-time and historical data via GraphQL APIs, WebSocket subscriptions, and Kafka streams. Free tier available."
 keywords: ["blockchain API", "blockchain data API", "multi-chain API", "Ethereum API", "Solana API", "BSC API", "Arbitrum API", "Base API", "Polygon API", "Tron API", "blockchain GraphQL API", "real-time blockchain data", "historical blockchain data", "DEX API", "DeFi API", "NFT API", "token API", "transaction API", "balance API", "smart contract API", "mempool API", "blockchain streaming", "WebSocket blockchain", "Kafka blockchain", "blockchain analytics", "blockchain developer tools", "blockchain infrastructure", "blockchain indexing", "blockchain data platform", "stablecoin API", "MEV detection", "mempool monitoring", "crypto price API", "real-time trading data", "cross-chain analytics", "blockchain compliance", "payment processing API"]
 ---
@@ -459,25 +459,25 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 
 ### **Trading & Analytics**
 - **Trading Bots**: Real-time price feeds with 1-second aggregation and market data via [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
-- **Portfolio Trackers**: Multi-chain [wallet monitoring](https://docs.bitquery.io/docs/evm/balances/)
+- **Portfolio Trackers**: Multi-chain wallet monitoring
 - **Market Analytics**: Volume, liquidity, and price analysis
 - **Arbitrage Detection**: Cross-chain and cross-DEX opportunities
 - **Charting Applications**: TradingView integration with real-time OHLC data
 
 ### **Enterprise Solutions**
-- **Compliance Tools**: [Transaction monitoring](https://docs.bitquery.io/docs/evm/transactions/) and reporting
+- **Compliance Tools**: Transaction monitoring and reporting
 - **Risk Management**: Real-time exposure tracking
 - **Business Intelligence**: Custom dashboards and KPIs
-- **Audit & Forensics**: Complete [transaction history](https://docs.bitquery.io/docs/evm/transactions/) analysis
+- **Audit & Forensics**: Complete transaction history analysis
 - **MEV Detection**: Identify arbitrage opportunities and sandwich attacks
-- **Stablecoin Payments**: Real-time [payment detection](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-payments-api.md) and compliance monitoring
+- **Stablecoin Payments**: Real-time payment detection and compliance monitoring
 
 ### **Consumer Applications**
-- **Wallet Apps**: [Balance tracking](https://docs.bitquery.io/docs/evm/balances/) and transaction history
+- **Wallet Apps**: Balance tracking and transaction history
 - **NFT Marketplaces**: Collection analytics and trading data
 - **Block Explorers**: Enhanced blockchain data presentation
 - **Gaming**: In-game asset tracking and trading
-- **Payment Apps**: Real-time [stablecoin payment](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-payments-api.md) processing
+- **Payment Apps**: Real-time stablecoin payment processing
 - **MEV Tools**: Advanced trading strategies and arbitrage detection
 
 ## Data Quality & Reliability
