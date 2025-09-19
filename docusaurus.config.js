@@ -57,10 +57,10 @@ const config = {
       domain: "www.chatbase.co",
     },
 
-    {
-      src: "/js/chatbase-open.js", // Custom script to auto-open Chatbase
-      defer: true,
-    },
+    // {
+    //   src: "/js/chatbase-open.js", // Custom script to auto-open Chatbase
+    //   defer: true,
+    // },
   ],
 
   plugins: [
@@ -887,8 +887,9 @@ const config = {
           },
           {
             to: "https://account.bitquery.io/user/api_v2/access_tokens",
-            label: "Get Your Access Token",
+            label: "Access API",
             position: "right",
+            className: "button button--primary bright-white-text",
           },
           {
             to: "https://dexrabbit.com/",

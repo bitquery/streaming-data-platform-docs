@@ -32,3 +32,8 @@
 .v2-highlight {
   color: #25c2a0;
 }
+
+.bright-white-text {
+  color: #ffffff !important;
+  font-weight: 600;
+}
