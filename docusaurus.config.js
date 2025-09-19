@@ -6,7 +6,7 @@ const darkCodeTheme = require("prism-react-renderer").themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Blockchain Data API (V2)",
+  title:"",
   tagline:
     "How to query data and build applications on Bitquery blockchain data platform",
   favicon: "img/favicon.ico",
@@ -886,7 +886,7 @@ const config = {
             position: "left",
           },
           {
-            to: "https://account.bitquery.io/user/api_v2/access_tokens",
+            to: "https://ide.bitquery.io/",
             label: "Access API",
             position: "right",
             className: "button button--primary bright-white-text",
