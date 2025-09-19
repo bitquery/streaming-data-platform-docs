@@ -1,3 +1,7 @@
+---
+title: "Pump Swap API"
+---
+
 # Pump Swap API
 
 Bitquery provides PumpSwap data via APIs, streams, and real-time subscriptions. These endpoints let you track liquidity, trades, prices, token activity, and more on the PumpSwap AMM DEX. If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
