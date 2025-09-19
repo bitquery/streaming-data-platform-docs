@@ -446,7 +446,7 @@ Get transactions ordered by block number in descending order.
 ### Ethereum DEX Trades
 
 This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.  
-▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-dextrades)
+▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Copy-of-Ethereum-dextrades_1)
 
 ### Ethereum Dex Trade By Tokens
 
