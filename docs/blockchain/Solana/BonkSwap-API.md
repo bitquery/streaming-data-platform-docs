@@ -1,7 +1,5 @@
 # BonkSwap API
 
-
-
 In this document, we will explore several examples related to BonkSwap data.
 
 Need zero-latency BonkSwap data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).

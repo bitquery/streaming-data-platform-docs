@@ -1,4 +1,4 @@
-# Pump Fun API - Live Prices, OHLCV, ATH, MarketCap
+# Pump.Fun API - Live Prices, OHLCV, ATH, MarketCap
 
 Get Ultra low latency Prices, OHLCV, ATH, MarketCap, Liquidity, traders and other information from PumpFun API,Streams and Data Dumps.
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery.
@@ -21,8 +21,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 
 <head>
   <meta name="title" content="Pump.Fun API - Live Prices, OHLCV, ATH, MarketCap"/>
-  <meta name="description" content="Ultra low latency Pump Fun Token Prices, OHLCV, ATH, MarketCap, Liquidity, traders and other information from Pump Fun API,Streams and Data Dumps.
-The below graphQL APIs and Streams are examples of data points you can get with Bitquery."/>
+  <meta name="description" content="Ultra low latency Pump Fun Token Prices, OHLCV, ATH, MarketCap, Liquidity, traders and other information from Pump Fun API,Streams and Data Dumps."/>
   <meta name="keywords" content="Pump fun API,Pump fun on-chain data API,Pump fun token data API,Pump.fun blockchain API,Pump.fun DEX data API,Pump.fun API documentation,Pump.fun crypto API,Pump.fun web3 API,DEX Trades,Solana,Blast,Pump.fun memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
   <meta name="robots" content="index, follow"/>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -31,16 +30,16 @@ The below graphQL APIs and Streams are examples of data points you can get with 
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Pump Fun API - Solana - Tokens, Trades, Live Prices"
+  content="Pump.Fun API - Solana - New Tokens, Trades, Live Prices"
 />
 <meta
   property="og:description"
-  content="Get on-chain data of any Pump.fun based token through our Pump.fun API."
+  content="Get Pump.fun tokens prices, trades, bonding curve progress etc"
 />
 
   <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Pump Fun API - Solana - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any Pump.fun based token through our Pump.fun API."/>
+  <meta property="twitter:title" content="Pump Fun API - Solana - New Tokens, Trades, Live Prices"/>
+  <meta property="twitter:description" content="Get Pump.fun tokens prices, trades, bonding curve progress etc"/>
 </head>
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
@@ -387,13 +386,22 @@ PumpFun Token prices against SOL Stream
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-
- {
+{
   Trading {
     Pairs(
-      where: {Price: {IsQuotedInUsd: false}, Market: {Network: {is: "Solana"}, Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}, Token: {Address: {is: "5cd1amZcopDYP3jBHZMfDCH5epWCGfsJvEXFJkgepump"}}, Interval: {Time: {Duration: {eq: 60}}}}
-      limit: {count: 1}
-      orderBy: {descending: Block_Time}
+      where: {
+        Price: { IsQuotedInUsd: false }
+        Market: {
+          Network: { is: "Solana" }
+          Program: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+        }
+        Token: {
+          Address: { is: "5cd1amZcopDYP3jBHZMfDCH5epWCGfsJvEXFJkgepump" }
+        }
+        Interval: { Time: { Duration: { eq: 60 } } }
+      }
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
     ) {
       Market {
         Address
@@ -433,7 +441,6 @@ PumpFun Token prices against SOL Stream
     }
   }
 }
-
 ```
 
 </details>
@@ -518,8 +525,8 @@ Use the below query to get Top 10 pump fun tokens by Price change in last 5mins.
       limit: {count: 10}
       limitBy:{count:1 by:Token_Address}
       orderBy:{descending:Price_Average_Mean}
-      where: {Block: {Time: {since_relative: {minutes_ago: 5}}}, 
-        Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, 
+      where: {Block: {Time: {since_relative: {minutes_ago: 5}}},
+        Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"},
           Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}}
     ) {
       Market {

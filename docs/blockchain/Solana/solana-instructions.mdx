@@ -100,13 +100,23 @@ subscription {
 
 The query below fetches the latest created tokens on the Solana blockchain, including details like newly created token addresses (which appear as the first entry in the Accounts array). We are querying the Solana Token Program with address `TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA` and filtering for the latest created tokens using `Method: {in: ["initializeMint", "initializeMint2", "initializeMint3"]}`.
 
-You can run the query [here](https://ide.bitquery.io/Get-newly-created-tokens-on-Solana_1)
+You can run the query [here](https://ide.bitquery.io/Get-newly-created-tokens-on-Solana0_3)
 
 ```graphql
 subscription {
   Solana {
     Instructions(
-      where: {Instruction: {Program: {Address: {is: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}, Method: {in: ["initializeMint", "initializeMint2"]}}}, Transaction: {Result: {Success: true}}}
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" }
+            Method: {
+              in: ["initializeMint", "initializeMint2", "initializeMint3"]
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
     ) {
       Instruction {
         Accounts {
@@ -130,14 +140,11 @@ subscription {
     }
   }
 }
-
-
-
 ```
 
 ## Get Token Metadata using Metaplex of Newly Created Tokens
 
-This query retrieves metadata for newly created tokens on Solana using the Metaplex program. 
+This query retrieves metadata for newly created tokens on Solana using the Metaplex program.
 The metadata is returned is the **JSON** field, which includes fields such as name, symbol, uri, and more.
 You can run the query [here](https://ide.bitquery.io/Get-newly-created-token-metadata-on-Solana)
 You can also add the keyword `subscription` and track it in real-time.
@@ -302,7 +309,10 @@ Receive real-time updates on token burn events on the Solana blockchain. The que
 subscription {
   Solana {
     Instructions(
-      where: {Instruction: {Program: {Method: {is: "burn"}}}, Transaction: {Result: {Success: true}}}
+      where: {
+        Instruction: { Program: { Method: { is: "burn" } } }
+        Transaction: { Result: { Success: true } }
+      }
     ) {
       Instruction {
         Accounts {
@@ -341,9 +351,9 @@ For more comprehensive token supply tracking, see our **[Solana Token Supply API
 {
   Solana {
     TokenSupplyUpdates(
-      where: {TokenSupplyUpdate: {Amount: {lt: "0"}}}
-      limit: {count: 20}
-      orderBy: {descending: Block_Time}
+      where: { TokenSupplyUpdate: { Amount: { lt: "0" } } }
+      limit: { count: 20 }
+      orderBy: { descending: Block_Time }
     ) {
       TokenSupplyUpdate {
         Currency {
@@ -398,3 +408,4 @@ For more comprehensive token supply tracking, see our **[Solana Token Supply API
 
 ```
 
+```
