@@ -69,6 +69,29 @@ For this example the pair between the tokens listed below is considered.
 
 :::
 
+## First 24 Hours Trade Volume for a Solana Token
+
+[This](https://ide.bitquery.io/first-24-hr-volume-for-a-token) query returns the trade volume for a Solana Token in the first 24 hours of its launch.
+We are using `13WvP5LC5ETUpFipYM2f9AQzg6QA9S5opxGp2Scpump` in this case.
+
+```graphql
+query MyQuery {
+  Solana(dataset: archive, aggregates: yes) {
+    DEXTradeByTokens(
+      orderBy: {ascendingByField: "Block_TimeFeild"}
+      limit: {count: 1}
+      where: {Trade: {Currency: {MintAddress: {is: "13WvP5LC5ETUpFipYM2f9AQzg6QA9S5opxGp2Scpump"}}}}
+    ) {
+      Block {
+        TimeFeild: Time(interval: {count: 24, in: hours})
+      }
+      sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+
+```
+
 ## Top 10 token traders
 
 [This](https://ide.bitquery.io/top-10-traders-of-the-token) query returns the all time top 10 token traders for a particular token,
