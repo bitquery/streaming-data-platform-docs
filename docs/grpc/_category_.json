@@ -1,0 +1,8 @@
+{
+  "label": "gRPC Streams",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "Docs on how to use Bitquery gRPC streams"
+  }
+}
