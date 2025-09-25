@@ -1,19 +1,41 @@
 ---
-title: "Crypto Price API - Real-time Multi-chain Price Data & OHLC"
-description: "Access real-time, aggregated cryptocurrency price data across EVM, Solana, Tron, and other chains. Get OHLC, moving averages, and volume data with ultra-low latency for trading bots, DeFi protocols, and charting applications."
-keywords: ["crypto price API", "cryptocurrency price data", "real-time price feed", "OHLC data", "multi-chain price API", "blockchain price data", "trading API", "DeFi price feed", "crypto market data", "price index", "moving averages", "volume data", "trading bots", "charting API", "EVM price data", "Solana price API", "Tron price data", "cross-chain prices", "aggregated price data", "low latency price feed"]
+title: "Crypto Price API – Real-Time Token Data, Charts & OHLC"
+description: "Access real-time crypto prices, OHLC, moving averages & volume across EVM, Solana, Tron & more. Ultra-low latency for trading bots, DeFi & charting apps."
+keywords:
+  [
+    "crypto price API",
+    "cryptocurrency price data",
+    "real-time price feed",
+    "OHLC data",
+    "multi-chain price API",
+    "blockchain price data",
+    "trading API",
+    "DeFi price feed",
+    "crypto market data",
+    "price index",
+    "moving averages",
+    "volume data",
+    "trading bots",
+    "charting API",
+    "EVM price data",
+    "Solana price API",
+    "Tron price data",
+    "cross-chain prices",
+    "aggregated price data",
+    "low latency price feed",
+  ]
 ---
 
 # Real-Time Crypto Price API - Multi-Chain Data in Seconds
 
-Starting July 2025, we have introduced separate multi-chain **Crypto Price API (Price index) and Streams** via GraphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
+Bitquery provides **Crypto Price APIs and Streams** via GraphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto).
 
 These tools let you stream and query aggregated price data—in USD or other paired currencies—based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains.
 
-The Crypto Price API (Price Index) provides more than just pair prices—it also includes [OHLCV (K-Line)](../crypto-ohlc-candle-k-line-api/), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
+The Crypto Price API (Price Index) provides more than just pair prices—it also includes [OHLCV (K-Line)](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
 While you can access the aggregated price for a single trading pair, the Price Index also supports cross-chain and cross-DEX aggregation, giving you a unified view of token prices across multiple ecosystems.
 
-## Key Features
+## Key Features of These APIs
 
 - **Pre-aggregated data**: OHLC, SMA, WMA, EMA, and mean prices calculated automatically
 - **Real-time streaming**: 1-second granularity via GraphQL subscriptions and Kafka

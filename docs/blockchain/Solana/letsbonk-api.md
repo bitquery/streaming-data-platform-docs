@@ -1,4 +1,4 @@
-# LetsBonk.Fun API - Solana - Tokens, Trades, Live Prices
+# LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -17,7 +17,8 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 :::
 
 <head>
-  <meta name="title" content="LetsBonk.Fun API - Solana - Tokens, Trades, Live Prices"/>
+<title>LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices</title>
+  <meta name="title" content="LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices"/>
   <meta name="description" content="Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our LetsBonk.fun API."/>
   <meta name="keywords" content="LetsBonk.fun API,LetsBonk.fun on-chain data API,LetsBonk.fun token data API,LetsBonk.fun blockchain API,LetsBonk.fun DEX data API,LetsBonk.fun API documentation,LetsBonk.fun crypto API,LetsBonk.fun web3 API,DEX Trades,Solana,Blast,LetsBonk.fun memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
   <meta name="robots" content="index, follow"/>
@@ -27,7 +28,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="LetsBonk.Fun API - Solana - Tokens, Trades, Live Prices"
+  content="LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices"
 />
 <meta
   property="og:description"
@@ -35,7 +36,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 />
 
   <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="LetsBonk.Fun API - Solana - Tokens, Trades, Live Prices"/>
+  <meta property="twitter:title" content="LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices"/>
   <meta property="twitter:description" content="Get on-chain data of any LetsBonk.fun based token through our LetsBonk.fun API."/>
 </head>
 
@@ -226,7 +227,7 @@ query GetBondingCurveProgressPercentage {
 
 ## Track LetsBonk.fun Tokens above 95% Bonding Curve Progress in realtime
 
-We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. You can run and test the saved query [here](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_2).
+We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range. Run the query: [LetsBonk.fun tokens between 95–100% bonding-curve progress ➤](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_2).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -296,7 +297,7 @@ subscription MyQuery {
 
 ## Top 100 About to Graduate LetsBonk.fun Tokens
 
-We can use below query to get top 100 About to Graduate LetsBonk.fun Tokens. You can run and test the saved query [here](https://ide.bitquery.io/Top-100-graduating-raydium-launchlab-tokens-in-last-5-minutes).
+We can use below query to get top 100 About to Graduate LetsBonk.fun Tokens. Run the query: [Top 100 tokens about to graduate (Raydium LaunchLab) ➤](https://ide.bitquery.io/Top-100-graduating-raydium-launchlab-tokens-in-last-5-minutes).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -370,7 +371,7 @@ We can use below query to get top 100 About to Graduate LetsBonk.fun Tokens. You
 
 ## Get all the instructions of Raydium LaunchLab
 
-Below query will get you all the instructions that the Raydium LaunchLab Program has. You can test the API [here](https://ide.bitquery.io/all-the-instructions-of-Raydium-LaunchLab).
+Below query will get you all the instructions that the Raydium LaunchLab Program has. Run the query: [All instructions of Raydium LaunchLab program ➤](https://ide.bitquery.io/all-the-instructions-of-Raydium-LaunchLab).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -400,7 +401,7 @@ Using above `get all instructions` api, you will figure out that there are 2 ins
 
 Thats why we have filtered for these 2 instructions in the below API, and tracking these. And `FfYek5vEz23cMkWsdJwG2oa6EphsvXSHrGpdALN4g6W1` is the LetsBonk.fun Platform address, and we are filtering for the instructions where the above listed methods are invoked and the letsbonk.fun platform config address is present in Instruction Accounts Array.
 
-Test out the API [here](https://ide.bitquery.io/Track-letsBonkfun-Token-Migrations-to-Raydium-DEX-and-Raydium-CPMM-in-realtime).
+Run the stream: [Track LetsBonk.fun token migrations to Raydium ➤](https://ide.bitquery.io/Track-letsBonkfun-Token-Migrations-to-Raydium-DEX-and-Raydium-CPMM-in-realtime).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -557,7 +558,7 @@ subscription{
 ## Latest Trades of a LetsBonk.fun token on Launchpad
 
 This query fetches the most recent trades of a LetsBonk.fun Token `token Mint Address` on the Raydium Launchpad.
-You can run the query [here](https://ide.bitquery.io/Latest-Trades-of-a-letsbonkfun-token-on-Launchpad)
+Run the query: [Latest trades of a LetsBonk.fun token ➤](https://ide.bitquery.io/Latest-Trades-of-a-letsbonkfun-token-on-Launchpad)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -618,7 +619,7 @@ Similarly, you can subscribe to trades on launchpad in real-time using [subscrip
 ## Latest Price of a LetsBonk.fun Token on Raydium Lanchlab
 
 This query provides the most recent price data for a specific LetsBonk.fun token `token Mint Address` launched on Raydium Launchpad. You can filter by the token’s `MintAddress`, and the query will return the last recorded trade price.
-You can run the query [here](https://ide.bitquery.io/Latest-Price-of-a-LetsBonkfun-Token-on-Launchpad)
+Run the query: [Latest price of a LetsBonk.fun token ➤](https://ide.bitquery.io/Latest-Price-of-a-LetsBonkfun-Token-on-Launchpad)
 
 <details>
   <summary>Click to expand GraphQL query</summary>

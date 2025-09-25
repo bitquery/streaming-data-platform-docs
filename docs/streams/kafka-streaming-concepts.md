@@ -6,6 +6,10 @@ sidebar_position: 1
 
 Bitquery provides realtime data via Kafka as well in addition to GraphQL subscriptions. In this section, we'll see how Kafka-based streaming works and how to integrate it into your application using practical code examples. For price data streams, check out our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) Kafka topic.
 
+## How to Get Access to these Streams?
+
+IDE credentials will not work with our Kafka Streams. You need a separate username and password. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
+
 ### Pro and Cons
 
 Kafka provides faster and more reliable streams comparing to GraphQL subscriptions due to the following advantages:
