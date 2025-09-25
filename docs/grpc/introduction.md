@@ -59,4 +59,12 @@ filters:
 **Get your API token**: Generate one at [https://account.bitquery.io/user/api_v2/access_tokens](https://account.bitquery.io/user/api_v2/access_tokens)
 
 
+## Schema for the Data
+
+- If you are a first time Bitquery user, schema is available in below mentioned files
+  - [Solana](https://github.com/bitquery/streaming_protobuf/tree/main/solana)
+  - [corecast](https://github.com/bitquery/streaming_protobuf/tree/main/solana/corecast)
+
+- If you are a Kafka user, the schema is the same as the Kafka schema, you only need the corecast schema
+
 
