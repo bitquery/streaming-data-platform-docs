@@ -5,7 +5,7 @@ description: Low-latency, context-aware, topic-wise streaming from Bitquery for 
 
 ### What are Smart gRPC Streams?
 
-Bitquery Smart gRPC Streams provide low-latency, context-aware, topic-wise event delivery from the Solana blockchain. Unlike raw gRPC streams, Smart Streams enrich and filter events at the edge so your application receives only the data it needs, with state attached (trades,balances, token context, program metadata).
+Bitquery Smart gRPC Streams provide low-latency, context-aware, topic-wise event delivery from the Solana blockchain. Unlike raw gRPC streams, Smart Streams enrich and filter events so your application receives only the data it needs (trades,balances, token context, program metadata).
 
 ### Why gRPC
 
