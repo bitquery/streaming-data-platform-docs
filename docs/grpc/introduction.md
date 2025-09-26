@@ -36,6 +36,10 @@ Filters are required to use Smart gRPC Streams. You must specify at least one fi
 
 Filters are applied server-side to reduce bandwidth and speed up downstream processing.
 
+## Quick Start Examples
+
+- [JS Example](https://github.com/bitquery/grpc-code-samples/tree/main/js-demo)
+- [Python Example](https://github.com/bitquery/grpc-code-samples/tree/main/python-demo)
 
 ### Quickstart (YAML config example)
 
@@ -48,22 +52,20 @@ server:
   insecure: false
 
 stream:
-  type: "transfers"   # one of: transactions, transfers, dex_trades, dex_orders, dex_pools, balances
+  type: "transfers" # one of: transactions, transfers, dex_trades, dex_orders, dex_pools, balances
 
 filters:
   signers:
-    - "7epLWkFd7xo18k4a4ySmN2UiiAFELDTV2ZNYAedCNh"   # example address
+    - "7epLWkFd7xo18k4a4ySmN2UiiAFELDTV2ZNYAedCNh" # example address
 ```
 
 **Get your API token**: Generate one at [https://account.bitquery.io/user/api_v2/access_tokens](https://account.bitquery.io/user/api_v2/access_tokens)
 
-
 ## Schema for the Data
 
 - If you are a first time Bitquery user, schema is available in below mentioned files
+
   - [Solana](https://github.com/bitquery/streaming_protobuf/tree/main/solana)
   - [corecast](https://github.com/bitquery/streaming_protobuf/tree/main/solana/corecast)
 
 - If you are a Kafka user, the schema is the same as the Kafka schema, you only need the corecast schema
-
-

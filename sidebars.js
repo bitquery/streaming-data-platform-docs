@@ -146,6 +146,19 @@ const sidebars = {
 
     {
       type: "category",
+      label: "gRPC Streams",
+      link: {
+        type: "generated-index",
+        title: "gRPC Streams",
+        description: "Docs on how to use Bitquery gRPC streams",
+      },
+      items: [
+        "grpc/introduction",
+      ],
+    },
+
+    {
+      type: "category",
       label: "Streaming",
       link: {
         type: "generated-index",
