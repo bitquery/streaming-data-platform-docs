@@ -16,12 +16,12 @@ Bitquery Smart gRPC Streams provide low-latency, context-aware, topic-wise event
 
 Bitquery exposes multiple topics so you subscribe only to what you need:
 
-- **transactions**: Finalized transactions with instructions, logs, and status.
-- **transfers**:All token transfers with token context.
-- **dex_trades**: DEX trade/swaps across supported protocols.
+- **[transactions](https://docs.bitquery.io/docs/grpc/solana/topics/transactions)**: Finalized transactions with instructions, logs, and status.
+- **transfers**: All token transfers with token context.
+- **[dex_trades](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades)**: DEX trade/swaps across supported protocols.
 - **dex_orders**: Order lifecycle updates where applicable.
 - **dex_pools**: Pool creation/updates and liquidity changes.
-- **balances**: Balance updates for tracked accounts and mints.
+- **[balances](https://docs.bitquery.io/docs/grpc/solana/topics/balance)**: Balance updates for tracked accounts and mints.
 
 Each topic supports context-aware filters and consistent identifiers for easy correlation across streams.
 
