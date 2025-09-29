@@ -146,19 +146,6 @@ const sidebars = {
 
     {
       type: "category",
-      label: "gRPC Streams",
-      link: {
-        type: "generated-index",
-        title: "gRPC Streams",
-        description: "Docs on how to use Bitquery gRPC streams",
-      },
-      items: [
-        "grpc/introduction",
-      ],
-    },
-
-    {
-      type: "category",
       label: "Streaming",
       link: {
         type: "generated-index",
@@ -167,7 +154,7 @@ const sidebars = {
       items: [
         {
           type: "category",
-          label: "Streaming via Subscriptions",
+          label: "GraphQL Subscriptions",
           link: {
             type: "generated-index",
             title: "Streaming via Subscriptions",
@@ -202,7 +189,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Data Streams",
+          label: "Kafka Streams",
           link: {
             type: "generated-index",
             title: "Data Streams Overview",
@@ -231,6 +218,24 @@ const sidebars = {
             },
             "streams/real-time-solana-data",
             "streams/sniper-trade-using-bitquery-kafka-stream",
+          ],
+        },
+        {
+          type: "category",
+          label: "gRPC Streams",
+          link: {
+            type: "generated-index",
+            title: "gRPC Streams",
+            description: "Docs on how to use Bitquery gRPC streams",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Solana",
+              items: [
+                "grpc/solana/introduction",
+              ],
+            },
           ],
         },
       ],

@@ -1,5 +1,5 @@
 ---
-title: Smart gRPC Streams
+title: CoreCast - Smart Solana gRPC Streams
 description: Low-latency, context-aware, topic-wise streaming from Bitquery for onchain data over gRPC.
 ---
 

@@ -1,0 +1,8 @@
+{
+  "label": "gRPC Solana Streams",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Docs on how to use Bitquery Solana gRPC streams"
+  }
+}
