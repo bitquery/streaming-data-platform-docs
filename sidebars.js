@@ -239,8 +239,10 @@ const sidebars = {
                   type: "category",
                   label: "Topics",
                   items: [
-                    "grpc/solana/topics/transactions",
+                    
                     "grpc/solana/topics/dextrades",
+                    "grpc/solana/topics/transactions",
+                    "grpc/solana/topics/balance",
                   ],
                 },
               ],
