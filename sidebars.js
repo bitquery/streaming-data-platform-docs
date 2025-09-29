@@ -234,6 +234,15 @@ const sidebars = {
               label: "Solana",
               items: [
                 "grpc/solana/introduction",
+
+                {
+                  type: "category",
+                  label: "Topics",
+                  items: [
+                    "grpc/solana/topics/transactions",
+                    "grpc/solana/topics/dextrades",
+                  ],
+                },
               ],
             },
           ],
