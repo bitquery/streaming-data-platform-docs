@@ -40,6 +40,7 @@ Filters are applied server-side to reduce bandwidth and speed up downstream proc
 
 - [JS Example](https://github.com/bitquery/grpc-code-samples/tree/main/js-demo)
 - [Python Example](https://github.com/bitquery/grpc-code-samples/tree/main/python-demo)
+- [Go Sample](https://github.com/bitquery/grpc-code-samples/tree/main/go-demo)
 
 ### Quickstart (YAML config example)
 
