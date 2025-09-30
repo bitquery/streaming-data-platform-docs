@@ -266,6 +266,11 @@ This API retrieves the history of token transfers (both sent and received) for a
 This API returns all token inflows and outflows for a Solana address within a specified timeframe, enabling balance calculation based on transaction history.
 ▶️ [Solana Token Inflows and Outflows for Balance Calculation](https://ide.bitquery.io/currency-sent-and-received-by-an-address-between-a-time_1)
 
+### Simple SOL transfers (Transactions not trades)
+
+This API returns simple SOL transfers; in other words, it contains transactions that are simple token transfers, not trades.
+▶️ [Simple SOL transfers (Transactions not trades)](https://ide.bitquery.io/Simple-SOL-transfers-Transactions-not-trades)
+
 ## PumpFun - Pumpswap API
 
 ### Get New Tokens for PumpFun
