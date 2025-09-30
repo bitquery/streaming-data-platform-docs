@@ -1,6 +1,6 @@
 # Authentication
 
-To access Bitquery’s Solana gRPC streams (CoreCast), you must authenticate every request using an **[authorization token](https://account.bitquery.io/user/api_v2/access_tokens)**. This token is provided in your configuration file and automatically added to the gRPC metadata before starting a stream. Checkout the [documentation](https://docs.bitquery.io/docs/authorisation/how-to-generate/) to create a new token.
+To access Bitquery’s Solana gRPC streams (CoreCast), you must authenticate every stream using an **[authorization token](https://account.bitquery.io/user/api_v2/access_tokens)**. This token is provided in your configuration file and automatically added to the gRPC metadata before starting a stream. Check the [documentation](https://docs.bitquery.io/docs/authorisation/how-to-generate/) to create a new token.
 
 ## Configuration
 
@@ -15,7 +15,7 @@ server:
 
 * **address** → gRPC server host address, which is `corecast.bitquery.io`.
 * **authorization** → your API token (string that usually starts with `ory_at_...`). 
-* **insecure** → set `true` if you want to use plaintext (`:80`) instead of TLS (`:443`).
+* **insecure** → set `true` 
 
 ## How it works
 
