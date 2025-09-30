@@ -69,3 +69,8 @@ filters:
   - [corecast](https://github.com/bitquery/streaming_protobuf/tree/main/solana/corecast)
 
 - If you are a Kafka user, the schema is the same as the Kafka schema, you only need the corecast schema
+
+The schema need not be downloaded, we have it as packages for install in NPM and PYPI.
+
+- Python `pip install bitquery-corecast-proto`
+- Node `npm install bitquery-corecast-proto`

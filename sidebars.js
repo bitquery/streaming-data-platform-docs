@@ -245,6 +245,7 @@ const sidebars = {
                     "grpc/solana/topics/balance",
                   ],
                 },
+                "grpc/solana/best_practices",
               ],
             },
           ],
