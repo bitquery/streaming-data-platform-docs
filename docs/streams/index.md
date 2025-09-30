@@ -8,9 +8,17 @@ keywords: [real-time blockchain data, cryptocurrency data API, DeFi data streams
 
 Bitquery provides powerful **real-time blockchain data streaming** capabilities through three distinct technologies, each optimized for different use cases and requirements. Whether you're building a **cryptocurrency trading bot**, **DeFi trading terminal**, **DEX pool monitoring** system, or **token sniping** application, we have the right **blockchain data streaming solution** for your needs.
 
+## Quick Navigation
+
+| Technology | Latency | Best For | Learn More |
+|------------|---------|----------|------------|
+| **[WebSocket](#websocket-graphql-subscriptions)** | ~1 second | Beginners, Web Apps, Complex Filtering | [WebSocket Docs](https://docs.bitquery.io/docs/subscriptions/websockets/) |
+| **[Kafka](#kafka-streams)** | < 500ms | Enterprise, High-Volume, Trading Bots | [Kafka Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) |
+| **[CoreCast](#corecast-grpc-streams)** | < 100ms | Solana, Ultra-Low Latency, MEV | [gRPC Docs](https://docs.bitquery.io/docs/grpc/solana/introduction/) |
+
 ## Blockchain Data Streaming Technologies Overview
 
-### Real-time GraphQL Subscriptions (WebSocket API)
+### Real-time GraphQL Subscriptions (WebSocket API) {#websocket-graphql-subscriptions}
 **Multichain Support** | **Live Data** | **Beginner-friendly**
 
 Our **WebSocket-based GraphQL subscriptions** provide **real-time cryptocurrency data** with very high filtering and formatting capabilities. You can filter by wallet addresses, token contracts, transaction amounts, USD values, and much more directly in your queries. Perfect for **crypto trading applications**, **[DeFi dashboards](https://docs.bitquery.io/docs/usecases/crypto-dashboard/)**, and **blockchain analytics platforms**.
@@ -20,7 +28,7 @@ Our **WebSocket-based GraphQL subscriptions** provide **real-time cryptocurrency
 - **Latency**: ~1 second (network + parsing overhead)
 - **Use Cases**: **Crypto trading dashboards**, **DeFi interfaces**, **real-time portfolio monitoring**
 
-### High-Performance Kafka Blockchain Streams  
+### High-Performance Kafka Blockchain Streams {#kafka-streams}  
 **Multichain Support** | **Ultra-low latency** | **High throughput**
 
 High-performance, **low-latency blockchain data streaming** for mission-critical **cryptocurrency trading systems** requiring maximum reliability and scalability. **No server-side filtering available** – you receive complete blockchain transaction data and must filter on the client side. Ideal for **MEV bots**, **arbitrage trading systems**, and **high-frequency DeFi applications** that need complete data streams.
@@ -30,7 +38,7 @@ High-performance, **low-latency blockchain data streaming** for mission-critical
 - **Latency**: < 500ms (sub-second)
 - **Use Cases**: **[Cryptocurrency trading bots](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)**, **real-time DeFi applications**, **MEV bot development**, **high-frequency blockchain monitoring**
 
-### Ultra-fast gRPC Streams (CoreCast)
+### Ultra-fast gRPC Streams (CoreCast) {#corecast-grpc-streams}
 **Solana Blockchain** | **Sub-100ms latency** | **Smart filtering**
 
 Our newest **ultra-low latency streaming technology** provides the fastest **Solana blockchain data** with server-side filtering capabilities and efficient binary serialization. Perfect for **Solana trading bots** and **MEV applications**. Filtering is available but more limited compared to WebSocket's extensive filtering options.
