@@ -10,9 +10,15 @@ One of the most common types of transfers on Ethereum are ERC20 transfers. Let's
 {
   EVM(dataset: realtime, network: eth) {
     Transfers(
-      where: {Transfer: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}
-      limit: {count: 10}
-      orderBy: {descending: Block_Time}
+      where: {
+        Transfer: {
+          Currency: {
+            SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" }
+          }
+        }
+      }
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
     ) {
       Transfer {
         Amount
@@ -78,8 +84,21 @@ You can find the query [here](https://ide.bitquery.io/Sender-OR-Receiver-Transfe
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     Transfers(
-      where: {any: [{Transfer: {Sender: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}, {Transfer: {Receiver: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}]}
-      limit: {count: 100}
+      where: {
+        any: [
+          {
+            Transfer: {
+              Sender: { is: "0x881d40237659c251811cec9c364ef91dc08d300c" }
+            }
+          }
+          {
+            Transfer: {
+              Receiver: { is: "0x881d40237659c251811cec9c364ef91dc08d300c" }
+            }
+          }
+        ]
+      }
+      limit: { count: 100 }
     ) {
       Transfer {
         Amount
@@ -139,9 +158,17 @@ This query retrieves the top 10 transfers of the token `0xB8c77482e45F1F44dE1745
 query MyQuery {
   EVM(dataset: archive) {
     Transfers(
-      where: {Transfer: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}, TransactionStatus: {Success: true}, Block: {Date: {is: "2024-06-29"}}}
-      orderBy: {descending: Block_Time}
-      limit: {count: 10}
+      where: {
+        Transfer: {
+          Currency: {
+            SmartContract: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" }
+          }
+        }
+        TransactionStatus: { Success: true }
+        Block: { Date: { is: "2024-06-29" } }
+      }
+      orderBy: { descending: Block_Time }
+      limit: { count: 10 }
     ) {
       Transfer {
         Amount
@@ -189,6 +216,39 @@ query MyQuery {
     }
   }
 }
+```
+
+## Earliest Transfer to a Wallet
+
+This query retrieves the earliest transfer received by a specific wallet address. By using `limit: {count: 1}` and `Time(minimum:Block_Number)`, we can identify the first transfer to an address during the specified time period.
+
+[Run Query](https://ide.bitquery.io/Copy-of-find-earliest-transfer-to-an-account)
+
+```graphql
+
+query MyQuery {
+  EVM(network: eth, dataset: archive) {
+    Transfers(
+      limit: {count: 1}
+      where: {Transfer: {Receiver: {is: "0xe37b87598134a2fc0Eda4d71a3a80ad28C751Ed7"}}}
+    ) {
+      Block {
+        Time(minimum: Block_Number)
+      }
+      Transaction {
+        From
+        Hash
+      }
+      Transfer {
+        Amount
+        Currency {
+          Native
+        }
+      }
+    }
+  }
+}
+
 
 
 ```
