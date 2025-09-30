@@ -235,7 +235,7 @@ const sidebars = {
               items: [
                 "grpc/solana/introduction",
                 "grpc/solana/authorisation",
-                
+
                 {
                   type: "category",
                   label: "Topics",
@@ -247,6 +247,7 @@ const sidebars = {
                   ],
                 },
                 "grpc/solana/best_practices",
+                "grpc/solana/errors"
               ],
             },
           ],
