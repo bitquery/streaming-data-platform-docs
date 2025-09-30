@@ -148,8 +148,8 @@ const sidebars = {
       type: "category",
       label: "Streaming",
       link: {
-        type: "generated-index",
-        title: "Streaming Overview",
+        type: "doc",
+        id: "streams/index",
       },
       items: [
         {
