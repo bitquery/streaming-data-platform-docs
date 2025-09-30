@@ -234,7 +234,8 @@ const sidebars = {
               label: "Solana",
               items: [
                 "grpc/solana/introduction",
-
+                "grpc/solana/authorisation",
+                
                 {
                   type: "category",
                   label: "Topics",
