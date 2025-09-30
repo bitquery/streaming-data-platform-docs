@@ -1,8 +1,8 @@
-# 🔑 Stream Authentication
+# Authentication
 
 To access Bitquery’s Solana gRPC streams (CoreCast), you must authenticate every request using an **[authorization token](https://account.bitquery.io/user/api_v2/access_tokens)**. This token is provided in your configuration file and automatically added to the gRPC metadata before starting a stream.
 
-## 📂 Configuration
+## Configuration
 
 The token is defined under the server in the `config.yaml` file:
 
@@ -17,7 +17,7 @@ server:
 * **authorization** → your API token (string that usually starts with `ory_at_...`). 
 * **insecure** → set `true` if you want to use plaintext (`:80`) instead of TLS (`:443`).
 
-## 🛠 How it works
+## How it works
 
 At runtime, the token from `config.server.authorization` is injected into gRPC metadata:
 
@@ -31,13 +31,13 @@ const stream = client.DexTrades(request, metadata);
 
 This adds an `authorization` header to the gRPC call. No other headers or credentials are required.
 
-## 🔒 Security
+## Security
 
 * Always keep your token secret — do not hardcode it in your codebase.
 * Store it in `config.yaml`, an environment variable, or a secret manager.
 * If `insecure: true`, traffic will not be encrypted. Prefer TLS (`insecure: false`).
 
-## ⚠️ Common Issues
+## Common Issues
 
 When authentication fails, you’ll see gRPC error **code `16`** with HTTP status **`401 Unauthorized`**:
 
