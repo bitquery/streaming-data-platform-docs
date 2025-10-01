@@ -2,8 +2,6 @@
 
 In this section we will see how to get data on Raydium CPMM trades in real-time. You can check out our [Pump Fun docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/), [Raydium v4 docs](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/) and [Raydium LaunchPad docs](https://docs.bitquery.io/docs/blockchain/Solana/launchpad-raydium/) too.
 
-
-
 :::note
 `Trade Side Account` field will not be available as aggregates in Archive and Combined Datasets
 :::
@@ -105,7 +103,7 @@ You can run the query [here](https://ide.bitquery.io/CPMM-pools-created_1)
 {
   Solana {
     Instructions(
-      where: {Instruction: {Program: {Address: {is: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"}, Method: {is: "createPool"}}}, Transaction: {Result: {Success: true}}}
+      where: {Instruction: {Program: {Address: {is: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"}, Method: {is: "initialize"}}}, Transaction: {Result: {Success: true}}}
       limit: {count: 10}
       orderBy: {descending: Block_Time}
     ) {
