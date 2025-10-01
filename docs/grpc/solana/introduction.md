@@ -5,7 +5,7 @@ description: Low-latency, context-aware, topic-wise streaming from Bitquery for 
 
 ### What are Smart gRPC Streams?
 
-Bitquery Smart gRPC Streams provide low-latency, context-aware, topic-wise event delivery from the Solana blockchain. Unlike raw gRPC streams, Smart Streams enrich and filter events so your application receives only the data it needs (trades,balances, token context, program metadata).
+Bitquery Smart gRPC Streams provide low-latency, context-aware, topic-wise event delivery from the Solana blockchain. Unlike raw gRPC streams, Smart Streams enrich and filter events so your application receives only the data it needs (trades,balances, token context, program metadata). The data is sent in the **protobuf format**, the schema is publicly available as packages for easy parsing.
 
 ### Why gRPC
 
@@ -16,12 +16,12 @@ Bitquery Smart gRPC Streams provide low-latency, context-aware, topic-wise event
 
 Bitquery exposes multiple topics so you subscribe only to what you need:
 
-- **transactions**: Finalized transactions with instructions, logs, and status.
-- **transfers**:All token transfers with token context.
-- **dex_trades**: DEX trade/swaps across supported protocols.
+- **[transactions](https://docs.bitquery.io/docs/grpc/solana/topics/transactions)**: Finalized transactions with instructions, logs, and status.
+- **transfers**: All token transfers with token context.
+- **[dex_trades](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades)**: DEX trade/swaps across supported protocols.
 - **dex_orders**: Order lifecycle updates where applicable.
 - **dex_pools**: Pool creation/updates and liquidity changes.
-- **balances**: Balance updates for tracked accounts and mints.
+- **[balances](https://docs.bitquery.io/docs/grpc/solana/topics/balance)**: Balance updates for tracked accounts and mints.
 
 Each topic supports context-aware filters and consistent identifiers for easy correlation across streams.
 
@@ -40,6 +40,7 @@ Filters are applied server-side to reduce bandwidth and speed up downstream proc
 
 - [JS Example](https://github.com/bitquery/grpc-code-samples/tree/main/js-demo)
 - [Python Example](https://github.com/bitquery/grpc-code-samples/tree/main/python-demo)
+- [Go Sample](https://github.com/bitquery/grpc-code-samples/tree/main/go-demo)
 
 ### Quickstart (YAML config example)
 
@@ -69,3 +70,8 @@ filters:
   - [corecast](https://github.com/bitquery/streaming_protobuf/tree/main/solana/corecast)
 
 - If you are a Kafka user, the schema is the same as the Kafka schema, you only need the corecast schema
+
+The schema need not be downloaded, we have it as packages for install in NPM and PYPI.
+
+- Python `pip install bitquery-corecast-proto`
+- Node `npm install bitquery-corecast-proto`

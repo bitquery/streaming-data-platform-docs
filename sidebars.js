@@ -148,8 +148,8 @@ const sidebars = {
       type: "category",
       label: "Streaming",
       link: {
-        type: "generated-index",
-        title: "Streaming Overview",
+        type: "doc",
+        id: "streams/index",
       },
       items: [
         {
@@ -234,6 +234,23 @@ const sidebars = {
               label: "Solana",
               items: [
                 "grpc/solana/introduction",
+                "grpc/solana/authorisation",
+
+                {
+                  type: "category",
+                  label: "Topics",
+                  items: [
+                    
+                    "grpc/solana/topics/dextrades",
+                    "grpc/solana/topics/transactions",
+                    "grpc/solana/topics/balance",
+                    "grpc/solana/topics/dexorder",
+                    "grpc/solana/topics/dexpools",
+                    "grpc/solana/topics/transfer",
+                  ],
+                },
+                "grpc/solana/best_practices",
+                "grpc/solana/errors"
               ],
             },
           ],
