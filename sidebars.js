@@ -242,10 +242,10 @@ const sidebars = {
                   link: {
                     type: "generated-index",
                     title: "gRPC Solana Topics",
-                    description: "Docs on how to use Bitquery Solana gRPC topics",
+                    description:
+                      "Docs on how to use Bitquery Solana gRPC topics",
                   },
                   items: [
-                    
                     "grpc/solana/topics/dextrades",
                     "grpc/solana/topics/transactions",
                     "grpc/solana/topics/balance",
@@ -254,8 +254,22 @@ const sidebars = {
                     "grpc/solana/topics/transfer",
                   ],
                 },
+                {
+                  type: "category",
+                  label: "Examples",
+                  link: {
+                    type: "generated-index",
+                    title: "gRPC Solana Examples",
+                    description:
+                      "Docs on how to use Bitquery Solana gRPC to get Pump.fun data",
+                  },
+                  items: [
+                    "grpc/solana/examples/pump-fun-grpc-streams",
+                    "grpc/solana/examples/letsbonk-grpc-streams",
+                  ],
+                },
                 "grpc/solana/best_practices",
-                "grpc/solana/errors"
+                "grpc/solana/errors",
               ],
             },
           ],
@@ -656,7 +670,7 @@ const sidebars = {
             "trading/crypto-price-api/in-depth",
             "trading/crypto-price-api/examples",
             "trading/crypto-price-api/crypto-market-data-api",
-            "trading/crypto-price-api/crypto-ohlc-candle-k-line-api"
+            "trading/crypto-price-api/crypto-ohlc-candle-k-line-api",
           ],
         },
       ],
