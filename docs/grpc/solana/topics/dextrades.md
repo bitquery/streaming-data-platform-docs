@@ -90,7 +90,7 @@ Here's an example of the data structure you'll receive:
 
 You can filter DEX trades by:
 
-- **Addresses**: `senders`, `receivers`, `program_ids`
+- **Addresses**: `Buy`, `Sell` accounts, `program`
 - **Tokens**: Specific mint addresses (e.g., WSOL, USDC)
 - **Value thresholds**: Minimum trade amounts
 - **Protocols**: Specific DEX protocols or pools
@@ -106,6 +106,11 @@ For Python development, install the protobuf package:
 
 ```bash
 pip install bitquery-corecast-proto
+```
+## NPM Package
+
+```bash
+npm install bitquery-corecast-proto
 ```
 
 This package includes all necessary protobuf definitions without requiring manual downloads.

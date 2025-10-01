@@ -32,8 +32,6 @@ Here's an example of the data structure you'll receive:
     "Slot": 370028492
   },
   "Transaction": {
-    "Index": 779,
-    "Signature": "2eoFGRLxJFXhLGBXS4dPgSGYfjF9yGx3Tfc4EgJqrndiMqTX22SZwaH1E8E8p7333z2CWqofY8YvJgB7DN6hJv1L",
         ...
   },
   "PoolEvent": {
@@ -143,6 +141,12 @@ For Python development, install the protobuf package:
 
 ```bash
 pip install bitquery-corecast-proto
+```
+
+## NPM Package
+
+```bash
+npm install bitquery-corecast-proto
 ```
 
 This package includes all necessary protobuf definitions without requiring manual downloads.

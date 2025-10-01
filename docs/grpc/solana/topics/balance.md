@@ -83,4 +83,10 @@ For Python development, install the protobuf package:
 pip install bitquery-corecast-proto
 ```
 
+## NPM Package
+
+```bash
+npm install bitquery-corecast-proto
+```
+
 This package includes all necessary protobuf definitions without requiring manual downloads.
