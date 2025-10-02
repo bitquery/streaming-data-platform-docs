@@ -4,12 +4,12 @@ Real-time streaming of LetsBonk.fun DEX trades, orders, and transactions via Cor
 
 ## Repository
 
-🔗 [**GitHub Repository**](https://github.com/Akshat-cs/letsbonk.fun-gRPC-Streams.git)
+🔗 [**GitHub Repository**](https://github.com/bitquery/grpc-usecase-examples/tree/main/Solana/lets-bonk-fun-example)
 
 Clone and get started:
 
 ```bash
-git clone https://github.com/Akshat-cs/letsbonk.fun-gRPC-Streams.git
+git clone hhttps://github.com/bitquery/grpc-usecase-examples.git
 ```
 
 ## Introduction

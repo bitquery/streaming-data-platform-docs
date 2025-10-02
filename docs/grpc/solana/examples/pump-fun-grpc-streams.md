@@ -4,12 +4,12 @@ Real-time streaming of Pump.fun DEX trades, orders, and transactions via CoreCas
 
 ## Repository
 
-🔗 [**GitHub Repository**](https://github.com/Akshat-cs/pump.fun-gRPC-Streams.git)
+🔗 [**GitHub Repository**](https://github.com/bitquery/grpc-usecase-examples/tree/main/Solana/pumpfun-example)
 
 Clone and get started:
 
 ```bash
-git clone https://github.com/Akshat-cs/pump.fun-gRPC-Streams.git
+git clone https://github.com/bitquery/grpc-usecase-examples.git
 ```
 
 ## Introduction
