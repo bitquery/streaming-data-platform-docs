@@ -6,7 +6,7 @@ const darkCodeTheme = require("prism-react-renderer").themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: " ",
+  title: "Bitquery",
   tagline:
     "How to query data and build applications on Bitquery blockchain data platform",
   favicon: "img/favicon.ico",
