@@ -1,50 +1,95 @@
 ---
+title: "Solana Jupiter API - Live Swaps, Limit Orders, DEX Aggregator Data"
+description: "Ultra low latency Jupiter DEX Aggregator swaps, limit orders, routing data, and trading analytics. Get real-time Jupiter API data for Solana token swaps, routing, and DEX aggregator insights."
 sidebar_position: 7
 ---
 
-# Solana Jupiter API
+# Solana Jupiter API - Live Swaps, Limit Orders, DEX Aggregator Data
 
-In this section, we'll show you how to access information about Jupiter data using Bitquery APIs.
+Get ultra low latency Jupiter DEX Aggregator swaps, limit orders, routing data, and trading analytics from Jupiter API, Streams and Data Dumps.
+The below GraphQL APIs and Streams are examples of data points you can get with Bitquery.
+If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
+
+Need zero-latency Jupiter data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+
+You may also be interested in:
+
+- [Pump.fun APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/)
+- [Raydium APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/raydium-api/)
+- [Orca APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/orca-api/)
+- [Serum APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/serum-api/)
+
+:::note
+To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
+
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+:::
 
 <head>
-<meta name="title" content="Jupiter API - Get Data on Swaps of Jupiter Aggregator"/>
-<meta name="description" content="Use our Solana API & Websockets, designed for developers, to get SPL token trading data on Jupiter DEX. Get Tokens involved in Swap, Addresses and details on the route of the swap."/>
-<meta name="keywords" content="jupiter aggregator api,jupiter aggreagtor v6 api jupiter dex aggregator api,jupiter aggregator solana api, Jupiter DEX Trades api,Jupiter Swaps api,Jupiter Limit Order API, Jupiter Create Limit Order API,  Jupiter Create Quote API, Jupiter Quote API, Jupiter Cancel Quote API, Jupiter Cancel Expired Quote API, Jupiter Cancel Limit Order API, Jupiter Cancel Expired Limit Order API ,Jupiter python api,Jupiter token swaps api,Jupiter aggregator api,Jupiter Aggregtor api docs, Solana DEX API, Solana Aggregator API"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
+<title>Jupiter API - Live Swaps, Limit Orders, DEX Aggregator Data</title>
+<meta
+  name="title"
+  content="Jupiter API - Live Swaps, Limit Orders, DEX Aggregator Data"
+/>
+<meta
+  name="description"
+  content="Ultra low latency Jupiter DEX Aggregator swaps, limit orders, routing data, and trading analytics. Get real-time Jupiter API data for Solana token swaps, routing, and DEX aggregator insights."
+/>
+<meta
+  name="keywords"
+  content="Jupiter API,jupiter aggregator api,jupiter dex aggregator api,jupiter aggregator solana api,jupiter swaps api,jupiter limit order api,jupiter routing api,jupiter dex trades api,jupiter token swaps api,jupiter aggregator v6 api,jupiter create limit order api,jupiter quote api,jupiter cancel order api,jupiter python api,jupiter api docs,solana dex api,solana aggregator api,jupiter real time data,jupiter websocket api,jupiter blockchain api,jupiter trading api,jupiter swap analytics,jupiter routing data,solana token swaps,dex aggregator data,blockchain trading data,crypto trading api"
+/>
+<meta name="robots" content="index, follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="English" />
 
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Jupiter API - Get Data on Swaps of Jupiter Aggregator"
+  content="Jupiter API - Solana - Swaps, Limit Orders, Routing Data"
 />
 <meta
   property="og:description"
-  content="Use our Solana API & Websockets, designed for developers, to get SPL token trading data on Jupiter DEX. Get Tokens involved in Swap, Addresses and details on the route of the swap."
+  content="Get Jupiter aggregator swaps, limit orders, routing data and trading analytics"
 />
 
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Jupiter API - Get Data on Swaps of Jupiter Aggregator" />
-<meta property="twitter:description" content="Use our Solana API & Websockets, designed for developers, to get SPL token trading data on Jupiter DEX. Get Tokens involved in Swap, Addresses and details on the route of the swap." />
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:title" content="Jupiter API - Solana - Swaps, Limit Orders, Routing Data"/>
+  <meta property="twitter:description" content="Get Jupiter aggregator swaps, limit orders, routing data and trading analytics"/>
 </head>
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-## Latest Swaps on Jupiter
+---
 
-To retrieve the newest swaps happened on Jupiter Aggregator, we will utilize the Solana instructions API/Websocket.
+### Table of Contents
 
-We will specifically look for the latest instructions from Jupiter's program, identified by the program address `JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4`. 
-Whenever a new swap is on Jupiter, it triggers the `sharedAccountsRoute` instructions. The tokens involved in the swap and adderesses to which tokens belong initially and the accounts involved in the route of the swap can be obtained from the Instructions API.
+### 1. Jupiter Swaps & Trading Data
 
-For instance, Index 7 and 8 represent the tokens A and B respectively involved in the swap, while Index 1 and 2 are the addresses to which the tokens B and A belong initially. Note that the indexing starts from 0.
+- [Track Latest Swaps on Jupiter ➤](#track-latest-swaps-on-jupiter)
+- [Monitor Jupiter Swap Activity ➤](#monitor-jupiter-swap-activity)
 
-You can run this query using this [link](https://ide.bitquery.io/Tokens-involved-in-Jupiter-swap-source-address-destination-address-DEX-involved_2#).
+### 2. Jupiter Limit Orders
+
+- [Track Latest Created Limit Orders ➤](#track-latest-created-limit-orders-on-jupiter)
+- [Monitor Cancel Limit Orders ➤](#track-latest-cancel-limit-order-transactions-on-jupiter)
+- [Track Cancel Expired Orders ➤](#track-latest-cancel-expired-limit-order-transactions-on-jupiter)
+
+### 3. [Video Tutorials](#video-tutorials)
+
+## Jupiter Swaps & Trading Data
+
+### Track Latest Swaps on Jupiter
+
+Get real-time Jupiter aggregator swap data including tokens involved, routing paths, and account details.
+
+We monitor Jupiter's program address `JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4` for `sharedAccountsRoute` instructions to track swap activity.
+The query returns tokens involved in swaps, source and destination addresses, and routing information.
+
+[Jupiter Latest Swaps — Stream ➤](https://ide.bitquery.io/Tokens-involved-in-Jupiter-swap-source-address-destination-address-DEX-involved_2#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -84,16 +129,68 @@ subscription {
 }
 ```
 
-## Track Latest Created Limit Orders on Jupiter
+</details>
 
-To track the latest created limit orders happened on Jupiter Limit Order Program, we will utilize the Solana instructions API/Websocket.
+### Monitor Jupiter Swap Activity
 
-To know which instruction method is used for creating limit orders, [we use this API](https://ide.bitquery.io/Get-all-methods-of-Jupiter-Limit-Order-Program#).
-We will specifically look for the latest instructions from Jupiter's Limit Order program, identified by the program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu`. 
-Whenever a limit order is created on Jupiter, it triggers the `initializeOrder` instructions. The input mint token address, output mint token address, base address, maker address, reserve address, maker input account and makeroutput address involved in the transaction can be obtained from the Instructions API.
+Track comprehensive Jupiter swap data including token details, account information, and routing paths for advanced analytics.
 
-The above mentioned addresses can be seen in the response in Program Account Names and the addresses to these ordered names maps directly to addresses in the Accounts array.
-You can run this query using this [link](https://ide.bitquery.io/Latest-created-Limit-Order-on-Jupiter-in-realtime#).
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Solana {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Address: { is: "JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4" }
+            Method: { is: "sharedAccountsRoute" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Transaction {
+        Signature
+      }
+      Instruction {
+        Program {
+          Method
+          AccountNames
+          Address
+        }
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Jupiter Limit Orders
+
+### Track Latest Created Limit Orders on Jupiter
+
+Monitor real-time Jupiter limit order creation with comprehensive details including input/output tokens, maker addresses, and order parameters.
+
+We track Jupiter's Limit Order program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu` for `initializeOrder` instructions.
+The query returns input/output mint addresses, maker addresses, reserve addresses, and order configuration details.
+
+[Jupiter Limit Order Creation — Stream ➤](https://ide.bitquery.io/Latest-created-Limit-Order-on-Jupiter-in-realtime#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -174,16 +271,19 @@ subscription {
 }
 ```
 
-## Track Latest Cancel Limit Order Transactions on Jupiter
+</details>
 
-To track the latest cancel limit order transactions happened on Jupiter Limit Order Program, we will utilize the Solana instructions API/Websocket.
+### Track Latest Cancel Limit Order Transactions on Jupiter
 
-To know which instruction method is used for canceling limit orders, [we use this API](https://ide.bitquery.io/Get-all-methods-of-Jupiter-Limit-Order-Program#).
-We will specifically look for the latest instructions from Jupiter's Limit Order program, identified by the program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu`. 
-Whenever a limit order is canceled on Jupiter, it triggers the `cancelOrder` instructions. The input mint token address, maker address, reserve address and maker input account involved in the transaction can be obtained from the Instructions API.
+Monitor real-time Jupiter limit order cancellations with detailed transaction information including maker addresses, token details, and cancellation parameters.
 
-The above mentioned addresses can be seen in the response in Program Account Names and the addresses to these ordered names maps directly to addresses in the Accounts array.
-You can run this query using this [link](https://ide.bitquery.io/Latest-Cancel-Limit-Order-Transactions-on-Jupiter-in-realtime#).
+We track Jupiter's Limit Order program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu` for `cancelOrder` instructions.
+The query returns input mint addresses, maker addresses, reserve addresses, and cancellation details.
+
+[Jupiter Limit Order Cancellation — Stream ➤](https://ide.bitquery.io/Latest-Cancel-Limit-Order-Transactions-on-Jupiter-in-realtime#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -264,14 +364,19 @@ subscription {
 }
 ```
 
-## Track Latest Cancel Expired Limit Order Transactions on Jupiter
+</details>
 
-To track the latest cancel expired limit order transactions happened on Jupiter Limit Order Program, we will utilize the Solana instructions API/Websocket.
+### Track Latest Cancel Expired Limit Order Transactions on Jupiter
 
-To know which instruction method is used for canceling expired limit orders, [we use this API](https://ide.bitquery.io/Get-all-methods-of-Jupiter-Limit-Order-Program#).
-We will specifically look for the latest instructions from Jupiter's Limit Order program, identified by the program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu`. 
-Whenever a expired limit order is canceled on Jupiter, it triggers the `cancelExpiredOrder` instructions.
-You can run this query using this [link](https://ide.bitquery.io/Latest-Cancel-Expired-Order-Transactions-on-Jupiter-in-realtime_1#).
+Monitor real-time Jupiter expired limit order cancellations with comprehensive transaction details and account information.
+
+We track Jupiter's Limit Order program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu` for `cancelExpiredOrder` instructions.
+The query returns transaction signatures, account details, and program arguments for expired order cancellations.
+
+[Jupiter Expired Order Cancellation — Stream ➤](https://ide.bitquery.io/Latest-Cancel-Expired-Order-Transactions-on-Jupiter-in-realtime_1#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -352,10 +457,14 @@ subscription {
 }
 ```
 
-## Video Tutorial | How to Track Swaps on Jupiter Aggregator on Solana in Realtime
+</details>
+
+## Video Tutorials
+
+### Video Tutorial | How to Track Swaps on Jupiter Aggregator on Solana in Realtime
 
 <VideoPlayer url="https://www.youtube.com/watch?v=NqWzQm1zoZ8" />
 
-## Video Tutorial | How to Track Create Limit Order, Cancel Limit Order and Cancel Expired Limit Order Transactions on Jupiter
+### Video Tutorial | How to Track Create Limit Order, Cancel Limit Order and Cancel Expired Limit Order Transactions on Jupiter
 
 <VideoPlayer url="https://www.youtube.com/watch?v=AUNu97LRTKc" />
