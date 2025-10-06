@@ -53,10 +53,12 @@ While you can access the aggregated price for a single trading pair, the Price I
 
 [Run Stream >](https://ide.bitquery.io/1-second-crypto-price-stream)
 
+> Note: A `Volume: {Usd: {gt: 5}}` filter is applied to remove extreme outliers; the price stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
-    Tokens(where: {Interval: {Time: {Duration: {eq: 1}}}}) {
+    Tokens(where: {Interval: {Time: {Duration: {eq: 1}}}, Volume: {Usd: {gt: 5}}}) {
       Token {
         Address
         Id
@@ -181,6 +183,8 @@ The Price APIs have three core data cubes:
 
 Currencies are representation of all tokens on various chains supported in Crypto Price API(Price Index). For example, take the case of Bitcoin, while it is a native token on Bitcoin chain, it is also traded on EVM chains as WBTC ( wrapped BTC). Now all these representations of BTC are represented as a single currency.
 
+> Note: We include `Volume: {Usd: {gt: 5}}` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 
 {
@@ -188,7 +192,7 @@ Currencies are representation of all tokens on various chains supported in Crypt
     Currencies(
       limit: {count: 1}
       orderBy: {descending: Block_Time}
-      where: {Currency: {Id: {is: "bid:bitcoin"}}}
+      where: {Currency: {Id: {is: "bid:bitcoin"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Volume {
         Usd
@@ -242,11 +246,13 @@ It takes amounts and prices from all chains that use BTC and wrapped versions (i
 
 Let's say you don't want a chain agnostic view, but want to focus on a particular chain. How to stream or query prices for it? This is where tokens come in.
 
+> Note: We include `Volume: {Usd: {gt: 5}}` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 {
   Trading {
     Tokens(
-      where: {Token: {Address: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}, Network: {is: "Solana"}}, Interval: {Time: {Duration: {eq: 1}}}}
+      where: {Token: {Address: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}, Network: {is: "Solana"}}, Interval: {Time: {Duration: {eq: 1}}}, Volume: {Usd: {gt: 5}}}
       limit: {count: 1}
       orderBy: {descending: Block_Time}
     ) {
@@ -301,10 +307,12 @@ Let's say you don't want a chain agnostic view, but want to focus on a particula
 
 We filter for specific tokens using the token `Address` and `Network`. If you need to stream all token prices on say Solana, simply set `Network` to `solana`.
 
+> Note: We include `Volume: {Usd: {gt: 5}}` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
-    Tokens(where: {Token: {Network: {is: "Solana"}}}) {
+    Tokens(where: {Token: {Network: {is: "Solana"}}, Volume: {Usd: {gt: 5}}}) {
       Token {
         Address
         Id
@@ -363,11 +371,13 @@ We will breakdown in detail how base token and Quote are chosen in the next sect
 
 > **Tip**: Use `TokenId` instead of `Token.Address` to fetch all variants of the same token (e.g., ETH, WETH, bridged ETH) across multiple chains.
 
+> Note: We include `Volume: {Usd: {gt: 5}}` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Market: {Network: {is: "Base"}}, QuoteToken: {Address: {is: "0x4200000000000000000000000000000000000006"}}, Token: {Address: {is: "0x940181a94a35a4569e4529a3cdfb74e38fd98631"}}}
+      where: {Market: {Network: {is: "Base"}}, QuoteToken: {Address: {is: "0x4200000000000000000000000000000000000006"}}, Token: {Address: {is: "0x940181a94a35a4569e4529a3cdfb74e38fd98631"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Currency {
         Symbol

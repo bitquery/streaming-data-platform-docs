@@ -37,13 +37,16 @@ Our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/in
 
 Get real-time Bitcoin OHLC data across all chains:
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 subscription {
   Trading {
     Currencies(
       where: {
         Currency: { Id: { is: "bid:bitcoin" } },
-        Interval: { Time: { Duration: { eq: 60 } } }
+        Interval: { Time: { Duration: { eq: 60 } } },
+        Volume: { Usd: { gt: 5 } }
       }
     ) {
       Currency {
@@ -209,13 +212,16 @@ Use the **Pairs** cube when you need OHLC data for specific trading pairs on spe
 
 Stream real-time Bitcoin OHLC data aggregated from all supported blockchains (Bitcoin, Ethereum WBTC, Solana, etc.) with 60-second intervals:
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 subscription {
   Trading {
     Currencies(
       where: {
         Currency: { Id: { is: "bid:bitcoin" } },
-        Interval: { Time: { Duration: { eq: 60 } } }
+        Interval: { Time: { Duration: { eq: 60 } } },
+        Volume: { Usd: { gt: 5 } }
       }
     ) {
       Currency {
@@ -267,11 +273,13 @@ subscription {
 
 Get real-time Ethereum OHLC data from all decentralized exchanges:
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 subscription {
   Trading {
     Pairs(
-      where: {Currency: {Id: {is: "bid:eth"}}, Interval: {Time: {Duration: {eq: 60}}}}
+      where: {Currency: {Id: {is: "bid:eth"}}, Interval: {Time: {Duration: {eq: 60}}}, Volume: {Usd: {gt: 5}}}
     ) {
       Token {
         Symbol
@@ -327,13 +335,16 @@ subscription {
 
 Monitor all Solana tokens with real-time OHLC data:
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 subscription {
   Trading {
     Tokens(
       where: {
         Token: { Network: { is: "Solana" } },
-        Interval: { Time: { Duration: { eq: 60 } } }
+        Interval: { Time: { Duration: { eq: 60 } } },
+        Volume: { Usd: { gt: 5 } }
       }
     ) {
       Token {
@@ -394,6 +405,8 @@ Get historical Bitcoin OHLC data for the last 7 days.
 
 [Run Query](https://ide.bitquery.io/historical-Bitcoin-OHLC-data-for-the-last-7-days)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` in most examples to remove extreme outliers; this query also includes time filtering for 7 days.
+
 ```graphql
 {
   Trading {
@@ -401,6 +414,7 @@ Get historical Bitcoin OHLC data for the last 7 days.
       where: {
         Currency: { Id: { is: "bid:bitcoin" } },
         Interval: { Time: { Duration: { eq: 3600 } } },
+        Volume: { Usd: { gt: 5 } },
         Block: {Time:{
           since_relative:{days_ago:7}
         }}
@@ -454,6 +468,8 @@ Get historical Bitcoin OHLC data for the last 7 days.
 ### 2. Top 10 Tokens by 5-Minute Price Change
 
 Find the biggest movers with OHLC data and price change calculations:
+
+> Note: We include `Volume: { Usd: { gt: 5 } }` in most examples to remove extreme outliers; this example already filters by `Volume: { Usd: { gt: 100000 } }`.
 
 ```graphql
 {
@@ -525,6 +541,8 @@ Find the biggest movers with OHLC data and price change calculations:
 
 Monitor all tokens on Uniswap v3 with 1-second OHLC data:
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 subscription {
   Trading {
@@ -535,7 +553,8 @@ subscription {
         Market: { 
           Network: { is: "Ethereum" },
           Address: { is: "0x1f98431c8ad98523631ae4a59f267346ea31f984" }
-        }
+        },
+        Volume: { Usd: { gt: 5 } }
       }
     ) {
       Market {
@@ -606,6 +625,8 @@ subscription {
 
 Track all tokens on Raydium with real-time OHLC data:
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 subscription {
   Trading {
@@ -616,7 +637,8 @@ subscription {
         Market: { 
           Network: { is: "Solana" },
           Program: { is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8" }
-        }
+        },
+        Volume: { Usd: { gt: 5 } }
       }
     ) {
       Market {
@@ -687,6 +709,8 @@ subscription {
 
 Monitor BSC tokens on PancakeSwap v3:
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 subscription {
   Trading {
@@ -697,7 +721,8 @@ subscription {
         Market: { 
           Network: { is: "Binance Smart Chain" },
           Address: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
-        }
+        },
+        Volume: { Usd: { gt: 5 } }
       }
     ) {
       Market {
@@ -918,13 +943,16 @@ Calculate percentage price changes using expressions:
 
 Get volume-weighted OHLC data for more accurate price representation:
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 subscription {
   Trading {
     Pairs(
       where: {
         Currency: { Id: { is: "bid:eth" } },
-        Interval: { Time: { Duration: { eq: 60 } } }
+        Interval: { Time: { Duration: { eq: 60 } } },
+        Volume: { Usd: { gt: 5 } }
       }
     ) {
       Token {
@@ -956,13 +984,16 @@ subscription {
 
 Find arbitrage opportunities using OHLC data across chains:
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 {
   Trading {
     Pairs(
       where: {
         Currency: { Id: { is: "bid:bitcoin" } },
-        QuoteCurrency: { Id: { is: "usdt" } }
+        QuoteCurrency: { Id: { is: "usdt" } },
+        Volume: { Usd: { gt: 5 } }
       },
       limit: { count: 10 },
       orderBy: { descending: Block_Time },

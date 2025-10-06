@@ -8,11 +8,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 [Run Stream ➤](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}}}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Token {
         Name
@@ -64,11 +66,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: false}`, this means tha
 
 [Run Stream ➤](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain-in-paired-token)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: false}, Market: {Network: {is: "Solana"}}}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: false}, Market: {Network: {is: "Solana"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Token {
         Name
@@ -125,6 +129,8 @@ Here we have selected the filter `Price: {IsQuotedInUsd: false}`, this means tha
 
 [Run Stream ➤](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain-against-WSOLSOL)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
@@ -137,8 +143,8 @@ subscription {
             ,"11111111111111111111111111111111"
             ]
           }
-        }
-        Market: {Network: {is: "Solana"}}}
+        },
+        Market: {Network: {is: "Solana"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Token {
         Name
@@ -193,13 +199,16 @@ This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in t
 
 [Run Stream ➤](https://ide.bitquery.io/OHLC-of-a-currency-on-multiple-blockchains)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 {
   Trading {
     Currencies(
       where: {
         Currency: { Id: { is: "bid:bitcoin" } },
-        Interval: { Time: { Duration: { eq: 60 } } }
+        Interval: { Time: { Duration: { eq: 60 } } },
+        Volume: { Usd: { gt: 5 } }
       },
       limit: { count: 1 },
       orderBy: { descending: Block_Time }
@@ -261,13 +270,16 @@ Stream real-time OHLC (Open, High, Low, Close) prices, trading volume, and movin
 
 [Run Stream ➤](https://ide.bitquery.io/Aggregated-Price-of-all-tokens-in-real-time-on-one-chain)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 subscription {
   Trading {
     Tokens(
       where: {
         Token: { Network: { is: "Solana" } }
-        Interval: { Time: { Duration: { eq: 60 } } }
+        Interval: { Time: { Duration: { eq: 60 } } },
+        Volume: { Usd: { gt: 5 } }
       }
     ) {
       Token {
@@ -326,6 +338,8 @@ Here we have selected the filter `Price: {IsQuotedInUsd: false}`, this means tha
 
 [Run Stream ➤](https://ide.bitquery.io/Token-OHLC-Stream-1-second-Multi-Chains_1)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 subscription {
   Trading {
@@ -334,7 +348,8 @@ subscription {
         Price: { IsQuotedInUsd: false }
         Interval: { Time: { Duration: { eq: 1 } } }
         Currency: { Id: { is: "bid:eth" } }
-        QuoteCurrency: { Id: { is: "usdc" } }
+        QuoteCurrency: { Id: { is: "usdc" } },
+        Volume: { Usd: { gt: 5 } }
       }
     ) {
       Token {
@@ -393,6 +408,8 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 [Run Stream ➤](https://ide.bitquery.io/Find-arbitrage-opportunity-with-same-token-across-chains_1)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```graphql
 query {
   Trading {
@@ -400,7 +417,8 @@ query {
       where: {
         Price: { IsQuotedInUsd: true }
         Currency: { Id: { is: "bid:bitcoin" } }
-        QuoteCurrency: { Id: { is: "usdt" } }
+        QuoteCurrency: { Id: { is: "usdt" } },
+        Volume: { Usd: { gt: 5 } }
       }
       limit: { count: 10 }
       orderBy: { descending: Block_Time }
@@ -464,6 +482,8 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 This stream uses [expressions](http://docs.bitquery.io/docs/graphql/capabilities/expression/)
 
 [Run Stream ➤](https://ide.bitquery.io/5-minute-price-change-api_2)
+
+> Note: We include `Volume: { Usd: { gt: 5 } }` in most examples to remove extreme outliers; this stream already filters by `Volume: { Usd: { gt: 100000 } }`.
 
 ```graphql
 {
@@ -540,6 +560,8 @@ This stream uses [expressions](http://docs.bitquery.io/docs/graphql/capabilities
 
 [Run Stream ➤](https://ide.bitquery.io/5-minute-price-change-api-on-solana_6)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` in most examples to remove extreme outliers; this stream already filters by `Volume: { Usd: { gt: 100000 } }`.
+
 ```
 subscription{
   Trading {
@@ -610,6 +632,8 @@ Stream Bitcoin price data (USD OHLC) with a focus on volume-based intervals, use
 Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them denominated in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
 [Run Stream ➤](https://ide.bitquery.io/5-minute-price-change-api-on-solana_5)
+
+> Note: We include `Volume: { Usd: { gt: 5 } }` in most examples to remove extreme outliers; this stream already filters by `Volume: { Usd: { gt: 100000 } }`.
 
 ```graphql
 {
@@ -685,11 +709,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 [Run Stream ➤](https://ide.bitquery.io/PumpAMM-tokens-1-second-price-stream-with-OHLC_1)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, Program: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, Program: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Market {
         Protocol
@@ -761,11 +787,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 [Run Stream ➤](https://ide.bitquery.io/Heaven-DEX-tokens-1-second-price-stream-with-OHLC)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, Program: {is: "HEAVENoP2qxoeuF8Dj2oT1GHEnu49U5mJYkdeC8BAX2o"}}}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, Program: {is: "HEAVENoP2qxoeuF8Dj2oT1GHEnu49U5mJYkdeC8BAX2o"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Market {
         Protocol
@@ -838,11 +866,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 [Run Stream ➤](https://ide.bitquery.io/Meteora-DBC-DEX-tokens-1-second-price-stream-with-OHLC)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, Program: {is: "HEAVENoP2qxoeuF8Dj2oT1GHEnu49U5mJYkdeC8BAX2o"}}}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, Program: {is: "HEAVENoP2qxoeuF8Dj2oT1GHEnu49U5mJYkdeC8BAX2o"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Market {
         Protocol
@@ -915,11 +945,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 [Run Stream ➤](https://ide.bitquery.io/Raydium-Launchpad-DEX-tokens-1-second-price-stream-with-OHLC)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, Program: {is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"}}}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Solana"}, Program: {is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Market {
         Protocol
@@ -992,11 +1024,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 [Run Stream ➤](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Ethereum"}, Address: {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}}}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Ethereum"}, Address: {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Market {
         Protocol
@@ -1069,11 +1103,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 [Run Stream ➤](https://ide.bitquery.io/Sushiswap-DEX-tokens-1-second-price-stream-with-OHLC)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Ethereum"}, Address: {is: "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac"}}}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Ethereum"}, Address: {is: "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Market {
         Protocol
@@ -1145,11 +1181,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 [Run Stream ➤](https://ide.bitquery.io/PancakeSwap-v3-DEX-tokens-1-second-price-stream-with-OHLC_1)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Ethereum"}, Address: {is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865"}}}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Ethereum"}, Address: {is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Market {
         Protocol
@@ -1221,11 +1259,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 [Run Stream ➤](https://ide.bitquery.io/FourMeme-DEX-tokens-1-second-price-stream-with-OHLC)
 
+> Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
+
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Binance Smart Chain"}, Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}, Market: {Network: {is: "Binance Smart Chain"}, Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Volume: {Usd: {gt: 5}}}
     ) {
       Market {
         Protocol
