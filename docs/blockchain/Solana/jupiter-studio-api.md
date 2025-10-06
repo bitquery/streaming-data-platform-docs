@@ -419,6 +419,7 @@ query MyQuery($tokenAddresses: [String!]) {
   "tokenAddresses":["CEVuiDHBxUeuuwvLugKqZpRpNtv5ejaQ1wKm2qzyjups","3Po3offygJjPg4cQpvc1AVT9JsYXyUapN2EKgFUbjups"]
 }
 ```
+</details>
 
 ### Get Latest Price of Jupiter Studio Token
 

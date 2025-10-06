@@ -2,23 +2,30 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Four Meme API
 
-Every bit of onchain information related to the Four Meme Exchange on BSC, live trades, bonding curve progress, newly created tokens, prices, volumes, makers/buyers/sellers, 
-and more can also be accessed directly through Bitquery APIs and streams. With our GraphQL APIs, real-time WebSocket feeds, 
-and enterprise-grade Kafka topics (plus optional cloud connectors like AWS, GCP, and Snowflake), you get seamless access to the 
-same on-chain data powering the exchange, ready for your analytics and trading workflows. Create your account and get started by following the 
-[Quickstart instructions](https://docs.bitquery.io/docs/start/first-query/).
+Get ultra low latency Four Meme memecoin data on BNB Chain: live trades, bonding curve progress, newly created tokens, prices, OHLC, liquidity, migrations, top traders and more.
+
+The below GraphQL APIs and Streams are examples of data points you can get with Bitquery. If you have questions on other data points, reach out to [support](https://t.me/Bloxy_info).
+
+Need zero-latency BSC data? Read about our Streams and contact us for a trial: https://docs.bitquery.io/docs/streams/
+
+You may also be interested in:
+
+- [Crypto Price API ➤](https://docs.bitquery.io/docs/trading/crypto-price-api/)
+- [BSC Pancake Swap APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/)
+- [BSC DEX Trades ➤](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/)
 
 <head>
-<meta name="title" content="Four Meme API - Real-time Meme Token Trading Data on BSC"/>
+<title>Four Meme API - Live Trades, Bonding Curve, Prices, Liquidity on BSC</title>
+<meta name="title" content="Four Meme API - Live Trades, Bonding Curve, Prices, Liquidity on BSC"/>
 
 <meta
   name="description"
-  content="Access Four Meme trading data on BNB Chain. Track memecoin creation, buys, sells, bonding curve progress, token stats, and more using Bitquery APIs."
+  content="Ultra low latency Four Meme memecoin data on BNB Chain: live trades, bonding curve progress, new tokens, prices, OHLC, liquidity, migrations, top traders. Access via GraphQL, streams, and Kafka."
 />
 
 <meta
   name="keywords"
-  content="Four Meme API, Four Meme trading data, memecoin BSC API, Bitquery Four Meme, meme token analytics, Four Meme bonding curve"
+  content="Four Meme API,four meme bsc api,four meme trading api,four meme bonding curve api,four meme prices api,four meme liquidity api,four meme ohlc api,four meme memecoin api,bnb chain meme api,bsc meme token api,bitquery four meme api,real-time bsc trades,bsc websocket api,crypto trading api,blockchain market data api,memecoin analytics"
 />
 
 <meta name="robots" content="index, follow" />
@@ -31,12 +38,12 @@ same on-chain data powering the exchange, ready for your analytics and trading w
 
 <meta
   property="og:title"
-  content="Four Meme API - Real-time Meme Token Trading Data on BSC"
+  content="Four Meme API - BSC - Live Trades, Bonding Curve, Prices"
 />
 
 <meta
   property="og:description"
-  content="Access Four Meme trading data on BNB Chain. Track memecoin creation, buys, sells, bonding curve progress, token stats, and more using Bitquery APIs."
+  content="Get Four Meme data on BNB Chain: trades, bonding curve progress, prices, liquidity, new tokens, migrations, and more."
 />
 
 <!-- Twitter -->
@@ -45,11 +52,50 @@ same on-chain data powering the exchange, ready for your analytics and trading w
 
 <meta
   property="twitter:title"
-  content="Four Meme API - Real-time Meme Token Trading Data on BSC"
+  content="Four Meme API - BSC - Live Trades, Bonding Curve, Prices"
 />
 
-<meta property="twitter:description" content="Access Four Meme trading data on BNB Chain. Track memecoin creation, buys, sells, bonding curve progress, token stats, and more using Bitquery APIs." />
+<meta property="twitter:description" content="Get Four Meme data on BNB Chain: trades, bonding curve progress, prices, liquidity, new tokens, migrations, and more." />
 </head>
+
+::::note
+To query or stream data via GraphQL outside the Bitquery IDE, you need to generate an API access token.
+
+Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation/how-to-generate/
+::::
+
+---
+
+### Table of Contents
+
+### 1. Four Meme Trading & Market Data (BSC)
+
+- [Subscribe the Latest Trades on Four Meme ➤](#subscribe-the-latest-trades-on-four-meme)
+- [Get Latest Buys and Sells for a Four Meme Token ➤](#get-latest-buys-and-sells-for-a-four-meme-token)
+- [Get Trade Metrics of a Four Meme Token ➤](#get-trade-metrics-of-a-four-meme-token)
+- [Get Price Change Percentage for a Four Meme Token ➤](#get-price-change-percentage-for-a-four-meme-token)
+- [Get OHLCV data of a Four Meme Token ➤](#get-ohlcv-data-of-a-four-meme-token)
+
+### 2. Token Lifecycle, Liquidity & Migrations
+
+- [Track Four Meme Token Migrations ➤](#track-four-meme-token-migrations)
+- [Bonding Curve Progress API for FourMeme token ➤](#bonding-curve-progress-api-for-fourmeme-token)
+- [Get Four Meme Tokens which are above 95% Bonding Curve Progress ➤](#get-four-meme-tokens-which-are-above-95-bonding-curve-progress)
+- [Get liquidity of a Four Meme token ➤](#get-liquidity-of-a-four-meme-token)
+- [Track Liquidity Add Events for All Tokens on Four Meme ➤](#track-liquidity-add-events-for-all-tokens-on-four-meme)
+- [Track Liquidity Add Events for a Token on Four Meme ➤](#track-liquidity-add-events-for-a-token-on-four-meme)
+
+### 3. Trader Insights
+
+- [Monitor trades of traders on Four meme ➤](#monitor-trades-of-traders-on-four-meme)
+- [Track Latest and Historical Trades of a Four Meme User ➤](#track-latest-and-historical-trades-of-a-four-meme-user)
+- [Top Buyers for a Token on Four Meme ➤](#top-buyers-for-a-token-on-four-meme)
+- [Top Traders of a token ➤](#top-traders-of-a-token)
+
+### 4. Market Cap & Getting Started
+
+- [Get Market Cap of a Four Meme Token ➤](#get-market-cap-of-a-four-meme-token)
+- [Getting Started with Bitquery ➤](#getting-started-with-bitquery)
 
 ## Bitquery DEX Data Access Options
 
@@ -417,15 +463,8 @@ query MyQuery($currency: String) {
   EVM(network: bsc) {
     DEXTradeByTokens(
       where: {
-        Trade: {
-          Currency: {
-            SmartContract: {is: $currency}
-          },
-          Success: true
-        }, 
-        Block: {
-          Time: {since_relative: {hours_ago: 24}}
-        }
+        Trade: { Currency: { SmartContract: { is: $currency } }, Success: true }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
       Trade {
@@ -438,15 +477,19 @@ query MyQuery($currency: String) {
       volume_24hr: sum(of: Trade_Side_AmountInUSD)
       volume_1hr: sum(
         of: Trade_Side_AmountInUSD
-        if: {Block: {Time: {since_relative: {hours_ago:1}}}}
+        if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
       )
       volume_5min: sum(
         of: Trade_Side_AmountInUSD
-        if: {Block: {Time: {since_relative:{minutes_ago:5}}}}
+        if: { Block: { Time: { since_relative: { minutes_ago: 5 } } } }
       )
       trades_24hr: count
-      trades_1hr: count(if: {Block: {Time: {since_relative: {hours_ago:1}}}})
-      trades_5min: count(if: {Block: {Time: {since_relative:{minutes_ago:5}}}})
+      trades_1hr: count(
+        if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+      )
+      trades_5min: count(
+        if: { Block: { Time: { since_relative: { minutes_ago: 5 } } } }
+      )
     }
   }
 }
@@ -472,15 +515,8 @@ query MyQuery($currency: String) {
   EVM(network: bsc) {
     DEXTradeByTokens(
       where: {
-        Trade: {
-          Currency: {
-            SmartContract: {is: $currency}
-          },
-          Success: true
-        }, 
-        Block: {
-          Time: {since_relative: {hours_ago: 24}}
-        }
+        Trade: { Currency: { SmartContract: { is: $currency } }, Success: true }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
       Trade {
@@ -490,13 +526,23 @@ query MyQuery($currency: String) {
           SmartContract
         }
         price_24hr: PriceInUSD(minimum: Block_Time)
-        price_1hr: PriceInUSD(if: {Block: {Time: {is_relative: {hours_ago:1}}}})
-        price_5min: PriceInUSD(if: {Block: {Time: {is_relative: {minutes_ago:1}}}})
+        price_1hr: PriceInUSD(
+          if: { Block: { Time: { is_relative: { hours_ago: 1 } } } }
+        )
+        price_5min: PriceInUSD(
+          if: { Block: { Time: { is_relative: { minutes_ago: 1 } } } }
+        )
         current: PriceInUSD
       }
-      change_24hr: calculate(expression: "( $Trade_current - $Trade_price_24hr ) / $Trade_price_24hr * 100")
-      change_1hr: calculate(expression: "( $Trade_current - $Trade_price_1hr ) / $Trade_price_1hr * 100")
-      change_5min: calculate(expression: "( $Trade_current - $Trade_price_5min ) / $Trade_price_5min * 100")
+      change_24hr: calculate(
+        expression: "( $Trade_current - $Trade_price_24hr ) / $Trade_price_24hr * 100"
+      )
+      change_1hr: calculate(
+        expression: "( $Trade_current - $Trade_price_1hr ) / $Trade_price_1hr * 100"
+      )
+      change_5min: calculate(
+        expression: "( $Trade_current - $Trade_price_5min ) / $Trade_price_5min * 100"
+      )
     }
   }
 }

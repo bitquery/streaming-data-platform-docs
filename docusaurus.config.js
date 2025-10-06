@@ -896,8 +896,8 @@ const config = {
             position: "left",
           },
           {
-            to: "https://lite.bitquery.io/",
-            label: "Investigation Tool",
+            to: "https://docs.bitquery.io/docs/grpc/solana/introduction/",
+            label: "Solana gRPC",
             position: "left",
           },
           {
