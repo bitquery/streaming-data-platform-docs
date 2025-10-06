@@ -1,6 +1,23 @@
-# Jupiter Studio API
+---
+title: "Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data"
+description: "Ultra low latency Jupiter Studio launchpad data, token trades, OHLC, migration tracking, and Meteora DBC analytics. Get real-time Jupiter Studio API data for token launches, trading, and migration insights."
+---
 
-In this section we will see some API examples on tracking Jupiter Studio launchpad tokens on Meteora's dynamic bonding curve.
+# Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data
+
+Get ultra low latency Jupiter Studio launchpad data, token trades, OHLC, migration tracking, and Meteora DBC analytics from Jupiter Studio API, Streams and Data Dumps.
+Access real-time data for Jupiter Studio token launches, trading activity, migration events, and Meteora Dynamic Bonding Curve insights through our Jupiter Studio API.
+The below GraphQL APIs and Streams are examples of data points you can get with Bitquery.
+If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
+
+Need zero-latency Jupiter Studio data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+
+You may also be interested in:
+
+- [Jupiter API ➤](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api/)
+- [Pump.fun APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/)
+- [Meteora APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/meteora-api/)
+- [Raydium APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/raydium-api/)
 
 :::note
 Jupiter studio tokens are launched and traded on Meteora DBC. So a Jup Studio token follows a lifecycle of a Meteora DBC Token.
@@ -15,29 +32,72 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <head>
-  <meta name="title" content="Jupiter Studio API - Solana - Real-time Pools, Trades, Prices, OHLC" />
-  <meta name="description" content="Access real-time and historical data for Jupiter Studio on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders." />
-  <meta name="keywords" content="Jupiter Studio API, Jupiter Studio,Meteora Dynamic Bonding Curve API,Dynamic Bonding Curve,Solana DEX,Meteora Jupiter Studio API,Solana on-chain API,real-time Solana trades,Meteora DBC Jupiter pool data,Solana token prices,OHLC data Solana,DEX trading API,crypto trading API,web3 Solana API,Bitquery GraphQL,Meteora v2 API,Solana blockchain data" />
-  <meta name="robots" content="index, follow" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
+<title>Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data</title>
+<meta
+  name="title"
+  content="Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data"
+/>
+<meta
+  name="description"
+  content="Ultra low latency Jupiter Studio launchpad data, token trades, OHLC, migration tracking, and Meteora DBC analytics. Get real-time Jupiter Studio API data for token launches, trading, and migration insights."
+/>
+<meta
+  name="keywords"
+  content="Jupiter Studio API,jupiter studio launchpad api,jupiter studio token api,jupiter studio meteora api,jupiter studio dbc api,jupiter studio migration api,jupiter studio trades api,jupiter studio ohlc api,jupiter studio price api,jupiter studio volume api,jupiter studio analytics api,meteora dynamic bonding curve api,meteora dbc api,meteora jupiter studio api,solana launchpad api,solana token launch api,solana dex api,solana trading api,jupiter studio real time data,jupiter studio websocket api,jupiter studio blockchain api,jupiter studio trading analytics,solana token launches,launchpad data,blockchain trading data,crypto launchpad api"
+/>
+<meta name="robots" content="index, follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="English" />
 
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Jupiter Studio API - Solana - Real-time Pools, Trades, Prices, OHLC"
+  content="Jupiter Studio API - Solana - Token Launches, Trades, Migration Data"
 />
-<meta property="og:description" content="Explore real-time DEX trades, latest pool creations, token prices, OHLC, and volume insights on Jupiter Studio Token using our Solana API." />
+<meta
+  property="og:description"
+  content="Get Jupiter Studio launchpad data, token trades, OHLC, migration tracking and Meteora DBC analytics"
+/>
 
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="Jupiter Studio API - Solana - Real-time Pools, Trades, Prices, OHLC" />
-  <meta property="twitter:description" content="Get rich on-chain insights into Jupiter Studio token pools, trades, and tokens with our real-time Solana API." />
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:title" content="Jupiter Studio API - Solana - Token Launches, Trades, Migration Data"/>
+  <meta property="twitter:description" content="Get Jupiter Studio launchpad data, token trades, OHLC, migration tracking and Meteora DBC analytics"/>
 </head>
 
-## Jupiter Studio Token Trades in Real-Time
+---
 
-The below query gets real-time information whenever there's a new trade of a Jupiter studio token on Meteora DBC including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics.
-You can run the query [here](https://ide.bitquery.io/trades-of-jup-studio-tokens-on-meteora-dbc-in-realtime)
+### Table of Contents
+
+### 1. Jupiter Studio Trading & Market Data
+
+- [Track Real-Time Jupiter Studio Token Trades ➤](#track-real-time-jupiter-studio-token-trades)
+- [Get Latest Price of Jupiter Studio Token ➤](#get-latest-price-of-jupiter-studio-token)
+- [Jupiter Studio Token OHLC Data ➤](#jupiter-studio-token-ohlc-data)
+- [Get Trading Volume & Analytics ➤](#get-trading-volume--analytics)
+
+### 2. Jupiter Studio Token Launches & Migration
+
+- [Track Latest Jupiter Studio Token Launches ➤](#track-latest-jupiter-studio-token-launches)
+- [Monitor Jupiter Studio Token Migrations ➤](#monitor-jupiter-studio-token-migrations)
+- [Check Token Migration Status ➤](#check-token-migration-status)
+
+### 3. Jupiter Studio Trader Insights
+
+- [Get Top Traders of Jupiter Studio Token ➤](#get-top-traders-of-jupiter-studio-token)
+
+## Jupiter Studio Trading & Market Data
+
+### Track Real-Time Jupiter Studio Token Trades
+
+Get real-time Jupiter Studio token trades on Meteora Dynamic Bonding Curve with comprehensive trade details including buy/sell information, account addresses, and transaction specifics.
+
+We monitor Jupiter Studio tokens (ending with "jups") trading on Meteora DBC program address `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN`.
+The query returns detailed trade information including currency details, amounts, prices, and account addresses.
+
+[Jupiter Studio Token Trades — Stream ➤](https://ide.bitquery.io/trades-of-jup-studio-tokens-on-meteora-dbc-in-realtime)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -100,11 +160,21 @@ subscription {
 }
 ```
 
-## Track Latest created Jupiter Studio Token pools on Meteora DBC
+</details>
 
-Below query will give you the latest created Jupiter Studio Token pools on Meteora DBC in realtime. You can test the query [here](https://ide.bitquery.io/jup-studio-token-creations-on-meteora-DBC)
+### Track Latest Jupiter Studio Token Launches on Meteora DBC
 
-```
+Monitor real-time Jupiter Studio token pool creations on Meteora Dynamic Bonding Curve with comprehensive launch details including token metadata, creator addresses, and pool configuration.
+
+We track Meteora DBC program address `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN` for `initialize_virtual_pool_with_spl_token` instructions.
+The query returns token details, account information, program arguments, and transaction specifics for new Jupiter Studio token launches.
+
+[Jupiter Studio Token Launches — Stream ➤](https://ide.bitquery.io/jup-studio-token-creations-on-meteora-DBC)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -183,11 +253,23 @@ subscription MyQuery {
 }
 ```
 
-## Track latest migrated Jupiter Studio tokens
+</details>
 
-Below query will give you the latest Jup Studio tokens migrated from Meteora DBC in realtime. You can test the query [here](https://ide.bitquery.io/jup-studio-token-migrations-from-Meteora-DBC-to-Meteors-DEX_1).
+## Jupiter Studio Token Launches & Migration
 
-```
+### Monitor Jupiter Studio Token Migrations
+
+Track real-time Jupiter Studio token migrations from Meteora Dynamic Bonding Curve to Meteora DEX with comprehensive migration details and transaction information.
+
+We monitor Meteora DBC program address `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN` for migration instructions including `migrate_meteora_damm` and `migration_damm_v2`.
+The query returns token details, account information, and migration transaction specifics for Jupiter Studio tokens.
+
+[Jupiter Studio Token Migrations — Stream ➤](https://ide.bitquery.io/jup-studio-token-migrations-from-Meteora-DBC-to-Meteors-DEX_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -255,9 +337,16 @@ subscription MyQuery {
 }
 ```
 
-## Check if the list of Jupiter Studio tokens has migrated from Meteora DBC
+</details>
 
-Below query will give you the response for each jup studio token in the list if it has graduated from Meteora DBC. Try out the query [here](https://ide.bitquery.io/Check-if-these-jup-tokens-tokens-have-migrated-from-Meteora-DBC).
+### Check Token Migration Status
+
+Check if specific Jupiter Studio tokens have migrated from Meteora DBC to Meteora DEX with detailed migration history and transaction information.
+
+[Jupiter Studio Migration Status Check — Query ➤](https://ide.bitquery.io/Check-if-these-jup-tokens-tokens-have-migrated-from-Meteora-DBC)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```
 query MyQuery($tokenAddresses: [String!]) {
@@ -331,13 +420,16 @@ query MyQuery($tokenAddresses: [String!]) {
 }
 ```
 
-## Latest Price of a Jupiter Studio Token on Meteora DBC
+### Get Latest Price of Jupiter Studio Token
 
-You can use the following query to get the latest price of a jup studio token on Meteora DBC on Solana.
+Get the most recent price data for a specific Jupiter Studio token trading on Meteora Dynamic Bonding Curve with comprehensive price information.
 
-You can run this query using this [link](https://ide.bitquery.io/latest-price-of-a-jup-studio-token-on-meteora-dbc).
+[Jupiter Studio Token Latest Price — Query ➤](https://ide.bitquery.io/latest-price-of-a-jup-studio-token-on-meteora-dbc)
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -362,11 +454,22 @@ You can run this query using this [link](https://ide.bitquery.io/latest-price-of
 }
 ```
 
-## Jupiter Studio Token OHLC API
+</details>
 
-If you want to get OHLC data for any specific Jup Studio currency pair on Meteora DBC, you can use this api. Only use [this API](https://ide.bitquery.io/Jupiter-studio-OHLC-API) as query and not subscription websocket as Aggregates and Time Intervals don't work well with subscriptions.
+### Jupiter Studio Token OHLC Data
 
-```
+Get comprehensive OHLC (Open, High, Low, Close) data for Jupiter Studio tokens trading on Meteora DBC with volume analysis and price movement insights.
+
+:::note
+Use this API as a query only, not as a subscription websocket, as aggregates and time intervals don't work well with subscriptions.
+:::
+
+[Jupiter Studio Token OHLC — Query ➤](https://ide.bitquery.io/Jupiter-studio-OHLC-API)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -390,46 +493,18 @@ If you want to get OHLC data for any specific Jup Studio currency pair on Meteor
 }
 ```
 
-## Get the Top Traders of a specific Jupiter Studio Token on Meteora DBC
+</details>
 
-The below query gets the Top Traders of the specified Jup studio Token `3Po3offygJjPg4cQpvc1AVT9JsYXyUapN2EKgFUbjups` on Meteora DBC. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-jup-studio-Token-on-Meteora-DBC)
+### Get Trading Volume & Analytics
 
-```
-query TopTraders($token: String) {
-  Solana {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "volumeUsd"}
-      limit: {count: 100}
-      where: {Trade: {Currency: {MintAddress: {is: $token}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Trade {
-        Account {
-          Owner
-        }
-        Side {
-          Account {
-            Address
-          }
-          Type
-        }
-      }
-      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
-      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
-      volume: sum(of: Trade_Amount)
-      volumeUsd: sum(of: Trade_Side_AmountInUSD)
-    }
-  }
-}
-{
-  "token": "3Po3offygJjPg4cQpvc1AVT9JsYXyUapN2EKgFUbjups"
-}
-```
+Get comprehensive trading volume analytics for Jupiter Studio tokens including total volume, buy volume, sell volume, and USD value analysis.
 
-## Get trading volume, buy volume, sell volume of a Jupiter studio token
+[Jupiter Studio Trading Volume — Query ➤](https://ide.bitquery.io/Get-trading-volume-buy-volume-sell-volume-of-a-jup-studio-token)
 
-This query fetches you the traded volume, buy volume and sell volume of a token `3Po3offygJjPg4cQpvc1AVT9JsYXyUapN2EKgFUbjups`. Try out the API [here](https://ide.bitquery.io/Get-trading-volume-buy-volume-sell-volume-of-a-jup-studio-token).
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(
@@ -461,3 +536,56 @@ query MyQuery {
   }
 }
 ```
+
+</details>
+
+## Jupiter Studio Trader Insights
+
+### Get Top Traders of Jupiter Studio Token
+
+Get comprehensive trader analytics for Jupiter Studio tokens including top traders by volume, buy/sell activity, and USD trading volume rankings.
+
+:::note
+Use this API as a query only, not as a subscription websocket, because aggregates don't work with subscriptions and will return incorrect results.
+:::
+
+[Jupiter Studio Top Traders — Query ➤](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-jup-studio-Token-on-Meteora-DBC)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query TopTraders($token: String) {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "volumeUsd"}
+      limit: {count: 100}
+      where: {Trade: {Currency: {MintAddress: {is: $token}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Trade {
+        Account {
+          Owner
+        }
+        Side {
+          Account {
+            Address
+          }
+          Type
+        }
+      }
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+```
+
+```json
+{
+  "token": "3Po3offygJjPg4cQpvc1AVT9JsYXyUapN2EKgFUbjups"
+}
+```
+
+</details>
