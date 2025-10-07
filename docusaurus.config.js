@@ -89,20 +89,20 @@ const config = {
         redirects: [
           // /docs/oldDoc -> /docs/newDoc
           {
-            to: "docs/blockchain/Solana/Pumpfun/Pump-Fun-API",
-            from: "/docs/blockchain/Solana/Pump-Fun-API"
+            to: "/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/",
+            from: "/docs/blockchain/Solana/Pump-Fun-API/"
           },
           {
-            to: "/docs/blockchain/Solana/Pumpfun/Pump-Fun-Marketcap-Bonding-Curve-API",
-            from: "/docs/blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API"
+            to: "/docs/blockchain/Solana/Pumpfun/Pump-Fun-Marketcap-Bonding-Curve-API/",
+            from: "/docs/blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/"
           },
           {
-            to: "docs/blockchain/Solana/Pumpfun/pump-fun-to-pump-swap",
-            from: "/docs/blockchain/Solana/pump-fun-to-pump-swap"
+            to: "/docs/blockchain/Solana/Pumpfun/pump-fun-to-pump-swap/",
+            from: "/docs/blockchain/Solana/pump-fun-to-pump-swap/"
           },
           {
-            to: "/docs/blockchain/Solana/Pumpfun/pump-swap-api",
-            from: "/docs/blockchain/Solana/pump-swap-api"
+            to: "/docs/blockchain/Solana/Pumpfun/pump-swap-api/",
+            from: "/docs/blockchain/Solana/pump-swap-api/"
           },
           {
             to: "/docs/blockchain/Ethereum/token-holders/token-holder-api/",
@@ -190,7 +190,7 @@ const config = {
           },
 
           {
-            to: "/docs/blockchain/Solana/Pump-Fun-API/",
+            to: "/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/",
             from: "/docs/examples/dextrades/Pump-Fun-API/",
           },
 
@@ -359,19 +359,19 @@ const config = {
             from: "/docs/examples/Solana/Orbic-API/",
           },
           {
-            to: "/docs/blockchain/Solana/Pump-Fun-API/",
+            to: "/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/",
             from: "/docs/examples/Solana/Pump-Fun-API/",
           },
           {
-            to: "/docs/blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/",
+            to: "/docs/blockchain/Solana/Pumpfun/Pump-Fun-Marketcap-Bonding-Curve-API/",
             from: "/docs/examples/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/",
           },
           {
-            to: "/docs/blockchain/Solana/pump-fun-to-pump-swap/",
+            to: "/docs/blockchain/Solana/Pumpfun/pump-fun-to-pump-swap/",
             from: "/docs/examples/Solana/pump-fun-to-pump-swap/",
           },
           {
-            to: "/docs/blockchain/Solana/pump-swap-api/",
+            to: "/docs/blockchain/Solana/Pumpfun/pump-swap-api/",
             from: "/docs/examples/Solana/pump-swap-api/",
           },
           {
