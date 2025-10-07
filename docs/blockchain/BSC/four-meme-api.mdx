@@ -503,6 +503,64 @@ query MyQuery($currency: String) {
 
 </details>
 
+## Get latest price of a Four.meme token
+
+We launched the [Price Index](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) in August 2025, allowing you to track price of any token trading onchain.
+Here's an example of [tracking Four.meme token prices](https://ide.bitquery.io/latest-token-price-on-four-meme-dex).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+{
+  Trading {
+    Pairs(
+      where: {Price: {IsQuotedInUsd: false}, Market: {Network: {is: "Binance Smart Chain"}, Program: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Token: {Address: {is: "0x2157de505dfaa51676d6d22c0424551fbeaf4444"}}, Interval: {Time: {Duration: {eq: 60}}}}
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+    ) {
+      Market {
+        Address
+        Network
+        Program
+        Protocol
+        ProtocolFamily
+      }
+      Price {
+        Average {
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+      }
+      Token {
+        Address
+        Name
+        Symbol
+      }
+      QuoteToken {
+        Address
+        Name
+        Symbol
+      }
+      Volume {
+        Base
+        Usd
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Get Price Change Percentage for a Four Meme Token
 
 Use the below query to get the price change in percentage for various time fields including `24 hours`, `1 hour` and `5 minutes`. Try it [here](https://ide.bitquery.io/Percentage-price-change-for-a-token).
