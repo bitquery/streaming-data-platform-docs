@@ -18,6 +18,7 @@ const sidebars = {
         "start/first-query",
         "start/starter-queries",
         "start/starter-subscriptions",
+        "start/endpoints",
         "start/embed",
         "start/errors",
         "start/getting-updates",
