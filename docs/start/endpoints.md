@@ -61,6 +61,6 @@ US regional endpoints are coming soon. In the meantime, US-based users can use t
 
 ## Next Steps
 
-- Learn about [API authentication](/docs/authorisation/how-to-use)
-- Explore the [GraphQL IDE](/docs/ide/login)
-- Check [API examples](/docs/examples/)
+- Learn about [API authentication](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+- Explore the [GraphQL IDE](https://ide.bitquery.io/)
+- Check [API examples](https://docs.bitquery.io/docs/blockchain/introduction/)
