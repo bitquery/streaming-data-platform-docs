@@ -63,12 +63,18 @@ Here's an example of the data structure you'll receive:
 
 ## Filtering Options
 
-You can filter balance updates by:
+The filter options are defined in the `request.proto` file. You can filter balance updates using the following filters:
 
-- **Addresses**: `senders`, `receivers`, `program_ids`
-- **Tokens**: Specific mint addresses (e.g., WSOL, USDC)
-- **Value thresholds**: Minimum balance change amounts
-- **Account types**: Native accounts vs token accounts
+```protobuf
+message SubscribeBalanceUpdateRequest {
+  AddressFilter address = 1;
+  AddressFilter token = 2;
+}
+```
+
+Available filters:
+- **address**: Filter by account address
+- **token**: Filter by token mint address (e.g., WSOL, USDC)
 
 ## Schema Reference
 

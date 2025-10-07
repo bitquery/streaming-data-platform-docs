@@ -124,14 +124,22 @@ Here's an example of the data structure you'll receive:
 
 ## Filtering Options
 
-You can filter DEX orders by:
+The filter options are defined in the `request.proto` file. You can filter DEX orders using the following filters:
 
-- **Addresses**: `program`, `account`
-- **Tokens**: Specific mint addresses (e.g., WSOL, USDC)
-- **Order types**: Buy/sell orders, market/limit orders
-- **Protocols**: Specific DEX protocols or order book systems
-- **Price ranges**: Minimum/maximum order prices
-- **Order sizes**: Minimum/maximum order amounts
+```protobuf
+message SubscribeOrdersRequest {
+  AddressFilter program = 1;
+  AddressFilter pool = 2;
+  AddressFilter token = 3;
+  AddressFilter trader = 4;
+}
+```
+
+Available filters:
+- **program**: Filter by DEX program address
+- **pool**: Filter by specific pool/market address
+- **token**: Filter by token mint address (e.g., WSOL, USDC)
+- **trader**: Filter by trader's wallet address
 
 
 ## Order Data Fields

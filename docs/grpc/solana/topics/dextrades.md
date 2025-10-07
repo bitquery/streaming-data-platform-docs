@@ -88,12 +88,22 @@ Here's an example of the data structure you'll receive:
 
 ## Filtering Options
 
-You can filter DEX trades by:
+The filter options are defined in the `request.proto` file. You can filter DEX trades using the following filters:
 
-- **Addresses**: `Buy`, `Sell` accounts, `program`
-- **Tokens**: Specific mint addresses (e.g., WSOL, USDC)
-- **Value thresholds**: Minimum trade amounts
-- **Protocols**: Specific DEX protocols or pools
+```protobuf
+message SubscribeTradesRequest {
+  AddressFilter program = 1;
+  AddressFilter pool = 2;
+  AddressFilter token = 3;
+  AddressFilter trader = 4;
+}
+```
+
+Available filters:
+- **program**: Filter by DEX program address
+- **pool**: Filter by specific pool/market address
+- **token**: Filter by token mint address (e.g., WSOL, USDC)
+- **trader**: Filter by trader's wallet address
 
 ## Schema Reference
 

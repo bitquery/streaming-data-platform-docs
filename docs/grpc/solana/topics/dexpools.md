@@ -112,13 +112,20 @@ Here's an example of the data structure you'll receive:
 
 ## Filtering Options
 
-You can filter DEX pool events by:
+The filter options are defined in the `request.proto` file. You can filter DEX pool events using the following filters:
 
-- **Addresses**: `program`,`account`
-- **Tokens**: Specific mint addresses (e.g., WSOL, USDC)
-- **Pool addresses**: Specific market/pool addresses
-- **Protocols**: Specific DEX protocols or families
-- **Value thresholds**: Minimum liquidity change amounts
+```protobuf
+message SubscribePoolsRequest  {
+  AddressFilter program = 1;
+  AddressFilter pool = 2;
+  AddressFilter token = 3;
+}
+```
+
+Available filters:
+- **program**: Filter by DEX program address
+- **pool**: Filter by specific pool/market address
+- **token**: Filter by token mint address (e.g., WSOL, USDC)
 
 ## Pool Event Types
 

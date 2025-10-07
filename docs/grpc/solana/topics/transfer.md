@@ -123,13 +123,20 @@ Here's an example of the data structure you'll receive:
 
 ## Filtering Options
 
-You can filter transfers by:
+The filter options are defined in the `request.proto` file. You can filter transfers using the following filters:
 
-- **Addresses**: `program`, `account`
-- **Tokens**: Specific mint addresses (e.g., WSOL, USDC)
-- **Transfer amounts**: Minimum/maximum transfer values
-- **Accounts**: Specific sender or receiver addresses
-- **Token programs**: SPL Token, SPL Token 2022, or other token programs
+```protobuf
+message SubscribeTransfersRequest {
+  AddressFilter sender = 1;
+  AddressFilter receiver = 2;
+  AddressFilter token = 3;
+}
+```
+
+Available filters:
+- **sender**: Filter by sender's address
+- **receiver**: Filter by receiver's address
+- **token**: Filter by token mint address (e.g., WSOL, USDC)
 
 ## Transfer Types
 

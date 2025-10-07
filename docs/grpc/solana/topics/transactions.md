@@ -98,12 +98,18 @@ Here's an example of the data structure you'll receive:
 
 ## Filtering Options
 
-You can filter transactions by:
+The filter options are defined in the `request.proto` file. You can filter transactions using the following filters:
 
-- **Addresses**: `senders`, `receivers`, `program_ids`
-- **Programs**: Specific program addresses (e.g., Vote, Token, System)
-- **Account types**: Signers, writable accounts, program accounts
-- **Transaction status**: Success/failure filtering
+```protobuf
+message SubscribeTransactionsRequest {
+  AddressFilter program = 1;
+  AddressFilter signer = 2;
+}
+```
+
+Available filters:
+- **program**: Filter by program address (e.g., Vote, Token, System)
+- **signer**: Filter by signer's address
 
 ## Schema Reference
 
