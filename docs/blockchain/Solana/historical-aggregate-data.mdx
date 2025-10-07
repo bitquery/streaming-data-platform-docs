@@ -78,18 +78,23 @@ We are using `13WvP5LC5ETUpFipYM2f9AQzg6QA9S5opxGp2Scpump` in this case.
 query MyQuery {
   Solana(dataset: archive, aggregates: yes) {
     DEXTradeByTokens(
-      orderBy: {ascendingByField: "Block_TimeFeild"}
-      limit: {count: 1}
-      where: {Trade: {Currency: {MintAddress: {is: "13WvP5LC5ETUpFipYM2f9AQzg6QA9S5opxGp2Scpump"}}}}
+      orderBy: { ascendingByField: "Block_TimeFeild" }
+      limit: { count: 1 }
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "13WvP5LC5ETUpFipYM2f9AQzg6QA9S5opxGp2Scpump" }
+          }
+        }
+      }
     ) {
       Block {
-        TimeFeild: Time(interval: {count: 24, in: hours})
+        TimeFeild: Time(interval: { count: 24, in: hours })
       }
       sum(of: Trade_Side_AmountInUSD)
     }
   }
 }
-
 ```
 
 ## Top 10 token traders
@@ -223,6 +228,54 @@ You can run the query [here](https://ide.bitquery.io/Price-ATH-query)
       aATH: quantile(of: Trade_PriceInUSD, level: 0.95)
     }
   }
+}
+```
+
+## Get ATH Price, ATH Date, Price Change percentage in 24h, 7d, 30d
+
+Fetches a Solana token’s ATH price, ATH date, and price change percentages over the past 24h, 7d, and 30d using Bitquery Solana APIs.
+Try the [query to get ATH price, ATH date, price change](https://ide.bitquery.io/ath-with-price-delta_1).
+
+```
+query ($token: String) {
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      where: {Trade: {Side: {Currency: {MintAddress: {in: ["11111111111111111111111111111111", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", "So11111111111111111111111111111111111111112"]}}, AmountInUSD: {gt: "10"}}, Currency: {MintAddress: {is: $token}}, PriceAsymmetry: {lt: 0.01}}, Transaction: {Result: {Success: true}}}
+      limit: {count: 1}
+    ) {
+      Trade {
+        Price_24h_ago: PriceInUSD(
+          minimum: Block_Slot
+          if: {Block: {Time: {since_relative: {hours_ago: 24}}}}
+        )
+        Price_7d_ago: PriceInUSD(
+          minimum: Block_Slot
+          if: {Block: {Time: {since_relative: {days_ago: 7}}}}
+        )
+        Price_30d_ago: PriceInUSD(
+          minimum: Block_Slot
+          if: {Block: {Time: {since_relative: {days_ago: 30}}}}
+        )
+        CurrentPrice: PriceInUSD(maximum: Block_Slot)
+      }
+      change24hr: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_24h_ago) / $Trade_Price_24h_ago) * 100"
+      )
+      change7d: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_7d_ago) / $Trade_Price_7d_ago) * 100"
+      )
+      change30d: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_30d_ago) / $Trade_Price_30d_ago) * 100"
+      )
+      aATH: quantile(of: Trade_PriceInUSD, level: 0.95)
+      Block {
+        Time
+      }
+    }
+  }
+}
+{
+  "token": "2tnA2ZmwmgUZLyYLi97zbwsFBXAqpMEcHu9Cv9JW6m26"
 }
 ```
 
