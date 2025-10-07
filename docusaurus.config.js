@@ -89,6 +89,22 @@ const config = {
         redirects: [
           // /docs/oldDoc -> /docs/newDoc
           {
+            to: "docs/blockchain/Solana/Pumpfun/Pump-Fun-API",
+            from: "/docs/blockchain/Solana/Pump-Fun-API"
+          },
+          {
+            to: "/docs/blockchain/Solana/Pumpfun/Pump-Fun-Marketcap-Bonding-Curve-API",
+            from: "/docs/blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API"
+          },
+          {
+            to: "docs/blockchain/Solana/Pumpfun/pump-fun-to-pump-swap",
+            from: "/docs/blockchain/Solana/pump-fun-to-pump-swap"
+          },
+          {
+            to: "/docs/blockchain/Solana/Pumpfun/pump-swap-api",
+            from: "/docs/blockchain/Solana/pump-swap-api"
+          },
+          {
             to: "/docs/blockchain/Ethereum/token-holders/token-holder-api/",
             from: "/docs/examples/balances/tokenHolders-api/",
           },

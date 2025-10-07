@@ -1,0 +1,115 @@
+---
+title: PumpFun API Documentation
+description: Collection of PumpFun APIs on Solana organized by functionality.
+slug: /blockchain/Solana/PumpFun/
+keywords:
+  - PumpFun API
+  - Pump Fun Solana API
+  - PumpFun DEX API
+  - PumpFun GraphQL API
+  - PumpFun Marketcap API
+  - PumpSwap API
+  - PumpFun to PumpSwap API
+  - Solana bonding curve API
+  - Best PumpFun API
+  - PumpFun token data API
+---
+
+In this section we will see how to fetch PumpFun related data via **Bitquery APIs** and **Streams**.
+
+To get started, [signup](https://account.bitquery.io/auth/signup?redirect_to=https%3A%2F%2Fide.bitquery.io%2F) with Bitquery and get your [Access Token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these](https://docs.bitquery.io/docs/authorisation/how-to-generate/) steps. 
+
+If you need help getting data on PumpFun, reach out to [support](https://t.me/Bloxy_info)
+
+## What is PumpFun API?
+
+Bitquery PumpFun APIs help you fetch on-chain data for PumpFun that includes:
+- **Token Trades**
+- **Trade Prices**
+- **Token Creation**
+- **Creator Holdings**
+- **Token Holdings**
+- **Bonding Curve Progress**
+- **Migration to Pump swap**
+- **Trades of a user**
+- **Trade Metrics** - Volume, Trades, Sellers & Buyers, etc.
+- **Token Liquidity**
+- **Token Price Change**
+- **Historical Data for Aggreagated Metrics**
+
+## What are capabilities of Bitquery PumpFun API?
+
+Bitquery PumpFun APIs are based on GraphQL, and are very flexible. You can fetch trades, token creation, token holdings, bonding curve progress and migration information for a specific token or wallet for a given time period, and join with other information.
+
+**Solana RPC**
+
+- JSON-RPC endpoint exposing raw on-chain state & transactions
+- No built-in history or analytics—any indexing/aggregation you build or outsource
+- Ideal for submitting transactions
+
+**Bitquery Solana API**
+
+- GraphQL endpoint over pre-indexed, parsed Solana data (token transfers, DEX trades, NFTs, etc.)
+- Historical data, joins, aggregations & real-time subscriptions
+- Great for real-time data and historical backtesting without running your own indexer
+
+## Difference between Solana Geyser stream and Bitquery Kafka Stream?
+
+**Solana Geyser stream**
+
+- **Data & Protocol**: Runs as a plugin in your own Solana validator, emitting raw on-chain events (account updates, slot status changes, processed transactions, block metadata) over binary or gRPC feeds.
+- **Infra & Maintenance**: You must host, scale, and secure the node yourself, parse and index all raw data client-side, and deal with only basic filtering—latency and reliability depend entirely on your setup; no built-in historical querying.
+
+**Bitquery Kafka Stream**
+
+- **Data & Protocol**: Provides fully managed Kafka topics—`solana.dextrades.proto`, `solana.tokens.proto`, and `solana.transactions.proto`—delivering pre-parsed, enriched Protocol-Buffers events (DEX trades, token transfers, supply/balance updates, instructions, blocks, etc.).
+- **Infra & Maintenance**: Enterprise-grade, auto-scaling Kafka streams with sub-second latency, schema-based filtering, instruction-level balance updates, built-in replication/failover—no node ops or custom parsing needed.
+
+Read more [here](https://docs.bitquery.io/docs/streams/real-time-solana-data/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
+
+## Does Bitquery support PumpFun Websocket and Webhooks?
+
+Bitquery supports websocket and webhooks — you can convert most of the GraphQL APIs into **GraphQL streams** by changing the word `query` to `subscription`. You can monitor this data via a websocket. More and [code samples available here](https://docs.bitquery.io/docs/subscriptions/websockets/)
+
+## PumpFun APIs
+
+- [Pump Fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API)
+- [Pump Swap API](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api)
+- [Marketcap Bonding Curve API](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API)
+- [Pump Fun to Pump Swap](https://docs.bitquery.io/docs/blockchain/Solana/pump-fun-to-pump-swap)
+
+## Related Solana APIs
+
+- [Solana Dex Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades)
+- [Solana Transactions](https://docs.bitquery.io/docs/blockchain/Solana/solana-transactions)
+- [Solana Transfers](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers)
+- [Solana Balance Updates](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates)
+- [Solana Instructions](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions)
+- [Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api)
+
+- [Building an AI Trading Agent on Solana](https://docs.bitquery.io/docs/blockchain/Solana/ai-agent-solana-data)
+
+## Videos
+
+import VideoPlayer from "../../../../src/components/videoplayer.js";
+
+### Video Tutorial | Get Live Prices, Metadata, OHLCV, Trading Pair Stats and Charts
+
+<VideoPlayer url="https://www.youtube.com/watch?v=SWqDSKHFJGI" />
+
+### Video Tutorial | How to Get the OHLC Data & Price of a Token on Pump Fun DEX in Realtime
+
+<VideoPlayer url="https://youtu.be/vixWQ1fzY3M" />
+
+### Video Tutorial | How to Track PumpFun DEX Trades and Newly Launched Tokens in Realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=QV8zBnmDFxY" />
+
+### Video Tutorial | How to get Token Holders and Trading Volume for a PumpFun Token
+
+<VideoPlayer url="https://www.youtube.com/watch?v=yGgKbv853SA" />
+
+### Video Tutorial | How to track the PumpFun Tokens which are about to Graduate to PumpSwap in Realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=ZB1Rir29Pnw" />
+

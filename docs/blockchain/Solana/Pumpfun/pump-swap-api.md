@@ -19,7 +19,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 
 Join us on [Telegram](https://t.me/Bloxy_info) for support and integration help.
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
+import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 <head>
 <title>PumpSwap API - Solana - Tokens, Trades, Live Prices</title>

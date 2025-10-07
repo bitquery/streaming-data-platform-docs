@@ -435,11 +435,15 @@ const sidebars = {
             {
               type: "category",
               label: "PumpFun",
+              link: {
+                type: "doc",
+                id: "blockchain/Solana/Pumpfun/index",
+              },
               items: [
-                "blockchain/Solana/Pump-Fun-API",
-                "blockchain/Solana/pump-swap-api",
-                "blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API",
-                "blockchain/Solana/pump-fun-to-pump-swap",
+                "blockchain/Solana/Pumpfun/Pump-Fun-API",
+                "blockchain/Solana/Pumpfun/pump-swap-api",
+                "blockchain/Solana/Pumpfun/Pump-Fun-Marketcap-Bonding-Curve-API",
+                "blockchain/Solana/Pumpfun/pump-fun-to-pump-swap",
               ],
             },
             {
