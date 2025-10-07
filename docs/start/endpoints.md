@@ -7,7 +7,7 @@ Bitquery provides multiple regional endpoints to optimize latency and performanc
 Bitquery offers three API versions:
 
 - **V1**: GraphQL API for historical blockchain data
-- **V2** & **EAP**: Streaming GraphQL API with real-time and historical data (varies from blockchain to blockhain)
+- **V2** & **EAP**: Streaming GraphQL API with real-time and historical data (varies from blockchain to blockchain)
 
 :::tip
 For optimal performance, use the endpoint closest to your application's deployment region.
