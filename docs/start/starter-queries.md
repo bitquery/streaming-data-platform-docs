@@ -100,6 +100,12 @@ Track token activity (OHLC, price, volume) every 1 second on FourMeme DEX (BSC).
 
 ## Four Meme API
 
+### Stream Real-time MarketCap of FourMeme Tokens
+
+Real-time market cap stream with OHLC for FourMeme tokens at 1-second intervals. Market cap is calculated from price using fixed 1 billion supply.
+
+▶️[Real-time Mcap](https://ide.bitquery.io/Real-Time-Marektcap-and-price-for-Four-meme-tokens)
+
 ### Trade Metrics of a Four Meme Token
 
 This query returns the traded volume and number of trades for a particular Four Meme token in different time frames, namely 24 hours, 1 hour and 5 minutes.  
