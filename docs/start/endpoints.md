@@ -4,10 +4,10 @@ Bitquery provides multiple regional endpoints to optimize latency and performanc
 
 ## Overview
 
-Bitquery offers three API versions:
+Bitquery offers two API versions:
 
 - **V1**: GraphQL API for historical blockchain data
-- **V2** & **EAP**: Streaming GraphQL API with real-time and historical data (varies from blockchain to blockchain)
+- **V2**: Streaming GraphQL API with real-time and historical data (varies from blockchain to blockchain)
 
 :::tip
 For optimal performance, use the endpoint closest to your application's deployment region.
@@ -27,11 +27,7 @@ https://graphql.bitquery.io
 https://streaming.bitquery.io/graphql
 ```
 
-### EAP - Streaming API
-
-```
-https://streaming.bitquery.io/eap
-```
+**Supported Chains**: Ethereum, BSC, Base, Matic (Polygon), Optimism, Arbitrum, Solana, Tron
 
 ## Asia
 
@@ -47,11 +43,7 @@ https://asia.graphql.bitquery.io
 https://asia.streaming.bitquery.io/graphql
 ```
 
-### EAP - Streaming API
-
-```
-https://asia.streaming.bitquery.io/eap
-```
+**Supported Chains**: Ethereum, BSC, Base, Matic (Polygon), Optimism, Arbitrum, Solana, Tron
 
 ## United States
 
