@@ -73,11 +73,14 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 - [Subscribe the Latest Trades on Four Meme ➤](#subscribe-the-latest-trades-on-four-meme)
 - [Get Latest Buys and Sells for a Four Meme Token ➤](#get-latest-buys-and-sells-for-a-four-meme-token)
 - [Get Trade Metrics of a Four Meme Token ➤](#get-trade-metrics-of-a-four-meme-token)
+- [Get latest price of a Four.meme token ➤](#get-latest-price-of-a-fourmeme-token)
 - [Get Price Change Percentage for a Four Meme Token ➤](#get-price-change-percentage-for-a-four-meme-token)
 - [Get OHLCV data of a Four Meme Token ➤](#get-ohlcv-data-of-a-four-meme-token)
+- [Get Trade Volume and Number of Trades for a Four Meme Token ➤](#get-trade-volume-and-number-of-trades-for-a-four-meme-token)
 
 ### 2. Token Lifecycle, Liquidity & Migrations
 
+- [Get Newly Created Tokens on Four Meme ➤](#get-newly-created-tokens-on-four-meme)
 - [Track Four Meme Token Migrations ➤](#track-four-meme-token-migrations)
 - [Bonding Curve Progress API for FourMeme token ➤](#bonding-curve-progress-api-for-fourmeme-token)
 - [Get Four Meme Tokens which are above 95% Bonding Curve Progress ➤](#get-four-meme-tokens-which-are-above-95-bonding-curve-progress)
@@ -95,7 +98,20 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 ### 4. Market Cap & Getting Started
 
 - [Get Market Cap of a Four Meme Token ➤](#get-market-cap-of-a-four-meme-token)
+- [Bitquery DEX Data Access Options ➤](#bitquery-dex-data-access-options)
 - [Getting Started with Bitquery ➤](#getting-started-with-bitquery)
+
+### 5. Video Tutorials
+
+- [Video Tutorial | How to get Bonding Curve Progress of any Four Meme Token ➤](#video-tutorial--how-to-get-bonding-curve-progress-of-any-four-meme-token)
+- [Video Tutorial | How to track the Four Meme Tokens which are about to Graduate in Realtime ➤](#video-tutorial--how-to-track-the-four-meme-tokens-which-are-about-to-graduate-in-realtime)
+- [Video Tutorial | How to get Liquidity of a Four Meme Token ➤](#video-tutorial--how-to-get-liquidity-of-a-four-meme-token)
+- [Video Tutorial | How to get Top Traders of a Four Meme Token on Solana Four Meme DEX ➤](#video-tutorial--how-to-get-top-traders-of-a-four-meme-token-on-solana-four-meme-dex)
+- [Video Tutorial | How to Get the OHLCV Data of a token on Four Meme DEX ➤](#video-tutorial--how-to-get-the-ohlcv-data-of-a-token-on-four-meme-dex)
+
+### 6. Real World Projects
+
+- [Real World Projects with Four Meme API ➤](#real-world-projects-with-four-meme-api)
 
 ## Bitquery DEX Data Access Options
 
@@ -251,69 +267,75 @@ query MyQuery {
 
 ## Get Newly Created Tokens on Four Meme
 
-Using [this](https://ide.bitquery.io/FourMeme--Newly-Created-Token-by-Tracking-Transfer#) query we could get newly created tokens that are listed on the exchange.
+[Run Query](https://ide.bitquery.io/track-Four-meme-token-creation-using-events)
 
-<details>
+This query retrieves newly created tokens on Four Meme by listening to the `TokenCreate` event. The response provides:
+
+**Token Information:**
+
+- **creator**: Wallet address of the token creator
+- **token**: Contract address of the newly created token
+- **name**: Token name
+- **symbol**: Token symbol/ticker
+- **totalSupply**: Total supply (always 1 billion tokens)
+
+**Launch Details:**
+
+- **requestId**: Unique identifier for the token creation
+- **launchTime**: Unix timestamp of when the token launched
+- **launchFee**: Fee paid
+
+
+ <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
   EVM(dataset: realtime, network: bsc) {
-    Transfers(
-      orderBy: { descending: Block_Time }
-      limit: { count: 10 }
+    Events(
       where: {
         Transaction: {
           To: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
         }
-        Transfer: {
-          Sender: { is: "0x0000000000000000000000000000000000000000" }
-        }
+        Log: { Signature: { Name: { is: "TokenCreate" } } }
       }
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
     ) {
-      Transfer {
-        Amount
-        AmountInUSD
-        Currency {
-          Name
-          Symbol
-          SmartContract
-          Decimals
-        }
-        Id
-        Index
-        Success
-        Type
-        URI
-        Sender
-        Receiver
-      }
-      Call {
-        From
-        Value
-        To
+      Log {
         Signature {
           Name
           Signature
         }
       }
-      Log {
-        SmartContract
-        Signature {
-          Name
+      Arguments {
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
         }
-      }
-      TransactionStatus {
-        Success
+        Name
+        Type
       }
       Transaction {
         Hash
-        From
         To
-      }
-      Block {
-        Time
-        Number
+        From
       }
     }
   }
@@ -1212,6 +1234,7 @@ query MyQuery {
 - [Video](https://youtu.be/mwmoZAo7oFE?si=_-4n2fL-lH6la-8i)
 
 ### Four Meme Sniper Bot
+
 - [Tutorial](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 - [Source Code](https://github.com/Kshitij0O7/evm-sniper)
 - [Video](https://youtu.be/vgOHgqTJmj0?si=yfUguMWdMtxRJMvg)
