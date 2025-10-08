@@ -5,15 +5,27 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 ## Table of Contents
 
 - [Crypto Price APIs](#crypto-price-apis)
-- [Solana APIs](#solana-trade-api)
+- [Four Meme API](#four-meme-api)
+- [Solana Trade API](#solana-trade-api)
+- [Solana Balance API](#solana-balance-api)
+- [Solana Pools API](#solana-pools-api)
+- [Solana Token API](#solana-token-api)
+- [Other Solana API](#other-solana-api)
+- [Solana historical data](#solana-historical-data)
 - [PumpFun - Pumpswap API](#pumpfun---pumpswap-api)
 - [Raydium API](#raydium-api)
-- [EVM APIs](#evm-token-holder-api)
+- [Raydium Launchpad API](#raydium-launchpad-api)
+- [LetsBonk.fun API](#letsbonkfun-api)
+- [EVM Token Holder API](#evm-token-holder-api)
+- [Ethereum API](#ethereum-api)
+- [BSC API](#bsc-api)
+- [Pancakeswap APIs](#pancakeswap-apis)
 - [NFT APIs](#nft-apis)
-- [TRON APIs](#tron)
-- [Bitcoin APIs](#bitcoin)
-- [Cardano APIs](#cardano)
-- [Ripple APIs](#ripple)
+- [TRON](#tron)
+- [Bitcoin](#bitcoin)
+- [Cardano](#cardano)
+- [Ripple](#ripple)
+- [Cosmos](#cosmos)
 - [More APIs](#more-apis)
 
 ## Crypto Price APIs
@@ -85,6 +97,23 @@ Monitor Raydium Launchlab token listings on Solana with 1-second OHLC and volume
 Track token activity (OHLC, price, volume) every 1 second on FourMeme DEX (BSC).
 
 ▶️ [FourMeme 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders](https://ide.bitquery.io/FourMeme-DEX-tokens-1-second-price-stream-with-OHLC)
+
+## Four Meme API
+
+### Trade Metrics of a Four Meme Token
+
+This query returns the traded volume and number of trades for a particular Four Meme token in different time frames, namely 24 hours, 1 hour and 5 minutes.  
+▶️[Token Trade Metrics](https://ide.bitquery.io/volume-and-trades-for-a-token-in-different-time-frames_1)
+
+### Latest and Historical Trades of a User
+
+Get the latest and historical trades by a user on `Four Meme` platform.  
+▶️[User Trades](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme)
+
+### Liquidity Addition for Four Meme Token
+
+Get the liquidity addition events for a specific token on the Four Meme Exchange.  
+▶️[Liquidity Addition](https://ide.bitquery.io/Liquidity-Added-to-specific-tokens-on-Four-meme)
 
 ## Solana Trade API
 
@@ -529,23 +558,6 @@ Get the latest price of a BEP-20 token on BSC network.
 
 Get all trading pairs present on a BSC network DEX.  
 ▶️[Trading Pairs](https://ide.bitquery.io/trading-pairs-on-a-specific-dex_1)
-
-## Four Meme API
-
-### Trade Metrics of a Four Meme Token
-
-This query returns the traded volume and number of trades for a particular Four Meme token in different time frames, namely 24 hours, 1 hour and 5 minutes.  
-▶️[Token Trade Metrics](https://ide.bitquery.io/volume-and-trades-for-a-token-in-different-time-frames_1)
-
-### Latest and Historical Trades of a User
-
-Get the latest and historical trades by a user on `Four Meme` platform.  
-▶️[User Trades](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme)
-
-### Liquidity Addition for Four Meme Token
-
-Get the liquidity addition events for a specific token on the Four Meme Exchange.  
-▶️[Liquidity Addition](https://ide.bitquery.io/Liquidity-Added-to-specific-tokens-on-Four-meme)
 
 ## Pancakeswap APIs
 
