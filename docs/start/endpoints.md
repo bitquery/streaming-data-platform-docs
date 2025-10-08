@@ -23,11 +23,18 @@ https://graphql.bitquery.io
 
 ### V2 - Streaming API
 
-```
-https://streaming.bitquery.io/graphql
-```
+The following chains are available via the Europe regional endpoint:
 
-**Supported Chains**: Ethereum, BSC, Base, Matic (Polygon), Optimism, Arbitrum, Solana, Tron
+| Blockchain | Endpoint |
+|------------|----------|
+| Ethereum | `https://streaming.bitquery.io/graphql` |
+| BSC (Binance Smart Chain) | `https://streaming.bitquery.io/graphql` |
+| Base | `https://streaming.bitquery.io/graphql` |
+| Solana | `https://streaming.bitquery.io/graphql` |
+| Arbitrum | `https://streaming.bitquery.io/graphql` |
+| Optimism | `https://streaming.bitquery.io/graphql` |
+| Tron | `https://streaming.bitquery.io/graphql` |
+| Matic (Polygon) | `https://streaming.bitquery.io/graphql` |
 
 ## Asia
 
@@ -39,11 +46,18 @@ https://asia.graphql.bitquery.io
 
 ### V2 - Streaming API
 
-```
-https://asia.streaming.bitquery.io/graphql
-```
+The following chains are available via the Asia regional endpoint:
 
-**Supported Chains**: Ethereum, BSC, Base, Matic (Polygon), Optimism, Arbitrum, Solana, Tron
+| Blockchain | Endpoint |
+|------------|----------|
+| Ethereum | `https://asia.streaming.bitquery.io/graphql` |
+| BSC (Binance Smart Chain) | `https://asia.streaming.bitquery.io/graphql` |
+| Base | `https://asia.streaming.bitquery.io/graphql` |
+| Solana | `https://asia.streaming.bitquery.io/graphql` |
+| Arbitrum | `https://asia.streaming.bitquery.io/graphql` |
+| Optimism | `https://asia.streaming.bitquery.io/graphql` |
+| Tron | `https://asia.streaming.bitquery.io/graphql` |
+| Matic (Polygon) | `https://asia.streaming.bitquery.io/graphql` |
 
 ## United States
 
