@@ -80,6 +80,7 @@ This query fetches the latest DEX trades on the Zora protocol (`zora_v4`) on Bas
   EVM(dataset: realtime, network: base) {
     DEXTrades(
       limit: { count: 20 }
+      orderBy: { descending: Block_Time }
       where: { Trade: { Dex: { ProtocolName: { is: "zora_v4" } } } }
     ) {
       Block {
@@ -186,13 +187,14 @@ This query fetches the latest DEX trades on the Zora protocol (`zora_v4`) on Bas
 
 ## Latest Trades of a Token on Zora
 
-[Run Query](https://ide.bitquery.io/Latest-Trades-of-a-Token-on-Zora)
+[Run Query](https://ide.bitquery.io/Latest-Trades-of-a-Token-on-Zora_2)
 
 ```
 {
   EVM(dataset: realtime, network: base) {
     DEXTrades(
       limit: {count: 20}
+       orderBy: {descending: Block_Time}
       where: {Trade: {Dex: {ProtocolName: {is: "zora_v4"}}, Buy: {Currency: {SmartContract: {is: "0xb3bcf37655c249426c20dd29c67afc0e192bd703"}}}}}
     ) {
       Block {
