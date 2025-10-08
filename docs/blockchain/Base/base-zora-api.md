@@ -187,7 +187,7 @@ This query fetches the latest DEX trades on the Zora protocol (`zora_v4`) on Bas
 
 ## Latest Trades of a Token on Zora
 
-[Run Query](https://ide.bitquery.io/Latest-Trades-of-a-Token-on-Zora_2)
+[Run Query](https://ide.bitquery.io/Latest-Trades-of-a-Token-on-Zora-Base)
 
 ```
 {
@@ -195,7 +195,7 @@ This query fetches the latest DEX trades on the Zora protocol (`zora_v4`) on Bas
     DEXTrades(
       limit: {count: 20}
        orderBy: {descending: Block_Time}
-      where: {Trade: {Dex: {ProtocolName: {is: "zora_v4"}}, Buy: {Currency: {SmartContract: {is: "0xb3bcf37655c249426c20dd29c67afc0e192bd703"}}}}}
+      where: {Trade: {Dex: {ProtocolName: {is: "zora_v4"}}, Buy: {Currency: {SmartContract: {is: "0x1111111111166b7fe7bd91427724b487980afc69"}}}}}
     ) {
       Block {
         Time
