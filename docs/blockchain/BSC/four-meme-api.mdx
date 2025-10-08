@@ -195,24 +195,16 @@ BondingCurveProgress = 100 - (((balance - 200000000) \* 100) / 800000000)
 
 - **Balance Retrieval**:
   - The `balance` is the four meme token balance at this Four Meme: Proxy address (0x5c952063c7fc8610FFDB798152D69F0B9550762b).
-  - Use this query to fetch the balance: [Query Link](https://ide.bitquery.io/Get-balance-of-an-address-for-a-specified-currency).
+  - Use this query to fetch the balance: [Query Link](https://ide.bitquery.io/Get-balance-of-an-address-for-a-specified-currency_1).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
-
 ```graphql
-query MyQuery {
+query MyQuery($token: String) {
   EVM(dataset: combined, network: bsc) {
     BalanceUpdates(
-      where: {
-        BalanceUpdate: {
-          Address: { is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b" }
-        }
-        Currency: {
-          SmartContract: { is: "0x366f446d2583fa4e703aa24721c820d5e5424444" }
-        }
-      }
-      orderBy: { descendingByField: "balance" }
+      where: {BalanceUpdate: {Address: {is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b"}}, Currency: {SmartContract: {is: $token}}}
+      orderBy: {descendingByField: "balance"}
     ) {
       Currency {
         Name
@@ -225,7 +217,15 @@ query MyQuery {
   }
 }
 ```
+</details>
 
+<details>
+  <summary>Click to expand Query Varibles (Paste this in variables section on IDE)</summary>
+```json
+{
+  "token": "0x13378bcbbc386eea99f09bc716f2c80979484444"
+}
+```
 </details>
 
 ## Get Four Meme Tokens which are above 95% Bonding Curve Progress
@@ -284,7 +284,6 @@ This query retrieves newly created tokens on Four Meme by listening to the `Toke
 - **requestId**: Unique identifier for the token creation
 - **launchTime**: Unix timestamp of when the token launched
 - **launchFee**: Fee paid
-
 
  <details>
   <summary>Click to expand GraphQL query</summary>
@@ -887,87 +886,79 @@ query MyQuery(
 
 </details>
 
-## Get Market Cap of a Four Meme Token
+## Get Realtime Market Cap and Price of a Four Meme Token
 
-To get the market cap of a token we need two things, the latest `PriceInUSD` and `total supply` of the token. [This](https://ide.bitquery.io/latest-token-price-in-usd) query helps with getting the latest USD price of a token.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query MyQuery($currency: String) {
-  EVM(network: bsc) {
-    DEXTradeByTokens(
-      where: { Trade: { Currency: { SmartContract: { is: $currency } } } }
-      orderBy: { descending: Block_Time }
-      limit: { count: 1 }
-    ) {
-      Trade {
-        PriceInUSD
-      }
-    }
-  }
-}
-```
-
-```json
-{
-  "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
-}
-```
-
-</details>
-
-Also, [this](https://ide.bitquery.io/Total-supply-of-a-four-meme-token) query returns the total supply of a token.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query MyQuery($currency: String) {
-  EVM(network: bsc, dataset: combined) {
-    Transfers(
-      where: {
-        Transfer: {
-          Currency: { SmartContract: { is: $currency } }
-          Success: true
-        }
-      }
-    ) {
-      minted: sum(
-        of: Transfer_Amount
-        if: {
-          Transfer: {
-            Sender: { is: "0x0000000000000000000000000000000000000000" }
-          }
-        }
-      )
-      burned: sum(
-        of: Transfer_Amount
-        if: {
-          Transfer: {
-            Receiver: { is: "0x0000000000000000000000000000000000000000" }
-          }
-        }
-      )
-    }
-  }
-}
-```
-
-```json
-{
-  "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
-}
-```
-
-</details>
-
-Now, to get market cap we need to multiply the total supply and price, that is:
+To get the market cap of a token we need two things, the latest `PriceInUSD` and `total supply` of the token. Total Supply is 1,000,000,000 (1B) for four meme tokens so we just need to get price and multiply it with 1B. [This](https://ide.bitquery.io/Real-Time-Marektcap-and-price-of-a-four-meme-token) query helps with getting the latest USD price of a token and hence its latest Marketcap.
 
 ```
 Market Cap = Total Supply * PriceInUSD
 ```
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Pairs(
+      where: {
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Price: { IsQuotedInUsd: true }
+        Market: {
+          Protocol: { is: "fourmeme_v1" }
+          Network: { is: "Binance Smart Chain" }
+        }
+        Volume: { Usd: { gt: 5 } }
+        Token: { Address: { is: "0xf5bc78c8c762e4003742dacc31f3ba7091be4444" } }
+      }
+    ) {
+      Token {
+        Name
+        Symbol
+        Address
+      }
+      Market {
+        Protocol
+        Program
+        Network
+        Name
+        Address
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      marketcap: calculate(expression: "Price_Average_Mean * 1000000000")
+      Price {
+        Average {
+          Mean
+        }
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
 
 ## Track Liquidity Add Events for All Tokens on Four Meme
 
