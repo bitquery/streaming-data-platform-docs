@@ -787,7 +787,7 @@ subscription {
 
 For production-grade applications like MEV bots and sniper bots, we recommend using Kafka streams instead of GraphQL subscriptions. Kafka streams provide:
 
-- **Sub-millisecond Latency**: 10-100x faster than GraphQL streams
+- **Sub-second Latency**: Faster than GraphQL streams
 - **Higher Throughput**: Handle thousands of transactions per second
 - **Better Reliability**: Built-in retry and error handling
 - **Scalability**: Horizontal scaling for high-volume applications
@@ -810,7 +810,7 @@ message BroadcastedTransactionsMessage {
 - **Monitoring Bots**: Track market activity with enterprise-grade reliability
 
 **Learn More:**
-- [Kafka Protobuf Streams Documentation ➤](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/)
+- [Kafka Protobuf Streams Documentation ➤](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
 - [Building a Sniper Bot with Kafka ➤](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 - [Contact Us for Kafka Stream Access ➤](https://t.me/Bloxy_info)
 
