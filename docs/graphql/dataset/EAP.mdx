@@ -2,27 +2,23 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Early Access Program
 
+:::note Migration Notice
+Chains from the Early Access Program (EAP) have moved to v2.
+
+- **Existing customers**: You can continue using the EAP endpoint without making any changes.
+- **New users**: You must use the v2 endpoint for all blockchains.
+:::
+
 # Early Access Program (EAP)
 
-The Early Access Program (EAP) is a feature designed to provide users with access to streaming data across various blockchain networks, including Solana, Matic, and more, primarily for evaluation purposes. This initiative allows developers and researchers to explore and test real-time data from chains other than what we provide via V2 endpoint.
+The Early Access Program (EAP) provided users with access to streaming data across various blockchain networks, including Solana, Matic, and more. These chains have now been migrated to the v2 endpoint.
 
-> NOTE  
-> EAP is currently limited to real-time information and does not include historical data. We will update it for specific chains. Please keep an eye out on the telegram channel and newsletter.
+## How to Access v2 APIs
 
-## How to Access EAP
-
-Accessing the EAP is straightforward and involves a simple selection process within the Bitquery IDE interface. Navigate to [Bitquery IDE](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/eap) to get started.
-
-![](/img/ide/eap.png)
-
+You can access v2 APIs through the Bitquery IDE interface. Navigate to [Bitquery IDE](https://ide.bitquery.io/) to get started.
 
 You can find examples on [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades.mdx) and Matic in our examples section.
 
-## How to Authorize Requests on EAP Endpoint
+## How to Authorize Requests
 
-APIs on EAP use the same OAuth token mechanism as v2 APIs. Read more on how to generate a token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
-
-
-## Video Tutorial on How to Get EAP Data in Your Application
-
-<VideoPlayer url="https://youtu.be/GrWjkROydao" />
+APIs use OAuth token mechanism for authentication. Read more on how to generate a token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)

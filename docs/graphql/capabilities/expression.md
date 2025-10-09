@@ -2,7 +2,7 @@
 
 ## What is a Calculate Expression?
 
-An expression is a mathematical function that can be applied to metrics in a GraphQL query. Bitquery's EAP dataset supports expressions to allow you to calculate custom metrics, such as `Price Change` or `Price Change Percentage`.
+An expression is a mathematical function that can be applied to metrics in a GraphQL query. Bitquery's v1 and v2 APIs support expressions to allow you to calculate custom metrics, such as `Price Change` or `Price Change Percentage`.
 
 You can create an expression in a query using `calculate()` function.
 

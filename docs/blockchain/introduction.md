@@ -12,7 +12,7 @@ Bitquery provides the most comprehensive blockchain data platform, offering real
 
 Unlike traditional blockchain RPC providers that offer raw node data, Bitquery provides **pre-indexed, enriched, and analytics-ready** blockchain data through multiple interfaces:
 
-- **Real-time Streaming**: Live data via GraphQL subscriptions and Kafka streams
+- **Real-time Streaming**: Live data via GraphQL subscriptions, gRPC and Kafka streams
 - **Pre-computed Analytics**: Real-time OHLC with 1-second aggregation, moving averages, volume metrics, and more
 - **Cross-chain Aggregation**: Unified view of tokens and currencies across chains
 - **High Performance**: Sub-second response times for complex queries
@@ -64,7 +64,6 @@ Bitquery's dedicated **[Crypto Price API](https://docs.bitquery.io/docs/trading/
 - **TradingView Integration**: Ready-to-chart SDK for real-time price feeds
 
 **Available Endpoints:**
-- **EAP Endpoint**: Advanced analytics and complex queries
 - **Streaming Endpoint**: Real-time data via WebSocket subscriptions
 - **Kafka Topic**: `trading.prices` for high-volume streaming applications
 
@@ -145,7 +144,6 @@ Access real-time data from the mempool before transactions are confirmed, enabli
 - **Load Balancing**: Automatic traffic distribution across multiple endpoints
 
 **Advanced Analytics:**
-- **EAP Endpoint**: Enhanced analytics platform for complex queries and calculations
 - **Custom Aggregations**: Build sophisticated analytics with custom time windows and metrics
 - **Cross-chain Analytics**: Unified analytics across multiple blockchain ecosystems
 
@@ -164,9 +162,15 @@ Our primary interface for querying blockchain data with powerful filtering, aggr
 - **Pagination** with cursor-based and offset-based options
 - **Field selection** - request only the data you need to optimize performance
 
+:::note Migration Notice
+Chains from the Early Access Program (EAP) have moved to v2.
+
+- **Existing customers**: You can continue using the EAP endpoint without making any changes.
+- **New users**: You must use the v2 endpoint for all blockchains.
+:::
+
 **Endpoints:**
 - **V2 Primary Endpoint**: `https://streaming.bitquery.io/graphql`
-- **V2 EAP Endpoint**: `https://streaming.bitquery.io/eap` (for advanced analytics)
 - **V1 Endpoint**: `https://graphql.bitquery.io/` (for comprehensive blockchain support)
 
 ```graphql
@@ -389,7 +393,6 @@ for message in consumer:
 - **Custom Topics**: Create custom topics for specific data requirements
 - **Priority Support**: Dedicated support for Kafka infrastructure issues
 - **SLA Guarantees**: 99.9% uptime with performance SLAs
-- **Advanced Analytics**: EAP endpoint for complex queries and analytics
 - **Silent Disconnect/Reconnect**: Automatic connection management for production applications
 
 ### **Cloud Data Storage & Data Export**
@@ -647,7 +650,6 @@ A: Bitquery's mempool monitoring provides pre-confirmation data:
 ### Q: What advanced features are available for enterprise users?
 
 A: Enterprise users get access to advanced capabilities:
-- **EAP Endpoint**: Enhanced analytics platform for complex queries
 - **Backfilling**: Automatic recovery of missing data during interruptions
 - **Silent Disconnect/Reconnect**: Automatic connection management
 - **Dedicated Infrastructure**: Isolated clusters for high-volume customers

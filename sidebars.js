@@ -114,7 +114,6 @@ const sidebars = {
             "graphql/dataset/archive",
             "graphql/dataset/combined",
             "graphql/dataset/database",
-            "graphql/dataset/EAP",
             "graphql/dataset/network",
             "graphql/dataset/options",
             "graphql/dataset/realtime",

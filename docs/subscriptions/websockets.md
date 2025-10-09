@@ -12,12 +12,6 @@ Bitquery makes real-time data available using WebSockets. We use a specific WebS
 wss://streaming.bitquery.io/graphql
 ```
 
-Note for chains on the [EAP endpoint](https://streaming.bitquery.io/eap), the url is
-
-```
-wss://streaming.bitquery.io/eap
-```
-
 ### Limits
 
 You are charged for the number of subscriptions (aka streams) and not for the number of websockets. Read more on pricing for streams [here](https://docs.bitquery.io/docs/ide/points/#how-are-points-calculated-for-subscriptions)

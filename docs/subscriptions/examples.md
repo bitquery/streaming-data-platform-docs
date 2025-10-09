@@ -23,7 +23,6 @@ async def main():
         url="wss://streaming.bitquery.io/graphql?token=ory_at_...",
         headers={"Sec-WebSocket-Protocol": "graphql-ws"})
 
-    # Use `/eap` instead of `/graphql` if you are using chains on EAP endpoint
     await transport.connect()
     print("Connected")
 
@@ -74,9 +73,8 @@ Open any online code editor and use this JavaScript code to use the websocket. S
 const { WebSocket } = require("ws");
 const config = require("./config.json"); //store OAuth token
 
-// Use `/eap` instead of `/graphql` if you're using the EAP endpoint
 const bitqueryConnection = new WebSocket(
-  "wss://streaming.bitquery.io/eap?token=" + config.oauthtoken,
+  "wss://streaming.bitquery.io/graphql?token=" + config.oauthtoken,
   ["graphql-ws"]
 );
 

@@ -1,6 +1,6 @@
 ---
 slug: solana-dex
-title: Introducing new DEXs on Solana EAP
+title: Introducing new DEXs on Solana
 authors: [Divyasshree]
 tags: [new data]
 ---

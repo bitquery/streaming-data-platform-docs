@@ -13,14 +13,12 @@ Below, you'll find key changes and instructions on how to adapt your existing v1
 
 One of the major differences between v1 and v2 is the way API is authenticated. In v1, you use a API-KEY to authenticate your requests to `graphql.bitquery.io`.
 
-And in v2, you use OAuth token mentioned as `Bearer ory_...yourtoken` and authenticate your requests to `streaming.bitquery.io/graphql` or `streaming.bitquery.io/eap`. Read more on how to generate token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+And in v2, you use OAuth token mentioned as `Bearer ory_...yourtoken` and authenticate your requests to `streaming.bitquery.io/graphql`. Read more on how to generate token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
 
 ## Changes in Network Specification
 
 - **v1:** Specified using a generic identifier within a function, e.g., `ethereum(network: ethereum)`.
 - **v2:** Now requires a more specific `network` identifier and inclusion of a `dataset`. Example: `EVM(network: eth, dataset: combined)`.
-
-In the case of chains on [EAP endpoint](https://docs.bitquery.io/docs/graphql/dataset/EAP/), you need not mention the `dataset` as it includes only realtime information.
 
 **Example Conversion:**
 

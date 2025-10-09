@@ -1,6 +1,6 @@
 # GraphQL Joins
 
-Starting March 2025, Bitquery APIs support joins on the v2 and EAP endpoint.
+Starting March 2025, Bitquery APIs support joins on the v2 endpoint.
 
 The `joinPLACEHOLDER` function enables you to **embed a subquery** within your main query, allowing data retrieval from the same or a different cube. This is functionally **equivalent to an SQL `JOIN` statement**, providing more efficient and structured data fetching.
 
@@ -35,7 +35,7 @@ Here are the additional details from your document that you may want to include 
 
 ### 1. **Schemas Supported**
 
-- Joins are available for **EVM, Tron, and Solana schemas** in GraphQL v2 and EAP.
+- Joins are available for **EVM, Tron, and Solana schemas** in GraphQL v2.
 
 ### 2. **Join Query Structure**
 

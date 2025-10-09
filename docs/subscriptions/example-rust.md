@@ -35,7 +35,7 @@ graphql-client = "0.10.0" # Adjust version as necessary
 
 This is the basic outline of what we will do
 
--   Establish a WebSocket connection to Bitquery's streaming endpoint. Use use `/eap` instead of `/graphql` if you are using chains on EAP endpoint.
+-   Establish a WebSocket connection to Bitquery's streaming endpoint.
 -  Set up up a GraphQL subscription to receive real-time DEX trades data.
 -   The `subscribe` function handles the connection setup and starts the streaming operation.
 -   The `main` function initializes the subscription and processes the incoming data.
@@ -167,7 +167,7 @@ where
     <T as GraphQLQuery>::Variables: Send + Sync + Unpin,
     <T as GraphQLQuery>::ResponseData: std::fmt::Debug,
 {
-    let mut request = "wss://streaming.bitquery.io/eap".into_client_request()?;
+    let mut request = "wss://streaming.bitquery.io/graphql".into_client_request()?;
     request.headers_mut().insert(
         header::SEC_WEBSOCKET_PROTOCOL,
         HeaderValue::from_str("graphql-transport-ws")?,
