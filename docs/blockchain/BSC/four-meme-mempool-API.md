@@ -175,17 +175,20 @@ subscription {
 
 Track pending trades for a specific Four Meme token. Perfect for monitoring price impact before large trades execute.
 
-[Run Stream ➤](https://ide.bitquery.io/Four-Meme-specific-token-mempool-trades_1)
+[Run Stream ➤](https://ide.bitquery.io/Four-Meme-specific-token-mempool-trades_3)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription($token: String) {
-  EVM(network: bsc, mempool: true) {
+  EVM(network: bsc mempool:true) {
     DEXTrades(
-      where: {Trade: {Dex: {ProtocolName: {is: "fourmeme_v1"}}, Buy: {Currency: {SmartContract: {is: "0x2a5f6ca36a2931126933c1fb9e333a9ba8154444"}}}}any:[{Trade:{Buy:{Currency:{SmartContract:{is:$token}}}}},{Trade:{Sell:{Currency:{SmartContract:{is:$token}}}}}]}
+      where: {Trade:{Dex:{ProtocolFamily:{is:"FourMeme"}}} any:[{Trade:{Buy:{Currency:{SmartContract:{is:$token}}}}},{Trade:{Sell:{Currency:{SmartContract:{is:$token}}}}}]}
     ) {
+      Block{
+        Time
+      }
       Trade {
         Buy {
           Buyer
@@ -197,6 +200,9 @@ subscription($token: String) {
           Amount
           Price
           PriceInUSD
+        }
+        Dex{
+          ProtocolFamily
         }
         Sell {
           Seller
@@ -219,7 +225,7 @@ subscription($token: String) {
   }
 }
 {
-  "token": "0x2a5f6ca36a2931126933c1fb9e333a9ba8154444"
+  "token": "0x444416a582466fdae0f2fcdf0a859675f8ff6e9f"
 }
 ```
 
