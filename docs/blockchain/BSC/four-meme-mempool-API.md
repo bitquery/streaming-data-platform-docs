@@ -94,6 +94,7 @@ When a transaction is broadcasted to the BSC network but not yet included in a b
 - **Block Context**: Each batch of simulated transactions includes the block header used as execution context
 
 **Why Monitor Mempool?**
+
 - **First-mover Advantage**: Detect opportunities before they're confirmed on-chain
 - **MEV Opportunities**: Identify profitable front-running and back-running opportunities
 - **Sniper Bots**: Be first to trade newly launched tokens
@@ -122,7 +123,9 @@ Monitor all Four Meme DEX trades in real-time as they appear in the mempool, bef
 ```graphql
 subscription {
   EVM(network: bsc, mempool: true) {
-    DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "fourmeme_v1"}}}}) {
+    DEXTrades(
+      where: { Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } } } }
+    ) {
       Trade {
         Buy {
           Buyer
@@ -172,21 +175,16 @@ subscription {
 
 Track pending trades for a specific Four Meme token. Perfect for monitoring price impact before large trades execute.
 
-[Run Stream ➤](https://ide.bitquery.io/Four-Meme-specific-token-mempool-trades)
+[Run Stream ➤](https://ide.bitquery.io/Four-Meme-specific-token-mempool-trades_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-subscription {
+subscription($token: String) {
   EVM(network: bsc, mempool: true) {
     DEXTrades(
-      where: {
-        Trade: {
-          Dex: { ProtocolName: { is: "fourmeme_v1" } }
-          Buy: { Currency: { SmartContract: { is: "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40" } } }
-        }
-      }
+      where: {Trade: {Dex: {ProtocolName: {is: "fourmeme_v1"}}, Buy: {Currency: {SmartContract: {is: "0x2a5f6ca36a2931126933c1fb9e333a9ba8154444"}}}}any:[{Trade:{Buy:{Currency:{SmartContract:{is:$token}}}}},{Trade:{Sell:{Currency:{SmartContract:{is:$token}}}}}]}
     ) {
       Trade {
         Buy {
@@ -219,6 +217,9 @@ subscription {
       }
     }
   }
+}
+{
+  "token": "0x2a5f6ca36a2931126933c1fb9e333a9ba8154444"
 }
 ```
 
@@ -353,7 +354,9 @@ subscription {
   EVM(network: bsc, mempool: true) {
     Events(
       where: {
-        Transaction: { To: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" } }
+        Transaction: {
+          To: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
+        }
         Log: { Signature: { Name: { is: "TokenCreate" } } }
       }
     ) {
@@ -418,7 +421,9 @@ subscription {
   EVM(network: bsc, mempool: true) {
     Events(
       where: {
-        Transaction: { To: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" } }
+        Transaction: {
+          To: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
+        }
         Log: { Signature: { Name: { is: "TokenCreate" } } }
       }
     ) {
@@ -468,7 +473,9 @@ subscription {
   EVM(network: bsc, mempool: true) {
     Events(
       where: {
-        LogHeader: { Address: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" } }
+        LogHeader: {
+          Address: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
+        }
         Log: { Signature: { Name: { is: "LiquidityAdded" } } }
       }
     ) {
@@ -571,7 +578,9 @@ subscription {
   EVM(network: bsc, mempool: true) {
     Events(
       where: {
-        LogHeader: { Address: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" } }
+        LogHeader: {
+          Address: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
+        }
         Log: {
           Signature: {
             Name: { in: ["LiquidityAdded", "TokenGraduated", "PairCreated"] }
@@ -624,9 +633,7 @@ subscription {
   EVM(network: bsc, mempool: true) {
     DEXTrades(
       where: {
-        Trade: {
-          Dex: { ProtocolName: { is: "fourmeme_v1" } }
-        }
+        Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } } }
         Transaction: {
           From: { is: "0x7db00d1f5b8855d40827f34bb17f95d31990306e" }
         }
@@ -681,9 +688,7 @@ subscription {
   EVM(network: bsc, mempool: true) {
     DEXTrades(
       where: {
-        Trade: {
-          Dex: { ProtocolName: { is: "fourmeme_v1" } }
-        }
+        Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } } }
         Transaction: {
           From: {
             in: [
@@ -741,9 +746,7 @@ subscription {
       where: {
         Trade: {
           Dex: { ProtocolName: { is: "fourmeme_v1" } }
-          Sell: {
-            AmountInUSD: { gt: "5000" }
-          }
+          Sell: { AmountInUSD: { gt: "5000" } }
         }
       }
     ) {
@@ -810,6 +813,7 @@ message BroadcastedTransactionsMessage {
 - **Monitoring Bots**: Track market activity with enterprise-grade reliability
 
 **Learn More:**
+
 - [Kafka Protobuf Streams Documentation ➤](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
 - [Building a Sniper Bot with Kafka ➤](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 - [Contact Us for Kafka Stream Access ➤](https://t.me/Bloxy_info)
