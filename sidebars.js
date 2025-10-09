@@ -420,6 +420,7 @@ const sidebars = {
             "blockchain/BSC/bsc-transfers",
             "blockchain/BSC/gra-fun-api",
             "blockchain/BSC/four-meme-api",
+            "blockchain/BSC/four-meme-mempool-API",
             "blockchain/BSC/pancake-swap-api",
             "blockchain/BSC/bsc-mempool-stream",
           ],
