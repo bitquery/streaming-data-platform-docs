@@ -21,7 +21,7 @@ import config from "./configs.json";
 We are using the [Tokens Cube from the Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) which gives you price of a token on different chains in **USD**. You can use Pairs Cube as well to get price against specific currency.
  
 ```javascript
-const endpoint = "https://streaming.bitquery.io/eap";
+const endpoint = "https://streaming.bitquery.io/graphql";
 ```
 
 ```javascript

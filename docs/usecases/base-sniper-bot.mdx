@@ -176,7 +176,7 @@ export const getTokens = async (): Promise<Tokens> => {
     const axiosConfig: AxiosRequestConfig = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://streaming.bitquery.io/eap",
+      url: "https://streaming.bitquery.io/graphql",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.BITQUERY_TOKEN}`, // put your oauth token here

@@ -28,7 +28,7 @@ Along with that, we are also defining the `payload` and `headers` for the reques
 ```py
 def get_trades():
     token = st.secrets['token']
-    url = "https://streaming.bitquery.io/eap"
+    url = "https://streaming.bitquery.io/graphql"
 
     query = """
     {

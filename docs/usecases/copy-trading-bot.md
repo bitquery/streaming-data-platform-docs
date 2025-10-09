@@ -39,7 +39,7 @@ def getTrades():
 
 ```python
 
-url = "https://streaming.bitquery.io/eap"
+url = "https://streaming.bitquery.io/graphql"
 
     payload = json.dumps({
         "query": """subscription {
