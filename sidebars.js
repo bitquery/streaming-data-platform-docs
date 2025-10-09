@@ -630,6 +630,16 @@ const sidebars = {
           },
           items: ["examples/cross-chain/cross-chain-api"],
         },
+        {
+          type: "category",
+          label: "Prediction Markets",
+          link: {
+            type: "generated-index",
+            title: "Prediction Market APIs",
+            description: "APIs for accessing prediction market data and trading information",
+          },
+          items: ["examples/polymarket-api/polymarket-api"],
+        },
       ],
     },
     {
