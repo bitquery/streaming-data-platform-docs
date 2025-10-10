@@ -142,6 +142,16 @@ This API serves as the foundational layer of our trading-focused data suite, des
 - **Volume**: Base token, Quote token, USD equivalent
 - **Price Statistics**: Mean, median, weighted average
 
+### Moving Average Calculation Window
+
+All moving averages (Simple Moving Average, Weighted Moving Average, and Exponential Moving Average) use a **window size of 5 entries** for calculation, regardless of the time interval:
+
+- **1-second interval**: 5 entries of 1 second each
+- **60-second interval**: 5 entries of 60 seconds each  
+- **3600-second interval**: 5 entries of 3600 seconds (1 hour) each
+
+This consistent window size ensures comparable moving average calculations across all time intervals.
+
 ## Accessing the API
 
 ![](/img/trade_api/api.png)
