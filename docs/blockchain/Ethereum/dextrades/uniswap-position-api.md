@@ -448,6 +448,34 @@ query PositionDetailsByTokenId {
    - `collect`: Collect accumulated fees
 3. **Closure** (`burn`): Remove all liquidity and destroy NFT
 
+### Calculating Price Bands from Position Ticks
+
+Uniswap V3 positions are defined by tick ranges, which represent the price boundaries where liquidity is active. You can calculate the actual price band from the tick values returned in the position arguments.
+
+**Formula:**
+
+```
+price_lower = 1.0001 ** tick_lower
+price_upper = 1.0001 ** tick_upper
+```
+
+**Where:**
+- `tick_lower`: The lower tick boundary (available in Arguments)
+- `tick_upper`: The upper tick boundary (available in Arguments)
+- `1.0001`: The base multiplier used by Uniswap V3
+
+**Example:**
+
+If a position has:
+- `tick_lower = -100`
+- `tick_upper = 100`
+
+Then:
+- `price_lower = 1.0001 ** (-100) ≈ 0.990`
+- `price_upper = 1.0001 ** 100 ≈ 1.010`
+
+**Note:** The tick values are returned in the `Arguments` field when querying position data using the `positions`, `mint`, `increaseLiquidity`, or `decreaseLiquidity` functions.
+
 ### NonfungiblePositionManager Contract
 
 - **Address**: `0xC36442b4a4522E871399CD717aBDD847Ab11FE88` (Ethereum Mainnet)
