@@ -1,9 +1,9 @@
 ---
-title: "Uniswap V3 Position NFT API - Track Liquidity Positions"
+title: "Uniswap V3 Position API - Track Liquidity Positions"
 description: "Track Uniswap V3 NFT positions, monitor liquidity changes, position creation, and position management using Bitquery's Position API."
 ---
 
-# Uniswap V3 Position NFT API
+# Uniswap V3 Position API - Track Liquidity Positions
 
 Uniswap V3 introduced NFT-based liquidity positions, where each position is represented as an ERC-721 NFT. Bitquery's Position API allows you to track position creation, liquidity additions, removals, burns, and query position details in real-time.
 
@@ -36,7 +36,6 @@ The Uniswap V3 NonfungiblePositionManager contract (`0xC36442b4a4522E871399CD717
   <meta property="twitter:description" content="Monitor Uniswap V3 positions, track liquidity providers, and analyze position changes in real-time." />
 </Head>
 
----
 
 ## Table of Contents
 

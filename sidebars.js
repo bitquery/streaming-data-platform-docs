@@ -360,6 +360,7 @@ const sidebars = {
                 "blockchain/Ethereum/dextrades/pair-creation-time",
                 "blockchain/Ethereum/dextrades/crypto-coin-ticker",
                 "blockchain/Ethereum/dextrades/uniswap-api",
+                "blockchain/Ethereum/dextrades/uniswap-position-api",
                 "blockchain/Ethereum/dextrades/pancakeswap-api",
                 "blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener",
                 "blockchain/Ethereum/dextrades/evm-bullx-api",
