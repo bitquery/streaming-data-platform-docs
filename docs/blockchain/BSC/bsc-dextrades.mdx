@@ -200,6 +200,34 @@ query topTraders($network: evm_network, $token: String) {
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/token/0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c#top_traders).
 
+## Top Traders by profit in last 7 days
+
+This query will fetch you top traders by profit in the last 7 days for the BSC network.
+You can test the query [here](https://ide.bitquery.io/top-traders-in-last-7-days-by-profit_2).
+
+```
+query TopTraders($network: evm_network) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: {descendingByField: "profit"}
+      limit: {count: 100}
+      where: {Trade: {Side: {Amount: {gt: "0"}}} Block:{Time:{since_relative:{days_ago:7}}}}
+    ) {
+      Trade {
+        Buyer
+      }
+      profit: calculate(expression:"$sold-$bought")
+      bought: sum(of: Trade_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
+      sold: sum(of: Trade_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+{
+  "network": "bsc"
+}
+```
+
 ## Get all Trading Pairs data of a specific token
 
 This query will fetch you all the trading pairs of a token for the BSC network.
