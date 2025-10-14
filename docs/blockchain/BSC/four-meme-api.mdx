@@ -141,7 +141,7 @@ subscription {
   EVM(network: bsc) {
     Events(
       where: {
-        Log: { Signature: { Name: { in: ["PairCreated", "PoolCreated"] } } }
+        Log: { Signature: { Name: { in: ["PairCreated"] } } }
         Transaction: {
           To: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
         }
@@ -732,6 +732,80 @@ subscription {
 </details>
 
 You can also get the trade activities of a user on Pancake Swap using our [Pancake Swap](./pancake-swap-api.md) APIs.
+
+## Track Four Meme Tokens in 14k to 18k Marketcap
+
+Tracks live Four Meme tokens on BSC with a market cap between $14K–$18K, filtered by 14k to 18k Marketcap.
+Useful for spotting emerging small-cap meme tokens in real time.
+Try the query [here](https://ide.bitquery.io/Four-meme-tokens-in-14K-to-17K-Marketcap).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Pairs(
+      where: {
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Price: {
+          IsQuotedInUsd: true
+          Average: { Mean: { gt: 0.000014, le: 0.000018 } }
+        }
+        Market: {
+          Protocol: { is: "fourmeme_v1" }
+          Network: { is: "Binance Smart Chain" }
+        }
+        Volume: { Usd: { gt: 5 } }
+      }
+    ) {
+      Token {
+        Name
+        Symbol
+        Address
+      }
+      Market {
+        Protocol
+        Program
+        Network
+        Name
+        Address
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      marketcap: calculate(expression: "Price_Average_Mean * 1000000000")
+      Price {
+        Average {
+          Mean
+        }
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
 
 ## Track Latest and Historical Trades of a Four Meme User
 
