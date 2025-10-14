@@ -82,7 +82,7 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 ### 2. Token Lifecycle, Liquidity & Migrations
 
 - [Get Newly Created Tokens on Four Meme ➤](#get-newly-created-tokens-on-four-meme)
-- [Track Four Meme Token Migrations ➤](#track-four-meme-token-migrations)
+- [Track All Four Meme Tokens That Have Migrated to Pancakeswap ➤](#track-all-four-meme-tokens-that-have-migrated-to-pancakeswap)
 - [Bonding Curve Progress API for FourMeme token ➤](#bonding-curve-progress-api-for-fourmeme-token)
 - [Get Four Meme Tokens which are above 95% Bonding Curve Progress ➤](#get-four-meme-tokens-which-are-above-95-bonding-curve-progress)
 - [Get liquidity of a Four Meme token ➤](#get-liquidity-of-a-four-meme-token)
@@ -129,9 +129,9 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 - [BSC Pancake Swap APIs](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/): Pancake swap Trades on BSC network with the help of examples.
 - [Trade APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
 
-## Track Four Meme Token Migrations
+## Track All Four Meme Tokens That Have Migrated to Pancakeswap
 
-Use the below query track four meme token migrations in realtime. Test it [here](https://ide.bitquery.io/four-meme-migration-to-pancakeswap).
+This query tracks four meme token migrations to Pancakeswap in realtime by monitoring transactions sent to the Four Meme factory address (`0x5c952063c7fc8610ffdb798152d69f0b9550762b`) and filtering for `PairCreated` and `PoolCreated` events. These events are emitted when a token graduates from Four Meme and migrates to Pancakeswap. Test it [here](https://ide.bitquery.io/four-meme-migration-to-pancakeswap).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
