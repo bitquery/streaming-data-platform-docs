@@ -215,7 +215,7 @@ This stream tracks the creation of BEP-20 tokens on BSC network in real time.
 ### Real time Trades on BSC
 
 This subscription returns the real-time trades happening on BSC Network. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader.  
-▶️[BSC Dex Trades](https://ide.bitquery.io/Newly-Created-Tokens-on-BSC-network_2)
+▶️[BSC Dex Trades](https://ide.bitquery.io/subscribe-to-dex-trades-on-BNB-mainnet)
 
 ## Four Meme
 
