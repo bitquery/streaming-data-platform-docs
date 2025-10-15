@@ -101,6 +101,7 @@ const sidebars = {
             "graphql/capabilities/joins",
             "graphql/capabilities/expression",
             "graphql/capabilities/relative-time",
+            "graphql/capabilities/json-filtering",
           ],
         },
         {
