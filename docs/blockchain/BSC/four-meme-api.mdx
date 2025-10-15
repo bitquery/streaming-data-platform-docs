@@ -74,6 +74,7 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 - [Subscribe the Latest Trades on Four Meme ➤](#subscribe-the-latest-trades-on-four-meme)
 - [Get Latest Buys and Sells for a Four Meme Token ➤](#get-latest-buys-and-sells-for-a-four-meme-token)
 - [Get Trade Metrics of a Four Meme Token ➤](#get-trade-metrics-of-a-four-meme-token)
+- [Get Metadata for a Newly Created Four Meme Token ➤](#metadata-for-a-newly-created-token)
 - [Get latest price of a Four.meme token ➤](#get-latest-price-of-a-fourmeme-token)
 - [Get Price Change Percentage for a Four Meme Token ➤](#get-price-change-percentage-for-a-four-meme-token)
 - [Get OHLCV data of a Four Meme Token ➤](#get-ohlcv-data-of-a-four-meme-token)
@@ -1202,6 +1203,49 @@ You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific
 
 ```
 
+</details>
+
+## Metadata for a Newly Created Token
+
+This query will fetch you trade metrics, such as marketcap, trade volume, token holders and creation time for a newly created Four Meme token on BSC network.
+You can test the query [here](https://ide.bitquery.io/zeyouBitquery-metrics-query).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery($token: String!) {
+  EVM(network: bsc) {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: $token}}}}
+    ) {
+      Block {
+        createdAt:Time(minimum: Block_Time)
+      }
+      volume:sum(of:Trade_Side_AmountInUSD)
+    }
+    BalanceUpdates(
+      where: {Currency: {SmartContract: {is: $token}}}
+    ){
+      holders:uniq(of:BalanceUpdate_Address, selectWhere:{gt:"0"})
+    }
+  }
+  marketCap: Trading {
+    Pairs(
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Market: {Network: {is: "Binance Smart Chain"}}, Volume: {Usd: {gt: 5}}, Token: {Address: {is: $token}}}
+      orderBy: {descending: Interval_Time_Start}
+      limit: {count: 1}
+    ) {
+      Price {
+        Average {
+          Mean
+        }
+      }
+      marketcap: calculate(expression: "Price_Average_Mean * 1000000000")
+    }
+  }
+}
+```
 </details>
 
 ## Top Traders of a token
