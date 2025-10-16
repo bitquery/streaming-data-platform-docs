@@ -526,41 +526,32 @@ query LatestTrades($network: evm_network, $token: String, $base: String) {
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/pair/0x711bfe972465a1e9182766ad67aff3c80a0cf308/0x55d398326f99059ff775485246999027b3197955#pair_latest_trades).
 
-## Get OHLC data for a particular token pair
+## Get OHLC Data For a Particular Token Pair
 
 This query will fetch you the OHLC of a token pair for the BSC network.
-You can test the query [here](https://ide.bitquery.io/ohlc-for-a-token-pair-on-bsc_1).
+You can test the query [here](https://ide.bitquery.io/BSC-OHLC-API-For-Token-Pair).
 
 ```
-query tradingViewPairs($network: evm_network, $token: String, $base: String) {
-  EVM(network: $network) {
+query tradingViewPairs {
+  EVM(network: bsc, dataset: realtime) {
     DEXTradeByTokens(
       orderBy: {ascendingByField: "Block_Time"}
-      where: {Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: $base}}}, Currency: {SmartContract: {is: $token}}, PriceAsymmetry: {lt: 0.1}}}
+      where: {TransactionStatus: {Success: true}, Trade: {Side: {Amount: {gt: "0"}, Currency: {SmartContract: {is: "0x55d398326f99059ff775485246999027b3197955"}}}, Currency: {SmartContract: {is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}}, Success: true}}
+      limit: {count: 10}
     ) {
       Block {
-        Time(interval: {count: 5, in: minutes})
+        Time(interval: {count: 60, in: seconds})
       }
-      Trade {
-        open: PriceInUSD(minimum: Block_Number)
-        close: PriceInUSD(maximum: Block_Number)
-        max: PriceInUSD(maximum: Trade_PriceInUSD)
-        min: PriceInUSD(minimum: Trade_PriceInUSD)
-      }
-      volume: sum(of: Trade_Side_Amount)
+      min: quantile(of: Trade_PriceInUSD, level: 0.1)
+      max: quantile(of: Trade_PriceInUSD, level: 0.9)
+      close: average(of: Trade_PriceInUSD)
+      open: average(of: Trade_PriceInUSD)
+      volume: sum(of: Trade_Side_AmountInUSD)
     }
   }
 }
-{
-  "network": "bsc",
-  "token": "0x711bfe972465a1e9182766ad67aff3c80a0cf308",
-  "base": "0x55d398326f99059ff775485246999027b3197955"
-}
+
 ```
-
-![image](https://github.com/user-attachments/assets/5dcf2e0f-ea70-46c0-93b9-6554b48d6efc)
-
-You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/pair/0x711bfe972465a1e9182766ad67aff3c80a0cf308/0x55d398326f99059ff775485246999027b3197955).
 
 ## Top Traders of a token pair
 

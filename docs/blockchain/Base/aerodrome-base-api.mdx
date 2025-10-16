@@ -1,14 +1,21 @@
 ---
+title: "Aerodrome Finance API - Base DEX Trades, Liquidity Pools, Token Analytics"
+description: "Get real-time Aerodrome Finance DEX trades, liquidity pools, token prices, trading volume and analytics on Base network. Access comprehensive on-chain data via Aerodrome API, Streams and GraphQL."
 sidebar_position: 7
 ---
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
+# Aerodrome Finance API - Base DEX Trades, Liquidity Pools, Token Analytics
 
-# Base AeroDrome API
+Get real-time Aerodrome Finance DEX trades, liquidity pools, token prices, trading volume and comprehensive analytics on Base network.
+Access live trading data, pool creation events, liquidity metrics and token statistics through our Aerodrome Finance API, Streams and Data services.
+The GraphQL APIs and Streams below provide extensive data points for the Aerodrome Finance ecosystem.
+If you have any questions on other data points, reach out to [support](https://t.me/Bloxy_info).
 
-This section provides you with a set of APIs and streams that provides an insight about the AeroDrome Finance ecosystem.
-If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
+You may also be interested in:
 
+- [Base Network DEX APIs ➤](https://docs.bitquery.io/docs/examples/dextrades/dex-api/)
+- [Token Trades APIs ➤](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/)
+- [Liquidity Pool APIs ➤](https://docs.bitquery.io/docs/examples/dextrades/pools-api/)
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
@@ -16,10 +23,68 @@ To query or stream data via graphQL **outside the Bitquery IDE**, you need to ge
 Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
 
+<head>
+<title>Aerodrome Finance API - Base DEX Trades, Liquidity Pools, Token Analytics</title>
+<meta
+  name="title"
+  content="Aerodrome Finance API - Base DEX Trades, Liquidity Pools, Token Analytics"
+/>
+<meta
+  name="description"
+  content="Get real-time Aerodrome Finance DEX trades, liquidity pools, token prices, trading volume and analytics on Base network. Access comprehensive on-chain data via Aerodrome API, Streams and GraphQL."
+/>
+<meta
+  name="keywords"
+  content="Aerodrome Finance API,Aerodrome DEX API,Base network DEX,Aerodrome liquidity pools,Aerodrome token prices,Aerodrome trading volume,Base DEX trades,Aerodrome on-chain data,Aerodrome blockchain API,Aerodrome Finance analytics,Base network API,DEX analytics,liquidity pool API,token trading API,Aerodrome GraphQL API,Base DeFi API,Aerodrome market data,real-time DEX data,crypto trading API,Base blockchain data"
+/>
+<meta name="robots" content="index, follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="English" />
+
+<meta property="og:type" content="website" />
+<meta
+  property="og:title"
+  content="Aerodrome Finance API - Base DEX Trades, Liquidity Pools, Token Analytics"
+/>
+<meta
+  property="og:description"
+  content="Get real-time Aerodrome Finance DEX trades, liquidity pools, token prices and analytics on Base network"
+/>
+
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Aerodrome Finance API - Base DEX Trades, Liquidity Pools, Token Analytics"/>
+<meta property="twitter:description" content="Get real-time Aerodrome Finance DEX trades, liquidity pools, token prices and analytics on Base network"/>
+</head>
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+---
+
+### Table of Contents
+
+### 1. DEX Trades & Trading Activity
+
+- [Subscribe to Latest Trades on Aerodrome Finance ➤](#subscribe-to-latest-trades-on-aerodrome-finance)
+- [Most Traded Tokens on Aerodrome Finance ➤](#most-traded-tokens-on-aerodrome-finance)
+
+### 2. Liquidity Pools & Analytics
+
+- [Latest Liquidity Pools on Aerodrome Finance ➤](#latest-liquidity-pools-on-aerodrome-finance)
+- [Get Liquidity of a Pool ➤](#get-liquidity-of-a-pool)
+
+### 3. [Video Tutorials](#video-tutorials)
+
+## DEX Trades & Trading Activity
+
 ## Subscribe to Latest Trades on Aerodrome Finance
 
-[This query](https://ide.bitquery.io/Latest-Trades-on-Aerodrome) subscribes to the latest DEX Trades on AeroDrome Finance. We are filtering out the Aerodrome DEX Trades by applying the `where` condition on `OwnerAddress` of the DEX.
-`0x420dd381b31aef6683db6b902084cb0ffece40da` is the `OwnerAddress` in this case.
+Stream real-time DEX trades on Aerodrome Finance with this subscription query. Monitor live buy/sell activity, token pairs, prices, and trading volumes as they happen on the Base network.
+This query filters Aerodrome DEX trades by the protocol's `OwnerAddress` (`0x420dd381b31aef6683db6b902084cb0ffece40da`).
+
+[Subscribe to Aerodrome Finance trades in real-time — Stream ➤](https://ide.bitquery.io/Latest-Trades-on-Aerodrome)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -68,12 +133,16 @@ subscription {
 }
 ```
 
-This subscription allows user to listen to the latest DEX Trades on `base` network involving the Aerodrome Finance.
+</details>
 
-## Most Traded Tokens on AeroDrome Finance
+## Most Traded Tokens on Aerodrome Finance
 
-You can check the most traded token on AeroDrome Finance for the previous month using the [following query](https://ide.bitquery.io/Most-Traded-Tokens-on-Aerodome-Last-Month).
-This query takes into account all the DEX Trades after `2024-06-10T00:00:00Z` and before `2024-07-10T00:00:00Z`, and returns the top `10` most traded tokens on AeroDrome Finance for the mentioned time period.
+Discover the most actively traded tokens on Aerodrome Finance over any time period. This query analyzes all DEX trades within a specified timeframe and ranks tokens by trade count, helping you identify trending tokens and market activity patterns.
+
+[Get most traded tokens on Aerodrome Finance — Query ➤](https://ide.bitquery.io/Most-Traded-Tokens-on-Aerodome-Last-Month)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -107,12 +176,18 @@ query MyQuery {
 }
 ```
 
-You can checkout more examples on [Token Trades](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/) for reference.
+</details>
 
-## Latest Liquidity Pools on AeroDrome Finance
+## Liquidity Pools & Analytics
 
-Recently created liquidity pools are a good earning opportunity, where one can utilize this opportunity in one way or the other like providing liquidity for a token, and so on.
-[This](https://ide.bitquery.io/Latest-Liquidity-Pools-on-Aerodome) query returns the latest liquidity pools created on the Aerodrome Finance.
+## Latest Liquidity Pools on Aerodrome Finance
+
+Track newly created liquidity pools on Aerodrome Finance in real-time. Discover fresh trading pairs and potential liquidity provision opportunities as pools are created. This query monitors `PoolCreated` events from the Aerodrome Finance smart contract, returning pool addresses, token pairs, and creation timestamps.
+
+[Get latest liquidity pools on Aerodrome Finance — Query ➤](https://ide.bitquery.io/Latest-Liquidity-Pools-on-Aerodome)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
@@ -169,7 +244,11 @@ Recently created liquidity pools are a good earning opportunity, where one can u
 }
 ```
 
-The above query will return an object of the following structure.
+</details>
+
+**Response Structure:**
+
+The query returns pool creation events with the following information:
 
 ```json
 {
@@ -218,15 +297,21 @@ The above query will return an object of the following structure.
 }
 ```
 
-where
+**Understanding the Response:**
 
-- `0x02f92800f57bcd74066f5709f1daa1a4302df875` and
-  `0xf564f589f58ced0127e48e1a02093ba53c2856ed` are the token addresses.
-- `0xa187378f0f3613e42b6ad5cc063a01060f82763f` is the pool address.
+- **Token Addresses**: The first two address arguments (`0x02f92800f57bcd74066f5709f1daa1a4302df875` and `0xf564f589f58ced0127e48e1a02093ba53c2856ed`) represent the two tokens in the trading pair.
+- **Pool Address**: The fourth argument (`0xa187378f0f3613e42b6ad5cc063a01060f82763f`) is the newly created liquidity pool address.
+- **Pool Type**: The boolean value indicates whether the pool is stable or volatile.
+- **Pool ID**: The bigInteger value is the unique pool identifier.
 
 ## Get Liquidity of a Pool
 
-The [following](https://ide.bitquery.io/Liquidity-of-a-Pool_2) query returns the Liquidity of the Pool in the Aerodrome Finance DEX with `0x1e039aade407a94df380649b33b52cb8ad41c755` as the Pool Address.
+Query the current liquidity levels for any Aerodrome Finance pool by pool address. This query retrieves the token balances for both assets in a liquidity pool, allowing you to calculate total value locked (TVL), assess pool depth, and analyze liquidity distribution.
+
+[Get pool liquidity on Aerodrome Finance — Query ➤](https://ide.bitquery.io/Liquidity-of-a-Pool_2)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
@@ -256,12 +341,14 @@ query MyQuery {
 }
 ```
 
-You can checkout more queries around Liquidity Pool [here](https://docs.bitquery.io/docs/examples/dextrades/pools-api/).
+</details>
 
-## Video Tutorial for Latest Trades and Most Purchased Tokens
+## Video Tutorials
+
+### Video Tutorial | How to Get Latest Trades and Most Traded Tokens on Aerodrome Finance
 
 <VideoPlayer url="https://youtu.be/MZbepYijCng" />
 
-## Video Tutorial for Latest Liquidity Pools and Liquidity of a Pool
+### Video Tutorial | How to Get Latest Liquidity Pools and Pool Liquidity on Aerodrome Finance
 
 <VideoPlayer url="https://youtu.be/HvuD4Gtaonc" />

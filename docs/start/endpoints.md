@@ -61,9 +61,26 @@ The following chains are available via the Asia regional endpoint:
 
 ## United States
 
-:::info
-US regional endpoints are coming soon. In the meantime, US-based users can use the Europe endpoints.
-:::
+### V1 - Historical Data API
+
+```
+https://us.graphql.bitquery.io
+```
+
+### V2 - Streaming API
+
+The following chains are available via the United States regional endpoint:
+
+| Blockchain | Endpoint |
+|------------|----------|
+| Ethereum | `https://us.streaming.bitquery.io/graphql` |
+| BSC (Binance Smart Chain) | `https://us.streaming.bitquery.io/graphql` |
+| Base | `https://us.streaming.bitquery.io/graphql` |
+| Solana | `https://us.streaming.bitquery.io/graphql` |
+| Arbitrum | `https://us.streaming.bitquery.io/graphql` |
+| Optimism | `https://us.streaming.bitquery.io/graphql` |
+| Tron | `https://us.streaming.bitquery.io/graphql` |
+| Matic (Polygon) | `https://us.streaming.bitquery.io/graphql` |
 
 ## Next Steps
 
