@@ -2,11 +2,14 @@
 
 This is a tutorial to build a fast, automated BSC (Binance Smart Chain) sniper bot for trading newly launched Four Meme tokens. The bot **detects new token launches in real time via [Bitquery’s Kafka streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)**, buys them instantly using the Four Meme Launchpad contract, and sells them after 1 minute—aiming to capitalize on rapid price movements.
 
+Checkout the complete codebase [here](https://github.com/bitquery/sniper-bot-bsc) if facing any issue.
+
 :::note
 Use a wallet/private key with only test funds **at your own risk** as this bot is highly experimental and is for **educational use only**!
 :::
 
 ---
+import VideoPlayer from "../../src/components/videoplayer.js";
 
 ## Features
 
@@ -16,6 +19,12 @@ Use a wallet/private key with only test funds **at your own risk** as this bot i
   Uses the Four Meme Launchpad DEX smart contract to buy new tokens and automatically sell them after 60 seconds.
 - **Nonce & Gas Handling:**  
   Handles transaction nonces and gas prices to handle failed/reverted transaction errors.
+
+---
+
+## Final Output
+
+![output](../../static/img/sniper_bot_bsc.gif)
 
 ---
 
@@ -429,3 +438,8 @@ pm2 logs evm-sniper
 - Test carefully! On-chain transactions are irreversible.
 - Gas fees and front-running risks exist on BSC—proceed at your own risk.
 - Code is for educational and research purposes only.
+
+
+## Video Tutorial
+
+<VideoPlayer url="https://youtu.be/vgOHgqTJmj0?si=SQU0tvQzKq9s7alu" />
