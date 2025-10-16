@@ -807,6 +807,54 @@ subscription {
 
 </details>
 
+## Get ATH price of a Four Meme Token
+
+Below query gives you all time high price of a four meme token.
+Try the query [here](https://ide.bitquery.io/four-meme---token-ATH-price).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query tradingView(
+  $network: evm_network
+  $dataset: dataset_arg_enum
+  $token: String
+) {
+  EVM(network: $network, dataset: $dataset) {
+    DEXTradeByTokens(
+      limit: { count: 1 }
+      where: {
+        Block: { Date: { since: "2025-10-10" } }
+        TransactionStatus: { Success: true }
+        Trade: {
+          Side: { Currency: { SmartContract: { is: "0x" } } }
+          Currency: { SmartContract: { is: $token } }
+          Success: true
+        }
+      }
+    ) {
+      max: quantile(of: Trade_PriceInUSD, level: 0.98)
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "network": "bsc",
+  "token": "0xe59ecb01d56a7f1e66276c1bc885d64c92614444",
+  "dataset": "combined",
+  "local": "EVM",
+  "interval": 60
+}
+```
+
+</details>
+
 ## Track Latest and Historical Trades of a Four Meme User
 
 You can use DEX Trades API with combined dataset to get latest and historic trades of a user. Run [this query](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme) for example.
