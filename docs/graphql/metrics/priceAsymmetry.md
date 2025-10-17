@@ -11,7 +11,7 @@ PriceAsymmetry = abs(BuyPrice - SellPrice) / (BuyPrice + SellPrice)
 ```
 
 Where:
-- `BuyPrice` and `SellPrice` are both in USD
+- `BuyPrice` and `SellPrice` are the USD prices from both sides of a trade (what the wallet buys, the pool sells, and vice-versa)
 - The formula only calculates when USD prices are available for both tokens
 - If USD prices are not available for both tokens, the value returns `0`
 
