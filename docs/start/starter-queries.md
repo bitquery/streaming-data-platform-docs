@@ -563,7 +563,7 @@ Get the latest price of a BEP-20 token on BSC network.
 ### Trading Pairs on a BSC DEX
 
 Get all trading pairs present on a BSC network DEX.  
-▶️[Trading Pairs](https://ide.bitquery.io/trading-pairs-on-a-specific-dex_1)
+▶️[Trading Pairs](https://ide.bitquery.io/trading-pairs-on-BNB-by-USD-volume)
 
 ## Pancakeswap APIs
 
