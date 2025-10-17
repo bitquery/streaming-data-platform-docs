@@ -2,6 +2,19 @@
 
 In this section, we will see how to use the `PriceAsymmetry` metric to filter results based on Price.
 
+## Formula
+
+The Price Asymmetry is calculated using the following formula:
+
+```
+PriceAsymmetry = abs(BuyPrice - SellPrice) / (BuyPrice + SellPrice)
+```
+
+Where:
+- `BuyPrice` and `SellPrice` are both in USD
+- The formula only calculates when USD prices are available for both tokens
+- If USD prices are not available for both tokens, the value returns `0`
+
 ## How to use PriceAsymmetry to filter anomalies and outliers in Trades ?
 
 The PriceAsymmetry metric is being used to filter outliers of anomalies. This means that trades that have a price asymmetry for example 0.1 will be excluded from the results. This helps to ensure that the results are more accurate and reliable, as it removes any trades that may have been caused by anomalies. The price Asymmetry value can only lie between 0 and 1.
