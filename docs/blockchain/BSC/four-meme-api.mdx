@@ -76,6 +76,7 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 - [Get Trade Metrics of a Four Meme Token ➤](#get-trade-metrics-of-a-four-meme-token)
 - [Get Metadata for a Newly Created Four Meme Token ➤](#metadata-for-a-newly-created-token)
 - [Get latest price of a Four.meme token ➤](#get-latest-price-of-a-fourmeme-token)
+- [Get ATH price of a Four Meme Token ➤](#get-ath-price-of-a-four-meme-token)
 - [Get Price Change Percentage for a Four Meme Token ➤](#get-price-change-percentage-for-a-four-meme-token)
 - [Get OHLCV data of a Four Meme Token ➤](#get-ohlcv-data-of-a-four-meme-token)
 - [Get Trade Volume and Number of Trades for a Four Meme Token ➤](#get-trade-volume-and-number-of-trades-for-a-four-meme-token)
@@ -83,6 +84,8 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 ### 2. Token Lifecycle, Liquidity & Migrations
 
 - [Get Newly Created Tokens on Four Meme ➤](#get-newly-created-tokens-on-four-meme)
+- [Get Four.Meme Tokens created by a specific Dev ➤](#get-fourmeme-tokens-created-by-a-specific-dev)
+- [Get Dev Address of a Four.meme token ➤](#get-dev-address-of-a-fourmeme-token)
 - [Track All Four Meme Tokens That Have Migrated to Pancakeswap ➤](#track-all-four-meme-tokens-that-have-migrated-to-pancakeswap)
 - [Bonding Curve Progress API for FourMeme token ➤](#bonding-curve-progress-api-for-fourmeme-token)
 - [Get Four Meme Tokens which are above 95% Bonding Curve Progress ➤](#get-four-meme-tokens-which-are-above-95-bonding-curve-progress)
@@ -371,6 +374,97 @@ This query retrieves newly created tokens on Four Meme by listening to the `Toke
 </details>
 
 You can refer to this [example](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/#subscribe-the-latest-trades-on-four-meme) to track latest trades of a token on other particular DEX's such as Pancake Swap.
+
+## Get Four.Meme Tokens created by a specific Dev
+
+This API fetches Four.Meme tokens created by a specific dev on BSC by tracking token minting transfers signed by a particular dev.
+`Dev Address` here in example is `0x9c75588640605d46b42f2d64c5c2e993de251210`. Use a date filter based on your needs — shorter time ranges mean faster execution and reduced query time.
+
+[Run Query](https://ide.bitquery.io/token-created-by-specific-dev)
+
+ <details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(network: bsc, dataset: combined) {
+    Transfers(
+      where: {
+        Block: { Date: { since: "2025-08-01" } }
+        Transfer: {
+          Sender: { is: "0x0000000000000000000000000000000000000000" }
+        }
+        Transaction: {
+          From: { in: ["0x9c75588640605d46b42f2d64c5c2e993de251210"] }
+        }
+      }
+    ) {
+      Transaction {
+        From
+        To
+      }
+      Transfer {
+        Sender
+        Receiver
+        Amount
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Get Dev Address of a Four.meme token
+
+Fetches the developer address that created a specific Four.Meme token on BSC by tracing the minting transfer (from the zero address) of that token’s smart contract.
+Use a date filter based on your needs — shorter time ranges make the query execute faster and return results more efficiently.
+Token Address in this example is 0xd284aa8910fe1dcac70f3e28ddd8cc61dac94444.
+
+[Run Query](https://ide.bitquery.io/check-who-created-this-token)
+
+ <details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(network: bsc, dataset: combined) {
+    Transfers(
+      where: {
+        Block: { Date: { since: "2025-08-01" } }
+        Transfer: {
+          Currency: {
+            SmartContract: { is: "0xd284aa8910fe1dcac70f3e28ddd8cc61dac94444" }
+          }
+          Sender: { is: "0x0000000000000000000000000000000000000000" }
+        }
+      }
+    ) {
+      Transaction {
+        From
+        To
+      }
+      Transfer {
+        Sender
+        Receiver
+        Amount
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
 
 ## Get Binance Meme Rush token creations on Four Meme
 
@@ -691,6 +785,54 @@ Here's an example of [tracking Four.meme token prices](https://ide.bitquery.io/l
 
 </details>
 
+## Get ATH price of a Four Meme Token
+
+Fetches the All-Time High (ATH) price of a specific Four.Meme token on BSC, using the `DEXTradeByTokens` dataset to calculate the 98th percentile of trade prices (approximate ATH).
+Use a date filter suited to your needs — a shorter duration will make the query run faster and return results more efficiently. Try the API [here](https://ide.bitquery.io/four-meme---token-ATH-price).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query tradingView(
+  $network: evm_network
+  $dataset: dataset_arg_enum
+  $token: String
+) {
+  EVM(network: $network, dataset: $dataset) {
+    DEXTradeByTokens(
+      limit: { count: 1 }
+      where: {
+        Block: { Date: { since: "2025-10-10" } }
+        TransactionStatus: { Success: true }
+        Trade: {
+          Side: { Currency: { SmartContract: { is: "0x" } } }
+          Currency: { SmartContract: { is: $token } }
+          Success: true
+        }
+      }
+    ) {
+      max: quantile(of: Trade_PriceInUSD, level: 0.98)
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "network": "bsc",
+  "token": "0xe59ecb01d56a7f1e66276c1bc885d64c92614444",
+  "dataset": "combined",
+  "local": "EVM",
+  "interval": 60
+}
+```
+
+</details>
+
 ## Get Price Change Percentage for a Four Meme Token
 
 Use the below query to get the price change in percentage for various time fields including `24 hours`, `1 hour` and `5 minutes`. Try it [here](https://ide.bitquery.io/Percentage-price-change-for-a-token).
@@ -910,54 +1052,6 @@ subscription {
       }
     }
   }
-}
-```
-
-</details>
-
-## Get ATH price of a Four Meme Token
-
-Below query gives you all time high price of a four meme token.
-Try the query [here](https://ide.bitquery.io/four-meme---token-ATH-price).
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query tradingView(
-  $network: evm_network
-  $dataset: dataset_arg_enum
-  $token: String
-) {
-  EVM(network: $network, dataset: $dataset) {
-    DEXTradeByTokens(
-      limit: { count: 1 }
-      where: {
-        Block: { Date: { since: "2025-10-10" } }
-        TransactionStatus: { Success: true }
-        Trade: {
-          Side: { Currency: { SmartContract: { is: "0x" } } }
-          Currency: { SmartContract: { is: $token } }
-          Success: true
-        }
-      }
-    ) {
-      max: quantile(of: Trade_PriceInUSD, level: 0.98)
-      Block {
-        Time
-      }
-    }
-  }
-}
-```
-
-```json
-{
-  "network": "bsc",
-  "token": "0xe59ecb01d56a7f1e66276c1bc885d64c92614444",
-  "dataset": "combined",
-  "local": "EVM",
-  "interval": 60
 }
 ```
 
