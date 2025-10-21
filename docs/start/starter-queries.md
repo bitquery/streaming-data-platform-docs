@@ -580,7 +580,7 @@ Get the latest price of a token traded on Pancakeswap.
 ### OHLC of a Token
 
 Get the OHLC stats of a token traded on Pancakeswap.  
-▶️[Token OHLC](https://ide.bitquery.io/BSC-Pancake-V3-OHLC-data_1)
+▶️[Token OHLC](https://ide.bitquery.io/OHLC-of-a-Token-on-pancake_swap_v3)
 
 ### Trades by User on Pancakeswap
 
