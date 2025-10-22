@@ -77,8 +77,7 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 - [Get Latest Price of a Token ➤](#get-latest-price-of-a-token)
 - [Track Price of a Token in Real-Time ➤](#track-price-of-a-token-in-real-time)
 - [Get OHLC Data of a Token ➤](#get-ohlc-data-of-a-token)
-- [Get ATH Market Cap of a Token ➤](#get-ath-market-cap-of-a-token)
-- [ATH Market Cap in a Specific Timeframe ➤](#ath-market-cap-in-a-specific-timeframe)
+- [ATH Market Cap of Pump Fun Tokens in a Specific Timeframe ➤](#ath-market-cap-of-pump-fun-tokens-in-a-specific-timeframe)
 - [Token Price Change Over Time ➤](#token-price-change-over-time-delta-from-x-minutes-back)
 
 ### 3. Trade Activity & Volume
@@ -643,40 +642,10 @@ Trade Side Account field will not be available for aggregate queries in Archive 
 
 </details>
 
-### Get ATH Market Cap of a Token
+### ATH Market Cap of Pump Fun Tokens in a Specific Timeframe
 
-Returns all-time-high price and marketcap in USD (marketcap = price \* 1B tokens)
-[ATH market cap of a Pump.fun token — Query ➤](https://ide.bitquery.io/Get-ATH-Market-Cap-of-a-Token#)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  Solana(dataset: combined) {
-    DEXTradeByTokens(
-      where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "3mZWpGvudc3rgDem4gNAW7K14A9CubYhG5ugDZ5npump" }
-          }
-        }
-      }
-      limit: { count: 1 }
-    ) {
-      ATH_Price: quantile(of: Trade_PriceInUSD, level: 0.98)
-      ATH_Marketcap: calculate(expression: "$ATH_Price * 1000000000")
-    }
-  }
-}
-```
-
-</details>
-
-### ATH Market Cap in a Specific Timeframe
-
-Same as above but within a given window timeframe.
-[ATH price and market cap in timeframe — Pump.fun Query ➤](https://ide.bitquery.io/ATH-Market-Cap-in-a-Specific-Timeframe_2#)
+Returns all-time-high price and marketcap in USD (marketcap = price \* 1B tokens) of the tokens specified in `Trade:{Currency: {MintAdress: {in: []}}}`.
+[ATH price and market cap in timeframe — Pump.fun Query ➤](https://ide.bitquery.io/ATH-Market-Cap-of-Pump-Fun-Tokens-in-a-Specific-Timeframe)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -685,20 +654,46 @@ Same as above but within a given window timeframe.
 {
   Solana(dataset: combined) {
     DEXTradeByTokens(
+      limitBy: { by: Trade_Currency_MintAddress, count: 1 }
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "3mZWpGvudc3rgDem4gNAW7K14A9CubYhG5ugDZ5npump" }
+            MintAddress: {
+              in: [
+                "639g7XEn1fMf7ZpHhKWUiHywY4PpQ5QPm6VMsw8Cpump"
+                "FXMCWau8etMkKZnyn4pi9qMM3NVfrCHFM4KKnJvNpump"
+              ]
+            }
+          }
+          Side: {
+            Currency: {
+              MintAddress: {
+                in: [
+                  "11111111111111111111111111111111"
+                  "So11111111111111111111111111111111111111112"
+                ]
+              }
+            }
           }
         }
-        Block: {
-          Time: { since: "2025-10-22T10:25:00Z", till: "2025-10-22T11:25:00Z" }
+        Block: { Time: { since: "2025-05-03T06:37:00Z" } }
+      }
+    ) {
+      Trade {
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+        PriceInUSD(maximum: Trade_PriceInUSD)
+        Side {
+          Currency {
+            Symbol
+          }
         }
       }
-      limit: { count: 1 }
-    ) {
-      ATH_Price: quantile(of: Trade_PriceInUSD, level: 0.98)
-      ATH_Marketcap: calculate(expression: "$ATH_Price * 1000000000")
+      max: quantile(of: Trade_PriceInUSD, level: 0.98)
+      ATH_Marketcap: calculate(expression: "$max * 1000000000")
     }
   }
 }
