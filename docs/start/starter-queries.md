@@ -41,7 +41,7 @@ This query gives you bitcoin currency 1-sec OHLC across different blockchains. Y
 This query gives you change in price ( Close-Open) of all tokens on Ethereum, BNB, Solana and Tron.
 You can adjust duration in `Duration: {eq: 300}` filter.
 
-▶️ [Crypto Price Change API](https://ide.bitquery.io/5-minute-price-change-api)
+▶️ [Crypto Price Change API](https://ide.bitquery.io/1-minute-price-change-api)
 
 ### OHLC of a currency on multiple blockchains
 
