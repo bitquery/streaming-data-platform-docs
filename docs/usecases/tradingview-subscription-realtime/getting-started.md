@@ -1,5 +1,8 @@
 ---
+title: "Real-Time Crypto Charting API - Live OHLCV Stream & TradingView Integration"
+description: "Build real-time crypto charts with live OHLCV data streams. Get 1-second candlestick updates, real-time price data, and seamless TradingView integration for DEX trading analytics."
 sidebar_position: 1
+keywords: [real-time crypto charting, OHLCV stream, live candlestick data, crypto price streaming, TradingView API, real-time OHLC, crypto trading charts, live DEX data, streaming candlesticks, real-time price feed]
 ---
 
 # Getting Started - TradingView Data API
