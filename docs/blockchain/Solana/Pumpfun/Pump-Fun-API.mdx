@@ -645,25 +645,27 @@ Trade Side Account field will not be available for aggregate queries in Archive 
 
 ### Get ATH Market Cap of a Token
 
-Returns all-time-high price in SOL (marketcap = price \* 1B tokens)
-[ATH market cap of a Pump.fun token — Query ➤](https://ide.bitquery.io/ATH-MC_1#)
+Returns all-time-high price and marketcap in USD (marketcap = price \* 1B tokens)
+[ATH market cap of a Pump.fun token — Query ➤](https://ide.bitquery.io/Get-ATH-Market-Cap-of-a-Token#)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
-  Solana {
+  Solana(dataset: combined) {
     DEXTradeByTokens(
       where: {
-        Trade: { Currency: { MintAddress: { is: "token mint address" } } }
+        Trade: {
+          Currency: {
+            MintAddress: { is: "3mZWpGvudc3rgDem4gNAW7K14A9CubYhG5ugDZ5npump" }
+          }
+        }
       }
       limit: { count: 1 }
-      orderBy: { descending: Trade_Price }
     ) {
-      Trade {
-        PriceInSOL: Price
-      }
+      ATH_Price: quantile(of: Trade_PriceInUSD, level: 0.98)
+      ATH_Marketcap: calculate(expression: "$ATH_Price * 1000000000")
     }
   }
 }
@@ -673,26 +675,30 @@ Returns all-time-high price in SOL (marketcap = price \* 1B tokens)
 
 ### ATH Market Cap in a Specific Timeframe
 
-Same as above but within a given window
-[ATH market cap in timeframe — Pump.fun Query ➤](https://ide.bitquery.io/ATH-MC-till-2minutes-prior#)
+Same as above but within a given window timeframe.
+[ATH price and market cap in timeframe — Pump.fun Query ➤](https://ide.bitquery.io/ATH-Market-Cap-in-a-Specific-Timeframe_2#)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
-  Solana {
+  Solana(dataset: combined) {
     DEXTradeByTokens(
       where: {
-        Trade: { Currency: { MintAddress: { is: "token mint address" } } }
-        Block: { Time: { till: "2025-06-03T06:37:00Z" } }
+        Trade: {
+          Currency: {
+            MintAddress: { is: "3mZWpGvudc3rgDem4gNAW7K14A9CubYhG5ugDZ5npump" }
+          }
+        }
+        Block: {
+          Time: { since: "2025-10-22T10:25:00Z", till: "2025-10-22T11:25:00Z" }
+        }
       }
       limit: { count: 1 }
-      orderBy: { descending: Trade_Price }
     ) {
-      Trade {
-        PriceInSOL: Price
-      }
+      ATH_Price: quantile(of: Trade_PriceInUSD, level: 0.98)
+      ATH_Marketcap: calculate(expression: "$ATH_Price * 1000000000")
     }
   }
 }
