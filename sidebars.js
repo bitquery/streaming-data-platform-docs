@@ -642,6 +642,16 @@ const sidebars = {
           },
           items: ["examples/polymarket-api/polymarket-api"],
         },
+        {
+          type: "category",
+          label: "Futures DEXs",
+          link: {
+            type: "generated-index",
+            title: "Futures DEX APIs",
+            description: "APIs for accessing futures and perpetual decentralized exchanges data including AsterDEX on BNB Smart Chain.",
+          },
+          items: ["examples/futures-dexs/asterdex-api"],
+        },
       ],
     },
     {
