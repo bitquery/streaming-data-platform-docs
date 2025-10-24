@@ -1,0 +1,8 @@
+{
+  "label": "Futures DEXs",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "API guides for futures and perpetual decentralized exchanges."
+  }
+}

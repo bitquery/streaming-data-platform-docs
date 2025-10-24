@@ -8,27 +8,26 @@ We now use the new [Price Index Streams](https://docs.bitquery.io/docs/trading/p
 
 To learn more about streaming data via graphQL, visit [Bitquery subscriptions](https://docs.bitquery.io/docs/subscriptions/subscription/).
 
-
-###  Imports and Configuration
+### Imports and Configuration
 
 ```javascript
 import { createClient } from "graphql-ws";
 import config from "./configs.json";
-
 ```
 
--   **createClient**: From the `graphql-ws` library, used to subscribe to GraphQL streams.
-    
--   **config**: A local file storing your Bitquery API token.
-    
+- **createClient**: From the `graphql-ws` library, used to subscribe to GraphQL streams.
+- **config**: A local file storing your Bitquery API token.
 
 ```javascript
 let client;
-const BITQUERY_ENDPOINT = 'wss://streaming.bitquery.io/eap?token=' + config.authtoken;
-
+const BITQUERY_ENDPOINT =
+  "wss://streaming.bitquery.io/eap?token=" + config.authtoken;
 ```
 
-###  Subscription Query
+### Subscription Query
+
+[Run Stream on IDE](https://ide.bitquery.io/1-second-crypto-price-stream)
+**We have used Solana as an example below, you can remove it and get data for all chains provided by the Price API**
 
 ```javascript
 const subscriptionQuery = `
@@ -61,23 +60,18 @@ subscription {
   }
 }
 `;
-
 ```
 
--   This query subscribes to **pre-aggregated 1-minute OHLC bars** for a token on the Solana network.
-    
--   It includes:
-    
-    -   Block time (`Block.Time`)
-        
-    -   OHLC prices (`Open`, `High`, `Low`, `Close`)
-        
-    -   Trade volume (`Volume.Base`)
-        
+- This query subscribes to **pre-aggregated 1-second OHLC bars** for a token on the Solana network.
+- It includes:
 
-----------
+  - Block time (`Block.Time`)
+  - OHLC prices (`Open`, `High`, `Low`, `Close`)
+  - Trade volume (`Volume.Base`)
 
-###  Subscribing to the Stream
+---
+
+### Subscribing to the Stream
 
 ```javascript
 export function subscribeToWebSocket(onRealtimeCallback) {
@@ -96,7 +90,7 @@ export function subscribeToWebSocket(onRealtimeCallback) {
       volume: tokenData.Volume.Base,
     };
 
-    onRealtimeCallback(bar); // Emit finalized 1-minute OHLC bar
+    onRealtimeCallback(bar); // Emit finalized 1-second OHLC bar
   };
 
   client.subscribe(
@@ -104,17 +98,14 @@ export function subscribeToWebSocket(onRealtimeCallback) {
     { next: onNext, error: console.error }
   );
 }
-
 ```
 
--   **subscribeToWebSocket**:
-    
-    -   Connects to Bitquery using `graphql-ws`.
-        
-    -   On each received message, extracts the finalized OHLC bar and passes it to your `onRealtimeCallback`.
-        
+- **subscribeToWebSocket**:
 
-###  Unsubscribing from the Stream
+  - Connects to Bitquery using `graphql-ws`.
+  - On each received message, extracts the finalized OHLC bar and passes it to your `onRealtimeCallback`.
+
+### Unsubscribing from the Stream
 
 ```javascript
 export function unsubscribeFromWebSocket() {
@@ -122,11 +113,6 @@ export function unsubscribeFromWebSocket() {
     client.dispose();
   }
 }
-
 ```
 
--   **unsubscribeFromWebSocket**: Terminates the WebSocket connection to stop receiving data.
-    
-
-
-
+- **unsubscribeFromWebSocket**: Terminates the WebSocket connection to stop receiving data.
