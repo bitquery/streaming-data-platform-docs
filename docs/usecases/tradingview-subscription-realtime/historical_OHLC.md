@@ -19,7 +19,11 @@ import config from "./configs.json";
 ### API Endpoint and Query
 
 We are using the [Tokens Cube from the Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) which gives you price of a token on different chains in **USD**. You can use Pairs Cube as well to get price against specific currency.
- 
+
+[You can test the query here](https://ide.bitquery.io/Historical-price-data)
+
+**We have used Solana as an example below, you can remove it and get data for all chains provided by the Price API**
+
 ```javascript
 const endpoint = "https://streaming.bitquery.io/graphql";
 ```
@@ -84,8 +88,6 @@ const TOKEN_DETAILS = `
 - **TOKEN_DETAILS**: This GraphQL query fetches token trading data on the Solana blockchain for 1-minute intervals (`Duration: {eq: 60}`), including OHLC prices in USD. It’s scoped to a specific token by address:
   `6ft9XJZX7wYEH1aywspW5TiXDcshGc2W2SqBHN9SLAEJ` for the sake of this explanation. You can pass the variables `quote` from url and set it here.
 
-
-
 ### fetchHistoricalData Function
 
 ```javascript
@@ -146,7 +148,7 @@ let bars = trades.map((trade) => {
 bars.sort((a, b) => a.time - b.time);
 ```
 
-Sorts the bars chronologically, as the API returns them in descending order by default. You can skip this step by changing query to return it in **ascending** order. 
+Sorts the bars chronologically, as the API returns them in descending order by default. You can skip this step by changing query to return it in **ascending** order.
 
 ### Handling Missing Bars
 
