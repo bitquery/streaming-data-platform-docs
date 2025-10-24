@@ -33,6 +33,26 @@ In thise section we will see how to monitor real-time balance changes across the
 <meta property="twitter:description" content="Learn how to get real time balance & balance updates of a BSC address using Bitquery's Balance Updates API." />
 </head>
 
+:::warning Important: Rebasing Token Limitations
+**Rebasing tokens are not supported for accurate balance calculations.**
+
+Rebasing tokens (like Mountain Protocol's USDM) automatically adjust their total supply and individual balances through mechanisms other than traditional transfer transactions. This means:
+
+- **Balance calculations may be inaccurate** - Our balance tracking doesn't capture rebasing adjustments
+- **Balance updates may be missing** - Individual holder balances change without visible transactions
+- **Historical balance data will be incorrect** - Past balances don't reflect rebasing adjustments
+
+**Before calculating balances for any token, verify it's not a rebasing token by:**
+
+1. Checking the token's official documentation
+2. Looking for rebasing mechanisms in the smart contract
+3. Consulting token issuer resources
+
+**Example of rebasing token:** Mountain Protocol USDM (`0x59d9356e565ab3a36dd77763fc0d87feaf85508c` on Arbitrum) - [Documentation](https://docs.mountainprotocol.com/legacy-docs/usdm-token)
+
+**Supported chains:** This limitation applies to all EVM chains (Ethereum, Arbitrum, BSC, Base, etc.)
+:::
+
 ## Subscribe to Balance Updates of a Particular Wallet
 
 The query will subscribe you to real-time updates for balance changes on the BSC blockchain, providing a continuous stream of data as new transactions are processed and recorded. Here we have used address `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`. You can find the query [here](https://ide.bitquery.io/get-real-time-balance-updates-of-an-address_1)

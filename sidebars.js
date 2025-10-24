@@ -423,6 +423,7 @@ const sidebars = {
             "blockchain/BSC/gra-fun-api",
             "blockchain/BSC/four-meme-api",
             "blockchain/BSC/four-meme-mempool-API",
+            "blockchain/BSC/binance-memerush-api",
             "blockchain/BSC/pancake-swap-api",
             "blockchain/BSC/bsc-mempool-stream",
           ],
@@ -638,7 +639,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Prediction Market APIs",
-            description: "APIs for accessing prediction market data and trading information",
+            description:
+              "APIs for accessing prediction market data and trading information",
           },
           items: ["examples/polymarket-api/polymarket-api"],
         },

@@ -1,8 +1,10 @@
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-# Four Meme API
+# Binance Meme Rush API
 
-Get ultra low latency Four Meme memecoin data on BNB Chain: live trades, bonding curve progress, newly created tokens, prices, OHLC, liquidity, migrations, top traders and more.
+Binance has launched Meme Rush, a new discovery feature inside the Binance Wallet that gives users early access to trending meme-coins from external launch platforms. Through a partnership with Four.Meme on the BNB Smart Chain, users can create and launch their own meme coins directly via Binance Wallet. Tokens launched in this way typically have contract addresses that start with `0x4444…`.
+
+Get ultra low latency Binance Meme Rush memecoin data on BNB Chain: live trades, bonding curve progress, newly created tokens, prices, OHLC, liquidity, migrations, top traders and more.
 
 The below GraphQL APIs and Streams are examples of data points you can get with Bitquery. If you have questions on other data points, reach out to [support](https://t.me/Bloxy_info).
 
@@ -16,17 +18,17 @@ You may also be interested in:
 - [PumpFun API ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
 
 <head>
-<title>Four Meme API - Live Trades, Bonding Curve, Prices, Liquidity on BSC</title>
-<meta name="title" content="Four Meme API - Live Trades, Bonding Curve, Prices, Liquidity on BSC"/>
+<title>Binance Meme Rush API - Live Trades, Bonding Curve, Prices, Liquidity on BSC</title>
+<meta name="title" content="Binance Meme Rush API - Live Trades, Bonding Curve, Prices, Liquidity on BSC"/>
 
 <meta
   name="description"
-  content="Ultra low latency Four Meme memecoin data on BNB Chain: live trades, bonding curve progress, new tokens, prices, OHLC, liquidity, migrations, top traders. Access via GraphQL, streams, and Kafka."
+  content="Ultra low latency Binance Meme Rush memecoin data on BNB Chain: live trades, bonding curve progress, new tokens, prices, OHLC, liquidity, migrations, top traders. Access via GraphQL, streams, and Kafka."
 />
 
 <meta
   name="keywords"
-  content="Four Meme API,four meme bsc api,four meme trading api,four meme bonding curve api,four meme prices api,four meme liquidity api,four meme ohlc api,four meme memecoin api,bnb chain meme api,bsc meme token api,bitquery four meme api,real-time bsc trades,bsc websocket api,crypto trading api,blockchain market data api,memecoin analytics"
+  content="Binance Meme Rush API,Binance Meme Rush bsc api,Binance Meme Rush trading api,Binance Meme Rush bonding curve api,Binance Meme Rush prices api,Binance Meme Rush liquidity api,Binance Meme Rush ohlc api,Binance Meme Rush memecoin api,bnb chain meme api,bsc meme token api,bitquery Binance Meme Rush api,real-time bsc trades,bsc websocket api,crypto trading api,blockchain market data api,memecoin analytics"
 />
 
 <meta name="robots" content="index, follow" />
@@ -39,12 +41,12 @@ You may also be interested in:
 
 <meta
   property="og:title"
-  content="Four Meme API - BSC - Live Trades, Bonding Curve, Prices"
+  content="Binance Meme Rush API - BSC - Live Trades, Bonding Curve, Prices"
 />
 
 <meta
   property="og:description"
-  content="Get Four Meme data on BNB Chain: trades, bonding curve progress, prices, liquidity, new tokens, migrations, and more."
+  content="Get Binance Meme Rush data on BNB Chain: trades, bonding curve progress, prices, liquidity, new tokens, migrations, and more."
 />
 
 <!-- Twitter -->
@@ -53,10 +55,10 @@ You may also be interested in:
 
 <meta
   property="twitter:title"
-  content="Four Meme API - BSC - Live Trades, Bonding Curve, Prices"
+  content="Binance Meme Rush API - BSC - Live Trades, Bonding Curve, Prices"
 />
 
-<meta property="twitter:description" content="Get Four Meme data on BNB Chain: trades, bonding curve progress, prices, liquidity, new tokens, migrations, and more." />
+<meta property="twitter:description" content="Get Binance Meme Rush data on BNB Chain: trades, bonding curve progress, prices, liquidity, new tokens, migrations, and more." />
 </head>
 
 ::::note
@@ -69,54 +71,44 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 
 ### Table of Contents
 
-### 1. Four Meme Trading & Market Data (BSC)
+### 1. Token Lifecycle, Migrations & Bonding Curve
 
-- [Subscribe the Latest Trades on Four Meme ➤](#subscribe-the-latest-trades-on-four-meme)
-- [Get Latest Buys and Sells for a Four Meme Token ➤](#get-latest-buys-and-sells-for-a-four-meme-token)
-- [Get Trade Metrics of a Four Meme Token ➤](#get-trade-metrics-of-a-four-meme-token)
-- [Get Metadata for a Newly Created Four Meme Token ➤](#metadata-for-a-newly-created-token)
-- [Get latest price of a Four.meme token ➤](#get-latest-price-of-a-fourmeme-token)
-- [Get ATH price of a Four Meme Token ➤](#get-ath-price-of-a-four-meme-token)
-- [Get Price Change Percentage for a Four Meme Token ➤](#get-price-change-percentage-for-a-four-meme-token)
-- [Get OHLCV data of a Four Meme Token ➤](#get-ohlcv-data-of-a-four-meme-token)
-- [Get Trade Volume and Number of Trades for a Four Meme Token ➤](#get-trade-volume-and-number-of-trades-for-a-four-meme-token)
+- [Track All Binance Meme Rush Tokens That Have Migrated to Pancakeswap ➤](#track-all-binance-meme-rush-tokens-that-have-migrated-to-pancakeswap)
+- [Check if a Binance Meme Rush token has migrated or not ➤](#check-if-a-binance-meme-rush-token-has-migrated-or-not)
+- [Bonding Curve Progress API for Binance Meme Rush token ➤](#bonding-curve-progress-api-for-binance-meme-rush-token)
+- [Get Binance Meme Rush Tokens which are above 95% Bonding Curve Progress ➤](#get-binance-meme-rush-tokens-which-are-above-95-bonding-curve-progress)
+- [Get Binance Meme Rush token creations on Four Meme ➤](#get-binance-meme-rush-token-creations-on-four-meme)
+- [Get Meme Rush Tokens created by a specific Dev ➤](#get-meme-rush-tokens-created-by-a-specific-dev)
+- [Get Dev Address of a Meme Rush token ➤](#get-dev-address-of-a-meme-rush-token)
 
-### 2. Token Lifecycle, Liquidity & Migrations
+### 2. Trading & Market Data
 
-- [Get Newly Created Tokens on Four Meme ➤](#get-newly-created-tokens-on-four-meme)
-- [Get Four.Meme Tokens created by a specific Dev ➤](#get-fourmeme-tokens-created-by-a-specific-dev)
-- [Get Dev Address of a Four.meme token ➤](#get-dev-address-of-a-fourmeme-token)
-- [Track All Four Meme Tokens That Have Migrated to Pancakeswap ➤](#track-all-four-meme-tokens-that-have-migrated-to-pancakeswap)
-- [Bonding Curve Progress API for FourMeme token ➤](#bonding-curve-progress-api-for-fourmeme-token)
-- [Get Four Meme Tokens which are above 95% Bonding Curve Progress ➤](#get-four-meme-tokens-which-are-above-95-bonding-curve-progress)
-- [Get liquidity of a Four Meme token ➤](#get-liquidity-of-a-four-meme-token)
-- [Track Liquidity Add Events for All Tokens on Four Meme ➤](#track-liquidity-add-events-for-all-tokens-on-four-meme)
-- [Track Liquidity Add Events for a Token on Four Meme ➤](#track-liquidity-add-events-for-a-token-on-four-meme)
+- [Subscribe the Latest Trades of Meme Rush tokens on Four Meme ➤](#subscribe-the-latest-trades-of-meme-rush-tokens-on-four-meme)
+- [Get Latest Buys and Sells for a Meme Rush Token ➤](#get-latest-buys-and-sells-for-a-meme-rush-token)
+- [Get Trade Metrics of a Meme Rush Token ➤](#get-trade-metrics-of-a-meme-rush-token)
+- [Get latest price of a Meme Rush token ➤](#get-latest-price-of-a-meme-rush-token)
+- [Get ATH price of a Meme Rush Token ➤](#get-ath-price-of-a-meme-rush-token)
+- [Get Price Change Percentage for a Meme Rush Token ➤](#get-price-change-percentage-for-a-meme-rush-token)
+- [Get OHLCV data of a Meme Rush Token ➤](#get-ohlcv-data-of-a-meme-rush-token)
+- [Get Trade Volume and Number of Trades for a Meme Rush Token ➤](#get-trade-volume-and-number-of-trades-for-a-meme-rush-token)
 
-### 3. Trader Insights
+### 3. Trader Insights & Analytics
 
-- [Monitor trades of traders on Four meme ➤](#monitor-trades-of-traders-on-four-meme)
-- [Track Latest and Historical Trades of a Four Meme User ➤](#track-latest-and-historical-trades-of-a-four-meme-user)
-- [Top Buyers for a Token on Four Meme ➤](#top-buyers-for-a-token-on-four-meme)
-- [Top Traders of a token ➤](#top-traders-of-a-token)
+- [Monitor Meme Rush trades of traders on Four.Meme ➤](#monitor-meme-rush-trades-of-traders-on-fourmeme)
+- [Track Meme Rush Tokens in 14k to 18k Marketcap ➤](#track-meme-rush-tokens-in-14k-to-18k-marketcap)
+- [Top Buyers for a Meme Rush Token on Four Meme ➤](#top-buyers-for-a-meme-rush-token-on-four-meme)
+- [Top Traders of a Meme Rush token ➤](#top-traders-of-a-meme-rush-token)
 
-### 4. Market Cap & Getting Started
+### 4. Market Cap, Liquidity & Metadata
 
-- [Get Market Cap of a Four Meme Token ➤](#get-market-cap-of-a-four-meme-token)
+- [Get Realtime Market Cap and Price of a Meme Rush Token ➤](#get-realtime-market-cap-and-price-of-a-meme-rush-token)
+- [Metadata for a Newly Created Meme Rush Token ➤](#metadata-for-a-newly-created-meme-rush-token)
+- [Get liquidity of a Meme Rush token ➤](#get-liquidity-of-a-meme-rush-token)
+
+### 5. Getting Started
+
 - [Bitquery DEX Data Access Options ➤](#bitquery-dex-data-access-options)
 - [Getting Started with Bitquery ➤](#getting-started-with-bitquery)
-
-### 5. Video Tutorials
-
-- [Video Tutorial | How to get Bonding Curve Progress of any Four Meme Token ➤](#video-tutorial--how-to-get-bonding-curve-progress-of-any-four-meme-token)
-- [Video Tutorial | How to track the Four Meme Tokens which are about to Graduate in Realtime ➤](#video-tutorial--how-to-track-the-four-meme-tokens-which-are-about-to-graduate-in-realtime)
-- [Video Tutorial | How to get Liquidity of a Four Meme Token ➤](#video-tutorial--how-to-get-liquidity-of-a-four-meme-token)
-- [Video Tutorial | How to get Top Traders of a Four Meme Token on Solana Four Meme DEX ➤](#video-tutorial--how-to-get-top-traders-of-a-four-meme-token-on-solana-four-meme-dex)
-- [Video Tutorial | How to Get the OHLCV Data of a token on Four Meme DEX ➤](#video-tutorial--how-to-get-the-ohlcv-data-of-a-token-on-four-meme-dex)
-
-### 6. Real World Projects
-
-- [Real World Projects with Four Meme API ➤](#real-world-projects-with-four-meme-api)
 
 ## Bitquery DEX Data Access Options
 
@@ -133,9 +125,9 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 - [BSC Pancake Swap APIs](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/): Pancake swap Trades on BSC network with the help of examples.
 - [Trade APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
 
-## Track All Four Meme Tokens That Have Migrated to Pancakeswap
+## Track All Binance Meme Rush Tokens That Have Migrated to Pancakeswap
 
-This query tracks four meme token migrations to Pancakeswap in realtime by monitoring transactions sent to the Four Meme factory address (`0x5c952063c7fc8610ffdb798152d69f0b9550762b`) and filtering for `PairCreated` and `PoolCreated` events. These events are emitted when a token graduates from Four Meme and migrates to Pancakeswap. Test it [here](https://ide.bitquery.io/four-meme-migration-to-pancakeswap).
+This query tracks Binance Meme Rush token migrations to Pancakeswap in realtime by monitoring transactions sent to the Four Meme factory address (`0x5c952063c7fc8610ffdb798152d69f0b9550762b`) and filtering for `PairCreated` and `PoolCreated` events. These events are emitted when a meme rush token graduates from Four Meme and migrates to Pancakeswap. Test it [here](https://ide.bitquery.io/binance-meme-rush-migration-to-pancakeswap).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -145,9 +137,12 @@ subscription {
   EVM(network: bsc) {
     Events(
       where: {
-        Log: { Signature: { Name: { in: ["PairCreated"] } } }
+        Log: { Signature: { Name: { in: ["PairCreated", "PoolCreated"] } } }
         Transaction: {
           To: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
+        }
+        Arguments: {
+          includes: { Value: { Address: { startsWith: "0x4444" } } }
         }
       }
     ) {
@@ -169,10 +164,10 @@ subscription {
 
 </details>
 
-## Check if a four meme token has migrated or not
+## Check if a Binance Meme Rush token has migrated or not
 
-Below query will only show response if a the mentioned four meme tokens have migrated to Pancakeswap. Note: Please use a `Block{Date}` filter to minimize the data processing and hence the query processing time and get fast responses.
-Try the query [here](https://ide.bitquery.io/if-token-migrated-from-four-meme-or-not_4).
+Below query will only show response if a the mentioned meme rush tokens have migrated to Pancakeswap. Note: Please use a `Block{Date}` filter to minimize the data processing and hence the query processing time and get fast responses.
+Try the query [here](https://ide.bitquery.io/if-meme-rush-token-migrated-from-four-meme-or-not#).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -180,7 +175,7 @@ Try the query [here](https://ide.bitquery.io/if-token-migrated-from-four-meme-or
 {
   EVM(network: bsc, dataset: combined) {
     DEXTradeByTokens(
-      where: {Block: {Date: {since: "2025-10-10"}}, Trade: {Dex: {OwnerAddress: {in: ["0xca143ce32fe78f1f7019d7d551a6402fc5350c73"]}}, Currency: {SmartContract: {in: ["0xfe9936abb3c0659733ff0d03cf41d17b04c84444", "0x9cb5ae8ec79c72bd70b415efb7ff936e707f4444"]}}}}
+      where: {Block: {Date: {since: "2025-10-10"}}, Trade: {Dex: {OwnerAddress: {in: ["0xca143ce32fe78f1f7019d7d551a6402fc5350c73"]}}, Currency: {SmartContract: {in: ["0x4444ab6a517216ee356dc899b6f28a62249446b5", "0x44443eed3477fe8de8696e0b6021ff72cc6624ef"]}}}}
     ) {
       count
       Trade {
@@ -194,9 +189,9 @@ Try the query [here](https://ide.bitquery.io/if-token-migrated-from-four-meme-or
 ```
 </details>
 
-## Bonding Curve Progress API for FourMeme token
+## Bonding Curve Progress API for Binance Meme Rush token
 
-Below query will give you amount of `left tokens` put it in the below given simplied formulae and you will get Bonding Curve progress for the token.
+Below query will give you amount of `left tokens` put it in the below given simplied formulae and you will get Bonding Curve progress for the meme rush token.
 
 ### Bonding Curve Progress Formula
 
@@ -210,7 +205,7 @@ Where:
 
 - **Definitions**:
   - `initialRealTokenReserves` = `totalSupply` - `reservedTokens`
-    - `totalSupply`: 1,000,000,000 (Four meme Token)
+    - `totalSupply`: 1,000,000,000 (Binance Meme Rush Token)
     - `reservedTokens`: 200,000,000
     - Therefore, `initialRealTokenReserves`: 800,000,000
   - `leftTokens` = `realTokenReserves` - `reservedTokens`
@@ -221,16 +216,12 @@ Where:
 BondingCurveProgress = 100 - (((balance - 200000000) \* 100) / 800000000)
 :::
 
-### Additional Notes
-
-- **Balance Retrieval**:
-  - The `balance` is the four meme token balance at this Four Meme: Proxy address (0x5c952063c7fc8610FFDB798152D69F0B9550762b).
-  - Use this query to fetch the balance: [Query Link](https://ide.bitquery.io/Get-balance-of-an-address-for-a-specified-currency_1).
+Try the API example [here](https://ide.bitquery.io/Get-bonding-curve-progress-for-a-specified-meme-rush-token).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 ```graphql
-query MyQuery($token: String) {
+query MyQuery ($token: String){
   EVM(dataset: combined, network: bsc) {
     BalanceUpdates(
       where: {BalanceUpdate: {Address: {is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b"}}, Currency: {SmartContract: {is: $token}}}
@@ -243,24 +234,29 @@ query MyQuery($token: String) {
       BalanceUpdate {
         Address
       }
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100 - ((($balance - 200000000) * 100) / 800000000)"
+      )
     }
   }
 }
-```
+
+````
 </details>
 
 <details>
   <summary>Click to expand Query Varibles (Paste this in variables section on IDE)</summary>
 ```json
 {
-  "token": "0x13378bcbbc386eea99f09bc716f2c80979484444"
+  "token": "0x444478624cb7c53abe549d6449e024f4d8b51bec"
 }
-```
+````
+
 </details>
 
-## Get Four Meme Tokens which are above 95% Bonding Curve Progress
+## Get Binance Meme Rush Tokens which are above 95% Bonding Curve Progress
 
-Using the above Bonding Curve formula, we can calculate the token balances for the Four Meme Proxy contract (0x5c952063c7fc8610FFDB798152D69F0B9550762b) corresponding to approximately 95% to 100% progress along the bonding curve, that comes out to be `200,000,000` to `240,000,000`. The tokens in the response are arranged in the ascending order of Bonding Curve Percentage, i.e., 95% to 100%. You can run and test the saved query [here](https://ide.bitquery.io/Four-Meme-Tokens-between-95-and-100-bonding-curve-progress).
+Using the above Bonding Curve formula, we can calculate the token balances for the Four Meme Proxy contract (0x5c952063c7fc8610FFDB798152D69F0B9550762b) corresponding to approximately 95% to 100% progress along the bonding curve, that comes out to be `200,000,000` to `240,000,000`. The Binance Meme Rush tokens in the response are arranged in the ascending order of Bonding Curve Percentage, i.e., 95% to 100%. You can run and test the saved query [here](https://ide.bitquery.io/Meme-Rush-Tokens-between-95-and-100-bonding-curve-progress_1).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -274,6 +270,7 @@ query MyQuery {
         BalanceUpdate: {
           Address: { is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b" }
         }
+        Currency: { SmartContract: { startsWith: "0x4444" } }
       }
       orderBy: { descendingByField: "balance" }
     ) {
@@ -288,6 +285,9 @@ query MyQuery {
       BalanceUpdate {
         Address
       }
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100 - ((($balance - 200000000) * 100) / 800000000)"
+      )
     }
   }
 }
@@ -295,11 +295,12 @@ query MyQuery {
 
 </details>
 
-## Get Newly Created Tokens on Four Meme
+## Get Binance Meme Rush token creations on Four Meme
 
-[Run Query](https://ide.bitquery.io/track-Four-meme-token-creation-using-events)
+[Run Query](https://ide.bitquery.io/track-Binance-Meme-Rush-token-creations-on-Four-meme-token)
 
-This query retrieves newly created tokens on Four Meme by listening to the `TokenCreate` event. The response provides:
+Binance Meme Rush is a new feature launched by Binance Wallet in collaboration with Four.Meme, aimed at enabling users to access meme tokens early in their initial stages, before they are listed on decentralized exchang
+This query retrieves newly created Binance Meme Rush tokens on Four Meme by listening to the `TokenCreate` event and specifically filtering for event transactions which includes address value in arguments `0x4444`. The response provides:
 
 **Token Information:**
 
@@ -327,6 +328,9 @@ This query retrieves newly created tokens on Four Meme by listening to the `Toke
           To: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
         }
         Log: { Signature: { Name: { is: "TokenCreate" } } }
+        Arguments: {
+          includes: { Value: { Address: { startsWith: "0x4444" } } }
+        }
       }
       limit: { count: 10 }
       orderBy: { descending: Block_Time }
@@ -373,14 +377,12 @@ This query retrieves newly created tokens on Four Meme by listening to the `Toke
 
 </details>
 
-You can refer to this [example](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/#subscribe-the-latest-trades-on-four-meme) to track latest trades of a token on other particular DEX's such as Pancake Swap.
+## Get Meme Rush Tokens created by a specific Dev
 
-## Get Four.Meme Tokens created by a specific Dev
+This API fetches Binance Meme Rush tokens created by a specific dev on BSC by tracking token minting transfers signed by a particular dev.
+`Dev Address` here in example is `0xF4f3eb591c47d14614D3A54aCBA28019e2041066`. Use a date filter based on your needs — shorter time ranges mean faster execution and reduced query time.
 
-This API fetches Four.Meme tokens created by a specific dev on BSC by tracking token minting transfers signed by a particular dev.
-`Dev Address` here in example is `0x9c75588640605d46b42f2d64c5c2e993de251210`. Use a date filter based on your needs — shorter time ranges mean faster execution and reduced query time.
-
-[Run Query](https://ide.bitquery.io/token-created-by-specific-dev)
+[Run Query](https://ide.bitquery.io/meme-rush-tokens-created-by-specific-dev)
 
  <details>
   <summary>Click to expand GraphQL query</summary>
@@ -393,9 +395,10 @@ This API fetches Four.Meme tokens created by a specific dev on BSC by tracking t
         Block: { Date: { since: "2025-08-01" } }
         Transfer: {
           Sender: { is: "0x0000000000000000000000000000000000000000" }
+          Currency: { SmartContract: { startsWith: "0x4444" } }
         }
         Transaction: {
-          From: { in: ["0x9c75588640605d46b42f2d64c5c2e993de251210"] }
+          From: { in: ["0xF4f3eb591c47d14614D3A54aCBA28019e2041066"] }
         }
       }
     ) {
@@ -420,13 +423,13 @@ This API fetches Four.Meme tokens created by a specific dev on BSC by tracking t
 
 </details>
 
-## Get Dev Address of a Four.meme token
+## Get Dev Address of a Meme Rush token
 
-Fetches the developer address that created a specific Four.Meme token on BSC by tracing the minting transfer (from the zero address) of that token’s smart contract.
+Fetches the developer address that created a specific Meme Rush token on BSC by tracing the minting transfer (from the zero address) of that token’s smart contract.
 Use a date filter based on your needs — shorter time ranges make the query execute faster and return results more efficiently.
-Token Address in this example is 0xd284aa8910fe1dcac70f3e28ddd8cc61dac94444.
+Token Address in this example is `0x44442f6b816d4308859470573cb32652c8eee0bb`.
 
-[Run Query](https://ide.bitquery.io/check-who-created-this-token)
+[Run Query](https://ide.bitquery.io/check-who-created-this-meme-rush-token)
 
  <details>
   <summary>Click to expand GraphQL query</summary>
@@ -439,7 +442,7 @@ Token Address in this example is 0xd284aa8910fe1dcac70f3e28ddd8cc61dac94444.
         Block: { Date: { since: "2025-08-01" } }
         Transfer: {
           Currency: {
-            SmartContract: { is: "0xd284aa8910fe1dcac70f3e28ddd8cc61dac94444" }
+            SmartContract: { is: "0x44442f6b816d4308859470573cb32652c8eee0bb" }
           }
           Sender: { is: "0x0000000000000000000000000000000000000000" }
         }
@@ -466,9 +469,9 @@ Token Address in this example is 0xd284aa8910fe1dcac70f3e28ddd8cc61dac94444.
 
 </details>
 
-## Subscribe the Latest Trades on Four Meme
+## Subscribe the Latest Trades of Meme Rush tokens on Four Meme
 
-Using subscriptions you can subscribe to the latest trades on Four Meme as shown in this [example](https://ide.bitquery.io/Latest-trades-on-fourmeme). The subscription returns latest trade info such as buyers and sellers, buy and sell currency details and amount of currency.
+Using subscriptions you can subscribe to the latest trades of Meme Rush tokens on Four Meme as shown in this [example](https://ide.bitquery.io/Latest-trades-of-meme-rush-tokens-on-fourmeme). The subscription returns latest trade info such as buyers and sellers, buy and sell currency details and amount of currency.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -477,7 +480,21 @@ Using subscriptions you can subscribe to the latest trades on Four Meme as shown
 subscription {
   EVM(network: bsc) {
     DEXTrades(
-      where: { Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } } } }
+      where: {
+        Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } } }
+        any: [
+          {
+            Trade: {
+              Buy: { Currency: { SmartContract: { startsWith: "0x4444" } } }
+            }
+          }
+          {
+            Trade: {
+              Sell: { Currency: { SmartContract: { startsWith: "0x4444" } } }
+            }
+          }
+        ]
+      }
     ) {
       Trade {
         Buy {
@@ -509,9 +526,9 @@ subscription {
 
 </details>
 
-## Get Latest Buys and Sells for a Four Meme Token
+## Get Latest Buys and Sells for a Meme Rush Token
 
-[This](https://ide.bitquery.io/Latest-buys-and-sells-for-a-four-meme-coin_1) query retrieves the most recent token buy and sell trades of a specific token on Four Meme Exchange.
+[This](https://ide.bitquery.io/Latest-buys-and-sells-for-a-meme-rush-coin-on-four-meme-dex) query retrieves the most recent token buy and sell trades of a specific Meme Rush token on Four Meme Exchange.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -585,7 +602,7 @@ query MyQuery($currency: String) {
 
 ```json
 {
-  "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
+  "currency": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"
 }
 ```
 
@@ -593,9 +610,9 @@ query MyQuery($currency: String) {
 
 You can also check if the token is listed on other DEX using this [example](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/#get-all-dexs-where-a-specific-token-is-listed).
 
-## Get Trade Metrics of a Four Meme Token
+## Get Trade Metrics of a Meme Rush Token
 
-Use the below query to get trade metrics like volume and trades for a token in different time frames, such as `24 hours`, `1 hour` and `5 minutes`. Test it [here](https://ide.bitquery.io/volume-and-trades-for-a-token-in-different-time-frames_3).
+Use the below query to get trade metrics like volume and trades for a token in different time frames, such as `24 hours`, `1 hour` and `5 minutes`. Test it [here](https://ide.bitquery.io/volume-and-trades-for-a-meme-rush-token-in-different-time-frames).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -639,16 +656,16 @@ query MyQuery($currency: String) {
 
 ```json
 {
-  "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
+  "currency": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"
 }
 ```
 
 </details>
 
-## Get latest price of a Four.meme token
+## Get latest price of a Meme Rush token
 
 We launched the [Price Index](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) in August 2025, allowing you to track price of any token trading onchain.
-Here's an example of [tracking Four.meme token prices](https://ide.bitquery.io/latest-token-price-on-four-meme-dex).
+Here's an example of [tracking Meme Rush token prices](https://ide.bitquery.io/latest-meme-rush-token-price-on-four-meme-dex#).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -657,7 +674,7 @@ Here's an example of [tracking Four.meme token prices](https://ide.bitquery.io/l
 {
   Trading {
     Pairs(
-      where: {Price: {IsQuotedInUsd: false}, Market: {Network: {is: "Binance Smart Chain"}, Program: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Token: {Address: {is: "0x2157de505dfaa51676d6d22c0424551fbeaf4444"}}, Interval: {Time: {Duration: {eq: 60}}}}
+      where: {Price: {IsQuotedInUsd: false}, Market: {Network: {is: "Binance Smart Chain"}, Program: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Token: {Address: {is: "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"}}, Interval: {Time: {Duration: {eq: 60}}}}
       limit: {count: 1}
       orderBy: {descending: Block_Time}
     ) {
@@ -703,10 +720,10 @@ Here's an example of [tracking Four.meme token prices](https://ide.bitquery.io/l
 
 </details>
 
-## Get ATH price of a Four Meme Token
+## Get ATH price of a Meme Rush Token
 
-Fetches the All-Time High (ATH) price of a specific Four.Meme token on BSC, using the `DEXTradeByTokens` dataset to calculate the 98th percentile of trade prices (approximate ATH).
-Use a date filter suited to your needs — a shorter duration will make the query run faster and return results more efficiently. Try the API [here](https://ide.bitquery.io/four-meme---token-ATH-price).
+Fetches the All-Time High (ATH) price of a specific Meme Rush token on BSC, using the `DEXTradeByTokens` dataset to calculate the 98th percentile of trade prices (approximate ATH).
+Use a date filter suited to your needs — a shorter duration will make the query run faster and return results more efficiently. Try the API [here](https://ide.bitquery.io/meme-rush-token-ATH-price).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -742,7 +759,7 @@ query tradingView(
 ```json
 {
   "network": "bsc",
-  "token": "0xe59ecb01d56a7f1e66276c1bc885d64c92614444",
+  "token": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701",
   "dataset": "combined",
   "local": "EVM",
   "interval": 60
@@ -751,9 +768,9 @@ query tradingView(
 
 </details>
 
-## Get Price Change Percentage for a Four Meme Token
+## Get Price Change Percentage for a Meme Rush Token
 
-Use the below query to get the price change in percentage for various time fields including `24 hours`, `1 hour` and `5 minutes`. Try it [here](https://ide.bitquery.io/Percentage-price-change-for-a-token).
+Use the below query to get the price change in percentage for various time fields including `24 hours`, `1 hour` and `5 minutes`. Try it [here](https://ide.bitquery.io/Percentage-price-change-for-a-meme-rush-token).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -798,15 +815,15 @@ query MyQuery($currency: String) {
 
 ```json
 {
-  "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
+  "currency": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"
 }
 ```
 
 </details>
 
-## Get OHLCV data of a Four Meme Token
+## Get OHLCV data of a Meme Rush Token
 
-Use the below query to get four meme token OHLCV data. Test it [here](https://ide.bitquery.io/OHLC-for-a-four-meme-token).
+Use the below query to get meme rush token OHLCV data. Test it [here](https://ide.bitquery.io/OHLC-for-a-meme-rush-token).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -843,15 +860,15 @@ query tradingView($network: evm_network, $token: String) {
 ```json
 {
   "network": "bsc",
-  "token": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
+  "token": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"
 }
 ```
 
 </details>
 
-## Monitor trades of traders on Four meme
+## Monitor Meme Rush trades of traders on Four.Meme
 
-You can use our streams to monitor real time trades of a trader on Four Meme, for example run [this stream](https://ide.bitquery.io/monitor-trades-of-a-trader-on-four-meme).
+You can use our streams to monitor real time trades of a trader on Four Meme, for example run [this stream](https://ide.bitquery.io/monitor-meme-rush-token-trades-of-a-trader-on-four-meme_1).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -865,6 +882,18 @@ subscription {
         Transaction: {
           From: { is: "0x7db00d1f5b8855d40827f34bb17f95d31990306e" }
         }
+        any: [
+          {
+            Trade: {
+              Buy: { Currency: { SmartContract: { startsWith: "0x4444" } } }
+            }
+          }
+          {
+            Trade: {
+              Sell: { Currency: { SmartContract: { startsWith: "0x4444" } } }
+            }
+          }
+        ]
       }
     ) {
       Trade {
@@ -901,11 +930,11 @@ subscription {
 
 You can also get the trade activities of a user on Pancake Swap using our [Pancake Swap](./pancake-swap-api.md) APIs.
 
-## Track Four Meme Tokens in 14k to 18k Marketcap
+## Track Meme Rush Tokens in 14k to 18k Marketcap
 
-Tracks live Four Meme tokens on BSC with a market cap between $14K–$18K, filtered by 14k to 18k Marketcap.
+Tracks live Meme Rush tokens on BSC with a market cap between $14K–$18K, filtered by 14k to 18k Marketcap.
 Useful for spotting emerging small-cap meme tokens in real time.
-Try the query [here](https://ide.bitquery.io/Four-meme-tokens-in-14K-to-17K-Marketcap).
+Try the query [here](https://ide.bitquery.io/meme-rush-tokens-in-14K-to-17K-Marketcap).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -925,6 +954,7 @@ subscription {
           Network: { is: "Binance Smart Chain" }
         }
         Volume: { Usd: { gt: 5 } }
+        Token: { Address: { startsWith: "0x4444" } }
       }
     ) {
       Token {
@@ -975,67 +1005,9 @@ subscription {
 
 </details>
 
-## Track Latest and Historical Trades of a Four Meme User
+## Top Buyers for a Meme Rush Token on Four Meme
 
-You can use DEX Trades API with combined dataset to get latest and historic trades of a user. Run [this query](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme) for example.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query MyQuery($address: String) {
-  EVM(dataset: combined, network: bsc) {
-    DEXTrades(
-      where: {
-        Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } }, Success: true }
-        Transaction: { From: { is: $address } }
-      }
-      orderBy: { descending: Block_Time }
-    ) {
-      Block {
-        Time
-      }
-      Trade {
-        Buy {
-          Buyer
-          Currency {
-            Name
-            Symbol
-            SmartContract
-          }
-          Amount
-          Price
-          PriceInUSD
-        }
-        Sell {
-          Seller
-          Currency {
-            Name
-            Symbol
-            SmartContract
-          }
-          Amount
-        }
-      }
-      Transaction {
-        Hash
-      }
-    }
-  }
-}
-```
-
-```json
-{
-  "address": "0x7db00d1f5b8855d40827f34bb17f95d31990306e"
-}
-```
-
-</details>
-
-## Top Buyers for a Token on Four Meme
-
-[This](https://ide.bitquery.io/Top-buyers-of-a-four-meme-token) query returns top buyers of a particular token on Four Meme, with currency smart contract as `0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40` for this example.
+[This](https://ide.bitquery.io/Top-buyers-of-a-meme-rush-token) query returns top buyers of a particular Meme Rush token on Four Meme, with currency smart contract as `0x44442202ff27ee2297c128d0c1ae43a0fbb35701` for this example.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -1067,15 +1039,15 @@ query MyQuery($currency: String) {
 
 ```json
 {
-  "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40"
+  "currency": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"
 }
 ```
 
 </details>
 
-## Get Trade Volume and Number of Trades for a Four Meme Token
+## Get Trade Volume and Number of Trades for a Meme Rush Token
 
-[This](https://ide.bitquery.io/volume-and-trades-for-a-token-in-different-time-frames_1) query returns the traded volume and number of trades for a particular Four Meme token in different time frames, namely 24 hours, 1 hour and 5 minutes.
+[This](https://ide.bitquery.io/volume-and-trades-for-a-token-in-different-time-frames_4) query returns the traded volume and number of trades for a particular Meme Rush token in different time frames, namely 24 hours, 1 hour and 5 minutes.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -1120,18 +1092,18 @@ query MyQuery(
 
 ```json
 {
-  "currency": "0x9b48a54bcce09e59b0479060e9328ab7dbdb0d40",
-  "time_24hr_ago": "2024-03-23T15:00:00Z",
-  "time_1hr_ago": "2024-03-24T14:00:00Z",
-  "time_5min_ago": "2024-03-24T15:55:00Z"
+  "currency": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701",
+  "time_24hr_ago": "2025-10-23T15:00:00Z",
+  "time_1hr_ago": "2025-10-24T14:00:00Z",
+  "time_5min_ago": "2025-10-24T15:55:00Z"
 }
 ```
 
 </details>
 
-## Get Realtime Market Cap and Price of a Four Meme Token
+## Get Realtime Market Cap and Price of a Meme Rush Token
 
-To get the market cap of a token we need two things, the latest `PriceInUSD` and `total supply` of the token. Total Supply is 1,000,000,000 (1B) for four meme tokens so we just need to get price and multiply it with 1B. [This](https://ide.bitquery.io/Real-Time-Marektcap-and-price-of-a-four-meme-token) query helps with getting the latest USD price of a token and hence its latest Marketcap.
+To get the market cap of a token we need two things, the latest `PriceInUSD` and `total supply` of the token. Total Supply is 1,000,000,000 (1B) for four meme tokens so we just need to get price and multiply it with 1B. [This](https://ide.bitquery.io/Real-Time-Marektcap-and-price-of-a-meme-rush-token) query helps with getting the latest USD price of a token and hence its latest Marketcap.
 
 ```
 Market Cap = Total Supply * PriceInUSD
@@ -1152,7 +1124,7 @@ subscription {
           Network: { is: "Binance Smart Chain" }
         }
         Volume: { Usd: { gt: 5 } }
-        Token: { Address: { is: "0xf5bc78c8c762e4003742dacc31f3ba7091be4444" } }
+        Token: { Address: { is: "0x44442202ff27ee2297c128d0c1ae43a0fbb35701" } }
       }
     ) {
       Token {
@@ -1203,179 +1175,10 @@ subscription {
 
 </details>
 
-## Track Liquidity Add Events for All Tokens on Four Meme
+## Metadata for a Newly Created Meme Rush Token
 
-This query tracks all liquidity addition events on the Four Meme Exchange. It listens for `LiquidityAdded` events emitted from the four meme exchange's smart contract (0x5c952063c7fc8610ffdb798152d69f0b9550762b)
-
-You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific-tokens-on-Four-meme)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```
-{
-  EVM(dataset: realtime, network: bsc) {
-    Events(
-      limit: {count: 20}
-      where: {LogHeader: {Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}},
-        Log: {Signature: {Name: {is: "LiquidityAdded"}}}}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-
-```
-
-</details>
-
-## Track Liquidity Add Events for a Token on Four Meme
-
-This query tracks liquidity addition events for a specific token on the Four Meme Exchange. It listens for `LiquidityAdded` events emitted from the exchange's smart contract (`0x5c952063c7fc8610ffdb798152d69f0b9550762b`) BNB network
-
-In this example, the query monitors liquidity events for a specific token (`0x5a49ce64a1e44f6fce07e9ff38f54dde8a8a0e94`) by filtering the event arguments to only include actions related to this token.
-
-You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific-tokens-on-Four-meme)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```
-{
-  EVM(dataset: realtime, network: bsc) {
-    Events(
-      limit: {count: 20}
-      where: {LogHeader: {Address: {is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b"}}, Log: {Signature: {Name: {is: "LiquidityAdded"}}}, Arguments: {includes: {Name: {is: "token1"}, Value: {Address: {is: "0x5a49ce64a1e44f6fce07e9ff38f54dde8a8a0e94"}}}}}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-
-```
-
-</details>
-
-## Metadata for a Newly Created Token
-
-This query will fetch you trade metrics, such as marketcap, trade volume, token holders and creation time for a newly created Four Meme token on BSC network.
-You can test the query [here](https://ide.bitquery.io/zeyouBitquery-metrics-query).
+This query will fetch you trade metrics, such as marketcap, trade volume, token holders and creation time for a newly created Meme Rush token on BSC network.
+You can test the query [here](https://ide.bitquery.io/marketcap-total-holders-metrics-query).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -1417,12 +1220,18 @@ query MyQuery($token: String!) {
 }
 ```
 
+```
+{
+  "token": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"
+}
+```
+
 </details>
 
-## Top Traders of a token
+## Top Traders of a Meme Rush token
 
-This query will fetch you top traders of a Four Meme token for the BSC network.
-You can test the query [here](https://ide.bitquery.io/top-traders-of-a-four-meme-token_1).
+This query will fetch you top traders of a meme rush token for the BSC network.
+You can test the query [here](https://ide.bitquery.io/top-traders-of-a-meme-rush-token).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -1450,17 +1259,20 @@ query topTraders($network: evm_network, $token: String) {
     }
   }
 }
+```
+
+```
 {
   "network": "bsc",
-  "token": "0x37e3a59843b056e063780402ef25e12dca394444"
+  "token": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"
 }
 ```
 
 </details>
 
-## Get liquidity of a Four Meme token
+## Get liquidity of a Meme Rush token
 
-Using below API you can get the liquidity of a four meme token. Subtract `200000000` from the Balance that this query returns because 200M tokens are reserved which gets transferred to pancakeswap when this fourmeme token graduates. Test the API [here](https://ide.bitquery.io/Get-liquidity-of-a-fourmeme-token).
+Using below API you can get the liquidity of a meme rush token. Subtract `200000000` from the Balance that this query returns because 200M tokens are reserved which gets transferred to pancakeswap when this meme rush token graduates. Test the API [here](https://ide.bitquery.io/Get-liquidity-of-a-meme-rush-token).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -1469,7 +1281,7 @@ Using below API you can get the liquidity of a four meme token. Subtract `200000
 query MyQuery {
   EVM(dataset: combined, network: bsc) {
     BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b"}}, Currency: {SmartContract: {is: "0x87c5b3da05b062480b55c2dbf374ccd084f74444"}}}
+      where: {BalanceUpdate: {Address: {is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b"}}, Currency: {SmartContract: {is: "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"}}}
       orderBy: {descendingByField: "balance"}
     ) {
       Currency {
@@ -1485,37 +1297,3 @@ query MyQuery {
 ```
 
 </details>
-
-## Video Tutorial | How to get Bonding Curve Progress of any Four Meme Token
-
-<VideoPlayer url="https://www.youtube.com/watch?v=D1LR535v0mI" />
-
-## Video Tutorial | How to track the Four Meme Tokens which are about to Graduate in Realtime
-
-<VideoPlayer url="https://youtu.be/vbDxtoOGLm4" />
-
-## Video Tutorial | How to get Liquidity of a Four Meme Token
-
-<VideoPlayer url="https://www.youtube.com/watch?v=nD1oVaJtwWo" />
-
-## Video Tutorial | How to get Top Traders of a Four Meme Token on Solana Four Meme DEX
-
-<VideoPlayer url="https://www.youtube.com/watch?v=EE7wsFKj6n0" />
-
-## Video Tutorial | How to Get the OHLCV Data of a token on Four Meme DEX
-
-<VideoPlayer url="https://www.youtube.com/watch?v=ZqTKDgSaYaQ" />
-
-## Real World Projects with Four Meme API
-
-### Building a Four Meme Dashboard
-
-- [Tutorial](https://learnblockchain.cn/article/12532)
-- [Source Code](https://github.com/Kshitij0O7/four-meme-dashboard)
-- [Video](https://youtu.be/mwmoZAo7oFE?si=_-4n2fL-lH6la-8i)
-
-### Four Meme Sniper Bot
-
-- [Tutorial](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
-- [Source Code](https://github.com/Kshitij0O7/evm-sniper)
-- [Video](https://youtu.be/vgOHgqTJmj0?si=yfUguMWdMtxRJMvg)
