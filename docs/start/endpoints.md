@@ -13,6 +13,11 @@ Bitquery offers two API versions:
 For optimal performance, use the endpoint closest to your application's deployment region.
 :::
 
+:::info WebSocket Endpoints (WSS)
+For WebSocket connections, use the same endpoints but replace `https` with `wss`. For example:
+- `https://asia.streaming.bitquery.io/graphql` becomes `wss://asia.streaming.bitquery.io/graphql`
+:::
+
 ## Europe and Nearby
 
 ### V1 - Historical Data API
