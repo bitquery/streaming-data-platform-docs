@@ -77,12 +77,12 @@ const config = {
     //     },
     //   },
     // ],
-    // [
-    //   require.resolve("@easyops-cn/docusaurus-search-local"),
-    //   {
-    //     // minimal configuration
-    //   },
-    // ],
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        // minimal configuration
+      },
+    ],
     [
       "@docusaurus/plugin-client-redirects",
       {
