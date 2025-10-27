@@ -66,6 +66,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 - [Subscribe to Latest Trades on Aerodrome Finance ➤](#subscribe-to-latest-trades-on-aerodrome-finance)
 - [Most Traded Tokens on Aerodrome Finance ➤](#most-traded-tokens-on-aerodrome-finance)
+- [Realtime Prices, OHLC, Trading Volume of all pairs ➤](#realtime-prices-ohlc-trading-volume-of-all-pairs)
 
 ### 2. Liquidity Pools & Analytics
 
@@ -171,6 +172,71 @@ query MyQuery {
         }
       }
       count
+    }
+  }
+}
+```
+
+</details>
+
+## Realtime Prices, OHLC, Trading Volume of all pairs
+
+Below API gives you instant access to live Aerodrome market data with pre-calculated OHLC, moving averages, and trading volumes updating every second—no complex calculations needed, just plug and play for your trading bots or analytics platform.
+
+[Realtime Prices, OHLC, Trading Volume of all pairs — Query ➤](https://ide.bitquery.io/aerodrome-dex---realtime-prices-1-sec-ohlc-trading-volumes)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Pairs(
+      where: {
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Price: { IsQuotedInUsd: true }
+        Market: { ProtocolFamily: { is: "Aerodrome" } }
+      }
+    ) {
+      Token {
+        Name
+        Symbol
+        Address
+      }
+      Price {
+        Average {
+          Estimate
+          Mean
+          ExponentialMoving
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
+      QuoteToken {
+        Name
+        Symbol
+        Address
+      }
+      Market {
+        ProtocolFamily
+      }
+      Volume {
+        Base
+        Quote
+      }
+      Interval {
+        Time {
+          Duration
+          Start
+          End
+        }
+      }
     }
   }
 }
