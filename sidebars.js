@@ -270,6 +270,7 @@ const sidebars = {
                   ],
                 },
                 "grpc/solana/best_practices",
+                "grpc/solana/live-reload",
                 "grpc/solana/errors",
               ],
             },
