@@ -6,6 +6,11 @@ You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tr
 
 Remember that Bitcoin blocks are produced with an average gap of 10 minutes per block.
 
+## Topic Details
+
+- `btc.transactions.proto` : streams all transactions details described below.
+- **Data Sample of Transaction Data**: You can view a sample of the Bitcoin stream data [here](https://github.com/bitquery/kafka-data-sample/blob/main/utxo/bitcoin.json). 
+
 ## Structure of On-Chain Data
 
 ### Block-Level Data
