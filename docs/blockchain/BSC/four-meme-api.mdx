@@ -523,7 +523,6 @@ query MyQuery($currency: String) {
       where: {
         Trade: {
           Buy: { Currency: { SmartContract: { is: $currency } } }
-          Success: true
           Dex: { ProtocolName: { is: "fourmeme_v1" } }
         }
       }
@@ -726,7 +725,6 @@ query tradingView(
         Trade: {
           Side: { Currency: { SmartContract: { is: "0x" } } }
           Currency: { SmartContract: { is: $token } }
-          Success: true
         }
       }
     ) {
@@ -763,7 +761,7 @@ query MyQuery($currency: String) {
   EVM(network: bsc) {
     DEXTradeByTokens(
       where: {
-        Trade: { Currency: { SmartContract: { is: $currency } }, Success: true }
+        Trade: { Currency: { SmartContract: { is: $currency } } }
         Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
@@ -861,7 +859,7 @@ subscription {
   EVM(network: bsc) {
     DEXTrades(
       where: {
-        Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } }, Success: true }
+        Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } } }
         Transaction: {
           From: { is: "0x7db00d1f5b8855d40827f34bb17f95d31990306e" }
         }
@@ -987,7 +985,7 @@ query MyQuery($address: String) {
   EVM(dataset: combined, network: bsc) {
     DEXTrades(
       where: {
-        Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } }, Success: true }
+        Trade: { Dex: { ProtocolName: { is: "fourmeme_v1" } } }
         Transaction: { From: { is: $address } }
       }
       orderBy: { descending: Block_Time }
@@ -1047,7 +1045,6 @@ query MyQuery($currency: String) {
       where: {
         Trade: {
           Buy: { Currency: { SmartContract: { is: $currency } } }
-          Success: true
           Dex: { ProtocolName: { is: "fourmeme_v1" } }
         }
       }
@@ -1090,7 +1087,7 @@ query MyQuery(
   EVM(network: bsc) {
     DEXTradeByTokens(
       where: {
-        Trade: { Currency: { SmartContract: { is: $currency } }, Success: true }
+        Trade: { Currency: { SmartContract: { is: $currency } } }
         Block: { Time: { since: $time_24hr_ago } }
       }
     ) {
