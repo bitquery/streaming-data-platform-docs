@@ -485,6 +485,7 @@ const sidebars = {
             "blockchain/Solana/solana_fees_api",
             "blockchain/Solana/Boop-Fun-API",
             "blockchain/Solana/BonkSwap-API",
+            "blockchain/Solana/trends-fun-API",
             "blockchain/Solana/jupiter-studio-api",
             "blockchain/Solana/solana-jupiter-api",
             "blockchain/Solana/solana-gmgn-api",
