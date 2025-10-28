@@ -100,9 +100,13 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 - [Top Buyers for a Token on Four Meme ➤](#top-buyers-for-a-token-on-four-meme)
 - [Top Traders of a token ➤](#top-traders-of-a-token)
 
-### 4. Market Cap & Getting Started
+### 4. Top Tokens & Getting Started
 
-- [Get Market Cap of a Four Meme Token ➤](#get-market-cap-of-a-four-meme-token)
+- [Get Realtime Market Cap and Price of a Four Meme Token ➤](#get-realtime-market-cap-and-price-of-a-four-meme-token)
+- [Top Tokens by marketcap ➤](#top-tokens-by-marketcap)
+- [Top Tokens by launch marketcap ➤](#top-tokens-by-launch-marketcap)
+- [Top Tokens by buys, sells, volume, price change, buyers, sellers ➤](#top-tokens-by-buys-sells-volume-price-change-buyers-sellers)
+- [Top Tokens by liquidity ➤](#top-tokens-by-liquidity)
 - [Bitquery DEX Data Access Options ➤](#bitquery-dex-data-access-options)
 - [Getting Started with Bitquery ➤](#getting-started-with-bitquery)
 
@@ -260,7 +264,7 @@ query MyQuery($token: String) {
 
 ## Get Four Meme Tokens which are above 95% Bonding Curve Progress
 
-Using the above Bonding Curve formula, we can calculate the token balances for the Four Meme Proxy contract (0x5c952063c7fc8610FFDB798152D69F0B9550762b) corresponding to approximately 95% to 100% progress along the bonding curve, that comes out to be `200,000,000` to `240,000,000`. The tokens in the response are arranged in the ascending order of Bonding Curve Percentage, i.e., 95% to 100%. You can run and test the saved query [here](https://ide.bitquery.io/Four-Meme-Tokens-between-95-and-100-bonding-curve-progress).
+Using the above Bonding Curve formula, we can calculate the token balances for the Four Meme Proxy contract (0x5c952063c7fc8610FFDB798152D69F0B9550762b) corresponding to approximately 95% to 100% progress along the bonding curve, that comes out to be `200,000,000` to `240,000,000`. The tokens in the response are arranged in the ascending order of Bonding Curve Percentage, i.e., 95% to 100%. You can run and test the saved query [here](https://ide.bitquery.io/Get-Four-Meme-Tokens-which-are-above-95-Bonding-Curve-Progress).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -269,13 +273,13 @@ Using the above Bonding Curve formula, we can calculate the token balances for t
 query MyQuery {
   EVM(dataset: combined, network: bsc) {
     BalanceUpdates(
-      limit: { count: 10 }
+      limit: { count: 100 }
       where: {
         BalanceUpdate: {
           Address: { is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b" }
         }
       }
-      orderBy: { descendingByField: "balance" }
+      orderBy: { descendingByField: "Bonding_Curve_Progress_precentage" }
     ) {
       Currency {
         SmartContract
@@ -288,6 +292,9 @@ query MyQuery {
       BalanceUpdate {
         Address
       }
+      Bonding_Curve_Progress_precentage: calculate(
+        expression: "100 - ((($balance - 200000000) * 100) / 800000000)"
+      )
     }
   }
 }
@@ -1192,6 +1199,336 @@ subscription {
           Low
           Open
         }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Top Tokens by marketcap
+
+Below API can be used to get top four meme tokens by marketcap. You can get all the data through us and create a min and max marketcap filter in your application. Try the API [here](https://ide.bitquery.io/top-tokens-by-marketcap-on-fourmeme).
+
+```
+Market Cap = Total Supply * PriceInUSD
+```
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(network: bsc, dataset: realtime) {
+    DEXTradeByTokens(
+      limit: { count: 100 }
+      orderBy: { descendingByField: "Marketcap" }
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Dex: { ProtocolName: { is: "fourmeme_v1" } }
+          Side: {
+            AmountInUSD: { gt: "20" }
+            Currency: {
+              SmartContract: {
+                in: [
+                  "0x"
+                  "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
+                  "0x55d398326f99059fF775485246999027B3197955"
+                  "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+                  "0x17EAfd08994305D8AcE37EfB82F1523177eC70EE"
+                  "0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d"
+                ]
+              }
+            }
+          }
+        }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        PriceInUSD(maximum: Block_Time)
+        Side {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+      }
+      Transaction {
+        Hash(maximum: Block_Time)
+      }
+      Marketcap: calculate(expression: "$Trade_PriceInUSD * 1000000000")
+    }
+  }
+}
+```
+
+</details>
+
+## Top Tokens by launch marketcap
+
+Below API can be used to get top four meme tokens by launch marketcap (marketcap at the time of launching). You can get all the data through us and create a min and max marketcap filter in your application. Try the API [here](https://ide.bitquery.io/top-tokens-by-launch-marketcap-on-fourmeme_1).
+
+```
+Market Cap = Total Supply * PriceInUSD
+```
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(network: bsc, dataset: realtime) {
+    DEXTradeByTokens(
+      limit: { count: 100 }
+      orderBy: { descendingByField: "Marketcap" }
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Dex: { ProtocolName: { is: "fourmeme_v1" } }
+          Side: {
+            AmountInUSD: { gt: "20" }
+            Currency: {
+              SmartContract: {
+                in: [
+                  "0x"
+                  "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
+                  "0x55d398326f99059fF775485246999027B3197955"
+                  "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+                  "0x17EAfd08994305D8AcE37EfB82F1523177eC70EE"
+                  "0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d"
+                ]
+              }
+            }
+          }
+        }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        PriceInUSD(minimum: Block_Time)
+        Side {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+      }
+      Transaction {
+        Hash(minimum: Block_Time)
+      }
+      Marketcap: calculate(expression: "$Trade_PriceInUSD * 1000000000")
+    }
+  }
+}
+```
+
+</details>
+
+## Top Tokens by buys, sells, volume, price change, buyers, sellers
+
+Below API can be used to get top four meme tokens by buys, sells, volume, price change, buyers, sellers. You can get all the data through us and create a min and max marketcap filter in your application. Try the API [here](https://ide.bitquery.io/top-tokens-by-price-change-volume-buys-sells-buyers-sellers_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(network: bsc, dataset: combined) {
+    DEXTradeByTokens(
+      limit: { count: 100 }
+      orderBy: { descendingByField: "buys_1hr" }
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        TransactionStatus: { Success: true }
+        Trade: {
+          Dex: { ProtocolName: { is: "fourmeme_v1" } }
+          Side: {
+            Currency: {
+              SmartContract: {
+                in: [
+                  "0x"
+                  "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
+                  "0x55d398326f99059fF775485246999027B3197955"
+                  "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+                  "0x17EAfd08994305D8AcE37EfB82F1523177eC70EE"
+                  "0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d"
+                ]
+              }
+            }
+          }
+        }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        price_24hr: Price(minimum: Block_Time)
+        price_1hr: Price(
+          maximum: Block_Time
+          if: { Block: { Time: { till_relative: { hours_ago: 1 } } } }
+        )
+        price_5min: Price(
+          maximum: Block_Time
+          if: { Block: { Time: { till_relative: { minutes_ago: 5 } } } }
+        )
+        current: Price(maximum: Block_Time)
+        Side {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+      }
+      buyers_24hr: count(
+        distinct: Transaction_From
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sellers_24hr: count(
+        distinct: Transaction_From
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      buys_1hr: count(
+        if: {
+          Trade: { Side: { Type: { is: buy } } }
+          Block: { Time: { till_relative: { hours_ago: 1 } } }
+        }
+      )
+      buys_24hr: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      sells_1hr: count(
+        if: {
+          Trade: { Side: { Type: { is: sell } } }
+          Block: { Time: { till_relative: { hours_ago: 1 } } }
+        }
+      )
+      sells_24hr: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      volume_1hr: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Block: { Time: { till_relative: { hours_ago: 1 } } } }
+      )
+      volume_24hr: sum(of: Trade_Side_AmountInUSD)
+      change_24hr: calculate(
+        expression: "( $Trade_current - $Trade_price_24hr ) / $Trade_price_24hr * 100"
+      )
+      change_1hr: calculate(
+        expression: "( $Trade_current - $Trade_price_1hr ) / $Trade_price_1hr * 100"
+      )
+      change_5min: calculate(
+        expression: "( $Trade_current - $Trade_price_5min ) / $Trade_price_5min * 100"
+      )
+    }
+  }
+}
+```
+
+</details>
+
+## Top Tokens by buys, sells, volume, price change, buyers, sellers
+
+Below API can be used to get top four meme tokens by buys, sells, volume, price change, buyers, sellers. You can get all the data through us and create a min and max buys, sells, volume, price change filter in your application. Try the API [here](https://ide.bitquery.io/top-tokens-by-launch-marketcap-on-fourmeme_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(network: bsc, dataset: realtime) {
+    DEXTradeByTokens(
+      limit: { count: 100 }
+      orderBy: { descendingByField: "Marketcap" }
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Dex: { ProtocolName: { is: "fourmeme_v1" } }
+          Side: {
+            AmountInUSD: { gt: "20" }
+            Currency: {
+              SmartContract: {
+                in: [
+                  "0x"
+                  "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
+                  "0x55d398326f99059fF775485246999027B3197955"
+                  "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+                  "0x17EAfd08994305D8AcE37EfB82F1523177eC70EE"
+                  "0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d"
+                ]
+              }
+            }
+          }
+        }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        PriceInUSD(minimum: Block_Time)
+        Side {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+      }
+      Transaction {
+        Hash(minimum: Block_Time)
+      }
+      Marketcap: calculate(expression: "$Trade_PriceInUSD * 1000000000")
+    }
+  }
+}
+```
+
+</details>
+
+## Top Tokens by liquidity
+
+Below API can be used to get top four meme tokens by liquidity between 800M and 900M token liquqidity. You can create a min and max liquidity filter in your application using this API. Try the API [here](https://ide.bitquery.io/Top-tokens-in-800-M-and-900-M-liquidity-range).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: bsc) {
+    BalanceUpdates(
+      where: {
+        BalanceUpdate: {
+          Address: { is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b" }
+        }
+      }
+      orderBy: { descendingByField: "balance" }
+    ) {
+      Currency {
+        Name
+        Symbol
+        SmartContract
+      }
+      balance: sum(
+        of: BalanceUpdate_Amount
+        selectWhere: { gt: "800000000", le: "900000000" }
+      )
+      BalanceUpdate {
+        Address
       }
     }
   }
