@@ -21,15 +21,22 @@ keywords:
 
 # Polymarket API Documentation
 
-## Introduction
+## Overview
 
-Polymarket is a decentralized prediction market platform built on Ethereum (and Polygon) that allows users to bet on the outcome of real-world events using cryptocurrency. The platform leverages the Conditional Token Framework (CTF) and integrates with UMA's Optimistic Oracle to create a trustless, transparent prediction market ecosystem for DeFi betting, event forecasting, and decentralized finance applications.
+Polymarket is a decentralized prediction market protocol powered by Conditional Tokens Framework (CTF). It enables users to:
 
-### How Polymarket Works
+- **Create markets (conditions)** tied to real-world events
+- **Trade outcome tokens** representing possible results  
+- **Resolve markets** via UMA oracles
+- **Redeem winning positions** for collateral
+
+This comprehensive API documentation describes when and how events are emitted through the Polymarket smart contracts during these processes, providing developers with complete access to prediction market data, oracle resolution tracking, and decentralized trading analytics.
+
+### How Polymarket Protocol Works
 
 1. **Market Creation**: Questions about real-world events are created with multiple possible outcomes for crypto prediction markets
-2. **Position Trading**: Users can buy and sell positions (represented as ERC-1155 tokens) based on their predictions
-3. **Collateral**: Positions are backed by collateral tokens (typically USDC stablecoin)
+2. **Position Trading**: Users can buy and sell positions (represented as ERC-1155 tokens) based on their predictions  
+3. **Collateral Management**: Positions are backed by collateral tokens (typically USDC stablecoin)
 4. **Oracle Resolution**: UMA's Optimistic Oracle system determines the outcome of prediction events
 5. **Payouts**: Users who predicted correctly receive payouts proportional to their stakes and market liquidity
 
@@ -39,15 +46,30 @@ The platform uses three main smart contracts deployed on Polygon network to hand
 
 | Contract | Address | Purpose |
 |----------|---------|---------|
-| **Main Polymarket Contract** | `0x4d97dcd97ec945f40cf65f87097ace5ea0476045` | Core prediction market logic, condition management, position splits/merges |
-| **UMA Adapter** | `0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7` | Oracle integration for question resolution and initialization |
-| **CTF Exchange** | `0xC5d563A36AE78145C45a50134d48A1215220f80a` | Trading infrastructure for position tokens |
+| **📘 Main Polymarket Contract** | `0x4d97dcd97ec945f40cf65f87097ace5ea0476045` | Implements the core market logic including condition setup, token minting/splitting, merging, and redemption |
+| **⚙️ UMA Adapter Contract** | `0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7` | Acts as middleware between Polymarket and UMA's Optimistic Oracle, submits and retrieves outcome data |
+| **💱 CTF Exchange Contract** | `0xC5d563A36AE78145C45a50134d48A1215220f80a` | Handles trading of ERC-1155 conditional tokens with AMM and orderbook logic |
 
 ---
 
-## Main Polymarket Contract APIs
+## 📘 Main Polymarket Contract APIs
 
-The main contract handles core prediction market functionality including condition management, position operations, and oracle event resolution. These [GraphQL APIs](https://docs.bitquery.io/docs/graphql/query/) provide real-time blockchain data for smart contract events, trading activities, and market analytics.
+**Address**: `0x4d97dcd97ec945f40cf65f87097ace5ea0476045`
+
+The main contract implements the core market logic including condition setup, token minting/splitting, merging, and redemption. These [GraphQL APIs](https://docs.bitquery.io/docs/graphql/query/) provide real-time blockchain data for smart contract events, trading activities, and market analytics.
+
+### Key Events Overview
+
+| Event Name | Description | Triggered When |
+|------------|-------------|----------------|
+| **ConditionPreparation** | A new market (condition) is initialized | `prepareCondition()` is called |
+| **ConditionResolution** | Oracle publishes final outcomes for a question | `reportPayouts()` is called |
+| **PositionSplit** | Collateral is divided into outcome tokens | `splitPosition()` is called |
+| **PositionsMerge** | Opposite outcomes are recombined back into collateral | `mergePositions()` is called |
+| **PayoutRedemption** | Winning token holders redeem collateral | `redeemPositions()` is called |
+| **TransferSingle / TransferBatch** | ERC-1155 transfers of outcome tokens | During user trading or AMM swaps |
+| **ApprovalForAll** | Operator approval granted or revoked | When user allows another address to manage positions |
+| **URI** | Token metadata updated | URI of a position token changes |
 
 ### 1. All Available Events
 **Endpoint**: [PolyMarket - All Available Events](https://ide.bitquery.io/PolyMarket---All-Available-Events)
@@ -79,6 +101,37 @@ Get all events emitted by the main Polymarket contract to track all platform act
 - `PositionSplit`: When users split positions into outcome-specific tokens
 - `PositionsMerge`: When users merge outcome tokens back to collateral
 - `PayoutRedemption`: When users claim winnings after resolution
+
+#### Example: Condition Creation
+
+```javascript
+emit ConditionPreparation(
+    conditionId,
+    oracle,
+    questionId,
+    outcomeSlotCount
+);
+```
+
+**Emitted When:**
+- A new question is defined and linked to an oracle
+- This marks the birth of a prediction market
+
+#### Example: Outcome Resolution
+
+```javascript
+emit ConditionResolution(
+    conditionId,
+    oracle,
+    questionId,
+    outcomeSlotCount,
+    payoutNumerators
+);
+```
+
+**Emitted When:**
+- The oracle reports the result, setting final payout ratios
+- This locks the market and determines which outcomes win
 
 ### 2. Newly Created Questions/Market ID
 **Endpoint**: [PolyMarket Newly Created Questions / Market ID](https://ide.bitquery.io/Polymarket-Newly-Created-MarketQuestions)
@@ -473,9 +526,26 @@ Specifically track condition resolution events when oracles determine outcomes.
 
 ---
 
-## UMA Adapter APIs
+## ⚙️ UMA Adapter APIs
 
-The UMA Adapter contract manages the integration with UMA's Optimistic Oracle system for decentralized question resolution and dispute handling. These APIs track oracle interactions, question lifecycle events, and resolution processes for prediction market outcomes.
+**Address**: `0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7`
+
+The UMA Adapter acts as a middleware between Polymarket and UMA's Optimistic Oracle. It submits and retrieves outcome data for market questions, managing the integration with UMA's Optimistic Oracle system for decentralized question resolution and dispute handling.
+
+### Typical Events
+
+| Event Name | Description | Triggered When |
+|------------|-------------|----------------|
+| **RequestPrice** | A new question is submitted to UMA for resolution | Market condition is prepared |
+| **ProposePrice** | UMA proposer suggests an outcome | Oracle phase begins |
+| **DisputePrice** | UMA disputer challenges the proposed outcome | Dispute window active |
+| **ResolvedPrice** | UMA confirms final result | Oracle resolution completed |
+
+### Oracle Lifecycle:
+
+1. **Market Creation** → Question submitted via `RequestPrice`
+2. **UMA Oracle Phase** → Proposes and disputes results  
+3. **Resolution** → Emits `ResolvedPrice`, which triggers `reportPayouts()` in the main contract
 
 ### 1. All UMA Adapter Events
 **Endpoint**: [UMACFA Adapter All events](https://ide.bitquery.io/PolyMarket---UMA-Adapter-All-events)
@@ -699,9 +769,37 @@ Monitor when new questions are initialized in the UMA oracle system.
 
 ---
 
-## CTF Exchange APIs
+## 💱 CTF Exchange APIs
 
-The Conditional Token Framework (CTF) Exchange handles the decentralized trading infrastructure for position tokens, order matching, and liquidity provision. These APIs provide access to [DEX trading data](https://docs.bitquery.io/docs/evm/dextrades/) including order fills, token registrations, and market making activities for prediction market tokens.
+**Address**: `0xC5d563A36AE78145C45a50134d48A1215220f80a`
+
+The Conditional Token Framework (CTF) Exchange handles trading of ERC-1155 conditional tokens (YES/NO outcomes). It implements AMM and orderbook-like logic for liquidity provision and swaps. These APIs provide access to [DEX trading data](https://docs.bitquery.io/docs/evm/dextrades/) including order fills, token registrations, and market making activities for prediction market tokens.
+
+### Key Trading Events
+
+| Event Name | Description | Triggered When |
+|------------|-------------|----------------|
+| **OrderCreated** | New buy/sell order placed | User submits order to trade outcome tokens |
+| **OrderFilled** | Trade executed between counterparties | Matching occurs on-chain or through relayers |
+| **OrderCancelled** | Open order withdrawn by user | User cancels order before fill |
+| **LiquidityAdded** | LP adds collateral & outcome tokens | User joins liquidity pool |
+| **LiquidityRemoved** | LP withdraws funds from pool | User exits market liquidity |
+
+#### Example: Trade Execution
+
+```javascript
+emit OrderFilled(
+    trader,
+    outcomeToken,
+    collateralToken,
+    price,
+    amount
+);
+```
+
+**Emitted When:**
+- Outcome token trade occurs
+- Used for analytics, AMM state tracking, and off-chain price feeds
 
 ### 1. Token Registered Events
 **Endpoint**: [PolyMarket CTF Exchange Contract - TokenRegistered Event](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----TokenRegistered-Event)
@@ -966,6 +1064,57 @@ Track individual order fills and partial executions.
 - Price execution details
 - Maker/taker information
 - Fee calculations
+
+---
+
+## 🔄 Market Lifecycle Summary
+
+The complete Polymarket prediction market lifecycle involves coordinated interactions across all three smart contracts:
+
+| Stage | Contract | Action | Event(s) |
+|-------|----------|--------|----------|
+| **Market Creation** | Main Polymarket | `prepareCondition()` | `ConditionPreparation` |
+| **Oracle Request** | UMA Adapter | Oracle submission | `RequestPrice` |
+| **Token Minting** | Main Polymarket | `splitPosition()` | `PositionSplit` |
+| **Trading** | CTF Exchange | Orders & swaps | `OrderCreated`, `OrderFilled` |
+| **Market Resolution** | UMA Adapter → Main | `reportPayouts()` | `ResolvedPrice`, `ConditionResolution` |
+| **Redemption** | Main Polymarket | `redeemPositions()` | `PayoutRedemption` |
+| **Liquidity Management** | CTF Exchange | LP add/remove | `LiquidityAdded`, `LiquidityRemoved` |
+
+### 📊 Event Flow Visualization
+
+```
+prepareCondition() 
+    ↓ ConditionPreparation
+splitPosition() 
+    ↓ PositionSplit  
+Trading on CTF Exchange
+    ↓ OrderCreated / OrderFilled
+reportPayouts()
+    ↓ ConditionResolution
+redeemPositions()
+    ↓ PayoutRedemption
+Collateral Released
+```
+
+## 🔐 Developer Notes
+
+### Important Implementation Details
+
+- **Event Indexing**: Most events include indexed parameters (e.g. `conditionId`, `oracle`, `trader`) for efficient log filtering
+- **Collateral Tokens**: Typically USDC on Polygon mainnet for consistent value reference
+- **UMA Oracle Finality**: Resolution finality depends on dispute windows and proposer bonds
+- **Gas Considerations**: `redeemPositions()` may be gas-intensive when redeeming multiple index sets
+- **ERC-1155 Compliance**: All outcome tokens follow ERC-1155 standard for batch operations
+- **Oracle Integration**: UMA's Optimistic Oracle provides decentralized, dispute-based resolution
+
+### Best Practices
+
+- Always monitor both `ConditionPreparation` and `RequestPrice` events for complete market creation tracking
+- Use `TransferSingle`/`TransferBatch` events to track position token movements
+- Monitor `ResolvedPrice` events from UMA Adapter to trigger market resolution processes
+- Track `OrderFilled` events for real-time trading analytics and price discovery
+- Implement proper error handling for oracle disputes and resolution delays
 
 ---
 
