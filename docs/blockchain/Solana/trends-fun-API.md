@@ -606,19 +606,9 @@ Using [this](https://ide.bitquery.io/liquidity-for-a-trends-fun-token-pair) quer
 {
   Solana {
     DEXPools(
-      where: {
-        Pool: {
-          Market: { MarketAddress: { is: "YOUR_POOL_ADDRESS" } }
-          Dex: {
-            ProgramAddress: {
-              is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"
-            }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-      orderBy: { descending: Block_Time }
-      limit: { count: 1 }
+      where: {Pool: {Market: {BaseCurrency: {MintAddress: {is: "TOKEN ADDRESS here"}}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}}, Transaction: {Result: {Success: true}}}
+      orderBy: {descending: Block_Time}
+      limit: {count: 1}
     ) {
       Pool {
         Base {
@@ -643,6 +633,7 @@ Using [this](https://ide.bitquery.io/liquidity-for-a-trends-fun-token-pair) quer
     }
   }
 }
+
 ```
 
 </details>
