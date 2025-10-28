@@ -83,7 +83,7 @@ let isReloading = false;
 function loadConfig() {
   try {
     const newConfig = yaml.load(fs.readFileSync('./config.yaml', 'utf8'));
-    console.log('✓ Configuration loaded successfully');
+    console.log('Configuration loaded successfully');
     return newConfig;
   } catch (error) {
     console.error('✗ Failed to load configuration:', error.message);
@@ -153,7 +153,7 @@ function reloadAndRestart() {
     try {
       initializeClient();
     } catch (error) {
-      console.error('✗ Failed to initialize client:', error.message);
+      console.error('Failed to initialize client:', error.message);
       isReloading = false;
       return;
     }
@@ -164,7 +164,7 @@ function reloadAndRestart() {
     startStream();
     isReloading = false;
   } catch (error) {
-    console.error('✗ Failed to start stream:', error.message);
+    console.error(' Failed to start stream:', error.message);
     isReloading = false;
   }
 }
@@ -174,7 +174,7 @@ function stopStream() {
   if (currentStream) {
     try {
       currentStream.cancel();
-      console.log('✓ Stream stopped');
+      console.log('Stream stopped');
     } catch (error) {
       console.error('Error stopping stream:', error.message);
     }
@@ -430,13 +430,13 @@ When live reload is active, you'll see these messages:
 
 ```
  Watching config.yaml for changes...
-✓ Configuration loaded successfully
-✓ Stream connected and listening for data...
+ Configuration loaded successfully
+ Stream connected and listening for data...
 
  Configuration changed, reloading...
-✓ Stream stopped
-✓ Configuration loaded successfully
-✓ Stream connected and listening for data...
+ Stream stopped
+ Configuration loaded successfully
+ Stream connected and listening for data...
 ```
 
 
