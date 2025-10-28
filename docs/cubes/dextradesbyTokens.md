@@ -1,6 +1,51 @@
 # DEXTradesByTokens Cube
 
-The DexTradesByTokens cube provides comprehensive information about the dex trading data, such as buyer, seller, token prices, pairs, transactions, OHLC, etc.
+The DEXTradesByTokens cube provides comprehensive information about DEX trading data from a token-centric perspective, showing both sides of each trade for every participant. This includes buyer, seller, token prices, pairs, transactions, OHLC data, and more.
+
+Unlike DEXTrades cube which uses `Buy` and `Sell` from the pool's perspective, DEXTradesByTokens uses the concept of `Trade` and `Side` to represent both sides of each trade from a token-centric view.
+
+## Understanding Trade and Side Structure
+
+In DEXTradesByTokens, each trade is represented with two main components:
+
+- **`Trade`**: The primary side of the trade, focusing on one specific token/currency
+- **`Side`**: The counter-side of the trade, representing what the token is being traded against
+
+### Example Structure Comparison
+
+**DEXTrades Approach (Pool Perspective):**
+
+```graphql
+Trade {
+  Buy {
+    Currency { Symbol }    # What the pool buys
+    Amount
+    Buyer                 # Pool address
+  }
+  Sell {
+    Currency { Symbol }    # What the pool sells
+    Amount
+    Seller                # User address
+  }
+}
+```
+
+**DEXTradesByTokens Approach (Token Perspective):**
+
+```graphql
+Trade {
+  Currency { Symbol }      # Primary token (e.g., "PEPE")
+  Amount                   # Amount of primary token
+  Buyer                    # Who bought the primary token
+  Seller                   # Who sold the primary token
+  Side {
+    Currency { Symbol }    # Counter token (e.g., "WETH")
+    Amount                 # Amount of counter token
+  }
+}
+```
+
+## Concept Explanation
 
 Let's understand the concept of buyer and seller when a trade occurs between User A and User B, and Token X and Token Y are swapped between them.
 
@@ -318,6 +363,302 @@ Using the sum metric, we retrieve the total trade volume of MMM tokens: 17992281
 ```
 
 Result: 1799228141.673992845889896448 MMM tokens.
+
+## Advanced Use Cases and Processing Patterns
+
+### Portfolio Tracking and User Analytics
+
+DEXTradesByTokens excels at tracking individual user activity across all their trades:
+
+#### User Portfolio Balance Tracker
+
+```python
+def track_user_portfolio(user_address, trades_data):
+    """Track user's token portfolio changes over time"""
+    portfolio = defaultdict(lambda: {'balance': 0, 'total_bought': 0, 'total_sold': 0})
+
+    for trade in trades_data:
+        token = trade['currency']['smart_contract'].lower()
+        amount = float(trade['amount'])
+
+        if trade['seller'].lower() == user_address.lower():
+            # User sold this token
+            portfolio[token]['balance'] -= amount
+            portfolio[token]['total_sold'] += amount
+        elif trade['buyer'].lower() == user_address.lower():
+            # User bought this token
+            portfolio[token]['balance'] += amount
+            portfolio[token]['total_bought'] += amount
+
+    return portfolio
+```
+
+#### Query for User Activity Tracking
+
+```graphql
+query UserActivityTracking(
+  $userAddress: String!
+  $sinceDate: ISO8601DateTime!
+) {
+  EVM(dataset: combined, network: eth) {
+    DEXTradeByTokens(
+      where: {
+        Block: { Time: { since: $sinceDate } }
+        Trade: {
+          # Get all trades where user is either buyer or seller
+          any: [
+            { Buyer: { is: $userAddress } }
+            { Seller: { is: $userAddress } }
+          ]
+        }
+      }
+      orderBy: { ascending: Block_Time }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Trade {
+        Buyer
+        Seller
+        Amount
+        AmountInUSD
+        Currency {
+          SmartContract
+          Symbol
+          Name
+        }
+        Side {
+          Amount
+          AmountInUSD
+          Currency {
+            SmartContract
+            Symbol
+          }
+        }
+      }
+      Transaction {
+        Hash
+        Signer
+      }
+    }
+  }
+}
+```
+
+### Token Flow Analysis
+
+Track how tokens move between different addresses and pools:
+
+#### Token Holder Distribution Changes
+
+```python
+def analyze_token_distribution(token_address, trades_data):
+    """Analyze how token distribution changes over time"""
+    holder_balances = defaultdict(float)
+    distribution_history = []
+
+    for trade in sorted(trades_data, key=lambda x: x['block']['time']):
+        if trade['currency']['smart_contract'].lower() == token_address.lower():
+            amount = float(trade['amount'])
+
+            # Update balances
+            holder_balances[trade['seller'].lower()] -= amount
+            holder_balances[trade['buyer'].lower()] += amount
+
+            # Record snapshot
+            distribution_history.append({
+                'time': trade['block']['time'],
+                'tx_hash': trade['transaction']['hash'],
+                'total_holders': len([addr for addr, bal in holder_balances.items() if bal > 0]),
+                'top_holder_percentage': max(holder_balances.values()) / sum(holder_balances.values()) * 100
+            })
+
+    return distribution_history
+```
+
+### Advanced Filtering Strategies
+
+#### Multi-Token Portfolio Analysis
+
+```graphql
+query MultiTokenPortfolioAnalysis($tokens: [String!]!, $userAddress: String!) {
+  EVM(dataset: combined, network: eth) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: { SmartContract: { in: $tokens } }
+          any: [
+            { Buyer: { is: $userAddress } }
+            { Seller: { is: $userAddress } }
+          ]
+        }
+      }
+    ) {
+      Trade {
+        Currency {
+          SmartContract
+          Symbol
+        }
+        Amount
+        AmountInUSD
+        Buyer
+        Seller
+        Side {
+          Currency {
+            Symbol
+          }
+          AmountInUSD
+        }
+      }
+    }
+  }
+}
+```
+
+#### High-Value Trade Detection
+
+```graphql
+query HighValueTrades($minValueUSD: Float!, $tokenAddress: String!) {
+  EVM(dataset: realtime, network: eth) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: $tokenAddress } }
+          AmountInUSD: { gt: $minValueUSD }
+        }
+      }
+      orderBy: { descending: Trade_AmountInUSD }
+    ) {
+      Trade {
+        AmountInUSD
+        Amount
+        Buyer
+        Seller
+        Currency {
+          Symbol
+        }
+        Side {
+          Currency {
+            Symbol
+          }
+          AmountInUSD
+        }
+      }
+      Transaction {
+        Hash
+        Signer
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
+### Performance Optimization Tips
+
+#### Efficient Pagination for Large Datasets
+
+```python
+def paginate_user_trades(user_address, page_size=1000):
+    """Efficiently paginate through large user trade datasets"""
+    offset = 0
+    all_trades = []
+
+    while True:
+        query = f"""
+        query PaginatedUserTrades {{
+          EVM(dataset: combined, network: eth) {{
+            DEXTradeByTokens(
+              limit: {{ offset: {offset}, count: {page_size} }}
+              where: {{
+                Trade: {{
+                  any: [
+                    {{ Buyer: {{ is: "{user_address}" }} }}
+                    {{ Seller: {{ is: "{user_address}" }} }}
+                  ]
+                }}
+              }}
+              orderBy: {{ descending: Block_Time }}
+            ) {{
+              # Your fields here
+            }}
+          }}
+        }}
+        """
+
+        result = execute_query(query)
+        trades = result['EVM']['DEXTradeByTokens']
+
+        if not trades:
+            break
+
+        all_trades.extend(trades)
+        offset += page_size
+
+        if len(trades) < page_size:
+            break
+
+    return all_trades
+```
+
+### Real-time Processing Considerations
+
+When processing DEXTradesByTokens data in real-time applications:
+
+#### Deduplication Strategy
+
+```python
+def deduplicate_trades(trades_list):
+    """Remove duplicate trades that might appear in real-time streams"""
+    seen_trades = set()
+    unique_trades = []
+
+    for trade in trades_list:
+        # Create unique identifier for each trade
+        trade_id = (
+            trade['transaction']['hash'],
+            trade['trade']['currency']['smart_contract'].lower(),
+            trade['trade']['buyer'].lower(),
+            trade['trade']['seller'].lower(),
+            str(trade['trade']['amount'])
+        )
+
+        if trade_id not in seen_trades:
+            seen_trades.add(trade_id)
+            unique_trades.append(trade)
+
+    return unique_trades
+```
+
+#### Memory-Efficient Processing
+
+```python
+def process_trades_stream(trade_generator):
+    """Process trades without loading everything into memory"""
+    user_summaries = defaultdict(lambda: {
+        'total_volume_usd': 0,
+        'trade_count': 0,
+        'unique_tokens': set()
+    })
+
+    for trade in trade_generator:
+        user_addr = trade['trade']['buyer'].lower()
+        volume_usd = float(trade['trade']['amount_in_usd'])
+        token = trade['trade']['currency']['smart_contract'].lower()
+
+        user_summaries[user_addr]['total_volume_usd'] += volume_usd
+        user_summaries[user_addr]['trade_count'] += 1
+        user_summaries[user_addr]['unique_tokens'].add(token)
+
+        # Periodic cleanup for memory management
+        if len(user_summaries) > 10000:
+            cleanup_old_users(user_summaries)
+
+    return user_summaries
+```
 
 Next, we use the count metric to retrieve the most traded token in any dex.
 

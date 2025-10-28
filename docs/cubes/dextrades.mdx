@@ -4,7 +4,9 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 The DEXTrades cube provides comprehensive information about the dex trading data, such as buyer, seller, token prices, pairs, transactions, etc.
 
-> Import Note: If there is a trade between 2 addresses, then one of them must be a pool, and the information displayed in the DEXTrades cube is from the pool's perspective.
+> **Advanced Usage Note**: This documentation includes advanced patterns for processing DEXTrades data based on production implementations. These patterns help handle complex scenarios like multi-hop swaps, proxy contracts, and proper volume calculations.
+
+> Import Note: If there is a trade between 2 addresses, the details in `Buy{}` dropdown are pool details, and the information displayed in the DEXTrades cube is from the pool's perspective.
 
 ![](/img/tokenAB.png)
 
@@ -24,61 +26,175 @@ Therefore, buyers and sellers change relatively when the trade sides change.
 
 It is important to note that a pool is always involved; whenever any trade occurs between two traders, one must be a pool. Thus, we are considering User B as a pool.
 
+## Understanding DEXTrade Cube data
+
 Next, we understand how the Dextrades Cube displays the result:
 
-When we run the DEXTrades API, DEXTrades results appear with buy-side and sell-side details. Buy-side details always contain the pool’s (User B) details and currency bought by the pool. The sell-side always contains the pool's other side details (User A), which may not be the pool and currency bought by User A.
-
-[Run this API using this link](https://ide.bitquery.io/DEXTrades-api) for better understanding.
+Take this query for example:
 
 ```
-
 {
-  EVM(dataset: archive, network: eth) {
-    DEXTrades(limit: {count: 2}
-    where:{
-      Transaction:{
-        Hash:{
-          is:"0x672b64a68f612667111fb2e1329dc1b47279042e1b84d894aa64119ae34a989f"
-        }
-      }
-    }
+  EVM(network: eth, dataset: archive) {
+    DEXTrades(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {TransactionStatus: {Success: true}, Block: {Number: {eq: "23674719"}}, Transaction: {Hash: {is: "0x0891b30722d44284d0c110c761190ecd6ad0f33946835bbde164561d847f5c87"}}}
     ) {
-      Transaction {
-        Hash
-      }
       Trade {
         Buy {
-          AmountInUSD
           Buyer
+          Amount
+          Price
           Currency {
+            SmartContract
             Name
           }
-          Seller
-          Currency {
+        }
+        Dex {
+          Pair {
             Name
+            SmartContract
           }
-          AmountInUSD
+          ProtocolName
         }
         Sell {
-          AmountInUSD
           Buyer
+          Amount
           Currency {
             Name
+            SmartContract
           }
-          Seller
-          Currency {
-            Name
-          }
-          AmountInUSD
         }
+      }
+      Transaction {
+        Hash
       }
     }
   }
 }
 
+
 ```
 
-The buy side contains the pool address `0x92560c178ce069cc014138ed3c2f5221ba71f58a` and currency bought by it.
+Output
+
+```
+{
+  "EVM": {
+    "DEXTrades": [
+      {
+        "Trade": {
+          "Buy": {
+            "Amount": "4002.603343842926485635",
+            "Buyer": "0xad4e4954b2f22525f5c9d7e7182fff9cf251d0f7",
+            "Currency": {
+              "Name": "MUSKITO Token",
+              "SmartContract": "0x7ef790d9bccc87989be0fdb88ffb955bec3d5e92"
+            },
+            "Price": 6.700259580759855e-9
+          },
+          "Dex": {
+            "Pair": {
+              "Name": "Uniswap V2",
+              "SmartContract": "0xad4e4954b2f22525f5c9d7e7182fff9cf251d0f7"
+            },
+            "ProtocolName": "uniswap_v2"
+          },
+          "Sell": {
+            "Amount": "0.000026818481402565",
+            "Buyer": "0x5fbf1aba26bf1493cd7677ad4ec25d96a91ab0ec",
+            "Currency": {
+              "Name": "Wrapped Ether",
+              "SmartContract": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+            }
+          }
+        },
+        "Transaction": {
+          "Hash": "0x0891b30722d44284d0c110c761190ecd6ad0f33946835bbde164561d847f5c87"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Analyzing the DEXTrades Output
+
+Let's break down how DEXTrades presents data from the pool's perspective:
+
+**Key Observations:**
+
+1. **Pool Identification**: The `Buy.Buyer` address matches the `Dex.Pair.SmartContract` address.
+
+2. **Buy Side (Pool's Perspective)**:
+
+   - **Currency**: The token that the pool received (project token)
+   - **Amount**: Quantity of tokens the pool received
+   - **Buyer**: Pool address (the pool is "buying" these tokens)
+   - **Price**: Current trading price per token
+
+3. **Sell Side (Pool's Perspective)**:
+   - **Currency**: The payment token (WETH, stablecoins, etc.)
+   - **Amount**: Quantity of payment tokens the pool gave out
+   - **Buyer**: User address who received the payment tokens
+
+**What Actually Happens:**
+
+From the **pool's perspective** (which is what DEXTrades shows):
+
+- The pool **bought** project tokens (received them from user)
+- The pool **sold** payment tokens (gave them to user)
+
+From the **user's perspective** (the actual trader):
+
+- User **sold** project tokens to the pool
+- User **bought** payment tokens (WETH/stablecoins) in return
+
+## Multi-Hop Trade Detection and Processing
+
+When processing DEXTrades data in production applications, it's crucial to handle multi-hop swaps correctly. Multi-hop trades occur when a single transaction contains multiple DEX trades that are part of one logical swap operation (e.g., Token A → WETH → Token B).
+
+### Identifying Multi-Hop Trades
+
+Multi-hop trades can be detected by:
+
+1. **Same Transaction Hash**: All trades in a multi-hop swap share the same transaction hash
+2. **Sequential Processing**: Trades appear in sequence within the same block following the Trade_Index
+3. **Token Chain Logic**: The sell token of one trade matches the buy token of the next
+
+### Processing Strategy
+
+For multi-hop trades, use this approach:
+
+- **Token Identification**: Use the first hop to identify the actual token being swapped (not the intermediate tokens)
+- **Volume Calculation**: Use the last hop to determine the final payment amount
+- **Direction Detection**: Check the signer's role in the final hop to determine if it's a buy or sell
+
+```python
+# Example pattern for multi-hop detection
+if tx_hash in processed_transactions:
+    # This is part of a multi-hop swap
+    first_hop = processed_transactions[tx_hash][0]
+    current_hop = trade_data  # Last hop seen
+
+    # Get actual token from first hop (exclude payment tokens)
+    actual_token = get_non_payment_token(first_hop)
+
+    # Get final volume from last hop payment side
+    final_volume = get_payment_side_amount(current_hop)
+
+    # Determine buy/sell from signer's role in last hop
+    is_buy = signer_is_buyer_in_final_hop(current_hop, signer)
+```
+
+### Payment Token Classification
+
+Different token types require different processing logic:
+
+- **Native Tokens**: `0x` (ETH), direct BNB trades
+- **Wrapped Tokens**: WETH, WBNB - used for volume calculations
+- **Stablecoins**: USDT, USDC, DAI - also payment tokens
+- **Other Tokens**: Project tokens, memecoins, etc.
 
 ## Filtering in DEXTrades Cube
 
@@ -203,52 +319,86 @@ In this example, we retrieve the trade currencies and their trader's details in 
 
 Next, we retrieve trade currency details on a particular dex in the ethereum network. Therefore, we use the Trade Buy Currency filter to specify the “currency address” and the Trade Dex OwnerAddress filter to specify the “Dex address.”
 
-Run this API to retrieve the trade activities of WETH (“0xc02….”) in the Uniswap v3 factory “ 0x1f98..”
+Run this API to retrieve the trade activities of WETH ("0xc02….") in the Uniswap v3 factory " 0x1f98.."
 
-## Aggregation in DEXTrades Cube
+## Advanced Buyer/Seller Logic and Proxy Contracts
 
-DexTrades cube aggregation helps aggregate data based on time, amount, address, currency, type, buyer, seller, dex (dex owner address), pool address (dex smart contract), block time, etc.
+### Understanding BitQuery's Buy/Sell Fields
 
-Through aggregation, we can extract trade details for specific tokens. For example, in the following API, we retrieve the total trade volume by summing all the trade amounts to obtain the top traded NFT in the ethereum network.
+In EVM chains, DEXTrades data, as we see above, the Buy fields represent the pool's events.
 
-We use the Trade Buy Currency fungible filter and set fungible to false to retrieve the NFT token data. Run the following API [using this link](https://ide.bitquery.io/Top-traders-of-a-given-token-in-a-pair_1).
+### Handling Different Scenarios
 
+When processing trades, check multiple scenarios for accurate buyer/seller identification:
+
+#### Scenario 1: Direct Signer Matches
+
+```python
+# Check if signer is directly in buy/sell fields
+if signer == buy_buyer:
+    # Signer bought the token
+    process_as_buy()
+elif signer == sell_seller:
+    # Signer sold the token
+    process_as_sell()
 ```
 
+#### Scenario 2: Proxy Contract Logic
 
-query {
-  EVM(dataset: combined, network: eth) {
-    DEXTrades(
-      orderBy: {descendingByField: "count"}
-      limit: {offset: 0, count: 10}
-      where: {Block: {Date: {since: "2023-05-02", till: "2023-05-09"}},
-        Trade: {Buy: {Currency: {Fungible: false}},
-          Sell: {Currency: {Fungible: true}}}}
-    ) {
-      Trade {
-        Buy {
-          Currency {
-            Symbol
-            SmartContract
-          }
-          min_price: Price(minimum: Trade_Buy_Price)
-          max_price: Price(maximum: Trade_Buy_Price)
-        }
-        Sell {
-          Currency {
-            Symbol
-            SmartContract
-          }
-        }
-      }
-      buy_amount: sum(of: Trade_Buy_Amount)
-      sell_amount: sum(of: Trade_Sell_Amount)
-      count
+When the signer doesn't appear in buyer/seller fields (common with proxy contracts):
 
-    }
+```python
+# Find consistent party across both sides
+if buy_buyer == sell_seller:
+    # This party appears to buy token and sell payment
+    # BUT for proxy contracts, logic is inverted
+    if signer != buy_buyer:
+        # Signer used proxy -> opposite action
+        process_as_sell()  # Inverted logic
+elif buy_seller == sell_buyer:
+    # This party appears to sell token and buy payment
+    # BUT for proxy contracts, logic is inverted
+    if signer != buy_seller:
+        # Signer used proxy -> opposite action
+        process_as_buy()   # Inverted logic
+```
+
+### Trade Type Classification
+
+Different trade types require specific handling:
+
+#### 1. Native Token Trades
+
+```graphql
+# Direct BNB/ETH trades (sell_contract = "0x")
+where: {
+  Trade: {
+    Sell: { Currency: { SmartContract: { is: "0x" } } }
   }
 }
+```
 
+#### 2. Wrapped Token Trades
+
+```graphql
+# WETH/WBNB trades
+where: {
+  Trade: {
+    Buy: { Currency: { SmartContract: { is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" } } }
+  }
+}
+```
+
+#### 3. Token-to-Token Swaps
+
+```graphql
+# Both sides are tokens (not native/wrapped)
+where: {
+  Trade: {
+    Buy: { Currency: { SmartContract: { not: "0x" } } },
+    Sell: { Currency: { SmartContract: { not: "0x" } } }
+  }
+}
 ```
 
 ## Metrics in DEXTrades Cube
@@ -278,14 +428,6 @@ query MyQuery {
 
 ```
 
-The DEXTrades cube also helps to retrieve the number of pools created in any DEX over a given period using the uniq metric.
-
-In the following example, we count the number of pools created on Uniswap v2 Dex before “2024-04-01” in the ethereum network.
-
-We use the Trade Dex OwnerAddress filter to specify the “Dex address” and uniq metic to count the distinct pool in [Uniswap v2 Dex](https://explorer.bitquery.io/ethereum/smart_contract/0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f) "0x5c6…”.
-
-[Run this](https://ide.bitquery.io/Pool-created-metrix) query to extract the 292381 pool created before 2024-04-01 in the ethereum network.
-
 ## How Does Bitquery Calculate USD Price for a Token?
 
 Bitquery calculates the token price using a simple formula:
@@ -308,6 +450,107 @@ In this example, the second calculation (WETH Price) may not be accurate because
 **WETH Price in USD = USDT amount in USD / Amount of WETH tokens**
 
 In this case, both values make sense, as both **WETH** and **USDT** can be valued in USD directly.
+
+## Common Edge Cases and Filtering Strategies
+
+### Filtering MEV Bots and Unwanted Trades
+
+Production applications often need to filter out certain types of trades:
+
+```graphql
+# Filter out specific MEV bot contracts
+query FilterMEVBots {
+  EVM(dataset: combined, network: eth) {
+    DEXTrades(
+      where: {
+        Transaction: {
+          To: { notIn: ["0x802b65b5d9016621e66003aed0b16615093f328b"] }
+        }
+      }
+    ) {
+      # Your trade data
+    }
+  }
+}
+```
+
+### Handling Zero Value Trades
+
+Filter out trades with zero amounts or prices:
+
+```graphql
+query FilterZeroTrades {
+  EVM(dataset: combined, network: eth) {
+    DEXTrades(
+      where: {
+        Trade: {
+          Buy: {
+            Amount: { gt: "0" },
+            PriceInUSD: { gt: 0 }
+          },
+          Sell: {
+            Amount: { gt: "0" },
+            PriceInUSD: { gt: 0 }
+          }
+        }
+      }
+    ) {
+      # Your trade data
+    }
+  }
+}
+```
+
+### Identifying Pool vs Trader Addresses
+
+For token-to-token swaps, distinguish between pool addresses and actual traders:
+
+```graphql
+# Focus on specific signer addresses (real traders)
+query RealTraders {
+  EVM(dataset: combined, network: eth) {
+    DEXTrades(
+      where: {
+        Transaction: {
+          Signer: { is: "0x742d35Cc6334C0532925a3b8C836f4b98C6b1e96" }
+        }
+      }
+    ) {
+      Transaction {
+        Signer
+      }
+      Trade {
+        Buy {
+          Buyer
+          Seller
+        }
+        Sell {
+          Buyer
+          Seller
+        }
+      }
+    }
+  }
+}
+```
+
+### Transaction Status Filtering
+
+Always filter for successful transactions:
+
+```graphql
+query SuccessfulTrades {
+  EVM(dataset: combined, network: eth) {
+    DEXTrades(
+      where: {
+        TransactionStatus: { Success: true }
+      }
+    ) {
+      # Your trade data
+    }
+  }
+}
+```
 
 ## Video Tutorial | Why PriceInUSD is 0 in Bitquery API response?
 

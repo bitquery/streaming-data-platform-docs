@@ -298,9 +298,9 @@ const sidebars = {
           items: [
             "cubes/EVM",
             "cubes/balance-updates-cube",
-            "cubes/dextrades-dextradesbyTokens",
             "cubes/dextrades",
             "cubes/dextradesbyTokens",
+            "cubes/dextrades-dextradesbyTokens",
             "cubes/transaction-cube",
             "cubes/transfers-cube",
             "evm/token-holders",
@@ -653,7 +653,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Futures DEX APIs",
-            description: "APIs for accessing futures and perpetual decentralized exchanges data including AsterDEX on BNB Smart Chain.",
+            description:
+              "APIs for accessing futures and perpetual decentralized exchanges data including AsterDEX on BNB Smart Chain.",
           },
           items: ["examples/futures-dexs/asterdex-api"],
         },
