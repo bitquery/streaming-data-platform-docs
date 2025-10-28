@@ -267,6 +267,7 @@ const sidebars = {
                   items: [
                     "grpc/solana/examples/pump-fun-grpc-streams",
                     "grpc/solana/examples/letsbonk-grpc-streams",
+                    "grpc/solana/examples/grpc-copy-trading-bot",
                   ],
                 },
                 "grpc/solana/best_practices",
