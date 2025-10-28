@@ -30,7 +30,7 @@ Polymarket is a decentralized prediction market protocol powered by Conditional 
 - **Resolve markets** via UMA oracles
 - **Redeem winning positions** for collateral
 
-This comprehensive API documentation describes when and how events are emitted through the Polymarket smart contracts during these processes, providing developers with complete access to prediction market data, oracle resolution tracking, and decentralized trading analytics.
+This comprehensive API documentation focuses on smart contract events emitted through the Polymarket protocol. However, through Bitquery's APIs, developers can access much more than just events - including smart contract calls (traces), token transfers, transaction data, balance updates, and complete blockchain analytics for prediction market data, oracle resolution tracking, and decentralized trading insights.
 
 ### How Polymarket Protocol Works
 
@@ -46,13 +46,13 @@ The platform uses three main smart contracts deployed on Polygon network to hand
 
 | Contract | Address | Purpose |
 |----------|---------|---------|
-| **📘 Main Polymarket Contract** | `0x4d97dcd97ec945f40cf65f87097ace5ea0476045` | Implements the core market logic including condition setup, token minting/splitting, merging, and redemption |
-| **⚙️ UMA Adapter Contract** | `0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7` | Acts as middleware between Polymarket and UMA's Optimistic Oracle, submits and retrieves outcome data |
-| **💱 CTF Exchange Contract** | `0xC5d563A36AE78145C45a50134d48A1215220f80a` | Handles trading of ERC-1155 conditional tokens with AMM and orderbook logic |
+| **Main Polymarket Contract** | `0x4d97dcd97ec945f40cf65f87097ace5ea0476045` | Implements the core market logic including condition setup, token minting/splitting, merging, and redemption |
+| **UMA Adapter Contract** | `0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7` | Acts as middleware between Polymarket and UMA's Optimistic Oracle, submits and retrieves outcome data |
+| **CTF Exchange Contract** | `0xC5d563A36AE78145C45a50134d48A1215220f80a` | Handles trading of ERC-1155 conditional tokens with AMM and orderbook logic |
 
 ---
 
-## 📘 Main Polymarket Contract APIs
+## Main Polymarket Contract APIs
 
 **Address**: `0x4d97dcd97ec945f40cf65f87097ace5ea0476045`
 
@@ -524,9 +524,110 @@ Specifically track condition resolution events when oracles determine outcomes.
 - Payout numerator arrays
 - Oracle addresses and timestamps
 
+### 6. Payout Received by Specific Polymarket Trader
+**Endpoint**: [Payout received by polymarket trader](https://ide.bitquery.io/Payout-received-by-polymarket-trader)
+
+Track all payouts received by a specific trader when they redeem winning positions.
+
+```graphql
+{
+  EVM(dataset: realtime, network: matic) {
+    Events(
+      orderBy: {descending: Block_Time}
+      where: {Log: {Signature: {Name: {in: ["PayoutRedemption"]}}},
+        Arguments:{
+          includes:{
+            Name:{is:"redeemer"}
+            Value:{Address:{is:"0x1ff49fdcb6685c94059b65620f43a683be0ce7a5"}}
+          }
+        }
+        LogHeader:
+        {Address: {is: "0x4d97dcd97ec945f40cf65f87097ace5ea0476045"}}}
+      limit: {count: 20}
+    ) {
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Topics {
+        Hash
+      }
+      TransactionStatus {
+        Success
+      }
+      LogHeader {
+        Address
+        Index
+        Data
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Log {
+        EnterIndex
+        ExitIndex
+        Index
+        LogAfterCallIndex
+        Pc
+        SmartContract
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+**Use Case**:
+- Track specific trader performance and winnings
+- Monitor high-volume trader activity  
+- Calculate individual trader profit/loss over time
+- Build trader portfolio analytics
+
+**Payout Data Includes**:
+- Redeemer address and transaction details
+- Payout amounts and token types
+- Market condition IDs and outcomes
+- Redemption timestamps and block information
+- Complete argument data for detailed analysis
+
+**How to Use**:
+Replace `0x1ff49fdcb6685c94059b65620f43a683be0ce7a5` with any trader address you want to monitor. This query filters `PayoutRedemption` events specifically for the specified `redeemer` address, allowing you to track all winning positions and payouts for that trader.
+
 ---
 
-## ⚙️ UMA Adapter APIs
+## UMA Adapter APIs
 
 **Address**: `0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7`
 
@@ -769,7 +870,7 @@ Monitor when new questions are initialized in the UMA oracle system.
 
 ---
 
-## 💱 CTF Exchange APIs
+## CTF Exchange APIs
 
 **Address**: `0xC5d563A36AE78145C45a50134d48A1215220f80a`
 
@@ -1067,7 +1168,7 @@ Track individual order fills and partial executions.
 
 ---
 
-## 🔄 Market Lifecycle Summary
+## Market Lifecycle Summary
 
 The complete Polymarket prediction market lifecycle involves coordinated interactions across all three smart contracts:
 
@@ -1081,7 +1182,7 @@ The complete Polymarket prediction market lifecycle involves coordinated interac
 | **Redemption** | Main Polymarket | `redeemPositions()` | `PayoutRedemption` |
 | **Liquidity Management** | CTF Exchange | LP add/remove | `LiquidityAdded`, `LiquidityRemoved` |
 
-### 📊 Event Flow Visualization
+### Event Flow Visualization
 
 ```
 prepareCondition() 
@@ -1097,7 +1198,7 @@ redeemPositions()
 Collateral Released
 ```
 
-## 🔐 Developer Notes
+## Developer Notes
 
 ### Important Implementation Details
 
