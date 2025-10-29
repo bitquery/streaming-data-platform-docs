@@ -53,7 +53,7 @@ async def main():
         print("Stopping subscription after 100 seconds.")
 
     # Close the connection
-    await transport.close()
+    await transport.close() #this sends complete message to server before closing websocket
     print("Transport closed")
 
 
@@ -71,10 +71,9 @@ Open any online code editor and use this JavaScript code to use the websocket. S
 
 ```javascript
 const { WebSocket } = require("ws");
-const config = require("./config.json"); //store OAuth token
 
 const bitqueryConnection = new WebSocket(
-  "wss://streaming.bitquery.io/graphql?token=" + config.oauthtoken,
+  "wss://streaming.bitquery.io/graphql?token=ory_",
   ["graphql-ws"]
 );
 
@@ -124,17 +123,17 @@ bitqueryConnection.on("message", (data) => {
       // Automatically close the connection after 10 seconds
       setTimeout(() => {
         console.log("Closing WebSocket connection after 10 seconds.");
-        
+
         // Send complete message to properly terminate subscription before closing
         if (bitqueryConnection.readyState === WebSocket.OPEN) {
           const completeMessage = {
             type: "complete",
-            id: "1"
+            id: "1",
           };
           bitqueryConnection.send(JSON.stringify(completeMessage));
           console.log("Complete message sent for subscription termination.");
         }
-        
+
         bitqueryConnection.close();
       }, 10000);
       break;
@@ -147,6 +146,10 @@ bitqueryConnection.on("message", (data) => {
       console.log("Keep-alive message received.");
       break;
 
+    case "complete":
+      console.log("Subscription completed.");
+      break;
+
     case "error":
       console.error("Error message received:", response.payload.errors);
       break;
@@ -157,16 +160,6 @@ bitqueryConnection.on("message", (data) => {
 });
 
 bitqueryConnection.on("close", () => {
-  // Send complete message to properly terminate subscription before closing
-  if (bitqueryConnection.readyState === WebSocket.OPEN) {
-    const completeMessage = {
-      type: "complete",
-      id: "1"
-    };
-    bitqueryConnection.send(JSON.stringify(completeMessage));
-    console.log("Complete message sent for subscription termination.");
-  }
-  
   console.log("Disconnected from Bitquery.");
 });
 
