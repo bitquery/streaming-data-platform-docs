@@ -93,6 +93,16 @@ function connectToBitquery() {
   });
 
   bitqueryConnection.on("close", () => {
+    // Send complete message to properly terminate subscription before closing
+    if (bitqueryConnection.readyState === WebSocket.OPEN) {
+      const completeMessage = {
+        type: "complete",
+        id: GRAPHQL_SUBSCRIPTION_ID
+      };
+      bitqueryConnection.send(JSON.stringify(completeMessage));
+      console.log("Complete message sent for subscription termination.");
+    }
+    
     console.warn("WebSocket closed. Reconnecting...");
     reconnect();
   });
@@ -137,6 +147,15 @@ function reconnect() {
 
   if (bitqueryConnection) {
     try {
+      // Send complete message to properly terminate subscription before closing
+      if (bitqueryConnection.readyState === WebSocket.OPEN) {
+        const completeMessage = {
+          type: "complete",
+          id: GRAPHQL_SUBSCRIPTION_ID
+        };
+        bitqueryConnection.send(JSON.stringify(completeMessage));
+        console.log("Complete message sent before reconnection.");
+      }
       bitqueryConnection.close(1000, "Reconnecting due to inactivity");
     } catch (e) {
       console.error("Error closing connection:", e.message);

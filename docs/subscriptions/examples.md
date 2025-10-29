@@ -124,6 +124,17 @@ bitqueryConnection.on("message", (data) => {
       // Automatically close the connection after 10 seconds
       setTimeout(() => {
         console.log("Closing WebSocket connection after 10 seconds.");
+        
+        // Send complete message to properly terminate subscription before closing
+        if (bitqueryConnection.readyState === WebSocket.OPEN) {
+          const completeMessage = {
+            type: "complete",
+            id: "1"
+          };
+          bitqueryConnection.send(JSON.stringify(completeMessage));
+          console.log("Complete message sent for subscription termination.");
+        }
+        
         bitqueryConnection.close();
       }, 10000);
       break;
@@ -146,6 +157,16 @@ bitqueryConnection.on("message", (data) => {
 });
 
 bitqueryConnection.on("close", () => {
+  // Send complete message to properly terminate subscription before closing
+  if (bitqueryConnection.readyState === WebSocket.OPEN) {
+    const completeMessage = {
+      type: "complete",
+      id: "1"
+    };
+    bitqueryConnection.send(JSON.stringify(completeMessage));
+    console.log("Complete message sent for subscription termination.");
+  }
+  
   console.log("Disconnected from Bitquery.");
 });
 
