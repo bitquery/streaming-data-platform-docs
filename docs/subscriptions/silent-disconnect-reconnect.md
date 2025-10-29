@@ -7,11 +7,18 @@ This is how it would look with below sample implemention of a silent disconnect-
 
 ![](/img/ApplicationExamples/disconnect.png)
 
+## Best Practices
+
+When implementing WebSocket subscriptions with auto-reconnect, follow these best practices:
+
+1. **Separate Processing and Consumption**: Keep message processing and consumption as separate, non-blocking processes. Processing incoming data should not block the WebSocket connection from receiving new messages. Use asynchronous handlers, queues, or separate threads/workers to process data independently from the WebSocket receiver.
+
+2. **Use Standard WebSocket Libraries**: Instead of manually managing each step of the WebSocket lifecycle (connection, subscription, keep-alive, reconnection), use well-tested WebSocket libraries that handle the full subscription lifecycle automatically. Libraries like `graphql-ws`, `apollo-client`, or similar provide built-in reconnection logic, subscription management, and error handling, reducing the complexity and potential bugs in your implementation.
+
 ## Sample Implementation in JavaScript
 
 ```js
 const { WebSocket } = require("ws");
-const config = require("./config.json");
 let isReconnecting = false;
 
 let bitqueryConnection;
@@ -40,7 +47,7 @@ const subscriptionQuery = `
 
 function connectToBitquery() {
   console.log("Connecting to Bitquery...");
-  const wsUrl = `wss://streaming.bitquery.io/eap?token=${config.oauthtoken}`;
+  const wsUrl = `wss://streaming.bitquery.io/graphql?token=ory_`;
   bitqueryConnection = new WebSocket(wsUrl, ["graphql-ws"]);
 
   bitqueryConnection.on("open", () => {
@@ -76,7 +83,12 @@ function connectToBitquery() {
         break;
 
       case "data":
-        // console.log("Received data:", response.payload.data);
+        console.log("Received data");
+
+        // Push to queue for async processing
+        //  setImmediate(() => processData(response.payload.data));
+
+        // console.log(response.payload.data.Tron.Transfers.Transfer)
         break;
 
       case "ka":
@@ -93,16 +105,6 @@ function connectToBitquery() {
   });
 
   bitqueryConnection.on("close", () => {
-    // Send complete message to properly terminate subscription before closing
-    if (bitqueryConnection.readyState === WebSocket.OPEN) {
-      const completeMessage = {
-        type: "complete",
-        id: GRAPHQL_SUBSCRIPTION_ID
-      };
-      bitqueryConnection.send(JSON.stringify(completeMessage));
-      console.log("Complete message sent for subscription termination.");
-    }
-    
     console.warn("WebSocket closed. Reconnecting...");
     reconnect();
   });
@@ -151,7 +153,7 @@ function reconnect() {
       if (bitqueryConnection.readyState === WebSocket.OPEN) {
         const completeMessage = {
           type: "complete",
-          id: GRAPHQL_SUBSCRIPTION_ID
+          id: GRAPHQL_SUBSCRIPTION_ID,
         };
         bitqueryConnection.send(JSON.stringify(completeMessage));
         console.log("Complete message sent before reconnection.");
