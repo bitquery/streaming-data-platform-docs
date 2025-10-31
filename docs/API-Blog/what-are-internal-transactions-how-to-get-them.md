@@ -53,7 +53,7 @@ query MyQuery {
 
 ```
 query MyQuery {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: archive, network: eth) {
     in: Calls(
       where: {Call: {Depth: {gt: 0}}, Transaction: {Hash: {is: "0xd70c784ca3000da707d29c662d3a5dbe3d6bbade73686e1c73b4a24979d9e8c4"}}}
     ) {
@@ -72,7 +72,7 @@ query MyQuery {
 
 ```
 
-[https://ide.bitquery.io/internal-tx-eth](https://ide.bitquery.io/internal-tx-eth)
+[Try the above query here.](https://ide.bitquery.io/internal-tx-eth_1)
 
 The link above is an example that shows how an internal transaction on Ethereum is tracked. It shows the patterns of internal transactions within a single Ethereum transaction. It shows the layers of internal calls, the Ethereum addresses involved, the status of each call, and the amount of Ether transferred in each case.
 
@@ -98,7 +98,7 @@ Explaining the query data
 
 ```
 query MyQuery {
-  EVM(dataset: combined, network: bsc) {
+  EVM(dataset: archive, network: bsc) {
     in: Calls(
       where: {Call: {Depth: {gt: 0}}, Transaction: {Hash: {is: "0x9c78b80a02c882db9d3d9add2d98243e4aeadb035fe9aacf82d04d51092db7fc"}}}
     ) {
@@ -117,7 +117,7 @@ query MyQuery {
 
 ```
 
-[https://ide.bitquery.io/internal-tx-bnb](https://ide.bitquery.io/internal-tx-bnb)
+[Try the above query here.](https://ide.bitquery.io/internal-tx-bnb_1)
 
 This query is aimed at analyzing the execution flow of a transaction, showing all the internal calls, their success, and the interactions between different addresses in the same transaction.
 
@@ -135,7 +135,7 @@ Components
 
 ```
 query MyQuery {
-  EVM(dataset: combined, network: base) {
+  EVM(dataset: archive, network: base) {
     in: Calls(
       where: {Call: {Depth: {gt: 0}}, Transaction: {Hash: {is: "0x85dc2c0eac54d090ac7e1b50bd47ec686ba764870b61714937b32524a96ed2b6"}}}
     ) {
@@ -153,7 +153,7 @@ query MyQuery {
 }
 ```
 
-[https://ide.bitquery.io/Base- --transaction](https://ide.bitquery.io/Base-internal--transaction)
+[Try the above query here.](https://ide.bitquery.io/Base-internal--transaction_1)
 
 This query is an example that shows how an internal transaction on Base is tracked.
 

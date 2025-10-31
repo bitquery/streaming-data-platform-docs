@@ -331,7 +331,7 @@ Returns top 100 About to Graduate Pump Fun Tokens.
 ### Get Graduated Tokens by Exchange
 
 Returns a list of tokens that have graduated (completed bonding phase) on Pump Fun to PumpSwap.
-▶️ [Get Graduated Tokens by Exchange](https://ide.bitquery.io/track-Pump-fun-migration-using-joins_3)
+▶️ [Get Graduated Tokens by Exchange](https://ide.bitquery.io/get-latest-Pump-fun-migration-using-joins)
 
 ### Top PumpFun Tokens by Marketcap
 
