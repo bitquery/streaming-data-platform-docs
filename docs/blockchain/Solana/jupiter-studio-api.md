@@ -77,7 +77,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ### 2. Jupiter Studio Token Launches & Migration
 
-- [Track Latest Jupiter Studio Token Launches ➤](#track-latest-jupiter-studio-token-launches)
+- [Track Latest Jupiter Studio Token Launches ➤](#track-latest-jupiter-studio-token-launches-on-meteora-dbc)
 - [Monitor Jupiter Studio Token Migrations ➤](#monitor-jupiter-studio-token-migrations)
 - [Check Token Migration Status ➤](#check-token-migration-status)
 

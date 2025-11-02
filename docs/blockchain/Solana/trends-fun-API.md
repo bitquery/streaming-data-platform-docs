@@ -44,8 +44,7 @@ If you want fastest data without any latency, we can provide gRPC and Kafka stre
 
 ### 1. Trends.fun Token Launches & Creation
 
-- [Track Trends.fun Token Creation ➤](#track-trendsfun-token-creation)
-- [Latest Trends.fun Token Launches ➤](#latest-trendsfun-token-launches)
+- [Track Trends.fun Token Creation ➤](#track-trendsfun-pool-creation)
 
 ### 2. Bonding Curve & Progress APIs
 
@@ -55,18 +54,18 @@ If you want fastest data without any latency, we can provide gRPC and Kafka stre
 ### 3. Token Migration & Graduation
 
 - [Track Trends.fun Token Migrations ➤](#track-trendsfun-token-migrations-to-meteora-dex-in-realtime)
-- [Top 100 About to Graduate Tokens ➤](#top-100-about-to-graduate-trendsfun-tokens)
+- [Top 100 About to Graduate Tokens ➤](#track-trendsfun-tokens-above-95-bonding-curve-progress-in-realtime)
 
 ### 4. Trading & Market Data
 
 - [Latest Trades of a Trends.fun Token ➤](#latest-trades-of-a-trendsfun-token)
-- [Latest Price of a Trends.fun Token ➤](#latest-price-of-a-trendsfun-token)
+- [Latest Price of a Trends.fun Token ➤](#ohlcv-for-specific-trendsfun-token)
 - [OHLCV Data ➤](#ohlcv-for-specific-trendsfun-token)
 - [Top Buyers and Sellers ➤](#top-buyers-of-a-trendsfun-token)
 
 ### 5. Liquidity & Pool Data
 
-- [Get Pair Address for a Token ➤](#get-pair-address-for-a-trendsfun-token)
+- [Get Pair Address for a Token ➤](#get-liquidity-for-a-trendsfun-token-pair-address)
 - [Get Liquidity for a Token Pair ➤](#get-liquidity-for-a-trendsfun-token-pair-address)
 
 ---
