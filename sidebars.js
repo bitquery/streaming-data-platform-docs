@@ -538,15 +538,6 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "TON",
-          link: {
-            type: "generated-index",
-            title: "TON API Documentation",
-          },
-          items: ["blockchain/TON/ton-dex-trades"],
-        },
-        {
-          type: "category",
           label: "Arbitrum",
           link: {
             type: "doc",

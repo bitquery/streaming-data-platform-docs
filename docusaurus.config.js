@@ -655,11 +655,11 @@ const config = {
             from: "/docs/examples/Tron/usdt-trc20-api/",
           },
 
-          // TON redirects from old examples/ton/ path to new blockchain/TON/ path
-          {
-            to: "/docs/blockchain/TON/ton-dex-trades/",
-            from: "/docs/examples/ton/ton-dex-trades/",
-          },
+          // TON redirects removed after API removed - BIT-12892
+          // {
+          //   to: "/docs/blockchain/TON/ton-dex-trades/",
+          //   from: "/docs/examples/ton/ton-dex-trades/",
+          // },
 
           // Arbitrum redirects from old examples/Arbitrum/ path to new blockchain/Arbitrum/ path
           {
