@@ -8,6 +8,7 @@ description: "Track Uniswap V3 NFT positions, monitor liquidity changes, positio
 Uniswap V3 introduced NFT-based liquidity positions, where each position is represented as an ERC-721 NFT. Bitquery's Position API allows you to track position creation, liquidity additions, removals, burns, and query position details in real-time.
 
 The Uniswap V3 NonfungiblePositionManager contract (`0xC36442b4a4522E871399CD717aBDD847Ab11FE88`) handles all position-related operations:
+
 - **Mint**: Creates new positions and returns a token ID
 - **Burn**: Closes positions (requires NFT ID)
 - **IncreaseLiquidity/DecreaseLiquidity**: Modifies existing positions (requires NFT ID)
@@ -36,17 +37,19 @@ The Uniswap V3 NonfungiblePositionManager contract (`0xC36442b4a4522E871399CD717
   <meta property="twitter:description" content="Monitor Uniswap V3 positions, track liquidity providers, and analyze position changes in real-time." />
 </Head>
 
-
 ## Table of Contents
 
 ### 1. Position Creation & Tracking
+
 - [Recent Position NFT Mints ➤](#recent-position-nft-mints)
 
 ### 2. Position Management
+
 - [Burn Position Events ➤](#burn-position-events)
 - [Increase & Decrease Liquidity Events ➤](#increase--decrease-liquidity-events)
 
 ### 3. Position Queries
+
 - [Get Position Details by Token ID ➤](#get-position-details-by-token-id)
 
 ---
@@ -254,7 +257,9 @@ query LiquidityChangeEvents {
     Calls(
       where: {
         Call: {
-          Signature: { Name: { in: ["increaseLiquidity", "decreaseLiquidity"] } }
+          Signature: {
+            Name: { in: ["increaseLiquidity", "decreaseLiquidity"] }
+          }
           To: { is: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88" }
         }
         Block: { Date: { after: "2025-09-20", before: "2025-09-22" } }
@@ -429,6 +434,88 @@ query PositionDetailsByTokenId {
 
 ---
 
+## Fee Collectors on Uniswap
+
+## Recent Fee Collections
+
+This query lists the most recent Uniswap V3 fee collection events by scanning `Collect` logs emitted by the Nonfungible Position Manager (`0xc36442b4a4522e871399cd717abdd847ab11fe88`).
+
+It returns decoded arguments—including the Uniswap position `tokenId`, the `recipient` address, and the collected `amount0` and `amount1` values (raw integer amounts).
+
+[Run query](https://ide.bitquery.io/Fee-collection-on-Uniswap-v3-Positions)
+
+```
+{
+  EVM(dataset: realtime, network: eth) {
+    Events(
+      limit: {count: 20}
+      where: {Log: {Signature: {Name: {is: "Collect"}}}, Transaction: {To: {is: "0xc36442b4a4522e871399cd717abdd847ab11fe88"}}}
+      orderBy: {descending: Block_Time}
+    ) {
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Topics {
+        Hash
+      }
+      TransactionStatus {
+        Success
+      }
+      LogHeader {
+        Address
+        Index
+        Data
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Log {
+        EnterIndex
+        ExitIndex
+        Index
+        LogAfterCallIndex
+        Pc
+        SmartContract
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Key Concepts
 
 ### Understanding Uniswap V3 Positions
@@ -460,6 +547,7 @@ price_upper = 1.0001 ** tick_upper
 ```
 
 **Where:**
+
 - `tick_lower`: The lower tick boundary (available in Arguments)
 - `tick_upper`: The upper tick boundary (available in Arguments)
 - `1.0001`: The base multiplier used by Uniswap V3
@@ -467,10 +555,12 @@ price_upper = 1.0001 ** tick_upper
 **Example:**
 
 If a position has:
+
 - `tick_lower = -100`
 - `tick_upper = 100`
 
 Then:
+
 - `price_lower = 1.0001 ** (-100) ≈ 0.990`
 - `price_upper = 1.0001 ** 100 ≈ 1.010`
 
@@ -481,6 +571,3 @@ Then:
 - **Address**: `0xC36442b4a4522E871399CD717aBDD847Ab11FE88` (Ethereum Mainnet)
 - **Purpose**: Manages all Uniswap V3 liquidity positions as NFTs
 - **Key Functions**: `mint`, `burn`, `increaseLiquidity`, `decreaseLiquidity`, `positions`, `collect`
-
-
-
