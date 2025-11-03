@@ -1,6 +1,6 @@
 # Uniswap API
 
-Uniswap is a decentralized exchange on Ethereum for trading ERC-20 tokens. Bitquery’s APIs support Uniswap trades, pool creations, and active user metrics across v1, v2, and v3 in real-time and across archive data since genesis.
+Uniswap is a decentralized exchange on Ethereum for trading ERC-20 tokens. Bitquery’s APIs support Uniswap trades, pool creations, and active user metrics across v1, v2, v3 and v4 in real-time and across archive data since genesis.
 
 You can also explore Uniswap APIs on other chains:
 
@@ -33,9 +33,9 @@ You can also explore Uniswap APIs on other chains:
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 
-## Realtime Uniswap v1, v2, v3 Trades
+## Realtime Uniswap v1, v2, v3, v4 Trades
 
-Track live trades across all Uniswap versions: [Run Stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream)
+Track live trades across all Uniswap versions: [Run Stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream_1)
 
 <details>
   <summary>Click to expand GraphQL subscription</summary>
@@ -47,7 +47,9 @@ subscription {
       where: {
         Trade: {
           Dex: {
-            ProtocolName: { in: ["uniswap_v3", "uniswap_v2", "uniswap_v1"] }
+            ProtocolName: {
+              in: ["uniswap_v4", "uniswap_v3", "uniswap_v2", "uniswap_v1"]
+            }
           }
         }
       }
@@ -111,17 +113,19 @@ subscription {
 The new [Price Index Stream](https://docs.bitquery.io/docs/trading/price-index/introduction/) helps you get token-level, pair-level, and market-level OHLC data for 1 sec interval( or higher), in real-time across all chains.
 These also includes trading metrics like SMA, EMA, VWAP, and more.
 
-[Run Stream](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline)
+[Run Stream](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline_1)
 
 <details>
 
-  <summary>Click to expand GraphQL query</summary>
+{" "}
+
+<summary>Click to expand GraphQL query</summary>
 
 ```
 subscription {
   Trading {
     Pairs(
-      where: {Market: {Protocol: {in: ["uniswap_v3", "uniswap_v2"]}}, Interval: {Time: {Duration: {eq: 1}}}}
+      where: {Market: {Protocol: {in: ["uniswap_v4","uniswap_v3", "uniswap_v2", "uniswap_v1"]}}, Interval: {Time: {Duration: {eq: 1}}}}
     ) {
       Currency {
         Name
@@ -161,15 +165,13 @@ subscription {
     }
   }
 }
-
 ```
 
 </details>
 
 ## Latest Trades of a Pair on Uniswap
 
-Retrieve the 50 most recent WETH/USDC trades on Uniswap v1–v3:
-
+Retrieve the 50 most recent WETH/USDC trades on Uniswap v1–v4, [Run query](https://ide.bitquery.io/Latest-Trades-of-a-Pair-on-Uniswap):
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -194,7 +196,9 @@ query LatestTrades {
             SmartContract: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" }
           }
           Dex: {
-            ProtocolName: { in: ["uniswap_v3", "uniswap_v2", "uniswap_v1"] }
+            ProtocolName: {
+              in: ["uniswap_v4", "uniswap_v3", "uniswap_v2", "uniswap_v1"]
+            }
           }
         }
       }
@@ -230,13 +234,13 @@ query LatestTrades {
     }
   }
 }
-````
+```
 
 </details>
 
 ## Top Traders of a Token
 
-Identify the top 100 USDC traders by USD volume on Uniswap v1–v3:
+Identify the top 100 USDC traders by USD volume on Uniswap v1–v4, [test the query here](https://ide.bitquery.io/Top-Traders-of-a-Token_8):
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -253,7 +257,9 @@ query topTraders {
             SmartContract: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" }
           }
           Dex: {
-            ProtocolName: { in: ["uniswap_v3", "uniswap_v2", "uniswap_v1"] }
+            ProtocolName: {
+              in: ["uniswap_v4", "uniswap_v3", "uniswap_v2", "uniswap_v1"]
+            }
           }
         }
       }
@@ -329,9 +335,9 @@ query pairTopTraders {
 
 ## Stream Latest Pool Creation on Uniswap V2, V3
 
-[Run Stream ➤](https://ide.bitquery.io/stream-pool-and-pair-creation-on-ethereum#)
+[Run Stream ➤](https://ide.bitquery.io/stream-pool-and-pair-creation-on-ethereum_1)
 
-[Run Query ➤](https://ide.bitquery.io/query-pool-and-pair-creation-on-ethereum#)
+[Run Query ➤](https://ide.bitquery.io/query-pool-and-pair-creation-on-ethereum_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -346,9 +352,12 @@ subscription {
             in: [
               "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
               "0x1f98431c8ad98523631ae4a59f267346ea31f984"
+              "0x000000000004444c5dc75cB358380D2e3dE08A90"
             ]
           }
-          Signature: { Name: { in: ["PoolCreated", "PairCreated"] } }
+          Signature: {
+            Name: { in: ["PoolCreated", "PairCreated", "Initialize"] }
+          }
         }
       }
     ) {
@@ -432,6 +441,71 @@ Track the last 10 `PairCreated` events from the Uniswap V2 factory:
         Value {
           ... on EVM_ABI_Address_Value_Arg {
             address
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Latest Pools Created on Uniswap V4
+
+Track the last 10 `Initialize` events from the Uniswap V4 factory:
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(dataset: realtime, network: eth) {
+    Events(
+      orderBy: { descending: Block_Number }
+      limit: { count: 10 }
+      where: {
+        Log: {
+          SmartContract: { is: "0x000000000004444c5dc75cB358380D2e3dE08A90" }
+          Signature: { Name: { is: "Initialize" } }
+        }
+      }
+    ) {
+      Log {
+        Signature {
+          Name
+          Parsed
+          Signature
+        }
+        SmartContract
+      }
+      Transaction {
+        Hash
+      }
+      Block {
+        Date
+        Number
+      }
+      Arguments {
+        Type
+        Value {
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
           }
         }
       }
