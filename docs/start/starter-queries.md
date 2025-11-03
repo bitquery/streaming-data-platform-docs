@@ -506,7 +506,7 @@ This query gets you top 10 Eth Tokens by Price Change in last 1h.
 ### Ethereum Events
 
 This query returns event info and logs for the Ethereum network. It includes arguments passed, transaction details, log info, block info, and more.  
-▶️ [Ethereum Events](https://ide.bitquery.io/ethereum-events-api)
+▶️ [Ethereum Events](https://ide.bitquery.io/recent-ethereum-events-API)
 
 ### Ethereum Calls
 
