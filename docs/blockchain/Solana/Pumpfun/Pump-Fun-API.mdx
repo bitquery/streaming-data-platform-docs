@@ -94,7 +94,7 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 - [Get All Trading Pairs of a Token ➤](#get-all-trading-pairs-of-a-token)
 - [Get Liquidity of Pump.fun Tokens ➤](#get-liquidity-of-pumpfun-tokens)
 - [Market Cap, Price, Liquidity, Bonding Curve, Volume ➤](#get-market-cap-price-liquidity-bonding-curve-and-volume)
-- [Last Trade Before Token Graduates to Raydium ➤](#get-last-pumpfun-trade-before-token-graduates-to-raydium)
+- [Get Last Pump.fun Trade Before Token Graduates to PumpSwap AMM ➤](#get-last-pumpfun-trade-before-token-graduates-to-pumpswap-amm)
 
 ### 5. Token Holder & Trader Insights
 
@@ -1224,10 +1224,10 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $pairAddress: String) {
 
 </details>
 
-### Get Last Pump.fun Trade Before Token Graduates to Raydium
+### Get Last Pump.fun Trade Before Token Graduates to PumpSwap AMM
 
-Finds the final pool trade before a token transitions to Raydium
-[Last Pump.fun trade before Raydium — Query ➤](https://ide.bitquery.io/pump-fun-token-graduating-to-raydium)
+Finds the final pool trade before a token transitions to PumpSwap
+[Last Pump.fun trade before PumpSwap — Query ➤](https://ide.bitquery.io/pump-fun-token-graduating-to-pumpswap)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -1240,6 +1240,13 @@ Finds the final pool trade before a token transitions to Raydium
         Pool: {
           Dex: { ProtocolName: { is: "pump" } }
           Base: { PostAmount: { eq: "206900000" } }
+          Market: {
+            BaseCurrency: {
+              MintAddress: {
+                is: "3Tf4ZSdJ6vvFY2ob9DDYFgFRGSgCxDm6MfBViY8ppump"
+              }
+            }
+          }
         }
         Transaction: { Result: { Success: true } }
       }
@@ -1276,11 +1283,13 @@ Finds the final pool trade before a token transitions to Raydium
           BaseCurrency {
             Name
             Symbol
+            MintAddress
           }
           MarketAddress
           QuoteCurrency {
             Name
             Symbol
+            MintAddress
           }
         }
       }
