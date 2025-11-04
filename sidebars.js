@@ -365,11 +365,13 @@ const sidebars = {
                 "blockchain/Ethereum/dextrades/uniswap-api",
                 "blockchain/Ethereum/dextrades/uniswap-position-api",
                 "blockchain/Ethereum/dextrades/pancakeswap-api",
+                "blockchain/Ethereum/dextrades/fluid-dex-api",
                 "blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener",
                 "blockchain/Ethereum/dextrades/evm-bullx-api",
                 "blockchain/Ethereum/dextrades/evm-gmgn-api",
                 "blockchain/Ethereum/dextrades/evm-photon-api",
                 "blockchain/Ethereum/dextrades/pools-api",
+
               ],
             },
             {
@@ -416,6 +418,7 @@ const sidebars = {
           },
           items: [
             "blockchain/BSC/bsc-balance-updates",
+            "blockchain/BSC/bsc-transaction-balance-api",
             "blockchain/BSC/bsc-calls-api",
             "blockchain/BSC/bsc-dextrades",
             "blockchain/BSC/bsc-uniswap-api",
