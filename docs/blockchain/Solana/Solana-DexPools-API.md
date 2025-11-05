@@ -315,6 +315,45 @@ query GetLatestLiquidityForPool {
 
 </details>
 
+## Get Locked Liquidity of a Pool on Solana
+
+This query retrieves the locked liquidity of a pool on Solana by querying balance updates for a specific pool account owner and currency. The locked liquidity is calculated as twice the balance of WSOL in USD (since pools typically have two tokens locked). You can find the query [here](https://ide.bitquery.io/get-locked-liquidity-of-a-pool-on-Solana).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  Solana {
+    BalanceUpdates(
+      where: {
+        BalanceUpdate: {
+          Account: {
+            Owner: { is: "FPY1pAp1xLq2hihs1Tm2tE2F8VQThXhLBvvZnvdfHCTb" }
+          }
+          Currency: {
+            MintAddress: { is: "So11111111111111111111111111111111111111112" }
+          }
+        }
+      }
+      orderBy: { descendingByField: "BalanceUpdate_Balance_maximum" }
+    ) {
+      BalanceUpdate {
+        Balance: PostBalanceInUSD(maximum: Block_Slot)
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+      }
+      locked_liquidity: calculate(expression: "$BalanceUpdate_Balance*2")
+    }
+  }
+}
+```
+
+</details>
+
 ## Get Top Pools Based on Liquidity
 
 [This](https://ide.bitquery.io/top-10-liquidity-pools_1) query retrieves the top liquidity pools on the Solana blockchain, sorted by their total liquidity (PostAmount). The query is filtered for pools that have been active since a specific time period. The results are limited to the top 10 pools based on their liquidity.
