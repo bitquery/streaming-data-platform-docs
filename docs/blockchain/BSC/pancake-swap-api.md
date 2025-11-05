@@ -12,7 +12,6 @@ To get the trade activities of the Pancake Swap exclusively we have added a filt
 
 ## Getting Started with Bitquery:
 
-- [Learning Track](https://docs.bitquery.io/docs/start/learning-path/): Learning track to get started with Bitquery GraphQL APIs and streams.
 - [BSC DEX Trades](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
 - [BSC Uniswap APIs](https://docs.bitquery.io/docs/blockchain/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
 - [BSC Four Meme APIs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/): Four Meme Trades on BSC network with the help of examples.
@@ -43,7 +42,7 @@ To get the trade activities of the Pancake Swap exclusively we have added a filt
 
 ## Get Latest Trades on Pancake Swap
 
-Using [this](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades) API endpoint we could query the most recent trades on PancakeSwap.
+Using [this](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades) API we could query the most recent trades on PancakeSwap.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -427,161 +426,50 @@ subscription {
 
 Also, checkout the [Four Meme](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/) documentation for APIs related to Four Meme tokens and Four Meme Exchange.
 
-## Latest Trades on Pancake Swap for a given trader
+## Get Top Traders of a Token on Pancake Swap
 
-[This](https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-trader) query returns the latest trades by a particular trader, with buyer wallet address as `0xafb2da14056725e3ba3a30dd846b6bbbd7886c56` in this case, on Pancake Swap. Also, you could subscribe to the same info using [this](https://ide.bitquery.io/Stream---BSC-PancakeSwap-v3-Trades-for-a-trader) stream.
+This query will fetch you top traders of a token for the selected network. You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-pancakeswap-bsc).
 
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: realtime, network: bsc) {
-    DEXTradeByTokens(
-      limit: { count: 20 }
-      orderBy: [
-        { descending: Block_Time }
-        { descending: Transaction_Index }
-        { descending: Trade_Index }
-      ]
-      where: {
-        Trade: {
-          Dex: {
-            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
-          }
-          Buyer: { is: "0xafb2da14056725e3ba3a30dd846b6bbbd7886c56" }
-        }
-      }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TransactionStatus {
-        Success
-      }
-      Log {
-        Signature {
-          Name
-          Signature
-        }
-        SmartContract
-      }
-      Receipt {
-        ContractAddress
-      }
-      Call {
-        From
-        Gas
-        GasUsed
-        InternalCalls
-        Signature {
-          Name
-          Signature
-        }
-        To
-        Value
-      }
-      Trade {
-        Amount
-        AmountInUSD
-        Buyer
-        Price
-        PriceInUSD
-        Buyer
-        Seller
-        Sender
-        Success
-        URIs
-        Fees {
-          Amount
-          AmountInUSD
-          Payer
-          Recipient
-        }
-        Dex {
-          ProtocolName
-          ProtocolFamily
-        }
-        Currency {
-          Name
-          Symbol
-          SmartContract
-        }
-        Side {
-          Amount
-          AmountInUSD
-          Buyer
-          Currency {
-            Name
-            Symbol
-            SmartContract
-          }
-          Ids
-          OrderId
-          Seller
-          Type
-          URIs
-        }
-      }
-      Transaction {
-        Hash
-        From
-        To
-      }
-    }
-  }
-}
-```
-
-</details>
-
-## Latest Price of a Token on Pancake Swap
-
-Using [this](https://ide.bitquery.io/BSC-PancakeSwap-v3-Price-for-a-token) API endpoint we could retrieve the latest price of a token traded on Pancake Swap. The price is calculated for the currency with `SmartContract` as `0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82` when it is traded against the currency with `SmartContract` as `0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c`. This query returns both price against the currency and price in USD.
+> Note: This queries the `realtime` database by default. To query `archive` data, change the `dataset` parameter and add a date period as a filter
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
-  EVM(dataset: realtime, network: bsc) {
+  EVM(network: bsc) {
     DEXTradeByTokens(
-      limit: { count: 20 }
-      orderBy: [
-        { descending: Block_Time }
-        { descending: Transaction_Index }
-        { descending: Trade_Index }
-      ]
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 100 }
       where: {
         Trade: {
-          Dex: {
-            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
-          }
           Currency: {
             SmartContract: { is: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82" }
           }
-          Side: {
-            Currency: {
-              SmartContract: {
-                is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
-              }
-            }
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
           }
         }
       }
     ) {
       Trade {
-        Price
-        PriceInUSD
-        Side {
-          Currency {
-            Name
-            Symbol
-            SmartContract
-          }
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
         }
+        Buyer
       }
+      bought: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sold: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
   }
 }
@@ -589,28 +477,28 @@ Using [this](https://ide.bitquery.io/BSC-PancakeSwap-v3-Price-for-a-token) API e
 
 </details>
 
-The same info could be streamed via this [subscription](https://ide.bitquery.io/Stream--BSC-PancakeSwap-v3-Price-for-a-token_1).
+## Get Trading Volume, Buy Volume, Sell Volume of a Token
 
-## Trade Metrics for a Pancake Swap Token in 24 Hours
-
-[This](https://ide.bitquery.io/volume-and-trades-for-a-pancake-token) API endpoint returns trade metrics such as volume, number of trades, average price, volatility, buyers and sellers for the last 24 hours.
+This query fetches you the traded volume, buy volume and sell volume of a token. Try out the API [here](https://ide.bitquery.io/trade_volume_bsc_pancakeswap).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query MyQuery($currency: String) {
+query MyQuery {
   EVM(network: bsc) {
     DEXTradeByTokens(
       where: {
         Trade: {
-          Currency: { SmartContract: { is: $currency } }
+          Currency: {
+            SmartContract: { is: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82" }
+          }
           Dex: {
             OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
           }
-          Success: true
         }
-        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        TransactionStatus: { Success: true }
+        Block: { Time: { since: "2025-02-12T00:00:00Z" } }
       }
     ) {
       Trade {
@@ -618,22 +506,62 @@ query MyQuery($currency: String) {
           Name
           Symbol
           SmartContract
+          Decimals
         }
       }
-      volumer: sum(of: Trade_Side_AmountInUSD)
-      trades: count
-      buyers: uniq(of: Trade_Buyer)
-      sellers: uniq(of: Trade_Seller)
-      volatility: standard_deviation(of: Trade_PriceInUSD)
-      average_price: average(of: Trade_PriceInUSD)
+      traded_volume_in_usd: sum(of: Trade_Side_AmountInUSD)
+      sell_volume_in_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      buy_volume_in_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
     }
   }
 }
 ```
 
-```json
-{
-  "currency": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"
+</details>
+
+## Get Metadata of a Token
+
+Use the below query to get Token's metadata like `Name`, `symbol`, `SmartContract Address`, `Decimals`. Try out the API [here](https://ide.bitquery.io/get-metadata-pancakeswap) in the Bitquery Playground.
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(network: bsc, dataset: realtime) {
+    DEXTradeByTokens(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82" }
+          }
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+          }
+        }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+          ProtocolName
+          HasURI
+          Fungible
+          Decimals
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -641,61 +569,72 @@ query MyQuery($currency: String) {
 
 ## OHLC of a Token on Pancake Swap
 
-[This](https://ide.bitquery.io/BSC-Pancake-V3-OHLC-data_1) API endpoint provides the OHLC/ K-Line data for a given token against other specified token. In the example below, we are calculating the OHLC for currency with address as `$base` against the token with the address as `$token`.
+[This](https://ide.bitquery.io/BSC-Pancake-V3-OHLC-data) API endpoint provides the OHLC/ K-Line data for a given token against other specified token.
+
+This query uses the `Trading` cube from the [Crypto Price APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query tradingViewPairs(
-  $network: evm_network
-  $dataset: dataset_arg_enum
-  $interval: Int
-  $token: String
-  $base: String
-  $time_ago: DateTime
-) {
-  EVM(network: $network, dataset: $dataset) {
-    DEXTradeByTokens(
-      orderBy: { ascendingByField: "Block_Time" }
+{
+  Trading(dataset: realtime) {
+    Pairs(
       where: {
-        TransactionStatus: { Success: true }
-        Trade: {
-          Side: {
-            Amount: { gt: "0" }
-            Currency: { SmartContract: { is: $token } }
-          }
-          Currency: { SmartContract: { is: $base } }
-          Success: true
-        }
-        Block: { Time: { since: $time_ago } }
+        Price: { IsQuotedInUsd: false }
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Currency: { Id: { is: "bid:eth" } }
+        QuoteCurrency: { Id: { is: "usdc" } }
+        Market: { Protocol: { is: "pancake_swap_v3" } }
       }
+      limit: { count: 10 }
+      orderBy: { descending: Interval_Time_End }
     ) {
-      Block {
-        Time(interval: { count: $interval, in: hours })
+      Token {
+        Id
+        Symbol
+        Address
+        NetworkBid
+        Network
+        Name
       }
-      low: quantile(of: Trade_PriceInUSD, level: 0.1)
-      high: quantile(of: Trade_PriceInUSD, level: 0.9)
-      open: Trade {
-        PriceInUSD(minimum: Block_Time)
+      QuoteToken {
+        Id
+        Symbol
+        Address
+        Name
+        NetworkBid
       }
-      close: Trade {
-        PriceInUSD(maximum: Block_Time)
+      Interval {
+        Time {
+          Start
+          End
+          Duration
+        }
       }
-      volume: sum(of: Trade_Side_AmountInUSD)
+      Volume {
+        Usd
+        Quote
+        Base
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+        Average {
+          Estimate
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+      }
     }
   }
-}
-```
-
-```json
-{
-  "network": "bsc",
-  "base": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
-  "token": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
-  "time_ago": "2025-03-11T08:12:13Z",
-  "dataset": "combined",
-  "interval": 1
 }
 ```
 
