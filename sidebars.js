@@ -330,9 +330,23 @@ const sidebars = {
             {
               type: "category",
               label: "Balances",
+              link: {
+                type: "doc",
+                id: "blockchain/Ethereum/balances/index",
+              },
               items: [
                 "blockchain/Ethereum/balances/balance-api",
                 "blockchain/Ethereum/token-holders/token-holder-api",
+                {
+                  type: "category",
+                  label: "Transaction Balance Tracker",
+                  items: [
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-transaction-balance-tracker",
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-validator-balance-tracker",
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-miner-balance-tracker",
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-mev-balance-tracker",
+                  ],
+                },
               ],
             },
             "blockchain/Ethereum/calls/smartcontract",
