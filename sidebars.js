@@ -386,7 +386,6 @@ const sidebars = {
                 "blockchain/Ethereum/dextrades/evm-gmgn-api",
                 "blockchain/Ethereum/dextrades/evm-photon-api",
                 "blockchain/Ethereum/dextrades/pools-api",
-
               ],
             },
             {
@@ -581,6 +580,7 @@ const sidebars = {
           },
           items: [
             "blockchain/Base/aerodrome-base-api",
+            "blockchain/Base/aerodrome-gauge-vaults-api",
             "blockchain/Base/base-uniswap-api",
             "blockchain/Base/base-clanker-api",
             "blockchain/Base/apestore-base-api",

@@ -39,11 +39,7 @@ Monitor balance changes for Ethereum validators, including staking rewards and w
 subscription {
   EVM(network: eth) {
     TransactionBalances(
-      where: {
-        TokenBalance: {
-          BalanceChangeReasonCode: { eq: 3 }
-        }
-      }
+      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 3 } } }
     ) {
       Block {
         Time
@@ -77,11 +73,7 @@ Track validator rewards and balance increases from staking activities.
 subscription {
   EVM(network: eth) {
     TransactionBalances(
-      where: {
-        TokenBalance: {
-          BalanceChangeReasonCode: { in: [2, 5] }
-        }
-      }
+      where: { TokenBalance: { BalanceChangeReasonCode: { in: [2, 5] } } }
     ) {
       Block {
         Time
