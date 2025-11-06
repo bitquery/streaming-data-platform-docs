@@ -76,9 +76,51 @@ This subscription filters transaction balances for a specific address.
 subscription {
   EVM(network: eth) {
     TransactionBalances(
+      where: { TokenBalance: { Address: { is: "0xYourAddressHere" } } }
+    ) {
+      Block {
+        Time
+      }
+      TokenBalance {
+        Currency {
+          Symbol
+          HasURI
+          SmartContract
+        }
+        PreBalance
+        PostBalance
+        Address
+        BalanceChangeReasonCode
+        TotalSupplyInUSD
+        TotalSupply
+        TokenOwnership {
+          Owns
+          Id
+        }
+        PostBalanceInUSD
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
+
+## Latest native balance of an address
+
+This API gives you latest balance of a specific address (here in example `0xd194daef0cd90675a3b823fcda248f76fccb49f3`) for the native currency. Try it out [here](https://ide.bitquery.io/Latest-native-balance-of-an-address).
+
+```graphql
+{
+  EVM(network: eth) {
+    TransactionBalances(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
       where: {
         TokenBalance: {
-          Address: { is: "0xYourAddressHere" }
+          Address: { is: "0xd194daef0cd90675a3b823fcda248f76fccb49f3" }
+          Currency: { Native: true }
         }
       }
     ) {
@@ -105,6 +147,122 @@ subscription {
       }
       Transaction {
         Hash
+      }
+    }
+  }
+}
+```
+
+## Latest balance of an address for a specific token
+
+This API gives you latest balance of a specific address (here in example `0xd194daef0cd90675a3b823fcda248f76fccb49f3`) for a specific token (here we have taken example of USDC `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`). Try it out [here](https://ide.bitquery.io/Latest-balance-of-an-address-for-a-specific-token).
+
+```graphql
+{
+  EVM(network: eth) {
+    TransactionBalances(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        TokenBalance: {
+          Address: { is: "0xd194daef0cd90675a3b823fcda248f76fccb49f3" }
+          Currency: {
+            SmartContract: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      TokenBalance {
+        Currency {
+          Symbol
+          HasURI
+          SmartContract
+        }
+        PreBalance
+        PostBalance
+        Address
+        BalanceChangeReasonCode
+        TotalSupplyInUSD
+        TotalSupply
+        TokenOwnership {
+          Owns
+          Id
+        }
+        PostBalanceInUSD
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
+
+## Latest liquidity of EVM Pool
+
+This API gives you latest liquidity of EVM Pool (here in example `0x5d4F3C6fA16908609BAC31Ff148Bd002AA6b8c83` LINK/USDC Uniswap v3 pool). Try it out [here](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool).
+
+```graphql
+{
+  EVM(network: eth) {
+    TransactionBalances(
+      limit: { count: 2 }
+      limitBy: { by: TokenBalance_Currency_SmartContract, count: 1 }
+      orderBy: { descendingByField: "TokenBalance_PostBalanceInUSD" }
+      where: {
+        TokenBalance: {
+          Address: { is: "0x5d4F3C6fA16908609BAC31Ff148Bd002AA6b8c83" }
+        }
+      }
+    ) {
+      TokenBalance {
+        Currency {
+          Symbol
+          HasURI
+          SmartContract
+        }
+        PostBalance(maximum: Block_Time)
+        PostBalanceInUSD(maximum: Block_Time)
+        Address
+      }
+    }
+  }
+}
+```
+
+## Latest Supply and Marketcap of a specific token on EVM
+
+This API gives you latest Supply and Marketcap of a token on EVM (here as example we have taken BITGET Token `0x54D2252757e1672EEaD234D27B1270728fF90581` ). Try it out [here](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token).
+
+```graphql
+{
+  EVM(network: eth) {
+    TransactionBalances(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        TokenBalance: {
+          Currency: {
+            SmartContract: { is: "0x54D2252757e1672EEaD234D27B1270728fF90581" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      TokenBalance {
+        Currency {
+          Symbol
+          HasURI
+          SmartContract
+        }
+        TotalSupplyInUSD
+        TotalSupply
       }
     }
   }
@@ -149,22 +307,21 @@ The `BalanceChangeReasonCode` field returns a numeric code that indicates why a 
 
 Below is a comprehensive table of all Ethereum balance change reason codes:
 
-| **Code** | **Reason**                          | **Description**                                                                                                                                                                       |
-| -------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0        | BalanceChangeUnspecified            | Unspecified balance change reason                                                                                                                                                     |
-| 1        | BalanceIncreaseRewardMineUncle      | Reward for mining an uncle block                                                                                                                                                      |
-| 2        | BalanceIncreaseRewardMineBlock      | Reward for mining a block                                                                                                                                                             |
+| **Code** | **Reason**                          | **Description**                                                                                                                                                                     |
+| -------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0        | BalanceChangeUnspecified            | Unspecified balance change reason                                                                                                                                                   |
+| 1        | BalanceIncreaseRewardMineUncle      | Reward for mining an uncle block                                                                                                                                                    |
+| 2        | BalanceIncreaseRewardMineBlock      | Reward for mining a block                                                                                                                                                           |
 | 3        | BalanceIncreaseWithdrawal           | ETH withdrawn from the beacon chain                                                                                                                                                 |
 | 4        | BalanceIncreaseGenesisBalance       | ETH allocated at the genesis block                                                                                                                                                  |
-| 5        | BalanceIncreaseRewardTransactionFee | Transaction tip increasing block builder's balance                                                                                                                                    |
+| 5        | BalanceIncreaseRewardTransactionFee | Transaction tip increasing block builder's balance                                                                                                                                  |
 | 6        | BalanceDecreaseGasBuy               | ETH spent to purchase gas for transaction execution. Part of this gas may be burnt as per EIP-1559 rules                                                                            |
 | 7        | BalanceIncreaseGasReturn            | ETH returned for unused gas at the end of execution                                                                                                                                 |
 | 8        | BalanceIncreaseDaoContract          | ETH sent to the DAO refund contract                                                                                                                                                 |
 | 9        | BalanceDecreaseDaoAccount           | ETH taken from a DAO account to be moved to the refund contract                                                                                                                     |
 | 10       | BalanceChangeTransfer               | ETH transferred via a call. It is a decrease for the sender and an increase for the recipient                                                                                       |
-| 11       | BalanceChangeTouchAccount           | Transfer of zero value. Only there to touch-create an account                                                                                                                         |
-| 12       | BalanceIncreaseSelfdestruct         | Balance added to the recipient as indicated by a selfdestructing account                                                                                                              |
-| 13       | BalanceDecreaseSelfdestruct         | Balance deducted from a contract due to self-destruct                                                                                                                                 |
+| 11       | BalanceChangeTouchAccount           | Transfer of zero value. Only there to touch-create an account                                                                                                                       |
+| 12       | BalanceIncreaseSelfdestruct         | Balance added to the recipient as indicated by a selfdestructing account                                                                                                            |
+| 13       | BalanceDecreaseSelfdestruct         | Balance deducted from a contract due to self-destruct                                                                                                                               |
 | 14       | BalanceDecreaseSelfdestructBurn     | ETH sent to an already self-destructed account within the same transaction (captured at end of tx). Note: it doesn't account for a self-destruct which appoints itself as recipient |
-| 15       | BalanceChangeRevert                 | Balance reverted back to a previous value due to call failure. Only emitted when the tracer has opted in to use the journaling wrapper (WrapWithJournal)                              |
-
+| 15       | BalanceChangeRevert                 | Balance reverted back to a previous value due to call failure. Only emitted when the tracer has opted in to use the journaling wrapper (WrapWithJournal)                            |
