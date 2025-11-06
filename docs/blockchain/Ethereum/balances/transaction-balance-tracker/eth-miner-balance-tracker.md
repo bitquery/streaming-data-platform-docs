@@ -231,9 +231,6 @@ Query historical miner balance data for analysis:
           Address: { is: "0xMinerAddressHere" }
           BalanceChangeReasonCode: { in: [1, 2, 5] }
         }
-        Block: {
-          Time: { since: "2024-01-01T00:00:00Z", till: "2024-01-31T23:59:59Z" }
-        }
       }
       limit: { count: 1000 }
     ) {

@@ -342,6 +342,7 @@ const sidebars = {
                   label: "Transaction Balance Tracker",
                   items: [
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-transaction-balance-tracker",
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-self-destruct-balance-api",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-validator-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-miner-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-mev-balance-tracker",

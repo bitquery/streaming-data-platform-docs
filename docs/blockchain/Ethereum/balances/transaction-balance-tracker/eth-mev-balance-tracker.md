@@ -194,9 +194,7 @@ Query historical MEV-related balance data for analysis:
           Address: { is: "0xMEVBotOrBuilderAddressHere" }
           BalanceChangeReasonCode: { eq: 5 }
         }
-        Block: {
-          Time: { since: "2025-10-01T00:00:00Z", till: "2025-10-31T23:59:59Z" }
-        }
+
       }
       limit: { count: 1000 }
       orderBy: { descendingByField: "TokenBalance_PostBalanceInUSD" }
@@ -237,9 +235,6 @@ Calculate total MEV rewards for a specific address or time period:
         TokenBalance: {
           Address: { is: "0xMEVBotOrBuilderAddressHere" }
           BalanceChangeReasonCode: { eq: 5 }
-        }
-        Block: {
-          Time: { since: "2025-10-01T00:00:00Z", till: "2025-10-31T23:59:59Z" }
         }
       }
     ) {
