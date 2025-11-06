@@ -148,43 +148,4 @@ subscription {
 }
 ```
 
-## Historical Validator Balance Data
 
-Query historical validator balance data for analysis:
-
-```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TransactionBalances(
-      where: {
-        TokenBalance: {
-          Address: { is: "0xValidatorAddressHere" }
-          BalanceChangeReasonCode: { in: [2, 3, 5] }
-        }
-        Block: {
-          Time: { since: "2024-01-01T00:00:00Z", till: "2024-01-31T23:59:59Z" }
-        }
-      }
-      limit: { count: 1000 }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
-    }
-  }
-}
-```
