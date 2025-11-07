@@ -583,7 +583,7 @@ A: Bitquery provides sub-second response times:
 ### Q: What are the rate limits and pricing?
 
 A: Bitquery offers flexible pricing:
-- **Free Tier**: 10,000 API points for 1 month (no credit card required)
+- **Free Tier**: 10,000 API points for 1 month
 - **Enterprise**: Custom solutions with dedicated support
 - **Rate limits**: Vary by plan, with enterprise customers getting higher limits
 
