@@ -346,7 +346,8 @@ const sidebars = {
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-validator-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-miner-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-mev-balance-tracker",
-                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-gas-balance-tracker"
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-gas-balance-tracker",
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-transfer-balance-tracker"
                   ],
                 },
               ],
