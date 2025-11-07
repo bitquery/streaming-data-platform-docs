@@ -33,17 +33,13 @@ The Ethereum Miner Balance Tracker API provides real-time balance updates for Et
 
 ## Track Miner Balance Updates
 
-Monitor balance changes for Ethereum miners, including block rewards, uncle block rewards, and transaction fee rewards.
+Monitor balance changes for Ethereum miners, including block rewards, uncle block rewards, and transaction fee rewards. Try the API [here](https://ide.bitquery.io/Track-Miner-Balance-Updates).
 
 ```graphql
 subscription {
   EVM(network: eth) {
     TransactionBalances(
-      where: {
-        TokenBalance: {
-          BalanceChangeReasonCode: { in: [1, 2, 5] }
-        }
-      }
+      where: { TokenBalance: { BalanceChangeReasonCode: { in: [1, 2, 5] } } }
     ) {
       Block {
         Time
@@ -76,16 +72,13 @@ subscription {
 ## Track Block Mining Rewards
 
 Track rewards received by miners for successfully mining blocks:
+Try the API [here](https://ide.bitquery.io/Track-Block-Mining-Rewards).
 
 ```graphql
 subscription {
   EVM(network: eth) {
     TransactionBalances(
-      where: {
-        TokenBalance: {
-          BalanceChangeReasonCode: { eq: 2 }
-        }
-      }
+      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 2 } } }
     ) {
       Block {
         Time
@@ -112,16 +105,13 @@ subscription {
 ## Track Uncle Block Rewards
 
 Monitor rewards for mining uncle blocks:
+Try the API [here](https://ide.bitquery.io/Track-Uncle-Block-Rewards).
 
 ```graphql
 subscription {
   EVM(network: eth) {
     TransactionBalances(
-      where: {
-        TokenBalance: {
-          BalanceChangeReasonCode: { eq: 1 }
-        }
-      }
+      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 1 } } }
     ) {
       Block {
         Time
@@ -148,16 +138,13 @@ subscription {
 ## Track Transaction Fee Rewards
 
 Monitor transaction fee rewards received by miners:
+Try the API [here](https://ide.bitquery.io/Track-Transaction-Fee-Rewards).
 
 ```graphql
 subscription {
   EVM(network: eth) {
     TransactionBalances(
-      where: {
-        TokenBalance: {
-          BalanceChangeReasonCode: { eq: 5 }
-        }
-      }
+      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 5 } } }
     ) {
       Block {
         Time
@@ -184,6 +171,7 @@ subscription {
 ## Filter by Miner Address
 
 Track balance changes for a specific miner address:
+Try the API [here](https://ide.bitquery.io/Filter-by-Miner-Address).
 
 ```graphql
 subscription {
@@ -221,6 +209,7 @@ subscription {
 ## Historical Miner Balance Data
 
 Query historical miner balance data for analysis:
+Try the API [here](https://ide.bitquery.io/Historical-Miner-Balance-Data).
 
 ```graphql
 {
@@ -255,4 +244,3 @@ Query historical miner balance data for analysis:
   }
 }
 ```
-

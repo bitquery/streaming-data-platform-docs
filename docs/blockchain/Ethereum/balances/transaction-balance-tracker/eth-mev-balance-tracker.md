@@ -33,7 +33,7 @@ The Ethereum MEV (Maximal Extractable Value) Balance Tracker API provides real-t
 
 ## Track MEV-Related Balance Updates
 
-Monitor balance changes related to MEV activities, including transaction fee rewards and block builder rewards.
+Monitor balance changes related to MEV activities, including transaction fee rewards and block builder rewards. Try the API [here](https://ide.bitquery.io/Track-MEV-Related-Balance-Updates).
 
 ```graphql
 subscription {
@@ -70,6 +70,7 @@ subscription {
 ## Track Block Builder Rewards
 
 Monitor transaction fee rewards received by block builders (MEV extractors):
+Try the API [here](https://ide.bitquery.io/Track-Block-Builder-Rewards).
 
 ```graphql
 subscription {
@@ -106,6 +107,7 @@ subscription {
 ## Filter by MEV Bot or Builder Address
 
 Track balance changes for specific MEV bots or block builders:
+Try the API [here](https://ide.bitquery.io/Filter-by-MEV-Bot-or-Builder-Address).
 
 ```graphql
 subscription {
@@ -145,6 +147,7 @@ subscription {
 ## Track Large MEV Transactions
 
 Monitor large transaction fee rewards that may indicate significant MEV extraction:
+Try the API [here](https://ide.bitquery.io/Track-Large-MEV-Transactions).
 
 ```graphql
 subscription {
@@ -184,6 +187,7 @@ subscription {
 ## Historical MEV Balance Data
 
 Query historical MEV-related balance data for analysis:
+Try the API [here](https://ide.bitquery.io/Historical-MEV-Balance-Data).
 
 ```graphql
 {
@@ -194,7 +198,6 @@ Query historical MEV-related balance data for analysis:
           Address: { is: "0xMEVBotOrBuilderAddressHere" }
           BalanceChangeReasonCode: { eq: 5 }
         }
-
       }
       limit: { count: 1000 }
       orderBy: { descendingByField: "TokenBalance_PostBalanceInUSD" }
@@ -226,6 +229,7 @@ Query historical MEV-related balance data for analysis:
 ## Aggregate MEV Rewards
 
 Calculate total MEV rewards for a specific address or time period:
+Try the API [here](https://ide.bitquery.io/Aggregate-MEV-Rewards).
 
 ```graphql
 {
@@ -250,4 +254,3 @@ Calculate total MEV rewards for a specific address or time period:
   }
 }
 ```
-

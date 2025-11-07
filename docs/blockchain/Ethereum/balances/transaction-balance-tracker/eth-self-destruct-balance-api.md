@@ -161,6 +161,7 @@ Monitor contract balance increase when contracts are self-destructing.
 ## Track Self-Destruct Balance Changes for Specific Address
 
 Monitor self-destruct balance changes for a specific contract address using this GraphQL query:
+Try the API [here](https://ide.bitquery.io/Track-Self-Destruct-Balance-Changes-for-Specific-Address).
 
 ```graphql
 subscription {
@@ -199,6 +200,7 @@ subscription {
 ## Track Large Self-Destruct Transaction Balances
 
 Monitor significant self-destruct balance changes (e.g., > $1000 USD) using this subscription:
+Try the API [here](https://ide.bitquery.io/Track-Large-Self-Destruct-Transaction-Balances).
 
 ```graphql
 subscription {
@@ -237,6 +239,7 @@ subscription {
 ## Track Ephemeral MEV Contract Balance Changes
 
 Monitor balance changes for short-lived contracts that are created and destroyed in the same transaction (typical pattern for MEV bots) using this subscription:
+Try the API [here](https://ide.bitquery.io/Track-Ephemeral-MEV-Contract-Balance-Changes).
 
 ```graphql
 subscription {
@@ -272,6 +275,7 @@ subscription {
 ## Aggregate Self-Destruct Statistics
 
 Calculate total ETH destroyed or received from self-destructs using aggregation functions:
+Try the API [here](https://ide.bitquery.io/Aggregate-Self-Destruct-Statistics).
 
 ```graphql
 {
@@ -315,6 +319,7 @@ Contrack Flow: Deploy → Transfer to MEV builder → Self-destruct
 - **Privacy** - prevents tracking of bundle logic across blocks
 
 **API Subscription: Track payments to known MEV builders:**
+Try the API [here](https://ide.bitquery.io/Track-payments-to-known-MEV-builders).
 
 ```graphql
 subscription {
@@ -366,14 +371,13 @@ Many MEV bots and arbitrage executors create contracts that are destroyed within
 - Cleanup of bytecode footprint
 
 **API Query: Track recent ephemeral contract patterns:**
+Try the API [here](https://ide.bitquery.io/Track-recent-ephemeral-contract-patterns).
 
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
     TransactionBalances(
-      where: {
-        TokenBalance: { BalanceChangeReasonCode: { eq: 13 } }
-      }
+      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 13 } } }
       limit: { count: 100 }
       orderBy: { descendingByField: "Block_Time" }
     ) {
@@ -406,6 +410,7 @@ Many MEV bots and arbitrage executors create contracts that are destroyed within
 ### Security Monitoring - Track Malicious Self-Destructs
 
 Track self-destruct events to identify potential security incidents or malicious contract destruction:
+Try the API [here](https://ide.bitquery.io/Track-Malicious-Self-Destructs).
 
 ```graphql
 subscription {

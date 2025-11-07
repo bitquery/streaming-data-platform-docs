@@ -34,6 +34,7 @@ The Ethereum Transaction Balance Tracker API provides real-time balance updates 
 ## Subscribe to All Transaction Balances
 
 This subscription provides real-time balance updates for all addresses involved in transactions on the Ethereum network.
+Try the API [here](https://ide.bitquery.io/Subscribe-to-All-Transaction-Balances).
 
 ```graphql
 subscription {
@@ -70,7 +71,7 @@ subscription {
 
 ## Subscribe to Transaction Balances for a Specific Address
 
-This subscription filters transaction balances for a specific address.
+This subscription filters transaction balances for a specific address. Try the API [here](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address).
 
 ```graphql
 subscription {
