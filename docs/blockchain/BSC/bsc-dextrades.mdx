@@ -285,6 +285,47 @@ query tokenTrades($network: evm_network, $token: String, $time_10min_ago: DateTi
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/token/0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c#token_trades).
 
+## Get First 500 Buyers of a specific token
+
+Below API gets you the first 500 buyers of a specific BSC token, here as example we have taken this token `0x031b41e504677879370e9DBcF937283A8691Fa7f`.
+Try the API [here](https://ide.bitquery.io/first-500-buyers-of-a-specific-BSC-chain-token_2#).
+
+```graphql
+query MyQuery {
+  EVM(network: bsc, dataset: combined) {
+    DEXTrades(
+      limit: { count: 500 }
+      orderBy: { ascending: Block_Time }
+      limitBy: { count: 1, by: Trade_Sell_Buyer }
+      where: {
+        Trade: {
+          Sell: {
+            Currency: {
+              SmartContract: {
+                is: "0x031b41e504677879370e9DBcF937283A8691Fa7f"
+              }
+            }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Sell {
+          Buyer
+        }
+      }
+      Transaction {
+        From
+        Hash
+      }
+    }
+  }
+}
+```
+
 ## Get all DEXs where a specific token is listed
 
 This query will fetch you all the DEXs where a token is listed for the BSC network.

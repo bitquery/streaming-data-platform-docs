@@ -198,6 +198,47 @@ subscription {
 
 ```
 
+## Get First 500 Buyers of a specific token
+
+Below API gets you the first 500 buyers of a specific Base chain token, here as example we have taken this token `0x58538e6A46E07434d7E7375Bc268D3cb839C0133`.
+Try the API [here](https://ide.bitquery.io/first-500-buyers-of-a-specific-base-token#).
+
+```graphql
+query MyQuery {
+  EVM(network: base, dataset: combined) {
+    DEXTrades(
+      limit: { count: 500 }
+      orderBy: { ascending: Block_Time }
+      limitBy: { count: 1, by: Trade_Sell_Buyer }
+      where: {
+        Trade: {
+          Sell: {
+            Currency: {
+              SmartContract: {
+                is: "0x58538e6A46E07434d7E7375Bc268D3cb839C0133"
+              }
+            }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Sell {
+          Buyer
+        }
+      }
+      Transaction {
+        From
+        Hash
+      }
+    }
+  }
+}
+```
+
 ## Get Price Change 5min, 1h, 6h and 24h of a specific token
 
 Use below query to get price change 5min, 1h, 6h and 24h of a specific token. Change the `Currency{SmartContract}` and `Dex{SmartContract}` according to your needs. Test the query [here]

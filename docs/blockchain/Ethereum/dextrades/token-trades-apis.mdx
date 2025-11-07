@@ -265,6 +265,52 @@ query MyQuery(
 
 </details>
 
+## Get First 500 Buyers of a specific token
+
+Below API gets you the first 500 buyers of a specific ERC-20 token, here as example we have taken this token `0x3c3a81e81dc49A522A592e7622A7E711c06bf354`.
+Try the API [here](https://ide.bitquery.io/first-500-buyers-of-a-ERC20-token_1#).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(network: eth, dataset: combined) {
+    DEXTrades(
+      limit: { count: 500 }
+      orderBy: { ascending: Block_Time }
+      limitBy: { count: 1, by: Trade_Sell_Buyer }
+      where: {
+        Trade: {
+          Sell: {
+            Currency: {
+              SmartContract: {
+                is: "0x3c3a81e81dc49A522A592e7622A7E711c06bf354"
+              }
+            }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Sell {
+          Buyer
+        }
+      }
+      Transaction {
+        From
+        Hash
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Historical Token Trades & Price API
 
 Use the DEXTrades API for historical buyside and sellside trades of BLUR token by the 1inch router.
@@ -462,9 +508,11 @@ query LatestTrades {
       orderBy: { descending: Block_Time }
       limit: { count: 50 }
       where: {
-        Trade: { 
-          Currency: { SmartContract: { is: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599" } }, 
-          Price: { gt: 0 } 
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599" }
+          }
+          Price: { gt: 0 }
         }
       }
     ) {
@@ -500,7 +548,6 @@ query LatestTrades {
     }
   }
 }
-
 ```
 
 </details>
@@ -515,7 +562,8 @@ Our DEX Dashboard gives you a easier way to check the data -> [DEXrabbit](https:
 
 <details>
 
-  <summary>Click to expand GraphQL query and variables</summary>
+{" "}
+<summary>Click to expand GraphQL query and variables</summary>
 
 ```
 query LatestTrades {
@@ -526,13 +574,13 @@ query LatestTrades {
       where: {
         TransactionStatus: { Success: true }
         Trade: {
-          Side: { 
+          Side: {
             Currency: { SmartContract: { in: [
-              "0x", 
-              "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", 
-              "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", 
+              "0x",
+              "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
               "0xdac17f958d2ee523a2206206994597c13d831ec7"
-            ] } } 
+            ] } }
           }
           Currency: { SmartContract: { in: [
             "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
@@ -582,7 +630,6 @@ query LatestTrades {
 ```
 
 </details>
-
 
 ## Token Trade Analytics
 
