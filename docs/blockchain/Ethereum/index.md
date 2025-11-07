@@ -180,12 +180,6 @@ Our **Ethereum API** provides access to:
 - Mempool data for pending transactions
 - NFT collections and trading data
 
-### Is there a free tier for your Ethereum API?
-Yes! We offer a free trial with 100,000 API points for 1 month. No credit card required to get started.
-
-### How fast is your Ethereum API?
-Our **Ethereum API** typically responds in under 1 second for most queries, with real-time data updates and high availability.
-
 ### Can I use your Ethereum API for commercial projects?
 Yes, our **Ethereum API** is designed for both personal and commercial use. We offer various pricing tiers to suit different needs.
 
