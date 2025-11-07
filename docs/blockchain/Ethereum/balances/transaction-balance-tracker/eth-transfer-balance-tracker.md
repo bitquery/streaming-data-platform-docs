@@ -6,6 +6,10 @@ sidebar_position: 7
 
 The Ethereum Transfer Balance Tracker API provides real-time balance updates for all addresses involved in Transfers on the Ethereum blockchain, and provides option to filter out based on the direction of transfer you want to target. The Ethereum Transfer Balance is tracked by marking the the `BalanceUpdateReason` equals `10`.
 
+:::note
+The queries covered this section are only valid for the Native Currency Transfer.
+:::
+
 <head>
 <meta name="title" content="Ethereum Transfer Balance Tracker API & Streams"/>
 <meta name="description" content="Learn how to get real-time balance updates for all addresses in Ethereum transfers with balance change reasons using Bitquery's Transfer Balance API."/>
