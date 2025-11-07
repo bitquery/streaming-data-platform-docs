@@ -63,7 +63,7 @@ See examples and code snippets [here](https://docs.bitquery.io/docs/subscription
 
 ## Ethereum Transaction Balance Tracker APIs
 
-### [Ethereum Transaction Balance Tracker](eth-transaction-balance-tracker)
+### [Ethereum Transaction Balance Tracker](https://docs.bitquery.io/blockchain/Ethereum/balances/transaction-balance-tracker/eth-transaction-balance-tracker)
 
 The core Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the Ethereum network, including detailed information about the reason for each balance change. Track native ETH, ERC-20 tokens, and NFTs with pre/post balances, USD values, and balance change reason codes.
 
@@ -74,7 +74,7 @@ The core Transaction Balance Tracker API provides real-time balance updates for 
 - Track ERC-20, ERC-721, and ERC-1155 tokens
 - Access pre and post balance values
 
-### [Ethereum Validator Balance Tracker](eth-validator-balance-tracker)
+### [Ethereum Validator Balance Tracker](https://docs.bitquery.io/blockchain/Ethereum/balances/transaction-balance-tracker/eth-validator-balance-tracker)
 
 Track Ethereum validator balances, staking rewards, and withdrawals from the beacon chain. Monitor validator activity including block rewards, withdrawal events, and transaction fee rewards.
 
@@ -85,7 +85,7 @@ Track Ethereum validator balances, staking rewards, and withdrawals from the bea
 - Filter by specific validator addresses
 - Real-time validator balance updates
 
-### [Ethereum Miner Balance Tracker](eth-miner-balance-tracker)
+### [Ethereum Miner Balance Tracker](https://docs.bitquery.io/blockchain/Ethereum/balances/transaction-balance-tracker/eth-miner-balance-tracker)
 
 Monitor Ethereum miner balances, mining rewards, uncle block rewards, and transaction fee rewards. Track historical and real-time mining activity across the Ethereum network.
 
@@ -96,7 +96,7 @@ Monitor Ethereum miner balances, mining rewards, uncle block rewards, and transa
 - Filter by specific miner addresses
 - Historical mining reward data
 
-### [Ethereum MEV Balance Tracker](eth-mev-balance-tracker)
+### [Ethereum MEV Balance Tracker](https://docs.bitquery.io/blockchain/Ethereum/balances/transaction-balance-tracker/eth-mev-balance-tracker)
 
 Track MEV (Maximal Extractable Value) related balance changes including transaction fee rewards, block builder rewards, and other MEV extraction activities. Monitor MEV bots and block builders in real-time.
 
@@ -107,7 +107,7 @@ Track MEV (Maximal Extractable Value) related balance changes including transact
 - Track large MEV transactions
 - Aggregate MEV reward statistics
 
-### [Ethereum Self-Destruct Balance Tracker](eth-self-destruct-balance-api)
+### [Ethereum Self-Destruct Balance Tracker](https://docs.bitquery.io/blockchain/Ethereum/balances/transaction-balance-tracker/eth-self-destruct-balance-api)
 
 Monitor contract self-destruct events, ephemeral contracts (like MEV bots), and security incidents. Track contracts that self-destruct and addresses that receive funds from self-destructed contracts.
 
