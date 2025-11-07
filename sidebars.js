@@ -340,6 +340,10 @@ const sidebars = {
                 {
                   type: "category",
                   label: "Transaction Balance Tracker",
+                  link: {
+                    type: "doc",
+                    id: "blockchain/Ethereum/balances/transaction-balance-tracker/index",
+                  },
                   items: [
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-transaction-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-self-destruct-balance-api",
