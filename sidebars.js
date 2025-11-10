@@ -299,7 +299,6 @@ const sidebars = {
             "cubes/EVM",
             "cubes/dextrades",
             "cubes/dextradesbyTokens",
-            "cubes/dextrades-dextradesbyTokens",
             "cubes/transaction-cube",
             "cubes/balance-updates-cube",
             "cubes/transfers-cube",
