@@ -55,6 +55,16 @@ Transactions include:
 - `Trace`: Detailed execution trace
   - `Calls`: Internal contract calls
   - `CaptureStates`: State modifications
+  - `TokenBalanceUpdates`: Balance changes for tokens (ERC-20, ERC-721, ERC-1155)
+    - `Token`: Token information (address, fungible status, decimals, total supply)
+    - `Address`: Address whose balance changed
+    - `PostBalance`: Balance after the transaction
+    - `TokenOwnership`: For NFTs, indicates ownership status
+  - `NativeBalanceUpdates`: Balance changes for native currency (ETH)
+    - `Address`: Address whose balance changed
+    - `PreBalance`: Balance before the transaction
+    - `PostBalance`: Balance after the transaction
+    - `BalanceChangeReasonCode`: Numeric code explaining why the balance changed (see [Transaction Balance Tracker documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) for code meanings)
 
 ### Token Data
 
