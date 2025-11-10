@@ -297,11 +297,10 @@ const sidebars = {
           },
           items: [
             "cubes/EVM",
-            "cubes/balance-updates-cube",
             "cubes/dextrades",
             "cubes/dextradesbyTokens",
-            "cubes/dextrades-dextradesbyTokens",
             "cubes/transaction-cube",
+            "cubes/balance-updates-cube",
             "cubes/transfers-cube",
             "evm/token-holders",
           ],
