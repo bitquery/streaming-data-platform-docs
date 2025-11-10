@@ -35,36 +35,69 @@ The `BlockMessage` also includes:
 - `Transactions`: All transactions in the block
 - `L1Header`: For Layer 2 chains, information about the corresponding L1 block
 
-### Transaction-Level Data
+## Transaction-Level Data
 
-Transactions include:
+Each transaction in the stream provides detailed information about execution, state changes, and balance updates.
 
-- `TransactionHeader`: Core transaction data
-  - `Hash`: Transaction hash
-  - `Gas`: Gas limit for this transaction
-  - `Value`: Amount of native currency transferred
-  - `Data`: Call data for contract interactions
-  - `From`/`To`: Sender and recipient addresses
-  - `GasPrice`, `GasFeeCap`, `GasTipCap`: Fee parameters
+### Structure
+
+Each transaction includes:
+
+- **`TransactionHeader`** — Core transaction metadata:
+
+  - `Hash` — Transaction hash
+  - `Gas` — Gas limit for this transaction
+  - `Value` — Amount of native currency transferred
+  - `Data` — Call data for contract interactions
+  - `From` / `To` — Sender and recipient addresses
+  - `GasPrice`, `GasFeeCap`, `GasTipCap` — Fee parameters
+  - `Nonce`, `ChainId` — Transaction metadata
   - Special fields for EIP-4844 blob transactions
-- `Signature`: Transaction signature (R, S, V values)
-- `Receipt`: Execution results
-  - `Status`: Success or failure
-  - `GasUsed`: Actual gas consumed
-  - `Logs`: Event logs emitted
-- `Trace`: Detailed execution trace
-  - `Calls`: Internal contract calls
-  - `CaptureStates`: State modifications
-  - `TokenBalanceUpdates`: Balance changes for tokens (ERC-20, ERC-721, ERC-1155)
-    - `Token`: Token information (address, fungible status, decimals, total supply)
-    - `Address`: Address whose balance changed
-    - `PostBalance`: Balance after the transaction
-    - `TokenOwnership`: For NFTs, indicates ownership status
-  - `NativeBalanceUpdates`: Balance changes for native currency (ETH)
-    - `Address`: Address whose balance changed
-    - `PreBalance`: Balance before the transaction
-    - `PostBalance`: Balance after the transaction
-    - `BalanceChangeReasonCode`: Numeric code explaining why the balance changed (see [Transaction Balance Tracker documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) for code meanings)
+
+- **`ReceiptHeader`** — Execution results:
+
+  - `Status` — Success or failure
+  - `GasUsed` — Actual gas consumed
+  - `Logs` — Event logs emitted by smart contracts
+  - `ContractAddress` — Deployed address for contract creation transactions
+
+- **`TransactionFee`** — Fee information:
+
+  - `SenderFee` — Total fee paid by the sender
+  - `MinerReward` — Portion rewarded to the validator/miner
+  - `Burnt` — Portion of the fee burned (EIP-1559)
+  - `GasRefund` — Gas refunded due to contract execution
+
+- **`Calls`** — Full internal call trace:
+
+  - Includes all nested contract calls with fields such as `From`, `To`, `Input`, `Output`, `GasUsed`, `Opcode`, and parsed `Signature`
+  - Each call may include `Logs`, `StateChanges`, and `ReturnValues`
+
+- **`Signature`** — Cryptographic components:
+
+  - `R`, `S`, and `V` values from the transaction’s ECDSA signature
+
+- **`TokenBalanceUpdates`** — Token (ERC-20, ERC-721, ERC-1155) balance updates detected during the transaction:
+
+  - `Token` — Information about the token
+
+    - `Address` — Token contract address
+    - `Fungible` — Whether the token is fungible (ERC-20) or non-fungible (ERC-721/1155)
+    - `Decimals` — Number of decimal places for fungible tokens
+    - `TotalSupply` — Current total supply recorded
+
+  - `Address` — Wallet whose balance changed
+  - `PostBalance` — Balance after the transaction
+  - `TokenOwnership` — For NFTs, indicates ownership details if applicable
+
+- **`NativeBalanceUpdates`** — Native currency (e.g., ETH) balance changes detected during the transaction:
+
+  - `Address` — Wallet whose native balance changed
+  - `PreBalance` — Balance before the transaction
+  - `PostBalance` — Balance after the transaction
+  - `BalanceChangeReasonCode` — Numeric code describing why the balance changed
+
+(see [Transaction Balance Tracker documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) for code meanings)
 
 ### Token Data
 
