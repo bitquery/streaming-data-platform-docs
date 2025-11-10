@@ -184,48 +184,6 @@ subscription {
 }
 ```
 
-## Historical MEV Balance Data
-
-Query historical MEV-related balance data for analysis:
-Try the API [here](https://ide.bitquery.io/Historical-MEV-Balance-Data-bsc).
-
-```graphql
-{
-  EVM(dataset: realtime, network: bsc) {
-    TransactionBalances(
-      where: {
-        TokenBalance: {
-          Address: { is: "0xMEVBotOrBuilderAddressHere" }
-          BalanceChangeReasonCode: { eq: 5 }
-        }
-      }
-      limit: { count: 1000 }
-      orderBy: { descendingByField: "TokenBalance_PostBalanceInUSD" }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-
-        GasPrice
-      }
-    }
-  }
-}
-```
-
 ## Aggregate MEV Rewards
 
 Calculate total MEV rewards for a specific address or time period:

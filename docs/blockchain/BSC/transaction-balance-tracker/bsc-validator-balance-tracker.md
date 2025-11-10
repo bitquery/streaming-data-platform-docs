@@ -34,13 +34,13 @@ The BSC Validator Balance Tracker API provides real-time balance updates for BSC
 ## Track Validator Balance Updates
 
 Monitor balance changes for BSC validators, including staking rewards and withdrawals from the beacon chain.
-Try the API [here](https://ide.bitquery.io/Track-Validator-Balance-Updates-bsc).
+Try the API [here](https://ide.bitquery.io/Track-Validator-Balance-Updates-bsc_1).
 
 ```graphql
 subscription {
   EVM(network: bsc) {
     TransactionBalances(
-      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 3 } } }
+      where: { TokenBalance: { BalanceChangeReasonCode: { in: [211, 5] } } }
     ) {
       Block {
         Time
@@ -69,13 +69,13 @@ subscription {
 ## Track Validator Rewards
 
 Track validator rewards and balance increases from staking activities.
-Try the API [here](https://ide.bitquery.io/Track-Validator-Rewards-bsc).
+Try the API [here](https://ide.bitquery.io/Track-Validator-Rewards-bsc_1).
 
 ```graphql
 subscription {
   EVM(network: bsc) {
     TransactionBalances(
-      where: { TokenBalance: { BalanceChangeReasonCode: { in: [2, 5] } } }
+      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 211 } } }
     ) {
       Block {
         Time
@@ -101,14 +101,12 @@ subscription {
 
 **Balance Change Reason Codes for Validators:**
 
-- **Code 2**: `BalanceIncreaseRewardMineBlock` - Reward for mining a block
-- **Code 3**: `BalanceIncreaseWithdrawal` - ETH withdrawn from the beacon chain
-- **Code 5**: `BalanceIncreaseRewardTransactionFee` - Transaction tip increasing block builder's balance
+- **Code 211**: `BalanceIncreaseRewardMineBlock` - BalanceChangeCode when BSC is distributing rewards to validator.
 
 ## Filter by Validator Address
 
 Track balance changes for a specific validator address:
-Try the API [here](https://ide.bitquery.io/Filter-by-Validator-Address-bsc).
+Try the API [here](https://ide.bitquery.io/Filter-by-Validator-Address-bsc_1).
 
 ```graphql
 subscription {
@@ -117,7 +115,7 @@ subscription {
       where: {
         TokenBalance: {
           Address: { is: "0xValidatorAddressHere" }
-          BalanceChangeReasonCode: { in: [2, 3, 5] }
+          BalanceChangeReasonCode: { eq: 211 }
         }
       }
     ) {
