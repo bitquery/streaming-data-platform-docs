@@ -4,54 +4,6 @@ The DEXTradesByTokens cube provides comprehensive information about DEX trading 
 
 Unlike DEXTrades cube which uses `Buy` and `Sell` from the pool's perspective, DEXTradesByTokens uses the concept of `Trade` and `Side` to represent both sides of each trade from a token-centric view.
 
-## Understanding Trade and Side Structure
-
-In DEXTradesByTokens, each trade is represented with two main components:
-
-- **`Trade`**: The primary side of the trade, focusing on one specific token/currency
-- **`Side`**: The counter-side of the trade, representing what the token is being traded against
-
-### Example Structure Comparison
-
-**DEXTrades Approach (Pool Perspective):**
-
-```graphql
-Trade {
-  Buy {
-    Currency { Symbol }    # What the pool buys
-    Amount
-    Buyer                 # Pool address
-  }
-  Sell {
-    Currency { Symbol }    # What the pool sells
-    Amount
-    Seller                # User address
-  }
-}
-```
-
-**DEXTradesByTokens Approach (Token Perspective):**
-
-```graphql
-Trade {
-  Currency { Symbol }      # Primary token (e.g., "PEPE")
-  Amount                   # Amount of primary token
-  Buyer                    # Who bought the primary token
-  Seller                   # Who sold the primary token
-  Side {
-    Currency { Symbol }    # Counter token (e.g., "WETH")
-    Amount                 # Amount of counter token
-    Type                   # "buy" or "sell" (from pool's perspective)
-    Buyer                  # Buyer of the side currency
-    Seller                 # Seller of the side currency
-  }
-}
-```
-
-**Note on Pool Role**: The `Side.Type` field indicates the pool's role relative to the side currency:
- - If `Side.Type` is `"buy"`, the pool is the buyer of the side currency (pool = `Side.Buyer`)
- - If `Side.Type` is `"sell"`, the pool is the seller of the side currency (pool = `Side.Seller`)
-
 ## Concept Explanation
 
 Let's understand the concept of buyer and seller when a trade occurs between User A and User B, and Token X and Token Y are swapped between them.
@@ -111,18 +63,65 @@ Therefore, buyers and sellers change relatively when the trade sides change.
     ]
   }
 }
-
 ```
 
 In the above result, User A (0x925...) is included as both a buyer and a seller. The same applies to User B (0xa69...), who is also shown as both a buyer and a seller. If one become a buyer then other automatically become a seller.
 
 > Important note: Let's say currency X and currency Y are swapped in trade. Then, the trade side currency of X is Y, and the trade side currency of Y is X. Therefore, the trade side currency is relatively changed based on the currency that is traded against it.
 
+## Understanding Trade and Side Structure
+
+In DEXTradesByTokens, each trade is represented with two main components:
+
+- **`Trade`**: The primary side of the trade, focusing on one specific token/currency
+- **`Side`**: The counter-side of the trade, representing what the token is being traded against
+
+### Example Structure Comparison
+
+**DEXTrades Approach (Pool Perspective):**
+
+```graphql
+Trade {
+  Buy {
+    Currency { Symbol }    # What the pool buys
+    Amount
+    Buyer                 # Pool address
+  }
+  Sell {
+    Currency { Symbol }    # What the pool sells
+    Amount
+    Seller                # User address
+  }
+}
+```
+
+**DEXTradesByTokens Approach (Token Perspective):**
+
+```graphql
+Trade {
+  Currency { Symbol }      # Primary token (e.g., "PEPE")
+  Amount                   # Amount of primary token
+  Buyer                    # Who bought the primary token
+  Seller                   # Who sold the primary token
+  Side {
+    Currency { Symbol }    # Counter token (e.g., "WETH")
+    Amount                 # Amount of counter token
+    Type                   # "buy" or "sell" (from pool's perspective)
+    Buyer                  # Buyer of the side currency
+    Seller                 # Seller of the side currency
+  }
+}
+```
+
+**Note on Pool Role**: The `Side.Type` field indicates the pool's role relative to the side currency:
+ - If `Side.Type` is `"buy"`, the pool is the buyer of the side currency (pool = `Side.Buyer`)
+ - If `Side.Type` is `"sell"`, the pool is the seller of the side currency (pool = `Side.Seller`)
+
 ## Filtering in DEXTradeByTokens Cube
 
 Filtering helps to fetch the exact data you are looking for. DexTradeByTokens Cube can filter based on currency, buyer, seller, dex, pool, sender, transaction, time, etc.
 
-Everything inside the “where” clause filters; it follows the `AND’ condition by default.
+Everything inside the "where" clause filters; it follows the `AND' condition by default.
 
 ## Advanced Use Cases and Processing Patterns
 

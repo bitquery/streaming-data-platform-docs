@@ -150,59 +150,13 @@ From the **user's perspective** (the actual trader):
 - User **sold** project tokens to the pool
 - User **bought** payment tokens (WETH/stablecoins) in return
 
-## Multi-Hop Trade Detection and Processing
-
-When processing DEXTrades data in production applications, it's crucial to handle multi-hop swaps correctly. Multi-hop trades occur when a single transaction contains multiple DEX trades that are part of one logical swap operation (e.g., Token A → WETH → Token B).
-
-### Identifying Multi-Hop Trades
-
-Multi-hop trades can be detected by:
-
-1. **Same Transaction Hash**: All trades in a multi-hop swap share the same transaction hash
-2. **Sequential Processing**: Trades appear in sequence within the same block following the Trade_Index
-3. **Token Chain Logic**: The sell token of one trade matches the buy token of the next
-
-### Processing Strategy
-
-For multi-hop trades, use this approach:
-
-- **Token Identification**: Use the first hop to identify the actual token being swapped (not the intermediate tokens)
-- **Volume Calculation**: Use the last hop to determine the final payment amount
-- **Direction Detection**: Check the signer's role in the final hop to determine if it's a buy or sell
-
-```python
-# Example pattern for multi-hop detection
-if tx_hash in processed_transactions:
-    # This is part of a multi-hop swap
-    first_hop = processed_transactions[tx_hash][0]
-    current_hop = trade_data  # Last hop seen
-
-    # Get actual token from first hop (exclude payment tokens)
-    actual_token = get_non_payment_token(first_hop)
-
-    # Get final volume from last hop payment side
-    final_volume = get_payment_side_amount(current_hop)
-
-    # Determine buy/sell from signer's role in last hop
-    is_buy = signer_is_buyer_in_final_hop(current_hop, signer)
-```
-
-### Payment Token Classification
-
-Different token types require different processing logic:
-
-- **Native Tokens**: `0x` (ETH), direct BNB trades
-- **Wrapped Tokens**: WETH, WBNB - used for volume calculations
-- **Stablecoins**: USDT, USDC, DAI - also payment tokens
-- **Other Tokens**: Project tokens, memecoins, etc.
-
 ## Filtering in DEXTrades Cube
 
 Filtering helps you retrieve the data you are looking for. DexTrades Cube can filter trades based on buy currency, sell currency, buyer, seller, dex, pool, sender, receiver, transaction, time, etc.
 
-Everything inside the “where” clause acts as a filter; it uses the ‘AND’ condition by default.
+Everything inside the "where" clause acts as a filter; it uses the 'AND' condition by default.
 
-In this example, we retrieve the trade currencies and their trader's details in the ethereum network. Therefore, we use the Trade Buy currency SmartContract filter to specify the buy “currency address” and the Trade Buy Seller to specify the “seller address.” We can extract trade information from the buy and sell sides using these filters. [Use this link to execute the following API.](https://ide.bitquery.io/seller-buyer-block-time-as-filters)
+In this example, we retrieve the trade currencies and their trader's details in the ethereum network. Therefore, we use the Trade Buy currency SmartContract filter to specify the buy "currency address" and the Trade Buy Seller to specify the "seller address." We can extract trade information from the buy and sell sides using these filters. [Use this link to execute the following API.](https://ide.bitquery.io/seller-buyer-block-time-as-filters)
 
 ```
 {
@@ -317,9 +271,105 @@ In this example, we retrieve the trade currencies and their trader's details in 
 }
 ```
 
-Next, we retrieve trade currency details on a particular dex in the ethereum network. Therefore, we use the Trade Buy Currency filter to specify the “currency address” and the Trade Dex OwnerAddress filter to specify the “Dex address.”
+Next, we retrieve trade currency details on a particular dex in the ethereum network. Therefore, we use the Trade Buy Currency filter to specify the "currency address" and the Trade Dex OwnerAddress filter to specify the "Dex address."
 
 Run this API to retrieve the trade activities of WETH ("0xc02….") in the Uniswap v3 factory " 0x1f98.."
+
+## Metrics in DEXTrades Cube
+
+Metrics allow for sum, count, average, median, maximum, minimum, and more calculations
+
+The count metric can easily retrieve a specific token's total number of trades. [Run this API](https://ide.bitquery.io/Count-of-trade-on-Uniswap-of-pepe) to find the total trades of [PEPE](https://explorer.bitquery.io/ethereum/token/0x6982508145454ce325ddbe47a25d4ec3d2311933) "0x698…" tokens in the [Uniswap v3 factory](https://explorer.bitquery.io/ethereum/token/0x6982508145454ce325ddbe47a25d4ec3d2311933) "0x1f984…" in the ethereum network.
+
+```
+query MyQuery {
+  EVM(dataset: archive, network: eth) {
+    DEXTradeByTokens(
+      where: {TransactionStatus: {Success: true},
+        Trade: {Currency:
+          {SmartContract:
+            {is: "0x6982508145454ce325ddbe47a25d4ec3d2311933"}},
+          Dex:
+          {OwnerAddress:
+            {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}}},
+        Block: {Date:
+          {since: "2024-01-01", till: "2024-06-02"}}}
+    ) {
+      total_trades: count
+    }
+  }
+}
+
+```
+
+## How Does Bitquery Calculate USD Price for a Token?
+
+Bitquery calculates the token price using a simple formula:
+
+**UsdPrice of token 1 = amount2 in USD / amount1**
+**UsdPrice of token 2 = amount1 in USD / amount2**
+
+If either of these amounts is missing, the price cannot be determined. To better understand token prices, one must first examine the trade amounts involved.
+
+It's important to note that this "price" is not the actual market price of the token, but rather a derivative based on the trade amounts.
+
+**Example: BAR/WETH Pair**  
+**BAR Price in USD = WETH amount in USD / Amount of BAR tokens**  
+**WETH Price in USD = BAR amount in USD / Amount of WETH tokens**
+
+In this example, the second calculation (WETH Price) may not be accurate because the **BAR amount in USD is unknown**.
+
+**Example: WETH/USDT Pair**  
+**USDT Price in USD = WETH amount in USD / Amount of USDT tokens**  
+**WETH Price in USD = USDT amount in USD / Amount of WETH tokens**
+
+In this case, both values make sense, as both **WETH** and **USDT** can be valued in USD directly.
+
+## Multi-Hop Trade Detection and Processing
+
+When processing DEXTrades data in production applications, it's crucial to handle multi-hop swaps correctly. Multi-hop trades occur when a single transaction contains multiple DEX trades that are part of one logical swap operation (e.g., Token A → WETH → Token B).
+
+### Identifying Multi-Hop Trades
+
+Multi-hop trades can be detected by:
+
+1. **Same Transaction Hash**: All trades in a multi-hop swap share the same transaction hash
+2. **Sequential Processing**: Trades appear in sequence within the same block following the Trade_Index
+3. **Token Chain Logic**: The sell token of one trade matches the buy token of the next
+
+### Processing Strategy
+
+For multi-hop trades, use this approach:
+
+- **Token Identification**: Use the first hop to identify the actual token being swapped (not the intermediate tokens)
+- **Volume Calculation**: Use the last hop to determine the final payment amount
+- **Direction Detection**: Check the signer's role in the final hop to determine if it's a buy or sell
+
+```python
+# Example pattern for multi-hop detection
+if tx_hash in processed_transactions:
+    # This is part of a multi-hop swap
+    first_hop = processed_transactions[tx_hash][0]
+    current_hop = trade_data  # Last hop seen
+
+    # Get actual token from first hop (exclude payment tokens)
+    actual_token = get_non_payment_token(first_hop)
+
+    # Get final volume from last hop payment side
+    final_volume = get_payment_side_amount(current_hop)
+
+    # Determine buy/sell from signer's role in last hop
+    is_buy = signer_is_buyer_in_final_hop(current_hop, signer)
+```
+
+### Payment Token Classification
+
+Different token types require different processing logic:
+
+- **Native Tokens**: `0x` (ETH), direct BNB trades
+- **Wrapped Tokens**: WETH, WBNB - used for volume calculations
+- **Stablecoins**: USDT, USDC, DAI - also payment tokens
+- **Other Tokens**: Project tokens, memecoins, etc.
 
 ## Advanced Buyer/Seller Logic and Proxy Contracts
 
@@ -400,56 +450,6 @@ where: {
   }
 }
 ```
-
-## Metrics in DEXTrades Cube
-
-Metrics allow for sum, count, average, median, maximum, minimum, and more calculations
-
-The count metric can easily retrieve a specific token's total number of trades. [Run this API](https://ide.bitquery.io/Count-of-trade-on-Uniswap-of-pepe) to find the total trades of [PEPE](https://explorer.bitquery.io/ethereum/token/0x6982508145454ce325ddbe47a25d4ec3d2311933) “0x698…” tokens in the [Uniswap v3 factory](https://explorer.bitquery.io/ethereum/token/0x6982508145454ce325ddbe47a25d4ec3d2311933) “0x1f984…” in the ethereum network.
-
-```
-query MyQuery {
-  EVM(dataset: archive, network: eth) {
-    DEXTradeByTokens(
-      where: {TransactionStatus: {Success: true},
-        Trade: {Currency:
-          {SmartContract:
-            {is: "0x6982508145454ce325ddbe47a25d4ec3d2311933"}},
-          Dex:
-          {OwnerAddress:
-            {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}}},
-        Block: {Date:
-          {since: "2024-01-01", till: "2024-06-02"}}}
-    ) {
-      total_trades: count
-    }
-  }
-}
-
-```
-
-## How Does Bitquery Calculate USD Price for a Token?
-
-Bitquery calculates the token price using a simple formula:
-
-**UsdPrice of token 1 = amount2 in USD / amount1**
-**UsdPrice of token 2 = amount1 in USD / amount2**
-
-If either of these amounts is missing, the price cannot be determined. To better understand token prices, one must first examine the trade amounts involved.
-
-It’s important to note that this “price” is not the actual market price of the token, but rather a derivative based on the trade amounts.
-
-**Example: BAR/WETH Pair**  
-**BAR Price in USD = WETH amount in USD / Amount of BAR tokens**  
-**WETH Price in USD = BAR amount in USD / Amount of WETH tokens**
-
-In this example, the second calculation (WETH Price) may not be accurate because the **BAR amount in USD is unknown**.
-
-**Example: WETH/USDT Pair**  
-**USDT Price in USD = WETH amount in USD / Amount of USDT tokens**  
-**WETH Price in USD = USDT amount in USD / Amount of WETH tokens**
-
-In this case, both values make sense, as both **WETH** and **USDT** can be valued in USD directly.
 
 ## Common Edge Cases and Filtering Strategies
 
