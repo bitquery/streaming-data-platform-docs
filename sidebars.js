@@ -438,7 +438,23 @@ const sidebars = {
           },
           items: [
             "blockchain/BSC/bsc-balance-updates",
-            "blockchain/BSC/bsc-transaction-balance-api",
+            {
+              type: "category",
+              label: "Transaction Balance Tracker",
+              link: {
+                type: "doc",
+                id: "blockchain/BSC/transaction-balance-tracker/index",
+              },
+              items: [
+                "blockchain/BSC/transaction-balance-tracker/bsc-transaction-balance-tracker",
+                "blockchain/BSC/transaction-balance-tracker/bsc-self-destruct-balance-api",
+                "blockchain/BSC/transaction-balance-tracker/bsc-validator-balance-tracker",
+                "blockchain/BSC/transaction-balance-tracker/bsc-miner-balance-tracker",
+                "blockchain/BSC/transaction-balance-tracker/bsc-mev-balance-tracker",
+                "blockchain/BSC/transaction-balance-tracker/bsc-gas-balance-tracker",
+                "blockchain/BSC/transaction-balance-tracker/bsc-transfer-balance-tracker",
+              ],
+            },
             "blockchain/BSC/bsc-calls-api",
             "blockchain/BSC/bsc-dextrades",
             "blockchain/BSC/bsc-uniswap-api",

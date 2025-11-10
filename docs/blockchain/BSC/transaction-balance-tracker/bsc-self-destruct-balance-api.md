@@ -2,14 +2,14 @@
 sidebar_position: 5
 ---
 
-# Ethereum Self-Destruct Balance Tracker
+# BSC Self-Destruct Balance Tracker
 
-The Ethereum Self-Destruct Balance Tracker API provides real-time balance updates for contracts that self-destruct and addresses that receive funds from self-destructed contracts. This API helps you monitor contract destruction events, track ephemeral contracts (like MEV bots), and analyze security incidents.
+The BSC Self-Destruct Balance Tracker API provides real-time balance updates for contracts that self-destruct and addresses that receive funds from self-destructed contracts. This API helps you monitor contract destruction events, track ephemeral contracts (like MEV bots), and analyze security incidents.
 
 <head>
-<meta name="title" content="Ethereum Self-Destruct Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track Ethereum contract self-destruct events, ephemeral contracts, and security incidents using Bitquery's Self-Destruct Balance Tracker API."/>
-<meta name="keywords" content="ethereum self-destruct, selfdestruct balance api, contract destruction tracker, ephemeral contracts, mev self-destruct, parity multisig, contract kill tracker, ethereum balance api"/>
+<meta name="title" content="BSC Self-Destruct Balance Tracker API & Streams"/>
+<meta name="description" content="Learn how to track BSC contract self-destruct events, ephemeral contracts, and security incidents using Bitquery's Self-Destruct Balance Tracker API."/>
+<meta name="keywords" content="bsc self-destruct, selfdestruct balance api, contract destruction tracker, ephemeral contracts, mev self-destruct, parity multisig, contract kill tracker, bsc balance api"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
@@ -18,17 +18,17 @@ The Ethereum Self-Destruct Balance Tracker API provides real-time balance update
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Ethereum Self-Destruct Balance Tracker API & Streams"
+  content="BSC Self-Destruct Balance Tracker API & Streams"
 />
 <meta
   property="og:description"
-  content="Learn how to track Ethereum contract self-destruct events, ephemeral contracts, and security incidents using Bitquery's Self-Destruct Balance Tracker API."
+  content="Learn how to track BSC contract self-destruct events, ephemeral contracts, and security incidents using Bitquery's Self-Destruct Balance Tracker API."
 />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum Self-Destruct Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track Ethereum contract self-destruct events, ephemeral contracts, and security incidents using Bitquery's Self-Destruct Balance Tracker API." />
+<meta property="twitter:title" content="BSC Self-Destruct Balance Tracker API & Streams" />
+<meta property="twitter:description" content="Learn how to track BSC contract self-destruct events, ephemeral contracts, and security incidents using Bitquery's Self-Destruct Balance Tracker API." />
 </head>
 
 ## What is Self-Destruct?
@@ -54,13 +54,13 @@ The API tracks self-destruct events using specific balance change reason codes:
 
 ## Track All Self-Destruct Event Balances
 
-Monitor all contract self-destruct event balances in real-time using this GraphQL subscription. [Run Stream](https://ide.bitquery.io/All-Self-Destruct-Event-Balances-Stream)
+Monitor all contract self-destruct event balances in real-time using this GraphQL subscription. [Run Stream](https://ide.bitquery.io/All-Self-Destruct-Event-Balances-Stream-bsc)
 
 You can also run this as a query by replacing the word `subscription` with `query`
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: { TokenBalance: { BalanceChangeReasonCode: { in: [12, 13, 14] } } }
     ) {
@@ -89,11 +89,11 @@ subscription {
 ## Track Contract Self-Destruct Balance Decrease
 
 Monitor contract balance decrease when contracts are self-destructing.
-[Run Query](https://ide.bitquery.io/Self-Destruct-Balance-Decrease-API)
+[Run Query](https://ide.bitquery.io/Self-Destruct-Balance-Decrease-API-bsc)
 
 ```graphql
 {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: { TokenBalance: { BalanceChangeReasonCode: { eq: 13 } } }
       limit: { count: 10 }
@@ -125,11 +125,11 @@ Monitor contract balance decrease when contracts are self-destructing.
 ## Track Recipients of Self-Destructed Fund Balances
 
 Monitor contract balance increase when contracts are self-destructing.
-[Run query](https://ide.bitquery.io/Self-Destruct-Balance-Increase-API)
+[Run query](https://ide.bitquery.io/Self-Destruct-Balance-Increase-API-bsc)
 
 ```graphql
 {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: { TokenBalance: { BalanceChangeReasonCode: { eq: 12 } } }
       limit: { count: 10 }
@@ -161,15 +161,15 @@ Monitor contract balance increase when contracts are self-destructing.
 ## Track Self-Destruct Balance Changes for Specific Address
 
 Monitor self-destruct balance changes for a specific contract address using this GraphQL query:
-Try the API [here](https://ide.bitquery.io/Track-Self-Destruct-Balance-Changes-for-Specific-Address).
+Try the API [here](https://ide.bitquery.io/Track-Self-Destruct-Balance-Changes-for-Specific-Address-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: {
         TokenBalance: {
-          Address: { is: "0x863DF6BFa4469f3ead0bE8f9F2AAE51c91A907b4" }
+          Address: { is: "YourContractAddress" }
           BalanceChangeReasonCode: { in: [12, 13, 14] }
         }
       }
@@ -200,11 +200,11 @@ subscription {
 ## Track Large Self-Destruct Transaction Balances
 
 Monitor significant self-destruct balance changes (e.g., > $1000 USD) using this subscription:
-Try the API [here](https://ide.bitquery.io/Track-Large-Self-Destruct-Transaction-Balances).
+Try the API [here](https://ide.bitquery.io/Track-Large-Self-Destruct-Transaction-Balances-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: {
         TokenBalance: {
@@ -239,11 +239,11 @@ subscription {
 ## Track Ephemeral MEV Contract Balance Changes
 
 Monitor balance changes for short-lived contracts that are created and destroyed in the same transaction (typical pattern for MEV bots) using this subscription:
-Try the API [here](https://ide.bitquery.io/Track-Ephemeral-MEV-Contract-Balance-Changes).
+Try the API [here](https://ide.bitquery.io/Track-Ephemeral-MEV-Contract-Balance-Changes-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: { TokenBalance: { BalanceChangeReasonCode: { eq: 13 } } }
     ) {
@@ -275,11 +275,11 @@ subscription {
 ## Aggregate Self-Destruct Statistics
 
 Calculate total ETH destroyed or received from self-destructs using aggregation functions:
-Try the API [here](https://ide.bitquery.io/Aggregate-Self-Destruct-Statistics).
+Try the API [here](https://ide.bitquery.io/Aggregate-Self-Destruct-Statistics-bsc).
 
 ```graphql
 {
-  EVM(dataset: realtime, network: eth) {
+  EVM(dataset: realtime, network: bsc) {
     TransactionBalances(
       where: { TokenBalance: { BalanceChangeReasonCode: { in: [12, 13] } } }
     ) {
@@ -319,18 +319,18 @@ Contrack Flow: Deploy → Transfer to MEV builder → Self-destruct
 - **Privacy** - prevents tracking of bundle logic across blocks
 
 **API Subscription: Track payments to known MEV builders:**
-Try the API [here](https://ide.bitquery.io/Track-payments-to-known-MEV-builders).
+Try the API [here](https://ide.bitquery.io/Track-payments-to-known-MEV-builders-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: {
         TokenBalance: {
           BalanceChangeReasonCode: { eq: 12 }
           Address: {
             in: [
-              "0x396343362be2A4dA1cE0C1C210945346fb82Aa49"
+              "YourMevAddress1"
               # Add other known MEV builder addresses
             ]
           }
@@ -371,11 +371,11 @@ Many MEV bots and arbitrage executors create contracts that are destroyed within
 - Cleanup of bytecode footprint
 
 **API Query: Track recent ephemeral contract patterns:**
-Try the API [here](https://ide.bitquery.io/Track-recent-ephemeral-contract-patterns_1).
+Try the API [here](https://ide.bitquery.io/Track-recent-ephemeral-contract-patterns-bsc).
 
 ```graphql
 {
-  EVM(dataset: realtime, network: eth) {
+  EVM(dataset: realtime, network: bsc) {
     TransactionBalances(
       where: { TokenBalance: { BalanceChangeReasonCode: { eq: 13 } } }
       limit: { count: 100 }
@@ -410,11 +410,11 @@ Try the API [here](https://ide.bitquery.io/Track-recent-ephemeral-contract-patte
 ### Security Monitoring - Track Malicious Self-Destructs
 
 Track self-destruct events to identify potential security incidents or malicious contract destruction:
-Try the API [here](https://ide.bitquery.io/Track-Malicious-Self-Destructs).
+Try the API [here](https://ide.bitquery.io/Track-Malicious-Self-Destructs-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: {
         TokenBalance: {

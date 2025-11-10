@@ -2,14 +2,14 @@
 sidebar_position: 6
 ---
 
-# Ethereum Gas Balance Tracker
+# BSC Gas Balance Tracker
 
-The Ethereum Gas Balance Tracker API provides real-time balance updates related to Gas Fee activities, including transaction fee rewards, monitoring gas fee spent, and other Gas-related balance changes.
+The BSC Gas Balance Tracker API provides real-time balance updates related to Gas Fee activities, including transaction fee rewards, monitoring gas fee spent, and other GAS-related balance changes.
 
 <head>
-<meta name="title" content="Ethereum Gas Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track Ethereum Gas-related balance changes, transaction fee rewards, Gas Fee Spent and GAS Fee returned  using Bitquery's Gas Balance Tracker API."/>
-<meta name="keywords" content="ethereum Gas balance, Gas tracker, Gas balance api, transaction fee rewards, Gas burnt, Gas returned, ethereum Gas api"/>
+<meta name="title" content="BSC Gas Balance Tracker API & Streams"/>
+<meta name="description" content="Learn how to track BSC Gas-related balance changes, transaction fee rewards, Gas Fee Spent and GAS Fee returned  using Bitquery's Gas Balance Tracker API."/>
+<meta name="keywords" content="bsc Gas balance, Gas tracker, Gas balance api, transaction fee rewards, Gas burnt, Gas returned, bsc Gas api"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
@@ -18,26 +18,26 @@ The Ethereum Gas Balance Tracker API provides real-time balance updates related 
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Ethereum Gas Balance Tracker API & Streams"
+  content="BSC Gas Balance Tracker API & Streams"
 />
 <meta
   property="og:description"
-  content="Learn how to track Ethereum Gas-related balance changes, transaction fee rewards, Gas Fee Spent and Gas Fee returned  using Bitquery's Gas Balance Tracker API."
+  content="Learn how to track BSC Gas-related balance changes, transaction fee rewards, Gas Fee Spent and Gas Fee returned  using Bitquery's Gas Balance Tracker API."
 />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum Gas Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track Ethereum Gas-related balance changes, transaction fee rewards, Gas Fee Spent and GAS Fee returned  using Bitquery's Gas Balance Tracker API." />
+<meta property="twitter:title" content="BSC Gas Balance Tracker API & Streams" />
+<meta property="twitter:description" content="Learn how to track BSC Gas-related balance changes, transaction fee rewards, Gas Fee Spent and GAS Fee returned  using Bitquery's Gas Balance Tracker API." />
 </head>
 
 ## Get Top Gas Fee Collectors
 
-[This](https://ide.bitquery.io/top-gas-fee-collectors_1) API endpoint returns the list of top gas fee collectors. We are tracking the Gas Collection Event causing Balance Update by appliying condition on `BalanceChangeReasonCode` to be equal to `5`.
+[This](https://ide.bitquery.io/top-gas-fee-collectors-bsc) API endpoint returns the list of top gas fee collectors. We are tracking the Gas Collection Event causing Balance Update by appliying condition on `BalanceChangeReasonCode` to be equal to `5`.
 
 ```graphql
 query TopGasGainers {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: {TokenBalance: {BalanceChangeReasonCode: {eq: 5}}}
       orderBy: {descendingByField: "gain", descending: Block_Time}
@@ -63,13 +63,13 @@ query TopGasGainers {
 
 ## Track the Balance after Latest Gas Fee Burn
 
-[This](https://ide.bitquery.io/Latest-balance-and-gas-fee-paid-for-an-address_1#) API endpoint returns the Balance and the Gas Fee burnt for a particular address after the latest Gas Fee Burn Event. We are tracking the Gas Burn Event causing Balance Update by appliying condition on `BalanceChangeReasonCode` to be equal to `6`.
+[This](https://ide.bitquery.io/Latest-balance-and-gas-fee-paid-for-an-address-bsc) API endpoint returns the Balance and the Gas Fee burnt for a particular address after the latest Gas Fee Burn Event. We are tracking the Gas Burn Event causing Balance Update by appliying condition on `BalanceChangeReasonCode` to be equal to `6`.
 
 ```graphql
 query MyQuery {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
-      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 6}, Address: {is: "0x18bb896994283bd9c16aa2072777a97c12f1b290"}}}
+      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 6}, Address: {is: "0xYourAddressInput"}}}
       limit: {count: 1}
       orderBy: {descending: Block_Time}
     ) {
@@ -95,13 +95,13 @@ query MyQuery {
 
 ## Track the Balance after Latest Gas Fee Burn for Multiple Addresses
 
-[This](https://ide.bitquery.io/Latest-balance-and-gas-fee-paid-for-multiple-addresses) API endpoint returns the Balance and the Gas Fee burnt for a list of addresses after the latest Gas Fee Burn Event.
+[This](https://ide.bitquery.io/Latest-balance-and-gas-fee-paid-for-multiple-addresses-bsc) API endpoint returns the Balance and the Gas Fee burnt for a list of addresses after the latest Gas Fee Burn Event.
 
 ```graphql
 query MyQuery {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
-      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 6}, Address: {in: ["0x18bb896994283bd9c16aa2072777a97c12f1b290", "0xdadb0d80178819f2319190d340ce9a924f783711"]}}}
+      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 6}, Address: {in: ["0xYourAddressInput1", "0xYourAddressInput2"]}}}
       limitBy: {by: TokenBalance_Address count: 1}
       orderBy: {descending: Block_Time}
     ) {
@@ -127,13 +127,13 @@ query MyQuery {
 
 ## Monitoring Balance after Latest Gas Fee Burn
 
-[This](https://ide.bitquery.io/Monitor-balance-and-gas-fee-paid-for-an-address-using-stream_1) stream returns the Balance and the Gas Fee burnt for a particular address in real time.
+[This](https://ide.bitquery.io/Monitor-balance-and-gas-fee-paid-for-an-address-using-stream-bsc) stream returns the Balance and the Gas Fee burnt for a particular address in real time.
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
-      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 6}, Address: {is: "0x18bb896994283bd9c16aa2072777a97c12f1b290"}}}
+      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 6}, Address: {is: "0xYourAddressInput"}}}
     ) {
       Block{
         Time
@@ -157,13 +157,13 @@ subscription {
 
 ## Monitoring Balance after Latest Gas Fee Burn for Multiple Addresses
 
-[This](https://ide.bitquery.io/Monitor-balance-and-gas-fee-paid-for-multiple-addresses--stream_1) stream returns the Balance and the Gas Fee burnt for a list of addresses in real time.
+[This](https://ide.bitquery.io/Monitor-balance-and-gas-fee-paid-for-multiple-addresses--stream-bsc) stream returns the Balance and the Gas Fee burnt for a list of addresses in real time.
 
 ```graphql
 query MyQuery {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
-      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 6}, Address: {in: ["0x18bb896994283bd9c16aa2072777a97c12f1b290", "0xdadb0d80178819f2319190d340ce9a924f783711"]}}}
+      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 6}, Address: {in: ["0xYourAddressInput1", "0xYourAddressInput2"]}}}
       limitBy: {by: TokenBalance_Address count: 1}
       orderBy: {descending: Block_Time}
     ) {
@@ -189,13 +189,13 @@ query MyQuery {
 
 ## Track the Balance after Latest Gas Return
 
-[This](https://ide.bitquery.io/Latest-balance-after-unused-gas-fee-returned--for-an-address#) API endpoint returns the Balance and the Gas Returned for a particular address after the latest Gas Return Event. We are tracking the Gas Return Event causing Balance Update by appliying condition on `BalanceChangeReasonCode` to be equal to `7`.
+[This](https://ide.bitquery.io/Latest-balance-after-unused-gas-fee-returned--for-an-address-bsc) API endpoint returns the Balance and the Gas Returned for a particular address after the latest Gas Return Event. We are tracking the Gas Return Event causing Balance Update by appliying condition on `BalanceChangeReasonCode` to be equal to `7`.
 
 ```graphql
 query MyQuery {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
-      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 7}, Address: {is: "0x18bb896994283bd9c16aa2072777a97c12f1b290"}}}
+      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 7}, Address: {is: "0xYourAddressInput"}}}
       limit: {count: 1}
       orderBy: {descending: Block_Time}
     ) {
@@ -221,13 +221,13 @@ query MyQuery {
 
 ## Track the Balance after Latest Gas Return for Multiple Addresses
 
-[This](https://ide.bitquery.io/Latest-balance-after-unused-gas-fee-returned--for-multiple-addresses#) API endpoint returns the Balance and the Gas Returned for a list of addresses after the latest Gas Return Event.
+[This](https://ide.bitquery.io/Latest-balance-after-unused-gas-fee-returned--for-multiple-addresses-bsc) API endpoint returns the Balance and the Gas Returned for a list of addresses after the latest Gas Return Event.
 
 ```graphql
 query MyQuery {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
-      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 7}, Address: {in: ["0x18bb896994283bd9c16aa2072777a97c12f1b290", "0x4838b106fce9647bdf1e7877bf73ce8b0bad5f97"]}}}
+      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 7}, Address: {in: ["0xYourAddressInput1", "0xYourAddressInput2"]}}}
       limitBy: {by:TokenBalance_Address count: 1}
       orderBy: {descending: Block_Time}
     ) {
@@ -253,13 +253,13 @@ query MyQuery {
 
 ## Monitoring Balance after Latest Gas Return
 
-[This](https://ide.bitquery.io/Monitor-balance-after-unused-gas-fee-returned--for-an-address--stream#) stream returns the Balance and the Gas Returned for a particular address in real time.
+[This](https://ide.bitquery.io/Monitor-balance-after-unused-gas-fee-returned--for-an-address--stream-bsc) stream returns the Balance and the Gas Returned for a particular address in real time.
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
-      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 7}, Address: {is: "0x18bb896994283bd9c16aa2072777a97c12f1b290"}}}
+      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 7}, Address: {is: "0xYourAddressInput"}}}
       limit: {count: 1}
       orderBy: {descending: Block_Time}
     ) {
@@ -285,13 +285,13 @@ subscription {
 
 ## Monitoring Balance after Latest Gas Return for Multiple Addresses
 
-[This](https://ide.bitquery.io/Monitor-balance-after-unused-gas-fee-returned--for-multiple-addresses--stream#) stream returns the Balance and the Gas Returned for a list of addresses in real time.
+[This](https://ide.bitquery.io/Monitor-balance-after-unused-gas-fee-returned--for-multiple-addresses--stream-bsc) stream returns the Balance and the Gas Returned for a list of addresses in real time.
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
-      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 7}, Address: {in: ["0x18bb896994283bd9c16aa2072777a97c12f1b290", "0x4838b106fce9647bdf1e7877bf73ce8b0bad5f97"]}}}
+      where: {TokenBalance: {BalanceChangeReasonCode: {eq: 7}, Address: {in: ["0xYourAddressInput1", "0xYourAddressInput2"]}}}
     ) {
       Block{
         Time
