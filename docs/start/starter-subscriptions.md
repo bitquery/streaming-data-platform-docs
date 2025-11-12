@@ -114,6 +114,38 @@ This stream gives info about the real time trades on Raydium exchange. You can m
 
 ▶️[Raydium Trades](https://ide.bitquery.io/Updated-Real-time-trades-on-Raydium-DEX-on-Solana_1)
 
+## Transaction Balance Updates
+
+### Real time Transaction Balance Update for a wallet on Ethereum
+
+This stream provides real time transaction balance updates for a wallet on Ethereum.
+
+▶️[Real Time Transaction Balance Update](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address-bsc)
+
+### Real time Validator Rewards
+
+This stream provides the info on rewards recieved by validators in real time.
+
+▶️[Real Time Validator Rewards](https://ide.bitquery.io/Track-Validator-Rewards)
+
+### Track MEV Balance in real time
+
+This stream monitors MEV activities and Balance Updates in real time.
+
+▶️[Real Time MEV Activities](https://ide.bitquery.io/Track-MEV-Related-Balance-Updates)
+
+### Real time Validator Rewards for BSC
+
+This stream provides the info on rewards recieved by validators on BSC in real time.
+
+▶️[Real Time Validator Rewards on BSC](https://ide.bitquery.io/Track-Validator-Balance-Updates-bsc_1)
+
+### Track MEV Balance in real time for BSC
+
+This stream monitors MEV activities and Balance Updates on BSC in real time.
+
+▶️[Real Time MEV Activities on BSC](https://ide.bitquery.io/Track-MEV-Related-Balance-Updates-bsc)
+
 ## EVM
 
 ### Real time price stream for tokens on Ethereum

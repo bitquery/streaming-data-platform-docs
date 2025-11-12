@@ -443,6 +443,21 @@ This API identifies addresses that hold multiple specified tokens
 
 ## Ethereum API
 
+### Get latest ERC20 token balance of a wallet
+
+Get latest ERC20 token balance of an wallet.
+▶️ [Get latest ERC20 token balance of a wallet](https://ide.bitquery.io/Latest-balance-of-an-address-for-a-specific-token)
+
+### Get latest liquidity of an EVM Pool
+
+Get latest liquidity of an EVM Pool.
+▶️ [Get latest liquidity of an EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
+
+### Get Total Supply and Marketcap of an ERC20 token
+
+Get Total Supply and Marketcap of an ERC20 token.
+▶️ [Get Total Supply and Marketcap of an ERC20 token](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
+
 ### Get ERC20 token transfers by wallet
 
 Get ERC20 token transactions ordered by block number in descending order.  
@@ -519,6 +534,19 @@ This query returns mining rewards info for Ethereum, including transaction fees,
 ▶️ [Miner Rewards](https://ide.bitquery.io/Ethereum-miner-rewards)
 
 ## BSC API
+
+Get latest BNB balance of an wallet.
+▶️ [Get latest BNB balance of a wallet](https://ide.bitquery.io/Latest-native-balance-of-an-address-bsc)
+
+### Get latest liquidity of an EVM Pool
+
+Get latest liquidity of an EVM Pool.
+▶️ [Get latest liquidity of an EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-BSC-pool)
+
+### Get Total Supply and Marketcap of an ERC20 token
+
+Get Total Supply and Marketcap of an ERC20 token.
+▶️ [Get Total Supply and Marketcap of an ERC20 token](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token-bsc)
 
 ### BSC Token Holders
 
