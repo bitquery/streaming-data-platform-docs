@@ -18,6 +18,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [LetsBonk.fun API](#letsbonkfun-api)
 - [EVM Token Holder API](#evm-token-holder-api)
 - [Ethereum API](#ethereum-api)
+- [Ethereum Transaction Balance Tracker API](#ethereum-transaction-balance-tracker-api)
 - [BSC API](#bsc-api)
 - [Pancakeswap APIs](#pancakeswap-apis)
 - [NFT APIs](#nft-apis)
@@ -517,6 +518,43 @@ Every interaction with any EVM network, from contract creation to fund transfer,
 
 This query returns mining rewards info for Ethereum, including transaction fees, fees burnt, rewards received, and more.  
 ▶️ [Miner Rewards](https://ide.bitquery.io/Ethereum-miner-rewards)
+
+## Ethereum Transaction Balance Tracker API
+
+### Latest Native Balance of an Address
+
+Get the latest native ETH balance of a specific address.  
+▶️ [Latest Native Balance of an Address](https://ide.bitquery.io/Latest-native-balance-of-an-address)
+
+### Latest Balance of an Address for a Specific Token
+
+Get the latest balance of a specific address for a specific ERC20 token.  
+▶️ [Latest Balance of an Address for a Specific Token](https://ide.bitquery.io/Latest-balance-of-an-address-for-a-specific-token)
+
+### Latest Liquidity of EVM Pool
+
+Get the latest liquidity of an EVM DEX pool (e.g., Uniswap v3 pool).  
+▶️ [Latest Liquidity of EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
+
+### Latest Supply and Marketcap of a Specific Token
+
+Get the latest total supply and on-chain marketcap of a specific token.  
+▶️ [Latest Supply and Marketcap of a Token](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token)
+
+### Top Gas Fee Collectors
+
+Get the list of top gas fee collectors on Ethereum.  
+▶️ [Top Gas Fee Collectors](https://ide.bitquery.io/top-gas-fee-collectors_1)
+
+### Top Validators by Total Tips earned in last 24 hrs
+
+Ranks validators by cumulative priority fees (tips) received in the last 24 hours.  
+▶️ [Top Validators by Total Tips](https://ide.bitquery.io/top-validators-by-total-tips-in-last-24-hrs#)
+
+### Track the Balance after Latest Gas Fee Burn
+
+Get the balance and gas fee burnt for a particular address after the latest gas fee burn event.  
+▶️ [Balance after Latest Gas Fee Burn](https://ide.bitquery.io/Latest-balance-and-gas-fee-paid-for-an-address_1#)
 
 ## BSC API
 

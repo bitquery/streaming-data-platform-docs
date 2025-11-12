@@ -10,6 +10,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Pumpswap Streams](#pumpswap-streams)
 - [Raydium Streams](#raydium-streams)
 - [EVM Streams](#evm)
+- [Ethereum Transaction Balance Tracker Streams](#ethereum-transaction-balance-tracker-streams)
 - [Uniswap V3 Streams](#uniswap-v3-streams)
 - [NFT Streams](#nft-streams)
 - [TRON Streams](#tron)
@@ -163,6 +164,53 @@ This subscription returns the real-time trades happening on Pancakeswap. You can
 This stream returns the real time trade price of a token against the token it is traded with and the price in USD. You could modify the stream to get the price of the token for a particular token pair or against a particular token.
 
 ▶️[Token Price Stream](https://ide.bitquery.io/token-price-stream)
+
+## Ethereum Transaction Balance Tracker Streams
+
+### Subscribe to All Transaction Balances
+
+This subscription provides real-time balance updates for all addresses involved in transactions on the Ethereum network.  
+▶️ [Subscribe to All Transaction Balances](https://ide.bitquery.io/Subscribe-to-All-Transaction-Balances)
+
+### Subscribe to Transaction Balances for a Specific Address
+
+This subscription filters transaction balances for a specific address in real-time.  
+▶️ [Subscribe to Transaction Balances for a Specific Address](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address)
+
+### Track Validator Balance Updates
+
+Monitor balance changes for Ethereum validators, including staking rewards and withdrawals from the beacon chain.  
+▶️ [Track Validator Balance Updates](https://ide.bitquery.io/Track-Validator-Balance-Updates)
+
+### Track Validator Rewards
+
+Track validator rewards and balance increases from staking activities in real-time.  
+▶️ [Track Validator Rewards](https://ide.bitquery.io/Track-Validator-Rewards)
+
+### Track Miner Balance Updates
+
+Monitor balance changes for Ethereum miners, including block rewards, uncle block rewards, and transaction fee rewards.  
+▶️ [Track Miner Balance Updates](https://ide.bitquery.io/Track-Miner-Balance-Updates)
+
+### Track Block Mining Rewards
+
+Track rewards received by miners for successfully mining blocks in real-time.  
+▶️ [Track Block Mining Rewards](https://ide.bitquery.io/Track-Block-Mining-Rewards)
+
+### Track MEV-Related Balance Updates
+
+Monitor balance changes related to MEV activities, including transaction fee rewards and block builder rewards.  
+▶️ [Track MEV-Related Balance Updates](https://ide.bitquery.io/Track-MEV-Related-Balance-Updates)
+
+### Track All Self-Destruct Event Balances
+
+Monitor all contract self-destruct event balances in real-time.  
+▶️ [Track All Self-Destruct Event Balances](https://ide.bitquery.io/All-Self-Destruct-Event-Balances-Stream)
+
+### Monitoring Balance after Latest Gas Fee Burn
+
+Monitor the balance and gas fee burnt for a particular address in real-time.  
+▶️ [Monitoring Balance after Latest Gas Fee Burn](https://ide.bitquery.io/Monitor-balance-and-gas-fee-paid-for-an-address-using-stream_1)
 
 ## Pancakeswap Streams
 

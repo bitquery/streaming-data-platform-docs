@@ -2,9 +2,13 @@
 sidebar_position: 3
 ---
 
+import VideoPlayer from "../../../../../src/components/videoplayer.js";
+
 # Ethereum Miner Balance Tracker
 
 The Ethereum Miner Balance Tracker API provides real-time balance updates for Ethereum miners, tracking their mining rewards, uncle block rewards, and transaction fee rewards.
+
+<VideoPlayer url="https://www.youtube.com/watch?v=VqV1K4RJc6U" />
 
 <head>
 <meta name="title" content="Ethereum Miner Balance Tracker API & Streams"/>

@@ -2,9 +2,13 @@
 sidebar_position: 2
 ---
 
+import VideoPlayer from "../../../../../src/components/videoplayer.js";
+
 # Ethereum Validator Balance Tracker
 
 The Ethereum Validator Balance Tracker API provides real-time balance updates for Ethereum validators, tracking their staking rewards, withdrawals, and balance changes.
+
+<VideoPlayer url="https://www.youtube.com/watch?v=mEvrPCeOx7I" />
 
 <head>
 <meta name="title" content="Ethereum Validator Balance Tracker API & Streams"/>
