@@ -9,7 +9,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [PumpFun Streams](#pumpfun-streams)
 - [Pumpswap Streams](#pumpswap-streams)
 - [Raydium Streams](#raydium-streams)
-- [Transaction Balance Streams](#transaction-balance-updates)
+- [Transaction Balance Streams](#transaction-balance-streams)
 - [EVM Streams](#evm)
 - [Uniswap V3 Streams](#uniswap-v3-streams)
 - [NFT Streams](#nft-streams)
@@ -115,7 +115,7 @@ This stream gives info about the real time trades on Raydium exchange. You can m
 
 ▶️[Raydium Trades](https://ide.bitquery.io/Updated-Real-time-trades-on-Raydium-DEX-on-Solana_1)
 
-## Transaction Balance Updates
+## Transaction Balance Streams
 
 ### Real time Transaction Balance Update for a wallet on Ethereum
 
