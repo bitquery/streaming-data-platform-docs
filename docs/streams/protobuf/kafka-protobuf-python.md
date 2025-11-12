@@ -18,7 +18,7 @@ This code is a sample to get it running. At scale, you have to implement queues 
 Before you begin, install the required Python package that includes the compiled `.pb2` files:
 
 ```sh
-pip install bitquery-pb2-kafka-package
+pip install bitquery-pb2-kafka-package base58 confluent_kafka
 
 ```
 
@@ -78,12 +78,12 @@ consumer.subscribe([topic])
 
 This function **recursively walks** through any protobuf message and prints all its fields, converting `bytes` to **base58** or **hex**.
 
-> 💡 **Solana vs EVM Encoding Tip**
+> **Solana vs EVM Encoding Tip**
 >
 > Protobuf `bytes` fields should be decoded differently depending on the blockchain:
 >
-> - ✅ **Solana**: Use `base58` (e.g. account addresses, signatures)
-> - ✅ **EVM (Ethereum, BSC, etc.)**: Use `hex` with a `0x` prefix
+> - **Solana**: Use `base58` (e.g. account addresses, signatures)
+> - **EVM (Ethereum, BSC, etc.)**: Use `hex` with a `0x` prefix
 >
 > This tutorial uses `base58` decoding, appropriate for Solana.  
 > If you're consuming EVM Protobuf messages instead, update:

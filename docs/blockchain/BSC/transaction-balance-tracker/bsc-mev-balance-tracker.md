@@ -2,14 +2,14 @@
 sidebar_position: 4
 ---
 
-# Ethereum MEV Balance Tracker
+# BSC MEV Balance Tracker
 
-The Ethereum MEV (Maximal Extractable Value) Balance Tracker API provides real-time balance updates related to MEV activities, including transaction fee rewards, block builder rewards, and other MEV-related balance changes.
+The BSC MEV (Maximal Extractable Value) Balance Tracker API provides real-time balance updates related to MEV activities, including transaction fee rewards, block builder rewards, and other MEV-related balance changes.
 
 <head>
-<meta name="title" content="Ethereum MEV Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track Ethereum MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery's MEV Balance Tracker API."/>
-<meta name="keywords" content="ethereum mev balance, mev tracker, mev balance api, transaction fee rewards, block builder rewards, mev extraction, ethereum mev api"/>
+<meta name="title" content="BSC MEV Balance Tracker API & Streams"/>
+<meta name="description" content="Learn how to track BSC MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery's MEV Balance Tracker API."/>
+<meta name="keywords" content="bsc mev balance, mev tracker, mev balance api, transaction fee rewards, block builder rewards, mev extraction, bsc mev api"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
@@ -18,26 +18,26 @@ The Ethereum MEV (Maximal Extractable Value) Balance Tracker API provides real-t
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Ethereum MEV Balance Tracker API & Streams"
+  content="BSC MEV Balance Tracker API & Streams"
 />
 <meta
   property="og:description"
-  content="Learn how to track Ethereum MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery's MEV Balance Tracker API."
+  content="Learn how to track BSC MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery's MEV Balance Tracker API."
 />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum MEV Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track Ethereum MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery's MEV Balance Tracker API." />
+<meta property="twitter:title" content="BSC MEV Balance Tracker API & Streams" />
+<meta property="twitter:description" content="Learn how to track BSC MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery's MEV Balance Tracker API." />
 </head>
 
 ## Track MEV-Related Balance Updates
 
-Monitor balance changes related to MEV activities, including transaction fee rewards and block builder rewards. Try the API [here](https://ide.bitquery.io/Track-MEV-Related-Balance-Updates).
+Monitor balance changes related to MEV activities, including transaction fee rewards and block builder rewards. Try the API [here](https://ide.bitquery.io/Track-MEV-Related-Balance-Updates-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: { TokenBalance: { BalanceChangeReasonCode: { eq: 5 } } }
     ) {
@@ -70,11 +70,11 @@ subscription {
 ## Track Block Builder Rewards
 
 Monitor transaction fee rewards received by block builders (MEV extractors):
-Try the API [here](https://ide.bitquery.io/Track-Block-Builder-Rewards).
+Try the API [here](https://ide.bitquery.io/Track-Block-Builder-Rewards-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: {
         TokenBalance: { BalanceChangeReasonCode: { eq: 5 } }
@@ -107,11 +107,11 @@ subscription {
 ## Filter by MEV Bot or Builder Address
 
 Track balance changes for specific MEV bots or block builders:
-Try the API [here](https://ide.bitquery.io/Filter-by-MEV-Bot-or-Builder-Address).
+Try the API [here](https://ide.bitquery.io/Filter-by-MEV-Bot-or-Builder-Address-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: {
         TokenBalance: {
@@ -147,11 +147,11 @@ subscription {
 ## Track Large MEV Transactions
 
 Monitor large transaction fee rewards that may indicate significant MEV extraction:
-Try the API [here](https://ide.bitquery.io/Track-Large-MEV-Transactions).
+Try the API [here](https://ide.bitquery.io/Track-Large-MEV-Transactions-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: {
         TokenBalance: {
@@ -187,11 +187,11 @@ subscription {
 ## Aggregate MEV Rewards
 
 Calculate total MEV rewards for a specific address or time period:
-Try the API [here](https://ide.bitquery.io/Aggregate-MEV-Rewards).
+Try the API [here](https://ide.bitquery.io/Aggregate-MEV-Rewards-bsc).
 
 ```graphql
 {
-  EVM(dataset: archive, network: eth) {
+  EVM(dataset: realtime, network: bsc) {
     TransactionBalances(
       where: {
         TokenBalance: {

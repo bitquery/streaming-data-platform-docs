@@ -199,24 +199,18 @@ const sidebars = {
             "streams/kafka-streaming-concepts",
             {
               type: "category",
-              label: "Protobuf Data Streams",
+              label: "L1/L2 Chains - Protobuf Data Streams",
               items: [
-                {
-                  type: "category",
-                  label: "L1/L2 Chains - Protobuf Data Streams",
-                  items: [
-                    "streams/protobuf/chains/Bitcoin-protobuf",
-                    "streams/protobuf/chains/EVM-protobuf",
-                    "streams/protobuf/chains/Solana-protobuf",
-                    "streams/protobuf/chains/Tron-protobuf",
-                  ],
-                },
-                "streams/protobuf/kafka-protobuf-go",
-                "streams/protobuf/kafka-protobuf-python",
-                "streams/protobuf/kafka-protobuf-js",
-                "streams/protobuf/filtering_kafka_streams",
+                "streams/protobuf/chains/Bitcoin-protobuf",
+                "streams/protobuf/chains/EVM-protobuf",
+                "streams/protobuf/chains/Solana-protobuf",
+                "streams/protobuf/chains/Tron-protobuf",
               ],
             },
+            "streams/protobuf/kafka-protobuf-go",
+            "streams/protobuf/kafka-protobuf-python",
+            "streams/protobuf/kafka-protobuf-js",
+            "streams/protobuf/filtering_kafka_streams",
             "streams/real-time-solana-data",
             "streams/sniper-trade-using-bitquery-kafka-stream",
           ],
@@ -297,11 +291,10 @@ const sidebars = {
           },
           items: [
             "cubes/EVM",
-            "cubes/balance-updates-cube",
             "cubes/dextrades",
             "cubes/dextradesbyTokens",
-            "cubes/dextrades-dextradesbyTokens",
             "cubes/transaction-cube",
+            "cubes/balance-updates-cube",
             "cubes/transfers-cube",
             "evm/token-holders",
           ],
@@ -340,13 +333,18 @@ const sidebars = {
                 {
                   type: "category",
                   label: "Transaction Balance Tracker",
+                  link: {
+                    type: "doc",
+                    id: "blockchain/Ethereum/balances/transaction-balance-tracker/index",
+                  },
                   items: [
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-transaction-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-self-destruct-balance-api",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-validator-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-miner-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-mev-balance-tracker",
-                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-gas-balance-tracker"
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-gas-balance-tracker",
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-transfer-balance-tracker"
                   ],
                 },
               ],
@@ -433,7 +431,23 @@ const sidebars = {
           },
           items: [
             "blockchain/BSC/bsc-balance-updates",
-            "blockchain/BSC/bsc-transaction-balance-api",
+            {
+              type: "category",
+              label: "Transaction Balance Tracker",
+              link: {
+                type: "doc",
+                id: "blockchain/BSC/transaction-balance-tracker/index",
+              },
+              items: [
+                "blockchain/BSC/transaction-balance-tracker/bsc-transaction-balance-tracker",
+                "blockchain/BSC/transaction-balance-tracker/bsc-self-destruct-balance-api",
+                "blockchain/BSC/transaction-balance-tracker/bsc-validator-balance-tracker",
+                "blockchain/BSC/transaction-balance-tracker/bsc-miner-balance-tracker",
+                "blockchain/BSC/transaction-balance-tracker/bsc-mev-balance-tracker",
+                "blockchain/BSC/transaction-balance-tracker/bsc-gas-balance-tracker",
+                "blockchain/BSC/transaction-balance-tracker/bsc-transfer-balance-tracker",
+              ],
+            },
             "blockchain/BSC/bsc-calls-api",
             "blockchain/BSC/bsc-dextrades",
             "blockchain/BSC/bsc-uniswap-api",

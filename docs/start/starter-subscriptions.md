@@ -9,6 +9,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [PumpFun Streams](#pumpfun-streams)
 - [Pumpswap Streams](#pumpswap-streams)
 - [Raydium Streams](#raydium-streams)
+- [Transaction Balance Streams](#transaction-balance-streams)
 - [EVM Streams](#evm)
 - [Ethereum Transaction Balance Tracker Streams](#ethereum-transaction-balance-tracker-streams)
 - [Uniswap V3 Streams](#uniswap-v3-streams)
@@ -114,6 +115,38 @@ This stream gives info about the real time liquidity pool creation on Raydium ex
 This stream gives info about the real time trades on Raydium exchange. You can modify this query to monitor trades on Raydium for a particular token or by a particular trader.
 
 ▶️[Raydium Trades](https://ide.bitquery.io/Updated-Real-time-trades-on-Raydium-DEX-on-Solana_1)
+
+## Transaction Balance Streams
+
+### Real time Transaction Balance Update for a wallet on Ethereum
+
+This stream provides real time transaction balance updates for a wallet on Ethereum.
+
+▶️[Real Time Transaction Balance Update](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address-bsc)
+
+### Real time Validator Rewards
+
+This stream provides the info on rewards recieved by validators in real time.
+
+▶️[Real Time Validator Rewards](https://ide.bitquery.io/Track-Validator-Rewards)
+
+### Track MEV Balance in real time
+
+This stream monitors MEV activities and Balance Updates in real time.
+
+▶️[Real Time MEV Activities](https://ide.bitquery.io/Track-MEV-Related-Balance-Updates)
+
+### Real time Validator Rewards for BSC
+
+This stream provides the info on rewards recieved by validators on BSC in real time.
+
+▶️[Real Time Validator Rewards on BSC](https://ide.bitquery.io/Track-Validator-Balance-Updates-bsc_1)
+
+### Track MEV Balance in real time for BSC
+
+This stream monitors MEV activities and Balance Updates on BSC in real time.
+
+▶️[Real Time MEV Activities on BSC](https://ide.bitquery.io/Track-MEV-Related-Balance-Updates-bsc)
 
 ## EVM
 

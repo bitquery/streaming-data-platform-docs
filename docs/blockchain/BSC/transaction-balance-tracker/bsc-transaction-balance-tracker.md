@@ -2,14 +2,14 @@
 sidebar_position: 1
 ---
 
-# Ethereum Transaction Balance Tracker
+# BSC Transaction Balance Tracker
 
-The Ethereum Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the Ethereum blockchain, including detailed information about the reason for each balance change.
+The BSC Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the BSC blockchain, including detailed information about the reason for each balance change.
 
 <head>
-<meta name="title" content="Ethereum Transaction Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to get real-time balance updates for all addresses in Ethereum transactions with balance change reasons using Bitquery's Transaction Balance API."/>
-<meta name="keywords" content="ethereum transaction balance api, eth balance streams, ethereum balance api, balance change reason, transaction balance python api, ethereum transaction balance, balance updates api, ethereum network api, ethereum web3 api"/>
+<meta name="title" content="BSC Transaction Balance Tracker API & Streams"/>
+<meta name="description" content="Learn how to get real-time balance updates for all addresses in BSC transactions with balance change reasons using Bitquery's Transaction Balance API."/>
+<meta name="keywords" content="bsc transaction balance api, bsc balance streams, bsc balance api, balance change reason, transaction balance python api, bsc transaction balance, balance updates api, bsc network api, bsc web3 api"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
@@ -18,27 +18,27 @@ The Ethereum Transaction Balance Tracker API provides real-time balance updates 
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Ethereum Transaction Balance Tracker API & Streams"
+  content="BSC Transaction Balance Tracker API & Streams"
 />
 <meta
   property="og:description"
-  content="Learn how to get real-time balance updates for all addresses in Ethereum transactions with balance change reasons using Bitquery's Transaction Balance API."
+  content="Learn how to get real-time balance updates for all addresses in BSC transactions with balance change reasons using Bitquery's Transaction Balance API."
 />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum Transaction Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to get real-time balance updates for all addresses in Ethereum transactions with balance change reasons using Bitquery's Transaction Balance API." />
+<meta property="twitter:title" content="BSC Transaction Balance Tracker API & Streams" />
+<meta property="twitter:description" content="Learn how to get real-time balance updates for all addresses in BSC transactions with balance change reasons using Bitquery's Transaction Balance API." />
 </head>
 
 ## Subscribe to All Transaction Balances
 
-This subscription provides real-time balance updates for all addresses involved in transactions on the Ethereum network.
-Try the API [here](https://ide.bitquery.io/Subscribe-to-All-Transaction-Balances).
+This subscription provides real-time balance updates for all addresses involved in transactions on the BSC network.
+Try the API [here](https://ide.bitquery.io/Subscribe-to-All-Transaction-Balances-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances {
       Block {
         Time
@@ -71,11 +71,11 @@ subscription {
 
 ## Subscribe to Transaction Balances for a Specific Address
 
-This subscription filters transaction balances for a specific address. Try the API [here](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address).
+This subscription filters transaction balances for a specific address. Try the API [here](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address-bsc).
 
 ```graphql
 subscription {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: { TokenBalance: { Address: { is: "0xYourAddressHere" } } }
     ) {
@@ -110,17 +110,17 @@ subscription {
 
 ## Latest native balance of an address
 
-This API gives you latest balance of a specific address (here in example `0xd194daef0cd90675a3b823fcda248f76fccb49f3`) for the native currency. Try it out [here](https://ide.bitquery.io/Latest-native-balance-of-an-address).
+This API gives you latest balance of a specific address (here in example `0x238a358808379702088667322f80ac48bad5e6c4`) for the native currency. Try it out [here](https://ide.bitquery.io/Latest-native-balance-of-an-address-bsc).
 
 ```graphql
 {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       limit: { count: 1 }
       orderBy: { descending: Block_Time }
       where: {
         TokenBalance: {
-          Address: { is: "0xd194daef0cd90675a3b823fcda248f76fccb49f3" }
+          Address: { is: "0x238a358808379702088667322f80ac48bad5e6c4" }
           Currency: { Native: true }
         }
       }
@@ -156,17 +156,17 @@ This API gives you latest balance of a specific address (here in example `0xd194
 
 ## Latest balance of an address for a specific token
 
-This API gives you latest balance of a specific address (here in example `0xd194daef0cd90675a3b823fcda248f76fccb49f3`) for a specific token (here we have taken example of USDC `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`). Try it out [here](https://ide.bitquery.io/Latest-balance-of-an-address-for-a-specific-token).
+This API gives you latest balance of a specific address (here in example `0x238a358808379702088667322f80ac48bad5e6c4`) for a specific token (here we have taken example of USDC `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`). Try it out [here](https://ide.bitquery.io/Latest-balance-of-an-address-for-a-specific-token-bsc).
 
 ```graphql
 {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       limit: { count: 1 }
       orderBy: { descending: Block_Time }
       where: {
         TokenBalance: {
-          Address: { is: "0xd194daef0cd90675a3b823fcda248f76fccb49f3" }
+          Address: { is: "0x238a358808379702088667322f80ac48bad5e6c4" }
           Currency: {
             SmartContract: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" }
           }
@@ -204,18 +204,18 @@ This API gives you latest balance of a specific address (here in example `0xd194
 
 ## Latest liquidity of EVM Pool
 
-This API gives you latest liquidity of EVM Pool (here in example `0x5d4F3C6fA16908609BAC31Ff148Bd002AA6b8c83` LINK/USDC Uniswap v3 pool). Try it out [here](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool).
+This API gives you latest liquidity of a BSC Pool. Try it out [here](https://ide.bitquery.io/latest-liquidity-of-a-BSC-pool).
 
 ```graphql
 {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       limit: { count: 2 }
       limitBy: { by: TokenBalance_Currency_SmartContract, count: 1 }
       orderBy: { descendingByField: "TokenBalance_PostBalanceInUSD" }
       where: {
         TokenBalance: {
-          Address: { is: "0x5d4F3C6fA16908609BAC31Ff148Bd002AA6b8c83" }
+          Address: { is: "YourPoolAddress" }
         }
       }
     ) {
@@ -236,18 +236,18 @@ This API gives you latest liquidity of EVM Pool (here in example `0x5d4F3C6fA169
 
 ## Latest Supply and Marketcap of a specific token on EVM
 
-This API gives you latest Supply and Marketcap of a token on EVM (here as example we have taken BITGET Token `0x54D2252757e1672EEaD234D27B1270728fF90581` ). Try it out [here](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token).
+This API gives you latest Supply and Marketcap of a token on BSC. Try it out [here](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token-bsc).
 
 ```graphql
 {
-  EVM(network: eth) {
+  EVM(network: bsc) {
     TransactionBalances(
       limit: { count: 1 }
       orderBy: { descending: Block_Time }
       where: {
         TokenBalance: {
           Currency: {
-            SmartContract: { is: "0x54D2252757e1672EEaD234D27B1270728fF90581" }
+            SmartContract: { is: "YourTokenAddress" }
           }
         }
       }
