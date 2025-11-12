@@ -9,6 +9,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [PumpFun Streams](#pumpfun-streams)
 - [Pumpswap Streams](#pumpswap-streams)
 - [Raydium Streams](#raydium-streams)
+- [Transaction Balance Streams](#transaction-balance-updates)
 - [EVM Streams](#evm)
 - [Uniswap V3 Streams](#uniswap-v3-streams)
 - [NFT Streams](#nft-streams)
