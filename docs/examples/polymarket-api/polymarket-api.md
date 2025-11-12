@@ -1,9 +1,18 @@
 ---
-title: "Polymarket API Documentation - DeFi Prediction Markets"
-description: "Access Polymarket prediction market data via GraphQL APIs. Track smart contracts, oracle resolution, and trading on Polygon blockchain."
+title: "Polymarket API Documentation - How to Query Polymarket Data with GraphQL"
+description: "Complete guide to Polymarket API: Query prediction market data, track trades, get market prices, and access smart contract events on Polygon. Learn how to use GraphQL APIs for Polymarket markets, conditions, tokens, and oracle resolution."
 keywords: 
   - Polymarket API
+  - Polymarket GraphQL API
+  - how to query Polymarket
+  - Polymarket data API
   - prediction market API
+  - Polymarket smart contract API
+  - query Polymarket markets
+  - Polymarket trading API
+  - Polymarket price API
+  - get Polymarket data
+  - Polymarket blockchain API
   - DeFi betting API
   - blockchain oracle data
   - decentralized trading API
@@ -17,9 +26,18 @@ keywords:
   - position trading API
   - oracle resolution API
   - CTF exchange API
+  - Polymarket condition ID
+  - Polymarket question ID
+  - Polymarket market ID
 ---
 
-# Polymarket API Documentation
+# Polymarket API Documentation - How to Query Polymarket Data
+
+Learn how to query Polymarket data using GraphQL APIs. This comprehensive guide shows you how to access prediction market data, track trades, get market prices, and monitor smart contract events on the Polygon blockchain.
+
+## What is Polymarket API?
+
+The Polymarket API provides programmatic access to prediction market data through GraphQL queries. You can query market information, trading activity, token holders, prices, and oracle resolution data directly from the blockchain.
 
 ## Overview
 
@@ -30,7 +48,7 @@ Polymarket is a decentralized prediction market protocol powered by Conditional 
 - **Resolve markets** via UMA oracles
 - **Redeem winning positions** for collateral
 
-This comprehensive API documentation focuses on smart contract events emitted through the Polymarket protocol. However, through Bitquery's APIs, developers can access much more than just events - including smart contract calls (traces), token transfers, transaction data, balance updates, and complete blockchain analytics for prediction market data, oracle resolution tracking, and decentralized trading insights.
+This comprehensive API documentation focuses on smart contract events emitted through the Polymarket protocol. However, through Bitquery's APIs, developers can access much more than just events - including [smart contract calls (traces)](https://docs.bitquery.io/docs/blockchain/Ethereum/calls/smartcontract), [token transfers](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api), [transaction data](https://docs.bitquery.io/docs/blockchain/Ethereum/transactions/transaction-api), [balance updates](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api), and complete blockchain analytics for prediction market data, oracle resolution tracking, and decentralized trading insights.
 
 ### How Polymarket Protocol Works
 
@@ -48,1125 +66,58 @@ The platform uses three main smart contracts deployed on Polygon network to hand
 |----------|---------|---------|
 | **Main Polymarket Contract** | `0x4d97dcd97ec945f40cf65f87097ace5ea0476045` | Implements the core market logic including condition setup, token minting/splitting, merging, and redemption |
 | **UMA Adapter Contract** | `0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7` | Acts as middleware between Polymarket and UMA's Optimistic Oracle, submits and retrieves outcome data |
-| **CTF Exchange Contract** | `0xC5d563A36AE78145C45a50134d48A1215220f80a` | Handles trading of ERC-1155 conditional tokens with AMM and orderbook logic |
+| **CTF Exchange Contract (Current)** | `0xC5d563A36AE78145C45a50134d48A1215220f80a` | Handles trading of ERC-1155 conditional tokens with AMM and orderbook logic (NegRisk multi-outcome) |
+| **CTF Exchange Contract (Legacy)** | `0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E` | Legacy binary markets exchange contract |
 
----
+## Quick Start - How to Query Polymarket Data
 
-## Main Polymarket Contract APIs
+**New to Polymarket APIs?** Start with the [Complete Guide to Get All Market Data](./get-market-data.md) to learn how to retrieve all information for a specific market.
+
+### Common Polymarket API Queries
+
+- **How to get Polymarket markets**: Query `QuestionInitialized` events from UMA Adapter contract
+- **How to get Polymarket prices**: Query `OrderFilled` events from CTF Exchange contract
+- **How to get Polymarket trades**: Query `OrderFilled` and `OrderMatched` events
+- **How to get Polymarket condition ID**: Query `ConditionPreparation` events from Main Contract
+- **How to decode Polymarket market data**: Decode `ancillaryData` from `QuestionInitialized` events
+
+## Documentation Structure
+
+This documentation is organized into three main sections, each covering a specific smart contract:
+
+### [Main Polymarket Contract](./main-polymarket-contract.md)
+
+The Conditional Tokens Framework (CTF) core contract - the fundamental ERC-1155 system used for all prediction markets. This contract handles:
+
+- **ConditionPreparation**: Creating new prediction market conditions (questions)
+- **PositionSplit**: Minting outcome tokens by splitting collateral
+- **PositionsMerge**: Burning tokens to reconstitute collateral
+- **ConditionResolution**: Oracle publishing final outcomes
+- **PayoutRedemption**: Users claiming collateral after resolution
 
 **Address**: `0x4d97dcd97ec945f40cf65f87097ace5ea0476045`
 
-The main contract implements the core market logic including condition setup, token minting/splitting, merging, and redemption. These [GraphQL APIs](https://docs.bitquery.io/docs/graphql/query/) provide real-time blockchain data for smart contract events, trading activities, and market analytics.
+Think of it as the "token factory" that issues and redeems conditional ERC-1155 tokens.
 
-### Key Events Overview
+### [Polymarket CTF Exchange](./polymarket-ctf-exchange.md)
 
-| Event Name | Description | Triggered When |
-|------------|-------------|----------------|
-| **ConditionPreparation** | A new market (condition) is initialized | `prepareCondition()` is called |
-| **ConditionResolution** | Oracle publishes final outcomes for a question | `reportPayouts()` is called |
-| **PositionSplit** | Collateral is divided into outcome tokens | `splitPosition()` is called |
-| **PositionsMerge** | Opposite outcomes are recombined back into collateral | `mergePositions()` is called |
-| **PayoutRedemption** | Winning token holders redeem collateral | `redeemPositions()` is called |
-| **TransferSingle / TransferBatch** | ERC-1155 transfers of outcome tokens | During user trading or AMM swaps |
-| **ApprovalForAll** | Operator approval granted or revoked | When user allows another address to manage positions |
-| **URI** | Token metadata updated | URI of a position token changes |
+Polymarket's trading venue where users buy and sell ERC-1155 outcome tokens created by the CTF contract. This exchange handles:
 
-### 1. All Available Events
-**Endpoint**: [PolyMarket - All Available Events](https://ide.bitquery.io/PolyMarket---All-Available-Events)
+- **TokenRegistered**: New asset IDs created when positions are split (similar to new pools on AMM)
+- **OrderMatched**: Successful order matching and trade executions
+- **OrderFilled**: Individual order fills and partial executions
 
-Get all events emitted by the main Polymarket contract to track all platform activities.
+**Addresses**:
+- Current (NegRisk multi-outcome): `0xC5d563A36AE78145C45a50134d48A1215220f80a`
+- Legacy (binary markets): `0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E`
 
-```graphql
-{
-  EVM(network: matic) {
-    Events(
-      where: {LogHeader: {Address: {is: "0x4d97dcd97ec945f40cf65f87097ace5ea0476045"}}}
-    ) {
-      count
-      Log {
-        Signature {
-          Name
-        }
-      }
-    }
-  }
-}
-```
+Think of it as the "exchange layer" that gives the conditional tokens a live market.
 
-**Use Case**: Monitor all platform activities, track user interactions, and analyze market dynamics.
+### [UMA Adapter Contract](./uma-adapter-contract.md)
 
-**Key Events Tracked**:
-- `ConditionPreparation`: When new prediction conditions are created
-- `ConditionResolution`: When oracles resolve prediction outcomes
-- `PositionSplit`: When users split positions into outcome-specific tokens
-- `PositionsMerge`: When users merge outcome tokens back to collateral
-- `PayoutRedemption`: When users claim winnings after resolution
-
-#### Example: Condition Creation
-
-```javascript
-emit ConditionPreparation(
-    conditionId,
-    oracle,
-    questionId,
-    outcomeSlotCount
-);
-```
-
-**Emitted When:**
-- A new question is defined and linked to an oracle
-- This marks the birth of a prediction market
-
-#### Example: Outcome Resolution
-
-```javascript
-emit ConditionResolution(
-    conditionId,
-    oracle,
-    questionId,
-    outcomeSlotCount,
-    payoutNumerators
-);
-```
-
-**Emitted When:**
-- The oracle reports the result, setting final payout ratios
-- This locks the market and determines which outcomes win
-
-### 2. Newly Created Questions/Market ID
-**Endpoint**: [PolyMarket Newly Created Questions / Market ID](https://ide.bitquery.io/Polymarket-Newly-Created-MarketQuestions)
-
-Track new prediction markets as they are created on the platform.
-
-```graphql
-{
-  EVM(dataset: realtime, network: matic) {
-    Events(
-      orderBy: {descending: Block_Time}
-      where: {
-        Log:{
-          Signature:{
-            Name:{
-              in:["ConditionPreparation","QuestionPrepared"]
-            }
-          }
-        }
-        LogHeader: {Address: {is: "0x4d97dcd97ec945f40cf65f87097ace5ea0476045"}}}
-      limit: {count: 20}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-**Use Case**: 
-- Monitor new market opportunities
-- Build market discovery features
-- Track platform growth and activity
-
-**Data Includes**:
-- Question text and parameters
-- Market IDs for cross-referencing
-- Creation timestamps
-- Oracle assignments
-
-### 3. Latest Resolved Questions
-**Endpoint**: [PolyMarket Latest Resolved Questions](https://ide.bitquery.io/PolyMarket---Latest-Resolved-Questions)
-
-Monitor recently resolved prediction markets and their outcomes.
-
-```graphql
-{
-  EVM(dataset: realtime, network: matic) {
-    Events(
-      orderBy: {descending: Block_Time}
-      where: {
-        Log:{
-          Signature:{
-            Name:{
-              in:["ConditionResolution"]
-            }
-          }
-        }
-        LogHeader: {Address: {is: "0x4d97dcd97ec945f40cf65f87097ace5ea0476045"}}}
-      limit: {count: 20}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-**Use Case**:
-- Track market resolution patterns
-- Analyze oracle accuracy
-- Calculate historical performance metrics
-- Trigger payout processes
-
-**Resolution Data**:
-- Final outcomes and payout numerators
-- Resolution timestamps
-- Oracle addresses
-- Market performance metrics
-
-### 4. Latest Position Splits
-**Endpoint**: [Latest position Split](https://ide.bitquery.io/PolyMarket---Latest-Position-Split)
-
-Track when users split their collateral into outcome-specific position tokens.
-
-```graphql
-{
-  EVM(dataset: realtime, network: matic) {
-    Events(
-      orderBy: {descending: Block_Time}
-      where: {
-        Log:{
-          Signature:{
-            Name:{
-              in:["PositionSplit"]
-            }
-          }
-        }
-        LogHeader: {Address: {is: "0x4d97dcd97ec945f40cf65f87097ace5ea0476045"}}}
-      limit: {count: 20}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-**Use Case**:
-- Monitor trading activity and market participation
-- Analyze user betting patterns
-- Track liquidity flows
-
-**Split Event Details**:
-- User addresses (stakeholders)
-- Collateral tokens and amounts
-- Partition arrays showing outcome distribution
-- Parent collection IDs
-
-### 5. Condition Resolution Events
-**Endpoint**: [PolyMarket - Condition Resolution Event](https://ide.bitquery.io/PolyMarket---Condition-Resolution-Event)
-
-Specifically track condition resolution events when oracles determine outcomes.
-
-```graphql
-{
-  EVM(dataset: realtime, network: matic) {
-    Events(
-      orderBy: {descending: Block_Time}
-      where: {
-        Log:{
-          Signature:{
-            Name:{
-              in:["ConditionResolution"]
-            }
-          }
-        }
-        LogHeader: {Address: {is: "0x4d97dcd97ec945f40cf65f87097ace5ea0476045"}}}
-      limit: {count: 20}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-```
-**Use Case**:
-- Automate payout calculations
-- Track oracle performance
-- Monitor resolution timing
-
-**Resolution Details**:
-- Condition IDs and outcomes
-- Payout numerator arrays
-- Oracle addresses and timestamps
-
-### 6. Payout Received by Specific Polymarket Trader
-**Endpoint**: [Payout received by polymarket trader](https://ide.bitquery.io/Payout-received-by-polymarket-trader)
-
-Track all payouts received by a specific trader when they redeem winning positions.
-
-```graphql
-{
-  EVM(dataset: realtime, network: matic) {
-    Events(
-      orderBy: {descending: Block_Time}
-      where: {Log: {Signature: {Name: {in: ["PayoutRedemption"]}}},
-        Arguments:{
-          includes:{
-            Name:{is:"redeemer"}
-            Value:{Address:{is:"0x1ff49fdcb6685c94059b65620f43a683be0ce7a5"}}
-          }
-        }
-        LogHeader:
-        {Address: {is: "0x4d97dcd97ec945f40cf65f87097ace5ea0476045"}}}
-      limit: {count: 20}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-**Use Case**:
-- Track specific trader performance and winnings
-- Monitor high-volume trader activity  
-- Calculate individual trader profit/loss over time
-- Build trader portfolio analytics
-
-**Payout Data Includes**:
-- Redeemer address and transaction details
-- Payout amounts and token types
-- Market condition IDs and outcomes
-- Redemption timestamps and block information
-- Complete argument data for detailed analysis
-
-**How to Use**:
-Replace `0x1ff49fdcb6685c94059b65620f43a683be0ce7a5` with any trader address you want to monitor. This query filters `PayoutRedemption` events specifically for the specified `redeemer` address, allowing you to track all winning positions and payouts for that trader.
-
----
-
-## UMA Adapter APIs
+Middleware between Polymarket and UMA's Optimistic Oracle. It submits and retrieves outcome data for market questions, managing the integration with UMA's Optimistic Oracle system for decentralized question resolution and dispute handling.
 
 **Address**: `0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7`
-
-The UMA Adapter acts as a middleware between Polymarket and UMA's Optimistic Oracle. It submits and retrieves outcome data for market questions, managing the integration with UMA's Optimistic Oracle system for decentralized question resolution and dispute handling.
-
-### Typical Events
-
-| Event Name | Description | Triggered When |
-|------------|-------------|----------------|
-| **RequestPrice** | A new question is submitted to UMA for resolution | Market condition is prepared |
-| **ProposePrice** | UMA proposer suggests an outcome | Oracle phase begins |
-| **DisputePrice** | UMA disputer challenges the proposed outcome | Dispute window active |
-| **ResolvedPrice** | UMA confirms final result | Oracle resolution completed |
-
-### Oracle Lifecycle:
-
-1. **Market Creation** → Question submitted via `RequestPrice`
-2. **UMA Oracle Phase** → Proposes and disputes results  
-3. **Resolution** → Emits `ResolvedPrice`, which triggers `reportPayouts()` in the main contract
-
-### 1. All UMA Adapter Events
-**Endpoint**: [UMACFA Adapter All events](https://ide.bitquery.io/PolyMarket---UMA-Adapter-All-events)
-
-Comprehensive tracking of all UMA Adapter contract events.
-
-```graphql
-{
-  EVM(network: matic) {
-    Events(
-      where: {LogHeader: {Address: {is: "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7"}}}
-    ) {
-      count
-      Log {
-        Signature {
-          Name
-        }
-      }
-    }
-  }
-}
-```
-**Use Case**: 
-- Monitor oracle integration health
-- Track question lifecycle from initialization to resolution
-- Debug oracle-related issues
-
-### 2. Question Resolved
-**Endpoint**: [UMA Adapter Question Resolved](https://ide.bitquery.io/PolyMarket---UMA-Adapter-Question-Resolved)
-
-Track when UMA oracle resolves questions with final outcomes.
-
-```graphql
-{
-  EVM(dataset: realtime, network: matic) {
-    Events(
-      orderBy: {descending: Block_Time}
-      where: {
-        Log:{
-          Signature:{
-            Name:{
-              in:["QuestionResolved"]
-            }
-          }
-        }
-        LogHeader: {Address: {is: "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7"}}}
-      limit: {count: 20}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-```
-**Use Case**:
-- Trigger automated payouts
-- Update market status in applications
-- Analyze resolution patterns and timing
-
-**Resolution Data**:
-- Question IDs and final answers
-- Resolution timestamps
-- Oracle dispute information (if any)
-
-### 3. New Questions Initialized
-**Endpoint**: [PolyMarket - UMA Adapter - New Questions](https://ide.bitquery.io/PolyMarket---UMA-Adapter-Question-Initialized)
-
-Monitor when new questions are initialized in the UMA oracle system.
-
-```graphql
-{
-  EVM(dataset: realtime, network: matic) {
-    Events(
-      orderBy: {descending: Block_Time}
-      where: {
-        Log:{
-          Signature:{
-            Name:{
-              in:["QuestionInitialized"]
-            }
-          }
-        }
-        LogHeader: {Address: {is: "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7"}}}
-      limit: {count: 20}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-**Use Case**:
-- Track question creation pipeline
-- Monitor oracle assignment process
-- Analyze question complexity and types
-
-**Initialization Data**:
-- Question identifiers
-- Oracle parameters
-- Reward and bond amounts
-- Expiry times
-
----
-
-## CTF Exchange APIs
-
-**Address**: `0xC5d563A36AE78145C45a50134d48A1215220f80a`
-
-The Conditional Token Framework (CTF) Exchange handles trading of ERC-1155 conditional tokens (YES/NO outcomes). It implements AMM and orderbook-like logic for liquidity provision and swaps. These APIs provide access to [DEX trading data](https://docs.bitquery.io/docs/evm/dextrades/) including order fills, token registrations, and market making activities for prediction market tokens.
-
-### Key Trading Events
-
-| Event Name | Description | Triggered When |
-|------------|-------------|----------------|
-| **OrderCreated** | New buy/sell order placed | User submits order to trade outcome tokens |
-| **OrderFilled** | Trade executed between counterparties | Matching occurs on-chain or through relayers |
-| **OrderCancelled** | Open order withdrawn by user | User cancels order before fill |
-| **LiquidityAdded** | LP adds collateral & outcome tokens | User joins liquidity pool |
-| **LiquidityRemoved** | LP withdraws funds from pool | User exits market liquidity |
-
-#### Example: Trade Execution
-
-```javascript
-emit OrderFilled(
-    trader,
-    outcomeToken,
-    collateralToken,
-    price,
-    amount
-);
-```
-
-**Emitted When:**
-- Outcome token trade occurs
-- Used for analytics, AMM state tracking, and off-chain price feeds
-
-### 1. Token Registered Events
-**Endpoint**: [PolyMarket CTF Exchange Contract - TokenRegistered Event](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----TokenRegistered-Event)
-
-Track when new outcome tokens are registered for trading.
-
-```graphql
-{
-  EVM(dataset: realtime, network: matic) {
-    Events(
-      orderBy: {descending: Block_Time}
-      where: {Log: {Signature: {Name: {in: ["TokenRegistered"]}}}, LogHeader: {Address: {is: "0xC5d563A36AE78145C45a50134d48A1215220f80a"}}}
-      limit: {count: 20}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-**Use Case**:
-- Monitor new trading pairs
-- Build token registries
-- Track market expansion
-
-**Registration Data**:
-- Token addresses and metadata
-- Market associations
-- Trading parameters
-
-### 2. Orders Matched Events
-**Endpoint**: [PolyMarket CTF Exchange Contract - OrdersMatched Event](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderMatched-Event_2)
-
-Monitor successful order matching and trade executions.
-
-```graphql
-{
-  EVM(dataset: realtime, network: matic) {
-    Events(
-      orderBy: {descending: Block_Time}
-      where: {Log: {Signature: {Name: {in: ["OrdersMatched"]}}}, LogHeader: {Address: {is: "0xC5d563A36AE78145C45a50134d48A1215220f80a"}}}
-      limit: {count: 20}
-    ) {
-  
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-**Use Case**:
-- Track trading volume and activity
-- Analyze price discovery
-- Calculate market metrics
-
-**Match Data**:
-- Order details and participants
-- Trade amounts and prices
-- Market identifiers
-- Execution timestamps
-
-### 3. Order Filled Events
-**Endpoint**: [PolyMarket CTF Exchange Contract - OrderFilled Event](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderFilled-Event)
-
-Track individual order fills and partial executions.
-
-```graphql
-{
-  EVM(dataset: realtime, network: matic) {
-    Events(
-      orderBy: {descending: Block_Time}
-      where: {Log: {Signature: {Name: {in: ["OrderFilled"]}}}, LogHeader: {Address: {is: "0xC5d563A36AE78145C45a50134d48A1215220f80a"}}}
-      limit: {count: 20}
-    ) {
-      Block {
-        Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
-      }
-      Transaction {
-        Hash
-        From
-        To
-      }
-      Log {
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
-      }
-      Arguments {
-        Name
-        Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-**Use Case**:
-- Detailed trade analysis
-- Order book reconstruction
-- User trading pattern analysis
-
-**Fill Data**:
-- Order IDs and fill amounts
-- Price execution details
-- Maker/taker information
-- Fee calculations
-
----
 
 ## Market Lifecycle Summary
 
@@ -1175,12 +126,11 @@ The complete Polymarket prediction market lifecycle involves coordinated interac
 | Stage | Contract | Action | Event(s) |
 |-------|----------|--------|----------|
 | **Market Creation** | Main Polymarket | `prepareCondition()` | `ConditionPreparation` |
-| **Oracle Request** | UMA Adapter | Oracle submission | `RequestPrice` |
+| **Oracle Request** | UMA Adapter | Oracle submission | `QuestionInitialized` |
 | **Token Minting** | Main Polymarket | `splitPosition()` | `PositionSplit` |
-| **Trading** | CTF Exchange | Orders & swaps | `OrderCreated`, `OrderFilled` |
-| **Market Resolution** | UMA Adapter → Main | `reportPayouts()` | `ResolvedPrice`, `ConditionResolution` |
+| **Trading** | CTF Exchange | Orders & swaps | `TokenRegistered`, `OrderMatched`, `OrderFilled` |
+| **Market Resolution** | UMA Adapter → Main | `reportPayouts()` | `QuestionResolved`, `ConditionResolution` |
 | **Redemption** | Main Polymarket | `redeemPositions()` | `PayoutRedemption` |
-| **Liquidity Management** | CTF Exchange | LP add/remove | `LiquidityAdded`, `LiquidityRemoved` |
 
 ### Event Flow Visualization
 
@@ -1190,7 +140,7 @@ prepareCondition()
 splitPosition() 
     ↓ PositionSplit  
 Trading on CTF Exchange
-    ↓ OrderCreated / OrderFilled
+    ↓ TokenRegistered / OrderMatched / OrderFilled
 reportPayouts()
     ↓ ConditionResolution
 redeemPositions()
@@ -1198,41 +148,22 @@ redeemPositions()
 Collateral Released
 ```
 
-## Developer Notes
-
-### Important Implementation Details
-
-- **Event Indexing**: Most events include indexed parameters (e.g. `conditionId`, `oracle`, `trader`) for efficient log filtering
-- **Collateral Tokens**: Typically USDC on Polygon mainnet for consistent value reference
-- **UMA Oracle Finality**: Resolution finality depends on dispute windows and proposer bonds
-- **Gas Considerations**: `redeemPositions()` may be gas-intensive when redeeming multiple index sets
-- **ERC-1155 Compliance**: All outcome tokens follow ERC-1155 standard for batch operations
-- **Oracle Integration**: UMA's Optimistic Oracle provides decentralized, dispute-based resolution
-
-### Best Practices
-
-- Always monitor both `ConditionPreparation` and `RequestPrice` events for complete market creation tracking
-- Use `TransferSingle`/`TransferBatch` events to track position token movements
-- Monitor `ResolvedPrice` events from UMA Adapter to trigger market resolution processes
-- Track `OrderFilled` events for real-time trading analytics and price discovery
-- Implement proper error handling for oracle disputes and resolution delays
-
----
-
 ## Developer Integration Guide
 
 ### Getting Started with Polymarket APIs
 
-1. **Choose Your Data Source**: Use the appropriate smart contract address based on what blockchain data you need:
-   - Market events and condition management: Main Polymarket contract
-   - Oracle resolution and dispute handling: UMA Adapter contract
-   - Trading activity and order matching: CTF Exchange contract
+Learn how to query Polymarket data step by step:
 
-2. **Set Up Bitquery Access**: All prediction market APIs are accessible through Bitquery's GraphQL IDE for real-time blockchain analytics
+1. **Choose Your Data Source**: Use the appropriate smart contract address based on what blockchain data you need:
+   - **How to get Polymarket markets and conditions**: Query [Main Polymarket contract](./main-polymarket-contract.md) for `ConditionPreparation` events
+   - **How to get Polymarket market metadata**: Query [UMA Adapter contract](./uma-adapter-contract.md) for `QuestionInitialized` events and decode `ancillaryData`
+   - **How to get Polymarket prices and trades**: Query [CTF Exchange contract](./polymarket-ctf-exchange.md) for `OrderFilled` and `TokenRegistered` events
+
+2. **Set Up Bitquery Access**: All Polymarket APIs are accessible through Bitquery's GraphQL IDE for real-time blockchain analytics
    - Sign up for a [Bitquery account](https://ide.bitquery.io/) 
    - Use the provided query links as starting points for your DeFi applications
    - Customize GraphQL queries for your specific prediction market use case
-
+   - Get your OAuth token from [Bitquery account settings](https://account.bitquery.io/user/api_v2/access_tokens)
 
 ### Common Use Cases for Polymarket Data
 
@@ -1251,7 +182,98 @@ Collateral Released
 - Monitor oracle resolution times, dispute rates, and consensus mechanisms
 - Alert on oracle failures, delays, or potential market manipulation for risk assessment
 
-### Additional Resources
+## Example Implementation: Polymarket Dashboard
+
+A complete Next.js application demonstrating how to build a Polymarket dashboard using Bitquery APIs.
+
+### GitHub Repository
+
+**[Polymarket Dashboard](https://github.com/buddies2705/polymarket-dashboard)** - Open source implementation showcasing real-time Polymarket data visualization.
+
+### Features
+
+- **Market Discovery**: Browse all Polymarket markets with trading activity
+- **Real-time Prices**: View current YES/NO prices for each market
+- **Trade History**: Detailed trade history with maker/taker information and prices
+- **Token Holders**: Track token holders and balances for each market
+- **Market Details**: Complete market information including:
+  - Market title and description (decoded from ancillaryData)
+  - Condition ID, Question ID, and Oracle addresses
+  - Current prices in USDC and cents
+  - Trade counts and activity metrics
+
+### Screenshots
+
+![Polymarket Markets List](https://github.com/buddies2705/polymarket-dashboard/raw/main/docs/screenshots/markets-list.png)
+
+*Markets list showing all available prediction markets with trade counts and current prices*
+
+![Market Details](https://github.com/buddies2705/polymarket-dashboard/raw/main/docs/screenshots/market-details.png)
+
+*Detailed market view with description, outcomes, technical details, and current prices*
+
+![Trades and Token Holders](https://github.com/buddies2705/polymarket-dashboard/raw/main/docs/screenshots/trades-holders.png)
+
+*Trade history and token holders for a specific market*
+
+### Technical Stack
+
+- **Framework**: Next.js with TypeScript
+- **Database**: SQLite for local data storage
+- **APIs**: Bitquery GraphQL APIs for blockchain data
+- **Data Sources**:
+  - `QuestionInitialized` events for market metadata
+  - `ConditionPreparation` events for condition information
+  - `TokenRegistered` events for trading pairs
+  - `OrderFilled` events for trade data
+
+### Getting Started
+
+The dashboard demonstrates practical implementation of:
+- Querying Bitquery APIs for Polymarket data
+- Decoding ancillaryData to extract market information
+- Calculating prices from OrderFilled events
+- Building a complete market explorer interface
+
+Visit the [GitHub repository](https://github.com/buddies2705/polymarket-dashboard) for:
+- Complete source code
+- Setup instructions
+- API integration examples
+- Database schema and data flow documentation
+
+### Best Practices
+
+- Always monitor both `ConditionPreparation` and `QuestionInitialized` events for complete market creation tracking
+- Monitor `QuestionResolved` events from UMA Adapter to trigger market resolution processes
+- Track `OrderFilled` events for real-time trading analytics and price discovery
+
+## Frequently Asked Questions (FAQ)
+
+### How do I query Polymarket data?
+
+Use GraphQL queries to access Polymarket smart contract events. Start with the [Complete Guide to Get All Market Data](./get-market-data.md) for step-by-step instructions.
+
+### How to get Polymarket prices?
+
+Query `OrderFilled` events from the CTF Exchange contract and calculate prices using the formula: Price (YES) = USDC paid / YES tokens received. See the [CTF Exchange documentation](./polymarket-ctf-exchange.md#price-calculation) for details.
+
+### How to get Polymarket market metadata?
+
+Query `QuestionInitialized` events from the UMA Adapter contract to get `ancillaryData`, then decode it to extract market title, description, and other metadata. See [decoding instructions](./polymarket-ctf-exchange.md#step-4-decode-ancillary-data).
+
+### How to find Polymarket condition ID?
+
+Query `ConditionPreparation` events from the Main Polymarket Contract using either a `questionId` or by filtering recent events. The `conditionId` is in the event arguments.
+
+### How to get Polymarket trades?
+
+Query `OrderFilled` events from the CTF Exchange contract using token addresses (asset IDs) obtained from `TokenRegistered` events. See the [CTF Exchange documentation](./polymarket-ctf-exchange.md#3-order-filled-events).
+
+### What is Polymarket API?
+
+Polymarket API refers to GraphQL queries that access Polymarket smart contract events on the Polygon blockchain. These APIs allow you to query market data, trades, prices, and oracle resolution information.
+
+## Additional Resources
 
 - [Polymarket Official Documentation](https://docs.polymarket.com/)
 - [UMA Oracle Documentation](https://docs.umaproject.org/)
@@ -1262,6 +284,19 @@ Collateral Released
 
 For technical support and questions:
 - Join the [Bitquery Telegram](https://t.me/bloxy_info)
+
+## Summary: Common Polymarket API Queries
+
+This documentation helps you answer common questions about querying Polymarket data:
+
+- **How to query Polymarket**: Use GraphQL queries to access smart contract events on Polygon
+- **How to get Polymarket prices**: Query `OrderFilled` events and calculate using USDC paid / tokens received
+- **How to get Polymarket trades**: Query `OrderFilled` and `OrderMatched` events from CTF Exchange
+- **How to get Polymarket markets**: Query `QuestionInitialized` events from UMA Adapter
+- **How to get Polymarket condition ID**: Query `ConditionPreparation` events from Main Contract
+- **How to decode Polymarket data**: Decode `ancillaryData` hex to UTF-8 to get market metadata
+- **Polymarket API GraphQL**: All queries use Bitquery's GraphQL API on Polygon network
+- **Polymarket smart contract addresses**: Main Contract (0x4d97dcd97ec945f40cf65f87097ace5ea0476045), CTF Exchange (0xC5d563A36AE78145C45a50134d48A1215220f80a), UMA Adapter (0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7)
 
 ---
 

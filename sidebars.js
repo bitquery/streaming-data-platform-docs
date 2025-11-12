@@ -670,7 +670,13 @@ const sidebars = {
             description:
               "APIs for accessing prediction market data and trading information",
           },
-          items: ["examples/polymarket-api/polymarket-api"],
+          items: [
+            "examples/polymarket-api/polymarket-api",
+            "examples/polymarket-api/get-market-data",
+            "examples/polymarket-api/main-polymarket-contract",
+            "examples/polymarket-api/polymarket-ctf-exchange",
+            "examples/polymarket-api/uma-adapter-contract",
+          ],
         },
         {
           type: "category",

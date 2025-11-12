@@ -1,0 +1,711 @@
+---
+title: "Polymarket CTF Exchange API - How to Get Prices and Trades"
+description: "Learn how to query Polymarket CTF Exchange: Get token registrations, order fills, calculate market prices. Track OrderFilled, OrderMatched, TokenRegistered events to get Polymarket trading data and prices."
+keywords:
+  - Polymarket CTF Exchange
+  - Polymarket prices API
+  - how to get Polymarket prices
+  - Polymarket trades API
+  - TokenRegistered
+  - OrderMatched
+  - OrderFilled
+  - Polymarket trading data
+  - calculate Polymarket prices
+  - Polymarket order filled
+  - prediction market trading
+  - conditional token trading
+  - Polymarket asset ID
+  - Polymarket token0 token1
+---
+
+# Polymarket CTF Exchange API - How to Get Prices and Trades
+
+Learn how to query Polymarket CTF Exchange to get real-time prices, trading data, and token registrations. This guide shows you how to calculate Polymarket market prices from OrderFilled events and track all trading activity.
+
+The Polymarket CTF Exchange is Polymarket's trading venue, where users buy and sell ERC-1155 outcome tokens created by the CTF contract. This exchange handles trading of conditional tokens with AMM and orderbook logic.
+
+## Contract Addresses
+
+| Contract | Address | Status |
+|----------|---------|--------|
+| **CTF Exchange (Current)** | `0xC5d563A36AE78145C45a50134d48A1215220f80a` | NegRisk multi-outcome markets |
+| **CTF Exchange (Legacy)** | `0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E` | Binary markets (legacy) |
+
+## Contract Overview
+
+This is Polymarket's trading venue, where users buy and sell the ERC-1155 outcome tokens created by the CTF contract.
+
+**What it does:**
+- Handles OrderMatched, OrderFilled, TokenRegistered events
+- Settles trades: swaps outcome tokens ↔ USDC.e collateral
+- Integrates with off-chain orderbook APIs (RFQ or AMM)
+- Enforces pricing, slippage, and liquidity provider logic
+
+**Think of it as:** The "exchange layer" that gives the conditional tokens a live market.
+
+## Key Events
+
+The Polymarket CTF Exchange has 3 major events that enable all trading:
+
+### 1. TokenRegistered
+
+The `TokenRegistered` event gets emitted when a new AssetId gets created because a position split occurs. This is very similar to new pools getting created on an AMM.
+
+**TokenRegistered has 3 fields:**
+- Token0
+- Token1
+- Condition ID
+
+**Emitted When:**
+- A new trading pair is registered for a condition
+- Position split creates new outcome tokens that need to be traded
+- Similar to liquidity pool creation on AMMs
+
+### 2. OrderMatched
+
+The `OrderMatched` event is emitted when orders are successfully matched between counterparties.
+
+**Emitted When:**
+- Buy and sell orders are matched
+- Trade execution occurs on-chain or through relayers
+- Used for tracking trading volume and activity
+
+### 3. OrderFilled
+
+The `OrderFilled` event tracks individual order fills and partial executions.
+
+**Emitted When:**
+- An order is filled (fully or partially)
+- Used for detailed trade analysis and price discovery
+- Contains price and amount information for calculating market prices
+
+## How to Calculate Polymarket Prices
+
+### Price Calculation Formula (from OrderFilled Events)
+
+Learn how to calculate Polymarket market prices from `OrderFilled` events. This is the standard method to get real-time YES/NO prices for any Polymarket market.
+
+Once you have the OrderFilled event for a condition, use this formula:
+
+**Price (YES) = USDC paid / YES tokens received**
+
+or equivalently:
+
+**Price (NO) = 1 - Price(YES)**
+
+**Example**: If a trade shows 1000 USDC paid for 2000 YES tokens, the price is 1000/2000 = 0.5 USDC per YES token (50 cents).
+
+## How to Query Polymarket CTF Exchange Events
+
+Learn how to query Polymarket trading data, get token registrations, track orders, and calculate prices. These queries show you how to access all CTF Exchange contract events.
+
+### 1. Token Registered Events
+
+**Endpoint**: [PolyMarket CTF Exchange Contract - TokenRegistered Event](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----TokenRegistered-Event)
+
+Track when new outcome tokens are registered for trading. This event is emitted when new AssetIds are created because position splits occur.
+
+```graphql
+{
+  EVM(dataset: combined, network: matic) {
+    Events(
+      orderBy: {descending: Block_Time}
+      where: {
+        Block: {Time: {since_relative: {days_ago: 6}}},
+        Arguments: {
+          includes: {
+            Name: {is: "conditionId"}, 
+            Value: {Bytes: {is: "CONDITION_ID_HERE"}}
+          }
+        }, 
+        Log: {Signature: {Name: {in: ["TokenRegistered"]}}}, 
+        LogHeader: {Address: {is: "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E"}}
+      }
+      limit: {count: 10}
+    ) {
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+**Use Case**:
+- Monitor new trading pairs
+- Build token registries
+- Track market expansion
+- Discover new markets as they become tradeable
+
+**Registration Data**:
+- Token addresses and metadata (Token0, Token1)
+- Market associations (Condition ID)
+- Trading parameters
+
+**Note**: Replace `CONDITION_ID_HERE` with the actual condition ID you want to query. This condition ID can be found in `ConditionPreparation` events from the Main Polymarket Contract.
+
+### 2. Orders Matched Events
+
+**Endpoint**: [PolyMarket CTF Exchange Contract - OrdersMatched Event](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderMatched-Event_2)
+
+Monitor successful order matching and trade executions.
+
+```graphql
+{
+  EVM(dataset: realtime, network: matic) {
+    Events(
+      orderBy: {descending: Block_Time}
+      where: {
+        Log: {Signature: {Name: {in: ["OrdersMatched"]}}}, 
+        LogHeader: {Address: {is: "0xC5d563A36AE78145C45a50134d48A1215220f80a"}}
+      }
+      limit: {count: 20}
+    ) {
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Topics {
+        Hash
+      }
+      TransactionStatus {
+        Success
+      }
+      LogHeader {
+        Address
+        Index
+        Data
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Log {
+        EnterIndex
+        ExitIndex
+        Index
+        LogAfterCallIndex
+        Pc
+        SmartContract
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+**Use Case**:
+- Track trading volume and activity
+- Analyze price discovery
+- Calculate market metrics
+- Monitor market liquidity
+
+**Match Data**:
+- Order details and participants
+- Trade amounts and prices
+- Market identifiers
+- Execution timestamps
+
+### 3. Order Filled Events
+
+**Endpoint**: [PolyMarket CTF Exchange Contract - OrderFilled Event](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderFilled-Event)
+
+Track individual order fills and partial executions. Use this to calculate current market prices.
+
+```graphql
+{
+  EVM(dataset: realtime, network: matic) {
+    Events(
+      orderBy: {descending: Block_Time}
+      where: {
+        Log: {Signature: {Name: {in: ["OrderFilled"]}}}, 
+        LogHeader: {Address: {is: "0xC5d563A36AE78145C45a50134d48A1215220f80a"}}
+      }
+      limit: {count: 20}
+    ) {
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Topics {
+        Hash
+      }
+      TransactionStatus {
+        Success
+      }
+      LogHeader {
+        Address
+        Index
+        Data
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Log {
+        EnterIndex
+        ExitIndex
+        Index
+        LogAfterCallIndex
+        Pc
+        SmartContract
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+**Use Case**:
+- Detailed trade analysis
+- Order book reconstruction
+- User trading pattern analysis
+- Real-time price calculation
+
+**Fill Data**:
+- Order IDs and fill amounts
+- Price execution details
+- Maker/taker information
+- Fee calculations
+
+### 4. Order Filled by Asset IDs
+
+Query orders using specific asset IDs. Asset IDs can be obtained from `TokenRegistered` events.
+
+```graphql
+{
+  EVM(dataset: realtime, network: matic) {
+    Events(
+      orderBy: {descending: Block_Time}
+      where: {
+        Arguments: {
+          includes: {
+            Value: {
+              BigInteger: {
+                in: [
+                  "39182227286566757926769923857730776203547401708661426564300709353277001600667",
+                  "114636268124494503037490860756604355363103779670431653896732128698851479935310"
+                ]
+              }
+            }
+          }
+        }, 
+        Log: {Signature: {Name: {in: ["OrderFilled"]}}}, 
+        LogHeader: {
+          Address: {
+            in: [
+              "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E",
+              "0xC5d563A36AE78145C45a50134d48A1215220f80a"
+            ]
+          }
+        }
+      }
+      limit: {count: 100}
+    ) {
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+**Use Case**:
+- Track trading activity for specific markets
+- Calculate prices for specific outcome tokens
+- Monitor liquidity for particular asset pairs
+
+**How to Use**:
+Replace the asset IDs in the `BigInteger` array with the actual asset IDs you want to query. These can be obtained from `TokenRegistered` events.
+
+## Workflow: Finding Market Data
+
+This workflow shows how to discover newly registered tokens and retrieve their associated question metadata. The process starts by finding newly registered tokens from `TokenRegistered` events, then uses two additional queries to get the complete question metadata through the condition ID and question ID relationships.
+
+### Step 1: Get Condition ID from TokenRegistered
+
+Query `TokenRegistered` events to find the condition ID for a market:
+
+```graphql
+{
+  EVM(dataset: combined, network: matic) {
+    Events(
+      orderBy: {descending: Block_Time}
+      where: {
+        Block: {Time: {since_relative: {days_ago: 6}}},
+        Log: {Signature: {Name: {in: ["TokenRegistered"]}}}, 
+        LogHeader: {Address: {is: "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E"}}
+      }
+      limit: {count: 10}
+    ) {
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Step 2: Get Question ID from ConditionPreparation
+
+Use the condition ID to query `ConditionPreparation` events from the Main Polymarket Contract to get the question ID. See the [Main Polymarket Contract documentation](./main-polymarket-contract.md) for details.
+
+### Step 3: Get Question Metadata from UMA Adapter
+
+Use the question ID to query `QuestionInitialized` events from the UMA Adapter contract to get the question metadata (ancillaryData). See the [UMA Adapter Contract documentation](./uma-adapter-contract.md) for details.
+
+```graphql
+{
+  EVM(dataset: combined, network: matic) {
+    Events(
+      orderBy: {descending: Block_Time}
+      where: {
+        Block: {
+          Time: {
+            since_relative: {hours_ago: 36}
+          }
+        }, 
+        Arguments: {
+          includes: {
+            Name: {is: "questionID"}, 
+            Value: {Bytes: {is: "QUESTION_ID_HERE"}}
+          }
+        }, 
+        Log: {Signature: {Name: {in: ["QuestionInitialized"]}}}, 
+        LogHeader: {Address: {is: "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7"}}
+      }
+      limit: {count: 1}
+    ) {
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      TransactionStatus {
+        Success
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Step 4: Decode Ancillary Data
+
+The `ancillaryData` field in `QuestionInitialized` events contains hex-encoded market question metadata. Decode it to get human-readable market information.
+
+#### Decoding Process
+
+The `ancillaryData` is stored as a hex string and needs to be decoded to UTF-8 to extract the market question details.
+
+**Python Example:**
+
+```python
+def decode_ancillary_data(hex_string):
+    """
+    Decode ancillaryData hex string to UTF-8 text.
+    
+    Args:
+        hex_string: Hex string from ancillaryData field (without 0x prefix)
+    
+    Returns:
+        Decoded text containing market question metadata
+    """
+    # Remove 0x prefix if present
+    if hex_string.startswith('0x'):
+        hex_string = hex_string[2:]
+    
+    # Decode hex to bytes, then to UTF-8 string
+    decoded_text = bytes.fromhex(hex_string).decode("utf-8")
+    return decoded_text
+
+# Example usage
+ancillary_data_hex = "713a207469746c653a205370726561643a20536f75746865726e204d69737320476f6c64656e204561676c657320282d322e35292c206465736372697074696f6e3a20496e20746865207570636f6d696e67204342422067616d652c207363686564756c656420666f72204e6f76656d626572203320617420363a33303020504d2045543a0a0a54686973206d61726b65742077696c6c207265736f6c766520746f2022536f75746865726e204d69737320476f6c64656e204561676c6573222069662074686520536f75746865726e204d69737320476f6c64656e204561676c65732077696e207468652067616d652062792033206f72206d6f726520706f696e74732e0a0a4f74686572776973652c2074686973206d61726b65742077696c6c207265736f6c766520746f202242756666616c6f2042756c6c73222e200a0a54686520726573756c742077696c6c2062652064657465726d696e6564206261736564206f6e207468652066696e616c2073636f726520696e636c7564696e6720616e79206f76657274696d6520706572696f64732e0a0a4966207468652067616d6520697320706f7374706f6e65642c2074686973206d61726b65742077696c6c2072656d61696e206f70656e20756e74696c207468652067616d6520686173206265656e20636f6d706c657465642e204966207468652067616d652069732063616e63656c656420656e746972656c792c2077697468206e6f206d616b652d75702067616d652c2074686973206d61726b65742077696c6c207265736f6c76652035302d35302e206d61726b65745f69643a20363630323236207265735f646174613a2070313a20302c2070323a20312c2070333a20302e352e20576865726520703120636f72726573706f6e647320746f2042756666616c6f2042756c6c732c20703220746f20536f75746865726e204d69737320476f6c64656e204561676c65732c20703320746f20756e6b6e6f776e2f35302d35302e2055706461746573206d61646520627920746865207175657374696f6e2063726561746f7220766961207468652062756c6c6574696e20626f61726420617420307836353037304245393134373734363044384137416545623934656639326665303536433266324137206173206465736372696265642062792068747470733a2f2f706f6c79676f6e7363616e2e636f6d2f74782f3078613134663031623131356334393133363234666333663530386639363066346465613235323735386537336332386635663037663865313964376263613036362073686f756c6420626520636f6e736964657265642e2c696e697469616c697a65723a39313433306361643264333937353736363439393731376661306436366137386438313465356335"
+
+decoded = decode_ancillary_data(ancillary_data_hex)
+print(decoded)
+```
+
+**JavaScript/TypeScript Example:**
+
+```javascript
+function decodeAncillaryData(hexString) {
+  // Remove 0x prefix if present
+  const hex = hexString.startsWith('0x') ? hexString.slice(2) : hexString;
+  
+  // Convert hex to bytes, then to UTF-8 string
+  const bytes = Buffer.from(hex, 'hex');
+  return bytes.toString('utf-8');
+}
+
+// Example usage
+const ancillaryDataHex = "713a207469746c653a205370726561643a20536f75746865726e204d69737320476f6c64656e204561676c657320282d322e35292c...";
+const decoded = decodeAncillaryData(ancillaryDataHex);
+console.log(decoded);
+```
+
+#### Decoded Data Structure
+
+The decoded `ancillaryData` contains structured market information in a text format. Here's the typical structure:
+
+| Field | Description | Usage |
+|-------|-------------|-------|
+| `title` | Short market question | Display in UI, used by indexers |
+| `description` | Defines resolution conditions | Used by UMA oracle for resolution |
+| `market_id` | Polymarket numeric ID | Links UI to Oracle bridge |
+| `res_data` | Payout mapping | Used by CTF payout logic |
+| `p1`, `p2`, `p3` | Outcome labels | Used by traders and oracles |
+| `initializer` | Market creator address | Used by UMA adapter |
+| `bulletin board address` | Update contract address | Oracle reference for updates |
+| `transaction link` | Proof of creation | Used for dispute validation |
+
+**Example Decoded Output:**
+
+```
+q: title: Spread: Southern Miss Golden Eagles (-2.5), description: In the upcoming CBB game, scheduled for November 3 at 6:30 PM ET:
+
+This market will resolve to "Southern Miss Golden Eagles" if the Southern Miss Golden Eagles win the game by 3 or more points.
+
+Otherwise, this market will resolve to "Buffalo Bulls". 
+
+The result will be determined based on the final score including any overtime periods.
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, this market will resolve 50-50. market_id: 660226 res_data: p1: 0, p2: 1, p3: 0.5. Where p1 corresponds to Buffalo Bulls, p2 to Southern Miss Golden Eagles, p3 to unknown/50-50. Updates made by the question creator via the bulletin board at 0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7 as described by https://polygonscan.com/tx/0xa14f01b115c49136246fc3f508f960f64dea252758e73c28f5f07e8e19d7bca066 should be considered.,initializer:91430cad2d3975766499717fa0d66a78d814e5c5
+```
+
+#### Parsing the Decoded Data
+
+The decoded text follows a structured format that can be parsed to extract individual fields:
+
+```python
+import re
+
+def parse_ancillary_data(decoded_text):
+    """
+    Parse decoded ancillaryData to extract structured fields.
+    
+    Returns a dictionary with parsed fields.
+    """
+    parsed = {}
+    
+    # Extract title
+    title_match = re.search(r'title:\s*([^,]+)', decoded_text)
+    if title_match:
+        parsed['title'] = title_match.group(1).strip()
+    
+    # Extract description
+    desc_match = re.search(r'description:\s*([^m]+?)(?=market_id:)', decoded_text, re.DOTALL)
+    if desc_match:
+        parsed['description'] = desc_match.group(1).strip()
+    
+    # Extract market_id
+    market_id_match = re.search(r'market_id:\s*(\d+)', decoded_text)
+    if market_id_match:
+        parsed['market_id'] = market_id_match.group(1)
+    
+    # Extract res_data
+    res_data_match = re.search(r'res_data:\s*([^\.]+)', decoded_text)
+    if res_data_match:
+        parsed['res_data'] = res_data_match.group(1).strip()
+    
+    # Extract outcome labels (p1, p2, p3)
+    p1_match = re.search(r'p1:\s*([^,]+)', decoded_text)
+    p2_match = re.search(r'p2:\s*([^,]+)', decoded_text)
+    p3_match = re.search(r'p3:\s*([^,]+)', decoded_text)
+    
+    if p1_match:
+        parsed['p1'] = p1_match.group(1).strip()
+    if p2_match:
+        parsed['p2'] = p2_match.group(1).strip()
+    if p3_match:
+        parsed['p3'] = p3_match.group(1).strip()
+    
+    # Extract initializer
+    init_match = re.search(r'initializer:([a-f0-9]+)', decoded_text)
+    if init_match:
+        parsed['initializer'] = '0x' + init_match.group(1)
+    
+    return parsed
+```
+
+### Step 5: Query Trading Activity
+
+Use the asset IDs from `TokenRegistered` events to query `OrderFilled` events and calculate current market prices. See the [Order Filled Events](#3-order-filled-events) and [Order Filled by Asset IDs](#4-order-filled-by-asset-ids) queries above for examples.
+
+## Integration with Other Contracts
+
+### Finding Condition ID
+
+The `TokenRegistered` event contains a `conditionId` field that links to the `ConditionPreparation` event in the Main Polymarket Contract. This allows you to:
+
+1. Track when new markets become tradeable
+2. Link trading activity to market conditions
+3. Get question metadata through the condition → question ID relationship
+
+### Price Discovery
+
+Use `OrderFilled` events to calculate real-time market prices:
+
+- **Price (YES) = USDC paid / YES tokens received**
+- **Price (NO) = 1 - Price(YES)**
+
+This provides accurate pricing data for prediction market analytics and trading applications.
+
+## Best Practices
+
+- Monitor `TokenRegistered` events to discover new markets as they become tradeable
+- Use `OrderFilled` events for real-time price discovery and market analytics
+- Track both current and legacy exchange contracts for comprehensive market coverage
+- Calculate prices using the latest `OrderFilled` events for each asset ID
+- Combine CTF Exchange data with Main Contract data for complete market lifecycle tracking
+
+## Additional Resources
+
+- [Polymarket API Overview](./polymarket-api.md)
+- [Main Polymarket Contract](./main-polymarket-contract.md)
+- [UMA Adapter Contract](./uma-adapter-contract.md)
+- [Bitquery GraphQL API Documentation](https://docs.bitquery.io/)
+- [DEX Trading Data Documentation](https://docs.bitquery.io/docs/evm/dextrades/)
+

@@ -77,12 +77,13 @@ const config = {
     //     },
     //   },
     // ],
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      {
-        // minimal configuration
-      },
-    ],
+    // Temporarily disabled due to Node 18 compatibility issue
+    // [
+    //   require.resolve("@easyops-cn/docusaurus-search-local"),
+    //   {
+    //     // minimal configuration
+    //   },
+    // ],
     [
       "@docusaurus/plugin-client-redirects",
       {
