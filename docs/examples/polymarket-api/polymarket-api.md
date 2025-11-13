@@ -204,15 +204,15 @@ A complete Next.js application demonstrating how to build a Polymarket dashboard
 
 ### Screenshots
 
-![Polymarket Markets List](https://github.com/buddies2705/polymarket-dashboard/raw/main/docs/screenshots/markets-list.png)
+![Polymarket Markets List](https://docs.bitquery.io/img/polymarket-dashboard/markets-list.png)
 
 *Markets list showing all available prediction markets with trade counts and current prices*
 
-![Market Details](https://github.com/buddies2705/polymarket-dashboard/raw/main/docs/screenshots/market-details.png)
+![Market Details](https://docs.bitquery.io/img/polymarket-dashboard/market-details.png)
 
 *Detailed market view with description, outcomes, technical details, and current prices*
 
-![Trades and Token Holders](https://github.com/buddies2705/polymarket-dashboard/raw/main/docs/screenshots/trades-holders.png)
+![Trades and Token Holders](https://docs.bitquery.io/img/polymarket-dashboard/trades-holders.png)
 
 *Trade history and token holders for a specific market*
 
