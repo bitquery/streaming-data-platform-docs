@@ -71,7 +71,7 @@ The platform uses three main smart contracts deployed on Polygon network to hand
 
 ## Quick Start - How to Query Polymarket Data
 
-**New to Polymarket APIs?** Start with the [Complete Guide to Get All Market Data](./get-market-data.md) to learn how to retrieve all information for a specific market.
+**New to Polymarket APIs?** Start with the [Complete Guide to Get All Market Data](https://docs.bitquery.io/docs/examples/polymarket-api/get-market-data) to learn how to retrieve all information for a specific market.
 
 ### Common Polymarket API Queries
 
@@ -85,7 +85,7 @@ The platform uses three main smart contracts deployed on Polygon network to hand
 
 This documentation is organized into three main sections, each covering a specific smart contract:
 
-### [Main Polymarket Contract](./main-polymarket-contract.md)
+### [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract)
 
 The Conditional Tokens Framework (CTF) core contract - the fundamental ERC-1155 system used for all prediction markets. This contract handles:
 
@@ -99,7 +99,7 @@ The Conditional Tokens Framework (CTF) core contract - the fundamental ERC-1155 
 
 Think of it as the "token factory" that issues and redeems conditional ERC-1155 tokens.
 
-### [Polymarket CTF Exchange](./polymarket-ctf-exchange.md)
+### [Polymarket CTF Exchange](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-ctf-exchange)
 
 Polymarket's trading venue where users buy and sell ERC-1155 outcome tokens created by the CTF contract. This exchange handles:
 
@@ -113,7 +113,7 @@ Polymarket's trading venue where users buy and sell ERC-1155 outcome tokens crea
 
 Think of it as the "exchange layer" that gives the conditional tokens a live market.
 
-### [UMA Adapter Contract](./uma-adapter-contract.md)
+### [UMA Adapter Contract](./uma-adapter-contract)
 
 Middleware between Polymarket and UMA's Optimistic Oracle. It submits and retrieves outcome data for market questions, managing the integration with UMA's Optimistic Oracle system for decentralized question resolution and dispute handling.
 
@@ -155,9 +155,9 @@ Collateral Released
 Learn how to query Polymarket data step by step:
 
 1. **Choose Your Data Source**: Use the appropriate smart contract address based on what blockchain data you need:
-   - **How to get Polymarket markets and conditions**: Query [Main Polymarket contract](./main-polymarket-contract.md) for `ConditionPreparation` events
-   - **How to get Polymarket market metadata**: Query [UMA Adapter contract](./uma-adapter-contract.md) for `QuestionInitialized` events and decode `ancillaryData`
-   - **How to get Polymarket prices and trades**: Query [CTF Exchange contract](./polymarket-ctf-exchange.md) for `OrderFilled` and `TokenRegistered` events
+   - **How to get Polymarket markets and conditions**: Query [Main Polymarket contract](./main-polymarket-contract) for `ConditionPreparation` events
+   - **How to get Polymarket market metadata**: Query [UMA Adapter contract](./uma-adapter-contract) for `QuestionInitialized` events and decode `ancillaryData`
+   - **How to get Polymarket prices and trades**: Query [CTF Exchange contract](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-ctf-exchange) for `OrderFilled` and `TokenRegistered` events
 
 2. **Set Up Bitquery Access**: All Polymarket APIs are accessible through Bitquery's GraphQL IDE for real-time blockchain analytics
    - Sign up for a [Bitquery account](https://ide.bitquery.io/) 
@@ -204,15 +204,15 @@ A complete Next.js application demonstrating how to build a Polymarket dashboard
 
 ### Screenshots
 
-![Polymarket Markets List](https://docs.bitquery.io/img/polymarket-dashboard/markets-list.png)
+![Polymarket Markets List](/img/polymarket-dashboard/markets-list.png)
 
 *Markets list showing all available prediction markets with trade counts and current prices*
 
-![Market Details](https://docs.bitquery.io/img/polymarket-dashboard/market-details.png)
+![Market Details](/img/polymarket-dashboard/market-details.png)
 
 *Detailed market view with description, outcomes, technical details, and current prices*
 
-![Trades and Token Holders](https://docs.bitquery.io/img/polymarket-dashboard/trades-holders.png)
+![Trades and Token Holders](/img/polymarket-dashboard/trades-holders.png)
 
 *Trade history and token holders for a specific market*
 
@@ -251,15 +251,15 @@ Visit the [GitHub repository](https://github.com/buddies2705/polymarket-dashboar
 
 ### How do I query Polymarket data?
 
-Use GraphQL queries to access Polymarket smart contract events. Start with the [Complete Guide to Get All Market Data](./get-market-data.md) for step-by-step instructions.
+Use GraphQL queries to access Polymarket smart contract events. Start with the [Complete Guide to Get All Market Data](./get-market-data) for step-by-step instructions.
 
 ### How to get Polymarket prices?
 
-Query `OrderFilled` events from the CTF Exchange contract and calculate prices using the formula: Price (YES) = USDC paid / YES tokens received. See the [CTF Exchange documentation](./polymarket-ctf-exchange.md#price-calculation) for details.
+Query `OrderFilled` events from the CTF Exchange contract and calculate prices using the formula: Price (YES) = USDC paid / YES tokens received. See the [CTF Exchange documentation](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-ctf-exchange#price-calculation) for details.
 
 ### How to get Polymarket market metadata?
 
-Query `QuestionInitialized` events from the UMA Adapter contract to get `ancillaryData`, then decode it to extract market title, description, and other metadata. See [decoding instructions](./polymarket-ctf-exchange.md#step-4-decode-ancillary-data).
+Query `QuestionInitialized` events from the UMA Adapter contract to get `ancillaryData`, then decode it to extract market title, description, and other metadata. See [decoding instructions](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-ctf-exchange#step-4-decode-ancillary-data).
 
 ### How to find Polymarket condition ID?
 
@@ -267,7 +267,7 @@ Query `ConditionPreparation` events from the Main Polymarket Contract using eith
 
 ### How to get Polymarket trades?
 
-Query `OrderFilled` events from the CTF Exchange contract using token addresses (asset IDs) obtained from `TokenRegistered` events. See the [CTF Exchange documentation](./polymarket-ctf-exchange.md#3-order-filled-events).
+Query `OrderFilled` events from the CTF Exchange contract using token addresses (asset IDs) obtained from `TokenRegistered` events. See the [CTF Exchange documentation](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-ctf-exchange#3-order-filled-events).
 
 ### What is Polymarket API?
 
