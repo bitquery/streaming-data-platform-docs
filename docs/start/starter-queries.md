@@ -354,6 +354,9 @@ This query returns the top 10 pump fun tokens by Marketcap change in last 5mins.
 This subscription query returns the latest PumpFun trades in real time.  
 ▶️ [Real-time Trades](https://ide.bitquery.io/Pumpfun-DEX-Trades_1#)
 
+Historical PumpFun Migrated Token on Raydium and Pumpswap.  
+▶️ [Historical PumpFun Migrated Tokens](https://ide.bitquery.io/all-pumpfun-migrated-token-query_4)
+
 ## Raydium API
 
 ### Latest Pools Created on Raydium
