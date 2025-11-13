@@ -447,7 +447,17 @@ This API identifies addresses that hold multiple specified tokens
 ### Get latest ERC20 token balance of a wallet
 
 Get latest ERC20 token balance of an wallet.
-▶️ [Get latest ERC20 token balance of a wallet](https://ide.bitquery.io/Latest-balance-of-an-address-for-a-specific-token)
+▶️ [Get latest ERC20 token balance of a wallet](https://ide.bitquery.io/Get-Latest-Token-Balance-for-an-Address)
+
+### Get All Token Balances for an Address
+
+Retrieve all ERC-20 token balances held by a specific address. This query returns balances for all tokens the address holds.
+▶️ [Get All Token Balances for an Address](https://ide.bitquery.io/Get-All-Token-Balances-for-an-Address)
+
+### Filter Tokens by Minimum Balance
+
+Get all tokens held by an address that have a minimum balance threshold. Useful for filtering out dust or small balances.
+▶️ [Filter Tokens by Minimum Balance](https://ide.bitquery.io/Filter-Tokens-by-Minimum-Balance)
 
 ### Get latest liquidity of an EVM Pool
 
@@ -544,7 +554,12 @@ Get the latest native ETH balance of a specific address.
 ### Latest Balance of an Address for a Specific Token
 
 Get the latest balance of a specific address for a specific ERC20 token.  
-▶️ [Latest Balance of an Address for a Specific Token](https://ide.bitquery.io/Latest-balance-of-an-address-for-a-specific-token)
+▶️ [Latest Balance of an Address for a Specific Token](https://ide.bitquery.io/Get-Latest-Token-Balance-for-an-Address)
+
+### Get Token Total Supply and Market Cap
+
+Retrieve the total supply and market capitalization of a specific ERC-20 token. This query provides on-chain market cap data.
+▶️ [Get Token Total Supply and Market Cap](https://ide.bitquery.io/Get-Token-Total-Supply-and-Market-Cap#)
 
 ### Latest Liquidity of EVM Pool
 
@@ -690,6 +705,21 @@ Get owners of NFTs for a given contract.
 
 Get owners of a specific NFT given the contract address and token ID.
 ▶️ [Get NFT owners by token ID](https://ide.bitquery.io/Who-owns-specific-NFT)
+
+### Get Latest NFT Balance for an Address
+
+Get the latest NFT balance for a specific address and NFT collection. This query returns the current NFT count and ownership information.
+▶️ [Get Latest NFT Balance for an Address](https://ide.bitquery.io/Get-Latest-NFT-Balance-for-an-Address)
+
+### Get All NFT Collections for an Address
+
+Retrieve all NFT collections held by a specific address. This query returns balances for all NFT collections the address owns.
+▶️ [Get All NFT Collections for an Address](https://ide.bitquery.io/Get-All-NFT-Collections-for-an-Address_1)
+
+### Get NFT Owner for Specific Token ID
+
+Check the current owner of a specific NFT token ID. This query returns ownership information for a particular token.
+▶️ [Get NFT Owner for Specific Token ID](https://ide.bitquery.io/Get-NFT-Owner-for-Specific-Token-ID)
 
 ### Get NFT trades for a specific NFT contract on specific marketplace
 

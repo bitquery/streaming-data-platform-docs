@@ -245,6 +245,16 @@ Monitor all contract self-destruct event balances in real-time.
 Monitor the balance and gas fee burnt for a particular address in real-time.  
 ▶️ [Monitoring Balance after Latest Gas Fee Burn](https://ide.bitquery.io/Monitor-balance-and-gas-fee-paid-for-an-address-using-stream_1)
 
+### Stream Token Balance Updates in Real Time
+
+Subscribe to real-time token balance updates for a specific address and token. This subscription will notify you whenever the token balance changes.
+▶️ [Stream Token Balance Updates in Real Time](https://ide.bitquery.io/Stream-Token-Balance-Updates-in-Real-Time)
+
+### Track Token Balance Changes by Transaction
+
+Monitor token balance changes for a specific token across all transactions. This helps track token movements and transfers.
+▶️ [Track Token Balance Changes by Transaction](https://ide.bitquery.io/Track-Token-Balance-Changes-by-Transaction#)
+
 ## Pancakeswap Streams
 
 ### Real time trades on Pancakeswap
@@ -317,6 +327,16 @@ This stream helps in monitoring the trades of a Four Meme user in real time.
 This stream allows you to monitor real time NFT trades on OpenSea. It could also be modified to get trades of a particular NFT collection or NFTs traded by a particular trader.
 
 ▶️[NFT Trades Stream](https://ide.bitquery.io/Latests-OpenSea-Trades--stream)
+
+### Stream NFT Balance Updates in Real Time
+
+Subscribe to real-time NFT balance updates for a specific address and collection. This subscription will notify you whenever NFT ownership changes.
+▶️ [Stream NFT Balance Updates in Real Time](https://ide.bitquery.io/Stream-NFT-Balance-Updates-in-Real-Time)
+
+### Track specific NFT Balance Changes
+
+Monitor NFT transfers for a specific collection across all transactions. This helps track NFT movements and ownership changes.
+▶️ [Track specific NFT Balance Changes](https://ide.bitquery.io/Track-specific-NFTs-Balance-Changes)
 
 ## Tron
 

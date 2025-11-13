@@ -339,12 +339,14 @@ const sidebars = {
                   },
                   items: [
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-transaction-balance-tracker",
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/token-balance-api",
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/nft-balance-api",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-self-destruct-balance-api",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-validator-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-miner-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-mev-balance-tracker",
                     "blockchain/Ethereum/balances/transaction-balance-tracker/eth-gas-balance-tracker",
-                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-transfer-balance-tracker"
+                    "blockchain/Ethereum/balances/transaction-balance-tracker/eth-transfer-balance-tracker",
                   ],
                 },
               ],
