@@ -1,5 +1,5 @@
 ---
-title: "How to Get All Data for a Specific Polymarket Market - Complete Guide"
+title: "Get Data for a Specific Polymarket Market"
 description: "Step-by-step guide: How to get all Polymarket market data including metadata, prices, trades, token holders. Learn how to query by condition ID, question ID, or market ID using GraphQL APIs."
 keywords:
   - how to get Polymarket market data

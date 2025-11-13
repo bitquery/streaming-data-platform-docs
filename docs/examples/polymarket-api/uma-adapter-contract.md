@@ -1,5 +1,5 @@
 ---
-title: "UMA Adapter Contract API - How to Get Market Metadata"
+title: "UMA Adapter Contract API"
 description: "Learn how to query UMA Adapter for Polymarket: Get QuestionInitialized events, decode ancillaryData, extract market titles and descriptions. Track oracle resolution and question metadata."
 keywords:
   - UMA Adapter

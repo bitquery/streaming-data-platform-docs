@@ -1,5 +1,5 @@
 ---
-title: "Polymarket CTF Exchange API - How to Get Prices and Trades"
+title: "Polymarket CTF Exchange API"
 description: "Learn how to query Polymarket CTF Exchange: Get token registrations, order fills, calculate market prices. Track OrderFilled, OrderMatched, TokenRegistered events to get Polymarket trading data and prices."
 keywords:
   - Polymarket CTF Exchange

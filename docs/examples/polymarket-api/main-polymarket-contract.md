@@ -1,5 +1,5 @@
 ---
-title: "Main Polymarket Contract API - How to Query ConditionPreparation, PositionSplit Events"
+title: "Main Polymarket Contract API"
 description: "Learn how to query Polymarket main contract events: ConditionPreparation, PositionSplit, PositionsMerge, ConditionResolution. Get condition ID, question ID, and track market lifecycle on Polygon."
 keywords:
   - Polymarket main contract
