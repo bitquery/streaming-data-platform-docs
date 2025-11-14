@@ -244,27 +244,20 @@ query LiquidityBurnEvents {
 
 ### Increase & Decrease Liquidity Events
 
-Monitor when liquidity providers add or remove liquidity from existing positions. These operations modify the liquidity amount without creating or destroying the NFT.
+Monitor when liquidity providers add or remove liquidity from existing positions. These operations modify the liquidity amount without creating or destroying the NFT. The `Returns` field will have the `liquidity`, `amount0`,`amount1`.
 
-[Run Query ➤](https://ide.bitquery.io/uniswap-v3-weth-usdt-increase-decrease)
+[Run Query ➤](https://ide.bitquery.io/uniswap-v3-liquidity-increase-decrease)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query LiquidityChangeEvents {
+
+  query LiquidityEvents {
   EVM(dataset: archive, network: eth) {
     Calls(
-      where: {
-        Call: {
-          Signature: {
-            Name: { in: ["increaseLiquidity", "decreaseLiquidity"] }
-          }
-          To: { is: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88" }
-        }
-        Block: { Date: { after: "2025-09-20", before: "2025-09-22" } }
-      }
-      limit: { count: 10 }
+      where: {Call: {Signature: {Name: {in: ["increaseLiquidity","decreaseLiquidity"]}}, To: {is: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88"}}, Block: {Date: {after: "2025-09-20", before: "2025-09-22"}}}
+      limit: {count: 1}
     ) {
       Arguments {
         Index
@@ -316,9 +309,33 @@ query LiquidityChangeEvents {
         Number
         Time
       }
+      Returns {
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+        }
+        Name
+      }
     }
   }
 }
+
 ```
 
 </details>
