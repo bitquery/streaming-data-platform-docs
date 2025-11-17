@@ -477,7 +477,7 @@ Get token balances for a specific wallet address.
 ### Get Swaps by Wallet Address
 
 Get all swap related transactions (buy, sell).  
-▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest_trades_by_maker)
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest-trades-by-market-maker)
 
 ### Get wallet net worth
 

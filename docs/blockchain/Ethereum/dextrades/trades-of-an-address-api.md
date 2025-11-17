@@ -6,7 +6,7 @@ sidebar_position: 7
 
 ## Latest Trades by Maker Address
 
-This GraphQL query retrieves the latest trades executed by a particular maker on the Ethereum network. You can view the query in the IDE [here](https://ide.bitquery.io/latest_trades_by_maker)
+This GraphQL query retrieves the latest trades executed by a particular maker on the Ethereum network. You can view the query in the IDE [here](https://ide.bitquery.io/latest-trades-by-market-maker)
 ```
 query MyQuery {
   EVM(dataset: combined, network: eth) {
