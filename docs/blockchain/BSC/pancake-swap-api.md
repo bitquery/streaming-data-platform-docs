@@ -143,7 +143,7 @@ Using [this](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades) API we
 
 ## Streaming Latest Trades on Pancake Swap
 
-[This](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream) subscription allows to subscribe to the latest trades on Pancake Swap.
+[This](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream_2) subscription allows to subscribe to the latest trades on Pancake Swap.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -151,7 +151,16 @@ Using [this](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades) API we
 ```graphql
 subscription {
   EVM(network: bsc) {
-    DEXTrades {
+    DEXTrades(
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+          }
+        }
+      }
+    ) {
       Block {
         Time
         Number
@@ -229,7 +238,7 @@ subscription {
 
 ## Subscribe to Mempool Trades on Pancake Swap
 
-Using [this](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrades---Stream) subscription you could stream the latest trades in the Mempool, that is streaming the unconfirmed trades.
+Using [this](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrades---Stream_1) subscription you could stream the latest trades in the Mempool, that is streaming the unconfirmed trades.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -237,7 +246,16 @@ Using [this](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrad
 ```graphql
 subscription {
   EVM(network: bsc, mempool: true) {
-    DEXTrades {
+    DEXTrades(
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+          }
+        }
+      }
+    ) {
       Block {
         Time
         Number
