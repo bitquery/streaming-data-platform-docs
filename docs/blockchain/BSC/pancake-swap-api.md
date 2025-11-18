@@ -587,7 +587,7 @@ query MyQuery {
 
 ## OHLC of a Token on Pancake Swap
 
-[This](https://ide.bitquery.io/BSC-Pancake-V3-OHLC-data) API endpoint provides the OHLC/ K-Line data for a given token against other specified token.
+[This](https://ide.bitquery.io/bsc-pancakeswap-ohlc-using-trading-api) API endpoint provides the OHLC/ K-Line data for a given token against other specified token.
 
 This query uses the `Trading` cube from the [Crypto Price APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
 
