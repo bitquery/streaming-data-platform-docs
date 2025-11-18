@@ -1,3 +1,5 @@
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Pancake Swap API
 
 In this section we will use APIs from Bitquery to get the on-chain trade related data, trade metrics, trades for a token or a trader on the Pancake Swap DEX.
@@ -1101,3 +1103,13 @@ query pairDexList(
 ```
 
 </details>
+
+## Video Tutorials
+
+### Get Pancakeswap Token Trade Metrics using Bitquery API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=0B1pw7LKoWE" />
+
+### How to get PancakeSwap trades in realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=T_BWvxYd4Pc" />
