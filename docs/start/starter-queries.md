@@ -17,26 +17,26 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 ## Cross-Chain / Multi-Chain APIs
 
-### Latest Price of Any Token
+#### Latest Price of Any Token
 
 This query gives you bitcoin currency 1-sec OHLC across different blockchains. You can adjust duration in `Duration: {eq: 1}` filter.
 
 ▶️ [Latest Price of Token Across Chains](https://ide.bitquery.io/Latest-bitcoin-price-on-across-chains)
 
-### Crypto Price Change API
+#### Crypto Price Change API
 
 This query gives you change in price ( Close-Open) of all tokens on Ethereum, BNB, Solana and Tron.
 You can adjust duration in `Duration: {eq: 300}` filter.
 
 ▶️ [Crypto Price Change API](https://ide.bitquery.io/1-minute-price-change-api)
 
-### OHLC of a currency on multiple blockchains
+#### OHLC of a currency on multiple blockchains
 
 This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in this eg Bitcoin; it will include all sorts of currencies whose underlying asset is Bitcoin like cbBTC, WBTC, etc) across all supported blockchains, aggregated into a given time interval (e.g., 60 seconds in this example).
 
 ▶️ [OHLC of a currency on multiple blockchains](https://ide.bitquery.io/OHLC-of-a-currency-on-multiple-blockchains)
 
-### OHLC of a Token Pair Across Chains
+#### OHLC of a Token Pair Across Chains
 
 This subscription fetches real-time OHLC (Open, High, Low, Close) price data for a token pair across different blockchains.  
 For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ETH).
@@ -49,7 +49,7 @@ For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ET
 
 #### Get latest ERC20 token balance of a wallet
 
-Get latest ERC20 token balance of an wallet.
+Get latest ERC20 token balance of a wallet.
 ▶️ [Get latest ERC20 token balance of a wallet](https://ide.bitquery.io/Get-Latest-Token-Balance-for-an-Address)
 
 #### Get All Token Balances for an Address
@@ -125,17 +125,17 @@ This query gets you top 10 Eth Tokens by Price Change in last 1h.
 Retrieve the total supply and market capitalization of a specific ERC-20 token. This query provides on-chain market cap data.
 ▶️ [Get Token Total Supply and Market Cap](https://ide.bitquery.io/Get-Token-Total-Supply-and-Market-Cap#)
 
-### Token Holder Count on a Specific Date
+#### Token Holder Count on a Specific Date
 
 This API returns the total number of holders for a specific token on a given date.
 ▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_6)
 
-### Token Holders and Stats on a Specific Date
+#### Token Holders and Stats on a Specific Date
 
 This API provides a list of all holders along with relevant statistics for a given token on a specific date.
 ▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_7)
 
-### Real-Time Holders of Multiple Tokens
+#### Real-Time Holders of Multiple Tokens
 
 This API leverages the balanceUpdate endpoint to deliver real-time holder data for multiple tokens.
 ▶️ [ Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH)
@@ -618,7 +618,7 @@ This API returns all incoming and outgoing transactions for a specific Bitcoin w
 
 ▶️ [Inflows and Outflows of a wallet](https://ide.bitquery.io/Inflows-and-Outflow-of-a-bitcoin-wallet)
 
-### OHLC & Price Data
+### Price Data
 
 #### Latest Bitcoin Price
 
@@ -709,82 +709,82 @@ This query provides balance and staking reward information for the Cosmos blockc
 
 ## NFT APIs
 
-### Get NFTs a specific wallet holds
+#### Get NFTs a specific wallet holds
 
 Get NFTs owned by a given address.
 ▶️ [Get NFTs by wallet](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
 
-### Get NFTs a contract holds
+#### Get NFTs a contract holds
 
 Get NFTs for a given contract address, including metadata for all NFTs (where available).
 ▶️ [Get NFTs by contract](https://ide.bitquery.io/Get-NFTs-by-wallet_1)
 
-### Get NFT metadata
+#### Get NFT metadata
 
 Get NFT data, including metadata (where available), for the given NFT contract address.
 ▶️ [Get NFT metadata](https://ide.bitquery.io/Get-NFT-metadata)
 
-### Get Metadata for Multiple NFT Contracts
+#### Get Metadata for Multiple NFT Contracts
 
 Get the metadata for a given list of contract addresses.
 ▶️ [Get Metadata for Multiple NFT Contracts](https://ide.bitquery.io/Get-Metadata-for-Multiple-NFT-Contracts_1)
 
-### Get NFT transfers by wallet
+#### Get NFT transfers by wallet
 
 Get transfers of NFTs given the wallet.
 ▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/latest-nft-transfers-by-a-user)
 
-### Get NFT owners by contract
+#### Get NFT owners by contract
 
 Get owners of NFTs for a given contract.
 ▶️ [Get NFT owners by contract](https://ide.bitquery.io/top-token-holders-of-Moonwalker-NFT)
 
-### Get NFT owners by token ID
+#### Get NFT owners by token ID
 
 Get owners of a specific NFT given the contract address and token ID.
 ▶️ [Get NFT owners by token ID](https://ide.bitquery.io/Who-owns-specific-NFT)
 
-### Get Latest NFT Balance for an Address
+#### Get Latest NFT Balance for an Address
 
 Get the latest NFT balance for a specific address and NFT collection. This query returns the current NFT count and ownership information.
 ▶️ [Get Latest NFT Balance for an Address](https://ide.bitquery.io/Get-Latest-NFT-Balance-for-an-Address)
 
-### Get All NFT Collections for an Address
+#### Get All NFT Collections for an Address
 
 Retrieve all NFT collections held by a specific address. This query returns balances for all NFT collections the address owns.
 ▶️ [Get All NFT Collections for an Address](https://ide.bitquery.io/Get-All-NFT-Collections-for-an-Address_1)
 
-### Get NFT Owner for Specific Token ID
+#### Get NFT Owner for Specific Token ID
 
 Check the current owner of a specific NFT token ID. This query returns ownership information for a particular token.
 ▶️ [Get NFT Owner for Specific Token ID](https://ide.bitquery.io/Get-NFT-Owner-for-Specific-Token-ID)
 
-### Get NFT trades for a specific NFT contract on specific marketplace
+#### Get NFT trades for a specific NFT contract on specific marketplace
 
 Get trades of NFTs for a given contract and marketplace.
 ▶️ [Get NFT trades by contract](https://ide.bitquery.io/Get-NFT-trades-by-contract)
 
-### Get NFT trades for a specific NFT contract and token ID
+#### Get NFT trades for a specific NFT contract and token ID
 
 Get trades of NFTs for a given contract and token ID.
 ▶️ [Get NFT trades by token](hhttps://ide.bitquery.io/Get-NFT-trades-by-token)
 
-### Get NFT trades by wallet
+#### Get NFT trades by wallet
 
 Get trades of NFTs for a given wallet.
 ▶️ [Get NFT trades by wallet](https://ide.bitquery.io/Get-trades-of-NFTs-for-a-given-wallet)
 
-### Get all NFTs in a collection
+#### Get all NFTs in a collection
 
 Get all NFTs in a collection.
 ▶️ [Get all NFTs in a collection](https://ide.bitquery.io/Get-all-NFTs-for-a-collection)
 
-### Latest NFT Trades
+#### Latest NFT Trades
 
 This query gets the latest 10 NFT trades on Ethereum mainnet. You can increase the limit to whatever you like, up to 25,000. Currently, it only retrieves data from the real-time database. To include historical data, use `dataset: combined`.  
 ▶️ [Latest NFT Trades](https://ide.bitquery.io/Latest-NFT-trades-on-ETH)
 
-### Top Traded NFTs in a Period
+#### Top Traded NFTs in a Period
 
 This query gets the top 10 traded NFTs based on the number of trades within a specified date range. You can change the filters such as the date range and limit.  
 ▶️ [Top Traded NFTs](https://ide.bitquery.io/Top-traded-NFT-tokens-in-a-month)
