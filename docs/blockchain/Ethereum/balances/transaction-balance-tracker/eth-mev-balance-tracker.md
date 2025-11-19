@@ -31,7 +31,7 @@ The Ethereum MEV (Maximal Extractable Value) Balance Tracker API provides real-t
 <meta property="twitter:description" content="Learn how to track Ethereum MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery's MEV Balance Tracker API." />
 </head>
 
-## Track mev-boost relays
+## Track MEV-Boost Relay Transaction Balances
 
 Track balance changes for MEV-boost relay addresses to monitor their activity and rewards. This example uses the `BloXroute Max Profit` address.
 
