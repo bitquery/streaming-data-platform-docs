@@ -67,6 +67,55 @@ subscription {
 
 - **Code 5**: `BalanceIncreaseRewardTransactionFee` - Transaction tip increasing block builder's balance (MEV-related)
 
+## Track MEV Payout Transaction Balances with MEV Reward
+
+This query focuses on a block builder address and returns the most recent payouts,
+including the token metadata, pre/post balances, and USD valuations, so you can
+quickly see how large each MEV reward was.
+
+[Try the API](https://ide.bitquery.io/QuasarBuilder-MEV-Payout-Transaction-Balance)
+
+```
+{
+  EVM(network: eth) {
+    TransactionBalances(
+      limit: {count: 10}
+      where: {Transaction: {}, TokenBalance: {BalanceChangeReasonCode: {eq: 6}, Address: {is: "0x396343362be2a4da1ce0c1c210945346fb82aa49"}}}
+      orderBy: {descending: Block_Time}
+    ) {
+      Block {
+        Time
+      }
+      TokenBalance {
+        Currency {
+          Symbol
+          HasURI
+          SmartContract
+        }
+        PreBalance
+        PostBalance
+        Address
+        BalanceChangeReasonCode
+        TotalSupplyInUSD
+        TotalSupply
+        TokenOwnership {
+          Owns
+          Id
+        }
+        PostBalanceInUSD
+      }
+      Transaction {
+        Hash
+        MEV_reward: Value
+        ValueInUSD
+      }
+    }
+  }
+}
+
+
+```
+
 ## Track Block Builder Rewards
 
 Monitor transaction fee rewards received by block builders (MEV extractors):
