@@ -1,3 +1,5 @@
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Pancake Swap API
 
 In this section we will use APIs from Bitquery to get the on-chain trade related data, trade metrics, trades for a token or a trader on the Pancake Swap DEX.
@@ -143,7 +145,7 @@ Using [this](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades) API we
 
 ## Streaming Latest Trades on Pancake Swap
 
-[This](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream) subscription allows to subscribe to the latest trades on Pancake Swap.
+[This](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream_2) subscription allows to subscribe to the latest trades on Pancake Swap.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -151,7 +153,16 @@ Using [this](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades) API we
 ```graphql
 subscription {
   EVM(network: bsc) {
-    DEXTrades {
+    DEXTrades(
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+          }
+        }
+      }
+    ) {
       Block {
         Time
         Number
@@ -229,7 +240,7 @@ subscription {
 
 ## Subscribe to Mempool Trades on Pancake Swap
 
-Using [this](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrades---Stream) subscription you could stream the latest trades in the Mempool, that is streaming the unconfirmed trades.
+Using [this](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrades---Stream_1) subscription you could stream the latest trades in the Mempool, that is streaming the unconfirmed trades.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -237,7 +248,16 @@ Using [this](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrad
 ```graphql
 subscription {
   EVM(network: bsc, mempool: true) {
-    DEXTrades {
+    DEXTrades(
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Dex: {
+            OwnerAddress: { is: "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865" }
+          }
+        }
+      }
+    ) {
       Block {
         Time
         Number
@@ -569,7 +589,7 @@ query MyQuery {
 
 ## OHLC of a Token on Pancake Swap
 
-[This](https://ide.bitquery.io/BSC-Pancake-V3-OHLC-data) API endpoint provides the OHLC/ K-Line data for a given token against other specified token.
+[This](https://ide.bitquery.io/bsc-pancakeswap-ohlc-using-trading-api) API endpoint provides the OHLC/ K-Line data for a given token against other specified token.
 
 This query uses the `Trading` cube from the [Crypto Price APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
 
@@ -1083,3 +1103,13 @@ query pairDexList(
 ```
 
 </details>
+
+## Video Tutorials
+
+### Get Pancakeswap Token Trade Metrics using Bitquery API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=0B1pw7LKoWE" />
+
+### How to get PancakeSwap trades in realtime
+
+<VideoPlayer url="https://www.youtube.com/watch?v=T_BWvxYd4Pc" />

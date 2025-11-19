@@ -78,27 +78,16 @@ Open this query on our GraphQL IDE using this [link](https://graphql.bitquery.io
 
 This query retrieves transfers where the sender or receiver is a particular address. To implement the OR logic, we utilize the `any` option and specify the two conditions within `[]` that should be combined using the OR operator. In this case we mention either the sender OR receiver should be `0x881d40237659c251811cec9c364ef91dc08d300c`.
 
-You can find the query [here](https://ide.bitquery.io/Sender-OR-Receiver-Transfer-Example-v2_3)
+You can find the query [here](https://ide.bitquery.io/Sender-OR-Receiver-Transfer-on-Ethereum)
 
 ```graphql
-query MyQuery {
-  EVM(dataset: combined, network: eth) {
+
+ query MyQuery {
+  EVM(dataset: archive, network: eth) {
     Transfers(
-      where: {
-        any: [
-          {
-            Transfer: {
-              Sender: { is: "0x881d40237659c251811cec9c364ef91dc08d300c" }
-            }
-          }
-          {
-            Transfer: {
-              Receiver: { is: "0x881d40237659c251811cec9c364ef91dc08d300c" }
-            }
-          }
-        ]
-      }
-      limit: { count: 100 }
+      where: {any: [{Transfer: {Sender: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}, {Transfer: {Receiver: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}], Block: {Number: {eq: "23814227"}}}
+      limit: {count: 100}
+      orderBy: {descending: Block_Time}
     ) {
       Transfer {
         Amount
@@ -109,9 +98,20 @@ query MyQuery {
           Name
         }
       }
+      Transaction {
+        Hash
+        From
+        To
+        Index
+      }
+      Block {
+        Number
+        Time
+      }
     }
   }
 }
+
 ```
 
 ## Addresses that received or sent money from given list of of addresses
