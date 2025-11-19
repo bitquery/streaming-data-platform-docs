@@ -456,7 +456,64 @@ Get latest BNB balance of an wallet.
 #### Get latest liquidity of an EVM Pool
 
 Get latest liquidity of an EVM Pool.
-▶️ [Get latest liquidity of an EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-BSC-pool_1)
+▶️ [Get latest liquidity of an EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
+
+### Get Total Supply and Marketcap of an ERC20 token
+
+Get Total Supply and Marketcap of an ERC20 token.
+▶️ [Get Total Supply and Marketcap of an ERC20 token](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
+
+### Get ERC20 token transfers by wallet
+
+Get ERC20 token transactions ordered by block number in descending order.  
+▶️ [Get ERC20 token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_2)
+
+### Get Native & ERC20 Token Balances by Wallet
+
+Get token balances for a specific wallet address.  
+▶️ [Get Native & ERC20 Token Balances by Wallet](https://ide.bitquery.io/balance-of-a-wallet_1)
+
+### Get ERC20 Token Balance by Wallet
+
+Get token balances for a specific wallet address.  
+▶️ [Get ERC20 Token Balance by Wallet](https://ide.bitquery.io/Get-ERC20-Token-Balance-by-Wallet)
+
+### Get Swaps by Wallet Address
+
+Get all swap related transactions (buy, sell).  
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest-trades-by-market-maker)
+
+### Get wallet net worth
+
+Get the net worth of a wallet in USD.  
+▶️ [Get wallet net worth](https://ide.bitquery.io/balance-of-a-wallet-in-USD_2)
+
+### Get Multiple ERC20 Token Prices
+
+Returns an array of token prices denominated in the blockchain's native token and USD for a given token contract address.  
+▶️ [Get Multiple ERC20 Token Prices](https://ide.bitquery.io/Price-of-multiple-tokens-in-realtime)
+
+### Get OHLCV by Pair Address
+
+Get the OHLCV candle stick by using pair address.  
+▶️ [Get OHLCV by Pair Address](https://ide.bitquery.io/OHLC0_8)
+
+### Get transactions by wallet
+
+Get transactions ordered by block number in descending order.  
+▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet)
+
+### Ethereum DEX Trades
+
+This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.  
+▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Copy-of-Ethereum-dextrades_1)
+
+### Ethereum Dex Trade By Tokens
+
+This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
+▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
+
+### Get Price Change 5min, 1h, 6h and 24h of a specific Eth token
 
 ### Trades
 
