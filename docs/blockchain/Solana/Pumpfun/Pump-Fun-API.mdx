@@ -74,6 +74,7 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 ### 2. Pump.fun Mayhem Mode Tokens
 
+- [Track Mayhem Mode enabled Pumpfun Tokens in realtime ➤](#track-mayhem-mode-enabled-pumpfun-tokens-in-realtime)
 - [Check Mayhem Mode of a Pump Fun Token ➤](#check-mayhem-mode-of-a-pump-fun-token)
 
 ### 3. Token Pricing & Market Data
@@ -407,6 +408,65 @@ subscription {
 Below APIs are realted to Pump.fun tokens which were launched with in Mayhem mode.
 
 If you need to check for a old pump.fun token if it was created with Mayhem mode `true` or `false` then use this [Bitquery Solana v1 API](http://docs.bitquery.io/v1/docs/Examples/Solana/transfers#check-if-a-pump-fun-token-was-launched-in-mayhem-mode---historical-query), in v1 we have all the solana transfers data so we check for the 1 Billion token transfer to Mayhem Autonomous AI agent if theres a transfer we can say that the token was a Mayhem token.
+
+### Track Mayhem Mode enabled Pumpfun Tokens in realtime
+
+Track Pump.fun tokens created in real time with Mayhem mode enabled. This API lets you monitor all new tokens launched with Mayhem set to true.
+Try the API [here](https://ide.bitquery.io/Track-Mayhem-Mode-enabled-Pumpfun-Tokens-in-realtime).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+subscription MyQuery {
+  Solana {
+    Instructions(
+      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {in: ["create", "create_v2"]}, Arguments: {includes: {Value: {Boolean: true}}}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Instruction {
+        Program {
+          Method
+          Arguments {
+            Name
+            Type
+            Value {
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
+              ... on Solana_ABI_String_Value_Arg {
+                string
+              }
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
+              }
+              ... on Solana_ABI_Bytes_Value_Arg {
+                hex
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Float_Value_Arg {
+                float
+              }
+              ... on Solana_ABI_Json_Value_Arg {
+                json
+              }
+            }
+          }
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+</details>
 
 ### Check Mayhem Mode of a Pump Fun Token
 
