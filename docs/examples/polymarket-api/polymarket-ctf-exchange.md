@@ -95,6 +95,313 @@ or equivalently:
 
 **Example**: If a trade shows 1000 USDC paid for 2000 YES tokens, the price is 1000/2000 = 0.5 USDC per YES token (50 cents).
 
+### Important: Decimal Normalization
+
+
+- **USDC**: Has 6 decimals. Divide by `10^6` (1,000,000) to get human-readable USDC
+- **Outcome Tokens**: Typically have 18 decimals. Divide by `10^18` to get human-readable tokens
+
+**Correct Price Calculation**:
+```python
+# Raw amounts from blockchain (in smallest units)
+usdc_paid_raw = 1000000  # 1 USDC in smallest units
+tokens_received_raw = 2000000000000000000  # 2 tokens in smallest units
+
+# Normalize to human-readable units
+usdc_normalized = usdc_paid_raw / 1e6  # = 1.0 USDC
+tokens_normalized = tokens_received_raw / 1e18  # = 2.0 tokens
+
+# Calculate price
+price = usdc_normalized / tokens_normalized  # = 0.5 USDC per token
+```
+
+### OrderFilled Event Structure
+
+The `OrderFilled` event contains these key fields:
+
+- **makerAssetId**: Asset ID that maker is giving (0 = USDC, otherwise = outcome token)
+- **takerAssetId**: Asset ID that taker is giving (0 = USDC, otherwise = outcome token)
+- **makerAmountFilled** or **makerAmount**: Amount maker is giving (in smallest units)
+- **takerAmountFilled** or **takerAmount**: Amount taker is giving (in smallest units)
+- **maker**: Maker wallet address
+- **taker**: Taker wallet address
+
+**Identifying USDC vs Tokens**:
+- If `makerAssetId == "0"` or `0`, maker is giving USDC
+- If `takerAssetId == "0"` or `0`, taker is giving USDC
+- The non-zero asset ID is the outcome token (YES or NO token)
+
+**Python Implementation Example**:
+```python
+def calculate_price_from_order_filled(event):
+    """Calculate price from OrderFilled event."""
+    args = {arg["Name"]: arg["Value"] for arg in event.get("Arguments", [])}
+    
+    # Extract asset IDs
+    maker_asset_id = extract_value(args.get("makerAssetId"))
+    taker_asset_id = extract_value(args.get("takerAssetId"))
+    
+    # Identify USDC (asset ID = "0")
+    maker_is_usdc = str(maker_asset_id).strip() == "0"
+    taker_is_usdc = str(taker_asset_id).strip() == "0"
+    
+    # Get amounts (try multiple field name variations)
+    maker_amount = extract_value(
+        args.get("makerAmountFilled") or 
+        args.get("makerAmount") or 
+        args.get("makerFillAmount")
+    )
+    taker_amount = extract_value(
+        args.get("takerAmountFilled") or 
+        args.get("takerAmount") or 
+        args.get("takerFillAmount")
+    )
+    
+    # Determine which side is USDC
+    if maker_is_usdc:
+        usdc_paid_raw = maker_amount
+        tokens_received_raw = taker_amount
+        outcome_asset_id = taker_asset_id
+    elif taker_is_usdc:
+        usdc_paid_raw = taker_amount
+        tokens_received_raw = maker_amount
+        outcome_asset_id = maker_asset_id
+    else:
+        return None  # Can't determine without USDC
+    
+    # Normalize amounts
+    usdc_normalized = usdc_paid_raw / 1e6  # USDC: 6 decimals
+    tokens_normalized = tokens_received_raw / 1e18  # Tokens: 18 decimals
+    
+    # Calculate price
+    if tokens_normalized > 0:
+        price = usdc_normalized / tokens_normalized
+        return {
+            "price": price,
+            "asset_id": outcome_asset_id,
+            "usdc_paid": usdc_normalized,
+            "tokens_received": tokens_normalized
+        }
+    return None
+```
+
+## Practical Trading Implementation
+
+### Setup and Configuration
+
+Before using the trading tools, configure your environment:
+
+**1. Install Dependencies**:
+```bash
+pip install -r requirements.txt
+```
+
+**2. Create `.env` file**:
+```env
+# Required: Bitquery API token
+OAUTH_TOKEN=your_bitquery_oauth_token
+
+# Optional: For executing trades
+PRIVATE_KEY=your_wallet_private_key
+POLYGON_RPC_URL=https://polygon-rpc.com
+
+# Contract addresses (defaults provided)
+CTF_EXCHANGE_ADDRESS=0xC5d563A36AE78145C45a50134d48A1215220f80a
+LEGACY_EXCHANGE_ADDRESS=0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E
+```
+
+**3. Get Bitquery API Token**:
+- Sign up at [Bitquery.io](https://bitquery.io)
+- Navigate to API settings
+- Generate an OAuth token
+- Add it to your `.env` file
+
+### Using the Polymarket Copy Trading Tool
+
+This codebase provides a complete implementation for querying Polymarket trades and calculating prices. Here's how to use it:
+
+#### 1. Track Recent Trades
+
+```python
+from bitquery_client import BitqueryClient
+from position_tracker import PositionTracker
+
+# Initialize
+client = BitqueryClient()
+tracker = PositionTracker(client)
+
+# Get recent trades
+positions = tracker.get_recent_positions(limit=20)
+
+for pos in positions:
+    print(f"Asset: {pos.asset_id}")
+    print(f"Price: ${pos.price:.4f}")  # Already normalized
+    print(f"Amount: {pos.amount:.4f}")  # Already normalized
+    print(f"Trader: {pos.trader_address}")
+    print(f"Time: {pos.timestamp}")
+```
+
+#### 2. Track Specific Trader
+
+```python
+# Monitor a specific trader's positions
+trader_address = "0x1234..."
+positions = tracker.track_trader(trader_address, limit=50)
+
+# Calculate trader statistics
+summary = tracker.get_trader_summary(trader_address)
+print(f"Total Volume: ${summary['total_volume']:.2f}")
+print(f"Average Price: ${summary['avg_price']:.4f}")
+```
+
+#### 3. Calculate Market Price for Asset
+
+```python
+# Get current market price for a specific asset ID
+asset_id = "39182227286566757926769923857730776203547401708661426564300709353277001600667"
+price = tracker.calculate_market_price(asset_id)
+
+if price:
+    print(f"Current Price: ${price:.4f}")
+    print(f"Implied Probability: {price * 100:.2f}%")
+```
+
+#### 4. Copy a Position
+
+```python
+from copy_trader import CopyTrader
+
+# Initialize copy trader
+copy_trader = CopyTrader(tracker)
+
+# Get positions for an asset
+positions = tracker.get_positions_by_asset(asset_id)
+latest_position = max(positions, key=lambda p: p.timestamp)
+
+# Simulate copying the position (2x multiplier)
+result = copy_trader.copy_position(latest_position, multiplier=2.0, execute=False)
+sim = result.get("simulation", {})
+
+print(f"Amount to buy: {sim['amount']:.4f} tokens")
+print(f"Price: ${sim['price']:.4f}")
+print(f"Total Cost: ${sim['total_cost']:.2f} USDC")
+```
+
+#### 5. Query OrderFilled Events Directly
+
+```python
+from bitquery_client import BitqueryClient
+
+client = BitqueryClient()
+
+# Query by asset IDs
+asset_ids = [
+    "39182227286566757926769923857730776203547401708661426564300709353277001600667"
+]
+events = client.get_order_filled_events(limit=100, asset_ids=asset_ids)
+
+# Query by trader address
+trader_address = "0x1234..."
+events = client.get_order_filled_events(limit=50, trader_address=trader_address)
+
+# Query recent events (last 24 hours)
+events = client.get_order_filled_events(limit=20, since_hours=24)
+```
+
+### Key Implementation Details
+
+**Decimal Handling**: The `PositionTracker` class automatically handles decimal normalization:
+- USDC amounts are normalized from 6 decimals
+- Token amounts are normalized from 18 decimals
+- All prices and amounts in `Position` objects are already in human-readable format
+
+**Event Parsing**: The `parse_order_filled_event()` method handles:
+- Multiple field name variations (`makerAmountFilled`, `makerAmount`, etc.)
+- USDC identification (asset ID = "0")
+- Price calculation with proper normalization
+- Trader address extraction
+
+**Price Calculation**: Prices are calculated as:
+```python
+usdc_normalized = usdc_paid_raw / 1e6
+tokens_normalized = tokens_received_raw / 1e18
+price = usdc_normalized / tokens_normalized
+```
+
+### Understanding OrderFilled Event Data
+
+**Raw Event Structure** (from Bitquery API):
+```json
+{
+  "Arguments": [
+    {
+      "Name": "makerAssetId",
+      "Value": {
+        "bigInteger": "0"  // or outcome token asset ID
+      }
+    },
+    {
+      "Name": "takerAssetId",
+      "Value": {
+        "bigInteger": "39182227286566757926769923857730776203547401708661426564300709353277001600667"
+      }
+    },
+    {
+      "Name": "makerAmountFilled",
+      "Value": {
+        "bigInteger": "1000000"  // 1 USDC in smallest units (6 decimals)
+      }
+    },
+    {
+      "Name": "takerAmountFilled",
+      "Value": {
+        "bigInteger": "2000000000000000000"  // 2 tokens in smallest units (18 decimals)
+      }
+    },
+    {
+      "Name": "maker",
+      "Value": {
+        "address": "0x1234..."
+      }
+    },
+    {
+      "Name": "taker",
+      "Value": {
+        "address": "0x5678..."
+      }
+    }
+  ],
+  "Block": {
+    "Time": "2024-01-01T12:00:00Z",
+    "Number": 12345678
+  },
+  "Transaction": {
+    "Hash": "0xabc...",
+    "From": "0x5678..."
+  }
+}
+```
+
+**Parsed Position Object** (after processing):
+```python
+Position(
+    asset_id="39182227286566757926769923857730776203547401708661426564300709353277001600667",
+    trader_address="0x5678...",
+    amount=2.0,  # Normalized tokens
+    price=0.5,   # USDC per token (normalized)
+    direction="YES",
+    timestamp=datetime(2024, 1, 1, 12, 0, 0),
+    tx_hash="0xabc...",
+    block_number=12345678
+)
+```
+
+**Key Points**:
+- Raw amounts are always integers (bigInteger) in smallest units
+- Asset ID "0" always represents USDC
+- The trader is the one receiving outcome tokens (buying)
+- Prices are calculated and normalized automatically
+
 ## How to Query Polymarket CTF Exchange Events
 
 Learn how to query Polymarket trading data, get token registrations, track orders, and calculate prices. These queries show you how to access all CTF Exchange contract events.
@@ -273,6 +580,16 @@ Monitor successful order matching and trade executions.
 
 Track individual order fills and partial executions. Use this to calculate current market prices.
 
+**Key Fields for Trading**:
+- `makerAssetId`: Asset ID maker is giving (0 = USDC, otherwise = outcome token)
+- `takerAssetId`: Asset ID taker is giving (0 = USDC, otherwise = outcome token)
+- `makerAmountFilled` or `makerAmount`: Amount in smallest units (USDC: 6 decimals, tokens: 18 decimals)
+- `takerAmountFilled` or `takerAmount`: Amount in smallest units
+- `maker`: Maker wallet address
+- `taker`: Taker wallet address
+
+**Note**: The codebase handles both current and legacy exchange addresses automatically.
+
 ```graphql
 {
   EVM(dataset: realtime, network: matic) {
@@ -348,17 +665,19 @@ Track individual order fills and partial executions. Use this to calculate curre
 }
 ```
 
-**Use Case**:
-- Detailed trade analysis
-- Order book reconstruction
-- User trading pattern analysis
-- Real-time price calculation
 
 **Fill Data**:
 - Order IDs and fill amounts
 - Price execution details
 - Maker/taker information
 - Fee calculations
+
+**Field Name Variations**:
+The codebase handles multiple possible field names for amounts:
+- `makerAmountFilled`, `makerAmount`, `makerFillAmount`, `makerFilledAmount`
+- `takerAmountFilled`, `takerAmount`, `takerFillAmount`, `takerFilledAmount`, `fillAmount`, `amount`
+
+This ensures compatibility with different event structures and API versions.
 
 ### 4. Order Filled by Asset IDs
 
@@ -693,13 +1012,114 @@ Use `OrderFilled` events to calculate real-time market prices:
 
 This provides accurate pricing data for prediction market analytics and trading applications.
 
-## Best Practices
+## Best Practices for Trading
 
-- Monitor `TokenRegistered` events to discover new markets as they become tradeable
-- Use `OrderFilled` events for real-time price discovery and market analytics
-- Track both current and legacy exchange contracts for comprehensive market coverage
-- Calculate prices using the latest `OrderFilled` events for each asset ID
-- Combine CTF Exchange data with Main Contract data for complete market lifecycle tracking
+### Price Calculation
+- **Always normalize decimals**: USDC uses 6 decimals, tokens use 18 decimals
+- **Use latest OrderFilled events**: Most recent trades reflect current market prices
+- **Handle multiple field names**: The API may return `makerAmountFilled`, `makerAmount`, or other variations
+- **Identify USDC correctly**: Asset ID "0" (string or integer) represents USDC
+
+### Trading Workflow
+1. **Discover Markets**: Query `TokenRegistered` events to find new tradeable markets
+2. **Get Asset IDs**: Extract asset IDs from TokenRegistered events for YES/NO tokens
+3. **Track Prices**: Query `OrderFilled` events filtered by asset IDs
+4. **Calculate Prices**: Normalize amounts and calculate `price = USDC / tokens`
+5. **Monitor Traders**: Track specific wallet addresses to identify successful trading patterns
+6. **Copy Trades**: Use calculated prices to execute copy trades with position multipliers
+
+## Code Examples
+
+### Complete Trading Example
+
+```python
+from bitquery_client import BitqueryClient
+from position_tracker import PositionTracker
+from copy_trader import CopyTrader
+
+# 1. Initialize components
+client = BitqueryClient()
+tracker = PositionTracker(client)
+copy_trader = CopyTrader(tracker)
+
+# 2. Get recent trades
+print("Fetching recent trades...")
+positions = tracker.get_recent_positions(limit=10)
+
+# 3. Analyze each position
+for pos in positions:
+    print(f"\n{'='*60}")
+    print(f"Asset ID: {pos.asset_id}")
+    print(f"Price: ${pos.price:.4f}")
+    print(f"Amount: {pos.amount:.4f} tokens")
+    print(f"Total Value: ${pos.amount * pos.price:.2f} USDC")
+    print(f"Trader: {pos.trader_address}")
+    print(f"Time: {pos.timestamp}")
+    
+    # 4. Calculate market price
+    market_price = tracker.calculate_market_price(pos.asset_id)
+    if market_price:
+        print(f"Current Market Price: ${market_price:.4f}")
+        print(f"Implied Probability: {market_price * 100:.2f}%")
+    
+    # 5. Simulate copying the trade
+    result = copy_trader.copy_position(pos, multiplier=1.0, execute=False)
+    if result.get("success"):
+        sim = result.get("simulation", {})
+        print(f"Copy Trade Cost: ${sim.get('total_cost', 0):.2f} USDC")
+```
+
+### Track and Copy Trader Example
+
+```python
+# Monitor a successful trader and copy their trades
+trader_address = "0x1234..."  # Replace with actual trader address
+
+# Get trader's recent positions
+positions = tracker.track_trader(trader_address, limit=20)
+
+# Get trader statistics
+summary = tracker.get_trader_summary(trader_address)
+print(f"Trader Summary:")
+print(f"  Total Positions: {summary['total_positions']}")
+print(f"  Total Volume: ${summary['total_volume']:.2f}")
+print(f"  Average Price: ${summary['avg_price']:.4f}")
+print(f"  Unique Assets: {summary['unique_assets']}")
+
+# Copy all positions with 0.5x multiplier
+for position in positions:
+    result = copy_trader.copy_position(position, multiplier=0.5, execute=False)
+    if result.get("success"):
+        sim = result.get("simulation", {})
+        print(f"Copied: {sim['amount']:.4f} tokens @ ${sim['price']:.4f}")
+```
+
+### Price Monitoring Example
+
+```python
+# Monitor price for a specific market
+asset_id = "39182227286566757926769923857730776203547401708661426564300709353277001600667"
+
+# Get all recent positions for this asset
+positions = tracker.get_positions_by_asset(asset_id)
+
+if positions:
+    # Sort by timestamp (most recent first)
+    positions.sort(key=lambda p: p.timestamp, reverse=True)
+    
+    # Get latest price
+    latest_price = positions[0].price
+    print(f"Latest Price: ${latest_price:.4f}")
+    
+    # Calculate average price
+    avg_price = sum(p.price for p in positions) / len(positions)
+    print(f"Average Price (last {len(positions)} trades): ${avg_price:.4f}")
+    
+    # Price trend
+    if len(positions) > 1:
+        price_change = latest_price - positions[-1].price
+        print(f"Price Change: ${price_change:.4f} ({price_change/latest_price*100:.2f}%)")
+```
 
 ## Additional Resources
 
@@ -708,4 +1128,5 @@ This provides accurate pricing data for prediction market analytics and trading 
 - [UMA Adapter Contract](./uma-adapter-contract.md)
 - [Bitquery GraphQL API Documentation](https://docs.bitquery.io/)
 - [DEX Trading Data Documentation](https://docs.bitquery.io/docs/evm/dextrades/)
+- [Polymarket Copy Trading Tool GitHub Repository](https://github.com/your-repo/polymarket-copytrade)
 
