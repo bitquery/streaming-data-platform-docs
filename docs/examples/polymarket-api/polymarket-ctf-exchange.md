@@ -26,16 +26,17 @@ The Polymarket CTF Exchange is Polymarket's trading venue, where users buy and s
 
 ## Contract Addresses
 
-| Contract | Address | Status |
-|----------|---------|--------|
+| Contract                   | Address                                      | Status                        |
+| -------------------------- | -------------------------------------------- | ----------------------------- |
 | **CTF Exchange (Current)** | `0xC5d563A36AE78145C45a50134d48A1215220f80a` | NegRisk multi-outcome markets |
-| **CTF Exchange (Legacy)** | `0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E` | Binary markets (legacy) |
+| **CTF Exchange (Legacy)**  | `0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E` | Binary markets (legacy)       |
 
 ## Contract Overview
 
 This is Polymarket's trading venue, where users buy and sell the ERC-1155 outcome tokens created by the CTF contract.
 
 **What it does:**
+
 - Handles OrderMatched, OrderFilled, TokenRegistered events
 - Settles trades: swaps outcome tokens ↔ USDC.e collateral
 - Integrates with off-chain orderbook APIs (RFQ or AMM)
@@ -52,11 +53,13 @@ The Polymarket CTF Exchange has 3 major events that enable all trading:
 The `TokenRegistered` event gets emitted when a new AssetId gets created because a position split occurs. This is very similar to new pools getting created on an AMM.
 
 **TokenRegistered has 3 fields:**
+
 - Token0
 - Token1
 - Condition ID
 
 **Emitted When:**
+
 - A new trading pair is registered for a condition
 - Position split creates new outcome tokens that need to be traded
 - Similar to liquidity pool creation on AMMs
@@ -66,6 +69,7 @@ The `TokenRegistered` event gets emitted when a new AssetId gets created because
 The `OrderMatched` event is emitted when orders are successfully matched between counterparties.
 
 **Emitted When:**
+
 - Buy and sell orders are matched
 - Trade execution occurs on-chain or through relayers
 - Used for tracking trading volume and activity
@@ -75,6 +79,7 @@ The `OrderMatched` event is emitted when orders are successfully matched between
 The `OrderFilled` event tracks individual order fills and partial executions.
 
 **Emitted When:**
+
 - An order is filled (fully or partially)
 - Used for detailed trade analysis and price discovery
 - Contains price and amount information for calculating market prices
@@ -97,23 +102,7 @@ or equivalently:
 
 ### Important: Decimal Normalization
 
-
-- **USDC**: Has 6 decimals. Divide by `10^6` (1,000,000) to get human-readable USDC
-- **Outcome Tokens**: Typically have 18 decimals. Divide by `10^18` to get human-readable tokens
-
-**Correct Price Calculation**:
-```python
-# Raw amounts from blockchain (in smallest units)
-usdc_paid_raw = 1000000  # 1 USDC in smallest units
-tokens_received_raw = 2000000000000000000  # 2 tokens in smallest units
-
-# Normalize to human-readable units
-usdc_normalized = usdc_paid_raw / 1e6  # = 1.0 USDC
-tokens_normalized = tokens_received_raw / 1e18  # = 2.0 tokens
-
-# Calculate price
-price = usdc_normalized / tokens_normalized  # = 0.5 USDC per token
-```
+**USDC**: Has 6 decimals. Divide by `10^6` (1,000,000) to get human-readable USDC
 
 ### OrderFilled Event Structure
 
@@ -127,217 +116,22 @@ The `OrderFilled` event contains these key fields:
 - **taker**: Taker wallet address
 
 **Identifying USDC vs Tokens**:
+
 - If `makerAssetId == "0"` or `0`, maker is giving USDC
 - If `takerAssetId == "0"` or `0`, taker is giving USDC
 - The non-zero asset ID is the outcome token (YES or NO token)
 
-**Python Implementation Example**:
-```python
-def calculate_price_from_order_filled(event):
-    """Calculate price from OrderFilled event."""
-    args = {arg["Name"]: arg["Value"] for arg in event.get("Arguments", [])}
-    
-    # Extract asset IDs
-    maker_asset_id = extract_value(args.get("makerAssetId"))
-    taker_asset_id = extract_value(args.get("takerAssetId"))
-    
-    # Identify USDC (asset ID = "0")
-    maker_is_usdc = str(maker_asset_id).strip() == "0"
-    taker_is_usdc = str(taker_asset_id).strip() == "0"
-    
-    # Get amounts (try multiple field name variations)
-    maker_amount = extract_value(
-        args.get("makerAmountFilled") or 
-        args.get("makerAmount") or 
-        args.get("makerFillAmount")
-    )
-    taker_amount = extract_value(
-        args.get("takerAmountFilled") or 
-        args.get("takerAmount") or 
-        args.get("takerFillAmount")
-    )
-    
-    # Determine which side is USDC
-    if maker_is_usdc:
-        usdc_paid_raw = maker_amount
-        tokens_received_raw = taker_amount
-        outcome_asset_id = taker_asset_id
-    elif taker_is_usdc:
-        usdc_paid_raw = taker_amount
-        tokens_received_raw = maker_amount
-        outcome_asset_id = maker_asset_id
-    else:
-        return None  # Can't determine without USDC
-    
-    # Normalize amounts
-    usdc_normalized = usdc_paid_raw / 1e6  # USDC: 6 decimals
-    tokens_normalized = tokens_received_raw / 1e18  # Tokens: 18 decimals
-    
-    # Calculate price
-    if tokens_normalized > 0:
-        price = usdc_normalized / tokens_normalized
-        return {
-            "price": price,
-            "asset_id": outcome_asset_id,
-            "usdc_paid": usdc_normalized,
-            "tokens_received": tokens_normalized
-        }
-    return None
-```
-
-## Practical Trading Implementation
-
-### Setup and Configuration
-
-Before using the trading tools, configure your environment:
-
-**1. Install Dependencies**:
-```bash
-pip install -r requirements.txt
-```
-
-**2. Create `.env` file**:
-```env
-# Required: Bitquery API token
-OAUTH_TOKEN=your_bitquery_oauth_token
-
-# Optional: For executing trades
-PRIVATE_KEY=your_wallet_private_key
-POLYGON_RPC_URL=https://polygon-rpc.com
-
-# Contract addresses (defaults provided)
-CTF_EXCHANGE_ADDRESS=0xC5d563A36AE78145C45a50134d48A1215220f80a
-LEGACY_EXCHANGE_ADDRESS=0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E
-```
-
-**3. Get Bitquery API Token**:
-- Sign up at [Bitquery.io](https://bitquery.io)
-- Navigate to API settings
-- Generate an OAuth token
-- Add it to your `.env` file
-
-### Using the Polymarket Copy Trading Tool
-
-This codebase provides a complete implementation for querying Polymarket trades and calculating prices. Here's how to use it:
-
-#### 1. Track Recent Trades
-
-```python
-from bitquery_client import BitqueryClient
-from position_tracker import PositionTracker
-
-# Initialize
-client = BitqueryClient()
-tracker = PositionTracker(client)
-
-# Get recent trades
-positions = tracker.get_recent_positions(limit=20)
-
-for pos in positions:
-    print(f"Asset: {pos.asset_id}")
-    print(f"Price: ${pos.price:.4f}")  # Already normalized
-    print(f"Amount: {pos.amount:.4f}")  # Already normalized
-    print(f"Trader: {pos.trader_address}")
-    print(f"Time: {pos.timestamp}")
-```
-
-#### 2. Track Specific Trader
-
-```python
-# Monitor a specific trader's positions
-trader_address = "0x1234..."
-positions = tracker.track_trader(trader_address, limit=50)
-
-# Calculate trader statistics
-summary = tracker.get_trader_summary(trader_address)
-print(f"Total Volume: ${summary['total_volume']:.2f}")
-print(f"Average Price: ${summary['avg_price']:.4f}")
-```
-
-#### 3. Calculate Market Price for Asset
-
-```python
-# Get current market price for a specific asset ID
-asset_id = "39182227286566757926769923857730776203547401708661426564300709353277001600667"
-price = tracker.calculate_market_price(asset_id)
-
-if price:
-    print(f"Current Price: ${price:.4f}")
-    print(f"Implied Probability: {price * 100:.2f}%")
-```
-
-#### 4. Copy a Position
-
-```python
-from copy_trader import CopyTrader
-
-# Initialize copy trader
-copy_trader = CopyTrader(tracker)
-
-# Get positions for an asset
-positions = tracker.get_positions_by_asset(asset_id)
-latest_position = max(positions, key=lambda p: p.timestamp)
-
-# Simulate copying the position (2x multiplier)
-result = copy_trader.copy_position(latest_position, multiplier=2.0, execute=False)
-sim = result.get("simulation", {})
-
-print(f"Amount to buy: {sim['amount']:.4f} tokens")
-print(f"Price: ${sim['price']:.4f}")
-print(f"Total Cost: ${sim['total_cost']:.2f} USDC")
-```
-
-#### 5. Query OrderFilled Events Directly
-
-```python
-from bitquery_client import BitqueryClient
-
-client = BitqueryClient()
-
-# Query by asset IDs
-asset_ids = [
-    "39182227286566757926769923857730776203547401708661426564300709353277001600667"
-]
-events = client.get_order_filled_events(limit=100, asset_ids=asset_ids)
-
-# Query by trader address
-trader_address = "0x1234..."
-events = client.get_order_filled_events(limit=50, trader_address=trader_address)
-
-# Query recent events (last 24 hours)
-events = client.get_order_filled_events(limit=20, since_hours=24)
-```
-
-### Key Implementation Details
-
-**Decimal Handling**: The `PositionTracker` class automatically handles decimal normalization:
-- USDC amounts are normalized from 6 decimals
-- Token amounts are normalized from 18 decimals
-- All prices and amounts in `Position` objects are already in human-readable format
-
-**Event Parsing**: The `parse_order_filled_event()` method handles:
-- Multiple field name variations (`makerAmountFilled`, `makerAmount`, etc.)
-- USDC identification (asset ID = "0")
-- Price calculation with proper normalization
-- Trader address extraction
-
-**Price Calculation**: Prices are calculated as:
-```python
-usdc_normalized = usdc_paid_raw / 1e6
-tokens_normalized = tokens_received_raw / 1e18
-price = usdc_normalized / tokens_normalized
-```
-
 ### Understanding OrderFilled Event Data
 
 **Raw Event Structure** (from Bitquery API):
+
 ```json
 {
   "Arguments": [
     {
       "Name": "makerAssetId",
       "Value": {
-        "bigInteger": "0"  // or outcome token asset ID
+        "bigInteger": "0" // or outcome token asset ID
       }
     },
     {
@@ -349,13 +143,13 @@ price = usdc_normalized / tokens_normalized
     {
       "Name": "makerAmountFilled",
       "Value": {
-        "bigInteger": "1000000"  // 1 USDC in smallest units (6 decimals)
+        "bigInteger": "1000000" // 1 USDC in smallest units (6 decimals)
       }
     },
     {
       "Name": "takerAmountFilled",
       "Value": {
-        "bigInteger": "2000000000000000000"  // 2 tokens in smallest units (18 decimals)
+        "bigInteger": "2000000000000000000" // 2 tokens in smallest units (18 decimals)
       }
     },
     {
@@ -383,6 +177,7 @@ price = usdc_normalized / tokens_normalized
 ```
 
 **Parsed Position Object** (after processing):
+
 ```python
 Position(
     asset_id="39182227286566757926769923857730776203547401708661426564300709353277001600667",
@@ -397,6 +192,7 @@ Position(
 ```
 
 **Key Points**:
+
 - Raw amounts are always integers (bigInteger) in smallest units
 - Asset ID "0" always represents USDC
 - The trader is the one receiving outcome tokens (buying)
@@ -416,19 +212,21 @@ Track when new outcome tokens are registered for trading. This event is emitted 
 {
   EVM(dataset: combined, network: matic) {
     Events(
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
       where: {
-        Block: {Time: {since_relative: {days_ago: 6}}},
+        Block: { Time: { since_relative: { days_ago: 6 } } }
         Arguments: {
           includes: {
-            Name: {is: "conditionId"}, 
-            Value: {Bytes: {is: "CONDITION_ID_HERE"}}
+            Name: { is: "conditionId" }
+            Value: { Bytes: { is: "CONDITION_ID_HERE" } }
           }
-        }, 
-        Log: {Signature: {Name: {in: ["TokenRegistered"]}}}, 
-        LogHeader: {Address: {is: "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E"}}
+        }
+        Log: { Signature: { Name: { in: ["TokenRegistered"] } } }
+        LogHeader: {
+          Address: { is: "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E" }
+        }
       }
-      limit: {count: 10}
+      limit: { count: 10 }
     ) {
       Block {
         Time
@@ -469,12 +267,14 @@ Track when new outcome tokens are registered for trading. This event is emitted 
 ```
 
 **Use Case**:
+
 - Monitor new trading pairs
 - Build token registries
 - Track market expansion
 - Discover new markets as they become tradeable
 
 **Registration Data**:
+
 - Token addresses and metadata (Token0, Token1)
 - Market associations (Condition ID)
 - Trading parameters
@@ -491,12 +291,14 @@ Monitor successful order matching and trade executions.
 {
   EVM(dataset: realtime, network: matic) {
     Events(
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
       where: {
-        Log: {Signature: {Name: {in: ["OrdersMatched"]}}}, 
-        LogHeader: {Address: {is: "0xC5d563A36AE78145C45a50134d48A1215220f80a"}}
+        Log: { Signature: { Name: { in: ["OrdersMatched"] } } }
+        LogHeader: {
+          Address: { is: "0xC5d563A36AE78145C45a50134d48A1215220f80a" }
+        }
       }
-      limit: {count: 20}
+      limit: { count: 20 }
     ) {
       Block {
         Time
@@ -563,12 +365,14 @@ Monitor successful order matching and trade executions.
 ```
 
 **Use Case**:
+
 - Track trading volume and activity
 - Analyze price discovery
 - Calculate market metrics
 - Monitor market liquidity
 
 **Match Data**:
+
 - Order details and participants
 - Trade amounts and prices
 - Market identifiers
@@ -581,6 +385,7 @@ Monitor successful order matching and trade executions.
 Track individual order fills and partial executions. Use this to calculate current market prices.
 
 **Key Fields for Trading**:
+
 - `makerAssetId`: Asset ID maker is giving (0 = USDC, otherwise = outcome token)
 - `takerAssetId`: Asset ID taker is giving (0 = USDC, otherwise = outcome token)
 - `makerAmountFilled` or `makerAmount`: Amount in smallest units (USDC: 6 decimals, tokens: 18 decimals)
@@ -594,12 +399,14 @@ Track individual order fills and partial executions. Use this to calculate curre
 {
   EVM(dataset: realtime, network: matic) {
     Events(
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
       where: {
-        Log: {Signature: {Name: {in: ["OrderFilled"]}}}, 
-        LogHeader: {Address: {is: "0xC5d563A36AE78145C45a50134d48A1215220f80a"}}
+        Log: { Signature: { Name: { in: ["OrderFilled"] } } }
+        LogHeader: {
+          Address: { is: "0xC5d563A36AE78145C45a50134d48A1215220f80a" }
+        }
       }
-      limit: {count: 20}
+      limit: { count: 20 }
     ) {
       Block {
         Time
@@ -665,8 +472,8 @@ Track individual order fills and partial executions. Use this to calculate curre
 }
 ```
 
-
 **Fill Data**:
+
 - Order IDs and fill amounts
 - Price execution details
 - Maker/taker information
@@ -674,6 +481,7 @@ Track individual order fills and partial executions. Use this to calculate curre
 
 **Field Name Variations**:
 The codebase handles multiple possible field names for amounts:
+
 - `makerAmountFilled`, `makerAmount`, `makerFillAmount`, `makerFilledAmount`
 - `takerAmountFilled`, `takerAmount`, `takerFillAmount`, `takerFilledAmount`, `fillAmount`, `amount`
 
@@ -687,31 +495,31 @@ Query orders using specific asset IDs. Asset IDs can be obtained from `TokenRegi
 {
   EVM(dataset: realtime, network: matic) {
     Events(
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
       where: {
         Arguments: {
           includes: {
             Value: {
               BigInteger: {
                 in: [
-                  "39182227286566757926769923857730776203547401708661426564300709353277001600667",
+                  "39182227286566757926769923857730776203547401708661426564300709353277001600667"
                   "114636268124494503037490860756604355363103779670431653896732128698851479935310"
                 ]
               }
             }
           }
-        }, 
-        Log: {Signature: {Name: {in: ["OrderFilled"]}}}, 
+        }
+        Log: { Signature: { Name: { in: ["OrderFilled"] } } }
         LogHeader: {
           Address: {
             in: [
-              "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E",
+              "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E"
               "0xC5d563A36AE78145C45a50134d48A1215220f80a"
             ]
           }
         }
       }
-      limit: {count: 100}
+      limit: { count: 100 }
     ) {
       Block {
         Time
@@ -752,6 +560,7 @@ Query orders using specific asset IDs. Asset IDs can be obtained from `TokenRegi
 ```
 
 **Use Case**:
+
 - Track trading activity for specific markets
 - Calculate prices for specific outcome tokens
 - Monitor liquidity for particular asset pairs
@@ -771,13 +580,15 @@ Query `TokenRegistered` events to find the condition ID for a market:
 {
   EVM(dataset: combined, network: matic) {
     Events(
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
       where: {
-        Block: {Time: {since_relative: {days_ago: 6}}},
-        Log: {Signature: {Name: {in: ["TokenRegistered"]}}}, 
-        LogHeader: {Address: {is: "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E"}}
+        Block: { Time: { since_relative: { days_ago: 6 } } }
+        Log: { Signature: { Name: { in: ["TokenRegistered"] } } }
+        LogHeader: {
+          Address: { is: "0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E" }
+        }
       }
-      limit: {count: 10}
+      limit: { count: 10 }
     ) {
       Arguments {
         Name
@@ -804,23 +615,21 @@ Use the question ID to query `QuestionInitialized` events from the UMA Adapter c
 {
   EVM(dataset: combined, network: matic) {
     Events(
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
       where: {
-        Block: {
-          Time: {
-            since_relative: {hours_ago: 36}
-          }
-        }, 
+        Block: { Time: { since_relative: { hours_ago: 36 } } }
         Arguments: {
           includes: {
-            Name: {is: "questionID"}, 
-            Value: {Bytes: {is: "QUESTION_ID_HERE"}}
+            Name: { is: "questionID" }
+            Value: { Bytes: { is: "QUESTION_ID_HERE" } }
           }
-        }, 
-        Log: {Signature: {Name: {in: ["QuestionInitialized"]}}}, 
-        LogHeader: {Address: {is: "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7"}}
+        }
+        Log: { Signature: { Name: { in: ["QuestionInitialized"] } } }
+        LogHeader: {
+          Address: { is: "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7" }
+        }
       }
-      limit: {count: 1}
+      limit: { count: 1 }
     ) {
       Block {
         Time
@@ -865,17 +674,17 @@ The `ancillaryData` is stored as a hex string and needs to be decoded to UTF-8 t
 def decode_ancillary_data(hex_string):
     """
     Decode ancillaryData hex string to UTF-8 text.
-    
+
     Args:
         hex_string: Hex string from ancillaryData field (without 0x prefix)
-    
+
     Returns:
         Decoded text containing market question metadata
     """
     # Remove 0x prefix if present
     if hex_string.startswith('0x'):
         hex_string = hex_string[2:]
-    
+
     # Decode hex to bytes, then to UTF-8 string
     decoded_text = bytes.fromhex(hex_string).decode("utf-8")
     return decoded_text
@@ -892,15 +701,16 @@ print(decoded)
 ```javascript
 function decodeAncillaryData(hexString) {
   // Remove 0x prefix if present
-  const hex = hexString.startsWith('0x') ? hexString.slice(2) : hexString;
-  
+  const hex = hexString.startsWith("0x") ? hexString.slice(2) : hexString;
+
   // Convert hex to bytes, then to UTF-8 string
-  const bytes = Buffer.from(hex, 'hex');
-  return bytes.toString('utf-8');
+  const bytes = Buffer.from(hex, "hex");
+  return bytes.toString("utf-8");
 }
 
 // Example usage
-const ancillaryDataHex = "713a207469746c653a205370726561643a20536f75746865726e204d69737320476f6c64656e204561676c657320282d322e35292c...";
+const ancillaryDataHex =
+  "713a207469746c653a205370726561643a20536f75746865726e204d69737320476f6c64656e204561676c657320282d322e35292c...";
 const decoded = decodeAncillaryData(ancillaryDataHex);
 console.log(decoded);
 ```
@@ -909,16 +719,16 @@ console.log(decoded);
 
 The decoded `ancillaryData` contains structured market information in a text format. Here's the typical structure:
 
-| Field | Description | Usage |
-|-------|-------------|-------|
-| `title` | Short market question | Display in UI, used by indexers |
-| `description` | Defines resolution conditions | Used by UMA oracle for resolution |
-| `market_id` | Polymarket numeric ID | Links UI to Oracle bridge |
-| `res_data` | Payout mapping | Used by CTF payout logic |
-| `p1`, `p2`, `p3` | Outcome labels | Used by traders and oracles |
-| `initializer` | Market creator address | Used by UMA adapter |
-| `bulletin board address` | Update contract address | Oracle reference for updates |
-| `transaction link` | Proof of creation | Used for dispute validation |
+| Field                    | Description                   | Usage                             |
+| ------------------------ | ----------------------------- | --------------------------------- |
+| `title`                  | Short market question         | Display in UI, used by indexers   |
+| `description`            | Defines resolution conditions | Used by UMA oracle for resolution |
+| `market_id`              | Polymarket numeric ID         | Links UI to Oracle bridge         |
+| `res_data`               | Payout mapping                | Used by CTF payout logic          |
+| `p1`, `p2`, `p3`         | Outcome labels                | Used by traders and oracles       |
+| `initializer`            | Market creator address        | Used by UMA adapter               |
+| `bulletin board address` | Update contract address       | Oracle reference for updates      |
+| `transaction link`       | Proof of creation             | Used for dispute validation       |
 
 **Example Decoded Output:**
 
@@ -927,7 +737,7 @@ q: title: Spread: Southern Miss Golden Eagles (-2.5), description: In the upcomi
 
 This market will resolve to "Southern Miss Golden Eagles" if the Southern Miss Golden Eagles win the game by 3 or more points.
 
-Otherwise, this market will resolve to "Buffalo Bulls". 
+Otherwise, this market will resolve to "Buffalo Bulls".
 
 The result will be determined based on the final score including any overtime periods.
 
@@ -944,48 +754,48 @@ import re
 def parse_ancillary_data(decoded_text):
     """
     Parse decoded ancillaryData to extract structured fields.
-    
+
     Returns a dictionary with parsed fields.
     """
     parsed = {}
-    
+
     # Extract title
     title_match = re.search(r'title:\s*([^,]+)', decoded_text)
     if title_match:
         parsed['title'] = title_match.group(1).strip()
-    
+
     # Extract description
     desc_match = re.search(r'description:\s*([^m]+?)(?=market_id:)', decoded_text, re.DOTALL)
     if desc_match:
         parsed['description'] = desc_match.group(1).strip()
-    
+
     # Extract market_id
     market_id_match = re.search(r'market_id:\s*(\d+)', decoded_text)
     if market_id_match:
         parsed['market_id'] = market_id_match.group(1)
-    
+
     # Extract res_data
     res_data_match = re.search(r'res_data:\s*([^\.]+)', decoded_text)
     if res_data_match:
         parsed['res_data'] = res_data_match.group(1).strip()
-    
+
     # Extract outcome labels (p1, p2, p3)
     p1_match = re.search(r'p1:\s*([^,]+)', decoded_text)
     p2_match = re.search(r'p2:\s*([^,]+)', decoded_text)
     p3_match = re.search(r'p3:\s*([^,]+)', decoded_text)
-    
+
     if p1_match:
         parsed['p1'] = p1_match.group(1).strip()
     if p2_match:
         parsed['p2'] = p2_match.group(1).strip()
     if p3_match:
         parsed['p3'] = p3_match.group(1).strip()
-    
+
     # Extract initializer
     init_match = re.search(r'initializer:([a-f0-9]+)', decoded_text)
     if init_match:
         parsed['initializer'] = '0x' + init_match.group(1)
-    
+
     return parsed
 ```
 
@@ -1015,19 +825,20 @@ This provides accurate pricing data for prediction market analytics and trading 
 ## Best Practices for Trading
 
 ### Price Calculation
+
 - **Always normalize decimals**: USDC uses 6 decimals, tokens use 18 decimals
 - **Use latest OrderFilled events**: Most recent trades reflect current market prices
 - **Handle multiple field names**: The API may return `makerAmountFilled`, `makerAmount`, or other variations
 - **Identify USDC correctly**: Asset ID "0" (string or integer) represents USDC
 
 ### Trading Workflow
+
 1. **Discover Markets**: Query `TokenRegistered` events to find new tradeable markets
 2. **Get Asset IDs**: Extract asset IDs from TokenRegistered events for YES/NO tokens
 3. **Track Prices**: Query `OrderFilled` events filtered by asset IDs
 4. **Calculate Prices**: Normalize amounts and calculate `price = USDC / tokens`
 5. **Monitor Traders**: Track specific wallet addresses to identify successful trading patterns
 6. **Copy Trades**: Use calculated prices to execute copy trades with position multipliers
-
 
 ## Additional Resources
 
@@ -1037,4 +848,3 @@ This provides accurate pricing data for prediction market analytics and trading 
 - [Bitquery GraphQL API Documentation](https://docs.bitquery.io/)
 - [DEX Trading Data Documentation](https://docs.bitquery.io/docs/evm/dextrades/)
 - [Polymarket Copy Trading Tool GitHub Repository](https://github.com/your-repo/polymarket-copytrade)
-
