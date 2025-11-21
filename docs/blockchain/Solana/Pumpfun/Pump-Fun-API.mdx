@@ -70,10 +70,13 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 - [Get Creation Time & Dev Address of a Token ➤](#get-creation-time--dev-address-of-a-token)
 - [Track New Token Launches in Realtime ➤](#track-new-token-launches-in-realtime)
 - [All Tokens Created by a Specific Address ➤](#all-tokens-created-by-a-specific-address)
-- [Check Mayhem Mode of a Pump Fun Token ➤](#check-mayhem-mode-of-a-pump-fun-token)
 - [Get Token Metadata, Dev Address, Creation Time ➤](#get-token-metadata-dev-address-creation-time-for-specific-token)
 
-### 2. Token Pricing & Market Data
+### 2. Pump.fun Mayhem Mode Tokens
+
+- [Check Mayhem Mode of a Pump Fun Token ➤](#check-mayhem-mode-of-a-pump-fun-token)
+
+### 3. Token Pricing & Market Data
 
 - [Get Latest Price of a Token ➤](#get-latest-price-of-a-token)
 - [Track Price of a Token in Real-Time ➤](#track-price-of-a-token-in-real-time)
@@ -81,7 +84,7 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 - [ATH Market Cap of Pump Fun Tokens in a Specific Timeframe ➤](#ath-market-cap-of-pump-fun-tokens-in-a-specific-timeframe)
 - [Token Price Change Over Time ➤](#token-price-change-over-time-delta-from-x-minutes-back)
 
-### 3. Trade Activity & Volume
+### 4. Trade Activity & Volume
 
 - [Get Real-Time Trades on Pump.fun ➤](#get-real-time-trades-on-pumpfun)
 - [Get Latest Trades for a Token ➤](#get-latest-trades-for-a-token)
@@ -90,28 +93,28 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 - [Get First 100 Buyers of a Token ➤](#get-first-100-buyers-of-a-token)
 - [Check If First 100 Buyers Still Holding ➤](#check-if-first-100-buyers-still-holding)
 
-### 4. Token Liquidity, Pools & Pairs
+### 5. Token Liquidity, Pools & Pairs
 
 - [Get All Trading Pairs of a Token ➤](#get-all-trading-pairs-of-a-token)
 - [Get Liquidity of Pump.fun Tokens ➤](#get-liquidity-of-pumpfun-tokens)
 - [Market Cap, Price, Liquidity, Bonding Curve, Volume ➤](#get-market-cap-price-liquidity-bonding-curve-and-volume)
 - [Get Last Pump.fun Trade Before Token Graduates to PumpSwap AMM ➤](#get-last-pumpfun-trade-before-token-graduates-to-pumpswap-amm)
 
-### 5. Token Holder & Trader Insights
+### 6. Token Holder & Trader Insights
 
 - [Get Dev’s Holdings of a Token ➤](#get-devs-holdings-of-a-token)
 - [Get Top 10 Token Holders ➤](#get-top-10-token-holders)
 - [Get Top Traders of a Token ➤](#get-top-traders-of-a-token)
 - [Get Top Token Creators ➤](#get-top-token-creators)
 
-### 6. Token Rankings & Filters
+### 7. Token Rankings & Filters
 
 - [Top Pump.fun Tokens by Market Cap ➤](#top-pumpfun-tokens-by-market-cap)
 - [All Tokens Above 10K Market Cap ➤](#all-tokens-above-10k-market-cap)
 - [Track King of the Hill Tokens ➤](#track-king-of-the-hill-tokens-30k35k-market-cap)
 - [Tokens Between 400K–450K Market Cap ➤](#tokens-between-400k450k-market-cap-with-dev--creation-time)
 
-### 7.[ Video Tutorials](#video-tutorials)
+### 8.[ Video Tutorials](#video-tutorials)
 
 ## Token Creation & Metadata
 
@@ -348,9 +351,66 @@ query MyQuery {
 
 </details>
 
+### Get Token Metadata, Dev Address, Creation Time For Specific Token
+
+Now you can track the newly created Pump.fun Tokens along with their dev address, metadata and supply.
+`PostBalance` will give you the current supply for the token.
+[Newly created Pump.fun tokens with dev, metadata — Stream ➤](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata_9)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```
+subscription {
+  Solana {
+    TokenSupplyUpdates(
+      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {in: ["create","create_v2"]}}}}
+    ) {
+      Block{
+        Time
+      }
+      Transaction{
+        Signer
+      }
+      TokenSupplyUpdate {
+        Amount
+        Currency {
+          Symbol
+          ProgramAddress
+          PrimarySaleHappened
+          Native
+          Name
+          MintAddress
+          MetadataAddress
+          Key
+          IsMutable
+          Fungible
+          EditionNonce
+          Decimals
+          Wrapped
+          VerifiedCollection
+          Uri
+          UpdateAuthority
+          TokenStandard
+        }
+        PostBalance
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Pump.fun Mayhem Mode Tokens
+
+Below APIs are realted to Pump.fun tokens which were launched with in Mayhem mode.
+
+If you need to check for a old pump.fun token if it was created with Mayhem mode `true` or `false` then use this [Bitquery Solana v1 API](http://docs.bitquery.io/v1/docs/Examples/Solana/transfers#check-if-a-pump-fun-token-was-launched-in-mayhem-mode---historical-query), in v1 we have all the solana transfers data so we check for the 1 Billion token transfer to Mayhem Autonomous AI agent if theres a transfer we can say that the token was a Mayhem token.
+
 ### Check Mayhem Mode of a Pump Fun Token
 
-Now you can check if a pump fun token was launched with the `is_mayhem_mode` as `true` or `false`.
+Now you can check if a pump fun token is in Mayhem mode or not, we will be checking if it was launched with the `is_mayhem_mode` as `true` or `false`.
 [Check Mayhem Mode of a Pump Fun Token — Query ➤](https://ide.bitquery.io/check-mayhem-mode-of-a-pump-fun-token_1)
 
 <details>
@@ -399,57 +459,6 @@ query MyQuery {
       }
       Transaction {
         Signature
-      }
-    }
-  }
-}
-```
-
-</details>
-
-### Get Token Metadata, Dev Address, Creation Time For Specific Token
-
-Now you can track the newly created Pump.fun Tokens along with their dev address, metadata and supply.
-`PostBalance` will give you the current supply for the token.
-[Newly created Pump.fun tokens with dev, metadata — Stream ➤](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata_9)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```
-subscription {
-  Solana {
-    TokenSupplyUpdates(
-      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}, Method: {in: ["create","create_v2"]}}}}
-    ) {
-      Block{
-        Time
-      }
-      Transaction{
-        Signer
-      }
-      TokenSupplyUpdate {
-        Amount
-        Currency {
-          Symbol
-          ProgramAddress
-          PrimarySaleHappened
-          Native
-          Name
-          MintAddress
-          MetadataAddress
-          Key
-          IsMutable
-          Fungible
-          EditionNonce
-          Decimals
-          Wrapped
-          VerifiedCollection
-          Uri
-          UpdateAuthority
-          TokenStandard
-        }
-        PostBalance
       }
     }
   }
