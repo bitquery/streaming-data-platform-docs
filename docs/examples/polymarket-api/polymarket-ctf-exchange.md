@@ -388,7 +388,7 @@ Track individual order fills and partial executions. Use this to calculate curre
 
 - `makerAssetId`: Asset ID maker is giving (0 = USDC, otherwise = outcome token)
 - `takerAssetId`: Asset ID taker is giving (0 = USDC, otherwise = outcome token)
-- `makerAmountFilled` or `makerAmount`: Amount in smallest units (USDC: 6 decimals, tokens: 18 decimals)
+- `makerAmountFilled` or `makerAmount`: Amount in smallest units (USDC: 6 decimals, tokens: 6 decimals)
 - `takerAmountFilled` or `takerAmount`: Amount in smallest units
 - `maker`: Maker wallet address
 - `taker`: Taker wallet address
@@ -826,7 +826,7 @@ This provides accurate pricing data for prediction market analytics and trading 
 
 ### Price Calculation
 
-- **Always normalize decimals**: USDC uses 6 decimals, tokens use 18 decimals
+- **Always normalize decimals**: USDC uses 6 decimals
 - **Use latest OrderFilled events**: Most recent trades reflect current market prices
 - **Handle multiple field names**: The API may return `makerAmountFilled`, `makerAmount`, or other variations
 - **Identify USDC correctly**: Asset ID "0" (string or integer) represents USDC
