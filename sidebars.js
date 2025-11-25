@@ -586,6 +586,7 @@ const sidebars = {
             "blockchain/Arbitrum/gmx-api",
             "blockchain/Arbitrum/Smart_Contract_Calls",
             "blockchain/Arbitrum/Smart_Contract_Events",
+            "blockchain/Arbitrum/arbitrum-timeboost-api",
           ],
         },
         {
