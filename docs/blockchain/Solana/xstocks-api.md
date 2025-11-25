@@ -75,6 +75,65 @@ subscription LatestTrades {
 }
 ```
 
+## Latest Price of xStocks using Crypto Price api
+
+You can get latest price of xStocks tokens prices using our [Crypto price api](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).
+
+You can run the query [here](https://ide.bitquery.io/xStocks-prices)
+
+```
+subscription {
+  Trading {
+    Tokens(
+      where: {Token: {Name: {includes: "xStock"}}, Interval: {Time: {Duration: {eq: 1}}}}
+    ) {
+      Token {
+        Address
+        Id
+        IsNative
+        Name
+        Network
+        Name
+        Symbol
+        TokenId
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+        Average {
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+      }
+    }
+  }
+}
+```
+
 ## Latest Price of the Apple xstock
 
 You can use the following query to get the latest price of a Apple xStock on Solana.
