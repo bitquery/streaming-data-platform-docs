@@ -26,6 +26,18 @@ It has the following options:
 In most cases you just not specify this attribute, assuming all option is what you need. Other options are suitable
 for event-driven applications:
 
+
+## Filtering Out All Branch Blocks
+
+Even with `trigger_on: head`, you might receive branch blocks. When a blockchain forks, the subscription cannot determine in real time whether the fork selected will become the longest chain (trunk) in the future. At the moment a fork occurs, the system may initially treat a branch block as the head, only to later discover it becomes part of a branch when a longer chain emerges.
+
+If you need to completely filter out branch-related blocks and transactions, you can run two streams:
+
+1. **Stream with `trigger_on: all`** - This captures all blocks (both trunk and branch)
+2. **Stream with `trigger_on: branch_updates`** - This captures only branch blocks
+
+By comparing these two streams, you can identify and filter out branch-related blocks and transactions. Any block or transaction that appears in the `branch_updates` stream should be excluded from your final dataset, ensuring you only process blocks that remain on the trunk chain.
+
 :::tip
 Use ```head_updates``` together with ```branches_updates``` when you need to accumulate all branches and the trunk
 :::
