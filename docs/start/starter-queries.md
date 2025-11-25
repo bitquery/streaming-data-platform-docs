@@ -91,6 +91,14 @@ This query returns the latest trades on the Ethereum network. This is useful whe
 Get all swap related transactions (buy, sell).  
 ▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest_trades_by_maker)
 
+### Events & Calls
+
+### Get Latest Events
+▶️ [Get Latest Events](https://ide.bitquery.io/Recents-Events-and-Logs-on-Ethereum)
+
+### Get Latest Calls
+▶️ [Get Latest Calls](https://ide.bitquery.io/Recent-Calls-on-Ethereum)
+
 ### OHLC & Price Data
 
 #### Get OHLCV by Pair Address
