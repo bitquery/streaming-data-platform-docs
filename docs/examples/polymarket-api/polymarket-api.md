@@ -1,5 +1,5 @@
 ---
-title: "Polymarket API Documentation"
+title: "Polymarket Data API"
 description: "Complete guide to Polymarket API: Query prediction market data, track trades, get market prices, and access smart contract events on Polygon. Learn how to use GraphQL APIs for Polymarket markets, conditions, tokens, and oracle resolution."
 keywords: 
   - Polymarket API
@@ -31,7 +31,7 @@ keywords:
   - Polymarket market ID
 ---
 
-# Polymarket API Documentation - How to Query Polymarket Data
+# Polymarket Data API Docs - How to Query Polymarket Data
 
 Learn how to query Polymarket data using GraphQL APIs. This comprehensive guide shows you how to access prediction market data, track trades, get market prices, and monitor smart contract events on the Polygon blockchain.
 
