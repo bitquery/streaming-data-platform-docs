@@ -1823,13 +1823,13 @@ We are taking here example of `0x35a7bb282d8caafe71617c9d52ee30f1adfe4444` token
 
 This query retrieves the first transfer of a token to each address, providing the timestamp when each address first received the token.
 
-[Run Query](https://ide.bitquery.io/first-transfers-of-a-token_2)
+[Run Query](https://ide.bitquery.io/first-transfers-of-a-token_4)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query MyQuery {
+query MyQuery($token: String) {
   EVM(network: bsc, dataset: combined) {
     Transfers(
       limit: { count: 1000 }
@@ -1837,10 +1837,13 @@ query MyQuery {
       where: {
         TransactionStatus: { Success: true }
         Transfer: {
-          Receiver: { not: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
-          Currency: {
-            SmartContract: { is: "0x35a7bb282d8caafe71617c9d52ee30f1adfe4444" }
+          Receiver: {
+            notIn: [
+              "0x5c952063c7fc8610ffdb798152d69f0b9550762b"
+              "0x757eba15a64468e6535532fcF093Cef90e226F85"
+            ]
           }
+          Currency: { SmartContract: { is: $token } }
         }
       }
     ) {
@@ -1850,8 +1853,15 @@ query MyQuery {
       Block {
         first_transfer: Time(minimum: Block_Time)
       }
+      total_bought_amount: sum(of: Transfer_Amount)
     }
   }
+}
+```
+
+```
+{
+  "token": "0x35a7bb282d8caafe71617c9d52ee30f1adfe4444"
 }
 ```
 
@@ -1861,14 +1871,14 @@ query MyQuery {
 
 This query checks if the addresses from Query 1 ever bought the token and when. Pass the address array from Query 1 as a variable to this query.
 
-[Run Query](https://ide.bitquery.io/get-first-buys-of-an-address-list-of-a-specific-token)
+[Run Query](https://ide.bitquery.io/get-first-buys-of-an-address-list-of-a-specific-token_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery($token: String!, $buyersList: [String!]) {
-  EVM(network: bsc, dataset: realtime) {
+  EVM(network: bsc, dataset: combined) {
     DEXTradeByTokens(
       orderBy: { descendingByField: "Block_first_buy" }
       where: {
