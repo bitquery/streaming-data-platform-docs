@@ -692,6 +692,17 @@ const sidebars = {
           },
           items: ["examples/futures-dexs/asterdex-api"],
         },
+        {
+          type: "category",
+          label: "x402 Protocol",
+          link: {
+            type: "generated-index",
+            title: "x402 Protocol APIs",
+            description:
+              "APIs for accessing x402 protocol payment data, monitoring server payments, and analyzing payment analytics across multiple blockchain networks.",
+          },
+          items: ["examples/x402/x402-data-apis"],
+        },
       ],
     },
     {
