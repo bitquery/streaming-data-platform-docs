@@ -1627,19 +1627,22 @@ We are taking here example of `3Fymji2JPhhbKuCzNPKEyjdEuF9cyFuQ8HksyjRGpump` tok
 
 This query retrieves the first transfer of a token to each address, providing the timestamp when each address first received the token.
 
-[Run Query](https://ide.bitquery.io/first-transfers-of-a-pump-fun-token#)
+[Run Query](https://ide.bitquery.io/first-transfers-of-a-pump-fun-token_1#)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query MyQuery($token: String) {
+query MyQuery($token: String, $bonding_curve: String) {
   Solana {
     Transfers(
       limit: { count: 1000 }
       orderBy: { ascendingByField: "Block_first_transfer" }
       where: {
-        Transfer: { Currency: { MintAddress: { is: $token } } }
+        Transfer: {
+          Receiver: { Token: { Owner: { not: $bonding_curve } } }
+          Currency: { MintAddress: { is: $token } }
+        }
         Transaction: { Result: { Success: true } }
       }
     ) {
@@ -1661,7 +1664,8 @@ query MyQuery($token: String) {
 
 ```
 {
-  "token": "3Fymji2JPhhbKuCzNPKEyjdEuF9cyFuQ8HksyjRGpump"
+  "token": "3Fymji2JPhhbKuCzNPKEyjdEuF9cyFuQ8HksyjRGpump",
+  "bonding_curve": "6AMeqEdepfKKmTQAwcMvbrwugcaJaXtt3MsJGy7WdXpk"
 }
 ```
 
