@@ -103,19 +103,23 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 ### 6. Token Holder & Trader Insights
 
-- [Get Dev’s Holdings of a Token ➤](#get-devs-holdings-of-a-token)
+- [Get Dev's Holdings of a Token ➤](#get-devs-holdings-of-a-token)
 - [Get Top 10 Token Holders ➤](#get-top-10-token-holders)
 - [Get Top Traders of a Token ➤](#get-top-traders-of-a-token)
 - [Get Top Token Creators ➤](#get-top-token-creators)
 
-### 7. Token Rankings & Filters
+### 7. Token Security & Analysis
+
+- [Check if a Pump.fun Token is Phishy ➤](#check-if-a-pumpfun-token-is-phishy)
+
+### 8. Token Rankings & Filters
 
 - [Top Pump.fun Tokens by Market Cap ➤](#top-pumpfun-tokens-by-market-cap)
 - [All Tokens Above 10K Market Cap ➤](#all-tokens-above-10k-market-cap)
 - [Track King of the Hill Tokens ➤](#track-king-of-the-hill-tokens-30k35k-market-cap)
 - [Tokens Between 400K–450K Market Cap ➤](#tokens-between-400k450k-market-cap-with-dev--creation-time)
 
-### 8.[ Video Tutorials](#video-tutorials)
+### 9.[ Video Tutorials](#video-tutorials)
 
 ## Token Creation & Metadata
 
@@ -1596,6 +1600,142 @@ query MyQuery {
 ```
 
 </details>
+
+## Token Security & Analysis
+
+### Check if a Pump.fun Token is Phishy
+
+This elaborative API approach uses two queries to detect if a Pump.fun token is potentially phishy by analyzing the relationship between token transfers and trades.
+This approach helps identify tokens where recipients received tokens without purchasing them, which is a common pattern in phishing or airdrop scams.
+
+#### How It Works
+
+The detection method works by:
+
+1. **First Query**: Get the first transfers of a token to addresses - this provides the timestamp of when each address first received the token.
+2. **Second Query**: Check if those addresses ever bought the token and when - pass the address list from the first query as a variable to check their purchase history.
+3. **Analysis**: Compare transfer times and trade times in your code:
+
+   - If an address **never bought** the token, it's suspicious.
+   - If an address's **first buy time is later than the first transfer time**, it indicates the token was received before being purchased, which is a red flag for phishing behavior.
+
+     Above analysis means someone else transferred the token to them which is phishy because devs often send token to famous KOLs or Influential People in crypto space to misguide traders.
+
+We are taking here example of `3Fymji2JPhhbKuCzNPKEyjdEuF9cyFuQ8HksyjRGpump` token, this may or may not be phishy as we are not running the further comparison between timestamps. Here we are just demonstrating that how you can get data from Bitquery and later run basic analysis on it.
+
+#### Query 1: Get First Transfers of a Token to Addresses
+
+This query retrieves the first transfer of a token to each address, providing the timestamp when each address first received the token.
+
+[Run Query](https://ide.bitquery.io/first-transfers-of-a-pump-fun-token#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery($token: String) {
+  Solana {
+    Transfers(
+      limit: { count: 1000 }
+      orderBy: { ascendingByField: "Block_first_transfer" }
+      where: {
+        Transfer: { Currency: { MintAddress: { is: $token } } }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Transfer {
+        Receiver {
+          Token {
+            Owner
+          }
+        }
+      }
+      Block {
+        first_transfer: Time(minimum: Block_Time)
+      }
+      total_transferred_amount: sum(of: Transfer_Amount)
+    }
+  }
+}
+```
+
+```
+{
+  "token": "3Fymji2JPhhbKuCzNPKEyjdEuF9cyFuQ8HksyjRGpump"
+}
+```
+
+</details>
+
+#### Query 2: Get First Buys of an Address List for a Specific Token
+
+This query checks if the addresses from Query 1 ever bought the token and when. Pass the address array from Query 1 as a variable to this query.
+
+[Run Query](https://ide.bitquery.io/get-first-buys-of-an-address-list-of-a-specific-pump-fun-token#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery($token: String!, $buyersList: [String!]) {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: { ascendingByField: "Block_first_buy" }
+      where: {
+        Trade: {
+          Account: { Token: { Owner: { in: $buyersList } } }
+          Currency: { MintAddress: { is: $token } }
+          Dex: {
+            ProgramAddress: {
+              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
+            }
+          }
+          Side: { Type: { is: buy } }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Trade {
+        Account {
+          Token {
+            Owner
+          }
+        }
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Side {
+          Type
+        }
+      }
+      Block {
+        first_buy: Time(minimum: Block_Time)
+      }
+      total_bought_amount: sum(of: Trade_Amount)
+    }
+  }
+}
+```
+
+```json
+{
+  "token": "3Fymji2JPhhbKuCzNPKEyjdEuF9cyFuQ8HksyjRGpump",
+  "buyersList": [ PASS THE ADDRESS LIST YOU GOT FROM QUERY 1 HERE ]
+}
+```
+
+</details>
+
+#### Implementation Notes
+
+- Extract the address list and first transfer timestamps from Query 1
+- Pass the address array as a variable to Query 2
+- Compare the timestamps for all addresses:
+  - If `firstTransferTime < firstBuyTime` or `firstBuyTime` is null → **Phishy indicator**
+  - If `firstBuyTime <= firstTransferTime` → **Normal behavior**
+- You can implement this logic in your application code to automatically flag suspicious tokens
 
 ## Token Rankings & Filters
 
