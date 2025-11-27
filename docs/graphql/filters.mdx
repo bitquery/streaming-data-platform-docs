@@ -30,12 +30,17 @@ You can run the query [here](https://ide.bitquery.io/using-OR-condition-example-
 
 > Note: The `any` filter must always be an array.
 
-```
+```graphql
 {
   EVM(dataset: archive, network: eth) {
     Blocks(
-      where: {any: [{Block: {Number: {gt: "19111970"}}}, {Block: {TxCount: {gt: 100}}}]}
-      limit: {count: 10}
+      where: {
+        any: [
+          { Block: { Number: { gt: "19111970" } } },
+          { Block: { TxCount: { gt: 100 } } }
+        ]
+      }
+      limit: { count: 10 }
     ) {
       Block {
         Bloom
@@ -47,8 +52,7 @@ You can run the query [here](https://ide.bitquery.io/using-OR-condition-example-
     }
   }
 }
-
-```
+````
 
 ## Examples
 
@@ -69,18 +73,18 @@ with the same levels as the query schema. This allows to build complex filters b
 as in the following example:
 
 ```graphql
-\{
-  EVM \{
+{
+  EVM {
     Transactions(
-      where: \{
-        Block: \{ GasUsed: \{ ge: "26000000" \} \}
-        Transaction: \{ Gas: \{ ge: "16000000" \} \}
+      where: {
+        Block: { GasUsed: { ge: "26000000" } }
+        Transaction: { Gas: { ge: "16000000" } }
       }
-    ) \{
-      Block \{
+    ) {
+      Block {
         GasUsed
       }
-      Transaction \{
+      Transaction {
         Gas
       }
     }
@@ -88,36 +92,35 @@ as in the following example:
 }
 ```
 
-:::note
-filters are combined by **AND** principles, result set is an intersection of all criteria defined in the
-`where` attribute
-:::
-
 ## Dynamic Where Filter
 
 You can pass the WHERE clause as a parameter to set dynamic conditions for filtering the response. In the below example, we are passing the WHERE clause as a parameter, where we use 'currency' as a filter.
 
-```
-query ($where: EVM_DEXTradeByToken_Filter) \{
-  EVM(dataset: archive) \{
+```graphql
+query ($where: EVM_DEXTradeByToken_Filter) {
+  EVM(dataset: archive) {
     DEXTradeByTokens(
-      limit: \{count: 10\}
+      limit: {count: 10}
       where: $where
-      orderBy: \{descending: Block_Date\}
-    ) \{
-      Block \{
+      orderBy: {descending: Block_Date}
+    ) {
+      Block {
         Date
       }
       sum(of: Trade_PriceInUSD)
     }
   }
 }
-<!-- Parameters -->
-\{
-  "where": \{
-    "Trade": \{
-      "Currency": \{
-        "Symbol": \{
+```
+
+**Parameters:**
+
+```json
+{
+  "where": {
+    "Trade": {
+      "Currency": {
+        "Symbol": {
           "is": "PEPE"
         }
       }
@@ -130,85 +133,73 @@ query ($where: EVM_DEXTradeByToken_Filter) \{
 
 Each condition can be passed as a parameter to allow for highly customizable queries.
 
-For example, in the below query:
-
-```
+```graphql
 query(
   $network: evm_network
   $mempool: Boolean
-	$currency_filter: EVM_DEXTradeByToken_Input_Trade_Currency_InputType
+  $currency_filter: EVM_DEXTradeByToken_Input_Trade_Currency_InputType
   $amount_usd_filter: EVM_Amount_With_Decimals
   $price_usd_filter: OLAP_Float
   $price_assymetry_filter: OLAP_Float
-) \{
-  EVM(network: $network mempool: $mempool) \{
+) {
+  EVM(network: $network mempool: $mempool) {
     DEXTradeByTokens(
-      orderBy: \{descending: Block_Number\}
-      limit: \{count: 35\}
+      orderBy: {descending: Block_Number}
+      limit: {count: 35}
 
-      where: \{
-
-        Trade: \{
+      where: {
+        Trade: {
           Currency: $currency_filter
           AmountInUSD: $amount_usd_filter
           PriceInUSD: $price_usd_filter
           PriceAsymmetry: $price_assymetry_filter
         }
-
       }
-
-    ) \{
-
-      Block \{
+    ) {
+      Block {
         Time
       }
 
-      Transaction \{
+      Transaction {
         Hash
       }
 
-      Trade \{
+      Trade {
         Buyer
         Seller
         Amount
         AmountInUSD
-        Currency \{
+        Currency {
           Symbol
           SmartContract
         }
         Price
         PriceInUSD
         PriceAsymmetry
-        Side \{
-          Currency \{
+        Side {
+          Currency {
             SmartContract
             Symbol
           }
         }
-
       }
-
     }
   }
 }
-<!-- Parameter -->
-
-\{
-  "network": "matic",
-  "mempool": false,
-  "currency_filter": \{ "SmartContract": \{ "is": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39"\}\},
-  "amount_usd_filter": \{"ge": "2000.0"\},
-  "price_usd_filter": \{"ge": 13.59\},
-  "price_assymetry_filter": \{"ge": 0.001\}
-}
 ```
 
-we have the following filters:
+**Parameters:**
 
-- **`$currency_filter`**: Filters trades by the currency involved using criteria based on the smart contract address.
-- **`$amount_usd_filter`**: Filters trades by the amount in USD.
-- **`$price_usd_filter`**: Filters trades by the price of the currency in USD.
-- **`$price_assymetry_filter`**: Filters trades by the price asymmetry value.
+```json
+{
+  "network": "matic",
+  "mempool": false,
+  "currency_filter": { "SmartContract": { "is": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39"} },
+  "amount_usd_filter": {"ge": "2000.0"},
+  "price_usd_filter": {"ge": 13.59},
+  "price_assymetry_filter": {"ge": 0.001}
+}
+```
 
 <VideoPlayer url="https://youtu.be/FJspQbK6y6o" />
 
@@ -220,180 +211,133 @@ Depending on the data type of the element used in `where` filter, different oper
 
 For numeric data, the following operators applicable:
 
-- `eq` equals to
-- `ne` not equals to
-- `ge` greater or equal
-- `gt` greater than
-- `le` less or equal
-- `lt` less than
-
-:::tip
-If you need to define the range of value, use `ge` and `le` together:
-
-```
-          GasUsed: \{
-            ge: "26000000"
-            le: "60000000"
-          }
-```
-
-:::tip
-
-:::note
-Almost all numeric values in blockchain lies above the 32-bit boundary defined for numbers in GraphQL
-and JSON. So the string values used instead to define any number with not limited precision.
-:::
+* `eq` equals to
+* `ne` not equals to
+* `ge` greater or equal
+* `gt` greater than
+* `le` less or equal
+* `lt` less than
 
 ### String Filter Types
 
-For string data, the following operators applicable:
+For string data:
 
-- `is` equals to
-- `not` not equals to
-- `in` value exists in a list
-- `notIn` value does not exist in a list
-- `includes` contains a substring (case-sensitive)
-- `includesCaseInsensitive` contains a substring (case-insensitive)
-- `notIncludes` does not contain a substring (case-sensitive)
-- `notIncludesCaseInsensitive` does not contain a substring (case-insensitive)
-- `like` matches a pattern using wildcards (case-sensitive)
-- `likeCaseInsensitive` matches a pattern using wildcards (case-insensitive)
-- `notLike` does not match a pattern (case-sensitive)
-- `notLikeCaseInsensitive` does not match a pattern (case-insensitive)
-- `startsWith` starts with a specific value (case-sensitive)
-- `startsWithCaseInsensitive` starts with a specific value (case-insensitive)
-- `endsWith` ends with a specific value (case-sensitive)
+* `is`
+* `not`
+* `in`
+* `notIn`
+* `includes`
+* `includesCaseInsensitive`
+* `notIncludes`
+* `notIncludesCaseInsensitive`
+* `like`
+* `likeCaseInsensitive`
+* `notLike`
+* `notLikeCaseInsensitive`
+* `startsWith`
+* `startsWithCaseInsensitive`
+* `endsWith`
 
-When using `like` and `likeCaseInsensitive` filters, you can use **wildcards** for flexible pattern matching:
+Examples:
 
-- `%` → Matches zero or more characters (e.g., `"%sol%"` matches `"mesolana"`, `"solid"`). Test the query [here](https://ide.bitquery.io/Currency-with-any-sol-inside)
-- `_` → Matches exactly one character (e.g., `"s_l"` matches `"sol"`, `"sal"`). Test the query [here](https://ide.bitquery.io/Currency-with-trump-and-s)
-
-- `notLike` does not match a pattern using wildcards (case-sensitive)
-- `notLikeCaseInsensitive` does not match a pattern using wildcards (case-insensitive)
-
-:::danger
-`not` and `ne` filters do not prevent to query large amount of data, consider use them only with
-some other filters
-:::
+* `%` → Matches zero or more characters
+* `_` → Matches exactly one character
 
 ### Date and Time Filter Types
 
-For date and timestamp data, the following operators applicable:
-
-- `is` date equals to
-- `not` date not equals to
-- `after` after certain date (not including it)
-- `since` after including date
-- `till` before including date
-- `before` before not including date
+* `is`
+* `not`
+* `after`
+* `since`
+* `till`
+* `before`
 
 ### Array Filter Types
 
-Array fields can be filtered using the following conditions:
+* `length`
+* `includes`
+* `excludes`
+* `startsWith`
+* `endsWith`
+* `notStartsWith`
+* `notEndsWith`
 
-- `length` condition on array length;
-- `includes` if array include item defined by the condition;
-- `excludes` if array exclude item defined by the condition;
-- `startsWith` if array starts with the item defined by the condition;
-- `endsWith` if array ends with the item defined by the condition;
-- `notStartsWith` if array does not start with the item defined by the condition;
-- `notEndsWith` if array does not end with the item defined by the condition;
+Example:
 
-:::note
-Note that all conditions on items can be a list, they all applied to selecting the item in AND manner.
-:::
-
-Example of the condition is the following:
-
-```
-\{
-  EVM \{
+```graphql
+{
+  EVM {
     Calls(
-      where: \{
-        Arguments: \{
-					length: \{eq: 2\}
-          includes: \{
-            Index: \{eq: 0\}
-            Name: \{is: "recipient"\}
+      where: {
+        Arguments: {
+          length: {eq: 2}
+          includes: {
+            Index: {eq: 0}
+            Name: {is: "recipient"}
           }
         }
       }
-      limit: \{count: 10\}) \{
-      Arguments \{
+      limit: {count: 10}
+    ) {
+      Arguments {
         Index
         Name
         Type
       }
-      Call \{
-        Signature \{
+      Call {
+        Signature {
           Signature
         }
       }
     }
   }
 }
-
 ```
 
-Filter selects calls which have 2 arguments, and the first argument name is "recipient"
+Another example:
 
-Condition can combine conditions on the items:
-
+```graphql
+Arguments: {
+  includes: [
+    {
+      Index: {eq: 0}
+      Name: {is: "recipient"}
+      Value: {Address: {is: "0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969"}}
+    }
+    {
+      Name: {is: "amount"}
+      Value: {BigInteger: {ge: "1000000000"}}
+    }
+  ]
+}
 ```
-Arguments: \{
-          includes: [
-            \{
-            Index: \{eq: 0\}
-            Name: \{is: "recipient"\}
-            Value: \{Address: \{is: "0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969"\}\}
-           }
-           \{
-            Name: \{is: "amount"\}
-            Value: \{BigInteger: \{ge: "1000000000"\}\}
-           }
-          ]
-        }
-      }
-```
-
-It extends the previous example, selecting only calls that have all 4 conditions:
-
-- the first argument named 'recipient'
-- the first argument value of type address equal to '0xa7f6ebbd4cdb249a2b999b7543aeb1f80bda7969'
-- any argument called "amount"
-- argument named "amount" having value bigger than 1000000000
 
 ## Filtering: Where vs selectWhere
 
-The `selectWhere` parameter functions similarly to the `HAVING` clause in SQL, allowing users to filter on aggregated data.
+The `selectWhere` parameter functions similarly to the `HAVING` clause in SQL.
 
-To demonstrate the use of `selectWhere`, consider the following query that retrieves blocks from the EVM dataset and filters based on a transaction count greater than 1,500,000.
-
-```
-query \{
-  EVM(dataset: archive) \{
-    Blocks \{
-      Block \{
+```graphql
+query {
+  EVM(dataset: archive) {
+    Blocks {
+      Block {
         Date
       }
-      sum(of: Block_TxCount selectWhere: \{gt: "1500000"\})
+      sum(of: Block_TxCount selectWhere: {gt: "1500000"})
     }
   }
 }
 ```
 
-**sum(of: Block_TxCount selectWhere: \{gt: "1500000"\})**: Applies the `sum` aggregate function to `Block_TxCount` and filters for sums greater than 1,500,000.
+This example filters based on aggregated `sum`.
 
-In this example, the query retrieves block data and applies a filter on the sum of transaction counts to include only those blocks where the transaction count exceeds 1,500,000.
+Compare with:
 
-This is different from the `where` clause, which is used to filter the blocks based on the transaction count:
-
-```
-query \{
-  EVM(dataset: archive) \{
-    Blocks(where: \{Block: \{TxCount: \{gt: 1500000\}\}}) \{
-      Block \{
+```graphql
+query {
+  EVM(dataset: archive) {
+    Blocks(where: {Block: {TxCount: {gt: 1500000}}}) {
+      Block {
         Date
       }
     }
@@ -401,6 +345,7 @@ query \{
 }
 ```
 
-- **Blocks(where: \{Block: \{TxCount: \{gt: 1500000\}\}\})**: Filters blocks directly where `TxCount` is greater than 1,500,000 before aggregation.
+`where` filters **before aggregation**, `selectWhere` filters **after aggregation**.
 
-In this query, the `where` clause directly filters blocks with transaction counts greater than 1,500,000 before any aggregation occurs.
+```
+
