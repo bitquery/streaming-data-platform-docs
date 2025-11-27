@@ -1,7 +1,7 @@
 ---
 title: "AsterDEX API Documentation"
 description: "Comprehensive AsterDEX API guide for BNB Smart Chain perpetual futures trading. Access real-time liquidations, order lifecycle tracking, margin trading data, funding rates, and smart contract events via Bitquery GraphQL APIs. Perfect for developers building DeFi trading applications."
-keywords: 
+keywords:
   - AsterDEX API documentation
   - BNB Smart Chain perpetual futures
   - BSC futures trading API
@@ -34,38 +34,6 @@ image: "/img/asterdex-api-guide.png"
 
 # AsterDEX API Documentation - Complete Guide to BNB Smart Chain Perpetual Futures Trading
 
-## Overview
-
-**AsterDEX** is a leading perpetual decentralized exchange (Perp DEX) built on **BNB Smart Chain (BSC)** that revolutionizes cryptocurrency futures trading through automated market-making mechanisms. This comprehensive API documentation provides developers with everything needed to integrate AsterDEX's perpetual futures data, liquidation events, and trading analytics into their DeFi applications.
-
-### What is AsterDEX?
-
-AsterDEX operates as a **decentralized futures exchange** on BNB Smart Chain, enabling users to:
-- Trade **perpetual futures contracts** with leverage
-- Provide liquidity to automated market makers
-- Earn fees through liquidity provision
-- Access **margin trading** with advanced risk management
-- Monitor **funding rates** and market dynamics
-
-### Why Use Bitquery for AsterDEX Data?
-
-**Bitquery** provides comprehensive blockchain data infrastructure that indexes the entire BSC chain in real-time. All **AsterDEX trading data** — including perpetual futures trades, liquidation events, margin calls, and smart contract interactions — is automatically captured and made available through powerful GraphQL APIs and streaming services.
-
-**Key advantages:**
-- **Real-time data access** without running blockchain nodes
-- **Historical data** for backtesting and analytics  
-- **GraphQL API** for flexible data queries
-- **Streaming capabilities** for live trading applications
-- **Complete order lifecycle tracking** from creation to settlement
-
-## What You Can Build with AsterDEX API Integration
-
-With Bitquery's AsterDEX integration, developers can build:
-
-- **Query all trades, swaps, and liquidity pool activity** on AsterDEX
-- **Monitor trader, token pairs, and pool performance** in real-time
-- **Stream real‑time on‑chain events** (swaps, stop loss & take profit updates, liquidations) as they occur
-
 ## Quick Start Guide
 
 ### Prerequisites for AsterDEX API Integration
@@ -73,7 +41,7 @@ With Bitquery's AsterDEX integration, developers can build:
 Before integrating AsterDEX APIs, ensure you have:
 
 1. **Bitquery Account**: Sign up at [ide.bitquery.io](https://ide.bitquery.io/) for API access
-2. **GraphQL Knowledge**: Basic understanding of GraphQL query syntax  
+2. **GraphQL Knowledge**: Basic understanding of GraphQL query syntax
 3. **BNB Smart Chain Familiarity**: Knowledge of BSC addresses and transactions
 4. **Development Environment**: Any programming language with HTTP request capabilities
 
@@ -105,23 +73,23 @@ const query = `
 }
 `;
 
-fetch('https://streaming.bitquery.io/graphql', {
-  method: 'POST',
+fetch("https://streaming.bitquery.io/graphql", {
+  method: "POST",
   headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer YOUR_API_KEY'
+    "Content-Type": "application/json",
+    Authorization: "Bearer YOUR_API_KEY",
   },
-  body: JSON.stringify({ query })
+  body: JSON.stringify({ query }),
 });
 ```
 
 ## Smart Contract Information
 
-| Contract Type | Address | Network | Purpose |
-|---------------|---------|---------|---------|
-| **AsterDEX Main Contract** | `0x1b6F2d3844C6ae7D56ceb3C3643b9060ba28FEb0` | BNB Smart Chain (BSC) | Core perpetual futures trading logic |
-| **Network ID** | `56` | BNB Smart Chain | Main BSC network identifier |
-| **Block Explorer** | [bscscan.com](https://bscscan.com/address/0x1b6F2d3844C6ae7D56ceb3C3643b9060ba28FEb0) | BSC Explorer | Contract verification and transactions |
+| Contract Type              | Address                                                                               | Network               | Purpose                                |
+| -------------------------- | ------------------------------------------------------------------------------------- | --------------------- | -------------------------------------- |
+| **AsterDEX Main Contract** | `0x1b6F2d3844C6ae7D56ceb3C3643b9060ba28FEb0`                                          | BNB Smart Chain (BSC) | Core perpetual futures trading logic   |
+| **Network ID**             | `56`                                                                                  | BNB Smart Chain       | Main BSC network identifier            |
+| **Block Explorer**         | [bscscan.com](https://bscscan.com/address/0x1b6F2d3844C6ae7D56ceb3C3643b9060ba28FEb0) | BSC Explorer          | Contract verification and transactions |
 
 ---
 
@@ -213,16 +181,16 @@ These allow Bitquery to display aggregate market metrics, such as open interest,
 
 ## Summary of Core Events
 
-| Stage | Key Events | Description |
-|-------|------------|-------------|
-| **Order Open** | `OpenMarketTrade`, `OpenLimitOrder` | Creation of new orders |
-| **Pending** | `MarketPendingTrade`, `PredictAndBetPending` | Waiting for oracle / validation |
-| **Execution** | `ExecuteLimitOrderSuccessful`, `MarketTradeCallback` | Order filled |
-| **Margin Update** | `UpdateMargin` | Margin increased or decreased |
-| **Risk Triggers** | `ExecuteTpSlOrLiq`, `UpdateTradeSl`, `UpdateTradeTp` | Stop-loss/TP triggered |
-| **Close** | `CloseTradeSuccessful`, `CloseTradeReceived` | Trade settled |
-| **Fees** | `OpenFee`, `CloseFee`, `FundingFeeAddLiquidity` | Fee settlements |
-| **Market Updates** | `UpdatePairPositionInfo`, `UpdatePairAccFundingFeePerShare` | Aggregate pair data refresh |
+| Stage              | Key Events                                                  | Description                     |
+| ------------------ | ----------------------------------------------------------- | ------------------------------- |
+| **Order Open**     | `OpenMarketTrade`, `OpenLimitOrder`                         | Creation of new orders          |
+| **Pending**        | `MarketPendingTrade`, `PredictAndBetPending`                | Waiting for oracle / validation |
+| **Execution**      | `ExecuteLimitOrderSuccessful`, `MarketTradeCallback`        | Order filled                    |
+| **Margin Update**  | `UpdateMargin`                                              | Margin increased or decreased   |
+| **Risk Triggers**  | `ExecuteTpSlOrLiq`, `UpdateTradeSl`, `UpdateTradeTp`        | Stop-loss/TP triggered          |
+| **Close**          | `CloseTradeSuccessful`, `CloseTradeReceived`                | Trade settled                   |
+| **Fees**           | `OpenFee`, `CloseFee`, `FundingFeeAddLiquidity`             | Fee settlements                 |
+| **Market Updates** | `UpdatePairPositionInfo`, `UpdatePairAccFundingFeePerShare` | Aggregate pair data refresh     |
 
 Bitquery indexes all of these events in real-time, linking them to transactions, blocks, and traders—enabling complete lifecycle tracking of each AsterDEX trade via API or stream.
 
@@ -240,8 +208,12 @@ Monitor all events emitted by the AsterDEX contract to track all platform activi
 {
   EVM(dataset: realtime, network: bsc) {
     Events(
-      limit: {count: 20}
-      where: {LogHeader: {Address: {is: "0x1b6F2d3844C6ae7D56ceb3C3643b9060ba28FEb0"}}}
+      limit: { count: 20 }
+      where: {
+        LogHeader: {
+          Address: { is: "0x1b6F2d3844C6ae7D56ceb3C3643b9060ba28FEb0" }
+        }
+      }
     ) {
       count
       Log {
@@ -265,15 +237,15 @@ Similarly, we can get all newly created Limit Orders by following the `OpenLimit
 
 #### Difference between OpenLimitOrder and OpenMarketTrade
 
-| Feature | OpenLimitOrder | OpenMarketTrade |
-|---------|----------------|-----------------|
-| **Purpose** | Creates a limit order — an instruction to open a trade only when price conditions are met. | Opens a market trade immediately at the current market price. |
-| **Function Call** | `openLimitOrder()` or `openLimitOrderBNB()` | `openMarketTrade()` or `openMarketTradeBNB()` |
-| **Emitted Event** | `OpenLimitOrder(address user, bytes32 orderHash, IBook.OpenDataInput data)` | `OpenMarketTrade(address user, bytes32 tradeHash, IBook.OpenDataInput trade)` |
-| **Execution Timing** | Delayed – waits for trigger (price crossing limit, oracle validation). | Immediate – executes as soon as transaction is confirmed. |
-| **Order State After Creation** | Becomes pending — monitored by AsterDEX Keeper or Chainlink callback. | Becomes active trade instantly. |
-| **Follow-up Events** | • `ExecuteLimitOrderSuccessful` (when executed)<br />• `ExecuteLimitOrderRejected` (if canceled/invalid)<br />• `CancelLimitOrder` (if user cancels) | • `MarketPendingTrade` (waiting oracle)<br />• `MarketTradeCallback` (execution confirmation)<br />• `PendingTradeRefund` (if failed) |
-| **Event Parameters (data struct)** | pairBase, isLong, tokenIn, amountIn, qty, price, stopLoss, takeProfit, broker | Same struct, but price acts as execution price instead of limit trigger. |
+| Feature                            | OpenLimitOrder                                                                                                                                       | OpenMarketTrade                                                                                                                       |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **Purpose**                        | Creates a limit order — an instruction to open a trade only when price conditions are met.                                                           | Opens a market trade immediately at the current market price.                                                                         |
+| **Function Call**                  | `openLimitOrder()` or `openLimitOrderBNB()`                                                                                                          | `openMarketTrade()` or `openMarketTradeBNB()`                                                                                         |
+| **Emitted Event**                  | `OpenLimitOrder(address user, bytes32 orderHash, IBook.OpenDataInput data)`                                                                          | `OpenMarketTrade(address user, bytes32 tradeHash, IBook.OpenDataInput trade)`                                                         |
+| **Execution Timing**               | Delayed – waits for trigger (price crossing limit, oracle validation).                                                                               | Immediate – executes as soon as transaction is confirmed.                                                                             |
+| **Order State After Creation**     | Becomes pending — monitored by AsterDEX Keeper or Chainlink callback.                                                                                | Becomes active trade instantly.                                                                                                       |
+| **Follow-up Events**               | • `ExecuteLimitOrderSuccessful` (when executed)<br />• `ExecuteLimitOrderRejected` (if canceled/invalid)<br />• `CancelLimitOrder` (if user cancels) | • `MarketPendingTrade` (waiting oracle)<br />• `MarketTradeCallback` (execution confirmation)<br />• `PendingTradeRefund` (if failed) |
+| **Event Parameters (data struct)** | pairBase, isLong, tokenIn, amountIn, qty, price, stopLoss, takeProfit, broker                                                                        | Same struct, but price acts as execution price instead of limit trigger.                                                              |
 
 ### 3. All Recent Liquidations on AsterDEX
 
@@ -332,42 +304,42 @@ You can actually merge these two queries. Here is an example: [Combined Traders 
 
 Here is the complete list of all events emitted by the AsterDEX smart contract with their signatures:
 
-| Event Name | Signature |
-|------------|-----------|
-| **PendingPredictionRefund** | `PendingPredictionRefund(address,uint256,uint8)` |
-| **MarketPendingTrade** | `MarketPendingTrade(address,bytes32,(address,bool,address,uint96,uint80,uint64,uint64,uint64,uint24))` |
-| **OpenFee** | `OpenFee(address,uint256,uint256,uint24,uint256,uint256)` |
-| **CloseTradeAddLiquidity** | `CloseTradeAddLiquidity(address,uint256)` |
-| **ExecuteLimitOrderSuccessful** | `ExecuteLimitOrderSuccessful(address,bytes32)` |
-| **CloseTradeReceived** | `CloseTradeReceived(address,bytes32,address,uint256)` |
-| **UnStake** | `UnStake(address,uint256)` |
-| **BurnFee** | `BurnFee(address,address,uint256,uint256,uint256,uint256)` |
-| **FundingFeeAddLiquidity** | `FundingFeeAddLiquidity(address,uint256)` |
-| **OpenLimitOrder** | `OpenLimitOrder(address,bytes32,(address,bool,address,uint96,uint80,uint64,uint64,uint64,uint24))` |
-| **CloseTradeRemoveLiquidity** | `CloseTradeRemoveLiquidity(address,uint256)` |
-| **SettlePredictionSuccessful** | `SettlePredictionSuccessful(uint256,bool,uint256,address,uint256,uint256)` |
-| **MintAlp** | `MintAlp(address,address,uint256,uint256)` |
-| **ExecuteCloseRejected** | `ExecuteCloseRejected(address,bytes32,uint8,uint64,uint64)` |
-| **UpdatePairAccFundingFeePerShare** | `UpdatePairAccFundingFeePerShare(address,uint256,int256,uint256)` |
-| **UpdateOrderSl** | `UpdateOrderSl(address,bytes32,uint256,uint256)` |
-| **CloseFee** | `CloseFee(address,uint256,uint256,uint24,uint256,uint256)` |
-| **CloseTradeSuccessful** | `CloseTradeSuccessful(address,bytes32,(uint64,int96,uint96,int96,uint96))` |
-| **UpdateMargin** | `UpdateMargin(address,bytes32,uint256,uint256)` |
-| **MintFee** | `MintFee(address,address,uint256,uint256,uint256,uint256)` |
-| **PredictAndBet** | `PredictAndBet(address,uint256,(address,uint96,address,uint96,address,uint96,uint32,uint64,uint40,uint24,bool,uint8))` |
-| **BurnRemoveLiquidity** | `BurnRemoveLiquidity(address,address,uint256)` |
-| **UpdateSlippageConfig** | `UpdateSlippageConfig(uint16,uint8,uint256,uint256,uint16,uint16,uint256,uint256)` |
-| **PendingTradeRefund** | `PendingTradeRefund(address,bytes32,uint8)` |
-| **PredictionCloseFee** | `PredictionCloseFee(address,uint256,uint256,uint24,uint256,uint256)` |
-| **PredictAndBetPending** | `PredictAndBetPending(address,uint256,(address,uint96,address,uint96,address,uint64,uint24,bool,uint128,uint8))` |
-| **UpdatePairPositionInfo** | `UpdatePairPositionInfo(address,uint256,uint256,uint256,int256,uint64,uint64)` |
-| **OpenMarketTrade** | `OpenMarketTrade(address,bytes32,(address,uint32,uint64,address,address,uint96,uint64,uint64,uint24,bool,uint96,int256,uint96,uint40,uint80,uint40,uint256))` |
-| **ExecuteCloseSuccessful** | `ExecuteCloseSuccessful(address,bytes32,uint8,(uint64,int96,uint96,int96,uint96))` |
-| **CancelLimitOrder** | `CancelLimitOrder(address,bytes32)` |
-| **UpdateTradeTp** | `UpdateTradeTp(address,bytes32,uint256,uint256)` |
-| **UpdateTradeSl** | `UpdateTradeSl(address,bytes32,uint256,uint256)` |
-| **MintAddLiquidity** | `MintAddLiquidity(address,address,uint256)` |
-| **BurnAlp** | `BurnAlp(address,address,address,uint256,uint256)` |
+| Event Name                          | Signature                                                                                                                                                     |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **PendingPredictionRefund**         | `PendingPredictionRefund(address,uint256,uint8)`                                                                                                              |
+| **MarketPendingTrade**              | `MarketPendingTrade(address,bytes32,(address,bool,address,uint96,uint80,uint64,uint64,uint64,uint24))`                                                        |
+| **OpenFee**                         | `OpenFee(address,uint256,uint256,uint24,uint256,uint256)`                                                                                                     |
+| **CloseTradeAddLiquidity**          | `CloseTradeAddLiquidity(address,uint256)`                                                                                                                     |
+| **ExecuteLimitOrderSuccessful**     | `ExecuteLimitOrderSuccessful(address,bytes32)`                                                                                                                |
+| **CloseTradeReceived**              | `CloseTradeReceived(address,bytes32,address,uint256)`                                                                                                         |
+| **UnStake**                         | `UnStake(address,uint256)`                                                                                                                                    |
+| **BurnFee**                         | `BurnFee(address,address,uint256,uint256,uint256,uint256)`                                                                                                    |
+| **FundingFeeAddLiquidity**          | `FundingFeeAddLiquidity(address,uint256)`                                                                                                                     |
+| **OpenLimitOrder**                  | `OpenLimitOrder(address,bytes32,(address,bool,address,uint96,uint80,uint64,uint64,uint64,uint24))`                                                            |
+| **CloseTradeRemoveLiquidity**       | `CloseTradeRemoveLiquidity(address,uint256)`                                                                                                                  |
+| **SettlePredictionSuccessful**      | `SettlePredictionSuccessful(uint256,bool,uint256,address,uint256,uint256)`                                                                                    |
+| **MintAlp**                         | `MintAlp(address,address,uint256,uint256)`                                                                                                                    |
+| **ExecuteCloseRejected**            | `ExecuteCloseRejected(address,bytes32,uint8,uint64,uint64)`                                                                                                   |
+| **UpdatePairAccFundingFeePerShare** | `UpdatePairAccFundingFeePerShare(address,uint256,int256,uint256)`                                                                                             |
+| **UpdateOrderSl**                   | `UpdateOrderSl(address,bytes32,uint256,uint256)`                                                                                                              |
+| **CloseFee**                        | `CloseFee(address,uint256,uint256,uint24,uint256,uint256)`                                                                                                    |
+| **CloseTradeSuccessful**            | `CloseTradeSuccessful(address,bytes32,(uint64,int96,uint96,int96,uint96))`                                                                                    |
+| **UpdateMargin**                    | `UpdateMargin(address,bytes32,uint256,uint256)`                                                                                                               |
+| **MintFee**                         | `MintFee(address,address,uint256,uint256,uint256,uint256)`                                                                                                    |
+| **PredictAndBet**                   | `PredictAndBet(address,uint256,(address,uint96,address,uint96,address,uint96,uint32,uint64,uint40,uint24,bool,uint8))`                                        |
+| **BurnRemoveLiquidity**             | `BurnRemoveLiquidity(address,address,uint256)`                                                                                                                |
+| **UpdateSlippageConfig**            | `UpdateSlippageConfig(uint16,uint8,uint256,uint256,uint16,uint16,uint256,uint256)`                                                                            |
+| **PendingTradeRefund**              | `PendingTradeRefund(address,bytes32,uint8)`                                                                                                                   |
+| **PredictionCloseFee**              | `PredictionCloseFee(address,uint256,uint256,uint24,uint256,uint256)`                                                                                          |
+| **PredictAndBetPending**            | `PredictAndBetPending(address,uint256,(address,uint96,address,uint96,address,uint64,uint24,bool,uint128,uint8))`                                              |
+| **UpdatePairPositionInfo**          | `UpdatePairPositionInfo(address,uint256,uint256,uint256,int256,uint64,uint64)`                                                                                |
+| **OpenMarketTrade**                 | `OpenMarketTrade(address,bytes32,(address,uint32,uint64,address,address,uint96,uint64,uint64,uint24,bool,uint96,int256,uint96,uint40,uint80,uint40,uint256))` |
+| **ExecuteCloseSuccessful**          | `ExecuteCloseSuccessful(address,bytes32,uint8,(uint64,int96,uint96,int96,uint96))`                                                                            |
+| **CancelLimitOrder**                | `CancelLimitOrder(address,bytes32)`                                                                                                                           |
+| **UpdateTradeTp**                   | `UpdateTradeTp(address,bytes32,uint256,uint256)`                                                                                                              |
+| **UpdateTradeSl**                   | `UpdateTradeSl(address,bytes32,uint256,uint256)`                                                                                                              |
+| **MintAddLiquidity**                | `MintAddLiquidity(address,address,uint256)`                                                                                                                   |
+| **BurnAlp**                         | `BurnAlp(address,address,address,uint256,uint256)`                                                                                                            |
 
 ---
 
@@ -386,21 +358,25 @@ Here is the complete list of all events emitted by the AsterDEX smart contract w
 ### Common Use Cases
 
 **Trading Dashboard**:
+
 - Track `OpenMarketTrade` and `OpenLimitOrder` for new positions
 - Monitor `CloseTradeSuccessful` for position closures
 - Display `UpdateMargin` events for margin changes
 
 **Risk Management**:
+
 - Monitor `ExecuteCloseSuccessful` with `executionType: 2` for liquidations
 - Track `UpdateTradeSl` and `UpdateTradeTp` for stop-loss and take-profit updates
 - Alert on funding rate changes via `UpdatePairAccFundingFeePerShare`
 
 **Analytics Platform**:
+
 - Aggregate trading volumes from all position opening/closing events
 - Analyze trader behavior using specific trader addresses
 - Calculate platform fees from `OpenFee` and `CloseFee` events
 
 **Arbitrage Monitoring**:
+
 - Watch for price discrepancies in `MarketPendingTrade` events
 - Monitor funding rates for cross-platform opportunities
 - Track liquidation events for potential arbitrage
@@ -410,12 +386,14 @@ Here is the complete list of all events emitted by the AsterDEX smart contract w
 ### Performance Optimization
 
 **Efficient Query Design:**
+
 - Use specific event names instead of querying all events
 - Implement proper pagination for large datasets
 - Cache frequently accessed data to reduce API calls
 - Use GraphQL field selection to minimize response size
 
 **Real-time Data Handling:**
+
 ```javascript
 // Optimized query for high-frequency trading applications
 const optimizedQuery = `{
@@ -438,12 +416,14 @@ const optimizedQuery = `{
 ### Security Considerations
 
 **API Key Management:**
+
 - Store API keys securely using environment variables
 - Implement API key rotation for production applications
 - Use read-only permissions when possible
 - Monitor API usage and set up alerts for unusual activity
 
 **Data Validation:**
+
 - Always validate contract addresses and event signatures
 - Implement checksum verification for address fields
 - Cross-reference critical data with multiple sources
@@ -452,24 +432,25 @@ const optimizedQuery = `{
 ### Error Handling and Reliability
 
 **Robust Integration Pattern:**
+
 ```javascript
 async function fetchAsterDEXData(retries = 3) {
   try {
     const response = await fetch(BITQUERY_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${API_KEY}` },
-      body: JSON.stringify({ query })
+      method: "POST",
+      headers: { Authorization: `Bearer ${API_KEY}` },
+      body: JSON.stringify({ query }),
     });
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     if (retries > 0) {
       console.log(`Retrying... ${retries} attempts remaining`);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       return fetchAsterDEXData(retries - 1);
     }
     throw error;
@@ -480,12 +461,14 @@ async function fetchAsterDEXData(retries = 3) {
 ### Scaling Your Application
 
 **Production Deployment:**
+
 - Implement connection pooling for high-throughput applications
 - Use caching layers (Redis/Memcached) for frequently accessed data
 - Set up monitoring and alerting for API performance
 - Plan for rate limit management and backoff strategies
 
 **Data Processing Pipeline:**
+
 - Process events in chronological order for accurate state tracking
 - Implement event deduplication for reliability
 - Use event sourcing patterns for complex trading logic
@@ -500,6 +483,26 @@ async function fetchAsterDEXData(retries = 3) {
 - [API Rate Limits](https://docs.bitquery.io/docs/graphql/limits/)
 
 ## Frequently Asked Questions (FAQ)
+
+### Why Use Bitquery for AsterDEX Data?
+
+**Bitquery** provides comprehensive blockchain data infrastructure that indexes the entire BSC chain in real-time. All **AsterDEX trading data** — including perpetual futures trades, liquidation events, margin calls, and smart contract interactions — is automatically captured and made available through powerful GraphQL APIs and streaming services.
+
+**Key advantages:**
+
+- **Real-time data access** without running blockchain nodes
+- **Historical data** for backtesting and analytics
+- **GraphQL API** for flexible data queries
+- **Streaming capabilities** for live trading applications
+- **Complete order lifecycle tracking** from creation to settlement
+
+## What You Can Build with AsterDEX API Integration
+
+With Bitquery's AsterDEX integration, developers can build:
+
+- **Query all trades, swaps, and liquidity pool activity** on AsterDEX
+- **Monitor trader, token pairs, and pool performance** in real-time
+- **Stream real‑time on‑chain events** (swaps, stop loss & take profit updates, liquidations) as they occur
 
 ### General AsterDEX API Questions
 
@@ -581,7 +584,8 @@ A: Data is indexed in real-time with typical latency of 1-3 seconds from block c
 
 ## Related Resources
 
-### Bitquery Platform  
+### Bitquery Platform
+
 - [Bitquery GraphQL IDE](https://ide.bitquery.io/)
 - [Bitquery Documentation](https://docs.bitquery.io/)
 - [BNB Smart Chain APIs](https://docs.bitquery.io/docs/blockchain/BSC/)
@@ -589,8 +593,9 @@ A: Data is indexed in real-time with typical latency of 1-3 seconds from block c
 ### Support
 
 For technical support and questions:
+
 - **Bitquery Support**: [Telegram Community](https://t.me/bloxy_info)
 
 ---
 
-*This comprehensive AsterDEX API documentation provides complete coverage of perpetual futures trading data on BNB Smart Chain. From order lifecycle tracking to liquidation monitoring, developers have access to all the tools needed to build sophisticated DeFi trading applications. All API examples include real contract addresses and working GraphQL queries for immediate implementation.*
+_This comprehensive AsterDEX API documentation provides complete coverage of perpetual futures trading data on BNB Smart Chain. From order lifecycle tracking to liquidation monitoring, developers have access to all the tools needed to build sophisticated DeFi trading applications. All API examples include real contract addresses and working GraphQL queries for immediate implementation._
