@@ -52,11 +52,11 @@ AsterDEX operates as a **decentralized futures exchange** on BNB Smart Chain, en
 **Bitquery** provides comprehensive blockchain data infrastructure that indexes the entire BSC chain in real-time. All **AsterDEX trading data** — including perpetual futures trades, liquidation events, margin calls, and smart contract interactions — is automatically captured and made available through powerful GraphQL APIs and streaming services.
 
 **Key advantages:**
-- ✅ **Real-time data access** without running blockchain nodes
-- ✅ **Historical data** for backtesting and analytics  
-- ✅ **GraphQL API** for flexible data queries
-- ✅ **Streaming capabilities** for live trading applications
-- ✅ **Complete order lifecycle tracking** from creation to settlement
+- **Real-time data access** without running blockchain nodes
+- **Historical data** for backtesting and analytics  
+- **GraphQL API** for flexible data queries
+- **Streaming capabilities** for live trading applications
+- **Complete order lifecycle tracking** from creation to settlement
 
 ## What You Can Build with AsterDEX API Integration
 

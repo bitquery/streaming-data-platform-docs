@@ -65,12 +65,12 @@ const kafka = new Kafka({
 
 This function **recursively walks** through any protobuf message and prints all its fields, converting `bytes` to **base58** or **hex**.
 
-> 💡 **Solana vs EVM Encoding Tip**
+> **Solana vs EVM Encoding Tip**
 >
 > Protobuf `bytes` fields represent things like public keys, signatures, and hashes — and must be decoded according to the target blockchain:
 >
-> - ✅ **Solana**: Decode as `base58` (e.g. account addresses, signatures)
-> - ✅ **EVM (Ethereum, BSC, etc.)**: Decode as `hex` with a `0x` prefix
+> - **Solana**: Decode as `base58` (e.g. account addresses, signatures)
+> - **EVM (Ethereum, BSC, etc.)**: Decode as `hex` with a `0x` prefix
 >
 > This tutorial uses `base58` decoding for Solana.  
 > If you're consuming **EVM data**, update your decoder to:
