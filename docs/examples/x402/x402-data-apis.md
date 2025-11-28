@@ -181,7 +181,7 @@ When you query the x402 Bazaar discovery endpoint, you receive detailed informat
       "totalRequests": 991
     }
   },
-  "resource": "https://x402.lucyos.ai/x402/tools/analyze_token",
+  "resource": "x402.lucyos.ai/x402/tools/analyze_token",
   "type": "http",
   "x402Version": 1
 }
@@ -416,15 +416,182 @@ where: {
 }
 ```
 
+## x402 Queries on Solana
+
+x402 protocol also operates on Solana network. The following queries demonstrate how to query x402 payment data on Solana using Bitquery's GraphQL API. Solana uses a different address format and query structure compared to EVM chains.
+
+### Example x402 Server on Solana
+
+For the following Solana examples, we'll use this x402 server address:
+
+**Server Address**: `DevFFyNWxZPtYLpEjzUnN1PFc9Po6PH7eZCi9f3tTkTw`
+
+This is the Dexter • Crypto agent server address that accepts payments on Solana.
+
+## Latest Payment to x402 Server on Solana
+
+This query retrieves the most recent payments made to a specific x402 server on Solana. It's useful for monitoring server activity and tracking payment transactions.
+
+You can run this query [here](https://ide.bitquery.io/Latest-Payment-to-specific-x402-server-taking-solana-payments).
+
+```graphql
+{
+  Solana {
+    Transfers(
+      limit: {count: 100}
+      orderBy: {descending: Block_Time}
+      where: {Transfer: {Receiver: {Owner: {is: "DevFFyNWxZPtYLpEjzUnN1PFc9Po6PH7eZCi9f3tTkTw"}}}}
+    ) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender {
+          Address
+          Owner
+        }
+        Receiver {
+          Address
+          Owner
+        }
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+      }
+      Instruction {
+        Program {
+          Method
+        }
+      }
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+### Query Explanation
+
+- **`Solana`**: Specifies the Solana network schema
+- **`Receiver: {Owner: {is: "..."}}`**: Filters transfers to the specific server owner address (Solana uses owner addresses instead of contract addresses)
+- **`orderBy: {descending: Block_Time}`**: Returns the most recent payments first
+- **`limit: {count: 100}`**: Retrieves up to 100 payment transactions
+- **`AmountInUSD`**: Shows the payment amount in USD equivalent
+- **`Instruction`**: Provides details about the Solana program instruction that executed the transfer
+
+## Real-Time Payment Monitoring on Solana
+
+You can monitor payments to a specific x402 server on Solana in real-time using GraphQL WebSocket subscriptions. This enables live tracking of payment activity without polling.
+
+You can run this subscription [here](https://ide.bitquery.io/Real-Time---Solana-transfers-stream).
+
+```graphql
+subscription {
+  Solana {
+    Transfers(
+      where: {Transfer: {Receiver: {Owner: {is: "DevFFyNWxZPtYLpEjzUnN1PFc9Po6PH7eZCi9f3tTkTw"}}}}
+    ) {
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender {
+          Address
+          Owner
+        }
+        Receiver {
+          Address
+          Owner
+        }
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+      }
+      Instruction {
+        Program {
+          Method
+        }
+      }
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+### Subscription Explanation
+
+- **`subscription`**: Uses [GraphQL subscription](https://docs.bitquery.io/docs/subscriptions/subscription) for real-time updates
+- **`Solana`**: Monitors the Solana network
+- **`Transfers`**: Listens for new transfer events matching the filter
+- The subscription will automatically push new payment transactions as they occur on-chain. Learn more about [real-time subscriptions](https://docs.bitquery.io/docs/subscriptions/)
+
+## Payment Analytics for x402 Server on Solana
+
+This query provides comprehensive payment analytics for a specific x402 server on Solana, including total volume, unique users, and transaction counts.
+
+:::note Solana API Version
+For complete transfer history on Solana, we use the v1 Solana API because v2 Solana API only shows transfers from the last 8 hours. The v1 API provides complete transfer history for comprehensive analytics.
+:::
+
+You can run this query [here](https://ide.bitquery.io/Payment-analytics-related-specific-x402-server-on-Solana).
+
+```graphql
+{
+  solana {
+    transfers(
+      date: {since: "2025-11-22"}
+      receiverAddress: {is: "DevFFyNWxZPtYLpEjzUnN1PFc9Po6PH7eZCi9f3tTkTw"}
+      currency: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}
+    ) {
+      totalTransactions7days: count(uniq: signature)
+      amount7days: amount(calculate: sum)
+      totalUniqueUsers7days: count(uniq: sender_address)
+      transactions24h: count(time: {since: "2025-11-28T00:00:00"})
+    }
+  }
+}
+```
+
+### Query Explanation
+
+- **`solana`**: Uses the v1 Solana API schema for complete historical data
+- **`date: {since: "2025-11-22"}`**: Analyzes payments since the specified date
+- **`receiverAddress: {is: "..."}`**: Filters for transfers to the specific server address
+- **`currency: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}`**: Filters for USDC payments (USDC mint address on Solana)
+- **`count(uniq: signature)`**: Counts unique transaction signatures
+- **`amount(calculate: sum)`**: Calculates total payment volume
+- **`count(uniq: sender_address)`**: Counts unique users who made payments
+- **`count(time: {since: "..."})`**: Conditional count for transactions in the last 24 hours
+
+### Analytics Metrics Returned
+
+- **`totalTransactions7days`**: Total number of payment transactions in the specified period
+- **`amount7days`**: Total payment amount received
+- **`totalUniqueUsers7days`**: Number of unique users who made payments
+- **`transactions24h`**: Number of transactions in the last 24 hours
+
 ## Related Documentation
 
 - [Blockchain Networks](https://docs.bitquery.io/docs/blockchain/introduction) - Overview of supported blockchain networks
 - [Base Network Documentation](https://docs.bitquery.io/docs/blockchain/Base/) - Complete guide to querying Base blockchain data
+- [Solana Network Documentation](https://docs.bitquery.io/docs/blockchain/Solana/) - Complete guide to querying Solana blockchain data
 - [Ethereum Network Documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/) - Query Ethereum blockchain data
 - [BSC Network Documentation](https://docs.bitquery.io/docs/blockchain/BSC/) - Query BSC blockchain data
 - [GraphQL Query Guide](https://docs.bitquery.io/docs/graphql/query) - Learn how to build GraphQL queries
 - [Real-time Subscriptions](https://docs.bitquery.io/docs/subscriptions/) - Monitor blockchain data in real-time
 - [Transfer API Documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) - Query ERC-20 token transfers
+- [Solana Transfers](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers) - Query Solana token transfers
 - [GraphQL Filters](https://docs.bitquery.io/docs/graphql/filters) - Advanced filtering techniques
 - [GraphQL Metrics](https://docs.bitquery.io/docs/graphql/metrics) - Aggregation and calculation functions
 - [Datetime Queries](https://docs.bitquery.io/docs/graphql/datetime) - Time-based filtering and analysis
