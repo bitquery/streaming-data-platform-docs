@@ -643,20 +643,6 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "OpBNB",
-          link: {
-            type: "generated-index",
-            title: "OpBNB API Documentation",
-          },
-          items: [
-            "examples/OpBNB/opbnb-balance-updates",
-            "examples/OpBNB/opbnb-dextrades",
-            "examples/OpBNB/opbnb-nft",
-            "examples/OpBNB/opbnb-transfers",
-          ],
-        },
-        {
-          type: "category",
           label: "Cross-Chain",
           link: {
             type: "generated-index",
