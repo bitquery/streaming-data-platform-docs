@@ -625,6 +625,79 @@ subscription{
 }
 ```
 
+## Drawdown of an Asset in the Last Hour
+
+Calculate the percentage drawdown (price decline) for tokens of a specific currency (e.g., Bitcoin) over a 1-hour interval.
+
+This query uses [expressions](http://docs.bitquery.io/docs/graphql/capabilities/expression/) to calculate drawdown as: `((Close - Open) / Open) * 100`.
+
+> **Note:** You can use `Token: {Address: {is: "token_address"}}` filter instead of `Currency: {Id: {is: "bid:bitcoin"}}` to filter by token address. We include `Volume: { Usd: { gt: 10 } }` to filter out tokens with very low trading volume.
+
+[Run query](https://ide.bitquery.io/Drawdown-of-a-token-last-hour)
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 1 }
+      orderBy: { ascendingByField: "drawdown" }
+      where: {
+        Volume: { Usd: { gt: 10 } }
+        Interval: { Time: { Duration: { eq: 3600 } } }
+        Currency: { Id: { is: "bid:bitcoin" } }
+      }
+    ) {
+      Token {
+        Address
+        Did
+        Id
+        IsNative
+        Name
+        Network
+        Symbol
+        TokenId
+      }
+      Currency {
+        Symbol
+        Id
+        Name
+      }
+      Interval {
+        VolumeBased
+        Time {
+          Start
+          End
+          Duration
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+        Average {
+          Estimate
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+      }
+      diff: calculate(expression: "Price_Ohlc_Close - Price_Ohlc_Open")
+      drawdown: calculate(expression: "($diff / Price_Ohlc_Open) * 100")
+    }
+  }
+}
+```
+
 ## Volume-Based Bitcoin Price Stream
 
 Stream Bitcoin price data (USD OHLC) with a focus on volume-based intervals, useful for detecting price action tied to trading activity rather than fixed time windows.
