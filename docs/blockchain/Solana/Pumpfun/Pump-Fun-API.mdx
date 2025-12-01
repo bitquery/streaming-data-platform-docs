@@ -1213,7 +1213,7 @@ Lists all markets where the token is traded, including pair addresses
 ### Get Liquidity of Pump.fun Tokens
 
 Gets pool token balances for liquidity estimation across multiple known pool accounts
-[Pump.fun pools and token balances — Query ➤](https://ide.bitquery.io/Pumpfun-pools--token-balances)
+[Pump.fun pools and token balances — Query ➤](https://ide.bitquery.io/Get-Liquidity-of-Pumpfun-Pools)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -1222,50 +1222,36 @@ Gets pool token balances for liquidity estimation across multiple known pool acc
 {
   Solana {
     BalanceUpdates(
-      where: {
-        Block: { Time: { since: "2024-06-25T07:00:00Z" } }
-        BalanceUpdate: {
-          Account: {
-            Token: {
-              Owner: {
-                in: [
-                  "BesTLFfCP9tAuUDWnqPdtDXZRu5xK6XD8TrABXGBECuf"
-                  "62dvmMKAfnt8jSdT3ToZtxAasx7Ud1tJ6xWsjwwhfaEQ"
-                  "73ZzSgNi27V9MdNQYyE39Vs9m1P9ZKgGPCHAJHin5gLd"
-                  "DwPwU1PAjTXtYNYkeR6awYMDBdSEk12npKzJWKbDHMta"
-                  "FJ4P2a2FqaWmqYpBw9eEfWD6cXV3F2qLPHvAA5jozscS"
-                  "6crUHiCoxZsQuxdMAB18VATKrg7ToyTVxt7MbLYmtugu"
-                ]
-              }
-            }
-          }
-          Currency: { Native: false }
-        }
-      }
+      where: {BalanceUpdate: {Currency: {Native: false}, PostBalance: {gt: "0"}, 
+      Account: {Owner: {in: ["7jVYY8nUjbt5gzLt3tZJaHD9NSMyaTuvPhJLfazmjjyy", "7iDwUGUDLccKdWN5hUppoqxLeUMjw7BieQAFdTwj3F5V"]}}}} # add pool address here
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
     ) {
       BalanceUpdate {
         Account {
           Token {
             Owner
           }
+          Owner
           Address
         }
         Currency {
           MintAddress
           Native
         }
-        PostBalance(maximum: Block_Slot)
+        Liquidity: PostBalance(maximum: Block_Slot)
       }
     }
   }
 }
+
 ```
 
 </details>
 
 ### Get Market Cap, Price, Liquidity, Bonding Curve, and Volume
 
-Returns detailed token metrics including bonding curve status
+Returns detailed token metrics including bonding curve status. **Please change the timestamp in the query to recent ones, the saved query might have outdated numbers**
 [Market cap, liquidity, bonding curve, volume — Pump.fun Query ➤](https://ide.bitquery.io/mcap-liquidity-bonding-curve-volume-supply-of-a-token-in-time-frame_1)
 
 <details>
