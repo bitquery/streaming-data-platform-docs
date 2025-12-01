@@ -94,7 +94,7 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 - [Get liquidity of a Four Meme token ➤](#get-liquidity-of-a-four-meme-token)
 - [Track Liquidity Add Events for All Tokens on Four Meme ➤](#track-liquidity-add-events-for-all-tokens-on-four-meme)
 - [Track Liquidity Add Events for a Token on Four Meme ➤](#track-liquidity-add-events-for-a-token-on-four-meme)
-- [Check if a Token is Phishy ➤](#check-if-a-token-is-phishy)
+- [Check if a Four.meme Token is Phishy ➤](#check-if-a-fourmeme-token-is-phishy)
 
 ### 3. Trader Insights
 
@@ -1799,7 +1799,7 @@ You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific
 
 </details>
 
-## Check if a Token is Phishy
+## Check if a Four.meme Token is Phishy
 
 This elaborative API approach uses two queries to detect if a Four Meme token is potentially phishy by analyzing the relationship between token transfers and trades.
 This approach helps identify tokens where recipients received tokens without purchasing them, which is a common pattern in phishing or airdrop scams.
@@ -1823,7 +1823,7 @@ We are taking here example of `0x35a7bb282d8caafe71617c9d52ee30f1adfe4444` token
 
 This query retrieves the first transfer of a token to each address, providing the timestamp when each address first received the token.
 
-[Run Query](https://ide.bitquery.io/first-transfers-of-a-token_4)
+[Run Query](https://ide.bitquery.io/first-transfers-of-a-token_5)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -1853,7 +1853,7 @@ query MyQuery($token: String) {
       Block {
         first_transfer: Time(minimum: Block_Time)
       }
-      total_bought_amount: sum(of: Transfer_Amount)
+      total_transferred_amount: sum(of: Transfer_Amount)
     }
   }
 }
@@ -1871,7 +1871,7 @@ query MyQuery($token: String) {
 
 This query checks if the addresses from Query 1 ever bought the token and when. Pass the address array from Query 1 as a variable to this query.
 
-[Run Query](https://ide.bitquery.io/get-first-buys-of-an-address-list-of-a-specific-token_1)
+[Run Query](https://ide.bitquery.io/get-first-buys-of-an-address-list-of-a-specific-token_2)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -1880,7 +1880,7 @@ This query checks if the addresses from Query 1 ever bought the token and when. 
 query MyQuery($token: String!, $buyersList: [String!]) {
   EVM(network: bsc, dataset: combined) {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "Block_first_buy" }
+      orderBy: { ascendingByField: "Block_first_buy" }
       where: {
         Trade: {
           Currency: { SmartContract: { is: $token } }
