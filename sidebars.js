@@ -597,6 +597,22 @@ const sidebars = {
             id: "blockchain/Base/index",
           },
           items: [
+            {
+              type: "category",
+              label: "Transaction Balance Tracker",
+              link: {
+                type: "doc",
+                id: "blockchain/Base/transaction-balance-tracker/index",
+              },
+              items: [
+                "blockchain/Base/transaction-balance-tracker/base-transaction-balance-tracker",
+                "blockchain/Base/transaction-balance-tracker/base-self-destruct-balance-api",
+                "blockchain/Base/transaction-balance-tracker/base-miner-balance-tracker",
+                "blockchain/Base/transaction-balance-tracker/base-mev-balance-tracker",
+                "blockchain/Base/transaction-balance-tracker/base-gas-balance-tracker",
+                "blockchain/Base/transaction-balance-tracker/base-transfer-balance-tracker",
+              ],
+            },
             "blockchain/Base/aerodrome-base-api",
             "blockchain/Base/aerodrome-gauge-vaults-api",
             "blockchain/Base/base-uniswap-api",
