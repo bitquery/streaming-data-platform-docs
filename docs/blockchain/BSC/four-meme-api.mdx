@@ -805,7 +805,9 @@ Here's an example of [tracking Four.meme token prices](https://ide.bitquery.io/l
 ## Get ATH price of a Four Meme Token
 
 Fetches the All-Time High (ATH) price of a specific Four.Meme token on BSC, using the `DEXTradeByTokens` dataset to calculate the 98th percentile of trade prices (approximate ATH).
-Use a date filter suited to your needs — a shorter duration will make the query run faster and return results more efficiently. Try the API [here](https://ide.bitquery.io/four-meme---token-ATH-price).
+Try the API [here](https://ide.bitquery.io/four-meme---token-ATH-price).
+
+**Tune the parameters `level: 0.98` and Date as necessary to filter outliers.**
 
 <details>
   <summary>Click to expand GraphQL query</summary>
