@@ -103,6 +103,25 @@ sasl_conf = {
 
 > Use plaintext only in trusted or local environments, as the connection is not encrypted.
 
+### SSL Connection (SASL_SSL )
+
+If you prefer to connect without SSL, you can use **SASL_SSL** on port `9093`. This requires certificates which can be accessed [here](https://github.com/bitquery/kafka-consumer-example)
+
+```python
+sasl_conf = {
+    'bootstrap.servers': 'rpk0.bitquery.io:9093,rpk1.bitquery.io:9093,rpk2.bitquery.io:9093',
+    'security.protocol': 'SASL_SSL',
+    'sasl.mechanism': 'SCRAM-SHA-512',
+    'sasl.username': '<YOUR USERNAME HERE>',
+    'sasl.password': '<YOUR PASSWORD HERE>',
+    'ssl.key.location': 'client.key.pem',
+     'ssl.ca.location': 'server.cer.pem',
+     'ssl.certificate.location': 'client.cer.pem',
+     'ssl.endpoint.identification.algorithm': 'none'
+}
+
+```
+
 ### Subscribe to particular topic(s)
 
 To receive messages you first create consumer and subscribe it to a topic or list of topics.
