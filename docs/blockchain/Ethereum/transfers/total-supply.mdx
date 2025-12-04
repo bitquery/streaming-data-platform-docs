@@ -4,14 +4,49 @@ sidebar_position: 2
 
 # Get Supply and Marketcap of a Token
 
-## Get Supply of a Token
+We will use the [Transaction Balance Tracker APIs](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) for this query.
 
-Let's see how to get the supply of a Token. We are taking TONCOIN token example in the following query. The token address for TONCOIN token is [0x582d872A1B094FC48F5DE31D3B73F2D9bE47def1](https://etherscan.io/token/0x582d872a1b094fc48f5de31d3b73f2d9be47def1)
-You can check out the query [here](https://ide.bitquery.io/Total-supply-of-a-token-on-ethereum-mainnet_1).
 
-import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 ```graphql
+{
+  EVM(network: eth) {
+    TransactionBalances(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        TokenBalance: {
+          Currency: {
+            SmartContract: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" }
+            Fungible: true
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      TokenBalance {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+          Decimals
+        }
+        TotalSupply
+        Marketcap: TotalSupplyInUSD
+      }
+    }
+  }
+}
+```
+
+## Alternative Method Using Transfer Cube
+
+### Get Supply of a Token
+
+```
 query MyQuery {
   EVM(network: eth, dataset: combined) {
     Transfers(
@@ -45,11 +80,7 @@ query MyQuery {
 }
 ```
 
-## Get Marketcap of a token
-
-Below query can be used to calculate Marketcap of a Token, first the query gets supply in the `amount` field then query uses join to get the `PriceInUSD`. Multiplying both of these will give you marketcap of the token.
-In this example, we are calculating marketcap of Pepes Dog (ZEUS) token which has smart contract address `0x0f7dC5D02CC1E1f5Ee47854d534D332A1081cCC8`.
-Try the query [here](https://ide.bitquery.io/supply-and-latest-price-of-token-to-get-marketcap).
+### Getting Marketcap
 
 ```
 {
@@ -78,6 +109,12 @@ Try the query [here](https://ide.bitquery.io/supply-and-latest-price-of-token-to
 }
 ```
 
-## Video Tutorial | How to get Supply and Market Cap of a Token
+First the query gets supply in the `amount` field then query uses join to get the `PriceInUSD`. Multiplying both of these will give you marketcap of the token.
+In this example, we are calculating marketcap of Pepes Dog (ZEUS) token which has smart contract address `0x0f7dC5D02CC1E1f5Ee47854d534D332A1081cCC8`.
+Try the query [here](https://ide.bitquery.io/supply-and-latest-price-of-token-to-get-marketcap).
 
-<VideoPlayer url="https://www.youtube.com/watch?v=O6GAYu8Belk" />
+## Video Tutorial
+
+import VideoPlayer from "../../../../src/components/videoplayer.js";
+
+<VideoPlayer url="https://www.youtube.com/watch?v=FW7jkNEqasE" />
