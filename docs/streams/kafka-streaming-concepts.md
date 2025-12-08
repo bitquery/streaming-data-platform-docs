@@ -125,13 +125,6 @@ sasl_conf = {
 ### Subscribe to particular topic(s)
 
 To receive messages you first create consumer and subscribe it to a topic or list of topics.
-Topic contains messages of the same type, for example:
-
-- tron.transactions contains messages with transactions, smart contract calls and events in Tron blockchain
-- tron.broadcasted.transactions contains messages from mempool broadcasted channel ( before they included in blocks )
-- tron.dextrades contains trades happen on Tron blockchain
-- solana.dextrades contains trades happen on Solana blockchain
-- and so on...
 
 General pattern of the topic name is:
 
@@ -149,13 +142,9 @@ Our multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/pric
 MESSAGE_TYPE is specific on blockchain, most blockchain has topics for:
 
 - dextrades - events from DEX trading
-- dexorders - events on creation / changing status of DEX orders
-- dexpools - events on creation / changing status of DEX pools
 - transactions - events, calls, transactions
-- transfers - token and coin transfers events
-- instructions - details on instructions and associated accounts, transaction details
+- tokens - token and coin transfers events
 - raw - blocks or transactions directly from node
-- instruction_balance_updates - instruction-level information on balance updates for accounts and token supply updates ( for solana )
 
 Refer to [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf) schemas for structure.
 
@@ -166,14 +155,45 @@ Refer to [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_pro
 - `*.broadcasted.transactions.proto` → `ParsedAbiBlockMessage`
 - `*.broadcasted.tokens.proto` → `TokenBlockMessage`
 - `*.broadcasted.dextrades.proto` → `DexBlockMessage`
-- `*.broadcasted.raw.proto` → `BlockMessage` ( Not yet deployed)
+- `*.broadcasted.raw.proto` → `BlockMessage`
 
 **Committed Blocks:**
 
 - `*.transactions.proto`
 - `*.tokens.proto`
 - `*.dextrades.proto`
-- `*.raw.proto` (Coming soon)
+- `*.raw.proto`
+
+## Complete List of Topics
+
+### EVM chains
+
+(For mempool data, add .broadcasted after chain name)
+
+- eth.transactions.proto
+- eth.tokens.proto
+- eth.dextrades.proto
+- bsc.transactions.proto
+- bsc.tokens.proto
+- bsc.dextrades.proto
+- base.transactions.proto
+- base.tokens.proto
+- base.dextrades.proto
+- matic.transactions.proto
+- matic.tokens.proto
+- matic.dextrades.proto
+- optimism.transactions.proto
+- optimism.tokens.proto
+- optimism.dextrades.proto
+
+### Other Chains
+
+- tron.transactions.proto
+- tron.tokens.proto
+- tron.dextrades.proto
+- solana.transactions.proto
+- solana.tokens.proto
+- solana.dextrades.proto
 
 Contact our support team for the topics that you can connect to for your specific needs.
 
