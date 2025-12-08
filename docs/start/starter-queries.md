@@ -14,6 +14,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Ripple](#ripple)
 - [Cosmos](#cosmos)
 - [NFT APIs](#nft-apis)
+- [Polymarket](#polymarket)
 
 ## Cross-Chain / Multi-Chain APIs
 
@@ -854,3 +855,15 @@ This query gets the latest 10 NFT trades on Ethereum mainnet. You can increase t
 
 This query gets the top 10 traded NFTs based on the number of trades within a specified date range. You can change the filters such as the date range and limit.  
 ▶️ [Top Traded NFTs](https://ide.bitquery.io/Top-traded-NFT-tokens-in-a-month)
+
+## Polymarket
+
+#### Discover Newly Created Markets
+
+Track fresh Polymarket prediction markets as they are initialized on Polygon by following `ConditionPreparation` events from the main Polymarket contract.
+▶️ [Polymarket Newly Created Questions / Market ID](https://ide.bitquery.io/Polymarket-Newly-Created-MarketQuestions)
+
+#### Stream Polymarket Order Fills and Prices
+
+Monitor live Polymarket trades and price updates by subscribing to `OrderFilled` events on the CTF Exchange contract.
+▶️ [PolyMarket CTF Exchange Contract - OrderFilled Event](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderFilled-Event)
