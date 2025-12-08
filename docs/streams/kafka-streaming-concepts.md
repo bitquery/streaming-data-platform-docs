@@ -166,6 +166,8 @@ Refer to [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_pro
 
 ## Complete List of Topics
 
+All the topics send data in the **protobuf** format
+
 ### EVM chains
 
 (For mempool data, add .broadcasted after chain name)
@@ -216,7 +218,7 @@ Typicaly you need setup of one consumer per one topic, as the message parsing fo
 
 > Note: For Price of a Token in DEXTrades topic, you need to calculate it using the amounts.
 
-### Read and parse messages
+## Read and parse messages
 
 Your consumer will read messages from the topic, and you will be able to parse them.
 
@@ -226,13 +228,6 @@ Your consumer will read messages from the topic, and you will be able to parse t
 - Message contains the list of objects on the top level. Structure of objects corresponds to the topic that you consume.
   General schema is described in https://github.com/bitquery/streaming_protobuf.
 
-## Protobuf Streams
-
-We also provide streams in the proto format, currently there are three topics that are available on Solana;
-
-- **solana.dextrades.proto**
-- **solana.tokens.proto**
-- **solana.transactions.proto** ( this includes unconfirmed transactions as well )
 
 ### What to Know About Protobuf Streams?
 
