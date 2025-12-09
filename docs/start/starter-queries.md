@@ -26,8 +26,8 @@ This query gives you bitcoin currency 1-sec OHLC across different blockchains. Y
 
 #### Crypto Price Change API
 
-This query gives you change in price ( Close-Open) of all tokens on Ethereum, BNB, Solana and Tron.
-You can adjust duration in `Duration: {eq: 300}` filter.
+This query gives you change in price (Close-Open) of all tokens on Ethereum, BNB, Solana and Tron.
+You can adjust duration in `Duration: {eq: 60}` filter.
 
 ▶️ [Crypto Price Change API](https://ide.bitquery.io/1-minute-price-change-api)
 
@@ -68,7 +68,9 @@ Get the latest liquidity of an EVM DEX pool (e.g., Uniswap v3 pool).
 #### Get ERC20 token transfers by wallet
 
 Get ERC20 token transactions ordered by block number in descending order.  
-▶️ [Get ERC20 token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_2)
+▶️ [Get ERC20 token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_4)
+
+### Transactions
 
 #### Get transactions by wallet
 
@@ -85,7 +87,7 @@ This query returns the latest trades on the Ethereum network where distinction o
 #### Ethereum Dex Trade By Tokens
 
 This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
-▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
+▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens_1)
 
 #### Get Swaps by Wallet Address
 
@@ -96,11 +98,11 @@ Get all swap related transactions (buy, sell).
 
 #### Get Latest Events
 
-▶️ [Get Latest Events](https://ide.bitquery.io/Recents-Events-and-Logs-on-Ethereum)
+▶️ [Get Latest Events](https://ide.bitquery.io/Recents-Events-and-Logs-on-Ethereum_1)
 
 #### Get Latest Calls
 
-▶️ [Get Latest Calls](https://ide.bitquery.io/Recent-Calls-on-Ethereum)
+▶️ [Get Latest Calls](https://ide.bitquery.io/Recent-Calls-on-Ethereum_1)
 
 ### OHLC & Price Data
 
@@ -117,12 +119,12 @@ Returns an array of token prices denominated in the blockchain's native token an
 #### Get Price Change 5min, 1h, 6h and 24h of a specific Eth token
 
 This query gets you Price Change 5min, 1h, 6h and 24h of a specific token on the Ethereum network.
-▶️ [Get Price Change 5min, 1h, 6h and 24h of a specific token](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_1#)
+▶️ [Get Price Change 5min, 1h, 6h and 24h of a specific token](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_4)
 
 #### Top 10 Eth Tokens by Price Change in last 1h
 
 This query gets you top 10 Eth Tokens by Price Change in last 1h.
-▶️ [Top 10 Eth Tokens by Price Change in last 1h](https://ide.bitquery.io/Top-10-eth-tokens-by-price-change-in-last-1-hr_1#)
+▶️ [Top 10 Eth Tokens by Price Change in last 1h](https://ide.bitquery.io/Top-10-eth-tokens-by-price-change-in-last-1-hr_2)
 
 #### Uniswap v3 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders
 
@@ -134,22 +136,27 @@ This query gets you top 10 Eth Tokens by Price Change in last 1h.
 #### Get Token Total Supply and Market Cap
 
 Retrieve the total supply and market capitalization of a specific ERC-20 token. This query provides on-chain market cap data.
-▶️ [Get Token Total Supply and Market Cap](https://ide.bitquery.io/Get-Token-Total-Supply-and-Market-Cap#)
+▶️ [Get Token Total Supply and Market Cap](https://ide.bitquery.io/Get-Token-Total-Supply-and-Market-Cap_1)
 
 #### Token Holder Count on a Specific Date
 
 This API returns the total number of holders for a specific token on a given date.
 ▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_6)
 
-#### Token Holders and Stats on a Specific Date
-
-This API provides a list of all holders along with relevant statistics for a given token on a specific date.
-▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_7)
-
 #### Real-Time Holders of Multiple Tokens
 
 This API leverages the balanceUpdate endpoint to deliver real-time holder data for multiple tokens.
-▶️ [ Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH)
+▶️ [ Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH_2)
+
+#### Token Holders of Multiple Tokens on a speicifc date - BalanceUpdates API
+
+This API provides a list of top holders along with relevant statistics for a given token liston a specific date using BalanceUpdates API.
+▶️ [ Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH-at-a-specific-time)
+
+#### Token Holders and Stats on a Specific Date - TokenHolders API
+
+This API provides a list of all holders along with relevant statistics for a given token on a specific date.
+▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_7)
 
 ## Solana
 
@@ -158,12 +165,12 @@ This API leverages the balanceUpdate endpoint to deliver real-time holder data f
 #### Get Native and SPL Token Balance by Wallet
 
 Gets the portfolio for an address.
-▶️ [Get Native and SPL Token Balance by Wallet](https://ide.bitquery.io/tokens-owned-by-an-address)
+▶️ [Get Native and SPL Token Balance by Wallet](https://ide.bitquery.io/tokens-owned-by-an-address_3)
 
 #### Historical Solana Balance
 
 This API returns all token inflows and outflows for a Solana address within a specified timeframe, enabling balance calculation based on transaction history.
-▶️ [Solana Token Inflows and Outflows for Balance Calculation](https://ide.bitquery.io/currency-sent-and-received-by-an-address-between-a-time_1)
+▶️ [Solana Token Inflows and Outflows for Balance Calculation](https://ide.bitquery.io/currency-sent-and-received-by-an-address-between-a-time_6)
 
 #### Solana Balance Update
 
@@ -204,7 +211,7 @@ This API retrieves the history of token transfers (both sent and received) for a
 #### Solana Token Inflows and Outflows for Balance Calculation
 
 This API returns all token inflows and outflows for a Solana address within a specified timeframe, enabling balance calculation based on transaction history.
-▶️ [Solana Token Inflows and Outflows for Balance Calculation](https://ide.bitquery.io/currency-sent-and-received-by-an-address-between-a-time_1)
+▶️ [Solana Token Inflows and Outflows for Balance Calculation](https://ide.bitquery.io/currency-sent-and-received-by-an-address-between-a-time_6)
 
 #### Simple SOL transfers (Transactions not trades)
 
@@ -213,7 +220,7 @@ This API returns simple SOL transfers; in other words, it contains transactions 
 
 ### Trades
 
-#### Solana Trades
+#### Solana Chain Trades
 
 This query gets the latest 10 trades on Solana. You can increase the limit to get more trades. This query only uses real-time data.  
 ▶️ [Solana Trades](https://ide.bitquery.io/Solana-dextrades)
@@ -231,14 +238,14 @@ Get all trades related transactions (buy, sell) for a specific wallet address.
 #### Get Swaps by Pair Address
 
 Get all trades related transactions for a specific pair address.
-▶️ [Get Swaps by Pair Address](https://ide.bitquery.io/Get-Swaps-by-Pair-Address)
+▶️ [Get Swaps by Pair Address](https://ide.bitquery.io/Get-Swaps-by-Pair-Address_1)
 
 #### Latest Trades for a specific currency on Raydium
 
 This query returns the latest created pools on Raydium. You can set the limit here also.
 ▶️ [Latest trades of a token on Raydium](https://ide.bitquery.io/Latest-buy-and-sell-of-specific-currency-on-Raydium-DEX-on-Solana)
 
-#### Latest Trades in Real Time
+#### Latest Trades in Real Time of a specific DEX
 
 This subscription query returns the latest PumpFun trades in real time.  
 ▶️ [Real-time Trades](https://ide.bitquery.io/Pumpfun-DEX-Trades_1#)
@@ -263,12 +270,12 @@ Stream live OHLC prices for Solana tokens denominated in their trading pair toke
 #### Price change 5min, 1hr, 6hr precentage of a specific token
 
 With this, you can get the price change 5min, 1hr, 6hr precentage of a specific token.
-▶️ [Price change 5min, 1hr, 6hr precentage](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_2)
+▶️ [Price change 5min, 1hr, 6hr precentage](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_5)
 
 #### Top 10 solana tokens by price change in last 1 hr
 
 With this, you can get top 10 solana tokens by price change in last 1 hr.
-▶️ [Top 10 solana tokens by price change in last 1 hr](https://ide.bitquery.io/Top-10-solana-tokens-by-price-change-in-last-1-hr_3)
+▶️ [Top 10 solana tokens by price change in last 1 hr](https://ide.bitquery.io/Top-10-solana-tokens-by-price-change-in-last-1-hr_4)
 
 #### PumpAMM 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders
 
@@ -330,7 +337,7 @@ Returns analytics data for multiple token addresses.
 #### Get Volume Stats for Solana Chain
 
 Returns volume statistics, active wallets, and total transactions for Solana.
-▶️ [Get Volume Stats By Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets)
+▶️ [Get Volume Stats By Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets_1)
 
 #### Top 10 marketcap jump tokens in last 1hr
 

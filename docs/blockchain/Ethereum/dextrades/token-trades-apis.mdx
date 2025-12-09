@@ -417,7 +417,7 @@ query MyQuery {
 ## Top 10 Eth Tokens by Price Change in last 1h
 
 Use below query to get top 10 Eth Tokens by Price Change in last 1h. Test the query [here]
-(https://ide.bitquery.io/Top-10-eth-tokens-by-price-change-in-last-1-hr_1#).
+(https://ide.bitquery.io/Top-10-eth-tokens-by-price-change-in-last-1-hr_2).
 
 <details>
   <summary>Click to expand GraphQL query and variables</summary>
@@ -426,9 +426,9 @@ Use below query to get top 10 Eth Tokens by Price Change in last 1h. Test the qu
 query MyQuery {
   EVM(dataset: combined) {
     DEXTradeByTokens(
-      limit:{count:10}
-      orderBy:{descendingByField:"Price_Change_1h"}
-      where: {TransactionStatus: {Success: true}, Block: {Time: {since_relative: {hours_ago: 24}}}}
+      limit: {count: 10}
+      orderBy: {descendingByField: "Price_Change_1h"}
+      where: {TransactionStatus: {Success: true}, Block: {Time: {since_relative: {hours_ago: 24}}}, Trade: {Side: {Currency: {SmartContract: {is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"}}}}}
     ) {
       Trade {
         Currency {
@@ -438,18 +438,18 @@ query MyQuery {
         }
         Price_5min_ago: PriceInUSD(
           minimum: Block_Number
-          if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
+          if: {Block: {Time: {since_relative: {minutes_ago: 5}}}} selectWhere:{ne:0}
         )
         Price_1h_ago: PriceInUSD(
           minimum: Block_Number
-          if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+          if: {Block: {Time: {since_relative: {hours_ago: 1}}}} selectWhere:{ne:0}
         )
         Price_6h_ago: PriceInUSD(
           minimum: Block_Number
-          if: {Block: {Time: {since_relative: {hours_ago: 6}}}}
+          if: {Block: {Time: {since_relative: {hours_ago: 6}}}} selectWhere:{ne:0}
         )
-        Price_24h_ago: PriceInUSD(minimum: Block_Number)
-        CurrentPrice: PriceInUSD(maximum: Block_Number)
+        Price_24h_ago: PriceInUSD(minimum: Block_Number selectWhere:{ne:0})
+        CurrentPrice: PriceInUSD(maximum: Block_Number selectWhere:{ne:0})
         Side {
           Currency {
             Name
@@ -457,11 +457,10 @@ query MyQuery {
             SmartContract
           }
         }
-        Dex{
+        Dex {
           SmartContract
         }
       }
-
       volume_5min: sum(
         of: Trade_Side_AmountInUSD
         if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
@@ -563,6 +562,7 @@ Our DEX Dashboard gives you a easier way to check the data -> [DEXrabbit](https:
 <details>
 
 {" "}
+
 <summary>Click to expand GraphQL query and variables</summary>
 
 ```

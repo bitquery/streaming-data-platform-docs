@@ -430,7 +430,7 @@ query MyQuery {
 
 ## Top 10 solana tokens by price change in last 1 hr
 
-Use the below query to get top 10 solana tokens by price change in last 1 hr. Test the query [here](https://ide.bitquery.io/Top-10-solana-tokens-by-price-change-in-last-1-hr_3)
+Use the below query to get top 10 solana tokens by price change in last 1 hr. Test the query [here](https://ide.bitquery.io/Top-10-solana-tokens-by-price-change-in-last-1-hr_4)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -438,50 +438,50 @@ Use the below query to get top 10 solana tokens by price change in last 1 hr. Te
 ```
 
 query MyQuery {
-Solana {
-DEXTradeByTokens(
-limit: {count: 10}
-orderBy: {descendingByField: "Price_Change_1h"}
-where: {Block: {Time: {since_relative: {hours_ago: 6}}}, Transaction: {Result: {Success: true}}}
-) {
-Trade {
-Currency {
-Name
-Symbol
-MintAddress
-}
-Price_5min_ago: PriceInUSD(
-minimum: Block_Time
-if: {Block: {Time: {since_relative: {minutes_ago: 5}}}}
-)
-Price_1h_ago: PriceInUSD(
-minimum: Block_Time
-if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
-)
-Price_6h_ago: PriceInUSD(minimum: Block_Time)
-CurrentPrice: PriceInUSD(maximum: Block_Time)
-Side {
-Currency {
-Name
-Symbol
-MintAddress
-}
-}
-Market {
-MarketAddress
-}
-}
-Price_Change_5min: calculate(
-expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100"
+  Solana {
+    DEXTradeByTokens(
+      limit: {count: 10}
+      orderBy: {descendingByField: "Price_Change_1h"}
+      where: {Block: {Time: {since_relative: {hours_ago: 6}}}, Transaction: {Result: {Success: true}}, Trade: {Side: {Currency: {MintAddress: {in: ["So11111111111111111111111111111111111111112","EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]}}}}}
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Price_5min_ago: PriceInUSD(
+          minimum: Block_Time
+          if: {Block: {Time: {since_relative: {minutes_ago: 5}}}} selectWhere:{ne:0}
+        )
+        Price_1h_ago: PriceInUSD(
+          minimum: Block_Time
+          if: {Block: {Time: {since_relative: {hours_ago: 1}}}} selectWhere:{ne:0}
+        )
+        Price_6h_ago: PriceInUSD(minimum: Block_Time  selectWhere:{ne:0})
+        CurrentPrice: PriceInUSD(maximum: Block_Time)
+        Side {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+        }
+        Market {
+          MarketAddress
+        }
+      }
+      Price_Change_5min: calculate(
+        expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100"
       )
       Price_Change_1h: calculate(
         expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100"
       )
       Price_Change_6h: calculate(
-        expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) \* 100"
-)
-}
-}
+        expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100"
+      )
+    }
+  }
 }
 
 ```
