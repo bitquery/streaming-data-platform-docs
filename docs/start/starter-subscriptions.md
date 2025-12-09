@@ -199,7 +199,7 @@ This stream provides real time liquidity details for all pools on Solana.
 
 This subscription tracks in real-time newly created Pumpfun tokens, including their metadata and associated developer addresses.
 
-▶️ [PumpFun Token Creation Stream](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+▶️ [PumpFun Token Creation Stream](https://ide.bitquery.io/newly-created-PF-token-developer-address-metadata)
 
 #### PumpFun Trades Stream
 

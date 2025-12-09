@@ -376,7 +376,7 @@ Get the liquidity addition events for a specific token on the Four Meme Exchange
 #### Get New Tokens for PumpFun
 
 Returns a list of newly created tokens on the Pump Fun.
-▶️ [Get New Tokens for PumpFun](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
+▶️ [Get New Tokens for PumpFun](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata--query#)
 
 #### Get Bonding Curve Progress of a Token on Pump Fun
 

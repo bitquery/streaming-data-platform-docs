@@ -4,7 +4,7 @@ sidebar_position: 7
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-# PancakeSwap Infinity API | Base
+# Base PancakeSwap Infinity API
 
 Bitquery provides PancakeSwap Infinity (Base) data through APIs, Streams and Data Dumps.
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery for PancakeSwap Infinity on Base.

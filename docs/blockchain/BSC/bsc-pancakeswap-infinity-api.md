@@ -4,7 +4,7 @@ sidebar_position: 7
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-# PancakeSwap Infinity API | BSC
+# BSC PancakeSwap Infinity API
 
 Bitquery provides PancakeSwap Infinity (BSC) data through APIs, Streams and Data Dumps.
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery for PancakeSwap Infinity on Binance Smart Chain (BSC).
