@@ -72,12 +72,12 @@ subscription {
 
 ## Recent Events with Logs on Ethereum
 
-This query is used to retrieve recent events' data on the ETH network. You can find the query [here](https://ide.bitquery.io/Recents-Events-and-Logs-on-Ethereum). The query returns details on each event include transaction details like hash, sender, call trace and event logs.
+This query is used to retrieve recent events' data on the ETH network. You can find the query [here](https://ide.bitquery.io/Recents-Events-and-Logs-on-Ethereum_2). The query returns details on each event include transaction details like hash, sender, call trace and event logs.
 
 ```graphql
 query MyQuery {
   EVM(dataset: realtime, network: eth) {
-    Events(limit: { count: 10 }, orderBy: { descending: Block_Time }) {
+    Events(limit: {count: 10}, orderBy: {descending: Block_Time}) {
       Block {
         Number
       }
@@ -96,9 +96,39 @@ query MyQuery {
         To
         Type
       }
+      Log {
+        SmartContract
+        Signature {
+          Name
+        }
+      }
+      Arguments {
+        Value {
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+        }
+        Name
+      }
     }
   }
 }
+
 ```
 
 ## Daily Stats on Calls

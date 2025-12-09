@@ -212,6 +212,7 @@ const sidebars = {
             "streams/protobuf/kafka-protobuf-js",
             "streams/protobuf/filtering_kafka_streams",
             "streams/real-time-solana-data",
+            "streams/real-time-indexer-with-kafka-stream",
             "streams/sniper-trade-using-bitquery-kafka-stream",
           ],
         },
