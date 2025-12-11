@@ -416,7 +416,7 @@ where: {
 }
 ```
 
-## x402 Queries on Solana
+## x402 Data APIs for Solana
 
 x402 protocol also operates on Solana network. The following queries demonstrate how to query x402 payment data on Solana using Bitquery's GraphQL API. Solana uses a different address format and query structure compared to EVM chains.
 
