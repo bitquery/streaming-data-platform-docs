@@ -198,6 +198,9 @@ This query gets the latest 10 transfers on Solana. You can increase the limit to
 To determine who funded a specific Solana wallet with SOL, you can utilise the following API.
 ▶️[Find who funded the specific Solana wallet](https://ide.bitquery.io/Who-funded-a-given-wallet)
 
+#### Solana Token creator and Time
+▶️[Solana Token creator and Time](https://ide.bitquery.io/Solana-token-creation-date-and-creator)
+
 #### Solana Historical Token Transfers Over Time
 
 This API provides historical data on all Solana token transfers that occurred within a specified time range.
