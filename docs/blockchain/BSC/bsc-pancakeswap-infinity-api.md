@@ -46,6 +46,8 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
   <meta property="twitter:description" content="Get on-chain data of any PancakeSwap Infinity based token through our PancakeSwap Infinity API."/>
 </head>
 
+<VideoPlayer url="https://www.youtube.com/watch?v=nVHdJUdKrJ8" />
+
 ## Get Latest Trades on PancakeSwap Infinity
 
 Below query will subscribe you to the latest DEX Trades on PancakeSwap Infinity. Try out the API [here](https://ide.bitquery.io/pancakeswap-infinity-trades-on-bsc)

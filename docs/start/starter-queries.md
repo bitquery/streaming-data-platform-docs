@@ -463,6 +463,120 @@ Returns LetsBonk.fun tokens which have more than 95% bonding curve progress.
 Returns top 100 About to Graduate LetsBonk.fun Tokens.
 ▶️ [Top 100 About to Graduate LetsBonk.fun Tokens](https://ide.bitquery.io/Top-100-graduating-raydium-launchlab-tokens-in-last-5-minutes)
 
+## Base
+
+### Balance APIs
+
+#### Get latest token balance of a wallet
+
+Get latest token balance of a wallet.
+▶️ [Get latest token balance of a wallet](https://ide.bitquery.io/Get-Latest-Token-Balance-for-an-Address_1)
+
+#### Get All Token Balances for an Address
+
+Retrieve all token balances held by a specific address. This query returns balances for all tokens the address holds.
+▶️ [Get All Token Balances for an Address](https://ide.bitquery.io/Get-All-Token-Balances-for-an-Address_1)
+
+#### Latest Liquidity of Base Pool
+
+Get the latest liquidity of an Base DEX pool (e.g., Uniswap v3 pool).  
+▶️ [Latest Liquidity of Base Pool](https://ide.bitquery.io/latest-liquidity-of-a-Base-pool_1)
+
+### Transfers
+
+#### Get token transfers by wallet
+
+Get token transactions ordered by block number in descending order.  
+▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-token-transfers-by-wallet)
+
+### Transactions
+
+#### Get transactions by wallet
+
+Get transactions ordered by block number in descending order.  
+▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet_2)
+
+### Trades
+
+#### Base DEX Trades
+
+This query returns the latest trades on the Base network where distinction of the buy and sell sides is present.  
+▶️ [Base DEX Trades](https://ide.bitquery.io/base-dextrades)
+
+#### Base Dex Trade By Tokens
+
+This query returns the latest trades on the Base network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
+▶️ [DexTrade By Tokens](https://ide.bitquery.io/Base-DexTradeByTokens_1)
+
+#### Get Swaps by Wallet Address
+
+Get all swap related transactions (buy, sell).  
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest_trades_by_maker-base_1)
+
+### Events & Calls
+
+#### Get Latest Events
+
+▶️ [Get Latest Events](https://ide.bitquery.io/Recents-Events-and-Logs-on-Base_1)
+
+#### Get Latest Calls
+
+▶️ [Get Latest Calls](https://ide.bitquery.io/Recent-Calls-on-base)
+
+### OHLC & Price Data
+
+#### Get OHLCV by Pair Address
+
+Get the OHLCV candle stick by using pair address.  
+▶️ [Get OHLCV by Pair Address](https://ide.bitquery.io/OHLC--base)
+
+#### Get Multiple Token Prices
+
+Returns an array of token prices denominated in the blockchain's native token and USD for a given token contract address.  
+▶️ [Get Multiple Token Prices](https://ide.bitquery.io/Price-of-multiple-tokens-in-realtime_1)
+
+#### Get Price Change 5min, 1h, 6h and 24h of a specific token
+
+This query gets you Price Change 5min, 1h, 6h and 24h of a specific token on the Base network.
+▶️ [Get Price Change 5min, 1h, 6h and 24h of a specific token](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_6)
+
+#### Top 10 Base Tokens by Price Change in last 1h
+
+This query gets you top 10 Base Tokens by Price Change in last 1h.
+▶️ [Top 10 Base Tokens by Price Change in last 1h](https://ide.bitquery.io/Top-10-base-tokens-by-price-change-in-last-1-hr_1)
+
+#### Uniswap v3 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders
+
+1-second OHLC and volume stream for tokens traded on Uniswap v3 (Base). Great for bot trading strategies.
+▶️ [Uniswap v3 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC_1)
+
+### Token Analytics
+
+#### Get Token Total Supply and Market Cap
+
+Retrieve the total supply and market capitalization of a specific token. This query provides on-chain market cap data.
+▶️ [Get Token Total Supply and Market Cap](https://ide.bitquery.io/Get-Token-Total-Supply-and-Market-Cap_2)
+
+#### Token Holder Count on a Specific Date
+
+This API returns the total number of holders for a specific token on a given date.
+▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_7)
+
+#### Real-Time Holders of Multiple Tokens
+
+This API leverages the balanceUpdate endpoint to deliver real-time holder data for multiple tokens.
+▶️ [ Real-Time Holders of Multiple Tokens](http://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base_1)
+
+#### Token Holders of Multiple Tokens on a speicifc date - BalanceUpdates API
+
+This API provides a list of top holders along with relevant statistics for a given token liston a specific date using BalanceUpdates API.
+▶️ [ Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base-at-a-specific-time)
+
+#### Token Holders and Stats on a Specific Date - TokenHolders API
+
+This API provides a list of all holders along with relevant statistics for a given token on a specific date.
+▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token-base)
+
 ## BSC (Binance Smart Chain)
 
 ### Balance APIs

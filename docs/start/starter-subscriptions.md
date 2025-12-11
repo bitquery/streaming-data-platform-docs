@@ -41,13 +41,13 @@ This subscription filters transaction balances for a specific address in real-ti
 
 ▶️ [Subscribe to Transaction Balances for a Specific Address](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address)
 
-#### Stream Token Balance Updates in Real Time
+#### Stream Token Balance of a Address in Real Time
 
 Subscribe to real-time token balance updates for a specific address and token. This subscription will notify you whenever the token balance changes.
 
 ▶️ [Stream Token Balance Updates in Real Time](https://ide.bitquery.io/Stream-Token-Balance-Updates-in-Real-Time)
 
-#### Track Token Balance Changes by Transaction
+#### Track Token Balance Changes
 
 Monitor token balance changes for a specific token across all transactions. This helps track token movements and transfers.
 
@@ -101,7 +101,7 @@ Monitor the balance and gas fee burnt for a particular address in real-time.
 
 This stream lets you monitor all the token transfers for a particular token. You can modify this subscription to track and monitor token transfers for a particular token from or to a particular address.
 
-▶️ [Token Transfers Stream](https://graphql.bitquery.io/ide/Subscribe-to-Latest-WETH-token-transfers)
+▶️ [Token Transfers Stream](https://ide.bitquery.io/Subscribe-to-Latest-WETH-token-transfers_3)
 
 ### Trades
 
@@ -131,23 +131,29 @@ This stream returns the real time trade price of a token against the token it is
 
 ▶️ [Token Price Stream](https://ide.bitquery.io/token-price-stream)
 
-### Uniswap Streams
+### Events Streams
 
 #### Pair Creation on Uniswap
 
 This stream returns the real time liquidity pools/token pairs created on Uniswap V3. You could modify the stream to monitor newly created pools on a different protocol.
 
-▶️ [Pair Creation Stream](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9)
+▶️ [Pair Creation Stream](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_10_1)
 
 ## Solana
 
 ### Balance APIs
 
-#### Balance Update Stream
+#### Balance Stream
 
 This stream provides all balance updates on the Solana blockchain.
 
 ▶️ [Balance Update Stream](https://ide.bitquery.io/solana-balance-update-stream_3)
+
+#### Token Balance Stream
+
+This stream provides all balance updates of a specific token on the Solana blockchain.
+
+▶️ [Token Balance Update Stream](https://ide.bitquery.io/USDC-balance-stream)
 
 ### Transfers
 
@@ -161,9 +167,15 @@ This stream provides all token transfers on the Solana blockchain, including SOL
 
 #### Solana Trades Stream
 
-This subscription streams real-time Solana trades, which you can modify this to track real-time trades of a particular token pair.
+This subscription streams real-time Solana trades.
 
 ▶️ [Solana Trades Stream](https://ide.bitquery.io/solana-trades-subscription_3)
+
+#### Specific Token Trades Stream
+
+This subscription stream uses DexTradeByTokens API to stream real-time specific token trades.
+
+▶️ [Specific Token Trades Stream](https://ide.bitquery.io/token-trades-subscription)
 
 #### Large Token Buys and Sells on Solana DEX
 
@@ -177,9 +189,9 @@ This stream provides real-time large buy and sell on Solana DEXs.
 
 This stream delivers real-time token prices on Solana based on the latest trades.
 
-▶️ [Real-time Token Prices on Solana](https://ide.bitquery.io/Real-time-price-stream-for-tokens-on-solana)
+▶️ [Real-time Token Prices on Solana](https://ide.bitquery.io/Real-time-price-stream-for-specific-token-on-solana)
 
-#### Seconds OHLC Stream
+#### 1-Second OHLC Stream
 
 This subscription generates a real-time OHLC (Open, High, Low, Close) K-line chart for Solana in real-time, useful for Tradingview charting in real-time.
 
@@ -215,19 +227,151 @@ This stream returns the real time trades on Pumpswap exchange. This stream could
 
 ▶️ [Pumpswap Trades Stream](https://ide.bitquery.io/pumpswap-trades)
 
-### Raydium Launchpad APIs
+### Raydium APIs
 
-#### New Pool Creation on Raydium
+#### New Pool Creation on Raydium v4
 
-This stream gives info about the real time liquidity pool creation on Raydium exchange. You can modify this query to get the real time liquidity pool creations on Raydium for a particular token.
+This stream gives info about the real time liquidity pool creation on Raydium exchange.
 
-▶️ [Raydium Pool Creation Stream](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_5)
+▶️ [Raydium v4 Pool Creation Stream](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_5)
+
+#### New Pool Creation on Raydium Launchpad
+
+This stream gives info about the real time liquidity pool creation on Raydium Launchpad.
+
+▶️ [Raydium Launchpad Pool Creation Stream](https://ide.bitquery.io/Raydium-Launchpad-pool-creations_1)
+
+#### New Pool Creation on Raydium CLMM
+
+This stream gives info about the real time liquidity pool creation on Raydium CLMM.
+
+▶️ [Raydium CLMM Pool Creation Stream](https://ide.bitquery.io/Raydium-CLMM-Pool-Creation-stream)
+
+#### New Pool Creation on Raydium CPMM
+
+This stream gives info about the real time liquidity pool creation on Raydium CPMM.
+
+▶️ [Raydium CPMM Pool Creation Stream](https://ide.bitquery.io/CPMM-pools-creation-stream)
 
 #### Latest Trades on Raydium
 
 This stream gives info about the real time trades on Raydium exchange. You can modify this query to monitor trades on Raydium for a particular token or by a particular trader.
 
 ▶️ [Raydium Trades](https://ide.bitquery.io/Updated-Real-time-trades-on-Raydium-DEX-on-Solana_1)
+
+## Base
+
+### Balance APIs
+
+#### Subscribe to All Transaction Balances
+
+This subscription provides real-time balance updates for all addresses involved in transactions on the Base network.
+
+▶️ [Subscribe to All Transaction Balances](https://ide.bitquery.io/Subscribe-to-All-Transaction-Balances_1)
+
+#### Subscribe to Transaction Balances for a Specific Address
+
+This subscription filters transaction balances for a specific address in real-time.
+
+▶️ [Subscribe to Transaction Balances for a Specific Address](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address_1)
+
+#### Stream Token Balance of a Address in Real Time
+
+Subscribe to real-time token balance updates for a specific address and token. This subscription will notify you whenever the token balance changes.
+
+▶️ [Stream Token Balance Updates in Real Time](https://ide.bitquery.io/Stream-Token-Balance-Updates-in-Real-Time-on-base)
+
+#### Track Token Balance Changes
+
+Monitor token balance changes for a specific token across all transactions. This helps track token movements and transfers.
+
+▶️ [Track Token Balance Changes by Transaction](https://ide.bitquery.io/Track-Token-Balance-Changes-by-Transaction-on-base)
+
+#### Track Validator Balance Updates
+
+Monitor balance changes for Base validators, including staking rewards and withdrawals from the beacon chain.
+
+▶️ [Track Validator Balance Updates](https://ide.bitquery.io/Track-Validator-Balance-Updates)
+
+#### Track Validator Rewards
+
+Track validator rewards and balance increases from staking activities in real-time.
+
+▶️ [Track Validator Rewards](https://ide.bitquery.io/Track-Validator-Balance-Updates-on-base)
+
+#### Track Miner Balance Updates
+
+Monitor balance changes for Base miners, including block rewards, uncle block rewards, and transaction fee rewards.
+
+▶️ [Track Miner Balance Updates](https://ide.bitquery.io/Track-Miner-Balance-Updates-BASE_1)
+
+#### Track Block Mining Rewards
+
+Track rewards received by miners for successfully mining blocks in real-time.
+
+▶️ [Track Block Mining Rewards](https://ide.bitquery.io/Track-Block-Mining-Rewards-base_1)
+
+#### Track MEV-Related Balance Updates
+
+Monitor balance changes related to MEV activities, including transaction fee rewards and block builder rewards.
+
+▶️ [Track MEV-Related Balance Updates](https://ide.bitquery.io/Track-MEV-Related-Balance-Updates-base_1)
+
+#### Track All Self-Destruct Event Balances
+
+Monitor all contract self-destruct event balances in real-time.
+
+▶️ [Track All Self-Destruct Event Balances](hhttps://ide.bitquery.io/All-Self-Destruct-Event-Balances-Stream-base_1)
+
+#### Monitoring Balance after Latest Gas Fee Burn
+
+Monitor the balance and gas fee burnt for a particular address in real-time.
+
+▶️ [Monitoring Balance after Latest Gas Fee Burn](https://ide.bitquery.io/Monitor-balance-and-gas-fee-paid-for-an-address-using-stream_2)
+
+### Transfers
+
+#### Token Transfers Stream
+
+This stream lets you monitor all the token transfers for a particular token. You can modify this subscription to track and monitor token transfers for a particular token from or to a particular address.
+
+▶️ [Token Transfers Stream](https://ide.bitquery.io/Subscribe-to-Latest-USDC-token-transfers)
+
+### Trades
+
+#### Base DEX Trades Stream
+
+This stream returns all the real time DEX trades happening on Base. You can modify this stream to get DEX trades on a particular DEX or trades of a particular token or trades by a particular trader.
+
+▶️ [DEX Trades Stream](https://ide.bitquery.io/subscribe-to-dex-trades-on-base_1)
+
+#### Uniswap Trades Stream
+
+This subscription returns the real-time trades happening on Uniswap. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader.
+
+▶️ [Uniswap Trades Stream](https://ide.bitquery.io/Realtime-Uniswap-v1-Uniswap-v2-Uniswap-V3-Trades_1)
+
+### OHLC & Price Data
+
+#### Real-time 1 second OHLC
+
+This stream provides real time price and OHLC stream for all tokens on Base based on trades.
+
+▶️ [Real-time 1 second OHLC](https://ide.bitquery.io/1-second-OHLC-k-line-Base)
+
+#### Token Price Stream
+
+This stream returns the real time trade price of a token against the token it is traded with and the price in USD. You could modify the stream to get the price of the token for a particular token pair or against a particular token.
+
+▶️ [Token Price Stream](https://ide.bitquery.io/token-price-stream_2)
+
+### Events Streams
+
+#### Pair Creation on Uniswap
+
+This stream returns the real time liquidity pools/token pairs created on Uniswap V3. You could modify the stream to monitor newly created pools on a different protocol.
+
+▶️ [Pair Creation Stream](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3-Base)
 
 ## BSC (Binance Smart Chain)
 
@@ -272,6 +416,12 @@ Get real time unconfirmed trades on Pancakeswap, using the given stream.
 ▶️ [Pancakeswap Mempool Trades](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrades---Stream)
 
 ### Four Meme APIs
+
+#### Four Meme Token Creations Stream
+
+This stream returns the latest token creations on `Four Meme` on BSC Network in real time.
+
+▶️ [Four.meme Token Creations Stream](https://ide.bitquery.io/track-Four-meme-token-creation-using-events_2)
 
 #### Four Meme Trades Stream
 
