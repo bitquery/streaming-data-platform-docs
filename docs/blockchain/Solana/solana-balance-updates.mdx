@@ -109,6 +109,35 @@ subscription {
 
 ```
 
+## Get Token Holdings and Holding time of an address
+
+Get the token holdings of an address and calculate the holding time using `first_buy_time` and `latest_balance_update_time`; test this query [here](https://ide.bitquery.io/token-holdings-of-an-address_2).
+
+```
+query MyQuery {
+  Solana {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Currency:{MintAddress:{is:"FSJYiGZhJ1wDPNhHbSHm49yJkzbFp7FykNB2SZFipump"}} Account: {Owner: {is: "CECN4BW4DKnbyddkd9FhWVR5dotzKhQr5p7DUPhQ55Du"}}}}
+    ) {
+      Block{
+        first_buy_time:Time(minimum:Block_Slot)
+        latest_balance_update_time:Time(maximum: Block_Slot)
+      }
+      BalanceUpdate {
+        First_Buy: PostBalance(minimum:Block_Slot)
+        Balance: PostBalance(maximum: Block_Slot)
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+      }
+    }
+  }
+}
+
+```
+
 ## Get Top 100 Token Holders of a Particular Token
 
 [This query](https://ide.bitquery.io/top-100-holders-of-USDC-token-on-Solana) returns the top 100 token holders of a particular token after a

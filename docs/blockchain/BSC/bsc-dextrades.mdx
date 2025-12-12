@@ -162,6 +162,52 @@ query LatestTrades($network: evm_network, $token: String) {
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/token/0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c#last_trades).
 
+## Total Bought, Total Sold, Avg Sell price, Last Active Trade of a specific token by an Address
+
+Get total bought, total sold, average sell price, and last active trade time for a specific token by a trader. Test the query [here](https://ide.bitquery.io/Total-buy-total-sell-avg-sell-last-active_1)
+
+```
+query MyQuery($trader: String, $token: String) {
+  EVM(dataset: realtime, network: bsc) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: $token } }
+        }
+        any: [
+          { Trade: { Buyer: { is: $trader } } }
+          { Trade: { Seller: { is: $trader } } }
+        ]
+      }
+    ) {
+      Block {
+        last_active_time: Time(maximum: Block_Time)
+      }
+      total_buy: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      total_sell: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      avg_sell_price_usd: average(
+        of: Trade_PriceInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+    }
+  }
+}
+
+```
+
+```
+{
+  "trader": "0xc5C2653d38E241D62F96A4fB8f8497b6126F21dC",
+  "token": "0x49d870B1d21D00c775DD03110Ef4c8FeF4Fd4444"
+}
+```
+
 ## Top Traders of a token
 
 This query will fetch you top traders of a token for the BSC network.

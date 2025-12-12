@@ -142,3 +142,40 @@ query {
 }
 
 ```
+
+## Get Token Holdings and Holding time of an address
+
+Get the token holdings of an address and calculate the holding time using `first_buy_time` and `latest_balance_update_time`; test this query [here](https://ide.bitquery.io/holdings-holding-time-of-an-address-for-a-specific-token-on-EVM).
+
+```
+query ($trader: String, $token: String) {
+  EVM(network: bsc) {
+    TransactionBalances(
+      where: {TokenBalance: {Address: {is: $trader}, Currency: {SmartContract: {is: $token}, Fungible: true}}}
+    ) {
+      Block{
+        first_buy_time:Time(minimum:Block_Time)
+        latest_balance_update_time:Time(maximum: Block_Time)
+      }
+      TokenBalance {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+          Decimals
+        }
+        First_buy_amount:PostBalance(minimum:Block_Time)
+        Latest_balance:PostBalance(maximum:Block_Time)
+        TotalSupply(maximum:Block_Time)
+      }
+    }
+  }
+}
+```
+
+```
+{
+  "trader": "0xc5C2653d38E241D62F96A4fB8f8497b6126F21dC",
+  "token": "0x49d870B1d21D00c775DD03110Ef4c8FeF4Fd4444"
+}
+```

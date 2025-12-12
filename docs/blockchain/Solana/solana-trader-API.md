@@ -222,6 +222,34 @@ query MyQuery($timestamp: DateTime, $trader: String) {
 }
 ```
 
+## Total Bought, Total Sold, Avg Sell price, Last Active Trade of a specific token by an Address
+
+Get total bought, total sold, average sell price, and last active trade time for a specific token by a trader. Test the query [here](https://ide.bitquery.io/Total-buy-total-sell-avg-sell-last-active)
+
+```
+query MyQuery ($trader:String, $token:String){
+  Solana(dataset: realtime) {
+    DEXTradeByTokens(
+      where: { Trade: {Currency:{MintAddress:{is:$token}} Side: {Currency: {MintAddress: {in: ["So11111111111111111111111111111111111111112", "11111111111111111111111111111111"]}}}}, any: [{Trade: {Account: {Address: {is: $trader}}}}, {Trade: {Account: {Token: {Owner: {is: $trader}}}}}]}
+    ) {
+      Block{
+        last_active_time:Time(maximum:Block_Time)
+      }
+      total_buy: sum(of:Trade_Side_AmountInUSD if: {Trade: {Side: {Type: {is: buy}}}})
+      total_sell: sum(of:Trade_Side_AmountInUSD if: {Trade: {Side: {Type: {is: sell}}}})
+      avg_sell_price: average(of:Trade_PriceInUSD if: {Trade: {Side: {Type: {is: sell}}}})
+    }
+  }
+}
+```
+
+```
+{
+  "token":"FSJYiGZhJ1wDPNhHbSHm49yJkzbFp7FykNB2SZFipump",
+  "trader": "CECN4BW4DKnbyddkd9FhWVR5dotzKhQr5p7DUPhQ55Du"
+}
+```
+
 ## Subscribe to a Trader in Real-time
 
 The below subscription query will fetch in real-time the trades done by a wallet. You can use websockets to build applications on this data. Read more [here](https://docs.bitquery.io/docs/subscriptions/websockets/)
