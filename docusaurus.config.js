@@ -857,12 +857,12 @@ const config = {
 
             const customItems = [
               {
-                url: "/pumpfun-token-sniffer",
+                url: "https://docs.bitquery.io/pumpfun-token-sniffer",
                 changefreq: "daily",
                 priority: 1,
               },
               {
-                url: "/crypto-reward-tax-calculator",
+                url: "https://docs.bitquery.io/crypto-reward-tax-calculator",
                 changefreq: "daily",
                 priority: 1,
               },
