@@ -10,6 +10,10 @@ Get data for New, Migrating, Graduated Pump.Fun Tokens through our Pump.Fun API.
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery.
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
+:::tip 🛡️ **Try Our PumpFun Token Sniffer**
+Want to analyze Pump.fun tokens for potential phishing risks? Check out our [**PumpFun Token Sniffer**](https://docs.bitquery.io/pumpfun-token-sniffer/) — a proof-of-concept tool that helps identify suspicious token behavior by analyzing transfers and trades.
+:::
+
 Need zero-latency Pumpfun data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
 You may also be interested in:
@@ -1222,10 +1226,22 @@ Gets pool token balances for liquidity estimation across multiple known pool acc
 {
   Solana {
     BalanceUpdates(
-      where: {BalanceUpdate: {Currency: {Native: false}, PostBalance: {gt: "0"}, 
-      Account: {Owner: {in: ["7jVYY8nUjbt5gzLt3tZJaHD9NSMyaTuvPhJLfazmjjyy", "7iDwUGUDLccKdWN5hUppoqxLeUMjw7BieQAFdTwj3F5V"]}}}} # add pool address here
-      limit: {count: 10}
-      orderBy: {descending: Block_Time}
+      where: {
+        BalanceUpdate: {
+          Currency: { Native: false }
+          PostBalance: { gt: "0" }
+          Account: {
+            Owner: {
+              in: [
+                "7jVYY8nUjbt5gzLt3tZJaHD9NSMyaTuvPhJLfazmjjyy"
+                "7iDwUGUDLccKdWN5hUppoqxLeUMjw7BieQAFdTwj3F5V"
+              ]
+            }
+          }
+        }
+      } # add pool address here
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
     ) {
       BalanceUpdate {
         Account {
@@ -1244,7 +1260,6 @@ Gets pool token balances for liquidity estimation across multiple known pool acc
     }
   }
 }
-
 ```
 
 </details>
