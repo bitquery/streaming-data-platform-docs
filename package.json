@@ -20,6 +20,7 @@
     "@docusaurus/plugin-google-gtag": "3.8.1",
     "@docusaurus/plugin-google-tag-manager": "3.8.1",
     "@docusaurus/preset-classic": "3.8.1",
+    "@docusaurus/plugin-sitemap": "3.8.1",
     "@easyops-cn/docusaurus-search-local": "^0.52.1",
     "@graphql-markdown/docusaurus": "^1.18.1",
     "@graphql-tools/url-loader": "^9.0.0",

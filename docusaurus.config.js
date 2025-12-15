@@ -840,14 +840,39 @@ const config = {
           editUrl:
             "https://github.com/bitquery/streaming-data-platform-docs/tree/main",
         },
-        theme: {
-          customCss: require.resolve("./src/css/custom.css"),
-        },
         sitemap: {
           changefreq: "daily",
           priority: 1,
           ignorePatterns: ["/docs/graphql-reference/**"],
           filename: "sitemap.xml",
+          createSitemapItems: async ({
+            siteConfig,
+            routes,
+            defaultCreateSitemapItems,
+          }) => {
+            const defaultItems = await defaultCreateSitemapItems({
+              siteConfig,
+              routes,
+            });
+
+            const customItems = [
+              {
+                url: "/pumpfun-token-sniffer",
+                changefreq: "daily",
+                priority: 1,
+              },
+              {
+                url: "/crypto-reward-tax-calculator",
+                changefreq: "daily",
+                priority: 1,
+              },
+            ];
+
+            return [...defaultItems, ...customItems];
+          },
+        },
+        theme: {
+          customCss: require.resolve("./src/css/custom.css"),
         },
         gtag: {
           trackingID: "G-ZWB80TDH9J",
