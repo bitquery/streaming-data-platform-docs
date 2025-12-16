@@ -308,3 +308,7 @@ query MyQuery {
   }
 }
 ```
+
+## Real World Projects Using Bitquery
+
+- [Crypto Rewards Tax Calculator](https://docs.bitquery.io/crypto-reward-tax-calculator)
