@@ -335,7 +335,7 @@ Production applications often need to filter out certain types of trades:
 ```graphql
 # Filter out specific MEV bot contracts
 query FilterMEVBots {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: realtime, network: eth) {
     DEXTrades(
       where: {
         Transaction: {
@@ -355,7 +355,7 @@ Filter out trades with zero amounts or prices:
 
 ```graphql
 query FilterZeroTrades {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: realtime, network: eth) {
     DEXTrades(
       where: {
         Trade: {
