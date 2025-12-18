@@ -710,6 +710,17 @@ const sidebars = {
           },
           items: ["examples/x402/x402-data-apis"],
         },
+        {
+          type: "category",
+          label: "Token Supply",
+          link: {
+            type: "generated-index",
+            title: "Token Supply APIs",
+            description:
+              "APIs for tracking real-time and historical token supply data across EVM blockchains including Ethereum, BSC, Base, and more.",
+          },
+          items: ["blockchain/Token-supply/evm-token-supply"],
+        },
       ],
     },
     {

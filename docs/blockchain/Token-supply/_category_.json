@@ -1,0 +1,9 @@
+{
+  "label": "Token Supply",
+  "position": 9,
+  "link": {
+    "type": "generated-index",
+    "description": "APIs to track real-time and historical token supply data across EVM blockchains including Ethereum, BSC, Base, and more."
+  }
+}
+
