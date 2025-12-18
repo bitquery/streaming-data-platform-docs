@@ -63,6 +63,22 @@ Retrieve all ERC-20 token balances held by a specific address. This query return
 Get the latest liquidity of an EVM DEX pool (e.g., Uniswap v3 pool).  
 ▶️ [Latest Liquidity of EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
 
+
+### Token Supply
+
+#### Latest Token Supply on ETH chain
+
+Latest Token Supply for all active token
+
+▶️ [Latest Token Supply for all active token](https://ide.bitquery.io/latest-token-supply-of-all-active-tokens-on-ETH-chain)
+
+#### Latest Token Supply of USDT-USDC on ETH chain
+
+Latest Token Supply for stablecoin like USDC-USDT
+
+▶️ [Latest Token Supply for stablecoin like USDC-USDT](https://ide.bitquery.io/latest-token-supply-on-USDT-and-USDC-on-ethereum-chain)
+
+
 ### Transfers
 
 #### Get ERC20 token transfers by wallet

@@ -95,6 +95,12 @@ Monitor the balance and gas fee burnt for a particular address in real-time.
 
 ▶️ [Monitoring Balance after Latest Gas Fee Burn](https://ide.bitquery.io/Monitor-balance-and-gas-fee-paid-for-an-address-using-stream_1)
 
+### Token Supply
+
+Monitor Real time token supply in real time on Ethereum chain.
+
+▶️ [Monitor Latest token supply](https://ide.bitquery.io/latest-token-supply-on-eth-chain)
+
 ### Transfers
 
 #### Token Transfers Stream
