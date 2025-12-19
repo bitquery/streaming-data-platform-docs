@@ -1000,6 +1000,11 @@ This query gets the top 10 traded NFTs based on the number of trades within a sp
 
 ### Main Polymarket Contract
 
+#### All Available Events
+
+Get all events emitted by the main Polymarket contract to track all platform activities.
+▶️ [All Available Events](https://ide.bitquery.io/PolyMarket---All-Available-Events)
+
 #### Discover Newly Created Markets
 
 Track fresh Polymarket prediction markets as they are initialized on Polygon by following `ConditionPreparation` events from the main Polymarket contract.
@@ -1021,6 +1026,11 @@ Track all payouts received by a specific trader when they redeem winning positio
 ▶️ [Payout Received by Polymarket Trader](https://ide.bitquery.io/Payout-received-by-polymarket-trader)
 
 ### UMA Adapter Contract
+
+#### All UMA Adapter Events
+
+Get all events emitted by the UMA Adapter contract to track all oracle-related activities.
+▶️ [All UMA Adapter Events](https://ide.bitquery.io/PolyMarket---UMA-Adapter-All-events)
 
 #### New Questions Initialized
 

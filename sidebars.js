@@ -321,6 +321,7 @@ const sidebars = {
           },
           items: [
             "blockchain/Ethereum/blocks/blocks-api",
+            "blockchain/Ethereum/token-supply/evm-token-supply",
             {
               type: "category",
               label: "Balances",
@@ -709,17 +710,6 @@ const sidebars = {
               "APIs for accessing x402 protocol payment data, monitoring server payments, and analyzing payment analytics across multiple blockchain networks.",
           },
           items: ["examples/x402/x402-data-apis"],
-        },
-        {
-          type: "category",
-          label: "Token Supply",
-          link: {
-            type: "generated-index",
-            title: "Token Supply APIs",
-            description:
-              "APIs for tracking real-time and historical token supply data across EVM blockchains including Ethereum, BSC, Base, and more.",
-          },
-          items: ["blockchain/Token-supply/evm-token-supply"],
         },
       ],
     },
