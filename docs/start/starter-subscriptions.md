@@ -10,6 +10,7 @@ Below is a set of subscriptions that are curated for you to get started with Bit
 - [BSC (Binance Smart Chain)](#bsc-binance-smart-chain)
 - [TRON](#tron)
 - [NFT Streams](#nft-streams)
+- [x402 Streams](#x402-streams)
 
 ## Cross-Chain / Multi-Chain APIs
 
@@ -490,6 +491,24 @@ Subscribe to real-time NFT balance updates for a specific address and collection
 Monitor NFT transfers for a specific collection across all transactions. This helps track NFT movements and ownership changes.
 
 ▶️ [Track Specific NFT Balance Changes](https://ide.bitquery.io/Track-specific-NFTs-Balance-Changes)
+
+## x402 Streams
+
+### Base
+
+#### Real-Time Payment Monitoring for x402 Server
+
+Real-time subscription to monitor payments to a specific x402 server on Base network using WebSockets.
+
+▶️ [Real-Time Payment Monitoring for x402 Server](https://ide.bitquery.io/Monitoring-the-latest-payment-to-the-specific-X402-server)
+
+### Solana
+
+#### Real-Time Payment Monitoring for x402 Server on Solana
+
+Real-time subscription to monitor payments to a specific x402 server on Solana network using WebSockets.
+
+▶️ [Real-Time Payment Monitoring for x402 Server on Solana](https://ide.bitquery.io/Real-Time---Solana-transfers-stream)
 
 ## More on Streams
 

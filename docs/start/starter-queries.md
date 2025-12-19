@@ -15,6 +15,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Cosmos](#cosmos)
 - [NFT APIs](#nft-apis)
 - [Polymarket](#polymarket)
+- [x402 APIs](#x402-apis)
 
 ## Cross-Chain / Multi-Chain APIs
 
@@ -63,7 +64,6 @@ Retrieve all ERC-20 token balances held by a specific address. This query return
 Get the latest liquidity of an EVM DEX pool (e.g., Uniswap v3 pool).  
 ▶️ [Latest Liquidity of EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
 
-
 ### Token Supply
 
 #### Latest Token Supply on ETH chain
@@ -77,7 +77,6 @@ Latest Token Supply for all active token
 Latest Token Supply for stablecoin like USDC-USDT
 
 ▶️ [Latest Token Supply for stablecoin like USDC-USDT](https://ide.bitquery.io/latest-token-supply-on-USDT-and-USDC-on-ethereum-chain)
-
 
 ### Transfers
 
@@ -215,6 +214,7 @@ To determine who funded a specific Solana wallet with SOL, you can utilise the f
 ▶️[Find who funded the specific Solana wallet](https://ide.bitquery.io/Who-funded-a-given-wallet)
 
 #### Solana Token creator and Time
+
 ▶️[Solana Token creator and Time](https://ide.bitquery.io/Solana-token-creation-date-and-creator)
 
 #### Solana Historical Token Transfers Over Time
@@ -998,12 +998,79 @@ This query gets the top 10 traded NFTs based on the number of trades within a sp
 
 ## Polymarket
 
+### Main Polymarket Contract
+
 #### Discover Newly Created Markets
 
 Track fresh Polymarket prediction markets as they are initialized on Polygon by following `ConditionPreparation` events from the main Polymarket contract.
 ▶️ [Polymarket Newly Created Questions / Market ID](https://ide.bitquery.io/Polymarket-Newly-Created-MarketQuestions)
 
-#### Stream Polymarket Order Fills and Prices
+#### Latest Position Splits
 
-Monitor live Polymarket trades and price updates by subscribing to `OrderFilled` events on the CTF Exchange contract.
-▶️ [PolyMarket CTF Exchange Contract - OrderFilled Event](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderFilled-Event)
+Track when users split their collateral into outcome-specific position tokens.
+▶️ [Latest Position Split](https://ide.bitquery.io/PolyMarket---Latest-Position-Split)
+
+#### Latest Resolved Questions
+
+Monitor recently resolved prediction markets and their outcomes.
+▶️ [Latest Resolved Questions](https://ide.bitquery.io/PolyMarket---Latest-Resolved-Questions)
+
+#### Payout Received by Polymarket Trader
+
+Track all payouts received by a specific trader when they redeem winning positions.
+▶️ [Payout Received by Polymarket Trader](https://ide.bitquery.io/Payout-received-by-polymarket-trader)
+
+### UMA Adapter Contract
+
+#### New Questions Initialized
+
+Track new questions and get market metadata including ancillaryData from the UMA Adapter contract.
+▶️ [Question Initialized Events](https://ide.bitquery.io/PolyMarket---UMA-Adapter-Question-Initialized)
+
+#### Question Resolved Events
+
+Monitor when questions are resolved by the oracle.
+▶️ [Question Resolved Events](https://ide.bitquery.io/PolyMarket---UMA-Adapter-Question-Resolved)
+
+### CTF Exchange Contract
+
+#### Token Registered Events
+
+Track when new outcome tokens are registered for trading.
+▶️ [Token Registered Events](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----TokenRegistered-Event)
+
+#### Orders Matched Events
+
+Monitor successful order matching and trade executions.
+▶️ [Orders Matched Events](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderMatched-Event_2)
+
+#### Order Filled Events
+
+Track individual order fills and partial executions to calculate market prices.
+▶️ [Order Filled Events](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderFilled-Event)
+
+## x402 APIs
+
+### Base
+
+#### Get Latest Payments to x402 Server
+
+Retrieves the most recent payments made to a specific x402 server on Base network.
+▶️ [Latest Payment to x402 Server](https://ide.bitquery.io/Latest-payment-to-specific-x402-server)
+
+#### Payment Analytics for x402 Server
+
+Comprehensive payment analytics including total volume, unique users, transaction counts, and time-based breakdowns for a specific x402 server.
+▶️ [Payment Analytics for x402 Server](https://ide.bitquery.io/Payment-analytics-related-specific-x402-server)
+
+### Solana
+
+#### Get Latest Payments to x402 Server on Solana
+
+Retrieves the most recent payments made to a specific x402 server on Solana network.
+▶️ [Latest Payment to x402 Server on Solana](https://ide.bitquery.io/Latest-Payment-to-specific-x402-server-taking-solana-payments)
+
+#### Payment Analytics for x402 Server on Solana
+
+Comprehensive payment analytics for a specific x402 server on Solana including total volume, unique users, and transaction counts.
+▶️ [Payment Analytics for x402 Server on Solana](https://ide.bitquery.io/Payment-analytics-related-specific-x402-server-on-Solana)
