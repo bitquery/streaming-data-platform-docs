@@ -74,7 +74,7 @@ Your application must implement the code:
 
 ## Retention Period of Messages
 
-**Proto Streams**: Messages are retained for **24 hours**.
+**Proto Streams**: Messages are retained for **4 hours**.
 
 ## Connect to Kafka Server
 
