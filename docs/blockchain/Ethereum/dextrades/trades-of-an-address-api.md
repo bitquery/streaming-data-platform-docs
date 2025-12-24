@@ -7,6 +7,7 @@ sidebar_position: 7
 ## Latest Trades by Maker Address
 
 This GraphQL query retrieves the latest trades executed by a particular maker on the Ethereum network. You can view the query in the IDE [here](https://ide.bitquery.io/latest-trades-by-market-maker)
+
 ```
 query MyQuery {
   EVM(dataset: combined, network: eth) {
@@ -69,7 +70,7 @@ For each trade, the query retrieves the following data:
 
 - `Trade`: details of the trade, including the amount of the currency bought and sold, the buyer and seller addresses, the currency name, symbol, and smart contract address, and the price of the trade.
 
-##  Buys and Sells of a Specific Token Pair by an Address
+## Buys and Sells of a Specific Token Pair by an Address
 
 You can view the query in the IDE [here](https://ide.bitquery.io/latest_buys_and_sell_)
 
@@ -134,7 +135,6 @@ query MyQuery {
 
 ```
 
-
 The "EVM" field contains two sub-queries: "Buys" and "Sells."
 
 The "Buys" sub-query retrieves the 10 most recent trades where the specified address was the maker and the token was purchased.
@@ -153,7 +153,7 @@ For each trade, the query retrieves the following data:
 
 - `Block`: block number and timestamp of the block in which the trade occurred.
 
-- `Transaction`:  The sender, reciever and the transaction hash
+- `Transaction`: The sender, reciever and the transaction hash
 
 - `Trade`: details of the trade, including the amount of the currency bought and sold, the buyer and seller addresses, the currency name, symbol, and smart contract address, and the price of the trade.
 
@@ -321,5 +321,63 @@ query TopTraders($token: String) {
 variables:
 {
   "token": "0xC90242Cd9959b7Be6EC01B5e99702Ee21161f3Ad"
+}
+```
+
+## Total Volume, Buy Volume, Sell Volume, and PnL for a Trader on a Specific Token
+
+This query returns comprehensive trading statistics for a specific trader's activity on a particular token, including total volume, buy/sell volumes in both token amounts and USD, trade counts, and PnL calculations over the last 24 hours.
+
+You can run this query [here](https://ide.bitquery.io/total-volume-buy-volume-sell-volume-PnL).
+
+```graphql
+query MyQuery($trader: String, $token: String) {
+  EVM(dataset: combined, network: eth) {
+    DEXTradeByTokens(
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Trade: { Currency: { SmartContract: { is: $token } } }
+        Transaction: { From: { is: $trader } }
+      }
+    ) {
+      Block {
+        last_active_time: Time(maximum: Block_Time)
+      }
+      total_volume: sum(of: Trade_Amount)
+      buy_volume: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      sell_volume: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      total_volume_usd: sum(of: Trade_Side_AmountInUSD)
+      sell_volume_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      buy_volume_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      total_buys: count(
+        distinct: Transaction_Hash
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      total_sells: count(
+        distinct: Transaction_Hash
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      PnL_usd: calculate(expression: "$sell_volume_usd - $buy_volume_usd")
+    }
+  }
+}
+```
+
+```json
+{
+  "token": "0xacba65D610B066443CB211E120835315361e4FCA",
+  "trader": "0x782c362fbf71f939445e6902a064f7e9384f47e2"
 }
 ```

@@ -346,6 +346,59 @@ You can run it [here](https://ide.bitquery.io/ATH-of-multiple-tokens-using-quant
 }
 ```
 
+## Get ATH Market Cap of Tokens
+
+This query returns the ATH (All-Time High) market cap, starting market cap, and related price metrics for multiple tokens. It calculates market cap using a 1 billion token supply and uses quantile to find the ATH price.
+
+You can run it [here](https://ide.bitquery.io/Marketcap-of-tokens)
+
+```graphql
+query GetAthMarketCap($tokens: [String!]!) {
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      limitBy: { by: Trade_Side_Currency_MintAddress, count: 1 }
+      where: {
+        Trade: {
+          Currency: { MintAddress: { in: $tokens } }
+          Side: { AmountInUSD: { gt: "1" } }
+        }
+      }
+    ) {
+      Trade {
+        Currency {
+          MintAddress
+          Name
+          Symbol
+        }
+        PriceInUSD(maximum: Trade_PriceInUSD)
+        Starting_Price: PriceInUSD(minimum: Block_Slot)
+        Side {
+          Currency {
+            Name
+            Symbol
+            MintAddress
+          }
+        }
+      }
+      max: quantile(of: Trade_PriceInUSD, level: 0.98)
+      quantile_price_ATH_Marketcap: calculate(expression: "$max * 1000000000")
+      Real_maximum_price_ATH_Marketcap: calculate(
+        expression: "$Trade_PriceInUSD_maximum * 1000000000"
+      )
+      Starting_Marketcap: calculate(
+        expression: "$Trade_Starting_Price * 1000000000"
+      )
+    }
+  }
+}
+```
+
+```json
+{
+  "tokens": ["8SAwv8EKMKaKnupTsYjoQdgBuWxJdo3ouA178UU7pump"]
+}
+```
+
 ## Video Tutorial for Querying Historical Solana Data
 
 <VideoPlayer url="https://youtu.be/qbSEPbHQb5k" />

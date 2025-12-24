@@ -81,13 +81,26 @@ This query retrieves transfers where the sender or receiver is a particular addr
 You can find the query [here](https://ide.bitquery.io/Sender-OR-Receiver-Transfer-on-Ethereum)
 
 ```graphql
-
- query MyQuery {
+query MyQuery {
   EVM(dataset: archive, network: eth) {
     Transfers(
-      where: {any: [{Transfer: {Sender: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}, {Transfer: {Receiver: {is: "0x881d40237659c251811cec9c364ef91dc08d300c"}}}], Block: {Number: {eq: "23814227"}}}
-      limit: {count: 100}
-      orderBy: {descending: Block_Time}
+      where: {
+        any: [
+          {
+            Transfer: {
+              Sender: { is: "0x881d40237659c251811cec9c364ef91dc08d300c" }
+            }
+          }
+          {
+            Transfer: {
+              Receiver: { is: "0x881d40237659c251811cec9c364ef91dc08d300c" }
+            }
+          }
+        ]
+        Block: { Number: { eq: "23814227" } }
+      }
+      limit: { count: 100 }
+      orderBy: { descending: Block_Time }
     ) {
       Transfer {
         Amount
@@ -111,7 +124,6 @@ You can find the query [here](https://ide.bitquery.io/Sender-OR-Receiver-Transfe
     }
   }
 }
-
 ```
 
 ## Addresses that received or sent money from given list of of addresses
@@ -147,6 +159,47 @@ query ($addresses: [String!]) {
 }
 {
   "addresses": ["0x21743a2efb926033f8c6e0c3554b13a0c669f63f","0x107f308d85d5481f5b729cfb1710532500e40217"]
+}
+```
+
+## Transfer Volume (Sent and Received) for an Address
+
+This query returns the total amount of tokens sent and received by a specific address for a particular token over the last year. This is useful for analyzing token flow and transfer activity. Here `0x` token address signifies native ETH currency.
+
+You can run this query [here](https://ide.bitquery.io/transfer-volume).
+
+```graphql
+query MyQuery($address: String, $token: String) {
+  EVM {
+    Transfers(
+      where: {
+        Block: { Time: { since_relative: { years_ago: 1 } } }
+        Transfer: {
+          Currency: { SmartContract: { is: $token } }
+          any: [
+            { Transfer: { Sender: { is: $address } } }
+            { Transfer: { Receiver: { is: $address } } }
+          ]
+        }
+      }
+    ) {
+      Sent: sum(
+        of: Transfer_Amount
+        if: { Transfer: { Sender: { is: $address } } }
+      )
+      Received: sum(
+        of: Transfer_Amount
+        if: { Transfer: { Receiver: { is: $address } } }
+      )
+    }
+  }
+}
+```
+
+```json
+{
+  "address": "0x782c362fbf71f939445e6902a064f7e9384f47e2",
+  "token": "0x"
 }
 ```
 
@@ -225,12 +278,15 @@ This query retrieves the earliest transfer received by a specific wallet address
 [Run Query](https://ide.bitquery.io/Copy-of-find-earliest-transfer-to-an-account)
 
 ```graphql
-
 query MyQuery {
   EVM(network: eth, dataset: archive) {
     Transfers(
-      limit: {count: 1}
-      where: {Transfer: {Receiver: {is: "0xe37b87598134a2fc0Eda4d71a3a80ad28C751Ed7"}}}
+      limit: { count: 1 }
+      where: {
+        Transfer: {
+          Receiver: { is: "0xe37b87598134a2fc0Eda4d71a3a80ad28C751Ed7" }
+        }
+      }
     ) {
       Block {
         Time(minimum: Block_Number)
@@ -248,7 +304,4 @@ query MyQuery {
     }
   }
 }
-
-
-
 ```
