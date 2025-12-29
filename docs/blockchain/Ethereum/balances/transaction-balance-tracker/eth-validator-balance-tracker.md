@@ -2,13 +2,11 @@
 sidebar_position: 2
 ---
 
-import VideoPlayer from "../../../../../src/components/videoplayer.js";
-
 # Ethereum Validator Balance Tracker
 
 The Ethereum Validator Balance Tracker API provides real-time balance updates for Ethereum validators, tracking their staking rewards, withdrawals, and balance changes.
 
-<VideoPlayer url="https://www.youtube.com/watch?v=mEvrPCeOx7I" />
+For a sample application, see the [Validators Rewards Tax Calculator](https://docs.bitquery.io/crypto-reward-tax-calculator).
 
 <head>
 <meta name="title" content="Ethereum Validator Balance Tracker API & Streams"/>
@@ -309,6 +307,8 @@ query MyQuery {
 }
 ```
 
-## Real World Projects Using Bitquery
+## Video Tutorial
 
-- [Crypto Rewards Tax Calculator](https://docs.bitquery.io/crypto-reward-tax-calculator)
+import VideoPlayer from "../../../../../src/components/videoplayer.js";
+
+<VideoPlayer url="https://www.youtube.com/watch?v=mEvrPCeOx7I" />
