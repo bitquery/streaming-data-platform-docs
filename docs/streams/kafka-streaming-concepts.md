@@ -175,19 +175,19 @@ All the topics send data in the **protobuf** format
 - eth.transactions.proto
 - eth.tokens.proto
 - eth.dextrades.proto
-- eth.dexpools.proto
+- eth.dexpools.proto - See [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
 - bsc.transactions.proto
 - bsc.tokens.proto
 - bsc.dextrades.proto
-- bsc.dexpools.proto
+- bsc.dexpools.proto - See [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
 - base.transactions.proto
 - base.tokens.proto
 - base.dextrades.proto
-- base.dexpools.proto
+- base.dexpools.proto - See [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
 - matic.transactions.proto
 - matic.tokens.proto
 - matic.dextrades.proto
-- matic.dexpools.proto
+- matic.dexpools.proto - See [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
 - optimism.transactions.proto
 - optimism.tokens.proto
 - optimism.dextrades.proto
