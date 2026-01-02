@@ -68,6 +68,30 @@ For example, in the `AtoBPrices` array above, with a 10 basis point (0.1%) slipp
 
 ## When is a new DEXPool record emitted in the APIs & Streams?
 
+A new DEXPool record is emitted in the APIs and Kafka streams when specific events occur that change the pool's liquidity or state. The events tracked vary by protocol version:
+
+### Uniswap V2
+
+The following events trigger a new DEXPool entry:
+
+- `Swap(address,uint256,uint256,uint256,uint256,address)` - Emitted when tokens are swapped in the pool
+- `Mint(address,uint256,uint256)` - Emitted when liquidity is added to the pool
+- `Burn(address,uint256,uint256,address)` - Emitted when liquidity is removed from the pool
+
+### Uniswap V3
+
+The following events trigger a new DEXPool entry:
+
+- `Mint(address,address,int24,int24,uint128,uint256,uint256)` - Emitted when liquidity is added to a position
+- `Burn(address,int24,int24,uint128,uint256,uint256)` - Emitted when liquidity is removed from a position
+- `Swap(address,address,int256,int256,uint160,uint128,int24)` - Emitted when tokens are swapped in the pool
+
+### Uniswap V4
+
+The following events trigger a new DEXPool entry:
+
+- `ModifyLiquidity(bytes32,address,int24,int24,int256,bytes32)` - Emitted when liquidity is modified in the pool
+- `Swap(bytes32,address,int128,int128,uint160,uint128,int24,uint24)` - Emitted when tokens are swapped in the pool
 
 ## Filtering in DEXPools Cube
 
