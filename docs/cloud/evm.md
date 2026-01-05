@@ -22,18 +22,112 @@ To explore the schema and test your tooling, use our **public sample EVM dataset
 - **Ethereum samples**:  
   [`https://github.com/bitquery/blockchain-cloud-data-dump-sample/tree/main/ethereum`](https://github.com/bitquery/blockchain-cloud-data-dump-sample/tree/main/ethereum)
 
-Each sample file includes the **exact S3 URL** in a comment and follows a directory structure similar to:
+
+The GitHub repository includes one sample file. The complete list of Parquet files is stored in our public S3 bucket and can be accessed directly. For example:  
+`https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/ethereum/balance_updates/24053500_24053549.parquet`
 
 ```text
-https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/ethereum/balance_updates/24053500_24053549.parquet
+
 
 bitquery-blockchain-dataset/
 └── ethereum/
-    └── balance_updates/
-        ├── 24053500_24053549.parquet
-        ├── 24053550_24053599.parquet
-        ├── 24053600_24053649.parquet
-        └── ...
+    ├── balance_updates/
+    │   ├── 24053500_24053549.parquet
+    │   ├── 24053550_24053599.parquet
+    │   ├── 24053600_24053649.parquet
+    │   ├── 24053650_24053699.parquet
+    │   ├── 24053700_24053749.parquet
+    │   ├── 24053750_24053799.parquet
+    │   ├── 24053800_24053849.parquet
+    │   ├── 24053850_24053899.parquet
+    │   ├── 24053900_24053949.parquet
+    │   └── 24053950_24053999.parquet
+    ├── blocks/
+    │   ├── 24053500_24053549.parquet
+    │   ├── 24053550_24053599.parquet
+    │   ├── 24053600_24053649.parquet
+    │   ├── 24053650_24053699.parquet
+    │   ├── 24053700_24053749.parquet
+    │   ├── 24053750_24053799.parquet
+    │   ├── 24053800_24053849.parquet
+    │   ├── 24053850_24053899.parquet
+    │   ├── 24053900_24053949.parquet
+    │   └── 24053950_24053999.parquet
+    ├── calls/
+    │   ├── 24053500_24053549.parquet
+    │   ├── 24053550_24053599.parquet
+    │   ├── 24053600_24053649.parquet
+    │   ├── 24053650_24053699.parquet
+    │   ├── 24053700_24053749.parquet
+    │   ├── 24053750_24053799.parquet
+    │   ├── 24053800_24053849.parquet
+    │   ├── 24053850_24053899.parquet
+    │   ├── 24053900_24053949.parquet
+    │   └── 24053950_24053999.parquet
+    ├── dex_trades/
+    │   ├── 24053500_24053549.parquet
+    │   ├── 24053550_24053599.parquet
+    │   ├── 24053600_24053649.parquet
+    │   ├── 24053650_24053699.parquet
+    │   ├── 24053700_24053749.parquet
+    │   ├── 24053750_24053799.parquet
+    │   ├── 24053800_24053849.parquet
+    │   ├── 24053850_24053899.parquet
+    │   ├── 24053900_24053949.parquet
+    │   └── 24053950_24053999.parquet
+    ├── events/
+    │   ├── 24053500_24053549.parquet
+    │   ├── 24053550_24053599.parquet
+    │   ├── 24053600_24053649.parquet
+    │   ├── 24053650_24053699.parquet
+    │   ├── 24053700_24053749.parquet
+    │   ├── 24053750_24053799.parquet
+    │   ├── 24053800_24053849.parquet
+    │   ├── 24053850_24053899.parquet
+    │   ├── 24053900_24053949.parquet
+    │   └── 24053950_24053999.parquet
+    ├── miner_rewards/
+    │   ├── 24053500_24053549.parquet
+    │   ├── 24053550_24053599.parquet
+    │   ├── 24053600_24053649.parquet
+    │   ├── 24053650_24053699.parquet
+    │   ├── 24053700_24053749.parquet
+    │   ├── 24053750_24053799.parquet
+    │   ├── 24053800_24053849.parquet
+    │   ├── 24053850_24053899.parquet
+    │   ├── 24053900_24053949.parquet
+    │   └── 24053950_24053999.parquet
+    ├── transactions/
+    │   ├── 24053500_24053549.parquet
+    │   ├── 24053550_24053599.parquet
+    │   ├── 24053600_24053649.parquet
+    │   ├── 24053650_24053699.parquet
+    │   ├── 24053700_24053749.parquet
+    │   ├── 24053750_24053799.parquet
+    │   ├── 24053800_24053849.parquet
+    │   ├── 24053850_24053899.parquet
+    │   ├── 24053900_24053949.parquet
+    │   └── 24053950_24053999.parquet
+    ├── transfers/
+    │   ├── 24053500_24053549.parquet
+    │   ├── 24053550_24053599.parquet
+    │   ├── 24053600_24053649.parquet
+    │   ├── 24053650_24053699.parquet
+    │   ├── 24053700_24053749.parquet
+    │   ├── 24053750_24053799.parquet
+    │   ├── 24053800_24053849.parquet
+    │   ├── 24053850_24053899.parquet
+    │   ├── 24053900_24053949.parquet
+    │   └── 24053950_24053999.parquet
+    └── uncle_blocks/
+        ├── 15535500_15535549.parquet
+        ├── 15535550_15535599.parquet
+        ├── 15535600_15535649.parquet
+        ├── 15535650_15535699.parquet
+        ├── 15535700_15535749.parquet
+        ├── 15535750_15535799.parquet
+        ├── 15535800_15535849.parquet
+        └── 15535850_15535899.parquet
 ```
 
 Use these samples to:

@@ -960,6 +960,7 @@ const sidebars = {
       },
       items: [
         "cloud/evm",
+        "cloud/solana",
         {
           type: "category",
           label: "Examples",
