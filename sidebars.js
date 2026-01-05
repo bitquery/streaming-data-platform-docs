@@ -989,6 +989,7 @@ const sidebars = {
         "API-Blog/track-token-lock-unlock",
         "API-Blog/use-regular-expressions-to-search-solana-logs",
         "API-Blog/what-are-internal-transactions-how-to-get-them",
+        "API-Blog/slippage-faq-using-dexpool-stream",
       ],
     },
   ],
