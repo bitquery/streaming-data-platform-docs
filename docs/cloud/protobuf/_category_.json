@@ -1,8 +1,0 @@
-{
-  "label": "Protobuf Format",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Format of the message"
-  }
-}
