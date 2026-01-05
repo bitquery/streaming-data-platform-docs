@@ -959,6 +959,7 @@ const sidebars = {
         id: "cloud/index",
       },
       items: [
+        "cloud/evm",
         {
           type: "category",
           label: "Examples",
