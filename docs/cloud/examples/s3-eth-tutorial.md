@@ -46,7 +46,7 @@ For this step, you need to get your AWS Access Keys.
 - Navigate to your profile -> Security credentials -> Generate Access Key
   ![credentials](/img/aws/aws_cred.png)
 
-You can find the details of the demo buckets here https://docs.bitquery.io/docs/cloud/s3/demo/
+You can find the details of the demo buckets here https://github.com/bitquery/blockchain-cloud-data-dump-sample.git
 
 The first part of the code uses the boto3 library to connect to the S3 bucket with the specified credentials. It then defines two object keys, block_object_key which correspond to the S3 object keys for the two files to be downloaded. It also specifies two local file paths, blocks_local_path and dextrades_local_path, which are where the downloaded files will be saved on the local system.
 

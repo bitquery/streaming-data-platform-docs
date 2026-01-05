@@ -955,25 +955,10 @@ const sidebars = {
       type: "category",
       label: "Data in Cloud",
       link: {
-        type: "generated-index",
-        title: "Data in Cloud",
+        type: "doc",
+        id: "cloud/index",
       },
       items: [
-        {
-          type: "category",
-          label: "Protobuf",
-          link: {
-            type: "generated-index",
-            title: "Protobuf Overview",
-          },
-          items: [
-            "cloud/protobuf/evm",
-            "cloud/protobuf/protobuf",
-            "cloud/protobuf/solana",
-            "cloud/protobuf/tron",
-            "cloud/protobuf/objects",
-          ],
-        },
         {
           type: "category",
           label: "Examples",
