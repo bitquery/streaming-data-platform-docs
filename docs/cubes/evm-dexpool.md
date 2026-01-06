@@ -1,12 +1,17 @@
+import VideoPlayer from "../../src/components/videoplayer.js";
+
 # DEXPools Cube on EVM Chains
 
 This section explains how the dexpool data is built and shared via APIs and Kafka streams. It also explains how to understand each entry of the response.
+
+<VideoPlayer url="https://www.youtube.com/watch?v=BWR0EXGXBys" />
 
 ## Concept Explanation
 
 Liquidity pools are fundamental components of decentralized exchanges that enable token swaps without traditional order books. Each pool contains two tokens (CurrencyA and CurrencyB), and the ratio of these tokens determines the exchange rate.
 
 When a user wants to swap tokens, they interact with a liquidity pool. The pool calculates the output amount based on:
+
 - Current liquidity reserves
 - The amount being swapped
 - Price impact and slippage tolerance
@@ -33,6 +38,7 @@ If you are willing to accept a price impact and slippage of up to 10.0% against 
 The calculation considers the price impact plus the worst-case scenario of slippage for different amounts, with limited losses for each, by simulating a swap by iterating through initialized ticks in the TickBitmap.
 
 > Important note: The liquidity calculation differs by protocol version:
+>
 > - For Uniswap V2 and V3, liquidity reflects exactly the balance of the pool
 > - For Uniswap V4, liquidity is the token balances in PoolManager
 
@@ -59,6 +65,7 @@ The `PoolPriceTable` provides price information for swaps in both directions:
 - **`BtoAPrice`**: Current spot price for CurrencyB to CurrencyA
 
 Each price entry in the arrays contains:
+
 - **`SlippageBasisPoints`**: Slippage tolerance in basis points (100 = 1%)
 - **`MaxAmountIn`**: Maximum input amount that can be swapped at this slippage level
 - **`MinAmountOut`**: Minimum output amount guaranteed at this slippage level
