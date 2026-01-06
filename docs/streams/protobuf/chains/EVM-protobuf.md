@@ -143,6 +143,18 @@ The `DexBlockMessage` stream specializes in DEX trading activity:
   - `OrderId`: Identifier for the order
   - `Assets`: What was traded
 
+#### DEXPools
+
+DEXPools provide real-time liquidity pool data for decentralized exchanges, including current token reserves, price calculations at different slippage tolerances, and pool state information. DEXPools data is available via Kafka streams and GraphQL APIs, and is emitted when specific events occur that change pool liquidity (such as swaps, mints, burns, or liquidity modifications depending on the protocol version).
+
+For detailed information about DEXPools, including:
+- Pool structure and liquidity information
+- Price tables and slippage calculations
+- When DEXPool records are emitted for different protocol versions (Uniswap V2, V3, V4)
+- Filtering and advanced use cases
+
+See the [DEXPools Cube on EVM Chains documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/).
+
 ### Layer 2 Support
 
 EVM Protobuf Streams provide dedicated fields for Layer 2 chains:
