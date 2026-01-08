@@ -190,6 +190,91 @@ Monitor when new questions are initialized in the UMA oracle system. This event 
 **How to Use**:
 Replace `QUESTION_ID_HERE` with the actual question ID. The question ID can be found in `ConditionPreparation` events from the Main Polymarket Contract.
 
+### 2.1. Find Creation Transaction of Question by Question ID
+
+**Endpoint**: [find question creation of question id](https://ide.bitquery.io/find-question-creation-of-question-id)
+
+Find the creation transaction for a specific question by searching for both `QuestionPrepared` and `QuestionInitialized` events. 
+
+```graphql
+{
+  EVM(dataset: realtime, network: matic) {
+    Events(
+      orderBy: {descending: Block_Time}
+      where: {Log: {Signature: {Name: {in: ["QuestionPrepared", "QuestionInitialized"]}}}, LogHeader: {Address: {is: "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7"}}, Block: {Time: {since: "2026-01-02T00:00:00Z", till: "2026-01-06T22:00:00Z"}}, Arguments: {includes: {Value: {Bytes: {is: "0x11d5e64512e6e01e1f83630ee7e29509f98b540eaae3ffc96e8de65fe3039f5f"}}}}}
+      limit: {count: 20}
+    ) {
+      Block {
+        Time
+        Number
+        Hash
+      }
+      Receipt {
+        ContractAddress
+      }
+      Topics {
+        Hash
+      }
+      TransactionStatus {
+        Success
+      }
+      LogHeader {
+        Address
+        Index
+        Data
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      Log {
+        EnterIndex
+        ExitIndex
+        Index
+        LogAfterCallIndex
+        Pc
+        SmartContract
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+
+**How to Use**:
+1. Replace the question ID in `Bytes: {is: "0x11d5e64512e6e01e1f83630ee7e29509f98b540eaae3ffc96e8de65fe3039f5f"}` with your target question ID
+2. Adjust the time range (`since` and `till`) to cover the period when the question was created
+3. Change `dataset: realtime` to `dataset: archive` if you need to search older transactions
+4. **Tip**: For older questions, search smaller time periods at a time for better performance
+
 ### Decoding Ancillary Data
 
 The `ancillaryData` field in `QuestionInitialized` events contains hex-encoded market question metadata. To decode it and extract human-readable information (title, description, market_id, etc.), see the [CTF Exchange documentation](./polymarket-ctf-exchange.md#step-4-decode-ancillary-data) for complete decoding instructions and examples.
