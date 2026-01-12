@@ -1,8 +1,8 @@
-import VideoPlayer from "../../src/components/videoplayer.js";
-
 # DEXPools Cube on EVM Chains
 
 This section explains how the dexpool data is built and shared via APIs and [Kafka streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/). It also explains how to understand each entry of the response.
+
+import VideoPlayer from "../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://www.youtube.com/watch?v=BWR0EXGXBys" />
 
