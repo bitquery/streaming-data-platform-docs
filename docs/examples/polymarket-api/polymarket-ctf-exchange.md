@@ -210,7 +210,7 @@ Track when new outcome tokens are registered for trading. This event is emitted 
 
 ```graphql
 {
-  EVM(dataset: combined, network: matic) {
+  EVM(dataset: realtime, network: matic) {
     Events(
       orderBy: { descending: Block_Time }
       where: {
@@ -578,7 +578,7 @@ Query `TokenRegistered` events to find the condition ID for a market:
 
 ```graphql
 {
-  EVM(dataset: combined, network: matic) {
+  EVM(dataset: realtime, network: matic) {
     Events(
       orderBy: { descending: Block_Time }
       where: {
@@ -613,7 +613,7 @@ Use the question ID to query `QuestionInitialized` events from the UMA Adapter c
 
 ```graphql
 {
-  EVM(dataset: combined, network: matic) {
+  EVM(dataset: realtime, network: matic) {
     Events(
       orderBy: { descending: Block_Time }
       where: {

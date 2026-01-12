@@ -113,7 +113,7 @@ Monitor when new questions are initialized in the UMA oracle system. This event 
 
 ```graphql
 {
-  EVM(dataset: combined, network: matic) {
+  EVM(dataset: realtime, network: matic) {
     Events(
       orderBy: {descending: Block_Time}
       where: {
@@ -388,7 +388,7 @@ Use the `questionID` to query `ConditionPreparation` events from the [Main Polym
 
 ```graphql
 {
-  EVM(dataset: combined, network: matic) {
+  EVM(dataset: realtime, network: matic) {
     Events(
       orderBy: {descending: Block_Time}
       where: {
@@ -425,7 +425,7 @@ Use the `conditionId` to query `TokenRegistered` events from the [CTF Exchange C
 
 ```graphql
 {
-  EVM(dataset: combined, network: matic) {
+  EVM(dataset: realtime, network: matic) {
     Events(
       orderBy: {descending: Block_Time}
       where: {

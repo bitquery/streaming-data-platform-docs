@@ -116,7 +116,7 @@ If you have a **Condition ID**, get the condition details:
 
 ```graphql
 {
-  EVM(dataset: combined, network: matic) {
+  EVM(dataset: realtime, network: matic) {
     Events(
       orderBy: {descending: Block_Time}
       where: {
