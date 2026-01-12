@@ -45,25 +45,11 @@ If you have a **Question ID**, start here to get the market metadata:
 
 ```graphql
 {
-  EVM(dataset: combined, network: matic) {
+  EVM(dataset: realtime, network: matic) {
     Events(
       orderBy: {descending: Block_Time}
-      where: {
-        Block: {
-          Time: {
-            since_relative: {hours_ago: 36}
-          }
-        }, 
-        Arguments: {
-          includes: {
-            Name: {is: "questionID"}, 
-            Value: {Bytes: {is: "QUESTION_ID_HERE"}}
-          }
-        }, 
-        Log: {Signature: {Name: {in: ["QuestionInitialized"]}}}, 
-        LogHeader: {Address: {is: "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7"}}
-      }
-      limit: {count: 1}
+      where: {Block: {Time: {since_relative: {days_ago: 1}}}, Arguments: {includes: {Name: {is: "questionID"}, Value: {Bytes: {is: "QUESTION_ID_HERE"}}}}, Log: {Signature: {Name: {in: ["QuestionInitialized"]}}}, LogHeader: {Address: {is: "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7"}}}
+      limit: {count: 10}
     ) {
       Block {
         Time
@@ -104,6 +90,7 @@ If you have a **Question ID**, start here to get the market metadata:
     }
   }
 }
+
 ```
 
 **What you get:**
