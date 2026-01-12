@@ -182,11 +182,11 @@ Get the trading pair information from `TokenRegistered` events:
 
 ```graphql
 {
-  EVM(dataset: combined, network: matic) {
+  EVM(dataset: realtime, network: matic) {
     Events(
       orderBy: {descending: Block_Time}
       where: {
-        Block: {Time: {since_relative: {days_ago: 6}}},
+        Block: {Time: {since_relative: {days_ago: 1}}},
         Arguments: {
           includes: {
             Name: {is: "conditionId"}, 
