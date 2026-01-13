@@ -53,7 +53,7 @@ You can find the query [here](https://ide.bitquery.io/realtime-slippage-on-ether
 
 ```graphql
 subscription {
-  EVM(network: ethereum) {
+  EVM(network: eth) {
     DEXPoolSlippages {
       Price {
         BtoA {
@@ -104,17 +104,18 @@ subscription {
 }
 ```
 
-## Latest Slippage for a Specific Pool
+## Latest Slippage for a Specific Pool on Uniswap V3
 
 This query retrieves the latest slippage data for a specific DEX pool on Ethereum. Use this to check current liquidity depth and price impact for a particular token pair.
 
-You can find the query [here](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3)
+
+You can find the query [here](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3-Ethereum)
 
 ```graphql
 query {
-  EVM(network: ethereum) {
+  EVM(network: eth) {
     DEXPoolSlippages(
-      where: {Price: {Pool: {SmartContract: {is: "0x42161084d0672e1d3f26a9b53e653be2084ff19c"}}}}
+      where: {Price: {Pool: {SmartContract: {is: "0xa43fe16908251ee70ef74718545e4fe6c5ccec9f"}}}}
       limit: {count: 10}
       orderBy: {descending: Block_Time}
     ) {
@@ -168,6 +169,67 @@ query {
 ```
 
 > **Note:** This query can be converted to a subscription to monitor in real-time. Simply replace `query` with `subscription` to receive live updates whenever the pool's liquidity changes.
+
+## Realtime Slippage for Uniswap V4 Pools
+
+This subscription query retrieves real-time slippage data for Uniswap V4 pools on Ethereum. Unlike Uniswap V3, which uses the pool's smart contract address, Uniswap V4 requires using the `PoolId` to identify pools. In Uniswap V4, liquidity is managed by a centralized pool manager contract.
+
+You can find the query [here](https://ide.bitquery.io/realtime-pair-slippage-on-ethereum-uniswap-v4)
+
+```
+subscription {
+  EVM(network: eth) {
+    DEXPoolSlippages(
+      where: {Price: {Pool: {PoolId: {is: "0x89c10991af36a29d4a14b346a272baa7205d2b41c72013f61cfca41ef2666412"}}}}
+    ) {
+      Price {
+        BtoA {
+          Price
+          MinAmountOut
+          MaxAmountIn
+        }
+        AtoB {
+          Price
+          MinAmountOut
+          MaxAmountIn
+        }
+        Pool {
+          PoolId
+          SmartContract
+          Pair {
+            Decimals
+            SmartContract
+            Name
+          }
+          CurrencyB {
+            Symbol
+            SmartContract
+            Name
+            Decimals
+          }
+          CurrencyA {
+            Symbol
+            SmartContract
+            Name
+            Decimals
+          }
+        }
+        Dex {
+          SmartContract
+          ProtocolVersion
+          ProtocolName
+          ProtocolFamily
+        }
+        SlippageBasisPoints
+      }
+      Block {
+        Time
+        Number
+      }
+    }
+  }
+}
+```
 
 ## Realtime Slippage Data via Kafka Streams
 
