@@ -2,6 +2,16 @@
 
 This section explains how the dexpool data is built and shared via APIs and [Kafka streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/). It also explains how to understand each entry of the response.
 
+> **Note:** In GraphQL, DEXPools data is accessed through two schema cubes:
+> - **`DEXPoolEvents`**: Provides pool event data (swaps, mints, burns, etc.)
+> - **`DEXPoolSlippages`**: Provides slippage and price impact data for different trade sizes
+>
+> For blockchain-specific slippage API documentation, see:
+> - [Arbitrum Slippage API](https://docs.bitquery.io/docs/blockchain/Arbitrum/arbitrum-slippage-api/)
+> - [Base Slippage API](https://docs.bitquery.io/docs/blockchain/Base/base-slippage-api/)
+> - [BSC Slippage API](https://docs.bitquery.io/docs/blockchain/BSC/bsc-slippage-api/)
+> - [Ethereum Slippage API](https://docs.bitquery.io/docs/blockchain/Ethereum/ethereum-slippage-api/)
+
 import VideoPlayer from "../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://www.youtube.com/watch?v=BWR0EXGXBys" />

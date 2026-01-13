@@ -391,6 +391,7 @@ const sidebars = {
                 "blockchain/Ethereum/dextrades/evm-gmgn-api",
                 "blockchain/Ethereum/dextrades/evm-photon-api",
                 "blockchain/Ethereum/dextrades/pools-api",
+                "blockchain/Ethereum/dextrades/ethereum-slippage-api",
               ],
             },
             {
@@ -588,6 +589,7 @@ const sidebars = {
             "blockchain/Arbitrum/Balance_Updates",
             "blockchain/Arbitrum/Blocks_Transactions",
             "blockchain/Arbitrum/DexTrades",
+            "blockchain/Arbitrum/arbitrum-slippage-api",
             "blockchain/Arbitrum/esgmx-api",
             "blockchain/Arbitrum/gmx-api",
             "blockchain/Arbitrum/Smart_Contract_Calls",
@@ -630,6 +632,7 @@ const sidebars = {
             "blockchain/Base/base-balance-updates",
             "blockchain/Base/base-coins-api",
             "blockchain/Base/base-dextrades",
+            "blockchain/Base/base-slippage-api",
             "blockchain/Base/base-nft",
             "blockchain/Base/base-transfers",
             "blockchain/Base/ai-agent-base-data",
@@ -660,6 +663,7 @@ const sidebars = {
           items: [
             "blockchain/Optimism/optimism-balance-updates",
             "blockchain/Optimism/optimism-dextrades",
+            "blockchain/Optimism/optimism-slippage-api",
             "blockchain/Optimism/optimism-nft",
             "blockchain/Optimism/optimism-transfers",
           ],
