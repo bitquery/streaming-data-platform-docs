@@ -232,7 +232,6 @@ Your consumer will read messages from the topic, and you will be able to parse t
 - Message contains the list of objects on the top level. Structure of objects corresponds to the topic that you consume.
   General schema is described in https://github.com/bitquery/streaming_protobuf.
 
-
 ### What to Know About Protobuf Streams?
 
 - **Lower Latency:** These streams are delivered before the block closing message appears on the node, resulting in less lag from the transaction to the stream.
@@ -249,6 +248,13 @@ When working with Kafka streams, ensuring efficient message consumption and proc
 ### 1. Parallel Processing of Partitions
 
 Kafka topics are divided into partitions, and each partition must be read in parallel to maximize throughput and minimize latency.
+
+**How Partitioning Works:**
+
+- The Kafka producer sets the message key to:
+  - **Block slot** (for Solana)
+  - **Block hash** (for EVM chains)
+- This ensures that **all messages for a single block/slot are routed to the same partition**.
 
 - **Always read all partitions in parallel** to prevent message lag.
 - Assign **one thread per partition** to ensure balanced load distribution.
