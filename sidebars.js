@@ -648,6 +648,7 @@ const sidebars = {
           items: [
             "blockchain/Matic/matic-balance-updates",
             "blockchain/Matic/matic-dextrades",
+            "blockchain/Matic/matic-slippage-api",
             "blockchain/Matic/matic-uniswap-api",
             "blockchain/Matic/matic-nft",
             "blockchain/Matic/matic-transfers",

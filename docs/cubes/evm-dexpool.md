@@ -10,7 +10,7 @@ This section explains how the dexpool data is built and shared via APIs and [Kaf
 > - [Arbitrum Slippage API](https://docs.bitquery.io/docs/blockchain/Arbitrum/arbitrum-slippage-api/)
 > - [Base Slippage API](https://docs.bitquery.io/docs/blockchain/Base/base-slippage-api/)
 > - [BSC Slippage API](https://docs.bitquery.io/docs/blockchain/BSC/bsc-slippage-api/)
-> - [Ethereum Slippage API](https://docs.bitquery.io/docs/blockchain/Ethereum/ethereum-slippage-api/)
+> - [Matic Slippage API](https://docs.bitquery.io/docs/blockchain/Matic/matic-slippage-api/)
 
 import VideoPlayer from "../../src/components/videoplayer.js";
 
