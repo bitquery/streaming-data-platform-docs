@@ -77,6 +77,14 @@ Each price entry in the arrays contains:
 - **`MinAmountOut`**: Minimum output amount guaranteed at this slippage level
 - **`Price`**: Average execution price for swaps at this slippage level
 
+The following slippage levels are available in the data:
+- 10 basis points (0.1%)
+- 50 basis points (0.5%)
+- 100 basis points (1.0%)
+- 200 basis points (2.0%)
+- 500 basis points (5.0%)
+- 1000 basis points (10.0%)
+
 For example, in the `AtoBPrices` array above, with a 10 basis point (0.1%) slippage tolerance, you can swap up to 2,557,952,147 units of CurrencyA (USDC) and receive at least 860,478,002,991,619,427 units of CurrencyB (WETH), at an average price of 0.0003364734002389014 USDC per WETH.
 
 ## When is a new DEXPool record emitted in the APIs & Streams?
