@@ -15,6 +15,7 @@ The EVM Protobuf Streams provide three main message types for different use case
 - `BlockMessage`: Full blocks with detailed transaction traces
 - `TokenBlockMessage`: Focused on token transfers with currency metadata
 - `DexBlockMessage`: Specialized for DEX (Decentralized Exchange) trading activity
+- `DexPoolBlockMessage` - Focused on real-time slippage at multiple bps and liquidity from Uniswap Pools
 
 ### Block-Level Data
 
@@ -143,7 +144,7 @@ The `DexBlockMessage` stream specializes in DEX trading activity:
   - `OrderId`: Identifier for the order
   - `Assets`: What was traded
 
-#### DEXPools
+### DEXPools
 
 DEXPools provide real-time liquidity pool data for decentralized exchanges, including current token reserves, price calculations at different slippage tolerances, and pool state information. DEXPools data is available via Kafka streams and GraphQL APIs, and is emitted when specific events occur that change pool liquidity (such as swaps, mints, burns, or liquidity modifications depending on the protocol version).
 
