@@ -108,7 +108,7 @@ subscription {
 
 This query retrieves the latest slippage data for a specific DEX pool on BSC. Use this to check current liquidity depth and price impact for a particular token pair.
 
-You can find the query [here](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3)
+You can find the query [here](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Pancakeswap)
 
 ```graphql
 query {

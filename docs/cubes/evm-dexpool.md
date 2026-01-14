@@ -3,14 +3,10 @@
 This section explains how the dexpool data is built and shared via APIs and [Kafka streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/). It also explains how to understand each entry of the response.
 
 > **Note:** In GraphQL, DEXPools data is accessed through two schema cubes:
+>
 > - **`DEXPoolEvents`**: Provides pool event data (swaps, mints, burns, etc.)
 > - **`DEXPoolSlippages`**: Provides slippage and price impact data for different trade sizes
->
-> For blockchain-specific slippage API documentation, see:
-> - [Arbitrum Slippage API](https://docs.bitquery.io/docs/blockchain/Arbitrum/arbitrum-slippage-api/)
-> - [Base Slippage API](https://docs.bitquery.io/docs/blockchain/Base/base-slippage-api/)
-> - [BSC Slippage API](https://docs.bitquery.io/docs/blockchain/BSC/bsc-slippage-api/)
-> - [Matic Slippage API](https://docs.bitquery.io/docs/blockchain/Matic/matic-slippage-api/)
+
 
 import VideoPlayer from "../../src/components/videoplayer.js";
 
@@ -81,6 +77,14 @@ Each price entry in the arrays contains:
 - **`MinAmountOut`**: Minimum output amount guaranteed at this slippage level
 - **`Price`**: Average execution price for swaps at this slippage level
 
+The following slippage levels are available in the data:
+- 10 basis points (0.1%)
+- 50 basis points (0.5%)
+- 100 basis points (1.0%)
+- 200 basis points (2.0%)
+- 500 basis points (5.0%)
+- 1000 basis points (10.0%)
+
 For example, in the `AtoBPrices` array above, with a 10 basis point (0.1%) slippage tolerance, you can swap up to 2,557,952,147 units of CurrencyA (USDC) and receive at least 860,478,002,991,619,427 units of CurrencyB (WETH), at an average price of 0.0003364734002389014 USDC per WETH.
 
 ## When is a new DEXPool record emitted in the APIs & Streams?
@@ -110,11 +114,29 @@ The following events trigger a new DEXPool entry:
 - `ModifyLiquidity(bytes32,address,int24,int24,int256,bytes32)` - Emitted when liquidity is modified in the pool
 - `Swap(bytes32,address,int128,int128,uint160,uint128,int24,uint24)` - Emitted when tokens are swapped in the pool
 
+> Note: Forks of Uniswap can also be tracked with these APIs if the signature is exactly the same.
+
 ## Filtering in DEXPools Cube
 
 Filtering helps to fetch the exact pool data you are looking for. DEXPools Cube can filter based on pool address, token addresses, DEX protocol, liquidity amounts, and more.
 
 Everything inside the "where" clause filters; it follows the `AND` condition by default.
+
+## API Examples
+For blockchain-specific slippage API documentation, see:
+
+- [Arbitrum Slippage API](https://docs.bitquery.io/docs/blockchain/Arbitrum/arbitrum-slippage-api/)
+- [Base Slippage API](https://docs.bitquery.io/docs/blockchain/Base/base-slippage-api/)
+- [BSC Slippage API](https://docs.bitquery.io/docs/blockchain/BSC/bsc-slippage-api/)
+- [Matic Slippage API](https://docs.bitquery.io/docs/blockchain/Matic/matic-slippage-api/)
+
+For blockchain-specific liquidity API documentation, see:
+
+- [Arbitrum Liquidity API](https://docs.bitquery.io/docs/blockchain/Arbitrum/arbitrum-liquidity-api/)
+- [Base Liquidity API](https://docs.bitquery.io/docs/blockchain/Base/base-liquidity-api/)
+- [BSC Liquidity API](https://docs.bitquery.io/docs/blockchain/BSC/bsc-liquidity-api/)
+- [Ethereum Liquidity API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/)
+- [Matic Liquidity API](https://docs.bitquery.io/docs/blockchain/Matic/matic-liquidity-api/)
 
 ## Advanced Use Cases and Processing Patterns
 
