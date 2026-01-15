@@ -213,53 +213,120 @@ You can run [this query](https://ide.bitquery.io/details-of-tokens-in-a-pair) in
 
 ## Liquidity of a Pool
 
-The below query finds the liquidity of USDT-WBTC-WETH pool on Curve.Fi using the pool address `0xD51a44d3FaE010294C616388b506AcdA1bfAAE46`. With this query we can get what tokens are in the pool and in what proportions in the pool.
-You can find the query [here](https://ide.bitquery.io/Curvefi-USDTWBTCWETH-Pool-liquidity)
+The below query finds the current liquidity of a pool using the pool address `0x540c57A187e8405df4522b3786B774cECbf2Fb5f`.
+You can find the query [here](https://ide.bitquery.io/Liquidity-of-a-Pool_3#)
 
 ```
 query MyQuery {
-  EVM(dataset: archive, network: bsc) {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "0xD51a44d3FaE010294C616388b506AcdA1bfAAE46"}}}
-      orderBy: {descendingByField: "balance"}
-    ) {
-      Currency {
-        Name
+  EVM(network: eth) {
+    DEXPoolEvents(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        PoolEvent: {
+          Pool: {
+            SmartContract: { is: "0x540c57A187e8405df4522b3786B774cECbf2Fb5f" }
+          }
+        }
       }
-      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
-      BalanceUpdate {
-        Address
+    ) {
+      Block {
+        Time
+        Number
+      }
+      PoolEvent {
+        AtoBPrice
+        BtoAPrice
+        Dex {
+          SmartContract
+          ProtocolName
+        }
+        Liquidity {
+          AmountCurrencyA
+          AmountCurrencyB
+        }
+        Pool {
+          CurrencyA {
+            Name
+            SmartContract
+            Symbol
+          }
+          CurrencyB {
+            Name
+            SmartContract
+            Symbol
+          }
+          PoolId
+          SmartContract
+        }
+      }
+      Transaction {
+        Gas
+        Hash
       }
     }
   }
 }
-
 ```
 
 ## Get Liquidity of Multiple Pools
 
-The query fetches the balance updates for specified liquidity pool addresses on the BSC network. It returns the currency name, the sum of positive balance updates (which can be interpreted as the liquidity), and the address of each pool. It can be adapted for other EVM compatible networks by changing the network parameter.
+This query retrieves the latest liquidity data for multiple specified pools in one call. It returns prices, token balances, pool details, and transaction information.
 
-You can find the query [here](https://ide.bitquery.io/multiple-pool-liquidity)
+You can find the query [here](https://ide.bitquery.io/Liquidity-of-multiple-Pools#)
 
 ```
 query MyQuery {
-  EVM(dataset: archive, network: bsc) {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Address: {in: ["0xD51a44d3FaE010294C616388b506AcdA1bfAAE46","0x60594a405d53811d3bc4766596efd80fd545a270","0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640"]}}}
-      orderBy: {descendingByField: "balance"}
-    ) {
-      Currency {
-        Name
+  EVM(network: eth) {
+    DEXPoolEvents(
+      limit: { count: 2 }
+      limitBy:{by:PoolEvent_Pool_SmartContract count:1}
+      orderBy: { descending: Block_Time }
+      where: {
+        PoolEvent: {
+          Pool: {
+            SmartContract: { in: ["0x540c57A187e8405df4522b3786B774cECbf2Fb5f","0xA43fe16908251ee70EF74718545e4FE6C5cCEc9f"] }
+          }
+        }
       }
-      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
-      BalanceUpdate {
-        Address
+    ) {
+      Block {
+        Time
+        Number
+      }
+      PoolEvent {
+        AtoBPrice
+        BtoAPrice
+        Dex {
+          SmartContract
+          ProtocolName
+        }
+        Liquidity {
+          AmountCurrencyA
+          AmountCurrencyB
+        }
+        Pool {
+          CurrencyA {
+            Name
+            SmartContract
+            Symbol
+          }
+          CurrencyB {
+            Name
+            SmartContract
+            Symbol
+          }
+          PoolId
+          SmartContract
+        }
+      }
+      Transaction {
+        Gas
+        Hash
       }
     }
   }
 }
-
 ```
 
 **Returned Data**
