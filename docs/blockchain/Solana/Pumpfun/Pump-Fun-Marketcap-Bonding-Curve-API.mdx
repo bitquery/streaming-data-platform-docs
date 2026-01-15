@@ -614,7 +614,7 @@ query GetBondingCurveProgressPercentage {
         }
       }
     ) {
-      Bonding_Curve_Progress_precentage: calculate(
+      Bonding_Curve_Progress_percentage: calculate(
         expression: "100 - ((($Pool_Base_Balance - 206900000) * 100) / 793100000)"
       )
       Pool {
