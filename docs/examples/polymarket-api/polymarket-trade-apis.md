@@ -1,10 +1,10 @@
 # Polymarket Trade APIs
 
-This comprehensive guide covers Polymarket trading APIs using Bitquery's DEXTradeByTokens cube. Access real-time and historical trade data, streaming updates, and market analytics for Polymarket's prediction markets on Polygon (Matic) network.
+This comprehensive guide covers Polymarket trading APIs using Bitquery's DEXTradeByTokens cube. Access real-time and historical trade data, streaming updates, and market analytics for Polymarket's prediction markets on Polygon (Matic) network, focusing specifically on USDC-based trades.
 
 ## Overview
 
-Polymarket is a decentralized prediction market platform built on Polygon. The DEXTradeByTokens API provides structured trade data from Polymarket's Conditional Token Framework (CTF) exchange, making it easy to track market movements, analyze trading patterns, and build trading applications.
+Polymarket is a decentralized prediction market platform built on Polygon. The DEXTradeByTokens API provides structured trade data from Polymarket's Conditional Token Framework (CTF) exchange, focusing on USDC-based trades to track market movements, analyze trading patterns, and build trading applications.
 
 ### Key Features
 - **Real-time streaming** of live trades via GraphQL subscriptions
@@ -21,15 +21,11 @@ Polymarket is a decentralized prediction market platform built on Polygon. The D
 
 ## Supported Assets
 
-Polymarket trades use these primary ERC-20 tokens on Polygon:
+Polymarket trades primarily use USDC (USD Coin) on Polygon for settlement:
 
 | Token | Contract Address | Symbol |
 |-------|------------------|--------|
 | USDC | `0x2791bca1f2de4661ed88a30c99a7a9449aa84174` | USDC |
-| USDT | `0x3c499c542cef5e3811e1192ce70d8cc03d5c3359` | USDT |
-| DAI | `0xc2132d05d31c914a87c6611c10748aeb04b58e8f` | DAI |
-| WETH | `0x7ceb23fd6bc0add59e62ac25578270cff1b9f619` | WETH |
-| WMATIC | `0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270` | WMATIC |
 
 ## Real-Time Trade Streaming
 
@@ -47,13 +43,7 @@ subscription {
           Side: {
             Currency: {
               SmartContract: {
-                in: [
-                  "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",  # USDC
-                  "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",  # USDT
-                  "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",  # DAI
-                  "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",   # WETH
-                  "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"   # WMATIC
-                ]
+                is: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
               }
             }
           }
@@ -131,13 +121,7 @@ Retrieve the most recent Polymarket trades with pagination.
           Side: {
             Currency: {
               SmartContract: {
-                in: [
-                  "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",  # USDC
-                  "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",  # USDT
-                  "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",  # DAI
-                  "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",   # WETH
-                  "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"   # WMATIC
-                ]
+                is: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
               }
             }
           }
@@ -238,13 +222,7 @@ Filter trades by specific position token IDs to track activity for particular pr
           Side: {
             Currency: {
               SmartContract: {
-                in: [
-                  "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
-                  "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
-                  "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
-                  "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
-                  "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"
-                ]
+                is: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
               }
             }
           }
@@ -424,9 +402,7 @@ Example: Convert condition ID to position token IDs using this formula:
 - [UMA Adapter Contract API](./uma-adapter-contract.md)
 - [DEXTradeByTokens Schema Reference](../../graphql-reference/objects/DEXTradeByTokens.mdx)
 
-## Support
-
-For questions or issues:
+## SupportFor questions or issues:
 - [Bitquery Documentation](https://docs.bitquery.io)
 - [Polymarket Documentation](https://docs.polymarket.com)
 - [Bitquery IDE](https://ide.bitquery.io)
