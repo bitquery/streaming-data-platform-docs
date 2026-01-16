@@ -380,6 +380,57 @@ Monitor successful order matching and trade executions.
 
 ### 3. Order Filled Events
 
+OrderFilled events are converted into trade data, which you can access directly via the DEXTradeByTokens APIs. You can explore and execute example queries in the [Bitquery Polymarket Trades IDE](https://ide.bitquery.io/polymarket-trades_4).
+
+
+```graphql
+{
+  EVM(network: matic) {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {TransactionStatus: {Success: true}, Trade: {Side: {Currency: {SmartContract: {in: ["0x2791bca1f2de4661ed88a30c99a7a9449aa84174", "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359", "0xc2132d05d31c914a87c6611c10748aeb04b58e8f", "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619", "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"]}}}, Dex: {ProtocolName: {is: "polymarket"}}}, Block: {Time: {since: "2026-01-14T14:18:44Z"}}}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        AmountInUSD
+        Amount
+        PriceInUSD
+        Side {
+          Type
+          Amount
+          AmountInUSD
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          Ids
+          OrderId
+        }
+        Currency {
+          Symbol
+          SmartContract
+          Name
+        }
+        Ids
+        OrderId
+      }
+    }
+  }
+}
+```
+
 **Endpoint**: [PolyMarket CTF Exchange Contract - OrderFilled Event](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderFilled-Event)
 
 Track individual order fills and partial executions. Use this to calculate current market prices.

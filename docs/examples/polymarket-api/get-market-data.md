@@ -252,7 +252,114 @@ Get the trading pair information from `TokenRegistered` events:
 
 ### Step 4: Get Trading Activity (OrderFilled Events)
 
+To access recent trade activity for Polymarket, use the `DEXTradeByTokens` cube. You can explore and test custom queries directly in the [Bitquery IDE](https://ide.bitquery.io/polymarket-trades_2).
+
+For a visual overview and market analytics powered by our data, visit [DEXRabbit's Polymarket page](https://dexrabbit.com/matic/dex_market/polymarket?tab=last).
+
+```graphql
+{
+  EVM(network: matic) {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {TransactionStatus: {Success: true}, Trade: {Side: {Currency: {SmartContract: {in: ["0x2791bca1f2de4661ed88a30c99a7a9449aa84174", "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359", "0xc2132d05d31c914a87c6611c10748aeb04b58e8f", "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619", "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"]}}}, Dex: {ProtocolName: {is: "polymarket"}}}, Block: {Time: {since: "2026-01-14T14:18:44Z"}}}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        AmountInUSD
+        Amount
+        PriceInUSD
+        Side {
+          Type
+          Amount
+          AmountInUSD
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          Ids
+          OrderId
+        }
+        Currency {
+          Symbol
+          SmartContract
+          Name
+        }
+        Ids
+        OrderId
+      }
+    }
+  }
+}
+```
+
 Get all trades for this market using the token addresses from Step 3:
+
+You can get it trades for assets using DEXTradeByTokens APIs. You can (try this query here)[https://ide.bitquery.io/polymarket-trades-for-specific-asset].
+
+
+```graphql
+{
+  EVM(network: matic) {
+    DEXTradeByTokens(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {TransactionStatus: {Success: true}, Trade: {Ids: {includes: 
+        {in: ["97408278120551058015409409997718823768028335713051995635566892310082207413708"]}},
+        Side: {Currency: {SmartContract: {in: ["0x2791bca1f2de4661ed88a30c99a7a9449aa84174", "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359", "0xc2132d05d31c914a87c6611c10748aeb04b58e8f", "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619", "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"]}}}, Dex: {ProtocolName: {is: "polymarket"}}}, Block: {Time: {since: "2026-01-14T14:18:44Z"}}}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        AmountInUSD
+        Amount
+        PriceInUSD
+        Side {
+          Type
+          Amount
+          AmountInUSD
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          Ids
+          OrderId
+        }
+        Currency {
+          Symbol
+          SmartContract
+          Name
+        }
+        Ids
+        OrderId
+      }
+    }
+  }
+}
+```
+
+You can also get it using `events` apis. Check following example.
 
 ```graphql
 {
@@ -337,7 +444,7 @@ Get all trades for this market using the token addresses from Step 3:
 
 ### Step 5: Get Order Matched Events
 
-Get order matching information:
+Get order matching information using events:
 
 ```graphql
 {
