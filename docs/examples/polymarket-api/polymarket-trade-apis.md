@@ -1,5 +1,5 @@
 ---
-title: Polymarket Trade APIs - Prediction Markets
+title: Polymarket Trade APIs - DEXTradeByTokens for Prediction Markets
 description: Comprehensive guide to Polymarket trading APIs using Bitquery's DEXTradeByTokens cube. Access real-time and historical trade data, streaming updates, and market analytics for Polymarket's prediction markets on Polygon network with USDC trades.
 keywords:
   - Polymarket API
@@ -423,7 +423,9 @@ Example: Convert condition ID to position token IDs using this formula:
 - [UMA Adapter Contract API](./uma-adapter-contract.md)
 - [DEXTradeByTokens Schema Reference](../../graphql-reference/objects/DEXTradeByTokens.mdx)
 
-## SupportFor questions or issues:
+## Support
+
+For questions or issues:
 - [Bitquery Documentation](https://docs.bitquery.io)
 - [Polymarket Documentation](https://docs.polymarket.com)
 - [Bitquery IDE](https://ide.bitquery.io)
