@@ -1,3 +1,24 @@
+---
+title: Polymarket Trade APIs - DEXTradeByTokens for Prediction Markets
+description: Comprehensive guide to Polymarket trading APIs using Bitquery's DEXTradeByTokens cube. Access real-time and historical trade data, streaming updates, and market analytics for Polymarket's prediction markets on Polygon network with USDC trades.
+keywords:
+  - Polymarket API
+  - DEXTradeByTokens
+  - Prediction markets
+  - Polymarket trades
+  - Real-time trading data
+  - Polygon blockchain
+  - USDC trades
+  - Bitquery API
+  - Prediction market analytics
+  - Polymarket streaming
+  - DEX trading data
+  - Market data API
+  - Trading analytics
+  - Prediction market trading
+sidebar_position: 5
+---
+
 # Polymarket Trade APIs
 
 This comprehensive guide covers Polymarket trading APIs using Bitquery's DEXTradeByTokens cube. Access real-time and historical trade data, streaming updates, and market analytics for Polymarket's prediction markets on Polygon (Matic) network, focusing specifically on USDC-based trades.
