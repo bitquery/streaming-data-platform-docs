@@ -418,10 +418,10 @@ Example: Convert condition ID to position token IDs using this formula:
 
 ## Related Documentation
 
-- [Polymarket CTF Exchange API](./polymarket-ctf-exchange.md)
-- [Polymarket Market Data API](./get-market-data.md)
-- [UMA Adapter Contract API](./uma-adapter-contract.md)
-- [DEXTradeByTokens Schema Reference](../../graphql-reference/objects/DEXTradeByTokens.mdx)
+- [Polymarket CTF Exchange API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-ctf-exchange)
+- [Polymarket Market Data API](https://docs.bitquery.io/docs/examples/polymarket-api/get-market-data)
+- [UMA Adapter Contract API](https://docs.bitquery.io/docs/examples/polymarket-api/uma-adapter-contract)
+- [DEXTradeByTokens Schema Reference](https://docs.bitquery.io/docs/graphql-reference/objects/DEXTradeByTokens)
 
 ## Support
 
