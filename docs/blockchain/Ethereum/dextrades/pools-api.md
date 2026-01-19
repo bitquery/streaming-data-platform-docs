@@ -6,6 +6,8 @@ sidebar_position: 5
 
 With the Pools API, developers can easily retrieve information about liquidity providers, trading volumes, fees, and other key metrics for a variety of different pools.
 
+> **Related APIs:** For monitoring slippage and price impact, see the [Ethereum Slippage API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/ethereum-slippage-api/). For real-time liquidity monitoring and pool reserves, see the [Ethereum Liquidity API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/).
+
 ## Latest pools for a specific DEX
 
 ```graphql
@@ -215,6 +217,8 @@ You can run [this query](https://ide.bitquery.io/details-of-tokens-in-a-pair) in
 
 The below query finds the current liquidity of a pool using the pool address `0x540c57A187e8405df4522b3786B774cECbf2Fb5f`.
 You can find the query [here](https://ide.bitquery.io/Liquidity-of-a-Pool_3#)
+
+> **Note:** For comprehensive real-time liquidity monitoring, including liquidity changes, pool reserves tracking, and spot prices, see the [Ethereum Liquidity API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/).
 
 ```
 query MyQuery {

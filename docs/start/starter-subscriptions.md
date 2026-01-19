@@ -126,6 +126,22 @@ This subscription returns the real-time trades happening on Uniswap. You can mod
 
 ▶️ [Uniswap Trades Stream](https://ide.bitquery.io/Realtime-Uniswap-v1-Uniswap-v2-Uniswap-V3-Trades)
 
+### Slippage Streams
+
+#### Realtime Slippage Monitoring
+
+This subscription query returns real-time slippage data for all DEX pools on Ethereum. You can monitor price impact and liquidity depth as trades occur.
+
+▶️ [Realtime Slippage Monitoring](https://ide.bitquery.io/realtime-slippage-on-ethereum)
+
+### Liquidity Streams
+
+#### Realtime Liquidity Stream
+
+This subscription query returns real-time liquidity data for all DEX pools on Ethereum. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
+
+▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_4#)
+
 ### OHLC & Price Data
 
 #### Real-time 1 second OHLC
@@ -360,6 +376,22 @@ This subscription returns the real-time trades happening on Uniswap. You can mod
 
 ▶️ [Uniswap Trades Stream](https://ide.bitquery.io/Realtime-Uniswap-v1-Uniswap-v2-Uniswap-V3-Trades_1)
 
+### Slippage Streams
+
+#### Realtime Slippage Monitoring
+
+This subscription query returns real-time slippage data for all DEX pools on Base. You can monitor price impact and liquidity depth as trades occur.
+
+▶️ [Realtime Slippage Monitoring](https://ide.bitquery.io/realtime-slippage-on-base)
+
+### Liquidity Streams
+
+#### Realtime Liquidity Stream
+
+This subscription query returns real-time liquidity data for all DEX pools on Base. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
+
+▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_3#)
+
 ### OHLC & Price Data
 
 #### Real-time 1 second OHLC
@@ -423,6 +455,22 @@ This subscription returns the real-time trades happening on Pancakeswap. You can
 Get real time unconfirmed trades on Pancakeswap, using the given stream.
 
 ▶️ [Pancakeswap Mempool Trades](https://ide.bitquery.io/Mempool---Latest-BSC-PancakeSwap-v3-dextrades---Stream)
+
+### Slippage Streams
+
+#### Realtime Slippage Monitoring
+
+This subscription query returns real-time slippage data for all DEX pools on BSC. You can monitor price impact and liquidity depth as trades occur.
+
+▶️ [Realtime Slippage Monitoring](https://ide.bitquery.io/realtime-slippage-on-bsc)
+
+### Liquidity Streams
+
+#### Realtime Liquidity Stream
+
+This subscription query returns real-time liquidity data for all DEX pools on BSC. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
+
+▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_2#)
 
 ### Four Meme APIs
 

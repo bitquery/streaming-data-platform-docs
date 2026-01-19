@@ -1,6 +1,6 @@
 ---
 title: BSC API Documentation
-description: Collection of BSC APIs organized by project.
+description: Collection of BSC APIs organized by project including DEX trades, liquidity pools, slippage data, and more.
 slug: /blockchain/BSC/
 keywords:
   - BSC API
@@ -18,17 +18,17 @@ keywords:
 
 # BSC API Documentation
 
-In this section we will see how to fetch data on different tokens, transactions, DEXs like Uniswap, Pancakeswap, Four Meme etc via APIs and Streams.
+In this section we will see how to fetch data on different tokens, transactions, DEXs like Uniswap, Pancakeswap, Four Meme, liquidity pools, and slippage data etc via APIs and Streams.
 
 If you need help getting data on Binance Smart Chain,reach out to [support](https://t.me/Bloxy_info)
 
 #### What is BSC API?
 
-Bitquery BSC APIs help you fetch onchain data by writing a graphQL query.
+Bitquery BSC APIs help you fetch onchain data like trades, transactions, balances, liquidity pools, and slippage data by writing a graphQL query.
 
 ### What are capabilities of Bitquery BSC API?
 
-Bitquery BSC APIs are very flexible, you can fetch trade, transaction, balance information for a specific wallet and join with other information.
+Bitquery BSC APIs are very flexible, you can fetch trade, transaction, balance, liquidity, and slippage information for a specific wallet and join with other information.
 
 ### Difference between BSC RPC, Bitquery BSC API and Bitquery Kafka Stream?
 
@@ -53,6 +53,18 @@ Bitquery supports websocket and webhooks, you can convert most of the graphQL AP
 - [Four Meme Trade API](./four-meme-api)
 - [GRA Fun API](./gra-fun-api)
 - [Building Four Meme Trading Bot](../../streams/sniper-trade-using-bitquery-kafka-stream)
+
+## BSC Slippage API
+
+- [BSC Slippage API](./bsc-slippage-api)
+
+Get slippage and price impact data for BSC DEX pools. Understand price impact and liquidity depth for token swaps, calculate maximum input amounts at different slippage tolerances, and monitor real-time slippage data across all DEX pools on BSC.
+
+## BSC Liquidity API
+
+- [BSC Liquidity API](./bsc-liquidity-api)
+
+Monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on BSC DEX pools. Track when liquidity is added or removed, monitor pool health and depth, and analyze liquidity patterns across different pools.
 
 ## Other BSC APIs
 

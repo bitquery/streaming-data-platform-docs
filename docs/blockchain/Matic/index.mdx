@@ -1,6 +1,6 @@
 ---
 title: Polygon (MATIC) API Documentation
-description: Collection of Polygon (MATIC) APIs organized by project.
+description: Collection of Polygon (MATIC) APIs organized by project including DEX trades, liquidity pools, slippage data, and more.
 slug: /blockchain/Matic/
 keywords:
   - API
@@ -18,7 +18,7 @@ keywords:
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-Discover everything you need to build powerful Polygon (MATIC) applications—from real-time DEX trading analytics and token holder insights to NFT tracking and transaction monitoring. This comprehensive guide provides ready-to-use GraphQL APIs, live streaming data, and step-by-step examples for tracking swaps, balances, transfers, and more across the Polygon ecosystem. Whether you're building trading bots, dashboards, or DeFi analytics tools, find all the Polygon data solutions you need right here.
+Discover everything you need to build powerful Polygon (MATIC) applications—from real-time DEX trading analytics, liquidity monitoring, slippage analysis, and token holder insights to NFT tracking and transaction monitoring. This comprehensive guide provides ready-to-use GraphQL APIs, live streaming data, and step-by-step examples for tracking swaps, balances, transfers, liquidity pools, and more across the Polygon ecosystem. Whether you're building trading bots, dashboards, or DeFi analytics tools, find all the Polygon data solutions you need right here.
 
 Need help crafting a query or subscription? Message us on [support](https://t.me/Bloxy_info).
 
@@ -28,7 +28,7 @@ It's a GraphQL interface over curated, indexed Polygon (MATIC) data. Write conci
 
 ## What can you build with it?
 
-Track wallet portfolios and token holders, monitor DEX price/volume and liquidity events, analyze gas and fees, stream mempool activity, compute KPIs over blocks/transactions, and power dashboards or trading systems with real‑time data.
+Track wallet portfolios and token holders, monitor DEX price/volume, liquidity events, pool reserves, and slippage data, analyze gas and fees, stream mempool activity, compute KPIs over blocks/transactions, and power dashboards or trading systems with real‑time data.
 
 ## How is it different from raw Polygon (MATIC) RPC?
 
@@ -51,6 +51,18 @@ Most queries can be turned into live streams by switching `query` to `subscripti
 - [Polygon (MATIC) Uniswap API](./matic-uniswap-api)
 
 Query and subscribe to on‑chain swaps, OHLCV, liquidity events, pools, and per‑wallet trading activity across major Polygon DEXes.
+
+## Polygon (MATIC) Slippage API
+
+- [Polygon (MATIC) Slippage API](./matic-slippage-api)
+
+Get slippage and price impact data for Polygon DEX pools. Understand price impact and liquidity depth for token swaps, calculate maximum input amounts at different slippage tolerances, and monitor real-time slippage data across all DEX pools on Polygon.
+
+## Polygon (MATIC) Liquidity API
+
+- [Polygon (MATIC) Liquidity API](./matic-liquidity-api)
+
+Monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on Polygon DEX pools. Track when liquidity is added or removed, monitor pool health and depth, and analyze liquidity patterns across different pools.
 
 ## Transfers
 
