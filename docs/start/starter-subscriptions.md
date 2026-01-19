@@ -134,6 +134,12 @@ This subscription query returns real-time slippage data for all DEX pools on Eth
 
 ▶️ [Realtime Slippage Monitoring](https://ide.bitquery.io/realtime-slippage-on-ethereum)
 
+#### Realtime Slippage for Uniswap V4 Pools
+
+This subscription query retrieves real-time slippage data for Uniswap V4 pools on Ethereum. Unlike Uniswap V3, which uses the pool's smart contract address, Uniswap V4 requires using the `PoolId` to identify pools.
+
+▶️ [Realtime Slippage for Uniswap V4 Pools](https://ide.bitquery.io/realtime-pair-slippage-on-ethereum-uniswap-v4)
+
 ### Liquidity Streams
 
 #### Realtime Liquidity Stream
@@ -141,6 +147,12 @@ This subscription query returns real-time slippage data for all DEX pools on Eth
 This subscription query returns real-time liquidity data for all DEX pools on Ethereum. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
 
 ▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_4#)
+
+#### Realtime Liquidity Stream of a Specific Pool
+
+This subscription query monitors real-time liquidity changes for a specific DEX pool on Ethereum. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
+
+▶️ [Realtime Liquidity Stream of a Specific Pool](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_4#)
 
 ### OHLC & Price Data
 
@@ -392,6 +404,12 @@ This subscription query returns real-time liquidity data for all DEX pools on Ba
 
 ▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_3#)
 
+#### Realtime Liquidity Stream of a Specific Pool
+
+This subscription query monitors real-time liquidity changes for a specific DEX pool on Base. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
+
+▶️ [Realtime Liquidity Stream of a Specific Pool](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_3#)
+
 ### OHLC & Price Data
 
 #### Real-time 1 second OHLC
@@ -471,6 +489,12 @@ This subscription query returns real-time slippage data for all DEX pools on BSC
 This subscription query returns real-time liquidity data for all DEX pools on BSC. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
 
 ▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_2#)
+
+#### Realtime Liquidity Stream of a Specific Pool
+
+This subscription query monitors real-time liquidity changes for a specific DEX pool on BSC. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
+
+▶️ [Realtime Liquidity Stream of a Specific Pool](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_1)
 
 ### Four Meme APIs
 

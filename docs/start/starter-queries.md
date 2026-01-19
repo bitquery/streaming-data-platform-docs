@@ -181,12 +181,6 @@ This query retrieves the latest slippage data for a specific DEX pool on Ethereu
 
 ▶️ [Latest Slippage for a Specific Pool on Uniswap V3](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3-Ethereum)
 
-#### Realtime Slippage Monitoring
-
-This subscription query returns real-time slippage data for all DEX pools on Ethereum. You can monitor price impact and liquidity depth as trades occur.
-
-▶️ [Realtime Slippage Monitoring](https://ide.bitquery.io/realtime-slippage-on-ethereum)
-
 ### Liquidity APIs
 
 #### Latest Liquidity Changes of a Specific Pool
@@ -194,12 +188,6 @@ This subscription query returns real-time slippage data for all DEX pools on Eth
 This query retrieves the latest liquidity events for a specific DEX pool on Ethereum. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
 
 ▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_5#)
-
-#### Realtime Liquidity Stream
-
-This subscription query returns real-time liquidity data for all DEX pools on Ethereum. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
-
-▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_4#)
 
 ## Solana
 
@@ -632,12 +620,6 @@ This query retrieves the latest slippage data for a specific DEX pool on Base. U
 
 ▶️ [Latest Slippage for a Specific Pool](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3)
 
-#### Realtime Slippage Monitoring
-
-This subscription query returns real-time slippage data for all DEX pools on Base. You can monitor price impact and liquidity depth as trades occur.
-
-▶️ [Realtime Slippage Monitoring](https://ide.bitquery.io/realtime-slippage-on-base)
-
 ### Liquidity APIs
 
 #### Latest Liquidity Changes of a Specific Pool
@@ -645,12 +627,6 @@ This subscription query returns real-time slippage data for all DEX pools on Bas
 This query retrieves the latest liquidity events for a specific DEX pool on Base. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
 
 ▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_4#)
-
-#### Realtime Liquidity Stream
-
-This subscription query returns real-time liquidity data for all DEX pools on Base. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
-
-▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_3#)
 
 ## BSC (Binance Smart Chain)
 
@@ -810,12 +786,6 @@ This query retrieves the latest slippage data for a specific DEX pool on BSC. Us
 
 ▶️ [Latest Slippage for a Specific Pool](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Pancakeswap)
 
-#### Realtime Slippage Monitoring
-
-This subscription query returns real-time slippage data for all DEX pools on BSC. You can monitor price impact and liquidity depth as trades occur.
-
-▶️ [Realtime Slippage Monitoring](https://ide.bitquery.io/realtime-slippage-on-bsc)
-
 ### Liquidity APIs
 
 #### Latest Liquidity Changes of a Specific Pool
@@ -823,12 +793,6 @@ This subscription query returns real-time slippage data for all DEX pools on BSC
 This query retrieves the latest liquidity events for a specific DEX pool on BSC. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
 
 ▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_2#)
-
-#### Realtime Liquidity Stream
-
-This subscription query returns real-time liquidity data for all DEX pools on BSC. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
-
-▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_2#)
 
 ### Four Meme APIs
 
