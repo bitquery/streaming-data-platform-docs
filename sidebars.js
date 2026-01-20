@@ -698,6 +698,7 @@ const sidebars = {
             "examples/polymarket-api/main-polymarket-contract",
             "examples/polymarket-api/polymarket-ctf-exchange",
             "examples/polymarket-api/uma-adapter-contract",
+            "examples/polymarket-api/polymarket-trade-apis",
           ],
         },
         {
