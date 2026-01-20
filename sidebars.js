@@ -889,6 +889,7 @@ const sidebars = {
           items: [
             "usecases/binance-exchange-wallet-monitoring",
             "usecases/track-millions-of-solana-wallets",
+            "usecases/realtime-liquidity-drain-detector",
           ],
         },
         {
@@ -972,8 +973,6 @@ const sidebars = {
       items: [
         "cloud/evm",
         "cloud/solana",
-        "cloud/tron",
-        "cloud/bitcoin",
         {
           type: "category",
           label: "Examples",
