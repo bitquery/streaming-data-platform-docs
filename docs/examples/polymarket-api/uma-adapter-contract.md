@@ -395,7 +395,7 @@ Use the `questionID` to query `ConditionPreparation` events from the [Main Polym
         Block: {Time: {since_relative: {hours_ago: 36}}}, 
         Arguments: {
           includes: {
-            Name: {is: "questionId"}, 
+            Name: {is: "questionID"}, 
             Value: {Bytes: {is: "QUESTION_ID_HERE"}}
           }
         }, 
@@ -471,7 +471,7 @@ Use the token addresses (asset IDs) to query `OrderFilled` events to get trading
 
 ### Linking Questions to Conditions
 
-The UMA Adapter's `QuestionInitialized` event contains a `questionID` that links to the `questionId` in the Main Polymarket Contract's `ConditionPreparation` event. This allows you to:
+The UMA Adapter's `QuestionInitialized` event contains a `questionID` that links to the `questionID` in the Main Polymarket Contract's `ConditionPreparation` event. This allows you to:
 
 1. Get question metadata (ancillaryData) from UMA Adapter
 2. Link questions to market conditions
