@@ -173,6 +173,22 @@ This API provides a list of top holders along with relevant statistics for a giv
 This API provides a list of all holders along with relevant statistics for a given token on a specific date.
 ▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_7)
 
+### Slippage APIs
+
+#### Latest Slippage for a Specific Pool on Uniswap V3
+
+This query retrieves the latest slippage data for a specific DEX pool on Ethereum. Use this to check current liquidity depth and price impact for a particular token pair.
+
+▶️ [Latest Slippage for a Specific Pool on Uniswap V3](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3-Ethereum)
+
+### Liquidity APIs
+
+#### Latest Liquidity Changes of a Specific Pool
+
+This query retrieves the latest liquidity events for a specific DEX pool on Ethereum. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
+
+▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_5#)
+
 ## Solana
 
 ### Balance APIs
@@ -596,6 +612,22 @@ This API provides a list of top holders along with relevant statistics for a giv
 This API provides a list of all holders along with relevant statistics for a given token on a specific date.
 ▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token-base)
 
+### Slippage APIs
+
+#### Latest Slippage for a Specific Pool
+
+This query retrieves the latest slippage data for a specific DEX pool on Base. Use this to check current liquidity depth and price impact for a particular token pair.
+
+▶️ [Latest Slippage for a Specific Pool](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3)
+
+### Liquidity APIs
+
+#### Latest Liquidity Changes of a Specific Pool
+
+This query retrieves the latest liquidity events for a specific DEX pool on Base. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
+
+▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_4#)
+
 ## BSC (Binance Smart Chain)
 
 ### Balance APIs
@@ -745,6 +777,22 @@ This query returns the top `50` holders of a given BEP-20 token.
 
 Get all trading pairs present on a BSC network DEX.  
 ▶️[Trading Pairs](https://ide.bitquery.io/trading-pairs-on-BNB-by-USD-volume)
+
+### Slippage APIs
+
+#### Latest Slippage for a Specific Pool
+
+This query retrieves the latest slippage data for a specific DEX pool on BSC. Use this to check current liquidity depth and price impact for a particular token pair.
+
+▶️ [Latest Slippage for a Specific Pool](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Pancakeswap)
+
+### Liquidity APIs
+
+#### Latest Liquidity Changes of a Specific Pool
+
+This query retrieves the latest liquidity events for a specific DEX pool on BSC. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
+
+▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_2#)
 
 ### Four Meme APIs
 

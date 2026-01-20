@@ -1,6 +1,6 @@
 ---
 title: Arbitrum API Documentation
-description: Collection of Arbitrum APIs organized by topic.
+description: Collection of Arbitrum APIs organized by topic including DEX trades, liquidity pools, slippage data, and more.
 slug: /blockchain/Arbitrum/
 keywords:
   - Arbitrum API
@@ -20,7 +20,7 @@ keywords:
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-Unlock the full potential of Arbitrum with comprehensive blockchain data—from GMX perpetual trading analytics and DEX swaps to cross-chain bridge monitoring and smart contract interactions. This complete guide delivers production-ready GraphQL APIs, real-time streaming data, and practical examples for tracking trades, balances, events, and more across the Arbitrum ecosystem. Whether you're building DeFi dashboards, trading algorithms, or cross-chain applications, discover all the Arbitrum data solutions you need here.
+Unlock the full potential of Arbitrum with comprehensive blockchain data—from GMX perpetual trading analytics and DEX swaps to liquidity monitoring, slippage analysis, cross-chain bridge monitoring, and smart contract interactions. This complete guide delivers production-ready GraphQL APIs, real-time streaming data, and practical examples for tracking trades, balances, liquidity pools, slippage, events, and more across the Arbitrum ecosystem. Whether you're building DeFi dashboards, trading algorithms, or cross-chain applications, discover all the Arbitrum data solutions you need here.
 
 Need help crafting a query or subscription? Message us on [support](https://t.me/Bloxy_info).
 
@@ -30,7 +30,7 @@ It's a GraphQL interface over curated, indexed Arbitrum data. Write powerful que
 
 ## What can you build with it?
 
-Track GMX perpetual positions, monitor DEX liquidity and trading volumes, analyze cross-chain bridge flows, stream smart contract events, compute trading KPIs, and power real-time dashboards for the most active L2 ecosystem.
+Track GMX perpetual positions, monitor DEX liquidity, pool reserves, slippage, and trading volumes, analyze cross-chain bridge flows, stream smart contract events, compute trading KPIs, and power real-time dashboards for the most active L2 ecosystem.
 
 ## How is it different from raw Arbitrum RPC?
 
@@ -54,6 +54,18 @@ Most queries can be turned into live streams by switching `query` to `subscripti
 - [esGMX API](./esgmx-api)
 
 Query and subscribe to perpetual trading data, DEX swaps, liquidity events, and trading analytics across Arbitrum's leading protocols.
+
+## Arbitrum Slippage API
+
+- [Arbitrum Slippage API](./arbitrum-slippage-api)
+
+Get slippage and price impact data for Arbitrum DEX pools. Understand price impact and liquidity depth for token swaps, calculate maximum input amounts at different slippage tolerances, and monitor real-time slippage data across all DEX pools on Arbitrum.
+
+## Arbitrum Liquidity API
+
+- [Arbitrum Liquidity API](./arbitrum-liquidity-api)
+
+Monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on Arbitrum DEX pools. Track when liquidity is added or removed, monitor pool health and depth, and analyze liquidity patterns across different pools.
 
 ## Core Arbitrum APIs
 

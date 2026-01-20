@@ -1,6 +1,6 @@
 ---
 title: Ethereum API - Best Blockchain Data API for Developers | Bitquery
-description: Access comprehensive Ethereum API with real-time blockchain data, transactions, DEX trades, token balances, and more. Free tier available. GraphQL API with subscriptions and Kafka streaming.
+description: Access comprehensive Ethereum API with real-time blockchain data, transactions, DEX trades, liquidity pools, slippage data, token balances, and more. Free tier available. GraphQL API with subscriptions and Kafka streaming.
 slug: /blockchain/Ethereum/
 keywords:
   - Ethereum API
@@ -28,7 +28,7 @@ keywords:
 
 Bitquery is the leading blockchain data platform that provides comprehensive **Ethereum API** solutions for developers. Instead of running your own Ethereum node or building complex indexing infrastructure, you can use our pre-built **Ethereum API** to get the blockchain data you need in seconds.
 
-Our **Ethereum API** provides comprehensive access to all Ethereum blockchain data including transactions, token balances, DEX trades, liquidity events, blocks, smart contract events, gas fees, mempool data, and NFT information. Available through GraphQL API with real-time streaming via GraphQL subscriptions and Kafka.
+Our **Ethereum API** provides comprehensive access to all Ethereum blockchain data including transactions, token balances, DEX trades, liquidity events, slippage data, pool reserves, blocks, smart contract events, gas fees, mempool data, and NFT information. Available through GraphQL API with real-time streaming via GraphQL subscriptions and Kafka.
 
 ## Getting Started
 
@@ -76,7 +76,7 @@ Build powerful applications including:
 - **Trading Tools**: Trading terminals, bots, and automated strategies
 - **Portfolio Trackers**: Monitor wallet portfolios and token holders
 - **Compliance Tools**: Tax reporting, auditing, and accounting products
-- **DeFi Analytics**: Monitor DEX price/volume and liquidity events
+- **DeFi Analytics**: Monitor DEX price/volume, liquidity events, slippage, and pool reserves
 - **Network Analysis**: Analyze gas usage, fees, and network health
 - **Real-time Monitoring**: Stream mempool activity and pending transactions
 - **Business Intelligence**: Compute KPIs over blocks/transactions for dashboards
@@ -100,6 +100,18 @@ See examples and code snippets [here](https://docs.bitquery.io/docs/subscription
 - [DEXScreener (EVM)](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener)
 
 Query and subscribe to on‑chain swaps, OHLCV, liquidity events, pools, and per‑wallet trading activity across major EVM DEXes.
+
+## Ethereum Slippage API
+
+- [Ethereum Slippage API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/ethereum-slippage-api)
+
+Get slippage and price impact data for Ethereum DEX pools. Understand price impact and liquidity depth for token swaps, calculate maximum input amounts at different slippage tolerances, and monitor real-time slippage data across all DEX pools on Ethereum.
+
+## Ethereum Liquidity API
+
+- [Ethereum Liquidity API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api)
+
+Monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on Ethereum DEX pools. Track when liquidity is added or removed, monitor pool health and depth, and analyze liquidity patterns across different pools.
 
 ## Ethereum Token Holders API
 
@@ -174,7 +186,7 @@ Our **Ethereum API** offers several advantages:
 Our **Ethereum API** provides access to:
 - All Ethereum transactions and blocks
 - Token balances and transfers (ERC-20, ERC-721, ERC-1155 and more)
-- DEX trades and liquidity data
+- DEX trades, liquidity data, slippage, and pool reserves
 - Smart contract events and logs
 - Gas fees and network statistics
 - Mempool data for pending transactions

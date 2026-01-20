@@ -1,6 +1,6 @@
 ---
 title: Base API Documentation
-description: Collection of Base chain APIs organized by topic.
+description: Collection of Base chain APIs organized by topic including DEX trades, liquidity pools, slippage data, and more.
 slug: /blockchain/Base/
 keywords:
   - Base API
@@ -23,17 +23,17 @@ keywords:
 
 ## Overview
 
-In this section we will see how to fetch data on tokens, transactions, and DEXs like Aerodrome and Uniswap on Base via APIs and Streams.
+In this section we will see how to fetch data on tokens, transactions, DEXs like Aerodrome and Uniswap, liquidity pools, and slippage data on Base via APIs and Streams.
 
 If you need help getting data on Base, reach out to [support](https://t.me/Bloxy_info).
 
 ### What is Base API?
 
-Bitquery Base APIs help you fetch onchain data like trades, transactions, balances, token holders etc using graphQL query.
+Bitquery Base APIs help you fetch onchain data like trades, transactions, balances, token holders, liquidity pools, and slippage data etc using graphQL query.
 
 ### What are capabilities of Bitquery Base API?
 
-Bitquery Base APIs are very flexible; you can fetch trade, transaction, and balance information for a period, for a specific wallet, and join with other information.
+Bitquery Base APIs are very flexible; you can fetch trade, transaction, balance, liquidity, and slippage information for a period, for a specific wallet, and join with other information.
 
 ### Difference between Base RPC and Bitquery Base API?
 
@@ -75,6 +75,18 @@ query LatestBaseTrades {
 - [ApeStore API](./apestore-base-api)
 - [Clanker API](./base-clanker-api)
 - [Jump (Base) API](./base-jump-base-api)
+
+## Base Slippage API
+
+- [Base Slippage API](./base-slippage-api)
+
+Get slippage and price impact data for Base DEX pools. Understand price impact and liquidity depth for token swaps, calculate maximum input amounts at different slippage tolerances, and monitor real-time slippage data across all DEX pools on Base.
+
+## Base Liquidity API
+
+- [Base Liquidity API](./base-liquidity-api)
+
+Monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on Base DEX pools. Track when liquidity is added or removed, monitor pool health and depth, and analyze liquidity patterns across different pools.
 
 ## Tokens, Transfers, Balances
 
