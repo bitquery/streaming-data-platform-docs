@@ -57,7 +57,7 @@ A condition represents a specific real-world event with one or more possible out
 emit ConditionPreparation(
     conditionId,
     oracle,
-    questionId,
+    questionID,
     outcomeSlotCount
 );
 ```
@@ -246,7 +246,7 @@ Track new prediction markets as they are created on the platform.
 - Creation timestamps
 - Oracle assignments
 
-**Note**: Using the `conditionId` from `ConditionPreparation` events, you can get the `questionId` from the event arguments. This `questionId` can then be used to query the [UMA Adapter Contract API](./uma-adapter-contract.md) `QuestionInitialized` event to retrieve question metadata (ancillaryData) containing the market title, description, and other details.
+**Note**: Using the `conditionId` from `ConditionPreparation` events, you can get the `questionID` from the event arguments. This `questionID` can then be used to query the [UMA Adapter Contract API](./uma-adapter-contract.md) `QuestionInitialized` event to retrieve question metadata (ancillaryData) containing the market title, description, and other details.
 
 ### 3. Condition Preparation by Condition ID
 
@@ -615,7 +615,7 @@ Replace `0x1ff49fdcb6685c94059b65620f43a683be0ce7a5` with any trader address you
 
 ### Finding Question Metadata
 
-The `conditionId` from `ConditionPreparation` events contains a `questionId` that can be used to query the UMA Adapter contract for question metadata (ancillaryData) from the `QuestionInitialized` event.
+The `conditionId` from `ConditionPreparation` events contains a `questionID` that can be used to query the UMA Adapter contract for question metadata (ancillaryData) from the `QuestionInitialized` event.
 
 See the [UMA Adapter Contract documentation](./uma-adapter-contract.md) for details on querying question metadata.
 
