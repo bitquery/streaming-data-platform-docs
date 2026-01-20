@@ -7,6 +7,15 @@ slug: /cloud/
 Bitquery provides ready-to-use blockchain **data dumps** via popular cloud providers such as **AWS**, **Google Cloud**, and **Snowflake**.  
 You can plug these datasets directly into your existing analytics stack (AWS, BigQuery, Snowflake, etc.) and build custom data pipelines without running your own blockchain infrastructure.
 
+## Available Blockchain Data Dumps
+
+Bitquery provides cloud data dumps for the following blockchains:
+
+- **[EVM Chains](/docs/cloud/evm)** – Ethereum, BSC, Base, Polygon/Matic, Optimism, Arbitrum, and other EVM-compatible chains
+- **[Solana](/docs/cloud/solana)** – Blocks, transactions, transfers, DEX data, and more
+- **[Tron](/docs/cloud/tron)** – Blocks, transactions, transfers, balance updates, and DEX trades
+- **[Bitcoin](/docs/cloud/bitcoin)** – Blocks, transactions, inputs, outputs, and OMNI Layer data
+
 ## Sample Parquet Data
 
 To quickly explore the structure of the data and test your tooling, you can use our **public sample dataset**:
