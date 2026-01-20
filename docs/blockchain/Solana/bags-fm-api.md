@@ -28,6 +28,8 @@ The **Bitquery Bags FM API** provides comprehensive access to **Bags FM launchpa
 Bags FM tokens are launched on Meteora DBC.
 :::
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 ## Table of Contents
 
 ### [API Endpoints](#api-endpoints)
@@ -638,7 +640,11 @@ Track **all transfers of Bags FM tokens** across wallets. This **Bags FM token t
   }
 }
 ```
+## Video Tutorials
 
+### Get Unlimited Bags FM Token Data Using Bitquery API
+
+<VideoPlayer url="https://youtu.be/wdryeTf_4rg" />
 ## Use Cases
 
 - **Trading Platforms** – Integrate **Bags FM price feeds**, **Bags FM token trades**, and liquidity data using the **Bitquery Bags FM API**
