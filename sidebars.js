@@ -973,6 +973,8 @@ const sidebars = {
       items: [
         "cloud/evm",
         "cloud/solana",
+         "cloud/tron",
+        "cloud/bitcoin",
         {
           type: "category",
           label: "Examples",
