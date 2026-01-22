@@ -1,5 +1,5 @@
 ---
-title: EVM Blockchain Data Export - Ethereum, BSC, Polygon Datasets for Snowflake, AWS S3, BigQuery
+title: EVM Data - Ethereum, BSC, Polygon Datasets for Snowflake, AWS S3, BigQuery
 description: Export EVM blockchain data for Ethereum, BSC, Base, Polygon, Optimism to cloud storage with Parquet datasets optimized for Snowflake, AWS S3, Google BigQuery, and data lakes. Get blocks, transactions, transfers, DEX trades, and balance updates.
 keywords:
   - EVM blockchain data
@@ -8,14 +8,26 @@ keywords:
   - Polygon data export
   - Base blockchain data
   - Optimism data export
+  - Arbitrum data export
+  - Avalanche data export
   - EVM DEX trades
   - EVM transfers
   - EVM balance updates
   - EVM transactions
+  - EVM smart contracts
+  - EVM events
+  - EVM logs
+  - EVM calls
+  - EVM miner rewards
+  - EVM uncle blocks
   - Parquet datasets
   - Snowflake EVM data
   - AWS S3 EVM
   - BigQuery EVM
+  - Redshift EVM data
+  - Databricks EVM
+  - Athena EVM queries
+  - Spark EVM data
   - EVM cloud storage
   - EVM historical data
   - EVM data lake
@@ -27,6 +39,29 @@ keywords:
   - Ethereum Parquet
   - BSC Parquet
   - Polygon Parquet
+  - Base Parquet
+  - Optimism Parquet
+  - Arbitrum Parquet
+  - Avalanche Parquet
+  - EVM blockchain export
+  - EVM data pipeline
+  - EVM ETL data
+  - EVM real-time data
+  - EVM streaming data
+  - EVM on-chain data
+  - DeFi data export
+  - NFT data export
+  - Web3 data analytics
+  - Blockchain data warehouse
+  - Crypto data lake
+  - Multi-chain data
+  - Cross-chain analytics
+  - Layer 1 blockchain data
+  - Ethereum mainnet data
+  - BSC mainnet data
+  - Polygon mainnet data
+  - Base mainnet data
+  - Optimism mainnet data
 sidebar_position: 2
 ---
 
