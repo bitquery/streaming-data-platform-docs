@@ -1,6 +1,32 @@
+---
+title: Tron Blockchain Data Export - Cloud Datasets for Snowflake, AWS S3, BigQuery
+description: Export Tron blockchain data to cloud storage with Parquet datasets optimized for Snowflake, AWS S3, Google BigQuery, and data lakes. Get blocks, transactions, transfers, balance updates, and DEX trades for large-scale analytics.
+keywords:
+  - Tron blockchain data
+  - Tron data export
+  - Tron DEX trades
+  - Tron transfers
+  - Tron balance updates
+  - Parquet datasets
+  - Snowflake Tron data
+  - AWS S3 Tron
+  - BigQuery Tron
+  - Tron cloud storage
+  - Tron historical data
+  - Tron data lake
+  - Tron analytics
+  - Tron data warehouse
+  - Tron Parquet files
+  - Tron batch data
+  - Tron data dumps
+  - Tron TRX transfers
+  - Tron token transfers
+sidebar_position: 4
+---
+
 # Tron Data Export for Snowflake, AWS, Google Cloud, etc.
 
-Bitquery provides **Tron blockchain data dumps** in **Parquet format**, designed for large-scale analytics, historical backfills, and data lake integrations.  
+Bitquery provides **Tron blockchain data dumps** in **Parquet format**, designed for large-scale analytics, historical backfills, and data lake integrations.
 These datasets can be hosted directly in your own cloud storage (for example, **AWS S3**) and queried using engines like **Snowflake, BigQuery, Athena, Spark, etc**.
 
 
