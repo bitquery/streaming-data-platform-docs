@@ -16,6 +16,8 @@ Checkout our [GeckoTerminal EVM API documentation](https://docs.bitquery.io/docs
 - **Cloud Solutions**: Access Solana data through AWS, GCP, and Snowflake integrations
 - **Kafka Streams**: High-throughput data streaming for enterprise applications
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 ## Getting Started with Solana
 
 - **[Solana API Examples](https://docs.bitquery.io/docs/blockchain/Solana/)** - Complete collection of Solana API examples
@@ -47,13 +49,13 @@ This guide shows how to retrieve the same Solana DEX data that GeckoTerminal dis
 ## Get Trade Transactions of GeckoTerminal for a particular pair in realtime
 
 The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
-You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-geckoTerminal)
+You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-geckoTerminal_1)
 
 ```
 subscription MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "3B5wuUrMEi5yATD7on46hKfej3pfmd7t1RKgrsN3pump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}, Transaction: {Result: {Success: true}}}
+      where: {Trade: {Currency: {MintAddress: {is: "8ha2CTTh7qr74o8jLbsniEdNMxnRpMttsWLwarEmpump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}, Transaction: {Result: {Success: true}}}
     ) {
       Block {
         Time
@@ -88,13 +90,13 @@ subscription MyQuery {
 ## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token of GeckoTerminal
 
 The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
-You can run the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair)
+You can run the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair00_2)
 
 ```graphql
-query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime!) {
+query MyQuery($token: String!, $side_token: String!, $pair_address: String!) {
   Solana(dataset: realtime) {
     DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: $token}}, Side: {Currency: {MintAddress: {is: $side_token}}}, Market: {MarketAddress: {is: $pair_address}}}, Block: {Time: {since: $time_1h_ago}}}
+      where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: $token}}, Side: {Currency: {MintAddress: {is: $side_token}}}, Market: {MarketAddress: {is: $pair_address}}}, Block: {Time: {since_relative: {hours_ago: 1}}}}
     ) {
       Trade {
         Currency {
@@ -105,7 +107,7 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
         start: PriceInUSD(minimum: Block_Time)
         min5: PriceInUSD(
           minimum: Block_Time
-          if: {Block: {Time: {after: $time_5min_ago}}}
+          if: {Block: {Time: {after_relative: {minutes_ago: 5}}}}
         )
         end: PriceInUSD(maximum: Block_Time)
         Dex {
@@ -127,7 +129,7 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
       makers: count(distinct: Transaction_Signer)
       makers_5min: count(
         distinct: Transaction_Signer
-        if: {Block: {Time: {after: $time_5min_ago}}}
+        if: {Block: {Time: {after_relative: {minutes_ago: 5}}}}
       )
       buyers: count(
         distinct: Transaction_Signer
@@ -135,7 +137,7 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
       )
       buyers_5min: count(
         distinct: Transaction_Signer
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after_relative: {minutes_ago: 5}}}}
       )
       sellers: count(
         distinct: Transaction_Signer
@@ -143,14 +145,14 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
       )
       sellers_5min: count(
         distinct: Transaction_Signer
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after_relative: {minutes_ago: 5}}}}
       )
       trades: count
-      trades_5min: count(if: {Block: {Time: {after: $time_5min_ago}}})
+      trades_5min: count(if: {Block: {Time: {after_relative: {minutes_ago: 5}}}})
       traded_volume: sum(of: Trade_Side_AmountInUSD)
       traded_volume_5min: sum(
         of: Trade_Side_AmountInUSD
-        if: {Block: {Time: {after: $time_5min_ago}}}
+        if: {Block: {Time: {after_relative: {minutes_ago: 5}}}}
       )
       buy_volume: sum(
         of: Trade_Side_AmountInUSD
@@ -158,7 +160,7 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
       )
       buy_volume_5min: sum(
         of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after_relative: {minutes_ago: 5}}}}
       )
       sell_volume: sum(
         of: Trade_Side_AmountInUSD
@@ -166,40 +168,37 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
       )
       sell_volume_5min: sum(
         of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after_relative: {minutes_ago: 5}}}}
       )
       buys: count(if: {Trade: {Side: {Type: {is: buy}}}})
       buys_5min: count(
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after_relative: {minutes_ago: 5}}}}
       )
       sells: count(if: {Trade: {Side: {Type: {is: sell}}}})
       sells_5min: count(
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after_relative: {minutes_ago: 5}}}}
       )
     }
   }
 }
 {
-  "token":"2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
-  "side_token": ""So11111111111111111111111111111111111111112",
-  "pair_address: "4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i",
-  "time_5min_ago":"2024-11-06T15:13:00Z",
-  "time_1h_ago": "2024-11-06T14:18:00Z"
+  "token":"3B5wuUrMEi5yATD7on46hKfej3pfmd7t1RKgrsN3pump",
+  "side_token": "So11111111111111111111111111111111111111112",
+  "pair_address": "9uWW4C36HiCTGr6pZW9VFhr9vdXktZ8NA8jVnzQU35pJ"
 }
 ```
 
 ## Get Top Pairs on Solana on GeckoTerminal
 
-The query will give the top 10 pairs on Solana network in descending order of their total trades happened in their pools in last 1 hour. This query will get you all the data you need such as total trades, total buys, total sells, total traded volume, total buy volume
-Please change the `Block: {Time: {since: "2024-08-15T04:19:00Z"}}` accordingly when you try out the query.
+The query will give the top 10 pairs on Solana network in descending order of their total trades happened in their pools in last 1 hour. This query will get you all the data you need such as total trades, total buys, total sells, total traded volume, total buy volume.
 Keep in mind you cannot use this as a websocket subscription becuase aggregate functions like `sum` doesn't work well in `subscription`.
-You can find the query [here](https://ide.bitquery.io/Get-Top-Pairs-on-Solana-on-GeckoTerminal)
+You can find the query [here](https://ide.bitquery.io/Get-Top-Pairs-on-Solana-on-GeckoTerminal_1)
 
 ```
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Trade: {Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Block: {Time: {since: "2024-08-15T04:19:00Z"}}}
+      where: {Transaction: {Result: {Success: true}}, Trade: {Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Block: {Time: {since_relative: {hours_ago: 1}}}}
       orderBy: {descendingByField: "total_trades"}
       limit: {count: 10}
     ) {
@@ -248,3 +247,9 @@ query MyQuery {
   }
 }
 ```
+
+## Video Tutorial
+
+### Get Gecko Terminal Data with Bitquery API and Streams
+
+<VideoPlayer url="https://youtu.be/VtT5Kq5ckCs" />

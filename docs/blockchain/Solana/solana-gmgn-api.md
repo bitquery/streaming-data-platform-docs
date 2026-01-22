@@ -14,14 +14,13 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## GMGN Trending API
 
-The query will give you the Top 10 trending tokens on GMGN in last 1 hour. Change the time in this `Block: {Time: {since: "2025-04-24T08:16:00Z"}}` to the time 1 hour ago timestamp whenever you test the query.
-You can find the query [here](https://ide.bitquery.io/gmgn-trending-api)
+The query will give you the Top 10 trending tokens on GMGN in last 1 hour. You can find the query [here](https://ide.bitquery.io/gmgn-trending-api_1)
 
 ``` graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Block: {Time: {since: "2025-04-24T08:16:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Side: {Currency: {MintAddress: {in: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v","Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}}, Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}}}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Transaction: {Result: {Success: true}}, Trade: {Side: {Currency: {MintAddress: {in: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v","Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}}, Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}}}
       limit: {count: 10}
       orderBy: {descendingByField: "trades_count"}
     ) {
@@ -34,6 +33,9 @@ query MyQuery {
         Dex {
           ProtocolName
           ProtocolFamily
+        }
+        Market{
+          MarketAddress
         }
         Side {
           Currency {
@@ -187,8 +189,8 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
 }
 {
   "token":"token mint address",
-  "side_token": ""So11111111111111111111111111111111111111112",
-  "pair_address: "4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i",
+  "side_token": "So11111111111111111111111111111111111111112",
+  "pair_address": "4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i",
   "time_5min_ago":"2024-11-06T15:13:00Z",
   "time_1h_ago": "2024-11-06T14:18:00Z"
 }
@@ -364,3 +366,8 @@ query MyQuery {
   }
 }
 ```
+## Video Tutorial
+
+### Get GMGN Terminal Data with Bitquery API and Streams
+
+<VideoPlayer url="https://youtu.be/8Vp_Q6RQzow" />
