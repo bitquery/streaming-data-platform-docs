@@ -940,7 +940,7 @@ const sidebars = {
             "usecases/telegram-bot",
             "usecases/Top-10-ethereum-tokens",
             "usecases/pumpfun-token-sniffer",
-            "usecases/defi-portfolio-profiler",
+            "usecases/defi_portfolio_scorer",
           ],
         },
         {

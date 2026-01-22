@@ -4,7 +4,7 @@ This guide demonstrates how to build a DeFi Portfolio Scorer tool that analyzes 
 
 GitHub Repository: [Defi-Portfolio-Profiler](https://github.com/Akshat-cs/Defi-Portfolio-Profiler)
 
-<img src="/img/usecases/defi_portfolio_profiler.png" />
+<img src="/img/usecases/defi_portfolio_scorer.png" />
 
 ## Overview
 
