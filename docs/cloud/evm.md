@@ -1,4 +1,36 @@
-# EVM Data Export for Snowflake, AWS, Google Cloud etc 
+---
+title: EVM Blockchain Data Export - Ethereum, BSC, Polygon Datasets for Snowflake, AWS S3, BigQuery
+description: Export EVM blockchain data for Ethereum, BSC, Base, Polygon, Optimism to cloud storage with Parquet datasets optimized for Snowflake, AWS S3, Google BigQuery, and data lakes. Get blocks, transactions, transfers, DEX trades, and balance updates.
+keywords:
+  - EVM blockchain data
+  - Ethereum data export
+  - BSC blockchain data
+  - Polygon data export
+  - Base blockchain data
+  - Optimism data export
+  - EVM DEX trades
+  - EVM transfers
+  - EVM balance updates
+  - EVM transactions
+  - Parquet datasets
+  - Snowflake EVM data
+  - AWS S3 EVM
+  - BigQuery EVM
+  - EVM cloud storage
+  - EVM historical data
+  - EVM data lake
+  - EVM analytics
+  - EVM data warehouse
+  - EVM Parquet files
+  - EVM batch data
+  - EVM data dumps
+  - Ethereum Parquet
+  - BSC Parquet
+  - Polygon Parquet
+sidebar_position: 2
+---
+
+# EVM Data Export for Snowflake, AWS, Google Cloud etc
 
 Bitquery provides **blockchain data dumps for EVM-base chains like Ethereum, BSC, Base, Polygon/Matic, Optimism, etc.** in parquet format that you can host directly in your own cloud (for example AWS S3) and plug into your analytics stack or data lake.
 
