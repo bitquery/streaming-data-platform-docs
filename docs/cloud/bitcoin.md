@@ -1,5 +1,5 @@
 ---
-title: Bitcoin Blockchain Data Export - Cloud Datasets for Snowflake, AWS S3, BigQuery
+title: Bitcoin Data Export API - Blockchain Datasets for Snowflake, AWS S3, BigQuery
 description: Export Bitcoin blockchain data to cloud storage with Parquet datasets optimized for Snowflake, AWS S3, Google BigQuery, and data lakes. Get blocks, transactions, inputs, outputs, and OMNI data for large-scale analytics.
 keywords:
   - Bitcoin blockchain data
