@@ -1,6 +1,6 @@
 ---
-title: Blockchain Data Export to Cloud - AWS S3, Snowflake, BigQuery Datasets
-description: Export blockchain data to cloud storage with ready-to-use Parquet datasets for AWS S3, Google BigQuery, Snowflake, and data lakes. Get Ethereum, Solana, Bitcoin, Tron, and EVM chain data for analytics, ETL pipelines, and data warehousing.
+title: Blockchain Data in Cloud - AWS S3, Snowflake, BigQuery Datasets
+description: Export blockchain data to cloud storage with ready-to-use Parquet datasets for AWS S3, Google BigQuery, Snowflake, and data lakes. Build scalable, real-time, low-latency solutions with Kafka streams and GraphQL subscriptions. Get Ethereum, Solana, Bitcoin, Tron, and EVM chain data for analytics, ETL pipelines, and data warehousing.
 keywords:
   - Blockchain data export
   - Cloud blockchain data
@@ -26,17 +26,30 @@ keywords:
   - Blockchain Parquet files
   - Data lake integration
   - Cloud data pipelines
+  - Real-time blockchain data
+  - Low-latency blockchain
+  - Scalable blockchain solutions
+  - Kafka blockchain streams
+  - Real-time blockchain analytics
+  - Blockchain streaming data
+  - High-throughput blockchain
+  - Cloud-native blockchain
+  - Serverless blockchain
+  - Microservices blockchain
+  - Event-driven blockchain
+  - Blockchain performance
+  - Sub-second blockchain data
 sidebar_position: 1
 ---
 
-# Blockchain Data in Your Cloud
+# Blockchain Data in Cloud
 
 Bitquery provides ready-to-use blockchain **data dumps** in **Parquet format** via popular cloud providers such as **AWS S3**, **Google Cloud Storage**, **Snowflake**, and **BigQuery**.  
 You can plug these datasets directly into your existing analytics stack and build custom data pipelines without running your own blockchain infrastructure or maintaining complex indexing systems.
 
 ## Overview
 
-Our cloud data export service delivers **production-ready blockchain datasets** optimized for large-scale analytics, historical backfills, and data lake integrations. All data is provided in **Apache Parquet format**, ensuring optimal compression, columnar storage, and compatibility with modern analytics engines.
+Our cloud data export service delivers **production-ready blockchain datasets** optimized for large-scale analytics, historical backfills, and data lake integrations. All data is provided in **Apache Parquet format**, ensuring optimal compression, columnar storage, and compatibility with modern analytics engines. We can also provide other file formats if required.
 
 ### Key Benefits
 
@@ -229,6 +242,103 @@ Our Parquet datasets are compatible with:
 - **Presto/Trino** – Distributed SQL query engine
 - **Apache Drill** – Schema-free SQL queries
 - **DuckDB** – In-process analytical database
+
+## Building Scalable Real-Time Solutions
+
+Bitquery enables you to build **enterprise-grade, scalable, real-time, low-latency solutions** in the cloud that can handle millions of transactions and events per second. Our cloud-native architecture supports both batch and streaming data pipelines for comprehensive blockchain analytics.
+
+### Real-Time Streaming Architecture
+
+Build low-latency applications with **sub-second data delivery** using:
+
+- **[Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)** – High-throughput, low-latency blockchain data streams
+  - **Mempool Data** – Access pending transactions before block confirmation
+  - **Committed Data** – Real-time confirmed transaction streams
+  - **Multi-Chain Support** – Stream data from Ethereum, Solana, Bitcoin, Tron, and more
+  - **Protobuf Format** – Efficient binary serialization for optimal performance
+
+- **GraphQL Subscriptions** – WebSocket-based real-time data subscriptions
+  - **Live Queries** – Subscribe to specific blockchain events and transactions
+  - **Custom Filters** – Filter data streams by address, token, contract, or event
+  - **Low Latency** – Sub-100ms data delivery for time-sensitive applications
+
+### Scalable Cloud Solutions
+
+Design and deploy **horizontally scalable solutions** that can handle:
+
+- **High Throughput** – Process millions of transactions per day
+- **Concurrent Users** – Support thousands of simultaneous connections
+- **Data Volume** – Handle petabytes of historical and real-time data
+- **Global Scale** – Deploy across multiple cloud regions for low latency
+
+### Cloud-Native Architecture Patterns
+
+#### Lambda Functions and Serverless
+
+Build serverless solutions using:
+
+- **AWS Lambda** – Process blockchain events in real-time
+- **Google Cloud Functions** – Serverless event-driven processing
+- **Azure Functions** – Scalable serverless compute
+- **Use Cases**: Real-time alerts, automated trading, compliance monitoring
+
+#### Containerized Microservices
+
+Deploy scalable microservices with:
+
+- **Kubernetes** – Container orchestration for auto-scaling
+- **Docker** – Containerized blockchain data processors
+- **ECS/EKS** – Managed container services on AWS
+- **Use Cases**: Multi-tenant analytics platforms, API services, data aggregators
+
+#### Event-Driven Architecture
+
+Build reactive systems with:
+
+- **Event Sourcing** – Store blockchain events as immutable logs
+- **CQRS** – Separate read and write models for optimal performance
+- **Message Queues** – Use Kafka, SQS, or Pub/Sub for event distribution
+- **Use Cases**: Real-time dashboards, notification systems, trading platforms
+
+### Low-Latency Optimization
+
+Achieve **millisecond-level latency** for time-sensitive applications:
+
+- **Edge Computing** – Deploy processing close to data sources
+- **In-Memory Caching** – Use Redis, Memcached, or ElastiCache
+- **CDN Integration** – Distribute data globally for reduced latency
+- **Connection Pooling** – Optimize database and API connections
+- **Use Cases**: Trading bots, arbitrage detection, flash loan monitoring
+
+### Hybrid Batch + Streaming Solutions
+
+Combine batch and streaming for comprehensive analytics:
+
+- **Lambda Architecture** – Process both real-time and historical data
+- **Kappa Architecture** – Unified streaming pipeline for all data
+- **Data Lake + Stream** – Store historical data in S3/GCS, stream real-time updates
+- **Use Cases**: Portfolio trackers, analytics dashboards, compliance systems
+
+### Example Real-Time Use Cases
+
+- **Trading Bots** – Execute trades based on real-time blockchain events
+- **Arbitrage Detection** – Identify price discrepancies across DEXs instantly
+- **Flash Loan Monitoring** – Detect and analyze flash loan attacks in real-time
+- **MEV Detection** – Monitor miner extractable value opportunities
+- **Compliance Alerts** – Real-time monitoring of suspicious transactions
+- **Portfolio Tracking** – Live updates of multi-chain portfolio values
+- **DEX Analytics** – Real-time DEX volume and liquidity tracking
+- **NFT Floor Price Alerts** – Instant notifications on price changes
+
+### Performance Benchmarks
+
+Our cloud solutions support:
+
+- **Latency**: Sub-100ms for real-time streams, sub-second for batch queries
+- **Throughput**: Millions of transactions per second processing capability
+- **Scalability**: Auto-scaling from zero to thousands of concurrent connections
+- **Availability**: 99.9% uptime SLA with multi-region redundancy
+- **Data Freshness**: Real-time data with <1 second delay from blockchain
 
 ## Use Cases
 
