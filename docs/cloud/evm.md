@@ -65,7 +65,7 @@ keywords:
 sidebar_position: 2
 ---
 
-# EVM Data Export for Snowflake, AWS, Google Cloud etc
+# EVM Data
 
 Bitquery provides **blockchain data dumps for EVM-base chains like Ethereum, BSC, Base, Polygon/Matic, Optimism, etc.** in parquet format that you can host directly in your own cloud (for example AWS S3) and plug into your analytics stack or data lake.
 

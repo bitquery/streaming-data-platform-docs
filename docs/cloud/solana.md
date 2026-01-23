@@ -1,5 +1,5 @@
 ---
-title: Solana Blockchain Data Export - Cloud Datasets for Snowflake, AWS S3, BigQuery
+title: Solana Data - Snowflake, AWS S3, BigQuery
 description: Export Solana blockchain data to cloud storage with Parquet datasets optimized for Snowflake, AWS S3, Google BigQuery, and data lakes. Get blocks, transactions, transfers, balance updates, DEX trades, and rewards for large-scale analytics.
 keywords:
   - Solana blockchain data
@@ -27,7 +27,7 @@ keywords:
 sidebar_position: 5
 ---
 
-# Solana Data Export for Snowflake, AWS, Google Cloud, etc.
+# Solana Data
 
 Bitquery provides **Solana blockchain data dumps** in **Parquet format**, designed for large-scale analytics, historical backfills, and data lake integrations.
 These datasets can be hosted directly in your own cloud storage (for example, **AWS S3**) and queried using engines like **Snowflake, BigQuery, Athena, Spark, etc**.
