@@ -124,7 +124,7 @@ Export **Bitcoin blockchain data** including transaction inputs, outputs, and OM
 
 ## Data Format and Structure
 
-All blockchain data is provided in **Apache Parquet format**, a columnar storage file format optimized for analytics workloads. Parquet offers:
+Blockchain data is provided by default in **Apache Parquet format**, a columnar storage file format optimized for analytics workloads. We can also provide data in other file formats (CSV, JSON, Avro, etc.) based on your requirements. Parquet offers:
 
 - **High Compression** – Reduces storage costs by up to 90%
 - **Columnar Storage** – Enables efficient column pruning and predicate pushdown
