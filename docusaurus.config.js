@@ -27,19 +27,6 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
 
-  // Windows: prevent Webpack/Watchpack from watching system files (e.g. C:\pagefile.sys)
-  configureWebpack: () => ({
-    watchOptions: {
-      ignored: [
-        /(?:^|[\\/])pagefile\.sys$/i,
-        /(?:^|[\\/])hiberfil\.sys$/i,
-        /(?:^|[\\/])swapfile\.sys$/i,
-        /(?:^|[\\/])System Volume Information(?:[\\/]|$)/i,
-        /(?:^|[\\/])\$RECYCLE\.BIN(?:[\\/]|$)/i,
-      ],
-    },
-  }),
-
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
