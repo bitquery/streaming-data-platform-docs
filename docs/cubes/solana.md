@@ -4,6 +4,8 @@ sidebar_position: 2
 
 # Solana Builder Terms Explanation
 
+> **Before you start**: Not sure when to use Transfers vs DEX Trades vs other data primitives? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+
 ### Dataset Parameters
 
 Solana API allows you to narrow down your results using these parameters:

@@ -14,9 +14,10 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 
 ## Foundation (30 minutes)
 
-1. **[Understanding Datasets](https://docs.bitquery.io/docs/graphql/dataset/archive)** - Learn about archive, real-time, and combined datasets
-2. **[Basic GraphQL Concepts](https://docs.bitquery.io/docs/graphql/introduction)** - Understand query structure and syntax
-3. **[Authorization](https://docs.bitquery.io/docs/authorisation/how-to-generate)** - Set up your access outside our IDE
+1. **[Mental Model: Transfers, Events, Calls, and DexTrades](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls)** - Understand when to use each data primitive
+2. **[Understanding Datasets](https://docs.bitquery.io/docs/graphql/dataset/archive)** - Learn about archive, real-time, and combined datasets
+3. **[Basic GraphQL Concepts](https://docs.bitquery.io/docs/graphql/introduction)** - Understand query structure and syntax
+4. **[Authorization](https://docs.bitquery.io/docs/authorisation/how-to-generate)** - Set up your access outside our IDE
 
 ## Intermediate (1-2 hours)
 

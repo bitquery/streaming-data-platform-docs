@@ -16,13 +16,15 @@ const sidebars = {
       items: [
         "start/learning-path",
         "start/first-query",
+
         "start/starter-queries",
         "start/starter-subscriptions",
         "start/endpoints",
+        "start/mental-model-transfers-events-calls",
         "start/embed",
         "start/errors",
         "start/getting-updates",
-        "start/mempool",
+        "start/mempool",   
       ],
     },
 
@@ -975,7 +977,7 @@ const sidebars = {
       items: [
         "cloud/evm",
         "cloud/solana",
-         "cloud/tron",
+        "cloud/tron",
         "cloud/bitcoin",
         {
           type: "category",

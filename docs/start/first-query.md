@@ -72,3 +72,11 @@ For example,
   }
 }
 ```
+
+## Next Steps
+
+Now that you've created your first query, learn which data primitives to use:
+
+- **[Mental Model: Transfers, Events, Calls, and DexTrades](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls)** - Understand when to use Transfers, Events, Calls, or DexTrades for your queries
+- **[Starter Queries](https://docs.bitquery.io/docs/start/starter-queries)** - Try pre-built queries for common use cases
+- **[Learning Path](https://docs.bitquery.io/docs/start/learning-path)** - Follow a structured path from beginner to advanced

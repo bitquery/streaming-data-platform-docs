@@ -1,5 +1,7 @@
 # Transfer Cube
 
+> **Before you start**: Not sure when to use Transfers vs Events vs Calls vs DexTrades? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+
 The Transfer cube provides details on asset transfers, blocks, contract calls, fees, event logs, receipts, transaction details, and transaction status.
 
 ![Transfers Fields](/img/cubes/transfers-cube.png)
