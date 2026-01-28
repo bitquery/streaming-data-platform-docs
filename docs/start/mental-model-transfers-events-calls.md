@@ -436,12 +436,12 @@ Now that you understand the mental model:
 1. **[Crypto Price API (Trading)](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction)** - Pre-aggregated OHLC, SMA, volume; Tokens, Currencies, Pairs cubes
 
 **EVM (Ethereum, BSC, Base, etc.):**
-2. **[Explore Transfers API](../blockchain/Ethereum/transfers/erc20-token-transfer-api)** - Learn Transfers in detail
-3. **[Explore Events API](../blockchain/Ethereum/events/events-api)** - Learn Events in detail  
-4. **[Explore Calls API](../blockchain/Ethereum/calls/smartcontract)** - Learn Calls in detail
-5. **[DEXTrades Cube](../cubes/dextrades)** - Pool perspective, one record per swap
-6. **[DEXTradesByTokens Cube](../cubes/dextradesbyTokens)** - Token perspective, filter by token
-7. **[Ethereum DEX API](../blockchain/Ethereum/dextrades/dex-api)** - DEX trading examples
+2. **[Explore Transfers API](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api)** - Learn Transfers in detail
+3. **[Explore Events API](/docs/blockchain/Ethereum/events/events-api)** - Learn Events in detail  
+4. **[Explore Calls API](/docs/blockchain/Ethereum/calls/smartcontract)** - Learn Calls in detail
+5. **[DEXTrades Cube](/docs/cubes/dextrades)** - Pool perspective, one record per swap
+6. **[DEXTradesByTokens Cube](/docs/cubes/dextradesbyTokens)** - Token perspective, filter by token
+7. **[Ethereum DEX API](/docs/blockchain/Ethereum/dextrades/dex-api)** - DEX trading examples
 
 **Solana:**
 8. **[Solana Builder Terms](https://docs.bitquery.io/docs/cubes/solana)** - Transfers, DEXTrades, Instructions, BalanceUpdates, DEXOrders
@@ -455,8 +455,8 @@ Now that you understand the mental model:
 14. **[Tron Transfers](https://docs.bitquery.io/docs/blockchain/Tron/tron-transfers)** - Token movements
 
 **General:**
-15. **[Try Starter Queries](./starter-queries)** - See real examples
-16. **[Build Your First Query](./first-query)** - Put it into practice
+15. **[Try Starter Queries](/docs/start/starter-queries)** - See real examples
+16. **[Build Your First Query](/docs/start/first-query)** - Put it into practice
 
 ---
 
