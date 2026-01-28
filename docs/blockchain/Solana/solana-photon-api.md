@@ -2,6 +2,8 @@
 sidebar_position: 1
 ---
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Photon Solana API
 
 Photon is a routing aggregator on Solana that finds the best execution paths across multiple DEXs. To identify trades that were routed through Photon, we use their program address `BSfD6SHZigAfDWSjzD5Q41jw8LmKwtmjskPH9XW1mrRW` in our queries.
@@ -153,3 +155,7 @@ You can find the query [here](https://ide.bitquery.io/Trades-of-a-Pair-Executed-
 }
 
 ```
+
+## Video Tutorial | Photon API Tutorial: Track DEXTrades on Solana (2026)
+
+<VideoPlayer url="https://www.youtube.com/watch?v=XoKQIymC4kA" />
