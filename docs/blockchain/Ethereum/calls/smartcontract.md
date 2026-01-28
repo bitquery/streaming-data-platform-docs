@@ -48,6 +48,8 @@ Bitquery provides managed Kafka topics including `ethereum.tokens.proto`, `ether
 
 ## Smart Contract Calls API Guide
 
+> **Before you start**: Not sure when to use Calls vs Transfers vs Events vs DexTrades? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+
 This API helps retrieve information about smart contract transactions, including details about the contract function that was called, the input and output parameters, and more. With this data, you can build applications that interact with smart contracts, perform analytics on contract activity, and more.
 
 ## Recent Smart Contract Calls

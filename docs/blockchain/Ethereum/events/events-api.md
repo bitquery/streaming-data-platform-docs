@@ -4,6 +4,8 @@ sidebar_position: 2
 
 # Events API
 
+> **Before you start**: Not sure when to use Events vs Transfers vs Calls vs DexTrades? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+
 The Event API gives you access real-time blockchain event data. Events represent changes to the state of a blockchain, such as transactions, token transfers, or contract creations.
 
 You can find the **Ethers Library equivalents** for these queries at **[Bitquery Ethers Library Section](https://docs.bitquery.io/docs/blockchain/Ethereum/ethers-library/debug_traceCall/)**.

@@ -1,5 +1,7 @@
 # DEX API
 
+> **Before you start**: Not sure when to use DexTrades vs DexTradesByTokens vs Events vs Calls? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+
 We have two main APIs to get DEX trading data.
 
 - DEXTrades
