@@ -109,6 +109,18 @@ This query returns the latest trades on the Ethereum network. This is useful whe
 Get all swap related transactions (buy, sell).  
 ▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest_trades_by_maker)
 
+
+#### Ethereum DEX Trades
+
+This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.  
+▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Copy-of-Ethereum-dextrades_1)
+
+#### Ethereum Dex Trade By Tokens
+
+This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
+▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
+
+
 ### Events & Calls
 
 #### Get Latest Events
@@ -642,16 +654,6 @@ Get latest BNB balance of an wallet.
 Get latest liquidity of an EVM Pool.
 ▶️ [Get latest liquidity of an EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
 
-#### Get Total Supply and Marketcap of an BSC token
-
-Get Total Supply and Marketcap of an BSC token.
-▶️ [Get Total Supply and Marketcap of an BSC token](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
-
-#### Get token transfers by wallet
-
-Get token transactions ordered by block number in descending order.  
-▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_2)
-
 #### Get Native & Token Balances by Wallet
 
 Get token balances for a specific wallet address.  
@@ -662,42 +664,40 @@ Get token balances for a specific wallet address.
 Get token balances for a specific wallet address.  
 ▶️ [Get Token Balance by Wallet](https://ide.bitquery.io/Get-ERC20-Token-Balance-by-Wallet)
 
-#### Get Swaps by Wallet Address
-
-Get all swap related transactions (buy, sell).  
-▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest-trades-by-market-maker)
-
 #### Get wallet net worth
 
 Get the net worth of a wallet in USD.  
 ▶️ [Get wallet net worth](https://ide.bitquery.io/balance-of-a-wallet-in-USD_2)
 
-#### Get Multiple Token Prices
 
-Returns an array of token prices denominated in the blockchain's native token and USD for a given token contract address.  
-▶️ [Get Multiple Token Prices](https://ide.bitquery.io/Price-of-multiple-tokens-in-realtime)
+### Token Supply
 
-#### Get OHLCV by Pair Address
 
-Get the OHLCV candle stick by using pair address.  
-▶️ [Get OHLCV by Pair Address](https://ide.bitquery.io/OHLC0_8)
+#### Get Total Supply and Marketcap of an BSC token
+
+Get Total Supply and Marketcap of an BSC token.
+▶️ [Get Total Supply and Marketcap of an BSC token](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
+
+### Transfers
+
+#### Get token transfers by wallet
+
+Get token transactions ordered by block number in descending order.  
+▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_2)
+
+### Transactions
 
 #### Get transactions by wallet
 
 Get transactions ordered by block number in descending order.  
 ▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet)
 
-#### Ethereum DEX Trades
-
-This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.  
-▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Copy-of-Ethereum-dextrades_1)
-
-#### Ethereum Dex Trade By Tokens
-
-This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
-▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
-
 ### Trades
+
+#### Get Swaps by Wallet Address
+
+Get all swap related transactions (buy, sell).  
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest-trades-by-market-maker)
 
 #### Buys of a Token on BNB
 
@@ -720,6 +720,16 @@ Get the latest and historical trades by a user on `Four Meme` platform.
 ▶️[User Trades](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme)
 
 ### OHLC & Price Data
+
+#### Get Multiple Token Prices
+
+Returns an array of token prices denominated in the blockchain's native token and USD for a given token contract address.  
+▶️ [Get Multiple Token Prices](https://ide.bitquery.io/Price-of-multiple-tokens-in-realtime)
+
+#### Get OHLCV by Pair Address
+
+Get the OHLCV candle stick by using pair address.  
+▶️ [Get OHLCV by Pair Address](https://ide.bitquery.io/OHLC0_8)
 
 #### OHLC for a BEP-20 Token
 
