@@ -61,7 +61,6 @@ const sidebars = {
         "ide/search",
         "ide/share",
         "ide/team",
-        "ide/tradingview",
         "ide/variables",
       ],
     },

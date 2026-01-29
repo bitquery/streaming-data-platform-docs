@@ -143,6 +143,11 @@ Get the OHLCV candle stick by using pair address.
 Returns an array of token prices denominated in the blockchain's native token and USD for a given token contract address.  
 ▶️ [Get Multiple ERC20 Token Prices](https://ide.bitquery.io/Price-of-multiple-tokens-in-realtime)
 
+#### Get ATH Price of a token
+
+Retrieves the all-time high (ATH) price in USD for a specified token contract.
+▶️ [Get ATH Price of a token](https://ide.bitquery.io/ATH-of-eth-token)
+
 #### Get Price Change 5min, 1h, 6h and 24h of a specific Eth token
 
 This query gets you Price Change 5min, 1h, 6h and 24h of a specific token on the Ethereum network.
@@ -308,6 +313,11 @@ You can get charting data easily with this query. Adjust the intervals as necess
 
 Stream live OHLC (Open, High, Low, Close) price and volume data for all tokens on Solana, quoted directly in USD. Useful for dashboards, analytics, or bots that need stable fiat-based prices.
 ▶️ [Real-Time Token Prices in USD on Solana](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain)
+
+#### Get ATH Price of a token
+
+Retrieves the all-time high (ATH) price in USD for a specified token contract.
+▶️ [Get ATH Price of a token](https://ide.bitquery.io/solana-ATH_9)
 
 #### Real-Time Token Prices in Quote Pair (USDC, USDT, etc.)
 
@@ -582,6 +592,11 @@ Get the OHLCV candle stick by using pair address.
 Returns an array of token prices denominated in the blockchain's native token and USD for a given token contract address.  
 ▶️ [Get Multiple Token Prices](https://ide.bitquery.io/Price-of-multiple-tokens-in-realtime_1)
 
+#### Get ATH Price of a token
+
+Retrieves the all-time high (ATH) price in USD for a specified token contract.
+▶️ [Get ATH Price of a token](https://ide.bitquery.io/ATH-of-base-token)
+
 #### Get Price Change 5min, 1h, 6h and 24h of a specific token
 
 This query gets you Price Change 5min, 1h, 6h and 24h of a specific token on the Base network.
@@ -672,7 +687,6 @@ Get the net worth of a wallet in USD.
 
 ### Token Supply
 
-
 #### Get Total Supply and Marketcap of an BSC token
 
 Get Total Supply and Marketcap of an BSC token.
@@ -735,6 +749,11 @@ Get the OHLCV candle stick by using pair address.
 
 Get OHLC statistics for a BEP-20 token on BSC network.  
 ▶️[OHLC of a Token](https://ide.bitquery.io/OHLC-for-a-token-on-bsc_1)
+
+#### Get ATH Price of a token
+
+Retrieves the all-time high (ATH) price in USD for a specified token contract.
+▶️ [Get ATH Price of a token](https://ide.bitquery.io/ATH-of-bsc-token_2)
 
 #### BEP-20 Token Price
 

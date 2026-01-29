@@ -428,6 +428,84 @@ You can test the query [here](https://ide.bitquery.io/track-Pump-fun_pumpswap-mi
 
 </details>
 
+
+## Pumpfun Token Migrations on a specific date - Historical
+
+Retrieve Pump.fun token migrations on a specific date. The API returns transfers to the PumpSwap migration receiver address for the given date.
+
+[Try the query](https://ide.bitquery.io/pumpfun-transfers-type-v1-to-pumpfun-migrations_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  solana {
+    transfers(
+      options: { limit: 500 }
+      date: { is: "2024-10-18" }
+      currency: { not: "SOL" }
+      externalProgramId: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+      transferType: { in: transfer }
+      receiverAddress: { is: "39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg" }
+    ) {
+      block {
+        height
+        timestamp {
+          iso8601
+        }
+      }
+      instruction {
+        action {
+          name
+        }
+        callPath
+        external
+        externalAction {
+          name
+          type
+        }
+        program {
+          name
+          id
+        }
+        externalProgram {
+          id
+          name
+        }
+      }
+      currency {
+        name
+        symbol
+        address
+      }
+      date {
+        date
+      }
+      amount
+      sender {
+        address
+        mintAccount
+        type
+      }
+      receiver {
+        address
+        mintAccount
+        type
+      }
+      transaction {
+        signature
+        signer
+      }
+      transferType
+    }
+  }
+}
+```
+
+</details>
+
+
 ## Check if the Pump Fun Token has migrated to PumpSwap - API
 
 To check if a Pump Fun Token has migrated to PumpSwap, we can use the below query. In this query we are checking if this token `6SmgaPU4LMd8eWhamtpTtArr7JYPKZSF8AKK2Uy5pump` has migrated to PumpSwap. You can run the query [here](https://ide.bitquery.io/check-if-a-pump-fun-token-has-migrated_1).

@@ -297,7 +297,7 @@ Our cloud solutions support:
 - **Throughput**: Millions of transactions per second processing capability
 - **Scalability**: Auto-scaling from zero to thousands of concurrent connections
 - **Availability**: 99.9% uptime SLA with multi-region redundancy
-- **Data Freshness**: Real-time data with <1 second delay from blockchain
+- **Data Freshness**: Real-time data with &lt;1 second delay from blockchain
 
 ## Use Cases
 

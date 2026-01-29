@@ -74,12 +74,14 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 - [Get Creation Time & Dev Address of a Token ➤](#get-creation-time--dev-address-of-a-token)
 - [Track New Token Launches in Realtime ➤](#track-new-token-launches-in-realtime)
 - [All Tokens Created by a Specific Address ➤](#all-tokens-created-by-a-specific-address)
+- [Get Pumpfun Token Created by a Wallet From Historical Data ➤](#get-pumpfun-token-created-by-a-wallet-from-historical-data)
 - [Get Token Metadata, Dev Address, Creation Time ➤](#get-token-metadata-dev-address-creation-time-for-specific-token)
 
 ### 2. Pump.fun Mayhem Mode Tokens
 
 - [Track Mayhem Mode enabled Pumpfun Tokens in realtime ➤](#track-mayhem-mode-enabled-pumpfun-tokens-in-realtime)
 - [Check Mayhem Mode of a Pump Fun Token ➤](#check-mayhem-mode-of-a-pump-fun-token)
+- [Check if a Pump Fun Token was Launched in Mayhem Mode (Historical) ➤](#check-if-a-pump-fun-token-was-launched-in-mayhem-mode---historical-query)
 
 ### 3. Token Pricing & Market Data
 
@@ -360,6 +362,76 @@ query MyQuery {
 
 </details>
 
+### Get Pumpfun Token Created by a Wallet From Historical Data
+
+Retrieve Pump.fun tokens created by a specific wallet from historical transfer data using the v1 Solana transfers API.
+
+[Run query](https://ide.bitquery.io/get-historical-created-token-and-creator)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  solana {
+    transfers(
+      options: { limit: 100, desc: "block.height" }
+      date: { is: "2025-12-08" }
+      externalProgramId: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+      currency: { is: "9TXP4iVTcP7cChVhbUCQfvkSPKJrmHh1jxMkJgGqLzDP" }
+      transferType: { is: mint }
+    ) {
+      block {
+        height
+        timestamp {
+          iso8601
+        }
+      }
+      instruction {
+        action {
+          name
+        }
+        callPath
+        external
+        externalAction {
+          name
+          type
+        }
+        program {
+          name
+          id
+        }
+        externalProgram {
+          id
+          name
+        }
+      }
+      currency {
+        name
+        symbol
+        address
+      }
+      date {
+        date
+      }
+      amount
+      receiver {
+        address
+        mintAccount
+        type
+      }
+      transaction {
+        signature
+        signer
+      }
+      transferType
+    }
+  }
+}
+```
+
+</details>
+
 ### Get Token Metadata, Dev Address, Creation Time For Specific Token
 
 Now you can track the newly created Pump.fun Tokens along with their dev address, metadata and supply.
@@ -527,6 +599,40 @@ query MyQuery {
       }
       Transaction {
         Signature
+      }
+    }
+  }
+}
+```
+
+</details>
+
+### Check if a pump fun token was launched in Mayhem mode - Historical Query
+
+WE using Solana v1 Transfers API for this. This query finds "Pump Fun" token launches in Mayhem mode by filtering for a transfer of exactly 1,000,000,000,000,000 units (1 Billion if adjusted to 6 decimal places) to the specified receiver and token mint. It returns currency info, amount, and transaction signature. In Mayhem mode, 1 Billion token supply is minted to the Mayhem Autonomous AI agent (`BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s`).
+
+[Try out the API](https://ide.bitquery.io/check-if-a-pump-fun-token-was-in-mayhem-mode)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  solana {
+    transfers(
+      amount: { is: 1000000000000000 }
+      receiverAddress: { is: "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s" }
+      currency: { is: "8ZVajuCD45RHs53LaCLpnqeKY519Ns64XZd12ZcLpump" }
+    ) {
+      currency {
+        name
+        symbol
+        decimals
+        address
+      }
+      amount
+      transaction {
+        signature
       }
     }
   }
