@@ -1,6 +1,6 @@
 ---
 title: Blockchain Data in Cloud - AWS S3, Snowflake, BigQuery Datasets
-description: Export blockchain data to cloud storage with ready-to-use Parquet datasets for AWS S3, Google BigQuery, Snowflake, and data lakes. Build scalable, real-time, low-latency solutions with Kafka streams and GraphQL subscriptions. Get Ethereum, Solana, Bitcoin, Tron, and EVM chain data for analytics, ETL pipelines, and data warehousing.
+description: Export blockchain data to cloud storage with ready-to-use Parquet datasets for AWS S3, Google BigQuery, Snowflake, and data lakes. Build scalable, real-time, low-latency solutions with Kafka streams and GraphQL subscriptions. Get Ethereum, BSC, Solana, Bitcoin, Tron, and EVM chain data for analytics, ETL pipelines, and data warehousing.
 keywords:
   - Blockchain data export
   - Cloud blockchain data
@@ -11,6 +11,8 @@ keywords:
   - Blockchain data lake
   - Blockchain data warehouse
   - Ethereum cloud data
+  - BSC cloud data
+  - BNB Chain cloud data
   - Solana cloud data
   - Bitcoin cloud data
   - Tron cloud data
@@ -121,6 +123,22 @@ Export **Bitcoin blockchain data** including transaction inputs, outputs, and OM
 - **OMNI Transfers** – OMNI Layer token transfers
 
 **Use Cases:** Bitcoin transaction analysis, UTXO tracking, address clustering, OMNI token analysis, blockchain forensics, historical price analysis.
+
+### [BSC (BNB Chain) Data Export](https://docs.bitquery.io/docs/cloud/bsc/)
+
+Export **BSC (BNB Chain) blockchain data** for comprehensive EVM-compatible chain analysis:
+
+- **Blocks** – Block-level metadata and timestamps
+- **Transactions** – Full transaction-level data with gas information
+- **Transfers** – Native BNB and BEP-20 token transfers
+- **Balance Updates** – Account balance changes per block
+- **DEX Trades** – Executed trades on BSC DEXs (PancakeSwap, etc.)
+- **DEX Pools** – Liquidity pool metadata and state
+- **Smart Contract Calls** – Function calls and contract interactions
+- **Events** – BSC event logs and emissions
+- **Miner Rewards** – Block rewards and transaction fees
+
+**Use Cases:** BSC DeFi analytics, PancakeSwap analysis, BEP-20 token tracking, DEX volume analysis, smart contract monitoring, yield farming analytics, NFT marketplace data.
 
 ## Data Format and Structure
 
@@ -271,65 +289,6 @@ Design and deploy **horizontally scalable solutions** that can handle:
 - **Data Volume** – Handle petabytes of historical and real-time data
 - **Global Scale** – Deploy across multiple cloud regions for low latency
 
-### Cloud-Native Architecture Patterns
-
-#### Lambda Functions and Serverless
-
-Build serverless solutions using:
-
-- **AWS Lambda** – Process blockchain events in real-time
-- **Google Cloud Functions** – Serverless event-driven processing
-- **Azure Functions** – Scalable serverless compute
-- **Use Cases**: Real-time alerts, automated trading, compliance monitoring
-
-#### Containerized Microservices
-
-Deploy scalable microservices with:
-
-- **Kubernetes** – Container orchestration for auto-scaling
-- **Docker** – Containerized blockchain data processors
-- **ECS/EKS** – Managed container services on AWS
-- **Use Cases**: Multi-tenant analytics platforms, API services, data aggregators
-
-#### Event-Driven Architecture
-
-Build reactive systems with:
-
-- **Event Sourcing** – Store blockchain events as immutable logs
-- **CQRS** – Separate read and write models for optimal performance
-- **Message Queues** – Use Kafka, SQS, or Pub/Sub for event distribution
-- **Use Cases**: Real-time dashboards, notification systems, trading platforms
-
-### Low-Latency Optimization
-
-Achieve **millisecond-level latency** for time-sensitive applications:
-
-- **Edge Computing** – Deploy processing close to data sources
-- **In-Memory Caching** – Use Redis, Memcached, or ElastiCache
-- **CDN Integration** – Distribute data globally for reduced latency
-- **Connection Pooling** – Optimize database and API connections
-- **Use Cases**: Trading bots, arbitrage detection, flash loan monitoring
-
-### Hybrid Batch + Streaming Solutions
-
-Combine batch and streaming for comprehensive analytics:
-
-- **Lambda Architecture** – Process both real-time and historical data
-- **Kappa Architecture** – Unified streaming pipeline for all data
-- **Data Lake + Stream** – Store historical data in S3/GCS, stream real-time updates
-- **Use Cases**: Portfolio trackers, analytics dashboards, compliance systems
-
-### Example Real-Time Use Cases
-
-- **Trading Bots** – Execute trades based on real-time blockchain events
-- **Arbitrage Detection** – Identify price discrepancies across DEXs instantly
-- **Flash Loan Monitoring** – Detect and analyze flash loan attacks in real-time
-- **MEV Detection** – Monitor miner extractable value opportunities
-- **Compliance Alerts** – Real-time monitoring of suspicious transactions
-- **Portfolio Tracking** – Live updates of multi-chain portfolio values
-- **DEX Analytics** – Real-time DEX volume and liquidity tracking
-- **NFT Floor Price Alerts** – Instant notifications on price changes
-
 ### Performance Benchmarks
 
 Our cloud solutions support:
@@ -338,7 +297,7 @@ Our cloud solutions support:
 - **Throughput**: Millions of transactions per second processing capability
 - **Scalability**: Auto-scaling from zero to thousands of concurrent connections
 - **Availability**: 99.9% uptime SLA with multi-region redundancy
-- **Data Freshness**: Real-time data with &lt; 1 second delay from blockchain
+- **Data Freshness**: Real-time data with <1 second delay from blockchain
 
 ## Use Cases
 
@@ -394,14 +353,15 @@ If you require **low-latency or streaming blockchain data**, Bitquery also provi
 ## Getting Started
 
 1. **Explore Sample Data** – Review our [GitHub repository](https://github.com/bitquery/blockchain-cloud-data-dump-sample) to understand data structures
-2. **Choose Your Blockchain** – Select from [EVM](https://docs.bitquery.io/docs/cloud/evm/), [Solana](https://docs.bitquery.io/docs/cloud/solana/), [Tron](https://docs.bitquery.io/docs/cloud/tron/), or [Bitcoin](https://docs.bitquery.io/docs/cloud/bitcoin/) data exports
+2. **Choose Your Blockchain** – Select from [EVM](https://docs.bitquery.io/docs/cloud/evm/), [Solana](https://docs.bitquery.io/docs/cloud/solana/), [Tron](https://docs.bitquery.io/docs/cloud/tron/), [Bitcoin](https://docs.bitquery.io/docs/cloud/bitcoin/), or [BSC](https://docs.bitquery.io/docs/cloud/bsc/) data exports
 3. **Set Up Cloud Storage** – Configure AWS S3, Google Cloud Storage, or your preferred storage solution
 4. **Integrate Analytics Engine** – Connect Snowflake, BigQuery, Athena, or your analytics platform
 5. **Build Your Pipeline** – Create ETL jobs to process and transform blockchain data
 
 ## Related Documentation
 
-- [EVM Data Export](https://docs.bitquery.io/docs/cloud/evm/) – Ethereum, BSC, Polygon, and other EVM chains
+- [EVM Data Export](https://docs.bitquery.io/docs/cloud/evm/) – Ethereum, Polygon, and other EVM chains
+- [BSC Data Export](https://docs.bitquery.io/docs/cloud/bsc/) – BNB Chain blockchain data dumps
 - [Solana Data Export](https://docs.bitquery.io/docs/cloud/solana/) – Solana blockchain data dumps
 - [Tron Data Export](https://docs.bitquery.io/docs/cloud/tron/) – Tron blockchain data dumps
 - [Bitcoin Data Export](https://docs.bitquery.io/docs/cloud/bitcoin/) – Bitcoin blockchain and OMNI data
