@@ -9,7 +9,7 @@ Remember that Bitcoin blocks are produced with an average gap of 10 minutes per 
 ## Topic Details
 
 - `btc.transactions.proto` : streams all transactions details described below.
-- **Data Sample of Transaction Data**: You can view a sample of the Bitcoin stream data [here](https://github.com/bitquery/kafka-data-sample/blob/main/utxo/bitcoin.json). 
+- **Data Sample of Transaction Data**: You can view a sample of the Bitcoin stream data [here](https://github.com/bitquery/kafka-data-sample/blob/main/utxo/btc_transactions.json). 
 
 ## Structure of On-Chain Data
 
