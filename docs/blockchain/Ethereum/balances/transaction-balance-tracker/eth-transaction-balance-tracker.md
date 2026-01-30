@@ -204,18 +204,22 @@ This API gives you latest balance of a specific address (here in example `0xd194
 
 ## Latest liquidity of EVM Pool
 
-This API gives you latest liquidity of EVM Pool (here in example `0x5d4F3C6fA16908609BAC31Ff148Bd002AA6b8c83` LINK/USDC Uniswap v3 pool). Try it out [here](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool).
+This API provides the latest liquidity information for multiple EVM pools in one API call. The example shows results for two pool addresses using a query updated to support multiple addresses. You can try 500 as well,just put them as a list in `where` clause. Try it out [here](https://ide.bitquery.io/latest-liquidity-of-multiple-pools#).
 
 ```graphql
 {
-  EVM(network: eth) {
+  EVM(network: base) {
     TransactionBalances(
-      limit: { count: 2 }
-      limitBy: { by: TokenBalance_Currency_SmartContract, count: 1 }
+      limitBy: { by: TokenBalance_Address, count: 2 }
       orderBy: { descendingByField: "TokenBalance_PostBalanceInUSD" }
       where: {
         TokenBalance: {
-          Address: { is: "0x5d4F3C6fA16908609BAC31Ff148Bd002AA6b8c83" }
+          Address: {
+            in: [
+              "0x3f0296BF652e19bca772EC3dF08b32732F93014A"
+              "0x22AEe3699b6A0fEd71490C103Bd4E5f3309891D5"
+            ]
+          }
         }
       }
     ) {

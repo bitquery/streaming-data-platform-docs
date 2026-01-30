@@ -94,21 +94,20 @@ Get transactions ordered by block number in descending order.
 
 ### Trades
 
-#### Ethereum DEX Trades
+#### Ethereum DEXTrades latest trades for a token
 
 This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.  
-▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Copy-of-Ethereum-dextrades_1)
+▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-dextrades-of-a-token)
 
-#### Ethereum Dex Trade By Tokens
+#### Ethereum DexTradeByTokens latest trades for a token
 
 This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
-▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens_1)
+▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens-of-a-token)
 
 #### Get Swaps by Wallet Address
 
 Get all swap related transactions (buy, sell).  
 ▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest_trades_by_maker)
-
 
 #### Ethereum DEX Trades
 
@@ -119,7 +118,6 @@ This query returns the latest trades on the Ethereum network where distinction o
 
 This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
 ▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
-
 
 ### Events & Calls
 
@@ -683,7 +681,6 @@ Get token balances for a specific wallet address.
 
 Get the net worth of a wallet in USD.  
 ▶️ [Get wallet net worth](https://ide.bitquery.io/balance-of-a-wallet-in-USD_2)
-
 
 ### Token Supply
 
