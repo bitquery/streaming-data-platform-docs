@@ -16,8 +16,8 @@ const sidebars = {
       items: [
         "start/learning-path",
         "start/first-query",
-
         "start/starter-queries",
+        "tools-directory",
         "start/starter-subscriptions",
         "start/endpoints",
         "start/mental-model-transfers-events-calls",
