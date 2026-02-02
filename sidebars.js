@@ -87,6 +87,7 @@ const sidebars = {
             "graphql/calculations",
             "graphql/combined",
             "graphql/filters",
+            "graphql/indexed-fields-reference",
             "graphql/limits",
             "graphql/capabilities/aggregated_metrics",
             "graphql/capabilities/array-intersect",

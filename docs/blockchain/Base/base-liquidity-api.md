@@ -269,6 +269,104 @@ subscription MyQuery {
 
 > **Important Note:** In Uniswap V4, all pools' liquidity is stored in the PoolManager contract, so the DEX smart contract address will be the same for all pairs. Use `PoolId` to differentiate between different pools. The `PoolId` field uniquely identifies each pool within the PoolManager.
 
+## Top Liquidity Pools of a token on Base
+
+The following API query retrieves the top liquidity pools where cbBTC (`0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf`) is either token A or token B in the pool on the Base chain. This allows you to identify which pools have the most liquidity for cbBTC, filtered to exclude certain pools if necessary.
+
+This query separates results by whether cbBTC is listed as the first token (`CurrencyA`) or the second token (`CurrencyB`) in the DEX pool, returning the 10 pools with the highest liquidity for each category. Exclusions (e.g., pools you want omitted from the results) are specified in the `SmartContract: {notIn: [...]}` filter.
+
+To test run, visit the [IDE example](https://ide.bitquery.io/top-liquidity-pools-of-cbBTC) or modify the pool filters to target another token as needed.
+
+```graphql
+query MyQuery {
+  EVM(network: base) {
+    TokenIsCurrencyA: DEXPoolEvents(
+      limit: { count: 10 }
+      orderBy: {
+        descendingByField: "PoolEvent_Liquidity_AmountCurrencyA_maximum"
+      }
+      where: {
+        PoolEvent: {
+          Pool: {
+            CurrencyA: {
+              SmartContract: {
+                is: "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf"
+              }
+            }
+            SmartContract: {
+              notIn: ["0x498581ff718922c3f8e6a244956af099b2652b2b"]
+            }
+          }
+        }
+      }
+    ) {
+      PoolEvent {
+        Liquidity {
+          AmountCurrencyA(maximum: Block_Time)
+          AmountCurrencyB(maximum: Block_Time)
+        }
+        Pool {
+          PoolId
+          SmartContract
+          CurrencyA {
+            Name
+            Symbol
+            SmartContract
+          }
+          CurrencyB {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+      }
+    }
+
+    TokenIsCurrencyB: DEXPoolEvents(
+      limit: { count: 10 }
+      orderBy: {
+        descendingByField: "PoolEvent_Liquidity_AmountCurrencyB_maximum"
+      }
+      where: {
+        PoolEvent: {
+          Pool: {
+            CurrencyB: {
+              SmartContract: {
+                is: "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf"
+              }
+            }
+            SmartContract: {
+              notIn: ["0x498581ff718922c3f8e6a244956af099b2652b2b"]
+            }
+          }
+        }
+      }
+    ) {
+      PoolEvent {
+        Liquidity {
+          AmountCurrencyA(maximum: Block_Time)
+          AmountCurrencyB(maximum: Block_Time)
+        }
+        Pool {
+          PoolId
+          SmartContract
+          CurrencyA {
+            Name
+            Symbol
+            SmartContract
+          }
+          CurrencyB {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Realtime Liquidity Data via Kafka Streams
 
 Liquidity data can also be obtained via Kafka streams for lower latency and better reliability. The Kafka topic for Base DEX pools is:

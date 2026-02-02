@@ -204,6 +204,10 @@ This query retrieves the latest liquidity events for a specific DEX pool on Ethe
 
 ▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_5#)
 
+#### Top Liquidity Pools of a token on Ethereum
+
+▶️ [Top Liquidity Pools of a token on Ethereum](https://ide.bitquery.io/top-liquidity-pools-of-atoken-on-ethereum)
+
 ## Solana
 
 ### Balance APIs
