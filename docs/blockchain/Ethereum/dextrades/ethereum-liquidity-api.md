@@ -269,6 +269,108 @@ subscription MyQuery {
 
 > **Important Note:** In Uniswap V4, all pools' liquidity is stored in the PoolManager contract, so the DEX smart contract address will be the same for all pairs. Use `PoolId` to differentiate between different pools. The `PoolId` field uniquely identifies each pool within the PoolManager.
 
+## Top Liquidity Pools on Ethereum (USDC, WBTC, WETH, USDT)
+
+The following GraphQL query retrieves the top 10 most recent DEX pool events on Ethereum where either side of the pool is one of the major tokens: USDC, WBTC, WETH, or USDT. Pools are filtered so that CurrencyA or CurrencyB is in the following contracts:
+
+- USDC: `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
+- WBTC: `0x2260fac5e5542a773aa44fbcfedf7c193bc2c599`
+- WETH: `0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2`
+- USDT: `0xdac17f958d2ee523a2206206994597c13d831ec7`
+
+Pools are sorted by latest block time and then by the largest dollar value of liquidity for both A and B sides. Only events from the last 2 minutes are retrieved.
+
+You can run and modify this query in the [IDE example](https://ide.bitquery.io/top-liquidity-pools-on-Ethereum).
+
+```graphql
+query MyQuery {
+  EVM(network: eth) {
+    DEXPoolEvents(
+      limit: { count: 10 }
+      orderBy: [
+        { descending: Block_Time }
+        { descending: PoolEvent_Liquidity_AmountCurrencyAInUSD }
+        { descending: PoolEvent_Liquidity_AmountCurrencyBInUSD }
+      ]
+      where: {
+        any: [
+          {
+            PoolEvent: {
+              Pool: {
+                CurrencyA: {
+                  SmartContract: {
+                    in: [
+                      "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+                      "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+                      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                      "0xdac17f958d2ee523a2206206994597c13d831ec7"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+          {
+            PoolEvent: {
+              Pool: {
+                CurrencyB: {
+                  SmartContract: {
+                    in: [
+                      "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+                      "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+                      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                      "0xdac17f958d2ee523a2206206994597c13d831ec7"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+        Block: { Time: { since_relative: { minutes_ago: 2 } } }
+      }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      PoolEvent {
+        AtoBPrice
+        BtoAPrice
+        Dex {
+          SmartContract
+          ProtocolName
+        }
+        Liquidity {
+          AmountCurrencyA
+          AmountCurrencyAInUSD
+          AmountCurrencyB
+          AmountCurrencyBInUSD
+        }
+        Pool {
+          CurrencyA {
+            Name
+            SmartContract
+            Symbol
+          }
+          CurrencyB {
+            Name
+            SmartContract
+            Symbol
+          }
+          PoolId
+          SmartContract
+        }
+      }
+      Transaction {
+        Gas
+        Hash
+      }
+    }
+  }
+}
+```
+
 ## Top Liquidity Pools of a token on Ethereum
 
 The following API query retrieves the top liquidity pools where shiba inu (`0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce`) is either token A or token B in the pool on the Base chain. This allows you to identify which pools have the most liquidity for cbBTC, filtered to exclude certain pools if necessary.

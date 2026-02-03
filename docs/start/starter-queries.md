@@ -45,6 +45,12 @@ For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ET
 
 ▶️ [OHLC of a Token Pair Across Chains](https://ide.bitquery.io/Token-OHLC-Stream-1-second-Multi-Chains_1)
 
+#### Aggregated Token Data (Volume & Price, Last 24h)
+
+This query returns up to 100 tokens with aggregated USD volume and average price over the last 24 hours. It also returns volume and price for the last 1h, 4h, and 24h using conditional metrics (`if` with `since_relative`), so you can build dashboards or compare short-term vs daily stats.
+
+▶️ [Aggregated Token Data](https://ide.bitquery.io/aggregated-data)
+
 ## Ethereum
 
 ### Balance APIs

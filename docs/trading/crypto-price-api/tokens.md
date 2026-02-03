@@ -1,5 +1,7 @@
 # Tokens Cube
 
+The **Tokens** cube provides chain-specific, aggregated price and volume data for individual tokens. For a **query** example that returns tokens with volume and average price over the last 24h (including conditional metrics for 1h, 4h, 24h), see [Aggregated Token Data](https://ide.bitquery.io/aggregated-data) or the [Crypto Price API examples](/docs/trading/crypto-price-api/examples#aggregated-token-data-volume--price-last-24h).
+
 ### Fields in the Schema
 
 ```graphql
@@ -65,7 +67,6 @@ subscription {
 
   - `Base`: Volume of the token itself (the token in question) for all pairs.
   - `Usd`: Total base volume converted to USD.
-
 
 - **IsQuotedInUsd**:  
   A boolean indicating whether the OHLC and average prices are expressed in USD (`true`) or in the quote token's value (`false`).

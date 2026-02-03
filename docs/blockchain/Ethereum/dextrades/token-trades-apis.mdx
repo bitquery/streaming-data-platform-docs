@@ -678,6 +678,66 @@ Run this for analytics related to token trades:
 
 </details>
 
+## Aggregated Token Data (Volume & Price, Last 24h)
+
+Run this to get up to 100 tokens with aggregated USD volume and average price over the last 24 hours, including separate stats for 1h, 4h, and 24h windows (supports Ethereum and other chains):
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 100 }
+      limitBy: { count: 1, by: Token_Id }
+      where: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+    ) {
+      Token {
+        Address
+        Id
+        IsNative
+        Name
+        Network
+        Symbol
+        TokenId
+      }
+      Volume {
+        Usd
+        H1VAgo: Usd(
+          if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+        )
+        H4VAgo: Usd(
+          if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
+        )
+        H24VAgo: Usd(
+          if: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+        )
+      }
+      Price {
+        Average {
+          currentPrice: Mean(maximum: Block_Time)
+          H1Ago: Mean(
+            minimum: Block_Time
+            if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+          )
+          H4Ago: Mean(
+            minimum: Block_Time
+            if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
+          )
+          H24Ago: Mean(
+            minimum: Block_Time
+            if: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+          )
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Top Traders of a Token
 
 Fetch the top 100 traders by volume USD:

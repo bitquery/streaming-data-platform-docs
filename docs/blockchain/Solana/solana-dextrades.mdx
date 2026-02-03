@@ -1932,6 +1932,57 @@ Run this query [here](https://ide.bitquery.io/find-all-trades-interacting-with-a
 - Filters are applied to the **Instruction.Program.Address**, targeting your custom program.
 - Ensures only trades where your program was involved are included.
 
+## Aggregated Token Data (Volume & Price, Last 24h)
+
+Get up to 100 tokens with aggregated USD volume and average price over the last 24 hours, plus volume and price for 1h, 4h, and 24h via conditional metrics (Trading API; includes Solana and other chains).
+
+▶️ [Aggregated Token Data](https://ide.bitquery.io/aggregated-data)
+
+```
+{
+  Trading {
+    Tokens(
+      limit: { count: 100 }
+      limitBy: { count: 1, by: Token_Id }
+      where: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+    ) {
+      Token {
+        Address
+        Id
+        IsNative
+        Name
+        Network
+        Symbol
+        TokenId
+      }
+      Volume {
+        Usd
+        H1VAgo: Usd(if: { Block: { Time: { since_relative: { hours_ago: 1 } } } })
+        H4VAgo: Usd(if: { Block: { Time: { since_relative: { hours_ago: 4 } } } })
+        H24VAgo: Usd(if: { Block: { Time: { since_relative: { hours_ago: 24 } } } })
+      }
+      Price {
+        Average {
+          currentPrice: Mean(maximum: Block_Time)
+          H1Ago: Mean(
+            minimum: Block_Time
+            if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+          )
+          H4Ago: Mean(
+            minimum: Block_Time
+            if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
+          )
+          H24Ago: Mean(
+            minimum: Block_Time
+            if: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+          )
+        }
+      }
+    }
+  }
+}
+```
+
 ## Video Tutorial on Solana DEXTrades API | How to get Decentralized Exchange Data with DEX Trades API
 
 <VideoPlayer url="https://youtu.be/PVHB9Z8v-Cc?si=IyiU9C1WxoHBBHTv" />

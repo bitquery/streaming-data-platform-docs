@@ -193,6 +193,63 @@ subscription {
 }
 ```
 
+## Aggregated Token Data (Volume & Price, Last 24h)
+
+Get a snapshot of tokens with aggregated USD volume and average price over the last 24 hours. The query uses `limitBy: { count: 1, by: Token_Id }` to return one row per token, and conditional metrics (`Volume.Usd(if: ...)`, `Price.Average.Mean(..., if: ...)`) to show volume and price for the last 1h, 4h, and 24h. Useful for dashboards, top-movers lists, or comparing short-term vs daily metrics.
+
+[Run query ➤](https://ide.bitquery.io/aggregated-data)
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 100 }
+      limitBy: { count: 1, by: Token_Id }
+      where: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+    ) {
+      Token {
+        Address
+        Id
+        IsNative
+        Name
+        Network
+        Symbol
+        TokenId
+      }
+      Volume {
+        Usd
+        H1VAgo: Usd(
+          if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+        )
+        H4VAgo: Usd(
+          if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
+        )
+        H24VAgo: Usd(
+          if: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+        )
+      }
+      Price {
+        Average {
+          currentPrice: Mean(maximum: Block_Time)
+          H1Ago: Mean(
+            minimum: Block_Time
+            if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+          )
+          H4Ago: Mean(
+            minimum: Block_Time
+            if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
+          )
+          H24Ago: Mean(
+            minimum: Block_Time
+            if: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+          )
+        }
+      }
+    }
+  }
+}
+```
+
 ## OHLC of a currency on multiple blockchains
 
 This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in this eg Bitcoin; it will include all sorts of currencies whose underlying asset is Bitcoin like cbBTC, WBTC, etc) across all supported blockchains, aggregated into a given time interval (e.g., 60 seconds in this example).
@@ -278,7 +335,7 @@ subscription {
     Tokens(
       where: {
         Token: { Network: { is: "Solana" } }
-        Interval: { Time: { Duration: { eq: 60 } } },
+        Interval: { Time: { Duration: { eq: 60 } } }
         Volume: { Usd: { gt: 5 } }
       }
     ) {
@@ -348,7 +405,7 @@ subscription {
         Price: { IsQuotedInUsd: false }
         Interval: { Time: { Duration: { eq: 1 } } }
         Currency: { Id: { is: "bid:eth" } }
-        QuoteCurrency: { Id: { is: "usdc" } },
+        QuoteCurrency: { Id: { is: "usdc" } }
         Volume: { Usd: { gt: 5 } }
       }
     ) {
@@ -417,7 +474,7 @@ query {
       where: {
         Price: { IsQuotedInUsd: true }
         Currency: { Id: { is: "bid:bitcoin" } }
-        QuoteCurrency: { Id: { is: "usdt" } },
+        QuoteCurrency: { Id: { is: "usdt" } }
         Volume: { Usd: { gt: 5 } }
       }
       limit: { count: 10 }
