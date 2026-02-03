@@ -12,7 +12,7 @@ keywords:
 
 # Indexed Fields Reference for `where` and `orderBy`
 
-Use **indexed fields** in your `where` filters and `orderBy` clauses. Filtering or sorting on non-indexed fields can lead to slow queries, timeouts, or incorrect results.
+Use **indexed fields** in your `where` filters and `orderBy` clauses. Filtering or sorting on non-indexed fields can lead to slow queries, timeouts.
 
 This page lists the fields that are indexed for each cube, dataset, and chain type. Prefer these fields when building `where` and `orderBy` conditions.
 
@@ -24,33 +24,33 @@ In `where`, filter on at least one indexed field (Index 1, 2, 3, or 4 where appl
 
 ## EVM (Archive)
 
-| Cube | Index 1 | Index 2 | Index 3 | Index 4 |
-|------|---------|---------|---------|--------|
-| **BalanceUpdates** | BalanceUpdate_Address | Currency_SmartContract | Transaction_Hash | — |
-| **Blocks** | Block_Hash | Block_Number | — | — |
-| **Calls** | Call_From | Call_To | Transaction_Hash | — |
-| **DEXTrades** | Transaction_Hash | — | — | — |
-| **DEXTradeByTokens** | Trade_Currency_SmartContract | Trade_Side_Seller | — | — |
-| **Events** | Call_To | Transaction_Hash | — | — |
-| **MinerRewards** | Block_Coinbase | Block_Number | Block_Hash | — |
-| **TokenHolders** | Currency_SmartContract | — | — | — |
-| **Transactions** | Transaction_From | Transaction_Hash | Transaction_To | — |
-| **Transfers** | Transaction_Hash | Transfer_Sender | Transfer_Receiver | Transfer_Currency_SmartContract |
+| Cube                 | Index 1                      | Index 2                | Index 3           | Index 4                         |
+| -------------------- | ---------------------------- | ---------------------- | ----------------- | ------------------------------- |
+| **BalanceUpdates**   | BalanceUpdate_Address        | Currency_SmartContract | Transaction_Hash  | —                               |
+| **Blocks**           | Block_Hash                   | Block_Number           | —                 | —                               |
+| **Calls**            | Call_From                    | Call_To                | Transaction_Hash  | —                               |
+| **DEXTrades**        | Transaction_Hash             | —                      | —                 | —                               |
+| **DEXTradeByTokens** | Trade_Currency_SmartContract | Trade_Side_Seller      | —                 | —                               |
+| **Events**           | Call_To                      | Transaction_Hash       | —                 | —                               |
+| **MinerRewards**     | Block_Coinbase               | Block_Number           | Block_Hash        | —                               |
+| **TokenHolders**     | Currency_SmartContract       | —                      | —                 | —                               |
+| **Transactions**     | Transaction_From             | Transaction_Hash       | Transaction_To    | —                               |
+| **Transfers**        | Transaction_Hash             | Transfer_Sender        | Transfer_Receiver | Transfer_Currency_SmartContract |
 
 ---
 
 ## Tron (Archive)
 
-| Cube | Index 1 | Index 2 | Index 3 | Index 4 |
-|------|---------|---------|---------|--------|
-| **BalanceUpdates** | BalanceUpdate_Address | Currency_SmartContract | Transaction_Hash | — |
-| **Blocks** | Block_Hash | Block_Number | — | — |
-| **Calls** | Call_From | Call_To | Transaction_Hash | — |
-| **DEXTrades** | Transaction_Hash | — | — | — |
-| **DEXTradeByTokens** | Trade_Currency_SmartContract | Trade_Side_Seller | — | — |
-| **Events** | Call_To | Transaction_Hash | — | — |
-| **Transactions** | Transaction_Hash | — | — | — |
-| **Transfers** | Transaction_Hash | Transfer_Sender | Transfer_Receiver | Transfer_Currency_SmartContract |
+| Cube                 | Index 1                      | Index 2                | Index 3           | Index 4                         |
+| -------------------- | ---------------------------- | ---------------------- | ----------------- | ------------------------------- |
+| **BalanceUpdates**   | BalanceUpdate_Address        | Currency_SmartContract | Transaction_Hash  | —                               |
+| **Blocks**           | Block_Hash                   | Block_Number           | —                 | —                               |
+| **Calls**            | Call_From                    | Call_To                | Transaction_Hash  | —                               |
+| **DEXTrades**        | Transaction_Hash             | —                      | —                 | —                               |
+| **DEXTradeByTokens** | Trade_Currency_SmartContract | Trade_Side_Seller      | —                 | —                               |
+| **Events**           | Call_To                      | Transaction_Hash       | —                 | —                               |
+| **Transactions**     | Transaction_Hash             | —                      | —                 | —                               |
+| **Transfers**        | Transaction_Hash             | Transfer_Sender        | Transfer_Receiver | Transfer_Currency_SmartContract |
 
 ---
 
@@ -58,28 +58,28 @@ In `where`, filter on at least one indexed field (Index 1, 2, 3, or 4 where appl
 
 ### Solana Realtime
 
-| Cube | Index 1 | Index 2 | Index 3 |
-|------|---------|---------|---------|
-| **DEXPools** | Pool_Market_MarketAddress | — | — |
-| **DEXTradeByTokens** | Trade_Currency_MintAddress | — | — |
-| **Instructions** | Transaction_Signer | — | — |
-| **Transfers** | Transfer_Receiver_Owner | Transfer_Sender_Owner | Transaction_Signature |
+| Cube                 | Index 1                    | Index 2               | Index 3               |
+| -------------------- | -------------------------- | --------------------- | --------------------- |
+| **DEXPools**         | Pool_Market_MarketAddress  | —                     | —                     |
+| **DEXTradeByTokens** | Trade_Currency_MintAddress | —                     | —                     |
+| **Instructions**     | Transaction_Signer         | —                     | —                     |
+| **Transfers**        | Transfer_Receiver_Owner    | Transfer_Sender_Owner | Transaction_Signature |
 
 ### Solana Archive
 
-| Cube | Index 1 | Index 2 | Index 3 |
-|------|---------|---------|---------|
-| **DEXTradeByTokens** | Trade_Currency_MintAddress | Trade_Account_Owner | — |
+| Cube                 | Index 1                    | Index 2             | Index 3 |
+| -------------------- | -------------------------- | ------------------- | ------- |
+| **DEXTradeByTokens** | Trade_Currency_MintAddress | Trade_Account_Owner | —       |
 
 ---
 
 ## Trading (Realtime)
 
-| Cube | Index 1 | Index 2 | Index 3 |
-|------|---------|---------|---------|
-| **Currencies** | Currency_Id | Interval_Time_Start | — |
-| **Tokens** | Token_Id | Interval_Time_Start | — |
-| **Pairs** | Token_Id | Currency_Id | Interval_Time_Start |
+| Cube           | Index 1     | Index 2             | Index 3             |
+| -------------- | ----------- | ------------------- | ------------------- |
+| **Currencies** | Currency_Id | Interval_Time_Start | —                   |
+| **Tokens**     | Token_Id    | Interval_Time_Start | —                   |
+| **Pairs**      | Token_Id    | Currency_Id         | Interval_Time_Start |
 
 ---
 
