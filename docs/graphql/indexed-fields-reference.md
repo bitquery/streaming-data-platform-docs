@@ -58,12 +58,12 @@ In `where`, filter on at least one indexed field (Index 1, 2, 3, or 4 where appl
 
 ### Solana Realtime
 
-| Cube                 | Index 1                    | Index 2               | Index 3               |
-| -------------------- | -------------------------- | --------------------- | --------------------- |
-| **DEXPools**         | Pool_Market_MarketAddress  | —                     | —                     |
-| **DEXTradeByTokens** | Trade_Currency_MintAddress | —                     | —                     |
-| **Instructions**     | Transaction_Signer         | —                     | —                     |
-| **Transfers**        | Transfer_Receiver_Owner    | Transfer_Sender_Owner | Transaction_Signature |
+| Cube                 | Index 1                    | Index 2                     | Index 3               |
+| -------------------- | -------------------------- | --------------------------- | --------------------- |
+| **DEXPools**         | Pool_Market_MarketAddress  | —                           | —                     |
+| **DEXTradeByTokens** | Trade_Currency_MintAddress | —                           | —                     |
+| **Instructions**     | Transaction_Signer         | Instruction_Program_Address | —                     |
+| **Transfers**        | Transfer_Receiver_Owner    | Transfer_Sender_Owner       | Transaction_Signature |
 
 ### Solana Archive
 
