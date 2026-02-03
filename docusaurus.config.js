@@ -941,8 +941,6 @@ const config = {
             to: "https://docs.bitquery.io/docs/graphql/indexed-fields-reference/",
             label: "Index List",
             position: "left",
-            target: "_blank",
-            rel: "noopener noreferrer",
           },
           {
             to: "https://bitquery.substack.com/",
