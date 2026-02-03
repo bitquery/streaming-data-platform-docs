@@ -58,11 +58,13 @@ Install these packages to fetch crypto prices, staking rewards, prediction marke
 
 | Package | Description | npm |
 |---------|-------------|-----|
+| **bitquery-tradingview-sdk** | Easy TradingView Charting via Bitquery | [npm](https://www.npmjs.com/package/@bitquery/tradingview-sdk) |
 | **bitquery-crypto-price** | Crypto price data via Bitquery APIs. | [npm](https://www.npmjs.com/package/bitquery-crypto-price) |
 | **staking-rewards-api** | Staking rewards and validator data. | [npm](https://www.npmjs.com/package/staking-rewards-api) |
 | **polymarket-api** | Polymarket prediction market data. | [npm](https://www.npmjs.com/package/polymarket-api) |
 | **bitquery-protobuf-schema** | Protobuf schemas for Bitquery Kafka streams (e.g. DEX pools, trades). | [npm](https://www.npmjs.com/package/bitquery-protobuf-schema) |
 | **bitquery-ton-sdk** | Bitquery SDK for TON blockchain data. | [npm](https://www.npmjs.com/package/bitquery-ton-sdk) |
+
 
 ---
 
