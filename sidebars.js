@@ -473,6 +473,7 @@ const sidebars = {
             "blockchain/BSC/binance-memerush-api",
             "blockchain/BSC/pancake-swap-api",
             "blockchain/BSC/bsc-mempool-stream",
+            "blockchain/BSC/flap-sh",
           ],
         },
         {
