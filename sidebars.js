@@ -385,6 +385,7 @@ const sidebars = {
                 "blockchain/Ethereum/dextrades/crypto-coin-ticker",
                 "blockchain/Ethereum/dextrades/uniswap-api",
                 "blockchain/Ethereum/dextrades/uniswap-position-api",
+                "blockchain/Ethereum/dextrades/uniswap-v4-api",
                 "blockchain/Ethereum/dextrades/pancakeswap-api",
                 "blockchain/Ethereum/dextrades/fluid-dex-api",
                 "blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener",
