@@ -770,12 +770,19 @@ const sidebars = {
           "APIs for accessing prediction market data and trading information",
       },
       items: [
-        "examples/polymarket-api/polymarket-api",
-        "examples/polymarket-api/get-market-data",
-        "examples/polymarket-api/main-polymarket-contract",
-        "examples/polymarket-api/polymarket-ctf-exchange",
-        "examples/polymarket-api/uma-adapter-contract",
-        "examples/polymarket-api/polymarket-trade-apis",
+        "examples/prediction-market/prediction-market-api",
+        {
+          type: "category",
+          label: "Polymarket",
+          items: [
+            "examples/polymarket-api/polymarket-api",
+            "examples/polymarket-api/get-market-data",
+            "examples/polymarket-api/main-polymarket-contract",
+            "examples/polymarket-api/polymarket-ctf-exchange",
+            "examples/polymarket-api/uma-adapter-contract",
+            "examples/polymarket-api/polymarket-trade-apis",
+          ],
+        },
       ],
     },
     {
@@ -939,7 +946,6 @@ const sidebars = {
           },
           items: [
             "usecases/crypto-dashboard",
-            "usecases/dapps",
             "usecases/discord-bot",
             "usecases/telegram-bot",
             "usecases/Top-10-ethereum-tokens",
