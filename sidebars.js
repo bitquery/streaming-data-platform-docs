@@ -689,24 +689,6 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Prediction Markets",
-          link: {
-            type: "generated-index",
-            title: "Prediction Market APIs",
-            description:
-              "APIs for accessing prediction market data and trading information",
-          },
-          items: [
-            "examples/polymarket-api/polymarket-api",
-            "examples/polymarket-api/get-market-data",
-            "examples/polymarket-api/main-polymarket-contract",
-            "examples/polymarket-api/polymarket-ctf-exchange",
-            "examples/polymarket-api/uma-adapter-contract",
-            "examples/polymarket-api/polymarket-trade-apis",
-          ],
-        },
-        {
-          type: "category",
           label: "Futures DEXs",
           link: {
             type: "generated-index",
@@ -776,6 +758,24 @@ const sidebars = {
             "trading/crypto-price-api/limit-order-price-api",
           ],
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Prediction Markets",
+      link: {
+        type: "generated-index",
+        title: "Prediction Market APIs",
+        description:
+          "APIs for accessing prediction market data and trading information",
+      },
+      items: [
+        "examples/polymarket-api/polymarket-api",
+        "examples/polymarket-api/get-market-data",
+        "examples/polymarket-api/main-polymarket-contract",
+        "examples/polymarket-api/polymarket-ctf-exchange",
+        "examples/polymarket-api/uma-adapter-contract",
+        "examples/polymarket-api/polymarket-trade-apis",
       ],
     },
     {
