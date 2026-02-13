@@ -42,13 +42,17 @@ Ready-to-use web apps and dashboards powered by Bitquery APIs. Many include a li
 | **EVM Sniper**                   | EVM-based sniper tool using Bitquery data.               | [GitHub](https://github.com/Kshitij0O7/evm-sniper)                   |
 | **Sentinel Crypto Watch**        | Crypto monitoring and alerting.                          | [GitHub](https://github.com/Kshitij0O7/sentinel-crypto-watch)        |
 
-### Charting & trading
+---
 
-| Tool                                         | Description                                                         | Source                                                                             | Docs                                                                                           |
-| -------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **TradingView with Realtime Data**           | TradingView charts with real-time OHLCV via Bitquery subscriptions. | [GitHub](https://github.com/bitquery/tradingview-subscription-realtime/tree/main)  | [TradingView Realtime guide](/docs/usecases/tradingview-subscription-realtime/getting-started) |
-| **AI Crypto Trader All-in-One**              | AI-driven crypto trading sample using Bitquery data.                | [GitHub](https://github.com/divyasshree-BQ/AI-crypto-trader-all-in-one)            | —                                                                                              |
-| **AI Crypto Trader All-in-One (CoW Intent)** | CoW Intent–based variant of the AI crypto trader.                   | [GitHub](https://github.com/divyasshree-BQ/AI-crypto-trader-all-in-one-CoW-Intent) | —                                                                                              |
+## Charting & trading
+
+| Tool                                         | Description                                                                 | Source                                                                 | Docs                                                                                           |
+| -------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **TradingView with Realtime Data**           | TradingView charts with real-time OHLCV via Bitquery subscriptions.         | [GitHub](https://github.com/bitquery/tradingview-subscription-realtime/tree/main) | [TradingView Realtime guide](/docs/usecases/tradingview-subscription-realtime/getting-started) |
+| **AI Crypto Trader All-in-One**              | AI-driven crypto trading sample using Bitquery data.                        | [GitHub](https://github.com/divyasshree-BQ/AI-crypto-trader-all-in-one) | —                                                                                              |
+| **AI Crypto Trader All-in-One (CoW Intent)** | CoW Intent–based variant of the AI crypto trader.                           | [GitHub](https://github.com/divyasshree-BQ/AI-crypto-trader-all-in-one-CoW-Intent) | —                                                                                              |
+| **Best Route Trader on Uniswap**             | Finds the most efficient swap route on Uniswap using on-chain liquidity and pricing data. | [GitHub](https://github.com/Divyn/best-route-trader-Uniswap) | — |
+|                                              | **Live Demo:** [Try it](https://best-route-trader-uniswap.vercel.app/)      |                                                                        |                                                                                                 |
 
 ---
 
