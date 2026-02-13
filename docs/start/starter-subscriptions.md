@@ -52,7 +52,7 @@ Subscribe to real-time token balance updates for a specific address and token. T
 
 Monitor token balance changes for a specific token across all transactions. This helps track token movements and transfers.
 
-▶️ [Track Token Balance Changes by Transaction](https://ide.bitquery.io/Track-Token-Balance-Changes-by-Transaction#)
+▶️ [Track Token Balance Changes by Transaction](https://ide.bitquery.io/Track-Any-Token-Balance-Changes-by-Transaction-on-ETH)
 
 #### Track Validator Balance Updates
 
