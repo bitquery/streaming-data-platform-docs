@@ -144,6 +144,27 @@ const sidebars = {
             "graphql/metrics/quantile",
           ],
         },
+        {
+          type: "category",
+          label: "Schema Reference",
+          link: {
+            type: "doc",
+            id: "schema/evm/top",
+          },
+          items: [
+            "schema/evm/blocks",
+            "schema/evm/miners",
+            "schema/evm/uncles",
+            "schema/evm/balances",
+            "schema/evm/transfers",
+            "schema/evm/transactions",
+            "schema/evm/events",
+            "schema/evm/dextrades",
+            "schema/evm/calls",
+            "schema/evm/arguments",
+            "schema/evm/token-holders",
+          ],
+        },
       ],
     },
 

@@ -23,7 +23,7 @@ keywords:
 sidebar_position: 3
 ---
 
-# Bitcoin Data Export for Snowflake, AWS, Google Cloud
+# Bitcoin Data
 
 Bitquery provides **Bitcoin blockchain data dumps** in **Parquet format**, designed for large-scale analytics, historical backfills, and data lake integrations.
 These datasets can be hosted directly in your own cloud storage (for example, **AWS S3**) and queried using engines like **Snowflake, BigQuery, Athena, Spark, etc**.
