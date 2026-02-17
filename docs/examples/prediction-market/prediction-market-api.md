@@ -17,17 +17,19 @@ keywords:
 
 # Prediction Market API
 
-The **Prediction Market API** is a **universal** API for querying **market lifecycle events**, **trades**, and **settlements** across prediction markets (e.g. Polymarket). Use it to filter by question title, event type, outcome, collateral token, and more. **Additional EVM chains will be supported soon**; query the cube under `EVM(network: ...)` for the chain you need.
-
-## Cubes overview
-
-| Cube                      | Use case                                                  |
-| ------------------------- | --------------------------------------------------------- |
-| **PredictionManagements** | Market creation and resolution events (Created, Resolved) |
-| **PredictionTrades**      | Buy/sell outcome tokens (taker/maker, amounts, outcome)   |
-| **PredictionSettlements** | Split, merge, and redemption of outcome tokens            |
+The **Prediction Market API** is a **universal** API for querying **market lifecycle events**, **trades**, and **settlements** across prediction markets (e.g. Polymarket). Use it to filter by question title, event type, outcome, collateral token, and more. Additional prediction markets will be supported soon.
 
 **Networks:** Currently **Polygon** (`network: matic`). More EVM chains coming soon.
+
+### Lifecycle flow
+
+| Stage          | Cube                    | Activities                 |
+| -------------- | ----------------------- | -------------------------- |
+| **Management** | `PredictionManagements` | Market Created / Resolved  |
+| **Trades**     | `PredictionTrades`      | Buy / Sell outcome tokens  |
+| **Settlement** | `PredictionSettlements` | Split / Merge / Redemption |
+
+Flow: **Management** (Created) → **Trades** (Buy/Sell) → **Settlement** (Split/Merge/Redemption)
 
 This is a **universal** prediction market API: the same cubes and fields work across supported chains. Use `EVM(network: matic)` for Polygon today; more chains will be added over time.
 
@@ -35,7 +37,9 @@ For contract-level and event-based Polymarket data (e.g. OrderFilled, ConditionR
 
 ## PredictionManagements
 
-Market creation and resolution (Created, Resolved). Filter by question title, event type, and prediction metadata.
+**PredictionManagements** returns market lifecycle events: **Created** (new market) and **Resolved** (outcome determined). Filter by question title, event type, and prediction metadata (e.g. image URL, resolution source). Each event includes `EventType`: `"Created"` or `"Resolved"`. Question fields such as **Image** (market image URL) and **ResolutionSource** (URL used to resolve the outcome) are included in the response—for example, `Image` might point to a Polymarket asset and `ResolutionSource` to a price feed or sports data URL.
+
+[Run API](https://ide.bitquery.io/Query-latest-created-resolved-prediction-markets-for-Bitcoin)
 
 ```graphql
 query PredictionManagements {
@@ -46,7 +50,6 @@ query PredictionManagements {
       where: {
         Management: {
           Prediction: { Question: { Title: { includes: "Bitcoin" } } }
-          EventType: { in: ["Created", "Resolved"] }
         }
       }
     ) {
@@ -104,7 +107,7 @@ query PredictionManagements {
 ### Key fields
 
 - **Management.EventType** — `"Created"` or `"Resolved"`.
-- **Management.Prediction.Question** — Title, MarketId, Id, Image, ResolutionSource, CreatedAt. **Title** is useful for filtering (e.g. by keyword like "Bitcoin"). **MarketId** links to full info: `https://gamma-api.polymarket.com/markets/{MarketId}`.
+- **Management.Prediction.Question** — Title, MarketId, Id, Image, ResolutionSource, CreatedAt. **Title** is useful for filtering (e.g. by keyword like "Bitcoin"). **MarketId** links to full info: `https://gamma-api.polymarket.com/markets/{MarketId}`. **ResolutionSource** can be any URL or source that indicates where the market outcome is resolved (e.g. sports scores, crypto oracles, esports).
 
 - **Management.Prediction.Condition** — Id, QuestionId, **Outcomes** (all possible outcomes; usually two: Id, Label).
 - **Management.Prediction.Outcome** / **OutcomeToken** — For **Resolved**: winning outcome token Id/AssetId; for **Created**: often empty.
