@@ -37,7 +37,16 @@ For contract-level and event-based Polymarket data (e.g. OrderFilled, ConditionR
 
 ## PredictionManagements
 
-**PredictionManagements** returns market lifecycle events: **Created** (new market) and **Resolved** (outcome determined). Filter by question title, event type, and prediction metadata (e.g. image URL, resolution source). Each event includes `EventType`: `"Created"` or `"Resolved"`. Question fields such as **Image** (market image URL) and **ResolutionSource** (URL used to resolve the outcome) are included in the response—for example, `Image` might point to a Polymarket asset and `ResolutionSource` to a price feed or sports data URL.
+**PredictionManagements** returns market lifecycle events:
+
+- **Created** — new market
+- **Resolved** — outcome determined
+
+You can filter by question title, event type, and prediction metadata (e.g. image URL, resolution source). Each event includes:
+
+- `EventType`: `"Created"` or `"Resolved"`
+- **Image** — market image URL (e.g. Polymarket asset)
+- **ResolutionSource** — URL used to resolve the outcome (e.g. price feed or sports data URL)
 
 [Run API](https://ide.bitquery.io/Query-latest-created-resolved-prediction-markets-for-Bitcoin)
 
