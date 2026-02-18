@@ -415,4 +415,4 @@ query TopRedeemers {
 | **Hottest markets by redemptions** | Use *Top 10 market questions by redeemed amount*. |
 | **Top redeemers** | Use *Top 10 redeemers* (optionally change `hours_ago` or add more filters). |
 
-For market creation and resolution events, see [PredictionManagements](./prediction-market-api#predictionmanagements). For trades, see [PredictionTrades](./prediction-market-api#predictiontrades-recent-buys).
+For market creation and resolution events, see [PredictionManagements](/docs/examples/prediction-market/prediction-market-api#predictionmanagements). For trades, see [PredictionTrades](/docs/examples/prediction-market/prediction-market-api#predictiontrades-recent-buys).
