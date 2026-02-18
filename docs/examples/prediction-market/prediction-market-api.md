@@ -189,7 +189,7 @@ query PredictionTrades {
 
 ## PredictionSettlements
 
-Split, merge, and redemption of outcome tokens (minting, merging positions, redeeming after resolution). For more examples (real-time stream, whale settlements, top winners, top markets), see the [Prediction Market Settlements API](./prediction-settlements-api) doc.
+Split, merge, and redemption of outcome tokens (minting, merging positions, redeeming after resolution). For more examples (real-time stream, whale settlements, top winners, top markets), see the [Prediction Market Settlements API](/docs/examples/prediction-market/prediction-settlements-api) doc.
 
 ```graphql
 query PredictionSettlements {
