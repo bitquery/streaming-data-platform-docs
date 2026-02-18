@@ -37,3 +37,34 @@
   color: #ffffff !important;
   font-weight: 600;
 }
+
+/* Copy MD button: in doc header next to title (via swizzled DocItem/Content) */
+.copy-md-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+.copy-md-header--no-title {
+  justify-content: flex-end;
+}
+
+button.copy-md {
+  flex-shrink: 0;
+  background: var(--ifm-color-primary-light);
+  color: white;
+  border: none;
+  border-radius: var(--ifm-button-border-radius, 8px);
+  padding: 0.5rem 1rem;
+  font-size: var(--ifm-font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--ifm-button-shadow);
+}
+
+button.copy-md:hover {
+  background: var(--ifm-color-primary);
+}

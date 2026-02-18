@@ -52,6 +52,8 @@ const config = {
   ],
 
   plugins: [
+    // Copy MD button is now in swizzled DocItem/Content (src/theme/DocItem/Content)
+    // require.resolve("./plugins/copy-md-plugin"),
     // [
     //   "@graphql-markdown/docusaurus",
     //   {
