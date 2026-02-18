@@ -19,7 +19,7 @@ keywords:
 
 The **PredictionSettlements** API returns **Split**, **Merge**, and **Redemption** events for prediction markets (e.g. Polymarket) on Polygon. Use it to stream live settlements, list latest activity, count events by type, find large redemptions (whales), and rank top winners or top markets by redeemed amount.
 
-**Network:** Polygon (`network: matic`). Part of the [Prediction Market API](./prediction-market-api) lifecycle (Management → Trades → **Settlement**).
+**Network:** Polygon (`network: matic`). Part of the [Prediction Market API](/docs/examples/prediction-market/prediction-market-api) lifecycle (Management → Trades → **Settlement**).
 
 ### Event types
 
