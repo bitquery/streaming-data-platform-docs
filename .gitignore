@@ -21,3 +21,5 @@ yarn-error.log*
 fix-mdx-braces.js
 fix-mdx-braces-v2.js
 tradingview-realtime-README.md
+fix.log
+audit.json

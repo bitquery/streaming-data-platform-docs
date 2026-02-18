@@ -53,5 +53,8 @@
   },
   "engines": {
     "node": ">=18.0"
+  },
+  "comments": {
+    "ajv issue": "very new. https://github.com/advisories/GHSA-2g4f-4pwh-qvx6. Does not affect us."
   }
 }
