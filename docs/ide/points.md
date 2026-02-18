@@ -4,7 +4,17 @@ sidebar_position: 11
 
 # Points
 
-At Bitquery we use points system to calculate the cost for a query. Each query will use a different number of points, based on the complexity and size of the query requested. 
+Bitquery indexes more than 1 Petabyte of structured blockchain data and exposes it through a single GraphQL interface. Using one endpoint, you can get a chain’s latest block height, follow money trails, pull DEX trades across supported blockchains, and more.
+
+Not every query uses the same resources: some need a small set of records, others scan billions; some are served from cache, others may use large amounts of memory. Charging only by number of API calls would be unfair, because each call has a different cost.
+
+**Points** solve this by tying cost to actual resource usage:
+
+**Points = Resources consumed × Price per unit**
+
+So you pay in proportion to what your queries consume. The exact algorithm and resource prices may change over time, but pricing is based on Points (not raw API call count).
+
+At Bitquery we use the points system to calculate the cost for each query. Each query consumes a different number of points based on its complexity and the amount of data requested. 
 
 **For a comprehensive understanding of the points system, please see this [video](https://youtu.be/L5QOTnvUwkg).**
 
@@ -116,3 +126,7 @@ For more detailed information about subscriptions and best practices, please ref
 You can check points consumed via streams under your [account](https://account.bitquery.io/user/api_v2/subscriptions).
 
 ![stream_points](/img/ide/stream_points.png)
+
+## Need help?
+
+If you still have questions about points or pricing, you can reach out to [support.bitquery.io](https://support.bitquery.io) or [sales@bitquery.io](mailto:sales@bitquery.io).
