@@ -1,9 +1,11 @@
 ---
 slug: documentation-started
 title: Started documenting data platform
-authors: [astudnev,gaurav,crox-safe,Divyasshree]
+authors: [astudnev,gaurav,Divyasshree]
 tags: [bitquery]
 ---
+
+<!-- truncate -->
 
 We are happy to start this project, documenting the new Bitquery data platform.
 

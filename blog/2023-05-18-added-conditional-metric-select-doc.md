@@ -5,6 +5,8 @@ authors: [astudnev]
 tags: [metrics]
 ---
 
+<!-- truncate -->
+
 There is the modification in the today release of Graphql:
 
 1. [selectWhere](/docs/graphql/metrics/selectWhere) for details

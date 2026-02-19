@@ -5,6 +5,8 @@ authors: [astudnev]
 tags: [new capability]
 ---
 
+<!-- truncate -->
+
 # Changes in API Schema
 
 The following changes applied to the schema:

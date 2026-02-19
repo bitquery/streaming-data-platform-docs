@@ -5,6 +5,8 @@ authors: [Divyasshree]
 tags: [new data]
 ---
 
+<!-- truncate -->
+
 # New Data
 
 We have now added data for several new Solana DEXes into our platform: Phoenix, Meteora, Lifi, and more!

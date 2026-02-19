@@ -5,6 +5,8 @@ authors: [Divyasshree]
 tags: [new api]
 ---
 
+<!-- truncate -->
+
 # Changes in APIs and Metrics
 
 In this update we have

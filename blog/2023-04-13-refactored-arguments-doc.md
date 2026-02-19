@@ -5,6 +5,8 @@ authors: [astudnev]
 tags: [arguments]
 ---
 
+<!-- truncate -->
+
 There is the major modification in the today release of Graphql:
 
 1. Arguments and return value for Calls and Events are now represented as arrays of structures. Use union to read values of arguments. Refer to [arguments](/docs/schema/evm/arguments) for details on data structures.

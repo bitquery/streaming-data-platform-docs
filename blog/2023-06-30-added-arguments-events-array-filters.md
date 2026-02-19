@@ -5,6 +5,8 @@ authors: [astudnev]
 tags: [metrics]
 ---
 
+<!-- truncate -->
+
 There is the additions in the today release of Graphql:
 
 1. [Filtering of arrays](/docs/graphql/filters/#array-filter-types) introduced filtering by arrays

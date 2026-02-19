@@ -5,6 +5,8 @@ authors: [Divyasshree]
 tags: [new capability]
 ---
 
+<!-- truncate -->
+
 # Changes in APIs
 
 In this update we have added a new capability to identify relation between two addresses/contracts with the [array intersect feature](/docs/graphql/capabilities/array-intersect)
