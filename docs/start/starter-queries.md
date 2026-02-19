@@ -1105,6 +1105,11 @@ Count how many Created and Resolved events occurred in the last 24 hours.
 Fetch the most recent Created events (new markets). All possible outcomes per market are in Prediction.Condition.Outcomes.
 ▶️ [Latest Market Creations](https://ide.bitquery.io/latest-polymarket-creations)
 
+#### Latest Market Resolutions
+
+Query that returns the 10 most recent Resolved events. Winning outcome is in Prediction.Outcome; Prediction.OutcomeToken holds the asset ID and contract details.
+▶️ [Latest Market Resolutions](https://ide.bitquery.io/latest-polymarket-resolutions_1)
+
 ### Prediction Market Settlements
 
 Prediction market settlement events (Split, Merge, Redemption) on Polygon. See [Prediction Market Settlements API](/docs/examples/prediction-market/prediction-settlements-api) for full details.

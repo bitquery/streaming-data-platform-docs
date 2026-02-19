@@ -486,9 +486,9 @@ query LatestMarketCreations {
 
 ---
 
-## Latest market resolutions (subscription)
+## Latest market resolutions (query)
 
-Subscription that returns the 10 most recent **Resolved** events. The winning outcome is in **Prediction.Outcome**; **Prediction.OutcomeToken** holds the asset ID and contract details for that outcome.
+Query that returns the 10 most recent **Resolved** events. The winning outcome is in **Prediction.Outcome**; **Prediction.OutcomeToken** holds the asset ID and contract details for that outcome.
 
 [Run in Bitquery IDE](https://ide.bitquery.io/latest-polymarket-resolutions_1)
 
@@ -580,6 +580,6 @@ query LatestMarketResolutions {
 | **New markets only (stream)** | Use *Real-time market creations* with `EventType: { is: "Created" }`. |
 | **Resolutions only (stream)** | Use *Real-time market resolutions* with `EventType: { is: "Resolved" }`. |
 | **Latest creations (historical)** | Use *Latest market creations* query. |
-| **Latest resolutions** | Use *Latest market resolutions* subscription. |
+| **Latest resolutions** | Use *Latest market resolutions* query. |
 
 For trades on outcome tokens, see [Prediction Market Trades API](../prediction-trades-api). For settlements (split, merge, redemption), see [Prediction Market Settlements API](../prediction-settlements-api).

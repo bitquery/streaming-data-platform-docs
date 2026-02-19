@@ -584,11 +584,6 @@ Subscribe only to new market (Created) events.
 Subscribe only to Resolved events. Winning outcome is in Prediction.Outcome; token details (e.g. AssetId) in Prediction.OutcomeToken.
 ▶️ [Realtime Market Resolutions](https://ide.bitquery.io/track-realtime-polymarket-resolutions)
 
-#### Latest Market Resolutions (Subscription)
-
-Subscription returning the 10 most recent Resolved events.
-▶️ [Latest Market Resolutions](https://ide.bitquery.io/latest-polymarket-resolutions)
-
 ### Prediction Market Settlements
 
 #### Real-Time Settlement Stream
