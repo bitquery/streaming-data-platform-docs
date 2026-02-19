@@ -68,7 +68,8 @@ Retrieve all ERC-20 token balances held by a specific address. This query return
 
 #### Latest Liquidity of EVM Pool
 
-Get the latest liquidity of an EVM DEX pool (e.g., Uniswap v3 pool).  
+Get the latest liquidity of an EVM DEX pool (e.g., Uniswap v3 pool).
+
 ▶️ [Latest Liquidity of EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
 
 ### Token Supply
@@ -81,7 +82,7 @@ Latest Token Supply for all active token
 
 #### Latest Token Supply of USDT-USDC on ETH chain
 
-Latest Token Supply for stablecoin like USDC-USDT
+Latest Token Supply for stablecoin like USDC-USDT.
 
 ▶️ [Latest Token Supply for stablecoin like USDC-USDT](https://ide.bitquery.io/latest-token-supply-on-USDT-and-USDC-on-ethereum-chain)
 
@@ -103,12 +104,14 @@ Get transactions ordered by block number in descending order.
 
 #### Ethereum DEXTrades latest trades for a token
 
-This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.  
+This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.
+
 ▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-dextrades-of-a-token)
 
 #### Ethereum DexTradeByTokens latest trades for a token
 
-This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
+This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.
+
 ▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens-of-a-token)
 
 #### Get Swaps by Wallet Address
@@ -183,12 +186,12 @@ This API returns the total number of holders for a specific token on a given dat
 #### Real-Time Holders of Multiple Tokens
 
 This API leverages the balanceUpdate endpoint to deliver real-time holder data for multiple tokens.
-▶️ [ Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH_2)
+▶️ [Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH_2)
 
 #### Token Holders of Multiple Tokens on a speicifc date - BalanceUpdates API
 
 This API provides a list of top holders along with relevant statistics for a given token liston a specific date using BalanceUpdates API.
-▶️ [ Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH-at-a-specific-time)
+▶️ [Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH-at-a-specific-time)
 
 #### Token Holders and Stats on a Specific Date - TokenHolders API
 
@@ -636,12 +639,12 @@ This API returns the total number of holders for a specific token on a given dat
 #### Real-Time Holders of Multiple Tokens
 
 This API leverages the balanceUpdate endpoint to deliver real-time holder data for multiple tokens.
-▶️ [ Real-Time Holders of Multiple Tokens](http://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base_1)
+▶️ [Real-Time Holders of Multiple Tokens](http://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base_1)
 
 #### Token Holders of Multiple Tokens on a speicifc date - BalanceUpdates API
 
 This API provides a list of top holders along with relevant statistics for a given token liston a specific date using BalanceUpdates API.
-▶️ [ Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base-at-a-specific-time)
+▶️ [Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base-at-a-specific-time)
 
 #### Token Holders and Stats on a Specific Date - TokenHolders API
 
