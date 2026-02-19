@@ -19,7 +19,7 @@ keywords:
 
 The **Prediction Market API** is a **universal** API for querying **market lifecycle events**, **trades**, and **settlements** across prediction markets (e.g. Polymarket). Use it to filter by question title, event type, outcome, collateral token, and more. Additional prediction markets will be supported soon.
 
-**Networks:** Currently **Polygon** (`network: matic`). More EVM chains coming soon.
+**Networks:** Currently **Polygon** (`network: matic`). More prediction markets coming soon.
 
 ### Lifecycle flow
 
@@ -37,7 +37,11 @@ For contract-level and event-based Polymarket data (e.g. OrderFilled, ConditionR
 
 ## PredictionManagements
 
-**PredictionManagements** returns market lifecycle events: **Created** (new market) and **Resolved** (outcome determined). You can filter by question title, event type, and prediction metadata (e.g. image URL, resolution source). For more examples (real-time stream, creations-only and resolutions-only subscriptions, counts), see the [Prediction Market Managements API](../prediction-managements-api) doc. Each event includes:
+**PredictionManagements** returns market lifecycle events: 
+
+**Created** (new market) and **Resolved** (outcome determined). You can filter by question title, event type, and prediction metadata (e.g. image URL, resolution source). For more examples (real-time stream, creations-only and resolutions-only subscriptions, counts), see the [Prediction Market Managements API](../prediction-managements-api) doc. 
+
+Each event includes:
 
 - `EventType`: `"Created"` or `"Resolved"`
 - **Image** — market image URL (e.g. Polymarket asset)

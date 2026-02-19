@@ -569,17 +569,5 @@ query LatestMarketResolutions {
 }
 ```
 
----
-
-## Use cases
-
-| Use case | Approach |
-| -------- | -------- |
-| **Live creation + resolution feed** | Use the real-time *Prediction managements stream* subscription. |
-| **Recent activity (any type)** | Use *Latest managements* with `limit` and `orderBy: { descending: Block_Time }`. |
-| **New markets only (stream)** | Use *Real-time market creations* with `EventType: { is: "Created" }`. |
-| **Resolutions only (stream)** | Use *Real-time market resolutions* with `EventType: { is: "Resolved" }`. |
-| **Latest creations (historical)** | Use *Latest market creations* query. |
-| **Latest resolutions** | Use *Latest market resolutions* query. |
 
 For trades on outcome tokens, see [Prediction Market Trades API](../prediction-trades-api). For settlements (split, merge, redemption), see [Prediction Market Settlements API](../prediction-settlements-api).

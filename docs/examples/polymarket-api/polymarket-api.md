@@ -24,7 +24,7 @@ keywords:
 
 # Polymarket API - Modern APIs for Prediction Markets
 
-**Query Polymarket trades, settlements, and market data using optimized GraphQL APIs**. Stream real-time data via Kafka for ultra-low-latency applications.
+Query Polymarket trades, settlements, and market data using optimized GraphQL APIs. Stream real-time data via Kafka for ultra-low-latency applications.
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
