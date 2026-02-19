@@ -807,6 +807,7 @@ const sidebars = {
           },
           items: [
             "examples/prediction-market/prediction-market-api",
+            "examples/prediction-market/prediction-managements-api",
             "examples/prediction-market/prediction-trades-api",
             "examples/prediction-market/prediction-settlements-api",
           ],

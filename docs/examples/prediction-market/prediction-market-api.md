@@ -37,12 +37,7 @@ For contract-level and event-based Polymarket data (e.g. OrderFilled, ConditionR
 
 ## PredictionManagements
 
-**PredictionManagements** returns market lifecycle events:
-
-- **Created** — new market
-- **Resolved** — outcome determined
-
-You can filter by question title, event type, and prediction metadata (e.g. image URL, resolution source). Each event includes:
+**PredictionManagements** returns market lifecycle events: **Created** (new market) and **Resolved** (outcome determined). You can filter by question title, event type, and prediction metadata (e.g. image URL, resolution source). For more examples (real-time stream, creations-only and resolutions-only subscriptions, counts), see the [Prediction Market Managements API](../prediction-managements-api) doc. Each event includes:
 
 - `EventType`: `"Created"` or `"Resolved"`
 - **Image** — market image URL (e.g. Polymarket asset)

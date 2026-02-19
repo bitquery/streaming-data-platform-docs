@@ -1086,6 +1086,25 @@ This query gets the top 10 traded NFTs based on the number of trades within a sp
 
 ## Prediction Market
 
+### Prediction Market Managements
+
+Prediction market lifecycle events (Created, Resolved) on Polygon. See [Prediction Market Managements API](/docs/examples/prediction-market/prediction-managements-api) for full details.
+
+#### Latest Managements (Creations + Resolutions)
+
+Fetch the most recent creation and resolution events with full details, ordered by block time.
+▶️ [Latest Prediction Managements](https://ide.bitquery.io/latest-Prediction-managements-resolutions-creations)
+
+#### Created vs Resolved Count (Last 24 Hours)
+
+Count how many Created and Resolved events occurred in the last 24 hours.
+▶️ [Created vs Resolved Count Last 24h](https://ide.bitquery.io/last-24-hr-resolution-and-ceated-count)
+
+#### Latest Market Creations
+
+Fetch the most recent Created events (new markets). All possible outcomes per market are in Prediction.Condition.Outcomes.
+▶️ [Latest Market Creations](https://ide.bitquery.io/latest-polymarket-creations)
+
 ### Prediction Market Settlements
 
 Prediction market settlement events (Split, Merge, Redemption) on Polygon. See [Prediction Market Settlements API](/docs/examples/prediction-market/prediction-settlements-api) for full details.

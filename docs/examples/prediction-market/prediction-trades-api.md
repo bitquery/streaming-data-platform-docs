@@ -21,7 +21,7 @@ The **PredictionTrades** API returns **buy/sell** activity on outcome tokens for
 **Network:** Polygon (`network: matic`). Part of the [Prediction Market API](../prediction-market-api) lifecycle (Management → **Trades** → Settlement).
 
 :::info Historical data
-PredictionTrades currently does **not** provide historical trade data beyond 8 hours. For **historical** Polymarket trades (date ranges, backtests, volume over time), use the [Polymarket Trade APIs](/docs/examples/polymarket-api/polymarket-trade-apis) with **DEXTradeByTokens** (EVM). We may add Prediction Market historical data in the future.
+For **historical** Polymarket trades (date ranges, backtests, volume over time), use the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/) docs (e.g. **DEXTradeByTokens** for historical trades on EVM).
 :::
 
 ### Trade direction

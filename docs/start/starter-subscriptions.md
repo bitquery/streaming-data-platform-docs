@@ -567,6 +567,28 @@ Monitor NFT transfers for a specific collection across all transactions. This he
 
 ## Polymarket
 
+### Prediction Market Managements
+
+#### Real-Time Management Stream (Creations + Resolutions)
+
+Subscribe to all prediction market lifecycle events (Created and Resolved) as they occur on Polygon.
+▶️ [Prediction Managements Stream](https://ide.bitquery.io/Prediction-Managements-subscription-resolutions-creations)
+
+#### Real-Time Market Creations
+
+Subscribe only to new market (Created) events.
+▶️ [Realtime Market Creations](https://ide.bitquery.io/track-realtime-new-polymarket-creations)
+
+#### Real-Time Market Resolutions
+
+Subscribe only to Resolved events. Winning outcome is in Prediction.Outcome; token details (e.g. AssetId) in Prediction.OutcomeToken.
+▶️ [Realtime Market Resolutions](https://ide.bitquery.io/track-realtime-polymarket-resolutions)
+
+#### Latest Market Resolutions (Subscription)
+
+Subscription returning the 10 most recent Resolved events.
+▶️ [Latest Market Resolutions](https://ide.bitquery.io/latest-polymarket-resolutions)
+
 ### Prediction Market Settlements
 
 #### Real-Time Settlement Stream
