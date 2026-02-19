@@ -188,6 +188,8 @@ All the topics send data in the **protobuf** format
 - matic.tokens.proto
 - matic.dextrades.proto
 - matic.dexpools.proto - See [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
+- matic.predictions.proto
+- matic.broadcasted.predictions.proto
 - optimism.transactions.proto
 - optimism.tokens.proto
 - optimism.dextrades.proto

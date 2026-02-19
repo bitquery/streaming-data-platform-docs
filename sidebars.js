@@ -822,8 +822,6 @@ const sidebars = {
           },
           items: [
             "examples/polymarket-api/polymarket-api",
-            "examples/polymarket-api/get-market-data",
-            "examples/polymarket-api/polymarket-trade-apis",
             {
               type: "category",
               label: "Specific Contract APIs",
@@ -839,7 +837,6 @@ const sidebars = {
                 "examples/polymarket-api/uma-adapter-contract",
               ],
             },
-            
           ],
         },
       ],
