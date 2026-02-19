@@ -1,5 +1,5 @@
 ---
-title: Polymarket Trade APIs - DEXTradeByTokens for Prediction Markets
+title: Polymarket Trade APIs
 description: Comprehensive guide to Polymarket trading APIs using Bitquery's DEXTradeByTokens cube. Access real-time and historical trade data, streaming updates, and market analytics for Polymarket's prediction markets on Polygon network with USDC trades.
 keywords:
   - Polymarket API
@@ -21,114 +21,100 @@ sidebar_position: 5
 
 # Polymarket Trade APIs
 
-This comprehensive guide covers Polymarket trading APIs using Bitquery's DEXTradeByTokens cube. Access real-time and historical trade data, streaming updates, and market analytics for Polymarket's prediction markets on Polygon (Matic) network, focusing specifically on USDC-based trades.
-
-## Overview
-
-Polymarket is a decentralized prediction market platform built on Polygon. The DEXTradeByTokens API provides structured trade data from Polymarket's Conditional Token Framework (CTF) exchange, focusing on USDC-based trades to track market movements, analyze trading patterns, and build trading applications.
-
-### Key Features
-- **Real-time streaming** of live trades via GraphQL subscriptions
-- **Historical trade data** with flexible filtering and pagination
-- **Multi-asset support** for all Polymarket prediction markets
-- **USD pricing** and volume calculations
-- **Order book insights** through position IDs and order tracking
-
-## Prerequisites
-
-- Bitquery API access (get your API key at [bitquery.io](https://bitquery.io))
-- Basic understanding of GraphQL
-- Familiarity with Polymarket's market structure (condition IDs, position tokens)
-
-## Supported Assets
-
-Polymarket trades primarily use USDC (USD Coin) on Polygon for settlement:
-
-| Token | Contract Address | Symbol |
-|-------|------------------|--------|
-| USDC | `0x2791bca1f2de4661ed88a30c99a7a9449aa84174` | USDC |
+This guide covers Polymarket trade APIs on Bitquery: real-time and historical trade data, streaming, and market analytics for Polymarket on Polygon (USDC). You can use the unified [Prediction Market API](/docs/examples/prediction-market/prediction-market-api) for real-time data.
 
 ## Real-Time Trade Streaming
 
-Subscribe to live Polymarket trades as they happen. This subscription provides real-time updates for all market activity.
+Subscribe to live Polymarket trades as they happen. Use **PredictionTrades** with a Polymarket filter for real-time updates and rich fields (question title, MarketId, outcome labels, buyer/seller).
 
-**Try it live:** [Polymarket Trades Stream](https://ide.bitquery.io/polymarket-trades-stream)
+**Try it live:** [Polymarket Trades Stream](https://ide.bitquery.io/Polymarket-trade-stream)
 
 ```graphql
-subscription {
+subscription PredictionTradesStream {
   EVM(network: matic) {
-    DEXTradeByTokens(
-      where: {
-        TransactionStatus: { Success: true }
-        Trade: {
-          Side: {
-            Currency: {
-              SmartContract: {
-                is: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
-              }
-            }
-          }
-          Dex: { ProtocolName: { is: "polymarket" } }
-        }
-      }
+    PredictionTrades(
+      where: {TransactionStatus: {Success: true}, Trade: {Prediction: {Marketplace: {ProtocolName: {is: "polymarket"}}}}}
     ) {
       Block {
         Time
       }
-      Transaction {
-        Hash
-      }
-      Trade {
-        Dex {
-          OwnerAddress
-          ProtocolFamily
-          ProtocolName
-        }
-        AmountInUSD
-        Amount
-        PriceInUSD
-        Side {
-          Type
-          Amount
-          AmountInUSD
-          Currency {
-            Symbol
-            SmartContract
-            Name
-          }
-          Ids
-          OrderId
-        }
-        Currency {
-          Symbol
-          SmartContract
+      Call {
+        Signature {
           Name
         }
-        Ids
-        OrderId
+      }
+      Log {
+        Signature {
+          Name
+        }
+        SmartContract
+      }
+      Trade {
+        OutcomeTrade {
+          Buyer
+          Seller
+          Amount
+          CollateralAmount
+          CollateralAmountInUSD
+          OrderId
+          Price
+          PriceInUSD
+          IsOutcomeBuy
+        }
+        Prediction {
+          CollateralToken {
+            Name
+            Symbol
+            SmartContract
+            AssetId
+          }
+          ConditionId
+          OutcomeToken {
+            Name
+            Symbol
+            SmartContract
+            AssetId
+          }
+          Marketplace {
+            SmartContract
+            ProtocolVersion
+            ProtocolName
+            ProtocolFamily
+          }
+          Question {
+            Title
+            ResolutionSource
+            Image
+            MarketId
+            Id
+            CreatedAt
+          }
+          Outcome {
+            Id
+            Index
+            Label
+          }
+        }
+      }
+      Transaction {
+        From
+        Hash
       }
     }
   }
 }
+
 ```
 
-### Response Fields
+## Historical Trade Queries (Polygon APIs)
 
-- **`Block.Time`**: Timestamp of the trade
-- **`Transaction.Hash`**: Blockchain transaction hash
-- **`Trade.AmountInUSD`**: Total trade value in USD
-- **`Trade.PriceInUSD`**: Price per unit in USD
-- **`Trade.Side`**: Buy/sell side information
-- **`Trade.Ids`**: Position token IDs (represents Yes/No outcomes)
-- **`Trade.OrderId`**: Unique order identifier
+Use **DEXTradeByTokens** when you need **historical** Polymarket data (date ranges, backtests, aggregations). For real-time or recent trades with rich prediction fields (Question, MarketId, Outcome), use [PredictionTrades with a Polymarket filter](/docs/examples/prediction-market/prediction-trades-api#polymarket-only-filter) instead.
 
-## Historical Trade Queries
+### Get latest trades (historical)
 
-### Get Latest Trades
+Retrieve the most recent Polymarket trades with pagination. Uses **DEXTradeByTokens** for full historical access.
 
-Retrieve the most recent Polymarket trades with pagination.
-
-**Try it live:** [Polymarket Trades API](https://ide.bitquery.io/polymarket-trades-api)
+**Try it live:** [Polymarket Trades API](https://ide.bitquery.io/Polymarket-trade-stream)
 
 ```graphql
 {
@@ -138,30 +124,13 @@ Retrieve the most recent Polymarket trades with pagination.
       limit: { count: 100 }
       where: {
         TransactionStatus: { Success: true }
-        Trade: {
-          Side: {
-            Currency: {
-              SmartContract: {
-                is: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
-              }
-            }
-          }
-          Dex: { ProtocolName: { is: "polymarket" } }
-        }
+        Trade: { Dex: { ProtocolName: { is: "polymarket" } } }
       }
     ) {
-      Block {
-        Time
-      }
-      Transaction {
-        Hash
-      }
+      Block { Time }
+      Transaction { Hash }
       Trade {
-        Dex {
-          OwnerAddress
-          ProtocolFamily
-          ProtocolName
-        }
+        Dex { OwnerAddress ProtocolFamily ProtocolName }
         AmountInUSD
         Amount
         PriceInUSD
@@ -169,28 +138,18 @@ Retrieve the most recent Polymarket trades with pagination.
           Type
           Amount
           AmountInUSD
-          Currency {
-            Symbol
-            SmartContract
-            Name
-          }
-          Ids
-          OrderId
-        }
-        Currency {
-          Symbol
-          SmartContract
-          Name
+          Currency { Symbol SmartContract Name }
         }
         Ids
         OrderId
+        Currency { Symbol SmartContract Name }
       }
     }
   }
 }
 ```
 
-### Filter by Time Range
+### Filter by time range
 
 ```graphql
 {
@@ -386,38 +345,21 @@ Example: Convert condition ID to position token IDs using this formula:
 }
 ```
 
-## Use Cases
+## Choosing the right API (advanced)
 
-### Trading Bot Development
-- Monitor real-time price movements
-- Track order book changes
-- Execute automated trading strategies
+You can access Polymarket trade data through two APIs. Use this when you need something beyond the [real-time stream](#real-time-trade-streaming) or [historical DEXTradeByTokens](#historical-trade-queries-dextradebytokens) examples above.
 
-### Market Analysis
-- Analyze trading volume patterns
-- Track market sentiment through position token ratios
-- Calculate price volatility
+| Need | Use | Cube | Historical? |
+|------|-----|------|-------------|
+| **Real-time stream** or **recent trades** with Question, MarketId, Outcome, Buyer/Seller | [Prediction Market Trades API](/docs/examples/prediction-market/prediction-trades-api) | `EVM` → `PredictionTrades` with `Trade.Prediction.Marketplace.ProtocolName: { is: "polymarket" }` | Recent/live only today; we may add historical data in the future |
+| **Historical trades**, date ranges, backtests, volume by hour, top markets | DEXTradeByTokens (this page) | `EVM` → `DEXTradeByTokens` with `Trade.Dex.ProtocolName: { is: "polymarket" }` | **Yes** — full history |
 
-### Portfolio Tracking
-- Monitor positions across multiple markets
-- Calculate P&L in real-time
-- Track market exposure
-
-### Risk Management
-- Set up alerts for large trades
-- Monitor liquidation events
-- Track market manipulation attempts
-
-## Best Practices
-
-1. **Use Streaming for Real-time Apps**: Subscriptions provide immediate updates without polling
-2. **Implement Rate Limiting**: Respect API limits and implement exponential backoff
-3. **Cache Frequently Used Data**: Store market metadata locally to reduce API calls
-4. **Handle Reorgs**: Account for blockchain reorganizations in your application logic
-5. **Validate Data**: Always verify trade data against on-chain transactions
+- **PredictionTrades**: Best for live streams and recent activity with rich prediction fields. Today it does not provide deep historical data; for full history use DEXTradeByTokens below. We may add Prediction Market historical data in the future.
+- **DEXTradeByTokens**: Use for historical Polymarket trade data, time-range queries, and aggregations (e.g. volume by hour, top markets by volume).
 
 ## Related Documentation
 
+- [Prediction Market Trades API](/docs/examples/prediction-market/prediction-trades-api) — real-time and recent Polymarket trades with Question, MarketId, Outcome (use filter `ProtocolName: { is: "polymarket" }`);
 - [Polymarket CTF Exchange API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-ctf-exchange)
 - [Polymarket Market Data API](https://docs.bitquery.io/docs/examples/polymarket-api/get-market-data)
 - [UMA Adapter Contract API](https://docs.bitquery.io/docs/examples/polymarket-api/uma-adapter-contract)

@@ -20,12 +20,14 @@ The **PredictionTrades** API returns **buy/sell** activity on outcome tokens for
 
 **Network:** Polygon (`network: matic`). Part of the [Prediction Market API](../prediction-market-api) lifecycle (Management → **Trades** → Settlement).
 
+:::info Historical data
+PredictionTrades currently does **not** provide historical trade data beyond 8 hours. For **historical** Polymarket trades (date ranges, backtests, volume over time), use the [Polymarket Trade APIs](/docs/examples/polymarket-api/polymarket-trade-apis) with **DEXTradeByTokens** (EVM). We may add Prediction Market historical data in the future.
+:::
+
 ### Trade direction
 
 - **IsOutcomeBuy: true** — Seller (maker) gives USDC (collateral), Buyer (taker) gives outcome tokens.
 - **IsOutcomeBuy: false** — Buyer gives USDC (collateral), Seller gives outcome tokens.
-
----
 
 ## Key fields
 
@@ -37,7 +39,15 @@ The **PredictionTrades** API returns **buy/sell** activity on outcome tokens for
 - **Trade.Prediction.OutcomeToken** — Outcome as a token: Name, Symbol, SmartContract, **AssetId** (use for volume/price per outcome).
 - **Trade.Prediction.Marketplace** — ProtocolName, ProtocolFamily, SmartContract, ProtocolVersion.
 
----
+## Polymarket-only filter {#polymarket-only-filter}
+
+To restrict results to **Polymarket** only, add this to your `where` clause:
+
+```graphql
+Trade: { Prediction: { Marketplace: { ProtocolName: { is: "polymarket" } } } }
+```
+
+Example: real-time stream for Polymarket only — use the [real-time trades stream](#real-time-trades-stream) query and add the filter above inside `PredictionTrades(where: { ... })`.
 
 ## Real-time trades stream
 
@@ -118,10 +128,7 @@ subscription PredictionTradesStream {
   }
 }
 ```
-
----
-
-## Latest trades (historical)
+## Latest Prediction Market trades API
 
 Fetch the most recent prediction market trades with full details, ordered by block time.
 
@@ -204,10 +211,7 @@ query LatestPredictionTrades {
   }
 }
 ```
-
----
-
-## Trades for a specific market (subscription)
+## Stream Trades for a specific market 
 
 Subscribe to trades for one market only by filtering on **Question.MarketId**. Replace `"1391179"` with your market ID.
 
@@ -293,9 +297,6 @@ subscription TradesForSpecificMarket {
   }
 }
 ```
-
----
-
 ## Trades for a specific trader
 
 Fetch all trades where the given address is either **Buyer** or **Seller**. Pass the trader address as the `$trader` variable.
@@ -393,9 +394,6 @@ query TradesForTrader($trader: String) {
   "trader": "0x101f2f96db1e39a9f36a1fa067751d541fd38e1a"
 }
 ```
-
----
-
 ## Total volume and Yes/No volume for a market
 
 Aggregate USD volume for a market over a time window: total volume plus volume per outcome. Many markets have **two outcomes** (e.g. Yes/No, Up/Down); this example uses a **Yes/No** market, so we split volume by outcome label "Yes" and "No". Pass the market’s outcome token **AssetId**s in `$marketAssets` (typically two: one per outcome).
@@ -450,9 +448,6 @@ query MarketVolumeByOutcome($marketAssets: [String!]) {
   ]
 }
 ```
-
----
-
 ## Current price per outcome (latest trade)
 
 Get the latest trade price for each outcome in a market (e.g. Yes/No, Up/Down—each market defines its own outcome labels). Uses `limitBy` so you get one row per outcome (by `Trade_Prediction_OutcomeToken_AssetId`), with **Price** and **PriceInUSD** taken at the maximum block time (most recent). The response includes **Outcome.Label** so you can see which outcome each price refers to.
@@ -491,9 +486,6 @@ query CurrentPricePerOutcome {
   }
 }
 ```
-
----
-
 ## Use cases
 
 | Use case | Approach |

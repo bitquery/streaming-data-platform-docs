@@ -14,6 +14,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Ripple](#ripple)
 - [Cosmos](#cosmos)
 - [NFT APIs](#nft-apis)
+- [Prediction Market](#prediction-market)
 - [Polymarket](#polymarket)
 - [x402 APIs](#x402-apis)
 
@@ -1080,7 +1081,7 @@ This query gets the latest 10 NFT trades on Ethereum mainnet. You can increase t
 This query gets the top 10 traded NFTs based on the number of trades within a specified date range. You can change the filters such as the date range and limit.  
 ▶️ [Top Traded NFTs](https://ide.bitquery.io/Top-traded-NFT-tokens-in-a-month)
 
-## Polymarket
+## Prediction Market
 
 ### Prediction Market Settlements
 
@@ -1139,6 +1140,8 @@ Aggregate USD volume for a market over a time window: total volume plus volume p
 
 Get the latest trade price for each outcome in a market. Uses `limitBy` for one row per outcome, with Price and PriceInUSD at the most recent block time.
 ▶️ [Current Price per Outcome](https://ide.bitquery.io/Current-price-inside-the-market-for-all-options-based-on-latest-trade)
+
+## Polymarket
 
 ### Main Polymarket Contract
 
