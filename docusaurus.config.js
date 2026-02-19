@@ -929,7 +929,7 @@ const config = {
           },
           {
             to: "https://docs.bitquery.io/docs/graphql/indexed-fields-reference/",
-            label: "Index List",
+            label: "Indexed Fields",
             position: "left",
           },
           {

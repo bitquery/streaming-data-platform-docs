@@ -796,19 +796,50 @@ const sidebars = {
           "APIs for accessing prediction market data and trading information",
       },
       items: [
-        "examples/prediction-market/prediction-market-api",
-        "examples/prediction-market/prediction-trades-api",
-        "examples/prediction-market/prediction-settlements-api",
         {
           type: "category",
-          label: "Polymarket",
+          label: "Unified API",
+          link: {
+            type: "generated-index",
+            title: "Unified Prediction Market API",
+            description:
+              "Universal API for querying market lifecycle, trades, and settlements across prediction markets",
+          },
+          items: [
+            "examples/prediction-market/prediction-market-api",
+            "examples/prediction-market/prediction-trades-api",
+            "examples/prediction-market/prediction-settlements-api",
+          ],
+        },
+        {
+          type: "category",
+          label: "Polymarket API",
+          link: {
+            type: "generated-index",
+            title: "Polymarket Implementation Guide",
+            description:
+              "Build prediction market apps on Polymarket: Get prices, trades, markets, and oracle resolutions",
+          },
           items: [
             "examples/polymarket-api/polymarket-api",
             "examples/polymarket-api/get-market-data",
-            "examples/polymarket-api/main-polymarket-contract",
-            "examples/polymarket-api/polymarket-ctf-exchange",
-            "examples/polymarket-api/uma-adapter-contract",
             "examples/polymarket-api/polymarket-trade-apis",
+            {
+              type: "category",
+              label: "Specific Contract APIs",
+              link: {
+                type: "generated-index",
+                title: "Polymarket Smart Contracts",
+                description:
+                  "Detailed documentation for Polymarket smart contracts and their events",
+              },
+              items: [
+                "examples/polymarket-api/main-polymarket-contract",
+                "examples/polymarket-api/polymarket-ctf-exchange",
+                "examples/polymarket-api/uma-adapter-contract",
+              ],
+            },
+            
           ],
         },
       ],
