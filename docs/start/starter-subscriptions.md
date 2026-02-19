@@ -10,6 +10,7 @@ Below is a set of subscriptions that are curated for you to get started with Bit
 - [BSC (Binance Smart Chain)](#bsc-binance-smart-chain)
 - [TRON](#tron)
 - [NFT Streams](#nft-streams)
+- [Polymarket](#polymarket)
 - [x402 Streams](#x402-streams)
 
 ## Cross-Chain / Multi-Chain APIs
@@ -563,6 +564,27 @@ Subscribe to real-time NFT balance updates for a specific address and collection
 Monitor NFT transfers for a specific collection across all transactions. This helps track NFT movements and ownership changes.
 
 ▶️ [Track Specific NFT Balance Changes](https://ide.bitquery.io/Track-specific-NFTs-Balance-Changes)
+
+## Polymarket
+
+### Prediction Market Settlements
+
+#### Real-Time Settlement Stream
+
+Subscribe to live Split, Merge, and Redemption events as they occur on Polygon.
+▶️ [Real-Time Prediction Market Settlements Stream](https://ide.bitquery.io/realtime-predicion-market-settlements-stream)
+
+### Prediction Market Trades
+
+#### Real-Time Trades Stream
+
+Subscribe to live prediction market trades as they occur on Polygon (successful transactions only).
+▶️ [Prediction Market Trades Stream](https://ide.bitquery.io/prediction-market-trades-subscription)
+
+#### Trades for a Specific Market (Stream)
+
+Subscribe to trades for one market only by filtering on Question.MarketId. Replace the market ID in the query with your target market.
+▶️ [Subscribe to Specific Market Trades](https://ide.bitquery.io/subscribe-to-specific-market-trades)
 
 ## x402 Streams
 

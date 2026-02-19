@@ -1082,6 +1082,64 @@ This query gets the top 10 traded NFTs based on the number of trades within a sp
 
 ## Polymarket
 
+### Prediction Market Settlements
+
+Prediction market settlement events (Split, Merge, Redemption) on Polygon. See [Prediction Market Settlements API](/docs/examples/prediction-market/prediction-settlements-api) for full details.
+
+#### Latest Settlements
+
+Fetch the most recent settlements with full details, ordered by block time.
+▶️ [Latest Prediction Market Settlements](https://ide.bitquery.io/latest-prediction-market-settlements_2)
+
+#### Redemption / Merge / Split Count (Last 1 Hour)
+
+Count how many settlement events occurred in the last hour, grouped by event signature (Split, Merge, Redemption).
+▶️ [Redemptions Merge Split Count](https://ide.bitquery.io/redemptions-merge-split-count-in-last-1-hour)
+
+#### Latest Whale Settlements
+
+Find the most recent high-value redemptions (e.g. amount ≥ 10,000 in outcome token units). Useful for tracking large payouts and whale activity.
+▶️ [Latest Whale Settlements](https://ide.bitquery.io/latest-whale-settlements-on-prediction-market_1)
+
+#### Top 10 Winners of a Specific Market Question
+
+Rank holders by total redeemed amount for one market (filter by question title).
+▶️ [Top 10 Winners of a Market Question](https://ide.bitquery.io/top-10-winners-of-a-market-question)
+
+#### Top 10 Market Questions by Redeemed Amount (Last 1 Hour)
+
+Aggregate redemptions by market question and sort by total redeemed amount. See which markets had the most payout activity recently.
+▶️ [Top 10 Market Questions by Redeemed Amount](https://ide.bitquery.io/top-10-market-questions-in-last-1-hour_1)
+
+#### Top 10 Redeemers (Last 1 Hour)
+
+Rank addresses by total amount redeemed in the last hour across all markets. Useful for leaderboards and whale tracking.
+▶️ [Top 10 Redeemers](https://ide.bitquery.io/top-10-redeemers)
+
+### Prediction Market Trades
+
+Prediction market buy/sell activity on outcome tokens on Polygon. See [Prediction Market Trades API](/docs/examples/prediction-market/prediction-trades-api) for full details.
+
+#### Latest Trades
+
+Fetch the most recent prediction market trades with full details, ordered by block time.
+▶️ [Latest Prediction Market Trades](https://ide.bitquery.io/latest-prediction-market-trades)
+
+#### Trades for a Specific Trader
+
+Fetch all trades where the given address is either Buyer or Seller. Pass the trader address as the `$trader` variable.
+▶️ [Trades for a Specific Trader](https://ide.bitquery.io/Trades-for-a-specific-trader)
+
+#### Total Volume and Yes/No Volume for a Market
+
+Aggregate USD volume for a market over a time window: total volume plus volume per outcome (e.g. Yes/No). Pass the market's outcome token AssetIds in `$marketAssets`.
+▶️ [Total Volume and Yes/No Volume for a Market](https://ide.bitquery.io/total-volume-outcome-1-volume-outcome-2-volume-of-a-market)
+
+#### Current Price per Outcome (Latest Trade)
+
+Get the latest trade price for each outcome in a market. Uses `limitBy` for one row per outcome, with Price and PriceInUSD at the most recent block time.
+▶️ [Current Price per Outcome](https://ide.bitquery.io/Current-price-inside-the-market-for-all-options-based-on-latest-trade)
+
 ### Main Polymarket Contract
 
 #### All Available Events

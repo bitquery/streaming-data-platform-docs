@@ -125,7 +125,7 @@ query PredictionManagements {
 
 ## PredictionTrades (Recent Buys)
 
-Buy/sell activity on outcome tokens: taker/maker (Buyer/Seller), amounts, and whether the trade is a buy or sell of the outcome.
+Buy/sell activity on outcome tokens: taker/maker (Buyer/Seller), amounts, and whether the trade is a buy or sell of the outcome. For more examples (real-time stream, trades by market or trader, volume by outcome, current prices), see the [Prediction Market Trades API](../prediction-trades-api) doc.
 
 ```graphql
 query PredictionTrades {
@@ -187,8 +187,8 @@ query PredictionTrades {
 
 ### Key fields
 
-- **Trade.OutcomeTrade.IsOutcomeBuy** — `true`: taker (Buyer) pays USDC (collateral), maker (Seller) gives outcome tokens. `false`: maker pays USDC, taker gives outcome tokens.
-- **Trade.OutcomeTrade** — Amount, Buyer (taker), Seller (maker), CollateralAmount.
+- **Trade.OutcomeTrade.IsOutcomeBuy** — `true`: Seller (maker) gives USDC (collateral), Buyer (taker) gives outcome tokens. `false`: Buyer gives USDC (collateral), Seller gives outcome tokens.
+- **Trade.OutcomeTrade** — Amount, Buyer, Seller, CollateralAmount.
 - **Trade.Prediction.Question** — MarketId (full info: `https://gamma-api.polymarket.com/markets/{MarketId}`), Title, Id, Image, CreatedAt.
 - **Trade.Prediction.Outcome** — Label, Id (tokenId), Index (index in Condition.Outcomes; see PredictionManagements).
 - **Trade.Prediction.CollateralToken** — Token used to pay for the outcome (e.g. USDC): Symbol, Name, Decimals, SmartContract.
@@ -198,7 +198,7 @@ query PredictionTrades {
 
 ## PredictionSettlements
 
-Split, merge, and redemption of outcome tokens (minting, merging positions, redeeming after resolution). For more examples (real-time stream, whale settlements, top winners, top markets), see the [Prediction Market Settlements API](/docs/examples/prediction-market/prediction-settlements-api) doc.
+Split, merge, and redemption of outcome tokens (minting, merging positions, redeeming after resolution). For more examples (real-time stream, whale settlements, top winners, top markets), see the [Prediction Market Settlements API](../prediction-settlements-api) doc.
 
 ```graphql
 query PredictionSettlements {
