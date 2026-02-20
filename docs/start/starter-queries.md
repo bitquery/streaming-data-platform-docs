@@ -224,6 +224,11 @@ This query retrieves the latest liquidity events for a specific DEX pool on Ethe
 
 ▶️ [Top Liquidity Pools of a token on Ethereum](https://ide.bitquery.io/top-liquidity-pools-of-atoken-on-ethereum)
 
+#### Liquidity of All Pools of a Token on Ethereum
+
+Get latest liquidity across all pools where the token appears as either pool side.
+▶️ [Liquidity of All Pools of a Token on Ethereum](https://ide.bitquery.io/liquidiy-of-all-token-pools_1)
+
 ## Solana
 
 ### Balance APIs
@@ -443,6 +448,11 @@ This query retrieves all instances of a specific token pair across decentralized
 
 This query retrieves the latest changes to liquidity pools on Solana, including the change amount and the price at which the change happened. This query also uses only the real-time data set.  
 ▶️ [Solana Liquidity Changes](https://ide.bitquery.io/Solana-DEXPools)
+
+#### Liquidity of All Pools of a Token on Solana
+
+Get latest liquidity snapshots for all pools where a token is either base or quote currency.
+▶️ [Liquidity of All Pools of a Token on Solana](https://ide.bitquery.io/liqidity-of-all-pools-of-a-token)
 
 #### Latest Pools Created on Raydium
 

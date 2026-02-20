@@ -159,6 +159,58 @@ query MyQuery {
 }
 ```
 
+## Get Liquidity of All Pools for a Token
+
+This query returns current liquidity across all pools where a token appears as either `CurrencyA` or `CurrencyB`. It is useful when you want a token-wide liquidity view across multiple pools and DEXes.
+
+You can find the query [here](https://ide.bitquery.io/liquidiy-of-all-token-pools_1)
+
+```graphql
+query MyQuery($token: String) {
+  EVM {
+    DEXPoolEvents(
+      where: {
+        TransactionStatus: { Success: true }
+        any: [
+          { PoolEvent: { Pool: { CurrencyA: { SmartContract: { is: $token } } } } }
+          { PoolEvent: { Pool: { CurrencyB: { SmartContract: { is: $token } } } } }
+        ]
+      }
+    ) {
+      PoolEvent {
+        Dex {
+          SmartContract
+        }
+        Liquidity {
+          AmountCurrencyA(maximum: Block_Time)
+          AmountCurrencyAInUSD(maximum: Block_Time)
+          AmountCurrencyB(maximum: Block_Time)
+          AmountCurrencyBInUSD(maximum: Block_Time)
+        }
+        Pool {
+          CurrencyA {
+            Name
+            Symbol
+            SmartContract
+          }
+          CurrencyB {
+            Name
+            Symbol
+            SmartContract
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "token": "0x8eD97a637A790Be1feff5e888d43629dc05408F6"
+}
+```
+
 ## Realtime Liquidity Stream of a Specific Pool
 
 This subscription query monitors real-time liquidity changes for a specific DEX pool on Ethereum. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.

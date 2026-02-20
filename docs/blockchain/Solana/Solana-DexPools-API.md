@@ -205,6 +205,87 @@ query ($token: String) {
 
 Check data here on [DEXrabbit](https://dexrabbit.com/solana/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm#pools).
 
+## Get Latest Liquidity for All Pools of a Token
+
+Use this query to get latest liquidity snapshots for all pools where a token appears either on the base side or quote side.
+
+Try the query [here](https://ide.bitquery.io/liqidity-of-all-pools-of-a-token)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query GetLatestLiquidityForPool {
+  Solana(dataset: realtime) {
+    DEXPools(
+      where: {
+        Pool: {
+          Market: {
+            BaseCurrency: { Name: { not: "" } }
+            QuoteCurrency: { Name: { not: "" } }
+          }
+        }
+        any: [
+          {
+            Pool: {
+              Market: {
+                BaseCurrency: {
+                  MintAddress: {
+                    is: "F5tfztTnE4sYsMhZT5KrFpWvHmYSfJZoRjCuxKPbpump"
+                  }
+                }
+              }
+            }
+          }
+          {
+            Pool: {
+              Market: {
+                QuoteCurrency: {
+                  MintAddress: {
+                    is: "F5tfztTnE4sYsMhZT5KrFpWvHmYSfJZoRjCuxKPbpump"
+                  }
+                }
+              }
+            }
+          }
+        ]
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Pool {
+        Market {
+          MarketAddress
+          BaseCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+          QuoteCurrency {
+            MintAddress
+            Symbol
+            Name
+          }
+        }
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        Quote {
+          PostAmount(maximum: Block_Slot)
+          PostAmountInUSD(maximum: Block_Slot)
+        }
+        Base {
+          PostAmount(maximum: Block_Slot)
+          PostAmountInUSD(maximum: Block_Slot)
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Latest Price of Token Based on Liqudity
 
 [This](https://ide.bitquery.io/latest-price-based-on-liquidity_2) subscription given below returns the latest and real-time price and other info related to the token, DEX and market for the following token `LMFzmYL6y1FX8HsEmZ6yNKNzercBmtmpg2ZoLwuUboU`.
