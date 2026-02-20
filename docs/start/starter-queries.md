@@ -161,6 +161,12 @@ Retrieves the all-time high (ATH) price in USD for a specified token contract.
 This query gets you Price Change 5min, 1h, 6h and 24h of a specific token on the Ethereum network.
 ▶️ [Get Price Change 5min, 1h, 6h and 24h of a specific token](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_4)
 
+#### Historical Price and Volume Data (Volume & Price, Last 24h using Trading API)
+
+Use this API to get historical price and volume for a specific token over the past 24 hours, with 1h, 4h, and 24h breakdowns.  
+
+▶️ [Historical Price and Volume Data](https://ide.bitquery.io/historical-price-and-historical-volume)
+
 #### Top 10 Eth Tokens by Price Change in last 1h
 
 This query gets you top 10 Eth Tokens by Price Change in last 1h.
@@ -397,6 +403,12 @@ Get the pair stats by using pair address.
 
 Get aggregated statistics across supported pairs of a token.
 ▶️ [Get Aggregated Token Pair Stats](https://ide.bitquery.io/traded-pairs-stats-of-a-token)
+
+#### Historical Price and Volume Data (Volume & Price, Last 24h using Trading API)
+
+Use this API to get historical price and volume for a specific token over the past 24 hours, with 1h, 4h, and 24h breakdowns.  
+
+▶️ [Historical Price and Volume Data](https://ide.bitquery.io/historical-price-and-historical-volume)
 
 #### Get Multiple Token Analytics
 
