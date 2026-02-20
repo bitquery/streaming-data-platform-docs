@@ -10,6 +10,8 @@ GraphQL query optimization is a crucial aspect of utilizing V2 APIs to their ful
 
 In this section, we will see how to optimize your V2 API queries.
 
+
+
 ### Understanding Datasets
 
 Choosing the right dataset is critical for both correctness and performance. We offer three datasets with different guarantees and latency characteristics:
@@ -140,6 +142,13 @@ Below is an example query that retrieves information about limitBy. For each cal
   }
 }
 ```
+
+### Understanding Indexes
+
+In each table, certain columns are used as indexes, you can use those columns to sort in `orderby` field to improve time to response.
+
+A detailed list is available in this [Indexes](https://docs.bitquery.io/docs/graphql/indexed-fields-reference/) page.
+
 
 ### Sorting Queries in GraphQL
 
