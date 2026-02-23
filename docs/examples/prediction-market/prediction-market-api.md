@@ -15,6 +15,8 @@ keywords:
   - outcome tokens
 ---
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Prediction Market API
 
 The **Prediction Market API** is a **universal** API for querying **market lifecycle events**, **trades**, and **settlements** across prediction markets (e.g. Polymarket). Use it to filter by question title, event type, outcome, collateral token, and more. Additional prediction markets will be supported soon.
@@ -34,6 +36,8 @@ Flow: **Management** (Created) → **Trades** (Buy/Sell) → **Settlement** (Spl
 This is a **universal** prediction market API: the same cubes and fields work across supported chains. Use `EVM(network: matic)` for Polygon today; more chains will be added over time.
 
 For contract-level and event-based Polymarket data (e.g. OrderFilled, ConditionResolution), see the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/) docs.
+
+<VideoPlayer url="https://www.youtube.com/watch?v=kb7lFJ2RnXE" />
 
 ## PredictionManagements
 
