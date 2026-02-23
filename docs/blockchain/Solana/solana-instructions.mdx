@@ -341,6 +341,111 @@ subscription {
 }
 ```
 
+### Latest token burns on Solana
+
+The query below fetches the latest token burn instructions on Solana by filtering for the **Token Program** (`TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA`) where the method includes `burn`. The **second address in the `Accounts` list is the token address being burnt**.
+
+You can run the query [here](https://ide.bitquery.io/Latest-token-burns-on-Solana#).
+
+```graphql
+{
+  Solana(network: solana) {
+    Instructions(
+      where: {
+        Instruction: {
+          Program: {
+            Method: { includes: "burn" }
+            Address: { is: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" }
+          }
+        }
+      }
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Instruction {
+        Program {
+          Method
+          Name
+          Address
+        }
+        Accounts {
+          Address
+        }
+        Index
+        BalanceUpdatesCount
+      }
+      Transaction {
+        Signature
+      }
+      Block {
+        Time
+        Slot
+      }
+    }
+  }
+}
+```
+
+### Balance updates for token burn instructions
+
+The query below uses the **InstructionBalanceUpdates** API to fetch balance updates that occur when token burn instructions execute. It filters for the Token Program (`TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA`) where the method includes `burn`, and returns balance deltas (Amount, PreBalance, PostBalance), currency details, and account info for each update.
+
+You can run the query [here](https://ide.bitquery.io/solana-balance-updates-executing-burn-instruction).
+
+```graphql
+{
+  Solana {
+    InstructionBalanceUpdates(
+      limit: { count: 20 }
+      where: {
+        Transaction: {}
+        Instruction: {
+          Program: {
+            Method: { includesCaseInsensitive: "burn" }
+            Address: { is: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" }
+          }
+        }
+      }
+      orderBy: { descending: Block_Time }
+    ) {
+      BalanceUpdate {
+        Account {
+          Address
+          Owner
+        }
+        Amount
+        Currency {
+          Name
+          Symbol
+          MintAddress
+          Decimals
+        }
+        Index
+        AmountInUSD
+        PreBalance
+        PreBalanceInUSD
+        PostBalance
+        PostBalanceInUSD
+      }
+      Instruction {
+        Program {
+          Method
+          Address
+        }
+      }
+      Transaction {
+        Signature
+        FeePayer
+      }
+      Block {
+        Time
+        Height
+      }
+    }
+  }
+}
+```
+
 ### Alternative: Token Burn Tracking via TokenSupplyUpdates API
 
 You can also track real-time token burn using the TokenSupplyUpdates API. Check out the [following example](https://ide.bitquery.io/token-burn-example-solana).
