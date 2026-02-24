@@ -823,6 +823,7 @@ const sidebars = {
           },
           items: [
             "examples/polymarket-api/polymarket-api",
+            "examples/polymarket-api/polymarket-markets-api",
             {
               type: "category",
               label: "Specific Contract APIs",
