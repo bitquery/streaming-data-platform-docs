@@ -6,6 +6,8 @@ sidebar_position: 6
 
 In this section we will see how to get Ethereum DEX pool liquidity information using Bitquery API. The liquidity API helps you monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on Ethereum DEX pools.
 
+> **Note:** This API also works for other EVM chains such as Base, BSC, and Arbitrum—just change the network parameters in your request.
+
 <head>
 <meta name="title" content="Ethereum DEX Pool Liquidity Data with Ethereum Liquidity API"/>
 <meta name="description" content="Get real-time liquidity and pool reserve data for Ethereum DEX pools through our Liquidity API."/>

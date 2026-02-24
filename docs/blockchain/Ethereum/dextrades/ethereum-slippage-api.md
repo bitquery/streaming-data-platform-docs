@@ -6,6 +6,8 @@ sidebar_position: 3
 
 In this section we will see how to get Ethereum DEX pool slippage information using our API. The slippage API helps you understand price impact and liquidity depth for token swaps on Ethereum DEX pools.
 
+> **Note:** This API also works for other EVM chains such as Base, BSC, and Arbitrum—just change the network parameters in your request.
+
 <head>
 <meta name="title" content="Ethereum DEX Pool Slippage Data with Ethereum Slippage API"/>
 <meta name="description" content="Get slippage and price impact data for Ethereum DEX pools through our Slippage API."/>
