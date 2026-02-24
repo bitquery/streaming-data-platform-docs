@@ -125,34 +125,40 @@ subscription{
 
 ## Get Price of a Token
 
-This query will give you the latest Price of a specified token using DEXTrades API. Here we have calculated the price of a token in USD and also against the sell currency. Here is the [saved query link](https://ide.bitquery.io/Price-of-a-token-in-realtime)
+This query will give you the latest Price of a specified token using Trading API. Here is the [saved query link](https://ide.bitquery.io/token-usd-price-using-trading-api)
 
 ```
-query MyQuery {
-  EVM(network: eth, dataset: realtime) {
-    DEXTrades(
-      limit: {count: 1}
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a"}}}, Sell: {Currency: {SmartContract: {is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"}}}, Dex: {Pair: {SmartContract: {is: "0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d"}}}}, TransactionStatus: {Success: true}}
+query MyQuery { 
+  Trading {
+    Pairs(
+      where: {Token: {Id: {is: "bid:eth:0xa12cc123ba206d4031d1c7f6223d1c2ec249f4f3"}}, Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}}
+      limit: {count: 10}
+      orderBy: {descending: Interval_Time_Start}
     ) {
-      Trade {
-        Buy {
-          Currency {
-            Symbol
-          }
-          Price_In_USD: PriceInUSD
-          Price_against_sell_currency: Price
+      Token {
+        Name
+        Address
+        Id
+        NetworkBid
+      }
+      Price {
+        Average {
+          Mean
+          Estimate
+          ExponentialMoving
+          SimpleMoving
+          WeightedSimpleMoving
         }
-        Sell {
-          Currency {
-            Symbol
-          }
+        Ohlc {
+          Open
+          High
+          Low
+          Close
         }
       }
     }
   }
 }
-
 
 ```
 
@@ -281,34 +287,51 @@ query MyQuery($network: evm_network, $token: String,$pairAddress: String , $min5
 }
 ```
 
-## Get OHLC of a token pair
+## Get OHLC Data for a Token Pair
 
-This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a specific token traded on DEXes over a defined time period and interval. You can use the `quoteCurrency` to input the contract address of the currency used for quoting the token prices.
+This query fetches the Open, High, Low, and Close (OHLC) price data (USD-quoted) for a given token pair across DEXs, using a specified quote token and time interval (in seconds). Specify the base token and quote token contract addresses in the `Token.Id` and `QuoteToken.Id` filters. The `Interval.Time.Duration` field allows you to define the candle interval (e.g., `3600` for 1 hour). The query returns the most recent OHLC data for up to 10 pairs sorted by their interval start time.
 
-You can find the query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum_1)
+You can find the query [here](https://ide.bitquery.io/ohlc-of-a-token-pair-1-hour-interval)
 
 ```
-{
-  EVM(network: eth, dataset: archive) {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_testfield"}
-      where: {Trade: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}, Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, Type: {is: buy}}, PriceAsymmetry: {lt: 0.1}}}
+query MyQuery { 
+  Trading {
+    Pairs(
+      where: {Token: {Id: {is: "bid:eth:0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, QuoteToken: {Id: {is: "bid:eth:0xdac17f958d2ee523a2206206994597c13d831ec7"}}, Interval: {Time: {Duration: {eq: 3600}}}, Price: {IsQuotedInUsd: true}}
       limit: {count: 10}
+      orderBy: {descending: Interval_Time_Start}
     ) {
-      Block {
-        testfield: Time(interval: {in: hours, count: 1})
+      Token {
+        Name
+        Address
+        Id
+        NetworkBid
       }
-      volume: sum(of: Trade_Amount)
-      Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Number)
-        close: Price(maximum: Block_Number)
+      QuoteToken{
+        Name
+        Address
+        Id
+        NetworkBid
       }
-      count
+      Price {
+        Average {
+          Mean
+          Estimate
+          ExponentialMoving
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
     }
   }
 }
+
 ```
 
 ## Top Traders of a token

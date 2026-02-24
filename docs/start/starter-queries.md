@@ -48,9 +48,9 @@ For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ET
 
 #### Historical Price and Volume Data (Volume & Price, Last 24h)
 
-Use this API to get historical price and volume for a specific token (example: bid:solana:9WHhgXJBGgxghkh5wAUWJFHVbnsRbonRYTnH2EChpump) over the past 24 hours, with 1h, 4h, and 24h breakdowns.  
+Use this API to get historical price and volume over the past 24 hours, with 1h, 4h, and 24h breakdowns.  
 
-▶️ [Historical Price and Volume Data](https://ide.bitquery.io/historical-price-and-historical-volume)
+▶️ [Historical Price and Volume Data](https://ide.bitquery.io/multiple-tokens-volume_1)
 
 ## Ethereum
 

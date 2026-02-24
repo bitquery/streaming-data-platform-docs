@@ -68,6 +68,95 @@ subscription MyQuery {
 
 ```
 
+
+## Get Price of a Token
+
+This query will give you the latest Price of a specified token using Trading API. Here is the [saved query link](https://ide.bitquery.io/token-usd-price-using-trading-api_1)
+
+```
+query MyQuery { 
+  Trading {
+    Pairs(
+      where: {Token: {Id: {is: "bid:solana:8jiVXftnn2ZG6bugK7HAH5j2G3D6TpsG521gqsWwpump"}}, Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}}
+      limit: {count: 10}
+      orderBy: {descending: Interval_Time_Start}
+    ) {
+      Token {
+        Name
+        Address
+        Id
+        NetworkBid
+      }
+      Price {
+        Average {
+          Mean
+          Estimate
+          ExponentialMoving
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
+    }
+  }
+}
+
+```
+
+
+## Get OHLC Data for a Token Pair
+
+This query fetches the Open, High, Low, and Close (OHLC) price data (USD-quoted) for a given token pair across DEXs, using a specified quote token and time interval (in seconds). Specify the base token and quote token contract addresses in the `Token.Id` and `QuoteToken.Id` filters. The `Interval.Time.Duration` field allows you to define the candle interval (e.g., `3600` for 1 hour). The query returns the most recent OHLC data for up to 10 pairs sorted by their interval start time.
+
+You can find the query [here](https://ide.bitquery.io/ohlc-of-a-solana-token-pair-1-hour-interval)
+
+```
+query MyQuery { 
+  Trading {
+    Pairs(
+      where: {Token: {Id: {is: "bid:solana:8jiVXftnn2ZG6bugK7HAH5j2G3D6TpsG521gqsWwpump"}}, QuoteToken: {Id: {is: "bid:solana:So11111111111111111111111111111111111111112"}}, Interval: {Time: {Duration: {eq: 3600}}}, Price: {IsQuotedInUsd: true}}
+      limit: {count: 10}
+      orderBy: {descending: Interval_Time_Start}
+    ) {
+      Token {
+        Name
+        Address
+        Id
+        NetworkBid
+      }
+      QuoteToken{
+        Name
+        Address
+        Id
+        NetworkBid
+      }
+      Price {
+        Average {
+          Mean
+          Estimate
+          ExponentialMoving
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
+    }
+  }
+}
+
+```
+
+
 ## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token of DEXScreener
 
 The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
