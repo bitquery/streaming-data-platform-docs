@@ -13,6 +13,8 @@ keywords:
   - Bitquery GraphQL prediction
 ---
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Prediction Market Managements API
 
 The **PredictionManagements** API returns **market lifecycle** events for prediction markets (e.g. Polymarket) on Polygon: **Created** (new market) and **Resolved** (outcome determined). Use it to stream live creations and resolutions, list latest events, and count Created vs Resolved over a time window.
@@ -37,6 +39,10 @@ The **PredictionManagements** API returns **market lifecycle** events for predic
 - **Management.Prediction.OutcomeToken** — For **Resolved**: token details for the winning outcome (Name, Symbol, **AssetId**, SmartContract). Use this for contract address and asset ID of the winning outcome token.
 - **Management.Prediction.CollateralToken** — Collateral token (e.g. USDC): Name, Symbol, AssetId, SmartContract.
 - **Management.Prediction.Marketplace** — ProtocolName, ProtocolFamily, SmartContract.
+
+---
+
+<VideoPlayer url="https://youtu.be/v1EKbpzCCkQ" />
 
 ---
 
