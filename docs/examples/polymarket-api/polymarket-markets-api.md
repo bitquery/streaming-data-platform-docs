@@ -34,7 +34,7 @@ All parameters are optional. You can combine multiple filters; results match mar
 
 ## Find markets by condition_id
 
-Use when you have on-chain condition IDs (e.g. from [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract/) or [CTF Exchange](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-ctf-exchange/) events). Condition IDs are hex strings; you can pass one or more.
+Use when you have on-chain condition IDs (e.g. from [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract/) events). Condition IDs are hex strings; you can pass one or more.
 
 Get market lifecycle events (created/resolved) for one or more condition IDs. Condition IDs are hex strings (with or without `0x`). [Run Query](https://ide.bitquery.io/Filter-markets-by-condition-ID-Polymarket)
 
@@ -112,7 +112,7 @@ query MarketsByConditionId($conditionIds: [String!]) {
 
 ## Find markets by token_id (AssetId)
 
-Use when you have outcome token IDs (e.g. from [Prediction Trades](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/) `OutcomeToken.AssetId` or [CTF Exchange](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-ctf-exchange/) order data). Pass one or more AssetIds.
+Use when you have outcome token IDs (e.g. from [Prediction Trades](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/) `OutcomeToken.AssetId`). Pass one or more AssetIds.
 
 [Run query](https://ide.bitquery.io/Filter-markets-by-asset-ID-Polymarket)
 
@@ -329,4 +329,4 @@ query MarketsByConditionIdRecent($conditionIds: [String!]) {
 | **Settlements & redemptions**    | [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/)                                                                       |
 | **Market creation & resolution** | [Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api/) / [Prediction Managements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-managements-api/) |
 | **Polymarket overview**          | [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)                                                                                                                  |
-| **On-chain condition & tokens**  | [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract/), [CTF Exchange](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-ctf-exchange/)                                                   |
+| **On-chain condition & tokens**  | [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract/)                                                   |

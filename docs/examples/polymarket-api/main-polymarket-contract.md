@@ -630,7 +630,6 @@ See the [UMA Adapter Contract documentation](./uma-adapter-contract.md) for deta
 ## Additional Resources
 
 - [Polymarket API Overview](./polymarket-api.md)
-- [CTF Exchange Contract](./polymarket-ctf-exchange.md)
 - [UMA Adapter Contract](./uma-adapter-contract.md)
 - [Bitquery GraphQL API Documentation](https://docs.bitquery.io/)
 

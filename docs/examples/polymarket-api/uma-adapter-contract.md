@@ -277,7 +277,7 @@ Find the creation transaction for a specific question by searching for both `Que
 
 ### Decoding Ancillary Data
 
-The `ancillaryData` field in `QuestionInitialized` events contains hex-encoded market question metadata. To decode it and extract human-readable information (title, description, market_id, etc.), see the [CTF Exchange documentation](./polymarket-ctf-exchange.md#step-4-decode-ancillary-data) for complete decoding instructions and examples.
+The `ancillaryData` field in `QuestionInitialized` events contains hex-encoded market question metadata that can be decoded to extract human-readable information (title, description, market_id, etc.).
 
 ### 3. Question Resolved Events
 
@@ -421,7 +421,7 @@ Extract the `conditionId` from the event arguments.
 
 ### Step 2: Get Registered Tokens (Token0 and Token1)
 
-Use the `conditionId` to query `TokenRegistered` events from the [CTF Exchange Contract](./polymarket-ctf-exchange.md) to get the trading pair tokens:
+Use the `conditionId` to query `TokenRegistered` events from the CTF Exchange contract to get the trading pair tokens:
 
 ```graphql
 {
@@ -465,7 +465,7 @@ Extract `token0` and `token1` addresses from the event arguments.
 
 ### Step 3: Get Order Activity
 
-Use the token addresses (asset IDs) to query `OrderFilled` events to get trading activity and calculate market prices. See the [Order Filled by Asset IDs](./polymarket-ctf-exchange.md#4-order-filled-by-asset-ids) query for details.
+Use the token addresses (asset IDs) to query `OrderFilled` events to get trading activity and calculate market prices.
 
 ## Integration with Other Contracts
 
@@ -497,7 +497,6 @@ The UMA Adapter's `QuestionInitialized` event contains a `questionID` that links
 
 - [Polymarket API Overview](./polymarket-api.md)
 - [Main Polymarket Contract](./main-polymarket-contract.md)
-- [CTF Exchange Contract](./polymarket-ctf-exchange.md)
 - [UMA Oracle Documentation](https://docs.umaproject.org/)
 - [Bitquery GraphQL API Documentation](https://docs.bitquery.io/)
 
