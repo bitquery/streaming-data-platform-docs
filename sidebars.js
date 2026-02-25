@@ -562,6 +562,7 @@ const sidebars = {
             "blockchain/Solana/solana-gmgn-api",
             "blockchain/Solana/solana-bullx-api",
             "blockchain/Solana/solana-photon-api",
+            "blockchain/Solana/solana-manifest-api",
             "blockchain/Solana/solana-logs",
             "blockchain/Solana/solana-nft",
             "blockchain/Solana/solana-orca-dex-api",
