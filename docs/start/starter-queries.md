@@ -1106,13 +1106,37 @@ This query gets the latest 10 NFT trades on Ethereum mainnet. You can increase t
 This query gets the top 10 traded NFTs based on the number of trades within a specified date range. You can change the filters such as the date range and limit.  
 ▶️ [Top Traded NFTs](https://ide.bitquery.io/Top-traded-NFT-tokens-in-a-month)
 
-## Prediction Market
+## PolyMarket
+
+### Prediction Market Trades
+
+Prediction market buy/sell activity on outcome tokens on Polygon. See [Prediction Market Trades API](/docs/examples/prediction-market/prediction-trades-api) for full details.
+
+#### Latest Trades
+
+Fetch the most recent prediction market trades with full details, ordered by block time.
+▶️ [Latest Prediction Market Trades](https://ide.bitquery.io/latest-prediction-market-trades)
+
+#### Trades for a Specific Trader
+
+Fetch all trades where the given address is either Buyer or Seller. Pass the trader address as the `$trader` variable.
+▶️ [Trades for a Specific Trader](https://ide.bitquery.io/Trades-for-a-specific-trader)
+
+#### Total Volume and Yes/No Volume for a Market
+
+Aggregate USD volume for a market over a time window: total volume plus volume per outcome (e.g. Yes/No). Pass the market's outcome token AssetIds in `$marketAssets`.
+▶️ [Total Volume and Yes/No Volume for a Market](https://ide.bitquery.io/total-volume-outcome-1-volume-outcome-2-volume-of-a-market)
+
+#### Current Price per Outcome (Latest Trade)
+
+Get the latest trade price for each outcome in a market. Uses `limitBy` for one row per outcome, with Price and PriceInUSD at the most recent block time.
+▶️ [Current Price per Outcome](https://ide.bitquery.io/Current-price-inside-the-market-for-all-options-based-on-latest-trade)
 
 ### Prediction Market Managements
 
 Prediction market lifecycle events (Created, Resolved) on Polygon. See [Prediction Market Managements API](/docs/examples/prediction-market/prediction-managements-api) for full details.
 
-#### Latest Managements (Creations + Resolutions)
+#### Latest Creations + Resolutions
 
 Fetch the most recent creation and resolution events with full details, ordered by block time.
 ▶️ [Latest Prediction Managements](https://ide.bitquery.io/latest-Prediction-managements-resolutions-creations)
@@ -1166,92 +1190,6 @@ Aggregate redemptions by market question and sort by total redeemed amount. See 
 Rank addresses by total amount redeemed in the last hour across all markets. Useful for leaderboards and whale tracking.
 ▶️ [Top 10 Redeemers](https://ide.bitquery.io/top-10-redeemers)
 
-### Prediction Market Trades
-
-Prediction market buy/sell activity on outcome tokens on Polygon. See [Prediction Market Trades API](/docs/examples/prediction-market/prediction-trades-api) for full details.
-
-#### Latest Trades
-
-Fetch the most recent prediction market trades with full details, ordered by block time.
-▶️ [Latest Prediction Market Trades](https://ide.bitquery.io/latest-prediction-market-trades)
-
-#### Trades for a Specific Trader
-
-Fetch all trades where the given address is either Buyer or Seller. Pass the trader address as the `$trader` variable.
-▶️ [Trades for a Specific Trader](https://ide.bitquery.io/Trades-for-a-specific-trader)
-
-#### Total Volume and Yes/No Volume for a Market
-
-Aggregate USD volume for a market over a time window: total volume plus volume per outcome (e.g. Yes/No). Pass the market's outcome token AssetIds in `$marketAssets`.
-▶️ [Total Volume and Yes/No Volume for a Market](https://ide.bitquery.io/total-volume-outcome-1-volume-outcome-2-volume-of-a-market)
-
-#### Current Price per Outcome (Latest Trade)
-
-Get the latest trade price for each outcome in a market. Uses `limitBy` for one row per outcome, with Price and PriceInUSD at the most recent block time.
-▶️ [Current Price per Outcome](https://ide.bitquery.io/Current-price-inside-the-market-for-all-options-based-on-latest-trade)
-
-## Polymarket
-
-### Main Polymarket Contract
-
-#### All Available Events
-
-Get all events emitted by the main Polymarket contract to track all platform activities.
-▶️ [All Available Events](https://ide.bitquery.io/PolyMarket---All-Available-Events)
-
-#### Discover Newly Created Markets
-
-Track fresh Polymarket prediction markets as they are initialized on Polygon by following `ConditionPreparation` events from the main Polymarket contract.
-▶️ [Polymarket Newly Created Questions / Market ID](https://ide.bitquery.io/Polymarket-Newly-Created-MarketQuestions)
-
-#### Latest Position Splits
-
-Track when users split their collateral into outcome-specific position tokens.
-▶️ [Latest Position Split](https://ide.bitquery.io/PolyMarket---Latest-Position-Split)
-
-#### Latest Resolved Questions
-
-Monitor recently resolved prediction markets and their outcomes.
-▶️ [Latest Resolved Questions](https://ide.bitquery.io/PolyMarket---Latest-Resolved-Questions)
-
-#### Payout Received by Polymarket Trader
-
-Track all payouts received by a specific trader when they redeem winning positions.
-▶️ [Payout Received by Polymarket Trader](https://ide.bitquery.io/Payout-received-by-polymarket-trader)
-
-### UMA Adapter Contract
-
-#### All UMA Adapter Events
-
-Get all events emitted by the UMA Adapter contract to track all oracle-related activities.
-▶️ [All UMA Adapter Events](https://ide.bitquery.io/PolyMarket---UMA-Adapter-All-events)
-
-#### New Questions Initialized
-
-Track new questions and get market metadata including ancillaryData from the UMA Adapter contract.
-▶️ [Question Initialized Events](https://ide.bitquery.io/PolyMarket---UMA-Adapter-Question-Initialized)
-
-#### Question Resolved Events
-
-Monitor when questions are resolved by the oracle.
-▶️ [Question Resolved Events](https://ide.bitquery.io/PolyMarket---UMA-Adapter-Question-Resolved)
-
-### CTF Exchange Contract
-
-#### Token Registered Events
-
-Track when new outcome tokens are registered for trading.
-▶️ [Token Registered Events](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----TokenRegistered-Event)
-
-#### Orders Matched Events
-
-Monitor successful order matching and trade executions.
-▶️ [Orders Matched Events](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderMatched-Event_2)
-
-#### Order Filled Events
-
-Track individual order fills and partial executions to calculate market prices.
-▶️ [Order Filled Events](https://ide.bitquery.io/Polymarket-Neg-Risk-CTF-Exchange-contract----OrderFilled-Event)
 
 ## x402 APIs
 
