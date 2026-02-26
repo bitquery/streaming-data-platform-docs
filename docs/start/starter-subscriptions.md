@@ -567,6 +567,18 @@ Monitor NFT transfers for a specific collection across all transactions. This he
 
 ## Polymarket
 
+### Prediction Market Trades
+
+#### Real-Time Trades Stream
+
+Subscribe to live prediction market trades as they occur on Polygon (successful transactions only).
+▶️ [Prediction Market Trades Stream](https://ide.bitquery.io/prediction-market-trades-subscription)
+
+#### Trades for a Specific Market (Stream)
+
+Subscribe to trades for one market only by filtering on Question.MarketId. Replace the market ID in the query with your target market.
+▶️ [Subscribe to Specific Market Trades](https://ide.bitquery.io/subscribe-to-specific-market-trades)
+
 ### Prediction Market Managements
 
 #### Real-Time Management Stream (Creations + Resolutions)
@@ -591,17 +603,7 @@ Subscribe only to Resolved events. Winning outcome is in Prediction.Outcome; tok
 Subscribe to live Split, Merge, and Redemption events as they occur on Polygon.
 ▶️ [Real-Time Prediction Market Settlements Stream](https://ide.bitquery.io/realtime-predicion-market-settlements-stream)
 
-### Prediction Market Trades
 
-#### Real-Time Trades Stream
-
-Subscribe to live prediction market trades as they occur on Polygon (successful transactions only).
-▶️ [Prediction Market Trades Stream](https://ide.bitquery.io/prediction-market-trades-subscription)
-
-#### Trades for a Specific Market (Stream)
-
-Subscribe to trades for one market only by filtering on Question.MarketId. Replace the market ID in the query with your target market.
-▶️ [Subscribe to Specific Market Trades](https://ide.bitquery.io/subscribe-to-specific-market-trades)
 
 ## x402 Streams
 
