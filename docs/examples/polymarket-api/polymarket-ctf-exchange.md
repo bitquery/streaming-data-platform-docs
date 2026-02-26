@@ -711,11 +711,11 @@ Query `TokenRegistered` events to find the condition ID for a market:
 
 ### Step 2: Get Question ID from ConditionPreparation
 
-Use the condition ID to query `ConditionPreparation` events from the Main Polymarket Contract to get the question ID. See the [Main Polymarket Contract documentation](./main-polymarket-contract.md) for details.
+Use the condition ID to query `ConditionPreparation` events from the Main Polymarket Contract to get the question ID. See the [Main Polymarket Contract documentation](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract) for details.
 
 ### Step 3: Get Question Metadata from UMA Adapter
 
-Use the question ID to query `QuestionInitialized` events from the UMA Adapter contract to get the question metadata (ancillaryData). See the [UMA Adapter Contract documentation](./uma-adapter-contract.md) for details.
+Use the question ID to query `QuestionInitialized` events from the UMA Adapter contract to get the question metadata (ancillaryData). See the [UMA Adapter Contract documentation](https://docs.bitquery.io/docs/examples/polymarket-api/uma-adapter-contract) for details.
 
 ```graphql
 {
@@ -948,9 +948,9 @@ This provides accurate pricing data for prediction market analytics and trading 
 
 ## Additional Resources
 
-- [Polymarket API Overview](./polymarket-api.md)
-- [Main Polymarket Contract](./main-polymarket-contract.md)
-- [UMA Adapter Contract](./uma-adapter-contract.md)
+- [Polymarket API Overview](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)
+- [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract)
+- [UMA Adapter Contract](https://docs.bitquery.io/docs/examples/polymarket-api/uma-adapter-contract)
 - [Bitquery GraphQL API Documentation](https://docs.bitquery.io/)
 - [DEX Trading Data Documentation](https://docs.bitquery.io/docs/evm/dextrades/)
 - [Polymarket Copy Trading Tool GitHub Repository](https://github.com/your-repo/polymarket-copytrade)

@@ -29,7 +29,7 @@ Query Polymarket trades, settlements, and market data using optimized GraphQL AP
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
 
-Follow the steps here: [How to generate Bitquery API token ➤](../../authorisation/how-to-generate/)
+Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
 
 ---
@@ -38,21 +38,27 @@ Follow the steps here: [How to generate Bitquery API token ➤](../../authorisat
 
 ### **Working with Trades & Prices?**
 
-Use the **[Prediction Trades API](../prediction-market/prediction-trades-api)** — query buy/sell activity, track prices, and monitor volume across Polymarket.
+Use the **[Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api)** — query buy/sell activity, track prices, and monitor volume across Polymarket.
 
-[→ Prediction Trades API](../prediction-market/prediction-trades-api)
+[→ Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api)
 
 ### **Tracking Positions & Redemptions?**
 
-Use the **[Prediction Settlements API](../prediction-market/prediction-settlements-api)** — query splits, merges, and redemptions after market resolution.
+Use the **[Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api)** — query splits, merges, and redemptions after market resolution.
 
-[→ Prediction Settlements API](../prediction-market/prediction-settlements-api)
+[→ Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api)
 
 ### **Need Market Lifecycle Data?**
 
-Use the **[Prediction Market API](../prediction-market/prediction-market-api)** — query market creation, resolution, and complete lifecycle events.
+Use the **[Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api)** — query market creation, resolution, and complete lifecycle events.
 
-[→ Prediction Market API](../prediction-market/prediction-market-api)
+[→ Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api)
+
+### **User & Wallet Activity?**
+
+Use the **[Polymarket Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api)** — query recent activity, volume, and market counts by wallet address; link to official profile and bridge APIs.
+
+[→ Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api)
 
 ### **Need Real-Time Streaming?**
 
@@ -65,7 +71,7 @@ Available Kafka topics:
 
 Note: Kafka streaming requires separate credentials. [Contact support](https://t.me/bloxy_info) or email support@bitquery.io for access.
 
-[→ Kafka Streams Documentation](../../streams/kafka-streaming-concepts)
+[→ Kafka Streams Documentation](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts)
 
 ---
 
@@ -407,5 +413,3 @@ query questionsByVolume($time_ago: DateTime) {
 For questions and technical support:
 
 - [Bitquery Telegram](https://t.me/bloxy_info)
-- [Polymarket Docs](https://docs.polymarket.com/)
-- [UMA Oracle Docs](https://docs.umaproject.org/)

@@ -384,7 +384,7 @@ This workflow shows how to start with a `questionID` from `QuestionInitialized` 
 
 ### Step 1: Get Condition ID from Question ID
 
-Use the `questionID` to query `ConditionPreparation` events from the [Main Polymarket Contract](./main-polymarket-contract.md) to get the `conditionId`:
+Use the `questionID` to query `ConditionPreparation` events from the [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract) to get the `conditionId`:
 
 ```graphql
 {
@@ -495,8 +495,8 @@ The UMA Adapter's `QuestionInitialized` event contains a `questionID` that links
 
 ## Additional Resources
 
-- [Polymarket API Overview](./polymarket-api.md)
-- [Main Polymarket Contract](./main-polymarket-contract.md)
+- [Polymarket API Overview](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)
+- [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract)
 - [UMA Oracle Documentation](https://docs.umaproject.org/)
 - [Bitquery GraphQL API Documentation](https://docs.bitquery.io/)
 

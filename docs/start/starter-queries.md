@@ -14,7 +14,6 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Ripple](#ripple)
 - [Cosmos](#cosmos)
 - [NFT APIs](#nft-apis)
-- [Prediction Market](#prediction-market)
 - [Polymarket](#polymarket)
 - [x402 APIs](#x402-apis)
 
