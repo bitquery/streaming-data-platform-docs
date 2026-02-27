@@ -8,7 +8,7 @@ Get ultra low latency Binance Meme Rush memecoin data on BNB Chain: live trades,
 
 The below GraphQL APIs and Streams are examples of data points you can get with Bitquery. If you have questions on other data points, reach out to [support](https://t.me/Bloxy_info).
 
-Need zero-latency BSC data? Read about our Streams and contact us for a trial: https://docs.bitquery.io/docs/streams/
+Need zero-latency BSC data via Kafka? Read about our [Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) and contact us for a trial.
 
 You may also be interested in:
 
