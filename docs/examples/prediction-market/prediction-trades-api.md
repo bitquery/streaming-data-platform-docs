@@ -14,6 +14,8 @@ keywords:
   - Bitquery GraphQL prediction
 ---
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Prediction Market Trades API
 
 The **PredictionTrades** API returns **buy/sell** activity on outcome tokens for prediction markets (e.g. Polymarket) on Polygon. Use it to stream live trades, list latest activity, filter by market or trader, compute volume per outcome, and get current prices per outcome from the latest trade.
@@ -38,6 +40,12 @@ For **historical** Polymarket trades (date ranges, backtests, volume over time),
 - **Trade.Prediction.CollateralToken** — Token used to pay for the outcome (e.g. USDC): Name, Symbol, SmartContract, AssetId.
 - **Trade.Prediction.OutcomeToken** — Outcome as a token: Name, Symbol, SmartContract, **AssetId** (use for volume/price per outcome).
 - **Trade.Prediction.Marketplace** — ProtocolName, ProtocolFamily, SmartContract, ProtocolVersion.
+
+---
+
+<VideoPlayer url="https://www.youtube.com/watch?v=Z2KPJ-xOlf8" />
+
+---
 
 ## Polymarket-only filter {#polymarket-only-filter}
 
