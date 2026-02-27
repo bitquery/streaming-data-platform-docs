@@ -64,17 +64,27 @@ Here's how it works:
 
 In the example above, querying the `Transactions` data cube within the Ethereum (`eth`) network consumes 5 points. The complexity of the query or the volume of data requested does not affect the points charged.
 
-## How are points calculated for subscriptions?
+## Streaming Data — Points and Pricing
 
-Under [new pricing](https://bitquery.io/blog/new-pricing-june-2024), we charge per simultaneous streams, instead of points.
+Bitquery offers two streaming interfaces for real-time blockchain data. Each has a different pricing model:
 
-However, internally each subscription is charged at the rate of 40 points per minute. We add enough points that it runs 24\*7 for the whole month.
+### 1. WebSocket Subscriptions (GraphQL)
 
-**Note**: Each data cube (e.g., Transfers, DEXTrades, or Blocks) activated counts as a separate subscription. If multiple cubes are used within a single WebSocket connection, each is billed as an individual subscription.
+WebSocket-based [GraphQL subscriptions](/docs/subscriptions/subscription) deliver real-time blockchain data through the same API you use for queries.
 
-### Example
+**How pricing works:**
 
-```
+- Internally, each subscription stream costs **40 points per minute**.
+- Under [paid plans](https://bitquery.io/pricing), you purchase a number of **concurrent streams** — and Bitquery adds enough points to keep those streams running 24/7 for the entire billing period.
+- **As a paid customer, you don't need to worry about points for streaming.** Simply tell us how many concurrent streams you need and we handle the rest.
+
+**What counts as one stream?**
+
+Each data cube (e.g., Transfers, DEXTrades, Blocks) activated counts as a **separate stream**. If you use multiple cubes within a single WebSocket connection, each one is billed individually.
+
+#### Example — Single Stream
+
+```graphql
 subscription {
   EVM(network: eth) {
     Transactions {
@@ -84,18 +94,15 @@ subscription {
     }
   }
 }
-
 ```
 
-In the example above, querying the `Transactions` data cube within the Ethereum (`eth`) network counts as a single subscription. The complexity of the query or the volume of data requested does not affect the points charged. You are billed solely based on the number of subscriptions and their duration.
+This counts as **1 stream** (one cube: `Transactions`).
 
-### What Counts as a Single Cube?
+#### Example — Multiple Streams
 
-When using the same method multiple times with different configurations or filters, each unique query counts as a separate cube.
+Using the same method twice with different filters results in two separate streams:
 
-For instance, the following query uses the `Transactions` method twice with different filters, resulting in two cubes:
-
-```
+```graphql
 subscription {
   EVM(network: eth) {
     Cube1: Transactions(where: {#filters A}) {
@@ -103,7 +110,7 @@ subscription {
         Hash
       }
     }
-     Cube2: Transactions(where: {#filters B}) {
+    Cube2: Transactions(where: {#filters B}) {
       Block {
         Hash
       }
@@ -112,14 +119,28 @@ subscription {
 }
 ```
 
-## Example Calculation
+This counts as **2 streams**.
 
-For instance:
+#### Points Calculation (Internal Reference)
 
-- **One Subscription**: If you maintain this subscription active for 10 minutes, you will be charged 400 points (10 minutes \* 40 points per minute).
-- **Multiple Subscriptions**: If you use both `Transfers` and `DEXTrades` in the same WebSocket, it counts as two subscriptions. Keeping these active for 10 minutes would result in 800 points being charged (2 subscriptions _ 10 minutes _ 40 points per minute).
+- **One stream for 10 minutes** = 400 points (10 min × 40 points/min)
+- **Two streams for 10 minutes** = 800 points (2 streams × 10 min × 40 points/min)
 
-For more detailed information about subscriptions and best practices, please refer to the [documentation on subscriptions](/docs/subscriptions/subscription.md).
+On paid plans this is handled automatically — you just pick the number of concurrent streams you need.
+
+For more details on subscriptions, see the [subscriptions documentation](/docs/subscriptions/subscription).
+
+### 2. Kafka Streams
+
+[Kafka streams](/docs/streams/kafka-streaming-concepts) provide high-throughput, low-latency blockchain data delivery via Apache Kafka.
+
+**Kafka pricing is completely separate from the points system.** There are no point deductions, no bandwidth caps, and no per-minute charges.
+
+- Access is granted directly as part of your plan.
+- There are no limitations on bandwidth or data volume.
+- Kafka streams are ideal for high-throughput use cases such as trading bots, real-time indexers, and large-scale analytics pipelines.
+
+To get started with Kafka streams, [contact our sales team](mailto:sales@bitquery.io) or visit the [Kafka streaming documentation](/docs/streams/kafka-streaming-concepts).
 
 ## How do you check points for your account?
 
