@@ -43,10 +43,6 @@ For **historical** Polymarket trades (date ranges, backtests, volume over time),
 
 ---
 
-<VideoPlayer url="https://www.youtube.com/watch?v=Z2KPJ-xOlf8" />
-
----
-
 ## Polymarket-only filter {#polymarket-only-filter}
 
 To restrict results to **Polymarket** only, add this to your `where` clause:
@@ -494,15 +490,6 @@ query CurrentPricePerOutcome {
   }
 }
 ```
-## Use cases
 
-| Use case | Approach |
-| -------- | -------- |
-| **Live trade feed** | Use the real-time *Prediction trades stream* subscription. |
-| **Recent activity** | Use *Latest trades* with `limit` and `orderBy: { descending: Block_Time }`. |
-| **One market only** | Use *Trades for a specific market* with `Question.MarketId: { is: "..." }`. |
-| **Trader history** | Use *Trades for a specific trader* with variable `$trader` (Buyer or Seller). |
-| **Market volume (total / Yes / No)** | Use *Total volume and Yes/No volume* with `$marketAssets` and optional time window. |
-| **Current market price** | Use *Current price per outcome* with `limitBy` and `MarketId`. |
 
 For market creation and resolution, see [PredictionManagements](../prediction-market-api#predictionmanagements). For settlements (split, merge, redemption), see [Prediction Market Settlements API](../prediction-settlements-api).
