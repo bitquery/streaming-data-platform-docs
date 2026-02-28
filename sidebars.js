@@ -546,6 +546,7 @@ const sidebars = {
             "blockchain/Solana/heaven-dex-api",
             "blockchain/Solana/bags-fm-api",
             "blockchain/Solana/solana-balance-updates",
+            "blockchain/Solana/solana-token-holders",
             "blockchain/Solana/solana-dextrades",
             "blockchain/Solana/solana-trader-API",
             "blockchain/Solana/historical-aggregate-data",
