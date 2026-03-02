@@ -10,7 +10,7 @@ Get data for New, Migrating, Graduated Pump.Fun Tokens through our Pump.Fun API.
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery.
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
-:::tip 🛡️ **Try Our PumpFun Token Sniffer**
+:::tip **Try Our PumpFun Token Sniffer**
 Want to analyze Pump.fun tokens for potential phishing risks? Check out our [**PumpFun Token Sniffer**](https://docs.bitquery.io/pumpfun-token-sniffer/) — a proof-of-concept tool that helps identify suspicious token behavior by analyzing transfers and trades.
 :::
 
@@ -1172,16 +1172,88 @@ Includes 5-minute and 1-hour metrics for deep token analytics
 query MyQuery($token: String!, $pair_address: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime!) {
   Solana(dataset: realtime) {
     DEXTradeByTokens(
-      where: {
-        Transaction: { Result: { Success: true } },
-        Trade: {
-          Currency: { MintAddress: { is: $token } },
-          Market: { MarketAddress: { is: $pair_address } }
-        },
-        Block: { Time: { since: $time_1h_ago } }
-      }
+      where: {Transaction: {Result: {Success: true}},Trade: {Currency: {MintAddress: {is: $token}}, Market: {MarketAddress: {is: $pair_address}}}, Block: {Time: {since: $time_1h_ago}}}
     ) {
-      ...
+      Trade {
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        start: PriceInUSD(minimum: Block_Time)
+        min5: PriceInUSD(
+          minimum: Block_Time
+          if: {Block: {Time: {after: $time_5min_ago}}}
+        )
+        end: PriceInUSD(maximum: Block_Time)
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          ProgramAddress
+        }
+        Market {
+          MarketAddress
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            MintAddress
+          }
+        }
+      }
+      makers: count(distinct: Transaction_Signer)
+      makers_5min: count(
+        distinct: Transaction_Signer
+        if: {Block: {Time: {after: $time_5min_ago}}}
+      )
+      buyers: count(
+        distinct: Transaction_Signer
+        if: {Trade: {Side: {Type: {is: buy}}}}
+      )
+      buyers_5min: count(
+        distinct: Transaction_Signer
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
+      )
+      sellers: count(
+        distinct: Transaction_Signer
+        if: {Trade: {Side: {Type: {is: sell}}}}
+      )
+      sellers_5min: count(
+        distinct: Transaction_Signer
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
+      )
+      trades: count
+      trades_5min: count(if: {Block: {Time: {after: $time_5min_ago}}})
+      traded_volume: sum(of: Trade_Side_AmountInUSD)
+      traded_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Block: {Time: {after: $time_5min_ago}}}
+      )
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: buy}}}}
+      )
+      buy_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: sell}}}}
+      )
+      sell_volume_5min: sum(
+        of: Trade_Side_AmountInUSD
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
+      )
+      buys: count(if: {Trade: {Side: {Type: {is: buy}}}})
+      buys_5min: count(
+        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
+      )
+      sells: count(if: {Trade: {Side: {Type: {is: sell}}}})
+      sells_5min: count(
+        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
+      )
     }
   }
 }
