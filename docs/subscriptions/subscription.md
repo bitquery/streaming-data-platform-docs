@@ -32,6 +32,20 @@ In addition, optimizing your queries can significantly enhance the performance o
 
 Subscriptions are also priced using our point-based system. Read about it [here](/docs/ide/points.md)
 
+## Default Parameters (GraphQL v2)
+
+GraphQL v2 applies the following default parameters to subscriptions. You can override any of these by specifying a different value explicitly in your GraphQL filters.
+
+| Parameter | Default value |
+|-----------|---------------|
+| **Subscription `limit`** | 800 (per message) |
+| **Transactions `success`** | `true` (only successful transactions are returned by default) |
+
+- **Subscription limit:** Each subscription message returns at most 800 items by default. Override this by specifying a different `limit` in your subscription filters if you need a different batch size.
+- **Transaction success filter:** By default, transaction-based data only includes transactions where `success` is `true`. To include failed transactions, add an explicit filter (for example, `success: false` or a condition that allows both) in your GraphQL request.
+
+For default limits on **queries**, see [Limits](/docs/graphql/limits.md).
+
 ## Creating Multiple Subscriptions in one Websocket
 
 It is possible—and often more efficient—to manage multiple subscriptions over a single WebSocket connection. This approach allows you to bundle various subscriptions, such as DEX Trades, Transactions, Blocks, and Transfers, into a single Websocket stream. However, it's important to note that your top-level element must be only one.

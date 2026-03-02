@@ -11,8 +11,7 @@ Results are limited by using attributes ```limit``` and ```limitBy```
 ```limit``` just does what is says: limits the results to pre-defined size.
 
 :::note
-if you do not specify ```limit```, some pre-defined system limit anyway will be applied, around
-10,000 rows of data. This is another argument to use aggregation.
+If you do not specify `limit`, a system default is applied. **GraphQL v2** uses a default of **25,000** rows per query result. You can override this by setting `limit` explicitly in your query filters. This is another argument to use aggregation when you need larger result sets.
 :::
 
 ```limit``` attribute has a structure:
