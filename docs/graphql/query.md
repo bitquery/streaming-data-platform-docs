@@ -43,6 +43,21 @@ This section describes principles that applies to subscriptions
 as well as to queries. We will show examples for queries, but remember that they applied to
 [subscriptions](/docs/subscriptions/subscription.md) as well.
 
+## Default filters (GraphQL v2)
+
+By default, **only successful data** is included in results. GraphQL v2 applies the following default filters to both queries and subscriptions. You can override any of them by specifying different values explicitly in your GraphQL filters.
+
+| Data type | Default filter(s) |
+|-----------|-------------------|
+| **Transactions** | `success = true` |
+| **Calls, Events, Transfers, Prediction market events, DEX pool events** | Call/event success **and** transaction success = `true` |
+| **DEX trades** | Trade `success = true` |
+| **Trade API market prices** | `Price_IsQuotedInUsd = true`, `Interval_VolumeBased = false` |
+
+To get failed or non-default data, add an explicit filter. For example, to query **failed DEX trades**, you must explicitly filter for them (e.g. [Failed trades example](https://ide.bitquery.io/Failed-trades)).
+
+For default **limits** (query and subscription), see [Limits](/docs/graphql/limits.md) and [Subscription default parameters](/docs/subscriptions/subscription.md#default-parameters-graphql-v2).
+
 ## Query Elements
 
 Consider the query:

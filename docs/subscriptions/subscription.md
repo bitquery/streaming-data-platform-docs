@@ -34,17 +34,15 @@ Subscriptions are also priced using our point-based system. Read about it [here]
 
 ## Default Parameters (GraphQL v2)
 
-GraphQL v2 applies the following default parameters to subscriptions. You can override any of these by specifying a different value explicitly in your GraphQL filters.
+GraphQL v2 applies the following default to subscriptions. You can override it by specifying a different value explicitly in your GraphQL filters.
 
 | Parameter | Default value |
 |-----------|---------------|
 | **Subscription `limit`** | 800 (per message) |
-| **Transactions `success`** | `true` (only successful transactions are returned by default) |
 
-- **Subscription limit:** Each subscription message returns at most 800 items by default. Override this by specifying a different `limit` in your subscription filters if you need a different batch size.
-- **Transaction success filter:** By default, transaction-based data only includes transactions where `success` is `true`. To include failed transactions, add an explicit filter (for example, `success: false` or a condition that allows both) in your GraphQL request.
+Each subscription message returns at most 800 items by default. Override this by specifying a different `limit` in your subscription filters if you need a different batch size.
 
-For default limits on **queries**, see [Limits](/docs/graphql/limits.md).
+For **default success and other filters** (e.g. only successful transactions, calls, events, transfers, DEX trades; Trade API defaults), see [Default filters (GraphQL v2)](/docs/graphql/query.md#default-filters-graphql-v2) in Query Principles. For default limits on **queries**, see [Limits](/docs/graphql/limits.md).
 
 ## Creating Multiple Subscriptions in one Websocket
 
