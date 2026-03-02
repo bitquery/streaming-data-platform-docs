@@ -364,9 +364,12 @@ query MyQuery {
 
 ### Get Pumpfun Token Created by a Wallet From Historical Data
 
-Retrieve Pump.fun tokens created by a specific wallet from historical transfer data using the v1 Solana transfers API.
+Use the **v1 Solana transfers API** to list Pump.fun tokens created by a specific wallet over a date range.
 
-[Run query](https://ide.bitquery.io/get-historical-created-token-and-creator)
+Replace the `signer` value and the `date` range in the query with your target wallet and desired window. For **aggregates** (e.g. total count of tokens created by a wallet), use the dedicated count query below.
+
+- **[Run query: list tokens created by wallet](https://ide.bitquery.io/Pumpfun-tokens-created-by-a-wallet-historical#)**
+- **[Run query: count of tokens created by wallet](https://ide.bitquery.io/Count-of-Pumpfun-tokens-created-by-a-wallet-historical#)**
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -375,11 +378,11 @@ Retrieve Pump.fun tokens created by a specific wallet from historical transfer d
 {
   solana {
     transfers(
-      options: { limit: 100, desc: "block.height" }
-      date: { is: "2025-12-08" }
-      externalProgramId: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
-      currency: { is: "9TXP4iVTcP7cChVhbUCQfvkSPKJrmHh1jxMkJgGqLzDP" }
-      transferType: { is: mint }
+      options: {limit: 100, desc: "block.height"}
+      date: {since: "2025-02-08", till: "2025-06-08"}
+      externalProgramId: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}
+      transferType: {is: mint}
+      signer: {is: "Ddu1xqgNHBRBiJrissrpLtevq2A7KAHjgiDzECoNL8HG"}
     ) {
       block {
         height
@@ -428,6 +431,7 @@ Retrieve Pump.fun tokens created by a specific wallet from historical transfer d
     }
   }
 }
+
 ```
 
 </details>
