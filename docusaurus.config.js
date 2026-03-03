@@ -127,10 +127,10 @@ const config = {
             to: "/docs/usecases/nft-analytics/",
             from: "/docs/usecases/nft_Analytics/",
           },
-          {
-            to: "/docs/usecases/crypto-dashboard/",
-            from: "/docs/usecases/crypto_dashboard/",
-          },
+          // {
+          //   to: "/docs/usecases/crypto-dashboard/",
+          //   from: "/docs/usecases/crypto_dashboard/",
+          // }, // that page does not get traffic anymore, so no need to redirect
           {
             to: "/docs/usecases/telegram-bot/",
             from: "/docs/usecases/Telegram_bot/",
@@ -193,10 +193,10 @@ const config = {
             to: "/docs/blockchain/Ethereum/ethers-library/eth_subscribe/",
             from: "/docs/examples/Ethereum-subscriptions/eth-subscribe/",
           },
-          {
-            to: "/docs/schema/schema-intro/",
-            from: "/docs/evm/",
-          },
+          // {
+          //   to: "/docs/schema/schema-intro/",
+          //   from: "/docs/evm/",
+          // }, // that page does not get traffic anymore, so no need to redirect
           {
             to: "/docs/category/how-to-guides/",
             from: "/docs/category/use-cases/",
@@ -811,6 +811,10 @@ const config = {
             to: "/docs/blockchain/Optimism/optimism-transfers/",
             from: "/docs/examples/Optimism/optimism-transfers/",
           },
+          {
+            to:" /docs/examples/polymarket-api/polymarket-markets-api",
+            from:"/docs/examples/polymarket-api/polymarket-ctf-exchange"
+          }
         ],
       },
     ],
