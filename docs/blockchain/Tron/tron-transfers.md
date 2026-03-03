@@ -90,7 +90,7 @@ query MyQuery {
 
 ## Transfers of a wallet address
 
-This query fetches you the recent 10 transfers of a specific wallet address `TFXttAWURRrXrd9JvFPVLEh1esJK8NHxn7`. Try the query [here](https://ide.bitquery.io/Transfers-of-a-wallet).
+This query fetches you the recent 10 transfers of a specific wallet address `TFXttAWURRrXrd9JvFPVLEh1esJK8NHxn7`. Try the query [here](https://ide.bitquery.io/Transfers-of-a-wallet-API).
 
 ```
 {
@@ -109,10 +109,15 @@ This query fetches you the recent 10 transfers of a specific wallet address `TFX
         AmountInUSD
         Sender
         Receiver
+        Currency {
+          Name
+          SmartContract
+        }
       }
     }
   }
 }
+
 ```
 
 ## Sender is a particular address
