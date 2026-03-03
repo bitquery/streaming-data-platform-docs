@@ -79,7 +79,7 @@ Replace `trader` with any Polygon wallet address (EOA or proxy wallet).
 | **Filter by market slug, condition ID, token** | [Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api/)                                                   |
 | **Settlements & redemptions**                  | [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/)                                        |
 | **Market lifecycle & resolution**              | [Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api/)                                                 |
-| **On-chain contracts & events**                | [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract/)                                               |
+| **On-chain contracts & events**                | Main Polymarket Contract (on-chain)                                               |
 
 ---
 

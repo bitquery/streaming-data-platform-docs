@@ -828,20 +828,6 @@ const sidebars = {
             "examples/polymarket-api/polymarket-markets-api",
             "examples/polymarket-api/polymarket-sports-api",
             "examples/polymarket-api/bitcoin-polymarket-api",
-            {
-              type: "category",
-              label: "Specific Contract APIs",
-              link: {
-                type: "generated-index",
-                title: "Polymarket Smart Contracts",
-                description:
-                  "Detailed documentation for Polymarket smart contracts and their events",
-              },
-              items: [
-                "examples/polymarket-api/main-polymarket-contract",
-                "examples/polymarket-api/uma-adapter-contract",
-              ],
-            },
           ],
         },
       ],

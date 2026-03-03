@@ -34,7 +34,7 @@ All parameters are optional. You can combine multiple filters; results match mar
 
 ## Find markets by condition_id
 
-Use when you have on-chain condition IDs (e.g. from [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract/) events). Condition IDs are hex strings; you can pass one or more.
+Use when you have on-chain condition IDs (e.g. from Main Polymarket Contract events). Condition IDs are hex strings; you can pass one or more.
 
 Get market lifecycle events (created/resolved) for one or more condition IDs. Condition IDs are hex strings (with or without `0x`). [Run Query](https://ide.bitquery.io/Filter-markets-by-condition-ID-Polymarket)
 
@@ -330,4 +330,4 @@ query MarketsByConditionIdRecent($conditionIds: [String!]) {
 | **Market creation & resolution** | [Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api/) / [Prediction Managements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-managements-api/) |
 | **Polymarket overview**          | [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)                                                                                                                  |
 | **User & wallet activity**       | [Polymarket Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api/)                                                                                     |
-| **On-chain condition & tokens**  | [Main Polymarket Contract](https://docs.bitquery.io/docs/examples/polymarket-api/main-polymarket-contract/)                                                   |
+| **On-chain condition & tokens**  | Main Polymarket Contract (on-chain)                                                   |
