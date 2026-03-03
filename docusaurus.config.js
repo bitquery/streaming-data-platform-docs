@@ -811,10 +811,20 @@ const config = {
             to: "/docs/blockchain/Optimism/optimism-transfers/",
             from: "/docs/examples/Optimism/optimism-transfers/",
           },
+
+          // Polymarket redirects from old examples/polymarket-api/ path to new examples/polymarket-api/ path
           {
-            to:" /docs/examples/polymarket-api/polymarket-markets-api",
-            from:"/docs/examples/polymarket-api/polymarket-ctf-exchange"
-          }
+            to: "/docs/examples/polymarket-api/polymarket-markets-api/",
+            from: "/docs/examples/polymarket-api/main-polymarket-contract/",
+          },
+          {
+            to: "/docs/examples/polymarket-api/polymarket-markets-api/",
+            from: "/docs/examples/polymarket-api/uma-adapter-contract/",
+          },
+          {
+            to: "/docs/examples/polymarket-api/polymarket-markets-api/",
+            from: "/docs/examples/polymarket-api/polymarket-ctf-exchange/",
+          },
         ],
       },
     ],
