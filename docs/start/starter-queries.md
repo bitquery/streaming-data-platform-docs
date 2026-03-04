@@ -302,7 +302,7 @@ This query retrieves the latest slippage data for a specific DEX pool on Ethereu
 
 This query retrieves the latest liquidity events for a specific DEX pool on Ethereum. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
 
-▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_5#)
+▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool-on-ETH)
 
 #### Top Liquidity Pools of a token on Ethereum
 
