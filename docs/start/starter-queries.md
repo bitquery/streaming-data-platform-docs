@@ -560,15 +560,14 @@ Get the liquidity addition events for a specific token on the Four Meme Exchange
 Returns a list of newly created tokens on the Pump Fun.
 ▶️ [Get New Tokens for PumpFun](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata--query#)
 
+#### Get Latest Price of a Token in USD
+
+▶️ [Get Latest Price of a Token](https://ide.bitquery.io/Pumpfun-token-latest-price-USD)
+
 #### Get Bonding Curve Progress of a Token on Pump Fun
 
 Returns Bonding Curve Percentage of a Token on the Pump Fun.
 ▶️ [Bonding Curve Percentage of a Token on Pump Fun](https://ide.bitquery.io/get-the-bonding-curve-progress-percentage_1)
-
-#### Track Pump Fun Tokens above 95% Bonding Curve Progress in realtime
-
-Returns Pump fun tokens which have more than 95% bonding curve progress.
-▶️ [Pump Fun Tokens above 95% Bonding Curve Progress](https://ide.bitquery.io/Pump-Fun-Tokens-between-95-and-100-bonding-curve-progress_3)
 
 #### Top 100 About to Graduate Pump Fun Tokens
 
