@@ -52,6 +52,10 @@ The Uniswap V3 NonfungiblePositionManager contract (`0xC36442b4a4522E871399CD717
 
 - [Get Position Details by Token ID ➤](#get-position-details-by-token-id)
 
+### 4. Uniswap V4
+
+- [Latest ModifyLiquidity Events (V4) ➤](#latest-modifyliquidity-events-uniswap-v4)
+
 ---
 
 ## Position Creation & Tracking
@@ -252,12 +256,19 @@ Monitor when liquidity providers add or remove liquidity from existing positions
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-
-  query LiquidityEvents {
+query LiquidityEvents {
   EVM(dataset: archive, network: eth) {
     Calls(
-      where: {Call: {Signature: {Name: {in: ["increaseLiquidity","decreaseLiquidity"]}}, To: {is: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88"}}, Block: {Date: {after: "2025-09-20", before: "2025-09-22"}}}
-      limit: {count: 1}
+      where: {
+        Call: {
+          Signature: {
+            Name: { in: ["increaseLiquidity", "decreaseLiquidity"] }
+          }
+          To: { is: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88" }
+        }
+        Block: { Date: { after: "2025-09-20", before: "2025-09-22" } }
+      }
+      limit: { count: 1 }
     ) {
       Arguments {
         Index
@@ -335,7 +346,6 @@ Monitor when liquidity providers add or remove liquidity from existing positions
     }
   }
 }
-
 ```
 
 </details>
@@ -449,8 +459,6 @@ query PositionDetailsByTokenId {
 
 </details>
 
----
-
 ## Fee Collectors on Uniswap
 
 ## Recent Fee Collections
@@ -532,6 +540,93 @@ It returns decoded arguments—including the Uniswap position `tokenId`, the `re
   }
 }
 ```
+
+## Uniswap V4
+
+Uniswap V4 uses a different architecture than V3: a single **PoolManager** contract (`0x000000000004444c5dc75cb358380d2e3de08a90`) manages pool state, and liquidity changes are emitted as `ModifyLiquidity` events.
+
+### Latest ModifyLiquidity Events on Uniswap V4
+
+Track the most recent liquidity modifications on Uniswap V4 by querying `ModifyLiquidity` events from the PoolManager contract. The response includes `tickLower` and `tickUpper` (int24 tick range), `liquidityDelta` (int256 — positive for adds, negative for removes), and `salt` (bytes32).
+
+[Run Query ➤](https://ide.bitquery.io/Latest-ModifyLiquidity-Events-on-Uniswap-v4)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query MyQuery {
+  EVM(dataset: realtime, network: eth) {
+    Events(
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Log: {
+          SmartContract: { is: "0x000000000004444c5dc75cb358380d2e3de08a90" }
+          Signature: { Name: { is: "ModifyLiquidity" } }
+        }
+      }
+    ) {
+      Block {
+        Number
+        Time
+      }
+      Call {
+        CallPath
+        InternalCalls
+        From
+        To
+        Signature {
+          Name
+        }
+      }
+      Topics {
+        Hash
+      }
+      Receipt {
+        CumulativeGasUsed
+      }
+      Transaction {
+        From
+        To
+        Type
+      }
+      Arguments {
+        Name
+        Type
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+        }
+      }
+      Log {
+        Signature {
+          Name
+        }
+        SmartContract
+      }
+    }
+  }
+}
+```
+
+</details>
 
 ## Key Concepts
 
