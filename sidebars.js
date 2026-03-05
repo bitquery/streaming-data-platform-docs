@@ -824,6 +824,7 @@ const sidebars = {
               "Build prediction market apps on Polymarket: Get prices, trades, markets, and oracle resolutions",
           },
           items: [
+            "examples/prediction-market/polymarket-data-for-hedge-funds",
             "examples/polymarket-api/polymarket-api",
             "examples/polymarket-api/polymarket-markets-api",
             "examples/polymarket-api/polymarket-sports-api",
