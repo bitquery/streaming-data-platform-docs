@@ -54,7 +54,7 @@ The Uniswap V3 NonfungiblePositionManager contract (`0xC36442b4a4522E871399CD717
 
 ### 4. Uniswap V4
 
-- [Latest ModifyLiquidity Events (V4) ➤](#latest-modifyliquidity-events-uniswap-v4)
+- [Latest ModifyLiquidity Events (V4) ➤](#latest-modifyliquidity-events-on-uniswap-v4)
 
 ---
 
