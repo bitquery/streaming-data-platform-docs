@@ -495,9 +495,9 @@ Get aggregated statistics across supported pairs of a token.
 
 #### Historical Price and Volume Data (Volume & Price, Last 24h using Trading API)
 
-Use this API to get historical price and volume for a specific token over the past 24 hours, with 1h, 4h, and 24h breakdowns.  
+Use this API to get historical price and volume for a specific token over the past 24 hours.
 
-▶️ [Historical Price and Volume Data](https://ide.bitquery.io/historical-price-and-historical-volume)
+▶️ [Historical Price and Volume Data](https://ide.bitquery.io/24h-historical-price-and-historical-volume-on-Solana)
 
 #### Get Multiple Token Analytics
 
