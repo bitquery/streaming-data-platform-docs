@@ -61,3 +61,87 @@ To retrieve data on token and currency transfers using Bitquery, users can utili
   - `Sender`: Returns the address of the token sender.
   - `Success`: Returns a Boolean value indicating whether the token transfer was successful.
   - `Type`: Returns the type of token transfer. e.g. call.
+
+## Deterministic Pagination for Backfilling Transfers
+
+When backfilling transfer data or building a historical index, you need **deterministic pagination** that guarantees no records are missed or duplicated. The key is to sort by a combination of fields that uniquely identify each transfer's position in the blockchain.
+
+**Try it live:** [Deterministic Transfer API](https://ide.bitquery.io/Reliable-transfer-api)
+
+```graphql
+{
+  EVM(dataset: combined, network: eth) {
+    Transfers(
+      where: { Transfer: { Success: true } }
+      orderBy: {
+        ascending: [
+          Block_Number,
+          Transaction_Index,
+          Call_Index,
+          Log_Index,
+          Transfer_Index,
+          Transfer_Type
+        ]
+      }
+      limit: { count: 10, offset: 0 }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+        From
+        Index
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender
+        Receiver
+        Index
+        Currency {
+          Symbol
+          Name
+          SmartContract
+          Decimals
+          Native
+        }
+      }
+      Call {
+        Index
+      }
+      Log {
+        LogAfterCallIndex
+        Index
+      }
+      Transfer {
+        Type
+      }
+    }
+  }
+}
+```
+
+### Why This Ordering Works
+
+The `orderBy` uses a composite ascending sort across six fields that together uniquely position every transfer in the blockchain:
+
+| Field | Purpose |
+|-------|---------|
+| `Block_Number` | Orders by block height |
+| `Transaction_Index` | Position of the transaction within the block |
+| `Call_Index` | Position of the internal call within the transaction |
+| `Log_Index` | Position of the event log within the call |
+| `Transfer_Index` | Position of the transfer within the log |
+| `Transfer_Type` | Differentiates transfer types at the same position |
+
+### How to Paginate
+
+Increment the `offset` by the `count` value on each request:
+
+- Page 1: `limit: { count: 10, offset: 0 }`
+- Page 2: `limit: { count: 10, offset: 10 }`
+- Page 3: `limit: { count: 10, offset: 20 }`
+
+This deterministic ordering ensures that every transfer appears exactly once across pages, making it safe for backfilling pipelines and historical data indexing. You can pull up to **25,000 records in a single request** by setting `count: 25000`.

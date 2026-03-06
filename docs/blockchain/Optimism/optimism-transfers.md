@@ -130,3 +130,66 @@ subscription {
 
 
 ```
+
+## Deterministic Pagination for Backfilling Transfers
+
+When backfilling Optimism transfer data or building a historical index, use deterministic pagination to guarantee no records are missed or duplicated.
+
+**Try it live:** [Deterministic Transfer API](https://ide.bitquery.io/Reliable-transfer-api)
+
+```graphql
+{
+  EVM(dataset: combined, network: optimism) {
+    Transfers(
+      where: { Transfer: { Success: true } }
+      orderBy: {
+        ascending: [
+          Block_Number,
+          Transaction_Index,
+          Call_Index,
+          Log_Index,
+          Transfer_Index,
+          Transfer_Type
+        ]
+      }
+      limit: { count: 10, offset: 0 }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+        From
+        Index
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender
+        Receiver
+        Index
+        Currency {
+          Symbol
+          Name
+          SmartContract
+          Decimals
+          Native
+        }
+      }
+      Call {
+        Index
+      }
+      Log {
+        LogAfterCallIndex
+        Index
+      }
+      Transfer {
+        Type
+      }
+    }
+  }
+}
+```
+
+The composite `orderBy` across `Block_Number`, `Transaction_Index`, `Call_Index`, `Log_Index`, `Transfer_Index`, and `Transfer_Type` uniquely positions every transfer, making offset-based pagination safe for backfilling. Increment `offset` by the `count` value on each request. You can pull up to **25,000 records in a single request** by setting `count: 25000`.
