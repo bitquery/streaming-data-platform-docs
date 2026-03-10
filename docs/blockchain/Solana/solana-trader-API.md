@@ -29,43 +29,53 @@ In this section we will see how to get Solana trader information using our API. 
 
 ## Top Traders of a token
 
-This query will give you top traders for this token `59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN` on Solana's DEX platforms.
-You can find the query [here](https://ide.bitquery.io/top-traders-of-a-token)
+This query returns the top traders for a specific token by USD volume over a date range. It uses the **combined** dataset and filters by token mint, quote currency (e.g. SOL), and optional date range. For each trader you get buy/sell counts, buy/sell volume, total volume, and trade count.
 
-```
-query TopTraders($token: String, $base: String) {
-  Solana {
+[Run query](https://ide.bitquery.io/top-traders-for-a-specific-token)
+
+```graphql
+{
+  Solana(dataset: combined) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "volumeUsd"}
-      limit: {count: 100}
-      where: {Trade: {Currency: {MintAddress: {is: $token}}, Side: {Amount: {gt: "0"}, Currency: {MintAddress: {is: $base}}}}, Transaction: {Result: {Success: true}}}
+      where: {
+        Trade: {
+          Currency: { MintAddress: { is: "98sMhvDwXj1RQi5c5Mndm3vPe9cBqPrbLaufMXFNMh5g" } }
+          Side: { Currency: { MintAddress: { is: "So11111111111111111111111111111111111111112" } } }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Date: { since: "2026-01-01", till: "2026-01-02" } }
+      }
+      orderBy: { descendingByField: "volume" }
+      limit: { count: 100 }
     ) {
       Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
         Account {
           Owner
         }
-        Dex {
-          ProgramAddress
-          ProtocolFamily
-          ProtocolName
-        }
       }
-      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
-      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
-      volume: sum(of: Trade_Amount)
-      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      volume: sum(of: Trade_Side_AmountInUSD)
+      trades: count
     }
   }
 }
-{
-  "token": "59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN",
-  "base": "So11111111111111111111111111111111111111112"
-}
 ```
 
-![image](https://github.com/user-attachments/assets/d2f6cc5d-b6ed-4ca2-b6aa-0b15f10d378a)
-
-Check data here on [DEXrabbit](https://dexrabbit.com/solana/pair/59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN/So11111111111111111111111111111111111111112#pair_top_traders).
+Change the token mint (`Trade.Currency.MintAddress`), quote currency (`Trade.Side.Currency.MintAddress`), and `Block.Date.since` / `till` to match your token and time window.
 
 ## Trades of Wallets in Realtime
 

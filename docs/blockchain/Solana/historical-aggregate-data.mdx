@@ -60,7 +60,6 @@ For this example the pair between the tokens listed below is considered.
 
 - Each OHLC data point is calculated independently per time interval (e.g., daily). There’s no enforcement to make the `Close` of one candle match the `Open` of the next.
 - **Gaps are possible**: Since the data is based on actual trades, if no trades occur exactly at the start or end of a day, the nearest trades before and after those timestamps will define the open and close. For instance:
-
   - Last trade on April 14: `23:58:12`
   - First trade on April 15: `00:03:45`  
     These would represent the _close_ of April 14 and _open_ of April 15 respectively, leaving a gap in between.
@@ -99,27 +98,52 @@ query MyQuery {
 }
 ```
 
-## Top 10 token traders
+## Top 100 traders of a token
 
-[This](https://ide.bitquery.io/top-10-traders-of-the-token) query returns the all time top 10 token traders for a particular token,
-which is `6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui` in this case.
+[This](https://ide.bitquery.io/top-traders-for-a-specific-token) query returns the top token traders for a specific token by USD volume over a date range. The example uses token mint `98sMhvDwXj1RQi5c5Mndm3vPe9cBqPrbLaufMXFNMh5g` paired with SOL (`So11111111111111111111111111111111111111112`) and the combined dataset for 2026-01-01 to 2026-01-02. You get trader address (Owner), buy/sell counts, buy/sell volume, total volume, and trade count per trader.
 
 ```graphql
-query MyQuery {
+{
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "tokens" }
       where: {
-        Trade: { Currency: { MintAddress: { is: "token mint address" } } }
+        Trade: {
+          Currency: {
+            MintAddress: { is: "98sMhvDwXj1RQi5c5Mndm3vPe9cBqPrbLaufMXFNMh5g" }
+          }
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Date: { since: "2026-01-01", till: "2026-01-02" } }
       }
+      orderBy: { descendingByField: "volume" }
+      limit: { count: 100 }
     ) {
       Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
         Account {
           Owner
         }
       }
-      tokens: sum(of: Trade_Amount)
+      buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      volume: sum(of: Trade_Side_AmountInUSD)
       trades: count
     }
   }
