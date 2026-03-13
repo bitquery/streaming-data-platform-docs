@@ -1,6 +1,6 @@
 ---
-title: "Polymarket API - Get Prices, Trades & Market Data"
-description: "Build Polymarket apps fast: Query trades, settlements, and market data using optimized APIs. Real-time prediction market data via GraphQL on Polygon."
+title: "Polymarket API - Trades, Prices, Market Data | Bitquery"
+description: "Polymarket API documentation (2026): Query trades, prices, and market data via GraphQL. Real-time prediction market API for developers. Free tier available."
 keywords:
   - Polymarket API
   - Polymarket GraphQL API
@@ -53,6 +53,12 @@ Use the **[Prediction Settlements API](https://docs.bitquery.io/docs/examples/pr
 Use the **[Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api)** — query market creation, resolution, and complete lifecycle events.
 
 [→ Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api)
+
+### **Need Market Metadata? Filter by slug, condition ID, or token?**
+
+Use the **[Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api)** (CTF Exchange) — query market data by slug, condition ID, outcome token, or event; combine with [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api) and [Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api) for full lifecycle.
+
+[→ Polymarket Markets API (CTF Exchange)](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api)
 
 ### **User & Wallet Activity?**
 

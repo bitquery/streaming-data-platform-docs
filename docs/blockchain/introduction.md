@@ -50,6 +50,8 @@ Our comprehensive V1 API supporting 40+ blockchains with historical data:
 
 ## Bitquery's Core Blockchain Data Capabilities
 
+**Popular APIs:** [Solana API](https://docs.bitquery.io/docs/blockchain/Solana/) (DEX trades, Pump.fun, Raydium) · [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api) · [BSC API](https://docs.bitquery.io/docs/blockchain/BSC/) · [Base API](https://docs.bitquery.io/docs/blockchain/Base/) · [DEX API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/dex-api) · [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
+
 ### **Crypto Price API - Real-Time Multi-Chain Price Data**
 
 Bitquery's dedicated **[Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** provides real-time, aggregated cryptocurrency price data with ultra-low latency across multiple blockchains. This specialized API is designed specifically for trading applications, DeFi protocols, and financial analytics.

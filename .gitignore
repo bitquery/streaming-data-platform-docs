@@ -23,3 +23,6 @@ fix-mdx-braces-v2.js
 tradingview-realtime-README.md
 fix.log
 audit.json
+
+# Google Search Console data (contains confidential GSC metrics)
+keywords/
