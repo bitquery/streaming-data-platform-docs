@@ -46,7 +46,7 @@ People are asking questions on Stack Exchange about custom filtering options in 
 
 ## Bitquery: A Powerful Alternative
 
-Bitquery offers a powerful real-time streaming system with two easy-to-use interfaces: **GraphQL Subscriptions** and **Kafka**. You can learn more about the differences and benefits of each in the [Bitquery documentation](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+Bitquery offers a powerful real-time streaming system with three interfaces: **GraphQL Subscriptions**, **Kafka**, and **gRPC (CoreCast)**. You can learn more about the differences and benefits of each in the [Bitquery documentation](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/). For ultra-low-latency gRPC streams (DEX trades, transfers, transactions), see [Solana gRPC Streams (CoreCast) →](https://docs.bitquery.io/docs/grpc/solana/introduction/).
 
 - **No Infra Needed**: You don’t need to run your own Solana node. Just use the Bitquery endpoint—no server costs, setup, or upgrades.
 - **Powerful Filtering**: Use GraphQL’s expressive filters to get only the data you need (by address, token, program, amount, and more). No more sifting through irrelevant noise.

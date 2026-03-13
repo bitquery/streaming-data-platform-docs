@@ -1,6 +1,7 @@
 ---
-title: CoreCast - Smart Solana gRPC Streams
-description: Low-latency, context-aware, topic-wise streaming from Bitquery for onchain data over gRPC.
+title: "Solana gRPC Streams - CoreCast Real-Time DEX, Transfers, Transactions"
+description: "grpc solana, solana grpc: Bitquery CoreCast streams for real-time DEX trades, transfers, transactions. Low-latency protobuf. Pump.fun, Raydium, Orca."
+keywords: ["grpc solana", "solana grpc", "CoreCast", "Solana gRPC stream", "Solana real-time data"]
 ---
 
 # CoreCast - Smart Solana gRPC Streams
