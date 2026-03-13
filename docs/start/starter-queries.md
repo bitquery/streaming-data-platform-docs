@@ -1,3 +1,20 @@
+---
+title: "Starter Queries - Bitquery API Examples by Chain"
+description: "Curated Bitquery starter queries for Ethereum, Solana, BSC, Polymarket, Bitcoin, and more. Cross-chain price API, OHLC, DEX trades, and blockchain examples."
+keywords: ["Bitquery starter queries", "Bitquery examples", "blockchain API examples", "GraphQL blockchain", "Bitquery IDE"]
+---
+
+<head>
+<meta name="title" content="Starter Queries - Bitquery API Examples by Chain"/>
+<meta name="description" content="Curated Bitquery starter queries for Ethereum, Solana, BSC, Polymarket, Bitcoin. Cross-chain price, OHLC, DEX, and more."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Starter Queries - Bitquery API Examples"/>
+<meta property="og:description" content="Get started with Bitquery: curated queries for crypto price, DEX, Polymarket, and blockchain data."/>
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Starter Queries - Bitquery Examples"/>
+</head>
+
 # Starter Queries
 
 Below is a set of queries that are curated for you to get started with Bitquery.

@@ -1,6 +1,19 @@
 ---
+title: "Backfill Data After WebSocket Disconnect - Python Tutorial"
+description: "Python tutorial: backfill missing data when WebSocket disconnects. Handle reconnections, query historical gaps, and gracefully close Bitquery streams."
 sidebar_position: 6
+keywords: ["backfill subscription", "WebSocket disconnection", "Bitquery Python", "GraphQL backfill", "stream reconnection"]
 ---
+
+<head>
+<meta name="title" content="Backfill Data After WebSocket Disconnect - Python Tutorial"/>
+<meta name="description" content="Python tutorial: backfill missing data when WebSocket disconnects. Handle reconnections and query historical gaps."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Backfill After WebSocket Disconnect - Bitquery"/>
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Backfill WebSocket Disconnect"/>
+</head>
 
 # How to Backfill Data After a WebSocket Disconnection in Python
 

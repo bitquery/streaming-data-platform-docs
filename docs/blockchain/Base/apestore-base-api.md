@@ -1,6 +1,19 @@
 ---
+title: "APE Store API - Base Chain Token Trades & Transaction Data"
+description: "Query APE Store trades on Base using Bitquery Transaction and Calls APIs. Get token address, contract address, and trade events via GraphQL."
 sidebar_position: 7
+keywords: ["APE Store API", "APE Store Base", "Base blockchain API", "Bitquery Base", "APE Store trades"]
 ---
+
+<head>
+<meta name="title" content="APE Store API - Base Chain Token Trades & Transaction Data"/>
+<meta name="description" content="Query APE Store trades on Base using Bitquery Transaction and Calls APIs. Token address, contract lookup, and trade events."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="APE Store API - Base Chain"/>
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="APE Store API - Base"/>
+</head>
 
 # APE Store API
 
