@@ -4,11 +4,14 @@ sidebar_position: 2
 
 # How to Use a Token
 
-
-Regardless of how you obtain your token—whether generated directly in the IDE or using a client ID-secret combination—the process for using the token remains consistent. 
+Regardless of how you obtain your token, whether generated directly in the IDE or using a client ID-secret combination, the process for using the token remains consistent.
 
 - You mention the token in the headers like this `'Authorization': f'Bearer {access_token}'`
+  OR
+
 - You attach the token in the URL `https://streaming.bitquery.io/graphql?token=ory_at_...`
+
+For the `wss` endpoint, the 2nd method is the only way, read more [here](https://docs.bitquery.io/docs/authorisation/websocket/)
 
 Below is an example in Python that mentions the token in the header.
 
