@@ -690,10 +690,14 @@ Try it on IDE: [Historical Price & Volume API](https://ide.bitquery.io/historica
 {
   Trading {
     Tokens(
-      where: { 
-        Interval: { Time: { Duration: { eq: 1 } } }, 
-        Block: { Time: { since_relative: { hours_ago: 24 } } }, 
-        Token: { Id: { in: ["bid:solana:9WHhgXJBGgxghkh5wAUWJFHVbnsRbonRYTnH2EChpump"] } } 
+      where: {
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Token: {
+          Id: {
+            in: ["bid:solana:9WHhgXJBGgxghkh5wAUWJFHVbnsRbonRYTnH2EChpump"]
+          }
+        }
       }
     ) {
       Currency {
@@ -706,20 +710,26 @@ Try it on IDE: [Historical Price & Volume API](https://ide.bitquery.io/historica
           currentPrice: Mean(maximum: Block_Time)
           H1Ago: Mean(
             minimum: Block_Time
-            if: {Block: {Time: {since_relative: {hours_ago: 1}}}}
+            if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
           )
           H4Ago: Mean(
             minimum: Block_Time
-            if: {Block: {Time: {since_relative: {hours_ago: 4}}}}
+            if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
           )
           H24Ago: Mean(
             minimum: Block_Time
-            if: {Block: {Time: {since_relative: {hours_ago: 24}}}}
+            if: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
           )
         }
       }
-      v1h: sum(of: Volume_Usd, if: {Block: {Time: {since_relative: {hours_ago: 1}}}})
-      v4h: sum(of: Volume_Usd, if: {Block: {Time: {since_relative: {hours_ago: 4}}}})
+      v1h: sum(
+        of: Volume_Usd
+        if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+      )
+      v4h: sum(
+        of: Volume_Usd
+        if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
+      )
       v24h: sum(of: Volume_Usd)
     }
   }
@@ -1541,6 +1551,71 @@ query MyQuery {
       )
     }
   }
+}
+```
+
+</details>
+
+## Realised PnL, buy volume, sell volume
+
+Get realised PnL, buy volume, and sell volume for a token on EVM of a trader for over a time window.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/Realised-Pnl-Buy-volume-Sell-Volume-Ethereum)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query ($trader: String) {
+  EVM(network: eth, dataset: combined) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x80029DBba7FA84bb16724a9fF6eE11c367D2FcfB" }
+          }
+        }
+        any: [
+          { Trade: { Buyer: { is: $trader } } }
+          { Trade: { Seller: { is: $trader } } }
+        ]
+        TransactionStatus: { Success: true }
+        Block: { Date: { since: "2026-03-11", till: "2026-03-13" } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+      }
+      buy_volume_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Buyer: { is: $trader }, Side: { Type: { is: sell } } } }
+      )
+      sell_volume_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Seller: { is: $trader }, Side: { Type: { is: buy } } } }
+      )
+      buy_volume: sum(
+        of: Trade_Amount
+        if: { Trade: { Buyer: { is: $trader }, Side: { Type: { is: sell } } } }
+      )
+      sell_volume: sum(
+        of: Trade_Amount
+        if: { Trade: { Seller: { is: $trader }, Side: { Type: { is: buy } } } }
+      )
+      PnL: calculate(expression: "$sell_volume_usd - $buy_volume_usd")
+      trades: count
+    }
+  }
+}
+```
+
+```
+{
+  "trader": "0x0a62Bd9Ee12119a5aC4807C0970fed8B71E83163"
 }
 ```
 
