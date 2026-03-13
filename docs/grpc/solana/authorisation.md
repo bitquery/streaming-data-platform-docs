@@ -1,6 +1,44 @@
+---
+title: "Solana gRPC Authentication - CoreCast API Token"
+description: "Authenticate Bitquery Solana gRPC streams (CoreCast). Configure API token for corecast.bitquery.io. Metadata, config.yaml, 401 debug."
+keywords: ["Solana gRPC auth", "CoreCast authentication", "grpc solana token", "bitquery api token"]
+---
+
 # Authentication
 
-To access Bitquery’s Solana gRPC streams (CoreCast), you must authenticate every stream using an **[authorization token](https://account.bitquery.io/user/api_v2/access_tokens)**. This token is provided in your configuration file and automatically added to the gRPC metadata before starting a stream. Check the [documentation](https://docs.bitquery.io/docs/authorisation/how-to-generate/) to create a new token.
+To access Bitquery's Solana gRPC streams (CoreCast), you must authenticate every stream using an **[authorization token](https://account.bitquery.io/user/api_v2/access_tokens)**. This token is provided in your configuration file and automatically added to the gRPC metadata before starting a stream. Check the [documentation](https://docs.bitquery.io/docs/authorisation/how-to-generate/) to create a new token.
+
+---
+
+## Overview
+
+1. Generate an API token at [account.bitquery.io](https://account.bitquery.io/user/api_v2/access_tokens)
+2. Add it to your config or environment
+3. Inject it into gRPC metadata as `Authorization` header before each stream call
+
+---
+
+## Quick Example
+
+Minimal Node.js snippet: create metadata and start a stream. Use your token from `config.yaml` or `process.env`.
+
+```javascript
+const grpc = require('@grpc/grpc-js');
+
+const metadata = new grpc.Metadata();
+metadata.add('authorization', process.env.BITQUERY_TOKEN || config.server.authorization);
+
+// Use with any CoreCast stream (DexTrades, Transfers, etc.)
+const stream = client.DexTrades(request, metadata);
+stream.on('data', (msg) => console.log(msg));
+stream.on('error', (err) => console.error(err));
+```
+
+:::tip No extra headers
+Only the `authorization` header is required. No API keys or other credentials.
+:::
+
+---
 
 ## Configuration
 
@@ -13,9 +51,13 @@ server:
   insecure: false
 ```
 
-* **address** → gRPC server host address, which is `corecast.bitquery.io`.
-* **authorization** → your API token (string that usually starts with `ory_at_...`). 
-* **insecure** → set `true` 
+| Field | Description |
+| ----- | ----------- |
+| **address** | gRPC server host: `corecast.bitquery.io` |
+| **authorization** | Your API token (usually starts with `ory_at_...`) |
+| **insecure** | Set `true` for unencrypted; prefer `false` (TLS) |
+
+---
 
 ## How it works
 
@@ -31,15 +73,19 @@ const stream = client.DexTrades(request, metadata);
 
 This adds an `authorization` header to the gRPC call. No other headers or credentials are required.
 
+---
+
 ## Security
 
 * Always keep your token secret — do not hardcode it in your codebase.
 * Store it in `config.yaml`, an environment variable, or a secret manager.
 * If `insecure: true`, traffic will not be encrypted. Prefer TLS (`insecure: false`).
 
+---
+
 ## Common Issues
 
-When authentication fails, you’ll see gRPC error **code `16`** with HTTP status **`401 Unauthorized`**:
+When authentication fails, you'll see gRPC error **code `16`** with HTTP status **`401 Unauthorized`**:
 
 ```json
 {

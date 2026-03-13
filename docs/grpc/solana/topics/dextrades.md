@@ -1,15 +1,79 @@
+---
+title: "Solana DEX Trades - gRPC Stream (CoreCast)"
+description: "Real-time DEX trade data via Solana gRPC. Pump.fun, Raydium, Orca. Protobuf, filter by program, pool, token, trader."
+keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana DEX stream", "dex trades"]
+---
+
 # Solana DEX Trades gRPC Stream
 
-The `dex_trades` gRPC Stream provides real-time DEX trade/swap data across supported Solana protocols. 
+The `dex_trades` gRPC Stream provides real-time DEX trade/swap data across supported Solana protocols (Pump.fun, Raydium, Orca, Jupiter, and more).
+
+---
+
+## Overview
+
+Subscribe to live DEX swaps with context-aware filtering. Each event includes transaction details, token context, trade amounts, and market address. Data is in **protobuf format** — use `bitquery-corecast-proto` to parse.
+
+:::note Filters required
+At least one filter per subscription. See [Filtering Options](#filtering-options).
+:::
+
+---
+
+## Quick Example (Node.js)
+
+Subscribe to Pump.fun DEX trades and log each event:
+
+```javascript
+const grpc = require('@grpc/grpc-js');
+const { loadPackageDefination } = require('bitquery-corecast-proto');
+
+const packageDefinition = loadPackageDefination();
+const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
+const CoreCast = protoDescriptor.solana_corecast.CoreCast;
+
+const client = new CoreCast('corecast.bitquery.io', grpc.credentials.createSsl());
+const metadata = new grpc.Metadata();
+metadata.add('authorization', process.env.BITQUERY_TOKEN || 'YOUR_API_TOKEN');
+
+const request = {
+  program: { addresses: ['6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P'] }  // Pump.fun
+};
+
+const stream = client.DexTrades(request, metadata);
+stream.on('data', (msg) => {
+  if (msg.Trade) {
+    const dex = msg.Trade.Dex?.ProtocolName || '?';
+    const base = msg.Trade.Market?.BaseCurrency?.Symbol || '?';
+    console.log(`[${dex}] Trade: ${base}`);
+  }
+});
+stream.on('error', (err) => console.error(err));
+```
+
+Run: `npm install @grpc/grpc-js bitquery-corecast-proto` then `BITQUERY_TOKEN=ory_at_xxx node index.js`
+
+---
 
 ## Configuration
 
 To subscribe to DEX trades, configure your stream as follows:
 
 ```yaml
+server:
+  address: "corecast.bitquery.io"
+  authorization: "<your_api_token>"
+  insecure: false
+
 stream:
   type: "dex_trades"
+
+filters:
+  programs:
+    - "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"  # Pump.fun example
 ```
+
+---
 
 ## Available Data
 
@@ -124,3 +188,13 @@ npm install bitquery-corecast-proto
 ```
 
 This package includes all necessary protobuf definitions without requiring manual downloads.
+
+---
+
+## Related
+
+- [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) — Topics and concepts
+- [Pump.fun gRPC Example](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/) — Full Pump.fun app
+- [Copy Trading Bot](https://docs.bitquery.io/docs/grpc/solana/examples/grpc-copy-trading-bot/) — Solana copy trading
+- [Solana DEX Trades (GraphQL)](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades) — WebSocket subscriptions
+- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorisation/) — Token setup
