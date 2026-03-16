@@ -186,7 +186,7 @@ query MyQuery {
 
 ## Track Pump Fun Token Migrations to PumpSwap in Realtime - Subscription
 
-You will need to use two queries to get the realtime migrations data, 2 instructions should be presnt in a transaction `migrate` and `create_pool` then only the transaction is a successfull migration of a pump fun token to pump swap.
+You will need to use two queries to get the realtime migrations data, 2 instructions should be present in a transaction `migrate` and `create_pool` then only the transaction is a successfull migration of a pump fun token to pump swap.
 
 Use [query 1](https://ide.bitquery.io/track-migrations-of-pump-token-in-realtime) to get the transactions where pumpfun:migrate instruction is invoked in realtime. We specifically need to get trxn signature and block slot of migrations in realtime.
 
