@@ -1,8 +1,10 @@
 ---
-title: "Polymarket Markets API - Filter by Slug, Condition & Token"
-description: "Find Polymarket markets using market slug, event slug, condition ID, and token ID filters. Query markets with multiple filter options for integration with trades and settlements."
+title: "Polymarket CTF Exchange & Markets API - Condition ID, Token Filters"
+description: "Query Polymarket conditional token (CTF) market data, condition IDs, and token filters. Market creation, resolution, and lifecycle events via GraphQL."
 keywords:
   - Polymarket Markets API
+  - Polymarket CTF Exchange
+  - Polymarket conditional tokens
   - Polymarket market slug
   - Polymarket event slug
   - condition ID Polymarket

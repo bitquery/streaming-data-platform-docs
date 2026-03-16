@@ -1,6 +1,19 @@
 ---
+title: "GraphQL Query Principles - Bitquery API Schema & Data"
+description: "Learn how to query blockchain data with GraphQL. Schema definition, query vs subscription, dataset options, and Bitquery API structure."
 sidebar_position: 0
+keywords: ["GraphQL query", "Bitquery GraphQL", "blockchain GraphQL", "Bitquery schema", "GraphQL API"]
 ---
+
+<head>
+<meta name="title" content="GraphQL Query Principles - Bitquery API Schema & Data"/>
+<meta name="description" content="Learn how to query blockchain data with GraphQL. Schema, query vs subscription, dataset options."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="GraphQL Query Principles - Bitquery"/>
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="GraphQL Query Principles"/>
+</head>
 
 # Query Principles
 

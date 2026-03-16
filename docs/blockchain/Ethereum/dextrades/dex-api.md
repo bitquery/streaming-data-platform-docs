@@ -2,6 +2,8 @@
 
 > **Before you start**: Not sure when to use DexTrades vs DexTradesByTokens vs Events vs Calls? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
 
+**DEX APIs across chains:** [Solana DEX](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades) (Pump.fun, Raydium, Orca, Jupiter) · [Base DEX](https://docs.bitquery.io/docs/blockchain/Base/base-dextrades) · [BSC DEX](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades) · [Uniswap API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/uniswap-api) · [PancakeSwap API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/pancakeswap-api) · [DEXScreener API](https://docs.bitquery.io/docs/examples/dextrades/DEXScreener/evm_dexscreener)
+
 We have two main APIs to get DEX trading data.
 
 - DEXTrades

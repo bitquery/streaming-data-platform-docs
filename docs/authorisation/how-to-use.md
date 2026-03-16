@@ -1,6 +1,19 @@
 ---
+title: "How to Use Bitquery API Token - Authorization Examples"
+description: "Use your Bitquery OAuth token in API requests: header Bearer token or URL token parameter. Python, JavaScript, and cURL examples for streaming.bitquery.io."
 sidebar_position: 2
+keywords: ["Bitquery API token", "Bitquery authorization", "OAuth token usage", "Bearer token", "API authentication"]
 ---
+
+<head>
+<meta name="title" content="How to Use Bitquery API Token - Authorization Examples"/>
+<meta name="description" content="Use your Bitquery OAuth token in API requests: Bearer header or URL parameter. Python, JavaScript, and cURL examples."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="How to Use Bitquery API Token"/>
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="How to Use Bitquery API Token"/>
+</head>
 
 # How to Use a Token
 

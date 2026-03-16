@@ -18,20 +18,20 @@ Once a token reaches full bonding (100%), it automatically migrates to PumpSwap,
 To help developers, traders, and analysts follow this journey, Bitquery offers a comprehensive real-time API suite that spans the entire lifecycle of a Pump fun token. Let’s walk through it:
 
 <head>
-  <meta name="title" content="Understanding Pump.fun Token Lifecycle with Bitquery APIs - Real-Time On-Chain Data"/>
-  <meta name="description" content="Learn how Pump.fun tokens are created, traded, and graduated to PumpSwap—and how to track every step using real-time Bitquery APIs."/>
+  <meta name="title" content="Pump.fun to PumpSwap API - Token Migration Tracking"/>
+  <meta name="description" content="Track Pump.fun token migrations to PumpSwap in real time. Bonding curve progress, graduation events, and DEX data via Bitquery API."/>
   <meta name="keywords" content="Pump.fun API, Solana memecoins, PumpSwap migration, Pump.fun token lifecycle, on-chain trading data, real-time blockchain API, Solana Shred Streams, token bonding curve, crypto analytics, Bitquery Pump.fun, DEX trades, token market cap, Solana developer tools"/>
   <meta name="robots" content="index, follow"/>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="language" content="English"/>
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Understanding Pump.fun Token Lifecycle with Bitquery APIs"/>
-  <meta property="og:description" content="A complete guide to tracking Pump.fun token creation, trading, bonding curve, and migration to PumpSwap using Bitquery’s real-time APIs."/>
+  <meta property="og:title" content="Pump.fun to PumpSwap API - Token Migration Tracking"/>
+  <meta property="og:description" content="Track Pump.fun token migrations to PumpSwap in real time. Bonding curve progress, graduation events, and DEX data via Bitquery API."/>
 
   <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Track the Full Lifecycle of Pump.fun Tokens with Bitquery APIs"/>
-  <meta property="twitter:description" content="From token launch to trading and migration, explore how to monitor Pump.fun tokens in real-time using Bitquery's blockchain APIs."/>
+  <meta property="twitter:title" content="Pump.fun to PumpSwap API - Token Migration Tracking"/>
+  <meta property="twitter:description" content="Track Pump.fun token migrations to PumpSwap in real time. Bonding curve progress and DEX data via Bitquery API."/>
 </head>
 
 ## Track New Token Creations in Real-Time
