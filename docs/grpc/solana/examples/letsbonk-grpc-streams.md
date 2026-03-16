@@ -1,3 +1,9 @@
+---
+title: "LetsBonk.fun gRPC Streams - Real-time DEX Trades"
+description: "Stream LetsBonk.fun DEX trades via CoreCast gRPC. Raydium LaunchLab memecoin launchpad."
+keywords: ["solana grpc", "grpc solana", "LetsBonk gRPC", "CoreCast", "Raydium LaunchLab"]
+---
+
 # LetsBonk.fun gRPC Streams
 
 Real-time streaming of LetsBonk.fun DEX trades, orders, and transactions via CoreCast gRPC API.
@@ -9,7 +15,7 @@ Real-time streaming of LetsBonk.fun DEX trades, orders, and transactions via Cor
 Clone and get started:
 
 ```bash
-git clone hhttps://github.com/bitquery/grpc-usecase-examples.git
+git clone https://github.com/bitquery/grpc-usecase-examples.git
 ```
 
 ## Introduction

@@ -1,3 +1,9 @@
+---
+title: "Pump.fun gRPC Streams - Real-time DEX Trades"
+description: "Stream Pump.fun DEX trades, orders, and transactions via CoreCast gRPC. Node.js example with filtering."
+keywords: ["solana grpc", "grpc solana", "Pump.fun gRPC", "CoreCast", "Pump.fun stream"]
+---
+
 # Pump.fun gRPC Streams
 
 Real-time streaming of Pump.fun DEX trades, orders, and transactions via CoreCast gRPC API.

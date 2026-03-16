@@ -1,10 +1,14 @@
-# Solana Manifest API
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+# Manifest DEX API
 
 Track real-time trades, token prices, OHLC data, top traders, and trading volume on **Manifest** DEX on Solana using Bitquery's GraphQL API. Filter by `Dex: { ProtocolFamily: { is: "Manifest" } }` to get Manifest-only data.
 
 :::note
 Use these APIs as **queries** for OHLC, top traders, and volume aggregates. Subscriptions are for real-time trades and price feeds; aggregates and time intervals do not work with subscriptions.
 :::
+
+<VideoPlayer url="https://youtu.be/SgFPOql5Q5A" />
 
 ## Real-time Manifest DEX Trades
 
@@ -15,7 +19,9 @@ Subscribe to trades on Manifest DEX as they happen. Returns buy/sell amounts, cu
 ```graphql
 subscription ManifestDEXTrades {
   Solana {
-    DEXTrades(where: { Trade: { Dex: { ProtocolFamily: { is: "Manifest" } } } }) {
+    DEXTrades(
+      where: { Trade: { Dex: { ProtocolFamily: { is: "Manifest" } } } }
+    ) {
       Trade {
         Dex {
           ProgramAddress
@@ -70,8 +76,14 @@ Get the most recent trade price for a token on Manifest. Example uses USDC (`EPj
       where: {
         Trade: {
           Dex: { ProtocolFamily: { is: "Manifest" } }
-          Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } }
-          Side: { Currency: { MintAddress: { is: "So11111111111111111111111111111111111111112" } } }
+          Currency: {
+            MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
+          }
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
         }
       }
     ) {
@@ -100,7 +112,9 @@ subscription RealtimeManifestPrice {
       where: {
         Trade: {
           Dex: { ProtocolFamily: { is: "Manifest" } }
-          Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } }
+          Currency: {
+            MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
+          }
         }
       }
     ) {
@@ -129,8 +143,14 @@ Get OHLC (open, high, low, close), volume, and trade count for a token pair on M
       orderBy: { descendingByField: "Block_Timefield" }
       where: {
         Trade: {
-          Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } }
-          Side: { Currency: { MintAddress: { is: "USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB" } } }
+          Currency: {
+            MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
+          }
+          Side: {
+            Currency: {
+              MintAddress: { is: "USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB" }
+            }
+          }
           Dex: { ProtocolFamily: { is: "Manifest" } }
           PriceAsymmetry: { lt: 0.1 }
         }
@@ -192,8 +212,14 @@ query TopTraders($token: String) {
           Type
         }
       }
-      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
-      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      bought: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sold: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
@@ -215,8 +241,14 @@ query ManifestTokenVolume {
         Block: { Time: { since_relative: { hours_ago: 1 } } }
         Transaction: { Result: { Success: true } }
         Trade: {
-          Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } }
-          Side: { Currency: { MintAddress: { is: "So11111111111111111111111111111111111111112" } } }
+          Currency: {
+            MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
+          }
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
           Dex: { ProtocolFamily: { is: "Manifest" } }
         }
       }

@@ -1,6 +1,55 @@
+---
+title: "Solana DEX Pools - gRPC Stream (CoreCast)"
+description: "Real-time DEX pool liquidity events via Solana gRPC. Add/remove liquidity, swaps. Protobuf."
+keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana DEX pools", "liquidity"]
+---
+
 # Solana DEX Pools gRPC Stream
 
 The `dex_pools` gRPC Stream provides real-time DEX pool liquidity and balance change data across supported Solana protocols.
+
+---
+
+## Overview
+
+Subscribe to live DEX pool events: liquidity adds, removes, swaps, and pool creation. Each event includes base/quote changes, market info, and balance updates. Data is in **protobuf format** — use `bitquery-corecast-proto` to parse.
+
+---
+
+## Quick Example (Node.js)
+
+Subscribe to PumpSwap pool events and log each event:
+
+```javascript
+const grpc = require('@grpc/grpc-js');
+const { loadPackageDefination } = require('bitquery-corecast-proto');
+
+const packageDefinition = loadPackageDefination();
+const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
+const CoreCast = protoDescriptor.solana_corecast.CoreCast;
+
+const client = new CoreCast('corecast.bitquery.io', grpc.credentials.createSsl());
+const metadata = new grpc.Metadata();
+metadata.add('authorization', process.env.BITQUERY_TOKEN || 'YOUR_API_TOKEN');
+
+const request = {
+  program: { addresses: ['pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA'] }  // PumpSwap AMM
+};
+
+const stream = client.DexPools(request, metadata);
+stream.on('data', (msg) => {
+  if (msg.PoolEvent) {
+    const dex = msg.PoolEvent.Dex?.ProtocolName || '?';
+    const method = msg.PoolEvent.Instruction?.Program?.Method || '?';
+    console.log(`[${dex}] Pool: ${method}`);
+  }
+});
+stream.on('error', (err) => console.error(err));
+```
+
+Run: `npm install @grpc/grpc-js bitquery-corecast-proto` then `BITQUERY_TOKEN=ory_at_xxx node index.js`
+
+---
 
 ## Configuration
 
@@ -157,3 +206,12 @@ npm install bitquery-corecast-proto
 ```
 
 This package includes all necessary protobuf definitions without requiring manual downloads.
+
+---
+
+## Related
+
+- [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) — Topics and concepts
+- [DEX Trades gRPC](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades/) — DEX swap stream
+- [Pump.fun gRPC Example](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/) — Uses dex_pools
+- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorisation/) — Token setup

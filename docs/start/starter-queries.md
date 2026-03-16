@@ -64,10 +64,9 @@ For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ET
 
 #### Historical Price and Volume Data (Volume & Price, Last 24h)
 
-Use this API to get historical price and volume over the past 24 hours, with 1h, 4h, and 24h breakdowns.  
+Use this API to get historical price and volume over the past 24 hours, with 1h, 4h, and 24h breakdowns.
 
 ▶️ [Historical Price and Volume Data](https://ide.bitquery.io/multiple-tokens-volume_1)
-
 
 ## PolyMarket
 
@@ -230,6 +229,11 @@ This query returns the latest trades on the Ethereum network where distinction o
 This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
 ▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
 
+#### Realised PnL, buy volume, sell volume
+
+Get realised PnL, buy volume, and sell volume for a token on EVM of a trader for over a time window.
+▶️ [Realised PnL, buy volume, sell volume](https://ide.bitquery.io/Realised-Pnl-Buy-volume-Sell-Volume-Ethereum)
+
 ### Events & Calls
 
 #### Get Latest Events
@@ -264,7 +268,7 @@ This query gets you Price Change 5min, 1h, 6h and 24h of a specific token on the
 
 #### Historical Price and Volume Data (Volume & Price, Last 24h using Trading API)
 
-Use this API to get historical price and volume for a specific token over the past 24 hours, with 1h, 4h, and 24h breakdowns.  
+Use this API to get historical price and volume for a specific token over the past 24 hours, with 1h, 4h, and 24h breakdowns.
 
 ▶️ [Historical Price and Volume Data](https://ide.bitquery.io/historical-price-and-historical-volume)
 
@@ -304,6 +308,11 @@ This API provides a list of top holders along with relevant statistics for a giv
 
 This API provides a list of all holders along with relevant statistics for a given token on a specific date.
 ▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_7)
+
+#### Realised PnL, buy volume, sell volume
+
+Get realised PnL, buy volume, and sell volume for a token on EVM of a trader for over a time window.
+▶️ [Realised PnL, buy volume, sell volume](https://ide.bitquery.io/Realised-Pnl-Buy-volume-Sell-Volume-Ethereum)
 
 ### Slippage APIs
 
@@ -426,6 +435,11 @@ This query returns the latest created pools on Raydium. You can set the limit he
 This subscription query returns the latest PumpFun trades in real time.  
 ▶️ [Real-time Trades](https://ide.bitquery.io/Pumpfun-DEX-Trades_1#)
 
+#### Realised PnL, avg buy price, buy volume, sell volume
+
+Get realised PnL, average buy price, buy volume, and sell volume for a token on Solana of a trader for over a time window.
+▶️ [Realised PnL, avg buy price, buy volume, sell volume](https://ide.bitquery.io/Realised-Pnl-avg-buy-price-Buy-volume-Sell-Volume-Solana_2)
+
 ### OHLC & Price Data
 
 #### Get OHLCV by Pair Address
@@ -509,6 +523,11 @@ Get the pair stats by using pair address.
 
 Get aggregated statistics across supported pairs of a token.
 ▶️ [Get Aggregated Token Pair Stats](https://ide.bitquery.io/traded-pairs-stats-of-a-token)
+
+#### Realised PnL, avg buy price, buy volume, sell volume of a Trader for specific token
+
+Get realised PnL, average buy price, buy volume, and sell volume for a token on Solana of a trader for over a time window.
+▶️ [Realised PnL, avg buy price, buy volume, sell volume](https://ide.bitquery.io/Realised-Pnl-avg-buy-price-Buy-volume-Sell-Volume-Solana_2)
 
 #### Historical Price and Volume Data (Volume & Price, Last 24h using Trading API)
 
@@ -1205,9 +1224,6 @@ This query gets the latest 10 NFT trades on Ethereum mainnet. You can increase t
 
 This query gets the top 10 traded NFTs based on the number of trades within a specified date range. You can change the filters such as the date range and limit.  
 ▶️ [Top Traded NFTs](https://ide.bitquery.io/Top-traded-NFT-tokens-in-a-month)
-
-
-
 
 ## x402 APIs
 

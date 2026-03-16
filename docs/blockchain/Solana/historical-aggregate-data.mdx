@@ -440,6 +440,71 @@ query GetAthMarketCap($tokens: [String!]!) {
 }
 ```
 
+## Realised PnL, avg buy price, buy volume, sell volume
+
+Get realised PnL, average buy price, buy volume, and sell volume for a token on Solana of a trader trader for over a time window.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/Realised-Pnl-avg-buy-price-Buy-volume-Sell-Volume-Solana_2)
+
+```graphql
+{
+  Solana(dataset: combined) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "4iLKj7fkZF2rSpgSD8W6UFq4fkKXkkbJMGXMz3B8pump" }
+          }
+          Account: {
+            Owner: { is: "2vqBfRdhX8sHmVFo1TY1yBdFXkHMe4LgifrxvHBpXUAK" }
+          }
+          Dex: { ProtocolName: { notIn: ["jupiter", "dex_solana_v3"] } }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Date: { since: "2026-03-11", till: "2026-03-13" } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          MintAddress
+        }
+        Account {
+          Owner
+        }
+      }
+      buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      buy_volume_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+
+      buy_volume_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell_volume_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      buy_volume: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell_volume: sum(
+        of: Trade_Amount
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      RealizedPnL: calculate(expression: "$sell_volume_usd - $buy_volume_usd")
+      trades: count
+      avg_buy_price: calculate(expression: "$buy_volume_usd / $buy_volume")
+    }
+  }
+}
+```
+
 ## Video Tutorial for Querying Historical Solana Data
 
 <VideoPlayer url="https://youtu.be/qbSEPbHQb5k" />
