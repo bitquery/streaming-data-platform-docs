@@ -11,6 +11,8 @@ The OHLC values (Open, High, Low, Close) are determined across all chains and to
 - Low: The lowest price observed in the interval, from any chain.
 - Close: The most recent/latest price recorded in the interval, from any chain.
 
+**Volume.Quote vs Volume.Usd**: For USD-based pricing, `Volume.Quote` is the sum of quote token amounts (not USD). Use `Volume.Usd` for USD totals. See [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm) for details.
+
 ```
 {
   Trading {
@@ -42,7 +44,7 @@ The OHLC values (Open, High, Low, Close) are determined across all chains and to
       Volume {
         Base
         BaseAttributedToUsd
-        Quote
+        Quote   # Sum of quote token amounts (not USD); use Usd for USD totals (March 11 2026: see Price Index Algorithm)
         Usd
       }
       Price {

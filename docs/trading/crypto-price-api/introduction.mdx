@@ -31,11 +31,11 @@ keywords:
 
 # Crypto Price API – Real-Time Token Data, Charts & OHLC
 
-Bitquery provides **Crypto Price APIs and Streams** via GraphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto). This **cryptocurrency price api** delivers comprehensive pricing data across multiple blockchains.
+Bitquery provides **Crypto Price APIs and Streams** via GraphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto). This **cryptocurrency price API** delivers comprehensive pricing data across multiple blockchains.
 
-These tools let you stream and query aggregated price data—in USD or other paired currencies—based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains. Our **crypto prices api** provides real-time and historical price information with ultra-low latency.
+These tools let you stream and query aggregated price data in USD or other paired currencies based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains. Our **crypto prices api** provides real-time and historical price information with ultra-low latency.
 
-The Crypto Price API (Price Index) provides more than just pair prices—it also includes [OHLCV (K-Line)](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
+The Crypto Price API (Price Index) provides more than just pair prices, it also includes [OHLCV (K-Line)](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
 While you can access the aggregated price for a single trading pair, the Price Index also supports cross-chain and cross-DEX aggregation, giving you a unified view of token prices across multiple ecosystems.
 
 ## Key Features of These APIs
@@ -46,7 +46,7 @@ While you can access the aggregated price for a single trading pair, the Price I
 - **Clean data**: Automatic filtering of low-quality trades and outliers
 - **Cross-chain aggregation**: Unified view of token prices across multiple ecosystems
 
-## List of Networks Supported
+## List of Supported Networks
 
 * Arbitrum
 * Base
@@ -126,7 +126,7 @@ The Crypto price API/Stream (Price Index) provides real-time, aggregated price d
 ### Data Processing Pipeline
 
 1. **Data Ingestion**: Onchain data is collected and parsed from supported DEXs across all chains
-2. **Quality Filtering**: Low-quality trades and outliers are automatically filtered out
+2. **Quality Filtering**: Trades with zero amount or below decimal precision (e.g. &lt; 10^decimals/10,000) are filtered out. See [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm) for details.
 3. **Aggregation**: Price data is aggregated by time intervals (1s, 3s, 5s, etc.) and volume thresholds
 4. **Metric Calculation**: OHLC, moving averages, and other statistical measures are pre-calculated
 5. **Distribution**: Data is made available via GraphQL subscriptions and Kafka streams
@@ -257,7 +257,7 @@ Currencies are representation of all tokens on various chains supported in Crypt
 
 ```
 
-### How the above query work?
+### How does the above query work?
 
 It takes amounts and prices from all chains that use BTC and wrapped versions (including bridged versions) and presents an aggregated view. The OHLC, mean and other values represent a stable BTC picture.
 

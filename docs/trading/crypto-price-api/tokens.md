@@ -66,7 +66,8 @@ subscription {
 - **Volume Section Explained:**
 
   - `Base`: Volume of the token itself (the token in question) for all pairs.
-  - `Usd`: Total base volume converted to USD.
+  - `Quote`: Sum of **quote token** amounts (the tokens it traded against). This is not USD—for USD amounts use `Usd`. (As of March 11 2026, see [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm).)
+  - `Usd`: Total volume in USD. Use this when you need USD amounts.
 
 - **IsQuotedInUsd**:  
   A boolean indicating whether the OHLC and average prices are expressed in USD (`true`) or in the quote token's value (`false`).

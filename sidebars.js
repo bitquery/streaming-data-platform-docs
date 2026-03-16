@@ -778,8 +778,9 @@ const sidebars = {
             // "trading/price-index/tokens",
             // "trading/price-index/currency",
             // "trading/price-index/pairs",
-
+            "trading/crypto-price-api/price-index-algorithm",
             "trading/crypto-price-api/in-depth",
+           
             "trading/crypto-price-api/examples",
             "trading/crypto-price-api/crypto-market-data-api",
             "trading/crypto-price-api/crypto-ohlc-candle-k-line-api",

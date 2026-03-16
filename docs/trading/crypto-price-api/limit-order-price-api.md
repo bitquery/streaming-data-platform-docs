@@ -73,12 +73,8 @@ Bitquery's [Crypto Price API for limit orders](https://docs.bitquery.io/docs/tra
 - **BSC**: PancakeSwap, Venus
 - **Cross-chain normalization** for unified pricing
 
-#### 4. **Bad Trade Filtering**
-Automatic outlier removal:
-- Statistical anomaly detection
-- Flash loan/MEV attack filtering  
-- Moving averages (SMA, WMA, EMA)
-- Anomaly-resistant OHLC
+#### 4. **Trade Filtering**
+Trades are excluded only when the trade amount is zero or below decimal precision (e.g. &lt; 10^decimals/10,000), avoiding precision loss. Moving averages (SMA, WMA, EMA) and anomaly-resistant OHLC are still calculated on the resulting feed. For full details see the [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm).
 
 
 

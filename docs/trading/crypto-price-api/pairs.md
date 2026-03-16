@@ -52,9 +52,9 @@ The Pairs cube provides trading data for a base token traded against a quote tok
 - `Volume.Base`:  
   Total amount of base token traded during the interval.
 - `Volume.Quote`:  
-  Total amount of quote token traded.
+  Sum of **quote token** amounts traded (e.g. USDT, USDC). For USD-base pairs this is not USD—it is the total in quote token units. For USD amounts use `Volume.Usd`. (As of March 11 2026, see [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm) for details.)
 - `Volume.Usd`:  
-  Total trade volume converted into USD, using known quote token prices (if available).
+  Total trade volume in USD. Use this when you need USD amounts.
 - `Volume.BaseAttributedToUsd`:  
   Portion of the `Volume.Base` that was traded against quote tokens with known USD prices. Used to accurately calculate average USD price.
 - `Price.Ohlc.*`:  
@@ -72,4 +72,4 @@ if quoteInUsd {
 }
 ```
 
-For an in-depth breakdown of how quote and base are assigned, go [here](https://docs.bitquery.io/docs/trading/price-index/in-depth/). It is not a necessary read.
+For an in-depth breakdown of how quote and base are assigned, see [Breaking Down Price Streams in Detail](/docs/trading/crypto-price-api/in-depth). It is not necessary for basic use.

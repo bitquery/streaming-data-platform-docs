@@ -1,7 +1,8 @@
 # Breaking Down Price Streams in Detail
 
-This section is not a necesary reading to start using the APIs, it is an explanation of how we have setup and designed the APIs, what algorithmic rules we follow to show data.
-You can go the examples section to start using it.
+This section is not necessary reading to start using the APIs; it explains how we have set up and designed the APIs and what algorithmic rules we follow to show data. You can go to the [examples section](/docs/trading/crypto-price-api/examples) to start using it.
+
+For how prices and volumes are computed (trade filtering, volume-weighted token/currency pricing, and field semantics), see **[Price Index Algorithm (March 11 2026 Update)](/docs/trading/crypto-price-api/price-index-algorithm)**.
 
 ## Understanding Base and Quote in Pairs API
 
