@@ -18,42 +18,6 @@ Subscribe to live DEX swaps with context-aware filtering. Each event includes tr
 At least one filter per subscription. See [Filtering Options](#filtering-options).
 :::
 
----
-
-## Quick Example (Node.js)
-
-Subscribe to Pump.fun DEX trades and log each event:
-
-```javascript
-const grpc = require('@grpc/grpc-js');
-const { loadPackageDefination } = require('bitquery-corecast-proto');
-
-const packageDefinition = loadPackageDefination();
-const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
-const CoreCast = protoDescriptor.solana_corecast.CoreCast;
-
-const client = new CoreCast('corecast.bitquery.io', grpc.credentials.createSsl());
-const metadata = new grpc.Metadata();
-metadata.add('authorization', process.env.BITQUERY_TOKEN || 'YOUR_API_TOKEN');
-
-const request = {
-  program: { addresses: ['6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P'] }  // Pump.fun
-};
-
-const stream = client.DexTrades(request, metadata);
-stream.on('data', (msg) => {
-  if (msg.Trade) {
-    const dex = msg.Trade.Dex?.ProtocolName || '?';
-    const base = msg.Trade.Market?.BaseCurrency?.Symbol || '?';
-    console.log(`[${dex}] Trade: ${base}`);
-  }
-});
-stream.on('error', (err) => console.error(err));
-```
-
-Run: `npm install @grpc/grpc-js bitquery-corecast-proto` then `BITQUERY_TOKEN=ory_at_xxx node index.js`
-
----
 
 ## Configuration
 

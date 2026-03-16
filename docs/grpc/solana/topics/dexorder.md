@@ -14,43 +14,6 @@ The `dex_orders` gRPC Stream provides real-time DEX order placement and executio
 
 Subscribe to live DEX order book events (place, cancel, fill) from OpenBook, Serum, and other order-book DEXs. Each event includes order details, market info, and balance updates. Data is in **protobuf format** — use `bitquery-corecast-proto` to parse.
 
----
-
-## Quick Example (Node.js)
-
-Subscribe to OpenBook orders and log each event:
-
-```javascript
-const grpc = require('@grpc/grpc-js');
-const { loadPackageDefination } = require('bitquery-corecast-proto');
-
-const packageDefinition = loadPackageDefination();
-const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
-const CoreCast = protoDescriptor.solana_corecast.CoreCast;
-
-const client = new CoreCast('corecast.bitquery.io', grpc.credentials.createSsl());
-const metadata = new grpc.Metadata();
-metadata.add('authorization', process.env.BITQUERY_TOKEN || 'YOUR_API_TOKEN');
-
-const request = {
-  program: { addresses: ['opnb2LAfJYbRMAHHvqjCwQxanZn7ReEHp1k81EohpZb'] }  // OpenBook v2
-};
-
-const stream = client.DexOrders(request, metadata);
-stream.on('data', (msg) => {
-  if (msg.Order) {
-    const dex = msg.Order.Dex?.ProtocolName || '?';
-    const side = msg.Order.Order?.BuySide ? 'BUY' : 'SELL';
-    console.log(`[${dex}] Order: ${side}`);
-  }
-});
-stream.on('error', (err) => console.error(err));
-```
-
-Run: `npm install @grpc/grpc-js bitquery-corecast-proto` then `BITQUERY_TOKEN=ory_at_xxx node index.js`
-
----
-
 ## Configuration
 
 To subscribe to DEX orders, configure your stream as follows:

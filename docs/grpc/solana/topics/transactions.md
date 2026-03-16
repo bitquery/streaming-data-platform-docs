@@ -14,42 +14,6 @@ The `transactions` gRPC Stream provides real-time transaction data across the So
 
 Subscribe to live Solana transactions with filtering by program or signer. Each event includes parsed instructions (IDL), balance updates, program logs, and execution status. Data is in **protobuf format** — use `bitquery-corecast-proto` to parse.
 
----
-
-## Quick Example (Node.js)
-
-Subscribe to transactions from a specific program and log each event:
-
-```javascript
-const grpc = require('@grpc/grpc-js');
-const { loadPackageDefination } = require('bitquery-corecast-proto');
-
-const packageDefinition = loadPackageDefination();
-const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
-const CoreCast = protoDescriptor.solana_corecast.CoreCast;
-
-const client = new CoreCast('corecast.bitquery.io', grpc.credentials.createSsl());
-const metadata = new grpc.Metadata();
-metadata.add('authorization', process.env.BITQUERY_TOKEN || 'YOUR_API_TOKEN');
-
-const request = {
-  program: { addresses: ['Vote111111111111111111111111111111111111111'] }  // Vote program
-};
-
-const stream = client.Transactions(request, metadata);
-stream.on('data', (msg) => {
-  if (msg.Transaction) {
-    const sig = msg.Transaction.Signature ? Buffer.from(msg.Transaction.Signature).toString('base64').slice(0, 16) : '?';
-    console.log(`Tx: ${sig}...`);
-  }
-});
-stream.on('error', (err) => console.error(err));
-```
-
-Run: `npm install @grpc/grpc-js bitquery-corecast-proto` then `BITQUERY_TOKEN=ory_at_xxx node index.js`
-
----
-
 ## Configuration
 
 To subscribe to transactions, configure your stream as follows:

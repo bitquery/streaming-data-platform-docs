@@ -14,42 +14,6 @@ The `balance` gRPC Stream provides real-time balance update data for Solana acco
 
 Subscribe to live balance changes for accounts and token accounts. Each event includes pre/post balances, currency details, and account context. Data is in **protobuf format** — use `bitquery-corecast-proto` to parse.
 
----
-
-## Quick Example (Node.js)
-
-Subscribe to balance updates for WSOL and log each event:
-
-```javascript
-const grpc = require('@grpc/grpc-js');
-const { loadPackageDefination } = require('bitquery-corecast-proto');
-
-const packageDefinition = loadPackageDefination();
-const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
-const CoreCast = protoDescriptor.solana_corecast.CoreCast;
-
-const client = new CoreCast('corecast.bitquery.io', grpc.credentials.createSsl());
-const metadata = new grpc.Metadata();
-metadata.add('authorization', process.env.BITQUERY_TOKEN || 'YOUR_API_TOKEN');
-
-const request = {
-  token: { addresses: ['So11111111111111111111111111111111111111112'] }  // WSOL
-};
-
-const stream = client.BalanceUpdates(request, metadata);
-stream.on('data', (msg) => {
-  if (msg.BalanceUpdate) {
-    const pre = msg.BalanceUpdate.BalanceUpdate?.PreBalance?.toString() || '0';
-    const post = msg.BalanceUpdate.BalanceUpdate?.PostBalance?.toString() || '0';
-    console.log(`Balance: ${pre} -> ${post}`);
-  }
-});
-stream.on('error', (err) => console.error(err));
-```
-
-Run: `npm install @grpc/grpc-js bitquery-corecast-proto` then `BITQUERY_TOKEN=ory_at_xxx node index.js`
-
----
 
 ## Configuration
 
