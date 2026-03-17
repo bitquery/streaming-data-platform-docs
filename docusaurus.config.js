@@ -937,7 +937,7 @@ const config = {
             className: "button button--primary bright-white-text",
           },
           {
-            to: "https://dexrabbit.com/",
+            to: "https://dexrabbit.bitquery.io/",
             label: "DEXRabbit",
             position: "left",
           },
