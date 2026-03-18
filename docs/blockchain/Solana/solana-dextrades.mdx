@@ -1727,70 +1727,69 @@ Get realised PnL, average buy price, buy volume, and sell volume for a token on 
 
 ## Solana Second-level OHLC / K-line API
 
-You can get OHLC for each second as a subscription query, which can then be monitored via websocket.
+For this we will use the new [Crypto Price APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
+
+You can get OHLC data at 1-second intervals via a subscription query, which can then be monitored via a WebSocket.
 Below is an example. You can read more on [quantiles here](https://docs.bitquery.io/docs/graphql/metrics/quantile/)
 
-Test the subscription query [here](https://ide.bitquery.io/seconds-oHLC-realtime-solana#)
+Test the subscription query [here](https://ide.bitquery.io/seconds-oHLC-realtime-solana-usd)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```
-subscription LatestTrades {
-  Solana {
-    DEXTradeByTokens(
+subscription{
+  Trading {
+    Tokens(
+      where: {Currency: {Id: {is: "bid:solana"}}, Interval: {Time: {Duration: {eq: 1}}}}
+      limit: {count: 1}
       orderBy: {descending: Block_Time}
-      limit: {count: 50}
-      where: {
-        Transaction: {Result: {Success: true}},
-        Trade: {
-          Side: {
-            Amount: {gt: "0"},
-            Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}
-          },
-          Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}
-        }
-      }
     ) {
-      min: quantile(of: Trade_PriceInUSD, level: 0.05)
-      max: quantile(of: Trade_PriceInUSD, level: 0.95)
-      volume: sum(of: Trade_Side_AmountInUSD)
+      Token {
+        Address
+        Id
+        IsNative
+        Name
+        Network
+        Name
+        Symbol
+        TokenId
+      }
       Block {
+        Date
         Time
+        Timestamp
       }
-      Transaction {
-        Signature
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
       }
-      Trade {
-        Market {
-          MarketAddress
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Close
+          High
+          Low
+          Open
         }
-        Dex {
-          ProtocolName
-          ProtocolFamily
-        }
-        Side {
-          Type
-        }
-        PriceInUSD
-        close: PriceInUSD
-        Amount
-        Side {
-          Currency {
-            Symbol
-            MintAddress
-            Name
-          }
-          AmountInUSD
-          Amount
+        Average {
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
         }
       }
     }
   }
 }
-
-
-
 ```
 
 </details>
