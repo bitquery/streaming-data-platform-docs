@@ -18,6 +18,22 @@ The first step is to create an application:
 - You can generate a token for your application with a set expiration time.
 - Or you can use your client ID-secret from your application to make a POST request to https://oauth2.bitquery.io/oauth2/token and get a token programmatically.
 
+Example:
+
+```bash
+curl -X POST "https://oauth2.bitquery.io/oauth2/token" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  --data-urlencode "grant_type=client_credentials" \
+  --data-urlencode "client_id=YOUR_CLIENT_ID" \
+  --data-urlencode "client_secret=YOUR_CLIENT_SECRET" \
+  --data-urlencode "scope=api"
+```
+
+Sample response:
+
+```json
+{"access_token":"<your_access_token>","expires_in":17999,"scope":"api","token_type":"bearer"}
+```
 
 > **If you have no applications created, the `Bearer` token changes every 12 hours. If the token is invalid, you get "Unauthorized"  message.**
 
@@ -58,6 +74,21 @@ If you believe that your access token has been compromised, you can revoke it by
 Remember that this approach requires more effort to implement. It is suitable for applications with a high risk of token theft or misuse. This approach expects you to programmatically generate an access token using your client ID and client secret of an application.
 
 ![client](/img/v2Access/clientid_secret.png)
+
+**Using curl**
+
+Replace `YOUR_CLIENT_ID` and `YOUR_CLIENT_SECRET` with your application's client ID and client secret:
+
+```bash
+curl -X POST "https://oauth2.bitquery.io/oauth2/token" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  --data-urlencode "grant_type=client_credentials" \
+  --data-urlencode "client_id=YOUR_CLIENT_ID" \
+  --data-urlencode "client_secret=YOUR_CLIENT_SECRET" \
+  --data-urlencode "scope=api"
+```
+
+**Using Python**
 
 Below is a code snippet in Python that shows you how to programmatically generate a token and use the API, replace the placeholders with actual information.
 
