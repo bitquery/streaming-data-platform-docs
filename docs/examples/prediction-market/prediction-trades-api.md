@@ -22,10 +22,6 @@ The **PredictionTrades** API returns **buy/sell** activity on outcome tokens for
 
 **Network:** Polygon (`network: matic`). Part of the [Prediction Market API](../prediction-market-api) lifecycle (Management → **Trades** → Settlement).
 
-:::info Historical data
-For **historical** Polymarket trades (date ranges, backtests, volume over time), use the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/) docs (e.g. **DEXTradeByTokens** for historical trades on EVM).
-:::
-
 ### Trade direction
 
 - **IsOutcomeBuy: true** — Seller (maker) gives USDC (collateral), Buyer (taker) gives outcome tokens.

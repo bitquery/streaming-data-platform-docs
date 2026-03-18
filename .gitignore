@@ -26,3 +26,6 @@ audit.json
 
 # Google Search Console data (contains confidential GSC metrics)
 keywords/
+
+# AEO recommendations and guides (internal use only)
+aeo/

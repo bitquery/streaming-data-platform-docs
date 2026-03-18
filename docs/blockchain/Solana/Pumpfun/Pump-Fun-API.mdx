@@ -1,14 +1,11 @@
 ---
 title: "Pump.fun API - Live Prices, OHLCV, ATH, MarketCap"
-description: "Ultra low latency Pump.fun Token Prices, OHLCV, ATH, MarketCap, Liquidity, traders and other information from Pump.fun API,Streams and Data Dumps."
+description: "Get live Pump.fun token prices, OHLCV, ATH, market cap, and trades via Bitquery's GraphQL API, WebSocket streams, gRPC, or Kafka. Covers new tokens, migrations to PumpSwap, and bonding curve data on Solana."
 ---
 
 # Pump.fun API - Live Prices, OHLCV, ATH, MarketCap
 
-Get Ultra low latency Pump.Fun Token Prices, OHLCV, ATH, MarketCap, Liquidity, traders and other information from PumpFun API,Streams and Data Dumps.
-Get data for New, Migrating, Graduated Pump.Fun Tokens through our Pump.Fun API.
-The below graphQL APIs and Streams are examples of data points you can get with Bitquery.
-If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
+The Bitquery Pump.fun API provides real-time and historical data for Pump.fun memecoin trades on Solana via GraphQL. Use Bitquery to get live trades, new token launches, OHLCV, bonding curve progress, top traders, and tokens migrated to PumpSwap. Access via REST, WebSocket subscriptions, gRPC streams, or Kafka. Filter by program address `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`. For other data points, reach out to [support](https://t.me/Bloxy_info).
 
 :::tip **Try Our PumpFun Token Sniffer**
 Want to analyze Pump.fun tokens for potential phishing risks? Check out our [**PumpFun Token Sniffer**](https://docs.bitquery.io/pumpfun-token-sniffer/) — a proof-of-concept tool that helps identify suspicious token behavior by analyzing transfers and trades.
@@ -70,66 +67,75 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 ### 1. Token Creation and Metadata
 
-- [Track Newly Created Pump.fun Tokens ➤](#track-newly-created-pumpfun-tokens)
-- [Get Creation Time & Dev Address of a Token ➤](#get-creation-time--dev-address-of-a-token)
-- [Track New Token Launches in Realtime ➤](#track-new-token-launches-in-realtime)
-- [All Tokens Created by a Specific Address ➤](#all-tokens-created-by-a-specific-address)
-- [Get Pumpfun Token Created by a Wallet From Historical Data ➤](#get-pumpfun-token-created-by-a-wallet-from-historical-data)
-- [Get Token Metadata, Dev Address, Creation Time ➤](#get-token-metadata-dev-address-creation-time-for-specific-token)
+- [How do I get newly created Pump.fun tokens? ➤](#how-do-i-get-newly-created-pumpfun-tokens)
+- [How do I get creation time and dev address? ➤](#how-do-i-get-creation-time-and-dev-address-of-a-pumpfun-token)
+- [How do I monitor Pump.fun new token launches? ➤](#how-do-i-monitor-pumpfun-new-token-launches-in-real-time)
+- [How do I get all tokens created by a specific address? ➤](#how-do-i-get-all-pumpfun-tokens-created-by-a-specific-address)
+- [How do I get tokens created by a wallet from historical data? ➤](#how-do-i-get-pumpfun-tokens-created-by-a-wallet-from-historical-data)
+- [How do I get token metadata, dev address, and creation time? ➤](#how-do-i-get-token-metadata-dev-address-and-creation-time-for-a-specific-pumpfun-token)
 
 ### 2. Pump.fun Mayhem Mode Tokens
 
-- [Track Mayhem Mode enabled Pumpfun Tokens in realtime ➤](#track-mayhem-mode-enabled-pumpfun-tokens-in-realtime)
-- [Check Mayhem Mode of a Pump Fun Token ➤](#check-mayhem-mode-of-a-pump-fun-token)
-- [Check if a Pump Fun Token was Launched in Mayhem Mode (Historical) ➤](#check-if-a-pump-fun-token-was-launched-in-mayhem-mode---historical-query)
+- [How do I track Mayhem mode enabled tokens? ➤](#how-do-i-track-mayhem-mode-enabled-pumpfun-tokens-in-real-time)
+- [How do I check Mayhem mode of a token? ➤](#how-do-i-check-mayhem-mode-of-a-pumpfun-token)
+- [How do I check if a token was launched in Mayhem mode? (Historical) ➤](#how-do-i-check-if-a-pumpfun-token-was-launched-in-mayhem-mode-historical)
 
 ### 3. Token Pricing & Market Data
 
-- [Get Latest Price of a Token ➤](#get-latest-price-of-a-token)
-- [Track Price of a Token in Real-Time ➤](#track-price-of-a-token-in-real-time)
-- [Get OHLC Data of a Token ➤](#get-ohlc-data-of-a-token)
-- [ATH Market Cap of Pump Fun Tokens in a Specific Timeframe ➤](#ath-market-cap-of-pump-fun-tokens-in-a-specific-timeframe)
-- [Token Price Change Over Time ➤](#token-price-change-over-time-delta-from-x-minutes-back)
+- [How do I get the latest price? ➤](#how-do-i-get-the-latest-price-of-a-pumpfun-token)
+- [How do I track price in real time? ➤](#how-do-i-track-the-price-of-a-pumpfun-token-in-real-time)
+- [How do I get top 10 tokens by price change in 5 minutes? ➤](#how-do-i-get-top-10-pumpfun-tokens-by-price-change-in-the-last-5-minutes)
+- [How do I get Pump.fun token OHLCV data historically? ➤](#how-do-i-get-pumpfun-token-ohlcv-data-historically)
+- [How do I get a token's all-time high (ATH) price? ➤](#how-do-i-get-a-tokens-all-time-high-ath-price-on-pumpfun)
+- [How do I get token price change over time? ➤](#how-do-i-get-token-price-change-over-time-delta-from-x-minutes-back)
 
 ### 4. Trade Activity & Volume
 
-- [Get Real-Time Trades on Pump.fun ➤](#get-real-time-trades-on-pumpfun)
-- [Get Latest Trades for a Token ➤](#get-latest-trades-for-a-token)
-- [Get Token’s Trading Volume ➤](#get-tokens-trading-volume)
-- [Detailed Trade Stats ➤](#get-detailed-trade-stats-volume-buys-sells-makers-buyers-sellers)
-- [Get First 100 Buyers of a Token ➤](#get-first-100-buyers-of-a-token)
-- [Check If First 100 Buyers Still Holding ➤](#check-if-first-100-buyers-still-holding)
+- [How do I get live trades from Pump.fun? ➤](#how-do-i-get-live-trades-from-pumpfun-using-bitquery)
+- [How do I get the latest trades? ➤](#how-do-i-get-the-latest-trades-for-a-pumpfun-token)
+- [How do I get the volume of a Pump.fun token for the last 7 days? ➤](#how-do-i-get-the-volume-of-a-pumpfun-token-for-the-last-7-days)
+- [How do I get detailed trade stats? ➤](#how-do-i-get-detailed-trade-stats-volume-buys-sells-makers-buyers-sellers)
+- [How do I get the first 100 buyers? ➤](#how-do-i-get-the-first-100-buyers-of-a-pumpfun-token)
+- [How do I check if the first 100 buyers are still holding? ➤](#how-do-i-check-if-the-first-100-buyers-are-still-holding)
 
 ### 5. Token Liquidity, Pools & Pairs
 
-- [Get All Trading Pairs of a Token ➤](#get-all-trading-pairs-of-a-token)
-- [Get Liquidity of Pump.fun Tokens ➤](#get-liquidity-of-pumpfun-tokens)
-- [Market Cap, Price, Liquidity, Bonding Curve, Volume ➤](#get-market-cap-price-liquidity-bonding-curve-and-volume)
-- [Get Last Pump.fun Trade Before Token Graduates to PumpSwap AMM ➤](#get-last-pumpfun-trade-before-token-graduates-to-pumpswap-amm)
+- [How do I get all trading pairs? ➤](#how-do-i-get-all-trading-pairs-of-a-pumpfun-token)
+- [How do I get liquidity? ➤](#how-do-i-get-liquidity-of-pumpfun-tokens)
+- [How do I get bonding curve progress? ➤](#how-do-i-get-bonding-curve-progress-for-a-pumpfun-token)
+- [How do I get the last trade before graduation to PumpSwap? ➤](#how-do-i-get-the-last-pumpfun-trade-before-a-token-graduates-to-pumpswap-amm)
 
 ### 6. Token Holder & Trader Insights
 
-- [Get Dev's Holdings of a Token ➤](#get-devs-holdings-of-a-token)
-- [Get Top 10 Token Holders ➤](#get-top-10-token-holders)
-- [Get Top Traders of a Token ➤](#get-top-traders-of-a-token)
-- [Get Top Token Creators ➤](#get-top-token-creators)
+- [How do I get dev's holdings? ➤](#how-do-i-get-devs-holdings-of-a-pumpfun-token)
+- [How do I get top 10 token holders? ➤](#how-do-i-get-top-10-token-holders-of-a-pumpfun-token)
+- [How do I get top traders of a Pump.fun token? ➤](#how-do-i-get-top-traders-of-a-pumpfun-token)
+- [How do I get top token creators? ➤](#how-do-i-get-top-pumpfun-token-creators)
 
 ### 7. Token Security & Analysis
 
-- [Check if a Pump.fun Token is Phishy ➤](#check-if-a-pumpfun-token-is-phishy)
+- [How do I check if a token is phishy? ➤](#how-do-i-check-if-a-pumpfun-token-is-phishy)
 
 ### 8. Token Rankings & Filters
 
-- [Top Pump.fun Tokens by Market Cap ➤](#top-pumpfun-tokens-by-market-cap)
-- [All Tokens Above 10K Market Cap ➤](#all-tokens-above-10k-market-cap)
-- [Track King of the Hill Tokens ➤](#track-king-of-the-hill-tokens-30k35k-market-cap)
-- [Tokens Between 400K–450K Market Cap ➤](#tokens-between-400k450k-market-cap-with-dev--creation-time)
+- [How do I get top tokens by market cap? ➤](#how-do-i-get-top-pumpfun-tokens-by-market-cap)
+- [How do I get all tokens above 10K market cap? ➤](#how-do-i-get-all-pumpfun-tokens-above-10k-market-cap)
+- [How do I track "King of the Hill" tokens? ➤](#how-do-i-track-king-of-the-hill-pumpfun-tokens-30k35k-market-cap)
+- [How do I get tokens between 400K–450K market cap? ➤](#how-do-i-get-pumpfun-tokens-between-400k450k-market-cap-with-dev-and-creation-time)
 
-### 9.[ Video Tutorials](#video-tutorials)
+### 9. Frequently Asked Questions
 
-## Pump.fun Program ID (Solana)
+- [Can I get Pump.fun data via gRPC or Kafka?](#can-i-get-pumpfun-token-trade-data-via-grpc-or-kafka-stream)
+- [What is the rate limit?](#what-is-the-rate-limit-for-the-pumpfun-api)
+- [Does Bitquery support historical Pump.fun data?](#does-bitquery-support-historical-pumpfun-data)
+- [How do I get tokens that migrated to PumpSwap?](#how-do-i-get-tokens-that-migrated-from-pumpfun-to-pumpswap)
+- [Why "columns not available in combined dataset"?](#why-does-my-pumpfun-query-return-columns-not-available-in-combined-dataset)
 
-The Pump.fun program address on Solana mainnet is:
+### 10. [Video Tutorials](#video-tutorials)
+
+## What is the Program Address for Pump.fun on Solana?
+
+The Pump.fun program address on Solana mainnet is `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`. Use Bitquery's GraphQL API to filter DEX trades, token creation, and bonding curve data by this program ID.
 
 ```
 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P
@@ -139,9 +145,9 @@ Use this program ID when filtering Solana instructions or token supply updates f
 
 ## Token Creation & Metadata
 
-### Track Newly Created Pump.fun Tokens
+### How do I get newly created Pump.fun tokens?
 
-Get metadata, supply, dev address of newly created tokens.
+Use Bitquery's `TokenSupplyUpdates` subscription filtered by the Pump.fun program `create` or `create_v2` method to get metadata, supply, and dev address of newly created tokens in real time.
 [Try New Pump.fun Tokens Query ➤](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata_8)
 
 <details>
@@ -196,7 +202,7 @@ subscription {
 
 </details>
 
-### Get Creation Time & Dev Address of a Token
+### How do I get creation time and dev address of a Pump.fun token?
 
 [Try Pump.Fun Dev Address & Creation Time Query ➤](https://ide.bitquery.io/PumpFun-Token-creation-time--creator_2)
 
@@ -236,9 +242,9 @@ query MyQuery {
 
 </details>
 
-### Track New Token Launches in Realtime
+### How do I monitor Pump.fun new token launches in real time?
 
-This subscription returns Pump.fun token creation events with all key accounts (e.g. mint address, bonding curve, metadata, creator) and token details (name, symbol, URI) from the Program Arguments.
+Use Bitquery's GraphQL subscription on `Instructions` filtered by the Pump.fun program and `create`/`create_v2` methods. This returns token creation events with mint address, bonding curve, metadata, creator, name, symbol, and URI.
 
 [Track Pump.fun token launches in realtime — Stream ➤](https://ide.bitquery.io/Track-new-token-launches-on-Pump-Fun-in-realtime0_7)
 
@@ -316,7 +322,7 @@ subscription {
 
 </details>
 
-### All Tokens Created by a Specific Address
+### How do I get all Pump.fun tokens created by a specific address?
 
 [All Pump.fun tokens created by an address — Query ➤](https://ide.bitquery.io/all-Pump-fun-tokens-created-by-an-address_3)
 
@@ -372,7 +378,7 @@ query MyQuery {
 
 </details>
 
-### Get Pumpfun Token Created by a Wallet From Historical Data
+### How do I get Pump.fun tokens created by a wallet from historical data?
 
 Use the **v1 Solana transfers API** to list Pump.fun tokens created by a specific wallet over a date range.
 
@@ -446,7 +452,7 @@ Replace the `signer` value and the `date` range in the query with your target wa
 
 </details>
 
-### Get Token Metadata, Dev Address, Creation Time For Specific Token
+### How do I get token metadata, dev address, and creation time for a specific Pump.fun token?
 
 Now you can track the newly created Pump.fun Tokens along with their dev address, metadata and supply.
 `PostBalance` will give you the current supply for the token.
@@ -499,11 +505,11 @@ subscription {
 
 ## Pump.fun Mayhem Mode Tokens
 
-Below APIs are realted to Pump.fun tokens which were launched with in Mayhem mode.
+Below APIs are related to Pump.fun tokens which were launched within Mayhem mode.
 
 If you need to check for a old pump.fun token if it was created with Mayhem mode `true` or `false` then use this [Bitquery Solana v1 API](http://docs.bitquery.io/v1/docs/Examples/Solana/transfers#check-if-a-pump-fun-token-was-launched-in-mayhem-mode---historical-query), in v1 we have all the solana transfers data so we check for the 1 Billion token transfer to Mayhem Autonomous AI agent if theres a transfer we can say that the token was a Mayhem token.
 
-### Track Mayhem Mode enabled Pumpfun Tokens in realtime
+### How do I track Mayhem mode enabled Pump.fun tokens in real time?
 
 Track Pump.fun tokens created in real time with Mayhem mode enabled. This API lets you monitor all new tokens launched with Mayhem set to true.
 Try the API [here](https://ide.bitquery.io/Track-Mayhem-Mode-enabled-Pumpfun-Tokens-in-realtime).
@@ -562,7 +568,7 @@ subscription MyQuery {
 
 </details>
 
-### Check Mayhem Mode of a Pump Fun Token
+### How do I check Mayhem mode of a Pump.fun token?
 
 Now you can check if a pump fun token is in Mayhem mode or not, we will be checking if it was launched with the `is_mayhem_mode` as `true` or `false`.
 [Check Mayhem Mode of a Pump Fun Token — Query ➤](https://ide.bitquery.io/check-mayhem-mode-of-a-pump-fun-token_1)
@@ -621,9 +627,9 @@ query MyQuery {
 
 </details>
 
-### Check if a pump fun token was launched in Mayhem mode - Historical Query
+### How do I check if a Pump.fun token was launched in Mayhem mode? (Historical)
 
-WE using Solana v1 Transfers API for this. This query finds "Pump Fun" token launches in Mayhem mode by filtering for a transfer of exactly 1,000,000,000,000,000 units (1 Billion if adjusted to 6 decimal places) to the specified receiver and token mint. It returns currency info, amount, and transaction signature. In Mayhem mode, 1 Billion token supply is minted to the Mayhem Autonomous AI agent (`BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s`).
+We use the Solana v1 Transfers API for this. This query finds "Pump Fun" token launches in Mayhem mode by filtering for a transfer of exactly 1,000,000,000,000,000 units (1 Billion if adjusted to 6 decimal places) to the specified receiver and token mint. It returns currency info, amount, and transaction signature. In Mayhem mode, 1 Billion token supply is minted to the Mayhem Autonomous AI agent (`BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s`).
 
 [Try out the API](https://ide.bitquery.io/check-if-a-pump-fun-token-was-in-mayhem-mode)
 
@@ -657,7 +663,7 @@ query MyQuery {
 
 ## Token Pricing & Market Data
 
-### Get Latest Price of a Token
+### How do I get the latest price of a Pump.fun token?
 
 We launched the [Price Index](https://docs.bitquery.io/docs/category/price-index/) in August 2025, allowing you to track price of any token trading onchain.
 
@@ -720,7 +726,7 @@ PumpFun Token prices against SOL Stream
 
 </details>
 
-### Track Price of a Token in Real-Time
+### How do I track the price of a Pump.fun token in real time?
 
 Live stream of token price updates on Pump.fun
 
@@ -786,9 +792,9 @@ subscription {
 
 </details>
 
-### Top 10 Pump.fun tokens by Price change in last 5mins
+### How do I get top 10 Pump.fun tokens by price change in the last 5 minutes?
 
-Use the below query to get Top 10 Pump.fun tokens by Price change in last 5mins. Test the query [here](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Price-change-in-last-5mins_3).
+Use the below query to get top 10 Pump.fun tokens by price change in the last 5 minutes. Test the query [here](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Price-change-in-last-5mins_3).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -846,10 +852,10 @@ Use the below query to get Top 10 Pump.fun tokens by Price change in last 5mins.
 
 </details>
 
-### Get OHLC Data of a Token
+### How do I get Pump.fun token OHLCV data historically?
 
-Fetches open-high-low-close data in 1-minute intervals for last 10 minutes
-[OHLC for a token on Pump.fun — Query ➤](https://ide.bitquery.io/OHLC-for-a-token-on-Pump-Fun_10)
+Use Bitquery's `DEXTradeByTokens` with `Block.Time(interval: minutes, count: 1)` to fetch open-high-low-close (OHLC) data. Filter by token mint and Pump.fun program `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`. For `dataset: combined`, some fields like `Trade_Side` may be limited.
+[OHLC for a token on Pump.fun — Query ➤](https://ide.bitquery.io/OHLC-for-a-token-on-Pump-Fun0_8)
 
 :::note
 Trade Side Account field will not be available for aggregate queries in Archive and Combined Datasets
@@ -860,26 +866,14 @@ Trade Side Account field will not be available for aggregate queries in Archive 
 
 ```graphql
 {
-  Solana {
+  Solana(dataset: combined) {
     DEXTradeByTokens(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "Block_Timefield" }
-      where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "66VR6bjEV5DPSDhYSQyPAxNsY3dgmH6Lwgi5cyf2pump" }
-          }
-          Dex: {
-            ProgramAddress: {
-              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
-            }
-          }
-          PriceAsymmetry: { lt: 0.1 }
-        }
-      }
+      limit: {count: 10}
+      orderBy: {descendingByField: "Block_Timefield"}
+      where: {Trade: {Currency: {MintAddress: {is: "66VR6bjEV5DPSDhYSQyPAxNsY3dgmH6Lwgi5cyf2pump"}}, Dex: {ProgramAddress: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}}}
     ) {
       Block {
-        Timefield: Time(interval: { in: minutes, count: 1 })
+        Timefield: Time(interval: {in: minutes, count: 1})
       }
       volume: sum(of: Trade_Amount)
       Trade {
@@ -896,9 +890,9 @@ Trade Side Account field will not be available for aggregate queries in Archive 
 
 </details>
 
-### ATH Market Cap of Pump Fun Tokens in a Specific Timeframe
+### How do I get a token's all-time high (ATH) price on Pump.fun?
 
-Returns all-time-high price and marketcap in USD (marketcap = price \* 1B tokens) of the tokens specified in `Trade:{Currency: {MintAdress: {in: []}}}`.
+Use Bitquery's `DEXTradeByTokens` with `dataset: combined`, `Trade.PriceInUSD(maximum: Trade_PriceInUSD)`, and `quantile(of: Trade_PriceInUSD, level: 0.98)` to get ATH price. Market cap = ATH price × 1 billion (Pump.fun tokens have 1B supply). Pass token mint addresses in `Trade.Currency.MintAddress.in`.
 [ATH price and market cap in timeframe — Pump.fun Query ➤](https://ide.bitquery.io/ATH-Market-Cap-of-Pump-Fun-Tokens-in-a-Specific-Timeframe)
 
 <details>
@@ -955,7 +949,7 @@ Returns all-time-high price and marketcap in USD (marketcap = price \* 1B tokens
 
 </details>
 
-### Token Price Change Over Time (Delta from X Minutes Back)
+### How do I get token price change over time (delta from X minutes back)?
 
 Useful for tracking % change by comparing first/last prices
 [Pump.fun token price change over time — Query ➤](https://ide.bitquery.io/Pumpfun-coins-with-price--mc-with-limit-and-delta-from-10-min-back-simple_1)
@@ -999,9 +993,9 @@ query PumpFunRecentTrades {
 
 ## Trade Activity & Volume
 
-### Get Real-Time Trades on Pump.fun
+### How do I get live trades from Pump.fun using Bitquery?
 
-Streams live trades, including buy/sell sides, amounts, involved accounts, and methods
+Use Bitquery's `DEXTrades` GraphQL subscription filtered by `ProtocolName: "pump"` to stream live Pump.fun trades including buy/sell sides, amounts, accounts, and methods. For gRPC or Kafka, see [Pump.fun gRPC Streams](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/).
 [Pump.fun real-time trades — Stream ➤](https://ide.bitquery.io/Pumpfun-DEX-Trades-stream)
 
 <details>
@@ -1068,7 +1062,7 @@ subscription MyQuery {
 
 </details>
 
-### Get Latest Trades for a Token
+### How do I get the latest trades for a Pump.fun token?
 
 Retrieves recent trades with detailed price, amount, and sides
 [Latest trades for a Pump.fun token — Query ➤](https://ide.bitquery.io/get-latest-trades-of-a-pump-fun-token_6)
@@ -1122,21 +1116,23 @@ query pumpfunTokenLatestTrades($token: String) {
 
 </details>
 
-### Get Token’s Trading Volume
+### How do I get the volume of a Pump.fun token for the last 7 days?
 
-Get volume traded for a token since a specific time
-[Trading volume of a Pump.fun token — Query ➤](https://ide.bitquery.io/trading-volume-of-a-token-pump-fun)
+Use Bitquery's `DEXTradeByTokens` with `sum(of: Trade_Amount)` and a `Block.Time.since` filter (e.g. 7 days ago) to aggregate trading volume. Filter by token mint address and `ProtocolName: "pump"`.
+[Trading volume of a Pump.fun token — Query ➤](https://ide.bitquery.io/trading-volume-of-a-token-pump-fun-lat-7-days)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query MyQuery {
-  Solana {
+  Solana(dataset: combined) {
     DEXTradeByTokens(
       where: {
         Trade: {
-          Currency: { MintAddress: { is: "token mint address" } }
+          Currency: {
+            MintAddress: { is: "HeGMgxcuASNEgGH8pTUBEfb3K4KjgaXwaMK3bs68pump" }
+          }
           Dex: { ProtocolName: { is: "pump" } }
         }
         Block: { Time: { since: "2024-06-27T06:46:00Z" } }
@@ -1161,7 +1157,28 @@ query MyQuery {
 
 </details>
 
-### Get Detailed Trade Stats: Volume, Buys, Sells, Makers, Buyers, Sellers
+In addition, you can get the last 7 days of trading volume using the [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/). Example:
+
+[Last 7 days of volume for any token — Query ➤](https://ide.bitquery.io/Last-7-days-of-volume-for-any-token_2)
+
+```graphql
+{
+  Trading {
+    Tokens(
+      where: {
+        Block: { Date: { since_relative: { days_ago: 7 } } }
+        Interval: { Time: { Duration: { eq: 3600 } } }
+        Token: { Address: { is: "cbbtcf3aa214zXHbiAZQwf4122FBYbraNdFqgw4iMij" } }
+      }
+    ) {
+      sum(of: Volume_Usd)
+    }
+  }
+}
+```
+
+
+### How do I get detailed trade stats (volume, buys, sells, makers, buyers, sellers)?
 
 Includes 5-minute and 1-hour metrics for deep token analytics
 [Pump.fun token detailed trade stats — Query ➤](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair_10)
@@ -1271,7 +1288,7 @@ query MyQuery($token: String!, $pair_address: String!, $time_5min_ago: DateTime!
 
 </details>
 
-### Get First 100 Buyers of a Token
+### How do I get the first 100 buyers of a Pump.fun token?
 
 Get wallet addresses of first 100 accounts who bought a token
 [First 100 buyers of a Pump.fun token — Query ➤](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1)
@@ -1314,7 +1331,7 @@ query MyQuery {
 
 </details>
 
-### Check If First 100 Buyers Still Holding
+### How do I check if the first 100 buyers are still holding?
 
 Pass the owner addresses from the above query to evaluate holdings
 [Holdings of first 100 buyers — Pump.fun Query ➤](https://ide.bitquery.io/balance-of-a-specific-token-at-the-specific-account-address)
@@ -1359,7 +1376,7 @@ query MyQuery {
 
 ## Token Liquidity, Pools & Pairs
 
-### Get All Trading Pairs of a Token
+### How do I get all trading pairs of a Pump.fun token?
 
 Lists all markets where the token is traded, including pair addresses
 [All trading pairs of a Pump.fun token — Query ➤](https://ide.bitquery.io/get-all-the-trading-pairs-of-a-specific-token)
@@ -1397,7 +1414,7 @@ Lists all markets where the token is traded, including pair addresses
 
 </details>
 
-### Get Liquidity of Pump.fun Tokens
+### How do I get liquidity of Pump.fun tokens?
 
 Gets pool token balances for liquidity estimation across multiple known pool accounts
 [Pump.fun pools and token balances — Query ➤](https://ide.bitquery.io/Get-Liquidity-of-Pumpfun-Pools)
@@ -1447,9 +1464,9 @@ Gets pool token balances for liquidity estimation across multiple known pool acc
 
 </details>
 
-### Get Market Cap, Price, Liquidity, Bonding Curve, and Volume
+### How do I get bonding curve progress for a Pump.fun token?
 
-Returns detailed token metrics including bonding curve status. **Please change the timestamp in the query to recent ones, the saved query might have outdated numbers**
+Use Bitquery's `DEXPools` with Pump.fun market address to get pool balances. Bonding curve progress = 100 - (((base_balance - 206900000) × 100) / 793100000). Combine with `DEXTradeByTokens` for volume and `TokenSupplyUpdates` for market cap. **Please change the timestamp in the query to recent ones; the saved query might have outdated numbers.**
 [Market cap, liquidity, bonding curve, volume — Pump.fun Query ➤](https://ide.bitquery.io/mcap-liquidity-bonding-curve-volume-supply-of-a-token-in-time-frame_1)
 
 <details>
@@ -1547,7 +1564,7 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $pairAddress: String) {
 
 </details>
 
-### Get Last Pump.fun Trade Before Token Graduates to PumpSwap AMM
+### How do I get the last Pump.fun trade before a token graduates to PumpSwap AMM?
 
 Finds the final pool trade before a token transitions to PumpSwap
 [Last Pump.fun trade before PumpSwap — Query ➤](https://ide.bitquery.io/pump-fun-token-graduating-to-pumpswap)
@@ -1625,9 +1642,9 @@ Finds the final pool trade before a token transitions to PumpSwap
 
 ## Token Holder & Trader Insights
 
-### Get Dev’s Holdings of a Token
+### How do I get dev's holdings of a Pump.fun token?
 
-Returns the developer’s current token holdings
+Returns the developer's current token holdings
 [Developer holdings of a Pump.fun token — Query ➤](https://ide.bitquery.io/trading-volume-of-a-token-pump-fun)
 
 <details>
@@ -1661,7 +1678,7 @@ query MyQuery($dev: String, $token: String) {
 
 </details>
 
-### Get Top 10 Token Holders
+### How do I get top 10 token holders of a Pump.fun token?
 
 Returns wallet addresses and holdings of top 10 token holders
 [Top 10 holders of a Pump.fun token — Query ➤](https://ide.bitquery.io/top-token-holders-for-a-pump-fun-token)
@@ -1700,9 +1717,9 @@ query MyQuery {
 
 </details>
 
-### Get Top Traders of a Token
+### How do I get top traders of a Pump.fun token?
 
-Returns top 100 wallets ranked by USD trade volume
+Use Bitquery's `DEXTradeByTokens` with `orderBy: descendingByField: "volumeUsd"`, `limit: 100`, and `sum(of: Trade_Side_AmountInUSD)` grouped by `Trade.Account.Owner` to rank top wallets by USD volume for a Pump.fun token.
 [Top traders of a Pump.fun token — Query ➤](https://ide.bitquery.io/top-traders-of-a-pump-fun-token_2)
 
 <details>
@@ -1748,7 +1765,7 @@ query TopTraders($token: String) {
 
 </details>
 
-### Get Top Token Creators
+### How do I get top Pump.fun token creators?
 
 Find wallet addresses of top creators by number of tokens launched
 [Top Pump.fun token creators — Query ➤](https://ide.bitquery.io/Top-pump-fun-token-creators_2)
@@ -1787,7 +1804,7 @@ query MyQuery {
 
 ## Token Security & Analysis
 
-### Check if a Pump.fun Token is Phishy
+### How do I check if a Pump.fun token is phishy?
 
 This elaborative API approach uses two queries to detect if a Pump.fun token is potentially phishy by analyzing the relationship between token transfers and trades.
 This approach helps identify tokens where recipients received tokens without purchasing them, which is a common pattern in phishing or airdrop scams.
@@ -1927,7 +1944,7 @@ query MyQuery($token: String!, $buyersList: [String!]) {
 
 ## Token Rankings & Filters
 
-### Top Pump.fun Tokens by Market Cap
+### How do I get top Pump.fun tokens by market cap?
 
 Returns top tokens by price (1B supply = price × 1B = market cap)
 [Top Pump.fun tokens by market cap — Query ➤](https://ide.bitquery.io/top-tokens-by-mktcap-on-pump-fun-in-last-15-min)
@@ -1978,7 +1995,7 @@ Returns top tokens by price (1B supply = price × 1B = market cap)
 
 </details>
 
-### All Tokens Above 10K Market Cap
+### How do I get all Pump.fun tokens above 10K market cap?
 
 Returns tokens with price above 0.00001 (i.e., 10K+ market cap)
 [Pump.fun tokens above 10K market cap — Query ➤](https://ide.bitquery.io/top-tokens-above-10k-USD-mktcap-on-pump-fun-in-last-15-min)
@@ -2029,7 +2046,7 @@ Returns tokens with price above 0.00001 (i.e., 10K+ market cap)
 
 </details>
 
-### Track “King of the Hill” Tokens (30K–35K Market Cap)
+### How do I track "King of the Hill" Pump.fun tokens (30K–35K market cap)?
 
 Live tokens within the specific market cap range highlighted by Pump.fun. [Here](https://x.com/pumpdotfun/status/1760103287397793933) checkout the official announcement by Pump.Fun team mentioning that a Pump.fun token reaches to King of the Hill if it crosses 30K USD Marketcap.
 [Pump.fun “King of the Hill” tokens — Stream ➤](https://ide.bitquery.io/track-King-of-the-hill-tokens-in-realtime)
@@ -2074,7 +2091,7 @@ subscription {
 
 </details>
 
-### Tokens Between 400K–450K Market Cap with Dev & Creation Time
+### How do I get Pump.fun tokens between 400K–450K market cap with dev and creation time?
 
 Filters tokens in a specific cap range and adds metadata
 [Pump.fun tokens between 400K–450K market cap — Query ➤](https://ide.bitquery.io/pumpfun-tokens-between-400K-and-450K-MC-and-their-creation-date-dev-address_3)
@@ -2195,3 +2212,25 @@ Filters tokens in a specific cap range and adds metadata
 #### Video Tutorial | Pump.fun Mayhem Mode API
 
 <VideoPlayer url="https://www.youtube.com/watch?v=pl5B-YTluj4" />
+
+## Frequently Asked Questions
+
+### Can I get Pump.fun token trade data via gRPC or Kafka stream?
+
+Yes. Bitquery offers [gRPC streams](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/) and Kafka for Pump.fun trades. Contact [sales](https://t.me/Bloxy_info) for a trial of zero-latency Pumpfun data Streams.
+
+### What is the rate limit for the Pump.fun API?
+
+Rate limits depend on your Bitquery plan. See [authorisation](https://docs.bitquery.io/docs/authorisation/how-to-use/) for API token limits and upgrade options.
+
+### Does Bitquery support historical Pump.fun data?
+
+Yes. Use `dataset: combined` in your GraphQL query for historical data. For real-time only (last ~8 hours on PumpSwap), use `dataset: realtime`. See [historical aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/) for details.
+
+### How do I get tokens that migrated from Pump.fun to PumpSwap?
+
+Use the [Pump Fun to Pump Swap](https://docs.bitquery.io/docs/blockchain/Solana/pump-fun-to-pump-swap) guide. Filter `DEXPools` by `Base.PostAmount: { eq: "206900000" }` to find tokens that graduated, or subscribe to pool creation events.
+
+### Why does my Pump.fun query return "columns not available in combined dataset"?
+
+The `Trade.Side` and some other fields are only available with `dataset: realtime`. For historical queries with `dataset: combined`, avoid `Trade_Side`, `Trade_Side_Type`, and similar realtime-only fields. Use [DEXTradeByTokens](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades) fields that work in both datasets.
