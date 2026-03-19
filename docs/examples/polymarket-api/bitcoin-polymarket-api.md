@@ -1,7 +1,10 @@
 ---
-title: "Bitcoin Up or Down Polymarket API - Stream Trades"
-description: "Query and stream Polymarket Bitcoin Up or Down prediction market trades via GraphQL. Real-time subscriptions and historical queries on Polygon. Filter by question title for Bitcoin price direction markets."
+title: "Polymarket Bitcoin Up or Down API & Websocket"
+description: "Query Polymarket Bitcoin price prediction, Bitcoin up or down, and Bitcoin price odds via GraphQL. Stream trades and odds on Polygon. Build dashboards, track top traders, aggregate odds, analyze volume, and monitor settlements and redemptions."
 keywords:
+  - polymarket bitcoin price prediction
+  - polymarket bitcoin up or down
+  - polymarket bitcoin price odds
   - Bitcoin Polymarket API
   - Bitcoin Up or Down prediction market
   - Polymarket Bitcoin trades
@@ -12,9 +15,11 @@ keywords:
   - PredictionTrades Bitcoin
 ---
 
-# Bitcoin Up or Down Polymarket API
+# How to Get Polymarket Bitcoin Up or Down Data Using Bitquery
 
-Query and stream **Bitcoin Up or Down** prediction market trades on Polymarket. These markets ask whether Bitcoin will be **up** or **down** at a specific time (e.g. daily or weekly settlement). 
+Query and stream **Polymarket Bitcoin up or down** prediction market trades and **Bitcoin price odds** via Bitquery’s GraphQL API. These markets ask whether Bitcoin will be **up** or **down** at a specific time (e.g. daily or weekly settlement).
+
+**What you can do with this API:** Build real-time dashboards, aggregate odds across markets, track top traders by volume, identify top winners from settlements, analyze market liquidity, monitor whale activity, backtest strategies, and power alerts or bots.
 
 
 ## How Bitcoin Up or Down markets are identified
@@ -45,7 +50,7 @@ Kafka requires **separate credentials**. See [Kafka Streaming Concepts](https://
 
 ---
 
-## Stream Bitcoin Up or Down trades (real-time)
+## How do I stream Bitcoin Up or Down trades in real time?
 
 Subscribe to live Polymarket trades for markets whose question title includes **"Bitcoin Up or Down"**. Includes block time, call/log signatures, full outcome trade details (buyer, seller, amount, price, USD values), and prediction metadata (question, outcomes, collateral token, marketplace).
 
@@ -134,7 +139,143 @@ subscription {
 }
 ```
 
-## Top Traders of Bitcoin Up or Down Market by Volume
+## How do I get Bitcoin price odds for all active Polymarket up/down markets?
+
+This WebSocket subscription streams real-time odds (prices) for all active "Bitcoin Up or Down" Polymarket markets.
+Use a GraphQL subscription on `PredictionTrades` with `limitBy: { count: 1, by: [Trade_Prediction_Question_Id, Trade_Prediction_Outcome_Label] }` to stream the latest odds (Up/Down outcome prices) for every active Bitcoin Up or Down market. Each market returns one row per outcome with `Price`, `PriceInUSD`, and market metadata.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/Odds-of-all-Bitcoin-up-and-down-markets)
+
+```graphql
+subscription {
+  EVM(network: matic) {
+    PredictionTrades(
+      orderBy: {descending: Block_Time}
+      limitBy: {count: 1, by: [Trade_Prediction_Question_Id, Trade_Prediction_Outcome_Label]}
+      where: {Trade: {Prediction: {Outcome: {Label: {in: ["Up", "Down"]}}, Marketplace: {ProtocolName: {is: "polymarket"}}, Question: {Title: {includes: "Bitcoin Up or Down"}}}}}
+    ) {
+      Trade {
+        OutcomeTrade {
+          Price
+          PriceInUSD
+          IsOutcomeBuy
+        }
+        Prediction {
+          CollateralToken {
+            Name
+            Symbol
+            AssetId
+          }
+          Question {
+            Title
+            ResolutionSource
+            Image
+            MarketId
+            Id
+            CreatedAt
+          }
+          Outcome {
+            Label
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+
+## How do I get the latest Bitcoin price odds for a specific up/down market?
+To track a single specific Bitcoin Up or Down market, use its unique question ID (condition ID) with the following query. This lets you fetch real-time or latest odds for just that market:
+
+Use `PredictionTrades` with `limitBy: { count: 1, by: Trade_Prediction_Outcome_Label }` and filter by `Question.Id` (condition ID) to get the latest odds for a single Bitcoin Up or Down market. Returns one row per outcome (Up/Down) with `Price` and `PriceInUSD`. Use a `query` for one-time fetch or change to `subscription` for real-time updates. Replace `Question.Id` with any market's condition ID to query odds for other Polymarket markets.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/Odds-of-a-specific-Bitcoin-up-and-down-market)
+
+```graphql
+{
+  EVM(network: matic) {
+    PredictionTrades(
+      orderBy: {descending: Block_Time}
+      limitBy: {count: 1, by: Trade_Prediction_Outcome_Label}
+      where: {Trade: {Prediction: {Outcome: {Label: {in: ["Up", "Down"]}}, 
+        Marketplace: {ProtocolName: {is: "polymarket"}}, Question: {Id: {is: "0xd8c16674c7242c146cd9662906af3a442ba702d08f079885287ebc194ab0c271"}, Title: {includes: "Bitcoin Up or Down"}}}}}
+    ) {
+      Trade {
+        OutcomeTrade {
+          Price
+          PriceInUSD
+          IsOutcomeBuy
+        }
+        Prediction {
+          CollateralToken {
+            Name
+            Symbol
+            AssetId
+          }
+          Question {
+            Title
+            ResolutionSource
+            Image
+            MarketId
+            Id
+            CreatedAt
+          }
+          Outcome {
+            Label
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+For real-time odds via WebSocket, use the same query with `subscription` instead of `query`:
+
+```graphql
+subscription {
+  EVM(network: matic) {
+    PredictionTrades(
+      orderBy: {descending: Block_Time}
+      limitBy: {count: 1, by: Trade_Prediction_Outcome_Label}
+      where: {Trade: {Prediction: {Outcome: {Label: {in: ["Up", "Down"]}}, Marketplace: {ProtocolName: {is: "polymarket"}}, Question: {Id: {is: "0xd8c16674c7242c146cd9662906af3a442ba702d08f079885287ebc194ab0c271"}, Title: {includes: "Bitcoin Up or Down"}}}}}
+    ) {
+      Trade {
+        OutcomeTrade {
+          Price
+          PriceInUSD
+          IsOutcomeBuy
+        }
+        Prediction {
+          CollateralToken {
+            Name
+            Symbol
+            AssetId
+          }
+          Question {
+            Title
+            ResolutionSource
+            Image
+            MarketId
+            Id
+            CreatedAt
+          }
+          Outcome {
+            Label
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Replace `Question.Id` with any market's condition ID and adjust the `Title` filter to get odds for other Polymarket prediction markets.
+
+
+
+## How do I get top traders of Bitcoin Up or Down markets by volume?
 
 This **query** returns the top 10 **buyers** and top 10 **sellers** by traded volume in Bitcoin Up or Down markets on Polymarket over the last 24 hours. Results are aggregated by trader address and ordered by `buy_amount` (buyers) or `sell_amount` (sellers).
 
@@ -171,6 +312,118 @@ This **query** returns the top 10 **buyers** and top 10 **sellers** by traded vo
 }
 ```
 
+
+## How do I get top winners of Bitcoin Up or Down markets by redemption volume?
+
+Use `PredictionSettlements` filtered by `EventType: "Redemption"` and `Question.Title` including "Bitcoin Up or Down" to return the top 10 holders by redeemed amount over the last hour. Useful for tracking which traders won the most on settled Bitcoin Up or Down markets.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/Top-Winners-of-Bitcoin-up-down-market)
+
+```graphql
+query MyQuery {
+  EVM(network: matic) {
+    PredictionSettlements(
+      limit: {count: 10}
+      orderBy: {descendingByField: "redeemed_amount"}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, 
+        Settlement: {EventType: {is: "Redemption"},
+          Prediction: {Question: {Title: {includes: "Bitcoin Up or Down"}}}}}
+    ) {
+      Settlement {
+        Holder
+        Prediction {
+          Question {
+            Title
+          }
+        }
+      }
+      redeemed_amount: sum(of: Settlement_Amounts_Amount)
+    }
+  }
+}
+```
+
+## Monitoring High-Value Trades on Polymarket Bitcoin Markets
+
+Use the following WebSocket subscription to monitor live trades greater than $5,000 USD on Polymarket Bitcoin Up or Down markets. This is ideal for detecting whale activity and large market movements in real time.
+
+```
+subscription {
+  EVM(network: matic) {
+    PredictionTrades(
+      where: {TransactionStatus: {Success: true}, 
+        Trade: {OutcomeTrade: {CollateralAmountInUSD: {gt: "5000"}},
+          Prediction: {Question: {Title: {includes: "Bitcoin Up or Down"}}}}}
+    ) {
+      Block {
+        Time
+      }
+      Call {
+        Signature {
+          Name
+        }
+      }
+      Log {
+        Signature {
+          Name
+        }
+        SmartContract
+      }
+      Trade {
+        OutcomeTrade {
+          Buyer
+          Seller
+          Amount
+          CollateralAmount
+          CollateralAmountInUSD
+          OrderId
+          Price
+          PriceInUSD
+          IsOutcomeBuy
+        }
+        Prediction {
+          CollateralToken {
+            Name
+            Symbol
+            SmartContract
+            AssetId
+          }
+          ConditionId
+          OutcomeToken {
+            Name
+            Symbol
+            SmartContract
+            AssetId
+          }
+          Marketplace {
+            SmartContract
+            ProtocolVersion
+            ProtocolName
+            ProtocolFamily
+          }
+          Question {
+            Title
+            ResolutionSource
+            Image
+            MarketId
+            Id
+            CreatedAt
+          }
+          Outcome {
+            Id
+            Index
+            Label
+          }
+        }
+      }
+      Transaction {
+        From
+        Hash
+      }
+    }
+  }
+}
+```
 
 
 ## Related APIs
