@@ -1,6 +1,6 @@
 ---
-title: "Polymarket API - Trades, Prices, Market Data"
-description: "Get real-time and historical Polymarket prediction market trades, prices, and volume via Bitquery's GraphQL API. Query by condition_id, filter by size, rank markets by volume. Access via REST, WebSocket, or Kafka on Polygon."
+title: "Polymarket API - Trade, Prices & Market Data"
+description: "How to query Polymarket prediction market trades, prices, and volume via Bitquery GraphQL. Stream real-time data, filter by condition_id, rank by volume. REST, WebSocket, or Kafka on Polygon."
 keywords:
   - Polymarket API
   - Polymarket GraphQL API
@@ -24,7 +24,7 @@ keywords:
 
 # Polymarket API - Trade, Prices & Market Data
 
-The Bitquery Polymarket API provides real-time and historical prediction market data on Polygon via GraphQL. Query trades, settlements, market metadata, and volume. Filter by condition_id, outcome token, or trade size. Access via REST, WebSocket subscriptions, or Kafka streams. Use `ProtocolName: "polymarket"` or `Marketplace.ProtocolName` in your queries.
+The Bitquery Polymarket API provides real-time and historical prediction market data on Polygon via GraphQL. Use it to query trades, settlements, market metadata, and volume; filter by condition_id, outcome token, or trade size; and access data via REST, WebSocket subscriptions, or Kafka streams. Filter by Polymarket using `ProtocolName: "polymarket"` or `Marketplace.ProtocolName` in your queries.
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
@@ -36,7 +36,8 @@ Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bit
 
 ## What Polymarket data can I get with Bitquery?
 
-Bitquery provides **trades and prices** (buy/sell activity, volume, outcome prices), **positions and redemptions** (splits, merges after resolution), **market lifecycle** (creation, resolution, oracle outcomes), **market metadata** (condition ID, slug, token filters via CTF Exchange), **wallet activity** (volume and market counts by address), and **real-time streaming** (Kafka for trades and settlements). All data is on Polygon (`network: matic`). Use the links below to find the right API:
+Bitquery provides **trades and prices** (buy/sell activity, volume, outcome prices), **positions and redemptions** (splits, merges after resolution), **market lifecycle** (creation, resolution, oracle outcomes), **market metadata** (condition ID, slug, token filters via CTF Exchange), **wallet activity** (volume and market counts by address), and **real-time streaming** (Kafka for trades and settlements). All data is on Polygon (`network: matic`). Use the links below to find the right API.
+
 
 ### How do I get Polymarket trades and prices?
 
@@ -87,7 +88,7 @@ Note: Kafka streaming requires separate credentials. [Contact support](https://t
 
 Use Bitquery's `PredictionTrades` GraphQL query filtered by `ProtocolName: "polymarket"` on Polygon (`network: matic`). For live streaming, use a subscription or Kafka.
 
-[Run this query](https://ide.bitquery.io/prediction_trades)
+[Run in Bitquery IDE](https://ide.bitquery.io/prediction_trades)
 
 ```graphql
 query {
@@ -95,7 +96,12 @@ query {
     PredictionTrades(
       limit: { count: 10 }
       orderBy: { descending: Transaction_Time }
-      where: { Trade: { OutcomeTrade: { IsOutcomeBuy: true } } }
+      where: {
+        Trade: {
+          Prediction: { Marketplace: { ProtocolName: { is: "polymarket" } } }
+          OutcomeTrade: { IsOutcomeBuy: true }
+        }
+      }
     ) {
       Transaction {
         Hash
@@ -268,7 +274,11 @@ Use Bitquery's `PredictionTrades` with `limitBy: Trade_Prediction_Question_Id`, 
 query questionsByVolume($time_ago: DateTime) {
   EVM(network: matic) {
     PredictionTrades(
-      where: {TransactionStatus: {Success: true}, Block: {Time: {since: $time_ago}}}
+      where: {
+        TransactionStatus: {Success: true}
+        Block: {Time: {since: $time_ago}}
+        Trade: {Prediction: {Marketplace: {ProtocolName: {is: "polymarket"}}}}
+      }
       limit: {count: 100}
       orderBy: {descendingByField: "sumBuyAndSell"}
       limitBy: {by: Trade_Prediction_Question_Id}
@@ -295,11 +305,296 @@ query questionsByVolume($time_ago: DateTime) {
     }
   }
 }
+```
+
+**Variables (example):**
+
+```json
 {
   "time_ago": "2026-02-24T07:22:21Z"
 }
 ```
 
+## How do I get real-time odds for all active Polymarket markets?
+
+Use a GraphQL subscription on `PredictionTrades` with `limitBy: { count: 1, by: [Trade_Prediction_Question_Id, Trade_Prediction_Outcome_Label] }` filtered by `ProtocolName: "polymarket"` to stream the latest odds for every active market. Returns live price and outcome probabilities.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/How-do-I-get-real-time-odds-for-all-active-Polymarket-markets)
+
+```graphql
+subscription {
+  EVM(network: matic) {
+    PredictionTrades(
+      limitBy: {count: 1, by: [Trade_Prediction_Question_Id, Trade_Prediction_Outcome_Label]}
+      where: {Trade: {Prediction: {Marketplace: {ProtocolName: {is: "polymarket"}}}}}
+    ) {
+      Trade {
+        OutcomeTrade {
+          Price
+          PriceInUSD
+          IsOutcomeBuy
+        }
+        Prediction {
+          CollateralToken {
+            Name
+            Symbol
+            AssetId
+          }
+          Question {
+            Title
+            ResolutionSource
+            Image
+            MarketId
+            Id
+            CreatedAt
+          }
+          Outcome {
+            Label
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## How do I track high-value or whale trades on Polymarket?
+
+Use a GraphQL subscription on `PredictionTrades` filtered by `CollateralAmountInUSD: { gt: "10000" }` and `ProtocolName: "polymarket"` to monitor trades exceeding $10,000 USD in real time. Ideal for detecting whale activity and large market movements.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/How-do-I-track-high-value-or-whale-trades-on-Polymarket)
+
+```graphql
+subscription {
+  EVM(network: matic) {
+    PredictionTrades(
+      where: {
+        TransactionStatus: {Success: true}
+        Trade: {
+          Prediction: {Marketplace: {ProtocolName: {is: "polymarket"}}}
+          OutcomeTrade: {CollateralAmountInUSD: {gt: "10000"}}
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Call {
+        Signature {
+          Name
+        }
+      }
+      Log {
+        Signature {
+          Name
+        }
+        SmartContract
+      }
+      Trade {
+        OutcomeTrade {
+          Buyer
+          Seller
+          Amount
+          CollateralAmount
+          CollateralAmountInUSD
+          OrderId
+          Price
+          PriceInUSD
+          IsOutcomeBuy
+        }
+        Prediction {
+          CollateralToken {
+            Name
+            Symbol
+            SmartContract
+            AssetId
+          }
+          ConditionId
+          OutcomeToken {
+            Name
+            Symbol
+            SmartContract
+            AssetId
+          }
+          Marketplace {
+            SmartContract
+            ProtocolVersion
+            ProtocolName
+            ProtocolFamily
+          }
+          Question {
+            Title
+            ResolutionSource
+            Image
+            MarketId
+            Id
+            CreatedAt
+          }
+          Outcome {
+            Id
+            Index
+            Label
+          }
+        }
+      }
+      Transaction {
+        From
+        Hash
+      }
+    }
+  }
+}
+```
+
+## What are the largest Polymarket trades in the last 7 days?
+
+Use `PredictionTrades` with `orderBy: { descending: Trade_OutcomeTrade_CollateralAmountInUSD }` and filter by `ProtocolName: "polymarket"` to get the top 10 largest trades by USD volume. Add `Block.Time: { since: $time_ago }` for a custom time window.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/What-are-the-largest-Polymarket-trades-in-the-last-7-days)
+
+```graphql
+query {
+  EVM(network: matic) {
+    PredictionTrades(
+      limit: {count: 10}
+      orderBy: {descending: Trade_OutcomeTrade_CollateralAmountInUSD}
+      where: {
+        TransactionStatus: {Success: true}
+        Trade: {
+          Prediction: {Marketplace: {ProtocolName: {is: "polymarket"}}}
+          OutcomeTrade: {CollateralAmountInUSD: {gt: "10000"}}
+        }
+      }
+    ) {
+      Block{
+        Time
+        Date
+      }
+      Trade {
+        OutcomeTrade {
+          Buyer
+          Seller
+          Amount
+          CollateralAmount
+          CollateralAmountInUSD
+          OrderId
+          Price
+          PriceInUSD
+          IsOutcomeBuy
+        }
+        Prediction {
+          CollateralToken {
+            Name
+            Symbol
+            SmartContract
+            AssetId
+          }
+          ConditionId
+          OutcomeToken {
+            Name
+            Symbol
+            SmartContract
+            AssetId
+          }
+          Marketplace {
+            SmartContract
+            ProtocolVersion
+            ProtocolName
+            ProtocolFamily
+          }
+          Question {
+            Title
+            ResolutionSource
+            Image
+            MarketId
+            Id
+            CreatedAt
+          }
+          Outcome {
+            Id
+            Index
+            Label
+          }
+        }
+      }
+      Transaction {
+        From
+        Hash
+      }
+    }
+  }
+}
+```
+
+## How do I get top buyers and sellers on Polymarket by volume?
+
+Use `PredictionTrades` with `limitBy` and `sum(of: Trade_OutcomeTrade_CollateralAmountInUSD)` grouped by Buyer (or Seller) to rank the top 100 wallets by volume over the last 5 days. Useful for leaderboards, whale tracking, and trader analytics.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/How-do-I-get-top-buyers-and-sellers-on-Polymarket-by-volume)
+
+```graphql
+query {
+  EVM(network: matic) {
+    buyers: PredictionTrades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "volume_usd"}
+      where: {
+        Block: {Time: {since_relative: {days_ago: 5}}}
+        TransactionStatus: {Success: true}
+        Trade: {Prediction: {Marketplace: {ProtocolName: {is: "polymarket"}}}}
+      }
+    ) {
+      volume_usd: sum(of: Trade_OutcomeTrade_CollateralAmountInUSD)
+      Trade {
+        OutcomeTrade {
+          Buyer
+        }
+      }
+    }
+    sellers: PredictionTrades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "volume_usd"}
+      where: {
+        Block: {Time: {since_relative: {days_ago: 5}}}
+        TransactionStatus: {Success: true}
+        Trade: {Prediction: {Marketplace: {ProtocolName: {is: "polymarket"}}}}
+      }
+    ) {
+      volume_usd: sum(of: Trade_OutcomeTrade_CollateralAmountInUSD)
+      Trade {
+        OutcomeTrade {
+          Seller
+        }
+      }
+    }
+  }
+}
+```
+
+
+## How do I count trades for a specific Polymarket trader?
+
+Use `PredictionTrades` with `any` filter on `Buyer` or `Seller` to return the total trade count for a wallet. Add `ProtocolName: "polymarket"` to restrict to Polymarket only. Replace the address with your target wallet.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/How-do-I-count-trades-for-a-specific-Polymarket-trader)
+
+```graphql
+query {
+  EVM(network: matic) {
+    PredictionTrades(
+      where: {
+        TransactionStatus: {Success: true}
+        any: [
+          {Trade: {Prediction: {Marketplace: {ProtocolName: {is: "polymarket"}}}, OutcomeTrade: {Buyer: {is: "0xd48165a42bb4eeb5971e5e830c068eef0890af35"}}}}
+          {Trade: {Prediction: {Marketplace: {ProtocolName: {is: "polymarket"}}}, OutcomeTrade: {Seller: {is: "0xd48165a42bb4eeb5971e5e830c068eef0890af35"}}}}
+        ]
+      }
+    ) {
+      count
+    }
+  }
+}
+```
 
 ---
 
