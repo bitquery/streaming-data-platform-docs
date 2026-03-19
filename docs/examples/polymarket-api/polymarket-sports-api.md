@@ -52,6 +52,222 @@ Kafka requires **separate credentials** (IDE tokens do not work). See the full g
 
 For credentials, [contact support](https://t.me/bloxy_info) or email support@bitquery.io.
 
+## Latest Fifa World Cup Markets Created
+
+Markets resolved via **FIFA** (`ResolutionSource` includes `fifa.com`). Returns the 10 most recent **Created** events with full condition, outcomes, question, and collateral token details.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/Latest-Fifa-World-Cup-Markets-Created)
+
+```graphql
+query LatestFifaMarketsCreated {
+  EVM(network: matic) {
+    PredictionManagements(
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Management: {
+          EventType: { is: "Created" }
+          Prediction: {
+            Question: { ResolutionSource: { includes: "fifa.com" } }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Call {
+        Signature {
+          Name
+        }
+      }
+      Log {
+        Signature {
+          Name
+        }
+        SmartContract
+      }
+      Management {
+        Description
+        EventType
+        Prediction {
+          CollateralToken {
+            Name
+            SmartContract
+            Symbol
+            AssetId
+          }
+          Condition {
+            Id
+            Oracle
+            Outcomes {
+              Id
+              Index
+              Label
+            }
+            QuestionId
+          }
+          Marketplace {
+            ProtocolName
+            ProtocolFamily
+            SmartContract
+          }
+          Outcome {
+            Id
+            Index
+            Label
+          }
+          OutcomeToken {
+            Symbol
+            SmartContract
+            Name
+            AssetId
+          }
+          Question {
+            CreatedAt
+            Id
+            Image
+            MarketId
+            ResolutionSource
+            Title
+          }
+        }
+      }
+      Transaction {
+        From
+        Hash
+      }
+    }
+  }
+}
+```
+
+## Top Cricket Markets by Volume
+Markets resolved via **FIFA** (`ResolutionSource` includes `fifa.com`). Returns the top 100 cricket related polymarkets sorted by trading volume in the past 24 hours.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/top-FIFA-World-Cup-markets-by-volume)
+
+```graphql
+query TopFIFAMarketsByVolume($time_ago: Int!, $limit: Int!) {
+  EVM(network: matic) {
+    PredictionTrades(
+      where: {Block: {Time: {since_relative: {hours_ago: $time_ago}}}, Trade: {Prediction: {Question: {ResolutionSource: {includes: "fifa.com"}}}}}
+      limit: {count: $limit}
+      orderBy: {descendingByField: "sumBuyAndSell"}
+    ) {
+      Trade {
+        Prediction {
+          Question {
+            Id
+            Image
+            Title
+            CreatedAt
+          }
+          OutcomeToken {
+            assetId0: AssetId(if: {Trade: {Prediction: {Outcome: {Index: {eq: 0}}}}})
+            assetId1: AssetId(if: {Trade: {Prediction: {Outcome: {Index: {eq: 1}}}}})
+          }
+          Outcome {
+            label0: Label(if: {Trade: {Prediction: {Outcome: {Index: {eq: 0}}}}})
+            label1: Label(if: {Trade: {Prediction: {Outcome: {Index: {eq: 1}}}}})
+          }
+        }
+        OutcomeTrade {
+          price0: Price(
+            maximum: Block_Time
+            if: {Trade: {Prediction: {Outcome: {Index: {eq: 0}}}}}
+          )
+          price1: Price(
+            maximum: Block_Time
+            if: {Trade: {Prediction: {Outcome: {Index: {eq: 1}}}}}
+          )
+        }
+      }
+      buyUSD: sum(
+        of: Trade_OutcomeTrade_CollateralAmountInUSD
+        if: {Trade: {OutcomeTrade: {IsOutcomeBuy: true}}}
+      )
+      sellUSD: sum(
+        of: Trade_OutcomeTrade_CollateralAmountInUSD
+        if: {Trade: {OutcomeTrade: {IsOutcomeBuy: false}}}
+      )
+      sumBuyAndSell: calculate(expression: "$buyUSD + $sellUSD")
+      trades: count
+      buyers: count(distinct: Trade_OutcomeTrade_Buyer)
+      sellers: count(distinct: Trade_OutcomeTrade_Seller)
+      resolved: joinPredictionManagements(
+        join: left
+        Management_Prediction_Question_Id: Trade_Prediction_Question_Id
+      ) {
+        Block {
+          Time(maximum: Block_Time, if: {Management: {EventType: {is: "Resolved"}}})
+        }
+      }
+    }
+  }
+}
+```
+
+Variables:
+
+```json
+{
+  "time_ago": 24,
+  "limit": 100
+}
+```
+
+## Top FIFA World Cup Markets by Liquidity
+
+Returns the top 100 FIFA World Cup related polymarkets sorted by liquidity position in the past 24 hours. Here `position` is the metric used for sorting, hence it could be regarded as the liquidity position of the particular market.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/Top-FIFA-World-Cup-Markets-by-Liquidity)
+
+```graphql
+query TopFIFAMarketByLiquidity($time_ago: Int!, $limit: Int!) {
+  EVM(network: matic) {
+    PredictionSettlements(
+      where: {Block: {Time: {since_relative: {hours_ago: $time_ago}}}, Settlement: {Prediction: {Question: {ResolutionSource: {includes: "fifa.com"}}}}}
+      limit: {count: $limit}
+      orderBy: {descendingByField: "position"}
+      limitBy: {by: Settlement_Prediction_Question_Id}
+    ) {
+      Settlement {
+        Prediction {
+          Question {
+            Image
+            MarketId
+            Title
+            Id
+            CreatedAt
+            ResolutionSource
+          }
+        }
+      }
+      split: sum(
+        of: Settlement_Amounts_CollateralAmountInUSD
+        if: {Settlement: {EventType: {is: "Split"}}}
+      )
+      merge: sum(
+        of: Settlement_Amounts_CollateralAmountInUSD
+        if: {Settlement: {EventType: {is: "Merge"}}}
+      )
+      position: calculate(expression: "$split - $merge")
+      count(if: {Settlement: {EventType: {is: "Redemption"}}}, selectWhere: {eq: "0"})
+    }
+  }
+}
+```
+
+Variables:
+
+```json
+{
+  "time_ago": 24,
+  "limit": 100
+}
+```
+
 ## Latest cricket markets created
 
 Markets resolved via **ESPN Cricinfo** (`ResolutionSource` includes `espncricinfo.com`). Returns the 10 most recent **Created** events with full condition, outcomes, question, and collateral token details.
@@ -141,6 +357,140 @@ query LatestCricketMarketsCreated {
   }
 }
 ```
+
+## Top Cricket Markets by Volume
+Markets resolved via **ESPN Cricinfo** (`ResolutionSource` includes `espncricinfo.com`). Returns the top 100 cricket related polymarkets sorted by trading volume in the past 24 hours.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/top-cricket-markets-by-volume)
+
+```graphql
+query TopCricketMarketsByVolume($time_ago: Int!, $limit: Int!) {
+  EVM(network: matic) {
+    PredictionTrades(
+      where: {Block: {Time: {since_relative: {hours_ago: $time_ago}}}, Trade: {Prediction: {Question: {ResolutionSource: {includes: "espncricinfo.com"}}}}}
+      limit: {count: $limit}
+      orderBy: {descendingByField: "sumBuyAndSell"}
+    ) {
+      Trade {
+        Prediction {
+          Question {
+            Id
+            Image
+            Title
+            CreatedAt
+          }
+          OutcomeToken {
+            assetId0: AssetId(if: {Trade: {Prediction: {Outcome: {Index: {eq: 0}}}}})
+            assetId1: AssetId(if: {Trade: {Prediction: {Outcome: {Index: {eq: 1}}}}})
+          }
+          Outcome {
+            label0: Label(if: {Trade: {Prediction: {Outcome: {Index: {eq: 0}}}}})
+            label1: Label(if: {Trade: {Prediction: {Outcome: {Index: {eq: 1}}}}})
+          }
+        }
+        OutcomeTrade {
+          price0: Price(
+            maximum: Block_Time
+            if: {Trade: {Prediction: {Outcome: {Index: {eq: 0}}}}}
+          )
+          price1: Price(
+            maximum: Block_Time
+            if: {Trade: {Prediction: {Outcome: {Index: {eq: 1}}}}}
+          )
+        }
+      }
+      buyUSD: sum(
+        of: Trade_OutcomeTrade_CollateralAmountInUSD
+        if: {Trade: {OutcomeTrade: {IsOutcomeBuy: true}}}
+      )
+      sellUSD: sum(
+        of: Trade_OutcomeTrade_CollateralAmountInUSD
+        if: {Trade: {OutcomeTrade: {IsOutcomeBuy: false}}}
+      )
+      sumBuyAndSell: calculate(expression: "$buyUSD + $sellUSD")
+      trades: count
+      buyers: count(distinct: Trade_OutcomeTrade_Buyer)
+      sellers: count(distinct: Trade_OutcomeTrade_Seller)
+      resolved: joinPredictionManagements(
+        join: left
+        Management_Prediction_Question_Id: Trade_Prediction_Question_Id
+      ) {
+        Block {
+          Time(maximum: Block_Time, if: {Management: {EventType: {is: "Resolved"}}})
+        }
+      }
+    }
+  }
+}
+```
+
+Variables:
+
+```json
+{
+  "time_ago": 24,
+  "limit": 100
+}
+```
+
+You can checkout the above data in more intuitive form on [DexRabbit](https://dexrabbit.bitquery.io/polymarket-predictions/sports/cricket?tab=volume).
+
+![Cricket Markets by Liquidity](../../../static/img/dexrabbit/cricket-volume.png)
+
+## Top Cricket Markets by Liquidity
+
+Returns the top 100 cricket related polymarkets sorted by liquidity position in the past 24 hours.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/Top-cricket-Markets-by-Liquidity)
+
+```graphql
+query questionByLiquidity($time_ago: Int!, $limit: Int!) {
+  EVM(network: matic) {
+    PredictionSettlements(
+      where: {Block: {Time: {since_relative: {hours_ago: $time_ago}}}, Settlement: {Prediction: {Question: {ResolutionSource: {includes: "espncricinfo.com"}}}}}
+      limit: {count: $limit}
+      orderBy: {descendingByField: "position"}
+      limitBy: {by: Settlement_Prediction_Question_Id}
+    ) {
+      Settlement {
+        Prediction {
+          Question {
+            Image
+            MarketId
+            Title
+            Id
+            CreatedAt
+            ResolutionSource
+          }
+        }
+      }
+      split: sum(
+        of: Settlement_Amounts_CollateralAmountInUSD
+        if: {Settlement: {EventType: {is: "Split"}}}
+      )
+      merge: sum(
+        of: Settlement_Amounts_CollateralAmountInUSD
+        if: {Settlement: {EventType: {is: "Merge"}}}
+      )
+      position: calculate(expression: "$split - $merge")
+      count(if: {Settlement: {EventType: {is: "Redemption"}}}, selectWhere: {eq: "0"})
+    }
+  }
+}
+```
+
+Variables:
+
+```json
+{
+  "time_ago": 24,
+  "limit": 100
+}
+```
+
+You can checkout the above data in more intuitive form on [DexRabbit](https://dexrabbit.bitquery.io/polymarket-predictions/sports/cricket?tab=liquidity).
+
+![Cricket Markets by Liquidity](../../../static/img/dexrabbit/cricket-liquidity.png)
 
 ## Latest sports markets created
 
