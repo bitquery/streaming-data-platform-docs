@@ -15,7 +15,7 @@ keywords:
   - PredictionTrades Bitcoin
 ---
 
-# How to Get Polymarket Bitcoin Up or Down Data Using Bitquery
+# Polymarket Bitcoin Up or Down Prediction Odds API
 
 Query and stream **Polymarket Bitcoin up or down** prediction market trades and **Bitcoin price odds** via Bitquery’s GraphQL API. These markets ask whether Bitcoin will be **up** or **down** at a specific time (e.g. daily or weekly settlement).
 
