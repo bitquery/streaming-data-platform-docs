@@ -319,26 +319,17 @@ Rank holders by total redeemed amount USD for one market (filter by question tit
 query MyQuery {
   EVM(network: matic) {
     PredictionSettlements(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "redeemed_amount" }
-      where: {
-        Block: { Time: { since_relative: { hours_ago: 1 } } }
-        Settlement: {
-          EventType: { is: "Redemption" }
-          Prediction: {
-            Question: {
-              Title: {
-                is: "Will Trump nominate Judy Shelton as the next Fed chair?"
-              }
-            }
-          }
-        }
-      }
+      limit: {count: 10}
+      orderBy: {descendingByField: "redeemed_amount"}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, 
+        Settlement: {EventType: {is: "Redemption"}, 
+          Prediction: {Question: {Title: {is: "Will Trump nominate Judy Shelton as the next Fed chair?"}}}}}
     ) {
       Settlement {
         Holder
       }
-      redeemed_amount: sum(of: Settlement_Amounts_CollateralAmountInUSD)
+      redeemed_amount: sum(of: Settlement_Amounts_CollateralAmountInUSD selectWhere:{gt:"0"})
+      count
     }
   }
 }
@@ -348,7 +339,7 @@ query MyQuery {
 
 ## Top 10 market questions by redeemed amount (last 1 hour)
 
-Aggregate redemptions by market question and sort by total redeemed amount. Use this to see which markets had the most payout activity recently.
+Aggregated redemptions by market question and sort by total redeemed amount. Use this to see which markets had the most payout activity recently.
 
 [Run in Bitquery IDE](https://ide.bitquery.io/top-10-market-questions-in-last-1-hour_2)
 
@@ -373,6 +364,7 @@ query MyQuery {
           }
         }
       }
+      count(distinct:Settlement_Holder)
       redeemed_amount: sum(of: Settlement_Amounts_CollateralAmountInUSD)
     }
   }
@@ -406,6 +398,7 @@ query TopRedeemers {
   }
 }
 ```
+
 
 ---
 
