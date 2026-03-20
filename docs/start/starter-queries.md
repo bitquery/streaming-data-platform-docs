@@ -68,6 +68,14 @@ Use this API to get historical price and volume over the past 24 hours, with 1h,
 
 ▶️ [Historical Price and Volume Data](https://ide.bitquery.io/multiple-tokens-volume_1)
 
+#### Volume of Multiple Tokens Across Different Chains
+
+Get volume and price change data for multiple tokens trading on different chains (Solana, Ethereum, BSC, Tron) in a single query. Returns volume for 1h, 4h, and 24h periods, plus price change percentages.
+
+> **Note:** For EVM chains (Ethereum, BSC, etc.) in the Trading API, use **all lowercase addresses** in the token ID format (e.g., `bid:eth:0x...` with lowercase hex). Mixed-case addresses may not match.
+
+▶️ [Volume of Multiple Tokens Across Chains](https://ide.bitquery.io/volume-of-a-token_1)
+
 ## PolyMarket
 
 ### Prediction Market Trades

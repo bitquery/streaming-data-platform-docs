@@ -19,6 +19,15 @@ keywords:
 
 Query **commodity-related prediction markets** on Polymarket: **Gold (GC)** (e.g. “Gold Up or Down”), **Crude Oil**, and other commodity price-direction markets. Use **PredictionManagements** for market creation and resolution events, **PredictionTrades** for prices and volume, and **PredictionSettlements** for redemptions and top redeemers. All data is on Polygon (`network: matic`).
 
+:::tip See it in action: DEXrabbit Polymarket showcase
+Check out our **Polymarket data showcase** on [DEXrabbit](https://dexrabbit.bitquery.io/polymarket-predictions) powered by Bitquery APIs. Explore live commodity markets:
+
+- **[Gold (GC) market example](https://dexrabbit.bitquery.io/polymarket-predictions/0x6a9b34f5f4b44a7d3dced5ac84b3300aa9ae18e163a9bb4c98b805b57bbc1abb)** — View current odds, trade statistics, volume, and top traders by PnL
+- **[Crude Oil market example](https://dexrabbit.bitquery.io/polymarket-predictions/0x9a1e4e09a4bb9321f9b3f4f04d4242f1c11046348f88d236eeb0ae038b336096)** — See price charts, trading activity, and market analytics
+
+Click the **"Get API"** buttons on any market page to get ready-to-use GraphQL queries for trade statistics, top traders by PnL, volume breakdowns, and more.
+:::
+
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
 :::

@@ -1453,6 +1453,68 @@ The below query retrieves the USD price of a token on Solana by setting `MintAdd
 
 </details>
 
+## Stablecoin Peg Health (Latest Price Across All Markets)
+
+Get the **latest price of a stablecoin across all Solana DEXs/markets**. Returns one row per market with the most recent trade price. Useful for monitoring peg health and identifying which exchanges have the stablecoin trading closest to its target peg (e.g., $1.00 for USD-pegged stablecoins).
+
+[Run in Bitquery IDE](https://ide.bitquery.io/Latest-Price-of-a-Token-on-all-exchanges_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limitBy: { count: 1, by: Trade_Market_MarketAddress }
+      where: {
+        Trade: {
+          Currency: { MintAddress: { is: "CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s" } }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+      Trade {
+        Amount
+        AmountInUSD
+        Price
+        PriceInUSD
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        Market {
+          MarketAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Side {
+          Type
+          Currency {
+            Name
+            MintAddress
+            Symbol
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Get the Token details like Update Authority, decimals, URI, is Mutable or not
 
 The below query retrieves the token details such as update authority for a particular token and also checks if a token's data is mutable or not. You can access the query [here](https://ide.bitquery.io/Solana-currency-details).
@@ -2052,6 +2114,81 @@ Get up to 100 tokens with aggregated USD volume and average price over the last 
   }
 }
 ```
+
+## Volume of Multiple Tokens Across Different Chains
+
+Get volume and price change data for multiple tokens trading on different chains (Solana, Ethereum, BSC, Tron) in a single query using the Trading API. Returns volume for 1h, 4h, and 24h periods, plus price change percentages for the same intervals.
+
+:::note EVM address format
+For **EVM chains** (Ethereum, BSC, etc.) in the Trading API, use **all lowercase addresses** in the token ID format (e.g., `bid:eth:0x...` with lowercase hex). Mixed-case addresses may not match.
+:::
+
+[Run in Bitquery IDE](https://ide.bitquery.io/volume-of-a-token_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query {
+  TokenAsBase: Trading { 
+    Pairs(
+      where: {
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Price: { IsQuotedInUsd: true }
+        Token: {
+          Id: {
+            in: [
+              "bid:solana:CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s",
+              "bid:eth:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78",
+              "bid:bsc:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78",
+              "bid:tron:TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"
+            ]
+          }
+        }
+        Market: { Protocol: { notIn: ["jupiter", "dex_solana_v3"] } }
+      }
+    ) {
+      Token {
+        Name
+        Symbol
+        Id
+      }
+      Price {
+        Average {
+          currentPrice: Mean(maximum: Block_Time)
+          H1Ago: Mean(
+            maximum: Block_Time
+            if: { Block: { Time: { till_relative: { hours_ago: 1 } } } }
+          )
+          H4Ago: Mean(
+            maximum: Block_Time
+            if: { Block: { Time: { till_relative: { hours_ago: 4 } } } }
+          )
+          H24Ago: Mean(
+            minimum: Block_Time
+            if: { Block: { Time: { after_relative: { hours_ago: 24 } } } }
+          )
+        }
+      }
+      Price_change_1h: calculate(
+        expression: "( ( $Price_Average_currentPrice - $Price_Average_H1Ago ) / $Price_Average_H1Ago ) * 100"
+      )
+      Price_change_4h: calculate(
+        expression: "( ( $Price_Average_currentPrice - $Price_Average_H4Ago ) / $Price_Average_H4Ago ) * 100"
+      )
+      Price_change_24h: calculate(
+        expression: "( ( $Price_Average_currentPrice - $Price_Average_H24Ago ) / $Price_Average_H24Ago ) * 100"
+      )
+      v1h: sum(of: Volume_Usd, if: { Block: { Time: { since_relative: { hours_ago: 1 } } } })
+      v4h: sum(of: Volume_Usd, if: { Block: { Time: { since_relative: { hours_ago: 4 } } } })
+      v24h: sum(of: Volume_Usd)
+    }
+  }
+}
+```
+
+</details>
 
 ## Video Tutorial on Solana DEXTrades API | How to get Decentralized Exchange Data with DEX Trades API
 

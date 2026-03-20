@@ -202,3 +202,174 @@ This query compares USDT prices across different blockchain networks in real-tim
 
 
 ```
+
+## Stablecoin Peg Health API
+
+Monitor stablecoin peg health by getting the **latest price per DEX/market** for a stablecoin. This helps identify which exchanges or markets have the stablecoin trading closest to its peg (e.g., $1.00 for USD-pegged stablecoins) and detect de-pegging events across different trading venues.
+
+### Solana Peg Health
+
+Get the latest price of a stablecoin across all Solana DEXs/markets. Returns one row per market with the most recent trade price.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/Latest-Price-of-a-Token-on-all-exchanges_1)
+
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limitBy: { count: 1, by: Trade_Market_MarketAddress }
+      where: {
+        Trade: {
+          Currency: { MintAddress: { is: "CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s" } }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Signature
+      }
+      Trade {
+        Amount
+        AmountInUSD
+        Price
+        PriceInUSD
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        Market {
+          MarketAddress
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        Side {
+          Type
+          Currency {
+            Name
+            MintAddress
+            Symbol
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+```
+
+### Ethereum / BSC Peg Health
+
+Get the latest price of a stablecoin across all EVM DEXs. Returns one row per DEX protocol with the most recent trade price. Works on Ethereum, BSC, and other EVM chains.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/evm-peg-health_1)
+
+```graphql
+{
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limitBy: { count: 1, by: Trade_Dex_SmartContract }
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: "CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s" } }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Amount
+        AmountInUSD
+        Price
+        PriceInUSD
+        Currency {
+          Name
+          SmartContract
+          Symbol
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          SmartContract
+        }
+        Side {
+          Type
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+```
+
+### Tron Peg Health
+
+Get the latest price of a stablecoin across all Tron DEXs. Returns one row per DEX protocol with the most recent trade price.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/peg-health-tron)
+
+```graphql
+{
+  Tron {
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limitBy: { count: 1, by: Trade_Dex_SmartContract }
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT" } }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Amount
+        AmountInUSD
+        Price
+        PriceInUSD
+        Currency {
+          Name
+          SmartContract
+          Symbol
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          SmartContract
+        }
+        Side {
+          Type
+          Currency {
+            Name
+            SmartContract
+            Symbol
+          }
+          AmountInUSD
+          Amount
+        }
+      }
+    }
+  }
+}
+```
