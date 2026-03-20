@@ -72,9 +72,10 @@ Bitquery offers two streaming interfaces for real-time blockchain data. Each has
 
 WebSocket-based [GraphQL subscriptions](/docs/subscriptions/subscription) deliver real-time blockchain data through the same API you use for queries.
 
+**Important:** Streams do not count towards points in paid plans. Streams are sold separately as a number of concurrent streams with no data or rate limits.
+
 **How pricing works:**
 
-- Internally, each subscription stream costs **40 points per minute**.
 - Under [paid plans](https://bitquery.io/pricing), you purchase a number of **concurrent streams** — and Bitquery adds enough points to keep those streams running 24/7 for the entire billing period.
 - **As a paid customer, you don't need to worry about points for streaming.** Simply tell us how many concurrent streams you need and we handle the rest.
 
