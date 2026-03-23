@@ -24,7 +24,7 @@ keywords:
 
 # Polymarket API - Trade, Prices & Market Data
 
-The Bitquery Polymarket API provides real-time and historical prediction market data on Polygon via GraphQL. Use it to query trades, settlements, market metadata, and volume; filter by condition_id, outcome token, or trade size; and access data via REST, WebSocket subscriptions, or Kafka streams. Filter by Polymarket using `ProtocolName: "polymarket"` or `Marketplace.ProtocolName` in your queries.
+The Bitquery Polymarket API provides prediction market data on Polygon via GraphQL. Use **`dataset: realtime`** on `EVM` queries for **`PredictionTrades`**, **`PredictionSettlements`**, and related prediction-market APIs—this dataset retains roughly the **last 7 days**. Use it to query trades, settlements, market metadata, and volume; filter by condition_id, outcome token, or trade size; and access data via REST, WebSocket subscriptions, or Kafka streams. Filter by Polymarket using `ProtocolName: "polymarket"` or `Marketplace.ProtocolName` in your queries.
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
@@ -32,11 +32,15 @@ To query or stream data outside the Bitquery IDE, you need an API access token.
 Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
 :::
 
+:::note Dataset
+Polymarket prediction-market data on Polygon requires **`dataset: realtime`** (~**7 days** of rolling history). Add `dataset: realtime` to the `EVM(...)` argument in your GraphQL examples when using prediction trades and settlements.
+:::
+
 ---
 
 ## What Polymarket data can I get with Bitquery?
 
-Bitquery provides **trades and prices** (buy/sell activity, volume, outcome prices), **positions and redemptions** (splits, merges after resolution), **market lifecycle** (creation, resolution, oracle outcomes), **market metadata** (condition ID, slug, token filters via CTF Exchange), **wallet activity** (volume and market counts by address), and **real-time streaming** (Kafka for trades and settlements). All data is on Polygon (`network: matic`). Use the links below to find the right API.
+Bitquery provides **trades and prices** (buy/sell activity, volume, outcome prices), **positions and redemptions** (splits, merges after resolution), **market lifecycle** (creation, resolution, oracle outcomes), **market metadata** (condition ID, slug, token filters via CTF Exchange), **wallet activity** (volume and market counts by address), and **real-time streaming** (Kafka for trades and settlements). All data is on Polygon (`network: matic`) with **`dataset: realtime`** (about the **last 7 days**). Use the links below to find the right API.
 
 
 ### How do I get Polymarket trades and prices?
@@ -68,6 +72,12 @@ Use the **[Polymarket Markets API](https://docs.bitquery.io/docs/examples/polyma
 Use the **[Polymarket Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api)** to query recent activity, volume, and market counts by wallet address.
 
 [→ Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api)
+
+### How do I build TVL, open-interest-style metrics, maker/taker splits, and order-flow analytics?
+
+Use the **[Polymarket Advanced Analytics API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-advanced-analytics-api)** for GraphQL examples: USDC balances in core contracts, daily volume and maker/taker splits, order-flow by market, whale-trade subscriptions, settlement flows, and top markets by volume.
+
+[→ Polymarket Advanced Analytics API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-advanced-analytics-api)
 
 ### How do I stream Polymarket data in real time?
 
@@ -614,7 +624,7 @@ Bitquery provides prediction market data via the [Prediction Trades API](https:/
 
 ### What network does Polymarket use?
 
-Polymarket runs on Polygon. Use `EVM(network: matic)` or `network: matic` in all Bitquery GraphQL queries.
+Polymarket runs on Polygon. Use `EVM(dataset: realtime, network: matic)` for prediction trades and settlements (see the **Dataset** note above—**realtime** holds about the **last 7 days**).
 
 ### Does Bitquery support real-time Polymarket streaming?
 

@@ -826,6 +826,7 @@ const sidebars = {
           },
           items: [
             "examples/polymarket-api/polymarket-api",
+            "examples/polymarket-api/polymarket-advanced-analytics-api",
             "examples/polymarket-api/polymarket-markets-api",
             "examples/polymarket-api/polymarket-sports-api",
             "examples/polymarket-api/polymarket-commodity-api",
