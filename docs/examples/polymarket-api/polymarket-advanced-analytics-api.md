@@ -12,6 +12,8 @@ keywords:
   - Polymarket open interest proxy
 ---
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Polymarket API - Advanced Analytics
 
 This guide shows **GraphQL examples** for deeper **Polymarket** metrics on **Polygon** (`network: matic`): **TVL** of Polymarket, **daily trade aggregates**, **buy vs sell pressure** for a market, **large-trade streaming**, **split/merge settlement** totals, and **top markets by volume**. All examples use **`dataset: realtime`**, which covers about the **last 7 days** of data. Use it together with the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/), [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/), and [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/).
@@ -40,6 +42,10 @@ Polymarket prediction-market data on Polygon (**`PredictionTrades`**, **`Predict
 | **Whale trades**                     | `PredictionTrades` (subscription) | Trades above a **USD** threshold                                                      |
 | **open Interest (one day)**          | `PredictionSettlements`           | **Split** / **merge** USDC and **net** (liquidity-style proxy, not CLOB OI)           |
 | **Top markets by volume**            | `PredictionTrades`                | Markets ranked by **buy + sell** USD over **24 hours**                                |
+
+---
+
+<VideoPlayer url="https://youtu.be/uilT4-a2LGs" />
 
 ---
 
