@@ -159,6 +159,13 @@ subscription {
       Volume {
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
     }
   }
 }
@@ -210,6 +217,13 @@ subscription {
       Volume {
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
     }
   }
 }
@@ -237,6 +251,13 @@ subscription {
       }
       Volume {
         Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
     }
   }
@@ -274,6 +295,13 @@ subscription {
         Base
         Quote
         Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
     }
   }

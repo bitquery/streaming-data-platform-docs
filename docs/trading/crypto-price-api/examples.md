@@ -45,6 +45,13 @@ subscription {
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         Ohlc {
           Close
@@ -107,6 +114,13 @@ subscription {
         Base
         Quote
         Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
       Price {
         Ohlc {
@@ -180,6 +194,13 @@ subscription {
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         Ohlc {
           Close
@@ -227,6 +248,13 @@ Get a snapshot of tokens with aggregated USD volume and average price over the l
         H24VAgo: Usd(
           if: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
         )
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
       Price {
         Average {
@@ -292,6 +320,13 @@ This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in t
         BaseAttributedToUsd
         Quote
         Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
       Price {
         IsQuotedInUsd #The price is shown in USD (`IsQuotedInUsd: true` by default).
@@ -366,6 +401,13 @@ subscription {
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         IsQuotedInUsd
         Ohlc {
@@ -435,6 +477,13 @@ subscription {
         Usd
         Quote
         Base
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
       Price {
         IsQuotedInUsd
@@ -584,6 +633,13 @@ This stream uses [expressions](http://docs.bitquery.io/docs/graphql/capabilities
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         IsQuotedInUsd
         Ohlc {
@@ -659,6 +715,13 @@ subscription{
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         IsQuotedInUsd
         Ohlc {
@@ -731,6 +794,13 @@ This query uses [expressions](http://docs.bitquery.io/docs/graphql/capabilities/
         Base
         Quote
         Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
       Price {
         IsQuotedInUsd
@@ -808,6 +878,13 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         IsQuotedInUsd
         Ohlc {
@@ -870,6 +947,13 @@ subscription {
         Base
         Quote
         Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
       Price {
         Ohlc {
@@ -948,6 +1032,13 @@ subscription {
         Base
         Quote
         Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
       Price {
         Ohlc {
@@ -1028,6 +1119,13 @@ subscription {
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         Ohlc {
           Close
@@ -1106,6 +1204,13 @@ subscription {
         Base
         Quote
         Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
       Price {
         Ohlc {
@@ -1186,6 +1291,13 @@ subscription {
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         Ohlc {
           Close
@@ -1265,6 +1377,13 @@ subscription {
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         Ohlc {
           Close
@@ -1343,6 +1462,13 @@ subscription {
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         Ohlc {
           Close
@@ -1420,6 +1546,13 @@ subscription {
         Base
         Quote
         Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
       }
       Price {
         Ohlc {

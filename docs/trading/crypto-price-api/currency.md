@@ -47,6 +47,13 @@ The OHLC values (Open, High, Low, Close) are determined across all chains and to
         Quote   # Sum of quote token amounts (not USD); use Usd for USD totals (March 11 2026: see Price Index Algorithm)
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         IsQuotedInUsd #The price is shown in USD (`IsQuotedInUsd: true` by default).
         Ohlc {

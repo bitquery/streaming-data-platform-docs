@@ -33,6 +33,13 @@ The Pairs cube provides trading data for a base token traded against a quote tok
         Quote
         Usd
       }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
       Price {
         Ohlc {
           Close
@@ -61,6 +68,7 @@ The Pairs cube provides trading data for a base token traded against a quote tok
   OHLC candles (Open, High, Low, Close) for the interval, computed using only trades with known USD values.
 - `Price.IsQuotedInUsd`:  
    Boolean flag indicating if the price values are quoted in USD. If `false`, the price is in quote token terms.
+- **`Supply`**: Currency-level metrics for the asset (not pair- or pool-specific).
 
 A rough pseudo-code of how price is calculated:
 
