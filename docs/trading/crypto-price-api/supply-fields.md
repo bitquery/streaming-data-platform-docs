@@ -46,13 +46,9 @@ The **maximum supply cap** for the asset. For assets **without** a fixed cap, or
 
 **Market capitalization in USD**, usually **price × circulating supply** when **circulating supply** is known (using the currency-level figure and the Price Index USD price for that row). When **circulating supply** is **unknown**, **`MarketCap` equals `FullyDilutedValuationUsd`** (see below). 
 
-- May be **null** if a usable **USD price** is missing.
-
 ### `FullyDilutedValuationUsd`
 
 **Fully diluted valuation in USD**: when **max supply** (or other inputs for a standard FDV) is known, this reflects valuation at fully diluted supply at the current USD price. When **circulating supply** is **unknown**, we set **`FullyDilutedValuationUsd` to the same value as `MarketCap`** (so both fields carry the same fallback valuation).
-
-- May be **null** when a usable **USD price** is missing.
 
 ## Bitcoin (`bid:bitcoin`) and on-chain supply
 
