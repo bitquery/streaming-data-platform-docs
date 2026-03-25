@@ -47,6 +47,8 @@ Polymarket prediction-market data on Polygon (**`PredictionTrades`**, **`Predict
 
 <VideoPlayer url="https://youtu.be/uilT4-a2LGs" />
 
+<VideoPlayer url="https://www.youtube.com/watch?v=WMWjad1zUvQ" />
+
 ---
 
 ## USDC TVL — balances for Conditional Tokens and neg-risk collateral
@@ -317,22 +319,16 @@ query PolymarketSettlementFlowOneDay($day: String!) {
 
 Rank **Polymarket** markets by **buy + sell** collateral USD, with **buy/sell** breakdown, **trade count**, **distinct buyers/sellers**, and optional **resolution** join. Uses **`limitBy: Trade_Prediction_Question_Id`** so each row is **one market**.
 
-[Run in Bitquery IDE](https://ide.bitquery.io/top-100-markets-by-volumein-last24-hrs)
+[Run in Bitquery IDE](https://ide.bitquery.io/top-100-markets-by-volumein-last24-hrs_1)
 
 ```graphql
-query TopMarketsByVolume($limit: Int!) {
-  EVM(dataset: realtime, network: matic) {
+query topMarketsByVolume($limit: Int!) {
+  EVM(network: matic) {
     PredictionTrades(
-      where: {
-        TransactionStatus: { Success: true }
-        Block: { Time: { since_relative: { hours_ago: 24 } } }
-        Trade: {
-          Prediction: { Marketplace: { ProtocolName: { is: "polymarket" } } }
-        }
-      }
+      where: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+      limitBy: { count: 1, by: Trade_Prediction_Question_Id }
       limit: { count: $limit }
       orderBy: { descendingByField: "sumBuyAndSell" }
-      limitBy: { by: Trade_Prediction_Question_Id }
     ) {
       Trade {
         Prediction {
