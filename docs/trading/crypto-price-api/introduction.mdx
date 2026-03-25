@@ -28,7 +28,6 @@ keywords:
   - "low latency price feed"
 ---
 
-
 # Crypto Price API – Real-Time Token Data, Charts & OHLC
 
 Bitquery provides **Crypto Price APIs and Streams** via GraphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto). This **cryptocurrency price API** delivers comprehensive pricing data across multiple blockchains.
@@ -48,14 +47,14 @@ While you can access the aggregated price for a single trading pair, the Price I
 
 ## List of Supported Networks
 
-* Arbitrum
-* Base
-* Matic
-* Ethereum
-* Solana
-* Binance Smart Chain
-* Tron
-* Optimism
+- Arbitrum
+- Base
+- Matic
+- Ethereum
+- Solana
+- Binance Smart Chain
+- Tron
+- Optimism
 
 ## Available Endpoints
 
@@ -71,7 +70,12 @@ While you can access the aggregated price for a single trading pair, the Price I
 ```graphql
 subscription {
   Trading {
-    Tokens(where: {Interval: {Time: {Duration: {eq: 1}}}, Volume: {Usd: {gt: 5}}}) {
+    Tokens(
+      where: {
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Volume: { Usd: { gt: 5 } }
+      }
+    ) {
       Token {
         Address
         Id
@@ -123,7 +127,6 @@ subscription {
     }
   }
 }
-
 ```
 
 ## What is the Crypto Price API (Price Index) and Why Does It Matter?
@@ -156,12 +159,20 @@ This API serves as the foundational layer of our trading-focused data suite, des
 - **Volume**: Base token, Quote token, USD equivalent
 - **Price Statistics**: Mean, median, weighted average
 
+### Supported Supply Metrics
+
+- Market Cap
+- Fully Diluted Valuation Usd
+- Circulating Supply
+- Total Supply
+- Max Supply
+
 ### Moving Average Calculation Window
 
 All moving averages (Simple Moving Average, Weighted Moving Average, and Exponential Moving Average) use a **window size of 5 entries** for calculation, regardless of the time interval:
 
 - **1-second interval**: 5 entries of 1 second each
-- **60-second interval**: 5 entries of 60 seconds each  
+- **60-second interval**: 5 entries of 60 seconds each
 - **3600-second interval**: 5 entries of 3600 seconds (1 hour) each
 
 This consistent window size ensures comparable moving average calculations across all time intervals.
@@ -185,8 +196,9 @@ Each message contains:
 
 - **Price metrics** – OHLC (Open, High, Low, Close), Mean Price, SMA, WMA, EMA in USD
 - **Volume data** – Base, Quote, and Base in USD
+- **Supply data** – currency-level MarketCap, FullyDilutedValuationUsd, CirculatingSupply, TotalSupply, and MaxSupply ([Supply fields reference](/docs/trading/crypto-price-api/supply-fields))
 - **Interval-based aggregation** – fixed durations (1s, 3s, 5s, 10s, etc.)
-- **Clean feed** – low-quality and outlier trades are filtered automatically for accuracy.
+- **Clean feed** – low-quality and outlier trades are filtered automatically for accuracy as per the price algorithm discussed above.
 
 > **Note on `"Quotes"`**:  
 > The `"Quotes": [...]` section in the Kafka stream shows how much was traded in the native token (e.g., SOL) and how the USD value was derived.  
@@ -212,9 +224,12 @@ Currencies are representation of all tokens on various chains supported in Crypt
 {
   Trading {
     Currencies(
-      limit: {count: 1}
-      orderBy: {descending: Block_Time}
-      where: {Currency: {Id: {is: "bid:bitcoin"}}, Volume: {Usd: {gt: 5}}}
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Currency: { Id: { is: "bid:bitcoin" } }
+        Volume: { Usd: { gt: 5 } }
+      }
     ) {
       Volume {
         Usd
@@ -262,7 +277,6 @@ Currencies are representation of all tokens on various chains supported in Crypt
     }
   }
 }
-
 ```
 
 ### How does the above query work?
@@ -279,9 +293,16 @@ Let's say you don't want a chain agnostic view, but want to focus on a particula
 {
   Trading {
     Tokens(
-      where: {Token: {Address: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}, Network: {is: "Solana"}}, Interval: {Time: {Duration: {eq: 1}}}, Volume: {Usd: {gt: 5}}}
-      limit: {count: 1}
-      orderBy: {descending: Block_Time}
+      where: {
+        Token: {
+          Address: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
+          Network: { is: "Solana" }
+        }
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Volume: { Usd: { gt: 5 } }
+      }
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
     ) {
       Token {
         Address
@@ -335,7 +356,6 @@ Let's say you don't want a chain agnostic view, but want to focus on a particula
     }
   }
 }
-
 ```
 
 We filter for specific tokens using the token `Address` and `Network`. If you need to stream all token prices on say Solana, simply set `Network` to `solana`.
@@ -345,7 +365,12 @@ We filter for specific tokens using the token `Address` and `Network`. If you ne
 ```graphql
 subscription {
   Trading {
-    Tokens(where: {Token: {Network: {is: "Solana"}}, Volume: {Usd: {gt: 5}}}) {
+    Tokens(
+      where: {
+        Token: { Network: { is: "Solana" } }
+        Volume: { Usd: { gt: 5 } }
+      }
+    ) {
       Token {
         Address
         Id
@@ -398,7 +423,6 @@ subscription {
     }
   }
 }
-
 ```
 
 ## Pairs
@@ -414,7 +438,14 @@ We will breakdown in detail how base token and Quote are chosen in the next sect
 subscription {
   Trading {
     Pairs(
-      where: {Market: {Network: {is: "Base"}}, QuoteToken: {Address: {is: "0x4200000000000000000000000000000000000006"}}, Token: {Address: {is: "0x940181a94a35a4569e4529a3cdfb74e38fd98631"}}, Volume: {Usd: {gt: 5}}}
+      where: {
+        Market: { Network: { is: "Base" } }
+        QuoteToken: {
+          Address: { is: "0x4200000000000000000000000000000000000006" }
+        }
+        Token: { Address: { is: "0x940181a94a35a4569e4529a3cdfb74e38fd98631" } }
+        Volume: { Usd: { gt: 5 } }
+      }
     ) {
       Currency {
         Symbol
@@ -475,8 +506,6 @@ subscription {
     }
   }
 }
-
-
 ```
 
 ## Volume of Multiple Tokens Across Different Chains
@@ -491,7 +520,7 @@ For **EVM chains** (Ethereum, BSC, etc.) in the Trading API, use **all lowercase
 
 ```graphql
 query {
-  TokenAsBase: Trading { 
+  TokenAsBase: Trading {
     Pairs(
       where: {
         Interval: { Time: { Duration: { eq: 1 } } }
@@ -500,9 +529,9 @@ query {
         Token: {
           Id: {
             in: [
-              "bid:solana:CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s",
-              "bid:eth:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78",
-              "bid:bsc:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78",
+              "bid:solana:CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s"
+              "bid:eth:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78"
+              "bid:bsc:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78"
               "bid:tron:TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"
             ]
           }
@@ -541,8 +570,14 @@ query {
       Price_change_24h: calculate(
         expression: "( ( $Price_Average_currentPrice - $Price_Average_H24Ago ) / $Price_Average_H24Ago ) * 100"
       )
-      v1h: sum(of: Volume_Usd, if: { Block: { Time: { since_relative: { hours_ago: 1 } } } })
-      v4h: sum(of: Volume_Usd, if: { Block: { Time: { since_relative: { hours_ago: 4 } } } })
+      v1h: sum(
+        of: Volume_Usd
+        if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+      )
+      v4h: sum(
+        of: Volume_Usd
+        if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
+      )
       v24h: sum(of: Volume_Usd)
     }
   }
