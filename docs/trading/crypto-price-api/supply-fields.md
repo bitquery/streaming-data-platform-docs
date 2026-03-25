@@ -1,5 +1,5 @@
 ---
-title: "Supply fields reference"
+title: "Supply Fields Reference"
 description: "Definitions for Supply metrics (circulating, total, max supply, market cap, FDV) on the Crypto Price API Tokens, Currency, and Pairs cubes."
 sidebar_position: 3
 keywords:
