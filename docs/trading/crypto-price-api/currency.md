@@ -76,3 +76,8 @@ The OHLC values (Open, High, Low, Close) are determined across all chains and to
 
 
 ```
+
+### Supply
+
+- **`Supply`**: Currency-level supply and USD valuation metrics for the asset (aligned with the same `Supply` fields on Tokens and Pairs). See [Supply fields reference](/docs/trading/crypto-price-api/supply-fields) for definitions of each subfield.
+

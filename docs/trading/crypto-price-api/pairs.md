@@ -68,7 +68,7 @@ The Pairs cube provides trading data for a base token traded against a quote tok
   OHLC candles (Open, High, Low, Close) for the interval, computed using only trades with known USD values.
 - `Price.IsQuotedInUsd`:  
    Boolean flag indicating if the price values are quoted in USD. If `false`, the price is in quote token terms.
-- **`Supply`**: Currency-level metrics for the asset (not pair- or pool-specific).
+- **`Supply`**: Currency-level metrics for the asset (not pair- or pool-specific). See [Supply fields reference](/docs/trading/crypto-price-api/supply-fields) for definitions of each subfield.
 
 A rough pseudo-code of how price is calculated:
 

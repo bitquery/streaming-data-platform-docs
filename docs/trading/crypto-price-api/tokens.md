@@ -81,4 +81,4 @@ subscription {
 - **Clarification on "Quote":**  
   The **Tokens** cube **does not show the specific quote tokens** used in each trade. Instead, it aggregates across all pairs the token is involved in—regardless of which token acted as the quote in those trades.
 - If you need **pair-level granularity** (i.e., to know exactly which token was the quote in a specific pair), use the **Pairs Cube** instead.
-- **`Supply`**: Currency-level metrics for the asset (aggregated across chains); price and volume on the row remain chain-specific.
+- **`Supply`**: Currency-level metrics for the asset (aggregated across chains); price and volume on the row remain chain-specific. See [Supply fields reference](/docs/trading/crypto-price-api/supply-fields) for each subfield (`CirculatingSupply`, `TotalSupply`, `MaxSupply`, `MarketCap`, `FullyDilutedValuationUsd`).
