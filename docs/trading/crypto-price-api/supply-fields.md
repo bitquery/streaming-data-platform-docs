@@ -26,7 +26,7 @@ Amounts below are **human-readable token units** (not raw integer amounts with d
 
 ### `CirculatingSupply`
 
-An estimate of the number of tokens **available to the market** (public float), from **CryptoRank** (methodology and exclusions follow CryptoRank).
+An estimate of the number of tokens **available to the market** (public float), from CryptoRank.
 
 - Often **unavailable** for assets CryptoRank does not cover well (e.g. many meme tokens).
 - May be **null** when a reliable circulating figure is not available.
