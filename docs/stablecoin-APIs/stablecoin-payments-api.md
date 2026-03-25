@@ -130,7 +130,60 @@ You can listen to **stablecoin transfers across various blockchains**:
 
 We simulate transaction on top of current block to provide Mempool simulated Transactions.
 
-### 3. Listening to Transfers for Specific Addresses (BSC Example)
+### 3. Listening to USDT payments on Tron (stream)
+
+This subscription streams **USDT** (`TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t`) transfers on **Tron**.  
+🔗 [Stream Example](https://ide.bitquery.io/Listening-to-All-USDT-and-USDC-Payments-on-Solana---stream)
+
+```graphql
+subscription {
+  Tron(network: tron) {
+    Transfers(
+      where: {Transfer: {Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Transfer {
+        Amount
+        Currency {
+          Name
+          Symbol
+        }
+        Receiver
+        Sender
+      }
+    }
+  }
+}
+```
+
+### 4. Listening to stablecoin transfers for specific addresses on Tron (stream)
+
+Listen to **USDT** sent or received by address `TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ`.  
+🔗 [Stream Example](https://ide.bitquery.io/Listening-to-stablecoin-Transfers-for-Specific-Addresse-on-tron)
+
+```graphql
+subscription {
+  Tron {
+    Transfers(
+      where: {any: [{Transfer: {Sender: {is: "TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ"}}}, {Transfer: {Receiver: {is: "TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ"}}}], Transfer: {Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender
+        Receiver
+      }
+    }
+  }
+}
+```
+
+### 5. Listening to Transfers for Specific Addresses (BSC Example)
 
 🔗 [Example Query](https://ide.bitquery.io/USDT-and-USDC-transfers-on-bnb-chain)
 
@@ -177,7 +230,7 @@ subscription {
 }
 ```
 
-### 4. Compliance & Risk Checks
+### 6. Compliance & Risk Checks
 
 For **AML/KYC and risk monitoring**, you can analyze payment addresses.  
 🔗 [Example API](https://ide.bitquery.io/stats-for-an-adddress)

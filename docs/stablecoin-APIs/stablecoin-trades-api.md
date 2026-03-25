@@ -4,6 +4,109 @@ The Stablecoin API by Bitquery provides you the comprehensive set of APIs which 
 
 We are going to particularly deep-dive into how to get Stablecoin Trades data in this section.
 
+## Ethereum
+
+### Stablecoin trades for Ethereum
+
+Below stream will give you realtime **USDT** DEX trades on Ethereum. Test the stream [here](https://ide.bitquery.io/Stablecoin-trades-for-etheruem).
+
+```
+subscription {
+  EVM {
+    DEXTrades(
+      where: {any: [{Trade: {Buy: {Currency: {SmartContract: {is: "0xdAC17F958D2ee523a2206206994597C13D831ec7"}}}}}, {Trade: {Sell: {Currency: {SmartContract: {is: "0xdAC17F958D2ee523a2206206994597C13D831ec7"}}}}}]}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+        Index
+      }
+      Trade {
+        Index
+        Dex {
+          SmartContract
+          ProtocolFamily
+          ProtocolName
+        }
+        Buy {
+          Amount
+          Buyer
+          Seller
+          Currency {
+            Decimals
+            Fungible
+            Symbol
+            SmartContract
+            Name
+          }
+          Price
+          PriceInUSD
+        }
+        Sell {
+          Buyer
+          Seller
+          Currency {
+            Decimals
+            Fungible
+            Symbol
+            SmartContract
+            Name
+          }
+          Price
+          PriceInUSD
+        }
+      }
+    }
+  }
+}
+```
+
+### Stablecoin Depeg tracking Stream for EVM
+
+Below stream tracks **USDT** on Ethereum when **PriceInUSD** is outside **0.95–1.05** (depeg-style band). Test the query [here](https://ide.bitquery.io/Stablecoin-Depeg-tracking-Stream-for-evm).
+
+```
+subscription {
+  EVM {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: "0xdAC17F958D2ee523a2206206994597C13D831ec7"}}, PriceInUSD: {lt:0.95 gt: 1.05}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Trade {
+        AmountInUSD
+        Amount
+        Buyer
+        Seller
+        Currency {
+          SmartContract
+          Name
+        }
+        Dex {
+          SmartContract
+          ProtocolName
+        }
+        Price
+        PriceInUSD
+        Side {
+          Buyer
+          Seller
+          AmountInUSD
+          Amount
+          Currency {
+            Name
+            SmartContract
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Solana
 
 ### Stablecoin trades
@@ -173,6 +276,109 @@ subscription {
           Currency {
             Name
             MintAddress
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Tron
+
+### Stablecoin trades for Tron
+
+Below stream will give you realtime **USDT** DEX trades on Tron. Test the stream [here](https://ide.bitquery.io/Stablecoin-trades-for-tron).
+
+```
+subscription {
+  Tron {
+    DEXTrades(
+      where: {any: [{Trade: {Buy: {Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}}}, {Trade: {Sell: {Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}}}]}
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+        Index
+      }
+      Trade {
+        Index
+        Dex {
+          SmartContract
+          ProtocolFamily
+          ProtocolName
+        }
+        Buy {
+          Amount
+          Buyer
+          Seller
+          Currency {
+            Decimals
+            Fungible
+            Symbol
+            SmartContract
+            Name
+          }
+          Price
+          PriceInUSD
+        }
+        Sell {
+          Buyer
+          Seller
+          Currency {
+            Decimals
+            Fungible
+            Symbol
+            SmartContract
+            Name
+          }
+          Price
+          PriceInUSD
+        }
+      }
+    }
+  }
+}
+```
+
+### Stablecoin Depeg tracking Stream for Tron
+
+Below stream tracks **USDT** on Tron when **PriceInUSD** is outside **0.95–1.05** (depeg-style band). Test the query [here](https://ide.bitquery.io/Stablecoin-Depeg-tracking-Stream-for-tron).
+
+```
+subscription {
+  Tron {
+    DEXTradeByTokens(
+      where: {Trade: {Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}, PriceInUSD: {lt:0.95 gt: 1.05}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Trade {
+        AmountInUSD
+        Amount
+        Buyer
+        Seller
+        Currency {
+          SmartContract
+          Name
+        }
+        Dex {
+          SmartContract
+          ProtocolName
+        }
+        Price
+        PriceInUSD
+        Side {
+          Buyer
+          Seller
+          AmountInUSD
+          Amount
+          Currency {
+            Name
+            SmartContract
           }
         }
       }

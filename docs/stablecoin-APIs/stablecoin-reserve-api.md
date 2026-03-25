@@ -57,3 +57,28 @@ Below API query will give you realtime reserves data of `USDC` on Solana. Test t
   }
 }
 ```
+
+## Tron
+
+### USDT Stablecoin reserves on Tron
+
+Below API query will give you realtime reserves data of `USDT` on Tron. Test the API [here](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Tron).
+
+```
+query MyQuery {
+  Tron(dataset: combined) {
+    Transfers(
+      where: {Transfer: {Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}, Success: true}}
+    ) {
+      minted: sum(
+        of: Transfer_Amount
+        if: {Transfer: {Sender: {is: "THPvaUhoh2Qn2y9THCZML3H815hhFhn5YC"}}}
+      )
+      burned: sum(
+        of: Transfer_Amount
+        if: {Transfer: {Receiver: {is: "THPvaUhoh2Qn2y9THCZML3H815hhFhn5YC"}}}
+      )
+    }
+  }
+}
+```

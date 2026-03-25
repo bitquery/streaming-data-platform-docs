@@ -54,6 +54,30 @@ query MyQuery {
 
 ```
 
+### Tron
+
+Below query will give you **USDT** balance for address `TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ` on Tron. Test the query [here](https://ide.bitquery.io/Stablecoin-Balance-of-an-Address).
+
+```
+query MyQuery {
+  Tron(dataset: combined) {
+    BalanceUpdates(
+      where: {BalanceUpdate: {Address: {is: "TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ"}}, Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}
+      orderBy: {descendingByField: "balance"}
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
+      BalanceUpdate {
+        Address
+      }
+    }
+  }
+}
+
+```
+
 More examples on balance and balance updates on EVM chains can be found [here](https://docs.bitquery.io/docs/examples/balances/balance-api/)
 
 Token holder API examples can be found [here](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api/)

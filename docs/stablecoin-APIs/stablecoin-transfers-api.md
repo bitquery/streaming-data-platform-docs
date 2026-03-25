@@ -124,3 +124,58 @@ Below query will give you `EURC` transfers from/to `cHxJ2uC6vgcCfoFSfupkfCWbKHAk
   }
 }
 ```
+
+## Tron
+
+### Stablecoin Realtime Transfers Stream on Tron
+
+Below stream will give you realtime transfers of `USDT` on Tron. Test the stream [here](https://ide.bitquery.io/Stablecoin-Realtime-Transfers-Stream-on-tron).
+
+```
+subscription {
+  Tron(network: tron) {
+    Transfers(
+      where: {Transfer: {Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Transfer {
+        Amount
+        Currency {
+          Name
+          Symbol
+        }
+        Receiver
+        Sender
+      }
+    }
+  }
+}
+```
+
+### Stablecoin recieved and sent by an address
+
+Below query will give you `USDT` transfers from/to `TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ` on Tron. Test the query [here](https://ide.bitquery.io/Stablecoin-recieved-and-sent-by-an-address).
+
+```
+{
+  Tron(dataset: combined) {
+    Transfers(
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+      where: {any: [{Transfer: {Sender: {is: "TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ"}}}, {Transfer: {Receiver: {is: "TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ"}}}], Transfer: {Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}}
+    ) {
+      Transaction {
+        Hash
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender
+        Receiver
+      }
+    }
+  }
+}
+```
