@@ -54,10 +54,10 @@ The **maximum supply cap** for the asset. For assets **without** a fixed cap, or
 
 For **Bitcoin**, the **`Supply`** block on **`Tokens`** rows describes **on-chain supply of wrapped and bridged BTC** (for example WBTC on Ethereum), **not** native Bitcoin UTXO supply on the Bitcoin network. **Native BTC does not exist as a single token contract** on EVM (and similar) chains the way ERC-20s do, so any **`TotalSupply`**-style figure in this API is tied to **those on-chain representations**.
 
-That is why you **do not** see **~21 million** in **`TotalSupply`** for a Bitcoin currency query: **21M** is the **network-level** cap for Bitcoin itself, while **`Supply` here** reflects **how much wrapped BTC is tracked on the chain(s)** backing that token row—typically **far below** 21M. **Max supply** and **circulating** narratives for “Bitcoin” in the wild still refer to the **main chain**; interpret **`Supply`** on **`Tokens`** for `bid:bitcoin` as **wrapped/on-chain BTC only**.
+That is why you **do not** see **~21 million** in **`TotalSupply`** for a Bitcoin currency query: **21M** is the **network-level** cap for Bitcoin itself, while **`Supply` here** reflects **how much wrapped BTC is tracked on the chain(s)** backing that token row. 
 
 ```graphql
-Trading {
+ {Trading {
   Tokens(
     where: {
       Currency: { Id: { is: "bid:bitcoin" } }
@@ -114,6 +114,6 @@ Trading {
     }
   }
 }
+}  
+ 
 ```
-
-This behavior is specific to how **Bitcoin** is represented **off the native chain**; other assets that **are** native tokens on the queried network may align more closely between **on-chain total supply** and **public “total supply”** figures.
