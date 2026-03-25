@@ -53,3 +53,71 @@ The **maximum supply cap** for the asset when CryptoRank provides one (e.g. Bitc
 **Fully diluted valuation in USD**: when **max supply** (or other inputs for a standard FDV) is known, this reflects valuation at fully diluted supply at the current USD price. When **circulating supply** is **unknown**, we set **`FullyDilutedValuationUsd` to the same value as `MarketCap`** (so both fields carry the same fallback valuation).
 
 - May be **null** when a usable **USD price** is missing.
+
+## Bitcoin (`bid:bitcoin`) and on-chain supply
+
+For **Bitcoin**, the **`Supply`** block on **`Tokens`** rows describes **on-chain supply of wrapped and bridged BTC** (for example WBTC on Ethereum), **not** native Bitcoin UTXO supply on the Bitcoin network. **Native BTC does not exist as a single token contract** on EVM (and similar) chains the way ERC-20s do, so any **`TotalSupply`**-style figure in this API is tied to **those on-chain representations**.
+
+That is why you **do not** see **~21 million** in **`TotalSupply`** for a Bitcoin currency query: **21M** is the **network-level** cap for Bitcoin itself, while **`Supply` here** reflects **how much wrapped BTC is tracked on the chain(s)** backing that token row—typically **far below** 21M. **Max supply** and **circulating** narratives for “Bitcoin” in the wild still refer to the **main chain**; interpret **`Supply`** on **`Tokens`** for `bid:bitcoin` as **wrapped/on-chain BTC only**.
+
+```graphql
+Trading {
+  Tokens(
+    where: {
+      Currency: { Id: { is: "bid:bitcoin" } }
+      Interval: { Time: { Duration: { eq: 1 } } }
+    }
+    limit: { count: 1 }
+    orderBy: { descending: Block_Time }
+  ) {
+    Token {
+      Address
+      Id
+      IsNative
+      Name
+      Network
+      Symbol
+      TokenId
+    }
+    Block {
+      Date
+      Time
+      Timestamp
+    }
+    Interval {
+      Time {
+        Start
+        Duration
+        End
+      }
+    }
+    Volume {
+      Base
+      Quote
+      Usd
+    }
+    Price {
+      IsQuotedInUsd
+      Ohlc {
+        Close
+        High
+        Low
+        Open
+      }
+      Average {
+        ExponentialMoving
+        Mean
+        SimpleMoving
+        WeightedSimpleMoving
+      }
+    }
+    Supply {
+      TotalSupply
+      MarketCap
+      FullyDilutedValuationUsd
+    }
+  }
+}
+```
+
+This behavior is specific to how **Bitcoin** is represented **off the native chain**; other assets that **are** native tokens on the queried network may align more closely between **on-chain total supply** and **public “total supply”** figures.
