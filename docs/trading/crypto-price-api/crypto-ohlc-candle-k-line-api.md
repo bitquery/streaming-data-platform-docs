@@ -66,11 +66,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
     }
   }
@@ -254,11 +252,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         IsQuotedInUsd
@@ -323,11 +319,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         IsQuotedInUsd
@@ -394,11 +388,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         IsQuotedInUsd
@@ -473,11 +465,9 @@ Get historical Bitcoin OHLC data for the last 7 days.
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         IsQuotedInUsd
@@ -545,11 +535,9 @@ Find the biggest movers with OHLC data and price change calculations:
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         IsQuotedInUsd
@@ -623,11 +611,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         Ohlc {
@@ -714,11 +700,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         Ohlc {
@@ -805,11 +789,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         Ohlc {
@@ -1026,11 +1008,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         Ohlc {

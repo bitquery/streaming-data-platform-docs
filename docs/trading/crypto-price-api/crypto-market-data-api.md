@@ -34,11 +34,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         Ohlc {
@@ -87,11 +85,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         Ohlc {
@@ -155,11 +151,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         IsQuotedInUsd
@@ -432,11 +426,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         Ohlc {

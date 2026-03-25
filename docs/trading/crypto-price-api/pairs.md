@@ -34,11 +34,9 @@ The Pairs cube provides trading data for a base token traded against a quote tok
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         Ohlc {

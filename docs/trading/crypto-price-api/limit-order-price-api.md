@@ -160,11 +160,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
     }
   }
@@ -218,11 +216,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
     }
   }
@@ -253,11 +249,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
     }
   }
@@ -297,11 +291,9 @@ subscription {
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
     }
   }

@@ -48,11 +48,9 @@ The OHLC values (Open, High, Low, Close) are determined across all chains and to
         Usd
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         IsQuotedInUsd #The price is shown in USD (`IsQuotedInUsd: true` by default).

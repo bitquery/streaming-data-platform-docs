@@ -35,11 +35,9 @@ subscription {
         Usd # Combined USD volume across all trades
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
         TotalSupply
-        MaxSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
       Price {
         IsQuotedInUsd # Whether price values are in USD (true/false)
