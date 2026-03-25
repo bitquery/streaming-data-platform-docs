@@ -40,7 +40,7 @@ The **total issued supply** of the asset as represented in reference data taken 
 
 ### `MaxSupply`
 
-The **maximum supply cap** for the asset when CryptoRank provides one (e.g. Bitcoin’s 21M cap). For assets **without** a fixed cap, or when CryptoRank has no figure, this field is typically **null** or omitted in responses. Often **unavailable** for the same asset classes as **circulating supply** (e.g. many meme tokens).
+The **maximum supply cap** for the asset. For assets **without** a fixed cap, or when CryptoRank has no figure, this field is typically 0. Often **unavailable** for the same asset classes as **circulating supply** (e.g. many meme tokens).
 
 ### `MarketCap`
 
