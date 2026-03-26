@@ -1,12 +1,25 @@
+---
+title: "Four Meme API"
+description: "How to query four.meme on BNB Chain with Bitquery: live trades, bonding curve, new tokens, OHLCV, liquidity, PancakeSwap migrations, top tokens by volume, and trader stats via GraphQL and WebSocket."
+keywords:
+  - Four Meme API
+  - four.meme BSC API
+  - Four Meme trades Bitquery
+  - Four Meme bonding curve
+  - Four Meme PancakeSwap migration
+  - BSC memecoin API
+---
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Four Meme API
 
-Get ultra low latency Four Meme memecoin data on BNB Chain: live trades, bonding curve progress, newly created tokens, prices, OHLC, liquidity, migrations, top traders and more.
+Bitquery exposes **four.meme (Four Meme)** on **BNB Chain** through GraphQL: **live trades** (`fourmeme_v1`), **TokenCreate** events on the exchange proxy, **bonding curve** math from proxy balances, **migrations** to PancakeSwap, **OHLCV**, **liquidity** events, and **leaderboards**. Use **subscriptions** for real-time streams and **`dataset: combined`** for history. The Four Meme exchange proxy used in examples is **`0x5c952063c7fc8610ffdb798152d69f0b9550762b`** (see below).
 
-The below GraphQL APIs and Streams are examples of data points you can get with Bitquery. If you have questions on other data points, reach out to [support](https://t.me/Bloxy_info).
 
-Need zero-latency BSC data? Read about our Streams and contact us for a trial: https://docs.bitquery.io/docs/streams/
+The sections below are example queries and streams. For other fields, contact [support](https://t.me/Bloxy_info).
+
+Need low-latency BSC data? See [Streams](https://docs.bitquery.io/docs/streams/) and contact us for a trial. For **mempool (pre-confirmation)** Four Meme data, see the dedicated [Four Meme Mempool API](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-mempool-API/) page.
 
 You may also be interested in:
 
@@ -16,12 +29,12 @@ You may also be interested in:
 - [PumpFun API ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
 
 <head>
-<title>Four Meme API - Live Trades, Bonding Curve, Prices, Liquidity on BSC</title>
-<meta name="title" content="Four Meme API - Live Trades, Bonding Curve, Prices, Liquidity on BSC"/>
+<title>Four Meme API</title>
+<meta name="title" content="How to Get Four Meme Data Using Bitquery"/>
 
 <meta
   name="description"
-  content="Ultra low latency Four Meme memecoin data on BNB Chain: live trades, bonding curve progress, new tokens, prices, OHLC, liquidity, migrations, top traders. Access via GraphQL, streams, and Kafka."
+  content="Query four.meme on BSC with Bitquery: live trades, bonding curve, TokenCreate streams, OHLCV, PancakeSwap migrations, top tokens by volume. GraphQL and WebSocket."
 />
 
 <meta
@@ -44,7 +57,7 @@ You may also be interested in:
 
 <meta
   property="og:description"
-  content="Get Four Meme data on BNB Chain: trades, bonding curve progress, prices, liquidity, new tokens, migrations, and more."
+  content="Live trades, bonding curve, new tokens, OHLCV, and PancakeSwap migrations for four.meme on BNB Chain via Bitquery."
 />
 
 <!-- Twitter -->
@@ -56,14 +69,22 @@ You may also be interested in:
   content="Four Meme API - BSC - Live Trades, Bonding Curve, Prices"
 />
 
-<meta property="twitter:description" content="Get Four Meme data on BNB Chain: trades, bonding curve progress, prices, liquidity, new tokens, migrations, and more." />
+<meta property="twitter:description" content="Four Meme (four.meme) on BSC: trades, bonding curve, streams, and migrations with Bitquery GraphQL." />
 </head>
 
-::::note
+:::note
 To query or stream data via GraphQL outside the Bitquery IDE, you need to generate an API access token.
 
-Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation/how-to-generate/
-::::
+Follow the steps here to create one: [How to generate Bitquery API token](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+:::
+
+## What is the Four Meme exchange contract address on BSC? {#what-is-the-four-meme-exchange-contract-address-on-bsc}
+
+The **Four Meme / four.meme exchange proxy** on BNB Chain is:
+
+`0x5c952063c7fc8610ffdb798152d69f0b9550762b`
+
+Use it in **`Transaction.To`**, **`LogHeader.Address`**, or **`BalanceUpdate.Address`** filters when you listen for **TokenCreate**, **LiquidityAdded**, or **migration**-related logs. **`DEXTrades`** for the launchpad use **`Dex.ProtocolName: { is: "fourmeme_v1" }`**.
 
 ---
 
@@ -71,25 +92,27 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 
 ### 1. Four Meme Trading & Market Data (BSC)
 
-- [Subscribe the Latest Trades on Four Meme ➤](#subscribe-the-latest-trades-on-four-meme)
+- [What is the Four Meme exchange contract address on BSC? ➤](#what-is-the-four-meme-exchange-contract-address-on-bsc)
+- [How do I get live Four Meme trades using Bitquery? ➤](#subscribe-the-latest-trades-on-four-meme)
 - [Get Latest Buys and Sells for a Four Meme Token ➤](#get-latest-buys-and-sells-for-a-four-meme-token)
 - [Get Trade Metrics of a Four Meme Token ➤](#get-trade-metrics-of-a-four-meme-token)
 - [Get Metadata for a Newly Created Four Meme Token ➤](#metadata-for-a-newly-created-token)
 - [Get latest price of a Four.meme token ➤](#get-latest-price-of-a-fourmeme-token)
 - [Get ATH price of a Four Meme Token ➤](#get-ath-price-of-a-four-meme-token)
 - [Get Price Change Percentage for a Four Meme Token ➤](#get-price-change-percentage-for-a-four-meme-token)
-- [Get OHLCV data of a Four Meme Token ➤](#get-ohlcv-data-of-a-four-meme-token)
+- [How do I get Four Meme OHLCV data for a token? ➤](#get-ohlcv-data-of-a-four-meme-token)
 - [Get Trade Volume and Number of Trades for a Four Meme Token ➤](#get-trade-volume-and-number-of-trades-for-a-four-meme-token)
 
 ### 2. Token Lifecycle, Liquidity & Migrations
 
-- [Get Newly Created Tokens on Four Meme ➤](#get-newly-created-tokens-on-four-meme)
+- [How do I get newly created tokens on Four Meme? ➤](#get-newly-created-tokens-on-four-meme)
+- [How do I stream Four Meme token creation events in real time? ➤](#how-do-i-stream-four-meme-token-creation-events-in-real-time)
 - [Get Four.Meme Tokens created by a specific Dev ➤](#get-fourmeme-tokens-created-by-a-specific-dev)
 - [Get Dev Address of a Four.meme token ➤](#get-dev-address-of-a-fourmeme-token)
 - [Get Dev Token Holding percentage ➤](#get-dev-token-holding-percentage)
 - [Get Top 10 Holders percentages ➤](#get-top-10-holders-percentages)
-- [Track All Four Meme Tokens That Have Migrated to Pancakeswap ➤](#track-all-four-meme-tokens-that-have-migrated-to-pancakeswap)
-- [Bonding Curve Progress API for FourMeme token ➤](#bonding-curve-progress-api-for-fourmeme-token)
+- [How do I detect Four Meme token migrations to PancakeSwap? ➤](#track-all-four-meme-tokens-that-have-migrated-to-pancakeswap)
+- [How do I get bonding curve progress for a Four Meme token? ➤](#bonding-curve-progress-api-for-fourmeme-token)
 - [Get Four Meme Tokens which are above 95% Bonding Curve Progress ➤](#get-four-meme-tokens-which-are-above-95-bonding-curve-progress)
 - [Get liquidity of a Four Meme token ➤](#get-liquidity-of-a-four-meme-token)
 - [Track Liquidity Add Events for All Tokens on Four Meme ➤](#track-liquidity-add-events-for-all-tokens-on-four-meme)
@@ -108,12 +131,17 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 - [Get Realtime Market Cap and Price of a Four Meme Token ➤](#get-realtime-market-cap-and-price-of-a-four-meme-token)
 - [Top Tokens by marketcap ➤](#top-tokens-by-marketcap)
 - [Top Tokens by launch marketcap ➤](#top-tokens-by-launch-marketcap)
-- [Top Tokens by buys, sells, volume, price change, buyers, sellers ➤](#top-tokens-by-buys-sells-volume-price-change-buyers-sellers)
+- [How do I get top tokens by volume on Four Meme? ➤](#top-tokens-by-buys-sells-volume-price-change-buyers-sellers)
+- [Top Four Meme tokens by realtime market cap (activity filter) ➤](#top-four-meme-tokens-by-realtime-marketcap)
 - [Top Tokens by liquidity ➤](#top-tokens-by-liquidity)
 - [Bitquery DEX Data Access Options ➤](#bitquery-dex-data-access-options)
 - [Getting Started with Bitquery ➤](#getting-started-with-bitquery)
 
-### 5. Video Tutorials
+### 5. Frequently asked questions (AEO)
+
+- [Four Meme on Bitquery — quick answers ➤](#frequently-asked-questions-four-meme-bitquery)
+
+### 6. Video Tutorials
 
 - [Video Tutorial | How to get Bonding Curve Progress of any Four Meme Token ➤](#video-tutorial--how-to-get-bonding-curve-progress-of-any-four-meme-token)
 - [Video Tutorial | How to track the Four Meme Tokens which are about to Graduate in Realtime ➤](#video-tutorial--how-to-track-the-four-meme-tokens-which-are-about-to-graduate-in-realtime)
@@ -121,7 +149,7 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 - [Video Tutorial | How to get Top Traders of a Four Meme Token on Solana Four Meme DEX ➤](#video-tutorial--how-to-get-top-traders-of-a-four-meme-token-on-solana-four-meme-dex)
 - [Video Tutorial | How to Get the OHLCV Data of a token on Four Meme DEX ➤](#video-tutorial--how-to-get-the-ohlcv-data-of-a-token-on-four-meme-dex)
 
-### 6. Real World Projects
+### 7. Real World Projects
 
 - [Real World Projects with Four Meme API ➤](#real-world-projects-with-four-meme-api)
 
@@ -140,7 +168,7 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation
 - [BSC Pancake Swap APIs](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/): Pancake swap Trades on BSC network with the help of examples.
 - [Trade APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
 
-## Track All Four Meme Tokens That Have Migrated to Pancakeswap
+## How do I detect Four Meme token migrations to PancakeSwap? {#track-all-four-meme-tokens-that-have-migrated-to-pancakeswap}
 
 This query tracks four meme token migrations to Pancakeswap in realtime by monitoring transactions sent to the Four Meme factory address (`0x5c952063c7fc8610ffdb798152d69f0b9550762b`) and filtering for `PairCreated` and `PoolCreated` events. These events are emitted when a token graduates from Four Meme and migrates to Pancakeswap. Test it [here](https://ide.bitquery.io/four-meme-migration-to-pancakeswap).
 
@@ -176,7 +204,7 @@ subscription {
 
 </details>
 
-## Check if a four meme token has migrated or not
+## Check if a four meme token has migrated or not {#check-if-a-four-meme-token-has-migrated-or-not}
 
 Below query will only show response if a the mentioned four meme tokens have migrated to Pancakeswap. Note: Please use a `Block{Date}` filter to minimize the data processing and hence the query processing time and get fast responses.
 Try the query [here](https://ide.bitquery.io/if-token-migrated-from-four-meme-or-not_4).
@@ -201,7 +229,7 @@ Try the query [here](https://ide.bitquery.io/if-token-migrated-from-four-meme-or
 ```
 </details>
 
-## Bonding Curve Progress API for FourMeme token
+## How do I get bonding curve progress for a Four Meme token? {#bonding-curve-progress-api-for-fourmeme-token}
 
 Below query will give you amount of `left tokens` put it in the below given simplied formulae and you will get Bonding Curve progress for the token.
 
@@ -305,7 +333,7 @@ query MyQuery {
 
 </details>
 
-## Get Newly Created Tokens on Four Meme
+## How do I get newly created tokens on Four Meme? {#get-newly-created-tokens-on-four-meme}
 
 [Run Query](https://ide.bitquery.io/track-Four-meme-token-creation-using-events)
 
@@ -340,6 +368,66 @@ This query retrieves newly created tokens on Four Meme by listening to the `Toke
       }
       limit: { count: 10 }
       orderBy: { descending: Block_Time }
+    ) {
+      Log {
+        Signature {
+          Name
+          Signature
+        }
+      }
+      Arguments {
+        Value {
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+          ... on EVM_ABI_Boolean_Value_Arg {
+            bool
+          }
+          ... on EVM_ABI_Bytes_Value_Arg {
+            hex
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_String_Value_Arg {
+            string
+          }
+        }
+        Name
+        Type
+      }
+      Transaction {
+        Hash
+        To
+        From
+      }
+    }
+  }
+}
+```
+
+</details>
+
+### How do I stream Four Meme token creation events in real time? {#how-do-i-stream-four-meme-token-creation-events-in-real-time}
+
+Use a **GraphQL subscription** on `EVM(network: bsc)` with the same `TokenCreate` filter as the query above. Each matching log is pushed as it appears. You can start from the same saved query in the IDE and change the operation type to **subscription**: [Token creation (IDE)](https://ide.bitquery.io/track-Four-meme-token-creation-using-events).
+
+<details>
+  <summary>Click to expand GraphQL subscription</summary>
+
+```graphql
+subscription {
+  EVM(network: bsc) {
+    Events(
+      where: {
+        Transaction: {
+          To: { is: "0x5c952063c7fc8610ffdb798152d69f0b9550762b" }
+        }
+        Log: { Signature: { Name: { is: "TokenCreate" } } }
+      }
     ) {
       Log {
         Signature {
@@ -566,7 +654,7 @@ query MyQuery {
 
 </details>
 
-## Subscribe the Latest Trades on Four Meme
+## How do I get live Four Meme trades using Bitquery? {#subscribe-the-latest-trades-on-four-meme}
 
 Using subscriptions you can subscribe to the latest trades on Four Meme as shown in this [example](https://ide.bitquery.io/Latest-trades-on-fourmeme). The subscription returns latest trade info such as buyers and sellers, buy and sell currency details and amount of currency.
 
@@ -904,7 +992,7 @@ query MyQuery($currency: String) {
 
 </details>
 
-## Get OHLCV data of a Four Meme Token
+## How do I get Four Meme OHLCV data for a token? {#get-ohlcv-data-of-a-four-meme-token}
 
 Use the below query to get four meme token OHLCV data. Test it [here](https://ide.bitquery.io/OHLC-for-a-four-meme-token).
 
@@ -999,7 +1087,7 @@ subscription {
 
 </details>
 
-You can also get the trade activities of a user on Pancake Swap using our [Pancake Swap](./pancake-swap-api.md) APIs.
+You can also get the trade activities of a user on Pancake Swap using our [Pancake Swap](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/) APIs.
 
 ## Track Four Meme Tokens in 14k to 18k Marketcap
 
@@ -1432,9 +1520,9 @@ query MyQuery {
 
 </details>
 
-## Top Tokens by buys, sells, volume, price change, buyers, sellers
+## How do I get top tokens by volume on Four Meme? {#top-tokens-by-buys-sells-volume-price-change-buyers-sellers}
 
-Below API can be used to get top four meme tokens by buys, sells, volume, price change, buyers, sellers. You can get all the data through us and create a min and max marketcap filter in your application. Try the API [here](https://ide.bitquery.io/top-tokens-by-price-change-volume-buys-sells-buyers-sellers_1).
+Below API can be used to get top Four Meme tokens by **buys, sells, volume, price change, buyers, and sellers** over rolling windows (for example 1h / 24h). You can apply min/max market cap filters in your application on top of this data. Try the API [here](https://ide.bitquery.io/top-tokens-by-price-change-volume-buys-sells-buyers-sellers_1).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -1534,9 +1622,9 @@ query MyQuery {
 
 </details>
 
-## Top Tokens by buys, sells, volume, price change, buyers, sellers
+## Top Four Meme tokens by realtime market cap (activity filter) {#top-four-meme-tokens-by-realtime-marketcap}
 
-Below API can be used to get top four meme tokens by buys, sells, volume, price change, buyers, sellers. You can get all the data through us and create a min and max buys, sells, volume, price change filter in your application. Try the API [here](https://ide.bitquery.io/top-tokens-by-launch-marketcap-on-fourmeme_1).
+This query uses **`dataset: realtime`** and **`DEXTradeByTokens`** ordered by a calculated **marketcap** field, with a minimum **trade size in USD** on the filter. Use it when you want a **live-oriented** leaderboard; for volume / buy-sell breakdowns use the [previous section](#top-tokens-by-buys-sells-volume-price-change-buyers-sellers). Try the API [here](https://ide.bitquery.io/top-tokens-by-launch-marketcap-on-fourmeme_1).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -2044,6 +2132,23 @@ query MyQuery {
 ```
 
 </details>
+
+## Frequently asked questions (Four Meme + Bitquery) {#frequently-asked-questions-four-meme-bitquery}
+
+These mirror common “answer engine” questions. Each item points to the section on **this page** unless noted.
+
+| Question | Where it is answered |
+| --- | --- |
+| How do I get live Four Meme trades using Bitquery? | [Live trades subscription](#subscribe-the-latest-trades-on-four-meme) (`fourmeme_v1` + `DEXTrades`) |
+| How do I detect Four Meme token migrations to PancakeSwap? | [Migration subscription](#track-all-four-meme-tokens-that-have-migrated-to-pancakeswap) and [check if migrated](#check-if-a-four-meme-token-has-migrated-or-not) |
+| How do I get bonding curve progress for a Four Meme token? | [Bonding curve formula + balance query](#bonding-curve-progress-api-for-fourmeme-token) |
+| What is the Four Meme exchange contract address on BSC? | [Contract address](#what-is-the-four-meme-exchange-contract-address-on-bsc) |
+| How do I get newly created tokens on Four Meme? | [TokenCreate query](#get-newly-created-tokens-on-four-meme) |
+| How do I stream Four Meme token creation events in real time? | [TokenCreate subscription](#how-do-i-stream-four-meme-token-creation-events-in-real-time) |
+| How do I get top tokens by volume on Four Meme? | [Top tokens by volume / activity](#top-tokens-by-buys-sells-volume-price-change-buyers-sellers) and [realtime market cap leaderboard](#top-four-meme-tokens-by-realtime-marketcap) |
+| Can I monitor Four Meme transactions in the BSC mempool before confirmation? | **Separate guide:** [Four Meme Mempool API](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-mempool-API/) (not duplicated on this page) |
+| How do I get Four Meme OHLCV data for a token? | [OHLCV query](#get-ohlcv-data-of-a-four-meme-token) |
+| Can the API return four.meme token volume changes every second? | **Not documented on this page yet** — add minimum interval, aggregation options, and any rate or streaming limits you want to communicate publicly. |
 
 ## Video Tutorial | How to get Bonding Curve Progress of any Four Meme Token
 

@@ -7,6 +7,48 @@ sidebar_position: 4
 This section provides examples of how to implement subscription queries in your code.
 **Remember: You need to implement logic to handle silent disconnect( when no data or keep-alive is received for say X seconds) in your code. Sample [here](https://docs.bitquery.io/docs/subscriptions/silent-disconnect-reconnect/)**.
 
+## How do I subscribe to live DEX trades using Bitquery WebSocket? {#how-do-i-subscribe-to-live-dex-trades-using-bitquery-websocket}
+
+Use Bitquery’s **GraphQL over WebSocket**: connect to [`wss://streaming.bitquery.io/graphql`](https://docs.bitquery.io/docs/subscriptions/websockets/) with the **`graphql-ws`** or **`graphql-transport-ws`** subprotocol, authenticate as described in [WebSocket authorisation](https://docs.bitquery.io/docs/authorisation/websocket/), then send a **`subscription`** whose root field is your chain API (for example `EVM` or `Solana`) and a **`DEXTrades`** selection. Each new trade matching your `where` clause is pushed as a message. Test the subscription in the [Bitquery IDE](https://ide.bitquery.io) by changing the operation from `query` to `subscription`, then reuse the same document in your client.
+
+The GraphQL document is the same whether you run it from Python, JavaScript, or any other client; only the WebSocket wiring differs (see the sections below).
+
+```graphql
+subscription LiveDexTrades {
+  EVM(network: bsc) {
+    DEXTrades {
+      Block {
+        Time
+      }
+      Trade {
+        Dex {
+          ProtocolName
+          SmartContract
+        }
+        Buy {
+          Buyer
+          Amount
+          Currency {
+            Symbol
+            SmartContract
+          }
+        }
+        Sell {
+          Seller
+          Amount
+          Currency {
+            Symbol
+            SmartContract
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Narrow results with a `where` argument on `DEXTrades` (specific pair, DEX, USD size, and so on) using the same [filter syntax](https://docs.bitquery.io/docs/graphql/filters/) as queries. For more BSC examples and IDE links, see [BSC DEX Trades](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/); for Solana, see [Solana DEX Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/). A saved BSC stream you can open in the IDE: [Subscribe to BSC DEX trades](https://ide.bitquery.io/subscribe-to-bsc-dex-trades).
+
 ## Implementation Example: Using WebSocket Using Python
 
 This example demonstrates how to use the `gql` library in Python to create a client that connects to a WebSocket endpoint, subscribes to a query, and prints the results. The script also uses the `asyncio` library to wait for results from the wss endpoint and all asynchronous operations.
@@ -67,7 +109,7 @@ The `transport.connect()` function is used to establish a connection to the WebS
 
 ## Implementation Example:Using WebSocket Using JavaScript
 
-Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](/docs/authorisation/websocket.md)
+Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](https://docs.bitquery.io/docs/authorisation/websocket/)
 
 ```javascript
 const { WebSocket } = require("ws");

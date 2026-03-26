@@ -309,7 +309,7 @@ subscription {
 - **[Crypto Price API Documentation](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** - Complete API reference with live examples
 - **[DEX Trade Filtering Guide](https://docs.bitquery.io/docs/usecases/how-to-filter-anomaly-prices/)** - How to handle raw data anomalies
 - **[OHLC Candlestick API](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/)** - Ready-to-chart data with [live Bitcoin OHLC example ➤](https://ide.bitquery.io/bitcoin-currency-price-stream)
-- **[DEXTradeByTokens API](https://docs.bitquery.io/docs/evm/dextradesbyTokens/)** - Raw trade data for comparison
+- **[DEXTradeByTokens API](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/)** - Raw trade data for comparison
 
 ### **Real-Time Streaming**
 - **GraphQL Endpoint**: `https://streaming.bitquery.io/graphql` ([Try in IDE ➤](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql))

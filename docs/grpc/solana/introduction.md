@@ -6,6 +6,12 @@ keywords: ["grpc solana", "solana grpc", "CoreCast", "Solana gRPC stream", "Sola
 
 # CoreCast - Smart Solana gRPC Streams
 
+## What is Bitquery gRPC for Solana and how is it different from RPC? {#what-is-bitquery-grpc-for-solana-and-how-is-it-different-from-rpc}
+
+**Bitquery gRPC for Solana** is **CoreCast** (Smart gRPC Streams): a managed feed of **indexed, decoded** Solana activity delivered as **Protobuf** over gRPC to `corecast.bitquery.io`. You subscribe by **topic** (for example `dex_trades`, `transfers`, `transactions`) with **server-side filters** (addresses, mints, programs, thresholds), so you receive structured events not raw ledger blobs.
+
+**Solana RPC** (JSON-RPC from a validator or provider) is the chain’s **low-level API**: `getTransaction`, `getAccountInfo`, `getBlock`, simulation, and base64 logs. You typically **poll or subscribe** per method, **decode instructions and layouts yourself**, and stitch together DEX or token context. CoreCast is optimized for **low-latency, filtered market data**; RPC is for **generic chain access** and tooling that already expects JSON-RPC. For GraphQL + WebSocket on the same indexed data, see [real-time subscriptions](https://docs.bitquery.io/docs/subscriptions/websockets/) and the [streaming overview](https://docs.bitquery.io/docs/streams/).
+
 ### What are Smart gRPC Streams?
 
 Bitquery Smart gRPC Streams provide low-latency, context-aware, topic-wise event delivery from the Solana blockchain. Unlike raw gRPC streams, Smart Streams enrich and filter events so your application receives only the data it needs (trades,balances, token context, program metadata). The data is sent in the **protobuf format**, the schema is publicly available as packages for easy parsing.

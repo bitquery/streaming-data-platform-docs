@@ -13,6 +13,36 @@ You can find the **Ethers Library equivalents** for these queries at **[Bitquery
 
 You can find the **NFT Events Examples** at **[Bitquery NFT API Section](https://docs.bitquery.io/docs/blockchain/Ethereum/nft/nft-blur-marketplace-api/)**.
 
+## Is it possible to subscribe to smart contract events using Bitquery streams? {#is-it-possible-to-subscribe-to-smart-contract-events-using-bitquery-streams}
+
+**Yes.** On **EVM** chains (Ethereum, BSC, Base, and other `EVM(network: …)` networks in the API), Bitquery exposes decoded **contract logs** under the **`Events`** field. Use a GraphQL **`subscription`** (not `query`) with the same `where` filters you would use for historical pulls—typically **`Log`** (signature name, smart contract address, topics) and **`Transaction`**—and deliver it over a **WebSocket** to [`wss://streaming.bitquery.io/graphql`](https://docs.bitquery.io/docs/subscriptions/websockets/) as in [WebSocket access](https://docs.bitquery.io/docs/subscriptions/websockets/) and [subscription basics](https://docs.bitquery.io/docs/subscriptions/subscription/). Filter reference: [GraphQL filters](https://docs.bitquery.io/docs/graphql/filters/). For **high-throughput or replay**, event-style data is also available via **Kafka** topics; see [streaming overview](https://docs.bitquery.io/docs/streams/).
+
+**Solana** does not use this EVM `Events` shape; for live program activity use **`Solana`** subscriptions (e.g. instructions) as in [Solana instructions](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/).
+
+Example: stream logs from a specific contract (here USDT on Ethereum) as they are indexed:
+
+```graphql
+subscription SmartContractEvents {
+  EVM(network: eth) {
+    Events(
+      where: {Log: {SmartContract: {is: "0xdAC17F958D2ee523a2206206994597C13D831ec7"}}}
+    ) {
+      Log {
+        Signature {
+          Name
+        }
+        SmartContract
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
+
+More patterns below: **mempool** logs (pending), **recent** events with `query`, and other **subscription** examples on this page.
+
 ## Mempool Events on Ethereum
 
 This query listens to real-time mempool events on the Ethereum (ETH) blockchain. The query is designed to capture details of transactions, logs, events, and arguments from the Ethereum Virtual Machine (EVM) before they are confirmed in a block.

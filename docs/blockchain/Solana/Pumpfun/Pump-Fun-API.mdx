@@ -94,6 +94,8 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 - [How do I get live trades from Pump.fun? ➤](#how-do-i-get-live-trades-from-pumpfun-using-bitquery)
 - [How do I get the latest trades? ➤](#how-do-i-get-the-latest-trades-for-a-pumpfun-token)
 - [How do I get the volume of a Pump.fun token for the last 7 days? ➤](#how-do-i-get-the-volume-of-a-pumpfun-token-for-the-last-7-days)
+- [How do I get all tokens traded on Pump.fun in the last 1 hour? ➤](#how-do-i-get-all-tokens-traded-on-pumpfun-in-the-last-1-hour)
+- [How do I get tokens that reached a specific market cap on Pump.fun? ➤](#how-do-i-get-tokens-that-reached-a-specific-market-cap-on-pumpfun)
 - [How do I get detailed trade stats? ➤](#how-do-i-get-detailed-trade-stats-volume-buys-sells-makers-buyers-sellers)
 - [How do I get the first 100 buyers? ➤](#how-do-i-get-the-first-100-buyers-of-a-pumpfun-token)
 - [How do I check if the first 100 buyers are still holding? ➤](#how-do-i-check-if-the-first-100-buyers-are-still-holding)
@@ -627,31 +629,23 @@ query MyQuery {
 
 ### How do I check if a Pump.fun token was launched in Mayhem mode? (Historical)
 
-We use the Solana v1 Transfers API for this. This query finds "Pump Fun" token launches in Mayhem mode by filtering for a transfer of exactly 1,000,000,000,000,000 units (1 Billion if adjusted to 6 decimal places) to the specified receiver and token mint. It returns currency info, amount, and transaction signature. In Mayhem mode, 1 Billion token supply is minted to the Mayhem Autonomous AI agent (`BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s`).
+We use the Solana v1 Transfers API for this. This query finds "Pump Fun" token launches in Mayhem mode by filtering the count of transfers of exactly 1,000,000,000,000,000 units (1 Billion if adjusted to 6 decimal places).
+If count is 2 it means token is minted in mayhem mode and if count is 1 then it means token is not minted in mayhem mode.
 
-[Try out the API](https://ide.bitquery.io/check-if-a-pump-fun-token-was-in-mayhem-mode)
+[Try out the API](https://ide.bitquery.io/token-mayhem-mode-or-not_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query MyQuery {
+{
   solana {
     transfers(
-      amount: { is: 1000000000000000 }
-      receiverAddress: { is: "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s" }
-      currency: { is: "8ZVajuCD45RHs53LaCLpnqeKY519Ns64XZd12ZcLpump" }
+      date:{since:"2025-01-01"}
+      amount: {is: 1000000000000000}
+      currency: {is: "EEhQvi54Rwme2z84gG6qQmuaWjnZ6b9AMgq5aGkKpump"}
     ) {
-      currency {
-        name
-        symbol
-        decimals
-        address
-      }
-      amount
-      transaction {
-        signature
-      }
+      count
     }
   }
 }
@@ -1191,6 +1185,93 @@ In addition, you can get the last 7 days of trading volume using the [Crypto Pri
   }
 }
 ```
+
+### How do I get all tokens traded on Pump.fun in the last 1 hour?
+
+To get all tokens traded on Pump.fun in the last 1 hour, use a query that filters trades by the Pump.fun protocol and a block time within the past hour. This provides a list of tokens that have had at least one trade during this window, along with associated token and market details. Each token record includes its mint address, name, symbol, and network.
+The sample GraphQL query below retrieves all Pump.fun tokens traded in the last hour on Solana:
+
+[All Pumpfun Tokens traded in last 1 hour — Query ➤](https://ide.bitquery.io/all-tokens-traded-on-Pumpfun-in-the-last-1-hour_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Trading {
+    Pairs(
+      limitBy: {by: Token_Address, count: 1}
+      where: {Market: {Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}, Token: {Network: {is: "Solana"}}, Block: {Time: {since_relative: {minutes_ago: 60}}}, Interval: {Time: {Duration: {eq: 1}}}}
+    ) {
+      Token {
+        Address
+        Id
+        IsNative
+        Name
+        Network
+        Symbol
+        TokenId
+      }
+      Market {
+        Address
+        Program
+        Name
+      }
+    }
+  }
+}
+```
+</details>
+
+### How do I get tokens that reached a specific market cap on Pump.fun?
+
+To find tokens on Pump.fun that have reached a specific market capitalization threshold, you can use the following Bitquery GraphQL example. This query filters for tokens with a market cap greater than or equal to a provided value (for example, $10,000) on Solana within the last minute. Adjust the `ge` value in `MarketCap` to your chosen threshold.
+
+[View Pump.fun tokens that reached a specific market cap — Query ➤](https://ide.bitquery.io/How-do-I-get-tokens-that-reached-a-specific-market-cap-on-Pumpfun)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Trading {
+    Pairs(
+      limitBy: {by: Token_Address, count: 1}
+      where: {Market: {Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}, Token: {Network: {is: "Solana"}}, Supply: {MarketCap: {ge: 10000}}, Block: {Time: {since_relative: {minutes_ago: 1}}}, Interval: {Time: {Duration: {eq: 1}}}}
+    ) {
+      Token {
+        Address
+        Id
+        IsNative
+        Name
+        Network
+        Symbol
+        TokenId
+      }
+      Price {
+        Average {
+          Mean
+          ExponentialMoving
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        TotalSupply
+      }
+      Market {
+        Address
+        Program
+        Name
+      }
+    }
+  }
+}
+```
+</details>
+
 
 ### How do I get detailed trade stats (volume, buys, sells, makers, buyers, sellers)?
 
