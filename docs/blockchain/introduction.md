@@ -81,6 +81,10 @@ Bitquery's dedicated **[Crypto Price API](https://docs.bitquery.io/docs/trading/
 - **Token Holders**: Distribution analysis and holder tracking
 - **Token Supply**: Circulating supply, total supply, and burn events
 
+### How do I get newly created tokens on a specific blockchain?
+
+There is no one GraphQL template for every chain: new tokens appear via launchpads, factories, or programs. Use Bitquery **launchpad and chain guides**—for example [Pump.fun on Solana](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/), [Four Meme on BSC](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/), [Ethereum contract creation](https://docs.bitquery.io/docs/blockchain/Ethereum/calls/contract-creation), and the [Ethereum Events API](https://docs.bitquery.io/docs/blockchain/Ethereum/events/events-api) for factory or `TokenCreated`-style logs. Pick the page that matches your network and launch mechanism.
+
 ### **Smart Contract Data**
 - **Contract Events**: Decoded smart contract events and logs
 - **Contract Calls**: Detailed contract interaction data

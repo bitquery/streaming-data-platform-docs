@@ -8,8 +8,9 @@ The Token Holders API allows you to access information regarding token holders f
 
 Let's explore some examples and discover how to use the Token Holders API.
 
+## How do I get token holder count for an ERC-20 token on a specific date?
 
-## Total Token Holder Count
+Use Bitquery `EVM.TokenHolders` with `dataset: archive`, the token contract, a snapshot `date`, and `uniq(of: Holder_Address)` while requiring positive balances. That returns how many distinct wallets held the token on that day—repeat for other dates to build a time series (see [holder count history](#how-do-i-get-token-holder-count-history-over-time) below).
 
 With the Token Holders API, you can retrieve the total number of token holders by using the `uniq` field on `Holder_Address`. In this example, we query the USDT holders on Ethereum as of October 21, 2023:
 
@@ -34,7 +35,9 @@ You can run this query in our IDE: [USDT token holder count](https://ide.bitquer
 
 </details>
 
-## Token holders of a token
+## How do I get historical top holders of an ERC-20 token by date?
+
+Query `EVM.TokenHolders` with `tokenSmartContract`, a historical `date`, `dataset: archive`, and `orderBy: { descending: Balance_Amount }`. Bitquery returns holder addresses and balances for that snapshot. Increase `limit.count` for more rows and filter `Balance.Amount` if you want to skip dust wallets.
 
 Get all token holders for a given token on a specific date. Adjust `limit` as needed:
 
@@ -65,7 +68,41 @@ Run in IDE: [Token holder API](https://ide.bitquery.io/token-holder-api_1)
 
 </details>
 
-## Token Balance of an address on a particular date
+## How do I get the list of all token holders for a contract on BSC?
+
+Use the same `TokenHolders` API as on Ethereum: set `network: bsc`, `dataset: archive` (or `combined` per your plan), the BEP-20 `tokenSmartContract`, and an optional `date` for historical snapshots. Paginate with `limit` because large tokens have many holders. For balance-update style samples on BSC, see also [BSC balance updates](https://docs.bitquery.io/docs/blockchain/BSC/bsc-balance-updates/).
+
+Run in IDE: [Top holders on BSC](https://ide.bitquery.io/Top-10-holders-of-a-token-on-BSC)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  EVM(dataset: archive, network: bsc) {
+    TokenHolders(
+      date: "2024-03-01"
+      tokenSmartContract: "0x55d398326f99059fF775485246999027B3197955"
+      limit: { count: 100 }
+      orderBy: { descending: Balance_Amount }
+      where: { Balance: { Amount: { gt: "0" } } }
+    ) {
+      Holder {
+        Address
+      }
+      Balance {
+        Amount
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## How do I get the balance of a wallet for a specific token (point in time)?
+
+Filter `TokenHolders` by `Holder.Address` and `tokenSmartContract` plus a `date` for a snapshot balance. For the latest balance from balance-update history (all tokens for a wallet, or one token via `Currency.SmartContract`), use the [Address Balance / Balance Updates API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/).
 
 Find how many tokens a specific address held on a given date:
 
@@ -99,9 +136,13 @@ Run in IDE: [Balance of token holder](https://ide.bitquery.io/balance-of-token-h
 
 </details>
 
-## Token Holders Over Time
+## How do I get token holder count history over time?
 
-To track holder counts over a range of dates, repeat the `TokenHolders` query with different `date` values to build your time series.
+Bitquery does not return a pre-aggregated daily holder-count series in one call. Run `TokenHolders` once per calendar day (or per week) with the same `tokenSmartContract`, varying `date`, and select `uniq(of: Holder_Address)` with `Balance.Amount > 0`. Aggregate the results in your app, or schedule the query. Use `dataset: archive` for older dates.
+
+## How do I track whale wallets and their token holdings on EVM?
+
+Treat whales as the largest holders: query `TokenHolders` with `orderBy: { descending: Balance_Amount }` and take the top N rows, or add `where: { Balance: { Amount: { gt: "..." } } }` as a minimum balance threshold. Combine with [ERC-20 transfers](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) or DEX trades if you need recent flows, not just snapshot balances.
 
 ## Token Holder Activity
 

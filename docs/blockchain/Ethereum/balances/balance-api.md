@@ -87,6 +87,10 @@ query MyQuery {
 
 ```
 
+## How do I get the balance of a wallet for a specific token?
+
+Use Bitquery `EVM.BalanceUpdates` with `BalanceUpdate.Address` set to the wallet and `Currency.SmartContract` set to the ERC-20 contract. Sum `BalanceUpdate_Amount` (or use the pattern below) for the wallet’s balance of that token. Always filter by contract address, not by token name. For a balance on a specific calendar date, consider the [Token Holders API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-holders/token-holder-api) snapshot instead.
+
 ## Balance for an address for a specific currency
 
 You can also get a balance for a specific currency for a given address just by adding Currency Filer. As you know, names on blockchains are not unique; however, addresses are. Therefore, while mentioning currencies, always use their currency address. Open the query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Balance-for-an-address-for-an-specific-currency_1).

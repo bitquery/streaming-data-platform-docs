@@ -45,6 +45,10 @@ Token supply refers to the total number of tokens that exist for a particular cr
 - **Stablecoin Monitoring**: Verify backing and supply changes for USDT, USDC, DAI, etc.
 - **Investment Research**: Evaluate tokenomics and supply dynamics
 
+## How do I get the total supply or circulating supply of a token?
+
+**Total supply on EVM:** Use Bitquery `EVM.TransactionBalances` (or streaming equivalents) and read `TokenBalance.TotalSupply` for the token contract, setting `network` to `eth`, `bsc`, `base`, or another supported chain. **Circulating supply** is not a single on-chain field: it is usually derived as total supply minus known treasury or locked wallets, or adjusted for burns—use mint/burn and transfer patterns from the same API family if you define it that way.
+
 ## 🔗 Related APIs
 
 ### EVM APIs
