@@ -53,11 +53,41 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 
 ---
 
+## How do I stream BSC pending transactions (mempool) using Bitquery? {#how-do-i-stream-bsc-pending-transactions-mempool-using-bitquery}
+
+Use a **GraphQL `subscription`** on the Bitquery streaming **WebSocket** [`wss://streaming.bitquery.io/graphql`](https://docs.bitquery.io/docs/subscriptions/websockets/) with root **`EVM(network: bsc, mempool: true)`**. The **`mempool: true`** flag switches the stream to **broadcast / simulated pending** traffic instead of only confirmed blocks. Under that root, subscribe to the same APIs you use on-chain—**`Transactions`**, **`Transfers`**, **`DEXTrades`**, **`Events`**, and others—with `where` filters as needed. Authenticate the socket per [WebSocket authorisation](https://docs.bitquery.io/docs/authorisation/websocket/). For mempool semantics (ordering, time window, vs confirmed subscriptions), read [Subscribing to mempool updates](https://docs.bitquery.io/docs/subscriptions/mempool-subscriptions/). For lower latency at scale, consider **Kafka** [EVM protobuf streams](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/).
+
+Minimal example—pending transaction headers on BSC:
+
+```graphql
+subscription BscMempoolTransactions {
+  EVM(network: bsc, mempool: true) {
+    Transactions {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+        Cost
+        To
+        From
+      }
+    }
+  }
+}
+```
+
+Try it in the IDE: [BSC mempool transactions](https://ide.bitquery.io/bsc-mempool-txs). Richer **`Transfers`** and **DEX** mempool patterns are in [Mempool Streaming Examples](#mempool-streaming-examples) below.
+
+---
+
 ## Table of Contents
 
-### 1. [How Mempool Simulation Works](#how-do-we-simulate-txs-for-bitquery-mempool-apis--streams)
+### 1. [How do I stream BSC pending transactions (mempool) using Bitquery?](#how-do-i-stream-bsc-pending-transactions-mempool-using-bitquery)
 
-### 2. Mempool Streaming Examples
+### 2. [How Mempool Simulation Works](#how-do-we-simulate-txs-for-bitquery-mempool-apis--streams)
+
+### 3. Mempool Streaming Examples
 
 - [Stream Four Meme Trades in Mempool ➤](#stream-four-meme-trades-in-mempool---detect-them-early)
 - [Stream Four Meme Token Creation in Mempool ➤](#stream-four-meme-token-creation-in-mempool---detect-them-first)

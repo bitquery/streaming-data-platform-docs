@@ -629,31 +629,23 @@ query MyQuery {
 
 ### How do I check if a Pump.fun token was launched in Mayhem mode? (Historical)
 
-We use the Solana v1 Transfers API for this. This query finds "Pump Fun" token launches in Mayhem mode by filtering for a transfer of exactly 1,000,000,000,000,000 units (1 Billion if adjusted to 6 decimal places) to the specified receiver and token mint. It returns currency info, amount, and transaction signature. In Mayhem mode, 1 Billion token supply is minted to the Mayhem Autonomous AI agent (`BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s`).
+We use the Solana v1 Transfers API for this. This query finds "Pump Fun" token launches in Mayhem mode by filtering the count of transfers of exactly 1,000,000,000,000,000 units (1 Billion if adjusted to 6 decimal places).
+If count is 2 it means token is minted in mayhem mode and if count is 1 then it means token is not minted in mayhem mode.
 
-[Try out the API](https://ide.bitquery.io/check-if-a-pump-fun-token-was-in-mayhem-mode)
+[Try out the API](https://ide.bitquery.io/token-mayhem-mode-or-not_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query MyQuery {
+{
   solana {
     transfers(
-      amount: { is: 1000000000000000 }
-      receiverAddress: { is: "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s" }
-      currency: { is: "8ZVajuCD45RHs53LaCLpnqeKY519Ns64XZd12ZcLpump" }
+      date:{since:"2025-01-01"}
+      amount: {is: 1000000000000000}
+      currency: {is: "EEhQvi54Rwme2z84gG6qQmuaWjnZ6b9AMgq5aGkKpump"}
     ) {
-      currency {
-        name
-        symbol
-        decimals
-        address
-      }
-      amount
-      transaction {
-        signature
-      }
+      count
     }
   }
 }
