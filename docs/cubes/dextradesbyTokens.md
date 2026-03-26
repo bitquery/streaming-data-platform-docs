@@ -119,6 +119,43 @@ Trade {
  - If `Side.Type` is `"buy"`, the pool is the buyer of the side currency (pool = `Side.Buyer`)
  - If `Side.Type` is `"sell"`, the pool is the seller of the side currency (pool = `Side.Seller`)
 
+## How do I get OHLC in a DEXTradeByTokens query? {#how-do-i-get-ohlc-in-a-dextradebytokens-query}
+
+Aggregate trades into candles with **`Block { Time(interval: { count, in: minutes | hours | days }) }`** on **`DEXTradeByTokens`**, then derive **open / high / low / close** from **`PriceInUSD`** (or your chain’s price field)—for example **`minimum`** / **`maximum`** of **`Trade_PriceInUSD`** and **`minimum`/`maximum` of `Block_Time`** for open and close. Filter by **`Trade.Currency`** (token address or mint) and optionally **`Trade.Dex`**. The same pattern works on **`EVM`** and **`Solana`**; see also [Solana OHLC API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#solana-ohlc-api).
+
+```graphql
+{
+  EVM(network: eth, dataset: combined) {
+    DEXTradeByTokens(
+      limit: { count: 24 }
+      orderBy: { ascending: Block_Time }
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Currency: { SmartContract: { is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" } }
+        }
+        Block: { Time: { since: "2024-12-01" } }
+      }
+    ) {
+      Block {
+        Time(interval: { count: 1, in: hours })
+      }
+      Trade {
+        open: PriceInUSD(minimum: Block_Number)
+        high: PriceInUSD(maximum: Trade_PriceInUSD)
+        low: PriceInUSD(minimum: Trade_PriceInUSD)
+        close: PriceInUSD(maximum: Block_Number)
+      }
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+```
+
+## How do I use DEXTradeByTokens vs DEXTrades for OHLCV? {#how-do-i-use-dextradebytokens-vs-dextrades-for-ohlcv}
+
+For **OHLCV**, prefer **`DEXTradeByTokens`** when you want **one token’s** chart (all pools and sides rolled up from the token’s perspective with **`Trade`** + **`Side`**). Use **`DEXTrades`** when you need **each raw swap** as a row (pool **`Buy`/`Sell`** view, precise routing, or per-transaction debugging). Both can power candles; **`DEXTradeByTokens`** is usually simpler for **per-token** open/high/low/close and volume. Compare cubes in [DEXTrades](https://docs.bitquery.io/docs/cubes/dextrades/) vs this page, and see [Crypto Price API vs DEXTradeByToken](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/#crypto-price-api-vs-dextradebytoken) when you want **pre-aggregated index** OHLC instead of DEX math.
+
 ## Filtering in DEXTradeByTokens Cube
 
 Filtering helps to fetch the exact data you are looking for. DexTradeByTokens Cube can filter based on currency, buyer, seller, dex, pool, sender, transaction, time, etc.

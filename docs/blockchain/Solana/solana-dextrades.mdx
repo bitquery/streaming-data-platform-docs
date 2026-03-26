@@ -29,6 +29,10 @@ You may also be interested in:
 - [Moonshot APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/)
 - [FourMeme APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
 
+## How do I get historical OHLCV for a Solana token? {#how-do-i-get-historical-ohlcv-for-a-solana-token}
+
+Use **`Solana(dataset: combined)`** or **`Solana(dataset: archive)`** with **`DEXTradeByTokens`**: filter **`Trade.Currency.MintAddress`** (and usually **`Trade.Side.Currency`** for the quote, e.g. WSOL/USDC), set **`Block.Time`** range, and bucket with **`Block { Time(interval: { count, in: minutes | hours | days }) }`**. Compute OHLC with **`PriceInUSD`** / **`Trade_Price`** minima and maxima or **`median`/`quantile`** as in [Solana OHLC API](#solana-ohlc-api). For **sub-second or index-style** bars, use the [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) and [second-level OHLC](#solana-second-level-ohlc-k-line-api) on this page.
+
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
@@ -366,7 +370,7 @@ query MyQuery {
 
 </details>
 
-## Price change 5min, 1hr, 6hr precentage of a specific token
+## Price change 5min, 1hr, 6hr precentage of a specific token {#price-change-5min-1hr-6hr-precentage-of-a-specific-token}
 
 Use below query to calculate the price change percentage for a specific token in last 5 min, 1 hr, 6hr. Test the query [here](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_2).
 
@@ -779,7 +783,7 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
 
 </details>
 
-## Get ATH Market Cap of Tokens
+## Get ATH Market Cap of Tokens {#get-ath-market-cap-of-tokens}
 
 This query returns the ATH (All-Time High) market cap, starting market cap, and related price metrics for multiple tokens. It calculates market cap using a 1 billion token supply and uses quantile to find the ATH price.
 
@@ -1412,7 +1416,7 @@ query MyQuery {
 
 </details>
 
-## Latest USD Price of a Token
+## Latest USD Price of a Token {#latest-usd-price-of-a-token}
 
 The below query retrieves the USD price of a token on Solana by setting `MintAddress: {is: "J5FAZ6bV7CCGHcU4CTXWVG6nnKHcwD9Pn4DntY93pump"}` and `Side: {Currency: {MintAddress: {is: "11111111111111111111111111111111"}}}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-Latest-Price-of-SOL-in--USD-Real-time#).
 
@@ -1787,7 +1791,7 @@ Get realised PnL, average buy price, buy volume, and sell volume for a token on 
 
 </details>
 
-## Solana Second-level OHLC / K-line API
+## Solana Second-level OHLC / K-line API {#solana-second-level-ohlc-k-line-api}
 
 For this we will use the new [Crypto Price APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
 
@@ -1856,7 +1860,7 @@ subscription{
 
 </details>
 
-## Solana OHLC API
+## Solana OHLC API {#solana-ohlc-api}
 
 You can query OHLC data in for any Solana token. In the below query we are fetching OHLC information for the pair WSOL-USDC by using the smart contract addresses in the `MintAddress` filter. Only use this API as `query` and not `subscription` websocket as Aggregates and Time Intervals don't work well with subscriptions.
 You can run and test the [saved query here](https://ide.bitquery.io/query_ohlc_quantile___1).

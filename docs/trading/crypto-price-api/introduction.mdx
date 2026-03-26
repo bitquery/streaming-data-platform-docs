@@ -38,6 +38,18 @@ These tools let you stream and query aggregated price data in USD or other paire
 The Crypto Price API (Price Index) provides more than just pair prices, it also includes [OHLCV (K-Line)](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
 While you can access the aggregated price for a single trading pair, the Price Index also supports cross-chain and cross-DEX aggregation, giving you a unified view of token prices across multiple ecosystems.
 
+## How do I get the current price of a token using Bitquery API? {#how-do-i-get-the-current-price-of-a-token-using-bitquery-api}
+
+Subscribe or query the **`Trading`** API: use **`Tokens`**, **`Pairs`**, or **`Currencies`** with your token or pair identifiers and read **`Price`**, including **`Ohlc.Close`** for the latest bar, over your chosen **`Interval`**. Use the streaming endpoint and a WebSocket client as in [Quick start](#quick-start), or run the same shape as a **query** for a snapshot. See the [Tokens cube](https://docs.bitquery.io/docs/trading/crypto-price-api/tokens/) and [examples](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/).
+
+## Is there an API to get token price in USD on Solana? {#is-there-an-api-to-get-token-price-in-usd-on-solana}
+
+**Yes.** Solana is a first-class network in the **Crypto Price API**: filter `Trading.Tokens` (or `Pairs`) by **`Token.Network: solana`** and use **`Price.IsQuotedInUsd`** / **`Price.Ohlc`** for aggregated USD. For **DEX-reported** USD from raw trades, use **`Solana { DEXTradeByTokens { ... Trade { ... PriceInUSD } } }`** on the [Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#latest-usd-price-of-a-token).
+
+## How do I get price change percentage for a token? {#how-do-i-get-price-change-percentage-for-a-token}
+
+Compare **two prices** in one query—e.g. **`PriceInUSD`** at **`maximum: Block_Time`** vs at an earlier time using **`if: { Block: { Time: { till_relative: { hours_ago: 24 } } } }`**—then use a **`calculate`** expression for **(current − past) / past × 100**. See [GraphQL expressions](https://docs.bitquery.io/docs/graphql/capabilities/expression/) and the Solana walkthrough [Price change 5min, 1hr, 6hr](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#price-change-5min-1hr-6hr-precentage-of-a-specific-token).
+
 ## Key Features of These APIs
 
 - **Pre-aggregated data**: OHLC, SMA, WMA, EMA, and mean prices calculated automatically
@@ -62,7 +74,7 @@ While you can access the aggregated price for a single trading pair, the Price I
 - **[Streaming Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql)**
 - **[NPM SDKs](https://www.npmjs.com/package/bitquery-crypto-price)**
 
-## Quick Start
+## Quick Start {#quick-start}
 
 [Run Stream >](https://ide.bitquery.io/1-second-crypto-price-stream)
 
