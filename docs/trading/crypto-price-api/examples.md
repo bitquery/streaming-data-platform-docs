@@ -6,7 +6,7 @@ Stream live OHLC (Open, High, Low, Close) price and volume data for all tokens o
 
 Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them denominated in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
-[Run Stream ➤](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain)
+[Run Stream ➤](https://ide.bitquery.io/Real-Time-USD-price-on-solana-chain_2)
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
@@ -137,7 +137,7 @@ Stream real-time OHLC and volume data for Solana tokens specifically paired agai
 
 Here we have selected the filter `Price: {IsQuotedInUsd: false}`, this means that any price values such as OHLC or Average indicators will be in quote currency. If you want them denominated in USD, change the filter to `Price: {IsQuotedInUsd: true}`.
 
-[Run Stream ➤](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain-against-WSOLSOL)
+[Run Stream ➤](https://ide.bitquery.io/Real-Time-usd-price-on-solana-against-WSOLSOL)
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
@@ -212,15 +212,15 @@ subscription {
 
 Get a snapshot of tokens with aggregated USD volume and average price over the last 24 hours. The query uses `limitBy: { count: 1, by: Token_Id }` to return one row per token, and conditional metrics (`Volume.Usd(if: ...)`, `Price.Average.Mean(..., if: ...)`) to show volume and price for the last 1h, 4h, and 24h. Useful for dashboards, top-movers lists, or comparing short-term vs daily metrics.
 
-[Run query ➤](https://ide.bitquery.io/aggregated-data)
+[Run query ➤](https://ide.bitquery.io/aggregated-data-for-tokens)
 
 ```graphql
 {
   Trading {
     Tokens(
-      limit: { count: 100 }
-      limitBy: { count: 1, by: Token_Id }
-      where: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+      limit: {count: 100}
+      limitBy: {count: 1, by: Token_Id}
+      where: {Block: {Time: {since_relative: {hours_ago: 24}}}}
     ) {
       Token {
         Address
@@ -228,46 +228,32 @@ Get a snapshot of tokens with aggregated USD volume and average price over the l
         IsNative
         Name
         Network
+        Name
         Symbol
         TokenId
       }
       Volume {
         Usd
-        H1VAgo: Usd(
-          if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
-        )
-        H4VAgo: Usd(
-          if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
-        )
-        H24VAgo: Usd(
-          if: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
-        )
-      }
-      Supply {
-        TotalSupply
-        FullyDilutedValuationUsd
-        MarketCap
+        H4VAgo: Usd(if: {Block: {Time: {since_relative: {hours_ago: 4}}}})
       }
       Price {
         Average {
           currentPrice: Mean(maximum: Block_Time)
-          H1Ago: Mean(
-            minimum: Block_Time
-            if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
-          )
-          H4Ago: Mean(
-            minimum: Block_Time
-            if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
-          )
           H24Ago: Mean(
             minimum: Block_Time
-            if: { Block: { Time: { since_relative: { hours_ago: 24 } } } }
+            if: {Block: {Time: {since_relative: {hours_ago: 24}}}}
           )
         }
+      }
+      Supply {
+        TotalSupply
+        MarketCap
+        FullyDilutedValuationUsd
       }
     }
   }
 }
+
 ```
 
 ## OHLC of a currency on multiple blockchains
