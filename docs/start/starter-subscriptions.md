@@ -144,6 +144,22 @@ Monitor Real time token supply in real time on Ethereum chain.
 
 ▶️ [Monitor Latest token supply](https://ide.bitquery.io/latest-token-supply-on-eth-chain)
 
+### MarketCap Streams
+
+Real-time **Trading API `Tokens`** streams for Ethereum: aggregated **market cap**, **FDV**, **supply**, **price**, and **volume**. Use **lowercase** addresses in **`eth:`** ids. More detail: **[Ethereum Token Market Cap API](/docs/blockchain/Ethereum/token-supply/ethereum-token-marketcap-api)**.
+
+#### Ethereum token market cap stream (Trading API)
+
+Subscribe to **`Tokens`** rows for assets whose currency id includes **`eth`** (interval duration &gt; 1s).
+
+▶️ [Ethereum Token Market Cap Stream](https://ide.bitquery.io/ethereum-token-marketcap-stream_1)
+
+#### Ethereum tokens with market cap above $1 million (Trading API)
+
+Subscribe when **`Token.Id`** matches Ethereum and **`Supply.MarketCap`** &gt; 1,000,000 USD.
+
+▶️ [Ethereum Tokens With Market Cap Above $1M](https://ide.bitquery.io/realtime-stream-ethereum-tokens-with-marketcap-above-1-million)
+
 ### Transfers
 
 #### Token Transfers Stream
@@ -463,6 +479,22 @@ This stream provides real time price and OHLC stream for all tokens on Base base
 This stream returns the real time trade price of a token against the token it is traded with and the price in USD. You could modify the stream to get the price of the token for a particular token pair or against a particular token.
 
 ▶️ [Token Price Stream](https://ide.bitquery.io/token-price-stream_2)
+
+### MarketCap Streams
+
+Real-time **Trading API `Tokens`** streams for **Base**. Use **lowercase** addresses in **`base:`** ids. More detail: **[Base Token Market Cap API](/docs/blockchain/Base/base-token-marketcap-api)**.
+
+#### Base token market cap stream (Trading API)
+
+Subscribe to **`Tokens`** rows for assets whose currency id includes **`base`** (interval duration &gt; 1s).
+
+▶️ [Base Token Market Cap Stream](https://ide.bitquery.io/base-token-marketcap-stream)
+
+#### Base tokens with market cap above $1 million (Trading API)
+
+Subscribe when **`Token.Id`** matches Base and **`Supply.MarketCap`** &gt; 1,000,000 USD.
+
+▶️ [Base Tokens With Market Cap Above $1M](https://ide.bitquery.io/realtime-stream-base-tokens-with-marketcap-above-1-million)
 
 ### Events Streams
 

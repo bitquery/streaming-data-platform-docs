@@ -194,6 +194,14 @@ Latest Token Supply for stablecoin like USDC-USDT.
 
 ▶️ [Latest Token Supply for stablecoin like USDC-USDT](https://ide.bitquery.io/latest-token-supply-on-USDT-and-USDC-on-ethereum-chain)
 
+### MarketCap APIs
+
+Trading API **`Tokens`** query for the latest **market cap**, **FDV**, **supply**, **price**, and **volume** for one Ethereum token. Use **`eth:`** + **lowercase** contract in **`Token.Id`**. Full examples: **[Ethereum Token Market Cap API](/docs/blockchain/Ethereum/token-supply/ethereum-token-marketcap-api)**.
+
+#### Latest market cap for a specific Ethereum token (Trading API)
+
+▶️ [Specific Ethereum Token Latest Market Cap](https://ide.bitquery.io/specific-ethereum-token-latest-marketcap_1)
+
 ### Transfers
 
 #### Get ERC20 token transfers by wallet
@@ -772,6 +780,14 @@ This query gets you top 10 Base Tokens by Price Change in last 1h.
 
 1-second OHLC and volume stream for tokens traded on Uniswap v3 (Base). Great for bot trading strategies.
 ▶️ [Uniswap v3 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC_1)
+
+### MarketCap APIs
+
+Trading API **`Tokens`** query for the latest **market cap**, **FDV**, **supply**, **price**, and **volume** for one Base token. Use **`base:`** + **lowercase** contract in **`Token.Id`**. Full examples: **[Base Token Market Cap API](/docs/blockchain/Base/base-token-marketcap-api)**.
+
+#### Latest market cap for a specific Base token (Trading API)
+
+▶️ [Specific Base Token Latest Market Cap](https://ide.bitquery.io/specific-base-token-latest-marketcap)
 
 ### Token Analytics
 

@@ -346,6 +346,7 @@ const sidebars = {
           items: [
             "blockchain/Ethereum/blocks/blocks-api",
             "blockchain/Ethereum/token-supply/evm-token-supply",
+            "blockchain/Ethereum/token-supply/ethereum-token-marketcap-api",
             {
               type: "category",
               label: "Balances",
@@ -620,6 +621,7 @@ const sidebars = {
             "blockchain/Arbitrum/Balance_Updates",
             "blockchain/Arbitrum/Blocks_Transactions",
             "blockchain/Arbitrum/DexTrades",
+            "blockchain/Arbitrum/arbitrum-token-marketcap-api",
             "blockchain/Arbitrum/uniswap-v4-api",
             "blockchain/Arbitrum/arbitrum-slippage-api",
             "blockchain/Arbitrum/arbitrum-liquidity-api",
@@ -665,6 +667,7 @@ const sidebars = {
             "blockchain/Base/base-zora-api",
             "blockchain/Base/base-balance-updates",
             "blockchain/Base/base-coins-api",
+            "blockchain/Base/base-token-marketcap-api",
             "blockchain/Base/base-dextrades",
             "blockchain/Base/base-slippage-api",
             "blockchain/Base/base-liquidity-api",
@@ -683,6 +686,7 @@ const sidebars = {
           items: [
             "blockchain/Matic/matic-balance-updates",
             "blockchain/Matic/matic-dextrades",
+            "blockchain/Matic/matic-token-marketcap-api",
             "blockchain/Matic/matic-slippage-api",
             "blockchain/Matic/matic-liquidity-api",
             "blockchain/Matic/matic-uniswap-api",
