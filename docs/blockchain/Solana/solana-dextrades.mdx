@@ -31,7 +31,9 @@ You may also be interested in:
 
 ## How do I get historical OHLCV for a Solana token? {#how-do-i-get-historical-ohlcv-for-a-solana-token}
 
-Use **`Solana(dataset: combined)`** or **`Solana(dataset: archive)`** with **`DEXTradeByTokens`**: filter **`Trade.Currency.MintAddress`** (and usually **`Trade.Side.Currency`** for the quote, e.g. WSOL/USDC), set **`Block.Time`** range, and bucket with **`Block { Time(interval: { count, in: minutes | hours | days }) }`**. Compute OHLC with **`PriceInUSD`** / **`Trade_Price`** minima and maxima or **`median`/`quantile`** as in [Solana OHLC API](#solana-ohlc-api). For **sub-second or index-style** bars, use the [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) and [second-level OHLC](#solana-second-level-ohlc-k-line-api) on this page.
+For **OHLC**, use the **[Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** first (`Trading.Tokens` / `Pairs` with **`Token.Network: solana`**) and [second-level OHLC](#solana-second-level-ohlc-k-line-api) on this page when you want **1-second-style** streams.
+
+For **historical OHLC** from on-chain DEX trades, use **`Solana(dataset: combined)`** or **`Solana(dataset: archive)`** with **`DEXTradeByTokens`**: filter **`Trade.Currency.MintAddress`** (and usually **`Trade.Side.Currency`** for the quote, e.g. WSOL/USDC), set **`Block.Time`** range, and bucket with **`Block { Time(interval: { count, in: minutes | hours | days }) }`**. Compute OHLC with **`PriceInUSD`** / **`Trade_Price`** minima and maxima or **`median`/`quantile`** as in [Solana OHLC API](#solana-ohlc-api).
 
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.

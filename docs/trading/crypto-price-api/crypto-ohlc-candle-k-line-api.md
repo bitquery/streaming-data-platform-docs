@@ -8,23 +8,24 @@ keywords: ["OHLC API", "crypto candle data", "K-line API", "real-time price data
 
 Get real-time and historical OHLC (Open, High, Low, Close) candle data, K-line charts, and price analytics for crypto tokens across all supported blockchains including Ethereum, Solana, BSC, Polygon, and Tron.
 
+**Recommendation:** Use the **[Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** as your **main source** for OHLC and K-line data—**real-time streams** and **pre-aggregated** bars (low-latency, easy to use). When you need **full historical OHLC** (deep backfill, archive ranges, or candles built from raw DEX trades), use **`DEXTradeByTokens`** on **`EVM`** or **`Solana`** and aggregate trades into candles—see [comparison below](#crypto-price-api-vs-dextradebytoken).
+
 ## How do I get OHLCV data for a token using Bitquery? {#how-do-i-get-ohlcv-data-for-a-token-using-bitquery}
 
-Use Bitquery’s **[Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** (`Trading` → `Tokens`, `Pairs`, or `Currencies`) for **pre-aggregated OHLC** with streaming and **1-second** (and other) intervals—best for clean, multi-DEX index pricing. For **DEX-native** OHLC built from trades, use **`DEXTradeByTokens`** under **`EVM`** or **`Solana`**, bucket with **`Block { Time(interval: { count, in: minutes | hours | days }) }`**, and select open/high/low/close from **`PriceInUSD`** / **`Trade_Price`** aggregates—this path supports **full history** (see [DEXTradeByTokens vs Price API](#crypto-price-api-vs-dextradebytoken)). The table below maps every common OHLCV and price question to the right doc.
+**Use the [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) first** (`Trading` → `Tokens`, `Pairs`, or `Currencies`): **pre-aggregated OHLC**, streaming, and intervals such as **1-second** and **1-minute**, with a **clean, multi-DEX index** view. **For historical OHLC** beyond what the Price API covers, switch to **`DEXTradeByTokens`** (or chain-specific DEX docs): bucket with **`Block { Time(interval: { count, in: minutes | hours | days }) }`** and derive open/high/low/close from **`PriceInUSD`** / **`Trade_Price`**. See [Crypto Price API vs DEXTradeByTokens](#crypto-price-api-vs-dextradebytoken) and the quick table below.
 
 ## OHLCV & price data — quick answers {#ohlcv-and-price-data-quick-answers}
 
 | Question | Where to read / run |
 |----------|---------------------|
-| How do I get OHLCV data for a token using Bitquery? | [This section](#how-do-i-get-ohlcv-data-for-a-token-using-bitquery) · [Crypto Price API intro](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) |
-| How do I get OHLC in a DEXTradeByTokens query? | [DEXTradeByTokens OHLC](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) |
-| How do I get historical OHLCV for a Solana token? | [Historical OHLCV on Solana](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#how-do-i-get-historical-ohlcv-for-a-solana-token) · [Solana OHLC API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#solana-ohlc-api) |
-| How do I get the current price of a token using Bitquery API? | [Current price (Price API)](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/#how-do-i-get-the-current-price-of-a-token-using-bitquery-api) · [Tokens cube](https://docs.bitquery.io/docs/trading/crypto-price-api/tokens/) |
-| How do I get price change percentage for a token? | [Price change %](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/#how-do-i-get-price-change-percentage-for-a-token) · [Expressions](https://docs.bitquery.io/docs/graphql/capabilities/expression/) · [Solana price change example](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#price-change-5min-1hr-6hr-precentage-of-a-specific-token) |
-| How do I get 1-minute OHLC candles for a DEX pair? | [Your first OHLC query](#your-first-ohlc-query) (`Duration: { eq: 60 }`) · [Pairs cube](https://docs.bitquery.io/docs/trading/crypto-price-api/pairs/) · [DEX OHLC pattern](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) |
-| How do I get the all-time high (ATH) price of a token? | [Solana ATH example](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#get-ath-market-cap-of-tokens) · [Quantiles](https://docs.bitquery.io/docs/graphql/metrics/quantile/) |
-| Is there an API to get token price in USD on Solana? | [USD price on Solana](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/#is-there-an-api-to-get-token-price-in-usd-on-solana) · [Latest USD price (DEX)](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#latest-usd-price-of-a-token) |
-| How do I get historical 1-second price data for a DEX pool? | [1-second stream (Price API)](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/#quick-start) · [TradingView / 1s OHLC tutorial](https://docs.bitquery.io/docs/usecases/tradingview-subscription-realtime/realtime_OHLC/) · Note: long **historical** 1s usually needs **DEX trade history** or archives—see [comparison](#crypto-price-api-vs-dextradebytoken) |
+| How do I get OHLCV data for a token using Bitquery? | **Last 7 Days** [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) ; **historical:** [DEXTradeByTokens OHLC](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) |
+| How do I get OHLC in a DEXTradeByTokens query? | [DEXTradeByTokens OHLC](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) (for **historical** OHLC or DEX-level control) |
+| How do I get historical OHLCV for a Solana token? | **Main OHLC:** [Crypto Price API / Solana](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/#is-there-an-api-to-get-token-price-in-usd-on-solana) · **Historical / DEX:** [Historical OHLCV on Solana](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#how-do-i-get-historical-ohlcv-for-a-solana-token) · [Solana OHLC API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#solana-ohlc-api) |
+| How do I get the current price of a token using Bitquery API? | [Current price (Price API)](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/#how-do-i-get-the-current-price-of-a-token-using-bitquery-api) |
+| How do I get price change percentage for a token? | [Price change](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/#volume-of-multiple-tokens-across-different-chains) |
+| How do I get 1-minute OHLC candles for a DEX pair? | **Main:** [Your first OHLC query](#your-first-ohlc-query) (`Duration: { eq: 60 }`) · [Pairs cube](https://docs.bitquery.io/docs/trading/crypto-price-api/pairs/) · **Historical:** [DEX OHLC pattern](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) |
+| How do I get the all-time high (ATH) price of a token? | [Solana ATH example](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#get-ath-market-cap-of-tokens)|
+| Is there an API to get token price in USD on Solana? | [USD price on Solana](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/#is-there-an-api-to-get-token-price-in-usd-on-solana) |
 | How do I use DEXTradeByTokens vs DEXTrades for OHLCV? | [OHLCV: which cube?](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/#how-do-i-use-dextradebytokens-vs-dextrades-for-ohlcv) · [DEXTrades cube](https://docs.bitquery.io/docs/cubes/dextrades/) |
 
 ## What is OHLC Data?
@@ -36,9 +37,9 @@ OHLC (Open, High, Low, Close) data, also known as candlestick or K-line data, is
 - **Low**: The lowest price reached during the interval
 - **Close**: The last price recorded in the interval
 
-Our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) provides pre-aggregated OHLC data with ultra-low latency, perfect for building trading applications, charting libraries, and real-time analytics dashboards.
+Our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) provides pre-aggregated OHLC data with ultra-low latency—**use it as the main source** for live charts and typical OHLC needs.
 
-**Important Note**: The [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) currently provides real-time data and the last 7 days of price history. For full historical OHLC data beyond 7 days, you should use [DEXTradeByTokens](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/), which supports both real-time and complete historical data.
+**Historical OHLC:** For **deep history** or candles computed from **raw DEX trades**, use **[DEXTradeByTokens](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/)** on **EVM** or **Solana** (with `dataset: combined` or `archive` as needed).
 
 ## Getting Started
 
@@ -129,15 +130,16 @@ subscription {
 
 ## Crypto Price API vs DEXTradeByToken {#crypto-price-api-vs-dextradebytoken}
 
-Understanding the key differences between these two approaches for getting OHLC data:
+**Default for OHLC:** Use the **Crypto Price API** as the **primary** source for real-time and standard OHLC. Use **`DEXTradeByTokens`** when you need **full historical** OHLC or trade-based aggregation over long ranges.
 
-| Feature | Crypto Price API | DEXTradeByToken |
+| Feature | Crypto Price API | DEXTradeByTokens |
 |---------|------------------|-----------------|
-| **Data Availability** | Real-time + Last 7 days | Real-time + Complete historical |
-| **Data Processing** | Pre-aggregated and real time aggregation of price data | Raw trades aggregated on-the-fly |
+| **Data Availability** | Real-time + **recent** OHLC (Price Index) | Real-time + **full** historical (with `dataset: combined` / `archive` as supported) |
+| **Data Processing** | Pre-aggregated and real time aggregation of price data | Raw trades aggregated on-the-fly in your query |
 | **Data Quality** | Filtered, clean price feed | All trades included |
 
 ### **When to Use Crypto Price API:**
+- **Default for OHLC and K-lines**—live streaming and pre-aggregated bars
 - Real-time trading applications requiring normalized pricing
 - Live charting and dashboards with aggregated price feeds
 - High-frequency trading strategies with sub-second updates
@@ -151,9 +153,10 @@ Understanding the key differences between these two approaches for getting OHLC 
 
 ### **When to Use DEXTradeByTokens API:**
 
-- When Actual Trades are required 
-- Complete price history requirements
-- Any time interval can be used as it do aggregation in real time
+- **Historical OHLC** and long-range backfills
+- When you need **actual per-trade** detail or **pool-specific** paths, not only index OHLC
+- **Full** price history, custom intervals, or archive-backed ranges
+- Any time interval can be used because aggregation is defined in the query over trades
 
 
 ## Supported Time Intervals
@@ -443,15 +446,15 @@ subscription {
 
 ## Historical OHLC Queries
 
-**Note**: The following examples work for the last 7 days of data. For historical data beyond 7 days, use [DEXTradeByToken](https://docs.bitquery.io/docs/evm/dextradesbyTokens/).
+**Note:** These examples use the **Crypto Price API** for **recent** OHLC. For **full historical** OHLC, use **[DEXTradeByTokens](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/)**.
 
-### 1. Bitcoin Historical OHLC (Last 7 Days)
+### 1. Bitcoin OHLC (Crypto Price API)
 
-Get historical Bitcoin OHLC data for the last 7 days.
+Recent Bitcoin OHLC using the Crypto Price API (time range in the query matches what the Price Index supports).
 
 [Run Query](https://ide.bitquery.io/historical-Bitcoin-OHLC-data-for-the-last-7-days)
 
-> Note: We include `Volume: { Usd: { gt: 5 } }` in most examples to remove extreme outliers; this query also includes time filtering for 7 days.
+> Note: We include `Volume: { Usd: { gt: 5 } }` in most examples to remove extreme outliers. The example uses a relative time window in `Block.Time`.
 
 ```graphql
 {
@@ -1137,7 +1140,7 @@ Our OHLC API supports all major blockchains:
 
 ## Best Practices
 
-1. **Choose the Right API**: Use [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) for real-time data and recent history (7 days), DEXTradeByToken for complete historical data
+1. **Choose the right API**: Use [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) as the **main** source for OHLC; use [DEXTradeByTokens](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/) for **historical** OHLC from DEX trades
 2. **Choose the Right Interval**: Use 1s for high-frequency trading, 1m for standard charting
 3. **Use USD Quoting**: Set `IsQuotedInUsd: true` for consistent price comparison
 
