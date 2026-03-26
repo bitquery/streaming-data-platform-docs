@@ -39,17 +39,6 @@ While you can access the aggregated price for a single trading pair, the Price I
 
 **OHLC & K-lines:** Use this **Crypto Price API** as the **primary** source. For **historical** OHLC (long backfills, archive data, or trade-built candles), use **`DEXTradeByTokens`** (see [OHLC guide — when to use DEX](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/#crypto-price-api-vs-dextradebytoken)).
 
-## How do I get the current price of a token using Bitquery API? {#how-do-i-get-the-current-price-of-a-token-using-bitquery-api}
-
-Subscribe or query the **`Trading`** API: use **`Tokens`**, **`Pairs`**, or **`Currencies`** with your token or pair identifiers and read **`Price`**, including **`Ohlc.Close`** for the latest bar, over your chosen **`Interval`**. Use the streaming endpoint and a WebSocket client as in [Quick start](#quick-start), or run the same shape as a **query** for a snapshot. See the [Tokens cube](https://docs.bitquery.io/docs/trading/crypto-price-api/tokens/) and [examples](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/).
-
-## Is there an API to get token price in USD on Solana? {#is-there-an-api-to-get-token-price-in-usd-on-solana}
-
-**Yes.** Solana is a first-class network in the **Crypto Price API**: filter `Trading.Tokens` (or `Pairs`) by **`Token.Network: solana`** and use **`Price.IsQuotedInUsd`** / **`Price.Ohlc`** for aggregated USD. For **DEX-reported** USD from raw trades, use **`Solana { DEXTradeByTokens { ... Trade { ... PriceInUSD } } }`** on the [Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#latest-usd-price-of-a-token).
-## How do I get price change percentage for a token? {#how-do-i-get-price-change-percentage-for-a-token}
-
-Compare **two prices** in one query—e.g. **`PriceInUSD`** at **`maximum: Block_Time`** vs at an earlier time using **`if: { Block: { Time: { till_relative: { hours_ago: 24 } } } }`**—then use a **`calculate`** expression for **(current − past) / past × 100**. See [GraphQL expressions](https://docs.bitquery.io/docs/graphql/capabilities/expression/) and the Solana walkthrough [Price change 5min, 1hr, 6hr](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#price-change-5min-1hr-6hr-precentage-of-a-specific-token).
-
 ## Key Features of These APIs
 
 - **Pre-aggregated data**: OHLC, SMA, WMA, EMA, and mean prices calculated automatically
@@ -217,7 +206,7 @@ Each message contains:
 > The `"Quotes": [...]` section in the Kafka stream shows how much was traded in the native token (e.g., SOL) and how the USD value was derived.  
 > All following price entries (`MeanPrice`, `SMA`, `OHLC`, etc.) are already expressed in USD and ready for direct use in charting, bots, or analytics.
 
-### Cubes in the API
+## Cubes in the API
 
 The Price APIs have three core data cubes:
 
@@ -227,7 +216,7 @@ The Price APIs have three core data cubes:
 
 > Note: Expressions are supported in this API.
 
-## Currencies
+### Currencies
 
 Currencies are representation of all tokens on various chains supported in Crypto Price API(Price Index). For example, take the case of Bitcoin, while it is a native token on Bitcoin chain, it is also traded on EVM chains as WBTC ( wrapped BTC). Now all these representations of BTC are represented as a single currency.
 
@@ -292,11 +281,11 @@ Currencies are representation of all tokens on various chains supported in Crypt
 }
 ```
 
-### How does the above query work?
+#### How does the above query work?
 
 It takes amounts and prices from all chains that use BTC and wrapped versions (including bridged versions) and presents an aggregated view. The OHLC, mean and other values represent a stable BTC picture.
 
-## Tokens
+### Tokens
 
 Let's say you don't want a chain agnostic view, but want to focus on a particular chain. How to stream or query prices for it? This is where tokens come in.
 
@@ -438,7 +427,7 @@ subscription {
 }
 ```
 
-## Pairs
+### Pairs
 
 This is the 3rd cube in these set of APIs. The Pairs cube gives you price, volume, and market-level trading data between two tokens — a base token and a quote token.
 We will breakdown in detail how base token and Quote are chosen in the next section.
@@ -516,82 +505,6 @@ subscription {
           ExponentialMoving
         }
       }
-    }
-  }
-}
-```
-
-## Volume of Multiple Tokens Across Different Chains
-
-Get volume and price change data for multiple tokens trading on different chains (Solana, Ethereum, BSC, Tron) in a single query. Returns volume for 1h, 4h, and 24h periods, plus price change percentages for the same intervals.
-
-:::note EVM address format
-For **EVM chains** (Ethereum, BSC, etc.) in the Trading API, use **all lowercase addresses** in the token ID format (e.g., `bid:eth:0x...` with lowercase hex). Mixed-case addresses may not match.
-:::
-
-[Run in Bitquery IDE](https://ide.bitquery.io/volume-of-a-token_1)
-
-```graphql
-query {
-  TokenAsBase: Trading {
-    Pairs(
-      where: {
-        Interval: { Time: { Duration: { eq: 1 } } }
-        Block: { Time: { since_relative: { hours_ago: 24 } } }
-        Price: { IsQuotedInUsd: true }
-        Token: {
-          Id: {
-            in: [
-              "bid:solana:CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s"
-              "bid:eth:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78"
-              "bid:bsc:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78"
-              "bid:tron:TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"
-            ]
-          }
-        }
-        Market: { Protocol: { notIn: ["jupiter", "dex_solana_v3"] } }
-      }
-    ) {
-      Token {
-        Name
-        Symbol
-        Id
-      }
-      Price {
-        Average {
-          currentPrice: Mean(maximum: Block_Time)
-          H1Ago: Mean(
-            maximum: Block_Time
-            if: { Block: { Time: { till_relative: { hours_ago: 1 } } } }
-          )
-          H4Ago: Mean(
-            maximum: Block_Time
-            if: { Block: { Time: { till_relative: { hours_ago: 4 } } } }
-          )
-          H24Ago: Mean(
-            minimum: Block_Time
-            if: { Block: { Time: { after_relative: { hours_ago: 24 } } } }
-          )
-        }
-      }
-      Price_change_1h: calculate(
-        expression: "( ( $Price_Average_currentPrice - $Price_Average_H1Ago ) / $Price_Average_H1Ago ) * 100"
-      )
-      Price_change_4h: calculate(
-        expression: "( ( $Price_Average_currentPrice - $Price_Average_H4Ago ) / $Price_Average_H4Ago ) * 100"
-      )
-      Price_change_24h: calculate(
-        expression: "( ( $Price_Average_currentPrice - $Price_Average_H24Ago ) / $Price_Average_H24Ago ) * 100"
-      )
-      v1h: sum(
-        of: Volume_Usd
-        if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
-      )
-      v4h: sum(
-        of: Volume_Usd
-        if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
-      )
-      v24h: sum(of: Volume_Usd)
     }
   }
 }
