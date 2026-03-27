@@ -29,6 +29,10 @@ However the options to use the historical data are quite limited and currently o
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
 :::
 
+## What fields are available in Solana DEXTradeByTokens with dataset: combined?
+
+**`Solana(dataset: combined)`** (and **`archive`**) **`DEXTradeByTokens`** supports **aggregate-friendly** fields: **time / intervals**, **amounts**, **prices**, **trade counts**, **`Trade.Currency`**, **`Trade.Side.Currency`**, **`Dex`**, pool/market identifiers, and similar columns shown in the examples below. **Fine-grained per-account fields** on the trade side (e.g. **`Trade Side Account`**-style projections) are often **unsupported**—the API returns “columns not available.” **Add fields one at a time** in the IDE and rely on the live schema. See [combined vs realtime on Solana](https://docs.bitquery.io/docs/graphql/dataset/combined#why-does-dataset-combined-return-fewer-fields-than-dataset-realtime-on-solana) and [Pump.fun combined note](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/#why-does-my-pumpfun-query-return-columns-not-available-in-combined-dataset).
+
 ## Historical OHLC on Solana
 
 [This](https://ide.bitquery.io/historical-ohlc-for-solana_3) query returns the historical OHLC data for a given pair along with volume
