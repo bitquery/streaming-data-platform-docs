@@ -63,6 +63,10 @@ Bitquery Solana APIs are very flexible, you can fetch trade, transaction, balanc
 
 Read more [here](https://docs.bitquery.io/docs/streams/real-time-solana-data/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
 
+## Why is Bitquery Solana data delayed compared to chain tip (e.g. several minutes behind)? {#why-is-bitquery-solana-data-delayed-compared-to-chain-tip}
+
+Solana data in Bitquery is **indexed and served through a pipeline**; during high load, **catch-up**, or **operational work**, the **latest indexed slot** can lag **real time** by **minutes**. That is usually **ingestion delay**, not your query syntax. Use **`dataset: realtime`** for the **freshest GraphQL window**, check [Bitquery system status](https://app-status.bitquery.io/) for Solana, and use **managed streams** ([WebSockets](/docs/subscriptions/websockets/), [Kafka](/docs/streams/kafka-streaming-concepts/), [gRPC CoreCast](/docs/grpc/solana/introduction/)) if you need **lower-latency** delivery. Persistent gaps warrant [support](https://support.bitquery.io/).
+
 ## Solana gRPC Streams (CoreCast)
 
 Bitquery **[Solana gRPC Streams](https://docs.bitquery.io/docs/grpc/solana/introduction/)** (CoreCast) provide ultra-low-latency, real-time data over gRPC with protobuf encoding. Subscribe to DEX trades, transfers, transactions, balances, and more with context-aware filtering — ideal for trading bots, copy trading, and high-frequency applications.

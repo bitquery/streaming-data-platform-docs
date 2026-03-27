@@ -15,6 +15,10 @@ One of the major differences between v1 and v2 is the way API is authenticated. 
 
 And in v2, you use OAuth token mentioned as `Bearer ory_...yourtoken` and authenticate your requests to `streaming.bitquery.io/graphql`. Read more on how to generate token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
 
+## Why do I get `Table 'geth.calls_from' does not exist` (or similar) error? {#why-do-i-get-table-gethcalls_from-does-not-exist-error}
+
+That message comes from **legacy v1 / internal storage paths** where old **ClickHouse** table names (for example **`geth.calls_from`**) were exposed in errors. **Bitquery v2** exposes **EVM contract activity** through the **`Calls`** cube and related fields, not those legacy tables. **Port your query to v2** (`EVM(network: …, dataset: …) { Calls { … } }`) using this guide and the [v2 docs](https://docs.bitquery.io/docs/). If you must stay on **v1** temporarily, validate the query against [V1 documentation](https://docs.bitquery.io/v1/) and open [support](https://support.bitquery.io/) with the full error text.
+
 ## Changes in Network Specification
 
 - **v1:** Specified using a generic identifier within a function, e.g., `ethereum(network: ethereum)`.
