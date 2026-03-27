@@ -47,3 +47,7 @@ To choose the right Bitquery API offering, it helps to understand their differen
 - When you require integration with Kafka-based ecosystems
 
 Pick Queries for flexibility and history, Subscriptions for easy real-time UI feeds, and Kafka Streams when you need industrial-scale, ultra-low-latency pipelines.
+
+## How do I specify dataset: realtime vs archive in an API v1 query?
+
+This site documents **API V2** GraphQL, where you set **`dataset`** on the root field (for example **`EVM(dataset: archive)`** or **`Solana(dataset: combined)`**)—see [Dataset options](https://docs.bitquery.io/docs/graphql/dataset/options). **API V1** uses a **different endpoint and schema**; realtime/archive semantics are **not** expressed the same way. For V1 query shapes and examples, use **[Bitquery V1 documentation](https://docs.bitquery.io/v1/)** and the [V1 examples catalog](https://docs.bitquery.io/v1/docs/category/examples).

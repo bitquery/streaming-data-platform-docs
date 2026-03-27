@@ -136,7 +136,7 @@ subscription {
 |---------|------------------|-----------------|
 | **Data Availability** | Real-time + **recent** OHLC (Price Index) | Real-time + **full** historical (with `dataset: combined` / `archive` as supported) |
 | **Data Processing** | Pre-aggregated and real time aggregation of price data | Raw trades aggregated on-the-fly in your query |
-| **Data Quality** | Filtered, clean price feed | All trades included |
+| **Data Quality** | Filtered, clean price feed, second level | Trade Level Price |
 
 ### **When to Use Crypto Price API:**
 - **Default for OHLC and K-lines**—live streaming and pre-aggregated bars
@@ -154,7 +154,7 @@ subscription {
 ### **When to Use DEXTradeByTokens API:**
 
 - **Historical OHLC** and long-range backfills
-- When you need **actual per-trade** detail or **pool-specific** paths, not only index OHLC
+- When you need **actual per-trade** detail not only index OHLC
 - **Full** price history, custom intervals, or archive-backed ranges
 - Any time interval can be used because aggregation is defined in the query over trades
 
@@ -1116,6 +1116,10 @@ Find arbitrage opportunities using OHLC data across chains:
 ```
 
 [Run Query ➤](https://ide.bitquery.io/Find-arbitrage-opportunity-with-same-token-across-chains)
+
+## Can I get 1-minute historical OHLC data for a full year? {#can-i-get-1-minute-historical-ohlc-data-for-a-full-year}
+
+**Crypto Price API:** best for **live and recent** OHLC; an unbroken **one-year 1-minute** series may exceed what the Price Index is designed to serve—check your **plan** and try coarser intervals or **DEX-derived** data for deep history. **DEXTradeByTokens:** bucket with **`Time(interval: { count: 1, in: minutes })`** and a **365-day** **`Block.Time`** range; **minutes with no trades** will be **empty** or **sparse**, and the query can be **heavy**. Prefer **hourly/daily** bars or export **raw trades** for backfill. See [Historical Solana aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/) and [DEXTradesByTokens OHLC](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query).
 
 ## Supported Blockchains
 

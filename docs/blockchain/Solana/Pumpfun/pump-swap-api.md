@@ -13,7 +13,6 @@ keywords:
 
 Bitquery’s **PumpSwap API** exposes the PumpSwap AMM on Solana through GraphQL: **live and historical trades**, **prices**, **OHLC**, **volume**, **pool creation**, and **Pump.fun → PumpSwap migrations**. Use **queries** for snapshots, **subscriptions** to track PumpSwap trades in real time, and **`dataset: combined`** when you need more history than **`dataset: realtime`** (~recent window). Filter trades with **`Dex.ProgramAddress: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"`**.
 
-
 For other data points, reach out to [support](https://t.me/Bloxy_info).
 
 :::note
@@ -1109,6 +1108,10 @@ Use a GraphQL **`subscription`** on **`DEXTrades`** (all PumpSwap trades) or **`
 ### Where can I get Pump.fun data before a token moves to PumpSwap?
 
 Use the [Pump.fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) and [Pump Fun to PumpSwap](https://docs.bitquery.io/docs/blockchain/Solana/pump-fun-to-pump-swap/) guides. This page focuses on **PumpSwap** only after migration.
+
+## I can only get 8 hours of PumpSwap data with dataset: realtime — how do I get older data? {#pumpswap-realtime-vs-combined-history}
+
+**`dataset: realtime`** on Solana only covers a **rolling recent window** (on the order of **hours**). For **older PumpSwap history**, switch to **`dataset: combined`** or **`dataset: archive`** on your **`Solana { ... }`** query so archive-backed rows are included. See [Historical Solana aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/) and the **OHLC / volume** examples later on this page.
 
 ---
 
