@@ -48,6 +48,10 @@ Our comprehensive V1 API supporting 40+ blockchains with historical data:
 - **[V2 Documentation](https://docs.bitquery.io/docs/)** - Latest APIs with real-time streaming
 - **[V1 Documentation](https://docs.bitquery.io/v1/)** - Comprehensive APIs with 40+ blockchain support
 
+## How do I add a custom EVM network and what does it cost? {#how-do-i-add-a-custom-evm-network-and-what-does-it-cost}
+
+**Adding a new EVM-compatible chain** to Bitquery’s indexed networks is **not** a self-serve toggle in these docs. It is a **product and indexing engagement**: scope (historical depth, datasets, SLAs), engineering effort, and **pricing** are agreed with Bitquery—typically via **sales** and a custom quote. Start from [pricing](https://bitquery.io/pricing) and [Account → Billing](https://account.bitquery.io/user/billing), or email [sales@bitquery.io](mailto:sales@bitquery.io) with the chain, RPC details, and your data requirements. For chains **already listed** in our docs, use the documented `network` values in GraphQL (see each chain’s guide).
+
 ## Bitquery's Core Blockchain Data Capabilities
 
 **Popular APIs:** [Solana API](https://docs.bitquery.io/docs/blockchain/Solana/) (DEX trades, Pump.fun, Raydium) · [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api) · [BSC API](https://docs.bitquery.io/docs/blockchain/BSC/) · [Base API](https://docs.bitquery.io/docs/blockchain/Base/) · [DEX API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/dex-api) · [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
@@ -80,10 +84,6 @@ Bitquery's dedicated **[Crypto Price API](https://docs.bitquery.io/docs/trading/
 - **Balance Updates**: Real-time wallet balance changes
 - **Token Holders**: Distribution analysis and holder tracking
 - **Token Supply**: Circulating supply, total supply, and burn events
-
-### How do I get newly created tokens on a specific blockchain?
-
-There is no one GraphQL template for every chain: new tokens appear via launchpads, factories, or programs. Use Bitquery **launchpad and chain guides**—for example [Pump.fun on Solana](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/), [Four Meme on BSC](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/), [Ethereum contract creation](https://docs.bitquery.io/docs/blockchain/Ethereum/calls/contract-creation), and the [Ethereum Events API](https://docs.bitquery.io/docs/blockchain/Ethereum/events/events-api) for factory or `TokenCreated`-style logs. Pick the page that matches your network and launch mechanism.
 
 ### **Smart Contract Data**
 - **Contract Events**: Decoded smart contract events and logs

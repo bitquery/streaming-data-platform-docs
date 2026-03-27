@@ -247,6 +247,10 @@ Buy{
 
 The nested schema in v2 requires accessing fields through specific paths, e.g., `Trade.Buy.Currency.SmartContract`.
 
+## Where do I find my Bitquery API v1 key? {#where-do-i-find-my-bitquery-api-v1-key}
+
+To find your Bitquery API v1 key, log in to your [Bitquery account](https://account.bitquery.io/), navigate to [Applications](https://account.bitquery.io/user/api_v2/applications), and create a new application if needed. Then, visit the [Access Tokens](https://account.bitquery.io/user/api_v2/access_tokens) page to generate a new access token. This token serves as your API key for authentication. When creating a token, be sure to set an appropriate lifespan to avoid unnecessary interruptions or the need for frequent regeneration.
+
 ## V1 vs V2 : Data Points
 
 ![](/img/v1v2.png)
