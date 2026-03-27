@@ -29,6 +29,10 @@ You may also be interested in:
 - [Moonshot APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/)
 - [FourMeme APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
 
+## How do I get trades made by a specific wallet on a DEX?
+
+Query `Solana.DEXTrades` (or `DEXTradeByTokens`) with `where` on the wallet as **`Trade.Buy.Account`**, **`Trade.Sell.Account`**, or **`Transaction.Signer`** depending on how the protocol records the user. Filter **`Transaction.Result.Success`** and the DEX program or protocol name if needed. See [latest trades by account patterns](#subscribe-to-latest-solana-trades) and [Realised PnL / trader windows](#realised-pnl-avg-buy-price-buy-volume-sell-volume) on this page for aggregated trader stats.
+
 ## How do I get historical OHLCV for a Solana token? {#how-do-i-get-historical-ohlcv-for-a-solana-token}
 
 For **OHLC**, use the **[Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** first (`Trading.Tokens` / `Pairs` with **`Token.Network: solana`**) and [second-level OHLC](#solana-second-level-ohlc-k-line-api) on this page when you want **1-second-style** streams.

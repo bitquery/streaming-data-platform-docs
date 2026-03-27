@@ -6,6 +6,10 @@ This project is a Solana copy trading bot that allows users to replicate trades 
 
 > Note: This material is for educational and informational purposes only and is not intended as investment advice. The content reflects the author's personal research and understanding. While specific investments and strategies are mentioned, no endorsement or association with these entities is implied. Readers should conduct their own research and consult with qualified professionals before making any investment decisions. Bitquery is not liable for any losses or damages resulting from the application of this information.
 
+## How do I backtest a copy-trading strategy using Bitquery?
+
+**Backtesting** means replaying history: pull past **DEX trades** (or transfers) for the leader wallet and optionally **token prices** over the same windows, then simulate entries/exits in your code. Use **`Solana.DEXTrades`** / **`DEXTradeByTokens`** with **`Block.Time`** ranges, pagination, and [starter trader / PnL examples](https://docs.bitquery.io/docs/start/starter-queries/). This tutorial shows how to **fetch** live trades; extend it with archived time ranges and your own PnL rules—Bitquery supplies data, not a built-in backtester.
+
 ## Understanding the Code
 
 You can view the entire codebase [here](https://github.com/Kshitij0O7/copy-trading-bot/tree/main). The major logical part is in the `main.py` file, so lets try to breakdown the code written here.

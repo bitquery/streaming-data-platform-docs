@@ -28,6 +28,9 @@ sidebar_position: 3
 Bitquery provides **Bitcoin blockchain data dumps** in **Parquet format**, designed for large-scale analytics, historical backfills, and data lake integrations.
 These datasets can be hosted directly in your own cloud storage (for example, **AWS S3**) and queried using engines like **Snowflake, BigQuery, Athena, Spark, etc**.
 
+## How do I get Bitcoin address balance history block by block?
+
+Bitcoin is **UTXO-based**, not account-based: an “address balance” at height *H* is the sum of **unspent outputs** paying that address with **block height ≤ H**. In Bitquery’s **Bitcoin Parquet dumps**, join **outputs** to **inputs** to mark spends, aggregate per address per block (or use your warehouse’s window functions). For interactive GraphQL wallet history, see **[V1 Bitcoin documentation](https://docs.bitquery.io/v1/docs/Examples/bitcoin/bitcoin-address-api)** if your use case is supported there.
 
 ## Available Bitcoin Topics
 

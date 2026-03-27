@@ -4,9 +4,11 @@ sidebar_position: 7
 
 # Address Trades API
 
-## Latest Trades by Maker Address
+## How do I get trades made by a specific wallet on a DEX?
 
 This GraphQL query retrieves the latest trades executed by a particular maker on the Ethereum network. You can view the query in the IDE [here](https://ide.bitquery.io/latest-trades-by-market-maker)
+
+On **EVM**, query `EVM.DEXTrades` (or `DEXTradeByTokens` for a token-centric view) and filter by the wallet as transaction sender or as **`Trade.Sender`** / buyer–seller fields depending on protocol. The example below filters `Transaction.From` as the taker for Ethereum. Adjust `network`, `dataset`, and DEX filters for BSC, Base, etc. For **Solana**, see [Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/).
 
 ```
 query MyQuery {
