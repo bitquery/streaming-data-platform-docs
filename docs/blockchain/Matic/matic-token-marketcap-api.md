@@ -46,7 +46,10 @@ You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/mati
 subscription MyQuery {
   Trading {
     Tokens(
-      where: {Currency: {Id: {includes: "matic"}}, Interval: {Time: {Duration: {gt: 1}}}}
+      where: {
+        Currency: { Id: { includes: "matic" } }
+        Interval: { Time: { Duration: { gt: 1 } } }
+      }
     ) {
       Token {
         Name
@@ -98,7 +101,12 @@ query {
     Tokens(
       limit: { count: 1 }
       orderBy: { descending: Block_Time }
-      where: {Token: {Id: {includes: "matic:0xeb51d9a39ad5eef215dc0bf39a8821ff804a0f01"}}, Interval: {Time: {Duration: {gt: 1}}}}
+      where: {
+        Token: {
+          Id: { includes: "matic:0xeb51d9a39ad5eef215dc0bf39a8821ff804a0f01" }
+        }
+        Interval: { Time: { Duration: { gt: 1 } } }
+      }
     ) {
       Token {
         Name
@@ -150,7 +158,11 @@ You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/real
 subscription {
   Trading {
     Tokens(
-      where: {Token: {Id: {includesCaseInsensitive: "matic"}}, Interval: {Time: {Duration: {gt: 1}}}, Supply: {MarketCap: {gt: 1000000}}}
+      where: {
+        Token: { Id: { includesCaseInsensitive: "matic" } }
+        Interval: { Time: { Duration: { gt: 1 } } }
+        Supply: { MarketCap: { gt: 1000000 } }
+      }
     ) {
       Currency {
         Name
@@ -170,3 +182,105 @@ subscription {
 :::tip Threshold and interval
 Tune **`Supply.MarketCap`** and **`Interval.Time.Duration`** for your alerts or dashboards. See **[Tokens cube](/docs/trading/crypto-price-api/tokens)** for more filters.
 :::
+
+---
+
+## How do I get top Polygon (Matic) tokens by market cap?
+
+This query ranks **Polygon** tokens by **`Supply.MarketCap`**. Set **`Token.Network`** to **Matic** (Polygon’s label in the Trading API). It uses roughly the **last 24 hours**, **1-second** intervals, at least **$1,000** **USD volume**, **`limitBy`** one row per **`Token_Id`**, and up to **50** tokens.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Tokens-by-Market-Cap-on-Polygon_1).
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 50 }
+      limitBy: { count: 1, by: Token_Id }
+      orderBy: { descending: Supply_MarketCap }
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Volume: { Usd: { gt: 1000 } }
+        Token: { Network: { is: "Matic" } }
+      }
+    ) {
+      Currency {
+        Id
+        Name
+        Symbol
+      }
+      Price {
+        Average {
+          Mean(maximum: Block_Time)
+        }
+      }
+      Volume {
+        Base(maximum: Block_Time)
+        Quote(maximum: Block_Time)
+        Usd(maximum: Block_Time)
+      }
+      Token {
+        Network
+        Symbol
+        Address
+      }
+      Supply {
+        MarketCap(maximum: Block_Time)
+        FullyDilutedValuationUsd(maximum: Block_Time)
+        TotalSupply(maximum: Block_Time)
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I get top Polygon tokens by market cap change in 1 hour?
+
+Uses a **1-hour** OHLC interval (`Duration: { eq: 3600 }`) and orders by **`change_mcap`**: **(close − open) × total supply**. **`Token.Network`** is **Matic**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/top-Polygon-tokens-by-Market-Cap-Change-1h).
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 50 }
+      orderBy: { descendingByField: "change_mcap" }
+      where: {
+        Interval: { Time: { Duration: { eq: 3600 } } }
+        Token: { Network: { is: "Matic" } }
+      }
+    ) {
+      Currency {
+        Id
+        Name
+        Symbol
+      }
+      Token {
+        Network
+        Symbol
+        Address
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
+      change_mcap: calculate(
+        expression: "($Price_Ohlc_Close-$Price_Ohlc_Open) * Supply_TotalSupply"
+      )
+      Price {
+        Ohlc {
+          Open
+          Close
+        }
+      }
+    }
+  }
+}
+```

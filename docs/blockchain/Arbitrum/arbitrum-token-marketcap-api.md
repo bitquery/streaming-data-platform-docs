@@ -170,3 +170,105 @@ subscription {
 :::tip Threshold and interval
 Tune **`Supply.MarketCap`** and **`Interval.Time.Duration`** for your alerts or dashboards. See **[Tokens cube](/docs/trading/crypto-price-api/tokens)** for more filters.
 :::
+
+---
+
+## How do I get top Arbitrum tokens by market cap?
+
+This query ranks **Arbitrum** tokens by **`Supply.MarketCap`**. It uses roughly the **last 24 hours** (`since_relative: { hours_ago: 24 }`), **1-second** intervals, at least **$1,000** **USD volume**, **`limitBy`** one row per **`Token_Id`**, and up to **50** tokens.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Tokens-by-Market-Cap-on-Arbitrum).
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 50 }
+      limitBy: { count: 1, by: Token_Id }
+      orderBy: { descending: Supply_MarketCap }
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Volume: { Usd: { gt: 1000 } }
+        Token: { Network: { is: "Arbitrum" } }
+      }
+    ) {
+      Currency {
+        Id
+        Name
+        Symbol
+      }
+      Price {
+        Average {
+          Mean(maximum: Block_Time)
+        }
+      }
+      Volume {
+        Base(maximum: Block_Time)
+        Quote(maximum: Block_Time)
+        Usd(maximum: Block_Time)
+      }
+      Token {
+        Network
+        Symbol
+        Address
+      }
+      Supply {
+        MarketCap(maximum: Block_Time)
+        FullyDilutedValuationUsd(maximum: Block_Time)
+        TotalSupply(maximum: Block_Time)
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I get top Arbitrum tokens by market cap change in 1 hour?
+
+Uses a **1-hour** OHLC interval (`Duration: { eq: 3600 }`) and orders by **`change_mcap`**: **(close − open) × total supply**. **`Token.Network`** is **Arbitrum**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/top-arb-tokens-by-Market-Cap-Change-1h).
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 50 }
+      orderBy: { descendingByField: "change_mcap" }
+      where: {
+        Interval: { Time: { Duration: { eq: 3600 } } }
+        Token: { Network: { is: "Arbitrum" } }
+      }
+    ) {
+      Currency {
+        Id
+        Name
+        Symbol
+      }
+      Token {
+        Network
+        Symbol
+        Address
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
+      change_mcap: calculate(
+        expression: "($Price_Ohlc_Close-$Price_Ohlc_Open) * Supply_TotalSupply"
+      )
+      Price {
+        Ohlc {
+          Open
+          Close
+        }
+      }
+    }
+  }
+}
+```
