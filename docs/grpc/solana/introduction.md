@@ -88,3 +88,7 @@ The schema need not be downloaded, we have it as packages for install in NPM and
 ## Is Solana gRPC (CoreCast) streaming included on the free plan? {#is-solana-grpc-corecast-streaming-included-on-the-free-plan}
 
 CoreCast uses the same **V2 API tokens** as the GraphQL IDE ([create a token](https://account.bitquery.io/user/api_v2/access_tokens); see [authentication](/docs/grpc/solana/authorisation/)). Whether **Solana gRPC streaming** is enabled for your workspace, and how it relates to the Developer (free) tier or points, depends on your **plan and account entitlements**—it is not guaranteed to be unlimited or identical to self-serve GraphQL limits. Check [pricing](https://bitquery.io/pricing) and [Points](/docs/ide/points/); if you need access or a trial, use [Account → Billing](https://account.bitquery.io/user/billing) or contact [sales@bitquery.io](mailto:sales@bitquery.io).
+
+## Does Bitquery support gRPC for chains other than Solana? {#does-bitquery-support-grpc-for-chains-other-than-solana}
+
+Currently, Bitquery offers gRPC streaming only for Solana. However, our platform is designed with the capability to enable gRPC for additional blockchains upon request. If you have specific requirements for gRPC on chains other than Solana, please contact the Bitquery sales team (sales@bitquery.io) to discuss potential solutions.
