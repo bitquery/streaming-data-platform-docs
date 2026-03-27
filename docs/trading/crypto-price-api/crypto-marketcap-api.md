@@ -71,26 +71,37 @@ Set a **currency id** or token **address** and read **`Supply.MarketCap`** from 
 
 ## Top Coins by Market Cap on a Chain
 
-Set **`Token: { Network: { is: "..." } }`** and read **`Supply.MarketCap`** from the query below (rows ordered by market cap). See the [Supply fields reference](/docs/trading/crypto-price-api/supply-fields) for related supply fields. You can also stream this in real-time by adding the keyword "subscription" at the top.
+ In this API, we fetch top tokens by MarketCap on Solana. Change Network fields to get top tokens for a different network or remove to get top tokens across all. We also add `Volume: {Usd: {gt: 1000}` filter to remove low-volume tokens.
+ 
+ See the [Supply fields reference](/docs/trading/crypto-price-api/supply-fields) for related supply fields. 
 
-[Run query ➤](https://ide.bitquery.io/top-tokens-by-mcap-on-Solana)
+You can also stream this in real-time by adding the keyword "subscription" at the top.
+
+[Run query ➤](https://ide.bitquery.io/top-tokens-by-mcap-on-Solana-vol-gt-1000-USD)
 
 ```graphql
 {
   Trading {
     Tokens(
-      limit: { count: 50 }
-      limitBy: { count: 1, by: Token_Id }
-      orderBy: { descending: Supply_MarketCap }
-      where: {
-        Interval: { Time: { Duration: { eq: 1 } } }
-        Token: { Network: { is: "Solana" } }
-      }
+      limit: {count: 50}
+      limitBy: {count: 1, by: Token_Id}
+      orderBy: {descending: Supply_MarketCap}
+      where: {Interval: {Time: {Duration: {eq: 1}}}, Volume: {Usd: {gt: 1000}}, Token: {Network: {is: "Solana"}}}
     ) {
       Currency {
         Id
         Name
         Symbol
+      }
+      Price {
+        Average {
+          Mean(maximum: Block_Time)
+        }
+      }
+      Volume {
+        Base(maximum: Block_Time)
+        Quote(maximum: Block_Time)
+        Usd(maximum: Block_Time)
       }
       Token {
         Network
@@ -98,15 +109,14 @@ Set **`Token: { Network: { is: "..." } }`** and read **`Supply.MarketCap`** from
         Address
       }
       Supply {
-        MarketCap
-        FullyDilutedValuationUsd
-        CirculatingSupply
-        TotalSupply
-        MaxSupply
+        MarketCap(maximum: Block_Time)
+        FullyDilutedValuationUsd(maximum: Block_Time)
+        TotalSupply(maximum: Block_Time)
       }
     }
   }
 }
+
 ```
 
 ## Total Supply of a Coin
