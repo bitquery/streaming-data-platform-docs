@@ -11,6 +11,8 @@ keywords:
   - DEX analytics tools
   - staking API
   - crypto price SDK
+  - OpenClaw
+  - ClawHub
 ---
 
 # Tools & SDKs Directory
@@ -53,6 +55,20 @@ Ready-to-use web apps and dashboards powered by Bitquery APIs. Many include a li
 | **AI Crypto Trader All-in-One (CoW Intent)** | CoW Intent–based variant of the AI crypto trader.                           | [GitHub](https://github.com/divyasshree-BQ/AI-crypto-trader-all-in-one-CoW-Intent) | —                                                                                              |
 | **Best Route Trader on Uniswap**             | Finds the most efficient swap route on Uniswap using on-chain liquidity and pricing data. | [GitHub](https://github.com/Divyn/best-route-trader-Uniswap) | — |
 |                                              | **Live Demo:** [Try it](https://best-route-trader-uniswap.vercel.app/)      |                                                                        |                                                                                                 |
+
+---
+
+## OpenClaw Agent Skills
+
+**[OpenClaw](https://openclaw.ai/)** skills stream live data from the **Bitquery WebSocket API** into an agent workspace. Install published skills with **[ClawHub](https://clawhub.ai/)** (`clawhub install …`); the full skill list, source folders, prerequisites, and `BITQUERY_API_KEY` setup are in the **[openclaw-skills-master](https://github.com/bitquery/openclaw-skills-master)** README. See also **[ClawHub CLI docs](https://docs.openclaw.ai/tools/clawhub)**.
+
+| `clawhub install` | Description |
+| ----------------- | ----------- |
+| `bitcoin-price-feed` | Real-time Bitcoin OHLC, volume, moving averages, and % change over WebSocket. |
+| `crypto-chart-usd` | Multi-token 1s OHLC with USD pricing, volume, and moving averages (Trading.Tokens API). |
+| `pumpfun-usd-price-stream` | Real-time Pump.fun tokens on Solana with USD OHLC, volume, moving averages, and tick-to-tick % change. |
+| `polymarket-real-time-trades` | Polymarket outcome trades on Polygon: buyer/seller, USD collateral, market question, tx details. |
+| `stablecoin-payments` | Solana USDC/USDT SPL transfers (mint filter; excludes swap-like program methods), amounts, USD, parties, fees. |
 
 ---
 
