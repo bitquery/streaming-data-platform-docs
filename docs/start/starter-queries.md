@@ -629,15 +629,17 @@ Returns a list of newly created tokens on the Pump Fun.
 Returns Bonding Curve Percentage of a Token on the Pump Fun.
 ▶️ [Bonding Curve Percentage of a Token on Pump Fun](https://ide.bitquery.io/get-the-bonding-curve-progress-percentage_1)
 
-#### Top 100 About to Graduate Pump Fun Tokens
+#### Track Pump Fun token migrations to PumpSwap (subscription)
 
-Returns top 100 About to Graduate Pump Fun Tokens.
-▶️ [Top 100 About to Graduate Pump Fun Tokens](https://ide.bitquery.io/Top-100-graduating-pump-fun-tokens-in-last-5-minutes_2)
+Realtime stream of PumpSwap **`create_pool`** migrations (Pump.fun → PumpSwap). Filters: successful transactions, instruction depth 1, program **`pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA`**, non-placeholder mint in arguments.
 
-#### Get Graduated Tokens by Exchange
+▶️ [Pump Fun migration stream](https://ide.bitquery.io/pumpfun-migration-stream_4#)
 
-Returns a list of tokens that have graduated (completed bonding phase) on Pump Fun to PumpSwap.
-▶️ [Get Graduated Tokens by Exchange](https://ide.bitquery.io/get-latest-Pump-fun-migration-using-joins)
+#### Latest Pump Fun token migrations to PumpSwap (query)
+
+Latest migrations with the same filters as the subscription; **`limit: 20`**, ordered by **`Block_Slot`** descending.
+
+▶️ [Pump Fun migration query](https://ide.bitquery.io/pumpfun-migration-query#)
 
 #### Top PumpFun Tokens by Marketcap
 

@@ -207,147 +207,29 @@ Test the query [here](https://ide.bitquery.io/Top-pump-fun-tokens-by-Marketcap-c
 
 ## Track Pump Fun Token Migrations to PumpSwap in Realtime - Subscription
 
-You will need to use two queries to get the realtime migrations data, 2 instructions should be present in a transaction `migrate` and `create_pool` then only the transaction is a successfull migration of a pump fun token to pump swap.
+Stream successful PumpSwap **`create_pool`** instructions (**`pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA`**) at **depth 1**, excluding placeholder mint **`11111111111111111111111111111111`** in instruction arguments. Migrated pair details appear under **`Instruction.Accounts`**.
 
-Use [query 1](https://ide.bitquery.io/track-migrations-of-pump-token-in-realtime) to get the transactions where pumpfun:migrate instruction is invoked in realtime. We specifically need to get trxn signature and block slot of migrations in realtime.
+Run the subscription [in the Bitquery IDE](https://ide.bitquery.io/pumpfun-migration-stream_4#).
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Click to expand GraphQL subscription</summary>
 
-```
+```graphql
 subscription {
   Solana {
     Instructions(
-      where: {Instruction: {Program: {Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}, Logs: {includes: {includes: "Migrate"}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Transaction {
-        Signature
-      }
-      Block {
-        Time
-        Slot
-      }
-    }
-  }
-}
-```
-
-and then use this [query 2](https://ide.bitquery.io/check-if-the-token-migrated-to-pump-swap_2) on the transaction signature and block slot that you received to check if it also includes `create_pool` instruction.
-
-```
-query ($transactionSignature: String, $blockSlot: String){
-  Solana {
-    Instructions(
-      where: {Instruction: {Program: {Method: {is: "create_pool"}, Address: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}}, Transaction: {Signature: {is: $transactionSignature}}, Block: {Slot: {eq: $blockSlot}}}
-    ) {
-      Instruction {
-        Program {
-          Address
-          Name
-          Method
-          Arguments {
-            Name
-            Type
-            Value {
-              ... on Solana_ABI_Json_Value_Arg {
-                json
-              }
-              ... on Solana_ABI_Float_Value_Arg {
-                float
-              }
-              ... on Solana_ABI_Boolean_Value_Arg {
-                bool
-              }
-              ... on Solana_ABI_Bytes_Value_Arg {
-                hex
-              }
-              ... on Solana_ABI_BigInt_Value_Arg {
-                bigInteger
-              }
-              ... on Solana_ABI_Address_Value_Arg {
-                address
-              }
-              ... on Solana_ABI_String_Value_Arg {
-                string
-              }
-              ... on Solana_ABI_Integer_Value_Arg {
-                integer
-              }
+      where: {
+        Transaction: { Result: { Success: true } }
+        Instruction: {
+          Depth: { eq: 1 }
+          Program: {
+            Method: { is: "create_pool" }
+            Address: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
+            Arguments: {
+              includes: [{ Value: { Address: { notIn: ["11111111111111111111111111111111"] } } }]
             }
           }
-          AccountNames
-          Json
         }
-        Accounts {
-          Address
-          IsWritable
-          Token {
-            Mint
-            Owner
-            ProgramId
-          }
-        }
-        Logs
-        BalanceUpdatesCount
-        AncestorIndexes
-        CallPath
-        CallerIndex
-        Data
-        Depth
-        ExternalSeqNumber
-        Index
-        InternalSeqNumber
-        TokenBalanceUpdatesCount
-      }
-      Transaction {
-        Fee
-        FeeInUSD
-        Signature
-        Signer
-        FeePayer
-        Result {
-          Success
-          ErrorMessage
-        }
-      }
-      Block {
-        Time
-        Slot
-      }
-    }
-  }
-}
-{
-  "transactionSignature": "3dr3mP58MQsFroBpz3iVgrwV89yhufxyKTpHd9HiKXsW8EPtx73u1rTDxZuMVA8Z5SnX4sZwyTji7UNUpweCKMCX",
-  "blockSlot": "344520645"
-}
-```
-
-</details>
-
-## Latest Pump Fun Token Migrations to PumpSwap - Query
-
-Use the below query to get 50 latest Pump Fun token migrations to PumpSwap. The Token Pair details which is migrated will be in Accounts[] array.
-
-You can test the query [here](https://ide.bitquery.io/track-Pump-fun_pumpswap-migration-using-joins).
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  Solana {
-    Instructions(
-      limit: { count: 50 }
-      orderBy: { descendingByField: "Migrate_Time_Time" }
-      where: {
-        Instruction: {
-          Program: {
-            Address: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
-          }
-          Logs: { includes: { includes: "Migrate" } }
-        }
-        Transaction: { Result: { Success: true } }
       }
     ) {
       Migrate_Time: Block {
@@ -357,90 +239,122 @@ You can test the query [here](https://ide.bitquery.io/track-Pump-fun_pumpswap-mi
         Program {
           Name
           Method
+          AccountNames
           Arguments {
             Name
             Value {
-              ... on Solana_ABI_Json_Value_Arg {
-                json
-              }
-              ... on Solana_ABI_Float_Value_Arg {
-                float
-              }
-              ... on Solana_ABI_Boolean_Value_Arg {
-                bool
-              }
-              ... on Solana_ABI_Bytes_Value_Arg {
-                hex
-              }
               ... on Solana_ABI_BigInt_Value_Arg {
                 bigInteger
               }
               ... on Solana_ABI_Address_Value_Arg {
                 address
               }
-              ... on Solana_ABI_String_Value_Arg {
-                string
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
               }
               ... on Solana_ABI_Integer_Value_Arg {
                 integer
               }
             }
           }
-          Address
-          AccountNames
         }
         Accounts {
-          Token {
-            ProgramId
-            Owner
-            Mint
-          }
-          IsWritable
           Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
         }
+        CallerIndex
+        Depth
+        CallPath
       }
       Transaction {
         Signature
+        Signer
+        Fee
       }
-      joinInstructions(
-        join: any_inner
-        Transaction_Index: Transaction_Index
-        Transaction_Signature: Transaction_Signature
-        where: {
-          Instruction: {
-            Program: {
-              Address: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
-              Method: { is: "create_pool" }
+    }
+  }
+}
+```
+
+</details>
+
+## Latest Pump Fun Token Migrations to PumpSwap - Query
+
+Same filters as the subscription, with **`limit: { count: 20 }`** and **`orderBy: { descending: Block_Slot }`** for recent migrations.
+
+Run the query [in the Bitquery IDE](https://ide.bitquery.io/pumpfun-migration-query#).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query {
+  Solana {
+    Instructions(
+      limit: { count: 20 }
+      orderBy: { descending: Block_Slot }
+      where: {
+        Transaction: { Result: { Success: true } }
+        Instruction: {
+          Depth: { eq: 1 }
+          Program: {
+            Method: { is: "create_pool" }
+            Address: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
+            Arguments: {
+              includes: [{ Value: { Address: { notIn: ["11111111111111111111111111111111"] } } }]
             }
           }
         }
-      ) {
-        Instruction {
-          Program {
+      }
+    ) {
+      Migrate_Time: Block {
+        Time
+      }
+      Instruction {
+        Program {
+          Name
+          Method
+          AccountNames
+          Arguments {
             Name
-            Method
-            Arguments {
-              Value {
-                ... on Solana_ABI_Address_Value_Arg {
-                  address
-                }
-                ... on Solana_ABI_String_Value_Arg {
-                  string
-                }
+            Value {
+              ... on Solana_ABI_BigInt_Value_Arg {
+                bigInteger
               }
-              Type
-              Name
-            }
-            AccountNames
-          }
-          Accounts {
-            Address
-            Token {
-              Owner
-              Mint
+              ... on Solana_ABI_Address_Value_Arg {
+                address
+              }
+              ... on Solana_ABI_Boolean_Value_Arg {
+                bool
+              }
+              ... on Solana_ABI_Integer_Value_Arg {
+                integer
+              }
             }
           }
         }
+        Accounts {
+          Address
+          IsWritable
+          Token {
+            Mint
+            Owner
+            ProgramId
+          }
+        }
+        CallerIndex
+        Depth
+        CallPath
+      }
+      Transaction {
+        Signature
+        Signer
+        Fee
       }
     }
   }
