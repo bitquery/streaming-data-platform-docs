@@ -35,40 +35,65 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 ## Get Latest Marketcap of a PumpFun Token
 
-You can get the marketcap of a pump fun token by this formulae `marketcap = 1000000000 * Latest USD Price` because all the pump fun tokens have 1 Billion supply.
+Use **Trading API** **`Pairs`**: latest row per token with **`limit: { count: 1 }`**, **`orderBy: { descending: Block_Time }`**, **`Token.Id`** matching your mint (**`solana:<mint>`**), **`Market.ProtocolFamily`** **Pumpfun**, and interval duration **&gt; 1** second. The response includes **`Supply.MarketCap`**, **FDV**, **OHLC**, **volume**, and **token** metadata.
 
-You can get the latest USD price of the desired token (here I have used this token `AaFi7r97BCirqrTGsCkAuLJ61Vavr3d2G8gWnFyApump`) from the below query and multiply it with 1 Billion and you will get the latest marketcap of the specified token.
-
-Test the query [here](https://ide.bitquery.io/marketcap-of-pump-fun-raydium-launchpad-token).
+Test the query [here](https://ide.bitquery.io/specific-pumpfun-token-latest-marketcap).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query MyQuery {
-  Solana {
-    DEXTradeByTokens(
+{
+  Trading {
+    Pairs(
       limit: { count: 1 }
       orderBy: { descending: Block_Time }
       where: {
-        Transaction: { Result: { Success: true } }
-        Trade: {
-          Currency: {
-            MintAddress: { is: "AaFi7r97BCirqrTGsCkAuLJ61Vavr3d2G8gWnFyApump" }
+        Token: {
+          Id: {
+            includesCaseInsensitive: "solana:7GMB7XbtTdvnHkPjH6yEwTUB3HYf5dqC3FKyr2sueMEh"
           }
         }
+        Interval: { Time: { Duration: { gt: 1 } } }
+        Market: { ProtocolFamily: { is: "Pumpfun" } }
       }
     ) {
-      Trade {
-        Price
-        PriceInUSD
-        Currency {
-          Name
-          MintAddress
-          Symbol
+      Token {
+        Name
+        Id
+        Address
+        Symbol
+      }
+      Block {
+        Time
+      }
+      Market {
+        Program
+        Protocol
+        ProtocolFamily
+      }
+      Supply {
+        TotalSupply
+        FullyDilutedValuationUsd
+        MarketCap
+      }
+      Price {
+        Average {
+          Mean
+        }
+        Ohlc {
+          Open
+          Low
+          High
+          Close
         }
       }
-      Marketcap: calculate(expression: "1000000000 * $Trade_PriceInUSD")
+      Volume {
+        Base
+        BaseAttributedToUsd
+        Quote
+        Usd
+      }
     }
   }
 }
@@ -78,59 +103,44 @@ query MyQuery {
 
 ## Get Tokens with a specific MarketCap
 
-You can get the marketcap of a pump fun token by this formulae `marketcap = 1000000000 * Latest USD Price` because all the pump fun tokens have 1 Billion supply.
+Stream **Trading** **`Pairs`** in real time for **Solana** tokens on **Pumpfun** when **`Supply.MarketCap`** is above a threshold (example below: **&gt; $10,000** USD). Change **`Supply.MarketCap.gt`** to tune the floor. Interval duration must be **&gt; 1** second.
 
-So to track the tokens with a specific marketcap, we just need to track their `PriceInUSD`. In the below example query we are tracking tokens in realtime using `subscription` keyword which are in marketcap range of $10K to $11K.
-Try it out using this [query link](https://ide.bitquery.io/Track-pump-fun-tokens-with-a-specific-mktcap).
+Try it with this [stream link](https://ide.bitquery.io/realtime-stream-pumpfun-tokens-with-marketcap-above-10k-marketcap#).
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Click to expand GraphQL subscription</summary>
 
 ```graphql
-subscription MyQuery {
-  Solana {
-    DEXTradeByTokens(
+subscription {
+  Trading {
+    Pairs(
       where: {
-        Trade: {
-          PriceInUSD: { gt: 0.00001, lt: 0.000011 }
-          Dex: {
-            ProgramAddress: {
-              is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
-            }
-          }
-          Side: {
-            Currency: {
-              MintAddress: { is: "11111111111111111111111111111111" }
-            }
-          }
-        }
-        Transaction: { Result: { Success: true } }
+        Token: { Id: { includesCaseInsensitive: "solana" } }
+        Interval: { Time: { Duration: { gt: 1 } } }
+        Supply: { MarketCap: { gt: 10000 } }
+        Market: { ProtocolFamily: { is: "Pumpfun" } }
       }
     ) {
-      Block {
-        Time
+      Currency {
+        Name
+        Id
+        Symbol
       }
-      Trade {
-        Currency {
-          Name
-          Symbol
-          Decimals
-          MintAddress
-        }
-        Price
-        PriceInUSD
-        Dex {
-          ProtocolName
-          ProtocolFamily
-          ProgramAddress
-        }
-        Side {
-          Currency {
-            MintAddress
-            Name
-            Symbol
-          }
-        }
+      Token {
+        Name
+        Symbol
+        Id
+        Address
+        Network
+      }
+      Market {
+        Protocol
+        ProtocolFamily
+      }
+      Supply {
+        TotalSupply
+        FullyDilutedValuationUsd
+        MarketCap
       }
     }
   }
@@ -139,44 +149,55 @@ subscription MyQuery {
 
 </details>
 
-You can also observe the approach of using `TokenSupplyUpdate` block to get the similiar data [here](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/).
+You can also use **`TokenSupplyUpdates`** for supply-driven views; see the [token supply cube](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/).
 
-## Top 10 pump fun tokens by Marketcap change in last 5mins
+## Top Pump.fun tokens by market cap change in the last 1 hour
 
-Use the below query to get top 10 pump fun tokens by Marketcap change in last 5mins. Test the query [here](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Marketcap-change-in-last-5mins_1).
+**Trading** **`Pairs`** with **1-hour** OHLC (`Duration: { eq: 3600 }`), **`Market.ProtocolFamily`** **Pumpfun**, **`Token.Network`** **Solana**, ordered by **`change_mcap`**: **(close − open) × total supply**. Up to **50** rows; adjust **`limit`** as needed.
+
+Test the query [here](https://ide.bitquery.io/Top-pump-fun-tokens-by-Marketcap-change-in-last-1-hr).
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
-query MyQuery {
-  Solana {
-    DEXTradeByTokens(
-      limit: {count: 10}
-      orderBy:{descendingByField:"Marketcap_Change_5min"}
-      where: {Trade: {Dex: {ProgramAddress: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}}, Transaction: {Result: {Success: true}}, Block: {Time: {since_relative: {hours_ago: 6}}}}
+```graphql
+{
+  Trading {
+    Pairs(
+      limit: { count: 50 }
+      orderBy: { descendingByField: "change_mcap" }
+      where: {
+        Market: { ProtocolFamily: { is: "Pumpfun" } }
+        Interval: { Time: { Duration: { eq: 3600 } } }
+        Token: { Network: { is: "Solana" } }
+      }
     ) {
-      Trade {
-        Currency {
-          Name
-          Symbol
-          MintAddress
-        }
-        Price_5min_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{minutes_ago:5}}}})
-				Price_1h_ago: PriceInUSD(minimum:Block_Time if:{Block:{Time:{since_relative:{hours_ago:1}}}})
-        Price_6h_ago: PriceInUSD(minimum: Block_Time)
-        CurrentPrice: PriceInUSD(maximum: Block_Time)
-        Side {
-          Currency {
-            Name
-            Symbol
-            MintAddress
-          }
+      Currency {
+        Id
+        Name
+        Symbol
+      }
+      Token {
+        Network
+        Symbol
+        Address
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
+      change_mcap: calculate(
+        expression: "($Price_Ohlc_Close-$Price_Ohlc_Open) * Supply_TotalSupply"
+      )
+      Price {
+        Ohlc {
+          Open
+          Close
         }
       }
-      Marketcap_Change_5min: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_5min_ago) / $Trade_Price_5min_ago) * 100")
-      Marketcap_Change_1h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_1h_ago) / $Trade_Price_1h_ago) * 100")
-      Marketcap_Change_6h: calculate(expression: "(($Trade_CurrentPrice - $Trade_Price_6h_ago) / $Trade_Price_6h_ago) * 100")
     }
   }
 }

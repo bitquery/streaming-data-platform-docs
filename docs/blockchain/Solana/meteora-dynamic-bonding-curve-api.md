@@ -404,6 +404,126 @@ query MyQuery($tokenAddresses: [String!]) {
 }
 ```
 
+## Market cap (Trading API)
+
+Use **Trading** **`Pairs`** with **`Market.Protocol`** **`dynamic_bonding_curve`** for aggregated **market cap**, **FDV**, **supply**, **price**, and **volume** on Meteora DBC. Replace **`solana:<mint>`** in **`Token.Id`** with your token.
+
+### Get latest market cap for a specific Meteora DBC token
+
+**`limit: { count: 1 }`**, **`orderBy: { descending: Block_Time }`**, **`Token.Id`** with **`includesCaseInsensitive`**, interval duration **&gt; 1** second, **`Market.Protocol`** **`dynamic_bonding_curve`**.
+
+Run the query [in the Bitquery IDE](https://ide.bitquery.io/specific-meteora-dbc-token-latest-marketcap#).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Trading {
+    Pairs(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Token: {
+          Id: {
+            includesCaseInsensitive: "solana:7GMB7XbtTdvnHkPjH6yEwTUB3HYf5dqC3FKyr2sueMEh"
+          }
+        }
+        Interval: { Time: { Duration: { gt: 1 } } }
+        Market: { Protocol: { is: "dynamic_bonding_curve" } }
+      }
+    ) {
+      Token {
+        Name
+        Id
+        Address
+        Symbol
+      }
+      Block {
+        Time
+      }
+      Market {
+        Program
+        Protocol
+        ProtocolFamily
+      }
+      Supply {
+        TotalSupply
+        FullyDilutedValuationUsd
+        MarketCap
+      }
+      Price {
+        Average {
+          Mean
+        }
+        Ohlc {
+          Open
+          Low
+          High
+          Close
+        }
+      }
+      Volume {
+        Base
+        BaseAttributedToUsd
+        Quote
+        Usd
+      }
+    }
+  }
+}
+```
+
+</details>
+
+### Stream Meteora DBC tokens with market cap above $10K
+
+Subscribe when the token is on **Solana**, **`Market.Protocol`** is **`dynamic_bonding_curve`**, **`Supply.MarketCap`** **&gt; 10,000** (USD), and interval duration **&gt; 1** second. Adjust **`gt`** to change the threshold.
+
+Run the subscription [in the Bitquery IDE](https://ide.bitquery.io/realtime-meteora-dbc-tokens-with-marketcap-10k).
+
+<details>
+  <summary>Click to expand GraphQL subscription</summary>
+
+```graphql
+subscription {
+  Trading {
+    Pairs(
+      where: {
+        Token: { Id: { includesCaseInsensitive: "solana" } }
+        Interval: { Time: { Duration: { gt: 1 } } }
+        Supply: { MarketCap: { gt: 10000 } }
+        Market: { Protocol: { is: "dynamic_bonding_curve" } }
+      }
+    ) {
+      Currency {
+        Name
+        Id
+        Symbol
+      }
+      Token {
+        Name
+        Symbol
+        Id
+        Address
+        Network
+      }
+      Market {
+        Protocol
+        ProtocolFamily
+      }
+      Supply {
+        TotalSupply
+        FullyDilutedValuationUsd
+        MarketCap
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Latest Price of a Token on Meteora DBC
 
 You can use the following query to get the latest price of a token on Meteora DBC on Solana.

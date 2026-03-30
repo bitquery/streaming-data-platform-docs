@@ -2079,49 +2079,53 @@ query MyQuery($token: String!, $buyersList: [String!]) {
 
 ### How do I get top Pump.fun tokens by market cap?
 
-Returns top tokens by price (1B supply = price × 1B = market cap)
-[Top Pump.fun tokens by market cap — Query ➤](https://ide.bitquery.io/Pumpfun-tokens-by-market-cap)
+Use **Trading API** **`Pairs`**: rank by **`Supply.MarketCap`** over the last **24 hours**, **1s** interval, **`Market.ProtocolFamily`** **Pumpfun**, **`Volume.Usd`** **&gt; 1000**, Solana tokens, **`limitBy`** one row per **`Token_Id`**, up to **50** results.
+
+[Top Pump.fun tokens by market cap — Query ➤](https://ide.bitquery.io/top-pump-fun-tokens-by-marketcap)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 {
-  Solana {
-    DEXTrades(
-      limitBy: { by: Trade_Buy_Currency_MintAddress, count: 1 }
-      limit: { count: 10 }
-      orderBy: { descendingByField: "marketcap" }
+  Trading {
+    Pairs(
+      limit: { count: 50 }
+      limitBy: { count: 1, by: Token_Id }
+      orderBy: { descending: Supply_MarketCap }
       where: {
-        Trade: {
-          Dex: { ProtocolName: { is: "pump" } }
-          Buy: {
-            Currency: {
-              MintAddress: { notIn: ["11111111111111111111111111111111"] }
-            }
-          }
-          PriceAsymmetry: { le: 0.1 }
-          Sell: { AmountInUSD: { gt: "10" } }
-        }
-        Transaction: { Result: { Success: true } }
-        Block: { Time: { since_relative: { minutes_ago: 30 } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Market: { ProtocolFamily: { is: "Pumpfun" } }
+        Volume: { Usd: { gt: 1000 } }
+        Token: { Network: { is: "Solana" } }
       }
     ) {
-      Trade {
-        Buy {
-          Price(maximum: Block_Time)
-          recentPrice: PriceInUSD(maximum: Block_Time)
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
+      Currency {
+        Id
+        Name
+        Symbol
+      }
+      Price {
+        Average {
+          Mean(maximum: Block_Time)
         }
       }
-      marketcap: calculate(expression: "1000000000 * $Trade_Buy_recentPrice")
+      Volume {
+        Base(maximum: Block_Time)
+        Quote(maximum: Block_Time)
+        Usd(maximum: Block_Time)
+      }
+      Token {
+        Network
+        Symbol
+        Address
+      }
+      Supply {
+        MarketCap(maximum: Block_Time)
+        FullyDilutedValuationUsd(maximum: Block_Time)
+        TotalSupply(maximum: Block_Time)
+      }
     }
   }
 }
@@ -2131,52 +2135,45 @@ Returns top tokens by price (1B supply = price × 1B = market cap)
 
 ### How do I get all Pump.fun tokens above 10K market cap?
 
-Returns tokens with price above 0.00001 (i.e., 10K+ market cap)
-[Pump.fun tokens above 10K market cap — Query ➤](https://ide.bitquery.io/Pumpfun-tokens-above-10K-market-cap)
+Subscribe to **Trading** **`Pairs`** when the token is on **Solana**, **`Market.ProtocolFamily`** is **Pumpfun**, **`Supply.MarketCap`** **&gt; 10,000** (USD), and interval duration **&gt; 1** second.
+
+[Pump.fun tokens above 10K market cap — Stream ➤](https://ide.bitquery.io/realtime-stream-pumpfun-tokens-with-marketcap-above-10k-marketcap#)
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Click to expand GraphQL subscription</summary>
 
 ```graphql
-{
-  Solana {
-    DEXTrades(
-      limitBy: { by: Trade_Buy_Currency_MintAddress, count: 1 }
-      limit: { count: 10 }
-      orderBy: { ascendingByField: "marketcap" }
+subscription {
+  Trading {
+    Pairs(
       where: {
-        Trade: {
-          Dex: { ProtocolName: { is: "pump" } }
-          Buy: {
-            Currency: {
-              MintAddress: { notIn: ["11111111111111111111111111111111"] }
-            }
-          }
-          PriceAsymmetry: { le: 0.1 }
-          Sell: { AmountInUSD: { gt: "10" } }
-        }
-        Transaction: { Result: { Success: true } }
-        Block: { Time: { since_relative: { minutes_ago: 30 } } }
+        Token: { Id: { includesCaseInsensitive: "solana" } }
+        Interval: { Time: { Duration: { gt: 1 } } }
+        Supply: { MarketCap: { gt: 10000 } }
+        Market: { ProtocolFamily: { is: "Pumpfun" } }
       }
     ) {
-      Trade {
-        Buy {
-          Price(maximum: Block_Time)
-          recentPrice: PriceInUSD(
-            maximum: Block_Time
-            selectWhere: { gt: 0.00001 }
-          )
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
-        }
+      Currency {
+        Name
+        Id
+        Symbol
       }
-      marketcap: calculate(expression: "1000000000 * $Trade_Buy_recentPrice")
+      Token {
+        Name
+        Symbol
+        Id
+        Address
+        Network
+      }
+      Market {
+        Protocol
+        ProtocolFamily
+      }
+      Supply {
+        TotalSupply
+        FullyDilutedValuationUsd
+        MarketCap
+      }
     }
   }
 }
@@ -2186,49 +2183,45 @@ Returns tokens with price above 0.00001 (i.e., 10K+ market cap)
 
 ### How do I track "King of the Hill" Pump.fun tokens (30K–35K market cap)?
 
-Tokens within the specific market cap range highlighted by Pump.fun. [Here](https://x.com/pumpdotfun/status/1760103287397793933) checkout the official announcement by Pump.Fun team mentioning that a Pump.fun token reaches to King of the Hill if it crosses 30K USD Marketcap.
-[Pump.fun “King of the Hill” tokens — Stream ➤](https://ide.bitquery.io/rack-King-of-the-Hill-Pumpfun-tokens)
+Tokens in the **$30K–$35K** **`Supply.MarketCap`** band on **Pumpfun** (see [Pump.fun on King of the Hill](https://x.com/pumpdotfun/status/1760103287397793933)). Subscribe to **Trading** **`Pairs`** with **`MarketCap`** between **30,000** and **35,000** USD.
+
+[Pump.fun “King of the Hill” tokens — Stream ➤](https://ide.bitquery.io/realtime-stream-of-King-of-the-Hill-Pumpfun-tokens-30K35K-market-cap#)
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Click to expand GraphQL subscription</summary>
 
 ```graphql
-{
-  Solana {
-    DEXTrades(
+subscription {
+  Trading {
+    Pairs(
       where: {
-        Trade: {
-          Dex: { ProtocolName: { is: "pump" } }
-          Buy: {
-            Currency: {
-              MintAddress: { notIn: ["11111111111111111111111111111111"] }
-            }
-          }
-          PriceAsymmetry: { le: 0.1 }
-          Sell: { AmountInUSD: { gt: "10" } }
-        }
-        Transaction: { Result: { Success: true } }
-        Block: { Time: { since_relative: { minutes_ago: 15 } } }
+        Token: { Id: { includesCaseInsensitive: "solana" } }
+        Interval: { Time: { Duration: { gt: 1 } } }
+        Supply: { MarketCap: { gt: 30000, lt: 35000 } }
+        Market: { ProtocolFamily: { is: "Pumpfun" } }
       }
     ) {
-      Trade {
-        Buy {
-          Price(maximum: Block_Time)
-          recentPrice: PriceInUSD(
-            maximum: Block_Time
-            selectWhere: { ge: 0.000030, le: 0.000035 }
-          )
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
-        }
+      Currency {
+        Name
+        Id
+        Symbol
       }
-      marketcap: calculate(expression: "1000000000 * $Trade_Buy_recentPrice")
+      Token {
+        Name
+        Symbol
+        Id
+        Address
+        Network
+      }
+      Market {
+        Protocol
+        ProtocolFamily
+      }
+      Supply {
+        TotalSupply
+        FullyDilutedValuationUsd
+        MarketCap
+      }
     }
   }
 }
