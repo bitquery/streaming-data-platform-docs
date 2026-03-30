@@ -29,6 +29,10 @@ In this section we'll have a look at some examples using the BSC Transfers API.
 <meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
 </head>
 
+## Why does my wallet inflow/outflow query miss some transactions on BSC? {#why-does-my-wallet-inflowoutflow-query-miss-some-transactions-on-bsc}
+
+**Transfers** in Bitquery model **token movements** (BEP-20, etc.) and related rows—not every balance change or **DEX** leg you see in a block explorer. **Native BNB** moves, **internal** transfers, **wrapped** flows, or activity only visible under **Calls** / **DEXTrades** may be absent if you only query `Transfers` with narrow **Sender/Receiver** filters. Use the right **primitive** for the movement type ([mental model](/docs/start/mental-model-transfers-events-calls)), set **`dataset: combined`** or **`archive`** for history, and widen **time bounds**. If a specific hash is missing across primitives, contact [support](https://support.bitquery.io/).
+
 ## Subscribe to Recent Whale Transactions of a particular currency
 
 The subscription query below fetches the whale transactions on the BSC network. We have used WBNB address `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`. You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDC-on-BSC)

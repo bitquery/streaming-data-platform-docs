@@ -8,6 +8,14 @@ Ordering can be applied to the results of the query, sorting the results in a wa
 
 Use attribute `orderBy` to define the ascending / descending way the results to be sorted.
 
+## How do I get the most recent entry only from a Bitquery query?
+
+Use **`orderBy`** so the newest row sorts first—usually **`descending: Block_Time`** (or **`Block_Slot`** / **`Block_Number`** on that cube)—then **`limit: { count: 1 }`**. With **metrics**, sort via **`descendingByField`** on the alias. Always align the sort field with the cube you query; otherwise “latest” is undefined.
+
+## What does the desc option do in a Bitquery query?
+
+**API V2** uses **`orderBy: { descending: … }`** or **`ascending`**, not a standalone **`desc`** option on the root query. **API V1** examples often used **`options: { desc: [ ... ], limit, offset }`**. For migration and side‑by‑side examples, see [Migrate Bitquery API V1 to V2](https://docs.bitquery.io/docs/API-Blog/migrate-v1-v2/).
+
 ```
     Transactions(
       orderBy: {

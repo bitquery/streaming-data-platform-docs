@@ -66,6 +66,8 @@ Understanding ERC20 transfers is essential for:
 
 ## 📋 Table of Contents
 
+- **How do I get token transfers for a specific contract?** - Filter by ERC-20 address
+- **How do I get all inbound and outbound transfers for an address?** - Sender or receiver OR filter
 - **Get Latest ERC20 Token Transfers** - Query recent token transfers
 - **Subscribe to Real-Time Transfers** - WebSocket subscriptions for live data
 - **Filter by Sender or Receiver** - Query transfers involving specific addresses
@@ -76,6 +78,46 @@ Understanding ERC20 transfers is essential for:
 - **API Response Fields** - Complete field reference
 
 ---
+
+## How do I get token transfers for a specific contract?
+
+Query `EVM.Transfers` with `where.Transfer.Currency.SmartContract` equal to the ERC-20 contract address, plus `dataset` and `network` (`eth` or another EVM chain). Order by `Block_Time` and use `limit` for pagination. The same filter works for historical windows using `Block.Time` or related filters.
+
+```graphql
+{
+  EVM(dataset: realtime, network: eth) {
+    Transfers(
+      where: {
+        Transfer: {
+          Currency: {
+            SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" }
+          }
+        }
+      }
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Transfer {
+        Amount
+        Currency {
+          Name
+          Symbol
+        }
+        Receiver
+        Sender
+        Type
+      }
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
 
 ## Get Latest ERC20 Token Transfers
 
@@ -259,9 +301,11 @@ For more information on setting up real-time subscriptions, see our [GraphQL Sub
 
 ---
 
-## Filter by Sender or Receiver
+## How do I get all inbound and outbound transfers for an address?
 
 Query transfers where a specific address is either the sender or receiver. This uses the `any` filter to implement OR logic, allowing you to find all transfers involving a particular address regardless of direction.
+
+Use `EVM.Transfers` with `where.any`: one branch matches `Transfer.Sender`, the other `Transfer.Receiver`, both set to the wallet. That returns **ERC-20** movements in both directions. Add `Block.Time` or `Block.Number` for windows, and `Currency.SmartContract` if you only want one token. Native coin movements use a separate native-transfer pattern on the same `Transfers` cube with appropriate currency filters.
 
 You can find the query [here](https://ide.bitquery.io/Sender-OR-Receiver-Transfer-on-Ethereum).
 

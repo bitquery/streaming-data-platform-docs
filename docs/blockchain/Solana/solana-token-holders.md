@@ -23,6 +23,14 @@ Get real-time and historical token holder data for any SPL token on Solana. Bitq
 <meta property="twitter:description" content="Get real-time and historical token holder data for any SPL token on Solana. Calculate top holders using Bitquery's V1 (historical transfers) and V2 (real-time balance updates) APIs." />
 </head>
 
+## Can I get Solana token holder data using Bitquery?
+
+Yes. Bitquery exposes Solana SPL holder analytics via GraphQL: use **V1** transfer-based aggregates for full history and top holders, or **V2** `BalanceUpdates` for fast snapshots on recently active tokens (roughly the last hours of balance updates). Pick V1 for long-lived tokens and trends; V2 for brand-new launches and near-real-time rankings.
+
+## How do I track whale wallets and their token holdings on Solana?
+
+Use V1 holder queries sorted by net balance to list the largest wallets, or V2 `BalanceUpdates` ordered by `PostBalance` for fresh launches. Filter minimum `PostBalance` or post-process balances to focus on whales, then correlate with [Solana transfers](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/) or [DEX trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/) for accumulation or distribution.
+
 ## Choosing the Right API
 
 Bitquery provides two versions of Solana APIs — each with different strengths for retrieving token holder data:
@@ -186,8 +194,8 @@ PostBalance: { gt: "1000000" }
 
 ## Use Cases
 
-### Whale Tracking
-Monitor large holders and track their accumulation or distribution patterns. Use V1 for historical whale behavior or V2 for real-time whale alerts on new tokens.
+### Whale tracking (largest holders)
+Monitor large holders and track their accumulation or distribution patterns. Use V1 for historical whale behavior or V2 for real-time whale alerts on new tokens. See [How do I track whale wallets and their token holdings on Solana?](#how-do-i-track-whale-wallets-and-their-token-holdings-on-solana) above for the query approach.
 
 ### Token Distribution Analysis
 Analyze how evenly a token is distributed across holders. Calculate metrics like the Gini coefficient or top-10 holder concentration to assess decentralization.

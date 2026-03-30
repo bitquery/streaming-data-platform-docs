@@ -411,6 +411,10 @@ EVM {
 
 ---
 
+## How do I identify which exchange a wallet belongs to (e.g., Binance)?
+
+Bitquery exposes **on-chain** activity (transfers, trades, calls)—not centralized-exchange **KYC or account labels**. To say “this is Binance,” combine Bitquery flows with a **third-party labeling API** or a curated list of **known deposit / hot wallets**, then detect when user funds move to or from those addresses. Bitquery is ideal for measuring **timing and amounts**; attribution is your mapping layer. However, Bitquery has some limited attribution data in [V1 apis](https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api).
+
 ## Quick Reference
 
 | Use Case | Recommended Primitive | Why |

@@ -348,4 +348,7 @@ query {
 `where` filters **before aggregation**, `selectWhere` filters **after aggregation**.
 
 ```
+## How do I use the 'since' and 'till' date filters in Bitquery GraphQL?
+
+Put **`since`** (start) and **`till`** (end) on **`Block.Time`**, **`Block.Date`**, or other **date/time filter** objects inside `where`. Example: `Block: { Time: { since: "2024-06-01T00:00:00Z", till: "2024-06-02T00:00:00Z" } }`. You can combine them with **`after`**, **`before`**, or **`is`** per field type. Full list: [Date and Time Filter Types](#date-and-time-filter-types).
 

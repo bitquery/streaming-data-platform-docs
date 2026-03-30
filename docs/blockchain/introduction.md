@@ -780,6 +780,17 @@ A: Bitquery provides flexible data retention:
 - **Export data**: Custom retention based on your needs
 - **Backup policies**: Multiple backups for data safety
 
+### How do I add a custom EVM network and what does it cost? {#how-do-i-add-a-custom-evm-network-and-what-does-it-cost}
+
+**Adding a new EVM-compatible chain** to Bitquery’s indexed networks is **not** a self-serve toggle in these docs. It is a **product and indexing engagement**: scope (historical depth, datasets, SLAs), engineering effort, and **pricing** are agreed with Bitquery—typically via **sales** and a custom quote. Start from [pricing](https://bitquery.io/pricing) and [Account → Billing](https://account.bitquery.io/user/billing), or email [sales@bitquery.io](mailto:sales@bitquery.io) with the chain, RPC details, and your data requirements. For chains **already listed** in our docs, use the documented `network` values in GraphQL (see each chain’s guide).
+
+
+### Does Bitquery support Arbitrum, Optimism, and Base? {#does-bitquery-support-arbitrum-optimism-and-base}
+
+**Yes.** All three are **EVM-compatible** networks in **V2**: use **`EVM(network: …, dataset: …)`** with the documented **`network`** values for **[Arbitrum](https://docs.bitquery.io/docs/blockchain/Arbitrum/)**, **[Optimism](https://docs.bitquery.io/docs/blockchain/Optimism/)**, and **[Base](https://docs.bitquery.io/docs/blockchain/Base/)** to query **blocks, transactions, transfers, DEX trades, events, calls**, and more. **Realtime**, **archive**, and **combined** datasets follow the same model as Ethereum and BSC; for streaming, use **GraphQL subscriptions**, **Kafka** ([EVM protobuf streams](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/)), and the chain-specific guides linked above.
+
+
 ---
 
 **Start building the future of blockchain applications today with Bitquery's comprehensive multi-chain data platform.**
+

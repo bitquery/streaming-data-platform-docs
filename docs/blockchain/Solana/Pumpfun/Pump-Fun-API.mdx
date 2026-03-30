@@ -97,6 +97,7 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 - [How do I get all tokens traded on Pump.fun in the last 1 hour? ➤](#how-do-i-get-all-tokens-traded-on-pumpfun-in-the-last-1-hour)
 - [How do I get tokens that reached a specific market cap on Pump.fun? ➤](#how-do-i-get-tokens-that-reached-a-specific-market-cap-on-pumpfun)
 - [How do I get detailed trade stats? ➤](#how-do-i-get-detailed-trade-stats-volume-buys-sells-makers-buyers-sellers)
+- [How do I get a wallet's PnL on Pump.fun tokens? ➤](#how-do-i-get-a-wallets-pnl-on-pumpfun-tokens)
 - [How do I get the first 100 buyers? ➤](#how-do-i-get-the-first-100-buyers-of-a-pumpfun-token)
 - [How do I check if the first 100 buyers are still holding? ➤](#how-do-i-check-if-the-first-100-buyers-are-still-holding)
 
@@ -629,8 +630,12 @@ query MyQuery {
 
 ### How do I check if a Pump.fun token was launched in Mayhem mode? (Historical)
 
-We use the Solana v1 Transfers API for this. This query finds "Pump Fun" token launches in Mayhem mode by filtering the count of transfers of exactly 1,000,000,000,000,000 units (1 Billion if adjusted to 6 decimal places).
-If count is 2 it means token is minted in mayhem mode and if count is 1 then it means token is not minted in mayhem mode.
+To determine if a Pump.fun token was launched in Mayhem mode, we utilize the Solana v1 Transfers API. The following query checks transfers of exactly 1,000,000,000,000,000 units (which equals 1 billion tokens when adjusted for 6 decimal places). 
+
+- If the resulting count is **2**, the token was launched in Mayhem mode.
+- If the count is **1**, the token was launched in standard mode.
+
+This method reliably identifies whether a token's initial mint followed the Mayhem mode process.
 
 [Try out the API](https://ide.bitquery.io/token-mayhem-mode-or-not_1)
 
@@ -996,6 +1001,10 @@ query PumpFunRecentTrades {
 ```
 
 </details>
+
+### How do I get a wallet's PnL on Pump.fun tokens? {#how-do-i-get-a-wallets-pnl-on-pumpfun-tokens}
+
+Bitquery does not return a single “PnL” field for Pump.fun: derive it from **historical buys and sells** for that wallet and mint. Query **`Solana.DEXTrades`** or **`DEXTradeByTokens`** with **`Dex.ProtocolName: pump`**, the token **`MintAddress`**, **`Transaction.Signer`** or buy/sell accounts, and a time window; then compute realized PnL from USD volumes (see the **[Realised PnL example on Solana DEX Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#realised-pnl-avg-buy-price-buy-volume-sell-volume)** and [starter PnL queries](https://docs.bitquery.io/docs/start/starter-queries/)). Use the **Crypto Price API** if you need mark-to-market for open positions.
 
 ## Trade Activity & Volume
 

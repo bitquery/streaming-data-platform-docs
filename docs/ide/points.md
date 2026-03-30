@@ -39,6 +39,10 @@ The number of points can vary for various reasons. Even the same query can produ
 
 For instance, if you include additional addresses, the points will be calculated considering the resources occupied by those addresses. To optimize this query, there are a few approaches you can consider. Firstly, narrowing down the date range can help to refine the results. Secondly, reducing the list of addresses may also be beneficial. However, the effectiveness of these strategies will depend on your specific goal.
 
+## Why does a Net::ReadTimeout error consume my API credits? {#why-does-net-readtimeout-consume-api-credits}
+
+Bitquery **points** reflect **work the backend performs** (see [how points are calculated](#how-are-points-calculated)), not whether your HTTP client waited long enough. If the server **executes** your GraphQL operation before the client hits **Net::ReadTimeout**, that run can still **deduct points**. Reduce cost by **narrowing filters**, lowering **`limit`**, and fixing slow patterns—see [Common errors — timeout](/docs/start/errors/#timeout-tcp-socket). For billing edge cases, check usage in your [account](https://account.bitquery.io/) or ask [support](https://support.bitquery.io/).
+
 ## How are points calculated for the realtime dataset?
 
 When you select `dataset:realtime` you are charged at 5 points per cube irrespective of the number of records you query.

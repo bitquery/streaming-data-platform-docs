@@ -164,6 +164,10 @@ Filtering helps to fetch the exact data you are looking for. DexTradeByTokens Cu
 
 Everything inside the "where" clause filters; it follows the `AND' condition by default.
 
+## How do I avoid duplicate results in DEX trade queries?
+
+**`DEXTradeByTokens`** intentionally returns **multiple rows per swap** (token-centric **Trade** + **Side**). That is not duplicate bad data—switch to **`DEXTrades`** if you need **one row per pool swap**. To dedupe in analysis, group or filter by **`Transaction.Hash`** (and trade index when present). For paging, use a **stable `orderBy`** and **time/blocks windows**; see [GraphQL limits](https://docs.bitquery.io/docs/graphql/limits/). Background: [DEXTrades vs DEXTradeByTokens](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/#how-do-i-use-dextradebytokens-vs-dextrades-for-ohlcv) and the [mental model](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls).
+
 ## Advanced Use Cases and Processing Patterns
 
 ### Portfolio Tracking and User Analytics

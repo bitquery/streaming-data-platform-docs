@@ -2,6 +2,10 @@
 
 This section will guide you through the interpretation of common error messages encountered within Bitquery APIs. It will help you decide when to escalate issues by filing a ticket at [Bitquery Support](https://support.bitquery.io/).
 
+## Why am I getting a 403 Forbidden error when making a GraphQL request in Python? {#why-am-i-getting-a-403-forbidden-error-when-making-a-graphql-request-in-python}
+
+For **API v2**, Bitquery expects a valid **OAuth token** on the right host: send `Authorization: Bearer <token>` to **`https://streaming.bitquery.io/graphql`** (see [how to use a token](/docs/authorisation/how-to-use/)). A **403** often means the gateway rejected the request—wrong URL, missing/expired token, or headers not passed exactly as in the Python example. For **legacy v1** (`graphql.bitquery.io`), check **IP allowlists and referrers** in your [account dashboard](/docs/ide/account/). If it still fails, open a ticket with the response body and request URL (redact secrets).
+
 ### ClickHouse Error: 400 Bad Request
 
 #### Error Message:
@@ -43,9 +47,9 @@ If the error persists or you believe it is occurring in error, contact the suppo
 
 ---
 
-### Empty Response Returned
+### Empty Response Returned {#empty-response-returned}
 
-If no trades/transfers are found for the queried period, compare with public explorers. If issues persist, contact support through the public Telegram group.
+If no trades/transfers are found for the queried period, compare with public explorers. Verify **network**, **dataset** (`realtime` vs `combined` / `archive`), **time filters**, and **contract or mint addresses**. If issues persist, contact support through the public Telegram group.
 
 ### Error in Name, Error in Symbol on Explorer
 
@@ -89,11 +93,13 @@ If you see this text `DB::Exception: Too many simultaneous queries`, this happen
 
 This error occurs when a query lacks a limit or requests an excessive number of records. To resolve it, consider adding filters to refine the query parameters. If issue still persists, please contact the support team on telegram with your query.
 
-### Timeout TCP socket
+### Timeout TCP socket {#timeout-tcp-socket}
 
 \[\{"message":"Net::ReadTimeout ..."\}\]
 
 This error occurs when the query is complex and takes too long to respond to a request. Check if you can optimize the query, if not please contact the support team on telegram with your query.
+
+**Points:** If your client times out, Bitquery may still have **started work** on the server; see [Why does a Net::ReadTimeout error consume my API credits?](/docs/ide/points/#why-does-net-readtimeout-consume-api-credits) on the Points page.
 
 ### Error: Failed to fetch ERROR http 424
 
@@ -154,3 +160,15 @@ Here's an example query demonstrating the use of the `limit` parameter:
 - **Resource Consideration**: Be cautious when setting high limits, as large queries might consume significant resources and impact performance.
 - **Pagination**: For large datasets, consider implementing pagination with `offset` to retrieve data in smaller chunks for better efficiency. Read more on limits and offsets [here](/docs/graphql/limits)
 - **Optimization**: Always aim to optimize your queries to retrieve the necessary data efficiently without exceeding resource limits.
+
+## Why am I getting a 500 error — query is taking too long? {#why-am-i-getting-a-500-error-query-is-taking-too-long}
+
+A **500** from Bitquery is often tied to **query cost**: the engine may hit **memory limits**, **timeouts**, or **too many simultaneous queries** for your plan. Narrow **time range**, add **`limit`**, filter on **indexed fields**, and avoid huge scans—see [limits](/docs/graphql/limits/), [filters](/docs/graphql/filters/), and [indexed fields](/docs/graphql/indexed-fields-reference/). Check [Bitquery status](https://app-status.bitquery.io/). If the query is minimal and 500s persist, contact [support](https://support.bitquery.io/) or [Telegram](https://t.me/Bloxy_info) with the operation text.
+
+## Why does my DEX trade query return zero results even though trades happened today? {#why-does-my-dex-trade-query-return-zero-results-even-though-trades-happened-today}
+
+**Dataset and time window** are the usual cause: **`dataset: realtime`** only covers a **rolling recent window** (hours—not full history), while **`combined`** / **`archive`** backfill older blocks. Wrong **DEX/program filter**, **pair or token address**, or **network** also returns empty rows. Confirm the same trade in an explorer, then align **`Block.Time`** / **`since`** with the dataset you chose. Solana-specific field gaps on **`combined`** are covered [here](/docs/graphql/dataset/combined#why-does-dataset-combined-return-fewer-fields-than-dataset-realtime-on-solana). See also [Empty Response Returned](#empty-response-returned) below.
+
+## Why does the ISO8601DateTime vs ISO8601Date type mismatch error occur? {#why-does-the-iso8601datetime-vs-iso8601date-type-mismatch-error-occur}
+
+GraphQL is strict about **variable types**. If a filter expects a **date only**, declare the variable as **`ISO8601Date`** and pass values like **`2024-01-15`**. If it expects a **full timestamp**, use **`ISO8601DateTime`** and pass **`2024-01-15T12:00:00Z`**. Mismatch triggers a schema validation error before the query runs. Match each argument to the type shown in the IDE schema for that field, and keep **time zones** explicit (`Z` or offset).

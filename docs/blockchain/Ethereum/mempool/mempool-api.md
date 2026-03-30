@@ -6,6 +6,10 @@ sidebar_position: 2
 
 In this section we will look at some examples of how to write mempool queries to extract the necessary data from broadcasted transactions. To read more about how we offer mempool data, read the introduction [here](/docs/subscriptions/mempool-subscriptions.md)
 
+## How do I get unconfirmed/pending transactions for an address?
+
+Subscribe to **`EVM(mempool: true)`** **`Transactions`** with **`where.any`** on **`Transaction.From`** and **`Transaction.To`** so you see pending txs **to or from** the wallet. Mempool support varies by **`network`**; the example under [Transactions from an Address](#transactions-from-an-address) shows a **from** filter you can extend with `any`. For **BSC**-specific streaming, see [BSC mempool stream](https://docs.bitquery.io/docs/blockchain/BSC/bsc-mempool-stream/).
+
 ## Simulating Pending Transactions
 
 The below query retrieves information about in-flight transactions, helping you simulate the most recent state. It is a way to see if they will succeed without sending them on-chain. The `Success` field tells you if your mempool tranaction is successful and `FaultError` and `FaultError` indicate otherwise.
@@ -206,7 +210,7 @@ subscription {
 
 Mempool Transactions API provides real-time data from the Binance mempool. You can use it to build applications that require up-to-date information about transactions associated with a specific address.
 
-This query retrieves transactions from the Binance mempool that were initiated from the specified address. It returns relevant information such as the block time, block number, transaction hash, transaction cost, sender address, and recipient address.
+The example below retrieves mempool transactions **from** the specified address (Binance / BSC mempool context). To also include pending txs **to** that address, use `where: { any: [ { Transaction: { From: { is: "..." } } }, { Transaction: { To: { is: "..." } } } ] }` in the same subscription shape. Results include block time, block number, hash, cost, and from/to fields where available.
 
 You can run the query [here](https://ide.bitquery.io/Binance-Mempool-Transactions_1)
 
