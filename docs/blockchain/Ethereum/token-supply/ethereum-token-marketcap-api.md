@@ -29,9 +29,11 @@ In the **Trading** API, use **lowercase** hex for EVM contract addresses in toke
 
 ## Related APIs
 
-- **[Polygon (Matic) Token Market Cap API](/docs/blockchain/Matic/matic-token-marketcap-api)** — same **`Trading.Tokens`** patterns on Polygon (`matic:` ids)
-- **[Arbitrum Token Market Cap API](/docs/blockchain/Arbitrum/arbitrum-token-marketcap-api)** — same **`Trading.Tokens`** patterns on Arbitrum (`arbitrum:` ids)
 - **[Base Token Market Cap API](/docs/blockchain/Base/base-token-marketcap-api)** — same **`Trading.Tokens`** patterns on Base (`base:` ids)
+- **[Arbitrum Token Market Cap API](/docs/blockchain/Arbitrum/arbitrum-token-marketcap-api)** — same **`Trading.Tokens`** patterns on Arbitrum (`arbitrum:` ids)
+- **[Polygon (Matic) Token Market Cap API](/docs/blockchain/Matic/matic-token-marketcap-api)** — same **`Trading.Tokens`** patterns on Polygon (`matic:` ids)
+- **[BSC Token Market Cap API](/docs/blockchain/BSC/bsc-token-marketcap-api)** — same **`Trading.Tokens`** patterns on BNB Smart Chain (`bsc:` ids)
+- **[Solana Token Market Cap API](/docs/blockchain/Solana/solana-token-marketcap-api)** — same **`Trading.Tokens`** patterns on Solana (`solana:` ids)
 - **[EVM Token Supply API](/docs/blockchain/Ethereum/token-supply/evm-token-supply)** — on-chain total supply via `EVM` / `TransactionBalances`
 - **[Crypto Price API — Tokens](/docs/trading/crypto-price-api/tokens)** — full `Tokens` cube reference
 

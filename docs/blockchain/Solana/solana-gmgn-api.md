@@ -1,10 +1,24 @@
 ---
+title: "GMGN Solana API | Trending Tokens, Pair Stats, Live DEX Trades"
+description: "GMGN-style Solana data via Bitquery: trending tokens, top pairs, buy/sell volume and makers, live pair trades, OHLC charts, and volume leaders—GraphQL queries and WebSocket streams for Raydium and Solana DEXs."
+keywords:
+  - GMGN Solana API
+  - Solana DEX screener API
+  - trending Solana tokens API
+  - Raydium pair stats API
+  - Solana buy sell volume API
+  - DEXTradeByTokens Solana
+  - Solana memecoin trading data API
+  - real-time Solana DEX trades stream
+  - Solana OHLC API
+  - top trading pairs Solana API
+  - Bitquery Solana GMGN
 sidebar_position: 1
 ---
 
 # GMGN Solana API
 
-This section will guide you through different APIs which will tell you how to get data like realtime trades just like how GMGN shows for Solana.
+Replicate **GMGN**-style **Solana** analytics with Bitquery: **trending tokens**, **top DEX pairs**, **aggregate stats** (buys, sells, buy/sell volume, makers, buyers, sellers), **live trades per pair**, **OHLC** for charts, **volume by token**, and **top traded pairs**. Uses **`DEXTradeByTokens`** and **`Solana`** GraphQL—some patterns work as **queries** only when they rely on heavy aggregates (see notes below).
 
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
@@ -12,17 +26,63 @@ This section will guide you through different APIs which will tell you how to ge
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
+<head>
+<meta name="title" content="GMGN Solana API | Trending Tokens & DEX Pair Stats | Bitquery"/>
+<meta name="description" content="GMGN-style Solana data: trending tokens, top pairs, buy/sell volume, makers, live trades, OHLC. Bitquery GraphQL and streams for Raydium & Solana DEXs."/>
+<meta name="keywords" content="GMGN Solana API, Solana DEX API, trending tokens Solana, Raydium API, buy sell volume, DEXTradeByTokens, Solana OHLC, top pairs, Bitquery"/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="GMGN Solana API | Bitquery"/>
+<meta property="og:description" content="Trending tokens, pair stats, live DEX trades, and OHLC for Solana—GMGN-style via Bitquery."/>
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="GMGN Solana API | Bitquery"/>
+<meta property="twitter:description" content="Trending tokens, pair stats, live DEX trades, and OHLC for Solana via Bitquery."/>
+</head>
+
+## Related APIs
+
+- **[GMGN API for Ethereum & EVM](/docs/blockchain/Ethereum/dextrades/evm-gmgn-api)** — **GMGN**-style **trending pairs**, token stats, **OHLC**, and **liquidity** on **Ethereum** and other **EVM** chains.
+- **[Solana DEX trades API](/docs/blockchain/Solana/solana-dextrades)** — Core **`DEXTrades`** / streaming patterns for **Solana** swaps and pair activity.
+- **[Raydium DEX API](/docs/blockchain/Solana/Solana-Raydium-DEX-API)** — **Raydium** pools, trades, and liquidity—common source for **Solana** screener UIs.
+- **[Solana DEXScreener API](/docs/blockchain/Solana/DEXScreener/solana_dexscreener)** — **DEXScreener**-style Solana **pair** and **price** examples.
+- **[Solana GeckoTerminal API](/docs/blockchain/Solana/solana-geckoterminal-api)** — **GeckoTerminal**-style charts and **OHLC** on **Solana**.
+
 ## GMGN Trending API
 
 The query will give you the Top 10 trending tokens on GMGN in last 1 hour. You can find the query [here](https://ide.bitquery.io/gmgn-trending-api_1)
 
-``` graphql
+```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Transaction: {Result: {Success: true}}, Trade: {Side: {Currency: {MintAddress: {in: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v","Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}}, Currency: {MintAddress: {notIn: ["So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"]}}}}
-      limit: {count: 10}
-      orderBy: {descendingByField: "trades_count"}
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Transaction: { Result: { Success: true } }
+        Trade: {
+          Side: {
+            Currency: {
+              MintAddress: {
+                in: [
+                  "So11111111111111111111111111111111111111112"
+                  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+                  "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
+                ]
+              }
+            }
+          }
+          Currency: {
+            MintAddress: {
+              notIn: [
+                "So11111111111111111111111111111111111111112"
+                "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+                "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
+              ]
+            }
+          }
+        }
+      }
+      limit: { count: 10 }
+      orderBy: { descendingByField: "trades_count" }
     ) {
       Trade {
         Currency {
@@ -34,7 +94,7 @@ query MyQuery {
           ProtocolName
           ProtocolFamily
         }
-        Market{
+        Market {
           MarketAddress
         }
         Side {
@@ -49,7 +109,6 @@ query MyQuery {
     }
   }
 }
-
 ```
 
 ## Get Trade Transactions of GMGN for a particular pair in realtime
@@ -57,11 +116,26 @@ query MyQuery {
 The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
 You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data)
 
-``` graphql
+```graphql
 subscription MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}, Transaction: {Result: {Success: true}}}
+      where: {
+        Trade: {
+          Currency: { MintAddress: { is: "token mint address" } }
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
+          Dex: {
+            ProgramAddress: {
+              is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
+            }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
     ) {
       Block {
         Time
@@ -90,7 +164,6 @@ subscription MyQuery {
     }
   }
 }
-
 ```
 
 ## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token of GMGN
@@ -203,13 +276,23 @@ Please change the `Block: {Time: {since: "2024-08-15T04:19:00Z"}}` accordingly w
 Keep in mind you cannot use this as a websocket subscription becuase aggregate functions like `sum` doesn't work well in `subscription`.
 You can find the query [here](https://ide.bitquery.io/GMGN--All-in-One-query_1)
 
-``` graphql
+```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Trade: {Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Block: {Time: {since: "2024-08-15T04:19:00Z"}}}
-      orderBy: {descendingByField: "total_trades"}
-      limit: {count: 10}
+      where: {
+        Transaction: { Result: { Success: true } }
+        Trade: {
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
+        }
+        Block: { Time: { since: "2024-08-15T04:19:00Z" } }
+      }
+      orderBy: { descendingByField: "total_trades" }
+      limit: { count: 10 }
     ) {
       Trade {
         Currency {
@@ -220,7 +303,7 @@ query MyQuery {
         start: PriceInUSD(minimum: Block_Time)
         min5: PriceInUSD(
           minimum: Block_Time
-          if: {Block: {Time: {after: "2024-08-15T05:14:00Z"}}}
+          if: { Block: { Time: { after: "2024-08-15T05:14:00Z" } } }
         )
         end: PriceInUSD(maximum: Block_Time)
         Dex {
@@ -239,19 +322,19 @@ query MyQuery {
           }
         }
       }
-      makers: count(distinct:Transaction_Signer)
+      makers: count(distinct: Transaction_Signer)
       total_trades: count
       total_traded_volume: sum(of: Trade_Side_AmountInUSD)
       total_buy_volume: sum(
         of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: buy}}}}
+        if: { Trade: { Side: { Type: { is: buy } } } }
       )
       total_sell_volume: sum(
         of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: sell}}}}
+        if: { Trade: { Side: { Type: { is: sell } } } }
       )
-      total_buys: count(if: {Trade: {Side: {Type: {is: buy}}}})
-      total_sells: count(if: {Trade: {Side: {Type: {is: sell}}}})
+      total_buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      total_sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
     }
   }
 }
@@ -261,16 +344,26 @@ query MyQuery {
 
 You can use the below query to build charts like how you see on BullX. You will get OHLC data for a token pair using below query. Test the API [here](https://ide.bitquery.io/Solana-OHLC-Query_5)
 
-``` graphql
+```graphql
 {
   Solana {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, PriceAsymmetry: {lt: 0.1}}}
-      limit: {count: 10}
+      orderBy: { descendingByField: "Block_Timefield" }
+      where: {
+        Trade: {
+          Currency: { MintAddress: { is: "token mint address" } }
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
+          PriceAsymmetry: { lt: 0.1 }
+        }
+      }
+      limit: { count: 10 }
     ) {
       Block {
-        Timefield: Time(interval: {in: minutes, count: 1})
+        Timefield: Time(interval: { in: minutes, count: 1 })
       }
       volume: sum(of: Trade_Amount)
       Trade {
@@ -289,7 +382,7 @@ You can use the below query to build charts like how you see on BullX. You will 
 
 This query will give you top traded pairs data. You can find the query [here](https://ide.bitquery.io/top-trading-pairs?_gl=1*131rbu4*_ga*MTU0ODE3ODUxMy4xNzM5Nzg0Njcw*_ga_ZWB80TDH9J*MTc0MjQ2MjAwNi43Ny4xLjE3NDI0NjIwNDQuMC4wLjA.).
 
-``` graphql
+```graphql
 query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
   Solana {
     DEXTradeByTokens(
@@ -340,11 +433,22 @@ query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime
 
 This query fetches you the traded volume, buy volume and sell volume of a token `J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump`. Try out the API [here](https://ide.bitquery.io/trade_volume_Solana#).
 
-``` graphql
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      where: {Block: {Time: {since: "2025-02-10T07:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}}
+      where: {
+        Block: { Time: { since: "2025-02-10T07:00:00Z" } }
+        Transaction: { Result: { Success: true } }
+        Trade: {
+          Currency: { MintAddress: { is: "token mint address" } }
+          Side: {
+            Currency: {
+              MintAddress: { is: "So11111111111111111111111111111111111111112" }
+            }
+          }
+        }
+      }
     ) {
       Trade {
         Currency {
@@ -360,12 +464,207 @@ query MyQuery {
       }
       traded_volume_USD: sum(of: Trade_Side_AmountInUSD)
       traded_volume: sum(of: Trade_Amount)
-    buy_volume: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:buy}}}})
-      sell_volume: sum(of:Trade_Side_AmountInUSD if:{Trade:{Side:{Type:{is:sell}}}})
+      buy_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell_volume: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
     }
   }
 }
 ```
+
+## Which DEX markets trade a token?
+
+Lists **Solana DEX programs** where a mint trades against a **base** (e.g. **WSOL**), with **volume**, **trade count**, **unique pair legs**, and **price** snapshots. Swap the variable mint for your token.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/DEX-Markets-for-a-token)
+
+```graphql
+query (
+  $token: String
+  $base: String
+  $time_10min_ago: DateTime
+  $time_1h_ago: DateTime
+  $time_3h_ago: DateTime
+) {
+  Solana {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "amount" }
+      where: {
+        Trade: {
+          Currency: { MintAddress: { is: $token } }
+          Side: {
+            Amount: { gt: "0" }
+            Currency: { MintAddress: { is: $base } }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { after: $time_3h_ago } }
+      }
+    ) {
+      Trade {
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+        price_last: PriceInUSD(maximum: Block_Slot)
+        price_10min_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: { Block: { Time: { before: $time_10min_ago } } }
+        )
+        price_1h_ago: PriceInUSD(
+          maximum: Block_Slot
+          if: { Block: { Time: { before: $time_1h_ago } } }
+        )
+        price_3h_ago: PriceInUSD(minimum: Block_Slot)
+      }
+      amount: sum(of: Trade_Side_Amount)
+      pairs: uniq(of: Trade_Side_Currency_MintAddress)
+      trades: count
+    }
+  }
+}
+```
+
+```json
+{
+  "token": "59VxMU35CaHHBTndQQWDkChprM5FMw7YQi5aPE5rfSHN",
+  "base": "So11111111111111111111111111111111111111112",
+  "time_10min_ago": "2024-09-19T10:45:46Z",
+  "time_1h_ago": "2024-09-19T09:55:46Z",
+  "time_3h_ago": "2024-09-19T07:55:46Z"
+}
+```
+
+## SPL tokens owned by a wallet (portfolio)
+
+**`BalanceUpdates`** for one **owner** address: current **post-balances** per mint—similar to a **wallet portfolio** view on explorers and terminal UIs.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/tokens-owned-by-an-address)
+
+```graphql
+query MyQuery {
+  Solana {
+    BalanceUpdates(
+      where: {
+        BalanceUpdate: {
+          Account: {
+            Owner: { is: "AtTjQKXo1CYTa2MuxPARtr382ZyhPU5YX4wMMpvaa1oy" }
+          }
+        }
+      }
+      orderBy: { descendingByField: "BalanceUpdate_Balance_maximum" }
+    ) {
+      BalanceUpdate {
+        Balance: PostBalance(maximum: Block_Slot)
+        Currency {
+          Name
+          Symbol
+        }
+      }
+    }
+  }
+}
+```
+
+## Top buyers of a token
+
+Ranks **accounts** by **buy-side USD** for a fixed **mint** (example: **RAY**). Use for **whale / smart money** style leaderboards.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/top-buyers-of-a-token_2)
+
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "buy" }
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+      limit: { count: 10 }
+    ) {
+      Trade {
+        Account {
+          Address
+          Token {
+            Owner
+          }
+        }
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+      }
+      buy: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+    }
+  }
+}
+```
+
+## Top sellers of a token
+
+Same pattern as **top buyers**, ordered by **sell-side** flow for the same mint.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/top-sellers-of-a-token_2)
+
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "sell" }
+      where: {
+        Trade: {
+          Currency: {
+            MintAddress: { is: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R" }
+          }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+      limit: { count: 10 }
+    ) {
+      Trade {
+        Account {
+          Address
+          Token {
+            Owner
+          }
+        }
+        Currency {
+          Symbol
+          Name
+          MintAddress
+        }
+      }
+      buy: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      sell: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+    }
+  }
+}
+```
+
 ## Video Tutorial
 
 ### Get GMGN Terminal Data with Bitquery API and Streams

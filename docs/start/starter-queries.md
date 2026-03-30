@@ -379,6 +379,14 @@ This query returns Solana balance update info for any balance update event. It i
 This query returns Solana balance update info for any balance update event, including the address, amount, currency details, and the details of the program responsible for this update.  
 ▶️ [Instruction Balance Updates](https://ide.bitquery.io/Solana-InstructionBalanceUpdates)
 
+### MarketCap APIs
+
+Trading API **`Tokens`** query for the latest **market cap**, **FDV**, **supply**, **price**, and **volume** for one Solana token. Use **`solana:`** + mint in **`Token.Id`**. Full examples: **[Solana Token Market Cap API](/docs/blockchain/Solana/solana-token-marketcap-api)**.
+
+#### Latest market cap for a specific Solana token (Trading API)
+
+▶️ [Specific Solana Token Latest Market Cap](https://ide.bitquery.io/specific-solana-token-latest-marketcap)
+
 ### Transfers
 
 #### Solana Transfers
@@ -867,6 +875,14 @@ Get the net worth of a wallet in USD.
 
 Get Total Supply and Marketcap of an BSC token.
 ▶️ [Get Total Supply and Marketcap of an BSC token](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
+
+### MarketCap APIs
+
+Trading API **`Tokens`** query for the latest **market cap**, **FDV**, **supply**, **price**, and **volume** for one BSC token. Use **`bsc:`** + **lowercase** contract in **`Token.Id`**. Full examples: **[BSC Token Market Cap API](/docs/blockchain/BSC/bsc-token-marketcap-api)**.
+
+#### Latest market cap for a specific BSC token (Trading API)
+
+▶️ [Specific BSC Token Latest Market Cap](https://ide.bitquery.io/specific-bsc-token-latest-marketcap_1)
 
 ### Transfers
 

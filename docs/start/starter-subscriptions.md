@@ -290,6 +290,22 @@ This subscription generates a real-time OHLC (Open, High, Low, Close) K-line cha
 
 ▶️ [Seconds OHLC Stream](https://ide.bitquery.io/1-second-OHLC-k-line-Solana)
 
+### MarketCap Streams
+
+Real-time **Trading API `Tokens`** streams for **Solana**: aggregated **market cap**, **FDV**, **supply**, **price**, and **volume**. Use **`solana:`** mint ids. More detail: **[Solana Token Market Cap API](/docs/blockchain/Solana/solana-token-marketcap-api)**.
+
+#### Solana token market cap stream (Trading API)
+
+Subscribe to **`Tokens`** rows for assets whose currency id includes **`solana`** (interval duration &gt; 1s).
+
+▶️ [Solana Token Market Cap Stream](https://ide.bitquery.io/solana-token-marketcap-stream)
+
+#### Solana tokens with market cap above $1 million (Trading API)
+
+Subscribe when **`Token.Id`** matches Solana and **`Supply.MarketCap`** &gt; 1,000,000 USD.
+
+▶️ [Solana Tokens With Market Cap Above $1M](https://ide.bitquery.io/realtime-stream-solana-tokens-with-marketcap-above-1-million)
+
 ### Pool/Liquidity APIs
 
 #### DEXPool Liquidity Changes
@@ -525,6 +541,22 @@ This stream provides the info on rewards received by validators on BSC in real t
 This stream monitors MEV activities and Balance Updates on BSC in real time.
 
 ▶️ [Real Time MEV Activities on BSC](https://ide.bitquery.io/Track-MEV-Related-Balance-Updates-bsc)
+
+### MarketCap Streams
+
+Real-time **Trading API `Tokens`** streams for **BNB Smart Chain (BSC)**. Use **lowercase** addresses in **`bsc:`** ids. More detail: **[BSC Token Market Cap API](/docs/blockchain/BSC/bsc-token-marketcap-api)**.
+
+#### BSC token market cap stream (Trading API)
+
+Subscribe to **`Tokens`** rows for assets whose currency id includes **`bsc`** (interval duration &gt; 1s).
+
+▶️ [BSC Token Market Cap Stream](https://ide.bitquery.io/bsc-token-marketcap-stream#)
+
+#### BSC tokens with market cap above $1 million (Trading API)
+
+Subscribe when **`Token.Id`** matches BSC and **`Supply.MarketCap`** &gt; 1,000,000 USD.
+
+▶️ [BSC Tokens With Market Cap Above $1M](https://ide.bitquery.io/realtime-stream-bsc-tokens-with-marketcap-above-1-million_1)
 
 ### Trades
 

@@ -1,12 +1,53 @@
-# GMGN EVM API
+---
+title: "GMGN API for Ethereum & EVM | Trending Pairs, Token Stats, DEX Trades"
+description: "Build GMGN-style dashboards on Ethereum and EVM chains: trending DEX pairs, live pair trades, token price, buy/sell volume, makers, OHLC, pool liquidity, top traders, and new Uniswap v3 pools via Bitquery GraphQL and WebSocket."
+keywords:
+  - GMGN API
+  - GMGN.ai API alternative
+  - Ethereum DEX screener API
+  - trending trading pairs API
+  - DEX token stats API
+  - buy volume sell volume API
+  - crypto makers buyers sellers API
+  - EVM DEXTradeByTokens
+  - real-time DEX trades subscription
+  - token OHLC API Ethereum
+  - DEX pool liquidity API
+  - top traders by token API
+  - Uniswap v3 new pools stream
+  - Bitquery GraphQL DEX API
+---
 
-This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair and many more just like how GMGN shows for EVM Chains.
+# GMGN API for Ethereum & EVM chains
+
+Use Bitquery’s **GraphQL** and **subscription** APIs to reproduce **GMGN**-style data on **Ethereum** and other **EVM** networks: **trending / top trading pairs**, **live trades per pair**, **token price in USD**, **buy and sell volume**, **makers**, **buyers and sellers**, **OHLC** for charts, **pool liquidity** by pair address, **top traders** for a token, and **new Uniswap v3 pools**. Examples below use `EVM(network: eth, …)`; change `network` for **Base**, **BSC**, **Arbitrum**, etc.
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 
+<head>
+<meta name="title" content="GMGN API for Ethereum & EVM | DEX Screener Data via Bitquery"/>
+<meta name="description" content="GMGN-style Ethereum & EVM data: trending pairs, live trades, token stats, OHLC, liquidity, top traders, Uniswap pool creation streams. GraphQL + WebSocket."/>
+<meta name="keywords" content="GMGN API, GMGN data API, Ethereum DEX API, trending pairs API, DEX screener API, buy sell volume, makers, OHLC, pool liquidity, top traders, Uniswap v3, Bitquery GraphQL, WebSocket crypto trades"/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="GMGN API for Ethereum & EVM | Bitquery"/>
+<meta property="og:description" content="Trending pairs, live DEX trades, token metrics, OHLC, liquidity, and top traders—like GMGN—for Ethereum and EVM chains."/>
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="GMGN API for Ethereum & EVM | Bitquery"/>
+<meta property="twitter:description" content="Trending pairs, live DEX trades, token metrics, OHLC, liquidity, and top traders for EVM chains."/>
+</head>
+
+## Related APIs
+
+- **[GMGN Solana API](/docs/blockchain/Solana/solana-gmgn-api)** — Same style of trending tokens, pair stats, and live trades on **Solana** (`DEXTradeByTokens`).
+- **[DEX API (EVM)](/docs/blockchain/Ethereum/dextrades/dex-api)** — **`DEXTrades`**: swaps with explicit buy/sell side, filters by pair, token, DEX, and trader.
+- **[Token trades APIs](/docs/blockchain/Ethereum/dextrades/token-trades-apis)** — Trade history and analytics centered on a **token** across pools (complements pair-level GMGN patterns).
+- **[Ethereum liquidity API](/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api)** — Pool **liquidity** adds/removes and depth-style metrics for Uniswap-style pools.
+- **[EVM DEXScreener API](/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener)** — **DEXScreener**-style pair and market views on **Ethereum** / EVM.
+
 ## Get the Top Trading Pairs
 
-The query will fetch you the Top Trading Pairs in desceneding order of the total number of trades took place in them just like how GMGN shows in its UI. You can check out the video tutorial [here](https://www.youtube.com/watch?v=qAJ2SPFaO-k) to understand the query better.
+The query returns **top / trending trading pairs** by **trade count** (GMGN-style pair ranking). You can check out the video tutorial [here](https://www.youtube.com/watch?v=qAJ2SPFaO-k) to understand the query better.
 
 You can find the query [here](https://ide.bitquery.io/List-of-trading-pairs-in-descending-order-of-trxns-in-last-24-hours)
 
@@ -376,6 +417,165 @@ subscription {
         }
         Name
       }
+    }
+  }
+}
+```
+
+## Get DEX activity across Ethereum
+
+Aggregate **`DEXTradeByTokens`** rows to see which **protocol families** have flow on the network: **buy/sell counts**, **unique buyers and sellers**. Swap **`network`** for **Base**, **BSC**, etc.
+
+You can find the query [here](https://ide.bitquery.io/dex-markets).
+
+```graphql
+query DexMarkets($network: evm_network) {
+  EVM(network: $network) {
+    DEXTradeByTokens {
+      Trade {
+        Dex {
+          ProtocolFamily
+        }
+      }
+      buyers: uniq(of: Trade_Buyer)
+      sellers: uniq(of: Trade_Sender)
+      count(if: { Trade: { Side: { Type: { is: buy } } } })
+    }
+  }
+}
+```
+
+```json
+{
+  "network": "eth"
+}
+```
+
+## Get trading pairs on a specific DEX
+
+Lists **pairs** on one **DEX** (e.g. **Uniswap**) with **USD volume**, **trade count**, and **price** snapshots over **10m / 1h / 3h** windows—useful for a **pair browser** like terminal UIs.
+
+You can find the query [here](https://ide.bitquery.io/trading-pairs-on-a-specific-dex).
+
+```graphql
+query DexMarkets($network: evm_network, $market: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "usd" }
+      where: { Trade: { Dex: { ProtocolFamily: { is: $market } } }, Block: { Time: { after: $time_3h_ago } } }
+      limit: { count: 200 }
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+          Fungible
+        }
+        Side {
+          Currency {
+            Symbol
+            Name
+            SmartContract
+          }
+        }
+        price_usd: PriceInUSD(maximum: Block_Number)
+        price_last: Price(maximum: Block_Number)
+        price_10min_ago: Price(maximum: Block_Number, if: { Block: { Time: { before: $time_10min_ago } } })
+        price_1h_ago: Price(maximum: Block_Number, if: { Block: { Time: { before: $time_1h_ago } } })
+        price_3h_ago: PriceInUSD(minimum: Block_Number)
+      }
+      usd: sum(of: Trade_AmountInUSD)
+      count
+    }
+  }
+}
+```
+
+```json
+{
+  "market": "Uniswap",
+  "network": "eth",
+  "time_10min_ago": "2024-09-22T13:21:39Z",
+  "time_1h_ago": "2024-09-22T12:31:39Z",
+  "time_3h_ago": "2024-09-22T10:31:39Z"
+}
+```
+
+## Get latest trades on a specific DEX
+
+Returns the **most recent swaps** on a **protocol family** (**Uniswap**, **SushiSwap**, etc.) with **amounts**, **USD**, **side**, and **tx hash**.
+
+You can find the query [here](https://ide.bitquery.io/latest-trades_5).
+
+```graphql
+query LatestTrades($network: evm_network, $market: String) {
+  EVM(network: $network) {
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limit: { count: 50 }
+      where: { Trade: { Dex: { ProtocolFamily: { is: $market } } } }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Dex {
+          OwnerAddress
+          ProtocolFamily
+          ProtocolName
+        }
+        AmountInUSD
+        Price
+        Amount
+        Side {
+          Type
+          Currency {
+            Symbol
+            SmartContract
+            Name
+          }
+          AmountInUSD
+          Amount
+        }
+        Currency {
+          Symbol
+          SmartContract
+          Name
+        }
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "market": "Uniswap",
+  "network": "eth"
+}
+```
+
+## Get ERC-20 balances for a wallet
+
+**`BalanceUpdates`** summed per **currency** for one **address**—a **portfolio**-style view of **tokens held** (positive balances only in the aggregate).
+
+You can find the query [here](https://ide.bitquery.io/balance-of-a-wallet_1).
+
+```graphql
+query MyQuery {
+  EVM(dataset: archive, network: eth) {
+    BalanceUpdates(
+      where: { BalanceUpdate: { Address: { is: "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6" } } }
+      orderBy: { descendingByField: "balance" }
+    ) {
+      Currency {
+        Name
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
     }
   }
 }

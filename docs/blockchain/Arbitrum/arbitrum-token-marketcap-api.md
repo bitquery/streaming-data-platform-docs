@@ -30,8 +30,10 @@ On **Arbitrum** (EVM), the **Trading** API expects **lowercase** hex in **`Id`**
 ## Related APIs
 
 - **[Ethereum Token Market Cap API](/docs/blockchain/Ethereum/token-supply/ethereum-token-marketcap-api)** — same patterns with **`eth:`** ids
+- **[BSC Token Market Cap API](/docs/blockchain/BSC/bsc-token-marketcap-api)** — same patterns with **`bsc:`** ids
 - **[Polygon (Matic) Token Market Cap API](/docs/blockchain/Matic/matic-token-marketcap-api)** — same patterns with **`matic:`** ids
 - **[Base Token Market Cap API](/docs/blockchain/Base/base-token-marketcap-api)** — same patterns with **`base:`** ids
+- **[Solana Token Market Cap API](/docs/blockchain/Solana/solana-token-marketcap-api)** — same patterns with **`solana:`** ids
 - **[Crypto Price API — Tokens](/docs/trading/crypto-price-api/tokens)** — full `Tokens` cube reference
 
 ---
