@@ -30,7 +30,7 @@ For example, If you are on the team plan, which allows 3 million points, however
 
 ## Will response times improve if I upgrade to a paid plan? {#will-response-times-improve-if-i-upgrade-to-a-paid-plan}
 
-Paid plans mainly increase **allowances** (points, streaming capacity, and commercial terms). If you want to improve response times, you should [optimize your queries](/docs/graphql/performance-tuning/). Even if it doesn't help, please ask for help from the team on [Telegram](https://t.me/bloxy_info)
+Paid plans mainly increase **allowances** (points, streaming capacity, and commercial terms). If you want to improve response times, you should [optimize your queries](/docs/graphql/optimizing-graphql-queries). Even if it doesn't help, please ask for help from the team on [Telegram](https://t.me/bloxy_info)
 
 
 ## When do API credits (points) reset — monthly or rolling? {#when-do-api-credits-points-reset-monthly-or-rolling}
