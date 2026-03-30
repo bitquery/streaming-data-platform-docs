@@ -142,7 +142,7 @@ query LatestFifaMarketsCreated {
 }
 ```
 
-## Top Cricket Markets by Volume
+## Top FIFA World Cup Markets by Volume
 Markets resolved via **FIFA** (`ResolutionSource` includes `fifa.com`). Returns the top 100 cricket related polymarkets sorted by trading volume in the past 24 hours.
 
 [Run in Bitquery IDE](https://ide.bitquery.io/top-FIFA-World-Cup-markets-by-volume)
