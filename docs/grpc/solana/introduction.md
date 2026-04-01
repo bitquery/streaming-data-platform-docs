@@ -91,4 +91,4 @@ CoreCast uses the same **V2 API tokens** as the GraphQL IDE ([create a token](ht
 
 ## Does Bitquery support gRPC for chains other than Solana? {#does-bitquery-support-grpc-for-chains-other-than-solana}
 
-Currently, Bitquery offers gRPC streaming only for Solana. However, our platform is designed with the capability to enable gRPC for additional blockchains upon request. If you have specific requirements for gRPC on chains other than Solana, please contact the Bitquery sales team (sales@bitquery.io) to discuss potential solutions.
+At present, Bitquery provides gRPC streaming exclusively for Solana. However, the platform is architected to support gRPC on other blockchains as well. If you require gRPC streaming for a blockchain outside of Solana, please reach out to the Bitquery sales team at sales@bitquery.io to explore custom solutions.
