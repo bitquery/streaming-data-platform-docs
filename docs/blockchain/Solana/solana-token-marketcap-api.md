@@ -2,6 +2,8 @@
 sidebar_position: 3
 ---
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Solana Token Market Cap API
 
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens on **Solana**. Filter with **`solana:`** plus the token **mint** in **`Token.Id`** / **`Currency.Id`**; ranked queries below use **`Token.Network`** **`Solana`**.
@@ -291,3 +293,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/top-solana-
   }
 }
 ```
+
+## Video tutorial
+
+<VideoPlayer url="https://youtu.be/AVmscLyye4c" />
