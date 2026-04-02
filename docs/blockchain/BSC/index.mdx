@@ -22,10 +22,6 @@ In this section we will see how to fetch data on different tokens, transactions,
 
 If you need help getting data on Binance Smart Chain,reach out to [support](https://t.me/Bloxy_info)
 
-## Can I monitor BSC pending transactions using Bitquery? {#can-i-monitor-bsc-pending-transactions-using-bitquery}
-
-**Yes.** Use **GraphQL subscriptions** with **`EVM(network: bsc, mempool: true)`** on the shapes documented for mempool (see [mempool subscriptions](/docs/subscriptions/mempool-subscriptions/) and the [Ethereum mempool API](/docs/blockchain/Ethereum/mempool/mempool-api/)—the same patterns apply to **BSC**). For **lower-latency** broadcast data, use **Kafka** streams as described on the **[BSC mempool stream](/docs/blockchain/BSC/bsc-mempool-stream/)** page. You need a valid **V2 OAuth token** for requests outside the IDE ([authorisation](/docs/authorisation/how-to-generate/)).
-
 #### What is BSC API?
 
 Bitquery BSC APIs help you fetch onchain data like trades, transactions, balances, liquidity pools, and slippage data by writing a graphQL query.
@@ -47,6 +43,11 @@ Read more about Kafka streams [here](https://docs.bitquery.io/docs/streams/proto
 ### Does Bitquery support BSC Websocket and BSC Webhooks?
 
 Bitquery supports websocket and webhooks, you can convert most of the graphQL APIs into graphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More [code samples available here](https://docs.bitquery.io/docs/subscriptions/websockets/)
+
+## Can I monitor BSC pending transactions using Bitquery? {#can-i-monitor-bsc-pending-transactions-using-bitquery}
+
+**Yes.** Use **GraphQL subscriptions** with **`EVM(network: bsc, mempool: true)`** on the shapes documented for mempool (see [mempool subscriptions](/docs/subscriptions/mempool-subscriptions/) and the [Ethereum mempool API](/docs/blockchain/Ethereum/mempool/mempool-api/)—the same patterns apply to **BSC**). For **lower-latency** broadcast data, use **Kafka** streams as described on the **[BSC mempool stream](/docs/blockchain/BSC/bsc-mempool-stream/)** page. You need a valid **V2 OAuth token** for requests outside the IDE ([authorisation](/docs/authorisation/how-to-generate/)).
+
 
 ## BSC DEX APIs
 

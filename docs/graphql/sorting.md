@@ -8,14 +8,6 @@ Ordering can be applied to the results of the query, sorting the results in a wa
 
 Use attribute `orderBy` to define the ascending / descending way the results to be sorted.
 
-## How do I get the most recent entry only from a Bitquery query?
-
-Use **`orderBy`** so the newest row sorts first—usually **`descending: Block_Time`** (or **`Block_Slot`** / **`Block_Number`** on that cube)—then **`limit: { count: 1 }`**. With **metrics**, sort via **`descendingByField`** on the alias. Always align the sort field with the cube you query; otherwise “latest” is undefined.
-
-## What does the desc option do in a Bitquery query?
-
-**API V2** uses **`orderBy: { descending: … }`** or **`ascending`**, not a standalone **`desc`** option on the root query. **API V1** examples often used **`options: { desc: [ ... ], limit, offset }`**. For migration and side‑by‑side examples, see [Migrate Bitquery API V1 to V2](https://docs.bitquery.io/docs/API-Blog/migrate-v1-v2/).
-
 ```
     Transactions(
       orderBy: {
@@ -134,3 +126,38 @@ You must write the name of the **metric** (`count`) or **alias** of the metric (
   }
 }
 ```
+## How do I get the most recent entry only from a Bitquery query?
+
+To fetch only the most recent entry (such as the latest trade, event, or transaction), use the `orderBy` argument to sort results by `Block_Time` in descending order (`{descending: Block_Time}`). To guarantee correct chronological ordering and resolve ties between events occurring in the same block, add secondary sort fields such as `Transaction_Index` or even lower levels like `Instruction_Index` and `Trade_Index` if available. This approach ensures your query will always return the latest entry—even in high-throughput chains or when multiple events share the same block time.
+
+Recommended ordering for the latest record:
+- First, sort by `Block_Time`—`{descending: Block_Time}`—to prioritize the newest blocks first.
+- Next, add `Transaction_Index`—`{descending: Transaction_Index}`—for precise ordering within a block.
+- Then, add `Instruction_Index` and/or `Trade_Index`—`{descending: Instruction_Index}`, `{descending: Trade_Index}`—to resolve ordering among instructions or trades that occur within the same transaction.
+
+This multi-level ordering creates a stable, deterministic way to get the most recent record, or to paginate results with full reliability.
+
+**Example: Get the latest trade on Solana (DEXTradeByTokens cube)**
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      orderBy: [
+        {descending: Block_Time},
+        {descending: Transaction_Index},
+        {descending: Instruction_Index},
+        {descending: Trade_Index}
+      ]
+      limit: {count: 1}
+    ) {
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+In this example, the query returns exactly one result (the most recent trade), sorted by block time, transaction index, instruction index, and trade index—all in descending order to ensure true "latest" ordering.
+## What does the desc option do in a Bitquery query?
+
+**API V2** uses **`orderBy: { descending: … }`** or **`ascending`**, not a standalone **`desc`** option on the root query. **API V1** examples often used **`options: { desc: [ ... ], limit, offset }`**. For migration and side‑by‑side examples, see [Migrate Bitquery API V1 to V2](https://docs.bitquery.io/docs/API-Blog/migrate-v1-v2/).
