@@ -840,6 +840,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
+          showLastUpdateTime: true,
           editUrl:
             "https://github.com/bitquery/streaming-data-platform-docs/tree/main",
         },
