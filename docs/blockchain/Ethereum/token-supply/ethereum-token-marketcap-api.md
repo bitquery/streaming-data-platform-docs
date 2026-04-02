@@ -2,6 +2,8 @@
 sidebar_position: 2
 ---
 
+import VideoPlayer from "../../../../src/components/videoplayer.js";
+
 # Ethereum Token Market Cap API
 
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens traded on **Ethereum**. Rows are tied to a time **interval**; filter Ethereum assets via token/currency **`Id`** (for example `eth:` plus the contract address).
@@ -287,3 +289,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/top-Eth-tok
   }
 }
 ```
+
+## Video tutorial
+
+<VideoPlayer url="https://youtu.be/XHX3i9-9yjI" />
