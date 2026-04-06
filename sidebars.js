@@ -779,6 +779,7 @@ const sidebars = {
                 "trading/crypto-price-api/tokens",
                 "trading/crypto-price-api/currency",
                 "trading/crypto-price-api/pairs",
+                "trading/crypto-price-api/trades-api",
               ],
             },
             // "trading/price-index/tokens",
