@@ -545,6 +545,10 @@ const config = {
             from: "/docs/trading/crypto-price-api/crypto-market-data-api",
             to: "/docs/trading/crypto-price-api/crypto-marketcap-api",
           },
+          {
+            from: "/docs/trading/crypto-price-api/trades-api",
+            to: "/docs/trading/crypto-trades-api/trades-api",
+          },
 
           // BSC redirects from old examples/BSC/ path to new blockchain/BSC/ path
           {

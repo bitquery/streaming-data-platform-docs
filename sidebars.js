@@ -779,7 +779,6 @@ const sidebars = {
                 "trading/crypto-price-api/tokens",
                 "trading/crypto-price-api/currency",
                 "trading/crypto-price-api/pairs",
-                "trading/crypto-price-api/trades-api",
               ],
             },
             // "trading/price-index/tokens",
@@ -792,6 +791,20 @@ const sidebars = {
             "trading/crypto-price-api/crypto-marketcap-api",
             "trading/crypto-price-api/crypto-ohlc-candle-k-line-api",
             "trading/crypto-price-api/limit-order-price-api",
+          ],
+        },
+        {
+          type: "category",
+          label: "Crypto Trades API",
+          link: {
+            type: "generated-index",
+            title: "Crypto Trades API",
+            description:
+              "Stream individual swap-level trade rows with price, supply, and market cap data.",
+          },
+          items: [
+            "trading/crypto-trades-api/trades-api",
+            "trading/crypto-trades-api/traders-api",
           ],
         },
       ],
