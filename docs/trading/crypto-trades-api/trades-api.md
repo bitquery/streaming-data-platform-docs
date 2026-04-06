@@ -16,7 +16,7 @@ keywords:
 
 # Crypto Trades API — Real-Time DEX Trade Streams
 
-> **Bitquery Crypto Trades API** streams **individual swap-level DEX trades** in **real time** across **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, and **Polygon** — each row includes **price**, **USD amounts**, **market cap**, **FDV**, **supply**, **trader address**, and **transaction metadata** via **GraphQL subscriptions**.
+> **Bitquery Crypto Trades API** streams **individual swap-level DEX trades** in **real time** across **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, and **Polygon**. Each row includes **price**, **USD amounts**, **market cap**, **FDV**, **supply**, **trader address**, and **transaction metadata** via **GraphQL subscriptions**.
 
 The **Trades** cube streams individual **swap-level** rows from the **Trading** API: each event includes **side**, **amounts** (base, quote, USD), **price**, **pair** (market, tokens, currencies), **trader**, **transaction** metadata, and a **supply** snapshot (**MarketCap**, **FDV**, circulating/total/max supply) for the token context on that row.
 
@@ -32,9 +32,8 @@ For **aggregated** token metrics across all pairs, use the **[Tokens cube](/docs
 
 More patterns: **[Crypto Price API examples](/docs/trading/crypto-price-api/examples)**.
 
----
 
-## How do I stream new DEX trades across all chains in real time?
+## How Do I Stream New DEX Trades Across All Chains in Real Time?
 
 > *Real-time* **multi-chain DEX trade stream** — subscribe to every new swap on **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, and **Polygon** in a single **GraphQL subscription**. Each event returns **price**, **USD amounts**, **market cap**, **supply**, **trader wallet**, and **transaction hash** the moment a trade is confirmed on-chain.
 
@@ -118,7 +117,7 @@ subscription {
 
 ---
 
-## How do I get all DEX trades on Solana with price, market cap, and supply?
+## How Do I Get All DEX Trades on Solana With Price, Market Cap, and Supply?
 
 > Stream **all Solana DEX trades** in real time with **USD price**, **market cap**, **FDV**, **circulating supply**, and **transaction fee** data. Filter by **`Pair.Market.Network: Solana`** to capture every swap across **Raydium**, **Orca**, **Jupiter**, **PumpSwap**, and other Solana DEXs in a single subscription.
 
@@ -202,9 +201,9 @@ subscription {
 
 ---
 
-## How do I stream trades for a specific token on Solana?
+## How Do I Stream Trades for a Specific Token on Solana?
 
-> Filter the **Solana trade stream** to a **single token** by its **mint address** using **`Pair.Token.Id`** — get real-time **swap events**, **USD price**, **market cap**, **supply**, and **trader wallet** for any **SPL token** traded on Raydium, Orca, Jupiter, Pump.fun, or PumpSwap.
+> Filter the **Solana trade stream** to a **single token** by its **mint address** using **`Pair.Token.Id`** — get real-time **swap events**, **USD price**, **market cap**, **supply**, and **trader wallet** for any **SPL token** traded on Raydium, Orca, Jupiter, pumpfun, or PumpSwap.
 
 You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Trades-of-a-specific-token-on-Solana).
 
@@ -295,7 +294,7 @@ subscription {
 
 ---
 
-## How do I get all trades for a specific Ethereum token with price, market cap, and supply?
+## How Do I Get All Trades for a Specific Ethereum Token With Price, Market Cap, and Supply?
 
 > Stream **Ethereum ERC-20 token trades** in real time — filter by **contract address** with **`Pair.Token.Id: bid:eth:0x…`** to get every **Uniswap**, **SushiSwap**, or other DEX swap including **USD price**, **market cap**, **FDV**, **supply**, **trader address**, and **transaction hash**.
 
@@ -388,7 +387,7 @@ subscription {
 
 ---
 
-## How do I stream all DEX trades on BSC (BNB Chain)?
+## How Do I Stream All DEX Trades on BSC (BNB Chain)?
 
 > Stream **every DEX swap on BNB Smart Chain** in real time — filter by **`Pair.Market.Network: Binance Smart Chain`** to capture trades across **PancakeSwap**, **Four.meme**, and other BSC DEXs. Each event returns **side**, **USD amounts**, **market cap**, **circulating supply**, **trader address**, and **pair metadata**.
 
@@ -470,7 +469,7 @@ subscription {
 
 ---
 
-## How do I stream all DEX trades on Base?
+## How Do I Stream All DEX Trades on Base?
 
 > Stream **every DEX swap on Base** in real time — filter by **`Pair.Market.Network: Base`** to capture trades across **Aerodrome**, **Uniswap**, **BaseSwap**, and other Base DEXs. Each event returns **side**, **USD amounts**, **market cap**, **circulating supply**, **trader wallet**, and **pair metadata**.
 
@@ -552,7 +551,7 @@ subscription {
 
 ---
 
-## How do I get all trades for a specific wallet on Solana?
+## How Do I Get All Trades for a Specific Wallet on Solana?
 
 > Track a **Solana wallet's DEX trading activity** in real time — filter by **`Trader.Address`** to stream every **buy and sell** swap executed by a specific wallet, including **token pair**, **USD price**, **amounts**, **market cap**, and **transaction details**. Useful for **copy trading bots**, **whale watching**, and **wallet PnL tracking**.
 
@@ -641,7 +640,7 @@ subscription {
 
 ---
 
-## How do I get trades for a specific trader on a specific token?
+## How Do I Get Trades for a Specific Trader on a Specific Token?
 
 > Combine **wallet address** and **token mint** filters to stream only the trades a **specific trader** made on a **specific token** — ideal for **position tracking**, **entry/exit analysis**, and **wallet-level PnL** on a per-token basis across **Solana**, **Ethereum**, or any supported chain.
 
@@ -735,9 +734,9 @@ subscription {
 
 ---
 
-## How do I stream all Pump.fun trades?
+## How Do I Stream All PumpFun Trades?
 
-> Stream **every Pump.fun trade** in real time by filtering on the **Pump.fun program address** (`6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`). Captures all bonding-curve swaps on Pump.fun including **token pair**, **USD amounts**, **market cap**, **circulating supply**, and **trader wallet** — useful for **new token sniping**, **bonding-curve monitoring**, and **Pump.fun analytics dashboards**.
+> Stream **every pumpfun trade** in real time by filtering on the **pumpfun program address** (`6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`). Captures all bonding-curve swaps on pumpfun including **token pair**, **USD amounts**, **market cap**, **circulating supply**, and **trader wallet** — useful for **new token sniping**, **bonding-curve monitoring**, and **pumpfun analytics dashboards**.
 
 You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/All-pumpfun-Trade-Stream_2).
 
@@ -819,9 +818,9 @@ subscription {
 
 ---
 
-## How do I stream all PumpSwap trades?
+## How Do I Stream All PumpSwap Trades?
 
-> Stream **every PumpSwap trade** in real time by filtering on the **PumpSwap program address** (`pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA`). Captures all AMM swaps on PumpSwap — the successor DEX for tokens that graduated from the Pump.fun bonding curve — including **token pair**, **USD amounts**, **market cap**, **supply**, and **trader wallet**.
+> Stream **every PumpSwap trade** in real time by filtering on the **PumpSwap program address** (`pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA`). Captures all AMM swaps on PumpSwap — the successor DEX for tokens that graduated from the pumpfun bonding curve — including **token pair**, **USD amounts**, **market cap**, **supply**, and **trader wallet**.
 
 You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/All-Pumpswap-Trade-Stream).
 
@@ -903,7 +902,7 @@ subscription {
 
 ---
 
-## How do I get only buy or sell trades for a token?
+## How Do I Get Only Buy or Sell Trades for a Token?
 
 > Stream **buy-side or sell-side trades** for a specific token by filtering on **`Pair.Token.Address`**. The **`Side`** field on each event tells you whether the trade was a **buy** or **sell** — use it client-side to split streams, calculate **buy/sell ratio**, track **buy pressure**, or trigger **sell alerts** for any token across supported chains.
 
@@ -976,7 +975,7 @@ subscription {
 
 ---
 
-## How do I get recent trades for WSOL (last 10 minutes)?
+## How Do I Get Recent Trades for WSOL (Last 10 Minutes)?
 
 > Query the **last 10 minutes of WSOL trades** using **`Block.Time.since_relative`** with **`Pair.Token.Id`** (indexed field for faster lookups). Returns trades sorted by **most recent first** with **USD amounts**, **market cap**, **supply**, **pool address**, and **trader wallet** — ideal for building **live trade feeds**, **recent activity widgets**, or **short-window analytics**.
 
@@ -1052,7 +1051,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Last-10-min
 
 ---
 
-## How do I stream trades for a specific trading pair?
+## How Do I Stream Trades for a Specific Trading Pair?
 
 > Stream **trades for a specific token pair** (e.g. **WSOL/USDC**) by filtering both **`Pair.Token.Id`** and **`Pair.QuoteToken.Id`**. This captures every swap between the two tokens **across all pools and DEXs** — useful for **pair-level price feeds**, **liquidity monitoring**, and **arbitrage detection** between Raydium, Orca, Jupiter, and other venues.
 
@@ -1125,7 +1124,7 @@ subscription {
 
 ---
 
-## How do I get the last 10 trades for a token pair across all pools?
+## How Do I Get the Last 10 Trades for a Token Pair Across All Pools?
 
 > Query the **last 10 trades** for a specific pair (e.g. **WSOL/USDC**) across **every pool and DEX** using **`limit`**, **`orderBy: descending Block_Time`**, and a **`since_relative`** time window. Returns the most recent swaps with **pool address**, **USD amounts**, **market cap**, **trader wallet**, and **side** — ideal for **recent trades widgets**, **pair activity tables**, and **cross-pool comparison**.
 
@@ -1202,7 +1201,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Last-10-WSO
 
 ---
 
-## How do I get trades above a minimum USD value (whale trades)?
+## How Do I Get Trades Above a Minimum USD Value (Whale Trades)?
 
 > Stream **whale trades** across all chains by filtering **`AmountsInUsd.Base`** with **`gt`** (greater than) — for example, only swaps worth **over $100,000 USD**. Captures large-size DEX trades in real time with **trader wallet**, **token pair**, **pool**, **market cap**, and **supply** — ideal for **whale alert bots**, **smart money tracking**, **large-order flow analysis**, and **institutional activity monitoring**.
 
@@ -1273,7 +1272,7 @@ subscription {
 
 ---
 
-## How do I track trades for multiple tokens in one subscription?
+## How Do I Track Trades for Multiple Tokens in One Subscription?
 
 > Monitor **multiple tokens in a single subscription** using the **`in`** operator on **`Pair.Token.Id`** and **`Pair.QuoteToken.Id`** with the **`any`** combinator — or filter by **multiple pool addresses** with **`Pair.Pool.Address.in`**. Both approaches let you batch-watch a **token watchlist** or a **set of liquidity pools** without opening separate streams — ideal for **portfolio dashboards**, **multi-token alert bots**, and **pool-level monitoring**.
 
@@ -1422,7 +1421,7 @@ subscription {
 
 ---
 
-## What are the most traded tokens on Solana in the last hour?
+## What Are the Most Traded Tokens on Solana in the Last Hour?
 
 > Get the **most traded tokens on Solana** in the last hour ranked by **trade count** — returns **number of trades**, **average trade size in USD**, and **total volume** per token pair. Useful for **trending token feeds**, **volume dashboards**, **hot token detection**, and identifying which tokens have the highest trading activity right now.
 

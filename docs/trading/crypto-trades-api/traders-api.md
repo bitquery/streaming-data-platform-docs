@@ -20,23 +20,22 @@ keywords:
   - crypto wallet activity feed
 ---
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
-
 # Traders API — Real-Time Wallet Trade Streams
 
-> **Bitquery Traders API** lets you **stream wallet trades in real time** across **Solana**, **Ethereum**, **BSC**, **Base**, and **Arbitrum** — track a **single wallet** or **multiple addresses**, detect **whale trades** above a USD threshold, filter by **token**, **pair**, **DEX program**, or **chain**, rank **top traders by volume** or **PnL**, and aggregate **buy/sell USD** with **`sum`**, **`calculate`**, **`limitBy`**, and **`orderBy`** using **GraphQL subscriptions** and **queries**.
+> **Bitquery Traders API** lets you **stream wallet trades in real time** across **Solana**, **Ethereum**, **BSC**, **Base**, and **Arbitrum** . You can track a **single wallet** or **multiple addresses**, detect **whale trades** above a USD threshold, filter by **token**, **pair**, **DEX program**, or **chain**, rank **top traders by volume** or **PnL**, and aggregate **buy/sell USD** with **`sum`**, **`calculate`**, **`limitBy`**, and **`orderBy`** using **GraphQL subscriptions** and **queries**.
 
 This page focuses on **trader/wallet-centric** queries using the unified **Trading** schema. For trade-level streaming (by token, pair, chain, or DEX), see the **[Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)**.
 
----
 
-## Video tutorial
+## Video Tutorial
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://youtu.be/-Jwh2I46XIw" />
 
 ---
 
-## How do I stream all trades for a specific wallet?
+## How Do I Stream All Trades for a Specific Wallet?
 
 > Subscribe to **every DEX trade** a wallet executes in **real time** across all supported chains — captures **buys and sells** across all tokens and DEXs, returning **token pair**, **USD amounts**, **market cap**, **supply**, **pool**, and **transaction metadata**. Useful for **copy trading bots**, **whale watching**, and **wallet activity feeds**.
 
@@ -110,7 +109,7 @@ subscription {
 
 ---
 
-## How do I track a wallet's trades on a specific token?
+## How Do I Track a Wallet's Trades on a Specific Token?
 
 > Filter a wallet's trade stream to a **single token** — combines **`Trader.Address`** with **`any`** on **`Pair.Token.Id`** and **`Pair.QuoteToken.Id`** so the token is matched whether it appears on the base or quote side of the pair. Returns **side**, **USD amounts**, **market cap**, **supply**, and **pool** for every trade — useful for **position tracking**, **entry/exit analysis**, and **per-token wallet stats**.
 
@@ -186,7 +185,7 @@ subscription {
 
 ---
 
-## How do I monitor multiple wallets in one subscription?
+## How Do I Monitor Multiple Wallets in One Subscription?
 
 > Watch **multiple wallets** in a **single real-time subscription** using the **`in`** operator on **`Trader.Address`** — captures every buy and sell across all tokens for your entire watchlist. Ideal for **copy trading dashboards**, **fund monitoring**, and **whale group tracking**.
 
@@ -264,7 +263,7 @@ subscription {
 
 ---
 
-## How do I stream a wallet's trades on a specific chain?
+## How Do I Stream a Wallet's Trades on a Specific Chain?
 
 > Filter a wallet's real-time trade stream to a **single chain** (e.g. Solana, Ethereum, BSC) by combining **`Trader.Address`** with **`Pair.Market.Network`**. Returns every swap the wallet executes on that chain with **side**, **USD amounts**, **market cap**, **pool**, and **transaction details**.
 
@@ -341,7 +340,7 @@ Change `Network` to `"Ethereum"`, `"Binance Smart Chain"`, `"Base"`, `"Arbitrum"
 
 ---
 
-## How do I detect whale traders in real time?
+## How Do I Detect Whale Traders in Real Time?
 
 > Stream **large trades** above a **USD threshold** across all chains — each event includes the **trader wallet address**, **token pair**, **USD amounts**, **market cap**, **pool**, and **transaction details**. Use for **whale alert bots**, **smart money feeds**, and **large-order flow monitoring**.
 
@@ -413,7 +412,7 @@ Adjust the `gt` threshold — e.g. `10000` for $10K+, `1000000` for $1M+ trades.
 
 ---
 
-## How do I stream whale trades for a specific wallet?
+## How Do I Stream Whale Trades for a Specific Wallet?
 
 > Combine **wallet address** and **USD amount threshold** to stream only **large trades** by a specific wallet — useful for tracking when a **known whale** or **smart money wallet** makes a significant move above your chosen USD value.
 
@@ -488,7 +487,7 @@ subscription {
 
 ---
 
-## How do I get recent trades for a wallet (last 10 minutes)?
+## How Do I Get Recent Trades for a Wallet (Last 10 Minutes)?
 
 > Query a wallet's **most recent trades** using **`Block.Time.since_relative`** — returns trades sorted by **most recent first** with **side**, **USD amounts**, **market cap**, **pool**, and **token pair**. Ideal for building **wallet activity feeds**, **recent trades tables**, and **portfolio dashboards**.
 
@@ -564,7 +563,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/How-do-I-ge
 
 ---
 
-## How do I monitor multiple wallets trading a specific token?
+## How Do I Monitor Multiple Wallets Trading a Specific Token?
 
 > Combine a **wallet watchlist** with a **token filter** using the **`any`** combinator on **`Pair.Token.Id`** and **`Pair.QuoteToken.Id`** — captures trades where any of the watched wallets swap the token on either side of the pair. Ideal for **tracking smart money positions on a token**, **coordinated trading detection**, and **group wallet analysis**.
 
@@ -636,7 +635,7 @@ subscription {
 
 ---
 
-## How do I stream a wallet's trades on a specific DEX?
+## How Do I Stream a Wallet's Trades on a Specific DEX?
 
 > Filter a wallet's trade stream to a **specific DEX program** (e.g. Raydium, PumpSwap, PancakeSwap) by combining **`Trader.Address`** with **`Pair.Market.Program`**. Useful for understanding **which DEXs a wallet prefers**, **protocol-level analytics**, and **DEX-specific copy trading**.
 
@@ -713,7 +712,7 @@ Change the `Program` address to target different DEXs — e.g. `6EF8rrecthR5Dkzo
 
 ---
 
-## How do I get a wallet's trades on a specific pair?
+## How Do I Get a Wallet's Trades on a Specific Pair?
 
 > Filter a wallet's trades to a **specific token pair** (e.g. WSOL/USDC) by combining **`Trader.Address`**, **`Pair.Token.Id`**, and **`Pair.QuoteToken.Id`** — captures every swap the wallet makes between those two tokens **across all pools and DEXs**. Useful for **pair-level position tracking** and **per-pair PnL**.
 
@@ -791,7 +790,7 @@ subscription {
 
 ---
 
-## Who are the top traders on Solana by trade count in the last hour?
+## Who Are the Top Traders on Solana by Trade Count in the Last Hour?
 
 > Rank the **most active traders on Solana** in the last hour by **number of trades** — returns **trade count**, **average trade size in USD**, and **total volume** per wallet address. Useful for identifying **high-frequency traders**, **bot wallets**, **market makers**, and the **most active participants** on-chain right now.
 
@@ -817,7 +816,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-trader-
 
 ---
 
-## How do I calculate a wallet's PnL for a specific token (last 30 minutes)?
+## How Do I Calculate a Wallet's PnL for a Specific Token (Last 30 Minutes)?
 
 > Aggregate **`Trades`** over **`Block.Time`** (last **30 minutes**) for one **`Pair.Token.Id`** and one **`Trader.Address`**. **`PnL`** is **`Amount_Sold − Amount_Bought`** on **`AmountsInUsd_Base`**; native sums use **`Amounts_Base`**. Useful for **short-window position PnL**, **per-wallet token performance**, and **trading dashboards**.
 
@@ -882,7 +881,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-PnL
 
 ---
 
-## How do I rank top traders by PnL for a specific pool (last 30 minutes)?
+## How Do I Rank Top Traders by PnL for a Specific Pool (Last 30 Minutes)?
 
 > Rank traders by **`PnL`** on one pool: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **pool-specific trader analytics**.
 
@@ -916,7 +915,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 
 ---
 
-## How do I rank top traders on Solana by PnL (last 30 minutes)?
+## How Do I Rank Top Traders on Solana by PnL (Last 30 Minutes)?
 
 > Across **Solana** pairs in the window, aggregate **one row per trader** with **`limitBy: {count: 1, by: Trader_Address}`**, then return the top **10** by **`PnL`**. Useful for **chain-wide PnL leaderboards** and **short-horizon trader rankings**.
 
