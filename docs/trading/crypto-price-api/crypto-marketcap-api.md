@@ -19,7 +19,6 @@ The **Crypto MarketCap API** is part of the Crypto Price APIs: you can **query**
 
 Those metrics are returned on the **`Supply`** object on **Currencies**, **Tokens**, and **Pairs** rows (`MarketCap`, `CirculatingSupply`, `TotalSupply`, and others). Field semantics are documented in the [Supply fields reference](/docs/trading/crypto-price-api/supply-fields). For intervals, cubes, and streaming setup, use the [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction).
 
-For a broader **cookbook** of OHLC streams, DEX trades, liquidity events, and cross-chain arbitrage examples, see **[Market data examples (multi-chain)](#where-can-i-find-multi-chain-ohlc-dex-and-arbitrage-examples)**.
 
 
 
