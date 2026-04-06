@@ -1,6 +1,6 @@
 ---
 title: "Traders API — Real-Time Wallet Trade Streams"
-description: "Stream real-time wallet trades with Bitquery Traders API. Track specific wallets, monitor multiple addresses, detect whale trades, filter by token/pair/DEX/chain, and rank top traders by volume across Solana, Ethereum & BSC via GraphQL."
+description: "Stream real-time wallet trades with Bitquery Traders API. Track specific wallets, monitor multiple addresses, detect whale trades, filter by token/pair/DEX/chain, rank top traders by volume or PnL, and aggregate wallet PnL across Solana, Ethereum & BSC via GraphQL."
 keywords:
   - traders API
   - wallet trade tracking API
@@ -15,12 +15,14 @@ keywords:
   - BSC top traders API
   - wallet DEX trade filter
   - top traders by trade count
+  - trader PnL GraphQL query
+  - top traders by PnL API
   - crypto wallet activity feed
 ---
 
 # Traders API — Real-Time Wallet Trade Streams
 
-> **Bitquery Traders API** lets you **stream wallet trades in real time** across **Solana**, **Ethereum**, **BSC**, **Base**, and **Arbitrum** — track a **single wallet** or **multiple addresses**, detect **whale trades** above a USD threshold, filter by **token**, **pair**, **DEX program**, or **chain**, and rank **top traders by volume** using **GraphQL subscriptions** and **queries**.
+> **Bitquery Traders API** lets you **stream wallet trades in real time** across **Solana**, **Ethereum**, **BSC**, **Base**, and **Arbitrum** — track a **single wallet** or **multiple addresses**, detect **whale trades** above a USD threshold, filter by **token**, **pair**, **DEX program**, or **chain**, rank **top traders by volume** or **PnL**, and aggregate **buy/sell USD** with **`sum`**, **`calculate`**, **`limitBy`**, and **`orderBy`** using **GraphQL subscriptions** and **queries**.
 
 This page focuses on **trader/wallet-centric** queries using the unified **Trading** schema. For trade-level streaming (by token, pair, chain, or DEX), see the **[Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)**.
 
@@ -800,6 +802,140 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-trader-
       Trader {
         Address
       }
+    }
+  }
+}
+```
+
+---
+
+## How do I calculate a wallet's PnL for a specific token (last 30 minutes)?
+
+> Aggregate **`Trades`** over **`Block.Time`** (last **30 minutes**) for one **`Pair.Token.Id`** and one **`Trader.Address`**. **`PnL`** is **`Amount_Sold − Amount_Bought`** on **`AmountsInUsd_Base`**; native sums use **`Amounts_Base`**. Useful for **short-window position PnL**, **per-wallet token performance**, and **trading dashboards**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-PnL-for-the-last-30mins-for-a-specific-token#).
+
+```graphql
+{
+  Trading {
+    Trades(
+      where: {
+        Block: {Time: {since_relative: {minutes_ago: 30}}}
+        Pair: {
+          Token: {
+            Id: {is: "bid:solana:8xs8TCoAMJ4zj5aeXmrDP2BechGrXLMzVyMVBxfCpump"}
+          }
+        }
+        Trader: {Address: {is: "QeHykJGZj6B2Syhi5a63t9oaLTwKXZqM4J5PjeZBWC2"}}
+      }
+    ) {
+      Trader {
+        Address
+      }
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: {Side: {is: "Buy"}})
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: {Side: {is: "Sell"}})
+      Amount_Bought_native: sum(of: Amounts_Base, if: {Side: {is: "Buy"}})
+      Amount_Sold_native: sum(of: Amounts_Base, if: {Side: {is: "Sell"}})
+      PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I rank top traders by PnL for a specific pool (last 30 minutes)?
+
+> Rank traders by **`PnL`** on one pool: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **pool-specific trader analytics**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-pair#).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 10}
+      orderBy: [{descendingByField: "PnL"}]
+      where: {
+        Block: {Time: {since_relative: {minutes_ago: 30}}}
+        Pair: {Market: {Address: {is: "2axyccPzS7Ei57c7ESEq7tBpo4HxtpfCR9gKxh5uNUpu"}}}
+      }
+    ) {
+      Trader {
+        Address
+      }
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: {Side: {is: "Buy"}})
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: {Side: {is: "Sell"}})
+      Amount_Bought_native: sum(of: Amounts_Base, if: {Side: {is: "Buy"}})
+      Amount_Sold_native: sum(of: Amounts_Base, if: {Side: {is: "Sell"}})
+      PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+    }
+  }
+}
+```
+
+---
+
+## How do I rank top traders on Solana by PnL (last 30 minutes)?
+
+> Across **Solana** pairs in the window, aggregate **one row per trader** with **`limitBy: {count: 1, by: Trader_Address}`**, then return the top **10** by **`PnL`**. Useful for **chain-wide PnL leaderboards** and **short-horizon trader rankings**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-on-Solana_2#).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 10}
+      limitBy: {count: 1, by: Trader_Address}
+      orderBy: [{descendingByField: "PnL"}]
+      where: {
+        Block: {Time: {since_relative: {minutes_ago: 30}}}
+        Pair: {Market: {Network: {is: "Solana"}}}
+      }
+    ) {
+      Trader {
+        Address
+      }
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: {Side: {is: "Buy"}})
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: {Side: {is: "Sell"}})
+      Amount_Bought_native: sum(of: Amounts_Base, if: {Side: {is: "Buy"}})
+      Amount_Sold_native: sum(of: Amounts_Base, if: {Side: {is: "Sell"}})
+      PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
     }
   }
 }
