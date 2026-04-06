@@ -20,11 +20,19 @@ keywords:
   - crypto wallet activity feed
 ---
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 # Traders API — Real-Time Wallet Trade Streams
 
 > **Bitquery Traders API** lets you **stream wallet trades in real time** across **Solana**, **Ethereum**, **BSC**, **Base**, and **Arbitrum** — track a **single wallet** or **multiple addresses**, detect **whale trades** above a USD threshold, filter by **token**, **pair**, **DEX program**, or **chain**, rank **top traders by volume** or **PnL**, and aggregate **buy/sell USD** with **`sum`**, **`calculate`**, **`limitBy`**, and **`orderBy`** using **GraphQL subscriptions** and **queries**.
 
 This page focuses on **trader/wallet-centric** queries using the unified **Trading** schema. For trade-level streaming (by token, pair, chain, or DEX), see the **[Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)**.
+
+---
+
+## Video tutorial
+
+<VideoPlayer url="https://youtu.be/-Jwh2I46XIw" />
 
 ---
 
