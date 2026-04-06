@@ -15,12 +15,9 @@ keywords:
 
 # Crypto MarketCap API and Market Data
 
-The **Crypto MarketCap API** is part of the Crypto Price APIs: you can **query** USD **market capitalization** and related **supply** fields, or **stream** them in **real time** for many chains using GraphQL **subscriptions** or the **`trading.prices`** Kafka topic described in the [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction). 
+The **Crypto MarketCap API** is part of the Crypto Price APIs: you can **query** USD **market capitalization** and related **supply** fields, or **stream** them in **real time** for many chains using GraphQL **subscriptions** or the **`trading.prices`** Kafka topic described in the [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction).
 
 Those metrics are returned on the **`Supply`** object on **Currencies**, **Tokens**, and **Pairs** rows (`MarketCap`, `CirculatingSupply`, `TotalSupply`, and others). Field semantics are documented in the [Supply fields reference](/docs/trading/crypto-price-api/supply-fields). For intervals, cubes, and streaming setup, use the [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction).
-
-
-
 
 ## How do I get the USD market cap of a single token? {#how-do-i-get-usd-market-cap-of-a-single-token}
 
@@ -32,10 +29,14 @@ Set token **address** and read **`Supply.MarketCap`** from the query below. See 
 {
   Trading {
     Tokens(
-      where: {Token: {Address: {is: "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn"}}, 
-        Interval: {Time: {Duration: {eq: 1}}}}
-      limit: {count: 1}
-      orderBy: {descending: Block_Time}
+      where: {
+        Token: {
+          Address: { is: "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn" }
+        }
+        Interval: { Time: { Duration: { eq: 1 } } }
+      }
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
     ) {
       Token {
         Address
@@ -86,8 +87,8 @@ Set token **address** and read **`Supply.MarketCap`** from the query below. See 
 ## How do I list top tokens by market cap on a blockchain? {#how-do-i-list-top-tokens-by-market-cap-on-a-blockchain}
 
 In this API, we fetch top tokens by MarketCap on Solana. Change Network fields to get top tokens for a different network or remove to get top tokens across all. We also add `Volume: {Usd: {gt: 1000}` filter to remove low-volume tokens.
- 
- See the [Supply fields reference](/docs/trading/crypto-price-api/supply-fields) for related supply fields. 
+
+See the [Supply fields reference](/docs/trading/crypto-price-api/supply-fields) for related supply fields.
 
 You can also stream this in real-time by adding the keyword "subscription" at the top.
 
@@ -97,10 +98,14 @@ You can also stream this in real-time by adding the keyword "subscription" at th
 {
   Trading {
     Tokens(
-      limit: {count: 50}
-      limitBy: {count: 1, by: Token_Id}
-      orderBy: {descending: Supply_MarketCap}
-      where: {Interval: {Time: {Duration: {eq: 1}}}, Volume: {Usd: {gt: 1000}}, Token: {Network: {is: "Solana"}}}
+      limit: { count: 50 }
+      limitBy: { count: 1, by: Token_Id }
+      orderBy: { descending: Supply_MarketCap }
+      where: {
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Volume: { Usd: { gt: 1000 } }
+        Token: { Network: { is: "Solana" } }
+      }
     ) {
       Currency {
         Id
@@ -130,7 +135,6 @@ You can also stream this in real-time by adding the keyword "subscription" at th
     }
   }
 }
-
 ```
 
 ## How do I query total supply and circulating supply for a cryptocurrency? {#how-do-i-query-total-supply-and-circulating-supply}
@@ -1349,25 +1353,24 @@ Use these pages when you need **protocol-specific** filters, **bonding curves**,
 
 ### Solana
 
-- [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API) — live trades, OHLCV, ATH, market cap, bonding curve, migrations to PumpSwap  
-- [PumpSwap API](/docs/blockchain/Solana/Pumpfun/pump-swap-api) — PumpSwap trades, prices, pools, historical + realtime datasets  
-- [Raydium DEX API](/docs/blockchain/Solana/Solana-Raydium-DEX-API) — Raydium swaps, pools, and liquidity  
-- [Orca DEX API](/docs/blockchain/Solana/solana-orca-dex-api) — Orca / Whirlpool trades and pools  
-- [Jupiter API](/docs/blockchain/Solana/solana-jupiter-api) — Jupiter aggregator swaps, routing, limit orders  
-- [Solana DEX trades (hub)](/docs/blockchain/Solana/solana-dextrades) — `DEXTrades`, `DEXTradeByTokens`, and chain-wide patterns  
-- [gRPC: Pump.fun streams](/docs/grpc/solana/examples/pump-fun-grpc-streams) — low-latency CoreCast example  
+- [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API) — live trades, OHLCV, ATH, market cap, bonding curve, migrations to PumpSwap
+- [PumpSwap API](/docs/blockchain/Solana/Pumpfun/pump-swap-api) — PumpSwap trades, prices, pools, historical + realtime datasets
+- [Raydium DEX API](/docs/blockchain/Solana/Solana-Raydium-DEX-API) — Raydium swaps, pools, and liquidity
+- [Orca DEX API](/docs/blockchain/Solana/solana-orca-dex-api) — Orca / Whirlpool trades and pools
+- [Jupiter API](/docs/blockchain/Solana/solana-jupiter-api) — Jupiter aggregator swaps, routing, limit orders
+- [Solana DEX trades (hub)](/docs/blockchain/Solana/solana-dextrades) — `DEXTrades`, `DEXTradeByTokens`, and chain-wide patterns
+- [gRPC: Pump.fun streams](/docs/grpc/solana/examples/pump-fun-grpc-streams) — low-latency CoreCast example
 
 ### BNB Chain (BSC)
 
-- [PancakeSwap API (BSC)](/docs/blockchain/BSC/pancake-swap-api) — PancakeSwap v2/v3 trades and pools  
-- [PancakeSwap Infinity (BSC)](/docs/blockchain/BSC/bsc-pancakeswap-infinity-api) — Infinity pools and hooks (where documented)  
-- [BSC DEX trades](/docs/blockchain/BSC/bsc-dextrades) — general BSC DEX query patterns  
-- [Four.meme API](/docs/blockchain/BSC/four-meme-api) — Four.meme launchpad and bonding on BSC  
-- [BSC mempool stream](/docs/blockchain/BSC/bsc-mempool-stream) — pending / pre-confirmation monitoring  
+- [PancakeSwap API (BSC)](/docs/blockchain/BSC/pancake-swap-api) — PancakeSwap v2/v3 trades and pools
+- [PancakeSwap Infinity (BSC)](/docs/blockchain/BSC/bsc-pancakeswap-infinity-api) — Infinity pools and hooks (where documented)
+- [BSC DEX trades](/docs/blockchain/BSC/bsc-dextrades) — general BSC DEX query patterns
+- [Four.meme API](/docs/blockchain/BSC/four-meme-api) — Four.meme launchpad and bonding on BSC
+- [BSC mempool stream](/docs/blockchain/BSC/bsc-mempool-stream) — pending / pre-confirmation monitoring
 
 ### Ethereum & cross‑chain
 
-- [DEX API (Ethereum hub)](/docs/blockchain/Ethereum/dextrades/dex-api) — Uniswap-style DEX patterns on Ethereum  
-- [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction) — Tokens, Pairs, Currencies cubes and Kafka `trading.prices`  
-- [OHLC / K-line API](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api) — candlesticks and intervals for charting  
-
+- [DEX API (Ethereum hub)](/docs/blockchain/Ethereum/dextrades/dex-api) — Uniswap-style DEX patterns on Ethereum
+- [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction) — Tokens, Pairs, Currencies cubes and Kafka `trading.prices`
+- [OHLC / K-line API](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api) — candlesticks and intervals for charting
