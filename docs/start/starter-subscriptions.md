@@ -19,7 +19,7 @@ Below is a set of subscriptions that are curated for you to get started with Bit
 
 This subscription gives you 1-second OHLC, mean price, averages for all tokens across Solana, Ethereum, BNB, Tron.
 
-▶️ [Crypto Price Stream](https://ide.bitquery.io/1-second-crypto-price-stream)
+▶️ [Crypto Price Stream](https://ide.bitquery.io/1-second-crypto-price-stream-with-mcap)
 
 #### Stablecoin 1 sec Price Stream
 
