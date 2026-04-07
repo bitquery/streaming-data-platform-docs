@@ -26,7 +26,6 @@ keywords:
 
 This page focuses on **trader/wallet-centric** queries using the unified **Trading** schema. For trade-level streaming (by token, pair, chain, or DEX), see the **[Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)**.
 
-
 ## Video Tutorial
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
@@ -46,7 +45,9 @@ subscription {
   Trading {
     Trades(
       where: {
-        Trader: {Address: {is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"}}
+        Trader: {
+          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
+        }
       }
     ) {
       Side
@@ -119,11 +120,32 @@ You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/trad
 subscription {
   Trading {
     Trades(
-      where: {any: [
-        {Pair: {Token: {Id: {is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"}}}}, 
-        {Pair: {QuoteToken: {Id: {is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"}}}}], 
-        Pair: {Market: {Network: {is: "Solana"}}}, 
-        Trader: {Address: {is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"}}}
+      where: {
+        any: [
+          {
+            Pair: {
+              Token: {
+                Id: {
+                  is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"
+                }
+              }
+            }
+          }
+          {
+            Pair: {
+              QuoteToken: {
+                Id: {
+                  is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"
+                }
+              }
+            }
+          }
+        ]
+        Pair: { Market: { Network: { is: "Solana" } } }
+        Trader: {
+          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
+        }
+      }
     ) {
       Side
       Supply {
@@ -196,11 +218,15 @@ subscription {
   Trading {
     Trades(
       where: {
-        Trader: {Address: {in: [
-          "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3",
-          "7eWHXZefGY98o9grrrt1Z3j7DcPDEhA4UviQ1pVNhTXX",
-          "6LNdbvyb11JH8qxAsJoPSfkwK4zJDQKQ6LNp4mxt8VpR"
-        ]}}
+        Trader: {
+          Address: {
+            in: [
+              "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"
+              "7eWHXZefGY98o9grrrt1Z3j7DcPDEhA4UviQ1pVNhTXX"
+              "6LNdbvyb11JH8qxAsJoPSfkwK4zJDQKQ6LNp4mxt8VpR"
+            ]
+          }
+        }
       }
     ) {
       Side
@@ -274,8 +300,10 @@ subscription {
   Trading {
     Trades(
       where: {
-        Pair: {Market: {Network: {is: "Solana"}}}
-        Trader: {Address: {is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"}}
+        Pair: { Market: { Network: { is: "Solana" } } }
+        Trader: {
+          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
+        }
       }
     ) {
       Side
@@ -349,7 +377,7 @@ You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Stre
 ```graphql
 subscription {
   Trading {
-    Trades(where: {AmountsInUsd: {Base: {gt: 100000}}}) {
+    Trades(where: { AmountsInUsd: { Base: { gt: 100000 } } }) {
       Side
       Supply {
         CirculatingSupply
@@ -423,8 +451,10 @@ subscription {
   Trading {
     Trades(
       where: {
-        Trader: {Address: {is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"}}
-        AmountsInUsd: {Base: {gt: 10000}}
+        Trader: {
+          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
+        }
+        AmountsInUsd: { Base: { gt: 10000 } }
       }
     ) {
       Side
@@ -497,10 +527,12 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/How-do-I-ge
 {
   Trading {
     Trades(
-      orderBy: {descending: Block_Time}
+      orderBy: { descending: Block_Time }
       where: {
-        Block: {Time: {since_relative: {minutes_ago: 10}}}
-        Trader: {Address: {is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"}}
+        Block: { Time: { since_relative: { minutes_ago: 10 } } }
+        Trader: {
+          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
+        }
       }
     ) {
       Side
@@ -573,7 +605,36 @@ You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/How-
 subscription {
   Trading {
     Trades(
-      where: {Trader: {Address: {in: ["GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3", "7eWHXZefGY98o9grrrt1Z3j7DcPDEhA4UviQ1pVNhTXX"]}}, any: [{Pair: {Token: {Id: {is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"}}}}, {Pair: {QuoteToken: {Id: {is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"}}}}]}
+      where: {
+        Trader: {
+          Address: {
+            in: [
+              "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"
+              "7eWHXZefGY98o9grrrt1Z3j7DcPDEhA4UviQ1pVNhTXX"
+            ]
+          }
+        }
+        any: [
+          {
+            Pair: {
+              Token: {
+                Id: {
+                  is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"
+                }
+              }
+            }
+          }
+          {
+            Pair: {
+              QuoteToken: {
+                Id: {
+                  is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"
+                }
+              }
+            }
+          }
+        ]
+      }
     ) {
       Side
       Supply {
@@ -646,8 +707,14 @@ subscription {
   Trading {
     Trades(
       where: {
-        Trader: {Address: {is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"}}
-        Pair: {Market: {Program: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}}
+        Trader: {
+          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
+        }
+        Pair: {
+          Market: {
+            Program: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
+          }
+        }
       }
     ) {
       Side
@@ -723,10 +790,18 @@ subscription {
   Trading {
     Trades(
       where: {
-        Trader: {Address: {is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"}}
+        Trader: {
+          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
+        }
         Pair: {
-          Token: {Id: {is: "bid:solana:So11111111111111111111111111111111111111112"}}
-          QuoteToken: {Id: {is: "bid:solana:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}
+          Token: {
+            Id: { is: "bid:solana:So11111111111111111111111111111111111111112" }
+          }
+          QuoteToken: {
+            Id: {
+              is: "bid:solana:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+            }
+          }
         }
       }
     ) {
@@ -792,20 +867,27 @@ subscription {
 
 ## Who Are the Top Traders on Solana by Trade Count in the Last Hour?
 
-> Rank the **most active traders on Solana** in the last hour by **number of trades** — returns **trade count**, **average trade size in USD**, and **total volume** per wallet address. Useful for identifying **high-frequency traders**, **bot wallets**, **market makers**, and the **most active participants** on-chain right now.
+> Rank up to **100** **Solana** wallets in the last **hour** by **trade count**, with **total quoted USD volume**, **per-side buy/sell volume**, and **buy/sell trade counts**. Useful for **activity leaderboards**, **bot detection**, and **comparing aggressive buyers vs sellers**.
 
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-trader-based-on-trade-count-in-last-1-hour-on-solana-and-its-total-volume-and-average-trade-size_1).
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Most-active-traders-by-trade-count#).
 
 ```graphql
 {
   Trading {
     Trades(
-      orderBy: [{descendingByField: "count"}]
-      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+      limit: { count: 100 }
+      orderBy: [{ descendingByField: "Trades_count" }]
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Pair: { Market: { Network: { is: "Solana" } } }
+      }
     ) {
-      count
-      average_trade_size: average(of: AmountsInUsd_Quote)
-      sum(of: AmountsInUsd_Quote)
+      Trades_count: count
+      Total_Volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
+      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
       Trader {
         Address
       }
@@ -816,7 +898,172 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-trader-
 
 ---
 
-## How Do I Calculate a Wallet's PnL for a Specific Token (Last 30 Minutes)?
+## How do I rank whale traders on Solana by total USD volume (last hour)?
+
+> Same **one-hour Solana** window as above, but ordered by **`Total_Volume`** (quoted USD) so the **largest notional traders** surface first — still includes **trade count** and **buy vs sell** split.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Whales-traders-by-total-USD-volume_1).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 100 }
+      orderBy: [{ descendingByField: "Total_Volume" }]
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Pair: { Market: { Network: { is: "Solana" } } }
+      }
+    ) {
+      Trades_count: count
+      Total_Volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
+      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+      Trader {
+        Address
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I find traders on Solana who only bought (no sells) in the last hour?
+
+> Lists wallets with **`sells: 0`** in the last hour on **Solana** (only **Buy** side trades), ordered by **total quoted USD volume**. Adjust the window or network in **`where`** for other scopes.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-who-only-buys#).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 100 }
+      orderBy: [{ descendingByField: "Total_Volume" }]
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Pair: { Market: { Network: { is: "Solana" } } }
+      }
+    ) {
+      Trades_count: count
+      Total_Volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
+      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } }, selectWhere: { eq: "0" })
+      Trader {
+        Address
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I find traders on Solana who only sold (no buys) in the last hour?
+
+> Lists wallets with **`buys: 0`** (only **Sell** side trades) in the same window. Pair with the **only buy** query to study **one-sided flow**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-who-only-sells_1#).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 100 }
+      orderBy: [{ descendingByField: "Total_Volume" }]
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Pair: { Market: { Network: { is: "Solana" } } }
+      }
+    ) {
+      Trades_count: count
+      Total_Volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
+      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
+      buys: count(if: { Side: { is: "Buy" } }, selectWhere: { eq: "0" })
+      sells: count(if: { Side: { is: "Sell" } })
+      Trader {
+        Address
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I list pools a wallet traded on Solana (last hour)?
+
+> For a fixed **`Trader.Address`**, aggregate up to **100** **pools** by **trade count** with **volume** and **buy/sell** breakdown per pool. Replace the sample address with any wallet you track.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Trader-interacted-with-these-tokens).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 100 }
+      orderBy: [{ descendingByField: "Trades_count" }]
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Pair: { Market: { Network: { is: "Solana" } } }
+        Trader: {
+          Address: { is: "2amy6YiYin3s49MEnXNA6ASDDnrrvhjMTd4WF59LJXBu" }
+        }
+      }
+    ) {
+      Trades_count: count
+      Total_Volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
+      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+      Trader {
+        Address
+      }
+      Pair {
+        Pool {
+          Address
+        }
+        Market {
+          Address
+          Program
+          Network
+          Protocol
+          ProtocolFamily
+        }
+        Token {
+          Name
+          Symbol
+          Address
+          Id
+          IsNative
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Name
+          Symbol
+          Address
+          Id
+          IsNative
+          TokenId
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I calculate a wallet's PnL for a specific token (last 30 minutes)?
 
 > Aggregate **`Trades`** over **`Block.Time`** (last **30 minutes**) for one **`Pair.Token.Id`** and one **`Trader.Address`**. **`PnL`** is **`Amount_Sold − Amount_Bought`** on **`AmountsInUsd_Base`**; native sums use **`Amounts_Base`**. Useful for **short-window position PnL**, **per-wallet token performance**, and **trading dashboards**.
 
@@ -827,25 +1074,29 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-PnL
   Trading {
     Trades(
       where: {
-        Block: {Time: {since_relative: {minutes_ago: 30}}}
+        Block: { Time: { since_relative: { minutes_ago: 30 } } }
         Pair: {
           Token: {
-            Id: {is: "bid:solana:8xs8TCoAMJ4zj5aeXmrDP2BechGrXLMzVyMVBxfCpump"}
+            Id: {
+              is: "bid:solana:8xs8TCoAMJ4zj5aeXmrDP2BechGrXLMzVyMVBxfCpump"
+            }
           }
         }
-        Trader: {Address: {is: "QeHykJGZj6B2Syhi5a63t9oaLTwKXZqM4J5PjeZBWC2"}}
+        Trader: {
+          Address: { is: "QeHykJGZj6B2Syhi5a63t9oaLTwKXZqM4J5PjeZBWC2" }
+        }
       }
     ) {
       Trader {
         Address
       }
-      Amount_Bought: sum(of: AmountsInUsd_Base, if: {Side: {is: "Buy"}})
-      Amount_Sold: sum(of: AmountsInUsd_Base, if: {Side: {is: "Sell"}})
-      Amount_Bought_native: sum(of: Amounts_Base, if: {Side: {is: "Buy"}})
-      Amount_Sold_native: sum(of: Amounts_Base, if: {Side: {is: "Sell"}})
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      Amount_Bought_native: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold_native: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
       PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
-      buys: count(if: {Side: {is: "Buy"}})
-      sells: count(if: {Side: {is: "Sell"}})
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
       Pair {
         Currency {
           Id
@@ -891,23 +1142,27 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 {
   Trading {
     Trades(
-      limit: {count: 10}
-      orderBy: [{descendingByField: "PnL"}]
+      limit: { count: 10 }
+      orderBy: [{ descendingByField: "PnL" }]
       where: {
-        Block: {Time: {since_relative: {minutes_ago: 30}}}
-        Pair: {Market: {Address: {is: "2axyccPzS7Ei57c7ESEq7tBpo4HxtpfCR9gKxh5uNUpu"}}}
+        Block: { Time: { since_relative: { minutes_ago: 30 } } }
+        Pair: {
+          Market: {
+            Address: { is: "2axyccPzS7Ei57c7ESEq7tBpo4HxtpfCR9gKxh5uNUpu" }
+          }
+        }
       }
     ) {
       Trader {
         Address
       }
-      Amount_Bought: sum(of: AmountsInUsd_Base, if: {Side: {is: "Buy"}})
-      Amount_Sold: sum(of: AmountsInUsd_Base, if: {Side: {is: "Sell"}})
-      Amount_Bought_native: sum(of: Amounts_Base, if: {Side: {is: "Buy"}})
-      Amount_Sold_native: sum(of: Amounts_Base, if: {Side: {is: "Sell"}})
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      Amount_Bought_native: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold_native: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
       PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
-      buys: count(if: {Side: {is: "Buy"}})
-      sells: count(if: {Side: {is: "Sell"}})
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
     }
   }
 }
@@ -925,24 +1180,58 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 {
   Trading {
     Trades(
-      limit: {count: 10}
-      limitBy: {count: 1, by: Trader_Address}
-      orderBy: [{descendingByField: "PnL"}]
+      limit: { count: 10 }
+      limitBy: { count: 1, by: Trader_Address }
+      orderBy: [{ descendingByField: "PnL" }]
       where: {
-        Block: {Time: {since_relative: {minutes_ago: 30}}}
-        Pair: {Market: {Network: {is: "Solana"}}}
+        Block: { Time: { since_relative: { minutes_ago: 30 } } }
+        Pair: { Market: { Network: { is: "Solana" } } }
       }
     ) {
       Trader {
         Address
       }
-      Amount_Bought: sum(of: AmountsInUsd_Base, if: {Side: {is: "Buy"}})
-      Amount_Sold: sum(of: AmountsInUsd_Base, if: {Side: {is: "Sell"}})
-      Amount_Bought_native: sum(of: Amounts_Base, if: {Side: {is: "Buy"}})
-      Amount_Sold_native: sum(of: Amounts_Base, if: {Side: {is: "Sell"}})
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      Amount_Bought_native: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold_native: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
       PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
-      buys: count(if: {Side: {is: "Buy"}})
-      sells: count(if: {Side: {is: "Sell"}})
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+    }
+  }
+}
+```
+
+---
+
+## How do I rank traders paying the highest total transaction fees on Solana (last hour)?
+
+> Ranks up to **100** wallets by **sum of `TransactionHeader.Fee`** over **Solana** **`Trades`** in the last hour (native fee units, e.g. **lamports** — convert with your own **SOL** price or decimals). Includes **trade count** and **quoted USD volume** for context.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-paying-the-highest-total-fees).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 100 }
+      orderBy: [{ descendingByField: "Total_fees_paid_by_trader" }]
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Pair: { Market: { Network: { is: "Solana" } } }
+      }
+    ) {
+      Trades_count: count
+      Total_fees_paid_by_trader: sum(of: TransactionHeader_Fee)
+      Total_Volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
+      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+      Trader {
+        Address
+      }
     }
   }
 }

@@ -28,6 +28,7 @@ For **aggregated** token metrics across all pairs, use the **[Tokens cube](/docs
 - **Networks**: Filter with **`Pair.Market.Network`** (e.g. **`Solana`**, **`Ethereum`**).
 - **Token filter**: Use **`Pair.Token.Id`** with the full id (e.g. **`bid:solana:<mint>`**, **`bid:eth:<lowercase_contract>`**) per your dataset conventions.
 - **Trader filter**: Use **`Trader.Address`** for the wallet executing the trade.
+- **Aggregations**: Examples at the end of this page use **`query`** with **`limit`**, **`orderBy`**, **`sum`**, **`average`**, **`count`**, **`calculate`**, **`limitBy`**, and **`distinct`** for volume, token, DEX, time-bucket, and fee analytics on **`Trades`**.
 - **USD vs quote**: **`PriceInUsd`** and **`AmountsInUsd`** are in USD where indexed; see **[Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm)** for how amounts and prices are derived.
 
 More patterns: **[Crypto Price API examples](/docs/trading/crypto-price-api/examples)**.
@@ -1461,6 +1462,515 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Most-traded
           Symbol
           TokenId
           Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I compare buy vs sell volume in USD per pool on Solana (last hour)?
+
+> Aggregates **Solana** **`Trades`** from the last **hour** into up to **100** rows per **liquidity pool**, ranked by **trade count**. Each row returns **quoted USD volume** (`AmountsInUsd_Quote`) split into **buy** vs **sell** sums plus **buy/sell counts**. Useful for **per-pool flow** and **directional pressure** dashboards.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Total-buy-vs-sell-volume-in-USD-per-token_1#).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "count"}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+    ) {
+      count
+      average_trade_size: average(of: AmountsInUsd_Quote)
+      total_volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Buy"}})
+      sell_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Sell"}})
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+      Pair {
+        Pool {
+          Address
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I rank pools by net buy-minus-sell trade count on Solana (last hour)?
+
+> Same **pool-level** aggregation as above, but adds **`net_flow`** as **`buys − sells`** (difference in **trade counts**, not USD). Ordered by **`net_flow`** so pools with more **buy-side prints** rank higher. For **USD** net flow, define a **`calculate`** on **`buy_volume`** and **`sell_volume`** instead.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Net-flow-buys---sells-per-token-symbol_2).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "net_flow"}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+    ) {
+      count
+      average_trade_size: average(of: AmountsInUsd_Quote)
+      total_volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Buy"}})
+      sell_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Sell"}})
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+      net_flow: calculate(expression: "$buys - $sells")
+      Pair {
+        Pool {
+          Address
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I aggregate quoted USD volume by DEX program on Solana (last hour)?
+
+> Groups **Solana** trades by **`Pair.Market.Program`** (and **protocol** metadata), returning **trade count** and **total quoted USD volume** per **DEX program**. Useful for **share-of-volume** charts across **AMMs** and programs.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Volume-distribution-by-DEX-program#).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "Dex_Volume"}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+    ) {
+      Trades_count: count
+      Dex_Volume: sum(of: AmountsInUsd_Quote)
+      Pair {
+        Market {
+          Program
+          Protocol
+          ProtocolFamily
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I rank Solana tokens by market cap using trade-window supply snapshots (last hour)?
+
+> One row per **base token** (**`limitBy`** on **`Pair.Token.Address`**) with **`Supply.MarketCap`**, **FDV**, and **total supply** taken at **`maximum: Block_Time`** inside the last hour, plus **volume** and **trade stats**. Replace **`Pair.Market.Network`** or add **`Pair.Token.Id`** filters to narrow the universe.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Tokens-ranked-by-market-cap_1).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      limitBy: {by: Pair_Token_Address, count: 1}
+      orderBy: {descending: Supply_MarketCap}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+    ) {
+      count
+      average_trade_size: average(of: AmountsInUsd_Quote)
+      total_volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Buy"}})
+      sell_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Sell"}})
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+      Pair {
+        Pool {
+          Address
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Supply {
+        TotalSupply(maximum: Block_Time)
+        FullyDilutedValuationUsd(maximum: Block_Time)
+        MarketCap(maximum: Block_Time)
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I find tokens with the highest trade frequency on Solana (last hour)?
+
+> Ranks **base tokens** by **`count`** of **`Trades`** in the window (plus **average trade size** and **volume** on **`AmountsInUsd_Quote`**). The selection nests **`Pair.Token`** only — ideal for **“most swapped assets”** style lists.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Tokens-with-highest-trade-frequency).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "count"}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+    ) {
+      count
+      average_trade_size: average(of: AmountsInUsd_Quote)
+      total_volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Buy"}})
+      sell_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Sell"}})
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+      Pair {
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I rank tokens by number of unique buyers on Solana (last hour)?
+
+> Adds **`unique_buyers`** as **`count(distinct: Trader_Address)`** on **Buy** side trades, ordered by that field — surfaces tokens with the **widest retail participation** in the window (subject to your filters).
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Tokens-with-most-unique-buyers).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "unique_buyers"}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+    ) {
+      count
+      average_trade_size: average(of: AmountsInUsd_Quote)
+      total_volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Buy"}})
+      sell_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Sell"}})
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+      unique_buyers: count(distinct: Trader_Address, if: {Side: {is: "Buy"}})
+      Pair {
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I find the most active liquidity pools on Solana by trade count (last hour)?
+
+> Ranks **pools** by **`count`** with full **pair** context (tokens + market). Same shape as **buy/sell volume per pool** but sorted purely by **activity** — good for **“hottest pools”** views.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Most-active-market-pools-by-trades).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "count"}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+    ) {
+      count
+      average_trade_size: average(of: AmountsInUsd_Quote)
+      total_volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Buy"}})
+      sell_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Sell"}})
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+      Pair {
+        Pool {
+          Address
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I count unique tokens traded per DEX program on Solana (last hour)?
+
+> Groups by **`Pair.Market`** program metadata and computes **`Unique_tokens`** with **`count(distinct: Pair_Token_Id)`** plus **volume** and **trade count** — shows how many **different base tokens** touched each **program** in the window.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Unique-tokens-per-DEX-program).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "Unique_tokens"}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+    ) {
+      Trades_count: count
+      Dex_Volume: sum(of: AmountsInUsd_Quote)
+      Unique_tokens: count(distinct: Pair_Token_Id)
+      Pair {
+        Market {
+          Program
+          Protocol
+          ProtocolFamily
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I get per-minute trade counts for a Solana token (last hour)?
+
+> Buckets **`Block.Time`** into **1-minute** intervals via **`Time(interval: {in: minutes, count: 1})`**, filtered to one **`Pair.Token.Id`** on **Solana**. Returns **count**, **volume**, and **buy/sell** breakdown **per minute** — useful for **intraday activity** charts.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Trade-count-over-time-by-block-timestamp).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "Block_Timefield"}
+      where: {
+        Block: {Time: {since_relative: {hours_ago: 1}}}
+        Pair: {
+          Token: {Id: {is: "bid:solana:FVo4K9FtXg9A4M6cAovqm4qgM7ALUpgei2da4D6R9FXb"}}
+          Market: {Network: {is: "Solana"}}
+        }
+      }
+    ) {
+      Block {
+        Timefield: Time(interval: {in: minutes, count: 1})
+      }
+      count
+      average_trade_size: average(of: AmountsInUsd_Quote)
+      total_volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Buy"}})
+      sell_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Sell"}})
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+      Pair {
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I find the busiest one-minute volume windows for a Solana token (last hour)?
+
+> Same **1-minute** buckets and **token** filter as above, but **`orderBy`** **`total_volume`** so the **largest quoted-USD minutes** float to the top — a simple **volume spike** detector.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Volume-spikes--busiest-1min-time-windows).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "total_volume"}
+      where: {
+        Block: {Time: {since_relative: {hours_ago: 1}}}
+        Pair: {
+          Token: {Id: {is: "bid:solana:FVo4K9FtXg9A4M6cAovqm4qgM7ALUpgei2da4D6R9FXb"}}
+          Market: {Network: {is: "Solana"}}
+        }
+      }
+    ) {
+      Block {
+        Timefield: Time(interval: {in: minutes, count: 1})
+      }
+      count
+      average_trade_size: average(of: AmountsInUsd_Quote)
+      total_volume: sum(of: AmountsInUsd_Quote)
+      buy_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Buy"}})
+      sell_volume: sum(of: AmountsInUsd_Quote, if: {Side: {is: "Sell"}})
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+      Pair {
+        Token {
+          Address
+          Id
+          Symbol
+          Network
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## How do I get total Solana DEX trade count, quoted USD volume, and sum of fees (last hour)?
+
+> Single-row aggregate over **all Solana** **`Trades`** in the window: **`TransactionHeader.Fee`** summed in **native units** (e.g. **lamports**), plus **trade count** and **`AmountsInUsd_Quote`** sum. Interpret **fees** with your own **SOL** reference price or decimals.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Total-SOL-fees-Total-Volume-Total-count-trades).
+
+```graphql
+{
+  Trading {
+    Trades(
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+    ) {
+      Trades_count_solana: count
+      Solana_Volume: sum(of: AmountsInUsd_Quote)
+      Total_fees_Solana: sum(of: TransactionHeader_Fee)
+    }
+  }
+}
+```
+
+---
+
+## How do I get average transaction fee per trade by DEX program on Solana (last hour)?
+
+> Groups by **`Pair.Market`** program fields, returning **`average(of: TransactionHeader_Fee)`** alongside **trade count**, **total fees**, and **quoted USD volume** per **program**. Fee values are **native**; compare **programs** on a **relative** basis or convert off-chain.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Average-fee-per-trade-Total-fees-total-volume-trades-count-per-DEX-program).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 100}
+      orderBy: {descendingByField: "Average_Fee_per_DEX"}
+      where: {Block: {Time: {since_relative: {hours_ago: 1}}}, Pair: {Market: {Network: {is: "Solana"}}}}
+    ) {
+      Trades_count_dex: count
+      Dex_Volume: sum(of: AmountsInUsd_Quote)
+      Total_fees_DEX: sum(of: TransactionHeader_Fee)
+      Average_Fee_per_DEX: average(of: TransactionHeader_Fee)
+      Pair {
+        Market {
+          Program
+          Protocol
+          ProtocolFamily
         }
       }
     }
