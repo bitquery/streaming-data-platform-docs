@@ -174,13 +174,13 @@ This stream lets you monitor all the token transfers for a particular token. You
 
 This stream returns all the real time DEX trades happening on Ethereum mainnet. You can modify this stream to get DEX trades on a particular DEX or trades of a particular token or trades by a particular trader.
 
-▶️ [DEX Trades Stream](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet_2)
+▶️ [DEX Trades Stream](https://ide.bitquery.io/All-Ethereum-Trade-Stream_1)
 
 #### Uniswap Trades Stream
 
 This subscription returns the real-time trades happening on Uniswap. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader.
 
-▶️ [Uniswap Trades Stream](https://ide.bitquery.io/Realtime-Uniswap-v1-Uniswap-v2-Uniswap-V3-Trades)
+▶️ [Uniswap Trades Stream](https://ide.bitquery.io/All-Ethereum-Uniswap-Trade-Stream)
 
 ### Slippage Streams
 

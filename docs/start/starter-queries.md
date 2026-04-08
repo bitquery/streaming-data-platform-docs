@@ -1,7 +1,14 @@
 ---
 title: "Starter Queries - Bitquery API Examples by Chain"
 description: "Curated Bitquery starter queries for Ethereum, Solana, BSC, Polymarket, Bitcoin, and more. Cross-chain price API, OHLC, DEX trades, and blockchain examples."
-keywords: ["Bitquery starter queries", "Bitquery examples", "blockchain API examples", "GraphQL blockchain", "Bitquery IDE"]
+keywords:
+  [
+    "Bitquery starter queries",
+    "Bitquery examples",
+    "blockchain API examples",
+    "GraphQL blockchain",
+    "Bitquery IDE",
+  ]
 ---
 
 <head>
@@ -223,7 +230,6 @@ Get transactions ordered by block number in descending order.
 This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.
 
 ▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-Trades-of-a-Token)
-
 
 #### Get Swaps by Wallet Address
 
