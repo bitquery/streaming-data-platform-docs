@@ -222,28 +222,13 @@ Get transactions ordered by block number in descending order.
 
 This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.
 
-▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-dextrades-of-a-token)
+▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-Trades-of-a-Token)
 
-#### Ethereum DexTradeByTokens latest trades for a token
-
-This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.
-
-▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens-of-a-token)
 
 #### Get Swaps by Wallet Address
 
 Get all swap related transactions (buy, sell).  
-▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest_trades_by_maker)
-
-#### Ethereum DEX Trades
-
-This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.  
-▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Copy-of-Ethereum-dextrades_1)
-
-#### Ethereum Dex Trade By Tokens
-
-This query returns the latest trades on the Ethereum network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
-▶️ [DexTrade By Tokens](https://ide.bitquery.io/Ethereum-DexTradeByTokens)
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/Ethereum-Trades-of-a-Trader)
 
 #### Realised PnL, buy volume, sell volume
 
