@@ -727,18 +727,18 @@ Get transactions ordered by block number in descending order.
 
 #### Base DEX Trades
 
-This query returns the latest trades on the Base network where distinction of the buy and sell sides is present.  
-▶️ [Base DEX Trades](https://ide.bitquery.io/base-dextrades)
+This query returns the latest trades on the Base network from a trader perspective and returns useful metrics such as marketcap and pool ranking.  
+▶️ [Base DEX Trades](https://ide.bitquery.io/base-dextrades_3)
 
 #### Base Dex Trade By Tokens
 
-This query returns the latest trades on the Base network. This is useful when looking for trades of a token without worrying about the buy or sell side.  
-▶️ [DexTrade By Tokens](https://ide.bitquery.io/Base-DexTradeByTokens_1)
+This query returns the latest trades on the Base network. This is useful when looking for trades of a token.  
+▶️ [DexTrade By Tokens](https://ide.bitquery.io/base-dextrades-for-a-token)
 
-#### Get Swaps by Wallet Address
+#### Get Trades by a Trader
 
-Get all swap related transactions (buy, sell).  
-▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest_trades_by_maker-base_1)
+Get all trades by a particular trader.  
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/base-dextrades-by-a-trader)
 
 ### Events & Calls
 
@@ -893,30 +893,25 @@ Get transactions ordered by block number in descending order.
 
 ### Trades
 
-#### Get Swaps by Wallet Address
+#### BSC DEX Trades
 
-Get all swap related transactions (buy, sell).  
-▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/latest-trades-by-market-maker)
+This query returns the latest trades on the BSC network from a trader perspective and returns useful metrics such as marketcap and pool ranking.  
+▶️ [BSC DEX Trades](https://ide.bitquery.io/BSC-dextrades_9)
 
-#### Buys of a Token on BNB
+#### BSC Dex Trade By Tokens
 
-This query returns the latest `100` buys of a given BEP-20 token.
-▶️[BSC Token Buys](https://ide.bitquery.io/BNB-Token-Buys)
+This query returns the latest trades on the BSC network. This is useful when looking for trades of a token.  
+▶️ [DexTrade By Tokens](https://ide.bitquery.io/BSC-dextrades-for-a-token)
 
-#### Latest Token Trades
+#### Get Trades by a Trader
 
-Get the latest trades of a token on Pancakeswap.  
-▶️[Token Trades](https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-token)
+Get all trades by a particular trader.  
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/BSC-dextrades-by-a-trader)
 
-#### Trades by User on Pancakeswap
+#### Trades on Pancakeswap
 
-Get the latest trades by a user on Pancakeswap.  
-▶️[User Trades](https://ide.bitquery.io/BSC-PancakeSwap-v3-Trades-for-a-trader)
-
-#### Latest and Historical Trades of a User
-
-Get the latest and historical trades by a user on `Four Meme` platform.  
-▶️[User Trades](https://ide.bitquery.io/Get-all-trades-of-a-trader-on-four-meme)
+Get the latest trades on Pancakeswap.  
+▶️[User Trades](https://ide.bitquery.io/BSC-dextrades-for-pancakeswap)
 
 ### OHLC & Price Data
 
