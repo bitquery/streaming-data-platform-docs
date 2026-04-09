@@ -236,11 +236,6 @@ This query returns the latest trades on the Ethereum network where distinction o
 Get all swap related transactions (buy, sell).  
 ▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/Ethereum-Trades-of-a-Trader)
 
-#### Realised PnL, buy volume, sell volume
-
-Get realised PnL, buy volume, and sell volume for a token on EVM of a trader for over a time window.
-▶️ [Realised PnL, buy volume, sell volume](https://ide.bitquery.io/Realised-Pnl-Buy-volume-Sell-Volume-Ethereum)
-
 ### Events & Calls
 
 #### Get Latest Events
@@ -455,7 +450,7 @@ This subscription query returns the latest PumpFun trades in real time.
 #### Get OHLCV by Pair Address
 
 You can get charting data easily with this query. Adjust the intervals as necessary. This query supports historical data.  
-▶️ [Get OHLCV by Pair Address](https://ide.bitquery.io/OHLC-for-a-token_1)
+▶️ [Get OHLCV by Pair Address](https://ide.bitquery.io/OHLC-for-a-token_8)
 
 #### Real-Time Token Prices in USD on Solana
 
@@ -467,10 +462,10 @@ Stream live OHLC (Open, High, Low, Close) price and volume data for all tokens o
 Retrieves the all-time high (ATH) price in USD for a specified token contract.
 ▶️ [Get ATH Price of a token](https://ide.bitquery.io/solana-ATH_9)
 
-#### Real-Time Token Prices in Quote Pair (USDC, USDT, etc.)
+#### Latest Token Prices in Quote Pair (USDC, USDT, etc.)
 
-Stream live OHLC prices for Solana tokens denominated in their trading pair token (e.g., USDC, USDT, or another crypto), instead of direct USD. Great for analyzing token behavior relative to stablecoins or other assets.
-▶️ [Real-Time Token Prices in Quote pair](https://ide.bitquery.io/Real-Time-usd-price-on-solana-chain-in-paired-token)
+Get latest OHLC prices for Solana tokens denominated in their trading pair token (e.g., USDC, USDT, or another crypto), instead of direct USD. Great for analyzing token behavior relative to stablecoins or other assets.
+▶️ [Latest Token Prices in Quote pair](https://ide.bitquery.io/Latest-usd-price-on-solana-chain)
 
 #### Price change 5min, 1hr, 6hr precentage of a specific token
 
@@ -1045,13 +1040,13 @@ This query returns the most recent transfers on the TRON network and includes de
 
 #### Tron DEX Trades
 
-This query returns the latest trades on the TRON network where the buy and sell sides are distinguished.  
-▶️ [TRON DEX Trades](https://ide.bitquery.io/Tron-DEX-Trades_1)
+This query returns the latest trades on the TRON network from a trader perspective.  
+▶️ [TRON DEX Trades](https://ide.bitquery.io/Tron-dextrades)
 
 #### Tron Dex Trade By Tokens
 
 This query returns the latest token trades on the TRON network.  
-▶️ [DexTrade By Tokens](https://ide.bitquery.io/Tron-DexTradeByTokens_1)
+▶️ [DexTrade By Tokens](https://ide.bitquery.io/Tron-trades-for-a-token)
 
 ## Bitcoin
 
