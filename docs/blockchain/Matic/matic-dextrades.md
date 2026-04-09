@@ -37,6 +37,8 @@ In this section we will see how to get Matic DEX trades information using our AP
 ## Subscribe to Latest Matic Trades
 
 This subscription will return information about the most recent trades executed on Matic's DEX platforms.
+
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 You can find the query [here](https://ide.bitquery.io/Realtime-matic-dex-trades-websocket)
 
 ```

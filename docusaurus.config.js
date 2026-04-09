@@ -4,6 +4,9 @@
 const lightCodeTheme = require("prism-react-renderer").themes.github;
 const darkCodeTheme = require("prism-react-renderer").themes.dracula;
 
+/** Analytics scripts are often blocked locally (ad blockers, privacy tools). The gtag client then throws `window.gtag is not a function`. Only enable for production builds. */
+const enableAnalytics = process.env.NODE_ENV === "production";
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Bitquery",
@@ -887,13 +890,17 @@ const config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-        gtag: {
-          trackingID: "G-ZWB80TDH9J",
-          anonymizeIP: true,
-        },
-        googleTagManager: {
-          containerId: "GTM-5GC69JH6",
-        },
+        ...(enableAnalytics
+          ? {
+              gtag: {
+                trackingID: "G-ZWB80TDH9J",
+                anonymizeIP: true,
+              },
+              googleTagManager: {
+                containerId: "GTM-5GC69JH6",
+              },
+            }
+          : {}),
       }),
     ],
   ],

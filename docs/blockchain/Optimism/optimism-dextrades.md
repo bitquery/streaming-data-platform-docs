@@ -41,6 +41,8 @@ In this section we will see how to get Optimism DEX trades information using our
 
 [This](https://ide.bitquery.io/trending-pairs-on-optimism) query returns the top trending trading pairs on Optimism based on the `Trade Volume`, and returns info like unique buyers and sellers, number of markets where the pair exist, latest price and price at a given time and much more.
 
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+
 ```graphql
 query pairs(
   $min_count: String

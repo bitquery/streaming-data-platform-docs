@@ -4,10 +4,10 @@ sidebar_position: 2
 
 # Solana DEX Trades API
 
-> **Before you start**: Not sure when to use DEX Trades vs Transfers vs other data primitives? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
-
 Bitquery provides Solana DEX trade data through APIs, Streams, and Data Dumps.  
 The GraphQL APIs and subscriptions below are examples of the real-time and historical trade data you can access across [Raydium](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/), [Orca](https://docs.bitquery.io/docs/blockchain/Solana/solana-orca-dex-api/), [Phoenix](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Phoenix-api/), [Meteora](https://docs.bitquery.io/docs/blockchain/Solana/Meteora-DAMM-v2-API/), [Jupiter](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api/), and other Solana-based DEXs.
+
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 If you have questions or need custom data, reach out to [support](https://t.me/Bloxy_info).
 
@@ -1480,7 +1480,9 @@ Get the **latest price of a stablecoin across all Solana DEXs/markets**. Returns
       limitBy: { count: 1, by: Trade_Market_MarketAddress }
       where: {
         Trade: {
-          Currency: { MintAddress: { is: "CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s" } }
+          Currency: {
+            MintAddress: { is: "CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s" }
+          }
         }
       }
     ) {
@@ -2140,7 +2142,7 @@ For **EVM chains** (Ethereum, BSC, etc.) in the Trading API, use **all lowercase
 
 ```graphql
 query {
-  TokenAsBase: Trading { 
+  TokenAsBase: Trading {
     Pairs(
       where: {
         Interval: { Time: { Duration: { eq: 1 } } }
@@ -2149,9 +2151,9 @@ query {
         Token: {
           Id: {
             in: [
-              "bid:solana:CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s",
-              "bid:eth:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78",
-              "bid:bsc:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78",
+              "bid:solana:CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s"
+              "bid:eth:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78"
+              "bid:bsc:0xfaf0cee6b20e2aaa4b80748a6af4cd89609a3d78"
               "bid:tron:TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"
             ]
           }
@@ -2190,8 +2192,14 @@ query {
       Price_change_24h: calculate(
         expression: "( ( $Price_Average_currentPrice - $Price_Average_H24Ago ) / $Price_Average_H24Ago ) * 100"
       )
-      v1h: sum(of: Volume_Usd, if: { Block: { Time: { since_relative: { hours_ago: 1 } } } })
-      v4h: sum(of: Volume_Usd, if: { Block: { Time: { since_relative: { hours_ago: 4 } } } })
+      v1h: sum(
+        of: Volume_Usd
+        if: { Block: { Time: { since_relative: { hours_ago: 1 } } } }
+      )
+      v4h: sum(
+        of: Volume_Usd
+        if: { Block: { Time: { since_relative: { hours_ago: 4 } } } }
+      )
       v24h: sum(of: Volume_Usd)
     }
   }

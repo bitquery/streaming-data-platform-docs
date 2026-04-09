@@ -92,6 +92,7 @@ const sidebars = {
             "graphql/capabilities/aggregated_metrics",
             "graphql/capabilities/array-intersect",
             "graphql/capabilities/patterns",
+            "graphql/capabilities/dextrades-dextradebytokens-trading-trades",
             "graphql/capabilities/query_fact_records",
             "graphql/capabilities/subscription_aggregates",
             "graphql/capabilities/subscription_facts",
