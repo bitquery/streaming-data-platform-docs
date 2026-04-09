@@ -6,7 +6,6 @@ sidebar_position: 2
 
 In this section we will see how to get Matic DEX trades information using our API.
 
-
 <head>
 <meta name="title" content="How to Get Polygon (MATIC) Decentralized Exchange Data with DEX Trades API"/>
 <meta name="description" content="Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API."/>
@@ -304,3 +303,139 @@ query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
 This query is available as a chart and table on [https://dexrabbit.com/matic](https://dexrabbit.com/matic)
 
 ![](/img/dexrabbit/matic_toptraders.png)
+
+---
+
+## Trades Cube APIs
+
+The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) for when to use which.
+
+### Get All DEX Trades on Polygon With Price, Market Cap, and Supply
+
+Stream **all Polygon DEX trades** in real time with **USD price**, **market cap**, **FDV**, **circulating supply**, and **transaction fee** data. Filter by **`Pair.Market.Network: Polygon`** to capture every swap across all Polygon DEXs in a single subscription.
+
+You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/All-trades-on-Polygon-with-Price-Marketcap-supply).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Trades(where: { Pair: { Market: { Network: { is: "Matic" } } } }) {
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
+</details>
+
+### Top Traders by PnL for a Specific Pool (Last 30 Minutes)
+
+Rank traders by **`PnL`** on one pool: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **pool-specific trader analytics**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-polygon-pool).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "PnL" }
+      where: {
+        Block: { Time: { since_relative: { minutes_ago: 30 } } }
+        Pair: {
+          Market: {
+            Address: { is: "0x5757371414417b8c6caad45baef941abc7d3ab32" }
+          }
+        }
+      }
+    ) {
+      Trader {
+        Address
+      }
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      Amount_Bought_native: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold_native: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
+      PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+    }
+  }
+}
+```
+
+</details>
+
+---
