@@ -423,37 +423,32 @@ This API returns simple SOL transfers; in other words, it contains transactions 
 #### Solana Chain Trades
 
 This query gets the latest 10 trades on Solana. You can increase the limit to get more trades. This query only uses real-time data.  
-▶️ [Solana Trades](https://ide.bitquery.io/Solana-dextrades)
+▶️ [Solana Trades](https://ide.bitquery.io/Solana-dextrades00_10)
 
 #### Solana Trades of a Token
 
-With this, you can query the trades of a token against another currency like WSOL or USDC.  
-▶️ [Trades of a Token](https://ide.bitquery.io/Latest-Trades-of-Trump-COin)
+With this, you can query the trades of a token on Solana.  
+▶️ [Trades of a Token](https://ide.bitquery.io/Solana-dextrades-for-a-token_1#)
 
 #### Get Trades by Wallet Address
 
 Get all trades related transactions (buy, sell) for a specific wallet address.
-▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/Trades-of-wallets-in-realtime_1)
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/Solana-dextrades-by-a-trader_2)
 
 #### Get Swaps by Pair Address
 
 Get all trades related transactions for a specific pair address.
-▶️ [Get Swaps by Pair Address](https://ide.bitquery.io/Get-Swaps-by-Pair-Address_1)
+▶️ [Get Swaps by Pair Address](https://ide.bitquery.io/swaps-for-a-market-address-on-Solana)
 
 #### Latest Trades for a specific currency on Raydium
 
-This query returns the latest created pools on Raydium. You can set the limit here also.
-▶️ [Latest trades of a token on Raydium](https://ide.bitquery.io/Latest-buy-and-sell-of-specific-currency-on-Raydium-DEX-on-Solana)
+This query returns the latest trades for a token on Raydium. You can set the limit here also.
+▶️ [Latest trades of a token on Raydium](https://ide.bitquery.io/Trades-for-a-token-on-Raydium-on-Solana)
 
 #### Latest Trades in Real Time of a specific DEX
 
 This subscription query returns the latest PumpFun trades in real time.  
-▶️ [Real-time Trades](https://ide.bitquery.io/Pumpfun-DEX-Trades_1#)
-
-#### Realised PnL, avg buy price, buy volume, sell volume
-
-Get realised PnL, average buy price, buy volume, and sell volume for a token on Solana of a trader for over a time window.
-▶️ [Realised PnL, avg buy price, buy volume, sell volume](https://ide.bitquery.io/Realised-Pnl-avg-buy-price-Buy-volume-Sell-Volume-Solana_2)
+▶️ [Real-time Trades](https://ide.bitquery.io/Latest-Pumpfun-trades-on-Solana)
 
 ### OHLC & Price Data
 
