@@ -133,9 +133,12 @@ General pattern of the topic name is:
 <BLOCKCHAIN_NAME>.broadcasted.<MESSAGE_TYPE>
 ```
 
-#### Price Index Streams
+#### Multi-chain trading topics
 
-Our multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/price-index/introduction/) have the topic `trading.prices`, it is not tied to one particular network.
+The **`trading`** namespace has two Kafka topics (not tied to one particular network). **Both use the same credentials** for your subscription:
+
+- **`trading.prices`** — multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/price-index/introduction/). See the [Crypto Price API](/docs/trading/crypto-price-api/introduction) for usage.
+- **`trading.trades`** — real-time DEX trades aligned with the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api). Message structure is defined in [`market/trades.proto`](https://github.com/bitquery/streaming_protobuf/blob/main/market/trades.proto) in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf).
 
 ### General Message Types
 
