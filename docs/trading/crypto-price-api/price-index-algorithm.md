@@ -29,13 +29,13 @@ In other words: a trade must have at least 10,000 units of decimal precision (e.
 
 ## Time Window and Volume Weighting
 
-Price and volume aggregation use a **rolling 1-hour** window.
+Price and volume aggregation use a **1-hour rolling** window.
 
 Each trade (or price entry) contributes to volume weighting with a factor **`exp(-decayRate × age)`**, where **age** is how far back in time the entry lies within that window (0 at the newest edge, increasing toward the older edge). That gives **exponential decay** toward older data: the **most recent** entries contribute **~100%** of their raw volume, while an entry at the **midpoint** of the window contributes **50%** of its volume (**50% exponential average** profile relative to the window).
 
-Aggregations (pool, token, and **non-stablecoin** currency) use these **decayed** volume contributions instead of raw sums over the window.
-
 <img alt="Volume weight decays from the newest edge of the 1-hour window toward older trades" src="/img/diagrams/decay_pricealgo.png" style={{ maxWidth: '640px', width: '100%', height: 'auto' }} />
+
+Aggregations (pool, token, and **non-stablecoin** currency) use these **decayed** volume contributions instead of raw sums over the window.
 
 <img alt="Trade filtering, exponential decay within the 1-hour window, and effective volume per market" src="/img/diagrams/internal_weights.png" style={{ maxWidth: '640px', width: '100%', height: 'auto' }} />
 
@@ -64,7 +64,6 @@ The **token** price is then the same style of **volume-weighted** combination ac
 
 <img alt="Multi-market aggregation to token price, market sort, volume-weighted blend, and API ranking" src="/img/diagrams/external_weights.png" style={{ maxWidth: '640px', width: '100%', height: 'auto' }} />
 
-
 ## How Currency Prices Are Determined
 
 The same rules apply for **non-stablecoin** currencies: a **1-hour** window, **exponentially decayed** volume weights (50% at the midpoint), and aggregation over **tokens** (volume and prices of each token representation) instead of over pairs and pools. Currency price is the volume-weighted combination of its token representations (e.g. WBTC, cbBTC, etc.) across chains.
@@ -77,10 +76,10 @@ The same rules apply for **non-stablecoin** currencies: a **1-hour** window, **e
 
 The API for **Trades**, **Pairs**, and **Tokens** exposes a **Ranking** object with two fields. It does **not** appear on **currencies** (see [How Currency Prices Are Determined](#how-currency-prices-are-determined)):
 
-| Field | Meaning |
-|--------|--------|
+| Field        | Meaning                                                                                                                                                                                                                                                             |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Position** | **1-based** index describing **priority** when multiple sources contribute: order of the **pair** in **token price**, or of the **token** among representations that feed a **non-stablecoin** currency blend. Lower number means higher priority in that ordering. |
-| **Weight** | Float in **`[0, 1]`** — this pool's share of the total decay-weighted volume at the current moment. Reflects how much this pool drives the blended token price. Weights across all contributing pools for a given token sum to 1. |
+| **Weight**   | Float in **`[0, 1]`** — this pool's share of the total decay-weighted volume at the current moment. Reflects how much this pool drives the blended token price. Weights across all contributing pools for a given token sum to 1.                                   |
 
 Use **Position** for display order or precedence; use **Weight** for how much each contributor matters in the blended price.
 
