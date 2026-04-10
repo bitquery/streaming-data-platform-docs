@@ -1,6 +1,6 @@
 ---
 title: "Price Index Algorithm"
-description: "How the Crypto Price API filters trades and computes token and currency prices using exponentially decayed volume weighting over the last 30 minutes."
+description: "How the Crypto Price API filters trades and computes token and currency prices using exponentially decayed volume weighting over the last hour (50% weight at the window midpoint)."
 sidebar_position: 2
 keywords:
   - "price index algorithm"
@@ -29,19 +29,19 @@ In other words: a trade must have at least 10,000 units of decimal precision (e.
 
 ## Time Window and Volume Weighting
 
-Price and volume aggregation use a **rolling 30-minute** window.
+Price and volume aggregation use a **rolling 1-hour** window.
 
-Each trade (or price entry) contributes to volume weighting with a factor **`exp(-decayRate × age)`**, where **age** is how far back in time the entry lies within that window (0 at the newest edge, increasing toward the older edge). That gives **exponential decay** toward older data: the **most recent** entries contribute **~100%** of their raw volume, while an entry at the **midpoint** of the window contributes **25%** of its volume.
+Each trade (or price entry) contributes to volume weighting with a factor **`exp(-decayRate × age)`**, where **age** is how far back in time the entry lies within that window (0 at the newest edge, increasing toward the older edge). That gives **exponential decay** toward older data: the **most recent** entries contribute **~100%** of their raw volume, while an entry at the **midpoint** of the window contributes **50%** of its volume (**50% exponential average** profile relative to the window).
 
 Aggregations (pool, token, and **non-stablecoin** currency) use these **decayed** volume contributions instead of raw sums over the window.
 
-<img alt="Volume weight decays from the newest edge of the 30-minute window toward older trades" src="/img/diagrams/decay_pricealgo.png" style={{ maxWidth: '640px', width: '100%', height: 'auto' }} />
+<img alt="Volume weight decays from the newest edge of the 1-hour window toward older trades" src="/img/diagrams/decay_pricealgo.png" style={{ maxWidth: '640px', width: '100%', height: 'auto' }} />
 
-<img alt="Trade filtering, exponential decay within the 30-minute window, and effective volume per market" src="/img/diagrams/internal_weights.png" style={{ maxWidth: '640px', width: '100%', height: 'auto' }} />
+<img alt="Trade filtering, exponential decay within the 1-hour window, and effective volume per market" src="/img/diagrams/internal_weights.png" style={{ maxWidth: '640px', width: '100%', height: 'auto' }} />
 
 ## How Token Prices Are Determined
 
-Token prices are determined by **volume-weighted aggregation** over eligible trades in the **last 30 minutes**, using decayed volumes as above.
+Token prices are determined by **volume-weighted aggregation** over eligible trades in the **last hour**, using decayed volumes as above.
 
 ### Step 1: Identify pairs where the token is base
 
@@ -49,7 +49,7 @@ We determine in which pairs the token acts as the **base** currency. A token can
 
 ### Step 2: Aggregate from pools to token price
 
-For each such pair we use the markets (DEX pools) where it is traded. Conceptually, for pools that trade the same logical pair, the combined price uses **volume-weighted** pooling with **decayed** base-token volumes over the 30-minute window:
+For each such pair we use the markets (DEX pools) where it is traded. Conceptually, for pools that trade the same logical pair, the combined price uses **volume-weighted** pooling with **decayed** base-token volumes over the 1-hour window:
 
 ```
 price(USD) = sum( price(p) × effectiveVolume(p) ) / sum( effectiveVolume(p) )
@@ -67,7 +67,7 @@ The **token** price is then the same style of **volume-weighted** combination ac
 
 ## How Currency Prices Are Determined
 
-The same rules apply for **non-stablecoin** currencies: a **30-minute** window, **exponentially decayed** volume weights, and aggregation over **tokens** (volume and prices of each token representation) instead of over pairs and pools. Currency price is the volume-weighted combination of its token representations (e.g. WBTC, cbBTC, etc.) across chains.
+The same rules apply for **non-stablecoin** currencies: a **1-hour** window, **exponentially decayed** volume weights (50% at the midpoint), and aggregation over **tokens** (volume and prices of each token representation) instead of over pairs and pools. Currency price is the volume-weighted combination of its token representations (e.g. WBTC, cbBTC, etc.) across chains.
 
 **Stablecoins** are **not** included in this trade-based currency path. Processing skips them in the currency aggregation loop that builds prices from DEX trades; stablecoin USD (or peg) prices come from a **separate pipeline** fed by an **external** spot source, **not** from decay-weighted DEX trade aggregation.
 
