@@ -688,3 +688,146 @@ query Volatility {
   }
 }
 ```
+
+---
+
+## Trades Cube APIs
+
+The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) for when to use which.
+
+### Get All DEX Trades on Meteora DBC With Price, Market Cap, and Supply
+
+Stream **all Meteora DBC DEX trades** in real time with **USD price**, **market cap**, **FDV**, **circulating supply**, and **transaction fee** data. Filter by **`Pair.Market.Protocol: dynamic_bonding_curve`** to capture every swap across Meteora DBC in a single subscription.
+
+You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Get-All-DEX-Trades-on-DBC-With-Price-Market-Cap-and-Supply).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Trades(
+      where: { Pair: { Market: { Protocol: { is: "dynamic_bonding_curve" } } } }
+    ) {
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        Currency {
+          Symbol
+          Id
+          Name
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
+</details>
+
+### Top Traders by PnL for a Specific Meteora DBC Token (Last 30 Minutes)
+
+Rank traders by **`PnL`** on one bonding curve: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **curve-specific trader analytics**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-meteora-DBC-token-curve_2).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "PnL" }
+      where: {
+        Block: { Time: { since_relative: { minutes_ago: 30 } } }
+        Pair: {
+          Market: {
+            Address: { is: "GowkHeDkWv5zvw7RmF9SHeNgxZVDzrVhn9MGBAk1Kfcn" }
+          }
+        }
+      }
+    ) {
+      Trader {
+        Address
+      }
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      Amount_Bought_native: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold_native: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
+      PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+    }
+  }
+}
+```
+
+</details>
+
+---

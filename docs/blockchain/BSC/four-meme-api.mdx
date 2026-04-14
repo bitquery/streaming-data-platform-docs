@@ -16,7 +16,6 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 Bitquery exposes **four.meme (Four Meme)** on **BNB Chain** through GraphQL: **live trades** (`fourmeme_v1`), **TokenCreate** events on the exchange proxy, **bonding curve** math from proxy balances, **migrations** to PancakeSwap, **OHLCV**, **liquidity** events, and **leaderboards**. Use **subscriptions** for real-time streams and **`dataset: combined`** for history. The Four Meme exchange proxy used in examples is **`0x5c952063c7fc8610ffdb798152d69f0b9550762b`** (see below).
 
-
 The sections below are example queries and streams. For other fields, contact [support](https://t.me/Bloxy_info).
 
 Need low-latency BSC data? See [Streams](https://docs.bitquery.io/docs/streams/) and contact us for a trial. For **mempool (pre-confirmation)** Four Meme data, see the dedicated [Four Meme Mempool API](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-mempool-API/) page.
@@ -1901,7 +1900,6 @@ The detection method works by:
 1. **First Query**: Get the first transfers of a token to addresses - this provides the timestamp of when each address first received the token.
 2. **Second Query**: Check if those addresses ever bought the token and when - pass the address list from the first query as a variable to check their purchase history.
 3. **Analysis**: Compare transfer times and trade times in your code:
-
    - If an address **never bought** the token, it's suspicious.
    - If an address's **first buy time is later than the first transfer time**, it indicates the token was received before being purchased, which is a red flag for phishing behavior.
 
@@ -2133,22 +2131,165 @@ query MyQuery {
 
 </details>
 
+---
+
+## Trades Cube APIs
+
+The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) for when to use which.
+
+### Get All DEX Trades on FourMeme With Price, Market Cap, and Supply
+
+Stream **all FourMeme DEX trades** in real time with **USD price**, **market cap**, **FDV**, **circulating supply**, and **transaction fee** data. Filter by **`Pair.Market.Protocol: FourMeme`** to capture every swap across FourMeme in a single subscription.
+
+You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Get-All-DEX-Trades-on-Four-meme-With-Price-Market-Cap-and-Supply).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Trades(
+      where: { Pair: { Market: { ProtocolFamily: { is: "FourMeme" } } } }
+    ) {
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        Currency {
+          Symbol
+          Id
+          Name
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
+</details>
+
+### Top Traders by PnL for a Specific FourMeme Token (Last 30 Minutes)
+
+Rank traders by **`PnL`** on specific bonding curve: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **curve-specific trader analytics**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-token_2).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "PnL" }
+      where: {
+        Block: { Time: { since_relative: { minutes_ago: 30 } } }
+        Pair: {
+          Token: {
+            Address: { is: "0x1f60df4bf4f08498ee4a111058c99774b81e4444" }
+          }
+        }
+      }
+    ) {
+      Trader {
+        Address
+      }
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      Amount_Bought_native: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold_native: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
+      PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+    }
+  }
+}
+```
+
+</details>
+
+---
+
 ## Frequently asked questions (Four Meme + Bitquery) {#frequently-asked-questions-four-meme-bitquery}
 
 These mirror common “answer engine” questions. Each item points to the section on **this page** unless noted.
 
-| Question | Where it is answered |
-| --- | --- |
-| How do I get live Four Meme trades using Bitquery? | [Live trades subscription](#subscribe-the-latest-trades-on-four-meme) (`fourmeme_v1` + `DEXTrades`) |
-| How do I detect Four Meme token migrations to PancakeSwap? | [Migration subscription](#track-all-four-meme-tokens-that-have-migrated-to-pancakeswap) and [check if migrated](#check-if-a-four-meme-token-has-migrated-or-not) |
-| How do I get bonding curve progress for a Four Meme token? | [Bonding curve formula + balance query](#bonding-curve-progress-api-for-fourmeme-token) |
-| What is the Four Meme exchange contract address on BSC? | [Contract address](#what-is-the-four-meme-exchange-contract-address-on-bsc) |
-| How do I get newly created tokens on Four Meme? | [TokenCreate query](#get-newly-created-tokens-on-four-meme) |
-| How do I stream Four Meme token creation events in real time? | [TokenCreate subscription](#how-do-i-stream-four-meme-token-creation-events-in-real-time) |
-| How do I get top tokens by volume on Four Meme? | [Top tokens by volume / activity](#top-tokens-by-buys-sells-volume-price-change-buyers-sellers) and [realtime market cap leaderboard](#top-four-meme-tokens-by-realtime-marketcap) |
-| Can I monitor Four Meme transactions in the BSC mempool before confirmation? | **Separate guide:** [Four Meme Mempool API](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-mempool-API/) (not duplicated on this page) |
-| How do I get Four Meme OHLCV data for a token? | [OHLCV query](#get-ohlcv-data-of-a-four-meme-token) |
-| Can the API return four.meme token volume changes every second? | **Not documented on this page yet** — add minimum interval, aggregation options, and any rate or streaming limits you want to communicate publicly. |
+| Question                                                                     | Where it is answered                                                                                                                                                               |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| How do I get live Four Meme trades using Bitquery?                           | [Live trades subscription](#subscribe-the-latest-trades-on-four-meme) (`fourmeme_v1` + `DEXTrades`)                                                                                |
+| How do I detect Four Meme token migrations to PancakeSwap?                   | [Migration subscription](#track-all-four-meme-tokens-that-have-migrated-to-pancakeswap) and [check if migrated](#check-if-a-four-meme-token-has-migrated-or-not)                   |
+| How do I get bonding curve progress for a Four Meme token?                   | [Bonding curve formula + balance query](#bonding-curve-progress-api-for-fourmeme-token)                                                                                            |
+| What is the Four Meme exchange contract address on BSC?                      | [Contract address](#what-is-the-four-meme-exchange-contract-address-on-bsc)                                                                                                        |
+| How do I get newly created tokens on Four Meme?                              | [TokenCreate query](#get-newly-created-tokens-on-four-meme)                                                                                                                        |
+| How do I stream Four Meme token creation events in real time?                | [TokenCreate subscription](#how-do-i-stream-four-meme-token-creation-events-in-real-time)                                                                                          |
+| How do I get top tokens by volume on Four Meme?                              | [Top tokens by volume / activity](#top-tokens-by-buys-sells-volume-price-change-buyers-sellers) and [realtime market cap leaderboard](#top-four-meme-tokens-by-realtime-marketcap) |
+| Can I monitor Four Meme transactions in the BSC mempool before confirmation? | **Separate guide:** [Four Meme Mempool API](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-mempool-API/) (not duplicated on this page)                                     |
+| How do I get Four Meme OHLCV data for a token?                               | [OHLCV query](#get-ohlcv-data-of-a-four-meme-token)                                                                                                                                |
+| Can the API return four.meme token volume changes every second?              | **Not documented on this page yet** — add minimum interval, aggregation options, and any rate or streaming limits you want to communicate publicly.                                |
 
 ## Video Tutorial | How to get Bonding Curve Progress of any Four Meme Token
 

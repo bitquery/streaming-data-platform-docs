@@ -630,7 +630,7 @@ query MyQuery {
 
 ### How do I check if a Pump.fun token was launched in Mayhem mode? (Historical)
 
-To determine if a Pump.fun token was launched in Mayhem mode, we utilize the Solana v1 Transfers API. The following query checks transfers of exactly 1,000,000,000,000,000 units (which equals 1 billion tokens when adjusted for 6 decimal places). 
+To determine if a Pump.fun token was launched in Mayhem mode, we utilize the Solana v1 Transfers API. The following query checks transfers of exactly 1,000,000,000,000,000 units (which equals 1 billion tokens when adjusted for 6 decimal places).
 
 - If the resulting count is **2**, the token was launched in Mayhem mode.
 - If the count is **1**, the token was launched in standard mode.
@@ -646,9 +646,9 @@ This method reliably identifies whether a token's initial mint followed the Mayh
 {
   solana {
     transfers(
-      date:{since:"2025-01-01"}
-      amount: {is: 1000000000000000}
-      currency: {is: "EEhQvi54Rwme2z84gG6qQmuaWjnZ6b9AMgq5aGkKpump"}
+      date: { since: "2025-01-01" }
+      amount: { is: 1000000000000000 }
+      currency: { is: "EEhQvi54Rwme2z84gG6qQmuaWjnZ6b9AMgq5aGkKpump" }
     ) {
       count
     }
@@ -1209,8 +1209,15 @@ The sample GraphQL query below retrieves all Pump.fun tokens traded in the last 
 {
   Trading {
     Pairs(
-      limitBy: {by: Token_Address, count: 1}
-      where: {Market: {Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}, Token: {Network: {is: "Solana"}}, Block: {Time: {since_relative: {minutes_ago: 60}}}, Interval: {Time: {Duration: {eq: 1}}}}
+      limitBy: { by: Token_Address, count: 1 }
+      where: {
+        Market: {
+          Program: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+        }
+        Token: { Network: { is: "Solana" } }
+        Block: { Time: { since_relative: { minutes_ago: 60 } } }
+        Interval: { Time: { Duration: { eq: 1 } } }
+      }
     ) {
       Token {
         Address
@@ -1230,6 +1237,7 @@ The sample GraphQL query below retrieves all Pump.fun tokens traded in the last 
   }
 }
 ```
+
 </details>
 
 ### How do I get tokens that reached a specific market cap on Pump.fun?
@@ -1245,8 +1253,16 @@ To find tokens on Pump.fun that have reached a specific market capitalization th
 {
   Trading {
     Pairs(
-      limitBy: {by: Token_Address, count: 1}
-      where: {Market: {Program: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}, Token: {Network: {is: "Solana"}}, Supply: {MarketCap: {ge: 10000}}, Block: {Time: {since_relative: {minutes_ago: 1}}}, Interval: {Time: {Duration: {eq: 1}}}}
+      limitBy: { by: Token_Address, count: 1 }
+      where: {
+        Market: {
+          Program: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+        }
+        Token: { Network: { is: "Solana" } }
+        Supply: { MarketCap: { ge: 10000 } }
+        Block: { Time: { since_relative: { minutes_ago: 1 } } }
+        Interval: { Time: { Duration: { eq: 1 } } }
+      }
     ) {
       Token {
         Address
@@ -1279,8 +1295,8 @@ To find tokens on Pump.fun that have reached a specific market capitalization th
   }
 }
 ```
-</details>
 
+</details>
 
 ### How do I get detailed trade stats (volume, buys, sells, makers, buyers, sellers)?
 
@@ -2228,6 +2244,147 @@ subscription {
 ```
 
 </details>
+
+---
+
+## Trades Cube APIs
+
+The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) for when to use which.
+
+### Get All DEX Trades on PumpFun With Price, Market Cap, and Supply
+
+Stream **all PumpFun DEX trades** in real time with **USD price**, **market cap**, **FDV**, **circulating supply**, and **transaction fee** data. Filter by **`Pair.Market.ProtocolFamily: Pumpfun`** to capture every swap across Pumpfun in a single subscription.
+
+You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Get-All-DEX-Trades-on-Pumpfun-With-Price-Market-Cap-and-Supply).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Trades(where: { Pair: { Market: { ProtocolFamily: { is: "Pumpfun" } } } }) {
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        Currency {
+          Symbol
+          Id
+          Name
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
+</details>
+
+### Top Traders by PnL for a Specific PumpFun Token (Last 30 Minutes)
+
+Rank traders by **`PnL`** on one bonding curve: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **curve-specific trader analytics**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-pumpfun-token-curve).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "PnL" }
+      where: {
+        Block: { Time: { since_relative: { minutes_ago: 30 } } }
+        Pair: {
+          Market: {
+            Address: { is: "4eFeg1mKLXQh6cssyp4kJzEcSYfCmRQnkDx1EPW8VHMw" }
+          }
+        }
+      }
+    ) {
+      Trader {
+        Address
+      }
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      Amount_Bought_native: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold_native: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
+      PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+    }
+  }
+}
+```
+
+</details>
+
+---
 
 ## Video Tutorials
 

@@ -12,10 +12,19 @@ keywords:
 ---
 
 <head>
-  <meta name="title" content="DEXScreener API Documentation - Solana Trades, Pairs, Prices"/>
-  <meta name="description" content="DEXScreener API documentation for Solana: get real-time trades, pair data, prices, volumes. Same data as DEXScreener dashboard via GraphQL, WebSocket, and Kafka."/>
-  <meta name="keywords" content="DEXScreener API, DEXScreener API documentation, DEXScreener Solana, Solana DEX API, real-time DEX trades"/>
-  <meta name="robots" content="index, follow"/>
+  <meta
+    name="title"
+    content="DEXScreener API Documentation - Solana Trades, Pairs, Prices"
+  />
+  <meta
+    name="description"
+    content="DEXScreener API documentation for Solana: get real-time trades, pair data, prices, volumes. Same data as DEXScreener dashboard via GraphQL, WebSocket, and Kafka."
+  />
+  <meta
+    name="keywords"
+    content="DEXScreener API, DEXScreener API documentation, DEXScreener Solana, Solana DEX API, real-time DEX trades"
+  />
+  <meta name="robots" content="index, follow" />
 </head>
 
 # DEXScreener API Documentation - Solana Trades, Pairs, Prices
@@ -84,13 +93,12 @@ subscription MyQuery {
 
 ```
 
-
 ## Get Price of a Token
 
 This query will give you the latest Price of a specified token using Trading API. Here is the [saved query link](https://ide.bitquery.io/token-usd-price-using-trading-api_1)
 
 ```
-query MyQuery { 
+query MyQuery {
   Trading {
     Pairs(
       where: {Token: {Id: {is: "bid:solana:8jiVXftnn2ZG6bugK7HAH5j2G3D6TpsG521gqsWwpump"}}, Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}}
@@ -124,7 +132,6 @@ query MyQuery {
 
 ```
 
-
 ## Get OHLC Data for a Token Pair
 
 This query fetches the Open, High, Low, and Close (OHLC) price data (USD-quoted) for a given token pair across DEXs, using a specified quote token and time interval (in seconds). Specify the base token and quote token contract addresses in the `Token.Id` and `QuoteToken.Id` filters. The `Interval.Time.Duration` field allows you to define the candle interval (e.g., `3600` for 1 hour). The query returns the most recent OHLC data for up to 10 pairs sorted by their interval start time.
@@ -132,7 +139,7 @@ This query fetches the Open, High, Low, and Close (OHLC) price data (USD-quoted)
 You can find the query [here](https://ide.bitquery.io/ohlc-of-a-solana-token-pair-1-hour-interval)
 
 ```
-query MyQuery { 
+query MyQuery {
   Trading {
     Pairs(
       where: {Token: {Id: {is: "bid:solana:8jiVXftnn2ZG6bugK7HAH5j2G3D6TpsG521gqsWwpump"}}, QuoteToken: {Id: {is: "bid:solana:So11111111111111111111111111111111111111112"}}, Interval: {Time: {Duration: {eq: 3600}}}, Price: {IsQuotedInUsd: true}}
@@ -171,7 +178,6 @@ query MyQuery {
 }
 
 ```
-
 
 ## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token of DEXScreener
 
@@ -336,6 +342,142 @@ query MyQuery {
   }
 }
 ```
+
+---
+
+## Trades Cube APIs
+
+The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) for when to use which.
+
+### Get All DEX Trades on Solana With Price, Market Cap, and Supply
+
+Stream **all Solana DEX trades** in real time with **USD price**, **market cap**, **FDV**, **circulating supply**, and **transaction fee** data. Filter by **`Pair.Market.Network: Solana`** to capture every swap across **Raydium**, **Orca**, **Jupiter**, **PumpSwap**, and other Solana DEXs in a single subscription.
+
+You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/All-trades-on-Solana-with-Price-Marketcap-supply).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Trading {
+    Trades(where: { Pair: { Market: { Network: { is: "Solana" } } } }) {
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
+</details>
+
+### Top Traders by PnL for a Specific Pool (Last 30 Minutes)
+
+Rank traders by **`PnL`** on one pool: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **pool-specific trader analytics**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-pair#).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 10 }
+      orderBy: [{ descendingByField: "PnL" }]
+      where: {
+        Block: { Time: { since_relative: { minutes_ago: 30 } } }
+        Pair: {
+          Market: {
+            Address: { is: "2axyccPzS7Ei57c7ESEq7tBpo4HxtpfCR9gKxh5uNUpu" }
+          }
+        }
+      }
+    ) {
+      Trader {
+        Address
+      }
+      Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      Amount_Bought_native: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
+      Amount_Sold_native: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
+      PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+    }
+  }
+}
+```
+
+</details>
+
+---
 
 ## Video Tutorial on How to Get Solana DEXTrades Data just like DEXScreener from Bitquery API
 
