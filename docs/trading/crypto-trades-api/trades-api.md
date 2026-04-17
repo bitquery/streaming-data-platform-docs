@@ -388,6 +388,98 @@ subscription {
 
 ---
 
+## How Do I Stream Uniswap v4 Trades on Ethereum With Pool Id and Market Cap?
+
+> Stream **Uniswap v4** swaps on **Ethereum** by filtering **`Pair.Market.Network: Ethereum`** and **`Pair.Market.Protocol: uniswap_v4`**. Each event includes **`Pair.Pool.Id`** (the **v4 pool identifier** the protocol uses), **`Pair.Pool.Address`**, **market cap** and **circulating supply** under **`Supply`**, and full **pair** and **trader** context.
+
+You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Uniswap-v4-trades-with-pool-id-and-mcap).
+
+```graphql
+subscription {
+  Trading {
+    Trades(
+      where: {Pair: {Market: {Network: {is: "Ethereum"}, Protocol: {is: "uniswap_v4"}}}}
+    ) {
+      Side
+      Supply {
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        Pool {
+          Id
+          Address
+        }
+      }
+    }
+  }
+}
+```
+
+On **Uniswap v4**, use **`Pair.Pool.Id`** as the stable **pool id** field (alongside **`Pair.Pool.Address`**). Example shape:
+
+```json
+"Pool": {
+  "Address": "0x000000000004444c5dc75cb358380d2e3de08a90",
+  "Id": "0x71ad627a0586a06b24834f7af328c5c387a512d183dbd7b8c31189a866adcefa"
+}
+```
+
+---
+
 ## How Do I Stream All DEX Trades on BSC (BNB Chain)?
 
 > Stream **every DEX swap on BNB Smart Chain** in real time — filter by **`Pair.Market.Network: Binance Smart Chain`** to capture trades across **PancakeSwap**, **Four.meme**, and other BSC DEXs. Each event returns **side**, **USD amounts**, **market cap**, **circulating supply**, **trader address**, and **pair metadata**.
