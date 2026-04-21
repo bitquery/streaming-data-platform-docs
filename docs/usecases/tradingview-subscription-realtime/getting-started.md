@@ -36,6 +36,16 @@ You do **not** need to read everything on this page before coding. Skim the [tut
 
 Come back here when something is unclear—especially [Key concepts](#key-concepts), [Architecture](#architecture-overview), or [When something goes wrong](#when-something-goes-wrong).
 
+## Checklist before you open your editor {#checklist-before-you-open-your-editor}
+
+Before you open [Getting Historical Data](/docs/usecases/tradingview-subscription-realtime/historical_OHLC/), confirm you have:
+
+- A **Bitquery** account and **OAuth** token with streaming access ([how to generate a token](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+- **TradingView Advanced Charts** approved and the `charting_library` files available locally (see [Prerequisites](#prerequisites)).
+- **Node.js 16+** installed.
+
+Optional: clone the [reference implementation](#clone-the-reference-repo-fastest) so you can compare your code with a working app.
+
 ## What you will build
 
 By the end of the series you will have a **small React application** that:
@@ -111,7 +121,7 @@ At runtime, the pieces interact like this:
 
 ---
 
-## Clone the reference repo (fastest)
+## Clone the reference repo (fastest) {#clone-the-reference-repo-fastest}
 
 1. Clone [tradingview-subscription-realtime](https://github.com/bitquery/tradingview-subscription-realtime).
 2. Add your **TradingView** `charting_library` (and any required folders) where the project expects them—see the repo README and [Widget Creation](/docs/usecases/tradingview-subscription-realtime/widget/).
@@ -210,11 +220,11 @@ Test these in [Bitquery IDE](https://ide.bitquery.io) **before** you paste them 
 | Gaps between candles               | Expected for raw aggregated OHLC; implement [Bar continuity](/docs/usecases/tradingview-subscription-realtime/bar-continuity/) if you want visual stitching. |
 | “TradingView is undefined”         | Import path to `charting_library` does not match where you copied the files.                                                                                 |
 
-For Bitquery-specific errors, see [support](#community--support).
+For Bitquery-specific errors, see [support](#community-and-support).
 
 ---
 
-## Community and support
+## Community and support {#community-and-support}
 
 - **Telegram:** [Bitquery Developers](https://t.me/Bloxy_info)
 - **Email:** support@bitquery.io
