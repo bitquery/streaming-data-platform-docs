@@ -1,19 +1,96 @@
-# Building MCPs using Bitquery
+---
+title: "Bitquery MCP Server"
+description: "Connect Claude, Cursor, or Claude Code to Bitquery’s production ClickHouse via MCP. Setup, OAuth flow, and example queries."
+keywords: ["Bitquery MCP", "Model Context Protocol", "ClickHouse", "Claude Desktop", "Cursor MCP", "mcp.bitquery.io"]
+---
 
-In this section, we will explore sample tutorials on building MCPs using Bitquery APIs and Streams for various use cases, such as algorithmic trading, on-chain investigation of hacks, and tracking fund flows in suspicious transactions, among others.
+<head>
+<meta name="title" content="Bitquery MCP Server"/>
+<meta name="description" content="Connect AI assistants to Bitquery’s production ClickHouse via MCP at mcp.bitquery.io."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Bitquery MCP Server"/>
+<meta property="og:description" content="Query raw trade data from the same ClickHouse that powers Bitquery—not an API wrapper."/>
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Bitquery MCP Server"/>
+</head>
 
-If you need guidance, please contact us on [our support channel](https://t.me/Bloxy_info) or create a ticket [here](https://support.bitquery.io/)
+# Bitquery MCP Server — now live
 
-## Tutorials
+**Endpoint:** [https://mcp.bitquery.io](https://mcp.bitquery.io)
 
-import VideoPlayer from "../../src/components/videoplayer.js";
+**Important:** this is **not** an API wrapper. The MCP connects directly to Bitquery’s **ClickHouse** database which is the same production database that powers Bitquery—so your agent can query raw trade data with the tools exposed by the server.
 
-### DEX Trading using MCP
+If you need help, use [our support channel](https://t.me/Bloxy_info) or open a ticket on [support.bitquery.io](https://support.bitquery.io/).
 
-Complete code available [here](https://github.com/Divyn/crypto-trading-mcp/tree/main)
+## Setup — Claude Desktop
 
-<VideoPlayer url="https://youtu.be/HhGL3cqYYTg" />
+1. Open **Settings → Developer → Edit Config**.
+2. Add this block to `claude_desktop_config.json` (merge with any existing `mcpServers`):
 
-### Crypto Investigation using MCP
+```json
+{
+  "mcpServers": {
+    "bitquery": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.bitquery.io/mcp"]
+    }
+  }
+}
+```
 
-<VideoPlayer url="https://youtu.be/1AFfWlFYNb8" />
+3. Restart Claude Desktop.
+4. Bitquery tools load automatically—look for the tools / connector icon in the UI.
+
+## Setup — Claude Code (terminal)
+
+```bash
+claude mcp add bitquery -- npx -y mcp-remote https://mcp.bitquery.io/mcp
+```
+
+## Setup — Cursor IDE
+
+Add to `.cursor/mcp.json` (create the file if it does not exist):
+
+```json
+{
+  "mcpServers": {
+    "bitquery": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.bitquery.io/mcp"]
+    }
+  }
+}
+```
+
+Restart Cursor or reload MCP configuration so the server is picked up.
+
+## First connection and permissions
+
+After configuration, you should see **Bitquery Trading Data** (or similar) among your MCP connectors—for example in Claude Desktop’s connector list:
+
+![Bitquery MCP listed among custom connectors](/img/mcp/mcp-connectors-bitquery-listed.png)
+
+The first time a tool runs, the client may ask you to **connect** and approve the request:
+
+![Tool run requesting Connect for Bitquery](/img/mcp/mcp-tool-connect-prompt.png)
+
+You will be prompted to **sign in** to your Bitquery account (create one free if needed):
+
+![Bitquery sign-in to authorize the application](/img/mcp/mcp-bitquery-sign-in.png)
+
+Then **authorize** the client (for example Claude) to use your account:
+
+![Authorize Bitquery access for the requesting application](/img/mcp/mcp-bitquery-authorize-access.png)
+
+In clients like Cursor you can choose whether tool calls need approval each time or are always allowed:
+
+![Tool permission options such as Always allow](/img/mcp/mcp-tool-permissions-dropdown.png)
+
+## Quick test after setup
+
+Ask your assistant something like:
+
+> Show me the top 10 traders on Solana by realized profit in the last 24 hours.
+
+That kind of question can scan large volumes of trades across Solana DEX venues, aggregate by wallet, and rank—directly against ClickHouse through the MCP tools.

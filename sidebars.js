@@ -882,7 +882,11 @@ const sidebars = {
         title: "How-To Guides Overview",
       },
       items: [
-        "usecases/MCP",
+        {
+          type: "doc",
+          id: "usecases/MCP",
+          label: "Bitquery MCP Server",
+        },
         {
           type: "category",
           label: "NFT Applications",

@@ -946,6 +946,12 @@ const config = {
             className: "v2-highlight",
           },
           {
+            type: "doc",
+            docId: "usecases/MCP",
+            position: "left",
+            label: "MCP Server",
+          },
+          {
             to: "https://bitquery.io/forms/api",
             label: "Book Demo",
             position: "left",
@@ -955,11 +961,6 @@ const config = {
             label: "Access API",
             position: "right",
             className: "button button--primary bright-white-text",
-          },
-          {
-            to: "https://dexrabbit.bitquery.io/",
-            label: "DEXRabbit",
-            position: "left",
           },
           {
             to: "https://docs.bitquery.io/docs/graphql/indexed-fields-reference/",
