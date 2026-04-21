@@ -35,11 +35,93 @@ In this section we will see how to get Arbitrum DEX trades information using our
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
+## Live DEX swap stream (Arbitrum) {#crypto-trades-live-stream}
+
+[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): one row per swap, with USD and supply. Filter **`Pair.Market.Network: Arbitrum`**. [When to use this vs chain DEX APIs](/docs/cubes/dextrades-dextradebytokens-trading-trades).
+
+Run this subscription in the [Bitquery IDE](https://ide.bitquery.io) (open a new tab, paste the subscription below, and run).
+
+```graphql
+subscription {
+  Trading {
+    Trades(where: { Pair: { Market: { Network: { is: "Arbitrum" } } } }) {
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
 ## Top Trending Pairs on Arbitrum
 
 [This](https://ide.bitquery.io/trending-token-pairs-on-Arbitrum) query returns the top trending pairs traded on Arbitrum Chain based on the trade volume for the last 24 hours, and returns info such as latest price, number of buyers and sellers, number of trades in a day and much more.
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 ```graphql
 query pairs(
@@ -245,7 +327,8 @@ An example for the data visualisation of the data obtained could be seen on the 
 
 ## Latest Trades in Realtime with Subscription
 
-This subscription query will return the latest DEX trades on the Arbitrum network in real time.
+This example uses the chain-specific **DEXTrades** cube via `EVM(network: arbitrum) { DEXTrades }` (pool-side Buy/Sell; see [DEXTrades cube](/docs/cubes/dextrades)). USD can be weak on thin pools. For trader + USD swap rows, use the [stream at the top](#crypto-trades-live-stream).
+
 You can find the query [here](https://ide.bitquery.io/Arbitrum-Dextrades-subscription)
 
 ```

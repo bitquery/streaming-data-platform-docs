@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
+
 
 # Photon Solana API
 
@@ -160,7 +160,7 @@ You can find the query [here](https://ide.bitquery.io/Trades-of-a-Pair-Executed-
 
 ## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) for when to use which.
+The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
 ### Get All DEX Trades on Solana With Price, Market Cap, and Supply
 
@@ -293,5 +293,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 ---
 
 ## Video Tutorial | Photon API Tutorial: Track DEXTrades on Solana (2026)
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://www.youtube.com/watch?v=XoKQIymC4kA" />

@@ -37,11 +37,93 @@ In this section we will see how to get Optimism DEX trades information using our
 <meta property="twitter:description" content="Get on-chain data of any Optimism based DEX through our DEX Trades API." />
 </head>
 
+## Live DEX swap stream (Optimism) {#crypto-trades-live-stream}
+
+[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): one row per swap, with USD and supply. Filter **`Pair.Market.Network: Optimism`**. [When to use this vs chain DEX APIs](/docs/cubes/dextrades-dextradebytokens-trading-trades).
+
+Run this subscription in the [Bitquery IDE](https://ide.bitquery.io) (open a new tab, paste the subscription below, and run).
+
+```graphql
+subscription {
+  Trading {
+    Trades(where: { Pair: { Market: { Network: { is: "Optimism" } } } }) {
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
 ## Top Trending Pairs on Optimism
 
 [This](https://ide.bitquery.io/trending-pairs-on-optimism) query returns the top trending trading pairs on Optimism based on the `Trade Volume`, and returns info like unique buyers and sellers, number of markets where the pair exist, latest price and price at a given time and much more.
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 ```graphql
 query pairs(
@@ -141,7 +223,8 @@ The example of this could be seen on the [DEXRabbit](https://dexrabbit.com/optim
 
 ## Subscribe to Latest Optimism Trades
 
-This subscription will return information about the most recent trades executed on Optimism's DEX platforms.
+This example uses the chain-specific **DEXTrades** cube via `EVM(network: optimism) { DEXTrades }` (pool-side Buy/Sell; see [DEXTrades cube](/docs/cubes/dextrades)). USD can be weak on thin pools. For trader + USD swap rows, use the [stream at the top](#crypto-trades-live-stream).
+
 You can find the query [here](https://ide.bitquery.io/Realtime-optimism-dex-trades-websocket)
 
 ```

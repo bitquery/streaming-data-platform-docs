@@ -127,6 +127,10 @@ const config = {
             from: "/docs/graphql/dataset/select_blocks/",
           },
           {
+            to: "/docs/cubes/dextrades-dextradebytokens-trading-trades/",
+            from: "/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades/",
+          },
+          {
             to: "/docs/usecases/nft-analytics/",
             from: "/docs/usecases/nft_Analytics/",
           },

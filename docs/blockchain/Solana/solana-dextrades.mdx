@@ -7,7 +7,7 @@ sidebar_position: 2
 Bitquery provides Solana DEX trade data through APIs, Streams, and Data Dumps.  
 The GraphQL APIs and subscriptions below are examples of the real-time and historical trade data you can access across [Raydium](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/), [Orca](https://docs.bitquery.io/docs/blockchain/Solana/solana-orca-dex-api/), [Phoenix](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Phoenix-api/), [Meteora](https://docs.bitquery.io/docs/blockchain/Solana/Meteora-DAMM-v2-API/), [Jupiter](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api/), and other Solana-based DEXs.
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 If you have questions or need custom data, reach out to [support](https://t.me/Bloxy_info).
 
@@ -74,11 +74,91 @@ Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bit
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-## Subscribe to Latest Solana Trades
+## Live DEX swap stream (Solana) {#crypto-trades-live-stream}
 
-This subscription will return information about the most recent trades executed on Solana's DEX platforms.
+[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): one row per swap, with USD and supply. Filter **`Pair.Market.Network: Solana`**. [When to use this vs chain DEX APIs](/docs/cubes/dextrades-dextradebytokens-trading-trades).
 
-For analyzing the transaction fees associated with these trades, see our **[Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api/)**.
+Run this subscription [in the Bitquery IDE](https://ide.bitquery.io/All-trades-on-Solana-with-Price-Marketcap-supply).
+
+```graphql
+subscription {
+  Trading {
+    Trades(where: { Pair: { Market: { Network: { is: "Solana" } } } }) {
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
+## Subscribe to Latest Solana Trades {#subscribe-to-latest-solana-trades}
+
+This example uses the chain-specific **DEXTrades** cube via `Solana { DEXTrades }` (good for signer/account filters). USD can be thin on some tokens. For swap rows with stronger USD, use the [stream at the top](#crypto-trades-live-stream). Fees: [Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api/).
 
 You can find the query [here](https://ide.bitquery.io/solana-trades-subscription_3)
 
@@ -2212,7 +2292,7 @@ query {
 
 ## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) for when to use which.
+The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
 ### Get All DEX Trades on Solana With Price, Market Cap, and Supply
 

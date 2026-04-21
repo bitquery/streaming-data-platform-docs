@@ -7,7 +7,7 @@ sidebar_position: 2
 Bitquery provides BSC DEX trade data through APIs, Streams, and Data Dumps.  
 The examples below show how to access real-time and historical trade data across BSC-based DEXs using GraphQL APIs and subscriptions.
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 If you're looking for other data points or have integration questions, reach out to [support](https://t.me/Bloxy_info).
 
@@ -55,9 +55,92 @@ Follow these steps: [How to generate Bitquery API token ➤](https://docs.bitque
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
+## Live DEX swap stream (BNB Chain) {#crypto-trades-live-stream}
+
+[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): one row per swap, with USD and supply. Filter **`Pair.Market.Network: Binance Smart Chain`**. [When to use this vs chain DEX APIs](/docs/cubes/dextrades-dextradebytokens-trading-trades).
+
+Run this subscription [in the Bitquery IDE](https://ide.bitquery.io/All-BNB-Trade-Stream).
+
+```graphql
+subscription {
+  Trading {
+    Trades(where: { Pair: { Market: { Network: { is: "Binance Smart Chain" } } } }) {
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
 ## Subscribe to Latest BSC Trades
 
-This subscription will return information about the most recent trades executed on BSC's DEX platforms.
+This example uses the chain-specific **DEXTrades** cube via `EVM(network: bsc) { DEXTrades }` (pool-side Buy/Sell; see [DEXTrades cube](/docs/cubes/dextrades)). USD fields can be empty on thin pools. For swap rows with trader + USD, use the [stream at the top](#crypto-trades-live-stream) of this page.
+
 You can find the query [here](https://ide.bitquery.io/subscribe-to-bsc-dex-trades)
 
 ```
@@ -683,58 +766,96 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/pair/0x711b
 
 ## Get Latest Trades on a specific DEX
 
-In this section, we will see how we can [subscribe](https://ide.bitquery.io/latest-trades-on-a-DEX-bsc) to the latest trades on particular DEX,
-Pancakeswap V3 in this example, using the `OwnerAddress` which is the alias for the `Factory Address` of the DEX as seen in the example below.
+Use the **[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)** to stream **live swaps** on BNB Chain. The example below only shows **PancakeSwap v3**: set **`Pair.Market.Network`** to **`Binance Smart Chain`** and **`Pair.Market.Protocol`** to **`pancake_swap_v3`**. Each event is one swap, with price in USD and the trader address.
+
+See [all BSC swaps](/docs/trading/crypto-trades-api/trades-api#how-do-i-stream-all-dex-trades-on-bsc-bnb-chain) in the Trades API doc, or open [every BSC swap in the IDE](https://ide.bitquery.io/All-BNB-Trade-Stream). For pool-level queries on PancakeSwap using **`EVM { DEXTrades }`**, use the [PancakeSwap API](/docs/blockchain/BSC/pancake-swap-api).
 
 ```graphql
 subscription {
-  EVM(network: bsc) {
-    DEXTrades(
+  Trading {
+    Trades(
       where: {
-        Trade: {
-          Dex: {
-            OwnerAddress: { is: "0x0BFbCF9fa4f9C56B0F40a671Ad40E0805A091865" }
+        Pair: {
+          Market: {
+            Network: { is: "Binance Smart Chain" }
+            Protocol: { is: "pancake_swap_v3" }
           }
         }
       }
     ) {
-      Trade {
-        Buy {
-          Currency {
-            SmartContract
-            Name
-            Symbol
-          }
-          PriceInUSD
-          Price
-          AmountInUSD
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
         }
-        Sell {
-          Buyer
-          Seller
-          Price
-          PriceInUSD
-          Currency {
-            Name
-            SmartContract
-            Symbol
-          }
+        Market {
+          Address
+          Program
+          Network
         }
-        Dex {
-          Pair {
-            SmartContract
-          }
-          ProtocolName
-          ProtocolFamily
-          ProtocolVersion
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
         }
       }
+      Price
+      PriceInUsd
     }
   }
 }
 ```
 
-Additionally we can also add filters and conditions on other parameters, such as `Currency SmartContract` to get latest trades of a token on a particular DEX as seen in this [example](https://ide.bitquery.io/latest-trades-of-a-token-on-a-DEX).
+To stream **a token on that DEX**, keep the same **`Pair.Market`** filters and add **`Pair.Token`** / **`Pair.QuoteToken`** (e.g. contract or **`Pair.Token.Id`**) — same patterns as token streams in the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api). For a **DEXTrades**-style example keyed on factory + token, see this [IDE query](https://ide.bitquery.io/latest-trades-of-a-token-on-a-DEX).
 
 ## Get all DEXs where a specific token pair is listed
 
@@ -1412,7 +1533,7 @@ query {
 
 ## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) for when to use which.
+The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
 ### Get All DEX Trades on BSC With Price, Market Cap, and Supply
 

@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Tron DEX Trades API
 
-In this section we will see how to get Tron DEX trades information using our API.
+**Tron DEX Trades** help you see **who swapped what, when, and at what price** on Tron decentralized exchanges which is useful for dashboards, alerts, research, and trading tools. The examples below are ready-to-run **GraphQL** queries and subscriptions you can copy into the [Bitquery IDE](https://ide.bitquery.io). You can also stream at scale via [Apache Kafka](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
 
 <head>
 <meta name="title" content="How to Get Tron Decentralized Exchange Data with DEX Trades API"/>
@@ -33,11 +33,92 @@ In this section we will see how to get Tron DEX trades information using our API
 <meta property="twitter:description" content="Get on-chain data of any Tron based DEX through our DEX Trades API." />
 </head>
 
+## Live DEX swap stream (Tron) {#crypto-trades-live-stream}
+
+[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): one row per swap, with USD and supply. Filter **`Pair.Market.Network: Tron`**. [When to use this vs chain DEX APIs](/docs/cubes/dextrades-dextradebytokens-trading-trades).
+
+Run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Get-All-DEX-Trades-on-Tron-With-Price-Market-Cap-and-Supply).
+
+```graphql
+subscription {
+  Trading {
+    Trades(where: { Pair: { Market: { Network: { is: "Tron" } } } }) {
+      Side
+      Supply {
+        MaxSupply
+        TotalSupply
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
 ## Subscribe to Latest Tron Trades
 
-This subscription will return information about the most recent trades executed on Tron's DEX platforms.
+This example uses the chain-specific **DEXTrades** cube via `Tron { DEXTrades }`. For trader + USD swap rows, use the [stream at the top](#crypto-trades-live-stream).
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 You can try the query [here](https://ide.bitquery.io/Latest-trades-on-Tron)
 
 ```
@@ -748,96 +829,9 @@ query {
 
 ---
 
-## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
+## More examples
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/graphql/capabilities/dextrades-dextradebytokens-trading-trades) for when to use which.
-
-### Get All DEX Trades on Tron With Price, Market Cap, and Supply
-
-Stream **all Tron DEX trades** in real time with **USD price**, **market cap**, **FDV**, **circulating supply**, and **transaction fee** data. Filter by **`Pair.Market.Network: Tron`** to capture every swap across all BSC DEXs in a single subscription.
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Get-All-DEX-Trades-on-Tron-With-Price-Market-Cap-and-Supply).
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-subscription {
-  Trading {
-    Trades(where: { Pair: { Market: { Network: { is: "Tron" } } } }) {
-      Side
-      Supply {
-        MaxSupply
-        TotalSupply
-        FullyDilutedValuationUsd
-        CirculatingSupply
-        MarketCap
-      }
-      Trader {
-        Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-        Hash
-        Index
-      }
-      Amounts {
-        Base
-        Quote
-      }
-      AmountsInUsd {
-        Base
-        Quote
-      }
-      Block {
-        Date
-        Time
-        Timestamp
-      }
-      Pair {
-        Currency {
-          Id
-          Name
-          Symbol
-        }
-        Market {
-          Address
-          Program
-          Network
-        }
-        QuoteCurrency {
-          Id
-          Name
-          Symbol
-        }
-        Token {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-        QuoteToken {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-      }
-      Price
-      PriceInUsd
-    }
-  }
-}
-```
-
-</details>
+Pool-level example below; full-network swap stream is [above](#crypto-trades-live-stream).
 
 ### Top Traders by PnL for a Specific Pool (Last 30 Minutes)
 

@@ -2,10 +2,6 @@
 
 This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair and many more just like how Photon shows for EVM Chains.
 
-import VideoPlayer from "../../../../src/components/videoplayer.js";
-
-<img width="1445" alt="Image" src="https://github.com/user-attachments/assets/1dfb2ecc-419f-4154-98d1-6964a47e7b44" />
-
 ## Get the Top Trading Pairs
 
 The query will fetch you the Top Trading Pairs in desceneding order of the total number of trades took place in them just like how Photon shows in its UI. You can check out the video tutorial [here](https://www.youtube.com/watch?v=qAJ2SPFaO-k) to understand the query better.

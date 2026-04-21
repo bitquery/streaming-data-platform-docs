@@ -17,10 +17,13 @@
   <meta property="twitter:description" content="Retrieve token data, trades, and prices for SunSwap tokens on the Tron network using the SunSwap API."/>
 </head>
 
+**[Bitquery](https://bitquery.io)** provides useful tron activity through **GraphQL** (on-demand queries and live **subscriptions**), and high-throughput Kafks streams for enterprise teams.
+
+This page documents **SunSwap**-related examples on **Tron**—events, contracts, and streams you can copy into the IDE. For general Tron DEX trade patterns, see the [Tron DEX Trades API](/docs/blockchain/Tron/tron-dextrades). If you are new here, start with [Your first query](/docs/start/first-query).
 
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 
-## New Tokens on Sunpump and Sell event in Ton Mempool
+## New Tokens on Sunpump and Sell event in Tron Mempool
 
 You can use following query to get new tokens and sell event using following stream.
 

@@ -8,9 +8,58 @@ sidebar_position: 7
 
 This GraphQL query retrieves the latest trades executed by a particular maker on the Ethereum network. You can view the query in the IDE [here](https://ide.bitquery.io/latest-trades-by-market-maker)
 
-On **EVM**, query `EVM.DEXTrades` (or `DEXTradeByTokens` for a token-centric view) and filter by the wallet as transaction sender or as **`Trade.Sender`** / buyer–seller fields depending on protocol. The example below filters `Transaction.From` as the taker for Ethereum. Adjust `network`, `dataset`, and DEX filters for BSC, Base, etc. For **Solana**, see [Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/).
+On **EVM**, use the chain-specific **DEXTrades** cube (GraphQL: `EVM { DEXTrades }`) or **`DEXTradeByTokens`** for a token-centric view. Filter by the wallet as transaction sender or as **`Trade.Sender`** / buyer–seller fields depending on protocol. The [DEXTrades example](#latest-trades-by-address) filters `Transaction.From` on Ethereum; adjust `network`, `dataset`, and DEX filters for BSC, Base, etc. For **Solana**, see [Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/).
 
+### Stream wallet swaps on Ethereum
+
+[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): filter **`Pair.Market.Network: Ethereum`** and **`Trader.Address`**. More examples: [Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api), [trader + token (IDE)](https://ide.bitquery.io/trades-of-a-specific-trader-of-a-specific-token).
+
+[Bitquery IDE](https://ide.bitquery.io)
+
+```graphql
+subscription {
+  Trading {
+    Trades(
+      where: {
+        Pair: { Market: { Network: { is: "Ethereum" } } }
+        Trader: { Address: { is: "0x9d6581468F04e5E55876a2660b5AeAbC12e3EFa0" } }
+      }
+    ) {
+      Side
+      Trader {
+        Address
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      TransactionHeader {
+        Hash
+      }
+      Block {
+        Time
+      }
+      Pair {
+        Token {
+          Symbol
+          Address
+        }
+        QuoteToken {
+          Symbol
+          Address
+        }
+      }
+      PriceInUsd
+    }
+  }
+}
 ```
+
+### Latest trades by address
+
+The query below uses the chain-specific **DEXTrades** cube on EVM (`EVM { DEXTrades }` with `network` and `dataset` for your chain).
+
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     DEXTrades(
@@ -233,7 +282,7 @@ subscription {
 The below query gives you trades where the specified address is either as a buyer or a seller. This is achieved by utilizing the `any` filter, which acts as an OR condition to encompass both buyer and seller roles in the results.
 You can find the query [here](https://ide.bitquery.io/Address-is-Buyer-or-Seller-V2)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: eth) {
     DEXTrades(

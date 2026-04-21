@@ -34,7 +34,7 @@ Bitquery provides **Crypto Price APIs and Streams** via GraphQL and [Kafka](http
 
 These tools let you stream and query aggregated price data in USD or other paired currencies based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains. Our **crypto prices api** is the **main** source for **real-time** pricing and **OHLC**; for **historical** OHLC from DEX trades, use **`DEXTradeByTokens`** as described in the [OHLC documentation](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/).
 
-The Crypto Price API (Price Index) provides more than just pair prices, it also includes [OHLCV (K-Line)](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
+The Crypto Price API provides more than just pair prices, it also includes [OHLCV (K-Line)](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/), Simple Moving Averages (SMA), Weighted Moving Averages (WMA), mean prices, and other key price-related statistics.
 While you can access the aggregated price for a single trading pair, the Price Index also supports cross-chain and cross-DEX aggregation, giving you a unified view of token prices across multiple ecosystems.
 
 **OHLC & K-lines:** Use this **Crypto Price API** as the **primary** source. For **historical** OHLC (long backfills, archive data, or trade-built candles), use **`DEXTradeByTokens`** (see [OHLC guide — when to use DEX](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/#crypto-price-api-vs-dextradebytoken)).
@@ -181,13 +181,18 @@ This consistent window size ensures comparable moving average calculations acros
 
 ## Accessing the API
 
-![](/img/trade_api/api.png)
+<img
+  src="/img/trade_api/api.png"
+  alt="Crypto Price API stream with pre-calculated OHLC in the response"
+  style={{ maxWidth: "min(100%, 360px)", height: "auto", display: "block" }}
+  loading="lazy"
+/>
 
 This stream has pre-calculated OHLC data in the response which you can feed directly to your charting solution without additional calculations. Our **cryptocurrency price api** is accessible through GraphQL queries and subscriptions, making it easy to integrate into your applications. The **crypto prices api** supports **real-time streaming** and **recent OHLC history** (about the **last 7 days** in the Price Index); for **older** OHLC, use **`DEXTradeByTokens`** as in the [OHLC guide](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/#crypto-price-api-vs-dextradebytoken).
 
 > **Note**: All queries can be converted to a GraphQL stream (WebSocket) by changing the keyword `query` to `subscription`
 
-## Kafka Topic for Crypto Price (Price Index) Stream: `trading.prices`
+## Kafka Topic for Crypto Price Stream: `trading.prices`
 
 This Kafka topic delivers **real-time, pre-aggregated price data** for tokens, currencies, and trading pairs across all supported blockchains. The data structure is a combination of all 3 cubes described in next section.
 

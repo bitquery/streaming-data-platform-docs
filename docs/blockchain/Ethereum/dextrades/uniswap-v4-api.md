@@ -15,61 +15,9 @@ Each pool in Uniswap v4 is uniquely identified by a `PoolId`, which is derived f
 
 The Uniswap v4 PoolManager contract (`0x000000000004444c5dc75cB358380D2e3dE08A90`) emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity.
 
-## Real time Trades on Uniswap V4
+## Live Uniswap v4 swaps on Ethereum {#live-uniswap-v4-swaps-on-ethereum}
 
-[This](https://ide.bitquery.io/Real-time-trades-on-uniswap-v4----subscription) subscription allows user to stream trades on Uniswap V4 in real time.
-
-```graphql
-subscription {
-  EVM {
-    DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v4"}}}}) {
-      Block{
-        Time
-      }
-      Trade {
-        PoolId
-        Buy {
-          Currency {
-            Name
-            Symbol
-            SmartContract
-            Decimals
-          }
-          Buyer
-          Amount
-          AmountInUSD
-          Price
-          PriceInUSD
-          Seller
-        }
-        Sell {
-          Currency {
-            Name
-            Symbol
-            SmartContract
-            Decimals
-          }
-          Buyer
-          Amount
-          AmountInUSD
-          Price
-          PriceInUSD
-          Seller
-        }
-      }
-      Transaction {
-        From
-        To
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Crypto Trades API: Uniswap v4 with Pool Id and market cap
-
-The subscription above uses **`EVM { DEXTrades }`**, where each row includes **`Trade.PoolId`**. You can also stream **Uniswap v4** swaps on **Ethereum** through the unified **[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)** with **`Trading { Trades }`**: filter **`Pair.Market.Network: Ethereum`** and **`Pair.Market.Protocol: uniswap_v4`**. Each event returns **`Pair.Pool.Id`** (the v4 pool identifier), **`Pair.Pool.Address`**, **`Supply`** (**`MarketCap`**, **`CirculatingSupply`**), and **pair / trader** fields.
+[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): filter **`Pair.Market.Network: Ethereum`** and **`Pair.Market.Protocol: uniswap_v4`**. You get pool id/address, supply fields, trader, and USD on each swap. [Chain DEXTrades vs this](/docs/cubes/dextrades-dextradebytokens-trading-trades).
 
 Run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Uniswap-v4-trades-with-pool-id-and-mcap).
 
@@ -154,6 +102,60 @@ On **Uniswap v4**, use **`Pair.Pool.Id`** as the stable **pool id** (alongside *
 "Pool": {
   "Address": "0x000000000004444c5dc75cb358380d2e3de08a90",
   "Id": "0x71ad627a0586a06b24834f7af328c5c387a512d183dbd7b8c31189a866adcefa"
+}
+```
+
+## Uniswap v4 Trades using DEXTrades API
+
+These swaps use the chain-specific **DEXTrades** cube via `EVM { DEXTrades }`: **`Trade.PoolId`**, pool-relative Buy/Sell ([DEXTrades cube](/docs/cubes/dextrades)). USD can be thin on small pools—use [live swaps above](#live-uniswap-v4-swaps-on-ethereum) when you want the Trading row shape.
+
+[Run in the Bitquery IDE](https://ide.bitquery.io/Real-time-trades-on-uniswap-v4----subscription).
+
+```graphql
+subscription {
+  EVM {
+    DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v4"}}}}) {
+      Block{
+        Time
+      }
+      Trade {
+        PoolId
+        Buy {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+            Decimals
+          }
+          Buyer
+          Amount
+          AmountInUSD
+          Price
+          PriceInUSD
+          Seller
+        }
+        Sell {
+          Currency {
+            Name
+            Symbol
+            SmartContract
+            Decimals
+          }
+          Buyer
+          Amount
+          AmountInUSD
+          Price
+          PriceInUSD
+          Seller
+        }
+      }
+      Transaction {
+        From
+        To
+        Hash
+      }
+    }
+  }
 }
 ```
 

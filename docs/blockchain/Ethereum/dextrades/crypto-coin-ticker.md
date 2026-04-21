@@ -5,9 +5,82 @@ sidebar_position: 3
 # Crypto Coin Ticker API
 
 You can build your crypto coin ticker using our [DEX APIs](https://bitquery.io/products/dex) based on the requirements of the data field. For pre-aggregated price data with OHLC, consider using our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).
-Also, you can set any time interval you need.
-Let's see an example.
-In this example, we are getting the [WETH](https://ide.bitquery.io/exploreapi/WETH/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) price against [USDT](https://ide.bitquery.io/exploreapi/USDT/0x7dd5f67a25afb9e73d4966b1ac578dabd9ccc986) on [Ethereum blockchain](https://bitquery.io/blockchains/ethereum-blockchain-api), aggregating different DEXs.
+
+For **per-swap ticks**, see the **[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)**.
+
+
+## Using Crypto price API
+
+For a **live ticker**, use the **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** stream.
+
+[Open the 1-second price stream in the IDE](https://ide.bitquery.io/1-second-crypto-price-stream).
+
+> Note: A `Volume: {Usd: {gt: 5}}` filter is applied to remove extreme outliers; the price stream already pre-filters outliers—this is an additional check.
+
+```graphql
+subscription {
+  Trading {
+    Tokens(
+      where: {
+        Interval: { Time: { Duration: { eq: 1 } } }
+        Volume: { Usd: { gt: 5 } }
+      }
+    ) {
+      Token {
+        Address
+        Id
+        IsNative
+        Name
+        Network
+        Symbol
+        TokenId
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Close
+          High
+          Low
+          Open
+        }
+        Average {
+          ExponentialMoving
+          Mean
+          SimpleMoving
+          WeightedSimpleMoving
+        }
+      }
+    }
+  }
+}
+```
+
+
+## OHLC ticker from DEXTradeByTokens
 
 Open this API on our [GraphQL IDE](https://ide.bitquery.io/Coin-ticker-api_4).
 

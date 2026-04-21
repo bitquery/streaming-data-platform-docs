@@ -89,6 +89,20 @@ For **aggregated** token metrics across pairs, use **[Tokens](/docs/trading/cryp
 
 ---
 
+## Chain hub examples
+
+These guides start with a **live swap stream** from the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api) (IDE link where we ship a saved query), then keep **`DEXTrades`** / **`DEXTradeByTokens`** for pools, OHLC, and analytics:
+
+- [BNB (BSC) DEX Trades](/docs/blockchain/BSC/bsc-dextrades)
+- [Base DEX Trades](/docs/blockchain/Base/base-dextrades)
+- [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)
+- [Polygon (MATIC) DEX Trades](/docs/blockchain/Matic/matic-dextrades)
+- [Optimism DEX Trades](/docs/blockchain/Optimism/optimism-dextrades)
+- [Tron DEX Trades](/docs/blockchain/Tron/tron-dextrades)
+- [Arbitrum DEX Trades](/docs/blockchain/Arbitrum/DexTrades)
+
+---
+
 ## Related documentation
 
 - [Mental model: transfers, events, calls, DEX, Trading](/docs/start/mental-model-transfers-events-calls)
