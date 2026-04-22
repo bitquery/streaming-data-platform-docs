@@ -19,7 +19,8 @@ keywords: ["Bitquery MCP", "Model Context Protocol", "ClickHouse", "Claude Deskt
 
 **Endpoint:** [https://mcp.bitquery.io](https://mcp.bitquery.io)
 
-**Important:** this is **not** an API wrapper. The MCP connects directly to Bitquery’s **ClickHouse** database, which is the same production database that powers Bitquery—so your agent can query outlier-filtered trade data with the tools exposed by the server.
+**Important:** this is **not** an API wrapper. The MCP connects directly to Bitquery’s **ClickHouse** database, which is the same production database that powers Bitquery—so your agent can query outlier-filtered trade data with the tools exposed by the server. 
+For graphQL examples of OHLC, aggregates, and related examples, use the [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) instead; details are in [References](#references).
 
 If you need help, use [our support channel](https://t.me/Bloxy_info) or open a ticket on [support.bitquery.io](https://support.bitquery.io/).
 
@@ -94,3 +95,7 @@ Ask your assistant something like:
 > Show me the top 10 traders on Solana by realized profit in the last 24 hours.
 
 That kind of question can scan large volumes of trades across Solana DEX venues, aggregate by wallet, and rank—directly against ClickHouse through the MCP tools.
+
+## References
+
+- [Crypto Price API documentation](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) — GraphQL and WSS access to OHLC and pre-aggregated token prices.
