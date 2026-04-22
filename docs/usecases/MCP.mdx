@@ -19,7 +19,7 @@ keywords: ["Bitquery MCP", "Model Context Protocol", "ClickHouse", "Claude Deskt
 
 **Endpoint:** [https://mcp.bitquery.io](https://mcp.bitquery.io)
 
-**Important:** this is **not** an API wrapper. The MCP connects directly to Bitquery’s **ClickHouse** database which is the same production database that powers Bitquery—so your agent can query raw trade data with the tools exposed by the server.
+**Important:** this is **not** an API wrapper. The MCP connects directly to Bitquery’s **ClickHouse** database, which is the same production database that powers Bitquery—so your agent can query outlier-filtered trade data with the tools exposed by the server.
 
 If you need help, use [our support channel](https://t.me/Bloxy_info) or open a ticket on [support.bitquery.io](https://support.bitquery.io/).
 
@@ -63,11 +63,11 @@ Add to `.cursor/mcp.json` (create the file if it does not exist):
 }
 ```
 
-Restart Cursor or reload MCP configuration so the server is picked up.
+Restart Cursor or reload the MCP configuration so the server is picked up.
 
 ## First connection and permissions
 
-After configuration, you should see **Bitquery Trading Data** (or similar) among your MCP connectors—for example in Claude Desktop’s connector list:
+After configuration, you should see **Bitquery Trading Data** among your MCP connectors, for example, in Claude Desktop’s connector list:
 
 ![Bitquery MCP listed among custom connectors](/img/mcp/mcp-connectors-bitquery-listed.png)
 
@@ -79,11 +79,11 @@ You will be prompted to **sign in** to your Bitquery account (create one free if
 
 ![Bitquery sign-in to authorize the application](/img/mcp/mcp-bitquery-sign-in.png)
 
-Then **authorize** the client (for example Claude) to use your account:
+Then **authorize** the client (for example, Claude) to use your account:
 
 ![Authorize Bitquery access for the requesting application](/img/mcp/mcp-bitquery-authorize-access.png)
 
-In clients like Cursor you can choose whether tool calls need approval each time or are always allowed:
+In clients like Cursor, you can choose whether tool calls need approval each time or are always allowed:
 
 ![Tool permission options such as Always allow](/img/mcp/mcp-tool-permissions-dropdown.png)
 
