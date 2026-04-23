@@ -876,17 +876,50 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "MCP",
+      link: {
+        type: "doc",
+        id: "mcp/mcp-server",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Trading",
+          link: {
+            type: "doc",
+            id: "mcp/trading/overview",
+          },
+          items: [
+            "mcp/trading/use-cases",
+            {
+              type: "category",
+              label: "Examples",
+              link: {
+                type: "doc",
+                id: "mcp/trading/examples/index",
+              },
+              items: [
+                "mcp/trading/examples/top-tokens-discovery",
+                "mcp/trading/examples/cross-chain-snapshot",
+                "mcp/trading/examples/token-ohlc-chart",
+                "mcp/trading/examples/solana-dex-market-share",
+                "mcp/trading/examples/pumpfun-launch-pulse",
+                "mcp/trading/examples/whale-wallet-decode",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      type: "category",
       label: "How-To Guides",
       link: {
         type: "generated-index",
         title: "How-To Guides Overview",
       },
       items: [
-        {
-          type: "doc",
-          id: "usecases/MCP",
-          label: "Bitquery MCP Server",
-        },
         {
           type: "category",
           label: "NFT Applications",

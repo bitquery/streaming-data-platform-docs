@@ -4,7 +4,21 @@
 const lightCodeTheme = require("prism-react-renderer").themes.github;
 const darkCodeTheme = require("prism-react-renderer").themes.dracula;
 
-/** Analytics scripts are often blocked locally (ad blockers, privacy tools). The gtag client then throws `window.gtag is not a function`. Only enable for production builds. */
+/**
+ * Analytics scripts are often blocked locally (ad blockers, privacy tools) and
+ * the `.docusaurus/` cache can leak a production-built gtag module into a
+ * subsequent `docusaurus start`. The gtag client module unconditionally calls
+ * `window.gtag(...)` on every route change, which then throws
+ * `TypeError: window.gtag is not a function`.
+ *
+ * Two guards below:
+ *   1. `enableAnalytics` — only include the gtag/GTM preset options in
+ *      production builds, so dev never ships the plugin.
+ *   2. `gtagNoopStub` — injected before any other script, stubs
+ *      `window.gtag` and `window.dataLayer` to no-ops. Real gtag.js (when it
+ *      loads) overrides the stub, so analytics still work in production; when
+ *      gtag.js is blocked or missing, the stub prevents the runtime error.
+ */
 const enableAnalytics = process.env.NODE_ENV === "production";
 
 /** @type {import('@docusaurus/types').Config} */
@@ -39,7 +53,8 @@ const config = {
   },
 
   scripts: [
-
+    // Must load before any script that calls `window.gtag` (see gtag-stub.js).
+    { src: "/js/gtag-stub.js" },
 
     {
       src: "https://www.chatbase.co/embed.min.js",
@@ -947,7 +962,7 @@ const config = {
           },
           {
             type: "doc",
-            docId: "usecases/MCP",
+            docId: "mcp/mcp-server",
             position: "left",
             label: "MCP Server",
           },
