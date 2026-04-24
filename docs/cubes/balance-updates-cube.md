@@ -8,33 +8,19 @@ Any update (Change) in the balance for any address by any means is a balance upd
 
 `BalanceUpdates` covers various types of balance changes on the blockchain depending on the blockchain, including token transfers, miner/validator rewards, staking-related on-chain rewards, fees, etc.
 
-Let’s see an example of BalanceUpdates API.
+Let’s see an example of the BalanceUpdates API.
 
-You can run following api [using tihs link](https://ide.bitquery.io/Balance-update-api).
+You can run the following api [using this link](https://ide.bitquery.io/Balance-update-API-explanation).
 
 ```graphql
+
+       
 {
-  EVM(dataset: combined, network: eth) {
+  EVM(dataset: realtime, network: eth) {
     BalanceUpdates(
-      limit: { count: 100 }
-      where: {
-        Block: { Time: { after: "2024-01-01T00:00:00Z" } }
-        Currency: {
-          SmartContract: {
-            in: ["0x", "0xdac17f958d2ee523a2206206994597c13d831ec7"]
-          }
-        }
-        BalanceUpdate: {
-          Amount: { ge: "0.001" }
-          AmountInUSD: { ge: "1" }
-          Address: {
-            in: [
-              "0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5"
-              "0x384623f9dd6A71767CEf2F8d74DFA53D5840a1a6"
-            ]
-          }
-        }
-      }
+      limit: {count: 100}
+      where: {BalanceUpdate: {Amount: {ge: "0.001"}, AmountInUSD: {ge: "1"}, Address: {in: ["0xBE0eB53F46cd790Cd13851d5EFf43D12404d33E8"]}}}
+      orderBy: {descending: Block_Time}
     ) {
       BalanceUpdate {
         Address
