@@ -157,6 +157,13 @@ const config = {
             to: "/docs/usecases/telegram-bot/",
             from: "/docs/usecases/Telegram_bot/",
           },
+          // MCP moved from Use Cases to docs/mcp/ (2026). Single `from` only:
+          // multiple entries can collide as the same `build/.../index.html` on
+          // case-insensitive filesystems (MCP vs mcp) or trailing-slash rules.
+          {
+            to: "/docs/mcp/mcp-server/",
+            from: "/docs/usecases/MCP/",
+          },
           {
             to: "/docs/authorisation/how-to-generate",
             from: "/docs/ide/authorisation/",
