@@ -161,7 +161,7 @@ const config = {
           // multiple entries can collide as the same `build/.../index.html` on
           // case-insensitive filesystems (MCP vs mcp) or trailing-slash rules.
           {
-            to: "/docs/mcp/mcp-server/",
+            to: "/docs/mcp/mcp-server",
             from: "/docs/usecases/MCP/",
           },
           {
