@@ -4,14 +4,24 @@ sidebar_position: 1
 
 # How to Generate a Token
 
-In this section, we will see how OAuth is used to generate a token. 
+In this section, we will see how OAuth is used to generate a token.
+
+## Authorization menu (account UI)
+
+Sign in at [account.bitquery.io](https://account.bitquery.io/). In the top navigation bar, open **Authorization**. It is a dropdown with two entries:
+
+- **Applications** — list of your apps, token lifespan per app, **Tokens** / **Revoke** actions in each row, and **+ New Application** to create one.
+- **Tokens** — generate and copy access tokens for a chosen application.
+
+The page below shows **Authorization** with **Applications** selected (active tab). A short doc link appears above the table; use **+ New Application** to add an app.
+
+![Authorization menu — Applications page at account.bitquery.io](/img/ide/authorization-applications.png)
+
+Direct links (same pages as the menu items): [Applications](https://account.bitquery.io/user/api_v2/applications) · [Access tokens](https://account.bitquery.io/user/api_v2/access_tokens).
 
 The first step is to create an application:
 
-
-1.  **Create an Application**: Navigate to the [Applications](https://account.bitquery.io/user/api_v2/applications) page and click `Create application`. Enter a name for your application and select an expiration time for the access tokens. Click `Create`.
-
-![Page](/img/v2Access/tab.png)
+1.  **Create an Application**: Open **Authorization → Applications** (or go to the [Applications](https://account.bitquery.io/user/api_v2/applications) page) and click **+ New Application**. Enter a name for your application and select an expiration time for the access tokens. Confirm creation.
 
 2.  **Generate Access Token**: We provide two methods to generate a token:
 
@@ -39,14 +49,14 @@ Sample response:
 
 ## Generating a Token with Set Expiration Time
 
-1.  Go to the [Access Token](https://account.bitquery.io/user/api_v2/access_tokens) page and select the application for which you want to generate an access token.
+1.  Open **Authorization → Applications** and click **Tokens** on the row for your application (or use **Authorization → Tokens** / the [Access tokens](https://account.bitquery.io/user/api_v2/access_tokens) page and choose the application). You will land on that app’s token page (URL like `/user/api_v2/applications/<id>`), which lists **Manually created access tokens**, the access token lifespan, and actions for each token.
 
-    ![generate](/img/v2Access/generate.png)
+    ![Application token page — manually created access tokens, Generate New Token](/img/ide/authorization-application-tokens.png)
 
-2.  Click **Generate Access Token**.
-3.  Copy the access token and store it in a secure location.
+2.  Click **Generate New Token** (or **Generate Access Token**, depending on the UI label).
+3.  For the new **Active** token, click **Copy** next to the token value (or copy the value safely another way) and store it in a secure location.
 
-![copy](/img/v2Access/copytoken.png)
+![Manually created access tokens — Copy button next to an active token](/img/ide/authorization-copy-token.png)
 
 **Using the token:**
 
@@ -65,7 +75,7 @@ Refer Postman examples [here](https://www.postman.com/interstellar-eclipse-27074
 
 **Revoking an Access Token**
 
-If you believe that your access token has been compromised, you can revoke it by clicking **Revoke** on the **Applications** page.
+If you believe that your access token has been compromised, open **Authorization → Applications** and click **Revoke** on the row for that application (some rows also link to **Tokens** for that app).
 
 ![revoke](/img/v2Access/revoke.png)
 
@@ -133,7 +143,7 @@ The response will include details on `scope` and `expiration time` of the token.
 
 **Deleting an Application**
 
-If you no longer need an application, you can delete it by clicking **Delete** on the **Applications** page. All the tokens associated with the application will no longer work.
+If you no longer need an application, open **Authorization → Applications** and remove it using the action shown for that row (for example **Delete** or **Revoke**, depending on application type). All tokens for that application will stop working.
 
 **Billing Considerations**
 

@@ -14,7 +14,7 @@ To invite your team, use the dropdown menu in our IDE.
 
 ![IDE Query Share](/img/ide/invite_new_member.png)
 
-You can view your team from the dropdown menu after entering into [Account](account.md).
+You can view your team from your [account dashboard](account.md): sign in at [account.bitquery.io](https://account.bitquery.io/), then use the **Authorization** menu in the top bar (or the equivalent entry under account settings).
 
 ![IDE Query Share](/img/ide/view_team.png)
 
