@@ -133,13 +133,6 @@ General pattern of the topic name is:
 <BLOCKCHAIN_NAME>.broadcasted.<MESSAGE_TYPE>
 ```
 
-#### Multi-chain trading topics
-
-The **`trading`** namespace has two Kafka topics (not tied to one particular network). **Both use the same credentials** for your subscription:
-
-- **`trading.prices`** — multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/price-index/introduction/). See the [Crypto Price API](/docs/trading/crypto-price-api/introduction) for usage.
-- **`trading.trades`** — real-time DEX trades aligned with the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api). Message structure is defined in [`market/trades.proto`](https://github.com/bitquery/streaming_protobuf/blob/main/market/trades.proto) in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf).
-
 ### General Message Types
 
 MESSAGE_TYPE is specific on blockchain, most blockchain has topics for:
@@ -169,7 +162,14 @@ Refer to [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_pro
 
 ## Complete List of Topics
 
-All the topics send data in the **protobuf** format
+All the topics send data in the **protobuf** format. Data sample for all these topics available [here](https://github.com/bitquery/kafka-data-sample)
+
+### Multi-chain trading topics
+
+The **`trading`** namespace has two Kafka topics (not tied to one particular network). **Both use the same credentials** for your subscription:
+
+- **`trading.prices`** — multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/price-index/introduction/). See the [Crypto Price API](/docs/trading/crypto-price-api/introduction) for usage.
+- **`trading.trades`** — real-time DEX trades aligned with the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api). Message structure is defined in [`market/trades.proto`](https://github.com/bitquery/streaming_protobuf/blob/main/market/trades.proto) in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf).
 
 ### EVM chains
 
@@ -211,7 +211,6 @@ Contact our support team for the topics that you can connect to for your specifi
 When subscribing, you also specify some important properties:
 
 - Configuration for offset management. It is done a bit differently in Kafka libraries, but the idea is that you have a choice of:
-
   1. receiving only latest messages, the next time you re-connect it will re-wing to the last one. It is controlled by config: `autoCommit: false, fromBeginning: false, auto.offset.reset: latest`
   2. or you want to consume all messages and do not lose any. Note that in this case when you re-start your server you will have a gap as it starts reading from the last message you received!
      You have to configure it as: `autoCommit: true, fromBeginning: false, auto.offset.reset: latest`.
