@@ -241,6 +241,30 @@ OAuth tokens are cached for ~30 days and refreshed automatically — you'll rare
 
 ---
 
+## Authentication via query token (less secure)
+
+An alternative to OAuth is available on MCP, similar to passing a token in the URL for streaming WebSockets — see [Authenticating WebSockets](/docs/authorisation/websocket/).
+
+Append your access token to the server URL as a `token` query parameter, for example:
+
+`https://mcp.bitquery.io?token=ory_...`
+
+If your client uses the `/mcp` path (for example with `mcp-remote`), add the query string to that URL:
+
+`https://mcp.bitquery.io/mcp?token=ory_...`
+
+Generate tokens from your [Bitquery account](https://account.bitquery.io/user/api_v2/access_tokens) — same process as in [How to generate API credentials](/docs/authorisation/how-to-generate/).
+
+This method is **less secure** than the OAuth flow (the token can appear in logs, process lists, and shell history), but it is often a better fit when:
+
+- you run a **fully autonomous agent** with no human in the loop to complete browser sign-in;
+- you **install Claude Code (or another MCP client) on a server** where interactive OAuth is awkward; or
+- the **default ~7 day token TTL** (or OAuth refresh behaviour) is not enough and you need long-lived, explicitly managed credentials.
+
+Prefer OAuth in interactive environments when you can.
+
+---
+
 ## What You Can Ask the Agent
 
 Almost every trader question maps to one of these patterns. Just type it into the chat — the agent figures out the rest.
