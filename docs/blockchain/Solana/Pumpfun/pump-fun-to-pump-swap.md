@@ -1,6 +1,20 @@
+---
+title: "Pump.fun to PumpSwap API - Token Migration Tracking"
+description: "Track the full lifecycle of a Pump.fun token with the Bitquery API: bonding curve progress, graduation events, PumpSwap migrations, and real-time DEX trades on Solana."
+keywords:
+  - Pump.fun API
+  - PumpSwap API
+  - Pump.fun to PumpSwap migration
+  - Pump.fun token lifecycle API
+  - Solana memecoin API
+  - bonding curve API
+  - real-time Solana DEX API
+  - Bitquery Pump.fun
+---
+
 # Understanding Pump.fun: From Launchpad to PumpSwap
 
-Pump fun is a Solana-based memecoin launchpad that has reshaped how tokens are created and traded. At its core is a bonding curve model, allowing anyone to launch a token with a fixed supply of 1 billion tokens, where around 800 million tokens are made available for bonding.
+Pump.fun is a Solana-based memecoin launchpad that has reshaped how tokens are created and traded. At its core is a bonding curve model that lets anyone launch a token with a fixed supply of 1 billion tokens, of which around 800 million are made available for bonding.
 
 As traders buy into the curve, the price increases non-linearly—early buyers benefit the most. The bonding curve progress, a very useful metric for developers and traders, can be computed as:
 
@@ -9,13 +23,13 @@ As traders buy into the curve, the price increases non-linearly—early buyers b
 BondingCurveProgress = 100 - (((balance - 206900000) \* 100) / 793100000)
 :::
 
-,where balance is balance of the bonding curve for that specific token.
+where `balance` is the balance of the bonding curve for that specific token.
 
 This helps identify tokens nearing sell-out, a common signal for tokens “about to pump.”
 
-Once a token reaches full bonding (100%), it automatically migrates to PumpSwap, Pump fun’s native AMM DEX. From there, it trades like any other Solana token. No manual listing is needed; the system handles everything.
+Once a token reaches full bonding (100%), it automatically migrates to PumpSwap, Pump.fun’s native AMM DEX. From there, it trades like any other Solana token—no manual listing is needed; the system handles everything.
 
-To help developers, traders, and analysts follow this journey, Bitquery offers a comprehensive real-time API suite that spans the entire lifecycle of a Pump fun token. Let’s walk through it:
+To help developers, traders, and analysts follow this journey, Bitquery offers a comprehensive real-time API suite that spans the entire lifecycle of a Pump.fun token. Let’s walk through it:
 
 <head>
   <meta name="title" content="Pump.fun to PumpSwap API - Token Migration Tracking"/>
@@ -36,15 +50,15 @@ To help developers, traders, and analysts follow this journey, Bitquery offers a
 
 ## Track New Token Creations in Real-Time
 
-Every token on Pump fun starts with a launch event. You can track these launches in real-time using a streaming API:
+Every token on Pump.fun starts with a launch event. You can track these launches in real time using a streaming API:
 
-- [Track Pump Fun Token Creations in Real-Time Using Subscription](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#track-newly-created-pump-fun-tokens)
+- [Track Pump.fun Token Creations in Real-Time Using a Subscription](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#track-newly-created-pump-fun-tokens)
 
-This API streams metadata like token name, symbol, mint, creator address, and timestamp the moment a new token is created.
+This API streams metadata such as token name, symbol, mint, creator address, and timestamp the moment a new token is created.
 
-## Follow Real-Time Market Data As They Are Traded on Pumpfun
+## Follow Real-Time Market Data as Tokens Trade on Pump.fun
 
-Pumpfun tokens are actively traded while they climb the bonding curve. Traders need up-to-the-second price feeds and trade streams:
+Pump.fun tokens are actively traded as they climb the bonding curve. Traders need up-to-the-second price feeds and trade streams:
 
 - [Track Price of a Token in Real-Time](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/#track-price-of-a-token-in-real-time)
 
@@ -128,28 +142,28 @@ Post-migration, tokens trade as standard AMM pairs. Bitquery continues to offer 
 
 - [Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a Specific Token](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api/#get-buy-volume-sell-volume-buys-sells-makers-total-trade-volume-buyers-sellers-of-a-specific-token)
 
-## Tracking Pumpfun Token Journey With Bitquery Shred Stream
+## Tracking a Pump.fun Token’s Journey with Bitquery Shred Streams
 
-Bitquery’s Kafka streams offer ultra-low-latency access to blockchain data by tapping directly into Solana’s Shred-level architecture. On Solana, a shred is the smallest fragment of a block — and it’s the first unit of data propagated between validators.
+Bitquery’s Kafka streams offer ultra-low-latency access to blockchain data by tapping directly into Solana’s Shred-level architecture. On Solana, a shred is the smallest fragment of a block—and it’s the first unit of data propagated between validators.
 
 Bitquery’s Shred Streams capture transactions as they’re broadcast to validators, often before the block is finalized and even before timestamps are attached. This means you receive transaction data faster than any traditional block-based solution, giving you a true edge in latency-sensitive use cases such as arbitrage, sniping, and real-time analytics.
 
-**You can use this to track pumpfun tokens as shown in [this tutorial](https://youtu.be/UlqZ8DgzNLc).**
+**You can use this to track Pump.fun tokens as shown in [this tutorial](https://youtu.be/UlqZ8DgzNLc).**
 
 Bitquery offers three main Kafka topics for Solana:
 
-- `solana.dextrades.proto` — Includes all trade and liquidity pool change data
-- `solana.tokens.proto` — Covers token transfers, supply changes, and balance updates at both the account and instruction level
-- `solana.transactions.proto` — Delivers detailed data for blocks, transactions, and instructions
+- `solana.dextrades.proto` — includes all trade and liquidity pool change data
+- `solana.tokens.proto` — covers token transfers, supply changes, and balance updates at both the account and instruction level
+- `solana.transactions.proto` — delivers detailed data for blocks, transactions, and instructions
 
-You can check out more details about Bitquery provided Solana Shred Streams [here](https://docs.bitquery.io/docs/streams/protobuf/chains/Solana-protobuf/) and Python code examples [here](https://docs.bitquery.io/docs/streams/protobuf/kafka-protobuf-python/).
+You can find more details about the Solana Shred Streams provided by Bitquery [here](https://docs.bitquery.io/docs/streams/protobuf/chains/Solana-protobuf/) and Python code examples [here](https://docs.bitquery.io/docs/streams/protobuf/kafka-protobuf-python/).
 
 ## Conclusion
 
-Pump fun has become the meme-fueled engine of Solana’s token economy. It has launched millions of tokens, introduced a playful but potent market dynamic, and evolved into a serious arena for real-time trading.
+Pump.fun has become the meme-fueled engine of Solana’s token economy. It has launched millions of tokens, introduced a playful but potent market dynamic, and evolved into a serious arena for real-time trading.
 
-For developers and analysts who want to build tools around this phenomenon, Bitquery offers a plug-and-play data layer that covers every phase of a Pump fun token’s lifecycle—from minting to AMM trading.
+For developers and analysts who want to build tools around this phenomenon, Bitquery offers a plug-and-play data layer that covers every phase of a Pump.fun token’s lifecycle—from minting to AMM trading.
 
-Whether you’re building dashboards, bots, trading tools, or alpha groups, these APIs let you track the entire journey without writing indexers or running infra.
+Whether you’re building dashboards, bots, trading tools, or alpha groups, these APIs let you track the entire journey without writing indexers or running infrastructure.
 
 Start querying. Stay real-time. And ride the next pump.

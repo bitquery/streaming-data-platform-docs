@@ -1,6 +1,6 @@
 ---
 title: "PumpSwap API - Solana - Tokens, Trades, Live Prices"
-description: "How to query and stream PumpSwap trades, prices, OHLC, volume, and pool events on Solana with Bitquery GraphQL. Track PumpSwap trades in real time via WebSocket, get historical data with dataset combined."
+description: "Query and stream PumpSwap trades, prices, OHLC, volume, and pool events on Solana with the Bitquery PumpSwap API. Track PumpSwap trades in real time via WebSocket and pull historical data with dataset combined."
 keywords:
   - PumpSwap API
   - track PumpSwap trades in real time
@@ -32,7 +32,7 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 <head>
 <title>PumpSwap API - Solana - Tokens, Trades, Live Prices</title>
   <meta name="title" content="PumpSwap API - Solana - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Query and stream PumpSwap trades, prices, OHLC, and volume on Solana with Bitquery. Track PumpSwap trades in real time via GraphQL subscription."/>
+  <meta name="description" content="Query and stream PumpSwap trades, prices, OHLC, and volume on Solana with the Bitquery PumpSwap API. Track PumpSwap trades in real time via a GraphQL subscription."/>
   <meta name="keywords" content="PumpSwap API,track PumpSwap trades in real time,PumpSwap WebSocket,PumpSwap GraphQL,Solana PumpSwap,PumpSwap on-chain data,PumpSwap program address,PumpSwap trades subscription,PumpSwap historical data,Bitquery"/>
   <meta name="robots" content="index, follow"/>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -45,49 +45,13 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 />
 <meta
   property="og:description"
-  content="Get APIs and streams for PumpSwap trades, prices, OHLC, and volume on Solana with Bitquery GraphQL and WebSocket."
+  content="Get the PumpSwap API and streams for PumpSwap trades, prices, OHLC, and volume on Solana via Bitquery GraphQL and WebSocket."
 />
 
   <meta property="twitter:card" content="summary_large_image"/>
   <meta property="twitter:title" content="PumpSwap API - Solana - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Track PumpSwap trades in real time and query PumpSwap prices, OHLC, and volume on Solana."/>
+  <meta property="twitter:description" content="Track PumpSwap trades in real time and query PumpSwap prices, OHLC, and volume on Solana with the Bitquery PumpSwap API."/>
 </head>
-
----
-
-### Table of Contents
-
-### 1. Pool creation and migration
-
-- [What is the PumpSwap program address? ➤](#what-is-the-pumpswap-program-address-on-solana)
-- [How do I get newly created PumpSwap pools in real time? ➤](#get-newly-created-pools-on-pumpswap-dex-in-realtime)
-- [How do I track Pump.fun pool migrations to PumpSwap in real time? ➤](#track-pools-that-are-migrated-to-pumpswap)
-
-### 2. Trades and prices
-
-- [How do I get the latest PumpSwap trades? ➤](#latest-trades-on-pumpswap)
-- [How do I track PumpSwap trades in real time? ➤](#latest-trades-on-pumpswap-websocket)
-- [How do I get OHLC data for a PumpSwap token? ➤](#ohlc-for-pumpswap-token)
-- [How do I get the latest trades for a token on PumpSwap? ➤](#latest-trades-for-a-token-on-pumpswap)
-- [How do I track PumpSwap trades for a specific token in real time? ➤](#latest-trades-for-a-token-on-pumpswap---websocket)
-- [How do I track a token’s price on PumpSwap in real time? ➤](#track-price-of-a-token-in-realtime-on-pumpswap)
-- [How do I get the latest price of a token on PumpSwap? ➤](#get-latest-price-of-a-token-on-pumpswap)
-- [How do I get trading volume for a PumpSwap token in a time range? ➤](#get-the-trading-volume-of-a-specific-token-on-pumpswap-dex)
-
-### 3. Trader insights
-
-- [How do I get the latest PumpSwap trades by a trader? ➤](#latest-trades-by-a-trader)
-- [How do I track a trader’s PumpSwap trades in real time? ➤](#latest-trades-by-a-trader---get-data-in-real-time-via-a-websocket)
-- [How do I get top traders on PumpSwap? ➤](#top-trader-on-pumpswap)
-
-### 4. Token analytics
-
-- [How do I get buy/sell volume and maker stats for a PumpSwap token? ➤](#get-buy-volume-sell-volume-buys-sells-makers-total-trade-volume-buyers-sellers-of-a-specific-token)
-
-### 5. FAQ and videos
-
-- [Frequently asked questions ➤](#frequently-asked-questions-pumpswap)
-- [PumpSwap video tutorials ➤](#pumpswap-video-tutorials)
 
 ## What is the PumpSwap program address on Solana? {#what-is-the-pumpswap-program-address-on-solana}
 

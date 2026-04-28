@@ -1,6 +1,6 @@
 ---
 title: PumpFun API Documentation
-description: Collection of PumpFun APIs on Solana organized by functionality.
+description: Collection of Bitquery's PumpFun APIs on Solana, organized by functionality — trades, prices, OHLCV, bonding curve, market cap, and PumpSwap migration data.
 slug: /blockchain/Solana/PumpFun/
 keywords:
   - PumpFun API
@@ -15,31 +15,31 @@ keywords:
   - PumpFun token data API
 ---
 
-In this section we will see how to fetch PumpFun related data via **Bitquery APIs** and **Streams**.
+In this section, we will see how to fetch PumpFun-related data via **Bitquery APIs** and **Streams**.
 
-To get started, [signup](https://account.bitquery.io/auth/signup?redirect_to=https%3A%2F%2Fide.bitquery.io%2F) with Bitquery and get your [Access Token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these](https://docs.bitquery.io/docs/authorisation/how-to-generate/) steps. 
+To get started, [sign up](https://account.bitquery.io/auth/signup?redirect_to=https%3A%2F%2Fide.bitquery.io%2F) with Bitquery and generate your [access token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these steps](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
 
-If you need help getting data on PumpFun, reach out to [support](https://t.me/Bloxy_info)
+If you need help getting data on PumpFun, reach out to [support](https://t.me/Bloxy_info).
 
-## What is PumpFun API?
+## What is the PumpFun API?
 
-Bitquery PumpFun APIs help you fetch on-chain data for PumpFun that includes:
+The Bitquery PumpFun API helps you fetch on-chain data for PumpFun, including:
 - **Token Trades**
 - **Trade Prices**
 - **Token Creation**
 - **Creator Holdings**
 - **Token Holdings**
 - **Bonding Curve Progress**
-- **Migration to Pump swap**
-- **Trades of a user**
-- **Trade Metrics** - Volume, Trades, Sellers & Buyers, etc.
+- **Migration to PumpSwap**
+- **Trades of a User**
+- **Trade Metrics** — volume, trades, sellers and buyers, etc.
 - **Token Liquidity**
 - **Token Price Change**
-- **Historical Data for Aggreagated Metrics**
+- **Historical Data for Aggregated Metrics**
 
-## What are capabilities of Bitquery PumpFun API?
+## What are the capabilities of the Bitquery PumpFun API?
 
-Bitquery PumpFun APIs are based on GraphQL, and are very flexible. You can fetch trades, token creation, token holdings, bonding curve progress and migration information for a specific token or wallet for a given time period, and join with other information.
+The Bitquery PumpFun APIs are based on GraphQL and are highly flexible. You can fetch trades, token creation, token holdings, bonding curve progress, and migration information for a specific token or wallet over a given time period, and join the results with other on-chain data.
 
 **Solana RPC**
 
@@ -53,7 +53,7 @@ Bitquery PumpFun APIs are based on GraphQL, and are very flexible. You can fetch
 - Historical data, joins, aggregations & real-time subscriptions
 - Great for real-time data and historical backtesting without running your own indexer
 
-## Difference between Solana Geyser stream and Bitquery Kafka Stream?
+## What is the difference between Solana Geyser and Bitquery Kafka streams?
 
 **Solana Geyser stream**
 
@@ -67,9 +67,9 @@ Bitquery PumpFun APIs are based on GraphQL, and are very flexible. You can fetch
 
 Read more [here](https://docs.bitquery.io/docs/streams/real-time-solana-data/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
 
-## Does Bitquery support PumpFun Websocket and Webhooks?
+## Does Bitquery support PumpFun WebSockets and Webhooks?
 
-Bitquery supports websocket and webhooks — you can convert most of the GraphQL APIs into **GraphQL streams** by changing the word `query` to `subscription`. You can monitor this data via a websocket. More and [code samples available here](https://docs.bitquery.io/docs/subscriptions/websockets/)
+Yes — Bitquery supports both WebSockets and webhooks. You can convert most of the GraphQL APIs into **GraphQL streams** by changing `query` to `subscription` and monitor the data over a WebSocket. More information and [code samples are available here](https://docs.bitquery.io/docs/subscriptions/websockets/).
 
 ## PumpFun APIs
 

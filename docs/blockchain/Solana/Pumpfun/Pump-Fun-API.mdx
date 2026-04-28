@@ -5,13 +5,13 @@ description: "Get live Pump.fun token prices, OHLCV, ATH, market cap, and trades
 
 # Pump.fun API - Live Prices, OHLCV, ATH, MarketCap
 
-The Bitquery Pump.fun API provides real-time and historical data for Pump.fun memecoin trades on Solana via GraphQL. Use Bitquery to get live trades, new token launches, OHLCV, bonding curve progress, top traders, and tokens migrated to PumpSwap. Access via REST, WebSocket subscriptions, gRPC streams, or Kafka. Filter by program address `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`. For other data points, reach out to [support](https://t.me/Bloxy_info).
+The Bitquery Pump.fun API provides real-time and historical data for Pump.fun memecoin trades on Solana via GraphQL. Use the API to get live trades, new token launches, OHLCV, bonding curve progress, top traders, and tokens migrated to PumpSwap. Access it via REST, WebSocket subscriptions, gRPC streams, or Kafka, and filter by the program address `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`. For other data points, reach out to [support](https://t.me/Bloxy_info).
 
 :::tip **Try Our PumpFun Token Sniffer**
 Want to analyze Pump.fun tokens for potential phishing risks? Check out our [**PumpFun Token Sniffer**](https://docs.bitquery.io/pumpfun-token-sniffer/) — a proof-of-concept tool that helps identify suspicious token behavior by analyzing transfers and trades.
 :::
 
-Need zero-latency Pumpfun data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/). For gRPC streaming: [Pump.fun gRPC Streams →](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/).
+Need zero-latency Pump.fun data? [Read about our Shred Streams and contact us for a trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/). For gRPC streaming, see [Pump.fun gRPC Streams →](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/).
 
 You may also be interested in:
 
@@ -34,7 +34,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 />
 <meta
   name="description"
-  content="Ultra low latency Pump.fun Token Prices, OHLCV, ATH, MarketCap, Liquidity, traders and other information from Pump.fun API,Streams and Data Dumps."
+  content="Ultra-low-latency Pump.fun token prices, OHLCV, ATH, market cap, liquidity, traders, and more — all delivered via the Bitquery Pump.fun API, streams, and data dumps."
 />
 <meta
   name="keywords"
@@ -51,89 +51,15 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
 />
 <meta
   property="og:description"
-  content="Get Pump.fun tokens prices, trades, bonding curve progress etc"
+  content="Get Pump.fun token prices, trades, and bonding curve progress via the Bitquery Pump.fun API."
 />
 
   <meta property="twitter:card" content="summary_large_image"/>
   <meta property="twitter:title" content="Pump.fun API - Solana - New Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get Pump.fun tokens prices, trades, bonding curve progress etc"/>
+  <meta property="twitter:description" content="Get Pump.fun token prices, trades, and bonding curve progress via the Bitquery Pump.fun API."/>
 </head>
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
-
----
-
-### Table of Contents
-
-### 1. Token Creation and Metadata
-
-- [How do I get newly created Pump.fun tokens? ➤](#how-do-i-get-newly-created-pumpfun-tokens)
-- [How do I get creation time and dev address? ➤](#how-do-i-get-creation-time-and-dev-address-of-a-pumpfun-token)
-- [How do I monitor Pump.fun new token launches? ➤](#how-do-i-monitor-pumpfun-new-token-launches-in-real-time)
-- [How do I get all tokens created by a specific address? ➤](#how-do-i-get-all-pumpfun-tokens-created-by-a-specific-address)
-- [How do I get tokens created by a wallet from historical data? ➤](#how-do-i-get-pumpfun-tokens-created-by-a-wallet-from-historical-data)
-- [How do I get token metadata, dev address, and creation time? ➤](#how-do-i-get-token-metadata-dev-address-and-creation-time-for-a-specific-pumpfun-token)
-
-### 2. Pump.fun Mayhem Mode Tokens
-
-- [How do I track Mayhem mode enabled tokens? ➤](#how-do-i-track-mayhem-mode-enabled-pumpfun-tokens-in-real-time)
-- [How do I check Mayhem mode of a token? ➤](#how-do-i-check-mayhem-mode-of-a-pumpfun-token)
-- [How do I check if a token was launched in Mayhem mode? (Historical) ➤](#how-do-i-check-if-a-pumpfun-token-was-launched-in-mayhem-mode-historical)
-
-### 3. Token Pricing & Market Data
-
-- [How do I get the latest price? ➤](#how-do-i-get-the-latest-price-of-a-pumpfun-token)
-- [How do I track price in real time? ➤](#how-do-i-track-the-price-of-a-pumpfun-token-in-real-time)
-- [How do I get top 10 tokens by price change in 5 minutes? ➤](#how-do-i-get-top-10-pumpfun-tokens-by-price-change-in-the-last-5-minutes)
-- [How do I get Pump.fun token OHLCV data historically? ➤](#how-do-i-get-pumpfun-token-ohlcv-data-historically)
-- [How do I get a token's all-time high (ATH) price? ➤](#how-do-i-get-a-tokens-all-time-high-ath-price-on-pumpfun)
-- [How do I get token price change over time? ➤](#how-do-i-get-token-price-change-over-time-delta-from-x-minutes-back)
-
-### 4. Trade Activity & Volume
-
-- [How do I get live trades from Pump.fun? ➤](#how-do-i-get-live-trades-from-pumpfun-using-bitquery)
-- [How do I get the latest trades? ➤](#how-do-i-get-the-latest-trades-for-a-pumpfun-token)
-- [How do I get the volume of a Pump.fun token for the last 7 days? ➤](#how-do-i-get-the-volume-of-a-pumpfun-token-for-the-last-7-days)
-- [How do I get all tokens traded on Pump.fun in the last 1 hour? ➤](#how-do-i-get-all-tokens-traded-on-pumpfun-in-the-last-1-hour)
-- [How do I get tokens that reached a specific market cap on Pump.fun? ➤](#how-do-i-get-tokens-that-reached-a-specific-market-cap-on-pumpfun)
-- [How do I get detailed trade stats? ➤](#how-do-i-get-detailed-trade-stats-volume-buys-sells-makers-buyers-sellers)
-- [How do I get a wallet's PnL on Pump.fun tokens? ➤](#how-do-i-get-a-wallets-pnl-on-pumpfun-tokens)
-- [How do I get the first 100 buyers? ➤](#how-do-i-get-the-first-100-buyers-of-a-pumpfun-token)
-- [How do I check if the first 100 buyers are still holding? ➤](#how-do-i-check-if-the-first-100-buyers-are-still-holding)
-
-### 5. Token Liquidity, Pools & Pairs
-
-- [How do I get all trading pairs? ➤](#how-do-i-get-all-trading-pairs-of-a-pumpfun-token)
-- [How do I get liquidity? ➤](#how-do-i-get-liquidity-of-pumpfun-tokens)
-- [How do I get bonding curve progress? ➤](#how-do-i-get-bonding-curve-progress-for-a-pumpfun-token)
-- [How do I get the last trade before graduation to PumpSwap? ➤](#how-do-i-get-the-last-pumpfun-trade-before-a-token-graduates-to-pumpswap-amm)
-
-### 6. Token Holder & Trader Insights
-
-- [How do I get dev's holdings? ➤](#how-do-i-get-devs-holdings-of-a-pumpfun-token)
-- [How do I get top 10 token holders? ➤](#how-do-i-get-top-10-token-holders-of-a-pumpfun-token)
-- [How do I get top traders of a Pump.fun token? ➤](#how-do-i-get-top-traders-of-a-pumpfun-token)
-- [How do I get top token creators? ➤](#how-do-i-get-top-pumpfun-token-creators)
-
-### 7. Token Security & Analysis
-
-- [How do I check if a token is phishy? ➤](#how-do-i-check-if-a-pumpfun-token-is-phishy)
-
-### 8. Token Rankings & Filters
-
-- [How do I get top tokens by market cap? ➤](#how-do-i-get-top-pumpfun-tokens-by-market-cap)
-- [How do I get all tokens above 10K market cap? ➤](#how-do-i-get-all-pumpfun-tokens-above-10k-market-cap)
-- [How do I track "King of the Hill" tokens? ➤](#how-do-i-track-king-of-the-hill-pumpfun-tokens-30k35k-market-cap)
-
-### 9. Frequently Asked Questions
-
-- [Can I get Pump.fun data via gRPC or Kafka?](#can-i-get-pumpfun-token-trade-data-via-grpc-or-kafka-stream)
-- [What is the rate limit?](#what-is-the-rate-limit-for-the-pumpfun-api)
-- [Does Bitquery support historical Pump.fun data?](#does-bitquery-support-historical-pumpfun-data)
-- [How do I get tokens that migrated to PumpSwap?](#how-do-i-get-tokens-that-migrated-from-pumpfun-to-pumpswap)
-- [Why "columns not available in combined dataset"?](#why-does-my-pumpfun-query-return-columns-not-available-in-combined-dataset)
-
-### 10. [Video Tutorials](#video-tutorials)
 
 ## What is the Program Address for Pump.fun on Solana?
 
