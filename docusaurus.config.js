@@ -899,7 +899,7 @@ const config = {
 
             const customItems = [
               {
-                url: "https://docs.bitquery.io/pumpfun-token-sniffer",
+                url: "https://pumpfun-token-sniffer.vercel.app/",
                 changefreq: "daily",
                 priority: 1,
               },
