@@ -23,11 +23,79 @@ Historical aggregate data for Solana is available via the v2 endpoint, providing
 However the options to use the historical data are quite limited and currently only works for the aggregate data on
 `DEXTradeByTokens`. In this section, we will see some working examples for the same.
 
-**To get historical transfers data going back to genesis of the chain, use the V1 endpoint. Docs available [here](https://docs.bitquery.io/v1/docs/Examples/Solana/transfers)**
+**To get historical transfers data going back to genesis of the chain, use the V1 endpoint. Docs available [here](https://docs.bitquery.io/v1/docs/Examples/Solana/transfers).** 
+
 
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
 :::
+
+## Historical Trades for Solana
+
+**Historical trades for upto past 30 days could be retrieved via Trading API. Docs available [here](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/).**
+[This](https://ide.bitquery.io/historical-Solana-trades_1) example showcase how trades for the duration of upto past 30 days could be recieved via trading API.
+
+```graphql
+query MyQuery {
+  Trading {
+    Trades(
+      where: {Pair: {Market: {Network: {is: "Solana"}}}, Block: {Date: {before_relative: {days_ago: 25}}}}
+      orderBy: {ascending: Block_Date}
+    ) {
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Time
+      }
+      Pair {
+        Market {
+          Address
+          Program
+        }
+        Pool {
+          Address
+          Id
+        }
+        QuoteToken {
+          Name
+          Symbol
+          Address
+        }
+        Token {
+          Name
+          Symbol
+          Address
+        }
+      }
+      Price
+      PriceInUsd
+      Ranking {
+        Position
+        Weight
+      }
+      Side
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        Hash
+      }
+    }
+  }
+}
+```
 
 ## Historical OHLC on Solana
 
