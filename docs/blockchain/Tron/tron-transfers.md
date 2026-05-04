@@ -151,14 +151,9 @@ subscription {
 
 ```
 
-{/* SEO-EXPANSION: Sections below added by Claude (2026-05-04) for review.
-    Goal: rank for high-volume Tron transfer queries (daily volume, exchange
-    deposits, first-receive dust, whale leaderboards). Please verify the
-    Bitquery IDE links and addresses before publishing. */}
-
 ## Daily Transfer Volume of a Tron Token
 
-Aggregate **daily transfer volume in USD** for any TRC20 token. Powers analytics dashboards, weekly newsletters, and on-chain reports for stablecoins, governance tokens, and memecoins on Tron.
+Aggregate **daily transfer volume in USD** for any TRC20 token for analytics dashboards, weekly newsletters, and on-chain reports for stablecoins, governance tokens, and memecoins on Tron.
 
 Run this query [here](https://ide.bitquery.io/daily-transfer-volume-tron).
 

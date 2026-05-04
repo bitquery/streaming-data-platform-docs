@@ -84,13 +84,9 @@ subscription {
 
 ```
 
-{/* SEO-EXPANSION: Section below adds high-intent balance queries
-    (holder count, historical balance, multi-token portfolio).
-    Added by Claude (2026-05-04) for review — please validate IDE links. */}
-
 ## Total Holder Count of a Tron Token
 
-Count the **total number of unique addresses holding a Tron TRC20 token** with a positive balance. A foundational metric for token-health dashboards and SEO-friendly "how many holders does X have" pages.
+Count the **total number of unique addresses holding a Tron TRC20 token** with a positive balance. A foundational metric for token-health dashboards.
 
 Run the query [here](https://ide.bitquery.io/tron-token-holder-count).
 

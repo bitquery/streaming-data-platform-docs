@@ -1004,7 +1004,9 @@ query FirstBuyersOfTronToken($token: String) {
 }
 ```
 
-```
+Variables:
+
+```json
 {
   "token": "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"
 }

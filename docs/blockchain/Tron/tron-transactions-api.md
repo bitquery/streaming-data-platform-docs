@@ -68,52 +68,6 @@ subscription {
 
 You can run the query [here](https://ide.bitquery.io/monitor-TRX-address-transactions)
 
-{/* SEO-EXPANSION: Sections below added by Claude (2026-05-04) for review.
-    Goal: cover popular Tron transaction queries (smart contract calls,
-    failed txs, top fee payers) for long-tail SEO. Verify IDE links before
-    publishing. */}
-
-## Smart Contract Method Calls on a Tron Contract
-
-Stream every **method invocation on a Tron smart contract** with the parsed signature and arguments. A core building block for protocol analytics, alerting, and reverse-engineering DeFi contracts on Tron.
-
-Try the subscription [here](https://ide.bitquery.io/tron-smart-contract-calls).
-
-```graphql
-subscription TronContractCalls($contract: String) {
-  Tron {
-    Calls(
-      where: {
-        Call: { To: { is: $contract } }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      Transaction {
-        Hash
-        FeePayer
-      }
-      Call {
-        From
-        To
-        Value
-        Signature {
-          Name
-          Signature
-          SignatureHash
-        }
-      }
-    }
-  }
-}
-{
-  "contract": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
-}
-```
-
 ## Failed Transactions on Tron (Reverts & Out-of-Energy Errors)
 
 List **failed transactions** for a Tron wallet with the failure message — invaluable for debugging dApps, monitoring bot health, and tracking contract reverts.
