@@ -2310,6 +2310,62 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 
 </details>
 
+### Get Latest Creator Fee Transfers on Pump.fun
+
+Retrieve the 10 most recent **creator fee collections** on the Pump.fun bonding curve program. Filter **`Instruction.Program.Method: "collect_creator_fee"`** and **`Instruction.Program.Address: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"`** to get balance updates showing who collected, how much, and from which token.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/latest-creator-fees-pumpfun#).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Solana(network: solana) {
+    InstructionBalanceUpdates(
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+      where: {Instruction: {Program: {Method: {is: "collect_creator_fee"}, Address: {is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Transaction {
+        Signer
+        Signature
+        Result {
+          Success
+          ErrorMessage
+        }
+        Index
+        Fee
+      }
+      Block {
+        Time
+        Hash
+      }
+      BalanceUpdate {
+        Account {
+          Address
+          Owner
+          Token {
+            Owner
+          }
+        }
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        PreBalance
+        PostBalance
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ---
 
 ## Video Tutorials

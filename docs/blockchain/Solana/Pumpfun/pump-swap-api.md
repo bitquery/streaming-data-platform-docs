@@ -1051,6 +1051,116 @@ query MyQuery {
 
 </details>
 
+## How do I get the latest creator fee transfers on PumpSwap? {#latest-creator-fee-transfers-on-pumpswap}
+
+Query **`InstructionBalanceUpdates`** where the program method is **`collect_coin_creator_fee`** and the program address is the PumpSwap AMM ID. This returns the 10 most recent creator fee collection events with balance changes, currency details, and transaction metadata.
+
+[Run in Bitquery IDE — latest creator fee transfers on PumpSwap](https://ide.bitquery.io/latest-creator-fee-transfers-on-pumpfun-amm)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+{
+  Solana(network: solana) {
+    InstructionBalanceUpdates(
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+      where: {Instruction: {Program: {Method: {is: "collect_coin_creator_fee"}, Address: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Transaction {
+        Signer
+        Signature
+        Result {
+          Success
+          ErrorMessage
+        }
+        Index
+        Fee
+      }
+      Block {
+        Time
+        Hash
+      }
+      BalanceUpdate {
+        Account {
+          Address
+          Owner
+          Token {
+            Owner
+          }
+        }
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        PreBalance
+        PostBalance
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## How do I track creator fee transfers on PumpSwap in real time? {#track-creator-fee-transfers-on-pumpswap-in-realtime}
+
+Subscribe to **`InstructionBalanceUpdates`** with the same **`collect_coin_creator_fee`** method and PumpSwap program address filter. Each event streams a new creator fee collection as it happens—use this to monitor creator revenue on PumpSwap tokens in real time.
+
+[Run in Bitquery IDE — track creator fee transfers on PumpSwap (WebSocket)](https://ide.bitquery.io/track-creator-fee-transfers-on-pumpfun-amm#)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+subscription {
+  Solana(network: solana) {
+    InstructionBalanceUpdates(
+      where: {Instruction: {Program: {Method: {is: "collect_coin_creator_fee"}, Address: {is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"}}}, Transaction: {Result: {Success: true}}}
+    ) {
+      Transaction {
+        Signer
+        Signature
+        Result {
+          Success
+          ErrorMessage
+        }
+        Index
+        Fee
+      }
+      Block {
+        Time
+        Hash
+      }
+      BalanceUpdate {
+        Account {
+          Address
+          Owner
+          Token {
+            Owner
+          }
+        }
+        Amount
+        AmountInUSD
+        Currency {
+          Name
+          MintAddress
+          Symbol
+        }
+        PreBalance
+        PostBalance
+      }
+    }
+  }
+}
+```
+
+</details>
+
 ## Frequently asked questions (PumpSwap) {#frequently-asked-questions-pumpswap}
 
 ### How do I track PumpSwap trades in real time?
