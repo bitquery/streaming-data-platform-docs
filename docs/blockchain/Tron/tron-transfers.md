@@ -151,6 +151,136 @@ subscription {
 
 ```
 
+{/* SEO-EXPANSION: Sections below added by Claude (2026-05-04) for review.
+    Goal: rank for high-volume Tron transfer queries (daily volume, exchange
+    deposits, first-receive dust, whale leaderboards). Please verify the
+    Bitquery IDE links and addresses before publishing. */}
+
+## Daily Transfer Volume of a Tron Token
+
+Aggregate **daily transfer volume in USD** for any TRC20 token. Powers analytics dashboards, weekly newsletters, and on-chain reports for stablecoins, governance tokens, and memecoins on Tron.
+
+Run this query [here](https://ide.bitquery.io/daily-transfer-volume-tron).
+
+```graphql
+query DailyTransferVolume($token: String, $since: DateTime) {
+  Tron {
+    Transfers(
+      where: {
+        Transfer: { Currency: { SmartContract: { is: $token } } }
+        Block: { Time: { since: $since } }
+        TransactionStatus: { Success: true }
+      }
+      orderBy: { ascendingByField: "Block_Date" }
+    ) {
+      Block {
+        Date(interval: { count: 1, in: days })
+      }
+      Transfer {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      transfers: count
+      unique_senders: uniq(of: Transfer_Sender)
+      unique_receivers: uniq(of: Transfer_Receiver)
+      volume: sum(of: Transfer_Amount)
+      volume_usd: sum(of: Transfer_AmountInUSD)
+    }
+  }
+}
+```
+
+Variables:
+```
+{
+  "token": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+  "since": "2025-01-01T00:00:00Z"
+}
+```
+
+## Detect Centralized Exchange (CEX) Deposits on Tron
+
+Identify large deposits flowing **into known centralized exchange wallets** on Tron — a classic on-chain signal for **selling pressure** and **whale accumulation**. Replace the receiver list with the exchange addresses you want to monitor (Binance, OKX, Bybit, KuCoin, etc.).
+
+Try this subscription [here](https://ide.bitquery.io/cex-deposits-tron).
+
+```graphql
+subscription CEXDepositsTron {
+  Tron {
+    Transfers(
+      where: {
+        Transfer: {
+          Receiver: {
+            in: [
+              "TMuA6YqfCeX8EhbfYEg5y7S4DqzSJireY9",
+              "TKzxdSv2FZKQrEqkKVgp5DcwEXBEKMg2Ax",
+              "TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb"
+            ]
+          }
+          Amount: { ge: "10000" }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender
+        Receiver
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
+
+## Top USDT TRC20 Whale Receivers (Last 24 Hours)
+
+Rank addresses by **total USDT TRC20 received** in the last 24 hours — the most-searched Tron whale leaderboard query. Replace the smart contract with any TRC20 token to reuse the pattern.
+
+Run the query [here](https://ide.bitquery.io/top-usdt-receivers-24h-tron).
+
+```graphql
+query TopUSDTReceivers24h {
+  Tron {
+    Transfers(
+      where: {
+        Transfer: {
+          Currency: { SmartContract: { is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t" } }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        TransactionStatus: { Success: true }
+      }
+      orderBy: { descendingByField: "received_usd" }
+      limit: { count: 50 }
+    ) {
+      Transfer {
+        Receiver
+        Currency {
+          Symbol
+          SmartContract
+        }
+      }
+      received_usd: sum(of: Transfer_AmountInUSD)
+      received_amount: sum(of: Transfer_Amount)
+      txs: count
+    }
+  }
+}
+```
+
 ## Subscribe to the latest NFT token transfers on Tron
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on Tron network. You can run the query [here](https://ide.bitquery.io/NFT-Token-Transfers-API_5)

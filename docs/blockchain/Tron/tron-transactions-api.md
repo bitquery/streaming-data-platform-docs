@@ -67,3 +67,119 @@ subscription {
 ```
 
 You can run the query [here](https://ide.bitquery.io/monitor-TRX-address-transactions)
+
+{/* SEO-EXPANSION: Sections below added by Claude (2026-05-04) for review.
+    Goal: cover popular Tron transaction queries (smart contract calls,
+    failed txs, top fee payers) for long-tail SEO. Verify IDE links before
+    publishing. */}
+
+## Smart Contract Method Calls on a Tron Contract
+
+Stream every **method invocation on a Tron smart contract** with the parsed signature and arguments. A core building block for protocol analytics, alerting, and reverse-engineering DeFi contracts on Tron.
+
+Try the subscription [here](https://ide.bitquery.io/tron-smart-contract-calls).
+
+```graphql
+subscription TronContractCalls($contract: String) {
+  Tron {
+    Calls(
+      where: {
+        Call: { To: { is: $contract } }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+        FeePayer
+      }
+      Call {
+        From
+        To
+        Value
+        Signature {
+          Name
+          Signature
+          SignatureHash
+        }
+      }
+    }
+  }
+}
+{
+  "contract": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+}
+```
+
+## Failed Transactions on Tron (Reverts & Out-of-Energy Errors)
+
+List **failed transactions** for a Tron wallet with the failure message — invaluable for debugging dApps, monitoring bot health, and tracking contract reverts.
+
+You can run the query [here](https://ide.bitquery.io/failed-tron-transactions).
+
+```graphql
+query FailedTronTransactions($address: String, $since: DateTime) {
+  Tron {
+    Transactions(
+      where: {
+        Transaction: {
+          FeePayer: { is: $address }
+          Result: { Success: false }
+        }
+        Block: { Time: { since: $since } }
+      }
+      orderBy: { descending: Block_Time }
+      limit: { count: 50 }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+        Fee
+        FeePayer
+        Result {
+          Success
+          Status
+          Message
+        }
+      }
+    }
+  }
+}
+{
+  "address": "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf",
+  "since": "2025-01-01T00:00:00Z"
+}
+```
+
+## Top Tron Wallets by Fees Paid (24h)
+
+Rank wallets by **TRX fees paid in the last 24 hours** — a popular leaderboard for spotting active bots, MEV searchers, and high-volume traders on Tron.
+
+Try the query [here](https://ide.bitquery.io/tron-top-fee-payers-24h).
+
+```graphql
+query TopTronFeePayers24h {
+  Tron {
+    Transactions(
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Transaction: { Result: { Success: true } }
+      }
+      orderBy: { descendingByField: "fees" }
+      limit: { count: 100 }
+    ) {
+      Transaction {
+        FeePayer
+      }
+      fees: sum(of: Transaction_Fee)
+      txs: count
+    }
+  }
+}
+```

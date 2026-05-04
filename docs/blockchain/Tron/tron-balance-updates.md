@@ -84,6 +84,98 @@ subscription {
 
 ```
 
+{/* SEO-EXPANSION: Section below adds high-intent balance queries
+    (holder count, historical balance, multi-token portfolio).
+    Added by Claude (2026-05-04) for review — please validate IDE links. */}
+
+## Total Holder Count of a Tron Token
+
+Count the **total number of unique addresses holding a Tron TRC20 token** with a positive balance. A foundational metric for token-health dashboards and SEO-friendly "how many holders does X have" pages.
+
+Run the query [here](https://ide.bitquery.io/tron-token-holder-count).
+
+```graphql
+query TokenHolderCount {
+  Tron(dataset: combined, aggregates: yes) {
+    BalanceUpdates(
+      where: {
+        Currency: { SmartContract: { is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t" } }
+      }
+    ) {
+      Currency {
+        Name
+        Symbol
+        SmartContract
+      }
+      holders: uniq(
+        of: BalanceUpdate_Address
+        selectWhere: { gt: "0" }
+      )
+    }
+  }
+}
+```
+
+## Historical Balance of a Tron Address at a Specific Time
+
+Reconstruct the **balance of a wallet as of a past block time** — useful for audits, airdrop snapshot eligibility, retroactive analytics, and tax tooling.
+
+Try the query [here](https://ide.bitquery.io/tron-historical-balance).
+
+```graphql
+query HistoricalBalanceTron($address: String, $until: DateTime) {
+  Tron(dataset: combined, aggregates: yes) {
+    BalanceUpdates(
+      where: {
+        BalanceUpdate: { Address: { is: $address } }
+        Block: { Time: { till: $until } }
+      }
+      orderBy: { descendingByField: "balance" }
+    ) {
+      Currency {
+        Name
+        Symbol
+        SmartContract
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
+    }
+  }
+}
+{
+  "address": "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf",
+  "until": "2025-06-01T00:00:00Z"
+}
+```
+
+## Full Multi-Token Portfolio of a Tron Wallet
+
+Return the **complete TRC10 + TRC20 portfolio** of any Tron address with USD valuation — the building block of Tron portfolio trackers and wallet UIs.
+
+Run the query [here](https://ide.bitquery.io/tron-wallet-portfolio).
+
+```graphql
+query TronWalletPortfolio($address: String) {
+  Tron(dataset: combined, aggregates: yes) {
+    BalanceUpdates(
+      where: { BalanceUpdate: { Address: { is: $address } } }
+      orderBy: { descendingByField: "balance_usd" }
+    ) {
+      Currency {
+        Name
+        Symbol
+        SmartContract
+        Native
+      }
+      balance: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
+      balance_usd: sum(of: BalanceUpdate_AmountInUSD, selectWhere: { gt: "0" })
+    }
+  }
+}
+{
+  "address": "TFXttAWURRrXrd9JvFPVLEh1esJK8NHxn7"
+}
+```
+
 ## Top Token Holders of a token
 
 This query fetches you the top 10 token holders of the token `TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT`. Check out the query [here](https://ide.bitquery.io/top-token-holders_2).

@@ -39,6 +39,9 @@ sidebar_position: 2
 
 Run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Get-All-DEX-Trades-on-Tron-With-Price-Market-Cap-and-Supply).
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 subscription {
   Trading {
@@ -115,13 +118,18 @@ subscription {
 }
 ```
 
+</details>
+
 ## Subscribe to Latest Tron Trades
 
 This example uses the chain-specific **DEXTrades** cube via `Tron { DEXTrades }`. For trader + USD swap rows, use the [stream at the top](#crypto-trades-live-stream).
 
 You can try the query [here](https://ide.bitquery.io/Latest-trades-on-Tron)
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 subscription {
   Tron {
     DEXTrades {
@@ -165,15 +173,18 @@ subscription {
     }
   }
 }
-
-
 ```
+
+</details>
 
 ## Get Token Stats like buyers, sellers, makers, total trades, total volume, buy volume, sell volume
 
 This query fetches you all the important token statistics such as number of buyers, sellers, makers, total trades, total volume, buy volume, sell volume. Try the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-tron-pair)
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query MyQuery( $token: String,$pairAddress: String , $min5_timestamp: DateTime, $hr1_timestamp: DateTime) {
   Tron {
     DEXTradeByTokens(
@@ -267,12 +278,17 @@ query MyQuery( $token: String,$pairAddress: String , $min5_timestamp: DateTime, 
 }
 ```
 
+</details>
+
 ## Get Top gainer tokens on Tron Network
 
 This query fetches you the top gainer tokens on Tron network.
 You can try the query [here](https://ide.bitquery.io/top-gainers_1).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Tron {
     DEXTradeByTokens(
@@ -307,6 +323,8 @@ You can try the query [here](https://ide.bitquery.io/top-gainers_1).
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/59eae28e-bfdd-42ea-b942-fd0c9facf583)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron).
@@ -316,7 +334,10 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/tron).
 This query fetches you the top bought tokens on Tron network.
 You can try the query [here](https://ide.bitquery.io/top-bought).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Tron {
     DEXTradeByTokens(
@@ -336,8 +357,9 @@ You can try the query [here](https://ide.bitquery.io/top-bought).
     }
   }
 }
-
 ```
+
+</details>
 
 Arranged in the descending order of `bought - sold` on [DEXrabbit](https://dexrabbit.com/tron).
 
@@ -350,7 +372,10 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/tron).
 This query fetches you the top sold tokens on Tron network.
 You can try the query [here](https://ide.bitquery.io/top-sold).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Tron {
     DEXTradeByTokens(
@@ -370,8 +395,9 @@ You can try the query [here](https://ide.bitquery.io/top-sold).
     }
   }
 }
-
 ```
+
+</details>
 
 Arranged in the descending order of `sold - bought` on [DEXrabbit](https://dexrabbit.com/tron).
 
@@ -384,7 +410,10 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/tron).
 This query fetches you the OHLC data of a specific token on Tron network.
 You can try the query [here](https://ide.bitquery.io/ohlc0_5).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query tradingViewPairs($token: String, $base: String) {
   Tron {
     DEXTradeByTokens(
@@ -410,6 +439,8 @@ query tradingViewPairs($token: String, $base: String) {
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/5ed90e34-a6ed-4c9b-a458-30d81a19d9f1)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TJ9mxWPmQSJswqMakEehFWcAntg73odiAq/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR).
@@ -419,7 +450,10 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TJ9mx
 This query fetches you the latest trades of a specific token on Tron network.
 You can try the query [here](https://ide.bitquery.io/latest-trades_3).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query LatestTrades($token: String, $base: String) {
   Tron {
     DEXTradeByTokens(
@@ -464,6 +498,8 @@ query LatestTrades($token: String, $base: String) {
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/af073bde-0e9e-45cf-8d27-bd9176d7bf73)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TJ9mxWPmQSJswqMakEehFWcAntg73odiAq/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR#pair_latest_trades).
@@ -473,7 +509,10 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TJ9mx
 This query fetches you the top traders of a specific token on Tron network.
 You can try the query [here](https://ide.bitquery.io/top-traders_6).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query TopTraders($token: String, $base: String) {
   Tron {
     DEXTradeByTokens(
@@ -501,6 +540,8 @@ query TopTraders($token: String, $base: String) {
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/f40658bd-aa9f-4c32-bcf3-792c098ea66e)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TSig7sWzEL2K83mkJMQtbyPpiVSbR6pZnb/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR#pair_top_traders).
@@ -510,7 +551,10 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TSig7
 This query fetches you the top 10 buyers of a specific token on Tron network.
 You can try the query [here](https://ide.bitquery.io/top-buyers-of-token---Tron_1).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Tron {
     DEXTradeByTokens(
@@ -532,12 +576,17 @@ You can try the query [here](https://ide.bitquery.io/top-buyers-of-token---Tron_
 }
 ```
 
+</details>
+
 ## Get Top Sellers of a token on Tron Network
 
 This query fetches you the top 10 sellers of a specific token on Tron network.
 You can try the query [here](https://ide.bitquery.io/top-sellers-of-token---Tron_3).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Tron {
     DEXTradeByTokens(
@@ -559,12 +608,17 @@ You can try the query [here](https://ide.bitquery.io/top-sellers-of-token---Tron
 }
 ```
 
+</details>
+
 ## Get DEX markets for a specific Token
 
 This query fetches you the DEXs where a specific token is being traded on Tron network.
 You can try the query [here](https://ide.bitquery.io/DEX-Markets-for-a-token_1).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query ($token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
   Tron {
     DEXTradeByTokens(
@@ -602,6 +656,8 @@ query ($token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: D
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/cf2e2b29-8a15-41d1-bbef-41339fd41f60)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TSig7sWzEL2K83mkJMQtbyPpiVSbR6pZnb/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR#pair_dex_list).
@@ -611,7 +667,10 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TSig7
 This query fetches you all the DEXs information on Tron network such as unique sellers, unique buyers etc.
 You can try the query [here](https://ide.bitquery.io/all-dexs-info).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query DexMarkets {
   Tron {
     DEXTradeByTokens {
@@ -628,6 +687,8 @@ query DexMarkets {
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/01287a30-53e1-4ffa-b5fc-828009282ac5)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/dex_market).
@@ -637,7 +698,10 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/dex_market
 This query fetches you TOp Traders information on Tron network.
 You can try the query [here](https://ide.bitquery.io/top-traders-on-tron-network).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query DexMarkets {
   Tron {
     DEXTradeByTokens(orderBy: {descendingByField: "trades"}, limit: {count: 100}) {
@@ -653,6 +717,8 @@ query DexMarkets {
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/1184d54f-47db-428f-8f71-cd0c591a310b)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/trader).
@@ -661,7 +727,10 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/trader).
 
 This query provides real-time updates on price of token `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t` in terms of USDT `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t`, including details about the DEX. Try the query [here](https://ide.bitquery.io/Track-price-of-a-tron-token-in-realtime)
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 subscription MyQuery {
   Tron {
     DEXTradeByTokens(
@@ -702,9 +771,9 @@ subscription MyQuery {
     }
   }
 }
-
-
 ```
+
+</details>
 
 ## Stablecoin Peg Health (Latest Price Across All DEXs)
 
@@ -712,7 +781,10 @@ Get the **latest price of a stablecoin across all Tron DEXs**. Returns one row p
 
 [Run in Bitquery IDE](https://ide.bitquery.io/peg-health-tron)
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Tron {
     DEXTradeByTokens(
@@ -757,6 +829,8 @@ Get the **latest price of a stablecoin across all Tron DEXs**. Returns one row p
 }
 ```
 
+</details>
+
 ## Volume of Multiple Tokens Across Different Chains
 
 Get volume and price change data for multiple tokens trading on different chains (Solana, Ethereum, BSC, Tron) in a single query using the Trading API. Returns volume for 1h, 4h, and 24h periods, plus price change percentages for the same intervals.
@@ -767,7 +841,10 @@ For **EVM chains** (Ethereum, BSC, etc.) in the Trading API, use **all lowercase
 
 [Run in Bitquery IDE](https://ide.bitquery.io/volume-of-a-token_1)
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query {
   TokenAsBase: Trading {
     Pairs(
@@ -827,6 +904,8 @@ query {
 }
 ```
 
+</details>
+
 ---
 
 ## More examples
@@ -867,6 +946,209 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
       sells: count(if: { Side: { is: "Sell" } })
     }
   }
+}
+```
+
+</details>
+
+---
+
+## Get the First 100 Buyers of a Token on Tron
+
+Find the **earliest buyers** of any Tron token by using Tron `DEXTradeByTokens` API. This is widely used for **memecoin sniper detection**, **early-holder analysis**, and **alpha groups** monitoring SunPump / SunSwap launches.
+
+You can try this query [here](https://ide.bitquery.io/first-100-buyers-tron-token).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query FirstBuyersOfTronToken($token: String) {
+  Tron {
+    DEXTradeByTokens(
+      orderBy: { ascending: Block_Time }
+      limitBy: { by: Trade_Buyer, count: 1 }
+      limit: { count: 100 }
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: $token } }
+          Side: { Type: { is: buy } }
+        }
+        TransactionStatus: { Success: true }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Buyer
+        Amount
+        AmountInUSD
+        Price
+        PriceInUSD
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
+
+```
+{
+  "token": "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"
+}
+```
+
+</details>
+
+## Track New Token Launches on Tron DEXs (SunPump & SunSwap)
+
+Surface tokens whose **first ever DEX trade** happened in a recent window — useful for **new launch radars**, **bot discovery**, and **trending token feeds** for the Tron ecosystem.
+
+Run this query [in the Bitquery IDE](https://ide.bitquery.io/new-token-launches-tron).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query NewTronTokenLaunches {
+  Tron {
+    DEXTradeByTokens(
+      orderBy: { ascendingByField: "first_trade" }
+      limitBy: { by: Trade_Currency_SmartContract, count: 1 }
+      limit: { count: 50 }
+      where: {
+        Trade: { Side: { Currency: { SmartContract: { is: "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR" } } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        TransactionStatus: { Success: true }
+      }
+    ) {
+      Trade {
+        Currency {
+          Name
+          Symbol
+          SmartContract
+        }
+        Dex {
+          ProtocolName
+          ProtocolFamily
+        }
+        first_price: PriceInUSD(minimum: Block_Time)
+      }
+      first_trade: minimum(of: Block_Time)
+      first_buyer: Trade_Buyer
+    }
+  }
+}
+```
+
+</details>
+
+## Wallet PnL Across All Tron Trades
+
+Compute realized **profit and loss for any Tron wallet** across every token it has traded. Powers **trader leaderboards**, **smart-money copytrading**, and **portfolio dashboards**. Filter `Trade_Sender` to the wallet you want.
+
+You can run the query [here](https://ide.bitquery.io/wallet-pnl-tron).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query WalletPnLTron($wallet: String) {
+  Tron {
+    DEXTradeByTokens(
+      where: {
+        Transaction: { Result: { Success: true } }
+        any: [
+          { Trade: { Buyer: { is: $wallet } } }
+          { Trade: { Seller: { is: $wallet } } }
+        ]
+      }
+      orderBy: { descendingByField: "pnl" }
+      limit: { count: 100 }
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+      }
+      bought_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      sold_usd: sum(
+        of: Trade_Side_AmountInUSD
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
+      pnl: calculate(expression: "$sold_usd - $bought_usd")
+      trades: count
+    }
+  }
+}
+{
+  "wallet": "TFXttAWURRrXrd9JvFPVLEh1esJK8NHxn7"
+}
+```
+
+</details>
+
+## Detect Token Snipers (Buyers Within 60 Seconds of Launch)
+
+Spot wallets that bought a Tron token within **60 seconds of its very first DEX trade** — the canonical signature of an automated **sniper bot**. Useful for risk scoring, anti-bot dashboards, and alpha tracking.
+
+Try the query [here](https://ide.bitquery.io/tron-snipers-detection).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query TronSnipers($token: String, $launch_time: DateTime, $sniper_window: DateTime) {
+  Tron {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: $token } }
+          Side: { Type: { is: buy } }
+        }
+        Block: { Time: { after: $launch_time, before: $sniper_window } }
+        TransactionStatus: { Success: true }
+      }
+      orderBy: { ascending: Block_Time }
+      limitBy: { by: Trade_Buyer, count: 1 }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Buyer
+        Amount
+        AmountInUSD
+        Price
+        PriceInUSD
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+{
+  "token": "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT",
+  "launch_time": "2025-01-01T00:00:00Z",
+  "sniper_window": "2025-01-01T00:01:00Z"
 }
 ```
 

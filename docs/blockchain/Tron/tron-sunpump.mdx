@@ -35,6 +35,9 @@ Here’s the [query](https://ide.bitquery.io/New-tokens-on-sunpump_1#) to retrie
 
 If you remove `subscription` from the below GraphQL query it will become API, for example check [this api](https://ide.bitquery.io/latest-created-Sunpump-tokens).
 
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
 ```graphql
 subscription MyQuery {
   Tron {
@@ -67,11 +70,16 @@ subscription MyQuery {
 }
 ```
 
+</details>
+
 ## Latest Trades on Sunpump Tron
 
 To subscribe to latest Sunpump trades you can use [the following stream](https://ide.bitquery.io/Sunpump-trades).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 subscription {
   Tron {
     DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "sun_pump_v1"}}}}) {
@@ -111,12 +119,17 @@ subscription {
 }
 ```
 
+</details>
+
 ## Get all Pairs in Virtual Liquidity Pool
 
 Sun Pump does not use a dedicated pool for each pair; instead, all liquidity is managed within a single contract.
 You can query the virtual liquidity pools directly by running the following query
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query SunPumpTokenPools {
   Tron {
     DexPools: BalanceUpdates(
@@ -134,13 +147,18 @@ query SunPumpTokenPools {
 }
 ```
 
+</details>
+
 Find the query [here](https://ide.bitquery.io/Sun-Pump-Virtual-Liquidity-Pools_1)
 
 ## Sunpump Trades in Mempool
 
 We simulate transactions in mempool, therefore you can also get trades directly from mempool using [following stream](https://ide.bitquery.io/Sunpump-trades-mempool).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 subscription {
   Tron (mempool:true) {
     DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "sun_pump_v1"}}}}) {
@@ -180,11 +198,16 @@ subscription {
 }
 ```
 
+</details>
+
 ## OHLC data for specific token on SunPump
 
 You can also get ohlc data for specific token using DEXTradeByTokens API. Here is [an example](https://ide.bitquery.io/OHLC0_6).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query TokenOHLC($token: String) {
   Tron {
     DEXTradeByTokens(
@@ -230,6 +253,8 @@ query TokenOHLC($token: String) {
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/0904c6fa-043e-4da7-895e-cdfed4794ad3)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/sunpump/TMaQT6QWTaTxuorH7Aa898Gmt7ibJKc6Ti).
@@ -240,7 +265,10 @@ You can also get trades for specific token using DEXTradeByTokens API. Here is [
 
 To learn the difference between DEXTrades and DEXTradeByTokens API, read [this](https://docs.bitquery.io/docs/cubes/dextrades/) and [this](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/) doc.
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query SunPumpTokenLatestTrades($token: String) {
   Tron {
     DEXTradeByTokens(
@@ -281,6 +309,8 @@ query SunPumpTokenLatestTrades($token: String) {
 }
 ```
 
+</details>
+
 ![image](https://github.com/user-attachments/assets/28c3e59d-750a-4873-a491-df2bbd42c9ad)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/sunpump/TQFZb7S1gb5D2u7HqmKJRNZXoTjVe428sh).
@@ -294,6 +324,9 @@ Getting SunPump data using transactions API instead of Trades as shown in follow
 ## Latest Buy events on SunPump Tron
 
 You can use following stream to get latest buys on Sunpump. You can try [this stream on IDE](https://ide.bitquery.io/latest-Buy-on-SunPump).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -337,13 +370,18 @@ subscription {
 }
 ```
 
+</details>
+
 ## Sunpump Bonding Curve using TRX Balance
 
 TRX balance in bonding curve based on dex trades. Calculated as `balance = in_sum - out_sum`
 
 Try [this query](https://ide.bitquery.io/SunPump-Bonding-Curve-TRX-Balance).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Tron {
     in: DEXTrades(
@@ -359,6 +397,8 @@ Try [this query](https://ide.bitquery.io/SunPump-Bonding-Curve-TRX-Balance).
   }
 }
 ```
+
+</details>
 
 Historical TRX balance in bonding curve based on DEX trades.
 
@@ -366,7 +406,10 @@ Calculated as `balance = in_sum - out_sum`
 
 Use following [query](https://ide.bitquery.io/SunPump-Historical-Bonding-Curve-TRX-Balance).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Tron {
     in: DEXTrades(
@@ -391,9 +434,14 @@ Use following [query](https://ide.bitquery.io/SunPump-Historical-Bonding-Curve-T
 }
 ```
 
+</details>
+
 ## Latest Sell events on SunPump Tron
 
 You can use following stream to get latest sells on Sunpump. You can try [this stream on IDE](https://ide.bitquery.io/sunpump-sell-event).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -437,11 +485,16 @@ subscription {
 }
 ```
 
+</details>
+
 ## First Time Buy Event on Sunpump
 
 You can use follow stream to get stream of first time buy event for any new token.
 
 You can try [this stream on IDE](https://ide.bitquery.io/Tron-sunpump-first-time-buy-event_1).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 subscription {
@@ -485,13 +538,18 @@ subscription {
 }
 ```
 
+</details>
+
 ## Tron DEX Trade API
 
 Currently Tron DEX trade API doesn't have Sunpump for now, but it has other DEXs including Sunswap and we are in process of adding Sunpump in DEX trades api.
 
 You can try [this API on our IDE](https://ide.bitquery.io/Tron-dex-trades).
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 subscription {
   Tron(mempool: false) {
     DEXTrades(where: {Transaction: {Result: {Success: true}}}) {
@@ -547,6 +605,8 @@ subscription {
 }
 ```
 
+</details>
+
 ## Track Token Launch to Sunswap
 
 This query allows you to track when tokens are launched on SunSwap using the `launchToDEX` function. It returns the most recent 10 token launches, displaying details such as the token address, transaction hash, block timestamp, and the method call signature.
@@ -555,7 +615,10 @@ This query allows you to track when tokens are launched on SunSwap using the `la
 You can use the **token** argument to get the address of the token that was launched.
 You can run the query [here](https://ide.bitquery.io/sunmpump-launchtoDEX_1)
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 query MyQuery {
   Tron(network: tron, dataset: realtime) {
     Calls(
@@ -600,8 +663,9 @@ query MyQuery {
     }
   }
 }
-
 ```
+
+</details>
 
 ## Track Token Purchase Events on Sunpump
 
@@ -610,7 +674,10 @@ The arguments has key event parameters like the token address, buyer, transactio
 
 You can run the query [here](https://ide.bitquery.io/TokenPurchased-on-Sunpump)
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 {
   Tron {
     Events(
@@ -660,8 +727,9 @@ You can run the query [here](https://ide.bitquery.io/TokenPurchased-on-Sunpump)
     }
   }
 }
-
 ```
+
+</details>
 
 ## Track Token Creation on Sunpump in Realtime
 
@@ -670,7 +738,10 @@ This subscription allows you to track new tokens being created on SunPump in rea
 The `Arguments` include the token address, creator, and token index.
 You can run it [here](https://ide.bitquery.io/Latest-tokens-created-on-Sunpump_2)
 
-```
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
 subscription{
   Tron {
     Events(
@@ -720,8 +791,9 @@ subscription{
     }
   }
 }
-
 ```
+
+</details>
 
 ## Video Tutorial on How to get Newly Created Tokens on Sun Pump
 
