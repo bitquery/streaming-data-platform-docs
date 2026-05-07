@@ -996,7 +996,7 @@ const config = {
           },
           {
             to: "https://docs.bitquery.io/docs/tools-directory/",
-            label: "Demo Tools",
+            label: "Free Tools",
             position: "left",
           },
         ],
