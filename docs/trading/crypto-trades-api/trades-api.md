@@ -2069,3 +2069,180 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Average-fee
   }
 }
 ```
+
+---
+
+## How do I stream live prices for a Pump.fun token using the Trades API?
+
+> Subscribe to **real-time price updates** for a specific Pump.fun token — streams every trade with **USD price**, **market cap**, **FDV**, **total supply**, **buy/sell amounts**, and **transaction details** as they happen. Filter by **`Pair.Market.Program`** (Pump.fun program address) and **`Pair.Token.Id`** to lock onto one token. Useful for **live price tickers**, **trading bots**, **real-time dashboards**, and **token monitoring**.
+
+You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/pump-fun-token-live-prices-using-trades-api_1#).
+
+```graphql
+subscription {
+  Trading {
+    Trades(
+      where: {
+        Pair: {
+          Market: { Network: { is: "Solana" } Program:{is:"6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"} }
+          Token: {
+            Id: { is: "bid:solana:DhDRgwGeTPzkykcSYgTw42EsH3DBZg1p6FnnnXkrpump" }
+          }
+        }
+      }
+    ) {
+      Side
+      Supply {
+        TotalSupply
+        FullyDilutedValuationUsd
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
+
+---
+
+## How do I get the first 50 buyers of a token?
+
+> Retrieve the **first 50 buy trades** for a specific token ordered by **ascending block time** — returns the **earliest buyers**, their **wallet addresses**, **amounts paid**, **USD values**, **price at entry**, **market cap**, and **supply data** at the time of each trade. Filter by **`Side: "Buy"`** and **`Pair.Token.Id`** to target one token. Useful for **early buyer analysis**, **smart money tracking**, **insider detection**, and **token launch forensics**.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/first-50-buyers-of-a-token_3#).
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 50}
+      orderBy: {ascending: Block_Time}
+      where: {Side: {is: "Buy"}, Pair: {Market: {Network: {is: "Solana"}}, Token: {Id: {is: "bid:solana:DhDRgwGeTPzkykcSYgTw42EsH3DBZg1p6FnnnXkrpump"}}}}
+    ) {
+      Side
+      Supply {
+        TotalSupply
+        FullyDilutedValuationUsd
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      TransactionHeader {
+        Fee
+        FeePayer
+        Sender
+        To
+        Hash
+        Index
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Block {
+        Date
+        Time
+        Timestamp
+      }
+      Pair {
+        Currency {
+          Id
+          Name
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+        }
+        QuoteCurrency {
+          Id
+          Name
+          Symbol
+        }
+        Token {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+        QuoteToken {
+          Address
+          Id
+          IsNative
+          Symbol
+          TokenId
+          Network
+        }
+      }
+      Price
+      PriceInUsd
+    }
+  }
+}
+```
