@@ -1,15 +1,16 @@
 ---
 sidebar_position: 1
+description: "Real-time Tron wallet balance updates via GraphQL subscriptions—IDE, WebSockets, Kafka."
 ---
 
 # Tron Balance & Balance Updates API
 
-In thise section we will see how to monitor real-time balance changes across the Tron blockchain
+In this section we will see how to monitor real-time balance changes across the Tron blockchain
 
 <head>
-<meta name="title" content="How to get Tron Balance Updates of an address"/>
-<meta name="description" content="Learn how to get real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API."/>
-<meta name="keywords" content="balance api, balance updates api, balance updates python api, Tron Balance python api, NFT balance api, Balance scan api, Balance api docs, Tron Balance crypto api, balance blockchain api,Tron network api, Tron web3 api, tronscan api"/>
+<meta name="title" content="How to get Tron Balance Updates of an address (real-time streams)"/>
+<meta name="description" content="Stream real-time Tron balance updates per wallet with Bitquery V2—GraphQL subscriptions, WebSockets, Kafka."/>
+<meta name="keywords" content="Real time Tron balance updates, Stream Tron balance, Tron balance subscription, Tron balance websocket, balance api, balance updates api, balance updates python api, Tron Balance python api, NFT balance api, Balance scan api, Balance api docs, Tron Balance crypto api, balance blockchain api, Tron network api, Tron web3 api, tronscan api, Tron Kafka balance"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
@@ -23,14 +24,14 @@ In thise section we will see how to monitor real-time balance changes across the
 />
 <meta
   property="og:description"
-  content="Learn how to get historical & real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API."
+  content="Live Tron balance update streams—wallet subs in IDE, WebSockets, Kafka."
 />
 
 <!-- Twitter -->
 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="How to get Tron Balance Updates of an address" />
-<meta property="twitter:description" content="Learn how to get real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API." />
+<meta property="twitter:description" content="Real-time Tron balance updates API—streaming-first." />
 </head>
 
 ## Subscribe to Balance Updates of a Particular Wallet

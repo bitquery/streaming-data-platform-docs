@@ -4,8 +4,9 @@ In this section we'll have a look at some examples using the Tron Transfers API.
 
 <head>
 <meta name="title" content="Tron Transfers API"/>
-<meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
-<meta name="keywords" content="Tron transfers api, Tron transfers python api, Tron transfers scan api, Tron transfers api docs, transfers crypto api, transfers blockchain api, Tron network api"/>
+<meta name="description" content="Get all historical & realtime transfers details for an address or a 
+contract, capturing internal transfers, external transfers and token transfers."/>
+<meta name="keywords" content="Real time Tron transfers, Stream Tron transfers, Tron transfers subscription, Tron transfer websocket, Tron whale transfers stream, Tron transfers api, Tron transfers python api, Tron transfers scan api, Tron transfers api docs, transfers crypto api, transfers blockchain api, Tron network api, Tron Kafka stream"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
