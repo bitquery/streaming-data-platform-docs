@@ -2,6 +2,6 @@
   "label": "Tron",
   "link": {
     "type": "generated-index",
-    "description": "Real-time Tron data: GraphQL subscriptions, WebSocket streams, and Kafka for live DEX, transfers, balances, and mempool"
+    "description": "Examples and Guidelines on Queries and Subscriptions"
   }
 }

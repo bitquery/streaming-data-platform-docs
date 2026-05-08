@@ -1,12 +1,11 @@
 # Tron Mempool API
 
-**Tron mempool** data is inherently **pre-confirmation and real-time**. These examples use **`Tron(mempool: true)`**. For trial subscriptions can be ran on the [Bitquery IDE](https://ide.bitquery.io), then integrated with systems using **WebSockets**, or at scale with [Kafka](/docs/streams/kafka-streaming-concepts/).
+In this section we'll have a look at some examples using the Tron Mempool API.
 
 <head>
-<meta name="title" content="Tron Mempool API - Real-time pending transactions on Tron"/>
-<meta name="description" content="Get Mempool data through our powerful and highly scalabe Mempool API. 
-Access all information about pricing history, Tron Mempool transactions, and Mempool trades."/>
-<meta name="keywords" content="Real time Tron mempool, Stream Tron mempool, Tron mempool subscription, Tron pending transactions websocket, Tron Mempool API, Mempool trades API, Mempool api, Mempool python api, Mempool api docs, Mempool crypto api, Tron network api, Tron web3 api, Tron Kafka mempool"/>
+<meta name="title" content="Tron Mempool API - The Ultimate Solution to get your Mempool data"/>
+<meta name="description" content="Get Mempool data through our powerful and highly scalabe Mempool API. Access all information about pricing history, Tron Mempool transactions, and Mempool trades."/>
+<meta name="keywords" content="Tron Mempool API, Mempool trades API, Mempool api, Mempool pricing history api, Mempool python api, rarible api, opensea api, Mempool api docs, Mempool crypto api,Tron network api, Tron web3 api"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
@@ -16,16 +15,12 @@ Access all information about pricing history, Tron Mempool transactions, and Mem
 <meta property="og:type" content="website" />
 <meta
   property="og:title"
-  content="Tron Mempool API - Real-time pending transactions on Tron"
+  content="Tron Mempool API - The Ultimate Solution to get your Mempool data"
 />
 <meta
   property="og:description"
   content="Get Mempool data through our powerful and highly scalabe Mempool API. Access all information about pricing history, Mempool balances, and Mempool trades."
 />
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Tron Mempool API - Real-time pending data" />
-<meta property="twitter:description" content="Stream Tron mempool activity—subs, WebSockets, Kafka." />
 </head>
 
 ## Latest Mempool Transfers

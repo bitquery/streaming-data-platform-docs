@@ -1,6 +1,5 @@
 ---
 sidebar_position: 2
-description: "Real-time Tron DEX trades—GraphQL subscriptions, WebSockets, Kafka streams—for live swap data on SunSwap and more."
 ---
 
 # Tron DEX Trades API
@@ -10,7 +9,7 @@ description: "Real-time Tron DEX trades—GraphQL subscriptions, WebSockets, Kaf
 <head>
 <meta name="title" content="How to Get Tron Decentralized Exchange Data with DEX Trades API"/>
 <meta name="description" content="Get on-chain data of any Tron based DEX through our DEX Trades API."/>
-<meta name="keywords" content="Real time Tron Dex Trades streams, Stream Tron Dex Trades, Streaming Tron Dex Trades, Tron Dex Trades subscription, Tron DEX Trades api,Tron DEX Trades python api,Tron DEX Trades token api,Tron Dex NFT api, DEX Trades scan api, DEX Trades api,Dex trades stream, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,Tron network stream, Tron Websocket streams, Tron web3 api, tronscan api"/>
+<meta name="keywords" content="Tron DEX Trades api,Tron DEX Trades python api,Tron DEX Trades token api,Tron Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,Tron network api, Tron web3 api, tronscan api"/>
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
