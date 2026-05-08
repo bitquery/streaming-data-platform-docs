@@ -24,7 +24,7 @@ const sidebars = {
         "start/embed",
         "start/errors",
         "start/getting-updates",
-        "start/mempool",   
+        "start/mempool",
       ],
     },
 
@@ -1069,6 +1069,7 @@ const sidebars = {
             "usecases/Top-10-ethereum-tokens",
             "usecases/pumpfun-token-sniffer",
             "usecases/defi_portfolio_scorer",
+            "usecases/polymarket-telegram-alerts-bot",
           ],
         },
         {
