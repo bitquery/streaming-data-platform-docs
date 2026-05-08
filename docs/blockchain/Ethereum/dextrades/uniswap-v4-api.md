@@ -346,3 +346,76 @@ query pairTopTraders {
   }
 }
 ```
+
+## Get Uniswap V4 Pool Liquidity
+
+Liquidity for v4 pools is reconstructed by stepping through each price range where liquidity is concentrated , so `AmountCurrencyA` / `AmountCurrencyB` reflect the actual PoolManager balances for that `PoolId`. See the [Ethereum Liquidity API](/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api) for the full `DEXPoolEvents` schema.
+
+Stream live liquidity for all Uniswap v4 pools on Ethereum. [Run in the Bitquery IDE](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4_6).
+
+```graphql
+subscription MyQuery {
+  EVM(network: eth) {
+    DEXPoolEvents(
+      where: {PoolEvent: {Dex: {ProtocolName: {is: "uniswap_v4"}}}}
+    ) {
+      Block { Time Number }
+      PoolEvent {
+        AtoBPrice
+        BtoAPrice
+        Liquidity {
+          AmountCurrencyA
+          AmountCurrencyAInUSD
+          AmountCurrencyB
+          AmountCurrencyBInUSD
+        }
+        Pool {
+          PoolId
+          SmartContract
+          CurrencyA { Name Symbol SmartContract }
+          CurrencyB { Name Symbol SmartContract }
+        }
+      }
+      Transaction { Hash }
+    }
+  }
+}
+```
+
+Filter to a specific pool by `PoolId` (e.g. SWFTC/USDT v4 pool). [Run in the Bitquery IDE](https://ide.bitquery.io/uniswap-v4-pool-liquidity-by-poolid-ethereum).
+
+```graphql
+subscription MyQuery {
+  EVM(network: ethereum) {
+    DEXPoolEvents(
+      where: {
+        PoolEvent: {
+          Dex: { ProtocolName: { is: "uniswap_v4" } }
+          Pool: { PoolId: { is: "0x2a5bf4f7f9f6044f854ae1170113504a023dbcb347f25a1809bab471f07a7dba" } }
+        }
+      }
+    ) {
+      Block { Time Number }
+      PoolEvent {
+        AtoBPrice
+        BtoAPrice
+        Liquidity {
+          AmountCurrencyA
+          AmountCurrencyAInUSD
+          AmountCurrencyB
+          AmountCurrencyBInUSD
+        }
+        Pool {
+          PoolId
+          SmartContract
+          CurrencyA { Name Symbol SmartContract }
+          CurrencyB { Name Symbol SmartContract }
+        }
+      }
+      Transaction { Hash }
+    }
+  }
+}
+```
+
+> In Uniswap v4 all pools live in the singleton PoolManager (`0x000000000004444c5dc75cB358380D2e3dE08A90`), so `Pool.SmartContract` is the same across pools — use `Pool.PoolId` to identify each pool.
