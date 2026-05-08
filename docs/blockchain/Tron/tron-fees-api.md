@@ -9,8 +9,9 @@ These APIs can be provided through different streams including Kafka for zero la
 
 <head>
   <meta name="title" content="Tron Fees API - Track Transaction Fees on Tron DApps"/>
-  <meta name="description" content="Query and analyze Tron transaction fees using Bitquery’s Tron Fees API. Get data on DEX trades, wallet transfers, and total account fees."/>
-  <meta name="keywords" content="Tron Fees API,Tron transaction fees,Tron Blockchain Data API,Track Tron DEX fees,Tron wallet fee analytics,crypto fees,Tron gas fees,Tron API,Kafka Tron API,Blockchain Data API,Tron token fees,Tron fee explorer"/>
+  <meta name="description" content="Analyze transaction fees on Tron including DEX trades, wallet 
+  transfers, and account-level metrics using Bitquery’s Tron Fees API."/>
+  <meta name="keywords" content="Real time Tron fees, Stream Tron transaction fees, Tron fees subscription, Tron fee websocket, Tron Fees API,Tron transaction fees,Tron Blockchain Data API,Track Tron DEX fees,Tron wallet fee analytics,crypto fees,Tron gas fees,Tron API,Kafka Tron API,Blockchain Data API,Tron token fees,Tron fee explorer"/>
   <meta name="robots" content="index, follow"/>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="language" content="English"/>
