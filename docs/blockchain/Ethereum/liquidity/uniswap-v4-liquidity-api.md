@@ -68,12 +68,6 @@ That means you can:
 
 Without a **`PoolId`** dimension, **per-pool** v4 liquidity for a “pair” is **not** faithfully represented; Bitquery exposes **`PoolId`** so you can align with how Uniswap v4 actually partitions state.
 
-:::note Coverage of `DEXPoolEvents`
-
-**`DEXPoolEvents`** for this flow reflects **swap** related pool updates only. It does **not** include other on-chain liquidity actions (for example **mint**, **burn**, **add liquidity**, or **remove liquidity** events) as separate indexed event types.
-
-:::
-
 ---
 
 ## API examples
@@ -241,6 +235,63 @@ query RecentUniswapV4PoolLiquidity($poolId: String!) {
       }
       Transaction {
         Hash
+      }
+    }
+  }
+}
+```
+
+### Latest Liquidity for All Uniswap V4 Pools for a Currency Pair
+
+This API endpoint provides latest liquidity event for every Uniswap V4 pool for a given currency pair. This info includes the **Price of currencies in terms of other**, **Price of currencies in USD**, **Currency Details** and `PoolIDs`.
+
+[Run in IDE](https://ide.bitquery.io/latest-liquidity-for-a-currency-pair-across-all-v4-pools_1)
+
+```graphql
+{
+  EVM {
+    DEXPoolEvents(
+      limitBy: {by: PoolEvent_Pool_PoolId count: 1}
+      orderBy: {descending: Block_Time}
+      where: {
+        PoolEvent: {
+          Dex: {ProtocolName: {is: "uniswap_v4"}}, 
+          Pool: {
+            CurrencyA: {SmartContract: {is: "0x0bb217e40f8a5cb79adf04e1aab60e5abd0dfc1e"}}, 
+            CurrencyB: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      PoolEvent {
+        AtoBPrice
+        BtoAPrice
+        AtoBPriceInUSD
+        BtoAPriceInUSD
+        Liquidity {
+          AmountCurrencyA
+          AmountCurrencyB
+          AmountCurrencyAInUSD
+          AmountCurrencyBInUSD
+        }
+        Pool {
+          CurrencyA {
+            Decimals
+            Name
+            Symbol
+            SmartContract
+          }
+          CurrencyB {
+            Decimals
+            Name
+            SmartContract
+            Symbol
+          }
+          PoolId
+        }
       }
     }
   }
