@@ -423,6 +423,15 @@ const sidebars = {
             },
             {
               type: "category",
+              label: "Liquidity",
+              link: {
+                type: "doc",
+                id: "blockchain/Ethereum/liquidity/uniswap-v4-liquidity-api",
+              },
+              items: ["blockchain/Ethereum/liquidity/uniswap-v4-liquidity-api"],
+            },
+            {
+              type: "category",
               label: "NFT",
               items: [
                 "blockchain/Ethereum/nft/nft-api",
