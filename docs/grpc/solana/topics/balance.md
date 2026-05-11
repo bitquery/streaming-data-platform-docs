@@ -80,8 +80,8 @@ The filter options are defined in the `request.proto` file. You can filter balan
 
 ```protobuf
 message SubscribeBalanceUpdateRequest {
-  AddressFilter address = 1;
-  AddressFilter token = 2;
+  AddressFilter address;
+  AddressFilter token;
 }
 ```
 

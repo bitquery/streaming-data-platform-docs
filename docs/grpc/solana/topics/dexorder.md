@@ -140,10 +140,10 @@ The filter options are defined in the `request.proto` file. You can filter DEX o
 
 ```protobuf
 message SubscribeOrdersRequest {
-  AddressFilter program = 1;
-  AddressFilter pool = 2;
-  AddressFilter token = 3;
-  AddressFilter trader = 4;
+  AddressFilter program;
+  AddressFilter pool;
+  AddressFilter token;
+  AddressFilter trader;
 }
 ```
 

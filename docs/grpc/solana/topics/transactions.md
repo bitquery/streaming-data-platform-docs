@@ -114,8 +114,8 @@ The filter options are defined in the `request.proto` file. You can filter trans
 
 ```protobuf
 message SubscribeTransactionsRequest {
-  AddressFilter program = 1;
-  AddressFilter signer = 2;
+  AddressFilter program;
+  AddressFilter signer;
 }
 ```
 
