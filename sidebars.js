@@ -1069,7 +1069,7 @@ const sidebars = {
             "usecases/Top-10-ethereum-tokens",
             "usecases/pumpfun-token-sniffer",
             "usecases/defi_portfolio_scorer",
-            "usecases/polymarket-telegram-alerts-bot",
+            "usecases/polymarket-tg-alerts-bot",
           ],
         },
         {
