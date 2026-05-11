@@ -1,10 +1,14 @@
+import VideoPlayer from "../../src/components/videoplayer.js";
+
 # How to Build a Polymarket Whale Alerts Telegram Bot with the Bitquery API
 
 Build a production-ready **Polymarket Telegram bot** that streams realtime trades and lets users set custom alerts on trade size, share price, trader wallet, or specific market — all powered by the **[Bitquery Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api/)**.
 
 By the end of this guide you'll have a multi-user Telegram bot that subscribes to every Polymarket trade on Polygon over a single GraphQL WebSocket, filters trades against per-user alert rules, and pushes Telegram notifications with links to Polymarket, PolygonScan, and the trader's profile.
 
-<img src="/img/usecases/polymarket_tg_alerts_bot.png" width="700" />
+## Video Walkthrough
+
+<VideoPlayer url="https://youtu.be/RRFVaf9_0G4" />
 
 <a href="https://t.me/PolyBit_Polymarket_Bot" target="_blank"><img src="https://raw.githubusercontent.com/Akshat-cs/PolyBit-Polymarket-Alerts-Telegram-Bot/main/assets/add-on-telegram.svg" alt="Add PolyBit on Telegram" height="48" /></a>
 

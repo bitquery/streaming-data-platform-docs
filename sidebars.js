@@ -1070,7 +1070,6 @@ const sidebars = {
             "usecases/Top-10-ethereum-tokens",
             "usecases/pumpfun-token-sniffer",
             "usecases/defi_portfolio_scorer",
-            "usecases/polymarket-tg-alerts-bot",
           ],
         },
         {
@@ -1081,6 +1080,7 @@ const sidebars = {
             title: "Bot Building",
           },
           items: [
+            "usecases/polymarket-tg-alerts-bot",
             "usecases/arbitrum-sniper-bot",
             "usecases/base-sniper-bot",
             "usecases/solana-sniper-bot",
