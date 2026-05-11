@@ -139,9 +139,9 @@ The filter options are defined in the `request.proto` file. You can filter trans
 
 ```protobuf
 message SubscribeTransfersRequest {
-  AddressFilter sender = 1;
-  AddressFilter receiver = 2;
-  AddressFilter token = 3;
+  AddressFilter sender;
+  AddressFilter receiver;
+  AddressFilter token;
 }
 ```
 

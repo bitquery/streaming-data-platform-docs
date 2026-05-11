@@ -129,9 +129,9 @@ The filter options are defined in the `request.proto` file. You can filter DEX p
 
 ```protobuf
 message SubscribePoolsRequest  {
-  AddressFilter program = 1;
-  AddressFilter pool = 2;
-  AddressFilter token = 3;
+  AddressFilter program;
+  AddressFilter pool;
+  AddressFilter token;
 }
 ```
 
