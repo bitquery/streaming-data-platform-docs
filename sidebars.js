@@ -462,6 +462,7 @@ const sidebars = {
               ],
             },
             "blockchain/Ethereum/transfers/rwa-api",
+            "blockchain/Ethereum/pepe-api"
           ],
         },
 

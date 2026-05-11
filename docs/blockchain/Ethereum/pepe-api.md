@@ -10,6 +10,54 @@ Query real-time and historical on-chain data for [PEPE](https://explorer.bitquer
 
 ---
 
+## Real Time PEPE Trades Stream
+
+Every PEPE DEX trade as it is confirmed on-chain in real time using Bitquery subscription.
+
+[Run In IDE ➤](https://ide.bitquery.io/pepe-live-trades-stream)
+
+```graphql
+subscription {
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: {
+            SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        AmountInUSD
+        Price
+        Side {
+          Type
+          AmountInUSD
+          Currency { Symbol }
+        }
+        Buyer
+        Seller
+        Dex {
+          ProtocolName
+          SmartContract
+        }
+        Currency { Symbol }
+      }
+    }
+  }
+}
+```
+
+---
+
 ## Real Time PEPE OHLCV Stream
 
 Stream live PEPE price data with 1-minute candles, moving averages, and USD volume.
@@ -23,8 +71,8 @@ subscription {
   Trading {
     Tokens(
       where: {
-        Currency: {
-          SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
+        Token: {
+          Address: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
         }
         Interval: { Time: { Duration: { eq: 60 } } }
         Volume: { Usd: { gt: 5 } }
@@ -62,16 +110,6 @@ subscription {
           ExponentialMoving
         }
       }
-      Volume {
-        Base
-        Quote
-        Usd
-      }
-      Supply {
-        TotalSupply
-        MarketCap
-        FullyDilutedValuationUsd
-      }
     }
   }
 }
@@ -83,27 +121,23 @@ subscription {
 
 Fetch hourly OHLCV candles for the past 30 days. Change `Duration` for different intervals, such as 60 (1 minute) or 300 (5 minutes).
 
-[Run In IDE ➤](https://ide.bitquery.io/pepe-historical-ohlcv-7days)
+[Run In IDE ➤](https://ide.bitquery.io/pepe-historical-ohlcv-30days)
 
 ```graphql
 {
   Trading {
     Tokens(
       where: {
-        Currency: {
-          SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
+        Token: {
+          Address: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
         }
         Interval: { Time: { Duration: { eq: 3600 } } }
         Volume: { Usd: { gt: 5 } }
         Block: { Time: { since_relative: { days_ago: 30 } } }
       }
       limit: { count: 1000 }
-      orderBy: { descending: Block_Time }
+      orderBy: { descending: Interval_Time_Start }
     ) {
-      Block {
-        Date
-        Time
-      }
       Interval {
         Time {
           Start
@@ -134,7 +168,7 @@ Fetch hourly OHLCV candles for the past 30 days. Change `Duration` for different
 ```
 
 ---
-
+<!-- 
 ## PEPE Price on Uniswap V3
 
 Get OHLCV data scoped to a specific PEPE pair on Uniswap v3, which turns out useful when you need DEX-level price isolation rather than an aggregated index.
@@ -229,11 +263,11 @@ Calculate 5-minute price change percentage, which can be useful for momentum sig
 }
 ```
 
----
+--- -->
 
 ## Monitor Whale Activities for PEPE in Real Time
 
-Subscribe to PEPE transfers above 1 trillion tokens the moment they hit the chain.
+Subscribe to PEPE transfers above 1 billion tokens the moment they hit the chain.
 
 [Run In IDE ➤](https://ide.bitquery.io/pepe-whale-transfer-stream)
 
@@ -273,7 +307,7 @@ subscription {
 
 ---
 
-## Recent Whale Transfers (Historical)
+<!-- ## Recent Whale Transfers (Historical)
 
 Query the last 50 large PEPE transfers in the past 7 days.
 
@@ -315,9 +349,9 @@ Query the last 50 large PEPE transfers in the past 7 days.
 
 ---
 
-## Whale Net Flow (Accumulation vs Distribution)
+## Whale Net Flow (Accumulation vs Distribution) -->
 
-Aggregate inflows and outflows for a wallet over 30 days to determine whether it is accumulating or distributing PEPE.
+<!-- Aggregate inflows and outflows for a wallet over 30 days to determine whether it is accumulating or distributing PEPE.
 
 [Run In IDE ➤](https://ide.bitquery.io/pepe-whale-net-flow)
 
@@ -356,26 +390,32 @@ Aggregate inflows and outflows for a wallet over 30 days to determine whether it
 }
 ```
 
----
+--- -->
 
-## Real-Time PEPE Volume and Market Cap Stream
+## Latest Trading Volume and Market Cap for PEPE
 
-[Run In IDE ➤](https://ide.bitquery.io/pepe-volume-marketcap-stream)
+This query provides the latest trade volume for the past one hour along with the latest market cap.
+
+[Run In IDE ➤](https://ide.bitquery.io/pepe-volume-marketcap)
 
 ```graphql
-subscription {
+ {
   Trading {
     Tokens(
       where: {
-        Currency: {
-          SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
+        Token: {
+          Address: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
         }
-        Interval: { Time: { Duration: { eq: 60 } } }
-        Volume: { Usd: { gt: 5 } }
+        Interval: { Time: { Duration: { eq: 3600 } } }
       }
+      orderBy: {descending: Interval_Time_End}
+      limit: {count: 1}
     ) {
-      Block {
-        Time
+      Interval{
+        Time{
+          Start
+          End
+        }
       }
       Price {
         Ohlc { Close }
@@ -433,30 +473,26 @@ Break down PEPE trading volume across all DEXs.
 
 ---
 
-## Historical Daily Volume (30 Days)
+## Historical Daily Volume for 30 Days
+
+The below query returns the daily trading volume for the past 30 days.
 
 [Run In IDE ➤](https://ide.bitquery.io/pepe-daily-volume-30days)
 
 ```graphql
-{
-  EVM(network: eth) {
-    DEXTradeByTokens(
+query MyQuery {
+  Trading {
+    Trades(
       where: {
-        Trade: {
-          Currency: {
-            SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
-          }
-        }
-        Block: { Time: { since_relative: { days_ago: 30 } } }
+        Block: {Time: {since_relative: {days_ago: 30}}}, 
+        Pair: {Token: {Address: {is: "0x6982508145454ce325ddbe47a25d4ec3d2311933"}}}
       }
-      orderBy: { ascending: Block_Date }
+      orderBy: {ascending: Block_Date}
     ) {
-      Block {
-        Date
-      }
-      volumeUsd: sum(of: Trade_AmountInUSD)
-      tradeCount: count(of: Transaction_Hash)
-      uniqueTraders: count(of: Trade_Buyer, distinct: true)
+      Block{ Date }
+      volume: sum(of: AmountsInUsd_Base)
+      trades: count
+      traders: uniq(of: Trader_Address)
     }
   }
 }
@@ -464,7 +500,7 @@ Break down PEPE trading volume across all DEXs.
 
 ---
 
-## PEPE Volume Across All Active Pairs (Real-Time)
+<!-- ## PEPE Volume Across All Active Pairs (Real-Time)
 
 Monitor volume across PEPE/WETH, PEPE/USDC, and all other active pairs simultaneously.
 
@@ -510,35 +546,31 @@ subscription {
 ```
 
 ---
+ -->
 
-
-## Top PEPE Buyers (Last 24 Hours)
+## Top PEPE Buyers for Last 24 Hours
 
 Rank wallets by total USD spent buying PEPE.
 
 [Run In IDE ➤](https://ide.bitquery.io/pepe-top-buyers-24h)
 
 ```graphql
-{
-  EVM(network: eth) {
-    DEXTradeByTokens(
+query MyQuery {
+  Trading {
+    Trades(
       where: {
-        Trade: {
-          Currency: {
-            SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
-          }
-          Side: { Type: { is: buy } }
-        }
-        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Block: {Time: {since_relative: {hours_ago: 24}}},
+        Pair: {Token: {Address: {is: "0x6982508145454ce325ddbe47a25d4ec3d2311933"}}}, 
+        Side: {is: "Buy"}
       }
-      limit: { count: 20 }
-      orderBy: { descendingByField: "volumeUsd" }
+      limit: {count: 20}
+      orderBy: {descendingByField: "volume"}
     ) {
-      Trade {
-        Buyer
+      Trader {
+        Address
       }
-      volumeUsd: sum(of: Trade_Side_AmountInUSD)
-      tradeCount: count(of: Transaction_Hash)
+      volume: sum(of: AmountsInUsd_Base)
+      trades: count
     }
   }
 }
@@ -546,33 +578,29 @@ Rank wallets by total USD spent buying PEPE.
 
 ---
 
-## Top PEPE Sellers (Last 24 Hours)
+## Top PEPE Sellers for Last 24 Hours
 
 Rank wallets by total USD value of PEPE sold.
 
 [Run In IDE ➤](https://ide.bitquery.io/pepe-top-sellers-24h)
 
 ```graphql
-{
-  EVM(network: eth) {
-    DEXTradeByTokens(
+query MyQuery {
+  Trading {
+    Trades(
       where: {
-        Trade: {
-          Currency: {
-            SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
-          }
-          Side: { Type: { is: sell } }
-        }
-        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Block: {Time: {since_relative: {hours_ago: 24}}},
+        Pair: {Token: {Address: {is: "0x6982508145454ce325ddbe47a25d4ec3d2311933"}}}, 
+        Side: {is: "Sell"}
       }
-      limit: { count: 20 }
-      orderBy: { descendingByField: "volumeUsd" }
+      limit: {count: 20}
+      orderBy: {descendingByField: "volume"}
     ) {
-      Trade {
-        Seller
+      Trader {
+        Address
       }
-      volumeUsd: sum(of: Trade_AmountInUSD)
-      tradeCount: count(of: Transaction_Hash)
+      volume: sum(of: AmountsInUsd_Base)
+      trades: count
     }
   }
 }
@@ -580,55 +608,7 @@ Rank wallets by total USD value of PEPE sold.
 
 ---
 
-## Latest PEPE Trades (Real-Time Stream)
-
-Every PEPE DEX trade as it is confirmed on-chain.
-
-[Run In IDE ➤](https://ide.bitquery.io/pepe-live-trades-stream)
-
-```graphql
-subscription {
-  EVM(network: eth) {
-    DEXTradeByTokens(
-      where: {
-        Trade: {
-          Currency: {
-            SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" }
-          }
-        }
-      }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      Transaction {
-        Hash
-      }
-      Trade {
-        AmountInUSD
-        Price
-        Side {
-          Type
-          AmountInUSD
-          Currency { Symbol }
-        }
-        Buyer
-        Seller
-        Dex {
-          ProtocolName
-          SmartContract
-        }
-        Currency { Symbol }
-      }
-    }
-  }
-}
-```
-
----
-
-## Largest Single PEPE Trades (Last 24 Hours)
+<!-- ## Largest Single PEPE Trades (Last 24 Hours)
 
 Spot the biggest individual trades by USD size — useful for identifying smart money entries and exits.
 
@@ -669,26 +649,29 @@ Spot the biggest individual trades by USD size — useful for identifying smart 
 ```
 
 ---
-
+ -->
 
 ## PEPE Top Holders by Balance
 
-[Run In IDE ➤](https://ide.bitquery.io/pepe-top-holders)
+[Run In IDE ➤](https://ide.bitquery.io/pepe-top-holders_3)
 
 ```graphql
-{
-  EVM(network: eth) {
-    TokenHolders(
-      tokenSmartContract: "0x6982508145454ce325ddbe47a25d4ec3d2311933"
-      limit: { count: 20 }
-      orderBy: { descending: Balance_Amount }
+query MyQuery {
+  Trading {
+    Trades(
+      where: {
+        Pair: {Token: {Address: {is: "0x6982508145454ce325ddbe47a25d4ec3d2311933"}}}, 
+      }
+      limit: {count: 20}
+      orderBy: {descendingByField: "holdings"}
     ) {
-      Holder {
+      Trader {
         Address
       }
-      Balance {
-        Amount
-      }
+      buy_volume: sum(of: AmountsInUsd_Base if: {Side: {is: "Buy"}})
+      sell_volume: sum(of: AmountsInUsd_Base if: {Side: {is: "Sell"}})
+      holdings: calculate(expression: "$buy_volume - $sell_volume")
+      trades: count
     }
   }
 }
@@ -696,7 +679,7 @@ Spot the biggest individual trades by USD size — useful for identifying smart 
 
 ---
 
-## PEPE Total Holder Count (Snapshot)
+<!-- ## PEPE Total Holder Count (Snapshot)
 
 Check how many unique wallets hold PEPE at a given date. Change the `snapshot` date to compare across time.
 
@@ -816,11 +799,4 @@ Track unique buyers and sellers per day — a measure of market breadth and comm
 }
 ```
 
----
-
-## Support
-
-- **IDE**: [ide.bitquery.io](https://ide.bitquery.io)
-- **Explorer**: [PEPE on Bitquery Explorer](https://explorer.bitquery.io/ethereum/token/0x6982508145454ce325ddbe47a25d4ec3d2311933)
-- **Community**: [Telegram](https://t.me/Bitquery_Community) · [Discord](https://discord.gg/bitquery)
-- **Contact**: [bitquery.io/contact](https://bitquery.io/contact)
+--- -->
