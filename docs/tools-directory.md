@@ -27,11 +27,12 @@ Ready-to-use web apps and dashboards powered by Bitquery APIs. Many include a li
 
 ### Try live & documented
 
-| Tool                                  | Description                                                                                                                     | Try it                                                           | How-to guide                                              | Source                                                                   |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
-| **Pump.fun Token Sniffer**            | Analyze Pump.fun (Solana) token metrics: holder distribution, transfer vs purchase patterns, top holders, bonding curve.        | [Open app](https://pumpfun-token-sniffer.vercel.app/)      | [Guide](/docs/usecases/pumpfun-token-sniffer)             | [GitHub](https://github.com/Akshat-cs/pumpfun-token-sniffer)             |
-| **DeFi Portfolio Scorer**             | Calculate a DeFi Strategy Score (25–100) for any Ethereum address using transaction count, protocol usage, and asset diversity. | [Open app](https://ethereum-wallet-defi-score.vercel.app/) | [Guide](/docs/usecases/defi_portfolio_scorer)             | [GitHub](https://github.com/Akshat-cs/Defi-Portfolio-Profiler)           |
-| **Realtime Liquidity Drain Detector** | Monitor DEX pools in real time via Kafka; detect significant liquidity drops and get alerts on a web dashboard.                 | —                                                                | [Guide](/docs/usecases/realtime-liquidity-drain-detector) | [GitHub](https://github.com/Akshat-cs/realtime-liquidity-drain-detector) |
+| Tool                                         | Description                                                                                                                                       | Try it                                                     | How-to guide                                              | Source                                                                        |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **PolyBit — Polymarket Alerts Telegram Bot** | Telegram bot that pushes alerts to you based on your set trade size, share price, trader wallet, or specific market. You can set multiple alerts. | [Add on Telegram](https://t.me/PolyBit_Polymarket_Bot)     | [Guide](/docs/usecases/polymarket-tg-alerts-bot)          | [GitHub](https://github.com/Akshat-cs/PolyBit-Polymarket-Alerts-Telegram-Bot) |
+| **Pump.fun Token Sniffer**                   | Analyze Pump.fun (Solana) token metrics: holder distribution, transfer vs purchase patterns, top holders, bonding curve.                          | [Open app](https://pumpfun-token-sniffer.vercel.app/)      | [Guide](/docs/usecases/pumpfun-token-sniffer)             | [GitHub](https://github.com/Akshat-cs/pumpfun-token-sniffer)                  |
+| **DeFi Portfolio Scorer**                    | Calculate a DeFi Strategy Score (25–100) for any Ethereum address using transaction count, protocol usage, and asset diversity.                   | [Open app](https://ethereum-wallet-defi-score.vercel.app/) | [Guide](/docs/usecases/defi_portfolio_scorer)             | [GitHub](https://github.com/Akshat-cs/Defi-Portfolio-Profiler)                |
+| **Realtime Liquidity Drain Detector**        | Monitor DEX pools in real time via Kafka; detect significant liquidity drops and get alerts on a web dashboard.                                   | —                                                          | [Guide](/docs/usecases/realtime-liquidity-drain-detector) | [GitHub](https://github.com/Akshat-cs/realtime-liquidity-drain-detector)      |
 
 ### Open-source apps (GitHub)
 
@@ -48,13 +49,13 @@ Ready-to-use web apps and dashboards powered by Bitquery APIs. Many include a li
 
 ## Charting & trading
 
-| Tool                                         | Description                                                                 | Source                                                                 | Docs                                                                                           |
-| -------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **TradingView with Realtime Data**           | TradingView charts with real-time OHLCV via Bitquery subscriptions.         | [GitHub](https://github.com/bitquery/tradingview-subscription-realtime/tree/main) | [TradingView Realtime guide](/docs/usecases/tradingview-subscription-realtime/getting-started) |
-| **AI Crypto Trader All-in-One**              | AI-driven crypto trading sample using Bitquery data.                        | [GitHub](https://github.com/divyasshree-BQ/AI-crypto-trader-all-in-one) | —                                                                                              |
-| **AI Crypto Trader All-in-One (CoW Intent)** | CoW Intent–based variant of the AI crypto trader.                           | [GitHub](https://github.com/divyasshree-BQ/AI-crypto-trader-all-in-one-CoW-Intent) | —                                                                                              |
-| **Best Route Trader on Uniswap**             | Finds the most efficient swap route on Uniswap using on-chain liquidity and pricing data. | [GitHub](https://github.com/Divyn/best-route-trader-Uniswap) | — |
-|                                              | **Live Demo:** [Try it](https://best-route-trader-uniswap.vercel.app/)      |                                                                        |                                                                                                 |
+| Tool                                         | Description                                                                               | Source                                                                             | Docs                                                                                           |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **TradingView with Realtime Data**           | TradingView charts with real-time OHLCV via Bitquery subscriptions.                       | [GitHub](https://github.com/bitquery/tradingview-subscription-realtime/tree/main)  | [TradingView Realtime guide](/docs/usecases/tradingview-subscription-realtime/getting-started) |
+| **AI Crypto Trader All-in-One**              | AI-driven crypto trading sample using Bitquery data.                                      | [GitHub](https://github.com/divyasshree-BQ/AI-crypto-trader-all-in-one)            | —                                                                                              |
+| **AI Crypto Trader All-in-One (CoW Intent)** | CoW Intent–based variant of the AI crypto trader.                                         | [GitHub](https://github.com/divyasshree-BQ/AI-crypto-trader-all-in-one-CoW-Intent) | —                                                                                              |
+| **Best Route Trader on Uniswap**             | Finds the most efficient swap route on Uniswap using on-chain liquidity and pricing data. | [GitHub](https://github.com/Divyn/best-route-trader-Uniswap)                       | —                                                                                              |
+|                                              | **Live Demo:** [Try it](https://best-route-trader-uniswap.vercel.app/)                    |                                                                                    |                                                                                                |
 
 ---
 
@@ -62,13 +63,13 @@ Ready-to-use web apps and dashboards powered by Bitquery APIs. Many include a li
 
 **[OpenClaw](https://openclaw.ai/)** skills stream live data from the **Bitquery WebSocket API** into an agent workspace. Install published skills with **[ClawHub](https://clawhub.ai/)** (`clawhub install …`); the full skill list, source folders, prerequisites, and `BITQUERY_API_KEY` setup are in the **[openclaw-skills-master](https://github.com/bitquery/openclaw-skills-master)** README. See also **[ClawHub CLI docs](https://docs.openclaw.ai/tools/clawhub)**.
 
-| `clawhub install` | Description |
-| ----------------- | ----------- |
-| `bitcoin-price-feed` | Real-time Bitcoin OHLC, volume, moving averages, and % change over WebSocket. |
-| `crypto-chart-usd` | Multi-token 1s OHLC with USD pricing, volume, and moving averages (Trading.Tokens API). |
-| `pumpfun-usd-price-stream` | Real-time Pump.fun tokens on Solana with USD OHLC, volume, moving averages, and tick-to-tick % change. |
-| `polymarket-real-time-trades` | Polymarket outcome trades on Polygon: buyer/seller, USD collateral, market question, tx details. |
-| `stablecoin-payments` | Solana USDC/USDT SPL transfers (mint filter; excludes swap-like program methods), amounts, USD, parties, fees. |
+| `clawhub install`             | Description                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `bitcoin-price-feed`          | Real-time Bitcoin OHLC, volume, moving averages, and % change over WebSocket.                                  |
+| `crypto-chart-usd`            | Multi-token 1s OHLC with USD pricing, volume, and moving averages (Trading.Tokens API).                        |
+| `pumpfun-usd-price-stream`    | Real-time Pump.fun tokens on Solana with USD OHLC, volume, moving averages, and tick-to-tick % change.         |
+| `polymarket-real-time-trades` | Polymarket outcome trades on Polygon: buyer/seller, USD collateral, market question, tx details.               |
+| `stablecoin-payments`         | Solana USDC/USDT SPL transfers (mint filter; excludes swap-like program methods), amounts, USD, parties, fees. |
 
 ---
 
