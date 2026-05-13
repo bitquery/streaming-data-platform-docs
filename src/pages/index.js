@@ -4,6 +4,7 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import { prodDocsPath } from "@site/src/utils/productionUrl";
 
 import styles from "./index.module.css";
 
@@ -23,25 +24,25 @@ function HomepageHeader() {
         <div className={styles.buttonGroup}>
           <Link
             className="button button--primary button--lg"
-            to="/docs/start/first-query/"
+            to={prodDocsPath("/docs/start/first-query/")}
           >
             Getting started — 5 min
           </Link>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/start/starter-queries/"
+            to={prodDocsPath("/docs/start/starter-queries/")}
           >
             Starter queries
           </Link>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/start/starter-subscriptions/"
+            to={prodDocsPath("/docs/start/starter-subscriptions/")}
           >
             Live streams
           </Link>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro/"
+            to={prodDocsPath("/docs/intro/")}
           >
             Platform overview
           </Link>

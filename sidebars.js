@@ -337,6 +337,7 @@ const sidebars = {
         id: "blockchain/introduction",
       },
       items: [
+        "blockchain/supported-chains",
         {
           type: "category",
           label: "Ethereum",

@@ -2,190 +2,360 @@ import React from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import styles from "./styles.module.css";
+import { PRODUCTION_MARKETING_SITE } from "@site/src/utils/productionUrl";
+import {
+  bitqueryTools,
+  chainListFullUrl,
+  chains,
+  dataTypes,
+  interfaces,
+  introVideoUrl,
+  personas,
+  platformOverviewUrl,
+  trendingPages,
+  useCases,
+  v1V2ApiGuideUrl,
+} from "./sectionsData";
 
-const capabilityCards = [
-  {
-    title: "GraphQL queries",
-    description:
-      "HTTP queries for transfers, trades, NFTs, and events across 40+ networks.",
-    to: "/docs/start/first-query/",
-  },
-  {
-    title: "Live subscriptions",
-    description:
-      "WebSocket streams with the same GraphQL shape as your queries.",
-    to: "/docs/start/starter-subscriptions/",
-  },
-  {
-    title: "Kafka streams",
-    description:
-      "Protobuf topics for high-volume pipelines and many consumers.",
-    to: "/docs/streams/kafka-streaming-concepts/",
-  },
-  {
-    title: "Cloud datasets",
-    description:
-      "Parquet in S3, Snowflake, BigQuery, and warehouses.",
-    to: "/docs/cloud/",
-  },
-  {
-    title: "Mempool data",
-    description:
-      "Broadcast transactions before confirmation.",
-    to: "/docs/start/mempool/",
-  },
-  {
-    title: "DeFi & trading cubes",
-    description:
-      "DEX trades, pools, and aggregates without archive nodes.",
-    to: "/docs/cubes/dextrades-dextradebytokens-trading-trades/",
-  },
-];
-
-const interfaceItems = [
-  { abbr: "HTTP", name: "GraphQL (HTTP)", hint: "Queries, dashboards", to: "/docs/start/endpoints/" },
-  { abbr: "WS", name: "Subscriptions", hint: "Push over WebSocket", to: "/docs/start/getting-updates/" },
-  { abbr: "KF", name: "Kafka", hint: "Scale-out pipelines", to: "/docs/streams/kafka-streaming-concepts/" },
-  { abbr: "CL", name: "Cloud files", hint: "Batch & analytics", to: "/docs/cloud/" },
-];
-
-const conceptLinks = [
-  { label: "Mental model: transfers, events, calls", to: "/docs/start/mental-model-transfers-events-calls/" },
-  { label: "Archive dataset", to: "/docs/graphql/dataset/archive/" },
-  { label: "Realtime dataset", to: "/docs/graphql/dataset/realtime/" },
-  { label: "Combined dataset", to: "/docs/graphql/dataset/combined/" },
-  { label: "Starter queries by chain", to: "/docs/start/starter-queries/" },
-  { label: "gRPC streaming (Solana)", to: "/docs/grpc/solana/introduction/" },
-  { label: "Internal transactions & traces", to: "/docs/API-Blog/what-are-internal-transactions-how-to-get-them/" },
-];
-
-const useCaseLinks = [
-  { label: "Telegram trading bot", to: "/docs/usecases/telegram-bot/" },
-  { label: "Polymarket alerts", to: "/docs/usecases/polymarket-tg-alerts-bot/" },
-  { label: "Real-time balance tracker", to: "/docs/usecases/real-time-balance-tracker/overview/" },
-  { label: "Mempool fees & analysis", to: "/docs/usecases/mempool-transaction-fee/" },
-  { label: "NFT analytics", to: "/docs/usecases/nft-analytics/" },
-  { label: "Copy trading bot", to: "/docs/usecases/copy-trading-bot/" },
-];
-
-function SquareMark({ large }) {
+function SectionHeader({ kicker, title, children, align = "center" }) {
   return (
-    <span
-      className={clsx(styles.squareMark, large && styles.squareMarkLg)}
-      aria-hidden
-    />
-  );
-}
-
-function CapabilityCard({ title, description, to }) {
-  return (
-    <Link to={to} className={styles.capabilityCard}>
-      <div className={styles.cardIconBox} aria-hidden>
-        <span className={styles.squareMark} />
-      </div>
-      <h3 className={styles.cardTitle}>{title}</h3>
-      <p className={styles.cardBody}>{description}</p>
-      <span className={styles.cardCta}>Read docs</span>
-    </Link>
+    <header
+      className={clsx(
+        styles.sectionHeader,
+        align === "left" && styles.sectionHeaderLeft,
+        align === "center" && styles.sectionHeaderCenter
+      )}
+    >
+      {kicker ? <p className={styles.sectionKicker}>{kicker}</p> : null}
+      <h2 className={styles.sectionTitle}>{title}</h2>
+      {children ? <div className={styles.sectionIntro}>{children}</div> : null}
+    </header>
   );
 }
 
 export default function HomepageFeatures({ tagline }) {
   return (
     <section className={styles.features}>
-      {/* Single dense band: narrative + caps + interfaces */}
-      <div className={clsx(styles.band, styles.bandSurface)}>
+      {/* 1 — Data: split rail + sharp chips */}
+      <div className={clsx(styles.band, styles.bandData)}>
+        <div className={styles.bandDataDecor} aria-hidden />
         <div className="container">
-          <div className={styles.topRow}>
-            <SquareMark large />
-            <div className={styles.topRowText}>
-              <h2 className={styles.primaryTitle}>What you can build</h2>
-              {tagline ? <p className={styles.taglineInline}>{tagline}</p> : null}
-              <p className={styles.primaryLead}>
-                Same data over HTTP, websocket, Kafka, or cloud files. Details:{" "}
-                <Link to="/docs/intro/">platform overview</Link>,{" "}
-                <Link to="/docs/mcp/mcp-server/">MCP Server</Link>.
-              </p>
+          <div className={styles.dataSectionLayout}>
+            <aside className={styles.dataRail} aria-hidden="true">
+              <span className={styles.dataRailNum}>01</span>
+              <span className={styles.dataRailLine} />
+              <span className={styles.dataRailLabel}>Data</span>
+            </aside>
+            <div className={styles.dataSectionBody}>
+              <SectionHeader kicker="What you query" title="Data & metrics" align="left">
+                {tagline ? (
+                  <p className={styles.sectionLead}>{tagline}</p>
+                ) : (
+                  <p className={styles.sectionLead}>
+                    Prices, liquidity events, wallet flows, and protocol traces
+                    across Bitquery datasets — same schema for historical and live
+                    workloads.
+                  </p>
+                )}
+              </SectionHeader>
+              <ul className={styles.dataChipGrid}>
+                {dataTypes.map((d) => (
+                  <li key={d.to}>
+                    <Link to={d.to} className={styles.dataChip}>
+                      <span className={styles.dataChipLabel}>{d.label}</span>
+                      <span className={styles.dataChipHint}>{d.hint}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <SquareMark large />
           </div>
+        </div>
+      </div>
 
-          <div className={styles.capabilityGrid}>
-            {capabilityCards.map((card) => (
-              <CapabilityCard key={card.to} {...card} />
+      {/* 2 — Interfaces: striped band + offset panel */}
+      <div className={clsx(styles.band, styles.bandInterfaces)}>
+        <div className={styles.bandInterfacesStripes} aria-hidden />
+        <div className="container">
+          <div className={styles.interfacesIntro}>
+            <span className={styles.stepBadge}>02</span>
+            <SectionHeader kicker="How you connect" title="Interfaces" align="left">
+              <p className={styles.sectionLead}>
+                One mental model: GraphQL for shapes, then stream the same fields
+                over WebSocket, Kafka, MCP, or gRPC.
+              </p>
+            </SectionHeader>
+          </div>
+          <div className={styles.interfacesPanel}>
+            <div className={styles.interfacesPanelHd}>
+              <span className={styles.interfacesPanelAccent} aria-hidden />
+              <p className={styles.interfacesPanelTag}>Delivery modes</p>
+            </div>
+            <div className={styles.interfaceGrid}>
+              {interfaces.map((item) => (
+                <Link key={item.abbr} to={item.to} className={styles.interfaceCell}>
+                  <span className={styles.abbrSquare}>{item.abbr}</span>
+                  <div>
+                    <span className={styles.interfaceName}>{item.name}</span>
+                    <span className={styles.interfaceHint}>{item.hint}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className={styles.apiVersionCta} role="note">
+            <p className={styles.apiVersionCtaText}>
+              <strong>V1 and V2</strong> use different GraphQL schemas and IDE
+              flows. Compare them if you are migrating or reusing older queries.
+            </p>
+            <Link
+              href={v1V2ApiGuideUrl}
+              className={clsx(
+                "button button--outline button--primary",
+                styles.apiVersionBtn
+              )}
+            >
+              V1 vs V2 API guide
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* 3 — Tools & explorers */}
+      <div className={clsx(styles.band, styles.bandTools)}>
+        <div className="container">
+          <div className={styles.toolsIntro}>
+            <span className={styles.stepBadge}>03</span>
+            <SectionHeader kicker="Ship faster" title="Tools & explorers" align="left">
+              <p className={styles.sectionLead}>
+                Explore markets, debug queries, and browse demos and SDKs built on
+                Bitquery.
+              </p>
+            </SectionHeader>
+          </div>
+          <ul className={styles.toolsGrid}>
+            {bitqueryTools.map((tool) => (
+              <li key={tool.title}>
+                <Link
+                  href={tool.href}
+                  className={styles.toolCard}
+                  {...(tool.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
+                  <span className={styles.toolCardTitleRow}>
+                    <span className={styles.toolCardTitle}>{tool.title}</span>
+                    {tool.external ? (
+                      <span className={styles.toolCardOutbound} aria-hidden>
+                        ↗
+                      </span>
+                    ) : null}
+                  </span>
+                  <span className={styles.toolCardHint}>{tool.hint}</span>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
+        </div>
+      </div>
 
-          <div className={styles.interfaceLabelRow}>
-            <span className={styles.squareRule} aria-hidden />
-            <h3 className={styles.interfaceHeading}>Interfaces</h3>
-            <span className={styles.squareRule} aria-hidden />
+      {/* 4 — Chains: monospace matrix */}
+      <div className={clsx(styles.band, styles.bandChains)}>
+        <div className="container">
+          <div className={styles.chainsHeaderRow}>
+            <span className={styles.stepBadgeAlt}>04</span>
+            <SectionHeader
+              kicker="Coverage"
+              title="Blockchains supported"
+              align="left"
+            >
+              <p className={styles.sectionLead}>
+                40+ networks across V1 & V2 — EVM, Solana, Tron, Bitcoin, and
+                more.
+              </p>
+            </SectionHeader>
           </div>
-          <div className={styles.interfaceGrid}>
-            {interfaceItems.map((item) => (
-              <Link key={item.to} to={item.to} className={styles.interfaceCell}>
-                <span className={styles.abbrSquare}>{item.abbr}</span>
-                <div>
-                  <span className={styles.interfaceName}>{item.name}</span>
-                  <span className={styles.interfaceHint}>{item.hint}</span>
-                </div>
+          <div className={styles.chainMatrix}>
+            <div className={styles.chainMatrixInner}>
+              {chains.map((c) => (
+                <Link key={c.label} to={c.to} className={styles.chainTag}>
+                  {c.label}
+                </Link>
+              ))}
+              <Link
+                to={chainListFullUrl}
+                className={clsx(styles.chainTag, styles.chainTagEm)}
+              >
+                Supported chains →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 4 — Personas: numbered + alternating frames */}
+      <div className={clsx(styles.band, styles.bandPersonas)}>
+        <div className={styles.bandPersonasWaves} aria-hidden />
+        <div className="container">
+          <div className={styles.personasIntro}>
+            <SectionHeader
+              kicker="Who builds here"
+              title="Built for your team"
+              align="center"
+            >
+              <p className={styles.sectionLead}>
+                From discretionary traders to audit-ready reporting — pick a path
+                and open the matching docs.
+              </p>
+            </SectionHeader>
+          </div>
+          <div className={styles.personaGrid}>
+            {personas.map((p, i) => (
+              <Link
+                key={p.title}
+                to={p.to}
+                className={clsx(
+                  styles.personaCard,
+                  i % 2 === 1 && styles.personaCardDashed
+                )}
+              >
+                <span className={styles.personaNum}>{i + 1}</span>
+                <h3 className={styles.personaTitle}>{p.title}</h3>
+                <p className={styles.personaBody}>{p.body}</p>
+                <span className={styles.personaCta}>Explore →</span>
               </Link>
             ))}
           </div>
         </div>
       </div>
 
-      {/* One compact band: concepts | use cases (side by side on large screens) */}
-      <div className={clsx(styles.band, styles.bandAlt)}>
+      {/* 5 — Trending: bento (featured + grid) */}
+      <div className={clsx(styles.band, styles.bandTrending)}>
         <div className="container">
-          <div className={styles.twoCol}>
-            <div className={styles.panel}>
-              <h3 className={styles.panelTitle}>
-                <SquareMark /> Data concepts
-              </h3>
-              <ul className={styles.compactList}>
-                {conceptLinks.map((c) => (
-                  <li key={c.to}>
-                    <Link className={styles.conceptLink} to={c.to}>
-                      {c.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <SectionHeader
+            kicker="Popular right now"
+            title="Trending documentation"
+            align="center"
+          >
+            <p className={styles.sectionLead}>
+              High-traffic guides teams open first when integrating streaming
+              market data.
+            </p>
+          </SectionHeader>
+          <div className={styles.trendingBento}>
+            {trendingPages.map((t, i) => (
+              <Link
+                key={t.to}
+                to={t.to}
+                className={clsx(
+                  styles.trendingCard,
+                  i === 0 && styles.trendingCardFeatured
+                )}
+              >
+                {i === 0 ? (
+                  <span className={styles.trendingFeaturedLabel}>Featured</span>
+                ) : null}
+                <h3 className={styles.trendingTitle}>{t.title}</h3>
+                <p className={styles.trendingBody}>{t.body}</p>
+                <span className={styles.trendingCta}>Open guide</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
 
-            <div className={styles.panel}>
-              <h3 className={styles.panelTitle}>
-                <SquareMark /> Popular use cases
-              </h3>
-              <ul className={styles.useCaseDense}>
-                {useCaseLinks.map((u) => (
-                  <li key={u.to}>
-                    <Link to={u.to} className={styles.useCaseDenseLink}>
-                      {u.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <p className={styles.browseMore}>
-                <Link to="/docs/category/how-to-guides/">All how-to guides</Link>
+      {/* 6 — Use cases: terminal-style block */}
+      <div className={clsx(styles.band, styles.bandUseCases)}>
+        <div className="container">
+          <div className={styles.useCasesSplit}>
+            <SectionHeader kicker="Recipes" title="Use cases & how-tos" align="left">
+              <p className={styles.sectionLead}>
+                End-to-end examples: bots, dashboards, alerts, and research
+                pipelines.
               </p>
+            </SectionHeader>
+            <div className={styles.useCaseTerminal}>
+              <div className={styles.useCaseTerminalBar}>
+                <span className={styles.useCaseDot} />
+                <span className={styles.useCaseDot} />
+                <span className={styles.useCaseDot} />
+                <span className={styles.useCaseTerminalTitle}>examples</span>
+              </div>
+              <div className={styles.useCaseCols}>
+                <ul className={styles.useCaseList}>
+                  {useCases.slice(0, 4).map((u) => (
+                    <li key={u.to}>
+                      <Link className={styles.useCaseLink} to={u.to}>
+                        {u.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <ul className={styles.useCaseList}>
+                  {useCases.slice(4).map((u) => (
+                    <li key={u.to}>
+                      <Link className={styles.useCaseLink} to={u.to}>
+                        {u.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Minimal video block: square frame, minimal copy */}
+      {/* 7 — Trust: inverted strip */}
+      <div className={clsx(styles.band, styles.bandTrust)}>
+        <div className="container">
+          <div className={styles.trustSplit}>
+            <div className={styles.trustCopy}>
+              <p className={styles.trustKicker}>Production scale</p>
+              <h2 className={styles.trustTitle}>Trusted for on-chain data</h2>
+              <p className={styles.trustLead}>
+                Exchanges, funds, protocols, and investigators rely on Bitquery for
+                trading, compliance, and research — from ad-hoc GraphQL to
+                Kafka-scale delivery.
+              </p>
+            </div>
+            <div className={styles.trustActions}>
+              <Link
+                className={styles.trustBtn}
+                href={`${PRODUCTION_MARKETING_SITE}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visit bitquery.io
+              </Link>
+              <Link
+                className={styles.trustBtnGhost}
+                href={`${PRODUCTION_MARKETING_SITE}/contact`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Enterprise & sales
+              </Link>
+              <Link className={styles.trustBtnGhost} to={platformOverviewUrl}>
+                Platform overview
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Video — rounded + label chip */}
       <div className={clsx(styles.band, styles.bandVideo)}>
         <div className={clsx("container", styles.videoRow)}>
-          <SquareMark />
-          <p className={styles.videoCaption}>Intro walkthrough · IDE · first query</p>
-          <SquareMark />
+          <span className={styles.videoChip}>Watch</span>
+          <p className={styles.videoCaption}>
+            Intro walkthrough · IDE · first query
+          </p>
         </div>
         <div className={clsx("container", styles.videoBox)}>
-          <div className={styles.videoSquareFrame}>
+          <div className={styles.videoFrame}>
             <video className={styles.video} controls preload="metadata">
-              <source src="/img/intro_video.mp4" type="video/mp4" />
+              <source src={introVideoUrl} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
