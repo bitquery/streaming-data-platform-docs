@@ -1137,6 +1137,7 @@ const sidebars = {
         "API-Blog/use-regular-expressions-to-search-solana-logs",
         "API-Blog/what-are-internal-transactions-how-to-get-them",
         "API-Blog/slippage-faq-using-dexpool-stream",
+        "API-Blog/polymarket-api-vs-bitquery-polymarket-api",
       ],
     },
   ],
