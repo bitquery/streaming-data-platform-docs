@@ -20,6 +20,8 @@ Unlike traditional blockchain RPC providers that offer raw node data, Bitquery p
 
 ## Supported Blockchains
 
+**[Supported blockchains & networks (V1, V2, Kafka, gRPC, ClickHouse, cloud) →](/docs/blockchain/supported-chains/)** — See a single matrix of which chains are covered per interface (GraphQL versions, Kafka, CoreCast, ClickHouse warehouse, Parquet/datashares).
+
 Bitquery provides comprehensive blockchain data across **40+ blockchains** through two active API versions:
 
 ### **V2 APIs**
@@ -45,6 +47,7 @@ Our comprehensive V1 API supporting 40+ blockchains with historical data:
 **Supported Blockchains:** Bitcoin, Ethereum, Solana, BSC, Polygon, Bitcoin Cash, Litecoin, Bitcoin SV, Dash, Zcash, Avalanche, Klaytn, Celo, Moonbeam, Fantom, Cronos, Cosmos, Hedera, Flow, EOS, Ripple (XRP), Stellar, Algorand, Cardano, Filecoin, and more.
 
 **Documentation:**
+- **[Supported chains by interface](/docs/blockchain/supported-chains/)** — Coverage matrix: V1/V2, Kafka, gRPC, ClickHouse, cloud
 - **[V2 Documentation](https://docs.bitquery.io/docs/)** - Latest APIs with real-time streaming
 - **[V1 Documentation](https://docs.bitquery.io/v1/)** - Comprehensive APIs with 40+ blockchain support
 
@@ -543,7 +546,7 @@ A: Bitquery is a comprehensive blockchain data platform that provides pre-indexe
 
 ### Q: Which blockchains does Bitquery support?
 
-A: Bitquery supports 40+ blockchains across two API versions:
+A: Bitquery supports 40+ blockchains across two API versions. For a detailed **per-interface** list (including Kafka, gRPC, ClickHouse, and cloud), see **[Supported blockchains & networks](/docs/blockchain/supported-chains/)**.
 
 **V2 APIs:**
 - **EVM Chains**: Ethereum, BSC, Arbitrum, Base, Polygon, Optimism, opBNB
@@ -553,6 +556,7 @@ A: Bitquery supports 40+ blockchains across two API versions:
 - **Supported Blockchains**: Bitcoin, Ethereum, Solana, BSC, Polygon, Bitcoin Cash, Litecoin, Bitcoin SV, Dash, Zcash, Avalanche, Klaytn, Celo, Moonbeam, Fantom, Cronos, Cosmos, Hedera, Flow, EOS, Ripple (XRP), Stellar, Algorand, Cardano, Filecoin, and more.
 
 **Documentation:**
+- **[Supported chains by interface](/docs/blockchain/supported-chains/)** — Coverage matrix: V1/V2, Kafka, gRPC, ClickHouse, cloud
 - **[V2 Documentation](https://docs.bitquery.io/docs/)** - Latest APIs with real-time streaming
 - **[V1 Documentation](https://docs.bitquery.io/v1/)** - Comprehensive APIs with 40+ blockchain support
 
