@@ -144,7 +144,7 @@ Because the server speaks the standard MCP protocol, any MCP-compatible client �
 The first dataset live on the MCP is **trading data** across all eight supported chains, with two views of the same trades:
 
 1. **Per-trade rows** — every swap, with price, USD amounts, supply snapshot, trader wallet, and transaction hash.
-2. **Pre-built candles** — OHLC, volume, and price averages bucketed at 1-minute, 5-minute, hourly, and daily intervals.
+2. **Pre-built candles** — OHLC, volume, and price averages bucketed at 1-second, 1-minute,5-minute, hourly, and daily intervals.
 
 The agent picks the right view based on your question. You don't have to think about it.
 
