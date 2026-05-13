@@ -1,12 +1,117 @@
 .features {
   display: flex;
-  align-items: center;
-  padding: 2rem 0;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 2rem 0 3rem;
   width: 100%;
+}
+
+.sectionHeading {
+  text-align: center;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.sectionLead {
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto 1.5rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.sectionBlock {
+  margin-top: 2.5rem;
+}
+
+.cardCol {
+  margin-bottom: 1.25rem;
+}
+
+.capabilityCard {
+  height: 100%;
+  padding: 1.25rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+  background: var(--ifm-background-surface-color);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.cardTitle a {
+  color: var(--ifm-heading-color);
+}
+
+.cardTitle a:hover {
+  text-decoration: none;
+}
+
+.cardBody {
+  flex: 1;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.cardLink {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.interfaceTableWrap {
+  overflow-x: auto;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.interfaceTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.interfaceTable th,
+.interfaceTable td {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+}
+
+.interfaceTable th {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.linkList {
+  max-width: 40rem;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.useCaseCol {
+  margin-bottom: 0.75rem;
+}
+
+.useCaseLink {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+  font-weight: 500;
+  text-align: center;
+}
+
+.useCaseLink:hover {
+  border-color: var(--ifm-color-primary);
+  text-decoration: none;
 }
 
 .featureSvg {
   height: 200px;
   width: 200px;
 }
-

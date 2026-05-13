@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Helmet } from 'react-helmet'; // Import react-helmet
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
@@ -19,18 +18,23 @@ function HomepageHeader() {
       <div className={styles.buttonGroup}>
         <Link
           className="button button--secondary button--lg"
-          to="/docs/start/first-query">
+          to="/docs/start/first-query/">
           Getting Started - 5min ⏱️
         </Link>
         <Link
           className="button button--secondary button--lg"
-          to="/docs/start/starter-queries">
+          to="/docs/start/starter-queries/">
           Popular APIs 📂
         </Link>
         <Link
           className="button button--secondary button--lg"
-          to="/docs/start/starter-subscriptions">
+          to="/docs/start/starter-subscriptions/">
           Popular Streams 📂
+        </Link>
+        <Link
+          className="button button--secondary button--lg"
+          to="/docs/intro/">
+          Docs overview 📖
         </Link>
       </div>
     </div>
