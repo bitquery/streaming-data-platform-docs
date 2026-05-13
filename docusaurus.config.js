@@ -1005,50 +1005,88 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Links",
+            title: "Start here",
             items: [
-              {
-                label: "Website",
-                to: "https://bitquery.io",
-              },
-              {
-                label: "V1 Docs",
-                to: "https://docs.bitquery.io/v1/",
-              },
-              {
-                label: "V2 Docs",
-                to: "docs/intro",
-              },
+              { label: "Platform overview", to: "/docs/intro/" },
+              { label: "Getting started — first query", to: "/docs/start/first-query/" },
+              { label: "Starter queries", to: "/docs/start/starter-queries/" },
+              { label: "Starter subscriptions (WebSocket)", to: "/docs/start/starter-subscriptions/" },
+              { label: "Supported chains (V1, V2, Kafka…)", to: "/docs/blockchain/supported-chains/" },
+              { label: "Blockchain APIs overview", to: "/docs/blockchain/introduction/" },
+              { label: "V1 documentation", href: "https://docs.bitquery.io/v1/" },
+              { label: "V1 vs V2 APIs (IDE & schema)", href: "https://docs.bitquery.io/v1/docs/graphql-ide/v1-and-v2" },
+            ],
+          },
+          {
+            title: "Data & metrics",
+            items: [
+              { label: "Token prices & OHLCV", to: "/docs/trading/crypto-price-api/introduction/" },
+              { label: "DEX trades", to: "/docs/trading/crypto-trades-api/trades-api/" },
+              { label: "Transfers & wallet flows", to: "/docs/start/mental-model-transfers-events-calls/" },
+              { label: "Contract calls & traces", to: "/docs/API-Blog/what-are-internal-transactions-how-to-get-them/" },
+              { label: "Smart-contract events", to: "/docs/start/mental-model-transfers-events-calls/" },
+              { label: "NFTs & metadata", to: "/docs/blockchain/Ethereum/nft/nft-api/" },
+              { label: "Balances & holders", to: "/docs/evm/balances/" },
+              { label: "Mempool & pending txs", to: "/docs/start/mempool/" },
+            ],
+          },
+          {
+            title: "Interfaces & streaming",
+            items: [
+              { label: "GraphQL (HTTP)", to: "/docs/start/first-query/" },
+              { label: "WebSocket subscriptions", to: "/docs/start/starter-subscriptions/" },
+              { label: "Kafka streaming concepts", to: "/docs/streams/kafka-streaming-concepts/" },
+              { label: "Streams overview", to: "/docs/streams/" },
+              { label: "MCP server", to: "/docs/mcp/mcp-server/" },
+              { label: "Cloud datasets (Parquet)", to: "/docs/cloud/" },
+              { label: "Solana gRPC (CoreCast)", to: "/docs/grpc/solana/introduction/" },
+            ],
+          },
+          {
+            title: "Tools & explorers",
+            items: [
+              { label: "DEXrabbit", href: "https://dexrabbit.com/" },
+              { label: "Explorer", href: "https://explorer.bitquery.io/" },
+              { label: "GraphQL IDE", href: "https://ide.bitquery.io/" },
+              { label: "Tools & SDKs directory", to: "/docs/tools-directory/" },
+              { label: "Blockchain ClickHouse warehouse", href: "https://bitquery.io/products/data-warehouse" },
+              { label: "Visit bitquery.io", href: "https://bitquery.io/" },
+              { label: "Enterprise & sales", href: "https://bitquery.io/contact" },
+            ],
+          },
+          {
+            title: "Blockchains",
+            items: [
+              { label: "Ethereum", to: "/docs/blockchain/Ethereum/" },
+              { label: "Solana", to: "/docs/blockchain/Solana/" },
+              { label: "BNB Chain (BSC)", to: "/docs/blockchain/BSC/" },
+              { label: "Base", to: "/docs/blockchain/Base/" },
+              { label: "Polygon", to: "/docs/blockchain/Matic/" },
+              { label: "Arbitrum", to: "/docs/blockchain/Arbitrum/" },
+              { label: "Optimism", to: "/docs/blockchain/Optimism/" },
+              { label: "Tron", to: "/docs/blockchain/Tron/" },
+              { label: "More networks…", to: "/docs/blockchain/introduction/" },
+            ],
+          },
+          {
+            title: "Guides & use cases",
+            items: [
+              { label: "Traders & desks →", to: "/docs/trading/crypto-price-api/introduction/" },
+              { label: "Analysts & quants →", to: "/docs/graphql/dataset/archive/" },
+              { label: "Auditors & finance →", to: "/docs/evm/balances/" },
+              { label: "Investigators & compliance →", href: "https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api" },
+              { label: "How-to guides & recipes", to: "/docs/category/how-to-guides/" },
             ],
           },
           {
             title: "Community",
             items: [
-              {
-                label: "Telegram",
-                href: "https://t.me/Bloxy_info",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/Bitquery_io",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "Forum",
-                href: "https://community.bitquery.io/",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/bitquery",
-              },
-              {
-                label: "Blog",
-                to: "https://bitquery.io/blog",
-              },
+              { label: "Telegram", href: "https://t.me/Bloxy_info" },
+              { label: "Twitter / X", href: "https://twitter.com/Bitquery_io" },
+              { label: "Forum", href: "https://community.bitquery.io/" },
+              { label: "GitHub", href: "https://github.com/bitquery" },
+              { label: "Blog", href: "https://bitquery.io/blog" },
+              { label: "Newsletter", href: "https://bitquery.substack.com/" },
             ],
           },
         ],
