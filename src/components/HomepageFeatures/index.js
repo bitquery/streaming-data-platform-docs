@@ -79,14 +79,14 @@ function SquareMark({ large }) {
 
 function CapabilityCard({ title, description, to }) {
   return (
-    <div className={clsx("col col--12 col--sm-6 col--lg-4", styles.cardCol)}>
-      <Link to={to} className={styles.capabilityCard}>
-        <SquareMark />
-        <h3 className={styles.cardTitle}>{title}</h3>
-        <p className={styles.cardBody}>{description}</p>
-        <span className={styles.cardCta}>Read docs</span>
-      </Link>
-    </div>
+    <Link to={to} className={styles.capabilityCard}>
+      <div className={styles.cardIconBox} aria-hidden>
+        <span className={styles.squareMark} />
+      </div>
+      <h3 className={styles.cardTitle}>{title}</h3>
+      <p className={styles.cardBody}>{description}</p>
+      <span className={styles.cardCta}>Read docs</span>
+    </Link>
   );
 }
 
@@ -94,7 +94,7 @@ export default function HomepageFeatures({ tagline }) {
   return (
     <section className={styles.features}>
       {/* Single dense band: narrative + caps + interfaces */}
-      <div className={styles.band}>
+      <div className={clsx(styles.band, styles.bandSurface)}>
         <div className="container">
           <div className={styles.topRow}>
             <SquareMark large />
@@ -110,7 +110,7 @@ export default function HomepageFeatures({ tagline }) {
             <SquareMark large />
           </div>
 
-          <div className="row">
+          <div className={styles.capabilityGrid}>
             {capabilityCards.map((card) => (
               <CapabilityCard key={card.to} {...card} />
             ))}
@@ -176,7 +176,7 @@ export default function HomepageFeatures({ tagline }) {
       </div>
 
       {/* Minimal video block: square frame, minimal copy */}
-      <div className={styles.band}>
+      <div className={clsx(styles.band, styles.bandVideo)}>
         <div className={clsx("container", styles.videoRow)}>
           <SquareMark />
           <p className={styles.videoCaption}>Intro walkthrough · IDE · first query</p>

@@ -7,15 +7,65 @@
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
 }
 
+/* First homepage strip: faint brand tint so it reads as its own section */
+.bandSurface {
+  background: color-mix(
+    in srgb,
+    var(--ifm-color-primary) 5%,
+    var(--ifm-background-color)
+  );
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--ifm-color-primary) 18%,
+    var(--ifm-color-emphasis-200)
+  );
+}
+
 .bandAlt {
-  background: var(--ifm-color-emphasis-100);
+  background: color-mix(
+    in srgb,
+    var(--ifm-color-emphasis-100) 92%,
+    var(--ifm-color-primary) 8%
+  );
+  border-bottom-color: var(--ifm-color-emphasis-300);
+}
+
+/* Video block: neutral band so it alternates with the band above */
+.bandVideo {
+  background: var(--ifm-color-emphasis-50);
+  border-bottom: none;
+}
+
+:global(html[data-theme="dark"]) .bandSurface {
+  background: color-mix(
+    in srgb,
+    var(--ifm-color-primary) 9%,
+    var(--ifm-background-color)
+  );
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--ifm-color-primary) 22%,
+    var(--ifm-color-emphasis-200)
+  );
+}
+
+:global(html[data-theme="dark"]) .bandAlt {
+  background: color-mix(in srgb, var(--ifm-color-emphasis-100) 88%, #0a0e14 12%);
+}
+
+:global(html[data-theme="dark"]) .bandVideo {
+  background: color-mix(
+    in srgb,
+    var(--ifm-background-surface-color) 65%,
+    var(--ifm-background-color)
+  );
 }
 
 /* ── Decorative squares ─────────────────────────────────── */
 .squareMark {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
+  display: block;
+  width: 12px;
+  height: 12px;
   flex-shrink: 0;
   background: var(--ifm-color-primary);
 }
@@ -63,57 +113,123 @@
   color: var(--ifm-color-emphasis-700);
 }
 
-.cardCol {
-  margin-bottom: 0.65rem;
+.cardIconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  margin-bottom: 0.75rem;
+  border: 2px solid var(--ifm-color-primary);
+  background: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
+  box-sizing: border-box;
+}
+
+.capabilityGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 576px) {
+  .capabilityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 996px) {
+  .capabilityGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
 }
 
 .capabilityCard {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-height: 10.5rem;
   height: 100%;
-  padding: 0.85rem 1rem 0.75rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 0;
+  padding: 1.25rem 1.2rem 1.1rem;
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 2px;
   background: var(--ifm-background-surface-color);
+  font-family: var(--ifm-font-family-base);
   text-decoration: none !important;
   color: inherit;
   transition:
     border-color 0.15s ease,
-    box-shadow 0.15s ease;
-  box-shadow: none;
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
 .capabilityCard:hover {
   border-color: var(--ifm-color-primary);
-  box-shadow: inset 0 0 0 1px var(--ifm-color-primary);
+  box-shadow: 0 0 0 1px var(--ifm-color-primary);
+  background: color-mix(
+    in srgb,
+    var(--ifm-color-primary) 6%,
+    var(--ifm-background-surface-color)
+  );
 }
 
-.capabilityCard .squareMark {
-  margin-bottom: 0.5rem;
+.capabilityCard:active {
+  transform: translateY(1px);
 }
 
 .cardTitle {
-  font-size: 0.98rem;
+  font-size: 1.0625rem;
   font-weight: 700;
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
   color: var(--ifm-heading-color);
+  letter-spacing: -0.015em;
 }
 
 .cardBody {
   flex: 1;
-  margin: 0 0 0.5rem;
-  font-size: 0.82rem;
-  line-height: 1.45;
-  color: var(--ifm-color-emphasis-700);
+  margin: 0 0 0.85rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ifm-color-emphasis-800);
 }
 
 .cardCta {
-  font-size: 0.78rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--ifm-color-primary);
+  margin-top: auto;
+}
+
+/* Dark theme: lift cards off page for readability */
+:global(html[data-theme="dark"]) .capabilityCard {
+  background: #1c2128;
+  border-color: #3d4a5c;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+:global(html[data-theme="dark"]) .capabilityCard:hover {
+  background: #222a35;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 1px var(--ifm-color-primary), 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+:global(html[data-theme="dark"]) .cardTitle {
+  color: #f0f3f6;
+}
+
+:global(html[data-theme="dark"]) .cardBody {
+  color: #c4cdd5;
+}
+
+:global(html[data-theme="dark"]) .cardIconBox {
+  background: color-mix(in srgb, var(--ifm-color-primary) 22%, #0d1117);
+  border-color: var(--ifm-color-primary-light);
 }
 
 .interfaceLabelRow {
@@ -350,6 +466,10 @@
   .capabilityCard,
   .interfaceCell {
     transition: none;
+  }
+
+  .capabilityCard:active {
+    transform: none;
   }
 }
 
