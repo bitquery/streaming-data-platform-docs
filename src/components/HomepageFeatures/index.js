@@ -2,7 +2,6 @@ import React from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import styles from "./styles.module.css";
-import { PRODUCTION_MARKETING_SITE } from "@site/src/utils/productionUrl";
 import {
   bitqueryTools,
   chainListFullUrl,
@@ -110,6 +109,8 @@ export default function HomepageFeatures({ tagline }) {
             </p>
             <Link
               href={v1V2ApiGuideUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className={clsx(
                 "button button--outline button--primary",
                 styles.apiVersionBtn
@@ -213,7 +214,13 @@ export default function HomepageFeatures({ tagline }) {
             {personas.map((p, i) => (
               <Link
                 key={p.title}
-                to={p.to}
+                {...(p.external
+                  ? {
+                      href: p.to,
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    }
+                  : { to: p.to })}
                 className={clsx(
                   styles.personaCard,
                   i % 2 === 1 && styles.personaCardDashed
@@ -322,7 +329,7 @@ export default function HomepageFeatures({ tagline }) {
             <div className={styles.trustActions}>
               <Link
                 className={styles.trustBtn}
-                href={`${PRODUCTION_MARKETING_SITE}/`}
+                href="https://bitquery.io/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -330,7 +337,7 @@ export default function HomepageFeatures({ tagline }) {
               </Link>
               <Link
                 className={styles.trustBtnGhost}
-                href={`${PRODUCTION_MARKETING_SITE}/contact`}
+                href="https://bitquery.io/contact"
                 target="_blank"
                 rel="noopener noreferrer"
               >
