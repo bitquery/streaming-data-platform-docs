@@ -1,30 +1,196 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * Homepage hero + shell
  */
 
+.main {
+  padding-bottom: 1.5rem;
+  background: var(--ifm-background-color);
+}
+
 .heroBanner {
-  padding: 4rem 0;
+  padding: 2.75rem 0 3.35rem;
   text-align: center;
   position: relative;
   overflow: hidden;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+/* Light grid accents (square-aligned) */
+.heroBanner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--ifm-color-primary) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--ifm-color-primary) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
+  mask-image: radial-gradient(
+    ellipse 70% 70% at 50% 30%,
+    black 18%,
+    transparent 72%
+  );
+  pointer-events: none;
 }
 
-.buttons {
-  display: flex;
+.heroInner {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary-darkest);
+  margin-bottom: 0.65rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--ifm-button-border-radius);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  background: var(--ifm-color-primary);
+}
+
+:global(html[data-theme="dark"]) .eyebrow {
+  background: rgba(0, 0, 0, 0.22);
+  color: #f2faf8;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+:global(html[data-theme="dark"]) .eyebrow::before {
+  background: var(--ifm-color-primary-light);
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.12;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.heroSubtitle {
+  font-size: 1.05rem;
+  max-width: 36rem;
+  margin: 0 auto 1.35rem;
+  opacity: 0.95;
+  line-height: 1.5;
 }
 
 .buttonGroup {
   display: flex;
-  gap: 1rem; /* space between buttons */
-  justify-content: center; /* optional: center them horizontally */
-  flex-wrap: wrap; /* optional: wrap on small screens */
+  gap: 0.75rem 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/*
+ * Infima buttons use background-color: var(--ifm-button-background-color).
+ * Setting only `background:` is often overridden — drive the official variables.
+ */
+.heroBanner .buttonGroup :global(.button) {
+  font-weight: 600;
+  border-radius: var(--ifm-button-border-radius);
+}
+
+.heroBanner .buttonGroup :global(.button.button--primary) {
+  --ifm-button-background-color: var(--ifm-color-primary-darkest);
+  --ifm-button-border-color: color-mix(
+    in srgb,
+    #000 20%,
+    var(--ifm-color-primary-darkest)
+  );
+  --ifm-button-color: #fff;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, #fff 16%, transparent) inset,
+    0 4px 16px rgba(0, 0, 0, 0.24);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.heroBanner .buttonGroup :global(.button.button--primary:hover) {
+  --ifm-button-background-color: var(--ifm-color-primary-darker);
+  --ifm-button-border-color: color-mix(
+    in srgb,
+    #000 14%,
+    var(--ifm-color-primary-darker)
+  );
+  --ifm-button-color: #fff;
+}
+
+.heroBanner .buttonGroup :global(.button.button--secondary) {
+  --ifm-button-background-color: #ffffff;
+  --ifm-button-border-color: rgba(255, 255, 255, 0.9);
+  --ifm-button-color: var(--ifm-color-primary-darkest);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.heroBanner .buttonGroup :global(.button.button--secondary:hover) {
+  --ifm-button-background-color: #f4fffb;
+  --ifm-button-border-color: #ffffff;
+  --ifm-button-color: var(--ifm-color-primary-darkest);
+  box-shadow:
+    0 1px 0 #fff inset,
+    0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+:global(html[data-theme="dark"]) .heroBanner .buttonGroup :global(.button.button--primary) {
+  --ifm-button-background-color: #052f27;
+  --ifm-button-border-color: rgba(255, 255, 255, 0.22);
+  --ifm-button-color: #fff;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, #fff 14%, transparent) inset,
+    0 4px 20px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+:global(html[data-theme="dark"]) .heroBanner .buttonGroup :global(.button.button--primary:hover) {
+  --ifm-button-background-color: var(--ifm-color-primary-darkest);
+  --ifm-button-border-color: rgba(255, 255, 255, 0.35);
+  --ifm-button-color: #fff;
+}
+
+:global(html[data-theme="dark"]) .heroBanner .buttonGroup :global(.button.button--secondary) {
+  --ifm-button-background-color: rgba(255, 255, 255, 0.16);
+  --ifm-button-border-color: rgba(255, 255, 255, 0.38);
+  --ifm-button-color: #fafcfb;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+:global(html[data-theme="dark"]) .heroBanner .buttonGroup :global(.button.button--secondary:hover) {
+  --ifm-button-background-color: rgba(255, 255, 255, 0.26);
+  --ifm-button-border-color: rgba(255, 255, 255, 0.5);
+  --ifm-button-color: #ffffff;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2.25rem 0 2.95rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.05rem;
+  }
 }

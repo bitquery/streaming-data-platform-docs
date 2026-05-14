@@ -1,0 +1,122 @@
+---
+title: Supported blockchains & networks (V1, V2, Kafka, gRPC, ClickHouse)
+description: "Compare Bitquery coverage across Bitcoin, Ethereum, Solana, BNB Chain, Polygon, Base, Arbitrum, Optimism, Tron, and 15+ other networks. See which chains are available on V1 GraphQL, V2 GraphQL WebSocket, Kafka protobuf, Solana CoreCast gRPC, ClickHouse replica SQL, and cloud Parquet exports."
+sidebar_position: 0
+image: img/heroImage4.png
+keywords:
+  - Bitquery supported chains
+  - multichain blockchain API
+  - Bitcoin Ethereum Solana API
+  - V1 vs V2 blockchain coverage
+  - Kafka blockchain streams chains
+  - Solana gRPC CoreCast
+  - ClickHouse blockchain replica
+  - cloud Parquet blockchain datasets
+  - BNB Chain Polygon Base Arbitrum
+  - blockchain data platform networks
+  - GraphQL WebSocket chains
+  - real-time crypto data chains
+---
+
+import Head from "@docusaurus/Head";
+
+<Head>
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline:
+        "Supported blockchains and networks: Bitquery V1, V2, Kafka, gRPC, ClickHouse, cloud",
+      description:
+        "Product-level coverage matrix for Bitquery APIs: which blockchains are supported on legacy V1 GraphQL, current V2 GraphQL and WebSocket, Apache Kafka protobuf streams, Solana CoreCast gRPC, ClickHouse replica access, and cloud Parquet datasets.",
+      author: { "@type": "Organization", name: "Bitquery", url: "https://bitquery.io" },
+      publisher: { "@type": "Organization", name: "Bitquery", url: "https://bitquery.io" },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://docs.bitquery.io/docs/blockchain/supported-chains/",
+      },
+      keywords:
+        "blockchain API, multichain, Ethereum, Solana, Bitcoin, BSC, Polygon, Kafka, GraphQL, ClickHouse",
+    })}
+  </script>
+</Head>
+
+# Supported blockchains & networks
+
+This guide lists **which blockchains Bitquery indexes** and how that lines up with each **delivery interface** on **[bitquery.io](https://bitquery.io/)**: legacy **[V1 GraphQL](https://docs.bitquery.io/v1/)** (broad catalog—schema reference), **[Data streams & GraphQL](https://bitquery.io/products/data-streams)** and **[WebSocket streams](https://bitquery.io/products/websocket-streams)** for real time, **[Kafka streams](https://bitquery.io/products/kafka-streams)** (protobuf), **[Solana gRPC (CoreCast)](https://bitquery.io/products/solana-grpc-streams)**, **[ClickHouse data warehouse](https://bitquery.io/products/data-warehouse)** with **[MCP server](https://bitquery.io/products/bitquery-mcp-server)** for AI clients, and **[cloud datashares & exports](https://bitquery.io/products/streaming)** (S3, Snowflake, BigQuery, and more). Major networks include **Bitcoin**, **Ethereum**, **Solana**, **BNB Chain**, **Polygon**, **Tron**, **Base**, **Arbitrum**, **Optimism**, and **Cardano**, plus additional L1s in the [matrix below](#supported-chains-matrix)—always validate your plan, entitlement, and live **[GraphQL IDE](https://ide.bitquery.io/)** before shipping.
+
+**Legend:** ✓ = included in this product line’s chain catalog below. **—** = not listed in that line’s default set (other Bitquery products or plans may still apply—ask support).
+
+---
+
+## Matrix: chain × product {#supported-chains-matrix}
+
+**ClickHouse replica:** SQL over Bitquery’s **[managed ClickHouse data warehouse](https://bitquery.io/products/data-warehouse)**—dedicated clusters with read replicas and real-time ingestion across **40+ chains** (see product page for full positioning). **Chain coverage for your project matches the catalog below** (aligned with cloud-style exports), with **tables and schema** depending on entitlement; for **AI assistants**, use the **[Bitquery MCP server](https://bitquery.io/products/bitquery-mcp-server)** ([technical setup](/docs/mcp/mcp-server/)).
+
+<div className="supportedChainsStickyTable">
+
+| Network | V1 GraphQL | V2 GraphQL / WebSocket | Kafka (protobuf) | Cloud (Parquet / datasets) | ClickHouse replica |
+|---------|:----------:|:----------------------:|:----------------:|:--------------------------:|:------------------:|
+| Bitcoin | ✓ | — | ✓ | ✓ | ✓ |
+| Litecoin | ✓ | — | — | ✓ | ✓ |
+| Bitcoin Cash | ✓ | — | — | ✓ | ✓ |
+| Zcash | ✓ | — | — | ✓ | ✓ |
+| Dash | ✓ | — | — | ✓ | ✓ |
+| Ethereum | ✓ | ✓ | ✓ | ✓ | ✓ |
+| BNB Chain (BSC) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Avalanche | ✓ | — | — | ✓ | ✓ |
+| Klaytn | ✓ | — | — | ✓ | ✓ |
+| Tron | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Celo | ✓ | — | — | ✓ | ✓ |
+| Algorand | ✓ | — | — | ✓ | ✓ |
+| Moonbeam | ✓ | — | — | ✓ | ✓ |
+| Fantom | ✓ | — | — | ✓ | ✓ |
+| Cronos | ✓ | — | — | ✓ | ✓ |
+| Solana | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Cardano | ✓ | — | — | ✓ | ✓ |
+| Polygon | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Filecoin | ✓ | — | — | ✓ | ✓ |
+| Ripple (XRP) | ✓ | — | — | ✓ | ✓ |
+| Stellar | ✓ | — | — | ✓ | ✓ |
+| Arbitrum | — | ✓ | ✓ | ✓ | ✓ |
+| Optimism | — | ✓ | ✓ | ✓ | ✓ |
+| Base | — | ✓ | ✓ | ✓ | ✓ |
+
+</div>
+
+:::note More networks
+
+**V1** historically covers **40+** blockchains—see the [V1 docs](https://docs.bitquery.io/v1/) for the full, schema-accurate list and **[Bitquery platform](https://bitquery.io/)** for plans. **V2** may also expose additional networks in the IDE (for example **opBNB**, **TON**) that are not repeated in the short list above—check live schema and [chain docs](/docs/blockchain/introduction/).
+
+**Kafka** also exposes multi-chain **`trading.prices`** and **`trading.trades`** topics—see **[Kafka streams](https://bitquery.io/products/kafka-streams)** and [Kafka streaming concepts](/docs/streams/kafka-streaming-concepts/).
+
+:::
+
+---
+
+## gRPC (CoreCast)
+
+**Solana only** — filtered protobuf streams to `corecast.bitquery.io`. Not multi-chain.
+
+- [Solana gRPC streams (product)](https://bitquery.io/products/solana-grpc-streams) · [CoreCast docs](/docs/grpc/solana/introduction/)
+
+---
+
+## Where to read more
+
+| Product | Get started |
+|--------|-------------|
+| **V2** | [Bitquery platform](https://bitquery.io/) · [Data streams](https://bitquery.io/products/data-streams) · [WebSocket streams](https://bitquery.io/products/websocket-streams) · Docs: [Intro](https://docs.bitquery.io/docs/intro/) · Chains: [Ethereum](https://bitquery.io/blockchains/ethereum-blockchain-api), [BNB Chain](https://docs.bitquery.io/docs/blockchain/BSC/), [Arbitrum](https://bitquery.io/blockchains/arbitrum-blockchain-api), [Optimism](https://bitquery.io/blockchains/optimism-blockchain-api), [Base](https://bitquery.io/blockchains/base-blockchain-api), [Polygon](https://bitquery.io/blockchains/polygon-blockchain-api), [Solana](https://bitquery.io/blockchains/solana-blockchain-api), [Tron](https://bitquery.io/blockchains/tron-blockchain-api) |
+| **V1** | [Bitquery platform](https://bitquery.io/) · [V1 documentation](https://docs.bitquery.io/v1/) · [V1 vs V2 (IDE & schema)](https://docs.bitquery.io/v1/docs/graphql-ide/v1-and-v2) |
+| **Kafka** | [Kafka streams](https://bitquery.io/products/kafka-streams) · [Real-time streaming hub](https://bitquery.io/products/streaming) · Docs: [Streams overview](https://docs.bitquery.io/docs/streams/) · [Kafka concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) |
+| **Cloud** | [Streaming & datashares](https://bitquery.io/products/streaming) · Docs: [Cloud data](https://docs.bitquery.io/docs/cloud/) · [EVM](https://docs.bitquery.io/docs/cloud/evm/) · [Solana](https://docs.bitquery.io/docs/cloud/solana/) · [Bitcoin](https://docs.bitquery.io/docs/cloud/bitcoin/) · [Tron](https://docs.bitquery.io/docs/cloud/tron/) |
+| **ClickHouse replica** | [ClickHouse data warehouse](https://bitquery.io/products/data-warehouse) · [MCP server](https://bitquery.io/products/bitquery-mcp-server) · [MCP docs](https://docs.bitquery.io/docs/mcp/mcp-server/) |
+
+---
+
+## See also
+
+- [ClickHouse data warehouse](https://bitquery.io/products/data-warehouse) — fully managed clusters, replicas, and real-time ingestion
+- [Data streams & Kafka / WebSocket / gRPC](https://bitquery.io/products/data-streams)
+- [Blockchain data APIs overview](/docs/blockchain/introduction/)
+- [gRPC vs WebSocket vs Kafka](/docs/streams/) (docs)
