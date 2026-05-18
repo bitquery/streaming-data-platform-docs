@@ -105,7 +105,7 @@ sasl_conf = {
 
 ### SSL Connection (SASL_SSL )
 
-If you prefer to connect without SSL, you can use **SASL_SSL** on port `9093`. This requires certificates which can be accessed [here](https://github.com/bitquery/kafka-consumer-example)
+If you prefer to connect with SSL, you can use **SASL_SSL** on port `9093`. This requires certificates which can be accessed [here](https://github.com/bitquery/kafka-consumer-example)
 
 ```python
 sasl_conf = {
@@ -162,49 +162,104 @@ Refer to [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_pro
 
 ## Complete List of Topics
 
-All the topics send data in the **protobuf** format. Data sample for all these topics available [here](https://github.com/bitquery/kafka-data-sample)
+All topics deliver data in **protobuf** format. JSON samples for inspection: [kafka-data-sample](https://github.com/bitquery/kafka-data-sample).
 
 ### Multi-chain trading topics
 
-The **`trading`** namespace has two Kafka topics (not tied to one particular network). **Both use the same credentials** for your subscription:
+The **`trading`** namespace defines two Kafka topics. **Both use the same credentials** as your subscription:
 
-- **`trading.prices`** — multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/price-index/introduction/). See the [Crypto Price API](/docs/trading/crypto-price-api/introduction) for usage.
-- **`trading.trades`** — real-time DEX trades aligned with the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api). Message structure is defined in [`market/trades.proto`](https://github.com/bitquery/streaming_protobuf/blob/main/market/trades.proto) in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf).
+- **`trading.prices`** — Multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/price-index/introduction/). See the [Crypto Price API](/docs/trading/crypto-price-api/introduction) for usage.
+- **`trading.trades`** — Real-time DEX trades aligned with the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api). Message structure is defined in [`market/trades.proto`](https://github.com/bitquery/streaming_protobuf/blob/main/market/trades.proto) in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf).
 
 ### EVM chains
 
-(For mempool data, add .broadcasted after chain name)
+**Committed** topics use:
 
-- eth.transactions.proto
-- eth.tokens.proto
-- eth.dextrades.proto
-- eth.dexpools.proto - See [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
-- bsc.transactions.proto
-- bsc.tokens.proto
-- bsc.dextrades.proto
-- bsc.dexpools.proto - See [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
-- base.transactions.proto
-- base.tokens.proto
-- base.dextrades.proto
-- base.dexpools.proto - See [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
-- matic.transactions.proto
-- matic.tokens.proto
-- matic.dextrades.proto
-- matic.dexpools.proto - See [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
-- matic.predictions.proto
-- matic.broadcasted.predictions.proto
-- optimism.transactions.proto
-- optimism.tokens.proto
-- optimism.dextrades.proto
+- **`*.transactions.proto`** → `ParsedAbiBlockMessage`
+- **`*.tokens.proto`** → `TokenBlockMessage`
+- **`*.dextrades.proto`** → `DexBlockMessage`
+- **`*.raw.proto`** → `BlockMessage`
 
-### Other Chains
+**Mempool / broadcasted** topics insert **`broadcasted`** immediately after the chain prefix (example: **`eth.broadcasted.transactions.proto`**). They use:
 
-- tron.transactions.proto
-- tron.tokens.proto
-- tron.dextrades.proto
-- solana.transactions.proto
-- solana.tokens.proto
-- solana.dextrades.proto
+- **`*.broadcasted.transactions.proto`** → `ParsedAbiBlockMessage`
+- **`*.broadcasted.tokens.proto`** → `TokenBlockMessage`
+- **`*.broadcasted.dextrades.proto`** → `DexBlockMessage`
+- **`*.broadcasted.raw.proto`** → `BlockMessage`
+
+**`*.dexpools.proto`** streams are described under the [DEXPools Cube documentation](/docs/cubes/evm-dexpool).
+
+#### Ethereum (`eth`)
+
+- `eth.transactions.proto` → `ParsedAbiBlockMessage`
+- `eth.tokens.proto` → `TokenBlockMessage`
+- `eth.dextrades.proto` → `DexBlockMessage`
+- `eth.dexpools.proto` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
+- `eth.raw.proto` → `BlockMessage`
+- `eth.broadcasted.transactions.proto` → `ParsedAbiBlockMessage`
+- `eth.broadcasted.tokens.proto` → `TokenBlockMessage`
+- `eth.broadcasted.dextrades.proto` → `DexBlockMessage`
+- `eth.broadcasted.raw.proto` → `BlockMessage`
+
+#### BNB Chain (`bsc`)
+
+- `bsc.transactions.proto` → `ParsedAbiBlockMessage`
+- `bsc.tokens.proto` → `TokenBlockMessage`
+- `bsc.dextrades.proto` → `DexBlockMessage`
+- `bsc.dexpools.proto` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
+
+Where enabled, **`bsc.broadcasted.*`** topics follow the same mapping as **`eth.broadcasted.*`**.
+
+#### Base (`base`)
+
+- `base.transactions.proto` → `ParsedAbiBlockMessage`
+- `base.tokens.proto` → `TokenBlockMessage`
+- `base.dextrades.proto` → `DexBlockMessage`
+- `base.dexpools.proto` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
+
+Where enabled, **`base.broadcasted.*`** topics follow the same mapping as **`eth.broadcasted.*`**.
+
+#### Polygon (`matic`)
+
+- `matic.transactions.proto` → `ParsedAbiBlockMessage`
+- `matic.tokens.proto` → `TokenBlockMessage`
+- `matic.dextrades.proto` → `DexBlockMessage`
+- `matic.dexpools.proto` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
+- `matic.predictions.proto` — prediction markets; decode using [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf)
+- `matic.broadcasted.predictions.proto` — prediction markets (broadcasted)
+
+Where enabled, **`matic.broadcasted.*`** topics for standard EVM **`transactions`**, **`tokens`**, **`dextrades`**, and **`raw`** streams follow the broadcasted mapping above.
+
+#### Optimism (`optimism`)
+
+- `optimism.transactions.proto` → `ParsedAbiBlockMessage`
+- `optimism.tokens.proto` → `TokenBlockMessage`
+- `optimism.dextrades.proto` → `DexBlockMessage`
+
+Where enabled, **`optimism.broadcasted.*`** topics follow the same mapping as **`eth.broadcasted.*`**.
+
+### Bitcoin
+
+- `btc.transactions.proto` — decode using Bitquery Bitcoin protobuf definitions in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf).
+
+### Solana (`solana`)
+
+- `solana.transactions.proto` → `ParsedIdlBlockMessage`
+- `solana.tokens.proto` → `TokenBlockMessage`
+- `solana.dextrades.proto` → `DexParsedBlockMessage`
+
+### Tron (`tron`)
+
+Message types per topic are defined in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf) for Tron.
+
+- `tron.raw.proto`
+- `tron.transactions.proto`
+- `tron.tokens.proto`
+- `tron.dextrades.proto`
+- `tron.broadcasted.raw.proto`
+- `tron.broadcasted.transactions.proto`
+- `tron.broadcasted.tokens.proto`
+- `tron.broadcasted.dextrades.proto`
 
 Contact our support team for the topics that you can connect to for your specific needs.
 

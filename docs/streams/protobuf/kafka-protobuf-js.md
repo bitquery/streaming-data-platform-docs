@@ -1,166 +1,130 @@
 ---
-sidebar_position: 2
+slug: kafka-protobuf-js
+sidebar_position: 4
+sidebar_label: Javascript Tutorial to Setup Solana Kafka Shred Stream
+title: Javascript Tutorial to Setup Solana Kafka Shred Stream
+description: Use Node.js, KafkaJS, LZ4, and bitquery-protobuf-schema to consume Bitquery Solana Kafka protobuf; run js-consumer-example from kafka-streams-examples-usecases.
 ---
 
 # Javascript Tutorial to Setup Solana Kafka Shred Stream
 
-This tutorial explains how to consume Solana transaction messages in protobuf format from Kafka using Javascript (Common JS), and print them efficiently with decoded `bytes` fields in **base58** format.
+This tutorial explains how to consume **Solana** protobuf messages from **Bitquery Kafka** using **JavaScript** (Node.js **CommonJS** — not a browser bundle), and print them with **`bytes`** fields decoded to **base58** where **`printProtobufMessage`** applies that encoding.
 
-You can read more about **Bitquery Protobuf Streams** here:  
-[Bitquery Kafka Streaming Concepts - Protobuf Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#protobuf-streams).
+**Streaming concepts:** **[Kafka streaming concepts — Protobuf streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#protobuf-streams)**.
 
-The complete code is available [here](https://github.com/bitquery/bitquery-protobuf). You can also try the [npm](https://www.npmjs.com/package/bitquery-protobuf) package that wraps the entire code for the ease of development.
+**Runnable project:** **[`bitquery/kafka-streams-examples-usecases`](https://github.com/bitquery/kafka-streams-examples-usecases)** — **[`js-consumer-example/`](https://github.com/bitquery/kafka-streams-examples-usecases/tree/main/js-consumer-example)** ([`src/index.js`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/js-consumer-example/src/index.js), [`src/config.js`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/js-consumer-example/src/config.js), [`package.json`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/js-consumer-example/package.json)).
 
-## **Prerequisites**
+Use **[`bitquery-protobuf-schema npm Package`](https://www.npmjs.com/package/bitquery-protobuf-schema)** so you do **not** hand-manage `.proto` files—the package resolves the schema from **`KAFKA_TOPIC`**.
 
-To avoid the hastle of manually downloading `proto` files containing schemas and writing code for loading and compiling those files, install the required npm package.
+> **Throughput:** Treat this repo as a **minimal** consumer. Saturating high-volume topics typically requires tuning **KafkaJS** parallelism, **partition-aware** runners, or **multiple consumers under one consumer group**. See **[Kafka streaming concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)** for partition-oriented guidance.
 
-```shell
-npm install bitquery-protobuf-schema
+## Prerequisites
+
+- **Node.js 18+** (`package.json` `engines`).
+- **npm**
+- Bitquery **Kafka username and password** for stream access.
+
+> You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
+
+Install all dependencies declared in **`package.json`**:
+
+```bash
+npm install
 ```
 
-Also, install other dependencies using the following command line.
+Key runtime libraries: **`kafkajs`**, **`kafkajs-lz4`** (+ **`lz4` / `lz4-asm`**), **`bitquery-protobuf-schema`**, **`dotenv`**, **`uuid`**, **`bs58`**.
 
-```shell
-npm install kafkajs@2.2.3 uuid fs@0.0.1-security kafkajs-lz4@1.2.1 lz4@0.6.5 lz4-asm@0.4.2 bs58 
-```
+## 1. Kafka client initialization (non-TLS baseline)
 
-You’ll also need your **Kafka username/password** provided by the Bitquery team.
+The sample builds a **KafkaJS** client with **SASL SCRAM-SHA-512**, **no TLS** (**`ssl: false`**), and default Bitquery broker endpoints (overridable via **`KAFKA_BOOTSTRAP_SERVERS`**). Compression: **LZ4** codec registration matches Bitquery payloads.
 
-## **1. Setup Kafka Consumer Configuration**
+See the live **`createKafka`** helper in **`src/index.js`** and env loading in **`src/config.js`** on GitHub (**links above**).
 
-### Kafka Client Initialization - Non SSL Version
+> You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
 
-```js
-const { Kafka } = require("kafkajs");
-const bs58 = require("bs58");
-const { loadProto } = require("bitquery-protobuf-schema");
-const { CompressionTypes, CompressionCodecs } = require("kafkajs");
-const LZ4 = require("kafkajs-lz4");
-const { v4: uuidv4 } = require("uuid");
+## 2. Protobuf traversal and `bytes` (Solana vs EVM)
 
-CompressionCodecs[CompressionTypes.LZ4] = new LZ4().codec;
+Printing is implemented in **`src/printProtobuf.js`** and mirrors the **recursive traversal** pattern from earlier Bitquery tutorials: nested objects descend; **`bytes`** are encoded with **`bs58`** when the printer runs in **`base58`** mode (Solana-focused default in **`index.js`**).
 
-const username = "<username>";
-const password = "<password>";
-const topic = "solana.transactions.proto";
-const id = uuidv4();
-
-const kafka = new Kafka({
-  clientId: username,
-  brokers: [
-    "rpk0.bitquery.io:9092",
-    "rpk1.bitquery.io:9092",
-    "rpk2.bitquery.io:9092",
-  ],
-  sasl: {
-    mechanism: "scram-sha-512",
-    username: username,
-    password: password,
-  },
-});
-```
-
-## **2. Define a Protobuf Traversal Print Function**
-
-This function **recursively walks** through any protobuf message and prints all its fields, converting `bytes` to **base58** or **hex**.
-
-> **Solana vs EVM Encoding Tip**
+> **Solana vs EVM `bytes`**
 >
-> Protobuf `bytes` fields represent things like public keys, signatures, and hashes — and must be decoded according to the target blockchain:
+> Protobuf **`bytes`** often encode addresses, hashes, or signatures—the display encoding depends on the chain:
 >
-> - **Solana**: Decode as `base58` (e.g. account addresses, signatures)
-> - **EVM (Ethereum, BSC, etc.)**: Decode as `hex` with a `0x` prefix
+> - **Solana:** **base58** (this tutorial’s default path).
+> - **EVM (Ethereum, BSC, Base, etc.):** **hex**, typically **`0x` + buffer.toString("hex")** when you customize the printer.
 >
-> This tutorial uses `base58` decoding for Solana.  
-> If you're consuming **EVM data**, update your decoder to:
+> Example pattern for hex (not used in the default Solana tree):
 >
 > ```js
-> const convertBytes = (buffer, encoding = "hex") => {
->   return "0x" + buffer.toString("hex");
-> };
+> const hex0x = (buffer) => "0x" + Buffer.from(buffer).toString("hex");
 > ```
 
-```js
-const convertBytes = (buffer, encoding = "base58") => {
-  if (encoding === "base58") {
-    return bs58.default.encode(buffer);
-  }
-  return buffer.toString("hex");
-};
+## 3. Consumer group and subscribe
 
-const printProtobufMessage = (msg, indent = 0, encoding = "base58") => {
-  const prefix = " ".repeat(indent);
-  for (const [key, value] of Object.entries(msg)) {
-    if (Array.isArray(value)) {
-      console.log(`${prefix}${key} (repeated):`);
-      value.forEach((item, idx) => {
-        if (typeof item === "object" && item !== null) {
-          console.log(`${prefix}  [${idx}]:`);
-          printProtobufMessage(item, indent + 4, encoding);
-        } else {
-          console.log(`${prefix}  [${idx}]: ${item}`);
-        }
-      });
-    } else if (value && typeof value === "object" && Buffer.isBuffer(value)) {
-      console.log(`${prefix}${key}: ${convertBytes(value, encoding)}`);
-    } else if (value && typeof value === "object") {
-      console.log(`${prefix}${key}:`);
-      printProtobufMessage(value, indent + 4, encoding);
-    } else {
-      console.log(`${prefix}${key}: ${value}`);
-    }
-  }
-};
+Group id:
+
+- Prefer **stable** **`KAFKA_GROUP_ID`** beginning with **your Kafka username** (Bitquery requirement for stable ids).
+- If unset, **`index.js`** uses **`${username}-group-${uuid}`** (hyphens stripped from uuid), matching the spirit of the older tutorial’s dynamic suffix.
+
+Subscribe uses **`fromBeginning`** from **`KAFKA_FROM_BEGINNING`** (boolean-style env parsing in **`config.js`**).
+
+> **Reminder vs Python / Go**
+>
+> Node uses **`KAFKA_FROM_BEGINNING`**. Python and Go in the **same repository** use **`KAFKA_AUTO_OFFSET_RESET`** (**`latest` / `earliest`**). Align env vars when you compare languages side by side.
+
+## 4. Run stream: load proto, decode, LZ4-ready pipeline
+
+[`src/index.js`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/js-consumer-example/src/index.js):
+
+1. **`await loadProto(cfg.topic)`** before consuming.
+2. **`consumer.connect()`** → **`subscribe({ topic, fromBeginning })`**.
+3. **`consumer.run({ autoCommit: false, eachMessage: ... })`**.
+4. **`decode`** + **`toObject`** ( **`bytes`** as **`Buffer`** for the printer ).
+5. **`printProtobufMessage`** to stdout; errors logged to stderr.
+
+KafkaJS timeouts in code: **`connectionTimeout: 10_000`**, **`requestTimeout: 60_000`**.
+
+## Execution workflow
+
+1. **Initialize client** — brokers from env or defaults; **`ssl: false`**; SCRAM SASL credentials.
+2. **Resolve group id** — explicit **`KAFKA_GROUP_ID`** or generated **`username-group-uuid`**.
+3. **`loadProto(topic)`** — bind decode type to **`KAFKA_TOPIC`**.
+4. **Connect and subscribe** — optional **`fromBeginning`** for new consumer groups without committed offsets—understand semantics vs **`autoCommit: false`** in this baseline.
+5. **Process messages** — **`eachMessage`** decodes protobuf, prints traversal.
+6. **Compression** — LZ4 codec registered for Kafka compression on the wire.
+7. **Errors** — caught per message where possible; fatal errors exit non-zero.
+
+**TLS:** baseline is **plaintext Kafka** on **9092**. For **`SASL_SSL`**, populate KafkaJS **`ssl`** objects and migrate brokers per **[Kafka streaming concepts — SASL_SSL](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#ssl-connection-sasl_ssl-)** plus **`js-consumer-example/README.md`**.
+
+## Clone and run (quick reference)
+
+> You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
+
+```bash
+git clone https://github.com/bitquery/kafka-streams-examples-usecases.git
+cd kafka-streams-examples-usecases/js-consumer-example
+npm install
+cp .env.example .env
+# set KAFKA_USERNAME, KAFKA_PASSWORD
+npm start
 ```
 
-## **3. Initialize Consumer**
+Debug KafkaJS internals:
 
-```js
-const consumer = kafka.consumer({ groupId: username + "-" + id });
+```bash
+npm run start:debug
 ```
 
-## **4. Consumer Running Stream and Getting Messages**
+## Troubleshooting
 
-The consumer subscribes to the topic and processes messages. LZ4 compression is supported, and message content is logged to the console.
+| Issue                     | Action                                                                                   |
+| ------------------------- | ---------------------------------------------------------------------------------------- |
+| Missing env vars          | **`cp .env.example .env`**, validate names                                               |
+| Auth / SASL failures      | Credentials, **`scram-sha-512`** mechanism, broker connectivity **9092**                 |
+| LZ4 / native addon errors | Re-run **`npm install`**; verify Node version ≥ 18                                       |
+| Decode failures           | Topic unsupported in your **`bitquery-protobuf-schema`** version or wrong topic spelling |
 
-```js
-const run = async () => {
-  let ParsedIdlBlockMessage = await loadProto(topic); // Load proto before starting Kafka
-  await consumer.connect();
-  await consumer.subscribe({ topic, fromBeginning: false });
+## See also
 
-  await consumer.run({
-    autoCommit: false,
-    eachMessage: async ({ partition, message }) => {
-      try {
-        const buffer = message.value;
-        const decoded = ParsedIdlBlockMessage.decode(buffer);
-        const msgObj = ParsedIdlBlockMessage.toObject(decoded, {
-          bytes: Buffer,
-        });
-        printProtobufMessage(msgObj);
-      } catch (err) {
-        console.error("Error decoding Protobuf message:", err);
-      }
-    },
-  });
-};
-
-run().catch(console.error);
-```
-
-## Execution Workflow
-
-1. **Kafka Client Initialization**: The Kafka client is created and configured with or without SSL certificates and SASL authentication.
-2. **Group ID Generation**: A groupId is created, ensuring no collision with other consumers.
-3. **Kafka Consumer Connection**: The consumer connects to the Kafka brokers and subscribes to a specified topic.
-4. **Message Processing**:
-   - **Loading Protobuf Schema**: Loads Protobuf Schema to decode the message recieved.
-   - **Connecting the Consumer**: Establishes the connection with Kafka.
-   - **Subscribing to the Topic**: Begins listening to the specified Kafka topic.
-   - **Running the Consumer**: Processes messages with the `eachMessage` handler.
-   - **Compression**: Supports handling messages compressed with LZ4.
-5. **Error Handling**: Any errors during message processing are caught and logged.
-
-By following this guide, you can set up a Node.js Kafka consumer using KafkaJS, secure it with SSL, and handle message compression using LZ4.
+- **[bitquery-protobuf-schema (npm package)](https://www.npmjs.com/package/bitquery-protobuf-schema)**
+- **[Kafka streaming concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)**

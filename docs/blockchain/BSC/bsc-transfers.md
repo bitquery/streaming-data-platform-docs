@@ -169,6 +169,63 @@ subscription {
 
 ```
 
+## Check if an address ever interacted with predict.fun (USDT → protocol receivers)
+
+Predict.fun flows on BSC often show up as USDT (`0x55d398326f99059fF775485246999027B3197955`) transfers **from** the user's wallet **to** one of the protocol contract addresses listed below. `limit: { count: 1 }` is enough for a historic “has this wallet interacted?” probe.
+
+**Try it:** [IDE — predict.fun interaction check](https://ide.bitquery.io/check-if-an-address-interacted-with-predictfun-ever)
+
+```graphql
+query ($address: String) {
+  EVM(dataset: realtime, network: bsc) {
+    Transfers(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Transfer: {
+          Currency: {
+            SmartContract: { is: "0x55d398326f99059ff775485246999027b3197955" }
+          }
+          Sender: { is: $address }
+          Receiver: {
+            in: [
+              "0x8BC070BEdAB741406F4B1Eb65A72bee27894B689"
+              "0x6bEb5a40C032AFc305961162d8204CDA16DECFa5"
+              "0x365fb81bd4A24D6303cd2F19c349dE6894D8d58A"
+              "0x8A289d458f5a134bA40015085a8F50Ffb681B41d"
+              "0xF1f8F5C641F20C48526269EF7DFF19172Efa9783"
+              "0xFbC2259aBB3F01c019ECE1d0200Ee673BB7BA34F"
+              "0xF2311C668aAA8dEc48D5da577d3018eb94b3132F"
+              "0xD172f3FBabe763Ee8E52D8b32421574236dA6057"
+            ]
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Transfer {
+        Sender
+        Receiver
+        Amount
+      }
+    }
+  }
+}
+```
+
+**Variables:**
+
+```json
+{
+  "address": "0x75b976434245E1Fc037f9c7645C5aCdDdA6b00A4"
+}
+```
+
 ## Deterministic Pagination for Backfilling Transfers
 
 When backfilling BSC transfer data or building a historical index, use deterministic pagination to guarantee no records are missed or duplicated.

@@ -1,462 +1,136 @@
 ---
-sidebar_position: 1
+slug: kafka-protobuf-go
+sidebar_position: 2
+sidebar_label: Go Example to Use Kafka Protobuf Streams for Real-time Data
+title: Go Example to Use Kafka Protobuf Streams for Real-time Data
+description: Connect a Go app to Bitquery Kafka with confluent-kafka-go, decode Solana ParsedIdlBlockMessage from protobuf, and run the minimal go-consumer-example from kafka-streams-examples-usecases.
 ---
 
 # Go Example to Use Kafka Protobuf Streams for Real-time Data
 
-This guide walks through the implementation of a Kafka consumer in Go to subscribe to a Kafka topic and process [onchain data streams from Bitquery](https://bitquery.io/products/streaming) in real-time. The consumer connects to the Kafka brokers securely using SSL and handles incoming messages in **Protobuf** format.
+This guide explains how to consume **Bitquery Kafka** topics from **Go**, receive **Protocol Buffers** payloads, and decode **Solana** blocks as **`ParsedIdlBlockMessage`**. The **reference implementation** you run is the minimal app in **[`bitquery/kafka-streams-examples-usecases`](https://github.com/bitquery/kafka-streams-examples-usecases)** ([`go-consumer-example/`](https://github.com/bitquery/kafka-streams-examples-usecases/tree/main/go-consumer-example)): one process, **`.env`** configuration, **`Poll`** loop, stdout for decoded data and stderr for logs.
 
-The schema is available [here](https://github.com/bitquery/streaming_protobuf/tree/main/solana).
+Read the platform overview in **[Kafka streaming concepts — Protobuf streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#protobuf-streams)**. **`.proto` sources and generated Go types** live under **[Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf)** (Solana tree: [`solana/`](https://github.com/bitquery/streaming_protobuf/tree/main/solana)); this sample imports **`github.com/bitquery/streaming_protobuf/v2/solana/messages`**.
 
-The complete code is available [here](https://github.com/bitquery/stream_protobuf_example).
+**Default wire security:** **SASL** (**SCRAM-SHA-512**) over **Kafka without TLS** on port **9092** (`SASL_PLAINTEXT`). Optional **TLS** is **`SASL_SSL`** on **9093** with PEM files—see **[SSL (SASL_SSL)](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#ssl-connection-sasl_ssl-)**. The minimal example does not enable TLS until you extend **[`kafka.ConfigMap`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/go-consumer-example/main.go)**.
 
-This code is a sample to get it running. At scale, you have to implement queues and/or multiple consumers ( under same group) to read the messages with little effect to throughput.
+> **Scaling:** The repository consumer is intentionally small. For production throughput, use **parallel partition readers**, **queues**, and/or **multiple consumer instances in the same group**, per Bitquery’s partition guidance in **[Kafka streaming concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)**. A larger **Go** reference (YAML, partitioned consumers, worker-style processing) remains **[`stream_protobuf_example`](https://github.com/bitquery/stream_protobuf_example)**—a **different** layout than `go-consumer-example`.
 
 ### Prerequisites
 
-Ensure you have the following components set up before running the Go Kafka consumer:
+| #   | Requirement                                                                                                                                                                    |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | **Bitquery Kafka access** — username and password for streams ([access](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#how-to-get-access-to-these-streams)).  |
+| 2   | **Authorized topic** — default **`solana.transactions.proto`**; your contract must include the topic you set.                                                                  |
+| 3   | **Go** **1.23+** — see [`go.mod`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/go-consumer-example/go.mod).                                           |
+| 4   | **`confluent-kafka-go/v2`** with **CGO** and system **`librdkafka`** (e.g. macOS: `brew install librdkafka pkg-config`; Debian/Ubuntu: `librdkafka-dev`, `pkg-config`, `gcc`). |
+| 5   | **Git** — to clone the examples repository.                                                                                                                                    |
 
-1. **Bitquery Kafka Server Access**: Access to Bitquery Kafka brokers.
-2. **Username and Password**: For authentication with the Kafka brokers.
-3. **Topic name(s)** to subscribe to like `solana.dextrades.proto`
-4. **Go**: Version >= 1.16.
-5. **Confluent Kafka Go Client**: Kafka client library for Go.
+> You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
 
-### **Key Components**
+### Key components (this repository)
 
-- **Kafka Consumer**: Listens for incoming messages from a Kafka topic.
-- **Processor**: Handles messages and processes them based on the topic.
-- **Configuration**: `config.yml` contains settings for Kafka, Consumer, and Processor.
-- **Main Entry Point**: `main.go` initializes and runs the consumer and processor.
+| Piece                       | Role                                                                                                                                                                                     |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`main.go`**               | Loads **`.env`**, builds **`kafka.ConfigMap`**, **`Subscribe`**, **`Poll`** loop, **`proto.Unmarshal`** into **`ParsedIdlBlockMessage`**, prints tree to **stdout**, logs to **stderr**. |
+| **`printproto.go`**         | Walks **protoreflect**; encodes **`bytes`** as **base58** (Solana-style).                                                                                                                |
+| **`.env` / `.env.example`** | **`KAFKA_USERNAME`**, **`KAFKA_PASSWORD`**, optional topic, bootstrap, group id, offset reset.                                                                                           |
 
-## Step by Step Code
+## Step by step
 
-### **`config.yml` - Kafka Config**
+### 1. Clone the Go example
 
-**Purpose**: To setup server, login, reconnect and other configuration details
-
-Below is the sample config setup, modify it according to your requirements.
-
-```yaml
-kafka:
-  bootstrap.servers: "rpk0.bitquery.io:9092,rpk1.bitquery.io:9092,rpk2.bitquery.io:9092"
-  security.protocol: "SASL_PLAINTEXT"
-  sasl.mechanism: "SCRAM-SHA-512"
-  sasl.username: "<your_username_here>"
-  sasl.password: "<your_password_here>"
-  group.id: "<username_group-number>"
-  ssl.endpoint.identification.algorithm: "none"
-  enable.auto.commit: false
-consumer:
-  topic: solana.dextrades.proto
-  partitioned: true
-processor:
-  buffer: 100V
-  workers: 8
-log_level: "debug"
+```bash
+git clone https://github.com/bitquery/kafka-streams-examples-usecases.git
+cd kafka-streams-examples-usecases/go-consumer-example
 ```
 
-### **`consumer.go` - Kafka Consumer**
+### 2. Install modules
 
-**Purpose**: Connects to Kafka, subscribes to a topic, and receives messages.
+```bash
+go mod tidy
+```
 
-**Types of Consumers**
+### 3. Configure environment
 
-- **SimpleConsumer**: Single consumer instance
-- **PartitionedConsumer**: Multiple consumers for high throughput
+```bash
+cp .env.example .env
+```
 
-**Key Functions**
+Set at minimum:
 
-1.  `newSimpleConsumer()`: Creates a Kafka consumer.
-2.  `waitMessages()`: Continuously reads messages.
-3.  `newPartitionedConsumer()`: Handles multiple Kafka partitions.
+> You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
+
+```env
+KAFKA_USERNAME=your_kafka_username
+KAFKA_PASSWORD=your_kafka_password
+```
+
+Optional (defaults match the Python and Node baselines in the same repository):
+
+```env
+# KAFKA_TOPIC=solana.transactions.proto
+# KAFKA_BOOTSTRAP_SERVERS=rpk0.bitquery.io:9092,rpk1.bitquery.io:9092,rpk2.bitquery.io:9092
+# KAFKA_GROUP_ID=my-username-stable-group
+# KAFKA_AUTO_OFFSET_RESET=latest
+```
+
+If **`KAFKA_GROUP_ID`** is omitted, the program generates **`{username}-group-{uuid}`** (see **`loadConfigFromEnv`** in **`main.go`**). Bitquery expects **`group.id`** to **start with your Kafka username** when you choose a stable id.
+
+### 4. Run
+
+```bash
+go run .
+```
+
+Stop with **Ctrl+C** (**`signal.NotifyContext`**).
+
+### 5. Configuration map (as built in code)
+
+The following keys are set in **[`main.go`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/go-consumer-example/main.go)** (values from env where noted):
 
 ```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"time"
-
-	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	"golang.org/x/sync/errgroup"
-)
-
-type Consumer interface {
-	waitMessages(ctx context.Context, listener Listener)
-	close()
-}
-
-type SimpleConsumer struct {
-	kafkaConsumer *kafka.Consumer
-}
-
-type ConsumerConfig struct {
-	Topic       string
-	Partitioned bool
-}
-
-type PartitionedConsumer struct {
-	kafkaConsumers []*kafka.Consumer
-}
-
-func newConsumer(config *Config) (Consumer, error) {
-	if config.Consumer.Partitioned {
-		return newPartitionedConsumer(config)
-	}
-	return newSimpleConsumer(config)
-}
-
-func newSimpleConsumer(config *Config) (*SimpleConsumer, error) {
-	kafkaConsumer, err := kafka.NewConsumer(&config.Kafka)
-	if err != nil {
-		return nil, err
-	}
-
-	err = kafkaConsumer.Subscribe(config.Consumer.Topic, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return &SimpleConsumer{
-		kafkaConsumer,
-	}, nil
-}
-
-func (consumer *SimpleConsumer) close() {
-	consumer.kafkaConsumer.Close()
-}
-
-func (consumer *SimpleConsumer) waitMessages(ctx context.Context, listener Listener) {
-	err := consumerWaitMessages(ctx, consumer.kafkaConsumer, listener)
-	if err != nil {
-		fmt.Println("error waiting messages:", err)
-	}
-}
-
-func consumerWaitMessages(ctx context.Context, consumer *kafka.Consumer, listener Listener) error {
-
-	fmt.Println("Running consumer " + consumer.String())
-	for {
-		select {
-		case <-ctx.Done():
-			fmt.Println("Done, exiting consumer loop")
-			return nil
-		default:
-		}
-
-		message, err := consumer.ReadMessage(time.Second * 60)
-		if err != nil {
-			return err
-		}
-
-		listener.enqueue(message)
-
-	}
-}
-
-func newPartitionedConsumer(config *Config) (Consumer, error) {
-
-	kafkaAdmin, err := kafka.NewAdminClient(&config.Kafka)
-	if err != nil {
-		return nil, err
-	}
-	defer kafkaAdmin.Close()
-
-	metadata, err := kafkaAdmin.GetMetadata(&config.Consumer.Topic, false, 10000)
-	if err != nil {
-		return nil, err
-	}
-
-	kafkaErr := metadata.Topics[config.Consumer.Topic].Error
-	if kafkaErr.Code() != kafka.ErrNoError {
-		return nil, kafkaErr
-	}
-
-	partitions := metadata.Topics[config.Consumer.Topic].Partitions
-	fmt.Printf("Subscribing to topic %s %d partitions: %v...\n", config.Consumer.Topic, len(partitions), partitions)
-
-	consumers := make([]*kafka.Consumer, len(partitions))
-	for i, partition := range partitions {
-		consumer, err := kafka.NewConsumer(&config.Kafka)
-		if err != nil {
-			return nil, err
-		}
-		err = consumer.Assign([]kafka.TopicPartition{{
-			Topic:     &config.Consumer.Topic,
-			Partition: partition.ID,
-			Offset:    kafka.OffsetStored,
-		}})
-		if err != nil {
-			return nil, err
-		}
-		err = consumer.Subscribe(config.Consumer.Topic, nil)
-		if err != nil {
-			return nil, err
-		}
-		consumers[i] = consumer
-	}
-
-	fmt.Printf("Assigned %d consumers to %s topic\n", len(consumers), config.Consumer.Topic)
-
-	return &PartitionedConsumer{
-		kafkaConsumers: consumers,
-	}, nil
-}
-
-func (consumer *PartitionedConsumer) close() {
-	for _, c := range consumer.kafkaConsumers {
-		err := c.Close()
-		if err != nil {
-			fmt.Println("Error closing consumer: " + err.Error())
-		}
-	}
-}
-
-func (consumer *PartitionedConsumer) waitMessages(ctx context.Context, listener Listener) {
-	var wg errgroup.Group
-	for _, c := range consumer.kafkaConsumers {
-		c := c
-		wg.Go(func() error {
-			return consumerWaitMessages(ctx, c, listener)
-		})
-	}
-	wg.Wait()
+cm := kafka.ConfigMap{
+	"bootstrap.servers":                     cfg.bootstrap,
+	"security.protocol":                     "SASL_PLAINTEXT",
+	"sasl.mechanisms":                       "SCRAM-SHA-512",
+	"sasl.username":                         cfg.username,
+	"sasl.password":                         cfg.password,
+	"group.id":                              cfg.groupID,
+	"session.timeout.ms":                    30_000,
+	"enable.auto.commit":                    false,
+	"ssl.endpoint.identification.algorithm": "none",
+	"auto.offset.reset":                     cfg.autoOffset,
 }
 ```
 
-### **`processor.go` - Message Processor**
+## Output and `bytes` fields
 
-**Purpose**: Processes Kafka messages using worker threads.
+- **Stdout:** decoded protobuf tree only (no partition/offset prefix).
+- **Stderr:** subscribe line, Kafka errors, decode errors, shutdown.
 
-**Key Features**
+> **Solana vs EVM `bytes`**
+>
+> This example prints **`bytes`** as **base58**, which matches typical **Solana** address / signature style. If you point the decoder at **EVM** protobuf types later, adjust **`printproto.go`** (or an equivalent printer) so **`bytes`** render as **hex** (commonly `0x`-prefixed) instead of base58.
 
-- Uses **multiple workers** to process messages in parallel.
-- Different handlers for different **Protobuf topics**.
-- Reports statistics every **100 messages**.
-- Deduplication Check (isDuplicated function)
+## Changing topic or message type
 
-**Key Functions**
+Updating **`KAFKA_TOPIC`** only works when the topic still decodes as **`ParsedIdlBlockMessage`**. Otherwise change the import and **`proto.Unmarshal` target** in **`main.go`** to the type that matches the topic schema (**[`pkg.go.dev` / streaming_protobuf/v2](https://pkg.go.dev/github.com/bitquery/streaming_protobuf/v2)**).
 
-1.  `newProcessor()`: Initializes message queue & workers.
-2.  `enqueue()`: Adds messages to the processing queue.
-3.  `start()`: Spins up worker goroutines to process messages.
-4.  `close()`: Waits for all workers to finish.
-5.  `isDuplicated()`: Prevents the same message from being processed multiple times
+## TLS (optional)
 
-**How DeDeuplication Works**
+Follow **[SASL_SSL](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#ssl-connection-sasl_ssl-)** and extend **`kafka.ConfigMap`** (and broker list, usually **9093**). PEM filenames and fetch commands are summarized in the **[examples repository `README.md`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/README.md)** and **[`kafka-consumer-example`](https://github.com/bitquery/kafka-consumer-example)**.
 
-- Each message is uniquely identified using **`slot` and `index`**.
-- A **Least Recently Used (LRU) cache** stores recently processed messages.
-- Messages are **discarded if already present in the cache**.
-- Entries **expire after 240 seconds**, keeping memory usage optimized.
+## Troubleshooting
 
-```go
-package main
+| Symptom                        | Check                                                                                                |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| Consumer create / load failure | **`librdkafka`**, **`CGO_ENABLED=1`**, **`pkg-config`**.                                             |
+| SASL / auth errors             | Credentials, topic entitlement, reachability of **9092** (or **9093** if using TLS).                 |
+| Protobuf unmarshal errors      | Message type does not match topic schema.                                                            |
+| Little or no stdout            | Offset policy (**`latest`** vs **`earliest`**) and group id; see Bitquery retention and offset docs. |
 
-import (
-	"context"
-	"fmt"
-	"sync"
-	"time"
+## See also
 
-	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	"github.com/hashicorp/golang-lru/v2/expirable"
-	"golang.org/x/sync/errgroup"
-)
-
-type ProcessorConfig struct {
-	Buffer  int
-	Workers int
-}
-
-type Listener interface {
-	enqueue(message *kafka.Message)
-}
-
-type dedupCache struct {
-	cache *expirable.LRU[string, bool]
-	mu    sync.Mutex
-}
-
-type processFn func(context.Context, *kafka.Message, int, *dedupCache) error
-
-type Processor struct {
-	queue     chan (*kafka.Message)
-	wg        errgroup.Group
-	config    ProcessorConfig
-	processFn processFn
-	stat      *Statistics
-	dedup     *dedupCache
-}
-
-func newProcessor(config *Config) (*Processor, error) {
-	processor := &Processor{
-		queue:  make(chan *kafka.Message, config.Processor.Buffer),
-		config: config.Processor,
-		stat:   newStatistics(),
-		dedup: &dedupCache{
-			cache: expirable.NewLRU[string, bool](100000, nil,
-				time.Second*time.Duration(240)),
-		},
-	}
-
-	var processFn processFn
-	switch config.Consumer.Topic {
-	case "solana.dextrades.proto":
-		processFn = processor.dexTradesMessageHandler
-	case "solana.transactions.proto":
-		processFn = processor.transactionsMessageHandler
-	case "solana.tokens.proto":
-		processFn = processor.tokensMessageHandler
-	default:
-		processFn = processor.jsonMessageHandler
-	}
-
-	processor.processFn = processFn
-	return processor, nil
-}
-
-func (processor *Processor) enqueue(message *kafka.Message) {
-	processor.queue <- message
-}
-
-func (processor *Processor) start(ctx context.Context) {
-	counter := 0
-	for i := 0; i < processor.config.Workers; i++ {
-		processor.wg.Go(func() error {
-			i := i
-			fmt.Println("Starting worker ", i)
-			for {
-				select {
-				case <-ctx.Done():
-					fmt.Println("Done, exiting processor loop worker ", i)
-					return nil
-				case message := <-processor.queue:
-					err := processor.processFn(ctx, message, i, processor.dedup)
-					if err != nil {
-						fmt.Println("Error processing message", err)
-					}
-					counter++
-					if counter%100 == 0 {
-						processor.stat.report()
-					}
-				}
-			}
-			return nil
-		})
-	}
-}
-
-func (processor *Processor) close() {
-	fmt.Println("Shutting down processor...")
-	processor.wg.Wait()
-	fmt.Println("Processor stopped")
-	processor.stat.report()
-}
-
-func (dedup *dedupCache) isDuplicated(slot uint64, index uint32) bool {
-	key := fmt.Sprintf("%d-%d", slot, index)
-	dedup.mu.Lock()
-	defer dedup.mu.Unlock()
-
-	if dedup.cache.Contains(key) {
-		return true
-	}
-
-	dedup.cache.Add(key, true)
-	return false
-}
-```
-
-### **`main.go` - Entry Point **
-
-**Purpose**: Loads configuration, initializes the consumer & processor, and starts them.
-
-**Key Steps**
-
-1.  **Read configuration** (`config.yml`)
-2.  **Initialize Kafka consumer** (`newConsumer()`)
-3.  **Initialize message processor** (`newProcessor()`)
-4.  **Start processing messages**
-5.  **Handle graceful shutdown (Ctrl+C)**
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"io"
-	"os"
-	"os/signal"
-	"syscall"
-
-	"gopkg.in/yaml.v3"
-
-	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-)
-
-type Config struct {
-	Kafka     kafka.ConfigMap
-	Consumer  ConsumerConfig
-	Processor ProcessorConfig
-}
-
-func main() {
-
-	file, err := os.Open("config.yml")
-	if err != nil {
-		panic(fmt.Errorf("error opening config file: %v, copy original file config_example.yml to config.yml and edit it", err))
-	}
-	defer file.Close()
-
-	bytes, err := io.ReadAll(file)
-	if err != nil {
-		panic(err)
-	}
-
-	var config Config
-	err = yaml.Unmarshal(bytes, &config)
-	if err != nil {
-		panic(err)
-	}
-
-	consumer, err := newConsumer(&config)
-	if err != nil {
-		panic(err)
-	}
-	defer consumer.close()
-
-	processor, err := newProcessor(&config)
-	if err != nil {
-		panic(err)
-	}
-	defer processor.close()
-
-	ctx, cancel := context.WithCancel(context.Background())
-	fmt.Println("press Ctrl-C to exit")
-	signalCh := make(chan os.Signal, 1)
-	signal.Notify(signalCh, os.Interrupt, syscall.SIGTERM, syscall.SIGINT)
-	go func() {
-		select {
-		case <-signalCh:
-			cancel()
-			fmt.Println("received Ctrl-C, finishing jobs...")
-			return
-		}
-	}()
-
-	processor.start(ctx)
-	consumer.waitMessages(ctx, processor)
-}
-```
-
-## **Running the Application**
-
-After setting up the config file, **start the consumer & processor**:
-
-```
-./stream_protobuf_example
-```
+- **[Kafka streaming concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)**
+- **[`stream_protobuf_example`](https://github.com/bitquery/stream_protobuf_example)** — optional advanced Go sample (not the same as `go-consumer-example`).

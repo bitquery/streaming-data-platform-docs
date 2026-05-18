@@ -230,12 +230,23 @@ const sidebars = {
             "streams/kafka-streaming-concepts",
             {
               type: "category",
-              label: "L1/L2 Chains - Protobuf Data Streams",
+              label: "Multi-chain and Chain-Specific Data Streams",
               items: [
-                "streams/protobuf/chains/Bitcoin-protobuf",
-                "streams/protobuf/chains/EVM-protobuf",
-                "streams/protobuf/chains/Solana-protobuf",
-                "streams/protobuf/chains/Tron-protobuf",
+                {
+                  type: "category",
+                  label: "Multi-chain Stream",
+                  items: ["streams/protobuf/kafka-trading-topics-protobuf"],
+                },
+                {
+                  type: "category",
+                  label: "Chain-specific Stream",
+                  items: [
+                    "streams/protobuf/chains/Bitcoin-protobuf",
+                    "streams/protobuf/chains/EVM-protobuf",
+                    "streams/protobuf/chains/Solana-protobuf",
+                    "streams/protobuf/chains/Tron-protobuf",
+                  ],
+                },
               ],
             },
             "streams/protobuf/kafka-protobuf-go",

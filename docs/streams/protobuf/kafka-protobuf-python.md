@@ -1,201 +1,126 @@
 ---
-sidebar_position: 2
+slug: kafka-protobuf-python
+sidebar_position: 3
+sidebar_label: Python Tutorial to use Solana Shreds from Kafka
+title: Python Tutorial to use Solana Shreds from Kafka
+description: Consume Bitquery Kafka Solana protobuf from Python with confluent_kafka and bitquery-pb2-kafka-package; run python-consumer-example from kafka-streams-examples-usecases.
 ---
 
 # Python Tutorial to use Solana Shreds from Kafka
 
-This tutorial explains how to consume Solana transaction messages in protobuf format from Kafka using Python, and print them efficiently with decoded `bytes` fields in **base58** format.
+This tutorial explains how to consume **Solana** transaction protobuf messages from **Bitquery Kafka** using **Python**, and print them with **`bytes`** fields shown in **base58** (pipe-friendly **stdout**; logs on **stderr**).
 
-You can read more about **Bitquery Protobuf Streams** here:  
-[Bitquery Kafka Streaming Concepts - Protobuf Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#protobuf-streams).
+Background: **[Kafka streaming concepts — Protobuf streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#protobuf-streams)**.
 
-The complete code is available [here](https://github.com/bitquery/streaming-protobuf-python/blob/main/consumer.py).
+**Runnable project:** **[`bitquery/kafka-streams-examples-usecases`](https://github.com/bitquery/kafka-streams-examples-usecases)** — folder **[`python-consumer-example/`](https://github.com/bitquery/kafka-streams-examples-usecases/tree/main/python-consumer-example)** ([`consumer.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/consumer.py), [`settings.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/settings.py), [`protobuf_print.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/protobuf_print.py)).
 
-This code is a sample to get it running. At scale, you have to implement queues and/or multiple consumers ( under same group) to read the messages with little effect to throughput.
+> **Scaling:** This sample is a single process. For high throughput, add **parallel partition consumption** and/or **worker pools** behind the poll loop, following Bitquery’s Kafka guidance in **[Kafka streaming concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)**.
 
-## **Prerequisites**
+## Prerequisites
 
-Before you begin, install the required Python package that includes the compiled `.pb2` files:
+Install dependencies from **`requirements.txt`** (pinned for compatibility with generated protobuf code):
 
-```sh
-pip install bitquery-pb2-kafka-package base58 confluent_kafka
-
+```bash
+pip install -r requirements.txt
 ```
 
-You’ll also need your **Kafka username/password** provided by the Bitquery team.
+Typical packages (see file for exact versions):
 
-## **1. Setup Kafka Consumer Configuration**
+- **`confluent-kafka`**
+- **`bitquery-pb2-kafka-package`** (Solana **`ParsedIdlBlockMessage`** and related generated code)
+- **`protobuf`**, **`base58`**, **`python-dotenv`**
 
-```python
-import uuid
-import base58
-from confluent_kafka import Consumer, KafkaError, KafkaException
-from google.protobuf.message import DecodeError
-from google.protobuf.descriptor import FieldDescriptor
-from solana import parsed_idl_block_message_pb2  # Bitquery's compiled protobuf schema
+You also need **Kafka username and password** from Bitquery for stream access.
 
-```
+> You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
 
-### Generate a unique Kafka consumer group ID:
+## 1. Setup Kafka consumer configuration
 
-```python
-group_id_suffix = uuid.uuid4().hex
+Configuration is **not** embedded as a large literal in the tutorial source: it is built in **`settings.load_settings()`** from environment variables (after **`load_dotenv()`**).
 
-```
+Conceptually, the consumer uses **non-TLS** Bitquery brokers by default:
 
-### Define your Kafka config:
+- **`bootstrap.servers`**: `rpk0.bitquery.io:9092,rpk1.bitquery.io:9092,rpk2.bitquery.io:9092` (overridable)
+- **`security.protocol`**: `SASL_PLAINTEXT`
+- **`sasl.mechanisms`**: `SCRAM-SHA-512`
+- **`enable.auto.commit`**: `False`
+- **`auto.offset.reset`**: `latest` or `earliest` (from **`KAFKA_AUTO_OFFSET_RESET`**)
 
-non-SSL:
+Full key list: **[`settings.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/settings.py)**.
 
-```python
-'bootstrap.servers': 'rpk0.bitquery.io:9092,rpk1.bitquery.io:9092,rpk2.bitquery.io:9092',
-'security.protocol': 'SASL_PLAINTEXT',
+### Environment variables
 
-```
+| Variable                  | Required | Notes                                    |
+| ------------------------- | -------- | ---------------------------------------- |
+| `KAFKA_USERNAME`          | Yes      |                                          |
+| `KAFKA_PASSWORD`          | Yes      |                                          |
+| `KAFKA_TOPIC`             | No       | Default `solana.transactions.proto`      |
+| `KAFKA_BOOTSTRAP_SERVERS` | No       | Default Bitquery `rpk*` **9092** cluster |
+| `KAFKA_GROUP_ID`          | No       | If unset: `{username}-group-{uuid}`      |
+| `KAFKA_AUTO_OFFSET_RESET` | No       | `latest` or `earliest`                   |
 
-Full example:
+> You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
 
-```python
-conf = {
-    'bootstrap.servers': 'rpk0.bitquery.io:9092,rpk1.bitquery.io:9092,rpk2.bitquery.io:9092',
-    'group.id': f'username-group-{group_id_suffix}',
-    'session.timeout.ms': 30000,
-    'security.protocol': 'SASL_PLAINTEXT',
-    'ssl.endpoint.identification.algorithm': 'none',
-    'sasl.mechanisms': 'SCRAM-SHA-512',
-    'sasl.username': 'your-username',
-    'sasl.password': 'your-password',
-    'auto.offset.reset': 'latest',
-}
+## 2. Define / use the protobuf print helper
 
-consumer = Consumer(conf)
-topic = 'solana.transactions.proto'
-consumer.subscribe([topic])
+The runnable project implements traversal in **`protobuf_print.py`** (**`print_protobuf_message`**) instead of pasting a long snippet into the docs. It walks protobuf fields recursively and uses **`base58`** when **`encoding='base58'`**.
 
-```
-
-## **2. Define a Protobuf Traversal Print Function**
-
-This function **recursively walks** through any protobuf message and prints all its fields, converting `bytes` to **base58** or **hex**.
-
-> **Solana vs EVM Encoding Tip**
+> **Solana vs EVM `bytes`**
 >
-> Protobuf `bytes` fields should be decoded differently depending on the blockchain:
+> - **Solana:** **`base58`** for typical addresses / signatures (this tutorial default).
+> - **EVM (Ethereum, BSC, Polygon, …):** prefer **`hex`** (often **`0x` + hex**).
 >
-> - **Solana**: Use `base58` (e.g. account addresses, signatures)
-> - **EVM (Ethereum, BSC, etc.)**: Use `hex` with a `0x` prefix
->
-> This tutorial uses `base58` decoding, appropriate for Solana.  
-> If you're consuming EVM Protobuf messages instead, update:
->
-> ```python
-> print_protobuf_message(msg, encoding='hex')
-> ```
->
-> and set `convert_bytes()` to return `'0x' + value.hex()`.
+> If you switch consumers to **EVM** protobuf types later, align **`print_protobuf_message(..., encoding=...)`** and any **`convert_bytes`** logic with your chain—not with Solana base58 defaults.
+
+_(Implementation detail: **`protobuf_print.py`** uses **`field.is_repeated()`** where available so it stays compatible with modern **`protobuf`** runtimes pinned in **`requirements.txt`**.)_
+
+## 3. Process messages from Kafka
+
+In **`consumer.py`**, **`process_payload`** parses the wire bytes:
 
 ```python
-def convert_bytes(value, encoding='base58'):
-    if encoding == 'base58':
-        return base58.b58encode(value).decode()
-    return value.hex()
-
-def print_protobuf_message(msg, indent=0, encoding='base58'):
-    prefix = ' ' * indent
-    for field in msg.DESCRIPTOR.fields:
-        value = getattr(msg, field.name)
-
-        if field.label == FieldDescriptor.LABEL_REPEATED: # The field is a repeated (i.e. array/list) field.
-            if not value:
-                continue
-            print(f"{prefix}{field.name} (repeated):")
-            for idx, item in enumerate(value):
-                if field.type == FieldDescriptor.TYPE_MESSAGE:
-                    print(f"{prefix}  [{idx}]:")
-                    print_protobuf_message(item, indent + 4, encoding)
-                elif field.type == FieldDescriptor.TYPE_BYTES:
-                    print(f"{prefix}  [{idx}]: {convert_bytes(item, encoding)}")
-                else:
-                    print(f"{prefix}  [{idx}]: {item}")
-
-        elif field.type == FieldDescriptor.TYPE_MESSAGE: # The field is a nested protobuf message.
-            if msg.HasField(field.name):
-                print(f"{prefix}{field.name}:")
-                print_protobuf_message(value, indent + 4, encoding)
-
-        elif field.type == FieldDescriptor.TYPE_BYTES:
-            print(f"{prefix}{field.name}: {convert_bytes(value, encoding)}")
-
-        elif field.containing_oneof:
-            if msg.WhichOneof(field.containing_oneof.name) == field.name:
-                print(f"{prefix}{field.name} (oneof): {value}")
-
-        else:
-            print(f"{prefix}{field.name}: {value}")
-
+block = parsed_idl_block_message_pb2.ParsedIdlBlockMessage()
+block.ParseFromString(raw)
+print_protobuf_message(block, indent=0, encoding="base58")
 ```
 
----
+### Adapting to another topic
 
-## **3. Process Messages From Kafka**
+You can adapt the script by changing **`KAFKA_TOPIC`** **and** the **imported message class** / **`ParseFromString`** target so the **generated type matches the topic schema**. Other plumbing (Kafka config, polling) can stay parallel to this sample.
 
-This function decodes the raw Protobuf message and passes it to our traversal printer.
+## 4. Poll and shut down cleanly
 
-```python
-def process_message(message):
-    try:
-        buffer = message.value()
+The main loop (**[`consumer.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/consumer.py)**) **`poll`s** until **SIGINT** / **SIGTERM**, logs on **stderr**, and closes the consumer in **`finally`**.
 
-        tx_block = parsed_idl_block_message_pb2.ParsedIdlBlockMessage()
-        tx_block.ParseFromString(buffer)
+## Clone and run (quick reference)
 
-        print("\nNew ParsedIdlBlockMessage received:\n")
-        print_protobuf_message(tx_block, encoding='base58')
+> You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
 
-    except DecodeError as err:
-        print(f"Protobuf decoding error: {err}")
-    except Exception as err:
-        print(f"Error processing message: {err}")
-
+```bash
+git clone https://github.com/bitquery/kafka-streams-examples-usecases.git
+cd kafka-streams-examples-usecases/python-consumer-example
+python3 -m venv .venv
+source .venv/bin/activate    # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env
+# edit KAFKA_USERNAME, KAFKA_PASSWORD
+python consumer.py
 ```
 
-### **Note**
+## TLS (optional)
 
-You can **easily adapt this script to any topic and Protobuf message type** — simply change the `topic` name and the corresponding **message class** in `process_message()`. The rest of the logic remains the same!
+Extend the **`conf`** dict from **`settings.py`** using Bitquery’s **[SASL_SSL](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#ssl-connection-sasl_ssl-)** snippet (brokers **9093**, PEM paths). Summary and **`curl`** for PEMs: **[examples repo `README.md`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/README.md)**.
 
-For example, if you're consuming a different topic with a different `.proto` schema:
+## Troubleshooting
 
-```python
-# Change the topic name
-topic = 'other_topic.proto'
+| Issue                                    | Action                                                                         |
+| ---------------------------------------- | ------------------------------------------------------------------------------ |
+| Missing env vars                         | **`cp .env.example .env`** and set credentials                                 |
+| **`KafkaException`** / auth              | Credentials, topic enabled for account, outbound **9092**                      |
+| **`DecodeError`**                        | Topic schema ≠ **`ParsedIdlBlockMessage`**                                     |
+| Protobuf reflection errors after upgrade | Keep **`requirements.txt`** pins aligned with **`bitquery-pb2-kafka-package`** |
 
-# Change the message class in process_message
-your_message = your_other_pb2.YourOtherMessage()
-your_message.ParseFromString(buffer)
+## See also
 
-```
-
-## **4. Poll and Print Messages in Real Time**
-
-This is the main loop for consuming Kafka messages and printing parsed protobuf content.
-
-```python
-try:
-    while True:
-        msg = consumer.poll(timeout=1.0)
-        if msg is None:
-            continue
-        if msg.error():
-            if msg.error().code() == KafkaError._PARTITION_EOF:
-                continue
-            else:
-                raise KafkaException(msg.error())
-        process_message(msg)
-
-except KeyboardInterrupt:
-    print("Stopping consumer...")
-
-finally:
-    consumer.close()
-
-```
+- **[bitquery-pb2-kafka-package (PyPI)](https://pypi.org/project/bitquery-pb2-kafka-package/)**
+- **[Kafka streaming concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)**

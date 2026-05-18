@@ -544,6 +544,10 @@ const config = {
             from: "/docs/streams/kafka-streams-js",
             to: "/docs/streams/protobuf/kafka-protobuf-js",
           },
+          {
+            from: "/docs/streams/protobuf/kafka-protobuf-javascript",
+            to: "/docs/streams/protobuf/kafka-protobuf-js",
+          },
 
           //crypto price api redirects
           {

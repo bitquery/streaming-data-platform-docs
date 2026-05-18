@@ -1,5 +1,5 @@
 {
-  "label": "L1/L2 Chains - Protobuf Data Streams",
+  "label": "Chain-specific Stream",
   "position": 1,
   "link": {
     "type": "generated-index",

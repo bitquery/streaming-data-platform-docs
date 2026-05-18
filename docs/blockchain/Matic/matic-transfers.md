@@ -133,6 +133,54 @@ subscription {
 
 ```
 
+# Check if an address ever interacted with Polymarket (CTF collateral transfer)
+
+Polymarket on Polygon routes outcome collateral through the **conditional tokens** USDC denomination at `0x4d97dCd97eC945f40cF65F87097ACe5EA0476045`. A lightweight check for **any historic interaction** is: has this wallet **received** at least one transfer of that token? (`limit: { count: 1 }` — empty result means no matching receipt found in the indexed data.)
+
+This is cheaper than scanning all `PredictionTrades` when you only need a yes/no signal. Narrow the pattern (e.g. also filter by counterparties) if you need stronger guarantees.
+
+**Try it:** [IDE — Polymarket interaction check](https://ide.bitquery.io/check-if-an-address-interacted-with-polymarket-ever)
+
+```graphql
+query ($address: String) {
+  EVM(dataset: combined, network: matic) {
+    Transfers(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Transfer: {
+          Currency: {
+            SmartContract: { is: "0x4d97DCd97eC945f40cF65F87097ACe5EA0476045" }
+          }
+          Receiver: { is: $address }
+        }
+      }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+      }
+      Transfer {
+        Sender
+        Receiver
+        Amount
+      }
+    }
+  }
+}
+```
+
+**Variables:**
+
+```json
+{
+  "address": "0x0c79f21ec570f5cc0d52d1bc640845faef430ad2"
+}
+```
+
 ## Deterministic Pagination for Backfilling Transfers
 
 When backfilling Polygon transfer data or building a historical index, use deterministic pagination to guarantee no records are missed or duplicated.
