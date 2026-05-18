@@ -2,29 +2,51 @@
 title: "EVM Balance API"
 ---
 
-BalanceUpdates API provides details related to balance. For example, it can provide current and historical balances. As the name suggests, this api can provide historical balance updates to build a portfolio-like application.
+# EVM Balance API
 
-It also has a lot of flexibility and supports ERC20 tokens and NFTs, including (ERC-1155). It can also provide the token holder's details. It allows you different [filters](docs/graphql/filters.mdx) to query data from different dimensions. You can find more examples [here](/docs/blockchain/Ethereum/balances/balance-api/)
+The **Balances** API returns current and historical token balances for addresses on EVM chains. Balances are non-zero by default (`Amount(selectWhere: { gt: "0" })`).
 
-Here's a query to get started.
+## Dataset: `archive` vs `combined`
+
+| Dataset | When to use |
+|---------|-------------|
+| **`combined`** | Latest balances. Queries **realtime and archive** databases and merges results. |
+| **`archive`** | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
+
+Full Ethereum examples: [Address Balance API](/docs/blockchain/Ethereum/balances/balance-api/).
+
+## Balance of an address
 
 ```graphql
-{
-  EVM (dataset: archive) {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "0xdfd5293d8e347dfe59e90efd55b2956a1343963d"}}}
+query {
+  EVM(network: eth, dataset: combined) {
+    Balances(
+      where: {
+        Balance: {
+          Address: {
+            is: "0x76147fd7891731e01f35cc18f87ae8e95bf06869"
+          }
+        }
+      }
     ) {
       Currency {
-        SmartContract
-        Name
         Symbol
-        Fungible
+        SmartContract
       }
-      sum(of: BalanceUpdate_Amount)
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        AmountInUSD
+        Address
+      }
     }
   }
 }
-
 ```
 
+## Examples on Ethereum
 
+- [Balance of an address](/docs/blockchain/Ethereum/balances/balance-api/#balance-of-an-address)
+- [Balance on a specific date](/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date)
+- [Balance for a specific token](/docs/blockchain/Ethereum/balances/balance-api/#balance-for-a-specific-token)
+- [Balance history by date](/docs/blockchain/Ethereum/balances/balance-api/#balance-history-by-date)
+- [Wallet balance for a specific token on a date](/docs/blockchain/Ethereum/balances/balance-api/#wallet-balance-for-a-specific-token-on-a-date)

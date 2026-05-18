@@ -5,32 +5,41 @@ title: "EVM Token Holders Cube"
 <head>
 <meta name="title" content="EVM Token Holders API"/>
 
-<meta name="description" content="Explore token holder information including holders of a token, balances, and holder activity. Discover balance, attributes, and more information effortlessly."/>
+<meta name="description" content="Explore token holder information including holders of a token, holder counts, top holders, and holder activity on Ethereum."/>
 
-<meta name="keywords" content="Token Balance, ERC20, USDT Balance, USDC Balance, ETH Balance, Ethereum, Ethereum Address"/>
+<meta name="keywords" content="Token Balance, ERC20, Token Holders, ETH Balance, Ethereum, Ethereum Address, Holders API"/>
 
 <meta name="robots" content="index, follow"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="language" content="English"/>
 
-<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 
 <meta property="og:title" content="EVM Token Holders API" />
 
-<meta property="og:description" content="Explore token holder information including holders of a token, balances, and holder activity. Discover balance, attributes, and more information effortlessly." />
+<meta property="og:description" content="Explore token holder information including holders of a token, holder counts, top holders, and holder activity on Ethereum." />
 
-<!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 
 <meta property="twitter:title" content="EVM Token Holders API" />
 
-<meta property="twitter:description" content="Explore token holder information including holders of a token, balances, and holder activity. Discover balance, attributes, and more information effortlessly." />
+<meta property="twitter:description" content="Explore token holder information including holders of a token, holder counts, top holders, and holder activity on Ethereum." />
 </head>
 
-## Token Holders
+# EVM Token Holders API
 
-Token holder of a token refers to any wallet which holds that particular token. On Ethereum, use the **Holders** API for top holders and holder counts. Use `dataset: combined` for latest rankings; use `dataset: archive` for historical snapshots and holders not recently active. See the [Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api/) for full examples.
+The **Holders** API returns token holder data for ERC-20 tokens: top holders, holder counts, and balance thresholds. Non-zero balances use `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`).
+
+## Dataset: `archive` vs `combined`
+
+| Dataset | When to use |
+|---------|-------------|
+| **`combined`** | Latest holder count, top holders, and balances. Queries **realtime and archive** databases and merges results. |
+| **`archive`** | Addresses not recently active (not in the realtime window). |
+
+Full Ethereum examples: [Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api).
+
+## Token holder count
 
 ```graphql
 query {
@@ -43,47 +52,35 @@ query {
           }
         }
       }
-      orderBy: {
-        descending: Balance_Amount
-      }
-      limit: {
-        count: 10
-      }
     ) {
-      Holder {
-        Address
-      }
-      Balance {
-        Amount(selectWhere: { gt: "0" })
-      }
+      uniq(of: Holder_Address)
     }
   }
 }
 ```
 
-### Filter Parameters
+## Filter parameters
 
-The Holders API allows you to narrow down results using these parameters:
+- `dataset: combined` — latest holder count, top holders, and activity
+- `dataset: archive` — addresses not recently active
+- `where.Currency.SmartContract` — token contract address (required)
+- `where.Balance.LastChangeTime` — filter by last balance change (datetime, e.g. `till: "2026-05-01T00:00:00Z"`). The Holders cube does not support `Block.Date`.
+- `where.Holder.Address` — filter to a specific wallet
+- `Balance.Amount(selectWhere: { gt: "..." })` — non-zero balances when listing amounts
+- `uniq(of: Holder_Address, if: { Balance: { Amount: { gt: "..." } } } })` — holder count above a threshold
+- `limit`, `orderBy` — pagination and sorting (e.g. `descending: Balance_Amount`)
 
-- `dataset: combined`: Latest data (realtime + archive merged).
-- `dataset: archive`: Historical snapshots and addresses not recently active.
-- `where.Currency.SmartContract`: Token contract address (required).
-- `where.Balance.LastChangeTime`: Filter by last balance change using datetime format (for example `till: "2026-05-01T00:00:00Z"`). The Holders cube does not support `Block.Date`.
-- `Balance.Amount(selectWhere: { gt: "..." })`: Filter by balance thresholds (not in `where`).
-- `limit`: Limit the number of holders returned.
-- `orderBy`: Order results (for example `descending: Balance_Amount`).
+## Return fields
 
-### Return Fields
+- `Holder.Address` — holder wallet address
+- `Balance.Amount`, `Balance.AmountInUSD` — token balance (use `selectWhere` for non-zero)
+- `Balance.UpdateCount`, `Balance.FirstChangeTime`, `Balance.LastChangeTime` — holder activity
 
-The Token Holder API provides access to the following fields:
+## Examples on Ethereum
 
-- `Balance`: Shows the token balance.
-- `BalanceUpdate`: Offers a range of aggregated data related to balance updates, including:
-  - `FirstDate`: The date of the holder’s first interaction with the token.
-  - `LastDate`: The date of the holder’s most recent interaction with the token.
-  - `InAmount`: The total amount of the token the holder received.
-  - `OutAmount`: The total amount of the token the holder sent.
-  - `InCount`: The number of transactions in which the holder received the token.
-  - `OutCount`: The number of transactions in which the holder sent out the token.
-- `Currency`: Provides currency-specific details, such as the smart contract and address.
-- `Holder`: Retrieves the holder’s address.
+- [Token holder count](/docs/blockchain/Ethereum/token-holders/token-holder-api#how-do-i-get-token-holder-count-for-an-erc-20-token)
+- [Historical top holders](/docs/blockchain/Ethereum/token-holders/token-holder-api#how-do-i-get-historical-top-holders-of-an-erc-20-token-by-date)
+- [Wallet token balance at a date](/docs/blockchain/Ethereum/token-holders/token-holder-api#how-do-i-get-the-balance-of-a-wallet-for-a-specific-token-point-in-time) (via [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#wallet-balance-for-a-specific-token-on-a-date))
+- [Top holders (current)](/docs/blockchain/Ethereum/token-holders/token-holder-api#top-holders-of-a-currency-current)
+- [Holder count above a threshold](/docs/blockchain/Ethereum/token-holders/token-holder-api#holder-count-with-balance-above-a-threshold)
+- [Holder activity](/docs/blockchain/Ethereum/token-holders/token-holder-api#token-holder-activity) — `UpdateCount`, `FirstChangeTime`, `LastChangeTime`
