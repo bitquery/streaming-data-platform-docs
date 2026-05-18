@@ -68,34 +68,3 @@ button.copy-md {
 button.copy-md:hover {
   background: var(--ifm-color-primary);
 }
-
-/* Supported chains matrix — sticky header while scrolling the doc */
-.supportedChainsStickyTable {
-  margin-bottom: 1rem;
-}
-
-.supportedChainsStickyTable table {
-  margin-bottom: 0;
-}
-
-.supportedChainsStickyTable thead th {
-  position: sticky;
-  /* Stay below fixed doc navbar + small gap */
-  top: calc(var(--ifm-navbar-height, 60px) + 4px);
-  z-index: 5;
-  background: var(--ifm-background-color);
-  box-shadow: inset 0 -1px 0 var(--ifm-table-border-color);
-  white-space: nowrap;
-}
-
-[data-theme="dark"] .supportedChainsStickyTable thead th {
-  background: var(--ifm-background-color);
-  box-shadow: inset 0 -1px 0 var(--ifm-table-border-color);
-}
-
-@media (max-width: 996px) {
-  .supportedChainsStickyTable thead th {
-    /* Mobile nav / Less room — keep flush under navbar */
-    top: calc(var(--ifm-navbar-height, 50px) + 2px);
-  }
-}
