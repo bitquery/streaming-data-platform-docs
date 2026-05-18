@@ -371,39 +371,6 @@ query {
 
 </details>
 
-### Amount In & Out for a Wallet
-
-[Run in IDE](https://ide.bitquery.io/Number-of-received-and-sent-tokens)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2026-05-01"
-      tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
-      where: {
-        Holder: {
-          Address: { is: "0x18f024244d0c41534c4fb77f958912f3aa403719" }
-        }
-      }
-    ) {
-      BalanceUpdate {
-        InAmount
-        OutAmount
-      }
-      Holder {
-        Address
-      }
-    }
-  }
-}
-```
-
-</details>
-
 ## Token Holder Statistics
 
 The **TokenHolders** API provides built-in distribution metrics. See [statistics docs](/docs/graphql/metrics/statistics/) for the full list.
@@ -447,41 +414,6 @@ The **TokenHolders** API provides built-in distribution metrics. See [statistics
       where: { Balance: { Amount: { ge: "0" } } }
     ) {
       median(of: Balance_Amount)
-    }
-  }
-}
-```
-
-</details>
-
-## Token Liquidation: Finding Complete Holdings Transfers
-
-[Run in IDE](https://ide.bitquery.io/addresses-that-transferred-out-all-of-their-holdings-for-this-particular-token-on-a-given-day)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      limit: { count: 100 }
-      tokenSmartContract: "0x54D2252757e1672EEaD234D27B1270728fF90581"
-      date: "2026-05-01"
-      where: {
-        BalanceUpdate: {
-          LastDate: { is: "2026-05-01" }
-          OutAmount: { gt: "0" }
-        }
-        Balance: { Amount: { eq: "0" } }
-      }
-    ) {
-      Holder {
-        Address
-      }
-      BalanceUpdate {
-        OutAmount
-      }
     }
   }
 }
