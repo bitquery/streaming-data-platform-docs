@@ -706,7 +706,7 @@ const sidebars = {
             id: "blockchain/Matic/index",
           },
           items: [
-            "blockchain/Matic/matic-balance-updates",
+            "blockchain/Matic/matic-balance-api",
             "blockchain/Matic/matic-dextrades",
             "blockchain/Matic/matic-token-marketcap-api",
             "blockchain/Matic/matic-slippage-api",

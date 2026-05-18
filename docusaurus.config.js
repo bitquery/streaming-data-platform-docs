@@ -803,8 +803,12 @@ const config = {
             from: "/docs/examples/Matic/",
           },
           {
-            to: "/docs/blockchain/Matic/matic-balance-updates/",
+            to: "/docs/blockchain/Matic/matic-balance-api/",
             from: "/docs/examples/Matic/matic-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Matic/matic-balance-api/",
+            from: "/docs/blockchain/Matic/matic-balance-updates/",
           },
           {
             to: "/docs/blockchain/Matic/matic-dextrades/",
