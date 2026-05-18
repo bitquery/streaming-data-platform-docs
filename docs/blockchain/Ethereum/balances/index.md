@@ -5,42 +5,54 @@ slug: /blockchain/Ethereum/balances/
 keywords:
   - Balance API
   - Ethereum Balance API
+  - Balances API
+  - Holders API
   - Token Holder API
   - Transaction Balance Tracker
-  - Validator Balance Tracker
-  - Miner Balance Tracker
-  - MEV Balance Tracker
-  - Balance Updates API
   - Ethereum Balance Data
 ---
 
-This section covers how to fetch balance-related data via **Bitquery APIs** and **Streams**.
+# Balances API Documentation
 
-To get started, [signup](https://account.bitquery.io/user/account) with Bitquery and get your [Access Token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these](https://docs.bitquery.io/docs/authorisation/how-to-generate/) steps. 
+This section covers how to fetch balance-related data on Ethereum via **Bitquery GraphQL APIs** and **Streams**.
 
-If you need help getting balance data, reach out to [support](https://t.me/Bloxy_info)
+To get started, [signup](https://account.bitquery.io/user/account) with Bitquery and get your [Access Token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these](https://docs.bitquery.io/docs/authorisation/how-to-generate/) steps.
 
+If you need help getting balance data, reach out to [support](https://t.me/Bloxy_info).
 
 ## Modes Supported
+
 - GraphQL API
 - GraphQL Stream
 - Kafka Stream
 
-## What is Balance API?
+## Primary APIs
 
-Bitquery Balance APIs help you fetch on-chain balance data for Ethereum that includes:
-- **Address Balances** - Current and historical balances for addresses
-- **Token Holder Data** - Information about token holders and their holdings
-- **Transaction Balance Tracking** - Track balance changes in transactions
-- **Validator Balance Tracking** - Monitor validator balances
-- **Miner Balance Tracking** - Track miner rewards and balances
-- **MEV Balance Tracking** - Monitor MEV-related balance changes
+| API | Documentation | Description |
+|-----|---------------|-------------|
+| **Balances** | [Address Balance API](/docs/blockchain/Ethereum/balances/balance-api/) | Current and historical token balances for wallet addresses (`EVM.Balances`). |
+| **Holders** | [Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api) | Top holders, holder counts, and holder activity (`EVM.Holders`). |
+| **TransactionBalances** | [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) | Per-transaction balance updates with supply, market cap, reason codes, and streams (`EVM.TransactionBalances`). |
+
+## What is the Balance API?
+
+On Ethereum, use the **Balances** cube for address-level balances and the **Holders** cube for token holder lists and counts. Both support `dataset: combined` (realtime + archive) and `dataset: archive` (historical and inactive addresses).
+
+See the [Address Balance API](/docs/blockchain/Ethereum/balances/balance-api/), [Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api), and [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) for queries and IDE examples.
+
+The [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) section also covers validator, miner, MEV, gas, NFT, and self-destruct balance tracking.
 
 ## When to Use Which API or Stream?
 
 | Use Case | API/Stream | Description |
 |----------|------------|-------------|
-| **Latest wallet balance** | BalanceUpdates cube with `sum` | When you need the latest wallet balance, use the BalanceUpdates cube with the `sum` function. See the [Address Balance History API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/) for details. |
-| **Token balance monitoring** | TransactionBalance API | When you need to monitor the latest token balance for a wallet along with supply and market cap data, use the TransactionBalance API. |
-| **Top token holders** | Token Holder API or sum of Balance Updates | When you need to find the top holders of a token, use the Token Holder API or sum of Balance Updates. |
-| **Use case specific transaction balance monitoring** | Transaction Balance Tracker APIs | When you need use case-specific transaction balance monitoring (e.g., validator, miner, or MEV tracking), use the Transaction Balance Tracker APIs. |
+| **Latest wallet balances** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-of-an-address) | All non-zero token balances for an address (`dataset: combined`). |
+| **Balance on a date** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date) | Point-in-time snapshot with `Block.Date.till` (`dataset: archive`). |
+| **Wallet balance for one token on a date** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#wallet-balance-for-a-specific-token-on-a-date) | `Block.Date`, `limit: 1`, `orderBy: Block_Date`. |
+| **Balance history over time** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-history-by-date) | Snapshots ordered by `Block_Date`. |
+| **Token holder count** | [Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api#how-do-i-get-token-holder-count-for-an-erc-20-token) | `uniq(of: Holder_Address)` with `dataset: combined`. |
+| **Top token holders** | [Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api#top-holders-of-a-currency-current) | `orderBy: Balance_Amount`, `limit`. |
+| **Holders above a threshold** | [Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api#holder-count-with-balance-above-a-threshold) | `uniq` with `if: { Balance: { Amount: { gt: "..." } } } }`. |
+| **Token balance with supply and market cap** | [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) | `EVM.TransactionBalances` — post balance, supply, USD value per transaction. |
+| **Real-time balance change streams** | [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) | Subscribe to balance updates with reason codes. |
+| **Validator / miner / MEV balance tracking** | [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) | Specialized trackers for rewards and MEV. |
