@@ -5,7 +5,7 @@ title: "EVM Token Holders Cube"
 <head>
 <meta name="title" content="EVM Token Holders API"/>
 
-<meta name="description" content="Explore token holder information include holders of a token, metrics like nakamoto coefficient, gini factor and theil index.Discover balance, attributes, and more information effortlessly."/>
+<meta name="description" content="Explore token holder information including holders of a token, balances, and holder activity. Discover balance, attributes, and more information effortlessly."/>
 
 <meta name="keywords" content="Token Balance, ERC20, USDT Balance, USDC Balance, ETH Balance, Ethereum, Ethereum Address"/>
 
@@ -18,40 +18,43 @@ title: "EVM Token Holders Cube"
 
 <meta property="og:title" content="EVM Token Holders API" />
 
-<meta property="og:description" content="Explore token holder information include holders of a token, metrics like nakamoto coefficient, gini factor and theil index. Discover balance, attributes, and more information effortlessly." />
+<meta property="og:description" content="Explore token holder information including holders of a token, balances, and holder activity. Discover balance, attributes, and more information effortlessly." />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 
 <meta property="twitter:title" content="EVM Token Holders API" />
 
-<meta property="twitter:description" content="Explore token holder information include holders of a token, metrics like nakamoto coefficient, gini factor and theil index. Discover balance, attributes, and more information effortlessly." />
+<meta property="twitter:description" content="Explore token holder information including holders of a token, balances, and holder activity. Discover balance, attributes, and more information effortlessly." />
 </head>
 
 ## Token Holders
 
-Token holder of a token refers to any wallet which holds that particular token. With Bitquery's TokenHolders API, you can get details related to the holders of any token.
+Token holder of a token refers to any wallet which holds that particular token. On Ethereum, use the **Holders** API for top holders and holder counts. Use `dataset: combined` for latest rankings; use `dataset: archive` for historical snapshots and holders not recently active. See the [Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api/) for full examples.
 
 ```graphql
-{
-  EVM(dataset: archive) {
-    TokenHolders(
-      tokenSmartContract: "0x514910771af9ca656af840dff83e8264ecf986ca"
-      date: "2023-10-04"
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
       where: {
-        Balance: { Amount: { gt: "0" } }
-        BalanceUpdate: { FirstDate: { is: "2023-10-04" } }
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
+        }
+      }
+      orderBy: {
+        descending: Balance_Amount
+      }
+      limit: {
+        count: 10
       }
     ) {
-      Balance {
-        Amount
-      }
       Holder {
         Address
       }
-      Currency {
-        Name
-        Symbol
+      Balance {
+        Amount(selectWhere: { gt: "0" })
       }
     }
   }
@@ -60,14 +63,15 @@ Token holder of a token refers to any wallet which holds that particular token. 
 
 ### Filter Parameters
 
-Token Holder API allows you to narrow down your results using these parameters:
+The Holders API allows you to narrow down results using these parameters:
 
-- `date`: Choose the date after which you want the token holders' data. **It's required for all token holder queries**.
-- `tokenSmartContract`: Specify the token's address. **It's required for all token holder queries**.
-- `limit`: Limit the results to a specified number of token holders.
-- `limitBy`: Limit results based on a specific field's value.
-- `orderBy`: Order results according to a field's value.
-- `where`: Filter results based on specific criteria related to the value of the returned field.
+- `dataset: combined`: Latest data (realtime + archive merged).
+- `dataset: archive`: Historical snapshots and addresses not recently active.
+- `where.Currency.SmartContract`: Token contract address (required).
+- `where.Balance.LastChangeTime`: Filter by last balance change using datetime format (for example `till: "2026-05-01T00:00:00Z"`). The Holders cube does not support `Block.Date`.
+- `Balance.Amount(selectWhere: { gt: "..." })`: Filter by balance thresholds (not in `where`).
+- `limit`: Limit the number of holders returned.
+- `orderBy`: Order results (for example `descending: Balance_Amount`).
 
 ### Return Fields
 
@@ -83,95 +87,3 @@ The Token Holder API provides access to the following fields:
   - `OutCount`: The number of transactions in which the holder sent out the token.
 - `Currency`: Provides currency-specific details, such as the smart contract and address.
 - `Holder`: Retrieves the holder’s address.
-
-## Indexes and Factors
-
-Indexes and factors are calculations that can be used to analyze data in the TokenHolders cube. They can be used to calculate a variety of metrics, such as the Gini coefficient, Nakamoto coefficient, and Thiel index.
-
-### Gini Factor
-
-The Gini coefficient is a measure of inequality in a distribution. It is a number between 0 and 1, with 0 representing perfect equality and 1 representing perfect inequality.
-This query will calculate the Gini coefficient for the distribution of balances among all holders of the specified token.You can find the query [here](https://ide.bitquery.io/Thiel-index-for-USDT)
-
-```
-query($currency: String! $date: String!) {
-  EVM(dataset: archive) {
-    TokenHolders(
-      tokenSmartContract: $currency
-      date: $date
-      where: {
-        Balance: {
-          Amount: {
-            gt: "0"
-          }
-        }
-      }
-    ) {
-    	gini(of: Balance_Amount)
-    }
-	}
-}
-{
-  "currency": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-  "date": "2022-10-01"
-}
-```
-
-### Nakamoto Index
-
-The Nakamoto coefficient is a measure of the centralization of a blockchain network. It is calculated by counting the number of holders that together control more than 51% of the total supply of a token an so the default value is 0.51.
-
-It can be used to compare the decentralization of different blockchain networks. It can also be used to track the changes in decentralization of a blockchain network over time.
-The below query gives number of holders having 99% of the supply of USDT.You can find the query [here](https://ide.bitquery.io/USDT-holders-having-99-of-all-supply-of-USDT-together)
-
-```
-query($currency: String! $date: String!) {
-  EVM(dataset: archive) {
-    TokenHolders(
-      tokenSmartContract: $currency
-      date: $date
-      where: {
-        Balance: {
-          Amount: {
-            gt: "0"
-          }
-        }
-      }
-    ) {
-    	nakamoto(of: Balance_Amount ratio: 0.99)
-    }
-	}
-}
-{
-  "currency": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-  "date": "2022-10-01"
-}
-```
-
-### Theil Index
-
-The Thiel index is another measure of inequality in a distribution. It is calculated by taking the square of the sum of the market shares of all participants in a market. You can find the query [here](https://ide.bitquery.io/Thiel-index-for-USDT)
-
-```
-query($currency: String! $date: String!) {
-  EVM(dataset: archive) {
-    TokenHolders(
-      tokenSmartContract: $currency
-      date: $date
-      where: {
-        Balance: {
-          Amount: {
-            gt: "0"
-          }
-        }
-      }
-    ) {
-    	theil_index(of: Balance_Amount)
-    }
-	}
-}
-{
-  "currency": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-  "date": "2022-10-01"
-}
-```
