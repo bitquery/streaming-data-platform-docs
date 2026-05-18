@@ -25,14 +25,14 @@ how to customize it to get data we need.
 
 ### Get balance for all currencies
 
-You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_2#) query to get the current balance of a particular address. 
+[Run in IDE](https://ide.bitquery.io/ethereum-balances-address)
 
-``` graphql
-{
-  EVM(dataset: combined){
-    BalanceUpdates(
+```graphql
+query {
+  EVM(network: eth, dataset: combined) {
+    Balances(
       where: {
-        BalanceUpdate: {
+        Balance: {
           Address: {
             is: "0x21a31ee1afc51d94c2efccaa2092ad1028285549"
           }
@@ -44,27 +44,31 @@ You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_2#) qu
         Symbol
         SmartContract
       }
-      sum(of: BalanceUpdate_AmountInUSD, selectWhere: {gt: "0"})
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        AmountInUSD
+      }
     }
   }
 }
-
 ```
 
 ### Get balance for one currency
 
-[This](https://ide.bitquery.io/eth_getBalance-for-one-address-for-eth_1) query returns the balance of the mentioned address for a selected currency. The currency in question is Ethereum with `SmartContract` as `0x`.
+[Run in IDE](https://ide.bitquery.io/ethereum-balances-native-eth)
 
-``` graphql
-{
-  EVM(dataset: combined){
-    BalanceUpdates(
+Returns the balance for native ETH (`SmartContract: "0x"`).
+
+```graphql
+query {
+  EVM(network: eth, dataset: combined) {
+    Balances(
       where: {
-        BalanceUpdate: {
+        Balance: {
           Address: {
             is: "0x21a31ee1afc51d94c2efccaa2092ad1028285549"
           }
-        },
+        }
         Currency: {
           SmartContract: {
             is: "0x"
@@ -77,7 +81,10 @@ You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_2#) qu
         Symbol
         SmartContract
       }
-      sum(of: BalanceUpdate_AmountInUSD, selectWhere: {gt: "0"})
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        AmountInUSD
+      }
     }
   }
 }
@@ -85,14 +92,14 @@ You can run [this](https://ide.bitquery.io/eth_getBalance-for-one-address_2#) qu
 
 ## eth_getBalance for Multiple Addresses
 
-To get the balance of multiple addresses, [this](https://ide.bitquery.io/eth_getBalance-for-multiple-address_1) query can be used. 
+Query each address in the `in` list. [Run in IDE](https://ide.bitquery.io/ethereum-balances-multiple-addresses)
 
-``` graphql
-{
-  EVM(dataset: combined) {
-    BalanceUpdates(
+```graphql
+query {
+  EVM(network: eth, dataset: combined) {
+    Balances(
       where: {
-        BalanceUpdate: {
+        Balance: {
           Address: {
             in: [
               "0xD51a44d3FaE010294C616388b506AcdA1bfAAE46",
@@ -108,12 +115,12 @@ To get the balance of multiple addresses, [this](https://ide.bitquery.io/eth_get
         Symbol
         SmartContract
       }
-      sum(of: BalanceUpdate_AmountInUSD, selectWhere: {gt: "0"})
-      BalanceUpdate {
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        AmountInUSD
         Address
       }
     }
   }
 }
-
 ```

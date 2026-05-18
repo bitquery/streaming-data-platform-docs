@@ -28,9 +28,7 @@ title: "EVM Token Holders API"
 
 # EVM Token Holders API
 
-The **Holders** API returns token holder data for ERC-20 tokens: top holders, holder counts, and balance thresholds. Non-zero balances use `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`).
-
-## Dataset: `archive` vs `combined`
+The **Holders** API returns token holder data for ERC-20 tokens: top holders, holder counts, and balance thresholds. Non-zero balances use `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
 
 | Dataset | When to use |
 |---------|-------------|
@@ -59,7 +57,7 @@ query {
 }
 ```
 
-## Filter parameters
+### Filter parameters
 
 - `dataset: combined` — latest holder count, top holders, and activity
 - `dataset: archive` — addresses not recently active
@@ -70,13 +68,13 @@ query {
 - `uniq(of: Holder_Address, if: { Balance: { Amount: { gt: "..." } } } })` — holder count above a threshold
 - `limit`, `orderBy` — pagination and sorting (e.g. `descending: Balance_Amount`)
 
-## Return fields
+### Return fields
 
 - `Holder.Address` — holder wallet address
 - `Balance.Amount`, `Balance.AmountInUSD` — token balance (use `selectWhere` for non-zero)
 - `Balance.UpdateCount`, `Balance.FirstChangeTime`, `Balance.LastChangeTime` — holder activity
 
-## Examples on Ethereum
+### Examples on Ethereum
 
 - [Token holder count](/docs/blockchain/Ethereum/token-holders/token-holder-api#how-do-i-get-token-holder-count-for-an-erc-20-token)
 - [Historical top holders](/docs/blockchain/Ethereum/token-holders/token-holder-api#how-do-i-get-historical-top-holders-of-an-erc-20-token-by-date)

@@ -46,7 +46,7 @@ The [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction
 
 | Use Case | API/Stream | Description |
 |----------|------------|-------------|
-| **Latest wallet balances** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-of-an-address) | All non-zero token balances for an address (`dataset: combined`). |
+| **Latest wallet balances** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-of-an-address) | Token balances for an address (`dataset: combined`; use `Amount(selectWhere: { gt: "0" })` for non-zero). |
 | **Balance on a date** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date) | Point-in-time snapshot with `Block.Date.till` (`dataset: archive`). |
 | **Wallet balance for one token on a date** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#wallet-balance-for-a-specific-token-on-a-date) | `Block.Date`, `limit: 1`, `orderBy: Block_Date`. |
 | **Balance history over time** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-history-by-date) | Snapshots ordered by `Block_Date`. |

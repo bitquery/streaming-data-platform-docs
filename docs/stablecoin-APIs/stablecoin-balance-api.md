@@ -32,26 +32,31 @@ query MyQuery {
 
 ### Ethereum
 
-[Run Query](https://ide.bitquery.io/balance-of-a-wallet_1)
+[Run Query](https://ide.bitquery.io/ethereum-stablecoin-balances-address)
 
-```
-query MyQuery {
-  EVM(dataset: combined, network: eth) {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6"}}}
-      orderBy: {descendingByField: "balance"}
+```graphql
+query {
+  EVM(network: eth, dataset: combined) {
+    Balances(
+      where: {
+        Balance: {
+          Address: {
+            is: "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6"
+          }
+        }
+      }
     ) {
       Currency {
-        Name
+        Symbol
+        SmartContract
       }
-      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
-      BalanceUpdate {
-        Address
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        AmountInUSD
       }
     }
   }
 }
-
 ```
 
 ### Tron

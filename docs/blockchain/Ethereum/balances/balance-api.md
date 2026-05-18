@@ -4,9 +4,7 @@ sidebar_position: 2
 
 # Address Balance API
 
-The **Balances** API returns current and historical token balances for an address on Ethereum. Balances are non-zero by default (`Amount(selectWhere: { gt: "0" })`).
-
-### Dataset: `archive` vs `combined`
+The **Balances** API returns current and historical token balances for an address on Ethereum. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
 
 | Dataset | When to use |
 |---------|-------------|
@@ -15,7 +13,7 @@ The **Balances** API returns current and historical token balances for an addres
 
 ## Balance of an address
 
-Returns all token balances for a wallet address.
+Returns token balances for a wallet address. Use `Amount(selectWhere: { gt: "0" })` to exclude zero balances.
 
 [Run in IDE](https://ide.bitquery.io/ethereum-balances-address)
 
@@ -54,7 +52,7 @@ query {
 **Returned fields**
 
 - `Currency.Symbol`, `Currency.SmartContract`: Token metadata.
-- `Balance.Amount`, `Balance.AmountInUSD`: Token balance and USD value (non-zero only).
+- `Balance.Amount`, `Balance.AmountInUSD`: Token balance and USD value (use `selectWhere` to filter non-zero amounts).
 
 :::warning Important: Rebasing Token Limitations
 **Rebasing tokens are not supported for accurate balance calculations.**

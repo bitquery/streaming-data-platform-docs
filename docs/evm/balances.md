@@ -4,9 +4,7 @@ title: "EVM Balance API"
 
 # EVM Balance API
 
-The **Balances** API returns current and historical token balances for addresses on EVM chains. Balances are non-zero by default (`Amount(selectWhere: { gt: "0" })`).
-
-## Dataset: `archive` vs `combined`
+The **Balances** API returns current and historical token balances for addresses on EVM chains. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
 
 | Dataset | When to use |
 |---------|-------------|
@@ -43,7 +41,7 @@ query {
 }
 ```
 
-## Examples on Ethereum
+### Examples on Ethereum
 
 - [Balance of an address](/docs/blockchain/Ethereum/balances/balance-api/#balance-of-an-address)
 - [Balance on a specific date](/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date)

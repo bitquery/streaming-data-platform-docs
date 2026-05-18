@@ -4,9 +4,7 @@ sidebar_position: 1
 
 # Token Holders API
 
-The **Holders** API returns token holder data for ERC-20 tokens on Ethereum: top holders, holder counts, and balance thresholds. Non-zero balances use `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`).
-
-### Dataset: `archive` vs `combined`
+The **Holders** API returns token holder data for ERC-20 tokens on Ethereum: top holders, holder counts, and balance thresholds. Non-zero balances use `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
 
 | Dataset | When to use |
 |---------|-------------|
