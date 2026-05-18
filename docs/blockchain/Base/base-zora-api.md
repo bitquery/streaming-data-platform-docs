@@ -185,6 +185,142 @@ This query fetches the latest DEX trades on the Zora protocol (`zora_v4`) on Bas
 }
 ```
 
+## All Zora trades for a wallet up to a block height
+
+Return **`zora_v4`** trades on Base where the wallet is **Buyer** or **Seller** on the trade, with **`Block.Number` ≤** your chosen ceiling. Uses **`dataset: combined`** for history plus **`limit: 1000`** and **`orderBy: { ascending: Block_Time }`** for chronological pages. The saved IDE query also matches transactions with **`Transaction.From`** equal to `0x152a04d9fde2396c01c05f065a00bd5f6edf5c88d` in the same `any` group—adjust or remove that branch if you only need wallet-based matches.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/all-zora-trades-for-a-specific-wallet-up-till-a-block-height)
+
+```graphql
+query ($address: String) {
+  EVM(dataset: combined, network: base) {
+    DEXTrades(
+      limit: { count: 1000 }
+      orderBy: { ascending: Block_Time }
+      where: {
+        Block: { Number: { le: "36453721" } },
+        any: [
+          { Trade: { Buy: { Buyer: { is: $address } } } },
+          { Trade: { Buy: { Seller: { is: $address } } } },
+          {
+            Transaction: {
+              From: { is: "0x152a04d9fde2396c01c05f065a00bd5f6edf5c88d" }
+            }
+          }
+        ],
+        Trade: { Dex: { ProtocolName: { is: "zora_v4" } } }
+      }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Fee {
+        Burnt
+        BurntInUSD
+        EffectiveGasPrice
+        EffectiveGasPriceInUSD
+        GasRefund
+        MinerReward
+        MinerRewardInUSD
+        PriorityFeePerGas
+        PriorityFeePerGasInUSD
+        Savings
+        SavingsInUSD
+        SenderFee
+        SenderFeeInUSD
+      }
+      Receipt {
+        ContractAddress
+        Status
+      }
+      TransactionStatus {
+        Success
+      }
+      Log {
+        Signature {
+          Name
+        }
+        SmartContract
+      }
+      Call {
+        From
+        InternalCalls
+        Signature {
+          Name
+          Signature
+        }
+        To
+        Value
+      }
+      Transaction {
+        Gas
+        Cost
+        CostInUSD
+        GasFeeCap
+        GasFeeCapInUSD
+        GasPrice
+        GasPriceInUSD
+        GasTipCap
+        GasTipCapInUSD
+        Index
+        Nonce
+        Protected
+        Time
+        Type
+        Value
+        ValueInUSD
+        Hash
+        From
+        To
+      }
+      Trade {
+        Buy {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Currency {
+            Decimals
+            Name
+            Symbol
+            SmartContract
+          }
+          Price
+          PriceInUSD
+        }
+        Sell {
+          Amount
+          AmountInUSD
+          Buyer
+          Seller
+          Currency {
+            Name
+            Symbol
+            SmartContract
+          }
+          Price
+          PriceInUSD
+        }
+        Dex {
+          ProtocolName
+          SmartContract
+          OwnerAddress
+        }
+      }
+    }
+  }
+}
+```
+
+**Variables:**
+
+```json
+{
+  "address": "0xa9ce7310c6d68b0e08df6de6fc79fc572f882bb1"
+}
+```
+
 ## Latest Trades of a Token on Zora
 
 [Run Query](https://ide.bitquery.io/Latest-Trades-of-a-Token-on-Zora-Base)
