@@ -4,28 +4,37 @@ sidebar_position: 1
 
 # Token Holders API
 
-The Token Holders API allows you to access information regarding token holders for both fungible (ERC20) and non-fungible (ERC721) tokens. This API provides access to current token holder data for a specific token, as well as historical information about token holders.
+The **Holders** API returns token holder data for ERC-20 tokens on Ethereum: top holders, holder counts, and balance thresholds. Non-zero balances use `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`).
 
-Let's explore some examples and discover how to use the Token Holders API.
+### Dataset: `archive` vs `combined`
 
-## How do I get token holder count for an ERC-20 token on a specific date?
+| Dataset | When to use |
+|---------|-------------|
+| **`combined`** | Latest holder count, top holders, and balances. Queries **realtime and archive** databases and merges results. |
+| **`archive`** | Addresses not recently active (not in the realtime window). |
 
-Use Bitquery `EVM.TokenHolders` with `dataset: archive`, the token contract, a snapshot `date`, and `uniq(of: Holder_Address)` while requiring positive balances. That returns how many distinct wallets held the token on that day—repeat for other dates to build a time series (see [holder count history](#how-do-i-get-token-holder-count-history-over-time) below).
+Let's explore examples using the Holders API on Ethereum.
 
-With the Token Holders API, you can retrieve the total number of token holders by using the `uniq` field on `Holder_Address`. In this example, we query the USDT holders on Ethereum as of October 21, 2023:
+## How do I get token holder count for an ERC-20 token?
 
-You can run this query in our IDE: [USDT token holder count](https://ide.bitquery.io/usdt-token-holder-count-using-token-holders-api)
+Count distinct wallets using `uniq(of: Holder_Address)` with `dataset: combined`.
+
+[Run in IDE](https://ide.bitquery.io/ethereum-holders-count-combined)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2023-10-21"
-      tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-      where: { Balance: { Amount: { gt: "0" } } }
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
+      where: {
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
+        }
+      }
     ) {
       uniq(of: Holder_Address)
     }
@@ -37,29 +46,42 @@ You can run this query in our IDE: [USDT token holder count](https://ide.bitquer
 
 ## How do I get historical top holders of an ERC-20 token by date?
 
-Query `EVM.TokenHolders` with `tokenSmartContract`, a historical `date`, `dataset: archive`, and `orderBy: { descending: Balance_Amount }`. Bitquery returns holder addresses and balances for that snapshot. Increase `limit.count` for more rows and filter `Balance.Amount` if you want to skip dust wallets.
+The **Holders** cube does not support `Block.Date`. Filter by `Balance.LastChangeTime` using datetime format (for example `"2026-05-01T00:00:00Z"`). For address balances on a calendar date, use the [Balances API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date) with `Block.Date`.
 
-Get all token holders for a given token on a specific date. Adjust `limit` as needed:
-
-Run in IDE: [Token holder API](https://ide.bitquery.io/token-holder-api_1)
+[Run in IDE](https://ide.bitquery.io/ethereum-holders-top-by-date)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2024-03-01"
-      tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
-      limit: { count: 100 }
-      orderBy: { descending: Balance_Amount }
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
+      where: {
+        Balance: {
+          LastChangeTime: {
+            till: "2026-05-01T00:00:00Z"
+          }
+        }
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
+        }
+      }
+      orderBy: {
+        descending: Balance_Amount
+      }
+      limit: {
+        count: 100
+      }
     ) {
       Holder {
         Address
       }
       Balance {
-        Amount
+        Amount(selectWhere: { gt: "0" })
+        LastChangeTime
       }
     }
   }
@@ -70,9 +92,9 @@ Run in IDE: [Token holder API](https://ide.bitquery.io/token-holder-api_1)
 
 ## How do I get the list of all token holders for a contract on BSC?
 
-Use the same `TokenHolders` API as on Ethereum: set `network: bsc`, `dataset: archive` (or `combined` per your plan), the BEP-20 `tokenSmartContract`, and an optional `date` for historical snapshots. Paginate with `limit` because large tokens have many holders. For balance-update style samples on BSC, see also [BSC balance updates](https://docs.bitquery.io/docs/blockchain/BSC/bsc-balance-updates/).
+Use the same `TokenHolders` API on BSC: set `network: bsc`, use `dataset: archive` for historical snapshots and holders not recently active, or `dataset: combined` for the latest state (realtime + archive). Pass the BEP-20 `tokenSmartContract` and an optional `date`. Paginate with `limit` because large tokens have many holders. For balance samples on BSC, see [BSC balance updates](https://docs.bitquery.io/docs/blockchain/BSC/bsc-balance-updates/).
 
-Run in IDE: [Top holders on BSC](https://ide.bitquery.io/Top-10-holders-of-a-token-on-BSC)
+[Run in IDE](https://ide.bitquery.io/Top-10-holders-of-a-token-on-BSC)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -81,7 +103,7 @@ Run in IDE: [Top holders on BSC](https://ide.bitquery.io/Top-10-holders-of-a-tok
 {
   EVM(dataset: archive, network: bsc) {
     TokenHolders(
-      date: "2024-03-01"
+      date: "2026-05-01"
       tokenSmartContract: "0x55d398326f99059fF775485246999027B3197955"
       limit: { count: 100 }
       orderBy: { descending: Balance_Amount }
@@ -102,32 +124,49 @@ Run in IDE: [Top holders on BSC](https://ide.bitquery.io/Top-10-holders-of-a-tok
 
 ## How do I get the balance of a wallet for a specific token (point in time)?
 
-Filter `TokenHolders` by `Holder.Address` and `tokenSmartContract` plus a `date` for a snapshot balance. For the latest balance from balance-update history (all tokens for a wallet, or one token via `Currency.SmartContract`), use the [Address Balance / Balance Updates API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/).
+Use the [Balances API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/) with `Balance.Address`, `Currency.SmartContract`, and `Block.Date.till`. Use `dataset: archive`, `orderBy: { descending: Block_Date }`, and `limit: { count: 1 }` to get the balance as of that date.
 
-Find how many tokens a specific address held on a given date:
-
-Run in IDE: [Balance of token holder](https://ide.bitquery.io/balance-of-token-holder-for-a-token-on-particular-date-using-token-holders-api)
+[Run in IDE](https://ide.bitquery.io/ethereum-wallet-balance-token-at-date)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2023-10-01"
-      tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
+query {
+  EVM(network: eth, dataset: archive) {
+    Balances(
       where: {
-        Holder: {
-          Address: { is: "0x50d9090d6ce6307b7ec8904cd3dca17b4da56353" }
+        Block: {
+          Date: {
+            till: "2026-05-05"
+          }
+        }
+        Balance: {
+          Address: {
+            is: "0xA46320Aa0b4877b9a46a07B4F3DB93719bd422dE"
+          }
+        }
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
         }
       }
+      limit: {
+        count: 1
+      }
+      orderBy: {
+        descending: Block_Date
+      }
     ) {
-      Holder {
-        Address
+      Currency {
+        Symbol
+        SmartContract
       }
       Balance {
-        Amount
+        Amount(selectWhere: { gt: "0" })
+        AmountInUSD
+        Address
       }
     }
   }
@@ -138,40 +177,154 @@ Run in IDE: [Balance of token holder](https://ide.bitquery.io/balance-of-token-h
 
 ## How do I get token holder count history over time?
 
-Bitquery does not return a pre-aggregated daily holder-count series in one call. Run `TokenHolders` once per calendar day (or per week) with the same `tokenSmartContract`, varying `date`, and select `uniq(of: Holder_Address)` with `Balance.Amount > 0`. Aggregate the results in your app, or schedule the query. Use `dataset: archive` for older dates.
+Run the holder count query with `Balance.LastChangeTime.till` in datetime format, varying the timestamp per period, then aggregate in your application or scheduler.
 
-## How do I track whale wallets and their token holdings on EVM?
-
-Treat whales as the largest holders: query `TokenHolders` with `orderBy: { descending: Balance_Amount }` and take the top N rows, or add `where: { Balance: { Amount: { gt: "..." } } }` as a minimum balance threshold. Combine with [ERC-20 transfers](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) or DEX trades if you need recent flows, not just snapshot balances.
-
-## Token Holder Activity
-
-### Count of Transactions for a Token from a Token Holder
-
-See how many on-chain transactions a given address made involving a specific token:
-
-Run in IDE: [Number of token transactions for a wallet](https://ide.bitquery.io/Number-of-token-transaction-for-a-wallet)
+[Run in IDE](https://ide.bitquery.io/ethereum-holders-count-by-date)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2023-10-22"
-      tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
       where: {
-        Holder: {
-          Address: { is: "0x18f024244d0c41534c4fb77f958912f3aa403719" }
+        Balance: {
+          LastChangeTime: {
+            till: "2026-05-01T00:00:00Z"
+          }
+        }
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
         }
       }
     ) {
-      BalanceUpdate {
-        transactions: Count
+      uniq(of: Holder_Address)
+    }
+  }
+}
+```
+
+</details>
+
+## How do I track whale wallets and their token holdings on EVM?
+
+Query top holders with `orderBy: { descending: Balance_Amount }` and `limit`, or count holders above a threshold with `uniq(of: Holder_Address, if: { Balance: { Amount: { gt: "..." } } })`. Combine with [ERC-20 transfers](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) for recent flows.
+
+## Top holders of a currency (current)
+
+Use `dataset: combined` for the latest top holders (realtime + archive).
+
+[Run in IDE](https://ide.bitquery.io/ethereum-holders-top)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
+      where: {
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
+        }
       }
+      orderBy: {
+        descending: Balance_Amount
+      }
+      limit: {
+        count: 10
+      }
+    ) {
       Holder {
         Address
+      }
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        FirstChangeTime
+        LastChangeTime
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Holder count with balance above a threshold
+
+Use `uniq(of: Holder_Address, if: { Balance: { Amount: { gt: "..." } } })` with your minimum balance value.
+
+[Run in IDE](https://ide.bitquery.io/count-ethereum-holders-count-above-threshold)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
+      where: {
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
+        }
+      }
+    ) {
+      uniq(
+        of: Holder_Address
+        if: {
+          Balance: {
+            Amount: {
+              gt: "10000000"
+            }
+          }
+        }
+      )
+    }
+  }
+}
+```
+
+</details>
+
+## Token Holder Activity
+
+The sections below use the **TokenHolders** API for holder-level activity metrics (`BalanceUpdate` aggregates). For current balances and top holders, prefer the **Holders** API above.
+
+### Count of Transactions for a Token from a Token Holder
+
+Use the **Holders** API with `Holder.Address` and `Balance.UpdateCount`.
+
+[Run in IDE](https://ide.bitquery.io/Number-of-token-transactions-for-a-wallet)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
+      where: {
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
+        }
+        Holder: {
+          Address: {
+            is: "0xB953E202C5E51C7C010E80402a63C02f37F14059"
+          }
+        }
+      }
+    ) {
+      Balance {
+        UpdateCount
       }
     }
   }
@@ -182,31 +335,34 @@ Run in IDE: [Number of token transactions for a wallet](https://ide.bitquery.io/
 
 ### First & Last Date of Transfer for a Token Holder
 
-Retrieve the first and most recent transfer dates for a holder:
+Use the **Holders** API with `Balance.FirstChangeTime` and `Balance.LastChangeTime` (datetime format).
 
-Run in IDE: [First & last date of transfer](https://ide.bitquery.io/first-and-last-date-of-transfer-for-token-of-a-token-holder)
+[Run in IDE](https://ide.bitquery.io/Frst-and-last-date-time-for-token-holder)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2023-10-22"
-      tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
       where: {
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
+        }
         Holder: {
-          Address: { is: "0x18f024244d0c41534c4fb77f958912f3aa403719" }
+          Address: {
+            is: "0xB953E202C5E51C7C010E80402a63C02f37F14059"
+          }
         }
       }
     ) {
-      BalanceUpdate {
-        FirstDate
-        LastDate
-      }
-      Holder {
-        Address
+      Balance {
+        UpdateCount
+        LastChangeTime
+        FirstChangeTime
       }
     }
   }
@@ -217,9 +373,7 @@ Run in IDE: [First & last date of transfer](https://ide.bitquery.io/first-and-la
 
 ### Amount In & Out for a Wallet
 
-Check total tokens received and sent by a holder:
-
-Run in IDE: [Received and sent tokens](https://ide.bitquery.io/Number-of-received-and-sent-tokens)
+[Run in IDE](https://ide.bitquery.io/Number-of-received-and-sent-tokens)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -228,7 +382,7 @@ Run in IDE: [Received and sent tokens](https://ide.bitquery.io/Number-of-receive
 {
   EVM(dataset: archive, network: eth) {
     TokenHolders(
-      date: "2023-10-22"
+      date: "2026-05-01"
       tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
       where: {
         Holder: {
@@ -250,258 +404,13 @@ Run in IDE: [Received and sent tokens](https://ide.bitquery.io/Number-of-receive
 
 </details>
 
-## Top Token Holders for a Token
-
-Find the top 10 holders by balance:
-
-Run in IDE: [Top token holders](https://ide.bitquery.io/top-token-holder-for-a-token-using-token-holders-api)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2023-10-22"
-      tokenSmartContract: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6"
-      limit: { count: 10 }
-      orderBy: { descending: Balance_Amount }
-    ) {
-      Holder {
-        Address
-      }
-      Balance {
-        Amount
-      }
-    }
-  }
-}
-```
-
-</details>
-
-## Token Holder with Certain Number of Tokens
-
-Find how many holders exceed a threshold:
-
-Run in IDE: [Count of holders above certain value](https://ide.bitquery.io/count-of-token-holders-above-certain-value-using-token-holders-api)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2023-10-22"
-      tokenSmartContract: "0x23581767a106ae21c074b2276D25e5C3e136a68b"
-      where: { Balance: { Amount: { ge: "50" } } }
-    ) {
-      uniq(of: Holder_Address)
-    }
-  }
-}
-```
-
-</details>
-
-Here’s another example grouping USDT holders into tiers using aliases:
-
-Run in IDE: [USDT token holder distribution](https://ide.bitquery.io/USDT-token-holder-distribution)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2023-10-22"
-      tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-      where: { Balance: { Amount: { ge: "0" } } }
-    ) {
-      classic: count(
-        distinct: Holder_Address
-        if: { Balance: { Amount: { gt: "1000000" } } }
-      )
-      pro: count(
-        distinct: Holder_Address
-        if: { Balance: { Amount: { gt: "100000", le: "1000000" } } }
-      )
-      growing: count(
-        distinct: Holder_Address
-        if: { Balance: { Amount: { gt: "1000", le: "100000" } } }
-      )
-    }
-  }
-}
-```
-
-</details>
-
-## Top Trending Tokens Based on Token Holders using BalanceUpdates API
-
-Identify the top 10 trending tokens by holder growth:
-
-Run in IDE: [Trending tokens by holders](https://ide.bitquery.io/Trending_Token_based_on_holders)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query MyQuery {
-  EVM(network: eth, dataset: combined) {
-    BalanceUpdates(
-      where: {
-        Block: { Date: { since: "2023-06-01" } }
-        BalanceUpdate: { Amount: { gt: "0" } }
-      }
-      orderBy: { descendingByField: "No_Holders" }
-      limit: { count: 10 }
-    ) {
-      No_Holders: count(distinct: BalanceUpdate_Address)
-      Currency {
-        Name
-        SmartContract
-      }
-    }
-  }
-}
-```
-
-</details>
-
-## Top Token Holders of a specific Token using BalanceUpdates API
-
-Get the top 10 holders for a particular token via the BalanceUpdates API:
-
-Run in IDE: [Top 10 token holders of a specific token](https://ide.bitquery.io/Top-10-token-holders-of-a-specific-token_1#)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query MyQuery {
-  EVM(network: eth, dataset: combined) {
-    BalanceUpdates(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "Balance" }
-      where: {
-        Currency: {
-          SmartContract: { is: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" }
-        }
-      }
-    ) {
-      Balance: sum(of: BalanceUpdate_Amount)
-      Currency {
-        SmartContract
-        Name
-        Symbol
-      }
-      BalanceUpdate {
-        Address
-      }
-    }
-  }
-}
-```
-
-</details>
-
-Or get native ETH top holders on a particular date:
-
-Run in IDE: [Top native ETH holders](https://ide.bitquery.io/Top-10-token-holders-of-a-specific-token_1#)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2024-03-01"
-      limit: { count: 100 }
-      orderBy: { descending: Balance_Amount }
-      where: { Currency: { Native: true } }
-      tokenSmartContract: "0x"
-    ) {
-      Holder {
-        Address
-      }
-      Balance {
-        Amount
-      }
-    }
-  }
-}
-```
-
-</details>
-
-## Common Token Holders of Two Tokens
-
-Find addresses holding both BAYC and MAYC NFTs:
-
-Run in IDE: [Common token holder – BAYC & MAYC](https://ide.bitquery.io/Common-token-holder-Bored-Ape-Yacht-Club-and-Mutant-Ape-Yacht-Club)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive) {
-    BalanceUpdates(
-      orderBy: { descendingByField: "token1" }
-      limit: { count: 1000 }
-      where: {
-        Currency: {
-          SmartContract: {
-            in: [
-              "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
-              "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
-            ]
-          }
-        }
-      }
-    ) {
-      BalanceUpdate {
-        Address
-      }
-      token1: sum(
-        of: BalanceUpdate_Amount
-        if: {
-          Currency: {
-            SmartContract: { is: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d" }
-          }
-        }
-        selectWhere: { gt: "0" }
-      )
-      token2: sum(
-        of: BalanceUpdate_Amount
-        if: {
-          Currency: {
-            SmartContract: { is: "0x60e4d786628fea6478f785a6d7e704777c86a7c6" }
-          }
-        }
-        selectWhere: { gt: "0" }
-      )
-    }
-  }
-}
-```
-
-</details>
-
 ## Token Holder Statistics
 
-The Token Holders API provides built-in metrics. See [statistics docs](/docs/graphql/metrics/statistics/) for the full list.
+The **TokenHolders** API provides built-in distribution metrics. See [statistics docs](/docs/graphql/metrics/statistics/) for the full list.
 
 ### Average Balance of Token Holder
 
-Calculate the average USDT balance across all holders on October 22, 2023:
-
-Run in IDE: [Average USDT balance](https://ide.bitquery.io/avg-usdt-balance-on-ethereum-using-token-holders-api)
+[Run in IDE](https://ide.bitquery.io/avg-usdt-balance-on-ethereum-using-token-holders-api)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -510,7 +419,7 @@ Run in IDE: [Average USDT balance](https://ide.bitquery.io/avg-usdt-balance-on-e
 {
   EVM(dataset: archive, network: eth) {
     TokenHolders(
-      date: "2023-10-22"
+      date: "2026-05-01"
       tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
       where: { Balance: { Amount: { ge: "0" } } }
     ) {
@@ -524,9 +433,7 @@ Run in IDE: [Average USDT balance](https://ide.bitquery.io/avg-usdt-balance-on-e
 
 ### Median Balance of Token Holder
 
-Compute the median balance for USDT holders on the same date:
-
-Run in IDE: [Median USDT balance](https://ide.bitquery.io/median-balance-of-usdt-holders-on-ethereum-with-token-holders-api)
+[Run in IDE](https://ide.bitquery.io/median-balance-of-usdt-holders-on-ethereum-with-token-holders-api)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -535,7 +442,7 @@ Run in IDE: [Median USDT balance](https://ide.bitquery.io/median-balance-of-usdt
 {
   EVM(dataset: archive, network: eth) {
     TokenHolders(
-      date: "2023-10-22"
+      date: "2026-05-01"
       tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
       where: { Balance: { Amount: { ge: "0" } } }
     ) {
@@ -549,9 +456,7 @@ Run in IDE: [Median USDT balance](https://ide.bitquery.io/median-balance-of-usdt
 
 ## Token Liquidation: Finding Complete Holdings Transfers
 
-Identify users who transferred out all of their DAI on March 22, 2023:
-
-Run in IDE: [Liquidated all DAI holdings](https://ide.bitquery.io/addresses-that-transferred-out-all-of-their-holdings-for-this-particular-token-on-a-given-day)
+[Run in IDE](https://ide.bitquery.io/addresses-that-transferred-out-all-of-their-holdings-for-this-particular-token-on-a-given-day)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -561,11 +466,11 @@ Run in IDE: [Liquidated all DAI holdings](https://ide.bitquery.io/addresses-that
   EVM(dataset: archive, network: eth) {
     TokenHolders(
       limit: { count: 100 }
-      tokenSmartContract: "0xdac17f958d2ee523a2206206994597c13d831ec7"
-      date: "2023-03-22"
+      tokenSmartContract: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+      date: "2026-05-01"
       where: {
         BalanceUpdate: {
-          LastDate: { is: "2023-03-22" }
+          LastDate: { is: "2026-05-01" }
           OutAmount: { gt: "0" }
         }
         Balance: { Amount: { eq: "0" } }
@@ -584,86 +489,9 @@ Run in IDE: [Liquidated all DAI holdings](https://ide.bitquery.io/addresses-that
 
 </details>
 
-## Gini Coefficient
-
-Compute the Gini coefficient for USDC distribution:
-
-Run in IDE: [Gini coefficient – USDC](https://ide.bitquery.io/gini-coefficient-for-usdc-token-on-ethereum-with-token-holders-api)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2023-10-22"
-      tokenSmartContract: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-      where: { Balance: { Amount: { gt: "0" } } }
-    ) {
-      gini(of: Balance_Amount)
-    }
-  }
-}
-```
-
-</details>
-
-## Nakamoto Coefficient
-
-Calculate the Nakamoto coefficient (99%) for stETH:
-
-Run in IDE: [Nakamoto coefficient – stETH](https://ide.bitquery.io/nakamoto-coefficient-for-steth-token-on-ethereum-with-token-holders-api)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2023-10-22"
-      tokenSmartContract: "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
-      where: { Balance: { Amount: { gt: "0" } } }
-    ) {
-      nakamoto(of: Balance_Amount, ratio: 0.99)
-    }
-  }
-}
-```
-
-</details>
-
-## Thiel Index
-
-Obtain the Thiel index for stETH:
-
-Run in IDE: [Thiel index – stETH](https://ide.bitquery.io/thiel-index-for-steth-token-on-ethereum-with-token-holders-api)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive, network: eth) {
-    TokenHolders(
-      date: "2023-10-22"
-      tokenSmartContract: "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
-      where: { Balance: { Amount: { gt: "0" } } }
-    ) {
-      theil_index(of: Balance_Amount)
-    }
-  }
-}
-```
-
-</details>
-
 ## Find Token Holders Outside a Certain Range
 
-Filter for holders with very large or very small balances:
-
-Run in IDE: [Find holders outside a range](https://ide.bitquery.io/Find-holders-outside-a-range)
+[Run in IDE](https://ide.bitquery.io/Find-holders-outside-a-range)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -673,7 +501,7 @@ Run in IDE: [Find holders outside a range](https://ide.bitquery.io/Find-holders-
   EVM(dataset: archive) {
     TokenHolders(
       tokenSmartContract: "0x0fcbd68251819928c8f6d182fc04be733fa94170"
-      date: "2024-01-29"
+      date: "2026-05-01"
       where: {
         any: [
           { Balance: { Amount: { gt: "100" } } }
