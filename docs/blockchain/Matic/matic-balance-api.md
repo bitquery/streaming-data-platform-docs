@@ -10,10 +10,10 @@ On EVM, **`BalanceUpdates`** and **`TokenHolders`** are deprecated as of **20 Ma
 
 The **Balances** API returns current and historical token balances for an address on Polygon (MATIC). To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
 
-| Dataset | When to use |
-|---------|-------------|
-| **`combined`** | Latest balances. Queries **realtime and archive** databases and merges results. |
-| **`archive`** | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
+| Dataset        | When to use                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| **`combined`** | Latest balances. Queries **realtime and archive** databases and merges results.             |
+| **`archive`**  | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
 
 Examples: [All Token Balances](#balance-of-an-address) · [Native MATIC](#native-matic-balance) · [Balance On A Date](#balance-on-a-specific-date) · [Specific Token](#balance-for-a-specific-token)
 
@@ -29,9 +29,7 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: {
-            is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4"
-          }
+          Address: { is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4" }
         }
       }
     ) {
@@ -61,13 +59,9 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: {
-            is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4"
-          }
+          Address: { is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4" }
         }
-        Currency: {
-          Native: true
-        }
+        Currency: { Native: true }
       }
     ) {
       Currency {
@@ -121,15 +115,9 @@ query {
   EVM(network: matic, dataset: archive) {
     Balances(
       where: {
-        Block: {
-          Date: {
-            till: "2026-05-01"
-          }
-        }
+        Block: { Date: { till: "2026-05-01" } }
         Balance: {
-          Address: {
-            is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4"
-          }
+          Address: { is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4" }
         }
       }
     ) {
@@ -159,15 +147,9 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: {
-            is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4"
-          }
+          Address: { is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4" }
         }
-        Currency: {
-          SmartContract: {
-            is: "0x"
-          }
-        }
+        Currency: { SmartContract: { is: "0x" } }
       }
     ) {
       Currency {
@@ -196,18 +178,12 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: {
-            is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4"
-          }
+          Address: { is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4" }
         }
         Currency: {}
       }
-      orderBy: {
-        descending: Block_Date
-      }
-      limit: {
-        count: 100
-      }
+      orderBy: { descending: Block_Date }
+      limit: { count: 100 }
     ) {
       Currency {
         Symbol
@@ -237,15 +213,9 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: {
-            is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4"
-          }
+          Address: { is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4" }
         }
-        Currency: {
-          SmartContract: {
-            is: "0x"
-          }
-        }
+        Currency: { SmartContract: { is: "0x" } }
       }
     ) {
       Currency {
@@ -261,7 +231,3 @@ query {
   }
 }
 ```
-
-## How Do I Get The Balance Of A Wallet For A Specific Token?
-
-Use `EVM.Balances` with `Balance.Address` and `Currency.SmartContract`. For the latest balance, use `dataset: combined`. For a balance on a specific date, see [Balance On A Specific Date](#balance-on-a-specific-date).
