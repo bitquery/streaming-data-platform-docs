@@ -4,6 +4,10 @@ sidebar_position: 2
 
 # Address Balance API
 
+:::caution Deprecated API
+`EVM.BalanceUpdates` is deprecated as of **20 May 2026** and will be removed on **15 June 2026**. Use **`EVM.Balances`** (this page) instead.
+:::
+
 The **Balances** API returns current and historical token balances for an address on Ethereum. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
 
 | Dataset | When to use |
