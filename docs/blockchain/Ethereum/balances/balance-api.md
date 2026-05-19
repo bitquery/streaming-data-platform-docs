@@ -209,7 +209,3 @@ query {
   }
 }
 ```
-
-## How do I get the balance of a wallet for a specific token?
-
-Use `EVM.Balances` with `Balance.Address` and `Currency.SmartContract`. For the latest balance, use `dataset: combined`. For a balance on a specific date, see [Wallet balance for a specific token on a date](#wallet-balance-for-a-specific-token-on-a-date). For holder distribution and top holders, see the [Token Holders API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-holders/token-holder-api).
