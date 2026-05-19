@@ -92,38 +92,6 @@ query {
 
 </details>
 
-## How do I get the list of all token holders for a contract on BSC?
-
-Use the same `TokenHolders` API on BSC: set `network: bsc`, use `dataset: archive` for historical snapshots and holders not recently active, or `dataset: combined` for the latest state (realtime + archive). Pass the BEP-20 `tokenSmartContract` and an optional `date`. Paginate with `limit` because large tokens have many holders. For balance samples on BSC, see [BSC balance updates](https://docs.bitquery.io/docs/blockchain/BSC/bsc-balance-updates/).
-
-[Run in IDE](https://ide.bitquery.io/Top-10-holders-of-a-token-on-BSC)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  EVM(dataset: archive, network: bsc) {
-    TokenHolders(
-      date: "2026-05-01"
-      tokenSmartContract: "0x55d398326f99059fF775485246999027B3197955"
-      limit: { count: 100 }
-      orderBy: { descending: Balance_Amount }
-      where: { Balance: { Amount: { gt: "0" } } }
-    ) {
-      Holder {
-        Address
-      }
-      Balance {
-        Amount
-      }
-    }
-  }
-}
-```
-
-</details>
-
 ## How do I get the balance of a wallet for a specific token (point in time)?
 
 Use the [Balances API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/) with `Balance.Address`, `Currency.SmartContract`, and `Block.Date.till`. Use `dataset: archive`, `orderBy: { descending: Block_Date }`, and `limit: { count: 1 }` to get the balance as of that date.
