@@ -124,7 +124,7 @@ query {
         }
         Balance: {
           Address: {
-            is: "0x4c828be6a67130Cd0835cEDa850Baec062Dfd685"
+            is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4"
           }
         }
       }
@@ -145,7 +145,7 @@ query {
 
 ## Balance For A Specific Token
 
-Add a `Currency.SmartContract` filter. Always use the contract address, not the token name.
+Add a `Currency.SmartContract` filter. Always use the contract address, not the token name. Use `0x` for native MATIC on Polygon, or the ERC-20 contract address for a token.
 
 [Run in IDE](https://ide.bitquery.io/matic-balances-specific-token)
 
@@ -156,12 +156,12 @@ query {
       where: {
         Balance: {
           Address: {
-            is: "0x4c828be6a67130Cd0835cEDa850Baec062Dfd685"
+            is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4"
           }
         }
         Currency: {
           SmartContract: {
-            is: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359"
+            is: "0x"
           }
         }
       }
@@ -193,7 +193,7 @@ query {
       where: {
         Balance: {
           Address: {
-            is: "0x4c828be6a67130Cd0835cEDa850Baec062Dfd685"
+            is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4"
           }
         }
         Currency: {}
@@ -223,36 +223,25 @@ query {
 
 ## Wallet Balance For A Specific Token On A Date
 
-Use `dataset: archive`, `Block.Date.till`, `orderBy: { descending: Block_Date }`, and `limit: { count: 1 }` to get the balance as of that date.
+Get a wallet's balance for a specific token with `Balance.Address` and `Currency.SmartContract`. This example uses native MATIC (`SmartContract: "0x"`) with `dataset: combined`. For a balance on a calendar date, use [Balance On A Specific Date](#balance-on-a-specific-date) with `dataset: archive` and `Block.Date.till`.
 
 [Run in IDE](https://ide.bitquery.io/matic-wallet-balance-token-at-date)
 
 ```graphql
 query {
-  EVM(network: matic, dataset: archive) {
+  EVM(network: matic, dataset: combined) {
     Balances(
       where: {
-        Block: {
-          Date: {
-            till: "2026-05-05"
-          }
-        }
         Balance: {
           Address: {
-            is: "0x4c828be6a67130Cd0835cEDa850Baec062Dfd685"
+            is: "0x4c569c1e541A19132AC893748E0ad54C7c989FF4"
           }
         }
         Currency: {
           SmartContract: {
-            is: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359"
+            is: "0x"
           }
         }
-      }
-      limit: {
-        count: 1
-      }
-      orderBy: {
-        descending: Block_Date
       }
     ) {
       Currency {
@@ -271,4 +260,4 @@ query {
 
 ## How Do I Get The Balance Of A Wallet For A Specific Token?
 
-Use `EVM.Balances` with `Balance.Address` and `Currency.SmartContract`. For the latest balance, use `dataset: combined`. For a balance on a specific date, see [Wallet Balance For A Specific Token On A Date](#wallet-balance-for-a-specific-token-on-a-date).
+Use `EVM.Balances` with `Balance.Address` and `Currency.SmartContract`. For the latest balance, use `dataset: combined`. For a balance on a specific date, see [Balance On A Specific Date](#balance-on-a-specific-date).
