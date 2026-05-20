@@ -32,7 +32,7 @@ sidebar_label: "Pump.fun Launch Pulse"
 
 > **The trader question:** *"Is launchpad activity heating up or cooling down? When are people actually deploying tokens?"*
 
-A single sentence to the agent gives you the answer for any launchpad on any chain.
+A single sentence to the agent gives you the answer for any launchpad on any chain. For live DEX prices across Pump.fun tokens after launch, see [DEXrabbit's Pump.fun category](https://dexrabbit.bitquery.io/categories/pump-fun).
 
 ## Ask the Agent
 

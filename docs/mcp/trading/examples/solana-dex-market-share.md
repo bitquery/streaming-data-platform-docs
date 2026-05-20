@@ -58,7 +58,7 @@ Every trade row in the dataset is tagged with its DEX — so a single sentence t
 **Two clear stories:**
 
 1. **Meteora dominates** by a wide margin — the combined DLMM + DAMM v2 + Dynamic Bonding Curve product family is now ~58% of all Solana DEX volume in this snapshot.
-2. **Pumpfun's per-trade size ($40)** confirms the meme-launch / micro-trade reality of the bonding-curve venue, while **Pumpswap** ($425) is where graduated tokens get serious flow.
+2. **Pumpfun's per-trade size ($40)** confirms the meme-launch / micro-trade reality of the bonding-curve venue, while **Pumpswap** ($425) is where graduated tokens get serious flow. Browse live Pump.fun token prices on [DEXrabbit's Pump.fun category](https://dexrabbit.bitquery.io/categories/pump-fun).
 
 ## What This Tells a Trader
 

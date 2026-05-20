@@ -207,6 +207,8 @@ This query compares USDT prices across different blockchain networks in real-tim
 
 Monitor stablecoin peg health by getting the **latest price per DEX/market** for a stablecoin. This helps identify which exchanges or markets have the stablecoin trading closest to its peg (e.g., $1.00 for USD-pegged stablecoins) and detect de-pegging events across different trading venues.
 
+Browse live multi-chain stablecoin DEX prices on [DEXrabbit's Stablecoins category](https://dexrabbit.bitquery.io/categories/stablecoins).
+
 ### Solana Peg Health
 
 Get the latest price of a stablecoin across all Solana DEXs/markets. Returns one row per market with the most recent trade price.

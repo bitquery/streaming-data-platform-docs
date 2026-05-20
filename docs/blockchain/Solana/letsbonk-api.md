@@ -2,7 +2,7 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this document, we will explore several examples related to LetsBonk.fun. You can also check out our [Pump Fun API Docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) and [FourMeme API Docs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/).
+In this document, we will explore several examples related to LetsBonk.fun. You can also check out our [Pump Fun API Docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) and [FourMeme API Docs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/). For live DEX prices and volume across LetsBonk tokens, see [DEXrabbit's LetsBonk category](https://dexrabbit.bitquery.io/categories/letsbonk-fun-ecosystem).
 
 :::note
 **LetsBonk.fun tokens are created and traded on Raydium Launchlab.**

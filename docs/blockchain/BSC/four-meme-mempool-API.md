@@ -9,6 +9,8 @@ Monitor Four Meme memecoin activity in the BSC mempool before transactions are c
 
 Get ahead of the market by monitoring mempool activity for Four Meme tokens before they hit the blockchain. Perfect for MEV bots, sniper bots, and advanced trading strategies.
 
+For live DEX prices and volume after tokens trade on-chain, browse [DEXrabbit's Four.meme category](https://dexrabbit.bitquery.io/categories/four-meme-ecosystem).
+
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.
 

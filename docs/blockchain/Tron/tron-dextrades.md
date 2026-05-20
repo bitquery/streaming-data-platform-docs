@@ -779,6 +779,8 @@ subscription MyQuery {
 
 Get the **latest price of a stablecoin across all Tron DEXs**. Returns one row per DEX protocol with the most recent trade price. Useful for monitoring peg health and identifying which exchanges have the stablecoin trading closest to its target peg (e.g., $1.00 for USD-pegged stablecoins).
 
+Browse multi-chain stablecoin DEX prices on [DEXrabbit's Stablecoins category](https://dexrabbit.bitquery.io/categories/stablecoins).
+
 [Run in Bitquery IDE](https://ide.bitquery.io/peg-health-tron)
 
 <details>
@@ -955,7 +957,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 
 ## Get the First 100 Buyers of a Token on Tron
 
-Find the **earliest buyers** of any Tron token by using Tron `DEXTradeByTokens` API. This is widely used for **memecoin sniper detection**, **early-holder analysis**, and **alpha groups** monitoring SunPump / SunSwap launches.
+Find the **earliest buyers** of any Tron token by using Tron `DEXTradeByTokens` API. This is widely used for **memecoin sniper detection**, **early-holder analysis**, and **alpha groups** monitoring SunPump / SunSwap launches. For live DEX prices across Tron memecoins, see [DEXrabbit's Tron Meme Coins category](https://dexrabbit.bitquery.io/categories/tron-meme).
 
 You can try this query [here](https://ide.bitquery.io/first-100-buyers-tron-token).
 

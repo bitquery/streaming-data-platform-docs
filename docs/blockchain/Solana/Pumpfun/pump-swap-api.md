@@ -11,7 +11,7 @@ keywords:
 
 # PumpSwap API
 
-Bitquery’s **PumpSwap API** exposes the PumpSwap AMM on Solana through GraphQL: **live and historical trades**, **prices**, **OHLC**, **volume**, **pool creation**, and **Pump.fun → PumpSwap migrations**. Use **queries** for snapshots, **subscriptions** to track PumpSwap trades in real time, and **`dataset: combined`** when you need more history than **`dataset: realtime`** (~recent window). Filter trades with **`Dex.ProgramAddress: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"`**.
+Bitquery’s **PumpSwap API** exposes the PumpSwap AMM on Solana through GraphQL: **live and historical trades**, **prices**, **OHLC**, **volume**, **pool creation**, and **Pump.fun → PumpSwap migrations**. Use **queries** for snapshots, **subscriptions** to track PumpSwap trades in real time, and **`dataset: combined`** when you need more history than **`dataset: realtime`** (~recent window). Filter trades with **`Dex.ProgramAddress: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"`**. For live DEX prices across Pump.fun tokens, see [DEXrabbit's Pump.fun category](https://dexrabbit.bitquery.io/categories/pump-fun).
 
 For other data points, reach out to [support](https://t.me/Bloxy_info).
 

@@ -4,6 +4,8 @@ The Stablecoin API by Bitquery provides you the comprehensive set of APIs which 
 
 We are going to particularly deep-dive into how to get Stablecoin Trades data in this section.
 
+For pre-built stablecoin dashboards (top tokens, flows, market activity), browse [DEXrabbit's Stablecoins category](https://dexrabbit.bitquery.io/categories/stablecoins).
+
 ## Ethereum
 
 ### Stablecoin trades for Ethereum
