@@ -19,7 +19,7 @@ The **Balances** API returns current and historical token balances for an addres
 
 Returns token balances for a wallet address. Use `Amount(selectWhere: { gt: "0" })` to exclude zero balances.
 
-[Run in IDE](https://ide.bitquery.io/ethereum-balances-address)
+[Run in IDE](https://ide.bitquery.io/Ethereum-Balance-of-an-Address)
 
 ```graphql
 query {
