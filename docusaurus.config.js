@@ -711,8 +711,12 @@ const config = {
             from: "/docs/examples/Arbitrum/arbitrum-cross-chain/",
           },
           {
-            to: "/docs/blockchain/Arbitrum/Balance_Updates/",
+            to: "/docs/blockchain/Arbitrum/arbitrum-balance-api/",
             from: "/docs/examples/Arbitrum/Balance_Updates/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/arbitrum-balance-api/",
+            from: "/docs/blockchain/Arbitrum/Balance_Updates/",
           },
           {
             to: "/docs/blockchain/Arbitrum/Blocks_Transactions/",
@@ -845,8 +849,12 @@ const config = {
             from: "/docs/examples/Optimism/",
           },
           {
-            to: "/docs/blockchain/Optimism/optimism-balance-updates/",
+            to: "/docs/blockchain/Optimism/optimism-balance-api/",
             from: "/docs/examples/Optimism/optimism-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/Optimism/optimism-balance-api/",
+            from: "/docs/blockchain/Optimism/optimism-balance-updates/",
           },
           {
             to: "/docs/blockchain/Optimism/optimism-dextrades/",

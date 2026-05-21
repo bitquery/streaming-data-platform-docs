@@ -651,7 +651,7 @@ const sidebars = {
           },
           items: [
             "blockchain/Arbitrum/arbitrum-cross-chain",
-            "blockchain/Arbitrum/Balance_Updates",
+            "blockchain/Arbitrum/arbitrum-balance-api",
             "blockchain/Arbitrum/Blocks_Transactions",
             "blockchain/Arbitrum/DexTrades",
             "blockchain/Arbitrum/arbitrum-token-marketcap-api",
@@ -736,7 +736,7 @@ const sidebars = {
             id: "blockchain/Optimism/index",
           },
           items: [
-            "blockchain/Optimism/optimism-balance-updates",
+            "blockchain/Optimism/optimism-balance-api",
             "blockchain/Optimism/optimism-dextrades",
             "blockchain/Optimism/uniswap-v4-api",
             "blockchain/Optimism/optimism-nft",
