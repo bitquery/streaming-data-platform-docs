@@ -29,7 +29,7 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF" }
+          Address: { is: "0xA89d65deF0A001947d8D5fDda93F9C4f8453902e" }
         }
       }
     ) {
@@ -59,7 +59,7 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF" }
+          Address: { is: "0xA89d65deF0A001947d8D5fDda93F9C4f8453902e" }
         }
         Currency: { Native: true }
       }
@@ -117,7 +117,7 @@ query {
       where: {
         Block: { Date: { till: "2026-05-01" } }
         Balance: {
-          Address: { is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF" }
+          Address: { is: "0xA89d65deF0A001947d8D5fDda93F9C4f8453902e" }
         }
       }
     ) {
@@ -137,7 +137,7 @@ query {
 
 ## Balance For A Specific Token
 
-Add a `Currency.SmartContract` filter. Always use the contract address, not the token name. Use `0x` for native ETH on Arbitrum, or the ERC-20 contract address for a token.
+Add a `Currency.SmartContract` filter. Always use the contract address, not the token name.
 
 [Run in IDE](https://ide.bitquery.io/arbitrum-balances-specific-token)
 
@@ -147,9 +147,11 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF" }
+          Address: { is: "0xA89d65deF0A001947d8D5fDda93F9C4f8453902e" }
         }
-        Currency: { SmartContract: { is: "0x" } }
+        Currency: {
+          SmartContract: { is: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f" }
+        }
       }
     ) {
       Currency {
@@ -178,9 +180,11 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF" }
+          Address: { is: "0xA89d65deF0A001947d8D5fDda93F9C4f8453902e" }
         }
-        Currency: {}
+        Currency: {
+          SmartContract: { is: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f" }
+        }
       }
       orderBy: { descending: Block_Date }
       limit: { count: 100 }
@@ -203,7 +207,7 @@ query {
 
 ## Wallet Balance For A Specific Token On A Date
 
-Get a wallet's balance for a specific token with `Balance.Address` and `Currency.SmartContract`. This example uses native ETH (`SmartContract: "0x"`) with `dataset: combined`. For a balance on a calendar date, use [Balance On A Specific Date](#balance-on-a-specific-date) with `dataset: archive` and `Block.Date.till`.
+Get a wallet's balance for a specific token with `Balance.Address` and `Currency.SmartContract`. This example uses `dataset: combined`. For a balance on a calendar date, use [Balance On A Specific Date](#balance-on-a-specific-date) with `dataset: archive` and `Block.Date.till`.
 
 [Run in IDE](https://ide.bitquery.io/arbitrum-wallet-balance-token-at-date)
 
@@ -213,9 +217,11 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF" }
+          Address: { is: "0xA89d65deF0A001947d8D5fDda93F9C4f8453902e" }
         }
-        Currency: { SmartContract: { is: "0x" } }
+        Currency: {
+          SmartContract: { is: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f" }
+        }
       }
     ) {
       Currency {

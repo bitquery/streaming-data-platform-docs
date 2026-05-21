@@ -10,10 +10,10 @@ On EVM, **`BalanceUpdates`** and **`TokenHolders`** are deprecated as of **20 Ma
 
 The **Balances** API returns current and historical token balances for an address on BNB Smart Chain (BSC). To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
 
-| Dataset | When to use |
-|---------|-------------|
-| **`combined`** | Latest balances. Queries **realtime and archive** databases and merges results. |
-| **`archive`** | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
+| Dataset        | When to use                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| **`combined`** | Latest balances. Queries **realtime and archive** databases and merges results.             |
+| **`archive`**  | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
 
 Examples: [All Token Balances](#balance-of-an-address) · [Native BNB](#native-bnb-balance) · [Balance On A Date](#balance-on-a-specific-date) · [Specific Token](#balance-for-a-specific-token)
 
@@ -29,7 +29,7 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" }
+          Address: { is: "0x6C341938bB75dDe823FAAfe7f446925c66E6270c" }
         }
       }
     ) {
@@ -49,7 +49,7 @@ query {
 
 ## Native BNB Balance
 
-Returns the native BNB balance for a wallet (not BEP-20 tokens). Filter with `Currency: { Native: true }` instead of a token contract address.
+Returns the native BNB balance for a wallet (not BEP-20 tokens). Filter with `Currency: { Native: true }`.
 
 [Run in IDE](https://ide.bitquery.io/bsc-native-balances-address)
 
@@ -59,7 +59,7 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" }
+          Address: { is: "0x6C341938bB75dDe823FAAfe7f446925c66E6270c" }
         }
         Currency: { Native: true }
       }
@@ -83,7 +83,7 @@ query {
 - `network: bsc`: BNB Smart Chain.
 - `dataset: combined`: Merges realtime and archive data for the latest balance state.
 - `Balance.Address`: Wallet address to query.
-- `Currency.Native: true`: Native BNB only (see [Native BNB Balance](#native-bnb-balance)).
+- `Currency.Native: true`: Native BNB only (see [Native BNB Balance](#native-bnb-balance)). For BEP-20 tokens, use `Currency.SmartContract` instead.
 
 **Returned fields**
 
@@ -117,7 +117,7 @@ query {
       where: {
         Block: { Date: { till: "2026-05-01" } }
         Balance: {
-          Address: { is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" }
+          Address: { is: "0x6C341938bB75dDe823FAAfe7f446925c66E6270c" }
         }
       }
     ) {
@@ -137,7 +137,7 @@ query {
 
 ## Balance For A Specific Token
 
-Add a `Currency.SmartContract` filter. Always use the contract address, not the token name. Use `0x` for native BNB on BSC, or the BEP-20 contract address for a token.
+Add a `Currency.SmartContract` filter for BEP-20 tokens (not native BNB). Always use the contract address, not the token name. The example below uses token `0x54261774905f3e6E9718f2ABb10ed6555cae308a` — use `Currency: { Native: true }` only for native BNB.
 
 [Run in IDE](https://ide.bitquery.io/bsc-balances-specific-token)
 
@@ -147,9 +147,11 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" }
+          Address: { is: "0x6C341938bB75dDe823FAAfe7f446925c66E6270c" }
         }
-        Currency: { SmartContract: { is: "0x" } }
+        Currency: {
+          SmartContract: { is: "0x54261774905f3e6E9718f2ABb10ed6555cae308a" }
+        }
       }
     ) {
       Currency {
@@ -178,9 +180,11 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" }
+          Address: { is: "0x6C341938bB75dDe823FAAfe7f446925c66E6270c" }
         }
-        Currency: {}
+        Currency: {
+          SmartContract: { is: "0x54261774905f3e6E9718f2ABb10ed6555cae308a" }
+        }
       }
       orderBy: { descending: Block_Date }
       limit: { count: 100 }
@@ -203,7 +207,7 @@ query {
 
 ## Wallet Balance For A Specific Token On A Date
 
-Get a wallet's balance for a specific token with `Balance.Address` and `Currency.SmartContract`. This example uses native BNB (`SmartContract: "0x"`) with `dataset: combined`. For a balance on a calendar date, use [Balance On A Specific Date](#balance-on-a-specific-date) with `dataset: archive` and `Block.Date.till`.
+Get a wallet's balance for a specific token with `Balance.Address` and `Currency.SmartContract`. This example uses BEP-20 token `0x54261774905f3e6E9718f2ABb10ed6555cae308a` with `dataset: combined`. For a balance on a calendar date, use [Balance On A Specific Date](#balance-on-a-specific-date) with `dataset: archive` and `Block.Date.till`.
 
 [Run in IDE](https://ide.bitquery.io/bsc-wallet-balance-token-at-date)
 
@@ -213,9 +217,11 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" }
+          Address: { is: "0x6C341938bB75dDe823FAAfe7f446925c66E6270c" }
         }
-        Currency: { SmartContract: { is: "0x" } }
+        Currency: {
+          SmartContract: { is: "0x54261774905f3e6E9718f2ABb10ed6555cae308a" }
+        }
       }
     ) {
       Currency {
