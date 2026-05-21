@@ -593,8 +593,12 @@ const config = {
             from: "/docs/examples/BSC/",
           },
           {
-            to: "/docs/blockchain/BSC/bsc-balance-updates/",
+            to: "/docs/blockchain/BSC/bsc-balance-api/",
             from: "/docs/examples/BSC/bsc-balance-updates/",
+          },
+          {
+            to: "/docs/blockchain/BSC/bsc-balance-api/",
+            from: "/docs/blockchain/BSC/bsc-balance-updates/",
           },
           {
             to: "/docs/blockchain/BSC/bsc-calls-api/",

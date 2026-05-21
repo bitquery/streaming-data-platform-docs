@@ -494,7 +494,7 @@ const sidebars = {
             id: "blockchain/BSC/index",
           },
           items: [
-            "blockchain/BSC/bsc-balance-updates",
+            "blockchain/BSC/bsc-balance-api",
             {
               type: "category",
               label: "Transaction Balance Tracker",
