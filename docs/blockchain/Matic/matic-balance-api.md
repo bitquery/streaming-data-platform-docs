@@ -90,20 +90,6 @@ query {
 - `Currency.Symbol`, `Currency.SmartContract`: Token metadata.
 - `Balance.Amount`, `Balance.AmountInUSD`: Token balance and USD value (use `selectWhere` to filter non-zero amounts).
 
-:::warning Important: Rebasing Token Limitations
-**Rebasing tokens are not supported for accurate balance calculations.**
-
-Rebasing tokens automatically adjust their total supply and individual balances through mechanisms other than traditional transfer transactions. This means:
-
-- **Balance calculations may be inaccurate** — Our balance tracking doesn't capture rebasing adjustments
-- **Balance updates may be missing** — Individual holder balances change without visible transactions
-- **Historical balance data will be incorrect** — Past balances don't reflect rebasing adjustments
-
-**Before calculating balances for any token, verify it's not a rebasing token** by checking the token's official documentation and smart contract.
-
-**Supported chains:** This limitation applies to all EVM chains (Ethereum, Polygon, Arbitrum, BSC, Base, etc.)
-:::
-
 ## Balance On A Specific Date
 
 Use `Block.Date.till` for a point-in-time snapshot. Use `dataset: archive` for historical dates and addresses not recently active.
