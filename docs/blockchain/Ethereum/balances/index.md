@@ -50,8 +50,8 @@ The [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction
 | **Balance on a date** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date) | Point-in-time snapshot with `Block.Date.till` (`dataset: archive`). |
 | **Wallet balance for one token on a date** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#wallet-balance-for-a-specific-token-on-a-date) | `Block.Date`, `limit: 1`, `orderBy: Block_Date`. |
 | **Balance history over time** | [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-history-by-date) | Snapshots ordered by `Block_Date`. |
-| **Token holder count** | [Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api#how-do-i-get-token-holder-count-for-an-erc-20-token) | `uniq(of: Holder_Address)` with `dataset: combined`. |
 | **Top token holders** | [Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api#top-holders-of-a-currency-current) | `orderBy: Balance_Amount`, `limit`. |
+| **Token holder count** | [Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api#token-holder-count-for-an-erc-20-token) | `uniq(of: Holder_Address)` with `dataset: combined`. |
 | **Holders above a threshold** | [Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api#holder-count-with-balance-above-a-threshold) | `uniq` with `if: { Balance: { Amount: { gt: "..." } } } }`. |
 | **Token balance with supply and market cap** | [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) | `EVM.TransactionBalances` — post balance, supply, USD value per transaction. |
 | **Real-time balance change streams** | [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) | Subscribe to balance updates with reason codes. |

@@ -76,9 +76,11 @@ query {
 
 ### Examples on Ethereum
 
-- [Token holder count](/docs/blockchain/Ethereum/token-holders/token-holder-api#how-do-i-get-token-holder-count-for-an-erc-20-token)
-- [Historical top holders](/docs/blockchain/Ethereum/token-holders/token-holder-api#how-do-i-get-historical-top-holders-of-an-erc-20-token-by-date)
-- [Wallet token balance at a date](/docs/blockchain/Ethereum/token-holders/token-holder-api#how-do-i-get-the-balance-of-a-wallet-for-a-specific-token-point-in-time) (via [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#wallet-balance-for-a-specific-token-on-a-date))
 - [Top holders (current)](/docs/blockchain/Ethereum/token-holders/token-holder-api#top-holders-of-a-currency-current)
+- [Token holder count](/docs/blockchain/Ethereum/token-holders/token-holder-api#token-holder-count-for-an-erc-20-token)
 - [Holder count above a threshold](/docs/blockchain/Ethereum/token-holders/token-holder-api#holder-count-with-balance-above-a-threshold)
+- [Track whale wallets](/docs/blockchain/Ethereum/token-holders/token-holder-api#track-whale-wallets-and-token-holdings)
+- [Historical top holders](/docs/blockchain/Ethereum/token-holders/token-holder-api#historical-top-holders-by-date)
+- [Holder count history](/docs/blockchain/Ethereum/token-holders/token-holder-api#token-holder-count-history-over-time)
+- [Wallet token balance at a date](/docs/blockchain/Ethereum/token-holders/token-holder-api#wallet-balance-at-a-point-in-time) (via [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#wallet-balance-for-a-specific-token-on-a-date))
 - [Holder activity](/docs/blockchain/Ethereum/token-holders/token-holder-api#token-holder-activity) — `UpdateCount`, `FirstChangeTime`, `LastChangeTime`

@@ -15,11 +15,53 @@ The **Holders** API returns token holder data for ERC-20 tokens on Ethereum: top
 | **`combined`** | Latest holder count, top holders, and balances. Queries **realtime and archive** databases and merges results. |
 | **`archive`** | Addresses not recently active (not in the realtime window). |
 
-Let's explore examples using the Holders API on Ethereum.
+Examples: [Top Holders](#top-holders-of-a-currency-current) · [Holder Count](#token-holder-count-for-an-erc-20-token) · [Whales](#holder-count-with-balance-above-a-threshold) · [Historical Top Holders](#historical-top-holders-by-date) · [Holder Activity](#token-holder-activity) · [Statistics](#token-holder-statistics)
 
-## How do I get token holder count for an ERC-20 token?
+## Top Holders Of A Currency (Current)
 
-Count distinct wallets using `uniq(of: Holder_Address)` with `dataset: combined`.
+The most common starting point for traders and analysts: who holds the most of a token right now. Use `dataset: combined` for the latest top holders (realtime + archive).
+
+[Run in IDE](https://ide.bitquery.io/ethereum-holders-top)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
+      where: {
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
+        }
+      }
+      orderBy: {
+        descending: Balance_Amount
+      }
+      limit: {
+        count: 10
+      }
+    ) {
+      Holder {
+        Address
+      }
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        FirstChangeTime
+        LastChangeTime
+      }
+    }
+  }
+}
+```
+
+</details>
+
+## Token Holder Count For An ERC-20 Token
+
+How many wallets hold a token. Count distinct addresses with `uniq(of: Holder_Address)` and `dataset: combined`.
 
 [Run in IDE](https://ide.bitquery.io/ethereum-holders-count-combined)
 
@@ -46,7 +88,49 @@ query {
 
 </details>
 
-## How do I get historical top holders of an ERC-20 token by date?
+## Holder Count With Balance Above A Threshold
+
+Count holders above a minimum balance (whale / large-holder filters). Use `uniq(of: Holder_Address, if: { Balance: { Amount: { gt: "..." } } })` with your threshold.
+
+[Run in IDE](https://ide.bitquery.io/count-ethereum-holders-count-above-threshold)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
+      where: {
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
+        }
+      }
+    ) {
+      uniq(
+        of: Holder_Address
+        if: {
+          Balance: {
+            Amount: {
+              gt: "10000000"
+            }
+          }
+        }
+      )
+    }
+  }
+}
+```
+
+</details>
+
+## Track Whale Wallets And Token Holdings
+
+For whale monitoring, combine **[Top Holders](#top-holders-of-a-currency-current)** (`orderBy: { descending: Balance_Amount }`, `limit`) with **[Holder Count Above A Threshold](#holder-count-with-balance-above-a-threshold)**. Pair with [ERC-20 transfers](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) to see recent inflows and outflows from large wallets.
+
+## Historical Top Holders By Date
 
 The **Holders** cube does not support `Block.Date`. Filter by `Balance.LastChangeTime` using datetime format (for example `"2026-05-01T00:00:00Z"`). For address balances on a calendar date, use the [Balances API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date) with `Block.Date`.
 
@@ -92,11 +176,45 @@ query {
 
 </details>
 
-## How do I get the balance of a wallet for a specific token (point in time)?
+## Token Holder Count History Over Time
 
-Use the [Balances API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/) with `Balance.Address`, `Currency.SmartContract`, and `Block.Date.till`. Use `dataset: archive`, `orderBy: { descending: Block_Date }`, and `limit: { count: 1 }` to get the balance as of that date.
+Build holder-count time series by running the count query with `Balance.LastChangeTime.till` at different timestamps, then aggregating in your app or scheduler.
 
-[Run in IDE](https://ide.bitquery.io/ethereum-wallet-balance-token-at-date)
+[Run in IDE](https://ide.bitquery.io/ethereum-holders-count-by-date)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query {
+  EVM(network: eth, dataset: combined) {
+    Holders(
+      where: {
+        Balance: {
+          LastChangeTime: {
+            till: "2026-05-01T00:00:00Z"
+          }
+        }
+        Currency: {
+          SmartContract: {
+            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
+          }
+        }
+      }
+    ) {
+      uniq(of: Holder_Address)
+    }
+  }
+}
+```
+
+</details>
+
+## Wallet Balance At A Point In Time
+
+One wallet’s balance for a token on a given date uses the **[Balances API](/docs/blockchain/Ethereum/balances/balance-api/)**, not Holders: set `Balance.Address`, `Currency.SmartContract`, and `Block.Date.till`. Use `dataset: archive`, `orderBy: { descending: Block_Date }`, and `limit: { count: 1 }`.
+
+[Run in IDE](https://ide.bitquery.io/ethereum-wallet-balance-token-at-date) · [Balances API docs](/docs/blockchain/Ethereum/balances/balance-api/#wallet-balance-for-a-specific-token-on-a-date)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -145,131 +263,11 @@ query {
 
 </details>
 
-## How do I get token holder count history over time?
-
-Run the holder count query with `Balance.LastChangeTime.till` in datetime format, varying the timestamp per period, then aggregate in your application or scheduler.
-
-[Run in IDE](https://ide.bitquery.io/ethereum-holders-count-by-date)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query {
-  EVM(network: eth, dataset: combined) {
-    Holders(
-      where: {
-        Balance: {
-          LastChangeTime: {
-            till: "2026-05-01T00:00:00Z"
-          }
-        }
-        Currency: {
-          SmartContract: {
-            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
-          }
-        }
-      }
-    ) {
-      uniq(of: Holder_Address)
-    }
-  }
-}
-```
-
-</details>
-
-## How do I track whale wallets and their token holdings on EVM?
-
-Query top holders with `orderBy: { descending: Balance_Amount }` and `limit`, or count holders above a threshold with `uniq(of: Holder_Address, if: { Balance: { Amount: { gt: "..." } } })`. Combine with [ERC-20 transfers](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) for recent flows.
-
-## Top holders of a currency (current)
-
-Use `dataset: combined` for the latest top holders (realtime + archive).
-
-[Run in IDE](https://ide.bitquery.io/ethereum-holders-top)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query {
-  EVM(network: eth, dataset: combined) {
-    Holders(
-      where: {
-        Currency: {
-          SmartContract: {
-            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
-          }
-        }
-      }
-      orderBy: {
-        descending: Balance_Amount
-      }
-      limit: {
-        count: 10
-      }
-    ) {
-      Holder {
-        Address
-      }
-      Balance {
-        Amount(selectWhere: { gt: "0" })
-        FirstChangeTime
-        LastChangeTime
-      }
-    }
-  }
-}
-```
-
-</details>
-
-## Holder count with balance above a threshold
-
-Use `uniq(of: Holder_Address, if: { Balance: { Amount: { gt: "..." } } })` with your minimum balance value.
-
-[Run in IDE](https://ide.bitquery.io/count-ethereum-holders-count-above-threshold)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query {
-  EVM(network: eth, dataset: combined) {
-    Holders(
-      where: {
-        Currency: {
-          SmartContract: {
-            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
-          }
-        }
-      }
-    ) {
-      uniq(
-        of: Holder_Address
-        if: {
-          Balance: {
-            Amount: {
-              gt: "10000000"
-            }
-          }
-        }
-      )
-    }
-  }
-}
-```
-
-</details>
-
 ## Token Holder Activity
 
-The sections below use the **TokenHolders** API for holder-level activity metrics (`BalanceUpdate` aggregates). For current balances and top holders, prefer the **Holders** API above.
+Drill into a **specific wallet** for a token: transfer count and first/last activity times. Uses the **Holders** API (`UpdateCount`, `FirstChangeTime`, `LastChangeTime`).
 
-### Count of Transactions for a Token from a Token Holder
-
-Use the **Holders** API with `Holder.Address` and `Balance.UpdateCount`.
+### Count Of Transactions For A Token From A Token Holder
 
 [Run in IDE](https://ide.bitquery.io/Number-of-token-transactions-for-a-wallet)
 
@@ -303,9 +301,7 @@ query {
 
 </details>
 
-### First & Last Date of Transfer for a Token Holder
-
-Use the **Holders** API with `Balance.FirstChangeTime` and `Balance.LastChangeTime` (datetime format).
+### First & Last Date Of Transfer For A Token Holder
 
 [Run in IDE](https://ide.bitquery.io/Frst-and-last-date-time-for-token-holder)
 
@@ -343,9 +339,9 @@ query {
 
 ## Token Holder Statistics
 
-The **TokenHolders** API provides built-in distribution metrics. See [statistics docs](/docs/graphql/metrics/statistics/) for the full list.
+Distribution metrics (average, median, Gini, Nakamoto index, and more) via the legacy **`TokenHolders`** cube or aggregated **Holders** queries. See [statistics docs](/docs/graphql/metrics/statistics/) for the full metric list.
 
-### Average Balance of Token Holder
+### Average Balance Of Token Holder
 
 [Run in IDE](https://ide.bitquery.io/avg-usdt-balance-on-ethereum-using-token-holders-api)
 
@@ -368,7 +364,7 @@ The **TokenHolders** API provides built-in distribution metrics. See [statistics
 
 </details>
 
-### Median Balance of Token Holder
+### Median Balance Of Token Holder
 
 [Run in IDE](https://ide.bitquery.io/median-balance-of-usdt-holders-on-ethereum-with-token-holders-api)
 
@@ -391,7 +387,9 @@ The **TokenHolders** API provides built-in distribution metrics. See [statistics
 
 </details>
 
-## Find Token Holders Outside a Certain Range
+## Find Token Holders Outside A Certain Range
+
+Advanced filter: holders with balance above an upper bound or below a lower bound (e.g. excluding mid-tier wallets).
 
 [Run in IDE](https://ide.bitquery.io/Find-holders-outside-a-range)
 
@@ -433,6 +431,6 @@ The **TokenHolders** API provides built-in distribution metrics. See [statistics
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 
-## Video Tutorial on How to Identify Top Token Holders for Any Cryptocurrency
+## Video Tutorial On How To Identify Top Token Holders For Any Cryptocurrency
 
 <VideoPlayer url="https://www.youtube.com/watch?v=I79TftivtjA" />

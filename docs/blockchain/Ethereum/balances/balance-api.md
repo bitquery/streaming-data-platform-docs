@@ -15,7 +15,7 @@ The **Balances** API returns current and historical token balances for an addres
 | **`combined`** | Latest balances. Queries **realtime and archive** databases and merges results.             |
 | **`archive`**  | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
 
-## Balance of an address
+## Balance Of An Address
 
 Returns token balances for a wallet address. Use `Amount(selectWhere: { gt: "0" })` to exclude zero balances.
 
@@ -56,7 +56,7 @@ query {
 - `Currency.Symbol`, `Currency.SmartContract`: Token metadata.
 - `Balance.Amount`, `Balance.AmountInUSD`: Token balance and USD value (use `selectWhere` to filter non-zero amounts).
 
-## Balance on a specific date
+## Balance On A Specific Date
 
 Use `Block.Date.till` for a point-in-time snapshot. Use `dataset: archive` for historical dates and addresses not recently active.
 
@@ -86,7 +86,7 @@ Use `Block.Date.till` for a point-in-time snapshot. Use `dataset: archive` for h
 }
 ```
 
-## Balance for a specific token
+## Balance For A Specific Token
 
 Add a `Currency.SmartContract` filter. Always use the contract address, not the token name.
 
@@ -119,7 +119,7 @@ query {
 }
 ```
 
-## Balance history by date
+## Balance History By Date
 
 Returns balance snapshots over time for an address. Use `dataset: archive`. Order by `Block_Date` descending and use `limit` to paginate. Add `Currency.SmartContract` under `Currency` to filter by a specific token.
 
@@ -154,7 +154,7 @@ query {
 }
 ```
 
-## Wallet balance for a specific token on a date
+## Wallet Balance For A Specific Token On A Date
 
 Use `dataset: archive`, `Block.Date.till`, `orderBy: { descending: Block_Date }`, and `limit: { count: 1 }` to get the balance as of that date.
 
