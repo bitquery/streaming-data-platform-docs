@@ -31,6 +31,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Cross-Chain / Multi-Chain APIs](#cross-chain--multi-chain-apis)
 - [Polymarket](#polymarket)
 - [Ethereum](#ethereum)
+- [Polygon (MATIC)](#polygon-matic)
 - [Solana](#solana)
 - [BSC (Binance Smart Chain)](#bsc-binance-smart-chain)
 - [TRON](#tron)
@@ -171,15 +172,10 @@ Rank addresses by total amount redeemed in the last hour across all markets. Use
 
 ### Balance APIs
 
-#### Get latest ERC20 token balance of a wallet
+#### Balance of an address
 
-Get latest ERC20 token balance of a wallet.
-▶️ [Get latest ERC20 token balance of a wallet](https://ide.bitquery.io/Get-Latest-Token-Balance-for-an-Address)
-
-#### Get All Token Balances for an Address
-
-Retrieve all ERC-20 token balances held by a specific address. This query returns balances for all tokens the address holds.
-▶️ [Get All Token Balances for an Address](https://ide.bitquery.io/Get-All-Token-Balances-for-an-Address)
+Returns all token balances for a wallet on Ethereum using `EVM.Balances` with `dataset: combined`.
+▶️ [Balance of an Address](https://ide.bitquery.io/Ethereum-Balance-of-an-Address)
 
 #### Latest Liquidity of EVM Pool
 
@@ -340,6 +336,15 @@ This query retrieves the latest liquidity events for a specific DEX pool on Ethe
 
 Get latest liquidity across all pools where the token appears as either pool side.
 ▶️ [Liquidity of All Pools of a Token on Ethereum](https://ide.bitquery.io/liquidiy-of-all-token-pools_1)
+
+## Polygon (MATIC)
+
+### Balance APIs
+
+#### Balance of an address
+
+Returns all token balances for a wallet on Polygon using `EVM.Balances` with `network: matic` and `dataset: combined`. See [Polygon Address Balance API](/docs/blockchain/Matic/matic-balance-api/#balance-of-an-address).
+▶️ [Balance of an Address](https://ide.bitquery.io/matic-balances-address)
 
 ## Solana
 
