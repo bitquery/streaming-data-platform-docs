@@ -152,6 +152,46 @@ query {
 }
 ```
 
+## Snapshot of Token Holders Info
+
+Number of unique Holders, Supply of Token and Gini Coefficient for the Balance Amount for a token before a certain Timestamp 
+could be dirived using the below query. These stats provide a good token snapshot in context of holders for any given time.
+
+[Run In IDE](https://ide.bitquery.io/token-holder-snapshot-matic)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+```graphql
+query MyQuery($network: evm_network!, $address: String!) {
+  EVM(network: $network, dataset: archive) {
+    Holders(
+      where: {
+        Currency: {SmartContract: {is: $address}}, 
+        Balance: {
+          Amount: {gt: "0"}, 
+          LastChangeTime: {till: "2026-05-20T00:00:00Z"}
+        },
+        Holder: {Address: {not: "0x"}}}
+    ) {
+      Balance {
+        LastChangeTime(maximum: Balance_LastChangeTime)
+      }
+      holders: uniq(of: Holder_Address)
+      supply: sum(of: Balance_Amount)
+      gini(of: Balance_Amount)
+    }
+  }
+}
+```
+
+```json
+{
+  "network": "matic",
+  "address": "0x99a57e6c8558bc6689f894e068733adf83c19725"
+}
+```
+</details>
+
 ## Balance History By Date
 
 Returns balance snapshots over time for an address. Use `dataset: archive`. Order by `Block_Date` descending and use `limit` to paginate. Add `Currency.SmartContract` under `Currency` to filter by a specific token.

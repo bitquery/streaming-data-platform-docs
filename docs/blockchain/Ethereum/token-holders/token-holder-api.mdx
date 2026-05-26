@@ -88,6 +88,46 @@ query {
 
 </details>
 
+## Snapshot of Token Holders Info
+
+Number of unique Holders, Supply of Token and Gini Coefficient for the Balance Amount for a token before a certain Timestamp 
+could be dirived using the below query. These stats provide a good token snapshot in context of holders for any given time.
+
+[Run In IDE](https://ide.bitquery.io/token-holder-snapshot_1)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+```graphql
+query MyQuery($network: evm_network!, $address: String!) {
+  EVM(network: $network, dataset: archive) {
+    Holders(
+      where: {
+        Currency: {SmartContract: {is: $address}}, 
+        Balance: {
+          Amount: {gt: "0"}, 
+          LastChangeTime: {till: "2026-05-20T00:00:00Z"}
+        },
+        Holder: {Address: {not: "0x"}}}
+    ) {
+      Balance {
+        LastChangeTime(maximum: Balance_LastChangeTime)
+      }
+      holders: uniq(of: Holder_Address)
+      supply: sum(of: Balance_Amount)
+      gini(of: Balance_Amount)
+    }
+  }
+}
+```
+
+```json
+{
+  "network": "eth",
+  "address": "0x00000000001594c61dd8a6804da9ab58ed2483ce"
+}
+```
+</details>
+
 ## Holder Count With Balance Above A Threshold
 
 Count holders above a minimum balance (whale / large-holder filters). Use `uniq(of: Holder_Address, if: { Balance: { Amount: { gt: "..." } } })` with your threshold.
