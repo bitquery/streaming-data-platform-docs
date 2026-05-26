@@ -17,7 +17,7 @@ The **Holders** API returns token holder data for ERC-20 tokens on Ethereum: top
 
 Examples: [Top Holders](#top-holders-of-a-currency-current) · [Holder Count](#token-holder-count-for-an-erc-20-token) · [Whales](#holder-count-with-balance-above-a-threshold) · [Historical Top Holders](#historical-top-holders-by-date) · [Holder Activity](#token-holder-activity) · [Statistics](#token-holder-statistics)
 
-## Top Holders Of A Currency (Current)
+## Top Holders of a Currency (Current)
 
 The most common starting point for traders and analysts: who holds the most of a token right now. Use `dataset: combined` for the latest top holders (realtime + archive).
 
@@ -59,7 +59,7 @@ query {
 
 </details>
 
-## Token Holder Count For An ERC-20 Token
+## Token Holder Count for an ERC-20 Token
 
 How many wallets hold a token. Count distinct addresses with `uniq(of: Holder_Address)` and `dataset: combined`.
 
@@ -88,12 +88,12 @@ query {
 
 </details>
 
-## Snapshot of Token Holders Info
+## Token Holder Snapshot
 
-Number of unique Holders, Supply of Token and Gini Coefficient for the Balance Amount for a token before a certain Timestamp 
-could be dirived using the below query. These stats provide a good token snapshot in context of holders for any given time.
+The number of unique holders, token supply, and Gini coefficient for the balance amount before a specific timestamp
+can be derived using the query below. These stats provide a useful holder snapshot for any given time.
 
-[Run In IDE](https://ide.bitquery.io/token-holder-snapshot_1)
+[Run in IDE](https://ide.bitquery.io/token-holder-snapshot_1)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -128,7 +128,7 @@ query MyQuery($network: evm_network!, $address: String!) {
 ```
 </details>
 
-## Holder Count With Balance Above A Threshold
+## Holder Count with Balance Above a Threshold
 
 Count holders above a minimum balance (whale / large-holder filters). Use `uniq(of: Holder_Address, if: { Balance: { Amount: { gt: "..." } } })` with your threshold.
 
@@ -166,11 +166,11 @@ query {
 
 </details>
 
-## Track Whale Wallets And Token Holdings
+## Track Whale Wallets and Token Holdings
 
-For whale monitoring, combine **[Top Holders](#top-holders-of-a-currency-current)** (`orderBy: { descending: Balance_Amount }`, `limit`) with **[Holder Count Above A Threshold](#holder-count-with-balance-above-a-threshold)**. Pair with [ERC-20 transfers](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) to see recent inflows and outflows from large wallets.
+For whale monitoring, combine **[Top Holders](#top-holders-of-a-currency-current)** (`orderBy: { descending: Balance_Amount }`, `limit`) with **[Holder Count Above a Threshold](#holder-count-with-balance-above-a-threshold)**. Pair with [ERC-20 transfers](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) to see recent inflows and outflows from large wallets.
 
-## Historical Top Holders By Date
+## Historical Top Holders by Date
 
 The **Holders** cube does not support `Block.Date`. Filter by `Balance.LastChangeTime` using datetime format (for example `"2026-05-01T00:00:00Z"`). For address balances on a calendar date, use the [Balances API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date) with `Block.Date`.
 
@@ -250,7 +250,7 @@ query {
 
 </details>
 
-## Wallet Balance At A Point In Time
+## Wallet Balance at a Point in Time
 
 One wallet’s balance for a token on a given date uses the **[Balances API](/docs/blockchain/Ethereum/balances/balance-api/)**, not Holders: set `Balance.Address`, `Currency.SmartContract`, and `Block.Date.till`. Use `dataset: archive`, `orderBy: { descending: Block_Date }`, and `limit: { count: 1 }`.
 
@@ -307,7 +307,7 @@ query {
 
 Drill into a **specific wallet** for a token: transfer count and first/last activity times. Uses the **Holders** API (`UpdateCount`, `FirstChangeTime`, `LastChangeTime`).
 
-### Count Of Transactions For A Token From A Token Holder
+### Count of Transactions for a Token from a Token Holder
 
 [Run in IDE](https://ide.bitquery.io/Number-of-token-transactions-for-a-wallet)
 
@@ -341,7 +341,7 @@ query {
 
 </details>
 
-### First & Last Date Of Transfer For A Token Holder
+### First and Last Transfer Dates for a Token Holder
 
 [Run in IDE](https://ide.bitquery.io/Frst-and-last-date-time-for-token-holder)
 
@@ -381,7 +381,7 @@ query {
 
 Distribution metrics (average, median, Gini, Nakamoto index, and more) via the legacy **`TokenHolders`** cube or aggregated **Holders** queries. See [statistics docs](/docs/graphql/metrics/statistics/) for the full metric list.
 
-### Average Balance Of Token Holder
+### Average Balance of a Token Holder
 
 [Run in IDE](https://ide.bitquery.io/avg-usdt-balance-on-ethereum-using-token-holders-api)
 
@@ -404,7 +404,7 @@ Distribution metrics (average, median, Gini, Nakamoto index, and more) via the l
 
 </details>
 
-### Median Balance Of Token Holder
+### Median Balance of a Token Holder
 
 [Run in IDE](https://ide.bitquery.io/median-balance-of-usdt-holders-on-ethereum-with-token-holders-api)
 
@@ -427,7 +427,7 @@ Distribution metrics (average, median, Gini, Nakamoto index, and more) via the l
 
 </details>
 
-## Find Token Holders Outside A Certain Range
+## Find Token Holders Outside a Certain Range
 
 Advanced filter: holders with balance above an upper bound or below a lower bound (e.g. excluding mid-tier wallets).
 
@@ -471,6 +471,6 @@ Advanced filter: holders with balance above an upper bound or below a lower boun
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 
-## Video Tutorial On How To Identify Top Token Holders For Any Cryptocurrency
+## Video Tutorial on How to Identify Top Token Holders for Any Cryptocurrency
 
 <VideoPlayer url="https://www.youtube.com/watch?v=I79TftivtjA" />

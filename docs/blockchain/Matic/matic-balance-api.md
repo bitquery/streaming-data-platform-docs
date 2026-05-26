@@ -15,9 +15,9 @@ The **Balances** API returns current and historical token balances for an addres
 | **`combined`** | Latest balances. Queries **realtime and archive** databases and merges results.             |
 | **`archive`**  | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
 
-Examples: [All Token Balances](#balance-of-an-address) · [Native MATIC](#native-matic-balance) · [Balance On A Date](#balance-on-a-specific-date) · [Specific Token](#balance-for-a-specific-token)
+Examples: [All Token Balances](#balance-of-an-address) · [Native MATIC](#native-matic-balance) · [Balance on a Date](#balance-on-a-specific-date) · [Specific Token](#balance-for-a-specific-token)
 
-## Balance Of An Address
+## Balance of an Address
 
 Returns token balances for a wallet address. Use `Amount(selectWhere: { gt: "0" })` to exclude zero balances.
 
@@ -90,7 +90,7 @@ query {
 - `Currency.Symbol`, `Currency.SmartContract`: Token metadata.
 - `Balance.Amount`, `Balance.AmountInUSD`: Token balance and USD value (use `selectWhere` to filter non-zero amounts).
 
-## Balance On A Specific Date
+## Balance on a Specific Date
 
 Use `Block.Date.till` for a point-in-time snapshot. Use `dataset: archive` for historical dates and addresses not recently active.
 
@@ -121,7 +121,7 @@ query {
 }
 ```
 
-## Balance For A Specific Token
+## Balance for a Specific Token
 
 Add a `Currency.SmartContract` filter. Always use the contract address, not the token name. Use `0x` for native MATIC on Polygon, or the ERC-20 contract address for a token.
 
@@ -152,12 +152,12 @@ query {
 }
 ```
 
-## Snapshot of Token Holders Info
+## Token Holder Snapshot
 
-Number of unique Holders, Supply of Token and Gini Coefficient for the Balance Amount for a token before a certain Timestamp 
-could be dirived using the below query. These stats provide a good token snapshot in context of holders for any given time.
+The number of unique holders, token supply, and Gini coefficient for the balance amount before a specific timestamp
+can be derived using the query below. These stats provide a useful holder snapshot for any given time.
 
-[Run In IDE](https://ide.bitquery.io/token-holder-snapshot-matic)
+[Run in IDE](https://ide.bitquery.io/token-holder-snapshot-matic)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -192,7 +192,7 @@ query MyQuery($network: evm_network!, $address: String!) {
 ```
 </details>
 
-## Balance History By Date
+## Balance History by Date
 
 Returns balance snapshots over time for an address. Use `dataset: archive`. Order by `Block_Date` descending and use `limit` to paginate. Add `Currency.SmartContract` under `Currency` to filter by a specific token.
 
@@ -227,9 +227,9 @@ query {
 }
 ```
 
-## Wallet Balance For A Specific Token On A Date
+## Wallet Balance for a Specific Token on a Date
 
-Get a wallet's balance for a specific token with `Balance.Address` and `Currency.SmartContract`. This example uses native MATIC (`SmartContract: "0x"`) with `dataset: combined`. For a balance on a calendar date, use [Balance On A Specific Date](#balance-on-a-specific-date) with `dataset: archive` and `Block.Date.till`.
+Get a wallet's balance for a specific token with `Balance.Address` and `Currency.SmartContract`. This example uses native MATIC (`SmartContract: "0x"`) with `dataset: combined`. For a balance on a calendar date, use [Balance on a Specific Date](#balance-on-a-specific-date) with `dataset: archive` and `Block.Date.till`.
 
 [Run in IDE](https://ide.bitquery.io/matic-wallet-balance-token-at-date)
 
