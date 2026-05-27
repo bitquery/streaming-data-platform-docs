@@ -87,6 +87,51 @@ Every Bankr launch emits a `Create(address,address,address,address)` event on th
 
 The four positional arguments are typically `(asset, numeraire, initializer, migrator)`. The first address is the newly created token; the third is the multicurve initializer holding its LP; the fourth identifies whether the launch uses `NoOpMigrator` or a real migrator.
 
+## Recent Bankr Tokens Created by a Deployer
+
+Filter `Create` events on the Airlock by **`Transaction.From`** to list every Bankr token launched by a specific wallet. Replace the deployer address with the wallet you want to track.
+
+[ Try it in the IDE ](https://ide.bitquery.io/All-bankers-tokens-created-by-a-deployer)
+
+```graphql
+{
+  EVM(network: base, dataset: realtime) {
+    Events(
+      limit: { count: 50 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Log: {
+          SmartContract: { is: "0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12" }
+          Signature: { Name: { is: "Create" } }
+        }
+        Transaction: {
+          From: { is: "0x36d4f6cddca1219440a5983f4d4459b20682e103" }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+        From
+      }
+      Arguments {
+        Name
+        Value {
+          __typename
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The first address in `Arguments` is the newly minted token contract.
+
 ## Real-time Stream of Bankr Launches
 
 Convert the above query into a subscription to be notified of every new token the moment it lands on Base.

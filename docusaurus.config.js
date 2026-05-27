@@ -706,10 +706,7 @@ const config = {
             to: "/docs/blockchain/Arbitrum/arbitrum-cross-chain/",
             from: "/docs/examples/Arbitrum/arbitrum-cross-chain/",
           },
-          {
-            to: "/docs/blockchain/Arbitrum/Balance_Updates/",
-            from: "/docs/examples/Arbitrum/Balance_Updates/",
-          },
+
           {
             to: "/docs/blockchain/Arbitrum/Blocks_Transactions/",
             from: "/docs/examples/Arbitrum/Blocks_Transactions/",
@@ -840,10 +837,7 @@ const config = {
             to: "/docs/blockchain/Optimism/",
             from: "/docs/examples/Optimism/",
           },
-          {
-            to: "/docs/blockchain/Optimism/optimism-balance-updates/",
-            from: "/docs/examples/Optimism/optimism-balance-updates/",
-          },
+
           {
             to: "/docs/blockchain/Optimism/optimism-dextrades/",
             from: "/docs/examples/Optimism/optimism-dextrades/",
@@ -1016,24 +1010,60 @@ const config = {
             title: "Start here",
             items: [
               { label: "Platform overview", to: "/docs/intro/" },
-              { label: "Getting started — first query", to: "/docs/start/first-query/" },
+              {
+                label: "Getting started — first query",
+                to: "/docs/start/first-query/",
+              },
               { label: "Starter queries", to: "/docs/start/starter-queries/" },
-              { label: "Starter subscriptions (WebSocket)", to: "/docs/start/starter-subscriptions/" },
-              { label: "Supported chains (V1, V2, Kafka…)", to: "/docs/blockchain/supported-chains/" },
-              { label: "Blockchain APIs overview", to: "/docs/blockchain/introduction/" },
-              { label: "V1 documentation", href: "https://docs.bitquery.io/v1/" },
-              { label: "V1 vs V2 APIs (IDE & schema)", href: "https://docs.bitquery.io/v1/docs/graphql-ide/v1-and-v2" },
+              {
+                label: "Starter subscriptions (WebSocket)",
+                to: "/docs/start/starter-subscriptions/",
+              },
+              {
+                label: "Supported chains (V1, V2, Kafka…)",
+                to: "/docs/blockchain/supported-chains/",
+              },
+              {
+                label: "Blockchain APIs overview",
+                to: "/docs/blockchain/introduction/",
+              },
+              {
+                label: "V1 documentation",
+                href: "https://docs.bitquery.io/v1/",
+              },
+              {
+                label: "V1 vs V2 APIs (IDE & schema)",
+                href: "https://docs.bitquery.io/v1/docs/graphql-ide/v1-and-v2",
+              },
             ],
           },
           {
             title: "Data & metrics",
             items: [
-              { label: "Token prices & OHLCV", to: "/docs/trading/crypto-price-api/introduction/" },
-              { label: "DEX trades", to: "/docs/trading/crypto-trades-api/trades-api/" },
-              { label: "Transfers & wallet flows", to: "/docs/start/mental-model-transfers-events-calls/" },
-              { label: "Contract calls & traces", to: "/docs/API-Blog/what-are-internal-transactions-how-to-get-them/" },
-              { label: "Smart-contract events", to: "/docs/start/mental-model-transfers-events-calls/" },
-              { label: "NFTs & metadata", to: "/docs/blockchain/Ethereum/nft/nft-api/" },
+              {
+                label: "Token prices & OHLCV",
+                to: "/docs/trading/crypto-price-api/introduction/",
+              },
+              {
+                label: "DEX trades",
+                to: "/docs/trading/crypto-trades-api/trades-api/",
+              },
+              {
+                label: "Transfers & wallet flows",
+                to: "/docs/start/mental-model-transfers-events-calls/",
+              },
+              {
+                label: "Contract calls & traces",
+                to: "/docs/API-Blog/what-are-internal-transactions-how-to-get-them/",
+              },
+              {
+                label: "Smart-contract events",
+                to: "/docs/start/mental-model-transfers-events-calls/",
+              },
+              {
+                label: "NFTs & metadata",
+                to: "/docs/blockchain/Ethereum/nft/nft-api/",
+              },
               { label: "Balances & holders", to: "/docs/evm/balances/" },
               { label: "Mempool & pending txs", to: "/docs/start/mempool/" },
             ],
@@ -1042,12 +1072,21 @@ const config = {
             title: "Interfaces & streaming",
             items: [
               { label: "GraphQL (HTTP)", to: "/docs/start/first-query/" },
-              { label: "WebSocket subscriptions", to: "/docs/start/starter-subscriptions/" },
-              { label: "Kafka streaming concepts", to: "/docs/streams/kafka-streaming-concepts/" },
+              {
+                label: "WebSocket subscriptions",
+                to: "/docs/start/starter-subscriptions/",
+              },
+              {
+                label: "Kafka streaming concepts",
+                to: "/docs/streams/kafka-streaming-concepts/",
+              },
               { label: "Streams overview", to: "/docs/streams/" },
               { label: "MCP server", to: "/docs/mcp/mcp-server/" },
               { label: "Cloud datasets (Parquet)", to: "/docs/cloud/" },
-              { label: "Solana gRPC (CoreCast)", to: "/docs/grpc/solana/introduction/" },
+              {
+                label: "Solana gRPC (CoreCast)",
+                to: "/docs/grpc/solana/introduction/",
+              },
             ],
           },
           {
@@ -1057,9 +1096,15 @@ const config = {
               { label: "Explorer", href: "https://explorer.bitquery.io/" },
               { label: "GraphQL IDE", href: "https://ide.bitquery.io/" },
               { label: "Tools & SDKs directory", to: "/docs/tools-directory/" },
-              { label: "Blockchain ClickHouse warehouse", href: "https://bitquery.io/products/data-warehouse" },
+              {
+                label: "Blockchain ClickHouse warehouse",
+                href: "https://bitquery.io/products/data-warehouse",
+              },
               { label: "Visit bitquery.io", href: "https://bitquery.io/" },
-              { label: "Enterprise & sales", href: "https://bitquery.io/contact" },
+              {
+                label: "Enterprise & sales",
+                href: "https://bitquery.io/contact",
+              },
             ],
           },
           {
@@ -1079,11 +1124,23 @@ const config = {
           {
             title: "Guides & use cases",
             items: [
-              { label: "Traders & desks →", to: "/docs/trading/crypto-price-api/introduction/" },
-              { label: "Analysts & quants →", to: "/docs/graphql/dataset/archive/" },
+              {
+                label: "Traders & desks →",
+                to: "/docs/trading/crypto-price-api/introduction/",
+              },
+              {
+                label: "Analysts & quants →",
+                to: "/docs/graphql/dataset/archive/",
+              },
               { label: "Auditors & finance →", to: "/docs/evm/balances/" },
-              { label: "Investigators & compliance →", href: "https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api" },
-              { label: "How-to guides & recipes", to: "/docs/category/how-to-guides/" },
+              {
+                label: "Investigators & compliance →",
+                href: "https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api",
+              },
+              {
+                label: "How-to guides & recipes",
+                to: "/docs/category/how-to-guides/",
+              },
             ],
           },
           {
