@@ -101,9 +101,9 @@ query {
   EVM(network: arbitrum, dataset: archive) {
     Balances(
       where: {
-        Block: { Date: { till: "2026-05-01" } }
+        Block: { Date: { till: "2026-05-05" } }
         Balance: {
-          Address: { is: "0x0C11Dc0d1Ae00E12A2015713B6bAaa1f4facF4c5" }
+          Address: { is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF" }
         }
       }
     ) {
@@ -135,7 +135,7 @@ query {
         Balance: {
           Address: { is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF" }
         }
-        Currency: { SmartContract: { is: "0x" } }
+        Currency: { SmartContract: { is: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1" } }
       }
     ) {
       Currency {
@@ -162,16 +162,17 @@ can be derived using the query below. These stats provide a useful holder snapsh
 <details>
   <summary>Click to expand GraphQL query</summary>
 ```graphql
-query MyQuery($network: evm_network!, $address: String!) {
-  EVM(network: $network, dataset: archive) {
+query {
+  EVM(network: arbitrum, dataset: archive) {
     Holders(
       where: {
-        Currency: {SmartContract: {is: $address}}, 
+        Currency: { SmartContract: { is: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9" } }
         Balance: {
-          Amount: {gt: "0"}, 
-          LastChangeTime: {till: "2026-05-20T00:00:00Z"}
-        },
-        Holder: {Address: {not: "0x"}}}
+          Amount: { gt: "0" }
+          LastChangeTime: { till: "2026-05-20T00:00:00Z" }
+        }
+        Holder: { Address: { not: "0x" } }
+      }
     ) {
       Balance {
         LastChangeTime(maximum: Balance_LastChangeTime)
@@ -181,13 +182,6 @@ query MyQuery($network: evm_network!, $address: String!) {
       gini(of: Balance_Amount)
     }
   }
-}
-```
-
-```json
-{
-  "network": "arbitrum",
-  "address": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"
 }
 ```
 </details>
@@ -204,9 +198,8 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0x0C11Dc0d1Ae00E12A2015713B6bAaa1f4facF4c5" }
+          Address: { is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF" }
         }
-        Currency: {}
       }
       orderBy: { descending: Block_Date }
       limit: { count: 100 }
@@ -221,37 +214,6 @@ query {
       }
       Block {
         Date
-      }
-    }
-  }
-}
-```
-
-## Wallet Balance for a Specific Token on a Date
-
-Get a wallet's balance for a specific token with `Balance.Address` and `Currency.SmartContract`. This example uses native ETH (`SmartContract: "0x"`) with `dataset: combined`. For a balance on a calendar date, use [Balance on a Specific Date](#balance-on-a-specific-date) with `dataset: archive` and `Block.Date.till`.
-
-[Run in IDE](https://ide.bitquery.io/arbitrum-wallet-balance-token-at-date)
-
-```graphql
-query {
-  EVM(network: arbitrum, dataset: combined) {
-    Balances(
-      where: {
-        Balance: {
-          Address: { is: "0xDef1C0ded9bec7F1a1670819833240f027b25EfF" }
-        }
-        Currency: { SmartContract: { is: "0x" } }
-      }
-    ) {
-      Currency {
-        Symbol
-        SmartContract
-      }
-      Balance {
-        Amount(selectWhere: { gt: "0" })
-        AmountInUSD
-        Address
       }
     }
   }

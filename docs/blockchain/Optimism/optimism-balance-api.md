@@ -103,7 +103,7 @@ query {
       where: {
         Block: { Date: { till: "2026-05-01" } }
         Balance: {
-          Address: { is: "0x8c6a20b87B9de1cc47aF14B6C7B0db9BE9fF9965" }
+          Address: { is: "0xacD03D601e5bB1B275Bb94076fF46ED9D753435A" }
         }
       }
     ) {
@@ -135,7 +135,7 @@ query {
         Balance: {
           Address: { is: "0xacD03D601e5bB1B275Bb94076fF46ED9D753435A" }
         }
-        Currency: { SmartContract: { is: "0x" } }
+        Currency: { SmartContract: { is: "0x23ee2343b892b1bb63503a4fabc840e0e2c6810f" } }
       }
     ) {
       Currency {
@@ -162,16 +162,17 @@ can be derived using the query below. These stats provide a useful holder snapsh
 <details>
   <summary>Click to expand GraphQL query</summary>
 ```graphql
-query MyQuery($network: evm_network!, $address: String!) {
-  EVM(network: $network, dataset: archive) {
+query {
+  EVM(network: optimism, dataset: archive) {
     Holders(
       where: {
-        Currency: {SmartContract: {is: $address}}, 
+        Currency: { SmartContract: { is: "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58" } }
         Balance: {
-          Amount: {gt: "0"}, 
-          LastChangeTime: {till: "2026-05-20T00:00:00Z"}
-        },
-        Holder: {Address: {not: "0x"}}}
+          Amount: { gt: "0" }
+          LastChangeTime: { till: "2026-05-20T00:00:00Z" }
+        }
+        Holder: { Address: { not: "0x" } }
+      }
     ) {
       Balance {
         LastChangeTime(maximum: Balance_LastChangeTime)
@@ -183,20 +184,13 @@ query MyQuery($network: evm_network!, $address: String!) {
   }
 }
 ```
-
-```json
-{
-  "network": "optimism",
-  "address": "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
-}
-```
 </details>
 
 ## Balance History by Date
 
 Returns balance snapshots over time for an address. Use `dataset: archive`. Order by `Block_Date` descending and use `limit` to paginate. Add `Currency.SmartContract` under `Currency` to filter by a specific token.
 
-[Run in IDE](https://ide.bitquery.io/optimism-balances-history)
+[Run in IDE](https://ide.bitquery.io/optimism-balances-history-address)
 
 ```graphql
 query {
@@ -204,7 +198,7 @@ query {
     Balances(
       where: {
         Balance: {
-          Address: { is: "0x8c6a20b87B9de1cc47aF14B6C7B0db9BE9fF9965" }
+          Address: { is: "0xacD03D601e5bB1B275Bb94076fF46ED9D753435A" }
         }
         Currency: {}
       }
