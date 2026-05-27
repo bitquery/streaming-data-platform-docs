@@ -75,11 +75,12 @@ In `where`, filter on at least one indexed field (Index 1, 2, 3, or 4 where appl
 
 ## Trading (Realtime)
 
-| Cube           | Index 1     | Index 2             | Index 3             |
-| -------------- | ----------- | ------------------- | ------------------- |
-| **Currencies** | Currency_Id | Interval_Time_Start | —                   |
-| **Tokens**     | Token_Id    | Interval_Time_Start | —                   |
-| **Pairs**      | Token_Id    | Currency_Id         | Interval_Time_Start |
+| Cube           | Index 1            | Index 2               | Index 3               | Index 4            | Index 5      |
+| -------------- | ------------------ | --------------------- | --------------------- | ------------------ | ------------ |
+| **Currencies** | Currency_Id        | Interval_Time_Start   | —                     | —                  | —            |
+| **Tokens**     | Token_Id           | Interval_Time_Start   | Currency_Id           | Token_Address      | —            |
+| **Pairs**      | Token_Id           | Currency_Id           | Interval_Time_Start   | Token_Address      | Pool_Address |
+| **Trades**     | Trader_Address     | Pair_Token_Address    | Pair_Pool_Address     | —                  | —            |
 
 ---
 
