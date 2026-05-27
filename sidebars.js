@@ -746,6 +746,40 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Cardano",
+          link: {
+            type: "doc",
+            id: "blockchain/Cardano/index",
+          },
+          items: [
+            "blockchain/Cardano/blocks",
+            "blockchain/Cardano/transactions",
+            "blockchain/Cardano/address",
+            "blockchain/Cardano/inputs-outputs",
+            "blockchain/Cardano/mints",
+            "blockchain/Cardano/djed",
+            "blockchain/Cardano/coinpath",
+          ],
+        },
+        {
+          type: "category",
+          label: "Bitcoin",
+          link: {
+            type: "doc",
+            id: "blockchain/Bitcoin/index",
+          },
+          items: [
+            "blockchain/Bitcoin/bitcoin-blocks-api",
+            "blockchain/Bitcoin/bitcoin-transactions-api",
+            "blockchain/Bitcoin/bitcoin-address-api",
+            "blockchain/Bitcoin/bitcoin-inputs-outputs",
+            "blockchain/Bitcoin/bitcoin-fee-api",
+            "blockchain/Bitcoin/bitcoin-omni-transactions",
+            "blockchain/Bitcoin/bitcoin-coinpath-api",
+          ],
+        },
+        {
+          type: "category",
           label: "Cross-Chain",
           link: {
             type: "generated-index",

@@ -1,0 +1,90 @@
+---
+title: Cardano API Documentation
+description: Query Cardano blocks, transactions, UTXOs, native tokens, addresses, staking, and coin-flow data with Bitquery's GraphQL API.
+slug: /blockchain/Cardano/
+keywords:
+  - Cardano API
+  - Cardano GraphQL API
+  - ADA API
+  - Cardano blockchain API
+  - Cardano explorer API
+  - Cardano native tokens API
+  - Cardano address balance API
+  - Cardano staking API
+  - DJED stablecoin API
+  - eUTXO API
+  - Cardano transactions API
+---
+
+# Cardano API Documentation
+
+## Overview
+
+Bitquery's Cardano APIs let you query the chain through GraphQL — blocks, transactions, addresses, native tokens, UTXO-level inputs and outputs, staking, and multi-hop fund flow. Replace the example addresses and token IDs in any query with your own values to point them at real wallets and assets.
+
+If you get stuck or need a data point that isn't covered here, reach out on [Telegram](https://t.me/Bloxy_info).
+
+:::info Endpoint
+Cardano GraphQL queries are served at `https://graphql.bitquery.io`.
+:::
+
+### What you can do with the Cardano API
+
+- Look up blocks by height, hash, or time window — including epoch, slot, slot leader, and VRF key.
+- Pull transactions with input/output totals, fees in ADA and USD, mint count, and withdrawals.
+- Get address balances across ADA and every native token a wallet holds, plus staking and rewards.
+- Walk UTXO-level inputs and outputs to reconstruct exact balances or build transaction feeds.
+- Track mints and burns of any native token (NFTs, fungibles, stablecoins like DJED).
+- Trace ADA flows inbound and outbound across multiple hops with Coinpath.
+
+### How the Cardano API differs from running your own node
+
+| `cardano-node` / RPC | Bitquery Cardano API |
+| --- | --- |
+| Raw chain state — you build the indexer | Pre-indexed and parsed: blocks, txs, UTXOs, native tokens, staking |
+| No historical analytics out of the box | History, joins, aggregations, USD conversion |
+| You stream and decode CBOR yourself | GraphQL response — pick the fields you need |
+| Best for submitting transactions and full validation | Best for analytics, dashboards, wallet UIs, and compliance work |
+
+## Quick start
+
+This query returns the 5 most recent Cardano blocks with hash, height, transaction count, and timestamp.
+
+```graphql
+{
+  cardano(network: cardano) {
+    blocks(options: {desc: "height", limit: 5}) {
+      height
+      blockHash
+      transactionCount
+      timestamp {
+        time(format: "%Y-%m-%d %H:%M:%S")
+      }
+    }
+  }
+}
+```
+
+## API reference
+
+### Core data
+
+- [Cardano Blocks API](https://docs.bitquery.io/docs/blockchain/Cardano/blocks) — block lookups by height or time, epoch/slot context, slot-leader metadata.
+- [Cardano Transactions API](https://docs.bitquery.io/docs/blockchain/Cardano/transactions) — transaction details, fees in ADA and USD, mint counts, daily counts.
+- [Cardano Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Cardano/inputs-outputs) — UTXO-level data for balance reconstruction and transfer feeds.
+
+### Addresses and staking
+
+- [Cardano Address API](https://docs.bitquery.io/docs/blockchain/Cardano/address) — per-asset balances, staking snapshot, and the `addressStats` aggregate cube.
+
+### Native tokens
+
+- [Cardano Mints API](https://docs.bitquery.io/docs/blockchain/Cardano/mints) — native-token mint and burn events, including NFT drops and fungible issuance.
+
+### Stablecoins
+
+- [Djed Stablecoin API](https://docs.bitquery.io/docs/blockchain/Cardano/djed) — DJED mints, burns, transfers, and wallet-level balance examples.
+
+### Fund tracing
+
+- [Cardano Coinpath API](https://docs.bitquery.io/docs/blockchain/Cardano/coinpath) — multi-hop inbound and outbound ADA flow tracing for compliance and treasury work.

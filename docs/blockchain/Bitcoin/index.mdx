@@ -1,0 +1,103 @@
+---
+title: Bitcoin API Documentation
+description: Query Bitcoin blocks, transactions, addresses, UTXO inputs and outputs, fees, miner rewards, Omni Layer, and fund flows with Bitquery's GraphQL and Kafka APIs.
+slug: /blockchain/Bitcoin/
+keywords:
+  - Bitcoin API
+  - Bitcoin GraphQL API
+  - BTC API
+  - Bitcoin blockchain API
+  - Bitcoin explorer API
+  - Bitcoin address balance API
+  - Bitcoin UTXO API
+  - Bitcoin fee API
+  - Bitcoin miner rewards API
+  - Bitcoin Omni Layer API
+  - Bitcoin Kafka stream
+---
+
+# Bitcoin API Documentation
+
+## Overview
+
+Bitquery's Bitcoin APIs cover the chain end-to-end through GraphQL — blocks, transactions, addresses, UTXO-level inputs and outputs, fees in BTC and USD, miner rewards, Omni Layer transactions (USDT-on-Bitcoin and other Omni tokens), and multi-hop fund flow tracing. Every query carries the historical USD value at the time of the transaction, which makes it easy to build wallet history feeds, tax / accounting tools, compliance dashboards, and mining analytics.
+
+If you need a data point that isn't covered here, reach out on [Telegram](https://t.me/Bloxy_info).
+
+:::info Endpoint
+Bitcoin GraphQL queries are served at `https://graphql.bitquery.io`. For real-time data, see the [Bitcoin Kafka stream](https://docs.bitquery.io/docs/streams/protobuf/chains/Bitcoin-protobuf).
+:::
+
+### What you can do with the Bitcoin API
+
+- Pull blocks by height, hash, or time window with difficulty, size, and transaction counts.
+- Get transactions with input and output totals, fees in BTC and USD, and per-tx pagination.
+- Compute address balances from raw UTXOs — including balance at a historical block height.
+- List individual UTXOs received and spent by an address inside any date range.
+- Aggregate fees paid by an address or across the network for fee analytics.
+- Track miner activity, daily block rewards, and first-active timestamps for mining pools.
+- Query Omni Layer transactions and transfers (USDT on Bitcoin and other Omni tokens).
+- Trace inbound and outbound fund flows across multiple hops with Coinpath.
+
+### How the Bitcoin API differs from running your own node
+
+| `bitcoind` / Bitcoin RPC | Bitquery Bitcoin API |
+| --- | --- |
+| Raw chain state — you build the indexer | Pre-indexed and parsed: blocks, txs, UTXOs, addresses, Omni Layer |
+| No historical analytics out of the box | History, joins, aggregations, USD conversion at trade time |
+| Re-scan the chain to compute balances | One query for current balance, balance at a height, or activity stats |
+| Best for submitting transactions and full validation | Best for analytics, dashboards, wallet UIs, compliance, and mining stats |
+
+### Real-time Bitcoin data
+
+For live, low-latency Bitcoin data, use Bitquery's **[Bitcoin Kafka stream](https://docs.bitquery.io/docs/streams/protobuf/chains/Bitcoin-protobuf)** (`btc.transactions.proto`). It delivers every block and transaction as soon as it lands on-chain, with full input/output detail, script and address parsing, and miner data. GraphQL subscriptions are not available for Bitcoin — Kafka is the real-time path.
+
+For polling or historical pulls, the GraphQL queries below work the same way you'd expect on any other Bitquery chain.
+
+## Quick start
+
+This query returns the 5 most recent Bitcoin blocks with height, difficulty, transaction count, and timestamp.
+
+```graphql
+{
+  bitcoin(network: bitcoin) {
+    blocks(options: {desc: "height", limit: 5}) {
+      height
+      difficulty
+      transactionCount
+      blockSizeBigInt
+      timestamp {
+        time(format: "%Y-%m-%d %H:%M:%S")
+      }
+    }
+  }
+}
+```
+
+## API reference
+
+### Core data
+
+- [Bitcoin Blocks API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-blocks-api) — block lookups by height or time, difficulty, size, and transaction counts.
+- [Bitcoin Transactions API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-transactions-api) — transaction-level data with fees, inputs/outputs totals, and pagination patterns.
+- [Bitcoin Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — UTXO-level data, historical BTC price, balance at a block height, and miner rewards.
+
+### Addresses and balances
+
+- [Bitcoin Address API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-address-api) — balances from UTXOs (current and at a height), `addressStats` aggregates, first/last-active.
+
+### Fees
+
+- [Bitcoin Fee API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-fee-api) — per-transaction and aggregate fee queries in BTC and USD.
+
+### Omni Layer (USDT on Bitcoin)
+
+- [Bitcoin Omni Transactions & Transfers API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-omni-transactions) — Omni transactions and per-address transfers for tokens like USDT-on-Bitcoin.
+
+### Fund tracing
+
+- [Bitcoin Coinpath API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-coinpath-api) — multi-hop fund flow tracing between Bitcoin addresses.
+
+### Real-time
+
+- [Bitcoin Kafka stream](https://docs.bitquery.io/docs/streams/protobuf/chains/Bitcoin-protobuf) — `btc.transactions.proto` topic for sub-block-time delivery.

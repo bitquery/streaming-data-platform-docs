@@ -40,6 +40,8 @@ Our V2 API version with enhanced features and real-time streaming:
 - **[Solana](https://docs.bitquery.io/docs/blockchain/Solana/)**
 - **[Tron](https://docs.bitquery.io/docs/blockchain/Tron/)**
 - **[TON](https://docs.bitquery.io/docs/blockchain/TON/)**
+- **[Bitcoin](https://docs.bitquery.io/docs/blockchain/Bitcoin/)**
+- **[Cardano](https://docs.bitquery.io/docs/blockchain/Cardano/)**
 
 ### **V1 APIs**
 Our comprehensive V1 API supporting 40+ blockchains with historical data:
@@ -550,7 +552,7 @@ A: Bitquery supports 40+ blockchains across two API versions. For a detailed **p
 
 **V2 APIs:**
 - **EVM Chains**: Ethereum, BSC, Arbitrum, Base, Polygon, Optimism, opBNB
-- **Non-EVM**: Solana, Tron, TON
+- **Non-EVM**: Solana, Tron, TON, Bitcoin, Cardano
 
 **V1 APIs:**
 - **Supported Blockchains**: Bitcoin, Ethereum, Solana, BSC, Polygon, Bitcoin Cash, Litecoin, Bitcoin SV, Dash, Zcash, Avalanche, Klaytn, Celo, Moonbeam, Fantom, Cronos, Cosmos, Hedera, Flow, EOS, Ripple (XRP), Stellar, Algorand, Cardano, Filecoin, and more.
