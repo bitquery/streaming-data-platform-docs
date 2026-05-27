@@ -220,34 +220,3 @@ query {
   }
 }
 ```
-
-## Wallet Balance for a Specific Token on a Date
-
-Get a wallet's balance for a specific token with `Balance.Address` and `Currency.SmartContract`. This example uses native ETH (`SmartContract: "0x"`) with `dataset: combined`. For a balance on a calendar date, use [Balance on a Specific Date](#balance-on-a-specific-date) with `dataset: archive` and `Block.Date.till`.
-
-[Run in IDE](https://ide.bitquery.io/optimism-wallet-balance-token-at-date)
-
-```graphql
-query {
-  EVM(network: optimism, dataset: combined) {
-    Balances(
-      where: {
-        Balance: {
-          Address: { is: "0xacD03D601e5bB1B275Bb94076fF46ED9D753435A" }
-        }
-        Currency: { SmartContract: { is: "0x" } }
-      }
-    ) {
-      Currency {
-        Symbol
-        SmartContract
-      }
-      Balance {
-        Amount(selectWhere: { gt: "0" })
-        AmountInUSD
-        Address
-      }
-    }
-  }
-}
-```
