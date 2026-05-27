@@ -695,6 +695,7 @@ const sidebars = {
             "blockchain/Base/base-uniswap-api",
             "blockchain/Base/uniswap-v4-api",
             "blockchain/Base/base-clanker-api",
+            "blockchain/Base/base-bankr-api",
             "blockchain/Base/apestore-base-api",
             "blockchain/Base/base-jump-base-api",
             "blockchain/Base/base-zora-api",
