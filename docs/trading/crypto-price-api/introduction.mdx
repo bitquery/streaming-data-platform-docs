@@ -58,6 +58,25 @@ While you can access the aggregated price for a single trading pair, the Price I
 - Tron
 - Optimism
 
+:::tip Faster queries: filter with `NetworkBid` instead of `Network`
+
+When you scope **Tokens**, **Pairs**, or related **Trading** queries by chain, prefer **`NetworkBid`** over the **`Network`** field in your `where` clause for lower latency.
+
+Use the same **`bid:<chain>`** convention as **`Token.Id`**.
+
+| Network Name | `NetworkBid` Value |
+| ---------------------- | ------------------------- |
+| Solana | `bid:solana` |
+| Ethereum | `bid:eth` |
+| Binance Smart Chain | `bid:bsc` |
+| Base | `bid:base` |
+| Arbitrum | `bid:arbitrum` |
+| Matic (Polygon) | `bid:matic` |
+| Tron | `bid:tron` |
+| Optimism | `bid:optimism` |
+
+:::
+
 ## Available Endpoints
 
 - **[Streaming Endpoint](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql)**

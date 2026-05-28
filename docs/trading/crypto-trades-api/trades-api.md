@@ -25,7 +25,7 @@ For **aggregated** token metrics across all pairs, use the **[Tokens cube](/docs
 ### Key points
 
 - **Subscriptions**: These examples use **`subscription`** for real-time streams; you can often run the same selection as a **`query`** with an added time window on **`Block`** / **`Interval`** where supported.
-- **Networks**: Filter with **`Pair.Market.Network`** (e.g. **`Solana`**, **`Ethereum`**).
+- **Networks**: Filter by chain with **`Pair.Market.Network`** to filter trades on a particular network. For **faster queries**, use **`Pair.Market.NetworkBid`** as showcased in the tip below.
 - **Token filter**: Use **`Pair.Token.Id`** with the full id (e.g. **`bid:solana:<mint>`**, **`bid:eth:<lowercase_contract>`**) per your dataset conventions.
 - **Trader filter**: Use **`Trader.Address`** for the wallet executing the trade.
 - **Aggregations**: Examples at the end of this page use **`query`** with **`limit`**, **`orderBy`**, **`sum`**, **`average`**, **`count`**, **`calculate`**, **`limitBy`**, and **`distinct`** for volume, token, DEX, time-bucket, and fee analytics on **`Trades`**.
@@ -33,6 +33,26 @@ For **aggregated** token metrics across all pairs, use the **[Tokens cube](/docs
 
 More patterns: **[Crypto Price API examples](/docs/trading/crypto-price-api/examples)**.
 
+:::tip Faster queries: filter with `NetworkBid` instead of `Network`
+
+On **`Trading.Trades`**, you can scope by chain with **`Pair.Market.NetworkBid`** instead of **`Pair.Market.Network`** for faster results.
+
+se the same **`bid:<chain>`** convention as **`Pair.Token.Id`**.
+
+| Network Name | `NetworkBid` Value |
+| ---------------------- | ------------------------- |
+| Solana | `bid:solana` |
+| Ethereum | `bid:eth` |
+| Binance Smart Chain | `bid:bsc` |
+| Base | `bid:base` |
+| Arbitrum | `bid:arbitrum` |
+| Matic (Polygon) | `bid:matic` |
+| Tron | `bid:tron` |
+| Optimism | `bid:optimism` |
+
+The same **`NetworkBid`** pattern applies on the **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** for **`Token.NetworkBid`** and **`Market.NetworkBid`** on **Tokens** and **Pairs**.
+
+:::
 
 ## How Do I Stream New DEX Trades Across All Chains in Real Time?
 
