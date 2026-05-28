@@ -6,6 +6,11 @@ sidebar_position: 1
 
 # Photon Solana API
 
+:::tip Need real-time Photon-style trader data or anything from the last ~30 days?
+For **real-time trader and wallet data over the last ~30 days** across **8 chains in one API**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical Photon-style trader data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
+
 Photon is a routing aggregator on Solana that finds the best execution paths across multiple DEXs. To identify trades that were routed through Photon, we use their program address `BSfD6SHZigAfDWSjzD5Q41jw8LmKwtmjskPH9XW1mrRW` in our queries.
 
 This program address appears in the instruction data when Photon routes a trade, allowing us to filter and analyze only the trades that went through their routing system. By joining DEX trade data with instruction data containing this program address, we can accurately track Photon's routing activity and provide insights into their trade execution patterns.

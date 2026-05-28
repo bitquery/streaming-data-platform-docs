@@ -821,6 +821,7 @@ const sidebars = {
           "Using Price Streams for Tokens & Currencies Across Chains",
       },
       items: [
+        "trading/trading-data-overview",
         {
           type: "category",
           label: "Crypto Price APIs",

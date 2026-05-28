@@ -4,6 +4,11 @@ sidebar_position: 1
 
 # BullX Solana API
 
+:::tip Need real-time BullX-style trader data or anything from the last ~30 days?
+For **real-time trader and wallet data over the last ~30 days** across **8 chains in one API**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical BullX-style trader data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
+
 This section will guide you through different APIs which will tell you how to get data like realtime trades just like how BullX shows for Solana.
 
 :::note

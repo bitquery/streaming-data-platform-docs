@@ -1,5 +1,10 @@
 # Solana Trader API
 
+:::tip Need real-time Solana trader data or anything from the last ~30 days?
+For **real-time trader and wallet data over the last ~30 days** across **8 chains in one API**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical Solana trader data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
+
 In this section we will see how to get Solana trader information using our API. More queries on DEX trades including latest trades, OHLC, and other data points can be found in the [Solana DEX Trades API page](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/).
 
 :::note

@@ -1,5 +1,10 @@
 # Raydium Launchpad API
 
+:::tip Need real-time Raydium Launchpad data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Raydium Launchpad swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Raydium Launchpad data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 In this section we see how to get data on Launchpad by Raydium. This includes token creation, latest trades by trader, for a token etc. You can also check out our [Pump Fun API Docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) and [LetsBonk.fun API Docs](https://docs.bitquery.io/docs/blockchain/Solana/letsbonk-api/).

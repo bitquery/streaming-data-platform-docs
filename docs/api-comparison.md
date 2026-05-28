@@ -4,6 +4,10 @@ sidebar_position: 1
 
 # API Comparison
 
+:::tip Looking specifically for trading / DEX data?
+This page compares **delivery methods** (GraphQL Query vs Subscription vs Kafka). For the **trading-data product choice** (chain-level `DEXTrades` / `DEXTradeByTokens` vs the curated `Trading` cube), see the dedicated [**Trading Data Overview**](https://docs.bitquery.io/docs/trading/trading-data-overview).
+:::
+
 To choose the right Bitquery API offering, it helps to understand their differences. The table below summarizes key features and capabilities of GraphQL Query vs GraphQL Subscription vs Kafka Streams:
 
 | Feature / Method                  | GraphQL Query                                | GraphQL Subscription (WebSocket)               | Kafka Streams (Protobuf)                          |

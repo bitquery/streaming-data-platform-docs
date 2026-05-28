@@ -2,6 +2,11 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Pancake Swap API
 
+:::tip Need real-time PancakeSwap data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PancakeSwap swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical PancakeSwap data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
+
 In this section we will use APIs from Bitquery to get the on-chain trade related data, trade metrics, trades for a token or a trader on the Pancake Swap DEX.
 To get the trade activities of the Pancake Swap exclusively we have added a filter out trades based on `Factory Contract` address, `0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865` for the case of Pancake Swap V3. To get the trades and trade related data for Pancake Swap V1 or V2 you would need their respective addresses. Create your account and get started by following the [Quickstart instructions](https://docs.bitquery.io/docs/start/first-query/).
 

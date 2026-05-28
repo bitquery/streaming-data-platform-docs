@@ -4,6 +4,11 @@ sidebar_position: 2
 
 # Tron DEX Trades API
 
+:::tip Need real-time Tron DEX data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API** (filter with `Pair.Market.Network: Tron`). Use this page when you need **historical Tron data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+:::
+
+
 **Tron DEX Trades** help you see **who swapped what, when, and at what price** on Tron decentralized exchanges which is useful for dashboards, alerts, research, and trading tools. The examples below are ready-to-run **GraphQL** queries and subscriptions you can copy into the [Bitquery IDE](https://ide.bitquery.io). You can also stream at scale via [Apache Kafka](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
 
 <head>

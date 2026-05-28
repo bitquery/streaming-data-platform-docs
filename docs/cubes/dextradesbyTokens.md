@@ -1,6 +1,10 @@
 # DEXTradesByTokens Cube
 
-> **Before you start**: Not sure when to use DexTradesByTokens vs DexTrades vs Events vs Calls? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+:::tip Need real-time data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this cube when you need **historical data older than ~30 days** (with `dataset: combined` or `archive`), custom OHLC intervals, or token-expanded rows.
+:::
+
+> **Before you start**: Not sure when to use DexTradesByTokens vs DexTrades vs Events vs Calls? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case. For a 1-page comparison of these three trade cubes, see [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades).
 
 The DEXTradesByTokens cube provides comprehensive information about DEX trading data from a token-centric perspective, showing both sides of each trade for every participant. This includes buyer, seller, token prices, pairs, transactions, OHLC data, and more.
 

@@ -5,6 +5,11 @@ description: "Monitor Four Meme memecoin transactions in real-time before confir
 
 # Four Meme Mempool API - Real-Time Pre-Confirmation Monitoring
 
+:::tip Need real-time Four.meme data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Four.meme swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Four.meme data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
+
 Monitor Four Meme memecoin activity in the BSC mempool before transactions are confirmed on-chain. Track pending trades, new token launches, bonding curve progress, and detect MEV opportunities with Bitquery's ultra-low latency Mempool APIs and Kafka Streams.
 
 Get ahead of the market by monitoring mempool activity for Four Meme tokens before they hit the blockchain. Perfect for MEV bots, sniper bots, and advanced trading strategies.

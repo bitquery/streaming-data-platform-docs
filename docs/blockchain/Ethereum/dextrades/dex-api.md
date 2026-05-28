@@ -1,5 +1,10 @@
 # DEX API
 
+:::tip Need real-time Ethereum DEX data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Ethereum DEX swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Ethereum DEX data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
+
 Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 For **live swaps** with trader, USD prices and mcap on each row, start with the **[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)**. For **historical** work—long lookbacks, archive datasets, pool-level detail, OHLC built from raw trades, and DEX-wide stats—**`DEXTrades`** and **`DEXTradeByTokens`** are usually the better fit; the queries on this page follow that path.

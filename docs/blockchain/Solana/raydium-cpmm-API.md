@@ -1,5 +1,10 @@
 # Raydium CPMM API
 
+:::tip Need real-time Raydium CPMM data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Raydium CPMM swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Raydium CPMM data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
+
 In this section we will see how to get data on Raydium CPMM trades in real-time. You can check out our [Pump Fun docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/), [Raydium v4 docs](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/) and [Raydium LaunchPad docs](https://docs.bitquery.io/docs/blockchain/Solana/launchpad-raydium/) too.
 
 :::note

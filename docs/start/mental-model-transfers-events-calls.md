@@ -8,7 +8,7 @@ Understanding when to use **Transfers**, **Events**, **Calls**, or **DexTrades**
 
 Before writing a query, ask yourself:
 
-1. **Do I need DEX swap/trade data or aggregated price/OHLC data?** → Use **DexTrades** / **DexTradesByTokens** for per-swap data, or the **[Trading (Crypto Price)](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction)** cube for pre-aggregated prices, OHLC, and moving averages.
+1. **Do I need DEX swap/trade data or aggregated price/OHLC data?** → For **real-time + the last ~30 days**, use the curated **`Trading`** cube — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) for swap-level rows or [`Trading.Tokens` / `Pairs` / `Currencies`](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction) for pre-aggregated OHLC. For **historical** data older than ~30 days, use chain-level **`DexTrades`** / **`DexTradesByTokens`**. See the [**Trading Data Overview**](https://docs.bitquery.io/docs/trading/trading-data-overview) for the full decision matrix.
 2. **Do I need token movements?** → Consider `Transfers` or `Calls`
 3. **Do I need smart contract state changes?** → Consider `Events`
 4. **Do I need function execution details?** → Consider `Calls`

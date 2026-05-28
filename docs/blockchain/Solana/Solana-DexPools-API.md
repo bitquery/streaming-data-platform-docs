@@ -4,6 +4,11 @@ sidebar_position: 2
 
 # Solana DEX Pools API
 
+:::tip Need real-time Solana DEX pool data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Solana DEX pool swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Solana DEX pool data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
+
 In this section we will see how to get Solana DEX Pools information using our API.
 
 <head>

@@ -22,6 +22,10 @@ keywords:
 
 # Traders API — Real-Time Wallet Trade Streams
 
+:::tip Which trade API should you use?
+The Traders API is the wallet-centric view of **`Trading.Trades`** — designed for **real-time and the last ~30 days**. For older / historical wallet activity (anything beyond ~30 days), use chain-level [`DEXTrades`](https://docs.bitquery.io/docs/cubes/dextrades) or [`DEXTradeByTokens`](https://docs.bitquery.io/docs/cubes/dextradesbyTokens) on the relevant chain root. See the [**Trading Data Overview**](https://docs.bitquery.io/docs/trading/trading-data-overview) for the full comparison.
+:::
+
 > **Bitquery Traders API** lets you **stream wallet trades in real time** across **Solana**, **Ethereum**, **BSC**, **Base**, and **Arbitrum** . You can track a **single wallet** or **multiple addresses**, detect **whale trades** above a USD threshold, filter by **token**, **pair**, **DEX program**, or **chain**, rank **top traders by volume** or **PnL**, and aggregate **buy/sell USD** with **`sum`**, **`calculate`**, **`limitBy`**, and **`orderBy`** using **GraphQL subscriptions** and **queries**.
 
 This page focuses on **trader/wallet-centric** queries using the unified **Trading** schema. For trade-level streaming (by token, pair, chain, or DEX), see the **[Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)**.

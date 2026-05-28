@@ -5,6 +5,10 @@ description: "Ultra low latency Jupiter Studio launchpad data, token trades, OHL
 
 # Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data
 
+:::tip Need real-time Jupiter Studio data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Jupiter Studio data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
 Get ultra low latency Jupiter Studio launchpad data, token trades, OHLC, migration tracking, and Meteora DBC analytics from Jupiter Studio API, Streams and Data Dumps.
 Access real-time data for Jupiter Studio token launches, trading activity, migration events, and Meteora Dynamic Bonding Curve insights through our Jupiter Studio API.
 The below GraphQL APIs and Streams are examples of data points you can get with Bitquery.

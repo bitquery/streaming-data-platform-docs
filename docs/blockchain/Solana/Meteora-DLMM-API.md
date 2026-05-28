@@ -1,5 +1,10 @@
 # Meteora DLMM API
 
+:::tip Need real-time Meteora DLMM data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Meteora DLMM swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Meteora DLMM data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
+
 Bitquery provides comprehensive real-time and historical data APIs and Streams for the Solana blockchain, enabling developers and traders to build powerful applications and execute trades based on reliable information from Meteora's Dynamic Liquidity Market Maker (DLMM).
 
 ## Frequently Asked Questions (FAQ)

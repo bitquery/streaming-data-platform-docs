@@ -30,6 +30,10 @@ keywords:
 
 # Crypto Price API – Real-Time Token Data, Charts & OHLC
 
+:::tip Real-time + last ~30 days only
+The Crypto Price API cubes (`Trading.Tokens`, `Trading.Currencies`, `Trading.Pairs`) are part of the **Trading cube** family — built for **real-time and the last ~30 days**. For OHLC built from raw trades **older than ~30 days**, use chain-level [`DEXTradeByTokens`](https://docs.bitquery.io/docs/cubes/dextradesbyTokens) instead. See the [**Trading Data Overview**](https://docs.bitquery.io/docs/trading/trading-data-overview) for the side-by-side comparison.
+:::
+
 Bitquery provides **Crypto Price APIs and Streams** via GraphQL and [Kafka](https://github.com/bitquery/streaming_protobuf/blob/feature/trading/market/price_index.proto). This **cryptocurrency price API** delivers comprehensive pricing data across multiple blockchains.
 
 These tools let you stream and query aggregated price data in USD or other paired currencies based on time and volume for all tokens across EVM, Solana, Tron, and other supported chains. Our **crypto prices api** is the **main** source for **real-time** pricing and **OHLC**; for **historical** OHLC from DEX trades, use **`DEXTradeByTokens`** as described in the [OHLC documentation](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/).

@@ -24,6 +24,11 @@ keywords:
 
 # Ethereum API - Complete Developer Guide
 
+:::tip Building a trading app or DEX UI on Ethereum?
+For **real-time trades and prices on Ethereum** (and the last ~30 days), use the curated [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. For **historical Ethereum data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
+:::
+
+
 ## What is Bitquery?
 
 Bitquery is the leading blockchain data platform that provides comprehensive **Ethereum API** solutions for developers. Instead of running your own Ethereum node or building complex indexing infrastructure, you can use our pre-built **Ethereum API** to get the blockchain data you need in seconds.

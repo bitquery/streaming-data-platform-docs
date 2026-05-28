@@ -2,6 +2,10 @@
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
+:::tip Need real-time Believe data or anything from the last ~30 days?
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Believe data older than ~30 days**, raw per-swap detail, or call / event context.
+:::
+
 ## 🎯 What is Believe Launchpad?
 
 The Believe Launchpad is a decentralized token launchpad built on the Solana blockchain that simplifies token creation and trading. It allows users to mint tokens directly through social media interactions (especially X/Twitter), making token creation accessible to everyone, even without technical expertise.
