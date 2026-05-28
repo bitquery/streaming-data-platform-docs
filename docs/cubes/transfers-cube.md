@@ -18,9 +18,24 @@ Let's explore more examples of filtering in the Transfer cube.
 
 Check [this query](https://ide.bitquery.io/transfers-over-100-eth-in-a-given-month), where we retrieve transfers over 100 ETH in a given month.
 
-Another example is [this query](https://ide.bitquery.io/Only-wallet-to-wallet-eth-transfers-on-ethereum), where we filter to get only wallet-to-wallet ETH transfers based on type.
+Another example is [this query](https://ide.bitquery.io/Only-wallet-to-wallet-eth-transfers-on-ethereum), where we filter to get only wallet-to-wallet ETH transfers using `Transfer_Type` filter.
 
 For an example of the `OR` operator, see [this query](https://ide.bitquery.io/all-transfers-of-a-address), which retrieves all transfers of a given address.
+
+## Transfer Type
+
+Every EVM chain transfer has **`Transfer_Type`** property, which provides insights about the type of transfer taking place. The three values classify **native** vs **token** transfers and whether native value moved at the **top level** or **inside a contract call** as shown in the table below.
+
+| Value | Meaning | Native? | `Call.CallPath` |
+| ----- | ------- | ------- | --------------- |
+| **`transaction`** | Native transfer from the **transaction signer** at the **root** of the transaction (external send). Not ERC-20. | Yes | Empty `[]` |
+| **`call`** | Native transfer as **`value` on an internal contract call** (contract forwards ETH during execution). | Yes | Non-empty |
+| **`token`** | **ERC-20** (or other token standard) transfer from contract execution. Never native. | No (`Currency.Native: false`) | Any |
+
+**Examples:** 
+- ERC-20 Token Transfer: `Transfer: { Type: { is: token } }`. [Run this Example](https://ide.bitquery.io/Only-token-transfers-on-ethereum)
+- Wallet to Wallet ETH Transfer: `Type: { is: transaction }`. [Run this Example](https://ide.bitquery.io/Only-wallet-to-wallet-eth-transfers-on-ethereum)
+- Internal Transfer → `Type: { is: call }`. [Run this Example](https://ide.bitquery.io/internal-transfers-on-ethereum)
 
 ## Metrics in Transfer
 
