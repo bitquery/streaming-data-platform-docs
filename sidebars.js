@@ -920,6 +920,7 @@ const sidebars = {
             "examples/polymarket-api/polymarket-commodity-api",
             "examples/polymarket-api/bitcoin-polymarket-api",
             "examples/polymarket-api/polymarket-insider-detection-api",
+            "examples/polymarket-api/polymarket-ai-tech-api",
           ],
         },
       ],
