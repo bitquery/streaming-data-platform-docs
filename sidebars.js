@@ -780,6 +780,23 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Algorand",
+          link: {
+            type: "doc",
+            id: "blockchain/Algorand/index",
+          },
+          items: [
+            "blockchain/Algorand/algorand-blocks-api",
+            "blockchain/Algorand/algorand-transactions-api",
+            "blockchain/Algorand/algorand-transfers-api",
+            "blockchain/Algorand/algorand-address-api",
+            "blockchain/Algorand/algorand-smart-contract-calls-api",
+            "blockchain/Algorand/algorand-arguments-api",
+            "blockchain/Algorand/algorand-coinpath-api",
+          ],
+        },
+        {
+          type: "category",
           label: "Cross-Chain",
           link: {
             type: "generated-index",

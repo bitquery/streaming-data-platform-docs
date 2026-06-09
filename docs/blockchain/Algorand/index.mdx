@@ -1,0 +1,87 @@
+---
+title: Algorand API Documentation
+description: Query Algorand blocks, transactions, ALGO and ASA transfers, addresses, smart contract calls, arguments, and fund flows with Bitquery's GraphQL API.
+slug: /blockchain/Algorand/
+keywords:
+  - Algorand API
+  - Algorand GraphQL API
+  - ALGO API
+  - Algorand blockchain API
+  - Algorand explorer API
+  - Algorand ASA API
+  - Algorand transfers API
+  - Algorand smart contract API
+  - Algorand coinpath API
+  - Algorand transactions API
+---
+
+# Algorand API Documentation
+
+## Overview
+
+Bitquery's Algorand APIs let you query the chain through GraphQL — blocks, transactions, ALGO and ASA transfers, address balances, smart contract calls, parsed call arguments, and multi-hop fund flow. Replace the example addresses and asset IDs in any query with your own values to point them at real wallets and assets.
+
+If you get stuck or need a data point that isn't covered here, reach out on [Telegram](https://t.me/Bloxy_info).
+
+:::info Endpoint
+Algorand GraphQL queries are served at `https://graphql.bitquery.io`.
+:::
+
+### What you can do with the Algorand API
+
+- Pull blocks by proposer, height, or time window with protocol version, rewards, and timestamps.
+- Get transactions with fees, types, senders, groups, and daily or per-address counts.
+- Track ALGO and ASA transfers filtered by asset ID, sender, receiver, or date range.
+- Look up native ALGO balances, multi-address snapshots, and smart contract bytecode.
+- Count and filter smart contract calls by transaction type (`pay`, `acfg`, and others).
+- Read parsed argument names, types, and values from smart contract calls and events.
+- Trace ALGO and ASA flows across multiple hops with Coinpath.
+
+### How the Algorand API differs from running your own node
+
+| Algorand node / indexer | Bitquery Algorand API |
+| --- | --- |
+| Raw chain state — you build the indexer | Pre-indexed and parsed: blocks, txs, transfers, app calls |
+| No historical analytics out of the box | History, joins, aggregations, USD conversion on transfers |
+| You decode transaction types and app args yourself | GraphQL response — pick the fields you need |
+| Best for submitting transactions and full validation | Best for analytics, dashboards, wallet UIs, and compliance work |
+
+## Quick start
+
+This query returns the 5 most recent Algorand blocks with height, hash, reward, proposer, and timestamp.
+
+```graphql
+{
+  algorand(network: algorand) {
+    blocks(options: {desc: "height", limit: 5}) {
+      height
+      hash
+      reward
+      proposer {
+        address
+      }
+      timestamp {
+        time(format: "%Y-%m-%d %H:%M:%S")
+      }
+    }
+  }
+}
+```
+
+## API reference
+
+### Core data
+
+- [Algorand Blocks API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-blocks-api) — block lookups by proposer, height, or time, plus reward aggregates.
+- [Algorand Transactions API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-transactions-api) — transaction details, daily counts, unique senders, and hash lookups.
+- [Algorand Transfers API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-transfers-api) — ALGO and ASA transfer history with USD amounts.
+
+### Addresses and contracts
+
+- [Algorand Address API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-address-api) — ALGO balances, multi-address lookups, and smart contract bytecode.
+- [Algorand Smart Contract Calls API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-smart-contract-calls-api) — app call counts, transaction-type filters, and new asset creation tracking.
+- [Algorand Arguments API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-arguments-api) — parsed argument names, types, and values from calls and events.
+
+### Fund tracing
+
+- [Algorand Coinpath API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-coinpath-api) — multi-hop ALGO and ASA flow tracing for compliance and treasury work.

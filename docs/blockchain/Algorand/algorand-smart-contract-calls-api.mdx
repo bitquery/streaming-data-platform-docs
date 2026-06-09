@@ -1,0 +1,136 @@
+---
+title: Algorand Smart Contract Calls API - Track App Calls & Asset Creation
+sidebar_label: Algorand Smart Contract Calls API
+description: Query Algorand smart contract calls with Bitquery GraphQL. Count calls per block, filter by transaction type (pay, acfg), and track newly created ASAs.
+keywords:
+  - Algorand smart contract calls API
+  - Algorand app calls API
+  - Algorand acfg API
+  - Algorand asset config API
+  - Algorand transaction type API
+  - Algorand GraphQL
+  - Bitquery Algorand
+---
+
+# Algorand Smart Contract Calls API
+
+The Smart Contract Calls API returns parsed application call data on Algorand: transaction type, sender, smart contract address, block context, and call counts. Filter by `txType` to isolate payments (`pay`), asset configuration (`acfg`), or any other Algorand transaction type.
+
+:::info Endpoint
+Algorand GraphQL queries are served at `https://graphql.bitquery.io`.
+:::
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+## Count unique smart contract calls in the latest block
+
+Returns the count of unique smart contract calls in the most recent block after a given date. [Run query](https://ide.bitquery.io/Get-Count-of-Smart-Contract-Calls-in-Latest-Block_1)
+
+```graphql
+{
+  algorand(network: algorand) {
+    smartContractCalls(
+      date: {after: "2023-08-05"}
+      options: {desc: "block.timestamp.iso8601", limit: 1}
+    ) {
+      block {
+        timestamp {
+          iso8601
+        }
+      }
+      count(uniq: calls)
+    }
+  }
+}
+```
+
+## Track newly created assets (acfg transactions)
+
+Returns the 10 most recent asset configuration transactions — `acfg` stands for asset config. Each result includes the smart contract address, transaction hash, sender, and block timestamp. [Run query](https://ide.bitquery.io/Track-latest-assets-created-on-Algorand-network_1#)
+
+```graphql
+{
+  algorand(network: algorand) {
+    smartContractCalls(
+      options: {desc: "block.timestamp.iso8601", limit: 10}
+      txType: {is: acfg}
+    ) {
+      block {
+        timestamp {
+          iso8601
+        }
+      }
+      smartContract {
+        address {
+          address
+        }
+      }
+      transaction {
+        hash
+      }
+      txSender {
+        address
+      }
+      txType
+    }
+  }
+}
+```
+
+## Count smart contract calls by transaction type since genesis
+
+Returns the total number of calls grouped by transaction type across Algorand mainnet history. [Run query](https://ide.bitquery.io/Count-of-each-trxn-type-called-till-now-on-Algorand-network#)
+
+```graphql
+query MyQuery {
+  algorand(network: algorand) {
+    smartContractCalls(options: {desc: "count"}) {
+      txType
+      count
+    }
+  }
+}
+```
+
+## Get latest smart contract calls filtered by type
+
+Returns the 10 most recent `pay` (payment) transactions with smart contract address, hash, sender, and block timestamp. Swap `pay` for any other `txType` value.
+
+```graphql
+{
+  algorand(network: algorand) {
+    smartContractCalls(
+      date: {after: "2023-08-05"}
+      options: {desc: "block.timestamp.iso8601", limit: 10}
+      txType: {is: pay}
+    ) {
+      block {
+        timestamp {
+          iso8601
+        }
+      }
+      smartContract {
+        address {
+          address
+        }
+      }
+      transaction {
+        hash
+      }
+      txSender {
+        address
+      }
+      txType
+    }
+  }
+}
+```
+
+## Video: tracking newly created tokens on Algorand
+
+<VideoPlayer url="https://www.youtube.com/watch?v=O3WC0QOk5Pw" />
+
+## Related resources
+
+- [Algorand Arguments API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-arguments-api) — parsed argument names, types, and values
+- [Algorand Transactions API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-transactions-api) — full transaction details and daily counts

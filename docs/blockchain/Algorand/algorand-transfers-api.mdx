@@ -1,0 +1,120 @@
+---
+title: Algorand Transfers API - Track ALGO & ASA Token Transfers
+sidebar_label: Algorand Transfers API
+description: Query Algorand ALGO and ASA transfers filtered by asset ID, date range, sender, or receiver. Get amounts in native units and USD via Bitquery GraphQL.
+keywords:
+  - Algorand transfers API
+  - Algorand token transfers
+  - Algorand ASA API
+  - ALGO transfer history
+  - Algorand asset transfer
+  - Algorand GraphQL
+  - Bitquery Algorand
+---
+
+# Algorand Transfers API
+
+The Transfers API returns ALGO and ASA (Algorand Standard Asset) movements with amounts in native units and USD, sender and receiver addresses, block context, and transaction hashes. Filter by asset ID, date range, or address to build wallet history feeds, treasury monitors, and token analytics dashboards.
+
+:::info Endpoint
+Algorand GraphQL queries are served at `https://graphql.bitquery.io`.
+:::
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
+## Get transfers for a specific asset in a date range
+
+Returns transfers for asset ID `31566704` between two dates, ordered by block height descending. Swap the `currency` filter for any ASA ID or ALGO. [Run query](https://ide.bitquery.io/All-the-transfers-of-an-asset-on-Algorand-Mainnet-in-a-specific-timeframe)
+
+```graphql
+query MyQuery {
+  algorand(network: algorand) {
+    transfers(
+      options: {desc: "block.height", limit: 10, offset: 0}
+      currency: {is: 31566704}
+      date: {since: "2024-07-01", till: "2024-07-09"}
+    ) {
+      amount
+      amount_usd: amount(in: USD)
+      currency {
+        tokenType
+        tokenId
+        symbol
+        name
+        decimals
+        address
+      }
+      receiver {
+        address
+        annotation
+      }
+      sender {
+        address
+        annotation
+      }
+      block {
+        height
+        timestamp {
+          time(format: "%Y-%m-%d %H:%M:%S")
+        }
+      }
+      transferType
+      transaction {
+        hash
+      }
+    }
+  }
+}
+```
+
+## Get transfers to or from an address for a specific asset
+
+Uses the `any` filter to match transfers where the address appears as either sender or receiver. [Run query](https://ide.bitquery.io/traansfers-where-a-currency-is-sent-from-or-sent-to-a-particular-address)
+
+```graphql
+query MyQuery {
+  algorand(network: algorand) {
+    transfers(
+      date: {since: "2024-07-01", till: "2024-07-09"}
+      currency: {is: 849191641}
+      any: [
+        {sender: {in: ["OLP2LMN4NDMT6FKRFCMV5J7U3LTUFXKOHOMGWYBMIA675FSRVWT4C5HWVI"]}}
+        {receiver: {in: ["OLP2LMN4NDMT6FKRFCMV5J7U3LTUFXKOHOMGWYBMIA675FSRVWT4C5HWVI"]}}
+      ]
+    ) {
+      block {
+        timestamp {
+          time(format: "%Y-%m-%d %H:%M:%S")
+        }
+        height
+      }
+      sender {
+        address
+        annotation
+      }
+      receiver {
+        address
+        annotation
+      }
+      currency {
+        address
+        symbol
+      }
+      amount
+      amount_usd: amount(in: USD)
+      transaction {
+        hash
+      }
+    }
+  }
+}
+```
+
+## Video: Algorand transfer data with Bitquery
+
+<VideoPlayer url="https://www.youtube.com/watch?v=Wu4RVrFMJ4Y" />
+
+## Related resources
+
+- [Algorand Address API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-address-api) — wallet balances and contract bytecode
+- [Algorand Coinpath API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-coinpath-api) — multi-hop fund flow tracing
