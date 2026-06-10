@@ -1,8 +1,9 @@
 ---
 sidebar_position: 3
+sidebar_label: Slippage & Price Impact
 ---
 
-# EVM DEX Pool - Uniswap Slippage API/Websocket
+# EVM DEX Slippage API
 
 In this section we will see how to get Ethereum DEX pool slippage information using our API. The slippage API helps you understand **Uniswap price impact slippage** and liquidity depth for token swaps on Ethereum DEX pools. Use it as a **Uniswap slippage calculator** to **calculate slippage** and set **Uniswap slippage tolerance** for Uniswap V2, V3, and V4 pools—including **Uniswap V3 price impact slippage** at different tolerance levels.
 

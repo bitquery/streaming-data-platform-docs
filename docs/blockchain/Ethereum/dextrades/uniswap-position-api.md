@@ -1,6 +1,7 @@
 ---
 title: "Uniswap V3 Position API - Track Liquidity Positions"
 description: "Track Uniswap V3 NFT positions, monitor liquidity changes, position creation, and position management using Bitquery's Position API."
+sidebar_label: Uniswap v3 LP Positions
 ---
 
 # Uniswap V3 Position API - Track Liquidity Positions

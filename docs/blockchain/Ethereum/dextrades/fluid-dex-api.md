@@ -1,3 +1,7 @@
+---
+sidebar_label: Fluid DEX Trades
+---
+
 # Fluid DEX API
 
 :::tip Need real-time Fluid DEX data or anything from the last ~30 days?

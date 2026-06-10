@@ -239,6 +239,18 @@ const config = {
             from: "/docs/examples/realtimetrades/",
           },
           {
+            to: "/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/",
+            from: "/docs/blockchain/Ethereum/dextrades/pools-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/",
+            from: "/docs/examples/dextrades/pools-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/dextrades/uniswap-v4-liquidity-api/",
+            from: "/docs/blockchain/Ethereum/liquidity/uniswap-v4-liquidity-api/",
+          },
+          {
             to: "/docs/blockchain/Solana/", // new target
             from: "/docs/category/solana/", // old category URL
           },

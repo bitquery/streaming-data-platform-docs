@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+sidebar_label: Pairs for a Token
 ---
 
 # Trading Pairs API

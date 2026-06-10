@@ -1,3 +1,7 @@
+---
+sidebar_label: DEX Trades API
+---
+
 # DEX API
 
 :::tip Need real-time Ethereum DEX data or anything from the last ~30 days?

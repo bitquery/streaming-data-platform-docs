@@ -1,8 +1,9 @@
 ---
 sidebar_position: 4
+sidebar_label: Pair Creation Time
 ---
 
-# Pair Creation APIs
+# Pair Creation Time API
 
 ## Pair Creation Time for a Specific Pair
 
