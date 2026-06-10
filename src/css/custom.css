@@ -223,6 +223,14 @@ html.plugin-pages .main-wrapper {
   padding-top: 0;
 }
 
+/* Card/chip links are block anchors — no Infima underline on hover */
+html.plugin-pages .main-wrapper a,
+html.plugin-pages .main-wrapper a:hover,
+html.plugin-pages .main-wrapper a:focus,
+html.plugin-pages .main-wrapper a:active {
+  text-decoration: none;
+}
+
 /* Doc sidebar active item */
 .menu__link--active:not(.menu__link--sublist) {
   background: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
