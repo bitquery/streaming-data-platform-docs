@@ -1,196 +1,453 @@
 /**
- * Homepage hero + shell
+ * Docs home — hero + code panel (design handoff)
  */
 
-.main {
-  padding-bottom: 1.5rem;
-  background: var(--ifm-background-color);
+.pageShell {
+  background: var(--bq-page-bg);
+  color: var(--bq-text, #fff);
 }
 
-.heroBanner {
-  padding: 2.75rem 0 3.35rem;
-  text-align: center;
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ===== HERO ===== */
+.hero {
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 66px 0 56px;
+  border-bottom: 1px solid var(--bq-line-2);
 }
 
-/* Light grid accents (square-aligned) */
-.heroBanner::before {
+.hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(
-      color-mix(in srgb, var(--ifm-color-primary) 8%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      color-mix(in srgb, var(--ifm-color-primary) 8%, transparent) 1px,
-      transparent 1px
-    );
-  background-size: 48px 48px;
-  mask-image: radial-gradient(
-    ellipse 70% 70% at 50% 30%,
-    black 18%,
-    transparent 72%
-  );
+  z-index: 0;
   pointer-events: none;
+  background:
+    radial-gradient(680px 360px at 80% 14%, var(--bq-accent-soft), transparent 66%),
+    radial-gradient(560px 320px at 8% 92%, rgba(0, 216, 221, 0.06), transparent 70%);
 }
 
-.heroInner {
+.heroGrid {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 52px;
+  align-items: center;
+}
+
+.heroGrid > * {
+  min-width: 0;
+}
+
+.hero h1 {
+  font-size: 50px;
+  font-weight: 500;
+  letter-spacing: -1.1px;
+  line-height: 1.06;
+  margin: 16px 0 18px;
+  color: #fff;
 }
 
 .eyebrow {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--bq-teal-muted);
+  margin: 0;
+}
+
+.sub {
+  font-size: 18px;
+  color: var(--bq-grey);
+  max-width: 520px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.heroSearch {
+  margin: 26px 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #0a0e14;
+  border: 1px solid var(--bq-line);
+  border-radius: 12px;
+  padding: 15px 18px;
+  width: 100%;
+  max-width: 540px;
+  min-width: 0;
+  cursor: text;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.heroSearch:hover {
+  border-color: var(--bq-accent);
+  box-shadow: 0 0 0 4px var(--bq-accent-soft);
+}
+
+.heroSearch svg {
+  width: 20px;
+  height: 20px;
+  color: var(--bq-dark-grey);
+  flex: none;
+}
+
+.ph {
+  flex: 1;
+  min-width: 0;
+  font-size: 16px;
+  color: var(--bq-dark-grey);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.heroSearch kbd {
+  font-family: var(--bq-font-mono);
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--bq-line);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 2px 6px;
+  color: var(--bq-grey);
+  flex: none;
+}
+
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.quick a {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ifm-color-primary-darkest);
-  margin-bottom: 0.65rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: var(--ifm-button-border-radius);
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(255, 255, 255, 0.98);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: var(--bq-card-bg);
+  border: 1px solid var(--bq-line);
+  border-radius: 999px;
+  padding: 9px 15px;
+  transition: border-color 0.15s, transform 0.15s, background 0.15s;
+  text-decoration: none;
 }
 
-.eyebrow::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  flex-shrink: 0;
-  background: var(--ifm-color-primary);
+.quick a:hover {
+  transform: translateY(-2px);
+  border-color: var(--bq-accent);
+  background: #11161f;
+  color: #fff;
 }
 
-:global(html[data-theme="dark"]) .eyebrow {
-  background: rgba(0, 0, 0, 0.22);
-  color: #f2faf8;
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+.quick a svg {
+  color: var(--bq-teal-muted);
 }
 
-:global(html[data-theme="dark"]) .eyebrow::before {
-  background: var(--ifm-color-primary-light);
+.quickPrimary {
+  background: var(--bq-accent-soft) !important;
+  border-color: var(--bq-accent) !important;
 }
 
-.heroTitle {
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 800;
-  line-height: 1.12;
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
+/* hero code panel */
+.heroVisual {
+  position: relative;
+  min-width: 0;
 }
 
-.heroSubtitle {
-  font-size: 1.05rem;
-  max-width: 36rem;
-  margin: 0 auto 1.35rem;
-  opacity: 0.95;
-  line-height: 1.5;
+.qpanel {
+  background: #080b11;
+  border: 1px solid var(--bq-line);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 44px 90px -44px rgba(0, 0, 0, 0.92);
+  max-width: 100%;
 }
 
-.buttonGroup {
+.qbar {
   display: flex;
-  gap: 0.75rem 1rem;
-  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--bq-line);
+  background: #0b0f16;
+  font-family: var(--bq-font-mono);
+  font-size: 11.5px;
+  color: var(--bq-dark-grey);
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+
+.fn {
+  color: var(--bq-grey);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.pill {
+  margin-left: auto;
+  color: var(--bq-teal);
+  background: rgba(0, 216, 221, 0.08);
+  border: 1px solid rgba(0, 216, 221, 0.2);
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+
+.qpanel pre {
+  margin: 0;
+  padding: 16px 18px;
+  font-family: var(--bq-font-mono);
+  font-size: 12.5px;
+  line-height: 1.62;
+  color: #c3cad6;
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+.ck {
+  color: #f788c0;
+}
+
+.cf {
+  color: #f93f9c;
+}
+
+.cs {
+  color: #74c7c5;
+}
+
+.cp {
+  color: #7c8699;
+}
+
+.cc {
+  color: #5b6577;
+  font-style: italic;
+}
+
+.qsplit {
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid var(--bq-line);
+}
+
+.lab {
+  flex: none;
+  width: 118px;
+  background: #0b0f16;
+  border-right: 1px solid var(--bq-line);
+  padding: 12px 14px;
+  font-family: var(--bq-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--bq-dark-grey);
+  display: flex;
+  align-items: center;
+}
+
+.qout {
+  flex: 1;
+  min-width: 0;
+  background: #0a0e14;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-x: auto;
+}
+
+.orow {
+  display: grid;
+  grid-template-columns: 1.3fr 0.5fr 0.9fr 0.8fr;
+  gap: 8px;
+  font-family: var(--bq-font-mono);
+  font-size: 11.5px;
+  align-items: center;
+  min-width: 260px;
+}
+
+.pr {
+  color: #fff;
+}
+
+.px {
+  color: #c3cad6;
+  text-align: right;
+}
+
+.dx {
+  color: var(--bq-teal);
+}
+
+.sd {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  justify-self: start;
+}
+
+.sdBuy {
+  background: rgba(62, 192, 127, 0.16);
+  color: #54c98e;
+}
+
+.sdSell {
+  background: rgba(236, 122, 109, 0.16);
+  color: #f0897c;
+}
+
+.qfoot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--bq-line);
+  background: #0b0f16;
+  font-family: var(--bq-font-mono);
+  font-size: 11px;
+  color: var(--bq-dark-grey);
   flex-wrap: wrap;
 }
 
-/*
- * Infima buttons use background-color: var(--ifm-button-background-color).
- * Setting only `background:` is often overridden — drive the official variables.
- */
-.heroBanner .buttonGroup :global(.button) {
-  font-weight: 600;
-  border-radius: var(--ifm-button-border-radius);
+.ok {
+  color: #54c98e;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.heroBanner .buttonGroup :global(.button.button--primary) {
-  --ifm-button-background-color: var(--ifm-color-primary-darkest);
-  --ifm-button-border-color: color-mix(
-    in srgb,
-    #000 20%,
-    var(--ifm-color-primary-darkest)
-  );
-  --ifm-button-color: #fff;
-  box-shadow:
-    0 1px 0 color-mix(in srgb, #fff 16%, transparent) inset,
-    0 4px 16px rgba(0, 0, 0, 0.24);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+.ok i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #54c98e;
+  display: block;
 }
 
-.heroBanner .buttonGroup :global(.button.button--primary:hover) {
-  --ifm-button-background-color: var(--ifm-color-primary-darker);
-  --ifm-button-border-color: color-mix(
-    in srgb,
-    #000 14%,
-    var(--ifm-color-primary-darker)
-  );
-  --ifm-button-color: #fff;
+.qfootNote {
+  margin-left: auto;
 }
 
-.heroBanner .buttonGroup :global(.button.button--secondary) {
-  --ifm-button-background-color: #ffffff;
-  --ifm-button-border-color: rgba(255, 255, 255, 0.9);
-  --ifm-button-color: var(--ifm-color-primary-darkest);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.85) inset,
-    0 2px 12px rgba(0, 0, 0, 0.15);
+.deliv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 13px;
+  justify-content: center;
 }
 
-.heroBanner .buttonGroup :global(.button.button--secondary:hover) {
-  --ifm-button-background-color: #f4fffb;
-  --ifm-button-border-color: #ffffff;
-  --ifm-button-color: var(--ifm-color-primary-darkest);
-  box-shadow:
-    0 1px 0 #fff inset,
-    0 4px 16px rgba(0, 0, 0, 0.12);
+.deliv span {
+  font-family: var(--bq-font-mono);
+  font-size: 10.5px;
+  color: var(--bq-grey);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--bq-line-2);
+  border-radius: 7px;
+  padding: 5px 10px;
 }
 
-:global(html[data-theme="dark"]) .heroBanner .buttonGroup :global(.button.button--primary) {
-  --ifm-button-background-color: #052f27;
-  --ifm-button-border-color: rgba(255, 255, 255, 0.22);
-  --ifm-button-color: #fff;
-  box-shadow:
-    0 1px 0 color-mix(in srgb, #fff 14%, transparent) inset,
-    0 4px 20px rgba(0, 0, 0, 0.35);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+.delivOn {
+  color: var(--bq-page-bg) !important;
+  background: var(--bq-teal) !important;
+  border-color: transparent !important;
+  font-weight: 500;
 }
 
-:global(html[data-theme="dark"]) .heroBanner .buttonGroup :global(.button.button--primary:hover) {
-  --ifm-button-background-color: var(--ifm-color-primary-darkest);
-  --ifm-button-border-color: rgba(255, 255, 255, 0.35);
-  --ifm-button-color: #fff;
+@media (max-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
 }
 
-:global(html[data-theme="dark"]) .heroBanner .buttonGroup :global(.button.button--secondary) {
-  --ifm-button-background-color: rgba(255, 255, 255, 0.16);
-  --ifm-button-border-color: rgba(255, 255, 255, 0.38);
-  --ifm-button-color: #fafcfb;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.1) inset,
-    0 2px 12px rgba(0, 0, 0, 0.18);
-}
-
-:global(html[data-theme="dark"]) .heroBanner .buttonGroup :global(.button.button--secondary:hover) {
-  --ifm-button-background-color: rgba(255, 255, 255, 0.26);
-  --ifm-button-border-color: rgba(255, 255, 255, 0.5);
-  --ifm-button-color: #ffffff;
-}
-
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2.25rem 0 2.95rem;
+@media (max-width: 560px) {
+  .wrap {
+    padding: 0 20px;
   }
 
-  .heroSubtitle {
-    font-size: 1.05rem;
+  .hero {
+    padding: 46px 0 44px;
+  }
+
+  .hero h1 {
+    font-size: 33px;
+    letter-spacing: -0.8px;
+  }
+
+  .sub {
+    font-size: 15.5px;
+  }
+
+  .heroSearch {
+    padding: 13px 14px;
+    gap: 10px;
+  }
+
+  .heroSearch kbd {
+    display: none;
+  }
+
+  .ph {
+    font-size: 14px;
+  }
+
+  .lab {
+    width: 88px;
+    padding: 12px 10px;
+    font-size: 9px;
+  }
+
+  .qfootNote {
+    margin-left: 0;
+    width: 100%;
+    line-height: 1.4;
+  }
+}
+
+:global(html[data-theme="light"]) .pageShell {
+  background: #f7f7f8;
+}
+
+:global(html[data-theme="light"]) .hero h1,
+:global(html[data-theme="light"]) .quick a {
+  color: #06090d;
+}
+
+:global(html[data-theme="light"]) .heroSearch,
+:global(html[data-theme="light"]) .qpanel {
+  background: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick a {
+    transition: none;
   }
 }
