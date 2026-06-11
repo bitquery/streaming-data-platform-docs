@@ -1109,6 +1109,35 @@
   background: rgba(147, 37, 75, 0.08);
 }
 
+/* Video band keeps dark gradient in light mode */
+:global(html[data-theme="light"]) .videoBand h2 {
+  color: #fff;
+}
+
+:global(html[data-theme="light"]) .videoBand .vk {
+  color: #7ec8cf;
+}
+
+:global(html[data-theme="light"]) .videoBand p {
+  color: #cdd5da;
+}
+
+:global(html[data-theme="light"]) .videoBand .vlabel {
+  color: #aab0bc;
+}
+
+:global(html[data-theme="light"]) .videoBand .bqBtnSecondary {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+  background: transparent;
+}
+
+:global(html[data-theme="light"]) .videoBand .bqBtnSecondary:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;

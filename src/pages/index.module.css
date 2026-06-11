@@ -503,10 +503,25 @@
   color: #fff !important;
 }
 
-/* Code panel stays dark in light mode */
+/* Code panel stays dark in light mode — restore dark-surface tokens inside */
 :global(html[data-theme="light"]) .qpanel {
   background: #080b11;
   border-color: rgba(255, 255, 255, 0.12);
+  --bq-grey: #aab0bc;
+  --bq-dark-grey: #7e8696;
+  --bq-line: rgba(255, 255, 255, 0.1);
+  --bq-line-2: rgba(255, 255, 255, 0.06);
+  --bq-teal: #00d8dd;
+  --bq-teal-muted: #51becc;
+}
+
+:global(html[data-theme="light"]) .qfoot,
+:global(html[data-theme="light"]) .qfootNote {
+  color: #7e8696;
+}
+
+:global(html[data-theme="light"]) .lab {
+  color: #7e8696;
 }
 
 @media (prefers-reduced-motion: reduce) {
