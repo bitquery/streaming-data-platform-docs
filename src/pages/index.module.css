@@ -433,17 +433,95 @@
 }
 
 :global(html[data-theme="light"]) .pageShell {
-  background: #f7f7f8;
+  background: var(--bq-page-bg);
+  color: var(--bq-text);
+}
+
+:global(html[data-theme="light"]) .hero {
+  border-bottom-color: var(--bq-line-2);
+}
+
+:global(html[data-theme="light"]) .hero::before {
+  background:
+    radial-gradient(680px 360px at 80% 14%, rgba(147, 37, 75, 0.08), transparent 66%),
+    radial-gradient(560px 320px at 8% 92%, rgba(0, 122, 128, 0.06), transparent 70%);
 }
 
 :global(html[data-theme="light"]) .hero h1,
-:global(html[data-theme="light"]) .quick a {
-  color: #06090d;
+:global(html[data-theme="light"]) .sub {
+  color: var(--bq-text);
 }
 
-:global(html[data-theme="light"]) .heroSearch,
-:global(html[data-theme="light"]) .qpanel {
+:global(html[data-theme="light"]) .eyebrow {
+  color: var(--bq-teal-muted);
+}
+
+:global(html[data-theme="light"]) .heroSearch {
   background: #fff;
+  border-color: var(--bq-line);
+}
+
+:global(html[data-theme="light"]) .heroSearch svg,
+:global(html[data-theme="light"]) .ph {
+  color: var(--bq-dark-grey);
+}
+
+:global(html[data-theme="light"]) .heroSearch kbd {
+  color: var(--bq-grey);
+  background: rgba(6, 9, 13, 0.05);
+  border-color: var(--bq-line);
+}
+
+:global(html[data-theme="light"]) .quick a {
+  color: var(--bq-text);
+  background: #fff;
+  border-color: var(--bq-line);
+}
+
+:global(html[data-theme="light"]) .quick a:hover {
+  color: var(--bq-text);
+  background: #f0f1f3;
+  border-color: var(--bq-accent);
+}
+
+:global(html[data-theme="light"]) .quick a svg {
+  color: var(--bq-teal-muted);
+}
+
+:global(html[data-theme="light"]) .quickPrimary {
+  background: var(--bq-accent-soft) !important;
+  border-color: var(--bq-accent) !important;
+}
+
+:global(html[data-theme="light"]) .deliv span {
+  color: var(--bq-grey);
+  background: rgba(6, 9, 13, 0.04);
+  border-color: var(--bq-line);
+}
+
+:global(html[data-theme="light"]) .delivOn {
+  color: #fff !important;
+}
+
+/* Code panel stays dark in light mode — restore dark-surface tokens inside */
+:global(html[data-theme="light"]) .qpanel {
+  background: #080b11;
+  border-color: rgba(255, 255, 255, 0.12);
+  --bq-grey: #aab0bc;
+  --bq-dark-grey: #7e8696;
+  --bq-line: rgba(255, 255, 255, 0.1);
+  --bq-line-2: rgba(255, 255, 255, 0.06);
+  --bq-teal: #00d8dd;
+  --bq-teal-muted: #51becc;
+}
+
+:global(html[data-theme="light"]) .qfoot,
+:global(html[data-theme="light"]) .qfootNote {
+  color: #7e8696;
+}
+
+:global(html[data-theme="light"]) .lab {
+  color: #7e8696;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import styles from "./styles.module.css";
@@ -110,12 +110,18 @@ function VideoBand() {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
 
-  const play = () => {
+  useEffect(() => {
+    if (!playing) return undefined;
     const video = videoRef.current;
-    if (!video) return;
-    setPlaying(true);
-    video.play();
-  };
+    if (!video) return undefined;
+    const playPromise = video.play();
+    if (playPromise?.catch) {
+      playPromise.catch(() => setPlaying(false));
+    }
+    return undefined;
+  }, [playing]);
+
+  const play = () => setPlaying(true);
 
   return (
     <section className={clsx(styles.block, styles.blockFlush)} aria-labelledby="vid-h">
@@ -143,24 +149,22 @@ function VideoBand() {
             </div>
           </div>
           <div className={clsx(styles.vframe, playing && styles.vframePlaying)}>
-            <video ref={videoRef} preload="none" controls playsInline>
+            <video ref={videoRef} preload="metadata" controls playsInline>
               <source src={introVideoUrl} type="video/mp4" />
             </video>
-            {!playing ? (
-              <div className={styles.poster}>
-                <button
-                  type="button"
-                  className={styles.play}
-                  aria-label="Play intro video"
-                  onClick={play}
-                >
-                  <svg viewBox="0 0 24 24" fill="#fff" aria-hidden>
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </button>
-                <span className={styles.vlabel}>intro_video.mp4 · ~3 min</span>
-              </div>
-            ) : null}
+            <div className={styles.poster}>
+              <button
+                type="button"
+                className={styles.play}
+                aria-label="Play intro video"
+                onClick={play}
+              >
+                <svg viewBox="0 0 24 24" fill="#fff" aria-hidden>
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </button>
+              <span className={styles.vlabel}>intro_video.mp4 · ~3 min</span>
+            </div>
           </div>
         </div>
       </div>
