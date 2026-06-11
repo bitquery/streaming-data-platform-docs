@@ -121,6 +121,20 @@ html[data-theme="light"] {
   --docusaurus-highlighted-code-line-bg: rgba(147, 37, 75, 0.12);
 }
 
+/* Homepage tokens on light surfaces — must follow :root dark defaults */
+html[data-theme="light"] {
+  --bq-page-bg: #f7f7f8;
+  --bq-card-bg: #ffffff;
+  --bq-grey: #55585c;
+  --bq-dark-grey: #383a3d;
+  --bq-text: #06090d;
+  --bq-line: rgba(6, 9, 13, 0.12);
+  --bq-line-2: rgba(6, 9, 13, 0.08);
+  --bq-teal: #007a80;
+  --bq-teal-muted: #0a6d73;
+  --bq-accent-soft: rgba(147, 37, 75, 0.1);
+}
+
 [data-theme="dark"] {
   --ifm-color-primary: #be3178;
   --ifm-color-primary-dark: #93254b;

@@ -4,7 +4,7 @@
 
 .home {
   background: var(--bq-page-bg);
-  color: #fff;
+  color: var(--bq-text);
 }
 
 .pageShell {
@@ -361,7 +361,7 @@
 .fan span {
   font-family: var(--bq-font-mono);
   font-size: 11px;
-  color: #fff;
+  color: var(--bq-text, #fff);
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--bq-line);
   border-radius: 7px;
@@ -605,7 +605,7 @@
   border-radius: 11px;
   padding: 14px 16px;
   font-size: 14px;
-  color: #fff;
+  color: var(--bq-text, #fff);
   font-weight: 500;
   transition: border-color 0.15s, background 0.15s, transform 0.15s;
   text-decoration: none;
@@ -615,7 +615,7 @@
   border-color: var(--bq-accent);
   background: #11161f;
   transform: translateY(-2px);
-  color: #fff;
+  color: var(--bq-text, #fff);
   text-decoration: none;
 }
 
@@ -950,18 +950,29 @@
 }
 
 :global(html[data-theme="light"]) .home {
-  background: #f7f7f8;
-  color: #06090d;
+  background: var(--bq-page-bg);
+  color: var(--bq-text);
 }
 
-:global(html[data-theme="light"]) .dcard,
-:global(html[data-theme="light"]) .step,
-:global(html[data-theme="light"]) .persona,
-:global(html[data-theme="light"]) .trend,
-:global(html[data-theme="light"]) .recipe,
-:global(html[data-theme="light"]) .chainChip,
-:global(html[data-theme="light"]) .mm {
-  background: #fff;
+:global(html[data-theme="light"]) .pageShell {
+  background: var(--bq-page-bg);
+  color: var(--bq-text);
+}
+
+/* Start band stays dark — keep light-on-dark text */
+:global(html[data-theme="light"]) .startHead h2,
+:global(html[data-theme="light"]) .step h3 {
+  color: #fff;
+}
+
+:global(html[data-theme="light"]) .startHead p,
+:global(html[data-theme="light"]) .step p {
+  color: #c8cdd6;
+}
+
+:global(html[data-theme="light"]) .step {
+  background: #0c121c;
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 :global(html[data-theme="light"]) .secHead h2,
@@ -969,7 +980,133 @@
 :global(html[data-theme="light"]) .persona h3,
 :global(html[data-theme="light"]) .trend h3,
 :global(html[data-theme="light"]) .trusted h2 {
-  color: #06090d;
+  color: var(--bq-text);
+}
+
+:global(html[data-theme="light"]) .sk,
+:global(html[data-theme="light"]) .secHead p,
+:global(html[data-theme="light"]) .dcard p,
+:global(html[data-theme="light"]) .persona p,
+:global(html[data-theme="light"]) .trend p,
+:global(html[data-theme="light"]) .mm p,
+:global(html[data-theme="light"]) .vnote p,
+:global(html[data-theme="light"]) .trusted > .wrap > p {
+  color: var(--bq-grey);
+}
+
+:global(html[data-theme="light"]) .dcard,
+:global(html[data-theme="light"]) .persona,
+:global(html[data-theme="light"]) .trend,
+:global(html[data-theme="light"]) .recipe,
+:global(html[data-theme="light"]) .chainChip,
+:global(html[data-theme="light"]) .mm {
+  background: #fff;
+  border-color: var(--bq-line);
+}
+
+:global(html[data-theme="light"]) .dcard:hover,
+:global(html[data-theme="light"]) .persona:hover,
+:global(html[data-theme="light"]) .trend:hover,
+:global(html[data-theme="light"]) .chainChip:hover {
+  border-color: rgba(6, 9, 13, 0.2);
+  background: #f7f7f8;
+}
+
+:global(html[data-theme="light"]) .recipe:hover {
+  background: #f0f1f3;
+  color: var(--bq-text);
+}
+
+:global(html[data-theme="light"]) .recipe svg {
+  color: var(--bq-teal-muted);
+}
+
+:global(html[data-theme="light"]) .cardLnkTeal,
+:global(html[data-theme="light"]) .chainChipMore,
+:global(html[data-theme="light"]) .recipeAll {
+  color: var(--bq-teal);
+}
+
+:global(html[data-theme="light"]) .fan span {
+  color: var(--bq-dark-grey);
+  background: rgba(6, 9, 13, 0.04);
+  border-color: var(--bq-line);
+}
+
+:global(html[data-theme="light"]) .fan span em {
+  color: var(--bq-teal-muted);
+}
+
+:global(html[data-theme="light"]) .mmtitle b {
+  color: var(--bq-teal);
+}
+
+:global(html[data-theme="light"]) .tag {
+  color: var(--bq-teal-muted);
+  background: rgba(0, 122, 128, 0.08);
+  border-color: rgba(0, 122, 128, 0.2);
+}
+
+:global(html[data-theme="light"]) .vnote {
+  background: rgba(0, 41, 255, 0.04);
+  border-color: rgba(0, 41, 255, 0.14);
+}
+
+:global(html[data-theme="light"]) .vnote b {
+  color: var(--bq-text);
+}
+
+:global(html[data-theme="light"]) .vnoteLink {
+  color: var(--bq-teal);
+}
+
+:global(html[data-theme="light"]) .trendFeat {
+  background: linear-gradient(140deg, #e8f4f5, #f5eef2);
+  border-color: rgba(0, 122, 128, 0.25);
+}
+
+:global(html[data-theme="light"]) .recipe {
+  color: var(--bq-text);
+}
+
+:global(html[data-theme="light"]) .chainChip {
+  color: var(--bq-text);
+}
+
+:global(html[data-theme="light"]) .cardLnk {
+  color: var(--bq-accent-strong);
+}
+
+:global(html[data-theme="light"]) .ifaceCard h3,
+:global(html[data-theme="light"]) .mmtitle {
+  color: var(--bq-text);
+}
+
+:global(html[data-theme="light"]) .persona .pn {
+  color: var(--bq-accent-strong);
+}
+
+:global(html[data-theme="light"]) .star {
+  color: #fff;
+  background: var(--bq-accent-strong);
+}
+
+:global(html[data-theme="light"]) .trusted h2 {
+  color: var(--bq-text);
+}
+
+:global(html[data-theme="light"]) .block {
+  border-color: var(--bq-line-2);
+}
+
+:global(html[data-theme="light"]) .bqBtnSecondary {
+  color: var(--bq-text);
+  border-color: var(--bq-cta-secondary);
+}
+
+:global(html[data-theme="light"]) .bqBtnSecondary:hover {
+  color: var(--bq-text);
+  background: rgba(147, 37, 75, 0.08);
 }
 
 @media (prefers-reduced-motion: reduce) {
