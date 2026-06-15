@@ -1,3 +1,5 @@
+import FAQ from "@site/src/components/FAQ";
+
 # Raydium CLMM API
 
 :::tip Need real-time Raydium CLMM data or anything from the last ~30 days?
@@ -6,32 +8,6 @@ For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitqu
 
 
 Bitquery provides comprehensive real-time and historical data APIs and Streams for the Solana blockchain, enabling developers and traders to build powerful applications and execute trades based on reliable information.
-
-## Frequently Asked Questions (FAQ)
-
-### Can I monitor Raydium CLMM trades in real-time?
-
-Yes, you can subscribe to real-time Raydium CLMM trades using GraphQL subscriptions. The API filters trades by the Raydium CLMM program address `CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK` and provides trade data as it happens on-chain. Examples available below.
-
-### What data can I get from the Raydium CLMM API?
-
-The API provides data for:
-
-- **DEX Trades**: Buy/sell amounts, token details (name, symbol, mint address, decimals), trader addresses, and transaction signatures
-- **Pool Creation**: Track new CLMM pools with token pairs, creator information, and account details
-- **Position Management**: Monitor position opening (`openPositionV2`), closing (`closePosition`), and liquidity modifications (`increaseLiquidityV2`, `decreaseLiquidityV2`)
-
-### How do I use Bitquery's Solana APIs?
-
-Bitquery provides GraphQL APIs for Solana data. You can test queries using the IDE at ide.bitquery.io or convert queries to subscriptions for real-time data via WebSocket connections. To access API outside the IDE, you need to use your OAuth token, generate one [here](https://account.bitquery.io/user/api_v2/access_tokens). For enterprise users, we also offer Kafka streams for high-throughput data processing.
-
-### What Kafka streams are available for Solana?
-
-Bitquery provides managed Kafka topics including `solana.dextrades.proto`, `solana.tokens.proto`, and `solana.transactions.proto` with pre-parsed, enriched Protocol-Buffers events. These streams offer sub-second latency and enterprise-grade reliability for high-volume data processing. Read more [here](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
-
-### Where can I find more information about Solana APIs?
-
-For comprehensive Solana API documentation, visit [https://docs.bitquery.io/docs/blockchain/Solana/](https://docs.bitquery.io/docs/blockchain/Solana/). For real-time streaming options, check out [https://docs.bitquery.io/docs/streams/real-time-solana-data/](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
 ## Raydium CLMM API Guide
 
@@ -543,3 +519,12 @@ You can run the query **[here](https://ide.bitquery.io/decreaseLiquidityV2-lates
 }
 
 ```
+
+<FAQ
+  items={[
+    { q: "Can I monitor Raydium CLMM trades in real time?", a: "Yes. Subscribe to Solana.DEXTrades filtered by the Raydium CLMM program CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK. Examples on this page include live subscription queries." },
+    { q: "What data does the Raydium CLMM API provide?", a: "DEX trades, new pool creation, position open/close events, liquidity changes, and trader addresses — with token metadata on each row." },
+    { q: "What is the Raydium CLMM program address?", a: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK on Solana mainnet. Filter DEXTrades and pool queries by this program." },
+    { q: "Can I stream CLMM data through Kafka?", a: "Yes. Enterprise plans include solana.dextrades.proto and related Kafka topics for high-throughput pipelines." },
+  ]}
+/>

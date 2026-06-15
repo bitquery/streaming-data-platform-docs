@@ -1,3 +1,5 @@
+import FAQ from "@site/src/components/FAQ";
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Pancake Swap API
@@ -1118,3 +1120,11 @@ query pairDexList(
 ### How to get PancakeSwap trades in realtime
 
 <VideoPlayer url="https://www.youtube.com/watch?v=T_BWvxYd4Pc" />
+
+<FAQ
+  items={[
+    { q: "How do I query PancakeSwap trades on BSC?", a: "Use EVM.DEXTrades with network bsc and filter Trade.Dex.ProtocolName for PancakeSwap v2 or v3." },
+    { q: "Does Bitquery cover PancakeSwap v3 pools?", a: "Yes. This page includes v2 and v3 trade and pool examples — pick the version that matches your pair." },
+    { q: "Can I stream PancakeSwap trades live?", a: "Use GraphQL subscriptions on EVM.DEXTrades or Kafka EVM protobuf streams for production pipelines." },
+  ]}
+/>

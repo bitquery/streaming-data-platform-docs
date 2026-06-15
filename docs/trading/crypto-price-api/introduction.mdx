@@ -1,5 +1,5 @@
 ---
-title: "Crypto Price API – Real-Time Token Data, Charts & OHLC | Bitquery"
+title: "Crypto Price API – Real-Time Token Data, Charts & OHLC"
 description: "Access real-time crypto prices, OHLC, moving averages & volume across EVM, Solana, Tron & more. Ultra-low latency for trading bots, DeFi & charting apps."
 keywords:
   - "crypto price API"
@@ -27,6 +27,8 @@ keywords:
   - "Coinmarketcap api"
   - "low latency price feed"
 ---
+
+import FAQ from "@site/src/components/FAQ";
 
 # Crypto Price API – Real-Time Token Data, Charts & OHLC
 
@@ -587,3 +589,24 @@ With the new Price API, you can simply feed the stream to your custom datafeed o
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://youtu.be/Lw7DordlJzg" />
+
+<FAQ
+  items={[
+    {
+      q: "How do I get real-time crypto prices and OHLC candles?",
+      a: "Use Trading.Tokens, Trading.Pairs, or Trading.Currencies for aggregated USD prices and OHLC over the last ~30 days. For older history, build candles from DEXTradeByTokens on the chain you need.",
+    },
+    {
+      q: "What is the difference between Crypto Price API and Crypto Trades API?",
+      a: "Crypto Price API gives aggregated price feeds and OHLC by token or pair. Crypto Trades API returns individual swap rows with USD price, market cap, and supply on every trade.",
+    },
+    {
+      q: "Which blockchains are supported?",
+      a: "Major EVM chains, Solana, Tron, and others in the Trading cube. Filter by network in your query — see the Trading Data Overview for the full list.",
+    },
+    {
+      q: "Can I stream live price updates to a chart or bot?",
+      a: "Yes. Use GraphQL subscriptions, Kafka price-index protobuf topics, or the TradingView SDK linked above for ready-to-chart feeds.",
+    },
+  ]}
+/>

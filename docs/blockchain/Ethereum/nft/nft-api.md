@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # NFT API
 
@@ -269,3 +270,10 @@ query MyQuery {
 - `Currency.Native`: The native type of the NFT's currency.
 - `Sender`: The address of the sender of the transfer.
 - `Receiver`: The address of the receiver of the transfer.
+
+<FAQ
+  items={[
+    { q: "How do I get NFT transfer history on Ethereum?", a: "Query NFT transfer APIs filtered by contract address, token ID, or wallet." },
+    { q: "Can I see OpenSea or Blur marketplace trades?", a: "Yes. Marketplace trades are indexed — filter by marketplace protocol in your query." },
+  ]}
+/>

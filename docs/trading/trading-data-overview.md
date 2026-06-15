@@ -1,5 +1,5 @@
 ---
-title: "Trading Data Overview — Chain-Level Trades vs Trading Cube | Bitquery"
+title: "Trading Data Overview — Chain-Level Trades vs Trading Cube"
 description: "Bitquery exposes DEX trading data in two ways: raw chain-level trades (DEXTrades / DEXTradeByTokens) and the unified Trading cube (Trading.Trades, Currencies, Tokens, Pairs). Learn the difference and pick the right API."
 sidebar_position: 1
 keywords:
@@ -15,6 +15,8 @@ keywords:
   - crypto price api
   - multi-chain trading api
 ---
+
+import FAQ from "@site/src/components/FAQ";
 
 # Trading Data Overview — Chain-Level Trades vs Trading Cube
 
@@ -169,3 +171,13 @@ A common pattern is to use the **Trading cube** for the live + 30-day-window tab
 - **Chain-level trade docs:** [DEX Trades (EVM)](/docs/evm/dextrades) · [DEXTradeByTokens cube](/docs/cubes/dextradesbyTokens) · [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)
 - **Price Index internals:** [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm) · [Supply fields reference](/docs/trading/crypto-price-api/supply-fields)
 - **API delivery comparison:** [GraphQL Query vs Subscription vs Kafka](/docs/api-comparison)
+
+<FAQ
+  items={[
+    { q: "When should I use Trading.Trades instead of DEXTrades?", a: "Use Trading.Trades for real-time or last ~30 days when you want clean USD prices, market cap, and MEV-filtered swaps across 8 chains in one query. Use DEXTrades when you need call/event context or raw per-chain detail." },
+    { q: "How far back does the Trading cube go?", a: "Roughly the last 30 days. For older OHLC or trade history, use DEXTradeByTokens with dataset combined or archive." },
+    { q: "Can I use both the Trading cube and chain-level APIs in one app?", a: "Yes — a common pattern is Trading.Trades for the live tab and DEXTradeByTokens for the historical tab of the same UI." },
+    { q: "Does the Trading cube filter out bad trades?", a: "Yes. MEV, wash, and outlier trades are dropped before USD price and supply fields are joined on each row." },
+    { q: "Which chains does Trading.Trades cover?", a: "Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron in one unified schema." },
+  ]}
+/>

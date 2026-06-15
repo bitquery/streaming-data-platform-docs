@@ -1,6 +1,7 @@
 ---
 sidebar_label: Uniswap v1–v3 Trades
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Uniswap API
 
@@ -678,4 +679,11 @@ You can get Uniswap data with sub-second latency via Kafka Streams. Read more [h
 Contact us on our telegram channel for a trial credentials.
 
 <VideoPlayer url="https://youtu.be/xcW_Na7YwSk" />
-```
+
+<FAQ
+  items={[
+    { q: "How do I query Uniswap trades on Ethereum?", a: "Filter EVM.DEXTrades with network eth and Trade.Dex.ProtocolName for uniswap_v2, uniswap_v3, or uniswap_v4." },
+    { q: "Can I get pool-level OHLC for Uniswap pairs?", a: "Yes. Use DEXTradeByTokens with interval aggregation on the pair or token mint." },
+    { q: "Does Bitquery support Uniswap v4?", a: "Yes where indexed — see the Uniswap v4 API doc for v4-specific pool and hook fields." },
+  ]}
+/>

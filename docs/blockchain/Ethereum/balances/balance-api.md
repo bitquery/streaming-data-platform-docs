@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Address Balance API
 
@@ -189,3 +190,10 @@ query {
   }
 }
 ```
+
+<FAQ
+  items={[
+    { q: "How do I check an Ethereum wallet balance?", a: "Query EVM balance APIs with the wallet address. Add a token contract filter for ERC-20 balances." },
+    { q: "Can I track balance changes over time?", a: "Use balance update APIs or historical queries documented on this page." },
+  ]}
+/>

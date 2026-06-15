@@ -3,6 +3,7 @@ title: "Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavi
 description: "Track Uniswap V4 trades, trader activities, token trades, and market behaviour in real time using Bitquery's DEX Trades API."
 sidebar_label: Uniswap v4 Trades
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Uniswap v4 Trades API
 
@@ -425,3 +426,10 @@ subscription MyQuery {
 ```
 
 > In Uniswap v4 all pools live in the singleton PoolManager (`0x000000000004444c5dc75cB358380D2e3dE08A90`), so `Pool.SmartContract` is the same across pools — use `Pool.PoolId` to identify each pool.
+
+<FAQ
+  items={[
+    { q: "How do I query Uniswap v4 trades?", a: "Use EVM DEXTrades with Uniswap v4 protocol filters — v4 pools and hooks are covered where indexed." },
+    { q: "Which chains have Uniswap v4 data?", a: "Ethereum, Base, BSC, Arbitrum, Optimism, and Polygon each have chain-specific v4 docs." },
+  ]}
+/>

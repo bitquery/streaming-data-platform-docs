@@ -18,6 +18,7 @@ keywords:
   - Uniswap v3 Base API
   - Zora API
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Base API Documentation
 
@@ -142,3 +143,11 @@ Browse live Base memecoin DEX prices on [DEXrabbit's Base Meme Coins category](h
 ### Video Tutorial | Build AI Trading Agent on Base
 
 <VideoPlayer url="https://youtu.be/ZIKi8jCrhvA" />
+
+<FAQ
+  items={[
+    { q: "What Base chain APIs are available?", a: "DEX trades, transfers, NFTs, Aerodrome, Uniswap, Zora, Clanker, and other Base-native protocols." },
+    { q: "How do I get Aerodrome or Base DEX trades?", a: "Query EVM.DEXTrades with network base and filter by protocol name — see the Aerodrome and base-dextrades docs." },
+    { q: "Is Base data near real-time?", a: "Yes. Trades and blocks are indexed as Base produces them. Use subscriptions for live apps." },
+  ]}
+/>

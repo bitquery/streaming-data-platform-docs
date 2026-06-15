@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # SmartContract Calls API
 
@@ -23,28 +24,15 @@ sidebar_position: 2
 <meta property="twitter:description" content="Retrieve detailed information about smart contract transactions, function calls, input/output parameters, and contract interactions on Ethereum using our comprehensive API." />
 </head>
 
-## Frequently Asked Questions (FAQ)
 
-### What is the Smart Contract Calls API?
-
-The Smart Contract Calls API helps you retrieve comprehensive information about smart contract transactions on Ethereum, including details about the contract function that was called, input and output parameters, gas usage, and more. This data enables you to build applications that interact with smart contracts, perform analytics on contract activity, and monitor contract interactions in real-time.
-
-### What data can I get from the Smart Contract Calls API?
-
-The API provides data for:
-- **Function Calls**: Details about which contract functions were called and their parameters
-- **Transaction Information**: Gas usage, transaction hash, sender/receiver addresses, and transaction status
-- **Contract Creation**: Track new contract deployments with creation details
-- **Internal Calls**: Monitor internal function calls within smart contracts
-
-
-### How do I use Bitquery's Ethereum APIs?
-
-Bitquery provides GraphQL APIs for Ethereum data. You can test queries using the IDE at ide.bitquery.io or convert queries to subscriptions for real-time data via WebSocket connections. To access API outside the IDE, you need to use your OAuth token, generate one [here](https://account.bitquery.io/user/api_v2/access_tokens). For enterprise users, we also offer Kafka streams for high-throughput data processing.
-
-### What Kafka streams are available for Ethereum?
-
-Bitquery provides managed Kafka topics including `ethereum.tokens.proto`, `ethereum.transactions.proto`, and `ethereum.dextrades.proto` with pre-parsed, enriched Protocol-Buffers events. These streams offer sub-second latency and enterprise-grade reliability for high-volume data processing. Read more [here](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+<FAQ
+  items={[
+    { q: "What is the Smart Contract Calls API?", a: "Query which functions were called on Ethereum contracts, with decoded inputs, gas usage, internal calls, and transaction context." },
+    { q: "When should I use Calls vs Events vs Transfers?", a: "Use Calls for function execution traces. Use Events for emitted logs. Use Transfers for token movements. See the Mental Model guide linked on this page." },
+    { q: "Can I track new contract deployments?", a: "Yes. Filter EVM.Calls with Call.Create true to list recent contract creation calls." },
+    { q: "Can I stream contract calls in real time?", a: "Yes. Convert your query to a GraphQL subscription or use Kafka ethereum.transactions.proto for high-volume monitoring." },
+  ]}
+/>
 
 ## Smart Contract Calls API Guide
 

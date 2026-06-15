@@ -18,6 +18,7 @@ keywords:
   - solana token api
   - solana transaction api
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Solana API - DEX Trades, Token Data, Real-Time Streams
 
@@ -172,3 +173,11 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 ### Video Tutorial | How to Track Latest Created Liquidity Pools, OHLC data of a specific pair on Solana Raydium DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=gqG5NW17mm0" />
+
+<FAQ
+  items={[
+    { q: "What Solana data can I get from Bitquery?", a: "DEX trades, transfers, NFT activity, DEX pools, Pump.fun, Raydium, Jupiter, balance updates, and more — via GraphQL, WebSocket, Kafka, or gRPC." },
+    { q: "What is the fastest way to stream Solana data?", a: "Solana gRPC/protobuf and Kafka for sub-100ms feeds. GraphQL subscriptions are simpler to prototype." },
+    { q: "Do I need a separate API key for gRPC streams?", a: "GraphQL uses your standard OAuth token. Kafka and gRPC may require additional credentials — contact support to enable them." },
+  ]}
+/>

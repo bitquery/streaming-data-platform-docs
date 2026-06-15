@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # ERC20 Token Transfers API
 
@@ -750,3 +751,11 @@ When backfilling Ethereum transfer data or building a historical index, use dete
 ```
 
 The composite `orderBy` across `Block_Number`, `Transaction_Index`, `Call_Index`, `Log_Index`, `Transfer_Index`, and `Transfer_Type` uniquely positions every transfer, making offset-based pagination safe for backfilling. Increment `offset` by the `count` value on each request. You can pull up to **25,000 records in a single request** by setting `count: 25000`.
+
+<FAQ
+  items={[
+    { q: "How do I get all transfers for an ERC-20 token?", a: "Query EVM.Transfers filtered by the token contract address. Add sender or receiver filters to narrow results." },
+    { q: "Can I stream ERC-20 transfers in real time?", a: "Yes. Convert your query to a GraphQL subscription or use Kafka EVM transfer topics." },
+    { q: "How far back can I query Ethereum transfers?", a: "Use dataset: combined for recent plus archive history, or dataset: archive for older addresses outside the realtime window." },
+  ]}
+/>

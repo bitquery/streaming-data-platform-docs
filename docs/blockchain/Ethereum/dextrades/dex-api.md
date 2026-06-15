@@ -1,6 +1,7 @@
 ---
 sidebar_label: DEX Trades API
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # DEX API
 
@@ -245,3 +246,11 @@ query LatestTrades($network: evm_network, $market: String) {
 ![image](https://github.com/user-attachments/assets/4495ec8e-ab55-4cf9-8b58-99ef264dcc1d)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market/Uniswap#trades).
+
+<FAQ
+  items={[
+    { q: "How do I get Uniswap or DEX trades on Ethereum?", a: "Query EVM.DEXTrades on network eth and filter by Trade.Dex.ProtocolName such as uniswap_v3 or uniswap_v2." },
+    { q: "How do I build OHLC from Ethereum DEX trades?", a: "Use DEXTradeByTokens with interval parameters, or the Crypto Price / OHLC API for recent USD candles." },
+    { q: "Which DEXs are indexed on Ethereum?", a: "Uniswap v2/v3/v4, Curve, Balancer, 1inch, and many others — filter by protocol name in your query." },
+  ]}
+/>

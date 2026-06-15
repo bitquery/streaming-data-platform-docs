@@ -15,6 +15,7 @@ keywords:
   - Bitquery Solana GMGN
 sidebar_position: 1
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # GMGN Solana API
 
@@ -675,3 +676,10 @@ Same pattern as **top buyers**, ordered by **sell-side** flow for the same mint.
 ### Get GMGN Terminal Data with Bitquery API and Streams
 
 <VideoPlayer url="https://youtu.be/8Vp_Q6RQzow" />
+
+<FAQ
+  items={[
+    { q: "How do I find trending Solana tokens?", a: "Aggregate Solana DEXTrades by mint over 5m, 1h, or 24h windows and sort by volume or trade count." },
+    { q: "Does this include Pump.fun tokens?", a: "Yes — filter by protocol or include all Solana DEX trades depending on the ranking you want." },
+  ]}
+/>

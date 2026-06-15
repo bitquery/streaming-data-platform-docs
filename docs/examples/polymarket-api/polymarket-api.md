@@ -21,6 +21,7 @@ keywords:
   - position trading API
   - oracle resolution API
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Polymarket API - Trade, Prices & Market Data
 
@@ -608,29 +609,17 @@ query {
 
 ---
 
-## Frequently Asked Questions
 
-### What is the Polymarket CTF Exchange?
-
-The CTF (Conditional Token Framework) Exchange is Polymarket's prediction market layer on Polygon. Bitquery indexes it as `polymarket` protocol. Use the [Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api) to query markets by condition_id, slug, or token ID.
-
-### How do I filter Polymarket trades by condition_id?
-
-Use the [Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api) with `Condition.Id` in your query, or `PredictionManagements` with `Prediction.Condition.Id: { in: $conditionIds }`. Combine with the [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api) for trade history.
-
-### Where can I get the Polymarket 5-minute BTC up/down API?
-
-Bitquery provides prediction market data via the [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api). Filter by market question or condition ID for BTC up/down markets. For a dedicated 5-minute product, contact [support](https://t.me/bloxy_info).
-
-### What network does Polymarket use?
-
-Polymarket runs on Polygon. Use `EVM(dataset: realtime, network: matic)` for prediction trades and settlements (see the **Dataset** note above—**realtime** holds about the **last 7 days**).
-
-### Does Bitquery support real-time Polymarket streaming?
-
-Yes. Use GraphQL subscriptions (change `query` to `subscription`) or [Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts) for `matic.predictions.proto`. Contact support for Kafka access.
-
----
+<FAQ
+  items={[
+    { q: "How do I get Polymarket trade data through an API?", a: "Query EVM(dataset: realtime, network: matic) for PredictionTrades with ProtocolName polymarket. Filter by wallet, condition_id, or outcome token. Use the IDE to test, then add your API token for production." },
+    { q: "How do I filter trades by market or condition_id?", a: "Look up the condition_id in the Polymarket Markets API, then pass it into PredictionTrades or PredictionManagements filters. The Markets API also accepts slug and token ID." },
+    { q: "What is the Polymarket CTF Exchange?", a: "The CTF (Conditional Token Framework) Exchange is Polymarket's prediction market layer on Polygon. Bitquery indexes it as polymarket protocol — use the Polymarket Markets API to query by condition_id, slug, or token ID." },
+    { q: "How far back does Polymarket data go?", a: "The realtime dataset keeps roughly the last 7 days of prediction trades and settlements. For longer history or bulk loads, ask about cloud exports or archive options." },
+    { q: "Can I stream Polymarket trades in real time?", a: "Yes. Change your query to a GraphQL subscription over WebSocket, or use Kafka on matic.predictions.proto if your plan includes streaming access." },
+    { q: "Where can I get Polymarket BTC up/down market data?", a: "Filter PredictionTrades by market question or condition_id for BTC up/down markets. For a dedicated short-interval product, contact support on Telegram." },
+  ]}
+/>
 
 ## Support
 

@@ -1,3 +1,5 @@
+import FAQ from "@site/src/components/FAQ";
+
 # LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
@@ -900,3 +902,11 @@ Using [this](https://ide.bitquery.io/liquidity-for-a-Letsbonkfun-token-pair_2) q
 ### Video Tutorial | How to get Top 100 About to Graduate LetsBonk.fun tokens
 
 <VideoPlayer url="https://www.youtube.com/watch?v=g3SVPcbUxX0" />
+
+<FAQ
+  items={[
+    { q: "What is LetsBonk.fun and how is it indexed?", a: "LetsBonk.fun is a Solana launchpad on Raydium LaunchLab. Bitquery indexes its token launches and trades like other Solana DEX protocols." },
+    { q: "How do I get LetsBonk token prices and trades?", a: "Filter Solana DEXTrades or Trading.Trades by the LetsBonk program or token mint. See the query examples on this page." },
+    { q: "Do I need an API key outside the IDE?", a: "Yes. Generate an OAuth token from your Bitquery account to run queries in your app or bot." },
+  ]}
+/>

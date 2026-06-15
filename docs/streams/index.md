@@ -1,8 +1,10 @@
 ---
-title: Real-time Blockchain Data Streaming API | Bitquery Streaming Platform
+title: Real-time Blockchain Data Streaming API
 description: Access real-time cryptocurrency and DeFi data with Bitquery's streaming APIs. Choose from WebSocket, Kafka, or gRPC streams for trading bots, DEX monitoring, and blockchain analytics.
 keywords: [real-time blockchain data, cryptocurrency data API, DeFi data streams, trading data feeds, blockchain WebSocket API, Kafka blockchain streams, gRPC blockchain data, crypto market data, DEX trading data, blockchain analytics API]
 ---
+
+import FAQ from "@site/src/components/FAQ";
 
 # Real-time Blockchain Data Streaming API | Bitquery Platform
 
@@ -137,3 +139,13 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 ---
 
 Ready to start streaming? Choose the technology that best fits your use case and dive into the detailed documentation for implementation guides, best practices, and code examples.
+
+<FAQ
+  items={[
+    { q: "What's the difference between WebSocket, Kafka, and gRPC streams?", a: "WebSocket subscriptions suit dashboards and bots with moderate volume. Kafka handles high-throughput enterprise pipelines. gRPC CoreCast on Solana delivers filtered raw blocks and transactions with minimal latency." },
+    { q: "Which blockchains support Kafka streaming?", a: "Ethereum, Solana, BSC, Polygon, Arbitrum, Base, Optimism, Tron, and more — see the Kafka concepts doc for the full topic list." },
+    { q: "Do I need a paid plan for Kafka access?", a: "Kafka credentials require an enterprise plan. Contact sales or use WebSocket subscriptions on standard plans for real-time GraphQL streaming." },
+    { q: "How do I authenticate WebSocket subscriptions?", a: "Pass your Bitquery OAuth token in the connection headers when opening the WebSocket — same token as HTTP GraphQL." },
+    { q: "When should I use gRPC instead of GraphQL subscriptions on Solana?", a: "Use gRPC CoreCast when you need raw transaction or account updates at very high throughput with custom filters; use GraphQL when you want parsed DEX trades and USD-enriched fields." },
+  ]}
+/>

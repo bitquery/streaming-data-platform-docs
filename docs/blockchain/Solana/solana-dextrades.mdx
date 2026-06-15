@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Solana DEX Trades API
 
@@ -2439,3 +2440,12 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 ## Video Tutorial on Solana DEXTrades API | How to get Top Solana tokens by Price Change 5min, 1h, 6h
 
 <VideoPlayer url="https://www.youtube.com/watch?v=vzAjTcKIjEI" />
+
+<FAQ
+  items={[
+    { q: "How do I get real-time Solana DEX trades?", a: "Open a GraphQL subscription on Solana.DEXTrades over WebSocket. Filter by DEX protocol, token mint, or pool address. For sub-100ms pipelines, use Kafka or Solana gRPC." },
+    { q: "Which Solana DEXs can I query?", a: "Raydium, Orca, Jupiter, Meteora, Pump.fun, Phoenix, Lifinity, and many others. Filter with Trade.Dex.ProtocolName or program address." },
+    { q: "How do I build OHLC candles from Solana trades?", a: "Use DEXTradeByTokens with an interval for historical OHLC, or Trading.Trades / Crypto Price API for recent USD-normalized candles." },
+    { q: "What is the difference between realtime and combined datasets?", a: "Realtime is the latest rolling window. Combined merges archive plus realtime so you can query history and recent data in one call." },
+  ]}
+/>

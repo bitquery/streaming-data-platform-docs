@@ -3,6 +3,7 @@ title: "Solana Jupiter API - Live Swaps, Limit Orders, DEX Aggregator Data"
 description: "Ultra low latency Jupiter DEX Aggregator swaps, limit orders, routing data, and trading analytics. Get real-time Jupiter API data for Solana token swaps, routing, and DEX aggregator insights."
 sidebar_position: 7
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Solana Jupiter API - Live Swaps, Limit Orders, DEX Aggregator Data
 
@@ -473,3 +474,10 @@ subscription {
 ### Video Tutorial | How to Track Create Limit Order, Cancel Limit Order and Cancel Expired Limit Order Transactions on Jupiter
 
 <VideoPlayer url="https://www.youtube.com/watch?v=AUNu97LRTKc" />
+
+<FAQ
+  items={[
+    { q: "Does Bitquery index Jupiter swaps?", a: "Yes. Jupiter aggregator routes appear in Solana DEXTrades — filter by Jupiter protocol or program fields in the examples." },
+    { q: "How do I find trending tokens by Jupiter volume?", a: "Aggregate DEXTrades by token mint over a time window and order by USD volume or trade count." },
+  ]}
+/>

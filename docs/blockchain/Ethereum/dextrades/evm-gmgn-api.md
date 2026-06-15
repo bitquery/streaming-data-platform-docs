@@ -18,6 +18,7 @@ keywords:
   - Uniswap v3 new pools stream
   - Bitquery GraphQL DEX API
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # GMGN API for Ethereum & EVM chains
 
@@ -581,3 +582,10 @@ query MyQuery {
   }
 }
 ```
+
+<FAQ
+  items={[
+    { q: "What is the GMGN-style API on Bitquery?", a: "Rank tokens and pairs by volume, trades, and price change using DEX trade aggregations — similar to GMGN dashboards." },
+    { q: "Which chains are supported?", a: "Ethereum and other EVM chains — see examples for the networks you need." },
+  ]}
+/>

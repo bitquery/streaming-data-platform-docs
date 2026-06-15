@@ -1,0 +1,46 @@
+---
+title: "Use Bitquery MCP in Windsurf"
+description: "Connect Windsurf to Bitquery's MCP server for blockchain DEX data, OHLC, and wallet queries in your AI coding workflow."
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Use Bitquery MCP in Windsurf
+
+Connect Windsurf to Bitquery's hosted MCP endpoint at [`https://mcp.bitquery.io`](https://mcp.bitquery.io) to query DEX trades, prices, liquidity, and wallet history while you build trading tools and dashboards.
+
+## Setup
+
+1. Open **Windsurf** → **Settings** → **MCP** (or the MCP / Cascade connectors panel).
+2. Add a **custom MCP server**.
+3. Server URL: `https://mcp.bitquery.io`
+4. Save and reload the MCP configuration.
+5. On first use, sign in with your Bitquery account when OAuth opens in the browser.
+
+If Windsurf expects a JSON config, use the same `mcp-remote` pattern as Cursor:
+
+```json
+{
+  "mcpServers": {
+    "bitquery": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.bitquery.io/mcp"]
+    }
+  }
+}
+```
+
+## Example prompts
+
+- *"Latest Raydium pool creations on Solana in the last 2 hours."*
+- *"OHLC 5m candles for ETH/USDC on Uniswap v3 today."*
+- *"Wallet PnL summary for `0x…` on Ethereum last 30 days."*
+
+See [MCP server overview](/docs/mcp/mcp-server/) for full coverage and auth options.
+
+<FAQ
+  items={[
+    { q: "How do I connect Windsurf to Bitquery?", a: "Add https://mcp.bitquery.io as a custom MCP server in Windsurf settings and complete OAuth on first tool call." },
+    { q: "What can I ask once connected?", a: "DEX trades, OHLC, trending tokens, wallet history, market cap — across major chains, in natural language." },
+  ]}
+/>

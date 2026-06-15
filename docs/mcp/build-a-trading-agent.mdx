@@ -1,0 +1,66 @@
+---
+title: "Build a Trading Agent with Bitquery MCP"
+description: "End-to-end recipe: connect an AI agent to Bitquery MCP, discover tokens, stream trades, and monitor wallets across chains."
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Build a Trading Agent with Bitquery MCP
+
+Use Bitquery's MCP server as the data layer for an AI trading agent: discover trending tokens, pull OHLC and liquidity, watch wallets, and alert on volume spikes — without writing GraphQL by hand.
+
+## Architecture
+
+```
+Your agent (Claude / Cursor / custom)  →  mcp.bitquery.io  →  Bitquery trading dataset
+```
+
+The agent calls MCP tools in plain English; Bitquery returns structured trade, price, and wallet data from the same production dataset as the GraphQL API.
+
+## Step 1 — Connect MCP
+
+Pick your runtime:
+
+| Client | Config |
+|--------|--------|
+| Claude Desktop | Custom connector → `https://mcp.bitquery.io` |
+| Cursor | `.cursor/mcp.json` with `mcp-remote` → `https://mcp.bitquery.io/mcp` |
+| Claude Code | `claude mcp add bitquery -- npx -y mcp-remote https://mcp.bitquery.io/mcp` |
+
+Sign in with a [Bitquery account](https://account.bitquery.io/) on first tool call. For headless servers, append `?token=YOUR_TOKEN` (see [MCP overview](/docs/mcp/mcp-server/#authentication-via-query-token-less-secure)).
+
+## Step 2 — Discovery loop
+
+Ask the agent to rank tokens by volume, filter wash trading, and return mint/ pool addresses:
+
+> *"Top 20 Solana tokens by USD volume in the last 24h, exclude pools with suspicious wash patterns."*
+
+Save mint addresses for monitoring.
+
+## Step 3 — Price & liquidity monitoring
+
+> *"1-minute OHLC for [TOKEN] on Raydium for the last 6 hours."*
+> *"Alert me when 5m volume on [POOL] exceeds 2× its 24h average."*
+
+For sub-100ms pipelines, graduate to [Kafka](/docs/streams/kafka-streaming-concepts/) or [Solana protobuf streams](/docs/streams/protobuf/chains/Solana-protobuf/) after validating logic via MCP.
+
+## Step 4 — Wallet intelligence
+
+> *"All trades for wallet [ADDRESS] on Base in the last 7 days with realised PnL per token."*
+
+Combine with your execution layer (CEX, on-chain router, etc.) — MCP is read-only and does not place trades.
+
+## Next steps
+
+- [MCP server overview](/docs/mcp/mcp-server/)
+- [Cursor setup](/docs/mcp/cursor/)
+- [Solana DEX trades API](/docs/blockchain/Solana/solana-dextrades/)
+- [Trading cube overview](/docs/trading/trading-data-overview/)
+
+<FAQ
+  items={[
+    { q: "Can I build a fully autonomous trading bot with MCP?", a: "MCP is read-only market data. Use it to research and signal; execution stays in your wallet, CEX, or router integration." },
+    { q: "Is MCP fast enough for live trading?", a: "Great for agent research and alerts. For HFT or sub-100ms feeds, move validated queries to Kafka or gRPC." },
+    { q: "How do I run MCP on a server without a browser?", a: "Pass a long-lived API token as ?token= on the MCP URL — see the auth section in the MCP overview." },
+  ]}
+/>

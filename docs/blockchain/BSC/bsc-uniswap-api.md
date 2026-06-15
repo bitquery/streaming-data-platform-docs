@@ -1,6 +1,7 @@
 ---
 sidebar_position: 7
 ---
+import FAQ from "@site/src/components/FAQ";
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -260,3 +261,10 @@ query MyQuery {
 }
 
 ```
+
+<FAQ
+  items={[
+    { q: "How do I get Uniswap trades on BSC?", a: "Query EVM.DEXTrades with network bsc and filter Trade.Dex.ProtocolName for Uniswap versions on BNB Chain." },
+    { q: "Does this include Uniswap v3 on BSC?", a: "Yes — see v3 pool and trade examples on this page." },
+  ]}
+/>

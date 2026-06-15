@@ -1,0 +1,39 @@
+---
+title: "Use Bitquery MCP in Claude Desktop"
+description: "Connect Claude Desktop to Bitquery's MCP server for on-chain DEX trades, OHLC, market cap, and wallet data in plain English."
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Use Bitquery MCP in Claude Desktop
+
+Connect Claude Desktop to [`https://mcp.bitquery.io`](https://mcp.bitquery.io) and query Bitquery's blockchain trading dataset in plain English — DEX trades, OHLC, market cap, and wallet history across Solana, Ethereum, BSC, Base, and more.
+
+## Setup
+
+1. Open **Claude Desktop** → **Settings** → **Connectors** (or **MCP Servers**).
+2. Choose **Add custom connector** / **Custom MCP server**.
+3. Paste the server URL:
+
+```
+https://mcp.bitquery.io
+```
+
+4. Save and restart Claude Desktop if prompted.
+5. When a tool runs for the first time, sign in with your [Bitquery account](https://account.bitquery.io/) and approve access. OAuth tokens refresh automatically (~30 days).
+
+## Example prompts
+
+- *"Top 10 Solana tokens by USD volume in the last 24 hours."*
+- *"1-minute OHLC for WIF on Raydium for the last 6 hours."*
+- *"Show every trade for wallet `7xKX…` on Base in the last 7 days."*
+
+See the full [MCP server overview](/docs/mcp/mcp-server/) for coverage, authentication options, and more clients.
+
+<FAQ
+  items={[
+    { q: "What URL do I paste into Claude Desktop?", a: "Use https://mcp.bitquery.io as the custom MCP connector. Sign in with your Bitquery account on first use." },
+    { q: "Is the Bitquery MCP server free?", a: "A free Bitquery account works to start. Usage beyond free-tier limits follows your existing API plan." },
+    { q: "Can Claude send transactions through MCP?", a: "No. The MCP server is read-only — it queries market and wallet data, it cannot move funds." },
+  ]}
+/>

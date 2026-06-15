@@ -13,6 +13,7 @@ keywords:
   - trader wallet trade history
   - token trade filter API
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Crypto Trades API — Real-Time DEX Trade Streams
 
@@ -2270,3 +2271,12 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/first-50-bu
   }
 }
 ```
+
+<FAQ
+  items={[
+    { q: "What is Trading.Trades and when should I use it?", a: "Trading.Trades is the cross-chain trading cube — one API for clean, MEV-filtered swaps with USD price, market cap, and supply on every row. Use it for bots, dashboards, and analytics on recent data (~30 days)." },
+    { q: "Which chains does the Crypto Trades API cover?", a: "Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron in a single schema. Filter with Pair.Market.Network." },
+    { q: "How is Trading.Trades different from chain-level DEXTrades?", a: "Trading.Trades is normalized and enriched for traders. Chain DEXTrades gives raw per-protocol detail and supports deeper history — use both depending on the job." },
+    { q: "Can I stream trades in real time?", a: "Yes. Change query to subscription for WebSocket delivery, or use Kafka trading protobuf topics for high-volume consumers." },
+  ]}
+/>

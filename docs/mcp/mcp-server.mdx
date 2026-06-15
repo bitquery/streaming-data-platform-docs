@@ -17,6 +17,8 @@ keywords:
   - crypto trading MCP server
 ---
 
+import FAQ from "@site/src/components/FAQ";
+
 <head>
 <meta name="title" content="Bitquery MCP Server — Blockchain Data for AI Agents"/>
 <meta name="description" content="Connect Claude, Cursor, ChatGPT to Bitquery's MCP server. Query DEX trades, OHLC, market cap & wallet data across Solana, Ethereum, BSC, Base in plain English."/>
@@ -31,60 +33,6 @@ keywords:
 <meta property="twitter:description" content="Plug Claude, Cursor, ChatGPT into the Bitquery MCP. Outlier-filtered DEX trades, OHLC, market cap & wallet data across 8+ chains — no SQL needed."/>
 <meta property="twitter:image" content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"/>
 <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/mcp-server/"/>
-<script type="application/ld+json">{`{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is the Bitquery MCP server?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Bitquery MCP is a hosted Model Context Protocol server at mcp.bitquery.io that lets AI clients like Claude, Cursor, ChatGPT, Claude Code, and VS Code query Bitquery's blockchain trading dataset in plain English. It exposes outlier-filtered DEX trades, OHLC, market cap, FDV, supply, and wallet history across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is the Bitquery MCP server free?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes — a free Bitquery account is enough to start. Heavy usage is metered against the same plan as the GraphQL API."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need to write SQL to use the MCP?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. You ask in plain English and the AI agent figures out the rest. The server is read-only — the agent cannot delete, insert, or modify anything."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which chains and DEXs does the Bitquery MCP cover?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Solana (Raydium, Pump.fun, PumpSwap, Meteora, Orca, BonkSwap, Lifinity, Phoenix, OpenBook, MagicEden and more), Ethereum (Uniswap v2/v3/v4, PancakeSwap, Curve, Balancer, 1inch, KyberNetwork), BNB Smart Chain (PancakeSwap, FourMeme, Flap), Base (Aerodrome, Uniswap, PancakeSwap, Zora), Arbitrum (Uniswap, GMX, Curve), Optimism (Uniswap, Aerodrome), Polygon (Uniswap, Polymarket), and Tron (SunSwap, SunPump)."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How fresh is the data on the Bitquery MCP?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Near real time — the dataset updates as blocks are processed across all supported chains."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I install the Bitquery MCP in Claude, Cursor, or ChatGPT?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Open Settings → Connectors (or MCP Servers) in your AI client, choose Custom Connector, and paste https://mcp.bitquery.io. Sign in with your Bitquery account when prompted; OAuth tokens are cached for ~30 days and auto-refresh."
-      }
-    }
-  ]
-}`}</script>
 </head>
 
 # Bitquery MCP Server — Blockchain Data for AI Agents
@@ -287,21 +235,17 @@ See the [worked examples](/docs/mcp/trading/examples/) for end-to-end versions o
 
 ---
 
-## FAQ
-
-**Is the MCP free?** Yes — a free Bitquery account is enough to start. Heavier usage is metered against your existing plan.
-
-**Do I need to write SQL?** No. You ask in plain English; the agent handles the rest. The server is read-only — the agent cannot delete, insert, or modify anything.
-
-**Can I self-host?** The underlying server is the open-source [`mcp-clickhouse`](https://github.com/ClickHouse/mcp-clickhouse) project. Bitquery runs the production deployment with OAuth and our production data; you can run your own MCP if you have your own database.
-
-**How far back does the data go?** Multiple years for the major chains. Tell the agent the window you care about (e.g. *"in the last 7 days"*) and it bounds the lookup efficiently.
-
-**How fresh is the data?** Near real time — the dataset updates as blocks are processed.
-
-**Where do I report issues or request new data?** [Telegram](https://t.me/Bloxy_info) or [support.bitquery.io](https://support.bitquery.io/).
-
----
+<FAQ
+  items={[
+    { q: "Is the Bitquery MCP server free?", a: "Yes — a free Bitquery account is enough to start. Heavy usage is metered against the same plan as the GraphQL API." },
+    { q: "Do I need to write SQL to use the MCP?", a: "No. You ask in plain English and the AI agent figures out the rest. The server is read-only — the agent cannot delete, insert, or modify anything." },
+    { q: "Which chains and DEXs does the Bitquery MCP cover?", a: "Solana (Raydium, Pump.fun, Meteora, Orca, and more), Ethereum (Uniswap, PancakeSwap, Curve), BSC (PancakeSwap, FourMeme), Base, Arbitrum, Optimism, Polygon (Polymarket), and Tron — see the chain table above for the full list." },
+    { q: "How fresh is the data on the Bitquery MCP?", a: "Near real time — the dataset updates as blocks are processed across all supported chains." },
+    { q: "How do I install the Bitquery MCP in Claude, Cursor, or ChatGPT?", a: "Open Settings → Connectors (or MCP Servers), add https://mcp.bitquery.io as a custom connector, and sign in with your Bitquery account when prompted." },
+    { q: "Can I self-host the MCP server?", a: "The underlying server is open-source mcp-clickhouse. Bitquery runs the production deployment with OAuth and our data; you can run your own if you have your own database." },
+    { q: "How far back does MCP data go?", a: "Multiple years for major chains. Tell the agent the window you care about (e.g. in the last 7 days) and it bounds the lookup efficiently." },
+  ]}
+/>
 
 ## References
 

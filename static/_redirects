@@ -1,0 +1,6 @@
+# Blog moved to main site (docs blog disabled)
+/blog/*  https://bitquery.io/blog/:splat  301
+
+# Legacy MCP path → canonical MCP docs (HTTPS, trailing slash)
+/docs/usecases/MCP  /docs/mcp/mcp-server/  301
+/docs/usecases/MCP/  /docs/mcp/mcp-server/  301
