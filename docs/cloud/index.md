@@ -44,6 +44,8 @@ keywords:
 sidebar_position: 1
 ---
 
+import FAQ from "@site/src/components/FAQ";
+
 # Blockchain Data in Cloud
 
 Bitquery provides ready-to-use blockchain **data dumps** in **Parquet format** via popular cloud providers such as **AWS S3**, **Google Cloud Storage**, **Snowflake**, and **BigQuery**.  
@@ -366,4 +368,25 @@ If you require **low-latency or streaming blockchain data**, Bitquery also provi
 - [Tron Data Export](https://docs.bitquery.io/docs/cloud/tron/) – Tron blockchain data dumps
 - [Bitcoin Data Export](https://docs.bitquery.io/docs/cloud/bitcoin/) – Bitcoin blockchain and OMNI data
 - [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) – Real-time blockchain data streams
+
+<FAQ
+  items={[
+    {
+      q: "How do I get historical blockchain data in bulk?",
+      a: "Bitquery delivers Parquet datasets to AWS S3, Google Cloud Storage, Snowflake, or BigQuery — ideal for backfills, data lakes, and warehouse loads. See the chain-specific export pages linked above.",
+    },
+    {
+      q: "What file format are the cloud exports?",
+      a: "Apache Parquet by default — columnar, compressed, and ready for Athena, Spark, BigQuery, or Snowflake. Other formats are available on request.",
+    },
+    {
+      q: "Can I sample the data before buying?",
+      a: "Yes. Explore schemas and sample files in the blockchain-cloud-data-dump-sample GitHub repo before requesting a full export.",
+    },
+    {
+      q: "How is cloud export different from the GraphQL API?",
+      a: "GraphQL is best for interactive queries and live apps. Cloud exports are for petabyte-scale history, ETL pipelines, and teams that load data into their own warehouse.",
+    },
+  ]}
+/>
 

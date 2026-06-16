@@ -31,6 +31,7 @@ slug: asterdex-api
 canonical: "/docs/examples/futures-dexs/asterdex-api"
 image: "/img/asterdex-api-guide.png"
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # AsterDEX API Documentation - Complete Guide to BNB Smart Chain Perpetual Futures Trading
 
@@ -482,19 +483,19 @@ async function fetchAsterDEXData(retries = 3) {
 - [Production Deployment Guide](https://docs.bitquery.io/docs/start/getting-updates/)
 - [API Rate Limits](https://docs.bitquery.io/docs/graphql/limits/)
 
-## Frequently Asked Questions (FAQ)
 
-### Why Use Bitquery for AsterDEX Data?
-
-**Bitquery** provides comprehensive blockchain data infrastructure that indexes the entire BSC chain in real-time. All **AsterDEX trading data** — including perpetual futures trades, liquidation events, margin calls, and smart contract interactions — is automatically captured and made available through powerful GraphQL APIs and streaming services.
-
-**Key advantages:**
-
-- **Real-time data access** without running blockchain nodes
-- **Historical data** for backtesting and analytics
-- **GraphQL API** for flexible data queries
-- **Streaming capabilities** for live trading applications
-- **Complete order lifecycle tracking** from creation to settlement
+<FAQ
+  items={[
+    { q: "How do I access AsterDEX perpetual futures data?", a: "Query EVM on network bsc filtered to AsterDEX contract events and trades — no BSC node required. Examples on this page use the main contract 0x1b6F2d3844C6ae7D56ceb3C3643b9060ba28FEb0." },
+    { q: "How do I track AsterDEX liquidations in real time?", a: "Monitor ExecuteCloseSuccessful events with executionType 2 via GraphQL subscription or polling." },
+    { q: "Can I follow a specific trader on AsterDEX?", a: "Yes. Filter trade and position events by wallet address to build trader dashboards or alerts." },
+    { q: "What execution types does AsterDEX use?", a: "0 TakeProfit, 1 StopLoss, 2 Liquidation, 3 Manual/Market close — filter events by executionType in your query." },
+    { q: "How fresh is AsterDEX data?", a: "Typically 1–3 seconds after BSC block confirmation. Use subscriptions for live trading applications." },
+    { q: "How do I differentiate limit orders from market orders?", a: "Monitor OpenLimitOrder events for limit orders and OpenMarketTrade events for market orders — each has different follow-up events." },
+    { q: "How do I track a trade from open to close?", a: "Use the order hash to chain OpenLimitOrder or OpenMarketTrade through ExecuteLimitOrderSuccessful, margin updates, and CloseTradeSuccessful." },
+    { q: "Can I get funding rate data for AsterDEX pairs?", a: "Yes. Monitor UpdatePairAccFundingFeePerShare for rate changes and FundingFeeAddLiquidity for funding payments." },
+  ]}
+/>
 
 ## What You Can Build with AsterDEX API Integration
 
@@ -503,84 +504,6 @@ With Bitquery's AsterDEX integration, developers can build:
 - **Query all trades, swaps, and liquidity pool activity** on AsterDEX
 - **Monitor trader, token pairs, and pool performance** in real-time
 - **Stream real‑time on‑chain events** (swaps, stop loss & take profit updates, liquidations) as they occur
-
-### General AsterDEX API Questions
-
-**Q: What is AsterDEX and how does it work?**
-
-A: AsterDEX is a perpetual decentralized exchange on BNB Smart Chain that allows users to trade cryptocurrency futures with leverage, provide liquidity, and earn trading fees. It uses automated market-making mechanisms for decentralized derivatives trading.
-
-**Q: How do I access AsterDEX trading data without running a BSC node?**
-
-A: Use Bitquery's GraphQL APIs to access complete AsterDEX data including trades, liquidations, and smart contract events without infrastructure setup. All data is indexed in real-time from BNB Smart Chain.
-
-**Q: What contract address does AsterDEX use on BSC?**
-
-A: The main AsterDEX contract address is `0x1b6F2d3844C6ae7D56ceb3C3643b9060ba28FEb0` on BNB Smart Chain (BSC).
-
-### API Integration Questions
-
-**Q: How can I track AsterDEX liquidations in real-time?**
-
-A: Use our liquidation API to monitor `ExecuteCloseSuccessful` events with `executionType: 2`. These events indicate liquidation occurrences with detailed position and price information.
-
-**Q: Can I track a specific trader's activity on AsterDEX?**
-
-A: Yes, use our trader-specific APIs to monitor all trading activities for any wallet address, including position openings, closures, margin updates, and P&L calculations.
-
-**Q: How do I differentiate between limit orders and market orders?**
-
-A: Monitor `OpenLimitOrder` events for limit orders and `OpenMarketTrade` events for market orders. Each has different execution timing and follow-up events.
-
-**Q: What are the different execution types in AsterDEX?**
-
-A: There are 4 execution types: 0 (TakeProfit), 1 (StopLoss), 2 (Liquidation), and 3 (Manual/Market close). Each indicates how a position was closed.
-
-### Technical Implementation Questions
-
-**Q: How do I track the complete lifecycle of an AsterDEX trade?**
-
-A: Use the order hash to track all related events from `OpenLimitOrder`/`OpenMarketTrade` through `ExecuteLimitOrderSuccessful`, margin updates, and final `CloseTradeSuccessful` events.
-
-**Q: Can I get real-time funding rate data for AsterDEX pairs?**
-
-A: Yes, monitor `UpdatePairAccFundingFeePerShare` events to track funding rate changes and `FundingFeeAddLiquidity` events for funding payments.
-
-**Q: How do I monitor margin calls and position health?**
-
-A: Track `UpdateMargin` events for margin changes and `ExecuteTpSlOrLiq` events for automated risk management triggers like stop-loss and take-profit executions.
-
-**Q: Is there rate limiting on Bitquery APIs for AsterDEX data?**
-
-A: Bitquery offers different plans with varying rate limits. Check the [Bitquery pricing page](https://bitquery.io/pricing) for current API limits and upgrade options.
-
-### Data Analysis Questions
-
-**Q: How can I calculate trading volumes on AsterDEX?**
-
-A: Aggregate `OpenMarketTrade` and `CloseTradeSuccessful` events, extracting position sizes and values to calculate daily, weekly, or monthly trading volumes.
-
-**Q: Can I track AsterDEX market maker activity?**
-
-A: Yes, analyze trading patterns using our trader APIs to identify market makers based on trading frequency, position sizes, and profit patterns.
-
-**Q: How do I analyze liquidation patterns and market stress?**
-
-A: Monitor liquidation events frequency, amounts, and market conditions during high volatility periods using our historical data APIs.
-
-### Getting Started Questions
-
-**Q: Do I need special permissions to access AsterDEX data via Bitquery?**
-
-A: Create a free [Bitquery account](https://ide.bitquery.io/) to start exploring data. Production applications may require paid plans for higher limits and additional features.
-
-**Q: Are there code examples for different programming languages?**
-
-A: Yes, all GraphQL queries work with any language that supports HTTP requests. Common implementations include JavaScript, Python, and Go clients.
-
-**Q: How fresh is the AsterDEX data provided by Bitquery?**
-
-A: Data is indexed in real-time with typical latency of 1-3 seconds from block confirmation on BNB Smart Chain.
 
 ## Related Resources
 

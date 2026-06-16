@@ -1,6 +1,7 @@
 ---
 sidebar_position: 6
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Solana Transactions API
 
@@ -113,3 +114,10 @@ subscription(
 }
 
 ```
+
+<FAQ
+  items={[
+    { q: "How do I look up a Solana transaction?", a: "Query Solana.Transactions by signature, or filter by account address and block time." },
+    { q: "Can I decode instruction data?", a: "Use Solana Instructions and balance update APIs for program-level detail beyond the raw transaction." },
+  ]}
+/>

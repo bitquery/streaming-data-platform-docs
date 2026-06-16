@@ -1,6 +1,7 @@
 ---
 sidebar_position: 7
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Raydium DEX API - Solana Trades, Pools, OHLC
 
@@ -816,3 +817,11 @@ subscription {
 ## Video Tutorial | How to track Raydium DEXTrades enabled by OpenBook Protocol using Bitquery API
 
 <VideoPlayer url="https://www.youtube.com/watch?v=aYARyvvItHA" />
+
+<FAQ
+  items={[
+    { q: "How do I stream Raydium trades in real time?", a: "Use a GraphQL subscription on Solana.DEXTrades with ProtocolName raydium, or connect to solana.dextrades.proto on Kafka for high throughput." },
+    { q: "How do I get OHLC for a Raydium pair?", a: "Aggregate DEXTradeByTokens by interval for the pool or token mint. For recent data with USD on every row, try Trading.Trades filtered to Raydium on Solana." },
+    { q: "Can I track new Raydium pool creation?", a: "Yes. Query or subscribe to DEXPools filtered by Raydium protocol and sort by creation time. Pool-creation examples are on this page." },
+  ]}
+/>

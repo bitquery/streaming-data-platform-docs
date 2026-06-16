@@ -1,6 +1,7 @@
 ---
 sidebar_position: 7
 ---
+import FAQ from "@site/src/components/FAQ";
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -231,3 +232,10 @@ query timeDiagram($network: evm_network) {
   "network": "matic"
 }
 ```
+
+<FAQ
+  items={[
+    { q: "How do I get Uniswap trades on Polygon?", a: "Query EVM.DEXTrades with network matic filtered to Uniswap protocol names." },
+    { q: "Can I filter by token pair?", a: "Yes — filter Buy and Sell Currency MintAddress or Symbol in your where clause." },
+  ]}
+/>

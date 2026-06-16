@@ -1,6 +1,7 @@
 ---
 sidebar_position: 7
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Orca DEX API
 
@@ -822,3 +823,11 @@ subscription {
 ## Video Tutorial | How To Track Add Liquidity And Remove Liquidity Transactions On Solana Orca DEX
 
 <VideoPlayer url="https://www.youtube.com/watch?v=X3rhSAROCu0" />
+
+<FAQ
+  items={[
+    { q: "How do I get Orca DEX trades for a token?", a: "Query Solana.DEXTrades with Trade.Dex.ProtocolName is orca and filter by buy or sell token mint address." },
+    { q: "Can I stream Orca trades live?", a: "Yes via GraphQL subscriptions or Kafka. Convert any query example on this page from query to subscription." },
+    { q: "How do I get liquidity and pool data for Orca?", a: "Use DEXPools queries filtered to Orca — track reserves, new pools, and pair metadata alongside trades." },
+  ]}
+/>

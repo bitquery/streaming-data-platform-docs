@@ -3,6 +3,9 @@ title: "Pump.fun API - Live Prices, OHLCV, ATH, MarketCap"
 description: "Get live Pump.fun token prices, OHLCV, ATH, market cap, and trades via Bitquery's GraphQL API, WebSocket streams, gRPC, or Kafka. Covers new tokens, migrations to PumpSwap, and bonding curve data on Solana."
 ---
 
+import VideoPlayer from "../../../../src/components/videoplayer.js";
+import FAQ from "@site/src/components/FAQ";
+
 # Pump.fun API - Live Prices, OHLCV, ATH, MarketCap
 
 :::tip Need real-time Pump.fun data or anything from the last ~30 days?
@@ -63,8 +66,6 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](ht
   <meta property="twitter:title" content="Pump.fun API - Solana - New Tokens, Trades, Live Prices"/>
   <meta property="twitter:description" content="Get Pump.fun token prices, trades, and bonding curve progress via the Bitquery Pump.fun API."/>
 </head>
-
-import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 ## What is the Program Address for Pump.fun on Solana?
 
@@ -2419,24 +2420,15 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/latest-crea
 
 <VideoPlayer url="https://www.youtube.com/watch?v=pl5B-YTluj4" />
 
-## Frequently Asked Questions
+### Why does my Pump.fun query return "columns not available in combined dataset"? {#why-does-my-pumpfun-query-return-columns-not-available-in-combined-dataset}
 
-### Can I get Pump.fun token trade data via gRPC or Kafka stream?
+Fields like `Trade.Side` are only available with `dataset: realtime`. For historical queries with `dataset: combined`, avoid `Trade_Side`, `Trade_Side_Type`, and similar realtime-only fields.
 
-Yes. Bitquery offers [gRPC streams](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/) and Kafka for Pump.fun trades. Contact [sales](https://t.me/Bloxy_info) for a trial of zero-latency Pumpfun data Streams.
-
-### What is the rate limit for the Pump.fun API?
-
-Rate limits depend on your Bitquery plan. See [authorisation](https://docs.bitquery.io/docs/authorisation/how-to-use/) for API token limits and upgrade options.
-
-### Does Bitquery support historical Pump.fun data?
-
-Yes. Use `dataset: combined` in your GraphQL query for historical data. For real-time only (last ~8 hours on PumpSwap), use `dataset: realtime`. See [historical aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/) for details.
-
-### How do I get tokens that migrated from Pump.fun to PumpSwap?
-
-Use the [Pump Fun to Pump Swap](https://docs.bitquery.io/docs/blockchain/Solana/pump-fun-to-pump-swap) guide. Filter `DEXPools` by `Base.PostAmount: { eq: "206900000" }` to find tokens that graduated, or subscribe to pool creation events.
-
-### Why does my Pump.fun query return "columns not available in combined dataset"?
-
-The `Trade.Side` and some other fields are only available with `dataset: realtime`. For historical queries with `dataset: combined`, avoid `Trade_Side`, `Trade_Side_Type`, and similar realtime-only fields. Use [DEXTradeByTokens](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades) fields that work in both datasets.
+<FAQ
+  items={[
+    { q: "How do I get the current price of a Pump.fun token?", a: "Query DEXTrades or Trading.Trades filtered by the token mint and Pump.fun program address 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P. Trading.Trades includes USD price on every row for the last ~30 days." },
+    { q: "How do I track new Pump.fun token launches?", a: "Subscribe to token creation or pool events filtered by the Pump.fun program, or poll DEXPools for new pairs. Examples on this page include real-time subscription queries." },
+    { q: "Does Bitquery have historical Pump.fun data?", a: "Yes. Use dataset: combined for older trades and bonding-curve history. Use dataset: realtime for the latest window only." },
+    { q: "How do I know when a token graduated to PumpSwap?", a: "Tokens that hit the bonding curve target appear in PumpSwap pools — filter DEXPools with Base.PostAmount equal to 206900000 or follow the Pump Fun to PumpSwap guide." },
+  ]}
+/>

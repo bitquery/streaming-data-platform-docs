@@ -1,6 +1,7 @@
 ---
 sidebar_position: 7
 ---
+import FAQ from "@site/src/components/FAQ";
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -314,3 +315,10 @@ query MyQuery {
 ## Building with Bitquery and Uniswap API
 
 Check [this](../../usecases/base-sniper-bot.mdx) guide to get started with building projects with real world value using Bitquery Uniswap APIs.
+
+<FAQ
+  items={[
+    { q: "How do I query Uniswap on Base?", a: "Use EVM.DEXTrades with network base and Uniswap protocol filters from the examples on this page." },
+    { q: "Can I get OHLC for Uniswap pairs on Base?", a: "Use DEXTradeByTokens interval aggregation or Trading.Trades for recent USD candles." },
+  ]}
+/>

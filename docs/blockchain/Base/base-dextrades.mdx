@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Base Chain DEX Trades API
 
@@ -636,3 +637,11 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 ## Video Tutorial | How to get Base Decentralized Exchange Data with DEX Trades API
 
 <VideoPlayer url="https://www.youtube.com/watch?v=RJJAo0yDf18" />
+
+<FAQ
+  items={[
+    { q: "How do I query DEX trades on Base?", a: "Use EVM.DEXTrades with network base. Filter by protocol (Aerodrome, Uniswap, etc.) or token pair." },
+    { q: "Which Base DEXs are covered?", a: "Aerodrome, Uniswap, PancakeSwap, Zora, and others listed in the Base docs." },
+    { q: "Can I stream Base DEX trades?", a: "Use GraphQL subscriptions or Kafka EVM streams for live trade feeds." },
+  ]}
+/>

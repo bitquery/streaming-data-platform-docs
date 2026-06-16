@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Token Holders API
 
@@ -474,3 +475,11 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 ## Video Tutorial on How to Identify Top Token Holders for Any Cryptocurrency
 
 <VideoPlayer url="https://www.youtube.com/watch?v=I79TftivtjA" />
+
+<FAQ
+  items={[
+    { q: "Which endpoint should I use for ERC-20 holders?", a: "Use EVM.Holders. The older EVM.TokenHolders field is deprecated and will be removed — migrate to Holders with Amount(selectWhere: { gt: \"0\" })." },
+    { q: "How do I get the top holders of a token?", a: "Query EVM.Holders with dataset: combined, filter by Currency SmartContract address, order by Balance descending, and limit results." },
+    { q: "How do I count total holders?", a: "Use a Holders query with count aggregation and Amount(selectWhere: { gt: \"0\" }) so zero-balance addresses are excluded." },
+  ]}
+/>

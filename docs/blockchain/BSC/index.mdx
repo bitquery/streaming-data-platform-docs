@@ -15,6 +15,7 @@ keywords:
   - BSC token api
   - BSC transaction api
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # BSC API Documentation
 
@@ -104,3 +105,11 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 ### Video Tutorial on BSC Protobuf Streams | Building BSC Sniper Trading Bot Using Bitquery Protobuf  Kafka Streams
 
 <VideoPlayer url="https://youtu.be/vgOHgqTJmj0" />
+
+<FAQ
+  items={[
+    { q: "What BSC data does Bitquery provide?", a: "DEX trades, token transfers, Four Meme, PancakeSwap, mempool streams, blocks, and smart contract calls." },
+    { q: "How do I query BSC DEX trades?", a: "Use EVM.DEXTrades with network bsc and filter by protocol or token contract address." },
+    { q: "Can I get real-time BSC streams?", a: "Yes via GraphQL subscriptions, Kafka, or mempool APIs depending on your use case." },
+  ]}
+/>

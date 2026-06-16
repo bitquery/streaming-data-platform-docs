@@ -989,6 +989,10 @@ const sidebars = {
         id: "mcp/mcp-server",
       },
       items: [
+        "mcp/claude-desktop",
+        "mcp/cursor",
+        "mcp/windsurf",
+        "mcp/build-a-trading-agent",
         {
           type: "category",
           label: "Trading",

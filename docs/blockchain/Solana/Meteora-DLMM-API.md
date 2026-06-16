@@ -1,3 +1,5 @@
+import FAQ from "@site/src/components/FAQ";
+
 # Meteora DLMM API
 
 :::tip Need real-time Meteora DLMM data or anything from the last ~30 days?
@@ -6,34 +8,6 @@ For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitqu
 
 
 Bitquery provides comprehensive real-time and historical data APIs and Streams for the Solana blockchain, enabling developers and traders to build powerful applications and execute trades based on reliable information from Meteora's Dynamic Liquidity Market Maker (DLMM).
-
-## Frequently Asked Questions (FAQ)
-
-### Can I monitor Meteora DLMM trades in real-time?
-
-Yes, you can subscribe to real-time Meteora DLMM trades using GraphQL subscriptions. The API filters trades by the Meteora DLMM program address `LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo` and provides trade data as it happens on-chain. Examples available below.
-
-### What data can I get from the Meteora DLMM API?
-
-The API provides data for:
-
-- **DEX Trades**: Buy/sell amounts, token details (name, symbol, mint address, decimals), trader addresses, and transaction signatures
-- **Pool Creation**: Track new DLMM pools with token pairs, creator information, and account details
-- **Price Data**: Real-time and historical token prices with USD conversions
-- **OHLC Data**: Open, High, Low, Close price data for technical analysis
-- **Volume Analytics**: Trading volume, buy/sell volume, and top trader insights
-
-### How do I use Bitquery's Solana APIs?
-
-Bitquery provides GraphQL APIs for Solana data. You can test queries using the IDE at ide.bitquery.io or convert queries to subscriptions for real-time data via WebSocket connections. To access API outside the IDE, you need to use your OAuth token, generate one [here](https://account.bitquery.io/user/api_v2/access_tokens). For enterprise users, we also offer Kafka streams for high-throughput data processing.
-
-### What Kafka streams are available for Solana?
-
-Bitquery provides managed Kafka topics including `solana.dextrades.proto`, `solana.tokens.proto`, and `solana.transactions.proto` with pre-parsed, enriched Protocol-Buffers events. These streams offer sub-second latency and enterprise-grade reliability for high-volume data processing. Read more [here](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
-
-### Where can I find more information about Solana APIs?
-
-For comprehensive Solana API documentation, visit [https://docs.bitquery.io/docs/blockchain/Solana/](https://docs.bitquery.io/docs/blockchain/Solana/). For real-time streaming options, check out [https://docs.bitquery.io/docs/streams/real-time-solana-data/](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
 ## Meteora DLMM API Guide
 
@@ -368,6 +342,15 @@ query MyQuery {
   }
 }
 ```
+
+<FAQ
+  items={[
+    { q: "Can I monitor Meteora DLMM trades in real time?", a: "Yes. Subscribe to Solana.DEXTrades filtered by program LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo." },
+    { q: "What is Meteora DLMM?", a: "Meteora Dynamic Liquidity Market Maker on Solana with concentrated liquidity. Bitquery indexes trades, pools, and price data." },
+    { q: "What data can I query?", a: "Swaps, pool creation, OHLC aggregates, volume by token, and trader addresses." },
+    { q: "Can I use Kafka for Meteora DLMM streams?", a: "Yes on enterprise plans — solana.dextrades.proto delivers parsed swap events with sub-second latency." },
+  ]}
+/>
 
 ## Related Documentation
 

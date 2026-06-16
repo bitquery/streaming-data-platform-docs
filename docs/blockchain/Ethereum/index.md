@@ -1,5 +1,5 @@
 ---
-title: Ethereum API - Best Blockchain Data API for Developers | Bitquery
+title: Ethereum API - Best Blockchain Data API for Developers
 description: Access comprehensive Ethereum API with real-time blockchain data, transactions, DEX trades, liquidity pools, slippage data, token balances, and more. Free tier available. GraphQL API with subscriptions and Kafka streaming.
 slug: /blockchain/Ethereum/
 keywords:
@@ -21,6 +21,9 @@ keywords:
   - free ethereum rpc
   - ethereum data api
 ---
+
+import VideoPlayer from "../../../src/components/videoplayer.js";
+import FAQ from "@site/src/components/FAQ";
 
 # Ethereum API - Complete Developer Guide
 
@@ -175,34 +178,24 @@ Access comprehensive NFT data across Ethereum including collections, ownership t
 
 Query detailed Ethereum transaction data including transaction hashes, from/to addresses, values transferred, gas prices, gas limits, gas used, nonce values, and transaction status. Access transaction input data, method signatures, internal transactions, and execution traces. Filter transactions by sender, receiver, value ranges, time periods, or transaction type to analyze payment flows, contract calls, and wallet behavior. Retrieve comprehensive transaction receipts with logs, events, and error details for both successful and failed transactions. Essential for transaction monitoring, forensic analysis, compliance reporting, and building comprehensive blockchain data applications.
 
-## Frequently Asked Questions
-
-### What is an Ethereum API?
-An **Ethereum API** is a programming interface that allows developers to access Ethereum blockchain data without running their own node. Our **Ethereum API** provides comprehensive access to transactions, balances, smart contract events, and more.
-
-### How does your Ethereum API compare to other providers?
-Our **Ethereum API** offers several advantages:
-- **Complete historical data** since Ethereum genesis
-- **Real-time streaming** via GraphQL subscriptions and Kafka
-- **Enriched data** with USD values and analytics
-- **GraphQL interface** for flexible querying
-
-### What data can I access with your Ethereum API?
-Our **Ethereum API** provides access to:
-- All Ethereum transactions and blocks
-- Token balances and transfers (ERC-20, ERC-721, ERC-1155 and more)
-- DEX trades, liquidity data, slippage, and pool reserves
-- Smart contract events and logs
-- Gas fees and network statistics
-- Mempool data for pending transactions
-- NFT collections and trading data
-
-### Can I use your Ethereum API for commercial projects?
-Yes, our **Ethereum API** is designed for both personal and commercial use. We offer various pricing tiers to suit different needs.
+<FAQ
+  items={[
+    {
+      q: "Do I need to run my own Ethereum node?",
+      a: "No. Bitquery indexes the full chain — query transactions, DEX trades, token transfers, NFTs, and smart contract events via GraphQL without node infrastructure.",
+    },
+    {
+      q: "How do I get real-time Ethereum DEX trades?",
+      a: "Use Trading.Trades for recent enriched swaps across chains, or EVM.DEXTrades on network eth for raw protocol-level detail and deeper history.",
+    },
+    {
+      q: "How far back does Ethereum historical data go?",
+      a: "To Ethereum genesis for indexed datasets. Use dataset: combined for merged archive and realtime, or cloud Parquet exports for bulk warehouse loads.",
+    },
+  ]}
+/>
 
 ## Ethereum Videos Tutorials
-
-import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ### DEX Trades on EVM (Uniswap, Aggregators, Screens)
 

@@ -1,8 +1,7 @@
 ---
 sidebar_position: 1
 ---
-
-
+import FAQ from "@site/src/components/FAQ";
 
 # Photon Solana API
 
@@ -302,3 +301,11 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://www.youtube.com/watch?v=XoKQIymC4kA" />
+
+<FAQ
+  items={[
+    { q: "How do I query Photon aggregator trades?", a: "Filter Solana.DEXTrades for Photon routes — the examples on this page show the program and protocol filters to use." },
+    { q: "Is Photon data available in real time?", a: "Yes. Use GraphQL subscriptions or Kafka streams for live swap data as blocks are processed." },
+    { q: "How is Photon different from querying Raydium directly?", a: "Photon is an aggregator — one swap may route through multiple DEXs. Filter by Photon to see aggregator-level trades." },
+  ]}
+/>

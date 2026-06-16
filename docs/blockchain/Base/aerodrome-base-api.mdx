@@ -3,6 +3,7 @@ title: "Aerodrome Finance API - Base DEX Trades, Liquidity Pools, Token Analytic
 description: "Get real-time Aerodrome Finance DEX trades, liquidity pools, token prices, trading volume and analytics on Base network. Access comprehensive on-chain data via Aerodrome API, Streams and GraphQL."
 sidebar_position: 7
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Aerodrome Finance API - Base DEX Trades, Liquidity Pools, Token Analytics
 
@@ -422,3 +423,10 @@ query MyQuery {
 ### Video Tutorial | How to Get Latest Liquidity Pools and Pool Liquidity on Aerodrome Finance
 
 <VideoPlayer url="https://youtu.be/HvuD4Gtaonc" />
+
+<FAQ
+  items={[
+    { q: "How do I get Aerodrome trades on Base?", a: "Query EVM.DEXTrades on network base with Aerodrome protocol filters from the examples on this page." },
+    { q: "Can I track new Aerodrome pools?", a: "Yes. Query DEXPools filtered to Aerodrome and sort by creation time or subscribe to new pool events." },
+  ]}
+/>

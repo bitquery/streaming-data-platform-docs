@@ -1,3 +1,5 @@
+import FAQ from "@site/src/components/FAQ";
+
 # What are Internal Transactions & How to Get Them?
 
 In blockchain a transaction is the transfer of value between two participants, recorded on a digital ledger. Not all transactions involve the direct sending of funds from one wallet to another, some transactions occur within smart contracts. These transactions are known as internal transactions.
@@ -246,3 +248,10 @@ transactions associated with the wallet address to ensure that all movements of 
 Tracking internal transactions is important to ensure the transparency and integrity of blockchain activities. By using tools such as Bitquery to monitor these transactions, users can verify the movement of their funds and also understand the flow of assets within smart contracts, thus ensuring the wallet balances are accurate. This is important for developers and users who need to maintain trust and security in decentralized applications.
 
 For more information and related content, visit the [Bitquery blog](https://bitquery.io/blog) or explore the [documentation](https://docs.bitquery.io/).
+<FAQ
+  items={[
+    { q: "What is an internal transaction?", a: "An internal transaction is a value transfer or contract call triggered inside an outer transaction — for example a DEX swap routed through a router contract." },
+    { q: "How do I fetch internal transactions with Bitquery?", a: "Use EVM.Calls or trace-style APIs filtered by transaction hash, contract address, or method signature." },
+    { q: "Are internal transactions the same as token transfers?", a: "No. Transfers move tokens between addresses. Internal calls show contract execution paths — both are useful for wallet and DeFi forensics." },
+  ]}
+/>

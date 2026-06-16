@@ -1,0 +1,69 @@
+---
+title: "Protocol API page template"
+description: "Template for protocol-specific API answer hubs — copy and customize for new DEX / launchpad pages."
+draft: true
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# {Protocol} API — Real-Time Trades, Prices & Liquidity
+
+Bitquery's {Protocol} API returns real-time and historical trades, OHLC candles, liquidity, and prices for {Protocol} on {Chain}, via GraphQL, WebSocket, and Kafka.
+
+## What data is available
+
+- Trades, OHLC, prices, liquidity, new pools/pairs
+- Wallet-level trade history and volume rankings
+- Historical archives plus realtime window (see dataset notes on live pages)
+
+## Stream real-time {Protocol} trades (GraphQL subscription)
+
+```graphql
+subscription {
+  Solana {
+    DEXTrades(
+      where: { Trade: { Dex: { ProtocolName: { is: "raydium" } } } }
+    ) {
+      Block { Time }
+      Trade {
+        Dex { ProtocolName }
+        Buy { Amount Currency { Symbol } }
+        Sell { Amount Currency { Symbol } }
+      }
+    }
+  }
+}
+```
+
+Replace `ProtocolName` and root type (`Solana` / `EVM`) for your venue.
+
+## Coverage & latency
+
+| | |
+|---|---|
+| **Chain** | {Chain} |
+| **Interfaces** | GraphQL, WebSocket, Kafka, gRPC (where available) |
+| **Latency** | Near real-time as blocks are processed |
+
+## Related docs
+
+- [Solana DEX trades](/docs/blockchain/Solana/solana-dextrades/)
+- [Authorisation](/docs/authorisation/how-to-generate/)
+- [Kafka streaming](/docs/streams/kafka-streaming-concepts/)
+
+<FAQ
+  items={[
+    {
+      q: "How do I get real-time {Protocol} trades?",
+      a: "Open a GraphQL subscription over WebSocket, or use Kafka/gRPC for sub-100ms pipelines. Filter by ProtocolName in your query.",
+    },
+    {
+      q: "Does it include new pool/pair creation?",
+      a: "Yes. Use DEXPools and pool-creation examples on the chain-specific DEX docs, filtered by the protocol name.",
+    },
+    {
+      q: "Do I need an API key?",
+      a: "Yes for queries outside the Bitquery IDE. Generate a token from your Bitquery account settings.",
+    },
+  ]}
+/>

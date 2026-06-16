@@ -1,3 +1,5 @@
+import FAQ from "@site/src/components/FAQ";
+
 # Solana DEX Orders API
 
 :::tip Need real-time Solana DEX orders data or anything from the last ~30 days?
@@ -289,3 +291,10 @@ You can run the query [here](https://ide.bitquery.io/Latest-Openbook-DEX-Orders#
 ## Video Tutorials
 
 <VideoPlayer url="https://youtu.be/altkxftGzxU" />
+
+<FAQ
+  items={[
+    { q: "What are Solana DEX orders in Bitquery?", a: "On-chain limit-order and order-book style events from supported DEXs, indexed for query and subscription." },
+    { q: "How do I filter orders by market?", a: "Use the order fields and filters shown in the examples on this page." },
+  ]}
+/>

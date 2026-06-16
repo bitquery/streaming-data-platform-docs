@@ -1,0 +1,51 @@
+---
+title: "Use Bitquery MCP in Cursor"
+description: "Add Bitquery's MCP server to Cursor for AI-assisted DEX trade queries, OHLC charts, and wallet analytics across 8+ chains."
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Use Bitquery MCP in Cursor
+
+Add Bitquery to Cursor so the AI can query live and historical DEX trades, OHLC, market cap, and wallet data via [`https://mcp.bitquery.io`](https://mcp.bitquery.io).
+
+## Setup via Cursor settings
+
+1. Open **Cursor Settings** → **MCP** (or **Features → MCP Servers**).
+2. Add a new MCP server.
+3. URL: `https://mcp.bitquery.io`
+4. Reload MCP configuration or restart Cursor.
+5. Approve Bitquery when prompted and sign in with your Bitquery account.
+
+## Setup via config file
+
+Add to `.cursor/mcp.json` in your project (or global Cursor config):
+
+```json
+{
+  "mcpServers": {
+    "bitquery": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.bitquery.io/mcp"]
+    }
+  }
+}
+```
+
+Restart Cursor so the server is picked up. On first tool call, complete OAuth in the browser.
+
+## Example prompts
+
+- *"Which Base tokens crossed $10M market cap in the last 24h?"*
+- *"Pull Pump.fun trades for mint `…` in the last hour."*
+- *"Compare 24h volume on Raydium vs Orca for SOL pairs."*
+
+More detail: [MCP server overview](/docs/mcp/mcp-server/).
+
+<FAQ
+  items={[
+    { q: "How do I add Bitquery MCP to Cursor?", a: "Add https://mcp.bitquery.io in Cursor MCP settings, or use mcp-remote in .cursor/mcp.json as shown on this page." },
+    { q: "Which chains can I query through MCP?", a: "Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron — ask in plain English, no GraphQL required." },
+    { q: "Can I use an API token instead of OAuth?", a: "Yes for headless setups — append ?token=YOUR_TOKEN to the MCP URL. OAuth is safer for daily interactive use." },
+  ]}
+/>

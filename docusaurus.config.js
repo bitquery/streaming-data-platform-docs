@@ -23,7 +23,8 @@ const enableAnalytics = process.env.NODE_ENV === "production";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Bitquery",
+  title: "Bitquery Docs",
+  titleDelimiter: "|",
   tagline:
     "How to query data and build applications on Bitquery blockchain data platform",
   favicon: "img/favicon.ico",
@@ -157,12 +158,26 @@ const config = {
             to: "/docs/usecases/telegram-bot/",
             from: "/docs/usecases/Telegram_bot/",
           },
-          // MCP moved from Use Cases to docs/mcp/ (2026). Single `from` only:
-          // multiple entries can collide as the same `build/.../index.html` on
-          // case-insensitive filesystems (MCP vs mcp) or trailing-slash rules.
+          // MCP moved from Use Cases to docs/mcp/ (2026).
           {
-            to: "/docs/mcp/mcp-server",
+            to: "/docs/mcp/mcp-server/",
             from: "/docs/usecases/MCP/",
+          },
+          {
+            to: "/docs/mcp/claude-desktop/",
+            from: "/docs/usecases/MCP/claude-desktop/",
+          },
+          {
+            to: "/docs/mcp/cursor/",
+            from: "/docs/usecases/MCP/cursor/",
+          },
+          {
+            to: "/docs/mcp/windsurf/",
+            from: "/docs/usecases/MCP/windsurf/",
+          },
+          {
+            to: "/docs/mcp/build-a-trading-agent/",
+            from: "/docs/usecases/MCP/build-a-trading-agent/",
           },
           {
             to: "/docs/authorisation/how-to-generate",
@@ -879,6 +894,8 @@ const config = {
         ],
       },
     ],
+    require.resolve("./plugins/llms-txt.js"),
+    require.resolve("./plugins/tech-article-jsonld.js"),
   ],
   presets: [
     [
@@ -888,14 +905,11 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
+          showLastUpdateAuthor: true,
           editUrl:
             "https://github.com/bitquery/streaming-data-platform-docs/tree/main",
         },
-        blog: {
-          showReadingTime: true,
-          editUrl:
-            "https://github.com/bitquery/streaming-data-platform-docs/tree/main",
-        },
+        blog: false,
         sitemap: {
           changefreq: "daily",
           priority: 1,
@@ -1094,6 +1108,7 @@ const config = {
               },
               { label: "Streams overview", to: "/docs/streams/" },
               { label: "MCP server", to: "/docs/mcp/mcp-server/" },
+              { label: "MCP in Cursor", to: "/docs/mcp/cursor/" },
               { label: "Cloud datasets (Parquet)", to: "/docs/cloud/" },
               {
                 label: "Solana gRPC (CoreCast)",

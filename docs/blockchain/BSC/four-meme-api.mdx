@@ -9,6 +9,7 @@ keywords:
   - Four Meme PancakeSwap migration
   - BSC memecoin API
 ---
+import FAQ from "@site/src/components/FAQ";
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -2330,3 +2331,11 @@ These mirror common “answer engine” questions. Each item points to the secti
 - [Tutorial](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 - [Source Code](https://github.com/Kshitij0O7/evm-sniper)
 - [Video](https://youtu.be/vgOHgqTJmj0?si=yfUguMWdMtxRJMvg)
+
+<FAQ
+  items={[
+    { q: "How do I get Four Meme token trades on BSC?", a: "Query EVM.DEXTrades on network bsc filtered to the Four Meme protocol. Examples cover new launches, OHLC, and top traders." },
+    { q: "Can I stream Four Meme trades before they confirm?", a: "Use the Four Meme Mempool API for pre-confirmation monitoring, or Kafka streams for confirmed trades at scale." },
+    { q: "How do I get OHLC for a Four Meme token?", a: "Use DEXTradeByTokens with interval aggregation on network bsc, or see the OHLC examples on this page." },
+  ]}
+/>

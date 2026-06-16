@@ -2,6 +2,7 @@
 sidebar_position: 3
 sidebar_label: Slippage & Price Impact
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # EVM DEX Slippage API
 
@@ -317,8 +318,9 @@ For a practical implementation example of using slippage data for automated trad
 
 For more advanced use cases, refer to the [DEXPools Cube documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/#advanced-use-cases-and-processing-patterns).
 
-## Frequently Asked Questions
-
-### How does slippage affect DEX trading?
-
-Slippage affects DEX trading by causing the actual execution price to differ from the expected price. When you swap tokens in a DEX pool, larger trades move the price along the liquidity curve—the more you buy or sell, the worse the price you get. This means you receive fewer output tokens than you expected (or pay more input tokens). Slippage is higher in shallow pools and for large orders. Use the DEXPoolSlippages API to check `MaxAmountIn` and `MinAmountOut` at different slippage tolerances before trading, so you can choose pools with enough liquidity and set appropriate slippage limits.
+<FAQ
+  items={[
+    { q: "How do I calculate slippage on a DEX trade?", a: "Compare the executed trade price to the pool mid-price at block time using trade and pool reserve fields." },
+    { q: "Do I need pool reserves to measure slippage?", a: "Yes — combine DEXTrades execution data with DEXPools liquidity snapshots from the same block or interval." },
+  ]}
+/>

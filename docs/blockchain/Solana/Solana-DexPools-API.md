@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+import FAQ from "@site/src/components/FAQ";
 
 # Solana DEX Pools API
 
@@ -972,3 +973,10 @@ subscription {
 ```
 
 </details>
+
+<FAQ
+  items={[
+    { q: "How do I find newly created Solana liquidity pools?", a: "Query or subscribe to Solana.DEXPools sorted by creation time with optional protocol filters." },
+    { q: "Can I monitor liquidity changes?", a: "Yes — pool reserve fields update as trades and LP events occur. Use subscriptions for live monitoring." },
+  ]}
+/>
