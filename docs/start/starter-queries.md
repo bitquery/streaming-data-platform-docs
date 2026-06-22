@@ -44,6 +44,8 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 ## Cross-Chain / Multi-Chain APIs
 
+### Real Time Data
+
 #### Latest Price of Any Token
 
 This query gives you bitcoin currency 1-sec OHLC across different blockchains. You can adjust duration in `Duration: {eq: 1}` filter.
@@ -70,12 +72,6 @@ For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ET
 
 ▶️ [OHLC of a Token Pair Across Chains](https://ide.bitquery.io/Token-OHLC-Stream-1-second-Multi-Chains_1)
 
-#### Historical Price and Volume Data (Volume & Price, Last 24h)
-
-Use this API to get historical price and volume over the past 24 hours, with 1h, 4h, and 24h breakdowns.
-
-▶️ [Historical Price and Volume Data](https://ide.bitquery.io/multiple-tokens-volume_1)
-
 #### Volume of Multiple Tokens Across Different Chains
 
 Get volume and price change data for multiple tokens trading on different chains (Solana, Ethereum, BSC, Tron) in a single query. Returns volume for 1h, 4h, and 24h periods, plus price change percentages.
@@ -83,6 +79,33 @@ Get volume and price change data for multiple tokens trading on different chains
 > **Note:** For EVM chains (Ethereum, BSC, etc.) in the Trading API, use **all lowercase addresses** in the token ID format (e.g., `bid:eth:0x...` with lowercase hex). Mixed-case addresses may not match.
 
 ▶️ [Volume of Multiple Tokens Across Chains](https://ide.bitquery.io/volume-of-a-token_1)
+
+### Historical Data
+
+#### Historical Price and Volume Data (Volume & Price, Last 24h)
+
+Use this API to get historical price and volume over the past 24 hours, with 1h, 4h, and 24h breakdowns. Note that the oldest possible data it could return is 30 days ago.
+
+▶️ [Historical Price and Volume Data](https://ide.bitquery.io/multiple-tokens-volume_1)
+
+#### Historical OHLC of a Token Pair Across Chains
+
+This query fetches historical OHLC (Open, High, Low, Close) price data for a token pair across different blockchains for as long back as 30 days.  
+For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ETH).
+
+▶️ [OHLC of a Token Pair Across Chains](https://ide.bitquery.io/Historical-Token-OHLC-Multi-Chains)
+
+#### Historical Price and Volume Data for a Token Pair
+
+Use this API to get historical price and volume for a specific token pair address on a specific network for the time window beyond the 30 days.
+
+▶️ [Historical Price and Volume Data](https://ide.bitquery.io/historical-price-and-historical-volume_1)
+
+#### All time High Trade Price for a Token
+
+Retrieves the all-time high (ATH) price in USD for a specified token contract. All time high price could lie beyond the 30 days window provided by Trading API, hence we use these network specific APIs to get the ATH for a token. While this provides the option to go beyond the 30 days time window, it also restricts the records to a single network.
+
+▶️ [Get ATH Price of a token](https://ide.bitquery.io/ATH-of-eth-token)
 
 ## PolyMarket
 
