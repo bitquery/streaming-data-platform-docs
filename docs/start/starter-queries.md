@@ -763,14 +763,14 @@ Get the latest liquidity of an Base DEX pool (e.g., Uniswap v3 pool).
 #### Get token transfers by wallet
 
 Get token transactions ordered by block number in descending order.  
-▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-token-transfers-by-wallet_1)
+▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-token-transfers-by-wallet-base)
 
 ### Historical Transfers
 
 #### Get Historical ERC20 token transfers by wallet
 
 Get ERC20 token transfers for an address in a given historical time window
-▶️ [Get Historical ERC20 token transfers by wallet](https://ide.bitquery.io/Get-historical-ERC20-token-transfers-by-wallet-base)
+▶️ [Get Historical ERC20 token transfers by wallet](https://ide.bitquery.io/Get-historical-ERC20-token-transfers-by-wallet-base_1)
 
 ### Real Time Transactions
 
@@ -966,7 +966,7 @@ Get transactions ordered by block number in descending order.
 #### Get historical transactions by wallet in a given period
 
 Get historical transactions for a given period of time ordered by block number in descending order.  
-▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet)
+▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet-bsc)
 
 ### Trades
 
