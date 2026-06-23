@@ -193,9 +193,9 @@ Rank addresses by total amount redeemed in the last hour across all markets. Use
 
 ## Ethereum
 
-### Balance APIs
+### Real Time Balance APIs
 
-#### Balance of an address
+#### Current Balance of an address
 
 Returns all token balances for a wallet on Ethereum using `EVM.Balances` with `dataset: combined`.
 ▶️ [Balance of an Address](https://ide.bitquery.io/Ethereum-Balance-of-an-Address)
@@ -205,6 +205,12 @@ Returns all token balances for a wallet on Ethereum using `EVM.Balances` with `d
 Get the latest liquidity of an EVM DEX pool (e.g., Uniswap v3 pool).
 
 ▶️ [Latest Liquidity of EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
+
+### Historical Balance APIs
+
+#### Historical Balance of an address
+Returns all token balances for a wallet on Ethereum on a certain date, using `EVM.Balances` with `dataset: archive`.
+▶️ [Historical Balance of an Address](https://ide.bitquery.io/Historical-Balance-of-an-Address)
 
 ### Token Supply
 
@@ -228,12 +234,19 @@ Trading API **`Tokens`** query for the latest **market cap**, **FDV**, **supply*
 
 ▶️ [Specific Ethereum Token Latest Market Cap](https://ide.bitquery.io/specific-ethereum-token-latest-marketcap_1)
 
-### Transfers
+### Real Time Transfers
 
 #### Get ERC20 token transfers by wallet
 
-Get ERC20 token transactions ordered by block number in descending order.  
-▶️ [Get ERC20 token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_4)
+Get ERC20 token transfers ordered by block number in descending order.  
+▶️ [Get ERC20 token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_7)
+
+### Historical Transfers
+
+#### Get Historical ERC20 token transfers by wallet
+
+Get ERC20 token transfers for an address in a given historical time window
+▶️ [Get Historical ERC20 token transfers by wallet](https://ide.bitquery.io/Get-historical-ERC20-token-transfers-by-wallet)
 
 ### Transactions
 
@@ -241,6 +254,11 @@ Get ERC20 token transactions ordered by block number in descending order.
 
 Get transactions ordered by block number in descending order.  
 ▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet)
+
+#### Get historical transactions by wallet
+
+Get historical transactions ordered by block number in descending order.  
+▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet)
 
 ### Trades
 
@@ -303,37 +321,40 @@ This query gets you top 10 Eth Tokens by Price Change in last 1h.
 1-second OHLC and volume stream for tokens traded on Uniswap v3 (Ethereum). Great for bot trading strategies.
 ▶️ [Uniswap v3 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
 
-### Token Analytics
+### Real Time Token Analytics
 
-#### Get Token Total Supply and Market Cap
+#### Get Latest Token Total Supply and Market Cap
 
 Retrieve the total supply and market capitalization of a specific ERC-20 token. This query provides on-chain market cap data.
 ▶️ [Get Token Total Supply and Market Cap](https://ide.bitquery.io/Get-Token-Total-Supply-and-Market-Cap_1)
 
-#### Token Holder Count on a Specific Date
+#### Current Token Holder Count
 
 This API returns the total number of holders for a specific token on a given date.
-▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_6)
+▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_8)
 
 #### Real-Time Holders of Multiple Tokens
 
-This API leverages the balanceUpdate endpoint to deliver real-time holder data for multiple tokens.
-▶️ [Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH_2)
-
-#### Token Holders of Multiple Tokens on a speicifc date - BalanceUpdates API
-
-This API provides a list of top holders along with relevant statistics for a given token liston a specific date using BalanceUpdates API.
-▶️ [Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH-at-a-specific-time)
-
-#### Token Holders and Stats on a Specific Date - TokenHolders API
-
-This API provides a list of all holders along with relevant statistics for a given token on a specific date.
-▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_7)
+This API leverages the Holders endpoint to deliver real-time holder data for multiple tokens.
+▶️ [Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-ETH_4)
 
 #### Realised PnL, buy volume, sell volume
 
 Get realised PnL, buy volume, and sell volume for a token on EVM of a trader for over a time window.
 ▶️ [Realised PnL, buy volume, sell volume](https://ide.bitquery.io/Realised-Pnl-Buy-volume-Sell-Volume-Ethereum)
+
+### Historical Token Analytics
+
+#### Token Holders of Multiple Tokens until last month
+
+This API provides a list of top holders along with relevant statistics for a given token liston a specific date using BalanceUpdates API.
+▶️ [Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-historical-holders-of-multiple-tokens-on-ETH)
+
+#### Token Holders and Stats on a Specific Date
+
+This API provides a list of all holders along with relevant statistics for a given token on a specific date.
+
+▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_8)
 
 ### Slippage APIs
 
@@ -362,12 +383,20 @@ Get latest liquidity across all pools where the token appears as either pool sid
 
 ## Polygon (MATIC)
 
-### Balance APIs
+### Real Time Balance APIs
 
 #### Balance of an address
 
 Returns all token balances for a wallet on Polygon using `EVM.Balances` with `network: matic` and `dataset: combined`. See [Polygon Address Balance API](/docs/blockchain/Matic/matic-balance-api/#balance-of-an-address).
 ▶️ [Balance of an Address](https://ide.bitquery.io/matic-balances-address)
+
+### Historical Balance APIs
+
+#### Balance of an address
+
+Returns all token balances for a wallet on Polygon using `EVM.Balances` with `network: matic` and `dataset: combined` until a particular period. For this example we will find the Balnce of the address one month ago.
+
+▶️ [Balance of an Address](https://ide.bitquery.io/matic-historical-balances-address)
 
 ## Solana
 
