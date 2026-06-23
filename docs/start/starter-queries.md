@@ -248,17 +248,19 @@ Get ERC20 token transfers ordered by block number in descending order.
 Get ERC20 token transfers for an address in a given historical time window
 ▶️ [Get Historical ERC20 token transfers by wallet](https://ide.bitquery.io/Get-historical-ERC20-token-transfers-by-wallet)
 
-### Transactions
+### Real Time Transactions
 
 #### Get transactions by wallet
 
 Get transactions ordered by block number in descending order.  
 ▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet)
 
-#### Get historical transactions by wallet
+### Historical Transactions
 
-Get historical transactions ordered by block number in descending order.  
-▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet)
+#### Get historical transactions by wallet in a given period
+
+Get historical transactions for a given period of time ordered by block number in descending order.  
+▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet-etc)
 
 ### Trades
 
@@ -756,19 +758,33 @@ Retrieve all token balances held by a specific address. This query returns balan
 Get the latest liquidity of an Base DEX pool (e.g., Uniswap v3 pool).  
 ▶️ [Latest Liquidity of Base Pool](https://ide.bitquery.io/latest-liquidity-of-a-Base-pool_1)
 
-### Transfers
+### Real Time Transfers
 
 #### Get token transfers by wallet
 
 Get token transactions ordered by block number in descending order.  
-▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-token-transfers-by-wallet)
+▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-token-transfers-by-wallet_1)
 
-### Transactions
+### Historical Transfers
+
+#### Get Historical ERC20 token transfers by wallet
+
+Get ERC20 token transfers for an address in a given historical time window
+▶️ [Get Historical ERC20 token transfers by wallet](https://ide.bitquery.io/Get-historical-ERC20-token-transfers-by-wallet-base)
+
+### Real Time Transactions
 
 #### Get transactions by wallet
 
 Get transactions ordered by block number in descending order.  
 ▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet_2)
+
+### Historical Transactions
+
+#### Get historical transactions by wallet in a given period
+
+Get historical transactions for a given period of time ordered by block number in descending order.  
+▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet-base)
 
 ### Trades
 
@@ -924,19 +940,33 @@ Trading API **`Tokens`** query for the latest **market cap**, **FDV**, **supply*
 
 ▶️ [Specific BSC Token Latest Market Cap](https://ide.bitquery.io/specific-bsc-token-latest-marketcap_1)
 
-### Transfers
+### Real Time Transfers
 
 #### Get token transfers by wallet
 
 Get token transactions ordered by block number in descending order.  
-▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_2)
+▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet-bsc)
 
-### Transactions
+### Historical Transfers
+
+#### Get Historical ERC20 token transfers by wallet
+
+Get ERC20 token transfers for an address in a given historical time window
+▶️ [Get Historical ERC20 token transfers by wallet](https://ide.bitquery.io/Get-historical-ERC20-token-transfers-by-wallet-bsc)
+
+### Real Time Transactions
 
 #### Get transactions by wallet
 
 Get transactions ordered by block number in descending order.  
-▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet)
+▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet_6)
+
+### Historical Transactions
+
+#### Get historical transactions by wallet in a given period
+
+Get historical transactions for a given period of time ordered by block number in descending order.  
+▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet)
 
 ### Trades
 
