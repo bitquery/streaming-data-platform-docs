@@ -57,20 +57,20 @@ This query gives you bitcoin currency 1-sec OHLC across different blockchains. Y
 This query gives you change in price (Close-Open) of all tokens on Ethereum, BNB, Solana and Tron.
 You can adjust duration in `Duration: {eq: 60}` filter.
 
-▶️ [Crypto Price Change API](https://ide.bitquery.io/1-minute-price-change-api)
+▶️ [Crypto Price Change API](https://ide.bitquery.io/1-minute-price-change-api_1)
 
 #### OHLC of a currency on multiple blockchains
 
 This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in this eg Bitcoin; it will include all sorts of currencies whose underlying asset is Bitcoin like cbBTC, WBTC, etc) across all supported blockchains, aggregated into a given time interval (e.g., 60 seconds in this example).
 
-▶️ [OHLC of a currency on multiple blockchains](https://ide.bitquery.io/OHLC-of-a-currency-on-multiple-blockchains)
+▶️ [OHLC of a currency on multiple blockchains](https://ide.bitquery.io/OHLC-of-a-currency-on-multiple-blockchains_2)
 
 #### OHLC of a Token Pair Across Chains
 
 This subscription fetches real-time OHLC (Open, High, Low, Close) price data for a token pair across different blockchains.  
 For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ETH).
 
-▶️ [OHLC of a Token Pair Across Chains](https://ide.bitquery.io/Token-OHLC-Stream-1-second-Multi-Chains_1)
+▶️ [OHLC of a Token Pair Across Chains](https://ide.bitquery.io/Token-OHLC-Stream-1-second-Multi-Chains_3)
 
 #### Volume of Multiple Tokens Across Different Chains
 
@@ -78,34 +78,34 @@ Get volume and price change data for multiple tokens trading on different chains
 
 > **Note:** For EVM chains (Ethereum, BSC, etc.) in the Trading API, use **all lowercase addresses** in the token ID format (e.g., `bid:eth:0x...` with lowercase hex). Mixed-case addresses may not match.
 
-▶️ [Volume of Multiple Tokens Across Chains](https://ide.bitquery.io/volume-of-a-token_1)
+▶️ [Volume of Multiple Tokens Across Chains](https://ide.bitquery.io/volume-of-a-token_2)
 
 ### Historical Data
 
-#### Historical Price and Volume Data (Volume & Price, Last 24h)
+#### SMA and Volume Data (for past 28, 14 and 7 Days Time)
 
-Use this API to get historical price and volume over the past 24 hours, with 1h, 4h, and 24h breakdowns. Note that the oldest possible data it could return is 30 days ago.
+Use this API to get SMA and volume over the past 28 days, with 14 days, and 7 days breakdowns. Note that the oldest possible data it could return is 30 days ago.
 
-▶️ [Historical Price and Volume Data](https://ide.bitquery.io/multiple-tokens-volume_1)
+▶️ [SMA and Volume Data for upto 28 Days](https://ide.bitquery.io/multiple-tokens-volume-and-SMA)
 
 #### Historical OHLC of a Token Pair Across Chains
 
 This query fetches historical OHLC (Open, High, Low, Close) price data for a token pair across different blockchains for as long back as 30 days.  
 For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ETH).
 
-▶️ [OHLC of a Token Pair Across Chains](https://ide.bitquery.io/Historical-Token-OHLC-Multi-Chains)
+▶️ [OHLC of a Token Pair Across Chains](https://ide.bitquery.io/Historical-Token-OHLC-Multi-Chains_1)
 
-#### Historical Price and Volume Data for a Token Pair
+#### Historical Price and Volume Data for a Token Pair beyond 30 days
 
 Use this API to get historical price and volume for a specific token pair address on a specific network for the time window beyond the 30 days.
 
-▶️ [Historical Price and Volume Data](https://ide.bitquery.io/historical-price-and-historical-volume_1)
+▶️ [Historical Price and Volume Data](https://ide.bitquery.io/historical-price-and-historical-volume)
 
 #### All time High Trade Price for a Token
 
 Retrieves the all-time high (ATH) price in USD for a specified token contract. All time high price could lie beyond the 30 days window provided by Trading API, hence we use these network specific APIs to get the ATH for a token. While this provides the option to go beyond the 30 days time window, it also restricts the records to a single network.
 
-▶️ [Get ATH Price of a token](https://ide.bitquery.io/ATH-of-eth-token)
+▶️ [Get ATH Price of a token](https://ide.bitquery.io/ATH-of-eth-token_1)
 
 ## PolyMarket
 
@@ -116,22 +116,22 @@ Prediction market buy/sell activity on outcome tokens on Polygon. See [Predictio
 #### Latest Trades
 
 Fetch the most recent prediction market trades with full details, ordered by block time.
-▶️ [Latest Prediction Market Trades](https://ide.bitquery.io/latest-prediction-market-trades)
+▶️ [Latest Prediction Market Trades](https://ide.bitquery.io/latest-prediction-market-trades_8)
 
 #### Trades for a Specific Trader
 
 Fetch all trades where the given address is either Buyer or Seller. Pass the trader address as the `$trader` variable.
-▶️ [Trades for a Specific Trader](https://ide.bitquery.io/Trades-for-a-specific-trader)
+▶️ [Trades for a Specific Trader](https://ide.bitquery.io/Trades-for-a-specific-trader_1)
 
 #### Total Volume and Yes/No Volume for a Market
 
 Aggregate USD volume for a market over a time window: total volume plus volume per outcome (e.g. Yes/No). Pass the market's outcome token AssetIds in `$marketAssets`.
-▶️ [Total Volume and Yes/No Volume for a Market](https://ide.bitquery.io/total-volume-outcome-1-volume-outcome-2-volume-of-a-market)
+▶️ [Total Volume and Yes/No Volume for a Market](https://ide.bitquery.io/total-volume-outcome-1-volume-outcome-2-volume-of-a-market_1)
 
 #### Current Price per Outcome (Latest Trade)
 
 Get the latest trade price for each outcome in a market. Uses `limitBy` for one row per outcome, with Price and PriceInUSD at the most recent block time.
-▶️ [Current Price per Outcome](https://ide.bitquery.io/Current-price-inside-the-market-for-all-options-based-on-latest-trade)
+▶️ [Current Price per Outcome](https://ide.bitquery.io/Current-price-inside-the-market-for-all-options-based-on-latest-trade_1)
 
 ### Prediction Market Managements
 
@@ -140,22 +140,22 @@ Prediction market lifecycle events (Created, Resolved) on Polygon. See [Predicti
 #### Latest Creations + Resolutions
 
 Fetch the most recent creation and resolution events with full details, ordered by block time.
-▶️ [Latest Prediction Managements](https://ide.bitquery.io/latest-Prediction-managements-resolutions-creations)
+▶️ [Latest Prediction Managements](https://ide.bitquery.io/latest-Prediction-managements-resolutions-creations_1)
 
 #### Created vs Resolved Count (Last 24 Hours)
 
 Count how many Created and Resolved events occurred in the last 24 hours.
-▶️ [Created vs Resolved Count Last 24h](https://ide.bitquery.io/last-24-hr-resolution-and-ceated-count)
+▶️ [Created vs Resolved Count Last 24h](https://ide.bitquery.io/last-24-hr-resolution-and-ceated-count_1)
 
 #### Latest Market Creations
 
 Fetch the most recent Created events (new markets). All possible outcomes per market are in Prediction.Condition.Outcomes.
-▶️ [Latest Market Creations](https://ide.bitquery.io/latest-polymarket-creations)
+▶️ [Latest Market Creations](https://ide.bitquery.io/latest-polymarket-creations_1)
 
 #### Latest Market Resolutions
 
 Query that returns the 10 most recent Resolved events. Winning outcome is in Prediction.Outcome; Prediction.OutcomeToken holds the asset ID and contract details.
-▶️ [Latest Market Resolutions](https://ide.bitquery.io/latest-polymarket-resolutions_1)
+▶️ [Latest Market Resolutions](https://ide.bitquery.io/latest-polymarket-resolutions_2)
 
 ### Prediction Market Settlements
 
@@ -164,32 +164,32 @@ Prediction market settlement events (Split, Merge, Redemption) on Polygon. See [
 #### Latest Settlements
 
 Fetch the most recent settlements with full details, ordered by block time.
-▶️ [Latest Prediction Market Settlements](https://ide.bitquery.io/latest-prediction-market-settlements_2)
+▶️ [Latest Prediction Market Settlements](https://ide.bitquery.io/latest-prediction-market-settlements_3)
 
 #### Redemption / Merge / Split Count (Last 1 Hour)
 
 Count how many settlement events occurred in the last hour, grouped by event signature (Split, Merge, Redemption).
-▶️ [Redemptions Merge Split Count](https://ide.bitquery.io/redemptions-merge-split-count-in-last-1-hour)
+▶️ [Redemptions Merge Split Count](https://ide.bitquery.io/redemptions-merge-split-count-in-last-1-hour_1)
 
 #### Latest Whale Settlements
 
 Find the most recent high-value redemptions (e.g. amount ≥ 10,000 in outcome token units). Useful for tracking large payouts and whale activity.
-▶️ [Latest Whale Settlements](https://ide.bitquery.io/latest-whale-settlements-on-prediction-market_1)
+▶️ [Latest Whale Settlements](https://ide.bitquery.io/latest-whale-settlements-on-prediction-market_3)
 
 #### Top 10 Winners of a Specific Market Question
 
 Rank holders by total redeemed amount for one market (filter by question title).
-▶️ [Top 10 Winners of a Market Question](https://ide.bitquery.io/top-10-winners-of-a-market-question)
+▶️ [Top 10 Winners of a Market Question](https://ide.bitquery.io/top-10-winners-of-a-market-question_2)
 
 #### Top 10 Market Questions by Redeemed Amount (Last 1 Hour)
 
 Aggregate redemptions by market question and sort by total redeemed amount. See which markets had the most payout activity recently.
-▶️ [Top 10 Market Questions by Redeemed Amount](https://ide.bitquery.io/top-10-market-questions-in-last-1-hour_1)
+▶️ [Top 10 Market Questions by Redeemed Amount](https://ide.bitquery.io/top-10-market-questions-in-last-1-hour_3)
 
 #### Top 10 Redeemers (Last 1 Hour)
 
 Rank addresses by total amount redeemed in the last hour across all markets. Useful for leaderboards and whale tracking.
-▶️ [Top 10 Redeemers](https://ide.bitquery.io/top-10-redeemers)
+▶️ [Top 10 Redeemers](https://ide.bitquery.io/top-10-redeemers_1)
 
 ## Ethereum
 
@@ -198,19 +198,19 @@ Rank addresses by total amount redeemed in the last hour across all markets. Use
 #### Current Balance of an address
 
 Returns all token balances for a wallet on Ethereum using `EVM.Balances` with `dataset: combined`.
-▶️ [Balance of an Address](https://ide.bitquery.io/Ethereum-Balance-of-an-Address)
+▶️ [Balance of an Address](https://ide.bitquery.io/Ethereum-Balance-of-an-Address_2)
 
 #### Latest Liquidity of EVM Pool
 
 Get the latest liquidity of an EVM DEX pool (e.g., Uniswap v3 pool).
 
-▶️ [Latest Liquidity of EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool)
+▶️ [Latest Liquidity of EVM Pool](https://ide.bitquery.io/latest-liquidity-of-a-EVM-pool_1)
 
 ### Historical Balance APIs
 
 #### Historical Balance of an address
 Returns all token balances for a wallet on Ethereum on a certain date, using `EVM.Balances` with `dataset: archive`.
-▶️ [Historical Balance of an Address](https://ide.bitquery.io/Historical-Balance-of-an-Address)
+▶️ [Historical Balance of an Address](https://ide.bitquery.io/Historical-Balance-of-an-Address_1)
 
 ### Token Supply
 
@@ -218,13 +218,13 @@ Returns all token balances for a wallet on Ethereum on a certain date, using `EV
 
 Latest Token Supply for all active token
 
-▶️ [Latest Token Supply for all active token](https://ide.bitquery.io/latest-token-supply-of-all-active-tokens-on-ETH-chain)
+▶️ [Latest Token Supply for all active token](https://ide.bitquery.io/latest-token-supply-of-all-active-tokens-on-ETH-chain_1)
 
 #### Latest Token Supply of USDT-USDC on ETH chain
 
 Latest Token Supply for stablecoin like USDC-USDT.
 
-▶️ [Latest Token Supply for stablecoin like USDC-USDT](https://ide.bitquery.io/latest-token-supply-on-USDT-and-USDC-on-ethereum-chain)
+▶️ [Latest Token Supply for stablecoin like USDC-USDT](https://ide.bitquery.io/latest-token-supply-on-USDT-and-USDC-on-ethereum-chain_1)
 
 ### MarketCap APIs
 
@@ -232,7 +232,7 @@ Trading API **`Tokens`** query for the latest **market cap**, **FDV**, **supply*
 
 #### Latest market cap for a specific Ethereum token (Trading API)
 
-▶️ [Specific Ethereum Token Latest Market Cap](https://ide.bitquery.io/specific-ethereum-token-latest-marketcap_1)
+▶️ [Specific Ethereum Token Latest Market Cap](https://ide.bitquery.io/specific-ethereum-token-latest-marketcap_2)
 
 ### Real Time Transfers
 
@@ -246,21 +246,21 @@ Get ERC20 token transfers ordered by block number in descending order.
 #### Get Historical ERC20 token transfers by wallet
 
 Get ERC20 token transfers for an address in a given historical time window
-▶️ [Get Historical ERC20 token transfers by wallet](https://ide.bitquery.io/Get-historical-ERC20-token-transfers-by-wallet)
+▶️ [Get Historical ERC20 token transfers by wallet](https://ide.bitquery.io/Get-historical-ERC20-token-transfers-by-wallet_1)
 
 ### Real Time Transactions
 
 #### Get transactions by wallet
 
 Get transactions ordered by block number in descending order.  
-▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet)
+▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet_7)
 
 ### Historical Transactions
 
 #### Get historical transactions by wallet in a given period
 
 Get historical transactions for a given period of time ordered by block number in descending order.  
-▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet-etc)
+▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet-etc_1)
 
 ### Trades
 
@@ -268,22 +268,22 @@ Get historical transactions for a given period of time ordered by block number i
 
 This query returns the latest trades on the Ethereum network where distinction of the buy and sell sides is present.
 
-▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-Trades-of-a-Token)
+▶️ [Ethereum DEX Trades](https://ide.bitquery.io/Ethereum-Trades-of-a-Token_1)
 
 #### Get Swaps by Wallet Address
 
 Get all swap related transactions (buy, sell).  
-▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/Ethereum-Trades-of-a-Trader)
+▶️ [Get Swaps by Wallet Address](https://ide.bitquery.io/Ethereum-Trades-of-a-Trader_1)
 
 ### Events & Calls
 
 #### Get Latest Events
 
-▶️ [Get Latest Events](https://ide.bitquery.io/Recents-Events-and-Logs-on-Ethereum_1)
+▶️ [Get Latest Events](https://ide.bitquery.io/Recents-Events-and-Logs-on-Ethereum_3)
 
 #### Get Latest Calls
 
-▶️ [Get Latest Calls](https://ide.bitquery.io/Recent-Calls-on-Ethereum_1)
+▶️ [Get Latest Calls](https://ide.bitquery.io/Recent-Calls-on-Ethereum_2)
 
 ### OHLC & Price Data
 
@@ -328,12 +328,12 @@ This query gets you top 10 Eth Tokens by Price Change in last 1h.
 #### Get Latest Token Total Supply and Market Cap
 
 Retrieve the total supply and market capitalization of a specific ERC-20 token. This query provides on-chain market cap data.
-▶️ [Get Token Total Supply and Market Cap](https://ide.bitquery.io/Get-Token-Total-Supply-and-Market-Cap_1)
+▶️ [Get Token Total Supply and Market Cap](https://ide.bitquery.io/Get-Token-Total-Supply-and-Market-Cap_4)
 
 #### Current Token Holder Count
 
 This API returns the total number of holders for a specific token on a given date.
-▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_8)
+▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_9)
 
 #### Real-Time Holders of Multiple Tokens
 
@@ -343,7 +343,7 @@ This API leverages the Holders endpoint to deliver real-time holder data for mul
 #### Realised PnL, buy volume, sell volume
 
 Get realised PnL, buy volume, and sell volume for a token on EVM of a trader for over a time window.
-▶️ [Realised PnL, buy volume, sell volume](https://ide.bitquery.io/Realised-Pnl-Buy-volume-Sell-Volume-Ethereum)
+▶️ [Realised PnL, buy volume, sell volume](https://ide.bitquery.io/Realised-Pnl-Buy-volume-Sell-Volume-Ethereum_1)
 
 ### Historical Token Analytics
 
@@ -356,7 +356,7 @@ This API provides a list of top holders along with relevant statistics for a giv
 
 This API provides a list of all holders along with relevant statistics for a given token on a specific date.
 
-▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_8)
+▶️ [Token Holders and Stats on a Specific Date](https://ide.bitquery.io/tokens-holders-of-a-token_10)
 
 ### Slippage APIs
 
@@ -364,7 +364,7 @@ This API provides a list of all holders along with relevant statistics for a giv
 
 This query retrieves the latest slippage data for a specific DEX pool on Ethereum. Use this to check current liquidity depth and price impact for a particular token pair.
 
-▶️ [Latest Slippage for a Specific Pool on Uniswap V3](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3-Ethereum)
+▶️ [Latest Slippage for a Specific Pool on Uniswap V3](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3-Ethereum_1)
 
 ### Liquidity APIs
 
@@ -372,16 +372,16 @@ This query retrieves the latest slippage data for a specific DEX pool on Ethereu
 
 This query retrieves the latest liquidity events for a specific DEX pool on Ethereum. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
 
-▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool-on-ETH)
+▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool-on-ETH_1)
 
 #### Top Liquidity Pools of a token on Ethereum
 
-▶️ [Top Liquidity Pools of a token on Ethereum](https://ide.bitquery.io/top-liquidity-pools-of-atoken-on-ethereum)
+▶️ [Top Liquidity Pools of a token on Ethereum](https://ide.bitquery.io/top-liquidity-pools-of-atoken-on-ethereum_1)
 
 #### Liquidity of All Pools of a Token on Ethereum
 
 Get latest liquidity across all pools where the token appears as either pool side.
-▶️ [Liquidity of All Pools of a Token on Ethereum](https://ide.bitquery.io/liquidiy-of-all-token-pools_1)
+▶️ [Liquidity of All Pools of a Token on Ethereum](https://ide.bitquery.io/liquidiy-of-all-token-pools_2)
 
 ## Polygon (MATIC)
 
@@ -390,7 +390,7 @@ Get latest liquidity across all pools where the token appears as either pool sid
 #### Balance of an address
 
 Returns all token balances for a wallet on Polygon using `EVM.Balances` with `network: matic` and `dataset: combined`. See [Polygon Address Balance API](/docs/blockchain/Matic/matic-balance-api/#balance-of-an-address).
-▶️ [Balance of an Address](https://ide.bitquery.io/matic-balances-address)
+▶️ [Balance of an Address](https://ide.bitquery.io/matic-balances-address_1)
 
 ### Historical Balance APIs
 
@@ -398,7 +398,7 @@ Returns all token balances for a wallet on Polygon using `EVM.Balances` with `ne
 
 Returns all token balances for a wallet on Polygon using `EVM.Balances` with `network: matic` and `dataset: combined` until a particular period. For this example we will find the Balnce of the address one month ago.
 
-▶️ [Balance of an Address](https://ide.bitquery.io/matic-historical-balances-address)
+▶️ [Balance of an Address](https://ide.bitquery.io/matic-historical-balances-address_1)
 
 ## Solana
 
@@ -746,45 +746,45 @@ Returns top 100 About to Graduate LetsBonk.fun Tokens.
 #### Get latest token balance of a wallet
 
 Get latest token balance of a wallet.
-▶️ [Get latest token balance of a wallet](https://ide.bitquery.io/Get-Latest-Token-Balance-for-an-Address_1)
+▶️ [Get latest token balance of a wallet](https://ide.bitquery.io/Get-Latest-Token-Balance-for-an-Address_4)
 
 #### Get All Token Balances for an Address
 
 Retrieve all token balances held by a specific address. This query returns balances for all tokens the address holds.
-▶️ [Get All Token Balances for an Address](https://ide.bitquery.io/Get-All-Token-Balances-for-an-Address_1)
+▶️ [Get All Token Balances for an Address](https://ide.bitquery.io/Get-All-Token-Balances-for-an-Address_4)
 
 #### Latest Liquidity of Base Pool
 
 Get the latest liquidity of an Base DEX pool (e.g., Uniswap v3 pool).  
-▶️ [Latest Liquidity of Base Pool](https://ide.bitquery.io/latest-liquidity-of-a-Base-pool_1)
+▶️ [Latest Liquidity of Base Pool](https://ide.bitquery.io/latest-liquidity-of-a-Base-pool_2)
 
 ### Real Time Transfers
 
 #### Get token transfers by wallet
 
 Get token transactions ordered by block number in descending order.  
-▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-token-transfers-by-wallet-base)
+▶️ [Get token transfers by wallet](https://ide.bitquery.io/Get-token-transfers-by-wallet-base_1)
 
 ### Historical Transfers
 
 #### Get Historical ERC20 token transfers by wallet
 
 Get ERC20 token transfers for an address in a given historical time window
-▶️ [Get Historical ERC20 token transfers by wallet](https://ide.bitquery.io/Get-historical-ERC20-token-transfers-by-wallet-base_1)
+▶️ [Get Historical ERC20 token transfers by wallet](https://ide.bitquery.io/Get-historical-ERC20-token-transfers-by-wallet-base_2)
 
 ### Real Time Transactions
 
 #### Get transactions by wallet
 
 Get transactions ordered by block number in descending order.  
-▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet_2)
+▶️ [Get transactions by wallet](https://ide.bitquery.io/Get-transactions-by-wallet_8)
 
 ### Historical Transactions
 
 #### Get historical transactions by wallet in a given period
 
 Get historical transactions for a given period of time ordered by block number in descending order.  
-▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet-base)
+▶️ [Get historical transactions by wallet](https://ide.bitquery.io/Get-historical-transactions-by-wallet-base_1)
 
 ### Trades
 
@@ -807,11 +807,11 @@ Get all trades by a particular trader.
 
 #### Get Latest Events
 
-▶️ [Get Latest Events](https://ide.bitquery.io/Recents-Events-and-Logs-on-Base_1)
+▶️ [Get Latest Events](https://ide.bitquery.io/Recents-Events-and-Logs-on-Base)
 
 #### Get Latest Calls
 
-▶️ [Get Latest Calls](https://ide.bitquery.io/Recent-Calls-on-base)
+▶️ [Get Latest Calls](https://ide.bitquery.io/Recent-Calls-on-base_1)
 
 ### OHLC & Price Data
 
@@ -858,7 +858,7 @@ Trading API **`Tokens`** query for the latest **market cap**, **FDV**, **supply*
 #### Get Token Total Supply and Market Cap
 
 Retrieve the total supply and market capitalization of a specific token. This query provides on-chain market cap data.
-▶️ [Get Token Total Supply and Market Cap](https://ide.bitquery.io/Get-Token-Total-Supply-and-Market-Cap_2)
+▶️ [Get Token Total Supply and Market Cap](https://ide.bitquery.io/Get-Token-Total-Supply-and-Market-Cap_5)
 
 #### Token Holder Count on a Specific Date
 
