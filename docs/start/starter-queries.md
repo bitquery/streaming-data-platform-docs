@@ -50,7 +50,7 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 
 This query gives you bitcoin currency 1-sec OHLC across different blockchains. You can adjust duration in `Duration: {eq: 1}` filter.
 
-▶️ [Latest Price of Token Across Chains](https://ide.bitquery.io/Latest-bitcoin-price-on-across-chains)
+▶️ [Latest Price of Token Across Chains](https://ide.bitquery.io/Latest-bitcoin-price-on-across-chains_5)
 
 #### Crypto Price Change API
 
