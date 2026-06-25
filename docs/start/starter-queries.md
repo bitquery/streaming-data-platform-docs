@@ -1137,17 +1137,29 @@ This query returns the most recent transfers on the TRON network and includes de
 This query returns the historical transfers for a wallet in a given time window on the TRON network and includes details such as token amount transferred, sender, receiver, and token info.  
 ▶️ [TRON Transfers](https://ide.bitquery.io/Historical-Tron-transfers-for-a-wallet)
 
-### Trades
+### Real Time Trades
 
 #### Tron DEX Trades
 
 This query returns the latest trades on the TRON network from a trader perspective.  
-▶️ [TRON DEX Trades](https://ide.bitquery.io/Tron-dextrades)
+▶️ [TRON DEX Trades](https://ide.bitquery.io/Tron-Trades)
 
 #### Tron Dex Trade By Tokens
 
 This query returns the latest token trades on the TRON network.  
 ▶️ [DexTrade By Tokens](https://ide.bitquery.io/Tron-trades-for-a-token)
+
+### Historical Trades
+
+#### Historical Tron Token Trades within 30 Days
+
+This query returns the historical trades on the TRON network for a token with the time window of past 30 days.  
+▶️ [Historical TRON Token Trades](https://ide.bitquery.io/Historical-Tron-trades-for-a-token-within-30-days)
+
+#### Historical Tron Token Trades beyond 30 Days
+
+This query returns the historical token trades on the TRON network for time window beyond 30 days.  
+▶️ [Historical Token Trades beyond 30 Days](https://ide.bitquery.io/Historical-tron-token-trades-beyond-30-days)
 
 ## Bitcoin
 
