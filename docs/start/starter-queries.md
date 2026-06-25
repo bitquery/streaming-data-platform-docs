@@ -333,7 +333,7 @@ Retrieve the total supply and market capitalization of a specific ERC-20 token. 
 #### Current Token Holder Count
 
 This API returns the total number of holders for a specific token on a given date.
-▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_9)
+▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/Copy-of-token-holders-count-eth)
 
 #### Real-Time Holders of Multiple Tokens
 
@@ -863,17 +863,17 @@ Retrieve the total supply and market capitalization of a specific token. This qu
 #### Token Holder Count on a Specific Date
 
 This API returns the total number of holders for a specific token on a given date.
-▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holder-count_7)
+▶️ [Token Holder Count on a Specific Date](https://ide.bitquery.io/token-holders-count-base)
 
 #### Real-Time Holders of Multiple Tokens
 
 This API leverages the balanceUpdate endpoint to deliver real-time holder data for multiple tokens.
-▶️ [Real-Time Holders of Multiple Tokens](http://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base_1)
+▶️ [Real-Time Holders of Multiple Tokens](http://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base_2)
 
-#### Token Holders of Multiple Tokens on a speicifc date - BalanceUpdates API
+#### Token Holders of Multiple Tokens on a speicifc date
 
-This API provides a list of top holders along with relevant statistics for a given token liston a specific date using BalanceUpdates API.
-▶️ [Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base-at-a-specific-time)
+This API provides a list of top holders along with relevant statistics for a given token liston a specific date using Holders API.
+▶️ [Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base-at-a-specific-time-holder-api)
 
 #### Token Holders and Stats on a Specific Date - TokenHolders API
 
@@ -886,7 +886,7 @@ This API provides a list of all holders along with relevant statistics for a giv
 
 This query retrieves the latest slippage data for a specific DEX pool on Base. Use this to check current liquidity depth and price impact for a particular token pair.
 
-▶️ [Latest Slippage for a Specific Pool](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3)
+▶️ [Latest Slippage for a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_7)
 
 ### Liquidity APIs
 
