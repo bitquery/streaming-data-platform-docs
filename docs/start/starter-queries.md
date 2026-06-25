@@ -1109,19 +1109,33 @@ Below query retrieves the Dev address and time when a Four Meme Token was create
 
 ## TRON
 
-### Balance APIs
+### Real Time Balance APIs
 
-#### Tron Balance Updates
+#### Current Balance of a Wallet
 
-This query returns the most recent balance updates that occurred on the TRON network.  
-▶️ [TRON Balance Updates](https://ide.bitquery.io/Tron-BalanceUpdates)
+This query returns the current balance of a wallet for all currencies on the TRON network.  
+▶️ [TRON Balance of a Wallet](https://ide.bitquery.io/Tron-Wallet-Balance)
 
-### Transfers
+### Historical Tron Balance APIs
 
-#### TRON Transfers
+#### Historical Balance of a Wallet for a Currency
+
+This query returns the current balance of a wallet for all currencies on the TRON network.  
+▶️ [TRON Balance for a Currency](https://ide.bitquery.io/Historical-Tron-Wallet-Balance-for-a-currency)
+
+### Real Time Transfers
+
+#### Latest TRON Transfers
 
 This query returns the most recent transfers on the TRON network and includes details such as token amount transferred, sender, receiver, and token info.  
-▶️ [TRON Transfers](https://ide.bitquery.io/Tron-transfer)
+▶️ [TRON Transfers](https://ide.bitquery.io/Tron-transfer_10_1)
+
+### Historical Transfers
+
+#### Historical TRON Transfers for a Wallet
+
+This query returns the historical transfers for a wallet in a given time window on the TRON network and includes details such as token amount transferred, sender, receiver, and token info.  
+▶️ [TRON Transfers](https://ide.bitquery.io/Historical-Tron-transfers-for-a-wallet)
 
 ### Trades
 
