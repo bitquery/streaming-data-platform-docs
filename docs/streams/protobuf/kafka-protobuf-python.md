@@ -27,7 +27,7 @@ pip install -r requirements.txt
 Typical packages (see file for exact versions):
 
 - **`confluent-kafka`**
-- **`bitquery-pb2-kafka-package`** (Solana **`ParsedIdlBlockMessage`** and related generated code)
+- **`bitquery-pb2-kafka-package`** (Solana **`ParsedIdlBlockMessage`** and pb2 files of all schema, can be viewed [here](https://pypi.org/project/bitquery-pb2-kafka-package/))
 - **`protobuf`**, **`base58`**, **`python-dotenv`**
 
 You also need **Kafka username and password** from Bitquery for stream access.
