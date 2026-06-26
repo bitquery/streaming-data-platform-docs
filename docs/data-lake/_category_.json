@@ -1,0 +1,8 @@
+{
+  "label": "Blockchain Data Lake",
+  "position": 10,
+  "link": {
+    "type": "doc",
+    "id": "data-lake/index"
+  }
+}

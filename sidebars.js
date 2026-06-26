@@ -1227,6 +1227,16 @@ const sidebars = {
 
     {
       type: "category",
+      label: "Blockchain Data Lake",
+      link: {
+        type: "doc",
+        id: "data-lake/index",
+      },
+      items: [],
+    },
+
+    {
+      type: "category",
       label: "API Blog",
       link: {
         type: "generated-index",
