@@ -29,7 +29,7 @@ Each block is parsed and normalized by Bitquery and stored as a **Protobuf** mes
 
 An archive node is built for consensus and for serving recent state over JSON-RPC. It is not built for handing you the entire chain. Extracting full history from a node means millions of rate-limited RPC calls, days or weeks of wall-clock time, and the cost of running and storing the node yourself. The data also comes back raw and undecoded, so you still have to build the decoding layer.
 
-The data lake works the other way around. The archive is already parsed into a structured Protobuf format and stored as objects, so reading it becomes a bulk, parallel, network-bound operation instead of a slow, serial, CPU- and disk-bound one. You bring our schema and we bring the data.
+The data lake works the other way around. The archive is already parsed into a structured Protobuf format and stored as objects, so reading it becomes a bulk, parallel, network-bound operation instead of a slow, serial, CPU- and disk-bound one.
 
 |                        | Archive node (RPC)          | Bitquery Data Lake (SeaweedFS)                            |
 | ---------------------- | --------------------------- | --------------------------------------------------------- |
@@ -50,13 +50,6 @@ The lake holds the complete, structured history of each supported chain. It cove
 - **Solana**
 - **Tron**
 - **Bitcoin**
-
-**Data points available per chain:**
-
-- **Transactions**
-- **Transfers**
-- **Balances**
-- **DEX Trades**
 
 Each block file also carries the block header and the lower-level data each chain exposes, such as receipts, logs, traces, instructions, and inputs/outputs. This gives you full-fidelity data rather than a summarized subset.
 
@@ -197,14 +190,20 @@ A single transaction comes back like this (trimmed; byte fields are base64-encod
         "CaptureStates": [
           {
             "CaptureStateHeader": {
-              "Pc": "5", "Opcode": { "Code": 52, "Name": "CALLVALUE" },
-              "Gas": "957193", "Cost": "2", "Depth": "2"
+              "Pc": "5",
+              "Opcode": { "Code": 52, "Name": "CALLVALUE" },
+              "Gas": "957193",
+              "Cost": "2",
+              "Depth": "2"
             }
           },
           {
             "CaptureStateHeader": {
-              "Pc": "1506", "Opcode": { "Code": 85, "Name": "SSTORE" },
-              "Gas": "956931", "Cost": "5000", "Depth": "2"
+              "Pc": "1506",
+              "Opcode": { "Code": 85, "Name": "SSTORE" },
+              "Gas": "956931",
+              "Cost": "5000",
+              "Depth": "2"
             },
             "Store": {
               "Address": "QgAAAAAAAAAAAAAAAAAAAAAAABU=",
