@@ -72,9 +72,8 @@ This is the same schema Bitquery uses for its Kafka streams, so one schema works
 
 - **Schema:** [github.com/bitquery/streaming_protobuf](https://github.com/bitquery/streaming_protobuf)
 - **Python package (pb2):** [`bitquery-pb2-kafka-package`](https://pypi.org/project/bitquery-pb2-kafka-package/) — generated Python protobuf bindings from the schema (`pip install bitquery-pb2-kafka-package`; modules: `evm`, `solana`, `tron`, `utxo`, `market`)
-- **Sample block:** [github.com/bitquery/blockchain-data-lake-sample](https://github.com/bitquery/blockchain-data-lake-sample)
 
-For scale reference, a single Base block in the sample is about 3.4 MB compressed and 12.1 MB decoded. The lake is hundreds of millions of such files per chain.
+For scale reference, a single Base block in the tutorial below is about 3.4 MB compressed and 12.1 MB decoded. The lake is hundreds of millions of such files per chain.
 
 ## How streaming works
 
@@ -84,15 +83,21 @@ There is no special protocol. Streaming from the lake is reading object bytes ov
 - **Range reads.** Objects support HTTP range requests, so a client can pull data in chunks and begin processing before a file fully arrives.
 - **Parallel fan-out.** Blocks are spread across many volume servers. Reading many blocks (or many ranges) at once hits many servers at once, so aggregate bandwidth scales horizontally within the **1–10 Gbps** range.
 
-Because the interface is S3, standard clients work unchanged, including `aws s3`, boto3, and s3fs.
+Because the interface is S3, standard clients work unchanged, including `aws s3`, boto3, and s3fs. Streaming the full archive is bounded by your network rather than by the lake: you get **1–10 Gbps network bandwidth**, depending on the server handling your reads.
 
-## Throughput
+## Try it: hands-on tutorial
 
-Streaming the full archive is bounded by your network rather than by the lake. You get **1–10 Gbps network bandwidth**, depending on the server handling your reads. Parallel readers across the cluster's volume servers scale aggregate throughput within that range.
+The fastest way to understand the lake is the [blockchain-data-lake-sample](https://github.com/bitquery/blockchain-data-lake-sample) repo. It is a complete walkthrough, not just a sample file. You get:
 
-## Try it: stream a block
+- **`stream.py`** — a Python client that streams blocks over S3, decompresses LZ4, and decodes Protobuf
+- **A real Base block** — the object key used in every command below
+- **A local demo lake** — a Docker image with that block already loaded
 
-Get the streaming client first:
+All of the commands on this page run from that repo after you clone it.
+
+### 1. Clone the repo and install dependencies
+
+This is where `stream.py` comes from. Run the rest of the steps from this directory.
 
 ```bash
 git clone https://github.com/bitquery/blockchain-data-lake-sample
@@ -102,13 +107,15 @@ pip install -r requirements.txt
 KEY="base/blocks/000046600927_0x0133403c4fe53c434b1d2a1686d339eebd4e8e7f50ab52ab84cd68029e82e955_49e9339dd61bdb91320044378bff935efd925d868ca257ef8c3bc42177f9fd44.block.lz4"
 ```
 
-Run the demo lake. We have published it as a [Docker image](https://hub.docker.com/r/marketingbitquery/datalake-demo) with the block already loaded.
+### 2. Start the demo lake
+
+We publish a [Docker image](https://hub.docker.com/r/marketingbitquery/datalake-demo) with the block already loaded:
 
 ```bash
 docker run -p 8333:8333 marketingbitquery/datalake-demo
 ```
 
-This serves a lake at `http://localhost:8333`. Point the client at it:
+This serves a lake at `http://localhost:8333`. Point `stream.py` at it:
 
 ```bash
 export DATA_LAKE_ENDPOINT=http://localhost:8333
@@ -116,7 +123,7 @@ export DATA_LAKE_ACCESS_KEY=admin
 export DATA_LAKE_SECRET_KEY=secret
 ```
 
-Stream and decode the block:
+### 3. Stream and decode a block
 
 ```bash
 python stream.py --bucket archive --key "$KEY" --decode
@@ -135,19 +142,21 @@ python stream.py --bucket archive --key "$KEY" --decode
   logs        : 1,180
 ```
 
-Run several readers in parallel to watch aggregate throughput rise:
+### 4. Scale up with parallel readers
+
+Run several concurrent readers to see aggregate throughput rise:
 
 ```bash
 python stream.py --bucket archive --key "$KEY" --duration 15 --concurrency 16
 ```
 
-The demo runs a single SeaweedFS node, so it only illustrates the streaming and decoding path and how concurrency adds up. The actual Bitquery Blockchain Data Lake runs on a distributed SeaweedFS cluster with many volume servers, where you get **1 to 10 Gbps network bandwidth depending on the server**. The same client code works unchanged against the live lake once you have its endpoint and credentials.
+The demo runs a single SeaweedFS node, so it only illustrates the streaming and decoding path and how concurrency adds up. The actual Bitquery Blockchain Data Lake runs on a distributed SeaweedFS cluster with many volume servers, where you get **1 to 10 Gbps network bandwidth depending on the server**. The same `stream.py` client works unchanged against the live lake once you have its endpoint and credentials.
 
 ## From a block to transactions, transfers, and trades
 
 A decoded block is the full structured record. It holds the header, every transaction, each transaction's receipt and logs, and the complete opcode-level execution trace. Nothing is summarized away, so any entity you care about can be derived from it.
 
-To look inside the transactions, `stream.py` can print them straight from the schema:
+Back in the tutorial repo, `stream.py` can also print individual transactions straight from the schema (same `$KEY` and env vars as above):
 
 ```bash
 python stream.py --bucket archive --key "$KEY" --tx 1
@@ -216,9 +225,9 @@ A single transaction comes back like this (trimmed; byte fields are base64-encod
 }
 ```
 
-That is two of the opcode steps from a single internal call. The real trace for this transaction has the full sequence (`CALLVALUE`, `CALLDATASIZE`, `CALLDATALOAD`, `CALLER`, `SSTORE`, and the rest), each with its gas accounting, and every storage slot it touched. The block in the sample carries this for all 169 transactions.
+That is two of the opcode steps from a single internal call. The real trace for this transaction has the full sequence (`CALLVALUE`, `CALLDATASIZE`, `CALLDATALOAD`, `CALLER`, `SSTORE`, and the rest), each with its gas accounting, and every storage slot it touched. The block in the tutorial carries this for all 169 transactions.
 
-From here you have two options.
+Once you have a decoded block, you can either build your own parser or use Bitquery's published protobuf definitions. The tutorial's `stream.py` shows the second approach; below is how to do both yourself.
 
 ### Write your own parser
 
@@ -240,12 +249,9 @@ This gives you full control. You decide how to turn raw logs and traces into tra
 
 ### Use Bitquery's protobuf files
 
-You do not have to define the message structure yourself. Bitquery publishes the protobuf schema and a generated Python package, so you parse the blocks with the same definitions Bitquery uses internally. Every field, for transactions, receipts, logs, and traces, is already described.
+You do not have to define the message structure yourself. Bitquery publishes the [protobuf schema](https://github.com/bitquery/streaming_protobuf) and the [`bitquery-pb2-kafka-package`](https://pypi.org/project/bitquery-pb2-kafka-package/) Python bindings listed above, so you parse blocks with the same definitions Bitquery uses internally. Every field, for transactions, receipts, logs, and traces, is already described.
 
-- [streaming_protobuf](https://github.com/bitquery/streaming_protobuf) is the protobuf schema for every chain and message type.
-- [`bitquery-pb2-kafka-package`](https://pypi.org/project/bitquery-pb2-kafka-package/) is the generated Python binding (`pip install bitquery-pb2-kafka-package`; modules: `evm`, `solana`, `tron`, `utxo`, `market`).
-
-With these you load a block in a few lines and read its fields directly, which is exactly what `stream.py` does:
+With these you load a block in a few lines and read its fields directly. This is the core of what `stream.py` in the tutorial repo does:
 
 ```python
 import lz4.frame
