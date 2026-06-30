@@ -1232,7 +1232,7 @@ const sidebars = {
         type: "doc",
         id: "data-lake/index",
       },
-      items: [],
+      items: ["data-lake/extract-transfers"],
     },
 
     {
