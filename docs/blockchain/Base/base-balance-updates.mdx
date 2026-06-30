@@ -2,91 +2,253 @@
 sidebar_position: 1
 ---
 
-# Base Chain Balance API
+# Base Address Balance API
 
-In this section we will see how to monitor real-time balance changes across the Base blockchain
-
-<head>
-<meta name="title" content="How to get Base Balance Updates of an address"/>
-<meta name="description" content="Learn how to get real time balance & balance updates of a Base address using Bitquery's Base Balance Updates API."/>
-<meta name="keywords" content="balance api, balance updates api, balance updates python api, Base Balance python api, NFT balance api, Balance scan api, Balance api docs, Base Balance crypto api, balance blockchain api,Base network api, Base web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to get Base Balance & Balance Updates of an address"
-/>
-<meta
-  property="og:description"
-  content="Learn how to get historical & real time balance & balance updates of a Base address using Bitquery's Base Balance Updates API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to get Base Balance Updates of an address" />
-<meta property="twitter:description" content="Learn how to get real time balance & balance updates of a Base address using Bitquery's Base Balance Updates API." />
-</head>
-
-:::warning Important: Rebasing Token Limitations
-**Rebasing tokens are not supported for accurate balance calculations.**
-
-Rebasing tokens (like Mountain Protocol's USDM) automatically adjust their total supply and individual balances through mechanisms other than traditional transfer transactions. This means:
-
-- **Balance calculations may be inaccurate** - Our balance tracking doesn't capture rebasing adjustments
-- **Balance updates may be missing** - Individual holder balances change without visible transactions
-- **Historical balance data will be incorrect** - Past balances don't reflect rebasing adjustments
-
-**Before calculating balances for any token, verify it's not a rebasing token by:**
-
-1. Checking the token's official documentation
-2. Looking for rebasing mechanisms in the smart contract
-3. Consulting token issuer resources
-
-**Example of rebasing token:** Mountain Protocol USDM (`0x59d9356e565ab3a36dd77763fc0d87feaf85508c` on Arbitrum) - [Documentation](https://docs.mountainprotocol.com/legacy-docs/usdm-token)
-
-**Supported chains:** This limitation applies to all EVM chains (Ethereum, Arbitrum, BSC, Base, etc.)
+:::caution Deprecated APIs
+On EVM, **`BalanceUpdates`** and **`TokenHolders`** are deprecated as of **20 May 2026** and will be removed on **15 June 2026**. Use **`EVM.Balances`** (this page) and **[Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api)** (`EVM.Holders`) instead.
 :::
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
+The **Balances** API returns current and historical token balances for an address on Base. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
 
-## Subscribe to Balance Updates of a Particular Wallet
+| Dataset        | When to use                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| **`combined`** | Latest balances. Queries **realtime and archive** databases and merges results.             |
+| **`archive`**  | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
 
-The query will subscribe you to real-time updates for balance changes on the Base blockchain, providing a continuous stream of data as new transactions are processed and recorded. Here we have used address `0x4200000000000000000000000000000000000006`. You can find the query [here](https://ide.bitquery.io/Get-real-time-balance-updates_1#)
+Examples: [All Token Balances](#balance-of-an-address) · [Native ETH (Base)](#native-eth-base-balance) · [Balance on a Date](#balance-on-a-specific-date) · [Specific Token](#balance-for-a-specific-token) · [Holder Snapshot](#token-holder-snapshot)
 
-> The balance update does not inherently include transaction fees. Therefore, to get the actual balance after all transactions and fees, you need to subtract the total transaction fees from the balance updates.
+## Balance of an Address
 
-```
-subscription {
-  EVM(network: base) {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "0x4200000000000000000000000000000000000006"}}}
+Returns token balances for a wallet address. Use `Amount(selectWhere: { gt: "0" })` to exclude zero balances.
+
+[Run in IDE](https://ide.bitquery.io/base-balances-address)
+
+```graphql
+{
+  EVM(network: base, dataset: combined) {
+    Balances(
+      where: {
+        Balance: {
+          Address: { is: "0xbaed383ede0e5d9d72430661f3285daa77e9439f" }
+        }
+      }
     ) {
       Currency {
-        Name
+        Symbol
+        SmartContract
       }
-      BalanceUpdate {
+      Balance {
+        Amount(selectWhere: { gt: "0" })
         Address
-        Amount
-        Type
-      }
-      Block {
-        Time
-      }
-      Transaction {
-        Hash
       }
     }
   }
 }
-
 ```
 
-## Video Tutorial | How to get Balance of an Address on Base network
+## Native ETH (Base) Balance
 
-<VideoPlayer url="https://www.youtube.com/watch?v=99ziGAZ9Pvw" />
+Returns the native ETH balance for a wallet on Base (not ERC-20 tokens). Filter with `Currency: { Native: true }` instead of a token contract address.
+
+[Run in IDE](https://ide.bitquery.io/base-native-balances-address)
+
+```graphql
+{
+  EVM(network: base, dataset: combined) {
+    Balances(
+      where: {
+        Balance: {
+          Address: { is: "0xbaed383ede0e5d9d72430661f3285daa77e9439f" }
+        }
+        Currency: { Native: true }
+      }
+    ) {
+      Currency {
+        Symbol
+        SmartContract
+      }
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        Address
+      }
+    }
+  }
+}
+```
+
+**Parameters**
+
+- `network: base`: Base mainnet.
+- `dataset: combined`: Merges realtime and archive data for the latest balance state.
+- `Balance.Address`: Wallet address to query.
+- `Currency.Native: true`: Native ETH on Base only (see [Native ETH (Base) Balance](#native-eth-base-balance)).
+
+**Returned fields**
+
+- `Currency.Symbol`, `Currency.SmartContract`: Token metadata.
+- `Balance.Amount`, `Balance.AmountInUSD`: Token balance and USD value (use `selectWhere` to filter non-zero amounts).
+
+## Balance on a Specific Date
+
+Use `Block.Date.till` for a point-in-time snapshot. Use `dataset: archive` for historical dates and addresses not recently active.
+
+[Run in IDE](https://ide.bitquery.io/base-balances-by-date)
+
+```graphql
+query {
+  EVM(network: base, dataset: archive) {
+    Balances(
+      where: {
+        Block: { Date: { till: "2026-05-01" } }
+        Balance: {
+          Address: { is: "0xbaed383ede0e5d9d72430661f3285daa77e9439f" }
+        }
+      }
+    ) {
+      Currency {
+        Symbol
+        SmartContract
+      }
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        AmountInUSD
+        Address
+      }
+    }
+  }
+}
+```
+
+## Balance for a Specific Token
+
+Add a `Currency.SmartContract` filter. Always use the contract address, not the token name. Use `0x` for native ETH on Base, or the ERC-20 contract address for a token.
+
+[Run in IDE](https://ide.bitquery.io/base-balances-specific-token)
+
+```graphql
+query {
+  EVM(network: base, dataset: combined) {
+    Balances(
+      where: {
+        Balance: {
+          Address: { is: "0xbaed383ede0e5d9d72430661f3285daa77e9439f" }
+        }
+        Currency: {
+          SmartContract: { is: "0x09403da25c27024c7418fc942dda8ffa70bc7c62" }
+        }
+      }
+    ) {
+      Currency {
+        Symbol
+        SmartContract
+      }
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        AmountInUSD
+        Address
+      }
+    }
+  }
+}
+```
+
+## Token Holder Snapshot
+
+The number of unique holders, token supply, and Gini coefficient for the balance amount before a specific timestamp
+can be derived using the query below. These stats provide a useful holder snapshot for any given time.
+
+[Run in IDE](https://ide.bitquery.io/token-holder-snapshot-base)
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+```graphql
+query MyQuery($network: evm_network!, $address: String!) {
+  EVM(network: $network, dataset: combined) {
+    Holders(
+      where: {Currency: {SmartContract: {is: $address}}, Balance: {Amount: {gt: "0"}, LastChangeTime: {till: "2026-06-30T00:00:00Z"}}}
+    ) {
+      Balance {
+        LastChangeTime(maximum: Balance_LastChangeTime)
+      }
+      holders: uniq(of: Holder_Address)
+      supply: sum(of: Balance_Amount)
+      gini(of: Balance_Amount)
+    }
+  }
+}
+```
+
+```json
+{
+  "network": "base",
+  "address": "0x940181a94A35A4569E4529A3CDfB74e38FD98631"
+}
+```
+
+</details>
+
+## Balance History by Date
+
+Returns balance snapshots over time for an address. Use `dataset: archive`. Order by `Block_Date` descending and use `limit` to paginate. Add `Currency.SmartContract` under `Currency` to filter by a specific token.
+
+[Run in IDE](https://ide.bitquery.io/base-balances-history)
+
+```graphql
+query {
+  EVM(network: base, dataset: archive) {
+    Balances(
+      where: {
+        Balance: {
+          Address: { is: "0xbaed383ede0e5d9d72430661f3285daa77e9439f" }
+        }
+        Currency: {}
+      }
+      orderBy: { descending: Block_Date }
+      limit: { count: 100 }
+    ) {
+      Currency {
+        Symbol
+        SmartContract
+      }
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        AmountInUSD
+      }
+      Block {
+        Date
+      }
+    }
+  }
+}
+```
+
+## Wallet Balance for a Specific Token on a Date
+
+Get a wallet's balance for a specific token with `Balance.Address` and `Currency.SmartContract`. This example uses native ETH (`SmartContract: "0x"`) with `dataset: combined`. For a balance on a calendar date, use [Balance on a Specific Date](#balance-on-a-specific-date) with `dataset: archive` and `Block.Date.till`.
+
+[Run in IDE](https://ide.bitquery.io/base-wallet-balance-token-at-date)
+
+```graphql
+query {
+  EVM(network: base, dataset: combined) {
+    Balances(
+      where: {
+        Balance: {
+          Address: { is: "0xbaed383ede0e5d9d72430661f3285daa77e9439f" }
+        }
+        Currency: { SmartContract: { is: "0x" } }
+      }
+    ) {
+      Currency {
+        Symbol
+        SmartContract
+      }
+      Balance {
+        Amount(selectWhere: { gt: "0" })
+        AmountInUSD
+        Address
+      }
+    }
+  }
+}
+```
