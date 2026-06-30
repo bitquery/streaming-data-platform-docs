@@ -28,28 +28,19 @@ The most common starting point for traders and analysts: who holds the most of a
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query {
+{
   EVM(network: eth, dataset: combined) {
     Holders(
-      where: {
-        Currency: {
-          SmartContract: {
-            is: "0x54D2252757e1672EEaD234D27B1270728fF90581"
-          }
-        }
-      }
-      orderBy: {
-        descending: Balance_Amount
-      }
-      limit: {
-        count: 10
-      }
+       date: "2026-06-30"
+      where: {Currency: {SmartContract: {is: "0x54D2252757e1672EEaD234D27B1270728fF90581"}}}
+      orderBy: {descending: Balance_Amount}
+      limit: {count: 10}
     ) {
       Holder {
         Address
       }
       Balance {
-        Amount(selectWhere: { gt: "0" })
+        Amount(selectWhere: {gt: "0"})
         FirstChangeTime
         LastChangeTime
       }
