@@ -599,6 +599,7 @@ const sidebars = {
             "blockchain/Solana/letsbonk-api",
             "blockchain/Solana/goonfi-api",
             "blockchain/Solana/heaven-dex-api",
+            "blockchain/Solana/byreal-api",
             "blockchain/Solana/bags-fm-api",
             "blockchain/Solana/solana-balance-updates",
             "blockchain/Solana/solana-token-holders",
