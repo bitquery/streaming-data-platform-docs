@@ -40,6 +40,7 @@ const sidebars = {
         "authorisation/how-to-generate",
         "authorisation/how-to-use",
         "authorisation/websocket",
+        "authorisation/usage-api"
       ],
     },
 
