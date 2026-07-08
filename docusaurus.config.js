@@ -967,6 +967,15 @@ const config = {
         respectPrefersColorScheme: false,
       },
 
+      announcementBar: {
+        id: "new_pricing_2026",
+        content:
+          '<span class="announcementBar__inner"><span class="announcementBar__badge">New</span><span class="announcementBar__text">Pricing plans starting at <strong>$49/mo</strong></span><a class="announcementBar__cta" href="https://bitquery.io/pricing#plans-anchor" target="_blank" rel="noopener noreferrer">Explore plans →</a></span>',
+        backgroundColor: "#93254b",
+        textColor: "#ffffff",
+        isCloseable: true,
+      },
+
       // metadata: [
       //   {
       //     name: 'baidu-site-verification',
