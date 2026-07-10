@@ -81,13 +81,14 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 ## What It Is
 
-The Bitquery MCP server is a hosted [Model Context Protocol](https://modelcontextprotocol.io/) endpoint that connects your AI client to Bitquery's production trading dataset — the same data behind Bitquery's GraphQL APIs, IDE, Kafka streams, and TradingView feeds.
+The Bitquery MCP server is a hosted [Model Context Protocol](https://modelcontextprotocol.io/) endpoint that connects your AI client to Bitquery's production trading and transfers dataset — the same data behind Bitquery's GraphQL APIs, IDE, Kafka streams, and TradingView feeds.
 
 You ask in plain English. The agent does the lookup. You get clean, structured rows back. No SQL, no schema, no rate-limit juggling.
 
 Concretely, your agent gets:
 
 - **Billions of swap-level trade rows** across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron.
+- **Transfer-level data** to trace the origin of funds, track cross-chain movements, and investigate wallet clusters.
 - **Pre-built OHLC candles** at 1-minute, 5-minute, hourly, and daily intervals.
 - **Per-token economics** — market cap, fully diluted valuation, circulating supply — on every row.
 - **Bitquery's outlier filter** baked in — wash-traded pools and noisy pairs are deprioritised automatically.
