@@ -15,7 +15,7 @@ The main menu is a single row at the top. A few items are direct links; the rest
 | Item | Notes |
 | --- | --- |
 | **Dashboard** | Home after login; overview cards (plan, usage, account, tokens, apps). |
-| **Billing** | Plans, payments, upgrades — [Billing](https://account.bitquery.io/user/billing). |
+| **Billing** | Plans, payments, self-serve upgrades — [Billing](https://account.bitquery.io/user/billing) → [Select Plan](https://account.bitquery.io/user/upgrade). |
 | **Authorization** | Dropdown — **Applications** ([manage apps](https://account.bitquery.io/user/api_v2/applications)) and **Tokens** ([generate tokens](https://account.bitquery.io/user/api_v2/access_tokens)). |
 | **API V1** | Dropdown — v1 API usage and tools. |
 | **API V2** | Dropdown — v2 queries, streams, subscriptions, and related reports. |
@@ -24,6 +24,21 @@ The main menu is a single row at the top. A few items are direct links; the rest
 | **Help** | Dropdown — documentation, community, and support. |
 
 Use **Apps → IDE** (or the **IDE** card on the dashboard) to open the GraphQL IDE at [ide.bitquery.io](https://ide.bitquery.io/).
+
+## Billing — self-serve upgrades
+
+You are in full control of your plan. From **Billing → [Select Plan](https://account.bitquery.io/user/upgrade)** you can:
+
+- ⚡ Pick a plan and upgrade instantly
+- 🔢 Choose **Monthly** or **Annual** billing (annual saves 20%)
+- 💳 Pay by card, cancel anytime
+- 🔢 Optionally **top up credits** (API points, stream-minutes, stream data) at checkout
+
+![Select plan](/img/selfservice/select-plan.png)
+
+Plans on self-serve: **Personal** (100K API points/mo, 3 concurrent requests), **Pro** (1M points/mo, 100 streams), **Scale** ⭐ (5M points/mo, 1,000 streams), and **Enterprise** (custom limits, dedicated SLA & support — [contact sales](https://bitquery.io/forms/api)).
+
+See [full plans](https://bitquery.io/pricing) or the [Upgrade to Paid Plan](/docs/ide/paid/) guide. Billing questions: [support@bitquery.io](mailto:support@bitquery.io).
 
 ## What you see on the Dashboard
 
