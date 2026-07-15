@@ -30,8 +30,8 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorisat
 :::
 
 :::tip Related docs
-- [Robinhood Trades API](/docs/examples/robinhood/robinhood-trades)
-- [Robinhood Transfers](/docs/examples/robinhood/robinhood-transfers)
+- [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
+- [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
 - [WebSocket subscriptions](/docs/subscriptions/websockets/)
 :::
 
@@ -565,5 +565,5 @@ Use **Events** when a launchpad emits a decoded creation event (like Flap.sh's `
 
 - Use the **WebSocket stream** links above (or switch the query to `subscription` in the IDE) for real-time launch alerts.
 - Track a launchpad not listed here by swapping `Transaction.To` and `Amount` per the [contract map](#launchpad-and-bot-contract-map).
-- Follow new tokens into markets with the [Robinhood Trades API](/docs/examples/robinhood/robinhood-trades).
-- Inspect holder and wallet flows with [Robinhood Transfers](/docs/examples/robinhood/robinhood-transfers).
+- Follow new tokens into markets with the [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades).
+- Inspect holder and wallet flows with [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers).
