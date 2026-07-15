@@ -18,14 +18,25 @@ At Bitquery we use the points system to calculate the cost for each query. Each 
 
 **For a comprehensive understanding of the points system, please see this [video](https://youtu.be/L5QOTnvUwkg).**
 
-When you first sign up, you’ll get 10K free points for the first month on the Developer plan. After that, you’ll need to upgrade or contact our sales team for a trial or paid plan to continue.
+When you first sign up, you’ll get 10K free points for the first month on the Developer plan. After that, you can [upgrade yourself in a few clicks](https://account.bitquery.io/user/upgrade) — no sales call needed — or contact our sales team for Enterprise/custom volumes.
 For every query you run, you can check the points consumed in real time.
 
 ![points](/img/ide/points.png)
 
-Different plans have different limits for points available. You can always request a custom top-up of points by directly contacting us.
+Different plans have different limits for points available.
 
-Check pricing [here](https://bitquery.io/pricing)
+## Running out of points? Top up or upgrade (self-serve)
+
+Points are now **self-serve**. Go to [Account → Billing → Select Plan](https://account.bitquery.io/user/upgrade) and either:
+
+- **Upgrade your plan** — Personal (100K points/mo), Pro (1M points/mo), or Scale (5M points/mo, recommended). Monthly or annual billing (annual saves 20%), pay by card, cancel anytime.
+- **Top up credits** — at step 2 of checkout, add **1 Million API points**, **100k Stream-minutes**, or **1 GB Stream Data** add-ons. Add-ons are billed together with your plan each period.
+
+![Top up credits](/img/selfservice/top-up-credits.png)
+
+For Enterprise or custom volumes, [contact sales](mailto:sales@bitquery.io).
+
+Check pricing [here](https://bitquery.io/pricing). See the full billing walkthrough on the [Upgrade to Paid Plan](/docs/ide/paid/) page.
 
 > **WARNING**  
 > Please do not send money or pay unless you receive an invoice from [bitquery.io](https://bitquery.io). Beware of scammers.

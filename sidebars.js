@@ -40,7 +40,7 @@ const sidebars = {
         "authorisation/how-to-generate",
         "authorisation/how-to-use",
         "authorisation/websocket",
-        "authorisation/usage-api"
+        "authorisation/usage-api",
       ],
     },
 
@@ -505,7 +505,7 @@ const sidebars = {
               ],
             },
             "blockchain/Ethereum/transfers/rwa-api",
-            "blockchain/Ethereum/pepe-api"
+            "blockchain/Ethereum/pepe-api",
           ],
         },
 
@@ -1036,6 +1036,15 @@ const sidebars = {
               ],
             },
           ],
+        },
+        {
+          type: "category",
+          label: "Tracing",
+          link: {
+            type: "doc",
+            id: "mcp/Tracing/overview",
+          },
+          items: ["mcp/Tracing/overview"],
         },
       ],
     },

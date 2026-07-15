@@ -1,6 +1,6 @@
 ---
 title: "Bitquery MCP Server — Blockchain Data for AI Agents"
-description: "Connect Claude, Cursor, ChatGPT to Bitquery's MCP server. Query DEX trades, OHLC, market cap & wallet data across Solana, Ethereum, BSC, Base in plain English."
+description: "Connect Claude, Cursor, ChatGPT to Bitquery's MCP server. Query DEX trades, transfers, OHLC, market cap & wallet data to trace the origin of funds across Solana, Ethereum, BSC, Base in plain English."
 keywords:
   - Bitquery MCP
   - Model Context Protocol blockchain
@@ -20,31 +20,58 @@ keywords:
 import FAQ from "@site/src/components/FAQ";
 
 <head>
-<meta name="title" content="Bitquery MCP Server — Blockchain Data for AI Agents"/>
-<meta name="description" content="Connect Claude, Cursor, ChatGPT to Bitquery's MCP server. Query DEX trades, OHLC, market cap & wallet data across Solana, Ethereum, BSC, Base in plain English."/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Bitquery MCP Server — Blockchain Data for AI Agents"/>
-<meta property="og:description" content="Plug Claude, Cursor, ChatGPT into the Bitquery MCP. Outlier-filtered DEX trades, OHLC, market cap & wallet data across 8+ chains — no SQL needed."/>
-<meta property="og:url" content="https://docs.bitquery.io/docs/mcp/mcp-server/"/>
-<meta property="og:image" content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Bitquery MCP Server — Blockchain Data for AI Agents"/>
-<meta property="twitter:description" content="Plug Claude, Cursor, ChatGPT into the Bitquery MCP. Outlier-filtered DEX trades, OHLC, market cap & wallet data across 8+ chains — no SQL needed."/>
-<meta property="twitter:image" content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"/>
-<link rel="canonical" href="https://docs.bitquery.io/docs/mcp/mcp-server/"/>
+  <meta
+    name="title"
+    content="Bitquery MCP Server — Blockchain Data for AI Agents"
+  />
+  <meta
+    name="description"
+    content="Connect Claude, Cursor, ChatGPT to Bitquery's MCP server. Query DEX trades, transfers, OHLC, market cap & wallet data to trace the origin of funds across Solana, Ethereum, BSC, Base in plain English."
+  />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:title"
+    content="Bitquery MCP Server — Blockchain Data for AI Agents"
+  />
+  <meta
+    property="og:description"
+    content="Plug Claude, Cursor, ChatGPT into the Bitquery MCP. Outlier-filtered DEX trades, transfers, OHLC, market cap & wallet data across 8+ chains — trace the origin of funds, no SQL needed."
+  />
+  <meta
+    property="og:url"
+    content="https://docs.bitquery.io/docs/mcp/mcp-server/"
+  />
+  <meta
+    property="og:image"
+    content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"
+  />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta
+    property="twitter:title"
+    content="Bitquery MCP Server — Blockchain Data for AI Agents"
+  />
+  <meta
+    property="twitter:description"
+    content="Plug Claude, Cursor, ChatGPT into the Bitquery MCP. Outlier-filtered DEX trades, transfers, OHLC, market cap & wallet data across 8+ chains — trace the origin of funds, no SQL needed."
+  />
+  <meta
+    property="twitter:image"
+    content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"
+  />
+  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/mcp-server/" />
 </head>
 
 # Bitquery MCP Server — Blockchain Data for AI Agents
 
-Connect [`https://mcp.bitquery.io`](https://mcp.bitquery.io) to Claude, Cursor, ChatGPT, Claude Code, or any other [MCP](https://modelcontextprotocol.io/)-compatible client and ask Bitquery's blockchain trading dataset anything — in plain English. Outlier-filtered DEX trades, OHLC candles, market cap, wallet history, across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron.
+Connect [`https://mcp.bitquery.io`](https://mcp.bitquery.io) to Claude, Cursor, ChatGPT, Claude Code, or any other [MCP](https://modelcontextprotocol.io/)-compatible client and ask Bitquery's blockchain dataset anything in plain English. Get outlier-filtered DEX trades, transfers, OHLC candles, market cap, and wallet history across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron. Trace the origin of funds, track cross-chain movements, and investigate wallet clusters.
 
-| | |
-|---|---|
-| **Endpoint** | [`https://mcp.bitquery.io`](https://mcp.bitquery.io) |
-| **Auth** | OAuth 2.1 — browser sign-in, no manual tokens |
-| **Pricing** | Free tier with a Bitquery account; metered against your existing plan beyond that |
-| **Support** | [Telegram](https://t.me/Bloxy_info) · [support.bitquery.io](https://support.bitquery.io/) |
+|              |                                                                                                                                               |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Endpoint** | [`https://mcp.bitquery.io`](https://mcp.bitquery.io)                                                                                          |
+| **Auth**     | OAuth 2.1 — browser sign-in, no manual tokens                                                                                                 |
+| **Pricing**  | Free tier with a Bitquery account; metered against your existing plan beyond that                                                             |
+| **Support**  | [Telegram](https://t.me/Bloxy_info) · [support.bitquery.io](https://support.bitquery.io/) · [support@bitquery.io](mailto:support@bitquery.io) |
 
 import VideoPlayer from "../../src/components/videoplayer.js";
 
@@ -54,13 +81,14 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 ## What It Is
 
-The Bitquery MCP server is a hosted [Model Context Protocol](https://modelcontextprotocol.io/) endpoint that connects your AI client to Bitquery's production trading dataset — the same data behind Bitquery's GraphQL APIs, IDE, Kafka streams, and TradingView feeds.
+The Bitquery MCP server is a hosted [Model Context Protocol](https://modelcontextprotocol.io/) endpoint that connects your AI client to Bitquery's production trading and transfers dataset — the same data behind Bitquery's GraphQL APIs, IDE, Kafka streams, and TradingView feeds.
 
 You ask in plain English. The agent does the lookup. You get clean, structured rows back. No SQL, no schema, no rate-limit juggling.
 
 Concretely, your agent gets:
 
 - **Billions of swap-level trade rows** across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron.
+- **Transfer-level data** to trace the origin of funds, track cross-chain movements, and investigate wallet clusters.
 - **Pre-built OHLC candles** at 1-minute, 5-minute, hourly, and daily intervals.
 - **Per-token economics** — market cap, fully diluted valuation, circulating supply — on every row.
 - **Bitquery's outlier filter** baked in — wash-traded pools and noisy pairs are deprioritised automatically.
@@ -102,6 +130,10 @@ Dive deeper in the **Trading** section:
 - [**What you can do with it**](/docs/mcp/trading/use-cases/) — eleven conversational patterns, with prompts and best practices.
 - [**Worked examples with charts**](/docs/mcp/trading/examples/) — six trader workflows with real data and charts.
 
+Dive deeper in the **Tracing** section:
+
+- [**Tracing on the MCP — overview**](/docs/mcp/Tracing/overview/) — AML, forensics, payment tracing, wallet clustering, and more.
+
 ---
 
 ## Under the Hood
@@ -124,7 +156,7 @@ Everything is sandboxed: writes, deletes, and mutations are rejected. Explore fr
 
 ![Add custom connector: Name and Remote MCP server URL fields](/img/mcp/custom_connector.png)
 
-You don't need to pick tools manually in the chat UI — ask in plain language (for example, *"get me the top Solana tokens by 24h volume"*) and Claude calls Bitquery when your request fits.
+You don't need to pick tools manually in the chat UI — ask in plain language (for example, _"get me the top Solana tokens by 24h volume"_) and Claude calls Bitquery when your request fits.
 
 ### ChatGPT
 
@@ -221,13 +253,13 @@ Prefer OAuth in interactive environments when you can.
 
 Almost every trader question maps to one of these patterns. Just type it into the chat — the agent figures out the rest.
 
-- **Token discovery & trending** — *"Top 10 Solana tokens by USD volume in the last 24h, skip wash-traded pools."*
-- **Trader PnL & wallet analytics** — *"Pull every trade for wallet `7xKX…` in the last 7 days. Compute realised PnL per token."*
-- **OHLC charts** — *"1-minute OHLC for the WIF/USDC pool on Raydium for the last 6 hours."*
-- **Market cap & FDV monitoring** — *"Which Base tokens crossed $10M market cap in the last 24h?"*
-- **Wash-trade filtering** — *"Only clean volume"* triggers Bitquery's outlier ranking automatically.
-- **Launchpad pulse** — *"How many new tokens launched on Pump.fun in the last hour vs the 24h average?"*
-- **Cross-chain market overview** — *"For each chain, show 24h DEX volume, trades, and unique traders."*
+- **Token discovery & trending** — _"Top 10 Solana tokens by USD volume in the last 24h, skip wash-traded pools."_
+- **Trader PnL & wallet analytics** — _"Pull every trade for wallet `7xKX…` in the last 7 days. Compute realised PnL per token."_
+- **OHLC charts** — _"1-minute OHLC for the WIF/USDC pool on Raydium for the last 6 hours."_
+- **Market cap & FDV monitoring** — _"Which Base tokens crossed $10M market cap in the last 24h?"_
+- **Wash-trade filtering** — _"Only clean volume"_ triggers Bitquery's outlier ranking automatically.
+- **Launchpad pulse** — _"How many new tokens launched on Pump.fun in the last hour vs the 24h average?"_
+- **Cross-chain market overview** — _"For each chain, show 24h DEX volume, trades, and unique traders."_
 - **Sniping & copy-trading research** — prototype signals before committing to a Kafka or gRPC stream.
 - **Slippage & liquidity** — derive realised slippage and effective depth from per-trade rows.
 
@@ -237,13 +269,34 @@ See the [worked examples](/docs/mcp/trading/examples/) for end-to-end versions o
 
 <FAQ
   items={[
-    { q: "Is the Bitquery MCP server free?", a: "Yes — a free Bitquery account is enough to start. Heavy usage is metered against the same plan as the GraphQL API." },
-    { q: "Do I need to write SQL to use the MCP?", a: "No. You ask in plain English and the AI agent figures out the rest. The server is read-only — the agent cannot delete, insert, or modify anything." },
-    { q: "Which chains and DEXs does the Bitquery MCP cover?", a: "Solana (Raydium, Pump.fun, Meteora, Orca, and more), Ethereum (Uniswap, PancakeSwap, Curve), BSC (PancakeSwap, FourMeme), Base, Arbitrum, Optimism, Polygon (Polymarket), and Tron — see the chain table above for the full list." },
-    { q: "How fresh is the data on the Bitquery MCP?", a: "Near real time — the dataset updates as blocks are processed across all supported chains." },
-    { q: "How do I install the Bitquery MCP in Claude, Cursor, or ChatGPT?", a: "Open Settings → Connectors (or MCP Servers), add https://mcp.bitquery.io as a custom connector, and sign in with your Bitquery account when prompted." },
-    { q: "Can I self-host the MCP server?", a: "The underlying server is open-source mcp-clickhouse. Bitquery runs the production deployment with OAuth and our data; you can run your own if you have your own database." },
-    { q: "How far back does MCP data go?", a: "Multiple years for major chains. Tell the agent the window you care about (e.g. in the last 7 days) and it bounds the lookup efficiently." },
+    {
+      q: "Is the Bitquery MCP server free?",
+      a: "Yes — a free Bitquery account is enough to start. Heavy usage is metered against the same plan as the GraphQL API.",
+    },
+    {
+      q: "Do I need to write SQL to use the MCP?",
+      a: "No. You ask in plain English and the AI agent figures out the rest. The server is read-only — the agent cannot delete, insert, or modify anything.",
+    },
+    {
+      q: "Which chains and DEXs does the Bitquery MCP cover?",
+      a: "Solana (Raydium, Pump.fun, Meteora, Orca, and more), Ethereum (Uniswap, PancakeSwap, Curve), BSC (PancakeSwap, FourMeme), Base, Arbitrum, Optimism, Polygon (Polymarket), and Tron — see the chain table above for the full list.",
+    },
+    {
+      q: "How fresh is the data on the Bitquery MCP?",
+      a: "Near real time — the dataset updates as blocks are processed across all supported chains.",
+    },
+    {
+      q: "How do I install the Bitquery MCP in Claude, Cursor, or ChatGPT?",
+      a: "Open Settings → Connectors (or MCP Servers), add https://mcp.bitquery.io as a custom connector, and sign in with your Bitquery account when prompted.",
+    },
+    {
+      q: "Can I self-host the MCP server?",
+      a: "The underlying server is open-source mcp-clickhouse. Bitquery runs the production deployment with OAuth and our data; you can run your own if you have your own database.",
+    },
+    {
+      q: "How far back does MCP data go?",
+      a: "Multiple years for major chains. Tell the agent the window you care about (e.g. in the last 7 days) and it bounds the lookup efficiently.",
+    },
   ]}
 />
 
