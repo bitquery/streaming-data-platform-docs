@@ -841,6 +841,17 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Robinhood",
+          link: {
+            type: "generated-index",
+            title: "Robinhood APIs",
+            description:
+              "APIs for accessing Robinhood trade and price data via Bitquery Trading APIs.",
+          },
+          items: ["examples/robinhood/robinhood-trades"],
+        },
+        {
+          type: "category",
           label: "x402 Protocol",
           link: {
             type: "generated-index",
