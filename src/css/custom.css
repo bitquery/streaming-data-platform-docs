@@ -817,6 +817,19 @@ html.plugin-pages .main-wrapper a:active {
   background: var(--bq-bg-elevated);
 }
 
+/*
+ * Anchor the code-block copy/word-wrap buttons to the top-right.
+ * Docusaurus positions this group with `calc(var(--ifm-pre-padding) / 2)`,
+ * which becomes invalid once `--ifm-pre-padding` is a multi-value shorthand
+ * (set above), dropping the offsets and letting the group fall to the bottom.
+ */
+.theme-code-block div[class*="buttonGroup"] {
+  top: 0.625rem;
+  right: 0.625rem;
+  bottom: auto;
+  left: auto;
+}
+
 .theme-doc-markdown table {
   display: table;
   width: 100%;
