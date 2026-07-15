@@ -1,19 +1,40 @@
 ---
 title: "Robinhood Trades API"
-description: "Query and stream Robinhood token trades and prices with Bitquery Trading APIs. Filter with NetworkBid bid:robinhood for real-time OHLC and volume."
+description: "Query and stream Robinhood token trades, prices, OHLCV, market cap, whale trades, and top traders with Bitquery Trading APIs, scoped with NetworkBid bid:robinhood."
 sidebar_position: 1
 keywords:
   - Robinhood API
   - Robinhood trades API
+  - Robinhood price API
   - OHLCV for Robinhood tokens
   - Marketcap for Robinhood tokens
   - Robinhood token trades
   - Latest price for Robinhood tokens
+  - Robinhood whale trades
+  - Robinhood top traders
+  - Robinhood real-time trade stream
+  - Robinhood K-line candles
+  - Bitquery Robinhood Trading API
 ---
+
+<head>
+<meta name="title" content="Robinhood Trades API & Streams | Prices, OHLCV, Whale Trades"/>
+<meta name="description" content="Query and stream Robinhood token trades, prices, OHLCV, market cap, whale trades, and top traders with Bitquery Trading APIs, scoped with NetworkBid bid:robinhood."/>
+<meta name="keywords" content="Robinhood API, Robinhood trades API, Robinhood price API, OHLCV for Robinhood tokens, Robinhood whale trades, Robinhood top traders, Robinhood real-time trade stream, Robinhood K-line candles, Bitquery Robinhood Trading API"/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Robinhood Trades API & Streams | Prices, OHLCV, Whale Trades"/>
+<meta property="og:description" content="Real-time and historical Robinhood token trades, USD prices, OHLCV, market cap, whale trades, and top traders via Bitquery Trading APIs."/>
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Robinhood Trades API & Streams | Prices, OHLCV, Whale Trades"/>
+<meta property="twitter:description" content="Real-time and historical Robinhood token trades, USD prices, OHLCV, market cap, whale trades, and top traders via Bitquery Trading APIs."/>
+</head>
 
 # Robinhood Trades API & Streams
 
-Bitquery exposes **Robinhood** trade and price data through the **Trading** APIs. 
+Bitquery exposes **Robinhood** trade and price data through the **Trading** APIs. Use these queries and real-time GraphQL subscriptions to get **live trades, USD prices, OHLCV/K-line candles, market cap, whale trades, top traders, and token leaderboards** on Robinhood — all scoped with the `bid:robinhood` network filter.
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
@@ -22,9 +43,11 @@ Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bit
 :::
 
 :::tip Related docs
+- [Robinhood Transfers](/docs/examples/robinhood/robinhood-transfers)
+- [Robinhood Meme Coin Launches API](/docs/examples/robinhood/robinhood-meme-coin-launches)
 - [Trading data overview](https://docs.bitquery.io/docs/trading/trading-data-overview/)
-- [Trades API](https://docs.bitquery.io/docs/category/crypto-trades-api/)
 - [Crypto Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)
+- [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
 :::
 
 ---
@@ -36,12 +59,11 @@ Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bit
 | `NetworkBid` | `bid:robinhood` | Filter to select Robinhood data (indexed and faster) |
 | `Network` | `Robinhood` | Filter to select Robinhood data |
 
-
 ---
 
-## Real time Trades on Robinhood
+## Real-Time Trades on Robinhood
 
-Stream real time tardes on Robinhood via a GraphQL subscription on `Trading.Trades` that includes details such as Trader Address, Base and Quote Currency Details, amounts, type of trade (buy or sell), market cap and transaction details.
+Stream real-time trades on Robinhood via a GraphQL subscription on `Trading.Trades` that includes details such as Trader Address, Base and Quote Currency Details, amounts, type of trade (buy or sell), market cap and transaction details.
 
 ▶️ [Run in IDE](https://ide.bitquery.io/Robinhood-Trades)
 
@@ -95,8 +117,6 @@ subscription {
   }
 }
 ```
-
-<!-- TODO: Expand returned fields (Volume, Average, Supply, full OHLC) as needed -->
 
 ---
 
@@ -166,9 +186,119 @@ Trade APIs allows user to query upto past 30 days of data using the GraphQL API.
 
 --- -->
 
-## Real Time Trades for a specific token
+## Latest Trades on Robinhood
 
-Using this GrpahQL stream you can get real time trades for a specific token with details such as trader address, token details, marketcap, FDV and transaction hash.
+Query the most recent trades across all Robinhood tokens — the query counterpart to the real-time stream above — ordered by newest first.
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 50 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Pair: {
+          Market: {
+            NetworkBid: { is: "bid:robinhood" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trader {
+        Address
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+      }
+      Pair {
+        Token {
+          Name
+          Symbol
+          Address
+        }
+        QuoteToken {
+          Name
+          Symbol
+          Address
+        }
+      }
+      Side
+      Supply {
+        FullyDilutedValuationUsd
+        MarketCap
+      }
+      TransactionHeader {
+        Hash
+      }
+    }
+  }
+}
+```
+
+---
+
+## Whale Trades on Robinhood
+
+Fetch large trades by filtering on USD value. This example returns trades of at least `$10,000` — adjust the `AmountsInUsd.Base` threshold as needed.
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 50}
+      orderBy: {descending: Block_Time}
+      where: {Pair: {Market: {NetworkBid: {is: "bid:robinhood"}}}, AmountsInUsd: {Base: {ge: 10000}}}
+    ) {
+      Block {
+        Time
+      }
+      Trader {
+        Address
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+      }
+      Pair {
+        Token {
+          Name
+          Symbol
+          Address
+        }
+        QuoteToken {
+          Name
+          Symbol
+          Address
+        }
+      }
+      Side
+      Supply {
+        FullyDilutedValuationUsd
+        MarketCap
+      }
+      TransactionHeader {
+        Hash
+      }
+    }
+  }
+}
+```
+
+---
+
+## Real-Time Trades for a Specific Token
+
+Using this GraphQL stream you can get real-time trades for a specific token with details such as trader address, token details, marketcap, FDV and transaction hash.
 
 ▶️ [Run in IDE](https://ide.bitquery.io/Robinhood-Trades-for-a-token)
 
@@ -230,9 +360,131 @@ subscription {
 
 ---
 
+## Trades for a Specific Pair or Pool
+
+Scope trades to a single liquidity pool using `Pool.Address` — useful when a token trades across multiple pools and you want just one.
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 50 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Pair: {
+          Market: {
+            NetworkBid: { is: "bid:robinhood" }
+          }
+          Pool: {
+            Address: { is: "0xbbaefcfcd7b92ed0df1a3eec22a21ba6beb0b52b" }
+          }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trader {
+        Address
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+      }
+      Pair {
+        Pool {
+          Address
+        }
+        Token {
+          Name
+          Symbol
+          Address
+        }
+        QuoteToken {
+          Name
+          Symbol
+          Address
+        }
+      }
+      Side
+      Supply {
+        FullyDilutedValuationUsd
+        MarketCap
+      }
+      TransactionHeader {
+        Hash
+      }
+    }
+  }
+}
+```
+
+---
+
+## First Buyers of a Token on Robinhood
+
+Get the earliest trades for a token, ordered oldest first, to find the first buyers after launch. Filtered to buys here; remove the `Side` filter for first trades of any side.
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 50 }
+      orderBy: { ascending: [Block_Time, TransactionHeader_Index] }
+      where: {
+        Pair: {
+          Token: {
+            Address: { is: "0xaf81aa091665c60cfa172f86a5a8d6b437a79353" }
+          }
+          Market: {
+            NetworkBid: { is: "bid:robinhood" }
+          }
+        }
+        Side: { is: "Buy" }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trader {
+        Address
+      }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+      }
+      Pair {
+        Token {
+          Name
+          Symbol
+          Address
+        }
+        QuoteToken {
+          Name
+          Symbol
+          Address
+        }
+      }
+      Side
+      TransactionHeader {
+        Hash
+      }
+    }
+  }
+}
+```
+
+---
+
 ## Trades by a Trader
 
-Using this GrpahQL API endpoint you can get token trades by a trader with details such as trade amount, trade type, token details, marketcap, FDV and transaction hash.
+Using this GraphQL API endpoint you can get token trades by a trader with details such as trade amount, trade type, token details, marketcap, FDV and transaction hash.
 
 ▶️ [Run in IDE](https://ide.bitquery.io/Robinhood-Trades-by-a-trader)
 
@@ -294,6 +546,46 @@ Using this GrpahQL API endpoint you can get token trades by a trader with detail
 
 ---
 
+## Top Traders of a Token on Robinhood
+
+Rank the biggest traders of a specific token by total USD volume, with a buy/sell split and trade count. Aggregates `Trading.Trades` grouped by trader.
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 50 }
+      orderBy: { descendingByField: "volume_usd" }
+      where: {
+        Pair: {
+          Token: {
+            Address: { is: "0x9077841e155faaf4e4e89470822c2187eeef7777" }
+          }
+          Market: {
+            NetworkBid: { is: "bid:robinhood" }
+          }
+        }
+      }
+    ) {
+      Trader {
+        Address
+      }
+      volume_usd: sum(of: AmountsInUsd_Base)
+      bought_usd: sum(
+        of: AmountsInUsd_Base
+        if: { Side: { is: "Buy" } }
+      )
+      sold_usd: sum(
+        of: AmountsInUsd_Base
+        if: { Side: { is: "Sell" } }
+      )
+      trades: count
+    }
+  }
+}
+```
+
+---
 
 ## Latest Price of a Token on Robinhood
 
@@ -328,7 +620,7 @@ If you want to monitor price for a particular pool, we suggest usage of `Trading
 
 ## Latest Price of a Token for a Liquidity Pool
 
-This API endpoint retrieves the latest price of a token for a particular token pair or liquidity pool using `Token.Pairs` cube.
+This API endpoint retrieves the latest price of a token for a particular token pair or liquidity pool using the `Trading.Pairs` cube.
 
 ▶️ [Run in IDE](https://ide.bitquery.io/latest-price-of-a-token-on-a-pool)
 
@@ -367,7 +659,105 @@ This API endpoint retrieves the latest price of a token for a particular token p
 
 ---
 
-## Real Time OHLCV stream for a Pair on Robinhood
+## Market Cap, FDV and Supply of a Token
+
+Get the latest market cap, fully-diluted valuation, supply, and price for a single Robinhood token in one row. `limit: 1` with `orderBy: { descending: Interval_Time_Start }` returns the most recent interval — the current snapshot.
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 1 }
+      orderBy: { descending: Interval_Time_Start }
+      where: {
+        Token: {
+          Address: { is: "0x9077841e155faaf4e4e89470822c2187eeef7777" }
+          NetworkBid: { is: "bid:robinhood" }
+        }
+        Interval: { Time: { Duration: { eq: 1 } } }
+      }
+    ) {
+      Token {
+        Name
+        Symbol
+        Address
+      }
+      Price {
+        Ohlc {
+          Close
+        }
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        CirculatingSupply
+        TotalSupply
+        MaxSupply
+      }
+      Volume {
+        Usd
+      }
+    }
+  }
+}
+```
+
+---
+
+## OHLCV / K-Line Candles for a Token
+
+Token-level OHLCV candles (USD-normalised, weighted across all pools) for charting. This example uses 1-minute candles (`Duration: 60`); use `300` (5m) or `3600` (1h — the maximum candle) as needed.
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 100 }
+      orderBy: { descending: Interval_Time_Start }
+      where: {
+        Token: {
+          Address: { is: "0x9077841e155faaf4e4e89470822c2187eeef7777" }
+          NetworkBid: { is: "bid:robinhood" }
+        }
+        Interval: { Time: { Duration: { eq: 60 } } }
+      }
+    ) {
+      Interval {
+        Time {
+          Start
+          End
+        }
+      }
+      Price {
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+      }
+      Token {
+        Name
+        Symbol
+        Address
+      }
+    }
+  }
+}
+```
+
+---
+
+## Real-Time OHLCV Stream for a Pair on Robinhood
 
 This GraphQL stream for 1 second OHLCV streams the USD normalised OHLC/K-line data for a token pair, and also contains info such as interval start and end time, marketcap, volume and token details for both base and quote tokens.
 
@@ -427,3 +817,58 @@ subscription{
   }
 }
 ```
+
+---
+
+## Top Tokens on Robinhood by Volume
+
+Rank the most actively traded Robinhood tokens by USD volume over the last 24 hours, aggregated from 1-second intervals with `sum`.
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: {count: 50}
+      limitBy: {count: 1, by: Token_Id}
+      orderBy: {descending: [Volume_Usd]}
+      where: {Interval: {Time: {Start: {since_relative: {days_ago: 1}}, Duration: {eq: 1}}}, Token: {NetworkBid: {is: "bid:robinhood"}}}
+    ) {
+      sum(of: Volume_Base)
+      usd: sum(of: Volume_Usd)
+      Token {
+        Name
+        Symbol
+        Address
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+      }
+    }
+  }
+}
+```
+
+---
+
+## FAQ
+
+### How do I stream Robinhood trades in real time?
+
+Run a GraphQL `subscription` on `Trading.Trades` filtered by `Pair.Market.NetworkBid: "bid:robinhood"`. Every matching trade is pushed to your client as it is indexed. Any query on this page can be turned into a stream by switching the operation to `subscription`.
+
+### What is the difference between `NetworkBid` and `Network`?
+
+Both scope results to Robinhood. `NetworkBid: "bid:robinhood"` is the indexed identifier and is faster; `Network: "Robinhood"` is the human-readable equivalent. Prefer `NetworkBid` in filters.
+
+### How do I get the current price of a Robinhood token?
+
+Use `Trading.Tokens` for the USD-normalised, pool-weighted price, or `Trading.Pairs` when you need the price on a specific pool.
+
+### Can I get OHLCV / candlestick data for Robinhood tokens?
+
+Yes. Query `Trading.Tokens` or `Trading.Pairs` with an `Interval.Time.Duration` in seconds — from 1 second up to a maximum of 3600 (1 hour) per candle.
+
+### How far back does Robinhood trade data go?
+
+The Trading APIs cover real-time data and roughly the last 30 days. For older history, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs.
