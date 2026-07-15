@@ -846,11 +846,12 @@ const sidebars = {
             type: "generated-index",
             title: "Robinhood APIs",
             description:
-              "APIs for accessing Robinhood trades, transfers, and balances via Bitquery Trading and EVM APIs.",
+              "APIs for accessing Robinhood trades, transfers, balances, and meme coin token launches via Bitquery Trading and EVM APIs.",
           },
           items: [
             "examples/robinhood/robinhood-trades",
-            "examples/robinhood/robinhood-transfers"
+            "examples/robinhood/robinhood-transfers",
+            "examples/robinhood/robinhood-meme-coin-launches",
           ],
         },
         {
