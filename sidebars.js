@@ -846,9 +846,12 @@ const sidebars = {
             type: "generated-index",
             title: "Robinhood APIs",
             description:
-              "APIs for accessing Robinhood trade and price data via Bitquery Trading APIs.",
+              "APIs for accessing Robinhood trades, transfers, and balances via Bitquery Trading and EVM APIs.",
           },
-          items: ["examples/robinhood/robinhood-trades"],
+          items: [
+            "examples/robinhood/robinhood-trades",
+            "examples/robinhood/robinhood-transfers"
+          ],
         },
         {
           type: "category",

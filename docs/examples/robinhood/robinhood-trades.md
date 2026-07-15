@@ -100,7 +100,7 @@ subscription {
 
 ---
 
-## Historical Trades on Robinhood
+<!-- ## Historical Trades on Robinhood
 
 Trade APIs allows user to query upto past 30 days of data using the GraphQL API.
 
@@ -164,7 +164,7 @@ Trade APIs allows user to query upto past 30 days of data using the GraphQL API.
 }
 ```
 
----
+--- -->
 
 ## Real Time Trades for a specific token
 
