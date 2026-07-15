@@ -841,6 +841,21 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Robinhood",
+          link: {
+            type: "generated-index",
+            title: "Robinhood APIs",
+            description:
+              "APIs for accessing Robinhood trades, transfers, balances, and meme coin token launches via Bitquery Trading and EVM APIs.",
+          },
+          items: [
+            "examples/robinhood/robinhood-trades",
+            "examples/robinhood/robinhood-transfers",
+            "examples/robinhood/robinhood-meme-coin-launches",
+          ],
+        },
+        {
+          type: "category",
           label: "x402 Protocol",
           link: {
             type: "generated-index",
