@@ -844,14 +844,17 @@ const sidebars = {
           label: "Robinhood",
           link: {
             type: "generated-index",
+            slug: "/blockchain/robinhood",
             title: "Robinhood APIs",
             description:
               "APIs for accessing Robinhood trades, transfers, balances, and meme coin token launches via Bitquery Trading and EVM APIs.",
           },
           items: [
-            "examples/robinhood/robinhood-trades",
-            "examples/robinhood/robinhood-transfers",
-            "examples/robinhood/robinhood-meme-coin-launches",
+            "blockchain/robinhood/robinhood-trades",
+            "blockchain/robinhood/robinhood-transfers",
+            "blockchain/robinhood/robinhood-meme-coin-launches",
+            "blockchain/robinhood/flap-sh-api",
+            "blockchain/robinhood/robinhood-token-supply",
           ],
         },
         {

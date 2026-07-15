@@ -43,8 +43,9 @@ Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bit
 :::
 
 :::tip Related docs
-- [Robinhood Transfers](/docs/examples/robinhood/robinhood-transfers)
-- [Robinhood Meme Coin Launches API](/docs/examples/robinhood/robinhood-meme-coin-launches)
+- [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
+- [Robinhood Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply)
+- [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)
 - [Trading data overview](https://docs.bitquery.io/docs/trading/trading-data-overview/)
 - [Crypto Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)
 - [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
@@ -696,6 +697,91 @@ Get the latest market cap, fully-diluted valuation, supply, and price for a sing
       }
       Volume {
         Usd
+      }
+    }
+  }
+}
+```
+
+---
+
+## Token Supply on Robinhood
+
+While `Trading.Tokens` (above) returns supply alongside price and market cap, you can also read **total supply** directly from the `EVM.TransactionBalances` cube. `TokenBalance.TotalSupply` is decimal-normalized (whole tokens). See the full guide in the [Robinhood Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply).
+
+### Latest Supply of a Token
+
+Get the most recent total supply for a single token by filtering on its contract address.
+
+```graphql
+{
+  EVM(network: robinhood) {
+    TransactionBalances(
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+      where: {TokenBalance: {Currency: {SmartContract: {is: "0x0bd7d308f8e1639fab988df18a8011f41eacad73"}}}}
+    ) {
+      TokenBalance {
+        Currency {
+          Symbol
+          HasURI
+          SmartContract
+        }
+        TotalSupply
+      }
+    }
+  }
+}
+```
+
+### Real-Time Supply Stream
+
+Stream live total-supply updates across Robinhood tokens. The `SmartContract: {not: "0x"}` filter excludes the native coin.
+
+```graphql
+subscription {
+  EVM(network: robinhood) {
+    TransactionBalances(
+      where: {
+        TokenBalance: {
+          Currency: {
+            SmartContract: {not: "0x"}
+          }
+        }
+      }
+    ) {
+      TokenBalance {
+        Currency {
+          Symbol
+          HasURI
+          SmartContract
+        }
+        TotalSupply
+      }
+    }
+  }
+}
+```
+
+### Supply of All Active Tokens
+
+Fetch the latest total supply for every recently active token. `limitBy` returns one row — the newest supply — per token contract.
+
+```graphql
+{
+  EVM(network: robinhood) {
+    TransactionBalances(
+      limitBy: {by: TokenBalance_Currency_SmartContract, count: 1}
+      orderBy: {descending: Block_Time}
+      where: {TokenBalance: {Currency: {SmartContract: {not: "0x"}}}}
+    ) {
+      TokenBalance {
+        Currency {
+          Symbol
+          HasURI
+          SmartContract
+        }
+        TotalSupply
       }
     }
   }

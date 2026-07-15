@@ -187,6 +187,30 @@ const config = {
             to: "/docs/authorisation/how-to-generate",
             from: "/docs/category/authorization/",
           },
+          {
+            to: "/docs/blockchain/robinhood/",
+            from: "/docs/category/robinhood/",
+          },
+          {
+            to: "/docs/blockchain/robinhood/robinhood-trades/",
+            from: "/docs/examples/robinhood/robinhood-trades/",
+          },
+          {
+            to: "/docs/blockchain/robinhood/robinhood-transfers/",
+            from: "/docs/examples/robinhood/robinhood-transfers/",
+          },
+          {
+            to: "/docs/blockchain/robinhood/robinhood-meme-coin-launches/",
+            from: "/docs/examples/robinhood/robinhood-meme-coin-launches/",
+          },
+          {
+            to: "/docs/blockchain/robinhood/flap-sh-api/",
+            from: "/docs/examples/robinhood/flap-sh-api/",
+          },
+          {
+            to: "/docs/blockchain/robinhood/robinhood-token-supply/",
+            from: "/docs/examples/robinhood/robinhood-token-supply/",
+          },
 
           {
             to: "/docs/authorisation/how-to-generate",
