@@ -1,5 +1,5 @@
 ---
-title: "Robinhood Trades"
+title: "Robinhood Trades API"
 description: "Query and stream Robinhood token trades and prices with Bitquery Trading APIs. Filter with NetworkBid bid:robinhood for real-time OHLC and volume."
 sidebar_position: 1
 keywords:
@@ -11,7 +11,7 @@ keywords:
   - Latest price for Robinhood tokens
 ---
 
-# Robinhood Trades
+# Robinhood Trades API & Streams
 
 Bitquery exposes **Robinhood** trade and price data through the **Trading** APIs. 
 
