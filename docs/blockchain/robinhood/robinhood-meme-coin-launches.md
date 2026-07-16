@@ -6,6 +6,11 @@ keywords:
   - Robinhood meme coin launches API
   - Robinhood token launch API
   - Robinhood new token created
+  - hood.fun Robinhood API
+  - hood.fun newly created tokens
+  - hood.fun launchpad API
+  - LaunchHood Robinhood API
+  - LaunchHood newly created tokens
   - Flap.sh Robinhood API
   - Flap.sh TokenCreated event
   - Klik Finance Robinhood launches
@@ -21,7 +26,7 @@ keywords:
 
 # Robinhood Meme Coin Launches API
 
-Track **meme coin token launches on Robinhood** with Bitquery GraphQL APIs. This guide shows how to detect newly created tokens from popular Robinhood launchpads and bots — **Flap.sh**, **Klik Finance**, **Bankr Bot**, **Ape.store**, **Bags.fm**, and **Clanker** — using `EVM(network: robinhood)` Events and Transfers cubes.
+Track **meme coin token launches on Robinhood** with Bitquery GraphQL APIs. This guide shows how to detect newly created tokens from popular Robinhood launchpads and bots — **hood.fun**, **LaunchHood**, **Flap.sh**, **Klik Finance**, **Bankr Bot**, **Ape.store**, **Bags.fm**, and **Clanker** — using `EVM(network: robinhood)` Events and Transfers cubes.
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
@@ -68,14 +73,132 @@ Every transfer query on this page is **identical except two values**: the launch
 
 | Protocol | Contract → `Transaction.To` | Mint `Amount` | Queries |
 | --- | --- | --- | --- |
-| **Flap.sh** | `0x26605f322f7ff986f381bb9a6e3f5dab0beaeb09` | `1000000000` | [Events](https://ide.bitquery.io/All-events-from-Flapsh) · [TokenCreated](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated) ([WS](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated---Websocket)) · [Transfers](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data) ([WS](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data---Websocket)) |
-| **Klik Finance** | `0x16cf6788b762ee8969744586ed16fc5705140dd7` | `1000000000` | [Transfers](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers) ([WS](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers---Websocket)) |
+| **hood.fun** | `0x5fcc1df0dc020cf454e742e9a8ae2554c37a452c` | `1000000000` | [Transfers](https://ide.bitquery.io/hoodfun-newly-creaed-tokens) ([WS](https://ide.bitquery.io/hoodfun-newly-creaed-tokens---Websocket)) |
+| **LaunchHood** | `0x62b33a039d289cbda50ebeb72fe4261449e61bcf` | `1000000000` | [Transfers](https://ide.bitquery.io/launchpad-newly-creaed-tokens) ([WS](https://ide.bitquery.io/launchpad-newly-creaed-tokens---Websocket)) |
+| **Flap.sh** | `0x26605f322f7ff986f381bb9a6e3f5dab0beaeb09` | `1000000000` | [Events](https://ide.bitquery.io/All-events-from-Flapsh) · [TokenCreated](https://ide.bitquery.io/Flapsh-Newly-created-tokens-using-logs-TokenCreated) ([WS](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated---Websocket)) · [Transfers](https://ide.bitquery.io/Flapsh-Newly-created-tokens-using-transfer-data) ([WS](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data---Websocket)) |
+| **Klik Finance** | `0x16cf6788b762ee8969744586ed16fc5705140dd7` | `1000000000` | [Transfers](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers) ([WS](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers-websocket)) |
 | **Bankr Bot** | `0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862` | `1000000000` | [Transfers](https://ide.bitquery.io/Bankr-Bot-Newly-created-tokens) ([WS](https://ide.bitquery.io/Bankr-Bot-Newly-created-tokens---Websocket)) |
 | **Ape.store** | `0x6e4910ea5a04376032f6564da9a9e4e88b7a87c1` | `1000000000` | [Transfers](https://ide.bitquery.io/Apestore-Newly-created-tokens) ([WS](https://ide.bitquery.io/Apestore-Newly-created-tokens---Websocket)) |
 | **Bags.fm** | `0xe8cc4431adf8b5a847c113ef0c6af9043219cb37` | `1000000000` | [Transfers](https://ide.bitquery.io/Bagsfm-Newly-created-tokens) ([WS](https://ide.bitquery.io/Bagsfm-Newly-created-tokens---Websocket)) |
 | **Clanker** | `0xd3f2cc1731b7fd17f28798835c2e02f0a1839a94` | `100000000000` | [Transfers](https://ide.bitquery.io/Clanker-Newly-created-tokens) ([WS](https://ide.bitquery.io/Clanker-Newly-created-tokens---Websocket)) |
 
 _WS = WebSocket subscription (real-time stream of the same query)._
+
+---
+
+## hood.fun
+
+**[hood.fun](https://hood.fun/)** is the premier fair-launch memecoin launchpad on the Robinhood network. Every token launches with a fixed **1 billion** supply on a bonding curve, so newly created tokens can be detected as mint transfers from the zero address where `Transaction.To` is the hood.fun contract.
+
+:::note Contract generations
+The current hood.fun launch contract is `0x5fcc1df0dc020cf454e742e9a8ae2554c37a452c`. The previous generation, `0x6a63d96ef77ae569fcb85934cf1bd1ec7fe9b33d`, still has tokens trading — swap the address in `Transaction.To` to query it.
+:::
+
+### hood.fun Newly created tokens
+
+▶️ [Run in IDE](https://ide.bitquery.io/hoodfun-newly-creaed-tokens) · [WebSocket stream](https://ide.bitquery.io/hoodfun-newly-creaed-tokens---Websocket)
+
+```graphql
+{
+  EVM(network: robinhood) {
+    Transfers(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {
+        Transaction: {To: {is: "0x5fcc1df0dc020cf454e742e9a8ae2554c37a452c"}}
+        Transfer: {
+          Amount: {eq: "1000000000"}
+          Sender: {is: "0x0000000000000000000000000000000000000000"}
+        }
+      }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      TransactionStatus {
+        Success
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender
+        Receiver
+        Currency {
+          Name
+          Symbol
+          SmartContract
+          Decimals
+          Fungible
+          Native
+          ProtocolName
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## LaunchHood
+
+**[LaunchHood](https://launchhood.com/)** is a memecoin launchpad on the Robinhood network where every coin lists directly on Uniswap at creation, with a fixed **1 billion** supply. Detect new LaunchHood tokens as mint transfers from the zero address where `Transaction.To` is the LaunchHood factory contract.
+
+### LaunchHood Newly created tokens
+
+▶️ [Run in IDE](https://ide.bitquery.io/launchpad-newly-creaed-tokens) · [WebSocket stream](https://ide.bitquery.io/launchpad-newly-creaed-tokens---Websocket)
+
+```graphql
+{
+  EVM(network: robinhood) {
+    Transfers(
+      orderBy: {descending: Block_Time}
+      limit: {count: 50}
+      where: {
+        Transaction: {To: {is: "0x62b33a039d289cbda50ebeb72fe4261449e61bcf"}}
+        Transfer: {
+          Amount: {eq: "1000000000"}
+          Sender: {is: "0x0000000000000000000000000000000000000000"}
+        }
+      }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+        From
+        To
+      }
+      TransactionStatus {
+        Success
+      }
+      Transfer {
+        Amount
+        AmountInUSD
+        Sender
+        Receiver
+        Currency {
+          Name
+          Symbol
+          SmartContract
+          Decimals
+          Fungible
+          Native
+          ProtocolName
+        }
+      }
+    }
+  }
+}
+```
 
 ---
 
@@ -112,7 +235,7 @@ List event signatures emitted by the Flap.sh contract to discover which logs are
 
 Filter Flap.sh `TokenCreated` events and decode argument values (token address, metadata fields, and related parameters).
 
-▶️ [Run in IDE](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated) · [WebSocket stream](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated---Websocket)
+▶️ [Run in IDE](https://ide.bitquery.io/Flapsh-Newly-created-tokens-using-logs-TokenCreated) · [WebSocket stream](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated---Websocket)
 
 ```graphql
 {
@@ -167,7 +290,7 @@ Filter Flap.sh `TokenCreated` events and decode argument values (token address, 
 
 Track Flap.sh mints as transfers from the zero address with amount `1000000000` in transactions sent to the Flap.sh contract.
 
-▶️ [Run in IDE](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data) · [WebSocket stream](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data---Websocket)
+▶️ [Run in IDE](https://ide.bitquery.io/Flapsh-Newly-created-tokens-using-transfer-data) · [WebSocket stream](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data---Websocket)
 
 ```graphql
 {
@@ -263,7 +386,7 @@ Detect **[Klik Finance](https://klik.finance/)** token launches on Robinhood by 
 
 ### Klik Finance Newly created tokens using transfers
 
-▶️ [Run in IDE](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers) · [WebSocket stream](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers---Websocket)
+▶️ [Run in IDE](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers) · [WebSocket stream](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers-websocket)
 
 ```graphql
 {
@@ -545,7 +668,7 @@ Open any **WebSocket** link in the [contract map](#launchpad-and-bot-contract-ma
 
 ### Which launchpads and bots does this page cover?
 
-Flap.sh, Klik Finance, Bankr Bot, Ape.store, Bags.fm, and Clanker on the Robinhood network. Each has its own contract address and mint amount listed in the contract map.
+hood.fun, LaunchHood, Flap.sh, Klik Finance, Bankr Bot, Ape.store, Bags.fm, and Clanker on the Robinhood network. Each has its own contract address and mint amount listed in the contract map.
 
 ### How do I track a launchpad that isn't listed here?
 
