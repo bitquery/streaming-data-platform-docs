@@ -61,7 +61,7 @@ Flap.sh launches can be detected via decoded **`TokenCreated`** events or via **
 
 Filter Flap.sh `TokenCreated` events and decode argument values (token address, metadata fields, and related parameters).
 
-▶️ [Run in IDE](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated) · [WebSocket stream](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated---Websocket)
+▶️ [Run in IDE](https://ide.bitquery.io/Flapsh-Newly-created-tokens-using-logs-TokenCreated) · [WebSocket stream](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated---Websocket)
 
 ```graphql
 {
@@ -116,7 +116,7 @@ Filter Flap.sh `TokenCreated` events and decode argument values (token address, 
 
 Track Flap.sh mints as transfers from the zero address with amount `1000000000` in transactions sent to the Flap.sh contract.
 
-▶️ [Run in IDE](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data) · [WebSocket stream](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data---Websocket)
+▶️ [Run in IDE](https://ide.bitquery.io/Flapsh-Newly-created-tokens-using-transfer-data) · [WebSocket stream](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data---Websocket)
 
 ```graphql
 {
