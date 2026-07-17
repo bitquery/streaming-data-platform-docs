@@ -71,7 +71,7 @@ Bitquery provides comprehensive cloud data dumps for the following blockchains:
 
 ### [EVM Chains Data Export](https://docs.bitquery.io/docs/cloud/evm/)
 
-Export blockchain data for **Ethereum, BSC, Base, Polygon/Matic, Optimism, Arbitrum**, and other EVM-compatible chains. Includes:
+Export blockchain data for **Ethereum, BSC, Base, Polygon/Matic, Optimism, Arbitrum, Robinhood**, and other EVM-compatible chains. Includes:
 
 - **Blocks** – Block-level metadata and timestamps
 - **Transactions** – Full transaction-level data with gas information

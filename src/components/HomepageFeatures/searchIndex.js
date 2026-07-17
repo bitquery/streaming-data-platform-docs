@@ -194,6 +194,12 @@ export const SEARCH_INDEX = [
     u: "/docs/blockchain/Tron/",
   },
   {
+    t: "Robinhood",
+    s: "Robinhood trades, launches & transfers",
+    g: "Chains",
+    u: "/docs/blockchain/robinhood/",
+  },
+  {
     t: "Supported chains",
     s: "All 40+ networks across V1, V2 & Kafka",
     g: "Chains",

@@ -40,6 +40,7 @@ The following chains are available via the Europe regional endpoint:
 | Optimism | `https://streaming.bitquery.io/graphql` |
 | Tron | `https://streaming.bitquery.io/graphql` |
 | Matic (Polygon) | `https://streaming.bitquery.io/graphql` |
+| Robinhood | `https://streaming.bitquery.io/graphql` |
 
 ## Asia
 
