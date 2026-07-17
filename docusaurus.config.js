@@ -1182,6 +1182,7 @@ const config = {
               { label: "Arbitrum", to: "/docs/blockchain/Arbitrum/" },
               { label: "Optimism", to: "/docs/blockchain/Optimism/" },
               { label: "Tron", to: "/docs/blockchain/Tron/" },
+              { label: "Robinhood", to: "/docs/blockchain/robinhood/" },
               { label: "More networks…", to: "/docs/blockchain/introduction/" },
             ],
           },

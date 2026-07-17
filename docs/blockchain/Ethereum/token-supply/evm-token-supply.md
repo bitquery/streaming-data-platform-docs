@@ -256,6 +256,7 @@ Maintain audit trails of supply changes for regulatory compliance and financial 
 | Arbitrum | `arbitrum`  | Arbitrum One        |
 | Polygon  | `matic`     | Polygon PoS         |
 | Optimism | `optimism`  | Optimism L2         |
+| Robinhood| `robinhood` | Robinhood network   |
 
 ---
 

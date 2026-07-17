@@ -39,7 +39,7 @@ Ask in plain English, get clean rows back. No SQL required.
 | | |
 |---|---|
 | **Endpoint** | [`https://mcp.bitquery.io`](https://mcp.bitquery.io) |
-| **Chains** | Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon (Matic), Tron |
+| **Chains** | Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon (Matic), Tron, Robinhood |
 | **Granularity** | Per-trade rows + pre-aggregated 1m / 5m / 1h / 1d cubes |
 | **Outlier filter** | Built in — just say "skip wash-traded pools" in your prompt |
 | **Latency** | Near real-time, updates as blocks land |
@@ -59,6 +59,7 @@ Live on the MCP today:
 | **Optimism** | Uniswap, Aerodrome, Balancer, PancakeSwap, … |
 | **Polygon (Matic)** | Uniswap, PancakeSwap, Balancer, Polymarket, Seaport, … |
 | **Tron** | SunSwap, SunPump |
+| **Robinhood** | Uniswap (v2/v3/v4), PancakeSwap, Balancer, Aerodrome, Curve, Flap, Bags.fm, … |
 
 Per-chain coverage details live in the [Blockchains section](/docs/blockchain/introduction/).
 

@@ -36,6 +36,7 @@ Our V2 API version with enhanced features and real-time streaming:
 - **[Polygon](https://docs.bitquery.io/docs/blockchain/Matic/)**
 - **[Optimism](https://docs.bitquery.io/docs/blockchain/Optimism/)**
 - **[opBNB](https://docs.bitquery.io/docs/blockchain/opBNB/)**
+- **[Robinhood](https://docs.bitquery.io/docs/blockchain/robinhood/)**
 
 **Non-EVM Chains:**
 - **[Solana](https://docs.bitquery.io/docs/blockchain/Solana/)**

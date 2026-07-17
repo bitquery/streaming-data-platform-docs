@@ -122,6 +122,7 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 ### GraphQL Subscriptions & Kafka Support:
 - **[Ethereum](https://docs.bitquery.io/docs/blockchain/Ethereum/)** & Layer 2s ([Arbitrum](https://docs.bitquery.io/docs/blockchain/Arbitrum/), [Optimism](https://docs.bitquery.io/docs/blockchain/Optimism/), [Base](https://docs.bitquery.io/docs/blockchain/Base/), [Polygon](https://docs.bitquery.io/docs/blockchain/Matic/))
 - **[Binance Smart Chain (BSC)](https://docs.bitquery.io/docs/blockchain/BSC/)**
+- **[Robinhood](https://docs.bitquery.io/docs/blockchain/robinhood/)**
 - **[Solana](https://docs.bitquery.io/docs/blockchain/Solana/)**
 - **[TRON](https://docs.bitquery.io/docs/blockchain/Tron/)**
 - **[TON](https://docs.bitquery.io/docs/blockchain/TON/)** (limited support)

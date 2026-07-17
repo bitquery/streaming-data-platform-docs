@@ -238,6 +238,13 @@ Where enabled, **`matic.broadcasted.*`** topics for standard EVM **`transactions
 
 Where enabled, **`optimism.broadcasted.*`** topics follow the same mapping as **`eth.broadcasted.*`**.
 
+#### Robinhood (`robinhood`)
+
+- `robinhood.transactions.proto` → `ParsedAbiBlockMessage`
+- `robinhood.tokens.proto` → `TokenBlockMessage`
+- `robinhood.dextrades.proto` → `DexBlockMessage`
+- `robinhood.raw.proto` → `BlockMessage`
+
 ### Bitcoin
 
 - `btc.transactions.proto` — decode using Bitquery Bitcoin protobuf definitions in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf).

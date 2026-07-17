@@ -46,7 +46,7 @@ The lake holds the complete, structured history of each supported chain. It cove
 
 **Supported chains:**
 
-- **All EVM / Ethereum chains** (e.g. Ethereum, Base, BNB Chain, Polygon, Arbitrum, Optimism)
+- **All EVM / Ethereum chains** (e.g. Ethereum, Base, BNB Chain, Polygon, Arbitrum, Optimism, Robinhood)
 - **Solana**
 - **Tron**
 - **Bitcoin**
