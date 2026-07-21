@@ -68,7 +68,13 @@ When you stream LetsBonk.fun trades, each message contains:
     Status: {
       Success: true,
       ErrorMessage: null
-    }
+    },
+    Header: {
+      Fee: 5000,
+      FeePayer: "8HqR8D9gHtN1eMJyaX7BN5PmzF5z9KgQzY4nXvFfRD8m",
+      Signer: "8HqR8D9gHtN1eMJyaX7BN5PmzF5z9KgQzY4nXvFfRD8m"
+    },
+    FeeInUsd: 0.00075
   },
   Trade: {
     InstructionIndex: 2,
@@ -133,6 +139,8 @@ When you stream LetsBonk.fun trades, each message contains:
 | `Trade.Buy.Account.Address`      | Buyer's wallet address            |
 | `Trade.Dex.ProgramAddress`       | Raydium LaunchLab program address |
 | `Trade.Market.MarketAddress`     | Market/pool address for the token |
+| `Transaction.Header.Fee`         | Transaction fee in lamports       |
+| `Transaction.FeeInUsd`           | Transaction fee in US dollars     |
 | `Block.Slot`                     | Solana block slot for timing      |
 
 ## Configuration Options

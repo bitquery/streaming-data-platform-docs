@@ -27,7 +27,7 @@ stream:
 
 The transactions stream provides comprehensive transaction information including:
 
-- **Transaction details**: Slot, signature, status, fees
+- **Transaction details**: Slot, signature, status, fees (in native and USD)
 - **Account information**: Signers, accounts, program IDs
 - **Balance updates**: Pre/post balances for all accounts
 - **Parsed instructions**: IDL-parsed program calls with arguments and logs
@@ -56,6 +56,7 @@ Here's an example of the data structure you'll receive:
             ...
       ]
     },
+    "FeeInUsd": 0.00075,
     "TotalBalanceUpdates": [
       {
         "PreBalance": 82844277367,

@@ -28,7 +28,7 @@ stream:
 
 The balance updates stream provides comprehensive balance change information including:
 
-- **Transaction details**: Slot, signature, status, fees
+- **Transaction details**: Slot, signature, status, fees (in native and USD)
 - **Account information**: Signers, token accounts, program IDs
 - **Token context**: Mint addresses, decimals, owners
 - **Balance changes**: Pre/post balances for accounts and token accounts

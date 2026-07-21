@@ -34,6 +34,7 @@ Transactions across all stream types share common elements:
 - `Signature`: The transaction's unique signature
 - `Status`: The execution status (Success/Error)
 - `Header`: Transaction metadata including fees and signers
+- `FeeInUsd`: Equivalent transaction fee in US dollars
 - `Index`: Position within the block
 
 Transactions contain various types of instructions, which are the core of Solana's execution model:

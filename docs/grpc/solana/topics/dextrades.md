@@ -43,7 +43,7 @@ filters:
 
 The DEX trades stream provides comprehensive trade information including:
 
-- **Transaction details**: Slot, signature, status, fees
+- **Transaction details**: Slot, signature, status, fees (in native and USD)
 - **Account information**: Signers, token accounts, program IDs
 - **Token context**: Mint addresses, decimals, owners
 - **Trade specifics**: Amounts, protocols, pools

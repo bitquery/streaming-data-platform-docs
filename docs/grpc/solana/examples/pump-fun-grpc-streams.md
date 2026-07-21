@@ -82,7 +82,8 @@ When you stream Pump.fun trades, each message contains:
       FeePayer: "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
       Signer: "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
       Accounts: [...]
-    }
+    },
+    FeeInUsd: 0.00075
   },
   Trade: {
     InstructionIndex: 2,

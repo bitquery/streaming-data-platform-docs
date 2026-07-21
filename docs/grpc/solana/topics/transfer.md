@@ -27,7 +27,7 @@ stream:
 
 The transfers stream provides comprehensive transfer information including:
 
-- **Transaction details**: Slot, signature, status, fees
+- **Transaction details**: Slot, signature, status, fees (in native and USD)
 - **Account information**: Signers, token accounts, program IDs
 - **Token context**: Mint addresses, decimals, owners, metadata
 - **Transfer specifics**: Amounts, sender/receiver addresses, authority information
