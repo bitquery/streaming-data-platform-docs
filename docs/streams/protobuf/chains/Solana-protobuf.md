@@ -91,24 +91,83 @@ The `solana.tokens.proto` topic uses this message type to share details of:
 
 ### DEX (Decentralized Exchange) Data
 
-The `DexParsedBlockMessage` stream is specialized for decentralized exchange activity:
+The `DexParsedBlockMessage` stream is specialized for decentralized exchange activity. Each transaction in this stream contains `Trades`, `OrderEvents`, and `PoolEvents` arrays, along with transaction-level balance summaries.
 
-- `DexInfo`: Details about the exchange program
+#### DexInfo
 
-  - `ProgramAddress`: Address of the DEX program
-  - `ProtocolName`: Name of the DEX
-  - `ProtocolFamily`: Family of DEX protocols
+Details about the exchange program:
 
-- `DexTradeEvent`: Records of trades executed on DEXs
+- `ProgramAddress`: Address of the DEX program
+- `ProtocolName`: Name of the DEX (e.g., "cp_amm", "pump_amm")
+- `ProtocolFamily`: Family of DEX protocols (e.g., "Meteora", "Pumpswap", "Raydium")
 
-  - `Buy`/`Sell`: Trade sides with amounts and accounts
-  - `Market`: The trading pair information
-  - `Fee`: Transaction fee
-  - `Royalty`: Creator royalties paid
+#### DexTradeEvent
 
-- `PoolLiquidityChangeEvent`: Records changes to liquidity pools
-  - `BaseCurrency`/`QuoteCurrency`: The pool's assets
-  - `ChangeAmount`: Amount added or removed
+Records of trades executed on DEXs, including full instruction-level data:
+
+- `InstructionIndex`: Position of the instruction within the transaction
+- `Dex`: The `DexInfo` for this trade
+- `Market`: The trading pair information
+  - `MarketAddress`: Pool/market address
+  - `BaseCurrency` / `QuoteCurrency`: Detailed currency metadata for both sides of the pair (Name, Symbol, Decimals, MintAddress, MetadataAddress, TokenStandard, Uri, etc.)
+- `Buy` / `Sell`: Both sides of the trade, each containing:
+  - `Amount`: Raw token amount (in the token's smallest unit)
+  - `AmountInUsd`: USD value of the trade side
+  - `Currency`: Detailed token metadata (Name, Symbol, Decimals, MintAddress, MetadataAddress, TokenStandard, etc.)
+  - `Account`: The token account involved (Address, IsSigner, IsWritable) with an optional `Token` sub-object containing `Mint`, `Owner`, `Decimals`, `ProgramId`, and `Supply`
+  - `Order`: Linked DEX order information when the trade fills a specific limit order (see `DexOrder` below)
+- `Fee`: DEX trading fee in the quote currency's smallest unit
+- `Royalty`: Creator royalties paid (in the quote currency's smallest unit)
+- `Instruction`: Full `ParsedIdlInstruction` containing:
+  - `Program`: Parsed IDL program info (Address, Name, Method, Signature, Arguments with Name/Type/Json, and the full IDL JSON)
+  - `AccountNames`: Ordered list of account names from the IDL
+  - `Accounts`: Account details with token sub-objects (Mint, Owner, Decimals, ProgramId, Supply)
+  - `Logs`: Program logs emitted during execution
+  - `BalanceUpdates`: Native SOL balance changes caused by this instruction (with `AccountIndex`, `PreBalance`, `PostBalance`)
+  - `TokenBalanceUpdates`: SPL token balance changes caused by this instruction (with `AccountIndex`, `PreBalance`, `PostBalance`)
+  - `AncestorIndexes`, `CallerIndex`, `ExternalSeqNumber`, `InternalSeqNumber`, `Depth`: Instruction hierarchy and sequencing metadata
+  - `Data`: Raw encoded instruction data
+
+#### DexOrderEvent
+
+Records of DEX order lifecycle events (open, update, cancel). Each event contains:
+
+- `InstructionIndex`: Position of the instruction within the transaction
+- `Type`: Order event type — `OPEN`, `UPDATE`, or `CANCEL`
+- `Dex`: The `DexInfo` for this order
+- `Market`: The trading pair information
+- `Order`: The `DexOrder` details:
+  - `OrderId`: Unique identifier for the order
+  - `BuySide`: Whether this is a buy (true) or sell (false) order
+  - `LimitPrice`: Limit price set for the order
+  - `LimitAmount`: Amount of tokens in the order
+  - `LimitPriceInUsd` / `LimitAmountInUsd`: USD equivalents
+  - `Account`: Token account for the order
+  - `Owner`: Wallet that owns the order
+  - `Payer`: Fee payer for the order transaction
+  - `Mint`: Token mint address
+- `Instruction`: Full `ParsedIdlInstruction` (same structure as in `DexTradeEvent`)
+
+#### PoolLiquidityChangeEvent
+
+Records changes to liquidity pools (adds, removes, swaps that change pool reserves):
+
+- `InstructionIndex`: Position of the instruction within the transaction
+- `Dex`: The `DexInfo` for this pool
+- `Market`: The trading pair information
+- `BaseCurrency` / `QuoteCurrency`: Each side contains:
+  - `ChangeAmount`: Amount added (positive) or removed (negative)
+  - `PostAmount`: Pool balance after the change
+  - `ChangeAmountInUsd` / `PostAmountInUsd`: USD equivalents
+- `Instruction`: Full `ParsedIdlInstruction` (same structure as in `DexTradeEvent`)
+
+#### Transaction-Level Balance Summaries
+
+In addition to per-event balance updates, each `ParsedDexTransaction` includes aggregate balance summaries:
+
+- `TotalBalanceUpdates`: Aggregate native SOL (lamports) balance changes across all instructions in the transaction
+- `TotalTokenBalanceUpdates`: Aggregate SPL/Token-2022 token balance changes across all instructions in the transaction
+- `FeeInUsd`: USD value of the total transaction fee
 
 ### Using This Stream in Python, JavaScript, and Go
 
