@@ -35,13 +35,13 @@ Our V2 API version with enhanced features and real-time streaming:
 - **[Base](https://docs.bitquery.io/docs/blockchain/Base/)**
 - **[Polygon](https://docs.bitquery.io/docs/blockchain/Matic/)**
 - **[Optimism](https://docs.bitquery.io/docs/blockchain/Optimism/)**
-- **[opBNB](https://docs.bitquery.io/docs/blockchain/opBNB/)**
+- **[opBNB](/docs/blockchain/supported-chains/)** (IDE / limited docs)
 - **[Robinhood](https://docs.bitquery.io/docs/blockchain/robinhood/)**
 
 **Non-EVM Chains:**
 - **[Solana](https://docs.bitquery.io/docs/blockchain/Solana/)**
 - **[Tron](https://docs.bitquery.io/docs/blockchain/Tron/)**
-- **[TON](https://docs.bitquery.io/docs/blockchain/TON/)**
+- **[TON](/docs/blockchain/supported-chains/)** (limited support)
 - **[Bitcoin](https://docs.bitquery.io/docs/blockchain/Bitcoin/)**
 - **[Cardano](https://docs.bitquery.io/docs/blockchain/Cardano/)**
 
@@ -107,19 +107,19 @@ Bitquery's dedicated **[Crypto Price API](https://docs.bitquery.io/docs/trading/
 - **Marketplace Integration**: OpenSea, LooksRare, and other platforms
 
 ### **Stablecoin APIs - Specialized Payment Infrastructure**
-Bitquery provides dedicated **[Stablecoin APIs](https://docs.bitquery.io/docs/stablecoin-APIs/)** for comprehensive stablecoin data across multiple blockchains, designed specifically for payment applications, compliance, and financial analytics.
+Bitquery provides dedicated **[Stablecoin APIs](/docs/category/stablecoin-apis/)** for comprehensive stablecoin data across multiple blockchains, designed specifically for payment applications, compliance, and financial analytics.
 
 **Key Features:**
-- **Real-time Price Monitoring**: Track stablecoin [price deviations](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-price-api.md) and arbitrage opportunities
-- **Payment Detection**: Instant identification of incoming [stablecoin transfers](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-payments-api.md)
+- **Real-time Price Monitoring**: Track stablecoin [price deviations](/docs/stablecoin-APIs/stablecoin-price-api/) and arbitrage opportunities
+- **Payment Detection**: Instant identification of incoming [stablecoin transfers](/docs/stablecoin-APIs/stablecoin-payments-api/)
 - **Multi-chain Support**: USDT, USDC, DAI, and other stablecoins across all supported chains
 - **Compliance Tools**: AML/KYC support with transaction monitoring
 - **Cross-chain Analytics**: Unified view of stablecoin movements across ecosystems
 
 **Available APIs:**
-- **[Stablecoin Price API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-price-api.md)** - Real-time price tracking and deviation monitoring
-- **[Stablecoin Payments API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-payments-api.md)** - Payment detection and compliance tools
-- **[Stablecoin Trades API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-trades-api.md)** - Trading data and volume analytics
+- **[Stablecoin Price API](/docs/stablecoin-APIs/stablecoin-price-api/)** - Real-time price tracking and deviation monitoring
+- **[Stablecoin Payments API](/docs/stablecoin-APIs/stablecoin-payments-api/)** - Payment detection and compliance tools
+- **[Stablecoin Trades API](/docs/stablecoin-APIs/stablecoin-trades-api/)** - Trading data and volume analytics
 - **USDT API** - Specialized Tether data across all chains
 
 ### **Mempool Monitoring - Pre-Confirmation Data**
@@ -459,7 +459,7 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 - **[Ethereum APIs](https://docs.bitquery.io/docs/blockchain/Ethereum/)** - Complete EVM ecosystem data
 - **[Solana APIs](https://docs.bitquery.io/docs/blockchain/Solana/)** - High-speed blockchain analytics
 - **[BSC APIs](https://docs.bitquery.io/docs/blockchain/BSC/)** - Binance Smart Chain data
-- **[Trading APIs](https://docs.bitquery.io/docs/trading/)** - Real-time price and trading data
+- **[Trading APIs](/docs/category/trading-apis/)** - Real-time price and trading data
 
 ## Use Cases & Applications
 
@@ -511,7 +511,7 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 
 ### **Documentation & Resources**
 - **[Complete API Documentation](https://docs.bitquery.io/docs/)** - Comprehensive guides for all features
-- **[Code Examples](https://docs.bitquery.io/docs/usecases/)** - Real-world implementation examples
+- **[Code Examples](/docs/category/how-to-guides/)** - Real-world implementation examples
 - **[Video Tutorials](https://docs.bitquery.io/docs/blockchain/Ethereum/)** - Step-by-step guides
 - **[Postman Collection](https://www.postman.com/interstellar-eclipse-270749/workspace/bitquery)** - Ready-to-use API examples
 
@@ -523,8 +523,8 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 ### **Learning Resources**
 - **[Learning Path](https://docs.bitquery.io/docs/start/learning-path/)** - Structured learning from beginner to advanced
 - **[Starter Queries](https://docs.bitquery.io/docs/start/starter-queries/)** - Pre-built queries for common use cases
-- **[GraphQL Guide](https://docs.bitquery.io/docs/graphql/)** - Complete GraphQL reference
-- **[Integration Examples](https://docs.bitquery.io/docs/usecases/)** - Real-world application examples
+- **[GraphQL Guide](/docs/category/building-queries/)** - Complete GraphQL reference
+- **[Integration Examples](/docs/category/how-to-guides/)** - Real-world application examples
 
 ## Next Steps
 
@@ -532,8 +532,8 @@ Ready to start building with blockchain data? Here's your path forward:
 
 1. **[Create Your Account](https://ide.bitquery.io/)** - Get instant access to our platform
 2. **[Run Your First Query](https://docs.bitquery.io/docs/start/first-query/)** - Learn the basics in 5 minutes
-3. **[Explore Blockchain APIs](https://docs.bitquery.io/docs/blockchain/)** - Dive into specific blockchain data
-4. **[Build Real-time Applications](https://docs.bitquery.io/docs/subscriptions/)** - Set up live data streams
+3. **[Explore Blockchain APIs](/docs/blockchain/supported-chains/)** - Dive into specific blockchain data
+4. **[Build Real-time Applications](/docs/category/graphql-subscriptions/)** - Set up live data streams
 5. **[Join Our Community](https://t.me/Bloxy_info)** - Get help and share your projects
 
 

@@ -221,7 +221,7 @@ The payment payload typically contains:
    - The recipient address matches the server's address
    - The transaction is confirmed and not a double-spend
 
-3. **Facilitator Role**: Facilitators monitor the blockchain for payment transactions using [real-time subscriptions](https://docs.bitquery.io/docs/subscriptions/). When they detect a valid payment to a registered server, they notify the server, enabling faster service delivery without waiting for full blockchain confirmation.
+3. **Facilitator Role**: Facilitators monitor the blockchain for payment transactions using [real-time subscriptions](/docs/category/graphql-subscriptions/). When they detect a valid payment to a registered server, they notify the server, enabling faster service delivery without waiting for full blockchain confirmation.
 
 This architecture ensures that servers only deliver services after verifying valid on-chain payments, creating a trustless pay-per-use system.
 
@@ -314,7 +314,7 @@ subscription {
 - **`subscription`**: Uses [GraphQL subscription](https://docs.bitquery.io/docs/subscriptions/subscription) for real-time updates
 - **`EVM(network: base)`**: Monitors the specified network (Base in this example). Change the network parameter to monitor other supported chains
 - **`Transfers`**: Listens for new transfer events matching the filter
-- The subscription will automatically push new payment transactions as they occur on-chain. Learn more about [real-time subscriptions](https://docs.bitquery.io/docs/subscriptions/)
+- The subscription will automatically push new payment transactions as they occur on-chain. Learn more about [real-time subscriptions](/docs/category/graphql-subscriptions/)
 
 ## Payment Analytics for Specific x402 Server
 
@@ -534,7 +534,7 @@ subscription {
 - **`subscription`**: Uses [GraphQL subscription](https://docs.bitquery.io/docs/subscriptions/subscription) for real-time updates
 - **`Solana`**: Monitors the Solana network
 - **`Transfers`**: Listens for new transfer events matching the filter
-- The subscription will automatically push new payment transactions as they occur on-chain. Learn more about [real-time subscriptions](https://docs.bitquery.io/docs/subscriptions/)
+- The subscription will automatically push new payment transactions as they occur on-chain. Learn more about [real-time subscriptions](/docs/category/graphql-subscriptions/)
 
 ## Payment Analytics for x402 Server on Solana
 
@@ -589,7 +589,7 @@ You can run this query [here](https://ide.bitquery.io/Payment-analytics-related-
 - [Ethereum Network Documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/) - Query Ethereum blockchain data
 - [BSC Network Documentation](https://docs.bitquery.io/docs/blockchain/BSC/) - Query BSC blockchain data
 - [GraphQL Query Guide](https://docs.bitquery.io/docs/graphql/query) - Learn how to build GraphQL queries
-- [Real-time Subscriptions](https://docs.bitquery.io/docs/subscriptions/) - Monitor blockchain data in real-time
+- [Real-time Subscriptions](/docs/category/graphql-subscriptions/) - Monitor blockchain data in real-time
 - [Transfer API Documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) - Query ERC-20 token transfers
 - [Solana Transfers](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers) - Query Solana token transfers
 - [GraphQL Filters](https://docs.bitquery.io/docs/graphql/filters) - Advanced filtering techniques

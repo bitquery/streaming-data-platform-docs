@@ -125,7 +125,7 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 - **[Robinhood](https://docs.bitquery.io/docs/blockchain/robinhood/)**
 - **[Solana](https://docs.bitquery.io/docs/blockchain/Solana/)**
 - **[TRON](https://docs.bitquery.io/docs/blockchain/Tron/)**
-- **[TON](https://docs.bitquery.io/docs/blockchain/TON/)** (limited support)
+- **[TON](/docs/blockchain/supported-chains/)** (limited support; see coverage matrix)
 
 ### gRPC Streams:
 - **[Solana](https://docs.bitquery.io/docs/blockchain/Solana/)** (with more blockchains coming soon)

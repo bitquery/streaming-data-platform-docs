@@ -16,8 +16,6 @@ sidebar_label: Overview
 
 These are the patterns we see most often when teams plug the [Bitquery MCP server](https://mcp.bitquery.io) into Claude, Cursor, ChatGPT, or Claude Code. **You don't write SQL** - you ask in plain English, the agent does the rest. Each pattern below shows the kind of question that works and what comes back.
 
-For end-to-end worked answers - including live transaction data and fund flow analysis - see the [examples section](https://docs.bitquery.io/docs/mcp/tracing/examples/).
-
 ---
 
 ## 1. AML/KYC Risk Scoring
@@ -26,15 +24,11 @@ For end-to-end worked answers - including live transaction data and fund flow an
 
 Score an incoming deposit or withdrawal using wallet age, transaction patterns, mixing signals, and known-entity labels. The agent returns a risk score (0-100) and flags suspicious patterns automatically.
 
-**See it live:** [AML Risk Scoring Example](https://docs.bitquery.io/docs/mcp/tracing/examples/#example-1-trace-a-single-payment).
-
 ## 2. Payment Tracing (Source to Destination)
 
 > _"Trace $500K USDT from Binance hot wallet 0x1234... to wallet 0x5678.... Show every hop, intermediate wallets, timing, and the final destination."_
 
 Trace the full path of a single payment from source to final destination across one or more hops. The agent maps every intermediate wallet, any DEX swaps or bridge activity, and identifies if funds reached a CEX or high-risk address.
-
-**See it live:** [Trace a Single Payment](https://docs.bitquery.io/docs/mcp/tracing/examples/#example-1-trace-a-single-payment).
 
 ## 3. Phishing and Fraud Investigation
 
@@ -42,15 +36,11 @@ Trace the full path of a single payment from source to final destination across 
 
 Map the spread of stolen funds from a phishing attack or scam across wallets, DEXs, and chains. Identify if funds were consolidated, swapped, or deposited to an exchange, and cluster related attacker wallets.
 
-**See it live:** [Investigate a Phishing Wallet](https://docs.bitquery.io/docs/mcp/tracing/examples/#example-2-investigate-a-phishing-wallet).
-
 ## 4. Wallet Clustering for Compliance
 
 > _"Wallet 0x123... received funds from multiple sources. Identify all wallets that have sent to or received from this address, and cluster them by likely control."_
 
 Identify related wallets using common-input-output heuristics, behavioral patterns, and timing analysis. The agent clusters wallets likely controlled by the same entity - useful for detecting account farming and money laundering rings.
-
-**See it live:** [CEX Deposit Cluster Analysis](https://docs.bitquery.io/docs/mcp/tracing/examples/#example-6-cex-deposit-cluster-analysis).
 
 ## 5. Stablecoin Movement Monitoring
 
@@ -58,15 +48,11 @@ Identify related wallets using common-input-output heuristics, behavioral patter
 
 Real-time or historical tracking of USDC, USDT, BUSD, and other stablecoins across chains and wallets. Useful for treasury monitoring, flow analysis, and detecting unusual liquidity movement patterns.
 
-**See it live:** [Track Stablecoin Movement](https://docs.bitquery.io/docs/mcp/tracing/examples/#example-3-track-stablecoin-movement).
-
 ## 6. Money Laundering Pattern Detection
 
 > _"Analyze wallet 0x... for layering patterns. Check for rapid mixing, frequent DEX swaps, cross-chain bridging, and rapid consolidation. Score likelihood of layering."_
 
 Identify common money laundering stages (placement, layering, integration) in fund flow patterns. The agent scores layering likelihood based on rapid mixing, frequent swaps, bridge activity, and consolidation velocity.
-
-**See it live:** [Identify Layering Patterns](https://docs.bitquery.io/docs/mcp/tracing/examples/#example-4-identify-layering-patterns).
 
 ## 7. Cross-Chain Bridge Activity
 
@@ -74,15 +60,11 @@ Identify common money laundering stages (placement, layering, integration) in fu
 
 Track when and where assets move across chain bridges (Wormhole, Stargate, LayerZero, etc.). Identify bridge concentration risk and detect round-tripping patterns that may indicate arbitrage or evasion.
 
-**See it live:** [Multi-Chain Fund Flow](https://docs.bitquery.io/docs/mcp/tracing/examples/#example-5-multi-chain-fund-flow).
-
 ## 8. CEX Deposit Clustering
 
 > _"Four wallets all deposited to Binance hot wallet within the same hour. Are these wallets related? Analyze creation dates, sources, and transaction patterns."_
 
 Identify related wallets by finding addresses that all deposit to the same exchange hot wallets. The agent analyzes wallet age, common sources, interaction history, and synchronized deposits to score likelihood of same controller.
-
-**See it live:** [CEX Deposit Cluster Analysis](https://docs.bitquery.io/docs/mcp/tracing/examples/#example-6-cex-deposit-cluster-analysis).
 
 ## 9. Sanctions and OFAC Compliance
 
@@ -147,8 +129,8 @@ The MCP only allows reads. The agent **cannot** delete, insert, drop, or modify 
 | Need                                                                      | Best fit                                                                                                                                                    |
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Conversational forensic analysis, ad-hoc investigations, agent loops      | **MCP** (this server)                                                                                                                                       |
-| Compliance backend, subscription monitoring, mempool data                 | [**GraphQL API**](https://docs.bitquery.io/docs/graphql/coinpath/) and [WebSocket subscriptions](https://docs.bitquery.io/docs/subscriptions/websockets)    |
-| Lowest-latency, highest-throughput streaming for real-time investigations | [**Kafka streams**](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts) and [**gRPC streams**](https://docs.bitquery.io/docs/grpc/introduction) |
-| Transaction forensics, entity matching, AML risk scoring APIs             | [**Coinpath API**](https://docs.bitquery.io/docs/graphql/coinpath/) (GraphQL-based)                                                                         |
+| Compliance backend, subscription monitoring, mempool data                 | [**GraphQL API**](/docs/graphql/query/) and [WebSocket subscriptions](/docs/subscriptions/websockets/)                                                    |
+| Lowest-latency, highest-throughput streaming for real-time investigations | [**Kafka streams**](/docs/streams/kafka-streaming-concepts/) and [**gRPC streams**](/docs/grpc/solana/introduction/)                                      |
+| Transaction forensics, entity matching, AML risk scoring APIs             | [**Coinpath API**](/docs/blockchain/Bitcoin/bitcoin-coinpath-api/) (GraphQL-based)                                                                         |
 
 The MCP and the GraphQL API read the **same dataset**, so anything you discover via MCP is reproducible in GraphQL or your production compliance stream.

@@ -18,7 +18,7 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 
 1. **[Mental Model: Transfers, Events, Calls, and DexTrades](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls)** - Understand when to use each data primitive
 2. **[Understanding Datasets](https://docs.bitquery.io/docs/graphql/dataset/archive)** - Learn about archive, real-time, and combined datasets
-3. **[Basic GraphQL Concepts](https://docs.bitquery.io/docs/graphql/introduction)** - Understand query structure and syntax
+3. **[Basic GraphQL Concepts](/docs/graphql/query/)** - Understand query structure and syntax
 4. **[Authorization](https://docs.bitquery.io/docs/authorization/how-to-generate)** - Set up your access outside our IDE
 
 ## Intermediate (1-2 hours)
@@ -30,8 +30,8 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 ## Advanced (2-4 hours)
 
 1. **[Platform-Specific APIs](https://docs.bitquery.io/docs/blockchain/Solana/)** - Deep dive into Solana, Ethereum, etc.
-2. **[Integration Examples](https://docs.bitquery.io/docs/usecases/)** - Real-world application examples
-3. **[Performance Optimization](https://docs.bitquery.io/docs/graphql/performance)** - Optimize your queries for production
+2. **[Integration Examples](/docs/category/how-to-guides/)** - Real-world application examples
+3. **[Performance Optimization](/docs/graphql/optimizing-graphql-queries/)** - Optimize your queries for production
 4. **[Contributing](https://docs.bitquery.io/docs/contribution-guidelines)** - Help improve the documentation
 
 ## Choose Your Path
@@ -45,13 +45,13 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 ### For Developers
 
 - Begin with **[Your First Query](https://docs.bitquery.io/docs/start/first-query)**
-- Master **[GraphQL Basics](https://docs.bitquery.io/docs/graphql/introduction)**
-- Build **[Custom Applications](https://docs.bitquery.io/docs/usecases/)**
+- Master **[GraphQL Basics](/docs/graphql/query/)**
+- Build **[Custom Applications](/docs/category/how-to-guides/)**
 
 ### For Analysts
 
 - Start with **[Historical Data](https://docs.bitquery.io/docs/graphql/dataset/archive)**
-- Learn **[Aggregation Queries](https://docs.bitquery.io/docs/graphql/aggregation)**
+- Learn **[Aggregation Queries](/docs/graphql/capabilities/aggregated_metrics/)**
 - Explore **[Analytics Examples](/docs/category/how-to-guides/)**
 
 ## Getting Help

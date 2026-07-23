@@ -683,6 +683,44 @@ const config = {
             to: "/docs/streams/protobuf/kafka-protobuf-js",
           },
 
+          // Stale / renamed doc paths
+          {
+            from: "/docs/how-to-guides-index/",
+            to: "/docs/category/how-to-guides/",
+          },
+          {
+            from: "/docs/mcp/tracing/examples/",
+            to: "/docs/mcp/Tracing/overview/",
+          },
+          {
+            from: "/docs/graphql/introduction/",
+            to: "/docs/graphql/query/",
+          },
+          {
+            from: "/docs/graphql/performance/",
+            to: "/docs/graphql/optimizing-graphql-queries/",
+          },
+          {
+            from: "/docs/graphql/aggregation/",
+            to: "/docs/graphql/capabilities/aggregated_metrics/",
+          },
+          {
+            from: "/docs/graphql/coinpath/",
+            to: "/docs/blockchain/Bitcoin/bitcoin-coinpath-api/",
+          },
+          {
+            from: "/docs/blockchain/TON/",
+            to: "/docs/blockchain/supported-chains/",
+          },
+          {
+            from: "/docs/blockchain/opBNB/",
+            to: "/docs/blockchain/supported-chains/",
+          },
+          {
+            from: "/docs/subscriptions/",
+            to: "/docs/category/graphql-subscriptions/",
+          },
+
           //crypto price api redirects
           {
             from: "/docs/trading/price-index/introduction",

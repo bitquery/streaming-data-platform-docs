@@ -53,7 +53,7 @@ Two functions, `split_text` and `send_long_message`, are defined to handle long 
 
 **Step 5: Define WebSocket Code**
 
-The `my_component` function is an asynchronous function that handles the WebSocket connection to Bitquery. You can read more about how to use it [here](https://docs.bitquery.io/docs/start/websocket/)
+The `my_component` function is an asynchronous function that handles the WebSocket connection to Bitquery. You can read more about how to use it [here](/docs/subscriptions/websockets/)
 The below code sends a GraphQL subscription query that listens to server for latest transfers on the Ethereum chain, i.e. it subscribes to the `EVM.Transfers` event.
 
 ```python

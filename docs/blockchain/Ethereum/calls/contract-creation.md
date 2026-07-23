@@ -9,7 +9,7 @@ Smart contract creators can use these queries to track the deployment of their o
 
 ## Subscription to track new smart contract creation in real-time
 
-This subscription will return information on each new smart contract created on Ethereum. You can create a [websocket](https://docs.bitquery.io/docs/start/websocket/) to monitor the same in real-time.
+This subscription will return information on each new smart contract created on Ethereum. You can create a [websocket](/docs/subscriptions/websockets/) to monitor the same in real-time.
 
 ```
 subscription {
