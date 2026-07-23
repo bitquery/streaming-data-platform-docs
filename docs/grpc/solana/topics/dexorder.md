@@ -193,5 +193,5 @@ This package includes all necessary protobuf definitions without requiring manua
 - [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) — Topics and concepts
 - [DEX Trades gRPC](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades/) — DEX swap stream
 - [Copy Trading Bot](https://docs.bitquery.io/docs/grpc/solana/examples/grpc-copy-trading-bot/) — Uses dex_orders
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorisation/) — Token setup
+- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorization/) — Token setup
 

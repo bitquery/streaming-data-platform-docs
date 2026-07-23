@@ -161,4 +161,4 @@ This package includes all necessary protobuf definitions without requiring manua
 - [Pump.fun gRPC Example](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/) — Full Pump.fun app
 - [Copy Trading Bot](https://docs.bitquery.io/docs/grpc/solana/examples/grpc-copy-trading-bot/) — Solana copy trading
 - [Solana DEX Trades (GraphQL)](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades) — WebSocket subscriptions
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorisation/) — Token setup
+- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorization/) — Token setup

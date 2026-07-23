@@ -20,7 +20,7 @@ For live DEX prices and volume after tokens trade on-chain, browse [DEXrabbit's 
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
 :::
 
 <head>
@@ -881,7 +881,7 @@ You may also be interested in:
 - [BSC Mempool Stream ➤](https://docs.bitquery.io/docs/blockchain/BSC/bsc-mempool-stream/)
 - [BSC DEX Trades API ➤](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/)
 - [Kafka Protobuf Streams ➤](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/)
-- [WebSocket Subscriptions ➤](https://docs.bitquery.io/docs/authorisation/websocket/)
+- [WebSocket Subscriptions ➤](https://docs.bitquery.io/docs/authorization/websocket/)
 - [Building a Sniper Bot Tutorial ➤](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 
 ## Need Help?

@@ -37,10 +37,10 @@ const sidebars = {
         description: "Learn about how to generate and use authorization tokens",
       },
       items: [
-        "authorisation/how-to-generate",
-        "authorisation/how-to-use",
-        "authorisation/websocket",
-        "authorisation/usage-api",
+        "authorization/how-to-generate",
+        "authorization/how-to-use",
+        "authorization/websocket",
+        "authorization/usage-api",
       ],
     },
 
@@ -273,7 +273,7 @@ const sidebars = {
               label: "Solana",
               items: [
                 "grpc/solana/introduction",
-                "grpc/solana/authorisation",
+                "grpc/solana/authorization",
 
                 {
                   type: "category",

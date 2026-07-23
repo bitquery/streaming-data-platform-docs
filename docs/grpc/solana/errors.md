@@ -38,7 +38,7 @@ When working with gRPC streams for Solana CoreCast, you may encounter errors. Th
     insecure: false
   ```
 * Check for trailing spaces or missing quotes.
-* [Generate](https://docs.bitquery.io/docs/authorisation/how-to-generate/) a new token if expired.
+* [Generate](https://docs.bitquery.io/docs/authorization/how-to-generate/) a new token if expired.
 
 ---
 

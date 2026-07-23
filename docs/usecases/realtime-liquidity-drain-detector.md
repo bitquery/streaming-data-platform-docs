@@ -28,7 +28,7 @@ The Realtime Liquidity Drain Detector is a Python-based security tool that:
 
 1. **Python 3.8+** installed on your system
 2. **Bitquery Kafka Credentials** - Contact sales via [Telegram](https://t.me/Bloxy_info) or fill out the [form](https://bitquery.io/forms/api) for Kafka access
-3. **Bitquery API Token** - Get your API token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+3. **Bitquery API Token** - Get your API token [here](https://docs.bitquery.io/docs/authorization/how-to-generate/)
 4. Basic understanding of Kafka streams and Python
 
 > **Note:** IDE credentials will not work with Kafka Streams. You need separate Kafka credentials for this tool.

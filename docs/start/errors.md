@@ -9,7 +9,7 @@ This section will guide you through the interpretation of common error messages 
 
 ## Why am I getting a 403 Forbidden error when making a GraphQL request in Python? {#why-am-i-getting-a-403-forbidden-error-when-making-a-graphql-request-in-python}
 
-For **API v2**, Bitquery expects a valid **OAuth token** on the right host: send `Authorization: Bearer <token>` to **`https://streaming.bitquery.io/graphql`** (see [how to use a token](/docs/authorisation/how-to-use/)). A **403** often means the gateway rejected the request—wrong URL, missing/expired token, or headers not passed exactly as in the Python example. For **legacy v1** (`graphql.bitquery.io`), check **IP allowlists and referrers** in your [account dashboard](/docs/ide/account/). If it still fails, open a ticket with the response body and request URL (redact secrets).
+For **API v2**, Bitquery expects a valid **OAuth token** on the right host: send `Authorization: Bearer <token>` to **`https://streaming.bitquery.io/graphql`** (see [how to use a token](/docs/authorization/how-to-use/)). A **403** often means the gateway rejected the request—wrong URL, missing/expired token, or headers not passed exactly as in the Python example. For **legacy v1** (`graphql.bitquery.io`), check **IP allowlists and referrers** in your [account dashboard](/docs/ide/account/). If it still fails, open a ticket with the response body and request URL (redact secrets).
 
 ### ClickHouse Error: 400 Bad Request
 

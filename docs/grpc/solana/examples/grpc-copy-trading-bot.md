@@ -104,7 +104,7 @@ function initializeClient() {
 }
 ```
 
-Refer to [this document](https://docs.bitquery.io/docs/grpc/solana/authorisation/) for any issues related to authorisation.
+Refer to [this document](https://docs.bitquery.io/docs/grpc/solana/authorization/) for any issues related to authorisation.
 
 ### Creating the Stream
 
@@ -415,7 +415,7 @@ amountInRaw: (buyAmount / 100).toString()  // 1% of original
 ### Bitquery Documentation
 
 - [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction)
-- [Authentication Guidelines](https://docs.bitquery.io/docs/grpc/solana/authorisation/)
+- [Authentication Guidelines](https://docs.bitquery.io/docs/grpc/solana/authorization/)
 - [Best Practises for gRPC streams](https://docs.bitquery.io/docs/grpc/solana/best_practices/)
 - [Other Examples](https://docs.bitquery.io/docs/category/examples/)
 - [Error Handling](https://docs.bitquery.io/docs/grpc/solana/errors/)

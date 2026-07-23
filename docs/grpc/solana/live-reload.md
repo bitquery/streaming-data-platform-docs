@@ -449,7 +449,7 @@ When live reload is active, you'll see these messages:
 
 - [Introduction to gRPC Streams](https://docs.bitquery.io/docs/grpc/solana/introduction)
 - [Best Practices](https://docs.bitquery.io/docs/grpc/solana/best_practices)
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorisation)
+- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorization)
 - [Error Handling](https://docs.bitquery.io/docs/grpc/solana/errors)
 
 ## Troubleshooting

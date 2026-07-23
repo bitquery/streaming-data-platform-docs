@@ -21,7 +21,7 @@ Detect suspicious trading on **Polymarket** using on-chain data from Polygon. Th
 Bitquery runs **its own blockchain nodes** and **indexes, decodes, and parses** raw Polygon transactions. That gives you signals the off-chain Polymarket Gamma and Data APIs cannot provide, such as how old a wallet is, where its money came from, and which other wallets share the same funder. These on-chain signals are the foundation of every serious insider-detection and copy-trading tool.
 
 :::note API Key Required
-To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/).
 :::
 
 ---

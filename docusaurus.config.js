@@ -171,6 +171,11 @@ const config = {
             from: "/docs/usecases/sandwitch-detection/",
           },
           {
+            // Category root had no index page; send British spelling URL to the guide.
+            to: "/docs/authorization/how-to-generate/",
+            from: "/docs/authorisation/",
+          },
+          {
             to: "/docs/graphql/dataset/select-blocks/",
             from: "/docs/graphql/dataset/select_blocks/",
           },
@@ -212,11 +217,11 @@ const config = {
             from: "/docs/usecases/MCP/build-a-trading-agent/",
           },
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/ide/authorisation/",
           },
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/category/authorization/",
           },
           {
@@ -245,21 +250,21 @@ const config = {
           },
 
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/ide/authorisation/simple",
           },
 
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/start/authorisation/secure/",
           },
 
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/start/authorisation/",
           },
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/start/authorisation/how-to-generate",
           },
           {
@@ -276,7 +281,7 @@ const config = {
           },
 
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/start/authorisation/simple/",
           },
 
@@ -945,12 +950,24 @@ const config = {
           },
         ],
         createRedirects(existingPath) {
+          const froms = [];
           if (existingPath.startsWith("/docs/schema/evm/")) {
-            return [
+            froms.push(
               existingPath.replace("/docs/schema/evm/", "/docs/evm/"),
-            ];
+            );
           }
-          return undefined;
+          if (existingPath.startsWith("/docs/authorization/")) {
+            froms.push(
+              existingPath.replace(
+                "/docs/authorization/",
+                "/docs/authorisation/",
+              ),
+            );
+          }
+          if (existingPath === "/docs/grpc/solana/authorization/") {
+            froms.push("/docs/grpc/solana/authorisation/");
+          }
+          return froms.length ? froms : undefined;
         },
       },
     ],

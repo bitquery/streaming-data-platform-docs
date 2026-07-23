@@ -19,7 +19,7 @@ keywords: ["Bitquery Usage API", "Bitquery billing API", "API quota", "OAuth2", 
 
 The **Usage API** exposes OAuth2-authenticated endpoints on [account.bitquery.io](https://account.bitquery.io/) so you can **programmatically track billing period status, plan limits, and consumption** for your Bitquery account.
 
-Open the interactive reference and copy a bearer token from **[Authorization → Usage API](https://account.bitquery.io/user/api)**. To create or manage tokens, see [How to Generate a Token](/docs/authorisation/how-to-generate/).
+Open the interactive reference and copy a bearer token from **[Authorization → Usage API](https://account.bitquery.io/user/api)**. To create or manage tokens, see [How to Generate a Token](/docs/authorization/how-to-generate/).
 
 :::caution Keep your token secret
 Authenticate every request with your account bearer token in the `Authorization` header. The token identifies your account — do not expose it in client-side code, public repos, or logs.

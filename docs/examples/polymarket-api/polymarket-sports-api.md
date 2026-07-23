@@ -34,7 +34,7 @@ Bitquery runs **its own blockchain nodes** and **indexes, decodes, and parses** 
 Every query below can be run live by changing `query` to `subscription`. See [Real-Time: GraphQL Subscriptions and Kafka](#real-time-graphql-subscriptions-and-kafka).
 
 :::note API Key Required
-To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/).
 :::
 
 ---

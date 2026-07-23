@@ -54,7 +54,7 @@ The Pump.fun Token Sniffer is a Python-based analysis tool built with Bitquery A
 ## Prerequisites
 
 1. **Python 3.8+** installed on your system
-2. **Bitquery API Token** - Get your API token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+2. **Bitquery API Token** - Get your API token [here](https://docs.bitquery.io/docs/authorization/how-to-generate/)
 3. Basic understanding of Solana blockchain and Pump.fun tokens
 
 ## Installation

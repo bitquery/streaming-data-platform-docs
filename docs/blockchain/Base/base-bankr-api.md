@@ -33,7 +33,7 @@ For the broader DEX schema, see:
 - [Base Token Market Cap API ➤](/docs/blockchain/Base/base-token-marketcap-api)
 
 :::note
-To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token. Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorisation/how-to-generate/).
+To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token. Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/).
 :::
 
 ## Bankr / Doppler Contract Map (Base)

@@ -39,7 +39,7 @@ Our Transaction Balance Tracker APIs track balance changes across different scen
 New to Transaction Balance Tracker? Here's how to get started:
 
 1. **[Create a free account](https://ide.bitquery.io/)** - Get instant access to our GraphQL IDE
-2. **[Generate your API key](https://docs.bitquery.io/docs/authorisation/how-to-generate/)** - Required for API access
+2. **[Generate your API key](https://docs.bitquery.io/docs/authorization/how-to-generate/)** - Required for API access
 3. **[Run your first query](https://docs.bitquery.io/docs/start/first-query/)** - Learn the basics in 5 minutes
 4. **[Explore examples](#ethereum-transaction-balance-tracker-apis)** - Copy-paste ready queries below
 

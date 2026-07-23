@@ -22,7 +22,7 @@ Github Code Repository - [Repository Link](https://github.com/Akshat-cs/Arbitrum
 ### Prerequisites
 
 1. **Node.js** and **npm** installed on your system.
-2. **Bitquery Free Developer Account** with OAuth token (follow instructions [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+2. **Bitquery Free Developer Account** with OAuth token (follow instructions [here](https://docs.bitquery.io/docs/authorization/how-to-generate/)).
 3. **Any Arbitrum Chain supported Wallet** with some Arbitrum ETH for transaction fees and also some WETH as I have used WETH in the video tutorial to make swap. I have used the Bitquery Arbitrum Events API to get the latest created pool which has Token A as WETH with Token Addres `0x82aF49447D8a07e3bd95BD0d56f35241523fBab1`.
 
 - If you want to conduct the swap using different Token then you can change the address in this `Arguments: {startsWith: {Value: {Address: {is: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"}}}}` in tokens.ts file to your Token Address that you want to conduct swaps with.
@@ -47,7 +47,7 @@ Github Code Repository - [Repository Link](https://github.com/Akshat-cs/Arbitrum
 
 1. **Create a `.env` file :**
 
-   This file will contain all the environment variables. Put in your Wallet private key that you are using to conduct swap. And also put in the Bitquery OAuth Token, follow the instructions on how to get it [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+   This file will contain all the environment variables. Put in your Wallet private key that you are using to conduct swap. And also put in the Bitquery OAuth Token, follow the instructions on how to get it [here](https://docs.bitquery.io/docs/authorization/how-to-generate/).
 
    ```javascript
    # Arbitrum MAINNET

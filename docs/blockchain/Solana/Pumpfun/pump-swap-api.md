@@ -23,7 +23,7 @@ For other data points, reach out to [support](https://t.me/Bloxy_info).
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
 :::
 
 - You can also explore [Pump Fun Data documentation ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/)

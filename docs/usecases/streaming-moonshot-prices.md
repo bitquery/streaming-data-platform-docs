@@ -18,7 +18,7 @@ The final output would look something like this
 
 -   Basic knowledge of React and JavaScript.
 -   Node.js installed on your machine.
--   [Bitquery OAuth token.](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+-   [Bitquery OAuth token.](https://docs.bitquery.io/docs/authorization/how-to-generate/)
 
 
 ### Step 1: Setting Up the Project

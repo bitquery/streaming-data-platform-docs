@@ -31,7 +31,7 @@ Make sure you have the following before starting:
 
 1. **Node.js** installed on your system.
 2. A **Bitquery API token** to fetch data from the APIs
-   You can get your API token from Bitquery using these steps [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+   You can get your API token from Bitquery using these steps [here](https://docs.bitquery.io/docs/authorization/how-to-generate/).
 3. Information about the Solana trading pair you want to analyze:
    - **Main Currency Address**: The mint address of the main currency.
    - **Side Currency Address**: The mint address of the side currency.
@@ -49,7 +49,7 @@ Make sure you have the following before starting:
 npm install
 ```
 
-3. Create a `.env` file in the root directory and add your Bitquery API Token, check the steps to get it [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/):
+3. Create a `.env` file in the root directory and add your Bitquery API Token, check the steps to get it [here](https://docs.bitquery.io/docs/authorization/how-to-generate/):
 
 ```
 AUTH_TOKEN = <YourBitqueryApiToken>

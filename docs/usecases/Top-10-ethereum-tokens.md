@@ -20,7 +20,7 @@ Github Code Repository - [Repository Link](https://github.com/Akshat-cs/Top-10-E
 ## Prerequisites
 
 1. **Node.js** and **npm** installed on your system.
-2. **Bitquery Account** with OAuth token (follow instructions [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+2. **Bitquery Account** with OAuth token (follow instructions [here](https://docs.bitquery.io/docs/authorization/how-to-generate/)).
 3. **Git** installed on your pc.
 
 ## Code Walkthrough

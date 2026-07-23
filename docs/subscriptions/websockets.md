@@ -29,7 +29,7 @@ It's important to note that for committed blocks, data will come in portions (by
 
 ## Authorising Websockets
 
-Read [here](https://docs.bitquery.io/docs/authorisation/websocket/) on how to use websockets with OAuth.
+Read [here](https://docs.bitquery.io/docs/authorization/websocket/) on how to use websockets with OAuth.
 
 Here is the link to a Postman collection with samples demonstrating how to use the wss endpoint:
 
@@ -84,7 +84,7 @@ When switching from a regular GraphQL query to a WebSocket subscription in Bitqu
 
 4. **Authentication**  
    - You must authenticate using OAuth or provide your Bitquery API token over the WebSocket connection.  
-   - See [WebSocket authorisation guide](https://docs.bitquery.io/docs/authorisation/websocket/) for details.
+   - See [WebSocket authorisation guide](https://docs.bitquery.io/docs/authorization/websocket/) for details.
 
 5. **Subprotocol**  
    - Your WebSocket client must support either `graphql-ws` or `graphql-transport-ws` subprotocols.    

@@ -117,4 +117,4 @@ This package includes all necessary protobuf definitions without requiring manua
 - [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) — Topics and concepts
 - [Transfers gRPC](https://docs.bitquery.io/docs/grpc/solana/topics/transfer/) — Token transfers
 - [Solana Balance Updates (GraphQL)](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/) — WebSocket subscriptions
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorisation/) — Token setup
+- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorization/) — Token setup

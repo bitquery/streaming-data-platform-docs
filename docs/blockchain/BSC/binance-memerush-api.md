@@ -69,7 +69,7 @@ You may also be interested in:
 ::::note
 To query or stream data via GraphQL outside the Bitquery IDE, you need to generate an API access token.
 
-Follow the steps here to create one: https://docs.bitquery.io/docs/authorisation/how-to-generate/
+Follow the steps here to create one: https://docs.bitquery.io/docs/authorization/how-to-generate/
 ::::
 
 ---

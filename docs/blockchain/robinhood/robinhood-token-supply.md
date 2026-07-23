@@ -21,7 +21,7 @@ Get **token total supply** on the **Robinhood** network with Bitquery's `EVM.Tra
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
 
-Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorisation/how-to-generate/)
+Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 :::tip Related docs

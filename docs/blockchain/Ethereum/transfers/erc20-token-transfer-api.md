@@ -690,7 +690,7 @@ Build comprehensive wallet analysis tools:
 3. **Read Documentation**: Explore our [Getting Started Guide](https://docs.bitquery.io/docs/start/first-query/)
 4. **Check Examples**: See more examples in [Starter Queries](https://docs.bitquery.io/docs/start/starter-queries)
 
-For more information on authentication and API usage, see our [Authorization Guide](https://docs.bitquery.io/docs/authorisation/how-to-use).
+For more information on authentication and API usage, see our [Authorization Guide](https://docs.bitquery.io/docs/authorization/how-to-use).
 
 ## Deterministic Pagination for Backfilling Transfers
 

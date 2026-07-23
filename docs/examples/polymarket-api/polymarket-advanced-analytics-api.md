@@ -19,7 +19,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 This guide shows **GraphQL examples** for deeper **Polymarket** metrics on **Polygon** (`network: matic`): **TVL** of Polymarket, **daily trade aggregates**, **buy vs sell pressure** for a market, **large-trade streaming**, **split/merge settlement** totals, and **top markets by volume**. All examples use **`dataset: realtime`**, which covers about the **last 7 days** of data. Use it together with the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/), [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/), and [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/).
 
 :::note API Key Required
-To run these queries outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+To run these queries outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token](https://docs.bitquery.io/docs/authorization/how-to-generate/).
 :::
 
 :::tip Contract addresses

@@ -10,7 +10,7 @@ This section provides examples of how to implement subscription queries in your 
 
 ## How do I subscribe to live DEX trades using Bitquery WebSocket? {#how-do-i-subscribe-to-live-dex-trades-using-bitquery-websocket}
 
-Use Bitquery’s **GraphQL over WebSocket**: connect to [`wss://streaming.bitquery.io/graphql`](https://docs.bitquery.io/docs/subscriptions/websockets/) with the **`graphql-ws`** or **`graphql-transport-ws`** subprotocol, authenticate as described in [WebSocket authorisation](https://docs.bitquery.io/docs/authorisation/websocket/), then send a **`subscription`** whose root field is your chain API (for example `EVM` or `Solana`) and a **`DEXTrades`** selection. Each new trade matching your `where` clause is pushed as a message. Test the subscription in the [Bitquery IDE](https://ide.bitquery.io) by changing the operation from `query` to `subscription`, then reuse the same document in your client.
+Use Bitquery’s **GraphQL over WebSocket**: connect to [`wss://streaming.bitquery.io/graphql`](https://docs.bitquery.io/docs/subscriptions/websockets/) with the **`graphql-ws`** or **`graphql-transport-ws`** subprotocol, authenticate as described in [WebSocket authorisation](https://docs.bitquery.io/docs/authorization/websocket/), then send a **`subscription`** whose root field is your chain API (for example `EVM` or `Solana`) and a **`DEXTrades`** selection. Each new trade matching your `where` clause is pushed as a message. Test the subscription in the [Bitquery IDE](https://ide.bitquery.io) by changing the operation from `query` to `subscription`, then reuse the same document in your client.
 
 The GraphQL document is the same whether you run it from Python, JavaScript, or any other client; only the WebSocket wiring differs (see the sections below).
 
@@ -110,7 +110,7 @@ The `transport.connect()` function is used to establish a connection to the WebS
 
 ## Implementation Example:Using WebSocket Using JavaScript
 
-Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](https://docs.bitquery.io/docs/authorisation/websocket/)
+Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](https://docs.bitquery.io/docs/authorization/websocket/)
 
 ```javascript
 const { WebSocket } = require("ws");

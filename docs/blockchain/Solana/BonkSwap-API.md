@@ -17,7 +17,7 @@ Need zero-latency BonkSwap data? [Read about our Shred Streams and Contact us fo
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
 :::
 
 import VideoPlayer from "../../../src/components/videoplayer.js";

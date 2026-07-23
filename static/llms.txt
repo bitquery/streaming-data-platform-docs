@@ -9,7 +9,7 @@
 - [Docs home](https://docs.bitquery.io/) — platform overview and navigation
 - [GraphQL IDE](https://ide.bitquery.io/) — run queries in the browser, no setup
 - [First query in 5 minutes](https://docs.bitquery.io/docs/start/first-query/)
-- [API keys & authentication](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+- [API keys & authentication](https://docs.bitquery.io/docs/authorization/how-to-generate/)
 - [MCP Server for AI agents](https://docs.bitquery.io/docs/mcp/mcp-server/)
 
 ## Trading data — prices, trades & OHLCV

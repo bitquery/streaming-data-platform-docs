@@ -14,7 +14,7 @@ In this tutorial we will use Bitquery Subscription queries to fetch latest Pumpf
 Before diving into the tutorial, ensure you have:
 
 1. **AWS Account**: With access to an S3 bucket and all permissions configured for Write Access.
-2. **Bitquery Account**: For generating a token to access the Streaming APIs. Follow [this link](https://docs.bitquery.io/docs/authorisation/how-to-generate/) for token generation.
+2. **Bitquery Account**: For generating a token to access the Streaming APIs. Follow [this link](https://docs.bitquery.io/docs/authorization/how-to-generate/) for token generation.
 3. **Python Environment**: With required libraries installed.
 
 Install required libraries if not already done:
@@ -55,7 +55,7 @@ import websockets
 url = "wss://streaming.bitquery.io/eap?token=your_bitquery_token"
 ```
 
-- Replace `your_bitquery_token` with the token generated from Bitquery ([guide](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+- Replace `your_bitquery_token` with the token generated from Bitquery ([guide](https://docs.bitquery.io/docs/authorization/how-to-generate/)).
 
 #### **4. Writing the Subscription Query**
 

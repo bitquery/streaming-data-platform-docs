@@ -118,7 +118,7 @@ export async function fetchHistoricalData(from) {
 ```
 
 - **axios.post**: Sends a POST request to Bitquery's streaming endpoint with the GraphQL query and an authorization token.
-- **Authorization**: Token is stored securely in `configs.json`. You can generate one by following [these instructions](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+- **Authorization**: Token is stored securely in `configs.json`. You can generate one by following [these instructions](https://docs.bitquery.io/docs/authorization/how-to-generate/).
 
 ### Data Processing
 

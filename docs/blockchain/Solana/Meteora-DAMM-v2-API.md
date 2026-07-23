@@ -371,7 +371,7 @@ query MyQuery {
 - [Solana Token Holders API](https://docs.bitquery.io/docs/blockchain/Solana/token-holders/)
 - [Real-time Solana Data Streams](https://docs.bitquery.io/docs/streams/real-time-solana-data/)
 - [GraphQL Reference](https://docs.bitquery.io/docs/graphql-reference/)
-- [API Authorization](https://docs.bitquery.io/docs/authorisation/how-to-use/)
+- [API Authorization](https://docs.bitquery.io/docs/authorization/how-to-use/)
 
 ## Support
 

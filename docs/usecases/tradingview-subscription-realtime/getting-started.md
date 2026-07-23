@@ -40,7 +40,7 @@ Come back here when something is unclear—especially [Key concepts](#key-concep
 
 Before you open [Getting Historical Data](/docs/usecases/tradingview-subscription-realtime/historical_OHLC/), confirm you have:
 
-- A **Bitquery** account and **OAuth** token with streaming access ([how to generate a token](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+- A **Bitquery** account and **OAuth** token with streaming access ([how to generate a token](https://docs.bitquery.io/docs/authorization/how-to-generate/)).
 - **TradingView Advanced Charts** approved and the `charting_library` files available locally (see [Prerequisites](#prerequisites)).
 - **Node.js 16+** installed.
 
@@ -107,7 +107,7 @@ Aggregated OHLC from any provider can have **open ≠ previous close**. This tut
 ### Must have
 
 - **Node.js 16+** (18 LTS is a safe choice).
-- A **Bitquery account** and an **OAuth token** with access to streaming (see [authorisation](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+- A **Bitquery account** and an **OAuth token** with access to streaming (see [authorisation](https://docs.bitquery.io/docs/authorization/how-to-generate/)).
 - **TradingView Advanced Charts** access: you must **apply** and receive their library; it is not optional for this integration path.
 
 ## Architecture overview

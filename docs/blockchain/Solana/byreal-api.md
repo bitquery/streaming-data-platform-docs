@@ -20,7 +20,7 @@ Need zero-latency Byreal data? [Read about our Shred Streams and Contact us for 
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
 :::
 
 <head>
@@ -540,4 +540,4 @@ items={[
 - [Traders API](https://docs.bitquery.io/docs/trading/crypto-trades-api/traders-api)
 - [Historical Solana aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/)
 - [Real-time Solana Data Streams](https://docs.bitquery.io/docs/streams/real-time-solana-data/)
-- [API Authorization](https://docs.bitquery.io/docs/authorisation/how-to-use/)
+- [API Authorization](https://docs.bitquery.io/docs/authorization/how-to-use/)

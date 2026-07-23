@@ -24,7 +24,7 @@ Regardless of how you obtain your token, whether generated directly in the IDE o
 
 - You attach the token in the URL `https://streaming.bitquery.io/graphql?token=ory_at_...`
 
-For the `wss` endpoint, the 2nd method is the only way, read more [here](https://docs.bitquery.io/docs/authorisation/websocket/)
+For the `wss` endpoint, the 2nd method is the only way, read more [here](https://docs.bitquery.io/docs/authorization/websocket/)
 
 Below is an example in Python that mentions the token in the header.
 

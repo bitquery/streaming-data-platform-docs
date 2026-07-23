@@ -216,7 +216,7 @@ This function sets up a WebSocket connection to the Bitquery streaming endpoint.
 
 ### Main Function
 
-In this function we will pass the OAuth token. The best practise would be to include it as an environment variable, but for the sake of this tutorial it has been hard coded. You can generate a token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+In this function we will pass the OAuth token. The best practise would be to include it as an environment variable, but for the sake of this tutorial it has been hard coded. You can generate a token [here](https://docs.bitquery.io/docs/authorization/how-to-generate/)
 
 #### Imports
 ```rust
