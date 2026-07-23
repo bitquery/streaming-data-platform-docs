@@ -106,10 +106,10 @@ $request->setBody('{"query":"subscription {\\n  EVM(mempool: true) {\\n    DEXTr
 $response = $request->send();
 $responseBody = $response->getBody();
 $responseData = json_decode($responseBody, true);
-$sandwitchOpportunityData = $responseData['data']['EVM']['DEXTrades']
+$sandwichOpportunityData = $responseData['data']['EVM']['DEXTrades']
 ```
 
-The code retrieves an array of necessary data to execute trade from the response data and stores it in the sandwitchOpportunityData variable.
+The code retrieves an array of necessary data to execute trade from the response data and stores it in the sandwichOpportunityData variable.
 
 ###  Building the webpage
 The code then displays the retrieved data in a PHP webpage built using basic HTML. 
@@ -120,7 +120,7 @@ echo '<html><body>';
 echo '<h1>Sandwich MEV Opportunities</h1>';
 echo '<h2>Possibilities on EVM chains</h2>';
 echo '<pre>';
-echo formatArrayAsTable($sandwitchOpportunityData);
+echo formatArrayAsTable($sandwichOpportunityData);
 echo '</pre>';
 echo '</body></html>';
 ```
@@ -204,7 +204,7 @@ Make sure that all the above code snippets lies within the php tag shown below.
 
 ## Here's how it looks 
 
-<video controls loop muted playsInline width="100%" src="/img/sandwitch.mp4"></video>
+<video controls loop muted playsInline width="100%" src="/img/sandwich.mp4"></video>
 
 
 If you want to build up query from scratch you are welcome or you can use the [premade examples](https://ide.bitquery.io/explore/All%20queries) as well.

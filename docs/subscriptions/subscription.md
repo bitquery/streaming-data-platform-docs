@@ -29,9 +29,9 @@ When creating queries for GraphQL subscriptions, here are some tips to consider:
 
 4.  **Modifying Subscriptions Does Not Work**: If you try to modify a running subscription, it will end the subscription.
 
-In addition, optimizing your queries can significantly enhance the performance of your subscriptions. For more insights on how to optimize your websocket queries, go [here](/docs/graphql/optimizing-graphql-queries.md).
+In addition, optimizing your queries can significantly enhance the performance of your subscriptions. For more insights on how to optimize your websocket queries, go [here](/docs/graphql/optimizing-graphql-queries/).
 
-Subscriptions are also priced using our point-based system. Read about it [here](/docs/ide/points.md)
+Subscriptions are also priced using our point-based system. Read about it [here](/docs/ide/points/)
 
 ## Default Parameters (GraphQL v2)
 
@@ -43,7 +43,7 @@ GraphQL v2 applies the following default to subscriptions. You can override it b
 
 Each subscription message returns at most 800 items by default. Override this by specifying a different `limit` in your subscription filters if you need a different batch size.
 
-For **default success and other filters** (e.g. only successful transactions, calls, events, transfers, DEX trades; Trade API defaults), see [Default filters (GraphQL v2)](/docs/graphql/query.md#default-filters-graphql-v2) in Query Principles. For default limits on **queries**, see [Limits](/docs/graphql/limits.md).
+For **default success and other filters** (e.g. only successful transactions, calls, events, transfers, DEX trades; Trade API defaults), see [Default filters (GraphQL v2)](/docs/graphql/query/#default-filters-graphql-v2) in Query Principles. For default limits on **queries**, see [Limits](/docs/graphql/limits/).
 
 ## Creating Multiple Subscriptions in one Websocket
 

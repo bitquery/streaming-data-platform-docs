@@ -121,6 +121,6 @@ Now we can check the UI and test the project by visiting `localhost:3000`.
 
 This is how the real-time Balance Tracker UI looks. You can enter any wallet address of your choice and track its activities, by tracking its Ethereum Balance changes in real-time.
 
-![Balance Tracker](../../../static/img/real_time_balance_tracker_demo.png)
+![Balance Tracker](/img/real_time_balance_tracker_demo.png)
 
 To avoid redundancy, it updates the balance every 10 seconds.

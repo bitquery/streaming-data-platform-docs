@@ -83,18 +83,17 @@ const config = {
   scripts: [
     // Must load before any script that calls `window.gtag` (see gtag-stub.js).
     { src: "/js/gtag-stub.js" },
-
-    {
-      src: "https://www.chatbase.co/embed.min.js",
-      async: true,
-      id: "Vz0cwoEYRJW6n5B2JeSeu",
-      domain: "www.chatbase.co",
-    },
-
-    // {
-    //   src: "/js/chatbase-open.js", // Custom script to auto-open Chatbase
-    //   defer: true,
-    // },
+    // Chat widget only in production builds (same gate as gtag/GTM).
+    ...(enableAnalytics
+      ? [
+          {
+            src: "https://www.chatbase.co/embed.min.js",
+            async: true,
+            id: "Vz0cwoEYRJW6n5B2JeSeu",
+            domain: "www.chatbase.co",
+          },
+        ]
+      : []),
   ],
 
   plugins: [
@@ -201,6 +200,10 @@ const config = {
           {
             to: "/docs/blockchain/Arbitrum/",
             from: "/docs/blockchain/Arbitrum/Overview/",
+          },
+          {
+            to: "/docs/category/capabilities/",
+            from: "/docs/graphql/capabilities/patterns/",
           },
           {
             to: "/docs/graphql/dataset/select-blocks/",

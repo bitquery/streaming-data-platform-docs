@@ -5,7 +5,7 @@ description: "Bitquery cloud data docs: How to Fetch Ethereum Data with AppSync 
 ---
 # How to Fetch Ethereum Data with AppSync and AWS Lambda
 
-We will be using Lambda functions to use Ethereum data from [S3 buckets](/docs/cloud/evm.md) with Appsync.
+We will be using Lambda functions to use Ethereum data from [S3 buckets](/docs/cloud/evm/) with Appsync.
 S3 buckets often store sensitive or valuable data. By using AWS Lambda as an intermediary, you can enforce access control and implement specific permissions logic before retrieving data from the S3 bucket. This adds an extra layer of security to your data access.
 
 Lambda functions allow you to implement custom logic or preprocessing steps before fetching data from S3. This could involve data transformations, validations, or any other custom operations required before responding to the GraphQL query.
@@ -13,7 +13,7 @@ Lambda functions allow you to implement custom logic or preprocessing steps befo
 
 ### Prerequisites:
 1. An AWS account with permissions to access AWS AppSync and Lambda.
-2. Existing Lambda function(s) to connect with AppSync. Read more on how to create Lambda function for blockchain data [here](/docs/cloud/examples/lambda-functions.md)
+2. Existing Lambda function(s) to connect with AppSync. Read more on how to create Lambda function for blockchain data [here](/docs/cloud/examples/lambda-functions/)
 
 ### Steps:
 

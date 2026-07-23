@@ -208,4 +208,4 @@ plotly
 
 The final product looks like the image given below.
 
-![Solana Wash Trading Dashboard](../../../static/img/wash_dashboard.png)
+![Solana Wash Trading Dashboard](/img/wash_dashboard.png)

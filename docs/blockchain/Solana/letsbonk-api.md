@@ -171,7 +171,7 @@ BondingCurveProgress = 100 - (((balance - 206900000) \* 100) / 793100000)
 
 - **Balance Retrieval**:
   - The `balance` is the token balance at the market address.
-  - Use this query to fetch the balance and then we use `espressions` to calculate the bonding curve progress percentage in the query itself: [Query Link](https://ide.bitquery.io/bonding-curve-progress-percentage-of-a-letsbonkfun-token).
+  - Use this query to fetch the balance and then we use `expressions` to calculate the bonding curve progress percentage in the query itself: [Query Link](https://ide.bitquery.io/bonding-curve-progress-percentage-of-a-letsbonkfun-token).
 
 <details>
   <summary>Click to expand GraphQL query</summary>

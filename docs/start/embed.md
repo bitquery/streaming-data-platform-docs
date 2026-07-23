@@ -21,6 +21,6 @@ You will see the code snippet and the selection of languages and libraries to us
 
 Select your programming language and run the code in your application.
 
-Note that you have to use your [OAuth key](/docs/authorization/how-to-generate.md). [IDE](/docs/start/first-query/) automatically
+Note that you have to use your [OAuth key](/docs/authorization/how-to-generate/). [IDE](/docs/start/first-query/) automatically
 substituted it for you in the code, but in production environment you may need to change it
 to another one, potentially with the [paid plan](/docs/ide/paid).

@@ -44,10 +44,10 @@ Filtering options are basic, so you may process much more data than you need, dr
 People are asking questions on Stack Exchange about custom filtering options in Geyser, which Bitquery provides with just too much ease.
 
 **[Ref 1:](https://solana.stackexchange.com/questions/9779/geyser-support-for-events)**  
-![Stack Exchange question on Geyser Filtering - 1](../../static/img/streams/question-1-streams.png)
+![Stack Exchange question on Geyser Filtering - 1](/img/streams/question-1-streams.png)
 
 **[Ref 2:](https://solana.stackexchange.com/questions/18663/how-to-filter-raydium-pool-with-geyser)**  
-![Stack Exchange question on Geyser Filtering - 2](../../static/img/streams/question-2-streams.png)
+![Stack Exchange question on Geyser Filtering - 2](/img/streams/question-2-streams.png)
 
 ## Bitquery: A Powerful Alternative
 
@@ -129,7 +129,7 @@ Bitquery’s Kafka streams are a unique product that provides ultra-low latency 
 
 Kafka streams deliver sub-second latency, crucial for high-frequency trading where Solana processes $25+ billion in daily volume. Access to unconfirmed transactions provides early market signals before block finalization. Latency goes to as low as 4–5ms.
 
-![Kafka Latency Go test results](../../static/img/streams/kafka-latency-go-test.png)
+![Kafka Latency Go test results](/img/streams/kafka-latency-go-test.png)
 
 ### Enterprise Scalability
 

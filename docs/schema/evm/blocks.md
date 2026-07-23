@@ -30,7 +30,7 @@ description: "Bitquery schema reference for Blocks: fields, types, and query pat
 
 Blocks API provide details on blocks.
 
-You can use different [filters](docs/graphql/filters.mdx) to query data from different dimensions. You can find more examples [here](/docs/blockchain/Ethereum/blocks/blocks-api/)
+You can use different [filters](/docs/graphql/filters/) to query data from different dimensions. You can find more examples [here](/docs/blockchain/Ethereum/blocks/blocks-api/)
 
 Let's see an example of Blocks API to get the latest 10 blocks on Ethereum blockchain.
 

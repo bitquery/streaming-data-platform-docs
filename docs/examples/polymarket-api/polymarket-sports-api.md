@@ -474,7 +474,7 @@ Variables:
 
 You can checkout the above data in more intuitive form on [DexRabbit](https://dexrabbit.bitquery.io/polymarket-predictions/sports/cricket?tab=volume).
 
-![Cricket Markets by Liquidity](../../../static/img/dexrabbit/cricket-volume.png)
+![Cricket Markets by Liquidity](/img/dexrabbit/cricket-volume.png)
 
 ## Top Cricket Markets by Liquidity
 
@@ -529,7 +529,7 @@ Variables:
 
 You can checkout the above data in more intuitive form on [DexRabbit](https://dexrabbit.bitquery.io/polymarket-predictions/sports/cricket?tab=liquidity).
 
-![Cricket Markets by Liquidity](../../../static/img/dexrabbit/cricket-liquidity.png)
+![Cricket Markets by Liquidity](/img/dexrabbit/cricket-liquidity.png)
 
 ## Latest Sports Markets Created
 
