@@ -287,7 +287,7 @@ The query counterpart to the stream above — the most recent Bags trades across
 ```
 
 :::tip Query ⇄ Stream
-Every query on this page can be turned into a live stream — switch the operation type from `query` to `subscription` in the Bitquery IDE (and drop `orderBy`/`limit`, which don't apply to subscriptions).
+Every query on this page can be turned into a live stream — switch the operation type from `query` to `subscription` in the Bitquery IDE (and drop `orderBy`/`limit`, which don't apply to subscriptions). Over WebSocket, connect to `wss://streaming.bitquery.io/graphql?token=YOUR_TOKEN` with the `graphql-transport-ws` subprotocol — see [WebSocket authentication](/docs/authorization/websocket/).
 :::
 
 ---
@@ -349,7 +349,7 @@ Scope trades to a single Bags token with `Pair.Token.Address`. This example uses
 
 ## Trades by a Trader on Bags
 
-Track all Bags trades made by a specific wallet by filtering on `Trader.Address`.
+Track all Bags trades made by a specific wallet by filtering on `Trader.Address`. Replace the example with any wallet address.
 
 ```graphql
 {
@@ -358,7 +358,7 @@ Track all Bags trades made by a specific wallet by filtering on `Trader.Address`
       limit: {count: 50}
       orderBy: {descending: Block_Time}
       where: {
-        Trader: {Address: {is: "0x00a60b9760a4aa1a2fd6388b5cb6295f4c90cee0"}}
+        Trader: {Address: {is: "0x80f173cff2e585d1156f9a96b6195939ac1ba643"}}
         Pair: {Market: {ProtocolFamily: {is: "Bags"}}}
       }
     ) {
