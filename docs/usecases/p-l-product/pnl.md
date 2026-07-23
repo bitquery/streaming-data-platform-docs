@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Calculating Profit or Loss Over Time"
-description: "This is the first step, where we calculate the Weighted Average of Buy Price(WABP) by getting all the buy trades of the token."
+description: "Build Calculating Profit or Loss Over Time: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Calculating Profit or Loss Over Time
 

@@ -1,6 +1,6 @@
 ---
 title: "DEXPools Cube on EVM Chains"
-description: "Learn the Bitquery EVM DEXPools cube — pool state, liquidity fields, filters, and example queries."
+description: "DEXPools Cube on EVM Chains: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. See examples in the Bitquery IDE."
 ---
 # DEXPools Cube on EVM Chains
 

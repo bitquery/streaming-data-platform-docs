@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
-title: "App"
-description: "App with Bitquery GraphQL APIs — queries, streams, and examples."
+title: "NFT Portfolio Tracker App Setup"
+description: "Configure the React app shell for a Bitquery NFT portfolio tracker, including routes, layout, and API authentication setup."
 ---
 # App 
 

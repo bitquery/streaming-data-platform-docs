@@ -1,6 +1,6 @@
 ---
 title: "Tron Fees API"
-description: "Query and analyze Tron transaction fees using Bitquery’s Tron Fees API. Get data on DEX trades, wallet transfers, and total account fees"
+description: "Tron Fees API: analyze Tron transaction fees and costs with Bitquery GraphQL queries and streams. Scale further with Kafka or gRPC streams."
 ---
 # Tron Fees API
 

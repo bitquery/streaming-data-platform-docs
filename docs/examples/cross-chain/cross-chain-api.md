@@ -1,6 +1,6 @@
 ---
 title: "NFTs Tracking Across Chains"
-description: "Bitquery example queries: NFTs Tracking Across Chains."
+description: "NFTs Tracking Across Chains: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. See examples in the Bitquery IDE."
 ---
 # NFTs Tracking Across Chains
 

@@ -1,6 +1,6 @@
 ---
-title: "Meteora API - DYN"
-description: "Access real-time and historical data for Meteora DYN on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders"
+title: "Solana Meteora Dyn API"
+description: "Solana Meteora Dyn API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Keep queries fast with indexed filters."
 ---
 # Meteora API - DYN
 

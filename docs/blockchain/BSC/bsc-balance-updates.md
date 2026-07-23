@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "BSC Balance Updates API"
-description: "Learn how to get historical & real time balance & balance updates of a BSC address using Bitquery."
+description: "BSC Balance Updates API: fetch current and historical BNB Chain balances with Bitquery GraphQL balance queries. Scale further with Kafka or gRPC streams."
 ---
 # BSC Balance Updates API
 

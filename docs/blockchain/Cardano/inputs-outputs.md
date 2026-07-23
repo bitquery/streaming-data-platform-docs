@@ -1,7 +1,7 @@
 ---
-title: Cardano Inputs and Outputs API - UTXO Data & Address Balances
+title: "Cardano Inputs and Outputs API"
 sidebar_label: Cardano Inputs & Outputs API
-description: Query Cardano UTXO inputs and outputs to reconstruct address balances, list transfers in a date range, and build wallet activity feeds via Bitquery GraphQL.
+description: "Cardano Inputs and Outputs API: query and stream Cardano on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 keywords:
   - Cardano inputs outputs API
   - Cardano UTXO API

@@ -1,6 +1,6 @@
 ---
 title: "Stablecoin Transfers API"
-description: "Bitquery stablecoin API docs: Stablecoin Transfers API."
+description: "Stablecoin Transfers API using Bitquery stablecoin APIs for prices, transfers, payments, and cross-chain monitoring workflows."
 ---
 # Stablecoin Transfers API
 

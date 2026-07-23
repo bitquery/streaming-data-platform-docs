@@ -1,6 +1,6 @@
 ---
-title: "BSC Transfers API"
-description: "Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers"
+title: "BNB Chain Transfers API"
+description: "BNB Chain Transfers API: monitor BNB Chain native and token transfers in real time with Bitquery GraphQL APIs. Includes filters and field selection tips."
 ---
 # BSC Transfers API
 

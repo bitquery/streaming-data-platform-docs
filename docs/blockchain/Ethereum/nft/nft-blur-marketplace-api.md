@@ -1,7 +1,7 @@
 ---
 sidebar_position: 8
 title: "NFT Blur MarketPlace API"
-description: "The NFT Blur Marketplace API provides a wide range of data related to the BLUR NFT Marketplace. With this API, We can access data on the latest traded NFTs, buy-sell activity of specific NFT tokens, top buyers of NFTs, specific buyer statistics for NFTs, NFT loan transactions, loan history,…"
+description: "NFT Blur MarketPlace API: track Ethereum NFT trades, ownership, and metadata with Bitquery GraphQL and streams. Covers archive history and realtime data."
 ---
 # NFT Blur MarketPlace API
 

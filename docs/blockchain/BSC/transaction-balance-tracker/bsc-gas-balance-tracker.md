@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "BSC Gas Balance Tracker"
-description: "Learn how to track BSC Gas-related balance changes, transaction fee rewards, Gas Fee Spent and Gas Fee returned  using Bitquery."
+description: "BSC Gas Balance Tracker: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions. Works with WebSocket live subscriptions."
 ---
 # BSC Gas Balance Tracker
 

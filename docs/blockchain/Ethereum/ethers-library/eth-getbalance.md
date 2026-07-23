@@ -1,6 +1,6 @@
 ---
-title: "eth_getBalance"
-description: "Retrieve the current balance of any Ethereum address using the eth_getBalance API"
+title: "Ethereum Eth Getbalance API"
+description: "Ethereum Eth Getbalance API: fetch current and historical Ethereum balances with Bitquery GraphQL balance queries. Works with WebSocket live subscriptions."
 ---
 # eth_getBalance
 

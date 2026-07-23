@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
-title: "Matic Uniswap API"
-description: "Get on-chain data of any Uniswap Matic token through our Uniswap API"
+title: "Polygon Matic Uniswap API"
+description: "Polygon Matic Uniswap API: query Polygon Uniswap trades, pools, and prices with Bitquery GraphQL DEX APIs. Copy GraphQL snippets for production apps."
 ---
 import FAQ from "@site/src/components/FAQ";
 

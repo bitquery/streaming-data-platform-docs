@@ -2,7 +2,7 @@
 sidebar_position: 5
 sidebar_label: Multi-Chain Trading Data Streams
 title: Multi-Chain Trading Data Streams (Protobuf)
-description: Kafka topics trading.prices and trading.trades—not tied to one network. Credentials, docs links, and schema references match Kafka streaming concepts.
+description: "Multi-Chain Trading Data Streams (Protobuf) with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
 ---
 # Multi-Chain Trading Data Streams (Protobuf)
 

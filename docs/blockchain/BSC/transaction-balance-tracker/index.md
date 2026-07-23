@@ -1,6 +1,6 @@
 ---
 title: BSC Transaction Balance Tracker API
-description: Access comprehensive BSC Transaction Balance Tracker APIs for real-time balance updates, validator tracking, miner rewards, MEV analysis, and self-destruct monitoring. GraphQL API with subscriptions.
+description: "BSC Transaction Balance Tracker API: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions."
 slug: /blockchain/BSC/transaction-balance-tracker/
 keywords:
   - BSC Transaction Balance Tracker

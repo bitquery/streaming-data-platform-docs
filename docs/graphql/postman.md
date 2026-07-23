@@ -1,6 +1,6 @@
 ---
 title: "Bitquery GraphQL in Postman"
-description: "Call Bitquery GraphQL APIs from Postman with auth headers and example requests."
+description: "Bitquery GraphQL in Postman in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
 # Accessing Queries on Postman
 

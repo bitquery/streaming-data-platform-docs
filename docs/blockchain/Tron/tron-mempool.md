@@ -1,6 +1,6 @@
 ---
 title: "Tron Mempool API"
-description: "Get Mempool data through our powerful and highly scalabe Mempool API. Access all information about pricing history, Tron Mempool transactions, and Mempool trades"
+description: "Tron Mempool API: watch Tron pending transactions before confirmation with Bitquery GraphQL subscriptions. Built for traders and analytics teams."
 ---
 # Tron Mempool API
 

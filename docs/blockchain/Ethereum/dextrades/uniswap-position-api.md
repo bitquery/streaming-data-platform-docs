@@ -1,6 +1,6 @@
 ---
 title: "Uniswap V3 Position API - Track Liquidity Positions"
-description: "Track Uniswap V3 NFT positions, monitor liquidity changes, position creation, and position management using Bitquery's Position API."
+description: "Uniswap V3 Position API - Track Liquidity Positions: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams."
 sidebar_label: Uniswap v3 LP Positions
 ---
 # Uniswap V3 Position API - Track Liquidity Positions

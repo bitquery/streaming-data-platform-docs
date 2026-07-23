@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: "Building with WebSockets: Code Sample in Rust"
-description: "Bitquery GraphQL subscriptions: Building with WebSockets: Code Sample in Rust."
+description: "Building with WebSockets: Code Sample in Rust using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
 # Building with WebSockets: Code Sample in Rust
 

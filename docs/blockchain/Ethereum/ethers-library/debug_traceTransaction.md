@@ -1,6 +1,6 @@
 ---
 title: "debug_traceTransaction"
-description: "Trace the execution of a specific transaction on the Ethereum blockchain using the debug_traceTransaction API"
+description: "debug_traceTransaction: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 ---
 # debug_traceTransaction
 

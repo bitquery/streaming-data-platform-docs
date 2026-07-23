@@ -1,6 +1,6 @@
 ---
 title: "Tron Transactions API"
-description: "Retrieve comprehensive details of historical and realtime Tron transactions, including internal transactions, external transactions, and token transfers for any address or contract"
+description: "Tron Transactions API: query and stream Tron on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 ---
 # Tron Transactions API
 

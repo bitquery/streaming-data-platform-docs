@@ -1,6 +1,6 @@
 ---
-title: "Byreal API"
-description: "Access real-time and historical data for Byreal on Solana using our GraphQL API. Track DEX trades, token prices, OHLC, market cap, and top traders"
+title: "Solana Byreal API"
+description: "Solana Byreal API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
 ---
 import FAQ from "@site/src/components/FAQ";
 

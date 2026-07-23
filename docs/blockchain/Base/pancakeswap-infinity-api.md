@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Base PancakeSwap Infinity API"
-description: "Get on-chain data of any PancakeSwap Infinity based token through our PancakeSwap Infinity API"
+description: "Base PancakeSwap Infinity API: query and stream Base on-chain data with Bitquery GraphQL examples for developers. Built for traders and analytics teams."
 ---
 import VideoPlayer from "../../../src/components/videoplayer.js";
 

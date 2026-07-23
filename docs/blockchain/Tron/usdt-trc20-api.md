@@ -1,6 +1,6 @@
 ---
-title: "TRC20 API"
-description: "Learn how to retrieve historical and real-time USDT data on the Tron network using Bitquery."
+title: "Tron Usdt Trc20 API"
+description: "Tron Usdt Trc20 API: query and stream Tron on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 ---
 # TRC20 API
 

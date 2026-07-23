@@ -1,6 +1,6 @@
 ---
 title: "Polymarket API - Advanced Analytics"
-description: "Polymarket analytics on Polygon: USDC TVL in core contracts, daily volume and maker/taker splits, order-flow by market, whale trades, settlement flows, and top markets by volume. GraphQL examples with Bitquery IDE links."
+description: "Polymarket API - Advanced Analytics: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - Polymarket analytics
   - Polymarket TVL

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 8
 title: "Ethereum Token Balance API"
-description: "Track ERC-20 token balances, total supply, and market capitalization using Bitquery."
+description: "Ethereum Token Balance API: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions. Built for traders and analytics teams."
 ---
 # Ethereum Token Balance API
 

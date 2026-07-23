@@ -1,7 +1,7 @@
 ---
-title: Bitcoin Address API - Get BTC Balance, UTXO Activity & USD Values
+title: "Bitcoin Address API - Get BTC Balance"
 sidebar_label: Bitcoin Address API
-description: Query Bitcoin address balances from raw UTXOs, balance at a historical block height, multi-address aggregates, first/last active timestamps, and per-period activity.
+description: "Bitcoin Address API - Get BTC Balance: query and stream Bitcoin on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Bitcoin address API
   - Bitcoin balance API

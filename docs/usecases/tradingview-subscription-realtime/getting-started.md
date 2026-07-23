@@ -1,6 +1,6 @@
 ---
-title: "TradingView API - Real-Time Crypto Charts, OHLCV Stream & Chart API"
-description: "TradingView API integration: Build real-time crypto charts with live OHLCV, 1-second candlesticks, and TradingView chart API. DEX data, multi-chain support."
+title: "TradingView Realtime Starter Guide"
+description: "Build Getting Started: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code. Keep queries fast with indexed filters."
 sidebar_position: 1
 keywords:
   [

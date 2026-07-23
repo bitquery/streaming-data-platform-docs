@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "Address Balance API"
-description: "The Balances API returns current and historical token balances for an address on Ethereum. To return only non-zero balances, add Amount(selectWhere: { gt: \"0\" }) on the Balance field (not in where). Use dataset: combined or dataset: archive as follows:."
+title: "Ethereum Balance API"
+description: "Ethereum Balance API: fetch current and historical Ethereum balances with Bitquery GraphQL balance queries. Great for bots, dashboards, and alerts."
 ---
 import FAQ from "@site/src/components/FAQ";
 

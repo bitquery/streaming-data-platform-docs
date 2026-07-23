@@ -1,6 +1,6 @@
 ---
 title: "Tron Transfers API"
-description: "Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers"
+description: "Tron Transfers API: monitor Tron native and token transfers in real time with Bitquery GraphQL APIs. Includes filters and field selection tips."
 ---
 # Tron Transfers API
 

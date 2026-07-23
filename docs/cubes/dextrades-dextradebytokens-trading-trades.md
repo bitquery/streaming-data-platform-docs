@@ -1,6 +1,6 @@
 ---
 title: "DEXTrades vs DEXTradeByTokens vs Trades cube"
-description: "Compare DEXTrades, DEXTradeByTokens, and the Trading API Trades cube: EVM pool-centric vs Solana trader-centric chain cubes, and trader-focused streams with reliable USD via the price index."
+description: "DEXTrades vs DEXTradeByTokens vs Trades cube: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
 # DEXTrades vs DEXTradeByTokens vs Trades cube
 

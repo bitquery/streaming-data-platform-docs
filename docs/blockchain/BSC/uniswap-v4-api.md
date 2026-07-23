@@ -1,6 +1,6 @@
 ---
-title: "Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior"
-description: "Track Uniswap V4 trades, trader activities, token trades, and market behavior in real time using Bitquery's DEX Trades API on BSC."
+title: "BNB Chain Uniswap V4 API"
+description: "BNB Chain Uniswap V4 API: query BNB Chain Uniswap trades, pools, and prices with Bitquery GraphQL DEX APIs. See examples in the Bitquery IDE."
 ---
 # Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior
 

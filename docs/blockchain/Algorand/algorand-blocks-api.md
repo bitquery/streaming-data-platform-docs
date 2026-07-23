@@ -1,7 +1,7 @@
 ---
-title: Algorand Blocks API - Query Blocks by Proposer, Height & Rewards
+title: "Algorand Blocks API - Query Blocks by Proposer"
 sidebar_label: Algorand Blocks API
-description: Pull Algorand blocks with proposer, height, protocol version, rewards, and timestamps via Bitquery's GraphQL Blocks API. Build explorer features and staking analytics.
+description: "Algorand Blocks API - Query Blocks by Proposer: query and stream Algorand on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Algorand blocks API
   - Algorand block explorer API

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "Mempool API"
-description: "Write Ethereum mempool GraphQL queries and subscriptions for pending transactions, trades, and events."
+title: "Ethereum Mempool API"
+description: "Watch Ethereum pending transactions before confirmation with Bitquery mempool GraphQL subscriptions, filters, and stream examples."
 ---
 # Mempool API
 

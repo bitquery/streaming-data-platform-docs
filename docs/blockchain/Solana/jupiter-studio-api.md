@@ -1,6 +1,6 @@
 ---
-title: "Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data"
-description: "Ultra low latency Jupiter Studio launchpad data, token trades, OHLC, migration tracking, and Meteora DBC analytics. Get real-time Jupiter Studio API data for token launches, trading, and migration insights."
+title: "Solana Jupiter Studio API"
+description: "Solana Jupiter Studio API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Covers archive history and realtime data."
 ---
 # Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data
 

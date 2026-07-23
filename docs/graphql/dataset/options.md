@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "Options"
-description: "GraphQL interface hides the internal complexity of the datasets,."
+title: "GraphQL Dataset Options"
+description: "Configure Bitquery GraphQL dataset options for archive, realtime, and combined modes when querying blockchain history live."
 ---
 # Options
 

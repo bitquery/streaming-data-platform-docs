@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
-title: "How to Write a Lambda Function to get Ethereum Data from AWS (Use AWS for Web3 )"
-description: "Bitquery cloud data docs: How to Write a Lambda Function to get Ethereum Data from AWS (Use AWS for Web3 )."
+title: "Cloud Lambda Function Examples"
+description: "Lambda Functions from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake. Keep queries fast with indexed filters."
 ---
 # How to Write a Lambda Function to get Ethereum Data from AWS (Use AWS for Web3 )
 

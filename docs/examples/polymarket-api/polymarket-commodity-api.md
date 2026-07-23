@@ -1,6 +1,6 @@
 ---
-title: "Polymarket Commodity API - Gold, Crude Oil & Commodity Markets"
-description: "Query Polymarket commodity prediction markets: Gold (GC), Crude Oil, and other commodities. Market creation, resolution, prices, OHLC, volume by outcome, and top redeemers via GraphQL on Polygon."
+title: "Polymarket Commodity API"
+description: "Polymarket Commodity API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Built for traders and analytics teams."
 keywords:
   - Polymarket commodity API
   - Polymarket Gold markets

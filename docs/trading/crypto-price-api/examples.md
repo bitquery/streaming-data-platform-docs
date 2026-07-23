@@ -1,6 +1,6 @@
 ---
 title: "Quick Start Examples"
-description: "Bitquery Trading / Price Index docs: Quick Start Examples."
+description: "Quick Start Examples via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams. See examples in the Bitquery IDE."
 ---
 # Quick Start Examples
 

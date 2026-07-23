@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "Aliases"
-description: "Use the Bitquery GraphQL Aliases metric in queries and aggregations."
+title: "GraphQL Metric Aliases"
+description: "Alias Bitquery GraphQL metrics to name aggregates, sort results cleanly, and return clearer API field names for apps. See examples in the Bitquery IDE."
 ---
 #  Aliases
 

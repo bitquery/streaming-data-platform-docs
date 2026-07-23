@@ -1,7 +1,7 @@
 ---
-title: Bitcoin Blocks API - Query Blocks by Height, Difficulty & Transaction Count
+title: "Bitcoin Blocks API"
 sidebar_label: Bitcoin Blocks API
-description: Pull Bitcoin blocks with height, difficulty, size, transaction counts, and timestamps via Bitquery's GraphQL Blocks API. Build explorer features and mining analytics.
+description: "Bitcoin Blocks API: query and stream Bitcoin on-chain data with Bitquery GraphQL examples for developers. Run it in the IDE, then ship in your app."
 keywords:
   - Bitcoin blocks API
   - Bitcoin block explorer API

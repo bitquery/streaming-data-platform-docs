@@ -1,6 +1,6 @@
 ---
-title: "Model Training"
-description: "This script handles the entire training pipeline for detecting wash trades using an XGBoost classifier. It combines real trade data from Bitquery, rule-based labeling, feature preprocessing, model training, evaluation, and model serialization."
+title: "Train a Wash Trading Model"
+description: "Build Training: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code. Includes filters and field selection tips."
 ---
 # Model Training
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
-title: "Select By Metric"
-description: "Use the Bitquery GraphQL Select By Metric metric in queries and aggregations."
+title: "Select Rows by GraphQL Metric"
+description: "Select By Metric in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Keep queries fast with indexed filters."
 ---
 #  Select By Metric
 

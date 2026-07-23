@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Query Aggregated Metrics"
-description: "Bitquery GraphQL capability: Query Aggregated Metrics."
+description: "Query Aggregated Metrics in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
 # Query Aggregated Metrics
 

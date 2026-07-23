@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "Base Gas Balance Tracker"
-description: "Learn how to track Base Gas-related balance changes, transaction fee rewards, Gas Fee Spent and Gas Fee returned  using Bitquery."
+description: "Base Gas Balance Tracker: stream Base balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
 # Base Gas Balance Tracker
 

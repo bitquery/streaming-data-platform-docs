@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "GraphQL Subscriptions Guide"
-description: "Create and run Bitquery GraphQL subscriptions for realtime on-chain data."
+description: "GraphQL Subscriptions Guide using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
 # What is a Subscription?
 

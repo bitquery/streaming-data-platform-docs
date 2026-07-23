@@ -1,6 +1,6 @@
 ---
-title: "GoonFi API"
-description: "Access real-time and historical data for GoonFi on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders"
+title: "Solana Goonfi API"
+description: "Solana Goonfi API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
 ---
 # GoonFi API
 

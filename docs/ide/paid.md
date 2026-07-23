@@ -1,7 +1,7 @@
 ---
 sidebar_position: 12
 title: "Bitquery IDE Paid Plans"
-description: "Understand Bitquery IDE paid plan features, limits, and upgrades."
+description: "Bitquery IDE Paid Plans in Bitquery docs with practical setup steps, examples, and guidance for secure API access. Keep queries fast with indexed filters."
 ---
 # Upgrade to Bitquery Paid Plan
 

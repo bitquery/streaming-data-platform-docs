@@ -1,7 +1,7 @@
 ---
 title: Cardano Blocks API - Query Blocks by Height, Slot & Epoch
 sidebar_label: Cardano Blocks API
-description: Look up Cardano blocks by height or time window with hash, epoch, slot, slot-leader, and transaction count via Bitquery's GraphQL Blocks API.
+description: "Cardano Blocks API - Query Blocks by Height, Slot & Epoch: query and stream Cardano on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Cardano blocks API
   - Cardano block explorer API

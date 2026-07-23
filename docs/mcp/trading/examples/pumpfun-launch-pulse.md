@@ -1,6 +1,6 @@
 ---
 title: "Example: Pump.fun Launch Pulse — Tokens Launched per Hour"
-description: "Use the Bitquery MCP to track new Pump.fun token launches hour by hour. Spot launchpad waves, fade exhaustion & quantify the meta of the moment."
+description: "Example: Pump.fun Launch Pulse — Tokens Launched per Hour with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
 image: "/img/mcp/charts/pumpfun-launches-hourly.svg"
 keywords:
   - Pump.fun launches per hour

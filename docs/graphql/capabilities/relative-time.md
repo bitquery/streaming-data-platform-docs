@@ -1,6 +1,6 @@
 ---
 title: "Relative Time Filters"
-description: "Bitquery GraphQL capability: Relative Time Filters."
+description: "Relative Time Filters in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
 # Relative Time Filters
 

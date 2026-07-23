@@ -1,6 +1,6 @@
 ---
-title: "How to Build a Polymarket Whale Alerts Telegram Bot with the Bitquery API"
-description: "Build a production-ready Polymarket Telegram bot that streams realtime trades and lets users set custom alerts on trade size, share price, trader wallet, or specific market — all powered by the Bitquery Prediction Market API."
+title: "Polymarket Tg Alerts Bot"
+description: "Build Polymarket Tg Alerts Bot: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 import VideoPlayer from "../../src/components/videoplayer.js";
 

@@ -1,6 +1,6 @@
 ---
-title: DEX Trades API
-description: "Get address balance and history on the DEX Trades blockchain. Also, get address balance and history for tokens or NFTs on the DEX Trades blockchain."
+title: "EVM DEX Trades Schema"
+description: "Explore the EVM DEX Trades schema in Bitquery GraphQL, including trade fields, joins, filters, and example queries for swap analytics."
 ---
 DEXTrades api gives trading-related data from different DEXs such as Uniswap, Pancakeswap, 0x, etc.
 

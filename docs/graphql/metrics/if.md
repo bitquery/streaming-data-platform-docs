@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Conditional Metrics"
-description: "Use the Bitquery GraphQL Conditional Metrics metric in queries and aggregations."
+description: "Conditional Metrics in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. See examples in the Bitquery IDE."
 ---
 #  Conditional Metrics
 

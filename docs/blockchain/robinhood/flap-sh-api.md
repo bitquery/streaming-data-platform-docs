@@ -1,6 +1,6 @@
 ---
 title: "Flap.sh API on Robinhood"
-description: "Track Flap.sh newly launched tokens and trades on Robinhood with Bitquery. Detect TokenCreated events, mint transfers, and stream Flap.sh market trades via EVM and Trading APIs."
+description: "Flap.sh API on Robinhood: query and stream Robinhood on-chain data with Bitquery GraphQL examples for developers. Great for bots, dashboards, and alerts."
 sidebar_position: 4
 keywords:
   - Flap.sh API

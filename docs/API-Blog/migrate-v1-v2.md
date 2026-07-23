@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
-title: "Migrating from API v1 to v2"
-description: "V2 APIs are designed to provide real-time blockchain data without any delay. It combines both real-time and historical data. You can read more on the differences here."
+title: "Migrate from Bitquery API v1 to v2"
+description: "Migrate Bitquery GraphQL apps from API v1 to v2 covering schema changes, streaming datasets, authentication updates, and code examples."
 ---
 # Migrating from API v1 to v2
 

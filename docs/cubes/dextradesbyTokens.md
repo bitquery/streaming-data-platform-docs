@@ -1,6 +1,6 @@
 ---
 title: "DEXTradesByTokens Cube"
-description: "Learn the Bitquery DEXTradeByTokens cube — token-expanded trades, filters, and example GraphQL queries."
+description: "DEXTradesByTokens Cube: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Keep queries fast with indexed filters."
 ---
 # DEXTradesByTokens Cube
 

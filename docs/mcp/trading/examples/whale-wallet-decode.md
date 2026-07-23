@@ -1,6 +1,6 @@
 ---
 title: "Example: Decode a Whale Wallet's 24h Activity"
-description: "Use the Bitquery MCP to break down any wallet's 24h DEX trading: tokens touched, buy vs sell volume, and behavioural signature in one query."
+description: "Example: Decode a Whale Wallet's 24h Activity with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
 image: "/img/mcp/charts/whale-portfolio.svg"
 keywords:
   - whale wallet tracker

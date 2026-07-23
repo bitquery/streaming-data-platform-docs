@@ -1,6 +1,6 @@
 ---
 title: "Solana DEX Trades - gRPC Stream (CoreCast)"
-description: "Real-time DEX trade data via Solana gRPC. Pump.fun, Raydium, Orca. Protobuf, filter by program, pool, token, trader."
+description: "Solana DEX Trades - gRPC Stream (CoreCast) for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana DEX stream", "dex trades"]
 ---
 # Solana DEX Trades gRPC Stream

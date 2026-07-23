@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "GraphQL Variables in Bitquery IDE"
-description: "Use GraphQL variables in the Bitquery IDE for reusable parameterized queries."
+description: "GraphQL Variables in Bitquery IDE in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 ---
 # Use Variables
 

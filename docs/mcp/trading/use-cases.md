@@ -1,6 +1,6 @@
 ---
 title: "Trading MCP — What You Can Do With It"
-description: "Bitquery MCP use cases: token discovery, trader PnL, OHLC, market cap, wash-trade filtering, launchpad pulse, sniping research, slippage & AI-agent analysis."
+description: "Trading MCP — What You Can Do With It with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
 image: "/img/mcp/charts/wsol-24h-candles.svg"
 keywords:
   - Bitquery MCP use cases

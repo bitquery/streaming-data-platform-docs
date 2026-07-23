@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "Photon Solana API"
-description: "Photon is a routing aggregator on Solana that finds the best execution paths across multiple DEXs. To identify trades that were routed through Photon, we use their program address BSfD6SHZigAfDWSjzD5Q41jw8LmKwtmjskPH9XW1mrRW in our queries."
+title: "Solana Photon API"
+description: "Solana Photon API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
 ---
 import FAQ from "@site/src/components/FAQ";
 

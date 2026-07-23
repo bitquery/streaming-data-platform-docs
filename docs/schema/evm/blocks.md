@@ -1,6 +1,6 @@
 ---
-title: "EVM Blocks API"
-description: "Access Ethereum block data, including gas limits, rewards, and more. Get the latest 10 blocks with the EVM Blocks API."
+title: "EVM Blocks Schema"
+description: "Blocks: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. Copy GraphQL snippets for production apps."
 ---
 Blocks API provide details on blocks.
 

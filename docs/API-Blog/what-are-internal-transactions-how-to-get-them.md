@@ -1,6 +1,6 @@
 ---
 title: "What are Internal Transactions & How to Get Them?"
-description: "Bitquery API blog: What are Internal Transactions & How to Get Them?."
+description: "What are Internal Transactions & How to Get Them?: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
 import FAQ from "@site/src/components/FAQ";
 

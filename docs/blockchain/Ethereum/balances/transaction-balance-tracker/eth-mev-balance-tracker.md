@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Ethereum MEV Balance Tracker"
-description: "Learn how to track Ethereum MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery."
+description: "Ethereum MEV Balance Tracker: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
 # Ethereum MEV Balance Tracker
 

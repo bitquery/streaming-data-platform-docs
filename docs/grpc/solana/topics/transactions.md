@@ -1,6 +1,6 @@
 ---
 title: "Solana Transactions - gRPC Stream (CoreCast)"
-description: "Real-time Solana transactions via gRPC. Filter by program, signer. Parsed instructions, protobuf."
+description: "Solana Transactions - gRPC Stream (CoreCast) for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana transactions stream"]
 ---
 # Solana Transactions gRPC Stream

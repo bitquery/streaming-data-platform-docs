@@ -1,7 +1,7 @@
 ---
 sidebar_position: 10
 title: "Blockchain Reorg Tree"
-description: "Bitquery GraphQL dataset guide: Blockchain Reorg Tree."
+description: "Blockchain Reorg Tree in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
 # Blockchain Reorg Tree
 

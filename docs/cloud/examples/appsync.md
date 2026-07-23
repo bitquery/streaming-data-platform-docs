@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "How to Fetch Ethereum Data with AppSync and AWS Lambda"
-description: "Bitquery cloud data docs: How to Fetch Ethereum Data with AppSync and AWS Lambda."
+description: "How to Fetch Ethereum Data with AppSync and AWS Lambda from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake."
 ---
 # How to Fetch Ethereum Data with AppSync and AWS Lambda
 

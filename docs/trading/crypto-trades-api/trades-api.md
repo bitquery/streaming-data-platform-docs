@@ -1,6 +1,6 @@
 ---
-title: "Crypto Trades API — Real-Time DEX Trade Streams Across Chains"
-description: "Stream real-time DEX trades with Bitquery Crypto Trades API. Get swap-level price, USD amounts, market cap, FDV & supply on Solana, Ethereum, BSC, Base & Arbitrum via GraphQL subscriptions."
+title: "Crypto Trades API — Real-Time DEX Trade Streams Across"
+description: "Crypto Trades API — Real-Time DEX Trade Streams Across via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
 keywords:
   - crypto trades API
   - real-time DEX trade stream

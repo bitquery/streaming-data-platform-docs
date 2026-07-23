@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Crypto Dashboard Project"
-description: "The following tutorial helps build a Cryptocurrency Portfolio Dashboard with React that fetches and displays the balance of different currencies for a given Ethereum address using the Bitquery Streaming API."
+description: "Build Crypto Dashboard Project: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Crypto Dashboard Project 
 

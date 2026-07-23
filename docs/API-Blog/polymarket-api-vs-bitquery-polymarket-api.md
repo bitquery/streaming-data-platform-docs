@@ -1,7 +1,6 @@
 ---
-title: "Polymarket API vs Bitquery Polymarket API: Which One Should You Use?"
-description:
-  "A side-by-side comparison of Polymarket's official APIs (CLOB, Gamma, Data, Real-Time Data Socket) and Bitquery's on-chain Polymarket API (GraphQL queries, subscriptions, and Kafka streams on Polygon)."
+title: "Polymarket API Vs Bitquery Polymarket"
+description: "Polymarket API Vs Bitquery Polymarket: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - Polymarket API
   - Bitquery Polymarket API

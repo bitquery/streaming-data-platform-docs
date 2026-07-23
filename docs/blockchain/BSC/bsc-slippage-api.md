@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
-title: "BSC Slippage API"
-description: "Get slippage and price impact data for BSC DEX pools through our Slippage API"
+title: "BNB Chain Slippage API"
+description: "BNB Chain Slippage API: measure BNB Chain DEX price impact and slippage with Bitquery GraphQL pool metrics. Covers archive history and realtime data."
 ---
 # BSC Slippage API
 

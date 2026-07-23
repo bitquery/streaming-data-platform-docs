@@ -1,6 +1,6 @@
 ---
 title: "Raydium Launchpad API"
-description: "Access real-time on-chain data for Raydium Launchpad tokens using the Bitquery-powered Raydium Launchpad API. Track trades, liquidity, token prices, and more on Solana"
+description: "Raydium Launchpad API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Works with WebSocket live subscriptions."
 ---
 # Raydium Launchpad API
 

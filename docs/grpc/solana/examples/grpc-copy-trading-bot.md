@@ -1,6 +1,6 @@
 ---
 title: "Solana Copy Trading Bot with gRPC Streams"
-description: "Build a copy trading bot using CoreCast gRPC and Jupiter API. Real-time DEX trade streaming on Solana."
+description: "Solana Copy Trading Bot with gRPC Streams for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "copy trading", "CoreCast", "Solana trading bot"]
 ---
 # Building Solana Copy Trading Bot with gRPC Streams

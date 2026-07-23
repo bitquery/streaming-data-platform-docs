@@ -1,6 +1,6 @@
 ---
 title: "Pump.fun Token Sniffer"
-description: "This guide demonstrates how to build a basic Pump.fun token analysis tool using Bitquery APIs. The tool displays various on-chain metrics related to Pump.fun tokens on Solana, helping users understand token distribution, holder behavior, and transfer patterns."
+description: "Build Pump.fun Token Sniffer: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Pump.fun Token Sniffer
 

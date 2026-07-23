@@ -1,6 +1,6 @@
 ---
 title: Pump.fun Data - Snowflake, AWS S3, BigQuery
-description: Export Pump.fun data to cloud storage with Parquet datasets optimized for Snowflake, AWS S3, Google BigQuery, and data lakes. Get Pump.fun token creations, migrations, DEX trades, liquidity pools, and OHLCV for large-scale analytics.
+description: "Pump.fun Data - Snowflake, AWS S3, BigQuery from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake."
 keywords:
   - Pumpfun data
   - Pump.fun data export

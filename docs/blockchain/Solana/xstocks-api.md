@@ -1,6 +1,6 @@
 ---
-title: "xStocks API"
-description: "Track real-time trades, live token prices, OHLC data, trading volumes, and top traders of Tesla, Apple, Meta, etc xStocks on Solana using Bitquery."
+title: "Solana Xstocks API"
+description: "Solana Xstocks API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 # xStocks API
 

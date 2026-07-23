@@ -1,6 +1,6 @@
 ---
 title: "Bags FM API - Bitquery"
-description: "Access real-time Bags FM token data, USD price streams, token transfers, trades, and creation events on Solana. Complete blockchain API for Bags FM with Bitquery's low-latency data."
+description: "Bags FM API - Bitquery: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Built for traders and analytics teams."
 keywords:
   [
     "Bags FM API",

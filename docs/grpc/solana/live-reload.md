@@ -1,6 +1,6 @@
 ---
 title: "Live Reload Configuration for gRPC Streams"
-description: "Live reload enables dynamic configuration changes without you having to restart your application. This feature automatically detects changes to your config.yaml file and restarts the stream with the new settings."
+description: "Live Reload Configuration for gRPC Streams for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 ---
 # Live Reload Configuration for gRPC Streams
 

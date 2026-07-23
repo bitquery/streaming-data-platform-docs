@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Base Uniswap API"
-description: "Get on-chain data of any Uniswap based token through our Uniswap API"
+description: "Base Uniswap API: query Base Uniswap trades, pools, and prices with Bitquery GraphQL DEX APIs. Built for traders and analytics teams."
 ---
 import FAQ from "@site/src/components/FAQ";
 

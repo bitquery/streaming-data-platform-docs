@@ -1,6 +1,6 @@
 ---
-title: "BSC NFT API"
-description: "Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades"
+title: "BNB Chain NFT API"
+description: "Track BNB Chain NFT trades, ownership, and metadata with Bitquery GraphQL queries, filters, and real-time streaming options."
 ---
 # BSC NFT API
 

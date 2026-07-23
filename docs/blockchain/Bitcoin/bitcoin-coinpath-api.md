@@ -1,7 +1,7 @@
 ---
 title: Bitcoin Coinpath API - Trace BTC Fund Flows Across Addresses
 sidebar_label: Bitcoin Coinpath API
-description: Trace Bitcoin fund flows between addresses with Bitquery Coinpath. Track inbound and outbound paths, multi-hop tracing, and address-to-address verification for AML and forensics.
+description: "Bitcoin Coinpath API - Trace BTC Fund Flows Across Addresses: query and stream Bitcoin on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Bitcoin coinpath API
   - Bitcoin fund tracing

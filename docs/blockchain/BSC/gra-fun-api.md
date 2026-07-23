@@ -1,6 +1,6 @@
 ---
-title: "GRA.fun API"
-description: "Get Meme coins trade from GRA.fun on BSC blockchain. Get buy, sell, redeem trades both real time and historical"
+title: "BNB Chain Gra Fun API"
+description: "BNB Chain Gra Fun API: query and stream BNB Chain on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
 ---
 # GRA.fun API
 

@@ -1,6 +1,6 @@
 ---
-title: Blockchain Data in Cloud - AWS S3, Snowflake, BigQuery Datasets
-description: Export blockchain data to cloud storage with ready-to-use Parquet datasets for AWS S3, Google BigQuery, Snowflake, and data lakes. Build scalable, real-time, low-latency solutions with Kafka streams and GraphQL subscriptions. Get Ethereum, BSC, Solana, Bitcoin, Tron, and EVM chain data for analytics, ETL pipelines, and data warehousing.
+title: "Blockchain Data in Cloud"
+description: "Blockchain Data in Cloud from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake. See examples in the Bitquery IDE."
 keywords:
   - Blockchain data export
   - Cloud blockchain data

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "API Comparison"
-description: "Compare Bitquery V1 vs V2 APIs, streaming options, and when to use each interface."
+title: "Bitquery API Product Comparison"
+description: "API Comparison: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Great for bots, dashboards, and alerts."
 ---
 # API Comparison
 

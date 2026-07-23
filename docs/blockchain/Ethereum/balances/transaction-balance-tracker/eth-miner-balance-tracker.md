@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Ethereum Miner Balance Tracker"
-description: "Learn how to track Ethereum miner balances, mining rewards, and uncle block rewards using Bitquery."
+description: "Ethereum Miner Balance Tracker: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
 import VideoPlayer from "../../../../../src/components/videoplayer.js";
 

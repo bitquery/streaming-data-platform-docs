@@ -1,7 +1,7 @@
 ---
-title: Algorand Arguments API - Parsed Smart Contract Call & Event Arguments
+title: "Algorand Arguments API"
 sidebar_label: Algorand Arguments API
-description: Query parsed argument names, types, and values from Algorand smart contract calls and events. Filter by contract address, transaction type, or argument value via Bitquery GraphQL.
+description: "Algorand Arguments API: query and stream Algorand on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
 keywords:
   - Algorand arguments API
   - Algorand smart contract arguments

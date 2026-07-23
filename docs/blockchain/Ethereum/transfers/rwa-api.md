@@ -1,6 +1,6 @@
 ---
 title: "RWA (Real World Assets) API"
-description: "Query Real World Asset (RWA) token transfers and related activity on Ethereum with Bitquery GraphQL."
+description: "RWA (Real World Assets) API: monitor Ethereum native and token transfers in real time with Bitquery GraphQL APIs. Built for traders and analytics teams."
 ---
 # RWA (Real World Assets) API
 

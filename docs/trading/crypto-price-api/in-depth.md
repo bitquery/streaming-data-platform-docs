@@ -1,6 +1,6 @@
 ---
 title: "Breaking Down Price Streams in Detail"
-description: "Bitquery Trading / Price Index docs: Breaking Down Price Streams in Detail."
+description: "Breaking Down Price Streams in Detail via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
 ---
 # Breaking Down Price Streams in Detail
 

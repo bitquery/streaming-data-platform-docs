@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Base Zora API"
-description: "Bitquery provides comprehensive Zora data through APIs, Streams and Data Dumps."
+description: "Base Zora API: query and stream Base on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 ---
 # Base Zora API
 

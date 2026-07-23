@@ -1,6 +1,6 @@
 ---
-title: "Raydium CPMM API"
-description: "Stream and query Raydium CPMM trades on Solana in real time with Bitquery DEX Trades GraphQL APIs."
+title: "Solana Raydium Cpmm API"
+description: "Solana Raydium Cpmm API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Works with WebSocket live subscriptions."
 ---
 # Raydium CPMM API
 

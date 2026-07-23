@@ -1,6 +1,6 @@
 ---
 title: "Traders API — Real-Time Wallet Trade Streams"
-description: "Stream real-time wallet trades with Bitquery Traders API. Track specific wallets, monitor multiple addresses, detect whale trades, filter by token/pair/DEX/chain, rank top traders by volume or PnL, and aggregate wallet PnL across Solana, Ethereum & BSC via GraphQL."
+description: "Traders API — Real-Time Wallet Trade Streams via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
 keywords:
   - traders API
   - wallet trade tracking API

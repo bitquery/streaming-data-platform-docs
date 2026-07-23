@@ -1,6 +1,6 @@
 ---
-title: "debug_traceCall"
-description: "Trace the execution of a smart contract function call on the Ethereum blockchain using the debug_traceCall API"
+title: "Ethereum Debug Tracecall"
+description: "Ethereum Debug Tracecall: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Copy GraphQL snippets for production apps."
 ---
 # debug_traceCall
 

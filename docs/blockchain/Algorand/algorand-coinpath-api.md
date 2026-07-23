@@ -1,7 +1,7 @@
 ---
-title: Algorand Coinpath API - Trace ALGO & ASA Flows Across Addresses
+title: "Algorand Coinpath API"
 sidebar_label: Algorand Coinpath API
-description: Trace Algorand fund flows between addresses with Bitquery Coinpath. Track outbound and inbound paths, hop depth, amounts, and transaction counts for AML and forensics.
+description: "Algorand Coinpath API: query and stream Algorand on-chain data with Bitquery GraphQL examples for developers. Built for traders and analytics teams."
 keywords:
   - Algorand coinpath API
   - Algorand fund tracing

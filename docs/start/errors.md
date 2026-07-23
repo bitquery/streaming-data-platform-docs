@@ -1,6 +1,6 @@
 ---
 title: "Bitquery API Common Errors"
-description: "Troubleshoot Bitquery GraphQL errors including 403 Forbidden, auth failures, rate limits, and query timeouts."
+description: "Bitquery API Common Errors: practical Bitquery setup guidance with examples for authentication, endpoints, and first queries."
 ---
 # Common Errors and What to Do
 

@@ -1,7 +1,7 @@
 ---
-title: Bitcoin Inputs and Outputs API - UTXO Data, Miner Rewards & BTC Price
+title: "Bitcoin Inputs Outputs"
 sidebar_label: Bitcoin Inputs & Outputs API
-description: Query Bitcoin UTXO inputs and outputs with Bitquery GraphQL. Get historical BTC price, address balance at a block height, miner block rewards, and per-address activity.
+description: "Bitcoin Inputs Outputs: query and stream Bitcoin on-chain data with Bitquery GraphQL examples for developers. Run it in the IDE, then ship in your app."
 keywords:
   - Bitcoin inputs outputs API
   - Bitcoin UTXO API

@@ -1,6 +1,6 @@
 ---
-title: "Polymarket Sports API - Live Odds, Cricket, NBA, NFL & Esports Markets"
-description: "Query and stream Polymarket sports prediction markets: live odds and implied probability, odds (line) movement OHLC, market resolutions, volume by outcome, top traders, and whale-bet alerts for NBA, NFL, soccer, cricket, UFC and esports. Real-time via GraphQL subscriptions and Kafka on Polygon."
+title: "Polymarket Sports API"
+description: "Polymarket Sports API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Run it in the IDE, then ship in your app."
 keywords:
   - Polymarket sports API
   - Polymarket live odds API

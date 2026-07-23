@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 sidebar_label: Pairs for a Token
-title: "Trading Pairs API"
-description: "If you want to get all trades of a token, you might want to know all its trading pairs."
+title: "Ethereum Get Trading Pairs Of Token API"
+description: "Ethereum Get Trading Pairs Of Token API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams."
 ---
 # Trading Pairs API
 

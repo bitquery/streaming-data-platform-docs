@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "Real-Time Blockchain Indexer: Build Reliable Indexers with Kafka Streams Instead of Archiv"
-description: "Bitquery streaming docs: Real-Time Blockchain Indexer: Build Reliable Indexers with Kafka Streams Instead of Archiv."
+title: "Real Time Indexer With Kafka Stream"
+description: "Real Time Indexer With Kafka Stream with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
 ---
 # Real-Time Blockchain Indexer: Build Reliable Indexers with Kafka Streams Instead of Archive Nodes, gRPC, or Webhook Services
 

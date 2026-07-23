@@ -1,6 +1,6 @@
 ---
 title: "Optimism NFT API"
-description: "Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades"
+description: "Optimism NFT API: track Optimism NFT trades, ownership, and metadata with Bitquery GraphQL and streams. Scale further with Kafka or gRPC streams."
 ---
 # Optimism NFT API
 

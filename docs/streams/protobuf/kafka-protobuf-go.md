@@ -3,7 +3,7 @@ slug: kafka-protobuf-go
 sidebar_position: 2
 sidebar_label: Go Example to Use Kafka Protobuf Streams for Real-time Data
 title: Go Example to Use Kafka Protobuf Streams for Real-time Data
-description: Connect a Go app to Bitquery Kafka with confluent-kafka-go, decode Solana ParsedIdlBlockMessage from protobuf, and run the minimal go-consumer-example from kafka-streams-examples-usecases.
+description: "Go Example to Use Kafka Protobuf Streams for Real-time Data with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading."
 ---
 # Go Example to Use Kafka Protobuf Streams for Real-time Data
 

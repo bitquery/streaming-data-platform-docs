@@ -1,6 +1,6 @@
 ---
 title: "Stablecoin Balance API"
-description: "Bitquery stablecoin API docs: Stablecoin Balance API."
+description: "Stablecoin Balance API using Bitquery stablecoin APIs for prices, transfers, payments, and cross-chain monitoring workflows."
 ---
 # Stablecoin Balance API
 

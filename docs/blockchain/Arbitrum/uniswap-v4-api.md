@@ -1,6 +1,6 @@
 ---
-title: "Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior"
-description: "Track Uniswap V4 trades, trader activities, token trades, and market behavior in real time using Bitquery's DEX Trades API on Arbitrum."
+title: "Arbitrum Uniswap V4 API"
+description: "Arbitrum Uniswap V4 API: query Arbitrum Uniswap trades, pools, and prices with Bitquery GraphQL DEX APIs. Keep queries fast with indexed filters."
 ---
 # Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior
 

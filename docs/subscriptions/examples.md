@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
-title: "Building with WebSockets: Code Samples in Python & JavaScript"
-description: "Bitquery GraphQL subscriptions: Building with WebSockets: Code Samples in Python & JavaScript."
+title: "Building with WebSockets"
+description: "Building with WebSockets using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
 # Building with WebSockets: Code Samples in Python & JavaScript
 

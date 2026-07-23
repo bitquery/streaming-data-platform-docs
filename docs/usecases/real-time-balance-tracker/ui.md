@@ -1,6 +1,6 @@
 ---
 title: "Building a Basic UI for Balance Tracker"
-description: "Build a simple HTML/CSS/JS UI for a real-time wallet balance tracker powered by Bitquery subscriptions."
+description: "Building a Basic UI for Balance Tracker: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Building a Basic UI for Balance Tracker
 

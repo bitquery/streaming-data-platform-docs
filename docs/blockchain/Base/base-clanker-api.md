@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Base Clanker API"
-description: "This section provides you with a set of queries that provides an insight about the Clank fun."
+description: "Base Clanker API: query and stream Base on-chain data with Bitquery GraphQL examples for developers. Great for bots, dashboards, and alerts."
 ---
 # Base Clanker API
 

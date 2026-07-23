@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
-title: "NFT Metadata API"
-description: "The NFT Metadata API retrieves the metadata of NFT."
+title: "Ethereum NFT Metadata API"
+description: "Ethereum NFT Metadata API: track Ethereum NFT trades, ownership, and metadata with Bitquery GraphQL and streams. Built for traders and analytics teams."
 ---
 # NFT Metadata API
 

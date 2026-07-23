@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Optimism DEX Trades API"
-description: "Get on-chain data of any Optimism based DEX through our DEX Trades API"
+description: "Optimism DEX Trades API: get Optimism DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Works with WebSocket live subscriptions."
 ---
 # Optimism DEX Trades API
 

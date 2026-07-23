@@ -1,6 +1,6 @@
 ---
 title: Bitcoin Data - Snowflake, AWS S3, GCP BigQuery
-description: Export Bitcoin blockchain data to cloud storage with Parquet datasets optimized for Snowflake, AWS S3, Google BigQuery, and data lakes. Get blocks, transactions, inputs, outputs, and OMNI data for large-scale analytics.
+description: "Bitcoin Data - Snowflake, AWS S3, GCP BigQuery from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake."
 keywords:
   - Bitcoin blockchain data
   - Bitcoin GCP Bigquery

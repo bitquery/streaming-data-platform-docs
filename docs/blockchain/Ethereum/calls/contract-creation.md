@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Smart Contract Creation"
-description: "Smart contract creators can use these queries to track the deployment of their own smart contracts and to monitor the deployment of new smart contracts by others."
+description: "Smart Contract Creation: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 # Smart Contract Creation
 

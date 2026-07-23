@@ -1,6 +1,6 @@
 ---
 title: "Stablecoin Payments API"
-description: "Comprehensive guide to Bitquery Stablecoin Payments API with real-time transfers, compliance checks, and multi-chain analytics."
+description: "Stablecoin Payments API using Bitquery stablecoin APIs for prices, transfers, payments, and cross-chain monitoring workflows."
 keywords:
   [
     "Stablecoin Payments API",

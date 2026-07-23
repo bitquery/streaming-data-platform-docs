@@ -1,6 +1,6 @@
 ---
-title: Blockchain Data Lake - Full Archive Streaming, Faster Than a Node
-description: Bitquery's Blockchain Data Lake stores the complete chain archive, every block from genesis to tip, as structured protobuf files in SeaweedFS. Stream the full history over an S3 interface at 1–10 Gbps network bandwidth (depending on server), far faster than syncing or querying your own archive node.
+title: "Blockchain Data Lake"
+description: "Blockchain Data Lake: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Covers archive history and realtime data."
 keywords:
   - Blockchain data lake
   - Full archive blockchain data

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 9
 title: "Optimize Bitquery GraphQL Queries"
-description: "Performance tips for faster, cheaper Bitquery GraphQL queries and streams."
+description: "Optimize Bitquery GraphQL Queries in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
 # GraphQL query optimization for APIs
 

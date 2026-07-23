@@ -1,6 +1,6 @@
 ---
 title: "Polymarket Bitcoin Up or Down API & Websocket"
-description: "Query Polymarket Bitcoin price prediction, Bitcoin up or down, and Bitcoin price odds via GraphQL. Stream trades and odds on Polygon. Build dashboards, track top traders, aggregate odds, analyze volume, and monitor settlements and redemptions."
+description: "Polymarket Bitcoin Up or Down API & Websocket: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - polymarket bitcoin price prediction
   - polymarket bitcoin up or down

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Arbitrum Smart Contract Events API"
-description: "Get Arbitrum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events"
+description: "Arbitrum Smart Contract Events API: query and stream Arbitrum on-chain data with Bitquery GraphQL examples for developers."
 ---
 # Arbitrum Smart Contract Events API
 

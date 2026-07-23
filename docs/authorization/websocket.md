@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Authenticate Bitquery WebSockets"
-description: "Authorize Bitquery GraphQL WebSocket subscriptions with OAuth access tokens."
+description: "Authenticate Bitquery WebSockets in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 ---
 # Authenticating Websockets
 

@@ -1,6 +1,6 @@
 ---
 title: "How to Use Bitquery API Token - Authorization Examples"
-description: "Use your Bitquery OAuth token in API requests: header Bearer token or URL token parameter. Python, JavaScript, and cURL examples for streaming.bitquery.io."
+description: "How to Use Bitquery API Token - Authorization Examples in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 sidebar_position: 2
 keywords: ["Bitquery API token", "Bitquery authorization", "OAuth token usage", "Bearer token", "API authentication"]
 ---

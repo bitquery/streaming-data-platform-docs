@@ -1,7 +1,7 @@
 ---
 sidebar_label: Fluid DEX Trades
-title: "Fluid DEX API"
-description: "Fluid DEX is a decentralized exchange protocol built on Ethereum and other EVM chains. Bitquery's APIs support tracking Fluid DEX vault positions, events, and contract interactions in real-time and across historical data."
+title: "Ethereum Fluid DEX API"
+description: "Ethereum Fluid DEX API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Run it in the IDE, then ship in your app."
 ---
 # Fluid DEX API
 

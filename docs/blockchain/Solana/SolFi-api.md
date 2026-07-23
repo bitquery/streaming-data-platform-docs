@@ -1,6 +1,6 @@
 ---
-title: "SolFi DEX API"
-description: "Track real-time trades, token prices, OHLC data, top traders, volumes, and volatility on SolFi DEX using Bitquery."
+title: "Solana Solfi API"
+description: "Solana Solfi API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
 ---
 # SolFi DEX API
 

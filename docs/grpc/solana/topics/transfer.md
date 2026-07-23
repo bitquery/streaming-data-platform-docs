@@ -1,6 +1,6 @@
 ---
 title: "Solana Transfers - gRPC Stream (CoreCast)"
-description: "Real-time token and SOL transfers via Solana gRPC. Filter by sender, receiver, token. Protobuf."
+description: "Solana Transfers - gRPC Stream (CoreCast) for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana transfers stream"]
 ---
 # Solana Transfers gRPC Stream

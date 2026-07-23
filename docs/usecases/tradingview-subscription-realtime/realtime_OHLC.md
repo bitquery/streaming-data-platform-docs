@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Fetching Real-time OHLC"
-description: "We now use the new Price Index Streams to fetch pre-aggregated OHLC data directly from Bitquery's GraphQL WebSocket API. This removes the need to manually calculate candlesticks from raw trade data."
+description: "Build Fetching Real-time OHLC: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Fetching Real-time OHLC
 

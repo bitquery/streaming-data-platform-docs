@@ -1,7 +1,7 @@
 ---
 sidebar_position: 11
 title: "Bitquery IDE Points and Usage"
-description: "How IDE points work for Bitquery GraphQL queries and subscriptions."
+description: "Bitquery IDE Points and Usage in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 ---
 # Points
 

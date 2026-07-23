@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Optimism Address Balance API"
-description: "The Balances API returns current and historical token balances for an address on Optimism. To return only non-zero balances, add Amount(selectWhere: { gt: \"0\" }) on the Balance field (not in where). Use dataset: combined or dataset: archive as follows:."
+description: "Optimism Address Balance API: fetch current and historical Optimism balances with Bitquery GraphQL balance queries. Great for bots, dashboards, and alerts."
 ---
 # Optimism Address Balance API
 

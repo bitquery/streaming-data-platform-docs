@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "SmartContract Calls API"
-description: "Retrieve detailed information about smart contract transactions, function calls, input/output parameters, and contract interactions on Ethereum using our comprehensive API"
+description: "SmartContract Calls API: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 ---
 import FAQ from "@site/src/components/FAQ";
 

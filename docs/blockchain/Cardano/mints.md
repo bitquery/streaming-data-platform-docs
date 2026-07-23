@@ -1,7 +1,7 @@
 ---
-title: Cardano Mints API - Track Native Token Mints, Burns & NFT Drops
+title: "Cardano Mints API - Track Native Token Mints"
 sidebar_label: Cardano Mints API
-description: Query Cardano native token mint and burn events with policy IDs, asset metadata, amounts, and block context. Track NFT collection drops and fungible token issuance via Bitquery GraphQL.
+description: "Cardano Mints API - Track Native Token Mints: query and stream Cardano on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Cardano mints API
   - Cardano native tokens API

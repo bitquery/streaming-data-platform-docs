@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Your First Bitquery GraphQL Query"
-description: "Create an account and run your first Bitquery GraphQL query in the IDE. Step-by-step setup for blockchain data access."
+description: "Run your first Bitquery GraphQL query in minutes with IDE setup, authentication basics, and a simple starter example you can reuse."
 ---
 # Your First Query
 

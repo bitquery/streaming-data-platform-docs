@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
-title: "Archive Database"
-description: "Archive database contains the data with the delay from tens of minutes to several hours,."
+title: "GraphQL Archive Dataset"
+description: "Query historical blockchain data with Bitquery’s archive dataset, including retention notes, limits, and GraphQL examples."
 ---
 # Archive Database
 

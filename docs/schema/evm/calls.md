@@ -1,6 +1,6 @@
 ---
 title: "EVM Smart Contract Calls API"
-description: "Bitquery schema reference for Calls: fields, types, and query patterns."
+description: "EVM Smart Contract Calls API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns."
 ---
 Calls API provides details about smart contract calls, arguments, callers, etc.
 

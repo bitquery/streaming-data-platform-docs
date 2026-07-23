@@ -2,7 +2,7 @@
 sidebar_position: 3
 sidebar_label: Slippage & Price Impact
 title: "EVM DEX Slippage API"
-description: "Get slippage and price impact data for Ethereum DEX pools through our Slippage API"
+description: "EVM DEX Slippage API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Includes filters and field selection tips."
 ---
 import FAQ from "@site/src/components/FAQ";
 

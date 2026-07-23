@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "How to Easily Track Token Lock and Unlock Events Using Bitquery APIs"
-description: "Bitquery API blog: How to Easily Track Token Lock and Unlock Events Using Bitquery APIs."
+title: "Track Token Lock Unlock"
+description: "Track Token Lock Unlock: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Keep queries fast with indexed filters."
 ---
 # How to Easily Track Token Lock and Unlock Events Using Bitquery APIs
 

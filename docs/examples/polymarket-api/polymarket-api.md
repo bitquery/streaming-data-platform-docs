@@ -1,6 +1,6 @@
 ---
 title: "Polymarket API - Trade, Prices & Market Data"
-description: "How to query Polymarket prediction market trades, prices, and volume via Bitquery GraphQL. Stream real-time data, filter by condition_id, rank by volume. REST, WebSocket, or Kafka on Polygon."
+description: "Polymarket API - Trade, Prices & Market Data: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - Polymarket API
   - Polymarket GraphQL API

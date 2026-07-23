@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "BSC Transfer Balance Tracker"
-description: "Learn how to get real-time balance updates for all addresses in BSC transfers with balance change reasons using Bitquery."
+description: "BSC Transfer Balance Tracker: monitor BNB Chain native and token transfers in real time with Bitquery GraphQL APIs. Keep queries fast with indexed filters."
 ---
 # BSC Transfer Balance Tracker
 

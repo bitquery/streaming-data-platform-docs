@@ -2,7 +2,7 @@
 sidebar_position: 3
 sidebar_label: Coin Ticker API
 title: "Crypto Coin Ticker API"
-description: "You can build your crypto coin ticker using our DEX APIs based on the requirements of the data field. For pre-aggregated price data with OHLC, consider using our Crypto Price API."
+description: "Crypto Coin Ticker API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Scale further with Kafka or gRPC streams."
 ---
 # Crypto Coin Ticker API
 

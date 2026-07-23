@@ -1,7 +1,7 @@
 ---
 sidebar_position: 9
-title: "Uniq"
-description: "Use the Bitquery GraphQL Uniq metric in queries and aggregations."
+title: "GraphQL Uniq Metric"
+description: "Count unique addresses, tokens, or traders with Bitquery’s uniq metric inside GraphQL aggregate blockchain queries. Keep queries fast with indexed filters."
 ---
 # Uniq
 

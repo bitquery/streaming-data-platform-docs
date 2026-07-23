@@ -1,6 +1,6 @@
 ---
 title: "Add-Liquidity Signals Telegram Bot"
-description: "This bot fetches real-time data on added liquidity for Solana DEX pools and sends alerts via Telegram. It highlights key details such as added liquidity, post-liquidity amounts, and provides direct trading links."
+description: "Build Add-Liquidity Signals Telegram Bot: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Add-Liquidity Signals Telegram Bot
 

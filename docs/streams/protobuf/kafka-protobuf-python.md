@@ -3,7 +3,7 @@ slug: kafka-protobuf-python
 sidebar_position: 3
 sidebar_label: Python Tutorial to use Solana Shreds from Kafka
 title: Python Tutorial to use Solana Shreds from Kafka
-description: Consume Bitquery Kafka Solana protobuf from Python with confluent_kafka and bitquery-pb2-kafka-package; run python-consumer-example from kafka-streams-examples-usecases.
+description: "Python Tutorial to use Solana Shreds from Kafka with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
 ---
 # Python Tutorial to use Solana Shreds from Kafka
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Solana Instructions Balance Updates API"
-description: "Get real time balance & balance updates of a Solana address associated with instruction invocation using Bitquery."
+description: "Solana Instructions Balance Updates API: fetch current and historical Solana balances with Bitquery GraphQL balance queries."
 ---
 # Solana Instructions Balance Updates API
 

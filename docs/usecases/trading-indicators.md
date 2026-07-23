@@ -1,6 +1,6 @@
 ---
 title: "Build Trading Indicators for Crypto Data"
-description: "Technical indicators are a vital tool for cryptocurrency traders, as they can help to identify trends, predict price movements, and make informed trading decisions. For real-time price data with pre-calculated indicators, use our Crypto Price API."
+description: "Build Trading Indicators for Crypto Data: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Build Trading Indicators for Crypto Data
 

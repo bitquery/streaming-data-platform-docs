@@ -1,6 +1,6 @@
 ---
 title: "Filing Data into Google BigQuery"
-description: "Bitquery GraphQL subscriptions: Filing Data into Google BigQuery."
+description: "Filing Data into Google BigQuery using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
 # Filing Data into Google BigQuery
 

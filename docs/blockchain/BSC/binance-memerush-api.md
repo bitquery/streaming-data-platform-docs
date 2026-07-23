@@ -1,6 +1,6 @@
 ---
 title: "Binance Meme Rush API"
-description: "Ultra low latency Binance Meme Rush memecoin data on BNB Chain: live trades, bonding curve progress, new tokens, prices, OHLC, liquidity, migrations, top traders. Access via GraphQL, streams, and Kafka"
+description: "Binance Meme Rush API: query and stream BNB Chain on-chain data with Bitquery GraphQL examples for developers. Great for bots, dashboards, and alerts."
 ---
 import VideoPlayer from "../../../src/components/videoplayer.js";
 

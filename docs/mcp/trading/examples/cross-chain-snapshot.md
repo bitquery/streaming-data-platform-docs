@@ -1,6 +1,6 @@
 ---
 title: "Example: Cross-Chain DEX Volume Snapshot"
-description: "Use the Bitquery MCP to compare 24h DEX volume, trades & unique traders across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon & Tron in one query."
+description: "Example: Cross-Chain DEX Volume Snapshot with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
 image: "/img/mcp/charts/cross-chain-volume.svg"
 keywords:
   - cross-chain DEX volume

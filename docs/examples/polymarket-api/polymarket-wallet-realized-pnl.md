@@ -1,6 +1,6 @@
 ---
 title: "Polymarket Wallet Realized PnL & Win Rate (Pattern)"
-description: "Use Bitquery PredictionTrades on Polygon to fetch a wallet’s Polymarket buys and sells in a time window, then aggregate by condition ID for realized PnL and win rate."
+description: "Polymarket Wallet Realized PnL & Win Rate (Pattern): Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - Polymarket PnL
   - Polymarket wallet analytics

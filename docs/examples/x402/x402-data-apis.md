@@ -1,6 +1,6 @@
 ---
-title: "x402 Data API"
-description: "Complete guide to x402 API: Query x402 payment transactions, monitor server payments in real-time, and analyze payment analytics. Learn how to use GraphQL APIs to track x402 protocol payments, server activity, and user transactions across multiple blockchain networks."
+title: "x402 Data APIs"
+description: "X402 Data Apis: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Run it in the IDE, then ship in your app."
 keywords:
   - x402 API
   - x402 GraphQL API

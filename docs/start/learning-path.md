@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Bitquery Learning Path"
-description: "Guided path from first query to streaming, cubes, and production apps on the Bitquery blockchain data platform."
+description: "Follow a guided Bitquery learning path from your first GraphQL query through streaming, cubes, and production-ready apps."
 ---
 # Learning Path: From Beginner to Advanced
 

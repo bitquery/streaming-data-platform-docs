@@ -1,6 +1,6 @@
 ---
 title: "Solana Shred Streams"
-description: "This section provides details about Bitquery's Solana Shred Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data."
+description: "Solana Shred Streams with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems. See examples in the Bitquery IDE."
 ---
 # Solana Shred Streams
 

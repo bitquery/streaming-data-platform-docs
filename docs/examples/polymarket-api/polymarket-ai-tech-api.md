@@ -1,6 +1,6 @@
 ---
-title: "Polymarket AI & Tech Markets API - OpenAI, GPT & Big Tech Odds"
-description: "Query and stream Polymarket AI and tech prediction markets: OpenAI, GPT, Anthropic, AGI and big-tech bets. Live odds (implied probability), odds movement OHLC, market creation and resolution, volume, and whale trades via GraphQL and Kafka on Polygon."
+title: "Polymarket AI & Tech Markets API"
+description: "Polymarket AI & Tech Markets API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - Polymarket AI markets API
   - Polymarket tech markets

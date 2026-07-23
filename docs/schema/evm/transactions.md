@@ -1,6 +1,6 @@
 ---
-title: Transactions API
-description: "Get information on transaction details and wallets on EVM chains. Also, get information on blocks for tokens or NFTs on EVM chains."
+title: "EVM Transactions Schema API"
+description: "Transactions API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. Scale further with Kafka or gRPC streams."
 ---
 The Transactions API provides detailed information on transactions including call count, gas, hash, type, and sender and recipient addresses etc. Here's a sample query to get started. You can see more examples [here](/docs/blockchain/Ethereum/transactions/transaction-api/)
 

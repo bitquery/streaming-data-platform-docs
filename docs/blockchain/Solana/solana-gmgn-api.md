@@ -1,6 +1,6 @@
 ---
-title: "GMGN Solana API | Trending Tokens, Pair Stats, Live DEX Trades"
-description: "GMGN-style Solana data via Bitquery: trending tokens, top pairs, buy/sell volume and makers, live pair trades, OHLC charts, and volume leaders—GraphQL queries and WebSocket streams for Raydium and Solana DEXs."
+title: "GMGN Solana API | Trending Tokens"
+description: "GMGN Solana API | Trending Tokens: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 keywords:
   - GMGN Solana API
   - Solana DEX screener API

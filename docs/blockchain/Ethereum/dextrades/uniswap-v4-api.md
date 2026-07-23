@@ -1,6 +1,6 @@
 ---
-title: "Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior"
-description: "Track Uniswap V4 trades, trader activities, token trades, and market behavior in real time using Bitquery's DEX Trades API."
+title: "Ethereum Uniswap V4 API"
+description: "Ethereum Uniswap V4 API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Works with WebSocket live subscriptions."
 sidebar_label: Uniswap v4 Trades
 ---
 import FAQ from "@site/src/components/FAQ";

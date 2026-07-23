@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Getting Historical Data"
-description: "Fetch historical OHLC candles from Bitquery to seed TradingView Advanced Charts before live updates."
+description: "Build Getting Historical Data: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Getting Historical Data
 

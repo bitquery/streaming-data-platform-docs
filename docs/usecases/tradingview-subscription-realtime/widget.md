@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "Widget Creation"
-description: "Now that we have setup a custom DataFeed, we need to create the TradingView Widget."
+description: "Build Widget Creation: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code. Keep queries fast with indexed filters."
 ---
 # Widget Creation
 

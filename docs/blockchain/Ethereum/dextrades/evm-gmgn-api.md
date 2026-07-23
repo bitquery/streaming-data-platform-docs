@@ -1,6 +1,6 @@
 ---
-title: "GMGN API for Ethereum & EVM | Trending Pairs, Token Stats, DEX Trades"
-description: "Build GMGN-style dashboards on Ethereum and EVM chains: trending DEX pairs, live pair trades, token price, buy/sell volume, makers, OHLC, pool liquidity, top traders, and new Uniswap v3 pools via Bitquery GraphQL and WebSocket."
+title: "Ethereum EVM Gmgn API"
+description: "Ethereum EVM Gmgn API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. See examples in the Bitquery IDE."
 sidebar_label: GMGN
 keywords:
   - GMGN API

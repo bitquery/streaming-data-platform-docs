@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Bitquery API Documentation - Blockchain Data Platform"
-description: "Access historical and real-time blockchain data via GraphQL, WebSocket, and Kafka. Query Ethereum, Solana, BSC, Polygon, and 40+ chains. Free tier available."
+description: "Bitquery API Documentation - Blockchain Data Platform: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
 # Overview
 

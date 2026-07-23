@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Bitquery WebSocket Subscriptions"
-description: "Connect to Bitquery GraphQL over WebSockets for realtime blockchain streams."
+description: "Bitquery WebSocket Subscriptions using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
 # Accessing Streaming Data via WebSocket
 

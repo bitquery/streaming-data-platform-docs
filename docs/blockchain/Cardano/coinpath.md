@@ -1,7 +1,7 @@
 ---
 title: Cardano Coinpath API - Trace ADA Flows Across Multiple Hops
 sidebar_label: Cardano Coinpath API
-description: Use Bitquery Coinpath on Cardano to trace ADA fund flows between addresses with multi-hop inbound and outbound paths for compliance, treasury, and forensic analysis.
+description: "Cardano Coinpath API - Trace ADA Flows Across Multiple Hops: query and stream Cardano on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Cardano coinpath API
   - Cardano fund tracing

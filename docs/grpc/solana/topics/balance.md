@@ -1,6 +1,6 @@
 ---
 title: "Solana Balance Updates - gRPC Stream (CoreCast)"
-description: "Real-time balance updates via Solana gRPC. Filter by address, token. Protobuf."
+description: "Solana Balance Updates - gRPC Stream (CoreCast) for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana balance stream"]
 ---
 # Solana Balance Updates gRPC Stream

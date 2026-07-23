@@ -1,6 +1,6 @@
 ---
-title: "Quantile"
-description: "Use the Bitquery GraphQL Quantile metric in queries and aggregations."
+title: "GraphQL Quantile Metric"
+description: "Quantile in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Scale further with Kafka or gRPC streams."
 ---
 # Quantile
 

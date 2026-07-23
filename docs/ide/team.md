@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Bitquery IDE Teams"
-description: "Collaborate on Bitquery GraphQL queries with IDE team workspaces."
+description: "Bitquery IDE Teams in Bitquery docs with practical setup steps, examples, and guidance for secure API access. Built for traders and analytics teams."
 ---
 # Develop in Team
 

@@ -1,6 +1,6 @@
 ---
 title: "Solana Builder Terms Explaination"
-description: "Glossary: Solana Builder Terms Explaination terms used in Bitquery blockchain data APIs."
+description: "Solana Builder Terms Explaination: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
 # Solana Builder Terms Explaination
 

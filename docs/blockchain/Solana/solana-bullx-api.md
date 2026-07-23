@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "BullX Solana API"
-description: "This section will guide you through different APIs which will tell you how to get data like realtime trades just like how BullX shows for Solana."
+title: "Solana Bullx API"
+description: "Solana Bullx API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
 ---
 # BullX Solana API
 

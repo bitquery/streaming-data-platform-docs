@@ -1,6 +1,6 @@
 ---
 title: "Polygon (MATIC) Transfers API"
-description: "Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers"
+description: "Polygon (MATIC) Transfers API: monitor Polygon native and token transfers in real time with Bitquery GraphQL APIs. Works with WebSocket live subscriptions."
 ---
 # Polygon (MATIC) Transfers API
 

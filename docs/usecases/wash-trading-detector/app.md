@@ -1,6 +1,6 @@
 ---
 title: "Solana Wash Trading Dashboard"
-description: "This script runs an interactive Streamlit web application that:."
+description: "Build Solana Wash Trading Dashboard: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Solana Wash Trading Dashboard
 

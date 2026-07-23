@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
-title: "Sum"
-description: "Use the Bitquery GraphQL Sum metric in queries and aggregations."
+title: "GraphQL Sum Metric"
+description: "Sum trade amounts and transfer volumes in Bitquery GraphQL aggregates to power clear blockchain analytics dashboards. See examples in the Bitquery IDE."
 ---
 #  Sum
 

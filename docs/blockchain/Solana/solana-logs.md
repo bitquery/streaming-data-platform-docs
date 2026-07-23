@@ -1,6 +1,6 @@
 ---
 title: "Solana Logs API"
-description: "Solana Logs API helps you filter program instruction logs using regular expressions."
+description: "Solana Logs: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
 ---
 # Solana Logs API
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "BSC MEV Balance Tracker"
-description: "Learn how to track BSC MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery."
+description: "BSC MEV Balance Tracker: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions. Keep queries fast with indexed filters."
 ---
 # BSC MEV Balance Tracker
 

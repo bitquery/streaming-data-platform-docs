@@ -1,6 +1,6 @@
 ---
-title: "Orbic API"
-description: "Access real-time and historical data for Orbic on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders"
+title: "Solana Orbic API"
+description: "Solana Orbic API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Includes filters and field selection tips."
 ---
 # Orbic API
 

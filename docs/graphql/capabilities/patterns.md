@@ -1,8 +1,8 @@
 ---
 draft: true
 sidebar_position: 1
-title: "Usage Patterns"
-description: "GraphQL is a language, and the schema is just a restriction how do you use."
+title: "GraphQL Usage Patterns"
+description: "Learn common Bitquery GraphQL patterns for facts, aggregates, subscriptions, and efficient query design across chains. See examples in the Bitquery IDE."
 ---
 # Usage Patterns
 

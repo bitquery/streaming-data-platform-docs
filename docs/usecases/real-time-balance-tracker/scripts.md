@@ -1,6 +1,6 @@
 ---
 title: "Calculations and Scripting"
-description: "We will be using a simple fromula given below to calculate and trace the real-time balance changes. To execute this formula through code we will build two files (namely balance.js and index.js)."
+description: "Build Calculations and Scripting: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Calculations and Scripting
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 9
 title: "Ethereum NFT Balance API"
-description: "Track NFT balances, ownership, and token IDs using Bitquery."
+description: "Ethereum NFT Balance API: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions. Works with WebSocket live subscriptions."
 ---
 # Ethereum NFT Balance API
 

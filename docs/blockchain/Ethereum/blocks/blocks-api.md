@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "Blocks API"
-description: "This GraphQL query retrieves the latest blocks in real time on the Ethereum network that were mined after March 3rd, 2023. It includes information on the block number, hash, mix digest, date, base fee, coinbase, transaction hash, transaction count, and result (including gas and errors). You can…"
+title: "Ethereum Blocks API"
+description: "Ethereum Blocks API: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
 # Blocks API
 

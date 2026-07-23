@@ -1,6 +1,6 @@
 ---
-title: "Four Meme Mempool API - Real-Time Pre-Confirmation Monitoring"
-description: "Monitor Four Meme memecoin transactions in real-time before confirmation. Track pending trades, token creations, and detect opportunities early with ultra-low latency mempool streams on BSC."
+title: "Four Meme Mempool API"
+description: "Four Meme Mempool API: watch BNB Chain pending transactions before confirmation with Bitquery GraphQL subscriptions. Built for traders and analytics teams."
 ---
 import FAQ from "@site/src/components/FAQ";
 

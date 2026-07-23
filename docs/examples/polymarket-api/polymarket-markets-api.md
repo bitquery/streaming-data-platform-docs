@@ -1,6 +1,6 @@
 ---
-title: "Polymarket CTF Exchange & Markets API - Condition ID, Token Filters"
-description: "Query Polymarket conditional token (CTF) market data, condition IDs, and token filters. Market creation, resolution, and lifecycle events via GraphQL."
+title: "Polymarket Markets API"
+description: "Polymarket Markets API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Keep queries fast with indexed filters."
 keywords:
   - Polymarket Markets API
   - Polymarket CTF Exchange

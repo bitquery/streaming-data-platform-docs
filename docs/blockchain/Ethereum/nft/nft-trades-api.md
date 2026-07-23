@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
-title: "NFT Trades API"
-description: "Query NFT DEX trades on EVM chains with Bitquery — latest trades by address, collection, and marketplace."
+title: "Ethereum NFT Trades API"
+description: "Ethereum NFT Trades API: track Ethereum NFT trades, ownership, and metadata with Bitquery GraphQL and streams. See examples in the Bitquery IDE."
 ---
 # NFT Trades API
 

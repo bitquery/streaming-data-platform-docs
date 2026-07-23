@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Generate a Bitquery API Token"
-description: "Create OAuth applications and generate Bitquery access tokens from the account Authorization menu."
+description: "Generate a Bitquery API Token in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 ---
 # How to Generate a Token
 

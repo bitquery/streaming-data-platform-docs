@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Realtime Database"
-description: "Bitquery GraphQL dataset guide: Realtime Database."
+description: "Realtime Database in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. See examples in the Bitquery IDE."
 ---
 # Realtime Database
 

@@ -1,6 +1,6 @@
 ---
-title: "Base Chain NFT API"
-description: "Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades"
+title: "Base NFT Trades and Metadata API"
+description: "Base NFT API: track Base NFT trades, ownership, and metadata with Bitquery GraphQL and streams. Includes filters and field selection tips."
 ---
 # Base Chain NFT API
 

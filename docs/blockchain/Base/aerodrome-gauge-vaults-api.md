@@ -1,6 +1,6 @@
 ---
-title: "Aerodrome Gauge Vaults API — Base (Deposits, Withdraws, Rewards)"
-description: "Track Aerodrome gauge vaults on Base: new gauges, deposits, withdraws, and reward claims. Query governance-directed emissions activity and LP staking flows via Bitquery GraphQL and Streams."
+title: "Aerodrome Gauge Vaults API"
+description: "Aerodrome Gauge Vaults API: query and stream Base on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
 sidebar_position: 7
 ---
 # Aerodrome Gauge Vaults API — Base (Deposits, Withdraws, Rewards)

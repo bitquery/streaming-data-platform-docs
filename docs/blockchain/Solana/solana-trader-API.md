@@ -1,6 +1,6 @@
 ---
 title: "Solana Trader API"
-description: "Get detailed insights into Solana traders and their activities, including Pumpfun data, across DEX platforms like Raydium and Jupiter. Access on-chain trading pair details, liquidity pools, and transaction analytics through our comprehensive Solana Trader API"
+description: "Solana Trader API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Includes filters and field selection tips."
 ---
 # Solana Trader API
 

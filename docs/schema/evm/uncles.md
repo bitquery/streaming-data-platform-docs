@@ -1,6 +1,6 @@
 ---
 title: "EVM Uncle Blocks API"
-description: "Bitquery schema reference for Uncles: fields, types, and query patterns."
+description: "EVM Uncle Blocks API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. See examples in the Bitquery IDE."
 ---
 ### What are Uncle Blocks?
 

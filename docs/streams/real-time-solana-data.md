@@ -1,6 +1,6 @@
 ---
-title: "The Need for Real-Time Data on Solana: Latency, Scale, and Fidelity at Stake"
-description: "Bitquery streaming docs: The Need for Real-Time Data on Solana: Latency, Scale, and Fidelity at Stake."
+title: "Real Time Solana Data"
+description: "Real Time Solana Data with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems. See examples in the Bitquery IDE."
 ---
 # The Need for Real-Time Data on Solana: Latency, Scale, and Fidelity at Stake
 

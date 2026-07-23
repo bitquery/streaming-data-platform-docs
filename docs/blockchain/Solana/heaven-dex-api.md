@@ -1,6 +1,6 @@
 ---
-title: "Heaven DEX API"
-description: "Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our Heaven DEX API"
+title: "Solana Heaven DEX API"
+description: "Solana Heaven DEX API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Includes filters and field selection tips."
 ---
 # Heaven DEX API
 

@@ -1,6 +1,6 @@
 ---
-title: "Robinhood Transfers"
-description: "Query and stream token transfers on Robinhood with Bitquery EVM Transfers APIs. Track senders, receivers, amounts, and token metadata in real time and historically."
+title: "Robinhood Transfers API"
+description: "Robinhood Transfers API: monitor Robinhood native and token transfers in real time with Bitquery GraphQL APIs. Keep queries fast with indexed filters."
 sidebar_position: 2
 keywords:
   - Robinhood transfers API

@@ -1,6 +1,6 @@
 ---
 title: "Crypto Tokens OHLC Candle K-Line API"
-description: "Get real-time and historical OHLC (Open, High, Low, Close) candle data, K-line charts, and price analytics for crypto tokens across all supported blockchains. Perfect for trading bots, charting applications, and market analysis."
+description: "Crypto Tokens OHLC Candle K-Line API via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
 keywords: ["OHLC API", "crypto candle data", "K-line API", "real-time price data", "crypto trading API", "blockchain price data", "candlestick charts", "crypto market data", "trading bot API", "crypto analytics", "multi-chain price data", "DEX price API", "crypto streaming API", "Kafka crypto data", "TradingView integration", "crypto arbitrage API"]
 ---
 # Crypto Tokens OHLC Candle K-Line API - Real-Time & Historical Price Data

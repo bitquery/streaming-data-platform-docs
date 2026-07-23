@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "GraphQL Calculations and Expressions"
-description: "Build calculated fields and expressions in Bitquery GraphQL queries."
+description: "GraphQL Calculations and Expressions in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
 # Calculations
 

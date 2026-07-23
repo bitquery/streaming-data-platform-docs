@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "NFT Ownership API"
-description: "The NFT Ownership API can be used to retrieve information about the ownership of a specific NFT ( Non-Fungible Token ) on the supported blockchain. For instance using this we can access the owners of an NFT including their addresses and associated metadata and also we can retrieve a list of the…"
+title: "Ethereum NFT Ownership API"
+description: "Ethereum NFT Ownership API: track Ethereum NFT trades, ownership, and metadata with Bitquery GraphQL and streams. Built for traders and analytics teams."
 ---
 # NFT Ownership API
 

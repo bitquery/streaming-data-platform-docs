@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Share Bitquery IDE Queries"
-description: "Share GraphQL queries and IDE links with teammates and the community."
+description: "Share Bitquery IDE Queries in Bitquery docs with practical setup steps, examples, and guidance for secure API access. See examples in the Bitquery IDE."
 ---
 # Share Query
 

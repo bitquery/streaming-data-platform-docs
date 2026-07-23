@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "Solana Transactions API"
-description: "Get information about specific transactions such as signature, block, transaction fee, success, fee payer, instructions count, signer, and transaction index"
+description: "Solana Transactions API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
 import FAQ from "@site/src/components/FAQ";
 

@@ -1,6 +1,6 @@
 ---
 title: "Prediction Market API"
-description: "Universal prediction market API: query market lifecycle, trades, and settlements across chains. Polymarket and more; additional EVM chains coming soon."
+description: "Prediction Market API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Covers archive history and realtime data."
 keywords:
   - prediction market API
   - Polymarket API

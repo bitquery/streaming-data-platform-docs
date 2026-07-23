@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Ethereum Token Market Cap API"
-description: "Stream and query Ethereum ERC-20 market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API"
+description: "Ethereum Token Market Cap API: stream Ethereum market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs. See examples in the Bitquery IDE."
 ---
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 

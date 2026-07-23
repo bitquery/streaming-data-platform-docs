@@ -1,6 +1,6 @@
 ---
 title: "Reconnect Automatically After Disconnect"
-description: "Bitquery GraphQL subscriptions: Reconnect Automatically After Disconnect."
+description: "Reconnect Automatically After Disconnect using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
 # Reconnect Automatically After Disconnect
 

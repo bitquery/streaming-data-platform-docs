@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "What is a Trigger?"
-description: "Bitquery GraphQL subscriptions: What is a Trigger?."
+description: "What is a Trigger? using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring. Keep queries fast with indexed filters."
 ---
 # What is a Trigger?
 

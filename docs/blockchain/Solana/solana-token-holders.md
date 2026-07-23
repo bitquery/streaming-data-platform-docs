@@ -1,6 +1,6 @@
 ---
 title: "Solana Token Holders API"
-description: "Get real-time and historical token holder data for any SPL token on Solana. Calculate top holders, track wallet distribution, and monitor holder changes using Bitquery."
+description: "Solana Token Holders API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 ---
 # Solana Token Holders API
 

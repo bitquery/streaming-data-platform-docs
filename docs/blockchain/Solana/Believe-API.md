@@ -1,6 +1,6 @@
 ---
 title: "Believe Launchpad API"
-description: "Get Believe Launchpad on-chain data of Meteora DBC Token Creations."
+description: "Believe Launchpad API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 # Believe Launchpad API
 

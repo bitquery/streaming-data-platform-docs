@@ -1,6 +1,6 @@
 ---
 title: "Setting Up App.js"
-description: "To complete the setup and run the chart, we need to call the TVChartContainer component inside the main App.js file. Here's the process:."
+description: "Build Setting Up App.js: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code. See examples in the Bitquery IDE."
 ---
 # Setting Up `App.js`
 

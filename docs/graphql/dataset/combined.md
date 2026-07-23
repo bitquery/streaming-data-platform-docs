@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "Combined Database"
-description: "Bitquery GraphQL dataset guide: Combined Database."
+description: "Combined Database in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. See examples in the Bitquery IDE."
 ---
 # Combined Database
 

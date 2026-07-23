@@ -1,6 +1,6 @@
 ---
-title: "eth_gasPrice"
-description: "Get the current gas price on the Ethereum network using the eth_gasPrice API"
+title: "Ethereum Eth Gasprice"
+description: "Ethereum Eth Gasprice: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 # eth_gasPrice
 

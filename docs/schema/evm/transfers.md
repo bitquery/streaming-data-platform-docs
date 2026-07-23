@@ -1,6 +1,6 @@
 ---
 title: "EVM Token Transfers API"
-description: "Get EVM token transfers with detailed infromation using the transfers API. Filter, sort, and analyze ERC-20 token flow easily."
+description: "EVM Token Transfers API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. See examples in the Bitquery IDE."
 ---
 To retrieve data on token and currency transfers using Bitquery, users can utilize the platform's GraphQL API. The Bitquery API allows users to construct custom queries to retrieve data on a wide range of blockchain events and transactions, including token transfers. You can find more examples [here](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api/)
 

@@ -1,7 +1,7 @@
 ---
-title: Bitcoin Transactions API - Get Latest Txs, Fees, and Daily Aggregates
+title: "Bitcoin Transactions API"
 sidebar_label: Bitcoin Transactions API
-description: Query Bitcoin transactions with input/output totals, fees in BTC and USD, daily counts, average fees, and per-address transaction history via Bitquery GraphQL.
+description: "Bitcoin Transactions API: query and stream Bitcoin on-chain data with Bitquery GraphQL examples for developers. Run it in the IDE, then ship in your app."
 keywords:
   - Bitcoin transactions API
   - Bitcoin transaction history

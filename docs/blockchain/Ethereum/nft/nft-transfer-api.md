@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
-title: "NFT Transfer API"
-description: "The NFT Transfer API provides access to diverse NFT transfer data on supported blockchains and have various use cases. For instance we can retrieve daily transfers, monitor top NFT transfers, track the latest transfers of specific NFTs, and subscribe to real-time transfers for instant updates etc."
+title: "Ethereum NFT Transfer API"
+description: "Ethereum NFT Transfer API: monitor Ethereum native and token transfers in real time with Bitquery GraphQL APIs. Copy GraphQL snippets for production apps."
 ---
 # NFT Transfer API
 

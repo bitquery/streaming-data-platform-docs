@@ -1,6 +1,6 @@
 ---
-title: "Tron SunSwap API"
-description: "Access on-chain data for any SunSwap-based token with the SunSwap API, including trades, prices, and token information on the Tron network"
+title: "Tron Sunswap API"
+description: "Tron Sunswap API: query and stream Tron on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
 # Tron SunSwap API
 

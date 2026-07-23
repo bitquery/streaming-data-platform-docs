@@ -1,6 +1,6 @@
 ---
-title: "eth_blockNumber"
-description: "Retrieve the latest block number on the Ethereum blockchain using the eth_blockNumber API"
+title: "Ethereum Eth Blocknumber"
+description: "Ethereum Eth Blocknumber: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
 # eth_blockNumber
 

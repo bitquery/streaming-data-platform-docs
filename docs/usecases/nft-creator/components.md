@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "Components"
-description: "The Components are the heavy-lifters of the app and contain the code snippets for the functionality."
+title: "NFT Portfolio Tracker UI Components"
+description: "Build React UI components that display NFT balances and metadata cleanly using Bitquery GraphQL NFT API responses. Works with WebSocket live subscriptions."
 ---
 # Components
 

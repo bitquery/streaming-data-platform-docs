@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Tron Address Balance API"
-description: "Learn how to get historical & real time balance & balance updates of a Tron address using Bitquery."
+description: "Tron Address Balance API: fetch current and historical Tron balances with Bitquery GraphQL balance queries. Run it in the IDE, then ship in your app."
 ---
 import FAQ from "@site/src/components/FAQ";
 

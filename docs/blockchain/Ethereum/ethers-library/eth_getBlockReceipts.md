@@ -1,6 +1,6 @@
 ---
 title: "eth_getBlockReceipts"
-description: "Retrieve detailed receipt information for a specific block on the Ethereum blockchain using the eth_getBlockReceipt API"
+description: "eth_getBlockReceipts: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Includes filters and field selection tips."
 ---
 # eth_getBlockReceipts
 

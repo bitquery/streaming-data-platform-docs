@@ -1,6 +1,6 @@
 ---
-title: "Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior"
-description: "Track Uniswap V4 trades, trader activities, token trades, and market behavior in real time using Bitquery's DEX Trades API on Optimism."
+title: "Optimism Uniswap V4 API"
+description: "Optimism Uniswap V4 API: query Optimism Uniswap trades, pools, and prices with Bitquery GraphQL DEX APIs. Built for traders and analytics teams."
 ---
 # Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior
 

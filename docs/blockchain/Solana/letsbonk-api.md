@@ -1,6 +1,6 @@
 ---
 title: "LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices"
-description: "Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our LetsBonk.fun API"
+description: "LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices: query and stream Solana on-chain data with Bitquery GraphQL examples for developers."
 ---
 import FAQ from "@site/src/components/FAQ";
 

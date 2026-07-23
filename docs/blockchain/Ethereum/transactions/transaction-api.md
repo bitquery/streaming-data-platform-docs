@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Token Transaction API"
-description: "The Transaction API provides access to transaction data on the blockchain. Transactions are the fundamental unit of account on a blockchain and represent the transfer of value from one address to another."
+description: "Token Transaction API: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
 # Token Transaction API
 

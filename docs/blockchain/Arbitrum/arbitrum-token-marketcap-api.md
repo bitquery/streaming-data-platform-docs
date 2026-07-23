@@ -1,7 +1,7 @@
 ---
 sidebar_position: 9
 title: "Arbitrum Token Market Cap API"
-description: "Stream and query Arbitrum token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API"
+description: "Arbitrum Token Market Cap API: stream Arbitrum market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs. See examples in the Bitquery IDE."
 ---
 # Arbitrum Token Market Cap API
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "Build Your Own NFT Portfolio Tracker with Bitquery NFT API - Begin Here"
-description: "The React app is designed for NFT creators who want to showcase their work in a portfolio format. With this app, creators can easily create a personalized portfolio page that displays their NFT collection, as well as information about their background and artistic process."
+title: "Build an NFT Portfolio Tracker"
+description: "Start the Bitquery NFT portfolio tracker tutorial: project setup, API token, environment config, and first NFT queries. See examples in the Bitquery IDE."
 ---
 # Build Your Own NFT Portfolio Tracker with Bitquery NFT API - Begin Here
 

@@ -1,6 +1,6 @@
 ---
 title: "Building a Trading Bot Using Bitquery Kafka Streams"
-description: "Bitquery streaming docs: Building a Trading Bot Using Bitquery Kafka Streams."
+description: "Building a Trading Bot Using Bitquery Kafka Streams with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
 ---
 # Building a Trading Bot Using Bitquery Kafka Streams
 

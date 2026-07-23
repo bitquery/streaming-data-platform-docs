@@ -1,6 +1,6 @@
 ---
 title: "Setting up Google Pub-Sub"
-description: "Bitquery GraphQL subscriptions: Setting up Google Pub-Sub."
+description: "Setting up Google Pub-Sub using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
 # Setting up Google Pub-Sub
 

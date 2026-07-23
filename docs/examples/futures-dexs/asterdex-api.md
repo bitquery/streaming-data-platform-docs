@@ -1,6 +1,6 @@
 ---
 title: "AsterDEX API Documentation"
-description: "Comprehensive AsterDEX API guide for BNB Smart Chain perpetual futures trading. Access real-time liquidations, order lifecycle tracking, margin trading data, funding rates, and smart contract events via Bitquery GraphQL APIs. Perfect for developers building DeFi trading applications."
+description: "AsterDEX API Documentation: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. See examples in the Bitquery IDE."
 keywords:
   - AsterDEX API documentation
   - BNB Smart Chain perpetual futures

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
-title: "Mempool Data API"
-description: "Query and stream pending mempool transactions with Bitquery before they confirm on-chain."
+title: "Mempool Data API Overview"
+description: "Use Bitquery mempool APIs to watch pending transactions before confirmation across supported chains with GraphQL queries and streams."
 ---
 # Getting Mempool Data
 

@@ -1,6 +1,6 @@
 ---
 title: "Backfill Data After WebSocket Disconnect - Python Tutorial"
-description: "Python tutorial: backfill missing data when WebSocket disconnects. Handle reconnections, query historical gaps, and gracefully close Bitquery streams."
+description: "Backfill Data After WebSocket Disconnect - Python Tutorial using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 sidebar_position: 6
 keywords: ["backfill subscription", "WebSocket disconnection", "Bitquery Python", "GraphQL backfill", "stream reconnection"]
 ---

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "Network"
-description: "Network attribute is a selection of the blockchain:."
+title: "GraphQL Network Selection"
+description: "Select the blockchain network in Bitquery GraphQL queries using the network attribute, with clear multi-chain examples. See examples in the Bitquery IDE."
 ---
 # Network
 

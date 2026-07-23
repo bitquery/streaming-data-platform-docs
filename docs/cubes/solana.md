@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Solana Builder Terms Explanation"
-description: "Overview of Bitquery Solana cubes — trades, transfers, instructions, and related GraphQL APIs."
+description: "Solana Builder Terms Explanation: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
 # Solana Builder Terms Explanation
 

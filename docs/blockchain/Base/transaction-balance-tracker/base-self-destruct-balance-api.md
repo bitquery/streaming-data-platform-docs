@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: "Base Self-Destruct Balance Tracker"
-description: "Learn how to track Base contract self-destruct events, ephemeral contracts, and security incidents using Bitquery."
+description: "Base Self-Destruct Balance Tracker: stream Base balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
 # Base Self-Destruct Balance Tracker
 

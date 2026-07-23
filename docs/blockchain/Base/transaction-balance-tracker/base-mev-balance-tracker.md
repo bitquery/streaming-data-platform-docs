@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Base MEV Balance Tracker"
-description: "Learn how to track Base MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery."
+description: "Base MEV Balance Tracker: stream Base balance changes with reason codes using Bitquery GraphQL subscriptions. Copy GraphQL snippets for production apps."
 ---
 # Base MEV Balance Tracker
 

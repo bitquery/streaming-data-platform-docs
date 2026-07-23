@@ -1,6 +1,6 @@
 ---
 title: "Robinhood Trades API"
-description: "Query and stream Robinhood token trades, prices, OHLCV, market cap, whale trades, and top traders with Bitquery Trading APIs, scoped with NetworkBid bid:robinhood."
+description: "Robinhood Trades API: query and stream Robinhood on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
 sidebar_position: 1
 keywords:
   - Robinhood API

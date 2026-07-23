@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
-title: "BSC Uniswap API"
-description: "Get on-chain data of any Uniswap based token through our Uniswap API"
+title: "BNB Chain Uniswap API"
+description: "BNB Chain Uniswap API: query BNB Chain Uniswap trades, pools, and prices with Bitquery GraphQL DEX APIs. Copy GraphQL snippets for production apps."
 ---
 import FAQ from "@site/src/components/FAQ";
 

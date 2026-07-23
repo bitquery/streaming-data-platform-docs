@@ -1,7 +1,7 @@
 ---
 sidebar_position: 11
-title: "BSC Liquidity API"
-description: "Get real-time liquidity and pool reserve data for BSC DEX pools through our Liquidity API"
+title: "BNB Chain Liquidity API"
+description: "BNB Chain Liquidity API: read BNB Chain pool reserves and liquidity updates via Bitquery GraphQL DEX APIs. Built for traders and analytics teams."
 ---
 # BSC Liquidity API
 

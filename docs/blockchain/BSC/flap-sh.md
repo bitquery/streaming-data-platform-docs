@@ -1,6 +1,6 @@
 ---
 title: Flap.sh API - BSC Launchpad Token Analytics and Trading Data
-description: Comprehensive guide to Flap.sh launchpad API on BNB Smart Chain. Track token creation, monitor trades, analyze OHLCV data, and stream real-time prices for Flap.sh tokens using Bitquery GraphQL APIs.
+description: "Flap.sh API - BSC Launchpad Token Analytics and Trading Data: query and stream BNB Chain on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Flap.sh API
   - Flap.sh launchpad

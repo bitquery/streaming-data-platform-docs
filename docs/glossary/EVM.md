@@ -1,6 +1,6 @@
 ---
 title: "EVM Builder Terms Explaination"
-description: "Glossary: EVM Builder Terms Explaination terms used in Bitquery blockchain data APIs."
+description: "EVM Builder Terms Explaination: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
 # EVM Builder Terms Explaination
 

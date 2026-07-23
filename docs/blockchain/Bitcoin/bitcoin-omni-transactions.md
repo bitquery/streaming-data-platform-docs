@@ -1,7 +1,7 @@
 ---
-title: Bitcoin Omni Layer API - Track USDT on Bitcoin and Other Omni Tokens
+title: "Bitcoin Omni Transactions"
 sidebar_label: Bitcoin Omni Layer API
-description: Query Omni Layer transactions and transfers on Bitcoin with Bitquery GraphQL. Track USDT-on-Bitcoin and other Omni-issued assets with senders, receivers, and fees.
+description: "Bitcoin Omni Transactions: query and stream Bitcoin on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 keywords:
   - Bitcoin Omni Layer API
   - Omni Layer GraphQL

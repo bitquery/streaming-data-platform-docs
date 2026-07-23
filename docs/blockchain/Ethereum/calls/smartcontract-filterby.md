@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "SmartContract API"
-description: "This query retrieves the 10 most recent smart contract calls that match a specific function signature (harvest()) on the Binance Smart Chain (BSC) network. It also includes transaction and block data associated with each call."
+title: "Ethereum Smartcontract Filterby"
+description: "Ethereum Smartcontract Filterby: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
 # SmartContract API
 

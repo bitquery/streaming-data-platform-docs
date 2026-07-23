@@ -1,8 +1,8 @@
 ---
 sidebar_position: 7
 sidebar_label: Wallet Trades API
-title: "Address Trades API"
-description: "This GraphQL query retrieves the latest trades executed by a particular maker on the Ethereum network. You can view the query in the IDE here."
+title: "Ethereum Trades Of An Address API"
+description: "Ethereum Trades Of An Address API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams."
 ---
 # Address Trades API
 

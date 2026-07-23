@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Base Slippage API"
-description: "Get slippage and price impact data for Base DEX pools through our Slippage API"
+description: "Base Slippage API: measure Base DEX price impact and slippage with Bitquery GraphQL pool metrics. Scale further with Kafka or gRPC streams."
 ---
 # Base Slippage API
 

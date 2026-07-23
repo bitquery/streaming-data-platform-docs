@@ -1,7 +1,7 @@
 ---
-title: Cardano Address API - Get Wallet Balances, Native Tokens & Staking
+title: "Cardano Address API"
 sidebar_label: Cardano Address API
-description: Query Cardano wallet balances across ADA and native tokens, plus staking and rewards data, using Bitquery's GraphQL Address API.
+description: "Cardano Address: query and stream Cardano on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 keywords:
   - Cardano address API
   - Cardano wallet balance API

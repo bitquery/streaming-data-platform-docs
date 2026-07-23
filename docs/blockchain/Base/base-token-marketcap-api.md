@@ -1,7 +1,7 @@
 ---
 sidebar_position: 10
 title: "Base Token Market Cap API"
-description: "Stream and query Base chain token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API"
+description: "Base Token Market Cap API: stream Base market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs. Includes filters and field selection tips."
 ---
 # Base Token Market Cap API
 

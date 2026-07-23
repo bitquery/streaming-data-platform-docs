@@ -1,6 +1,6 @@
 ---
 title: "Solana gRPC Authentication - CoreCast API Token"
-description: "Authenticate Bitquery Solana gRPC streams (CoreCast). Configure API token for corecast.bitquery.io. Metadata, config.yaml, 401 debug."
+description: "Solana gRPC Authentication - CoreCast API Token for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["Solana gRPC auth", "CoreCast authentication", "grpc solana token", "bitquery api token"]
 ---
 # Authentication

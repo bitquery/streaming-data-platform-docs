@@ -1,6 +1,6 @@
 ---
 title: "Transaction Cube"
-description: "Learn the Bitquery Transactions cube — transaction fields, filters, and example GraphQL queries."
+description: "Transaction Cube: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Run it in the IDE, then ship in your app."
 ---
 # Transaction Cube
 

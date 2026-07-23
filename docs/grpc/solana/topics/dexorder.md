@@ -1,6 +1,6 @@
 ---
 title: "Solana DEX Orders - gRPC Stream (CoreCast)"
-description: "Real-time DEX order book data via Solana gRPC. OpenBook, Serum. Filter by program, pool, token."
+description: "Solana DEX Orders - gRPC Stream (CoreCast) for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana DEX orders", "order book"]
 ---
 # Solana DEX Orders gRPC Stream

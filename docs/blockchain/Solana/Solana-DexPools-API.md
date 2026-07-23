@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Solana DEX Pools API"
-description: "Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, Phoenix etc through our DEX Pools API"
+description: "Solana DEX Pools API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 import FAQ from "@site/src/components/FAQ";
 

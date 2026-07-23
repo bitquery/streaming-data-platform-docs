@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "How to Filter Events from Solana Logs Using Bitquery APIs and Regular Expressions"
-description: "Bitquery API blog: How to Filter Events from Solana Logs Using Bitquery APIs and Regular Expressions."
+title: "Use Regular Expressions To Search Solana Logs"
+description: "Use Regular Expressions To Search Solana Logs: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
 # How to Filter Events from Solana Logs Using Bitquery APIs and Regular Expressions
 

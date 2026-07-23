@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: Tools & SDKs Directory
-description: Discover sample apps, dashboards, and SDKs built with Bitquery blockchain data APIs. Try live demos, clone repos, and integrate crypto data into your projects.
+description: "Tools & SDKs Directory: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Works with WebSocket live subscriptions."
 keywords:
   - Bitquery tools
   - blockchain API tools

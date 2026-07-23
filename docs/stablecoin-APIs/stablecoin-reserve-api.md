@@ -1,6 +1,6 @@
 ---
 title: "Stablecoin Reserve API"
-description: "Bitquery stablecoin API docs: Stablecoin Reserve API."
+description: "Stablecoin Reserve API using Bitquery stablecoin APIs for prices, transfers, payments, and cross-chain monitoring workflows."
 ---
 # Stablecoin Reserve API
 

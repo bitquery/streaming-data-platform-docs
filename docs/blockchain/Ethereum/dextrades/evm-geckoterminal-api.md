@@ -2,7 +2,7 @@
 sidebar_position: 1
 sidebar_label: GeckoTerminal
 title: "GeckoTerminal EVM API"
-description: "Get real-time EVM token pairs, trades, prices, buyers, sellers, volumes and DEX analytics—exactly as seen on GeckoTerminal—using Bitquery APIs, streams & cloud"
+description: "GeckoTerminal EVM API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Great for bots, dashboards, and alerts."
 ---
 # GeckoTerminal EVM API
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Ethereum Validator Balance Tracker"
-description: "Learn how to track Ethereum validator balances, staking rewards, and withdrawals using Bitquery."
+description: "Ethereum Validator Balance Tracker: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions."
 ---
 # Ethereum Validator Balance Tracker
 

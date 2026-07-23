@@ -1,7 +1,7 @@
 ---
-title: Algorand Address API - Get ALGO Balances & Smart Contract Bytecode
+title: "Algorand Address API"
 sidebar_label: Algorand Address API
-description: Query Algorand address balances for ALGO, look up multiple addresses in one request, and retrieve smart contract bytecode and source via Bitquery GraphQL.
+description: "Algorand Address API: query and stream Algorand on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 keywords:
   - Algorand address API
   - Algorand balance API

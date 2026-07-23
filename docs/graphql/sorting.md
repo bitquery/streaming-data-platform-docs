@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Sorting Results in Bitquery GraphQL"
-description: "Order Bitquery GraphQL query results with orderBy and related sort options."
+description: "Sorting Results in Bitquery GraphQL in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
 # Sorting
 

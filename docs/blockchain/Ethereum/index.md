@@ -1,6 +1,6 @@
 ---
 title: Ethereum API - Best Blockchain Data API for Developers
-description: Access comprehensive Ethereum API with real-time blockchain data, transactions, DEX trades, liquidity pools, slippage data, token balances, and more. Free tier available. GraphQL API with subscriptions and Kafka streaming.
+description: "Ethereum API - Best Blockchain Data API for Developers: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers."
 slug: /blockchain/Ethereum/
 keywords:
   - Ethereum API

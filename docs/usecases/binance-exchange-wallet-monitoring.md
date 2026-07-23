@@ -1,6 +1,6 @@
 ---
-title: "Monitoring Withdrawals and Deposits for 1000s of Binance Exchange Wallets"
-description: "In this guide we will utilize the Protobuf Kafka streams provided by Bitquery to monitor withdrawals and deposits for a large number of Binance Exchange Wallets on BSC network. You can read more about Kafka solution by Bitquery here."
+title: "Binance Exchange Wallet Monitoring"
+description: "Build Binance Exchange Wallet Monitoring: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Monitoring Withdrawals and Deposits for 1000s of Binance Exchange Wallets
 

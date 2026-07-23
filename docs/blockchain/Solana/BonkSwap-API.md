@@ -1,6 +1,6 @@
 ---
-title: "BonkSwap API"
-description: "Get on-chain data of any BonkSwap based token through our BonkSwap API"
+title: "Solana Bonkswap API"
+description: "Solana Bonkswap API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Includes filters and field selection tips."
 ---
 # BonkSwap API
 

@@ -1,6 +1,6 @@
 ---
 title: "Trade Labelling Module"
-description: "The label.py module provides a single function, labeltrades, that accepts raw DEX trade data and applies a series of rule-based checks to label each trade as wash trade or not."
+description: "Build Trade Labelling Module: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Trade Labelling Module
 

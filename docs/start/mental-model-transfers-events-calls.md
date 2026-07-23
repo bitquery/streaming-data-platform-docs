@@ -1,6 +1,6 @@
 ---
 title: "Transfers vs Events vs Calls vs DexTrades"
-description: "Choose the right Bitquery cube: Transfers, Events, Calls, or DexTrades. Mental model for EVM, Solana, and Tron queries."
+description: "Transfers vs Events vs Calls vs DexTrades: practical Bitquery setup guidance with examples for authentication, endpoints, and first queries."
 ---
 # Mental Model: Transfers, Events, Calls, and DexTrades
 

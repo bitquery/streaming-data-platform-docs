@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "Overview"
-description: "Bitquery schema reference for Overview: fields, types, and query patterns."
+title: "EVM Schema Overview"
+description: "Explore Bitquery’s EVM GraphQL schema cubes for blocks, transactions, transfers, events, calls, and DEX trade analytics."
 ---
 # Overview
 

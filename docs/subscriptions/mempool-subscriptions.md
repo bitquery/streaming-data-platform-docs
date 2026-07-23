@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: "Subscribing to Mempool Updates"
-description: "Bitquery GraphQL subscriptions: Subscribing to Mempool Updates."
+description: "Subscribing to Mempool Updates using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
 # Subscribing to Mempool Updates
 

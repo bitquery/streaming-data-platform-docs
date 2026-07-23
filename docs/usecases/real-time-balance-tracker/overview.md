@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "Overview"
-description: "Building a real time balance tracker can be really helpful for the investigation teams to closely monitor the activities of a wallet. In this tutorial we will learn how to build a simple real time balance tracker using Javascript and NodeJS for the logical reasoning, using Bitquery's Balance…"
+title: "Real-Time Wallet Balance Tracker"
+description: "Plan a live wallet balance tracker with Bitquery balance streams, Node.js processing, and a simple browser UI for updates."
 ---
 # Overview
 

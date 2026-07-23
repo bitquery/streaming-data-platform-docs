@@ -1,6 +1,6 @@
 ---
 title: "PumpSwap API - Solana - Tokens, Trades, Live Prices"
-description: "Query and stream PumpSwap trades, prices, OHLC, volume, and pool events on Solana with the Bitquery PumpSwap API. Track PumpSwap trades in real time via WebSocket and pull historical data with dataset combined."
+description: "PumpSwap API - Solana - Tokens, Trades, Live Prices: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams."
 keywords:
   - PumpSwap API
   - track PumpSwap trades in real time

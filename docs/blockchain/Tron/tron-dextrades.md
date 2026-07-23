@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "Tron DEX Trades API"
-description: "Get on-chain data of any Tron based DEX through our DEX Trades API"
+title: "Tron DEXtrades API"
+description: "Tron DEXtrades API: get Tron DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Built for traders and analytics teams."
 ---
 # Tron DEX Trades API
 

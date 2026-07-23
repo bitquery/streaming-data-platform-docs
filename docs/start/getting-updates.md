@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Subscribe to Real-Time Blockchain Data"
-description: "Use Bitquery GraphQL subscriptions and WebSockets to stream real-time blockchain updates into your app."
+description: "Subscribe to Real-Time Blockchain Data: practical Bitquery setup guidance with examples for authentication, endpoints, and first queries."
 ---
 # Subscribing to Real-Time Data
 

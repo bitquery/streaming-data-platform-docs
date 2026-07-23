@@ -1,6 +1,6 @@
 ---
-title: "Meteora DLMM API"
-description: "Bitquery provides comprehensive real-time and historical data APIs and Streams for the Solana blockchain, enabling developers and traders to build powerful applications and execute trades based on reliable information from Meteora's Dynamic Liquidity Market Maker (DLMM)."
+title: "Solana Meteora Dlmm API"
+description: "Solana Meteora Dlmm API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Covers archive history and realtime data."
 ---
 import FAQ from "@site/src/components/FAQ";
 

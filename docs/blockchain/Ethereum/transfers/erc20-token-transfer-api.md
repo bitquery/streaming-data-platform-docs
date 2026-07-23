@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "ERC20 Token Transfers API"
-description: "Get real-time and historical ERC20 token transfers on Ethereum. Track USDT, USDC, WETH transfers, monitor wallet activity, analyze transfer volumes, and build token analytics with Bitquery."
+description: "ERC20 Token Transfers API: monitor Ethereum native and token transfers in real time with Bitquery GraphQL APIs. Keep queries fast with indexed filters."
 ---
 import FAQ from "@site/src/components/FAQ";
 

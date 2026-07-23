@@ -1,6 +1,6 @@
 ---
 title: "Polygon (MATIC) NFT API"
-description: "Get NFT data through our powerful and highly scalabe NFT API. Access all information about pricing history, NFT balances, and NFT trades"
+description: "Polygon (MATIC) NFT API: track Polygon NFT trades, ownership, and metadata with Bitquery GraphQL and streams. Keep queries fast with indexed filters."
 ---
 # Polygon (MATIC) NFT API
 

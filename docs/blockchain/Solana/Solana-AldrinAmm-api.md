@@ -1,6 +1,6 @@
 ---
-title: "AldrinAmm DEX API"
-description: "The below query gets real-time information whenever there's a new trade on the AldrinAmm DEX including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics."
+title: "Solana Aldrinamm API"
+description: "Solana Aldrinamm API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Run it in the IDE, then ship in your app."
 ---
 # AldrinAmm DEX API
 

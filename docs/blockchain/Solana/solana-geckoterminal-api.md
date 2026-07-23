@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "GeckoTerminal Solana API"
-description: "Access real-time Solana DEX trades, token pairs, volumes, buyers, sellers, and live price data as seen on GeckoTerminal, via Bitquery GraphQL APIs and streaming"
+description: "GeckoTerminal Solana API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 # GeckoTerminal Solana API
 

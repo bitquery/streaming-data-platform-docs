@@ -1,7 +1,7 @@
 ---
 sidebar_label: DEX Trades API
-title: "DEX API"
-description: "Read DEXTrades vs DEXTradeByTokens vs Trades cube to get a better understanding on when to use which cube."
+title: "Ethereum DEX Trades API"
+description: "Compare DEXTrades, DEXTradeByTokens, and Trading cubes for Ethereum DEX analytics using Bitquery GraphQL examples. Keep queries fast with indexed filters."
 ---
 import FAQ from "@site/src/components/FAQ";
 

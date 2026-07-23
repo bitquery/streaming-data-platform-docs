@@ -1,6 +1,6 @@
 ---
-title: "Meteora DAMM v2 API"
-description: "Bitquery provides comprehensive real-time and historical data APIs and Streams for the Solana blockchain, enabling developers and traders to build powerful applications and execute trades based on reliable information from Meteora's Dynamic Automated Market Maker (DAMM) v2."
+title: "Solana Meteora Damm V2 API"
+description: "Solana Meteora Damm V2 API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Keep queries fast with indexed filters."
 ---
 import FAQ from "@site/src/components/FAQ";
 

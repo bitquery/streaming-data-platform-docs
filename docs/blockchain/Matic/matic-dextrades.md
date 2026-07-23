@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Polygon (MATIC) DEX Trades API"
-description: "Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API"
+description: "Polygon (MATIC) DEX Trades API: get Polygon DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. See examples in the Bitquery IDE."
 ---
 # Polygon (MATIC) DEX Trades API
 

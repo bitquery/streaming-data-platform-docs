@@ -1,6 +1,6 @@
 ---
 title: "Trading MCP Examples — Real Data, Real Charts"
-description: "6 worked examples of how traders use the Bitquery MCP: token discovery, cross-chain snapshot, OHLC, DEX share, launchpad pulse & whale-wallet analysis."
+description: "Trading MCP Examples — Real Data, Real Charts with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
 image: "/img/mcp/charts/top-tokens-solana-24h.svg"
 keywords:
   - Bitquery MCP examples

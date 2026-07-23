@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "Using Metrics"
-description: "Use the Bitquery GraphQL Using Metrics metric in queries and aggregations."
+title: "GraphQL Metrics Overview"
+description: "Metrics in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Built for traders and analytics teams."
 ---
 #  Using Metrics
 

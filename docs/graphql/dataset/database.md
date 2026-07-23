@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Database Selection"
-description: "Bitquery GraphQL dataset guide: Database Selection."
+description: "Database Selection in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. See examples in the Bitquery IDE."
 ---
 # Database Selection
 

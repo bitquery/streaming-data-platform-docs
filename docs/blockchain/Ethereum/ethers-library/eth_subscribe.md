@@ -1,6 +1,6 @@
 ---
-title: "eth_subscribe"
-description: "Subscribe to real-time Ethereum blockchain events, including new blocks, pending transactions, and logs, using the eth_subscribe API"
+title: "Ethereum Eth Subscribe"
+description: "Ethereum Eth Subscribe: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Run it in the IDE, then ship in your app."
 ---
 # eth_subscribe
 

@@ -1,6 +1,6 @@
 ---
 title: "Using Bitquery Subscriptions to Load On-chain Data into S3"
-description: "Bitquery GraphQL subscriptions: Using Bitquery Subscriptions to Load On-chain Data into S3."
+description: "Using Bitquery Subscriptions to Load On-chain Data into S3 using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
 # Using Bitquery Subscriptions to Load On-chain Data into S3
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Ethereum Transaction Balance Tracker"
-description: "Learn how to get real-time balance updates for all addresses in Ethereum transactions with balance change reasons using Bitquery."
+description: "Ethereum Transaction Balance Tracker: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions."
 ---
 # Ethereum Transaction Balance Tracker
 

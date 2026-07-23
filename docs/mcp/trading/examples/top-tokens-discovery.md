@@ -1,6 +1,6 @@
 ---
 title: "Example: Find the Hottest Solana Tokens of the Day"
-description: "Use the Bitquery MCP to surface today's top-traded Solana tokens with built-in outlier filtering — for watchlist building & momentum trading."
+description: "Example: Find the Hottest Solana Tokens of the Day with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
 image: "/img/mcp/charts/top-tokens-solana-24h.svg"
 keywords:
   - top Solana tokens

@@ -1,6 +1,6 @@
 ---
 title: "Trading Data Overview — Chain-Level Trades vs Trading Cube"
-description: "Bitquery exposes DEX trading data in two ways: raw chain-level trades (DEXTrades / DEXTradeByTokens) and the unified Trading cube (Trading.Trades, Currencies, Tokens, Pairs). Learn the difference and pick the right API."
+description: "Trading Data Overview — Chain-Level Trades vs Trading Cube via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live."
 sidebar_position: 1
 keywords:
   - bitquery trading data

@@ -1,7 +1,7 @@
 ---
-title: Djed Stablecoin API on Cardano - Track DJED Mints, Burns & Transfers
+title: "Cardano Djed Stablecoin API"
 sidebar_label: Djed Stablecoin API on Cardano
-description: Query the Djed stablecoin on Cardano with Bitquery GraphQL. Track DJED mints, burns, recent transfers, wallet balances, and per-address DJED activity.
+description: "Cardano Djed: query and stream Cardano on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 keywords:
   - Djed API
   - DJED Cardano

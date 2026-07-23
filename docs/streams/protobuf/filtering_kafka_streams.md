@@ -1,6 +1,6 @@
 ---
 title: "Filtering Kafka Streams for Specific Usecases"
-description: "Bitquery streaming docs: Filtering Kafka Streams for Specific Usecases."
+description: "Filtering Kafka Streams for Specific Usecases with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
 ---
 # Filtering Kafka Streams for Specific Usecases
 

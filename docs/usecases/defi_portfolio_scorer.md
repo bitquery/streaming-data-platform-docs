@@ -1,6 +1,6 @@
 ---
 title: "DeFi Portfolio Scorer"
-description: "This guide demonstrates how to build a DeFi Portfolio Scorer tool that analyzes Ethereum wallet address and calculates a DeFi Strategy Score based on transaction patterns, protocol interactions, and asset holdings using Bitquery APIs."
+description: "Build DeFi Portfolio Scorer: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # DeFi Portfolio Scorer
 

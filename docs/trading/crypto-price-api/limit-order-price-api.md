@@ -1,6 +1,6 @@
 ---
 title: "Limit Order Price API"
-description: "Use our crypto price API for limit orders to get reliable price for limit order execution. Our limit order price API prevents false triggers with aggregated price feeds and dampening mechanisms."
+description: "Limit Order Price API via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams. See examples in the Bitquery IDE."
 keywords:
   [
     "limit order price api",

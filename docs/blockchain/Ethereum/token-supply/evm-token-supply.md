@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "EVM Token Supply API"
-description: "Get real-time and historical token supply data for ERC-20 tokens across Ethereum, BSC, Base, and all EVM chains. Track USDT, USDC supply, monitor token minting & burning"
+description: "EVM Token Supply API: stream Ethereum market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs. Run it in the IDE, then ship in your app."
 ---
 # EVM Token Supply API
 

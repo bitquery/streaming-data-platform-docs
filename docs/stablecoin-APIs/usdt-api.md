@@ -1,6 +1,6 @@
 ---
-title: "USDT API"
-description: "Comprehensive guide to Bitquery USDT API with real-time transfers, compliance checks, and multi-chain analytics."
+title: "USDT Stablecoin API"
+description: "Query USDT transfers, balances, and supply activity with Bitquery stablecoin APIs using GraphQL examples across major blockchains."
 keywords:
   [
     "USDT Payments API",

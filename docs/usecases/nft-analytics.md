@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "NFT Analytics Dashboard - Tutorial"
-description: "Bitquery's queries can help NFT marketplace builders analyze the performance of different NFTs on various blockchain networks. By providing real-time data on transaction volume, and other key metrics, Bitquery can help builders optimize their marketplace's offerings and improve trading…"
+description: "Build NFT Analytics Dashboard - Tutorial: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # NFT Analytics Dashboard - Tutorial
 

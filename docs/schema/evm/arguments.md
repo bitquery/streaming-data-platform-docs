@@ -1,6 +1,6 @@
 ---
 title: "EVM Arguments and Returns API"
-description: "Get EVM Arguments and Returns with detailed information using the arguments API. Filter, sort, and analyze ERC-20 token flow easily."
+description: "EVM Arguments and Returns API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns."
 ---
 Smart contract calls and events have arguments. In case the call or event signature is parsed against ABI,
 the arguments are showing the values, types and names passed to call or event.

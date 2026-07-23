@@ -1,6 +1,6 @@
 ---
-title: "eth_getCode"
-description: "Retrieve the bytecode of a smart contract deployed on the Ethereum blockchain using the eth_getCode API"
+title: "Ethereum Eth Getcode"
+description: "Ethereum Eth Getcode: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
 ---
 # eth_getCode
 

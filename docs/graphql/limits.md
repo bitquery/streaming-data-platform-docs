@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Bitquery GraphQL Query Limits"
-description: "Understand Bitquery GraphQL limits, timeouts, and how to stay within quotas."
+description: "Bitquery GraphQL Query Limits in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
 # Limits
 

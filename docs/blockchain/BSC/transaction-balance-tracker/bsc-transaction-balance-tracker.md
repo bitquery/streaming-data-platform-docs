@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "BSC Transaction Balance Tracker"
-description: "Learn how to get real-time balance updates for all addresses in BSC transactions with balance change reasons using Bitquery."
+description: "BSC Transaction Balance Tracker: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions."
 ---
 # BSC Transaction Balance Tracker
 

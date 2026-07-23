@@ -1,6 +1,6 @@
 ---
 title: Tracing MCP - What You Can Do With It
-description: Bitquery MCP use cases - AML compliance, law enforcement, forensic investigations, money laundering detection, sanctions screening, and regulatory reporting.
+description: "Tracing MCP - What You Can Do With It with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
 keywords:
   - Bitquery MCP use cases
   - blockchain forensics

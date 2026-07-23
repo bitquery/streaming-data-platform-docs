@@ -1,6 +1,6 @@
 ---
-title: "Slippage FAQ: Calculating Necessary Slippage for DEX Swaps Using Bitquery DEXPool Stream"
-description: "FAQ answering developer questions about calculating necessary slippage before executing DEX swaps from smart contracts. Learn how to use Bitquery DEXPool stream data to programmatically determine slippage tolerance instead of guessing or trial-and-error."
+title: "Slippage Faq Using Dexpool Stream"
+description: "Slippage Faq Using Dexpool Stream: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - slippage calculation
   - DEX slippage

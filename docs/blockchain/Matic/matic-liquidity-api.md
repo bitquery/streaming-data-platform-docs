@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
-title: "Matic Liquidity API"
-description: "Get real-time liquidity and pool reserve data for Matic DEX pools through our Liquidity API"
+title: "Polygon Matic Liquidity API"
+description: "Polygon Matic Liquidity API: read Polygon pool reserves and liquidity updates via Bitquery GraphQL DEX APIs. Great for bots, dashboards, and alerts."
 ---
 # Matic Liquidity API
 

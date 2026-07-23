@@ -1,6 +1,6 @@
 ---
 title: "LetsBonk.fun gRPC Streams - Real-time DEX Trades"
-description: "Stream LetsBonk.fun DEX trades via CoreCast gRPC. Raydium LaunchLab memecoin launchpad."
+description: "LetsBonk.fun gRPC Streams - Real-time DEX Trades for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "LetsBonk gRPC", "CoreCast", "Raydium LaunchLab"]
 ---
 # LetsBonk.fun gRPC Streams

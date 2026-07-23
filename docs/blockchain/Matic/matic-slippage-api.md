@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
-title: "Matic Slippage API"
-description: "Get slippage and price impact data for Matic DEX pools through our Slippage API"
+title: "Polygon Matic Slippage API"
+description: "Polygon Matic Slippage API: measure Polygon DEX price impact and slippage with Bitquery GraphQL pool metrics. Covers archive history and realtime data."
 ---
 # Matic Slippage API
 

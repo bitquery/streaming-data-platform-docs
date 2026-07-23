@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Base Transaction Balance Tracker"
-description: "Learn how to get real-time balance updates for all addresses in Base transactions with balance change reasons using Bitquery."
+description: "Base Transaction Balance Tracker: stream Base balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
 # Base Transaction Balance Tracker
 

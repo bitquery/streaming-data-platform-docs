@@ -1,7 +1,7 @@
 ---
-title: Bitcoin Fee API - Get Per-Tx Fees, USD Fees, and Address Aggregates
+title: "Bitcoin Fee API"
 sidebar_label: Bitcoin Fee API
-description: Query Bitcoin transaction fees with per-tx breakdowns and aggregate totals in BTC and USD. Useful for fee estimation, wallet expense tracking, and cost analysis.
+description: "Bitcoin Fee API: analyze Bitcoin transaction fees and costs with Bitquery GraphQL queries and streams. Great for bots, dashboards, and alerts."
 keywords:
   - Bitcoin fee API
   - Bitcoin transaction fees

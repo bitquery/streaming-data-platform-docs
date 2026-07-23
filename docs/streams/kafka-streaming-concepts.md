@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "Bitquery Kafka Streaming Concepts"
-description: "How Bitquery Kafka streams work vs GraphQL subscriptions — access, topics, offsets, and integration patterns."
+title: "Kafka Streaming Concepts"
+description: "Learn Bitquery Kafka stream concepts: topics, offsets, SASL auth, protobuf payloads, and when Kafka beats WebSockets for crypto data."
 ---
 # Bitquery Kafka Streams - Understanding Concepts
 

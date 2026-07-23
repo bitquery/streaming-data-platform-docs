@@ -1,6 +1,6 @@
 ---
 title: "Stablecoin Trades API"
-description: "Bitquery stablecoin API docs: Stablecoin Trades API."
+description: "Stablecoin Trades API using Bitquery stablecoin APIs for prices, transfers, payments, and cross-chain monitoring workflows."
 ---
 # Stablecoin Trades API
 

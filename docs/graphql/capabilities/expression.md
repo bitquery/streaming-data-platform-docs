@@ -1,6 +1,6 @@
 ---
-title: "Expressions"
-description: "An expression is a mathematical function that can be applied to metrics in a GraphQL query. Bitquery's v1 and v2 APIs support expressions to allow you to calculate custom metrics, such as Price Change or Price Change Percentage."
+title: "GraphQL Expressions"
+description: "Expression in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Built for traders and analytics teams."
 ---
 # Expressions
 

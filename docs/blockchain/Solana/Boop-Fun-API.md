@@ -1,6 +1,6 @@
 ---
-title: "Boop Fun API"
-description: "Get on-chain data of any Boop.fun based token through our Boop.fun API"
+title: "Solana Boop Fun API"
+description: "Solana Boop Fun API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
 # Boop Fun API
 

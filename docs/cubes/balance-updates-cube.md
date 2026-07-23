@@ -1,6 +1,6 @@
 ---
 title: "Balance Update Cube"
-description: "Learn the Bitquery Balance Updates cube — balance change rows, filters, and example GraphQL queries."
+description: "Balance Update Cube: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Great for bots, dashboards, and alerts."
 ---
 # Balance Update Cube
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "Arbitrum Transactions API"
-description: "The Arbitrum transactions API allows you to query for transactions on the Arbitrum blockchain. You can use this API to get information about specific transactions, such as the signature, block, transaction fee, success, fee payer, inner instructions count, instructions count, signer, and transaction"
+description: "Arbitrum Transactions API: query and stream Arbitrum on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 # Arbitrum Transactions API
 

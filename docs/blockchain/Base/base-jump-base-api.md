@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
-title: "Base Jump API"
-description: "Track Jump trading-related activity on Base with Bitquery transaction and transfer GraphQL APIs."
+title: "Base Jump Base API"
+description: "Base Jump Base API: query and stream Base on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
 ---
 # Base Jump API
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Arbitrum Smart Contract Calls API"
-description: "Explore Arbitrum smart contract call data. Analyze smart contract calls with detailed information"
+description: "Arbitrum Smart Contract Calls API: query and stream Arbitrum on-chain data with Bitquery GraphQL examples for developers."
 ---
 # Arbitrum Smart Contract Calls API
 

@@ -1,6 +1,6 @@
 ---
 title: "Trends.Fun API - Solana - New Tokens, Trades, Live Prices"
-description: "Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our Trends.fun API"
+description: "Trends.Fun API - Solana - New Tokens, Trades, Live Prices: query and stream Solana on-chain data with Bitquery GraphQL examples for developers."
 ---
 # Trends.Fun API - Solana - New Tokens, Trades, Live Prices
 

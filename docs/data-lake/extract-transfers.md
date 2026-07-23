@@ -1,6 +1,6 @@
 ---
 title: Extract Transfers from a Block
-description: Code design for pulling native and ERC-20/ERC-721 token transfers out of a Bitquery Blockchain Data Lake block, using the published protobuf schema.
+description: "Extract Transfers from a Block: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - blockchain transfers
   - ERC-20 transfer parsing

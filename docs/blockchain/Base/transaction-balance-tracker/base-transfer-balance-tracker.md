@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Base Transfer Balance Tracker"
-description: "Learn how to get real-time balance updates for all addresses in Base transfers with balance change reasons using Bitquery."
+description: "Base Transfer Balance Tracker: monitor Base native and token transfers in real time with Bitquery GraphQL APIs. Copy GraphQL snippets for production apps."
 ---
 # Base Transfer Balance Tracker
 

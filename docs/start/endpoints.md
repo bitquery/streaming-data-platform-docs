@@ -1,6 +1,6 @@
 ---
 title: "Bitquery API Endpoints and Regions"
-description: "Regional GraphQL and WebSocket endpoints for Bitquery V1 and V2 APIs. Choose Europe, US, or Asia for lower latency."
+description: "Find Bitquery GraphQL, streaming, and regional API endpoints with base URLs, auth notes, and which service to use for each workload."
 ---
 # Endpoints and Regions
 

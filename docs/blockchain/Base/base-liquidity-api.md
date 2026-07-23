@@ -1,7 +1,7 @@
 ---
 sidebar_position: 15
 title: "Base Liquidity API"
-description: "Get real-time liquidity and pool reserve data for Base DEX pools through our Liquidity API"
+description: "Base Liquidity API: read Base pool reserves and liquidity updates via Bitquery GraphQL DEX APIs. Covers archive history and realtime data."
 ---
 # Base Liquidity API
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
-title: "NFT Collection API"
-description: "Here is a query that retrieves all the NFTs in a Collection."
+title: "Ethereum NFT Collection API"
+description: "Ethereum NFT Collection API: track Ethereum NFT trades, ownership, and metadata with Bitquery GraphQL and streams. Works with WebSocket live subscriptions."
 ---
 # NFT Collection API
 

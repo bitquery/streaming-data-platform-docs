@@ -1,6 +1,6 @@
 ---
-title: "EVM Balance API"
-description: "Bitquery schema reference for EVM Balance API: fields, types, and query patterns."
+title: "EVM Balance Schema API"
+description: "EVM Balance API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. See examples in the Bitquery IDE."
 ---
 # EVM Balance API
 

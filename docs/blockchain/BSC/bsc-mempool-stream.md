@@ -1,6 +1,6 @@
 ---
 title: "BSC Mempool Stream - Real-Time Transaction Monitoring"
-description: "Monitor BSC mempool in real-time. Track pending transactions, DEX trades, token creations, and more with ultra-low latency using Bitquery Mempool APIs and Kafka Streams."
+description: "BSC Mempool Stream - Real-Time Transaction Monitoring: watch BNB Chain pending transactions before confirmation with Bitquery GraphQL subscriptions."
 ---
 # BSC Mempool Stream - Real-Time Transaction Monitoring
 

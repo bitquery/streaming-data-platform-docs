@@ -1,6 +1,6 @@
 ---
 title: "Example: Build an OHLC Candle Chart for Any Token"
-description: "Use the Bitquery MCP to pull real-time hourly OHLC + volume for any token on any supported chain — feed it into TradingView or your bot."
+description: "Example: Build an OHLC Candle Chart for Any Token with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
 image: "/img/mcp/charts/wsol-24h-candles.svg"
 keywords:
   - OHLC chart MCP

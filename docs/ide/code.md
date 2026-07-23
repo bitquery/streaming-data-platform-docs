@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Export GraphQL Code from the IDE"
-description: "Export Bitquery GraphQL queries from the IDE into application code snippets."
+description: "Export GraphQL Code from the IDE in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 ---
 # Export Code
 

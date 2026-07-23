@@ -1,6 +1,6 @@
 ---
 title: "Bags.fm API on Robinhood"
-description: "Query and stream Bags.fm trades on Robinhood with Bitquery: live trades, prices, OHLCV, market cap, whale trades, top traders, and bonding-curve events."
+description: "Bags.fm API on Robinhood: query and stream Robinhood on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
 sidebar_position: 5
 keywords:
   - Bags.fm API

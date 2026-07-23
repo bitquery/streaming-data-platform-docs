@@ -1,6 +1,6 @@
 ---
-title: "Get Blockchain Data on Telegram Chat in Real-Time"
-description: "Build a Telegram bot that streams Bitquery WebSocket GraphQL subscriptions for live blockchain alerts."
+title: "Telegram Bot for Live Blockchain Data"
+description: "Build a Telegram bot that streams Bitquery WebSocket GraphQL subscriptions and sends real-time blockchain alerts to chats."
 ---
 # Get Blockchain Data on Telegram Chat in Real-Time
 

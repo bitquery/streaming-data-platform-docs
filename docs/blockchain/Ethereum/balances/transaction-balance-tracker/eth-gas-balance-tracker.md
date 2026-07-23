@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "Ethereum Gas Balance Tracker"
-description: "Learn how to track Ethereum Gas-related balance changes, transaction fee rewards, Gas Fee Spent and GAS Fee returned  using Bitquery."
+description: "Ethereum Gas Balance Tracker: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
 # Ethereum Gas Balance Tracker
 

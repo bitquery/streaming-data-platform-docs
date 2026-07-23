@@ -3,7 +3,7 @@ slug: kafka-protobuf-js
 sidebar_position: 4
 sidebar_label: Javascript Tutorial to Setup Solana Kafka Shred Stream
 title: Javascript Tutorial to Setup Solana Kafka Shred Stream
-description: Use Node.js, KafkaJS, LZ4, and bitquery-protobuf-schema to consume Bitquery Solana Kafka protobuf; run js-consumer-example from kafka-streams-examples-usecases.
+description: "Javascript Tutorial to Setup Solana Kafka Shred Stream with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
 ---
 # Javascript Tutorial to Setup Solana Kafka Shred Stream
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
-title: "Count Distinct"
-description: "Use the Bitquery GraphQL Count Distinct metric in queries and aggregations."
+title: "GraphQL Distinct Metric"
+description: "Distinct in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Keep queries fast with indexed filters."
 ---
 #  Count Distinct
 

@@ -1,6 +1,6 @@
 ---
-title: "Manifest DEX API"
-description: "Track real-time trades, token prices, OHLC data, top traders, and trading volume on Manifest DEX on Solana using Bitquery's GraphQL API. Filter by Dex: { ProtocolFamily: { is: \"Manifest\" } } to get Manifest-only data."
+title: "Solana Manifest API"
+description: "Solana Manifest API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
 import VideoPlayer from "../../../src/components/videoplayer.js";
 

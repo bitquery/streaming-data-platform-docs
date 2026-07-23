@@ -1,6 +1,6 @@
 ---
-title: "Phoenix DEX API"
-description: "Track real-time trades, token prices, OHLC data, top traders, and volatility on Phoenix DEX using our powerful GraphQL API on Solana"
+title: "Solana Phoenix API"
+description: "Solana Phoenix API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Includes filters and field selection tips."
 ---
 # Phoenix DEX API
 

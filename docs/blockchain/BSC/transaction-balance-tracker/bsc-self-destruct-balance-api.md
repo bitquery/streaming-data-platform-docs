@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: "BSC Self-Destruct Balance Tracker"
-description: "Learn how to track BSC contract self-destruct events, ephemeral contracts, and security incidents using Bitquery."
+description: "BSC Self-Destruct Balance Tracker: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions."
 ---
 # BSC Self-Destruct Balance Tracker
 

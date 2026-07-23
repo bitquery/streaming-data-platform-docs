@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: "Ethereum Self-Destruct Balance Tracker"
-description: "Learn how to track Ethereum contract self-destruct events, ephemeral contracts, and security incidents using Bitquery."
+description: "Ethereum Self-Destruct Balance Tracker: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions."
 ---
 # Ethereum Self-Destruct Balance Tracker
 

@@ -1,6 +1,6 @@
 ---
-title: "Transfer Cube"
-description: "Learn the Bitquery Transfers cube — transfer fields, filters, and example GraphQL queries."
+title: "Transfers Cube"
+description: "Transfers Cube: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Keep queries fast with indexed filters."
 ---
 # Transfer Cube
 

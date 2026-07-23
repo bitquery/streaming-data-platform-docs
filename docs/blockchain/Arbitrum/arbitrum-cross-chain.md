@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Arbitrum Cross Chain API"
-description: "Explore the integration of the Arbitrum Cross Chain API to track bridge transfers, interact with smart contracts, and fetch detailed transaction data."
+description: "Arbitrum Cross Chain API: query and stream Arbitrum on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 # Arbitrum Cross Chain API
 

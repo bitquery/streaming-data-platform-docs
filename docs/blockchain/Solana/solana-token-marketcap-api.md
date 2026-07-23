@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Solana Token Market Cap API"
-description: "Stream and query Solana SPL token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API"
+description: "Solana Token Market Cap API: stream Solana market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs. See examples in the Bitquery IDE."
 ---
 import VideoPlayer from "../../../src/components/videoplayer.js";
 

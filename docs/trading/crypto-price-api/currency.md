@@ -1,6 +1,6 @@
 ---
-title: "Currency Cube"
-description: "Bitquery Trading / Price Index docs: Currency Cube."
+title: "Crypto Currency Price API"
+description: "Query currency-level crypto prices and conversions with Bitquery Trading APIs, including GraphQL examples and streaming options."
 ---
 # Currency Cube
 

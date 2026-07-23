@@ -1,6 +1,6 @@
 ---
-title: "Example: Solana DEX Market Share — Meteora vs Pumpswap vs Raydium"
-description: "Use the Bitquery MCP to break down Solana DEX volume by protocol family — Meteora, Pumpswap, Raydium, Orca and the long tail. Real 24h numbers."
+title: "Example: Solana DEX Market Share"
+description: "Example: Solana DEX Market Share with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
 image: "/img/mcp/charts/solana-dex-share.svg"
 keywords:
   - Solana DEX market share

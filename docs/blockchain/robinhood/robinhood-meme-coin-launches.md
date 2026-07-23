@@ -1,6 +1,6 @@
 ---
 title: "Robinhood Meme Coin Launches API"
-description: "Track meme coin token launches on Robinhood with Bitquery. Detect new token creations from Flap.sh, Klik Finance, Bankr, Ape.store, Bags.fm, and Clanker."
+description: "Robinhood Meme Coin Launches API: query and stream Robinhood on-chain data with Bitquery GraphQL examples for developers."
 sidebar_position: 3
 keywords:
   - Robinhood meme coin launches API

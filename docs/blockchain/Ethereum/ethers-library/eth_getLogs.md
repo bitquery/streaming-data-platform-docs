@@ -1,6 +1,6 @@
 ---
-title: "eth_getLogs"
-description: "Retrieve logs and events from transactions on the Ethereum blockchain using the eth_getLogs API"
+title: "Ethereum Eth Getlogs"
+description: "Ethereum Eth Getlogs: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 # eth_getLogs
 

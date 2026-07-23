@@ -2,7 +2,7 @@
 sidebar_position: 6
 sidebar_label: Pool Liquidity & Reserves
 title: "Ethereum Liquidity API"
-description: "Get real-time liquidity and pool reserve data for Ethereum DEX pools through our Liquidity API"
+description: "Ethereum Liquidity API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Great for bots, dashboards, and alerts."
 ---
 # Ethereum Liquidity API
 

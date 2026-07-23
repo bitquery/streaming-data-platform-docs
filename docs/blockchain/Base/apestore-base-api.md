@@ -1,6 +1,6 @@
 ---
 title: "APE Store API - Base Chain Token Trades & Transaction Data"
-description: "Query APE Store trades on Base using Bitquery Transaction and Calls APIs. Get token address, contract address, and trade events via GraphQL."
+description: "APE Store API - Base Chain Token Trades & Transaction Data: query and stream Base on-chain data with Bitquery GraphQL examples for developers."
 sidebar_position: 7
 keywords: ["APE Store API", "APE Store Base", "Base blockchain API", "Bitquery Base", "APE Store trades"]
 ---

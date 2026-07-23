@@ -1,6 +1,6 @@
 ---
-title: "EVM Streams"
-description: "This section provides details about Bitquery's EVM Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data."
+title: "EVM Kafka Protobuf Streams"
+description: "EVM Protobuf with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems. Great for bots, dashboards, and alerts."
 ---
 # EVM Streams
 

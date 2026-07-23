@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "Events API"
-description: "> Before you start: Not sure when to use Events vs Transfers vs Calls vs DexTrades? Read our Mental Model guide to understand which primitive to use for your use case."
+title: "Ethereum Events API"
+description: "Ethereum Events API: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 # Events API
 

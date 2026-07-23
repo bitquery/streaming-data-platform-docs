@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: "Custom DataFeed Setup"
-description: "Build a custom TradingView Advanced Charts datafeed backed by Bitquery GraphQL OHLC and trade streams."
+description: "Build Custom DataFeed Setup: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 # Custom DataFeed Setup
 

@@ -1,6 +1,6 @@
 ---
 title: "Solana DEX Orders API"
-description: "Retrieve on-chain liquidity pool and trading pair data from Solana-based DEXs like Raydium and Jupiter using our DEX Orders API"
+description: "Solana DEX Orders API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 ---
 import FAQ from "@site/src/components/FAQ";
 

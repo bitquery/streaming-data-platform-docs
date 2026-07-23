@@ -1,6 +1,6 @@
 ---
 title: "Solana DEX Pools - gRPC Stream (CoreCast)"
-description: "Real-time DEX pool liquidity events via Solana gRPC. Add/remove liquidity, swaps. Protobuf."
+description: "Solana DEX Pools - gRPC Stream (CoreCast) for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana DEX pools", "liquidity"]
 ---
 # Solana DEX Pools gRPC Stream

@@ -1,6 +1,6 @@
 ---
 title: "eth_getTransactionByHash"
-description: "Retrieve detailed information about a specific Ethereum transaction using its hash with the eth_getTransactionByHash API"
+description: "eth_getTransactionByHash: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 ---
 # eth_getTransactionByHash
 

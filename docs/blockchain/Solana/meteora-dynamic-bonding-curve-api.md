@@ -1,6 +1,6 @@
 ---
 title: "Meteora Dynamic Bonding Curve API"
-description: "Access real-time and historical data for Meteora DBC on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders"
+description: "Meteora Dynamic Bonding Curve API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. See examples in the Bitquery IDE."
 ---
 # Meteora Dynamic Bonding Curve API
 

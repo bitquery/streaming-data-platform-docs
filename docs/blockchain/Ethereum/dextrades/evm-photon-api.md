@@ -1,7 +1,7 @@
 ---
 sidebar_label: Photon
-title: "Photon EVM API"
-description: "This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair and many more just like how Photon shows for EVM Chains."
+title: "Ethereum EVM Photon API"
+description: "Ethereum EVM Photon API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Built for traders and analytics teams."
 ---
 # Photon EVM API
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-title: "NFT API"
-description: "Non-Fungible Tokens (NFTs) are digital assets with unique identification codes that cannot be exchanged for other tokens on a one-to-one basis. NFTs have gained significant popularity in recent years, with the growth of digital art, collectables, and gaming."
+title: "Ethereum NFT API"
+description: "Query Ethereum NFT trades, ownership, metadata, and transfers with Bitquery GraphQL APIs, filters, and live streams. See examples in the Bitquery IDE."
 ---
 import FAQ from "@site/src/components/FAQ";
 

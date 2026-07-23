@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "BSC PancakeSwap Infinity API"
-description: "Get on-chain data of any PancakeSwap Infinity based token through our PancakeSwap Infinity API"
+description: "BSC PancakeSwap Infinity API: query and stream BNB Chain on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
 import VideoPlayer from "../../../src/components/videoplayer.js";
 

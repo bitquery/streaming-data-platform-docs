@@ -1,6 +1,6 @@
 ---
 title: "Trading Data on the Bitquery MCP — Overview"
-description: "What trading data the Bitquery MCP exposes: chains, DEX protocols, granularity & outlier filtering across Solana, Ethereum, BSC, Base, Arbitrum & more."
+description: "Trading Data on the Bitquery MCP — Overview with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
 image: "/img/mcp/charts/cross-chain-volume.svg"
 keywords:
   - Bitquery MCP trading data

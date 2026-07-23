@@ -1,6 +1,6 @@
 ---
 title: "Filtering JSON Arguments"
-description: "Bitquery GraphQL capability: Filtering JSON Arguments."
+description: "Filtering JSON Arguments in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
 # Filtering JSON Arguments
 

@@ -1,6 +1,6 @@
 ---
 title: Balances API Documentation
-description: Collection of Balance APIs on Ethereum organized by functionality.
+description: "Balances API Documentation: fetch current and historical Ethereum balances with Bitquery GraphQL balance queries. Great for bots, dashboards, and alerts."
 slug: /blockchain/Ethereum/balances/
 keywords:
   - Balance API

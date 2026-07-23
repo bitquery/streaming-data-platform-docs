@@ -1,7 +1,7 @@
 ---
 sidebar_position: 8
 title: "Base Bankr (Doppler) API"
-description: "Track every Bankr-launched token on Base in real time. Bitquery exposes launches, Uniswap V4 trades, OHLC, market cap, FDV, and holder activity for tokens deployed via Bankr through the Doppler Protocol"
+description: "Base Bankr (Doppler) API: query and stream Base on-chain data with Bitquery GraphQL examples for developers. Built for traders and analytics teams."
 ---
 # Base Bankr (Doppler) API
 

@@ -1,6 +1,6 @@
 ---
 title: "How to Build a Solana Copy Trading Bot - Tutorial"
-description: "This project is a Solana copy trading bot that allows users to replicate trades executed by a specified account on the Solana blockchain. The bot fetches trading data using the Bitquery API. For real-time price monitoring, consider using our Crypto Price API. However since this is a tutorial…"
+description: "Build How to Build a Solana Copy Trading Bot - Tutorial: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
 import VideoPlayer from "../../src/components/videoplayer.js";
 

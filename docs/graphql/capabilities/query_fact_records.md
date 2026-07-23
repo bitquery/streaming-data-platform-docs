@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-title: "Query Fact Records"
-description: "This is the simplest type of query. You just define the attributes which you need in the results,."
+title: "Query Fact Records in GraphQL"
+description: "Query raw blockchain fact records with Bitquery GraphQL, including field selection, filters, limits, and result shapes. See examples in the Bitquery IDE."
 ---
 # Query Fact Records
 

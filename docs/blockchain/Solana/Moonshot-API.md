@@ -1,6 +1,6 @@
 ---
-title: "Moonit API"
-description: "Get on-chain data of any Moonit based token through our Moonit API"
+title: "Solana Moonshot API"
+description: "Solana Moonshot API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Copy GraphQL snippets for production apps."
 ---
 # Moonit API
 

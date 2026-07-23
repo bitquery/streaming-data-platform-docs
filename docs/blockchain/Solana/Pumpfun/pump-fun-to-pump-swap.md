@@ -1,6 +1,6 @@
 ---
 title: "Pump.fun to PumpSwap API - Token Migration Tracking"
-description: "Track the full lifecycle of a Pump.fun token with the Bitquery API: bonding curve progress, graduation events, PumpSwap migrations, and real-time DEX trades on Solana."
+description: "Pump.fun to PumpSwap API - Token Migration Tracking: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams."
 keywords:
   - Pump.fun API
   - PumpSwap API

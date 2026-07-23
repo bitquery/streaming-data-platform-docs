@@ -1,6 +1,6 @@
 ---
 title: Base Transaction Balance Tracker API
-description: Access comprehensive Base Transaction Balance Tracker APIs for real-time balance updates, miner rewards, MEV analysis, and self-destruct monitoring. GraphQL API with subscriptions.
+description: "Base Transaction Balance Tracker API: stream Base balance changes with reason codes using Bitquery GraphQL subscriptions."
 slug: /blockchain/Base/transaction-balance-tracker/
 keywords:
   - Base Transaction Balance Tracker

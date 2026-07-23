@@ -1,6 +1,6 @@
 ---
 title: "Solana Fees API"
-description: "Query and analyze Solana transaction fees using Bitquery’s Solana Fees API. Get data on DEX trades, wallet transfers, and total account fees"
+description: "Solana Fees API: analyze Solana transaction fees and costs with Bitquery GraphQL queries and streams. Scale further with Kafka or gRPC streams."
 ---
 # Solana Fees API
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Arbitrum Slippage API"
-description: "Get slippage and price impact data for Arbitrum DEX pools through our Slippage API"
+description: "Arbitrum Slippage API: measure Arbitrum DEX price impact and slippage with Bitquery GraphQL pool metrics. Built for traders and analytics teams."
 ---
 # Arbitrum Slippage API
 

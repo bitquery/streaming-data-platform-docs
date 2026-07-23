@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Arbitrum Liquidity API"
-description: "Get real-time liquidity and pool reserve data for Arbitrum DEX pools through our Liquidity API"
+description: "Arbitrum Liquidity API: read Arbitrum pool reserves and liquidity updates via Bitquery GraphQL DEX APIs. Built for traders and analytics teams."
 ---
 # Arbitrum Liquidity API
 

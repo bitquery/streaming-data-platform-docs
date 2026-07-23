@@ -1,6 +1,6 @@
 ---
 title: "EVM Token Holders API"
-description: "Bitquery schema reference for EVM Token Holders API: fields, types, and query patterns."
+description: "EVM Token Holders API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. See examples in the Bitquery IDE."
 ---
 # EVM Token Holders API
 

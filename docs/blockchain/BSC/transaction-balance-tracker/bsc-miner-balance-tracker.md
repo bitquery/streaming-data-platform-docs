@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "BSC Miner Balance Tracker"
-description: "Learn how to track BSC miner balances, mining rewards, and uncle block rewards using Bitquery."
+description: "BSC Miner Balance Tracker: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions. Built for traders and analytics teams."
 ---
 # BSC Miner Balance Tracker
 

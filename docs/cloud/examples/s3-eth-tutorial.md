@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Getting Ethereum Data from AWS Bucket"
-description: "Bitquery cloud data docs: Getting Ethereum Data from AWS Bucket."
+description: "Getting Ethereum Data from AWS Bucket from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake."
 ---
 # Getting Ethereum Data from AWS Bucket
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 11
 title: "Bitquery IDE Account Settings"
-description: "Manage your Bitquery IDE account, profile, and access settings."
+description: "Bitquery IDE Account Settings in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 ---
 # Manage Account
 

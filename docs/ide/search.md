@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Search Queries in Bitquery IDE"
-description: "Search saved and public GraphQL queries in the Bitquery IDE."
+description: "Search Queries in Bitquery IDE in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 ---
 # Search Queries
 

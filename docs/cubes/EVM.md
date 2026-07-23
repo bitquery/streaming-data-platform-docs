@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "EVM Builder Terms Explanation"
-description: "Overview of Bitquery EVM cubes — trades, transfers, calls, events, and related GraphQL APIs."
+description: "EVM Builder Terms Explanation: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
 # EVM Builder Terms Explanation
 

@@ -1,6 +1,6 @@
 ---
 title: "Polymarket Wallet & User Activity API"
-description: "Query Polymarket user activity, positions, and wallet-level data. Use Bitquery GraphQL for trader stats and link to official Polymarket profile and bridge APIs."
+description: "Polymarket Wallet & User Activity API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - Polymarket wallet API
   - Polymarket user activity

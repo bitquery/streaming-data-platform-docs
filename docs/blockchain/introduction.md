@@ -1,6 +1,6 @@
 ---
-title: "Blockchain Data APIs - Multi-Chain Developer Platform"
-description: "Access comprehensive blockchain data across Ethereum, Solana, BSC, Arbitrum, Base, Polygon, Tron, and more. Real-time and historical data via GraphQL APIs, WebSocket subscriptions, and Kafka streams. Free tier available."
+title: "Blockchain Data APIs Overview"
+description: "Explore Bitquery multi-chain blockchain APIs for trades, transfers, balances, NFTs, mempool data, and real-time streams."
 keywords: ["blockchain API", "blockchain data API", "multi-chain API", "Ethereum API", "Solana API", "BSC API", "Arbitrum API", "Base API", "Polygon API", "Tron API", "blockchain GraphQL API", "real-time blockchain data", "historical blockchain data", "DEX API", "DeFi API", "NFT API", "token API", "transaction API", "balance API", "smart contract API", "mempool API", "blockchain streaming", "WebSocket blockchain", "Kafka blockchain", "blockchain analytics", "blockchain developer tools", "blockchain infrastructure", "blockchain indexing", "blockchain data platform", "stablecoin API", "MEV detection", "mempool monitoring", "crypto price API", "real-time trading data", "cross-chain analytics", "blockchain compliance", "payment processing API"]
 ---
 import FAQ from "@site/src/components/FAQ";

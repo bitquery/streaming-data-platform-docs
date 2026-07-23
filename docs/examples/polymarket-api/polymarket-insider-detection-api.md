@@ -1,6 +1,6 @@
 ---
 title: "Polymarket Insider & Fresh-Wallet Detection API"
-description: "Detect insider trading and suspicious wallets on Polymarket with Bitquery on-chain data: fresh-wallet checks, USDC funding-source tracing, wallet clustering (Sybil detection), large bets, and pre-resolution timing on Polygon."
+description: "Polymarket Insider & Fresh-Wallet Detection API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - Polymarket insider trading API
   - Polymarket fresh wallet detection

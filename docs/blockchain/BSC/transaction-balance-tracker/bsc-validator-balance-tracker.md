@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "BSC Validator Balance Tracker"
-description: "Learn how to track BSC validator balances, staking rewards, and withdrawals using Bitquery."
+description: "BSC Validator Balance Tracker: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
 # BSC Validator Balance Tracker
 

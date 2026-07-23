@@ -1,7 +1,7 @@
 ---
 title: Cardano Transactions API - Fees, Inputs, Outputs & Mints
 sidebar_label: Cardano Transactions API
-description: Query Cardano transactions with input and output totals, fees in ADA and USD, mint counts, withdrawals, and daily transaction counts via Bitquery GraphQL.
+description: "Cardano Transactions API - Fees, Inputs, Outputs & Mints: query and stream Cardano on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Cardano transactions API
   - Cardano fee API

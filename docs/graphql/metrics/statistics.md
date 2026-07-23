@@ -1,7 +1,7 @@
 ---
 sidebar_position: 8
-title: "Statistics"
-description: "Use the Bitquery GraphQL Statistics metric in queries and aggregations."
+title: "GraphQL Statistics Metrics"
+description: "Statistics in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Scale further with Kafka or gRPC streams."
 ---
 #  Statistics
 

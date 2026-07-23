@@ -1,6 +1,6 @@
 ---
 title: "eth_getTransactionReceipt"
-description: "Retrieve detailed transaction receipts, including logs, status, and gas usage on Ethereum using the eth_getTransactionReceipt API"
+description: "eth_getTransactionReceipt: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 # eth_getTransactionReceipt
 

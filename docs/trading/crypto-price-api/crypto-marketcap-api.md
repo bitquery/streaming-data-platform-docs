@@ -1,6 +1,6 @@
 ---
 title: "Crypto MarketCap API & Market Data"
-description: "Real-time crypto market cap API by Bitquery: USD market cap, FDV & token supply on Solana, Ethereum & BSC. GraphQL subscriptions, Kafka trading.prices, multi-chain OHLC & DEX examples."
+description: "Crypto MarketCap API & Market Data via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
 keywords:
   - crypto market cap API
   - Crypto Market data

@@ -1,6 +1,6 @@
 ---
 title: "Usage API - Track Billing and Quota Programmatically"
-description: "OAuth2-authenticated Usage API on account.bitquery.io. Check billing period, plan limits, and current usage with GET /api/usage."
+description: "Usage API - Track Billing and Quota Programmatically in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 sidebar_position: 4
 keywords: ["Bitquery Usage API", "Bitquery billing API", "API quota", "OAuth2", "account.bitquery.io", "usage tracking"]
 ---

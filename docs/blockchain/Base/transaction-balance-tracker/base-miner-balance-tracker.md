@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Base Miner Balance Tracker"
-description: "Learn how to track Base miner balances, mining rewards, and uncle block rewards using Bitquery."
+description: "Base Miner Balance Tracker: stream Base balance changes with reason codes using Bitquery GraphQL subscriptions. Copy GraphQL snippets for production apps."
 ---
 # Base Miner Balance Tracker
 
