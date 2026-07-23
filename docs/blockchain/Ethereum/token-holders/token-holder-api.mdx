@@ -6,7 +6,7 @@ import FAQ from "@site/src/components/FAQ";
 # Token Holders API
 
 :::caution Deprecated API
-`EVM.TokenHolders` is deprecated as of **20 May 2026** and will be removed on **15 June 2026**. Use **`EVM.Holders`** (this page) instead.
+`EVM.TokenHolders` was deprecated as of **20 May 2026** and removed on **15 June 2026**. Use **`EVM.Holders`** (this page) instead.
 :::
 
 The **Holders** API returns token holder data for ERC-20 tokens on Ethereum: top holders, holder counts, and balance thresholds. Non-zero balances use `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
@@ -469,7 +469,7 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 <FAQ
   items={[
-    { q: "Which endpoint should I use for ERC-20 holders?", a: "Use EVM.Holders. The older EVM.TokenHolders field is deprecated and will be removed — migrate to Holders with Amount(selectWhere: { gt: \"0\" })." },
+    { q: "Which endpoint should I use for ERC-20 holders?", a: "Use EVM.Holders. The older EVM.TokenHolders field has been removed — migrate to Holders with Amount(selectWhere: { gt: \"0\" })." },
     { q: "How do I get the top holders of a token?", a: "Query EVM.Holders with dataset: combined, filter by Currency SmartContract address, order by Balance descending, and limit results." },
     { q: "How do I count total holders?", a: "Use a Holders query with count aggregation and Amount(selectWhere: { gt: \"0\" }) so zero-balance addresses are excluded." },
   ]}

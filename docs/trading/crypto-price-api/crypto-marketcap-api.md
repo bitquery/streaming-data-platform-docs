@@ -225,7 +225,7 @@ This section aggregates commonly used queries for market data across chains, pai
 
 Subscribe to **`Trading.Tokens`** with a **network** and **interval** to stream OHLC, volume, and **`Supply`** (including **MarketCap**) for many tokens on that chain in one feed.
 
-The following stream provide 60 second aggregated data. For information on all available time intervals, see the supported intervals documentation [here](http://localhost:3000/docs/trading/crypto-price-api/introduction/#supported-time-intervals).
+The following stream provide 60 second aggregated data. For information on all available time intervals, see the supported intervals documentation [here](/docs/trading/crypto-price-api/introduction/#supported-time-intervals).
 
 [Run Query](https://ide.bitquery.io/Aggregated-Price-of-all-tokens-in-real-time-on-one-chain_1)
 

@@ -15,7 +15,7 @@ keywords:
 # Understanding Pump.fun: From Launchpad to PumpSwap
 
 :::tip Need real-time Pump.fun & PumpSwap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Pump.fun & PumpSwap swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Pump.fun & PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Pump.fun & PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Pump.fun & PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 

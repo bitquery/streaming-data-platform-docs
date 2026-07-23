@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Overview
 
-Building a real time balance tracker can be really helpful for the investigation teams to closely monitor the activities of a wallet. In this tutorial we will learn how to build a simple real time balance tracker using Javascript and NodeJS for the logical reasoning, using Bitquery's [Balance Updates API](https://docs.bitquery.io/docs/examples/balances/balance-api/), while using HTML, CSS and JavaScript to make the monitoring application more intuitive.
+Building a real time balance tracker can be really helpful for the investigation teams to closely monitor the activities of a wallet. In this tutorial we will learn how to build a simple real time balance tracker using Javascript and NodeJS for the logical reasoning, using Bitquery's [Balance API](/docs/blockchain/Ethereum/balances/balance-api/), while using HTML, CSS and JavaScript to make the monitoring application more intuitive.
 
 ## Real Time Balance Calculation Logic
 

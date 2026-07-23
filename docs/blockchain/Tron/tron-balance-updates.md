@@ -6,7 +6,7 @@ import FAQ from "@site/src/components/FAQ";
 # Tron Address Balance API
 
 :::caution Deprecated API
-`Tron.BalanceUpdates` is deprecated as of **18 June 2026** and will be removed on **18 July 2026**. Use **`Tron.Balances`** (this page) instead.
+`Tron.BalanceUpdates` was deprecated as of **18 June 2026** and removed on **18 July 2026**. Use **`Tron.Balances`** (this page) instead.
 :::
 
 The **Balances** API returns current and historical token balances for an address on Tron. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
@@ -323,7 +323,7 @@ query TopTokenHolders {
 
 ## Deprecated: BalanceUpdates Queries
 
-The examples below use the deprecated **`Tron.BalanceUpdates`** API. Migrate to **`Tron.Balances`** and **`Tron.Holders`** (sections above) before **18 July 2026**.
+The examples below use the deprecated **`Tron.BalanceUpdates`** API. Migrate to **`Tron.Balances`** and **`Tron.Holders`** (sections above) — **`Tron.BalanceUpdates`** is no longer available.
 
 ### Balance of an Address on Tron
 

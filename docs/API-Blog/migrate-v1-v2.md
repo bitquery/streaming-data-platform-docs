@@ -52,7 +52,7 @@ The v2 API maintains a similar schema structure but integrates new data cubes su
 If you're new to v2, check more examples on:
 
 [TokenHolder APIs](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api/)
-[balanceUpdates](https://docs.bitquery.io/docs/examples/balances/balance-api/)
+[balanceUpdates](/docs/blockchain/Ethereum/balances/balance-api/)
 [DexTradeByTokens](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/)
 
 ## Smart Contract Interactions

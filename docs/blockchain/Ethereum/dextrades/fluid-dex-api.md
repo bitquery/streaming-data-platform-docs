@@ -5,7 +5,7 @@ sidebar_label: Fluid DEX Trades
 # Fluid DEX API
 
 :::tip Need real-time Fluid DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Fluid DEX swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Fluid DEX data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Fluid DEX swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Fluid DEX data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 
