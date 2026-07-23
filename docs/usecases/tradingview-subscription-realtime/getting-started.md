@@ -107,7 +107,7 @@ Aggregated OHLC from any provider can have **open ≠ previous close**. This tut
 ### Must have
 
 - **Node.js 16+** (18 LTS is a safe choice).
-- A **Bitquery account** and an **OAuth token** with access to streaming (see [authorisation](https://docs.bitquery.io/docs/authorization/how-to-generate/)).
+- A **Bitquery account** and an **OAuth token** with access to streaming (see [authorization](https://docs.bitquery.io/docs/authorization/how-to-generate/)).
 - **TradingView Advanced Charts** access: you must **apply** and receive their library; it is not optional for this integration path.
 
 ## Architecture overview

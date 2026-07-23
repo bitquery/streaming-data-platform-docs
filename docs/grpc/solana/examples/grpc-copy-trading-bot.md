@@ -104,7 +104,7 @@ function initializeClient() {
 }
 ```
 
-Refer to [this document](https://docs.bitquery.io/docs/grpc/solana/authorization/) for any issues related to authorisation.
+Refer to [this document](https://docs.bitquery.io/docs/grpc/solana/authorization/) for any issues related to authorization.
 
 ### Creating the Stream
 

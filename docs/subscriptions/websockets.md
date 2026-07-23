@@ -84,7 +84,7 @@ When switching from a regular GraphQL query to a WebSocket subscription in Bitqu
 
 4. **Authentication**  
    - You must authenticate using OAuth or provide your Bitquery API token over the WebSocket connection.  
-   - See [WebSocket authorisation guide](https://docs.bitquery.io/docs/authorization/websocket/) for details.
+   - See [WebSocket authorization guide](https://docs.bitquery.io/docs/authorization/websocket/) for details.
 
 5. **Subprotocol**  
    - Your WebSocket client must support either `graphql-ws` or `graphql-transport-ws` subprotocols.    

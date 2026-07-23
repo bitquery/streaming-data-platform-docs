@@ -176,6 +176,10 @@ const config = {
             from: "/docs/authorisation/",
           },
           {
+            to: "/docs/blockchain/Arbitrum/",
+            from: "/docs/blockchain/Arbitrum/Overview/",
+          },
+          {
             to: "/docs/graphql/dataset/select-blocks/",
             from: "/docs/graphql/dataset/select_blocks/",
           },
