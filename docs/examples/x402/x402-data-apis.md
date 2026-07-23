@@ -596,5 +596,5 @@ You can run this query [here](https://ide.bitquery.io/Payment-analytics-related-
 - [GraphQL Metrics](https://docs.bitquery.io/docs/graphql/metrics) - Aggregation and calculation functions
 - [Datetime Queries](https://docs.bitquery.io/docs/graphql/datetime) - Time-based filtering and analysis
 - [Getting Started Guide](https://docs.bitquery.io/docs/start/first-query) - Build your first query
-- [WebSocket Subscriptions](https://docs.bitquery.io/docs/subscriptions/websocket) - Real-time data streaming
+- [WebSocket Subscriptions](/docs/subscriptions/websockets/) - Real-time data streaming
 

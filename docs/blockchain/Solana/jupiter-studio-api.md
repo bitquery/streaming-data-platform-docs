@@ -20,8 +20,8 @@ You may also be interested in:
 
 - [Jupiter API ➤](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api/)
 - [Pump.fun APIs ➤](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
-- [Meteora APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/meteora-api/)
-- [Raydium APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/raydium-api/)
+- [Meteora APIs ➤](/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/)
+- [Raydium APIs ➤](/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
 
 :::note
 Jupiter studio tokens are launched and traded on Meteora DBC. So a Jup Studio token follows a lifecycle of a Meteora DBC Token.

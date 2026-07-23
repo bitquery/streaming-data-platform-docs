@@ -410,5 +410,5 @@ Complete guide to [using trades to calculate OHLC is available here](https://doc
 
 To visualize OHLCV data using **TradingView Advanced Chart Library**, refer to:
 
-- [TradingView Advanced Charts Guide](https://docs.bitquery.io/docs/usecases/tradingview-advanced-charts/getting-started/)
+- [TradingView Advanced Charts Guide](/docs/usecases/tradingview-subscription-realtime/getting-started/)
 - [TradingView Real-Time Subscription](https://docs.bitquery.io/docs/usecases/tradingview-subscription-realtime/getting-started/)

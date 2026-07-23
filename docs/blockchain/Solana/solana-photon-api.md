@@ -24,7 +24,7 @@ This program address appears in the instruction data when Photon routes a trade,
 ## Latest Trades Routed via Photon
 
 This query retrieves the latest 100 trades that were routed through Photon on Solana.
-The query uses a `joinInstructions` function to filter trades that specifically involved Photon's routing program (address: `BSfD6SHZigAfDWSjzD5Q41jw8LmKwtmjskPH9XW1mrRW`). For more information about using joins in Bitquery APIs, see our [graphQL joins documentation](https://docs.bitquery.io/docs/graphql/joins/).
+The query uses a `joinInstructions` function to filter trades that specifically involved Photon's routing program (address: `BSfD6SHZigAfDWSjzD5Q41jw8LmKwtmjskPH9XW1mrRW`). For more information about using joins in Bitquery APIs, see our [graphQL joins documentation](/docs/graphql/capabilities/joins/).
 
 [Run Query](https://ide.bitquery.io/Trades-Executed-on-Photon)
 

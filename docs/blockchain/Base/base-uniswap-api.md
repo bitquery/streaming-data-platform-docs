@@ -317,7 +317,7 @@ query MyQuery {
 
 ## Building with Bitquery and Uniswap API
 
-Check [this](../../usecases/base-sniper-bot.mdx) guide to get started with building projects with real world value using Bitquery Uniswap APIs.
+Check [this](/docs/usecases/base-sniper-bot/) guide to get started with building projects with real world value using Bitquery Uniswap APIs.
 
 <FAQ
   items={[

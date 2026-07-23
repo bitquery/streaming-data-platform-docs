@@ -315,7 +315,7 @@ stream:
 
 ### Filters
 
-Use [filtering options](https://docs.bitquery.io/docs/grpc/solana/filters/?utm_source=github&utm_medium=docs&utm_campaign=grpc_copytrading) to target specific trades:
+Use [filtering options](/docs/grpc/solana/topics/dextrades/#filtering-options) to target specific trades:
 
 ```yaml
 # config.yaml

@@ -8,9 +8,8 @@ description: "Bitquery blockchain API docs: Tron Fees API."
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 In this document, we will explore several examples related to Tron Fees data.
-We also have [PumpFun APIs](https://docs.bitquery.io/docs/blockchain/Tron/Pump-Fun-API/) to track Pump Fun token swaps, [PumpSwap APIs](https://docs.bitquery.io/docs/blockchain/Tron/pump-swap-api/) if you want to track the token after it has been migrated to PumpSwap AMM.
-Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Tron/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/).
-These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
+For related memecoin fee and trade analytics on other chains, see [Pump.fun](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/), [PumpSwap](/docs/blockchain/Solana/Pumpfun/pump-swap-api/), [Moonshot](/docs/blockchain/Solana/Moonshot-API/), and [Four.meme](/docs/blockchain/BSC/four-meme-api/).
+These APIs can also be delivered through Kafka streams for low-latency use cases — contact us on Telegram.
 
 <head>
   <meta name="title" content="Tron Fees API - Track Transaction Fees on Tron DApps"/>

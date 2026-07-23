@@ -1,12 +1,11 @@
 ---
 title: Base Transaction Balance Tracker API
-description: Access comprehensive Base Transaction Balance Tracker APIs for real-time balance updates, validator tracking, miner rewards, MEV analysis, and self-destruct monitoring. GraphQL API with subscriptions.
+description: Access comprehensive Base Transaction Balance Tracker APIs for real-time balance updates, miner rewards, MEV analysis, and self-destruct monitoring. GraphQL API with subscriptions.
 slug: /blockchain/Base/transaction-balance-tracker/
 keywords:
   - Base Transaction Balance Tracker
   - Base Balance API
   - Transaction Balance API
-  - Validator Balance Tracker
   - Miner Balance Tracker
   - MEV Balance Tracker
   - Self-Destruct Balance API
@@ -21,7 +20,7 @@ keywords:
 
 The **Base Transaction Balance Tracker API** provides real-time balance updates for all addresses involved in transactions on the Base blockchain. Unlike traditional balance APIs that only show current balances, our Transaction Balance Tracker captures every balance change with detailed information about the reason for each change, making it perfect for building comprehensive transaction monitoring, portfolio tracking, and blockchain analytics applications.
 
-Our Transaction Balance Tracker APIs track balance changes across different scenarios including regular transactions, validator rewards, miner rewards, MEV activities, and contract self-destruct events. Each balance change is enriched with reason codes, pre/post balances, USD values, and transaction context.
+Our Transaction Balance Tracker APIs track balance changes across different scenarios including regular transactions, miner rewards, MEV activities, and contract self-destruct events. Each balance change is enriched with reason codes, pre/post balances, USD values, and transaction context.
 
 ## Key Features
 
@@ -30,7 +29,7 @@ Our Transaction Balance Tracker APIs track balance changes across different scen
 - **Comprehensive Coverage**: Track native ETH, ERC-20 tokens, ERC-721, and ERC-1155 NFTs
 - **Historical Data**: Access complete historical balance change data since Base genesis
 - **USD Values**: Get balance values in USD for portfolio tracking and analytics
-- **Multiple Use Cases**: Monitor validators, miners, MEV bots, self-destruct events, and more
+- **Multiple Use Cases**: Monitor miners, MEV bots, self-destruct events, and more
 
 ## Getting Started
 
@@ -73,17 +72,6 @@ The core Transaction Balance Tracker API provides real-time balance updates for 
 - Get balance change reason codes for native currency
 - Track ERC-20, ERC-721, and ERC-1155 tokens
 - Access pre and post balance values
-
-### [Base Validator Balance Tracker](https://docs.bitquery.io/docs/blockchain/Base/transaction-balance-tracker/base-validator-balance-tracker)
-
-Track Base validator balances, staking rewards, and withdrawals from the beacon chain. Monitor validator activity including block rewards, withdrawal events, and transaction fee rewards.
-
-**Key Features:**
-- Track validator staking rewards (Code 2)
-- Monitor beacon chain withdrawals (Code 3)
-- Track transaction fee rewards (Code 5)
-- Filter by specific validator addresses
-- Real-time validator balance updates
 
 ### [Base Miner Balance Tracker](https://docs.bitquery.io/docs/blockchain/Base/transaction-balance-tracker/base-miner-balance-tracker)
 

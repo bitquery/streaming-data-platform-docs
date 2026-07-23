@@ -720,6 +720,54 @@ const config = {
             from: "/docs/subscriptions/",
             to: "/docs/category/graphql-subscriptions/",
           },
+          {
+            from: "/docs/subscriptions/websocket/",
+            to: "/docs/subscriptions/websockets/",
+          },
+          {
+            from: "/docs/usecases/tradingview-advanced-charts/getting-started/",
+            to: "/docs/usecases/tradingview-subscription-realtime/getting-started/",
+          },
+          {
+            from: "/docs/graphql/joins/",
+            to: "/docs/graphql/capabilities/joins/",
+          },
+          {
+            from: "/docs/blockchain/Solana/raydium-api/",
+            to: "/docs/blockchain/Solana/Solana-Raydium-DEX-API/",
+          },
+          {
+            from: "/docs/blockchain/Solana/orca-api/",
+            to: "/docs/blockchain/Solana/solana-orca-dex-api/",
+          },
+          {
+            from: "/docs/blockchain/Solana/serum-api/",
+            to: "/docs/blockchain/Solana/Solana-OpenBook-api/",
+          },
+          {
+            from: "/docs/blockchain/Solana/meteora-api/",
+            to: "/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/",
+          },
+          {
+            from: "/docs/blockchain/Ethereum/dextrades/DEXScreener/solana_dexscreener/",
+            to: "/docs/blockchain/Solana/DEXScreener/solana_dexscreener/",
+          },
+          {
+            from: "/docs/blockchain/Ethereum/BSC/bsc-uniswap-api/",
+            to: "/docs/blockchain/BSC/bsc-uniswap-api/",
+          },
+          {
+            from: "/docs/blockchain/Ethereum/Base/base-uniswap-api/",
+            to: "/docs/blockchain/Base/base-uniswap-api/",
+          },
+          {
+            from: "/docs/blockchain/Ethereum/Matic/matic-uniswap-api/",
+            to: "/docs/blockchain/Matic/matic-uniswap-api/",
+          },
+          {
+            from: "/docs/grpc/solana/filters/",
+            to: "/docs/grpc/solana/topics/dextrades/",
+          },
 
           //crypto price api redirects
           {
