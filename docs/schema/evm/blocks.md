@@ -1,7 +1,7 @@
 ---
 title: "EVM Blocks API"
+description: "Bitquery schema reference for Blocks: fields, types, and query patterns."
 ---
-
 <head>
 <meta name="title" content="EVM Blocks API"/>
 

@@ -1,3 +1,8 @@
+---
+title: "Building a Basic UI for Balance Tracker"
+description: "Bitquery how-to guide: Building a Basic UI for Balance Tracker."
+---
+
 # Building a Basic UI for Balance Tracker
 
 In this section we will create a simple UI using HTML, CSS and JavaScript to make the real-time Balance Tracker intuitive. For that we will create a HTML file named `index.js` in the same directory.

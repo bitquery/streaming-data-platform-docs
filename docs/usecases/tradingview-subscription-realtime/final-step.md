@@ -1,3 +1,8 @@
+---
+title: "Setting Up App.js"
+description: "Bitquery how-to guide: Setting Up App.js."
+---
+
 # Setting Up `App.js`
 
 To complete the setup and run the chart, we need to call the `TVChartContainer` component inside the main `App.js` file. Here's the process:

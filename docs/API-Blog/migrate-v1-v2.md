@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Migrating from API v1 to v2"
+description: "Bitquery API blog: Migrating from API v1 to v2."
 ---
-
 # Migrating from API v1 to v2
 
 ## Overview

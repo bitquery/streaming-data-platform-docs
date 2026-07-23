@@ -1,6 +1,9 @@
 ---
 sidebar_position: 6
+title: "Widget Creation"
+description: "Bitquery how-to guide: Widget Creation."
 ---
+
 # Widget Creation
 
 Now that we have setup a custom DataFeed, we need to create the TradingView Widget.

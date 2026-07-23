@@ -1,7 +1,7 @@
 ---
 title: "EVM Token Transfers API"
+description: "Bitquery schema reference for Transfers: fields, types, and query patterns."
 ---
-
 <head>
 <meta name="title" content="EVM Token Transfers API"/>
 

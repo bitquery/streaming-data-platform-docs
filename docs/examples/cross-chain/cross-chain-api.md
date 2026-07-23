@@ -1,3 +1,8 @@
+---
+title: "NFTs Tracking Across Chains"
+description: "Bitquery example queries: NFTs Tracking Across Chains."
+---
+
 # NFTs Tracking Across Chains
 
 Effortlessly check NFTs across different chains. [You can run the query here](https://ide.bitquery.io/multi-chain-NFT-updates)

@@ -1,7 +1,7 @@
 ---
 title: "EVM Smart Contract Calls API"
+description: "Bitquery schema reference for Calls: fields, types, and query patterns."
 ---
-
 <head>
 <meta name="title" content="EVM Smart Contract Calls API"/>
 

@@ -1,3 +1,8 @@
+---
+title: "Calculations and Scripting"
+description: "Bitquery how-to guide: Calculations and Scripting."
+---
+
 # Calculations and Scripting
 
 We will be using a simple fromula given below to calculate and trace the real-time balance changes. To execute this formula through code we will build two files (namely balance.js and index.js).

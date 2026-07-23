@@ -1,7 +1,7 @@
 ---
 title: Transactions API
+description: "Bitquery schema reference for Transactions: fields, types, and query patterns."
 ---
-
 <head>
 <meta name="title" content="Transactions API"/>
 <meta name="description" content="Get information on transaction details and wallets on EVM chains. Also, get information on blocks for tokens or NFTs on EVM chains."/>

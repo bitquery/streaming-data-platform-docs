@@ -1,7 +1,7 @@
 ---
 title: "EVM Arguments and Returns API"
+description: "Bitquery schema reference for Arguments: fields, types, and query patterns."
 ---
-
 <head>
 <meta name="title" content="EVM Arguments and Returns API"/>
 

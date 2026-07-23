@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Pages"
+description: "Bitquery how-to guide: Pages."
 ---
-
 # Pages
 
 ## About Page

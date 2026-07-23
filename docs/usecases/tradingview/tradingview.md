@@ -1,3 +1,8 @@
+---
+title: "Tutorial to build TradingView chart with real-time blockchain data (Streaming API version)"
+description: "Bitquery how-to guide: Tutorial to build TradingView chart with real-time blockchain data (Streaming API version)."
+---
+
 # Tutorial to build TradingView chart with real-time blockchain data (Streaming API version)
 
 We will be building the demo in React using the [lightweight-charts library](https://tradingview.github.io/lightweight-charts/).

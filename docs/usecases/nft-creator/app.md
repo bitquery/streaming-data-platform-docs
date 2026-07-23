@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "App"
+description: "Bitquery how-to guide: App."
 ---
-
 # App 
 
 Finally we will write the app code and the css

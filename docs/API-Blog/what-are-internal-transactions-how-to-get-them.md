@@ -1,3 +1,8 @@
+---
+title: "What are Internal Transactions & How to Get Them?"
+description: "Bitquery API blog: What are Internal Transactions & How to Get Them?."
+---
+
 import FAQ from "@site/src/components/FAQ";
 
 # What are Internal Transactions & How to Get Them?

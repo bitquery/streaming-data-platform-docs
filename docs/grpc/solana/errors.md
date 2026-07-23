@@ -1,3 +1,8 @@
+---
+title: "Error Handling"
+description: "Bitquery Solana gRPC docs: Error Handling."
+---
+
 # Error Handling
 
 When working with gRPC streams for Solana CoreCast, you may encounter errors. This page documents common error types, their causes, and how to debug them.

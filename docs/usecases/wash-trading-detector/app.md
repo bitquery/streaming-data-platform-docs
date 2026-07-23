@@ -1,3 +1,8 @@
+---
+title: "Solana Wash Trading Dashboard"
+description: "Bitquery how-to guide: Solana Wash Trading Dashboard."
+---
+
 # Solana Wash Trading Dashboard
 
 This script runs an interactive Streamlit web application that:

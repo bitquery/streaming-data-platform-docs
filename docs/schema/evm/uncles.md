@@ -1,7 +1,7 @@
 ---
 title: "EVM Uncle Blocks API"
+description: "Bitquery schema reference for Uncles: fields, types, and query patterns."
 ---
-
 <head>
 <meta name="title" content="EVM Uncle Blocks API"/>
 

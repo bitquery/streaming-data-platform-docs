@@ -1,3 +1,8 @@
+---
+title: "Solana Wash Trades Detector"
+description: "Bitquery how-to guide: Solana Wash Trades Detector."
+---
+
 # Solana Wash Trades Detector
 
 This project fetches on-chain Solana DEX trades data from Bitquery, labels potential wash-trades based on a set of defined rules, trains an XGBoost model, and deploys an interactive Streamlit dashboard to visualize suspicious trades and compute risk metrics.

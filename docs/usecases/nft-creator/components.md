@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Components"
+description: "Bitquery how-to guide: Components."
 ---
-
 # Components
 
 The Components are the heavy-lifters of the app and contain the code snippets for the functionality.

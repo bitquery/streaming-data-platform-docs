@@ -1,3 +1,8 @@
+---
+title: "Best Practices for Solana gRPC Streams"
+description: "Bitquery Solana gRPC docs: Best Practices for Solana gRPC Streams."
+---
+
 # Best Practices for Solana gRPC Streams
 
 When building applications with Bitquery's Solana gRPC streams, follow these best practices to ensure your application is reliable, efficient, and handles data effectively. This guide covers filtering, connection management, error handling, and monitoring.

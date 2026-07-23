@@ -1,7 +1,7 @@
 ---
 title: DEX Trades API
+description: "Bitquery schema reference for Dextrades: fields, types, and query patterns."
 ---
-
 <head>
 <meta name="title" content="DEX Trades API"/>
 <meta name="description" content="Get address balance and history on the DEX Trades blockchain. Also, get address balance and history for tokens or NFTs on the DEX Trades blockchain."/>

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "How to Easily Track Token Lock and Unlock Events Using Bitquery APIs"
+description: "Bitquery API blog: How to Easily Track Token Lock and Unlock Events Using Bitquery APIs."
 ---
-
 # How to Easily Track Token Lock and Unlock Events Using Bitquery APIs
 
 In this article, we are going to understand why tracking token lock and unlock events is necessary for investors and project teams in the quickly changing crypto space.

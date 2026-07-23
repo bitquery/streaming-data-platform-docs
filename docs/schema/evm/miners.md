@@ -1,8 +1,7 @@
 ---
 title:  EVM Miner Rewards API
+description: "Bitquery schema reference for Miners: fields, types, and query patterns."
 ---
-
-
 <head>
 <meta name="title" content="EVM Miner Rewards API"/>
 <meta name="description" content= "EVM balance API will help get the balance or balance history of any address or smart contract on the EVM blockchain."/>

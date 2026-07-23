@@ -1,7 +1,7 @@
 ---
 title: "EVM Smart Contract Events & logs API"
+description: "Bitquery schema reference for Events: fields, types, and query patterns."
 ---
-
 <head>
 <meta name="title" content="EVM Smart Contract Events & logs API"/>
 

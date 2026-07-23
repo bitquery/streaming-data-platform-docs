@@ -1,3 +1,8 @@
+---
+title: "Live Reload Configuration for gRPC Streams"
+description: "Bitquery Solana gRPC docs: Live Reload Configuration for gRPC Streams."
+---
+
 # Live Reload Configuration for gRPC Streams
 
 Live reload enables dynamic configuration changes without you having to restart your application. This feature automatically detects changes to your `config.yaml` file and restarts the stream with the new settings.

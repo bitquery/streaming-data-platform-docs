@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "Custom DataFeed Setup"
+description: "Bitquery how-to guide: Custom DataFeed Setup."
 ---
-
 # Custom DataFeed Setup
 
 In this section, we will create a custom DataFeed for TradingView's Advanced Charting Library, integrating historical OHLC data and real-time data subscription. We will use three main files:

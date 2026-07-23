@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Getting Historical Data"
+description: "Bitquery how-to guide: Getting Historical Data."
 ---
-
 # Getting Historical Data
 
 In this section, we will write the code to get historical OHLC data to populate a chart with candlesticks up to the current timestamp. Create a new file called `histOHLC.js` and add the following code. Each part of the code is explained below.
