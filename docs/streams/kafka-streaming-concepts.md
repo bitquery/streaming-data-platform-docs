@@ -309,7 +309,7 @@ Your consumer will read messages from the topic, and you will be able to parse t
 - **Message Packing:** Transactions are packed in small chunks, with no more than 250 transactions per message.
 - **Message Expiration:** Topic messages expire after 24 hours in the stream.
 
-## Best Practises
+## Best Practices {#best-practises}
 
 When working with Kafka streams, ensuring efficient message consumption and processing is crucial for maintaining low latency and high throughput. Here are the best practices to follow:
 

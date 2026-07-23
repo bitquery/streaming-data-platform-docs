@@ -29,21 +29,21 @@ Bitquery provides comprehensive blockchain data across **40+ blockchains** throu
 Our V2 API version with enhanced features and real-time streaming:
 
 **EVM-Compatible Chains:**
-- **[Ethereum](https://docs.bitquery.io/docs/blockchain/Ethereum/)**
-- **[BSC (Binance Smart Chain)](https://docs.bitquery.io/docs/blockchain/BSC/)**
-- **[Arbitrum](https://docs.bitquery.io/docs/blockchain/Arbitrum/)**
-- **[Base](https://docs.bitquery.io/docs/blockchain/Base/)**
-- **[Polygon](https://docs.bitquery.io/docs/blockchain/Matic/)**
-- **[Optimism](https://docs.bitquery.io/docs/blockchain/Optimism/)**
+- **[Ethereum](/docs/blockchain/Ethereum/)**
+- **[BSC (Binance Smart Chain)](/docs/blockchain/BSC/)**
+- **[Arbitrum](/docs/blockchain/Arbitrum/)**
+- **[Base](/docs/blockchain/Base/)**
+- **[Polygon](/docs/blockchain/Matic/)**
+- **[Optimism](/docs/blockchain/Optimism/)**
 - **[opBNB](/docs/blockchain/supported-chains/)** (IDE / limited docs)
-- **[Robinhood](https://docs.bitquery.io/docs/blockchain/robinhood/)**
+- **[Robinhood](/docs/blockchain/robinhood/)**
 
 **Non-EVM Chains:**
-- **[Solana](https://docs.bitquery.io/docs/blockchain/Solana/)**
-- **[Tron](https://docs.bitquery.io/docs/blockchain/Tron/)**
+- **[Solana](/docs/blockchain/Solana/)**
+- **[Tron](/docs/blockchain/Tron/)**
 - **[TON](/docs/blockchain/supported-chains/)** (limited support)
-- **[Bitcoin](https://docs.bitquery.io/docs/blockchain/Bitcoin/)**
-- **[Cardano](https://docs.bitquery.io/docs/blockchain/Cardano/)**
+- **[Bitcoin](/docs/blockchain/Bitcoin/)**
+- **[Cardano](/docs/blockchain/Cardano/)**
 
 ### **V1 APIs**
 Our comprehensive V1 API supporting 40+ blockchains with historical data:
@@ -52,16 +52,16 @@ Our comprehensive V1 API supporting 40+ blockchains with historical data:
 
 **Documentation:**
 - **[Supported chains by interface](/docs/blockchain/supported-chains/)** — Coverage matrix: V1/V2, Kafka, gRPC, ClickHouse, cloud
-- **[V2 Documentation](https://docs.bitquery.io/docs/)** - Latest APIs with real-time streaming
+- **[V2 Documentation](/docs/)** - Latest APIs with real-time streaming
 - **[V1 Documentation](https://docs.bitquery.io/v1/)** - Comprehensive APIs with 40+ blockchain support
 
 ## Bitquery's Core Blockchain Data Capabilities
 
-**Popular APIs:** [Solana API](https://docs.bitquery.io/docs/blockchain/Solana/) (DEX trades, Pump.fun, Raydium) · [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api) · [BSC API](https://docs.bitquery.io/docs/blockchain/BSC/) · [Base API](https://docs.bitquery.io/docs/blockchain/Base/) · [DEX API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/dex-api) · [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
+**Popular APIs:** [Solana API](/docs/blockchain/Solana/) (DEX trades, Pump.fun, Raydium) · [Polymarket API](/docs/examples/polymarket-api/polymarket-api) · [BSC API](/docs/blockchain/BSC/) · [Base API](/docs/blockchain/Base/) · [DEX API](/docs/blockchain/Ethereum/dextrades/dex-api) · [Crypto Price API](/docs/trading/crypto-price-api/introduction/)
 
 ### **Crypto Price API - Real-Time Multi-Chain Price Data**
 
-Bitquery's dedicated **[Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** provides real-time, aggregated cryptocurrency price data with ultra-low latency across multiple blockchains. This specialized API is designed specifically for trading applications, DeFi protocols, and financial analytics.
+Bitquery's dedicated **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** provides real-time, aggregated cryptocurrency price data with ultra-low latency across multiple blockchains. This specialized API is designed specifically for trading applications, DeFi protocols, and financial analytics.
 
 **Key Features:**
 - **Real-time Streaming**: 1-second granularity via GraphQL subscriptions and Kafka streams
@@ -138,7 +138,7 @@ Access real-time data from the mempool before transactions are confirmed, enabli
 - **Tron Mempool**: TRX network pending transaction tracking
 - **Kafka Mempool Streams**: Ultra-low latency mempool data via Protocol Buffers
 
-**Learn More:** [Mempool Subscriptions](https://docs.bitquery.io/docs/subscriptions/mempool-subscriptions/)
+**Learn More:** [Mempool Subscriptions](/docs/subscriptions/mempool-subscriptions/)
 
 ### **Advanced Features & Enterprise Capabilities**
 
@@ -156,7 +156,7 @@ Access real-time data from the mempool before transactions are confirmed, enabli
 - **Custom Aggregations**: Build sophisticated analytics with custom time windows and metrics
 - **Cross-chain Analytics**: Unified analytics across multiple blockchain ecosystems
 
-**Learn More:** [Advanced Features](https://docs.bitquery.io/docs/subscriptions/backfilling-subscription/)
+**Learn More:** [Advanced Features](/docs/subscriptions/backfilling-subscription/)
 
 ## Developer Interfaces
 
@@ -232,7 +232,7 @@ Chains from the Early Access Program (EAP) have moved to v2.
 ### **Real-time Subscriptions (WebSocket)**
 Convert any query to a live stream by changing `query` to `subscription`. Our WebSocket implementation provides real-time blockchain data with sub-second latency.
 
-**Learn More:** [WebSocket Subscriptions](https://docs.bitquery.io/docs/subscriptions/websockets/)
+**Learn More:** [WebSocket Subscriptions](/docs/subscriptions/websockets/)
 
 **WebSocket Features:**
 - **Protocol Support**: Both `graphql-ws` and `subscriptions-transport-ws` protocols
@@ -329,7 +329,7 @@ const unsubscribe = client.subscribe(
 ### **Kafka Streaming**
 High-throughput streaming for enterprise applications with pre-parsed Protocol Buffers. Our Kafka infrastructure provides enterprise-grade data streaming with guaranteed delivery and horizontal scalability.
 
-**Learn More:** [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
+**Learn More:** [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/)
 
 **Kafka Infrastructure:**
 - **Broker**: `streaming.bitquery.io:9092`
@@ -451,26 +451,26 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 - Use OAuth2 for secure, programmatic access
 
 ### 3. **Run Your First Query**
-- Try our [starter queries](https://docs.bitquery.io/docs/start/starter-queries/) for common use cases
+- Try our [starter queries](/docs/start/starter-queries/) for common use cases
 - Use the IDE's autocomplete (Ctrl+Space) for query building
 - Convert queries to subscriptions for real-time data
 
 ### 4. **Explore Blockchain-Specific APIs**
-- **[Ethereum APIs](https://docs.bitquery.io/docs/blockchain/Ethereum/)** - Complete EVM ecosystem data
-- **[Solana APIs](https://docs.bitquery.io/docs/blockchain/Solana/)** - High-speed blockchain analytics
-- **[BSC APIs](https://docs.bitquery.io/docs/blockchain/BSC/)** - Binance Smart Chain data
+- **[Ethereum APIs](/docs/blockchain/Ethereum/)** - Complete EVM ecosystem data
+- **[Solana APIs](/docs/blockchain/Solana/)** - High-speed blockchain analytics
+- **[BSC APIs](/docs/blockchain/BSC/)** - Binance Smart Chain data
 - **[Trading APIs](/docs/category/trading-apis/)** - Real-time price and trading data
 
 ## Use Cases & Applications
 
 ### **DeFi Applications**
-- **DEX Aggregators**: Best [price discovery](https://docs.bitquery.io/docs/schema/evm/dextrades/) across multiple DEXs
+- **DEX Aggregators**: Best [price discovery](/docs/schema/evm/dextrades/) across multiple DEXs
 - **Yield Farming**: Track liquidity positions and rewards
 - **Lending Protocols**: Monitor collateral ratios and liquidations
 - **Cross-chain Bridges**: Track asset movements between chains
 
 ### **Trading & Analytics**
-- **Trading Bots**: Real-time price feeds with 1-second aggregation and market data via [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
+- **Trading Bots**: Real-time price feeds with 1-second aggregation and market data via [Crypto Price API](/docs/trading/crypto-price-api/introduction/)
 - **Portfolio Trackers**: Multi-chain wallet monitoring
 - **Market Analytics**: Volume, liquidity, and price analysis
 - **Arbitrage Detection**: Cross-chain and cross-DEX opportunities
@@ -510,9 +510,9 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 ## Support & Community
 
 ### **Documentation & Resources**
-- **[Complete API Documentation](https://docs.bitquery.io/docs/)** - Comprehensive guides for all features
+- **[Complete API Documentation](/docs/)** - Comprehensive guides for all features
 - **[Code Examples](/docs/category/how-to-guides/)** - Real-world implementation examples
-- **[Video Tutorials](https://docs.bitquery.io/docs/blockchain/Ethereum/)** - Step-by-step guides
+- **[Video Tutorials](/docs/blockchain/Ethereum/)** - Step-by-step guides
 - **[Postman Collection](https://www.postman.com/interstellar-eclipse-270749/workspace/bitquery)** - Ready-to-use API examples
 
 ### **Community Support**
@@ -521,8 +521,8 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 - **[Support Desk](https://support.bitquery.io/)** - Technical issues and data problems
 
 ### **Learning Resources**
-- **[Learning Path](https://docs.bitquery.io/docs/start/learning-path/)** - Structured learning from beginner to advanced
-- **[Starter Queries](https://docs.bitquery.io/docs/start/starter-queries/)** - Pre-built queries for common use cases
+- **[Learning Path](/docs/start/learning-path/)** - Structured learning from beginner to advanced
+- **[Starter Queries](/docs/start/starter-queries/)** - Pre-built queries for common use cases
 - **[GraphQL Guide](/docs/category/building-queries/)** - Complete GraphQL reference
 - **[Integration Examples](/docs/category/how-to-guides/)** - Real-world application examples
 
@@ -531,7 +531,7 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 Ready to start building with blockchain data? Here's your path forward:
 
 1. **[Create Your Account](https://ide.bitquery.io/)** - Get instant access to our platform
-2. **[Run Your First Query](https://docs.bitquery.io/docs/start/first-query/)** - Learn the basics in 5 minutes
+2. **[Run Your First Query](/docs/start/first-query/)** - Learn the basics in 5 minutes
 3. **[Explore Blockchain APIs](/docs/blockchain/supported-chains/)** - Dive into specific blockchain data
 4. **[Build Real-time Applications](/docs/category/graphql-subscriptions/)** - Set up live data streams
 5. **[Join Our Community](https://t.me/Bloxy_info)** - Get help and share your projects

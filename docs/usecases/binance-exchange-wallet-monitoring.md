@@ -96,7 +96,7 @@ consumer.subscribe([topic])
 
 ## Creating Set of Binance Exchange Wallets
 
-For the purpose of tutorial we have directly created a set containing a bunch of Binance exchange wallet addresses. When building an enterprise grade solution where the number of wallets are in thousands or millions, the set could be saved in a seperate file. The wallets are stored in a set instead of list due to fast lookup in sets.
+For the purpose of tutorial we have directly created a set containing a bunch of Binance exchange wallet addresses. When building an enterprise grade solution where the number of wallets are in thousands or millions, the set could be saved in a separate file. The wallets are stored in a set instead of list due to fast lookup in sets.
 
 ```python
 wallets = {

@@ -52,7 +52,7 @@ The list of supported time units are given below.
 
 ### Last Hour Trades
 
-The following examples uses the `after_relative` filter to get Solana DEX Trades for the last `1 hour`. You can checkout from the results that the oldest trades returned occured an hour ago(UTC Time).
+The following example uses the `after_relative` filter to get Solana DEX Trades for the last `1 hour`. You can checkout from the results that the oldest trades returned occurred an hour ago(UTC Time).
 
 ```graphql
 {

@@ -14,16 +14,16 @@ Bitquery provides powerful **real-time blockchain data streaming** capabilities 
 
 | Technology | Latency | Best For | Learn More |
 |------------|---------|----------|------------|
-| **[WebSocket](#websocket-graphql-subscriptions)** | ~1 second | Beginners, Web Apps, Complex Filtering | [WebSocket Docs](https://docs.bitquery.io/docs/subscriptions/websockets/) |
-| **[Kafka](#kafka-streams)** | < 500ms | Enterprise, High-Volume, Trading Bots | [Kafka Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) |
-| **[CoreCast](#corecast-grpc-streams)** | < 100ms | Solana, Ultra-Low Latency, MEV | [gRPC Docs](https://docs.bitquery.io/docs/grpc/solana/introduction/) |
+| **[WebSocket](#websocket-graphql-subscriptions)** | ~1 second | Beginners, Web Apps, Complex Filtering | [WebSocket Docs](/docs/subscriptions/websockets/) |
+| **[Kafka](#kafka-streams)** | < 500ms | Enterprise, High-Volume, Trading Bots | [Kafka Concepts](/docs/streams/kafka-streaming-concepts/) |
+| **[CoreCast](#corecast-grpc-streams)** | < 100ms | Solana, Ultra-Low Latency, MEV | [gRPC Docs](/docs/grpc/solana/introduction/) |
 
 ## Blockchain Data Streaming Technologies Overview
 
 ### Real-time GraphQL Subscriptions (WebSocket API) {#websocket-graphql-subscriptions}
 **Multichain Support** | **Live Data** | **Beginner-friendly**
 
-Our **WebSocket-based GraphQL subscriptions** provide **real-time cryptocurrency data** with very high filtering and formatting capabilities. You can filter by wallet addresses, token contracts, transaction amounts, USD values, and much more directly in your queries. Perfect for **crypto trading applications**, **[DeFi dashboards](https://docs.bitquery.io/docs/usecases/crypto-dashboard/)**, and **blockchain analytics platforms**.
+Our **WebSocket-based GraphQL subscriptions** provide **real-time cryptocurrency data** with very high filtering and formatting capabilities. You can filter by wallet addresses, token contracts, transaction amounts, USD values, and much more directly in your queries. Perfect for **crypto trading applications**, **[DeFi dashboards](/docs/usecases/crypto-dashboard/)**, and **blockchain analytics platforms**.
 
 - **Endpoint**: `wss://streaming.bitquery.io/graphql`
 - **Protocols**: `graphql-transport-ws`, `graphql-ws`
@@ -38,7 +38,7 @@ High-performance, **low-latency blockchain data streaming** for mission-critical
 - **Endpoints**: `rpk0.bitquery.io:9092`, `rpk1.bitquery.io:9092`, `rpk2.bitquery.io:9092`
 - **Protocol**: Apache Kafka with SASL authentication
 - **Latency**: < 500ms (sub-second)
-- **Use Cases**: **[Cryptocurrency trading bots](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)**, **real-time DeFi applications**, **MEV bot development**, **high-frequency blockchain monitoring**
+- **Use Cases**: **[Cryptocurrency trading bots](/docs/streams/sniper-trade-using-bitquery-kafka-stream/)**, **real-time DeFi applications**, **MEV bot development**, **high-frequency blockchain monitoring**
 
 ### Ultra-fast gRPC Streams (CoreCast) {#corecast-grpc-streams}
 **Solana Blockchain** | **Sub-100ms latency** | **Smart filtering**
@@ -61,7 +61,7 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 | **Retention / Replay** | ❌ No | ✅ Yes, configurable retention window | ❌ No |
 | **Schema / Data Format** | JSON over WebSocket | Avro/Protobuf over Kafka | Protobuf (typed contracts) |
 | **Delivery Guarantee** | At-most-once | ✅ At-least-once (can configure exactly-once) | At-most-once |
-| **Integration Complexity** | Easiest for frontends, explorers, bots | Requires infra (Kafka cluster, consumers) | Lightweight, good for backend apps and trading stratergies |
+| **Integration Complexity** | Easiest for frontends, explorers, bots | Requires infra (Kafka cluster, consumers) | Lightweight, good for backend apps and trading strategies |
 | **Bandwidth Efficiency** | Medium (JSON, more verbose) | High (binary encoding, batching) | Medium (Protobuf, direct streams) |
 | **Use Case Fit** | Dashboards, explorers, analytics needing USD values & rich filters | Mission-critical infra: indexing, ETL pipelines, archival, guaranteed delivery | Ultra-low latency trading, real-time DeFi apps, terminals, Telegram bots |
 
@@ -70,8 +70,8 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 ### Choose **Real-time GraphQL WebSocket API** if:
 
 - Building **crypto trading web applications**
-- Need **[advanced filtering capabilities](https://docs.bitquery.io/docs/graphql/filters/)** with complex conditions and **real-time USD prices**
-- Require **[cryptocurrency price calculations](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** and **DeFi token metrics**
+- Need **[advanced filtering capabilities](/docs/graphql/filters/)** with complex conditions and **real-time USD prices**
+- Require **[cryptocurrency price calculations](/docs/trading/crypto-price-api/introduction/)** and **DeFi token metrics**
 - Want fastest development and prototyping experience for **blockchain applications**
 - Building **crypto dashboards**, **DeFi monitoring tools**, or **blockchain analytics platforms**
 - Need unified interface for both **historical blockchain data** and **real-time streams**
@@ -90,52 +90,52 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 - Working specifically with **Solana blockchain ecosystem**
 - Need **ultra-low latency** (< 100ms) for **Solana trading**
 - Want basic server-side filtering to reduce bandwidth (more limited than WebSocket)
-- Building **[high-frequency Solana trading applications](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/)** and **MEV bots**
+- Building **[high-frequency Solana trading applications](/docs/blockchain/Solana/Solana-Raydium-DEX-API/)** and **MEV bots**
 - Developing lightweight backend services for **Solana DeFi**
-- Creating **[Solana trading Telegram bots](https://docs.bitquery.io/docs/usecases/telegram-bot/)** or **terminal applications**
+- Creating **[Solana trading Telegram bots](/docs/usecases/telegram-bot/)** or **terminal applications**
 
 ## Getting Started
 
 ### GraphQL Subscriptions (WebSockets)
-1. **Authentication**: Use your [IDE credentials](https://docs.bitquery.io/docs/authorization/how-to-generate/) or [OAuth tokens](https://docs.bitquery.io/docs/authorization/websocket/)
+1. **Authentication**: Use your [IDE credentials](/docs/authorization/how-to-generate/) or [OAuth tokens](/docs/authorization/websocket/)
 2. **Connect**: `wss://streaming.bitquery.io/graphql`
-3. **Start**: Create your first subscription in the [Bitquery IDE](https://ide.bitquery.io) using our [starter subscriptions](https://docs.bitquery.io/docs/start/starter-subscriptions/)
+3. **Start**: Create your first subscription in the [Bitquery IDE](https://ide.bitquery.io) using our [starter subscriptions](/docs/start/starter-subscriptions/)
 
-**Learn more**: [WebSocket Documentation](https://docs.bitquery.io/docs/subscriptions/websockets/) | [Examples](https://docs.bitquery.io/docs/subscriptions/examples/)
+**Learn more**: [WebSocket Documentation](/docs/subscriptions/websockets/) | [Examples](/docs/subscriptions/examples/)
 
 ### Kafka Streams
 1. **Get Access**: Contact our [sales team](https://bitquery.io/forms/api) for Kafka credentials
 2. **Connect**: Use SASL authentication with provided username/password
 3. **Subscribe**: Choose from topics like `ethereum.dextrades`, `solana.transactions`, etc.
 
-**Learn more**: [Kafka Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) | [Best Practices](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#best-practises)
+**Learn more**: [Kafka Concepts](/docs/streams/kafka-streaming-concepts/) | [Best Practices](/docs/streams/kafka-streaming-concepts/#best-practises)
 
 ### gRPC Streams (CoreCast)
 1. **Get Token**: Generate at [API Access Tokens](https://account.bitquery.io/user/api_v2/access_tokens)
 2. **Connect**: `corecast.bitquery.io` with your API token
 3. **Filter**: Define filters for addresses, tokens, or value thresholds
 
-**Learn more**: [gRPC Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) | [Code Examples](https://github.com/bitquery/grpc-code-samples)
+**Learn more**: [gRPC Introduction](/docs/grpc/solana/introduction/) | [Code Examples](https://github.com/bitquery/grpc-code-samples)
 
 ## Multi-chain Blockchain Data Coverage
 
 ### GraphQL Subscriptions & Kafka Support:
-- **[Ethereum](https://docs.bitquery.io/docs/blockchain/Ethereum/)** & Layer 2s ([Arbitrum](https://docs.bitquery.io/docs/blockchain/Arbitrum/), [Optimism](https://docs.bitquery.io/docs/blockchain/Optimism/), [Base](https://docs.bitquery.io/docs/blockchain/Base/), [Polygon](https://docs.bitquery.io/docs/blockchain/Matic/))
-- **[Binance Smart Chain (BSC)](https://docs.bitquery.io/docs/blockchain/BSC/)**
-- **[Robinhood](https://docs.bitquery.io/docs/blockchain/robinhood/)**
-- **[Solana](https://docs.bitquery.io/docs/blockchain/Solana/)**
-- **[TRON](https://docs.bitquery.io/docs/blockchain/Tron/)**
+- **[Ethereum](/docs/blockchain/Ethereum/)** & Layer 2s ([Arbitrum](/docs/blockchain/Arbitrum/), [Optimism](/docs/blockchain/Optimism/), [Base](/docs/blockchain/Base/), [Polygon](/docs/blockchain/Matic/))
+- **[Binance Smart Chain (BSC)](/docs/blockchain/BSC/)**
+- **[Robinhood](/docs/blockchain/robinhood/)**
+- **[Solana](/docs/blockchain/Solana/)**
+- **[TRON](/docs/blockchain/Tron/)**
 - **[TON](/docs/blockchain/supported-chains/)** (limited support; see coverage matrix)
 
 ### gRPC Streams:
-- **[Solana](https://docs.bitquery.io/docs/blockchain/Solana/)** (with more blockchains coming soon)
+- **[Solana](/docs/blockchain/Solana/)** (with more blockchains coming soon)
 
 ## Support & Resources
 
 - **Documentation**: Comprehensive guides for each technology
 - **Community**: Join our [Telegram](https://t.me/Bloxy_info) for support
 - **Code Examples**: [GitHub repositories](https://github.com/bitquery) with sample implementations
-- **Interactive Tools**: Test queries in our [IDE](https://ide.bitquery.io) with our [starter queries](https://docs.bitquery.io/docs/start/starter-queries/)
+- **Interactive Tools**: Test queries in our [IDE](https://ide.bitquery.io) with our [starter queries](/docs/start/starter-queries/)
 
 ---
 
