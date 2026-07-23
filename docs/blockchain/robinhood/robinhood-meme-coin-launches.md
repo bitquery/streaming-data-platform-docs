@@ -21,6 +21,8 @@ keywords:
   - Bags.fm Robinhood token launches
   - Clanker Robinhood launches API
   - Robinhood launchpad API
+  - Robinhood launchpad comparison
+  - Robinhood token launches per day
   - meme coin token creation Robinhood
   - Bitquery Robinhood Events API
   - Bitquery Robinhood Transfers API
@@ -66,6 +68,10 @@ Bitquery's `Transfer.Amount` is already adjusted for the token's `Decimals`, so 
 
 Flap.sh emits a decoded `TokenCreated` event, so it can be tracked via **Events** (richer, with decoded arguments) as well as transfers. The other launchpads and bots on this page are tracked via the **mint-transfer** pattern.
 
+:::tip Reaching older launches
+These queries default to the **realtime** dataset — a rolling window of recent blocks whose depth varies. Launchpads with sparse recent activity can return few or no rows. To reach further back, add `dataset: combined` (or `archive`) on the `EVM` root plus a time filter — e.g. `EVM(network: robinhood, dataset: combined)` with `Block: {Time: {since_relative: {days_ago: 7}}}`.
+:::
+
 ---
 
 ## Launchpad and bot contract map
@@ -88,12 +94,79 @@ _WS = WebSocket subscription (real-time stream of the same query)._
 
 ---
 
+## Compare launchpad activity
+
+One query across every launchpad: count zero-address mints per launch contract over a window (`Transaction.To` in the contract-map list) and group by contract. `tokens` counts distinct minted token contracts. This matches mints of **any** amount — Clanker's different launch supply included — so treat it as an activity overview rather than an exact per-protocol launch count.
+
+```graphql
+{
+  EVM(network: robinhood, dataset: combined) {
+    Transfers(
+      limit: { count: 10 }
+      orderBy: { descendingByField: "launches" }
+      where: {
+        Block: { Time: { since_relative: { days_ago: 7 } } }
+        Transfer: { Sender: { is: "0x0000000000000000000000000000000000000000" } }
+        Transaction: {
+          To: {
+            in: [
+              "0x5fcc1df0dc020cf454e742e9a8ae2554c37a452c"
+              "0x62b33a039d289cbda50ebeb72fe4261449e61bcf"
+              "0xd4ccbfa37e2f35611b3042e4096ad7a3459bd007"
+              "0x26605f322f7ff986f381bb9a6e3f5dab0beaeb09"
+              "0x16cf6788b762ee8969744586ed16fc5705140dd7"
+              "0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862"
+              "0x6e4910ea5a04376032f6564da9a9e4e88b7a87c1"
+              "0xe8cc4431adf8b5a847c113ef0c6af9043219cb37"
+              "0xd3f2cc1731b7fd17f28798835c2e02f0a1839a94"
+            ]
+          }
+        }
+      }
+    ) {
+      Transaction {
+        To
+      }
+      launches: count
+      tokens: uniq(of: Transfer_Currency_SmartContract)
+    }
+  }
+}
+```
+
+### Launches per day for one launchpad
+
+Bucket a launchpad's mints into daily counts — a launch-rate series (example: Flap.sh).
+
+```graphql
+{
+  EVM(network: robinhood, dataset: combined) {
+    Transfers(
+      limit: { count: 7 }
+      orderBy: { descendingByField: "Block_Time" }
+      where: {
+        Block: { Time: { since_relative: { days_ago: 7 } } }
+        Transfer: { Sender: { is: "0x0000000000000000000000000000000000000000" } }
+        Transaction: { To: { is: "0x26605f322f7ff986f381bb9a6e3f5dab0beaeb09" } }
+      }
+    ) {
+      Block {
+        Time(interval: { in: days, count: 1 })
+      }
+      launches: count
+    }
+  }
+}
+```
+
+---
+
 ## hood.fun
 
 **[hood.fun](https://hood.fun/)** is the premier fair-launch memecoin launchpad on the Robinhood network. Every token launches with a fixed **1 billion** supply on a bonding curve, so newly created tokens can be detected as mint transfers from the zero address where `Transaction.To` is the hood.fun contract.
 
 :::note Contract generations
-The current hood.fun launch contract is `0x5fcc1df0dc020cf454e742e9a8ae2554c37a452c`. The previous generation, `0x6a63d96ef77ae569fcb85934cf1bd1ec7fe9b33d`, still has tokens trading — swap the address in `Transaction.To` to query it.
+The current hood.fun launch contract is `0x5fcc1df0dc020cf454e742e9a8ae2554c37a452c`. The previous generation, `0x6a63d96ef77ae569fcb85934cf1bd1ec7fe9b33d`, still has tokens trading — swap the address in `Transaction.To` to query it. Older generations' launch history sits outside the realtime window, so query them with `dataset: combined` or `archive`.
 :::
 
 ### hood.fun Newly created tokens
@@ -732,6 +805,10 @@ Copy any transfer query on this page and replace the address in `Transaction.To`
 ### Why do the queries filter transfers by a fixed `Amount`?
 
 The `Amount` is the full initial token supply minted at launch (`1000000000` for most launchpads, `100000000000` for Clanker). Combined with the zero-address sender, it isolates the launch mint from ordinary transfers. `Transfer.Amount` is already decimal-normalized, so compare against the whole-token value, not the raw on-chain integer.
+
+### How do I compare launch activity across launchpads?
+
+Use the [cross-launchpad query](#compare-launchpad-activity): filter zero-address mints where `Transaction.To` is in the contract-map list, group by `Transaction.To`, and `count`. Add `dataset: combined` and a `Block.Time` window for full coverage.
 
 ### Should I use the Events or Transfers method?
 
