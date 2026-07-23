@@ -160,7 +160,7 @@ subscription {
 
 ## How do I track Pump.fun pool migrations to PumpSwap in real time? {#track-pools-that-are-migrated-to-pumpswap}
 
-Subscribe to **`create_pool`** instructions on the PumpSwap program when they follow a Pump.fun **`migrate`** flow. **`Instruction.Accounts[]`** carries pool and token accounts; argument **`Value`** fields include liquidity added. Pair with the [Pump Fun to PumpSwap](https://docs.bitquery.io/docs/blockchain/Solana/pump-fun-to-pump-swap/) guide for full migration logic.
+Subscribe to **`create_pool`** instructions on the PumpSwap program when they follow a Pump.fun **`migrate`** flow. **`Instruction.Accounts[]`** carries pool and token accounts; argument **`Value`** fields include liquidity added. Pair with the [Pump Fun to PumpSwap](/docs/blockchain/Solana/Pumpfun/pump-fun-to-pump-swap/) guide for full migration logic.
 
 [Run in Bitquery IDE — Pump.fun → PumpSwap migrations](https://ide.bitquery.io/pumpfun-migration-stream_2#)
 
@@ -1186,7 +1186,7 @@ Use a GraphQL **`subscription`** on **`DEXTrades`** (all PumpSwap trades) or **`
 
 ### Where can I get Pump.fun data before a token moves to PumpSwap?
 
-Use the [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [Pump Fun to PumpSwap](https://docs.bitquery.io/docs/blockchain/Solana/pump-fun-to-pump-swap/) guides. This page focuses on **PumpSwap** only after migration.
+Use the [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [Pump Fun to PumpSwap](/docs/blockchain/Solana/Pumpfun/pump-fun-to-pump-swap/) guides. This page focuses on **PumpSwap** only after migration.
 
 ## I can only get 8 hours of PumpSwap data with dataset: realtime — how do I get older data? {#pumpswap-realtime-vs-combined-history}
 

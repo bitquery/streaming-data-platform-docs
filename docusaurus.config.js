@@ -57,6 +57,29 @@ const config = {
     locales: ["en"],
   },
 
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/dm-sans-latin-400-normal.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/dm-sans-latin-500-normal.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossorigin: "anonymous",
+      },
+    },
+  ],
+
   scripts: [
     // Must load before any script that calls `window.gtag` (see gtag-stub.js).
     { src: "/js/gtag-stub.js" },

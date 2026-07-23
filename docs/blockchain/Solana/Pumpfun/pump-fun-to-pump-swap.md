@@ -139,13 +139,13 @@ Once graduated:
 
 You can track these graduation events in real-time using Bitquery’s API:
 
-- [Track Pump Fun Token Migrations to PumpSwap](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API/#track-pump-fun-token-migrations-to-pumpswap)
+- [Track Pump Fun Token Migrations to PumpSwap](/docs/blockchain/Solana/Pumpfun/Pump-Fun-Marketcap-Bonding-Curve-API/#track-pump-fun-token-migrations-to-pumpswap)
 
 Post-migration, tokens trade as standard AMM pairs. Bitquery continues to offer real-time data support:
 
-- [Latest Trades for a Token on Pumpswap - Websocket](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api/#latest-trades-for-a-token-on-pumpswap---websocket)
+- [Latest Trades for a Token on Pumpswap - Websocket](/docs/blockchain/Solana/Pumpfun/pump-swap-api/#latest-trades-for-a-token-on-pumpswap---websocket)
 
-- [Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a Specific Token](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api/#get-buy-volume-sell-volume-buys-sells-makers-total-trade-volume-buyers-sellers-of-a-specific-token)
+- [Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a Specific Token](/docs/blockchain/Solana/Pumpfun/pump-swap-api/#get-buy-volume-sell-volume-buys-sells-makers-total-trade-volume-buyers-sellers-of-a-specific-token)
 
 ## Tracking a Pump.fun Token’s Journey with Bitquery Shred Streams
 
