@@ -244,7 +244,7 @@ for tx in block.Transactions:
         ...
 ```
 
-This gives you full control. You decide how to turn raw logs and traces into transfers, swaps, or anything else, by decoding them against the relevant contract ABIs. For a worked example, see [Extract transfers from a block](./extract-transfers.md).
+This gives you full control. You decide how to turn raw logs and traces into transfers, swaps, or anything else, by decoding them against the relevant contract ABIs. For a worked example, see [Extract transfers from a block](./extract-transfers/).
 
 ### Use Bitquery's protobuf files
 
