@@ -1,6 +1,6 @@
 ---
 title: "Robinhood Trades API"
-description: "Robinhood Trades API: query and stream Robinhood on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
+description: "Robinhood Trades API: live trades, USD prices, OHLCV candles, market cap, whale trades, buy/sell pressure, and top traders via Bitquery GraphQL & WebSockets."
 sidebar_position: 1
 keywords:
   - Robinhood API
@@ -14,6 +14,9 @@ keywords:
   - Robinhood top traders
   - Robinhood real-time trade stream
   - Robinhood K-line candles
+  - Robinhood buy sell pressure
+  - Robinhood most active pools
+  - Robinhood token price watchlist
   - Bitquery Robinhood Trading API
 ---
 # Robinhood Trades API & Streams
@@ -27,9 +30,10 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
-- [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
-- [Robinhood Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply)
-- [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)
+- [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers/)
+- [Robinhood Liquidity & Slippage API](/docs/blockchain/robinhood/robinhood-liquidity/)
+- [Robinhood Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply/)
+- [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches/)
 - [Trading data overview](/docs/trading/trading-data-overview/)
 - [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api/)
 - [Crypto Price API](/docs/trading/crypto-price-api/introduction/)
@@ -43,6 +47,17 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 | --- | --- | --- |
 | `NetworkBid` | `bid:robinhood` | Filter to select Robinhood data (indexed and faster) |
 | `Network` | `Robinhood` | Filter to select Robinhood data |
+
+### Example tokens used on this page
+
+| Item | Value |
+| --- | --- |
+| ASSETH (AssetHood, example token) | `0x9077841e155faaf4e4e89470822c2187eeef7777` |
+| Example pool trading ASSETH | `0xbbaefcfcd7b92ed0df1a3eec22a21ba6beb0b52b` |
+| SOLdiers (first-buyers example) | `0xaf81aa091665c60cfa172f86a5a8d6b437a79353` |
+| WETH | `0x0bd7d308f8e1639fab988df18a8011f41eacad73` |
+
+These are live examples — meme tokens go quiet over time, so swap in any token, pool, or trader you care about.
 
 ---
 
@@ -103,11 +118,15 @@ subscription {
 }
 ```
 
+:::tip WebSocket connection
+Run subscriptions against `wss://streaming.bitquery.io/graphql?token=YOUR_TOKEN` with the `graphql-transport-ws` subprotocol (`connection_init` → `connection_ack` → `subscribe`). See [WebSocket authentication](/docs/authorization/websocket/).
+:::
+
 ---
 
-<!-- ## Historical Trades on Robinhood
+## Historical Trades on Robinhood
 
-Trade APIs allows user to query upto past 30 days of data using the GraphQL API.
+The Trading APIs cover roughly the **last 30 days** of history (for newer networks, data starts when Bitquery indexing began — measure the exact coverage with [this query](#check-the-trading-data-window)). This example pulls a past window using relative time bounds.
 
 ▶️ [Run in IDE](https://ide.bitquery.io/Historical-Robinhood-Trades)
 
@@ -115,6 +134,7 @@ Trade APIs allows user to query upto past 30 days of data using the GraphQL API.
 {
   Trading {
     Trades(
+      limit: {count: 50}
       orderBy: {ascending: Block_Date}
       where: {
         Block: {
@@ -169,7 +189,7 @@ Trade APIs allows user to query upto past 30 days of data using the GraphQL API.
 }
 ```
 
---- -->
+---
 
 ## Latest Trades on Robinhood
 
@@ -283,7 +303,7 @@ Fetch large trades by filtering on USD value. This example returns trades of at 
 
 ## Real-Time Trades for a Specific Token
 
-Using this GraphQL stream you can get real-time trades for a specific token with details such as trader address, token details, marketcap, FDV and transaction hash.
+Using this GraphQL stream you can get real-time trades for a specific token (example: AssetHood, `ASSETH`) with details such as trader address, token details, marketcap, FDV and transaction hash.
 
 ▶️ [Run in IDE](https://ide.bitquery.io/Robinhood-Trades-for-a-token)
 
@@ -411,7 +431,7 @@ Scope trades to a single liquidity pool using `Pool.Address` — useful when a t
 
 ## First Buyers of a Token on Robinhood
 
-Get the earliest trades for a token, ordered oldest first, to find the first buyers after launch. Filtered to buys here; remove the `Side` filter for first trades of any side.
+Get the earliest trades for a token (example: the SOLdiers meme token), ordered oldest first, to find the first buyers after launch. Filtered to buys here; remove the `Side` filter for first trades of any side.
 
 ```graphql
 {
@@ -477,6 +497,8 @@ Using this GraphQL API endpoint you can get token trades by a trader with detail
 {
   Trading {
     Trades(
+      limit: { count: 50 }
+      orderBy: { descending: Block_Time }
       where: {
         Trader:{
           Address:{
@@ -749,13 +771,14 @@ subscription {
 
 ### Supply of All Active Tokens
 
-Fetch the latest total supply for every recently active token. `limitBy` returns one row — the newest supply — per token contract.
+Fetch the latest total supply for every recently active token. `limitBy` returns one row — the newest supply — per token contract. Keep a `limit`: unbounded, this returns one row per active token, which can be very large.
 
 ```graphql
 {
   EVM(network: robinhood) {
     TransactionBalances(
       limitBy: {by: TokenBalance_Currency_SmartContract, count: 1}
+      limit: {count: 100}
       orderBy: {descending: Block_Time}
       where: {TokenBalance: {Currency: {SmartContract: {not: "0x"}}}}
     ) {
@@ -921,6 +944,141 @@ Rank the most actively traded Robinhood tokens by USD volume over the last 24 ho
 
 ---
 
+## Buy vs Sell Pressure for a Token
+
+Gauge demand in one call: buy and sell USD volume, trade counts, and unique traders for a token over a window. Compute net flow client-side as `bought_usd − sold_usd`.
+
+```graphql
+{
+  Trading {
+    Trades(
+      where: {
+        Pair: {
+          Token: { Address: { is: "0x9077841e155faaf4e4e89470822c2187eeef7777" } }
+          Market: { NetworkBid: { is: "bid:robinhood" } }
+        }
+        Block: { Time: { since_relative: { days_ago: 1 } } }
+      }
+    ) {
+      bought_usd: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      sold_usd: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+      traders: uniq(of: Trader_Address)
+    }
+  }
+}
+```
+
+---
+
+## Most Active Pools on Robinhood
+
+Rank pools by trade count over the last day, with USD volume and unique traders per pool. Trade count is a more robust ranking key than USD volume, which can be inflated to absurd values on thin meme pools — treat extreme `volume_usd` readings as suspect.
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 20 }
+      orderBy: { descendingByField: "trades" }
+      where: {
+        Pair: { Market: { NetworkBid: { is: "bid:robinhood" } } }
+        Block: { Time: { since_relative: { days_ago: 1 } } }
+      }
+    ) {
+      Pair {
+        Pool {
+          Address
+        }
+        Market {
+          Protocol
+        }
+        Token {
+          Symbol
+          Address
+        }
+        QuoteToken {
+          Symbol
+        }
+      }
+      trades: count
+      volume_usd: sum(of: AmountsInUsd_Base)
+      traders: uniq(of: Trader_Address)
+    }
+  }
+}
+```
+
+---
+
+## Price Watchlist: Latest Price for Multiple Tokens
+
+One latest price per token in a single call — `limitBy` on `Token_Id` keeps the newest 1-second interval for each token in the list. `Interval.Time.End` doubles as a staleness indicator: it is the last time that token actually traded.
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 10 }
+      limitBy: { by: Token_Id, count: 1 }
+      orderBy: { descending: Interval_Time_End }
+      where: {
+        Token: {
+          Address: {
+            in: [
+              "0x9077841e155faaf4e4e89470822c2187eeef7777"
+              "0xaf81aa091665c60cfa172f86a5a8d6b437a79353"
+            ]
+          }
+          NetworkBid: { is: "bid:robinhood" }
+        }
+        Interval: { Time: { Duration: { eq: 1 } } }
+      }
+    ) {
+      Token {
+        Symbol
+        Address
+      }
+      Price {
+        Ohlc {
+          Close
+        }
+      }
+      Interval {
+        Time {
+          End
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## Check the Trading Data Window
+
+Don't guess how far back Trading data reaches — ask for the earliest available trade.
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: { count: 1 }
+      orderBy: { ascending: Block_Time }
+      where: { Pair: { Market: { NetworkBid: { is: "bid:robinhood" } } } }
+    ) {
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
+---
+
 ## FAQ
 
 ### How do I stream Robinhood trades in real time?
@@ -941,4 +1099,8 @@ Yes. Query `Trading.Tokens` or `Trading.Pairs` with an `Interval.Time.Duration` 
 
 ### How far back does Robinhood trade data go?
 
-The Trading APIs cover real-time data and roughly the last 30 days. For older history, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs.
+The Trading APIs cover real-time data and roughly the last 30 days — for newer networks, data starts when Bitquery indexing began. Measure the exact coverage with the [window query](#check-the-trading-data-window). For older history, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs.
+
+### How do I measure buy vs sell pressure for a Robinhood token?
+
+Aggregate `Trading.Trades` with conditional sums — `sum(of: AmountsInUsd_Base, if: {Side: {is: "Buy"}})` versus the `Sell` side — over your window, and compare. See [Buy vs Sell Pressure](#buy-vs-sell-pressure-for-a-token).
