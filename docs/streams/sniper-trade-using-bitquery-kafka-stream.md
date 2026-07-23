@@ -24,7 +24,7 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 ## Final Output
 
-![output](../../static/img/sniper_bot_bsc.gif)
+<video controls loop muted playsInline width="100%" src="/img/sniper_bot_bsc.mp4"></video>
 
 ---
 

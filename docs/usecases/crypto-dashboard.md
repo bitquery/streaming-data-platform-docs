@@ -6,7 +6,9 @@ sidebar_position: 4
 
 The following tutorial helps build a Cryptocurrency Portfolio Dashboard with React that fetches and displays the balance of different currencies for a given Ethereum address using the Bitquery Streaming API.
 
-This is how it will look ![finally](/img/ApplicationExamples/crypto_dashboard.gif)
+This is how it will look:
+
+<video controls loop muted playsInline width="100%" src="/img/ApplicationExamples/crypto_dashboard.mp4"></video>
 
 The app has the following features:
 

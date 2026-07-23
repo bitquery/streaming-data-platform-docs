@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+title: "Bitquery Kafka Streaming Concepts"
+description: "How Bitquery Kafka streams work vs GraphQL subscriptions — access, topics, offsets, and integration patterns."
 ---
 
 # Bitquery Kafka Streams - Understanding Concepts

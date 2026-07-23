@@ -25,7 +25,7 @@ A comprehensive guide to building a **high-performance Solana trading bot** that
 
 The final result of this project would appear as the one given below.
 
-![Copy Bot Demo](../../../../static/img/copy-bot-solana.gif)
+<video controls loop muted playsInline width="100%" src="/img/copy-bot-solana.mp4"></video>
 
 ## Architecture Overview
 

@@ -17,7 +17,7 @@ The list of indicators we will be calculating
 
 ### Sample Output
 
-![](/img/trade_api/indicators.gif)
+<video controls loop muted playsInline width="100%" src="/img/trade_api/indicators.mp4"></video>
 
 **Step 1: Setup WebSocket Connection**
 

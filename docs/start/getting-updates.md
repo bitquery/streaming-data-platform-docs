@@ -28,7 +28,7 @@ The run button now again becomes green. But now, when you press it, you will not
 immediately get results, as it will wait for a new block to be formed. In the BSC network, blocks typically come in 3-4 seconds. Hence, you will see this sequence after some time
 on the result panel:
 
-![IDE subscription execution](/img/ide/ide_subscription.gif)
+<video controls loop muted playsInline width="100%" src="/img/ide/ide_subscription.mp4"></video>
 
 > Query used: [Real Time Blocks Subscription | BSC](https://graphql.bitquery.io/ide/Real-Time-Blocks-Subscription--BSC)
 

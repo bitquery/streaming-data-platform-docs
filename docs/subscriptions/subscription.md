@@ -14,7 +14,7 @@ subscription {
 }
 ```
 
-![Export code](/img/ide/ide_subscription.gif)
+<video controls loop muted playsInline width="100%" src="/img/ide/ide_subscription.mp4"></video>
 
 Almost any query can be converted to subscription just by replacing `query` type to `subscription`.
 
