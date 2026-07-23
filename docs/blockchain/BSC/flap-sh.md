@@ -803,7 +803,7 @@ You can identify Flap.sh tokens by checking the last 4 characters of their contr
 
 ## Related Documentation
 
-- [BSC Blockchain API](/docs/blockchain/BSC/index) – BNB Smart Chain documentation
+- [BSC Blockchain API](/docs/blockchain/BSC/) – BNB Smart Chain documentation
 - [DEX Trades API](/docs/schema/evm/dextrades) – DEX trading data documentation
 - [Events API](/docs/schema/evm/events) – Smart contract events documentation
 - [Transfers API](/docs/schema/evm/transfers) – Token transfer tracking

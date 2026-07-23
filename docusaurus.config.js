@@ -172,14 +172,8 @@ const config = {
             to: "/docs/trading/crypto-price-api/tokens/",
             from: "/docs/trading/crypto-price-api/cube-examples.md/token-examples/",
           },
-          {
-            to: "/docs/blockchain/Ethereum/nft/nft-trades-api/",
-            from: "/docs/blockchain/Ethereum/nft/nft-trades-apI/",
-          },
-          {
-            to: "/docs/blockchain/Ethereum/nft/nft-calls-api/",
-            from: "/docs/blockchain/Ethereum/nft/nft-calls-apI/",
-          },
+          // Case-only typo redirects (apI → api) omitted: they collide with the
+          // real pages on case-insensitive filesystems (macOS local builds).
           {
             to: "/docs/usecases/sandwich-detection/",
             from: "/docs/usecases/sandwitch-detection/",
@@ -716,10 +710,7 @@ const config = {
             from: "/docs/subscriptions/websocket/",
             to: "/docs/subscriptions/websockets/",
           },
-          {
-            from: "/docs/usecases/tradingview-advanced-charts/getting-started/",
-            to: "/docs/usecases/tradingview-subscription-realtime/getting-started/",
-          },
+          // tradingview-advanced-charts/getting-started redirect is defined once above.
           {
             from: "/docs/graphql/joins/",
             to: "/docs/graphql/capabilities/joins/",
@@ -740,10 +731,7 @@ const config = {
             from: "/docs/blockchain/Solana/meteora-api/",
             to: "/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/",
           },
-          {
-            from: "/docs/blockchain/Ethereum/dextrades/DEXScreener/solana_dexscreener/",
-            to: "/docs/blockchain/Solana/DEXScreener/solana_dexscreener/",
-          },
+          // solana_dexscreener redirect is defined once above (Ethereum → Solana path).
           {
             from: "/docs/blockchain/Ethereum/BSC/bsc-uniswap-api/",
             to: "/docs/blockchain/BSC/bsc-uniswap-api/",
@@ -956,7 +944,8 @@ const config = {
             from: "/docs/examples/Arbitrum/Smart_Contract_Events/",
           },
           {
-            to: "/docs/blockchain/Arbitrum/Overview",
+            // Overview page was removed; category index is the hub.
+            to: "/docs/blockchain/Arbitrum/",
             from: "/docs/examples/Arbitrum/Overview",
           },
 

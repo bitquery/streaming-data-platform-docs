@@ -52,7 +52,7 @@ Our comprehensive V1 API supporting 40+ blockchains with historical data:
 
 **Documentation:**
 - **[Supported chains by interface](/docs/blockchain/supported-chains/)** — Coverage matrix: V1/V2, Kafka, gRPC, ClickHouse, cloud
-- **[V2 Documentation](/docs/)** - Latest APIs with real-time streaming
+- **[V2 Documentation](/docs/intro/)** - Latest APIs with real-time streaming
 - **[V1 Documentation](https://docs.bitquery.io/v1/)** - Comprehensive APIs with 40+ blockchain support
 
 ## Bitquery's Core Blockchain Data Capabilities
@@ -507,7 +507,7 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 ## Support & Community
 
 ### **Documentation & Resources**
-- **[Complete API Documentation](/docs/)** - Comprehensive guides for all features
+- **[Complete API Documentation](/docs/intro/)** - Comprehensive guides for all features
 - **[Code Examples](/docs/category/how-to-guides/)** - Real-world implementation examples
 - **[Video Tutorials](/docs/blockchain/Ethereum/)** - Step-by-step guides
 - **[Postman Collection](https://www.postman.com/interstellar-eclipse-270749/workspace/bitquery)** - Ready-to-use API examples

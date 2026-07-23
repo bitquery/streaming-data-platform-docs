@@ -888,7 +888,7 @@ subscription {
 
 </details>
 
-You can also get the trade activities of a user on Pancake Swap using our [Pancake Swap](./pancake-swap-api/) APIs.
+You can also get the trade activities of a user on Pancake Swap using our [Pancake Swap](/docs/blockchain/BSC/pancake-swap-api/) APIs.
 
 ## Track Meme Rush Tokens in 14k to 18k Marketcap
 

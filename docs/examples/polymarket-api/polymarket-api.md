@@ -1,6 +1,9 @@
 ---
 title: "Polymarket API - Trade, Prices & Market Data"
 description: "Polymarket API - Trade, Prices & Market Data: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
+# Keep explicit slug so URL stays /polymarket-api/polymarket-api/ (folder basename
+# would otherwise collapse this doc onto /examples/polymarket-api/).
+slug: /examples/polymarket-api/polymarket-api
 keywords:
   - Polymarket API
   - Polymarket GraphQL API
