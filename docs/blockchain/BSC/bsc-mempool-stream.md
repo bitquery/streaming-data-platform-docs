@@ -324,7 +324,7 @@ subscription {
 You may also be interested in:
 
 - [Four Meme API Documentation ➤](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
-- [BSC DEX Trades API ➤](https://docs.bitquery.io/docs/evm/dextrades/)
+- [BSC DEX Trades API ➤](https://docs.bitquery.io/docs/schema/evm/dextrades/)
 - [Kafka Protobuf Streams for EVM ➤](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/)
 - [WebSocket Subscriptions ➤](https://docs.bitquery.io/docs/authorisation/websocket/)
 

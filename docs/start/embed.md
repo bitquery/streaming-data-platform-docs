@@ -1,3 +1,8 @@
+---
+title: "Embed Bitquery Queries in Your App"
+description: "Integrate Bitquery GraphQL queries and subscriptions into your application with any language or framework."
+---
+
 # Use it in Your Application
 
 You can integrate both queries and subscriptions in your application on any programming language and framework.

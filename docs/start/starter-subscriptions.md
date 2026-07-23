@@ -1,3 +1,8 @@
+---
+title: "Starter GraphQL Subscriptions"
+description: "Curated Bitquery WebSocket subscriptions for real-time DEX trades, transfers, mempool, Polymarket, and multi-chain streams."
+---
+
 # Starter Subscriptions
 
 Below is a set of subscriptions that are curated for you to get started with Bitquery.

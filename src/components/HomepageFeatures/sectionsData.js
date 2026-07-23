@@ -106,7 +106,7 @@ export const dataTypes = [
   {
     label: "Balances & holders",
     hint: "EVM & Solana holder sets and snapshots.",
-    to: "/docs/evm/balances/",
+    to: "/docs/schema/evm/balances/",
     icon: "holders",
   },
   {
@@ -221,7 +221,7 @@ export const personas = [
   {
     title: "Auditors & finance",
     body: "Balances, transfers and settlement trails for proof and reconciliation.",
-    to: "/docs/evm/balances/",
+    to: "/docs/schema/evm/balances/",
   },
   {
     title: "Investigators & compliance",

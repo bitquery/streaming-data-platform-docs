@@ -69,7 +69,7 @@ Chain-level trades are parsed **directly from each blockchain**. Every DEX swap 
 - Custom OHLC intervals not supported by the pre-aggregated cubes.
 - On-chain analytics scoped to a single chain or a specific DEX protocol.
 
-Learn more: [DEX Trades API (EVM)](/docs/evm/dextrades) · [DEXTradeByTokens Cube](/docs/cubes/dextradesbyTokens) · [Crypto Price API vs DEXTradeByTokens](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#crypto-price-api-vs-dextradebytoken).
+Learn more: [DEX Trades API (EVM)](/docs/schema/evm/dextrades) · [DEXTradeByTokens Cube](/docs/cubes/dextradesbyTokens) · [Crypto Price API vs DEXTradeByTokens](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#crypto-price-api-vs-dextradebytoken).
 
 ---
 
@@ -168,7 +168,7 @@ A common pattern is to use the **Trading cube** for the live + 30-day-window tab
 ## Next steps
 
 - **Trading cube docs:** [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api) · [Crypto Price API](/docs/trading/crypto-price-api/introduction) · [Tokens cube](/docs/trading/crypto-price-api/tokens) · [Currencies cube](/docs/trading/crypto-price-api/currency) · [Pairs cube](/docs/trading/crypto-price-api/pairs)
-- **Chain-level trade docs:** [DEX Trades (EVM)](/docs/evm/dextrades) · [DEXTradeByTokens cube](/docs/cubes/dextradesbyTokens) · [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)
+- **Chain-level trade docs:** [DEX Trades (EVM)](/docs/schema/evm/dextrades) · [DEXTradeByTokens cube](/docs/cubes/dextradesbyTokens) · [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)
 - **Price Index internals:** [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm) · [Supply fields reference](/docs/trading/crypto-price-api/supply-fields)
 - **API delivery comparison:** [GraphQL Query vs Subscription vs Kafka](/docs/api-comparison)
 

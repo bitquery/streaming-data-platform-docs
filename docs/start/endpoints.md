@@ -1,3 +1,8 @@
+---
+title: "Bitquery API Endpoints and Regions"
+description: "Regional GraphQL and WebSocket endpoints for Bitquery V1 and V2 APIs. Choose Europe, US, or Asia for lower latency."
+---
+
 # Endpoints and Regions
 
 Bitquery provides multiple regional endpoints to optimize latency and performance. Choose the endpoint closest to your geographic location for the best experience.

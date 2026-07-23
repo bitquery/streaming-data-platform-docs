@@ -53,10 +53,10 @@ Token supply refers to the total number of tokens that exist for a particular cr
 
 ### EVM APIs
 
-- **[EVM Balance Updates API](https://docs.bitquery.io/docs/evm/balances/)** - Track wallet balance changes
-- **[EVM Token Holders API](https://docs.bitquery.io/docs/evm/token-holders/)** - Get top holders of any token
-- **[EVM Transfers API](https://docs.bitquery.io/docs/evm/transfers/)** - Monitor token transfers
-- **[EVM DEX Trades API](https://docs.bitquery.io/docs/evm/dextrades/)** - Track trading activity
+- **[EVM Balance Updates API](https://docs.bitquery.io/docs/schema/evm/balances/)** - Track wallet balance changes
+- **[EVM Token Holders API](https://docs.bitquery.io/docs/schema/evm/token-holders/)** - Get top holders of any token
+- **[EVM Transfers API](https://docs.bitquery.io/docs/schema/evm/transfers/)** - Monitor token transfers
+- **[EVM DEX Trades API](https://docs.bitquery.io/docs/schema/evm/dextrades/)** - Track trading activity
 
 ### Solana APIs
 

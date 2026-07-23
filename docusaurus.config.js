@@ -143,6 +143,22 @@ const config = {
             from: "/docs/evm/token_holders/",
           },
           {
+            to: "/docs/schema/evm/top/",
+            from: "/docs/evm/",
+          },
+          {
+            to: "/docs/trading/crypto-price-api/currency/",
+            from: "/docs/trading/crypto-price-api/cube-examples.md/currency-examples/",
+          },
+          {
+            to: "/docs/trading/crypto-price-api/pairs/",
+            from: "/docs/trading/crypto-price-api/cube-examples.md/pair-examples/",
+          },
+          {
+            to: "/docs/trading/crypto-price-api/tokens/",
+            from: "/docs/trading/crypto-price-api/cube-examples.md/token-examples/",
+          },
+          {
             to: "/docs/graphql/dataset/select-blocks/",
             from: "/docs/graphql/dataset/select_blocks/",
           },
@@ -265,10 +281,6 @@ const config = {
             to: "/docs/blockchain/Ethereum/ethers-library/eth_subscribe/",
             from: "/docs/examples/Ethereum-subscriptions/eth-subscribe/",
           },
-          // {
-          //   to: "/docs/schema/schema-intro/",
-          //   from: "/docs/evm/",
-          // }, // that page does not get traffic anymore, so no need to redirect
           {
             to: "/docs/category/how-to-guides/",
             from: "/docs/category/use-cases/",
@@ -920,6 +932,14 @@ const config = {
             from: "/docs/examples/polymarket-api/polymarket-ctf-exchange/",
           },
         ],
+        createRedirects(existingPath) {
+          if (existingPath.startsWith("/docs/schema/evm/")) {
+            return [
+              existingPath.replace("/docs/schema/evm/", "/docs/evm/"),
+            ];
+          }
+          return undefined;
+        },
       },
     ],
     require.resolve("./plugins/llms-txt.js"),
@@ -939,9 +959,13 @@ const config = {
         },
         blog: false,
         sitemap: {
-          changefreq: "daily",
-          priority: 1,
-          ignorePatterns: ["/docs/graphql-reference/**"],
+          changefreq: "weekly",
+          priority: 0.5,
+          ignorePatterns: [
+            "/docs/graphql-reference/**",
+            "/markdown-page/**",
+            "/search/**",
+          ],
           filename: "sitemap.xml",
           createSitemapItems: async ({
             siteConfig,
@@ -953,20 +977,28 @@ const config = {
               routes,
             });
 
+            const filtered = defaultItems.filter((item) => {
+              try {
+                const path = new URL(item.url).pathname;
+                return (
+                  path !== "/markdown-page/" &&
+                  path !== "/search/" &&
+                  !path.includes("/cube-examples.md/")
+                );
+              } catch {
+                return true;
+              }
+            });
+
             const customItems = [
               {
-                url: "https://pumpfun-token-sniffer.vercel.app/",
-                changefreq: "daily",
-                priority: 1,
-              },
-              {
-                url: "https://docs.bitquery.io/crypto-reward-tax-calculator",
-                changefreq: "daily",
-                priority: 1,
+                url: "https://docs.bitquery.io/crypto-reward-tax-calculator/",
+                changefreq: "monthly",
+                priority: 0.6,
               },
             ];
 
-            return [...defaultItems, ...customItems];
+            return [...filtered, ...customItems];
           },
         },
         theme: {
@@ -1127,7 +1159,7 @@ const config = {
                 label: "NFTs & metadata",
                 to: "/docs/blockchain/Ethereum/nft/nft-api/",
               },
-              { label: "Balances & holders", to: "/docs/evm/balances/" },
+              { label: "Balances & holders", to: "/docs/schema/evm/balances/" },
               { label: "Mempool & pending txs", to: "/docs/start/mempool/" },
             ],
           },
@@ -1197,7 +1229,7 @@ const config = {
                 label: "Analysts & quants →",
                 to: "/docs/graphql/dataset/archive/",
               },
-              { label: "Auditors & finance →", to: "/docs/evm/balances/" },
+              { label: "Auditors & finance →", to: "/docs/schema/evm/balances/" },
               {
                 label: "Investigators & compliance →",
                 href: "https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api",

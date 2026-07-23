@@ -464,7 +464,7 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 ## Use Cases & Applications
 
 ### **DeFi Applications**
-- **DEX Aggregators**: Best [price discovery](https://docs.bitquery.io/docs/evm/dextrades/) across multiple DEXs
+- **DEX Aggregators**: Best [price discovery](https://docs.bitquery.io/docs/schema/evm/dextrades/) across multiple DEXs
 - **Yield Farming**: Track liquidity positions and rewards
 - **Lending Protocols**: Monitor collateral ratios and liquidations
 - **Cross-chain Bridges**: Track asset movements between chains

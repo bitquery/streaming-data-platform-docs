@@ -50,9 +50,9 @@ Understanding ERC20 transfers is essential for:
 - **[Ethereum Events API](https://docs.bitquery.io/docs/blockchain/Ethereum/events/events-api)** - Query smart contract events
 
 ### EVM APIs
-- **[EVM Transfers API](https://docs.bitquery.io/docs/evm/transfers)** - General EVM token transfers documentation
-- **[EVM Balance Updates API](https://docs.bitquery.io/docs/evm/balances)** - Track balance changes across EVM chains
-- **[EVM DEX Trades API](https://docs.bitquery.io/docs/evm/dextrades)** - DEX trading data across EVM chains
+- **[EVM Transfers API](https://docs.bitquery.io/docs/schema/evm/transfers)** - General EVM token transfers documentation
+- **[EVM Balance Updates API](https://docs.bitquery.io/docs/schema/evm/balances)** - Track balance changes across EVM chains
+- **[EVM DEX Trades API](https://docs.bitquery.io/docs/schema/evm/dextrades)** - DEX trading data across EVM chains
 
 ### NFT & Other Token Standards
 - **[NFT Transfer API](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/nft-token-transfer-api)** - Track ERC721 and ERC1155 NFT transfers

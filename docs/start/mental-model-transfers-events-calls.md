@@ -1,3 +1,8 @@
+---
+title: "Transfers vs Events vs Calls vs DexTrades"
+description: "Choose the right Bitquery cube: Transfers, Events, Calls, or DexTrades. Mental model for EVM, Solana, and Tron queries."
+---
+
 # Mental Model: Transfers, Events, Calls, and DexTrades
 
 Understanding when to use **Transfers**, **Events**, **Calls**, or **DexTrades** is one of the decisions you'll make when querying blockchain data. This guide explains the conceptual differences and helps you choose the right primitive for your use case.

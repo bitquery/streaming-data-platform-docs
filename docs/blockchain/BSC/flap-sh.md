@@ -805,9 +805,9 @@ You can identify Flap.sh tokens by checking the last 4 characters of their contr
 ## Related Documentation
 
 - [BSC Blockchain API](https://docs.bitquery.io/docs/blockchain/BSC/index) – BNB Smart Chain documentation
-- [DEX Trades API](https://docs.bitquery.io/docs/evm/dextrades) – DEX trading data documentation
-- [Events API](https://docs.bitquery.io/docs/evm/events) – Smart contract events documentation
-- [Transfers API](https://docs.bitquery.io/docs/evm/transfers) – Token transfer tracking
+- [DEX Trades API](https://docs.bitquery.io/docs/schema/evm/dextrades) – DEX trading data documentation
+- [Events API](https://docs.bitquery.io/docs/schema/evm/events) – Smart contract events documentation
+- [Transfers API](https://docs.bitquery.io/docs/schema/evm/transfers) – Token transfer tracking
 - [Trading APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction) – Price and OHLCV data
 - [GraphQL Subscriptions](https://docs.bitquery.io/docs/subscriptions/subscription) – Real-time data streaming
 

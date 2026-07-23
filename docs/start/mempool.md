@@ -1,5 +1,7 @@
 ---
 sidebar_position: 5
+title: "Mempool Data API"
+description: "Query and stream pending mempool transactions with Bitquery before they confirm on-chain."
 ---
 
 # Getting Mempool Data

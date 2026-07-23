@@ -1,3 +1,8 @@
+---
+title: "Bitquery API Common Errors"
+description: "Troubleshoot Bitquery GraphQL errors including 403 Forbidden, auth failures, rate limits, and query timeouts."
+---
+
 # Common Errors and What to Do
 
 This section will guide you through the interpretation of common error messages encountered within Bitquery APIs. It will help you decide when to escalate issues by filing a ticket at [Bitquery Support](https://support.bitquery.io/).

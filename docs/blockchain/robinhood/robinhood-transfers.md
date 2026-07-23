@@ -17,7 +17,7 @@ Bitquery exposes **Robinhood** transfer data through the **EVM Transfers** APIs.
 
 :::tip Related docs
 - [ERC20 Token Transfers API (Ethereum)](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api/)
-- [EVM Transfers](https://docs.bitquery.io/docs/evm/transfers/)
+- [EVM Transfers](https://docs.bitquery.io/docs/schema/evm/transfers/)
 - [Robinhood Trades](/docs/blockchain/robinhood/robinhood-trades)
 :::
 
