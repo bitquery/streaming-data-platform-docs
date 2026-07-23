@@ -359,10 +359,10 @@ query MyQuery {
 
 ## Related Documentation
 
-- [Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/dextrades/)
-- [Solana Token Holders API](https://docs.bitquery.io/docs/blockchain/Solana/token-holders/)
+- [Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades/)
+- [Solana Token Holders API](/docs/blockchain/Solana/solana-token-holders/)
 - [Real-time Solana Data Streams](https://docs.bitquery.io/docs/streams/real-time-solana-data/)
-- [GraphQL Reference](https://docs.bitquery.io/docs/graphql-reference/)
+- [Schema overview](/docs/schema/schema-intro/)
 - [API Authorization](https://docs.bitquery.io/docs/authorization/how-to-use/)
 
 ## Support

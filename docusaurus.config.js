@@ -768,6 +768,18 @@ const config = {
             from: "/docs/grpc/solana/filters/",
             to: "/docs/grpc/solana/topics/dextrades/",
           },
+          {
+            from: "/docs/blockchain/Solana/dextrades/",
+            to: "/docs/blockchain/Solana/solana-dextrades/",
+          },
+          {
+            from: "/docs/blockchain/Solana/token-holders/",
+            to: "/docs/blockchain/Solana/solana-token-holders/",
+          },
+          {
+            from: "/docs/graphql-reference/",
+            to: "/docs/schema/schema-intro/",
+          },
 
           //crypto price api redirects
           {

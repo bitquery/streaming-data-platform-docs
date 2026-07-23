@@ -3,6 +3,7 @@
   "position": 5,
   "link": {
     "type": "generated-index",
-    "description": "Metrics used to calculate statistics over the results grouped by dimensions"
+    "description": "Metrics used to calculate statistics over the results grouped by dimensions",
+    "slug": "/graphql/metrics"
   }
 }

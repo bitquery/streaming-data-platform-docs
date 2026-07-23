@@ -169,7 +169,7 @@ END IF
 
 | Topic | Link |
 | ----- | ---- |
-| PolyMarket APIs Intro | [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/) |
-| Advanced Polymarket Analytics | [Advanced Polymarket Metrics](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-advanced-analytics-api/) |
+| PolyMarket APIs Intro | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) |
+| Advanced Polymarket Analytics | [Advanced Polymarket Metrics](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/) |
 | Prediction trades reference | [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/) |
-| Sports Related PolyMarkets | [Polymarket Sports API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-sports-api/) |
+| Sports Related PolyMarkets | [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/) |

@@ -886,6 +886,7 @@ const sidebars = {
           label: "Crypto Price APIs",
           link: {
             type: "generated-index",
+            slug: "/trading/crypto-price-api",
             title: "Crypto Price API",
             description:
               "Access token and currency pricing data across chains.",
@@ -966,6 +967,7 @@ const sidebars = {
           label: "Polymarket API",
           link: {
             type: "generated-index",
+            slug: "/examples/polymarket-api",
             title: "Polymarket Implementation Guide",
             description:
               "Build prediction market apps on Polymarket: Get prices, trades, markets, and oracle resolutions",

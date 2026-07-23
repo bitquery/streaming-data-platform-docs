@@ -17,7 +17,7 @@ Need zero-latency BSC data via Kafka? Read about our [Kafka Streams](https://doc
 
 You may also be interested in:
 
-- [Crypto Price API ➤](https://docs.bitquery.io/docs/trading/crypto-price-api/)
+- [Crypto Price API ➤](/docs/trading/crypto-price-api/introduction/)
 - [BSC Pancake Swap APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/)
 - [BSC DEX Trades ➤](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/)
 - [PumpFun API ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
@@ -128,7 +128,7 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorization
 - [BSC DEX Trades](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
 - [BSC Uniswap APIs](https://docs.bitquery.io/docs/blockchain/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
 - [BSC Pancake Swap APIs](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/): Pancake swap Trades on BSC network with the help of examples.
-- [Trade APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
+- [Trade APIs](/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
 
 ## Track All Binance Meme Rush Tokens That Have Migrated to Pancakeswap
 
@@ -669,7 +669,7 @@ query MyQuery($currency: String) {
 
 ## Get latest price of a Meme Rush token
 
-We launched the [Price Index](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) in August 2025, allowing you to track price of any token trading onchain.
+We launched the [Price Index](/docs/trading/crypto-price-api/introduction/) in August 2025, allowing you to track price of any token trading onchain.
 Here's an example of [tracking Meme Rush token prices](https://ide.bitquery.io/latest-meme-rush-token-price-on-four-meme-dex#).
 
 <details>

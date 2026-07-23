@@ -35,7 +35,7 @@ Flow: **Management** (Created) → **Trades** (Buy/Sell) → **Settlement** (Spl
 
 This is a **universal** prediction market API: the same cubes and fields work across supported chains. Use `EVM(network: matic)` for Polygon today; more chains will be added over time.
 
-For contract-level and event-based Polymarket data (e.g. OrderFilled, ConditionResolution), see the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/) docs.
+For contract-level and event-based Polymarket data (e.g. OrderFilled, ConditionResolution), see the [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) docs.
 
 <VideoPlayer url="https://www.youtube.com/watch?v=kb7lFJ2RnXE" />
 
