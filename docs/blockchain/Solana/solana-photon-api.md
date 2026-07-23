@@ -1,17 +1,15 @@
 ---
 sidebar_position: 1
 title: "Photon Solana API"
-description: "Bitquery blockchain API docs: Photon Solana API."
+description: "Photon is a routing aggregator on Solana that finds the best execution paths across multiple DEXs. To identify trades that were routed through Photon, we use their program address BSfD6SHZigAfDWSjzD5Q41jw8LmKwtmjskPH9XW1mrRW in our queries."
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # Photon Solana API
 
 :::tip Need real-time Photon-style trader data or anything from the last ~30 days?
-For **real-time trader and wallet data over the last ~30 days** across **9 chains in one API**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical Photon-style trader data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time trader and wallet data over the last ~30 days** across **9 chains in one API**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical Photon-style trader data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Photon is a routing aggregator on Solana that finds the best execution paths across multiple DEXs. To identify trades that were routed through Photon, we use their program address `BSfD6SHZigAfDWSjzD5Q41jw8LmKwtmjskPH9XW1mrRW` in our queries.
 
@@ -86,7 +84,6 @@ The query uses a `joinInstructions` function to filter trades that specifically 
     }
   }
 }
-
 
 ```
 
@@ -167,7 +164,7 @@ You can find the query [here](https://ide.bitquery.io/Trades-of-a-Pair-Executed-
 
 ## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
+The queries below use the **[Trades cube](/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
 ### Get All DEX Trades on Solana With Price, Market Cap, and Supply
 

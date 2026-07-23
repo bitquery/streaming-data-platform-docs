@@ -5,16 +5,15 @@ sidebar_label: Python Tutorial to use Solana Shreds from Kafka
 title: Python Tutorial to use Solana Shreds from Kafka
 description: Consume Bitquery Kafka Solana protobuf from Python with confluent_kafka and bitquery-pb2-kafka-package; run python-consumer-example from kafka-streams-examples-usecases.
 ---
-
 # Python Tutorial to use Solana Shreds from Kafka
 
 This tutorial explains how to consume **Solana** transaction protobuf messages from **Bitquery Kafka** using **Python**, and print them with **`bytes`** fields shown in **base58** (pipe-friendly **stdout**; logs on **stderr**).
 
-Background: **[Kafka streaming concepts — Protobuf streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#protobuf-streams)**.
+Background: **[Kafka streaming concepts — Protobuf streams](/docs/streams/kafka-streaming-concepts/#protobuf-streams)**.
 
 **Runnable project:** **[`bitquery/kafka-streams-examples-usecases`](https://github.com/bitquery/kafka-streams-examples-usecases)** — folder **[`python-consumer-example/`](https://github.com/bitquery/kafka-streams-examples-usecases/tree/main/python-consumer-example)** ([`consumer.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/consumer.py), [`settings.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/settings.py), [`protobuf_print.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/protobuf_print.py)).
 
-> **Scaling:** This sample is a single process. For high throughput, add **parallel partition consumption** and/or **worker pools** behind the poll loop, following Bitquery’s Kafka guidance in **[Kafka streaming concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)**.
+> **Scaling:** This sample is a single process. For high throughput, add **parallel partition consumption** and/or **worker pools** behind the poll loop, following Bitquery’s Kafka guidance in **[Kafka streaming concepts](/docs/streams/kafka-streaming-concepts/)**.
 
 ## Prerequisites
 
@@ -109,7 +108,7 @@ python consumer.py
 
 ## TLS (optional)
 
-Extend the **`conf`** dict from **`settings.py`** using Bitquery’s **[SASL_SSL](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#ssl-connection-sasl_ssl-)** snippet (brokers **9093**, PEM paths). Summary and **`curl`** for PEMs: **[examples repo `README.md`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/README.md)**.
+Extend the **`conf`** dict from **`settings.py`** using Bitquery’s **[SASL_SSL](/docs/streams/kafka-streaming-concepts/#ssl-connection-sasl_ssl-)** snippet (brokers **9093**, PEM paths). Summary and **`curl`** for PEMs: **[examples repo `README.md`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/README.md)**.
 
 ## Troubleshooting
 
@@ -123,4 +122,4 @@ Extend the **`conf`** dict from **`settings.py`** using Bitquery’s **[SASL_SSL
 ## See also
 
 - **[bitquery-pb2-kafka-package (PyPI)](https://pypi.org/project/bitquery-pb2-kafka-package/)**
-- **[Kafka streaming concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)**
+- **[Kafka streaming concepts](/docs/streams/kafka-streaming-concepts/)**

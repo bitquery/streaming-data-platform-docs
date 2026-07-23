@@ -1,28 +1,13 @@
 ---
 sidebar_position: 3
 title: "Polygon (Matic) Token Market Cap API"
-description: "Bitquery blockchain API docs: Polygon (Matic) Token Market Cap API."
+description: "Stream and query Polygon (Matic) token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API"
 ---
 # Polygon (Matic) Token Market Cap API
 
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens on **Polygon** (network id **`matic`** in the Trading API). Filter with **`matic:`** plus a **lowercase** contract address in **`Token.Id`** / **`Currency.Id`**.
 
 For schema details and field meanings, see the **[Tokens cube](/docs/trading/crypto-price-api/tokens)** and **[Supply fields](/docs/trading/crypto-price-api/supply-fields)**.
-
-<head>
-<meta name="title" content="Polygon Matic Token Market Cap API | Trading Tokens"/>
-<meta name="description" content="Stream and query Polygon (Matic) token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API."/>
-<meta name="keywords" content="polygon token market cap, matic token market cap, polygon erc20 api, bitquery trading tokens matic, polygon fdv api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Polygon (Matic) Token Market Cap API"/>
-<meta property="og:description" content="Real-time streams and queries for Polygon token market cap, supply, and price via Trading.Tokens."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Polygon (Matic) Token Market Cap API"/>
-<meta property="twitter:description" content="Real-time streams and queries for Polygon token market cap, supply, and price via Trading.Tokens."/>
-</head>
 
 :::note Trading API and EVM addresses
 On **Polygon** (**`matic`** in Trading), use **lowercase** hex in **`Id`** values (e.g. `matic:0xeb51…`, not mixed-case checksum addresses).

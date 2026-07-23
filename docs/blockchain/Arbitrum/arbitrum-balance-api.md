@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: "Arbitrum Address Balance API"
-description: "Bitquery blockchain API docs: Arbitrum Address Balance API."
+description: "The Balances API returns current and historical token balances for an address on Arbitrum. To return only non-zero balances, add Amount(selectWhere: { gt: \"0\" }) on the Balance field (not in where). Use dataset: combined or dataset: archive as follows:."
 ---
 # Arbitrum Address Balance API
 

@@ -1,8 +1,7 @@
 ---
 title: "Get Blockchain Data on Telegram Chat in Real-Time"
-description: "Bitquery how-to guide: Get Blockchain Data on Telegram Chat in Real-Time."
+description: "Build a Telegram bot that streams Bitquery WebSocket GraphQL subscriptions for live blockchain alerts."
 ---
-
 # Get Blockchain Data on Telegram Chat in Real-Time
 
 With this code, your Telegram bot will respond to the `/start` command by initiating a WebSocket connection to Bitquery and sending blockchain data updates to the Telegram chat.
@@ -110,7 +109,6 @@ The below code sends a GraphQL subscription query that listens to server for lat
     def start(update: Update, context: CallbackContext):
         update.message.reply_text("Starting WebSocket connection...")
         asyncio.run(start_websocket_and_send_updates(update))
-
 
 ```
 

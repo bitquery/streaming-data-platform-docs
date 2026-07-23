@@ -221,7 +221,6 @@ Chains from the Early Access Program (EAP) have moved to v2.
 }
 ```
 
-
 **Advanced Query Features:**
 - **Nested filtering**: Filter by multiple criteria across related entities
 - **Time-based queries**: Query by specific time ranges, intervals, or relative periods
@@ -284,7 +283,6 @@ subscription {
   }
 }
 ```
-
 
 **WebSocket Connection Example (JavaScript):**
 ```javascript
@@ -387,7 +385,6 @@ for message in consumer:
     print(f"Price: ${trade.price_usd}")
     print(f"Block: {trade.block.number}")
 ```
-
 
 **Kafka Features:**
 - **Schema Evolution**: Backward and forward compatible Protocol Buffer schemas
@@ -535,7 +532,6 @@ Ready to start building with blockchain data? Here's your path forward:
 3. **[Explore Blockchain APIs](/docs/blockchain/supported-chains/)** - Dive into specific blockchain data
 4. **[Build Real-time Applications](/docs/category/graphql-subscriptions/)** - Set up live data streams
 5. **[Join Our Community](https://t.me/Bloxy_info)** - Get help and share your projects
-
 
 <FAQ
   items={[

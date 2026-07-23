@@ -1,8 +1,7 @@
 ---
 title: "Monitoring Solana at Scale: Managing 100s of Addresses"
-description: "Bitquery how-to guide: Monitoring Solana at Scale: Managing 100s of Addresses."
+description: "This guide demonstrates how to monitor real-time token transfers and DEX trades for hundreds of blockchain addresses efficiently using WebSockets and Streamlit. Learn to dynamically track and display key transfer and trade details in a real-time dashboard."
 ---
-
 # Monitoring Solana at Scale: Managing 100s of Addresses
 
 This guide demonstrates how to monitor real-time token transfers and DEX trades for hundreds of blockchain addresses efficiently using WebSockets and Streamlit. Learn to dynamically track and display key transfer and trade details in a real-time dashboard.

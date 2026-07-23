@@ -1,14 +1,12 @@
 ---
-title: "Uniswap V4 API on Matic - Track Trader Activities, Token Trades and Market Behaviour"
-description: "Track Uniswap V4 trades, trader activities, token trades, and market behaviour in real time using Bitquery's DEX Trades API on Matic."
+title: "Uniswap V4 API on Matic - Track Trader Activities, Token Trades and Market Behavior"
+description: "Track Uniswap V4 trades, trader activities, token trades, and market behavior in real time using Bitquery's DEX Trades API on Matic."
 ---
-
-# Uniswap V4 API - Track Trader Activities, Token Trades and Market Behaviour
+# Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior
 
 :::tip Need real-time Uniswap V4 (Polygon) data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Uniswap V4 (Polygon) swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Uniswap V4 (Polygon) data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Uniswap V4 (Polygon) swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Uniswap V4 (Polygon) data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Uniswap v4 introduces a major shift in protocol architecture. Instead of deploying a separate smart contract for each liquidity pool, Uniswap v4 uses a singleton PoolManager contract that manages all pools internally as structured state.
 

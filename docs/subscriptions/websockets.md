@@ -13,12 +13,11 @@ Bitquery makes real-time data available using WebSockets. We use a specific WebS
 wss://streaming.bitquery.io/graphql
 ```
 
-For a **live DEX trades** subscription example (GraphQL document plus BSC/Solana links), see [How do I subscribe to live DEX trades using Bitquery WebSocket?](https://docs.bitquery.io/docs/subscriptions/examples#how-do-i-subscribe-to-live-dex-trades-using-bitquery-websocket).
+For a **live DEX trades** subscription example (GraphQL document plus BSC/Solana links), see [How do I subscribe to live DEX trades using Bitquery WebSocket?](/docs/subscriptions/examples#how-do-i-subscribe-to-live-dex-trades-using-bitquery-websocket).
 
 ### Limits
 
-You are charged for the number of subscriptions (aka streams) and not for the number of websockets. Read more on pricing for streams [here](https://docs.bitquery.io/docs/ide/points/#how-are-points-calculated-for-subscriptions)
-
+You are charged for the number of subscriptions (aka streams) and not for the number of websockets. Read more on pricing for streams [here](/docs/ide/points/#how-are-points-calculated-for-subscriptions)
 
 ### Data Handling
 
@@ -26,16 +25,15 @@ It's important to note that for committed blocks, data will come in portions (by
 
 **Websockets using Bitquery graphQL streams cannot send "close" messages, only way to end the subscription/stream is to close the websocket**
 
-
 ## Authorising Websockets
 
-Read [here](https://docs.bitquery.io/docs/authorization/websocket/) on how to use websockets with OAuth.
+Read [here](/docs/authorization/websocket/) on how to use websockets with OAuth.
 
 Here is the link to a Postman collection with samples demonstrating how to use the wss endpoint:
 
 > [Postman Collection for Examples](https://www.postman.com/interstellar-eclipse-270749/workspace/bitquery)
 
-Continue reading about how to create and use websockets in this [section](https://docs.bitquery.io/docs/subscriptions/subscription/)
+Continue reading about how to create and use websockets in this [section](/docs/subscriptions/subscription/)
 
 ## Supported Standards
 
@@ -48,8 +46,7 @@ Essentially they are the same, differ only in details. Typically, you use some l
 which already implement one of these. we support both of them. We adhere to the standard logic for ping, pong, and disconnect actions.
 We adhere to the standard logic for ping, pong, and disconnect actions. Once the socket is open, the server sends a 'ka' message if you're using graphql-ws. Alternatively, if you're using graphql-transport-ws, the server will send a 'pong' message. This process ensures that the connection remains active and healthy.
 
-You can find examples of how to use it in your code [here](https://docs.bitquery.io/docs/subscriptions/examples/)
-
+You can find examples of how to use it in your code [here](/docs/subscriptions/examples/)
 
 ## Why do I get a failed WebSocket connection error when converting query to subscription?
 
@@ -84,7 +81,7 @@ When switching from a regular GraphQL query to a WebSocket subscription in Bitqu
 
 4. **Authentication**  
    - You must authenticate using OAuth or provide your Bitquery API token over the WebSocket connection.  
-   - See [WebSocket authorization guide](https://docs.bitquery.io/docs/authorization/websocket/) for details.
+   - See [WebSocket authorization guide](/docs/authorization/websocket/) for details.
 
 5. **Subprotocol**  
    - Your WebSocket client must support either `graphql-ws` or `graphql-transport-ws` subprotocols.    
@@ -92,7 +89,7 @@ When switching from a regular GraphQL query to a WebSocket subscription in Bitqu
 
 6. **Compatibility Caveats**  
    - Some fields or dataset combinations supported in queries are *not* yet available via streaming subscriptions.  
-   - If you get “subscription not valid” errors, check [this guide](https://docs.bitquery.io/docs/subscriptions/subscription/) or Bitquery v2 query docs for compatibility information.
+   - If you get “subscription not valid” errors, check [this guide](/docs/subscriptions/subscription/) or Bitquery v2 query docs for compatibility information.
 
 7. **Error Diagnosis**
     - _Connection failed_ errors usually indicate a transport or authentication problem.

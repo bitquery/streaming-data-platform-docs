@@ -11,8 +11,6 @@ GraphQL query optimization is a crucial aspect of utilizing V2 APIs to their ful
 
 In this section, we will see how to optimize your V2 API queries.
 
-
-
 ### Understanding Datasets
 
 Choosing the right dataset is critical for both correctness and performance. We offer three datasets with different guarantees and latency characteristics:
@@ -38,7 +36,7 @@ EVM(dataset: combined, network: bsc) { BalanceUpdates(limit: { count: 1000 }) { 
 
 ### Understanding limits in GraphQL
 
-In V2 APIs, it's crucial to note the implicit default limit applied when a specific limit isn't explicitly defined within a query. [By default, this limit restricts the number of records returned to 10,000](https://docs.bitquery.io/docs/start/errors/#limits). This safeguard is in place to prevent excessive resource consumption, ensuring the efficient processing of queries.
+In V2 APIs, it's crucial to note the implicit default limit applied when a specific limit isn't explicitly defined within a query. [By default, this limit restricts the number of records returned to 10,000](/docs/start/errors/#limits). This safeguard is in place to prevent excessive resource consumption, ensuring the efficient processing of queries.
 
 However, to tailor data retrieval according to specific needs, V2 APIs provide the flexibility to set custom limits using the 'limit' parameter.
 
@@ -148,8 +146,7 @@ Below is an example query that retrieves information about limitBy. For each cal
 
 In each table, certain columns are used as indexes, you can use those columns to sort in `orderby` field to improve time to response.
 
-A detailed list is available in this [Indexes](https://docs.bitquery.io/docs/graphql/indexed-fields-reference/) page.
-
+A detailed list is available in this [Indexes](/docs/graphql/indexed-fields-reference/) page.
 
 ### Sorting Queries in GraphQL
 
@@ -210,7 +207,7 @@ Metric-based sorting is a powerful feature in GraphQL that allows you to sort da
 }
 ```
 
-In the above example, we use the SUM metric to sort the responses. We give an [alias](https://docs.bitquery.io/docs/graphql/metrics/alias/) to the sum field (Balance) and sort the responses from highest to lowest sum.
+In the above example, we use the SUM metric to sort the responses. We give an [alias](/docs/graphql/metrics/alias/) to the sum field (Balance) and sort the responses from highest to lowest sum.
 
 ### Filtering data in GraphQL queries
 

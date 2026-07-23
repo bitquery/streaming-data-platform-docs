@@ -4,17 +4,6 @@ description: "Use your Bitquery OAuth token in API requests: header Bearer token
 sidebar_position: 2
 keywords: ["Bitquery API token", "Bitquery authorization", "OAuth token usage", "Bearer token", "API authentication"]
 ---
-
-<head>
-<meta name="title" content="How to Use Bitquery API Token - Authorization Examples"/>
-<meta name="description" content="Use your Bitquery OAuth token in API requests: Bearer header or URL parameter. Python, JavaScript, and cURL examples."/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="How to Use Bitquery API Token"/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="How to Use Bitquery API Token"/>
-</head>
-
 # How to Use a Token
 
 Regardless of how you obtain your token, whether generated directly in the IDE or using a client ID-secret combination, the process for using the token remains consistent.
@@ -24,7 +13,7 @@ Regardless of how you obtain your token, whether generated directly in the IDE o
 
 - You attach the token in the URL `https://streaming.bitquery.io/graphql?token=ory_at_...`
 
-For the `wss` endpoint, the 2nd method is the only way, read more [here](https://docs.bitquery.io/docs/authorization/websocket/)
+For the `wss` endpoint, the 2nd method is the only way, read more [here](/docs/authorization/websocket/)
 
 Below is an example in Python that mentions the token in the header.
 
@@ -32,11 +21,9 @@ Below is an example in Python that mentions the token in the header.
 import requests
 import json
 
-
 def oAuth_example():
 
   //access_token generated using either of the two approaches
-
 
   # Step 2: Make Streaming API query
   url_graphql = "https://streaming.bitquery.io/graphql"
@@ -80,7 +67,6 @@ def oAuth_example():
 
   # Print the response
   print(response_graphql.text)
-
 
 oAuth_example()
 ```

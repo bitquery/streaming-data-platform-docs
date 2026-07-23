@@ -15,7 +15,6 @@ keywords:
   - Polygon (MATIC) token api
   - Polygon (MATIC) transaction api
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 Discover everything you need to build powerful Polygon (MATIC) applications—from real-time DEX trading analytics, liquidity monitoring, slippage analysis, and token holder insights to NFT tracking and transaction monitoring. This comprehensive guide provides ready-to-use GraphQL APIs, live streaming data, and step-by-step examples for tracking swaps, balances, transfers, liquidity pools, and more across the Polygon ecosystem. Whether you're building trading bots, dashboards, or DeFi analytics tools, find all the Polygon data solutions you need right here.
@@ -25,9 +24,8 @@ Need help crafting a query or subscription? Message us on [support](https://t.me
 ## What is the Bitquery Polygon (MATIC) API?
 
 :::tip Building a trading app or DEX UI on Polygon (MATIC)?
-For **real-time trades and prices on Polygon (MATIC)** (and the last ~30 days), use the curated [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. For **historical Polygon (MATIC) data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
+For **real-time trades and prices on Polygon (MATIC)** (and the last ~30 days), use the curated [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. For **historical Polygon (MATIC) data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
 :::
-
 
 It's a GraphQL interface over curated, indexed Polygon (MATIC) data. Write concise queries instead of building and maintaining your own indexer.
 
@@ -48,7 +46,7 @@ Track wallet portfolios and token holders, monitor DEX price/volume, liquidity e
 
 ## WebSockets and Webhooks
 
-Most queries can be turned into live streams by switching `query` to `subscription`, and consumed over WebSocket. See examples and code snippets [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
+Most queries can be turned into live streams by switching `query` to `subscription`, and consumed over WebSocket. See examples and code snippets [here](/docs/subscriptions/websockets/).
 
 ## DEX Trades
 

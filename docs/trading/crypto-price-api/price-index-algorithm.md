@@ -11,7 +11,6 @@ keywords:
   - "currency price"
   - "DEX price aggregation"
 ---
-
 # Price Index Algorithm
 
 This page describes how the Price Index (Crypto Price API) filters trades and computes prices for tokens and currencies. It is the single source of truth for the algorithm in effect from **April 2026**.

@@ -2,7 +2,6 @@
 title: "BSC Mempool Stream - Real-Time Transaction Monitoring"
 description: "Monitor BSC mempool in real-time. Track pending transactions, DEX trades, token creations, and more with ultra-low latency using Bitquery Mempool APIs and Kafka Streams."
 ---
-
 # BSC Mempool Stream - Real-Time Transaction Monitoring
 
 Monitor BSC (BNB Smart Chain) mempool transactions in real-time before they are confirmed on-chain. Track pending DEX trades, token creations, transfers, and detect opportunities early with Bitquery's Mempool APIs and Streams.
@@ -10,52 +9,19 @@ Monitor BSC (BNB Smart Chain) mempool transactions in real-time before they are 
 Any Bitquery GraphQL stream can be converted to a mempool monitoring stream by setting `mempool: true`.
 
 We also provide low-latency Kafka streams to monitor broadcasted data, which are much faster than GraphQL mempool streams.
-Read more about Kafka streams [here](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/).
+Read more about Kafka streams [here](/docs/streams/protobuf/chains/EVM-protobuf/).
 
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-<title>BSC Mempool Stream - Real-Time Transaction Monitoring | Bitquery</title>
-<meta
-  name="title"
-  content="BSC Mempool Stream - Real-Time Transaction Monitoring"
-/>
-<meta
-  name="description"
-  content="Monitor BSC mempool in real-time. Track pending transactions, DEX trades, token creations, and more with ultra-low latency using Bitquery Mempool APIs and Kafka Streams."
-/>
-<meta
-  name="keywords"
-  content="BSC mempool,BNB chain mempool,BSC pending transactions,BSC mempool API,BSC mempool stream,Four Meme mempool,BSC DEX trades mempool,real-time BSC,BSC transaction monitoring,BNB chain API,blockchain mempool,crypto mempool,mempool monitoring,BSC websocket"
-/>
-<meta name="robots" content="index, follow" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="language" content="English" />
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="BSC Mempool Stream - Real-Time Transaction Monitoring"
-/>
-<meta
-  property="og:description"
-  content="Monitor BSC mempool in real-time. Track pending transactions, DEX trades, token creations before confirmation."
-/>
-
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="BSC Mempool Stream - Real-Time Transaction Monitoring"/>
-<meta property="twitter:description" content="Monitor BSC mempool in real-time. Track pending transactions, DEX trades, token creations before confirmation."/>
-</head>
 
 ---
 
 ## How do I stream BSC pending transactions (mempool) using Bitquery? {#how-do-i-stream-bsc-pending-transactions-mempool-using-bitquery}
 
-Use a **GraphQL `subscription`** on the Bitquery streaming **WebSocket** [`wss://streaming.bitquery.io/graphql`](https://docs.bitquery.io/docs/subscriptions/websockets/) with root **`EVM(network: bsc, mempool: true)`**. The **`mempool: true`** flag switches the stream to **broadcast / simulated pending** traffic instead of only confirmed blocks. Under that root, subscribe to the same APIs you use on-chain—**`Transactions`**, **`Transfers`**, **`DEXTrades`**, **`Events`**, and others—with `where` filters as needed. Authenticate the socket per [WebSocket authorization](https://docs.bitquery.io/docs/authorization/websocket/). For mempool semantics (ordering, time window, vs confirmed subscriptions), read [Subscribing to mempool updates](https://docs.bitquery.io/docs/subscriptions/mempool-subscriptions/). For lower latency at scale, consider **Kafka** [EVM protobuf streams](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/).
+Use a **GraphQL `subscription`** on the Bitquery streaming **WebSocket** [`wss://streaming.bitquery.io/graphql`](/docs/subscriptions/websockets/) with root **`EVM(network: bsc, mempool: true)`**. The **`mempool: true`** flag switches the stream to **broadcast / simulated pending** traffic instead of only confirmed blocks. Under that root, subscribe to the same APIs you use on-chain—**`Transactions`**, **`Transfers`**, **`DEXTrades`**, **`Events`**, and others—with `where` filters as needed. Authenticate the socket per [WebSocket authorization](/docs/authorization/websocket/). For mempool semantics (ordering, time window, vs confirmed subscriptions), read [Subscribing to mempool updates](/docs/subscriptions/mempool-subscriptions/). For lower latency at scale, consider **Kafka** [EVM protobuf streams](/docs/streams/protobuf/chains/EVM-protobuf/).
 
 Minimal example—pending transaction headers on BSC:
 
@@ -158,7 +124,6 @@ subscription {
 ```
 
 </details>
-
 
 ### Stream Four Meme Token Creation in Mempool - Detect Them First
 
@@ -323,10 +288,10 @@ subscription {
 
 You may also be interested in:
 
-- [Four Meme API Documentation ➤](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
-- [BSC DEX Trades API ➤](https://docs.bitquery.io/docs/schema/evm/dextrades/)
-- [Kafka Protobuf Streams for EVM ➤](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/)
-- [WebSocket Subscriptions ➤](https://docs.bitquery.io/docs/authorization/websocket/)
+- [Four Meme API Documentation ➤](/docs/blockchain/BSC/four-meme-api/)
+- [BSC DEX Trades API ➤](/docs/schema/evm/dextrades/)
+- [Kafka Protobuf Streams for EVM ➤](/docs/streams/protobuf/chains/EVM-protobuf/)
+- [WebSocket Subscriptions ➤](/docs/authorization/websocket/)
 
 ## Need Help?
 

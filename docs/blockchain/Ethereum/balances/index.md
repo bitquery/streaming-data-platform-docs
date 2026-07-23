@@ -11,12 +11,11 @@ keywords:
   - Transaction Balance Tracker
   - Ethereum Balance Data
 ---
-
 # Balances API Documentation
 
 This section covers how to fetch balance-related data on Ethereum via **Bitquery GraphQL APIs** and **Streams**.
 
-To get started, [signup](https://account.bitquery.io/user/account) with Bitquery and get your [Access Token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these](https://docs.bitquery.io/docs/authorization/how-to-generate/) steps.
+To get started, [signup](https://account.bitquery.io/user/account) with Bitquery and get your [Access Token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these](/docs/authorization/how-to-generate/) steps.
 
 If you need help getting balance data, reach out to [support](https://t.me/Bloxy_info).
 

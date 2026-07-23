@@ -9,7 +9,6 @@ keywords:
   - query performance
   - cube indexes
 ---
-
 # Indexed Fields Reference for `where` and `orderBy`
 
 Use **indexed fields** in your `where` filters and `orderBy` clauses. Filtering or sorting on non-indexed fields can lead to slow queries, timeouts.

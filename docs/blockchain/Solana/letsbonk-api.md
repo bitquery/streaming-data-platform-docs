@@ -1,8 +1,7 @@
 ---
 title: "LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices"
-description: "Bitquery blockchain API docs: LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices."
+description: "Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our LetsBonk.fun API"
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices
@@ -10,46 +9,22 @@ import FAQ from "@site/src/components/FAQ";
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 :::tip Need real-time LetsBonk.fun data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical LetsBonk.fun data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical LetsBonk.fun data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-In this document, we will explore several examples related to LetsBonk.fun. You can also check out our [Pump Fun API Docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [FourMeme API Docs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/). For live DEX prices and volume across LetsBonk tokens, see [DEXrabbit's LetsBonk category](https://dexrabbit.bitquery.io/categories/letsbonk-fun-ecosystem).
+In this document, we will explore several examples related to LetsBonk.fun. You can also check out our [Pump Fun API Docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [FourMeme API Docs](/docs/blockchain/BSC/four-meme-api/). For live DEX prices and volume across LetsBonk tokens, see [DEXrabbit's LetsBonk category](https://dexrabbit.bitquery.io/categories/letsbonk-fun-ecosystem).
 
 :::note
 **LetsBonk.fun tokens are created and traded on Raydium Launchlab.**
 :::
 
-Need zero-latency LetsBonk.fun data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+Need zero-latency LetsBonk.fun data? [Read about our Shred Streams and Contact us for a Trial](/docs/streams/real-time-solana-data/).
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-<title>LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices</title>
-  <meta name="title" content="LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our LetsBonk.fun API."/>
-  <meta name="keywords" content="LetsBonk.fun API,LetsBonk.fun on-chain data API,LetsBonk.fun token data API,LetsBonk.fun blockchain API,LetsBonk.fun DEX data API,LetsBonk.fun API documentation,LetsBonk.fun crypto API,LetsBonk.fun web3 API,DEX Trades,Solana,Blast,LetsBonk.fun memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our LetsBonk.fun API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any LetsBonk.fun based token through our LetsBonk.fun API."/>
-</head>
 
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 
@@ -625,7 +600,7 @@ query LatestTrades {
 
 </details>
 
-Similarly, you can subscribe to trades on launchpad in real-time using [subscription query](https://ide.bitquery.io/Subscribe-to-Trades-on-Launchpad). The same can be tracked using [Bitquery Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
+Similarly, you can subscribe to trades on launchpad in real-time using [subscription query](https://ide.bitquery.io/Subscribe-to-Trades-on-Launchpad). The same can be tracked using [Bitquery Kafka Streams](/docs/streams/kafka-streaming-concepts/)
 
 ## Latest Price of a LetsBonk.fun Token on Raydium Lanchlab
 

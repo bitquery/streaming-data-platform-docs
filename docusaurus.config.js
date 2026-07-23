@@ -83,17 +83,9 @@ const config = {
   scripts: [
     // Must load before any script that calls `window.gtag` (see gtag-stub.js).
     { src: "/js/gtag-stub.js" },
-    // Chat widget only in production builds (same gate as gtag/GTM).
-    ...(enableAnalytics
-      ? [
-          {
-            src: "https://www.chatbase.co/embed.min.js",
-            async: true,
-            id: "Vz0cwoEYRJW6n5B2JeSeu",
-            domain: "www.chatbase.co",
-          },
-        ]
-      : []),
+    // Chat widget only in production; deferred until interaction/idle
+    // (see static/js/chatbase-deferred.js) to avoid loading embed.min.js on every LCP.
+    ...(enableAnalytics ? [{ src: "/js/chatbase-deferred.js", async: true }] : []),
   ],
 
   plugins: [
@@ -1259,7 +1251,7 @@ const config = {
             className: "button button--primary bright-white-text",
           },
           {
-            to: "https://docs.bitquery.io/docs/graphql/indexed-fields-reference/",
+            to: "/docs/graphql/indexed-fields-reference/",
             label: "Indexed Fields",
             position: "left",
           },
@@ -1269,7 +1261,7 @@ const config = {
             position: "left",
           },
           {
-            to: "https://docs.bitquery.io/docs/tools-directory/",
+            to: "/docs/tools-directory/",
             label: "Free Tools",
             position: "left",
           },

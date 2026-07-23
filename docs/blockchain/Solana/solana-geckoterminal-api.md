@@ -1,14 +1,14 @@
 ---
 sidebar_position: 1
 title: "GeckoTerminal Solana API"
-description: "Bitquery blockchain API docs: GeckoTerminal Solana API."
+description: "Access real-time Solana DEX trades, token pairs, volumes, buyers, sellers, and live price data as seen on GeckoTerminal, via Bitquery GraphQL APIs and streaming"
 ---
 # GeckoTerminal Solana API
 
 Everything you see on the GeckoTerminal Solana dashboard—live pairs, trades, prices, volumes, makers/buyers/sellers, and more—can be accessed via APIs/Streams with Bitquery.
 We expose the same on-chain data via GraphQL APIs, real-time WebSocket streams, and enterprise Kafka topics, with optional cloud connectors (AWS, GCP, Snowflake) for analytics pipelines.
 
-Checkout our [GeckoTerminal EVM API documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/evm-geckoterminal-api/) if you are interested in getting EVM chains(Ethereum, Binance Smart Chain(BSC), Arbitrum, Base, Matic, Optimism, etc) data which GeckoTerminal shows.
+Checkout our [GeckoTerminal EVM API documentation](/docs/blockchain/Ethereum/dextrades/evm-geckoterminal-api/) if you are interested in getting EVM chains(Ethereum, Binance Smart Chain(BSC), Arbitrum, Base, Matic, Optimism, etc) data which GeckoTerminal shows.
 
 ## Bitquery Solana Data Access Options
 
@@ -21,31 +21,12 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Getting Started with Solana
 
-- **[Solana API Examples](https://docs.bitquery.io/docs/blockchain/Solana/)** - Complete collection of Solana API examples
-- **[Solana DEX Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades)** - Real-time DEX trading data and analytics
-- **[Solana Subscriptions](https://docs.bitquery.io/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
+- **[Solana API Examples](/docs/blockchain/Solana/)** - Complete collection of Solana API examples
+- **[Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)** - Real-time DEX trading data and analytics
+- **[Solana Subscriptions](/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
 - **[IDE for Solana](https://graphql.bitquery.io/ide)** - Interactive development environment for testing Solana queries
 
 This guide shows how to retrieve the same Solana DEX data that GeckoTerminal displays—real-time trades, pair stats, volumes, buyers/sellers, and more—using Bitquery APIs, streams, and Kafka.
-
-<Head>
-  <meta name="title" content="GeckoTerminal API | Solana - Live DEX & Token Data" />
-  <meta name="description" content="Access real-time Solana DEX trades, token pairs, volumes, buyers, sellers, and live price data as seen on GeckoTerminal, via Bitquery GraphQL APIs and streaming." />
-  <meta name="keywords" content="GeckoTerminal API,Solana DEX API,Solana live trades,token pair data,Solana on-chain analytics,Bitquery API,DEX statistics,DeFi analytics,Raydium,Orca,Jupiter,crypto API,blockchain data,real-time Solana stream" />
-  <meta name="robots" content="index, follow" />
-  <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="GeckoTerminal API | Solana - Live DEX & Token Data" />
-  <meta property="og:description" content="Explore Solana DEX pairs, trades, volumes, live prices and buyer/seller stats from GeckoTerminal, using Bitquery API and real-time subscriptions." />
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="GeckoTerminal API | Solana - Live DEX & Token Data" />
-  <meta property="twitter:description" content="Access real-time Solana token pair analytics, trades, volumes, DEX prices and participant metrics just like GeckoTerminal, via Bitquery GraphQL API." />
-</Head>
 
 ## Get Trade Transactions of GeckoTerminal for a particular pair in realtime
 

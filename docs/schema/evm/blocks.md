@@ -1,33 +1,7 @@
 ---
 title: "EVM Blocks API"
-description: "Bitquery schema reference for Blocks: fields, types, and query patterns."
+description: "Access Ethereum block data, including gas limits, rewards, and more. Get the latest 10 blocks with the EVM Blocks API."
 ---
-<head>
-<meta name="title" content="EVM Blocks API"/>
-
-<meta name="description" content="Access Ethereum block data, including gas limits, rewards, and more. Get the latest 10 blocks with the EVM Blocks API."/>
-
-<meta name="keywords" content="Ethereum blockchain, Block information, Block data retrieval, Ethereum network, Block height, Gas limit, Block rewards, Timestamp, Block difficulty, Transaction count, Uncle count, Total difficulty, Block size, Miner, Block hash, Block date, Block filtering options, Block aggregation, Ethereum analytics, Ethereum development"/>
-
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-
-<meta property="og:title" content="EVM Blocks API" />
-
-<meta property="og:description" content="Access Ethereum block data, including gas limits, rewards, and more. Get the latest 10 blocks with the EVM Blocks API." />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-
-<meta property="twitter:title" content="EVM Blocks API" />
-
-<meta property="twitter:description" content="Access Ethereum block data, including gas limits, rewards, and more. Get the latest 10 blocks with the EVM Blocks API." />
-</head>
-
 Blocks API provide details on blocks.
 
 You can use different [filters](/docs/graphql/filters/) to query data from different dimensions. You can find more examples [here](/docs/blockchain/Ethereum/blocks/blocks-api/)

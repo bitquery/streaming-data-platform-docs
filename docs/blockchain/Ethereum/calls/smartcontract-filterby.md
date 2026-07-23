@@ -1,17 +1,14 @@
 ---
 sidebar_position: 1
 title: "SmartContract API"
-description: "Bitquery blockchain API docs: SmartContract API."
+description: "This query retrieves the 10 most recent smart contract calls that match a specific function signature (harvest()) on the Binance Smart Chain (BSC) network. It also includes transaction and block data associated with each call."
 ---
 # SmartContract API
 
 ## Smart Contract Calls by Method Signature
 
-
-
 This query retrieves the 10 most recent smart contract calls that match a specific function signature (harvest()) on the Binance Smart Chain (BSC) network. It also includes transaction and block data associated with each call. 
 You can find the GraphQL query [here](https://graphql.bitquery.io/ide/Calls-by-Method-Signature)
-
 
 ```
 query MyQuery {
@@ -64,7 +61,6 @@ The query returns the following data for each smart contract call:
 
 ## Smart Contract Calls by Opcode
 
-
 This GraphQL query retrieves information about the latest STATICCALL EVM (Ethereum Virtual Machine) calls on the Binance Smart Chain network.
 You can find the GraphQL query [here](https://graphql.bitquery.io/ide/Smart-Contract-Calls-by-Opcode)
 
@@ -107,7 +103,6 @@ query MyQuery {
 - `orderBy` parameter is used to sort the results by the Block_Date field in descending order.
 - `where` parameter is used to filter the results based on certain conditions. In this case, the where parameter filters the results to include only STATICCALL calls made after January 1st, 2023.
 
-
 **Returned Data**
 
 - `Call`: Returns information about the STATICCALL call, including the number of logs generated, internal calls made, and the name of the opcode used.
@@ -116,8 +111,7 @@ query MyQuery {
 
 ## Smart Contract Calls by Arguments
 
-
-The Array-like structure of [Arguments and Returns](https://docs.bitquery.io/docs/schema/evm/arguments/) in Smart Contract Calls allows us to insert specific filters, enabling us to effectively narrow down our search. Further we can better understand the details of smart contract interactions in specific contexts.
+The Array-like structure of [Arguments and Returns](/docs/schema/evm/arguments/) in Smart Contract Calls allows us to insert specific filters, enabling us to effectively narrow down our search. Further we can better understand the details of smart contract interactions in specific contexts.
 
 **Example 1**
 

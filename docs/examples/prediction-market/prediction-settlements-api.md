@@ -14,7 +14,6 @@ keywords:
   - prediction market analytics
   - Bitquery GraphQL prediction
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Prediction Market Settlements API
@@ -398,7 +397,6 @@ query TopRedeemers {
   }
 }
 ```
-
 
 ---
 

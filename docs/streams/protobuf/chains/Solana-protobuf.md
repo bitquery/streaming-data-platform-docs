@@ -1,8 +1,7 @@
 ---
 title: "Solana Shred Streams"
-description: "Bitquery streaming docs: Solana Shred Streams."
+description: "This section provides details about Bitquery's Solana Shred Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data."
 ---
-
 # Solana Shred Streams
 
 This section provides details about Bitquery's Solana Shred Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data.

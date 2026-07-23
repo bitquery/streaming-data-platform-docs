@@ -1,36 +1,9 @@
 ---
 sidebar_position: 3
 title: "Solana Instructions API"
-description: "Bitquery blockchain API docs: Solana Instructions API."
+description: "Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc"
 ---
 # Solana Instructions API
-
-<head>
-<meta name="title" content="Solana Instructions API | Get decoded Instructions data"/>
-<meta name="description" content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc."/>
-<meta name="keywords" content="instructions api, instructions python api, instructions scan api, instructions api docs, DEX Trades crypto api, instructions blockchain api,solana network api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Solana Instructions API | Get decoded Instructions data"
-/>
-<meta
-  property="og:description"
-  content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana Instructions API | Get decoded Instructions data" />
-<meta property="twitter:description" content="Get instructions data executed on Solana including details like indices of preceding instructions signer, signature, balance, and program details etc." />
-</head>
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -48,11 +21,11 @@ The **Solana Instructions API** provides comprehensive access to decoded instruc
 
 ## 🔗 Related APIs
 
-- **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)** - Monitor real-time balance changes
-- **[Solana Token Supply API](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/)** - Track token supply and creation events
-- **[Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities across DEXs
-- **[Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/)** - Track token transfers and movements
-- **[Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api/)** - Analyze transaction fees and costs
+- **[Solana Balance Updates API](/docs/blockchain/Solana/solana-balance-updates/)** - Monitor real-time balance changes
+- **[Solana Token Supply API](/docs/blockchain/Solana/token-supply-cube/)** - Track token supply and creation events
+- **[Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities across DEXs
+- **[Solana Transfers API](/docs/blockchain/Solana/solana-transfers/)** - Track token transfers and movements
+- **[Solana Fees API](/docs/blockchain/Solana/solana_fees_api/)** - Analyze transaction fees and costs
 
 ---
 
@@ -60,7 +33,7 @@ The **Solana Instructions API** provides comprehensive access to decoded instruc
 
 The subscription below fetches the latest instructions executed on the Solana blockchain, including details like indices of preceding instructions, signer information, transaction signatures, balance updates, and program details.
 
-For monitoring the balance changes that result from these instructions, see our **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)**.
+For monitoring the balance changes that result from these instructions, see our **[Solana Balance Updates API](/docs/blockchain/Solana/solana-balance-updates/)**.
 
 You can run the query [here](https://ide.bitquery.io/Latest-Solana-Instructions)
 
@@ -319,7 +292,6 @@ query MyQuery {
   }
 }
 
-
 ```
 
 ## Get Buyevent instruction details
@@ -533,7 +505,7 @@ You can run the query [here](https://ide.bitquery.io/solana-balance-updates-exec
 
 You can also track real-time token burn using the TokenSupplyUpdates API. Check out the [following example](https://ide.bitquery.io/token-burn-example-solana).
 
-For more comprehensive token supply tracking, see our **[Solana Token Supply API](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/)** documentation.
+For more comprehensive token supply tracking, see our **[Solana Token Supply API](/docs/blockchain/Solana/token-supply-cube/)** documentation.
 
 ```graphql
 {

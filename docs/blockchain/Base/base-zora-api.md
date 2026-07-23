@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Base Zora API"
-description: "Bitquery blockchain API docs: Base Zora API."
+description: "Bitquery provides comprehensive Zora data through APIs, Streams and Data Dumps."
 ---
 # Base Zora API
 
@@ -11,17 +11,17 @@ This section provides you with a set of GraphQL APIs and streams that offer insi
 The below GraphQL APIs and Streams are examples of data points you can get with Bitquery for Zora on Base.
 If you have any questions on other data points, reach out to [support](https://t.me/Bloxy_info).
 
-Need zero-latency Base data? [Read about our Kafka Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+Need zero-latency Base data? [Read about our Kafka Streams and Contact us for a Trial](/docs/streams/kafka-streaming-concepts/).
 
 You may also be interested in:
 
-- [Base DEX Trade APIs ➤](https://docs.bitquery.io/docs/blockchain/Base/base-dextrades/)
-- [Base Uniswap APIs ➤](https://docs.bitquery.io/docs/blockchain/Base/base-uniswap-api/)
+- [Base DEX Trade APIs ➤](/docs/blockchain/Base/base-dextrades/)
+- [Base Uniswap APIs ➤](/docs/blockchain/Base/base-uniswap-api/)
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 ## Get Newly Created Zora Tokens

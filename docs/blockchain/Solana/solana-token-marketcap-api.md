@@ -1,35 +1,19 @@
 ---
 sidebar_position: 3
 title: "Solana Token Market Cap API"
-description: "Bitquery blockchain API docs: Solana Token Market Cap API."
+description: "Stream and query Solana SPL token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API"
 ---
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Solana Token Market Cap API
 
 :::tip Need real-time Solana token market-cap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Solana token market-cap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Solana token market-cap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Solana token market-cap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Solana token market-cap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens on **Solana**. Filter with **`solana:`** plus the token **mint** in **`Token.Id`** / **`Currency.Id`**; ranked queries below use **`Token.Network`** **`Solana`**.
 
 For schema details and field meanings, see the **[Tokens cube](/docs/trading/crypto-price-api/tokens)** and **[Supply fields](/docs/trading/crypto-price-api/supply-fields)**.
-
-<head>
-<meta name="title" content="Solana Token Market Cap API | Trading Tokens"/>
-<meta name="description" content="Stream and query Solana SPL token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API."/>
-<meta name="keywords" content="solana token market cap, spl token market cap api, solana fdv api, bitquery trading tokens solana, solana token supply price"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Solana Token Market Cap API"/>
-<meta property="og:description" content="Real-time streams and queries for Solana token market cap, supply, and price via Trading.Tokens."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Solana Token Market Cap API"/>
-<meta property="twitter:description" content="Real-time streams and queries for Solana token market cap, supply, and price via Trading.Tokens."/>
-</head>
 
 ## Related APIs
 

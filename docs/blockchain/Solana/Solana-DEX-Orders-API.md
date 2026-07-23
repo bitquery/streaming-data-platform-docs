@@ -1,37 +1,16 @@
 ---
 title: "Solana DEX Orders API"
-description: "Bitquery blockchain API docs: Solana DEX Orders API."
+description: "Retrieve on-chain liquidity pool and trading pair data from Solana-based DEXs like Raydium and Jupiter using our DEX Orders API"
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # Solana DEX Orders API
 
 :::tip Need real-time Solana DEX orders data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Solana DEX orders swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Solana DEX orders data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Solana DEX orders swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Solana DEX orders data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-
 In this section, you'll learn how to access Solana-based decentralized exchange (DEX) trading data using our DEX Orders API.
-
-<head>
-<meta name="title" content="Solana DEX Orders API | Access Raydium, Jupiter Data"/>
-<meta name="description" content="Retrieve on-chain liquidity pool and trading pair data from Solana-based DEXs like Raydium and Jupiter using our DEX Orders API."/>
-<meta name="keywords" content="Solana DEX Orders API, Solana DEX Orders Python API, Solana DEX Orders Token API, Solana DEX Orders NFT API, DEX Orders Scan API, DEX Orders API Docs, Solana Web3 API, Solana Blockchain API"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Solana DEX Orders API | Access Raydium, Jupiter Data" />
-<meta property="og:description" content="Retrieve on-chain liquidity pool and trading pair data from Solana-based DEXs like Raydium and Jupiter using our DEX Orders API." />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana DEX Orders API | Access Raydium, Jupiter Data" />
-<meta property="twitter:description" content="Retrieve on-chain liquidity pool and trading pair data from Solana-based DEXs like Raydium and Jupiter using our DEX Orders API." />
-</head>
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 

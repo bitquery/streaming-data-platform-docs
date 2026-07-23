@@ -11,7 +11,6 @@ keywords:
   - mcp.bitquery.io
 sidebar_label: Overview
 ---
-
 # Tracing MCP - What You Can Do With It
 
 These are the patterns we see most often when teams plug the [Bitquery MCP server](https://mcp.bitquery.io) into Claude, Cursor, ChatGPT, or Claude Code. **You don't write SQL** - you ask in plain English, the agent does the rest. Each pattern below shows the kind of question that works and what comes back.

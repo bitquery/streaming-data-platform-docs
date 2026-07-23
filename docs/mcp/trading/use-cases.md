@@ -1,6 +1,7 @@
 ---
 title: "Trading MCP — What You Can Do With It"
 description: "Bitquery MCP use cases: token discovery, trader PnL, OHLC, market cap, wash-trade filtering, launchpad pulse, sniping research, slippage & AI-agent analysis."
+image: "/img/mcp/charts/wsol-24h-candles.svg"
 keywords:
   - Bitquery MCP use cases
   - trading AI agent
@@ -13,23 +14,6 @@ keywords:
   - mcp.bitquery.io
 sidebar_label: "Use Cases"
 ---
-
-<head>
-  <meta name="title" content="Trading MCP — What You Can Do With It"/>
-  <meta name="description" content="Bitquery MCP use cases: token discovery, trader PnL, OHLC, market cap, wash-trade filtering, launchpad pulse, sniping research, slippage & AI-agent analysis."/>
-  <meta name="robots" content="index, follow"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Trading MCP — What You Can Do With It"/>
-  <meta property="og:description" content="11 conversational patterns the Bitquery MCP unlocks for AI-driven crypto trading research, with prompts you can paste straight into Claude or Cursor."/>
-  <meta property="og:url" content="https://docs.bitquery.io/docs/mcp/trading/use-cases/"/>
-  <meta property="og:image" content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"/>
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Trading MCP — What You Can Do With It"/>
-  <meta property="twitter:description" content="11 conversational patterns the Bitquery MCP unlocks for AI-driven crypto trading research, with prompts you can paste straight into Claude or Cursor."/>
-  <meta property="twitter:image" content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"/>
-  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/trading/use-cases/"/>
-</head>
-
 # Trading MCP — What You Can Do With It
 
 These are the patterns we see most often when teams plug the [Bitquery MCP server](/docs/mcp/mcp-server/) into Claude, Cursor, ChatGPT, or Claude Code. **You don't write SQL** — you ask in plain English, the agent does the rest. Each pattern below shows the kind of question that works and what comes back.

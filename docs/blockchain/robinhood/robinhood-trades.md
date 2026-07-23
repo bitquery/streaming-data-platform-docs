@@ -16,22 +16,6 @@ keywords:
   - Robinhood K-line candles
   - Bitquery Robinhood Trading API
 ---
-
-<head>
-<meta name="title" content="Robinhood Trades API & Streams | Prices, OHLCV, Whale Trades"/>
-<meta name="description" content="Query and stream Robinhood token trades, prices, OHLCV, market cap, whale trades, and top traders with Bitquery Trading APIs, scoped with NetworkBid bid:robinhood."/>
-<meta name="keywords" content="Robinhood API, Robinhood trades API, Robinhood price API, OHLCV for Robinhood tokens, Robinhood whale trades, Robinhood top traders, Robinhood real-time trade stream, Robinhood K-line candles, Bitquery Robinhood Trading API"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Robinhood Trades API & Streams | Prices, OHLCV, Whale Trades"/>
-<meta property="og:description" content="Real-time and historical Robinhood token trades, USD prices, OHLCV, market cap, whale trades, and top traders via Bitquery Trading APIs."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Robinhood Trades API & Streams | Prices, OHLCV, Whale Trades"/>
-<meta property="twitter:description" content="Real-time and historical Robinhood token trades, USD prices, OHLCV, market cap, whale trades, and top traders via Bitquery Trading APIs."/>
-</head>
-
 # Robinhood Trades API & Streams
 
 Bitquery exposes **Robinhood** trade and price data through the **Trading** APIs. Use these queries and real-time GraphQL subscriptions to get **live trades, USD prices, OHLCV/K-line candles, market cap, whale trades, top traders, and token leaderboards** on Robinhood — all scoped with the `bid:robinhood` network filter.
@@ -39,16 +23,16 @@ Bitquery exposes **Robinhood** trade and price data through the **Trading** APIs
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
 
-Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 :::tip Related docs
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
 - [Robinhood Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply)
 - [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)
-- [Trading data overview](https://docs.bitquery.io/docs/trading/trading-data-overview/)
-- [Crypto Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)
-- [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
+- [Trading data overview](/docs/trading/trading-data-overview/)
+- [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api/)
+- [Crypto Price API](/docs/trading/crypto-price-api/introduction/)
 :::
 
 ---
@@ -592,7 +576,7 @@ Rank the biggest traders of a specific token by total USD volume, with a buy/sel
 
 Get the latest USD normalised price of a token on Robinhood network using this API endpoint using `Trading.Tokens`.
 
-:::note A single token might be traded on multiple pools, with each pool having a difference in price. As for the price returned by Bitquery we provide the weighted average price across all pools. To know more about the price calculation refer to [this](https://docs.bitquery.io/docs/trading/crypto-price-api/price-index-algorithm/#how-token-prices-are-determined) document. 
+:::note A single token might be traded on multiple pools, with each pool having a difference in price. As for the price returned by Bitquery we provide the weighted average price across all pools. To know more about the price calculation refer to [this](/docs/trading/crypto-price-api/price-index-algorithm/#how-token-prices-are-determined) document. 
 
 If you want to monitor price for a particular pool, we suggest usage of `Trading.Pairs` instead of `Trading.Tokens` where you could specify the pool address.
 :::

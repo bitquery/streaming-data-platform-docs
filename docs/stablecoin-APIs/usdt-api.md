@@ -16,7 +16,6 @@ keywords:
     "Bitquery API",
   ]
 ---
-
 # USDT API
 
 USDT (Tether) powers a large share of on-chain value transfer, payments, and trading across multiple blockchains. This page curates the most useful USDT APIs—covering price, payments (transfers), trades, reserves, and balances—along with live streams you can use in production.

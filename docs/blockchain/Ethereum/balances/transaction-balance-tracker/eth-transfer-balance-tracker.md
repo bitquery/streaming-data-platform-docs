@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Ethereum Transfer Balance Tracker"
-description: "Bitquery blockchain API docs: Ethereum Transfer Balance Tracker."
+description: "Learn how to get real-time balance updates for all addresses in Ethereum transfers with balance change reasons using Bitquery."
 ---
 # Ethereum Transfer Balance Tracker
 
@@ -10,31 +10,6 @@ The Ethereum Transfer Balance Tracker API provides real-time balance updates for
 :::note
 The queries covered this section are only valid for the Native Currency Transfer.
 :::
-
-<head>
-<meta name="title" content="Ethereum Transfer Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to get real-time balance updates for all addresses in Ethereum transfers with balance change reasons using Bitquery's Transfer Balance API."/>
-<meta name="keywords" content="ethereum transfer balance api, eth balance streams, ethereum balance api, balance change reason, transfer balance python api, ethereum transfer balance, balance updates api, ethereum network api, ethereum web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Ethereum Transfer Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to get real-time balance updates for all addresses in Ethereum transfers with balance change reasons using Bitquery's Transfer Balance API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum Transfer Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to get real-time balance updates for all addresses in Ethereum transfers with balance change reasons using Bitquery's Transfer Balance API." />
-</head>
 
 ## Get Balance Info for an Address after Transfer
 
@@ -327,7 +302,6 @@ subscription {
 }
 ```
 </details>
-
 
 ## Get Balance Info for an Address after Transfer Recieved
 

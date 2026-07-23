@@ -1,63 +1,35 @@
 ---
 sidebar_position: 2
 title: "BNB DEX Trades API"
-description: "Bitquery blockchain API docs: BNB DEX Trades API."
+description: "Get on-chain data of any BSC based DEX through our DEX Trades API"
 ---
 # BNB DEX Trades API
 
 :::tip Need real-time BNB / BSC DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Binance Smart Chain`). Use this page when you need **historical BNB / BSC data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Binance Smart Chain`). Use this page when you need **historical BNB / BSC data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
 :::
-
 
 Bitquery provides BSC DEX trade data through APIs, Streams, and Data Dumps.  
 The examples below show how to access real-time and historical trade data across BSC-based DEXs using GraphQL APIs and subscriptions.
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 If you're looking for other data points or have integration questions, reach out to [support](https://t.me/Bloxy_info).
 
 Need zero-latency BSC trade data?  
-[Explore our Kafka Streams and request a trial ➤](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/)
+[Explore our Kafka Streams and request a trial ➤](/docs/streams/protobuf/chains/EVM-protobuf/)
 
 You may also be interested in:
 
-- [FourMeme APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
-- [BNB Uniswap API ➤](https://docs.bitquery.io/docs/blockchain/BSC/bsc-uniswap-api/)
-- [BNB DEX Trades API ➤](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/)
+- [FourMeme APIs ➤](/docs/blockchain/BSC/four-meme-api/)
+- [BNB Uniswap API ➤](/docs/blockchain/BSC/bsc-uniswap-api/)
+- [BNB DEX Trades API ➤](/docs/blockchain/BSC/bsc-dextrades/)
 
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you must generate an API access token.
 
-Follow these steps: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow these steps: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-<meta name="title" content="BSC Decentralized Exchange Data with DEX Trades API"/>
-<meta name="description" content="Get on-chain data of any BSC based DEX through our DEX Trades API."/>
-<meta name="keywords" content="BSC DEX Trades api,BSC DEX Trades python api,BSC DEX Trades token api,BSC Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,BSC network api, BSC web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="BSC Decentralized Exchange Data with DEX Trades API"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any BSC based DEX through our DEX Trades API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="BSC Decentralized Exchange Data with DEX Trades API" />
-<meta property="twitter:description" content="Get on-chain data of any BSC based DEX through our DEX Trades API." />
-</head>
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -194,7 +166,6 @@ subscription {
     }
   }
 }
-
 
 ```
 
@@ -1541,7 +1512,7 @@ query {
 
 ## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
+The queries below use the **[Trades cube](/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
 ### Get All DEX Trades on BSC With Price, Market Cap, and Supply
 

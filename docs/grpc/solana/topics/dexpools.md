@@ -3,7 +3,6 @@ title: "Solana DEX Pools - gRPC Stream (CoreCast)"
 description: "Real-time DEX pool liquidity events via Solana gRPC. Add/remove liquidity, swaps. Protobuf."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana DEX pools", "liquidity"]
 ---
-
 # Solana DEX Pools gRPC Stream
 
 The `dex_pools` gRPC Stream provides real-time DEX pool liquidity and balance change data across supported Solana protocols.
@@ -13,7 +12,6 @@ The `dex_pools` gRPC Stream provides real-time DEX pool liquidity and balance ch
 ## Overview
 
 Subscribe to live DEX pool events: liquidity adds, removes, swaps, and pool creation. Each event includes base/quote changes, market info, and balance updates. Data is in **protobuf format** — use `bitquery-corecast-proto` to parse.
-
 
 ## Configuration
 
@@ -175,7 +173,7 @@ This package includes all necessary protobuf definitions without requiring manua
 
 ## Related
 
-- [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) — Topics and concepts
-- [DEX Trades gRPC](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades/) — DEX swap stream
-- [Pump.fun gRPC Example](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/) — Uses dex_pools
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorization/) — Token setup
+- [CoreCast Introduction](/docs/grpc/solana/introduction/) — Topics and concepts
+- [DEX Trades gRPC](/docs/grpc/solana/topics/dextrades/) — DEX swap stream
+- [Pump.fun gRPC Example](/docs/grpc/solana/examples/pump-fun-grpc-streams/) — Uses dex_pools
+- [Authorization](/docs/grpc/solana/authorization/) — Token setup

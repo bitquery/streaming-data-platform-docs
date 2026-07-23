@@ -1,53 +1,32 @@
 ---
 title: "Byreal API"
-description: "Bitquery blockchain API docs: Byreal API."
+description: "Access real-time and historical data for Byreal on Solana using our GraphQL API. Track DEX trades, token prices, OHLC, market cap, and top traders"
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # Byreal API
 
 :::tip Need real-time Byreal data or anything from the last ~30 days?
-Use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) for swap-level rows and [`Trading.Pairs`](https://docs.bitquery.io/docs/trading/crypto-price-api/pairs) for **OHLC**, **volume**, and **market cap**. Both include **USD price and supply** on every row. For **historical data older than ~30 days** and **historical aggregates** (OHLC, volume, top traders), see [Historical Solana aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/).
+Use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) for swap-level rows and [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs) for **OHLC**, **volume**, and **market cap**. Both include **USD price and supply** on every row. For **historical data older than ~30 days** and **historical aggregates** (OHLC, volume, top traders), see [Historical Solana aggregate data](/docs/blockchain/Solana/historical-aggregate-data/).
 :::
 
-Bitquery provides real-time and historical data APIs and streams for **Byreal**, a Solana trading protocol. For **prices, OHLC, volume, market cap, and trader analytics** over the **last ~30 days**, use the [**Crypto Price API**](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) (`Trading.Pairs`) and [**Crypto Trades API**](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) (`Trading.Trades`), filtering by **`Market.Program`** **`REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2`**.
+Bitquery provides real-time and historical data APIs and streams for **Byreal**, a Solana trading protocol. For **prices, OHLC, volume, market cap, and trader analytics** over the **last ~30 days**, use the [**Crypto Price API**](/docs/trading/crypto-price-api/introduction/) (`Trading.Pairs`) and [**Crypto Trades API**](/docs/trading/crypto-trades-api/trades-api) (`Trading.Trades`), filtering by **`Market.Program`** **`REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2`**.
 
-For **historical aggregates** going back to **May 2024** — OHLC candlesticks, volume, and time-bucketed analytics on **`DEXTradeByTokens`** with **`dataset: combined`** or **`dataset: archive`** — see [Historical Solana aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/). Filter those queries by **`Trade.Dex.ProgramAddress`** **`REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2`** for Byreal-specific history.
+For **historical aggregates** going back to **May 2024** — OHLC candlesticks, volume, and time-bucketed analytics on **`DEXTradeByTokens`** with **`dataset: combined`** or **`dataset: archive`** — see [Historical Solana aggregate data](/docs/blockchain/Solana/historical-aggregate-data/). Filter those queries by **`Trade.Dex.ProgramAddress`** **`REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2`** for Byreal-specific history.
 
-Need zero-latency Byreal data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+Need zero-latency Byreal data? [Read about our Shred Streams and Contact us for a Trial](/docs/streams/real-time-solana-data/).
 
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-  <meta name="title" content="Byreal API - Solana - Real-time Trades, Prices, OHLC" />
-  <meta name="description" content="Access real-time and historical data for Byreal on Solana using our GraphQL API. Track DEX trades, token prices, OHLC, market cap, and top traders." />
-  <meta name="keywords" content="Byreal,Byreal API,Solana DEX,Byreal trading protocol,Solana on-chain API,real-time Solana trades,Byreal token prices,Byreal OHLC data Solana,DEX trading API,crypto trading API,web3 Solana API,Bitquery GraphQL,Solana blockchain data" />
-  <meta name="robots" content="index, follow" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Byreal API - Solana - Real-time Trades, Prices, OHLC"
-/>
-<meta property="og:description" content="Explore real-time Byreal trades, token prices, OHLC, market cap, and volume on Solana using Bitquery GraphQL APIs." />
-
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="Byreal API - Solana - Real-time Trades, Prices, OHLC" />
-  <meta property="twitter:description" content="Get on-chain Byreal trading data — swaps, prices, OHLC, and volume — with Bitquery's Solana API." />
-</head>
 
 ## Byreal Trades in Real-Time — Crypto Trades API
 
 Stream new Byreal swaps via **`Trading.Trades`** with **USD price**, **market cap**, **FDV**, **supply**, **trader address**, and **transaction metadata** on every row. Filter by **`Pair.Market.Program`** **`REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2`**.
 
-For schema details, see the [**Crypto Trades API**](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) and [**Supply fields**](https://docs.bitquery.io/docs/trading/crypto-price-api/supply-fields).
+For schema details, see the [**Crypto Trades API**](/docs/trading/crypto-trades-api/trades-api) and [**Supply fields**](/docs/trading/crypto-price-api/supply-fields).
 
 Run the subscription [in the Bitquery IDE](https://ide.bitquery.io/Real-time-trades-on-Byreal-DEX-on-Solana).
 
@@ -189,7 +168,7 @@ subscription {
 
 Use **`Trading.Pairs`** with **`Market.Program`** **`REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2`** for aggregated **market cap**, **FDV**, **supply**, **price**, and **volume**. Replace **`solana:<mint>`** in **`Token.Id`** with your token.
 
-See the [**Pairs cube**](https://docs.bitquery.io/docs/trading/crypto-price-api/pairs) for full field reference.
+See the [**Pairs cube**](/docs/trading/crypto-price-api/pairs) for full field reference.
 
 ### Get latest market cap for a specific Byreal token
 
@@ -514,7 +493,7 @@ The **Trading APIs** on this page cover **real-time streams** and roughly the **
 
 For **older Byreal history** and **historical aggregates** — OHLC candlesticks, volume buckets, and time-series analytics from **May 2024** onward — use chain-level queries on **`Solana(dataset: combined)`** or **`Solana(dataset: archive)`** with **`DEXTradeByTokens`**. Filter by **`Trade.Dex.ProgramAddress`** **`REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2`**.
 
-See the full guide with working examples: [Historical Solana aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/).
+See the full guide with working examples: [Historical Solana aggregate data](/docs/blockchain/Solana/historical-aggregate-data/).
 
 For a Byreal-specific historical OHLC starting point, try [Byreal historical OHLC — DEXTradeByTokens](https://ide.bitquery.io/Byreal-historical-OHLC-DEXTradeByTokens) in the IDE (uses **`Solana(dataset: combined)`** and **`Trade.Dex.ProgramAddress`** **`REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2`**).
 
@@ -534,10 +513,10 @@ items={[
 
 ## Related Documentation
 
-- [Crypto Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)
-- [Crypto Price API — Pairs](https://docs.bitquery.io/docs/trading/crypto-price-api/pairs)
-- [Crypto Price API — OHLC](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api)
-- [Traders API](https://docs.bitquery.io/docs/trading/crypto-trades-api/traders-api)
-- [Historical Solana aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/)
-- [Real-time Solana Data Streams](https://docs.bitquery.io/docs/streams/real-time-solana-data/)
-- [API Authorization](https://docs.bitquery.io/docs/authorization/how-to-use/)
+- [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)
+- [Crypto Price API — Pairs](/docs/trading/crypto-price-api/pairs)
+- [Crypto Price API — OHLC](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api)
+- [Traders API](/docs/trading/crypto-trades-api/traders-api)
+- [Historical Solana aggregate data](/docs/blockchain/Solana/historical-aggregate-data/)
+- [Real-time Solana Data Streams](/docs/streams/real-time-solana-data/)
+- [API Authorization](/docs/authorization/how-to-use/)

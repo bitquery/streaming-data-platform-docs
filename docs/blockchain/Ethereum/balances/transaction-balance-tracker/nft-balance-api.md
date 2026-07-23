@@ -1,7 +1,7 @@
 ---
 sidebar_position: 9
 title: "Ethereum NFT Balance API"
-description: "Bitquery blockchain API docs: Ethereum NFT Balance API."
+description: "Track NFT balances, ownership, and token IDs using Bitquery."
 ---
 # Ethereum NFT Balance API
 
@@ -13,31 +13,6 @@ For NFTs (ERC-721 / ERC-1155), the following fields are available:
 - **Available**: `PostBalance`, `TokenOwnership`
 - **Not Provided**: `PreBalance`, `BalanceChangeReasonCode`, `TotalSupply`, `TotalSupplyInUSD`, `PostBalanceInUSD`
   :::
-
-<head>
-<meta name="title" content="Ethereum NFT Balance API & Streams"/>
-<meta name="description" content="Track NFT balances, ownership, and token IDs using Bitquery's NFT Balance API for Ethereum ERC-721 and ERC-1155 tokens."/>
-<meta name="keywords" content="ethereum nft balance api, erc-721 balance api, erc-1155 balance api, nft ownership api, nft balance tracker, nft token id api, ethereum nft balance, nft balance streams"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Ethereum NFT Balance API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Track NFT balances, ownership, and token IDs using Bitquery's NFT Balance API for Ethereum ERC-721 and ERC-1155 tokens."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum NFT Balance API & Streams" />
-<meta property="twitter:description" content="Track NFT balances, ownership, and token IDs using Bitquery's NFT Balance API for Ethereum ERC-721 and ERC-1155 tokens." />
-</head>
 
 ## Get Latest NFT Balance for an Address
 

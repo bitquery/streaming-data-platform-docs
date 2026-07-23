@@ -27,7 +27,6 @@ It has the following options:
 In most cases you just not specify this attribute, assuming all option is what you need. Other options are suitable
 for event-driven applications:
 
-
 ## Filtering Out All Branch Blocks
 
 Even with `trigger_on: head`, you might receive branch blocks. When a blockchain forks, the subscription cannot determine in real time whether the fork selected will become the longest chain (trunk) in the future. At the moment a fork occurs, the system may initially treat a branch block as the head, only to later discover it becomes part of a branch when a longer chain emerges.

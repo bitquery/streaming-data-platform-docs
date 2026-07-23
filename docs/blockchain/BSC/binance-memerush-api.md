@@ -1,8 +1,7 @@
 ---
 title: "Binance Meme Rush API"
-description: "Bitquery blockchain API docs: Binance Meme Rush API."
+description: "Ultra low latency Binance Meme Rush memecoin data on BNB Chain: live trades, bonding curve progress, new tokens, prices, OHLC, liquidity, migrations, top traders. Access via GraphQL, streams, and Kafka"
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Binance Meme Rush API
@@ -13,63 +12,19 @@ Get ultra low latency Binance Meme Rush memecoin data on BNB Chain: live trades,
 
 The below GraphQL APIs and Streams are examples of data points you can get with Bitquery. If you have questions on other data points, reach out to [support](https://t.me/Bloxy_info).
 
-Need zero-latency BSC data via Kafka? Read about our [Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) and contact us for a trial.
+Need zero-latency BSC data via Kafka? Read about our [Kafka Streams](/docs/streams/kafka-streaming-concepts/) and contact us for a trial.
 
 You may also be interested in:
 
 - [Crypto Price API ➤](/docs/trading/crypto-price-api/introduction/)
-- [BSC Pancake Swap APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/)
-- [BSC DEX Trades ➤](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/)
-- [PumpFun API ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
-
-<head>
-<title>Binance Meme Rush API - Live Trades, Bonding Curve, Prices, Liquidity on BSC</title>
-<meta name="title" content="Binance Meme Rush API - Live Trades, Bonding Curve, Prices, Liquidity on BSC"/>
-
-<meta
-  name="description"
-  content="Ultra low latency Binance Meme Rush memecoin data on BNB Chain: live trades, bonding curve progress, new tokens, prices, OHLC, liquidity, migrations, top traders. Access via GraphQL, streams, and Kafka."
-/>
-
-<meta
-  name="keywords"
-  content="Binance Meme Rush API,Binance Meme Rush bsc api,Binance Meme Rush trading api,Binance Meme Rush bonding curve api,Binance Meme Rush prices api,Binance Meme Rush liquidity api,Binance Meme Rush ohlc api,Binance Meme Rush memecoin api,bnb chain meme api,bsc meme token api,bitquery Binance Meme Rush api,real-time bsc trades,bsc websocket api,crypto trading api,blockchain market data api,memecoin analytics"
-/>
-
-<meta name="robots" content="index, follow" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="language" content="English" />
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-
-<meta
-  property="og:title"
-  content="Binance Meme Rush API - BSC - Live Trades, Bonding Curve, Prices"
-/>
-
-<meta
-  property="og:description"
-  content="Get Binance Meme Rush data on BNB Chain: trades, bonding curve progress, prices, liquidity, new tokens, migrations, and more."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-
-<meta
-  property="twitter:title"
-  content="Binance Meme Rush API - BSC - Live Trades, Bonding Curve, Prices"
-/>
-
-<meta property="twitter:description" content="Get Binance Meme Rush data on BNB Chain: trades, bonding curve progress, prices, liquidity, new tokens, migrations, and more." />
-</head>
+- [BSC Pancake Swap APIs ➤](/docs/blockchain/BSC/pancake-swap-api/)
+- [BSC DEX Trades ➤](/docs/blockchain/BSC/bsc-dextrades/)
+- [PumpFun API ➤](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
 
 ::::note
 To query or stream data via GraphQL outside the Bitquery IDE, you need to generate an API access token.
 
-Follow the steps here to create one: https://docs.bitquery.io/docs/authorization/how-to-generate/
+Follow the steps here to create one: /docs/authorization/how-to-generate/
 ::::
 
 ---
@@ -124,10 +79,10 @@ Follow the steps here to create one: https://docs.bitquery.io/docs/authorization
 
 ## Getting Started with Bitquery:
 
-- [Learning Track](https://docs.bitquery.io/docs/start/learning-path/): Learning track to get started with Bitquery GraphQL APIs and streams.
-- [BSC DEX Trades](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
-- [BSC Uniswap APIs](https://docs.bitquery.io/docs/blockchain/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
-- [BSC Pancake Swap APIs](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/): Pancake swap Trades on BSC network with the help of examples.
+- [Learning Track](/docs/start/learning-path/): Learning track to get started with Bitquery GraphQL APIs and streams.
+- [BSC DEX Trades](/docs/blockchain/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
+- [BSC Uniswap APIs](/docs/blockchain/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
+- [BSC Pancake Swap APIs](/docs/blockchain/BSC/pancake-swap-api/): Pancake swap Trades on BSC network with the help of examples.
 - [Trade APIs](/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
 
 ## Track All Binance Meme Rush Tokens That Have Migrated to Pancakeswap
@@ -613,7 +568,7 @@ query MyQuery($currency: String) {
 
 </details>
 
-You can also check if the token is listed on other DEX using this [example](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/#get-all-dexs-where-a-specific-token-is-listed).
+You can also check if the token is listed on other DEX using this [example](/docs/blockchain/BSC/bsc-dextrades/#get-all-dexs-where-a-specific-token-is-listed).
 
 ## Get Trade Metrics of a Meme Rush Token
 

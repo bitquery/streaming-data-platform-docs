@@ -1,44 +1,22 @@
 ---
 title: "Meteora Dynamic Bonding Curve API"
-description: "Bitquery blockchain API docs: Meteora Dynamic Bonding Curve API."
+description: "Access real-time and historical data for Meteora DBC on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders"
 ---
-
 # Meteora Dynamic Bonding Curve API
 
 :::tip Need real-time Meteora DBC data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Meteora DBC swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Meteora DBC data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Meteora DBC swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Meteora DBC data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 In this section we will see some API examples on tracking tokens on Meteora's dynamic bonding curve.
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
-
-<head>
-  <meta name="title" content="Meteora DBC API - Solana - Real-time Pools, Trades, Prices, OHLC" />
-  <meta name="description" content="Access real-time and historical data for Meteora DBC on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders." />
-  <meta name="keywords" content="Meteora DBC,Meteora Dynamic Bonding Curve API,Dynamic Bonding Curve,Solana DEX,Meteora API,Solana on-chain API,real-time Solana trades,Meteora pool data,Solana token prices,OHLC data Solana,DEX trading API,crypto trading API,web3 Solana API,Bitquery GraphQL,Meteora v2 API,Solana blockchain data" />
-  <meta name="robots" content="index, follow" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Meteora DBC API - Solana - Real-time Pools, Trades, Prices, OHLC"
-/>
-<meta property="og:description" content="Explore real-time DEX trades, latest pool creations, token prices, OHLC, and volume insights on Meteora DBC using our Solana API." />
-
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="Meteora DBC API - Solana - Real-time Pools, Trades, Prices, OHLC" />
-  <meta property="twitter:description" content="Get rich on-chain insights into Meteora DBC pools, trades, and tokens with our real-time Solana API." />
-</head>
 
 ## Meteora DBC Trades in Real-Time
 
@@ -703,7 +681,7 @@ query Volatility {
 
 ## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
+The queries below use the **[Trades cube](/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
 ### Get All DEX Trades on Meteora DBC With Price, Market Cap, and Supply
 

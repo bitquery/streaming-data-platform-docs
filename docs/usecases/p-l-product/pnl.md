@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Calculating Profit or Loss Over Time"
-description: "Bitquery how-to guide: Calculating Profit or Loss Over Time."
+description: "This is the first step, where we calculate the Weighted Average of Buy Price(WABP) by getting all the buy trades of the token."
 ---
 # Calculating Profit or Loss Over Time
 
@@ -19,8 +19,6 @@ pnl = sum(sellPriceInUSD-WABP)
 ```
 
 1.  Import the necessary libraries:
-
-
 
 ```javascript
 const axios = require('axios');
@@ -127,8 +125,6 @@ const average = await getWeightedAverage(token, wallet);
 ```
 
 12.  Declare variables and Traverse the `sellTrades` array:
-
-
 
 ```javascript
 let pnl = 0;

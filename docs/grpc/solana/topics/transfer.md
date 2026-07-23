@@ -3,7 +3,6 @@ title: "Solana Transfers - gRPC Stream (CoreCast)"
 description: "Real-time token and SOL transfers via Solana gRPC. Filter by sender, receiver, token. Protobuf."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana transfers stream"]
 ---
-
 # Solana Transfers gRPC Stream
 
 The `transfers` gRPC Stream provides real-time token and SOL transfer data across the Solana blockchain.
@@ -132,7 +131,6 @@ Here's an example of the data structure you'll receive:
 }
 ```
 
-
 ## Filtering Options
 
 The filter options are defined in the `request.proto` file. You can filter transfers using the following filters:
@@ -168,7 +166,6 @@ The transfers stream captures various transfer-related events:
 - **Currency**: Token information including mint address and decimals
 - **InstructionIndex**: The position of the transfer instruction in the transaction
 
-
 ## Schema Reference
 
 - **Protobuf Schema**: [dex_block_message.proto](https://github.com/bitquery/streaming_protobuf/blob/main/solana/dex_block_message.proto)
@@ -194,7 +191,7 @@ This package includes all necessary protobuf definitions without requiring manua
 
 ## Related
 
-- [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) — Topics and concepts
-- [DEX Trades gRPC](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades/) — DEX swap stream
-- [Solana Transfers (GraphQL)](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/) — WebSocket subscriptions
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorization/) — Token setup
+- [CoreCast Introduction](/docs/grpc/solana/introduction/) — Topics and concepts
+- [DEX Trades gRPC](/docs/grpc/solana/topics/dextrades/) — DEX swap stream
+- [Solana Transfers (GraphQL)](/docs/blockchain/Solana/solana-transfers/) — WebSocket subscriptions
+- [Authorization](/docs/grpc/solana/authorization/) — Token setup

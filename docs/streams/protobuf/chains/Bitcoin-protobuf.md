@@ -1,8 +1,7 @@
 ---
 title: "Bitcoin Streams"
-description: "Bitquery streaming docs: Bitcoin Streams."
+description: "This section provides details about Bitquery's Bitcoin Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data."
 ---
-
 # Bitcoin Streams
 
 This section provides details about Bitquery's Bitcoin Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data.

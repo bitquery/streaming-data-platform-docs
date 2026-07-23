@@ -11,15 +11,14 @@ keywords:
   - Polymarket maker taker
   - Polymarket open interest proxy
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Polymarket API - Advanced Analytics
 
-This guide shows **GraphQL examples** for deeper **Polymarket** metrics on **Polygon** (`network: matic`): **TVL** of Polymarket, **daily trade aggregates**, **buy vs sell pressure** for a market, **large-trade streaming**, **split/merge settlement** totals, and **top markets by volume**. All examples use **`dataset: realtime`**, which covers about the **last 7 days** of data. Use it together with the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/), [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/), and [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/).
+This guide shows **GraphQL examples** for deeper **Polymarket** metrics on **Polygon** (`network: matic`): **TVL** of Polymarket, **daily trade aggregates**, **buy vs sell pressure** for a market, **large-trade streaming**, **split/merge settlement** totals, and **top markets by volume**. All examples use **`dataset: realtime`**, which covers about the **last 7 days** of data. Use it together with the [Polymarket API](/docs/examples/polymarket-api/polymarket-api/), [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/), and [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/).
 
 :::note API Key Required
-To run these queries outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token](https://docs.bitquery.io/docs/authorization/how-to-generate/).
+To run these queries outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token](/docs/authorization/how-to-generate/).
 :::
 
 :::tip Contract addresses
@@ -163,7 +162,7 @@ query PolymarketVolume(
 
 ## Order flow — buy vs sell pressure by hour
 
-Bucket trades by **hour** and split **collateral USD** using **`IsOutcomeBuy`** (see [Prediction Trades API — trade direction](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/)).
+Bucket trades by **hour** and split **collateral USD** using **`IsOutcomeBuy`** (see [Prediction Trades API — trade direction](/docs/examples/prediction-market/prediction-trades-api/)).
 
 ### One market (filter by exact question title)
 
@@ -408,12 +407,12 @@ query topMarketsByVolume($limit: Int!) {
 
 | Need                        | Doc                                                                                                                            |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Trades, prices, filters     | [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/)                       |
-| Splits, merges, redemptions | [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/)             |
-| Condition ID, slug, token   | [Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api/)                        |
-| Overview                    | [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)                                        |
-| Wallet-level activity       | [Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api/)                     |
-| Token balances (USDC)       | [Token Balance API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/token-balance-api/) |
+| Trades, prices, filters     | [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/)                       |
+| Splits, merges, redemptions | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/)             |
+| Condition ID, slug, token   | [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/)                        |
+| Overview                    | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/)                                        |
+| Wallet-level activity       | [Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/)                     |
+| Token balances (USDC)       | [Token Balance API](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/token-balance-api/) |
 
 ---
 

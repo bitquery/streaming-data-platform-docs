@@ -1,9 +1,8 @@
 ---
 sidebar_position: 7
 title: "Base Uniswap API"
-description: "Bitquery blockchain API docs: Base Uniswap API."
+description: "Get on-chain data of any Uniswap based token through our Uniswap API"
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
@@ -11,49 +10,25 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 # Base Uniswap API
 
 :::tip Need real-time Base Uniswap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Base Uniswap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Base Uniswap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Base Uniswap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Base Uniswap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Bitquery provides Uniswap data through APIs, Streams and Data Dumps.
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery for Uniswap on Base.
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
-Need zero-latency Base data? [Read about our Kafka Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+Need zero-latency Base data? [Read about our Kafka Streams and Contact us for a Trial](/docs/streams/kafka-streaming-concepts/).
 
 You may also be interested in:
 
-- [Clanker APIs ➤](https://docs.bitquery.io/docs/blockchain/Base/base-clanker-api/)
-- [Base DEX Trade APIs ➤](https://docs.bitquery.io/docs/blockchain/Base/base-dextrades/)
+- [Clanker APIs ➤](/docs/blockchain/Base/base-clanker-api/)
+- [Base DEX Trade APIs ➤](/docs/blockchain/Base/base-dextrades/)
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-  <meta name="title" content="Base Uniswap API - Base - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get on-chain data of any Uniswap based token through our Uniswap API."/>
-  <meta name="keywords" content="Uniswap API,Uniswap on-chain data API,Uniswap token data API,Base blockchain API,Uniswap DEX data API,Uniswap API documentation,Uniswap crypto API,Uniswap web3 API,DEX Trades,Base,Uniswap,Uniswap memecoins,Base DEX,Uniswap DEX,token trading,blockchain data,crypto trading"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Base Uniswap API - Base - Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any Uniswap based token through our Uniswap API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Uniswap API - Base - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any Uniswap based token through our Uniswap API."/>
-</head>
 
 ## Get Latest Trades on Uniswap v3
 

@@ -12,7 +12,6 @@ keywords:
   - Cardano GraphQL
   - Bitquery Cardano
 ---
-
 # Cardano Mints API
 
 Cardano doesn't mint tokens through smart contracts the way EVM chains do. Every native token — fungible or NFT — is issued under a **minting policy**, and every mint or burn shows up on-chain as a single event tied to that policy. The Mints API exposes those events with amounts, transaction hash, block context, and the full asset metadata. Use it to track NFT collection drops, fungible-token issuance, stablecoin supply changes, or any kind of on-chain supply movement.
@@ -53,7 +52,7 @@ Pull the 10 most recent mint events across every minting policy on a given date.
 }
 ```
 
-To find the largest single mints, sort by `desc: "value"`. To filter by a specific policy or asset, add `currency: {is: "<asset fingerprint>"}` — see the [DJED examples](https://docs.bitquery.io/docs/blockchain/Cardano/djed) for the pattern. On Cardano, the policy ID is the first 56 hex characters of `currency.address`; the remainder is the hex-encoded asset name.
+To find the largest single mints, sort by `desc: "value"`. To filter by a specific policy or asset, add `currency: {is: "<asset fingerprint>"}` — see the [DJED examples](/docs/blockchain/Cardano/djed) for the pattern. On Cardano, the policy ID is the first 56 hex characters of `currency.address`; the remainder is the hex-encoded asset name.
 
 ## Aggregate Cardano mints by month
 
@@ -86,5 +85,5 @@ Change `startOfInterval(unit: month)` to `week` or `day` for finer buckets. To d
 
 ## Related resources
 
-- [Djed Stablecoin API](https://docs.bitquery.io/docs/blockchain/Cardano/djed) — currency-filtered mint and burn examples on a real asset
-- [Cardano Transactions API](https://docs.bitquery.io/docs/blockchain/Cardano/transactions) — full transaction context for mint events
+- [Djed Stablecoin API](/docs/blockchain/Cardano/djed) — currency-filtered mint and burn examples on a real asset
+- [Cardano Transactions API](/docs/blockchain/Cardano/transactions) — full transaction context for mint events

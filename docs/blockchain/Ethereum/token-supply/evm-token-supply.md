@@ -1,30 +1,11 @@
 ---
 sidebar_position: 1
 title: "EVM Token Supply API"
-description: "Bitquery blockchain API docs: EVM Token Supply API."
+description: "Get real-time and historical token supply data for ERC-20 tokens across Ethereum, BSC, Base, and all EVM chains. Track USDT, USDC supply, monitor token minting & burning"
 ---
 # EVM Token Supply API
 
 Track real-time and historical token supply data across all EVM-compatible blockchains including Ethereum, BNB Chain (BSC), Base, Arbitrum, Polygon, and more using Bitquery's Token Supply API.
-
-<head>
-<meta name="title" content="EVM Token Supply API | Get Total Supply of Any Token"/>
-<meta name="description" content="Get real-time and historical token supply data for ERC-20 tokens across Ethereum, BSC, Base, and all EVM chains. Track USDT, USDC supply, monitor token minting & burning."/>
-<meta name="keywords" content="token supply api, total supply api, erc20 token supply, ethereum token supply, bsc token supply, base token supply, usdt supply api, usdc supply api, token circulating supply, token market cap api, crypto supply tracker, token supply tracker, evm token api, blockchain supply api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="EVM Token Supply API | Track Total Supply Across All EVM Chains" />
-<meta property="og:description" content="Get real-time and historical token supply data for ERC-20 tokens. Track USDT, USDC, and any token's total supply across Ethereum, BSC, Base, and more." />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="EVM Token Supply API | Track Total Supply Across All EVM Chains" />
-<meta property="twitter:description" content="Get real-time and historical token supply data for ERC-20 tokens. Track USDT, USDC, and any token's total supply across Ethereum, BSC, Base, and more." />
-</head>
 
 :::info Looking for Solana Token Supply?
 Bitquery also provides comprehensive **[Solana Token Supply API](/docs/blockchain/Solana/token-supply-cube/)** with features including:
@@ -54,10 +35,10 @@ Token supply refers to the total number of tokens that exist for a particular cr
 
 ### EVM APIs
 
-- **[EVM Balance Updates API](https://docs.bitquery.io/docs/schema/evm/balances/)** - Track wallet balance changes
-- **[EVM Token Holders API](https://docs.bitquery.io/docs/schema/evm/token-holders/)** - Get top holders of any token
-- **[EVM Transfers API](https://docs.bitquery.io/docs/schema/evm/transfers/)** - Monitor token transfers
-- **[EVM DEX Trades API](https://docs.bitquery.io/docs/schema/evm/dextrades/)** - Track trading activity
+- **[EVM Balance Updates API](/docs/schema/evm/balances/)** - Track wallet balance changes
+- **[EVM Token Holders API](/docs/schema/evm/token-holders/)** - Get top holders of any token
+- **[EVM Transfers API](/docs/schema/evm/transfers/)** - Monitor token transfers
+- **[EVM DEX Trades API](/docs/schema/evm/dextrades/)** - Track trading activity
 
 ### Solana APIs
 
@@ -279,5 +260,5 @@ Maintain audit trails of supply changes for regulatory compliance and financial 
 2. **Try in IDE**: Test queries in the [Bitquery IDE](https://ide.bitquery.io/)
 3. **Integrate**: Use the GraphQL endpoint in your application
 
-For more information on authentication and API usage, see our [Getting Started Guide](https://docs.bitquery.io/docs/start/first-query/).
+For more information on authentication and API usage, see our [Getting Started Guide](/docs/start/first-query/).
 

@@ -13,7 +13,6 @@ keywords:
   - Balance Change Reason Codes
   - Real-time Balance Updates
 ---
-
 # Base Transaction Balance Tracker API - Complete Guide
 
 ## What is Transaction Balance Tracker?
@@ -36,8 +35,8 @@ Our Transaction Balance Tracker APIs track balance changes across different scen
 New to Transaction Balance Tracker? Here's how to get started:
 
 1. **[Create a free account](https://ide.bitquery.io/)** - Get instant access to our GraphQL IDE
-2. **[Generate your API key](https://docs.bitquery.io/docs/authorization/how-to-generate/)** - Required for API access
-3. **[Run your first query](https://docs.bitquery.io/docs/start/first-query/)** - Learn the basics in 5 minutes
+2. **[Generate your API key](/docs/authorization/how-to-generate/)** - Required for API access
+3. **[Run your first query](/docs/start/first-query/)** - Learn the basics in 5 minutes
 4. **[Explore examples](#base-transaction-balance-tracker-apis)** - Copy-paste ready queries below
 
 Need help crafting a query or subscription? Message us on [support](https://t.me/Bloxy_info).
@@ -58,11 +57,11 @@ Get live Base balance updates through our streaming solutions:
 - **GraphQL Subscriptions**: Convert any query to a live stream by changing `query` to `subscription`
 - **Kafka Streaming**: High-throughput streaming for enterprise applications
 
-See examples and code snippets [here](https://docs.bitquery.io/docs/subscriptions/websockets/) for GraphQL subscription implementation, and learn about [Kafka streaming](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) for high-volume use cases.
+See examples and code snippets [here](/docs/subscriptions/websockets/) for GraphQL subscription implementation, and learn about [Kafka streaming](/docs/streams/kafka-streaming-concepts/) for high-volume use cases.
 
 ## Base Transaction Balance Tracker APIs
 
-### [Base Transaction Balance Tracker](https://docs.bitquery.io/docs/blockchain/Base/transaction-balance-tracker/base-transaction-balance-tracker)
+### [Base Transaction Balance Tracker](/docs/blockchain/Base/transaction-balance-tracker/base-transaction-balance-tracker)
 
 The core Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the Base network, including detailed information about the reason for each balance change. Track native ETH, ERC-20 tokens, and NFTs with pre/post balances, USD values, and balance change reason codes.
 
@@ -73,7 +72,7 @@ The core Transaction Balance Tracker API provides real-time balance updates for 
 - Track ERC-20, ERC-721, and ERC-1155 tokens
 - Access pre and post balance values
 
-### [Base Miner Balance Tracker](https://docs.bitquery.io/docs/blockchain/Base/transaction-balance-tracker/base-miner-balance-tracker)
+### [Base Miner Balance Tracker](/docs/blockchain/Base/transaction-balance-tracker/base-miner-balance-tracker)
 
 Monitor Base miner balances, mining rewards, uncle block rewards, and transaction fee rewards. Track historical and real-time mining activity across the Base network.
 
@@ -84,7 +83,7 @@ Monitor Base miner balances, mining rewards, uncle block rewards, and transactio
 - Filter by specific miner addresses
 - Historical mining reward data
 
-### [Base MEV Balance Tracker](https://docs.bitquery.io/docs/blockchain/Base/transaction-balance-tracker/base-mev-balance-tracker)
+### [Base MEV Balance Tracker](/docs/blockchain/Base/transaction-balance-tracker/base-mev-balance-tracker)
 
 Track MEV (Maximal Extractable Value) related balance changes including transaction fee rewards, block builder rewards, and other MEV extraction activities. Monitor MEV bots and block builders in real-time.
 
@@ -95,7 +94,7 @@ Track MEV (Maximal Extractable Value) related balance changes including transact
 - Track large MEV transactions
 - Aggregate MEV reward statistics
 
-### [Base Self-Destruct Balance Tracker](https://docs.bitquery.io/docs/blockchain/Base/transaction-balance-tracker/base-self-destruct-balance-api)
+### [Base Self-Destruct Balance Tracker](/docs/blockchain/Base/transaction-balance-tracker/base-self-destruct-balance-api)
 
 Monitor contract self-destruct events, ephemeral contracts (like MEV bots), and security incidents. Track contracts that self-destruct and addresses that receive funds from self-destructed contracts.
 

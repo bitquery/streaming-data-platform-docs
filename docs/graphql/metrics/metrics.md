@@ -22,5 +22,3 @@ Consider using metrics in every query to the [archive database](/docs/graphql/da
 Metrics can be also used in subscriptions, refer to [Subscription on Aggregated Metrics](/docs/graphql/capabilities/subscription_aggregates/) for details.
 :::
 
-
-

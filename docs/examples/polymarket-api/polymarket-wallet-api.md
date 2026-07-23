@@ -10,10 +10,9 @@ keywords:
   - prediction market user data
   - Polymarket bridge API
 ---
-
 # Wallet & User Activity API
 
-Get **user- and wallet-level data** for Polymarket: recent activity, positions, trade volume, and market counts. Use Bitquery GraphQL to analyze trader behavior by wallet address, and combine with the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/) overview for trades and market data.
+Get **user- and wallet-level data** for Polymarket: recent activity, positions, trade volume, and market counts. Use Bitquery GraphQL to analyze trader behavior by wallet address, and combine with the [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) overview for trades and market data.
 
 ## Check if an address ever interacted with Polymarket (on-chain transfers)
 
@@ -116,17 +115,16 @@ Replace `trader` with any Polygon wallet address (EOA or proxy wallet).
 | **Public profile by wallet**        | Polymarket Gamma API                            | `GET /public-profile?address=<wallet>` (no auth)                   |
 | **Deposits & withdrawals**          | Polymarket Bridge API                           | Supported assets, deposit/withdrawal addresses, transaction status |
 
-
 ---
 
 ## Related APIs
 
 | Need                                           | API                                                                                                                                                       |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Trades, prices, volume**                     | [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/) · [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/) |
-| **Filter by market slug, condition ID, token** | [Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api/)                                                   |
-| **Settlements & redemptions**                  | [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/)                                        |
-| **Market lifecycle & resolution**              | [Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api/)                                                 |
+| **Trades, prices, volume**                     | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) · [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/) |
+| **Filter by market slug, condition ID, token** | [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/)                                                   |
+| **Settlements & redemptions**                  | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/)                                        |
+| **Market lifecycle & resolution**              | [Prediction Market API](/docs/examples/prediction-market/prediction-market-api/)                                                 |
 | **On-chain contracts & events**                | Main Polymarket Contract (on-chain)                                               |
 
 ---

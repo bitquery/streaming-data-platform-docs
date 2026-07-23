@@ -21,22 +21,6 @@ keywords:
   - Bitquery Bags.fm Trading API
   - Bitquery Bags.fm Events API
 ---
-
-<head>
-<meta name="title" content="Bags.fm API on Robinhood | Trades, Prices, OHLCV & Streams"/>
-<meta name="description" content="Query and stream Bags.fm trades on Robinhood with Bitquery: live trades, prices, OHLCV, market cap, whale trades, top traders, and bonding-curve events."/>
-<meta name="keywords" content="Bags.fm API, Bags.fm Robinhood API, Bags.fm trades API, Bags.fm price API, OHLCV for Bags.fm tokens, Bags.fm market cap API, Bags.fm whale trades, Bags.fm top traders, Bags TokensBought event, Bags TokensSold event, bags_v2 protocol, Bitquery Bags.fm Trading API"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Bags.fm API on Robinhood | Trades, Prices, OHLCV & Streams"/>
-<meta property="og:description" content="Real-time and historical Bags.fm token trades, USD prices, OHLCV, market cap, whale trades, top traders, and raw bonding-curve TokensBought/TokensSold events via Bitquery."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Bags.fm API on Robinhood | Trades, Prices, OHLCV & Streams"/>
-<meta property="twitter:description" content="Real-time and historical Bags.fm token trades, USD prices, OHLCV, market cap, whale trades, top traders, and raw bonding-curve events via Bitquery."/>
-</head>
-
 # Bags.fm API on Robinhood
 
 **[Bags.fm](https://bags.fm/)** is a token launchpad on the **Robinhood** network where tokens trade on a bonding-curve AMM. This guide focuses on **Bags.fm trading data** — live and historical trades, USD prices, OHLCV/K-line candles, market cap, whale trades, top traders, and the raw bonding-curve `TokensBought`/`TokensSold` events — using Bitquery's `Trading` and `EVM(network: robinhood)` APIs.

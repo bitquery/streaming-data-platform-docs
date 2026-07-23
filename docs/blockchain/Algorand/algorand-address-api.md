@@ -10,7 +10,6 @@ keywords:
   - Algorand GraphQL
   - Bitquery Algorand
 ---
-
 # Algorand Address API
 
 The Address API gives you native ALGO balances for one or many accounts, plus smart contract details — bytecode and source — for application addresses. Use it for wallet dashboards, treasury monitoring, and inspecting on-chain program code without running your own indexer.
@@ -79,5 +78,5 @@ Returns the bytecode and source of an Algorand application address. Add the `bal
 
 ## Related resources
 
-- [Algorand Transfers API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-transfers-api) — ALGO and ASA transfer history per address
-- [Algorand Coinpath API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-coinpath-api) — multi-hop fund flow tracing
+- [Algorand Transfers API](/docs/blockchain/Algorand/algorand-transfers-api) — ALGO and ASA transfer history per address
+- [Algorand Coinpath API](/docs/blockchain/Algorand/algorand-coinpath-api) — multi-hop fund flow tracing

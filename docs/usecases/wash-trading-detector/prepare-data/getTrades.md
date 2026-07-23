@@ -1,8 +1,7 @@
 ---
 title: "Fetching Solana DEX Trades"
-description: "Bitquery how-to guide: Fetching Solana DEX Trades."
+description: "This module connects to the Bitquery GraphQL API to fetch latest Solana DEX trade data. The trades returned are used throughout the project for labeling, model training, and prediction."
 ---
-
 # Fetching Solana DEX Trades
 
 This module connects to the Bitquery GraphQL API to fetch latest Solana DEX trade data. The trades returned are used throughout the project for labeling, model training, and prediction.

@@ -3,7 +3,6 @@ sidebar_position: 1
 title: "Generate a Bitquery API Token"
 description: "Create OAuth applications and generate Bitquery access tokens from the account Authorization menu."
 ---
-
 # How to Generate a Token
 
 In this section, we will see how OAuth is used to generate a token.
@@ -110,7 +109,6 @@ Ensure that `scope=api` is mentioned in the payload,
 import requests
 import json
 
-
 def oAuth_example():
 
   url = "https://oauth2.bitquery.io/oauth2/token"
@@ -131,7 +129,6 @@ def oAuth_example():
   }
 
   //use the token to send a request
-
 
 oAuth_example()
 ```

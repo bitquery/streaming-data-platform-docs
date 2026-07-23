@@ -11,13 +11,11 @@ keywords:
   - real-time Solana DEX API
   - Bitquery Pump.fun
 ---
-
 # Understanding Pump.fun: From Launchpad to PumpSwap
 
 :::tip Need real-time Pump.fun & PumpSwap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Pump.fun & PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Pump.fun & PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Pump.fun & PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Pump.fun & PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Pump.fun is a Solana-based memecoin launchpad that has reshaped how tokens are created and traded. At its core is a bonding curve model that lets anyone launch a token with a fixed supply of 1 billion tokens, of which around 800 million are made available for bonding.
 
@@ -35,23 +33,6 @@ This helps identify tokens nearing sell-out, a common signal for tokens “about
 Once a token reaches full bonding (100%), it automatically migrates to PumpSwap, Pump.fun’s native AMM DEX. From there, it trades like any other Solana token—no manual listing is needed; the system handles everything.
 
 To help developers, traders, and analysts follow this journey, Bitquery offers a comprehensive real-time API suite that spans the entire lifecycle of a Pump.fun token. Let’s walk through it:
-
-<head>
-  <meta name="title" content="Pump.fun to PumpSwap API - Token Migration Tracking"/>
-  <meta name="description" content="Track Pump.fun token migrations to PumpSwap in real time. Bonding curve progress, graduation events, and DEX data via Bitquery API."/>
-  <meta name="keywords" content="Pump.fun API, Solana memecoins, PumpSwap migration, Pump.fun token lifecycle, on-chain trading data, real-time blockchain API, Solana Shred Streams, token bonding curve, crypto analytics, Bitquery Pump.fun, DEX trades, token market cap, Solana developer tools"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Pump.fun to PumpSwap API - Token Migration Tracking"/>
-  <meta property="og:description" content="Track Pump.fun token migrations to PumpSwap in real time. Bonding curve progress, graduation events, and DEX data via Bitquery API."/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Pump.fun to PumpSwap API - Token Migration Tracking"/>
-  <meta property="twitter:description" content="Track Pump.fun token migrations to PumpSwap in real time. Bonding curve progress and DEX data via Bitquery API."/>
-</head>
 
 ## Track New Token Creations in Real-Time
 
@@ -161,7 +142,7 @@ Bitquery offers three main Kafka topics for Solana:
 - `solana.tokens.proto` — covers token transfers, supply changes, and balance updates at both the account and instruction level
 - `solana.transactions.proto` — delivers detailed data for blocks, transactions, and instructions
 
-You can find more details about the Solana Shred Streams provided by Bitquery [here](https://docs.bitquery.io/docs/streams/protobuf/chains/Solana-protobuf/) and Python code examples [here](https://docs.bitquery.io/docs/streams/protobuf/kafka-protobuf-python/).
+You can find more details about the Solana Shred Streams provided by Bitquery [here](/docs/streams/protobuf/chains/Solana-protobuf/) and Python code examples [here](/docs/streams/protobuf/kafka-protobuf-python/).
 
 ## Conclusion
 

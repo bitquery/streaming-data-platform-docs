@@ -14,7 +14,6 @@ keywords:
   - PredictionManagements commodity
   - PredictionTrades commodity
 ---
-
 # Polymarket Commodity API — Gold, Crude Oil & Commodity Markets
 
 Query **commodity-related prediction markets** on Polymarket: **Gold (GC)** (e.g. “Gold Up or Down”), **Crude Oil**, and other commodity price-direction markets. Use **PredictionManagements** for market creation and resolution events, **PredictionTrades** for prices and volume, and **PredictionSettlements** for redemptions and top redeemers. All data is on Polygon (`network: matic`).
@@ -29,7 +28,7 @@ Click the **"Get API"** buttons on any market page to get ready-to-use GraphQL q
 :::
 
 :::note API Key Required
-To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/).
+To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/).
 :::
 
 ---
@@ -45,7 +44,7 @@ Markets are filtered by **Question.Title** using case-insensitive keywords. Use 
 | **MarketId** | Specific market (prices, OHLC, volume) | `Question.MarketId` (replace with your market ID) |
 | **ProtocolName** | Polymarket only | `Marketplace.ProtocolName: "polymarket"` |
 
-**Network:** Polygon (`network: matic`). For full lifecycle and trade APIs, see the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api) overview and [Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api).
+**Network:** Polygon (`network: matic`). For full lifecycle and trade APIs, see the [Polymarket API](/docs/examples/polymarket-api/polymarket-api) overview and [Prediction Market API](/docs/examples/prediction-market/prediction-market-api).
 
 ---
 
@@ -607,4 +606,4 @@ For **ultra-low-latency** consumption, prediction market data (including commodi
 - **`matic.predictions.proto`** — Raw prediction market events (creations, resolutions, trades)
 - **`matic.broadcasted.predictions.proto`** — Mempool prediction market data
 
-Kafka requires **separate credentials**. See [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/). For access, [contact support](https://t.me/bloxy_info) or email support@bitquery.io.
+Kafka requires **separate credentials**. See [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/). For access, [contact support](https://t.me/bloxy_info) or email support@bitquery.io.

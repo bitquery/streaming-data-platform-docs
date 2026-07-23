@@ -25,7 +25,6 @@ do not use ```offset``` for pagination of the result, unless you sure that the r
 modified or added between the queries and also have strong ordering
 :::
 
-
 ## limitBy
 
 ```limitBy``` limits the result size for every value of the supplied attribute

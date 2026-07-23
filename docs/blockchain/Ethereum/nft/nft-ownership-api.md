@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "NFT Ownership API"
-description: "Bitquery blockchain API docs: NFT Ownership API."
+description: "The NFT Ownership API can be used to retrieve information about the ownership of a specific NFT ( Non-Fungible Token ) on the supported blockchain. For instance using this we can access the owners of an NFT including their addresses and associated metadata and also we can retrieve a list of the…"
 ---
 # NFT Ownership API
 
@@ -143,14 +143,11 @@ query MyQuery {
   }
 }
 
-
 ```
-
 
 ## Past (churned) holders of tokens
 
 Check past (churned) token holders of a NFT token [using following query](https://ide.bitquery.io/past-token-holder-of-a-token_1).
-
 
 ```
 {

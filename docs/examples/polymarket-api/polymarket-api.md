@@ -30,7 +30,7 @@ The Bitquery Polymarket API provides prediction market data on Polygon via Graph
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
 
-Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 :::note Dataset
@@ -43,42 +43,41 @@ Polymarket prediction-market data on Polygon requires **`dataset: realtime`** (~
 
 Bitquery provides **trades and prices** (buy/sell activity, volume, outcome prices), **positions and redemptions** (splits, merges after resolution), **market lifecycle** (creation, resolution, oracle outcomes), **market metadata** (condition ID, slug, token filters via CTF Exchange), **wallet activity** (volume and market counts by address), and **real-time streaming** (Kafka for trades and settlements). All data is on Polygon (`network: matic`) with **`dataset: realtime`** (about the **last 7 days**). Use the links below to find the right API.
 
-
 ### How do I get Polymarket trades and prices?
 
-Use the **[Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api)** to query buy/sell activity, track prices, and monitor volume across Polymarket.
+Use the **[Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api)** to query buy/sell activity, track prices, and monitor volume across Polymarket.
 
-[→ Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api)
+[→ Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api)
 
 ### How do I track positions and redemptions?
 
-Use the **[Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api)** to query splits, merges, and redemptions after market resolution.
+Use the **[Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api)** to query splits, merges, and redemptions after market resolution.
 
-[→ Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api)
+[→ Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api)
 
 ### How do I get market lifecycle data?
 
-Use the **[Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api)** to query market creation, resolution, and complete lifecycle events.
+Use the **[Prediction Market API](/docs/examples/prediction-market/prediction-market-api)** to query market creation, resolution, and complete lifecycle events.
 
-[→ Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api)
+[→ Prediction Market API](/docs/examples/prediction-market/prediction-market-api)
 
 ### How do I query Polymarket CTF exchange data (condition ID, slug, token)?
 
-Use the **[Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api)** (CTF Exchange) to query market data by slug, condition ID, outcome token, or event. Combine with [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api) and [Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api) for full lifecycle.
+Use the **[Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api)** (CTF Exchange) to query market data by slug, condition ID, outcome token, or event. Combine with [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api) and [Prediction Market API](/docs/examples/prediction-market/prediction-market-api) for full lifecycle.
 
-[→ Polymarket Markets API (CTF Exchange)](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api)
+[→ Polymarket Markets API (CTF Exchange)](/docs/examples/polymarket-api/polymarket-markets-api)
 
 ### How do I get Polymarket wallet and user activity?
 
-Use the **[Polymarket Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api)** to query recent activity, volume, and market counts by wallet address.
+Use the **[Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api)** to query recent activity, volume, and market counts by wallet address.
 
-[→ Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api)
+[→ Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api)
 
 ### How do I build TVL, open-interest-style metrics, maker/taker splits, and order-flow analytics?
 
-Use the **[Polymarket Advanced Analytics API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-advanced-analytics-api)** for GraphQL examples: USDC balances in core contracts, daily volume and maker/taker splits, order-flow by market, whale-trade subscriptions, settlement flows, and top markets by volume.
+Use the **[Polymarket Advanced Analytics API](/docs/examples/polymarket-api/polymarket-advanced-analytics-api)** for GraphQL examples: USDC balances in core contracts, daily volume and maker/taker splits, order-flow by market, whale-trade subscriptions, settlement flows, and top markets by volume.
 
-[→ Polymarket Advanced Analytics API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-advanced-analytics-api)
+[→ Polymarket Advanced Analytics API](/docs/examples/polymarket-api/polymarket-advanced-analytics-api)
 
 ### How do I stream Polymarket data in real time?
 
@@ -91,7 +90,7 @@ Available Kafka topics:
 
 Note: Kafka streaming requires separate credentials. [Contact support](https://t.me/bloxy_info) or email support@bitquery.io for access.
 
-[→ Kafka Streams Documentation](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts)
+[→ Kafka Streams Documentation](/docs/streams/kafka-streaming-concepts)
 
 ---
 
@@ -195,11 +194,9 @@ subscription PredictionTradesStream {
 }
 ```
 
-
-
 ### How do I filter Polymarket trades by condition_id or asset ID?
 
-Use `PredictionManagements` with `OutcomeToken.AssetId` or `Condition.Id` in the where clause. For condition_id, market_slug, and combined filters, see the [Polymarket Markets API (CTF Exchange)](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api/).
+Use `PredictionManagements` with `OutcomeToken.AssetId` or `Condition.Id` in the where clause. For condition_id, market_slug, and combined filters, see the [Polymarket Markets API (CTF Exchange)](/docs/examples/polymarket-api/polymarket-markets-api/).
 
 [Run query](https://ide.bitquery.io/Filter-markets-by-asset-ID-Polymarket)
 
@@ -273,7 +270,6 @@ query MarketsByAssetId($assetIds: [String!]) {
   ]
 }
 ```
-
 
 ### How do I get Polymarket markets ranked by volume?
 
@@ -582,7 +578,6 @@ query {
 }
 ```
 
-
 ## How do I count trades for a specific Polymarket trader?
 
 Use `PredictionTrades` with `any` filter on `Buyer` or `Seller` to return the total trade count for a wallet. Add `ProtocolName: "polymarket"` to restrict to Polymarket only. Replace the address with your target wallet.
@@ -608,7 +603,6 @@ query {
 ```
 
 ---
-
 
 <FAQ
   items={[

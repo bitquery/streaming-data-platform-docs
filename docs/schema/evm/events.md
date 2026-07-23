@@ -1,33 +1,7 @@
 ---
 title: "EVM Smart Contract Events & logs API"
-description: "Bitquery schema reference for Events: fields, types, and query patterns."
+description: "Get Ethereum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events."
 ---
-<head>
-<meta name="title" content="EVM Smart Contract Events & logs API"/>
-
-<meta name="description" content="Get Ethereum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events."/>
-
-<meta name="keywords" content="Ethereum, Smart contract events, USDT contract, Ethereum event monitoring, Event signature, event timestamp, event tracking, Contract signature, Ethereum event"/>
-
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-
-<meta property="og:title" content="EVM Smart Contract Events & logs API" />
-
-<meta property="og:description" content="Get Ethereum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events."/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-
-<meta property="twitter:title" content="EVM Smart Contract Events & logs API" />
-
-<meta property="twitter:description" content="Get Ethereum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events." />
-</head>
-
 Smart contract events and logs are an important feature of Ethereum smart contracts that allow developers to track and record specific actions or data on the blockchain.
 You can retrieve data on blockchain calls and logs from the blockchain network. You can find more examples [here](/docs/blockchain/Ethereum/events/events-api/)
 

@@ -10,14 +10,13 @@ keywords:
   - Robinhood token transfers api
   - Robinhood wallet transfers api
 ---
-
 # Robinhood Transfers
 
 Bitquery exposes **Robinhood** transfer data through the **EVM Transfers** APIs. Use `network: robinhood` on the `EVM` root to scope queries and subscriptions to Robinhood.
 
 :::tip Related docs
-- [ERC20 Token Transfers API (Ethereum)](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api/)
-- [EVM Transfers](https://docs.bitquery.io/docs/schema/evm/transfers/)
+- [ERC20 Token Transfers API (Ethereum)](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api/)
+- [EVM Transfers](/docs/schema/evm/transfers/)
 - [Robinhood Trades](/docs/blockchain/robinhood/robinhood-trades)
 :::
 

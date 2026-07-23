@@ -10,7 +10,6 @@ S3 buckets often store sensitive or valuable data. By using AWS Lambda as an int
 
 Lambda functions allow you to implement custom logic or preprocessing steps before fetching data from S3. This could involve data transformations, validations, or any other custom operations required before responding to the GraphQL query.
 
-
 ### Prerequisites:
 1. An AWS account with permissions to access AWS AppSync and Lambda.
 2. Existing Lambda function(s) to connect with AppSync. Read more on how to create Lambda function for blockchain data [here](/docs/cloud/examples/lambda-functions/)

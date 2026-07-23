@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Ethereum Token Market Cap API"
-description: "Bitquery blockchain API docs: Ethereum Token Market Cap API."
+description: "Stream and query Ethereum ERC-20 market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API"
 ---
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 
@@ -10,21 +10,6 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens traded on **Ethereum**. Rows are tied to a time **interval**; filter Ethereum assets via token/currency **`Id`** (for example `eth:` plus the contract address).
 
 For schema details and field meanings, see the **[Tokens cube](/docs/trading/crypto-price-api/tokens)** and **[Supply fields](/docs/trading/crypto-price-api/supply-fields)**.
-
-<head>
-<meta name="title" content="Ethereum Token Market Cap API | Trading Tokens"/>
-<meta name="description" content="Stream and query Ethereum ERC-20 market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API."/>
-<meta name="keywords" content="ethereum token market cap, erc20 market cap api, token fdv api, trading tokens api, bitquery trading, ethereum token supply price"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Ethereum Token Market Cap API"/>
-<meta property="og:description" content="Real-time streams and queries for Ethereum token market cap, supply, and price via Trading.Tokens."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Ethereum Token Market Cap API"/>
-<meta property="twitter:description" content="Real-time streams and queries for Ethereum token market cap, supply, and price via Trading.Tokens."/>
-</head>
 
 :::note Trading API and EVM addresses
 In the **Trading** API, use **lowercase** hex for EVM contract addresses in token/currency **`Id`** values (e.g. `eth:0xabc…`, not checksum `0xAbC…`).

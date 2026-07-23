@@ -20,9 +20,8 @@ import FAQ from "@site/src/components/FAQ";
 # BSC API Documentation
 
 :::tip Building a trading app or DEX UI on BNB Chain (BSC)?
-For **real-time trades and prices on BNB Chain (BSC)** (and the last ~30 days), use the curated [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. For **historical BNB Chain (BSC) data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
+For **real-time trades and prices on BNB Chain (BSC)** (and the last ~30 days), use the curated [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. For **historical BNB Chain (BSC) data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
 :::
-
 
 In this section we will see how to fetch data on different tokens, transactions, DEXs like Uniswap, Pancakeswap, Four Meme, liquidity pools, and slippage data etc via APIs and Streams.
 
@@ -44,16 +43,15 @@ Bitquery BSC APIs are very flexible, you can fetch trade, transaction, balance, 
 | No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions | Delivers pre-parsed, enriched Protocol-Buffers events (DEX trades, token transfers and transactions) |
 | Ideal for submitting transactions | Great for real-time data and historical backtesting without running your own indexer | Great for Enterprise usage with built-in replication/failover and no node ops or custom parsing needed |
 
-Read more about Kafka streams [here](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
+Read more about Kafka streams [here](/docs/streams/protobuf/chains/EVM-protobuf/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
 
 ### Does Bitquery support BSC Websocket and BSC Webhooks?
 
-Bitquery supports websocket and webhooks, you can convert most of the graphQL APIs into graphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More [code samples available here](https://docs.bitquery.io/docs/subscriptions/websockets/)
+Bitquery supports websocket and webhooks, you can convert most of the graphQL APIs into graphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More [code samples available here](/docs/subscriptions/websockets/)
 
 ## Can I monitor BSC pending transactions using Bitquery? {#can-i-monitor-bsc-pending-transactions-using-bitquery}
 
 **Yes.** Use **GraphQL subscriptions** with **`EVM(network: bsc, mempool: true)`** on the shapes documented for mempool (see [mempool subscriptions](/docs/subscriptions/mempool-subscriptions/) and the [Ethereum mempool API](/docs/blockchain/Ethereum/mempool/mempool-api/)—the same patterns apply to **BSC**). For **lower-latency** broadcast data, use **Kafka** streams as described on the **[BSC mempool stream](/docs/blockchain/BSC/bsc-mempool-stream/)** page. You need a valid **V2 OAuth token** for requests outside the IDE ([authorization](/docs/authorization/how-to-generate/)).
-
 
 ## BSC DEX APIs
 

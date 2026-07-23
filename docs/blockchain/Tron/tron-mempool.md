@@ -1,32 +1,10 @@
 ---
 title: "Tron Mempool API"
-description: "Bitquery blockchain API docs: Tron Mempool API."
+description: "Get Mempool data through our powerful and highly scalabe Mempool API. Access all information about pricing history, Tron Mempool transactions, and Mempool trades"
 ---
-
 # Tron Mempool API
 
 In this section we'll have a look at some examples using the Tron Mempool API.
-
-<head>
-<meta name="title" content="Tron Mempool API - The Ultimate Solution to get your Mempool data"/>
-<meta name="description" content="Get Mempool data through our powerful and highly scalabe Mempool API. Access all information about pricing history, Tron Mempool transactions, and Mempool trades."/>
-<meta name="keywords" content="Tron Mempool API, Mempool trades API, Mempool api, Mempool pricing history api, Mempool python api, rarible api, opensea api, Mempool api docs, Mempool crypto api,Tron network api, Tron web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Tron Mempool API - The Ultimate Solution to get your Mempool data"
-/>
-<meta
-  property="og:description"
-  content="Get Mempool data through our powerful and highly scalabe Mempool API. Access all information about pricing history, Mempool balances, and Mempool trades."
-/>
-</head>
 
 ## Latest Mempool Transfers
 
@@ -50,7 +28,6 @@ subscription {
     }
   }
 }
-
 
 ```
 

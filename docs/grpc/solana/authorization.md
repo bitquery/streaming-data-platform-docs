@@ -3,10 +3,9 @@ title: "Solana gRPC Authentication - CoreCast API Token"
 description: "Authenticate Bitquery Solana gRPC streams (CoreCast). Configure API token for corecast.bitquery.io. Metadata, config.yaml, 401 debug."
 keywords: ["Solana gRPC auth", "CoreCast authentication", "grpc solana token", "bitquery api token"]
 ---
-
 # Authentication
 
-To access Bitquery's Solana gRPC streams (CoreCast), you must authenticate every stream using an **[authorization token](https://account.bitquery.io/user/api_v2/access_tokens)**. This token is provided in your configuration file and automatically added to the gRPC metadata before starting a stream. Check the [documentation](https://docs.bitquery.io/docs/authorization/how-to-generate/) to create a new token.
+To access Bitquery's Solana gRPC streams (CoreCast), you must authenticate every stream using an **[authorization token](https://account.bitquery.io/user/api_v2/access_tokens)**. This token is provided in your configuration file and automatically added to the gRPC metadata before starting a stream. Check the [documentation](/docs/authorization/how-to-generate/) to create a new token.
 
 ---
 

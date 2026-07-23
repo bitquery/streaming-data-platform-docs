@@ -1,9 +1,8 @@
 ---
 sidebar_position: 6
 title: "Widget Creation"
-description: "Bitquery how-to guide: Widget Creation."
+description: "Now that we have setup a custom DataFeed, we need to create the TradingView Widget."
 ---
-
 # Widget Creation
 
 Now that we have setup a custom DataFeed, we need to create the TradingView Widget.
@@ -155,5 +154,4 @@ export default TVChartContainer;
 ```
 
 - The component renders a `div` where the TradingView chart will be displayed, with the specified height and width.
-
 

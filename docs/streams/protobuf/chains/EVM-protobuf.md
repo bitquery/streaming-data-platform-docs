@@ -1,8 +1,7 @@
 ---
 title: "EVM Streams"
-description: "Bitquery streaming docs: EVM Streams."
+description: "This section provides details about Bitquery's EVM Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data."
 ---
-
 # EVM Streams
 
 This section provides details about Bitquery's EVM Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data.
@@ -103,7 +102,7 @@ Each transaction includes:
   - `PostBalance` — Balance after the transaction
   - `BalanceChangeReasonCode` — Numeric code describing why the balance changed
 
-(see [Transaction Balance Tracker documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) for code meanings)
+(see [Transaction Balance Tracker documentation](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) for code meanings)
 
 ### Token Data
 
@@ -159,7 +158,7 @@ For detailed information about DEXPools, including:
 - When DEXPool records are emitted for different protocol versions (Uniswap V2, V3, V4)
 - Filtering and advanced use cases
 
-See the [DEXPools Cube on EVM Chains documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/).
+See the [DEXPools Cube on EVM Chains documentation](/docs/cubes/evm-dexpool/).
 
 ### Layer 2 Support
 

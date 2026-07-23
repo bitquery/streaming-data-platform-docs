@@ -22,7 +22,6 @@ keywords:
   - Flap.sh VanityTokenCreated
   - Flap.sh MsgSent social event
 ---
-
 # Flap.sh API on Robinhood
 
 **Flap.sh** is a token launchpad on the **Robinhood** network. This guide shows how to track **newly launched Flap.sh tokens**, **Flap.sh trades**, and **lifecycle events** — token graduations, bonding-curve progress, supply changes, tax paid, vanity tokens, and social messages — with Bitquery GraphQL APIs, using the `EVM(network: robinhood)` and `Trading` cubes.

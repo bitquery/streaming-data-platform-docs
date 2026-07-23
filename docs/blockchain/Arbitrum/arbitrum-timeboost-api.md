@@ -1,12 +1,11 @@
 ---
 sidebar_position: 11
 title: "Arbitrum TimeBoost API & Streams"
-description: "Bitquery blockchain API docs: Arbitrum TimeBoost API & Streams."
+description: "Arbitrum sequencers traditionally ordered transactions on a first-come-first-serve (FCFS) basis. TimeBoost introduced an auction-driven priority lane that lets searchers bid for earlier inclusion. With Bitquery’s Stream you can subscribe to every call that interacts with the TimeBoost auction…"
 ---
 # Arbitrum TimeBoost API & Streams
 
 Arbitrum sequencers traditionally ordered transactions on a first-come-first-serve (FCFS) basis. **TimeBoost** introduced an auction-driven priority lane that lets searchers bid for earlier inclusion. With Bitquery’s Stream you can subscribe to every call that interacts with the TimeBoost auction contract and correlate it with other Arbitrum insights described in our [Arbitrum Overview](./).
-
 
 ## Real-time subscription
 

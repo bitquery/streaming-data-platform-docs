@@ -18,7 +18,6 @@ keywords:
   - Web3 data lake
 sidebar_position: 1
 ---
-
 # Blockchain Data Lake
 
 The Bitquery **Blockchain Data Lake** gives you the complete archive of a blockchain. It holds every block from **genesis to the current tip** as structured data that you can stream directly into your own systems. You get the full node dataset without running a node, so there is no syncing, no RPC rate limits, and no indexing infrastructure to operate.
@@ -268,6 +267,6 @@ So you bring the block, our protobuf files describe it, and you parse out transa
 
 ## Related documentation
 
-- [Data in Cloud](https://docs.bitquery.io/docs/cloud/) covers curated, ready-to-use Parquet data dumps for analytics and warehousing.
-- [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) covers real-time blockchain data streams that use the same protobuf schema.
+- [Data in Cloud](/docs/cloud/) covers curated, ready-to-use Parquet data dumps for analytics and warehousing.
+- [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/) covers real-time blockchain data streams that use the same protobuf schema.
 - [streaming_protobuf](https://github.com/bitquery/streaming_protobuf) is the block schema.

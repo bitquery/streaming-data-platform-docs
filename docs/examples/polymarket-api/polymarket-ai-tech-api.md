@@ -13,7 +13,6 @@ keywords:
   - Polymarket Kafka streams
   - Polygon prediction markets AI
 ---
-
 # Polymarket AI & Tech Markets API
 
 Get full access to **Polymarket AI and tech prediction markets** through one API. That covers OpenAI, GPT, Anthropic, AGI, and big-tech bets, with live odds (implied probability), trades, volume, market creation and resolution, and trader activity.
@@ -27,7 +26,7 @@ Bitquery runs **its own blockchain nodes** and **indexes, decodes, and parses** 
 Every query below can be run live by changing `query` to `subscription`.
 
 :::note API Key Required
-To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/).
+To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/).
 :::
 
 ---
@@ -394,7 +393,7 @@ For ultra-low-latency consumption, prediction market data (including AI and tech
 - **`matic.predictions.proto`:** Raw prediction market events (creations, resolutions, trades)
 - **`matic.broadcasted.predictions.proto`:** Mempool prediction market data
 
-Kafka requires separate credentials. See [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/). For access, [contact support](https://t.me/bloxy_info) or email support@bitquery.io.
+Kafka requires separate credentials. See [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/). For access, [contact support](https://t.me/bloxy_info) or email support@bitquery.io.
 
 ---
 
@@ -402,13 +401,13 @@ Kafka requires separate credentials. See [Kafka Streaming Concepts](https://docs
 
 | Need | API |
 | ---- | --- |
-| **Live odds, trades, volume by sport** | [Polymarket Sports API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-sports-api/) |
-| **Commodity markets (gold, oil)** | [Polymarket Commodity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-commodity-api/) |
-| **Bitcoin up or down odds** | [Polymarket Bitcoin API](https://docs.bitquery.io/docs/examples/polymarket-api/bitcoin-polymarket-api/) |
-| **Insider & fresh-wallet detection** | [Polymarket Insider Detection API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-insider-detection-api/) |
-| **Trader realized PnL & win rate** | [Realized PnL & Win Rate for Polymarket Trader](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
-| **Settlements & redemptions** | [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/) |
-| **Real-time: Kafka streams** | [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) |
+| **Live odds, trades, volume by sport** | [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/) |
+| **Commodity markets (gold, oil)** | [Polymarket Commodity API](/docs/examples/polymarket-api/polymarket-commodity-api/) |
+| **Bitcoin up or down odds** | [Polymarket Bitcoin API](/docs/examples/polymarket-api/bitcoin-polymarket-api/) |
+| **Insider & fresh-wallet detection** | [Polymarket Insider Detection API](/docs/examples/polymarket-api/polymarket-insider-detection-api/) |
+| **Trader realized PnL & win rate** | [Realized PnL & Win Rate for Polymarket Trader](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
+| **Settlements & redemptions** | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/) |
+| **Real-time: Kafka streams** | [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/) |
 
 ---
 

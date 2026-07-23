@@ -1,38 +1,10 @@
 ---
 title: "Optimism Transfers API"
-description: "Bitquery blockchain API docs: Optimism Transfers API."
+description: "Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers"
 ---
-
 # Optimism Transfers API
 
 In this section we'll have a look at some examples using the Optimism Transfers API.
-
-<head>
-<meta name="title" content="Optimism Transfers API"/>
-<meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
-<meta name="keywords" content="optimism transfers api, optimism transfers python api, optimism transfers scan api, optimism transfers api docs, transfers crypto api, transfers blockchain api, optimism network api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Optimism Transfers API"
-/>
-<meta
-  property="og:description"
-  content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Optimism Transfers API" />
-<meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
-</head>
 
 # Subscribe to Recent Whale Transactions of a particular currency
 
@@ -66,7 +38,6 @@ subscription {
   }
 }
 
-
 ```
 
 # Sender is a particular address
@@ -99,7 +70,6 @@ subscription {
   }
 }
 
-
 ```
 
 # Subscribe to the latest NFT token transfers on Optimism
@@ -131,8 +101,6 @@ subscription {
     }
   }
 }
-
-
 
 ```
 

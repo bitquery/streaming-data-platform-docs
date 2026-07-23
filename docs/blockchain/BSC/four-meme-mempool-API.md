@@ -7,9 +7,8 @@ import FAQ from "@site/src/components/FAQ";
 # Four Meme Mempool API - Real-Time Pre-Confirmation Monitoring
 
 :::tip Need real-time Four.meme data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Four.meme swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Four.meme data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Four.meme swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Four.meme data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Monitor Four Meme memecoin activity in the BSC mempool before transactions are confirmed on-chain. Track pending trades, new token launches, bonding curve progress, and detect MEV opportunities with Bitquery's ultra-low latency Mempool APIs and Kafka Streams.
 
@@ -20,41 +19,8 @@ For live DEX prices and volume after tokens trade on-chain, browse [DEXrabbit's 
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-<title>Four Meme Mempool API - Real-Time Pre-Confirmation Monitoring | Bitquery</title>
-<meta
-  name="title"
-  content="Four Meme Mempool API - Real-Time Pre-Confirmation Monitoring"
-/>
-<meta
-  name="description"
-  content="Monitor Four Meme memecoin transactions in real-time before confirmation. Track pending trades, token creations, and detect opportunities early with ultra-low latency mempool streams on BSC."
-/>
-<meta
-  name="keywords"
-  content="Four Meme mempool,Four Meme mempool API,Four Meme pending transactions,Four Meme sniper bot,BSC mempool,Four Meme real-time,Four Meme MEV,Four Meme frontrun,Four Meme backrun,memecoin mempool,BSC mempool stream,Four Meme websocket,Four Meme kafka,blockchain mempool,crypto mempool API,Four Meme trading bot,Four Meme API,fourmeme mempool"
-/>
-<meta name="robots" content="index, follow" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="language" content="English" />
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Four Meme Mempool API - Real-Time Pre-Confirmation Monitoring"
-/>
-<meta
-  property="og:description"
-  content="Monitor Four Meme mempool in real-time. Track pending trades, token creations before confirmation on BSC."
-/>
-
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Four Meme Mempool API - Real-Time Pre-Confirmation Monitoring"/>
-<meta property="twitter:description" content="Monitor Four Meme mempool in real-time. Track pending trades, token creations before confirmation on BSC."/>
-</head>
 
 ---
 
@@ -112,7 +78,7 @@ When a transaction is broadcasted to the BSC network but not yet included in a b
 :::tip
 We provide both GraphQL streams (easy to use) and Kafka streams (ultra-low latency) for mempool monitoring. For production MEV and sniper bots, we recommend Kafka streams.
 
-Read more: [Kafka Protobuf Streams for EVM ➤](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/)
+Read more: [Kafka Protobuf Streams for EVM ➤](/docs/streams/protobuf/chains/EVM-protobuf/)
 :::
 
 ---
@@ -828,8 +794,8 @@ message BroadcastedTransactionsMessage {
 
 **Learn More:**
 
-- [Kafka Protobuf Streams Documentation ➤](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
-- [Building a Sniper Bot with Kafka ➤](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
+- [Kafka Protobuf Streams Documentation ➤](/docs/streams/kafka-streaming-concepts/)
+- [Building a Sniper Bot with Kafka ➤](/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 - [Contact Us for Kafka Stream Access ➤](https://t.me/Bloxy_info)
 
 ---
@@ -877,12 +843,12 @@ message BroadcastedTransactionsMessage {
 
 You may also be interested in:
 
-- [Four Meme API Documentation ➤](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
-- [BSC Mempool Stream ➤](https://docs.bitquery.io/docs/blockchain/BSC/bsc-mempool-stream/)
-- [BSC DEX Trades API ➤](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/)
-- [Kafka Protobuf Streams ➤](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/)
-- [WebSocket Subscriptions ➤](https://docs.bitquery.io/docs/authorization/websocket/)
-- [Building a Sniper Bot Tutorial ➤](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
+- [Four Meme API Documentation ➤](/docs/blockchain/BSC/four-meme-api/)
+- [BSC Mempool Stream ➤](/docs/blockchain/BSC/bsc-mempool-stream/)
+- [BSC DEX Trades API ➤](/docs/blockchain/BSC/bsc-dextrades/)
+- [Kafka Protobuf Streams ➤](/docs/streams/protobuf/chains/EVM-protobuf/)
+- [WebSocket Subscriptions ➤](/docs/authorization/websocket/)
+- [Building a Sniper Bot Tutorial ➤](/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 
 ## Need Help?
 

@@ -2,7 +2,7 @@
 draft: true
 sidebar_position: 1
 title: "Usage Patterns"
-description: "Bitquery GraphQL capability: Usage Patterns."
+description: "GraphQL is a language, and the schema is just a restriction how do you use."
 ---
 # Usage Patterns
 

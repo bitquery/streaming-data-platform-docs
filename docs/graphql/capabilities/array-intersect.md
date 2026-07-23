@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "Array Intersection"
-description: "Bitquery GraphQL capability: Array Intersection."
+description: "The arrayintersect feature is an advanced query format that generates an intersection of addresses from specified datasets. You can use the where clause to introduce filters that refine your results according to desired criteria. The output is a list of addresses that share a common link to the…"
 ---
 # Array Intersection
 
@@ -80,6 +80,5 @@ This query will return a response in this format ; as an array consisting of ele
     ]
   }
 }
-
 
 ```

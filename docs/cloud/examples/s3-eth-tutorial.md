@@ -82,7 +82,6 @@ block_headers = block_message_pb2.BlockHeader()
 block_headers.ParseFromString(decompressed_data)
 print('here1')
 
-
 ```
 
 ### Write to JSON files

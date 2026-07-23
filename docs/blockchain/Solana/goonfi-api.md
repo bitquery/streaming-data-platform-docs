@@ -1,36 +1,14 @@
 ---
 title: "GoonFi API"
-description: "Bitquery blockchain API docs: GoonFi API."
+description: "Access real-time and historical data for GoonFi on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders"
 ---
-
 # GoonFi API
 
 :::tip Need real-time GoonFi data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered GoonFi swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical GoonFi data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered GoonFi swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical GoonFi data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
-
-<head>
-  <meta name="title" content="GoonFi API - Solana - Real-time Pools, Trades, Prices, OHLC" />
-  <meta name="description" content="Access real-time and historical data for GoonFi on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders." />
-  <meta name="keywords" content="GoonFi,Solana DEX,GoonFi API,Solana on-chain API,real-time Solana trades,GoonFi pool data,GoonFi token prices,GoonFi OHLC data Solana,DEX trading API,crypto trading API,web3 Solana API,Bitquery GraphQL,GoonFi v2 API,Solana blockchain data" />
-  <meta name="robots" content="index, follow" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="GoonFi API - Solana - Real-time Pools, Trades, Prices, OHLC"
-/>
-<meta property="og:description" content="Explore real-time DEX trades, latest pool creations, token prices, OHLC, and volume insights on GoonFi using our Solana API." />
-
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="GoonFi API - Solana - Real-time Pools, Trades, Prices, OHLC" />
-  <meta property="twitter:description" content="Get rich on-chain insights into GoonFi pools, trades, and tokens with our real-time Solana API." />
-</head>
 
 ## GoonFi Trades in Real-Time
 

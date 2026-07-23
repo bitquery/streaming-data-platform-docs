@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "NFT Metadata API"
-description: "Bitquery blockchain API docs: NFT Metadata API."
+description: "The NFT Metadata API retrieves the metadata of NFT."
 ---
 # NFT Metadata API
 
@@ -46,7 +46,6 @@ Let see an example query that retrieves the metadata of an NFT based on its toke
 -   `orderBy` : Orders the results in descending order based on the Block_Number.
 -   `where` : This parameter specifies the conditions to filter the results by. In this case, the token ID is `4226` and the Currency with the Smart Contract being `0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D`.
 
-
 **Returned Data**
 
 -   `Currency {....}` :  Represent currency details.
@@ -54,7 +53,6 @@ Let see an example query that retrieves the metadata of an NFT based on its toke
 -   `URI`  : Represents the URL associated with the NFT.
 
 You can find the graphql query [here](https://ide.bitquery.io/NFT-metadata_1_1).
-
 
 ## Get the Creator of an NFT
 
@@ -86,7 +84,6 @@ The Following query retrieves the Creator of the NFT.
 -   `orderBy` : Orders the results in descending order based on the Block_Time.
 -   `limit`  : Specifies the maximum results to return. In this query, the limit is 1.
 -   `where` : It filters the results to include only calls made to the smart contract with the specified address `0x23581767a106ae21c074b2276d25e5c3e136a68b` and only includes create call.
-
 
 **Returned Data**
 

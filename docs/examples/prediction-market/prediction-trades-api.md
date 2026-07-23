@@ -13,7 +13,6 @@ keywords:
   - prediction market analytics
   - Bitquery GraphQL prediction
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Prediction Market Trades API
@@ -490,6 +489,5 @@ query CurrentPricePerOutcome {
   }
 }
 ```
-
 
 For market creation and resolution, see [PredictionManagements](../prediction-market-api#predictionmanagements). For settlements (split, merge, redemption), see [Prediction Market Settlements API](../prediction-settlements-api).

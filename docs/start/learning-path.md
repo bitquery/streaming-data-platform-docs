@@ -3,7 +3,6 @@ sidebar_position: 2
 title: "Bitquery Learning Path"
 description: "Guided path from first query to streaming, cubes, and production apps on the Bitquery blockchain data platform."
 ---
-
 # Learning Path: From Beginner to Advanced
 
 This guide provides a structured path to learn Bitquery APIs progressively, from basic concepts to advanced implementations.

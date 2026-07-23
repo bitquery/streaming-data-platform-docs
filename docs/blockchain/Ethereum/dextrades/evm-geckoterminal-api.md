@@ -2,14 +2,14 @@
 sidebar_position: 1
 sidebar_label: GeckoTerminal
 title: "GeckoTerminal EVM API"
-description: "Bitquery blockchain API docs: GeckoTerminal EVM API."
+description: "Get real-time EVM token pairs, trades, prices, buyers, sellers, volumes and DEX analytics—exactly as seen on GeckoTerminal—using Bitquery APIs, streams & cloud"
 ---
 # GeckoTerminal EVM API
 
 Everything you see on the GeckoTerminal EVM dashboard—live pairs, trades, prices, volumes, makers/buyers/sellers, and more—can be accessed via APIs/Streams with Bitquery.
 We expose the same on-chain data via GraphQL APIs, real-time WebSocket streams, and enterprise Kafka topics, with optional cloud connectors (AWS, GCP, Snowflake) for analytics pipelines.
 
-Checkout our [GeckoTerminal Solana API documentation](https://docs.bitquery.io/docs/blockchain/Solana/solana-geckoterminal-api/) if you are interested in getting Solana data which GeckoTerminal shows.
+Checkout our [GeckoTerminal Solana API documentation](/docs/blockchain/Solana/solana-geckoterminal-api/) if you are interested in getting Solana data which GeckoTerminal shows.
 
 :::note
 GeckoTerminal EVM APIs include data apis for EVM chains like Ethereum, Binance Smart Chain(BSC), Arbitrum, Base, Matic, Optimism, etc
@@ -24,29 +24,12 @@ GeckoTerminal EVM APIs include data apis for EVM chains like Ethereum, Binance S
 
 ## Getting Started with EVM
 
-- **[EVM API Examples](https://docs.bitquery.io/docs/blockchain/Ethereum/)** - Complete collection of EVM API examples
-- **[EVM DEX Trades](https://docs.bitquery.io/docs/category/dex-trades/)** - Real-time DEX trading data and analytics
-- **[EVM Subscriptions](https://docs.bitquery.io/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
+- **[EVM API Examples](/docs/blockchain/Ethereum/)** - Complete collection of EVM API examples
+- **[EVM DEX Trades](/docs/category/dex-trades/)** - Real-time DEX trading data and analytics
+- **[EVM Subscriptions](/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
 - **[IDE for EVM](https://graphql.bitquery.io/ide)** - Interactive development environment for testing EVM queries
 
 This guide shows how to retrieve the same EVM DEX data that GeckoTerminal displays—real-time trades, pair stats, volumes, buyers/sellers, and more—using Bitquery APIs, streams, and Kafka.
-
-<Head>
-  <meta name="title" content="GeckoTerminal API for EVM Chains - Live DEX & Token Data" />
-  <meta name="description" content="Get real-time EVM token pairs, trades, prices, buyers, sellers, volumes and DEX analytics—exactly as seen on GeckoTerminal—using Bitquery APIs, streams & cloud." />
-  <meta name="keywords" content="GeckoTerminal API,EVM DEX API,token pair data,crypto API,real-time DEX trades,blockchain analytics,Bitquery,DeFi analytics,Ethereum,BSC,Arbitrum,Polygon,Optimism,Base" />
-  <meta name="robots" content="index, follow" />
-  <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="GeckoTerminal API for EVM Chains - Live DEX & Token Data" />
-  <meta property="og:description" content="Retrieve live EVM token pairs, trade stats, prices, buyers, sellers and volume, just like GeckoTerminal, using Bitquery's API and streaming solutions." />
-
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="GeckoTerminal API | Live DEX & Token Data for EVM" />
-  <meta property="twitter:description" content="Access EVM token pair analytics, trades, volumes, DEX prices and participant metrics as on GeckoTerminal, via Bitquery API and streaming." />
-</Head>
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 
@@ -89,7 +72,6 @@ query TrendingPairs {
     }
   }
 }
-
 
 ```
 
@@ -139,7 +121,6 @@ subscription{
   }
 }
 
-
 ```
 
 ## Get Price of a Token
@@ -172,7 +153,6 @@ query MyQuery {
   }
 }
 
-
 ```
 
 ## Get Liquidity of a specific pair by using its Pair Address
@@ -195,7 +175,6 @@ query MyQuery {
     }
   }
 }
-
 
 ```
 

@@ -1,12 +1,12 @@
 ---
 sidebar_position: 7
 title: "Base Jump API"
-description: "Bitquery blockchain API docs: Base Jump API."
+description: "Track Jump trading-related activity on Base with Bitquery transaction and transfer GraphQL APIs."
 ---
 # Base Jump API
 
-In this section we will see how we can use the [Transaction](https://docs.bitquery.io/docs/cubes/transaction-cube/) 
-and [Calls](https://docs.bitquery.io/docs/graphql-reference/enums/evm-call-compare-fields/) API from Bitquery to get info about trades on Base Jump using one of the token address traded on the platform. For this section the token address is the following - `0xEfC79f30b56f36bc49Bf47e8Dccf969fFF214EeD`.
+In this section we will see how we can use the [Transaction](/docs/cubes/transaction-cube/) 
+and [Calls](/docs/graphql-reference/enums/evm-call-compare-fields/) API from Bitquery to get info about trades on Base Jump using one of the token address traded on the platform. For this section the token address is the following - `0xEfC79f30b56f36bc49Bf47e8Dccf969fFF214EeD`.
 
 ## Get Base Jump Address
 
@@ -79,7 +79,7 @@ query MyQuery {
   }
 }
 ```
-From the results we get a signature named `swap` that will be analysed to get the trades on Base Jump.
+From the results we get a signature named `swap` that will be analyzed to get the trades on Base Jump.
 
 ## Get Trades for Base Jump
 

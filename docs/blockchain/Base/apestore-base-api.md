@@ -4,21 +4,10 @@ description: "Query APE Store trades on Base using Bitquery Transaction and Call
 sidebar_position: 7
 keywords: ["APE Store API", "APE Store Base", "Base blockchain API", "Bitquery Base", "APE Store trades"]
 ---
-
-<head>
-<meta name="title" content="APE Store API - Base Chain Token Trades & Transaction Data"/>
-<meta name="description" content="Query APE Store trades on Base using Bitquery Transaction and Calls APIs. Token address, contract lookup, and trade events."/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="APE Store API - Base Chain"/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="APE Store API - Base"/>
-</head>
-
 # APE Store API
 
-In this section we will see how we can use the [Transaction](https://docs.bitquery.io/docs/cubes/transaction-cube/) 
-and [Calls](https://docs.bitquery.io/docs/graphql-reference/enums/evm-call-compare-fields/) API from Bitquery to get info about trades on APE Store using one of the token address traded on the platform. For this section the token address is the following - `0xb2779752b8abe50e2a06bddd774bf0a40353f867`.
+In this section we will see how we can use the [Transaction](/docs/cubes/transaction-cube/) 
+and [Calls](/docs/graphql-reference/enums/evm-call-compare-fields/) API from Bitquery to get info about trades on APE Store using one of the token address traded on the platform. For this section the token address is the following - `0xb2779752b8abe50e2a06bddd774bf0a40353f867`.
 
 ## Get APE Store Address
 
@@ -92,7 +81,7 @@ query MyQuery {
   }
 }
 ```
-From the results we get a signature named `buy` that will be analysed to get the trades on APE Store.
+From the results we get a signature named `buy` that will be analyzed to get the trades on APE Store.
 
 ## Get Trades for APE Store
 

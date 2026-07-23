@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Polygon (MATIC) Address Balance API"
-description: "Bitquery blockchain API docs: Polygon (MATIC) Address Balance API."
+description: "The Balances API returns current and historical token balances for an address on Polygon (MATIC). To return only non-zero balances, add Amount(selectWhere: { gt: \"0\" }) on the Balance field (not in where). Use dataset: combined or dataset: archive as follows:."
 ---
 # Polygon (MATIC) Address Balance API
 

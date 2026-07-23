@@ -4,17 +4,6 @@ description: "OAuth2-authenticated Usage API on account.bitquery.io. Check billi
 sidebar_position: 4
 keywords: ["Bitquery Usage API", "Bitquery billing API", "API quota", "OAuth2", "account.bitquery.io", "usage tracking"]
 ---
-
-<head>
-<meta name="title" content="Usage API - Track Billing and Quota Programmatically"/>
-<meta name="description" content="OAuth2-authenticated Usage API on account.bitquery.io. Check billing period, plan limits, and current usage with GET /api/usage."/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Bitquery Usage API"/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Bitquery Usage API"/>
-</head>
-
 # Usage API
 
 The **Usage API** exposes OAuth2-authenticated endpoints on [account.bitquery.io](https://account.bitquery.io/) so you can **programmatically track billing period status, plan limits, and consumption** for your Bitquery account.

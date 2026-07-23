@@ -14,7 +14,6 @@ keywords:
   - market resolution
   - outcome tokens
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Prediction Market API

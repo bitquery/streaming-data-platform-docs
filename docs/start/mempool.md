@@ -3,7 +3,6 @@ sidebar_position: 5
 title: "Mempool Data API"
 description: "Query and stream pending mempool transactions with Bitquery before they confirm on-chain."
 ---
-
 # Getting Mempool Data
 
 In the previous section, we saw how to write a subscription query. Now, let's examine the process of obtaining mempool data.

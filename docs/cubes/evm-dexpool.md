@@ -2,16 +2,14 @@
 title: "DEXPools Cube on EVM Chains"
 description: "Learn the Bitquery EVM DEXPools cube — pool state, liquidity fields, filters, and example queries."
 ---
-
 # DEXPools Cube on EVM Chains
 
-This section explains how the dexpool data is built and shared via APIs and [Kafka streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/). It also explains how to understand each entry of the response.
+This section explains how the dexpool data is built and shared via APIs and [Kafka streams](/docs/streams/kafka-streaming-concepts/). It also explains how to understand each entry of the response.
 
 > **Note:** In GraphQL, DEXPools data is accessed through two schema cubes:
 >
 > - **`DEXPoolEvents`**: Provides pool event data (swaps, mints, burns, etc.)
 > - **`DEXPoolSlippages`**: Provides slippage and price impact data for different trade sizes
-
 
 import VideoPlayer from "../../src/components/videoplayer.js";
 
@@ -130,18 +128,18 @@ Everything inside the "where" clause filters; it follows the `AND` condition by 
 ## API Examples
 For blockchain-specific slippage API documentation, see:
 
-- [Arbitrum Slippage API](https://docs.bitquery.io/docs/blockchain/Arbitrum/arbitrum-slippage-api/)
-- [Base Slippage API](https://docs.bitquery.io/docs/blockchain/Base/base-slippage-api/)
-- [BSC Slippage API](https://docs.bitquery.io/docs/blockchain/BSC/bsc-slippage-api/)
-- [Matic Slippage API](https://docs.bitquery.io/docs/blockchain/Matic/matic-slippage-api/)
+- [Arbitrum Slippage API](/docs/blockchain/Arbitrum/arbitrum-slippage-api/)
+- [Base Slippage API](/docs/blockchain/Base/base-slippage-api/)
+- [BSC Slippage API](/docs/blockchain/BSC/bsc-slippage-api/)
+- [Matic Slippage API](/docs/blockchain/Matic/matic-slippage-api/)
 
 For blockchain-specific liquidity API documentation, see:
 
-- [Arbitrum Liquidity API](https://docs.bitquery.io/docs/blockchain/Arbitrum/arbitrum-liquidity-api/)
-- [Base Liquidity API](https://docs.bitquery.io/docs/blockchain/Base/base-liquidity-api/)
-- [BSC Liquidity API](https://docs.bitquery.io/docs/blockchain/BSC/bsc-liquidity-api/)
-- [Ethereum Liquidity API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/)
-- [Matic Liquidity API](https://docs.bitquery.io/docs/blockchain/Matic/matic-liquidity-api/)
+- [Arbitrum Liquidity API](/docs/blockchain/Arbitrum/arbitrum-liquidity-api/)
+- [Base Liquidity API](/docs/blockchain/Base/base-liquidity-api/)
+- [BSC Liquidity API](/docs/blockchain/BSC/bsc-liquidity-api/)
+- [Ethereum Liquidity API](/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/)
+- [Matic Liquidity API](/docs/blockchain/Matic/matic-liquidity-api/)
 
 ## Advanced Use Cases and Processing Patterns
 

@@ -2,14 +2,13 @@
 title: "DEXTradesByTokens Cube"
 description: "Learn the Bitquery DEXTradeByTokens cube — token-expanded trades, filters, and example GraphQL queries."
 ---
-
 # DEXTradesByTokens Cube
 
 :::tip Need real-time data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this cube when you need **historical data older than ~30 days** (with `dataset: combined` or `archive`), custom OHLC intervals, or token-expanded rows.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this cube when you need **historical data older than ~30 days** (with `dataset: combined` or `archive`), custom OHLC intervals, or token-expanded rows.
 :::
 
-> **Before you start**: Not sure when to use DexTradesByTokens vs DexTrades vs Events vs Calls? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case. For a 1-page comparison of these three trade cubes, see [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades).
+> **Before you start**: Not sure when to use DexTradesByTokens vs DexTrades vs Events vs Calls? Read our [Mental Model guide](/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case. For a 1-page comparison of these three trade cubes, see [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades).
 
 The DEXTradesByTokens cube provides comprehensive information about DEX trading data from a token-centric perspective, showing both sides of each trade for every participant. This includes buyer, seller, token prices, pairs, transactions, OHLC data, and more.
 
@@ -130,9 +129,9 @@ Trade {
 
 ## How do I get OHLC in a DEXTradeByTokens query? {#how-do-i-get-ohlc-in-a-dextradebytokens-query}
 
-For OHLC, use the **[Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** (`Trading` → `Tokens` / `Pairs`) as the **main** source—pre-aggregated and simpler. **Use `DEXTradeByTokens` on this page when you need historical OHLC** or when you must derive candles from **raw DEX trades** for a specific token or pool.
+For OHLC, use the **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** (`Trading` → `Tokens` / `Pairs`) as the **main** source—pre-aggregated and simpler. **Use `DEXTradeByTokens` on this page when you need historical OHLC** or when you must derive candles from **raw DEX trades** for a specific token or pool.
 
-Aggregate trades into candles with **`Block { Time(interval: { count, in: minutes | hours | days }) }`** on **`DEXTradeByTokens`**, then derive **open / high / low / close** from **`PriceInUSD`** (or your chain’s price field)—for example **`minimum`** / **`maximum`** of **`Trade_PriceInUSD`** and **`minimum`/`maximum` of `Block_Number`** for open and close. Filter by **`Trade.Currency`** (token address or mint) and optionally **`Trade.Dex`**. The same pattern works on **`EVM`** and **`Solana`**; see also [Solana OHLC API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#solana-ohlc-api).
+Aggregate trades into candles with **`Block { Time(interval: { count, in: minutes | hours | days }) }`** on **`DEXTradeByTokens`**, then derive **open / high / low / close** from **`PriceInUSD`** (or your chain’s price field)—for example **`minimum`** / **`maximum`** of **`Trade_PriceInUSD`** and **`minimum`/`maximum` of `Block_Number`** for open and close. Filter by **`Trade.Currency`** (token address or mint) and optionally **`Trade.Dex`**. The same pattern works on **`EVM`** and **`Solana`**; see also [Solana OHLC API](/docs/blockchain/Solana/solana-dextrades/#solana-ohlc-api).
 
 ```graphql
 {
@@ -165,7 +164,7 @@ Aggregate trades into candles with **`Block { Time(interval: { count, in: minute
 
 ## How do I use DEXTradeByTokens vs DEXTrades for OHLCV? {#how-do-i-use-dextradebytokens-vs-dextrades-for-ohlcv}
 
-For **OHLCV**, treat the **Crypto Price API** as the default—see [when to use which](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/#crypto-price-api-vs-dextradebytoken). Among DEX cubes, prefer **`DEXTradeByTokens`** for **one token’s** chart (all pools and sides from the token’s view with **`Trade`** + **`Side`**). Use **`DEXTrades`** when you need **each raw swap** as a row (pool **`Buy`/`Sell`** view, routing, or debugging). Both can power candles; **`DEXTradeByTokens`** is usually simpler for **per-token** open/high/low/close and volume. Compare with [DEXTrades](https://docs.bitquery.io/docs/cubes/dextrades/).
+For **OHLCV**, treat the **Crypto Price API** as the default—see [when to use which](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/#crypto-price-api-vs-dextradebytoken). Among DEX cubes, prefer **`DEXTradeByTokens`** for **one token’s** chart (all pools and sides from the token’s view with **`Trade`** + **`Side`**). Use **`DEXTrades`** when you need **each raw swap** as a row (pool **`Buy`/`Sell`** view, routing, or debugging). Both can power candles; **`DEXTradeByTokens`** is usually simpler for **per-token** open/high/low/close and volume. Compare with [DEXTrades](/docs/cubes/dextrades/).
 
 ## Filtering in DEXTradeByTokens Cube
 
@@ -259,4 +258,4 @@ query UserActivityTracking(
 
 **`DEXTradeByTokens`** intentionally returns **multiple rows per swap** (token-centric **Trade** + **Side**). If you want to avoid this, please specify the **Side** currency. Alternatively, switch to **`DEXTrades`** if you need **one row per pool swap**. To deduplicate during analysis, group or filter by **`Transaction.Hash`** (and trade index when present).
 
-For paging, use a **stable `orderBy`** and **time/blocks windows**; see [GraphQL limits](https://docs.bitquery.io/docs/graphql/limits/). Background: [DEXTrades vs DEXTradeByTokens](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/#how-do-i-use-dextradebytokens-vs-dextrades-for-ohlcv) and the [mental model](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls).
+For paging, use a **stable `orderBy`** and **time/blocks windows**; see [GraphQL limits](/docs/graphql/limits/). Background: [DEXTrades vs DEXTradeByTokens](/docs/cubes/dextradesbyTokens/#how-do-i-use-dextradebytokens-vs-dextrades-for-ohlcv) and the [mental model](/docs/start/mental-model-transfers-events-calls).

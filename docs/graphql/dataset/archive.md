@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: "Archive Database"
-description: "Bitquery GraphQL dataset guide: Archive Database."
+description: "Archive database contains the data with the delay from tens of minutes to several hours,."
 ---
 # Archive Database
 
@@ -24,7 +24,6 @@ Archive Database features:
 * queries need to be optimized, as the archive size quite significant
 
 :::
-
 
 Also Check [Combined](/docs/graphql/dataset/combined) and [RealTime](/docs/graphql/dataset/realtime) dataset.
 

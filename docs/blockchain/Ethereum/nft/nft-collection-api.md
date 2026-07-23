@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "NFT Collection API"
-description: "Bitquery blockchain API docs: NFT Collection API."
+description: "Here is a query that retrieves all the NFTs in a Collection."
 ---
 # NFT Collection API
 
@@ -33,7 +33,6 @@ Here is a query that retrieves all the NFTs in a Collection.
 
 ```
 You can find the graphql query [here](https://ide.bitquery.io/Get-all-NFTs-for-a-collection).
-
 
 ## Get All Token Holders of a Collection 
 

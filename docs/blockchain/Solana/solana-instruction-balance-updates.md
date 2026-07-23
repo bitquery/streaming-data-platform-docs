@@ -1,36 +1,9 @@
 ---
 sidebar_position: 3
 title: "Solana Instructions Balance Updates API"
-description: "Bitquery blockchain API docs: Solana Instructions Balance Updates API."
+description: "Get real time balance & balance updates of a Solana address associated with instruction invocation using Bitquery."
 ---
 # Solana Instructions Balance Updates API
-
-<head>
-<meta name="title" content="Solana Instructions Balance Updates API | Get decoded Instructions Balance Updates data"/>
-<meta name="description" content="Get real time balance & balance updates of a Solana address associated with instruction invocation using Bitquery's Solana Instruction Balance Updates API."/>
-<meta name="keywords" content="Instructions Balance Updates api, Instructions Balance Updates python api, Instructions Balance Updates scan api, Instructions Balance Updates api docs, DEX Trades crypto api, Instructions Balance Updates blockchain api,solana network api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Solana Instructions Balance Updates API | Get decoded Instructions Balance Updates data"
-/>
-<meta
-  property="og:description"
-  content="Get real time balance & balance updates of a Solana address associated with instruction invocation using Bitquery's Solana Instruction Balance Updates API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana Instructions Balance Updates API | Get decoded Instructions Balance Updates data" />
-<meta property="twitter:description" content="Get real time balance & balance updates of a Solana address associated with instruction invocation using Bitquery's Solana Instruction Balance Updates API." />
-</head>
 
 ## Latest Solana Instructions Balance Updates
 

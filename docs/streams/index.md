@@ -3,7 +3,6 @@ title: Real-time Blockchain Data Streaming API
 description: Access real-time cryptocurrency and DeFi data with Bitquery's streaming APIs. Choose from WebSocket, Kafka, or gRPC streams for trading bots, DEX monitoring, and blockchain analytics.
 keywords: [real-time blockchain data, cryptocurrency data API, DeFi data streams, trading data feeds, blockchain WebSocket API, Kafka blockchain streams, gRPC blockchain data, crypto market data, DEX trading data, blockchain analytics API]
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # Real-time Blockchain Data Streaming API | Bitquery Platform

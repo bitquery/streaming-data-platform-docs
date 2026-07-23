@@ -1,13 +1,13 @@
 ---
 sidebar_position: 4
 title: "Fetching Real-time OHLC"
-description: "Bitquery how-to guide: Fetching Real-time OHLC."
+description: "We now use the new Price Index Streams to fetch pre-aggregated OHLC data directly from Bitquery's GraphQL WebSocket API. This removes the need to manually calculate candlesticks from raw trade data."
 ---
 # Fetching Real-time OHLC
 
 We now use the new [Price Index Streams](/docs/trading/crypto-price-api/examples/#ohlc-stream-on-a-chain) to fetch **pre-aggregated OHLC data** directly from Bitquery's GraphQL WebSocket API. This removes the need to manually calculate candlesticks from raw trade data.
 
-To learn more about streaming data via graphQL, visit [Bitquery subscriptions](https://docs.bitquery.io/docs/subscriptions/subscription/).
+To learn more about streaming data via graphQL, visit [Bitquery subscriptions](/docs/subscriptions/subscription/).
 
 ### Imports and Configuration
 

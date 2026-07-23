@@ -1,23 +1,21 @@
 ---
 title: "BonkSwap API"
-description: "Bitquery blockchain API docs: BonkSwap API."
+description: "Get on-chain data of any BonkSwap based token through our BonkSwap API"
 ---
-
 # BonkSwap API
 
 :::tip Need real-time BonkSwap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered BonkSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical BonkSwap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered BonkSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical BonkSwap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 In this document, we will explore several examples related to BonkSwap data.
 
-Need zero-latency BonkSwap data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+Need zero-latency BonkSwap data? [Read about our Shred Streams and Contact us for a Trial](/docs/streams/real-time-solana-data/).
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
@@ -29,29 +27,6 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
   - [Get Top Traders on BonkSwap](#get-top-traders-on-bonkswap)
   - [Get Latest Trades By Trader on BonkSwap](#get-latest-trades-by-trader-on-bonkswap)
   - [OHLC of a token on BonkSwap](#get-ohlc-for-a-bonkswap-token)
-
-<head>
-  <meta name="title" content="BonkSwap API - Solana - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get on-chain data of any BonkSwap based token through our BonkSwap API."/>
-  <meta name="keywords" content="BonkSwap API,BonkSwap on-chain data API,BonkSwap token data API,BonkSwap blockchain API,BonkSwap DEX data API,BonkSwap API documentation,BonkSwap crypto API,BonkSwap web3 API,DEX Trades,Solana,Blast,BonkSwap memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="BonkSwap API - Solana - Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any BonkSwap based token through our BonkSwap API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="BonkSwap API - Solana - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any BonkSwap based token through our BonkSwap API."/>
-</head>
 
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 
@@ -284,6 +259,5 @@ query MyQuery {
     }
   }
 }
-
 
 ```

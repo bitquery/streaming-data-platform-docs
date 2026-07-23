@@ -23,7 +23,6 @@ keywords:
   - Launchpad monitoring
 sidebar_position: 1
 ---
-
 # Flap.sh API
 
 Flap.sh is a token launchpad platform on BNB Smart Chain (BSC) that enables users to create and launch new tokens with unique features including tax tokens and vanity addresses. This comprehensive guide covers how to track, analyze, and monitor Flap.sh tokens using Bitquery's GraphQL APIs.
@@ -804,12 +803,12 @@ You can identify Flap.sh tokens by checking the last 4 characters of their contr
 
 ## Related Documentation
 
-- [BSC Blockchain API](https://docs.bitquery.io/docs/blockchain/BSC/index) – BNB Smart Chain documentation
-- [DEX Trades API](https://docs.bitquery.io/docs/schema/evm/dextrades) – DEX trading data documentation
-- [Events API](https://docs.bitquery.io/docs/schema/evm/events) – Smart contract events documentation
-- [Transfers API](https://docs.bitquery.io/docs/schema/evm/transfers) – Token transfer tracking
-- [Trading APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction) – Price and OHLCV data
-- [GraphQL Subscriptions](https://docs.bitquery.io/docs/subscriptions/subscription) – Real-time data streaming
+- [BSC Blockchain API](/docs/blockchain/BSC/index) – BNB Smart Chain documentation
+- [DEX Trades API](/docs/schema/evm/dextrades) – DEX trading data documentation
+- [Events API](/docs/schema/evm/events) – Smart contract events documentation
+- [Transfers API](/docs/schema/evm/transfers) – Token transfer tracking
+- [Trading APIs](/docs/trading/crypto-price-api/introduction) – Price and OHLCV data
+- [GraphQL Subscriptions](/docs/subscriptions/subscription) – Real-time data streaming
 
 ## Support
 

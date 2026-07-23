@@ -1,8 +1,7 @@
 ---
 title: "TRON Streams"
-description: "Bitquery streaming docs: TRON Streams."
+description: "TRON produces blocks approximately every 3 seconds, offering high throughput for transactions and smart contracts."
 ---
-
 # TRON Streams
 
 You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tree/main/tron).

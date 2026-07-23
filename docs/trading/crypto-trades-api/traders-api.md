@@ -19,16 +19,15 @@ keywords:
   - top traders by PnL API
   - crypto wallet activity feed
 ---
-
 # Traders API — Real-Time Wallet Trade Streams
 
 :::tip Which trade API should you use?
-The Traders API is the wallet-centric view of **`Trading.Trades`** — designed for **real-time and the last ~30 days**. For older / historical wallet activity (anything beyond ~30 days), use chain-level [`DEXTrades`](https://docs.bitquery.io/docs/cubes/dextrades) or [`DEXTradeByTokens`](https://docs.bitquery.io/docs/cubes/dextradesbyTokens) on the relevant chain root. See the [**Trading Data Overview**](https://docs.bitquery.io/docs/trading/trading-data-overview) for the full comparison.
+The Traders API is the wallet-centric view of **`Trading.Trades`** — designed for **real-time and the last ~30 days**. For older / historical wallet activity (anything beyond ~30 days), use chain-level [`DEXTrades`](/docs/cubes/dextrades) or [`DEXTradeByTokens`](/docs/cubes/dextradesbyTokens) on the relevant chain root. See the [**Trading Data Overview**](/docs/trading/trading-data-overview) for the full comparison.
 :::
 
 > **Bitquery Traders API** lets you **stream wallet trades in real time** across **Solana**, **Ethereum**, **BSC**, **Base**, and **Arbitrum** . You can track a **single wallet** or **multiple addresses**, detect **whale trades** above a USD threshold, filter by **token**, **pair**, **DEX program**, or **chain**, rank **top traders by volume** or **PnL**, and aggregate **buy/sell USD** with **`sum`**, **`calculate`**, **`limitBy`**, and **`orderBy`** using **GraphQL subscriptions** and **queries**.
 
-This page focuses on **trader/wallet-centric** queries using the unified **Trading** schema. For trade-level streaming (by token, pair, chain, or DEX), see the **[Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)**.
+This page focuses on **trader/wallet-centric** queries using the unified **Trading** schema. For trade-level streaming (by token, pair, chain, or DEX), see the **[Trades API](/docs/trading/crypto-trades-api/trades-api)**.
 
 ## Video Tutorial
 
@@ -1247,13 +1246,13 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-pay
 
 > Extend your **trader analytics** with these complementary Bitquery APIs — **trade streams**, **price data**, **market cap**, **OHLC**, and **chain-specific DEX** docs for deeper wallet and token analysis.
 
-- **[Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)** — stream trades by token, pair, chain, DEX, or USD threshold (not wallet-filtered)
-- **[Crypto MarketCap API](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-marketcap-api)** — USD market cap, FDV, and token supply data
-- **[Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction)** — Tokens, Pairs, Currencies cubes and Kafka `trading.prices`
-- **[OHLC / K-line API](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api)** — candlestick and interval data for charting
-- **[Solana DEX Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades)** — chain-level `DEXTrades` and `DEXTradeByTokens` with aggregation (top traders, PnL, first buyers)
-- **[Solana Trader API](https://docs.bitquery.io/docs/blockchain/Solana/solana-trader-API)** — Solana-specific wallet queries with `DEXTradeByTokens` aggregation
-- **[BSC DEX Trades](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades)** — BSC top traders by profit, first buyers, and per-wallet token stats
-- **[Pump.fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API)** — Pump.fun trades, bonding curve, top traders, and market cap
-- **[PumpSwap API](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/pump-swap-api)** — PumpSwap AMM trades, pools, and pricing
-- **[gRPC Copy Trading Bot](https://docs.bitquery.io/docs/grpc/solana/examples/grpc-copy-trading-bot)** — low-latency CoreCast gRPC streaming for copy trading
+- **[Trades API](/docs/trading/crypto-trades-api/trades-api)** — stream trades by token, pair, chain, DEX, or USD threshold (not wallet-filtered)
+- **[Crypto MarketCap API](/docs/trading/crypto-price-api/crypto-marketcap-api)** — USD market cap, FDV, and token supply data
+- **[Crypto Price API](/docs/trading/crypto-price-api/introduction)** — Tokens, Pairs, Currencies cubes and Kafka `trading.prices`
+- **[OHLC / K-line API](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api)** — candlestick and interval data for charting
+- **[Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)** — chain-level `DEXTrades` and `DEXTradeByTokens` with aggregation (top traders, PnL, first buyers)
+- **[Solana Trader API](/docs/blockchain/Solana/solana-trader-API)** — Solana-specific wallet queries with `DEXTradeByTokens` aggregation
+- **[BSC DEX Trades](/docs/blockchain/BSC/bsc-dextrades)** — BSC top traders by profit, first buyers, and per-wallet token stats
+- **[Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API)** — Pump.fun trades, bonding curve, top traders, and market cap
+- **[PumpSwap API](/docs/blockchain/Solana/Pumpfun/pump-swap-api)** — PumpSwap AMM trades, pools, and pricing
+- **[gRPC Copy Trading Bot](/docs/grpc/solana/examples/grpc-copy-trading-bot)** — low-latency CoreCast gRPC streaming for copy trading

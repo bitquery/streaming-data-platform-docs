@@ -3,7 +3,6 @@ sidebar_position: 4
 title: "NFT Calls API"
 description: "Query NFT smart-contract calls on EVM — function names, arguments, and returns via Bitquery GraphQL."
 ---
-
 # NFT Calls API
 This API helps retrieve information about smart contract transactions, including details about the contract function that was called, the input and output parameters, and more. 
 

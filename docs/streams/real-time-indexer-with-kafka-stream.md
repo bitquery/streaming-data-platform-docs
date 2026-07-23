@@ -196,7 +196,7 @@ Build robust indexing pipelines that:
 Building a real-time indexer with Bitquery's Kafka streams is straightforward:
 
 1. **Get Kafka Access**: Contact Bitquery sales by filling the [form on the website](https://bitquery.io/forms/api) for Kafka credentials
-2. **Choose Your Topics**: Select the topics that match your indexing needs. List is available [here](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#complete-list-of-topics)
+2. **Choose Your Topics**: Select the topics that match your indexing needs. List is available [here](/docs/streams/kafka-streaming-concepts/#complete-list-of-topics)
 3. **Set Up Consumers**: Create Kafka consumers with proper offset management
 4. **Process Messages**: Parse protobuf messages and update your index
 5. **Handle Failures**: Use Bitquery Kafka's 24-hour retention to recover from crashes

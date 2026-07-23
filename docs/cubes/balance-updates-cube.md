@@ -2,7 +2,6 @@
 title: "Balance Update Cube"
 description: "Learn the Bitquery Balance Updates cube — balance change rows, filters, and example GraphQL queries."
 ---
-
 # Balance Update Cube
 
 Our `BalanceUpdates` cube is designed to provide historical and realtime balance updates. This cube provides multiple ways to query historical balance data.

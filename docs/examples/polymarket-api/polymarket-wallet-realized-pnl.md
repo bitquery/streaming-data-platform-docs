@@ -9,12 +9,9 @@ keywords:
   - PredictionTrades Polygon
   - Polymarket GraphQL
 ---
-
 # Realized PnL & Win Rate for Polymarket Trader
 
 You can use Bitquery **`PredictionTrades`** on Polygon (`network: matic`) to pull a wallet’s **outcome buys** and **outcome sells** on Polymarket over a chosen window (for example the last **24 hours**). From that response, you can aggregate by **`ConditionId`**, calculate `realised PnL` per condition, and derive the total **realized PnL** and **win rate** for Polymarket trading.
-
-
 
 ## How is PnL and Win Rate calculated?
 
@@ -171,5 +168,5 @@ END IF
 | ----- | ---- |
 | PolyMarket APIs Intro | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) |
 | Advanced Polymarket Analytics | [Advanced Polymarket Metrics](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/) |
-| Prediction trades reference | [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/) |
+| Prediction trades reference | [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/) |
 | Sports Related PolyMarkets | [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/) |

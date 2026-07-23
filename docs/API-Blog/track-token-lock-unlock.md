@@ -229,8 +229,7 @@ subscription {
 
 This subscription query tracks transactions that signal token unlocks, providing details about the dates, transaction hash, gas price, and gas used. It helps in predicting when tokens will become available for trading. 4. Set Up Notifications
 
-[Create notifications to alert](https://docs.bitquery.io/docs/usecases/monitoring-solana-blockchain-real-time-tutorial/) you when tokens are about to be unlocked. You can use email alerts, websockets, or messaging platforms like Slack. Setting up notifications ensures you stay informed about important events and can react promptly to market changes.
-
+[Create notifications to alert](/docs/usecases/monitoring-solana-blockchain-real-time-tutorial/) you when tokens are about to be unlocked. You can use email alerts, websockets, or messaging platforms like Slack. Setting up notifications ensures you stay informed about important events and can react promptly to market changes.
 
 ### Tracking Token Lock/ Unlock Without Knowing Log Signatures
 
@@ -305,8 +304,6 @@ query ($network: evm_network, $limit: Int, $method: String) {
  "method": "c42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67"
 }
 ```
-
-
 
 ### Solana Token Unlock Schedule
 

@@ -1,8 +1,7 @@
 ---
 title: "Tutorial: Creating a Discord Bot to Fetch Price Data"
-description: "Bitquery how-to guide: Tutorial: Creating a Discord Bot to Fetch Price Data."
+description: "In this tutorial, we will walk you through the process of creating a Discord bot using the discord.js library. The bot will fetch price data using the dextrades API and respond to a specific command in a Discord server."
 ---
-
 # Tutorial: Creating a Discord Bot to Fetch Price Data
 
 In this tutorial, we will walk you through the process of creating a Discord bot using the `discord.js` library. The bot will fetch price data using the dextrades API and respond to a specific command in a Discord server.
@@ -18,7 +17,6 @@ Before we begin, make sure you have the following:
 -   Node.js installed on your machine
 -   A Discord account
 -   A Bitquery API Token (you can sign up for a free API token at [Bitquery](https://ide.bitquery.io/))
-
 
 #### Setting up the Bot
 

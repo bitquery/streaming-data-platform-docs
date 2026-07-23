@@ -10,7 +10,6 @@ keywords:
   - Algorand event arguments
   - Bitquery Algorand
 ---
-
 # Algorand Arguments API
 
 When Bitquery parses an Algorand smart contract call or event, the Arguments API exposes each argument's index, type, and value alongside transaction and block context. Use it to inspect app call payloads, filter calls by specific argument values, or build dashboards around on-chain program activity.
@@ -83,5 +82,5 @@ Narrow results to a specific application. You can also filter by `txType`, `txHa
 
 ## Related resources
 
-- [Algorand Smart Contract Calls API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-smart-contract-calls-api) — call counts and transaction-type filters
-- [Algorand Transactions API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-transactions-api) — full transaction details and hash lookups
+- [Algorand Smart Contract Calls API](/docs/blockchain/Algorand/algorand-smart-contract-calls-api) — call counts and transaction-type filters
+- [Algorand Transactions API](/docs/blockchain/Algorand/algorand-transactions-api) — full transaction details and hash lookups

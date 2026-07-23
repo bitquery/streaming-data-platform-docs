@@ -23,7 +23,6 @@ keywords:
     "crypto limit orders"
   ]
 ---
-
 # Limit Order Price API: Crypto Price API for Limit Orders
 
 ## The Problem: Why Raw Trade Data Fails for Limit Orders
@@ -44,7 +43,7 @@ The same token can trade at vastly different prices (e.g., $100 on Uniswap vs $9
 
 ## The Solution: Aggregated Price Streams
 
-Bitquery's [Crypto Price API for limit orders](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) provides **aggregated price data** with built-in dampening mechanisms, serving as a reliable limit order price API:
+Bitquery's [Crypto Price API for limit orders](/docs/trading/crypto-price-api/introduction/) provides **aggregated price data** with built-in dampening mechanisms, serving as a reliable limit order price API:
 
 **Multi-pool aggregation** across all major DEXs  
 **Cross-chain price discovery** for market-wide pricing  
@@ -76,8 +75,6 @@ Bitquery's [Crypto Price API for limit orders](https://docs.bitquery.io/docs/tra
 #### 4. **Trade Filtering**
 Trades are excluded only when the trade amount is zero or below decimal precision (e.g. &lt; 10^decimals/10,000), avoiding precision loss. Moving averages (SMA, WMA, EMA) and anomaly-resistant OHLC are still calculated on the resulting feed. For full details see the [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm).
 
-
-
 ## TradingView Integration
 
 TradingView integration can be achieved through a custom datafeed that connects to Bitquery's real-time price streams. The datafeed supports multiple timeframe resolutions (1s to 1h), subscribes to real-time OHLC data via WebSocket, and provides the structured bar data format that TradingView requires for live chart updates. This enables professional-grade charting with institutional-quality aggregated price data.
@@ -86,7 +83,7 @@ TradingView integration can be achieved through a custom datafeed that connects 
 
 ### **Production Resources**
 
-**Complete Tutorial**: Follow our comprehensive [TradingView Real-Time Streaming Tutorial](https://docs.bitquery.io/docs/usecases/tradingview-subscription-realtime/getting-started/) that shows how to integrate Bitquery's Crypto Price API with TradingView's Advanced Charts.
+**Complete Tutorial**: Follow our comprehensive [TradingView Real-Time Streaming Tutorial](/docs/usecases/tradingview-subscription-realtime/getting-started/) that shows how to integrate Bitquery's Crypto Price API with TradingView's Advanced Charts.
 
 **Production-Ready Code**: 
 - **GitHub Repository**: [Complete implementation examples](https://github.com/bitquery/tradingview-subscription-realtime/tree/main)
@@ -306,15 +303,15 @@ subscription {
 ## Production Resources & Documentation
 
 ### **Implementation Guides**
-- **[Crypto Price API Documentation](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** - Complete API reference with live examples
-- **[DEX Trade Filtering Guide](https://docs.bitquery.io/docs/usecases/how-to-filter-anomaly-prices/)** - How to handle raw data anomalies
-- **[OHLC Candlestick API](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/)** - Ready-to-chart data with [live Bitcoin OHLC example ➤](https://ide.bitquery.io/bitcoin-currency-price-stream)
-- **[DEXTradeByTokens API](https://docs.bitquery.io/docs/cubes/dextradesbyTokens/)** - Raw trade data for comparison
+- **[Crypto Price API Documentation](/docs/trading/crypto-price-api/introduction/)** - Complete API reference with live examples
+- **[DEX Trade Filtering Guide](/docs/usecases/how-to-filter-anomaly-prices/)** - How to handle raw data anomalies
+- **[OHLC Candlestick API](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/)** - Ready-to-chart data with [live Bitcoin OHLC example ➤](https://ide.bitquery.io/bitcoin-currency-price-stream)
+- **[DEXTradeByTokens API](/docs/cubes/dextradesbyTokens/)** - Raw trade data for comparison
 
 ### **Real-Time Streaming**
 - **GraphQL Endpoint**: `https://streaming.bitquery.io/graphql` ([Try in IDE ➤](https://ide.bitquery.io/?endpoint=https://streaming.bitquery.io/graphql))
 - **Kafka Topic**: `trading.prices` ([Schema & SDKs ➤](https://github.com/bitquery/streaming_protobuf/tree/main/market))
-- **WebSocket Subscriptions**: Convert any query to `subscription` for real-time data ([WebSocket Guide ➤](https://docs.bitquery.io/docs/subscriptions/websockets/))
+- **WebSocket Subscriptions**: Convert any query to `subscription` for real-time data ([WebSocket Guide ➤](/docs/subscriptions/websockets/))
 
 ## **Proven Production Benefits**
 Based on real trading platform implementations ([see live comparison ➤](https://ide.bitquery.io/raw-vs-aggregated-price-comparison)):
@@ -331,13 +328,13 @@ Based on real trading platform implementations ([see live comparison ➤](https:
 - **Real-time USD pricing**: Built-in conversion eliminating additional API calls
 - **Bad trade filtering**: Automatic removal of outliers and routing anomalies
 
-[Explore all technical features ➤](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/#key-features-of-these-apis)
+[Explore all technical features ➤](/docs/trading/crypto-price-api/introduction/#key-features-of-these-apis)
 
 Ready to implement our crypto price API for limit orders in your trading system? 
 
 **Get Started with Our Limit Order Price API:**
 - [Try live examples in our IDE ➤](https://ide.bitquery.io/?query_name=crypto-price-examples)
-- [Read the complete API documentation ➤](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction)
+- [Read the complete API documentation ➤](/docs/trading/crypto-price-api/introduction)
 - [Download SDKs and schemas ➤](https://github.com/bitquery/streaming_protobuf/tree/main/market)
 - [Join our community ➤](https://t.me/Bloxy_info)
 

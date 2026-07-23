@@ -1,6 +1,7 @@
 ---
 title: "Trading MCP Examples — Real Data, Real Charts"
 description: "6 worked examples of how traders use the Bitquery MCP: token discovery, cross-chain snapshot, OHLC, DEX share, launchpad pulse & whale-wallet analysis."
+image: "/img/mcp/charts/top-tokens-solana-24h.svg"
 keywords:
   - Bitquery MCP examples
   - trading MCP demo
@@ -10,23 +11,6 @@ keywords:
   - DEX trading dashboard AI
 sidebar_label: "Examples"
 ---
-
-<head>
-  <meta name="title" content="Trading MCP Examples — Real Data, Real Charts"/>
-  <meta name="description" content="6 worked examples of how traders use the Bitquery MCP: token discovery, cross-chain snapshot, OHLC, DEX share, launchpad pulse & whale-wallet analysis."/>
-  <meta name="robots" content="index, follow"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Trading MCP Examples — Real Data, Real Charts"/>
-  <meta property="og:description" content="Six self-contained trader workflows on the Bitquery MCP, each with a real-data chart, the prompt to paste into Claude/Cursor, and a trader playbook."/>
-  <meta property="og:url" content="https://docs.bitquery.io/docs/mcp/trading/examples/"/>
-  <meta property="og:image" content="https://docs.bitquery.io/img/mcp/charts/top-tokens-solana-24h.svg"/>
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Trading MCP Examples — Real Data, Real Charts"/>
-  <meta property="twitter:description" content="Six self-contained trader workflows on the Bitquery MCP, each with a real-data chart, the prompt to paste into Claude/Cursor, and a trader playbook."/>
-  <meta property="twitter:image" content="https://docs.bitquery.io/img/mcp/charts/top-tokens-solana-24h.svg"/>
-  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/trading/examples/"/>
-</head>
-
 # Trading MCP Examples
 
 Six worked examples of what your AI agent can do once the [Bitquery MCP server](/docs/mcp/mcp-server/) is connected. Each page is **self-contained** and includes:

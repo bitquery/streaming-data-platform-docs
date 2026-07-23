@@ -9,8 +9,6 @@ The IDE will allow you to get the code in the language of your choice, so you ca
 
 ![Export code](/img/ide/Code_export.png)
 
-
-
 To use the Export Code feature, follow the steps below:
 
 1.  Write your query in the IDE as you normally would.

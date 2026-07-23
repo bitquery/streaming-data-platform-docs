@@ -12,7 +12,6 @@ keywords:
   - Cardano native token balance
   - Bitquery Cardano
 ---
-
 # Cardano Address API
 
 The Address API gives you everything tied to a Cardano wallet: ADA balance, balances for every native token the wallet holds, and the staking snapshot (controlled stake, rewards available, rewards withdrawn). For quick activity profiling you can also use the `addressStats` cube, which returns pre-aggregated inflow, outflow, counterparty, and first/last-active metrics.
@@ -72,7 +71,7 @@ If you only want the ADA balance, filter the response client-side where `currenc
 `addressStats` is a pre-aggregated view of a wallet's lifetime activity — total inflows and outflows, inbound and outbound transaction counts, unique senders and receivers, unique active days, current balance, and the first / last active timestamps. It's the fastest way to profile an address for compliance checks, exchange screening, or analytics dashboards.
 
 :::caution
-`addressStats` is pre-aggregated and can lag the chain slightly. For exact, up-to-the-block balance math, sum `outputs` and subtract `inputs` from the [Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Cardano/inputs-outputs).
+`addressStats` is pre-aggregated and can lag the chain slightly. For exact, up-to-the-block balance math, sum `outputs` and subtract `inputs` from the [Inputs and Outputs API](/docs/blockchain/Cardano/inputs-outputs).
 :::
 
 ```graphql
@@ -108,6 +107,6 @@ Pair this with the `address(...)` query above when you want fast aggregate metri
 
 ## Related resources
 
-- [Cardano Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Cardano/inputs-outputs) — UTXO-level balance reconstruction
-- [Cardano Transactions API](https://docs.bitquery.io/docs/blockchain/Cardano/transactions) — transaction-level data with fees
-- [Cardano Coinpath API](https://docs.bitquery.io/docs/blockchain/Cardano/coinpath) — multi-hop ADA flow tracing
+- [Cardano Inputs and Outputs API](/docs/blockchain/Cardano/inputs-outputs) — UTXO-level balance reconstruction
+- [Cardano Transactions API](/docs/blockchain/Cardano/transactions) — transaction-level data with fees
+- [Cardano Coinpath API](/docs/blockchain/Cardano/coinpath) — multi-hop ADA flow tracing

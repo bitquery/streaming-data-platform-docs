@@ -1,9 +1,8 @@
 ---
 sidebar_position: 1
 title: "Token Holders API"
-description: "Bitquery blockchain API docs: Token Holders API."
+description: "The Holders API returns token holder data for ERC-20 tokens on Ethereum: top holders, holder counts, and balance thresholds. Non-zero balances use Amount(selectWhere: { gt: \"0\" }) on the Balance field (not in where). Use dataset: combined or dataset: archive as follows:."
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # Token Holders API
@@ -163,11 +162,11 @@ query {
 
 ## Track Whale Wallets and Token Holdings
 
-For whale monitoring, combine **[Top Holders](#top-holders-of-a-currency-current)** (`orderBy: { descending: Balance_Amount }`, `limit`) with **[Holder Count Above a Threshold](#holder-count-with-balance-above-a-threshold)**. Pair with [ERC-20 transfers](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) to see recent inflows and outflows from large wallets.
+For whale monitoring, combine **[Top Holders](#top-holders-of-a-currency-current)** (`orderBy: { descending: Balance_Amount }`, `limit`) with **[Holder Count Above a Threshold](#holder-count-with-balance-above-a-threshold)**. Pair with [ERC-20 transfers](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) to see recent inflows and outflows from large wallets.
 
 ## Historical Top Holders by Date
 
-The **Holders** cube does not support `Block.Date`. Filter by `Balance.LastChangeTime` using datetime format (for example `"2026-05-01T00:00:00Z"`). For address balances on a calendar date, use the [Balances API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date) with `Block.Date`.
+The **Holders** cube does not support `Block.Date`. Filter by `Balance.LastChangeTime` using datetime format (for example `"2026-05-01T00:00:00Z"`). For address balances on a calendar date, use the [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date) with `Block.Date`.
 
 [Run in IDE](https://ide.bitquery.io/ethereum-holders-top-by-date)
 

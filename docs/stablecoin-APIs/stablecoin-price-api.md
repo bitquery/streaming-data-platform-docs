@@ -2,7 +2,6 @@
 title: "Stablecoin Price API"
 description: "Bitquery stablecoin API docs: Stablecoin Price API."
 ---
-
 # Stablecoin Price API
 
 While stablecoins are designed to maintain a stable value (typically pegged to USD, EUR, or other assets), they can deviate slightly from their target price (e.g., $0.998 or $1.02 for USD-pegged stablecoins). For developers, traders, and businesses processing large volumes of stablecoin payments, even these small deviations can translate to significant financial impact at scale.
@@ -11,7 +10,7 @@ Bitquery's Stablecoin API provides comprehensive real-time data including transf
 
 Track minute price changes, fetch blended average prices, and identify arbitrage opportunities across different platforms with precision and ease.
 
-This is built on the extensive [Crypto Price APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
+This is built on the extensive [Crypto Price APIs](/docs/trading/crypto-price-api/introduction/)
 
 Need help implementing stablecoin price APIs? Contact our support team or join our community discussion on [@Bloxy_info](https://t.me/bloxy_info).
 
@@ -204,7 +203,6 @@ This query compares USDT prices across different blockchain networks in real-tim
     }
   }
 }
-
 
 ```
 

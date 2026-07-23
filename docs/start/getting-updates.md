@@ -3,7 +3,6 @@ sidebar_position: 2
 title: "Subscribe to Real-Time Blockchain Data"
 description: "Use Bitquery GraphQL subscriptions and WebSockets to stream real-time blockchain updates into your app."
 ---
-
 # Subscribing to Real-Time Data
 
 After you have created and successfully run [your first query](/docs/start/first-query), it is time to
@@ -33,7 +32,6 @@ on the result panel:
 > Query used: [Real Time Blocks Subscription | BSC](https://graphql.bitquery.io/ide/Real-Time-Blocks-Subscription--BSC)
 
 To stop updates, press the run button again.
-
 
 :::caution Resources usage
 

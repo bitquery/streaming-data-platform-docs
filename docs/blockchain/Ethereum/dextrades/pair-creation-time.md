@@ -2,7 +2,7 @@
 sidebar_position: 4
 sidebar_label: Pair Creation Time
 title: "Pair Creation Time API"
-description: "Bitquery blockchain API docs: Pair Creation Time API."
+description: "Let's see how we can get pair creation time for a specific pair. We will use Events API for this. Filter for PairCreated event and also put one more filter, for which pair address you want the creation time. We have used 0x5c6919B79FAC1C3555675ae59A9ac2484f3972F5 pair address in our example."
 ---
 # Pair Creation Time API
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Token Transaction API"
-description: "Bitquery blockchain API docs: Token Transaction API."
+description: "The Transaction API provides access to transaction data on the blockchain. Transactions are the fundamental unit of account on a blockchain and represent the transfer of value from one address to another."
 ---
 # Token Transaction API
 
@@ -81,7 +81,6 @@ You can run the query [here](https://ide.bitquery.io/Latest-Transactions-fromto-
   }
 }
 
-
 ```
 
 </details>
@@ -128,7 +127,6 @@ query MyQuery {
     }
   }
 }
-
 
 ```
 

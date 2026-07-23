@@ -181,4 +181,3 @@ query {
 
 This query will return the Solana Instructions Logs and transaction signature to double check the results and get more info.  
 
-

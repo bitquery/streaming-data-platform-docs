@@ -13,12 +13,11 @@ keywords:
   - Polymarket market search
   - filter markets by slug
 ---
-
 # Markets API
 
-Find markets on Polymarket using various filters, including **market slug**, **event slug**, **condition ID**, and **token ID**. Use these parameters to narrow results to specific markets or events when building apps that combine market metadata with [trades](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/) and [settlements](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/).
+Find markets on Polymarket using various filters, including **market slug**, **event slug**, **condition ID**, and **token ID**. Use these parameters to narrow results to specific markets or events when building apps that combine market metadata with [trades](/docs/examples/prediction-market/prediction-trades-api/) and [settlements](/docs/examples/prediction-market/prediction-settlements-api/).
 
-**Network:** Polygon (`network: matic`). For full lifecycle and trade data, see the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/) overview and the [Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api/).
+**Network:** Polygon (`network: matic`). For full lifecycle and trade data, see the [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) overview and the [Prediction Market API](/docs/examples/prediction-market/prediction-market-api/).
 
 ---
 
@@ -31,8 +30,6 @@ All parameters are optional. You can combine multiple filters; results match mar
 | **market_slug**  | string[] | Filter markets by market slug(s). Can provide multiple values.      |    |
 | **condition_id** | string[] | Filter markets by condition ID(s). Can provide multiple values.     |
 | **token_id**     | string[] | Filter markets by outcome token ID(s). Can provide multiple values. |
-
-
 
 ## Find markets by condition_id
 
@@ -111,10 +108,9 @@ query MarketsByConditionId($conditionIds: [String!]) {
 }
 ```
 
-
 ## Find markets by token_id (AssetId)
 
-Use when you have outcome token IDs (e.g. from [Prediction Trades](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/) `OutcomeToken.AssetId`). Pass one or more AssetIds.
+Use when you have outcome token IDs (e.g. from [Prediction Trades](/docs/examples/prediction-market/prediction-trades-api/) `OutcomeToken.AssetId`). Pass one or more AssetIds.
 
 [Run query](https://ide.bitquery.io/Filter-markets-by-asset-ID-Polymarket)
 
@@ -264,8 +260,6 @@ query MarketsByMarketSlug($marketSlug: String!) {
 }
 ```
 
-
-
 ### Combined filters (condition_id + time range)
 
 Combine **condition_id** with other filters such as a time window or event type in the same `where` clause.
@@ -327,9 +321,9 @@ query MarketsByConditionIdRecent($conditionIds: [String!]) {
 
 | Need                             | API                                                                                                                                                 |
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Trades & prices**              | [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/)                                                                                 |
-| **Settlements & redemptions**    | [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/)                                                                       |
-| **Market creation & resolution** | [Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api/) / [Prediction Managements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-managements-api/) |
-| **Polymarket overview**          | [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)                                                                                                                  |
-| **User & wallet activity**       | [Polymarket Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api/)                                                                                     |
+| **Trades & prices**              | [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/)                                                                                 |
+| **Settlements & redemptions**    | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/)                                                                       |
+| **Market creation & resolution** | [Prediction Market API](/docs/examples/prediction-market/prediction-market-api/) / [Prediction Managements API](/docs/examples/prediction-market/prediction-managements-api/) |
+| **Polymarket overview**          | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/)                                                                                                                  |
+| **User & wallet activity**       | [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/)                                                                                     |
 | **On-chain condition & tokens**  | Main Polymarket Contract (on-chain)                                                   |

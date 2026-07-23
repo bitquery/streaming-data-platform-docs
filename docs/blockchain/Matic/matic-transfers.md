@@ -1,40 +1,10 @@
 ---
 title: "Polygon (MATIC) Transfers API"
-description: "Bitquery blockchain API docs: Polygon (MATIC) Transfers API."
+description: "Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers"
 ---
-
 # Polygon (MATIC) Transfers API
 
 In this section we'll have a look at some examples using the Polygon (MATIC) Transfers API.
-
-
-
-<head>
-<meta name="title" content="Polygon (MATIC) Transfers API"/>
-<meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
-<meta name="keywords" content="Polygon (MATIC) transfers api, Polygon (MATIC) transfers python api, Polygon (MATIC) transfers scan api, Polygon (MATIC) transfers api docs, transfers crypto api, transfers blockchain api, Polygon (MATIC) network api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Polygon (MATIC) Transfers API"
-/>
-<meta
-  property="og:description"
-  content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Polygon (MATIC) Transfers API" />
-<meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
-</head>
 
 # Subscribe to Recent Whale Transactions of a particular currency
 
@@ -66,7 +36,6 @@ subscription{
     }
   }
 }
-
 
 ```
 
@@ -100,9 +69,6 @@ subscription {
   }
 }
 
-
-
-
 ```
 
 # Subscribe to the latest NFT token transfers on Polygon (MATIC)
@@ -134,7 +100,6 @@ subscription {
     }
   }
 }
-
 
 ```
 

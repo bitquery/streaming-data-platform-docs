@@ -2,7 +2,6 @@
 title: "Quantile"
 description: "Use the Bitquery GraphQL Quantile metric in queries and aggregations."
 ---
-
 # Quantile
 
 Quantiles are useful in understanding the distribution of numerical data by dividing it into intervals.

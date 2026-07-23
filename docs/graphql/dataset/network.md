@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Network"
-description: "Bitquery GraphQL dataset guide: Network."
+description: "Network attribute is a selection of the blockchain:."
 ---
 # Network
 
@@ -41,5 +41,4 @@ celo: 42220
 canto: 7700
 aurora: 1313161554
 ```
-
 

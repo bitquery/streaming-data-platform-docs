@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Migrating from API v1 to v2"
-description: "Bitquery API blog: Migrating from API v1 to v2."
+description: "V2 APIs are designed to provide real-time blockchain data without any delay. It combines both real-time and historical data. You can read more on the differences here."
 ---
 # Migrating from API v1 to v2
 
@@ -14,7 +14,7 @@ Below, you'll find key changes and instructions on how to adapt your existing v1
 
 One of the major differences between v1 and v2 is the way API is authenticated. In v1, you use a API-KEY to authenticate your requests to `graphql.bitquery.io`.
 
-And in v2, you use OAuth token mentioned as `Bearer ory_...yourtoken` and authenticate your requests to `streaming.bitquery.io/graphql`. Read more on how to generate token [here](https://docs.bitquery.io/docs/authorization/how-to-generate/).
+And in v2, you use OAuth token mentioned as `Bearer ory_...yourtoken` and authenticate your requests to `streaming.bitquery.io/graphql`. Read more on how to generate token [here](/docs/authorization/how-to-generate/).
 
 ## Changes in Network Specification
 

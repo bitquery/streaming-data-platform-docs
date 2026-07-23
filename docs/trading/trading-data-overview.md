@@ -15,7 +15,6 @@ keywords:
   - crypto price api
   - multi-chain trading api
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # Trading Data Overview — Chain-Level Trades vs Trading Cube
@@ -156,7 +155,7 @@ The first two rows answer the question for 80% of users — pick by **how far ba
 | Stream all swaps on 9 chains in **one** subscription | `Trading.Trades` |
 | Build OHLC at a **custom** interval (e.g. 7-second, 4-hour) | `DEXTradeByTokens` (in-query aggregation) |
 | Join trades to the originating **call / instruction / event log** | `EVM.DEXTrades` / `Solana.DEXTrades` |
-| Analyse MEV, sandwich attacks, or raw flow | Chain-level (Trading cube filters these out) |
+| Analyze MEV, sandwich attacks, or raw flow | Chain-level (Trading cube filters these out) |
 | Build wallet-level PnL with USD attribution out-of-the-box | `Trading.Trades` |
 
 :::tip Mixing both layers

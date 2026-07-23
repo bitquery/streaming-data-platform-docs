@@ -22,5 +22,3 @@ count(distinct: Block_Number if: {Block: {GasUsed: {gt: "0"}}})
 Use [Aliases](/docs/graphql/metrics/alias) to name these metrics
 :::
 
-
-

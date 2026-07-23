@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "NFT Token Transfers API"
-description: "Bitquery blockchain API docs: NFT Token Transfers API."
+description: "Let's see how to get the latest NFT token transfers. We are taking Cryptokitties(CK) token example in the following query. The token address for Cryptokitties(CK) token is 0x06012c8cf97bead5deae237070f9587f8e7a266d."
 ---
 # NFT Token Transfers API
 

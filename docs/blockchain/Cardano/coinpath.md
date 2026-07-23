@@ -12,7 +12,6 @@ keywords:
   - Cardano GraphQL
   - Bitquery Cardano
 ---
-
 # Cardano Coinpath API
 
 Coinpath walks ADA flows between Cardano addresses across multiple hops — forward to see where funds went, backward to see where they came from. Because Cardano uses an eUTXO model, the API stitches chains of UTXOs together and returns senders, receivers, hop depth, amounts, and transaction counts at each level. Common use cases: AML / compliance screening, DAO treasury audits, exchange deposit tracing, and source-of-funds verification.
@@ -106,5 +105,5 @@ For forensic work, depths of 5–7 are common. Add `direction: inbound` to `opti
 
 ## Related resources
 
-- [Cardano Address API](https://docs.bitquery.io/docs/blockchain/Cardano/address) — wallet balances, staking, and `addressStats`
-- [Cardano Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Cardano/inputs-outputs) — UTXO-level inflows and outflows
+- [Cardano Address API](/docs/blockchain/Cardano/address) — wallet balances, staking, and `addressStats`
+- [Cardano Inputs and Outputs API](/docs/blockchain/Cardano/inputs-outputs) — UTXO-level inflows and outflows

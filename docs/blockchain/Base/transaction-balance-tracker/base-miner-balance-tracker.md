@@ -1,36 +1,11 @@
 ---
 sidebar_position: 3
 title: "Base Miner Balance Tracker"
-description: "Bitquery blockchain API docs: Base Miner Balance Tracker."
+description: "Learn how to track Base miner balances, mining rewards, and uncle block rewards using Bitquery."
 ---
 # Base Miner Balance Tracker
 
 The Base Miner Balance Tracker API provides real-time balance updates for Base miners, tracking their mining rewards, uncle block rewards, and transaction fee rewards.
-
-<head>
-<meta name="title" content="Base Miner Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track Base miner balances, mining rewards, and uncle block rewards using Bitquery's Miner Balance Tracker API."/>
-<meta name="keywords" content="base miner balance, mining rewards, miner balance tracker, base mining api, uncle block rewards, transaction fee rewards, miner rewards api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Base Miner Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to track Base miner balances, mining rewards, and uncle block rewards using Bitquery's Miner Balance Tracker API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Base Miner Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track Base miner balances, mining rewards, and uncle block rewards using Bitquery's Miner Balance Tracker API." />
-</head>
 
 ## Track Miner Balance Updates
 

@@ -1,24 +1,23 @@
 ---
 sidebar_position: 2
 title: "Events API"
-description: "Bitquery blockchain API docs: Events API."
+description: "> Before you start: Not sure when to use Events vs Transfers vs Calls vs DexTrades? Read our Mental Model guide to understand which primitive to use for your use case."
 ---
 # Events API
 
-> **Before you start**: Not sure when to use Events vs Transfers vs Calls vs DexTrades? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+> **Before you start**: Not sure when to use Events vs Transfers vs Calls vs DexTrades? Read our [Mental Model guide](/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
 
 The Event API gives you access real-time blockchain event data. Events represent changes to the state of a blockchain, such as transactions, token transfers, or contract creations.
 
-You can find the **Ethers Library equivalents** for these queries at **[Bitquery Ethers Library Section](https://docs.bitquery.io/docs/blockchain/Ethereum/ethers-library/debug_traceCall/)**.
+You can find the **Ethers Library equivalents** for these queries at **[Bitquery Ethers Library Section](/docs/blockchain/Ethereum/ethers-library/debug_traceCall/)**.
 
-
-You can find the **NFT Events Examples** at **[Bitquery NFT API Section](https://docs.bitquery.io/docs/blockchain/Ethereum/nft/nft-blur-marketplace-api/)**.
+You can find the **NFT Events Examples** at **[Bitquery NFT API Section](/docs/blockchain/Ethereum/nft/nft-blur-marketplace-api/)**.
 
 ## Is it possible to subscribe to smart contract events using Bitquery streams? {#is-it-possible-to-subscribe-to-smart-contract-events-using-bitquery-streams}
 
-**Yes.** On **EVM** chains (Ethereum, BSC, Base, and other `EVM(network: …)` networks in the API), Bitquery exposes decoded **contract logs** under the **`Events`** field. Use a GraphQL **`subscription`** (not `query`) with the same `where` filters you would use for historical pulls—typically **`Log`** (signature name, smart contract address, topics) and **`Transaction`**—and deliver it over a **WebSocket** to [`wss://streaming.bitquery.io/graphql`](https://docs.bitquery.io/docs/subscriptions/websockets/) as in [WebSocket access](https://docs.bitquery.io/docs/subscriptions/websockets/) and [subscription basics](https://docs.bitquery.io/docs/subscriptions/subscription/). Filter reference: [GraphQL filters](https://docs.bitquery.io/docs/graphql/filters/). For **high-throughput or replay**, event-style data is also available via **Kafka** topics; see [streaming overview](https://docs.bitquery.io/docs/streams/).
+**Yes.** On **EVM** chains (Ethereum, BSC, Base, and other `EVM(network: …)` networks in the API), Bitquery exposes decoded **contract logs** under the **`Events`** field. Use a GraphQL **`subscription`** (not `query`) with the same `where` filters you would use for historical pulls—typically **`Log`** (signature name, smart contract address, topics) and **`Transaction`**—and deliver it over a **WebSocket** to [`wss://streaming.bitquery.io/graphql`](/docs/subscriptions/websockets/) as in [WebSocket access](/docs/subscriptions/websockets/) and [subscription basics](/docs/subscriptions/subscription/). Filter reference: [GraphQL filters](/docs/graphql/filters/). For **high-throughput or replay**, event-style data is also available via **Kafka** topics; see [streaming overview](/docs/streams/).
 
-**Solana** does not use this EVM `Events` shape; for live program activity use **`Solana`** subscriptions (e.g. instructions) as in [Solana instructions](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/).
+**Solana** does not use this EVM `Events` shape; for live program activity use **`Solana`** subscriptions (e.g. instructions) as in [Solana instructions](/docs/blockchain/Solana/solana-instructions/).
 
 Example: stream logs from a specific contract (here USDT on Ethereum) as they are indexed:
 
@@ -283,7 +282,6 @@ query MyQuery {
   }
 }
 
-
 ```
 
 ## Subscribe to the Same Event Across Multiple Contracts
@@ -317,7 +315,6 @@ subscription {
     }
   }
 }
-
 
 ```
 

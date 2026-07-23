@@ -26,19 +26,6 @@ Use Bitquery’s **GraphQL** and **subscription** APIs to reproduce **GMGN**-sty
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 
-<head>
-<meta name="title" content="GMGN API for Ethereum & EVM | DEX Screener Data via Bitquery"/>
-<meta name="description" content="GMGN-style Ethereum & EVM data: trending pairs, live trades, token stats, OHLC, liquidity, top traders, Uniswap pool creation streams. GraphQL + WebSocket."/>
-<meta name="keywords" content="GMGN API, GMGN data API, Ethereum DEX API, trending pairs API, DEX screener API, buy sell volume, makers, OHLC, pool liquidity, top traders, Uniswap v3, Bitquery GraphQL, WebSocket crypto trades"/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="GMGN API for Ethereum & EVM | Bitquery"/>
-<meta property="og:description" content="Trending pairs, live DEX trades, token metrics, OHLC, liquidity, and top traders—like GMGN—for Ethereum and EVM chains."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="GMGN API for Ethereum & EVM | Bitquery"/>
-<meta property="twitter:description" content="Trending pairs, live DEX trades, token metrics, OHLC, liquidity, and top traders for EVM chains."/>
-</head>
-
 ## Related APIs
 
 - **[GMGN Solana API](/docs/blockchain/Solana/solana-gmgn-api)** — Same style of trending tokens, pair stats, and live trades on **Solana** (`DEXTradeByTokens`).
@@ -86,7 +73,6 @@ query TrendingPairs {
     }
   }
 }
-
 
 ```
 
@@ -136,7 +122,6 @@ subscription{
   }
 }
 
-
 ```
 
 ## Get Price of a Token
@@ -169,7 +154,6 @@ query MyQuery {
   }
 }
 
-
 ```
 
 ## Get Liquidity of a specific pair by using its Pair Address
@@ -192,7 +176,6 @@ query MyQuery {
     }
   }
 }
-
 
 ```
 

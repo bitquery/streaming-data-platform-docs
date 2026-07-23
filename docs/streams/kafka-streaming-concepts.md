@@ -3,10 +3,9 @@ sidebar_position: 1
 title: "Bitquery Kafka Streaming Concepts"
 description: "How Bitquery Kafka streams work vs GraphQL subscriptions — access, topics, offsets, and integration patterns."
 ---
-
 # Bitquery Kafka Streams - Understanding Concepts
 
-Bitquery provides realtime data via Kafka as well in addition to GraphQL subscriptions. In this section, we'll see how Kafka-based streaming works and how to integrate it into your application using practical code examples. For price data streams, check out our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) Kafka topic.
+Bitquery provides realtime data via Kafka as well in addition to GraphQL subscriptions. In this section, we'll see how Kafka-based streaming works and how to integrate it into your application using practical code examples. For price data streams, check out our [Crypto Price API](/docs/trading/crypto-price-api/introduction/) Kafka topic.
 
 ## How to Get Access to these Streams?
 
@@ -17,7 +16,7 @@ IDE credentials will not work with our Kafka Streams. You need a separate userna
 Kafka provides faster and more reliable streams comparing to GraphQL subscriptions due to the following advantages:
 
 1. It has lower latency due to the shorter data pipeline, as GraphQL subscriptions involve custom databases and additional logic to process, filter and format the data
-2. Better reliability of the connection protocol compared to WebSocket interface, better optimised for persistent connections
+2. Better reliability of the connection protocol compared to WebSocket interface, better optimized for persistent connections
 3. Messages from Kafka topic can be read from the latest offset, it is possible to create consumers that have all messages without gaps and interruption.
 4. Scalability is better as multiple consumers may split the load to consume one topic, automatically redistributing load on them
 

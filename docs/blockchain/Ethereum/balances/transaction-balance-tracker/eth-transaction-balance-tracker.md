@@ -1,36 +1,11 @@
 ---
 sidebar_position: 1
 title: "Ethereum Transaction Balance Tracker"
-description: "Bitquery blockchain API docs: Ethereum Transaction Balance Tracker."
+description: "Learn how to get real-time balance updates for all addresses in Ethereum transactions with balance change reasons using Bitquery."
 ---
 # Ethereum Transaction Balance Tracker
 
 The Ethereum Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the Ethereum blockchain, including detailed information about the reason for each balance change.
-
-<head>
-<meta name="title" content="Ethereum Transaction Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to get real-time balance updates for all addresses in Ethereum transactions with balance change reasons using Bitquery's Transaction Balance API."/>
-<meta name="keywords" content="ethereum transaction balance api, eth balance streams, ethereum balance api, balance change reason, transaction balance python api, ethereum transaction balance, balance updates api, ethereum network api, ethereum web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Ethereum Transaction Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to get real-time balance updates for all addresses in Ethereum transactions with balance change reasons using Bitquery's Transaction Balance API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum Transaction Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to get real-time balance updates for all addresses in Ethereum transactions with balance change reasons using Bitquery's Transaction Balance API." />
-</head>
 
 ## Subscribe to All Transaction Balances
 

@@ -1,39 +1,11 @@
 ---
 sidebar_position: 4
 title: "Arbitrum Smart Contract Events API"
-description: "Bitquery blockchain API docs: Arbitrum Smart Contract Events API."
+description: "Get Arbitrum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events"
 ---
 # Arbitrum Smart Contract Events API
 
 In this section we will see how to get Arbitrum Smart Contract Events information using our API.
-
-
-
-<head>
-<meta name="title" content="Arbitrum Smart Contract Events & logs API"/>
-
-<meta name="description" content="Get Arbitrum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events."/>
-
-<meta name="keywords" content="Arbitrum, Smart contract events, USDT contract, Arbitrum event monitoring, Event signature, event timestamp, event tracking, Contract signature, Arbitrum event"/>
-
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-
-<meta property="og:title" content="Arbitrum Smart Contract Events & logs API" />
-
-<meta property="og:description" content="Get Arbitrum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events."/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-
-<meta property="twitter:title" content="Arbitrum Smart Contract Events & logs API" />
-
-<meta property="twitter:description" content="Get Arbitrum Smart Contract Event data using Events API. Explore events in-depth using detailed information of events." />
-</head>
 
 ## Tracking Swap Events on Arbitrum
 

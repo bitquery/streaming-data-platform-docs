@@ -8,7 +8,6 @@ description: "Use the Bitquery GraphQL Count Distinct metric in queries and aggr
  ```count``` with ```distinct``` attribute calculates the unique values **in each set of dimensions**.
 This query will count miners (unique coinbase) by every date:
 
-
 ```graphql
 {
   EVM (dataset: archive){
@@ -21,6 +20,4 @@ This query will count miners (unique coinbase) by every date:
   }
 }
 ```
-
-
 

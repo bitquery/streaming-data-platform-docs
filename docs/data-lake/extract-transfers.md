@@ -9,7 +9,6 @@ keywords:
   - token transfer decoder
 sidebar_position: 2
 ---
-
 # Extract Transfers from a Block
 
 This page shows how to pull transfers out of a streamed block. It builds on the streaming and decoding steps from the [overview](./), so it assumes you already have a decoded `BlockMessage`.

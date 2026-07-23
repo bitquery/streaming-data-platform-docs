@@ -1,30 +1,10 @@
 ---
 title: "TRC20 API"
-description: "Bitquery blockchain API docs: TRC20 API."
+description: "Learn how to retrieve historical and real-time USDT data on the Tron network using Bitquery."
 ---
-
 # TRC20 API
 
 In this section we'll have a look at some examples using the TCR20 API.
-
-<head>
-<meta name="keywords" content="TRC20 API, TRC20 real-time transfers, USDT TRC20 DEX trades, Tron mempool transfers, Tron balance updates API, Tron balance Python API, Tron blockchain API, Tron network API, Tron web3 API, Bitquery Tron API, TRC20 documentation, Tron crypto API"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta property="og:title" content="How to Get Real-Time TRC20 Information on Tron Network" />
-<meta property="og:description" content="Learn how to retrieve historical and real-time USDT data on the Tron network using Bitquery's TRC20 API." />
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to Get Real-Time TRC20 Information on Tron Network" />
-<meta property="twitter:description" content="Learn how to retrieve real-time USDT Tron information using Bitquery's TRC20 API." />
-</head>
 
 ## Tether USD (USDT) Transfers in Realtime
 
@@ -117,7 +97,6 @@ subscription {
     }
   }
 }
-
 
 ```
 

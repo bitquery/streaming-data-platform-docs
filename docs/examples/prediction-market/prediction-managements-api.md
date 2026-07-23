@@ -12,7 +12,6 @@ keywords:
   - outcome tokens
   - Bitquery GraphQL prediction
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Prediction Market Managements API
@@ -574,6 +573,5 @@ query LatestMarketResolutions {
   }
 }
 ```
-
 
 For trades on outcome tokens, see [Prediction Market Trades API](../prediction-trades-api). For settlements (split, merge, redemption), see [Prediction Market Settlements API](../prediction-settlements-api).

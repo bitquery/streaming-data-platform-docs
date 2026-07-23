@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Components"
-description: "Bitquery how-to guide: Components."
+description: "The Components are the heavy-lifters of the app and contain the code snippets for the functionality."
 ---
 # Components
 
@@ -20,15 +20,11 @@ The code for the Home component includes the following:
 
 1.  Import CSS style file:
 
-
-
 `import '../../pages/style.css';` 
 
 This imports the CSS file "style.css" from the "pages" directory.
 
 2.  Import libraries and components:
-
-
 
 ```JSX
 import { useState, useEffect, React } from 'react'
@@ -47,15 +43,11 @@ This imports the following components and libraries:
 
 3.  Set API OAuth Token:
 
-
-
 `const oauth_token = 'YOUR KEY'` 
 
 This sets a constant variable "oauth_token" to the Bitquery API OAuth Token.
 
 4.  Define function to fetch data from API:
-
-
 
 `const fetchdata = async () => {
   // Code to fetch data
@@ -65,16 +57,12 @@ This function uses axios to send a post request to the Bitquery API to retrieve 
 
 5.  Define state variables:
 
-
-
 `const [balances, setBalances] = useState([]);
 const [loading, setLoading] = useState(true);` 
 
 These variables define the state of the component. The "balances" variable is initialized as an empty array, and the "loading" variable is set to true. These variables are used to display a loading spinner while the data is being fetched from the API.
 
 6.  Use useEffect to call fetchdata function:
-
-
 
 `useEffect(() => {
   fetchdata();
@@ -83,7 +71,6 @@ These variables define the state of the component. The "balances" variable is in
 This calls the "fetchdata" function when the component mounts for the first time.
 
 7.  Return JSX:
-
 
 ```JSX
 return (
@@ -96,8 +83,6 @@ return (
 This returns the JSX that defines the component's appearance and functionality.
 
 8.  Render JSX:
-
-
 
 ```JSX <Container className="project-section">
   <Row>
@@ -116,8 +101,6 @@ This renders the JSX that defines the layout of the component. It includes a con
 
 9.  Define BalanceCard component:
 
-
-
 `function BalanceCard({ balance }) {
   // Code to render balance information
 }` 
@@ -125,8 +108,6 @@ This renders the JSX that defines the layout of the component. It includes a con
 This component takes in a "balance" prop and renders information about the balance, including the currency name, address, amount, and ID.
 
 10.  Export Home component as default:
-
-
 
 `export default Home;` 
 
@@ -309,14 +290,11 @@ export default Home;
 
 ```
 
-
 ## About Page
 
 ### Import Statements
 
 The `Aboutpage` component imports the following libraries and modules:
-
-
 
 `import React from 'react'
 import '../../pages/style.css';
@@ -329,7 +307,6 @@ import { Container, Row, Col } from 'react-bootstrap'`
 ### About Page Content
 
 The `Aboutpage` component renders the following content:
-
 
 ```JSX
 <div className='aboutpagebackground'>
@@ -395,14 +372,11 @@ The `Aboutpage` component is exported using the `export default` statement:
 
 This allows other modules to import and use the `Aboutpage` component.
 
-
 ## Contact Page
-
 
 The `Contactpage` component is a React functional component that renders the Contact Us page of a website. It includes a header, a paragraph of text, and a link to the Telegram channel where users can get in touch with the website's team.
 
 ### Import Statements
-
 
 ```JSX
 import React from 'react';
@@ -413,8 +387,6 @@ import { Container } from 'react-bootstrap';
 This component uses `React` to create the component, `style.css` for custom styling, and `Container` component from `react-bootstrap` to create a responsive container.
 
 ### Contactpage Component
-
-
 
 ```JSX
 function Contactpage() {
@@ -438,7 +410,6 @@ export default Contactpage;
 ```
 
 ## Header Component
-
 
 ### State
 

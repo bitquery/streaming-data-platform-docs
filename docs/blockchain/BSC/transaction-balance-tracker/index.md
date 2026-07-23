@@ -14,7 +14,6 @@ keywords:
   - Balance Change Reason Codes
   - Real-time Balance Updates
 ---
-
 # BSC Transaction Balance Tracker API - Complete Guide
 
 ## What is Transaction Balance Tracker?
@@ -37,8 +36,8 @@ Our Transaction Balance Tracker APIs track balance changes across different scen
 New to Transaction Balance Tracker? Here's how to get started:
 
 1. **[Create a free account](https://ide.bitquery.io/)** - Get instant access to our GraphQL IDE
-2. **[Generate your API key](https://docs.bitquery.io/docs/authorization/how-to-generate/)** - Required for API access
-3. **[Run your first query](https://docs.bitquery.io/docs/start/first-query/)** - Learn the basics in 5 minutes
+2. **[Generate your API key](/docs/authorization/how-to-generate/)** - Required for API access
+3. **[Run your first query](/docs/start/first-query/)** - Learn the basics in 5 minutes
 4. **[Explore examples](#bsc-transaction-balance-tracker-apis)** - Copy-paste ready queries below
 
 Need help crafting a query or subscription? Message us on [support](https://t.me/Bloxy_info).
@@ -59,11 +58,11 @@ Get live BSC balance updates through our streaming solutions:
 - **GraphQL Subscriptions**: Convert any query to a live stream by changing `query` to `subscription`
 - **Kafka Streaming**: High-throughput streaming for enterprise applications
 
-See examples and code snippets [here](https://docs.bitquery.io/docs/subscriptions/websockets/) for GraphQL subscription implementation, and learn about [Kafka streaming](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) for high-volume use cases.
+See examples and code snippets [here](/docs/subscriptions/websockets/) for GraphQL subscription implementation, and learn about [Kafka streaming](/docs/streams/kafka-streaming-concepts/) for high-volume use cases.
 
 ## BSC Transaction Balance Tracker APIs
 
-### [BSC Transaction Balance Tracker](https://docs.bitquery.io/docs/blockchain/BSC/transaction-balance-tracker/bsc-transaction-balance-tracker)
+### [BSC Transaction Balance Tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-transaction-balance-tracker)
 
 The core Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the BSC network, including detailed information about the reason for each balance change. Track native ETH, ERC-20 tokens, and NFTs with pre/post balances, USD values, and balance change reason codes.
 
@@ -74,7 +73,7 @@ The core Transaction Balance Tracker API provides real-time balance updates for 
 - Track ERC-20, ERC-721, and ERC-1155 tokens
 - Access pre and post balance values
 
-### [BSC Validator Balance Tracker](https://docs.bitquery.io/docs/blockchain/BSC/transaction-balance-tracker/bsc-validator-balance-tracker)
+### [BSC Validator Balance Tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-validator-balance-tracker)
 
 Track BSC validator balances, staking rewards, and withdrawals from the beacon chain. Monitor validator activity including block rewards, withdrawal events, and transaction fee rewards.
 
@@ -85,7 +84,7 @@ Track BSC validator balances, staking rewards, and withdrawals from the beacon c
 - Filter by specific validator addresses
 - Real-time validator balance updates
 
-### [BSC Miner Balance Tracker](https://docs.bitquery.io/docs/blockchain/BSC/transaction-balance-tracker/bsc-miner-balance-tracker)
+### [BSC Miner Balance Tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-miner-balance-tracker)
 
 Monitor BSC miner balances, mining rewards, uncle block rewards, and transaction fee rewards. Track historical and real-time mining activity across the BSC network.
 
@@ -96,7 +95,7 @@ Monitor BSC miner balances, mining rewards, uncle block rewards, and transaction
 - Filter by specific miner addresses
 - Historical mining reward data
 
-### [BSC MEV Balance Tracker](https://docs.bitquery.io/docs/blockchain/BSC/transaction-balance-tracker/bsc-mev-balance-tracker)
+### [BSC MEV Balance Tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-mev-balance-tracker)
 
 Track MEV (Maximal Extractable Value) related balance changes including transaction fee rewards, block builder rewards, and other MEV extraction activities. Monitor MEV bots and block builders in real-time.
 
@@ -107,7 +106,7 @@ Track MEV (Maximal Extractable Value) related balance changes including transact
 - Track large MEV transactions
 - Aggregate MEV reward statistics
 
-### [BSC Self-Destruct Balance Tracker](https://docs.bitquery.io/docs/blockchain/BSC/transaction-balance-tracker/bsc-self-destruct-balance-api)
+### [BSC Self-Destruct Balance Tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-self-destruct-balance-api)
 
 Monitor contract self-destruct events, ephemeral contracts (like MEV bots), and security incidents. Track contracts that self-destruct and addresses that receive funds from self-destructed contracts.
 

@@ -12,10 +12,9 @@ keywords:
     "Bitquery API",
   ]
 ---
-
 # Stablecoin Payments API
 
-Bitquery's Stablecoin Payments API exposes real-time and historical payment flows for USDT, USDC, FDUSD, EURC, DAI, TUSD, USDS, USD1, USDD and other major stablecoins across Solana, Ethereum, Tron, BSC, Base, Arbitrum, Polygon and more — through a single GraphQL endpoint. This page focuses on payment-oriented use cases (incoming/outgoing transfers, merchant detection, address monitoring, AML/compliance). For related capabilities, see the [Stablecoin Transfers API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-transfers-api), [Stablecoin Balance API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-balance-api), [Stablecoin Trades API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-trades-api), [Stablecoin Reserve API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-reserve-api) and [Stablecoin Price API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-price-api).
+Bitquery's Stablecoin Payments API exposes real-time and historical payment flows for USDT, USDC, FDUSD, EURC, DAI, TUSD, USDS, USD1, USDD and other major stablecoins across Solana, Ethereum, Tron, BSC, Base, Arbitrum, Polygon and more — through a single GraphQL endpoint. This page focuses on payment-oriented use cases (incoming/outgoing transfers, merchant detection, address monitoring, AML/compliance). For related capabilities, see the [Stablecoin Transfers API](/docs/stablecoin-APIs/stablecoin-transfers-api), [Stablecoin Balance API](/docs/stablecoin-APIs/stablecoin-balance-api), [Stablecoin Trades API](/docs/stablecoin-APIs/stablecoin-trades-api), [Stablecoin Reserve API](/docs/stablecoin-APIs/stablecoin-reserve-api) and [Stablecoin Price API](/docs/stablecoin-APIs/stablecoin-price-api).
 
 All examples below are runnable in the [Bitquery IDE](https://ide.bitquery.io). Streams are delivered over WebSocket / Kafka subscriptions; historical queries use the same schema over HTTP. For pre-built stablecoin dashboards (top tokens, flows, market activity), browse the [DEXrabbit Stablecoins dashboard](https://dexrabbit.bitquery.io/categories/stablecoins).
 
@@ -152,7 +151,7 @@ subscription {
 }
 ```
 
-For the equivalent on Solana, see the [Stablecoin Transfers API → Stablecoin received and sent by an address](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-transfers-api#stablecoin-recieved-and-sent-by-an-address).
+For the equivalent on Solana, see the [Stablecoin Transfers API → Stablecoin received and sent by an address](/docs/stablecoin-APIs/stablecoin-transfers-api#stablecoin-recieved-and-sent-by-an-address).
 
 ### 5. Stablecoin Payments For a Specific Address (BSC)
 
@@ -233,7 +232,7 @@ subscription {
 }
 ```
 
-For the full transfer schema (mint/burn detection, `Type`, dataset selection), see the [Stablecoin Transfers API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-transfers-api).
+For the full transfer schema (mint/burn detection, `Type`, dataset selection), see the [Stablecoin Transfers API](/docs/stablecoin-APIs/stablecoin-transfers-api).
 
 ## Compliance & Risk Checks
 
@@ -273,11 +272,11 @@ For **AML/KYC and risk monitoring**, you can analyze a payment counterparty's fu
 }
 ```
 
-To verify the live balance of a payer/payee on any chain, see the [Stablecoin Balance API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-balance-api) (Solana, Ethereum and Tron examples included).
+To verify the live balance of a payer/payee on any chain, see the [Stablecoin Balance API](/docs/stablecoin-APIs/stablecoin-balance-api) (Solana, Ethereum and Tron examples included).
 
 ### Confirming the Sender's Solvency Before Settlement
 
-Before releasing goods or off-ramping a stablecoin payment, you may want to verify the sender actually held the asset at the moment of transfer. Use the [Stablecoin Balance API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-balance-api#stablecoin-balance-of-an-address) to fetch a wallet's current stablecoin balance per chain. For supply-side checks (e.g. confirming an issuer mint backed an inbound payment), use the [Stablecoin Reserve API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-reserve-api).
+Before releasing goods or off-ramping a stablecoin payment, you may want to verify the sender actually held the asset at the moment of transfer. Use the [Stablecoin Balance API](/docs/stablecoin-APIs/stablecoin-balance-api#stablecoin-balance-of-an-address) to fetch a wallet's current stablecoin balance per chain. For supply-side checks (e.g. confirming an issuer mint backed an inbound payment), use the [Stablecoin Reserve API](/docs/stablecoin-APIs/stablecoin-reserve-api).
 
 ## Payment Analytics
 
@@ -337,7 +336,7 @@ Identify addresses that **last received USDT** on a specific date — useful for
 
 ### 3. Top Stablecoin Holders
 
-Find **top holders of USDT on Ethereum**, including inflows, outflows, and full activity history. The [Stablecoin Balance API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-balance-api#get-top-100-holders-of-a-particular-stablecoin) covers the same pattern on Solana.
+Find **top holders of USDT on Ethereum**, including inflows, outflows, and full activity history. The [Stablecoin Balance API](/docs/stablecoin-APIs/stablecoin-balance-api#get-top-100-holders-of-a-particular-stablecoin) covers the same pattern on Solana.
 
 🔗 [Query Example](https://ide.bitquery.io/Top-holders-of-usdt-on-specific-date)
 
@@ -372,17 +371,17 @@ Find **top holders of USDT on Ethereum**, including inflows, outflows, and full 
 
 ## Pricing Stablecoin Payments Accurately
 
-For high-value or cross-border payments, even a 20–50 bps deviation from the peg materially changes settlement value. Use the [Stablecoin Price API](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-price-api) to:
+For high-value or cross-border payments, even a 20–50 bps deviation from the peg materially changes settlement value. Use the [Stablecoin Price API](/docs/stablecoin-APIs/stablecoin-price-api) to:
 
-- [Stream the latest price](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-price-api#stream-latest-stablecoin-price) of USDT/USDC/DAI/USDS at 1-second intervals.
-- [Compare prices across chains](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-price-api#check-arbitrage-of-a-stablecoin-across-chains) to mark the payment to its true on-chain rate.
-- [Monitor peg health per DEX/market](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-price-api#stablecoin-peg-health-api) to catch a depeg before it hits your treasury.
+- [Stream the latest price](/docs/stablecoin-APIs/stablecoin-price-api#stream-latest-stablecoin-price) of USDT/USDC/DAI/USDS at 1-second intervals.
+- [Compare prices across chains](/docs/stablecoin-APIs/stablecoin-price-api#check-arbitrage-of-a-stablecoin-across-chains) to mark the payment to its true on-chain rate.
+- [Monitor peg health per DEX/market](/docs/stablecoin-APIs/stablecoin-price-api#stablecoin-peg-health-api) to catch a depeg before it hits your treasury.
 
-For depeg detection at the trade level (alerting when any trade prints outside `0.95–1.05`), see the [Stablecoin Trades API → Depeg tracking streams](https://docs.bitquery.io/docs/stablecoin-APIs/stablecoin-trades-api#stablecoin-depeg-tracking-stream-for-evm).
+For depeg detection at the trade level (alerting when any trade prints outside `0.95–1.05`), see the [Stablecoin Trades API → Depeg tracking streams](/docs/stablecoin-APIs/stablecoin-trades-api#stablecoin-depeg-tracking-stream-for-evm).
 
 ## Asset-Specific Guides
 
-For deep-dives on a single asset (price + payments + trades + reserves + balances curated together), see [USDT API](https://docs.bitquery.io/docs/stablecoin-APIs/usdt-api).
+For deep-dives on a single asset (price + payments + trades + reserves + balances curated together), see [USDT API](/docs/stablecoin-APIs/usdt-api).
 
 ## Why Use Bitquery for Stablecoin Payments?
 

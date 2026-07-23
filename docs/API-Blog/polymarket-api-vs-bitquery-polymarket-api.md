@@ -13,7 +13,6 @@ keywords:
   - Polymarket websocket
   - on-chain prediction markets
 ---
-
 # Polymarket API vs Bitquery Polymarket API
 
 If you are building on Polymarket—whether a dashboard, a trading bot, a research tool, or a wallet leaderboard—you have two very different data stacks to choose from. Polymarket publishes a set of **official REST and WebSocket APIs** that serve the [polymarket.com](https://polymarket.com) application itself. Bitquery offers an **on-chain-derived GraphQL API** for the same Polymarket markets on Polygon, plus subscriptions and Kafka streams.
@@ -48,20 +47,20 @@ Bitquery takes a different approach. It indexes the Polymarket contracts on Poly
 
 The pages under **`docs/examples/polymarket-api/`** in this repo correspond to these guides:
 
-- [Polymarket API overview](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/): the entry point, covering the core PredictionTrades query, live subscriptions, whale trades, and top buyers and sellers.
-- [Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api/): filter markets by market_slug, condition_id, or token_id through PredictionManagements.
-- [Polymarket Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api/): recent trade counts, collateral totals, and distinct-market counts for any wallet, plus guidance on which fields belong to Polymarket's Profile, Gamma, or Bridge APIs.
-- [Polymarket Advanced Analytics API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-advanced-analytics-api/): USDC TVL in core contracts, daily volume, maker/taker splits, order flow by market, whale subscriptions, settlement flows, and top markets by volume.
-- [Polymarket Sports API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-sports-api/): cricket, sports, and esports markets filtered by ResolutionSource, description, or outcome label.
-- [Polymarket Commodity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-commodity-api/): oil, gold, and commodity-linked prediction markets.
-- [Bitcoin Up or Down Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/bitcoin-polymarket-api/): BTC direction markets, live odds, and top winners from settlements.
-- [Polymarket Wallet Realized PnL](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/): PnL derived from on-chain fills.
+- [Polymarket API overview](/docs/examples/polymarket-api/polymarket-api/): the entry point, covering the core PredictionTrades query, live subscriptions, whale trades, and top buyers and sellers.
+- [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/): filter markets by market_slug, condition_id, or token_id through PredictionManagements.
+- [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/): recent trade counts, collateral totals, and distinct-market counts for any wallet, plus guidance on which fields belong to Polymarket's Profile, Gamma, or Bridge APIs.
+- [Polymarket Advanced Analytics API](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/): USDC TVL in core contracts, daily volume, maker/taker splits, order flow by market, whale subscriptions, settlement flows, and top markets by volume.
+- [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/): cricket, sports, and esports markets filtered by ResolutionSource, description, or outcome label.
+- [Polymarket Commodity API](/docs/examples/polymarket-api/polymarket-commodity-api/): oil, gold, and commodity-linked prediction markets.
+- [Bitcoin Up or Down Polymarket API](/docs/examples/polymarket-api/bitcoin-polymarket-api/): BTC direction markets, live odds, and top winners from settlements.
+- [Polymarket Wallet Realized PnL](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/): PnL derived from on-chain fills.
 
 Underneath, Bitquery's primary operations are PredictionTrades (buys and sells with buyer, seller, amount, price, USD-denominated collateral, and full market metadata), PredictionManagements (creation, resolution, and other lifecycle events), and PredictionSettlements (splits, merges, redemptions). Each can be run as a query for history or as a subscription for live streaming; swapping the single keyword is the only change required. For low-latency pipelines, Bitquery also publishes Kafka topics matic.predictions.proto and matic.broadcasted.predictions.proto (mempool), which require separate credentials.
 
 Because everything is GraphQL, aggregations, limitBy, orderBy: descendingByField, and computed expressions (e.g. `calculate(expression: "$buyUSD + $sellUSD")`) are first-class. That is what makes queries like "top 100 Polymarket markets by volume over a window" or "all whale trades above $10k across Polymarket in real time" one query instead of a client-side batch job over the CLOB.
 
-The one caveat is retention on the live endpoint: dataset: realtime holds roughly the **last 7 days**. For longer windows, a **full historical dataset is available via [Bitquery Cloud](https://docs.bitquery.io/docs/cloud/) on request**, with no need to self-persist the stream.
+The one caveat is retention on the live endpoint: dataset: realtime holds roughly the **last 7 days**. For longer windows, a **full historical dataset is available via [Bitquery Cloud](/docs/cloud/) on request**, with no need to self-persist the stream.
 
 ## Side-by-side comparison
 
@@ -70,17 +69,17 @@ The one caveat is retention on the live endpoint: dataset: realtime holds roughl
 | **Place orders** | Yes, via CLOB /order with signed requests | No (read-only) |
 | **Live order book (bids/asks/depth)** | Yes, via CLOB REST + WS market channel | No; trades and settlements, not the L2 book |
 | **Event, market, tag, series metadata** | Yes, via Gamma API, canonical | Partial: market ID, question, outcomes, condition ID, resolution source (on-chain derived) |
-| **User positions / PnL** | Yes, via Data API /positions | Derivable from trades + settlements; [realized PnL example](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
-| **User activity feed** | Yes, via Data API /activity | Yes, via [Wallet API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api/) |
+| **User positions / PnL** | Yes, via Data API /positions | Derivable from trades + settlements; [realized PnL example](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
+| **User activity feed** | Yes, via Data API /activity | Yes, via [Wallet API](/docs/examples/polymarket-api/polymarket-wallet-api/) |
 | **Price history per token** | Yes, via CLOB /prices-history | Yes, via PredictionTrades with time filter |
 | **On-chain fields** (tx hash, block time, log signatures, condition ID events) | Limited | Yes, native on every row |
 | **Aggregations** (top N markets by volume, top wallets, maker/taker split) | Client-side | Native GraphQL: sum, count(distinct:), limitBy, orderBy: descendingByField |
-| **Whale trade filtering across all markets** | Manual | One subscription; see the [whale trades example](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/) |
+| **Whale trade filtering across all markets** | Manual | One subscription; see the [whale trades example](/docs/examples/polymarket-api/polymarket-api/) |
 | **Real-time streaming** | WebSocket (ws-subscriptions-clob, ws-live-data), cannot unsubscribe, some filter gaps | GraphQL subscriptions plus Kafka matic.predictions.proto |
-| **Settlement (split / merge / redeem) analytics** | Indirect | Native; see [Advanced Analytics](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-advanced-analytics-api/) |
-| **Cross-market vertical APIs** (sports, commodity, BTC up/down) | Filter manually on Gamma | Purpose-built: [Sports](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-sports-api/), [Commodity](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-commodity-api/), [Bitcoin Up or Down](https://docs.bitquery.io/docs/examples/polymarket-api/bitcoin-polymarket-api/) |
+| **Settlement (split / merge / redeem) analytics** | Indirect | Native; see [Advanced Analytics](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/) |
+| **Cross-market vertical APIs** (sports, commodity, BTC up/down) | Filter manually on Gamma | Purpose-built: [Sports](/docs/examples/polymarket-api/polymarket-sports-api/), [Commodity](/docs/examples/polymarket-api/polymarket-commodity-api/), [Bitcoin Up or Down](/docs/examples/polymarket-api/bitcoin-polymarket-api/) |
 | **TVL / USDC custody balances** | Not exposed | Yes, via TransactionBalances on Conditional Tokens + neg-risk collateral |
-| **Historical depth** | Full CLOB history | realtime dataset ~last 7 days; full historical dataset available via [Bitquery Cloud](https://docs.bitquery.io/docs/cloud/) on request |
+| **Historical depth** | Full CLOB history | realtime dataset ~last 7 days; full historical dataset available via [Bitquery Cloud](/docs/cloud/) on request |
 | **Auth** | API-key + HMAC-SHA256 (CLOB); none (Gamma) | Bitquery API token; Kafka requires separate creds |
 | **Rate limits** | 4,000/10s (Gamma), ~10 orders/sec (CLOB) | No data or rate limits on streams; Kafka for enterprise streaming and scaling to 1,000+ simultaneous users |
 
@@ -125,10 +124,10 @@ A reasonable production architecture looks like this:
 
 If you are new to Bitquery's Polymarket coverage, four queries exercise most of the surface area:
 
-1. The basic recent-trades query from the [Polymarket API overview](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/), which confirms your API token and shows the shape of a PredictionTrade.
+1. The basic recent-trades query from the [Polymarket API overview](/docs/examples/polymarket-api/polymarket-api/), which confirms your API token and shows the shape of a PredictionTrade.
 2. The volume-ranking query from the same doc, which demonstrates limitBy, orderBy: descendingByField, and the computed sumBuyAndSell expression.
 3. A live whale-trade subscription: swap the query keyword for subscription and filter on `CollateralAmountInUSD: { gt: "10000" }` to push events as they happen.
-4. The daily volume and maker/taker split from the [Advanced Analytics page](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-advanced-analytics-api/), which shows how far GraphQL takes you before any client-side aggregation is required.
+4. The daily volume and maker/taker split from the [Advanced Analytics page](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/), which shows how far GraphQL takes you before any client-side aggregation is required.
 
 All of these are runnable from the Bitquery IDE (linked inline from each docs page) before you ever issue an API token.
 
@@ -144,19 +143,19 @@ The two APIs are not rivals; they answer different questions. The official Polym
 
 Canonical Bitquery Polymarket references:
 
-- [Polymarket API, Trade, Prices & Market Data](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)
-- [Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api/) for CTF Exchange, condition_id, and token_id lookups
-- [Polymarket Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api/)
-- [Polymarket Advanced Analytics API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-advanced-analytics-api/)
+- [Polymarket API, Trade, Prices & Market Data](/docs/examples/polymarket-api/polymarket-api/)
+- [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/) for CTF Exchange, condition_id, and token_id lookups
+- [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/)
+- [Polymarket Advanced Analytics API](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/)
 
 Vertical guides:
 
-- [Polymarket Sports API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-sports-api/)
-- [Polymarket Commodity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-commodity-api/)
-- [Bitcoin Up or Down Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/bitcoin-polymarket-api/)
-- [Polymarket Wallet Realized PnL](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/)
+- [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/)
+- [Polymarket Commodity API](/docs/examples/polymarket-api/polymarket-commodity-api/)
+- [Bitcoin Up or Down Polymarket API](/docs/examples/polymarket-api/bitcoin-polymarket-api/)
+- [Polymarket Wallet Realized PnL](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/)
 
 Infrastructure and live reference:
 
-- [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
+- [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/)
 - [DexRabbit Polymarket Predictions dashboard](https://dexrabbit.bitquery.io/polymarket-predictions)

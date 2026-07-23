@@ -20,7 +20,6 @@ Typically you should avoid using this type of query, as it is slower than real t
 and does not give full consistency of the data.
 :::
 
-
 Also Check [Archive](/docs/graphql/dataset/archive) and [RealTime](/docs/graphql/dataset/realtime) dataset.
 
 ## What is the difference between realtime, archive, and combined datasets?

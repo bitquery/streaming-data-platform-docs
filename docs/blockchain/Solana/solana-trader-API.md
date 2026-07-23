@@ -1,41 +1,18 @@
 ---
 title: "Solana Trader API"
-description: "Bitquery blockchain API docs: Solana Trader API."
+description: "Get detailed insights into Solana traders and their activities, including Pumpfun data, across DEX platforms like Raydium and Jupiter. Access on-chain trading pair details, liquidity pools, and transaction analytics through our comprehensive Solana Trader API"
 ---
-
 # Solana Trader API
 
 :::tip Need real-time Solana trader data or anything from the last ~30 days?
-For **real-time trader and wallet data over the last ~30 days** across **9 chains in one API**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical Solana trader data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time trader and wallet data over the last ~30 days** across **9 chains in one API**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical Solana trader data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-
-In this section we will see how to get Solana trader information using our API. More queries on DEX trades including latest trades, OHLC, and other data points can be found in the [Solana DEX Trades API page](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/).
+In this section we will see how to get Solana trader information using our API. More queries on DEX trades including latest trades, OHLC, and other data points can be found in the [Solana DEX Trades API page](/docs/blockchain/Solana/solana-dextrades/).
 
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
 :::
-
-<head>
-<meta name="title" content="Solana Trader API | Real-Time Data for DEX Trades with Pumpfun Insights" />
-<meta name="description" content="Get detailed insights into Solana traders and their activities, including Pumpfun data, across DEX platforms like Raydium and Jupiter. Access on-chain trading pair details, liquidity pools, and transaction analytics through our comprehensive Solana Trader API." />
-<meta name="keywords" content="Solana Trader API, Solana DEX Trades API, Solana trading API, Pumpfun data, Raydium API, Jupiter API, Solana liquidity pools, Solana trading pairs, Solana blockchain API, crypto trading data API, web3 Solana API, Solana on-chain data API, Solana DeFi API" />
-<meta name="robots" content="index, follow" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="language" content="English" />
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Solana Trader API | Real-Time Data for DEX Trades with Pumpfun Insights" />
-<meta property="og:description" content="Get detailed insights into Solana traders and their activities, including Pumpfun data, across DEX platforms like Raydium and Jupiter. Access on-chain trading pair details, liquidity pools, and transaction analytics through our comprehensive Solana Trader API." />
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana Trader API | Real-Time Data for DEX Trades with Pumpfun Insights" />
-<meta property="twitter:description" content="Get detailed insights into Solana traders and their activities, including Pumpfun data, across DEX platforms like Raydium and Jupiter. Access on-chain trading pair details, liquidity pools, and transaction analytics through our comprehensive Solana Trader API." />
-</head>
 
 ## Top Traders of a token
 
@@ -272,7 +249,7 @@ query MyQuery ($trader:String, $token:String){
 
 ## Subscribe to a Trader in Real-time
 
-The below subscription query will fetch in real-time the trades done by a wallet. You can use websockets to build applications on this data. Read more [here](https://docs.bitquery.io/docs/subscriptions/websockets/)
+The below subscription query will fetch in real-time the trades done by a wallet. You can use websockets to build applications on this data. Read more [here](/docs/subscriptions/websockets/)
 
 To filter trades by a wallet we will use the condition `Account: {Address: {is}}`. Run the subscription query [here](https://ide.bitquery.io/trades-of-a-wallet_2)
 

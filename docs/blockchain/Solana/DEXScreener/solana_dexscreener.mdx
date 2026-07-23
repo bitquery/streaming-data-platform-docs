@@ -10,29 +10,12 @@ keywords:
   - DEX pairs API
   - real-time DEX trades
 ---
-
-<head>
-  <meta
-    name="title"
-    content="DEXScreener API Documentation - Solana Trades, Pairs, Prices"
-  />
-  <meta
-    name="description"
-    content="DEXScreener API documentation for Solana: get real-time trades, pair data, prices, volumes. Same data as DEXScreener dashboard via GraphQL, WebSocket, and Kafka."
-  />
-  <meta
-    name="keywords"
-    content="DEXScreener API, DEXScreener API documentation, DEXScreener Solana, Solana DEX API, real-time DEX trades"
-  />
-  <meta name="robots" content="index, follow" />
-</head>
-
 # DEXScreener API Documentation - Solana Trades, Pairs, Prices
 
 Everything you see on the DEXScreener Solana dashboard—live pairs, trades, prices, volumes, makers/buyers/sellers, and more—can be accessed via APIs/Streams with Bitquery.
 We expose the same on-chain data via GraphQL APIs, real-time WebSocket streams, and enterprise Kafka topics, with optional cloud connectors (AWS, GCP, Snowflake) for analytics pipelines.
 
-Checkout our [DEXScreener EVM API documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener/) if you are interested in getting EVM chains(Ethereum, Binance Smart Chain(BSC), Arbitrum, Base, Matic, Optimism, etc) data which DEXScreener shows.
+Checkout our [DEXScreener EVM API documentation](/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener/) if you are interested in getting EVM chains(Ethereum, Binance Smart Chain(BSC), Arbitrum, Base, Matic, Optimism, etc) data which DEXScreener shows.
 
 ## Bitquery Solana Data Access Options
 
@@ -43,9 +26,9 @@ Checkout our [DEXScreener EVM API documentation](https://docs.bitquery.io/docs/b
 
 ## Getting Started with Solana
 
-- **[Solana API Examples](https://docs.bitquery.io/docs/blockchain/Solana/)** - Complete collection of Solana API examples
-- **[Solana DEX Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades)** - Real-time DEX trading data and analytics
-- **[Solana Subscriptions](https://docs.bitquery.io/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
+- **[Solana API Examples](/docs/blockchain/Solana/)** - Complete collection of Solana API examples
+- **[Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)** - Real-time DEX trading data and analytics
+- **[Solana Subscriptions](/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
 - **[IDE for Solana](https://graphql.bitquery.io/ide)** - Interactive development environment for testing Solana queries
 
 This guide shows how to retrieve the same Solana DEX data that DEXScreener displays—real-time trades, pair stats, volumes, buyers/sellers, and more—using Bitquery APIs, streams, and Kafka.
@@ -347,7 +330,7 @@ query MyQuery {
 
 ## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
+The queries below use the **[Trades cube](/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
 ### Get All DEX Trades on Solana With Price, Market Cap, and Supply
 

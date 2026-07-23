@@ -2,7 +2,7 @@
 sidebar_position: 4
 sidebar_label: Newly Created Pairs
 title: "Getting Latest Pairs"
-description: "Bitquery blockchain API docs: Getting Latest Pairs."
+description: "Let's see how we can get latest trading pairs created on DEXs. In this example we use Smart Contract Events to track PoolCreated event for Uniswap v3 factory contract. Because whenever a new pool gets created Uniswap v3 factory contract emits a PoolCreated event with the details of the pool."
 ---
 # Getting Latest Pairs
 
@@ -60,7 +60,6 @@ Let's see how we can get latest trading pairs created on DEXs. In this example w
     }
   }
 }
-
 
 ```
 

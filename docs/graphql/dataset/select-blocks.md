@@ -5,7 +5,6 @@ description: "Bitquery GraphQL dataset guide: Blockchain Reorg Tree."
 ---
 # Blockchain Reorg Tree
 
-
 Blocks in the blockchain form a tree (or directed acyclic graph DAG in general):
 
 ![Blockchain graph](/img/diagrams/tree.png)
@@ -26,8 +25,6 @@ Branched block 102 however is included in real time database.
 :::
 ## Select Blocks
 
-
-
 Select blocks attribute controls real time and combined database queries in terms of which block data 
 to include in the result set.
 
@@ -36,7 +33,6 @@ It has the following options:
 * ```trunk``` (default)  will include only blocks that are on the main current trunk (having the maximum height on tip)
 * ```tree```  all tree, combining trunk and branches
 * ```branches``` for only branched blocks (not on trunk)
-
 
 :::tip
 You need ```tree``` and ```branches``` only in a very special case, when you need to analyze the reorganization tree

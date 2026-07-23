@@ -1,37 +1,18 @@
 ---
 title: "Raydium Launchpad API"
-description: "Bitquery blockchain API docs: Raydium Launchpad API."
+description: "Access real-time on-chain data for Raydium Launchpad tokens using the Bitquery-powered Raydium Launchpad API. Track trades, liquidity, token prices, and more on Solana"
 ---
-
 # Raydium Launchpad API
 
 :::tip Need real-time Raydium Launchpad data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Raydium Launchpad swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Raydium Launchpad data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Raydium Launchpad swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Raydium Launchpad data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this section we see how to get data on Launchpad by Raydium. This includes token creation, latest trades by trader, for a token etc. You can also check out our [Pump Fun API Docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [LetsBonk.fun API Docs](https://docs.bitquery.io/docs/blockchain/Solana/letsbonk-api/).
+In this section we see how to get data on Launchpad by Raydium. This includes token creation, latest trades by trader, for a token etc. You can also check out our [Pump Fun API Docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [LetsBonk.fun API Docs](/docs/blockchain/Solana/letsbonk-api/).
 
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
-
-<head>
-  <meta name="title" content="Raydium Launchpad API - Solana On-Chain Token & Trade Data" />
-  <meta name="description" content="Access real-time on-chain data for Raydium Launchpad tokens using the Bitquery-powered Raydium Launchpad API. Track trades, liquidity, token prices, and more on Solana." />
-  <meta name="keywords" content="Raydium Launchpad API,Raydium token data,Solana API,Raydium on-chain data,Raydium DEX API,Solana Launchpad tokens,Raydium AcceleRaytor,Raydium LaunchLab,Bitquery API,crypto trading API,Solana memecoins,Raydium blockchain data,token analytics API" />
-  <meta name="robots" content="index, follow" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Raydium Launchpad API - Solana On-Chain Token & Trade Data" />
-  <meta property="og:description" content="Explore token analytics and real-time data from Raydium Launchpad projects on Solana with the Bitquery API." />
-
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="Raydium Launchpad API - Token & Trade Data on Solana" />
-  <meta property="twitter:description" content="Monitor token trades, prices, and liquidity for Raydium Launchpad projects using Bitquery's on-chain API." />
-</head>
 
 ## Latest Pools Created on Launchpad
 
@@ -710,7 +691,7 @@ query LatestTrades {
 
 </details>
 
-Similarly, you can subscribe to trades on launchpad in real-time using [subscription query](https://ide.bitquery.io/Subscribe-to-Trades-on-Launchpad). The same can be tracked using [Bitquery Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
+Similarly, you can subscribe to trades on launchpad in real-time using [subscription query](https://ide.bitquery.io/Subscribe-to-Trades-on-Launchpad). The same can be tracked using [Bitquery Kafka Streams](/docs/streams/kafka-streaming-concepts/)
 
 ## Latest Price of a Token on Launchpad
 

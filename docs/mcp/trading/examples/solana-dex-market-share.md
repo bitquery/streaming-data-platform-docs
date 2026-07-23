@@ -1,6 +1,7 @@
 ---
 title: "Example: Solana DEX Market Share — Meteora vs Pumpswap vs Raydium"
 description: "Use the Bitquery MCP to break down Solana DEX volume by protocol family — Meteora, Pumpswap, Raydium, Orca and the long tail. Real 24h numbers."
+image: "/img/mcp/charts/solana-dex-share.svg"
 keywords:
   - Solana DEX market share
   - Meteora vs Pumpswap
@@ -11,23 +12,6 @@ keywords:
   - Orca Whirlpool volume
 sidebar_label: "Solana DEX Market Share"
 ---
-
-<head>
-  <meta name="title" content="Solana DEX Market Share — Meteora vs Pumpswap vs Raydium (Bitquery MCP)"/>
-  <meta name="description" content="Use the Bitquery MCP to break down Solana DEX volume by protocol family — Meteora, Pumpswap, Raydium, Orca and the long tail. Real 24h numbers."/>
-  <meta name="robots" content="index, follow"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Solana DEX Market Share — Meteora vs Pumpswap vs Raydium"/>
-  <meta property="og:description" content="Live ranking of Solana DEX protocol families by 24h USD volume — Meteora dominates with ~58%, Pumpswap absorbs graduated tokens, the long tail still moves $80M–200M / day."/>
-  <meta property="og:url" content="https://docs.bitquery.io/docs/mcp/trading/examples/solana-dex-market-share/"/>
-  <meta property="og:image" content="https://docs.bitquery.io/img/mcp/charts/solana-dex-share.svg"/>
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Solana DEX Market Share — Meteora vs Pumpswap vs Raydium"/>
-  <meta property="twitter:description" content="Live ranking of Solana DEX protocol families by 24h USD volume — Meteora dominates with ~58%, Pumpswap absorbs graduated tokens, the long tail still moves $80M–200M / day."/>
-  <meta property="twitter:image" content="https://docs.bitquery.io/img/mcp/charts/solana-dex-share.svg"/>
-  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/trading/examples/solana-dex-market-share/"/>
-</head>
-
 # Solana DEX Market Share Battle
 
 > **The trader question:** *"Which Solana DEX is winning today's volume? Where is liquidity actually flowing?"*

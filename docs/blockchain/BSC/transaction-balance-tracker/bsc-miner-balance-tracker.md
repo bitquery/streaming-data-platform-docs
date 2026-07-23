@@ -1,36 +1,11 @@
 ---
 sidebar_position: 3
 title: "BSC Miner Balance Tracker"
-description: "Bitquery blockchain API docs: BSC Miner Balance Tracker."
+description: "Learn how to track BSC miner balances, mining rewards, and uncle block rewards using Bitquery."
 ---
 # BSC Miner Balance Tracker
 
 The BSC Miner Balance Tracker API provides real-time balance updates for BSC miners, tracking their mining rewards, uncle block rewards, and transaction fee rewards.
-
-<head>
-<meta name="title" content="BSC Miner Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track BSC miner balances, mining rewards, and uncle block rewards using Bitquery's Miner Balance Tracker API."/>
-<meta name="keywords" content="bsc miner balance, mining rewards, miner balance tracker, bsc mining api, uncle block rewards, transaction fee rewards, miner rewards api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="BSC Miner Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to track BSC miner balances, mining rewards, and uncle block rewards using Bitquery's Miner Balance Tracker API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="BSC Miner Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track BSC miner balances, mining rewards, and uncle block rewards using Bitquery's Miner Balance Tracker API." />
-</head>
 
 ## Track Miner Balance Updates
 

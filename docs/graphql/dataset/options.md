@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Options"
-description: "Bitquery GraphQL dataset guide: Options."
+description: "GraphQL interface hides the internal complexity of the datasets,."
 ---
 # Options
 
@@ -18,12 +18,10 @@ Top level element of the query has 3 attributes, defining what is the source for
 2. ```dataset``` - what type of the database to query
 3. ```select_blocks``` - which blocks (branches or trunk only) to include in results
 
-
 ![Dataset options](/img/ide/dataset_options.png)
 
 :::note
 [subscription](/docs/subscriptions/subscription/) has a different set of top level elements. 
 For example, the dataset for subscription is always real time and not controlled.
 :::
-
 

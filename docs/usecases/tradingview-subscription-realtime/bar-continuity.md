@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Bar continuity (OHLC stitching)"
-description: "Bitquery how-to guide: Bar continuity (OHLC stitching)."
+description: "TradingView draws each candle from the open, high, low, close you supply. If the next bar’s open does not equal the previous bar’s close, the bodies can look disconnected or “floating,” even when the underlying stream is correct."
 ---
 # Bar continuity (OHLC stitching)
 

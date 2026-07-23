@@ -1,38 +1,10 @@
 ---
 title: "Tron Transfers API"
-description: "Bitquery blockchain API docs: Tron Transfers API."
+description: "Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers"
 ---
-
 # Tron Transfers API
 
 In this section we'll have a look at some examples using the Tron Transfers API.
-
-<head>
-<meta name="title" content="Tron Transfers API"/>
-<meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
-<meta name="keywords" content="Tron transfers api, Tron transfers python api, Tron transfers scan api, Tron transfers api docs, transfers crypto api, transfers blockchain api, Tron network api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Tron Transfers API"
-/>
-<meta
-  property="og:description"
-  content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Tron Transfers API" />
-<meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
-</head>
 
 ## Subscribe to Recent Whale Transactions of a particular currency
 
@@ -63,7 +35,6 @@ subscription{
     }
   }
 }
-
 
 ```
 
@@ -309,6 +280,5 @@ subscription {
     }
   }
 }
-
 
 ```

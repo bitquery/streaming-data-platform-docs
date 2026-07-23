@@ -2,7 +2,6 @@
 title: "The Need for Real-Time Data on Solana: Latency, Scale, and Fidelity at Stake"
 description: "Bitquery streaming docs: The Need for Real-Time Data on Solana: Latency, Scale, and Fidelity at Stake."
 ---
-
 # The Need for Real-Time Data on Solana: Latency, Scale, and Fidelity at Stake
 
 > “Better be first 99 percent of the time than second 100 percent of the time.”  
@@ -51,7 +50,7 @@ People are asking questions on Stack Exchange about custom filtering options in 
 
 ## Bitquery: A Powerful Alternative
 
-Bitquery offers a powerful real-time streaming system with three interfaces: **GraphQL Subscriptions**, **Kafka**, and **gRPC (CoreCast)**. You can learn more about the differences and benefits of each in the [Bitquery documentation](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/). For ultra-low-latency gRPC streams (DEX trades, transfers, transactions), see [Solana gRPC Streams (CoreCast) →](https://docs.bitquery.io/docs/grpc/solana/introduction/).
+Bitquery offers a powerful real-time streaming system with three interfaces: **GraphQL Subscriptions**, **Kafka**, and **gRPC (CoreCast)**. You can learn more about the differences and benefits of each in the [Bitquery documentation](/docs/streams/kafka-streaming-concepts/). For ultra-low-latency gRPC streams (DEX trades, transfers, transactions), see [Solana gRPC Streams (CoreCast) →](/docs/grpc/solana/introduction/).
 
 - **No Infra Needed**: You don’t need to run your own Solana node. Just use the Bitquery endpoint—no server costs, setup, or upgrades.
 - **Powerful Filtering**: Use GraphQL’s expressive filters to get only the data you need (by address, token, program, amount, and more). No more sifting through irrelevant noise.
@@ -83,7 +82,7 @@ You can test these queries live on the [Bitquery IDE](https://ide.bitquery.io/).
 
 Create targeted data streams for specific use cases:
 
-- [Monitor 100 specific wallet addresses](https://docs.bitquery.io/docs/usecases/monitoring-solana-at-scale-managing-hundreds-of-addresses/) for whale tracking and large transaction alerts
+- [Monitor 100 specific wallet addresses](/docs/usecases/monitoring-solana-at-scale-managing-hundreds-of-addresses/) for whale tracking and large transaction alerts
 - Custom token streams filtering by specific programs, amounts, or trading pairs. For eg: [track newly created pump fun tokens](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/#track-newly-created-pump-fun-tokens-creation-time-dev-address-metadata)
 - Focus processing power only on relevant data, reducing costs and complexity
 
@@ -91,7 +90,7 @@ Create targeted data streams for specific use cases:
 
 Bitquery’s Kafka streams are a unique product that provides ultra-low latency data directly from blockchain. Here are some key features.
 
-**[Bitquery offers three main Kafka streams](https://docs.bitquery.io/docs/streams/protobuf/chains/Solana-protobuf/)**:
+**[Bitquery offers three main Kafka streams](/docs/streams/protobuf/chains/Solana-protobuf/)**:
 
 - `solana.dextrades.proto` — Includes all trade and liquidity pool change data.
 - `solana.tokens.proto` — Covers token transfers, supply changes, and balance updates at both the account and instruction level.
@@ -135,9 +134,9 @@ Kafka streams deliver sub-second latency, crucial for high-frequency trading whe
 
 Kafka's distributed architecture handles massive throughput with built-in replication and automatic failover. Scale from thousands to millions of transactions per second without infrastructure management.
 
-Read this tutorial on [how to use Bitquery’s Kafka Streams to monitor millions of Solana wallet balances](https://docs.bitquery.io/docs/usecases/track-millions-of-solana-wallets/).
+Read this tutorial on [how to use Bitquery’s Kafka Streams to monitor millions of Solana wallet balances](/docs/usecases/track-millions-of-solana-wallets/).
 
-Also, check out how you can [track withdrawals and deposits for 1000s of Binance exchange wallets](https://docs.bitquery.io/docs/usecases/binance-exchange-wallet-monitoring/).
+Also, check out how you can [track withdrawals and deposits for 1000s of Binance exchange wallets](/docs/usecases/binance-exchange-wallet-monitoring/).
 
 ### Development Efficiency
 

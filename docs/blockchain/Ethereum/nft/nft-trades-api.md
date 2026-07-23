@@ -3,7 +3,6 @@ sidebar_position: 5
 title: "NFT Trades API"
 description: "Query NFT DEX trades on EVM chains with Bitquery — latest trades by address, collection, and marketplace."
 ---
-
 # NFT Trades API
 
 The NFT Trades API provides access to diverse NFT DEX trades data on supported blockchain.  
@@ -71,16 +70,13 @@ Let's dive into an example query that fetches the most recent NFT trades associa
 -   `orderBy` : Orders the results in descending order based on the Block_Time.
 -   `where` : It filters results based on specified conditions. Here, it selects transfers where the currency is non-fungible and buyer's address is `0x6afdf83501af209d2455e49ed9179c209852a701`.
 
-
 **Returned Data**
 
 -  `Trade`: It displays the details of the trade, `DEX {}` provides DEX information (protocol name, owner address, delegated status, delegated to address, and smart contract address), `Buy{}` and `sell{}` represents the buy side details ( price, seller, buyer, currency information, NFT IDs, order ID, and URIs ), and the sell side details ( price, amount, currency information, buyer, and seller ) respectively.
 -  `Transaction` : Represents the hash of the transaction associated with the trade.
 -  `Block` - Represents the block time of the trade.
 
-
 You can find the graphql query [here](https://ide.bitquery.io/NFT-trades-of-an-address).
-
 
 ## Get Top Traded NFT Tokens
 
@@ -186,7 +182,6 @@ query MyQuery {
 
 You can find the graphql query [here](https://ide.bitquery.io/Latests-OpenSea-Trades).
 
-
 ## Top Traded NFTs on Opensea
 
 This query retrieves the Top Traded NFTs on Opensea based on trade count and can also aggregate trading vol, trade count, buyer, seller, and nfts.
@@ -230,7 +225,6 @@ query MyQuery {
 
 You can find the graphql query [here](https://ide.bitquery.io/Top-Traded-NFTs-on-Opensea).
 
-
 ## Total Buy & Sell of an NFT on Opensea 
 
 To Retrieve Total Buy & sell of specific NFT on Opensea, we just need to specify the currency contract address in the Buy filter.
@@ -266,7 +260,6 @@ To Retrieve Total Buy & sell of specific NFT on Opensea, we just need to specify
 
 You can find the graphql query [here](https://ide.bitquery.io/Total-buy-sell-of-an-NFT-on-opensea).
 
-
 ## Latest NFT buyer on Opensea 
 
 This query retrieves the Latest NFT buyer on Opensea.
@@ -299,7 +292,6 @@ This query retrieves the Latest NFT buyer on Opensea.
 ```
 
 You can find the graphql query [here](https://ide.bitquery.io/Total-buy-sell-of-an-NFT-on-opensea).
-
 
 ## Specific Buyer stats of an NFT on Opensea
 

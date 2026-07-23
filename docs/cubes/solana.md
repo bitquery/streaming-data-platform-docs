@@ -5,7 +5,7 @@ description: "Overview of Bitquery Solana cubes — trades, transfers, instructi
 ---
 # Solana Builder Terms Explanation
 
-> **Before you start**: Not sure when to use Transfers vs DEX Trades vs other data primitives? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+> **Before you start**: Not sure when to use Transfers vs DEX Trades vs other data primitives? Read our [Mental Model guide](/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
 
 ### Dataset Parameters
 

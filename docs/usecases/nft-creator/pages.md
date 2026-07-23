@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Pages"
-description: "Bitquery how-to guide: Pages."
+description: "The About page is a React functional component that renders the Header and Aboutpage components."
 ---
 # Pages
 
@@ -13,7 +13,6 @@ The About page is a React functional component that renders the Header and About
 import React from 'react'
 import Header from '../components/Header/Header'
 import Aboutpage from '../components/Aboutpage/Aboutpage'
-
 
 function About() {
   return (

@@ -1,32 +1,11 @@
 ---
 title: DEX Trades API
-description: "Bitquery schema reference for Dextrades: fields, types, and query patterns."
+description: "Get address balance and history on the DEX Trades blockchain. Also, get address balance and history for tokens or NFTs on the DEX Trades blockchain."
 ---
-<head>
-<meta name="title" content="DEX Trades API"/>
-<meta name="description" content="Get address balance and history on the DEX Trades blockchain. Also, get address balance and history for tokens or NFTs on the DEX Trades blockchain."/>
-<meta name="keywords" content="DEX Trades api, DEX Trades python api, DEX Trades nft api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,matic network api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="DEX Trades, address balance and history API" />
-<meta property="og:description" content="Get DEX trades data for EVM chains. Also, get address balance and history for tokens or NFTs on the EVM chain." />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="DEX Trades API" />
-<meta property="twitter:description" content="Get DEX trades data for EVM chains. Also, get address balance and history for tokens or NFTs on the EVM chain." />
-</head>
-
-
 DEXTrades api gives trading-related data from different DEXs such as Uniswap, Pancakeswap, 0x, etc.
 
 API provides historical and real-time trades and pricing information for tokens. The API allows different filters to query the Smart contract calls details from different dimensions, such as from different DEXs, protocols, tokens, trades, pools, etc. 
 You can find more examples [here](/docs/blockchain/Ethereum/dextrades/get-trading-pairs-of-token/)
-
 
 ## DEX Trades Cube
 
@@ -73,7 +52,6 @@ Query price OHLC data for token pairs using DEX Trades By Tokens
 
 ```graphql
 
-
 query MyQuery {
   EVM(dataset: archive) {
     DEXTradeByTokens(
@@ -112,14 +90,12 @@ query MyQuery {
   }
 }
 
-
 ```
 
 :::note
 we applied filter by tokens, used [interval](/docs/graphql/datetime) and actual numbers 
 calculated by  aggregated [metrics ( max/min )](/docs/graphql/calculations)
 :::
-
 
 ```graphql
 {

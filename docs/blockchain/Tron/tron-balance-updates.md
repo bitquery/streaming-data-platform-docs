@@ -1,9 +1,8 @@
 ---
 sidebar_position: 1
 title: "Tron Address Balance API"
-description: "Bitquery blockchain API docs: Tron Address Balance API."
+description: "Learn how to get historical & real time balance & balance updates of a Tron address using Bitquery."
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # Tron Address Balance API
@@ -18,33 +17,6 @@ The **Balances** API returns current and historical token balances for an addres
 | -------------- | ------------------------------------------------------------------------------------------- |
 | **`combined`** | Latest balances. Queries **realtime and archive** databases and merges results.             |
 | **`archive`**  | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
-
-<head>
-<meta name="title" content="How to get Tron Balance Updates of an address"/>
-<meta name="description" content="Learn how to get real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API."/>
-<meta name="keywords" content="balance api, balance updates api, balance updates python api, Tron Balance python api, NFT balance api, Balance scan api, Balance api docs, Tron Balance crypto api, balance blockchain api,Tron network api, Tron web3 api, tronscan api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to get Tron Balance & Balance Updates of an address"
-/>
-<meta
-  property="og:description"
-  content="Learn how to get historical & real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to get Tron Balance Updates of an address" />
-<meta property="twitter:description" content="Learn how to get real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API." />
-</head>
 
 ## Portfolio of a Tron Wallet
 

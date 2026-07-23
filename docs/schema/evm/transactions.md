@@ -1,29 +1,8 @@
 ---
 title: Transactions API
-description: "Bitquery schema reference for Transactions: fields, types, and query patterns."
+description: "Get information on transaction details and wallets on EVM chains. Also, get information on blocks for tokens or NFTs on EVM chains."
 ---
-<head>
-<meta name="title" content="Transactions API"/>
-<meta name="description" content="Get information on transaction details and wallets on EVM chains. Also, get information on blocks for tokens or NFTs on EVM chains."/>
-<meta name="keywords" content=" api,  python api,  nft api,  scan api,  matic api,  api docs,  crypto api,  blockchain api,matic network api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Transactions API" />
-<meta property="og:description" content="Get information on transaction details and wallets on EVM chains. Also, get information on blocks for tokens or NFTs on EVM chains." />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Transactions API" />
-<meta property="twitter:description" content="Get information on transaction details and wallets on  blockchain. Also, get blocks information for tokens or NFTs on EVM chains." />
-</head>
-
 The Transactions API provides detailed information on transactions including call count, gas, hash, type, and sender and recipient addresses etc. Here's a sample query to get started. You can see more examples [here](/docs/blockchain/Ethereum/transactions/transaction-api/)
-
-
 
     query MyQuery \{
       EVM(dataset: realtime, network: bsc) \{

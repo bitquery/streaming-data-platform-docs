@@ -23,13 +23,12 @@ import FAQ from "@site/src/components/FAQ";
 # Solana API - DEX Trades, Token Data, Real-Time Streams
 
 :::tip Building a trading app or DEX UI on Solana?
-For **real-time trades and prices on Solana** (and the last ~30 days), use the curated [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. For **historical Solana data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
+For **real-time trades and prices on Solana** (and the last ~30 days), use the curated [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. For **historical Solana data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
 :::
 
+Access data from **[Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)**, **[Raydium DEX API](/docs/blockchain/Solana/Solana-Raydium-DEX-API)**, **[Orca API](/docs/blockchain/Solana/solana-orca-dex-api)**, **[DEXScreener API](/docs/blockchain/Solana/DEXScreener/solana_dexscreener/)**, **[Jupiter API](/docs/blockchain/Solana/solana-jupiter-api)**, **[Meteora](/docs/blockchain/Solana/Meteora-DAMM-v2-API)**, **[GMGN](/docs/blockchain/Solana/solana-gmgn-api)**, **[Phoenix](/docs/blockchain/Solana/Solana-Phoenix-api)**, and more via GraphQL APIs and Streams.
 
-Access data from **[Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)**, **[Raydium DEX API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API)**, **[Orca API](https://docs.bitquery.io/docs/blockchain/Solana/solana-orca-dex-api)**, **[DEXScreener API](/docs/blockchain/Solana/DEXScreener/solana_dexscreener/)**, **[Jupiter API](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api)**, **[Meteora](https://docs.bitquery.io/docs/blockchain/Solana/Meteora-DAMM-v2-API)**, **[GMGN](https://docs.bitquery.io/docs/blockchain/Solana/solana-gmgn-api)**, **[Phoenix](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Phoenix-api)**, and more via GraphQL APIs and Streams.
-
-> **Before you start**: Not sure when to use Transfers vs DEX Trades vs other data primitives? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+> **Before you start**: Not sure when to use Transfers vs DEX Trades vs other data primitives? Read our [Mental Model guide](/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
 
 If you need help getting data on Solana,reach out to [support](https://t.me/Bloxy_info)
 
@@ -67,19 +66,19 @@ Bitquery Solana APIs are very flexible, you can fetch trade, transaction, balanc
 - **Data & Protocol**: Provides fully managed Kafka topics—`solana.dextrades.proto`, `solana.tokens.proto`, and `solana.transactions.proto`—delivering pre-parsed, enriched Protocol-Buffers events (DEX trades, token transfers, supply/balance updates, instructions, blocks, etc.).
 - **Infra & Maintenance**: Enterprise-grade, auto-scaling Kafka streams with sub-second latency, schema-based filtering, instruction-level balance updates, built-in replication/failover—no node ops or custom parsing needed.
 
-Read more [here](https://docs.bitquery.io/docs/streams/real-time-solana-data/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
+Read more [here](/docs/streams/real-time-solana-data/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
 
 ## Solana gRPC Streams (CoreCast)
 
-Bitquery **[Solana gRPC Streams](https://docs.bitquery.io/docs/grpc/solana/introduction/)** (CoreCast) provide ultra-low-latency, real-time data over gRPC with protobuf encoding. Subscribe to DEX trades, transfers, transactions, balances, and more with context-aware filtering — ideal for trading bots, copy trading, and high-frequency applications.
+Bitquery **[Solana gRPC Streams](/docs/grpc/solana/introduction/)** (CoreCast) provide ultra-low-latency, real-time data over gRPC with protobuf encoding. Subscribe to DEX trades, transfers, transactions, balances, and more with context-aware filtering — ideal for trading bots, copy trading, and high-frequency applications.
 
-- **[CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/)** — Topics, filters, and quick start
-- **[Pump.fun gRPC Streams](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/)** — Real-time Pump.fun trades
-- **[Copy Trading Bot](https://docs.bitquery.io/docs/grpc/solana/examples/grpc-copy-trading-bot/)** — Build a Solana copy trading bot with gRPC
+- **[CoreCast Introduction](/docs/grpc/solana/introduction/)** — Topics, filters, and quick start
+- **[Pump.fun gRPC Streams](/docs/grpc/solana/examples/pump-fun-grpc-streams/)** — Real-time Pump.fun trades
+- **[Copy Trading Bot](/docs/grpc/solana/examples/grpc-copy-trading-bot/)** — Build a Solana copy trading bot with gRPC
 
 ## Does Bitquery support Solana Websocket and Solana Webhooks?
 
-Bitquery supports websocket and webhooks, you can convert most of the graphQL APIs into graphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More and [code samples available here](https://docs.bitquery.io/docs/subscriptions/websockets/)
+Bitquery supports websocket and webhooks, you can convert most of the graphQL APIs into graphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More and [code samples available here](/docs/subscriptions/websockets/)
 
 ## PumpFun
 
@@ -91,60 +90,60 @@ Bitquery supports websocket and webhooks, you can convert most of the graphQL AP
 
 ## Raydium
 
-- [Raydium Launchpad](https://docs.bitquery.io/docs/blockchain/Solana/launchpad-raydium)
-- [Raydium DEX API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API)
-- [Raydium CLMM API](https://docs.bitquery.io/docs/blockchain/Solana/raydium-clmm-API)
-- [Raydium CPMM API](https://docs.bitquery.io/docs/blockchain/Solana/raydium-cpmm-API)
+- [Raydium Launchpad](/docs/blockchain/Solana/launchpad-raydium)
+- [Raydium DEX API](/docs/blockchain/Solana/Solana-Raydium-DEX-API)
+- [Raydium CLMM API](/docs/blockchain/Solana/raydium-clmm-API)
+- [Raydium CPMM API](/docs/blockchain/Solana/raydium-cpmm-API)
 
 ## Meteora
 
-- [Meteora DAMM v2 API](https://docs.bitquery.io/docs/blockchain/Solana/Meteora-DAMM-v2-API)
-- [Meteora DLMM API](https://docs.bitquery.io/docs/blockchain/Solana/Meteora-DLMM-API)
-- [Meteora DYN API](https://docs.bitquery.io/docs/blockchain/Solana/Meteora-DYN-API)
-- [Meteora Dynamic Bonding Curve API](https://docs.bitquery.io/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api)
+- [Meteora DAMM v2 API](/docs/blockchain/Solana/Meteora-DAMM-v2-API)
+- [Meteora DLMM API](/docs/blockchain/Solana/Meteora-DLMM-API)
+- [Meteora DYN API](/docs/blockchain/Solana/Meteora-DYN-API)
+- [Meteora Dynamic Bonding Curve API](/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api)
 
 ## Solana DEX APIs
 
-- [Solana Dex Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades)
-- [Solana Trader API](https://docs.bitquery.io/docs/blockchain/Solana/solana-trader-API)
-- [Historical Aggregate Data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data)
-- [Solana Zeta](https://docs.bitquery.io/docs/blockchain/Solana/solana-zeta)
-- [Solana Jupiter API](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api)
-- [Solana GMGN API](https://docs.bitquery.io/docs/blockchain/Solana/solana-gmgn-api)
-- [Solana BullX API](https://docs.bitquery.io/docs/blockchain/Solana/solana-bullx-api)
-- [Solana Photon API](https://docs.bitquery.io/docs/blockchain/Solana/solana-photon-api)
-- [Moonshot API](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API)
-- [Solana Aldrin AMM API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-AldrinAmm-api)
-- [Solana DEX Orders API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-DEX-Orders-API)
-- [Solana Dex Pools API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-DexPools-API)
-- [Solana Jito Bundle API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Jito-Bundle-api)
-- [Solana Lifinity DEX API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Lifinity-dex-api)
-- [Believe API](https://docs.bitquery.io/docs/blockchain/Solana/Believe-API)
-- [Solana OpenBook API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-OpenBook-api)
-- [Solana Phoenix API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Phoenix-api)
-- [SolFi API](https://docs.bitquery.io/docs/blockchain/Solana/SolFi-api)
-- [Orbic API](https://docs.bitquery.io/docs/blockchain/Solana/Orbic-API)
+- [Solana Dex Trades](/docs/blockchain/Solana/solana-dextrades)
+- [Solana Trader API](/docs/blockchain/Solana/solana-trader-API)
+- [Historical Aggregate Data](/docs/blockchain/Solana/historical-aggregate-data)
+- [Solana Zeta](/docs/blockchain/Solana/solana-zeta)
+- [Solana Jupiter API](/docs/blockchain/Solana/solana-jupiter-api)
+- [Solana GMGN API](/docs/blockchain/Solana/solana-gmgn-api)
+- [Solana BullX API](/docs/blockchain/Solana/solana-bullx-api)
+- [Solana Photon API](/docs/blockchain/Solana/solana-photon-api)
+- [Moonshot API](/docs/blockchain/Solana/Moonshot-API)
+- [Solana Aldrin AMM API](/docs/blockchain/Solana/Solana-AldrinAmm-api)
+- [Solana DEX Orders API](/docs/blockchain/Solana/Solana-DEX-Orders-API)
+- [Solana Dex Pools API](/docs/blockchain/Solana/Solana-DexPools-API)
+- [Solana Jito Bundle API](/docs/blockchain/Solana/Solana-Jito-Bundle-api)
+- [Solana Lifinity DEX API](/docs/blockchain/Solana/Solana-Lifinity-dex-api)
+- [Believe API](/docs/blockchain/Solana/Believe-API)
+- [Solana OpenBook API](/docs/blockchain/Solana/Solana-OpenBook-api)
+- [Solana Phoenix API](/docs/blockchain/Solana/Solana-Phoenix-api)
+- [SolFi API](/docs/blockchain/Solana/SolFi-api)
+- [Orbic API](/docs/blockchain/Solana/Orbic-API)
 - [DEX Screener (Solana)](/docs/blockchain/Solana/DEXScreener/solana_dexscreener/)
 
 ## Other Solana APIs
 
-- [Solana Balance Updates](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates)
-- [Token Supply Cube](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube)
-- [Solana Instructions](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions)
-- [Solana Transactions](https://docs.bitquery.io/docs/blockchain/Solana/solana-transactions)
-- [Solana Transfers](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers)
-- [Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api)
-- [Boop Fun API](https://docs.bitquery.io/docs/blockchain/Solana/Boop-Fun-API)
-- [BonkSwap API](https://docs.bitquery.io/docs/blockchain/Solana/BonkSwap-API)
-- [BonkSwap API](https://docs.bitquery.io/docs/blockchain/Solana/letsbonk-api)
-- [Solana Logs](https://docs.bitquery.io/docs/blockchain/Solana/solana-logs)
-- [Solana NFT](https://docs.bitquery.io/docs/blockchain/Solana/solana-nft)
-- [Solana Orca DEX API](https://docs.bitquery.io/docs/blockchain/Solana/solana-orca-dex-api)
-- [Solana Rewards](https://docs.bitquery.io/docs/blockchain/Solana/solana-rewards)
-- [Solana Search Tokens](https://docs.bitquery.io/docs/blockchain/Solana/solana-search-tokens)
+- [Solana Balance Updates](/docs/blockchain/Solana/solana-balance-updates)
+- [Token Supply Cube](/docs/blockchain/Solana/token-supply-cube)
+- [Solana Instructions](/docs/blockchain/Solana/solana-instructions)
+- [Solana Transactions](/docs/blockchain/Solana/solana-transactions)
+- [Solana Transfers](/docs/blockchain/Solana/solana-transfers)
+- [Solana Fees API](/docs/blockchain/Solana/solana_fees_api)
+- [Boop Fun API](/docs/blockchain/Solana/Boop-Fun-API)
+- [BonkSwap API](/docs/blockchain/Solana/BonkSwap-API)
+- [BonkSwap API](/docs/blockchain/Solana/letsbonk-api)
+- [Solana Logs](/docs/blockchain/Solana/solana-logs)
+- [Solana NFT](/docs/blockchain/Solana/solana-nft)
+- [Solana Orca DEX API](/docs/blockchain/Solana/solana-orca-dex-api)
+- [Solana Rewards](/docs/blockchain/Solana/solana-rewards)
+- [Solana Search Tokens](/docs/blockchain/Solana/solana-search-tokens)
 - [Historical Solana Transfer Data](https://docs.bitquery.io/v1/docs/Examples/Solana/transfers)
 
-- [Building an AI Trading Agent on Solana](https://docs.bitquery.io/docs/blockchain/Solana/ai-agent-solana-data)
+- [Building an AI Trading Agent on Solana](/docs/blockchain/Solana/ai-agent-solana-data)
 
 ## Videos
 

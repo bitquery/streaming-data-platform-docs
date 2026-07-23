@@ -1,43 +1,15 @@
 ---
 sidebar_position: 2
 title: "Arbitrum DEX Trades API"
-description: "Bitquery blockchain API docs: Arbitrum DEX Trades API."
+description: "Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API"
 ---
 # Arbitrum DEX Trades API
 
 :::tip Need real-time Arbitrum DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Arbitrum`). Use this page when you need **historical Arbitrum data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Arbitrum`). Use this page when you need **historical Arbitrum data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
 :::
 
-
 In this section we will see how to get Arbitrum DEX trades information using our API.
-
-<head>
-<meta name="title" content="Arbitrum Decentralized Exchange Data with Arbitrum DEX Trades API"/>
-<meta name="description" content="Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API."/>
-<meta name="keywords" content="Arbitrum DEX Trades api,Arbitrum DEX Trades python api,Arbitrum DEX Trades token api,Arbitrum Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,Arbitrum network api, Arbitrum web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to Get Arbitrum Decentralized Exchange Data with Arbitrum DEX Trades API"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to Get Arbitrum Decentralized Exchange Data with Arbitrum DEX Trades API" />
-<meta property="twitter:description" content="Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API." />
-</head>
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -127,7 +99,7 @@ subscription {
 
 [This](https://ide.bitquery.io/trending-token-pairs-on-Arbitrum) query returns the top trending pairs traded on Arbitrum Chain based on the trade volume for the last 24 hours, and returns info such as latest price, number of buyers and sellers, number of trades in a day and much more.
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 ```graphql
 query pairs(

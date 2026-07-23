@@ -1,11 +1,10 @@
 ---
 title: "Automated Trading on Ethereum: How To Build a Volume Surge Detection Bot"
-description: "Bitquery how-to guide: Automated Trading on Ethereum: How To Build a Volume Surge Detection Bot."
+description: "In this tutorial, we will build a Python bot that monitors token trading volume on Ethereum and automatically executes buy orders when volume surges by 10% or more. For real-time price data with volume metrics, use our Crypto Price API."
 ---
-
 # Automated Trading on Ethereum: How To Build a Volume Surge Detection Bot
 
-In this tutorial, we will build a Python bot that monitors token trading volume on Ethereum and automatically executes buy orders when volume surges by 10% or more. For real-time price data with volume metrics, use our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).
+In this tutorial, we will build a Python bot that monitors token trading volume on Ethereum and automatically executes buy orders when volume surges by 10% or more. For real-time price data with volume metrics, use our [Crypto Price API](/docs/trading/crypto-price-api/introduction/).
 
 We’ll leverage the Bitquery APIs with Python to monitor activities and automatically execute trades in real-time. We’ll explore how to access and use Bitquery APIs to fetch real-time trading volume data, calculate volume changes, and perform automated transactions on the Ethereum Sepolia testnet.
 
@@ -25,7 +24,7 @@ In this section, we’ll build an MEV bot that detects a surge in trade volume f
 
 This tutorial will guide you through creating a Python script that detects a surge in trading volume for a specific token and executes a buy order on the Ethereum Sepolia testnet. We'll use the Bitquery API to fetch trading volume data and Web3.py to interact with the Ethereum blockchain.
 
-This bot uses the [Bitquery API](https://docs.bitquery.io/docs/intro/) to fetch real-time trading data and Web3.py to interact with the Ethereum blockchain, demonstrating a practical application of Python in blockchain trading automation using the Bitquery API.
+This bot uses the [Bitquery API](/docs/intro/) to fetch real-time trading data and Web3.py to interact with the Ethereum blockchain, demonstrating a practical application of Python in blockchain trading automation using the Bitquery API.
 
 - Here is the [link](https://github.com/bitquery/volume-surge-trading-bot/tree/main) to the GitHub Repository for the volume surge detection MEV bot
 - Here is also a [step-by-step video tutorial](https://www.youtube.com/watch?v=2sK-dtYF2-k) for the project.
@@ -46,7 +45,7 @@ The requests library is used for making Https requests in python while the web3 
 
 2.  Once you’ve set up your python environment and download the necessary library for the project as we’ve done in the previous step, you need to set up the API keys needed to retrieve the data from Bitquery.
 
-- Follow [this link](https://docs.bitquery.io/docs/authorization/how-to-generate/) to learn how to generate the tokens either programmatically or manually to use for this project.
+- Follow [this link](/docs/authorization/how-to-generate/) to learn how to generate the tokens either programmatically or manually to use for this project.
 
 - Visit the alchemy website, and follow the necessary instructions to generate the URL needed to connect with your Sepolia Testnet through the Infura environment.
 
@@ -107,7 +106,7 @@ print(f"PREDEFINED_TILL_DATE: {PREDEFINED_TILL_DATE}")
 
 At this step, you create the fetch_volume_data function to fetch historical trading volume data from Bitquery.
 
-The fetch_volume_data function below takes the token_address parameter and uses the [DEXTradeByTokens API](https://docs.bitquery.io/docs/schema/evm/dextrades/) to retrieve the count of trade, sell, and buy amounts from the blockchain using the variables you set up in Step2 (Script configuration) above.
+The fetch_volume_data function below takes the token_address parameter and uses the [DEXTradeByTokens API](/docs/schema/evm/dextrades/) to retrieve the count of trade, sell, and buy amounts from the blockchain using the variables you set up in Step2 (Script configuration) above.
 
 ```python
 # Function to fetch historical volume data from Bitquery
@@ -140,7 +139,6 @@ print("Querying Bitquery API...")
             headers={'Authorization': f'Bearer {BITQUERY_AUTH_TOKEN}'}
         )
 
-
         if response.status_code == 200:
             print("Data successfully fetched.")
             data = response.json()
@@ -154,7 +152,6 @@ print("Querying Bitquery API...")
             return trades
         else:
             raise Exception(f"Failed to fetch data: {response.text}")
-
 
     except Exception as e:
         print(f"Error in fetch_volume_data: {str(e)}")
@@ -176,7 +173,6 @@ def get_volume():
         trades = fetch_volume_data(TOKEN_ADDRESS)
         if trades is None:
             return 0  # No trades, so volume is 0
-
 
         total_volume = sum(float(trade['buy']) + float(trade['sell']) for trade in trades)
         print(f"Total volume: {total_volume}")
@@ -284,11 +280,9 @@ def main():
         initial_volume = get_volume()
         print("Initial Volume:", initial_volume)
 
-
         while True:
             current_volume = get_volume()
             print("Current Volume:", current_volume)
-
 
             if check_volume_surge(initial_volume, current_volume):
                 print(f"Volume surge detected. Executing buy order.")
@@ -296,13 +290,10 @@ def main():
                 if tx_hash:
                     print(f"Transaction hash: {tx_hash}")
 
-
             time.sleep(60 * 1)  # Check every 1 minute
-
 
     except Exception as e:
         print(f"Error occurred: {str(e)}")
-
 
 if __name__ == "__main__":
     main()

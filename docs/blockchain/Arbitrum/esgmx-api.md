@@ -1,8 +1,7 @@
 ---
 title: "esGMX (Escrowed) and vGLP (Vested) API"
-description: "Bitquery blockchain API docs: esGMX (Escrowed) and vGLP (Vested) API."
+description: "When a wallet stakes GMX tokens in the GMX protocol, they are escrowed and earn Escrowed GMX (esGMX) tokens as rewards."
 ---
-
 # esGMX (Escrowed) and vGLP (Vested) API 
 
 When a wallet stakes GMX tokens in the GMX protocol, they are escrowed and earn Escrowed GMX (esGMX) tokens as rewards.

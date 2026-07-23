@@ -12,7 +12,6 @@ keywords:
   - Solana Ethereum BSC market cap
   - multi-chain OHLC API
 ---
-
 # Crypto MarketCap API and Market Data
 
 The **Crypto MarketCap API** is part of the Crypto Price APIs: you can **query** USD **market capitalization** and related **supply** fields, or **stream** them in **real time** for many chains using GraphQL **subscriptions** or the **`trading.prices`** Kafka topic described in the [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction).

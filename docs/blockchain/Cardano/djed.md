@@ -13,14 +13,13 @@ keywords:
   - Bitquery Djed
   - DJED supply tracking
 ---
-
 # Djed Stablecoin API
 
 [Djed](https://djed.xyz) is an overcollateralized, USD-pegged stablecoin on Cardano, issued by COTI and designed in collaboration with Input Output Global. It trades under the ticker **DJED** (asset name `DjedMicroUSD`) and is backed by ADA reserves. Every issuance is an on-chain **mint** of the DJED native token, and every redemption is a **burn** — which means Djed's full lifecycle maps cleanly onto Bitquery's existing Cardano primitives:
 
-- Mint and burn activity → [Cardano Mints API](https://docs.bitquery.io/docs/blockchain/Cardano/mints)
-- Holder balances → [Cardano Address API](https://docs.bitquery.io/docs/blockchain/Cardano/address)
-- Movements between wallets → [Cardano Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Cardano/inputs-outputs)
+- Mint and burn activity → [Cardano Mints API](/docs/blockchain/Cardano/mints)
+- Holder balances → [Cardano Address API](/docs/blockchain/Cardano/address)
+- Movements between wallets → [Cardano Inputs and Outputs API](/docs/blockchain/Cardano/inputs-outputs)
 
 You can verify the on-chain asset on Cardanoscan: [DjedMicroUSD token page](https://cardanoscan.io/token/8db269c3ec630e06ae29f74bc39edd1f87c819f1056206e879a1cd61446a65644d6963726f555344).
 
@@ -117,7 +116,7 @@ Good for portfolio tracking of Djed holders, wallet-level risk analytics, or bal
 }
 ```
 
-Drop the `staking` block when you don't need stake context, or pair this with `addressStats` (see the [Cardano Address API](https://docs.bitquery.io/docs/blockchain/Cardano/address)) to combine per-asset balances with aggregate activity metrics in a single request.
+Drop the `staking` block when you don't need stake context, or pair this with `addressStats` (see the [Cardano Address API](/docs/blockchain/Cardano/address)) to combine per-asset balances with aggregate activity metrics in a single request.
 
 ## Recent DJED movements network-wide
 
@@ -260,10 +259,10 @@ Combine this with the "received" query above to reconstruct a wallet's complete 
 
 ## Related resources
 
-- [Cardano Mints API](https://docs.bitquery.io/docs/blockchain/Cardano/mints) — generic mint and burn query patterns
-- [Cardano Address API](https://docs.bitquery.io/docs/blockchain/Cardano/address) — wallet balances and the `addressStats` cube
-- [Cardano Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Cardano/inputs-outputs) — full UTXO query reference
-- [Cardano Coinpath API](https://docs.bitquery.io/docs/blockchain/Cardano/coinpath) — multi-hop fund tracing
+- [Cardano Mints API](/docs/blockchain/Cardano/mints) — generic mint and burn query patterns
+- [Cardano Address API](/docs/blockchain/Cardano/address) — wallet balances and the `addressStats` cube
+- [Cardano Inputs and Outputs API](/docs/blockchain/Cardano/inputs-outputs) — full UTXO query reference
+- [Cardano Coinpath API](/docs/blockchain/Cardano/coinpath) — multi-hop fund tracing
 - [Djed official site](https://djed.xyz)
 - [Djed app (mint / redeem UI)](https://app.djed.xyz/)
 - [Djed launch announcement on COTI Medium](https://medium.com/cotinetwork/a-new-era-for-stablecoins-begins-djed-is-live-on-mainnet-55971971f2a8)

@@ -12,7 +12,6 @@ keywords:
   - Cardano block height query
   - Bitquery Cardano
 ---
-
 # Cardano Blocks API
 
 The Blocks API exposes everything you'd expect from a Cardano block: height, hash, size, protocol version, epoch and slot context, slot-leader metadata, VRF key, transaction count, and timestamp. Use it to power explorer front-ends, monitor chain progression, or pull historical block context for downstream analytics.
@@ -81,5 +80,5 @@ Sort ascending with `asc: "height"` to walk the chain forward, and widen the `ti
 
 ## Related resources
 
-- [Cardano Transactions API](https://docs.bitquery.io/docs/blockchain/Cardano/transactions) — per-block transaction details and fees
-- [Cardano Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Cardano/inputs-outputs) — UTXO data tied to each transaction
+- [Cardano Transactions API](/docs/blockchain/Cardano/transactions) — per-block transaction details and fees
+- [Cardano Inputs and Outputs API](/docs/blockchain/Cardano/inputs-outputs) — UTXO data tied to each transaction

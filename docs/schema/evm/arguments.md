@@ -1,26 +1,7 @@
 ---
 title: "EVM Arguments and Returns API"
-description: "Bitquery schema reference for Arguments: fields, types, and query patterns."
+description: "Get EVM Arguments and Returns with detailed information using the arguments API. Filter, sort, and analyze ERC-20 token flow easily."
 ---
-<head>
-<meta name="title" content="EVM Arguments and Returns API"/>
-
-<meta name="description" content="Get EVM Arguments and Returns with detailed information using the arguments API. Filter, sort, and analyze ERC-20 token flow easily."/>
-
-<meta name="keywords" content="EVM Arguments and Returns, EVM Arguments and Returns per second, EVM arguments analysis, ERC-20 Arguments and Returns, EVM token transaction data, EVM arguments history, EVM arguments API, EVM arguments tracking, EVM arguments monitoring, ERC-20 arguments analytics"/>
-
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-
-<meta property="og:title" content="EVM Arguments and Returns API" />
-
-<meta property="og:description" content="Get EVM Arguments and Returns with detailed information using the arguments API. Filter, sort, and analyze ERC-20 token flow easily."/>
-</head>
-
 Smart contract calls and events have arguments. In case the call or event signature is parsed against ABI,
 the arguments are showing the values, types and names passed to call or event.
 
@@ -129,7 +110,7 @@ Arguments and returns are arrays, and this enables to use filtering on them as d
 For example, this query selects specific calls by applying filter to argument length
 and to specific values of arguments.
 Combining argument filters with signature filters on events and calls gives you the power
-to analyse the arguments used in smart contracts in specific context.
+to analyze the arguments used in smart contracts in specific context.
 
 ```
 {

@@ -1,8 +1,7 @@
 ---
 title: "Pancake Swap API"
-description: "Bitquery blockchain API docs: Pancake Swap API."
+description: "Get on-chain data of any Pancake Swap trades through our Pancake Swap API"
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
@@ -10,12 +9,11 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 # Pancake Swap API
 
 :::tip Need real-time PancakeSwap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PancakeSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical PancakeSwap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PancakeSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical PancakeSwap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-
 In this section we will use APIs from Bitquery to get the on-chain trade related data, trade metrics, trades for a token or a trader on the Pancake Swap DEX.
-To get the trade activities of the Pancake Swap exclusively we have added a filter out trades based on `Factory Contract` address, `0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865` for the case of Pancake Swap V3. To get the trades and trade related data for Pancake Swap V1 or V2 you would need their respective addresses. Create your account and get started by following the [Quickstart instructions](https://docs.bitquery.io/docs/start/first-query/).
+To get the trade activities of the Pancake Swap exclusively we have added a filter out trades based on `Factory Contract` address, `0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865` for the case of Pancake Swap V3. To get the trades and trade related data for Pancake Swap V1 or V2 you would need their respective addresses. Create your account and get started by following the [Quickstart instructions](/docs/start/first-query/).
 
 ## Bitquery DEX Data Access Options
 
@@ -26,33 +24,10 @@ To get the trade activities of the Pancake Swap exclusively we have added a filt
 
 ## Getting Started with Bitquery:
 
-- [BSC DEX Trades](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
-- [BSC Uniswap APIs](https://docs.bitquery.io/docs/blockchain/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
-- [BSC Four Meme APIs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/): Four Meme Trades on BSC network with the help of examples.
-- [Trade APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
-
-<head>
-  <meta name="title" content="Pancake Swap API - BSC - Tokens, Trades, Live Prices, Liquidity"/>
-  <meta name="description" content="Get on-chain data of any Pancake Swap trade through our Pancake Swap API."/>
-  <meta name="keywords" content="Pancake Swap API,Pancake Swap on-chain data API,Pancake Swap token data API, Pancake Swap liquidity API, Pancake Swap blockchain API,Pancake Swap DEX data API,Pancake Swap API documentation,Pancake Swap crypto API,Pancake Swap web3 API,DEX Trades,Solana,Blast,Pancake Swap memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to Get Pancake Swap On-Chain Data with Pancake Swap API"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any Pancake Swap trades through our Pancake Swap API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="How to Get Pancake Swap On-Chain Data with Pancake Swap API"/>
-  <meta property="twitter:description" content="Get on-chain data of any Pancake Swap trades through our Pancake Swap API."/>
-</head>
+- [BSC DEX Trades](/docs/blockchain/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
+- [BSC Uniswap APIs](/docs/blockchain/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
+- [BSC Four Meme APIs](/docs/blockchain/BSC/four-meme-api/): Four Meme Trades on BSC network with the help of examples.
+- [Trade APIs](/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
 
 ## Get Latest Trades on Pancake Swap
 
@@ -456,7 +431,7 @@ subscription {
 
 </details>
 
-Also, checkout the [Four Meme](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/) documentation for APIs related to Four Meme tokens and Four Meme Exchange.
+Also, checkout the [Four Meme](/docs/blockchain/BSC/four-meme-api/) documentation for APIs related to Four Meme tokens and Four Meme Exchange.
 
 ## Get Top Traders of a Token on Pancake Swap
 
@@ -603,7 +578,7 @@ query MyQuery {
 
 [This](https://ide.bitquery.io/bsc-pancakeswap-ohlc-using-trading-api) API endpoint provides the OHLC/ K-Line data for a given token against other specified token.
 
-This query uses the `Trading` cube from the [Crypto Price APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
+This query uses the `Trading` cube from the [Crypto Price APIs](/docs/trading/crypto-price-api/introduction/)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -674,7 +649,7 @@ This query uses the `Trading` cube from the [Crypto Price APIs](https://docs.bit
 
 ## Price Change Percentage for a Token on Pancake Swap
 
-[This](https://ide.bitquery.io/Percentage-price-change-for-a-pancake-swap-token) query returns the price change percentage for a token traded on Pancake Swap in the time periods of `24hr`, `1hr` and `5 min` using [calculate expression](https://docs.bitquery.io/docs/graphql/capabilities/expression/) feature.
+[This](https://ide.bitquery.io/Percentage-price-change-for-a-pancake-swap-token) query returns the price change percentage for a token traded on Pancake Swap in the time periods of `24hr`, `1hr` and `5 min` using [calculate expression](/docs/graphql/capabilities/expression/) feature.
 
 <details>
   <summary>Click to expand GraphQL query</summary>

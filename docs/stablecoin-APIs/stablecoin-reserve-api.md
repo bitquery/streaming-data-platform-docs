@@ -2,7 +2,6 @@
 title: "Stablecoin Reserve API"
 description: "Bitquery stablecoin API docs: Stablecoin Reserve API."
 ---
-
 # Stablecoin Reserve API
 
 The Stablecoin API by Bitquery provides you the comprehensive set of APIs which can provide you realtime reserves data, realtime transfers, realtime trades, realtime price, holder distribution of stablecoins across chains with a single API call.

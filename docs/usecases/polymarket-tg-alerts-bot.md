@@ -1,13 +1,12 @@
 ---
 title: "How to Build a Polymarket Whale Alerts Telegram Bot with the Bitquery API"
-description: "Bitquery how-to guide: How to Build a Polymarket Whale Alerts Telegram Bot with the Bitquery API."
+description: "Build a production-ready Polymarket Telegram bot that streams realtime trades and lets users set custom alerts on trade size, share price, trader wallet, or specific market — all powered by the Bitquery Prediction Market API."
 ---
-
 import VideoPlayer from "../../src/components/videoplayer.js";
 
 # How to Build a Polymarket Whale Alerts Telegram Bot with the Bitquery API
 
-Build a production-ready **Polymarket Telegram bot** that streams realtime trades and lets users set custom alerts on trade size, share price, trader wallet, or specific market — all powered by the **[Bitquery Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api/)**.
+Build a production-ready **Polymarket Telegram bot** that streams realtime trades and lets users set custom alerts on trade size, share price, trader wallet, or specific market — all powered by the **[Bitquery Prediction Market API](/docs/examples/prediction-market/prediction-market-api/)**.
 
 By the end of this guide you'll have a multi-user Telegram bot that subscribes to every Polymarket trade on Polygon over a single GraphQL WebSocket, filters trades against per-user alert rules, and pushes Telegram notifications with links to Polymarket, PolygonScan, and the trader's profile.
 
@@ -592,10 +591,10 @@ All of these reuse the same GraphQL endpoint, same auth, same field shapes.
 
 ## Resources
 
-- [Bitquery Prediction Market API docs](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api/)
-- [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/)
-- [Prediction Managements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-managements-api/)
-- [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/)
+- [Bitquery Prediction Market API docs](/docs/examples/prediction-market/prediction-market-api/)
+- [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/)
+- [Prediction Managements API](/docs/examples/prediction-market/prediction-managements-api/)
+- [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/)
 - [Source code](https://github.com/Akshat-cs/PolyBit-Polymarket-Alerts-Telegram-Bot)
 - [Live demo — @PolyBit_Polymarket_Bot](https://t.me/PolyBit_Polymarket_Bot)
 - [Get a Bitquery token](https://account.bitquery.io)

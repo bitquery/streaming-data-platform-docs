@@ -12,7 +12,6 @@ keywords:
   - BTC block size
   - Bitquery Bitcoin
 ---
-
 # Bitcoin Blocks API
 
 The Blocks API returns block-level data on Bitcoin: height, difficulty, size, transaction count, and timestamp. Use it to drive explorer front-ends, monitor chain progression, or pull historical block context for mining and network analytics.
@@ -66,6 +65,6 @@ Swap the sort to `desc: "difficulty"` or `desc: "blockSizeBigInt"` for different
 
 ## Related resources
 
-- [Bitcoin Transactions API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-transactions-api) — per-block transaction details and fees
-- [Bitcoin Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — UTXO data and miner rewards
-- [Bitcoin Kafka stream](https://docs.bitquery.io/docs/streams/protobuf/chains/Bitcoin-protobuf) — real-time block and transaction delivery
+- [Bitcoin Transactions API](/docs/blockchain/Bitcoin/bitcoin-transactions-api) — per-block transaction details and fees
+- [Bitcoin Inputs and Outputs API](/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — UTXO data and miner rewards
+- [Bitcoin Kafka stream](/docs/streams/protobuf/chains/Bitcoin-protobuf) — real-time block and transaction delivery

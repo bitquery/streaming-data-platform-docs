@@ -8,13 +8,11 @@ keywords:
   - Solana PumpSwap GraphQL
   - PumpSwap program address
 ---
-
 # PumpSwap API
 
 :::tip Need real-time PumpSwap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Bitquery’s **PumpSwap API** exposes the PumpSwap AMM on Solana through GraphQL: **live and historical trades**, **prices**, **OHLC**, **volume**, **pool creation**, and **Pump.fun → PumpSwap migrations**. Use **queries** for snapshots, **subscriptions** to track PumpSwap trades in real time, and **`dataset: combined`** when you need more history than **`dataset: realtime`** (~recent window). Filter trades with **`Dex.ProgramAddress: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"`**. For live DEX prices across Pump.fun tokens, see [DEXrabbit's Pump.fun category](https://dexrabbit.bitquery.io/categories/pump-fun).
 
@@ -23,40 +21,16 @@ For other data points, reach out to [support](https://t.me/Bloxy_info).
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 - You can also explore [Pump Fun Data documentation ➤](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
-- Also check out [LetsBonk.fun APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/letsbonk-api/)
-- Need zero-latency PumpSwap data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+- Also check out [LetsBonk.fun APIs ➤](/docs/blockchain/Solana/letsbonk-api/)
+- Need zero-latency PumpSwap data? [Read about our Shred Streams and Contact us for a Trial](/docs/streams/real-time-solana-data/).
 
 Join us on [Telegram](https://t.me/Bloxy_info) for support and integration help.
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
-
-<head>
-<title>PumpSwap API - Solana - Tokens, Trades, Live Prices</title>
-  <meta name="title" content="PumpSwap API - Solana - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Query and stream PumpSwap trades, prices, OHLC, and volume on Solana with the Bitquery PumpSwap API. Track PumpSwap trades in real time via a GraphQL subscription."/>
-  <meta name="keywords" content="PumpSwap API,track PumpSwap trades in real time,PumpSwap WebSocket,PumpSwap GraphQL,Solana PumpSwap,PumpSwap on-chain data,PumpSwap program address,PumpSwap trades subscription,PumpSwap historical data,Bitquery"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="PumpSwap API - Solana - Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get the PumpSwap API and streams for PumpSwap trades, prices, OHLC, and volume on Solana via Bitquery GraphQL and WebSocket."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="PumpSwap API - Solana - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Track PumpSwap trades in real time and query PumpSwap prices, OHLC, and volume on Solana with the Bitquery PumpSwap API."/>
-</head>
 
 ## What is the PumpSwap program address on Solana? {#what-is-the-pumpswap-program-address-on-solana}
 
@@ -1178,7 +1152,7 @@ Use a GraphQL **`subscription`** on **`DEXTrades`** (all PumpSwap trades) or **`
 
 ### Why do I only see recent PumpSwap data with `dataset: realtime`?
 
-**`dataset: realtime`** covers a **rolling recent window** (roughly the last several hours of activity). For **full history**, use **`dataset: combined`** (or archive where applicable) on **`Solana`**, as described in [historical aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/).
+**`dataset: realtime`** covers a **rolling recent window** (roughly the last several hours of activity). For **full history**, use **`dataset: combined`** (or archive where applicable) on **`Solana`**, as described in [historical aggregate data](/docs/blockchain/Solana/historical-aggregate-data/).
 
 ### Can I run PumpSwap volume or OHLC aggregates as a subscription?
 
@@ -1190,7 +1164,7 @@ Use the [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [Pump 
 
 ## I can only get 8 hours of PumpSwap data with dataset: realtime — how do I get older data? {#pumpswap-realtime-vs-combined-history}
 
-**`dataset: realtime`** on Solana only covers a **rolling recent window** (on the order of **hours**). For **older PumpSwap history**, switch to **`dataset: combined`** or **`dataset: archive`** on your **`Solana { ... }`** query so archive-backed rows are included. See [Historical Solana aggregate data](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/) and the **OHLC / volume** examples later on this page.
+**`dataset: realtime`** on Solana only covers a **rolling recent window** (on the order of **hours**). For **older PumpSwap history**, switch to **`dataset: combined`** or **`dataset: archive`** on your **`Solana { ... }`** query so archive-backed rows are included. See [Historical Solana aggregate data](/docs/blockchain/Solana/historical-aggregate-data/) and the **OHLC / volume** examples later on this page.
 
 ---
 

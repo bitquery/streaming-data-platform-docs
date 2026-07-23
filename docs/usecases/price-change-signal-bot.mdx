@@ -1,11 +1,10 @@
 ---
 title: "How to build a Crypto Price Change Signal Bot on Telegram"
-description: "Bitquery how-to guide: How to build a Crypto Price Change Signal Bot on Telegram."
+description: "This bot fetches real-time trading data from Bitquery and sends alerts on significant token price changes. For pre-aggregated price data with OHLC, consider using our Crypto Price API. The bot is built using the python-telegram-bot library to handle interactions with Telegram users and aiohttp…"
 ---
-
 # How to build a Crypto Price Change Signal Bot on Telegram
 
-This bot fetches real-time trading data from Bitquery and sends alerts on significant token price changes. For pre-aggregated price data with OHLC, consider using our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/). The bot is built using the `python-telegram-bot` library to handle interactions with Telegram users and `aiohttp` for making asynchronous API requests.
+This bot fetches real-time trading data from Bitquery and sends alerts on significant token price changes. For pre-aggregated price data with OHLC, consider using our [Crypto Price API](/docs/trading/crypto-price-api/introduction/). The bot is built using the `python-telegram-bot` library to handle interactions with Telegram users and `aiohttp` for making asynchronous API requests.
 
 Github Repository Link is available [here](https://github.com/bitquery/Price-Change-Signal-Telegram-Bot/tree/main)
 
@@ -26,7 +25,7 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 2. **Configuration and Constants**
 
    - `BOT_TOKEN`: The Telegram bot token from the BotFather. Get it from [here](https://telegram.me/BotFather)
-   - `OAUTH_TOKEN`: The authorization token for the Bitquery API. Check out the steps on how to get it [here](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+   - `OAUTH_TOKEN`: The authorization token for the Bitquery API. Check out the steps on how to get it [here](/docs/authorization/how-to-generate/)
    - `logging.basicConfig`: Configures logging to track bot operations and potential errors.
 
 3. **Helper Functions**

@@ -1,36 +1,11 @@
 ---
 sidebar_position: 5
 title: "BSC Self-Destruct Balance Tracker"
-description: "Bitquery blockchain API docs: BSC Self-Destruct Balance Tracker."
+description: "Learn how to track BSC contract self-destruct events, ephemeral contracts, and security incidents using Bitquery."
 ---
 # BSC Self-Destruct Balance Tracker
 
 The BSC Self-Destruct Balance Tracker API provides real-time balance updates for contracts that self-destruct and addresses that receive funds from self-destructed contracts. This API helps you monitor contract destruction events, track ephemeral contracts (like MEV bots), and analyze security incidents.
-
-<head>
-<meta name="title" content="BSC Self-Destruct Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track BSC contract self-destruct events, ephemeral contracts, and security incidents using Bitquery's Self-Destruct Balance Tracker API."/>
-<meta name="keywords" content="bsc self-destruct, selfdestruct balance api, contract destruction tracker, ephemeral contracts, mev self-destruct, parity multisig, contract kill tracker, bsc balance api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="BSC Self-Destruct Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to track BSC contract self-destruct events, ephemeral contracts, and security incidents using Bitquery's Self-Destruct Balance Tracker API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="BSC Self-Destruct Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track BSC contract self-destruct events, ephemeral contracts, and security incidents using Bitquery's Self-Destruct Balance Tracker API." />
-</head>
 
 ## What is Self-Destruct?
 

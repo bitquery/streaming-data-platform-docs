@@ -2,7 +2,6 @@
 title: "Quick Start Examples"
 description: "Bitquery Trading / Price Index docs: Quick Start Examples."
 ---
-
 # Quick Start Examples
 
 ## Real-Time Token Prices in USD on Solana

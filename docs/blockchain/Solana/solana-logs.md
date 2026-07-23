@@ -1,13 +1,10 @@
 ---
 title: "Solana Logs API"
-description: "Bitquery blockchain API docs: Solana Logs API."
+description: "Solana Logs API helps you filter program instruction logs using regular expressions."
 ---
-
 # Solana Logs API
 
 Solana Logs API helps you filter program instruction logs using regular expressions.
-
-
 
 # Finding Instructions with Log Matching
 

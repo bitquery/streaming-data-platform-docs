@@ -18,5 +18,3 @@ sum(of: BalanceUpdate_Amount selectWhere: {gt: "0"})
 You can combine this attribute with other attributes, including conditions in ```if```
 :::
 
-
-

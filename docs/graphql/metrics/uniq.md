@@ -24,7 +24,6 @@ The `uniq` function is used to estimate the count of unique values in a dataset.
   }
 }
 
-
 ```
 
 ### Result

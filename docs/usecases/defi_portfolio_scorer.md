@@ -1,8 +1,7 @@
 ---
 title: "DeFi Portfolio Scorer"
-description: "Bitquery how-to guide: DeFi Portfolio Scorer."
+description: "This guide demonstrates how to build a DeFi Portfolio Scorer tool that analyzes Ethereum wallet address and calculates a DeFi Strategy Score based on transaction patterns, protocol interactions, and asset holdings using Bitquery APIs."
 ---
-
 # DeFi Portfolio Scorer
 
 This guide demonstrates how to build a DeFi Portfolio Scorer tool that analyzes Ethereum wallet address and calculates a DeFi Strategy Score based on transaction patterns, protocol interactions, and asset holdings using Bitquery APIs.
@@ -58,7 +57,7 @@ The final score ranges from 25 (minimum) to 100 (maximum), providing a comprehen
 ## Prerequisites
 
 1. **Python 3.7+** installed on your system
-2. **Bitquery API Token** - Get your API token [here](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+2. **Bitquery API Token** - Get your API token [here](/docs/authorization/how-to-generate/)
 3. Basic understanding of Ethereum blockchain and DeFi protocols
 
 ## Installation

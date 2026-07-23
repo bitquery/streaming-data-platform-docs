@@ -26,12 +26,10 @@ keywords:
   - SPL token transfers
 sidebar_position: 5
 ---
-
 # Solana Data
 
 Bitquery provides **Solana blockchain data dumps** in **Parquet format**, designed for large-scale analytics, historical backfills, and data lake integrations.
 These datasets can be hosted directly in your own cloud storage (for example, **AWS S3**) and queried using engines like **Snowflake, BigQuery, Athena, Spark, etc**.
-
 
 ## Available Solana Topics
 
@@ -66,8 +64,6 @@ You can explore schemas and validate your tooling using the **public Solana samp
 https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/solana/balance_updates/390740000_390740049.parquet
 
 ```
-
-
 
 ## Solana Dataset Directory Structure
 
@@ -121,14 +117,13 @@ Example:
 
     
 
-
 ## Real-Time vs Batch Data Access
 
 Cloud data dumps are optimized for **batch analytics and historical workloads**.
 
 If you require **low-latency or streaming Solana data**, Bitquery also provides:
 
--   [**Kafka streams**](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
+-   [**Kafka streams**](/docs/streams/kafka-streaming-concepts/)
     
 -   **GraphQL subscriptions**
     

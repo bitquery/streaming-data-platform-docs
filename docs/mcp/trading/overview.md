@@ -1,6 +1,7 @@
 ---
 title: "Trading Data on the Bitquery MCP — Overview"
 description: "What trading data the Bitquery MCP exposes: chains, DEX protocols, granularity & outlier filtering across Solana, Ethereum, BSC, Base, Arbitrum & more."
+image: "/img/mcp/charts/cross-chain-volume.svg"
 keywords:
   - Bitquery MCP trading data
   - DEX trades MCP
@@ -11,23 +12,6 @@ keywords:
   - blockchain data AI agent
   - DEX OHLC AI
 ---
-
-<head>
-  <meta name="title" content="Trading Data on the Bitquery MCP — Overview"/>
-  <meta name="description" content="What trading data the Bitquery MCP exposes: chains, DEX protocols, granularity & outlier filtering across Solana, Ethereum, BSC, Base, Arbitrum & more."/>
-  <meta name="robots" content="index, follow"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Trading Data on the Bitquery MCP — Overview"/>
-  <meta property="og:description" content="What trading data the Bitquery MCP exposes across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Tron — DEX trades, OHLC, market cap, wallet flow."/>
-  <meta property="og:url" content="https://docs.bitquery.io/docs/mcp/trading/overview/"/>
-  <meta property="og:image" content="https://docs.bitquery.io/img/mcp/charts/cross-chain-volume.svg"/>
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Trading Data on the Bitquery MCP — Overview"/>
-  <meta property="twitter:description" content="What trading data the Bitquery MCP exposes across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Tron — DEX trades, OHLC, market cap, wallet flow."/>
-  <meta property="twitter:image" content="https://docs.bitquery.io/img/mcp/charts/cross-chain-volume.svg"/>
-  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/trading/overview/"/>
-</head>
-
 # Trading Data on the Bitquery MCP
 
 The [Bitquery MCP server](/docs/mcp/mcp-server/) plugs your AI agent directly into Bitquery's **trading dataset** — the same data that powers the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api/), [Crypto Price API](/docs/trading/crypto-price-api/introduction/), [TradingView feeds](/docs/usecases/tradingview-subscription-realtime/getting-started/), and our GraphQL endpoints.

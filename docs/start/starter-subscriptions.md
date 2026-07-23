@@ -2,7 +2,6 @@
 title: "Starter GraphQL Subscriptions"
 description: "Curated Bitquery WebSocket subscriptions for real-time DEX trades, transfers, mempool, Polymarket, and multi-chain streams."
 ---
-
 # Starter Subscriptions
 
 Below is a set of subscriptions that are curated for you to get started with Bitquery.
@@ -69,7 +68,6 @@ Subscribe only to Resolved events. Winning outcome is in Prediction.Outcome; tok
 
 Subscribe to live Split, Merge, and Redemption events as they occur on Polygon.
 ▶️ [Real-Time Prediction Market Settlements Stream](https://ide.bitquery.io/realtime-predicion-market-settlements-stream)
-
 
 ## Ethereum
 
@@ -673,8 +671,6 @@ Monitor NFT transfers for a specific collection across all transactions. This he
 
 ▶️ [Track Specific NFT Balance Changes](https://ide.bitquery.io/Track-specific-NFTs-Balance-Changes)
 
-
-
 ## x402 Streams
 
 ### Base
@@ -697,5 +693,5 @@ Real-time subscription to monitor payments to a specific x402 server on Solana n
 
 You will find more detailed information on streams and subscriptions in the relevant sections.
 
-- [Understanding Subscription](https://docs.bitquery.io/docs/subscriptions/subscription/)
-- [Streaming via Websocket](https://docs.bitquery.io/docs/subscriptions/examples/)
+- [Understanding Subscription](/docs/subscriptions/subscription/)
+- [Streaming via Websocket](/docs/subscriptions/examples/)

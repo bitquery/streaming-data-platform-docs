@@ -1,6 +1,7 @@
 ---
 title: "Bitquery MCP Server — Blockchain Data for AI Agents"
 description: "Connect Claude, Cursor, ChatGPT to Bitquery's MCP server. Query DEX trades, transfers, OHLC, market cap & wallet data to trace the origin of funds across 9 chains in plain English."
+image: "/img/mcp/charts/wsol-24h-candles.svg"
 keywords:
   - Bitquery MCP
   - Model Context Protocol blockchain
@@ -16,51 +17,7 @@ keywords:
   - blockchain data for AI agents
   - crypto trading MCP server
 ---
-
 import FAQ from "@site/src/components/FAQ";
-
-<head>
-  <meta
-    name="title"
-    content="Bitquery MCP Server — Blockchain Data for AI Agents"
-  />
-  <meta
-    name="description"
-    content="Connect Claude, Cursor, ChatGPT to Bitquery's MCP server. Query DEX trades, transfers, OHLC, market cap & wallet data to trace the origin of funds across 9 chains in plain English."
-  />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:type" content="website" />
-  <meta
-    property="og:title"
-    content="Bitquery MCP Server — Blockchain Data for AI Agents"
-  />
-  <meta
-    property="og:description"
-    content="Plug Claude, Cursor, ChatGPT into the Bitquery MCP. Outlier-filtered DEX trades, transfers, OHLC, market cap & wallet data across 9 chains — trace the origin of funds, no SQL needed."
-  />
-  <meta
-    property="og:url"
-    content="https://docs.bitquery.io/docs/mcp/mcp-server/"
-  />
-  <meta
-    property="og:image"
-    content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"
-  />
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta
-    property="twitter:title"
-    content="Bitquery MCP Server — Blockchain Data for AI Agents"
-  />
-  <meta
-    property="twitter:description"
-    content="Plug Claude, Cursor, ChatGPT into the Bitquery MCP. Outlier-filtered DEX trades, transfers, OHLC, market cap & wallet data across 9 chains — trace the origin of funds, no SQL needed."
-  />
-  <meta
-    property="twitter:image"
-    content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"
-  />
-  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/mcp-server/" />
-</head>
 
 # Bitquery MCP Server — Blockchain Data for AI Agents
 
@@ -243,7 +200,7 @@ This method is **less secure** than the OAuth flow (the token can appear in logs
 
 - you run a **fully autonomous agent** with no human in the loop to complete browser sign-in;
 - you **install Claude Code (or another MCP client) on a server** where interactive OAuth is awkward; or
-- the **default ~7 day token TTL** (or OAuth refresh behaviour) is not enough and you need long-lived, explicitly managed credentials.
+- the **default ~7 day token TTL** (or OAuth refresh behavior) is not enough and you need long-lived, explicitly managed credentials.
 
 Prefer OAuth in interactive environments when you can.
 

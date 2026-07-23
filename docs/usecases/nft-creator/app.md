@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "App"
-description: "Bitquery how-to guide: App."
+description: "App with Bitquery GraphQL APIs — queries, streams, and examples."
 ---
 # App 
 
@@ -89,7 +89,6 @@ return (
 );
 ```
 
-
 ### Complete Code
 
 ```JSX
@@ -170,5 +169,4 @@ export default App;
 ## CSS
 
 Use the css file in this [Github repo.](https://github.com/bitquery/nft-creator-portfolio/blob/main/src/pages/style.css)
-
 

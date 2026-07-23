@@ -1,8 +1,7 @@
 ---
 title: "How to Filter Abnormal Prices"
-description: "Bitquery how-to guide: How to Filter Abnormal Prices."
+description: "You might see abnormal prices when you fetch data from Bitquery APIs. There can be two possibilities as to why these abnormal prices associated with trades are appearing in your API response."
 ---
-
 # How to Filter Abnormal Prices
 
 You might see abnormal prices when you fetch data from Bitquery APIs. There can be two possibilities as to why these abnormal prices associated with trades are appearing in your API response.
@@ -11,7 +10,7 @@ You might see abnormal prices when you fetch data from Bitquery APIs. There can 
 
 - In the second case, the Bitquery DB itself has incorrect trade data, then create a ticket [here](http://support.bitquery.io).
 
-In the first case, we are going to see 3 different methods to filter anomaly trades. Anomaly trades are the trades that result in abnormally high or low prices in USD. Bitquery provides raw trade data and does not omit any trades that are happening over the network. But this also results in some issues for the Bitquery data consumers if they are trying to build something around the Price of tokens, such as trying to get All time high price or building OHLC/K-line charts. For pre-filtered, clean price data, consider using our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).
+In the first case, we are going to see 3 different methods to filter anomaly trades. Anomaly trades are the trades that result in abnormally high or low prices in USD. Bitquery provides raw trade data and does not omit any trades that are happening over the network. But this also results in some issues for the Bitquery data consumers if they are trying to build something around the Price of tokens, such as trying to get All time high price or building OHLC/K-line charts. For pre-filtered, clean price data, consider using our [Crypto Price API](/docs/trading/crypto-price-api/introduction/).
 
 3 ways to omit these types of anomaly trades:
 
@@ -21,7 +20,7 @@ Price Asymmetry represents the difference in TradeAmount in USD of main currency
    as a filter in our APIs as this will filter out trades with more than 10% difference in their trade amounts.
    Also, filter out low AmountinUSD trades from this, say `{Trade: {AmountInUSD: \{lt: "10"\}}}`
 
-Read more about Price Asymmetry [here](https://docs.bitquery.io/docs/graphql/metrics/priceAsymmetry/).
+Read more about Price Asymmetry [here](/docs/graphql/metrics/priceAsymmetry/).
 
 Here's an example [query on ethereum trades](https://ide.bitquery.io/Price-based-on-DEX-trades-in-USD).
 
@@ -54,7 +53,7 @@ For example, the median represents the middle point of the data. Half of the res
 
 The level: 0.75 represents the 75th percentile and it shows that 75% of the responses had values lower than this, while level: 0.25 represents the 25th percentile and it shows that 25% of the values were lower.
 
-Read more about quantile [here](https://docs.bitquery.io/docs/graphql/metrics/quantile/).
+Read more about quantile [here](/docs/graphql/metrics/quantile/).
 
 We can also remove anomaly trades using the quantile metric. Also add one more filter to remove low AmountinUSD trades from this, say `{Trade: {AmountInUSD: {lt: "10"}}}`
 
@@ -109,7 +108,7 @@ query AllTimeHighTokenPriceQuery(
 ## 3. Get all trades and filter on your end
 Get all the trades from Bitquery API and then filter trades using your own custom logic so that you can remove the anomaly trades with abnormal prices.
 
-One such example we have shown [here](https://docs.bitquery.io/docs/usecases/solana-ohlc-calculator/) where custom logic is a very basic one, fetching quantile values of Trade USD Price with level: 0.05 and level: 0.95 and then only fetching trades between these 2 Trade Prices and thus removing extremes.
+One such example we have shown [here](/docs/usecases/solana-ohlc-calculator/) where custom logic is a very basic one, fetching quantile values of Trade USD Price with level: 0.05 and level: 0.95 and then only fetching trades between these 2 Trade Prices and thus removing extremes.
 
 ## Conclusion
 

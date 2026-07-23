@@ -1,28 +1,13 @@
 ---
 sidebar_position: 9
 title: "Arbitrum Token Market Cap API"
-description: "Bitquery blockchain API docs: Arbitrum Token Market Cap API."
+description: "Stream and query Arbitrum token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API"
 ---
 # Arbitrum Token Market Cap API
 
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens traded on **Arbitrum One**. Filter with token/currency **`Id`** values such as **`arbitrum:`** plus a **lowercase** contract address.
 
 For schema details and field meanings, see the **[Tokens cube](/docs/trading/crypto-price-api/tokens)** and **[Supply fields](/docs/trading/crypto-price-api/supply-fields)**.
-
-<head>
-<meta name="title" content="Arbitrum Token Market Cap API | Trading Tokens"/>
-<meta name="description" content="Stream and query Arbitrum token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API."/>
-<meta name="keywords" content="arbitrum token market cap, arbitrum one erc20 market cap, arbitrum token api, bitquery trading tokens arbitrum, arbitrum fdv api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Arbitrum Token Market Cap API"/>
-<meta property="og:description" content="Real-time streams and queries for Arbitrum token market cap, supply, and price via Trading.Tokens."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Arbitrum Token Market Cap API"/>
-<meta property="twitter:description" content="Real-time streams and queries for Arbitrum token market cap, supply, and price via Trading.Tokens."/>
-</head>
 
 :::note Trading API and EVM addresses
 On **Arbitrum** (EVM), the **Trading** API expects **lowercase** hex in **`Id`** values (e.g. `arbitrum:0x97e6…`, not mixed-case checksum addresses).

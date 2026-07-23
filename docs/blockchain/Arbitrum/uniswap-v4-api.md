@@ -1,9 +1,8 @@
 ---
-title: "Uniswap V4 API - Track Trader Activities, Token Trades and Market Behaviour"
-description: "Track Uniswap V4 trades, trader activities, token trades, and market behaviour in real time using Bitquery's DEX Trades API on Arbitrum."
+title: "Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior"
+description: "Track Uniswap V4 trades, trader activities, token trades, and market behavior in real time using Bitquery's DEX Trades API on Arbitrum."
 ---
-
-# Uniswap V4 API - Track Trader Activities, Token Trades and Market Behaviour
+# Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior
 
 Uniswap v4 introduces a major shift in protocol architecture. Instead of deploying a separate smart contract for each liquidity pool, Uniswap v4 uses a singleton PoolManager contract that manages all pools internally as structured state.
 

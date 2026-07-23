@@ -1,12 +1,10 @@
 ---
 title: "Build Multi-Chain NFT Scanner"
-description: "Bitquery how-to guide: Build Multi-Chain NFT Scanner."
+description: "In this guide, we will use Bitquery Streaming API for scanning NFTs (Non-Fungible Tokens) across various blockchains for the given address. We'll explore how to build an NFT scanner that works with a specific wallet address using Python."
 ---
-
 # Build Multi-Chain NFT Scanner
 
 In this guide, we will use Bitquery Streaming API for scanning NFTs (Non-Fungible Tokens) across various blockchains for the given address. We'll explore how to build an NFT scanner that works with a specific wallet address using Python.
-
 
 ## Why Bitquery for NFT Scanning?
 

@@ -1,8 +1,7 @@
 ---
 title: "Creating a Heatmap for Ethereum Token Holders using Python"
-description: "Bitquery how-to guide: Creating a Heatmap for Ethereum Token Holders using Python."
+description: "In this tutorial we will see how to visualize top token holders in a heatmap using the Token Holder APIs with Python."
 ---
-
 # Creating a Heatmap for Ethereum Token Holders using Python
 
 In this tutorial we will see how to visualize top token holders in a heatmap using the [Token Holder APIs](/docs/blockchain/Ethereum/token-holders/token-holder-api/) with Python.

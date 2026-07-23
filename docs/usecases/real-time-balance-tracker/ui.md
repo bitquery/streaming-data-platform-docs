@@ -1,8 +1,7 @@
 ---
 title: "Building a Basic UI for Balance Tracker"
-description: "Bitquery how-to guide: Building a Basic UI for Balance Tracker."
+description: "Build a simple HTML/CSS/JS UI for a real-time wallet balance tracker powered by Bitquery subscriptions."
 ---
-
 # Building a Basic UI for Balance Tracker
 
 In this section we will create a simple UI using HTML, CSS and JavaScript to make the real-time Balance Tracker intuitive. For that we will create a HTML file named `index.js` in the same directory.
@@ -13,9 +12,9 @@ In this section we will create a simple UI using HTML, CSS and JavaScript to mak
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Balance Tracker</title>
+    
+    
+    
     <style>
         body {
             font-family: Arial, sans-serif;

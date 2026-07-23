@@ -12,7 +12,6 @@ keywords:
   - BTC UTXO
   - Bitquery Bitcoin
 ---
-
 # Bitcoin Inputs and Outputs API
 
 Bitcoin runs on an unspent-transaction-output (UTXO) model — every transaction consumes previous outputs (inputs) and creates new ones (outputs). These APIs give you direct access to that UTXO data with BTC and USD values, block context, transaction hashes, and per-address filtering. They're the foundation for balance reconstruction, miner reward tracking, historical price lookups, and detailed wallet activity feeds.
@@ -204,7 +203,7 @@ query MyQuery {
 
 ## Related resources
 
-- [Bitcoin Address API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-address-api) — balances and activity stats per address
-- [Bitcoin Coinpath API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-coinpath-api) — multi-hop fund flow tracing
-- [Bitcoin Transactions API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-transactions-api) — transaction-level totals and fees
-- [Bitcoin Kafka stream](https://docs.bitquery.io/docs/streams/protobuf/chains/Bitcoin-protobuf) — real-time UTXO delivery
+- [Bitcoin Address API](/docs/blockchain/Bitcoin/bitcoin-address-api) — balances and activity stats per address
+- [Bitcoin Coinpath API](/docs/blockchain/Bitcoin/bitcoin-coinpath-api) — multi-hop fund flow tracing
+- [Bitcoin Transactions API](/docs/blockchain/Bitcoin/bitcoin-transactions-api) — transaction-level totals and fees
+- [Bitcoin Kafka stream](/docs/streams/protobuf/chains/Bitcoin-protobuf) — real-time UTXO delivery

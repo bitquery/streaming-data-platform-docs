@@ -1,8 +1,7 @@
 ---
 title: "Live Reload Configuration for gRPC Streams"
-description: "Bitquery Solana gRPC docs: Live Reload Configuration for gRPC Streams."
+description: "Live reload enables dynamic configuration changes without you having to restart your application. This feature automatically detects changes to your config.yaml file and restarts the stream with the new settings."
 ---
-
 # Live Reload Configuration for gRPC Streams
 
 Live reload enables dynamic configuration changes without you having to restart your application. This feature automatically detects changes to your `config.yaml` file and restarts the stream with the new settings.
@@ -323,9 +322,9 @@ You can switch between these stream types using live reload:
 - **`balances`**: Balance updates for accounts
 
 For detailed information on each stream type, see:
-- [DEX Trades](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades)
-- [Transactions](https://docs.bitquery.io/docs/grpc/solana/topics/transactions)
-- [Balances](https://docs.bitquery.io/docs/grpc/solana/topics/balance)
+- [DEX Trades](/docs/grpc/solana/topics/dextrades)
+- [Transactions](/docs/grpc/solana/topics/transactions)
+- [Balances](/docs/grpc/solana/topics/balance)
 
 ## Available Filters
 
@@ -411,7 +410,6 @@ The `isReloading` flag prevents error spam during normal reload operations.
 4. **Monitor reload events**: Log when reloads happen to track configuration changes
 5. **Handle edge cases**: Ensure your application handles the brief disconnection during reload
 
-
 ### Environment Variables
 
 For sensitive data like API tokens, use environment variables:
@@ -444,13 +442,12 @@ When live reload is active, you'll see these messages:
  Stream connected and listening for data...
 ```
 
-
 ## Related Documentation
 
-- [Introduction to gRPC Streams](https://docs.bitquery.io/docs/grpc/solana/introduction)
-- [Best Practices](https://docs.bitquery.io/docs/grpc/solana/best_practices)
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorization)
-- [Error Handling](https://docs.bitquery.io/docs/grpc/solana/errors)
+- [Introduction to gRPC Streams](/docs/grpc/solana/introduction)
+- [Best Practices](/docs/grpc/solana/best_practices)
+- [Authorization](/docs/grpc/solana/authorization)
+- [Error Handling](/docs/grpc/solana/errors)
 
 ## Troubleshooting
 
@@ -485,7 +482,7 @@ If you experience memory issues with live reload:
 
 Now that you understand live reload, explore:
 
-- [Stream Topics](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades) - Different types of streams available
-- [Best Practices](https://docs.bitquery.io/docs/grpc/solana/best_practices) - Production-ready patterns
-- [Examples](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams) - Real-world use cases
+- [Stream Topics](/docs/grpc/solana/topics/dextrades) - Different types of streams available
+- [Best Practices](/docs/grpc/solana/best_practices) - Production-ready patterns
+- [Examples](/docs/grpc/solana/examples/pump-fun-grpc-streams) - Real-world use cases
 

@@ -2,7 +2,7 @@
 sidebar_position: 1
 sidebar_label: BullX
 title: "BullX EVM API"
-description: "Bitquery blockchain API docs: BullX EVM API."
+description: "This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair, chart and many more just like how BullX shows for EVM Chains."
 ---
 # BullX EVM API
 
@@ -49,7 +49,6 @@ query TrendingPairs {
     }
   }
 }
-
 
 ```
 
@@ -99,7 +98,6 @@ subscription{
   }
 }
 
-
 ```
 
 ## Get Price of a Token
@@ -132,7 +130,6 @@ query MyQuery {
   }
 }
 
-
 ```
 
 ## Get Liquidity of a specific pair by using its Pair Address
@@ -155,7 +152,6 @@ query MyQuery {
     }
   }
 }
-
 
 ```
 

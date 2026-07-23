@@ -24,7 +24,6 @@ For example to calculate average reward:
 average(of: Reward_Total)
 ```
 
-
 ##  Over Two Variables
 
 Some statistics require 2 variables. 

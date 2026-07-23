@@ -3,7 +3,6 @@ title: "Solana Transactions - gRPC Stream (CoreCast)"
 description: "Real-time Solana transactions via gRPC. Filter by program, signer. Parsed instructions, protobuf."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana transactions stream"]
 ---
-
 # Solana Transactions gRPC Stream
 
 The `transactions` gRPC Stream provides real-time transaction data across the Solana blockchain.
@@ -149,6 +148,6 @@ This package includes all necessary protobuf definitions without requiring manua
 
 ## Related
 
-- [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) — Topics and concepts
-- [DEX Trades gRPC](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades/) — DEX swap stream
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorization/) — Token setup
+- [CoreCast Introduction](/docs/grpc/solana/introduction/) — Topics and concepts
+- [DEX Trades gRPC](/docs/grpc/solana/topics/dextrades/) — DEX swap stream
+- [Authorization](/docs/grpc/solana/authorization/) — Token setup

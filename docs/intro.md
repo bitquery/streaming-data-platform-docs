@@ -3,11 +3,9 @@ sidebar_position: 1
 title: "Bitquery API Documentation - Blockchain Data Platform"
 description: "Access historical and real-time blockchain data via GraphQL, WebSocket, and Kafka. Query Ethereum, Solana, BSC, Polygon, and 40+ chains. Free tier available."
 ---
-
 # Overview
 
 Bitquery 's infrastructure provides you access to historical and real-time blockchain data through various interfaces such as GraphQL APIs.
-
 
 ## GraphQL Query API
 
@@ -68,12 +66,9 @@ to the parsed protocols as DEX (decentralized exchanges) or NFT (non-fungible to
 
 ![AWS S3 bucket](/img/aws/s3_bucket.png)
 
-
-
 ## SQL Like Interface
 
 We also provide SQL like interface on our Enterprise plan, if you want to explore that, please send us email at [hello@bitquery.io](mailto:hello@bitquery.io)
-
 
 ## Bitquery Support Channels
 

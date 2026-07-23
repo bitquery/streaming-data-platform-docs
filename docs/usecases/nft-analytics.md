@@ -1,13 +1,12 @@
 ---
 sidebar_position: 3
 title: "NFT Analytics Dashboard - Tutorial"
-description: "Bitquery how-to guide: NFT Analytics Dashboard - Tutorial."
+description: "Bitquery's queries can help NFT marketplace builders analyze the performance of different NFTs on various blockchain networks. By providing real-time data on transaction volume, and other key metrics, Bitquery can help builders optimize their marketplace's offerings and improve trading…"
 ---
 # NFT Analytics Dashboard - Tutorial
 
  ### Marketplace Analysis
  Bitquery's queries can help NFT marketplace builders analyze the performance of different NFTs on various blockchain networks. By providing real-time data on  transaction volume, and other key metrics, Bitquery can help builders optimize their marketplace's offerings and improve trading conditions for users.
-
 
 ## Tutorial 
 This is a tutorial to build a NFT Dashboard using Python code that connects to the Bitquery API and retrieves data for a particular NFT on the Ethereum network. The code then displays the data on a user-friendly interface built using Python and Streamlit.
@@ -65,7 +64,6 @@ st.metric("Count of Punk Evil Rabbit NFTS Bought",count_nfts_bought)
 ```
 The title() and header() methods are used to display the title and header of the dashboard, respectively. The metric() method is used to display the count of NFTs bought as a metric.
 
-
 ### Adding a Table
 
 This code snippet retrieves the latest DEX trades for a specific NFT token from the Ethereum blockchain using The Graph API, and displays them in a data table using the streamlit library.
@@ -91,7 +89,6 @@ st.dataframe(df)
 ### Adding a Chart
 
 The chart section of the code creates a line chart using the streamlit library. The chart displays the number of NFTs bought on a daily basis on the OpenSea protocol on the Ethereum blockchain.
-
 
 ```python
 ## chart
@@ -119,7 +116,6 @@ st.line_chart(df_chart,x='Block_Date',y='Count_NFTS_bought')
 #### Here's how it looks
 
 <video controls loop muted playsInline width="100%" src="/img/nft_dashboard.mp4"></video>
-
 
 If you want to build up query from scratch you are welcome or you can use the [premade examples](https://ide.bitquery.io/explore/All%20queries) as well.
 

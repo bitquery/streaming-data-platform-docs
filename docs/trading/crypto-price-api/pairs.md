@@ -1,8 +1,7 @@
 ---
 title: "Pairs Cube"
-description: "Bitquery Trading / Price Index docs: Pairs Cube."
+description: "The Pairs cube provides trading data for a base token traded against a quote token on a particular DEX or protocol."
 ---
-
 # Pairs Cube
 
 The Pairs cube provides trading data for a base token traded against a quote token on a particular DEX or protocol.
@@ -55,7 +54,6 @@ The Pairs cube provides trading data for a base token traded against a quote tok
     }
   }
 }
-
 
 ```
 

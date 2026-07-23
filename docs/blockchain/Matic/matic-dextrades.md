@@ -1,43 +1,15 @@
 ---
 sidebar_position: 2
 title: "Polygon (MATIC) DEX Trades API"
-description: "Bitquery blockchain API docs: Polygon (MATIC) DEX Trades API."
+description: "Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API"
 ---
 # Polygon (MATIC) DEX Trades API
 
 :::tip Need real-time Polygon (MATIC) DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Matic`). Use this page when you need **historical Polygon (MATIC) data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Matic`). Use this page when you need **historical Polygon (MATIC) data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
 :::
 
-
 In this section we will see how to get Matic DEX trades information using our API.
-
-<head>
-<meta name="title" content="How to Get Polygon (MATIC) Decentralized Exchange Data with DEX Trades API"/>
-<meta name="description" content="Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API."/>
-<meta name="keywords" content="Polygon (MATIC) DEX Trades api,Polygon (MATIC) DEX Trades python api,Polygon (MATIC) DEX Trades token api,Polygon (MATIC) Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,Polygon (MATIC) network api, Polygon (MATIC) web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to Get Polygon (MATIC) Decentralized Exchange Data with DEX Trades API"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to Get Polygon (MATIC) Decentralized Exchange Data with DEX Trades API" />
-<meta property="twitter:description" content="Get on-chain data of any Polygon (MATIC) based DEX through our DEX Trades API." />
-</head>
 
 ## Live DEX swap stream (Polygon) {#crypto-trades-live-stream}
 
@@ -130,7 +102,7 @@ subscription {
 
 This example uses the chain-specific **DEXTrades** cube via `EVM(network: matic) { DEXTrades }` (pool-side Buy/Sell; see [DEXTrades cube](/docs/cubes/dextrades)). USD can be weak on thin pools. For trader + USD swap rows, use the [stream at the top](#crypto-trades-live-stream).
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 You can find the query [here](https://ide.bitquery.io/Realtime-matic-dex-trades-websocket)
 
 ```
@@ -178,8 +150,6 @@ subscription {
     }
   }
 }
-
-
 
 ```
 
@@ -231,7 +201,6 @@ subscription {
     }
   }
 }
-
 
 ```
 

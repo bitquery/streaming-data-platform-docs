@@ -2,7 +2,6 @@
 title: "Stablecoin Balance API"
 description: "Bitquery stablecoin API docs: Stablecoin Balance API."
 ---
-
 # Stablecoin Balance API
 
 The Stablecoin API by Bitquery provides you the comprehensive set of APIs which can provide you realtime transfers, realtime trades, realtime price, holder distribution of stablecoins across chains with a single API call.

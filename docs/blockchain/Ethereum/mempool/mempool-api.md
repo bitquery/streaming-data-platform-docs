@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Mempool API"
-description: "Bitquery blockchain API docs: Mempool API."
+description: "Write Ethereum mempool GraphQL queries and subscriptions for pending transactions, trades, and events."
 ---
 # Mempool API
 
@@ -9,7 +9,7 @@ In this section we will look at some examples of how to write mempool queries to
 
 ## How do I get unconfirmed/pending transactions for an address?
 
-Subscribe to **`EVM(mempool: true)`** **`Transactions`** with **`where.any`** on **`Transaction.From`** and **`Transaction.To`** so you see pending txs **to or from** the wallet. Mempool support varies by **`network`**; the example under [Transactions from an Address](#transactions-from-an-address) shows a **from** filter you can extend with `any`. For **BSC**-specific streaming, see [BSC mempool stream](https://docs.bitquery.io/docs/blockchain/BSC/bsc-mempool-stream/).
+Subscribe to **`EVM(mempool: true)`** **`Transactions`** with **`where.any`** on **`Transaction.From`** and **`Transaction.To`** so you see pending txs **to or from** the wallet. Mempool support varies by **`network`**; the example under [Transactions from an Address](#transactions-from-an-address) shows a **from** filter you can extend with `any`. For **BSC**-specific streaming, see [BSC mempool stream](/docs/blockchain/BSC/bsc-mempool-stream/).
 
 ## Simulating Pending Transactions
 
@@ -51,7 +51,6 @@ subscription{
   }
 }
 
-
 ```
 
 ## Get Recommended Fees
@@ -87,7 +86,6 @@ You can run the query [here](https://ide.bitquery.io/Get-Mempool-Fees)
     }
   }
 }
-
 
 ```
 
@@ -235,7 +233,6 @@ subscription {
  }
 }
 
-
 ```
 
 ## Balance Updates in Mempool in Real-time
@@ -263,7 +260,6 @@ subscription {
     }
   }
 }
-
 
 ```
 

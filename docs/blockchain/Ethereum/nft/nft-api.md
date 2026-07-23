@@ -1,9 +1,8 @@
 ---
 sidebar_position: 1
 title: "NFT API"
-description: "Bitquery blockchain API docs: NFT API."
+description: "Non-Fungible Tokens (NFTs) are digital assets with unique identification codes that cannot be exchanged for other tokens on a one-to-one basis. NFTs have gained significant popularity in recent years, with the growth of digital art, collectables, and gaming."
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # NFT API
