@@ -10,7 +10,7 @@ For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitqu
 :::
 
 
-In this section we will see how to get data on Raydium CPMM trades in real-time. You can check out our [Pump Fun docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/), [Raydium v4 docs](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/) and [Raydium LaunchPad docs](https://docs.bitquery.io/docs/blockchain/Solana/launchpad-raydium/) too.
+In this section we will see how to get data on Raydium CPMM trades in real-time. You can check out our [Pump Fun docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/), [Raydium v4 docs](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/) and [Raydium LaunchPad docs](https://docs.bitquery.io/docs/blockchain/Solana/launchpad-raydium/) too.
 
 :::note
 `Trade Side Account` field will not be available as aggregates in Archive and Combined Datasets

@@ -52,7 +52,7 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 
 - Start with **[Historical Data](https://docs.bitquery.io/docs/graphql/dataset/archive)**
 - Learn **[Aggregation Queries](https://docs.bitquery.io/docs/graphql/aggregation)**
-- Explore **[Analytics Examples](https://docs.bitquery.io/docs/examples/)**
+- Explore **[Analytics Examples](/docs/category/how-to-guides/)**
 
 ## Getting Help
 

@@ -13,7 +13,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical LetsBonk.fun data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-In this document, we will explore several examples related to LetsBonk.fun. You can also check out our [Pump Fun API Docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) and [FourMeme API Docs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/). For live DEX prices and volume across LetsBonk tokens, see [DEXrabbit's LetsBonk category](https://dexrabbit.bitquery.io/categories/letsbonk-fun-ecosystem).
+In this document, we will explore several examples related to LetsBonk.fun. You can also check out our [Pump Fun API Docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [FourMeme API Docs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/). For live DEX prices and volume across LetsBonk tokens, see [DEXrabbit's LetsBonk category](https://dexrabbit.bitquery.io/categories/letsbonk-fun-ecosystem).
 
 :::note
 **LetsBonk.fun tokens are created and traded on Raydium Launchlab.**

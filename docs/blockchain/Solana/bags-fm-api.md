@@ -670,7 +670,7 @@ The **Bags FM token trades** endpoints aggregate data from multiple Solana DEXs:
 - [Raydium API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
 - [Orca API](https://docs.bitquery.io/docs/blockchain/Solana/solana-orca-dex-api/)
 - [Jupiter API](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api/)
-- [PumpFun API](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/)
+- [PumpFun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
 - [Letsbonk API](https://docs.bitquery.io/docs/blockchain/Solana/letsbonk-api/)
 
 ## 🔗 Related Solana APIs

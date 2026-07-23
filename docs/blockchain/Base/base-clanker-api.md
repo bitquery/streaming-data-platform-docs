@@ -8,7 +8,7 @@ description: "Bitquery blockchain API docs: Base Clanker API."
 This section provides you with a set of queries that provides an insight about the Clank fun.
 Clank.fun is a platform on the Base blockchain that allows users to launch and trade meme coins. Each coin is deployed as an ERC-20 token on Uniswap V3 with permanently locked single-sided liquidity of 1,000,000,000 coin. To launch a token, users must hold at least 1,000,000 $CLANKFUN tokens. Token creators earn 0.4% of the trading volume in liquidity provider (LP) fees, which can be claimed anytime on clanker.world.
 
-You can see [Uniswap guide](https://docs.bitquery.io/docs/examples/Base/base-uniswap-api/) to get latest trades of these tokens, top traders, OHLCV, get token metadata, top bought tokens, top sold tokens, etc. For live DEX prices across Clanker-launched tokens, see [DEXrabbit's Clanker category](https://dexrabbit.bitquery.io/categories/clanker-ecosystem).
+You can see [Uniswap guide](https://docs.bitquery.io/docs/blockchain/Base/base-uniswap-api/) to get latest trades of these tokens, top traders, OHLCV, get token metadata, top bought tokens, top sold tokens, etc. For live DEX prices across Clanker-launched tokens, see [DEXrabbit's Clanker category](https://dexrabbit.bitquery.io/categories/clanker-ecosystem).
 
 ## Latest Tokens created using Clanker
 

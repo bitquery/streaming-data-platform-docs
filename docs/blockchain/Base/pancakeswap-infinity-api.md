@@ -15,8 +15,8 @@ Need zero-latency Base data? [Read about our Kafka Streams and Contact us for a 
 
 You may also be interested in:
 
-- [Clanker APIs ➤](https://docs.bitquery.io/docs/examples/Base/base-clanker-api/)
-- [Base DEX Trade APIs ➤](https://docs.bitquery.io/docs/examples/Base/base-dextrades/)
+- [Clanker APIs ➤](https://docs.bitquery.io/docs/blockchain/Base/base-clanker-api/)
+- [Base DEX Trade APIs ➤](https://docs.bitquery.io/docs/blockchain/Base/base-dextrades/)
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.

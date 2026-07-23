@@ -26,7 +26,7 @@ To query or stream data via graphQL **outside the Bitquery IDE**, you need to ge
 Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorization/how-to-generate/)
 :::
 
-- You can also explore [Pump Fun Data documentation ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/)
+- You can also explore [Pump Fun Data documentation ➤](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
 - Also check out [LetsBonk.fun APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/letsbonk-api/)
 - Need zero-latency PumpSwap data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
 
@@ -1186,7 +1186,7 @@ Use a GraphQL **`subscription`** on **`DEXTrades`** (all PumpSwap trades) or **`
 
 ### Where can I get Pump.fun data before a token moves to PumpSwap?
 
-Use the [Pump.fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) and [Pump Fun to PumpSwap](https://docs.bitquery.io/docs/blockchain/Solana/pump-fun-to-pump-swap/) guides. This page focuses on **PumpSwap** only after migration.
+Use the [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [Pump Fun to PumpSwap](https://docs.bitquery.io/docs/blockchain/Solana/pump-fun-to-pump-swap/) guides. This page focuses on **PumpSwap** only after migration.
 
 ## I can only get 8 hours of PumpSwap data with dataset: realtime — how do I get older data? {#pumpswap-realtime-vs-combined-history}
 

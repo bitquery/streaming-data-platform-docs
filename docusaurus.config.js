@@ -293,6 +293,26 @@ const config = {
             to: "/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/",
             from: "/docs/examples/dextrades/Pump-Fun-API/",
           },
+          {
+            to: "/docs/blockchain/Ethereum/dextrades/dex-api/",
+            from: "/docs/examples/dextrades/dex-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/dextrades/token-trades-apis/",
+            from: "/docs/examples/dextrades/token-trades-apis/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener/",
+            from: "/docs/examples/dextrades/DEXScreener/evm_dexscreener/",
+          },
+          {
+            to: "/docs/blockchain/Solana/DEXScreener/solana_dexscreener/",
+            from: "/docs/examples/dextrades/DEXScreener/solana_dexscreener/",
+          },
+          {
+            to: "/docs/category/how-to-guides/",
+            from: "/docs/examples/",
+          },
 
           {
             to: "/docs/blockchain/Ethereum/ethers-library/eth_subscribe",

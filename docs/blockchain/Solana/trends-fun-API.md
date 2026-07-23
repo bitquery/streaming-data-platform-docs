@@ -9,7 +9,7 @@ description: "Bitquery blockchain API docs: Trends.Fun API - Solana - New Tokens
 For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Trends.fun data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-In this page, we will explore several examples related to Trends.fun. You can also check out our [Pump Fun API Docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) and [Jupiter Studio API Docs](https://docs.bitquery.io/docs/blockchain/Solana/jupiter-studio-api/).
+In this page, we will explore several examples related to Trends.fun. You can also check out our [Pump Fun API Docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [Jupiter Studio API Docs](https://docs.bitquery.io/docs/blockchain/Solana/jupiter-studio-api/).
 
 :::note
 **Trends.fun tokens are created and traded on Meteora Dynamic Bonding Curve (DBC).**

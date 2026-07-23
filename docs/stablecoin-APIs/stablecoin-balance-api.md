@@ -90,7 +90,7 @@ query MyQuery {
 
 More examples on balance and balance updates on EVM chains can be found [here](/docs/blockchain/Ethereum/balances/balance-api/)
 
-Token holder API examples can be found [here](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api/)
+Token holder API examples can be found [here](/docs/blockchain/Ethereum/token-holders/token-holder-api/)
 
 ## Get Top 100 Holders of a Particular Stablecoin
 

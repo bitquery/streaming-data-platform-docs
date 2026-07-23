@@ -56,7 +56,7 @@ To fetch OHLC (Open, High, Low, Close) data for a specific token pair on EVM-com
 - **Robinhood** → `EVM(network: robinhood)`
 
 For full API documentation, refer to:  
-[Get OHLC Data for a Particular Token Pair](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/#get-ohlc-data-for-a-particular-token-pair).
+[Get OHLC Data for a Particular Token Pair](/docs/blockchain/Ethereum/dextrades/token-trades-apis/#get-ohlc-data-for-a-particular-token-pair).
 
 ### **Sample Query**
 

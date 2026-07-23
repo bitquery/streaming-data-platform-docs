@@ -16,9 +16,9 @@ This page covers, on Base:
 
 You may also be interested in:
 
-- [Base Network DEX APIs ➤](https://docs.bitquery.io/docs/examples/dextrades/dex-api/)
-- [Token Trades APIs ➤](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/)
-- [Liquidity Pool APIs ➤](https://docs.bitquery.io/docs/examples/dextrades/pools-api/)
+- [Base Network DEX APIs ➤](/docs/blockchain/Ethereum/dextrades/dex-api/)
+- [Token Trades APIs ➤](/docs/blockchain/Ethereum/dextrades/token-trades-apis/)
+- [Liquidity Pool APIs ➤](/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/)
 
 Use the GraphQL queries below to monitor governance‑directed liquidity incentives across Aerodrome on Base. If you need other data points, reach out to [support](https://t.me/Bloxy_info).
 

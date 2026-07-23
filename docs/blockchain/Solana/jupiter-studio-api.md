@@ -19,7 +19,7 @@ Need zero-latency Jupiter Studio data? [Read about our Shred Streams and Contact
 You may also be interested in:
 
 - [Jupiter API ➤](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api/)
-- [Pump.fun APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/)
+- [Pump.fun APIs ➤](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
 - [Meteora APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/meteora-api/)
 - [Raydium APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/raydium-api/)
 

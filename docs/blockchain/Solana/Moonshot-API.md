@@ -9,7 +9,7 @@ description: "Bitquery blockchain API docs: Moonit API."
 For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Moonit data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-In this section we will see how to get real-time data on Moonit trades, transactions and wallet updates. Similarly you can get [pump.fun data here](https://docs.bitquery.io/docs/examples/dextrades/Pump-Fun-API/)
+In this section we will see how to get real-time data on Moonit trades, transactions and wallet updates. Similarly you can get [pump.fun data here](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
 
 :::note
 `Trade Side Account` field will not be available as aggregates in Archive and Combined Datasets
