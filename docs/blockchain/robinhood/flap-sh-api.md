@@ -21,6 +21,9 @@ keywords:
   - Flap.sh tax paid event
   - Flap.sh VanityTokenCreated
   - Flap.sh MsgSent social event
+  - Flap.sh TokenBought event
+  - Flap.sh TokenSold event
+  - Flap.sh raw bonding curve trades
 ---
 # Flap.sh API on Robinhood
 
@@ -250,6 +253,47 @@ Beyond buy/sell trades, Flap.sh emits lifecycle events across several contracts 
 :::tip Stream any event
 Every query below can be run as a real-time stream — change the operation type to `subscription` in the Bitquery IDE.
 :::
+
+### Raw bonding-curve trades (`TokenBought` / `TokenSold`)
+
+The bonding-curve engine emits its own decoded trade events on the Flap.sh contract with on-chain-exact values. `TokenBought` arguments: `ts`, `token`, `buyer`, `amount`, `eth`, `fee`, `postPrice` — swap the signature name to `TokenSold` for sells. Use these when you need the exact fee and post-trade curve price; use `Trading.Trades` (above) for decimal-normalized, USD-priced trades.
+
+```graphql
+{
+  EVM(network: robinhood) {
+    Events(
+      limit: {count: 20}
+      orderBy: {descending: Block_Time}
+      where: {
+        Log: {Signature: {Name: {is: "TokenBought"}}}
+        LogHeader: {Address: {is: "0x26605f322f7ff986f381bb9a6e3f5dab0beaeb09"}}
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+        From
+      }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+          ... on EVM_ABI_Integer_Value_Arg {
+            integer
+          }
+        }
+      }
+    }
+  }
+}
+```
 
 ### Token graduations (`LaunchedToDEX`)
 
