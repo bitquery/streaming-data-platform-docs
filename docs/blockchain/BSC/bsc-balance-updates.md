@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "BSC Balance Updates API"
+description: "Bitquery blockchain API docs: BSC Balance Updates API."
 ---
-
 # BSC Balance Updates API
 
 In thise section we will see how to monitor real-time balance changes across the BSC blockchain.

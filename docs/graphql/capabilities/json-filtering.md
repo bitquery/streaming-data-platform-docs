@@ -1,3 +1,8 @@
+---
+title: "Filtering JSON Arguments"
+description: "Bitquery GraphQL capability: Filtering JSON Arguments."
+---
+
 # Filtering JSON Arguments
 
 Starting October 2025, we support filtering of JSON arguments in Solana instructions. This feature allows you to query blockchain data based on the parsed argument values within program instructions.

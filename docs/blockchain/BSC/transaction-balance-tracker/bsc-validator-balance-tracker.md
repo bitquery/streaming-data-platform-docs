@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "BSC Validator Balance Tracker"
+description: "Bitquery blockchain API docs: BSC Validator Balance Tracker."
 ---
-
 # BSC Validator Balance Tracker
 
 The BSC Validator Balance Tracker API provides real-time balance updates for BSC validators, tracking their staking rewards, withdrawals, and balance changes.

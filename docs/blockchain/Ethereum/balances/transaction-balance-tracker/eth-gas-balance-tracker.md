@@ -1,7 +1,8 @@
 ---
 sidebar_position: 6
+title: "Ethereum Gas Balance Tracker"
+description: "Bitquery blockchain API docs: Ethereum Gas Balance Tracker."
 ---
-
 # Ethereum Gas Balance Tracker
 
 The Ethereum Gas Balance Tracker API provides real-time balance updates related to Gas Fee activities, including transaction fee rewards, monitoring gas fee spent, and other Gas-related balance changes.

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "SmartContract API"
+description: "Bitquery blockchain API docs: SmartContract API."
 ---
-
 # SmartContract API
 
 ## Smart Contract Calls by Method Signature

@@ -1,6 +1,9 @@
 ---
 sidebar_position: 1
+title: "Tron Address Balance API"
+description: "Bitquery blockchain API docs: Tron Address Balance API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # Tron Address Balance API

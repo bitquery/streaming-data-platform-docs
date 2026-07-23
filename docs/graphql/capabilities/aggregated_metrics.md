@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Query Aggregated Metrics"
+description: "Bitquery GraphQL capability: Query Aggregated Metrics."
 ---
-
 # Query Aggregated Metrics
 
 This is the most effective query.

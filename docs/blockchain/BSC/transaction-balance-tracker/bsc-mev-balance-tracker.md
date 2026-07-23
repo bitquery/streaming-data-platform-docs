@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "BSC MEV Balance Tracker"
+description: "Bitquery blockchain API docs: BSC MEV Balance Tracker."
 ---
-
 # BSC MEV Balance Tracker
 
 The BSC MEV (Maximal Extractable Value) Balance Tracker API provides real-time balance updates related to MEV activities, including transaction fee rewards, block builder rewards, and other MEV-related balance changes.

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Optimism Address Balance API"
+description: "Bitquery blockchain API docs: Optimism Address Balance API."
 ---
-
 # Optimism Address Balance API
 
 :::caution Deprecated APIs

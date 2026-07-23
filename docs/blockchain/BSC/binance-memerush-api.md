@@ -1,3 +1,8 @@
+---
+title: "Binance Meme Rush API"
+description: "Bitquery blockchain API docs: Binance Meme Rush API."
+---
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Binance Meme Rush API

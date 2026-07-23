@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "Subscription on Aggregated Metrics"
+description: "Bitquery GraphQL capability: Subscription on Aggregated Metrics."
 ---
-
 # Subscription on Aggregated Metrics
 
 It is a subscription to the results of [Query Aggregated Metrics](/docs/graphql/capabilities/aggregated_metrics).

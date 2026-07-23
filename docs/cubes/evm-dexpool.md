@@ -1,3 +1,8 @@
+---
+title: "DEXPools Cube on EVM Chains"
+description: "Learn the Bitquery EVM DEXPools cube — pool state, liquidity fields, filters, and example queries."
+---
+
 # DEXPools Cube on EVM Chains
 
 This section explains how the dexpool data is built and shared via APIs and [Kafka streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/). It also explains how to understand each entry of the response.

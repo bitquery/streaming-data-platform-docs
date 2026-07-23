@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "BSC Transaction Balance Tracker"
+description: "Bitquery blockchain API docs: BSC Transaction Balance Tracker."
 ---
-
 # BSC Transaction Balance Tracker
 
 The BSC Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the BSC blockchain, including detailed information about the reason for each balance change.

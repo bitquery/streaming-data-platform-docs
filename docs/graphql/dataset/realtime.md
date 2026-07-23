@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Realtime Database"
+description: "Bitquery GraphQL dataset guide: Realtime Database."
 ---
-
 # Realtime Database
 
 Realtime is the default database (if you omit the attribute, then it is used).

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Optimism DEX Trades API"
+description: "Bitquery blockchain API docs: Optimism DEX Trades API."
 ---
-
 # Optimism DEX Trades API
 
 :::tip Need real-time Optimism DEX data or anything from the last ~30 days?

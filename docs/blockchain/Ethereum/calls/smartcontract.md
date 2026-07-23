@@ -1,6 +1,9 @@
 ---
 sidebar_position: 2
+title: "SmartContract Calls API"
+description: "Bitquery blockchain API docs: SmartContract Calls API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # SmartContract Calls API

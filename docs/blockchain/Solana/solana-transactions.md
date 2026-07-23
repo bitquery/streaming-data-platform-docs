@@ -1,6 +1,9 @@
 ---
 sidebar_position: 6
+title: "Solana Transactions API"
+description: "Bitquery blockchain API docs: Solana Transactions API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # Solana Transactions API

@@ -1,3 +1,8 @@
+---
+title: "The Need for Real-Time Data on Solana: Latency, Scale, and Fidelity at Stake"
+description: "Bitquery streaming docs: The Need for Real-Time Data on Solana: Latency, Scale, and Fidelity at Stake."
+---
+
 # The Need for Real-Time Data on Solana: Latency, Scale, and Fidelity at Stake
 
 > “Better be first 99 percent of the time than second 100 percent of the time.”  

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "BSC Miner Balance Tracker"
+description: "Bitquery blockchain API docs: BSC Miner Balance Tracker."
 ---
-
 # BSC Miner Balance Tracker
 
 The BSC Miner Balance Tracker API provides real-time balance updates for BSC miners, tracking their mining rewards, uncle block rewards, and transaction fee rewards.

@@ -1,3 +1,8 @@
+---
+title: "Setting up Google Pub-Sub"
+description: "Bitquery GraphQL subscriptions: Setting up Google Pub-Sub."
+---
+
 # Setting up Google Pub-Sub
 
 This tutorial walks through a process of subscribing to the Bitquery Streaming API and publishing its data to a Google Cloud Pub/Sub topic.

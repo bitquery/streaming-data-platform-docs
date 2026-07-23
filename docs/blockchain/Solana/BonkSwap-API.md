@@ -1,3 +1,8 @@
+---
+title: "BonkSwap API"
+description: "Bitquery blockchain API docs: BonkSwap API."
+---
+
 # BonkSwap API
 
 :::tip Need real-time BonkSwap data or anything from the last ~30 days?

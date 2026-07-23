@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "NFT Analytics Dashboard - Tutorial"
+description: "Bitquery how-to guide: NFT Analytics Dashboard - Tutorial."
 ---
-
 # NFT Analytics Dashboard - Tutorial
 
  ### Marketplace Analysis

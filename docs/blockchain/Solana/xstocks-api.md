@@ -1,3 +1,8 @@
+---
+title: "xStocks API"
+description: "Bitquery blockchain API docs: xStocks API."
+---
+
 # xStocks API
 
 :::tip Need real-time xStocks data or anything from the last ~30 days?

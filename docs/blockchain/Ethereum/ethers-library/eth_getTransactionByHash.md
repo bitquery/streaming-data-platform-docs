@@ -1,3 +1,8 @@
+---
+title: "eth_getTransactionByHash"
+description: "Bitquery blockchain API docs: eth_getTransactionByHash."
+---
+
 # eth_getTransactionByHash
 
 In this section we will discuss how we can build eth_getTransactionByHash alternatives using Bitquery APIs.

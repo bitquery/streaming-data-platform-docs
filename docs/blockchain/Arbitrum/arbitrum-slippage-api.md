@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Arbitrum Slippage API"
+description: "Bitquery blockchain API docs: Arbitrum Slippage API."
 ---
-
 # Arbitrum Slippage API
 
 In this section we will see how to get Arbitrum DEX pool slippage information using our API. The slippage API helps you understand price impact and liquidity depth for token swaps on Arbitrum DEX pools.

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "API Comparison"
+description: "Compare Bitquery V1 vs V2 APIs, streaming options, and when to use each interface."
 ---
-
 # API Comparison
 
 :::tip Looking specifically for trading / DEX data?

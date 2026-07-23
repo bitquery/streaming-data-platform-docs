@@ -1,3 +1,8 @@
+---
+title: "Believe Launchpad API"
+description: "Bitquery blockchain API docs: Believe Launchpad API."
+---
+
 # Believe Launchpad API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";

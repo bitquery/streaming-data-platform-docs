@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Polygon (Matic) Token Market Cap API"
+description: "Bitquery blockchain API docs: Polygon (Matic) Token Market Cap API."
 ---
-
 # Polygon (Matic) Token Market Cap API
 
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens on **Polygon** (network id **`matic`** in the Trading API). Filter with **`matic:`** plus a **lowercase** contract address in **`Token.Id`** / **`Currency.Id`**.

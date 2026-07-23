@@ -1,3 +1,8 @@
+---
+title: "GRA.fun API"
+description: "Bitquery blockchain API docs: GRA.fun API."
+---
+
 # GRA.fun API
 
 :::tip Need real-time GRA.fun data or anything from the last ~30 days?

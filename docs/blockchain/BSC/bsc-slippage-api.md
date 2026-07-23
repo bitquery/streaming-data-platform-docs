@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "BSC Slippage API"
+description: "Bitquery blockchain API docs: BSC Slippage API."
 ---
-
 # BSC Slippage API
 
 In this section we will see how to get BSC DEX pool slippage information using our API. The slippage API helps you understand price impact and liquidity depth for token swaps on BSC DEX pools.

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 8
+title: "Base Bankr (Doppler) API"
+description: "Bitquery blockchain API docs: Base Bankr (Doppler) API."
 ---
-
 # Base Bankr (Doppler) API
 
 <head>

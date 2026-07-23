@@ -1,3 +1,8 @@
+---
+title: "Phoenix DEX API"
+description: "Bitquery blockchain API docs: Phoenix DEX API."
+---
+
 # Phoenix DEX API
 
 :::tip Need real-time Phoenix data or anything from the last ~30 days?

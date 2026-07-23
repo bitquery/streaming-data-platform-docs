@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Base Slippage API"
+description: "Bitquery blockchain API docs: Base Slippage API."
 ---
-
 # Base Slippage API
 
 In this section we will see how to get Base DEX pool slippage information using our API. The slippage API helps you understand price impact and liquidity depth for token swaps on Base DEX pools.

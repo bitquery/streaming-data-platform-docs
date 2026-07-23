@@ -1,7 +1,8 @@
 ---
 sidebar_position: 6
+title: "NFT Metadata API"
+description: "Bitquery blockchain API docs: NFT Metadata API."
 ---
-
 # NFT Metadata API
 
 The NFT Metadata API retrieves the metadata of NFT.

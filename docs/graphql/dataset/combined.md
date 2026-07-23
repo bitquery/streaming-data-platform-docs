@@ -1,8 +1,8 @@
 ---
 sidebar_position: 6
+title: "Combined Database"
+description: "Bitquery GraphQL dataset guide: Combined Database."
 ---
-
-
 # Combined Database
 
 When you query combined database, actually the query goes to the archive and real time databases separately

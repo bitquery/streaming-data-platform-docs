@@ -1,3 +1,8 @@
+---
+title: "Polygon (MATIC) NFT API"
+description: "Bitquery blockchain API docs: Polygon (MATIC) NFT API."
+---
+
 # Polygon (MATIC) NFT API
 
 In this section we'll have a look at some examples using the Matic NFT API.

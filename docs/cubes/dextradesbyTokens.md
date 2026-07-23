@@ -1,3 +1,8 @@
+---
+title: "DEXTradesByTokens Cube"
+description: "Learn the Bitquery DEXTradeByTokens cube — token-expanded trades, filters, and example GraphQL queries."
+---
+
 # DEXTradesByTokens Cube
 
 :::tip Need real-time data or anything from the last ~30 days?

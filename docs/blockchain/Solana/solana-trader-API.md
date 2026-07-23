@@ -1,3 +1,8 @@
+---
+title: "Solana Trader API"
+description: "Bitquery blockchain API docs: Solana Trader API."
+---
+
 # Solana Trader API
 
 :::tip Need real-time Solana trader data or anything from the last ~30 days?

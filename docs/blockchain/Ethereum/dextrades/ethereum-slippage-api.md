@@ -1,7 +1,10 @@
 ---
 sidebar_position: 3
 sidebar_label: Slippage & Price Impact
+title: "EVM DEX Slippage API"
+description: "Bitquery blockchain API docs: EVM DEX Slippage API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # EVM DEX Slippage API

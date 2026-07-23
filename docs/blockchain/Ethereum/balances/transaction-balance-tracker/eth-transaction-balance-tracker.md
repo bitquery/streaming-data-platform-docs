@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "Ethereum Transaction Balance Tracker"
+description: "Bitquery blockchain API docs: Ethereum Transaction Balance Tracker."
 ---
-
 # Ethereum Transaction Balance Tracker
 
 The Ethereum Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the Ethereum blockchain, including detailed information about the reason for each balance change.

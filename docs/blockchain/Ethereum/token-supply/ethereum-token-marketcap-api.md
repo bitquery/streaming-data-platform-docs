@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Ethereum Token Market Cap API"
+description: "Bitquery blockchain API docs: Ethereum Token Market Cap API."
 ---
-
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 # Ethereum Token Market Cap API

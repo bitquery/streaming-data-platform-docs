@@ -1,8 +1,9 @@
 ---
 sidebar_position: 4
 sidebar_label: Pair Creation Time
+title: "Pair Creation Time API"
+description: "Bitquery blockchain API docs: Pair Creation Time API."
 ---
-
 # Pair Creation Time API
 
 ## Pair Creation Time for a Specific Pair

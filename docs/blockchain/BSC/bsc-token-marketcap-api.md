@@ -1,7 +1,8 @@
 ---
 sidebar_position: 8
+title: "BNB Smart Chain (BSC) Token Market Cap API"
+description: "Bitquery blockchain API docs: BNB Smart Chain (BSC) Token Market Cap API."
 ---
-
 # BNB Smart Chain (BSC) Token Market Cap API
 
 This page explains how to **query or stream** BSC token metrics including **market cap**, **FDV**, **supply**, **price**, and **volume** with Bitquery **`Trading.Tokens`** (GraphQL).

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "Building with WebSockets: Code Sample in Rust"
+description: "Bitquery GraphQL subscriptions: Building with WebSockets: Code Sample in Rust."
 ---
-
 # Building with WebSockets: Code Sample in Rust
 
 In this section we will see how to use bitquery subscriptions in Rust. The final output will look something like this

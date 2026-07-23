@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Ethereum Miner Balance Tracker"
+description: "Bitquery blockchain API docs: Ethereum Miner Balance Tracker."
 ---
-
 import VideoPlayer from "../../../../../src/components/videoplayer.js";
 
 # Ethereum Miner Balance Tracker

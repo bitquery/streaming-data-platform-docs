@@ -1,3 +1,8 @@
+---
+title: "EVM Streams"
+description: "Bitquery streaming docs: EVM Streams."
+---
+
 # EVM Streams
 
 This section provides details about Bitquery's EVM Streams via Kafka. The top-level Kafka section explains how we use Kafka Streams to deliver data.

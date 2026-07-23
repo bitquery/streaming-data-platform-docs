@@ -1,7 +1,8 @@
 ---
 sidebar_position: 10
+title: "Blockchain Reorg Tree"
+description: "Bitquery GraphQL dataset guide: Blockchain Reorg Tree."
 ---
-
 # Blockchain Reorg Tree
 
 

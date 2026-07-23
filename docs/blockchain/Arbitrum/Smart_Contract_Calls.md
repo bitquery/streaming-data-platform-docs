@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Arbitrum Smart Contract Calls API"
+description: "Bitquery blockchain API docs: Arbitrum Smart Contract Calls API."
 ---
-
 # Arbitrum Smart Contract Calls API
 
 In this section we will see how to get Arbitrum Smart contract calls information using our API.

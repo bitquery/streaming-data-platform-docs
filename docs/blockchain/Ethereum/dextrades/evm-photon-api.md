@@ -1,7 +1,8 @@
 ---
 sidebar_label: Photon
+title: "Photon EVM API"
+description: "Bitquery blockchain API docs: Photon EVM API."
 ---
-
 # Photon EVM API
 
 This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair and many more just like how Photon shows for EVM Chains.

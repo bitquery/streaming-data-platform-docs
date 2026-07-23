@@ -1,3 +1,8 @@
+---
+title: "eth_blockNumber"
+description: "Bitquery blockchain API docs: eth_blockNumber."
+---
+
 # eth_blockNumber
 
 In this section, we will discuus the eth_blockNumber API endpoint that returns the latest block number of the blockchain.

@@ -1,3 +1,8 @@
+---
+title: "eth_getBlockReceipts"
+description: "Bitquery blockchain API docs: eth_getBlockReceipts."
+---
+
 # eth_getBlockReceipts
 
 In this section we will build an API that serves as an alternative to the eth_getBlockReceipts JSON RPC method that takes `Block Number` as an input and returns all transaction receipts for the given block.

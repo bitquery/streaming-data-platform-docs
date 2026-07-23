@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Base Transfer Balance Tracker"
+description: "Bitquery blockchain API docs: Base Transfer Balance Tracker."
 ---
-
 # Base Transfer Balance Tracker
 
 The Base Transfer Balance Tracker API provides real-time balance updates for all addresses involved in Transfers on the Base blockchain, and provides option to filter out based on the direction of transfer you want to target. The Base Transfer Balance is tracked by marking the the `BalanceUpdateReason` equals `10`.

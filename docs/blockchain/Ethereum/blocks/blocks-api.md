@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "Blocks API"
+description: "Bitquery blockchain API docs: Blocks API."
 ---
-
 # Blocks API
 
 ## Latest blocks in the Ethereum network

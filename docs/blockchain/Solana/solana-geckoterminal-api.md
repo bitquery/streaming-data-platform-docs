@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "GeckoTerminal Solana API"
+description: "Bitquery blockchain API docs: GeckoTerminal Solana API."
 ---
-
 # GeckoTerminal Solana API
 
 Everything you see on the GeckoTerminal Solana dashboard—live pairs, trades, prices, volumes, makers/buyers/sellers, and more—can be accessed via APIs/Streams with Bitquery.

@@ -1,3 +1,8 @@
+---
+title: "Tron Fees API"
+description: "Bitquery blockchain API docs: Tron Fees API."
+---
+
 # Tron Fees API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";

@@ -1,6 +1,9 @@
 ---
 sidebar_position: 2
+title: "Solana DEX Pools API"
+description: "Bitquery blockchain API docs: Solana DEX Pools API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # Solana DEX Pools API

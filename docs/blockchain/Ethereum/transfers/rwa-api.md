@@ -1,3 +1,8 @@
+---
+title: "RWA (Real World Assets) API"
+description: "Bitquery blockchain API docs: RWA (Real World Assets) API."
+---
+
 # RWA (Real World Assets) API
 
 In this section, we will explore some of the APIs that help us obtain information about Real World Assets (RWAs) on Ethereum, Arbitrum, and other EVM chains.

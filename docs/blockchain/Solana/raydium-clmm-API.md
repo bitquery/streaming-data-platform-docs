@@ -1,3 +1,8 @@
+---
+title: "Raydium CLMM API"
+description: "Bitquery blockchain API docs: Raydium CLMM API."
+---
+
 import FAQ from "@site/src/components/FAQ";
 
 # Raydium CLMM API

@@ -1,3 +1,8 @@
+---
+title: "Manifest DEX API"
+description: "Bitquery blockchain API docs: Manifest DEX API."
+---
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Manifest DEX API

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "BSC Self-Destruct Balance Tracker"
+description: "Bitquery blockchain API docs: BSC Self-Destruct Balance Tracker."
 ---
-
 # BSC Self-Destruct Balance Tracker
 
 The BSC Self-Destruct Balance Tracker API provides real-time balance updates for contracts that self-destruct and addresses that receive funds from self-destructed contracts. This API helps you monitor contract destruction events, track ephemeral contracts (like MEV bots), and analyze security incidents.

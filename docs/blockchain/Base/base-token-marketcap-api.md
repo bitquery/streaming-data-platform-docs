@@ -1,7 +1,8 @@
 ---
 sidebar_position: 10
+title: "Base Token Market Cap API"
+description: "Bitquery blockchain API docs: Base Token Market Cap API."
 ---
-
 # Base Token Market Cap API
 
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens traded on **Base**. Filter Base assets with token/currency **`Id`** values such as **`base:`** plus a **lowercase** contract address.

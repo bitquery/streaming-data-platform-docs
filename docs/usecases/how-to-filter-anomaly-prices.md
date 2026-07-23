@@ -1,3 +1,8 @@
+---
+title: "How to Filter Abnormal Prices"
+description: "Bitquery how-to guide: How to Filter Abnormal Prices."
+---
+
 # How to Filter Abnormal Prices
 
 You might see abnormal prices when you fetch data from Bitquery APIs. There can be two possibilities as to why these abnormal prices associated with trades are appearing in your API response.

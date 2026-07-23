@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Arbitrum Cross Chain API"
+description: "Bitquery blockchain API docs: Arbitrum Cross Chain API."
 ---
-
 # Arbitrum Cross Chain API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";

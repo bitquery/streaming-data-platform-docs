@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "Options"
+description: "Bitquery GraphQL dataset guide: Options."
 ---
-
 # Options
 
 GraphQL interface hides the internal complexity of the datasets, 

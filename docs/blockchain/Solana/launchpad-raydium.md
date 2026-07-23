@@ -1,3 +1,8 @@
+---
+title: "Raydium Launchpad API"
+description: "Bitquery blockchain API docs: Raydium Launchpad API."
+---
+
 # Raydium Launchpad API
 
 :::tip Need real-time Raydium Launchpad data or anything from the last ~30 days?

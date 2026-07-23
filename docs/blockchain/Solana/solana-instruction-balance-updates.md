@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Solana Instructions Balance Updates API"
+description: "Bitquery blockchain API docs: Solana Instructions Balance Updates API."
 ---
-
 # Solana Instructions Balance Updates API
 
 <head>

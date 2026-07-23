@@ -1,3 +1,8 @@
+---
+title: "Stablecoin Price API"
+description: "Bitquery stablecoin API docs: Stablecoin Price API."
+---
+
 # Stablecoin Price API
 
 While stablecoins are designed to maintain a stable value (typically pegged to USD, EUR, or other assets), they can deviate slightly from their target price (e.g., $0.998 or $1.02 for USD-pegged stablecoins). For developers, traders, and businesses processing large volumes of stablecoin payments, even these small deviations can translate to significant financial impact at scale.

@@ -1,8 +1,9 @@
 ---
 sidebar_position: 6
 sidebar_label: Pool Liquidity & Reserves
+title: "Ethereum Liquidity API"
+description: "Bitquery blockchain API docs: Ethereum Liquidity API."
 ---
-
 # Ethereum Liquidity API
 
 In this section we will see how to get Ethereum DEX pool liquidity information using Bitquery API. The liquidity API helps you monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on Ethereum DEX pools.

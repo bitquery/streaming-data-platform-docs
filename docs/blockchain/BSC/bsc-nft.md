@@ -1,3 +1,8 @@
+---
+title: "BSC NFT API"
+description: "Bitquery blockchain API docs: BSC NFT API."
+---
+
 # BSC NFT API
 
 In this section we'll have a look at some examples using the BSC NFT API.

@@ -1,8 +1,9 @@
 ---
 sidebar_position: 1
 sidebar_label: BullX
+title: "BullX EVM API"
+description: "Bitquery blockchain API docs: BullX EVM API."
 ---
-
 # BullX EVM API
 
 This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair, chart and many more just like how BullX shows for EVM Chains.

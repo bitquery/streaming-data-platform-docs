@@ -1,3 +1,8 @@
+---
+title: "Trends.Fun API - Solana - New Tokens, Trades, Live Prices"
+description: "Bitquery blockchain API docs: Trends.Fun API - Solana - New Tokens, Trades, Live Prices."
+---
+
 # Trends.Fun API - Solana - New Tokens, Trades, Live Prices
 
 :::tip Need real-time Trends.fun data or anything from the last ~30 days?

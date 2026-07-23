@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "BSC Transfer Balance Tracker"
+description: "Bitquery blockchain API docs: BSC Transfer Balance Tracker."
 ---
-
 # BSC Transfer Balance Tracker
 
 The BSC Transfer Balance Tracker API provides real-time balance updates for all addresses involved in Transfers on the BSC blockchain, and provides option to filter out based on the direction of transfer you want to target. The BSC Transfer Balance is tracked by marking the the `BalanceUpdateReason` equals `10`.

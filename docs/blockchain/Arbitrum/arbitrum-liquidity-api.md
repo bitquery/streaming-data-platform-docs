@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Arbitrum Liquidity API"
+description: "Bitquery blockchain API docs: Arbitrum Liquidity API."
 ---
-
 # Arbitrum Liquidity API
 
 In this section we will see how to get Arbitrum DEX pool liquidity information using Bitquery API. The liquidity API helps you monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on Arbitrum DEX pools.

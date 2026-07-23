@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Matic Slippage API"
+description: "Bitquery blockchain API docs: Matic Slippage API."
 ---
-
 # Matic Slippage API
 
 In this section we will see how to get Matic DEX pool slippage information using our API. The slippage API helps you understand price impact and liquidity depth for token swaps on Matic DEX pools.

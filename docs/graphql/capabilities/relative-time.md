@@ -1,3 +1,8 @@
+---
+title: "Relative Time Filters"
+description: "Bitquery GraphQL capability: Relative Time Filters."
+---
+
 # Relative Time Filters
 
 Bitquery's GraphQL API now supports **relative time filtering**. This filtering option simplify querying time-dependent blockchain data without manually calculating or formatting exact UTC timestamps.

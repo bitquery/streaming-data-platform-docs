@@ -1,7 +1,8 @@
 ---
 sidebar_position: 15
+title: "Base Liquidity API"
+description: "Bitquery blockchain API docs: Base Liquidity API."
 ---
-
 # Base Liquidity API
 
 In this section we will see how to get Base DEX pool liquidity information using Bitquery API. The liquidity API helps you monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on Base DEX pools.

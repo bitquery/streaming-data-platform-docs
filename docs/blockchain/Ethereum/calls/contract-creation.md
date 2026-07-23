@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "Smart Contract Creation"
+description: "Bitquery blockchain API docs: Smart Contract Creation."
 ---
-
 # Smart Contract Creation
 
 Smart contract creators can use these queries to track the deployment of their own smart contracts and to monitor the deployment of new smart contracts by others.

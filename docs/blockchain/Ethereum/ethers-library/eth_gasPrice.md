@@ -1,3 +1,8 @@
+---
+title: "eth_gasPrice"
+description: "Bitquery blockchain API docs: eth_gasPrice."
+---
+
 # eth_gasPrice
 
 In this section, we will build a data stream that returns the gas fee of the latest transaction in WEI. Unlike any JSON RPC method like eht_gasPrice that returns the hexadecimal equivalent of an integer representing the current gas price in WEI, this returns the integer value itself.

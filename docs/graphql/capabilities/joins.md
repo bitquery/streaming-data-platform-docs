@@ -1,3 +1,8 @@
+---
+title: "GraphQL Joins"
+description: "Bitquery GraphQL capability: GraphQL Joins."
+---
+
 # GraphQL Joins
 
 Starting March 2025, Bitquery APIs support joins on the v2 endpoint.

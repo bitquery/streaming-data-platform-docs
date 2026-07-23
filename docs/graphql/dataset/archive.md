@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "Archive Database"
+description: "Bitquery GraphQL dataset guide: Archive Database."
 ---
-
 # Archive Database
 
 Archive database contains the data with the **delay from tens of minutes to several hours**,

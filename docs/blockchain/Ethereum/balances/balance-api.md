@@ -1,6 +1,9 @@
 ---
 sidebar_position: 2
+title: "Address Balance API"
+description: "Bitquery blockchain API docs: Address Balance API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # Address Balance API

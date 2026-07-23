@@ -1,3 +1,8 @@
+---
+title: "Moonit API"
+description: "Bitquery blockchain API docs: Moonit API."
+---
+
 # Moonit API
 
 :::tip Need real-time Moonit data or anything from the last ~30 days?

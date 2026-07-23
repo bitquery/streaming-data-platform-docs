@@ -1,3 +1,8 @@
+---
+title: "Meteora DAMM v2 API"
+description: "Bitquery blockchain API docs: Meteora DAMM v2 API."
+---
+
 import FAQ from "@site/src/components/FAQ";
 
 # Meteora DAMM v2 API

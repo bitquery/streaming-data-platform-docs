@@ -1,3 +1,8 @@
+---
+title: "Polygon (MATIC) Transfers API"
+description: "Bitquery blockchain API docs: Polygon (MATIC) Transfers API."
+---
+
 # Polygon (MATIC) Transfers API
 
 In this section we'll have a look at some examples using the Polygon (MATIC) Transfers API.

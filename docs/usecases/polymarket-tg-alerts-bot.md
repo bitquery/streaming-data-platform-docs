@@ -1,3 +1,8 @@
+---
+title: "How to Build a Polymarket Whale Alerts Telegram Bot with the Bitquery API"
+description: "Bitquery how-to guide: How to Build a Polymarket Whale Alerts Telegram Bot with the Bitquery API."
+---
+
 import VideoPlayer from "../../src/components/videoplayer.js";
 
 # How to Build a Polymarket Whale Alerts Telegram Bot with the Bitquery API

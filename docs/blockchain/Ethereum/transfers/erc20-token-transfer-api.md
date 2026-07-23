@@ -1,6 +1,9 @@
 ---
 sidebar_position: 1
+title: "ERC20 Token Transfers API"
+description: "Bitquery blockchain API docs: ERC20 Token Transfers API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # ERC20 Token Transfers API

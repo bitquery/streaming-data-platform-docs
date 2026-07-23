@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
+title: "Query Fact Records"
+description: "Bitquery GraphQL capability: Query Fact Records."
 ---
-
-
 # Query Fact Records
 
 This is the simplest type of query. You just define the attributes which you need in the results,

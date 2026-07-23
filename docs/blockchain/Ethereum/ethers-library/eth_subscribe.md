@@ -1,3 +1,8 @@
+---
+title: "eth_subscribe"
+description: "Bitquery blockchain API docs: eth_subscribe."
+---
+
 # eth_subscribe
 
 Ethereum Subscription API allows developers to build websockets that receive real-time notifications about the Ethereum blockchain. In this section we will see how to create subscription for each eth_subscribe JSON RPC method and how to customize it to get data we need.

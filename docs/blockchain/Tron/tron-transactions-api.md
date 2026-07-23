@@ -1,3 +1,8 @@
+---
+title: "Tron Transactions API"
+description: "Bitquery blockchain API docs: Tron Transactions API."
+---
+
 # Tron Transactions API
 
 In this section we'll have a look at some examples using the Tron Transactions API.

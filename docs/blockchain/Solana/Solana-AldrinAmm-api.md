@@ -1,3 +1,8 @@
+---
+title: "AldrinAmm DEX API"
+description: "Bitquery blockchain API docs: AldrinAmm DEX API."
+---
+
 # AldrinAmm DEX API
 
 :::tip Need real-time AldrinAmm data or anything from the last ~30 days?

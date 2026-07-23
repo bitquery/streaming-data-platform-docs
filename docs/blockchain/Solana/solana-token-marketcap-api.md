@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Solana Token Market Cap API"
+description: "Bitquery blockchain API docs: Solana Token Market Cap API."
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Solana Token Market Cap API

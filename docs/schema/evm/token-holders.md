@@ -1,7 +1,7 @@
 ---
 title: "EVM Token Holders API"
+description: "Bitquery schema reference for EVM Token Holders API: fields, types, and query patterns."
 ---
-
 <head>
 <meta name="title" content="EVM Token Holders API"/>
 

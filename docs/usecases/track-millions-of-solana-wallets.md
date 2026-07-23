@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "How to efficiently track millions of Solana Wallets Balance with Bitquery Kafka Streams"
+description: "Bitquery how-to guide: How to efficiently track millions of Solana Wallets Balance with Bitquery Kafka Streams."
 ---
-
 # How to efficiently track millions of Solana Wallets Balance with Bitquery Kafka Streams
 
 Accurate, real-time wallet balance data is mission-critical for crypto businesses. Whether it's exchanges and custodians monitoring incoming deposits, DeFi protocols watching collateral positions, or analytics platforms tracking whale movements—speed matters. Just a few milliseconds can mean the difference between a successful liquidation or a costly missed opportunity.

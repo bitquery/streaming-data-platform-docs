@@ -1,7 +1,8 @@
 ---
 sidebar_position: 6
+title: "Arbitrum Transactions API"
+description: "Bitquery blockchain API docs: Arbitrum Transactions API."
 ---
-
 # Arbitrum Transactions API
 
 In this section we'll have a look at some examples using the Arbitrum Transactions API.

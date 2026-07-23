@@ -1,3 +1,8 @@
+---
+title: "Meteora Dynamic Bonding Curve API"
+description: "Bitquery blockchain API docs: Meteora Dynamic Bonding Curve API."
+---
+
 # Meteora Dynamic Bonding Curve API
 
 :::tip Need real-time Meteora DBC data or anything from the last ~30 days?

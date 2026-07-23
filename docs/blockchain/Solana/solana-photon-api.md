@@ -1,6 +1,9 @@
 ---
 sidebar_position: 1
+title: "Photon Solana API"
+description: "Bitquery blockchain API docs: Photon Solana API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # Photon Solana API

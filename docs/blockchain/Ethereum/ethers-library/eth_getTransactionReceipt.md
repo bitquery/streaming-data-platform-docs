@@ -1,3 +1,8 @@
+---
+title: "eth_getTransactionReceipt"
+description: "Bitquery blockchain API docs: eth_getTransactionReceipt."
+---
+
 # eth_getTransactionReceipt
 
 In this section, we will build an alternative to the eth_getTransactionReceipt JSON RPC method using the Bitquery APIs. The method is used to provide the receipt of a transaction given `transaction hash`. Note that the receipt is not available for pending transactions.

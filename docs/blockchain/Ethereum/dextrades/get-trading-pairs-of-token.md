@@ -1,8 +1,9 @@
 ---
 sidebar_position: 2
 sidebar_label: Pairs for a Token
+title: "Trading Pairs API"
+description: "Bitquery blockchain API docs: Trading Pairs API."
 ---
-
 # Trading Pairs API
 
 If you want to get all trades of a token, you might want to know all its trading pairs.

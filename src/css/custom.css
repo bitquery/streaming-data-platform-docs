@@ -3,7 +3,7 @@
  * Tokens: berry CTAs, dark backgrounds, DM Sans, pink→cyan accents.
  */
 
-/* Fonts loaded via docusaurus.config.js stylesheets + preconnect (avoids CSS @import block) */
+@import "./fonts.css";
 
 /* Default canvas matches brand dark before theme script runs */
 html {

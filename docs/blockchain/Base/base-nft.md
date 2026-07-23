@@ -1,3 +1,8 @@
+---
+title: "Base Chain NFT API"
+description: "Bitquery blockchain API docs: Base Chain NFT API."
+---
+
 # Base Chain NFT API
 
 In this section we'll have a look at some examples on how to get NFT information on Base using the NFT API.

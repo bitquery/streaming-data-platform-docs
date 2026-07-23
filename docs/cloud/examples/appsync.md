@@ -1,7 +1,8 @@
 ---
 sidebar_position: 6
+title: "How to Fetch Ethereum Data with AppSync and AWS Lambda"
+description: "Bitquery cloud data docs: How to Fetch Ethereum Data with AppSync and AWS Lambda."
 ---
-
 # How to Fetch Ethereum Data with AppSync and AWS Lambda
 
 We will be using Lambda functions to use Ethereum data from [S3 buckets](/docs/cloud/evm.md) with Appsync.

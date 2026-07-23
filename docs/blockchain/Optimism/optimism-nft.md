@@ -1,3 +1,8 @@
+---
+title: "Optimism NFT API"
+description: "Bitquery blockchain API docs: Optimism NFT API."
+---
+
 # Optimism NFT API
 
 In this section we'll have a look at some examples using the Optimism NFT data API.

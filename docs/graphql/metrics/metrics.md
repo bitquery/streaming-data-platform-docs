@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "Using Metrics"
+description: "Use the Bitquery GraphQL Using Metrics metric in queries and aggregations."
 ---
-
 #  Using Metrics
 
 Use metrics if you want to:

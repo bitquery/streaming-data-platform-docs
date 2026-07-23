@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
+title: "Database Selection"
+description: "Bitquery GraphQL dataset guide: Database Selection."
 ---
-
-
 # Database Selection
 
 Dataset attribute on the query top level defines the database to query:

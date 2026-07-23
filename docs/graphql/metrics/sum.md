@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Sum"
+description: "Use the Bitquery GraphQL Sum metric in queries and aggregations."
 ---
-
 #  Sum
 
  ```sum``` element in the query returns the sum of elements **in each set of dimensions**.

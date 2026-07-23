@@ -1,3 +1,8 @@
+---
+title: "Meteora API - DYN"
+description: "Bitquery blockchain API docs: Meteora API - DYN."
+---
+
 # Meteora API - DYN
 
 :::tip Need real-time Meteora DYN data or anything from the last ~30 days?

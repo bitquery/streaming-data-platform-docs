@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Base Jump API"
+description: "Bitquery blockchain API docs: Base Jump API."
 ---
-
 # Base Jump API
 
 In this section we will see how we can use the [Transaction](https://docs.bitquery.io/docs/cubes/transaction-cube/) 

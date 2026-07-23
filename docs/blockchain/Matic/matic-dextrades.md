@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Polygon (MATIC) DEX Trades API"
+description: "Bitquery blockchain API docs: Polygon (MATIC) DEX Trades API."
 ---
-
 # Polygon (MATIC) DEX Trades API
 
 :::tip Need real-time Polygon (MATIC) DEX data or anything from the last ~30 days?

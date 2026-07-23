@@ -1,3 +1,8 @@
+---
+title: "BSC Transfers API"
+description: "Bitquery blockchain API docs: BSC Transfers API."
+---
+
 # BSC Transfers API
 
 In this section we'll have a look at some examples using the BSC Transfers API.

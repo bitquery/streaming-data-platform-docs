@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Tron DEX Trades API"
+description: "Bitquery blockchain API docs: Tron DEX Trades API."
 ---
-
 # Tron DEX Trades API
 
 :::tip Need real-time Tron DEX data or anything from the last ~30 days?

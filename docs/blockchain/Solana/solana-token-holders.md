@@ -1,3 +1,8 @@
+---
+title: "Solana Token Holders API"
+description: "Bitquery blockchain API docs: Solana Token Holders API."
+---
+
 # Solana Token Holders API
 
 Get real-time and historical token holder data for any SPL token on Solana. Bitquery provides two approaches to retrieve token holders — choose the one that fits your use case.

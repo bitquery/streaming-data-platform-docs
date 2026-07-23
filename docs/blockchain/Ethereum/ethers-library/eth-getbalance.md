@@ -1,3 +1,8 @@
+---
+title: "eth_getBalance"
+description: "Bitquery blockchain API docs: eth_getBalance."
+---
+
 # eth_getBalance
 
 Ethereum getBalance is an API endpoint that retrieves the balance for a particular address for any given currency on the Ethereum blockchain. In this section we will see how to create queries that serves as an alternative for the eth_getBalance JSON RPC method and

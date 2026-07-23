@@ -1,3 +1,8 @@
+---
+title: "Solana DEX Orders API"
+description: "Bitquery blockchain API docs: Solana DEX Orders API."
+---
+
 import FAQ from "@site/src/components/FAQ";
 
 # Solana DEX Orders API

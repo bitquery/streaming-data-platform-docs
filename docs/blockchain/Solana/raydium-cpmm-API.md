@@ -1,3 +1,8 @@
+---
+title: "Raydium CPMM API"
+description: "Bitquery blockchain API docs: Raydium CPMM API."
+---
+
 # Raydium CPMM API
 
 :::tip Need real-time Raydium CPMM data or anything from the last ~30 days?

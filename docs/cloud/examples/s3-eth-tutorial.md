@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Getting Ethereum Data from AWS Bucket"
+description: "Bitquery cloud data docs: Getting Ethereum Data from AWS Bucket."
 ---
-
 # Getting Ethereum Data from AWS Bucket
 
 We are now offering raw blockchain data on Amazon S3, taking a step towards providing a faster way to build dApps.

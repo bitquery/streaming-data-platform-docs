@@ -1,7 +1,8 @@
 ---
 sidebar_position: 6
+title: "Base Gas Balance Tracker"
+description: "Bitquery blockchain API docs: Base Gas Balance Tracker."
 ---
-
 # Base Gas Balance Tracker
 
 The Base Gas Balance Tracker API provides real-time balance updates related to Gas Fee activities, including transaction fee rewards, monitoring gas fee spent, and other GAS-related balance changes.

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "How to Write a Lambda Function to get Ethereum Data from AWS (Use AWS for Web3 )"
+description: "Bitquery cloud data docs: How to Write a Lambda Function to get Ethereum Data from AWS (Use AWS for Web3 )."
 ---
-
 # How to Write a Lambda Function to get Ethereum Data from AWS (Use AWS for Web3 )
 
 In this tutorial we will see how to write a Lambda function to retrieve ethereum data from the sample buckets available in the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-oi4sbdu6zro3i?sr=0-1&ref_=beagle&applicationId=AWSMPContessa).

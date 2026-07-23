@@ -1,7 +1,8 @@
 ---
 sidebar_position: 11
+title: "Contributing to V2 Documentation"
+description: "How to contribute improvements, examples, and fixes to the Bitquery V2 docs site."
 ---
-
 # Contributing to V2 Documentation
 
 ## New contributors

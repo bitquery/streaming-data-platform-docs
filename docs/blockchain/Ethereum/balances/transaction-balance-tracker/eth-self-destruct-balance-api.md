@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "Ethereum Self-Destruct Balance Tracker"
+description: "Bitquery blockchain API docs: Ethereum Self-Destruct Balance Tracker."
 ---
-
 # Ethereum Self-Destruct Balance Tracker
 
 The Ethereum Self-Destruct Balance Tracker API provides real-time balance updates for contracts that self-destruct and addresses that receive funds from self-destructed contracts. This API helps you monitor contract destruction events, track ephemeral contracts (like MEV bots), and analyze security incidents.

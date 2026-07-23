@@ -1,3 +1,8 @@
+---
+title: "debug_traceCall"
+description: "Bitquery blockchain API docs: debug_traceCall."
+---
+
 # debug_traceCall
 
 In this section, we will discuss how we can use Bitquery APIs as an alternative to the debug_traceCall JSON RPC method, which runs an eth_call within the context of the given block execution using the final state of parent block as the base.

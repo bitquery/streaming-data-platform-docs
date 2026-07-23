@@ -1,3 +1,8 @@
+---
+title: "LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices"
+description: "Bitquery blockchain API docs: LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices."
+---
+
 import FAQ from "@site/src/components/FAQ";
 
 # LetsBonk.Fun API - Solana - New Tokens, Trades, Live Prices

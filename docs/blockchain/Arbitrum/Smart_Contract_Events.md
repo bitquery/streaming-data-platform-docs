@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Arbitrum Smart Contract Events API"
+description: "Bitquery blockchain API docs: Arbitrum Smart Contract Events API."
 ---
-
 # Arbitrum Smart Contract Events API
 
 In this section we will see how to get Arbitrum Smart Contract Events information using our API.

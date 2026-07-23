@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "Polygon (MATIC) Address Balance API"
+description: "Bitquery blockchain API docs: Polygon (MATIC) Address Balance API."
 ---
-
 # Polygon (MATIC) Address Balance API
 
 :::caution Deprecated APIs

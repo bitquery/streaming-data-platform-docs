@@ -1,3 +1,8 @@
+---
+title: "EVM Builder Terms Explaination"
+description: "Glossary: EVM Builder Terms Explaination terms used in Bitquery blockchain data APIs."
+---
+
 # EVM Builder Terms Explaination
 
 ### Dataset Parameters

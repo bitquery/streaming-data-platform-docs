@@ -1,3 +1,8 @@
+---
+title: "Boop Fun API"
+description: "Bitquery blockchain API docs: Boop Fun API."
+---
+
 # Boop Fun API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";

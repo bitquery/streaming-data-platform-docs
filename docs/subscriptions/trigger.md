@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "What is a Trigger?"
+description: "Bitquery GraphQL subscriptions: What is a Trigger?."
 ---
-
 # What is a Trigger?
 
 The new data pushed to subscription on receiving the new block in the real time database assuming that the criteria,

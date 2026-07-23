@@ -1,3 +1,8 @@
+---
+title: "eth_getLogs"
+description: "Bitquery blockchain API docs: eth_getLogs."
+---
+
 # eth_getLogs
 
 In this section, we will see how we can use Bitquery APIs as an alternative to the eth_getLogs JSON RPC method and return an array of `Logs` object matching the filter object(*optional). 

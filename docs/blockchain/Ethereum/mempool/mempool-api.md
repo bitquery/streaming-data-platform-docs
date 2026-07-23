@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Mempool API"
+description: "Bitquery blockchain API docs: Mempool API."
 ---
-
 # Mempool API
 
 In this section we will look at some examples of how to write mempool queries to extract the necessary data from broadcasted transactions. To read more about how we offer mempool data, read the introduction [here](/docs/subscriptions/mempool-subscriptions.md)

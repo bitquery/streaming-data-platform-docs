@@ -1,8 +1,9 @@
 ---
 sidebar_position: 3
 sidebar_label: Coin Ticker API
+title: "Crypto Coin Ticker API"
+description: "Bitquery blockchain API docs: Crypto Coin Ticker API."
 ---
-
 # Crypto Coin Ticker API
 
 You can build your crypto coin ticker using our [DEX APIs](https://bitquery.io/products/dex) based on the requirements of the data field. For pre-aggregated price data with OHLC, consider using our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).

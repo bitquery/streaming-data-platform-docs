@@ -1,8 +1,9 @@
 ---
 sidebar_position: 1
 sidebar_label: GeckoTerminal
+title: "GeckoTerminal EVM API"
+description: "Bitquery blockchain API docs: GeckoTerminal EVM API."
 ---
-
 # GeckoTerminal EVM API
 
 Everything you see on the GeckoTerminal EVM dashboard—live pairs, trades, prices, volumes, makers/buyers/sellers, and more—can be accessed via APIs/Streams with Bitquery.

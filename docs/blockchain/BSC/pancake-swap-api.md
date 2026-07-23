@@ -1,3 +1,8 @@
+---
+title: "Pancake Swap API"
+description: "Bitquery blockchain API docs: Pancake Swap API."
+---
+
 import FAQ from "@site/src/components/FAQ";
 
 import VideoPlayer from "../../../src/components/videoplayer.js";

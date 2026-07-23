@@ -1,7 +1,8 @@
 ---
 sidebar_position: 9
+title: "Ethereum NFT Balance API"
+description: "Bitquery blockchain API docs: Ethereum NFT Balance API."
 ---
-
 # Ethereum NFT Balance API
 
 The Ethereum NFT Balance API provides real-time balance updates for ERC-721 and ERC-1155 non-fungible tokens on the Ethereum blockchain. Track NFT ownership, token IDs, and ownership status for any address holding NFTs.

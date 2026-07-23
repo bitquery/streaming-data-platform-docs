@@ -1,6 +1,9 @@
 ---
 sidebar_position: 7
+title: "Matic Uniswap API"
+description: "Bitquery blockchain API docs: Matic Uniswap API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 import VideoPlayer from "../../../src/components/videoplayer.js";

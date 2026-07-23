@@ -1,8 +1,9 @@
 ---
 sidebar_position: 4
 sidebar_label: Newly Created Pairs
+title: "Getting Latest Pairs"
+description: "Bitquery blockchain API docs: Getting Latest Pairs."
 ---
-
 # Getting Latest Pairs
 
 ## Latest Trading Pairs for a DEX

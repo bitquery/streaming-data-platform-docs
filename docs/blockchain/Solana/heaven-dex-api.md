@@ -1,3 +1,8 @@
+---
+title: "Heaven DEX API"
+description: "Bitquery blockchain API docs: Heaven DEX API."
+---
+
 # Heaven DEX API
 
 :::tip Need real-time Heaven DEX data or anything from the last ~30 days?

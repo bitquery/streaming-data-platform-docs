@@ -1,6 +1,9 @@
 ---
 sidebar_position: 7
+title: "Base Uniswap API"
+description: "Bitquery blockchain API docs: Base Uniswap API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 import VideoPlayer from "../../../src/components/videoplayer.js";

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Subscription on Facts"
+description: "Bitquery GraphQL capability: Subscription on Facts."
 ---
-
 # Subscription on Facts
 
 It is a subscription to the results of [Query Fact Records](/docs/graphql/capabilities/query_fact_records).

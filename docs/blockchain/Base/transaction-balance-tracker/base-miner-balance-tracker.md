@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Base Miner Balance Tracker"
+description: "Bitquery blockchain API docs: Base Miner Balance Tracker."
 ---
-
 # Base Miner Balance Tracker
 
 The Base Miner Balance Tracker API provides real-time balance updates for Base miners, tracking their mining rewards, uncle block rewards, and transaction fee rewards.

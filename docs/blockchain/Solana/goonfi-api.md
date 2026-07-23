@@ -1,3 +1,8 @@
+---
+title: "GoonFi API"
+description: "Bitquery blockchain API docs: GoonFi API."
+---
+
 # GoonFi API
 
 :::tip Need real-time GoonFi data or anything from the last ~30 days?

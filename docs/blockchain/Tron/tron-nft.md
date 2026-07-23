@@ -1,3 +1,8 @@
+---
+title: "Tron NFT API"
+description: "Bitquery blockchain API docs: Tron NFT API."
+---
+
 # Tron NFT API
 
 In this section we'll have a look at some examples using the Tron NFT API.

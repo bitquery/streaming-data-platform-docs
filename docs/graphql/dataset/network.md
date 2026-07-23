@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Network"
+description: "Bitquery GraphQL dataset guide: Network."
 ---
-
 # Network
 
 Network attribute is a selection of the blockchain:

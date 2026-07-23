@@ -30,11 +30,11 @@ const sidebars = {
 
     {
       type: "category",
-      label: "Authorisation",
+      label: "Authorization",
       link: {
         type: "generated-index",
-        title: "Authorisation Documentation",
-        description: "Learn about how to generate and use authorisation tokens",
+        title: "Authorization Documentation",
+        description: "Learn about how to generate and use authorization tokens",
       },
       items: [
         "authorisation/how-to-generate",

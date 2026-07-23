@@ -1,3 +1,8 @@
+---
+title: "How to Build a Solana Copy Trading Bot - Tutorial"
+description: "Bitquery how-to guide: How to Build a Solana Copy Trading Bot - Tutorial."
+---
+
 import VideoPlayer from "../../src/components/videoplayer.js";
 
 # How to Build a Solana Copy Trading Bot - Tutorial

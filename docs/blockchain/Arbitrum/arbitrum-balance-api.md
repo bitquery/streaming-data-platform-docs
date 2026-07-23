@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "Arbitrum Address Balance API"
+description: "Bitquery blockchain API docs: Arbitrum Address Balance API."
 ---
-
 # Arbitrum Address Balance API
 
 :::caution Deprecated APIs

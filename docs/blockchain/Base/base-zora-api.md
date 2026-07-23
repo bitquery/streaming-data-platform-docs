@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Base Zora API"
+description: "Bitquery blockchain API docs: Base Zora API."
 ---
-
 # Base Zora API
 
 Bitquery provides comprehensive Zora data through APIs, Streams and Data Dumps.

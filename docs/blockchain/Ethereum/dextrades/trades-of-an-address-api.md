@@ -1,8 +1,9 @@
 ---
 sidebar_position: 7
 sidebar_label: Wallet Trades API
+title: "Address Trades API"
+description: "Bitquery blockchain API docs: Address Trades API."
 ---
-
 # Address Trades API
 
 ## How do I get trades made by a specific wallet on a DEX?

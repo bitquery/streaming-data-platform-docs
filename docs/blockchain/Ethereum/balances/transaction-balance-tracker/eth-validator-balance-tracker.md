@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Ethereum Validator Balance Tracker"
+description: "Bitquery blockchain API docs: Ethereum Validator Balance Tracker."
 ---
-
 # Ethereum Validator Balance Tracker
 
 The Ethereum Validator Balance Tracker API provides real-time balance updates for Ethereum validators, tracking their staking rewards, withdrawals, and balance changes.

@@ -1,3 +1,8 @@
+---
+title: "Filtering Kafka Streams for Specific Usecases"
+description: "Bitquery streaming docs: Filtering Kafka Streams for Specific Usecases."
+---
+
 # Filtering Kafka Streams for Specific Usecases
 
 In this section, we will see code examples and patterns for filtering Kafka stream messages based on specific criteria — such as smart contract methods, token addresses, DEX interactions, and more.

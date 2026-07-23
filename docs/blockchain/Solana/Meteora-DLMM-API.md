@@ -1,3 +1,8 @@
+---
+title: "Meteora DLMM API"
+description: "Bitquery blockchain API docs: Meteora DLMM API."
+---
+
 import FAQ from "@site/src/components/FAQ";
 
 # Meteora DLMM API

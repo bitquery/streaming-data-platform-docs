@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Conditional Metrics"
+description: "Use the Bitquery GraphQL Conditional Metrics metric in queries and aggregations."
 ---
-
 #  Conditional Metrics
 
 Metrics have ```if``` attribute to define the condition for metric execution.

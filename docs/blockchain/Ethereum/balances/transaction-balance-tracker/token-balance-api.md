@@ -1,7 +1,8 @@
 ---
 sidebar_position: 8
+title: "Ethereum Token Balance API"
+description: "Bitquery blockchain API docs: Ethereum Token Balance API."
 ---
-
 # Ethereum Token Balance API
 
 The Ethereum Token Balance API provides real-time balance updates for ERC-20 fungible tokens on the Ethereum blockchain. Track token balances, total supply, market capitalization, and USD values for any address holding ERC-20 tokens.

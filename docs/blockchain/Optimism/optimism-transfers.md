@@ -1,3 +1,8 @@
+---
+title: "Optimism Transfers API"
+description: "Bitquery blockchain API docs: Optimism Transfers API."
+---
+
 # Optimism Transfers API
 
 In this section we'll have a look at some examples using the Optimism Transfers API.

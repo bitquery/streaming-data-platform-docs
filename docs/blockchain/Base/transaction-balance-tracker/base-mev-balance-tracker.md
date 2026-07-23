@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Base MEV Balance Tracker"
+description: "Bitquery blockchain API docs: Base MEV Balance Tracker."
 ---
-
 # Base MEV Balance Tracker
 
 The Base MEV (Maximal Extractable Value) Balance Tracker API provides real-time balance updates related to MEV activities, including transaction fee rewards, block builder rewards, and other MEV-related balance changes.

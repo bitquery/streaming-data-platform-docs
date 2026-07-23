@@ -1,3 +1,8 @@
+---
+title: "Get Blockchain Data on Telegram Chat in Real-Time"
+description: "Bitquery how-to guide: Get Blockchain Data on Telegram Chat in Real-Time."
+---
+
 # Get Blockchain Data on Telegram Chat in Real-Time
 
 With this code, your Telegram bot will respond to the `/start` command by initiating a WebSocket connection to Bitquery and sending blockchain data updates to the Telegram chat.

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "Overview"
+description: "Bitquery schema reference for Overview: fields, types, and query patterns."
 ---
-
 # Overview
 
 Bitquery APIs provide access to real-time and historical data from the Ethereum Virtual Machine (EVM) based blockchains through its EVM-based schema. The schema is designed to enable developers to query blockchain data through an API using GraphQL.

@@ -1,3 +1,8 @@
+---
+title: "Tron Mempool API"
+description: "Bitquery blockchain API docs: Tron Mempool API."
+---
+
 # Tron Mempool API
 
 In this section we'll have a look at some examples using the Tron Mempool API.

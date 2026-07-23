@@ -1,7 +1,7 @@
 ---
 title: "EVM Balance API"
+description: "Bitquery schema reference for EVM Balance API: fields, types, and query patterns."
 ---
-
 # EVM Balance API
 
 The **Balances** API returns current and historical token balances for addresses on EVM chains. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Building with WebSockets: Code Samples in Python & JavaScript"
+description: "Bitquery GraphQL subscriptions: Building with WebSockets: Code Samples in Python & JavaScript."
 ---
-
 # Building with WebSockets: Code Samples in Python & JavaScript
 
 This section provides examples of how to implement subscription queries in your code.

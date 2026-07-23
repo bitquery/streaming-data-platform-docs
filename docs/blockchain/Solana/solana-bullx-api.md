@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "BullX Solana API"
+description: "Bitquery blockchain API docs: BullX Solana API."
 ---
-
 # BullX Solana API
 
 :::tip Need real-time BullX-style trader data or anything from the last ~30 days?

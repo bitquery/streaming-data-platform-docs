@@ -1,3 +1,8 @@
+---
+title: "Transfer Cube"
+description: "Learn the Bitquery Transfers cube — transfer fields, filters, and example GraphQL queries."
+---
+
 # Transfer Cube
 
 > **Before you start**: Not sure when to use Transfers vs Events vs Calls vs DexTrades? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.

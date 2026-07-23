@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "NFT Collection API"
+description: "Bitquery blockchain API docs: NFT Collection API."
 ---
-
 # NFT Collection API
 
 ## Get All NFTs in a Collection

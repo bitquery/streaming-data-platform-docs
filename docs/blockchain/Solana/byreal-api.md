@@ -1,3 +1,8 @@
+---
+title: "Byreal API"
+description: "Bitquery blockchain API docs: Byreal API."
+---
+
 import FAQ from "@site/src/components/FAQ";
 
 # Byreal API

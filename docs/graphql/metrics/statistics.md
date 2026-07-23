@@ -1,7 +1,8 @@
 ---
 sidebar_position: 8
+title: "Statistics"
+description: "Use the Bitquery GraphQL Statistics metric in queries and aggregations."
 ---
-
 #  Statistics
 
 ##  Over One Variable

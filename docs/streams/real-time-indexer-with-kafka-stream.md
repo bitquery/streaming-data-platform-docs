@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Real-Time Blockchain Indexer: Build Reliable Indexers with Kafka Streams Instead of Archiv"
+description: "Bitquery streaming docs: Real-Time Blockchain Indexer: Build Reliable Indexers with Kafka Streams Instead of Archiv."
 ---
-
 # Real-Time Blockchain Indexer: Build Reliable Indexers with Kafka Streams Instead of Archive Nodes, gRPC, or Webhook Services
 
 Building a real-time blockchain indexer is one of the most challenging infrastructure tasks in the process of tracking trades, monitoring token transfers, parsing internal calls, or building a comprehensive on-chain analytics platform. If you decide to run your own archive node, you need to plan for big SSD storage (multiple TBs), fast disks / high IOPS, and robust backup/monitoring. If not, you might be looking for need reliable, low-latency access to blockchain data at scale.

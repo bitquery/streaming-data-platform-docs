@@ -1,3 +1,8 @@
+---
+title: "debug_traceTransaction"
+description: "Bitquery blockchain API docs: debug_traceTransaction."
+---
+
 # debug_traceTransaction
 
 debug_traceTransaction is a JSON RPC method that returns tracing results for the specified transaction. In this section, we are looking for a way to build an alternative for the same using Bitquery API.

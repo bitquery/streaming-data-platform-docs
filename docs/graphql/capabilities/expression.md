@@ -1,3 +1,8 @@
+---
+title: "Expressions"
+description: "Bitquery GraphQL capability: Expressions."
+---
+
 # Expressions
 
 ## What is a Calculate Expression?

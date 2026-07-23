@@ -1,3 +1,8 @@
+---
+title: "Build OHLC Values using DEX Trades Data"
+description: "Bitquery how-to guide: Build OHLC Values using DEX Trades Data."
+---
+
 # Build OHLC Values using DEX Trades Data
 
 This script calculates **OHLC (Open, High, Low, Close)** data for a particular Token Pair Solana-based trades by leveraging percentile filtering thus removing anomaly or bot trades. It fetches trading data from the Bitquery API and processes it to compute the OHLC values for a specific trading pair. For pre-aggregated OHLC data, see our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).

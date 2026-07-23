@@ -1,3 +1,8 @@
+---
+title: "TRC20 API"
+description: "Bitquery blockchain API docs: TRC20 API."
+---
+
 # TRC20 API
 
 In this section we'll have a look at some examples using the TCR20 API.

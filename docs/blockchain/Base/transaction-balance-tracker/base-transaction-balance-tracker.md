@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "Base Transaction Balance Tracker"
+description: "Bitquery blockchain API docs: Base Transaction Balance Tracker."
 ---
-
 # Base Transaction Balance Tracker
 
 The Base Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the Base blockchain, including detailed information about the reason for each balance change.

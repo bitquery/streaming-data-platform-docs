@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "EVM Token Supply API"
+description: "Bitquery blockchain API docs: EVM Token Supply API."
 ---
-
 # EVM Token Supply API
 
 Track real-time and historical token supply data across all EVM-compatible blockchains including Ethereum, BNB Chain (BSC), Base, Arbitrum, Polygon, and more using Bitquery's Token Supply API.

@@ -1,7 +1,8 @@
 ---
 sidebar_label: Fluid DEX Trades
+title: "Fluid DEX API"
+description: "Bitquery blockchain API docs: Fluid DEX API."
 ---
-
 # Fluid DEX API
 
 :::tip Need real-time Fluid DEX data or anything from the last ~30 days?

@@ -1,3 +1,8 @@
+---
+title: "SolFi DEX API"
+description: "Bitquery blockchain API docs: SolFi DEX API."
+---
+
 # SolFi DEX API
 
 :::tip Need real-time SolFi data or anything from the last ~30 days?

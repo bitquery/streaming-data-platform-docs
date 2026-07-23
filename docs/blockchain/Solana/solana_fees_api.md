@@ -1,3 +1,8 @@
+---
+title: "Solana Fees API"
+description: "Bitquery blockchain API docs: Solana Fees API."
+---
+
 # Solana Fees API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";

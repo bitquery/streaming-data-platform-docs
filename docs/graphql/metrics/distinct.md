@@ -1,7 +1,8 @@
 ---
 sidebar_position: 6
+title: "Count Distinct"
+description: "Use the Bitquery GraphQL Count Distinct metric in queries and aggregations."
 ---
-
 #  Count Distinct
 
  ```count``` with ```distinct``` attribute calculates the unique values **in each set of dimensions**.

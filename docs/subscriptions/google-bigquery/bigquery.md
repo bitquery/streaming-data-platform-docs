@@ -1,3 +1,8 @@
+---
+title: "Filing Data into Google BigQuery"
+description: "Bitquery GraphQL subscriptions: Filing Data into Google BigQuery."
+---
+
 # Filing Data into Google BigQuery
 
 In this part, we'll demonstrate how to set up Google BigQuery to store data from Google Pub/Sub. The incoming data will be stored in a BigQuery table called `newtrades`. We'll go step-by-step, covering table creation, schema definition, and configuring Pub/Sub to write directly to BigQuery.

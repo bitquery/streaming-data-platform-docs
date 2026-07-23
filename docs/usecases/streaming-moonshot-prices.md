@@ -1,3 +1,8 @@
+---
+title: "Tutorial: How to Stream Moonshot Live Prices"
+description: "Bitquery how-to guide: Tutorial: How to Stream Moonshot Live Prices."
+---
+
 # Tutorial: How to Stream Moonshot Live Prices
 
 In this tutorial, you will learn how to create a simple React application to stream live prices from the Moonshot protocol using WebSocket and Bitquery's [Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/).

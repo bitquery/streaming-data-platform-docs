@@ -1,3 +1,8 @@
+---
+title: "eth_getCode"
+description: "Bitquery blockchain API docs: eth_getCode."
+---
+
 # eth_getCode
 
 In this section we will build a query that serves as an alternative to the eth_getCode JSON RPC method. However unlike the method that requires two arameters, namely `address` and `block number`, this API only needs an `address`.

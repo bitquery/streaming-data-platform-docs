@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Base PancakeSwap Infinity API"
+description: "Bitquery blockchain API docs: Base PancakeSwap Infinity API."
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Base PancakeSwap Infinity API

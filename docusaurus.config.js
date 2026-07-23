@@ -57,31 +57,6 @@ const config = {
     locales: ["en"],
   },
 
-  headTags: [
-    {
-      tagName: "link",
-      attributes: {
-        rel: "preconnect",
-        href: "https://fonts.googleapis.com",
-      },
-    },
-    {
-      tagName: "link",
-      attributes: {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossorigin: "anonymous",
-      },
-    },
-  ],
-
-  stylesheets: [
-    {
-      href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap",
-      type: "text/css",
-    },
-  ],
-
   scripts: [
     // Must load before any script that calls `window.gtag` (see gtag-stub.js).
     { src: "/js/gtag-stub.js" },
@@ -1061,7 +1036,7 @@ const config = {
       colorMode: {
         defaultMode: "dark",
         disableSwitch: false,
-        respectPrefersColorScheme: false,
+        respectPrefersColorScheme: true,
       },
 
       announcementBar: {

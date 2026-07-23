@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "Select By Metric"
+description: "Use the Bitquery GraphQL Select By Metric metric in queries and aggregations."
 ---
-
 #  Select By Metric
 
 Metric value can be used to filter out the result by  ```selectIf``` attribute to 

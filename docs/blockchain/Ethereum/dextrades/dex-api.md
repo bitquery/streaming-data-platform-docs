@@ -1,6 +1,9 @@
 ---
 sidebar_label: DEX Trades API
+title: "DEX API"
+description: "Bitquery blockchain API docs: DEX API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # DEX API

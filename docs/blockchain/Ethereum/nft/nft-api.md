@@ -1,6 +1,9 @@
 ---
 sidebar_position: 1
+title: "NFT API"
+description: "Bitquery blockchain API docs: NFT API."
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # NFT API

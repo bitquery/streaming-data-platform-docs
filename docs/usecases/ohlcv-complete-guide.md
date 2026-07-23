@@ -1,3 +1,8 @@
+---
+title: "Complete Guide to Building the Perfect OHLCV Data Using Bitquery APIs"
+description: "Bitquery how-to guide: Complete Guide to Building the Perfect OHLCV Data Using Bitquery APIs."
+---
+
 # Complete Guide to Building the Perfect OHLCV Data Using Bitquery APIs
 
 In this guide, we will see how to get OHLCV (Open, High, Low, Close, Volume) candlestick data—or K-Line data—across different blockchain networks using Bitquery APIs. We’ll also explore how to filter out bot trades, outliers, and abnormally high or low prices to ensure accurate OHLC calculations.

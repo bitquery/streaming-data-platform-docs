@@ -1,7 +1,8 @@
 ---
 sidebar_position: 9
+title: "Arbitrum Token Market Cap API"
+description: "Bitquery blockchain API docs: Arbitrum Token Market Cap API."
 ---
-
 # Arbitrum Token Market Cap API
 
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens traded on **Arbitrum One**. Filter with token/currency **`Id`** values such as **`arbitrum:`** plus a **lowercase** contract address.

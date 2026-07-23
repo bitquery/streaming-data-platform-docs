@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Dashboard : Top 10 Ethereum Token Pairs"
+description: "Bitquery how-to guide: Dashboard : Top 10 Ethereum Token Pairs."
 ---
-
 # Dashboard : Top 10 Ethereum Token Pairs
 
 The following tutorial helps build a Top 10 Ethereum Tokens Dashboard with Next JS and Bitquery APIs that fetches and displays the Top 10 Token Pairs in last 1 hour on Ethereum mainnet in desceneding order of number of transactions.

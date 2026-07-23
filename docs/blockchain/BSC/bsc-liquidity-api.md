@@ -1,7 +1,8 @@
 ---
 sidebar_position: 11
+title: "BSC Liquidity API"
+description: "Bitquery blockchain API docs: BSC Liquidity API."
 ---
-
 # BSC Liquidity API
 
 In this section we will see how to get BSC DEX pool liquidity information using Bitquery API. The liquidity API helps you monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on BSC DEX pools.

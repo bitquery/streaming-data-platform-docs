@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Aliases"
+description: "Use the Bitquery GraphQL Aliases metric in queries and aggregations."
 ---
-
 #  Aliases
 
 Aliases is a part of the GraphQL [standard](https://spec.graphql.org/draft/#sec-Field-Alias)

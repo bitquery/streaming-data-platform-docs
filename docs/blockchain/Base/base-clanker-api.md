@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Base Clanker API"
+description: "Bitquery blockchain API docs: Base Clanker API."
 ---
-
 # Base Clanker API
 
 This section provides you with a set of queries that provides an insight about the Clank fun.
