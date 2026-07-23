@@ -1,3 +1,7 @@
+---
+title: "Add-Liquidity Signals Telegram Bot"
+description: "Build Add-Liquidity Signals Telegram Bot: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
+---
 # Add-Liquidity Signals Telegram Bot
 
 This bot fetches real-time data on added liquidity for Solana DEX pools and sends alerts via Telegram. It highlights key details such as added liquidity, post-liquidity amounts, and provides direct trading links.
@@ -25,7 +29,7 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 1. **Python 3.8+** installed on your system.
 2. **Telegram Bot Token** from [BotFather](https://telegram.me/BotFather).
-3. **Bitquery API Token** for accessing Solana liquidity data. Get your API token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+3. **Bitquery API Token** for accessing Solana liquidity data. Get your API token [here](/docs/authorization/how-to-generate/).
 
 ## Installation
 
@@ -41,7 +45,7 @@ import VideoPlayer from "../../src/components/videoplayer.js";
    pip install python-telegram-bot aiohttp
    ```
 
-3. Replace Bot token and OAuth Token values in the `top-liquidity-additions.py` file with your own tokens. Get the BOT_TOKEN from Bot father and Bitquery OAuth token using these [steps](https://docs.bitquery.io/docs/authorisation/how-to-generate/):
+3. Replace Bot token and OAuth Token values in the `top-liquidity-additions.py` file with your own tokens. Get the BOT_TOKEN from Bot father and Bitquery OAuth token using these [steps](/docs/authorization/how-to-generate/):
 
    ```
    BOT_TOKEN=your-telegram-bot-token

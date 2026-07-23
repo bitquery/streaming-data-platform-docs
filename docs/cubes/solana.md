@@ -1,10 +1,11 @@
 ---
 sidebar_position: 2
+title: "Solana Builder Terms Explanation"
+description: "Solana Builder Terms Explanation: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
-
 # Solana Builder Terms Explanation
 
-> **Before you start**: Not sure when to use Transfers vs DEX Trades vs other data primitives? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+> **Before you start**: Not sure when to use Transfers vs DEX Trades vs other data primitives? Read our [Mental Model guide](/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
 
 ### Dataset Parameters
 

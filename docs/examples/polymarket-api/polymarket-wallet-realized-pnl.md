@@ -1,6 +1,6 @@
 ---
 title: "Polymarket Wallet Realized PnL & Win Rate (Pattern)"
-description: "Use Bitquery PredictionTrades on Polygon to fetch a wallet’s Polymarket buys and sells in a time window, then aggregate by condition ID for realized PnL and win rate."
+description: "Polymarket Wallet Realized PnL & Win Rate (Pattern): Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - Polymarket PnL
   - Polymarket wallet analytics
@@ -9,12 +9,9 @@ keywords:
   - PredictionTrades Polygon
   - Polymarket GraphQL
 ---
-
 # Realized PnL & Win Rate for Polymarket Trader
 
 You can use Bitquery **`PredictionTrades`** on Polygon (`network: matic`) to pull a wallet’s **outcome buys** and **outcome sells** on Polymarket over a chosen window (for example the last **24 hours**). From that response, you can aggregate by **`ConditionId`**, calculate `realised PnL` per condition, and derive the total **realized PnL** and **win rate** for Polymarket trading.
-
-
 
 ## How is PnL and Win Rate calculated?
 
@@ -169,7 +166,7 @@ END IF
 
 | Topic | Link |
 | ----- | ---- |
-| PolyMarket APIs Intro | [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/) |
-| Advanced Polymarket Analytics | [Advanced Polymarket Metrics](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-advanced-analytics-api/) |
-| Prediction trades reference | [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/) |
-| Sports Related PolyMarkets | [Polymarket Sports API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-sports-api/) |
+| PolyMarket APIs Intro | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) |
+| Advanced Polymarket Analytics | [Advanced Polymarket Metrics](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/) |
+| Prediction trades reference | [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/) |
+| Sports Related PolyMarkets | [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/) |

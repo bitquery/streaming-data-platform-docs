@@ -1,3 +1,7 @@
+---
+title: "EVM Builder Terms Explaination"
+description: "EVM Builder Terms Explaination: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
+---
 # EVM Builder Terms Explaination
 
 ### Dataset Parameters

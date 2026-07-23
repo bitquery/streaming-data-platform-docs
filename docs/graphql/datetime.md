@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Date and Time Filters in GraphQL"
+description: "Date and Time Filters in GraphQL in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
-
 # Date and Time
 
 ## Format

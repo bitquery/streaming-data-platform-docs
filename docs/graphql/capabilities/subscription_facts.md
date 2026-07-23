@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Subscription on Facts"
+description: "Subscription on Facts in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
-
 # Subscription on Facts
 
 It is a subscription to the results of [Query Fact Records](/docs/graphql/capabilities/query_fact_records).

@@ -1,6 +1,6 @@
 ---
 title: "Polymarket Insider & Fresh-Wallet Detection API"
-description: "Detect insider trading and suspicious wallets on Polymarket with Bitquery on-chain data: fresh-wallet checks, USDC funding-source tracing, wallet clustering (Sybil detection), large bets, and pre-resolution timing on Polygon."
+description: "Polymarket Insider & Fresh-Wallet Detection API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - Polymarket insider trading API
   - Polymarket fresh wallet detection
@@ -13,7 +13,6 @@ keywords:
   - Polygon USDC funding source
   - Polymarket on-chain surveillance
 ---
-
 # Polymarket Insider & Fresh-Wallet Detection API
 
 Detect suspicious trading on **Polymarket** using on-chain data from Polygon. This page shows how to flag potential insiders by combining **fresh-wallet checks**, **USDC funding-source tracing**, **wallet clustering**, **large bets**, and **pre-resolution timing**.
@@ -21,7 +20,7 @@ Detect suspicious trading on **Polymarket** using on-chain data from Polygon. Th
 Bitquery runs **its own blockchain nodes** and **indexes, decodes, and parses** raw Polygon transactions. That gives you signals the off-chain Polymarket Gamma and Data APIs cannot provide, such as how old a wallet is, where its money came from, and which other wallets share the same funder. These on-chain signals are the foundation of every serious insider-detection and copy-trading tool.
 
 :::note API Key Required
-To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/).
 :::
 
 ---
@@ -203,9 +202,9 @@ query SiblingWallets {
 
 The final signals come from the trade itself. Check how soon before resolution the wallet entered, and whether it was on the winning side.
 
-- **Pre-resolution timing:** join the wallet's trades to the market's `Resolved` event and compute the lead time. Use the `joinPredictionManagements` pattern from the [Polymarket Sports API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-sports-api/).
+- **Pre-resolution timing:** join the wallet's trades to the market's `Resolved` event and compute the lead time. Use the `joinPredictionManagements` pattern from the [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/).
 - **Won and dormant:** confirm the payout with a `Redemption` query on `PredictionSettlements`, then re-run Step 2 to check the wallet went quiet afterward.
-- **Realized profit and win rate:** see [Realized PnL & Win Rate for Polymarket Trader](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/).
+- **Realized profit and win rate:** see [Realized PnL & Win Rate for Polymarket Trader](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/).
 
 ---
 
@@ -241,12 +240,12 @@ Read this before acting on a flag.
 
 | Need | API |
 | ---- | --- |
-| **Live odds, trades, volume by sport** | [Polymarket Sports API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-sports-api/) |
-| **Trader realized PnL & win rate** | [Realized PnL & Win Rate for Polymarket Trader](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
-| **User & wallet activity** | [Polymarket Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api/) |
-| **Trades, prices, whales** | [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/) |
-| **Settlements & redemptions** | [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/) |
-| **Real-time: Kafka streams** | [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) |
+| **Live odds, trades, volume by sport** | [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/) |
+| **Trader realized PnL & win rate** | [Realized PnL & Win Rate for Polymarket Trader](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
+| **User & wallet activity** | [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/) |
+| **Trades, prices, whales** | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) |
+| **Settlements & redemptions** | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/) |
+| **Real-time: Kafka streams** | [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/) |
 
 ---
 

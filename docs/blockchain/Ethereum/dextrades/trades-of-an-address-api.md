@@ -1,19 +1,20 @@
 ---
 sidebar_position: 7
 sidebar_label: Wallet Trades API
+title: "Ethereum Trades Of An Address API"
+description: "Ethereum Trades Of An Address API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams."
 ---
-
 # Address Trades API
 
 ## How do I get trades made by a specific wallet on a DEX?
 
 This GraphQL query retrieves the latest trades executed by a particular maker on the Ethereum network. You can view the query in the IDE [here](https://ide.bitquery.io/latest-trades-by-market-maker)
 
-On **EVM**, use the chain-specific **DEXTrades** cube (GraphQL: `EVM { DEXTrades }`) or **`DEXTradeByTokens`** for a token-centric view. Filter by the wallet as transaction sender or as **`Trade.Sender`** / buyer–seller fields depending on protocol. The [DEXTrades example](#latest-trades-by-address) filters `Transaction.From` on Ethereum; adjust `network`, `dataset`, and DEX filters for BSC, Base, etc. For **Solana**, see [Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/).
+On **EVM**, use the chain-specific **DEXTrades** cube (GraphQL: `EVM { DEXTrades }`) or **`DEXTradeByTokens`** for a token-centric view. Filter by the wallet as transaction sender or as **`Trade.Sender`** / buyer–seller fields depending on protocol. The [DEXTrades example](#latest-trades-by-address) filters `Transaction.From` on Ethereum; adjust `network`, `dataset`, and DEX filters for BSC, Base, etc. For **Solana**, see [Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades/).
 
 ### Stream wallet swaps on Ethereum
 
-[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): filter **`Pair.Market.Network: Ethereum`** and **`Trader.Address`**. More examples: [Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api), [trader + token (IDE)](https://ide.bitquery.io/trades-of-a-specific-trader-of-a-specific-token).
+[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): filter **`Pair.Market.Network: Ethereum`** and **`Trader.Address`**. More examples: [Trades API](/docs/trading/crypto-trades-api/trades-api), [trader + token (IDE)](https://ide.bitquery.io/trades-of-a-specific-trader-of-a-specific-token).
 
 [Bitquery IDE](https://ide.bitquery.io)
 

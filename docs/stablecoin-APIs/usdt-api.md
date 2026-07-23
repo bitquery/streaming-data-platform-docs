@@ -1,6 +1,6 @@
 ---
-title: "USDT API"
-description: "Comprehensive guide to Bitquery USDT API with real-time transfers, compliance checks, and multi-chain analytics."
+title: "USDT Stablecoin API"
+description: "Query USDT transfers, balances, and supply activity with Bitquery stablecoin APIs using GraphQL examples across major blockchains."
 keywords:
   [
     "USDT Payments API",
@@ -16,7 +16,6 @@ keywords:
     "Bitquery API",
   ]
 ---
-
 # USDT API
 
 USDT (Tether) powers a large share of on-chain value transfer, payments, and trading across multiple blockchains. This page curates the most useful USDT APIs—covering price, payments (transfers), trades, reserves, and balances—along with live streams you can use in production.

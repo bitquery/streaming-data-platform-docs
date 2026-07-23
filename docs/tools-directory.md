@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: Tools & SDKs Directory
-description: Discover sample apps, dashboards, and SDKs built with Bitquery blockchain data APIs. Try live demos, clone repos, and integrate crypto data into your projects.
+description: "Tools & SDKs Directory: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Works with WebSocket live subscriptions."
 keywords:
   - Bitquery tools
   - blockchain API tools
@@ -14,10 +14,9 @@ keywords:
   - OpenClaw
   - ClawHub
 ---
-
 # Tools & SDKs Directory
 
-Explore **sample applications**, **dashboards**, and **SDKs** built with Bitquery blockchain data. Use these tools to analyze tokens, monitor liquidity, score DeFi portfolios, build charts, or integrate real-time crypto data into your own apps. Each entry includes source code (GitHub), documentation, and—where available—a live demo you can try. For a complete list of step-by-step tutorials (bots, snipers, dashboards, wash trading, NFT tools), see the [How-To Guides index](https://docs.bitquery.io/docs/how-to-guides-index/).
+Explore **sample applications**, **dashboards**, and **SDKs** built with Bitquery blockchain data. Use these tools to analyze tokens, monitor liquidity, score DeFi portfolios, build charts, or integrate real-time crypto data into your own apps. Each entry includes source code (GitHub), documentation, and—where available—a live demo you can try. For a complete list of step-by-step tutorials (bots, snipers, dashboards, wash trading, NFT tools), see the [How-To Guides index](/docs/category/how-to-guides/).
 
 ---
 

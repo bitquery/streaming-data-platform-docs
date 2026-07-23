@@ -1,31 +1,14 @@
+---
+title: "Solana Orbic API"
+description: "Solana Orbic API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Includes filters and field selection tips."
+---
 # Orbic API
 
 :::tip Need real-time Orbic data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Orbic swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Orbic data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Orbic swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Orbic data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
-
-<head>
-  <meta name="title" content="Orbic API - Solana - Real-time Pools, Trades, Prices, OHLC" />
-  <meta name="description" content="Access real-time and historical data for Orbic on Solana using our GraphQL API. Track pools, DEX trades, token prices, OHLC, and top traders." />
-  <meta name="keywords" content="Orbic,Solana DEX,Meteora API,Solana on-chain API,real-time Solana trades,Meteora pool data,Solana token prices,OHLC data Solana,DEX trading API,crypto trading API,web3 Solana API,Bitquery GraphQL,Meteora v2 API,Solana blockchain data" />
-  <meta name="robots" content="index, follow" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Orbic API - Solana - Real-time Pools, Trades, Prices, OHLC"
-/>
-<meta property="og:description" content="Explore real-time DEX trades, latest pool creations, token prices, OHLC, and volume insights on Orbic using our Solana API." />
-
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="Orbic API - Solana - Real-time Pools, Trades, Prices, OHLC" />
-  <meta property="twitter:description" content="Get rich on-chain insights into Orbic pools, trades, and tokens with our real-time Solana API." />
-</head>
 
 ## Orbic Trades in Real-Time
 

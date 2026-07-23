@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "What is a Trigger?"
+description: "What is a Trigger? using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring. Keep queries fast with indexed filters."
 ---
-
 # What is a Trigger?
 
 The new data pushed to subscription on receiving the new block in the real time database assuming that the criteria,
@@ -25,7 +26,6 @@ It has the following options:
 
 In most cases you just not specify this attribute, assuming all option is what you need. Other options are suitable
 for event-driven applications:
-
 
 ## Filtering Out All Branch Blocks
 

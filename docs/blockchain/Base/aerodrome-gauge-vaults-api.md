@@ -1,9 +1,8 @@
 ---
-title: "Aerodrome Gauge Vaults API — Base (Deposits, Withdraws, Rewards)"
-description: "Track Aerodrome gauge vaults on Base: new gauges, deposits, withdraws, and reward claims. Query governance-directed emissions activity and LP staking flows via Bitquery GraphQL and Streams."
+title: "Aerodrome Gauge Vaults API"
+description: "Aerodrome Gauge Vaults API: query and stream Base on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
 sidebar_position: 7
 ---
-
 # Aerodrome Gauge Vaults API — Base (Deposits, Withdraws, Rewards)
 
 Aerodrome Finance gauge vaults are staking contracts for LP tokens that let liquidity providers earn AERO emissions. veAERO holders (who lock AERO for up to four years) vote every week to direct emissions across pool gauges. LPs staking in the most‑voted gauges earn more AERO, while veAERO voters receive trading fees from the pools they support and may be incentivized by external bribes. Users can also auto‑compound earned AERO into veAERO to build long‑term voting power.
@@ -16,50 +15,17 @@ This page covers, on Base:
 
 You may also be interested in:
 
-- [Base Network DEX APIs ➤](https://docs.bitquery.io/docs/examples/dextrades/dex-api/)
-- [Token Trades APIs ➤](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/)
-- [Liquidity Pool APIs ➤](https://docs.bitquery.io/docs/examples/dextrades/pools-api/)
+- [Base Network DEX APIs ➤](/docs/blockchain/Ethereum/dextrades/dex-api/)
+- [Token Trades APIs ➤](/docs/blockchain/Ethereum/dextrades/token-trades-apis/)
+- [Liquidity Pool APIs ➤](/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/)
 
 Use the GraphQL queries below to monitor governance‑directed liquidity incentives across Aerodrome on Base. If you need other data points, reach out to [support](https://t.me/Bloxy_info).
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-<title>Aerodrome Gauge Vaults API — Base (Deposits, Withdraws, Rewards)</title>
-<meta
-  name="title"
-  content="Aerodrome Gauge Vaults API — Base (Deposits, Withdraws, Rewards)"
-/>
-<meta
-  name="description"
-  content="Track Aerodrome gauge vaults on Base: new gauges, deposits, withdraws, and reward claims. Monitor veAERO-directed emissions and LP staking flows via Bitquery GraphQL and Streams."
-/>
-<meta
-  name="keywords"
-  content="Aerodrome Gauge Vaults API,Base Aerodrome gauges,veAERO emissions,Aerodrome deposits,withdraws,ClaimRewards,gauge creation,LP staking,Aerodrome rewards,Base DeFi analytics,GraphQL API"
-/>
-<meta name="robots" content="index, follow" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="language" content="English" />
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Aerodrome Gauge Vaults API — Base (Deposits, Withdraws, Rewards)"
-/>
-<meta
-  property="og:description"
-  content="Track Aerodrome gauge vault creation, deposits, withdraws and reward claims on Base."
-/>
-
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Aerodrome Gauge Vaults API — Base (Deposits, Withdraws, Rewards)"/>
-<meta property="twitter:description" content="Monitor Aerodrome gauge vaults on Base: new gauges, deposits, withdraws, rewards."/>
-</head>
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 

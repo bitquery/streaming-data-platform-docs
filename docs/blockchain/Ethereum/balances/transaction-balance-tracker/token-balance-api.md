@@ -1,7 +1,8 @@
 ---
 sidebar_position: 8
+title: "Ethereum Token Balance API"
+description: "Ethereum Token Balance API: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions. Built for traders and analytics teams."
 ---
-
 # Ethereum Token Balance API
 
 The Ethereum Token Balance API provides real-time balance updates for ERC-20 fungible tokens on the Ethereum blockchain. Track token balances, total supply, market capitalization, and USD values for any address holding ERC-20 tokens.
@@ -12,31 +13,6 @@ For ERC-20 tokens, the following fields are available:
 - **Available**: `PostBalance`, `PostBalanceInUSD`, `TotalSupply`, `TotalSupplyInUSD`
 - **Not Provided**: `PreBalance`, `BalanceChangeReasonCode`, `TokenOwnership`
   :::
-
-<head>
-<meta name="title" content="Ethereum Token Balance API & Streams"/>
-<meta name="description" content="Track ERC-20 token balances, total supply, and market capitalization using Bitquery's Token Balance API for Ethereum."/>
-<meta name="keywords" content="ethereum token balance api, erc-20 balance api, token balance tracker, token supply api, token market cap api, ethereum token balance, token balance streams, erc20 balance api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Ethereum Token Balance API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Track ERC-20 token balances, total supply, and market capitalization using Bitquery's Token Balance API for Ethereum."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum Token Balance API & Streams" />
-<meta property="twitter:description" content="Track ERC-20 token balances, total supply, and market capitalization using Bitquery's Token Balance API for Ethereum." />
-</head>
 
 ## Get Latest Token Balance for an Address
 

@@ -1,6 +1,6 @@
 ---
 title: Optimism API Documentation
-description: Collection of Optimism APIs organized by topic.
+description: "Optimism API Documentation: query and stream Optimism on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
 slug: /blockchain/Optimism/
 keywords:
   - Optimism API
@@ -18,13 +18,11 @@ keywords:
   - Optimism DEX API
   - Optimism uniswap trades
 ---
-
 # Optimism API Documentation
 
 :::tip Building a trading app or DEX UI on Optimism?
-For **real-time trades and prices on Optimism** (and the last ~30 days), use the curated [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. For **historical Optimism data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
+For **real-time trades and prices on Optimism** (and the last ~30 days), use the curated [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. For **historical Optimism data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
 :::
-
 
 ## Overview
 
@@ -52,7 +50,7 @@ To access Bitquery Tron API you would require your own **[Access Token](https://
 
 ### Does Bitquery support Optimism Websocket and Webhooks?
 
-Bitquery supports websocket and webhooks; you can convert most GraphQL APIs into GraphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More docs and code samples are available [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
+Bitquery supports websocket and webhooks; you can convert most GraphQL APIs into GraphQL streams by changing the word `query` to `subscription`. You can monitor this data via a websocket. More docs and code samples are available [here](/docs/subscriptions/websockets/).
 
 ## Quick start
 
@@ -92,14 +90,13 @@ query LatestOptimismTrades {
 
 ## DEX APIs
 
-- [Optimism Dex Trades](https://docs.bitquery.io/docs/examples/Optimism/optimism-dextrades/)
+- [Optimism Dex Trades](./optimism-dextrades)
 
 ## Core Optimism APIs
 
 - [Balance API](./optimism-balance-api)
-- [NFT](http://localhost:3000/docs/examples/Optimism/optimism-nft/)
-- [Transactions](https://docs.bitquery.io/docs/examples/Optimism/Optimism-transactions-api/)
-- [Transfers](https://docs.bitquery.io/docs/examples/Optimism/optimism-transfers/)
+- [NFT](./optimism-nft)
+- [Transfers](./optimism-transfers)
 
 ## Videos
 

@@ -1,3 +1,7 @@
+---
+title: "Transaction Cube"
+description: "Transaction Cube: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Run it in the IDE, then ship in your app."
+---
 # Transaction Cube
 
 Transaction Cube provides comprehensive information about transactions, blocks, receipts, fees, transaction status, signatures, and more. You can check all the fields in [this query](https://ide.bitquery.io/transaction-cube-with-all-fields).

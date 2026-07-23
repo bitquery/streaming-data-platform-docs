@@ -1,3 +1,7 @@
+---
+title: "Bitquery API Endpoints and Regions"
+description: "Find Bitquery GraphQL, streaming, and regional API endpoints with base URLs, auth notes, and which service to use for each workload."
+---
 # Endpoints and Regions
 
 Bitquery provides multiple regional endpoints to optimize latency and performance. Choose the endpoint closest to your geographic location for the best experience.
@@ -90,6 +94,6 @@ The following chains are available via the United States regional endpoint:
 
 ## Next Steps
 
-- Learn about [API authentication](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+- Learn about [API authentication](/docs/authorization/how-to-generate/)
 - Explore the [GraphQL IDE](https://ide.bitquery.io/)
-- Check [API examples](https://docs.bitquery.io/docs/blockchain/introduction/)
+- Check [API examples](/docs/blockchain/introduction/)

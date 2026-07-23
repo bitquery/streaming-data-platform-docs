@@ -1,9 +1,8 @@
 ---
-title: "Uniswap V4 API - Track Trader Activities, Token Trades and Market Behaviour"
-description: "Track Uniswap V4 trades, trader activities, token trades, and market behaviour in real time using Bitquery's DEX Trades API on BSC."
+title: "BNB Chain Uniswap V4 API"
+description: "BNB Chain Uniswap V4 API: query BNB Chain Uniswap trades, pools, and prices with Bitquery GraphQL DEX APIs. See examples in the Bitquery IDE."
 ---
-
-# Uniswap V4 API - Track Trader Activities, Token Trades and Market Behaviour
+# Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior
 
 Uniswap v4 introduces a major shift in protocol architecture. Instead of deploying a separate smart contract for each liquidity pool, Uniswap v4 uses a singleton PoolManager contract that manages all pools internally as structured state.
 

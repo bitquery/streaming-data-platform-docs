@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: Indexed Fields Reference (where & orderBy)
-description: Use indexed fields in where and orderBy for correct, fast queries. Reference of indexed fields per cube, dataset, and chain.
+description: "Indexed Fields Reference (where & orderBy) in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 keywords:
   - indexed fields
   - where filter
@@ -9,7 +9,6 @@ keywords:
   - query performance
   - cube indexes
 ---
-
 # Indexed Fields Reference for `where` and `orderBy`
 
 Use **indexed fields** in your `where` filters and `orderBy` clauses. Filtering or sorting on non-indexed fields can lead to slow queries, timeouts.

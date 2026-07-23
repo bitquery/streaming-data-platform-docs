@@ -1,3 +1,7 @@
+---
+title: "Solana gRPC Errors"
+description: "Errors for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples. Run it in the IDE, then ship in your app."
+---
 # Error Handling
 
 When working with gRPC streams for Solana CoreCast, you may encounter errors. This page documents common error types, their causes, and how to debug them.
@@ -33,7 +37,7 @@ When working with gRPC streams for Solana CoreCast, you may encounter errors. Th
     insecure: false
   ```
 * Check for trailing spaces or missing quotes.
-* [Generate](https://docs.bitquery.io/docs/authorisation/how-to-generate/) a new token if expired.
+* [Generate](/docs/authorization/how-to-generate/) a new token if expired.
 
 ---
 
@@ -54,9 +58,9 @@ stream:
 
 ### Supported Stream Types
 
-* [`dex_trades`](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades/)
-* [`transactions`](https://docs.bitquery.io/docs/grpc/solana/topics/transactions/)
-* [`balances`](https://docs.bitquery.io/docs/grpc/solana/topics/balance/)
+* [`dex_trades`](/docs/grpc/solana/topics/dextrades/)
+* [`transactions`](/docs/grpc/solana/topics/transactions/)
+* [`balances`](/docs/grpc/solana/topics/balance/)
 
 ### How to Fix
 

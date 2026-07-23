@@ -1,11 +1,14 @@
+---
+title: "Solana Raydium Clmm API"
+description: "Solana Raydium Clmm API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Keep queries fast with indexed filters."
+---
 import FAQ from "@site/src/components/FAQ";
 
 # Raydium CLMM API
 
 :::tip Need real-time Raydium CLMM data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Raydium CLMM swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Raydium CLMM data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Raydium CLMM swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Raydium CLMM data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Bitquery provides comprehensive real-time and historical data APIs and Streams for the Solana blockchain, enabling developers and traders to build powerful applications and execute trades based on reliable information.
 
@@ -18,32 +21,6 @@ In this section we will see how to get data on Raydium CLMM trades in real-time.
 :::note
 `Trade Side Account` field will not be available as aggregates in Archive and Combined Datasets
 :::
-
-<head>
-<meta name="title" content="Raydium CLMM API - Monitor Solana Liquidity Pools & Trading Activity"/>
-<meta name="description" content="Access real-time data on Raydium's concentrated liquidity market maker (CLMM) on Solana. Use our API to track liquidity pools, trades, and more."/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Raydium CLMM API - Real-Time Solana Liquidity Pools & Trades"
-/>
-<meta
-  property="og:description"
-  content="Get up-to-date information on Raydium's CLMM on Solana. Use our API to monitor liquidity pools and trading activities."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Raydium CLMM API - Monitor Solana Liquidity Pools & Trading Activity" />
-<meta property="twitter:description" content="Access real-time data on Raydium's CLMM on Solana. Use our API to track liquidity pools, trades, and more." />
-</head>
 
 ## Subscribe to Realtime CLMM Trades
 

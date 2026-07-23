@@ -1,3 +1,7 @@
+---
+title: "Reconnect Automatically After Disconnect"
+description: "Reconnect Automatically After Disconnect using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
+---
 # Reconnect Automatically After Disconnect
 
 When using Bitquery GraphQL streams via WebSocket, you need to implement reconnect logic if you don't receive any data or a 'ka' message for, say, 10 seconds.

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
+title: "Query Fact Records in GraphQL"
+description: "Query raw blockchain fact records with Bitquery GraphQL, including field selection, filters, limits, and result shapes. See examples in the Bitquery IDE."
 ---
-
-
 # Query Fact Records
 
 This is the simplest type of query. You just define the attributes which you need in the results,
@@ -19,7 +19,6 @@ This type of query is useful in the following cases:
 2.  define ordering and query just the last records. This type of query should also take care about date / time filtering especially if you query archive data.
 
 [Query example ](https://graphql.bitquery.io/ide/Last-transactions-with-cost) to get the last transactions in the blockchain with the cost of them:
-
 
 ```graphql
 query {

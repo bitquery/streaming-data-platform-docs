@@ -1,6 +1,6 @@
 ---
 title: "Price Index Algorithm"
-description: "How the Crypto Price API filters trades and computes token and currency prices using exponentially decayed volume weighting over the last hour (50% weight at the window midpoint)."
+description: "Price Index Algorithm via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams. See examples in the Bitquery IDE."
 sidebar_position: 2
 keywords:
   - "price index algorithm"
@@ -11,7 +11,6 @@ keywords:
   - "currency price"
   - "DEX price aggregation"
 ---
-
 # Price Index Algorithm
 
 This page describes how the Price Index (Crypto Price API) filters trades and computes prices for tokens and currencies. It is the single source of truth for the algorithm in effect from **April 2026**.

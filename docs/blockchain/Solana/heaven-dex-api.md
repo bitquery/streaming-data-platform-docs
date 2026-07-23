@@ -1,44 +1,24 @@
+---
+title: "Solana Heaven DEX API"
+description: "Solana Heaven DEX API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Includes filters and field selection tips."
+---
 # Heaven DEX API
 
 :::tip Need real-time Heaven DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Heaven DEX swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Heaven DEX data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Heaven DEX swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Heaven DEX data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
-In this document, we will explore several examples related to Heaven Dex. You can also check out our [Pump Fun API Docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) and [FourMeme API Docs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/).
+In this document, we will explore several examples related to Heaven Dex. You can also check out our [Pump Fun API Docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [FourMeme API Docs](/docs/blockchain/BSC/four-meme-api/).
 
-Need zero-latency Heaven DEX data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+Need zero-latency Heaven DEX data? [Read about our Shred Streams and Contact us for a Trial](/docs/streams/real-time-solana-data/).
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-  <meta name="title" content="Heaven DEX API - Solana - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our Heaven DEX API."/>
-  <meta name="keywords" content="Heaven DEX API,Heaven DEX on-chain data API,Heaven DEX token data API,Heaven DEX blockchain API,Heaven DEX DEX data API,Heaven DEX API documentation,Heaven DEX crypto API,Heaven DEX web3 API,DEX Trades,Solana,Blast,Heaven DEX memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Heaven DEX API - Solana - Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our Heaven DEX API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Heaven DEX API - Solana - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any Heaven DEX based token through our Heaven DEX API."/>
-</head>
 
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 

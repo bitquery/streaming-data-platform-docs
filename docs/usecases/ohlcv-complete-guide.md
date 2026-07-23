@@ -1,3 +1,7 @@
+---
+title: "OHLCV Candle Data Complete Guide"
+description: "Learn how to build OHLCV candles from Bitquery DEX trade data, including intervals, aggregations, gaps, and chart-ready GraphQL examples."
+---
 # Complete Guide to Building the Perfect OHLCV Data Using Bitquery APIs
 
 In this guide, we will see how to get OHLCV (Open, High, Low, Close, Volume) candlestick data—or K-Line data—across different blockchain networks using Bitquery APIs. We’ll also explore how to filter out bot trades, outliers, and abnormally high or low prices to ensure accurate OHLC calculations.
@@ -51,7 +55,7 @@ To fetch OHLC (Open, High, Low, Close) data for a specific token pair on EVM-com
 - **Robinhood** → `EVM(network: robinhood)`
 
 For full API documentation, refer to:  
-[Get OHLC Data for a Particular Token Pair](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/#get-ohlc-data-for-a-particular-token-pair).
+[Get OHLC Data for a Particular Token Pair](/docs/blockchain/Ethereum/dextrades/token-trades-apis/#get-ohlc-data-for-a-particular-token-pair).
 
 ### **Sample Query**
 
@@ -101,7 +105,7 @@ Bitquery also supports non-EVM chains, such as **Solana** and **Tron**, enabling
 ## **OHLC on Solana**
 
 For a detailed guide, visit:  
-[Historical OHLC on Solana](https://docs.bitquery.io/docs/blockchain/Solana/historical-aggregate-data/#historical-ohlc-on-solana).
+[Historical OHLC on Solana](/docs/blockchain/Solana/historical-aggregate-data/#historical-ohlc-on-solana).
 
 #### **Sample Query**
 
@@ -144,7 +148,7 @@ For a detailed guide, visit:
 ## **OHLC on Tron**
 
 For details, visit:  
-[OHLC Data on Tron](https://docs.bitquery.io/docs/blockchain/Tron/tron-dextrades/#get-ohlc-data-of-a-token-on-tron-network).
+[OHLC Data on Tron](/docs/blockchain/Tron/tron-dextrades/#get-ohlc-data-of-a-token-on-tron-network).
 
 #### **Sample Query**
 
@@ -230,7 +234,6 @@ subscription LatestTrades {
   }
 }
 
-
 ```
 
 This GraphQL **subscription** query is fetching real-time **OHLC (Open, High, Low, Close)** data for Solana trades by continuously monitoring and streaming the latest trades.
@@ -271,7 +274,7 @@ When fetching trade data from Bitquery APIs, you may encounter abnormal prices. 
 2. **Incorrect trade data in Bitquery’s database** – If you suspect incorrect data, report the issue by creating a support ticket.
 
 For a complete guide, visit:  
-[How to Filter Anomalous Prices](https://docs.bitquery.io/docs/usecases/how-to-filter-anomaly-prices/).
+[How to Filter Anomalous Prices](/docs/usecases/how-to-filter-anomaly-prices/).
 
 ### **Methods to Filter Anomalous Trades**
 
@@ -297,7 +300,7 @@ For a complete guide, visit:
 - To filter extreme values, keep trades only between the **5th and 95th percentiles**.
 
 For more details, check:  
-[Quantile Documentation](https://docs.bitquery.io/docs/graphql/metrics/quantile/).
+[Quantile Documentation](/docs/graphql/metrics/quantile/).
 
 #### **3. Fetch All Trades and Filter Manually**
 
@@ -399,11 +402,11 @@ _Effect:_ The low (`min1`) is adjusted upwards, likely removing an extreme drop.
 
 If you prefer not to use an aggregated GraphQL query, you can fetch raw trade data and manually compute OHLC values.
 
-Complete guide to [using trades to calculate OHLC is available here](https://docs.bitquery.io/docs/usecases/solana-ohlc-calculator/)
+Complete guide to [using trades to calculate OHLC is available here](/docs/usecases/solana-ohlc-calculator/)
 
 ## **Building TradingView Charts**
 
 To visualize OHLCV data using **TradingView Advanced Chart Library**, refer to:
 
-- [TradingView Advanced Charts Guide](https://docs.bitquery.io/docs/usecases/tradingview-advanced-charts/getting-started/)
-- [TradingView Real-Time Subscription](https://docs.bitquery.io/docs/usecases/tradingview-subscription-realtime/getting-started/)
+- [TradingView Advanced Charts Guide](/docs/usecases/tradingview-subscription-realtime/getting-started/)
+- [TradingView Real-Time Subscription](/docs/usecases/tradingview-subscription-realtime/getting-started/)

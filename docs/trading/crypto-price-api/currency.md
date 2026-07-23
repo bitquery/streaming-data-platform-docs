@@ -1,3 +1,7 @@
+---
+title: "Crypto Currency Price API"
+description: "Query currency-level crypto prices and conversions with Bitquery Trading APIs, including GraphQL examples and streaming options."
+---
 # Currency Cube
 
 The Currency Cube provides a unified, chain-agnostic price for an asset in USD, such as Bitcoin by aggregating prices and volumes from all its representations (e.g., WBTC, cbBTC, and other bridged or wrapped forms) across all supported chains. This multi-chain cryptocurrency price data approach ensures consistent pricing across different blockchain implementations.
@@ -71,7 +75,6 @@ The OHLC values (Open, High, Low, Close) are determined across all chains and to
     }
   }
 }
-
 
 ```
 

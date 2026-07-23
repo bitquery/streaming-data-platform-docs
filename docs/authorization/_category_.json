@@ -1,0 +1,8 @@
+{
+  "label": "Authorization",
+  "position": 2,
+  "link": {
+    "type": "doc",
+    "id": "authorization/how-to-generate"
+  }
+}

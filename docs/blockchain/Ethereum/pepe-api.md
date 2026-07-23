@@ -1,9 +1,8 @@
 ---
-title: "PEPE Coin API"
-description: "Get real-time and historical on-chain data for PEPE coin on Ethereum — OHLCV price feeds, whale transfers, DEX volume, top buyers and sellers, and holder rankings using Bitquery's GraphQL API."
+title: "Ethereum Pepe API"
+description: "Ethereum Pepe API: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Run it in the IDE, then ship in your app."
 keywords: ["PEPE API", "PEPE coin API", "PEPE on-chain data", "PEPE price API", "PEPE OHLCV", "PEPE whale tracker", "PEPE DEX trades", "PEPE holder API", "Ethereum memecoin API", "PEPE GraphQL", "PEPE market cap API", "PEPE trading API"]
 ---
-
 # PEPE Coin API
 
 Query real-time and historical on-chain data for [PEPE](https://explorer.bitquery.io/ethereum/token/0x6982508145454ce325ddbe47a25d4ec3d2311933), a popular ERC-20 memecoin on Ethereum. All examples below target PEPE's contract address: `0x6982508145454ce325ddbe47a25d4ec3d2311933`.

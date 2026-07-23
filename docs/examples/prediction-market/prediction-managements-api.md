@@ -1,6 +1,6 @@
 ---
 title: "Prediction Market Managements API"
-description: "Query prediction market lifecycle: real-time streams and historical queries for market creation and resolution. Created and Resolved events on Polygon (Polymarket and more)."
+description: "Prediction Market Managements API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - PredictionManagements
   - prediction market management API
@@ -12,7 +12,6 @@ keywords:
   - outcome tokens
   - Bitquery GraphQL prediction
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Prediction Market Managements API
@@ -574,6 +573,5 @@ query LatestMarketResolutions {
   }
 }
 ```
-
 
 For trades on outcome tokens, see [Prediction Market Trades API](../prediction-trades-api). For settlements (split, merge, redemption), see [Prediction Market Settlements API](../prediction-settlements-api).

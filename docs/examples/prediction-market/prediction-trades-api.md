@@ -1,6 +1,6 @@
 ---
 title: "Prediction Market Trades API"
-description: "Query prediction market trades: real-time streams, latest trades, trades by market or trader, volume by outcome, and current prices. Buy/sell outcome tokens on Polygon (Polymarket and more)."
+description: "Prediction Market Trades API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - PredictionTrades
   - prediction market trades API
@@ -13,7 +13,6 @@ keywords:
   - prediction market analytics
   - Bitquery GraphQL prediction
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Prediction Market Trades API
@@ -490,6 +489,5 @@ query CurrentPricePerOutcome {
   }
 }
 ```
-
 
 For market creation and resolution, see [PredictionManagements](../prediction-market-api#predictionmanagements). For settlements (split, merge, redemption), see [Prediction Market Settlements API](../prediction-settlements-api).

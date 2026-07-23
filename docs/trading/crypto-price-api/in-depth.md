@@ -1,3 +1,7 @@
+---
+title: "Breaking Down Price Streams in Detail"
+description: "Breaking Down Price Streams in Detail via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
+---
 # Breaking Down Price Streams in Detail
 
 This section is not necessary reading to start using the APIs; it explains how we have set up and designed the APIs and what algorithmic rules we follow to show data. You can go to the [examples section](/docs/trading/crypto-price-api/examples) to start using it.

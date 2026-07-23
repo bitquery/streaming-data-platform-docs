@@ -1,7 +1,7 @@
 ---
-title: Bitcoin Transactions API - Get Latest Txs, Fees, and Daily Aggregates
+title: "Bitcoin Transactions API"
 sidebar_label: Bitcoin Transactions API
-description: Query Bitcoin transactions with input/output totals, fees in BTC and USD, daily counts, average fees, and per-address transaction history via Bitquery GraphQL.
+description: "Bitcoin Transactions API: query and stream Bitcoin on-chain data with Bitquery GraphQL examples for developers. Run it in the IDE, then ship in your app."
 keywords:
   - Bitcoin transactions API
   - Bitcoin transaction history
@@ -12,7 +12,6 @@ keywords:
   - Bitcoin address transactions
   - Bitquery Bitcoin
 ---
-
 # Bitcoin Transactions API
 
 The Transactions API returns transaction-level data on Bitcoin: input and output totals in BTC and USD, fees, input/output counts, block context, and per-address transaction history. Use it for paginated transaction feeds, daily activity dashboards, fee trend analysis, and wallet history widgets.
@@ -104,7 +103,7 @@ Swap `inputAddress` for `outputAddress` to see received transactions instead. Ad
 
 ## Related resources
 
-- [Bitcoin Blocks API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-blocks-api) — block-level lookups and stats
-- [Bitcoin Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — UTXO-level transaction detail
-- [Bitcoin Fee API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-fee-api) — focused fee queries and aggregates
-- [Bitcoin Address API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-address-api) — wallet balances and activity stats
+- [Bitcoin Blocks API](/docs/blockchain/Bitcoin/bitcoin-blocks-api) — block-level lookups and stats
+- [Bitcoin Inputs and Outputs API](/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — UTXO-level transaction detail
+- [Bitcoin Fee API](/docs/blockchain/Bitcoin/bitcoin-fee-api) — focused fee queries and aggregates
+- [Bitcoin Address API](/docs/blockchain/Bitcoin/bitcoin-address-api) — wallet balances and activity stats

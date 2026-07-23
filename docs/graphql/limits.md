@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Bitquery GraphQL Query Limits"
+description: "Bitquery GraphQL Query Limits in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
-
 # Limits
 
 Results are limited by using attributes ```limit``` and ```limitBy```
@@ -23,7 +24,6 @@ If you do not specify `limit`, a system default is applied. **GraphQL v2** uses 
 do not use ```offset``` for pagination of the result, unless you sure that the results are not 
 modified or added between the queries and also have strong ordering
 :::
-
 
 ## limitBy
 

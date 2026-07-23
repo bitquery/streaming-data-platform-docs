@@ -1,6 +1,6 @@
 ---
-title: EVM Data - Ethereum, BSC, Polygon Datasets for Snowflake, AWS S3, BigQuery
-description: Export EVM blockchain data for Ethereum, BSC, Base, Polygon, Optimism to cloud storage with Parquet datasets optimized for Snowflake, AWS S3, Google BigQuery, and data lakes. Get blocks, transactions, transfers, DEX trades, and balance updates.
+title: "EVM Cloud Data Exports"
+description: "Access Bitquery EVM cloud datasets for historical blockchain exports in Parquet, ready for S3, BigQuery, Snowflake, and data lakes."
 keywords:
   - EVM blockchain data
   - Ethereum data export
@@ -64,7 +64,6 @@ keywords:
   - Optimism mainnet data
 sidebar_position: 2
 ---
-
 # EVM Data
 
 Bitquery provides **blockchain data dumps for EVM-base chains like Ethereum, BSC, Base, Polygon/Matic, Optimism, Robinhood, etc.** in parquet format that you can host directly in your own cloud (for example AWS S3) and plug into your analytics stack or data lake.
@@ -81,7 +80,6 @@ For EVM chains we currently provide the following topics:
 - **Transactions** – [sample file](https://github.com/bitquery/blockchain-cloud-data-dump-sample/blob/main/ethereum/transactions.js)
 - **Transfers** – [sample file](https://github.com/bitquery/blockchain-cloud-data-dump-sample/blob/main/ethereum/transfers.js)
 
-
 ## Sample Ethereum Cloud Dataset
 
 To explore the schema and test your tooling, use our **public sample EVM datasets** on GitHub:
@@ -89,12 +87,10 @@ To explore the schema and test your tooling, use our **public sample EVM dataset
 - **Ethereum samples**:  
   [`https://github.com/bitquery/blockchain-cloud-data-dump-sample/tree/main/ethereum`](https://github.com/bitquery/blockchain-cloud-data-dump-sample/tree/main/ethereum)
 
-
 The GitHub repository includes one sample file. The complete list of Parquet files is stored in our public S3 bucket and can be accessed directly. For example:  
 `https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/ethereum/balance_updates/24053500_24053549.parquet`
 
 ```text
-
 
 bitquery-blockchain-dataset/
 └── ethereum/

@@ -1,8 +1,9 @@
 ---
 sidebar_position: 2
 sidebar_label: Pairs for a Token
+title: "Ethereum Get Trading Pairs Of Token API"
+description: "Ethereum Get Trading Pairs Of Token API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams."
 ---
-
 # Trading Pairs API
 
 If you want to get all trades of a token, you might want to know all its trading pairs.
@@ -192,8 +193,6 @@ The query returns an object containing a list of DEX trades, each with the follo
 - `Buy`: An object containing information about the buy currency, including the name and smart contract address.
 - `Sell`: An object containing information about the sell currency, including the name and smart contract address.
 
-
-
 ## Get liquidity of token pool/pair
 
 To get liquidity of token pairs you need 2 things. 1. Pair address 2. Addresses of tokens in the pair.
@@ -205,8 +204,6 @@ Here pair address - `0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf`
 USDT address - `0xdAC17F958D2ee523a2206206994597C13D831ec7`
 
 USDC address - `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
-
-
 
 ```graphql
 query MyQuery {

@@ -1,9 +1,8 @@
 ---
 title: "Solana Balance Updates - gRPC Stream (CoreCast)"
-description: "Real-time balance updates via Solana gRPC. Filter by address, token. Protobuf."
+description: "Solana Balance Updates - gRPC Stream (CoreCast) for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana balance stream"]
 ---
-
 # Solana Balance Updates gRPC Stream
 
 The `balance` gRPC Stream provides real-time balance update data for Solana accounts and token accounts.
@@ -13,7 +12,6 @@ The `balance` gRPC Stream provides real-time balance update data for Solana acco
 ## Overview
 
 Subscribe to live balance changes for accounts and token accounts. Each event includes pre/post balances, currency details, and account context. Data is in **protobuf format** — use `bitquery-corecast-proto` to parse.
-
 
 ## Configuration
 
@@ -114,7 +112,7 @@ This package includes all necessary protobuf definitions without requiring manua
 
 ## Related
 
-- [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) — Topics and concepts
-- [Transfers gRPC](https://docs.bitquery.io/docs/grpc/solana/topics/transfer/) — Token transfers
-- [Solana Balance Updates (GraphQL)](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/) — WebSocket subscriptions
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorisation/) — Token setup
+- [CoreCast Introduction](/docs/grpc/solana/introduction/) — Topics and concepts
+- [Transfers gRPC](/docs/grpc/solana/topics/transfer/) — Token transfers
+- [Solana Balance Updates (GraphQL)](/docs/blockchain/Solana/solana-balance-updates/) — WebSocket subscriptions
+- [Authorization](/docs/grpc/solana/authorization/) — Token setup

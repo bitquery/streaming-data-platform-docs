@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Real Time Indexer With Kafka Stream"
+description: "Real Time Indexer With Kafka Stream with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
 ---
-
 # Real-Time Blockchain Indexer: Build Reliable Indexers with Kafka Streams Instead of Archive Nodes, gRPC, or Webhook Services
 
 Building a real-time blockchain indexer is one of the most challenging infrastructure tasks in the process of tracking trades, monitoring token transfers, parsing internal calls, or building a comprehensive on-chain analytics platform. If you decide to run your own archive node, you need to plan for big SSD storage (multiple TBs), fast disks / high IOPS, and robust backup/monitoring. If not, you might be looking for need reliable, low-latency access to blockchain data at scale.
@@ -195,7 +196,7 @@ Build robust indexing pipelines that:
 Building a real-time indexer with Bitquery's Kafka streams is straightforward:
 
 1. **Get Kafka Access**: Contact Bitquery sales by filling the [form on the website](https://bitquery.io/forms/api) for Kafka credentials
-2. **Choose Your Topics**: Select the topics that match your indexing needs. List is available [here](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#complete-list-of-topics)
+2. **Choose Your Topics**: Select the topics that match your indexing needs. List is available [here](/docs/streams/kafka-streaming-concepts/#complete-list-of-topics)
 3. **Set Up Consumers**: Create Kafka consumers with proper offset management
 4. **Process Messages**: Parse protobuf messages and update your index
 5. **Handle Failures**: Use Bitquery Kafka's 24-hour retention to recover from crashes

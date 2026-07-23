@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Bitquery IDE Teams"
+description: "Bitquery IDE Teams in Bitquery docs with practical setup steps, examples, and guidance for secure API access. Built for traders and analytics teams."
 ---
-
 # Develop in Team
 
 Bitquery IDE is built for Teams. You can invite team members and share the same billing account.
@@ -14,7 +15,7 @@ To invite your team, use the dropdown menu in our IDE.
 
 ![IDE Query Share](/img/ide/invite_new_member.png)
 
-You can view your team from your [account dashboard](account.md): sign in at [account.bitquery.io](https://account.bitquery.io/), then use the **Authorization** menu in the top bar (or the equivalent entry under account settings).
+You can view your team from your [account dashboard](/docs/ide/account/): sign in at [account.bitquery.io](https://account.bitquery.io/), then use the **Authorization** menu in the top bar (or the equivalent entry under account settings).
 
 ![IDE Query Share](/img/ide/view_team.png)
 

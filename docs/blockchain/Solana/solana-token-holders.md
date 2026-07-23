@@ -1,27 +1,10 @@
+---
+title: "Solana Token Holders API"
+description: "Solana Token Holders API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
+---
 # Solana Token Holders API
 
 Get real-time and historical token holder data for any SPL token on Solana. Bitquery provides two approaches to retrieve token holders — choose the one that fits your use case.
-
-<head>
-<meta name="title" content="Solana Token Holders API | Get Top Holders for Any SPL Token"/>
-<meta name="description" content="Get real-time and historical token holder data for any SPL token on Solana. Calculate top holders, track wallet distribution, and monitor holder changes using Bitquery's V1 and V2 APIs."/>
-<meta name="keywords" content="Solana token holders API, SPL token holders, Solana wallet holders, Solana top holders, token holder distribution, Solana balance API, Solana holder tracking, Solana whale tracking, Pump.fun token holders, Solana DeFi holders, token holder analytics, Solana blockchain API, Solana web3 API, Solana holder count, SPL token balance, Solana token distribution"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Solana Token Holders API | Get Top Holders for Any SPL Token" />
-<meta property="og:description" content="Get real-time and historical token holder data for any SPL token on Solana. Calculate top holders using Bitquery's V1 (historical transfers) and V2 (real-time balance updates) APIs." />
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana Token Holders API | Get Top Holders for Any SPL Token" />
-<meta property="twitter:description" content="Get real-time and historical token holder data for any SPL token on Solana. Calculate top holders using Bitquery's V1 (historical transfers) and V2 (real-time balance updates) APIs." />
-</head>
 
 ## Can I get Solana token holder data using Bitquery?
 
@@ -29,7 +12,7 @@ Yes. Bitquery exposes Solana SPL holder analytics via GraphQL: use **V1** transf
 
 ## How do I track whale wallets and their token holdings on Solana?
 
-Use V1 holder queries sorted by net balance to list the largest wallets, or V2 `BalanceUpdates` ordered by `PostBalance` for fresh launches. Filter minimum `PostBalance` or post-process balances to focus on whales, then correlate with [Solana transfers](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/) or [DEX trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/) for accumulation or distribution.
+Use V1 holder queries sorted by net balance to list the largest wallets, or V2 `BalanceUpdates` ordered by `PostBalance` for fresh launches. Filter minimum `PostBalance` or post-process balances to focus on whales, then correlate with [Solana transfers](/docs/blockchain/Solana/solana-transfers/) or [DEX trades](/docs/blockchain/Solana/solana-dextrades/) for accumulation or distribution.
 
 ## Choosing the Right API
 
@@ -210,7 +193,7 @@ Use V1 to track how the number of unique holders changes over different date ran
 Verify that airdrop recipients actually hold the tokens by querying current balances.
 
 ### Smart Money Tracking
-Identify wallets that consistently hold tokens early in successful launches. Cross-reference with the [Solana Trader API](https://docs.bitquery.io/docs/blockchain/Solana/solana-trader-API/) for deeper analysis.
+Identify wallets that consistently hold tokens early in successful launches. Cross-reference with the [Solana Trader API](/docs/blockchain/Solana/solana-trader-API/) for deeper analysis.
 
 ## Best Practices
 
@@ -224,12 +207,12 @@ Identify wallets that consistently hold tokens early in successful launches. Cro
 
 ## Related APIs
 
-- [Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/) — Real-time balance change monitoring
-- [Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/) — Track token transfers
-- [Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/) — Trading activity for tokens
-- [Solana Trader API](https://docs.bitquery.io/docs/blockchain/Solana/solana-trader-API/) — Trader analytics and smart money tracking
-- [Solana Token Supply API](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/) — Token supply data
-- [Pump.fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) — Pump.fun token data
+- [Solana Balance Updates API](/docs/blockchain/Solana/solana-balance-updates/) — Real-time balance change monitoring
+- [Solana Transfers API](/docs/blockchain/Solana/solana-transfers/) — Track token transfers
+- [Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades/) — Trading activity for tokens
+- [Solana Trader API](/docs/blockchain/Solana/solana-trader-API/) — Trader analytics and smart money tracking
+- [Solana Token Supply API](/docs/blockchain/Solana/token-supply-cube/) — Token supply data
+- [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) — Pump.fun token data
 
 ## Support
 

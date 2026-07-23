@@ -1,6 +1,6 @@
 ---
-title: "Polymarket Sports API - Live Odds, Cricket, NBA, NFL & Esports Markets"
-description: "Query and stream Polymarket sports prediction markets: live odds and implied probability, odds (line) movement OHLC, market resolutions, volume by outcome, top traders, and whale-bet alerts for NBA, NFL, soccer, cricket, UFC and esports. Real-time via GraphQL subscriptions and Kafka on Polygon."
+title: "Polymarket Sports API"
+description: "Polymarket Sports API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Run it in the IDE, then ship in your app."
 keywords:
   - Polymarket sports API
   - Polymarket live odds API
@@ -20,7 +20,6 @@ keywords:
   - prediction market ResolutionSource
   - Polygon prediction markets sports
 ---
-
 # Polymarket Sports API - Live Odds, Cricket, NBA, NFL & Esports Markets
 
 Get full access to **Polymarket sports markets** through one API. That covers NBA, NFL, soccer, cricket, UFC, esports and more, with live odds (implied probability), trades, volume, market creation and resolution, and trader-level activity.
@@ -34,7 +33,7 @@ Bitquery runs **its own blockchain nodes** and **indexes, decodes, and parses** 
 Every query below can be run live by changing `query` to `subscription`. See [Real-Time: GraphQL Subscriptions and Kafka](#real-time-graphql-subscriptions-and-kafka).
 
 :::note API Key Required
-To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+To query or stream data outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/).
 :::
 
 ---
@@ -87,7 +86,7 @@ For **ultra-low-latency** and high-throughput consumption, prediction market dat
 
 Kafka requires **separate credentials** (IDE tokens do not work). See the full guide and topic list:
 
-- **[Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/):** Connect, subscribe, parse messages, and configure consumers.
+- **[Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/):** Connect, subscribe, parse messages, and configure consumers.
 
 For credentials, [contact support](https://t.me/bloxy_info) or email support@bitquery.io.
 
@@ -474,7 +473,7 @@ Variables:
 
 You can checkout the above data in more intuitive form on [DexRabbit](https://dexrabbit.bitquery.io/polymarket-predictions/sports/cricket?tab=volume).
 
-![Cricket Markets by Liquidity](../../../static/img/dexrabbit/cricket-volume.png)
+![Cricket Markets by Liquidity](/img/dexrabbit/cricket-volume.png)
 
 ## Top Cricket Markets by Liquidity
 
@@ -529,7 +528,7 @@ Variables:
 
 You can checkout the above data in more intuitive form on [DexRabbit](https://dexrabbit.bitquery.io/polymarket-predictions/sports/cricket?tab=liquidity).
 
-![Cricket Markets by Liquidity](../../../static/img/dexrabbit/cricket-liquidity.png)
+![Cricket Markets by Liquidity](/img/dexrabbit/cricket-liquidity.png)
 
 ## Latest Sports Markets Created
 
@@ -1210,15 +1209,15 @@ Trade: {
 
 | Need                                        | API                                                                                                                   |
 | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| **Market lifecycle (creation, resolution)** | [Prediction Managements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-managements-api/)    |
-| **Trades, volume, prices**                  | [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/)              |
-| **Filter by slug, condition ID, token**     | [Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api/)               |
-| **Polymarket overview**                     | [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)                               |
-| **Settlements & redemptions**               | [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/)    |
-| **User & wallet activity**                  | [Polymarket Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api/) |
-| **Trader realized PnL & win rate**          | [Realized PnL & Win Rate for Polymarket Trader](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
-| **Real-time: GraphQL subscriptions**        | [GraphQL subscriptions & WebSockets](https://docs.bitquery.io/docs/subscriptions/websockets/)                         |
-| **Real-time: Kafka streams**                | [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)                           |
+| **Market lifecycle (creation, resolution)** | [Prediction Managements API](/docs/examples/prediction-market/prediction-managements-api/)    |
+| **Trades, volume, prices**                  | [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/)              |
+| **Filter by slug, condition ID, token**     | [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/)               |
+| **Polymarket overview**                     | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/)                               |
+| **Settlements & redemptions**               | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/)    |
+| **User & wallet activity**                  | [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/) |
+| **Trader realized PnL & win rate**          | [Realized PnL & Win Rate for Polymarket Trader](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
+| **Real-time: GraphQL subscriptions**        | [GraphQL subscriptions & WebSockets](/docs/subscriptions/websockets/)                         |
+| **Real-time: Kafka streams**                | [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/)                           |
 
 ---
 

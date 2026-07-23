@@ -1,5 +1,7 @@
 ---
 sidebar_position: 6
+title: "Widget Creation"
+description: "Build Widget Creation: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code. Keep queries fast with indexed filters."
 ---
 # Widget Creation
 
@@ -152,5 +154,4 @@ export default TVChartContainer;
 ```
 
 - The component renders a `div` where the TradingView chart will be displayed, with the specified height and width.
-
 

@@ -1,6 +1,10 @@
+---
+title: "How to Stream Moonshot Live Prices"
+description: "Build How to Stream Moonshot Live Prices: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
+---
 # Tutorial: How to Stream Moonshot Live Prices
 
-In this tutorial, you will learn how to create a simple React application to stream live prices from the Moonshot protocol using WebSocket and Bitquery's [Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/).
+In this tutorial, you will learn how to create a simple React application to stream live prices from the Moonshot protocol using WebSocket and Bitquery's [Moonshot APIs](/docs/blockchain/Solana/Moonshot-API/).
 
 You can find the complete repo [here](https://github.com/Divyn/streaming-moonshot-prices)
 
@@ -8,13 +12,11 @@ The final output would look something like this
 
 ![](/img/ApplicationExamples/moonshot.png)
 
-
 ### Prerequisites
 
 -   Basic knowledge of React and JavaScript.
 -   Node.js installed on your machine.
--   [Bitquery OAuth token.](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
-
+-   [Bitquery OAuth token.](/docs/authorization/how-to-generate/)
 
 ### Step 1: Setting Up the Project
 
@@ -34,12 +36,9 @@ npm install reconnecting-websocket
 
 ```
 
-
 ### Step 3: Create the `useWebSocket` Hook
 
 The `useWebSocket` hook will manage the WebSocket connection, handle reconnection attempts, and process the incoming data.
-
-
 
 #### **1. `useWebSocket.js` - Custom WebSocket Hook**
 

@@ -1,16 +1,15 @@
 ---
-title: "Solana gRPC Streams - CoreCast Real-Time DEX, Transfers, Transactions"
-description: "grpc solana, solana grpc: Bitquery CoreCast streams for real-time DEX trades, transfers, transactions. Low-latency protobuf. Pump.fun, Raydium, Orca."
+title: "Solana gRPC Introduction"
+description: "Introduction for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples. See examples in the Bitquery IDE."
 keywords: ["grpc solana", "solana grpc", "CoreCast", "Solana gRPC stream", "Solana real-time data"]
 ---
-
 # CoreCast - Smart Solana gRPC Streams
 
 ## What is Bitquery gRPC for Solana and how is it different from RPC? {#what-is-bitquery-grpc-for-solana-and-how-is-it-different-from-rpc}
 
 **Bitquery gRPC for Solana** is **CoreCast** (Smart gRPC Streams): a managed feed of **indexed, decoded** Solana activity delivered as **Protobuf** over gRPC to `corecast.bitquery.io`. You subscribe by **topic** (for example `dex_trades`, `transfers`, `transactions`) with **server-side filters** (addresses, mints, programs, thresholds), so you receive structured events not raw ledger blobs.
 
-**Solana RPC** (JSON-RPC from a validator or provider) is the chain’s **low-level API**: `getTransaction`, `getAccountInfo`, `getBlock`, simulation, and base64 logs. You typically **poll or subscribe** per method, **decode instructions and layouts yourself**, and stitch together DEX or token context. CoreCast is optimized for **low-latency, filtered market data**; RPC is for **generic chain access** and tooling that already expects JSON-RPC. For GraphQL + WebSocket on the same indexed data, see [real-time subscriptions](https://docs.bitquery.io/docs/subscriptions/websockets/) and the [streaming overview](https://docs.bitquery.io/docs/streams/).
+**Solana RPC** (JSON-RPC from a validator or provider) is the chain’s **low-level API**: `getTransaction`, `getAccountInfo`, `getBlock`, simulation, and base64 logs. You typically **poll or subscribe** per method, **decode instructions and layouts yourself**, and stitch together DEX or token context. CoreCast is optimized for **low-latency, filtered market data**; RPC is for **generic chain access** and tooling that already expects JSON-RPC. For GraphQL + WebSocket on the same indexed data, see [real-time subscriptions](/docs/subscriptions/websockets/) and the [streaming overview](/docs/streams/).
 
 ### What are Smart gRPC Streams?
 
@@ -25,12 +24,12 @@ Bitquery Smart gRPC Streams provide low-latency, context-aware, topic-wise event
 
 Bitquery exposes multiple topics so you subscribe only to what you need:
 
-- **[transactions](https://docs.bitquery.io/docs/grpc/solana/topics/transactions)**: Finalized transactions with instructions, logs, and status.
+- **[transactions](/docs/grpc/solana/topics/transactions)**: Finalized transactions with instructions, logs, and status.
 - **transfers**: All token transfers with token context.
-- **[dex_trades](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades)**: DEX trade/swaps across supported protocols.
+- **[dex_trades](/docs/grpc/solana/topics/dextrades)**: DEX trade/swaps across supported protocols.
 - **dex_orders**: Order lifecycle updates where applicable.
 - **dex_pools**: Pool creation/updates and liquidity changes.
-- **[balances](https://docs.bitquery.io/docs/grpc/solana/topics/balance)**: Balance updates for tracked accounts and mints.
+- **[balances](/docs/grpc/solana/topics/balance)**: Balance updates for tracked accounts and mints.
 
 Each topic supports context-aware filters and consistent identifiers for easy correlation across streams.
 
@@ -87,7 +86,7 @@ The schema need not be downloaded, we have it as packages for install in NPM and
 
 ## Is Solana gRPC (CoreCast) streaming included on the free plan? {#is-solana-grpc-corecast-streaming-included-on-the-free-plan}
 
-CoreCast uses the same **V2 API tokens** as the GraphQL IDE ([create a token](https://account.bitquery.io/user/api_v2/access_tokens); see [authentication](/docs/grpc/solana/authorisation/)). Whether **Solana gRPC streaming** is enabled for your workspace, and how it relates to the Developer (free) tier or points, depends on your **plan and account entitlements**—it is not guaranteed to be unlimited or identical to self-serve GraphQL limits. Check [pricing](https://bitquery.io/pricing) and [Points](/docs/ide/points/); if you need access or a trial, use [Account → Billing](https://account.bitquery.io/user/billing) or contact [sales@bitquery.io](mailto:sales@bitquery.io).
+CoreCast uses the same **V2 API tokens** as the GraphQL IDE ([create a token](https://account.bitquery.io/user/api_v2/access_tokens); see [authentication](/docs/grpc/solana/authorization/)). Whether **Solana gRPC streaming** is enabled for your workspace, and how it relates to the Developer (free) tier or points, depends on your **plan and account entitlements**—it is not guaranteed to be unlimited or identical to self-serve GraphQL limits. Check [pricing](https://bitquery.io/pricing) and [Points](/docs/ide/points/); if you need access or a trial, use [Account → Billing](https://account.bitquery.io/user/billing) or contact [sales@bitquery.io](mailto:sales@bitquery.io).
 
 ## Does Bitquery support gRPC for chains other than Solana? {#does-bitquery-support-grpc-for-chains-other-than-solana}
 

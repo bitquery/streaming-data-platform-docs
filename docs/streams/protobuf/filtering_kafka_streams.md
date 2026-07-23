@@ -1,3 +1,7 @@
+---
+title: "Filtering Kafka Streams for Specific Usecases"
+description: "Filtering Kafka Streams for Specific Usecases with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
+---
 # Filtering Kafka Streams for Specific Usecases
 
 In this section, we will see code examples and patterns for filtering Kafka stream messages based on specific criteria — such as smart contract methods, token addresses, DEX interactions, and more.
@@ -6,10 +10,10 @@ These examples assume you’ve already set up a working Kafka consumer and are s
 
 Refer to specific pages for topic and message related explanation.
 
-- [Solana](https://docs.bitquery.io/docs/streams/protobuf/chains/Solana-protobuf/)
-- [EVM including ETH, BSC, Base etc](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/)
-- [Bitcoin](https://docs.bitquery.io/docs/streams/protobuf/chains/Bitcoin-protobuf/)
-- [Tron](https://docs.bitquery.io/docs/streams/protobuf/chains/Tron-protobuf/)
+- [Solana](/docs/streams/protobuf/chains/Solana-protobuf/)
+- [EVM including ETH, BSC, Base etc](/docs/streams/protobuf/chains/EVM-protobuf/)
+- [Bitcoin](/docs/streams/protobuf/chains/Bitcoin-protobuf/)
+- [Tron](/docs/streams/protobuf/chains/Tron-protobuf/)
 
 ## Filtering for a specific program and method in Solana
 
@@ -76,7 +80,4 @@ def process_message(message):
                 print(f"Transaction Index: {tx.Index}")
                 print("Full Transaction Data:\n")
 ```
-
-
-
 

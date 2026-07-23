@@ -1,6 +1,6 @@
 ---
 title: "Trading Data Overview — Chain-Level Trades vs Trading Cube"
-description: "Bitquery exposes DEX trading data in two ways: raw chain-level trades (DEXTrades / DEXTradeByTokens) and the unified Trading cube (Trading.Trades, Currencies, Tokens, Pairs). Learn the difference and pick the right API."
+description: "Trading Data Overview — Chain-Level Trades vs Trading Cube via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live."
 sidebar_position: 1
 keywords:
   - bitquery trading data
@@ -15,7 +15,6 @@ keywords:
   - crypto price api
   - multi-chain trading api
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # Trading Data Overview — Chain-Level Trades vs Trading Cube
@@ -69,7 +68,7 @@ Chain-level trades are parsed **directly from each blockchain**. Every DEX swap 
 - Custom OHLC intervals not supported by the pre-aggregated cubes.
 - On-chain analytics scoped to a single chain or a specific DEX protocol.
 
-Learn more: [DEX Trades API (EVM)](/docs/evm/dextrades) · [DEXTradeByTokens Cube](/docs/cubes/dextradesbyTokens) · [Crypto Price API vs DEXTradeByTokens](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#crypto-price-api-vs-dextradebytoken).
+Learn more: [DEX Trades API (EVM)](/docs/schema/evm/dextrades) · [DEXTradeByTokens Cube](/docs/cubes/dextradesbyTokens) · [Crypto Price API vs DEXTradeByTokens](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#crypto-price-api-vs-dextradebytoken).
 
 ---
 
@@ -156,7 +155,7 @@ The first two rows answer the question for 80% of users — pick by **how far ba
 | Stream all swaps on 9 chains in **one** subscription | `Trading.Trades` |
 | Build OHLC at a **custom** interval (e.g. 7-second, 4-hour) | `DEXTradeByTokens` (in-query aggregation) |
 | Join trades to the originating **call / instruction / event log** | `EVM.DEXTrades` / `Solana.DEXTrades` |
-| Analyse MEV, sandwich attacks, or raw flow | Chain-level (Trading cube filters these out) |
+| Analyze MEV, sandwich attacks, or raw flow | Chain-level (Trading cube filters these out) |
 | Build wallet-level PnL with USD attribution out-of-the-box | `Trading.Trades` |
 
 :::tip Mixing both layers
@@ -168,7 +167,7 @@ A common pattern is to use the **Trading cube** for the live + 30-day-window tab
 ## Next steps
 
 - **Trading cube docs:** [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api) · [Crypto Price API](/docs/trading/crypto-price-api/introduction) · [Tokens cube](/docs/trading/crypto-price-api/tokens) · [Currencies cube](/docs/trading/crypto-price-api/currency) · [Pairs cube](/docs/trading/crypto-price-api/pairs)
-- **Chain-level trade docs:** [DEX Trades (EVM)](/docs/evm/dextrades) · [DEXTradeByTokens cube](/docs/cubes/dextradesbyTokens) · [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)
+- **Chain-level trade docs:** [DEX Trades (EVM)](/docs/schema/evm/dextrades) · [DEXTradeByTokens cube](/docs/cubes/dextradesbyTokens) · [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)
 - **Price Index internals:** [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm) · [Supply fields reference](/docs/trading/crypto-price-api/supply-fields)
 - **API delivery comparison:** [GraphQL Query vs Subscription vs Kafka](/docs/api-comparison)
 

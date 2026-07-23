@@ -1,6 +1,7 @@
 ---
 title: "Example: Cross-Chain DEX Volume Snapshot"
-description: "Use the Bitquery MCP to compare 24h DEX volume, trades & unique traders across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon & Tron in one query."
+description: "Example: Cross-Chain DEX Volume Snapshot with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
+image: "/img/mcp/charts/cross-chain-volume.svg"
 keywords:
   - cross-chain DEX volume
   - chain comparison MCP
@@ -10,23 +11,6 @@ keywords:
   - Solana vs Ethereum volume
 sidebar_label: "Cross-Chain DEX Snapshot"
 ---
-
-<head>
-  <meta name="title" content="Cross-Chain DEX Volume Snapshot — Bitquery MCP Example"/>
-  <meta name="description" content="Use the Bitquery MCP to compare 24h DEX volume, trades & unique traders across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon & Tron in one query."/>
-  <meta name="robots" content="index, follow"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Cross-Chain DEX Volume Snapshot — Bitquery MCP Example"/>
-  <meta property="og:description" content="One MCP query, eight chains: USD volume, trade count, unique traders, average trade size — see where the DEX action really is."/>
-  <meta property="og:url" content="https://docs.bitquery.io/docs/mcp/trading/examples/cross-chain-snapshot/"/>
-  <meta property="og:image" content="https://docs.bitquery.io/img/mcp/charts/cross-chain-volume.svg"/>
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Cross-Chain DEX Volume Snapshot — Bitquery MCP Example"/>
-  <meta property="twitter:description" content="One MCP query, eight chains: USD volume, trade count, unique traders, average trade size — see where the DEX action really is."/>
-  <meta property="twitter:image" content="https://docs.bitquery.io/img/mcp/charts/cross-chain-volume.svg"/>
-  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/trading/examples/cross-chain-snapshot/"/>
-</head>
-
 # Cross-Chain DEX Volume Snapshot
 
 > **The trader question:** *"Where is the action right now? Which chain is the most liquid, the most active, and has the most distinct traders?"*

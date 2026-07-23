@@ -1,39 +1,40 @@
 ---
 sidebar_position: 2
+title: "Solana DEX Trades API"
+description: "Stream Solana DEX swaps, prices, and OHLC for Raydium, Jupiter, and more using Bitquery GraphQL queries and live streams."
 ---
 import FAQ from "@site/src/components/FAQ";
 
 # Solana DEX Trades API
 
 :::tip Need real-time Solana DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API** (filter with `Pair.Market.Network: Solana`). Use this page when you need **historical Solana data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Solana`). Use this page when you need **historical Solana data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
 :::
 
-
 Bitquery provides Solana DEX trade data through APIs, Streams, and Data Dumps.  
-The GraphQL APIs and subscriptions below are examples of the real-time and historical trade data you can access across [Raydium](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/), [Orca](https://docs.bitquery.io/docs/blockchain/Solana/solana-orca-dex-api/), [Phoenix](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Phoenix-api/), [Meteora](https://docs.bitquery.io/docs/blockchain/Solana/Meteora-DAMM-v2-API/), [Jupiter](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api/), and other Solana-based DEXs.
+The GraphQL APIs and subscriptions below are examples of the real-time and historical trade data you can access across [Raydium](/docs/blockchain/Solana/Solana-Raydium-DEX-API/), [Orca](/docs/blockchain/Solana/solana-orca-dex-api/), [Phoenix](/docs/blockchain/Solana/Solana-Phoenix-api/), [Meteora](/docs/blockchain/Solana/Meteora-DAMM-v2-API/), [Jupiter](/docs/blockchain/Solana/solana-jupiter-api/), and other Solana-based DEXs.
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 If you have questions or need custom data, reach out to [support](https://t.me/Bloxy_info).
 
 Need zero-latency Solana DEX trade data?  
-[Read about our Shred Streams and contact us for a trial ➤](https://docs.bitquery.io/docs/streams/real-time-solana-data/)  
-For gRPC streaming: [Solana gRPC Streams (CoreCast) →](https://docs.bitquery.io/docs/grpc/solana/introduction/)
+[Read about our Shred Streams and contact us for a trial ➤](/docs/streams/real-time-solana-data/)  
+For gRPC streaming: [Solana gRPC Streams (CoreCast) →](/docs/grpc/solana/introduction/)
 
 ## 🔗 Related Solana APIs
 
-- **[Solana Instructions API](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/)** - Track real-time instructions and token creation events
-- **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)** - Monitor wallet balance changes from trades
-- **[Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/)** - Track token transfers and movements
-- **[Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api/)** - Analyze trading fees and transaction costs
-- **[Solana Token Supply API](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/)** - Monitor token supply changes from trading activities
+- **[Solana Instructions API](/docs/blockchain/Solana/solana-instructions/)** - Track real-time instructions and token creation events
+- **[Solana Balance Updates API](/docs/blockchain/Solana/solana-balance-updates/)** - Monitor wallet balance changes from trades
+- **[Solana Transfers API](/docs/blockchain/Solana/solana-transfers/)** - Track token transfers and movements
+- **[Solana Fees API](/docs/blockchain/Solana/solana_fees_api/)** - Analyze trading fees and transaction costs
+- **[Solana Token Supply API](/docs/blockchain/Solana/token-supply-cube/)** - Monitor token supply changes from trading activities
 
 You may also be interested in:
 
-- [PumpSwap APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api/)
-- [Moonshot APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/)
-- [FourMeme APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
+- [PumpSwap APIs ➤](/docs/blockchain/Solana/Pumpfun/pump-swap-api/)
+- [Moonshot APIs ➤](/docs/blockchain/Solana/Moonshot-API/)
+- [FourMeme APIs ➤](/docs/blockchain/BSC/four-meme-api/)
 - [DEXrabbit Categories](https://dexrabbit.bitquery.io/categories) — curated token groups with live multi-chain DEX prices (memes, LSTs, stablecoins, launchpads)
 
 ## How do I get trades made by a specific wallet on a DEX?
@@ -42,42 +43,15 @@ Query `Solana.DEXTrades` (or `DEXTradeByTokens`) with `where` on the wallet as *
 
 ## How do I get historical OHLCV for a Solana token? {#how-do-i-get-historical-ohlcv-for-a-solana-token}
 
-For **OHLC**, use the **[Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)** first (`Trading.Tokens` / `Pairs` with **`Token.Network: solana`**) and [second-level OHLC](#solana-second-level-ohlc-k-line-api) on this page when you want **1-second-style** streams.
+For **OHLC**, use the **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** first (`Trading.Tokens` / `Pairs` with **`Token.Network: solana`**) and [second-level OHLC](#solana-second-level-ohlc-k-line-api) on this page when you want **1-second-style** streams.
 
 For **historical OHLC** from on-chain DEX trades, use **`Solana(dataset: combined)`** or **`Solana(dataset: archive)`** with **`DEXTradeByTokens`**: filter **`Trade.Currency.MintAddress`** (and usually **`Trade.Side.Currency`** for the quote, e.g. WSOL/USDC), set **`Block.Time`** range, and bucket with **`Block { Time(interval: { count, in: minutes | hours | days }) }`**. Compute OHLC with **`PriceInUSD`** / **`Trade_Price`** minima and maxima or **`median`/`quantile`** as in [Solana OHLC API](#solana-ohlc-api).
 
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-<meta name="title" content="Solana DEX Trades API | Get Raydium, Jupiter data"/>
-<meta name="description" content="Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, etc through our DEX Trades API."/>
-<meta name="keywords" content="Solana DEX Trades api,Solana DEX Trades python api,Solana DEX Trades token api,Solana Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,solana network api, solana web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Solana DEX Trades API | Get Raydium, Jupiter data"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, etc through our DEX Trades API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana DEX Trades API | Get Raydium, Jupiter data" />
-<meta property="twitter:description" content="Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, etc through our DEX Trades API." />
-</head>
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -165,7 +139,7 @@ subscription {
 
 ## Subscribe to Latest Solana Trades {#subscribe-to-latest-solana-trades}
 
-This example uses the chain-specific **DEXTrades** cube via `Solana { DEXTrades }` (good for signer/account filters). USD can be thin on some tokens. For swap rows with stronger USD, use the [stream at the top](#crypto-trades-live-stream). Fees: [Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api/).
+This example uses the chain-specific **DEXTrades** cube via `Solana { DEXTrades }` (good for signer/account filters). USD can be thin on some tokens. For swap rows with stronger USD, use the [stream at the top](#crypto-trades-live-stream). Fees: [Solana Fees API](/docs/blockchain/Solana/solana_fees_api/).
 
 You can find the query [here](https://ide.bitquery.io/solana-trades-subscription_3)
 
@@ -399,8 +373,6 @@ query MyQuery {
   }
 }
 
-
-
 ```
 
 </details>
@@ -522,7 +494,6 @@ query MyQuery {
     }
   }
 }
-
 
 ```
 
@@ -1890,10 +1861,10 @@ Get realised PnL, average buy price, buy volume, and sell volume for a token on 
 
 ## Solana Second-level OHLC / K-line API {#solana-second-level-ohlc-k-line-api}
 
-For this we will use the new [Crypto Price APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)
+For this we will use the new [Crypto Price APIs](/docs/trading/crypto-price-api/introduction/)
 
 You can get OHLC data at 1-second intervals via a subscription query, which can then be monitored via a WebSocket.
-Below is an example. You can read more on [quantiles here](https://docs.bitquery.io/docs/graphql/metrics/quantile/)
+Below is an example. You can read more on [quantiles here](/docs/graphql/metrics/quantile/)
 
 Test the subscription query [here](https://ide.bitquery.io/seconds-oHLC-realtime-solana-usd)
 
@@ -2096,7 +2067,7 @@ When querying Solana DEXTradeByTokens, you can use pre-made aggregates to optimi
 
 You want to track or filter DEX trades that interacted with a specific Solana program (e.g., one you deployed or are monitoring).
 
-This query uses the [graphQL joins](https://docs.bitquery.io/docs/graphql/capabilities/joins/) feature to join Solana DEX trades with instructions executed by a specific program address.
+This query uses the [graphQL joins](/docs/graphql/capabilities/joins/) feature to join Solana DEX trades with instructions executed by a specific program address.
 Run this query [here](https://ide.bitquery.io/find-all-trades-interacting-with-a-program)
 
 <details>
@@ -2301,7 +2272,7 @@ query {
 
 ## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
+The queries below use the **[Trades cube](/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
 ### Get All DEX Trades on Solana With Price, Market Cap, and Supply
 

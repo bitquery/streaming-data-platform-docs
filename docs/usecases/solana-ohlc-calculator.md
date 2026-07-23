@@ -1,6 +1,10 @@
+---
+title: "Build Solana OHLC from DEX Trades"
+description: "Calculate Solana OHLC candles from Bitquery DEX trades with JavaScript examples for intervals, pricing, and chart integrations."
+---
 # Build OHLC Values using DEX Trades Data
 
-This script calculates **OHLC (Open, High, Low, Close)** data for a particular Token Pair Solana-based trades by leveraging percentile filtering thus removing anomaly or bot trades. It fetches trading data from the Bitquery API and processes it to compute the OHLC values for a specific trading pair. For pre-aggregated OHLC data, see our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).
+This script calculates **OHLC (Open, High, Low, Close)** data for a particular Token Pair Solana-based trades by leveraging percentile filtering thus removing anomaly or bot trades. It fetches trading data from the Bitquery API and processes it to compute the OHLC values for a specific trading pair. For pre-aggregated OHLC data, see our [Crypto Price API](/docs/trading/crypto-price-api/introduction/).
 
 The sole motive of this tutorial is to guide you how an OHLC is calculated and Bot trades or anomaly trades are filtered out. We have shown one of the by using `quantile`, you can devise your own strategy to use different filters or logics to omit these anomaly trades.
 
@@ -26,7 +30,7 @@ Make sure you have the following before starting:
 
 1. **Node.js** installed on your system.
 2. A **Bitquery API token** to fetch data from the APIs
-   You can get your API token from Bitquery using these steps [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+   You can get your API token from Bitquery using these steps [here](/docs/authorization/how-to-generate/).
 3. Information about the Solana trading pair you want to analyze:
    - **Main Currency Address**: The mint address of the main currency.
    - **Side Currency Address**: The mint address of the side currency.
@@ -44,7 +48,7 @@ Make sure you have the following before starting:
 npm install
 ```
 
-3. Create a `.env` file in the root directory and add your Bitquery API Token, check the steps to get it [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/):
+3. Create a `.env` file in the root directory and add your Bitquery API Token, check the steps to get it [here](/docs/authorization/how-to-generate/):
 
 ```
 AUTH_TOKEN = <YourBitqueryApiToken>

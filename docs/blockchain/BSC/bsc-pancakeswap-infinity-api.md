@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "BSC PancakeSwap Infinity API"
+description: "BSC PancakeSwap Infinity API: query and stream BNB Chain on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # BSC PancakeSwap Infinity API
@@ -10,41 +11,18 @@ Bitquery provides PancakeSwap Infinity (BSC) data through APIs, Streams and Data
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery for PancakeSwap Infinity on Binance Smart Chain (BSC).
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
-Need zero-latency Binance Smart Chain (BSC) data? [Read about our Kafka Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+Need zero-latency Binance Smart Chain (BSC) data? [Read about our Kafka Streams and Contact us for a Trial](/docs/streams/kafka-streaming-concepts/).
 
 You may also be interested in:
 
-- [Four.meme APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
-- [BSC PancakeSwap APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/)
+- [Four.meme APIs ➤](/docs/blockchain/BSC/four-meme-api/)
+- [BSC PancakeSwap APIs ➤](/docs/blockchain/BSC/pancake-swap-api/)
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-  <meta name="title" content="PancakeSwap Infinity API - BSC - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get on-chain data of any PancakeSwap Infinity based token through our PancakeSwap Infinity API."/>
-  <meta name="keywords" content="PancakeSwap Infinity API,PancakeSwap Infinity on-chain data API,PancakeSwap Infinity token data API,BSC blockchain API,PancakeSwap Infinity DEX data API,PancakeSwap Infinity API documentation,PancakeSwap Infinity crypto API,PancakeSwap Infinity web3 API,DEX Trades,BSC,PancakeSwap Infinity,PancakeSwap Infinity memecoins,BSC DEX,PancakeSwap Infinity DEX,token trading,blockchain data,crypto trading"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="PancakeSwap Infinity API - BSC - Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any PancakeSwap Infinity based token through our PancakeSwap Infinity API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="PancakeSwap Infinity API - BSC - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any PancakeSwap Infinity based token through our PancakeSwap Infinity API."/>
-</head>
 
 <VideoPlayer url="https://www.youtube.com/watch?v=nVHdJUdKrJ8" />
 

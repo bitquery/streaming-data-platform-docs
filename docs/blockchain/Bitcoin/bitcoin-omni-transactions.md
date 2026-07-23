@@ -1,7 +1,7 @@
 ---
-title: Bitcoin Omni Layer API - Track USDT on Bitcoin and Other Omni Tokens
+title: "Bitcoin Omni Transactions"
 sidebar_label: Bitcoin Omni Layer API
-description: Query Omni Layer transactions and transfers on Bitcoin with Bitquery GraphQL. Track USDT-on-Bitcoin and other Omni-issued assets with senders, receivers, and fees.
+description: "Bitcoin Omni Transactions: query and stream Bitcoin on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 keywords:
   - Bitcoin Omni Layer API
   - Omni Layer GraphQL
@@ -12,7 +12,6 @@ keywords:
   - Bitcoin GraphQL
   - Bitquery Omni
 ---
-
 # Bitcoin Omni Layer API
 
 The Omni Layer is a protocol built on top of Bitcoin for issuing and trading custom tokens — most famously the original Bitcoin-issued USDT. These APIs return Omni-specific transaction and transfer data so you can track issuance, redemptions, and per-address Omni token activity directly on the Bitcoin chain.
@@ -73,6 +72,6 @@ Filter incoming transfers with `transferTo: {is: "..."}` instead, add a `date` w
 
 ## Related resources
 
-- [Bitcoin Transactions API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-transactions-api) — base-layer Bitcoin transactions
-- [Bitcoin Address API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-address-api) — address balances and activity
-- [Bitcoin Coinpath API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-coinpath-api) — multi-hop BTC fund tracing
+- [Bitcoin Transactions API](/docs/blockchain/Bitcoin/bitcoin-transactions-api) — base-layer Bitcoin transactions
+- [Bitcoin Address API](/docs/blockchain/Bitcoin/bitcoin-address-api) — address balances and activity
+- [Bitcoin Coinpath API](/docs/blockchain/Bitcoin/bitcoin-coinpath-api) — multi-hop BTC fund tracing

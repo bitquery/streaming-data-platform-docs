@@ -1,11 +1,12 @@
 ---
 sidebar_position: 5
+title: "Arbitrum Address Balance API"
+description: "Arbitrum Address Balance API: fetch current and historical Arbitrum balances with Bitquery GraphQL balance queries. Keep queries fast with indexed filters."
 ---
-
 # Arbitrum Address Balance API
 
 :::caution Deprecated APIs
-On EVM, **`BalanceUpdates`** and **`TokenHolders`** are deprecated as of **20 May 2026** and will be removed on **15 June 2026**. Use **`EVM.Balances`** (this page) and **[Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api)** (`EVM.Holders`) instead.
+On EVM, **`BalanceUpdates`** and **`TokenHolders`** were deprecated as of **20 May 2026** and removed on **15 June 2026**. Use **`EVM.Balances`** (this page) and **[Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api)** (`EVM.Holders`) instead.
 :::
 
 The **Balances** API returns current and historical token balances for an address on Arbitrum. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:

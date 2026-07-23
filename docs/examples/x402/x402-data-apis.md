@@ -1,6 +1,6 @@
 ---
-title: "x402 Data API"
-description: "Complete guide to x402 API: Query x402 payment transactions, monitor server payments in real-time, and analyze payment analytics. Learn how to use GraphQL APIs to track x402 protocol payments, server activity, and user transactions across multiple blockchain networks."
+title: "x402 Data APIs"
+description: "X402 Data Apis: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Run it in the IDE, then ship in your app."
 keywords:
   - x402 API
   - x402 GraphQL API
@@ -21,31 +21,13 @@ keywords:
   - smart contract payments
   - payment analytics API
 ---
-
-<head>
-  <meta name="title" content="x402 Data API" />
-  <meta name="description" content="Track x402 protocol payments, monitor server activity in real-time, and analyze payment analytics across multiple blockchain networks using Bitquery's GraphQL API. Learn how to query x402 payment transactions, server payments, and user analytics." />
-  <meta name="keywords" content="x402 API, x402 GraphQL API, x402 payment API, x402 server API, blockchain payment API, x402 analytics, x402 payment tracking, x402 Bazaar, decentralized API payments, pay-per-use API, x402 protocol, multi-chain payment protocol, GraphQL payment queries, x402 server monitoring, real-time payment data" />
-  <meta name="robots" content="index, follow" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="x402 Data API" />
-  <meta property="og:description" content="Use Bitquery's GraphQL API to track x402 protocol payments, monitor server activity in real-time, and analyze payment analytics across multiple blockchain networks. Complete guide to x402 payment queries." />
-
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="x402 Data API - Query x402 Payment Transactions & Server Analytics" />
-  <meta property="twitter:description" content="Track x402 protocol payments and server analytics across multiple blockchain networks using Bitquery's GraphQL API. Real-time payment monitoring and analytics queries." />
-</head>
-
 # x402 Data API Docs - How to Query x402 Payment Data
 
 Learn how to query x402 payment data using GraphQL APIs. This comprehensive guide shows you how to access payment transactions, monitor server activity in real-time, and analyze payment analytics across multiple blockchain networks. The examples in this guide use Base network, but x402 protocol supports multiple chains.
 
 ## What is x402 API?
 
-The x402 API provides programmatic access to x402 protocol payment data through [GraphQL queries](https://docs.bitquery.io/docs/graphql/query). You can query payment transactions, track server activity, monitor real-time payments, and analyze payment analytics directly from the blockchain using [Bitquery's streaming data platform](https://docs.bitquery.io/docs/intro).
+The x402 API provides programmatic access to x402 protocol payment data through [GraphQL queries](/docs/graphql/query). You can query payment transactions, track server activity, monitor real-time payments, and analyze payment analytics directly from the blockchain using [Bitquery's streaming data platform](/docs/intro).
 
 ## x402 Overview
 
@@ -53,15 +35,15 @@ x402 is a decentralized payment protocol that enables pay-per-use API access on 
 
 ## How x402 Works?
 
-x402 operates on a three-party architecture consisting of clients (API consumers), servers (API providers), and facilitators (payment processors). When a client wants to use a paid API service, they initiate a payment transaction on the blockchain. The facilitator validates the payment and notifies the server, which then processes the API request. The server verifies the payment payload embedded in the request headers before delivering the service. This creates a trustless system where payments are verified on-chain before service delivery, ensuring both parties fulfill their obligations without requiring intermediaries. All payment transactions are recorded on the blockchain and can be queried using [GraphQL transfer queries](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) for the respective network.
+x402 operates on a three-party architecture consisting of clients (API consumers), servers (API providers), and facilitators (payment processors). When a client wants to use a paid API service, they initiate a payment transaction on the blockchain. The facilitator validates the payment and notifies the server, which then processes the API request. The server verifies the payment payload embedded in the request headers before delivering the service. This creates a trustless system where payments are verified on-chain before service delivery, ensuring both parties fulfill their obligations without requiring intermediaries. All payment transactions are recorded on the blockchain and can be queried using [GraphQL transfer queries](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) for the respective network.
 
 ## Various Actors in x402
 
 The x402 ecosystem consists of three main actors:
 
-1. **Clients**: Users or applications that consume paid API services. They initiate [payment transactions](https://docs.bitquery.io/docs/blockchain/Ethereum/transactions/transaction-api) and include payment payloads in their API requests.
+1. **Clients**: Users or applications that consume paid API services. They initiate [payment transactions](/docs/blockchain/Ethereum/transactions/transaction-api) and include payment payloads in their API requests.
 
-2. **Servers**: API providers who offer services for payment. They verify payment payloads and deliver services after confirming valid payments on-chain. Server addresses can be tracked using [transfer queries](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api).
+2. **Servers**: API providers who offer services for payment. They verify payment payloads and deliver services after confirming valid payments on-chain. Server addresses can be tracked using [transfer queries](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api).
 
 3. **Facilitators**: Payment processors that validate transactions, monitor the blockchain for payments, and notify servers when valid payments are detected. They help bridge the gap between on-chain payments and off-chain service delivery.
 
@@ -213,21 +195,21 @@ The payment payload typically contains:
 
 ### Verification Process
 
-1. **Client Side**: The client initiates a [payment transaction](https://docs.bitquery.io/docs/blockchain/Ethereum/transactions/transaction-api) on the supported blockchain network, sending supported tokens (such as USDC) to the server's address. The client then encodes the payment details into a Base64 JSON payload.
+1. **Client Side**: The client initiates a [payment transaction](/docs/blockchain/Ethereum/transactions/transaction-api) on the supported blockchain network, sending supported tokens (such as USDC) to the server's address. The client then encodes the payment details into a Base64 JSON payload.
 
 2. **Server Side**: The server receives the API request with the `X-PAYMENT` header. It decodes the payload and verifies the payment by checking:
-   - The transaction exists on-chain (verifiable through [transaction queries](https://docs.bitquery.io/docs/blockchain/Ethereum/transactions/transaction-api))
+   - The transaction exists on-chain (verifiable through [transaction queries](/docs/blockchain/Ethereum/transactions/transaction-api))
    - The payment amount matches the required fee
    - The recipient address matches the server's address
    - The transaction is confirmed and not a double-spend
 
-3. **Facilitator Role**: Facilitators monitor the blockchain for payment transactions using [real-time subscriptions](https://docs.bitquery.io/docs/subscriptions/). When they detect a valid payment to a registered server, they notify the server, enabling faster service delivery without waiting for full blockchain confirmation.
+3. **Facilitator Role**: Facilitators monitor the blockchain for payment transactions using [real-time subscriptions](/docs/category/graphql-subscriptions/). When they detect a valid payment to a registered server, they notify the server, enabling faster service delivery without waiting for full blockchain confirmation.
 
 This architecture ensures that servers only deliver services after verifying valid on-chain payments, creating a trustless pay-per-use system.
 
 ## x402 Data API Queries
 
-The following queries demonstrate how to query x402 payment data using [Bitquery's GraphQL API](https://docs.bitquery.io/docs/graphql/query). These queries help you monitor payments, track server activity, and analyze payment analytics. For more information on building queries, see our [GraphQL query guide](https://docs.bitquery.io/docs/graphql/query) and [filtering documentation](https://docs.bitquery.io/docs/graphql/filters).
+The following queries demonstrate how to query x402 payment data using [Bitquery's GraphQL API](/docs/graphql/query). These queries help you monitor payments, track server activity, and analyze payment analytics. For more information on building queries, see our [GraphQL query guide](/docs/graphql/query) and [filtering documentation](/docs/graphql/filters).
 
 :::note Multi-Chain Support
 x402 protocol supports multiple blockchain networks. The examples below use Base network, but you can adapt these queries for other supported chains by changing the `network` parameter.
@@ -274,11 +256,11 @@ query MyQuery {
 
 ### Query Explanation
 
-- **`dataset: realtime`**: Queries the most recent blockchain data. Learn more about [dataset options](https://docs.bitquery.io/docs/graphql/dataset/options)
-- **`network: base`**: Specifies the network (Base in this example). Change this to query other supported chains (e.g., `network: ethereum`, `network: bsc`). See [supported networks](https://docs.bitquery.io/docs/blockchain/introduction)
-- **`Receiver: {in: [...]}`**: Filters transfers to the specific server address using [GraphQL filters](https://docs.bitquery.io/docs/graphql/filters)
-- **`orderBy: {descending: Block_Number}`**: Returns the most recent payments first. See [sorting documentation](https://docs.bitquery.io/docs/graphql/sorting)
-- **`limit: {count: 100}`**: Retrieves up to 100 payment transactions. Check [query limits](https://docs.bitquery.io/docs/graphql/limits)
+- **`dataset: realtime`**: Queries the most recent blockchain data. Learn more about [dataset options](/docs/graphql/dataset/options)
+- **`network: base`**: Specifies the network (Base in this example). Change this to query other supported chains (e.g., `network: ethereum`, `network: bsc`). See [supported networks](/docs/blockchain/introduction)
+- **`Receiver: {in: [...]}`**: Filters transfers to the specific server address using [GraphQL filters](/docs/graphql/filters)
+- **`orderBy: {descending: Block_Number}`**: Returns the most recent payments first. See [sorting documentation](/docs/graphql/sorting)
+- **`limit: {count: 100}`**: Retrieves up to 100 payment transactions. Check [query limits](/docs/graphql/limits)
 
 ## Real-Time Payment Monitoring with GraphQL WebSockets
 
@@ -311,10 +293,10 @@ subscription {
 
 ### Subscription Explanation
 
-- **`subscription`**: Uses [GraphQL subscription](https://docs.bitquery.io/docs/subscriptions/subscription) for real-time updates
+- **`subscription`**: Uses [GraphQL subscription](/docs/subscriptions/subscription) for real-time updates
 - **`EVM(network: base)`**: Monitors the specified network (Base in this example). Change the network parameter to monitor other supported chains
 - **`Transfers`**: Listens for new transfer events matching the filter
-- The subscription will automatically push new payment transactions as they occur on-chain. Learn more about [real-time subscriptions](https://docs.bitquery.io/docs/subscriptions/)
+- The subscription will automatically push new payment transactions as they occur on-chain. Learn more about [real-time subscriptions](/docs/category/graphql-subscriptions/)
 
 ## Payment Analytics for Specific x402 Server
 
@@ -352,14 +334,14 @@ query MyQuery {
 
 ### Query Explanation
 
-- **`dataset: combined`**: Queries both historical and real-time data. See [dataset options](https://docs.bitquery.io/docs/graphql/dataset/options)
-- **`since_relative: {days_ago: 7}`**: Analyzes the last 7 days of payments using [datetime filters](https://docs.bitquery.io/docs/graphql/datetime)
-- **`Currency: {SmartContract: {is: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"}}`**: Filters for USDC payments (this is the USDC contract address on Base; use the appropriate contract address for other networks). Learn about [token transfer queries](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api)
-- **`sum(of: Transfer_Amount)`**: Calculates total payment volume using [GraphQL metrics](https://docs.bitquery.io/docs/graphql/metrics)
+- **`dataset: combined`**: Queries both historical and real-time data. See [dataset options](/docs/graphql/dataset/options)
+- **`since_relative: {days_ago: 7}`**: Analyzes the last 7 days of payments using [datetime filters](/docs/graphql/datetime)
+- **`Currency: {SmartContract: {is: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"}}`**: Filters for USDC payments (this is the USDC contract address on Base; use the appropriate contract address for other networks). Learn about [token transfer queries](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api)
+- **`sum(of: Transfer_Amount)`**: Calculates total payment volume using [GraphQL metrics](/docs/graphql/metrics)
 - **`sum(of: Transfer_AmountInUSD)`**: Calculates total volume in USD
 - **`count(distinct: Transfer_Sender)`**: Counts unique users who made payments
 - **`count(distinct: Transaction_Hash)`**: Counts total payment transactions
-- **`transactions24h`**: Conditional count for transactions in the last 24 hours using [conditional metrics](https://docs.bitquery.io/docs/graphql/metrics)
+- **`transactions24h`**: Conditional count for transactions in the last 24 hours using [conditional metrics](/docs/graphql/metrics)
 
 ### Analytics Metrics Returned
 
@@ -531,10 +513,10 @@ subscription {
 
 ### Subscription Explanation
 
-- **`subscription`**: Uses [GraphQL subscription](https://docs.bitquery.io/docs/subscriptions/subscription) for real-time updates
+- **`subscription`**: Uses [GraphQL subscription](/docs/subscriptions/subscription) for real-time updates
 - **`Solana`**: Monitors the Solana network
 - **`Transfers`**: Listens for new transfer events matching the filter
-- The subscription will automatically push new payment transactions as they occur on-chain. Learn more about [real-time subscriptions](https://docs.bitquery.io/docs/subscriptions/)
+- The subscription will automatically push new payment transactions as they occur on-chain. Learn more about [real-time subscriptions](/docs/category/graphql-subscriptions/)
 
 ## Payment Analytics for x402 Server on Solana
 
@@ -583,18 +565,18 @@ You can run this query [here](https://ide.bitquery.io/Payment-analytics-related-
 
 ## Related Documentation
 
-- [Blockchain Networks](https://docs.bitquery.io/docs/blockchain/introduction) - Overview of supported blockchain networks
-- [Base Network Documentation](https://docs.bitquery.io/docs/blockchain/Base/) - Complete guide to querying Base blockchain data
-- [Solana Network Documentation](https://docs.bitquery.io/docs/blockchain/Solana/) - Complete guide to querying Solana blockchain data
-- [Ethereum Network Documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/) - Query Ethereum blockchain data
-- [BSC Network Documentation](https://docs.bitquery.io/docs/blockchain/BSC/) - Query BSC blockchain data
-- [GraphQL Query Guide](https://docs.bitquery.io/docs/graphql/query) - Learn how to build GraphQL queries
-- [Real-time Subscriptions](https://docs.bitquery.io/docs/subscriptions/) - Monitor blockchain data in real-time
-- [Transfer API Documentation](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) - Query ERC-20 token transfers
-- [Solana Transfers](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers) - Query Solana token transfers
-- [GraphQL Filters](https://docs.bitquery.io/docs/graphql/filters) - Advanced filtering techniques
-- [GraphQL Metrics](https://docs.bitquery.io/docs/graphql/metrics) - Aggregation and calculation functions
-- [Datetime Queries](https://docs.bitquery.io/docs/graphql/datetime) - Time-based filtering and analysis
-- [Getting Started Guide](https://docs.bitquery.io/docs/start/first-query) - Build your first query
-- [WebSocket Subscriptions](https://docs.bitquery.io/docs/subscriptions/websocket) - Real-time data streaming
+- [Blockchain Networks](/docs/blockchain/introduction) - Overview of supported blockchain networks
+- [Base Network Documentation](/docs/blockchain/Base/) - Complete guide to querying Base blockchain data
+- [Solana Network Documentation](/docs/blockchain/Solana/) - Complete guide to querying Solana blockchain data
+- [Ethereum Network Documentation](/docs/blockchain/Ethereum/) - Query Ethereum blockchain data
+- [BSC Network Documentation](/docs/blockchain/BSC/) - Query BSC blockchain data
+- [GraphQL Query Guide](/docs/graphql/query) - Learn how to build GraphQL queries
+- [Real-time Subscriptions](/docs/category/graphql-subscriptions/) - Monitor blockchain data in real-time
+- [Transfer API Documentation](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) - Query ERC-20 token transfers
+- [Solana Transfers](/docs/blockchain/Solana/solana-transfers) - Query Solana token transfers
+- [GraphQL Filters](/docs/graphql/filters) - Advanced filtering techniques
+- [GraphQL Metrics](/docs/graphql/metrics) - Aggregation and calculation functions
+- [Datetime Queries](/docs/graphql/datetime) - Time-based filtering and analysis
+- [Getting Started Guide](/docs/start/first-query) - Build your first query
+- [WebSocket Subscriptions](/docs/subscriptions/websockets/) - Real-time data streaming
 

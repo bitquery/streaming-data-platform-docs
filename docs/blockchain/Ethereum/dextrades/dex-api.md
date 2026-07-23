@@ -1,20 +1,21 @@
 ---
 sidebar_label: DEX Trades API
+title: "Ethereum DEX Trades API"
+description: "Compare DEXTrades, DEXTradeByTokens, and Trading cubes for Ethereum DEX analytics using Bitquery GraphQL examples. Keep queries fast with indexed filters."
 ---
 import FAQ from "@site/src/components/FAQ";
 
 # DEX API
 
 :::tip Need real-time Ethereum DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Ethereum DEX swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Ethereum DEX data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Ethereum DEX swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Ethereum DEX data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 For **live swaps** with trader, USD prices and mcap on each row, start with the **[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)**. For **historical** work—long lookbacks, archive datasets, pool-level detail, OHLC built from raw trades, and DEX-wide stats—**`DEXTrades`** and **`DEXTradeByTokens`** are usually the better fit; the queries on this page follow that path.
 
-**DEX APIs across chains:** [Solana DEX](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades) (Pump.fun, Raydium, Orca, Jupiter) · [Base DEX](https://docs.bitquery.io/docs/blockchain/Base/base-dextrades) · [BSC DEX](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades) · [Uniswap API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/uniswap-api) · [PancakeSwap API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/pancakeswap-api) · [DEXScreener API](https://docs.bitquery.io/docs/examples/dextrades/DEXScreener/evm_dexscreener)
+**DEX APIs across chains:** [Solana DEX](/docs/blockchain/Solana/solana-dextrades) (Pump.fun, Raydium, Orca, Jupiter) · [Base DEX](/docs/blockchain/Base/base-dextrades) · [BSC DEX](/docs/blockchain/BSC/bsc-dextrades) · [Uniswap API](/docs/blockchain/Ethereum/dextrades/uniswap-api) · [PancakeSwap API](/docs/blockchain/Ethereum/dextrades/pancakeswap-api) · [DEXScreener API](/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener/)
 
 For curated token groups with live multi-chain DEX prices and volume (LSTs, memes, stablecoins, launchpads, and more), browse [DEXrabbit Categories](https://dexrabbit.bitquery.io/categories).
 
@@ -23,7 +24,7 @@ We have two main APIs to get DEX trading data.
 - DEXTrades
 - DEXTradeByTokens
 
-To learn the difference between two APIs, please check [this doc](https://docs.bitquery.io/docs/schema/evm/dextrades/).
+To learn the difference between two APIs, please check [this doc](/docs/schema/evm/dextrades/).
 
 ## Get all the DEXs info on a Ethereum network
 

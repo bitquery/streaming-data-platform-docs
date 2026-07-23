@@ -1,6 +1,10 @@
+---
+title: "Binance Exchange Wallet Monitoring"
+description: "Build Binance Exchange Wallet Monitoring: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
+---
 # Monitoring Withdrawals and Deposits for 1000s of Binance Exchange Wallets
 
-In this guide we will utilize the [Protobuf Kafka streams](docs/streams/protobuf/kafka-protobuf-python.md) provided by Bitquery to monitor withdrawls and deposits for a large number of Binance Exchange Wallets on BSC network.  You can read more about Kafka solution by Bitquery [here](docs/streams/kafka-streaming-concepts.md).
+In this guide we will utilize the [Protobuf Kafka streams](/docs/streams/protobuf/kafka-protobuf-python/) provided by Bitquery to monitor withdrawals and deposits for a large number of Binance Exchange Wallets on BSC network.  You can read more about Kafka solution by Bitquery [here](/docs/streams/kafka-streaming-concepts/).
 
 Checkout the complete [codebase](https://github.com/bitquery/binance-exchange-wallets-monitoring) for any issues in the tutorial.
 
@@ -91,7 +95,7 @@ consumer.subscribe([topic])
 
 ## Creating Set of Binance Exchange Wallets
 
-For the purpose of tutorial we have directly created a set containing a bunch of Binance exchange wallet addresses. When building an enterprise grade solution where the number of wallets are in thousands or millions, the set could be saved in a seperate file. The wallets are stored in a set instead of list due to fast lookup in sets.
+For the purpose of tutorial we have directly created a set containing a bunch of Binance exchange wallet addresses. When building an enterprise grade solution where the number of wallets are in thousands or millions, the set could be saved in a separate file. The wallets are stored in a set instead of list due to fast lookup in sets.
 
 ```python
 wallets = {
@@ -177,4 +181,4 @@ python main.py
 
 ## Final Result
 
-![Final Results of Project](../../static/img/usecases/kafka-examples/result.png)
+![Final Results of Project](/img/usecases/kafka-examples/result.png)

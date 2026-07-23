@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "EVM Builder Terms Explanation"
+description: "EVM Builder Terms Explanation: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
-
 # EVM Builder Terms Explanation
 
 ### Dataset Parameters

@@ -3,20 +3,19 @@ slug: kafka-protobuf-js
 sidebar_position: 4
 sidebar_label: Javascript Tutorial to Setup Solana Kafka Shred Stream
 title: Javascript Tutorial to Setup Solana Kafka Shred Stream
-description: Use Node.js, KafkaJS, LZ4, and bitquery-protobuf-schema to consume Bitquery Solana Kafka protobuf; run js-consumer-example from kafka-streams-examples-usecases.
+description: "Javascript Tutorial to Setup Solana Kafka Shred Stream with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
 ---
-
 # Javascript Tutorial to Setup Solana Kafka Shred Stream
 
 This tutorial explains how to consume **Solana** protobuf messages from **Bitquery Kafka** using **JavaScript** (Node.js **CommonJS** — not a browser bundle), and print them with **`bytes`** fields decoded to **base58** where **`printProtobufMessage`** applies that encoding.
 
-**Streaming concepts:** **[Kafka streaming concepts — Protobuf streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#protobuf-streams)**.
+**Streaming concepts:** **[Kafka streaming concepts — Protobuf streams](/docs/streams/kafka-streaming-concepts/#what-to-know-about-protobuf-streams)**.
 
 **Runnable project:** **[`bitquery/kafka-streams-examples-usecases`](https://github.com/bitquery/kafka-streams-examples-usecases)** — **[`js-consumer-example/`](https://github.com/bitquery/kafka-streams-examples-usecases/tree/main/js-consumer-example)** ([`src/index.js`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/js-consumer-example/src/index.js), [`src/config.js`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/js-consumer-example/src/config.js), [`package.json`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/js-consumer-example/package.json)).
 
 Use **[`bitquery-protobuf-schema npm Package`](https://www.npmjs.com/package/bitquery-protobuf-schema)** so you do **not** hand-manage `.proto` files—the package resolves the schema from **`KAFKA_TOPIC`**.
 
-> **Throughput:** Treat this repo as a **minimal** consumer. Saturating high-volume topics typically requires tuning **KafkaJS** parallelism, **partition-aware** runners, or **multiple consumers under one consumer group**. See **[Kafka streaming concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)** for partition-oriented guidance.
+> **Throughput:** Treat this repo as a **minimal** consumer. Saturating high-volume topics typically requires tuning **KafkaJS** parallelism, **partition-aware** runners, or **multiple consumers under one consumer group**. See **[Kafka streaming concepts](/docs/streams/kafka-streaming-concepts/)** for partition-oriented guidance.
 
 ## Prerequisites
 
@@ -94,7 +93,7 @@ KafkaJS timeouts in code: **`connectionTimeout: 10_000`**, **`requestTimeout: 60
 6. **Compression** — LZ4 codec registered for Kafka compression on the wire.
 7. **Errors** — caught per message where possible; fatal errors exit non-zero.
 
-**TLS:** baseline is **plaintext Kafka** on **9092**. For **`SASL_SSL`**, populate KafkaJS **`ssl`** objects and migrate brokers per **[Kafka streaming concepts — SASL_SSL](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/#ssl-connection-sasl_ssl-)** plus **`js-consumer-example/README.md`**.
+**TLS:** baseline is **plaintext Kafka** on **9092**. For **`SASL_SSL`**, populate KafkaJS **`ssl`** objects and migrate brokers per **[Kafka streaming concepts — SASL_SSL](/docs/streams/kafka-streaming-concepts/#ssl-connection-sasl_ssl-)** plus **`js-consumer-example/README.md`**.
 
 ## Clone and run (quick reference)
 
@@ -127,4 +126,4 @@ npm run start:debug
 ## See also
 
 - **[bitquery-protobuf-schema (npm package)](https://www.npmjs.com/package/bitquery-protobuf-schema)**
-- **[Kafka streaming concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)**
+- **[Kafka streaming concepts](/docs/streams/kafka-streaming-concepts/)**

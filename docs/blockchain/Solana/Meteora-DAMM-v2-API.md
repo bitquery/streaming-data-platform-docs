@@ -1,11 +1,14 @@
+---
+title: "Solana Meteora Damm V2 API"
+description: "Solana Meteora Damm V2 API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Keep queries fast with indexed filters."
+---
 import FAQ from "@site/src/components/FAQ";
 
 # Meteora DAMM v2 API
 
 :::tip Need real-time Meteora DAMM v2 data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Meteora DAMM v2 swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Meteora DAMM v2 data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Meteora DAMM v2 swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Meteora DAMM v2 data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Bitquery provides comprehensive real-time and historical data APIs and Streams for the Solana blockchain, enabling developers and traders to build powerful applications and execute trades based on reliable information from Meteora's Dynamic Automated Market Maker (DAMM) v2.
 
@@ -16,32 +19,6 @@ In this section we will see how to get data on Meteora DAMM v2 trades in real-ti
 :::note
 `Trade Side Account` field will not be available as aggregates in Archive and Combined Datasets
 :::
-
-<head>
-<meta name="title" content="Meteora DAMM v2 API - Monitor Solana Liquidity Pools & Trading Activity"/>
-<meta name="description" content="Access real-time data on Meteora's Dynamic Automated Market Maker (DAMM) v2 on Solana. Use our API to track liquidity pools, trades, and more."/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Meteora DAMM v2 API - Real-Time Solana Liquidity Pools & Trades"
-/>
-<meta
-  property="og:description"
-  content="Get up-to-date information on Meteora's DAMM v2 on Solana. Use our API to monitor liquidity pools and trading activities."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Meteora DAMM v2 API - Monitor Solana Liquidity Pools & Trading Activity" />
-<meta property="twitter:description" content="Access real-time data on Meteora's DAMM v2 on Solana. Use our API to track liquidity pools, trades, and more." />
-</head>
 
 ## Subscribe to Realtime DAMM v2 Trades
 
@@ -362,11 +339,11 @@ query MyQuery {
 
 ## Related Documentation
 
-- [Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/dextrades/)
-- [Solana Token Holders API](https://docs.bitquery.io/docs/blockchain/Solana/token-holders/)
-- [Real-time Solana Data Streams](https://docs.bitquery.io/docs/streams/real-time-solana-data/)
-- [GraphQL Reference](https://docs.bitquery.io/docs/graphql-reference/)
-- [API Authorization](https://docs.bitquery.io/docs/authorisation/how-to-use/)
+- [Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades/)
+- [Solana Token Holders API](/docs/blockchain/Solana/solana-token-holders/)
+- [Real-time Solana Data Streams](/docs/streams/real-time-solana-data/)
+- [Schema overview](/docs/schema/schema-intro/)
+- [API Authorization](/docs/authorization/how-to-use/)
 
 ## Support
 

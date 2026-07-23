@@ -1,20 +1,9 @@
 ---
 title: "Backfill Data After WebSocket Disconnect - Python Tutorial"
-description: "Python tutorial: backfill missing data when WebSocket disconnects. Handle reconnections, query historical gaps, and gracefully close Bitquery streams."
+description: "Backfill Data After WebSocket Disconnect - Python Tutorial using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 sidebar_position: 6
 keywords: ["backfill subscription", "WebSocket disconnection", "Bitquery Python", "GraphQL backfill", "stream reconnection"]
 ---
-
-<head>
-<meta name="title" content="Backfill Data After WebSocket Disconnect - Python Tutorial"/>
-<meta name="description" content="Python tutorial: backfill missing data when WebSocket disconnects. Handle reconnections and query historical gaps."/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Backfill After WebSocket Disconnect - Bitquery"/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Backfill WebSocket Disconnect"/>
-</head>
-
 # How to Backfill Data After a WebSocket Disconnection in Python
 
 In this section, we'll discuss potential approaches to backfill data when stream disconnects. We will write code to receive live data, handles potential errors and disconnections, backfills any missing data during downtime, and ensures a graceful closure of connections. 
@@ -31,7 +20,6 @@ In this tutorial, we'll build a system that:
 ![flow](/img/diagrams/backfill.png)
 
 We'll use Python's `asyncio` for asynchronous operations, the `gql` library for GraphQL interactions, and the `requests` library for HTTP requests.
-
 
 ## Prerequisites
 
@@ -531,7 +519,6 @@ Backfilled Data: {...}  # Historical data fetched to fill the gap
 
 ## Alternative Approach: Using Block Heights to Backfill Data
 You can implement an alternative approach that uses block heights instead of relying on time periods. 
-
 
 1.  **Track the Last Processed Block Height**: Continuously update and save the latest block height received from the live data stream.
 2.  **Detect Disconnections**: Monitor the WebSocket connection for any interruptions.

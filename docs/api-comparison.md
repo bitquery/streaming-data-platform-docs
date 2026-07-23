@@ -1,11 +1,12 @@
 ---
 sidebar_position: 1
+title: "Bitquery API Product Comparison"
+description: "API Comparison: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Great for bots, dashboards, and alerts."
 ---
-
 # API Comparison
 
 :::tip Looking specifically for trading / DEX data?
-This page compares **delivery methods** (GraphQL Query vs Subscription vs Kafka). For the **trading-data product choice** (chain-level `DEXTrades` / `DEXTradeByTokens` vs the curated `Trading` cube), see the dedicated [**Trading Data Overview**](https://docs.bitquery.io/docs/trading/trading-data-overview).
+This page compares **delivery methods** (GraphQL Query vs Subscription vs Kafka). For the **trading-data product choice** (chain-level `DEXTrades` / `DEXTradeByTokens` vs the curated `Trading` cube), see the dedicated [**Trading Data Overview**](/docs/trading/trading-data-overview).
 :::
 
 To choose the right Bitquery API offering, it helps to understand their differences. The table below summarizes key features and capabilities of GraphQL Query vs GraphQL Subscription vs Kafka Streams:
@@ -54,4 +55,4 @@ Pick Queries for flexibility and history, Subscriptions for easy real-time UI fe
 
 ## How do I specify dataset: realtime vs archive in an API v1 query?
 
-This site documents **API V2** GraphQL, where you set **`dataset`** on the root field (for example **`EVM(dataset: archive)`** or **`Solana(dataset: combined)`**)—see [Dataset options](https://docs.bitquery.io/docs/graphql/dataset/options). **API V1** uses a **different endpoint and schema**; realtime/archive semantics are **not** expressed the same way. For V1 query shapes and examples, use **[Bitquery V1 documentation](https://docs.bitquery.io/v1/)** and the [V1 examples catalog](https://docs.bitquery.io/v1/docs/category/examples).
+This site documents **API V2** GraphQL, where you set **`dataset`** on the root field (for example **`EVM(dataset: archive)`** or **`Solana(dataset: combined)`**)—see [Dataset options](/docs/graphql/dataset/options). **API V1** uses a **different endpoint and schema**; realtime/archive semantics are **not** expressed the same way. For V1 query shapes and examples, use **[Bitquery V1 documentation](https://docs.bitquery.io/v1/)** and the [V1 examples catalog](https://docs.bitquery.io/v1/docs/category/examples).

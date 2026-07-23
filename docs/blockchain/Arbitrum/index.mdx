@@ -1,6 +1,6 @@
 ---
 title: Arbitrum API Documentation
-description: Collection of Arbitrum APIs organized by topic including DEX trades, liquidity pools, slippage data, and more.
+description: "Arbitrum API Documentation: query and stream Arbitrum on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
 slug: /blockchain/Arbitrum/
 keywords:
   - Arbitrum API
@@ -17,7 +17,6 @@ keywords:
   - GMX API
   - Arbitrum DEX API
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 Unlock the full potential of Arbitrum with comprehensive blockchain data—from GMX perpetual trading analytics and DEX swaps to liquidity monitoring, slippage analysis, cross-chain bridge monitoring, and smart contract interactions. This complete guide delivers production-ready GraphQL APIs, real-time streaming data, and practical examples for tracking trades, balances, liquidity pools, slippage, events, and more across the Arbitrum ecosystem. Whether you're building DeFi dashboards, trading algorithms, or cross-chain applications, discover all the Arbitrum data solutions you need here.
@@ -27,9 +26,8 @@ Need help crafting a query or subscription? Message us on [support](https://t.me
 ## What is the Bitquery Arbitrum API?
 
 :::tip Building a trading app or DEX UI on Arbitrum?
-For **real-time trades and prices on Arbitrum** (and the last ~30 days), use the curated [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. For **historical Arbitrum data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
+For **real-time trades and prices on Arbitrum** (and the last ~30 days), use the curated [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. For **historical Arbitrum data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
 :::
-
 
 It's a GraphQL interface over curated, indexed Arbitrum data. Write powerful queries instead of building and maintaining your own indexer for the fastest L2 solution.
 
@@ -50,7 +48,7 @@ Track GMX perpetual positions, monitor DEX liquidity, pool reserves, slippage, a
 
 ## WebSockets and Webhooks
 
-Most queries can be turned into live streams by switching `query` to `subscription`, and consumed over WebSocket. See examples and code snippets [here](https://docs.bitquery.io/docs/subscriptions/websockets/).
+Most queries can be turned into live streams by switching `query` to `subscription`, and consumed over WebSocket. See examples and code snippets [here](/docs/subscriptions/websockets/).
 
 ## DEX and Perp APIs
 
@@ -74,7 +72,6 @@ Monitor real-time liquidity changes, track pool reserves, and analyze liquidity 
 
 ## Core Arbitrum APIs
 
-- [Overview](./Overview)
 - [Blocks & Transactions](./Blocks_Transactions)
 - [Smart Contract Calls](./Smart_Contract_Calls)
 - [Smart Contract Events](./Smart_Contract_Events)

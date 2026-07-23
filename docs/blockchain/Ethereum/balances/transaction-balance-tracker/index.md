@@ -1,6 +1,6 @@
 ---
 title: Ethereum Transaction Balance Tracker API
-description: Access comprehensive Ethereum Transaction Balance Tracker APIs for real-time balance updates, validator tracking, miner rewards, MEV analysis, and self-destruct monitoring. GraphQL API with subscriptions.
+description: "Ethereum Transaction Balance Tracker API: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions."
 slug: /blockchain/Ethereum/balances/transaction-balance-tracker/
 keywords:
   - Ethereum Transaction Balance Tracker
@@ -16,7 +16,6 @@ keywords:
   - Ethereum Token Balance API
   - Ethereum NFT Balance API
 ---
-
 # Ethereum Transaction Balance Tracker API - Complete Guide
 
 ## What is Transaction Balance Tracker?
@@ -39,8 +38,8 @@ Our Transaction Balance Tracker APIs track balance changes across different scen
 New to Transaction Balance Tracker? Here's how to get started:
 
 1. **[Create a free account](https://ide.bitquery.io/)** - Get instant access to our GraphQL IDE
-2. **[Generate your API key](https://docs.bitquery.io/docs/authorisation/how-to-generate/)** - Required for API access
-3. **[Run your first query](https://docs.bitquery.io/docs/start/first-query/)** - Learn the basics in 5 minutes
+2. **[Generate your API key](/docs/authorization/how-to-generate/)** - Required for API access
+3. **[Run your first query](/docs/start/first-query/)** - Learn the basics in 5 minutes
 4. **[Explore examples](#ethereum-transaction-balance-tracker-apis)** - Copy-paste ready queries below
 
 Need help crafting a query or subscription? Message us on [support](https://t.me/Bloxy_info).
@@ -61,11 +60,11 @@ Get live Ethereum balance updates through our streaming solutions:
 - **GraphQL Subscriptions**: Convert any query to a live stream by changing `query` to `subscription`
 - **Kafka Streaming**: High-throughput streaming for enterprise applications
 
-See examples and code snippets [here](https://docs.bitquery.io/docs/subscriptions/websockets/) for GraphQL subscription implementation, and learn about [Kafka streaming](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) for high-volume use cases.
+See examples and code snippets [here](/docs/subscriptions/websockets/) for GraphQL subscription implementation, and learn about [Kafka streaming](/docs/streams/kafka-streaming-concepts/) for high-volume use cases.
 
 ## Ethereum Transaction Balance Tracker APIs
 
-### [Ethereum Transaction Balance Tracker](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-transaction-balance-tracker)
+### [Ethereum Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-transaction-balance-tracker)
 
 The core Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the Ethereum network, including detailed information about the reason for each balance change. Track native ETH, ERC-20 tokens, and NFTs with pre/post balances, USD values, and balance change reason codes.
 
@@ -77,7 +76,7 @@ The core Transaction Balance Tracker API provides real-time balance updates for 
 - Track ERC-20, ERC-721, and ERC-1155 tokens
 - Access pre and post balance values
 
-### [Ethereum Transaction Balance Tracker](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-transfer-balance-tracker)
+### [Ethereum Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-transfer-balance-tracker)
 
 Transfer Balance Tracker API provides real-time balance updates for all addresses involved in transfer of Native Currency on the Ethereum network.
 
@@ -87,7 +86,7 @@ Transfer Balance Tracker API provides real-time balance updates for all addresse
 - Filter by specific addresses
 - Access pre and post balance values
 
-### [Ethereum Validator Balance Tracker](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-validator-balance-tracker)
+### [Ethereum Validator Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-validator-balance-tracker)
 
 Track Ethereum validator balances, staking rewards, and withdrawals from the beacon chain. Monitor validator activity including block rewards, withdrawal events, and transaction fee rewards.
 
@@ -99,7 +98,7 @@ Track Ethereum validator balances, staking rewards, and withdrawals from the bea
 - Filter by specific validator addresses
 - Real-time validator balance updates
 
-### [Ethereum Gas Balance Tracker](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-gas-balance-tracker)
+### [Ethereum Gas Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-gas-balance-tracker)
 
 Track Ethereum balance changes for gas burn, unused gas returned for unused gas at the end of execution, and transaction tips.
 
@@ -109,7 +108,7 @@ Track Ethereum balance changes for gas burn, unused gas returned for unused gas 
 - Track gas burnt (Code 6)
 - Track gas returned for unused gas at the end of execution (Code 7)
 
-### [Ethereum Miner Balance Tracker](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-miner-balance-tracker)
+### [Ethereum Miner Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-miner-balance-tracker)
 
 Monitor Ethereum miner balances, mining rewards, uncle block rewards, and transaction fee rewards. Track historical and real-time mining activity across the Ethereum network.
 
@@ -121,7 +120,7 @@ Monitor Ethereum miner balances, mining rewards, uncle block rewards, and transa
 - Filter by specific miner addresses
 - Historical mining reward data
 
-### [Ethereum MEV Balance Tracker](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-mev-balance-tracker)
+### [Ethereum MEV Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-mev-balance-tracker)
 
 Track MEV (Maximal Extractable Value) related balance changes including transaction fee rewards, block builder rewards, and other MEV extraction activities. Monitor MEV bots and block builders in real-time.
 
@@ -133,7 +132,7 @@ Track MEV (Maximal Extractable Value) related balance changes including transact
 - Track large MEV transactions
 - Aggregate MEV reward statistics
 
-### [Ethereum Self-Destruct Balance Tracker](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-self-destruct-balance-api)
+### [Ethereum Self-Destruct Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-self-destruct-balance-api)
 
 Monitor contract self-destruct events, ephemeral contracts (like MEV bots), and security incidents. Track contracts that self-destruct and addresses that receive funds from self-destructed contracts.
 
@@ -145,7 +144,7 @@ Monitor contract self-destruct events, ephemeral contracts (like MEV bots), and 
 - Security incident monitoring
 - Aggregate self-destruct statistics
 
-### [Ethereum Token Balance API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/token-balance-api)
+### [Ethereum Token Balance API](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/token-balance-api)
 
 Track ERC-20 fungible token balances, total supply, and market capitalization for any address on Ethereum. Monitor token holdings, portfolio values, and token balance changes in real-time.
 
@@ -159,7 +158,7 @@ Track ERC-20 fungible token balances, total supply, and market capitalization fo
 - Stream token balance updates in real-time
 - Monitor token balance changes by transaction
 
-### [Ethereum NFT Balance API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/nft-balance-api)
+### [Ethereum NFT Balance API](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/nft-balance-api)
 
 Track ERC-721 and ERC-1155 non-fungible token balances, ownership, and token IDs for any address on Ethereum. Monitor NFT collections, ownership changes, and specific token ownership in real-time.
 

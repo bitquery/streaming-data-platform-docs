@@ -1,9 +1,8 @@
 ---
 title: "Solana DEX Orders - gRPC Stream (CoreCast)"
-description: "Real-time DEX order book data via Solana gRPC. OpenBook, Serum. Filter by program, pool, token."
+description: "Solana DEX Orders - gRPC Stream (CoreCast) for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana DEX orders", "order book"]
 ---
-
 # Solana DEX Orders gRPC Stream
 
 The `dex_orders` gRPC Stream provides real-time DEX order placement and execution data across supported Solana protocols.
@@ -153,7 +152,6 @@ Available filters:
 - **token**: Filter by token mint address (e.g., WSOL, USDC)
 - **trader**: Filter by trader's wallet address
 
-
 ## Order Data Fields
 
 - **OrderId**: Unique identifier for the order
@@ -190,8 +188,8 @@ This package includes all necessary protobuf definitions without requiring manua
 
 ## Related
 
-- [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) — Topics and concepts
-- [DEX Trades gRPC](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades/) — DEX swap stream
-- [Copy Trading Bot](https://docs.bitquery.io/docs/grpc/solana/examples/grpc-copy-trading-bot/) — Uses dex_orders
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorisation/) — Token setup
+- [CoreCast Introduction](/docs/grpc/solana/introduction/) — Topics and concepts
+- [DEX Trades gRPC](/docs/grpc/solana/topics/dextrades/) — DEX swap stream
+- [Copy Trading Bot](/docs/grpc/solana/examples/grpc-copy-trading-bot/) — Uses dex_orders
+- [Authorization](/docs/grpc/solana/authorization/) — Token setup
 

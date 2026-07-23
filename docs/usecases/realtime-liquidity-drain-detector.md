@@ -1,3 +1,7 @@
+---
+title: "Realtime Liquidity Drain Detector"
+description: "Build Realtime Liquidity Drain Detector: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
+---
 # Realtime Liquidity Drain Detector
 
 This guide demonstrates how to build a real-time DeFi security tool that monitors DEX pools to detect liquidity drains using Bitquery's Kafka streams. The tool provides instant alerts when significant liquidity drops are detected in DEX pools, helping protect against potential liquidity drains.
@@ -23,7 +27,7 @@ The Realtime Liquidity Drain Detector is a Python-based security tool that:
 
 1. **Python 3.8+** installed on your system
 2. **Bitquery Kafka Credentials** - Contact sales via [Telegram](https://t.me/Bloxy_info) or fill out the [form](https://bitquery.io/forms/api) for Kafka access
-3. **Bitquery API Token** - Get your API token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+3. **Bitquery API Token** - Get your API token [here](/docs/authorization/how-to-generate/)
 4. Basic understanding of Kafka streams and Python
 
 > **Note:** IDE credentials will not work with Kafka Streams. You need separate Kafka credentials for this tool.
@@ -144,7 +148,7 @@ Kafka streams provide:
 - Ability to read from latest offset without gaps
 - Better scalability with multiple consumers
 
-For detailed information on Kafka streams, refer to the [Kafka Streaming Concepts documentation](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+For detailed information on Kafka streams, refer to the [Kafka Streaming Concepts documentation](/docs/streams/kafka-streaming-concepts/).
 
 ### 2. Data Structures
 
@@ -632,11 +636,11 @@ Before executing large trades:
 
 ## Related Documentation
 
-- [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
-- [EVM Protobuf Kafka Streams](https://docs.bitquery.io/docs/streams/protobuf/chains/EVM-protobuf/)
-- [Ethereum Liquidity API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api)
-- [Ethereum Slippage API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/ethereum-slippage-api)
-- [DEXPools Cube Documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/)
+- [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/)
+- [EVM Protobuf Kafka Streams](/docs/streams/protobuf/chains/EVM-protobuf/)
+- [Ethereum Liquidity API](/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api)
+- [Ethereum Slippage API](/docs/blockchain/Ethereum/dextrades/ethereum-slippage-api)
+- [DEXPools Cube Documentation](/docs/cubes/evm-dexpool/)
 
 ## Important Considerations
 

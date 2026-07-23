@@ -1,3 +1,7 @@
+---
+title: "Building a Basic UI for Balance Tracker"
+description: "Building a Basic UI for Balance Tracker: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
+---
 # Building a Basic UI for Balance Tracker
 
 In this section we will create a simple UI using HTML, CSS and JavaScript to make the real-time Balance Tracker intuitive. For that we will create a HTML file named `index.js` in the same directory.
@@ -8,9 +12,9 @@ In this section we will create a simple UI using HTML, CSS and JavaScript to mak
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Balance Tracker</title>
+    
+    
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -116,6 +120,6 @@ Now we can check the UI and test the project by visiting `localhost:3000`.
 
 This is how the real-time Balance Tracker UI looks. You can enter any wallet address of your choice and track its activities, by tracking its Ethereum Balance changes in real-time.
 
-![Balance Tracker](../../../static/img/real_time_balance_tracker_demo.png)
+![Balance Tracker](/img/real_time_balance_tracker_demo.png)
 
 To avoid redundancy, it updates the balance every 10 seconds.

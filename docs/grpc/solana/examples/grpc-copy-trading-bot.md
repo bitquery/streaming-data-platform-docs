@@ -1,12 +1,11 @@
 ---
 title: "Solana Copy Trading Bot with gRPC Streams"
-description: "Build a copy trading bot using CoreCast gRPC and Jupiter API. Real-time DEX trade streaming on Solana."
+description: "Solana Copy Trading Bot with gRPC Streams for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "copy trading", "CoreCast", "Solana trading bot"]
 ---
-
 # Building Solana Copy Trading Bot with gRPC Streams
 
-A comprehensive guide to building a **high-performance Solana trading bot** that leverages **gRPC streams** for real-time copy trading using [Bitquery CoreCast](https://docs.bitquery.io/docs/grpc/solana/introduction/).
+A comprehensive guide to building a **high-performance Solana trading bot** that leverages **gRPC streams** for real-time copy trading using [Bitquery CoreCast](/docs/grpc/solana/introduction/).
 
 ## Table of Contents
 
@@ -25,7 +24,7 @@ A comprehensive guide to building a **high-performance Solana trading bot** that
 
 The final result of this project would appear as the one given below.
 
-![Copy Bot Demo](../../../../static/img/copy-bot-solana.gif)
+<video controls loop muted playsInline width="100%" src="/img/copy-bot-solana.mp4"></video>
 
 ## Architecture Overview
 
@@ -65,13 +64,13 @@ This **Solana trading bot** implements a streaming architecture for **copy tradi
 └─────────────────────┘
 ```
 
-Learn more about [Bitquery CoreCast architecture](https://docs.bitquery.io/docs/grpc/solana/introduction/).
+Learn more about [Bitquery CoreCast architecture](/docs/grpc/solana/introduction/).
 
 ---
 
 ## Bitquery CoreCast Integration
 
-[Bitquery CoreCast](https://docs.bitquery.io/docs/grpc/solana/introduction/) provides real-time blockchain data streaming via gRPC for **Solana trading bots**.
+[Bitquery CoreCast](/docs/grpc/solana/introduction/) provides real-time blockchain data streaming via gRPC for **Solana trading bots**.
 
 ```javascript
 // index.js - Loading Protocol Buffers
@@ -104,11 +103,11 @@ function initializeClient() {
 }
 ```
 
-Refer to [this document](https://docs.bitquery.io/docs/grpc/solana/authorisation/) for any issues related to authorisation.
+Refer to [this document](/docs/grpc/solana/authorization/) for any issues related to authorization.
 
 ### Creating the Stream
 
-Multiple [Solana stream topics](https://docs.bitquery.io/docs/category/topics/) are available:
+Multiple [Solana stream topics](/docs/category/topics/) are available:
 
 ```javascript
 // index.js - Stream Creation
@@ -306,16 +305,16 @@ stream:
 ```
 
 **Available Stream Types:**
-- `dex_trades` - [DEX trades](https://docs.bitquery.io/docs/grpc/solana/topics/dextrades/)
-- `dex_orders` - [Order book data](https://docs.bitquery.io/docs/grpc/solana/topics/dexorder/)
-- `dex_pools` - [Pool liquidity events](https://docs.bitquery.io/docs/grpc/solana/topics/dexpools/)
-- `transactions` - [All transactions](https://docs.bitquery.io/docs/grpc/solana/topics/transactions/)
-- `transfers` - [Token transfers](https://docs.bitquery.io/docs/grpc/solana/topics/transfer/)
-- `balances` - [Balance updates](https://docs.bitquery.io/docs/grpc/solana/topics/balance/)
+- `dex_trades` - [DEX trades](/docs/grpc/solana/topics/dextrades/)
+- `dex_orders` - [Order book data](/docs/grpc/solana/topics/dexorder/)
+- `dex_pools` - [Pool liquidity events](/docs/grpc/solana/topics/dexpools/)
+- `transactions` - [All transactions](/docs/grpc/solana/topics/transactions/)
+- `transfers` - [Token transfers](/docs/grpc/solana/topics/transfer/)
+- `balances` - [Balance updates](/docs/grpc/solana/topics/balance/)
 
 ### Filters
 
-Use [filtering options](https://docs.bitquery.io/docs/grpc/solana/filters/?utm_source=github&utm_medium=docs&utm_campaign=grpc_copytrading) to target specific trades:
+Use [filtering options](/docs/grpc/solana/topics/dextrades/#filtering-options) to target specific trades:
 
 ```yaml
 # config.yaml
@@ -414,11 +413,11 @@ amountInRaw: (buyAmount / 100).toString()  // 1% of original
 
 ### Bitquery Documentation
 
-- [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction)
-- [Authentication Guidelines](https://docs.bitquery.io/docs/grpc/solana/authorisation/)
-- [Best Practises for gRPC streams](https://docs.bitquery.io/docs/grpc/solana/best_practices/)
-- [Other Examples](https://docs.bitquery.io/docs/category/examples/)
-- [Error Handling](https://docs.bitquery.io/docs/grpc/solana/errors/)
+- [CoreCast Introduction](/docs/grpc/solana/introduction)
+- [Authentication Guidelines](/docs/grpc/solana/authorization/)
+- [Best Practices for gRPC streams](/docs/grpc/solana/best_practices/)
+- [Other Examples](/docs/category/examples/)
+- [Error Handling](/docs/grpc/solana/errors/)
 
 ### External APIs
 

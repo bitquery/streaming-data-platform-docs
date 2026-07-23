@@ -1,6 +1,6 @@
 ---
-title: "Crypto Trades API — Real-Time DEX Trade Streams Across Chains"
-description: "Stream real-time DEX trades with Bitquery Crypto Trades API. Get swap-level price, USD amounts, market cap, FDV & supply on Solana, Ethereum, BSC, Base & Arbitrum via GraphQL subscriptions."
+title: "Crypto Trades API — Real-Time DEX Trade Streams Across"
+description: "Crypto Trades API — Real-Time DEX Trade Streams Across via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
 keywords:
   - crypto trades API
   - real-time DEX trade stream
@@ -18,7 +18,7 @@ import FAQ from "@site/src/components/FAQ";
 # Crypto Trades API — Real-Time DEX Trade Streams
 
 :::tip Which trade API should you use?
-This page covers **`Trading.Trades`** — the curated, multi-chain trade feed for **real-time and the last ~30 days**. For older / historical data (anything beyond ~30 days) drop down to chain-level [`DEXTrades`](https://docs.bitquery.io/docs/cubes/dextrades) or [`DEXTradeByTokens`](https://docs.bitquery.io/docs/cubes/dextradesbyTokens). See the [**Trading Data Overview**](https://docs.bitquery.io/docs/trading/trading-data-overview) for a full side-by-side comparison.
+This page covers **`Trading.Trades`** — the curated, multi-chain trade feed for **real-time and the last ~30 days**. For older / historical data (anything beyond ~30 days) drop down to chain-level [`DEXTrades`](/docs/cubes/dextrades) or [`DEXTradeByTokens`](/docs/cubes/dextradesbyTokens). See the [**Trading Data Overview**](/docs/trading/trading-data-overview) for a full side-by-side comparison.
 :::
 
 > **Bitquery Crypto Trades API** streams **individual swap-level DEX trades** in **real time** across **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, and **Polygon**. Each row includes **price**, **USD amounts**, **market cap**, **FDV**, **supply**, **trader address**, and **transaction metadata** via **GraphQL subscriptions**.

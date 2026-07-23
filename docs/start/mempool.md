@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "Mempool Data API Overview"
+description: "Use Bitquery mempool APIs to watch pending transactions before confirmation across supported chains with GraphQL queries and streams."
 ---
-
 # Getting Mempool Data
 
 In the previous section, we saw how to write a subscription query. Now, let's examine the process of obtaining mempool data.

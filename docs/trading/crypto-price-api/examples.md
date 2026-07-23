@@ -1,3 +1,7 @@
+---
+title: "Quick Start Examples"
+description: "Quick Start Examples via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams. See examples in the Bitquery IDE."
+---
 # Quick Start Examples
 
 ## Real-Time Token Prices in USD on Solana
@@ -330,7 +334,7 @@ This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in t
 Mention the chain/network using the `Token: {Network}` filter.  
 Available values: `Ethereum`, `Solana`, `Base`, `Optimism`, `Opbnb`, `Matic`, `Arbitrum`, `Binance Smart Chain`, `Tron`.
 
-The available duration intervals are listed [here](https://docs.bitquery.io/docs/trading/price-index/introduction/#understanding-intervals).
+The available duration intervals are listed [here](/docs/trading/crypto-price-api/introduction/#understanding-intervals).
 
 In Tokens cube, only `IsQuotedInUsd:true` is supported so you will see OHLC and Price values in USD only.
 

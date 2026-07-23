@@ -1,3 +1,7 @@
+---
+title: "Transfers vs Events vs Calls vs DexTrades"
+description: "Transfers vs Events vs Calls vs DexTrades: practical Bitquery setup guidance with examples for authentication, endpoints, and first queries."
+---
 # Mental Model: Transfers, Events, Calls, and DexTrades
 
 Understanding when to use **Transfers**, **Events**, **Calls**, or **DexTrades** is one of the decisions you'll make when querying blockchain data. This guide explains the conceptual differences and helps you choose the right primitive for your use case.
@@ -8,7 +12,7 @@ Understanding when to use **Transfers**, **Events**, **Calls**, or **DexTrades**
 
 Before writing a query, ask yourself:
 
-1. **Do I need DEX swap/trade data or aggregated price/OHLC data?** → For **real-time + the last ~30 days**, use the curated **`Trading`** cube — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) for swap-level rows or [`Trading.Tokens` / `Pairs` / `Currencies`](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction) for pre-aggregated OHLC. For **historical** data older than ~30 days, use chain-level **`DexTrades`** / **`DexTradesByTokens`**. See the [**Trading Data Overview**](https://docs.bitquery.io/docs/trading/trading-data-overview) for the full decision matrix.
+1. **Do I need DEX swap/trade data or aggregated price/OHLC data?** → For **real-time + the last ~30 days**, use the curated **`Trading`** cube — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) for swap-level rows or [`Trading.Tokens` / `Pairs` / `Currencies`](/docs/trading/crypto-price-api/introduction) for pre-aggregated OHLC. For **historical** data older than ~30 days, use chain-level **`DexTrades`** / **`DexTradesByTokens`**. See the [**Trading Data Overview**](/docs/trading/trading-data-overview) for the full decision matrix.
 2. **Do I need token movements?** → Consider `Transfers` or `Calls`
 3. **Do I need smart contract state changes?** → Consider `Events`
 4. **Do I need function execution details?** → Consider `Calls`
@@ -177,7 +181,7 @@ EVM {
 
 **Trading vs DexTrades:** Use **Trading** when you need **aggregated price/OHLC/volume** for charting or feeds. Use **DexTrades** when you need **individual swaps**, protocol/pool breakdown, or trade-level fields (buyer, seller, tx, block).
 
-Docs: [Crypto Price API (Trading)](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction), [Tokens / Currencies / Pairs](https://docs.bitquery.io/docs/trading/crypto-price-api/tokens), [OHLC & candles](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api).
+Docs: [Crypto Price API (Trading)](/docs/trading/crypto-price-api/introduction), [Tokens / Currencies / Pairs](/docs/trading/crypto-price-api/tokens), [OHLC & candles](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api).
 
 ---
 
@@ -204,16 +208,16 @@ Use the root `EVM(network: eth | bsc | base | ...)` in your query.
 
 Solana does **not** have EVM-style **Events** or **Calls**; use **Instructions** and **Logs** (inside Instructions) for program activity.
 
-Docs: [Solana Builder Terms](https://docs.bitquery.io/docs/cubes/solana), [Solana DEX Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades), [Solana Transfers](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers), [Solana Instructions](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions), [Solana Balance Updates](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates).
+Docs: [Solana Builder Terms](/docs/cubes/solana), [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades), [Solana Transfers](/docs/blockchain/Solana/solana-transfers), [Solana Instructions](/docs/blockchain/Solana/solana-instructions), [Solana Balance Updates](/docs/blockchain/Solana/solana-balance-updates).
 
 ### Tron
 
 - **Transfers** – TRC-20 and native TRX movements. Same idea as EVM Transfers; use `Tron { Transfers(...) }`.
 - **DEXTrades** – DEX swap data (e.g. SunSwap). Same idea as EVM; use `Tron { DEXTrades(...) }`.
 
-Tron’s model is close to EVM (TVM); Transfers and DEXTrades map directly. For logs and contract calls, see the [Tron API docs](https://docs.bitquery.io/docs/blockchain/Tron/).
+Tron’s model is close to EVM (TVM); Transfers and DEXTrades map directly. For logs and contract calls, see the [Tron API docs](/docs/blockchain/Tron/).
 
-Docs: [Tron API](https://docs.bitquery.io/docs/blockchain/Tron/), [Tron DEX Trades](https://docs.bitquery.io/docs/blockchain/Tron/tron-dextrades), [Tron Transfers](https://docs.bitquery.io/docs/blockchain/Tron/tron-transfers).
+Docs: [Tron API](/docs/blockchain/Tron/), [Tron DEX Trades](/docs/blockchain/Tron/tron-dextrades), [Tron Transfers](/docs/blockchain/Tron/tron-transfers).
 
 ### Quick mapping
 
@@ -437,7 +441,7 @@ Bitquery exposes **on-chain** activity (transfers, trades, calls)—not centrali
 Now that you understand the mental model:
 
 **Price / OHLC / charting (all chains):**
-1. **[Crypto Price API (Trading)](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction)** - Pre-aggregated OHLC, SMA, volume; Tokens, Currencies, Pairs cubes
+1. **[Crypto Price API (Trading)](/docs/trading/crypto-price-api/introduction)** - Pre-aggregated OHLC, SMA, volume; Tokens, Currencies, Pairs cubes
 
 **EVM (Ethereum, BSC, Base, etc.):**
 2. **[Explore Transfers API](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api)** - Learn Transfers in detail
@@ -448,15 +452,15 @@ Now that you understand the mental model:
 7. **[Ethereum DEX API](/docs/blockchain/Ethereum/dextrades/dex-api)** - DEX trading examples
 
 **Solana:**
-8. **[Solana Builder Terms](https://docs.bitquery.io/docs/cubes/solana)** - Transfers, DEXTrades, Instructions, BalanceUpdates, DEXOrders
-9. **[Solana DEX Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades)** - DEX swap data
-10. **[Solana Transfers](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers)** - Token movements
-11. **[Solana Instructions](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions)** - Program execution (Calls-like)
+8. **[Solana Builder Terms](/docs/cubes/solana)** - Transfers, DEXTrades, Instructions, BalanceUpdates, DEXOrders
+9. **[Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)** - DEX swap data
+10. **[Solana Transfers](/docs/blockchain/Solana/solana-transfers)** - Token movements
+11. **[Solana Instructions](/docs/blockchain/Solana/solana-instructions)** - Program execution (Calls-like)
 
 **Tron:**
-12. **[Tron API](https://docs.bitquery.io/docs/blockchain/Tron/)** - Overview
-13. **[Tron DEX Trades](https://docs.bitquery.io/docs/blockchain/Tron/tron-dextrades)** - DEX swap data
-14. **[Tron Transfers](https://docs.bitquery.io/docs/blockchain/Tron/tron-transfers)** - Token movements
+12. **[Tron API](/docs/blockchain/Tron/)** - Overview
+13. **[Tron DEX Trades](/docs/blockchain/Tron/tron-dextrades)** - DEX swap data
+14. **[Tron Transfers](/docs/blockchain/Tron/tron-transfers)** - Token movements
 
 **General:**
 15. **[Try Starter Queries](/docs/start/starter-queries)** - See real examples

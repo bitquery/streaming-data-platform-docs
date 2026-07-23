@@ -1,3 +1,7 @@
+---
+title: "Setting up Google Pub-Sub"
+description: "Setting up Google Pub-Sub using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
+---
 # Setting up Google Pub-Sub
 
 This tutorial walks through a process of subscribing to the Bitquery Streaming API and publishing its data to a Google Cloud Pub/Sub topic.
@@ -16,7 +20,6 @@ This tutorial walks through a process of subscribing to the Bitquery Streaming A
 
    - Click on the topic and create a subscription (e.g., `test1d`).
    - Choose Pull or Push, depending on your architecture.
-
 
 3. Service Account Configuration:
    - Create a service account with the role `Pub/Sub Publisher`.
@@ -54,7 +57,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "key.json"
 
 #### Bitquery WebSocket API Details
 
-Configure the WebSocket URL and the query to fetch Pumpfun DEX trades. To learn how to generate a token to use with the url, go [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Configure the WebSocket URL and the query to fetch Pumpfun DEX trades. To learn how to generate a token to use with the url, go [here](/docs/authorization/how-to-generate/)
 
 ```python
 url = "wss://streaming.bitquery.io/eap?token=<YOUR_TOKEN>"

@@ -1,6 +1,6 @@
 ---
 title: "Crypto MarketCap API & Market Data"
-description: "Real-time crypto market cap API by Bitquery: USD market cap, FDV & token supply on Solana, Ethereum & BSC. GraphQL subscriptions, Kafka trading.prices, multi-chain OHLC & DEX examples."
+description: "Crypto MarketCap API & Market Data via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
 keywords:
   - crypto market cap API
   - Crypto Market data
@@ -12,7 +12,6 @@ keywords:
   - Solana Ethereum BSC market cap
   - multi-chain OHLC API
 ---
-
 # Crypto MarketCap API and Market Data
 
 The **Crypto MarketCap API** is part of the Crypto Price APIs: you can **query** USD **market capitalization** and related **supply** fields, or **stream** them in **real time** for many chains using GraphQL **subscriptions** or the **`trading.prices`** Kafka topic described in the [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction).
@@ -225,7 +224,7 @@ This section aggregates commonly used queries for market data across chains, pai
 
 Subscribe to **`Trading.Tokens`** with a **network** and **interval** to stream OHLC, volume, and **`Supply`** (including **MarketCap**) for many tokens on that chain in one feed.
 
-The following stream provide 60 second aggregated data. For information on all available time intervals, see the supported intervals documentation [here](http://localhost:3000/docs/trading/crypto-price-api/introduction/#supported-time-intervals).
+The following stream provide 60 second aggregated data. For information on all available time intervals, see the supported intervals documentation [here](/docs/trading/crypto-price-api/introduction/#supported-time-intervals).
 
 [Run Query](https://ide.bitquery.io/Aggregated-Price-of-all-tokens-in-real-time-on-one-chain_1)
 

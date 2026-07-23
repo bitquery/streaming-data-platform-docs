@@ -1,8 +1,9 @@
 ---
 sidebar_position: 1
 sidebar_label: BullX
+title: "Ethereum EVM Bullx API"
+description: "Ethereum EVM Bullx API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. See examples in the Bitquery IDE."
 ---
-
 # BullX EVM API
 
 This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair, chart and many more just like how BullX shows for EVM Chains.
@@ -48,7 +49,6 @@ query TrendingPairs {
     }
   }
 }
-
 
 ```
 
@@ -98,7 +98,6 @@ subscription{
   }
 }
 
-
 ```
 
 ## Get Price of a Token
@@ -131,7 +130,6 @@ query MyQuery {
   }
 }
 
-
 ```
 
 ## Get Liquidity of a specific pair by using its Pair Address
@@ -154,7 +152,6 @@ query MyQuery {
     }
   }
 }
-
 
 ```
 

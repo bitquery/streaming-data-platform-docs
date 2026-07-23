@@ -1,35 +1,11 @@
 ---
 sidebar_position: 6
+title: "Base Gas Balance Tracker"
+description: "Base Gas Balance Tracker: stream Base balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
-
 # Base Gas Balance Tracker
 
 The Base Gas Balance Tracker API provides real-time balance updates related to Gas Fee activities, including transaction fee rewards, monitoring gas fee spent, and other GAS-related balance changes.
-
-<head>
-<meta name="title" content="Base Gas Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track Base Gas-related balance changes, transaction fee rewards, Gas Fee Spent and GAS Fee returned  using Bitquery's Gas Balance Tracker API."/>
-<meta name="keywords" content="base Gas balance, Gas tracker, Gas balance api, transaction fee rewards, Gas burnt, Gas returned, base Gas api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Base Gas Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to track Base Gas-related balance changes, transaction fee rewards, Gas Fee Spent and Gas Fee returned  using Bitquery's Gas Balance Tracker API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Base Gas Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track Base Gas-related balance changes, transaction fee rewards, Gas Fee Spent and Gas Fee returned  using Bitquery's Gas Balance Tracker API." />
-</head>
 
 ## Get Top Gas Fee Collectors
 
@@ -154,5 +130,4 @@ subscription {
   }
 }
 ```
-
 

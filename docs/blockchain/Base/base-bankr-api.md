@@ -1,23 +1,9 @@
 ---
 sidebar_position: 8
+title: "Base Bankr (Doppler) API"
+description: "Base Bankr (Doppler) API: query and stream Base on-chain data with Bitquery GraphQL examples for developers. Built for traders and analytics teams."
 ---
-
 # Base Bankr (Doppler) API
-
-<head>
-<meta name="title" content="Base Bankr / Doppler API | Track Bankr Tokens, Market Cap, OHLC"/>
-<meta name="description" content="Track every Bankr-launched token on Base in real time. Bitquery exposes launches, Uniswap V4 trades, OHLC, market cap, FDV, and holder activity for tokens deployed via Bankr through the Doppler Protocol."/>
-<meta name="keywords" content="bankr api, bankr base launchpad, doppler protocol api, bankr token tracker, base launchpad, bankr market cap, bankr ohlc, uniswap v4 bankr, doppler multicurve, bankr token api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Base Bankr (Doppler) API | Track Bankr Tokens, Market Cap, OHLC"/>
-<meta property="og:description" content="Real-time market cap, OHLC, and trade data for Bankr-launched tokens on Base."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Base Bankr (Doppler) API | Track Bankr Tokens, Market Cap, OHLC"/>
-<meta property="twitter:description" content="Real-time market cap, OHLC, and trade data for Bankr-launched tokens on Base."/>
-</head>
 
 This page provides a set of queries to track tokens launched by **[Bankr](https://bankr.bot/)** on Base. Bankr deploys tokens using the **[Doppler Protocol](https://docs.doppler.lol/)** (canonical contracts maintained by Whetstone Research). Each token is minted into the Doppler **Airlock** orchestrator, seeded into a **Uniswap V4** multicurve pool via an initializer contract, and traded on V4 from the moment it launches.
 
@@ -32,7 +18,7 @@ For the broader DEX schema, see:
 - [Base Token Market Cap API ➤](/docs/blockchain/Base/base-token-marketcap-api)
 
 :::note
-To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token. Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorisation/how-to-generate/).
+To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token. Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/).
 :::
 
 ## Bankr / Doppler Contract Map (Base)

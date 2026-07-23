@@ -1,6 +1,6 @@
 ---
 title: Balances API Documentation
-description: Collection of Balance APIs on Ethereum organized by functionality.
+description: "Balances API Documentation: fetch current and historical Ethereum balances with Bitquery GraphQL balance queries. Great for bots, dashboards, and alerts."
 slug: /blockchain/Ethereum/balances/
 keywords:
   - Balance API
@@ -11,12 +11,11 @@ keywords:
   - Transaction Balance Tracker
   - Ethereum Balance Data
 ---
-
 # Balances API Documentation
 
 This section covers how to fetch balance-related data on Ethereum via **Bitquery GraphQL APIs** and **Streams**.
 
-To get started, [signup](https://account.bitquery.io/user/account) with Bitquery and get your [Access Token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these](https://docs.bitquery.io/docs/authorisation/how-to-generate/) steps.
+To get started, [signup](https://account.bitquery.io/user/account) with Bitquery and get your [Access Token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these](/docs/authorization/how-to-generate/) steps.
 
 If you need help getting balance data, reach out to [support](https://t.me/Bloxy_info).
 

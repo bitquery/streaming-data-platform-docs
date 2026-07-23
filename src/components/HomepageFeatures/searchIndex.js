@@ -86,7 +86,7 @@ export const SEARCH_INDEX = [
     t: "Balances & holders",
     s: "EVM & Solana holder sets and snapshots",
     g: "Data",
-    u: "/docs/evm/balances/",
+    u: "/docs/schema/evm/balances/",
   },
   {
     t: "Mempool & pending txs",

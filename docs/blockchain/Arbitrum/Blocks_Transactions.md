@@ -1,29 +1,11 @@
 ---
 sidebar_position: 6
+title: "Arbitrum Transactions API"
+description: "Arbitrum Transactions API: query and stream Arbitrum on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
-
 # Arbitrum Transactions API
 
 In this section we'll have a look at some examples using the Arbitrum Transactions API.
-
-<head>
-<meta name="title" content="Arbitrum Transaction API"/>
-<meta name="description" content="The Arbitrum transactions API allows you to query for transactions on the Arbitrum blockchain. You can use this API to get information about specific transactions, such as the signature, block, transaction fee, success, fee payer, inner instructions count, instructions count, signer, and transaction index."/>
-<meta name="keywords" content="Arbitrum transaction api, Arbitrum transaction python api, Arbitrum transaction details api, Arbitrum transactions scan api, Arbitrum transaction api docs, Arbitrum transaction crypto api, transaction blockchain api, Arbitrum network api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="How to get all Transaction details on Arbitrum using Arbitrum Transactions API" />
-<meta property="og:description" content="The Arbitrum transactions API allows you to query for transactions on the Arbitrum blockchain. You can use this API to get information about specific transactions, such as the signature, block, transaction fee, success, fee payer, inner instructions count, instructions count, signer, and transaction index." />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to get all Transaction details on Arbitrum using Arbitrum Transactions API" />
-<meta property="twitter:description" content="The Arbitrum transactions API allows you to query for transactions on the Arbitrum blockchain. You can use this API to get information about specific transactions, such as the signature, block, transaction fee, success, fee payer, inner instructions count, instructions count, signer, and transaction index." />
-</head>
 
 ## Latest Transactions
 
@@ -95,7 +77,6 @@ To retrieve the latest transactions from or to a specific wallet address we will
   }
 }
 
-
 ```
 
 ## Latest Blocks
@@ -117,6 +98,5 @@ query MyQuery {
     }
   }
 }
-
 
 ```

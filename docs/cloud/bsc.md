@@ -1,6 +1,6 @@
 ---
 title: BSC Data - BNB Chain Export for Snowflake, AWS S3, BigQuery
-description: Export BSC (BNB Chain) blockchain data to cloud storage with Parquet datasets optimized for Snowflake, AWS S3, Google BigQuery, and data lakes. Get blocks, transactions, transfers, DEX trades, balance updates, and smart contract data for large-scale analytics.
+description: "BSC Data - BNB Chain Export for Snowflake, AWS S3, BigQuery from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake."
 keywords:
   - BSC blockchain data
   - BNB Chain data export
@@ -48,7 +48,6 @@ keywords:
   - BSC DEX analytics
 sidebar_position: 6
 ---
-
 # BSC Data - BNB Chain
 
 Bitquery provides **BSC (BNB Chain) blockchain data dumps** in **Parquet format**, designed for large-scale analytics, historical backfills, and data lake integrations.
@@ -137,5 +136,5 @@ Cloud data dumps are optimized for **batch analytics and historical workloads**.
 
 If you require **low-latency or streaming BSC data**, Bitquery also provides:
 
--   [**Kafka streams**](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
+-   [**Kafka streams**](/docs/streams/kafka-streaming-concepts/)
 -   **GraphQL subscriptions**

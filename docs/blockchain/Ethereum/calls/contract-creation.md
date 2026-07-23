@@ -1,14 +1,15 @@
 ---
 sidebar_position: 1
+title: "Smart Contract Creation"
+description: "Smart Contract Creation: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
-
 # Smart Contract Creation
 
 Smart contract creators can use these queries to track the deployment of their own smart contracts and to monitor the deployment of new smart contracts by others.
 
 ## Subscription to track new smart contract creation in real-time
 
-This subscription will return information on each new smart contract created on Ethereum. You can create a [websocket](https://docs.bitquery.io/docs/start/websocket/) to monitor the same in real-time.
+This subscription will return information on each new smart contract created on Ethereum. You can create a [websocket](/docs/subscriptions/websockets/) to monitor the same in real-time.
 
 ```
 subscription {

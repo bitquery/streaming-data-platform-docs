@@ -1,7 +1,10 @@
 ---
 sidebar_position: 1
+title: "GraphQL Metrics Overview"
+description: "Metrics in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Built for traders and analytics teams."
+# Keep explicit path so this does not collide with the Metrics category hub slug.
+slug: /graphql/metrics/metrics
 ---
-
 #  Using Metrics
 
 Use metrics if you want to:
@@ -10,16 +13,14 @@ Use metrics if you want to:
 * aggregate the results in a smaller set
 
 Adding metrics make the query aggregate query, and it will return
-results, grouped by dimensions. Look [Query Aggregated Metrics](../capabilities/aggregated_metrics.md)
+results, grouped by dimensions. Look [Query Aggregated Metrics](/docs/graphql/capabilities/aggregated_metrics/)
 for details.
 
 :::tip
-Consider using metrics in every query to the [archive database](../dataset/archive.md)
+Consider using metrics in every query to the [archive database](/docs/graphql/dataset/archive/)
 :::
 
 :::note
-Metrics can be also used in subscriptions, refer to [Subscription on Aggregated Metrics](../capabilities/subscription_aggregates.md) for details.
+Metrics can be also used in subscriptions, refer to [Subscription on Aggregated Metrics](/docs/graphql/capabilities/subscription_aggregates/) for details.
 :::
-
-
 

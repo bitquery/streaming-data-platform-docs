@@ -1,6 +1,6 @@
 ---
-title: "Slippage FAQ: Calculating Necessary Slippage for DEX Swaps Using Bitquery DEXPool Stream"
-description: "FAQ answering developer questions about calculating necessary slippage before executing DEX swaps from smart contracts. Learn how to use Bitquery DEXPool stream data to programmatically determine slippage tolerance instead of guessing or trial-and-error."
+title: "Slippage Faq Using Dexpool Stream"
+description: "Slippage Faq Using Dexpool Stream: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - slippage calculation
   - DEX slippage
@@ -13,7 +13,6 @@ keywords:
   - swapExactTokensForTokens
   - removeLiquidity
 ---
-
 # Slippage FAQ: Calculating Necessary Slippage for DEX Swaps Using Bitquery DEXPool Stream
 
 This FAQ addresses common developer questions about calculating necessary slippage before executing swaps or withdrawing liquidity on DEXs from smart contracts. Instead of guessing or using trial-and-error, you can use Bitquery's DEXPool stream data to programmatically determine the appropriate slippage tolerance.
@@ -544,7 +543,7 @@ Subscribe to DEXPool stream updates for your target pool. When you see `Liquidit
 
 ## Additional Resources
 
-- [DEXPools Cube Documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/) - Complete guide to DEXPool data structure and concepts
+- [DEXPools Cube Documentation](/docs/cubes/evm-dexpool/) - Complete guide to DEXPool data structure and concepts
 - [Bitquery IDE](https://ide.bitquery.io/) - Query DEXPool data in real-time
 - [Kafka Data Samples](https://github.com/bitquery/kafka-data-sample/blob/main/evm/eth_dexpools.json) - Sample DEXPool stream data structure
-- [EVM DEXPool Stream Documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/) - Understanding when DEXPool records are emitted
+- [EVM DEXPool Stream Documentation](/docs/cubes/evm-dexpool/) - Understanding when DEXPool records are emitted

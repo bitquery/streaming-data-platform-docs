@@ -1,6 +1,7 @@
 ---
-title: "Bitquery MCP Server — Blockchain Data for AI Agents"
-description: "Connect Claude, Cursor, ChatGPT to Bitquery's MCP server. Query DEX trades, transfers, OHLC, market cap & wallet data to trace the origin of funds across Solana, Ethereum, BSC, Base in plain English."
+title: "Bitquery MCP Server for AI Agents"
+description: "Connect Claude, Cursor, or ChatGPT to Bitquery MCP to query DEX trades, OHLC prices, and wallet analytics in plain English."
+image: "/img/mcp/charts/wsol-24h-candles.svg"
 keywords:
   - Bitquery MCP
   - Model Context Protocol blockchain
@@ -16,55 +17,11 @@ keywords:
   - blockchain data for AI agents
   - crypto trading MCP server
 ---
-
 import FAQ from "@site/src/components/FAQ";
-
-<head>
-  <meta
-    name="title"
-    content="Bitquery MCP Server — Blockchain Data for AI Agents"
-  />
-  <meta
-    name="description"
-    content="Connect Claude, Cursor, ChatGPT to Bitquery's MCP server. Query DEX trades, transfers, OHLC, market cap & wallet data to trace the origin of funds across Solana, Ethereum, BSC, Base in plain English."
-  />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:type" content="website" />
-  <meta
-    property="og:title"
-    content="Bitquery MCP Server — Blockchain Data for AI Agents"
-  />
-  <meta
-    property="og:description"
-    content="Plug Claude, Cursor, ChatGPT into the Bitquery MCP. Outlier-filtered DEX trades, transfers, OHLC, market cap & wallet data across 8+ chains — trace the origin of funds, no SQL needed."
-  />
-  <meta
-    property="og:url"
-    content="https://docs.bitquery.io/docs/mcp/mcp-server/"
-  />
-  <meta
-    property="og:image"
-    content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"
-  />
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta
-    property="twitter:title"
-    content="Bitquery MCP Server — Blockchain Data for AI Agents"
-  />
-  <meta
-    property="twitter:description"
-    content="Plug Claude, Cursor, ChatGPT into the Bitquery MCP. Outlier-filtered DEX trades, transfers, OHLC, market cap & wallet data across 8+ chains — trace the origin of funds, no SQL needed."
-  />
-  <meta
-    property="twitter:image"
-    content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"
-  />
-  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/mcp-server/" />
-</head>
 
 # Bitquery MCP Server — Blockchain Data for AI Agents
 
-Connect [`https://mcp.bitquery.io`](https://mcp.bitquery.io) to Claude, Cursor, ChatGPT, Claude Code, or any other [MCP](https://modelcontextprotocol.io/)-compatible client and ask Bitquery's blockchain dataset anything in plain English. Get outlier-filtered DEX trades, transfers, OHLC candles, market cap, and wallet history across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron. Trace the origin of funds, track cross-chain movements, and investigate wallet clusters.
+Connect [`https://mcp.bitquery.io`](https://mcp.bitquery.io) to Claude, Cursor, ChatGPT, Claude Code, or any other [MCP](https://modelcontextprotocol.io/)-compatible client and ask Bitquery's blockchain dataset anything in plain English. Get outlier-filtered DEX trades, transfers, OHLC candles, market cap, and wallet history across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Tron, and Robinhood. Trace the origin of funds, track cross-chain movements, and investigate wallet clusters.
 
 |              |                                                                                                                                               |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -227,7 +184,7 @@ OAuth tokens are cached for ~30 days and refreshed automatically — you'll rare
 
 ## Authentication via query token (less secure)
 
-An alternative to OAuth is available on MCP, similar to passing a token in the URL for streaming WebSockets — see [Authenticating WebSockets](/docs/authorisation/websocket/).
+An alternative to OAuth is available on MCP, similar to passing a token in the URL for streaming WebSockets — see [Authenticating WebSockets](/docs/authorization/websocket/).
 
 Append your access token to the server URL as a `token` query parameter, for example:
 
@@ -237,13 +194,13 @@ If your client uses the `/mcp` path (for example with `mcp-remote`), add the que
 
 `https://mcp.bitquery.io/mcp?token=ory_...`
 
-Generate tokens from your [Bitquery account](https://account.bitquery.io/user/api_v2/access_tokens) — same process as in [How to generate API credentials](/docs/authorisation/how-to-generate/).
+Generate tokens from your [Bitquery account](https://account.bitquery.io/user/api_v2/access_tokens) — same process as in [How to generate API credentials](/docs/authorization/how-to-generate/).
 
 This method is **less secure** than the OAuth flow (the token can appear in logs, process lists, and shell history), but it is often a better fit when:
 
 - you run a **fully autonomous agent** with no human in the loop to complete browser sign-in;
 - you **install Claude Code (or another MCP client) on a server** where interactive OAuth is awkward; or
-- the **default ~7 day token TTL** (or OAuth refresh behaviour) is not enough and you need long-lived, explicitly managed credentials.
+- the **default ~7 day token TTL** (or OAuth refresh behavior) is not enough and you need long-lived, explicitly managed credentials.
 
 Prefer OAuth in interactive environments when you can.
 
@@ -309,5 +266,5 @@ See the [worked examples](/docs/mcp/trading/examples/) for end-to-end versions o
 - [Traders API](/docs/trading/crypto-trades-api/traders-api/) — wallet-centric trade analytics.
 - [Price index algorithm](/docs/trading/crypto-price-api/price-index-algorithm/) — how Bitquery's outlier filter and ranking are computed.
 - [How to filter anomaly prices](/docs/usecases/how-to-filter-anomaly-prices/) — practical guide to Bitquery's outlier ranking.
-- [How to generate Bitquery API credentials](/docs/authorisation/how-to-generate/) — for non-MCP clients.
+- [How to generate Bitquery API credentials](/docs/authorization/how-to-generate/) — for non-MCP clients.
 - [Bitquery Account](https://account.bitquery.io/) — sign up / manage plan.

@@ -1,43 +1,17 @@
 ---
 sidebar_position: 2
+title: "Solana DEX Pools API"
+description: "Solana DEX Pools API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
 ---
 import FAQ from "@site/src/components/FAQ";
 
 # Solana DEX Pools API
 
 :::tip Need real-time Solana DEX pool data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Solana DEX pool swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Solana DEX pool data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Solana DEX pool swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Solana DEX pool data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-
 In this section we will see how to get Solana DEX Pools information using our API.
-
-<head>
-<meta name="title" content="Solana DEX Pools API | Get Liquidity Data of the Pools"/>
-<meta name="description" content="Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, Phoenix etc through our DEX Pools API."/>
-<meta name="keywords" content="Solana DEX Pools api,Solana DEX Pools python api,Solana DEX Pools token api,Solana Dex NFT api, DEX Trades scan api, DEX Pools api, DEX Pools api docs, DEX Pools crypto api, DEX Pools blockchain api,solana network api, solana web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Solana DEX Pools API | Get Liquidity Data of the Pools"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, Phoenix etc through our DEX Pools API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana DEX Pools API | Get Liquidity Data of the Pools" />
-<meta property="twitter:description" content="Get on-chain data of liquidity pools and trading pairs from any Solana based DEX like Raydium, Jupiter, Phoenix etc through our DEX Pools API." />
-</head>
 
 ## Get all Liquidity Pools updates on Solana
 

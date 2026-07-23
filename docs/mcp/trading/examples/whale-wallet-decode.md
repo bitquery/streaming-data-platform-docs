@@ -1,6 +1,7 @@
 ---
 title: "Example: Decode a Whale Wallet's 24h Activity"
-description: "Use the Bitquery MCP to break down any wallet's 24h DEX trading: tokens touched, buy vs sell volume, and behavioural signature in one query."
+description: "Example: Decode a Whale Wallet's 24h Activity with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
+image: "/img/mcp/charts/whale-portfolio.svg"
 keywords:
   - whale wallet tracker
   - trader analytics MCP
@@ -11,23 +12,6 @@ keywords:
   - Bitquery MCP example
 sidebar_label: "Decode a Whale Wallet"
 ---
-
-<head>
-  <meta name="title" content="Decode a Whale Wallet's 24h Activity — Bitquery MCP Example"/>
-  <meta name="description" content="Use the Bitquery MCP to break down any wallet's 24h DEX trading: tokens touched, buy vs sell volume, and behavioural signature in one query."/>
-  <meta name="robots" content="index, follow"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Decode a Whale Wallet's 24h Activity"/>
-  <meta property="og:description" content="Spot bots vs humans, find directional whales worth copying, audit a token's smart money — all from one prompt to your AI agent through the Bitquery MCP."/>
-  <meta property="og:url" content="https://docs.bitquery.io/docs/mcp/trading/examples/whale-wallet-decode/"/>
-  <meta property="og:image" content="https://docs.bitquery.io/img/mcp/charts/whale-portfolio.svg"/>
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Decode a Whale Wallet's 24h Activity"/>
-  <meta property="twitter:description" content="Spot bots vs humans, find directional whales worth copying, audit a token's smart money — all from one prompt to your AI agent through the Bitquery MCP."/>
-  <meta property="twitter:image" content="https://docs.bitquery.io/img/mcp/charts/whale-portfolio.svg"/>
-  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/trading/examples/whale-wallet-decode/"/>
-</head>
-
 # Decode a Whale Wallet's 24h Activity
 
 > **The trader question:** *"Who is `MfDuWeqS…` and what are they doing? Are they accumulating, distributing, or making markets?"*

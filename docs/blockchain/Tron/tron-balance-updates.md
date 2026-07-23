@@ -1,12 +1,14 @@
 ---
 sidebar_position: 1
+title: "Tron Address Balance API"
+description: "Tron Address Balance API: fetch current and historical Tron balances with Bitquery GraphQL balance queries. Run it in the IDE, then ship in your app."
 ---
 import FAQ from "@site/src/components/FAQ";
 
 # Tron Address Balance API
 
 :::caution Deprecated API
-`Tron.BalanceUpdates` is deprecated as of **18 June 2026** and will be removed on **18 July 2026**. Use **`Tron.Balances`** (this page) instead.
+`Tron.BalanceUpdates` was deprecated as of **18 June 2026** and removed on **18 July 2026**. Use **`Tron.Balances`** (this page) instead.
 :::
 
 The **Balances** API returns current and historical token balances for an address on Tron. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
@@ -15,33 +17,6 @@ The **Balances** API returns current and historical token balances for an addres
 | -------------- | ------------------------------------------------------------------------------------------- |
 | **`combined`** | Latest balances. Queries **realtime and archive** databases and merges results.             |
 | **`archive`**  | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
-
-<head>
-<meta name="title" content="How to get Tron Balance Updates of an address"/>
-<meta name="description" content="Learn how to get real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API."/>
-<meta name="keywords" content="balance api, balance updates api, balance updates python api, Tron Balance python api, NFT balance api, Balance scan api, Balance api docs, Tron Balance crypto api, balance blockchain api,Tron network api, Tron web3 api, tronscan api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to get Tron Balance & Balance Updates of an address"
-/>
-<meta
-  property="og:description"
-  content="Learn how to get historical & real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to get Tron Balance Updates of an address" />
-<meta property="twitter:description" content="Learn how to get real time balance & balance updates of a Tron address using Bitquery's Tron Balance Updates API." />
-</head>
 
 ## Portfolio of a Tron Wallet
 
@@ -323,7 +298,7 @@ query TopTokenHolders {
 
 ## Deprecated: BalanceUpdates Queries
 
-The examples below use the deprecated **`Tron.BalanceUpdates`** API. Migrate to **`Tron.Balances`** and **`Tron.Holders`** (sections above) before **18 July 2026**.
+The examples below use the deprecated **`Tron.BalanceUpdates`** API. Migrate to **`Tron.Balances`** and **`Tron.Holders`** (sections above) — **`Tron.BalanceUpdates`** is no longer available.
 
 ### Balance of an Address on Tron
 

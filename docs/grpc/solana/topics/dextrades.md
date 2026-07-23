@@ -1,9 +1,8 @@
 ---
 title: "Solana DEX Trades - gRPC Stream (CoreCast)"
-description: "Real-time DEX trade data via Solana gRPC. Pump.fun, Raydium, Orca. Protobuf, filter by program, pool, token, trader."
+description: "Solana DEX Trades - gRPC Stream (CoreCast) for Bitquery Solana gRPC (CoreCast), covering setup, filters, reliability, and stream examples."
 keywords: ["solana grpc", "grpc solana", "CoreCast", "Solana DEX stream", "dex trades"]
 ---
-
 # Solana DEX Trades gRPC Stream
 
 The `dex_trades` gRPC Stream provides real-time DEX trade/swap data across supported Solana protocols (Pump.fun, Raydium, Orca, Jupiter, and more).
@@ -17,7 +16,6 @@ Subscribe to live DEX swaps with context-aware filtering. Each event includes tr
 :::note Filters required
 At least one filter per subscription. See [Filtering Options](#filtering-options).
 :::
-
 
 ## Configuration
 
@@ -157,8 +155,8 @@ This package includes all necessary protobuf definitions without requiring manua
 
 ## Related
 
-- [CoreCast Introduction](https://docs.bitquery.io/docs/grpc/solana/introduction/) — Topics and concepts
-- [Pump.fun gRPC Example](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/) — Full Pump.fun app
-- [Copy Trading Bot](https://docs.bitquery.io/docs/grpc/solana/examples/grpc-copy-trading-bot/) — Solana copy trading
-- [Solana DEX Trades (GraphQL)](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades) — WebSocket subscriptions
-- [Authorization](https://docs.bitquery.io/docs/grpc/solana/authorisation/) — Token setup
+- [CoreCast Introduction](/docs/grpc/solana/introduction/) — Topics and concepts
+- [Pump.fun gRPC Example](/docs/grpc/solana/examples/pump-fun-grpc-streams/) — Full Pump.fun app
+- [Copy Trading Bot](/docs/grpc/solana/examples/grpc-copy-trading-bot/) — Solana copy trading
+- [Solana DEX Trades (GraphQL)](/docs/blockchain/Solana/solana-dextrades) — WebSocket subscriptions
+- [Authorization](/docs/grpc/solana/authorization/) — Token setup

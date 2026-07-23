@@ -1,7 +1,7 @@
 ---
 title: PumpFun API Documentation
-description: Collection of Bitquery's PumpFun APIs on Solana, organized by functionality — trades, prices, OHLCV, bonding curve, market cap, and PumpSwap migration data.
-slug: /blockchain/Solana/PumpFun/
+description: "PumpFun API Documentation: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Great for bots, dashboards, and alerts."
+slug: /blockchain/Solana/Pumpfun/
 keywords:
   - PumpFun API
   - Pump Fun Solana API
@@ -14,14 +14,13 @@ keywords:
   - Best PumpFun API
   - PumpFun token data API
 ---
-
 :::tip Need real-time Pump.fun data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Pump.fun and PumpSwap swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Pre-aggregated 1-second OHLC is available via [`Trading.Tokens`](https://docs.bitquery.io/docs/trading/crypto-price-api/tokens) and [`Trading.Pairs`](https://docs.bitquery.io/docs/trading/crypto-price-api/pairs). Use the Pump.fun pages below when you need **historical data older than ~30 days**, bonding-curve internals, or raw on-chain detail.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Pump.fun and PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Pre-aggregated 1-second OHLC is available via [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) and [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs). Use the Pump.fun pages below when you need **historical data older than ~30 days**, bonding-curve internals, or raw on-chain detail.
 :::
 
 In this section, we will see how to fetch PumpFun-related data via **Bitquery APIs** and **Streams**.
 
-To get started, [sign up](https://account.bitquery.io/auth/signup?redirect_to=https%3A%2F%2Fide.bitquery.io%2F) with Bitquery and generate your [access token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these steps](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+To get started, [sign up](https://account.bitquery.io/auth/signup?redirect_to=https%3A%2F%2Fide.bitquery.io%2F) with Bitquery and generate your [access token](https://account.bitquery.io/user/api_v2/access_tokens) by following [these steps](/docs/authorization/how-to-generate/).
 
 If you need help getting data on PumpFun, reach out to [support](https://t.me/Bloxy_info).
 
@@ -71,29 +70,29 @@ The Bitquery PumpFun APIs are based on GraphQL and are highly flexible. You can 
 - **Data & Protocol**: Provides fully managed Kafka topics—`solana.dextrades.proto`, `solana.tokens.proto`, and `solana.transactions.proto`—delivering pre-parsed, enriched Protocol-Buffers events (DEX trades, token transfers, supply/balance updates, instructions, blocks, etc.).
 - **Infra & Maintenance**: Enterprise-grade, auto-scaling Kafka streams with sub-second latency, schema-based filtering, instruction-level balance updates, built-in replication/failover—no node ops or custom parsing needed.
 
-Read more [here](https://docs.bitquery.io/docs/streams/real-time-solana-data/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
+Read more [here](/docs/streams/real-time-solana-data/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
 
 ## Does Bitquery support PumpFun WebSockets and Webhooks?
 
-Yes — Bitquery supports both WebSockets and webhooks. You can convert most of the GraphQL APIs into **GraphQL streams** by changing `query` to `subscription` and monitor the data over a WebSocket. More information and [code samples are available here](https://docs.bitquery.io/docs/subscriptions/websockets/).
+Yes — Bitquery supports both WebSockets and webhooks. You can convert most of the GraphQL APIs into **GraphQL streams** by changing `query` to `subscription` and monitor the data over a WebSocket. More information and [code samples are available here](/docs/subscriptions/websockets/).
 
 ## PumpFun APIs
 
-- [Pump Fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API)
-- [Pump Swap API](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api)
-- [Marketcap Bonding Curve API](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-Marketcap-Bonding-Curve-API)
-- [Pump Fun to Pump Swap](https://docs.bitquery.io/docs/blockchain/Solana/pump-fun-to-pump-swap)
+- [Pump Fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
+- [Pump Swap API](/docs/blockchain/Solana/Pumpfun/pump-swap-api/)
+- [Marketcap Bonding Curve API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-Marketcap-Bonding-Curve-API/)
+- [Pump Fun to Pump Swap](/docs/blockchain/Solana/Pumpfun/pump-fun-to-pump-swap/)
 
 ## Related Solana APIs
 
-- [Solana Dex Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades)
-- [Solana Transactions](https://docs.bitquery.io/docs/blockchain/Solana/solana-transactions)
-- [Solana Transfers](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers)
-- [Solana Balance Updates](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates)
-- [Solana Instructions](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions)
-- [Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api)
+- [Solana Dex Trades](/docs/blockchain/Solana/solana-dextrades)
+- [Solana Transactions](/docs/blockchain/Solana/solana-transactions)
+- [Solana Transfers](/docs/blockchain/Solana/solana-transfers)
+- [Solana Balance Updates](/docs/blockchain/Solana/solana-balance-updates)
+- [Solana Instructions](/docs/blockchain/Solana/solana-instructions)
+- [Solana Fees API](/docs/blockchain/Solana/solana_fees_api)
 
-- [Building an AI Trading Agent on Solana](https://docs.bitquery.io/docs/blockchain/Solana/ai-agent-solana-data)
+- [Building an AI Trading Agent on Solana](/docs/blockchain/Solana/ai-agent-solana-data)
 
 ## Videos
 

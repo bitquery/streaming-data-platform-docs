@@ -1,7 +1,8 @@
 ---
 sidebar_label: Uniswap v4 Pool Liquidity
+title: "Uniswap v4 Liquidity on Ethereum"
+description: "Uniswap v4 Liquidity on Ethereum: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams."
 ---
-
 # Uniswap v4 Liquidity on Ethereum
 
 Uniswap **v4** changes **where** liquidity lives and **how** you identify a “pool.” This page explains that mechanism, contrasts it with earlier versions, and shows how **Bitquery** lets you read **one concrete pool’s** liquidity for a token pair using **`PoolId`**—something that is awkward or misleading if you only filter by **token addresses** or a **single factory contract**.
@@ -417,6 +418,6 @@ query MyQuery {
 
 ## Related documentation
 
-- [Uniswap v4 DEX Trades API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/uniswap-v4-api/) — trades, `PoolId` filters, pair stats  
-- [Ethereum Liquidity API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/) — more `DEXPoolEvents` patterns, including Uniswap v4 subscription examples  
-- [DEXPools cube](https://docs.bitquery.io/docs/cubes/evm-dexpool/) — field semantics and event types  
+- [Uniswap v4 DEX Trades API](/docs/blockchain/Ethereum/dextrades/uniswap-v4-api/) — trades, `PoolId` filters, pair stats  
+- [Ethereum Liquidity API](/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api/) — more `DEXPoolEvents` patterns, including Uniswap v4 subscription examples  
+- [DEXPools cube](/docs/cubes/evm-dexpool/) — field semantics and event types  

@@ -1,35 +1,11 @@
 ---
 sidebar_position: 6
+title: "Ethereum Gas Balance Tracker"
+description: "Ethereum Gas Balance Tracker: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
-
 # Ethereum Gas Balance Tracker
 
 The Ethereum Gas Balance Tracker API provides real-time balance updates related to Gas Fee activities, including transaction fee rewards, monitoring gas fee spent, and other Gas-related balance changes.
-
-<head>
-<meta name="title" content="Ethereum Gas Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track Ethereum Gas-related balance changes, transaction fee rewards, Gas Fee Spent and GAS Fee returned  using Bitquery's Gas Balance Tracker API."/>
-<meta name="keywords" content="ethereum Gas balance, Gas tracker, Gas balance api, transaction fee rewards, Gas burnt, Gas returned, ethereum Gas api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Ethereum Gas Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to track Ethereum Gas-related balance changes, transaction fee rewards, Gas Fee Spent and Gas Fee returned  using Bitquery's Gas Balance Tracker API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum Gas Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track Ethereum Gas-related balance changes, transaction fee rewards, Gas Fee Spent and GAS Fee returned  using Bitquery's Gas Balance Tracker API." />
-</head>
 
 ## Get Top Gas Fee Collectors
 

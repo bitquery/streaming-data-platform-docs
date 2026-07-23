@@ -1,6 +1,6 @@
 ---
-title: Blockchain Data Lake - Full Archive Streaming, Faster Than a Node
-description: Bitquery's Blockchain Data Lake stores the complete chain archive, every block from genesis to tip, as structured protobuf files in SeaweedFS. Stream the full history over an S3 interface at 1–10 Gbps network bandwidth (depending on server), far faster than syncing or querying your own archive node.
+title: "Blockchain Data Lake"
+description: "Blockchain Data Lake: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Covers archive history and realtime data."
 keywords:
   - Blockchain data lake
   - Full archive blockchain data
@@ -18,7 +18,6 @@ keywords:
   - Web3 data lake
 sidebar_position: 1
 ---
-
 # Blockchain Data Lake
 
 The Bitquery **Blockchain Data Lake** gives you the complete archive of a blockchain. It holds every block from **genesis to the current tip** as structured data that you can stream directly into your own systems. You get the full node dataset without running a node, so there is no syncing, no RPC rate limits, and no indexing infrastructure to operate.
@@ -244,7 +243,7 @@ for tx in block.Transactions:
         ...
 ```
 
-This gives you full control. You decide how to turn raw logs and traces into transfers, swaps, or anything else, by decoding them against the relevant contract ABIs. For a worked example, see [Extract transfers from a block](./extract-transfers.md).
+This gives you full control. You decide how to turn raw logs and traces into transfers, swaps, or anything else, by decoding them against the relevant contract ABIs. For a worked example, see [Extract transfers from a block](./extract-transfers/).
 
 ### Use Bitquery's protobuf files
 
@@ -268,6 +267,6 @@ So you bring the block, our protobuf files describe it, and you parse out transa
 
 ## Related documentation
 
-- [Data in Cloud](https://docs.bitquery.io/docs/cloud/) covers curated, ready-to-use Parquet data dumps for analytics and warehousing.
-- [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) covers real-time blockchain data streams that use the same protobuf schema.
+- [Data in Cloud](/docs/cloud/) covers curated, ready-to-use Parquet data dumps for analytics and warehousing.
+- [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/) covers real-time blockchain data streams that use the same protobuf schema.
 - [streaming_protobuf](https://github.com/bitquery/streaming_protobuf) is the block schema.

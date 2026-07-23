@@ -1,20 +1,9 @@
 ---
 title: "GraphQL Query Principles - Bitquery API Schema & Data"
-description: "Learn how to query blockchain data with GraphQL. Schema definition, query vs subscription, dataset options, and Bitquery API structure."
+description: "GraphQL Query Principles - Bitquery API Schema & Data in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 sidebar_position: 0
 keywords: ["GraphQL query", "Bitquery GraphQL", "blockchain GraphQL", "Bitquery schema", "GraphQL API"]
 ---
-
-<head>
-<meta name="title" content="GraphQL Query Principles - Bitquery API Schema & Data"/>
-<meta name="description" content="Learn how to query blockchain data with GraphQL. Schema, query vs subscription, dataset options."/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="GraphQL Query Principles - Bitquery"/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="GraphQL Query Principles"/>
-</head>
-
 # Query Principles
 
 You query the data using [GraphQL](https://graphql.org/) language. Basically it
@@ -35,7 +24,7 @@ see it full. You only need a portion of it related to your needs typically.
 Query is used to query the data. When you need to get updated results, you must query the
 endpoint again with the same or another query. 
 
-Subscription is used to get data updates. You define a [subscription](/docs/subscriptions/subscription.md), 
+Subscription is used to get data updates. You define a [subscription](/docs/subscriptions/subscription/), 
 and after the new data appear, it will be delivered to you without any actions from your side.
 
 This defines the cases, when to use one or another:
@@ -43,8 +32,7 @@ This defines the cases, when to use one or another:
 * use queries when you need data once, or the data not likely changed during its usage period
 * use subscriptions for the "live" data, or when data may be changed while using it
 
-
-Good news, that queries and [subscriptions](/docs/subscriptions/subscription.md) use identical schemas, except some attributes of the top
+Good news, that queries and [subscriptions](/docs/subscriptions/subscription/) use identical schemas, except some attributes of the top
 element, to define the [dataset](/docs/graphql/dataset/options) usage. It allows your applications to 
 switch between pull and push modes of operation with a minimal changes of the code
 and queries.
@@ -54,7 +42,7 @@ Compare the code in [the first query](/docs/start/first-query) and
 
 This section describes principles that applies to subscriptions
 as well as to queries. We will show examples for queries, but remember that they applied to
-[subscriptions](/docs/subscriptions/subscription.md) as well.
+[subscriptions](/docs/subscriptions/subscription/) as well.
 
 ## Default filters (GraphQL v2)
 
@@ -69,7 +57,7 @@ By default, **only successful data** is included in results. GraphQL v2 applies 
 
 To get failed or non-default data, add an explicit filter. For example, to query **failed DEX trades**, you must explicitly filter for them (e.g. [Failed trades example](https://ide.bitquery.io/Failed-trades)).
 
-For default **limits** (query and subscription), see [Limits](/docs/graphql/limits.md) and [Subscription default parameters](/docs/subscriptions/subscription.md#default-parameters-graphql-v2).
+For default **limits** (query and subscription), see [Limits](/docs/graphql/limits/) and [Subscription default parameters](/docs/subscriptions/subscription/#default-parameters-graphql-v2).
 
 ## Query Elements
 
@@ -106,14 +94,12 @@ Refer to the [dataset](/docs/graphql/dataset/options) documentation for possible
 By selecting the top element ``` EVM ``` we completely define what we can query below this element.
 Apparently, Bitcoin and Ethereum have different schema and data, so we can not query them exactly the same way.
 
-
 ### Cube Element
 
 ```Blocks(limit: {count: 10})``` is what we call "Cube", particulary because we
 use [OLAP](https://wikipedia.org/wiki/OLAP) methodology, applying
 [metrics](/docs/graphql/metrics). Cube defines what kind of facts we want to query, in this case
 we interested in blocks. Cubes are generally different for different types of blockchains.
-
 
 ### Dimension Element
 
@@ -146,8 +132,6 @@ block **date** __AND__ by transaction **hash**:
       }
 ```
 
-
-
 ### Metric Element
 
 ```count``` is a [metric](/docs/graphql/metrics). It is optional, defines "what we want to measure".
@@ -175,8 +159,6 @@ Block {
 
 Refer to the [metric](/docs/graphql/metrics/) tutorial for more details how you can use them.
 
-
-
 ### Attributes
 
 ```limit: {count: 10}``` is an attribute, defining [limit](/docs/graphql/limits) on the data result size.
@@ -187,7 +169,6 @@ There are several types of attributes, described in the sections:
 * [ordering](/docs/graphql/sorting)
 * [filters](/docs/graphql/filters)
 * [calculations](/docs/graphql/calculations)
-
 
 ### Correctness
 

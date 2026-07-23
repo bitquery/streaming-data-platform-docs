@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Share Bitquery IDE Queries"
+description: "Share Bitquery IDE Queries in Bitquery docs with practical setup steps, examples, and guidance for secure API access. See examples in the Bitquery IDE."
 ---
-
 # Share Query
 
 In the IDE you can share your queries, this way you can allow other people to see and use your query. To do this you will have to select the `Shared to everyone` checkbox and then press the `Save` button.

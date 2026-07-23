@@ -1,6 +1,10 @@
+---
+title: "Creating a Heatmap for Ethereum Token Holders using Python"
+description: "Build Creating a Heatmap for Ethereum Token Holders using Python: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application."
+---
 # Creating a Heatmap for Ethereum Token Holders using Python
 
-In this tutorial we will see how to visualize top token holders in a heatmap using the [Token Holder APIs](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api/) with Python.
+In this tutorial we will see how to visualize top token holders in a heatmap using the [Token Holder APIs](/docs/blockchain/Ethereum/token-holders/token-holder-api/) with Python.
 
 1. **Import libraries**: Necessary Python libraries are imported including `requests` for making HTTP requests, `json` for parsing JSON data, `pandas` for data manipulation and analysis, `seaborn` and `matplotlib` for data visualization.
 
@@ -23,7 +27,7 @@ In this tutorial we will see how to visualize top token holders in a heatmap usi
    }
    ```
 
-3. **Create the payload**: The payload consists of a GraphQL query that fetches the top 50 token holders of a specific Bitfinex LEO Token (`0x2af5d2ad76741191d15dfe7bf6ac92d4bd912ca3`) on a specific date. You can read more about Token Holder APIs [here](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api/)
+3. **Create the payload**: The payload consists of a GraphQL query that fetches the top 50 token holders of a specific Bitfinex LEO Token (`0x2af5d2ad76741191d15dfe7bf6ac92d4bd912ca3`) on a specific date. You can read more about Token Holder APIs [here](/docs/blockchain/Ethereum/token-holders/token-holder-api/)
 
    ```python
    payload = json.dumps({

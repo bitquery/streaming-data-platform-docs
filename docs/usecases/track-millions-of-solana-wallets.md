@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Track Millions Of Solana Wallets"
+description: "Build Track Millions Of Solana Wallets: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
-
 # How to efficiently track millions of Solana Wallets Balance with Bitquery Kafka Streams
 
 Accurate, real-time wallet balance data is mission-critical for crypto businesses. Whether it's exchanges and custodians monitoring incoming deposits, DeFi protocols watching collateral positions, or analytics platforms tracking whale movements—speed matters. Just a few milliseconds can mean the difference between a successful liquidation or a costly missed opportunity.
@@ -20,7 +21,7 @@ But tracking wallet balances on Solana is uniquely challenging. As a high-throug
 Traditionally, teams rely on Remote Procedure Call (RPC) polling to query wallet balances. But as your tracking scales, that model breaks down—wasting resources, increasing latency, and burning through RPC limits.
 For a deeper dive into this problem space, check out our post on [Scalable Balance Tracking for Custodians: A Better Alternative to Node-Based Approaches](https://www.linkedin.com/pulse/scalable-balance-tracking-custodians-better-alternative-node-based-wiyuc).
 In this article, we’ll walk through a practical implementation of scalable Solana wallet balance tracking using Bitquery’s Kafka Streams. We'll share code examples, design insights, and explain how Kafka helps you stream balance changes in real time—without hammering RPC nodes.
-If you're new to Kafka, start with [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) on Bitquery to get a basic understanding before diving in.
+If you're new to Kafka, start with [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/) on Bitquery to get a basic understanding before diving in.
 
 import VideoPlayer from "../../src/components/videoplayer.js";
 

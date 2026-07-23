@@ -1,6 +1,7 @@
 ---
 title: "Example: Build an OHLC Candle Chart for Any Token"
-description: "Use the Bitquery MCP to pull real-time hourly OHLC + volume for any token on any supported chain — feed it into TradingView or your bot."
+description: "Example: Build an OHLC Candle Chart for Any Token with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
+image: "/img/mcp/charts/wsol-24h-candles.svg"
 keywords:
   - OHLC chart MCP
   - candlestick chart Solana
@@ -11,23 +12,6 @@ keywords:
   - Bitquery MCP example
 sidebar_label: "OHLC Candle Chart"
 ---
-
-<head>
-  <meta name="title" content="Build an OHLC Candle Chart for Any Token — Bitquery MCP"/>
-  <meta name="description" content="Use the Bitquery MCP to pull real-time hourly OHLC + volume for any token on any supported chain — feed it into TradingView or your bot."/>
-  <meta name="robots" content="index, follow"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Build an OHLC Candle Chart for Any Token — Bitquery MCP"/>
-  <meta property="og:description" content="One prompt to your AI agent returns 1-minute, 5-minute, hourly, or daily candles for any token on Solana, Ethereum, BSC, Base, and more."/>
-  <meta property="og:url" content="https://docs.bitquery.io/docs/mcp/trading/examples/token-ohlc-chart/"/>
-  <meta property="og:image" content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"/>
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Build an OHLC Candle Chart for Any Token — Bitquery MCP"/>
-  <meta property="twitter:description" content="One prompt to your AI agent returns 1-minute, 5-minute, hourly, or daily candles for any token on Solana, Ethereum, BSC, Base, and more."/>
-  <meta property="twitter:image" content="https://docs.bitquery.io/img/mcp/charts/wsol-24h-candles.svg"/>
-  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/trading/examples/token-ohlc-chart/"/>
-</head>
-
 # Build an OHLC Candle Chart for Any Token
 
 > **The trader question:** *"Give me the last 24 hours of price action for WSOL so I can eyeball the trend."*

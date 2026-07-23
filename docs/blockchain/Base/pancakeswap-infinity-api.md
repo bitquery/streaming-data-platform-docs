@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Base PancakeSwap Infinity API"
+description: "Base PancakeSwap Infinity API: query and stream Base on-chain data with Bitquery GraphQL examples for developers. Built for traders and analytics teams."
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Base PancakeSwap Infinity API
@@ -10,41 +11,18 @@ Bitquery provides PancakeSwap Infinity (Base) data through APIs, Streams and Dat
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery for PancakeSwap Infinity on Base.
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
-Need zero-latency Base data? [Read about our Kafka Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+Need zero-latency Base data? [Read about our Kafka Streams and Contact us for a Trial](/docs/streams/kafka-streaming-concepts/).
 
 You may also be interested in:
 
-- [Clanker APIs ➤](https://docs.bitquery.io/docs/examples/Base/base-clanker-api/)
-- [Base DEX Trade APIs ➤](https://docs.bitquery.io/docs/examples/Base/base-dextrades/)
+- [Clanker APIs ➤](/docs/blockchain/Base/base-clanker-api/)
+- [Base DEX Trade APIs ➤](/docs/blockchain/Base/base-dextrades/)
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-  <meta name="title" content="PancakeSwap Infinity API - Base - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get on-chain data of any PancakeSwap Infinity based token through our PancakeSwap Infinity API."/>
-  <meta name="keywords" content="PancakeSwap Infinity API,PancakeSwap Infinity on-chain data API,PancakeSwap Infinity token data API,Base blockchain API,PancakeSwap Infinity DEX data API,PancakeSwap Infinity API documentation,PancakeSwap Infinity crypto API,PancakeSwap Infinity web3 API,DEX Trades,Base,PancakeSwap Infinity,PancakeSwap Infinity memecoins,Base DEX,PancakeSwap Infinity DEX,token trading,blockchain data,crypto trading"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="PancakeSwap Infinity API - Base - Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any PancakeSwap Infinity based token through our PancakeSwap Infinity API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="PancakeSwap Infinity API - Base - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any PancakeSwap Infinity based token through our PancakeSwap Infinity API."/>
-</head>
 
 ## Get Latest Trades on PancakeSwap Infinity
 

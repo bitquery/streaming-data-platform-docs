@@ -1,6 +1,6 @@
 ---
-title: "GMGN Solana API | Trending Tokens, Pair Stats, Live DEX Trades"
-description: "GMGN-style Solana data via Bitquery: trending tokens, top pairs, buy/sell volume and makers, live pair trades, OHLC charts, and volume leaders—GraphQL queries and WebSocket streams for Raydium and Solana DEXs."
+title: "GMGN Solana API | Trending Tokens"
+description: "GMGN Solana API | Trending Tokens: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 keywords:
   - GMGN Solana API
   - Solana DEX screener API
@@ -20,9 +20,8 @@ import FAQ from "@site/src/components/FAQ";
 # GMGN Solana API
 
 :::tip Need real-time GMGN-style trader data or anything from the last ~30 days?
-For **real-time trader and wallet data over the last ~30 days** across **8 chains in one API**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical GMGN-style trader data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time trader and wallet data over the last ~30 days** across **9 chains in one API**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical GMGN-style trader data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Replicate **GMGN**-style **Solana** analytics with Bitquery: **trending tokens**, **top DEX pairs**, **aggregate stats** (buys, sells, buy/sell volume, makers, buyers, sellers), **live trades per pair**, **OHLC** for charts, **volume by token**, and **top traded pairs**. Uses **`DEXTradeByTokens`** and **`Solana`** GraphQL—some patterns work as **queries** only when they rely on heavy aggregates (see notes below).
 
@@ -31,19 +30,6 @@ Replicate **GMGN**-style **Solana** analytics with Bitquery: **trending tokens**
 :::
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
-
-<head>
-<meta name="title" content="GMGN Solana API | Trending Tokens & DEX Pair Stats | Bitquery"/>
-<meta name="description" content="GMGN-style Solana data: trending tokens, top pairs, buy/sell volume, makers, live trades, OHLC. Bitquery GraphQL and streams for Raydium & Solana DEXs."/>
-<meta name="keywords" content="GMGN Solana API, Solana DEX API, trending tokens Solana, Raydium API, buy sell volume, DEXTradeByTokens, Solana OHLC, top pairs, Bitquery"/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="GMGN Solana API | Bitquery"/>
-<meta property="og:description" content="Trending tokens, pair stats, live DEX trades, and OHLC for Solana—GMGN-style via Bitquery."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="GMGN Solana API | Bitquery"/>
-<meta property="twitter:description" content="Trending tokens, pair stats, live DEX trades, and OHLC for Solana via Bitquery."/>
-</head>
 
 ## Related APIs
 

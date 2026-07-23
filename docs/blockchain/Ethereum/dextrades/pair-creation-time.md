@@ -1,8 +1,9 @@
 ---
 sidebar_position: 4
 sidebar_label: Pair Creation Time
+title: "Pair Creation Time API"
+description: "Pair Creation Time API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. See examples in the Bitquery IDE."
 ---
-
 # Pair Creation Time API
 
 ## Pair Creation Time for a Specific Pair

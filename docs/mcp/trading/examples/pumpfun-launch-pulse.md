@@ -1,6 +1,7 @@
 ---
 title: "Example: Pump.fun Launch Pulse — Tokens Launched per Hour"
-description: "Use the Bitquery MCP to track new Pump.fun token launches hour by hour. Spot launchpad waves, fade exhaustion & quantify the meta of the moment."
+description: "Example: Pump.fun Launch Pulse — Tokens Launched per Hour with Bitquery MCP for AI tools like Claude and Cursor to analyze on-chain data in plain English."
+image: "/img/mcp/charts/pumpfun-launches-hourly.svg"
 keywords:
   - Pump.fun launches per hour
   - new memecoin tracker
@@ -11,23 +12,6 @@ keywords:
   - Bitquery MCP example
 sidebar_label: "Pump.fun Launch Pulse"
 ---
-
-<head>
-  <meta name="title" content="Pump.fun Launch Pulse — New Tokens per Hour (Bitquery MCP)"/>
-  <meta name="description" content="Use the Bitquery MCP to track new Pump.fun token launches hour by hour. Spot launchpad waves, fade exhaustion & quantify the meta of the moment."/>
-  <meta name="robots" content="index, follow"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Pump.fun Launch Pulse — New Tokens per Hour"/>
-  <meta property="og:description" content="36-hour view of new-token creation on Pump.fun — diurnal cycles, frenzy hours, meta cooldowns, and how to apply the same lens to LetsBonk, FourMeme, and other launchpads."/>
-  <meta property="og:url" content="https://docs.bitquery.io/docs/mcp/trading/examples/pumpfun-launch-pulse/"/>
-  <meta property="og:image" content="https://docs.bitquery.io/img/mcp/charts/pumpfun-launches-hourly.svg"/>
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Pump.fun Launch Pulse — New Tokens per Hour"/>
-  <meta property="twitter:description" content="36-hour view of new-token creation on Pump.fun — diurnal cycles, frenzy hours, meta cooldowns, and how to apply the same lens to LetsBonk, FourMeme, and other launchpads."/>
-  <meta property="twitter:image" content="https://docs.bitquery.io/img/mcp/charts/pumpfun-launches-hourly.svg"/>
-  <link rel="canonical" href="https://docs.bitquery.io/docs/mcp/trading/examples/pumpfun-launch-pulse/"/>
-</head>
-
 # Pump.fun Launch Pulse — New Tokens per Hour
 
 > **The trader question:** *"Is launchpad activity heating up or cooling down? When are people actually deploying tokens?"*

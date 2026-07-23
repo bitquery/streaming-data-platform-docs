@@ -1,35 +1,11 @@
 ---
 sidebar_position: 4
+title: "Ethereum MEV Balance Tracker"
+description: "Ethereum MEV Balance Tracker: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
-
 # Ethereum MEV Balance Tracker
 
 The Ethereum MEV (Maximal Extractable Value) Balance Tracker API provides real-time balance updates related to MEV activities, including transaction fee rewards, block builder rewards, and other MEV-related balance changes.
-
-<head>
-<meta name="title" content="Ethereum MEV Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track Ethereum MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery's MEV Balance Tracker API."/>
-<meta name="keywords" content="ethereum mev balance, mev tracker, mev balance api, transaction fee rewards, block builder rewards, mev extraction, ethereum mev api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Ethereum MEV Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to track Ethereum MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery's MEV Balance Tracker API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum MEV Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track Ethereum MEV-related balance changes, transaction fee rewards, and block builder rewards using Bitquery's MEV Balance Tracker API." />
-</head>
 
 ## Track MEV-Boost Relay Transaction Balances
 

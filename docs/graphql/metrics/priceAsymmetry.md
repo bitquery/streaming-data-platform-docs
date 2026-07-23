@@ -1,3 +1,7 @@
+---
+title: "GraphQL Price Asymmetry Metric"
+description: "Price Asymmetry in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Keep queries fast with indexed filters."
+---
 # Price Asymmetry
 
 In this section, we will see how to use the `PriceAsymmetry` metric to filter results based on Price.
@@ -74,6 +78,5 @@ subscription {
     }
   }
 }
-
 
 ```

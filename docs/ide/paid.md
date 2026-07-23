@@ -1,7 +1,8 @@
 ---
 sidebar_position: 12
+title: "Bitquery IDE Paid Plans"
+description: "Bitquery IDE Paid Plans in Bitquery docs with practical setup steps, examples, and guidance for secure API access. Keep queries fast with indexed filters."
 ---
-
 # Upgrade to Bitquery Paid Plan
 
 You are now in full control of your plan. You can upgrade yourself from your account — no sales call required — or contact sales for custom/Enterprise volumes.

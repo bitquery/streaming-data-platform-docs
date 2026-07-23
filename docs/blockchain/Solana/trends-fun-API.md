@@ -1,46 +1,26 @@
+---
+title: "Trends.Fun API - Solana - New Tokens, Trades, Live Prices"
+description: "Trends.Fun API - Solana - New Tokens, Trades, Live Prices: query and stream Solana on-chain data with Bitquery GraphQL examples for developers."
+---
 # Trends.Fun API - Solana - New Tokens, Trades, Live Prices
 
 :::tip Need real-time Trends.fun data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Trends.fun data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Trends.fun data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-In this page, we will explore several examples related to Trends.fun. You can also check out our [Pump Fun API Docs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) and [Jupiter Studio API Docs](https://docs.bitquery.io/docs/blockchain/Solana/jupiter-studio-api/).
+In this page, we will explore several examples related to Trends.fun. You can also check out our [Pump Fun API Docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [Jupiter Studio API Docs](/docs/blockchain/Solana/jupiter-studio-api/).
 
 :::note
 **Trends.fun tokens are created and traded on Meteora Dynamic Bonding Curve (DBC).**
 :::
 
-Need zero-latency Trends.fun data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+Need zero-latency Trends.fun data? [Read about our Shred Streams and Contact us for a Trial](/docs/streams/real-time-solana-data/).
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-<title>Trends.Fun API - Solana - New Tokens, Trades, Live Prices</title>
-  <meta name="title" content="Trends.Fun API - Solana - New Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our Trends.fun API."/>
-  <meta name="keywords" content="Trends.fun API,Trends.fun on-chain data API,Trends.fun token data API,Trends.fun blockchain API,Trends.fun DEX data API,Trends.fun API documentation,Trends.fun crypto API,Trends.fun web3 API,DEX Trades,Solana,Trends.fun memecoins,Solana DEX,token trading,blockchain data,crypto trading,Meteora DBC API"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Trends.Fun API - Solana - New Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get real time prices, charts, marketcap, liquidity, ATH, Trades and other trading related data using our Trends.fun API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Trends.Fun API - Solana - New Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any Trends.fun based token through our Trends.fun API."/>
-</head>
 
 If you want fastest data without any latency, we can provide gRPC and Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 
@@ -714,6 +694,6 @@ Get all tokens created by a specific Trends.fun developer/creator address.
 
 ### Additional Resources
 
-- Need ultra-low latency Trends.fun data? Check out our [Kafka Streaming Services](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
-- Explore more Solana APIs: [Solana Documentation ➤](https://docs.bitquery.io/docs/blockchain/Solana/)
+- Need ultra-low latency Trends.fun data? Check out our [Kafka Streaming Services](/docs/streams/kafka-streaming-concepts/)
+- Explore more Solana APIs: [Solana Documentation ➤](/docs/blockchain/Solana/)
 - For technical support, join our [Telegram](https://t.me/Bloxy_info)

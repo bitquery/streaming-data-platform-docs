@@ -1,7 +1,8 @@
 ---
 sidebar_position: 9
+title: "GraphQL Uniq Metric"
+description: "Count unique addresses, tokens, or traders with Bitquery’s uniq metric inside GraphQL aggregate blockchain queries. Keep queries fast with indexed filters."
 ---
-
 # Uniq
 
 The `uniq` function is used to estimate the count of unique values in a dataset. It's particularly useful for analyzing large datasets where an exact count may not be necessary or where performance is a concern. Below is an example query using the `uniq` function within the context of EVM TokenHolders API to get the number of unique token holders for a specific token on a given date.
@@ -22,7 +23,6 @@ The `uniq` function is used to estimate the count of unique values in a dataset.
     }
   }
 }
-
 
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: "Robinhood Token Supply API"
-description: "Get the latest total supply of a token, stream real-time supply updates, and fetch supply for all active tokens on Robinhood with Bitquery's EVM TransactionBalances API."
+description: "Robinhood Token Supply API: stream Robinhood market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs. See examples in the Bitquery IDE."
 sidebar_position: 5
 keywords:
   - Robinhood token supply API
@@ -13,7 +13,6 @@ keywords:
   - Bitquery Robinhood supply API
   - Robinhood token circulating supply
 ---
-
 # Robinhood Token Supply API
 
 Get **token total supply** on the **Robinhood** network with Bitquery's `EVM.TransactionBalances` API. This guide covers the **latest supply of a token**, a **real-time supply stream**, and the **supply of all active tokens**.
@@ -21,7 +20,7 @@ Get **token total supply** on the **Robinhood** network with Bitquery's `EVM.Tra
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
 
-Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorisation/how-to-generate/)
+Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 :::tip Related docs

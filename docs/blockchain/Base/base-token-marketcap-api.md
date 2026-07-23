@@ -1,27 +1,13 @@
 ---
 sidebar_position: 10
+title: "Base Token Market Cap API"
+description: "Base Token Market Cap API: stream Base market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs. Includes filters and field selection tips."
 ---
-
 # Base Token Market Cap API
 
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens traded on **Base**. Filter Base assets with token/currency **`Id`** values such as **`base:`** plus a **lowercase** contract address.
 
 For schema details and field meanings, see the **[Tokens cube](/docs/trading/crypto-price-api/tokens)** and **[Supply fields](/docs/trading/crypto-price-api/supply-fields)**.
-
-<head>
-<meta name="title" content="Base Token Market Cap API | Trading Tokens"/>
-<meta name="description" content="Stream and query Base chain token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API."/>
-<meta name="keywords" content="base token market cap, base chain erc20 market cap, base token api, bitquery trading tokens base, base fdv api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Base Token Market Cap API"/>
-<meta property="og:description" content="Real-time streams and queries for Base token market cap, supply, and price via Trading.Tokens."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Base Token Market Cap API"/>
-<meta property="twitter:description" content="Real-time streams and queries for Base token market cap, supply, and price via Trading.Tokens."/>
-</head>
 
 :::note Trading API and EVM addresses
 On **Base** (EVM), the **Trading** API expects **lowercase** hex in **`Id`** values (e.g. `base:0x1f1c…`, not mixed-case checksum addresses).

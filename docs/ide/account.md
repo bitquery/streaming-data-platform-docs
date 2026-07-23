@@ -1,7 +1,8 @@
 ---
 sidebar_position: 11
+title: "Bitquery IDE Account Settings"
+description: "Bitquery IDE Account Settings in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 ---
-
 # Manage Account
 
 After you sign in at [account.bitquery.io](https://account.bitquery.io/), the first screen is the **Dashboard** ([`/user/dashboard`](https://account.bitquery.io/user/dashboard)). It summarizes your plan, usage, profile, tokens, shortcuts to apps (including the GraphQL **IDE**), and support links.

@@ -1,6 +1,6 @@
 ---
 title: "AsterDEX API Documentation"
-description: "Comprehensive AsterDEX API guide for BNB Smart Chain perpetual futures trading. Access real-time liquidations, order lifecycle tracking, margin trading data, funding rates, and smart contract events via Bitquery GraphQL APIs. Perfect for developers building DeFi trading applications."
+description: "AsterDEX API Documentation: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. See examples in the Bitquery IDE."
 keywords:
   - AsterDEX API documentation
   - BNB Smart Chain perpetual futures
@@ -478,11 +478,10 @@ async function fetchAsterDEXData(retries = 3) {
 ### Additional Resources
 
 - [Bitquery Documentation](https://docs.bitquery.io/)
-- [GraphQL Query Guide](https://docs.bitquery.io/docs/graphql/query/)
+- [GraphQL Query Guide](/docs/graphql/query/)
 - [BNB Smart Chain Explorer](https://bscscan.com/)
-- [Production Deployment Guide](https://docs.bitquery.io/docs/start/getting-updates/)
-- [API Rate Limits](https://docs.bitquery.io/docs/graphql/limits/)
-
+- [Production Deployment Guide](/docs/start/getting-updates/)
+- [API Rate Limits](/docs/graphql/limits/)
 
 <FAQ
   items={[
@@ -511,7 +510,7 @@ With Bitquery's AsterDEX integration, developers can build:
 
 - [Bitquery GraphQL IDE](https://ide.bitquery.io/)
 - [Bitquery Documentation](https://docs.bitquery.io/)
-- [BNB Smart Chain APIs](https://docs.bitquery.io/docs/blockchain/BSC/)
+- [BNB Smart Chain APIs](/docs/blockchain/BSC/)
 
 ### Support
 

@@ -1,3 +1,7 @@
+---
+title: "Labelling Rules for Solana Wash Trades"
+description: "Build Labelling Rules for Solana Wash Trades: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
+---
 # Labelling Rules for Solana Wash Trades
 
 This module implements a set of domain-specific rules to identify potentially suspicious DEX trades and label the column `is_wash_trades` as true against them. These rules will be applied to prepare labelled data on which the model training will occur. These rules will recieve a list of JSON objects and return a dataframe object.

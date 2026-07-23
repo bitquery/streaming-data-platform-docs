@@ -1,6 +1,6 @@
 ---
 title: "Robinhood Meme Coin Launches API"
-description: "Track meme coin token launches on Robinhood with Bitquery. Detect new token creations from Flap.sh, Klik Finance, Bankr, Ape.store, Bags.fm, and Clanker."
+description: "Robinhood Meme Coin Launches API: query and stream Robinhood on-chain data with Bitquery GraphQL examples for developers."
 sidebar_position: 3
 keywords:
   - Robinhood meme coin launches API
@@ -25,7 +25,6 @@ keywords:
   - Bitquery Robinhood Events API
   - Bitquery Robinhood Transfers API
 ---
-
 # Robinhood Meme Coin Launches API
 
 Track **meme coin token launches on Robinhood** with Bitquery GraphQL APIs. This guide shows how to detect newly created tokens from popular Robinhood launchpads and bots — **hood.fun**, **LaunchHood**, **Virtuals**, **Flap.sh**, **Klik Finance**, **Bankr Bot**, **Ape.store**, **Bags.fm**, and **Clanker** — using `EVM(network: robinhood)` Events and Transfers cubes.
@@ -33,7 +32,7 @@ Track **meme coin token launches on Robinhood** with Bitquery GraphQL APIs. This
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
 
-Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorisation/how-to-generate/)
+Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 :::tip Related docs

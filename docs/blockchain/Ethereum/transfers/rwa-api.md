@@ -1,10 +1,14 @@
+---
+title: "RWA (Real World Assets) API"
+description: "RWA (Real World Assets) API: monitor Ethereum native and token transfers in real time with Bitquery GraphQL APIs. Built for traders and analytics teams."
+---
 # RWA (Real World Assets) API
 
 In this section, we will explore some of the APIs that help us obtain information about Real World Assets (RWAs) on Ethereum, Arbitrum, and other EVM chains.
 
 These APIs can be executed on any EVM chain simply by changing the `network: eth` parameter to the appropriate chain and using the correct address.
 
-We have written about analysing RWA data in the blog [here](https://bitquery.io/blog/real-world-asset-tracking-arbitrum-bitquery-apis) and how it has influenced tokenized real-estate [here](https://bitquery.io/blog/tokenized-real-estate-transforming-property-investment).
+We have written about analyzing RWA data in the blog [here](https://bitquery.io/blog/real-world-asset-tracking-arbitrum-bitquery-apis) and how it has influenced tokenized real-estate [here](https://bitquery.io/blog/tokenized-real-estate-transforming-property-investment).
 
 ## Top Holders of an RWA
 

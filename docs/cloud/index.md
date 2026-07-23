@@ -1,6 +1,6 @@
 ---
-title: Blockchain Data in Cloud - AWS S3, Snowflake, BigQuery Datasets
-description: Export blockchain data to cloud storage with ready-to-use Parquet datasets for AWS S3, Google BigQuery, Snowflake, and data lakes. Build scalable, real-time, low-latency solutions with Kafka streams and GraphQL subscriptions. Get Ethereum, BSC, Solana, Bitcoin, Tron, and EVM chain data for analytics, ETL pipelines, and data warehousing.
+title: "Blockchain Data in Cloud"
+description: "Blockchain Data in Cloud from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake. See examples in the Bitquery IDE."
 keywords:
   - Blockchain data export
   - Cloud blockchain data
@@ -43,7 +43,6 @@ keywords:
   - Sub-second blockchain data
 sidebar_position: 1
 ---
-
 import FAQ from "@site/src/components/FAQ";
 
 # Blockchain Data in Cloud
@@ -69,7 +68,7 @@ Our cloud data export service delivers **production-ready blockchain datasets** 
 
 Bitquery provides comprehensive cloud data dumps for the following blockchains:
 
-### [EVM Chains Data Export](https://docs.bitquery.io/docs/cloud/evm/)
+### [EVM Chains Data Export](/docs/cloud/evm/)
 
 Export blockchain data for **Ethereum, BSC, Base, Polygon/Matic, Optimism, Arbitrum, Robinhood**, and other EVM-compatible chains. Includes:
 
@@ -86,7 +85,7 @@ Export blockchain data for **Ethereum, BSC, Base, Polygon/Matic, Optimism, Arbit
 
 **Use Cases:** DeFi analytics, NFT tracking, smart contract analysis, token holder analysis, DEX volume analysis, cross-chain analytics.
 
-### [Solana Blockchain Data Export](https://docs.bitquery.io/docs/cloud/solana/)
+### [Solana Blockchain Data Export](/docs/cloud/solana/)
 
 Export **Solana blockchain data** including slot-level blocks, transactions, transfers, and DEX activity:
 
@@ -101,7 +100,7 @@ Export **Solana blockchain data** including slot-level blocks, transactions, tra
 
 **Use Cases:** Solana DeFi analytics, NFT marketplace analysis, token transfer tracking, DEX volume analysis, validator performance monitoring.
 
-### [Tron Blockchain Data Export](https://docs.bitquery.io/docs/cloud/tron/)
+### [Tron Blockchain Data Export](/docs/cloud/tron/)
 
 Export **Tron blockchain data** for comprehensive network analysis:
 
@@ -113,7 +112,7 @@ Export **Tron blockchain data** for comprehensive network analysis:
 
 **Use Cases:** Tron DeFi analytics, TRC-20 token tracking, DEX volume analysis, account balance monitoring, transaction flow analysis.
 
-### [Bitcoin Blockchain Data Export](https://docs.bitquery.io/docs/cloud/bitcoin/)
+### [Bitcoin Blockchain Data Export](/docs/cloud/bitcoin/)
 
 Export **Bitcoin blockchain data** including transaction inputs, outputs, and OMNI Layer protocol data:
 
@@ -126,7 +125,7 @@ Export **Bitcoin blockchain data** including transaction inputs, outputs, and OM
 
 **Use Cases:** Bitcoin transaction analysis, UTXO tracking, address clustering, OMNI token analysis, blockchain forensics, historical price analysis.
 
-### [BSC (BNB Chain) Data Export](https://docs.bitquery.io/docs/cloud/bsc/)
+### [BSC (BNB Chain) Data Export](/docs/cloud/bsc/)
 
 Export **BSC (BNB Chain) blockchain data** for comprehensive EVM-compatible chain analysis:
 
@@ -271,7 +270,7 @@ Bitquery enables you to build **enterprise-grade, scalable, real-time, low-laten
 
 Build low-latency applications with **sub-second data delivery** using:
 
-- **[Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)** – High-throughput, low-latency blockchain data streams
+- **[Kafka Streams](/docs/streams/kafka-streaming-concepts/)** – High-throughput, low-latency blockchain data streams
   - **Mempool Data** – Access pending transactions before block confirmation
   - **Committed Data** – Real-time confirmed transaction streams
   - **Multi-Chain Support** – Stream data from Ethereum, Solana, Bitcoin, Tron, and more
@@ -349,25 +348,25 @@ Cloud data dumps are optimized for **batch analytics and historical workloads**.
 
 If you require **low-latency or streaming blockchain data**, Bitquery also provides:
 
-- **[Kafka Streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)** – Real-time blockchain data streams via Apache Kafka
+- **[Kafka Streams](/docs/streams/kafka-streaming-concepts/)** – Real-time blockchain data streams via Apache Kafka
 - **GraphQL Subscriptions** – Live data subscriptions for real-time applications
 
 ## Getting Started
 
 1. **Explore Sample Data** – Review our [GitHub repository](https://github.com/bitquery/blockchain-cloud-data-dump-sample) to understand data structures
-2. **Choose Your Blockchain** – Select from [EVM](https://docs.bitquery.io/docs/cloud/evm/), [Solana](https://docs.bitquery.io/docs/cloud/solana/), [Tron](https://docs.bitquery.io/docs/cloud/tron/), [Bitcoin](https://docs.bitquery.io/docs/cloud/bitcoin/), or [BSC](https://docs.bitquery.io/docs/cloud/bsc/) data exports
+2. **Choose Your Blockchain** – Select from [EVM](/docs/cloud/evm/), [Solana](/docs/cloud/solana/), [Tron](/docs/cloud/tron/), [Bitcoin](/docs/cloud/bitcoin/), or [BSC](/docs/cloud/bsc/) data exports
 3. **Set Up Cloud Storage** – Configure AWS S3, Google Cloud Storage, or your preferred storage solution
 4. **Integrate Analytics Engine** – Connect Snowflake, BigQuery, Athena, or your analytics platform
 5. **Build Your Pipeline** – Create ETL jobs to process and transform blockchain data
 
 ## Related Documentation
 
-- [EVM Data Export](https://docs.bitquery.io/docs/cloud/evm/) – Ethereum, Polygon, and other EVM chains
-- [BSC Data Export](https://docs.bitquery.io/docs/cloud/bsc/) – BNB Chain blockchain data dumps
-- [Solana Data Export](https://docs.bitquery.io/docs/cloud/solana/) – Solana blockchain data dumps
-- [Tron Data Export](https://docs.bitquery.io/docs/cloud/tron/) – Tron blockchain data dumps
-- [Bitcoin Data Export](https://docs.bitquery.io/docs/cloud/bitcoin/) – Bitcoin blockchain and OMNI data
-- [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/) – Real-time blockchain data streams
+- [EVM Data Export](/docs/cloud/evm/) – Ethereum, Polygon, and other EVM chains
+- [BSC Data Export](/docs/cloud/bsc/) – BNB Chain blockchain data dumps
+- [Solana Data Export](/docs/cloud/solana/) – Solana blockchain data dumps
+- [Tron Data Export](/docs/cloud/tron/) – Tron blockchain data dumps
+- [Bitcoin Data Export](/docs/cloud/bitcoin/) – Bitcoin blockchain and OMNI data
+- [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/) – Real-time blockchain data streams
 
 <FAQ
   items={[

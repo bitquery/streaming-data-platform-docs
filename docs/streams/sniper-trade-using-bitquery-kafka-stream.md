@@ -1,6 +1,10 @@
+---
+title: "Building a Trading Bot Using Bitquery Kafka Streams"
+description: "Building a Trading Bot Using Bitquery Kafka Streams with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
+---
 # Building a Trading Bot Using Bitquery Kafka Streams
 
-This is a tutorial to build a fast, automated BSC (Binance Smart Chain) sniper bot for trading newly launched Four Meme tokens. The bot **detects new token launches in real time via [Bitquery’s Kafka streams](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)**, buys them instantly using the Four Meme Launchpad contract, and sells them after 1 minute—aiming to capitalize on rapid price movements.
+This is a tutorial to build a fast, automated BSC (Binance Smart Chain) sniper bot for trading newly launched Four Meme tokens. The bot **detects new token launches in real time via [Bitquery’s Kafka streams](/docs/streams/kafka-streaming-concepts/)**, buys them instantly using the Four Meme Launchpad contract, and sells them after 1 minute—aiming to capitalize on rapid price movements.
 
 Checkout the complete codebase [here](https://github.com/bitquery/sniper-bot-bsc) if facing any issue.
 
@@ -24,7 +28,7 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 ## Final Output
 
-![output](../../static/img/sniper_bot_bsc.gif)
+<video controls loop muted playsInline width="100%" src="/img/sniper_bot_bsc.mp4"></video>
 
 ---
 
@@ -438,7 +442,6 @@ pm2 logs evm-sniper
 - Test carefully! On-chain transactions are irreversible.
 - Gas fees and front-running risks exist on BSC—proceed at your own risk.
 - Code is for educational and research purposes only.
-
 
 ## Video Tutorial
 

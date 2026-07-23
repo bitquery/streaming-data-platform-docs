@@ -1,6 +1,6 @@
 # Bitquery Data Platform Documentation
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+This website is built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
 
 ### Installation
 
@@ -54,4 +54,4 @@ npx docusaurus-prince-pdf -u http://localhost:3000/docs/intro
 
 ### Contributing to Docs
 
-Read contribution guidlines [here](https://docs.bitquery.io/docs/contribution_guidelines) 
+Read contribution guidlines [here](https://docs.bitquery.io/docs/contribution-guidelines) 

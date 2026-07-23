@@ -1,37 +1,11 @@
 ---
 sidebar_position: 7
+title: "Polygon Matic Liquidity API"
+description: "Polygon Matic Liquidity API: read Polygon pool reserves and liquidity updates via Bitquery GraphQL DEX APIs. Great for bots, dashboards, and alerts."
 ---
-
 # Matic Liquidity API
 
 In this section we will see how to get Matic DEX pool liquidity information using Bitquery API. The liquidity API helps you monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on Matic DEX pools.
-
-<head>
-<meta name="title" content="Matic DEX Pool Liquidity Data with Matic Liquidity API"/>
-<meta name="description" content="Get real-time liquidity and pool reserve data for Matic DEX pools through our Liquidity API."/>
-<meta name="keywords" content="Matic liquidity api, Polygon liquidity api, Matic DEX pool api, Matic pool reserves api, Matic liquidity monitoring api, Matic DEX api, Matic web3 api, Polygon DEX api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to Get Matic DEX Pool Liquidity Data with Matic Liquidity API"
-/>
-<meta
-  property="og:description"
-  content="Get real-time liquidity and pool reserve data for Matic DEX pools through our Liquidity API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to Get Matic DEX Pool Liquidity Data with Matic Liquidity API" />
-<meta property="twitter:description" content="Get real-time liquidity and pool reserve data for Matic DEX pools through our Liquidity API." />
-</head>
 
 ## Understanding Liquidity and Pool Reserves
 
@@ -49,7 +23,7 @@ The DEXPoolEvents API provides real-time information about:
 - Pool and token pair information
 - Transaction details for liquidity-changing events
 
-For a comprehensive explanation of how DEX pools work, liquidity calculations, and when pool events are emitted, refer to the [DEXPools Cube documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/).
+For a comprehensive explanation of how DEX pools work, liquidity calculations, and when pool events are emitted, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/).
 
 ## Realtime Liquidity Stream
 
@@ -282,7 +256,7 @@ Kafka streams provide the same liquidity data as GraphQL subscriptions but with 
 - Ability to read from latest offset without gaps
 - Better scalability with multiple consumers
 
-For detailed information on how to connect to Kafka streams, subscribe to topics, and parse messages, refer to the [Kafka Streaming Concepts documentation](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+For detailed information on how to connect to Kafka streams, subscribe to topics, and parse messages, refer to the [Kafka Streaming Concepts documentation](/docs/streams/kafka-streaming-concepts/).
 
 > **Note:** IDE credentials will not work with Kafka Streams. You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
 
@@ -315,7 +289,7 @@ The `DEXPoolEvents` API response contains the following information:
   - `Hash`: Transaction hash
   - `Gas`: Gas used for the transaction
 
-For more details on when new pool events are emitted and how liquidity is calculated, see the [DEXPools Cube documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/#when-is-a-new-dexpool-record-emitted-in-the-apis--streams).
+For more details on when new pool events are emitted and how liquidity is calculated, see the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#when-is-a-new-dexpool-record-emitted-in-the-apis--streams).
 
 ## Use Cases
 
@@ -353,4 +327,4 @@ Track liquidity events that may create trading opportunities:
 - Monitor liquidity removals that may signal pool abandonment
 - Identify pools experiencing rapid liquidity growth
 
-For more advanced use cases, refer to the [DEXPools Cube documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/#advanced-use-cases-and-processing-patterns).
+For more advanced use cases, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#advanced-use-cases-and-processing-patterns).

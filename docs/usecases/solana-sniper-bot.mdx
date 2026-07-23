@@ -1,26 +1,13 @@
 ---
-title: "Solana Sniper Bot Tutorial - Real-Time Subscriptions & Jupiter Swap API"
-description: "Build a Solana sniper bot with Bitquery real-time subscriptions and Jupiter Swap API. Tutorial covers listening for on-chain instructions, executing token swaps, and bot setup."
+title: "Solana Sniper Bot"
+description: "Build Solana Sniper Bot: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code. See examples in the Bitquery IDE."
 keywords: ["Solana sniper bot", "Solana sniper tutorial", "Jupiter Swap API", "Bitquery Solana", "Solana real-time subscriptions", "Solana trading bot"]
 ---
-
-<head>
-<meta name="title" content="Solana Sniper Bot Tutorial - Real-Time Subscriptions & Jupiter Swap API"/>
-<meta name="description" content="Build a Solana sniper bot with Bitquery real-time subscriptions and Jupiter Swap API. Tutorial covers on-chain instruction detection and token swaps."/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Solana Sniper Bot Tutorial - Real-Time Subscriptions & Jupiter Swap"/>
-<meta property="og:description" content="Tutorial: Build a Solana sniper bot using Bitquery subscriptions and Jupiter Swap API."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Solana Sniper Bot Tutorial"/>
-</head>
-
 # Tutorial for Building a Solana Sniper Bot Using Bitquery Real-Time Solana Subscriptions and Jupiter Swap API
 
 This tutorial will guide you through building a Solana sniper bot using Bitquery for real-time Solana subscriptions and the Jupiter Swap API for executing swaps. By the end of this guide, you'll have a bot that listens for specific on-chain instructions and performs token swaps based on the detected instructions.
 
 > Note: This material is for educational and informational purposes only and is not intended as investment advice. The content reflects the author's personal research and understanding. While specific investments and strategies are mentioned, no endorsement or association with these entities is implied. Readers should conduct their own research and consult with qualified professionals before making any investment decisions. Bitquery is not liable for any losses or damages resulting from the application of this information.
-
 
 import VideoPlayer from "../../src/components/videoplayer.js";
 
@@ -28,14 +15,13 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://youtu.be/_74wKjMBwOU" />
 
-
 ## Tutorial
 
 ### Prerequisites
 
 Before you begin, ensure you have the following:
 1. **Node.js** and **npm** installed on your system (follow instructions [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)).
-2. **Bitquery Free Developer Account** with OAuth token (follow instructions [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+2. **Bitquery Free Developer Account** with OAuth token (follow instructions [here](/docs/authorization/how-to-generate/)).
 3. **Solana Wallet** with some SOL for transaction fees.
 
 ### Step 1: Setting Up the Environment
@@ -79,7 +65,7 @@ Before you begin, ensure you have the following:
 
 3. **Define the Solana Instructions GraphQL query for Bitquery:**
 
-This query fetches new liquidity pools created on the Solana Raydium DEX along with token information. For detailed information on the Raydium API, check examples [here](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
+This query fetches new liquidity pools created on the Solana Raydium DEX along with token information. For detailed information on the Raydium API, check examples [here](/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
 
 ```javascript
     const gql = (strings, ...values) =>

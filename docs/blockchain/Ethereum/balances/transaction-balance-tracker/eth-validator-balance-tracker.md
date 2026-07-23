@@ -1,37 +1,13 @@
 ---
 sidebar_position: 2
+title: "Ethereum Validator Balance Tracker"
+description: "Ethereum Validator Balance Tracker: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions."
 ---
-
 # Ethereum Validator Balance Tracker
 
 The Ethereum Validator Balance Tracker API provides real-time balance updates for Ethereum validators, tracking their staking rewards, withdrawals, and balance changes.
 
 For a sample application, see the [Validators Rewards Tax Calculator](https://docs.bitquery.io/crypto-reward-tax-calculator).
-
-<head>
-<meta name="title" content="Ethereum Validator Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track Ethereum validator balances, staking rewards, and withdrawals using Bitquery's Validator Balance Tracker API."/>
-<meta name="keywords" content="ethereum validator balance, validator staking rewards, ethereum validator api, validator balance tracker, ethereum beacon chain, validator withdrawals, staking rewards api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Ethereum Validator Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to track Ethereum validator balances, staking rewards, and withdrawals using Bitquery's Validator Balance Tracker API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum Validator Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track Ethereum validator balances, staking rewards, and withdrawals using Bitquery's Validator Balance Tracker API." />
-</head>
 
 ## Track Validator Balance Updates
 

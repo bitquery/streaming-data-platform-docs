@@ -57,21 +57,35 @@ const config = {
     locales: ["en"],
   },
 
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/dm-sans-latin-400-normal.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/dm-sans-latin-500-normal.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossorigin: "anonymous",
+      },
+    },
+  ],
+
   scripts: [
     // Must load before any script that calls `window.gtag` (see gtag-stub.js).
     { src: "/js/gtag-stub.js" },
-
-    {
-      src: "https://www.chatbase.co/embed.min.js",
-      async: true,
-      id: "Vz0cwoEYRJW6n5B2JeSeu",
-      domain: "www.chatbase.co",
-    },
-
-    // {
-    //   src: "/js/chatbase-open.js", // Custom script to auto-open Chatbase
-    //   defer: true,
-    // },
+    // Chat widget only in production; deferred until interaction/idle
+    // (see static/js/chatbase-deferred.js) to avoid loading embed.min.js on every LCP.
+    ...(enableAnalytics ? [{ src: "/js/chatbase-deferred.js", async: true }] : []),
   ],
 
   plugins: [
@@ -118,6 +132,8 @@ const config = {
             to: "/docs/blockchain/Solana/Pumpfun/pump-swap-api/",
             from: "/docs/blockchain/Solana/pump-swap-api/",
           },
+          // PumpFun → Pumpfun case redirect lives in static/_redirects (Netlify).
+          // A client-redirect here breaks macOS builds (case-insensitive FS).
           {
             to: "/docs/blockchain/Ethereum/token-holders/token-holder-api/",
             from: "/docs/examples/balances/tokenHolders-api/",
@@ -141,6 +157,41 @@ const config = {
           {
             to: "/docs/schema/evm/token-holders/",
             from: "/docs/evm/token_holders/",
+          },
+          {
+            to: "/docs/schema/evm/top/",
+            from: "/docs/evm/",
+          },
+          {
+            to: "/docs/trading/crypto-price-api/currency/",
+            from: "/docs/trading/crypto-price-api/cube-examples.md/currency-examples/",
+          },
+          {
+            to: "/docs/trading/crypto-price-api/pairs/",
+            from: "/docs/trading/crypto-price-api/cube-examples.md/pair-examples/",
+          },
+          {
+            to: "/docs/trading/crypto-price-api/tokens/",
+            from: "/docs/trading/crypto-price-api/cube-examples.md/token-examples/",
+          },
+          // Case-only typo redirects (apI → api) omitted: they collide with the
+          // real pages on case-insensitive filesystems (macOS local builds).
+          {
+            to: "/docs/usecases/sandwich-detection/",
+            from: "/docs/usecases/sandwitch-detection/",
+          },
+          {
+            // Category root had no index page; send British spelling URL to the guide.
+            to: "/docs/authorization/how-to-generate/",
+            from: "/docs/authorisation/",
+          },
+          {
+            to: "/docs/blockchain/Arbitrum/",
+            from: "/docs/blockchain/Arbitrum/Overview/",
+          },
+          {
+            to: "/docs/category/capabilities/",
+            from: "/docs/graphql/capabilities/patterns/",
           },
           {
             to: "/docs/graphql/dataset/select-blocks/",
@@ -184,11 +235,11 @@ const config = {
             from: "/docs/usecases/MCP/build-a-trading-agent/",
           },
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/ide/authorisation/",
           },
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/category/authorization/",
           },
           {
@@ -217,21 +268,21 @@ const config = {
           },
 
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/ide/authorisation/simple",
           },
 
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/start/authorisation/secure/",
           },
 
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/start/authorisation/",
           },
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/start/authorisation/how-to-generate",
           },
           {
@@ -248,13 +299,33 @@ const config = {
           },
 
           {
-            to: "/docs/authorisation/how-to-generate",
+            to: "/docs/authorization/how-to-generate",
             from: "/docs/start/authorisation/simple/",
           },
 
           {
             to: "/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/",
             from: "/docs/examples/dextrades/Pump-Fun-API/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/dextrades/dex-api/",
+            from: "/docs/examples/dextrades/dex-api/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/dextrades/token-trades-apis/",
+            from: "/docs/examples/dextrades/token-trades-apis/",
+          },
+          {
+            to: "/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener/",
+            from: "/docs/examples/dextrades/DEXScreener/evm_dexscreener/",
+          },
+          {
+            to: "/docs/blockchain/Solana/DEXScreener/solana_dexscreener/",
+            from: "/docs/examples/dextrades/DEXScreener/solana_dexscreener/",
+          },
+          {
+            to: "/docs/category/how-to-guides/",
+            from: "/docs/examples/",
           },
 
           {
@@ -265,10 +336,6 @@ const config = {
             to: "/docs/blockchain/Ethereum/ethers-library/eth_subscribe/",
             from: "/docs/examples/Ethereum-subscriptions/eth-subscribe/",
           },
-          // {
-          //   to: "/docs/schema/schema-intro/",
-          //   from: "/docs/evm/",
-          // }, // that page does not get traffic anymore, so no need to redirect
           {
             to: "/docs/category/how-to-guides/",
             from: "/docs/category/use-cases/",
@@ -604,6 +671,98 @@ const config = {
             to: "/docs/streams/protobuf/kafka-protobuf-js",
           },
 
+          // Stale / renamed doc paths
+          {
+            from: "/docs/how-to-guides-index/",
+            to: "/docs/category/how-to-guides/",
+          },
+          {
+            from: "/docs/mcp/tracing/examples/",
+            to: "/docs/mcp/Tracing/overview/",
+          },
+          {
+            from: "/docs/graphql/introduction/",
+            to: "/docs/graphql/query/",
+          },
+          {
+            from: "/docs/graphql/performance/",
+            to: "/docs/graphql/optimizing-graphql-queries/",
+          },
+          {
+            from: "/docs/graphql/aggregation/",
+            to: "/docs/graphql/capabilities/aggregated_metrics/",
+          },
+          {
+            from: "/docs/graphql/coinpath/",
+            to: "/docs/blockchain/Bitcoin/bitcoin-coinpath-api/",
+          },
+          {
+            from: "/docs/blockchain/TON/",
+            to: "/docs/blockchain/supported-chains/",
+          },
+          {
+            from: "/docs/blockchain/opBNB/",
+            to: "/docs/blockchain/supported-chains/",
+          },
+          {
+            from: "/docs/subscriptions/",
+            to: "/docs/category/graphql-subscriptions/",
+          },
+          {
+            from: "/docs/subscriptions/websocket/",
+            to: "/docs/subscriptions/websockets/",
+          },
+          // tradingview-advanced-charts/getting-started redirect is defined once above.
+          {
+            from: "/docs/graphql/joins/",
+            to: "/docs/graphql/capabilities/joins/",
+          },
+          {
+            from: "/docs/blockchain/Solana/raydium-api/",
+            to: "/docs/blockchain/Solana/Solana-Raydium-DEX-API/",
+          },
+          {
+            from: "/docs/blockchain/Solana/orca-api/",
+            to: "/docs/blockchain/Solana/solana-orca-dex-api/",
+          },
+          {
+            from: "/docs/blockchain/Solana/serum-api/",
+            to: "/docs/blockchain/Solana/Solana-OpenBook-api/",
+          },
+          {
+            from: "/docs/blockchain/Solana/meteora-api/",
+            to: "/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/",
+          },
+          // solana_dexscreener redirect is defined once above (Ethereum → Solana path).
+          {
+            from: "/docs/blockchain/Ethereum/BSC/bsc-uniswap-api/",
+            to: "/docs/blockchain/BSC/bsc-uniswap-api/",
+          },
+          {
+            from: "/docs/blockchain/Ethereum/Base/base-uniswap-api/",
+            to: "/docs/blockchain/Base/base-uniswap-api/",
+          },
+          {
+            from: "/docs/blockchain/Ethereum/Matic/matic-uniswap-api/",
+            to: "/docs/blockchain/Matic/matic-uniswap-api/",
+          },
+          {
+            from: "/docs/grpc/solana/filters/",
+            to: "/docs/grpc/solana/topics/dextrades/",
+          },
+          {
+            from: "/docs/blockchain/Solana/dextrades/",
+            to: "/docs/blockchain/Solana/solana-dextrades/",
+          },
+          {
+            from: "/docs/blockchain/Solana/token-holders/",
+            to: "/docs/blockchain/Solana/solana-token-holders/",
+          },
+          {
+            from: "/docs/graphql-reference/",
+            to: "/docs/schema/schema-intro/",
+          },
+
           //crypto price api redirects
           {
             from: "/docs/trading/price-index/introduction",
@@ -787,7 +946,8 @@ const config = {
             from: "/docs/examples/Arbitrum/Smart_Contract_Events/",
           },
           {
-            to: "/docs/blockchain/Arbitrum/Overview",
+            // Overview page was removed; category index is the hub.
+            to: "/docs/blockchain/Arbitrum/",
             from: "/docs/examples/Arbitrum/Overview",
           },
 
@@ -920,6 +1080,26 @@ const config = {
             from: "/docs/examples/polymarket-api/polymarket-ctf-exchange/",
           },
         ],
+        createRedirects(existingPath) {
+          const froms = [];
+          if (existingPath.startsWith("/docs/schema/evm/")) {
+            froms.push(
+              existingPath.replace("/docs/schema/evm/", "/docs/evm/"),
+            );
+          }
+          if (existingPath.startsWith("/docs/authorization/")) {
+            froms.push(
+              existingPath.replace(
+                "/docs/authorization/",
+                "/docs/authorisation/",
+              ),
+            );
+          }
+          if (existingPath === "/docs/grpc/solana/authorization/") {
+            froms.push("/docs/grpc/solana/authorisation/");
+          }
+          return froms.length ? froms : undefined;
+        },
       },
     ],
     require.resolve("./plugins/llms-txt.js"),
@@ -939,9 +1119,13 @@ const config = {
         },
         blog: false,
         sitemap: {
-          changefreq: "daily",
-          priority: 1,
-          ignorePatterns: ["/docs/graphql-reference/**"],
+          changefreq: "weekly",
+          priority: 0.5,
+          ignorePatterns: [
+            "/docs/graphql-reference/**",
+            "/markdown-page/**",
+            "/search/**",
+          ],
           filename: "sitemap.xml",
           createSitemapItems: async ({
             siteConfig,
@@ -953,20 +1137,28 @@ const config = {
               routes,
             });
 
+            const filtered = defaultItems.filter((item) => {
+              try {
+                const path = new URL(item.url).pathname;
+                return (
+                  path !== "/markdown-page/" &&
+                  path !== "/search/" &&
+                  !path.includes("/cube-examples.md/")
+                );
+              } catch {
+                return true;
+              }
+            });
+
             const customItems = [
               {
-                url: "https://pumpfun-token-sniffer.vercel.app/",
-                changefreq: "daily",
-                priority: 1,
-              },
-              {
-                url: "https://docs.bitquery.io/crypto-reward-tax-calculator",
-                changefreq: "daily",
-                priority: 1,
+                url: "https://docs.bitquery.io/crypto-reward-tax-calculator/",
+                changefreq: "monthly",
+                priority: 0.6,
               },
             ];
 
-            return [...defaultItems, ...customItems];
+            return [...filtered, ...customItems];
           },
         },
         theme: {
@@ -992,7 +1184,7 @@ const config = {
       colorMode: {
         defaultMode: "dark",
         disableSwitch: false,
-        respectPrefersColorScheme: false,
+        respectPrefersColorScheme: true,
       },
 
       announcementBar: {
@@ -1050,7 +1242,7 @@ const config = {
             className: "button button--primary bright-white-text",
           },
           {
-            to: "https://docs.bitquery.io/docs/graphql/indexed-fields-reference/",
+            to: "/docs/graphql/indexed-fields-reference/",
             label: "Indexed Fields",
             position: "left",
           },
@@ -1060,7 +1252,7 @@ const config = {
             position: "left",
           },
           {
-            to: "https://docs.bitquery.io/docs/tools-directory/",
+            to: "/docs/tools-directory/",
             label: "Free Tools",
             position: "left",
           },
@@ -1127,7 +1319,7 @@ const config = {
                 label: "NFTs & metadata",
                 to: "/docs/blockchain/Ethereum/nft/nft-api/",
               },
-              { label: "Balances & holders", to: "/docs/evm/balances/" },
+              { label: "Balances & holders", to: "/docs/schema/evm/balances/" },
               { label: "Mempool & pending txs", to: "/docs/start/mempool/" },
             ],
           },
@@ -1197,7 +1389,7 @@ const config = {
                 label: "Analysts & quants →",
                 to: "/docs/graphql/dataset/archive/",
               },
-              { label: "Auditors & finance →", to: "/docs/evm/balances/" },
+              { label: "Auditors & finance →", to: "/docs/schema/evm/balances/" },
               {
                 label: "Investigators & compliance →",
                 href: "https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api",

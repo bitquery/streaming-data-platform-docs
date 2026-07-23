@@ -1,43 +1,18 @@
+---
+title: "BNB Chain Gra Fun API"
+description: "BNB Chain Gra Fun API: query and stream BNB Chain on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
+---
 # GRA.fun API
 
 :::tip Need real-time GRA.fun data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered GRA.fun swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical GRA.fun data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered GRA.fun swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical GRA.fun data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-
 In this section we'll have a look at some examples using the BSC Transfers API.
-
-<head>
-<meta name="title" content="GRA.fun API"/>
-<meta name="description" content="Get Meme coins trade from GRA.fun on BSC blockchain. Get buy, sell, redeem trades both real time and historical"/>
-<meta name="keywords" content="Gra.fun api, Gra fun api, gra fun memcoin generator api, memecoin"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Gra Fun API"
-/>
-<meta
-  property="og:description"
-  content="Get Meme coins trade from GRA.fun on BSC blockchain. Get buy, sell, redeem trades both real time and historical."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Gra Fun API" />
-<meta property="twitter:description" content="Get Meme coins trade from GRA.fun on BSC blockchain. Get buy, sell, redeem trades both real time and historical." />
-</head>
 
 ## New Token Created
 
 Retrieve newly created tokens on the gra.fun platform using [query below](https://ide.bitquery.io/grafun-new-token-created-api).
-
 
 ```graphql
 {
@@ -143,11 +118,9 @@ Retrieve all transfer and trade events related to the GRA fun using [this query]
 
 ```
 
-
 ## GRA fun Redeem Transactions
 
 Retrieve all redeemed transactions using [this query](https://ide.bitquery.io/Gra-fun-redeem-transactions).
-
 
 ```graphql
 {
@@ -301,7 +274,6 @@ Retrieve all buy transactions from GRA.fun using [this query](https://ide.bitque
 
 Retrieve all sell transactions on GRA fun using [this query](https://ide.bitquery.io/Gra-fun-sell-transactions).
 
-
 ```graphql
 {
   EVM(network: bsc) {
@@ -375,7 +347,6 @@ Retrieve all sell transactions on GRA fun using [this query](https://ide.bitquer
 
 ```
 
-
 ## GRA fun Transaction Details
 
 Retrieve detailed information about a specific transaction using [this query](https://ide.bitquery.io/gra-fun-detailed-transfer-of-a-transaction). You can check Sender and Receiver of Transfers to understand what bought and sold.
@@ -419,11 +390,9 @@ Retrieve detailed information about a specific transaction using [this query](ht
 
 To get all transfers of on GRA.fun, please check [this query](https://ide.bitquery.io/gra-fun-all-transfers).
 
-
 ## Trades of a token on pancake v3
 
 Use this API to get Pancake V3 APIs using [this api](https://ide.bitquery.io/Trades-of-token-on-pancake-v3)
-
 
 ```
 {

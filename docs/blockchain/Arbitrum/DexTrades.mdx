@@ -1,42 +1,15 @@
 ---
 sidebar_position: 2
+title: "Arbitrum DEX Trades API"
+description: "Arbitrum DEX Trades API: get Arbitrum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Scale further with Kafka or gRPC streams."
 ---
-
 # Arbitrum DEX Trades API
 
 :::tip Need real-time Arbitrum DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API** (filter with `Pair.Market.Network: Arbitrum`). Use this page when you need **historical Arbitrum data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Arbitrum`). Use this page when you need **historical Arbitrum data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
 :::
 
-
 In this section we will see how to get Arbitrum DEX trades information using our API.
-
-<head>
-<meta name="title" content="Arbitrum Decentralized Exchange Data with Arbitrum DEX Trades API"/>
-<meta name="description" content="Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API."/>
-<meta name="keywords" content="Arbitrum DEX Trades api,Arbitrum DEX Trades python api,Arbitrum DEX Trades token api,Arbitrum Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,Arbitrum network api, Arbitrum web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to Get Arbitrum Decentralized Exchange Data with Arbitrum DEX Trades API"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to Get Arbitrum Decentralized Exchange Data with Arbitrum DEX Trades API" />
-<meta property="twitter:description" content="Get on-chain data of any Arbitrum Arbitrumd DEX through our DEX Trades API." />
-</head>
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -126,7 +99,7 @@ subscription {
 
 [This](https://ide.bitquery.io/trending-token-pairs-on-Arbitrum) query returns the top trending pairs traded on Arbitrum Chain based on the trade volume for the last 24 hours, and returns info such as latest price, number of buyers and sellers, number of trades in a day and much more.
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 ```graphql
 query pairs(
@@ -222,7 +195,7 @@ query pairs(
 
 Implementation of this data in a full scale project could be seen on [DEXRabbit](https://dexrabbit.com/arbitrum/pair).
 
-![Trending Pairs on Arbitrum](../../../static/img/dexrabbit/arbitrum/arbitrum_trending_pairs.png)
+![Trending Pairs on Arbitrum](/img/dexrabbit/arbitrum/arbitrum_trending_pairs.png)
 
 ## Latest Trades for a Token Pair on Arbitrum
 
@@ -328,7 +301,7 @@ query tradingViewPairs(
 
 An example for the data visualisation of the data obtained could be seen on the [DEXRabbit](https://dexrabbit.com/arbitrum/pair/0x912ce59144191c1204e64559fe8253a0e49e6548/0xff970a61a04b1ca14834a43f5de4533ebddb5cc8).
 
-![OHLC/ K Line for a Pair on Arbitrum](../../../static/img/dexrabbit/arbitrum/arbitrum_ohlc_pair.png)
+![OHLC/ K Line for a Pair on Arbitrum](/img/dexrabbit/arbitrum/arbitrum_ohlc_pair.png)
 
 ## Latest Trades in Realtime with Subscription
 
@@ -584,7 +557,7 @@ query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
 
 The implementation of this data could also be seen on the [DEXRabbit](https://dexrabbit.com/arbitrum/token/0x912ce59144191c1204e64559fe8253a0e49e6548#top_traders).
 
-![Top Traders for a token on Arbitrum](../../../static/img/dexrabbit/arbitrum/arbitrum_top_traders_token.png)
+![Top Traders for a token on Arbitrum](/img/dexrabbit/arbitrum/arbitrum_top_traders_token.png)
 
 The `DEXTrades` API contains the following information about each trade:
 

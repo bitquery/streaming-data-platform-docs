@@ -2,9 +2,8 @@
 sidebar_position: 5
 sidebar_label: Multi-Chain Trading Data Streams
 title: Multi-Chain Trading Data Streams (Protobuf)
-description: Kafka topics trading.prices and trading.trades—not tied to one network. Credentials, docs links, and schema references match Kafka streaming concepts.
+description: "Multi-Chain Trading Data Streams (Protobuf) with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems."
 ---
-
 # Multi-Chain Trading Data Streams (Protobuf)
 
 Broker setup, SASL authentication, consumer groups, and general Kafka behavior are covered in **[Bitquery Kafka Streams — Understanding Concepts](/docs/streams/kafka-streaming-concepts)**.
@@ -15,7 +14,7 @@ All Kafka topics documented there deliver messages in **protobuf** format (JSON 
 
 The **`trading`** namespace defines two Kafka topics. **Both use the same credentials** as your subscription:
 
-- **`trading.prices`** — Multi-chain [Price Index Streams](https://docs.bitquery.io/docs/trading/price-index/introduction/). See the [Crypto Price API](/docs/trading/crypto-price-api/introduction) for usage.
+- **`trading.prices`** — Multi-chain [Price Index Streams](/docs/trading/crypto-price-api/introduction/). See the [Crypto Price API](/docs/trading/crypto-price-api/introduction) for usage.
 - **`trading.trades`** — Real-time DEX trades aligned with the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api). Message structure is defined in [`market/trades.proto`](https://github.com/bitquery/streaming_protobuf/blob/main/market/trades.proto) in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf).
 
 ## See also

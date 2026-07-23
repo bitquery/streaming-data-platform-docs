@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Ethereum NFT Collection API"
+description: "Ethereum NFT Collection API: track Ethereum NFT trades, ownership, and metadata with Bitquery GraphQL and streams. Works with WebSocket live subscriptions."
 ---
-
 # NFT Collection API
 
 ## Get All NFTs in a Collection
@@ -32,7 +33,6 @@ Here is a query that retrieves all the NFTs in a Collection.
 
 ```
 You can find the graphql query [here](https://ide.bitquery.io/Get-all-NFTs-for-a-collection).
-
 
 ## Get All Token Holders of a Collection 
 

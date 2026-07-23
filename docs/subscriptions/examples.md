@@ -1,15 +1,16 @@
 ---
 sidebar_position: 4
+title: "Building with WebSockets"
+description: "Building with WebSockets using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
-
 # Building with WebSockets: Code Samples in Python & JavaScript
 
 This section provides examples of how to implement subscription queries in your code.
-**Remember: You need to implement logic to handle silent disconnect( when no data or keep-alive is received for say X seconds) in your code. Sample [here](https://docs.bitquery.io/docs/subscriptions/silent-disconnect-reconnect/)**.
+**Remember: You need to implement logic to handle silent disconnect( when no data or keep-alive is received for say X seconds) in your code. Sample [here](/docs/subscriptions/silent-disconnect-reconnect/)**.
 
 ## How do I subscribe to live DEX trades using Bitquery WebSocket? {#how-do-i-subscribe-to-live-dex-trades-using-bitquery-websocket}
 
-Use Bitquery’s **GraphQL over WebSocket**: connect to [`wss://streaming.bitquery.io/graphql`](https://docs.bitquery.io/docs/subscriptions/websockets/) with the **`graphql-ws`** or **`graphql-transport-ws`** subprotocol, authenticate as described in [WebSocket authorisation](https://docs.bitquery.io/docs/authorisation/websocket/), then send a **`subscription`** whose root field is your chain API (for example `EVM` or `Solana`) and a **`DEXTrades`** selection. Each new trade matching your `where` clause is pushed as a message. Test the subscription in the [Bitquery IDE](https://ide.bitquery.io) by changing the operation from `query` to `subscription`, then reuse the same document in your client.
+Use Bitquery’s **GraphQL over WebSocket**: connect to [`wss://streaming.bitquery.io/graphql`](/docs/subscriptions/websockets/) with the **`graphql-ws`** or **`graphql-transport-ws`** subprotocol, authenticate as described in [WebSocket authorization](/docs/authorization/websocket/), then send a **`subscription`** whose root field is your chain API (for example `EVM` or `Solana`) and a **`DEXTrades`** selection. Each new trade matching your `where` clause is pushed as a message. Test the subscription in the [Bitquery IDE](https://ide.bitquery.io) by changing the operation from `query` to `subscription`, then reuse the same document in your client.
 
 The GraphQL document is the same whether you run it from Python, JavaScript, or any other client; only the WebSocket wiring differs (see the sections below).
 
@@ -47,7 +48,7 @@ subscription LiveDexTrades {
 }
 ```
 
-Narrow results with a `where` argument on `DEXTrades` (specific pair, DEX, USD size, and so on) using the same [filter syntax](https://docs.bitquery.io/docs/graphql/filters/) as queries. For more BSC examples and IDE links, see [BSC DEX Trades](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/); for Solana, see [Solana DEX Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/). A saved BSC stream you can open in the IDE: [Subscribe to BSC DEX trades](https://ide.bitquery.io/subscribe-to-bsc-dex-trades).
+Narrow results with a `where` argument on `DEXTrades` (specific pair, DEX, USD size, and so on) using the same [filter syntax](/docs/graphql/filters/) as queries. For more BSC examples and IDE links, see [BSC DEX Trades](/docs/blockchain/BSC/bsc-dextrades/); for Solana, see [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades/). A saved BSC stream you can open in the IDE: [Subscribe to BSC DEX trades](https://ide.bitquery.io/subscribe-to-bsc-dex-trades).
 
 ## Implementation Example: Using WebSocket Using Python
 
@@ -58,7 +59,6 @@ import asyncio
 
 from gql import Client, gql
 from gql.transport.websockets import WebsocketsTransport
-
 
 async def main():
     transport = WebsocketsTransport(
@@ -98,18 +98,16 @@ async def main():
     await transport.close() #this sends complete message to server before closing websocket
     print("Transport closed")
 
-
 # Run the asyncio event loop
 asyncio.run(main())
-
 
 ```
 
 The `transport.connect()` function is used to establish a connection to the WebSocket server and start the subscription. Similarly, `transport.close()` is used to close the connection and stop the subscription after 100 seconds.
 
-## Implementation Example:Using WebSocket Using JavaScript
+## Implementation Example: Using WebSocket Using JavaScript {#implementation-exampleusing-websocket-using-javascript}
 
-Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](https://docs.bitquery.io/docs/authorisation/websocket/)
+Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](/docs/authorization/websocket/)
 
 ```javascript
 const { WebSocket } = require("ws");

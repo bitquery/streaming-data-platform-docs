@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "GraphQL Variables in Bitquery IDE"
+description: "GraphQL Variables in Bitquery IDE in Bitquery docs with practical setup steps, examples, and guidance for secure API access."
 ---
-
 # Use Variables
 
 When creating a query you can pass parameters to it, this way you can create a more **organized**, **readable** and **maintainable** code.
@@ -10,7 +11,6 @@ In the IDE there are two boxes that allow you to insert code, the first one is f
 ![IDE Query Variables](/img/ide/query_variables.png)
 
 > You can obtain the code through this link [Transaction Detail EVM | BSC](https://graphql.bitquery.io/ide/Transaction-Detail-EVM--BSC)
-
 
 ## Variable types
 

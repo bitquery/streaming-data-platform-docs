@@ -1,9 +1,13 @@
+---
+title: "Believe Launchpad API"
+description: "Believe Launchpad API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
+---
 # Believe Launchpad API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 :::tip Need real-time Believe data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Believe data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Believe data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 ## 🎯 What is Believe Launchpad?
@@ -12,9 +16,9 @@ The Believe Launchpad is a decentralized token launchpad built on the Solana blo
 
 ## Related APIs
 
-- **[Meteora Dynamic Bonding Curve API](https://docs.bitquery.io/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/)** - Core DBC functionality
-- **[Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/)** - Alternative launchpad
-- **[FourMeme APIs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)** - BSC-based token creation
+- **[Meteora Dynamic Bonding Curve API](/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/)** - Core DBC functionality
+- **[Moonshot APIs](/docs/blockchain/Solana/Moonshot-API/)** - Alternative launchpad
+- **[FourMeme APIs](/docs/blockchain/BSC/four-meme-api/)** - BSC-based token creation
 
 ## Pro Tips
 
@@ -26,31 +30,6 @@ The Believe Launchpad is a decentralized token launchpad built on the Solana blo
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
 :::
-
-<head>
-<title>Believe Launchpad API - Solana | Get Believe Tokens data</title>
-  <meta name="title" content="Believe Launchpad API - Solana | Track Token Creations By Believe"/>
-  <meta name="description" content="Get Believe Launchpad on-chain data of Meteora DBC Token Creations"/>
-  <meta name="keywords" content="Believe Launchpad data API, Beleive protocol token creations api, Beleive protocol token launch api, Solana token launch data, Bitquery Solana API, Meteora DBC API, token creation analytics, trading fee claim data, creator earnings API, Solana bonding curve data, Believe Launchpad integration, token lifecycle Solana, crypto data API Solana, Bitquery Believe Launchpad endpoints, token launch tracking, token metadata Solana, decentralized token data, real-time Solana token stats, Solana API for token creation, claim fee API Believe, Bitquery IDE API examples
-"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Believe Launchpad API - Solana | Track Token Creations By Believe"
-/>
-<meta
-  property="og:description"
-  content="Get Believe Launchpad on-chain data of Meteora DBC Token Creations"
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Believe Launchpad API - Solana | Track Token Creations By Believe"/>
-  <meta property="twitter:description" content="Get Believe Launchpad on-chain data of Meteora DBC Token Creations"/>
-</head>
 
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 
@@ -217,7 +196,7 @@ query MyQuery($tokenAddress: String!) {
 
 ## Get the Believe Launchpad tokens which are graduated to Meteora
 
-For checking which Believe tokens graduated, we need to get all the tokens created by Believe on Meteora DBC using this [Get All Token Creations by Believe - API](https://docs.bitquery.io/docs/blockchain/Solana/Believe-API/#get-latest-meteora-dbc-token-creations-using-believe-protocol) and then after getting all the token addresses put them in [Check if the Believe Tokens has Graduated - API](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1) to check which of them graduated to Meteora.
+For checking which Believe tokens graduated, we need to get all the tokens created by Believe on Meteora DBC using this [Get All Token Creations by Believe - API](/docs/blockchain/Solana/Believe-API/#get-latest-meteora-dbc-token-creations-using-believe-launchpad) and then after getting all the token addresses put them in [Check if the Believe Tokens has Graduated - API](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1) to check which of them graduated to Meteora.
 
 ```
 query MyQuery {

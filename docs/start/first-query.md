@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "Your First Bitquery GraphQL Query"
+description: "Run your first Bitquery GraphQL query in minutes with IDE setup, authentication basics, and a simple starter example you can reuse."
 ---
-
 # Your First Query
 
 Create and run your first query on Bitquery IDE by visiting [https://graphql.bitquery.io/ide](https://graphql.bitquery.io/ide).
@@ -77,6 +78,6 @@ For example,
 
 Now that you've created your first query, learn which data primitives to use:
 
-- **[Mental Model: Transfers, Events, Calls, and DexTrades](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls)** - Understand when to use Transfers, Events, Calls, or DexTrades for your queries
-- **[Starter Queries](https://docs.bitquery.io/docs/start/starter-queries)** - Try pre-built queries for common use cases
-- **[Learning Path](https://docs.bitquery.io/docs/start/learning-path)** - Follow a structured path from beginner to advanced
+- **[Mental Model: Transfers, Events, Calls, and DexTrades](/docs/start/mental-model-transfers-events-calls)** - Understand when to use Transfers, Events, Calls, or DexTrades for your queries
+- **[Starter Queries](/docs/start/starter-queries)** - Try pre-built queries for common use cases
+- **[Learning Path](/docs/start/learning-path)** - Follow a structured path from beginner to advanced

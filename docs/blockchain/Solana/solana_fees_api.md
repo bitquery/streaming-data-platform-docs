@@ -1,28 +1,15 @@
+---
+title: "Solana Fees API"
+description: "Solana Fees API: analyze Solana transaction fees and costs with Bitquery GraphQL queries and streams. Scale further with Kafka or gRPC streams."
+---
 # Solana Fees API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 In this document, we will explore several examples related to Solana Fees data.
-We also have [PumpFun APIs](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/) to track Pump Fun token swaps, [PumpSwap APIs](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api/) if you want to track the token after it has been migrated to PumpSwap AMM.
-Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/).
+We also have [PumpFun APIs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) to track Pump Fun token swaps, [PumpSwap APIs](/docs/blockchain/Solana/Pumpfun/pump-swap-api/) if you want to track the token after it has been migrated to PumpSwap AMM.
+Additionally, you can also check out our [Moonshot APIs](/docs/blockchain/Solana/Moonshot-API/), [FourMeme APIs](/docs/blockchain/BSC/four-meme-api/).
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
-
-<head>
-  <meta name="title" content="Solana Fees API - Track Transaction Fees on Solana DApps"/>
-  <meta name="description" content="Query and analyze Solana transaction fees using Bitquery’s Solana Fees API. Get data on DEX trades, wallet transfers, and total account fees."/>
-  <meta name="keywords" content="Solana Fees API,Solana transaction fees,Solana Blockchain Data API,Track Solana DEX fees,Solana wallet fee analytics,crypto fees,Solana gas fees,Solana API,Kafka Solana API,Blockchain Data API,Solana token fees,Solana fee explorer"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Track Solana Transaction Fees with Solana Fees API" />
-  <meta property="og:description" content="Analyze transaction fees on Solana including DEX trades, wallet transfers, and account-level metrics using Bitquery’s Solana Fees API." />
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Track Solana Transaction Fees with Solana Fees API"/>
-  <meta property="twitter:description" content="Analyze transaction fees on Solana including DEX trades, wallet transfers, and account-level metrics using Bitquery’s Solana Fees API."/>
-</head>
 
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 
@@ -178,8 +165,8 @@ query MyQuery {
 
 ## 🔗 Related Solana APIs
 
-- **[Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities and their fees
-- **[Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/)** - Track transfer fees and costs
-- **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)** - Monitor balance changes including fees
-- **[Solana Instructions API](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/)** - Track instruction execution fees
-- **[Solana Token Supply API](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/)** - Monitor supply-related transaction fees
+- **[Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities and their fees
+- **[Solana Transfers API](/docs/blockchain/Solana/solana-transfers/)** - Track transfer fees and costs
+- **[Solana Balance Updates API](/docs/blockchain/Solana/solana-balance-updates/)** - Monitor balance changes including fees
+- **[Solana Instructions API](/docs/blockchain/Solana/solana-instructions/)** - Track instruction execution fees
+- **[Solana Token Supply API](/docs/blockchain/Solana/token-supply-cube/)** - Monitor supply-related transaction fees

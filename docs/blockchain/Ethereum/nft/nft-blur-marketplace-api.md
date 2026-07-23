@@ -1,11 +1,11 @@
 ---
 sidebar_position: 8
+title: "NFT Blur MarketPlace API"
+description: "NFT Blur MarketPlace API: track Ethereum NFT trades, ownership, and metadata with Bitquery GraphQL and streams. Covers archive history and realtime data."
 ---
-
 # NFT Blur MarketPlace API
 
 The NFT Blur Marketplace API provides a wide range of data related to the BLUR NFT Marketplace. With this API, We can access data on the latest traded NFTs, buy-sell activity of specific NFT tokens, top buyers of NFTs, specific buyer statistics for NFTs, NFT loan transactions, loan history, refinancing actions and much more.
-
 
 ## Latest Trades on Blur
 
@@ -122,11 +122,9 @@ query MyQuery {
 - `nfts` : Shows the count of distinct NFTs involved in the trades.
 - `Trade` : Includes information about the trade, specifically the currency details from the buy side of the trade.
 
-
 ## Total Buy-Sell of an NFT Token on Blur
 
 Here, the [query](https://ide.bitquery.io/Total-buy-sell-of-an-NFT-token-onBLUR) gather total trades, trade volume, unique buyers, and sellers for a specific NFT token on Blur Marketplace - in this case, the [Nakamigos NFT token](https://explorer.bitquery.io/ethereum/token/0xd774557b647330c91bf44cfeab205095f7e6c367).
-
 
 ```
 query MyQuery {
@@ -216,7 +214,6 @@ query MyQuery {
 - `difffernt_nfts` : Displays a count of different NFTs bought by each buyer.
 - `total_money_paid` : The total amount of money paid by each buyer for their purchases.
 
-
 ## Specific Buyer stats for an NFT on Blur
 
 In [this](https://ide.bitquery.io/Specific-buyer-stats-for-an-NFT-onBLUR) query, we are getting details for a specific address on Blur NFT marketplace. We are also getting the first and last trade dates for the address.
@@ -283,7 +280,6 @@ query MyQuery {
 Blur uses [Blend protocol](https://www.paradigm.xyz/2023/05/blend) for NFT loans. We're can [fetch](https://ide.bitquery.io/Latest-Loans-taken-onBlur) recent loans on the BLUR market through "LoanOfferTaken" events tied to Blur : [Blend Contract](https://explorer.bitquery.io/ethereum/smart_contract/0x29469395eaf6f95920e59f858042f0e28d98a20b/events). 
 
 We're using LogHeader instead of Log → SmartContract for queries due to a [delegated proxy contract](https://medium.com/coinmonks/proxy-pattern-and-upgradeable-smart-contracts-45d68d6f15da).
-
 
 ```
 {
@@ -428,7 +424,6 @@ We're using LogHeader instead of Log → SmartContract for queries due to a [del
 **Returned Data**
 
 Same as previous queries, this query will return details about the block, transaction, log, and arguments. By modifying the 'Arguments.includes' filter, you can track loan activities for different NFT collections on the Blur marketplace.
-
 
 ## Latest Loans for a specific lender
 
@@ -719,7 +714,6 @@ The Blur's Blend protocol utilizes LienID as a primary key to track individual l
 
 The response will include details about the block, transaction, log, and event arguments. By adjusting the LienID in Arguments.includes, you can fetch loan details for various LienIDs on the Blur marketplace.
 
-
 ## Latest Loan Refinances on Blur
 
 Refinancing in NFTs refers to securing a new loan using an NFT as collateral to repay an existing loan. The following [query](https://ide.bitquery.io/loan-refinance-on-Blur) retrieves the latest refinance events on BLUR.
@@ -783,7 +777,6 @@ Refinancing in NFTs refers to securing a new loan using an NFT as collateral to 
 **Parameters**
 
 `where` : 'LogHeader.Address' sets the address to the Blur: Blend Contract. 'Log.Signature.Name' filters for the event name "Refinance".
-
 
 ## All Refinance loans for specific NFT
 
@@ -993,11 +986,9 @@ The 'StartAuction' event is triggered when an NFT auction starts on the  Blur : 
 
 `where` : 'LogHeader.Address' sets the address to the Blur: Blend Contract. 'Log.Signature.Name' filters for the event name "StartAuction".
 
-
 # Latest Locked NFTs Buy Trades
 
 Locked NFTs are temporarily non-transferrable and can be traded or transferred after the lock period. These NFTs are often cheaper than non-locked. The following [query](https://ide.bitquery.io/Locked-NFT-bought-on-Blur-marketplace) retrieves the latest trades of locked NFTs by filtering for the 'BuyLocked' event under the Blur : [Blend Contract](https://explorer.bitquery.io/ethereum/smart_contract/0x29469395eaf6f95920e59f858042f0e28d98a20b/events). 
-
 
 ```
 {
@@ -1187,7 +1178,6 @@ When a seizure event happens, control of the NFT shifts to the lender or an enfo
 **Parameters**
 
 - `where`: 'LogHeader' filters the results where the Address matches the Blur: Blend contract address. 'Log' Further filters the results where the Name of Signature matches the "Seize" event.
-
 
 **Returned Data**
 

@@ -1,7 +1,7 @@
 ---
 title: Cardano Transactions API - Fees, Inputs, Outputs & Mints
 sidebar_label: Cardano Transactions API
-description: Query Cardano transactions with input and output totals, fees in ADA and USD, mint counts, withdrawals, and daily transaction counts via Bitquery GraphQL.
+description: "Cardano Transactions API - Fees, Inputs, Outputs & Mints: query and stream Cardano on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Cardano transactions API
   - Cardano fee API
@@ -12,7 +12,6 @@ keywords:
   - ADA transaction fees
   - Bitquery Cardano
 ---
-
 # Cardano Transactions API
 
 The Transactions API returns transaction-level data on Cardano: input and output totals, fees in ADA and USD, mint counts, withdrawals, and block context. Use it for daily reporting, fee analysis, spotting outlier transactions, and building activity dashboards.
@@ -75,6 +74,6 @@ Use `startOfInterval(unit: day, interval: 10)` for coarser buckets, raise `limit
 
 ## Related resources
 
-- [Cardano Blocks API](https://docs.bitquery.io/docs/blockchain/Cardano/blocks) — block-level lookups and time-window queries
-- [Cardano Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Cardano/inputs-outputs) — UTXO-level transaction data
-- [Cardano Mints API](https://docs.bitquery.io/docs/blockchain/Cardano/mints) — drill into the mint events behind `mintCount`
+- [Cardano Blocks API](/docs/blockchain/Cardano/blocks) — block-level lookups and time-window queries
+- [Cardano Inputs and Outputs API](/docs/blockchain/Cardano/inputs-outputs) — UTXO-level transaction data
+- [Cardano Mints API](/docs/blockchain/Cardano/mints) — drill into the mint events behind `mintCount`

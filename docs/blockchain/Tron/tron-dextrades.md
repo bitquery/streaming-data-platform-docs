@@ -1,42 +1,15 @@
 ---
 sidebar_position: 2
+title: "Tron DEXtrades API"
+description: "Tron DEXtrades API: get Tron DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Built for traders and analytics teams."
 ---
-
 # Tron DEX Trades API
 
 :::tip Need real-time Tron DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API** (filter with `Pair.Market.Network: Tron`). Use this page when you need **historical Tron data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Tron`). Use this page when you need **historical Tron data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
 :::
 
-
-**Tron DEX Trades** help you see **who swapped what, when, and at what price** on Tron decentralized exchanges which is useful for dashboards, alerts, research, and trading tools. The examples below are ready-to-run **GraphQL** queries and subscriptions you can copy into the [Bitquery IDE](https://ide.bitquery.io). You can also stream at scale via [Apache Kafka](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
-
-<head>
-<meta name="title" content="How to Get Tron Decentralized Exchange Data with DEX Trades API"/>
-<meta name="description" content="Get on-chain data of any Tron based DEX through our DEX Trades API."/>
-<meta name="keywords" content="Tron DEX Trades api,Tron DEX Trades python api,Tron DEX Trades token api,Tron Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,Tron network api, Tron web3 api, tronscan api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to Get Tron Decentralized Exchange Data with DEX Trades API"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any Tron based DEX through our DEX Trades API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to Get Tron Decentralized Exchange Data with DEX Trades API" />
-<meta property="twitter:description" content="Get on-chain data of any Tron based DEX through our DEX Trades API." />
-</head>
+**Tron DEX Trades** help you see **who swapped what, when, and at what price** on Tron decentralized exchanges which is useful for dashboards, alerts, research, and trading tools. The examples below are ready-to-run **GraphQL** queries and subscriptions you can copy into the [Bitquery IDE](https://ide.bitquery.io). You can also stream at scale via [Apache Kafka](/docs/streams/kafka-streaming-concepts/).
 
 ## Live DEX swap stream (Tron) {#crypto-trades-live-stream}
 

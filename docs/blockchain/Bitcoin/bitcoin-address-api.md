@@ -1,7 +1,7 @@
 ---
-title: Bitcoin Address API - Get BTC Balance, UTXO Activity & USD Values
+title: "Bitcoin Address API - Get BTC Balance"
 sidebar_label: Bitcoin Address API
-description: Query Bitcoin address balances from raw UTXOs, balance at a historical block height, multi-address aggregates, first/last active timestamps, and per-period activity.
+description: "Bitcoin Address API - Get BTC Balance: query and stream Bitcoin on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Bitcoin address API
   - Bitcoin balance API
@@ -13,7 +13,6 @@ keywords:
   - addressStats Bitcoin
   - Bitquery Bitcoin
 ---
-
 # Bitcoin Address API
 
 Bitcoin doesn't store account balances on-chain — there is no `getBalance` call. The reliable way to get an address balance is to sum every UTXO the address received (outputs) and subtract every UTXO it has spent (inputs). Bitquery indexes that UTXO data and pairs every value with the BTC/USD price at the time of the transaction, so you can pull current balances, historical balances at a specific block, or full activity timelines in a single request.
@@ -235,6 +234,6 @@ Returns every UTXO an address spent or received inside a time window, with block
 
 ## Related resources
 
-- [Bitcoin Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — more UTXO patterns, miner rewards, and historical BTC price
-- [Bitcoin Transactions API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-transactions-api) — per-tx detail and pagination
-- [Bitcoin Coinpath API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-coinpath-api) — multi-hop fund tracing
+- [Bitcoin Inputs and Outputs API](/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — more UTXO patterns, miner rewards, and historical BTC price
+- [Bitcoin Transactions API](/docs/blockchain/Bitcoin/bitcoin-transactions-api) — per-tx detail and pagination
+- [Bitcoin Coinpath API](/docs/blockchain/Bitcoin/bitcoin-coinpath-api) — multi-hop fund tracing

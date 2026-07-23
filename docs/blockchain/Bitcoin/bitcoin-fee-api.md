@@ -1,7 +1,7 @@
 ---
-title: Bitcoin Fee API - Get Per-Tx Fees, USD Fees, and Address Aggregates
+title: "Bitcoin Fee API"
 sidebar_label: Bitcoin Fee API
-description: Query Bitcoin transaction fees with per-tx breakdowns and aggregate totals in BTC and USD. Useful for fee estimation, wallet expense tracking, and cost analysis.
+description: "Bitcoin Fee API: analyze Bitcoin transaction fees and costs with Bitquery GraphQL queries and streams. Great for bots, dashboards, and alerts."
 keywords:
   - Bitcoin fee API
   - Bitcoin transaction fees
@@ -12,7 +12,6 @@ keywords:
   - Bitcoin fee aggregates
   - Bitquery Bitcoin
 ---
-
 # Bitcoin Fee API
 
 Query Bitcoin transaction fees at the per-transaction level or aggregated across an address or time window — in BTC and USD. Use it for fee estimation, wallet expense tracking, and historical fee trend analysis.
@@ -87,6 +86,6 @@ Change `date` to a range for multi-day totals, drop `inputAddress` for a network
 
 ## Related resources
 
-- [Bitcoin Transactions API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-transactions-api) — full transaction query patterns
-- [Bitcoin Address API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-address-api) — address balances and activity
-- [Bitcoin Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — UTXO-level detail
+- [Bitcoin Transactions API](/docs/blockchain/Bitcoin/bitcoin-transactions-api) — full transaction query patterns
+- [Bitcoin Address API](/docs/blockchain/Bitcoin/bitcoin-address-api) — address balances and activity
+- [Bitcoin Inputs and Outputs API](/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — UTXO-level detail

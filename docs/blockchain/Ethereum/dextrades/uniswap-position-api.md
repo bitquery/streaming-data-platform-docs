@@ -1,9 +1,8 @@
 ---
 title: "Uniswap V3 Position API - Track Liquidity Positions"
-description: "Track Uniswap V3 NFT positions, monitor liquidity changes, position creation, and position management using Bitquery's Position API."
+description: "Uniswap V3 Position API - Track Liquidity Positions: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams."
 sidebar_label: Uniswap v3 LP Positions
 ---
-
 # Uniswap V3 Position API - Track Liquidity Positions
 
 Uniswap V3 introduced NFT-based liquidity positions, where each position is represented as an ERC-721 NFT. Bitquery's Position API allows you to track position creation, liquidity additions, removals, burns, and query position details in real-time.
@@ -14,29 +13,6 @@ The Uniswap V3 NonfungiblePositionManager contract (`0xC36442b4a4522E871399CD717
 - **Burn**: Closes positions (requires NFT ID)
 - **IncreaseLiquidity/DecreaseLiquidity**: Modifies existing positions (requires NFT ID)
 - **Positions**: Queries position details by token ID
-
-<Head>
-  <meta name="title" content="Uniswap V3 Position NFT API - Track Liquidity Positions on Ethereum" />
-  <meta name="description" content="Monitor Uniswap V3 NFT positions, track liquidity providers, position creation, and position management using Bitquery's real-time Position API." />
-  <meta name="keywords" content="Uniswap V3 API,Uniswap positions API,Uniswap NFT positions,Uniswap liquidity API,Ethereum liquidity positions,DeFi position tracking,Uniswap V3 liquidity provider,NFT position API,Bitquery API,Uniswap position management,liquidity provider analytics,Uniswap V3 positions tracking,DeFi analytics API" />
-  <meta name="robots" content="index, follow" />
-  <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
-
-  <meta property="og:type" content="website" />
-  <meta
-    property="og:title"
-    content="Uniswap V3 Position NFT API - Track Liquidity Positions"
-  />
-  <meta
-    property="og:description"
-    content="Track Uniswap V3 NFT positions, liquidity changes, and position analytics with Bitquery's real-time API."
-  />
-
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="Uniswap V3 Position NFT API - Liquidity Position Tracking" />
-  <meta property="twitter:description" content="Monitor Uniswap V3 positions, track liquidity providers, and analyze position changes in real-time." />
-</Head>
 
 ## Table of Contents
 

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 11
+title: "Contributing to V2 Documentation"
+description: "Contributing to V2 Documentation: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
-
 # Contributing to V2 Documentation
 
 ## New contributors

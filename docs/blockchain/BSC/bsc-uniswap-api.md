@@ -1,5 +1,7 @@
 ---
 sidebar_position: 7
+title: "BNB Chain Uniswap API"
+description: "BNB Chain Uniswap API: query BNB Chain Uniswap trades, pools, and prices with Bitquery GraphQL DEX APIs. Copy GraphQL snippets for production apps."
 ---
 import FAQ from "@site/src/components/FAQ";
 
@@ -8,29 +10,6 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 # BSC Uniswap API
 
 This section provides you with a set of queries that provides an insight about the Uniswap DEX on BSC.
-
-<head>
-  <meta name="title" content="BSC Uniswap API - BSC - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get on-chain data of any Uniswap based token through our Uniswap API."/>
-  <meta name="keywords" content="Uniswap API,Uniswap on-chain data API,Uniswap token data API,BSC blockchain API,Uniswap DEX data API,Uniswap API documentation,Uniswap crypto API,Uniswap web3 API,DEX Trades,BSC,BNB, Uniswap,Uniswap memecoins,BSC DEX,Uniswap DEX,token trading,blockchain data,crypto trading"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="BSC Uniswap API - BSC - Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any Uniswap BSCd token through our Uniswap API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Uniswap API - BSC - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any Uniswap BSCd token through our Uniswap API."/>
-</head>
 
 ## Get Latest Trades on Uniswap v3
 

@@ -1,35 +1,11 @@
 ---
 sidebar_position: 2
+title: "BSC Validator Balance Tracker"
+description: "BSC Validator Balance Tracker: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
-
 # BSC Validator Balance Tracker
 
 The BSC Validator Balance Tracker API provides real-time balance updates for BSC validators, tracking their staking rewards, withdrawals, and balance changes.
-
-<head>
-<meta name="title" content="BSC Validator Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track BSC validator balances, staking rewards, and withdrawals using Bitquery's Validator Balance Tracker API."/>
-<meta name="keywords" content="bsc validator balance, validator staking rewards, bsc validator api, validator balance tracker, bsc beacon chain, validator withdrawals, staking rewards api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="BSC Validator Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to track BSC validator balances, staking rewards, and withdrawals using Bitquery's Validator Balance Tracker API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="BSC Validator Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track BSC validator balances, staking rewards, and withdrawals using Bitquery's Validator Balance Tracker API." />
-</head>
 
 ## Track Validator Balance Updates
 

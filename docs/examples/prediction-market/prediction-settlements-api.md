@@ -1,6 +1,6 @@
 ---
 title: "Prediction Market Settlements API"
-description: "Query prediction market settlements: real-time streams, latest settlements, redemptions, whale activity, top winners, and top market questions. Split, merge, and redemption events on Polygon (Polymarket and more)."
+description: "Prediction Market Settlements API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - PredictionSettlements
   - prediction market settlements API
@@ -14,7 +14,6 @@ keywords:
   - prediction market analytics
   - Bitquery GraphQL prediction
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Prediction Market Settlements API
@@ -398,7 +397,6 @@ query TopRedeemers {
   }
 }
 ```
-
 
 ---
 

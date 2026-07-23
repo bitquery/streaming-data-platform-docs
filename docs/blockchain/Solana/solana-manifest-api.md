@@ -1,11 +1,14 @@
+---
+title: "Solana Manifest API"
+description: "Solana Manifest API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
+---
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Manifest DEX API
 
 :::tip Need real-time Manifest data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Manifest swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Manifest data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Manifest swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Manifest data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
-
 
 Track real-time trades, token prices, OHLC data, top traders, and trading volume on **Manifest** DEX on Solana using Bitquery's GraphQL API. Filter by `Dex: { ProtocolFamily: { is: "Manifest" } }` to get Manifest-only data.
 

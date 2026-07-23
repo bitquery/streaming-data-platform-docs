@@ -1,6 +1,6 @@
 ---
 title: Bitcoin Data - Snowflake, AWS S3, GCP BigQuery
-description: Export Bitcoin blockchain data to cloud storage with Parquet datasets optimized for Snowflake, AWS S3, Google BigQuery, and data lakes. Get blocks, transactions, inputs, outputs, and OMNI data for large-scale analytics.
+description: "Bitcoin Data - Snowflake, AWS S3, GCP BigQuery from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake."
 keywords:
   - Bitcoin blockchain data
   - Bitcoin GCP Bigquery
@@ -22,7 +22,6 @@ keywords:
   - Bitcoin data dumps
 sidebar_position: 3
 ---
-
 # Bitcoin Data
 
 Bitquery provides **Bitcoin blockchain data dumps** in **Parquet format**, designed for large-scale analytics, historical backfills, and data lake integrations.
@@ -61,8 +60,6 @@ You can explore schemas and validate your tooling using the **public Bitcoin sam
 https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/bitcoin/blocks/<block_range>.parquet
 
 ```
-
-
 
 ## Bitcoin Dataset Directory Structure
 
@@ -109,14 +106,13 @@ Example:
 
     
 
-
 ## Real-Time vs Batch Data Access
 
 Cloud data dumps are optimized for **batch analytics and historical workloads**.
 
 If you require **low-latency or streaming Bitcoin data**, Bitquery also provides:
 
--   [**Kafka streams**](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
+-   [**Kafka streams**](/docs/streams/kafka-streaming-concepts/)
     
 -   **GraphQL subscriptions**
     

@@ -1,3 +1,7 @@
+---
+title: "Stablecoin Balance API"
+description: "Stablecoin Balance API using Bitquery stablecoin APIs for prices, transfers, payments, and cross-chain monitoring workflows."
+---
 # Stablecoin Balance API
 
 The Stablecoin API by Bitquery provides you the comprehensive set of APIs which can provide you realtime transfers, realtime trades, realtime price, holder distribution of stablecoins across chains with a single API call.
@@ -83,9 +87,9 @@ query MyQuery {
 
 ```
 
-More examples on balance and balance updates on EVM chains can be found [here](https://docs.bitquery.io/docs/examples/balances/balance-api/)
+More examples on balance and balance updates on EVM chains can be found [here](/docs/blockchain/Ethereum/balances/balance-api/)
 
-Token holder API examples can be found [here](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api/)
+Token holder API examples can be found [here](/docs/blockchain/Ethereum/token-holders/token-holder-api/)
 
 ## Get Top 100 Holders of a Particular Stablecoin
 

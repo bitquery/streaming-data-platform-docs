@@ -1,41 +1,22 @@
+---
+title: "Solana Boop Fun API"
+description: "Solana Boop Fun API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
+---
 # Boop Fun API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 :::tip Need real-time Boop.fun data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Boop.fun data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Boop.fun data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-In this document, we will explore several examples related to Boop fun data. We also have [Raydium Launchpad APIs](https://docs.bitquery.io/docs/blockchain/Solana/launchpad-raydium/).
-Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/).
+In this document, we will explore several examples related to Boop fun data. We also have [Raydium Launchpad APIs](/docs/blockchain/Solana/launchpad-raydium/).
+Additionally, you can also check out our [Moonshot APIs](/docs/blockchain/Solana/Moonshot-API/), [FourMeme APIs](/docs/blockchain/BSC/four-meme-api/).
 These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on [telegram](https://t.me/Bloxy_info).
 
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
 :::
-
-<head>
-  <meta name="title" content="Boop Fun API - Solana - Tokens, Trades, Live Prices"/>
-  <meta name="description" content="Get on-chain data of any Boop.fun based token through our Boop.fun API."/>
-  <meta name="keywords" content="Boop.fun API,Boop.fun on-chain data API,Boop.fun token data API,Boop.fun blockchain API,Boop.fun DEX data API,Boop.fun API documentation,Boop.fun crypto API,Boop.fun web3 API,DEX Trades,Solana,Blast,Boop.fun memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Boop Fun API - Solana - Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any Boop.fun based token through our Boop.fun API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Boop Fun API - Solana - Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get on-chain data of any Boop.fun based token through our Boop.fun API."/>
-</head>
 
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 

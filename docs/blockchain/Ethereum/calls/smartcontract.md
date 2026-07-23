@@ -1,29 +1,11 @@
 ---
 sidebar_position: 2
+title: "SmartContract Calls API"
+description: "SmartContract Calls API: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 ---
 import FAQ from "@site/src/components/FAQ";
 
 # SmartContract Calls API
-
-<head>
-<meta name="title" content="Ethereum Smart Contract Calls API | Get Contract Function Data"/>
-<meta name="description" content="Retrieve detailed information about smart contract transactions, function calls, input/output parameters, and contract interactions on Ethereum using our comprehensive API."/>
-<meta name="keywords" content="ethereum smart contract api, smart contract calls api, ethereum contract function api, smart contract analytics api, ethereum transaction api, contract interaction api, ethereum web3 api, smart contract monitoring api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Ethereum Smart Contract Calls API | Get Contract Function Data" />
-<meta property="og:description" content="Retrieve detailed information about smart contract transactions, function calls, input/output parameters, and contract interactions on Ethereum using our comprehensive API." />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum Smart Contract Calls API | Get Contract Function Data" />
-<meta property="twitter:description" content="Retrieve detailed information about smart contract transactions, function calls, input/output parameters, and contract interactions on Ethereum using our comprehensive API." />
-</head>
-
 
 <FAQ
   items={[
@@ -36,7 +18,7 @@ import FAQ from "@site/src/components/FAQ";
 
 ## Smart Contract Calls API Guide
 
-> **Before you start**: Not sure when to use Calls vs Transfers vs Events vs DexTrades? Read our [Mental Model guide](https://docs.bitquery.io/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
+> **Before you start**: Not sure when to use Calls vs Transfers vs Events vs DexTrades? Read our [Mental Model guide](/docs/start/mental-model-transfers-events-calls) to understand which primitive to use for your use case.
 
 This API helps retrieve information about smart contract transactions, including details about the contract function that was called, the input and output parameters, and more. With this data, you can build applications that interact with smart contracts, perform analytics on contract activity, and more.
 
@@ -79,9 +61,6 @@ This query retrieves the most recent smart contract calls on the Ethereum networ
 
 </details>
 
-
-
-
 ## Recent Smart Contract Creation Calls
 
 This GraphQL query fetches data from the "eth" network about the 10 most recent calls made in Ethereum that were contract creation calls.
@@ -117,7 +96,6 @@ query MyQuery {
     }
   }
 }
-
 
 ```
 

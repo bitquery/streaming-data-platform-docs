@@ -1,12 +1,15 @@
 ---
 sidebar_position: 4
+title: "Crypto Dashboard Project"
+description: "Build Crypto Dashboard Project: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
-
 # Crypto Dashboard Project 
 
 The following tutorial helps build a Cryptocurrency Portfolio Dashboard with React that fetches and displays the balance of different currencies for a given Ethereum address using the Bitquery Streaming API.
 
-This is how it will look ![finally](/img/ApplicationExamples/crypto_dashboard.gif)
+This is how it will look:
+
+<video controls loop muted playsInline width="100%" src="/img/ApplicationExamples/crypto_dashboard.mp4"></video>
 
 The app has the following features:
 
@@ -28,7 +31,6 @@ To use this code, you need to have the following dependencies installed in your 
 3. axios
 4. react-icons
 
-
 ### Create App
 Create an empty react app with the
 ```
@@ -36,7 +38,6 @@ npx create-react-app my-app
 
 ```
 command and clear the defaults in app.js file. 
-
 
 ### Import Statements
 ```

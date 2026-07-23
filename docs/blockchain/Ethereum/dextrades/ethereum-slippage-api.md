@@ -1,6 +1,8 @@
 ---
 sidebar_position: 3
 sidebar_label: Slippage & Price Impact
+title: "EVM DEX Slippage API"
+description: "EVM DEX Slippage API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Includes filters and field selection tips."
 ---
 import FAQ from "@site/src/components/FAQ";
 
@@ -9,33 +11,6 @@ import FAQ from "@site/src/components/FAQ";
 In this section we will see how to get Ethereum DEX pool slippage information using our API. The slippage API helps you understand **Uniswap price impact slippage** and liquidity depth for token swaps on Ethereum DEX pools. Use it as a **Uniswap slippage calculator** to **calculate slippage** and set **Uniswap slippage tolerance** for Uniswap V2, V3, and V4 pools—including **Uniswap V3 price impact slippage** at different tolerance levels.
 
 > **Note:** This API also works for other EVM chains such as Base, BSC, and Arbitrum—just change the network parameters in your request.
-
-<head>
-<meta name="title" content="EVM DEX Pool - Uniswap Slippage API/Websocket"/>
-<meta name="description" content="Get slippage and price impact data for Ethereum DEX pools through our Slippage API."/>
-<meta name="keywords" content="Ethereum slippage api, Ethereum DEX pool api, Ethereum liquidity api, Ethereum price impact api, Ethereum DEX api, Ethereum web3 api, uniswap slippage tolerance, uniswap price impact slippage, uniswap slippage calculator, calculate slippage uniswap, uniswap v3 price impact slippage"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="EVM DEX Pool - Uniswap Slippage API/Websocket"
-/>
-<meta
-  property="og:description"
-  content="Get slippage and price impact data for Ethereum DEX pools through our Slippage API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="EVM DEX Pool - Uniswap Slippage API/Websocket" />
-<meta property="twitter:description" content="Get slippage and price impact data for Ethereum DEX pools through our Slippage API." />
-</head>
 
 ## What is Slippage and Price Impact in Crypto DEX pools?
 
@@ -47,7 +22,7 @@ The DEXPoolSlippages API provides detailed information about:
 - Average execution prices for different trade sizes
 - Price impact calculations for both swap directions (A to B and B to A)
 
-For a comprehensive explanation of how DEX pools work, liquidity calculations, and price tables, refer to the [DEXPools Cube documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/).
+For a comprehensive explanation of how DEX pools work, liquidity calculations, and price tables, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/).
 
 ## Realtime Slippage Monitoring for Uniswap Pools
 
@@ -111,7 +86,6 @@ subscription {
 ## Latest Slippage for a Specific Pool on Uniswap V3
 
 This query retrieves the latest slippage data for a specific DEX pool on Ethereum. Use it to calculate slippage and check Uniswap V3 price impact slippage for a particular token pair before trading.
-
 
 You can find the query [here](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3-Ethereum)
 
@@ -247,7 +221,7 @@ Kafka streams provide the same slippage data as GraphQL subscriptions but with s
 - Ability to read from latest offset without gaps
 - Better scalability with multiple consumers
 
-For detailed information on how to connect to Kafka streams, subscribe to topics, and parse messages, refer to the [Kafka Streaming Concepts documentation](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+For detailed information on how to connect to Kafka streams, subscribe to topics, and parse messages, refer to the [Kafka Streaming Concepts documentation](/docs/streams/kafka-streaming-concepts/).
 
 > **Note:** IDE credentials will not work with Kafka Streams. You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
 
@@ -269,7 +243,7 @@ The `DEXPoolSlippages` API response contains the following information:
   - `Time`: Timestamp of the block
   - `Number`: Block number
 
-For more details on how slippage is calculated and when new pool records are emitted, see the [DEXPools Cube documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/#when-is-a-new-dexpool-record-emitted-in-the-apis--streams).
+For more details on how slippage is calculated and when new pool records are emitted, see the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#when-is-a-new-dexpool-record-emitted-in-the-apis--streams).
 
 ## Use Cases
 
@@ -316,7 +290,7 @@ For a practical implementation example of using slippage data for automated trad
 - Execute fade trades against temporary price impacts
 - Manage positions with dynamic stop losses and take profits based on slippage data
 
-For more advanced use cases, refer to the [DEXPools Cube documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/#advanced-use-cases-and-processing-patterns).
+For more advanced use cases, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#advanced-use-cases-and-processing-patterns).
 
 <FAQ
   items={[

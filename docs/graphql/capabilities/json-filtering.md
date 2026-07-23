@@ -1,3 +1,7 @@
+---
+title: "Filtering JSON Arguments"
+description: "Filtering JSON Arguments in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
+---
 # Filtering JSON Arguments
 
 Starting October 2025, we support filtering of JSON arguments in Solana instructions. This feature allows you to query blockchain data based on the parsed argument values within program instructions.
@@ -96,7 +100,6 @@ The following query demonstrates how to filter `setAuthority` method calls where
 - `Accounts` - Array of account addresses involved in the instruction
 - `Transaction.Signature` - The transaction signature
 
-
 ## Filtering Options
 
 ### JSON Value Operators
@@ -155,6 +158,4 @@ Arguments: {
   ]
 }
 ```
-
-
 

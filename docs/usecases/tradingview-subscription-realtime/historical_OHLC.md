@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Getting Historical Data"
+description: "Build Getting Historical Data: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
-
 # Getting Historical Data
 
 In this section, we will write the code to get historical OHLC data to populate a chart with candlesticks up to the current timestamp. Create a new file called `histOHLC.js` and add the following code. Each part of the code is explained below.
@@ -20,7 +21,7 @@ import { connectBarContinuity } from "./barContinuity";
 
 ### API Endpoint and Query
 
-We are using the [Tokens Cube from the Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) which gives you price of a token on different chains in **USD**. You can use Pairs Cube as well to get price against specific currency.
+We are using the [Tokens Cube from the Crypto Price API](/docs/trading/crypto-price-api/introduction/) which gives you price of a token on different chains in **USD**. You can use Pairs Cube as well to get price against specific currency.
 
 [You can test the query here](https://ide.bitquery.io/Historical-price-data)
 
@@ -117,7 +118,7 @@ export async function fetchHistoricalData(from) {
 ```
 
 - **axios.post**: Sends a POST request to Bitquery's streaming endpoint with the GraphQL query and an authorization token.
-- **Authorization**: Token is stored securely in `configs.json`. You can generate one by following [these instructions](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+- **Authorization**: Token is stored securely in `configs.json`. You can generate one by following [these instructions](/docs/authorization/how-to-generate/).
 
 ### Data Processing
 

@@ -1,14 +1,13 @@
 ---
 sidebar_position: 3
+title: "Database Selection"
+description: "Database Selection in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. See examples in the Bitquery IDE."
 ---
-
-
 # Database Selection
 
 Dataset attribute on the query top level defines the database to query:
 
 ![Dataset option](/img/ide/dataset_option.png)
-
 
 * ```realtime``` (default) is the real time database, containing the new blocks
 * ```archive``` is the finalized database, data from the first block to a recent time (from hours to minutes ago)

@@ -1,6 +1,6 @@
 ---
 title: "Prediction Market API"
-description: "Universal prediction market API: query market lifecycle, trades, and settlements across chains. Polymarket and more; additional EVM chains coming soon."
+description: "Prediction Market API: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Covers archive history and realtime data."
 keywords:
   - prediction market API
   - Polymarket API
@@ -14,7 +14,6 @@ keywords:
   - market resolution
   - outcome tokens
 ---
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Prediction Market API
@@ -35,7 +34,7 @@ Flow: **Management** (Created) → **Trades** (Buy/Sell) → **Settlement** (Spl
 
 This is a **universal** prediction market API: the same cubes and fields work across supported chains. Use `EVM(network: matic)` for Polygon today; more chains will be added over time.
 
-For contract-level and event-based Polymarket data (e.g. OrderFilled, ConditionResolution), see the [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/) docs.
+For contract-level and event-based Polymarket data (e.g. OrderFilled, ConditionResolution), see the [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) docs.
 
 <VideoPlayer url="https://www.youtube.com/watch?v=kb7lFJ2RnXE" />
 

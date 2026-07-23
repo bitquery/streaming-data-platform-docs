@@ -1,6 +1,6 @@
 ---
-title: "GMGN API for Ethereum & EVM | Trending Pairs, Token Stats, DEX Trades"
-description: "Build GMGN-style dashboards on Ethereum and EVM chains: trending DEX pairs, live pair trades, token price, buy/sell volume, makers, OHLC, pool liquidity, top traders, and new Uniswap v3 pools via Bitquery GraphQL and WebSocket."
+title: "Ethereum EVM Gmgn API"
+description: "Ethereum EVM Gmgn API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. See examples in the Bitquery IDE."
 sidebar_label: GMGN
 keywords:
   - GMGN API
@@ -25,19 +25,6 @@ import FAQ from "@site/src/components/FAQ";
 Use Bitquery’s **GraphQL** and **subscription** APIs to reproduce **GMGN**-style data on **Ethereum** and other **EVM** networks: **trending / top trading pairs**, **live trades per pair**, **token price in USD**, **buy and sell volume**, **makers**, **buyers and sellers**, **OHLC** for charts, **pool liquidity** by pair address, **top traders** for a token, and **new Uniswap v3 pools**. Examples below use `EVM(network: eth, …)`; change `network` for **Base**, **BSC**, **Arbitrum**, etc.
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
-
-<head>
-<meta name="title" content="GMGN API for Ethereum & EVM | DEX Screener Data via Bitquery"/>
-<meta name="description" content="GMGN-style Ethereum & EVM data: trending pairs, live trades, token stats, OHLC, liquidity, top traders, Uniswap pool creation streams. GraphQL + WebSocket."/>
-<meta name="keywords" content="GMGN API, GMGN data API, Ethereum DEX API, trending pairs API, DEX screener API, buy sell volume, makers, OHLC, pool liquidity, top traders, Uniswap v3, Bitquery GraphQL, WebSocket crypto trades"/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="GMGN API for Ethereum & EVM | Bitquery"/>
-<meta property="og:description" content="Trending pairs, live DEX trades, token metrics, OHLC, liquidity, and top traders—like GMGN—for Ethereum and EVM chains."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="GMGN API for Ethereum & EVM | Bitquery"/>
-<meta property="twitter:description" content="Trending pairs, live DEX trades, token metrics, OHLC, liquidity, and top traders for EVM chains."/>
-</head>
 
 ## Related APIs
 
@@ -87,7 +74,6 @@ query TrendingPairs {
   }
 }
 
-
 ```
 
 ## Get Trade Transactions for a particular pair in realtime
@@ -136,7 +122,6 @@ subscription{
   }
 }
 
-
 ```
 
 ## Get Price of a Token
@@ -169,7 +154,6 @@ query MyQuery {
   }
 }
 
-
 ```
 
 ## Get Liquidity of a specific pair by using its Pair Address
@@ -192,7 +176,6 @@ query MyQuery {
     }
   }
 }
-
 
 ```
 

@@ -1,3 +1,7 @@
+---
+title: "GraphQL Joins"
+description: "Joins in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Includes filters and field selection tips."
+---
 # GraphQL Joins
 
 Starting March 2025, Bitquery APIs support joins on the v2 endpoint.

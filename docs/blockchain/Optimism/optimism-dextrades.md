@@ -1,46 +1,19 @@
 ---
 sidebar_position: 2
+title: "Optimism DEX Trades API"
+description: "Optimism DEX Trades API: get Optimism DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Works with WebSocket live subscriptions."
 ---
-
 # Optimism DEX Trades API
 
 :::tip Need real-time Optimism DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API** (filter with `Pair.Market.Network: Optimism`). Use this page when you need **historical Optimism data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Optimism`). Use this page when you need **historical Optimism data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
 :::
-
 
 If you were using Optimism RPC till now to get data, forget about it.
 
 Our Optimism real time streams are perfect alternative for Optimism web3 subscribe.
 
 In this section we will see how to get Optimism DEX trades information using our GraphQL APIs.
-
-<head>
-<meta name="title" content="How to Get Optimism Decentralized Exchange Data with Optimism DEX Trades API"/>
-<meta name="description" content="Get on-chain data of any Optimism based DEX through our DEX Trades API."/>
-<meta name="keywords" content="Optimism DEX Trades api,Optimism DEX Trades python api,Optimism DEX Trades token api,Optimism Dex NFT api, DEX Trades scan api, DEX Trades api, DEX Trades api docs, DEX Trades crypto api, DEX Trades blockchain api,Optimism network api, Optimism web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to Get Optimism Decentralized Exchange Data with Optimism DEX Trades API"
-/>
-<meta
-  property="og:description"
-  content="Get on-chain data of any Optimism based DEX through our DEX Trades API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to Get Optimism Decentralized Exchange Data with Optimism DEX Trades API" />
-<meta property="twitter:description" content="Get on-chain data of any Optimism based DEX through our DEX Trades API." />
-</head>
 
 ## Live DEX swap stream (Optimism) {#crypto-trades-live-stream}
 
@@ -128,7 +101,7 @@ subscription {
 
 [This](https://ide.bitquery.io/trending-pairs-on-optimism) query returns the top trending trading pairs on Optimism based on the `Trade Volume`, and returns info like unique buyers and sellers, number of markets where the pair exist, latest price and price at a given time and much more.
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
 ```graphql
 query pairs(
@@ -224,7 +197,7 @@ query pairs(
 
 The example of this could be seen on the [DEXRabbit](https://dexrabbit.com/optimism).
 
-![Trending Pairs on Optimism](../../../static/img/dexrabbit/optimism_trending_pairs.png)
+![Trending Pairs on Optimism](/img/dexrabbit/optimism_trending_pairs.png)
 
 ## Subscribe to Latest Optimism Trades
 
@@ -278,7 +251,6 @@ subscription {
   }
 }
 
-
 ```
 
 ## Get Top Traders on Optimism
@@ -306,7 +278,7 @@ query topTraders($network: evm_network, $time_ago: DateTime) {
 
 You can checkout a completed product using this info on [DEXRabbit](https://dexrabbit.com/optimism/trader).
 
-![Top Traders on Optimism](../../../static/img/dexrabbit/optimism_top_traders.png)
+![Top Traders on Optimism](/img/dexrabbit/optimism_top_traders.png)
 
 ## Get Top Traders for a Pair on Optimism
 
@@ -355,7 +327,7 @@ query pairTopTraders(
 
 An example for the same could be seen in the [DEXRabbit](https://dexrabbit.com/optimism/pair/0xdc6ff44d5d932cbd77b52e5612ba0529dc6226f1/0x0b2c639c533813f4aa9d7837caf62653d097ff85#pair_top_traders) as shown below.
 
-![Top Traders for a Pair](../../../static/img/dexrabbit/optimism_top_pair_traders.png)
+![Top Traders for a Pair](/img/dexrabbit/optimism_top_pair_traders.png)
 
 ## Subscribe to Latest Price of a Token in Real-time
 
@@ -436,7 +408,7 @@ query topTokens($network: evm_network, $time_ago: DateTime!) {
 
 An example of the utilisation of this data could be seen on [DEXRabbit](https://dexrabbit.com/optimism/token).
 
-![Top Tokens on Optimism](../../../static/img/dexrabbit/optimism_top_tokens.png)
+![Top Tokens on Optimism](/img/dexrabbit/optimism_top_tokens.png)
 
 ## Latest USD Price of a Token
 
@@ -483,7 +455,5 @@ subscription {
     }
   }
 }
-
-
 
 ```

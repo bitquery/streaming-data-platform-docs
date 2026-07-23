@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "Subscription on Aggregated Metrics"
+description: "Subscription on Aggregated Metrics in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
-
 # Subscription on Aggregated Metrics
 
 It is a subscription to the results of [Query Aggregated Metrics](/docs/graphql/capabilities/aggregated_metrics).

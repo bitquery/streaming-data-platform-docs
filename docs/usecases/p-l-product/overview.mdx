@@ -1,10 +1,11 @@
 ---
 sidebar_position: 1
+title: "Crypto Profit and Loss Calculator"
+description: "Build a JavaScript crypto PnL calculator with Bitquery DEX trades for cost basis, proceeds, realized gains, and reporting."
 ---
-
 # Overview
 
-Profit and Loss calculation in crypto is not easy to build. However, it is an important metric while evaluating the financial performance of an asset. In this tutorial, we will see how to build a simple profit and loss calculator in Javascript using Bitquery's [DEXTrades API](https://docs.bitquery.io/docs/examples/dextrades/dex-api/)
+Profit and Loss calculation in crypto is not easy to build. However, it is an important metric while evaluating the financial performance of an asset. In this tutorial, we will see how to build a simple profit and loss calculator in Javascript using Bitquery's [DEXTrades API](/docs/blockchain/Ethereum/dextrades/dex-api/)
 
 ## Realized PnL
 
@@ -17,7 +18,6 @@ WABP = sum(buyAmount*buyPriceInUSD)/sum(buyAmount)
 pnl = sum(sellAmount*(sellPriceInUSD-WABP))
 ```
 
-
 ### Example Scenario:
 
 An account buys and sells a token as follows:
@@ -29,7 +29,6 @@ An account buys and sells a token as follows:
 
 2. **Sell Transaction**:
    - Sells 15 tokens at $7 each.
-
 
 #### Step 1: Calculate the Weighted Average Buy Price (WABP)
 
@@ -73,8 +72,7 @@ Realized PnL = 19.95
 
 The realized PnL for this transaction is $19.95.
 
-Click [here](https://docs.bitquery.io/docs/usecases/p-l-product/pnl) to get started with the project.
-
+Click [here](/docs/usecases/p-l-product/pnl) to get started with the project.
 
 ## Complete Video Tutorial
 

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "Solana Token Supply API"
+description: "Solana Token Supply API: stream Solana market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs. Built for traders and analytics teams."
 ---
-
 # Solana Token Supply API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
@@ -23,44 +24,17 @@ The **Solana Token Supply API** provides comprehensive access to real-time token
 
 ## 🔗 Related Solana APIs
 
-- **[Solana Instructions API](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/)** - Track token creation and burn instructions
-- **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)** - Monitor balance changes from supply updates
-- **[Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/)** - Track transfers that affect token supply
-- **[Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities impacting supply
-- **[Solana Fees API](https://docs.bitquery.io/docs/blockchain/Solana/solana_fees_api/)** - Analyze fees from supply-related transactions
-
-<head>
-<meta name="title" content="Solana Token Supply API | Easiest way to get Solana Token supply"/>
-<meta name="description" content="Access real-time on-chain data for Solana token supply and more through our Solana Token Supply API."/>
-<meta name="keywords" content="Solana Token Supply API, Solana Token Supply python api, Solana Token Supply data api, Solana Token Supply blockchain api, token supply scan api, Solana web3 token supply api, Solana DEX token supply API, Solana network token supply API"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Solana Token Supply API | Easiest way to get Solana Token supply"
-/>
-<meta
-  property="og:description"
-  content="Access real-time on-chain data for Solana token supply and more through our Solana Token Supply API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Solana Token Supply API | Easiest way to get Solana Token supply" />
-<meta property="twitter:description" content="Access real-time on-chain data for Solana token supply and more through our Solana Token Supply API." />
-</head>
+- **[Solana Instructions API](/docs/blockchain/Solana/solana-instructions/)** - Track token creation and burn instructions
+- **[Solana Balance Updates API](/docs/blockchain/Solana/solana-balance-updates/)** - Monitor balance changes from supply updates
+- **[Solana Transfers API](/docs/blockchain/Solana/solana-transfers/)** - Track transfers that affect token supply
+- **[Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities impacting supply
+- **[Solana Fees API](/docs/blockchain/Solana/solana_fees_api/)** - Analyze fees from supply-related transactions
 
 ## Subscribe to Token Supply Changes
 
 This subscription will return the token supply changes in realtime. `PostBalance` will give you the current supply. Check the query [here](https://ide.bitquery.io/token-supply-updates-sub)
 
-For tracking the instructions that cause these supply changes (like token creation and burning), see our **[Solana Instructions API](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/)**.
+For tracking the instructions that cause these supply changes (like token creation and burning), see our **[Solana Instructions API](/docs/blockchain/Solana/solana-instructions/)**.
 
 ```graphql
 subscription {
@@ -246,8 +220,6 @@ query MyQuery {
 }
 ```
 
-
-
 ## Marketcap of a Token
 
 We use `PostBalanceInUSD` field to get the marketcap. Since it is built on real-time data, you will get the Marketcap if the token was active in the past 8 hours or is being transacted in real-time.
@@ -318,7 +290,7 @@ Here is an example which gets both supply and Price.
 
 ## Monitor Market Cap Metric for a Pump Fun Token
 
-The subscription given [below](https://ide.bitquery.io/pump-fun-token-mcap-monitoring) could be used to setup a [websocket](https://docs.bitquery.io/docs/subscriptions/websockets/) like solution that monitors market cap of a Pump Fun token in real time, where the `PostBalanceInUSD` is essentially the marketcap of the token.
+The subscription given [below](https://ide.bitquery.io/pump-fun-token-mcap-monitoring) could be used to setup a [websocket](/docs/subscriptions/websockets/) like solution that monitors market cap of a Pump Fun token in real time, where the `PostBalanceInUSD` is essentially the marketcap of the token.
 
 ```graphql
 subscription {

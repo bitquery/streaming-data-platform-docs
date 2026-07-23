@@ -1,6 +1,6 @@
 ---
-title: "TradingView API - Real-Time Crypto Charts, OHLCV Stream & Chart API"
-description: "TradingView API integration: Build real-time crypto charts with live OHLCV, 1-second candlesticks, and TradingView chart API. DEX data, multi-chain support."
+title: "TradingView Realtime Starter Guide"
+description: "Build Getting Started: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code. Keep queries fast with indexed filters."
 sidebar_position: 1
 keywords:
   [
@@ -17,7 +17,6 @@ keywords:
     real-time price feed,
   ]
 ---
-
 # TradingView API - Real-Time Crypto OHLC Stream
 
 This guide is the **entry point** for the tutorial: how to embed [TradingView Advanced Charts](https://in.tradingview.com/advanced-charts/) in a React app and drive the chart with **Bitquery**—historical OHLC over HTTPS and **live** OHLC over a GraphQL WebSocket subscription.
@@ -28,7 +27,7 @@ This guide is the **entry point** for the tutorial: how to embed [TradingView Ad
 
 The chart loads history first, then extends the last candle as new OHLC arrives:
 
-![](/img/ApplicationExamples/charting.gif)
+<video controls loop muted playsInline width="100%" src="/img/ApplicationExamples/charting.mp4"></video>
 
 ## If this is your first time here
 
@@ -40,7 +39,7 @@ Come back here when something is unclear—especially [Key concepts](#key-concep
 
 Before you open [Getting Historical Data](/docs/usecases/tradingview-subscription-realtime/historical_OHLC/), confirm you have:
 
-- A **Bitquery** account and **OAuth** token with streaming access ([how to generate a token](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+- A **Bitquery** account and **OAuth** token with streaming access ([how to generate a token](/docs/authorization/how-to-generate/)).
 - **TradingView Advanced Charts** approved and the `charting_library` files available locally (see [Prerequisites](#prerequisites)).
 - **Node.js 16+** installed.
 
@@ -85,7 +84,7 @@ You are responsible for **fetching** that data; Bitquery is the backend in this 
 
 ### Bitquery: one API, two transports
 
-- **Historical:** `POST` a GraphQL query to Bitquery’s HTTP endpoint (this tutorial uses patterns aligned with the [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/)).
+- **Historical:** `POST` a GraphQL query to Bitquery’s HTTP endpoint (this tutorial uses patterns aligned with the [Crypto Price API](/docs/trading/crypto-price-api/introduction/)).
 - **Real-time:** open a **WebSocket** connection and run a GraphQL **subscription**. Bitquery pushes new OHLC as it is finalized (for example per interval).
 
 Same schema family conceptually; different mechanics than REST polling.
@@ -107,7 +106,7 @@ Aggregated OHLC from any provider can have **open ≠ previous close**. This tut
 ### Must have
 
 - **Node.js 16+** (18 LTS is a safe choice).
-- A **Bitquery account** and an **OAuth token** with access to streaming (see [authorisation](https://docs.bitquery.io/docs/authorisation/how-to-generate/)).
+- A **Bitquery account** and an **OAuth token** with access to streaming (see [authorization](/docs/authorization/how-to-generate/)).
 - **TradingView Advanced Charts** access: you must **apply** and receive their library; it is not optional for this integration path.
 
 ## Architecture overview
@@ -176,7 +175,7 @@ Bitquery’s **Crypto Price** and related trading APIs cover many chains; the ex
 - **Solana:** Raydium, Orca, Pumpfun, PumpSwap, and other Solana DEXs where the API exposes them.
 - **Other:** Tron and additional networks as listed in the current schema.
 
-Always confirm your **network name** and **token address** format in the [IDE schema explorer](https://ide.bitquery.io) or main [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) documentation before shipping.
+Always confirm your **network name** and **token address** format in the [IDE schema explorer](https://ide.bitquery.io) or main [Crypto Price API](/docs/trading/crypto-price-api/introduction/) documentation before shipping.
 
 ---
 
@@ -206,7 +205,7 @@ Test these in [Bitquery IDE](https://ide.bitquery.io) **before** you paste them 
 ### Data quality notes
 
 - **Bar continuity** — optional normalization so candles meet visually ([Bar continuity](/docs/usecases/tradingview-subscription-realtime/bar-continuity/)).
-- **DEX aggregation** — Bitquery’s price products combine liquidity across venues; see the [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) docs for methodology and limits.
+- **DEX aggregation** — Bitquery’s price products combine liquidity across venues; see the [Crypto Price API](/docs/trading/crypto-price-api/introduction/) docs for methodology and limits.
 
 ---
 

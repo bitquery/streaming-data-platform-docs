@@ -1,15 +1,14 @@
 ---
 title: "Pump.fun API - Live Prices, OHLCV, ATH, MarketCap"
-description: "Get live Pump.fun token prices, OHLCV, ATH, market cap, and trades via Bitquery's GraphQL API, WebSocket streams, gRPC, or Kafka. Covers new tokens, migrations to PumpSwap, and bonding curve data on Solana."
+description: "Pump.fun API - Live Prices, OHLCV, ATH, MarketCap: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams."
 ---
-
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 import FAQ from "@site/src/components/FAQ";
 
 # Pump.fun API - Live Prices, OHLCV, ATH, MarketCap
 
 :::tip Need real-time Pump.fun data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Pump.fun examples using `Trading.Trades` are also shown in the **"Trader-Focused Trade APIs"** section below. Use the raw chain-level queries on this page when you need **historical Pump.fun data older than ~30 days**, bonding-curve internals, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Pump.fun examples using `Trading.Trades` are also shown in the **"Trader-Focused Trade APIs"** section below. Use the raw chain-level queries on this page when you need **historical Pump.fun data older than ~30 days**, bonding-curve internals, or call / event context.
 :::
 
 The Bitquery Pump.fun API provides real-time and historical data for Pump.fun memecoin trades on Solana via GraphQL. Use the API to get live trades, new token launches, OHLCV, bonding curve progress, top traders, and tokens migrated to PumpSwap. Access it via REST, WebSocket subscriptions, gRPC streams, or Kafka, and filter by the program address `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`. For other data points, reach out to [support](https://t.me/Bloxy_info).
@@ -18,54 +17,21 @@ The Bitquery Pump.fun API provides real-time and historical data for Pump.fun me
 Want to analyze Pump.fun tokens for potential phishing risks? Check out our [**PumpFun Token Sniffer**](https://pumpfun-token-sniffer.vercel.app/) — a proof-of-concept tool that helps identify suspicious token behavior by analyzing transfers and trades.
 :::
 
-Need zero-latency Pump.fun data? [Read about our Shred Streams and contact us for a trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/). For gRPC streaming, see [Pump.fun gRPC Streams →](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/).
+Need zero-latency Pump.fun data? [Read about our Shred Streams and contact us for a trial](/docs/streams/real-time-solana-data/). For gRPC streaming, see [Pump.fun gRPC Streams →](/docs/grpc/solana/examples/pump-fun-grpc-streams/).
 
 You may also be interested in:
 
-- [LetsBonk.fun APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/letsbonk-api/)
-- [PumpSwap APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/pump-swap-api/)
-- [Moonshot APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/Moonshot-API/)
-- [FourMeme APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
+- [LetsBonk.fun APIs ➤](/docs/blockchain/Solana/letsbonk-api/)
+- [PumpSwap APIs ➤](/docs/blockchain/Solana/Pumpfun/pump-swap-api/)
+- [Moonshot APIs ➤](/docs/blockchain/Solana/Moonshot-API/)
+- [FourMeme APIs ➤](/docs/blockchain/BSC/four-meme-api/)
 - [DEXrabbit Pump.fun tokens](https://dexrabbit.bitquery.io/categories/pump-fun) — live multi-chain DEX prices and 24h volume
 
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
-<head>
-<title>Pump.fun API - Live Prices, OHLCV, ATH, MarketCap</title>
-<meta
-  name="title"
-  content="Pump.Fun API - Live Prices, OHLCV, ATH, MarketCap"
-/>
-<meta
-  name="description"
-  content="Ultra-low-latency Pump.fun token prices, OHLCV, ATH, market cap, liquidity, traders, and more — all delivered via the Bitquery Pump.fun API, streams, and data dumps."
-/>
-<meta
-  name="keywords"
-  content="Pump.fun API,pump.fun api new tokens endpoint,pump.fun program id solana,pump.fun program id mainnet,pump.fun token supply,pump.fun livestream api,Pump.fun on-chain data API,Pump.fun token data API,Pump.fun blockchain API,Pump.fun DEX data API,Pump.fun API documentation,Pump.fun crypto API,Pump.fun web3 API,DEX Trades,Solana,Blast,Pump.fun memecoins,Solana DEX,Blast DEX,token trading,blockchain data,crypto trading"
-/>
-<meta name="robots" content="index, follow" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="language" content="English" />
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Pump.Fun API - Solana - New Tokens, Trades, Live Prices"
-/>
-<meta
-  property="og:description"
-  content="Get Pump.fun token prices, trades, and bonding curve progress via the Bitquery Pump.fun API."
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Pump.fun API - Solana - New Tokens, Trades, Live Prices"/>
-  <meta property="twitter:description" content="Get Pump.fun token prices, trades, and bonding curve progress via the Bitquery Pump.fun API."/>
-</head>
 
 ## What is the Program Address for Pump.fun on Solana?
 
@@ -594,7 +560,7 @@ This method reliably identifies whether a token's initial mint followed the Mayh
 
 ### How do I get the latest price of a Pump.fun token?
 
-We launched the [Price Index](https://docs.bitquery.io/docs/category/price-index/) in August 2025, allowing you to track price of any token trading onchain.
+We launched the [Price Index](/docs/trading/crypto-price-api/) in August 2025, allowing you to track price of any token trading onchain.
 
 Here's an example of tracking PumpFun token prices.
 
@@ -936,13 +902,13 @@ query PumpFunRecentTrades {
 
 ### How do I get a wallet's PnL on Pump.fun tokens? {#how-do-i-get-a-wallets-pnl-on-pumpfun-tokens}
 
-Bitquery does not return a single “PnL” field for Pump.fun: derive it from **historical buys and sells** for that wallet and mint. Query **`Solana.DEXTrades`** or **`DEXTradeByTokens`** with **`Dex.ProtocolName: pump`**, the token **`MintAddress`**, **`Transaction.Signer`** or buy/sell accounts, and a time window; then compute realized PnL from USD volumes (see the **[Realised PnL example on Solana DEX Trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/#realised-pnl-avg-buy-price-buy-volume-sell-volume)** and [starter PnL queries](https://docs.bitquery.io/docs/start/starter-queries/)). Use the **Crypto Price API** if you need mark-to-market for open positions.
+Bitquery does not return a single “PnL” field for Pump.fun: derive it from **historical buys and sells** for that wallet and mint. Query **`Solana.DEXTrades`** or **`DEXTradeByTokens`** with **`Dex.ProtocolName: pump`**, the token **`MintAddress`**, **`Transaction.Signer`** or buy/sell accounts, and a time window; then compute realized PnL from USD volumes (see the **[Realised PnL example on Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades/#realised-pnl-avg-buy-price-buy-volume-sell-volume)** and [starter PnL queries](/docs/start/starter-queries/)). Use the **Crypto Price API** if you need mark-to-market for open positions.
 
 ## Trade Activity & Volume
 
 ### How do I get live trades from Pump.fun using Bitquery?
 
-Use Bitquery's `DEXTrades` GraphQL subscription filtered by `ProtocolName: "pump"` to stream live Pump.fun trades including buy/sell sides, amounts, accounts, and methods. For gRPC or Kafka, see [Pump.fun gRPC Streams](https://docs.bitquery.io/docs/grpc/solana/examples/pump-fun-grpc-streams/).
+Use Bitquery's `DEXTrades` GraphQL subscription filtered by `ProtocolName: "pump"` to stream live Pump.fun trades including buy/sell sides, amounts, accounts, and methods. For gRPC or Kafka, see [Pump.fun gRPC Streams](/docs/grpc/solana/examples/pump-fun-grpc-streams/).
 [Pump.fun real-time trades — Stream ➤](https://ide.bitquery.io/Pumpfun-DEX-Trades-stream)
 
 <details>
@@ -1105,7 +1071,7 @@ query MyQuery {
 
 </details>
 
-In addition, you can get the last 7 days of trading volume using the [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/). Example:
+In addition, you can get the last 7 days of trading volume using the [Crypto Price API](/docs/trading/crypto-price-api/introduction/). Example:
 
 [Last 7 days of volume for any token — Query ➤](https://ide.bitquery.io/Last-7-days-of-volume-for-any-token_2)
 
@@ -2181,7 +2147,7 @@ subscription {
 
 ## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
+The queries below use the **[Trades cube](/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
 ### Get All DEX Trades on PumpFun With Price, Market Cap, and Supply
 

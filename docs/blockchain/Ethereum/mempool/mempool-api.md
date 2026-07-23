@@ -1,14 +1,15 @@
 ---
 sidebar_position: 2
+title: "Ethereum Mempool API"
+description: "Watch Ethereum pending transactions before confirmation with Bitquery mempool GraphQL subscriptions, filters, and stream examples."
 ---
-
 # Mempool API
 
-In this section we will look at some examples of how to write mempool queries to extract the necessary data from broadcasted transactions. To read more about how we offer mempool data, read the introduction [here](/docs/subscriptions/mempool-subscriptions.md)
+In this section we will look at some examples of how to write mempool queries to extract the necessary data from broadcasted transactions. To read more about how we offer mempool data, read the introduction [here](/docs/subscriptions/mempool-subscriptions/)
 
 ## How do I get unconfirmed/pending transactions for an address?
 
-Subscribe to **`EVM(mempool: true)`** **`Transactions`** with **`where.any`** on **`Transaction.From`** and **`Transaction.To`** so you see pending txs **to or from** the wallet. Mempool support varies by **`network`**; the example under [Transactions from an Address](#transactions-from-an-address) shows a **from** filter you can extend with `any`. For **BSC**-specific streaming, see [BSC mempool stream](https://docs.bitquery.io/docs/blockchain/BSC/bsc-mempool-stream/).
+Subscribe to **`EVM(mempool: true)`** **`Transactions`** with **`where.any`** on **`Transaction.From`** and **`Transaction.To`** so you see pending txs **to or from** the wallet. Mempool support varies by **`network`**; the example under [Transactions from an Address](#transactions-from-an-address) shows a **from** filter you can extend with `any`. For **BSC**-specific streaming, see [BSC mempool stream](/docs/blockchain/BSC/bsc-mempool-stream/).
 
 ## Simulating Pending Transactions
 
@@ -50,7 +51,6 @@ subscription{
   }
 }
 
-
 ```
 
 ## Get Recommended Fees
@@ -86,7 +86,6 @@ You can run the query [here](https://ide.bitquery.io/Get-Mempool-Fees)
     }
   }
 }
-
 
 ```
 
@@ -234,7 +233,6 @@ subscription {
  }
 }
 
-
 ```
 
 ## Balance Updates in Mempool in Real-time
@@ -262,7 +260,6 @@ subscription {
     }
   }
 }
-
 
 ```
 

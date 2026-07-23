@@ -1,8 +1,12 @@
+---
+title: "Build Trading Indicators for Crypto Data"
+description: "Build Trading Indicators for Crypto Data: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
+---
 # Build Trading Indicators for Crypto Data
 
-Technical indicators are a vital tool for cryptocurrency traders, as they can help to identify trends, predict price movements, and make informed trading decisions. For real-time price data with pre-calculated indicators, use our [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/).
+Technical indicators are a vital tool for cryptocurrency traders, as they can help to identify trends, predict price movements, and make informed trading decisions. For real-time price data with pre-calculated indicators, use our [Crypto Price API](/docs/trading/crypto-price-api/introduction/).
 
-With our new [Crypto Price Stream](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) we can get real-time crypto market data with **Simple Moving Average (SMA)**, **Exponential Moving Average (EMA)**, and **Weighted Simple Moving Average (WSMA)** at 1-second interval precalculated.
+With our new [Crypto Price Stream](/docs/trading/crypto-price-api/introduction/) we can get real-time crypto market data with **Simple Moving Average (SMA)**, **Exponential Moving Average (EMA)**, and **Weighted Simple Moving Average (WSMA)** at 1-second interval precalculated.
 
 In this tutorial we will see how to stream them and calculate advanced trading indicators.
 **This code is available readily as a Python package [here](https://pypi.org/project/bitquery-trading-indicators-stream/)**
@@ -17,7 +21,7 @@ The list of indicators we will be calculating
 
 ### Sample Output
 
-![](/img/trade_api/indicators.gif)
+<video controls loop muted playsInline width="100%" src="/img/trade_api/indicators.mp4"></video>
 
 **Step 1: Setup WebSocket Connection**
 

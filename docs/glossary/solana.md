@@ -1,3 +1,7 @@
+---
+title: "Solana Builder Terms Explaination"
+description: "Solana Builder Terms Explaination: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
+---
 # Solana Builder Terms Explaination
 
 ### Dataset Parameters

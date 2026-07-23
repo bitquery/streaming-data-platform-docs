@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "Token Transaction API"
+description: "Token Transaction API: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 ---
-
 # Token Transaction API
 
 The Transaction API provides access to transaction data on the blockchain. Transactions are the fundamental unit of account on a blockchain and represent the transfer of value from one address to another.
@@ -80,7 +81,6 @@ You can run the query [here](https://ide.bitquery.io/Latest-Transactions-fromto-
   }
 }
 
-
 ```
 
 </details>
@@ -127,7 +127,6 @@ query MyQuery {
     }
   }
 }
-
 
 ```
 

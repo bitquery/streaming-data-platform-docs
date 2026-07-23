@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Sorting Results in Bitquery GraphQL"
+description: "Sorting Results in Bitquery GraphQL in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams."
 ---
-
 # Sorting
 
 Ordering can be applied to the results of the query, sorting the results in a way you define.
@@ -27,7 +28,6 @@ If multiple sorting conditions are used, they applied in the order you define th
 ```
 
 First results will be sorted by Transaction_Value and after that by Block_Number.
-
 
 Another way to sort on multiple condition is following 
 
@@ -55,8 +55,6 @@ Another way to sort on multiple condition is following
   }
 }
 ```
-
-
 
 :::note
 this is not the same as:
@@ -96,9 +94,6 @@ The example below shows how to sort transfers by their index within a block in a
     }
   }
 }
-
-
-
 
 ```
 
@@ -160,4 +155,4 @@ This multi-level ordering creates a stable, deterministic way to get the most re
 In this example, the query returns exactly one result (the most recent trade), sorted by block time, transaction index, instruction index, and trade index—all in descending order to ensure true "latest" ordering.
 ## What does the desc option do in a Bitquery query?
 
-**API V2** uses **`orderBy: { descending: … }`** or **`ascending`**, not a standalone **`desc`** option on the root query. **API V1** examples often used **`options: { desc: [ ... ], limit, offset }`**. For migration and side‑by‑side examples, see [Migrate Bitquery API V1 to V2](https://docs.bitquery.io/docs/API-Blog/migrate-v1-v2/).
+**API V2** uses **`orderBy: { descending: … }`** or **`ascending`**, not a standalone **`desc`** option on the root query. **API V1** examples often used **`options: { desc: [ ... ], limit, offset }`**. For migration and side‑by‑side examples, see [Migrate Bitquery API V1 to V2](/docs/API-Blog/migrate-v1-v2/).

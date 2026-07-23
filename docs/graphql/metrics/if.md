@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Conditional Metrics"
+description: "Conditional Metrics in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. See examples in the Bitquery IDE."
 ---
-
 #  Conditional Metrics
 
 Metrics have ```if``` attribute to define the condition for metric execution.
@@ -20,6 +21,4 @@ count(distinct: Block_Number if: {Block: {GasUsed: {gt: "0"}}})
 :::tip
 Use [Aliases](/docs/graphql/metrics/alias) to name these metrics
 :::
-
-
 

@@ -1,21 +1,8 @@
+---
+title: "Tron Sunswap API"
+description: "Tron Sunswap API: query and stream Tron on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
+---
 # Tron SunSwap API
-
-<head>
-  <meta name="title" content="SunSwap API - Tron Network - Token Data, Trades, Live Prices"/>
-  <meta name="description" content="Access on-chain data for any SunSwap-based token with the SunSwap API, including trades, prices, and token information on the Tron network."/>
-  <meta name="keywords" content="SunSwap API, SunSwap on-chain data, SunSwap token API, Tron DEX API, SunSwap trading API, blockchain data API, SunSwap documentation, crypto trading, decentralized exchange, token trading, Tron network, Tron blockchain, SunSwap token prices, web3 API"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Access SunSwap On-Chain Data with the SunSwap API" />
-  <meta property="og:description" content="Get on-chain data, including trades and token prices, for any SunSwap-based token on the Tron network using the SunSwap API." />
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Access SunSwap On-Chain Data with the SunSwap API"/>
-  <meta property="twitter:description" content="Retrieve token data, trades, and prices for SunSwap tokens on the Tron network using the SunSwap API."/>
-</head>
 
 **[Bitquery](https://bitquery.io)** provides useful tron activity through **GraphQL** (on-demand queries and live **subscriptions**), and high-throughput Kafks streams for enterprise teams.
 
@@ -115,9 +102,7 @@ query MyQuery {
   }
 }
 
-
 ```
-
 
 ## Latest Trades of a Token on Sunswap
 

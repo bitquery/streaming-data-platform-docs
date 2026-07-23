@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Migrate from Bitquery API v1 to v2"
+description: "Migrate Bitquery GraphQL apps from API v1 to v2 covering schema changes, streaming datasets, authentication updates, and code examples."
 ---
-
 # Migrating from API v1 to v2
 
 ## Overview
@@ -13,7 +14,7 @@ Below, you'll find key changes and instructions on how to adapt your existing v1
 
 One of the major differences between v1 and v2 is the way API is authenticated. In v1, you use a API-KEY to authenticate your requests to `graphql.bitquery.io`.
 
-And in v2, you use OAuth token mentioned as `Bearer ory_...yourtoken` and authenticate your requests to `streaming.bitquery.io/graphql`. Read more on how to generate token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/).
+And in v2, you use OAuth token mentioned as `Bearer ory_...yourtoken` and authenticate your requests to `streaming.bitquery.io/graphql`. Read more on how to generate token [here](/docs/authorization/how-to-generate/).
 
 ## Changes in Network Specification
 
@@ -51,9 +52,9 @@ The v2 API maintains a similar schema structure but integrates new data cubes su
 
 If you're new to v2, check more examples on:
 
-[TokenHolder APIs](https://docs.bitquery.io/docs/examples/token-holders/token-holder-api/)
-[balanceUpdates](https://docs.bitquery.io/docs/examples/balances/balance-api/)
-[DexTradeByTokens](https://docs.bitquery.io/docs/examples/dextrades/token-trades-apis/)
+[TokenHolder APIs](/docs/blockchain/Ethereum/token-holders/token-holder-api/)
+[balanceUpdates](/docs/blockchain/Ethereum/balances/balance-api/)
+[DexTradeByTokens](/docs/blockchain/Ethereum/dextrades/token-trades-apis/)
 
 ## Smart Contract Interactions
 

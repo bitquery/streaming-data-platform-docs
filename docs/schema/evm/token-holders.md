@@ -1,31 +1,7 @@
 ---
 title: "EVM Token Holders API"
+description: "EVM Token Holders API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. See examples in the Bitquery IDE."
 ---
-
-<head>
-<meta name="title" content="EVM Token Holders API"/>
-
-<meta name="description" content="Explore token holder information including holders of a token, holder counts, top holders, and holder activity on Ethereum."/>
-
-<meta name="keywords" content="Token Balance, ERC20, Token Holders, ETH Balance, Ethereum, Ethereum Address, Holders API"/>
-
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<meta property="og:type" content="website" />
-
-<meta property="og:title" content="EVM Token Holders API" />
-
-<meta property="og:description" content="Explore token holder information including holders of a token, holder counts, top holders, and holder activity on Ethereum." />
-
-<meta property="twitter:card" content="summary_large_image" />
-
-<meta property="twitter:title" content="EVM Token Holders API" />
-
-<meta property="twitter:description" content="Explore token holder information including holders of a token, holder counts, top holders, and holder activity on Ethereum." />
-</head>
-
 # EVM Token Holders API
 
 The **Holders** API returns token holder data for ERC-20 tokens: top holders, holder counts, and balance thresholds. Non-zero balances use `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:

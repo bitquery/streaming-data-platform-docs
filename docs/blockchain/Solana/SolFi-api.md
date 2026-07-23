@@ -1,28 +1,14 @@
+---
+title: "Solana Solfi API"
+description: "Solana Solfi API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
+---
 # SolFi DEX API
 
 :::tip Need real-time SolFi data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered SolFi swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical SolFi data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered SolFi swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical SolFi data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
-
-<head>
-  <meta name="title" content="SolFi DEX API - Solana - Real-time Trades, Prices, OHLC Data"/>
-  <meta name="description" content="Track real-time trades, token prices, OHLC data, top traders, volumes, and volatility on SolFi DEX using Bitquery's powerful GraphQL API for Solana."/>
-  <meta name="keywords" content="SolFi API,SolFi DEX data,Solana DEX API,real-time Solana token prices,SolFi token trades,SolFi OHLC API,top traders on SolFi,SolFi volatility API,Solana trading analytics,DEX trades Solana,crypto GraphQL API,SolFi blockchain data"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="SolFi DEX API - Solana - Real-time Trades, Prices, OHLC Data"/>
-  <meta property="og:description" content="Track real-time trades, token prices, OHLC data, top traders, volumes, and volatility on SolFi DEX using Bitquery's powerful GraphQL API for Solana." />
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="SolFi DEX API - Solana - Real-time Trades, Prices, OHLC Data"/>
-  <meta property="twitter:description" content="Track real-time trades, token prices, OHLC data, top traders, volumes, and volatility on SolFi DEX using Bitquery's powerful GraphQL API for Solana."/>
-</head>
 
 ## SolFi Trades in Real-Time
 

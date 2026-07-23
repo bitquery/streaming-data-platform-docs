@@ -1,6 +1,6 @@
 ---
 title: "Supply Fields Reference"
-description: "Definitions for Supply metrics (circulating, total, max supply, market cap, FDV) on the Crypto Price API Tokens, Currency, and Pairs cubes."
+description: "Supply Fields Reference via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
 sidebar_position: 3
 keywords:
   - "crypto price api supply"
@@ -10,7 +10,6 @@ keywords:
   - "fully diluted valuation"
   - "fdv"
 ---
-
 # Supply fields reference
 
 The **`Supply`** object appears on the **Tokens**, **Currency**, and **Pairs** cubes with the same field names. Values describe the **underlying asset** (**currency**), not a specific pool or DEX pair.
@@ -32,7 +31,6 @@ An estimate of the number of tokens **available to the market** (public float), 
 - May be **null** when a reliable circulating figure is not available.
 
 **Circulating supply** and **max supply** coverage is available for assets that trade on **CEXs**; many **meme tokens** and thinly covered assets may **not** have these supply figures, so those fields are often missing for those names.
-
 
 ### `TotalSupply`
 

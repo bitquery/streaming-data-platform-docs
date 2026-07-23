@@ -1,37 +1,11 @@
 ---
 sidebar_position: 1
+title: "BSC Balance Updates API"
+description: "BSC Balance Updates API: fetch current and historical BNB Chain balances with Bitquery GraphQL balance queries. Scale further with Kafka or gRPC streams."
 ---
-
 # BSC Balance Updates API
 
 In thise section we will see how to monitor real-time balance changes across the BSC blockchain.
-
-<head>
-<meta name="title" content="BSC Balance Updates API"/>
-<meta name="description" content="Learn how to get real time balance & balance updates of a BSC address using Bitquery's Balance Updates API."/>
-<meta name="keywords" content="balance api, balance updates api, balance updates python api, BSC Balance python api, NFT balance api, Balance scan api, Balance api docs, BSC Balance crypto api, balance blockchain api,BSC network api, BSC web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="BSC Balance Updates API"
-/>
-<meta
-  property="og:description"
-  content="Learn how to get historical & real time balance & balance updates of a BSC address using Bitquery's Balance Updates API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="BSC Balance Updates API" />
-<meta property="twitter:description" content="Learn how to get real time balance & balance updates of a BSC address using Bitquery's Balance Updates API." />
-</head>
 
 :::warning Important: Rebasing Token Limitations
 **Rebasing tokens are not supported for accurate balance calculations.**

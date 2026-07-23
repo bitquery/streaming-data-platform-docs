@@ -1,7 +1,7 @@
 ---
-title: Algorand Blocks API - Query Blocks by Proposer, Height & Rewards
+title: "Algorand Blocks API - Query Blocks by Proposer"
 sidebar_label: Algorand Blocks API
-description: Pull Algorand blocks with proposer, height, protocol version, rewards, and timestamps via Bitquery's GraphQL Blocks API. Build explorer features and staking analytics.
+description: "Algorand Blocks API - Query Blocks by Proposer: query and stream Algorand on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Algorand blocks API
   - Algorand block explorer API
@@ -11,7 +11,6 @@ keywords:
   - Algorand block height query
   - Bitquery Algorand
 ---
-
 # Algorand Blocks API
 
 The Blocks API returns block-level data on Algorand: height, hash, protocol version, proposer, seed, reward, and timestamp. Use it to drive explorer front-ends, monitor chain progression, track validator participation, or aggregate block rewards over time.
@@ -68,5 +67,5 @@ Aggregates total block rewards for a proposer address. Add a `date` filter to li
 
 ## Related resources
 
-- [Algorand Transactions API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-transactions-api) — per-block transaction details and daily counts
-- [Algorand Address API](https://docs.bitquery.io/docs/blockchain/Algorand/algorand-address-api) — proposer and wallet balances
+- [Algorand Transactions API](/docs/blockchain/Algorand/algorand-transactions-api) — per-block transaction details and daily counts
+- [Algorand Address API](/docs/blockchain/Algorand/algorand-address-api) — proposer and wallet balances

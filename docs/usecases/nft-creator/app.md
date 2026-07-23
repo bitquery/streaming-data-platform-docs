@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "NFT Portfolio Tracker App Setup"
+description: "Configure the React app shell for a Bitquery NFT portfolio tracker, including routes, layout, and API authentication setup."
 ---
-
 # App 
 
 Finally we will write the app code and the css
@@ -88,7 +89,6 @@ return (
 );
 ```
 
-
 ### Complete Code
 
 ```JSX
@@ -169,5 +169,4 @@ export default App;
 ## CSS
 
 Use the css file in this [Github repo.](https://github.com/bitquery/nft-creator-portfolio/blob/main/src/pages/style.css)
-
 

@@ -1,3 +1,7 @@
+---
+title: "Balance Update Cube"
+description: "Balance Update Cube: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Great for bots, dashboards, and alerts."
+---
 # Balance Update Cube
 
 Our `BalanceUpdates` cube is designed to provide historical and realtime balance updates. This cube provides multiple ways to query historical balance data.

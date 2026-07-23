@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Ethereum Miner Balance Tracker"
+description: "Ethereum Miner Balance Tracker: stream Ethereum balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
-
 import VideoPlayer from "../../../../../src/components/videoplayer.js";
 
 # Ethereum Miner Balance Tracker
@@ -9,31 +10,6 @@ import VideoPlayer from "../../../../../src/components/videoplayer.js";
 The Ethereum Miner Balance Tracker API provides real-time balance updates for Ethereum miners, tracking their mining rewards, uncle block rewards, and transaction fee rewards.
 
 <VideoPlayer url="https://www.youtube.com/watch?v=VqV1K4RJc6U" />
-
-<head>
-<meta name="title" content="Ethereum Miner Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to track Ethereum miner balances, mining rewards, and uncle block rewards using Bitquery's Miner Balance Tracker API."/>
-<meta name="keywords" content="ethereum miner balance, mining rewards, miner balance tracker, ethereum mining api, uncle block rewards, transaction fee rewards, miner rewards api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Ethereum Miner Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to track Ethereum miner balances, mining rewards, and uncle block rewards using Bitquery's Miner Balance Tracker API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Ethereum Miner Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to track Ethereum miner balances, mining rewards, and uncle block rewards using Bitquery's Miner Balance Tracker API." />
-</head>
 
 ## Track Miner Balance Updates
 

@@ -1,7 +1,7 @@
 ---
 title: Bitcoin Coinpath API - Trace BTC Fund Flows Across Addresses
 sidebar_label: Bitcoin Coinpath API
-description: Trace Bitcoin fund flows between addresses with Bitquery Coinpath. Track inbound and outbound paths, multi-hop tracing, and address-to-address verification for AML and forensics.
+description: "Bitcoin Coinpath API - Trace BTC Fund Flows Across Addresses: query and stream Bitcoin on-chain data with Bitquery GraphQL examples for developers."
 keywords:
   - Bitcoin coinpath API
   - Bitcoin fund tracing
@@ -12,7 +12,6 @@ keywords:
   - Bitcoin GraphQL
   - Bitquery Bitcoin
 ---
-
 # Bitcoin Coinpath API
 
 Coinpath walks Bitcoin fund flows between addresses — forward to see where funds went, backward to see where they came from. Use it for AML investigations, source-of-funds verification, exchange deposit tracing, and mapping transaction paths across wallets.
@@ -130,6 +129,6 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Related resources
 
-- [Bitcoin Address API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-address-api) — balances and activity stats
-- [Bitcoin Inputs and Outputs API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — UTXO-level inflows and outflows
-- [Bitcoin Transactions API](https://docs.bitquery.io/docs/blockchain/Bitcoin/bitcoin-transactions-api) — per-tx detail
+- [Bitcoin Address API](/docs/blockchain/Bitcoin/bitcoin-address-api) — balances and activity stats
+- [Bitcoin Inputs and Outputs API](/docs/blockchain/Bitcoin/bitcoin-inputs-outputs) — UTXO-level inflows and outflows
+- [Bitcoin Transactions API](/docs/blockchain/Bitcoin/bitcoin-transactions-api) — per-tx detail

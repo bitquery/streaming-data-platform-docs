@@ -4,3 +4,8 @@
 # Legacy MCP path → canonical MCP docs (HTTPS, trailing slash)
 /docs/usecases/MCP  /docs/mcp/mcp-server/  301
 /docs/usecases/MCP/  /docs/mcp/mcp-server/  301
+
+# Canonicalize PumpFun → Pumpfun URL casing (case-sensitive hosts / SEO)
+/docs/blockchain/Solana/PumpFun  /docs/blockchain/Solana/Pumpfun/  301
+/docs/blockchain/Solana/PumpFun/  /docs/blockchain/Solana/Pumpfun/  301
+/docs/blockchain/Solana/PumpFun/*  /docs/blockchain/Solana/Pumpfun/:splat  301

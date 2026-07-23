@@ -1,7 +1,13 @@
+---
+title: "Telegram Bot for Live Blockchain Data"
+description: "Build a Telegram bot that streams Bitquery WebSocket GraphQL subscriptions and sends real-time blockchain alerts to chats."
+---
 # Get Blockchain Data on Telegram Chat in Real-Time
 
 With this code, your Telegram bot will respond to the `/start` command by initiating a WebSocket connection to Bitquery and sending blockchain data updates to the Telegram chat.
-This is how it will look ![chat](/img/ApplicationExamples/telegram_bot.gif)
+This is how it will look:
+
+<video controls loop muted playsInline width="100%" src="/img/ApplicationExamples/telegram_bot.mp4"></video>
 
 You can find the complete code [here](https://github.com/divyasshree-BQ/telegram-bot/blob/main/getTransfer_WS.py)
 
@@ -46,7 +52,7 @@ Two functions, `split_text` and `send_long_message`, are defined to handle long 
 
 **Step 5: Define WebSocket Code**
 
-The `my_component` function is an asynchronous function that handles the WebSocket connection to Bitquery. You can read more about how to use it [here](https://docs.bitquery.io/docs/start/websocket/)
+The `my_component` function is an asynchronous function that handles the WebSocket connection to Bitquery. You can read more about how to use it [here](/docs/subscriptions/websockets/)
 The below code sends a GraphQL subscription query that listens to server for latest transfers on the Ethereum chain, i.e. it subscribes to the `EVM.Transfers` event.
 
 ```python
@@ -103,7 +109,6 @@ The below code sends a GraphQL subscription query that listens to server for lat
     def start(update: Update, context: CallbackContext):
         update.message.reply_text("Starting WebSocket connection...")
         asyncio.run(start_websocket_and_send_updates(update))
-
 
 ```
 

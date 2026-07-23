@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Getting Ethereum Data from AWS Bucket"
+description: "Getting Ethereum Data from AWS Bucket from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake."
 ---
-
 # Getting Ethereum Data from AWS Bucket
 
 We are now offering raw blockchain data on Amazon S3, taking a step towards providing a faster way to build dApps.
@@ -80,7 +81,6 @@ print('here')
 block_headers = block_message_pb2.BlockHeader()
 block_headers.ParseFromString(decompressed_data)
 print('here1')
-
 
 ```
 

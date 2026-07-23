@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "NFT Portfolio Tracker Pages"
+description: "Create React pages for an NFT creator portfolio that loads holdings and metadata from Bitquery NFT GraphQL APIs. See examples in the Bitquery IDE."
 ---
-
 # Pages
 
 ## About Page
@@ -12,7 +13,6 @@ The About page is a React functional component that renders the Header and About
 import React from 'react'
 import Header from '../components/Header/Header'
 import Aboutpage from '../components/Aboutpage/Aboutpage'
-
 
 function About() {
   return (

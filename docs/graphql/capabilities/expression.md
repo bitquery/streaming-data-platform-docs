@@ -1,3 +1,7 @@
+---
+title: "GraphQL Expressions"
+description: "Expression in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Built for traders and analytics teams."
+---
 # Expressions
 
 ## What is a Calculate Expression?

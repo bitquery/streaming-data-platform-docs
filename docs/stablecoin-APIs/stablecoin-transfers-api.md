@@ -1,3 +1,7 @@
+---
+title: "Stablecoin Transfers API"
+description: "Stablecoin Transfers API using Bitquery stablecoin APIs for prices, transfers, payments, and cross-chain monitoring workflows."
+---
 # Stablecoin Transfers API
 
 The Stablecoin API by Bitquery provides you the comprehensive set of APIs which can provide you realtime transfers, realtime trades, realtime price, holder distribution of stablecoins across chains with a single API call.

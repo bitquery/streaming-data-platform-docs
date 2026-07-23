@@ -1,3 +1,7 @@
+---
+title: "Solana Wash Trading Dashboard"
+description: "Build Solana Wash Trading Dashboard: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
+---
 # Solana Wash Trading Dashboard
 
 This script runs an interactive Streamlit web application that:
@@ -203,4 +207,4 @@ plotly
 
 The final product looks like the image given below.
 
-![Solana Wash Trading Dashboard](../../../static/img/wash_dashboard.png)
+![Solana Wash Trading Dashboard](/img/wash_dashboard.png)

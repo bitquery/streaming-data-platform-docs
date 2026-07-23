@@ -1,20 +1,8 @@
 ---
-title: "Historical Solana Data API - OHLC, Volume & Aggregate Queries"
-description: "Query historical Solana aggregate data via Bitquery V2: OHLC candlesticks, DEX trade volume, and time-series analytics from May 2024. V1 endpoint for full genesis transfers."
+title: "Historical Solana Data API"
+description: "Historical Solana Data API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Built for traders and analytics teams."
 keywords: ["historical Solana data", "Solana OHLC API", "Solana archive data", "Solana historical volume", "DEXTradeByTokens", "Solana aggregate API"]
 ---
-
-<head>
-<meta name="title" content="Historical Solana Data API - OHLC, Volume & Aggregate Queries"/>
-<meta name="description" content="Query historical Solana aggregate data via Bitquery V2: OHLC candlesticks, DEX trade volume, and time-series analytics from May 2024. V1 for genesis transfers."/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Historical Solana Data API - OHLC, Volume & Aggregate Queries"/>
-<meta property="og:description" content="Historical Solana OHLC, DEX volume, and aggregate data. Archive and combined datasets from May 2024."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Historical Solana Data API - OHLC, Volume & Aggregate"/>
-</head>
-
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Historical Solana Data
@@ -25,14 +13,13 @@ However the options to use the historical data are quite limited and currently o
 
 **To get historical transfers data going back to genesis of the chain, use the V1 endpoint. Docs available [here](https://docs.bitquery.io/v1/docs/Examples/Solana/transfers).** 
 
-
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
 :::
 
 ## Historical Trades for Solana
 
-**Historical trades for upto past 30 days could be retrieved via Trading API. Docs available [here](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/).**
+**Historical trades for upto past 30 days could be retrieved via Trading API. Docs available [here](/docs/trading/crypto-trades-api/trades-api/).**
 [This](https://ide.bitquery.io/historical-Solana-trades_1) example showcase how trades for the duration of upto past 30 days could be recieved via trading API.
 
 ```graphql
@@ -151,7 +138,7 @@ For this example the pair between the tokens listed below is considered.
 
 - **Derived from block time**: All time-based grouping (daily, hourly, etc.) depends on block timestamps.
 
-**Alternative approach**: You can get all trades and calculate OHLC locally in your own system. Complete guide [here](https://docs.bitquery.io/docs/usecases/ohlcv-complete-guide/)
+**Alternative approach**: You can get all trades and calculate OHLC locally in your own system. Complete guide [here](/docs/usecases/ohlcv-complete-guide/)
 
 :::
 
@@ -325,7 +312,7 @@ query MyQuery {
 In this query we use the 95th percentile (`level: 0.95`) to find the highest price of a token.
 We also use `PriceAsymmetry` and `AmountInUSD` in combination to filter outliers as much as possible.
 
-Read more about quantiles [here](https://docs.bitquery.io/docs/graphql/metrics/quantile/)
+Read more about quantiles [here](/docs/graphql/metrics/quantile/)
 You can run the query [here](https://ide.bitquery.io/Price-ATH-query)
 
 ```
@@ -580,7 +567,7 @@ That is **not** full ledger genesis history. For **SPL transfers and older histo
 
 ## What fields are available in Solana DEXTradeByTokens with dataset: combined?
 
-**`Solana(dataset: combined)`** (and **`archive`**) **`DEXTradeByTokens`** supports **aggregate-friendly** fields: **time / intervals**, **amounts**, **prices**, **trade counts**, **`Trade.Currency`**, **`Trade.Side.Currency`**, **`Dex`**, pool/market identifiers, and similar columns shown in the examples below. **Fine-grained per-account fields** on the trade side (e.g. **`Trade Side Account`**-style projections) are often **unsupported**—the API returns “columns not available.” **Add fields one at a time** in the IDE and rely on the live schema. See [combined vs realtime on Solana](https://docs.bitquery.io/docs/graphql/dataset/combined#why-does-dataset-combined-return-fewer-fields-than-dataset-realtime-on-solana) and [Pump.fun combined note](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/#why-does-my-pumpfun-query-return-columns-not-available-in-combined-dataset).
+**`Solana(dataset: combined)`** (and **`archive`**) **`DEXTradeByTokens`** supports **aggregate-friendly** fields: **time / intervals**, **amounts**, **prices**, **trade counts**, **`Trade.Currency`**, **`Trade.Side.Currency`**, **`Dex`**, pool/market identifiers, and similar columns shown in the examples below. **Fine-grained per-account fields** on the trade side (e.g. **`Trade Side Account`**-style projections) are often **unsupported**—the API returns “columns not available.” **Add fields one at a time** in the IDE and rely on the live schema. See [combined vs realtime on Solana](/docs/graphql/dataset/combined#why-does-dataset-combined-return-fewer-fields-than-dataset-realtime-on-solana) and [Pump.fun combined note](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/#why-does-my-pumpfun-query-return-columns-not-available-in-combined-dataset).
 
 ## Video Tutorial for Querying Historical Solana Data
 

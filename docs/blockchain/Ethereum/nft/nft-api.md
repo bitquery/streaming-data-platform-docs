@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+title: "Ethereum NFT API"
+description: "Query Ethereum NFT trades, ownership, metadata, and transfers with Bitquery GraphQL APIs, filters, and live streams. See examples in the Bitquery IDE."
 ---
 import FAQ from "@site/src/components/FAQ";
 

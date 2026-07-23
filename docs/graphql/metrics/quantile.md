@@ -1,3 +1,7 @@
+---
+title: "GraphQL Quantile Metric"
+description: "Quantile in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Scale further with Kafka or gRPC streams."
+---
 # Quantile
 
 Quantiles are useful in understanding the distribution of numerical data by dividing it into intervals.

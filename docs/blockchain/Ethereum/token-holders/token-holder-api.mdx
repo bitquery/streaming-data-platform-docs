@@ -1,12 +1,14 @@
 ---
 sidebar_position: 1
+title: "Ethereum Token Holder API"
+description: "Ethereum Token Holder API: query and stream Ethereum on-chain data with Bitquery GraphQL examples for developers. Scale further with Kafka or gRPC streams."
 ---
 import FAQ from "@site/src/components/FAQ";
 
 # Token Holders API
 
 :::caution Deprecated API
-`EVM.TokenHolders` is deprecated as of **20 May 2026** and will be removed on **15 June 2026**. Use **`EVM.Holders`** (this page) instead.
+`EVM.TokenHolders` was deprecated as of **20 May 2026** and removed on **15 June 2026**. Use **`EVM.Holders`** (this page) instead.
 :::
 
 The **Holders** API returns token holder data for ERC-20 tokens on Ethereum: top holders, holder counts, and balance thresholds. Non-zero balances use `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
@@ -160,11 +162,11 @@ query {
 
 ## Track Whale Wallets and Token Holdings
 
-For whale monitoring, combine **[Top Holders](#top-holders-of-a-currency-current)** (`orderBy: { descending: Balance_Amount }`, `limit`) with **[Holder Count Above a Threshold](#holder-count-with-balance-above-a-threshold)**. Pair with [ERC-20 transfers](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) to see recent inflows and outflows from large wallets.
+For whale monitoring, combine **[Top Holders](#top-holders-of-a-currency-current)** (`orderBy: { descending: Balance_Amount }`, `limit`) with **[Holder Count Above a Threshold](#holder-count-with-balance-above-a-threshold)**. Pair with [ERC-20 transfers](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api) to see recent inflows and outflows from large wallets.
 
 ## Historical Top Holders by Date
 
-The **Holders** cube does not support `Block.Date`. Filter by `Balance.LastChangeTime` using datetime format (for example `"2026-05-01T00:00:00Z"`). For address balances on a calendar date, use the [Balances API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date) with `Block.Date`.
+The **Holders** cube does not support `Block.Date`. Filter by `Balance.LastChangeTime` using datetime format (for example `"2026-05-01T00:00:00Z"`). For address balances on a calendar date, use the [Balances API](/docs/blockchain/Ethereum/balances/balance-api/#balance-on-a-specific-date) with `Block.Date`.
 
 [Run in IDE](https://ide.bitquery.io/ethereum-holders-top-by-date)
 
@@ -469,7 +471,7 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 <FAQ
   items={[
-    { q: "Which endpoint should I use for ERC-20 holders?", a: "Use EVM.Holders. The older EVM.TokenHolders field is deprecated and will be removed — migrate to Holders with Amount(selectWhere: { gt: \"0\" })." },
+    { q: "Which endpoint should I use for ERC-20 holders?", a: "Use EVM.Holders. The older EVM.TokenHolders field has been removed — migrate to Holders with Amount(selectWhere: { gt: \"0\" })." },
     { q: "How do I get the top holders of a token?", a: "Query EVM.Holders with dataset: combined, filter by Currency SmartContract address, order by Balance descending, and limit results." },
     { q: "How do I count total holders?", a: "Use a Holders query with count aggregation and Amount(selectWhere: { gt: \"0\" }) so zero-balance addresses are excluded." },
   ]}

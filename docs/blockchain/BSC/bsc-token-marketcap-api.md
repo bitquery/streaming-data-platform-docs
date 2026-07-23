@@ -1,7 +1,8 @@
 ---
 sidebar_position: 8
+title: "BNB Smart Chain (BSC) Token Market Cap API"
+description: "BNB Smart Chain (BSC) Token Market Cap API: stream BNB Chain market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs."
 ---
-
 # BNB Smart Chain (BSC) Token Market Cap API
 
 This page explains how to **query or stream** BSC token metrics including **market cap**, **FDV**, **supply**, **price**, and **volume** with Bitquery **`Trading.Tokens`** (GraphQL).
@@ -9,21 +10,6 @@ This page explains how to **query or stream** BSC token metrics including **mark
 Use **`bsc:`** plus a **lowercase** contract address in token ids, or filter **`Token.Network`** to **`Binance Smart Chain`**, as in the examples below.
 
 For field definitions, see **[Tokens cube](/docs/trading/crypto-price-api/tokens)** and **[Supply fields](/docs/trading/crypto-price-api/supply-fields)**.
-
-<head>
-<meta name="title" content="BSC Token Market Cap API | Trading Tokens"/>
-<meta name="description" content="Stream and query BNB Smart Chain (BSC) token market cap, FDV, supply, OHLC price, and volume using Bitquery Trading.Tokens GraphQL API."/>
-<meta name="keywords" content="BSC token market cap, BNB chain token market cap, PancakeSwap token api, bitquery trading tokens bsc, bsc fdv api, binance smart chain token api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="BSC Token Market Cap API"/>
-<meta property="og:description" content="Real-time streams and queries for BSC token market cap, supply, and price via Trading.Tokens."/>
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="BSC Token Market Cap API"/>
-<meta property="twitter:description" content="Real-time streams and queries for BSC token market cap, supply, and price via Trading.Tokens."/>
-</head>
 
 :::note Trading API and EVM addresses
 On **BSC** (EVM), use **lowercase** hex in **`Id`** values (e.g. `bsc:0x2eb0…`, not mixed-case checksum addresses).

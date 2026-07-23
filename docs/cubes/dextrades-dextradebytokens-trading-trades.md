@@ -1,11 +1,10 @@
 ---
 title: "DEXTrades vs DEXTradeByTokens vs Trades cube"
-description: "Compare DEXTrades, DEXTradeByTokens, and the Trading API Trades cube: EVM pool-centric vs Solana trader-centric chain cubes, and trader-focused streams with reliable USD via the price index."
+description: "DEXTrades vs DEXTradeByTokens vs Trades cube: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 ---
-
 # DEXTrades vs DEXTradeByTokens vs Trades cube
 
-> **Looking for the product-family choice first?** This page is the **cube-by-cube row-shape** comparison. For the higher-level "should I use chain-level trades or the curated Trading cube?" decision (with the full Trading cube family — `Trading.Trades`, `Tokens`, `Currencies`, `Pairs`), start with the [**Trading Data Overview**](https://docs.bitquery.io/docs/trading/trading-data-overview).
+> **Looking for the product-family choice first?** This page is the **cube-by-cube row-shape** comparison. For the higher-level "should I use chain-level trades or the curated Trading cube?" decision (with the full Trading cube family — `Trading.Trades`, `Tokens`, `Currencies`, `Pairs`), start with the [**Trading Data Overview**](/docs/trading/trading-data-overview).
 
 Bitquery exposes **three** common ways to work with **DEX swap–level** data. They differ by **GraphQL root**, **row shape** (how each swap is represented), and **what fields are normalized for you**.
 
@@ -15,7 +14,7 @@ This page compares them so you can pick the right primitive before you write fil
 
 ## At a glance
 
-| | **DEXTrades** | **DEXTradeByTokens** | **Trades cube** (`Trading { Trades }` — [Crypto Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)) |
+| | **DEXTrades** | **DEXTradeByTokens** | **Trades cube** (`Trading { Trades }` — [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)) |
 |---|----------------|----------------------|---------------------------------------------|
 | **GraphQL root** | Chain APIs such as `EVM(...)`, `Solana { ... }`, `Tron { ... }` | Same chain roots | `Trading { Trades }` |
 | **Focus (by chain)** | **EVM / Tron:** **Pool-focused**—`Buy`/`Sell` follow the pool’s perspective ([DEXTrades cube](/docs/cubes/dextrades)). **Solana:** **Trader-focused**—natural fit for signer, buyer/seller, and account-style filters (see [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades), [trader patterns](/docs/blockchain/Solana/solana-trader-API)). | **EVM / Tron:** Still **pool-relative** on the **`Side`** leg (e.g. `Side.Type` vs pool); rows are **token-expanded**, not “wallet-first.” **Solana:** **Trader-focused** in practice—e.g. buyers/sellers and volume by **`Transaction.Signer`** and `Side.Type` in [Solana examples](/docs/blockchain/Solana/solana-dextrades). | **Trader-focused** everywhere: first-class **`Trader.Address`**, **`Pair`**, **`Side`**, and USD fields aligned to the [Price Index](/docs/trading/crypto-price-api/price-index-algorithm). |
@@ -25,7 +24,7 @@ This page compares them so you can pick the right primitive before you write fil
 | **Best when you need** | **EVM:** one record per pool swap, protocol/pool analytics, multi-hop debugging. **Solana:** trades by **wallet** / signer / account, buy vs sell counts, DEX-level analytics on chain. | **EVM:** token-level OHLC from raw trades, “all pairs for this token,” portfolio-style filters (with dedupe discipline). **Solana:** token **and** trader analytics (buyers, sellers, makers) in one model. | **Real-time** (or windowed) **multi-chain** swap stream, **trader-centric** apps, **reliable USD** on each row, **supply snapshot** (market cap, FDV, circulating/total/max). |
 | **Watch out for** | On **EVM**, `Buy`/`Sell` are **pool**-relative—not the end-user’s intuition without reading the field docs. | **Double counting** if you sum without filtering by token or deduplicating (e.g. by transaction hash / index). | Not a substitute for **pre-aggregated OHLC** on **Tokens** / **Pairs**; for aggregated charts prefer [Crypto Price API](/docs/trading/crypto-price-api/introduction) unless you need raw swap rows |
 
-Full reference pages: [DEXTrades cube](/docs/cubes/dextrades), [DEXTradesByTokens cube](/docs/cubes/dextradesbyTokens), [Crypto Trades API — `Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api).
+Full reference pages: [DEXTrades cube](/docs/cubes/dextrades), [DEXTradesByTokens cube](/docs/cubes/dextradesbyTokens), [Crypto Trades API — `Trades`](/docs/trading/crypto-trades-api/trades-api).
 
 ---
 
@@ -61,9 +60,9 @@ The [DEXTradesByTokens](/docs/cubes/dextradesbyTokens) / **`DEXTradeByTokens`** 
 
 ## Trades cube (Crypto Trades API — trader-focused, strong USD)
 
-The **`Trades`** field under **`Trading`** is documented as the [Crypto Trades API — real-time DEX trade streams](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api). It is **not** nested under `EVM` / `Solana` per chain in the same way; you use **`Trading { Trades }`** and narrow with **`Pair.Market.Network`**, token ids, and **`Trader.Address`**.
+The **`Trades`** field under **`Trading`** is documented as the [Crypto Trades API — real-time DEX trade streams](/docs/trading/crypto-trades-api/trades-api). It is **not** nested under `EVM` / `Solana` per chain in the same way; you use **`Trading { Trades }`** and narrow with **`Pair.Market.Network`**, token ids, and **`Trader.Address`**.
 
-**Trader-first model:** Rows are built for **who traded**—**`Trader.Address`** is a first-class filter—alongside **`Pair`**, **`Side`**, and amounts. That is the natural API for **wallet streams**, **leaderboards**, and **per-user** trade history across **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, and **Polygon** in one schema ([Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)).
+**Trader-first model:** Rows are built for **who traded**—**`Trader.Address`** is a first-class filter—alongside **`Pair`**, **`Side`**, and amounts. That is the natural API for **wallet streams**, **leaderboards**, and **per-user** trade history across **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, and **Polygon** in one schema ([Trades API](/docs/trading/crypto-trades-api/trades-api)).
 
 **USD vs chain DEX cubes:** On **`DEXTrades`** / **`DEXTradeByTokens`**, **`PriceInUSD`** is often **missing or zero** for **meme or thinly traded** tokens (see [DEXTrades cube](/docs/cubes/dextrades) pricing notes). The **`Trades`** cube is different: **`PriceInUsd`** and **`AmountsInUsd`** are tied to the **Trading price index**, so you **usually get usable USD** for the same long-tail assets where raw chain DEX USD fields fail. Details: [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm).
 
@@ -75,7 +74,7 @@ The **`Trades`** field under **`Trading`** is documented as the [Crypto Trades A
 - **Token filter:** **`Pair.Token.Id`** with the full id (e.g. `bid:solana:<mint>`, `bid:eth:<lowercase_contract>`) per dataset conventions.
 - **Trader filter:** **`Trader.Address`**.
 
-For **aggregated** token metrics across pairs, use **[Tokens](https://docs.bitquery.io/docs/trading/crypto-price-api/tokens)**; for **pair-level** OHLC intervals, use **[Pairs](https://docs.bitquery.io/docs/trading/crypto-price-api/pairs)**—as noted on the [Trades API page](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api).
+For **aggregated** token metrics across pairs, use **[Tokens](/docs/trading/crypto-price-api/tokens)**; for **pair-level** OHLC intervals, use **[Pairs](/docs/trading/crypto-price-api/pairs)**—as noted on the [Trades API page](/docs/trading/crypto-trades-api/trades-api).
 
 ---
 
@@ -85,7 +84,7 @@ For **aggregated** token metrics across pairs, use **[Tokens](https://docs.bitqu
 
 2. **Token-expanded rows**, OHLC **from raw DEX trades**, or **Solana** maker/buyer/seller aggregates on **`DEXTradeByTokens`**? → **`DEXTradeByTokens`**, with **strict filters** on **EVM** so counts are not doubled.
 
-3. **Trader-centric** product, **multi-chain** `Trading` stream, **reliable USD** (including meme / long-tail), plus **supply** on each row? → **`Trading { Trades }`** ([Crypto Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)).
+3. **Trader-centric** product, **multi-chain** `Trading` stream, **reliable USD** (including meme / long-tail), plus **supply** on each row? → **`Trading { Trades }`** ([Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)).
 
 4. **Need pre-built candles / moving averages / mean price** without aggregating raw swaps yourself? → **[Crypto Price API](/docs/trading/crypto-price-api/introduction)** (**Tokens**, **Pairs**, **Currencies**)—not the same as **`Trades`**, as explained in the [mental model](/docs/start/mental-model-transfers-events-calls#trading-crypto-price-cube).
 
@@ -93,7 +92,7 @@ For **aggregated** token metrics across pairs, use **[Tokens](https://docs.bitqu
 
 ## Chain hub examples
 
-These guides start with a **live swap stream** from the [Crypto Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) (IDE link where we ship a saved query), then keep **`DEXTrades`** / **`DEXTradeByTokens`** for pools, OHLC, and analytics:
+These guides start with a **live swap stream** from the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api) (IDE link where we ship a saved query), then keep **`DEXTrades`** / **`DEXTradeByTokens`** for pools, OHLC, and analytics:
 
 - [BNB (BSC) DEX Trades](/docs/blockchain/BSC/bsc-dextrades)
 - [Base DEX Trades](/docs/blockchain/Base/base-dextrades)
@@ -110,5 +109,5 @@ These guides start with a **live swap stream** from the [Crypto Trades API](http
 - [Mental model: transfers, events, calls, DEX, Trading](/docs/start/mental-model-transfers-events-calls)
 - [DEXTrades cube](/docs/cubes/dextrades)
 - [DEXTradesByTokens cube](/docs/cubes/dextradesbyTokens)
-- [Crypto Trades API — `Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api)
+- [Crypto Trades API — `Trades`](/docs/trading/crypto-trades-api/trades-api)
 - [GraphQL limits](/docs/graphql/limits) (paging, `orderBy`, time windows)

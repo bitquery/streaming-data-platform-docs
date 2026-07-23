@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
+title: "GraphQL Metric Aliases"
+description: "Alias Bitquery GraphQL metrics to name aggregates, sort results cleanly, and return clearer API field names for apps. See examples in the Bitquery IDE."
 ---
-
 #  Aliases
 
 Aliases is a part of the GraphQL [standard](https://spec.graphql.org/draft/#sec-Field-Alias)

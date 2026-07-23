@@ -1,7 +1,8 @@
 ---
 sidebar_position: 5
+title: "Building with WebSockets: Code Sample in Rust"
+description: "Building with WebSockets: Code Sample in Rust using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
-
 # Building with WebSockets: Code Sample in Rust
 
 In this section we will see how to use bitquery subscriptions in Rust. The final output will look something like this
@@ -40,7 +41,6 @@ This is the basic outline of what we will do
 -   The `subscribe` function handles the connection setup and starts the streaming operation.
 -   The `main` function initializes the subscription and processes the incoming data.
 
-
 This Rust code sets up a WebSocket client to subscribe to real-time data from Bitquery Solana APIs using the GraphQL over WebSocket protocol. 
 
 ### **How Everything Connects**
@@ -50,7 +50,6 @@ This Rust code sets up a WebSocket client to subscribe to real-time data from Bi
 3.  **GraphQL Queries (`queries.rs`)**: Defines how we request and handle blockchain data.
 4.  **Tokio Task Spawner (`tokio_spawner.rs`)**: Helps manage background tasks.
 5.  **Main Function (`main.rs`)**: Sets up and runs our application.
-
 
 ### **TokioSpawner Module**
 
@@ -212,10 +211,9 @@ This function sets up a WebSocket connection to the Bitquery streaming endpoint.
 6. **Return Client and Stream**:
    - Return the client and the stream of data.
 
-
 ### Main Function
 
-In this function we will pass the OAuth token. The best practise would be to include it as an environment variable, but for the sake of this tutorial it has been hard coded. You can generate a token [here](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+In this function we will pass the OAuth token. The best practice would be to include it as an environment variable, but for the sake of this tutorial it has been hard coded. You can generate a token [here](/docs/authorization/how-to-generate/)
 
 #### Imports
 ```rust
@@ -252,7 +250,6 @@ pub type DexTradesVariables = queries::dex_trades::Variables;
 ```
 Defines type aliases for the GraphQL query and variables.
 
-
 ```rust
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -284,8 +281,6 @@ This is the entry point of the application.
 3. **Process Incoming Data**:
    - Iterate over the stream of incoming responses.
    - Print each response using `dbg!`.
-
-
 
 ### 4. Run the Project
 With everything set up, you can now build and run your project:

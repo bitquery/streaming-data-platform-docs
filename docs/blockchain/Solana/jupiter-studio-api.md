@@ -1,12 +1,11 @@
 ---
-title: "Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data"
-description: "Ultra low latency Jupiter Studio launchpad data, token trades, OHLC, migration tracking, and Meteora DBC analytics. Get real-time Jupiter Studio API data for token launches, trading, and migration insights."
+title: "Solana Jupiter Studio API"
+description: "Solana Jupiter Studio API: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Covers archive history and realtime data."
 ---
-
 # Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data
 
 :::tip Need real-time Jupiter Studio data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Jupiter Studio data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Jupiter Studio data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 Get ultra low latency Jupiter Studio launchpad data, token trades, OHLC, migration tracking, and Meteora DBC analytics from Jupiter Studio API, Streams and Data Dumps.
@@ -14,14 +13,14 @@ Access real-time data for Jupiter Studio token launches, trading activity, migra
 The below GraphQL APIs and Streams are examples of data points you can get with Bitquery.
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
-Need zero-latency Jupiter Studio data? [Read about our Shred Streams and Contact us for a Trial](https://docs.bitquery.io/docs/streams/real-time-solana-data/).
+Need zero-latency Jupiter Studio data? [Read about our Shred Streams and Contact us for a Trial](/docs/streams/real-time-solana-data/).
 
 You may also be interested in:
 
-- [Jupiter API ➤](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api/)
-- [Pump.fun APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/)
-- [Meteora APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/meteora-api/)
-- [Raydium APIs ➤](https://docs.bitquery.io/docs/blockchain/Solana/raydium-api/)
+- [Jupiter API ➤](/docs/blockchain/Solana/solana-jupiter-api/)
+- [Pump.fun APIs ➤](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
+- [Meteora APIs ➤](/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/)
+- [Raydium APIs ➤](/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
 
 :::note
 Jupiter studio tokens are launched and traded on Meteora DBC. So a Jup Studio token follows a lifecycle of a Meteora DBC Token.
@@ -30,43 +29,10 @@ Jupiter studio tokens are launched and traded on Meteora DBC. So a Jup Studio to
 :::note
 To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token ➤](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
-
-<head>
-<title>Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data</title>
-<meta
-  name="title"
-  content="Jupiter Studio API - Live Token Launches, Trades, OHLC, Migration Data"
-/>
-<meta
-  name="description"
-  content="Ultra low latency Jupiter Studio launchpad data, token trades, OHLC, migration tracking, and Meteora DBC analytics. Get real-time Jupiter Studio API data for token launches, trading, and migration insights."
-/>
-<meta
-  name="keywords"
-  content="Jupiter Studio API,jupiter studio launchpad api,jupiter studio token api,jupiter studio meteora api,jupiter studio dbc api,jupiter studio migration api,jupiter studio trades api,jupiter studio ohlc api,jupiter studio price api,jupiter studio volume api,jupiter studio analytics api,meteora dynamic bonding curve api,meteora dbc api,meteora jupiter studio api,solana launchpad api,solana token launch api,solana dex api,solana trading api,jupiter studio real time data,jupiter studio websocket api,jupiter studio blockchain api,jupiter studio trading analytics,solana token launches,launchpad data,blockchain trading data,crypto launchpad api"
-/>
-<meta name="robots" content="index, follow" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="language" content="English" />
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Jupiter Studio API - Solana - Token Launches, Trades, Migration Data"
-/>
-<meta
-  property="og:description"
-  content="Get Jupiter Studio launchpad data, token trades, OHLC, migration tracking and Meteora DBC analytics"
-/>
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Jupiter Studio API - Solana - Token Launches, Trades, Migration Data"/>
-  <meta property="twitter:description" content="Get Jupiter Studio launchpad data, token trades, OHLC, migration tracking and Meteora DBC analytics"/>
-</head>
 
 ---
 

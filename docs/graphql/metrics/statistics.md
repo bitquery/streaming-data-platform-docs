@@ -1,7 +1,8 @@
 ---
 sidebar_position: 8
+title: "GraphQL Statistics Metrics"
+description: "Statistics in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Scale further with Kafka or gRPC streams."
 ---
-
 #  Statistics
 
 ##  Over One Variable
@@ -22,7 +23,6 @@ For example to calculate average reward:
 ```
 average(of: Reward_Total)
 ```
-
 
 ##  Over Two Variables
 

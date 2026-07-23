@@ -1,35 +1,11 @@
 ---
 sidebar_position: 1
+title: "Base Transaction Balance Tracker"
+description: "Base Transaction Balance Tracker: stream Base balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
 ---
-
 # Base Transaction Balance Tracker
 
 The Base Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the Base blockchain, including detailed information about the reason for each balance change.
-
-<head>
-<meta name="title" content="Base Transaction Balance Tracker API & Streams"/>
-<meta name="description" content="Learn how to get real-time balance updates for all addresses in Base transactions with balance change reasons using Bitquery's Transaction Balance API."/>
-<meta name="keywords" content="base transaction balance api, base balance streams, base balance api, balance change reason, transaction balance python api, base transaction balance, balance updates api, base network api, base web3 api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="Base Transaction Balance Tracker API & Streams"
-/>
-<meta
-  property="og:description"
-  content="Learn how to get real-time balance updates for all addresses in Base transactions with balance change reasons using Bitquery's Transaction Balance API."
-/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Base Transaction Balance Tracker API & Streams" />
-<meta property="twitter:description" content="Learn how to get real-time balance updates for all addresses in Base transactions with balance change reasons using Bitquery's Transaction Balance API." />
-</head>
 
 ## Subscribe to All Transaction Balances
 

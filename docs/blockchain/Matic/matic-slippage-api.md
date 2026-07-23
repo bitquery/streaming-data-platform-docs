@@ -1,37 +1,11 @@
 ---
 sidebar_position: 3
+title: "Polygon Matic Slippage API"
+description: "Polygon Matic Slippage API: measure Polygon DEX price impact and slippage with Bitquery GraphQL pool metrics. Covers archive history and realtime data."
 ---
-
 # Matic Slippage API
 
 In this section we will see how to get Matic DEX pool slippage information using our API. The slippage API helps you understand price impact and liquidity depth for token swaps on Matic DEX pools.
-
-<head>
-<meta name="title" content="Matic DEX Pool Slippage Data with Matic Slippage API"/>
-<meta name="description" content="Get slippage and price impact data for Matic DEX pools through our Slippage API."/>
-<meta name="keywords" content="Matic slippage api, Matic DEX pool api, Matic liquidity api, Matic price impact api, Matic DEX api, Matic web3 api, Polygon slippage api, Polygon DEX pool api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="How to Get Matic DEX Pool Slippage Data with Matic Slippage API"
-/>
-<meta
-  property="og:description"
-  content="Get slippage and price impact data for Matic DEX pools through our Slippage API."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="How to Get Matic DEX Pool Slippage Data with Matic Slippage API" />
-<meta property="twitter:description" content="Get slippage and price impact data for Matic DEX pools through our Slippage API." />
-</head>
 
 ## Understanding Slippage and Price Impact
 
@@ -43,7 +17,7 @@ The DEXPoolSlippages API provides detailed information about:
 - Average execution prices for different trade sizes
 - Price impact calculations for both swap directions (A to B and B to A)
 
-For a comprehensive explanation of how DEX pools work, liquidity calculations, and price tables, refer to the [DEXPools Cube documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/).
+For a comprehensive explanation of how DEX pools work, liquidity calculations, and price tables, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/).
 
 ## Realtime Slippage Monitoring
 
@@ -181,7 +155,7 @@ Kafka streams provide the same slippage data as GraphQL subscriptions but with s
 - Ability to read from latest offset without gaps
 - Better scalability with multiple consumers
 
-For detailed information on how to connect to Kafka streams, subscribe to topics, and parse messages, refer to the [Kafka Streaming Concepts documentation](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/).
+For detailed information on how to connect to Kafka streams, subscribe to topics, and parse messages, refer to the [Kafka Streaming Concepts documentation](/docs/streams/kafka-streaming-concepts/).
 
 > **Note:** IDE credentials will not work with Kafka Streams. You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
 
@@ -203,7 +177,7 @@ The `DEXPoolSlippages` API response contains the following information:
   - `Time`: Timestamp of the block
   - `Number`: Block number
 
-For more details on how slippage is calculated and when new pool records are emitted, see the [DEXPools Cube documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/#when-is-a-new-dexpool-record-emitted-in-the-apis--streams).
+For more details on how slippage is calculated and when new pool records are emitted, see the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#when-is-a-new-dexpool-record-emitted-in-the-apis--streams).
 
 ## Use Cases
 
@@ -250,4 +224,4 @@ For a practical implementation example of using slippage data for automated trad
 - Execute fade trades against temporary price impacts
 - Manage positions with dynamic stop losses and take profits based on slippage data
 
-For more advanced use cases, refer to the [DEXPools Cube documentation](https://docs.bitquery.io/docs/cubes/evm-dexpool/#advanced-use-cases-and-processing-patterns).
+For more advanced use cases, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#advanced-use-cases-and-processing-patterns).

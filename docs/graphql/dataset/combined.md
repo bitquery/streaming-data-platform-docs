@@ -1,8 +1,8 @@
 ---
 sidebar_position: 6
+title: "Combined Database"
+description: "Combined Database in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. See examples in the Bitquery IDE."
 ---
-
-
 # Combined Database
 
 When you query combined database, actually the query goes to the archive and real time databases separately
@@ -19,7 +19,6 @@ how you can query the trunk or branch block updates **ONLY for real time databas
 Typically you should avoid using this type of query, as it is slower than real time and archive
 and does not give full consistency of the data.
 :::
-
 
 Also Check [Archive](/docs/graphql/dataset/archive) and [RealTime](/docs/graphql/dataset/realtime) dataset.
 

@@ -1,6 +1,6 @@
 ---
 title: "Polymarket Bitcoin Up or Down API & Websocket"
-description: "Query Polymarket Bitcoin price prediction, Bitcoin up or down, and Bitcoin price odds via GraphQL. Stream trades and odds on Polygon. Build dashboards, track top traders, aggregate odds, analyze volume, and monitor settlements and redemptions."
+description: "Polymarket Bitcoin Up or Down API & Websocket: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
 keywords:
   - polymarket bitcoin price prediction
   - polymarket bitcoin up or down
@@ -14,7 +14,6 @@ keywords:
   - Bitcoin price direction market API
   - PredictionTrades Bitcoin
 ---
-
 # Polymarket Bitcoin Up or Down Prediction Odds API
 
 Query and stream **Polymarket Bitcoin up or down** prediction market trades and **Bitcoin price odds** via Bitquery’s GraphQL API. These markets ask whether Bitcoin will be **up** or **down** at a specific time (e.g. daily or weekly settlement).
@@ -45,7 +44,7 @@ For **ultra-low-latency** consumption, prediction market data (including Bitcoin
 - **`matic.predictions.proto`** — Raw prediction market events (trades, creations, resolutions)
 - **`matic.broadcasted.predictions.proto`** — Mempool prediction market data
 
-Kafka requires **separate credentials**. See [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/). For access, [contact support](https://t.me/bloxy_info) or email support@bitquery.io.
+Kafka requires **separate credentials**. See [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/). For access, [contact support](https://t.me/bloxy_info) or email support@bitquery.io.
 
 ---
 
@@ -602,12 +601,12 @@ Each query exposes the same `$wallets` variable, so you can drop the same wallet
 
 | Need                                 | API                                                                                                                                                                                                |
 | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **All Polymarket trades & prices**   | [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/) / [Prediction Trades API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-trades-api/) |
-| **Filter by slug, condition, token** | [Polymarket Markets API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-markets-api/)                                                                                            |
-| **Settlements & redemptions**        | [Prediction Settlements API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-settlements-api/)                                                                                 |
-| **Market creation & resolution**     | [Prediction Market API](https://docs.bitquery.io/docs/examples/prediction-market/prediction-market-api/)                                                                                           |
-| **User & wallet activity**           | [Polymarket Wallet & User Activity API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-wallet-api/)                                                                              |
-| **Real-time: Kafka streams**         | [Kafka Streaming Concepts](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)                                                                                                        |
+| **All Polymarket trades & prices**   | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) / [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/) |
+| **Filter by slug, condition, token** | [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/)                                                                                            |
+| **Settlements & redemptions**        | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/)                                                                                 |
+| **Market creation & resolution**     | [Prediction Market API](/docs/examples/prediction-market/prediction-market-api/)                                                                                           |
+| **User & wallet activity**           | [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/)                                                                              |
+| **Real-time: Kafka streams**         | [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/)                                                                                                        |
 
 ---
 

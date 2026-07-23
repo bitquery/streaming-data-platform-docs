@@ -1,28 +1,14 @@
+---
+title: "Tron Fees API"
+description: "Tron Fees API: analyze Tron transaction fees and costs with Bitquery GraphQL queries and streams. Scale further with Kafka or gRPC streams."
+---
 # Tron Fees API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 In this document, we will explore several examples related to Tron Fees data.
-We also have [PumpFun APIs](https://docs.bitquery.io/docs/blockchain/Tron/Pump-Fun-API/) to track Pump Fun token swaps, [PumpSwap APIs](https://docs.bitquery.io/docs/blockchain/Tron/pump-swap-api/) if you want to track the token after it has been migrated to PumpSwap AMM.
-Additionally, you can also check out our [Moonshot APIs](https://docs.bitquery.io/docs/blockchain/Tron/Moonshot-API/), [FourMeme APIs](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/).
-These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
-
-<head>
-  <meta name="title" content="Tron Fees API - Track Transaction Fees on Tron DApps"/>
-  <meta name="description" content="Query and analyze Tron transaction fees using Bitquery’s Tron Fees API. Get data on DEX trades, wallet transfers, and total account fees."/>
-  <meta name="keywords" content="Tron Fees API,Tron transaction fees,Tron Blockchain Data API,Track Tron DEX fees,Tron wallet fee analytics,crypto fees,Tron gas fees,Tron API,Kafka Tron API,Blockchain Data API,Tron token fees,Tron fee explorer"/>
-  <meta name="robots" content="index, follow"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="language" content="English"/>
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Track Tron Transaction Fees with Tron Fees API" />
-  <meta property="og:description" content="Analyze transaction fees on Tron including DEX trades, wallet transfers, and account-level metrics using Bitquery’s Tron Fees API." />
-
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Track Tron Transaction Fees with Tron Fees API"/>
-  <meta property="twitter:description" content="Analyze transaction fees on Tron including DEX trades, wallet transfers, and account-level metrics using Bitquery’s Tron Fees API."/>
-</head>
+For related memecoin fee and trade analytics on other chains, see [Pump.fun](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/), [PumpSwap](/docs/blockchain/Solana/Pumpfun/pump-swap-api/), [Moonshot](/docs/blockchain/Solana/Moonshot-API/), and [Four.meme](/docs/blockchain/BSC/four-meme-api/).
+These APIs can also be delivered through Kafka streams for low-latency use cases — contact us on Telegram.
 
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
 

@@ -1,33 +1,10 @@
+---
+title: "BNB Chain Transfers API"
+description: "BNB Chain Transfers API: monitor BNB Chain native and token transfers in real time with Bitquery GraphQL APIs. Includes filters and field selection tips."
+---
 # BSC Transfers API
 
 In this section we'll have a look at some examples using the BSC Transfers API.
-
-<head>
-<meta name="title" content="BSC Transfers API"/>
-<meta name="description" content="Get all historical & realtime transfers details for an address or a contract, capturing internal transfers, external transfers and token transfers."/>
-<meta name="keywords" content="BSC transfers api, BSC transfers python api, BSC transfers scan api, BSC transfers api docs, transfers crypto api, transfers blockchain api, BSC network api"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="BSC Transfers API"
-/>
-<meta
-  property="og:description"
-  content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="BSC Transfers API" />
-<meta property="twitter:description" content="Get all historical & realtime transfers for an address or a contract, capturing internal transfers, external transfers and token transfers." />
-</head>
 
 ## Subscribe to Recent Whale Transactions of a particular currency
 
@@ -59,7 +36,6 @@ subscription{
     }
   }
 }
-
 
 ```
 
@@ -165,7 +141,6 @@ subscription {
     }
   }
 }
-
 
 ```
 

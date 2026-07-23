@@ -1,30 +1,13 @@
 ---
 sidebar_position: 1
+title: "ERC20 Token Transfers API"
+description: "ERC20 Token Transfers API: monitor Ethereum native and token transfers in real time with Bitquery GraphQL APIs. Keep queries fast with indexed filters."
 ---
 import FAQ from "@site/src/components/FAQ";
 
 # ERC20 Token Transfers API
 
 Track and analyze ERC20 token transfers across the Ethereum blockchain in real-time and historically. Monitor token movements, analyze transfer volumes, track wallet activity, and build comprehensive token transfer analytics using Bitquery's ERC20 Token Transfers API.
-
-<head>
-<meta name="title" content="ERC20 Token Transfers API | Track Ethereum Token Transfers"/>
-<meta name="description" content="Get real-time and historical ERC20 token transfers on Ethereum. Track USDT, USDC, WETH transfers, monitor wallet activity, analyze transfer volumes, and build token analytics with Bitquery's GraphQL API."/>
-<meta name="keywords" content="ERC20 token transfers, ERC20 transfer API, Ethereum token transfers, token transfer tracking, USDT transfers, USDC transfers, WETH transfers, token transfer analytics, ERC20 API, Ethereum transfers API, token flow analysis, wallet transfer tracking, ERC20 transfer history, token transfer monitoring"/>
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="ERC20 Token Transfers API | Track Ethereum Token Transfers" />
-<meta property="og:description" content="Get real-time and historical ERC20 token transfers on Ethereum. Track USDT, USDC, WETH transfers, monitor wallet activity, and analyze transfer volumes." />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="ERC20 Token Transfers API | Track Ethereum Token Transfers" />
-<meta property="twitter:description" content="Get real-time and historical ERC20 token transfers on Ethereum. Track USDT, USDC, WETH transfers, monitor wallet activity, and analyze transfer volumes." />
-</head>
 
 ## What are ERC20 Token Transfers?
 
@@ -41,27 +24,27 @@ Understanding ERC20 transfers is essential for:
 ## 🔗 Related APIs
 
 ### Ethereum APIs
-- **[Ethereum Balance API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api)** - Get wallet balances for ERC20, ERC721, and ERC1155 tokens
-- **[Ethereum Transaction Balance Tracker](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/)** - Track real-time balance changes with reason codes
-- **[Ethereum Token Holders API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-holders/token-holder-api)** - Get top token holders and distribution data
-- **[Ethereum Token Supply API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-supply/evm-token-supply)** - Track total supply and supply changes
-- **[Ethereum DEX Trades API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/dex-api)** - Monitor DEX trading activity
-- **[Ethereum Transactions API](https://docs.bitquery.io/docs/blockchain/Ethereum/transactions/transaction-api)** - Get comprehensive transaction data
-- **[Ethereum Events API](https://docs.bitquery.io/docs/blockchain/Ethereum/events/events-api)** - Query smart contract events
+- **[Ethereum Balance API](/docs/blockchain/Ethereum/balances/balance-api)** - Get wallet balances for ERC20, ERC721, and ERC1155 tokens
+- **[Ethereum Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/)** - Track real-time balance changes with reason codes
+- **[Ethereum Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api)** - Get top token holders and distribution data
+- **[Ethereum Token Supply API](/docs/blockchain/Ethereum/token-supply/evm-token-supply)** - Track total supply and supply changes
+- **[Ethereum DEX Trades API](/docs/blockchain/Ethereum/dextrades/dex-api)** - Monitor DEX trading activity
+- **[Ethereum Transactions API](/docs/blockchain/Ethereum/transactions/transaction-api)** - Get comprehensive transaction data
+- **[Ethereum Events API](/docs/blockchain/Ethereum/events/events-api)** - Query smart contract events
 
 ### EVM APIs
-- **[EVM Transfers API](https://docs.bitquery.io/docs/evm/transfers)** - General EVM token transfers documentation
-- **[EVM Balance Updates API](https://docs.bitquery.io/docs/evm/balances)** - Track balance changes across EVM chains
-- **[EVM DEX Trades API](https://docs.bitquery.io/docs/evm/dextrades)** - DEX trading data across EVM chains
+- **[EVM Transfers API](/docs/schema/evm/transfers)** - General EVM token transfers documentation
+- **[EVM Balance Updates API](/docs/schema/evm/balances)** - Track balance changes across EVM chains
+- **[EVM DEX Trades API](/docs/schema/evm/dextrades)** - DEX trading data across EVM chains
 
 ### NFT & Other Token Standards
-- **[NFT Transfer API](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/nft-token-transfer-api)** - Track ERC721 and ERC1155 NFT transfers
-- **[RWA Token API](https://docs.bitquery.io/docs/blockchain/Ethereum/transfers/rwa-api)** - Real World Asset token transfers
+- **[NFT Transfer API](/docs/blockchain/Ethereum/transfers/nft-token-transfer-api)** - Track ERC721 and ERC1155 NFT transfers
+- **[RWA Token API](/docs/blockchain/Ethereum/transfers/rwa-api)** - Real World Asset token transfers
 
 ### Solana APIs
-- **[Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/)** - Track SPL token transfers and SOL transfers on Solana
-- **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)** - Monitor Solana wallet balance changes
-- **[Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)** - Track Solana DEX trading activity
+- **[Solana Transfers API](/docs/blockchain/Solana/solana-transfers/)** - Track SPL token transfers and SOL transfers on Solana
+- **[Solana Balance Updates API](/docs/blockchain/Solana/solana-balance-updates/)** - Monitor Solana wallet balance changes
+- **[Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades/)** - Track Solana DEX trading activity
 
 ---
 
@@ -252,7 +235,7 @@ The example below queries transfers for USDT, USDC, WETH, and native ETH (`0x` r
 }
 ```
 
-**Solana Token Transfers**: For SPL token transfers on Solana, see our **[Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/)** documentation.
+**Solana Token Transfers**: For SPL token transfers on Solana, see our **[Solana Transfers API](/docs/blockchain/Solana/solana-transfers/)** documentation.
 :::
 
 ---
@@ -297,7 +280,7 @@ subscription {
 ```
 
 :::tip Real-Time Monitoring
-For more information on setting up real-time subscriptions, see our [GraphQL Subscriptions documentation](https://docs.bitquery.io/docs/subscriptions/subscription).
+For more information on setting up real-time subscriptions, see our [GraphQL Subscriptions documentation](/docs/subscriptions/subscription).
 :::
 
 ---
@@ -397,7 +380,7 @@ query ($addresses: [String!]) {
 ```
 
 :::note Array Intersect Function
-Learn more about the `array_intersect` function in our [Array Intersect documentation](https://docs.bitquery.io/docs/graphql/capabilities/array-intersect).
+Learn more about the `array_intersect` function in our [Array Intersect documentation](/docs/graphql/capabilities/array-intersect).
 :::
 
 ---
@@ -570,8 +553,8 @@ Track all token transfers for a wallet to build comprehensive portfolio dashboar
 - Build transaction timelines
 
 **Related APIs:**
-- [Ethereum Balance API](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/balance-api) - Get current wallet balances
-- [Transaction Balance Tracker](https://docs.bitquery.io/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) - Real-time balance updates
+- [Ethereum Balance API](/docs/blockchain/Ethereum/balances/balance-api) - Get current wallet balances
+- [Transaction Balance Tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/) - Real-time balance updates
 
 ### 2. Tax & Accounting
 
@@ -607,8 +590,8 @@ Analyze token flows in and out of DeFi protocols:
 - Measure protocol adoption
 
 **Related APIs:**
-- [Ethereum DEX Trades API](https://docs.bitquery.io/docs/blockchain/Ethereum/dextrades/dex-api) - Track DEX trading activity
-- [Ethereum Events API](https://docs.bitquery.io/docs/blockchain/Ethereum/events/events-api) - Monitor smart contract events
+- [Ethereum DEX Trades API](/docs/blockchain/Ethereum/dextrades/dex-api) - Track DEX trading activity
+- [Ethereum Events API](/docs/blockchain/Ethereum/events/events-api) - Monitor smart contract events
 
 ### 4. Token Distribution Analysis
 
@@ -619,8 +602,8 @@ Understand how tokens are distributed across addresses:
 - Identify distribution patterns
 
 **Related APIs:**
-- [Token Holders API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-holders/token-holder-api) - Get top holders
-- [Token Supply API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-supply/evm-token-supply) - Track supply changes
+- [Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api) - Get top holders
+- [Token Supply API](/docs/blockchain/Ethereum/token-supply/evm-token-supply) - Track supply changes
 
 ### 5. Security & Fraud Detection
 
@@ -684,10 +667,10 @@ Build comprehensive wallet analysis tools:
 
 1. **Get API Access**: Sign up at [Bitquery](https://bitquery.io/) to get your API key
 2. **Try in IDE**: Test queries in the [Bitquery IDE](https://ide.bitquery.io/)
-3. **Read Documentation**: Explore our [Getting Started Guide](https://docs.bitquery.io/docs/start/first-query/)
-4. **Check Examples**: See more examples in [Starter Queries](https://docs.bitquery.io/docs/start/starter-queries)
+3. **Read Documentation**: Explore our [Getting Started Guide](/docs/start/first-query/)
+4. **Check Examples**: See more examples in [Starter Queries](/docs/start/starter-queries)
 
-For more information on authentication and API usage, see our [Authorization Guide](https://docs.bitquery.io/docs/authorisation/how-to-use).
+For more information on authentication and API usage, see our [Authorization Guide](/docs/authorization/how-to-use).
 
 ## Deterministic Pagination for Backfilling Transfers
 

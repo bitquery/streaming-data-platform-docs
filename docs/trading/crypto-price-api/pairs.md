@@ -1,3 +1,7 @@
+---
+title: "Crypto Trading Pairs Price API"
+description: "Get crypto trading pair prices, volume, and OHLC with Bitquery Trading APIs using GraphQL queries and real-time stream options."
+---
 # Pairs Cube
 
 The Pairs cube provides trading data for a base token traded against a quote token on a particular DEX or protocol.
@@ -50,7 +54,6 @@ The Pairs cube provides trading data for a base token traded against a quote tok
     }
   }
 }
-
 
 ```
 

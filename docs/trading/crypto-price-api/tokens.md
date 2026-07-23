@@ -1,3 +1,7 @@
+---
+title: "Crypto Token Price API"
+description: "Fetch token USD prices, market stats, and history with Bitquery crypto price APIs using GraphQL queries and live subscriptions."
+---
 # Tokens Cube
 
 The **Tokens** cube provides chain-specific, aggregated price and volume data for individual tokens. For a **query** example that returns tokens with volume and average price over the last 24h (including conditional metrics for 1h, 4h, 24h), see [Aggregated Token Data](https://ide.bitquery.io/aggregated-data) or the [Crypto Price API examples](/docs/trading/crypto-price-api/examples#aggregated-token-data-volume--price-last-24h).

@@ -1,3 +1,7 @@
+---
+title: "esGMX (Escrowed) and vGLP (Vested) API"
+description: "esGMX (Escrowed) and vGLP (Vested) API: query and stream Arbitrum on-chain data with Bitquery GraphQL examples for developers."
+---
 # esGMX (Escrowed) and vGLP (Vested) API 
 
 When a wallet stakes GMX tokens in the GMX protocol, they are escrowed and earn Escrowed GMX (esGMX) tokens as rewards.

@@ -30,17 +30,17 @@ const sidebars = {
 
     {
       type: "category",
-      label: "Authorisation",
+      label: "Authorization",
+      // Doc link avoids /docs/category/authorization/ so the legacy redirect works.
       link: {
-        type: "generated-index",
-        title: "Authorisation Documentation",
-        description: "Learn about how to generate and use authorisation tokens",
+        type: "doc",
+        id: "authorization/how-to-generate",
       },
       items: [
-        "authorisation/how-to-generate",
-        "authorisation/how-to-use",
-        "authorisation/websocket",
-        "authorisation/usage-api",
+        "authorization/how-to-generate",
+        "authorization/how-to-use",
+        "authorization/websocket",
+        "authorization/usage-api",
       ],
     },
 
@@ -92,7 +92,6 @@ const sidebars = {
             "graphql/limits",
             "graphql/capabilities/aggregated_metrics",
             "graphql/capabilities/array-intersect",
-            "graphql/capabilities/patterns",
             "graphql/capabilities/query_fact_records",
             "graphql/capabilities/subscription_aggregates",
             "graphql/capabilities/subscription_facts",
@@ -129,7 +128,10 @@ const sidebars = {
           label: "Metrics",
           link: {
             type: "generated-index",
+            slug: "/graphql/metrics",
             title: "Metrics",
+            description:
+              "Metrics used to calculate statistics over results grouped by dimensions",
           },
           items: [
             "graphql/metrics/alias",
@@ -273,7 +275,7 @@ const sidebars = {
               label: "Solana",
               items: [
                 "grpc/solana/introduction",
-                "grpc/solana/authorisation",
+                "grpc/solana/authorization",
 
                 {
                   type: "category",
@@ -342,7 +344,7 @@ const sidebars = {
             "cubes/transaction-cube",
             "cubes/balance-updates-cube",
             "cubes/transfers-cube",
-            "evm/token-holders",
+            "schema/evm/token-holders",
           ],
         },
         "cubes/solana",
@@ -482,9 +484,9 @@ const sidebars = {
                 "blockchain/Ethereum/nft/nft-metadata-api",
                 "blockchain/Ethereum/nft/nft-ownership-api",
                 "blockchain/Ethereum/nft/nft-transfer-api",
-                "blockchain/Ethereum/nft/nft-trades-apI",
+                "blockchain/Ethereum/nft/nft-trades-api",
                 "blockchain/Ethereum/nft/nft-blur-marketplace-api",
-                "blockchain/Ethereum/nft/nft-calls-apI",
+                "blockchain/Ethereum/nft/nft-calls-api",
               ],
             },
             {
@@ -887,6 +889,7 @@ const sidebars = {
           label: "Crypto Price APIs",
           link: {
             type: "generated-index",
+            slug: "/trading/crypto-price-api",
             title: "Crypto Price API",
             description:
               "Access token and currency pricing data across chains.",
@@ -967,6 +970,7 @@ const sidebars = {
           label: "Polymarket API",
           link: {
             type: "generated-index",
+            slug: "/examples/polymarket-api",
             title: "Polymarket Implementation Guide",
             description:
               "Build prediction market apps on Polymarket: Get prices, trades, markets, and oracle resolutions",
@@ -1220,7 +1224,7 @@ const sidebars = {
             "usecases/price-change-signal-bot",
             "usecases/add-liquidity-signal-bot",
             "usecases/solana-arbitrage-dashboard",
-            "usecases/sandwitch-detection",
+            "usecases/sandwich-detection",
           ],
         },
       ],

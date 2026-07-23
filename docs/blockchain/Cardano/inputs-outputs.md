@@ -1,7 +1,7 @@
 ---
-title: Cardano Inputs and Outputs API - UTXO Data & Address Balances
+title: "Cardano Inputs and Outputs API"
 sidebar_label: Cardano Inputs & Outputs API
-description: Query Cardano UTXO inputs and outputs to reconstruct address balances, list transfers in a date range, and build wallet activity feeds via Bitquery GraphQL.
+description: "Cardano Inputs and Outputs API: query and stream Cardano on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
 keywords:
   - Cardano inputs outputs API
   - Cardano UTXO API
@@ -12,7 +12,6 @@ keywords:
   - ADA inputs outputs
   - Bitquery Cardano
 ---
-
 # Cardano Inputs and Outputs API
 
 Cardano runs on an **eUTXO** model — there are no account balances stored on-chain. To get an address's balance or activity you walk its inputs (UTXOs being spent) and outputs (UTXOs being received). These APIs return that UTXO-level data with transaction hash, output index, ADA and USD values, and block timestamps.
@@ -54,7 +53,7 @@ In the eUTXO model, an address balance is simply `sum(outputs received) - sum(in
 
 Add `date: {since: ..., till: ...}` to scope a window, pass `inputAddress: {in: [...]}` / `outputAddress: {in: [...]}` to aggregate across multiple wallets in one call, or drop the `currency: {is: "ADA"}` filter to include native tokens alongside ADA.
 
-For the aggregate shortcut (with pre-computed inflows, outflows, counterparty counts, etc.) see the [`addressStats` query](https://docs.bitquery.io/docs/blockchain/Cardano/address#get-cardano-address-activity-stats-addressstats).
+For the aggregate shortcut (with pre-computed inflows, outflows, counterparty counts, etc.) see the [`addressStats` query](/docs/blockchain/Cardano/address#get-cardano-address-activity-stats-addressstats).
 
 ## List UTXO outputs received by a Cardano address
 
@@ -151,6 +150,6 @@ The `properties` field on the currency object contains the parsed datum:
 
 ## Related resources
 
-- [Cardano Address API](https://docs.bitquery.io/docs/blockchain/Cardano/address) — balances, staking, and the `addressStats` aggregate cube
-- [Cardano Coinpath API](https://docs.bitquery.io/docs/blockchain/Cardano/coinpath) — multi-hop ADA flow tracing across addresses
-- [Cardano Transactions API](https://docs.bitquery.io/docs/blockchain/Cardano/transactions) — transaction-level totals and fees
+- [Cardano Address API](/docs/blockchain/Cardano/address) — balances, staking, and the `addressStats` aggregate cube
+- [Cardano Coinpath API](/docs/blockchain/Cardano/coinpath) — multi-hop ADA flow tracing across addresses
+- [Cardano Transactions API](/docs/blockchain/Cardano/transactions) — transaction-level totals and fees

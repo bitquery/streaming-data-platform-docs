@@ -1,7 +1,7 @@
 ---
-title: "EVM Balance API"
+title: "EVM Balance Schema API"
+description: "EVM Balance API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. See examples in the Bitquery IDE."
 ---
-
 # EVM Balance API
 
 The **Balances** API returns current and historical token balances for addresses on EVM chains. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:

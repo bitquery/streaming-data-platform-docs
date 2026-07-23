@@ -1,6 +1,6 @@
 ---
 title: "Bags FM API - Bitquery"
-description: "Access real-time Bags FM token data, USD price streams, token transfers, trades, and creation events on Solana. Complete blockchain API for Bags FM with Bitquery's low-latency data."
+description: "Bags FM API - Bitquery: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Built for traders and analytics teams."
 keywords:
   [
     "Bags FM API",
@@ -14,11 +14,10 @@ keywords:
     "Bitquery Bags FM API",
   ]
 ---
-
 # Bags FM API Documentation
 
 :::tip Need real-time Bags FM data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Use this page when you need **historical Bags FM data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Bags FM data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 Welcome to the **Bags FM API documentation**, powered by **Bitquery blockchain data APIs**.  
@@ -666,24 +665,24 @@ Track **all transfers of Bags FM tokens** across wallets. This **Bags FM token t
 
 The **Bags FM token trades** endpoints aggregate data from multiple Solana DEXs:
 
-- [Meteora API](https://docs.bitquery.io/docs/blockchain/Solana/Meteora-DAMM-v2-API/)
-- [Raydium API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
-- [Orca API](https://docs.bitquery.io/docs/blockchain/Solana/solana-orca-dex-api/)
-- [Jupiter API](https://docs.bitquery.io/docs/blockchain/Solana/solana-jupiter-api/)
-- [PumpFun API](https://docs.bitquery.io/docs/blockchain/Solana/Pump-Fun-API/)
-- [Letsbonk API](https://docs.bitquery.io/docs/blockchain/Solana/letsbonk-api/)
+- [Meteora API](/docs/blockchain/Solana/Meteora-DAMM-v2-API/)
+- [Raydium API](/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
+- [Orca API](/docs/blockchain/Solana/solana-orca-dex-api/)
+- [Jupiter API](/docs/blockchain/Solana/solana-jupiter-api/)
+- [PumpFun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
+- [Letsbonk API](/docs/blockchain/Solana/letsbonk-api/)
 
 ## 🔗 Related Solana APIs
 
-- **[Solana Instructions API](https://docs.bitquery.io/docs/blockchain/Solana/solana-instructions/)** - Track token creation and burn instructions
-- **[Solana DEX Trades API](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities across all DEXs
-- **[Solana Transfers API](https://docs.bitquery.io/docs/blockchain/Solana/solana-transfers/)** - Track token transfers and movements
-- **[Solana Balance Updates API](https://docs.bitquery.io/docs/blockchain/Solana/solana-balance-updates/)** - Monitor balance changes from trades and transfers
-- **[Solana Token Supply API](https://docs.bitquery.io/docs/blockchain/Solana/token-supply-cube/)** - Track token supply and creation events
+- **[Solana Instructions API](/docs/blockchain/Solana/solana-instructions/)** - Track token creation and burn instructions
+- **[Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades/)** - Monitor trading activities across all DEXs
+- **[Solana Transfers API](/docs/blockchain/Solana/solana-transfers/)** - Track token transfers and movements
+- **[Solana Balance Updates API](/docs/blockchain/Solana/solana-balance-updates/)** - Monitor balance changes from trades and transfers
+- **[Solana Token Supply API](/docs/blockchain/Solana/token-supply-cube/)** - Track token supply and creation events
 
 ## Conclusion
 
 The **Bags FM API (via Bitquery)** delivers **complete blockchain data access** for Bags FM tokens.  
-From **token creation** and **supply updates** to **real-time USD prices** through [crypto price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/), **DEX trades**, and **transfers**, it provides everything you need to build apps, dashboards, and trading systems.
+From **token creation** and **supply updates** to **real-time USD prices** through [crypto price API](/docs/trading/crypto-price-api/introduction/), **DEX trades**, and **transfers**, it provides everything you need to build apps, dashboards, and trading systems.
 
 The **Bitquery Bags FM API** is your comprehensive solution for accessing **Bags FM token data**, **Bags FM token transfers**, **Bags FM token trades**, and **real-time Bags FM price API** streams on the Solana blockchain.

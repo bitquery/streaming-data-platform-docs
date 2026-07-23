@@ -1,3 +1,7 @@
+---
+title: "Tron Kafka Protobuf Streams"
+description: "Tron Protobuf with Bitquery Kafka and protobuf streams for low-latency blockchain ingestion in trading systems. Run it in the IDE, then ship in your app."
+---
 # TRON Streams
 
 You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tree/main/tron).

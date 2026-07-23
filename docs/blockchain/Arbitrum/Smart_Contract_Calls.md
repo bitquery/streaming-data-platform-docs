@@ -1,37 +1,11 @@
 ---
 sidebar_position: 3
+title: "Arbitrum Smart Contract Calls API"
+description: "Arbitrum Smart Contract Calls API: query and stream Arbitrum on-chain data with Bitquery GraphQL examples for developers."
 ---
-
 # Arbitrum Smart Contract Calls API
 
 In this section we will see how to get Arbitrum Smart contract calls information using our API.
-
-
-<head>
-<meta name="title" content="Arbitrum Smart Contract Calls API"/>
-
-<meta name="description" content="Explore Arbitrum smart contract call data. Analyze smart contract calls with detailed information."/>
-
-<meta name="keywords" content="Arbitrum, smart contract, Arbitrum smart contracts, blockchain transactions, blockchain analysis, smart contract calls, DApps, cryptocurrency, token transfers, crypto transactions, Arbitrum transactions, blockchain analytics, Arbitrum data"/>
-
-<meta name="robots" content="index, follow"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="language" content="English"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-
-<meta property="og:title" content="Arbitrum Smart Contract Calls API" />
-
-<meta property="og:description" content="Explore Arbitrum smart contract call data. Analyze smart contract calls with detailed information."/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-
-<meta property="twitter:title" content="Arbitrum Smart Contract Calls API" />
-
-<meta property="twitter:description" content="Explore Arbitrum smart contract call data. Analyze smart contract calls with detailed information." />
-</head>
 
 ## Transaction Call Trace for a Arbitrum Transaction
 

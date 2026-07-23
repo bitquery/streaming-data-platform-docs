@@ -1,6 +1,6 @@
 ---
-title: "Four Meme API"
-description: "How to query four.meme on BNB Chain with Bitquery: live trades, bonding curve, new tokens, OHLCV, liquidity, PancakeSwap migrations, top tokens by volume, and trader stats via GraphQL and WebSocket."
+title: "BNB Chain Four Meme API"
+description: "BNB Chain Four Meme API: query and stream BNB Chain on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
 keywords:
   - Four Meme API
   - four.meme BSC API
@@ -16,72 +16,28 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 # Four Meme API
 
 :::tip Need real-time Four.meme data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](https://docs.bitquery.io/docs/trading/trading-data-overview) — [`Trading.Trades`](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **8 chains in one API**. Four.meme examples using `Trading.Trades` are also shown in the **"Trader-Focused Trade APIs"** section below. Use the raw chain-level queries on this page when you need **historical Four.meme data older than ~30 days** or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Four.meme examples using `Trading.Trades` are also shown in the **"Trader-Focused Trade APIs"** section below. Use the raw chain-level queries on this page when you need **historical Four.meme data older than ~30 days** or call / event context.
 :::
 
 Bitquery exposes **four.meme (Four Meme)** on **BNB Chain** through GraphQL: **live trades** (`fourmeme_v1`), **TokenCreate** events on the exchange proxy, **bonding curve** math from proxy balances, **migrations** to PancakeSwap, **OHLCV**, **liquidity** events, and **leaderboards**. Use **subscriptions** for real-time streams and **`dataset: combined`** for history. The Four Meme exchange proxy used in examples is **`0x5c952063c7fc8610ffdb798152d69f0b9550762b`** (see below).
 
 The sections below are example queries and streams. For other fields, contact [support](https://t.me/Bloxy_info).
 
-Need low-latency BSC data? See [Streams](https://docs.bitquery.io/docs/streams/) and contact us for a trial. For **mempool (pre-confirmation)** Four Meme data, see the dedicated [Four Meme Mempool API](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-mempool-API/) page.
+Need low-latency BSC data? See [Streams](/docs/streams/) and contact us for a trial. For **mempool (pre-confirmation)** Four Meme data, see the dedicated [Four Meme Mempool API](/docs/blockchain/BSC/four-meme-mempool-API/) page.
 
 For live DEX prices and 24h volume across Four.meme tokens, see [DEXrabbit's Four.meme category](https://dexrabbit.bitquery.io/categories/four-meme-ecosystem).
 
 You may also be interested in:
 
-- [Crypto Price API ➤](https://docs.bitquery.io/docs/trading/crypto-price-api/)
-- [BSC Pancake Swap APIs ➤](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/)
-- [BSC DEX Trades ➤](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/)
-- [PumpFun API ➤](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
-
-<head>
-<title>Four Meme API</title>
-<meta name="title" content="How to Get Four Meme Data Using Bitquery"/>
-
-<meta
-  name="description"
-  content="Query four.meme on BSC with Bitquery: live trades, bonding curve, TokenCreate streams, OHLCV, PancakeSwap migrations, top tokens by volume. GraphQL and WebSocket."
-/>
-
-<meta
-  name="keywords"
-  content="Four Meme API,four meme bsc api,four meme trading api,four meme bonding curve api,four meme prices api,four meme liquidity api,four meme ohlc api,four meme memecoin api,bnb chain meme api,bsc meme token api,bitquery four meme api,real-time bsc trades,bsc websocket api,crypto trading api,blockchain market data api,memecoin analytics"
-/>
-
-<meta name="robots" content="index, follow" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="language" content="English" />
-
-<!-- Open Graph / Facebook -->
-
-<meta property="og:type" content="website" />
-
-<meta
-  property="og:title"
-  content="Four Meme API - BSC - Live Trades, Bonding Curve, Prices"
-/>
-
-<meta
-  property="og:description"
-  content="Live trades, bonding curve, new tokens, OHLCV, and PancakeSwap migrations for four.meme on BNB Chain via Bitquery."
-/>
-
-<!-- Twitter -->
-
-<meta property="twitter:card" content="summary_large_image" />
-
-<meta
-  property="twitter:title"
-  content="Four Meme API - BSC - Live Trades, Bonding Curve, Prices"
-/>
-
-<meta property="twitter:description" content="Four Meme (four.meme) on BSC: trades, bonding curve, streams, and migrations with Bitquery GraphQL." />
-</head>
+- [Crypto Price API ➤](/docs/trading/crypto-price-api/introduction/)
+- [BSC Pancake Swap APIs ➤](/docs/blockchain/BSC/pancake-swap-api/)
+- [BSC DEX Trades ➤](/docs/blockchain/BSC/bsc-dextrades/)
+- [PumpFun API ➤](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
 
 :::note
 To query or stream data via GraphQL outside the Bitquery IDE, you need to generate an API access token.
 
-Follow the steps here to create one: [How to generate Bitquery API token](https://docs.bitquery.io/docs/authorisation/how-to-generate/)
+Follow the steps here to create one: [How to generate Bitquery API token](/docs/authorization/how-to-generate/)
 :::
 
 ## What is the Four Meme exchange contract address on BSC? {#what-is-the-four-meme-exchange-contract-address-on-bsc}
@@ -168,11 +124,11 @@ Use it in **`Transaction.To`**, **`LogHeader.Address`**, or **`BalanceUpdate.Add
 
 ## Getting Started with Bitquery:
 
-- [Learning Track](https://docs.bitquery.io/docs/start/learning-path/): Learning track to get started with Bitquery GraphQL APIs and streams.
-- [BSC DEX Trades](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
-- [BSC Uniswap APIs](https://docs.bitquery.io/docs/blockchain/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
-- [BSC Pancake Swap APIs](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/): Pancake swap Trades on BSC network with the help of examples.
-- [Trade APIs](https://docs.bitquery.io/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
+- [Learning Track](/docs/start/learning-path/): Learning track to get started with Bitquery GraphQL APIs and streams.
+- [BSC DEX Trades](/docs/blockchain/BSC/bsc-dextrades/): Real time DEX Trading data via examples.
+- [BSC Uniswap APIs](/docs/blockchain/BSC/bsc-uniswap-api/): Uniswap Trades on BSC network with the help of examples.
+- [BSC Pancake Swap APIs](/docs/blockchain/BSC/pancake-swap-api/): Pancake swap Trades on BSC network with the help of examples.
+- [Trade APIs](/docs/trading/crypto-price-api/examples/): Multi-chain Trade API Examples.
 
 ## How do I detect Four Meme token migrations to PancakeSwap? {#track-all-four-meme-tokens-that-have-migrated-to-pancakeswap}
 
@@ -477,7 +433,7 @@ subscription {
 
 </details>
 
-You can refer to this [example](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/#subscribe-the-latest-trades-on-four-meme) to track latest trades of a token on other particular DEX's such as Pancake Swap.
+You can refer to this [example](/docs/blockchain/BSC/four-meme-api/#subscribe-the-latest-trades-on-four-meme) to track latest trades of a token on other particular DEX's such as Pancake Swap.
 
 ## Get Four.Meme Tokens created by a specific Dev
 
@@ -784,7 +740,7 @@ query MyQuery($currency: String) {
 
 </details>
 
-You can also check if the token is listed on other DEX using this [example](https://docs.bitquery.io/docs/blockchain/BSC/bsc-dextrades/#get-all-dexs-where-a-specific-token-is-listed).
+You can also check if the token is listed on other DEX using this [example](/docs/blockchain/BSC/bsc-dextrades/#get-all-dexs-where-a-specific-token-is-listed).
 
 ## Get Trade Metrics of a Four Meme Token
 
@@ -840,7 +796,7 @@ query MyQuery($currency: String) {
 
 ## Get latest price of a Four.meme token
 
-We launched the [Price Index](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) in August 2025, allowing you to track price of any token trading onchain.
+We launched the [Price Index](/docs/trading/crypto-price-api/introduction/) in August 2025, allowing you to track price of any token trading onchain.
 Here's an example of [tracking Four.meme token prices](https://ide.bitquery.io/latest-token-price-on-four-meme-dex).
 
 <details>
@@ -1093,7 +1049,7 @@ subscription {
 
 </details>
 
-You can also get the trade activities of a user on Pancake Swap using our [Pancake Swap](https://docs.bitquery.io/docs/blockchain/BSC/pancake-swap-api/) APIs.
+You can also get the trade activities of a user on Pancake Swap using our [Pancake Swap](/docs/blockchain/BSC/pancake-swap-api/) APIs.
 
 ## Track Four Meme Tokens in 14k to 18k Marketcap
 
@@ -2142,7 +2098,7 @@ query MyQuery {
 
 ## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
 
-The queries below use the **[Trades cube](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](https://docs.bitquery.io/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
+The queries below use the **[Trades cube](/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
 ### Get All DEX Trades on FourMeme With Price, Market Cap, and Supply
 
@@ -2294,7 +2250,7 @@ These mirror common “answer engine” questions. Each item points to the secti
 | How do I get newly created tokens on Four Meme?                              | [TokenCreate query](#get-newly-created-tokens-on-four-meme)                                                                                                                        |
 | How do I stream Four Meme token creation events in real time?                | [TokenCreate subscription](#how-do-i-stream-four-meme-token-creation-events-in-real-time)                                                                                          |
 | How do I get top tokens by volume on Four Meme?                              | [Top tokens by volume / activity](#top-tokens-by-buys-sells-volume-price-change-buyers-sellers) and [realtime market cap leaderboard](#top-four-meme-tokens-by-realtime-marketcap) |
-| Can I monitor Four Meme transactions in the BSC mempool before confirmation? | **Separate guide:** [Four Meme Mempool API](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-mempool-API/) (not duplicated on this page)                                     |
+| Can I monitor Four Meme transactions in the BSC mempool before confirmation? | **Separate guide:** [Four Meme Mempool API](/docs/blockchain/BSC/four-meme-mempool-API/) (not duplicated on this page)                                     |
 | How do I get Four Meme OHLCV data for a token?                               | [OHLCV query](#get-ohlcv-data-of-a-four-meme-token)                                                                                                                                |
 | Can the API return four.meme token volume changes every second?              | **Not documented on this page yet** — add minimum interval, aggregation options, and any rate or streaming limits you want to communicate publicly.                                |
 
@@ -2328,7 +2284,7 @@ These mirror common “answer engine” questions. Each item points to the secti
 
 ### Four Meme Sniper Bot
 
-- [Tutorial](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
+- [Tutorial](/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 - [Source Code](https://github.com/Kshitij0O7/evm-sniper)
 - [Video](https://youtu.be/vgOHgqTJmj0?si=yfUguMWdMtxRJMvg)
 

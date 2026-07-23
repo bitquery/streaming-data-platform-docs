@@ -1,6 +1,6 @@
 ---
 title: "Flap.sh API on Robinhood"
-description: "Track Flap.sh newly launched tokens and trades on Robinhood with Bitquery. Detect TokenCreated events, mint transfers, and stream Flap.sh market trades via EVM and Trading APIs."
+description: "Flap.sh API on Robinhood: query and stream Robinhood on-chain data with Bitquery GraphQL examples for developers. Great for bots, dashboards, and alerts."
 sidebar_position: 4
 keywords:
   - Flap.sh API
@@ -22,7 +22,6 @@ keywords:
   - Flap.sh VanityTokenCreated
   - Flap.sh MsgSent social event
 ---
-
 # Flap.sh API on Robinhood
 
 **Flap.sh** is a token launchpad on the **Robinhood** network. This guide shows how to track **newly launched Flap.sh tokens**, **Flap.sh trades**, and **lifecycle events** — token graduations, bonding-curve progress, supply changes, tax paid, vanity tokens, and social messages — with Bitquery GraphQL APIs, using the `EVM(network: robinhood)` and `Trading` cubes.
@@ -30,7 +29,7 @@ keywords:
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
 
-Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorisation/how-to-generate/)
+Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
 
 :::tip Related docs
