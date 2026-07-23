@@ -83,7 +83,7 @@ You can test these queries live on the [Bitquery IDE](https://ide.bitquery.io/).
 Create targeted data streams for specific use cases:
 
 - [Monitor 100 specific wallet addresses](/docs/usecases/monitoring-solana-at-scale-managing-hundreds-of-addresses/) for whale tracking and large transaction alerts
-- Custom token streams filtering by specific programs, amounts, or trading pairs. For eg: [track newly created pump fun tokens](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/#track-newly-created-pump-fun-tokens-creation-time-dev-address-metadata)
+- Custom token streams filtering by specific programs, amounts, or trading pairs. For eg: [track newly created pump fun tokens](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/#how-do-i-get-newly-created-pumpfun-tokens)
 - Focus processing power only on relevant data, reducing costs and complexity
 
 ## Kafka Stream by Bitquery

@@ -17,7 +17,7 @@ For a **live DEX trades** subscription example (GraphQL document plus BSC/Solana
 
 ### Limits
 
-You are charged for the number of subscriptions (aka streams) and not for the number of websockets. Read more on pricing for streams [here](/docs/ide/points/#how-are-points-calculated-for-subscriptions)
+You are charged for the number of subscriptions (aka streams) and not for the number of websockets. Read more on pricing for streams [here](/docs/ide/points/#1-websocket-subscriptions-graphql)
 
 ### Data Handling
 

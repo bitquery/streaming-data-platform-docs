@@ -132,6 +132,8 @@ const config = {
             to: "/docs/blockchain/Solana/Pumpfun/pump-swap-api/",
             from: "/docs/blockchain/Solana/pump-swap-api/",
           },
+          // PumpFun → Pumpfun case redirect lives in static/_redirects (Netlify).
+          // A client-redirect here breaks macOS builds (case-insensitive FS).
           {
             to: "/docs/blockchain/Ethereum/token-holders/token-holder-api/",
             from: "/docs/examples/balances/tokenHolders-api/",

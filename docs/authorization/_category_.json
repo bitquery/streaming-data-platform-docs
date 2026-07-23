@@ -2,7 +2,7 @@
   "label": "Authorization",
   "position": 2,
   "link": {
-    "type": "generated-index",
-    "description": "Using the APIs in Application"
+    "type": "doc",
+    "id": "authorization/how-to-generate"
   }
 }

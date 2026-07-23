@@ -105,7 +105,7 @@ asyncio.run(main())
 
 The `transport.connect()` function is used to establish a connection to the WebSocket server and start the subscription. Similarly, `transport.close()` is used to close the connection and stop the subscription after 100 seconds.
 
-## Implementation Example:Using WebSocket Using JavaScript
+## Implementation Example: Using WebSocket Using JavaScript {#implementation-exampleusing-websocket-using-javascript}
 
 Open any online code editor and use this JavaScript code to use the websocket. Starting January you need to use OAuth to use the V2 APIs. Read more [here](/docs/authorization/websocket/)
 

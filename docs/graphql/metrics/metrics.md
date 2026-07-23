@@ -2,6 +2,8 @@
 sidebar_position: 1
 title: "GraphQL Metrics Overview"
 description: "Metrics in Bitquery GraphQL with clear syntax, examples, and tips for fast blockchain queries and streams. Built for traders and analytics teams."
+# Keep explicit path so this does not collide with the Metrics category hub slug.
+slug: /graphql/metrics/metrics
 ---
 #  Using Metrics
 

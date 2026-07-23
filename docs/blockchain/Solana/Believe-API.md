@@ -196,7 +196,7 @@ query MyQuery($tokenAddress: String!) {
 
 ## Get the Believe Launchpad tokens which are graduated to Meteora
 
-For checking which Believe tokens graduated, we need to get all the tokens created by Believe on Meteora DBC using this [Get All Token Creations by Believe - API](/docs/blockchain/Solana/Believe-API/#get-latest-meteora-dbc-token-creations-using-believe-protocol) and then after getting all the token addresses put them in [Check if the Believe Tokens has Graduated - API](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1) to check which of them graduated to Meteora.
+For checking which Believe tokens graduated, we need to get all the tokens created by Believe on Meteora DBC using this [Get All Token Creations by Believe - API](/docs/blockchain/Solana/Believe-API/#get-latest-meteora-dbc-token-creations-using-believe-launchpad) and then after getting all the token addresses put them in [Check if the Believe Tokens has Graduated - API](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1) to check which of them graduated to Meteora.
 
 ```
 query MyQuery {

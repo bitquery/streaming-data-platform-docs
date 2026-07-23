@@ -9,7 +9,7 @@ description: "Python Tutorial to use Solana Shreds from Kafka with Bitquery Kafk
 
 This tutorial explains how to consume **Solana** transaction protobuf messages from **Bitquery Kafka** using **Python**, and print them with **`bytes`** fields shown in **base58** (pipe-friendly **stdout**; logs on **stderr**).
 
-Background: **[Kafka streaming concepts — Protobuf streams](/docs/streams/kafka-streaming-concepts/#protobuf-streams)**.
+Background: **[Kafka streaming concepts — Protobuf streams](/docs/streams/kafka-streaming-concepts/#what-to-know-about-protobuf-streams)**.
 
 **Runnable project:** **[`bitquery/kafka-streams-examples-usecases`](https://github.com/bitquery/kafka-streams-examples-usecases)** — folder **[`python-consumer-example/`](https://github.com/bitquery/kafka-streams-examples-usecases/tree/main/python-consumer-example)** ([`consumer.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/consumer.py), [`settings.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/settings.py), [`protobuf_print.py`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/python-consumer-example/protobuf_print.py)).
 

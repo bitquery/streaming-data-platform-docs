@@ -1,6 +1,7 @@
 ---
 title: "TradingView Charts with Bitquery"
 description: "Build Tradingview: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code. Works with WebSocket live subscriptions."
+slug: /usecases/tradingview/tradingview
 ---
 # Tutorial to build TradingView chart with real-time blockchain data (Streaming API version)
 

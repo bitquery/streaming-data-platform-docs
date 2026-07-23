@@ -9,7 +9,7 @@ description: "Javascript Tutorial to Setup Solana Kafka Shred Stream with Bitque
 
 This tutorial explains how to consume **Solana** protobuf messages from **Bitquery Kafka** using **JavaScript** (Node.js **CommonJS** — not a browser bundle), and print them with **`bytes`** fields decoded to **base58** where **`printProtobufMessage`** applies that encoding.
 
-**Streaming concepts:** **[Kafka streaming concepts — Protobuf streams](/docs/streams/kafka-streaming-concepts/#protobuf-streams)**.
+**Streaming concepts:** **[Kafka streaming concepts — Protobuf streams](/docs/streams/kafka-streaming-concepts/#what-to-know-about-protobuf-streams)**.
 
 **Runnable project:** **[`bitquery/kafka-streams-examples-usecases`](https://github.com/bitquery/kafka-streams-examples-usecases)** — **[`js-consumer-example/`](https://github.com/bitquery/kafka-streams-examples-usecases/tree/main/js-consumer-example)** ([`src/index.js`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/js-consumer-example/src/index.js), [`src/config.js`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/js-consumer-example/src/config.js), [`package.json`](https://github.com/bitquery/kafka-streams-examples-usecases/blob/main/js-consumer-example/package.json)).
 

@@ -31,10 +31,10 @@ const sidebars = {
     {
       type: "category",
       label: "Authorization",
+      // Doc link avoids /docs/category/authorization/ so the legacy redirect works.
       link: {
-        type: "generated-index",
-        title: "Authorization Documentation",
-        description: "Learn about how to generate and use authorization tokens",
+        type: "doc",
+        id: "authorization/how-to-generate",
       },
       items: [
         "authorization/how-to-generate",
@@ -128,7 +128,10 @@ const sidebars = {
           label: "Metrics",
           link: {
             type: "generated-index",
+            slug: "/graphql/metrics",
             title: "Metrics",
+            description:
+              "Metrics used to calculate statistics over results grouped by dimensions",
           },
           items: [
             "graphql/metrics/alias",

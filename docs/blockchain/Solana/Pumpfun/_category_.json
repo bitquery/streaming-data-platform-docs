@@ -1,7 +1,7 @@
 {
-    "label": "Pumpfun",
-    "link": {
-      "type": "doc",
-      "id": "/index"
-    }
+  "label": "Pumpfun",
+  "link": {
+    "type": "doc",
+    "id": "blockchain/Solana/Pumpfun/index"
   }
+}
