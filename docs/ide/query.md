@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Run Queries in Bitquery IDE"
+description: "Write, run, and debug GraphQL queries in the Bitquery IDE."
 ---
-
 # Create Query
 
 Creating a query in IDE is very easy, on the left you can see the endpoint schema, which will help you to create a query quickly and easily.

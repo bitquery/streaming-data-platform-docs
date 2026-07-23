@@ -1,7 +1,8 @@
 ---
 sidebar_position: 6
+title: "GraphQL Calculations and Expressions"
+description: "Build calculated fields and expressions in Bitquery GraphQL queries."
 ---
-
 # Calculations
 
 Attributes ```maximum``` ```minimum``` ```where``` can be appended to an element in query.

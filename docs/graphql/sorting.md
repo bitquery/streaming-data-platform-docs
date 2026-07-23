@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Sorting Results in Bitquery GraphQL"
+description: "Order Bitquery GraphQL query results with orderBy and related sort options."
 ---
-
 # Sorting
 
 Ordering can be applied to the results of the query, sorting the results in a way you define.

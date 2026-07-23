@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "GraphQL Variables in Bitquery IDE"
+description: "Use GraphQL variables in the Bitquery IDE for reusable parameterized queries."
 ---
-
 # Use Variables
 
 When creating a query you can pass parameters to it, this way you can create a more **organized**, **readable** and **maintainable** code.

@@ -1,3 +1,8 @@
+---
+title: "Bitquery GraphQL in Postman"
+description: "Call Bitquery GraphQL APIs from Postman with auth headers and example requests."
+---
+
 # Accessing Queries on Postman
 
 You can run the queries and subscriptions on Postman as well. Below is the link to the collection:

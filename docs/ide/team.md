@@ -1,7 +1,8 @@
 ---
 sidebar_position: 7
+title: "Bitquery IDE Teams"
+description: "Collaborate on Bitquery GraphQL queries with IDE team workspaces."
 ---
-
 # Develop in Team
 
 Bitquery IDE is built for Teams. You can invite team members and share the same billing account.

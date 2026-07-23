@@ -1,7 +1,8 @@
 ---
 sidebar_position: 10
+title: "Combined Dataset in Bitquery GraphQL"
+description: "Query realtime and archive blockchain data together with dataset: combined."
 ---
-
 # Combined Queries
 
 Several queries can be combined and return results in one request:

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Bitquery WebSocket Subscriptions"
+description: "Connect to Bitquery GraphQL over WebSockets for realtime blockchain streams."
 ---
-
 # Accessing Streaming Data via WebSocket
 
 In the previous section, we learned how to get live data in Bitquery IDE by creating subscription queries. Now, let's take a closer look at how these live updates actually work and what happens behind the scenes to provide you with this real-time data.

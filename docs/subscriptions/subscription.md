@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+title: "GraphQL Subscriptions Guide"
+description: "Create and run Bitquery GraphQL subscriptions for realtime on-chain data."
 ---
-
 # What is a Subscription?
 
 Subscription is defined by the subscription type of GraphQL request:

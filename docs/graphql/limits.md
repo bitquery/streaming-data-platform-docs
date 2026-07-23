@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Bitquery GraphQL Query Limits"
+description: "Understand Bitquery GraphQL limits, timeouts, and how to stay within quotas."
 ---
-
 # Limits
 
 Results are limited by using attributes ```limit``` and ```limitBy```

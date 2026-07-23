@@ -1,7 +1,8 @@
 ---
 sidebar_position: 11
+title: "Bitquery IDE Points and Usage"
+description: "How IDE points work for Bitquery GraphQL queries and subscriptions."
 ---
-
 # Points
 
 Bitquery indexes more than 1 Petabyte of structured blockchain data and exposes it through a single GraphQL interface. Using one endpoint, you can get a chain’s latest block height, follow money trails, pull DEX trades across supported blockchains, and more.

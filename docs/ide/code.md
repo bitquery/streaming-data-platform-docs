@@ -1,7 +1,8 @@
 ---
 sidebar_position: 4
+title: "Export GraphQL Code from the IDE"
+description: "Export Bitquery GraphQL queries from the IDE into application code snippets."
 ---
-
 # Export Code
 
 The IDE will allow you to get the code in the language of your choice, so you can test your queries quickly. To do this you must go to the top right side of the screen

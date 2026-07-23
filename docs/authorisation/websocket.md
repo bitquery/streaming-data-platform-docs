@@ -1,7 +1,8 @@
 ---
 sidebar_position: 3
+title: "Authenticate Bitquery WebSockets"
+description: "Authorize Bitquery GraphQL WebSocket subscriptions with OAuth access tokens."
 ---
-
 # Authenticating Websockets
 
 When it comes to authenticating websockets the token can be included only in the following manner:
