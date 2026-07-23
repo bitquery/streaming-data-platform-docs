@@ -1,6 +1,6 @@
 ---
 title: "Robinhood Token Supply API"
-description: "Robinhood Token Supply API: stream Robinhood market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs. See examples in the Bitquery IDE."
+description: "Robinhood Token Supply API: query and stream token total supply with Bitquery's EVM TransactionBalances API — single tokens, watchlists, and all active tokens."
 sidebar_position: 5
 keywords:
   - Robinhood token supply API
@@ -12,6 +12,8 @@ keywords:
   - token total supply Robinhood
   - Bitquery Robinhood supply API
   - Robinhood token circulating supply
+  - Robinhood tokenized stock supply
+  - Robinhood NVDA token supply
 ---
 # Robinhood Token Supply API
 
@@ -26,6 +28,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::tip Related docs
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
+- [Robinhood Liquidity & Slippage API](/docs/blockchain/robinhood/robinhood-liquidity/)
 - [Flap.sh API on Robinhood](/docs/blockchain/robinhood/flap-sh-api)
 - [WebSocket subscriptions](/docs/subscriptions/websockets/)
 :::
@@ -120,13 +123,14 @@ subscription {
 
 ## Supply of All Active Tokens
 
-Fetch the latest total supply for every recently active token in a single query. `limitBy` collapses results to the newest record per token contract, so each token appears once with its current supply.
+Fetch the latest total supply for every recently active token in a single query. `limitBy` collapses results to the newest record per token contract, so each token appears once with its current supply. Keep a `limit` — unbounded, this returns one row per active token, which can be very large.
 
 ```graphql
 {
   EVM(network: robinhood) {
     TransactionBalances(
       limitBy: {by: TokenBalance_Currency_SmartContract, count: 1}
+      limit: {count: 100}
       orderBy: {descending: Block_Time}
       where: {TokenBalance: {Currency: {SmartContract: {not: "0x"}}}}
     ) {
@@ -177,6 +181,65 @@ Fetch the latest total supply for every recently active token in a single query.
 
 ---
 
+## Tokenized Stock Supply (NVDA)
+
+Robinhood's tokenized equities are ordinary ERC-20s, so the same query returns the on-chain supply of a stock token — `TotalSupply` reads as the tokenized share count. Example: NVIDIA (`NVDA`); swap in AAPL (`0xaf3d76f1834a1d425780943c99ea8a608f8a93f9`) or any other stock token.
+
+```graphql
+{
+  EVM(network: robinhood) {
+    TransactionBalances(
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+      where: {TokenBalance: {Currency: {SmartContract: {is: "0xd0601ce157db5bdc3162bbac2a2c8af5320d9eec"}}}}
+    ) {
+      TokenBalance {
+        Currency {
+          Symbol
+          Name
+          SmartContract
+        }
+        TotalSupply
+      }
+    }
+  }
+}
+```
+
+---
+
+## Supply Watchlist: Multiple Tokens at Once
+
+One latest supply row per token for a fixed list — `SmartContract.in` plus `limitBy` per contract. Example list: WETH, USDG, AAPL, NVDA.
+
+```graphql
+{
+  EVM(network: robinhood) {
+    TransactionBalances(
+      limitBy: {by: TokenBalance_Currency_SmartContract, count: 1}
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+      where: {TokenBalance: {Currency: {SmartContract: {in: [
+        "0x0bd7d308f8e1639fab988df18a8011f41eacad73",
+        "0x5fc5360d0400a0fd4f2af552add042d716f1d168",
+        "0xaf3d76f1834a1d425780943c99ea8a608f8a93f9",
+        "0xd0601ce157db5bdc3162bbac2a2c8af5320d9eec"
+      ]}}}}
+    ) {
+      TokenBalance {
+        Currency {
+          Symbol
+          SmartContract
+        }
+        TotalSupply
+      }
+    }
+  }
+}
+```
+
+---
+
 ## FAQ
 
 ### How do I get the current total supply of a Robinhood token?
@@ -190,6 +253,10 @@ Run the `subscription` on `TransactionBalances` with `Currency.SmartContract: {n
 ### How do I list supply for all active tokens at once?
 
 Use `limitBy: {by: TokenBalance_Currency_SmartContract, count: 1}` with `orderBy: {descending: Block_Time}`. This returns one row — the latest supply — per token contract.
+
+### Can I get supply for several tokens in one query?
+
+Yes — filter `Currency.SmartContract` with `in: [...]` and add `limitBy: {by: TokenBalance_Currency_SmartContract, count: 1}` so each token returns its newest supply once. See [the watchlist example](#supply-watchlist-multiple-tokens-at-once).
 
 ### Is `TotalSupply` raw or decimal-adjusted?
 
