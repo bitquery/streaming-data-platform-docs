@@ -12,14 +12,14 @@ Bitquery provides realtime data via Kafka as well in addition to GraphQL subscri
 
 IDE credentials will not work with our Kafka Streams. You need a separate username and password. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
 
-### Pro and Cons
+### Pros and Cons
 
 Kafka provides faster and more reliable streams comparing to GraphQL subscriptions due to the following advantages:
 
-1. It has lower lattency due to the shorter data pipeline, as GraphQL subscriptions involve custom databases and additional logic to process, filter and format the data
-2. Better reliabilty of the connection protocol compared to WebSocket interface, better optimised for persistent connections
+1. It has lower latency due to the shorter data pipeline, as GraphQL subscriptions involve custom databases and additional logic to process, filter and format the data
+2. Better reliability of the connection protocol compared to WebSocket interface, better optimised for persistent connections
 3. Messages from Kafka topic can be read from the latest offset, it is possible to create consumers that have all messages without gaps and interruption.
-4. Scalability is better as multiple consumers may split the load to consume one topic, automaticlly redistributing load on them
+4. Scalability is better as multiple consumers may split the load to consume one topic, automatically redistributing load on them
 
 There are some disadvantages however compared to GraphQL subscriptions:
 
@@ -56,10 +56,10 @@ This decision sometimes not straightforward, consult our sales and support team,
 
 ### Kafka Streams Lattency
 
-Topics for the same blockchain are not equal by lattency. If you have requirements on lattency, consider to select the proper stream for your application:
+Topics for the same blockchain are not equal by latency. If you have requirements on latency, consider to select the proper stream for your application:
 
 1. Broadcasted topics are available for most blockchains. They can be faster, as the transactions are not waiting till include and commit the block in the chain
-2. Streams are chained while they are parsing, the closer the topic to the original blockchain node, the less is the lattency. Consider selecting the closest topic that you can effectively parse. Every transformation introduces 100-1000 msec latency in the overall topic delay.
+2. Streams are chained while they are parsing, the closer the topic to the original blockchain node, the less is the latency. Consider selecting the closest topic that you can effectively parse. Every transformation introduces 100-1000 msec latency in the overall topic delay.
 
 The diagram shows the data pipeline of the streams on the way to KAFKA topics. Broadcasted and committed transaction
 datapipelines are identical:

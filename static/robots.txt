@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /docs/graphql-reference/
+Disallow: /search/
 
 User-agent: GPTBot
 Allow: /
