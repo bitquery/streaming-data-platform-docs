@@ -72,7 +72,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 `Transfer.Type` commonly returns `token` (ERC-20 log), `call` (internal value move), or `transaction` (top-level ETH value).
 
 :::tip AmountInUSD on Robinhood transfers
-In practice **only native ETH carries a populated `AmountInUSD`** on this cube. Verified over a 24h window: 6.6M WETH transfers and 2.4M USDG transfers both summed to `$0` USD. Consequences:
+In practice **only native ETH carries a populated `AmountInUSD`** on this cube — WETH and USDG rows return `0` too, not just long-tail tokens. Consequences:
 
 - USD thresholds and USD rankings effectively select **ETH flows only**.
 - For USDG, treat `Transfer.Amount` as ≈ USD (it is a dollar stablecoin).
@@ -80,9 +80,9 @@ In practice **only native ETH carries a populated `AmountInUSD`** on this cube. 
 :::
 
 :::tip Choosing a dataset
-- **`realtime`** — a rolling window of recent blocks. Its depth **varies**: at the time of testing it held ~4 days (~110M transfers), but it can be much shorter. Don't assume a fixed depth.
+- **`realtime`** — a rolling window of recent blocks. Its depth **varies** from hours to days — don't assume a fixed depth; measure it with the query below.
 - **`combined`** — archive + realtime union. The safe choice for any fixed window (24h, 48h, 7d).
-- **`archive`** — full history; its head lags the chain by minutes (observed ~30 minutes). Unlike the [liquidity cubes](/docs/blockchain/robinhood/robinhood-liquidity/), Transfers **does** support archive.
+- **`archive`** — full history; its head lags the chain by minutes. Unlike the [liquidity cubes](/docs/blockchain/robinhood/robinhood-liquidity/), Transfers **does** support archive.
 :::
 
 ### Check the dataset window
@@ -108,7 +108,7 @@ Don't guess the realtime depth — measure it. `Time(minimum: …)` / `Time(maxi
 Stream live transfers for dashboards, bots, and alerting.
 
 :::warning Filter live streams
-Robinhood transfer volume is very high (tested: an unfiltered stream delivered its first batch in about a second). Prefer a `where` filter (token, address, or `AmountInUSD`) in production. An unfiltered subscription is fine for exploration, but it can overwhelm clients and burn stream quota.
+Robinhood transfer volume is very high. Prefer a `where` filter (token, address, or `AmountInUSD`) in production. An unfiltered subscription is fine for exploration, but it can overwhelm clients and burn stream quota.
 :::
 
 ▶️ [Run in IDE](https://ide.bitquery.io/real-time-transfers-on-robinhood)
@@ -151,7 +151,7 @@ Connect to `wss://streaming.bitquery.io/graphql?token=YOUR_TOKEN` with the `grap
 
 ### Stream whale transfers (USD threshold)
 
-Alert when a successful transfer exceeds a USD size. Exclude the zero address to skip wrap/unwrap and mint/burn noise. Because USD is populated for native ETH, this is effectively a **large ETH move alert** — when tested live it caught a $13.7k ETH transfer within seconds.
+Alert when a successful transfer exceeds a USD size. Exclude the zero address to skip wrap/unwrap and mint/burn noise. Because USD is populated for native ETH, this is effectively a **large ETH move alert**.
 
 ```graphql
 subscription {
@@ -525,8 +525,6 @@ One call, one **latest** transfer per token: `limitBy` on the currency contract 
 }
 ```
 
-When tested, the top rows all carried the same one-second timestamp — WETH, USDG, tokenized stocks (INTC), and meme tokens transfer many times per second on Robinhood.
-
 ---
 
 ## USDG stablecoin transfers
@@ -575,7 +573,7 @@ When tested, the top rows all carried the same one-second timestamp — WETH, US
 
 ### USDG 24h activity summary
 
-Use `dataset: combined` so the full 24h window is covered regardless of the current realtime depth. When tested this returned **2.4M USDG transfers moving over $1B (1.045B USDG) between ~17k senders and ~18k receivers in one day**.
+Use `dataset: combined` so the full 24h window is covered regardless of the current realtime depth.
 
 ```graphql
 {
@@ -604,7 +602,7 @@ Use `dataset: combined` so the full 24h window is covered regardless of the curr
 
 ## Tokenized stock transfers (AAPL, NVDA)
 
-**Trading / custody:** monitor tokenized equity movements. Robinhood's stock tokens are ordinary ERC-20s here — AAPL below; swap in NVDA (`0xd0601ce1…`) or any other. Live testing also saw GOOGL, GME, INTC, and SNDK tokens moving. `AmountInUSD` is `0` for these, so read `Transfer.Amount` as the **share count**.
+**Trading / custody:** monitor tokenized equity movements. Robinhood's stock tokens are ordinary ERC-20s here — AAPL below; swap in NVDA (`0xd0601ce1…`) or any other. Other stock tokens (GOOGL, GME, INTC, SNDK) follow the same pattern. `AmountInUSD` is `0` for these, so read `Transfer.Amount` as the **share count**.
 
 ```graphql
 {
@@ -647,7 +645,7 @@ Use `dataset: combined` so the full 24h window is covered regardless of the curr
 ```
 
 :::warning Ticker symbols are not unique
-The 24h most-transferred list surfaced **two different contracts both using the GME symbol** (`0x1b0e319c…` and `0xc2362aff…`). Always resolve and pin the `SmartContract` address (the canonical Robinhood stock tokens are named like `NVIDIA • Robinhood Token`) instead of trusting a ticker.
+Multiple contracts can share one ticker — Robinhood has **two different contracts both using the GME symbol** (`0x1b0e319c…` and `0xc2362aff…`). Always resolve and pin the `SmartContract` address (the canonical Robinhood stock tokens are named like `NVIDIA • Robinhood Token`) instead of trusting a ticker.
 :::
 
 ---
@@ -787,7 +785,7 @@ Filter where the address is either `Transfer.Sender` or `Transfer.Receiver` to b
 
 ## Whale transfers by USD value
 
-**Trading / compliance:** find the largest successful transfers by `AmountInUSD`, excluding zero-address wrap/unwrap and mint/burn rows. Since only native ETH carries USD, this surfaces **large ETH moves** (top row in testing: a $4.8M ETH transfer). For token whales, use raw-amount thresholds like the [meme-token example](#large-meme-token-transfers-by-token-amount).
+**Trading / compliance:** find the largest successful transfers by `AmountInUSD`, excluding zero-address wrap/unwrap and mint/burn rows. Since only native ETH carries USD, this surfaces **large ETH moves**. For token whales, use raw-amount thresholds like the [meme-token example](#large-meme-token-transfers-by-token-amount).
 
 ```graphql
 {
@@ -1172,19 +1170,6 @@ When `AmountInUSD` is `0`, rank by raw `Transfer.Amount`. Example uses FREN (`0x
 }
 ```
 
-Live 24h sample when tested — note the tokenized stocks in the top ranks, and **two distinct GME contracts**:
-
-| Token | Transfers | Unique senders |
-| --- | --- | --- |
-| ETH (native) | 8.90M | 227,568 |
-| WETH | 6.64M | 56,850 |
-| USDG | 2.40M | 16,872 |
-| GME (`0x1b0e319c…`) | 1.09M | 1,558 |
-| NVDA | 625k | 2,359 |
-| GME (`0xc2362aff…`) | 573k | 14,505 |
-| SPCX | 535k | 1,700 |
-| GOOGL | 409k | 1,388 |
-
 ---
 
 ## Top receivers by ETH inflow (liquidity hubs)
@@ -1257,7 +1242,7 @@ Live 24h sample when tested — note the tokenized stocks in the top ranks, and 
 
 ## Unique senders and receivers for a token
 
-**Distribution / compliance:** count distinct participants for WETH over 24 hours. Tested result: 6.64M transfers between ~57k senders and ~51k receivers (and `usd: 0` — WETH carries no USD enrichment; see [the USD note](#network-and-useful-contracts)).
+**Distribution / compliance:** count distinct participants for WETH over 24 hours. Note `usd` comes back `0` here — WETH carries no USD enrichment (see [the USD note](#network-and-useful-contracts)).
 
 ```graphql
 {
@@ -1286,7 +1271,7 @@ Live 24h sample when tested — note the tokenized stocks in the top ranks, and 
 
 ## ETH transfer size statistics (24h)
 
-**Market microstructure:** distribution stats for native ETH transfer sizes — average, median, and 90th percentile in one aggregate call. Tested values: 8.9M ETH transfers in 24h totalling **$1.19B**, average **$133**, median **$13.88**, p90 **$237** from ~228k senders (a long-tail distribution — the average sits far above the median).
+**Market microstructure:** distribution stats for native ETH transfer sizes — average, median, and 90th percentile in one aggregate call. Expect a long-tail distribution: the average typically sits far above the median.
 
 ```graphql
 {
@@ -1350,14 +1335,7 @@ Also available: `standard_deviation`, other `quantile` levels, and `count(distin
 
 ## Daily transfer volume (7 days)
 
-**Dashboards:** one row per day — total transfers, ETH-denominated USD volume, and how many distinct tokens moved. Live sample when tested:
-
-| Day | Transfers | USD volume (native ETH) | Active tokens |
-| --- | --- | --- | --- |
-| 2026-07-22 | 29.7M | $1.21B | 60,365 |
-| 2026-07-21 | 28.2M | $1.26B | 62,836 |
-| 2026-07-20 | 24.3M | $1.17B | 52,488 |
-| 2026-07-19 | 18.4M | $0.95B | 42,234 |
+**Dashboards:** one row per day — total transfers, ETH-denominated USD volume, and how many distinct tokens moved.
 
 ```graphql
 {
@@ -1387,7 +1365,7 @@ Remember the USD column reflects native ETH only; token flows are counted but no
 
 ## Transfer types breakdown
 
-Understand how transfers are classified on Robinhood (`token`, `call`, `transaction`). Tested split over 6 hours: ~75% `token` (5.2M), ~24% `call` (1.6M), ~1% `transaction` (72k).
+Understand how transfers are classified on Robinhood (`token`, `call`, `transaction`).
 
 ```graphql
 {
@@ -1468,7 +1446,7 @@ Understand how transfers are classified on Robinhood (`token`, `call`, `transact
 Use `dataset: combined` (or `archive`) with `Block.Date` for ledgers and backfills. Example: large USD transfers between two calendar dates.
 
 :::note after/before are exclusive
-`Date.after: "2026-07-20"` with `Date.before: "2026-07-22"` returns **only 2026-07-21** (both bounds excluded — verified live). Use `since` / `till` when you want inclusive bounds.
+`Date.after: "2026-07-20"` with `Date.before: "2026-07-22"` returns **only 2026-07-21** (both bounds excluded). Use `since` / `till` when you want inclusive bounds.
 :::
 
 ```graphql
@@ -1612,8 +1590,8 @@ For the full cube shape, see [EVM Transfers](/docs/schema/evm/transfers/).
 ## Tips for fast, useful queries
 
 1. Always scope with `network: robinhood` and prefer a time window (`Block.Time` / `Block.Date`) on aggregates.
-2. Realtime depth **varies** (observed anywhere from hours to ~4 days) — never assume it; use `combined` for any fixed window (24h/48h/7d) and `archive` for full history. Measure the current window with the [dataset window query](#check-the-dataset-window).
-3. Filter WebSocket subscriptions in production — unfiltered Robinhood transfer streams are very noisy (first batch arrives in about a second). Connect with the `graphql-transport-ws` subprotocol and the token in the URL ([WebSocket auth](/docs/authorization/websocket/)).
+2. Realtime depth **varies** (anywhere from hours to days) — never assume it; use `combined` for any fixed window (24h/48h/7d) and `archive` for full history. Measure the current window with the [dataset window query](#check-the-dataset-window).
+3. Filter WebSocket subscriptions in production — unfiltered Robinhood transfer streams are very noisy. Connect with the `graphql-transport-ws` subprotocol and the token in the URL ([WebSocket auth](/docs/authorization/websocket/)).
 4. Use `Transfer.Success: true` unless you specifically want failed flows; check `Call.Success` / `Call.Reverted` separately when debugging.
 5. `AmountInUSD` is effectively **native-ETH-only** on Robinhood transfers — use it for ETH whales; use `Amount` for USDG (≈ dollars), tokenized stocks (shares), and meme tokens.
 6. Exclude the zero address when you want address-to-address or whale alerts without wrap/unwrap noise.
@@ -1643,11 +1621,11 @@ Use `where.any` with `Transfer.Sender` and `Transfer.Receiver` set to the same a
 
 ### How far back does the realtime dataset go?
 
-It varies — realtime is a rolling window of recent blocks (~4 days deep when tested, sometimes much less). Measure it with the [dataset window query](#check-the-dataset-window), and switch to `combined` whenever your window must be complete.
+It varies — realtime is a rolling window of recent blocks; its depth changes over time. Measure it with the [dataset window query](#check-the-dataset-window), and switch to `combined` whenever your window must be complete.
 
 ### Why is AmountInUSD 0 for WETH, USDG, or stock tokens?
 
-USD enrichment on the Robinhood Transfers cube effectively covers native ETH only — verified: 24h sums for WETH and USDG both returned `$0` across millions of transfers. Use `Transfer.Amount` (USDG ≈ dollars, stock tokens ≈ shares) or join prices from the [Trades API](/docs/blockchain/robinhood/robinhood-trades/).
+USD enrichment on the Robinhood Transfers cube effectively covers native ETH only — WETH and USDG rows return `$0` as well. Use `Transfer.Amount` (USDG ≈ dollars, stock tokens ≈ shares) or join prices from the [Trades API](/docs/blockchain/robinhood/robinhood-trades/).
 
 ### How do I get hourly or daily transfer volume?
 

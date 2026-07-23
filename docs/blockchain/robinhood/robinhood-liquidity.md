@@ -84,9 +84,9 @@ The example `PoolId` and pool addresses are **illustrative addresses that were a
 
 ## How to read pool prices
 
-Price fields are directional and quoted in the pool's own currencies. For the ETH/USDG V4 pool (`CurrencyA` = ETH, `CurrencyB` = USDG), a live row read:
+Price fields are directional and quoted in the pool's own currencies. For the ETH/USDG V4 pool (`CurrencyA` = ETH, `CurrencyB` = USDG), a typical row reads:
 
-| Field | Meaning | Live value |
+| Field | Meaning | Example |
 | --- | --- | --- |
 | `AtoBPrice` | Units of **CurrencyA** per 1 **CurrencyB** | `0.000525` (ETH per USDG) |
 | `AtoBPriceInUSD` | USD price of 1 **CurrencyB** | `0.998` (USDG ≈ $1) |
@@ -399,7 +399,7 @@ Note the `BtoAPriceInUSD: 0` and `AmountCurrencyBInUSD: 0` — real rows carry U
 
 ### Tokenized stock pools (AAPL)
 
-Robinhood tokenized equities trade in ordinary DEX pools. AAPL's most liquid venue at the time of testing was the **USDG/AAPL Uniswap V4 pool** (`PoolId 0xc748f467…`), where `AtoBPrice ≈ 320.79` — the AAPL price quoted in USDG. Swap in the NVDA address (`0xd0601ce1…`) for NVIDIA pools.
+Robinhood tokenized equities trade in ordinary DEX pools. An active AAPL venue is the **USDG/AAPL Uniswap V4 pool** (`PoolId 0xc748f467…`); its `AtoBPrice` is the AAPL price quoted in USDG. Swap in the NVDA address (`0xd0601ce1…`) for NVIDIA pools.
 
 ```graphql
 {
@@ -519,7 +519,7 @@ When you only know the ticker, filter on `Currency.Symbol`. One latest row per p
 ```
 
 :::warning Symbols are not unique
-Running this exact query returned **two different contracts both claiming the NVDA symbol**: the canonical `NVIDIA • Robinhood Token` (`0xd0601ce1…`) and a copycat named just `NVDA` (`0xdecf74e4…`). Use symbol filters for discovery, then pin the `SmartContract` address in anything that trades. Also check the other side of the pair — the ETH/NVDA pool has NVDA as `CurrencyB`, but flip the filter to `CurrencyA` (or use `any:`) for full coverage.
+Robinhood has **two different contracts both claiming the NVDA symbol**: the canonical `NVIDIA • Robinhood Token` (`0xd0601ce1…`) and a copycat named just `NVDA` (`0xdecf74e4…`). Use symbol filters for discovery, then pin the `SmartContract` address in anything that trades. Also check the other side of the pair — the ETH/NVDA pool has NVDA as `CurrencyB`, but flip the filter to `CurrencyA` (or use `any:`) for full coverage.
 :::
 
 ---
@@ -592,17 +592,7 @@ Isolate one protocol's pool updates — Uniswap V2/V3/V4 or PancakeSwap.
 }
 ```
 
-Protocols observed on Robinhood pool events when this page was last tested:
-
-| `ProtocolFamily` | `ProtocolName` | Share of pool events* |
-| --- | --- | --- |
-| Uniswap | `uniswap_v3` | ~63% |
-| Uniswap | `uniswap_v4` | ~29% |
-| Uniswap | `uniswap_v2` | ~7% |
-| PancakeSwap | `pancake_swap_v3` | under 1% |
-| PancakeSwapInfinity | `pancakeswap_infinity` | trace |
-
-*Share of the realtime window at the time of writing (~16.7M pool updates across ~85,000 pools); it shifts constantly.
+Protocols observed on Robinhood pool events: **Uniswap** (`uniswap_v2`, `uniswap_v3`, `uniswap_v4`) and **PancakeSwap** (`pancake_swap_v3`, `pancakeswap_infinity`). Run the breakdown query above for the current split.
 
 ### Network-wide totals
 
@@ -780,7 +770,7 @@ The `Field(maximum: OtherField)` syntax is an **argmax**: it returns this field'
 }
 ```
 
-Live sample from this query — the ETH/NVDA pool over one hour: 413 updates, high `210.52`, low `208.04`, last `209.16` (the tokenized NVIDIA price in USD), TVL ≈ `$44,940`. Meme pools show far wider ranges (an ETH/MARSCOIN pool printed a 2× intra-hour swing). Compute swing % client-side as `(high − low) ÷ low`; use absolute `since:`/`till:` timestamps if you prefer fixed windows.
+Compute swing % client-side as `(high − low) ÷ low`; use absolute `since:`/`till:` timestamps if you prefer fixed windows.
 
 ---
 
@@ -818,16 +808,7 @@ Note `orderBy: { descendingByField: "interval_Time" }` — the sort key is the a
 }
 ```
 
-Live sample (ETH/USDG V4 pool — `BtoAPrice` is USDG per ETH):
-
-| Interval (UTC) | Updates | Close | Avg | Pool ETH | ETH side USD |
-| --- | --- | --- | --- | --- | --- |
-| 13:55 | 126 | 1898.60 | 1902.26 | 156.04 | 296,749 |
-| 13:50 | 123 | 1905.83 | 1901.66 | 152.96 | 290,961 |
-| 13:45 | 84 | 1901.55 | 1904.09 | 160.11 | 304,924 |
-| 13:40 | 77 | 1906.09 | 1904.22 | 152.65 | 290,604 |
-
-The realtime window only reaches back a number of hours — this is for intraday series, not multi-month TVL history.
+The realtime window only reaches back a limited time — this is for intraday series, not multi-month TVL history.
 
 ---
 
@@ -888,7 +869,7 @@ subscription {
 ```
 
 :::tip WebSocket connection
-Connect to `wss://streaming.bitquery.io/graphql?token=YOUR_TOKEN` with the `graphql-transport-ws` subprotocol (`connection_init` → `connection_ack` → `subscribe`). This exact subscription delivered its first live event within seconds when tested. See [WebSocket authentication](/docs/authorization/websocket/).
+Connect to `wss://streaming.bitquery.io/graphql?token=YOUR_TOKEN` with the `graphql-transport-ws` subprotocol (`connection_init` → `connection_ack` → `subscribe`). See [WebSocket authentication](/docs/authorization/websocket/).
 :::
 
 ---
@@ -1204,10 +1185,8 @@ Pull recent levels for a V4 `PoolId`. Compare `MaxAmountIn` across 10 → 1000 b
 }
 ```
 
-Live sample: ETH/CASHCAT `140.3 ETH` (≈$260k), ETH/dollars `136.8 ETH`, ETH/FIRE `133.1 ETH`, ETH/AnsemCat `118.9 ETH`, down to ETH/SUBT `27.3 ETH` (≈$51k).
-
 :::warning Degenerate pools report absurd depth
-Without the `lt` cap, testing surfaced pools claiming capacity of **850 million ETH** (and USD values in the trillions) — one-sided or broken V4 pools whose curve math degenerates. Keep a sanity band on `MaxAmountIn`, and cross-check any surprising top row against the pool's actual reserves in `DEXPoolEvents` before routing (the sample's own top row — 5,625 ETH against a meme token — deserves exactly that check). The same applies to `MaxAmountInInUSD` screeners: long-tail token USD prices can be wildly inflated.
+One-sided or broken V4 pools can report absurd capacity — millions of ETH, USD values in the trillions — because their curve math degenerates. Keep a sanity band on `MaxAmountIn`, and cross-check any surprising top row against the pool's actual reserves in `DEXPoolEvents` before routing. The same applies to `MaxAmountInInUSD` screeners: long-tail token USD prices can be wildly inflated.
 :::
 
 ### Whale capacity and thin liquidity screeners
@@ -1310,7 +1289,7 @@ subscription {
 
 ### Stream a network-wide slippage screener
 
-Drop the pool filter and keep one tolerance to watch **every pool's 1% depth** as it changes — the push-based version of the screeners above. This subscription delivered its first event in about a second when tested live.
+Drop the pool filter and keep one tolerance to watch **every pool's 1% depth** as it changes — the push-based version of the screeners above.
 
 ```graphql
 subscription {
@@ -1430,11 +1409,11 @@ Yes, within the realtime window: bucket `DEXPoolEvents` with `Time(interval: { c
 
 ### Which DEX protocols run on Robinhood?
 
-Pool events at the time of testing came from `uniswap_v3` (~63%), `uniswap_v4` (~29%), `uniswap_v2` (~7%), plus small shares of `pancake_swap_v3` and `pancakeswap_infinity`. Run the [protocol breakdown query](#protocol-activity-breakdown) for current numbers.
+Pool events come from `uniswap_v3`, `uniswap_v4`, `uniswap_v2`, plus `pancake_swap_v3` and `pancakeswap_infinity`. Run the [protocol breakdown query](#protocol-activity-breakdown) for the current split.
 
 ### Why are some USD fields 0 — or absurdly large?
 
-USD enrichment covers mainly native-ETH-quoted pools; V2/V3 and exotic pairs often report `0`, and broken or one-sided pools can report inflated USD capacity (test runs saw trillion-dollar readings on meme pools). Prefer raw token amounts with sanity bounds, and derive USD from reserves where needed.
+USD enrichment covers mainly native-ETH-quoted pools; V2/V3 and exotic pairs often report `0`, and broken or one-sided pools can report inflated USD capacity (even trillion-dollar readings on meme pools). Prefer raw token amounts with sanity bounds, and derive USD from reserves where needed.
 
 ### Why is PoolId `0x` on some rows?
 
