@@ -34,4 +34,6 @@ To learn more about using the Bitquery API with this app, please refer to the do
 
 ## Final Look
 
-The app once completed will look like the demo shown ![below](/img/nft_portfolio_demo.gif)
+The app once completed will look like the demo shown below:
+
+<video controls loop muted playsInline width="100%" src="/img/nft_portfolio_demo.mp4"></video>

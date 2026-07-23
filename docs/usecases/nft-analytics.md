@@ -115,7 +115,9 @@ st.subheader('Daily Metrics')
 st.line_chart(df_chart,x='Block_Date',y='Count_NFTS_bought')
 ```
 
-#### Here's how it looks ![finally](/img/nft_dashboard.gif)
+#### Here's how it looks
+
+<video controls loop muted playsInline width="100%" src="/img/nft_dashboard.mp4"></video>
 
 
 If you want to build up query from scratch you are welcome or you can use the [premade examples](https://ide.bitquery.io/explore/All%20queries) as well.

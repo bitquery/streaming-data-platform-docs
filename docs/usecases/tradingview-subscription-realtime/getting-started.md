@@ -28,7 +28,7 @@ This guide is the **entry point** for the tutorial: how to embed [TradingView Ad
 
 The chart loads history first, then extends the last candle as new OHLC arrives:
 
-![](/img/ApplicationExamples/charting.gif)
+<video controls loop muted playsInline width="100%" src="/img/ApplicationExamples/charting.mp4"></video>
 
 ## If this is your first time here
 

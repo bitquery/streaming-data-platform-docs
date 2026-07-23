@@ -138,7 +138,7 @@ The dashboard will open in your browser, where you will see real-time updates of
 
 This is how it will look.
 
-![](/img/ApplicationExamples/solana_transfer_monitoring.gif)
+<video controls loop muted playsInline width="100%" src="/img/ApplicationExamples/solana_transfer_monitoring.mp4"></video>
 
 ## Scaling the Monitoring
 
