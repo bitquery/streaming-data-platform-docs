@@ -5,27 +5,43 @@ Disallow: /search/
 
 User-agent: GPTBot
 Allow: /
+Disallow: /docs/graphql-reference/
+Disallow: /search/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /docs/graphql-reference/
+Disallow: /search/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /docs/graphql-reference/
+Disallow: /search/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /docs/graphql-reference/
+Disallow: /search/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /docs/graphql-reference/
+Disallow: /search/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /docs/graphql-reference/
+Disallow: /search/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /docs/graphql-reference/
+Disallow: /search/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /docs/graphql-reference/
+Disallow: /search/
 
 Sitemap: https://docs.bitquery.io/sitemap.xml
 # AI index: https://docs.bitquery.io/llms.txt

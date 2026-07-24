@@ -205,3 +205,11 @@ Query detailed Ethereum transaction data including transaction hashes, from/to a
 ### Ethereum Price & Balances
 
 <VideoPlayer url="https://youtu.be/qsg86xlfnhM" />
+
+
+## More guides
+
+- [Data Coverage & Retention](/docs/graphql/data-coverage-retention/) — how far back this chain's data goes
+- [Common errors and what to do](/docs/start/errors/)
+- [Plans, Points & Limits](/docs/plans/how-billing-works/)
+- [First query in 5 minutes](/docs/start/first-query/)

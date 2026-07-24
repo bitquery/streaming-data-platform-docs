@@ -8,57 +8,57 @@
 
 - [Docs home](https://docs.bitquery.io/) — platform overview and navigation
 - [GraphQL IDE](https://ide.bitquery.io/) — run queries in the browser, no setup
-- [First query in 5 minutes](/docs/start/first-query/)
-- [API keys & authentication](/docs/authorization/how-to-generate/)
-- [MCP Server for AI agents](/docs/mcp/mcp-server/)
+- [First query in 5 minutes](https://docs.bitquery.io/docs/start/first-query/)
+- [API keys & authentication](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+- [MCP Server for AI agents](https://docs.bitquery.io/docs/mcp/mcp-server/)
 
 ## Trading data — prices, trades & OHLCV
 
 Most teams building charts, bots, or dashboards start here. The **Trading cube** gives you
 clean, MEV-filtered swap data with USD price, market cap, and supply on every row.
 
-- [Trading data overview](/docs/trading/trading-data-overview/) — when to use Trading cube vs chain-level APIs
-- [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api/) — real-time DEX swaps across 9 chains in one query
-- [Crypto Price API](/docs/trading/crypto-price-api/introduction/) — token prices, pairs, and aggregated feeds
-- [OHLC / candlestick (K-line) API](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/) — build charts and technical indicators
-- [Market cap & supply fields](/docs/trading/crypto-price-api/crypto-marketcap-api/) — FDV, circulating supply on trade rows
-- [Traders API](/docs/trading/crypto-trades-api/traders-api/) — wallet-level trade history and PnL-style analytics
+- [Trading data overview](https://docs.bitquery.io/docs/trading/trading-data-overview/) — when to use Trading cube vs chain-level APIs
+- [Crypto Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/) — real-time DEX swaps across 9 chains in one query
+- [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) — token prices, pairs, and aggregated feeds
+- [OHLC / candlestick (K-line) API](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/) — build charts and technical indicators
+- [Market cap & supply fields](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-marketcap-api/) — FDV, circulating supply on trade rows
+- [Traders API](https://docs.bitquery.io/docs/trading/crypto-trades-api/traders-api/) — wallet-level trade history and PnL-style analytics
 
-For **historical OHLC older than ~30 days**, use chain-level [`DEXTradeByTokens`](/docs/cubes/dextradesbyTokens) instead of the Trading cube.
+For **historical OHLC older than ~30 days**, use chain-level [`DEXTradeByTokens`](https://docs.bitquery.io/docs/cubes/dextradesbyTokens) instead of the Trading cube.
 
 ## Historical data & bulk uploads
 
 Need a full backfill, data lake, or warehouse load — not row-by-row GraphQL?
 
-- [Cloud datasets overview](/docs/cloud/) — Parquet exports to S3, GCS, Snowflake, BigQuery
-- [EVM historical dumps](/docs/cloud/evm/) — Ethereum, Polygon, Base, and other EVM chains
-- [Solana historical dumps](/docs/cloud/solana/)
-- [BSC / BNB Chain dumps](/docs/cloud/bsc/)
+- [Cloud datasets overview](https://docs.bitquery.io/docs/cloud/) — Parquet exports to S3, GCS, Snowflake, BigQuery
+- [EVM historical dumps](https://docs.bitquery.io/docs/cloud/evm/) — Ethereum, Polygon, Base, and other EVM chains
+- [Solana historical dumps](https://docs.bitquery.io/docs/cloud/solana/)
+- [BSC / BNB Chain dumps](https://docs.bitquery.io/docs/cloud/bsc/)
 - [Sample data on GitHub](https://github.com/bitquery/blockchain-cloud-data-dump-sample) — explore schemas before you buy
 
 Contact [sales@bitquery.io](mailto:sales@bitquery.io) for custom historical exports and upload schedules.
 
 ## Streaming interfaces
 
-- [GraphQL queries](/docs/graphql/query/)
-- [WebSocket subscriptions](/docs/subscriptions/subscription/)
-- [Kafka streaming](/docs/streams/kafka-streaming-concepts/)
-- [Solana gRPC / Protobuf](/docs/streams/protobuf/chains/Solana-protobuf/)
+- [GraphQL queries](https://docs.bitquery.io/docs/graphql/query/)
+- [WebSocket subscriptions](https://docs.bitquery.io/docs/subscriptions/subscription/)
+- [Kafka streaming](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
+- [Solana gRPC / Protobuf](https://docs.bitquery.io/docs/streams/protobuf/chains/Solana-protobuf/)
 
 ## Popular protocol APIs
 
-- [Solana DEX trades](/docs/blockchain/Solana/solana-dextrades/)
-- [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
-- [Raydium DEX API](/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
-- [Polymarket API](/docs/examples/polymarket-api/polymarket-api/)
-- [Token holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api/)
+- [Solana DEX trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)
+- [Pump.fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
+- [Raydium DEX API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
+- [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)
+- [Token holders API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-holders/token-holder-api/)
 
 ## MCP for AI agents
 
-- [MCP overview](/docs/mcp/mcp-server/)
-- [Claude Desktop setup](/docs/mcp/claude-desktop/)
-- [Cursor setup](/docs/mcp/cursor/)
-- [Build a trading agent](/docs/mcp/build-a-trading-agent/)
+- [MCP overview](https://docs.bitquery.io/docs/mcp/mcp-server/)
+- [Claude Desktop setup](https://docs.bitquery.io/docs/mcp/claude-desktop/)
+- [Cursor setup](https://docs.bitquery.io/docs/mcp/cursor/)
+- [Build a trading agent](https://docs.bitquery.io/docs/mcp/build-a-trading-agent/)
 
 ## Full index
 
