@@ -1,16 +1,11 @@
 /**
- * Swizzled DocItem/Content:
- *  - "Copy MD" button next to the title (unchanged).
- *  - Auto "Related pages" footer generated from the sidebar (sibling links in the
- *    same category). This gives every doc inbound + outbound links with no
- *    per-page frontmatter, mechanically removing dead-ends. Renders nothing when
- *    the page has no sidebar category siblings.
+ * Swizzled DocItem/Content to add Copy MD button next to the title.
  * No import needed in any .md file - applies to all doc pages.
  */
 import React, {useState, useCallback} from 'react';
 import clsx from 'clsx';
 import {ThemeClassNames} from '@docusaurus/theme-common';
-import {useDoc, useDocsSidebar} from '@docusaurus/plugin-content-docs/client';
+import {useDoc} from '@docusaurus/plugin-content-docs/client';
 import MDXContent from '@theme/MDXContent';
 
 function toRawGitHubUrl(editUrl) {
@@ -54,60 +49,13 @@ function CopyMDButton() {
   }, [metadata.editUrl]);
 
   return (
-    <button type="button" className="copy-md" onClick={handleClick}>
+    <button
+      type="button"
+      className="copy-md"
+      onClick={handleClick}
+    >
       {status}
     </button>
-  );
-}
-
-// Find the sibling doc-links of the current page within its sidebar category.
-function findSiblingLinks(items, permalink) {
-  for (const item of items || []) {
-    if (item && item.type === 'category') {
-      const links = (item.items || []).filter((c) => c && c.type === 'link');
-      if (links.some((c) => c.href === permalink)) {
-        return links;
-      }
-      const nested = findSiblingLinks(item.items, permalink);
-      if (nested) {
-        return nested;
-      }
-    }
-  }
-  return null;
-}
-
-function RelatedPages() {
-  let permalink;
-  let sidebar;
-  try {
-    permalink = useDoc()?.metadata?.permalink;
-    sidebar = useDocsSidebar();
-  } catch {
-    return null;
-  }
-  if (!sidebar || !permalink) {
-    return null;
-  }
-  const siblings = findSiblingLinks(sidebar.items, permalink);
-  if (!siblings) {
-    return null;
-  }
-  const links = siblings.filter((c) => c.href !== permalink).slice(0, 8);
-  if (links.length === 0) {
-    return null;
-  }
-  return (
-    <nav className="related-pages" aria-label="Related pages">
-      <p className="related-pages__title">Related pages</p>
-      <ul className="related-pages__list">
-        {links.map((c) => (
-          <li key={c.href}>
-            <a href={c.href}>{c.label}</a>
-          </li>
-        ))}
-      </ul>
-    </nav>
   );
 }
 
@@ -118,7 +66,6 @@ export default function DocItemContent({children}) {
         <CopyMDButton />
       </div>
       <MDXContent>{children}</MDXContent>
-      <RelatedPages />
     </div>
   );
 }
