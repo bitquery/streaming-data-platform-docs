@@ -986,7 +986,7 @@ The 'StartAuction' event is triggered when an NFT auction starts on the  Blur : 
 
 `where` : 'LogHeader.Address' sets the address to the Blur: Blend Contract. 'Log.Signature.Name' filters for the event name "StartAuction".
 
-# Latest Locked NFTs Buy Trades
+## Latest Locked NFTs Buy Trades
 
 Locked NFTs are temporarily non-transferrable and can be traded or transferred after the lock period. These NFTs are often cheaper than non-locked. The following [query](https://ide.bitquery.io/Locked-NFT-bought-on-Blur-marketplace) retrieves the latest trades of locked NFTs by filtering for the 'BuyLocked' event under the Blur : [Blend Contract](https://explorer.bitquery.io/ethereum/smart_contract/0x29469395eaf6f95920e59f858042f0e28d98a20b/events). 
 

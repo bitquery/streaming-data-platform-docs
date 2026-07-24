@@ -2,6 +2,8 @@
 title:  EVM Miner Rewards API
 description: "EVM Miner Rewards API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. See examples in the Bitquery IDE."
 ---
+# EVM Miner Rewards API
+
 Miner Rewards are the incentives paid out to miners for validating transactions and creating new blocks on the blockchain. You can access Miner Rewards data using the Bitquery API.
 
 ```graphql

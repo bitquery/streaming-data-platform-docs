@@ -166,7 +166,7 @@ query MyQuery {
 ## Daily Stats on Calls
 
 This query retrieves the date and number of unique event calls for the date.
-You can find the query [here](https://graphql.bitquery.io/ide/Daily-Unique-Call-Count)
+You can find the query [here](https://ide.bitquery.io/Daily-Unique-Call-Count)
 
 ```graphql
 query MyQuery {

@@ -109,7 +109,7 @@ We are just providing the BLUR token as buy currency.
 }
 ```
 
-Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Pair-tokens-for-BLUR-token-for-all-DEXs_1)
+Open the above query on GraphQL IDE using this [link](https://ide.bitquery.io/Pair-tokens-for-BLUR-token-for-all-DEXs_1)
 
 **Parameters**
 
@@ -175,7 +175,7 @@ Now, let's see an example of getting all pairs of a token for a specific DEX. In
 }
 ```
 
-Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/pairs-of-blur-token-new-dataset_1)
+Open the above query on GraphQL IDE using this [link](https://ide.bitquery.io/pairs-of-blur-token-new-dataset_1)
 
 **Parameters**:
 

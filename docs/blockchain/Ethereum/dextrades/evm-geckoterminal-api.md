@@ -27,7 +27,7 @@ GeckoTerminal EVM APIs include data apis for EVM chains like Ethereum, Binance S
 - **[EVM API Examples](/docs/blockchain/Ethereum/)** - Complete collection of EVM API examples
 - **[EVM DEX Trades](/docs/category/dex-trades/)** - Real-time DEX trading data and analytics
 - **[EVM Subscriptions](/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
-- **[IDE for EVM](https://graphql.bitquery.io/ide)** - Interactive development environment for testing EVM queries
+- **[IDE for EVM](https://ide.bitquery.io)** - Interactive development environment for testing EVM queries
 
 This guide shows how to retrieve the same EVM DEX data that GeckoTerminal displays—real-time trades, pair stats, volumes, buyers/sellers, and more—using Bitquery APIs, streams, and Kafka.
 

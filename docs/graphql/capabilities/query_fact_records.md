@@ -18,7 +18,7 @@ This type of query is useful in the following cases:
 1.  query some specific sub-set of the data, with the very well-defined filters. For example, the last token transfers of specific address for today. The more precise filter you define, the better it will run. Date or time filters are essential in this case.
 2.  define ordering and query just the last records. This type of query should also take care about date / time filtering especially if you query archive data.
 
-[Query example ](https://graphql.bitquery.io/ide/Last-transactions-with-cost) to get the last transactions in the blockchain with the cost of them:
+[Query example ](https://ide.bitquery.io/Last-transactions-with-cost) to get the last transactions in the blockchain with the cost of them:
 
 ```graphql
 query {

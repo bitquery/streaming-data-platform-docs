@@ -2,6 +2,8 @@
 title: "EVM Transactions Schema API"
 description: "Transactions API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. Scale further with Kafka or gRPC streams."
 ---
+# EVM Transactions Schema API
+
 The Transactions API provides detailed information on transactions including call count, gas, hash, type, and sender and recipient addresses etc. Here's a sample query to get started. You can see more examples [here](/docs/blockchain/Ethereum/transactions/transaction-api/)
 
     query MyQuery \{

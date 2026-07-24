@@ -10,7 +10,7 @@ In the IDE there are two boxes that allow you to insert code, the first one is f
 
 ![IDE Query Variables](/img/ide/query_variables.png)
 
-> You can obtain the code through this link [Transaction Detail EVM | BSC](https://graphql.bitquery.io/ide/Transaction-Detail-EVM--BSC)
+> You can obtain the code through this link [Transaction Detail EVM | BSC](https://ide.bitquery.io/Transaction-Detail-EVM--BSC)
 
 ## Variable types
 

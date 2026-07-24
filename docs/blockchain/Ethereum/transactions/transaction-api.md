@@ -12,7 +12,7 @@ The Transaction API allows users to query for transaction data by specifying fil
 ## Latest Transactions
 
 This query is using the Transactions API to retrieve transaction data from the Binance Smart Chain (BSC) blockchain network in real-time.
-You can find the query [here](https://graphql.bitquery.io/ide/Last-transactions-with-cost)
+You can find the query [here](https://ide.bitquery.io/Last-transactions-with-cost)
 
 <details>
   <summary>Click to expand GraphQL query</summary>

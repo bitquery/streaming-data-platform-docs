@@ -2,6 +2,8 @@
 title: "EVM Uncle Blocks API"
 description: "EVM Uncle Blocks API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. See examples in the Bitquery IDE."
 ---
+# EVM Uncle Blocks API
+
 ### What are Uncle Blocks?
 
 Uncle blocks, also known as "orphan blocks", are blocks on the blockchain that are not included in the main blockchain. Uncle blocks are still valid blocks, but they were not selected to be included in the main blockchain by the network consensus algorithm.

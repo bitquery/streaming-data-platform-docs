@@ -15,7 +15,7 @@ This type of query is useful in the following cases:
 2. get statistics over a large amount of data, for example total number of transactions or transfer volume
 3. query integral information about some object, for example, an address
 
-[Example](https://graphql.bitquery.io/ide/Maximum-amounts-of-ETH-transfer-by-date) of query to get maximum ethereum transfer amount by date:
+[Example](https://ide.bitquery.io/Maximum-amounts-of-ETH-transfer-by-date) of query to get maximum ethereum transfer amount by date:
 
 ```graphql
 query {

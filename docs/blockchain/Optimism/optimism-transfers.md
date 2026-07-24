@@ -6,7 +6,7 @@ description: "Optimism Transfers API: monitor Optimism native and token transfer
 
 In this section we'll have a look at some examples using the Optimism Transfers API.
 
-# Subscribe to Recent Whale Transactions of a particular currency
+## Subscribe to Recent Whale Transactions of a particular currency
 
 The subscription query below fetches the whale transactions on the Optimism network. We have used USDT address `0x94b008aA00579c1307B0EF2c499aD98a8ce58e58`
 You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDT-on-optimism)
@@ -40,7 +40,7 @@ subscription {
 
 ```
 
-# Sender is a particular address
+## Sender is a particular address
 
 This websocket retrieves transfers where the sender is a particular address `0xEbe80f029b1c02862B9E8a70a7e5317C06F62Cae`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {is: "0xEbe80f029b1c02862B9E8a70a7e5317C06F62Cae"}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/Sender-is-a-particular-address)
 
@@ -72,7 +72,7 @@ subscription {
 
 ```
 
-# Subscribe to the latest NFT token transfers on Optimism
+## Subscribe to the latest NFT token transfers on Optimism
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on Optimism network. You can run the query [here](https://ide.bitquery.io/NFT-Token-Transfers-API_1)
 

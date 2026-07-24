@@ -246,7 +246,7 @@ Monitor ERC20 token transfers in real-time using GraphQL subscriptions. This is 
 
 This example subscribes to WETH (Wrapped Ethereum) token transfers. The contract address is [0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2](https://explorer.bitquery.io/ethereum/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).
 
-You can test this subscription [here](https://graphql.bitquery.io/ide/Subscribe-to-Latest-WETH-token-transfers).
+You can test this subscription [here](https://ide.bitquery.io/Subscribe-to-Latest-WETH-token-transfers).
 
 ```graphql
 subscription {

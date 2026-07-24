@@ -301,7 +301,7 @@ query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime
 }
 ```
 
-# Get trading volume, buy volume, sell volume of a token
+## Get trading volume, buy volume, sell volume of a token
 
 This query fetches you the traded volume, buy volume and sell volume of a token `J4JbUQRaZMxdoQgY6oEHdkPttoLtZ1oKpBThic76pump`. Try out the API [here](https://ide.bitquery.io/trade_volume_Solana#).
 

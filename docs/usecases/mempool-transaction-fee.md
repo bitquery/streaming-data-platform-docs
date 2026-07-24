@@ -95,7 +95,7 @@ def main():
 st.title("Transaction Fee Analysis Dashboard")
 ```
 
-# Fetch data from Mempool API
+## Fetch data from Mempool API
 
 ```python
 try:

@@ -66,3 +66,9 @@ function Home() {
 
 export default Home
 ```
+
+## Next steps
+
+- [Getting started](/docs/usecases/nft-creator/gettingstarted/)
+- [Components](/docs/usecases/nft-creator/components/)
+- [App](/docs/usecases/nft-creator/app/)

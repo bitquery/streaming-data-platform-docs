@@ -6,7 +6,7 @@ description: "Solana Logs: query and stream Solana on-chain data with Bitquery G
 
 Solana Logs API helps you filter program instruction logs using regular expressions.
 
-# Finding Instructions with Log Matching
+## Finding Instructions with Log Matching
 
 The Solana Logs API allows you to search for specific instructions based on log content that matches exact phrases. For example, to find logs related to 'AnchorError' with a specific error code and message
 You can find the query [here](https://ide.bitquery.io/SlippageToleranceExceeded#)

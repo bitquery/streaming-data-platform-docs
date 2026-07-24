@@ -24,7 +24,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 - **[Solana API Examples](/docs/blockchain/Solana/)** - Complete collection of Solana API examples
 - **[Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)** - Real-time DEX trading data and analytics
 - **[Solana Subscriptions](/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
-- **[IDE for Solana](https://graphql.bitquery.io/ide)** - Interactive development environment for testing Solana queries
+- **[IDE for Solana](https://ide.bitquery.io)** - Interactive development environment for testing Solana queries
 
 This guide shows how to retrieve the same Solana DEX data that GeckoTerminal displays—real-time trades, pair stats, volumes, buyers/sellers, and more—using Bitquery APIs, streams, and Kafka.
 

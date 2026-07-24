@@ -39,7 +39,7 @@ Let's see how to get the latest NFT token transfers. We are taking Cryptokitties
 }
 ```
 
-Here is the [link](https://graphql.bitquery.io/ide/Cryptokitties-Token-Transfers) to the query on IDE.
+Here is the [link](https://ide.bitquery.io/Cryptokitties-Token-Transfers) to the query on IDE.
 
 ## Subscribe to the latest ERC721 token transfers
 
@@ -73,7 +73,7 @@ subscription {
 
 ```
 
-You can open this API on our GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Subscribe-to-latest-Axie-infinity-token-transfers_1).
+You can open this API on our GraphQL IDE using this [link](https://ide.bitquery.io/Subscribe-to-latest-Axie-infinity-token-transfers_1).
 
 ## Addresses that transfer NFTs to/from a list of addresses
 

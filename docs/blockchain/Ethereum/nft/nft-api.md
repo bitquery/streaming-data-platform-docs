@@ -218,7 +218,7 @@ The EVM Transfers query returns the following fields:
 ## All transfers of an NFT
 
 This query retrieves the most recent transfers of a specific non-fungible token (NFT) on the Ethereum network.
-You can find the GraphQL query [here](https://graphql.bitquery.io/ide/All-transfers-of-an-NFT)
+You can find the GraphQL query [here](https://ide.bitquery.io/All-transfers-of-an-NFT)
 
 ```graphql
 query MyQuery {

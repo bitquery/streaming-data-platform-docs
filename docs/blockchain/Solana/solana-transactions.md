@@ -9,7 +9,7 @@ import FAQ from "@site/src/components/FAQ";
 
 In this section we'll have a look at some examples using the Solana Transactions API.
 
-# Subscribe to Recent Transactions
+## Subscribe to Recent Transactions
 
 The subscription query below fetches the most recent transactions on the Solana blockchain
 You can find the query [here](https://ide.bitquery.io/Realtime-Solana-Transactions)

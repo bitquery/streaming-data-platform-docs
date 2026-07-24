@@ -8,7 +8,7 @@ description: "Ethereum Smartcontract Filterby: query and stream Ethereum on-chai
 ## Smart Contract Calls by Method Signature
 
 This query retrieves the 10 most recent smart contract calls that match a specific function signature (harvest()) on the Binance Smart Chain (BSC) network. It also includes transaction and block data associated with each call. 
-You can find the GraphQL query [here](https://graphql.bitquery.io/ide/Calls-by-Method-Signature)
+You can find the GraphQL query [here](https://ide.bitquery.io/Calls-by-Method-Signature)
 
 ```graphql
 query MyQuery {
@@ -62,7 +62,7 @@ The query returns the following data for each smart contract call:
 ## Smart Contract Calls by Opcode
 
 This GraphQL query retrieves information about the latest STATICCALL EVM (Ethereum Virtual Machine) calls on the Binance Smart Chain network.
-You can find the GraphQL query [here](https://graphql.bitquery.io/ide/Smart-Contract-Calls-by-Opcode)
+You can find the GraphQL query [here](https://ide.bitquery.io/Smart-Contract-Calls-by-Opcode)
 
 ```graphql
 query MyQuery {
