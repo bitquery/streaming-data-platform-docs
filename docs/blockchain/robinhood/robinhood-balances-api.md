@@ -1,21 +1,18 @@
 ---
-title: "Robinhood Balances API — Portfolios, Holders & History"
-description: "Query Robinhood wallet balances with Bitquery GraphQL: full portfolios, token holders, holder counts, richest wallets, and balance history by any date."
+title: "Robinhood Balances API — Wallet Portfolios & History"
+description: "Query Robinhood wallet balances with Bitquery GraphQL: full portfolios, multi-address batches, wallet profiling, and balance history as of any date."
 sidebar_position: 6
 keywords:
   - Robinhood balances API
   - Robinhood wallet balance
-  - Robinhood token holders API
-  - Robinhood holder count
   - Robinhood portfolio API
   - Robinhood balance history
-  - Robinhood richest wallets
   - eth_getBalance alternative
   - Bitquery Robinhood Balances
 ---
-# Robinhood Balances API — Portfolios, Holders & History
+# Robinhood Balances API — Wallet Portfolios & History
 
-Query **wallet and token balances on Robinhood** with Bitquery GraphQL. The `EVM.Balances` cube returns **computed balances with built-in aggregates** — amount, USD value, first/last change time, and update count — grouped by whatever dimensions you select: one wallet's full portfolio, one token's holder list, or network-wide per-currency totals, all in single calls that would take thousands of `eth_getBalance` / `balanceOf` RPCs.
+Query **wallet balances on Robinhood** with Bitquery GraphQL. The `EVM.Balances` cube returns **computed balances with built-in aggregates** — amount, USD value, first/last change time, and update count — grouped by whatever dimensions you select: one wallet's full portfolio, a batch of wallets, or network-wide per-currency totals, all in single calls that would take thousands of `eth_getBalance` / `balanceOf` RPCs. For token-centric holder rankings and counts, use the dedicated [Token Holders API](/docs/blockchain/robinhood/robinhood-token-holders-api/).
 
 Every query on this page was executed against the production endpoint before publishing.
 
@@ -26,13 +23,14 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Token Holders API](/docs/blockchain/robinhood/robinhood-token-holders-api/)
 - [Robinhood Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply/)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers/)
 - [Robinhood Trades](/docs/blockchain/robinhood/robinhood-trades/) (for prices to value non-ETH holdings)
 - [Robinhood Events API](/docs/blockchain/robinhood/robinhood-events-api/)
 :::
 
-**On this page:** [Concepts](#datasets-grouping-and-selectwhere) · [Portfolio](#all-token-balances-of-an-address-portfolio) · [As-of-date](#balance-as-of-a-date-time-travel) · [Single token](#native-eth-and-single-token-balances) · [Multi-address](#balances-for-multiple-addresses) · [Top holders](#top-holders-of-a-token) · [Rich list](#richest-native-eth-wallets) · [Whales](#whale-holders-by-usd) · [Holder count](#holder-count-of-a-token) · [Wallet profile](#wallet-profile-first-seen-last-active-update-count) · [Currency totals](#network-wide-per-currency-totals) · [FAQ](#faq)
+**On this page:** [Concepts](#datasets-grouping-and-selectwhere) · [Portfolio](#all-token-balances-of-an-address-portfolio) · [As-of-date](#balance-as-of-a-date-time-travel) · [Single token](#native-eth-and-single-token-balances) · [Multi-address](#balances-for-multiple-addresses) · [Wallet profile](#wallet-profile-first-seen-last-active-update-count) · [Currency totals](#network-wide-per-currency-totals) · [FAQ](#faq)
 
 ---
 
@@ -41,7 +39,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 | | Node RPC (`eth_getBalance` / `balanceOf` calls) | Bitquery Balances |
 | --- | --- | --- |
 | Whole portfolio | One call **per token** you already know about | One call returns every token the wallet holds |
-| Token holders | Impossible without indexing all transfers yourself | One query, sortable, with holder counts |
+| Token holders | Impossible without indexing all transfers yourself | One sortable query on the [Holders API](/docs/blockchain/robinhood/robinhood-token-holders-api/) |
 | History | Archive node + block-pinned calls | `Block.Date.till` gives the balance as of any date |
 | Extras | — | USD value, first/last change time, update count |
 
@@ -194,93 +192,9 @@ Batch a watchlist with `Address.in` — one row per address (per selected curren
 
 ---
 
-## Top holders of a token
+## Token holders
 
-Select `Balance.Address` (grouping per wallet), filter the token, and order by amount — a holder leaderboard in one query. Example: USDG.
-
-```graphql
-{
-  EVM(network: robinhood, dataset: combined) {
-    Balances(
-      limit: { count: 10 }
-      orderBy: { descending: Balance_Amount }
-      where: { Currency: { SmartContract: { is: "0x5fc5360d0400a0fd4f2af552add042d716f1d168" } } }
-    ) {
-      Balance {
-        Address
-        Amount(selectWhere: { gt: "0" })
-        AmountInUSD
-      }
-    }
-  }
-}
-```
-
----
-
-## Richest native ETH wallets
-
-The same pattern on the native currency. Note that **contracts appear as holders** — the WETH contract naturally tops native rankings since it custodies wrapped ETH; filter or label known contracts for a pure-wallet list.
-
-```graphql
-{
-  EVM(network: robinhood, dataset: combined) {
-    Balances(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "Balance_Amount" }
-      where: { Currency: { Native: true } }
-    ) {
-      Balance {
-        Address
-        Amount(selectWhere: { gt: "0" })
-        AmountInUSD
-      }
-    }
-  }
-}
-```
-
----
-
-## Whale holders (by USD)
-
-`selectWhere` on `AmountInUSD` keeps only balances above a USD floor — reliable for native ETH (see the [USD note](#datasets-grouping-and-selectwhere)); for tokens, threshold the raw `Amount` instead.
-
-```graphql
-{
-  EVM(network: robinhood, dataset: combined) {
-    Balances(
-      limit: { count: 10 }
-      orderBy: { descendingByField: "Balance_Amount" }
-      where: { Currency: { Native: true } }
-    ) {
-      Balance {
-        Address
-        Amount
-        AmountInUSD(selectWhere: { gt: "10000" })
-      }
-    }
-  }
-}
-```
-
----
-
-## Holder count of a token
-
-One number: distinct addresses that have ever held the token. Combine with the top-holders query for distribution dashboards.
-
-```graphql
-{
-  EVM(network: robinhood, dataset: combined) {
-    Balances(
-      where: { Currency: { SmartContract: { is: "0x5fc5360d0400a0fd4f2af552add042d716f1d168" } } }
-    ) {
-      holders: count(distinct: Balance_Address)
-    }
-  }
-}
-```
+Holder rankings, counts, whale floors, distribution stats, and dormancy screens have a dedicated cube and page — see the **[Robinhood Token Holders API](/docs/blockchain/robinhood/robinhood-token-holders-api/)**.
 
 ---
 
@@ -356,8 +270,7 @@ Need balance changes as a continuous feed? Bitquery delivers Robinhood token dat
 | --- | --- |
 | Wallet / portfolio page | [Portfolio query](#all-token-balances-of-an-address-portfolio); poll on an interval for live UX |
 | Tax / audit snapshots | [Balance as of a date](#balance-as-of-a-date-time-travel) with `Block.Date.till` |
-| Token distribution dashboards | [Top holders](#top-holders-of-a-token) + [holder count](#holder-count-of-a-token) |
-| Rich lists & whale tracking | [Native rankings](#richest-native-eth-wallets), [USD floors](#whale-holders-by-usd) |
+| Token distribution, rich lists & whales | [Token Holders API](/docs/blockchain/robinhood/robinhood-token-holders-api/) rankings, counts, and balance floors |
 | Wallet profiling (age, dormancy) | [First/last change + update count](#wallet-profile-first-seen-last-active-update-count) |
 | Exchange / custody monitoring | [Multi-address batch](#balances-for-multiple-addresses) on a polling schedule |
 | Supply-side view | [Per-currency totals](#network-wide-per-currency-totals), or the [Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply/) |
@@ -370,9 +283,8 @@ Need balance changes as a continuous feed? Bitquery delivers Robinhood token dat
 2. Remember grouping follows selection: add or drop `Balance.Address` / `Currency` fields to pivot between wallet, token, and network views.
 3. Use `selectWhere` (post-aggregation) for balance thresholds; regular `where` filters raw rows before aggregation.
 4. `AmountInUSD` is native-ETH-only in practice — USDG's `Amount` ≈ dollars; price other tokens via the [Trades API](/docs/blockchain/robinhood/robinhood-trades/).
-5. Keep a `limit` on holder-style queries — popular tokens have very large holder sets.
-6. Contracts show up in holder lists (WETH tops native rankings by design) — filter known contract addresses for people-only lists.
-7. An as-of-date query before a wallet's first activity returns no rows — that's the correct answer, not an error.
+5. For holder rankings and counts, use the dedicated [Token Holders API](/docs/blockchain/robinhood/robinhood-token-holders-api/) — its `Holders` cube is built for the token-centric view.
+6. An as-of-date query before a wallet's first activity returns no rows — that's the correct answer, not an error.
 
 ---
 
@@ -388,7 +300,7 @@ Add `Block: { Date: { till: "YYYY-MM-DD" } }` to any balance query — the cube 
 
 ### How do I list the top holders of a token?
 
-Filter the token's `Currency.SmartContract`, select `Balance.Address`, and order by `Balance_Amount` descending — see [Top holders](#top-holders-of-a-token). `count(distinct: Balance_Address)` gives the holder count.
+Use the dedicated [Token Holders API](/docs/blockchain/robinhood/robinhood-token-holders-api/) — its `Holders` cube returns sortable holder rankings, holder counts, distribution stats, and dormancy screens.
 
 ### Why is AmountInUSD 0 for my token balances?
 

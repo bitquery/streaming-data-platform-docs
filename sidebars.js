@@ -858,6 +858,7 @@ const sidebars = {
             "blockchain/robinhood/robinhood-events-api",
             "blockchain/robinhood/robinhood-calls-api",
             "blockchain/robinhood/robinhood-balances-api",
+            "blockchain/robinhood/robinhood-token-holders-api",
             "blockchain/robinhood/robinhood-meme-coin-launches",
             "blockchain/robinhood/flap-sh-api",
             "blockchain/robinhood/bags-fm-api",
