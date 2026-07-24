@@ -446,7 +446,7 @@ It returns decoded arguments—including the Uniswap position `tokenId`, the `re
 
 [Run query](https://ide.bitquery.io/Fee-collection-on-Uniswap-v3-Positions)
 
-```
+```graphql
 {
   EVM(dataset: realtime, network: eth) {
     Events(

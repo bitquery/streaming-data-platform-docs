@@ -40,7 +40,7 @@ npx create-react-app my-app
 command and clear the defaults in app.js file. 
 
 ### Import Statements
-```
+```javascript
 import React, { useState } from 'react';
 import axios from 'axios';
 import './portfolio.css';

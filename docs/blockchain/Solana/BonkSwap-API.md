@@ -38,7 +38,7 @@ This is a graphQL query that fetches latest swaps on BonkSwap, you can convert t
 
 [Run Query ➤](https://ide.bitquery.io/Latest-Trades-on-BonkSwap)
 
-```
+```graphql
 query LatestTrades {
   Solana {
     DEXTradeByTokens(
@@ -100,7 +100,7 @@ The below API fetches top traders on BonkSwap using recent trading volume of the
 
 [Run Query ➤](https://ide.bitquery.io/Top-Traders-on-BonkSwap)
 
-```
+```graphql
 query TopTraders {
   Solana {
     DEXTradeByTokens(
@@ -163,7 +163,7 @@ The below API fetches recent trades by a particular trader. We use the `Transact
 
 [Run Query ➤](https://ide.bitquery.io/Bonkswap-Trades-by-Trader-API)
 
-```
+```graphql
 {
   Solana(network: solana, dataset: realtime) {
     DEXTrades(
@@ -237,7 +237,7 @@ The below API fetches recent trades by a particular trader. We use the `Transact
 
 [Run Query ➤](https://ide.bitquery.io/ohlc-for-bonkswap-token)
 
-```
+```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(

@@ -362,7 +362,7 @@ Below query will get you all the instructions that the Raydium LaunchLab Program
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana {
     Instructions(
@@ -392,7 +392,7 @@ Run the stream: [Track LetsBonk.fun token migrations to Raydium ➤](https://ide
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -468,7 +468,7 @@ Try out the [API](https://ide.bitquery.io/Raydium-Launchlab-Meteora-DBC-BoopFun-
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription{
   Solana {
     Instructions(

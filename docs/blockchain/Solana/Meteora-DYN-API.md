@@ -14,7 +14,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 Below query will give you the latest created Meteora DYN pools in realtime. You can test the query [here](https://ide.bitquery.io/Track-Latest-created-pools-on-MeteoraDYN)
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -144,7 +144,7 @@ You can use the following query to get the latest price of a token on Meteora DY
 
 You can run this query using this [link](https://ide.bitquery.io/latest-price-of-a-token-on-DYN#).
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -170,7 +170,7 @@ You can use the following query to get the latest price of a token on Meteora DY
 
 You can run this query using this [link](https://ide.bitquery.io/Realtime-Price-feed-of-a-Token-on-Meteora-DYN#).
 
-```
+```graphql
 subscription{
   Solana {
     DEXTradeByTokens(
@@ -192,7 +192,7 @@ subscription{
 
 If you want to get OHLC data for any specific currency pair on Meteora DYN, you can use this api. Only use [this API](https://ide.bitquery.io/Meteora-DYN-OHLC-API#) as query and not subscription websocket as Aggregates and Time Intervals don't work well with subscriptions.
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -220,7 +220,7 @@ If you want to get OHLC data for any specific currency pair on Meteora DYN, you 
 
 The below query gets the Top Traders of the specified Token `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` on Meteora DYN. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-Token-on-Meteora-DYN-DEX#)
 
-```
+```graphql
 query TopTraders($token: String) {
   Solana {
     DEXTradeByTokens(
@@ -255,7 +255,7 @@ query TopTraders($token: String) {
 
 This query fetches you the traded volume, buy volume and sell volume of a token `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v`. Try out the API [here](https://ide.bitquery.io/Get-trading-volume-buy-volume-sell-volume-of-a-token_4#).
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(

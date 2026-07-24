@@ -146,7 +146,7 @@ You can find the query [here](https://ide.bitquery.io/solana-trades-subscription
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription {
   Solana {
     DEXTrades {
@@ -236,7 +236,7 @@ You can run the query [here](https://ide.bitquery.io/Price-of-a-Token-Against-WS
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query LatestTrades {
   Solana {
     DEXTradeByTokens(
@@ -288,7 +288,7 @@ You can find the query [here](https://ide.bitquery.io/Latest-Trades-of-Trump-COi
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query LatestTrades($token: String, $base: String) {
   Solana {
     DEXTradeByTokens(
@@ -332,7 +332,7 @@ query LatestTrades($token: String, $base: String) {
 }
 ```
 
-```
+```json
 {
   "token": "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump",
   "base": "So11111111111111111111111111111111111111112"
@@ -355,7 +355,7 @@ You can run the query [here](https://ide.bitquery.io/Price-change-of-a-token-on-
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: realtime) {
     DEXTradeByTokens(
@@ -385,7 +385,7 @@ query MyQuery {
 
 <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: realtime) {
     DEXTradeByTokens(
@@ -442,7 +442,7 @@ Use below query to calculate the price change percentage for a specific token in
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 
 query MyQuery {
   Solana {
@@ -506,7 +506,7 @@ Use the below query to get top 10 solana tokens by price change in last 1 hr. Te
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 
 query MyQuery {
   Solana {
@@ -691,7 +691,7 @@ You can find the query [here](https://ide.bitquery.io/Solana-Raydium-New-Pairs_2
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query{
   Solana(dataset: archive) {
     DEXTradeByTokens(
@@ -1074,7 +1074,7 @@ You can find the query [here](https://ide.bitquery.io/DEX-Markets-for-a-token)
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query ($token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
   Solana {
     DEXTradeByTokens(
@@ -1125,7 +1125,7 @@ You can use the below query to get any token's creation time. Note that we are p
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
  Solana(dataset: combined) {
   DEXTradeByTokens(
@@ -1148,7 +1148,7 @@ You can use the below stream to get the volume changes in last 2 minutes. Try th
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Solana(dataset: realtime) {
     DEXTradeByTokens(
@@ -1190,7 +1190,7 @@ You can use the below stream to get the Solana price. Try the query on ide [here
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription {
   Solana {
     DEXTrades(
@@ -1225,7 +1225,7 @@ You can find the query [here](https://ide.bitquery.io/Top-Bought-Solana-Tokens)
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -1263,7 +1263,7 @@ You can find the query [here](https://ide.bitquery.io/Top-sold-Solana-Tokens)
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -1301,7 +1301,7 @@ You can find the query [here](https://ide.bitquery.io/top-trading-pairs)
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query ($time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
   Solana {
     DEXTradeByTokens(
@@ -1362,7 +1362,7 @@ You can find the query [here](https://ide.bitquery.io/top-dexs)
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query DexMarkets {
   Solana {
     DEXTradeByTokens {
@@ -1400,7 +1400,7 @@ You can find the query [here](https://ide.bitquery.io/traded-pairs-of-a-token)
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query ($token: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
   Solana {
     DEXTradeByTokens(
@@ -1461,7 +1461,7 @@ Find the query [here](https://ide.bitquery.io/Solana-DEXs)
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana {
     DEXTrades(limitBy: {by: Trade_Dex_ProtocolFamily, count: 1}, limit: {count: 10}) {
@@ -1487,7 +1487,7 @@ The below query retrieves the USD price of a token on Solana by setting `MintAdd
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -1594,7 +1594,7 @@ The below query retrieves the token details such as update authority for a parti
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: archive) {
     DEXTradeByTokens(
@@ -1628,7 +1628,7 @@ This query retrieves top buyers of the token `4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iC
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -1665,7 +1665,7 @@ This query retrieves top sellers of the token `4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5i
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -1702,7 +1702,7 @@ You can use this API to fetch trades of a specific wallet address `tRadEVu2Va7Ws
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
@@ -1760,7 +1760,7 @@ This query fetches you the traded volume, buy volume and sell volume of a token 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(
@@ -1871,7 +1871,7 @@ Test the subscription query [here](https://ide.bitquery.io/seconds-oHLC-realtime
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription{
   Trading {
     Tokens(
@@ -1940,7 +1940,7 @@ The `Trade Side Account` field is **not available** in aggregate queries across 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query TradesSolToken($ca: String!, $currencies: [String!], $dataset: dataset_arg_enum, $interval: Int) {
   Solana(dataset: $dataset) {
     DEXTradeByTokens(
@@ -1996,7 +1996,7 @@ ere is [an example](https://ide.bitquery.io/latest-price-for-more-than-1-markets
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription {
   Solana {
     DEXTrades(
@@ -2032,7 +2032,7 @@ When querying Solana DEXTradeByTokens, you can use pre-made aggregates to optimi
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 
 {
   Solana(aggregates: only) {
@@ -2073,7 +2073,7 @@ Run this query [here](https://ide.bitquery.io/find-all-trades-interacting-with-a
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Solana {
     DEXTrades(limit: {count: 100}) {
@@ -2142,7 +2142,7 @@ Get up to 100 tokens with aggregated USD volume and average price over the last 
 
 ▶️ [Aggregated Token Data](https://ide.bitquery.io/aggregated-data)
 
-```
+```graphql
 {
   Trading {
     Tokens(

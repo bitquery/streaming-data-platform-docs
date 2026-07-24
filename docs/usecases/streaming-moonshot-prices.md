@@ -10,7 +10,7 @@ You can find the complete repo [here](https://github.com/Divyn/streaming-moonsho
 
 The final output would look something like this
 
-![](/img/ApplicationExamples/moonshot.png)
+![Streaming Moonshot token prices](/img/ApplicationExamples/moonshot.png)
 
 ### Prerequisites
 
@@ -31,7 +31,7 @@ cd moonshot-stream
 
 Install the necessary dependencies for WebSocket support:
 
-```
+```bash
 npm install reconnecting-websocket
 
 ```

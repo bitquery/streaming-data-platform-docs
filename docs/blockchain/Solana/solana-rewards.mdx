@@ -14,7 +14,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 The query below helps track the most recent reward distributions on the Solana blockchain in real-time.
 You can find the query [here](https://ide.bitquery.io/Latest-Solana-Rewards)
 
-```
+```graphql
 subscription {
   Solana {
     Rewards(limit: {count: 10}) {
@@ -43,7 +43,7 @@ subscription {
 
 If you're interested in tracking the rewards for a specific wallet address, you can modify the query to filter results based on the address. This allows stakeholders to monitor their own rewards or analyze rewards distribution to specific addresses over time. You can find the query [here](https://ide.bitquery.io/Rewards-for-a-wallet-address)
 
-```
+```graphql
 subscription {
   Solana {
     Rewards(

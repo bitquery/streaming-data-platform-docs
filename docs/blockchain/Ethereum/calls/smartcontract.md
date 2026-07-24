@@ -67,7 +67,7 @@ This GraphQL query fetches data from the "eth" network about the 10 most recent 
 
 You can run the query [here](https://ide.bitquery.io/smart-contract-creation-on-EVM-chains)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: realtime, network: eth) {
     Calls(

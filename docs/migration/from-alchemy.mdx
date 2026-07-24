@@ -1,0 +1,63 @@
+---
+title: "Migrating from Alchemy to Bitquery"
+description: "Map Alchemy Transfers, Token, and NFT API calls to Bitquery GraphQL cubes for decoded, multi-chain data."
+sidebar_position: 11
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Migrating from Alchemy to Bitquery
+
+Alchemy is node-and-enhanced-API centric; Bitquery is a decoded, multi-chain data layer queried with GraphQL. This guide maps the common enhanced-API calls.
+
+:::note
+Verify chain/cube coverage against the [coverage matrix](/docs/graphql/data-coverage-retention/).
+:::
+
+## Concept mapping
+
+| Alchemy | Bitquery (GraphQL) |
+|---|---|
+| `alchemy_getAssetTransfers` | `EVM { Transfers(...) }` |
+| Token balances / metadata | `EVM { Balances(...) }`, Currency fields |
+| NFT API | [NFT API](/docs/blockchain/Ethereum/nft/nft-api/) |
+| `eth_getLogs` (raw) | `EVM { Events(...) }` (decoded) |
+| Webhooks / Notify | [WebSocket subscriptions](/docs/subscriptions/websockets/) / [Kafka](/docs/streams/kafka-operations/) |
+| Trace/debug for internal txs | `EVM { Calls(...) }` (decoded internal calls) |
+
+## Example: asset transfers for an address
+
+```graphql
+{
+  EVM(network: eth, dataset: combined) {
+    Transfers(
+      where: { Transfer: { Receiver: { is: "0x..." } } }
+      orderBy: { descending: Block_Time }
+    ) {
+      Block { Time }
+      Transfer { Amount Currency { Symbol SmartContract } Sender }
+      Transaction { Hash }
+    }
+  }
+}
+```
+
+## What differs
+
+- **Decoded, not raw.** Events and internal calls come decoded, so you often skip client-side log parsing.
+- **Multi-chain in one schema.** The same cube shape works across supported EVM chains (and Solana/Tron have parallel cubes).
+- **Delivery.** Real-time via WebSocket/Kafka/gRPC.
+
+<FAQ
+  items={[
+    { q: "What replaces alchemy_getAssetTransfers?", a: "The EVM Transfers cube with sender/receiver filters, ordered by Block_Time. It returns decoded transfers with currency metadata." },
+    { q: "How do I get internal transactions?", a: "Use the Calls cube, which returns decoded internal calls — no separate trace endpoint required." },
+    { q: "Does Bitquery run nodes / RPC?", a: "Bitquery is a decoded data layer queried via GraphQL and streams, not a JSON-RPC node provider. For decoded historical + real-time data, use the cubes." },
+  ]}
+/>
+
+## Next steps
+
+- [Getting started](/docs/start/first-query/)
+- [Smart contract calls](/docs/blockchain/Ethereum/calls/smartcontract/)
+- [Data Coverage & Retention](/docs/graphql/data-coverage-retention/)

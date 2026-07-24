@@ -205,7 +205,7 @@ This example uses the chain-specific **DEXTrades** cube via `EVM(network: optimi
 
 You can find the query [here](https://ide.bitquery.io/Realtime-optimism-dex-trades-websocket)
 
-```
+```graphql
 subscription {
   EVM(network: optimism) {
     DEXTrades {
@@ -333,7 +333,7 @@ An example for the same could be seen in the [DEXRabbit](https://dexrabbit.com/o
 
 This query provides real-time updates on price of WETH `0x4200000000000000000000000000000000000006` in terms of USD Coin `0x7f5c764cbc14f9669b88837ca1490cca17c31607`, including details about the DEX, market, and order specifics. Find the query [here](https://ide.bitquery.io/Price-of-WETH-in-terms-of-USDC-on-Optimism#)
 
-```
+```graphql
 subscription {
   EVM(network: optimism) {
     DEXTrades(
@@ -414,7 +414,7 @@ An example of the utilisation of this data could be seen on [DEXRabbit](https://
 
 The below query retrieves the USD price of a token on Optimism by setting `SmartContract: {is: "0x68f180fcCe6836688e9084f035309E29Bf0A2095"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-latest-price-of-WBTC-in-USD-on-optimism#).
 
-```
+```graphql
 subscription {
   EVM(network: optimism) {
     DEXTradeByTokens(

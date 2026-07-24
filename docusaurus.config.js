@@ -45,7 +45,7 @@ const config = {
   onBrokenLinks: "throw",
   markdown: {
     hooks: {
-      onBrokenMarkdownLinks: "warn",
+      onBrokenMarkdownLinks: "throw",
     },
   },
 
@@ -78,6 +78,40 @@ const config = {
         crossorigin: "anonymous",
       },
     },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/jetbrains-mono-latin-400-normal.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/jetbrains-mono-latin-500-normal.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "theme-color",
+        content: "#93254b",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "apple-touch-icon",
+        href: "/img/apple-touch-icon.png",
+      },
+    },
   ],
 
   scripts: [
@@ -89,8 +123,7 @@ const config = {
   ],
 
   plugins: [
-    // Copy MD button is now in swizzled DocItem/Content (src/theme/DocItem/Content)
-    // require.resolve("./plugins/copy-md-plugin"),
+    // Copy MD button is implemented in swizzled DocItem/Content (src/theme/DocItem/Content).
     // [
     //   "@graphql-markdown/docusaurus",
     //   {
@@ -132,7 +165,7 @@ const config = {
             to: "/docs/blockchain/Solana/Pumpfun/pump-swap-api/",
             from: "/docs/blockchain/Solana/pump-swap-api/",
           },
-          // PumpFun → Pumpfun case redirect lives in static/_redirects (Netlify).
+          // PumpFun → Pumpfun case redirect is handled server-side in nginx/default.conf.
           // A client-redirect here breaks macOS builds (case-insensitive FS).
           {
             to: "/docs/blockchain/Ethereum/token-holders/token-holder-api/",
@@ -1166,10 +1199,10 @@ const config = {
         },
         ...(enableAnalytics
           ? {
-              gtag: {
-                trackingID: "G-ZWB80TDH9J",
-                anonymizeIP: true,
-              },
+              // GA4 + HubSpot load via GTM (container GTM-5GC69JH6, which has a
+              // GA-4 Google Tag firing on All Pages). Do NOT also enable the gtag
+              // plugin here — it would load G-ZWB80TDH9J a second time and
+              // double-count pageviews.
               googleTagManager: {
                 containerId: "GTM-5GC69JH6",
               },
@@ -1196,13 +1229,6 @@ const config = {
         isCloseable: true,
       },
 
-      // metadata: [
-      //   {
-      //     name: 'baidu-site-verification',
-      //     content: 'codeva-3D7wc6GZVP' // Replace with your actual content value
-      //   },
-      //   // ... other meta tags ...
-      // ],
       // Replace with your project's social card
       image: "img/heroImage4.png",
       navbar: {
@@ -1212,11 +1238,6 @@ const config = {
           srcDark: "img/logoBitqueryWhite.png",
         },
         items: [
-          {
-            to: "https://docs.bitquery.io/v1/",
-            label: "V1 Docs",
-            position: "left",
-          },
           {
             type: "doc",
             docId: "intro",
@@ -1229,6 +1250,11 @@ const config = {
             docId: "mcp/mcp-server",
             position: "left",
             label: "MCP Server",
+          },
+          {
+            to: "https://docs.bitquery.io/v1/",
+            label: "V1 (legacy)",
+            position: "left",
           },
           {
             to: "https://bitquery.io/forms/api",
@@ -1359,7 +1385,7 @@ const config = {
               { label: "Visit bitquery.io", href: "https://bitquery.io/" },
               {
                 label: "Enterprise & sales",
-                href: "https://bitquery.io/contact",
+                href: "https://bitquery.io/forms/api",
               },
             ],
           },

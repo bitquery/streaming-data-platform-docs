@@ -14,7 +14,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 This subscription websocket lets you track the newly created pools on Uniswap V3 `0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7`. And we are listening for a particular event here named as `PoolCreated` because whenever a new pool is created on Uniswap V3 this event is fired. You can get the newly created pool address in the response in `arguments`.
 You can find the query [here](https://ide.bitquery.io/Newly-Created-Pools-on-Uniswap-v3-on-BSC-network_3#)
 
-```
+```graphql
 subscription {
   EVM(network: bsc) {
     Events(

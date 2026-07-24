@@ -51,7 +51,7 @@ query TronWalletPortfolio($address: String) {
 
 **Variables**
 
-```
+```json
 {
   "address": "TFXttAWURRrXrd9JvFPVLEh1esJK8NHxn7"
 }
@@ -304,7 +304,7 @@ The examples below use the deprecated **`Tron.BalanceUpdates`** API. Migrate to 
 
 [Run Query ➤](https://ide.bitquery.io/balance-of-an-address-on-tron)
 
-```
+```graphql
 {
   Tron(dataset: combined, aggregates: yes) {
     BalanceUpdates(
@@ -413,7 +413,7 @@ query TronWalletPortfolio($address: String) {
 
 This query fetches you the top 10 token holders of the token `TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT`. Check out the query [here](https://ide.bitquery.io/top-token-holders_2).
 
-```
+```graphql
 query MyQuery {
   Tron(dataset: combined) {
     BalanceUpdates(

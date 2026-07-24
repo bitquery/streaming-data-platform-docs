@@ -26,7 +26,7 @@ subscription {
 
 [This](https://ide.bitquery.io/eth_blockNumber-stream-bsc) returns the latest `Block Number` for the different Network, namely `bsc`.
 
-```
+```graphql
 subscription {
   EVM(network: bsc) {
     Blocks {

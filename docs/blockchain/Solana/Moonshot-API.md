@@ -200,7 +200,7 @@ subscription {
 
 Below query will get you all the instructions that the Moonit Program has. You can test the API [here](https://ide.bitquery.io/instruction-invocation-count-in-last-10-hours).
 
-```
+```graphql
 query MyQuery {
   Solana {
     Instructions(
@@ -225,7 +225,7 @@ Thats why we have filtered for these 2 instructions in the below API, and tracki
 
 Test out the API [here](https://ide.bitquery.io/Track-Moonit-Token-Migrations-to-Raydium-and-Meteora-in-realtime).
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -296,7 +296,7 @@ Use this single subscription to stream real-time token migration events across B
 
 Try out the [API](https://ide.bitquery.io/Raydium-Launchlab-Meteora-DBC-BoopFun-Moonshot-LetsBonkfun-token-migrations-in-realtime_2) here on IDE.
 
-```
+```graphql
 subscription{
   Solana {
     Instructions(
@@ -839,7 +839,7 @@ query ($tokens: [String!]) {
 }
 ```
 
-```
+```json
 {
   "tokens": [
     "token mint address"

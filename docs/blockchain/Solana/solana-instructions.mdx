@@ -205,7 +205,7 @@ The metadata is returned is the **JSON** field, which includes fields such as na
 You can run the query [here](https://ide.bitquery.io/Get-newly-created-token-metadata-on-Solana)
 You can also add the keyword `subscription` and track it in real-time.
 
-```
+```graphql
 {
   Solana {
     Instructions(
@@ -276,7 +276,7 @@ The query below fetches the count of the latest created tokens on the Solana blo
 
 You can run the query [here](https://ide.bitquery.io/Count---Tokens-created-on-Solana)
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: realtime, network: solana) {
     Instructions(
@@ -298,7 +298,7 @@ query MyQuery {
 
 Use the below query to get the `BuyEvent` instruction details. Test the query [here](https://ide.bitquery.io/BuyEvent).
 
-```
+```graphql
 subscription {
   Solana {
     Instructions(where: {

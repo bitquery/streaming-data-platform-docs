@@ -13,7 +13,7 @@ The query returns the 10 most recent `swap` events on the Arbitrum network. We g
 
 You can find the query [here](https://ide.bitquery.io/Swap-Events-Arbitrum)
 
-```
+```graphql
 
 query ($network: evm_network, $limit: Int, $method: String) {
   EVM(dataset: archive, network: $network) {

@@ -105,7 +105,7 @@ Below is a code snippet in Python that shows you how to programmatically generat
 
 Ensure that `scope=api` is mentioned in the payload,
 
-```
+```javascript
 import requests
 import json
 

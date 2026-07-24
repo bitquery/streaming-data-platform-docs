@@ -22,7 +22,7 @@ additional information is provided:
 
 As example, the following data means the array of size 2 of addresses:
 
-```
+```json
           {
             "Index": 0,
             "Name": "",
@@ -112,7 +112,7 @@ and to specific values of arguments.
 Combining argument filters with signature filters on events and calls gives you the power
 to analyze the arguments used in smart contracts in specific context.
 
-```
+```graphql
 {
   EVM {
     Calls(

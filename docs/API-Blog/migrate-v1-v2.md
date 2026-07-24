@@ -102,7 +102,7 @@ One of the major differences in v2 is how arguments and their values are handled
 
 Let's take this query in v1, where we get total number of unique currencies traded on Ethereum on a particular day. The `count` and `sum` aggregation is available in both v1 and v2.
 
-```
+```graphql
 query MyQuery {
   ethereum(network: ethereum) {
     dexTrades(date: {is: "2024-01-01"}) {
@@ -117,7 +117,7 @@ query MyQuery {
 - **Date Filtering**: Instead of a separate `date` field, v2 uses `Block.Date` for date filtering.
 - **Field Mapping**: The `buy_currency` and `sell_currency` fields in v1 are mapped to `Trade_Buy_Currency_SmartContract` and `Trade_Sell_Currency_SmartContract` respectively in v2.
 
-```
+```graphql
 query MyQuery {
   EVM(network: eth, dataset: combined) {
     DEXTrades(where: {Block: {Date: {is: "2024-01-01"}}}) {
@@ -139,7 +139,7 @@ To avoid this issue, in API v2, values are now represented as strings, allowing 
 
 Let's take the below query which fetches the latest token details including USD values.
 
-```
+```graphql
 {
   ethereum(network: ethereum) {
     dexTrades(
@@ -195,7 +195,7 @@ There is no separate filter called `options`
 
 Next, we select the fields in the response
 
-```
+```graphql
 {
       Block {
         Number
@@ -254,4 +254,4 @@ To find your Bitquery API v1 key, log in to your [Bitquery account](https://acco
 
 ## V1 vs V2 : Data Points
 
-![](/img/v1v2.png)
+![Bitquery v1 to v2 API comparison](/img/v1v2.png)

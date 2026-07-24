@@ -33,7 +33,7 @@ This guide shows how to retrieve the same Solana DEX data that GeckoTerminal dis
 The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
 You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-geckoTerminal_1)
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     DEXTradeByTokens(
@@ -176,7 +176,7 @@ The query will give the top 10 pairs on Solana network in descending order of th
 Keep in mind you cannot use this as a websocket subscription becuase aggregate functions like `sum` doesn't work well in `subscription`.
 You can find the query [here](https://ide.bitquery.io/Get-Top-Pairs-on-Solana-on-GeckoTerminal_1)
 
-```
+```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(

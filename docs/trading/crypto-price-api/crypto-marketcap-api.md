@@ -722,7 +722,7 @@ Compare **`Trading.Pairs`** rows for the same **currency** / **quote** across **
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Trading {
     Pairs(
@@ -786,7 +786,7 @@ Subscribe to **`Trading.Pairs`** filtered by **Uniswap protocols** and **1s** in
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -1232,7 +1232,7 @@ Query **`EVM(network: eth, dataset: combined).Events`** for **`Burn`** logs on t
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   EVM(network: eth, dataset: combined) {
     Events(

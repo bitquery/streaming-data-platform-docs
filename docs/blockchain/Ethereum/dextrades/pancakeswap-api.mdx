@@ -22,7 +22,7 @@ The PancakSwap DEX Data is also available for view as a dashboard [at DEXRABBIT]
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query LatestTrades {
   EVM(network: eth) {
     DEXTradeByTokens(
@@ -76,7 +76,7 @@ query LatestTrades {
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query pairs($min_count: String, $market: String, $network: evm_network, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime, $time_ago: DateTime, $eth: String!, $weth: String!, $usdc: String!, $usdt: String!) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -150,7 +150,7 @@ query pairs($min_count: String, $market: String, $network: evm_network, $time_10
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query topTraders {
   EVM(network: eth) {
     DEXTradeByTokens(

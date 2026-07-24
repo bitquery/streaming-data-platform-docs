@@ -31,7 +31,7 @@ To learn the difference between two APIs, please check [this doc](/docs/schema/e
 This query will fetch you all the DEXs info for the selected network.
 You can test the query [here](https://ide.bitquery.io/dex-markets).
 
-```
+```graphql
 query DexMarkets($network: evm_network) {
   EVM(network: $network) {
     DEXTradeByTokens {
@@ -60,7 +60,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market)
 This query will fetch you a specific DEX stats for the selected network.
 You can test the query [here](https://ide.bitquery.io/dex-info).
 
-```
+```graphql
 query DexMarkets($network: evm_network, $market: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -92,7 +92,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market/
 This query will fetch you all trading pairs on a particular DEX for the selected network.
 You can test the query [here](https://ide.bitquery.io/trading-pairs-on-a-specific-dex).
 
-```
+```graphql
 query DexMarkets($network: evm_network, $market: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -149,7 +149,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market/
 This query will fetch you Top Traders on a particular DEX for the selected network.
 You can test the query [here](https://ide.bitquery.io/top-traders-on-a-DEX_1).
 
-```
+```graphql
 query DexMarkets($network: evm_network, $market: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -196,7 +196,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market/
 This query will fetch you latest trades on a particular DEX for the selected network.
 You can test the query [here](https://ide.bitquery.io/latest-trades_5).
 
-```
+```graphql
 query LatestTrades($network: evm_network, $market: String) {
   EVM(network: $network) {
     DEXTradeByTokens(

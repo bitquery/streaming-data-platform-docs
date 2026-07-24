@@ -11,7 +11,7 @@ In this section we'll have a look at some examples using the Matic NFT API.
 This query subscribes you to the real time transfers of a specific non-fungible token (NFT) on the Matic network.
 You can find the query [here](https://ide.bitquery.io/Real-time-transfer-websocket-for-NFT-token-on-matic)
 
-```
+```graphql
 subscription {
   EVM(network: matic) {
     Transfers(

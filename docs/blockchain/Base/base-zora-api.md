@@ -326,7 +326,7 @@ query ($address: String) {
 
 [Run Query](https://ide.bitquery.io/Latest-Trades-of-a-Token-on-Zora-Base)
 
-```
+```graphql
 {
   EVM(dataset: realtime, network: base) {
     DEXTrades(

@@ -235,7 +235,7 @@ This subscription query tracks transactions that signal token unlocks, providing
 
 In any query if you are not sure about the event name or signature, use the `includes` filter to filter the events. In the below example, let's track latest token lock and unlock events on Optimism by using `includes: "locked"` filter for Log Signatures. You can run the query [here](https://ide.bitquery.io/Optimism-token-unlocked)
 
-```
+```graphql
 {
   EVM(dataset: archive, network: optimism) {
     Events(

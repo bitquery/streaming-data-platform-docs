@@ -1,0 +1,64 @@
+---
+title: "Migrating from Helius to Bitquery (Solana)"
+description: "Map Helius Solana APIs — enhanced transactions, DAS, and webhooks — to Bitquery Solana cubes, Kafka, and gRPC."
+sidebar_position: 12
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Migrating from Helius to Bitquery (Solana)
+
+Both cover Solana; Bitquery adds a decoded GraphQL layer plus Kafka and gRPC streams, and cross-chain coverage in one schema.
+
+:::note
+Solana retention differs sharply by cube — check the [coverage matrix](/docs/graphql/data-coverage-retention/) before assuming deep history.
+:::
+
+## Concept mapping
+
+| Helius | Bitquery |
+|---|---|
+| Enhanced/parsed transactions | `Solana { Transactions / Instructions / DEXTradeByTokens }` |
+| Webhooks | [WebSocket subscriptions](/docs/subscriptions/websockets/), [Kafka](/docs/streams/kafka-operations/), [gRPC](/docs/grpc/solana/introduction/) |
+| Token / DAS metadata | Solana token + [Crypto Price API](/docs/trading/crypto-price-api/introduction/) |
+| pump.fun / launchpad data | [Solana launchpad pages](/docs/blockchain/Solana/) |
+| Low-latency streaming | [Solana gRPC (CoreCast)](/docs/grpc/solana/introduction/) |
+
+## Example: DEX trades for a mint
+
+```graphql
+{
+  Solana(dataset: realtime) {
+    DEXTradeByTokens(
+      where: { Trade: { Currency: { MintAddress: { is: "<mint>" } } } }
+      orderBy: { descending: Block_Time }
+      limit: { count: 100 }
+    ) {
+      Trade { Amount Price Side { Type } Dex { ProtocolName } }
+      Transaction { Signature }
+      Block { Time }
+    }
+  }
+}
+```
+
+## What differs
+
+- **Query language.** Decoded GraphQL cubes rather than parsed-transaction REST responses.
+- **Streaming options.** WebSocket, Kafka, and gRPC — pick by latency and filtering needs. gRPC requires at least one filter.
+- **History.** Raw Solana trades cover a rolling recent window via API; OHLC aggregates go back further; deep raw history is via S3 export. See the matrix.
+- **Note:** deep historical Solana *instructions by signature* are not available — consume them in real time via Kafka or gRPC.
+
+<FAQ
+  items={[
+    { q: "What replaces Helius webhooks?", a: "Use WebSocket subscriptions, Kafka topics, or Solana gRPC depending on throughput and filtering. gRPC is lowest-latency and requires at least one filter." },
+    { q: "Can I get pump.fun launch data?", a: "Yes — via the Solana launchpad pages and the DEX trade cubes. See the Solana section." },
+    { q: "How much Solana history is available?", a: "Raw trades cover a rolling recent window via the API; OHLC aggregates go back further; deep raw history is via S3 export. Check the coverage matrix." },
+  ]}
+/>
+
+## Next steps
+
+- [Solana gRPC (CoreCast)](/docs/grpc/solana/introduction/)
+- [Solana DEX trades](/docs/blockchain/Solana/solana-dextrades/)
+- [Data Coverage & Retention](/docs/graphql/data-coverage-retention/)

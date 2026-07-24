@@ -11,7 +11,7 @@ The query below gives you balance update associated with a instruction invocatio
 
 You can run the query [here](https://ide.bitquery.io/balance-updates)
 
-```
+```graphql
 query {
   Solana(dataset: realtime) {
     InstructionBalanceUpdates(limit: {count: 10}) {
@@ -33,7 +33,7 @@ query {
 
 Using the below query, you can retrieve latest liquidity locks made using streamflow. Test the query [here](https://ide.bitquery.io/Liquidity-lock-using-instructions-balance-update)
 
-```
+```graphql
 {
   Solana {
     InstructionBalanceUpdates(limit: {count: 20}

@@ -11,7 +11,7 @@ In this section we'll have a look at some examples on how to get NFT information
 This query subscribes you to the real time transfers of a specific non-fungible token (NFT) on the Base network.
 You can find the query [here](https://ide.bitquery.io/Transfers-of-a-particular-NFT_1#)
 
-```
+```graphql
 subscription {
   EVM(network: base) {
     Transfers(

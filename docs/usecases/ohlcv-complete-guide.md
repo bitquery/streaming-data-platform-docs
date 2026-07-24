@@ -194,7 +194,7 @@ In EVM and non-EVM chains, you can also use `subscription` to get a token pair w
 
 Take this query below for example;
 
-```
+```graphql
 subscription LatestTrades {
   Solana {
     DEXTradeByTokens(
@@ -323,7 +323,7 @@ For example if you check the OHLC for this token `J3TqbUgHurQGNxWtT88UQPcMNVmrL8
 
 Take this query [https://ide.bitquery.io/quantile](https://ide.bitquery.io/quantile) which includes both OHLC using `maximum`, `minimum` and using `quantile` and removes small trades using `AmountinUSD >10` filter.
 
-```
+```graphql
 {
   Solana(dataset: combined) {
     DEXTradeByTokens(

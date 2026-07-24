@@ -48,7 +48,7 @@ More patterns below: **mempool** logs (pending), **recent** events with `query`,
 This query listens to real-time mempool events on the Ethereum (ETH) blockchain. The query is designed to capture details of transactions, logs, events, and arguments from the Ethereum Virtual Machine (EVM) before they are confirmed in a block.
 You can run it [here](https://ide.bitquery.io/Mempool-event-stream)
 
-```
+```graphql
 subscription {
   EVM(network: eth, mempool: true) {
     Events {
@@ -204,7 +204,7 @@ query MyQuery {
 The query below shows latest 10 events emitted by the AAVE V3 contract. The `Log` field in the results will contain information about the event, including its signature, smart contract address, and transaction hash. The `Arguments` field will contain the values of any arguments that were passed to the event.
 You can find the query [here](https://ide.bitquery.io/All-aave-v3-events-latest)
 
-```
+```graphql
 {
   EVM(dataset: realtime, network: eth) {
     Events(
@@ -253,7 +253,7 @@ To get Staking-related information, we will be using the "Staked" signature to f
 
 You can find the query [here](https://ide.bitquery.io/Copy-of-Latest-Token-Stake-Events)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: realtime, network: eth) {
     Events(
@@ -288,7 +288,7 @@ query MyQuery {
 
 In the below query we listen for a specific event (Approval) across multiple smart contracts on the Ethereum (ETH) network. Run the query [here](https://ide.bitquery.io/Subscribe-to-the-Same-Event-Across-Multiple-Contracts)
 
-```
+```graphql
 subscription {
   EVM(network: eth) {
     Events(
@@ -322,7 +322,7 @@ subscription {
 
 This query retrieves the most recent liquidity removal events (Burn events) on Uniswap. It includes details about the transaction, block, log, and arguments. You can run the query [here](https://ide.bitquery.io/uniswap-v2-liquidity-removed)
 
-```
+```graphql
 {
   EVM(network: eth, dataset: combined) {
     Events(
@@ -385,7 +385,7 @@ This query retrieves the most recent liquidity removal events (Burn events) on U
 
 This subscription provides information on the latest real-time swap events on Ethereum. You can run it [here](https://ide.bitquery.io/all-swap-events)
 
-```
+```graphql
 subscription {
   EVM(network: eth) {
     Events(where: {Log: {Signature: {Name: {in: ["swap", "Swap"]}}}}) {
@@ -435,7 +435,7 @@ subscription {
 Chefdotfun, similar to platforms like Pumpfun and Sunpump, is a token creation platform on the Ethereum network. This query retrieves the latest Chefdotfun swap transactions by filtering event logs related to the smart contract.
 You can run the query [here](https://ide.bitquery.io/Latest-chefdog-swaps)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     Events(

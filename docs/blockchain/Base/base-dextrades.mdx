@@ -104,7 +104,7 @@ This example uses the chain-specific **DEXTrades** cube via `EVM(network: base) 
 Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 You can find the query [here](https://ide.bitquery.io/subscribe-to-dex-trades-on-base)
 
-```
+```graphql
 subscription MyQuery {
   EVM(network: base) {
     DEXTrades {
@@ -172,7 +172,7 @@ subscription MyQuery {
 
 This query provides real-time updates on price of USDC `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` in terms of DAI `0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb`, including details about the DEX, market, and order specifics. Find the query [here](https://ide.bitquery.io/Price-of-USDC-in-terms-of-DAI-on-Base-network#)
 
-```
+```graphql
 subscription {
   EVM(network: base) {
     DEXTrades(
@@ -215,7 +215,7 @@ subscription {
 
 The below query retrieves the USD price of a token on Base chain by setting `SmartContract: {is: "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-latest-price-of-DAI-in-USD-on-Base#).
 
-```
+```graphql
 subscription {
   EVM(network: base) {
     DEXTradeByTokens(
@@ -305,7 +305,7 @@ query MyQuery {
 Use below query to get price change 5min, 1h, 6h and 24h of a specific token. Change the `Currency{SmartContract}` and `Dex{SmartContract}` according to your needs. Test the query [here]
 (https://ide.bitquery.io/Price-change-5min-1hr-6hr-24h-precentage-of-a-specific-token).
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined network:base) {
     DEXTradeByTokens(
@@ -347,7 +347,7 @@ query MyQuery {
 Use below query to get top 10 Base Tokens by Price Change in last 1h. Test the query [here]
 (https://ide.bitquery.io/Top-10-base-tokens-by-price-change-in-last-1-hr).
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined network:base) {
     DEXTradeByTokens(
@@ -424,7 +424,7 @@ Get up to 100 tokens with aggregated USD volume and average price over the last 
 
 ▶️ [Aggregated Token Data](https://ide.bitquery.io/aggregated-data)
 
-```
+```graphql
 {
   Trading {
     Tokens(

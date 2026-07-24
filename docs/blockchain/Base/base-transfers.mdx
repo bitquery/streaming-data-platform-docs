@@ -12,7 +12,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 The subscription query below fetches the whale transactions on the Base network. We have used USDC address `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`. You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDC-on-base#)
 
-```
+```graphql
 subscription {
   EVM(network: base) {
     Transfers(
@@ -45,7 +45,7 @@ subscription {
 
 This websocket retrieves transfers where the sender is a particular address `0x3304E22DDaa22bCdC5fCa2269b418046aE7b566A`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {is: "0x3304E22DDaa22bCdC5fCa2269b418046aE7b566A"}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/Sender-is-a-particular-address_3#)
 
-```
+```graphql
 subscription {
   EVM(network: base) {
     Transfers(
@@ -77,7 +77,7 @@ subscription {
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on Base network. You can run the query [here](https://ide.bitquery.io/NFT-Token-Transfers-API_4#)
 
-```
+```graphql
 subscription {
   EVM(network: base) {
     Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {
@@ -111,7 +111,7 @@ This below query will give you all the transfers of a particular NFT `0xb68CA010
 
 You can test out the query [here](https://ide.bitquery.io/get-all-transfers-of-a-specific-nft).
 
-```
+```graphql
 query MyQuery {
   EVM(network: base, dataset: realtime) {
     Transfers(
@@ -146,7 +146,7 @@ We use the `any` filter [ OR condition] to get transactions from or to a wallet.
 
 [Run Query](https://ide.bitquery.io/tx-from-to-base-address)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: base) {
     Transfers(

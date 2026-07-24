@@ -14,7 +14,7 @@ Current Balance = sum(all_balance_updates) + steam_balance_updates
 
 To initiate the project run the following command.
 
-```
+```bash
 npm init -y
 ```
 
@@ -27,7 +27,7 @@ Before going further make sure that all the dependencies are installed. The depe
 
 Use the following command to install these dependencies.
 
-```
+```bash
 npm install axios dotenv express ws
 ```
 

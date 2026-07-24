@@ -96,7 +96,7 @@ Read more about using `array_intersect` [here](/docs/graphql/capabilities/array-
 
 You can find the query [here](https://ide.bitquery.io/array_intersect-example-for-NFT).
 
-```
+```graphql
 query ($addresses: [String!]) {
   EVM(dataset: archive) {
     Transfers(

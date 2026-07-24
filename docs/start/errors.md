@@ -41,7 +41,7 @@ This error typically arises due to incorrect query construction involving limits
 
 This error occurs when you exceed certain limits set by ClickHouse or the Bitquery API. These limits may include:
 
-- **Rate Limit**: The maximum number of queries allowed per minute (e.g., 180 queries per minute).
+- **Rate Limit**: The maximum number of queries allowed per minute (the exact value depends on your plan — see [Rate Limits & Concurrency](/docs/plans/rate-limits/)).
 - **Session Limit**: The maximum number of active sessions allowed at any given time.
 - **Streams Limit**: The maximum number of streams you can open simultaneously.
 
@@ -125,6 +125,65 @@ These errors typically occur due to how the WebSocket client is configured in `w
 
 - **Memory Usage Consideration:** Since Python can use up to 4 bytes of memory to represent a single character, each connection may use up to `4 * max_size * max_queue` bytes of memory to store incoming messages. By default, this can amount to 128 MiB. Depending on your application’s requirements, you may want to lower these limits to optimize performance.
   Read more [here](https://websockets.readthedocs.io/en/9.1/api/client.html#using-a-connection_
+
+---
+
+## Billing, quota & access errors
+
+These are the most common runtime errors and their fixes. Each heading is the literal error string so you can search for it.
+
+### `No active billing period` (HTTP 402) {#no-active-billing-period}
+
+A `402` with **`No active billing period`** (or `access restricted by points limit`) means the account has no active plan/points for this request. Common causes:
+
+- Your trial expired, or a free tier hasn't been activated.
+- A payment is still provisioning (there can be a short delay after paying).
+- You're calling a **paid-only interface** (for example gRPC/Kafka) your plan doesn't include.
+
+**Fix:** confirm an active plan at [Account → Billing](https://account.bitquery.io/user/upgrade); see [How Billing Works](/docs/plans/how-billing-works/). If you just paid, wait a few minutes and retry.
+
+### `points limit exceeded: usage quota reached` {#points-limit-exceeded}
+
+You've consumed your point allowance for the period, **or** you're using a token minted under a previous (smaller) plan.
+
+**Fix:** top up / upgrade at [Account → Billing](https://account.bitquery.io/user/upgrade). **If you just upgraded and still see this, generate a new access token** — a token created under the old plan can keep enforcing the old limit. See [How Billing Works](/docs/plans/how-billing-works/).
+
+### `too many concurrent subscriptions` / `exceeded the maximum number of subscriptions per user id` {#too-many-concurrent-subscriptions}
+
+You've hit your plan's concurrent-subscription cap. Two gotchas:
+
+- Over the cap, a subscription may **connect but deliver no data** instead of erroring clearly.
+- **Revoking a token does not stop already-open sockets.**
+
+**Fix:** view and terminate running subscriptions at [Account → Subscriptions](https://account.bitquery.io/user/api_v2/subscriptions). See [WebSocket subscriptions](/docs/subscriptions/websockets/) and [Rate Limits & Concurrency](/docs/plans/rate-limits/).
+
+### `no table can query <Cube> ... consider use realtime dataset` / `Missing columns` {#dataset-not-available}
+
+The cube isn't deployed on the **dataset** you selected for that **chain** (for example, `combined` Holders on a chain that only has `realtime` Holders), or a column doesn't exist on that chain.
+
+**Fix:** switch dataset (often to `realtime`), or choose a chain/cube combination that exists. See the [Data Coverage & Retention matrix](/docs/graphql/data-coverage-retention/).
+
+### `Table <name> doesn't exist` (v1) {#v1-table-does-not-exist}
+
+A v1 query is hitting a table retired during the v1 → v2 migration. Move the query to the v2 endpoint and schema — see [Getting started](/docs/start/first-query/).
+
+### gRPC `16 UNAUTHENTICATED` vs `7 PERMISSION_DENIED` {#grpc-auth-errors}
+
+- **`16 UNAUTHENTICATED`** — the credential is missing, malformed, or expired. Regenerate and re-send it.
+- **`7 PERMISSION_DENIED`** — the credential is valid but not entitled (wrong plan, rate-limited, or no active billing period).
+
+See [Solana gRPC](/docs/grpc/solana/introduction/).
+
+### Kafka authentication / connection failures {#kafka-auth-errors}
+
+If your Kafka client can't authenticate or reach the brokers, check the connection recipe: port 9092, `SASL_PLAINTEXT` with your Kafka username/password (SASL/PLAIN), and no client TLS certs. See the [Kafka Operations Cookbook](/docs/streams/kafka-operations/).
+
+### Empty results despite data existing — full checklist {#empty-results-checklist}
+
+1. **Dataset/retention** — is the date range within the window for that cube? See the [coverage matrix](/docs/graphql/data-coverage-retention/).
+2. **EVM address case** — filters with `is:` are case-sensitive; lowercase the address or use `caseInsensitive`.
+3. **Ordering pitfall** — ordering by a non-indexed timestamp field can silently drop rows; order by `Block_Time` instead.
+4. **Filters** — verify network, DEX/program, and token/mint address against an explorer.
 
 ---
 

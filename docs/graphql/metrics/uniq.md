@@ -9,7 +9,7 @@ The `uniq` function is used to estimate the count of unique values in a dataset.
 
 ### Example Query
 
-```
+```graphql
 {
   EVM(dataset: archive, network: eth) {
     TokenHolders(
@@ -28,7 +28,7 @@ The `uniq` function is used to estimate the count of unique values in a dataset.
 
 ### Result
 
-```
+```json
 {
   "EVM": {
     "TokenHolders": [

@@ -12,7 +12,7 @@ In this section we will see how to get Arbitrum Smart contract calls information
 This query gets the transaction call trace for an Arbitrum transaction. The `Calls` API in the query returns a list of all calls made by the transaction.
 You can find the query [here](https://ide.bitquery.io/Transaction-Call-Trace-Arbitrum)
 
-```
+```graphql
 query myquery($network: evm_network!, $hash: String!) {
   EVM(dataset: combined, network: $network) {
     Calls(

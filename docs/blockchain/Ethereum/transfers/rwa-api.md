@@ -87,7 +87,7 @@ This query filters for recent `Issue` events on Ethereum and displays logs emitt
 You can use the same as a `subscription` to monitor issuances in real-time.
 You can run the query [here](https://ide.bitquery.io/BlackRock-USD-Institutional-Digital-Liquidity-Fund-Latest-Issuance)
 
-```
+```graphql
 {
   EVM(dataset: realtime, network: eth) {
     Events(

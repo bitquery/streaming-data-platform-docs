@@ -1,0 +1,45 @@
+---
+title: "Migrating from Yellowstone gRPC to Bitquery CoreCast"
+description: "Move from Yellowstone Geyser gRPC to Bitquery's Solana CoreCast gRPC — decoded streams, filters, and auth differences."
+sidebar_position: 13
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Migrating from Yellowstone gRPC to Bitquery CoreCast
+
+If you're streaming Solana over Yellowstone Geyser gRPC, Bitquery's **CoreCast** gRPC offers a decoded stream. The mental models differ, so read this before porting a Yellowstone client.
+
+:::note
+CoreCast is **not** a drop-in Yellowstone replacement — the protobuf schema and semantics differ.
+:::
+
+## Key differences
+
+- **Decoded, not raw.** CoreCast delivers decoded events (DEX trades, pools, transfers) rather than raw account/transaction updates you decode yourself.
+- **A filter is required.** A CoreCast subscription must include at least one filter; a fully-unfiltered "everything" stream is rejected.
+- **Multiple tokens per stream.** A single CoreCast stream can filter on many token/account addresses at once — you don't need one stream per token.
+- **Auth.** Uses a Bitquery-issued credential; errors surface as gRPC status codes — `16 UNAUTHENTICATED` (bad/missing/expired credential) vs `7 PERMISSION_DENIED` (valid but not entitled). See [common errors](/docs/start/errors/#grpc-auth-errors).
+
+## Getting started
+
+See [Solana gRPC (CoreCast)](/docs/grpc/solana/introduction/) for the connection details, then the topic pages for the decoded event shapes.
+
+## When to choose Kafka or WebSocket instead
+
+- Need multi-chain, not just Solana? Use [Kafka](/docs/streams/kafka-operations/).
+- Need simple browser/server subscriptions with server-side filtering? Use [WebSocket subscriptions](/docs/subscriptions/websockets/).
+
+<FAQ
+  items={[
+    { q: "Is CoreCast a drop-in replacement for Yellowstone gRPC?", a: "No. CoreCast delivers decoded events with a different protobuf schema and requires at least one filter; you can't port a Yellowstone client unchanged." },
+    { q: "Why is my CoreCast stream rejected?", a: "A subscription must include at least one filter — unfiltered streams are rejected. Also check auth: 16 UNAUTHENTICATED means a bad credential; 7 PERMISSION_DENIED means it's valid but not entitled." },
+    { q: "Can I stream multiple tokens at once?", a: "Yes — a single CoreCast stream can filter on many token/account addresses at once, so you don't need a separate stream per token." },
+  ]}
+/>
+
+## Next steps
+
+- [Solana gRPC (CoreCast)](/docs/grpc/solana/introduction/)
+- [Kafka Operations Cookbook](/docs/streams/kafka-operations/)
+- [Common errors — gRPC auth](/docs/start/errors/#grpc-auth-errors)

@@ -14,7 +14,7 @@ We are going to particularly deep-dive into how to get Stablecoin Transfers data
 
 Below stream will give you realtime transfers of `USDC` on Eth mainnet. Test the stream [here](https://ide.bitquery.io/Stablecoin-Realtime-Payments-Stream-on-Eth-Mainnet).
 
-```
+```graphql
 subscription {
   EVM(network: eth) {
     Transfers(
@@ -42,7 +42,7 @@ subscription {
 
 Below API query will give you mint/burn data of `USDT` on Ethereum. Test the API [here](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Ethereum).
 
-```
+```graphql
 query MyQuery {
   EVM(network: eth, dataset: combined) {
     Transfers(
@@ -68,7 +68,7 @@ query MyQuery {
 
 Below stream will give you realtime transfers of `USDC` on Solana. Test the stream [here](https://ide.bitquery.io/stablecoin-transfers-websocket).
 
-```
+```graphql
 subscription {
   Solana {
     Transfers(
@@ -103,7 +103,7 @@ subscription {
 
 Below query will give you `EURC` transfers from/to `cHxJ2uC6vgcCfoFSfupkfCWbKHAkekrGfG39DXRamXT` on Solana. Test the query [here](https://ide.bitquery.io/stablecoin-Transfers-fromto-an-address).
 
-```
+```graphql
 {
   Solana {
     Transfers(
@@ -135,7 +135,7 @@ Below query will give you `EURC` transfers from/to `cHxJ2uC6vgcCfoFSfupkfCWbKHAk
 
 Below stream will give you realtime transfers of `USDT` on Tron. Test the stream [here](https://ide.bitquery.io/Stablecoin-Realtime-Transfers-Stream-on-tron).
 
-```
+```graphql
 subscription {
   Tron(network: tron) {
     Transfers(
@@ -162,7 +162,7 @@ subscription {
 
 Below query will give you `USDT` transfers from/to `TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ` on Tron. Test the query [here](https://ide.bitquery.io/Stablecoin-recieved-and-sent-by-an-address).
 
-```
+```graphql
 {
   Tron(dataset: combined) {
     Transfers(

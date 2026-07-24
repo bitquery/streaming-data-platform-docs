@@ -72,7 +72,7 @@ You can use the below query to get the tokens which are getting traded and have 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     DEXPools(
@@ -143,7 +143,7 @@ You can find the query [here](https://ide.bitquery.io/get-all-the-liquidity-pool
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query ($token: String) {
   Solana {
     DEXPools(
@@ -477,7 +477,7 @@ This query tracks liquidity addition events on Solana DEX pools by monitoring sp
 
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Solana(network: solana) {
     DEXPools(
@@ -544,7 +544,7 @@ This query tracks liquidity removal events on Solana DEX pools by monitoring wit
 
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 
 {
   Solana(network: solana) {

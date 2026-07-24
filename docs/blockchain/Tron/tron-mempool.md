@@ -12,7 +12,7 @@ The below subscription provides real-time data on token transfers happening in t
 
 You can find the query [here](https://ide.bitquery.io/Tron-mempool-transfers)
 
-```
+```graphql
 subscription {
   Tron(mempool: true) {
     Transfers {
@@ -35,7 +35,7 @@ subscription {
 
 The below subscription provides provides real-time data on decentralized exchange (DEX) trades happening in the TRON mempool including details of buyer,seller, protocol information and the amount with USD values.
 
-```
+```graphql
 subscription {
   Tron(mempool: true) {
     DEXTrades {
@@ -86,7 +86,7 @@ subscription {
 
 The below subscription provides data on all transactions happening in the TRON mempool including Witness information.
 
-```
+```graphql
 subscription {
   Tron(mempool: true) {
     Transactions {
@@ -122,7 +122,7 @@ subscription {
 
 The below subscription provides data on non-fungible token (NFT) transfers happening in the TRON mempool.
 
-```
+```graphql
 subscription {
   Tron(mempool: true) {
     Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {

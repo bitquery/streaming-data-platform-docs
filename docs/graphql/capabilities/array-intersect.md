@@ -6,7 +6,7 @@ description: "Array Intersection in Bitquery GraphQL with clear syntax, examples
 # Array Intersection
 
 The `array_intersect` feature is an advanced query format that generates an intersection of addresses from specified datasets. You can use the `where` clause to introduce filters that refine your results according to desired criteria. The output is a list of addresses that share a common link to the two datasets.
-![](/img/diagrams/array_intersect.png)
+![Array intersect operation diagram](/img/diagrams/array_intersect.png)
 
 In the following section, we'll explore how to use `array_intersect` to reveal the associations between pairs of addresses or contracts.
 
@@ -31,7 +31,7 @@ Constraints:
 
 Suppose you have an array of two addresses ( A and B ) and want to identify which addresses have engaged in transactions with both Contract A and Contract B. By passing these arrays to array_intersect, the function will return an array of addresses that interacted with both contracts.
 
-```
+```graphql
 query($addresses: [String!]) {
   EVM(dataset: archive){
     Transfers(
@@ -67,7 +67,7 @@ query($addresses: [String!]) {
 
 This query will return a response in this format ; as an array consisting of elements found in both side1 and side2 that have interacted with **all the addresses** in the intersectWith array. If no common elements are detected, the result will be an empty array.
 
-```
+```json
 {
   "EVM": {
     "Transfers": [

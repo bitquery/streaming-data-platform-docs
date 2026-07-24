@@ -394,7 +394,7 @@ To get all transfers of on GRA.fun, please check [this query](https://ide.bitque
 
 Use this API to get Pancake V3 APIs using [this api](https://ide.bitquery.io/Trades-of-token-on-pancake-v3)
 
-```
+```graphql
 {
   EVM(dataset: archive, network: bsc) {
     DEXTrades(
@@ -444,7 +444,7 @@ Use this API to get Pancake V3 APIs using [this api](https://ide.bitquery.io/Tra
 
 Get 1st trade of token on Pancake v3 using [this api](https://ide.bitquery.io/Trades-of-token-on-pancake-v3_5).
 
-```
+```graphql
 {
   EVM(dataset: combined, network: bsc) {
     DEXTrades(

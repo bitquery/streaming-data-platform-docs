@@ -630,7 +630,7 @@ Here's an example of [tracking Meme Rush token prices](https://ide.bitquery.io/l
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Trading {
     Pairs(
@@ -1180,7 +1180,7 @@ query MyQuery($token: String!) {
 }
 ```
 
-```
+```json
 {
   "token": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"
 }
@@ -1196,7 +1196,7 @@ You can test the query [here](https://ide.bitquery.io/top-traders-of-a-meme-rush
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query topTraders($network: evm_network, $token: String) {
   EVM(network: $network, dataset: combined) {
     DEXTradeByTokens(
@@ -1221,7 +1221,7 @@ query topTraders($network: evm_network, $token: String) {
 }
 ```
 
-```
+```json
 {
   "network": "bsc",
   "token": "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"
@@ -1237,7 +1237,7 @@ Using below API you can get the liquidity of a meme rush token. Subtract `200000
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: bsc) {
     BalanceUpdates(

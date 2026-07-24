@@ -433,7 +433,7 @@ Monitor balance changes related to MEV activities, including transaction fee rew
 
 Monitor all contract self-destruct event balances in real-time.
 
-▶️ [Track All Self-Destruct Event Balances](hhttps://ide.bitquery.io/All-Self-Destruct-Event-Balances-Stream-base_1)
+▶️ [Track All Self-Destruct Event Balances](https://ide.bitquery.io/All-Self-Destruct-Event-Balances-Stream-base_1)
 
 #### Monitoring Balance after Latest Gas Fee Burn
 

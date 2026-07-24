@@ -1,5 +1,5 @@
 /**
- * Injects TechArticle JSON-LD into each built doc page HTML at postBuild.
+ * Injects TechArticle + BreadcrumbList JSON-LD into each built doc page at postBuild.
  */
 const fs = require("fs");
 const path = require("path");
@@ -33,9 +33,10 @@ function parseFrontmatter(filePath) {
   if (!title) {
     title = body.match(/^#\s+(.+)$/m)?.[1];
   }
+  const description = fm.match(/^description:\s*["']?(.+?)["']?\s*$/m)?.[1];
   const slug = fm.match(/^slug:\s*(.+)\s*$/m)?.[1];
   const draft = /^\s*draft:\s*true\s*$/m.test(fm);
-  return { title, slug, draft };
+  return { title, description, slug, draft };
 }
 
 function docPermalink(siteDir, filePath) {
@@ -45,23 +46,54 @@ function docPermalink(siteDir, filePath) {
     return null;
   }
   if (parsed.slug) {
-    const slug = parsed.slug.startsWith("/") ? parsed.slug : `/${parsed.slug}`;
-    return slug.endsWith("/") ? slug : `${slug}/`;
+    // Doc slugs are relative to the /docs route base. A leading-slash slug like
+    // "/migration/" maps to "/docs/migration/", not "/migration/".
+    const s = parsed.slug.startsWith("/") ? parsed.slug : `/${parsed.slug}`;
+    const full = `/docs${s}`.replace(/\/+$/, "") + "/";
+    return full;
   }
-  const withoutExt = rel.replace(/\.(md|mdx)$/, "");
+  const withoutExt = rel.replace(/\.(md|mdx)$/, "").replace(/\/(index|README)$/i, "");
   return `/docs/${withoutExt}/`;
 }
 
-function gitLastUpdated(siteDir, filePath) {
+function gitDate(siteDir, filePath, first) {
   try {
-    const iso = execSync(`git log -1 --format=%cI -- "${filePath}"`, {
-      cwd: siteDir,
-      encoding: "utf8",
-    }).trim();
+    const flag = first ? "--diff-filter=A --follow" : "";
+    const iso = execSync(
+      `git log -1 ${flag} --format=%cI -- "${filePath}"`,
+      { cwd: siteDir, encoding: "utf8" },
+    ).trim();
     return iso ? iso.split("T")[0] : undefined;
   } catch {
     return undefined;
   }
+}
+
+function humanize(seg) {
+  return seg
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function breadcrumb(base, permalink, title) {
+  const parts = permalink.split("/").filter(Boolean); // e.g. ["docs","blockchain","Solana","x"]
+  const items = [];
+  let acc = "";
+  parts.forEach((seg, i) => {
+    acc += `/${seg}`;
+    const isLast = i === parts.length - 1;
+    items.push({
+      "@type": "ListItem",
+      position: i + 1,
+      name: isLast ? title || humanize(seg) : seg === "docs" ? "Docs" : humanize(seg),
+      item: `${base}${acc}/`,
+    });
+  });
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items,
+  };
 }
 
 /** @type {import('@docusaurus/types').PluginModule} */
@@ -91,13 +123,16 @@ module.exports = function techArticleJsonLdPlugin(context) {
           continue;
         }
 
-        const { title } = parseFrontmatter(filePath);
-        const dateModified = gitLastUpdated(context.siteDir, filePath);
+        const { title, description } = parseFrontmatter(filePath);
+        const dateModified = gitDate(context.siteDir, filePath, false);
+        const datePublished = gitDate(context.siteDir, filePath, true);
 
-        const jsonLd = {
+        const techArticle = {
           "@context": "https://schema.org",
           "@type": "TechArticle",
           headline: title,
+          ...(description ? { description } : {}),
+          ...(datePublished ? { datePublished } : {}),
           ...(dateModified ? { dateModified } : {}),
           author: { "@type": "Organization", name: "Bitquery" },
           publisher: { "@type": "Organization", name: "Bitquery" },
@@ -107,7 +142,12 @@ module.exports = function techArticleJsonLdPlugin(context) {
           },
         };
 
-        const tag = `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
+        const crumbs = breadcrumb(base, permalink, title);
+
+        const tag =
+          `<script type="application/ld+json">${JSON.stringify(techArticle)}</script>` +
+          `<script type="application/ld+json">${JSON.stringify(crumbs)}</script>`;
+
         let html = fs.readFileSync(htmlPath, "utf8");
         if (html.includes('"@type":"TechArticle"')) {
           continue;

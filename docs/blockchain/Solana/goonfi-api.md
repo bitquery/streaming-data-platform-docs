@@ -194,7 +194,7 @@ You can use the following query to get the latest price of a token on GoonFi on 
 
 You can run this query using this [link](https://ide.bitquery.io/latest-price-of-a-token-on-GoonFi_1).
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -225,7 +225,7 @@ You can use the following query to get the latest price of a token on GoonFi on 
 
 You can run this query using this [link](https://ide.bitquery.io/Realtime-Price-feed-of-a-Token-on-GoonFi_1).
 
-```
+```graphql
 subscription{
   Solana {
     DEXTradeByTokens(
@@ -252,7 +252,7 @@ subscription{
 
 If you want to get OHLC data for any specific currency pair on GoonFi, you can use this api. Only use [this API](https://ide.bitquery.io/GoonFi-OHLC-API_1) as query and not subscription websocket as Aggregates and Time Intervals don't work well with subscriptions.
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -281,7 +281,7 @@ If you want to get OHLC data for any specific currency pair on GoonFi, you can u
 Below API will give you realtime prices, OHLC, and volume data for all GoonFi trading pairs. We have selected `1` sec as the interval for the OHLC, volume or moving average calculation. You can select any other interval as well like 5 sec, 30 sec, 60 sec, 3600 sec, etc.
 Try the API [here](https://ide.bitquery.io/GoonFi-Realtime-OHLC-Price-Volume-API---Crypto-Price-API_1).
 
-```
+```graphql
 subscription MyQuery {
   Trading {
     Pairs(
@@ -339,7 +339,7 @@ subscription MyQuery {
 
 The below query gets the Top Traders of the specified Token `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` on GoonFi. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-Token-on-GoonFi-DEX_1)
 
-```
+```graphql
 query TopTraders($token: String) {
   Solana {
     DEXTradeByTokens(
@@ -374,7 +374,7 @@ query TopTraders($token: String) {
 
 This query fetches you the traded volume, buy volume and sell volume of a token `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v`. Try out the API [here](https://ide.bitquery.io/Get-trading-volume-buy-volume-sell-volume-of-a-token-on-GoonFi-DEX_1).
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(

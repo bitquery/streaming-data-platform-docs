@@ -14,7 +14,7 @@ In this section we'll have a look at some examples using the Solana Transactions
 The subscription query below fetches the most recent transactions on the Solana blockchain
 You can find the query [here](https://ide.bitquery.io/Realtime-Solana-Transactions)
 
-```
+```graphql
 subscription {
   Solana {
     Transactions(limit: {count: 10}) {
@@ -56,7 +56,7 @@ You can run the query [here](https://ide.bitquery.io/Solana-tx-dynamic-filter)
 - **`$network`**: Specifies the Solana network.
 - **`$tx_filter`**: A filter object used to specify the criteria for transactions to retrieve.
 
-```
+```graphql
 subscription(
    $network: solana_network
    $tx_filter: Solana_Transaction_Filter

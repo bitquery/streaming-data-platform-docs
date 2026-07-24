@@ -11,7 +11,7 @@ Solana Logs API helps you filter program instruction logs using regular expressi
 The Solana Logs API allows you to search for specific instructions based on log content that matches exact phrases. For example, to find logs related to 'AnchorError' with a specific error code and message
 You can find the query [here](https://ide.bitquery.io/SlippageToleranceExceeded#)
 
-```
+```graphql
 {
   Solana {
     Instructions(
@@ -55,7 +55,7 @@ To exclude instructions containing specific log phrases such as 'AnchorError' yo
 
 You can find the query [here](https://ide.bitquery.io/Not-Anchor-Error-Solana-Logs)
 
-```
+```graphql
 {
   Solana {
     Instructions(
@@ -97,7 +97,7 @@ You can find the query [here](https://ide.bitquery.io/Not-Anchor-Error-Solana-Lo
 
 To find instructions based on logs that contain specific patterns or keywords, such as an invoke log, you can use the `like` filter.
 
-```
+```graphql
 {
   Solana {
     Instructions(
@@ -139,7 +139,7 @@ To find instructions based on logs that contain specific patterns or keywords, s
 To find instructions based on logs that contain specific patterns or keywords, such as an ZETA market log, you can use the `includes` filter which searches for the presence of the keyword as a whole in the log. 
 You can run the query [here](https://ide.bitquery.io/Solana-Zeta-Market-logs)
 
-```
+```graphql
 {
   Solana {
     Instructions(

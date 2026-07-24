@@ -49,7 +49,7 @@ For **default success and other filters** (e.g. only successful transactions, ca
 
 It is possible—and often more efficient—to manage multiple subscriptions over a single WebSocket connection. This approach allows you to bundle various subscriptions, such as DEX Trades, Transactions, Blocks, and Transfers, into a single Websocket stream. However, it's important to note that your top-level element must be only one.
 
-```
+```graphql
 subscription{
   EVM{
     Transfers{
@@ -71,7 +71,7 @@ This query will return two sets of transfer data for USDT on the Ethereum networ
 
 You can run the query [here](https://ide.bitquery.io/USDT-transfers-of-different-amounts-mempool)
 
-```
+```graphql
 subscription ($token: String!, $minamount: String!, $mempool: Boolean, $network: evm_network!) {
   usdt: EVM(network: $network, mempool: $mempool) {
     transfers_above_10K: Transfers(

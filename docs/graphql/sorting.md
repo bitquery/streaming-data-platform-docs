@@ -31,7 +31,7 @@ First results will be sorted by Transaction_Value and after that by Block_Number
 
 Another way to sort on multiple condition is following 
 
-```
+```graphql
 {
   EVM {
     Events(
@@ -70,7 +70,7 @@ this is not the same as:
 
 The example below shows how to sort transfers by their index within a block in ascending order,
 
-```
+```graphql
 {
   EVM(dataset: archive) {
     Transfers(

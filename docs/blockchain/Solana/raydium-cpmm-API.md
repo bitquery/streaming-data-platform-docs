@@ -19,7 +19,7 @@ In this section we will see how to get data on Raydium CPMM trades in real-time.
 This query subscribes to real-time trades on the Raydium CPMM on the Solana blockchain by filtering using `{Program: {Address: {is: "CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C"}}}:`.
 You can run the query [here](https://ide.bitquery.io/CPMM-trades).
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     DEXTrades(
@@ -81,7 +81,7 @@ The mint addresses for the tokens being used in the pool are listed for example 
 
 You can run the query [here](https://ide.bitquery.io/CPMM-pools-created_1)
 
-```
+```graphql
 {
   Solana {
     Instructions(

@@ -29,7 +29,7 @@ query {
 ```
 ## Integrated Development Environment (IDE)
 
-Integrated Development Environment (**[IDE](https://graphql.bitquery.io/ide?endpoint=https://streaming.bitquery.io/graphql)**) helps you to manage your query,
+Integrated Development Environment (**[IDE](https://ide.bitquery.io/)**) helps you to manage your query,
 share them with other developers and generate a code to use the queries in your applications.
 
 ![IDE screen](/img/ide/ide_screen.png)

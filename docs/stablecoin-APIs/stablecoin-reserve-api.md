@@ -14,7 +14,7 @@ We are going to particularly deep-dive into how to get Stablecoin Transfers data
 
 Below API query will give you realtime reserves data of `USDT` on Ethereum. Test the API [here](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Ethereum).
 
-```
+```graphql
 query MyQuery {
   EVM(network: eth, dataset: combined) {
     Transfers(
@@ -40,7 +40,7 @@ query MyQuery {
 
 Below API query will give you realtime reserves data of `USDC` on Solana. Test the API [here](https://ide.bitquery.io/USDC-Stablecoin-reserves-on-Solana).
 
-```
+```graphql
 {
   Solana {
     TokenSupplyUpdates(
@@ -68,7 +68,7 @@ Below API query will give you realtime reserves data of `USDC` on Solana. Test t
 
 Below API query will give you realtime reserves data of `USDT` on Tron. Test the API [here](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Tron).
 
-```
+```graphql
 query MyQuery {
   Tron(dataset: combined) {
     Transfers(

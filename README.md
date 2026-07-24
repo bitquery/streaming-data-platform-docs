@@ -54,4 +54,18 @@ npx docusaurus-prince-pdf -u http://localhost:3000/docs/intro
 
 ### Contributing to Docs
 
-Read contribution guidlines [here](https://docs.bitquery.io/docs/contribution-guidelines) 
+Read contribution guidlines [here](https://docs.bitquery.io/docs/contribution-guidelines)
+
+### Link checking
+
+```
+$ yarn build          # emit build/ so the checker can validate against real routes
+$ yarn check-links    # fails on broken internal links / dead URL schemes
+```
+
+`scripts/check-links.mjs` validates links against the routes Docusaurus actually emits (it reads `build/` when present), so it correctly resolves `slug:` front matter and extensionless relative links. It also runs in CI after the build.
+
+### Repo notes
+
+- `b5e8420ece5b4116b64bb3214828f286.txt` and `baidu_verify_codeva-*.html` are third-party search-engine site-verification files. Do not delete them.
+- The site is served in production by nginx (`nginx/default.conf`, `Dockerfile`), not Netlify. Redirects and 404 handling live in that nginx config.

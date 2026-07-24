@@ -10,7 +10,7 @@ In this section we'll have a look at some examples using the Tron Transactions A
 
 The subscription query below fetches the transactions on the Tron network for the wallet address `TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf`.
 
-```
+```graphql
 subscription {
   Tron {
     Transactions(

@@ -10,7 +10,7 @@ In this section we'll have a look at some examples using the Polygon (MATIC) Tra
 
 The subscription query below fetches the whale transactions on the MATIC network. We have used USDC address `0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359`. You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDC-on-matic)
 
-```
+```graphql
 subscription{
   EVM(network: matic) {
     Transfers(
@@ -43,7 +43,7 @@ subscription{
 
 This websocket retrieves transfers where the sender is a particular address `0x1A8f43e01B78979EB4Ef7feBEC60F32c9A72f58E`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {is: "0x1A8f43e01B78979EB4Ef7feBEC60F32c9A72f58E"}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/Sender-is-a-particular-address_2)
 
-```
+```graphql
 subscription {
   EVM(network: matic) {
     Transfers(
@@ -75,7 +75,7 @@ subscription {
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on Polygon (MATIC) network. You can run the query [here](https://ide.bitquery.io/NFT-Token-Transfers-API_3)
 
-```
+```graphql
 subscription {
   EVM(network: matic) {
     Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {

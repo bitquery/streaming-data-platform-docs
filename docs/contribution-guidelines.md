@@ -58,3 +58,14 @@ If you need help contributing to the Bitquery documentation, please feel free to
 • Be sure to write descriptive commit messages.
 
 • Be responsive to feedback from the maintainers of the Bitquery documentation repository.
+
+## Documentation maintenance & governance
+
+To keep the docs answering what users actually ask, maintainers follow a few standing rules:
+
+- **Docs-first support.** Any question answered twice in support (Telegram/tickets) becomes a new or updated docs page within a week — the answer is already written, converting it takes ~30 minutes. Share the docs link, not a one-off reply.
+- **Capture IDE snippets.** A saved `ide.bitquery.io` query shared as a support answer should be embedded in the relevant docs page, not left only in chat.
+- **Evergreen facts.** Never embed point-in-time numbers or dated tables in a page. Express retention as rolling windows ("last 30 days", "since the chain was onboarded"). Any unavoidable absolute date lives in one place — the [Data Coverage & Retention](/docs/graphql/data-coverage-retention/) matrix — and is linked from elsewhere.
+- **Ship docs with the feature.** A new chain, cube, stream, or topic ships with its docs page on day one, including its row in the retention matrix.
+- **Link hygiene.** `yarn check-links` runs in CI and must pass. Use root-relative internal links with a trailing slash; never absolute `https://docs.bitquery.io/...` self-links. Run `yarn check-links --report` periodically to review orphaned pages, dead ends, thin pages, and untagged code fences.
+- **Page checklist.** Purpose clear in the first two sentences; every query explained (when to use it, key fields, a run-in-IDE link, a note on the response); a `## Next steps` block of related links; an `<FAQ/>` block on high-traffic pages (it emits FAQPage JSON-LD for AI answer engines).

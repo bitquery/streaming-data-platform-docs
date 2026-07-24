@@ -13,7 +13,7 @@ Protocols like Uniswap have pairs or pools. In this section we will see how we c
 
 This query can be used to get all trade metrics (trade amount, TX count) for a given pair ( in this case WETH/CaL) on a given EVM network over a particular time period.
 
-```
+```graphql
 query ($network: evm_network, $token: String!, $token2: String!) {
   EVM(network: $network, dataset: combined) {
     Unique_Buyers: DEXTrades(

@@ -9,7 +9,7 @@ When using Bitquery GraphQL streams via WebSocket, you need to implement reconne
 
 This is how it would look with below sample implemention of a silent disconnect-reconnect scenario.
 
-![](/img/ApplicationExamples/disconnect.png)
+![WebSocket disconnect and reconnect flow](/img/ApplicationExamples/disconnect.png)
 
 ## Best Practices
 

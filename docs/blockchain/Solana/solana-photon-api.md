@@ -26,7 +26,7 @@ The query uses a `joinInstructions` function to filter trades that specifically 
 
 [Run Query](https://ide.bitquery.io/Trades-Executed-on-Photon)
 
-```
+```graphql
 {
   Solana {
     DEXTrades(limit: {count: 100}, orderBy: {descending: Block_Time}) {
@@ -92,7 +92,7 @@ The query uses a `joinInstructions` function to filter trades that specifically 
 The query will get latest trades for a Solana pair executed via Photon
 You can find the query [here](https://ide.bitquery.io/Trades-of-a-Pair-Executed-on-Photon)
 
-```
+```graphql
 {
   Solana {
     DEXTrades(

@@ -108,7 +108,7 @@ By setting, `Transfers(limit: {count: 1} orderBy: {ascending: Block_Time})` we f
 
 You can run the query [here](https://ide.bitquery.io/Fidenza-725)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive) {
     Transfers(
@@ -149,7 +149,7 @@ query MyQuery {
 
 Check past (churned) token holders of a NFT token [using following query](https://ide.bitquery.io/past-token-holder-of-a-token_1).
 
-```
+```graphql
 {
   EVM(dataset: combined) {
     BalanceUpdates(

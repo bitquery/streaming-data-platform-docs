@@ -108,7 +108,7 @@ In this section we will create a simple UI using HTML, CSS and JavaScript to mak
 
 To run the project run the following command:
 
-```
+```bash
 node index.js
 ```
 

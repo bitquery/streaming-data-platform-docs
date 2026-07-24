@@ -40,7 +40,7 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
 You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-dexcsreener#)
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     DEXTradeByTokens(
@@ -80,7 +80,7 @@ subscription MyQuery {
 
 This query will give you the latest Price of a specified token using Trading API. Here is the [saved query link](https://ide.bitquery.io/token-usd-price-using-trading-api_1)
 
-```
+```graphql
 query MyQuery {
   Trading {
     Pairs(
@@ -121,7 +121,7 @@ This query fetches the Open, High, Low, and Close (OHLC) price data (USD-quoted)
 
 You can find the query [here](https://ide.bitquery.io/ohlc-of-a-solana-token-pair-1-hour-interval)
 
-```
+```graphql
 query MyQuery {
   Trading {
     Pairs(
@@ -272,7 +272,7 @@ Please change the `Block: {Time: {since: "2024-08-15T04:19:00Z"}}` accordingly w
 Keep in mind you cannot use this as a websocket subscription becuase aggregate functions like `sum` doesn't work well in `subscription`.
 You can find the query [here](https://ide.bitquery.io/Dexscreener--All-in-One-query_1)
 
-```
+```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(

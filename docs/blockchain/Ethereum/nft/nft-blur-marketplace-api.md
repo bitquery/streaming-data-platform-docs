@@ -11,7 +11,7 @@ The NFT Blur Marketplace API provides a wide range of data related to the BLUR N
 
 The Blur Marketplace supports the [Seaport protocol](https://opensea.io/blog/articles/introducing-seaport-protocol), which can be utilize to retrieve the most recent Blur trades - [query](https://ide.bitquery.io/Latest-10-Trades-on-Blur).
 
-```
+```graphql
 query MyQuery {
   EVM {
     DEXTrades(
@@ -78,7 +78,7 @@ We can also identify the most traded NFT on the Blur Marketplace using this API.
 
 In the following [query](https://ide.bitquery.io/Most-traded-NFT-on-Blur-marketplace), we aggregate the data based on buyers, sellers, NFTs, and trade volume, and then sort the results based on the trade count. This highlights the most active NFTs in the marketplace.
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     DEXTrades(
@@ -126,7 +126,7 @@ query MyQuery {
 
 Here, the [query](https://ide.bitquery.io/Total-buy-sell-of-an-NFT-token-onBLUR) gather total trades, trade volume, unique buyers, and sellers for a specific NFT token on Blur Marketplace - in this case, the [Nakamigos NFT token](https://explorer.bitquery.io/ethereum/token/0xd774557b647330c91bf44cfeab205095f7e6c367).
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     DEXTrades(
@@ -168,7 +168,7 @@ query MyQuery {
 
 In [this](https://ide.bitquery.io/Top-buyers-of-NFTs-onBLUR) query, we fetch the top buyers on the BLUR marketplace. We aggregate based on NFTs bought, unique transactions, and then sort them based on the number of trades
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     DEXTrades(
@@ -218,7 +218,7 @@ query MyQuery {
 
 In [this](https://ide.bitquery.io/Specific-buyer-stats-for-an-NFT-onBLUR) query, we are getting details for a specific address on Blur NFT marketplace. We are also getting the first and last trade dates for the address.
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     DEXTrades(
@@ -281,7 +281,7 @@ Blur uses [Blend protocol](https://www.paradigm.xyz/2023/05/blend) for NFT loans
 
 We're using LogHeader instead of Log → SmartContract for queries due to a [delegated proxy contract](https://medium.com/coinmonks/proxy-pattern-and-upgradeable-smart-contracts-45d68d6f15da).
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -353,7 +353,7 @@ We're using LogHeader instead of Log → SmartContract for queries due to a [del
 
 [This](https://ide.bitquery.io/Latest-loans-for-specific-NFTtoken) query retrieves all loans linked to the [MutantApeYachtClub](https://explorer.bitquery.io/ethereum/token/0x60e4d786628fea6478f785a6d7e704777c86a7c6) collection on the BLUR market. We filter event arguments in the smart contract and sort by block time
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -429,7 +429,7 @@ Same as previous queries, this query will return details about the block, transa
 
 Using argument filtering, [this](https://ide.bitquery.io/Latest-Loans-for-a-specificlender) query fetches the latest loans for a specific lender address. The same method can be applied to find loans for a specific borrower address - [query](https://ide.bitquery.io/Latest-Loans-for-a-specificborrower-on-Blur-marketplace).
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -505,7 +505,7 @@ Similar to previous queries, this query will provide details about the block, tr
 
 If we want to track loans above a specific amount on the Blur marketplace, we can use the following [query](https://ide.bitquery.io/Loans-above-a-specific-amount-on-the-Blur-NFT-marketplace).
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -571,7 +571,7 @@ If we want to track loans above a specific amount on the Blur marketplace, we ca
 
 [This](https://ide.bitquery.io/Loan-history-for-specific-NFTID) query retrives the loan history for a specific NFT ID on the BLUR market, by matching event arguments to a particular collection address and tokenId.
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -647,7 +647,7 @@ The response includes details about the block, transaction, log, and event argum
 
 The Blur's Blend protocol utilizes LienID as a primary key to track individual loan details. [This](https://ide.bitquery.io/Get-loan-details-for-specificlienId) query fetches details for a specific LienID across different events.
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -718,7 +718,7 @@ The response will include details about the block, transaction, log, and event a
 
 Refinancing in NFTs refers to securing a new loan using an NFT as collateral to repay an existing loan. The following [query](https://ide.bitquery.io/loan-refinance-on-Blur) retrieves the latest refinance events on BLUR.
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -782,7 +782,7 @@ Refinancing in NFTs refers to securing a new loan using an NFT as collateral to 
 
 To retrieve all refinance loans for a specific NFT collection, we filter Refinance event arguments in [this](https://ide.bitquery.io/All-refinance-loans-for-specificNFT-collection) query
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -852,7 +852,7 @@ To retrieve all refinance loans for a specific NFT collection, we filter Refinan
 
 For loan repayment transactions on the BLUR market, use the [following](https://ide.bitquery.io/Loan-repayment-of-blur-marketplace)  query. It filters 'Repay' events and sets the smart contract address to the Blur: Blend address
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -926,7 +926,7 @@ The response contains details about the block, transaction, log, and arguments, 
 
 The 'StartAuction' event is triggered when an NFT auction starts on the  Blur : [Blend Contract](https://explorer.bitquery.io/ethereum/smart_contract/0x29469395eaf6f95920e59f858042f0e28d98a20b/events). The following [query](https://ide.bitquery.io/Auction-on-blur-marketplace) monitors these events. If you want to track auctions for a specific NFT, modify the [query](https://ide.bitquery.io/Auctions-for-specific-lienID) to filter for a specific LienID in the 'Arguments' field.
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -990,7 +990,7 @@ The 'StartAuction' event is triggered when an NFT auction starts on the  Blur : 
 
 Locked NFTs are temporarily non-transferrable and can be traded or transferred after the lock period. These NFTs are often cheaper than non-locked. The following [query](https://ide.bitquery.io/Locked-NFT-bought-on-Blur-marketplace) retrieves the latest trades of locked NFTs by filtering for the 'BuyLocked' event under the Blur : [Blend Contract](https://explorer.bitquery.io/ethereum/smart_contract/0x29469395eaf6f95920e59f858042f0e28d98a20b/events). 
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -1055,7 +1055,7 @@ Locked NFTs are temporarily non-transferrable and can be traded or transferred a
 On the BLUR market, the 'OfferCancelled' event initiates when an offer is withdrawn or cancelled. The following [query](https://ide.bitquery.io/Latest-Cancelled-offers-on-Blur-NFT-marketplace) fetches recent 'OfferCancelled' events under the Blur : [Blend Contract](https://explorer.bitquery.io/ethereum/smart_contract/0x29469395eaf6f95920e59f858042f0e28d98a20b/events). 
 .
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(
@@ -1119,7 +1119,7 @@ On the BLUR market, the 'OfferCancelled' event initiates when an offer is withdr
 
 When a seizure event happens, control of the NFT shifts to the lender or an enforcing third party. The  [query](https://ide.bitquery.io/Latest-Seized-NFTs-on-Blur-marketplace) filters transactions for the 'seize' event on the Blur : [Blend Contract](https://explorer.bitquery.io/ethereum/smart_contract/0x29469395eaf6f95920e59f858042f0e28d98a20b/events) to track these
 
-```
+```graphql
 {
   EVM(dataset: combined, network: eth) {
     Events(

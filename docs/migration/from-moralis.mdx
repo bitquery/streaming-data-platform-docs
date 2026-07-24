@@ -1,0 +1,64 @@
+---
+title: "Migrating from Moralis to Bitquery"
+description: "Map common Moralis calls — token prices, transfers, balances, and holders — to Bitquery GraphQL cubes and streams."
+sidebar_position: 10
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Migrating from Moralis to Bitquery
+
+A concept map for teams moving REST-style Moralis calls to Bitquery's GraphQL cubes. Instead of one endpoint per resource, you compose a single GraphQL query against the cube you need.
+
+:::note
+Capability comparisons below describe Bitquery's model; verify exact coverage for your chains against the [coverage matrix](/docs/graphql/data-coverage-retention/).
+:::
+
+## Concept mapping
+
+| Moralis (REST) | Bitquery (GraphQL) |
+|---|---|
+| Get wallet token balances | `EVM { Balances(...) }` — [Balances](/docs/blockchain/Ethereum/balances/balance-api/) |
+| Get wallet token transfers | `EVM { Transfers(...) }` — [Transfers](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api/) |
+| Get token price | [Crypto Price API](/docs/trading/crypto-price-api/introduction/) |
+| Get token holders | `EVM { Holders(...) }` — [Holders](/docs/blockchain/Ethereum/token-holders/token-holder-api/) |
+| Get DEX trades / swaps | `EVM { DEXTrades / DEXTradeByTokens }` — [DEX trades](/docs/blockchain/Ethereum/dextrades/dex-api/) |
+| Streams (webhooks) | [WebSocket subscriptions](/docs/subscriptions/websockets/) or [Kafka](/docs/streams/kafka-operations/) |
+
+## Example: wallet token transfers
+
+```graphql
+{
+  EVM(network: eth, dataset: combined) {
+    Transfers(
+      where: { Transfer: { Sender: { is: "0x..." } } }
+      orderBy: { descending: Block_Time }
+      limit: { count: 100 }
+    ) {
+      Block { Time }
+      Transfer { Amount Currency { Symbol SmartContract } Receiver }
+      Transaction { Hash }
+    }
+  }
+}
+```
+
+## What differs
+
+- **One flexible query vs many endpoints.** You select exactly the fields you need across a cube, rather than calling a fixed-shape endpoint.
+- **Dataset selection.** Choose `realtime` / `combined` explicitly for live vs historical data — see the [coverage matrix](/docs/graphql/data-coverage-retention/).
+- **Streaming.** Real-time delivery is via WebSocket/Kafka/gRPC rather than webhooks. **[confirm your delivery needs]**
+
+<FAQ
+  items={[
+    { q: "How do I get wallet balances like Moralis?", a: "Use the EVM Balances cube with an Address filter. Add a Currency filter for a single token." },
+    { q: "Does Bitquery have webhooks like Moralis Streams?", a: "Real-time delivery is via WebSocket subscriptions, Kafka, or Solana gRPC rather than webhooks. Choose based on throughput and filtering needs." },
+    { q: "How far back does historical data go?", a: "It depends on the chain and cube — see the Data Coverage & Retention matrix." },
+  ]}
+/>
+
+## Next steps
+
+- [Getting started](/docs/start/first-query/)
+- [Data Coverage & Retention](/docs/graphql/data-coverage-retention/)
+- [First query](/docs/start/first-query/)

@@ -27,7 +27,7 @@ For monitoring the balance changes that result from these transfers, see our **[
 
 [Run Stream >](https://ide.bitquery.io/Subscribe-to-the-all-transfers-on-Solana)
 
-```
+```graphql
 subscription {
   Solana(network: solana) {
     Transfers {
@@ -60,7 +60,7 @@ subscription {
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to all NFT token transfers. You can run the query [here](https://ide.bitquery.io/Subscribe-to-the-latest-NFT-transfers-on-Solana)
 
-```
+```graphql
 subscription {
   Solana {
     Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {
@@ -94,7 +94,7 @@ subscription {
 
 One of the most common types of transfers on Solana are SPL token transfers. Let's see an example to get the latest SPL token transfers using our API. Today we are taking an example of JUPITER token transfers. The contract address for the JUPITER token is `JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN`. You can find the query [here](https://ide.bitquery.io/SPL-transfers-websocket_1)
 
-```
+```graphql
 subscription {
   Solana {
     Transfers(
@@ -127,7 +127,7 @@ subscription {
 
 This query will help you fetch transfers for a particular transaction signature `3x3fbg3zfTvcfwEiDee5Z5NnQP2Hr7cgZZ9bMxNYtYKi6fMN9gT6xpdUzRb2FjfCkGXMPvhkt3bW61CHCNaWwdQi`. Check the query [here](https://ide.bitquery.io/Query-transfer-by-sig)
 
-```
+```graphql
 {
   Solana(dataset: realtime) {
     Transfers(
@@ -168,7 +168,7 @@ This query will help you fetch transfers for a particular transaction signature 
 
 This websocket retrieves transfers where the sender is a particular address `2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {Address: {is: "2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc"}}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/transfers-where-sender-is-the-specified-address_1)
 
-```
+```graphql
 subscription {
   Solana {
     Transfers(
@@ -275,7 +275,7 @@ subscription {
 
 This query fetches you the recent 10 transfers of a specific wallet address `9nnLbotNTcUhvbrsA6Mdkx45Sm82G35zo28AqUvjExn8`. Try the query [here](https://ide.bitquery.io/Transfers-of-a-wallet_1).
 
-```
+```graphql
 {
   Solana {
     Transfers(

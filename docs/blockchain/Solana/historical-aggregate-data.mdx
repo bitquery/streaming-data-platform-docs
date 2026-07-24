@@ -315,7 +315,7 @@ We also use `PriceAsymmetry` and `AmountInUSD` in combination to filter outliers
 Read more about quantiles [here](/docs/graphql/metrics/quantile/)
 You can run the query [here](https://ide.bitquery.io/Price-ATH-query)
 
-```
+```graphql
 {
   Solana(dataset: combined) {
     DEXTradeByTokens(
@@ -334,7 +334,7 @@ You can run the query [here](https://ide.bitquery.io/Price-ATH-query)
 Fetches a Solana token’s ATH price, ATH date, and price change percentages over the past 24h, 7d, and 30d using Bitquery Solana APIs.
 Try the [query to get ATH price, ATH date, price change](https://ide.bitquery.io/ath-with-price-delta_1).
 
-```
+```graphql
 query ($token: String) {
   Solana(dataset: combined) {
     DEXTradeByTokens(

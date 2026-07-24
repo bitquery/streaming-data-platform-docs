@@ -6,7 +6,7 @@ description: "Get crypto trading pair prices, volume, and OHLC with Bitquery Tra
 
 The Pairs cube provides trading data for a base token traded against a quote token on a particular DEX or protocol.
 
-```
+```graphql
 {
   Trading {
     Pairs(

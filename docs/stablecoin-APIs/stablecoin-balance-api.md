@@ -14,7 +14,7 @@ We are going to particularly deep-dive into how to get Stablecoin Balance data i
 
 Below stream will give you balance of `9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM` for `FDUSD` on Solana. Test the query [here](https://ide.bitquery.io/FDUSD-balance-of-an-address).
 
-```
+```graphql
 query MyQuery {
   Solana {
     BalanceUpdates(
@@ -67,7 +67,7 @@ query {
 
 Below query will give you **USDT** balance for address `TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ` on Tron. Test the query [here](https://ide.bitquery.io/Stablecoin-Balance-of-an-Address).
 
-```
+```graphql
 query MyQuery {
   Tron(dataset: combined) {
     BalanceUpdates(
@@ -95,7 +95,7 @@ Token holder API examples can be found [here](/docs/blockchain/Ethereum/token-ho
 
 [This query](https://ide.bitquery.io/top-100-holders-of-USDC-token-on-Solana) returns the top 100 holders of a particular Stablecoin.
 
-```
+```graphql
 query MyQuery {
   Solana {
     BalanceUpdates(

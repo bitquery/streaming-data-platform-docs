@@ -11,7 +11,7 @@ Smart contract creators can use these queries to track the deployment of their o
 
 This subscription will return information on each new smart contract created on Ethereum. You can create a [websocket](/docs/subscriptions/websockets/) to monitor the same in real-time.
 
-```
+```graphql
 subscription {
   eth_creates: EVM(network: eth) {
     creates: Calls(
@@ -50,7 +50,7 @@ This subscription has information on
 This query below, will return the number of new smart contracts created on the Ethereum and Binance Smart Chain networks since a particular date. It will also return the date of each day on which new smart contracts were created.
 You can find the query [here](https://ide.bitquery.io/ETHBSC-SC-creates-count-over-date)
 
-```
+```graphql
 query {
   eth_creates: EVM(dataset: archive network: eth) {
     creates: Calls(
@@ -83,7 +83,7 @@ query {
 This query will return the most recent transaction that created the token contract. The `Output` field of the Call object in the transaction contains the encoded bytecode of the contract. Replace `0xc923D39fA2d97fb4B660Fc66DAdB1421605975E0` with the token contract address that you want to get the code for.
 You can find the query [here](https://ide.bitquery.io/ByteCode-of-A-Token)
 
-```
+```graphql
 {
   eth_creates: EVM(dataset: archive, network: eth) {
     creates: Calls(
@@ -114,7 +114,7 @@ You can use calls api to get smart contract creator or deployer of a smart contr
 
 Try this query [here](https://ide.bitquery.io/creator--deployer-of-an-address_1).
 
-```
+```graphql
 {
   EVM(dataset: combined) {
     Calls(
@@ -144,7 +144,7 @@ For example,
 
 You can run the query [here](https://ide.bitquery.io/Get-Contract-Type-in-v2)
 
-```
+```graphql
  query MyQuery {
   EVM(network: eth) {
     Transfers(

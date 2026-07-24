@@ -25,7 +25,7 @@ In this section we will see how to get data on Meteora DAMM v2 trades in real-ti
 This query subscribes to real-time trades on the Meteora DAMM v2 (Dynamic Automated Market Maker) on the Solana blockchain by filtering using the program address `cpamdpZCGKUy5JxQXB4dcpGPiikHawvSWAd6mEn1sGG`.
 You can run the query [here](https://ide.bitquery.io/Real-time-trades-on-MeteoraDAMMv2-DEX-on-Solana)
 
-```
+```graphql
 subscription {
   Solana {
     DEXTrades(
@@ -99,7 +99,7 @@ The mint addresses for the tokens being used in the pool are listed, indicating 
 
 You can test the query [here](https://ide.bitquery.io/Track-Latest-created-pools-on-Meteora-DAMM-v2)
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -170,7 +170,7 @@ You can use the following query to get the latest price of a token on Meteora DA
 
 You can run this query using this [link](https://ide.bitquery.io/latest-price-of-a-token-on-Damm-v2).
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -196,7 +196,7 @@ You can use the following subscription to get real-time price updates of a token
 
 You can run this query using this [link](https://ide.bitquery.io/Realtime-Price-feed-of-a-Token-on-Meteora-DAMM-v2).
 
-```
+```graphql
 subscription{
   Solana {
     DEXTradeByTokens(
@@ -224,7 +224,7 @@ Only use this API as a query and not as a subscription websocket, as Aggregates 
 
 You can run this query [here](https://ide.bitquery.io/Meteora-DAMM-v2-OHLC-API).
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -258,7 +258,7 @@ Keep in mind you can use this API only as a query and not a subscription websock
 
 You can run the query [here](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-Token-on-Meteora-DAMM-v2-DEX_1)
 
-```
+```graphql
 query TopTraders($token: String) {
   Solana {
     DEXTradeByTokens(
@@ -295,7 +295,7 @@ This query fetches the traded volume, buy volume and sell volume of a specific t
 
 Try out the API [here](https://ide.bitquery.io/Get-trading-volume-buy-volume-sell-volume-of-a-token_2).
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(

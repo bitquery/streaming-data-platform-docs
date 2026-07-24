@@ -7,6 +7,7 @@
     "start": "node scripts/patch-gray-matter.js && docusaurus start",
     "dev": "node scripts/patch-gray-matter.js && docusaurus start",
     "build": "node scripts/patch-gray-matter.js && docusaurus build",
+    "check-links": "node scripts/check-links.mjs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
