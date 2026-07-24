@@ -59,7 +59,7 @@ If you are migrating node code: your `eth_getLogs` `address` filter maps to `Log
 ## Datasets and history
 
 - **`realtime`** (the default) — a rolling window of recent blocks whose depth varies; don't assume it, measure it with the probe below.
-- **`archive`** — event history back to when Bitquery indexing began for Robinhood; its head lags the chain by minutes.
+- **`archive`** — deep event history, retained up to roughly the **last 3 months** (Robinhood is a newer chain, so today the archive holds its complete history; older data ages out as the cap applies); its head lags the chain by minutes.
 - **`combined`** — archive + realtime union; the safe choice for fixed windows (24h, 7d).
 
 Need bulk history beyond what you want to page through the API? Bitquery can also provide **historical data exports** — [contact support](https://bitquery.io/forms/api).
@@ -217,6 +217,10 @@ subscription {
 
 :::tip WebSocket connection
 Connect to `wss://streaming.bitquery.io/graphql?token=YOUR_TOKEN` with the `graphql-transport-ws` subprotocol (`connection_init` → `connection_ack` → `subscribe`). See [WebSocket authentication](/docs/authorization/websocket/). Any subscription on this page also runs as a query — add `limit` and `orderBy` and drop the `subscription` keyword.
+:::
+
+:::tip Prefer Kafka for the firehose
+Consuming the full event feed continuously? Bitquery also delivers Robinhood data as **Kafka streams** — decoded transactions, calls, and events on the protobuf topic `robinhood.transactions.proto` — with consumer-group scaling and replay. See [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/).
 :::
 
 ---
@@ -698,7 +702,7 @@ Use `Log.Signature.SignatureHash` with the keccak hash of the event signature, *
 
 ### How far back does Robinhood events data go?
 
-`archive` reaches back to when Bitquery indexing began for the network, and `realtime` holds a rolling recent window — measure either with the [window probe](#check-the-events-window). For bulk history, Bitquery can additionally provide data exports on request.
+`archive` retains up to roughly the last 3 months of events (on a newer chain like Robinhood that is currently its complete history), and `realtime` holds a rolling recent window — measure either with the [window probe](#check-the-events-window). For older or bulk history, Bitquery can provide data exports on request.
 
 ### How do I get every event a specific transaction emitted?
 
