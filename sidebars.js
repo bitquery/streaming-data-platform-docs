@@ -849,12 +849,16 @@ const sidebars = {
             slug: "/blockchain/robinhood",
             title: "Robinhood APIs",
             description:
-              "APIs for accessing Robinhood trades, transfers, liquidity, slippage, balances, and meme coin token launches via Bitquery Trading and EVM APIs.",
+              "APIs for accessing Robinhood trades, transfers, liquidity, slippage, events, balances, and meme coin token launches via Bitquery Trading and EVM APIs.",
           },
           items: [
             "blockchain/robinhood/robinhood-trades",
             "blockchain/robinhood/robinhood-transfers",
             "blockchain/robinhood/robinhood-liquidity",
+            "blockchain/robinhood/robinhood-events-api",
+            "blockchain/robinhood/robinhood-calls-api",
+            "blockchain/robinhood/robinhood-balances-api",
+            "blockchain/robinhood/robinhood-token-holders-api",
             "blockchain/robinhood/robinhood-meme-coin-launches",
             "blockchain/robinhood/flap-sh-api",
             "blockchain/robinhood/bags-fm-api",

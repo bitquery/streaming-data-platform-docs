@@ -872,6 +872,10 @@ subscription {
 Connect to `wss://streaming.bitquery.io/graphql?token=YOUR_TOKEN` with the `graphql-transport-ws` subprotocol (`connection_init` → `connection_ack` → `subscribe`). See [WebSocket authentication](/docs/authorization/websocket/).
 :::
 
+:::tip Prefer Kafka for the firehose
+Consuming pool updates at firehose scale? Bitquery also delivers Robinhood DEX data as **Kafka streams** (protobuf topic `robinhood.dextrades.proto`) with consumer-group scaling and replay. See [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/).
+:::
+
 ---
 
 ## Slippage and price impact

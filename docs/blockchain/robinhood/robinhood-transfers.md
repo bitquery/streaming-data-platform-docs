@@ -149,6 +149,10 @@ subscription {
 Connect to `wss://streaming.bitquery.io/graphql?token=YOUR_TOKEN` with the `graphql-transport-ws` subprotocol (`connection_init` → `connection_ack` → `subscribe`). Events arrive in per-block batches. See [WebSocket authentication](/docs/authorization/websocket/).
 :::
 
+:::tip Prefer Kafka for the firehose
+Consuming all Robinhood transfers continuously? Bitquery also delivers this data as **Kafka streams** (protobuf topic `robinhood.tokens.proto`) with consumer-group scaling and replay. See [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/).
+:::
+
 ### Stream whale transfers (USD threshold)
 
 Alert when a successful transfer exceeds a USD size. Exclude the zero address to skip wrap/unwrap and mint/burn noise. Because USD is populated for native ETH, this is effectively a **large ETH move alert**.
