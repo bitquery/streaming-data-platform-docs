@@ -18,7 +18,7 @@ Need help implementing stablecoin price APIs? Contact our support team or join o
 
 [Run Stream](https://ide.bitquery.io/stablecoin-1-second-price-stream)
 
-```
+```graphql
 subscription {
   Trading {
     Tokens(
@@ -76,7 +76,7 @@ subscription {
 
 [Run Query](https://ide.bitquery.io/5-minute-price-change-stablecoin-API)
 
-```
+```graphql
 {
   Trading {
     Tokens(
@@ -150,7 +150,7 @@ This query compares USDT prices across different blockchain networks in real-tim
 
 [Run Query](https://ide.bitquery.io/usdt-latest-price-arbitrage)
 
-```
+```graphql
 {
   Trading {
     Tokens(

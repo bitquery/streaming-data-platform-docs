@@ -1,0 +1,75 @@
+---
+title: "Kafka Operations Cookbook"
+description: "Connect, authenticate, and operate Bitquery Kafka consumers — offsets, timestamps, retention, billing, and schema gotchas."
+sidebar_position: 3
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Kafka Operations Cookbook
+
+Practical operating guidance for Bitquery Kafka consumers: how to connect and authenticate, how offsets and timestamps behave, what retention to expect, and the schema traps that trip up new integrators. For the streaming concepts and topic catalogue, start with [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/).
+
+:::caution Verify connection details for your account
+Broker hosts, ports, and credential rules are provisioned per account — use the values in your onboarding details.
+:::
+
+## Connection recipe
+
+- **Port:** `9092`
+- **Security protocol:** `SASL_PLAINTEXT` with your Kafka **username and password** (SASL/PLAIN) — no client TLS certificates required.
+- **Consumer group id:** use any stable `group.id` for your consumer.
+- Credentials for the chain topics (e.g. `solana.*`) and the `trading.*` topic family may differ — use the credential issued for the family you're consuming.
+
+See the language-specific starters: [Python](/docs/streams/protobuf/kafka-protobuf-python/), [JavaScript](/docs/streams/protobuf/kafka-protobuf-js/), [Go](/docs/streams/protobuf/kafka-protobuf-go/).
+
+## Retention: Kafka is not a historical firehose
+
+Kafka delivers **realtime data plus a small backfill window (hours, not history)**. A fresh consumer sees recent messages forward — not the chain from genesis. For anything older, use GraphQL (within its [retention window](/docs/graphql/data-coverage-retention/)) or a [cloud/S3 export](/docs/cloud/). Two independent integrators have assumed Kafka replays genesis; it does not.
+
+## Offsets and restart behavior
+
+Two common restart modes:
+
+- **Skip the backlog (only new messages):** reset the group to the latest offset — e.g. `auto.offset.reset=latest`, or an explicit reset to end on startup.
+- **Resume where you stopped (backfill the gap):** reuse the **same `group.id`** and resume from committed offsets. Commit periodically — but **not too frequently**, since very frequent commits create broker backpressure.
+- If you see **`Offset out of range`** (your committed offset aged out of the retention window), reset to `latest` and continue.
+
+## Timestamps (especially Solana)
+
+- On Solana shred streams, a message carries its **slot**, but the **block timestamp is only populated on the final message of a block** (messages are pushed before the block finalizes). **Do not treat an empty/zero `BlockHeader.Timestamp` on non-final messages as staleness.**
+- Block time is rounded and propagation adds a small delay, so an event can carry a timestamp a second or two before it reaches your consumer. Budget for this when computing "latency".
+
+## No server-side filtering
+
+Kafka topics are **firehoses** — there is no server-side filter. Consume the topic and filter client-side (by mint, program, pair, address, etc.). If you need server-side filtering, use GraphQL subscriptions or Solana gRPC (which requires at least one filter) instead.
+
+## Billing: what counts as a "stream"
+
+Each **environment / consumer group** counts as its own stream. Running the same topic from `dev`, `staging`, and `prod` (three consumer groups) counts as three streams. Kafka capacity is billed separately from GraphQL query points. See [How Billing Works](/docs/plans/how-billing-works/).
+
+## Schema gotchas
+
+- In `BlockHeader`, the fields **`TxHash`, `Root`, and `ReceiptHash` are block-level Merkle roots — not a transaction hash.** The actual transaction hash lives on the transaction record (`TransactionHeader`), not the block header. The `TxHash` name is a common source of confusion.
+- Message nesting generally goes block → transaction → event; consult the [protobuf schema](/docs/streams/protobuf/kafka-trading-topics-protobuf/) for the exact shape of each topic.
+
+## Diagnosing lag
+
+If messages arrive late or pile up, check **consumer lag first** — it's usually the client (slow processing, too few partitions consumed, large payloads on some chains) rather than the broker. Scale consumers or parallelize partition consumption.
+
+<FAQ
+  items={[
+    { q: "Does Bitquery Kafka include historical data?", a: "No. Kafka streams realtime data plus a few hours of backfill. A fresh consumer gets recent messages forward, not the chain from genesis. Use GraphQL (within retention) or a cloud/S3 export for history." },
+    { q: "Why is BlockHeader.Timestamp zero on some Solana messages?", a: "On shred streams the block timestamp is only set on the final message of a block; earlier messages in the same block carry the slot but not the timestamp. Don't treat that as staleness." },
+    { q: "How do I resume my consumer from where it stopped?", a: "Reuse the same group.id and resume from committed offsets; commit periodically but not too often. To skip the backlog instead, reset the group to the latest offset." },
+    { q: "Can I filter Kafka messages server-side?", a: "No. Kafka topics are firehoses with no server-side filtering — filter client-side. For server-side filtering use GraphQL subscriptions or Solana gRPC." },
+    { q: "Does the TxHash field give me the transaction hash?", a: "Not in BlockHeader — there TxHash/Root/ReceiptHash are block-level Merkle roots. The real transaction hash is on the transaction record." },
+  ]}
+/>
+
+## Next steps
+
+- [Kafka Streaming Concepts & topic list](/docs/streams/kafka-streaming-concepts/)
+- [Protobuf schema reference](/docs/streams/protobuf/kafka-trading-topics-protobuf/)
+- [Data Coverage & Retention](/docs/graphql/data-coverage-retention/)
+- [Common errors — Kafka auth](/docs/start/errors/#kafka-auth-errors)

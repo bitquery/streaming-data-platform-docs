@@ -11,7 +11,7 @@ In this section we'll have a look at some examples using the BSC NFT API.
 This query subscribes you to the real time non-fungible token (NFT) transfers of a specific nft contract on the BSC network.
 You can find the query [here](https://ide.bitquery.io/Track-realtime-NFT-Transfers-of-a-specific-NFT-on-BSC-chain)
 
-```
+```graphql
 subscription {
   EVM(network: bsc) {
     Transfers(

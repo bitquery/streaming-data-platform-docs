@@ -10,7 +10,7 @@ Before any information can be written on a block, it must first go through the m
 
 By using the following query format, you can access all information about broadcasted transactions, including events, trades, and balances:
 
-```
+```graphql
 
 query{
   EVM(mempool: true){
@@ -21,7 +21,7 @@ query{
 ```
 And below format for subscriptions
 
-```
+```graphql
 subscription {
   EVM(mempool: true) {
   }

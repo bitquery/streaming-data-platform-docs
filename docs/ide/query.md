@@ -14,3 +14,5 @@ You can go to the following entries to learn more:
 - [Share Query](/docs/ide/share)
 - [Save Query Privately](/docs/ide/private)
 - [Search Queries](/docs/ide/search)
+
+Each run shows the **points** it consumed, so you can gauge query cost before scaling up — see [how billing works](/docs/plans/how-billing-works/). Make sure your token targets the V2 endpoint (`streaming.bitquery.io/graphql`); see [how to generate a token](/docs/authorization/how-to-generate/).

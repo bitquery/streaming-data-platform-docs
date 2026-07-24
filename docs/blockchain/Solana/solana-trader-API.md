@@ -68,7 +68,7 @@ Change the token mint (`Trade.Currency.MintAddress`), quote currency (`Trade.Sid
 
 Below query will give you the trades of the wallets present in `addressList` in realtime. Try the query [here](https://ide.bitquery.io/Trades-of-wallets-in-realtime_1).
 
-```
+```graphql
 subscription MyQuery($addressList: [String!]) {
   Solana {
     DEXTrades(
@@ -126,7 +126,7 @@ subscription MyQuery($addressList: [String!]) {
 
 Below query will give you the trades of the wallets present in `addressList` along with the balance updates happened in those trades.. Try the query [here](https://ide.bitquery.io/Trades-of-wallets-with-balance-Updates-in-that-trades).
 
-```
+```graphql
 query MyQuery($addressList: [String!]) {
   Solana {
     DEXTrades(
@@ -202,7 +202,7 @@ query MyQuery($addressList: [String!]) {
 To get the count of Buys and Sells of a specific trader after a certain `timestamp`, use the following query.
 Find the query [here](https://ide.bitquery.io/buys-and-sells-of-a-traders)
 
-```
+```graphql
 query MyQuery($timestamp: DateTime, $trader: String) {
   Solana(dataset: combined) {
     DEXTradeByTokens(
@@ -223,7 +223,7 @@ query MyQuery($timestamp: DateTime, $trader: String) {
 
 Get total bought, total sold, average sell price, and last active trade time for a specific token by a trader. Test the query [here](https://ide.bitquery.io/Total-buy-total-sell-avg-sell-last-active)
 
-```
+```graphql
 query MyQuery ($trader:String, $token:String){
   Solana(dataset: realtime) {
     DEXTradeByTokens(
@@ -240,7 +240,7 @@ query MyQuery ($trader:String, $token:String){
 }
 ```
 
-```
+```json
 {
   "token":"FSJYiGZhJ1wDPNhHbSHm49yJkzbFp7FykNB2SZFipump",
   "trader": "CECN4BW4DKnbyddkd9FhWVR5dotzKhQr5p7DUPhQ55Du"
@@ -255,7 +255,7 @@ To filter trades by a wallet we will use the condition `Account: {Address: {is}}
 
 You can convert this subscription to a `query` to get past trades of the wallet.
 
-```
+```graphql
 subscription {
   Solana {
     buy: DEXTrades(

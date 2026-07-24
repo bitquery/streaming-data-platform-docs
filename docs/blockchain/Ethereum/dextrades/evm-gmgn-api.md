@@ -40,7 +40,7 @@ The query returns **top / trending trading pairs** by **trade count** (GMGN-styl
 
 You can find the query [here](https://ide.bitquery.io/List-of-trading-pairs-in-descending-order-of-trxns-in-last-24-hours)
 
-```
+```graphql
 query TrendingPairs {
   EVM(dataset: combined, network: eth) {
     DEXTradeByTokens(
@@ -81,7 +81,7 @@ query TrendingPairs {
 The query will subscribe you to real-time trade transactions for a pair, providing a continuous stream of data as new trades are processed and recorded.
 You can find the query [here](https://ide.bitquery.io/Get-pair-trades-data-just-like-dexcsreener)
 
-```
+```graphql
 subscription{
   EVM(network: eth) {
     DEXTradeByTokens(
@@ -128,7 +128,7 @@ subscription{
 
 This query will give you the latest Price of a specified token using DEXTrades API. Here we have calculated the price of a token in USD and also against the sell currency. Here is the [saved query link](https://ide.bitquery.io/Price-of-a-token-in-realtime)
 
-```
+```graphql
 query MyQuery {
   EVM(network: eth, dataset: realtime) {
     DEXTrades(
@@ -162,7 +162,7 @@ The below query finds the liquidity of a pool using the pool address `0xc2eaB7d3
 
 You can find the query [here](https://ide.bitquery.io/Get-liquidity-of-a-pair_1)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: eth) {
     BalanceUpdates(
@@ -185,7 +185,7 @@ The query will fetch you the buys, sells, buy volume, sell volume and also the n
 
 You can find the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-eth-pair#)
 
-```
+```graphql
 query MyQuery($network: evm_network, $token: String,$pairAddress: String , $min5_timestamp: DateTime, $hr1_timestamp: DateTime) {
   EVM(dataset: realtime, network: $network) {
     DEXTradeByTokens(
@@ -286,7 +286,7 @@ This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a s
 
 You can find the query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum_1)
 
-```
+```graphql
 {
   EVM(network: eth, dataset: archive) {
     DEXTradeByTokens(
@@ -315,7 +315,7 @@ You can find the query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum
 This query will fetch you top traders of a token for the selected network.
 You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token_7).
 
-```
+```graphql
 query topTraders($network: evm_network, $token: String) {
   EVM(network: $network) {
     DEXTradeByTokens(

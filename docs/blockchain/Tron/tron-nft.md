@@ -11,7 +11,7 @@ In this section we'll have a look at some examples using the Tron NFT API.
 This query subscribes you to the real time transfers of a specific non-fungible token (NFT) on the Tron network.
 You can find the query [here](https://ide.bitquery.io/Websocket-for-tracking-Transfers-of-a-particular-NFT-websocket)
 
-```
+```graphql
 subscription{
   Tron {
     Transfers(

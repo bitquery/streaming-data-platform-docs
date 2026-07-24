@@ -13,7 +13,7 @@ Protocols like Uniswap have pairs or pools. In this section we will see how we c
 
 This query can be used to get all trade metrics (trade amount, TX count) for a given pair ( in this case WETH/CaL) on a given EVM network over a particular time period.
 
-```
+```graphql
 query ($network: evm_network, $token: String!, $token2: String!) {
   EVM(network: $network, dataset: combined) {
     Unique_Buyers: DEXTrades(
@@ -109,7 +109,7 @@ We are just providing the BLUR token as buy currency.
 }
 ```
 
-Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/Pair-tokens-for-BLUR-token-for-all-DEXs_1)
+Open the above query on GraphQL IDE using this [link](https://ide.bitquery.io/Pair-tokens-for-BLUR-token-for-all-DEXs_1)
 
 **Parameters**
 
@@ -175,7 +175,7 @@ Now, let's see an example of getting all pairs of a token for a specific DEX. In
 }
 ```
 
-Open the above query on GraphQL IDE using this [link](https://graphql.bitquery.io/ide/pairs-of-blur-token-new-dataset_1)
+Open the above query on GraphQL IDE using this [link](https://ide.bitquery.io/pairs-of-blur-token-new-dataset_1)
 
 **Parameters**:
 

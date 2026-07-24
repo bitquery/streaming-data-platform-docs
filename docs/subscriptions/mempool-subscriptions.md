@@ -23,7 +23,7 @@ Mempool subscriptions differ from regular subscriptions. This subscription invol
 
 To distinguish between pending and confirmed transactions, use a two-step approach combining `mempool: true` for unconfirmed transactions and `mempool: false` for confirmed ones.
 
-```
+```graphql
 subscription {
   confirmed: EVM(mempool: false) {
     Transactions {
@@ -44,7 +44,7 @@ subscription {
 
 Mempool Transactions
 
-```
+```graphql
 subscription {
   mempool_transactions: EVM(mempool: true) {
     Transactions {

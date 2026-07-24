@@ -7,7 +7,7 @@ description: "Building with WebSockets: Code Sample in Rust using Bitquery Graph
 
 In this section we will see how to use bitquery subscriptions in Rust. The final output will look something like this
 
-![](/img/ApplicationExamples/rust.png)
+![Rust WebSocket subscription example](/img/ApplicationExamples/rust.png)
 
 You can find the complete code [here](https://github.com/bitquery/graphql-streaming-example-rs/)
 

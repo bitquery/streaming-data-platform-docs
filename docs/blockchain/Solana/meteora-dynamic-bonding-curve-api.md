@@ -80,7 +80,7 @@ subscription {
 
 Below query will give you the latest created Meteora DBC in realtime. You can test the query [here](https://ide.bitquery.io/token-creations-on-meteora-DBC)
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -162,7 +162,7 @@ subscription MyQuery {
 
 Below query will give you the latest migrated tokens Meteora DBC in realtime. You can test the query [here](https://ide.bitquery.io/meteora-DBC-token-migrations-to-Meteors-DEX)
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -246,7 +246,7 @@ Use this single subscription to stream real-time token migration events across B
 
 Try out the [API](https://ide.bitquery.io/Raydium-Launchlab-Meteora-DBC-BoopFun-Moonshot-LetsBonkfun-token-migrations-in-realtime_2) here on IDE.
 
-```
+```graphql
 subscription{
   Solana {
     Instructions(
@@ -321,7 +321,7 @@ subscription{
 
 Below query will give you the response for each token in the list if the token has graduated from Meteora DBC. Try out the query [here](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1).
 
-```
+```graphql
 query MyQuery($tokenAddresses: [String!]) {
   Solana {
     Instructions(
@@ -518,7 +518,7 @@ You can use the following query to get the latest price of a token on Meteora DB
 
 You can run this query using this [link](https://ide.bitquery.io/latest-price-of-a-meteora-dbc-token).
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -542,7 +542,7 @@ You can run this query using this [link](https://ide.bitquery.io/latest-price-of
 
 If you want to get OHLC data for any specific currency pair on Meteora DBC, you can use this api. Only use [this API](https://ide.bitquery.io/Meteora-DBC-OHLC-API) as query and not subscription websocket as Aggregates and Time Intervals don't work well with subscriptions.
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -570,7 +570,7 @@ If you want to get OHLC data for any specific currency pair on Meteora DBC, you 
 
 The below query gets the Top Traders of the specified Token `4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm` on Meteora DBC. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-Token-on-Meteora-DBC)
 
-```
+```graphql
 query TopTraders($token: String) {
   Solana {
     DEXTradeByTokens(
@@ -605,7 +605,7 @@ query TopTraders($token: String) {
 
 This query fetches you the traded volume, buy volume and sell volume of a token `4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm`. Try out the API [here](https://ide.bitquery.io/Get-trading-volume-buy-volume-sell-volume-of-a-token).
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(

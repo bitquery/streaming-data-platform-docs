@@ -1,0 +1,84 @@
+---
+title: "How Billing Works: Points, Plans & Limits"
+description: "Understand Bitquery API points — how queries are priced, streams billing, overage, trials, and per-chain plan entitlements."
+sidebar_position: 1
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# How Billing Works: Points, Plans & Limits
+
+Bitquery bills by **points**, not by raw request count, because queries differ enormously in the work they do. This page explains what a point is, how streams are billed separately, what happens when you run out, and why a query can fail on a chain you didn't purchase.
+
+:::note Check the pricing page for current numbers
+Plan prices and allowances can change — the [pricing page](https://bitquery.io/pricing) is the source of truth. The figures below were current at the time of writing.
+:::
+
+## Plans at a glance
+
+| Plan | Price | Points / mo | Rate limit | Concurrent streams |
+|---|---|---|---|---|
+| Personal | $39/mo | 100K | 30 / min | — |
+| Pro | $79/mo | 1M | 90 / min | 100 |
+| Scale | $239/mo | 5M | 240 / min | 1,000 |
+| Enterprise | Custom | Custom | Custom | Unlimited |
+
+A call costs about **5 points**, so points ÷ 5 ≈ included calls (e.g. Scale's 5M points ≈ 1M calls). See the [pricing page](https://bitquery.io/pricing) for the latest.
+
+## What is a point?
+
+**Points = resources consumed × price per unit.** A query that scans billions of rows costs more points than one served from a small indexed slice. The same query can even cost slightly different amounts run-to-run depending on how much data it touches. This is why two APIs with the same number of calls can have very different point costs. For the full model, see [IDE Points](/docs/ide/points/).
+
+Key consequences developers hit most often:
+
+- **A query costs about 5 points**, adjusted by how much data it scans. Batching is efficient: one request filtering 50 addresses costs roughly the same as one for a single address — so prefer one batched query over 50 separate ones.
+- **There's a per-request record cap** (around 25,000 records). For larger result sets, paginate or use a stream/export.
+- **Points don't roll over.** Unused points expire at the end of the billing period; they do not carry forward.
+
+## Streams are billed separately from points
+
+WebSocket subscriptions, Kafka, and gRPC streams are **not** paid for out of your query points. They use stream entitlements:
+
+- Stream **capacity** is measured in *stream-minutes* and *GB of stream data* (add-ons at checkout), and by **concurrent stream count** (Personal: none; Pro: 100; Scale: 1,000; Enterprise: unlimited).
+- **Each environment/consumer counts as its own stream.** Running the same Kafka topic from `dev`, `staging`, and `prod` (different consumer groups) counts as three streams.
+- Kafka access is a separate line item from your GraphQL plan.
+
+See [Rate Limits & Concurrency](/docs/plans/rate-limits/) for the concurrency caps and how they surface.
+
+## Running out: overage, caps, and the 402
+
+- When you exhaust your points, requests fail with a **`402` / `points limit exceeded`** error. Top up or upgrade from [Account → Billing](https://account.bitquery.io/user/upgrade).
+- Overage is billed per additional million points — **$50 per 1M points** (monthly billing) or **$40 per 1M points** (annual).
+- **After upgrading, regenerate your access token if you still see the old limit.** A token minted under the previous plan can keep returning `points limit exceeded` until you generate a fresh one.
+
+Check your live usage at [Account → Usage](https://account.bitquery.io/user/stats/queries) and via the [Usage API](/docs/authorization/usage-api/).
+
+## Per-chain entitlements
+
+Plans grant access to a specific set of chains. **Querying a chain that isn't in your plan fails** — and the error can look like a data problem rather than a billing one. If a query works in the IDE but fails from your app (or vice-versa), confirm the chain is included in your plan.
+
+## Trials
+
+The free trial runs for **7 days** and includes **1,000 API points, 100 MCP credits, 2 simultaneous streams, 17 stream-minutes, and 0.2 GB of stream data**, across **all chains with complete history**. No card required.
+
+## Paying by crypto
+
+Card payment is available on all plans; **crypto payment is available on annual plans**. For invoices, only pay against an invoice issued from `bitquery.io` — beware of impersonation.
+
+<FAQ
+  items={[
+    { q: "What are Bitquery API points?", a: "Points measure the resources a query consumes (roughly: rows scanned × complexity), so you pay in proportion to the work done rather than a flat per-call rate. The same query can cost slightly different points on different runs." },
+    { q: "Why am I getting 'points limit exceeded' after upgrading?", a: "An access token minted under your previous plan can keep enforcing the old limit. Generate a new token after upgrading, and confirm the new plan is active in your account." },
+    { q: "Do unused points roll over?", a: "No. Points expire at the end of each billing period and do not carry forward." },
+    { q: "How are WebSocket and Kafka streams billed?", a: "Streams are billed via stream entitlements (stream-minutes, GB, concurrent stream count), separately from query points. Each environment/consumer group typically counts as a separate stream." },
+    { q: "Why does my query fail on a chain I haven't purchased?", a: "Plans grant access to a specific set of chains. A query against a chain outside your plan fails; the error can resemble a data issue. Confirm the chain is included in your plan." },
+    { q: "How do I estimate monthly cost before committing?", a: "Run representative queries on a trial key and read the per-query point cost shown in the IDE, then multiply by your expected volume. Streams are estimated separately via stream entitlements." },
+  ]}
+/>
+
+## Next steps
+
+- [IDE Points (how points are calculated)](/docs/ide/points/)
+- [Upgrade to a paid plan](/docs/ide/paid/)
+- [Rate Limits & Concurrency](/docs/plans/rate-limits/)
+- [Data Coverage & Retention](/docs/graphql/data-coverage-retention/)

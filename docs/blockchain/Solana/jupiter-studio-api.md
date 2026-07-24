@@ -318,7 +318,7 @@ Check if specific Jupiter Studio tokens have migrated from Meteora DBC to Meteor
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery($tokenAddresses: [String!]) {
   Solana {
     Instructions(

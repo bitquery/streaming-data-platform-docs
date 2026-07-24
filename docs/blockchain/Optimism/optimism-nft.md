@@ -12,7 +12,7 @@ This query subscribes you to the real time transfers of a specific non-fungible 
 
 You can find the query [here](https://ide.bitquery.io/Transfers-of-a-particular-NFT#)
 
-```
+```graphql
 subscription {
   EVM(network: optimism) {
     Transfers(

@@ -1,0 +1,93 @@
+---
+title: "Wallet PnL: Compute Realized & Unrealized Profit"
+description: "Compute a wallet's realized and unrealized PnL from Bitquery trade history using the Trades API, with an average-cost walkthrough."
+sidebar_position: 6
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Wallet PnL: Realized & Unrealized Profit
+
+Bitquery doesn't return a single "PnL" number — you compute it from a wallet's **trade history** plus the token's **current price**. This recipe shows the average-cost approach that most trackers use. It works on every chain the Trades API covers, including the Robinhood chain.
+
+## 1. Pull the wallet's trades
+
+Open the [Bitquery IDE](https://ide.bitquery.io/) and run a Trades query filtered to the wallet, ordered by time. This returns each buy/sell with amount, price, and side — the raw material for PnL.
+
+```graphql
+{
+  Trading {
+    Trades(
+      where: { Trade: { Account: { Address: { is: "<wallet>" } } } }
+      orderBy: { ascending: Block_Time }
+      limit: { count: 10000 }
+    ) {
+      Block { Time }
+      Trade {
+        Side { Type }
+        Amount
+        Price
+        Currency { Symbol Address }
+      }
+    }
+  }
+}
+```
+
+The `Side.Type` (buy/sell), `Amount`, and `Price` on each row are what you fold into a running position. Note the [Trades API retention window](/docs/graphql/data-coverage-retention/) — for deep history beyond it, use a [cloud/S3 export](/docs/cloud/).
+
+## 2. Fold trades into a position (average cost)
+
+For each token, walk trades in time order:
+
+- **Buy:** increase quantity; increase cost basis by `amount × price`.
+- **Sell:** realized PnL += `amount × (sell price − average cost)`; reduce quantity and cost basis proportionally.
+- **Average cost** = running cost basis ÷ running quantity.
+
+```python
+# trades: list of {side, amount, price} in time order, per token
+qty = 0.0
+cost = 0.0        # total cost basis of the open position
+realized = 0.0
+for t in trades:
+    if t["side"] == "buy":
+        qty += t["amount"]
+        cost += t["amount"] * t["price"]
+    else:  # sell
+        avg = cost / qty if qty else 0.0
+        realized += t["amount"] * (t["price"] - avg)
+        cost -= t["amount"] * avg
+        qty -= t["amount"]
+
+avg_cost = cost / qty if qty else 0.0
+# unrealized needs the current price (see step 3)
+```
+
+## 3. Add unrealized PnL
+
+Fetch the token's **current price** from the [Crypto Price API](/docs/trading/crypto-price-api/introduction/), then:
+
+```text
+unrealized = open_quantity × (current_price − average_cost)
+total_pnl  = realized + unrealized
+```
+
+## Caveats
+
+- **Price source matters.** Use a consistent price feed (the same one you'd display) — the token-level price index is MEV/outlier-filtered; see [which price to use](/docs/trading/crypto-price-api/price-index-algorithm/).
+- **Fees & gas** aren't included above — subtract them if you need net PnL.
+- **Method choice** (average cost vs FIFO) changes realized PnL; pick one and be consistent.
+
+<FAQ
+  items={[
+    { q: "Does Bitquery return wallet PnL directly?", a: "No — you compute PnL from the wallet's trade history (Trades API) plus the token's current price. This page shows the average-cost method." },
+    { q: "How far back can I compute PnL?", a: "As far back as the Trades API retains individual trades (a rolling window); for older history use a cloud/S3 export of trades. See the coverage matrix." },
+    { q: "Can I compute PnL on the Robinhood chain?", a: "Yes. The same trade-history approach works on every chain the Trades API covers, including Robinhood." },
+  ]}
+/>
+
+## Next steps
+
+- [Trades API](/docs/trading/crypto-trades-api/trades-api/)
+- [Crypto Price API](/docs/trading/crypto-price-api/introduction/)
+- [Data Coverage & Retention](/docs/graphql/data-coverage-retention/)

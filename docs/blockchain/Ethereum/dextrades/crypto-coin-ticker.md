@@ -84,7 +84,7 @@ subscription {
 
 Open this API on our [GraphQL IDE](https://ide.bitquery.io/Coin-ticker-api_4).
 
-```
+```graphql
 {
   EVM(dataset: realtime) {
     DEXTradeByTokens(

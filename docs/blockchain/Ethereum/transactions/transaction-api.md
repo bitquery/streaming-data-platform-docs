@@ -12,7 +12,7 @@ The Transaction API allows users to query for transaction data by specifying fil
 ## Latest Transactions
 
 This query is using the Transactions API to retrieve transaction data from the Binance Smart Chain (BSC) blockchain network in real-time.
-You can find the query [here](https://graphql.bitquery.io/ide/Last-transactions-with-cost)
+You can find the query [here](https://ide.bitquery.io/Last-transactions-with-cost)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -60,7 +60,7 @@ You can run the query [here](https://ide.bitquery.io/Latest-Transactions-fromto-
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   EVM(dataset: archive, network: eth) {
     Transactions(
@@ -90,7 +90,7 @@ You can run the query [here](https://ide.bitquery.io/Latest-Transactions-fromto-
 The below query retrieves transaction details using the transaction hash. The `where` clause filters transactions based on the `Hash` field, which is set to `0xc3684c0ea63c0e081fb779bb8feaa5e5109ccc70ef30f17f4eea041ec5ea0bc7`.
 You can find the query [here](https://ide.bitquery.io/Get-a-transaction-by-hash)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     Transactions(
@@ -117,7 +117,7 @@ query MyQuery {
 The following query helps you determine the next available nonce for an Ethereum account by getting the latest transaction in the mempool (broadcasted transactions). The returned nonce is the highest nonce used by the account in the mempool. To get the next available nonce for a new transaction, you should increment this value by 1.
 You can find the query [here](https://ide.bitquery.io/get-next-available-nonce)
 
-```
+```graphql
 query MyQuery {
   EVM(mempool: true, network: eth) {
     Transactions(limit: {count: 1}, orderBy: {descending: Block_Time}) {
@@ -136,7 +136,7 @@ In the below query we will use the field `Transaction_ValueInUSD` to get the tot
 
 You can find the query [here](https://ide.bitquery.io/Transaction-value-in-USD)
 
-```
+```graphql
 query MyQuery {
   EVM(network: eth) {
     in_txs: Transactions(
@@ -156,7 +156,7 @@ The below query gets all internal transactions for a particular tx filtered usin
 
 You can run the query [here](https://ide.bitquery.io/internal-transactions-for-a-particular-tx)
 
-```
+```graphql
 query MyQuery {
   EVM(network: eth) {
     Calls(

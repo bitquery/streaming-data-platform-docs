@@ -72,7 +72,7 @@ You can get latest price of xStocks tokens prices using our [Crypto price api](/
 
 You can run the query [here](https://ide.bitquery.io/xStocks-prices)
 
-```
+```graphql
 subscription {
   Trading {
     Tokens(
@@ -131,7 +131,7 @@ You can use the following query to get the latest price of a Apple xStock on Sol
 
 You can run this query using this [link](https://ide.bitquery.io/Get-Latest-Price-of-Apple-xStock-in--USD-Real-time).
 
-```
+```graphql
 query {
   Solana {
     DEXTradeByTokens(
@@ -178,7 +178,7 @@ You can use the following query to get the latest price of a Apple xStock on Sol
 
 You can run this query using this [link](https://ide.bitquery.io/Get-realtime-Price-of-Apple-xStock-in--USD-Real-time).
 
-```
+```graphql
 subscription {
   Solana {
     DEXTradeByTokens(
@@ -221,7 +221,7 @@ subscription {
 
 If you want to get OHLC data for any xStock, you can use this api. Only use [this API](https://ide.bitquery.io/Tesla-xStock-OHLC-for-specific-pair) as query and not subscription websocket as Aggregates and Time Intervals don't work well with subscriptions.
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -249,7 +249,7 @@ If you want to get OHLC data for any xStock, you can use this api. Only use [thi
 
 The below query gets the Top Traders of the Apple xStock `XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp`. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/Top-Traders-of-the-Apple-xStock_1)
 
-```
+```graphql
 query TopTraders($token: String) {
   Solana {
     DEXTradeByTokens(
@@ -288,7 +288,7 @@ query TopTraders($token: String) {
 
 This query fetches you the traded volume, buy volume and sell volume of a Meta xStock `Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu`. Try out the API [here](https://ide.bitquery.io/trade_volume-META-xStock).
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(

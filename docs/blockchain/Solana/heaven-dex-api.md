@@ -233,7 +233,7 @@ You can run this query using [this link](https://ide.bitquery.io/live-price-of-t
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -527,7 +527,7 @@ The below query gets the Top Traders of the specified Token `G9z2bN7rqxdoN526H4X
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query TopTraders($token: String) {
   Solana {
     DEXTradeByTokens(
@@ -567,7 +567,7 @@ This query fetches you the traded volume, buy volume and sell volume of a token 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(

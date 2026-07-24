@@ -121,7 +121,7 @@ This example uses the chain-specific **DEXTrades** cube via `EVM(network: bsc) {
 
 You can find the query [here](https://ide.bitquery.io/subscribe-to-bsc-dex-trades)
 
-```
+```graphql
 subscription {
   EVM(network: bsc) {
     DEXTrades {
@@ -174,7 +174,7 @@ subscription {
 This query will fetch you latest trades for a token for the BSC network.
 You can test the query [here](https://ide.bitquery.io/latest-trades-of-a-token-on-bsc).
 
-```
+```graphql
 query LatestTrades($network: evm_network, $token: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -228,7 +228,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/token/0x713
 
 Get total bought, total sold, average sell price, and last active trade time for a specific token by a trader. Test the query [here](https://ide.bitquery.io/Total-buy-total-sell-avg-sell-last-active_1)
 
-```
+```graphql
 query MyQuery($trader: String, $token: String) {
   EVM(dataset: realtime, network: bsc) {
     DEXTradeByTokens(
@@ -263,7 +263,7 @@ query MyQuery($trader: String, $token: String) {
 
 ```
 
-```
+```json
 {
   "trader": "0xc5C2653d38E241D62F96A4fB8f8497b6126F21dC",
   "token": "0x49d870B1d21D00c775DD03110Ef4c8FeF4Fd4444"
@@ -275,7 +275,7 @@ query MyQuery($trader: String, $token: String) {
 This query will fetch you top traders of a token for the BSC network.
 You can test the query [here](https://ide.bitquery.io/top-traders--token-bsc_3).
 
-```
+```graphql
 query topTraders($network: evm_network, $token: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -313,7 +313,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/token/0x713
 This query will fetch you top traders by profit in the last 7 days for the BSC network.
 You can test the query [here](https://ide.bitquery.io/top-traders-in-last-7-days-by-profit_2).
 
-```
+```graphql
 query TopTraders($network: evm_network) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -341,7 +341,7 @@ query TopTraders($network: evm_network) {
 This query will fetch you all the trading pairs of a token for the BSC network.
 You can test the query [here](https://ide.bitquery.io/trading-pairs-of-a-token).
 
-```
+```graphql
 query tokenTrades($network: evm_network, $token: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -439,7 +439,7 @@ query MyQuery {
 This query will fetch you all the DEXs where a token is listed for the BSC network.
 You can test the query [here](https://ide.bitquery.io/get-all-dex-markets-for-a-token).
 
-```
+```graphql
 query tokenDexMarkets($network: evm_network, $token: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -473,7 +473,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/token/0x713
 Use below query to get price change 5min, 1h, 6h and 24h of a specific token. Change the `Currency{SmartContract}` and `Dex{SmartContract}` according to your needs. Test the query [here]
 (https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_3).
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined network:bsc) {
     DEXTradeByTokens(
@@ -515,7 +515,7 @@ query MyQuery {
 Use below query to get top 10 BSC Tokens by Price Change in last 1h. Test the query [here]
 (https://ide.bitquery.io/Top-10-bsc-tokens-by-price-change-in-last-1-hr).
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined network:bsc) {
     DEXTradeByTokens(
@@ -590,7 +590,7 @@ query MyQuery {
 This query will fetch you the OHLC of a token for the BSC network.
 You can test the query [here](https://ide.bitquery.io/OHLC-for-a-token-on-bsc_1).
 
-```
+```graphql
 query tradingView($network: evm_network, $token: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -625,7 +625,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/token/0x713
 This query will fetch you latest trades for a token pair for the BSC network.
 You can test the query [here](https://ide.bitquery.io/Latest-price-of-a-token-on-bsc).
 
-```
+```graphql
 query LatestTrades($network: evm_network, $token: String, $base: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -680,7 +680,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/pair/0x711b
 This query will fetch you the OHLC of a token pair for the BSC network.
 You can test the query [here](https://ide.bitquery.io/BSC-OHLC-API-For-Token-Pair).
 
-```
+```graphql
 query tradingViewPairs {
   EVM(network: bsc, dataset: realtime) {
     DEXTradeByTokens(
@@ -707,7 +707,7 @@ query tradingViewPairs {
 This query will fetch you top traders of a token pair for the BSC network.
 You can test the query [here](https://ide.bitquery.io/pair-top-traders_2).
 
-```
+```graphql
 query pairTopTraders($network: evm_network, $token: String, $base: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -839,7 +839,7 @@ To stream **a token on that DEX**, keep the same **`Pair.Market`** filters and a
 This query will fetch you all the DEXs where a token pair is listed for the BSC network.
 You can test the query [here](https://ide.bitquery.io/pair-dex-list_5).
 
-```
+```graphql
 query pairDexList($network: evm_network, $token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -887,7 +887,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/pair/0x711b
 This query will fetch you top gainers for the BSC network.
 You can test the query [here](https://ide.bitquery.io/bsc-top-gainers).
 
-```
+```graphql
 query ($network: evm_network) {
   EVM(network: $network) {
     DEXTradeByTokens(orderBy: {descendingByField: "usd"}, limit: {count: 100}) {
@@ -930,7 +930,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc).
 This query will fetch you top bought tokens for the BSC network. Arranged in descending order of `bought - sold`.
 You can test the query [here](https://ide.bitquery.io/top-bought-bsc).
 
-```
+```graphql
 query timeDiagram($network: evm_network) {
   EVM(network: $network) {
     DEXTradeByTokens(orderBy: {descendingByField: "buy"}, limit: {count: 100}) {
@@ -960,7 +960,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc).
 This query will fetch you top sold tokens for the BSC network. Arranged in descending order of `sold - bought`.
 You can test the query [here](https://ide.bitquery.io/top-sold-bsc).
 
-```
+```graphql
 query timeDiagram($network: evm_network) {
   EVM(network: $network) {
     DEXTradeByTokens(orderBy: {descendingByField: "sell"}, limit: {count: 100}) {
@@ -990,7 +990,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc).
 This query retrieves all the DEXes operating on BSC network and gives info such as `ProtocolName` , `ProtocolVersion` and `ProtocolFamily`.
 Find the query [here](https://ide.bitquery.io/Get-all-the-DEXs-on-BSC-network).
 
-```
+```graphql
 query MyQuery {
   EVM(network: bsc, dataset: realtime) {
     DEXTrades {
@@ -1012,7 +1012,7 @@ query MyQuery {
 
 This query provides real-time updates on price of ETH `0x2170Ed0880ac9A755fd29B2688956BD959F933F8` in terms of WBNB `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`, including details about the DEX, market, and order specifics. Find the query [here](https://ide.bitquery.io/realtime-price-of-a-ETH-in-terms-of-WBNB)
 
-```
+```graphql
 subscription {
   EVM(network: bsc) {
     DEXTrades(
@@ -1065,7 +1065,7 @@ subscription {
 
 The below query retrieves the USD price of a token on BSC by setting `{Trade: {Buy: {Currency: {SmartContract: {is: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"}}}}}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/realtime-usd-price-of-a-WBNB).
 
-```
+```graphql
 subscription {
   EVM(network: bsc) {
     DEXTrades(
@@ -1120,7 +1120,7 @@ Browse multi-chain stablecoin DEX prices on [DEXrabbit's Stablecoins category](h
 
 [Run in Bitquery IDE](https://ide.bitquery.io/evm-peg-health_1)
 
-```
+```graphql
 {
   EVM(network: bsc) {
     DEXTradeByTokens(
@@ -1170,7 +1170,7 @@ Browse multi-chain stablecoin DEX prices on [DEXrabbit's Stablecoins category](h
 This query will fetch you all the DEXs info for the BSC network.
 You can test the query [here](https://ide.bitquery.io/all-dexs-info-on-bsc).
 
-```
+```graphql
 query DexMarkets($network: evm_network) {
   EVM(network: $network) {
     DEXTradeByTokens {
@@ -1199,7 +1199,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/dex_market)
 This query will fetch you a specific DEX stats for the BSC network.
 You can test the query [here](https://ide.bitquery.io/particular-dex-stats).
 
-```
+```graphql
 query DexMarkets($network: evm_network, $market: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -1231,7 +1231,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/dex_market/
 This query will fetch you all trading pairs on a particular DEX for the BSC network.
 You can test the query [here](https://ide.bitquery.io/trading-pairs-on-a-specific-dex_1).
 
-```
+```graphql
 query DexMarkets($network: evm_network, $market: String, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -1288,7 +1288,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/dex_market/
 This query will fetch you Top Traders on a particular DEX for the BSC network.
 You can test the query [here](https://ide.bitquery.io/top-traders-on-a-specific-dex_1).
 
-```
+```graphql
 query DexMarkets($network: evm_network, $market: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -1335,7 +1335,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.com/bsc/dex_market/
 This query will fetch you latest trades on a particular DEX for the BSC network.
 You can test the query [here](https://ide.bitquery.io/latest-trades-on-a-particular-dex).
 
-```
+```graphql
 query LatestTrades($network: evm_network, $market: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -1393,7 +1393,7 @@ Get up to 100 tokens with aggregated USD volume and average price over the last 
 
 ▶️ [Aggregated Token Data](https://ide.bitquery.io/aggregated-data)
 
-```
+```graphql
 {
   Trading {
     Tokens(
@@ -1448,7 +1448,7 @@ For **EVM chains** (Ethereum, BSC, etc.) in the Trading API, use **all lowercase
 
 [Run in Bitquery IDE](https://ide.bitquery.io/volume-of-a-token_1)
 
-```
+```graphql
 query {
   TokenAsBase: Trading {
     Pairs(

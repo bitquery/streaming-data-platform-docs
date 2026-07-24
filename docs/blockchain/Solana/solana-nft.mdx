@@ -14,7 +14,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 The subscription query provided below fetches the most recent NFT trades on the Solana blockchain.
 You can find the query [here](https://ide.bitquery.io/Latest-Solana-NFT-Trades). In this query you will also get failed transactions. To get only successful transactions, set `Transaction: {Result: {Success: true}}`
 
-```
+```graphql
 subscription {
   Solana {
     DEXTradeByTokens(where: {Trade: {Currency: {Fungible: false}}}) {
@@ -45,7 +45,7 @@ subscription {
 The subscription query provided below fetches the real time nft balance updates of addressses across Solana Ecosystem. This query also gives us NFT balance of the wallets using `PreBalance` and `PostBalance`.
 You can find the query [here](https://ide.bitquery.io/real-time-nft-balance-updates-across-solana-ecosystem)
 
-```
+```graphql
 subscription {
   Solana {
     BalanceUpdates(
@@ -77,7 +77,7 @@ subscription {
 The subscription query provided fetches the most-traded NFTs in the last few hours. For Solana, only realtime information is available, so the aggregate might not be accurate beyond a few hours.
 You can find the query [here](https://ide.bitquery.io/NFT-currencies-on-Solana-by-DEXes_1)
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(

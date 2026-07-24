@@ -15,7 +15,7 @@ The below query retrieves the latest successful smart contract calls on the BNB 
 
 You can run it [here](https://ide.bitquery.io/Latest-Calls-on-BSC-network)
 
-```
+```graphql
 {
   EVM(network: bsc) {
     Calls(
@@ -69,7 +69,7 @@ You can run it [here](https://ide.bitquery.io/Latest-Calls-on-BSC-network)
 This subscription websocket lets you track the newly created tokens on BSC network. You will find the newly created token contract address in the response under `Receipt: ContractAddress` field.
 You can find the query [here](https://ide.bitquery.io/Newly-Created-Tokens-on-BSC-network_2#)
 
-```
+```graphql
 subscription {
   EVM(network: bsc) {
     Calls(

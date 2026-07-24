@@ -2,6 +2,8 @@
 title: "EVM DEX Trades Schema"
 description: "Explore the EVM DEX Trades schema in Bitquery GraphQL, including trade fields, joins, filters, and example queries for swap analytics."
 ---
+# EVM DEX Trades Schema
+
 DEXTrades api gives trading-related data from different DEXs such as Uniswap, Pancakeswap, 0x, etc.
 
 API provides historical and real-time trades and pricing information for tokens. The API allows different filters to query the Smart contract calls details from different dimensions, such as from different DEXs, protocols, tokens, trades, pools, etc. 

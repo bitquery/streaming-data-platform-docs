@@ -127,7 +127,7 @@ For each trade, the query retrieves the following data:
 
 You can view the query in the IDE [here](https://ide.bitquery.io/latest_buys_and_sell_)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
     Sells: DEXTrades(

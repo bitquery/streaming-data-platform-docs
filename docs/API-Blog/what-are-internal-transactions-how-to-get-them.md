@@ -34,7 +34,7 @@ Internal transfers occur as part of the execution of smart contract functions ra
 In this example we are querying all transfers happening as a part of this `0x9c78b80a02c882db9d3d9add2d98243e4aeadb035fe9aacf82d04d51092db7fc` transaction by using the `Transfers` cube and setting `Call-> Index` to greater than 0.
 Run the query [here](https://ide.bitquery.io/Get-internal-transfers-of-tx)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: bsc) {
     Transfers(
@@ -57,7 +57,7 @@ query MyQuery {
 
 ### Ethereum
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: eth) {
     in: Calls(
@@ -102,7 +102,7 @@ Explaining the query data
 
 ### BNB
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: bsc) {
     in: Calls(
@@ -139,7 +139,7 @@ Components
 
 ### BASE
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: base) {
     in: Calls(
@@ -189,11 +189,11 @@ Details:
 
 The internal transactions section provides details such as the sender and receiver addresses, the amount transferred, and the specific contract method called and gas used.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd2u4PdpEvwZpwemeJ221AT2xGPrvHxjzzCuWdqbTQd64Mz_HJuX-O9ybhLjJmczfvuLkb9JwjBAVLB2lz7BO0b_VAPoeeXfOvIpSeA_uRQJg6Ya5W5oALK0hDPgLPq0uzxd4N_K4vcDUjLLR8rzF03t68g?key=5ttYeo2nskIw9kc9CkTdTA)
+![Internal transactions example](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd2u4PdpEvwZpwemeJ221AT2xGPrvHxjzzCuWdqbTQd64Mz_HJuX-O9ybhLjJmczfvuLkb9JwjBAVLB2lz7BO0b_VAPoeeXfOvIpSeA_uRQJg6Ya5W5oALK0hDPgLPq0uzxd4N_K4vcDUjLLR8rzF03t68g?key=5ttYeo2nskIw9kc9CkTdTA)
 
 There is also a graphical view that shows how funds flow between different addresses
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfpIcX5dHn8aERff9UJKN5qOzM7mFsuFmlP3b_zvMf2O4z27YRSnjDBUh4g0rXXha3xEaX_2U_cVHE2F6UQO_Da7VjyY5HPu6awAQ2TcofiixcuzMHuzDMs5KBJQ32TSwQU9a09RcOCNsZGOAS8ceMGZI5u?key=5ttYeo2nskIw9kc9CkTdTA)
+![Internal transactions trace example](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfpIcX5dHn8aERff9UJKN5qOzM7mFsuFmlP3b_zvMf2O4z27YRSnjDBUh4g0rXXha3xEaX_2U_cVHE2F6UQO_Da7VjyY5HPu6awAQ2TcofiixcuzMHuzDMs5KBJQ32TSwQU9a09RcOCNsZGOAS8ceMGZI5u?key=5ttYeo2nskIw9kc9CkTdTA)
 
 ### Tracing an Internal Transaction Example
 
@@ -209,11 +209,11 @@ This is an example of an ETH transaction on the Bitquery Explorer using the trac
 
 [https://explorer.bitquery.io/ethereum/tx/0x26960e8c31dde5d76b69ba68201bfea5186555a7b44383f515d109ded74f3ac8/tracing](https://explorer.bitquery.io/ethereum/tx/0x26960e8c31dde5d76b69ba68201bfea5186555a7b44383f515d109ded74f3ac8/tracing)
 
-![](/img/ApplicationExamples/eth_tree.png)
+![Ethereum internal transaction call tree](/img/ApplicationExamples/eth_tree.png)
 
 Below is a graphical view that shows how funds flow between different addresses
 
-![](/img/ApplicationExamples/eth_trace.png)
+![Ethereum transaction trace](/img/ApplicationExamples/eth_trace.png)
 
 #### Binance (BNB) Smart Chain
 
@@ -221,11 +221,11 @@ This is an example of a BSC transaction on the Bitquery Explorer using the traci
 
 [https://explorer.bitquery.io/bsc/tx/0x9c78b80a02c882db9d3d9add2d98243e4aeadb035fe9aacf82d04d51092db7fc/tracing](https://explorer.bitquery.io/bsc/tx/0x9c78b80a02c882db9d3d9add2d98243e4aeadb035fe9aacf82d04d51092db7fc/tracing)
 
-![](/img/ApplicationExamples/bnb_tree.png)
+![BNB Chain internal transaction call tree](/img/ApplicationExamples/bnb_tree.png)
 
 Below is a graphical view that shows how funds flow between different addresses
 
-![](/img/ApplicationExamples/bnb_trace.png)
+![BNB Chain transaction trace](/img/ApplicationExamples/bnb_trace.png)
 
 #### ARBITRUM
 
@@ -233,11 +233,11 @@ This is an example of an Arbitrum transaction on the Bitquery Explorer using the
 
 [https://explorer.bitquery.io/arbitrum/tx/0x9346cd8afb33598d6ab57c3c83f5267ea96765e63e16b04e8dee7e599151c938/tracing](https://explorer.bitquery.io/arbitrum/tx/0x9346cd8afb33598d6ab57c3c83f5267ea96765e63e16b04e8dee7e599151c938/tracing)
 
-![](/img/ApplicationExamples/arb_tree.png)
+![Arbitrum internal transaction call tree](/img/ApplicationExamples/arb_tree.png)
 
 Below is a graphical view that shows how funds flow between different addresses
 
-![](/img/ApplicationExamples/arb_trace.png)
+![Arbitrum transaction trace](/img/ApplicationExamples/arb_trace.png)
 
 Here’s a practical example to help people understand the importance of tracing internal transactions:
 

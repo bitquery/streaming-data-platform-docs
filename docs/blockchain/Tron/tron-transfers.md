@@ -10,7 +10,7 @@ In this section we'll have a look at some examples using the Tron Transfers API.
 
 The subscription query below fetches the whale transactions on the Tron network. We have used USDT address `TThzxNRLrW2Brp9DcTQU8i4Wd9udCWEdZ3`. You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDT-on-Tron)
 
-```
+```graphql
 subscription{
   Tron {
     Transfers(
@@ -42,7 +42,7 @@ subscription{
 
 This query retrieves the top 10 transfers by amount of the token `TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT`. Try the query [here](https://ide.bitquery.io/top-transfers-of-a-token_2).
 
-```
+```graphql
 query MyQuery {
   Tron {
     Transfers(
@@ -68,7 +68,7 @@ query MyQuery {
 
 This query fetches you the recent 10 transfers of a specific wallet address `TFXttAWURRrXrd9JvFPVLEh1esJK8NHxn7`. Try the query [here](https://ide.bitquery.io/Transfers-of-a-wallet-API).
 
-```
+```graphql
 {
   Tron {
     Transfers(
@@ -100,7 +100,7 @@ This query fetches you the recent 10 transfers of a specific wallet address `TFX
 
 This websocket retrieves transfers where the sender is a particular address `TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {is: "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf"}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/Sender-is-particular-address)
 
-```
+```graphql
 subscription {
    Tron {
     Transfers(
@@ -165,7 +165,7 @@ query DailyTransferVolume($token: String, $since: DateTime) {
 ```
 
 Variables:
-```
+```json
 {
   "token": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
   "since": "2025-01-01T00:00:00Z"
@@ -256,7 +256,7 @@ query TopUSDTReceivers24h {
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on Tron network. You can run the query [here](https://ide.bitquery.io/NFT-Token-Transfers-API_5)
 
-```
+```graphql
 subscription {
   Tron {
     Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {

@@ -8,7 +8,7 @@ You can run the queries and subscriptions on Postman as well. Below is the link 
 
 [Postman Collection for Examples](https://www.postman.com/interstellar-eclipse-270749/workspace/bitquery)
 
-![](/img/postman.png)
+![Using the Bitquery GraphQL API in Postman](/img/postman.png)
 
 You can find examples for all chains in folders. Remember that token must be passed differently for a `query` vs a `subscription`. You can read more about it [here](/docs/authorization/how-to-use/)
 

@@ -17,7 +17,7 @@ For the `wss` endpoint, the 2nd method is the only way, read more [here](/docs/a
 
 Below is an example in Python that mentions the token in the header.
 
-```
+```javascript
 import requests
 import json
 

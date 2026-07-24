@@ -32,7 +32,7 @@ The mint addresses for the tokens being used in the pool are listed, indicating 
 
 You can test the query [here](https://ide.bitquery.io/Track-Latest-created-pools-on-Meteora-DLMM_1)
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -161,7 +161,7 @@ You can use the following query to get the latest price of a token on Meteora DL
 
 You can run this query using this [link](https://ide.bitquery.io/latest-price-of-a-token-on-DLMM#).
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -188,7 +188,7 @@ You can use the following subscription to get real-time price updates of a token
 
 You can run this query using this [link](https://ide.bitquery.io/Realtime-Price-feed-of-a-Token-on-Meteora-DLMM#).
 
-```
+```graphql
 subscription{
   Solana {
     DEXTradeByTokens(
@@ -216,7 +216,7 @@ Only use this API as a query and not as a subscription websocket, as Aggregates 
 
 You can run this query [here](https://ide.bitquery.io/Meteora-DLMM-OHLC-API#).
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -250,7 +250,7 @@ Keep in mind you can use this API only as a query and not a subscription websock
 
 You can run the query [here](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-Token-on-Meteora-DLMM-DEX#)
 
-```
+```graphql
 query TopTraders($token: String) {
   Solana {
     DEXTradeByTokens(
@@ -287,7 +287,7 @@ This query fetches the traded volume, buy volume and sell volume of a specific t
 
 Try out the API [here](https://ide.bitquery.io/Get-trading-volume-buy-volume-sell-volume-of-a-token_3#).
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(

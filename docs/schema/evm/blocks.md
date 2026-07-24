@@ -2,6 +2,8 @@
 title: "EVM Blocks Schema"
 description: "Blocks: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns. Copy GraphQL snippets for production apps."
 ---
+# EVM Blocks Schema
+
 Blocks API provide details on blocks.
 
 You can use different [filters](/docs/graphql/filters/) to query data from different dimensions. You can find more examples [here](/docs/blockchain/Ethereum/blocks/blocks-api/)

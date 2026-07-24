@@ -1,0 +1,106 @@
+---
+title: "Data Coverage & Retention: How Far Back Does Data Go?"
+description: "How much history each Bitquery API keeps per chain — realtime vs archive vs combined datasets, Kafka backfill, and when to use S3 exports."
+sidebar_position: 1
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Data Coverage & Retention
+
+How far back Bitquery data goes depends on the **chain**, the **cube** (Trades, Transfers, Balances, Holders, …), the **dataset** (`realtime`, `archive`, `combined`), and the **interface** (GraphQL, WebSocket, Kafka, or cloud/S3 export). This page is the single source of truth for those windows. **If a query returns empty results for a date range, check here first** — most "missing data" reports are really a dataset or retention mismatch, not a bug.
+
+:::note Windows expand over time
+Retention windows widen as coverage grows. If you need more than the API keeps, use a cloud/S3 export or an Enterprise historical plan (see below).
+:::
+
+## The three datasets: realtime, archive, combined
+
+Every GraphQL cube is served from one or more datasets, selected with the `dataset:` argument:
+
+- **`realtime`** — the most recent data (roughly the last few hours), lowest latency. Always available.
+- **`archive`** — deep history. Available where Bitquery has back-indexed the chain/cube.
+- **`combined`** — stitches `archive` + `realtime` into one continuous result. Use it when you need both history and the latest rows in a single query.
+
+**Availability differs by chain and by cube.** Selecting a dataset a chain doesn't support surfaces a ClickHouse error such as `no table can query <Cube> ... consider use realtime dataset`. That's not a bug — it means the archive/combined table for that cube isn't deployed on that chain. See the [dataset reference](/docs/graphql/dataset/realtime/) and the [Early Access Program datasets](/docs/graphql/dataset/EAP/) for details.
+
+Rule of thumb: reach for `realtime` for live/streaming use cases, `combined` for "recent history + now", and `archive` for pure backfills — but only where the matrix below says archive exists.
+
+## Coverage matrix
+
+Windows are expressed as rolling ranges, not fixed dates, so they stay correct over time.
+
+### EVM chains (Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, …)
+
+| Cube | realtime | archive / combined | Kafka | Notes |
+|---|---|---|---|---|
+| DEX Trades | ✅ | ✅ full history | ✅ | Deep history via `combined`. |
+| Transfers | ✅ | ✅ full history | ✅ | |
+| Transactions | ✅ | ✅ full history | ✅ | |
+| Balances | ✅ | ✅ | — | Query at a block/date for point-in-time balances. |
+| Holders | ✅ | ✅ all v2 EVM chains | — | The Holders API is available on all v2 EVM chains. |
+| Calls & Events | ✅ | ~3 months (Ethereum: full history) | ✅ | ~3 months on all EVM chains **except Ethereum**, which keeps full history. Older data on any chain (including Ethereum) via S3 export. |
+| Mempool | ✅ (stream) | — | — | Pending-tx data is realtime only. |
+
+### Solana
+
+| Cube | realtime | archive / combined | Kafka | Notes |
+|---|---|---|---|---|
+| DEX Trades | ✅ | ~30 days via API | ✅ | Older raw trades via a cloud/S3 export. |
+| OHLC / price aggregates | ✅ | Minute-level since October 2024 | ✅ (trading topics) | Aggregated candles go back much further than raw trades. |
+| Transfers | ✅ ~last 8h | via S3 | ✅ | The API serves roughly the last 8 hours; deep history via S3 export. |
+| Balances | ⏳ recent activity only | — | — | Balances reflect tokens active recently; dormant balances may not appear. |
+| Instructions | ⏳ recent only | — | ✅ | Deep historical instruction lookup by signature is not available via API. |
+| DEX Pools | ✅ | — | ✅ | Pool events are realtime; not in archive. |
+
+### Tron & Bitcoin
+
+| Cube | realtime | archive / combined | Notes |
+|---|---|---|---|
+| Transfers / Transactions | ✅ | ✅ full history | Full archive available. |
+| Balances | ✅ | ✅ | Point-in-time supported. |
+| Coinpath (money flow) | — | ✅ (v1) | Coinpath is served by the [v1 API](https://docs.bitquery.io/v1/); there is no v2 equivalent yet. |
+
+### Trading cube (cross-chain Trades / Tokens / Pairs)
+
+| Surface | Window | Notes |
+|---|---|---|
+| Trades / Tokens / Pairs | ~30 days | For older raw trades use chain-level `DEXTradeByTokens` or an S3 export. |
+| Price / OHLC aggregates | Longer than raw trades **[confirm start]** | See the [Crypto Price API](/docs/trading/crypto-price-api/introduction/). |
+
+### Robinhood chain
+
+| Cube | Window | Notes |
+|---|---|---|
+| Trades | Since the chain was onboarded | Full history from onboarding forward. |
+| Transfers | Complete history | Full transfer history available. |
+
+## Kafka is not a historical firehose
+
+Kafka (and Solana gRPC) deliver **realtime data plus a small backfill window (hours, not history)**. If you connect a fresh consumer, you get recent messages forward — not the chain from genesis. For anything older than the backfill window, use GraphQL (within the API's retention) or a cloud/S3 export. See the [Kafka Operations Cookbook](/docs/streams/kafka-operations/).
+
+## Need more history than the API keeps?
+
+When you need a full backfill beyond the API windows above:
+
+- **Cloud / S3 datasets** — Parquet exports of raw + decoded data into your own store. See [Cloud datasets](/docs/cloud/).
+- **Enterprise plans** — the self-serve plans (Personal/Pro/Scale) share a rolling window (about 30-day trades and 4–8h on-chain data); complete history requires an Enterprise plan or a historical export. See [Plans, Points & Limits](/docs/plans/how-billing-works/).
+
+Contact [sales@bitquery.io](mailto:sales@bitquery.io) for custom export ranges.
+
+<FAQ
+  items={[
+    { q: "How far back does Solana DEX trade data go?", a: "Raw individual Solana DEX trades are available for roughly the last 30 days via the API; OHLC/price aggregates go back much further. For older raw trades, use a cloud/S3 export. Confirm the current window with support as coverage expands." },
+    { q: "Why does my query return empty results for old dates?", a: "Usually the date range is outside the retention window for that cube/dataset, or the cube isn't deployed on that chain's archive. Check the coverage matrix above, verify you're using combined (not realtime) for history, and confirm the chain supports it." },
+    { q: "What is the difference between realtime, archive and combined datasets?", a: "realtime is the most recent data (about the last few hours); archive is deep history; combined merges both into one continuous result. Availability differs per chain and per cube." },
+    { q: "Does Kafka include historical data?", a: "No. Kafka streams realtime data plus a few hours of backfill. For history, use GraphQL (within retention) or a cloud/S3 export." },
+    { q: "How do I get data older than the API retention window?", a: "Use a cloud/S3 Parquet export, or an enterprise historical export. See the Cloud datasets page and contact sales for custom ranges." },
+  ]}
+/>
+
+## Next steps
+
+- [Datasets: realtime, archive, combined](/docs/graphql/dataset/realtime/)
+- [Common errors — including empty results](/docs/start/errors/)
+- [Kafka Operations Cookbook](/docs/streams/kafka-operations/)
+- [Cloud datasets (Parquet / S3)](/docs/cloud/)

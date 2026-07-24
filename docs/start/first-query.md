@@ -5,7 +5,7 @@ description: "Run your first Bitquery GraphQL query in minutes with IDE setup, a
 ---
 # Your First Query
 
-Create and run your first query on Bitquery IDE by visiting [https://graphql.bitquery.io/ide](https://graphql.bitquery.io/ide).
+Create and run your first query on Bitquery IDE by visiting [https://ide.bitquery.io/](https://ide.bitquery.io/).
 
 ## Create an account
 
@@ -13,7 +13,7 @@ To continue, you must first [register](https://account.bitquery.io/auth/signup) 
 
 **Registration Process**:
 
-- Navigate to the Bitquery GraphQL IDE by visiting [https://graphql.bitquery.io/ide](https://graphql.bitquery.io/ide).
+- Navigate to the Bitquery GraphQL IDE by visiting [https://ide.bitquery.io/](https://ide.bitquery.io/).
 - If you are not registered, click on the "Not registered" link.
 - You will need to provide your Email, Password, Password Confirmation, Name, and Company Name in the designated fields.
 - Complete the CAPTCHA challenge and click the Submit button to proceed.

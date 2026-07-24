@@ -8,9 +8,9 @@ description: "Ethereum Smartcontract Filterby: query and stream Ethereum on-chai
 ## Smart Contract Calls by Method Signature
 
 This query retrieves the 10 most recent smart contract calls that match a specific function signature (harvest()) on the Binance Smart Chain (BSC) network. It also includes transaction and block data associated with each call. 
-You can find the GraphQL query [here](https://graphql.bitquery.io/ide/Calls-by-Method-Signature)
+You can find the GraphQL query [here](https://ide.bitquery.io/Calls-by-Method-Signature)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: bsc) {
     Calls(
@@ -62,9 +62,9 @@ The query returns the following data for each smart contract call:
 ## Smart Contract Calls by Opcode
 
 This GraphQL query retrieves information about the latest STATICCALL EVM (Ethereum Virtual Machine) calls on the Binance Smart Chain network.
-You can find the GraphQL query [here](https://graphql.bitquery.io/ide/Smart-Contract-Calls-by-Opcode)
+You can find the GraphQL query [here](https://ide.bitquery.io/Smart-Contract-Calls-by-Opcode)
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: bsc) {
     Calls(
@@ -117,7 +117,7 @@ The Array-like structure of [Arguments and Returns](/docs/schema/evm/arguments/)
 
 This [query](https://ide.bitquery.io/smart_contract_argument_transfer) demonstrates how we can trace transfer calls to a particular token contract, Matic Token in this case, that are being transferred to a specified wallet address. This is useful for monitoring the inflow of a specific token to a certain wallet.
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: eth) {
     Calls(
@@ -192,7 +192,7 @@ Let's consider a scenario where we're interested in tracking large liquidity add
 
 By [this](https://ide.bitquery.io/addLiquidityETH_function) query, We can track calls to the function ` addLiquidityETH ` which is a common function used in Uniswap for adding liquidity to a pool.
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: eth) {
     Calls(

@@ -402,7 +402,7 @@ query MyQuery {
 
 Use the following WebSocket subscription to monitor live trades greater than $5,000 USD on Polymarket Bitcoin Up or Down markets. This is ideal for detecting whale activity and large market movements in real time.
 
-```
+```graphql
 subscription {
   EVM(network: matic) {
     PredictionTrades(

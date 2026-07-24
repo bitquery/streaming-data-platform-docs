@@ -17,7 +17,7 @@ If you want fastest data without any latency, we can provide Kafka streams, plea
 Get a list of successful DEX trades on Tron along with the transaction fee details for each trade.
 You can test the query [here](https://ide.bitquery.io/tron-trades-with-transaction-fees#).
 
-```
+```graphql
 query MyQuery {
   Tron {
     DEXTradeByTokens(
@@ -72,7 +72,7 @@ query MyQuery {
 Track wallet token transfers and get the fees paid for each by the address.
 You can test the query [here](https://ide.bitquery.io/tron-wallet-transfers-with-transaction-fees-paid).
 
-```
+```graphql
 query MyQuery {
   Tron {
     Transfers(
@@ -109,7 +109,7 @@ query MyQuery {
 Get the total fees (in SOL and USD) paid by a specific Tron account across all transfers.
 You can test the query [here](https://ide.bitquery.io/Tron-total-txn-fees-paid-by-the-Account#).
 
-```
+```graphql
 query MyQuery {
   Tron {
     Transfers(
@@ -127,7 +127,7 @@ query MyQuery {
 Get total fees paid by a Tron account for transferring each type of token.
 You can test the query [here](https://ide.bitquery.io/Tron-Transaction-fees-paid-by-Account-aggregated-by-currency).
 
-```
+```graphql
 query MyQuery {
   Tron {
     Transfers(

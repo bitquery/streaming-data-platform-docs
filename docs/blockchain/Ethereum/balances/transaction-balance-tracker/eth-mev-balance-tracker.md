@@ -98,7 +98,7 @@ quickly see how large each MEV reward was.
 
 [Try the API](https://ide.bitquery.io/QuasarBuilder-MEV-Payout-Transaction-Balance)
 
-```
+```graphql
 {
   EVM(network: eth) {
     TransactionBalances(

@@ -360,7 +360,7 @@ Now you can track the newly created Pump.fun Tokens along with their dev address
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription {
   Solana {
     TokenSupplyUpdates(
@@ -416,7 +416,7 @@ Try the API [here](https://ide.bitquery.io/Track-Mayhem-Mode-enabled-Pumpfun-Tok
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -475,7 +475,7 @@ Now you can check if a pump fun token is in Mayhem mode or not, we will be check
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana {
     Instructions(
@@ -700,7 +700,7 @@ Use the below query to get top 10 Pump.fun tokens by price change in the last 5 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Trading {
     Pairs(
@@ -1910,7 +1910,7 @@ query MyQuery($token: String, $bonding_curve: String) {
 }
 ```
 
-```
+```json
 {
   "token": "3Fymji2JPhhbKuCzNPKEyjdEuF9cyFuQ8HksyjRGpump",
   "bonding_curve": "6AMeqEdepfKKmTQAwcMvbrwugcaJaXtt3MsJGy7WdXpk"

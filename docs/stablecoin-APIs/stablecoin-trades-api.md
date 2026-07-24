@@ -16,7 +16,7 @@ For pre-built stablecoin dashboards (top tokens, flows, market activity), browse
 
 Below stream will give you realtime **USDT** DEX trades on Ethereum. Test the stream [here](https://ide.bitquery.io/Stablecoin-trades-for-etheruem).
 
-```
+```graphql
 subscription {
   EVM {
     DEXTrades(
@@ -73,7 +73,7 @@ subscription {
 
 Below stream tracks **USDT** on Ethereum when **PriceInUSD** is outside **0.95–1.05** (depeg-style band). Test the query [here](https://ide.bitquery.io/Stablecoin-Depeg-tracking-Stream-for-evm).
 
-```
+```graphql
 subscription {
   EVM {
     DEXTradeByTokens(
@@ -119,7 +119,7 @@ subscription {
 
 Below stream will give you realtime trades of `USDT` on Solana. Test the stream [here](https://ide.bitquery.io/solana-trades-subscription_10_1).
 
-```
+```graphql
 subscription {
   Solana {
     DEXTrades (where:{any:[{Trade:{Buy:{Currency:{MintAddress:{is:"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}}}}},{Trade:{Sell:{Currency:{MintAddress:{is:"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}}}}}]}){
@@ -198,7 +198,7 @@ subscription {
 Below stream will provide you the realtime portfolio updates for a particular address for a specific Stablecoin. In this query example, we are tracking portfolio updates for the address `3i51cKbLbaKAqvRJdCUaq9hsnvf9kqCfMujNgFj7nRKt` and for stablecoin `USDC`.
 Test the query [here](https://ide.bitquery.io/real-time-stablecoin-portfolio_2).
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     DEXTradeByTokens(
@@ -251,7 +251,7 @@ subscription MyQuery {
 Below stream will be able to track specific Stablecoin depeg. In this query example, we are tracking depeg for the stablecoin `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` which has a symbol `USDC`.
 Test the query [here](https://ide.bitquery.io/stablecoin-depeg-tracking-stream-for-USDC).
 
-```
+```graphql
 subscription {
   Solana {
     DEXTradeByTokens(
@@ -296,7 +296,7 @@ subscription {
 
 Below stream will give you realtime **USDT** DEX trades on Tron. Test the stream [here](https://ide.bitquery.io/Stablecoin-trades-for-tron).
 
-```
+```graphql
 subscription {
   Tron {
     DEXTrades(
@@ -353,7 +353,7 @@ subscription {
 
 Below stream tracks **USDT** on Tron when **PriceInUSD** is outside **0.95–1.05** (depeg-style band). Test the query [here](https://ide.bitquery.io/Stablecoin-Depeg-tracking-Stream-for-tron).
 
-```
+```graphql
 subscription {
   Tron {
     DEXTradeByTokens(

@@ -113,7 +113,7 @@ Aggregated OHLC from any provider can have **open ≠ previous close**. This tut
 
 At runtime, the pieces interact like this:
 
-![](/img/diagrams/tradingview_flowchart.png)
+![TradingView integration flowchart](/img/diagrams/tradingview_flowchart.png)
 
 1. **First paint:** the widget asks the datafeed for **history**; your code calls Bitquery over **HTTPS**, maps the result to bars, and returns them to TradingView.
 2. **Live:** the widget **subscribes**; your code opens a **WebSocket** subscription, receives each new bar, and forwards it to TradingView’s callback so the chart updates.

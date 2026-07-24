@@ -1,0 +1,72 @@
+---
+title: "Wallet Provenance: First Funding & Deployer History"
+description: "Find who funded a wallet, its first incoming transfer, and every token a deployer has launched — for provenance and rug-checks."
+sidebar_position: 21
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Wallet Provenance & Deployer History
+
+Two related investigation recipes: tracing where a wallet's funds first came from, and listing every token a deployer has launched (a common rug-check).
+
+## First incoming transfer (who funded this wallet)
+
+Order the wallet's incoming transfers ascending by time and take the first — that's the initial funding event, and its sender is the funder.
+
+```graphql
+{
+  EVM(network: eth, dataset: combined) {
+    Transfers(
+      where: { Transfer: { Receiver: { is: "0x..." } } }
+      orderBy: { ascending: Block_Time }
+      limit: { count: 1 }
+    ) {
+      Block { Time }
+      Transfer {
+        Sender
+        Amount
+        Currency { Symbol SmartContract }
+      }
+      Transaction { Hash }
+    }
+  }
+}
+```
+
+Order by `Block_Time` (not a transaction-timestamp field, which can drop rows). Repeat on the funder to walk the chain back a few hops; for deep multi-hop money-flow use [Coinpath](https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api).
+
+## Every token a wallet deployed (rug-check)
+
+Find contract-creation events by a deployer address to see all tokens/contracts it launched — repeat-deployer patterns are a rug signal.
+
+```graphql
+{
+  EVM(network: eth, dataset: combined) {
+    Calls(
+      where: {
+        Call: { Create: true, Signer: { is: "0x..." } }
+      }
+    ) {
+      Block { Time }
+      Call { To }
+      Transaction { Hash }
+    }
+  }
+}
+```
+
+`Call.To` on a creation call is the newly-deployed contract address. On Solana, use the launchpad create instructions (e.g. pump.fun) filtered by the creator wallet — see the [Solana launchpad pages](/docs/blockchain/Solana/).
+
+<FAQ
+  items={[
+    { q: "How do I find who funded a wallet?", a: "Order the wallet's incoming transfers ascending by Block_Time and take the first; its sender is the initial funder. Walk back a few hops on the funder for provenance." },
+    { q: "How do I list every token a deployer launched?", a: "Query contract-creation calls (Create: true) filtered by the deployer/signer address; Call.To is each newly-deployed contract. Repeat-deployer patterns are a rug signal." },
+    { q: "Can I follow funds across many hops automatically?", a: "For deep multi-hop money-flow, use Coinpath (currently a v1 capability). The transfer-ordering recipe here is best for one or a few hops." },
+  ]}
+/>
+
+## Next steps
+
+- [ERC-20 transfers API](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api/)
+- [Coinpath (v1)](https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api)

@@ -64,7 +64,7 @@ You can use the following query to get the latest price of a token on SolFi on S
 
 You can run this query using this [link](https://ide.bitquery.io/latest-price-of-token-on-solfi).
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -90,7 +90,7 @@ You can use the following query to get the latest price of a token on SolFi on S
 
 You can run this query using this [link](https://ide.bitquery.io/realtime-price-of-token-on-solfi).
 
-```
+```graphql
 subscription{
   Solana {
     DEXTradeByTokens(
@@ -112,7 +112,7 @@ subscription{
 
 If you want to get OHLC data for any specific currency pair on SolFi, you can use this api. Only use [this API](https://ide.bitquery.io/SolFi-OHLC-for-specific-pair) as query and not subscription websocket as Aggregates and Time Intervals don't work well with subscriptions.
 
-```
+```graphql
 {
   Solana {
     DEXTradeByTokens(
@@ -141,7 +141,7 @@ If you want to get OHLC data for any specific currency pair on SolFi, you can us
 
 The below query gets the Top Traders of the specified Token `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` on SolFi. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-solfi)
 
-```
+```graphql
 query TopTraders($token: String) {
   Solana {
     DEXTradeByTokens(
@@ -176,7 +176,7 @@ query TopTraders($token: String) {
 
 This query fetches you the traded volume, buy volume and sell volume of a token `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v`. Try out the API [here](https://ide.bitquery.io/trade_volume-Solfi).
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: combined) {
     DEXTradeByTokens(

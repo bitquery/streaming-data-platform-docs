@@ -6,7 +6,7 @@ description: "eth_getTransactionReceipt: query and stream Ethereum on-chain data
 
 In this section, we will build an alternative to the eth_getTransactionReceipt JSON RPC method using the Bitquery APIs. The method is used to provide the receipt of a transaction given `transaction hash`. Note that the receipt is not available for pending transactions.
 
-# Get Transaction Receipt
+## Get Transaction Receipt
 We can get the receipt of a transaction using the transaction hash, `0x4fe59dcf4f834f17acdcd0f244538c119523009ce47817ccd56423404ba34ffa` for this example, using [this](https://ide.bitquery.io/eth_getTransactionReceipt_1) API given below.
 
 ``` graphql

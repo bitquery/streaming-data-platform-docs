@@ -6,7 +6,7 @@ description: "debug_traceTransaction: query and stream Ethereum on-chain data wi
 
 debug_traceTransaction is a JSON RPC method that returns tracing results for the specified transaction. In this section, we are looking for a way to build an alternative for the same using Bitquery API.
 
-# Debug Trace Transaction
+## Debug Trace Transaction
 
 To trace a transaction using the debug_traceTransaction we need the `transaction hash`. We are using [this](https://ide.bitquery.io/debug_traceTransaction) API given below for tracing the transaction, with transaction hash as `0x4fe59dcf4f834f17acdcd0f244538c119523009ce47817ccd56423404ba34ffa`.
 

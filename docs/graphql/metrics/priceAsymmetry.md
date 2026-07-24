@@ -33,7 +33,7 @@ Use the PriceAsymmetry metric to filter the response. By comparing two values de
 
 Here's an example [query on ethereum trades](https://ide.bitquery.io/Price-based-on-DEX-trades-in-USD).
 
-```
+```graphql
 subscription {
   EVM {
     DEXTradeByTokens(
@@ -63,7 +63,7 @@ subscription {
 
 Similarly, below is an example on solana trades.
 
-```
+```graphql
 subscription {
   Solana {
     DEXTradeByTokens(

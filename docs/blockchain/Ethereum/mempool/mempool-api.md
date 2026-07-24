@@ -16,7 +16,7 @@ Subscribe to **`EVM(mempool: true)`** **`Transactions`** with **`where.any`** on
 The below query retrieves information about in-flight transactions, helping you simulate the most recent state. It is a way to see if they will succeed without sending them on-chain. The `Success` field tells you if your mempool tranaction is successful and `FaultError` and `FaultError` indicate otherwise.
 You can find query [here](https://ide.bitquery.io/Simulating-Pending-Transactions_1)
 
-```
+```graphql
 subscription{
   EVM(mempool: true) {
     Transfers{
@@ -59,7 +59,7 @@ The Recommended Fees API provides real-time data from the mempool. It returns fi
 
 You can run the query [here](https://ide.bitquery.io/Get-Mempool-Fees)
 
-```
+```graphql
 {
   EVM(mempool: true) {
     Transactions(limit: {count: 100}) {
@@ -93,7 +93,7 @@ You can run the query [here](https://ide.bitquery.io/Get-Mempool-Fees)
 
 This query returns information about transactions that have triggered the `PairCreated` event in the mempool, including the transaction hash, log signature, and argument values. You can run the query [here](https://ide.bitquery.io/PairCreated-in-Mempool)
 
-```
+```graphql
 subscription {
   EVM(mempool: true) {
     Events(where: {Log: {Signature: {Name: {is: "PairCreated"}}}}) {
@@ -138,7 +138,7 @@ subscription {
 
 This subscription provides information about the most recent token trades in the mempool, including the block number and time, transaction details, and trade information such as buyer, seller, price, and currencies involved. You can run the query [here](https://ide.bitquery.io/mempool-token-trades_1)
 
-```
+```graphql
 subscription {
   EVM(mempool: true) {
     buyside: DEXTrades {
@@ -185,7 +185,7 @@ subscription {
 
 This subscription returns details about the latest token transfers in the mempool, including the transfer amount, currency name and symbol, sender, receiver, and transfer type. You can run the query [here](https://ide.bitquery.io/mempool-transfers_1)
 
-```
+```graphql
 subscription {
   EVM(mempool: true) {
     Transfers {
@@ -213,7 +213,7 @@ The example below retrieves mempool transactions **from** the specified address 
 
 You can run the query [here](https://ide.bitquery.io/Binance-Mempool-Transactions_1)
 
-```
+```graphql
 subscription {
  EVM(mempool: true) {
    Transactions(
@@ -240,7 +240,7 @@ subscription {
 You can track changes in balance after each transaction in the mempool, even before it is confirmed.
 You can run it [here](https://ide.bitquery.io/Mempool-balance-updates-on-Ethereum-Arbitrum-BNB-subscription)
 
-```
+```graphql
 subscription {
   EVM(network: eth, mempool: true) {
     BalanceUpdates {
@@ -267,7 +267,7 @@ subscription {
 
 The following subscription query retrieves real-time mempool transactions and includes key details such as the block time, block number, transaction hash, transaction cost, and the V, R, S components of the transaction signature. You can run it [here](https://ide.bitquery.io/vrs-signature)
 
-```
+```graphql
 subscription {
   EVM(network: eth, mempool: true) {
     Transactions {

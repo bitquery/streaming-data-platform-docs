@@ -14,7 +14,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -77,7 +77,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: false}`, this means tha
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -145,7 +145,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: false}`, this means tha
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -268,7 +268,7 @@ This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in t
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 {
   Trading {
     Currencies(
@@ -561,7 +561,7 @@ Fetch the top 10 tokens by 5-minute percentage price change (USD-based), only in
 
 Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
-This stream uses [expressions](http://docs.bitquery.io/docs/graphql/capabilities/expression/)
+This stream uses [expressions](/docs/graphql/capabilities/expression/)
 
 [Run Stream ➤](https://ide.bitquery.io/5-minute-price-change-api_2)
 
@@ -643,13 +643,13 @@ Stream the top 10 tokens on Solana by 5-minute price change (in USD), filtered b
 
 Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
-This stream uses [expressions](http://docs.bitquery.io/docs/graphql/capabilities/expression/)
+This stream uses [expressions](/docs/graphql/capabilities/expression/)
 
 [Run Stream ➤](https://ide.bitquery.io/5-minute-price-change-api-on-solana_6)
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` in most examples to remove extreme outliers; this stream already filters by `Volume: { Usd: { gt: 100000 } }`.
 
-```
+```graphql
 subscription{
   Trading {
     Tokens(
@@ -721,7 +721,7 @@ subscription{
 
 Calculate the percentage drawdown (price decline) for tokens of a specific currency (e.g., Bitcoin) over a 1-hour interval.
 
-This query uses [expressions](http://docs.bitquery.io/docs/graphql/capabilities/expression/) to calculate drawdown as: `((Close - Open) / Open) * 100`.
+This query uses [expressions](/docs/graphql/capabilities/expression/) to calculate drawdown as: `((Close - Open) / Open) * 100`.
 
 > **Note:** You can use `Token: {Address: {is: "token_address"}}` filter instead of `Currency: {Id: {is: "bid:bitcoin"}}` to filter by token address. We include `Volume: { Usd: { gt: 10 } }` to filter out tokens with very low trading volume.
 
@@ -886,7 +886,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -969,7 +969,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -1053,7 +1053,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -1137,7 +1137,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -1221,7 +1221,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -1305,7 +1305,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -1388,7 +1388,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(
@@ -1471,7 +1471,7 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 
 > Note: We include `Volume: { Usd: { gt: 5 } }` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
-```
+```graphql
 subscription {
   Trading {
     Pairs(

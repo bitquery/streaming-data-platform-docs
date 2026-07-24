@@ -18,7 +18,7 @@ The DEXTrades cube provides comprehensive information about the dex trading data
 
 > Import Note: If there is a trade between 2 addresses, the details in `Buy{}` dropdown are pool details, and the information displayed in the DEXTrades cube is from the pool's perspective.
 
-![](/img/tokenAB.png)
+![Token A to Token B trade pair diagram](/img/tokenAB.png)
 
 Let's understand the concept of buyer and seller. Token X and token Y swap as above.
 
@@ -42,7 +42,7 @@ Next, we understand how the Dextrades Cube displays the result:
 
 Take this query for example:
 
-```
+```graphql
 {
   EVM(network: eth, dataset: archive) {
     DEXTrades(
@@ -87,7 +87,7 @@ Take this query for example:
 
 Output
 
-```
+```json
 {
   "EVM": {
     "DEXTrades": [
@@ -165,7 +165,7 @@ Metrics allow for sum, count, average, median, maximum, minimum, and more calcul
 
 The count metric can easily retrieve a specific token's total number of trades. [Run this API](https://ide.bitquery.io/Count-of-trade-on-Uniswap-of-pepe) to find the total trades of [PEPE](https://explorer.bitquery.io/ethereum/token/0x6982508145454ce325ddbe47a25d4ec3d2311933) "0x698…" tokens in the [Uniswap v3 factory](https://explorer.bitquery.io/ethereum/token/0x6982508145454ce325ddbe47a25d4ec3d2311933) "0x1f984…" in the ethereum network.
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: archive, network: eth) {
     DEXTradeByTokens(

@@ -31,7 +31,7 @@ Rebasing tokens (like Mountain Protocol's USDM) automatically adjust their total
 
 The query will subscribe you to real-time updates for balance changes on the BSC blockchain, providing a continuous stream of data as new transactions are processed and recorded. Here we have used address `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`. You can find the query [here](https://ide.bitquery.io/get-real-time-balance-updates-of-an-address_1)
 
-```
+```graphql
 subscription {
   EVM(network: bsc) {
     BalanceUpdates(
@@ -60,7 +60,7 @@ This query gets the top holders of a token filtered using `Currency: { SmartCont
 
 You can run the query [here](https://ide.bitquery.io/Top-10-holders-of-a-token-on-BSC)
 
-```
+```graphql
 
 {
   EVM(network: bsc, aggregates: yes, dataset: combined) {
@@ -87,7 +87,7 @@ We will aggregate balance update data for this API.
 
 [Run Query ➤](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-BSC)
 
-```
+```graphql
 query {
   EVM(network: bsc, aggregates: yes, dataset: combined) {
     BalanceUpdates(
@@ -121,7 +121,7 @@ query {
 
 Get the token holdings of an address and calculate the holding time using `first_buy_time` and `latest_balance_update_time`; test this query [here](https://ide.bitquery.io/holdings-holding-time-of-an-address-for-a-specific-token-on-EVM).
 
-```
+```graphql
 query ($trader: String, $token: String) {
   EVM(network: bsc) {
     TransactionBalances(
@@ -147,7 +147,7 @@ query ($trader: String, $token: String) {
 }
 ```
 
-```
+```json
 {
   "trader": "0xc5C2653d38E241D62F96A4fB8f8497b6126F21dC",
   "token": "0x49d870B1d21D00c775DD03110Ef4c8FeF4Fd4444"

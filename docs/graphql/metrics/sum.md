@@ -9,7 +9,7 @@ description: "Sum trade amounts and transfer volumes in Bitquery GraphQL aggrega
 
 Example: 
 
-```
+```graphql
 {
   EVM (dataset: archive){
     MinerRewards {

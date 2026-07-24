@@ -49,7 +49,7 @@ At the top of your `index.js` file, import the necessary dependencies:
 
   
 
-```
+```javascript
 const { Client, GatewayIntentBits } = require("discord.js");
 const axios = require("axios");
 require("dotenv").config();
@@ -66,7 +66,7 @@ Next, configure the Discord bot by creating a new instance of the `Client` class
 
   
 
-```
+```javascript
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -85,7 +85,7 @@ Retrieve your Discord bot token and Bitquery OAuth token. Replace the placeholde
 
   
 
-```
+```javascript
 const CLIENT_TOKEN = "<YOUR_DISCORD_BOT_TOKEN>";
 
 ```

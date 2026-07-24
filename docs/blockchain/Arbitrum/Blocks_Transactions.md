@@ -12,7 +12,7 @@ In this section we'll have a look at some examples using the Arbitrum Transactio
 The query below retrieves the latest 10 transactions on the Arbitrum network.
 You can find the query [here](https://ide.bitquery.io/Latest-Transactions_3)
 
-```
+```graphql
 {
   EVM(network: arbitrum, dataset: archive) {
     Transactions(
@@ -47,7 +47,7 @@ You can find the query [here](https://ide.bitquery.io/Latest-Transactions_3)
 
 To retrieve the latest transactions from or to a specific wallet address we will be using the `any` filter which acts as the OR condition. This query fetches the 10 most recent transactions from/to the specified wallet address, ordered by the block time in descending order.
 
-```
+```graphql
 {
   EVM(network: arbitrum, dataset: archive) {
     Transactions(
@@ -84,7 +84,7 @@ To retrieve the latest transactions from or to a specific wallet address we will
 The query below retrieves the latest 10 blocks on the Arbitrum network.
 You can find the query [here](https://ide.bitquery.io/Latest-Arbitrum-blocks)
 
-```
+```graphql
 query MyQuery {
   EVM(network: arbitrum) {
     Blocks(limit: {count: 10}, orderBy: {descending: Block_Time}) {

@@ -16,7 +16,7 @@ You can use following query to get new tokens and sell event using following str
 
 Here is [link]( https://ide.bitquery.io/Events-with-argumens) using which you can run it on our IDE.
 
-```
+```graphql
 subscription {
   Tron(mempool: true) {
     NewTokenEvents: Events(
@@ -65,7 +65,7 @@ To fetch the most recent trades on SunSwap, you can filter the trades by using t
 The query retrieves details about each trade, including the amounts and prices of tokens bought and sold, as well as information about the trading pair.
 You can find the query [here](https://ide.bitquery.io/sunswap-v2-latest-Trades)
 
-```
+```graphql
 query MyQuery {
   Tron(dataset: realtime, network: tron) {
     DEXTrades(
@@ -107,7 +107,7 @@ query MyQuery {
 ## Latest Trades of a Token on Sunswap
 
 You can run the query [here](https://ide.bitquery.io/sunswap-latest-Trades-of-token)
-```
+```graphql
 query MyQuery {
   Tron(dataset: realtime, network: tron) {
     DEXTrades(

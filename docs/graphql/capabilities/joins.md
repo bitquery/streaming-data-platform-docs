@@ -10,7 +10,7 @@ The `joinPLACEHOLDER` function enables you to **embed a subquery** within your m
 
 For example,
 
-```
+```graphql
 query MyQuery {
   EVM {
     DEXTradeByTokens{
@@ -33,7 +33,7 @@ query MyQuery {
 - `inner` returns only matching results. If there are no matching results in joined query, the result is not returned;
 - `inner_any` returns only one ( any ) matching result. If there are no matching results in joined query, the result is not returned;
 
-![](/img/joins.png)
+![GraphQL joins across cubes diagram](/img/joins.png)
 
 Here are the additional details from your document that you may want to include in your Markdown:
 

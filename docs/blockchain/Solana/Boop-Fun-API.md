@@ -26,7 +26,7 @@ Below query can be used to track Boop.fun token migrations. In this query we are
 
 Try the query [here](https://ide.bitquery.io/Boopfun-token-migrations)
 
-```
+```graphql
 query MyQuery {
   Solana {
     Instructions(
@@ -97,7 +97,7 @@ query MyQuery {
 
 You can track latest buy trades on Boop.Fun using the below API. Try the API [here](https://ide.bitquery.io/latest-boopfun-token-buys#).
 
-```
+```graphql
 query MyQuery {
   Solana {
     Instructions(
@@ -168,7 +168,7 @@ query MyQuery {
 
 You can track latest sell trades on Boop.Fun using the below API. Try the API [here](https://ide.bitquery.io/latest-boopfun-token-sells#).
 
-```
+```graphql
 query MyQuery {
   Solana {
     Instructions(
@@ -239,7 +239,7 @@ query MyQuery {
 
 You can track latest token launches on Boop.Fun using the below API. Try the API [here](https://ide.bitquery.io/latest-boopfun-token-creations#).
 
-```
+```graphql
 query MyQuery {
   Solana {
     Instructions(
@@ -313,7 +313,7 @@ Use this single subscription to stream real-time token migration events across B
 
 Try out the [API](https://ide.bitquery.io/Raydium-Launchlab-Meteora-DBC-BoopFun-Moonshot-LetsBonkfun-token-migrations-in-realtime_2) here on IDE.
 
-```
+```graphql
 subscription{
   Solana {
     Instructions(

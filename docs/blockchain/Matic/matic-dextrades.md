@@ -105,7 +105,7 @@ This example uses the chain-specific **DEXTrades** cube via `EVM(network: matic)
 Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 You can find the query [here](https://ide.bitquery.io/Realtime-matic-dex-trades-websocket)
 
-```
+```graphql
 subscription {
   EVM(network: matic) {
     DEXTrades {
@@ -157,7 +157,7 @@ subscription {
 
 This query provides real-time updates on price of AVAX `0x2C89bbc92BD86F8075d1DEcc58C7F4E0107f286b` in terms of WMATIC `0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270`, including details about the DEX, market, and order specifics. Find the query [here](https://ide.bitquery.io/Price-of-a-AVAX-in-terms-of-WMATIC-on-matic_2)
 
-```
+```graphql
 subscription {
   EVM(network: matic) {
     DEXTrades(
@@ -208,7 +208,7 @@ subscription {
 
 The below query retrieves the USD price of a token on Matic by setting `SmartContract: {is: "0xe06bd4f5aac8d0aa337d13ec88db6defc6eaeefe"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Latest-USD-Price-of-a-Token-on-Matic).
 
-```
+```graphql
 subscription {
   EVM(network: matic) {
     DEXTrades(
@@ -263,7 +263,7 @@ We use `any` filter ( OR condition) to exclude `$wmatic`, `$weth`, `$usdc`, `$us
 
 You can run this query [here](https://ide.bitquery.io/top-tokens-on-matic-stats)
 
-```
+```graphql
 query pairs($min_count: String, $network: evm_network, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime, $time_ago: DateTime, $wmatic: String!, $weth: String!, $usdc: String!, $usdt: String!, $usdcpos: String!) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -326,7 +326,7 @@ query pairs($min_count: String, $network: evm_network, $time_10min_ago: DateTime
 
 This query is available as a heatmap on [https://dexrabbit.com/matic](https://dexrabbit.com/matic)
 
-![](/img/dexrabbit/matic_toptokens.png)
+![Top Polygon tokens by volume on DEXrabbit](/img/dexrabbit/matic_toptokens.png)
 
 ## Top Traders of a Token
 
@@ -334,7 +334,7 @@ This query retrieves data on the top traders of a specific token on the Matic ne
 
 You can run the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-matic_1)
 
-```
+```graphql
 query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
@@ -364,7 +364,7 @@ query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
 
 This query is available as a chart and table on [https://dexrabbit.com/matic](https://dexrabbit.com/matic)
 
-![](/img/dexrabbit/matic_toptraders.png)
+![Top Polygon traders on DEXrabbit](/img/dexrabbit/matic_toptraders.png)
 
 ---
 

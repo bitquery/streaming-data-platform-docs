@@ -802,7 +802,7 @@ Here's an example of [tracking Four.meme token prices](https://ide.bitquery.io/l
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   Trading {
     Pairs(
@@ -1691,7 +1691,7 @@ You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   EVM(dataset: realtime, network: bsc) {
     Events(
@@ -1777,7 +1777,7 @@ You can run the query [here](https://ide.bitquery.io/Liquidity-Added-to-specific
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 {
   EVM(dataset: realtime, network: bsc) {
     Events(
@@ -1910,7 +1910,7 @@ query MyQuery($token: String) {
 }
 ```
 
-```
+```json
 {
   "token": "0x35a7bb282d8caafe71617c9d52ee30f1adfe4444"
 }
@@ -1962,7 +1962,7 @@ query MyQuery($token: String!, $buyersList: [String!]) {
 }
 ```
 
-```
+```json
 {
   "token": "0x35a7BB282d8CAAFe71617c9d52EE30F1adFe4444",
   "buyersList" : [Pass the Address list you getting in Query 1]
@@ -2035,7 +2035,7 @@ You can test the query [here](https://ide.bitquery.io/top-traders-of-a-four-meme
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query topTraders($network: evm_network, $token: String) {
   EVM(network: $network, dataset: combined) {
     DEXTradeByTokens(
@@ -2073,7 +2073,7 @@ Using below API you can get the liquidity of a four meme token. Subtract `200000
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   EVM(dataset: combined, network: bsc) {
     BalanceUpdates(

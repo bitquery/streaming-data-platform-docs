@@ -65,7 +65,7 @@ To ensure that Pub/Sub sends data to BigQuery:
      - **Delivery Type**: Write to BigQuery
      - **BigQuery Table**: Select the `newtrades` table in the `trade_data` dataset.
 
-![](/img/diagrams/bigquery_table.png)
+![BigQuery table populated with streamed blockchain data](/img/diagrams/bigquery_table.png)
 
 3. Click **Create**.
 

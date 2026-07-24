@@ -29,7 +29,7 @@ on the result panel:
 
 <video controls loop muted playsInline width="100%" src="/img/ide/ide_subscription.mp4"></video>
 
-> Query used: [Real Time Blocks Subscription | BSC](https://graphql.bitquery.io/ide/Real-Time-Blocks-Subscription--BSC)
+> Query used: [Real Time Blocks Subscription | BSC](https://ide.bitquery.io/Real-Time-Blocks-Subscription--BSC)
 
 To stop updates, press the run button again.
 

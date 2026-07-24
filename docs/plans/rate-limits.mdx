@@ -1,0 +1,69 @@
+---
+title: "Rate Limits, Concurrency & Backoff"
+description: "Bitquery API rate limits, 429 causes, recommended backoff, WebSocket concurrency caps, and gRPC stream rules."
+sidebar_position: 2
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Rate Limits, Concurrency & Backoff
+
+This page explains the limits that govern how fast you can query and stream, how to tell the different throttles apart, and how to build a client that backs off correctly.
+
+:::note Limits vary by plan
+The [pricing page](https://bitquery.io/pricing) is the source of truth for current per-plan limits.
+:::
+
+## Request rate limit
+
+The GraphQL API enforces a per-account **requests-per-minute** limit by plan:
+
+| Plan | Rate limit |
+|---|---|
+| Personal | 30 / min |
+| Pro | 90 / min |
+| Scale | 240 / min |
+| Enterprise | Custom |
+
+Exceeding it returns a `429`. Heavy analytical queries also compete for shared compute (see below), so throughput in practice depends on query cost, not just request count.
+
+## Three different throttles — and how to tell them apart
+
+A `4xx`/`5xx` under load can come from three distinct sources. Diagnosing which one you hit determines the fix:
+
+1. **Account rate limit** — you're sending requests faster than your plan's per-minute allowance. *Fix:* slow down / add client-side rate limiting.
+2. **Shared compute pressure** — a message like `temporarily blocked due to a high number of long-running queries` means the shared query engine is busy, not that you exceeded an account limit. *Fix:* retry with backoff; make queries cheaper (narrower time windows, indexed filters).
+3. **Plan entitlement block** — the request targets a chain/cube/interface not in your plan. *Fix:* this is billing, not throttling — see [How Billing Works](/docs/plans/how-billing-works/).
+
+## Recommended client behavior
+
+- Run **heavy queries sequentially**, not in large parallel bursts.
+- On `429` or a shared-compute block, use **exponential backoff** (start around 5s, double, cap at ~1 min).
+- Keep queries cheap: narrow `Block.Time`/date ranges, and filter on [indexed fields](/docs/graphql/indexed-fields-reference/) so the engine scans less.
+- Prefer **one batched query** (many addresses/tokens in a single `where`) over many small ones.
+
+## WebSocket concurrency
+
+- Each plan allows a maximum number of **concurrent subscriptions** (Personal: none; Pro: 100; Scale: 1,000; Enterprise: unlimited).
+- **Exceeding the cap fails silently:** the socket connects but delivers no data, rather than returning a clear error. If a subscription "connects but nothing arrives," check your running-subscription count first at [Account → Subscriptions](https://account.bitquery.io/user/api_v2/subscriptions).
+- **Revoking a token does not kill open sockets.** Terminate running subscriptions explicitly from the account panel. See [WebSocket subscriptions](/docs/subscriptions/websockets/).
+
+## gRPC (Solana CoreCast)
+
+- A gRPC subscription **requires at least one filter** — an unfiltered stream is rejected.
+- **Multiple tokens per stream.** You can subscribe to many token/account filters in a single gRPC stream — you don't need one stream per token.
+
+<FAQ
+  items={[
+    { q: "How many requests per minute does Bitquery allow?", a: "It depends on your plan: Personal 30/min, Pro 90/min, Scale 240/min, Enterprise custom. Exceeding it returns a 429, and heavy queries also compete for shared compute." },
+    { q: "Why am I getting 429 errors?", a: "Either you exceeded your account's per-minute rate, or the shared query engine is under load ('temporarily blocked due to a high number of long-running queries'). The first needs client-side rate limiting; the second needs retry with backoff and cheaper queries." },
+    { q: "Why is my WebSocket connected but receiving no data?", a: "You've likely exceeded your plan's concurrent-subscription cap, which fails silently. Check and terminate running subscriptions in the account panel; note that revoking a token does not stop already-open sockets." },
+  ]}
+/>
+
+## Next steps
+
+- [How Billing Works: Points, Plans & Limits](/docs/plans/how-billing-works/)
+- [WebSocket subscriptions](/docs/subscriptions/websockets/)
+- [Common errors and what to do](/docs/start/errors/)
+- [Indexed fields reference](/docs/graphql/indexed-fields-reference/)

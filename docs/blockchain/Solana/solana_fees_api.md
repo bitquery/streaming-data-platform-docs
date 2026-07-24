@@ -18,7 +18,7 @@ If you want fastest data without any latency, we can provide Kafka streams, plea
 Get a list of successful DEX trades on Solana along with the transaction fee details for each trade.
 You can test the query [here](https://ide.bitquery.io/trades-with-transaction-fees#).
 
-```
+```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
@@ -81,7 +81,7 @@ query MyQuery {
 Track wallet token transfers and get the fees paid for each by the address.
 You can test the query [here](https://ide.bitquery.io/wallet-transfers-with-transaction-fees-paid#).
 
-```
+```graphql
 query MyQuery {
   Solana {
     Transfers(
@@ -122,7 +122,7 @@ query MyQuery {
 Get the total fees (in SOL and USD) paid by a specific Solana account across all transfers.
 You can test the query [here](https://ide.bitquery.io/total-txn-fees-paid-by-the-Account#).
 
-```
+```graphql
 query MyQuery {
   Solana {
     Transfers(
@@ -140,7 +140,7 @@ query MyQuery {
 Get total fees paid by a Solana account for transferring each type of token.
 You can test the query [here](https://ide.bitquery.io/Transaction-fees-paid-by-Account-aggregated-by-currency#).
 
-```
+```graphql
 query MyQuery {
   Solana {
     Transfers(

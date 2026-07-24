@@ -65,7 +65,7 @@ Here's how it works:
 
 ### Example
 
-```
+```graphql
 {
   EVM(network: eth, dataset: realtime) {
     Transactions {

@@ -11,7 +11,7 @@ In this section we'll have a look at some examples using the TCR20 API.
 To monitor USDT transfers on Tron in real-time, you can use the following query.
 You can run the query [here](https://ide.bitquery.io/usdt-trc20-transfers_1)
 
-```
+```graphql
 
 subscription {
   Tron {
@@ -48,7 +48,7 @@ subscription {
 
 This query retrieves real-time data on DEX trades involving USDT on the Tron network. It monitors trades where USDT is the bought currency, identified by the smart contract `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t`. The subscription provides details about each trade, including the trade timestamp, protocol details, buyer and seller information, trade amounts, and order IDs.
 
-```
+```graphql
 subscription {
   Tron {
     DEXTrades(
@@ -197,7 +197,7 @@ query USDTHolderBuckets {
 
 This query retrieves real-time data on USDT transfers in the Tron network's mempool by filtering using the smart contract address `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t`. The subscription provides details about each pending transfer, including the transaction hash, transfer amount, sender and receiver addresses, and the anticipated block number.
 
-```
+```graphql
 subscription {
   Tron(mempool: true) {
     Transfers(

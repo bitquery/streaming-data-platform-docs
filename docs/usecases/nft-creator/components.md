@@ -421,7 +421,7 @@ The Header component has two states: `expand` and `navColour`.
 
 The Header component has one function: `scrollHandler()`. This function listens for a scroll event and updates the `navColour` state based on the scroll position. If the scroll position is greater than or equal to 20, `navColour` is set to `true` and the navigation bar becomes sticky.
 
-```
+```javascript
 import React from 'react';
 import Header from './Header';
 

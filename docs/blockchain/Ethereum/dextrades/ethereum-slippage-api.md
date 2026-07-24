@@ -154,7 +154,7 @@ This subscription query retrieves real-time slippage data for Uniswap V4 pools o
 
 You can find the query [here](https://ide.bitquery.io/realtime-pair-slippage-on-ethereum-uniswap-v4)
 
-```
+```graphql
 subscription {
   EVM(network: eth) {
     DEXPoolSlippages(

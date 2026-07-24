@@ -18,3 +18,5 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Check internal links
+        run: node scripts/check-links.mjs

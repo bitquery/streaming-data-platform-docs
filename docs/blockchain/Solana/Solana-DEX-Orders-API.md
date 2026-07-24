@@ -18,7 +18,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 This query provides real-time updates on order events, including details about the DEX, market, and order specifics. You can run the query [here](https://ide.bitquery.io/Copy-of-Solana-DEX-trades-API)
 
-```
+```graphql
 subscription {
   Solana {
     DEXOrders {
@@ -91,7 +91,7 @@ To fetch the most recent orders for a specific token, filter using the token's `
 
 You can run the query [here](https://ide.bitquery.io/Latest-DEXOrders-for-token-on-Solana)
 
-```
+```graphql
 {
   Solana(dataset: realtime) {
     DEXOrders(
@@ -136,7 +136,7 @@ You can filter orders based on specific price conditions, such as all orders wit
 
 You can run the query [here](https://ide.bitquery.io/LimitPrice-DEXOrders-for-token-on-Solana)
 
-```
+```graphql
 {
   Solana(dataset: realtime) {
     DEXOrders(
@@ -181,7 +181,7 @@ This query retrieves the latest open orders on Solana-based DEXs. Open orders ar
 
 You can run the query [here](https://ide.bitquery.io/Latest-Open-DEX-Orders-Solana)
 
-```
+```graphql
 {
   Solana(dataset: realtime) {
     DEXOrders(
@@ -225,7 +225,7 @@ You can run the query [here](https://ide.bitquery.io/Latest-Open-DEX-Orders-Sola
 This query fetches the latest orders from the OpenBook DEX on Solana, providing comprehensive information about the DEX protocol, market, order specifics, and transaction details. OpenBook is an exchange protocol offering central limit orderbook for top Solana DeFi protocols.
 You can run the query [here](https://ide.bitquery.io/Latest-Openbook-DEX-Orders#)
 
-```
+```graphql
 {
   Solana(dataset: realtime) {
     DEXOrders(

@@ -123,7 +123,7 @@ subscription MyQuery {
 Using below query, you can check when was a Believe Launchpad token created. Here we have taken the example of checking creation time and transaction signature of this token `GsVr8GdT57gBa6GxujrtAeRGmYbFfABGFk2eaG2DzBLV`. Note: we only have last 8 hours of Solana Instructions data so this query will not return anything for the Believe Launchpad token which was created more than 8 hours ago.
 Run the query: [Get a Believe token's creation time and dev address? ➤](https://ide.bitquery.io/check-when-a-Believe-protocol-token-was-created-on-Meteora-DBC_1).
 
-```
+```graphql
 query MyQuery($tokenAddress: String!) {
   Solana {
     Instructions(
@@ -198,7 +198,7 @@ query MyQuery($tokenAddress: String!) {
 
 For checking which Believe tokens graduated, we need to get all the tokens created by Believe on Meteora DBC using this [Get All Token Creations by Believe - API](/docs/blockchain/Solana/Believe-API/#get-latest-meteora-dbc-token-creations-using-believe-launchpad) and then after getting all the token addresses put them in [Check if the Believe Tokens has Graduated - API](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1) to check which of them graduated to Meteora.
 
-```
+```graphql
 query MyQuery {
   Solana {
     Instructions(
@@ -281,7 +281,7 @@ query MyQuery {
 
 Then put all the token addresses in the `$tokenAddresses` variable in the following query. Run it here: [Check if the tokens have migrated from Meteora DBC ➤](https://ide.bitquery.io/Check-if-the-tokens-have-migrated-from-Meteora-DBC_1).
 
-```
+```graphql
 query MyQuery($tokenAddresses: [String!]) {
   Solana {
     Instructions(

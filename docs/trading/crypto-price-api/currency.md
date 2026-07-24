@@ -17,7 +17,7 @@ The OHLC values (Open, High, Low, Close) are determined across all chains and to
 
 **Volume.Quote vs Volume.Usd**: For USD-based pricing, `Volume.Quote` is the sum of quote token amounts (not USD). Use `Volume.Usd` for USD totals. See [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm) for details.
 
-```
+```graphql
 {
   Trading {
     Currencies(

@@ -91,7 +91,7 @@ cd solana-wallet-tracker
 
 2. Install dependencies:
 
-```
+```bash
 pip install confluent-kafka protobuf base58 bitquery-pb2-kafka-package python-dotenv
 ```
 
@@ -107,7 +107,7 @@ KAFKA_PASSWORD = <password>
 
 4. Run the wallet tracker:
 
-```
+```bash
 python wallet_balance_extractor.py
 ```
 
@@ -200,7 +200,7 @@ Let's examine the entire implementation in detail:
 
 ### Imports
 
-```
+```javascript
 import uuid
 import base58
 import json
@@ -219,7 +219,7 @@ The IndexedWalletTracker class is the heart of our implementation. It manages th
 
 #### Initialization
 
-```
+```python
 def __init__(self):
     # Create output directory
     self.output_dir = "wallet_balances"
@@ -259,7 +259,7 @@ This initializes:
 
 #### Utility Functions
 
-```
+```python
 def convert_bytes(self, value):
     """Convert bytes to base58 string"""
     if isinstance(value, bytes):
@@ -269,7 +269,7 @@ def convert_bytes(self, value):
 
 This simple utility converts byte values (like addresses) to Solana's base58 format.
 
-```
+```python
 def calculate_human_balance(self, raw_balance, decimals):
     """Calculate human-readable balance based on token decimals"""
     if decimals > 0:
@@ -281,7 +281,7 @@ This function converts raw token amounts (like 1000000000 lamports) to human-rea
 
 #### Extracting Data from Messages
 
-```
+```python
 def extract_token_metadata(self, currency):
     """Extract token metadata from Currency object"""
     token_mint = "UNKNOWN"
@@ -325,7 +325,7 @@ def extract_token_metadata(self, currency):
 
 This function extracts token metadata (mint address, symbol, decimals, name) from the Currency objects in the Kafka messages. It also updates the token metadata cache for future reference.
 
-```
+```python
 def extract_address(self, tx, account_index):
     """Extract address from transaction using account index"""
     address = None
@@ -353,7 +353,7 @@ This function extracts a wallet address from a transaction given an account inde
 
 #### Updating Wallet Balances
 
-```
+```python
 def update_wallet_balance(self, address, token_mint, token_info, raw_balance):
     """Update the wallet balance index with the latest balance"""
     if address == "UNKNOWN" or address is None:
@@ -383,7 +383,7 @@ def update_wallet_balance(self, address, token_mint, token_info, raw_balance):
 
 This is the core function that updates our in-memory index with the latest wallet balance. It also calculates a human-readable balance value and tracks when the balance was last updated.
 
-```
+```python
 def process_balance_update(self, address, token_info, raw_balance):
     """Process a balance update and update the index"""
     if address and token_info['mint'] != "UNKNOWN":
@@ -405,7 +405,7 @@ This is a wrapper around `update_wallet_balance` that also updates our statistic
 
 #### Exporting Balances
 
-```
+```python
 def export_balances(self, force=False):
     """Export current balances to file if interval has passed or forced"""
     current_time = time.time()
@@ -463,7 +463,7 @@ This function exports our in-memory wallet balances to both JSON and CSV files. 
 
 #### Processing Messages
 
-```
+```python
 def process_message(self, token_block):
     """Process a token block message"""
     self.stats['messages_processed'] += 1
@@ -615,7 +615,7 @@ After processing all the balance updates, the method checks if it's time to expo
 
 #### Statistics Reporting
 
-```
+```python
    def print_stats(self):
        """Print tracker statistics"""
        elapsed = time.time() - self.stats['start_time']
@@ -636,7 +636,7 @@ This method prints statistics about the tracker's performance, including runtime
 
 #### Main Consumer Function
 
-```
+```python
 def run_consumer():
    """Run the Kafka consumer with the indexed wallet tracker"""
    # Load environment variables from .env file

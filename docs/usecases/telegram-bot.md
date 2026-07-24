@@ -15,7 +15,7 @@ You can find the complete code [here](https://github.com/divyasshree-BQ/telegram
 
 1.  Install the required Python libraries:
 
-```
+```bash
 pip install asyncio json websockets tracemalloc telegram-bot-api
 ```
 
@@ -37,7 +37,7 @@ You also need to get your API OAuth Token from Bitquery, you can get it for free
 **Step 4: Define Functions for Handling Long Messages**
 Since the response received from the Bitquery API is much longer than allowed limits( 4000 characters), we will write a function that splits the text and sends it to the chat.
 
-```
+```python
 def split_text(text, max_length):
     return [text[i:i + max_length] for i in range(0, len(text), max_length)]
 

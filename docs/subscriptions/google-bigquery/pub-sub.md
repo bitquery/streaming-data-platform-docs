@@ -14,7 +14,7 @@ This tutorial walks through a process of subscribing to the Bitquery Streaming A
    - Navigate to Pub/Sub > Topics.
    - Create a new topic named `bitquery-data-stream`( this is an example).
 
-![](/img/diagrams/pubsub.png)
+![Google Pub/Sub data pipeline diagram](/img/diagrams/pubsub.png)
 
 2. Create a Subscription:
 

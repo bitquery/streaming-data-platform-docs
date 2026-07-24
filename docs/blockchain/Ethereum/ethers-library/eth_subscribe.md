@@ -10,7 +10,7 @@ Ethereum Subscription API allows developers to build websockets that receive rea
 
 To subscribe to incoming pending transactions, use the below subscription. You can run it [here](https://ide.bitquery.io/eth_subscribependingTransactions)
 
-```
+```graphql
 subscription {
   EVM(mempool: true) {
     Transactions {
@@ -43,7 +43,7 @@ subscription {
 
 You can subscribe to all incoming logs filtered by any of the fields including method signature, tx value,sender , receiver and so on. In the below example we are tracking only logs where the method name is `transfer`. You can run it [here](https://ide.bitquery.io/eth_subscribelogs)
 
-```
+```graphql
 subscription {
   EVM(mempool: true) {
     Events(where: {Log: {Signature: {Name: {is: "Transfer"}}}}) {
@@ -83,7 +83,7 @@ subscription {
 
 You can subscribe to new blocks as they arrive in real-time. This includes information about the new block, such as its block number, hash,transaction count and timestamp.
 
-```
+```graphql
 subscription {
   EVM {
     Blocks {

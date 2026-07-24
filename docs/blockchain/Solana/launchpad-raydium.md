@@ -98,7 +98,7 @@ Below query will get you all the instructions that the Raydium LaunchLab Program
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 query MyQuery {
   Solana {
     Instructions(
@@ -128,7 +128,7 @@ Test out the API [here](https://ide.bitquery.io/Track-Token-Migrations-to-Raydiu
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     Instructions(
@@ -204,7 +204,7 @@ Try out the [API](https://ide.bitquery.io/Raydium-Launchlab-Meteora-DBC-BoopFun-
 <details>
   <summary>Click to expand GraphQL query</summary>
 
-```
+```graphql
 subscription{
   Solana {
     Instructions(

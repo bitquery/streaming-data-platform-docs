@@ -856,7 +856,7 @@ This API returns the total number of holders for a specific token on a given dat
 #### Real-Time Holders of Multiple Tokens
 
 This API leverages the balanceUpdate endpoint to deliver real-time holder data for multiple tokens.
-▶️ [Real-Time Holders of Multiple Tokens](http://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base_2)
+▶️ [Real-Time Holders of Multiple Tokens](https://ide.bitquery.io/Top-10-holders-of-multiple-tokens-on-Base_2)
 
 #### Token Holders of Multiple Tokens on a speicifc date
 
@@ -1018,7 +1018,7 @@ Get the OHLC stats of a token traded on Pancakeswap.
 #### Get Price Change 5min, 1h, 6h and 24h of a specific BSC token
 
 This query gets you Price Change 5min, 1h, 6h and 24h of a specific token on the BSC network.
-▶️ [Get Price Change 5min, 1h, 6h and 24h of a specific token](ttps://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_3)
+▶️ [Get Price Change 5min, 1h, 6h and 24h of a specific token](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_3)
 
 #### Top 10 BSC Tokens by Price Change in last 1h
 
@@ -1322,7 +1322,7 @@ Get trades of NFTs for a given contract and marketplace.
 #### Get NFT trades for a specific NFT contract and token ID
 
 Get trades of NFTs for a given contract and token ID.
-▶️ [Get NFT trades by token](hhttps://ide.bitquery.io/Get-NFT-trades-by-token)
+▶️ [Get NFT trades by token](https://ide.bitquery.io/Get-NFT-trades-by-token)
 
 #### Get NFT trades by wallet
 

@@ -18,7 +18,7 @@ Unlike DEXTrades cube which uses `Buy` and `Sell` from the pool's perspective, D
 
 Let's understand the concept of buyer and seller when a trade occurs between User A and User B, and Token X and Token Y are swapped between them.
 
-![](/img/tokenAB.png)
+![Token A to Token B trade pair diagram](/img/tokenAB.png)
 
 We see the trade from user A's side, then we get the following:
 
@@ -36,7 +36,7 @@ Therefore, buyers and sellers change relatively when the trade sides change.
 
 [Run this API for better understanding](https://ide.bitquery.io/DEXTradeByTokens-API_1). When you run this API you get the following result.
 
-```
+```json
 {
   "EVM": {
     "DEXTradeByTokens": [

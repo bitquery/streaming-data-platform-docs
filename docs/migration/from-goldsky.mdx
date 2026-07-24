@@ -1,0 +1,64 @@
+---
+title: "Migrating from GoldSky Subgraphs to Bitquery"
+description: "Move from GoldSky/subgraph indexing to Bitquery's prebuilt decoded cubes — no subgraph deployment required."
+sidebar_position: 14
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Migrating from GoldSky Subgraphs to Bitquery
+
+Subgraphs require you to define a schema, write mappings, and deploy an indexer per protocol. Bitquery gives you prebuilt, decoded cross-chain cubes you query directly — no subgraph to author or operate.
+
+:::note
+Verify chain/cube coverage in the [coverage matrix](/docs/graphql/data-coverage-retention/).
+:::
+
+## Concept mapping
+
+| GoldSky / subgraph | Bitquery |
+|---|---|
+| Define GraphQL schema + mappings | Prebuilt cubes — no schema authoring |
+| Deploy & sync a subgraph | Nothing to deploy; query immediately |
+| Entity queries | Cube queries (`EVM { ... }`, `Solana { ... }`, `Trading { ... }`) |
+| Subgraph webhooks / streams | [WebSocket](/docs/subscriptions/websockets/) / [Kafka](/docs/streams/kafka-operations/) / [gRPC](/docs/grpc/solana/introduction/) |
+| Custom protocol decoding | Ask support to index a protocol's ABIs/IDL |
+
+## Example: pair-creation events (a common subgraph use case)
+
+```graphql
+{
+  EVM(network: eth, dataset: combined) {
+    Events(
+      where: { Log: { Signature: { Name: { is: "PairCreated" } } } }
+      orderBy: { descending: Block_Time }
+      limit: { count: 100 }
+    ) {
+      Block { Time }
+      Log { Signature { Name } SmartContract }
+      Transaction { Hash }
+    }
+  }
+}
+```
+
+## What differs
+
+- **No indexer to run.** You skip subgraph authoring, deployment, and re-syncs.
+- **Cross-chain in one place.** The same query shapes span supported chains.
+- **Rate limits & cost** are point-based rather than per-subgraph — see [How Billing Works](/docs/plans/how-billing-works/).
+- **Custom protocols.** If a protocol isn't decoded yet, ask support to index its ABIs/IDL.
+
+<FAQ
+  items={[
+    { q: "Do I need to deploy a subgraph with Bitquery?", a: "No. Bitquery provides prebuilt decoded cubes you query directly — there's no subgraph schema, mapping, or indexer to deploy or sync." },
+    { q: "How do I track pair-creation or custom events?", a: "Use the Events cube filtered by event signature. For a protocol that isn't decoded yet, ask support to index its ABIs/IDL." },
+    { q: "How is pricing different from subgraphs?", a: "Bitquery bills by API points rather than per-subgraph hosting. See How Billing Works." },
+  ]}
+/>
+
+## Next steps
+
+- [Smart contract events](/docs/blockchain/Ethereum/events/events-api/)
+- [How Billing Works](/docs/plans/how-billing-works/)
+- [Data Coverage & Retention](/docs/graphql/data-coverage-retention/)

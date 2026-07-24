@@ -6,11 +6,11 @@ description: "Polygon (MATIC) Transfers API: monitor Polygon native and token tr
 
 In this section we'll have a look at some examples using the Polygon (MATIC) Transfers API.
 
-# Subscribe to Recent Whale Transactions of a particular currency
+## Subscribe to Recent Whale Transactions of a particular currency
 
 The subscription query below fetches the whale transactions on the MATIC network. We have used USDC address `0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359`. You can find the query [here](https://ide.bitquery.io/Whale-transfers-of-USDC-on-matic)
 
-```
+```graphql
 subscription{
   EVM(network: matic) {
     Transfers(
@@ -39,11 +39,11 @@ subscription{
 
 ```
 
-# Sender is a particular address
+## Sender is a particular address
 
 This websocket retrieves transfers where the sender is a particular address `0x1A8f43e01B78979EB4Ef7feBEC60F32c9A72f58E`. For this subscription query we use `where` keyword and in that we specify `{Transfer: {Sender: {is: "0x1A8f43e01B78979EB4Ef7feBEC60F32c9A72f58E"}}}` to get the desired data. You can find the query [here](https://ide.bitquery.io/Sender-is-a-particular-address_2)
 
-```
+```graphql
 subscription {
   EVM(network: matic) {
     Transfers(
@@ -71,11 +71,11 @@ subscription {
 
 ```
 
-# Subscribe to the latest NFT token transfers on Polygon (MATIC)
+## Subscribe to the latest NFT token transfers on Polygon (MATIC)
 
 Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on Polygon (MATIC) network. You can run the query [here](https://ide.bitquery.io/NFT-Token-Transfers-API_3)
 
-```
+```graphql
 subscription {
   EVM(network: matic) {
     Transfers(where: {Transfer: {Currency: {Fungible: false}}}) {
@@ -103,7 +103,7 @@ subscription {
 
 ```
 
-# Check if an address ever interacted with Polymarket (CTF collateral transfer)
+## Check if an address ever interacted with Polymarket (CTF collateral transfer)
 
 Polymarket on Polygon routes outcome collateral through the **conditional tokens** USDC denomination at `0x4d97dCd97eC945f40cF65F87097ACe5EA0476045`. A lightweight check for **any historic interaction** is: has this wallet **received** at least one transfer of that token? (`limit: { count: 1 }` — empty result means no matching receipt found in the indexed data.)
 

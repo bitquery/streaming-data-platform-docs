@@ -2,6 +2,8 @@
 title: "EVM Arguments and Returns API"
 description: "EVM Arguments and Returns API: Bitquery EVM GraphQL schema reference with fields, filters, relationships, and query patterns."
 ---
+# EVM Arguments and Returns API
+
 Smart contract calls and events have arguments. In case the call or event signature is parsed against ABI,
 the arguments are showing the values, types and names passed to call or event.
 
@@ -22,7 +24,7 @@ additional information is provided:
 
 As example, the following data means the array of size 2 of addresses:
 
-```
+```json
           {
             "Index": 0,
             "Name": "",
@@ -112,7 +114,7 @@ and to specific values of arguments.
 Combining argument filters with signature filters on events and calls gives you the power
 to analyze the arguments used in smart contracts in specific context.
 
-```
+```graphql
 {
   EVM {
     Calls(

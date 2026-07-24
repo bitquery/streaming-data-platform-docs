@@ -29,7 +29,7 @@ Get real-time and historical USDT prices, OHLCV, and moving averages across supp
 🔗 [Stream Example](https://ide.bitquery.io/stablecoin-price-stream-of-USDT_2)  
 🔗 [API Example](https://ide.bitquery.io/stablecoin-price-query-of-USDT_1)
 
-```
+```graphql
  subscription {
   Trading {
     Tokens(
@@ -85,7 +85,7 @@ Get real-time and historical USDT prices, OHLCV, and moving averages across supp
 }
 ```
 
-```
+```graphql
   query {
   Trading {
     Tokens(
@@ -150,7 +150,7 @@ Track live USDT stablecoin transfers. USDT is ideal for payments, settlements, e
 🔗 [Stream Example](https://ide.bitquery.io/USDT-token-Transfers-stream-on-solana)  
 🔗 [API Example](https://ide.bitquery.io/USDT-token-Transfers-api-on-solana)
 
-```
+```graphql
 subscription {
   Solana {
     Transfers(
@@ -195,7 +195,7 @@ subscription {
 }
 ```
 
-```
+```graphql
 {
   Solana {
     Transfers(
@@ -251,7 +251,7 @@ Below example is to track USDT trading activity on Solana.
 🔗 [Stream Example](https://ide.bitquery.io/solana-trades-subscription_10_1)  
 🔗 [API Example](https://ide.bitquery.io/solana-USDT-trades-query)
 
-```
+```graphql
 subscription {
   Solana {
     DEXTrades (where:{any:[{Trade:{Buy:{Currency:{MintAddress:{is:"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}}}}},{Trade:{Sell:{Currency:{MintAddress:{is:"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}}}}}]}){
@@ -325,7 +325,7 @@ subscription {
 }
 ```
 
-```
+```graphql
 query {
   Solana {
     DEXTrades (
@@ -409,7 +409,7 @@ Monitor USDT reserve or get lateast reserve value on Solana using below Stream/A
 🔗 [Stream Example](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Solana)  
 🔗 [API Example](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Solana--query)
 
-```
+```graphql
 subscription{
   Solana {
     TokenSupplyUpdates(
@@ -429,7 +429,7 @@ subscription{
 }
 ```
 
-```
+```graphql
 {
   Solana {
     TokenSupplyUpdates(
@@ -459,7 +459,7 @@ Query USDT holders, balances over time, and distribution metrics (e.g., whales, 
 
 🔗 [API Example](https://ide.bitquery.io/USDT-balance-of-an-address)
 
-```
+```graphql
 query MyQuery {
   Solana {
     BalanceUpdates(
@@ -482,7 +482,7 @@ query MyQuery {
 
 🔗 [API Example](https://ide.bitquery.io/top-100-holders-of-USDT-token-on-Solana_1)
 
-```
+```graphql
 query MyQuery {
   Solana(dataset: realtime, network: solana, aggregates: yes) {
     BalanceUpdates(

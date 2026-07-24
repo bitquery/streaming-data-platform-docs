@@ -27,7 +27,7 @@ In this section we will see how to get data on Raydium CLMM trades in real-time.
 This query subscribes to real-time trades on the Raydium CLMM (Concentrated Liquidity Market Maker) on the Solana blockchain by filtering using `{Program: {Address: {is: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"}}}:`.
 You can run the query [here](https://ide.bitquery.io/Raydium-CLMM-DEX-Trades-with-AccountNames)
 
-```
+```graphql
 subscription MyQuery {
   Solana {
     DEXTrades(
@@ -90,7 +90,7 @@ The mint addresses for the tokens being used in the pool are listed for example 
 
 You can run the query [here](https://ide.bitquery.io/Raydium-CLMM-Pool-Creation)
 
-```
+```graphql
 {
   Solana {
     Instructions(
@@ -156,7 +156,7 @@ You can run the query [here](https://ide.bitquery.io/Raydium-CLMM-Pool-Creation)
 
 The below query tracks latest position closes on raydium CLMM by filtering using `Method: {is: "closePosition"}`. The `personalPosition` account which is the 4th in the list of `Accounts` includes the address of account to store personal position.
 
-```
+```graphql
 {
   Solana {
     Instructions(
@@ -230,7 +230,7 @@ This is where various accounts like NFTs, tokens, and program states are updated
 - **amount0Max**: The maximum amount of **Token 0** to be added to the position.
 - **amount1Max**: The maximum amount of **Token 1** to be added to the position.
 
-```
+```graphql
 {
   Solana {
     Instructions(
@@ -327,7 +327,7 @@ The arguments and account details include
 
 You can run the query [here](https://ide.bitquery.io/increaseLiquidityV2-latest-raydium-clmm#)
 
-```
+```graphql
 {
   Solana {
     Instructions(
@@ -430,7 +430,7 @@ This API fetches **Decrease Liquidity V2** transactions from the **Raydium CLMM*
 
 You can run the query **[here](https://ide.bitquery.io/decreaseLiquidityV2-latest-raydium-clmm_1#)**
 
-```
+```graphql
 {
   Solana {
     Instructions(
