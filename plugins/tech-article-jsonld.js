@@ -69,33 +69,6 @@ function gitDate(siteDir, filePath, first) {
   }
 }
 
-function humanize(seg) {
-  return seg
-    .replace(/[-_]+/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
-function breadcrumb(base, permalink, title) {
-  const parts = permalink.split("/").filter(Boolean); // e.g. ["docs","blockchain","Solana","x"]
-  const items = [];
-  let acc = "";
-  parts.forEach((seg, i) => {
-    acc += `/${seg}`;
-    const isLast = i === parts.length - 1;
-    items.push({
-      "@type": "ListItem",
-      position: i + 1,
-      name: isLast ? title || humanize(seg) : seg === "docs" ? "Docs" : humanize(seg),
-      item: `${base}${acc}/`,
-    });
-  });
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items,
-  };
-}
-
 /** @type {import('@docusaurus/types').PluginModule} */
 module.exports = function techArticleJsonLdPlugin(context) {
   return {
@@ -142,11 +115,9 @@ module.exports = function techArticleJsonLdPlugin(context) {
           },
         };
 
-        const crumbs = breadcrumb(base, permalink, title);
-
-        const tag =
-          `<script type="application/ld+json">${JSON.stringify(techArticle)}</script>` +
-          `<script type="application/ld+json">${JSON.stringify(crumbs)}</script>`;
+        // BreadcrumbList is emitted natively by the Docusaurus theme's breadcrumbs,
+        // so we inject only TechArticle here to avoid duplicate structured data.
+        const tag = `<script type="application/ld+json">${JSON.stringify(techArticle)}</script>`;
 
         let html = fs.readFileSync(htmlPath, "utf8");
         if (html.includes('"@type":"TechArticle"')) {
