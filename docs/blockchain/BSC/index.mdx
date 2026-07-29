@@ -15,6 +15,7 @@ keywords:
   - BSC token api
   - BSC transaction api
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
 # BSC API Documentation
@@ -37,11 +38,11 @@ Bitquery BSC APIs are very flexible, you can fetch trade, transaction, balance, 
 
 ### Difference between BSC RPC, Bitquery BSC API and Bitquery Kafka Stream?
 
-| BSC RPC | Bitquery BSC API | Bitquery Kafka Stream
-| --- | --- | --- |
-| JSON-RPC endpoint exposing raw EVM on-chain state and transactions | GraphQL endpoint over pre-indexed, parsed BSC chain data (token transfers, DEX trades, logs, calls, etc.) | Provides fully managed Kafka topics (bsc.dextrades.proto, bsc.tokens.proto, bsc.transactions.proto) |
-| No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions | Delivers pre-parsed, enriched Protocol-Buffers events (DEX trades, token transfers and transactions) |
-| Ideal for submitting transactions | Great for real-time data and historical backtesting without running your own indexer | Great for Enterprise usage with built-in replication/failover and no node ops or custom parsing needed |
+| BSC RPC                                                                          | Bitquery BSC API                                                                                          | Bitquery Kafka Stream                                                                                  |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| JSON-RPC endpoint exposing raw EVM on-chain state and transactions               | GraphQL endpoint over pre-indexed, parsed BSC chain data (token transfers, DEX trades, logs, calls, etc.) | Provides fully managed Kafka topics (bsc.dextrades.proto, bsc.tokens.proto, bsc.transactions.proto)    |
+| No built-in history or analytics—any indexing/aggregation you build or outsource | Historical data, joins, aggregations & real-time subscriptions                                            | Delivers pre-parsed, enriched Protocol-Buffers events (DEX trades, token transfers and transactions)   |
+| Ideal for submitting transactions                                                | Great for real-time data and historical backtesting without running your own indexer                      | Great for Enterprise usage with built-in replication/failover and no node ops or custom parsing needed |
 
 Read more about Kafka streams [here](/docs/streams/protobuf/chains/EVM-protobuf/) and contact sales via [Telegram](https://t.me/Bloxy_info) or [form](https://bitquery.io/forms/api) for a **Trial**.
 
@@ -75,9 +76,13 @@ Get slippage and price impact data for BSC DEX pools. Understand price impact an
 
 Monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on BSC DEX pools. Track when liquidity is added or removed, monitor pool health and depth, and analyze liquidity patterns across different pools.
 
+## BSC Balance APIs
+
+- [BSC Balance API](./bsc-balance-updates) — `EVM.Balances` for current and historical token balances
+- [BSC Transaction Balance Tracker](./transaction-balance-tracker/) — Real-time balance changes with reason codes (`EVM.TransactionBalances`)
+
 ## Other BSC APIs
 
-- [BSC Balance Updates API](./bsc-balance-updates)
 - [BSC Mempool API](./bsc-mempool-stream)
 - [BSC Transfers API](./bsc-transfers)
 - [BSC Events API](./bsc-events-api)
@@ -100,18 +105,26 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://youtu.be/LDs5vrM07zs" />
 
-### Video Tutorial on BSC Protobuf Streams | Building BSC Sniper Trading Bot Using Bitquery Protobuf  Kafka Streams
+### Video Tutorial on BSC Protobuf Streams | Building BSC Sniper Trading Bot Using Bitquery Protobuf Kafka Streams
 
 <VideoPlayer url="https://youtu.be/vgOHgqTJmj0" />
 
 <FAQ
   items={[
-    { q: "What BSC data does Bitquery provide?", a: "DEX trades, token transfers, Four Meme, PancakeSwap, mempool streams, blocks, and smart contract calls." },
-    { q: "How do I query BSC DEX trades?", a: "Use EVM.DEXTrades with network bsc and filter by protocol or token contract address." },
-    { q: "Can I get real-time BSC streams?", a: "Yes via GraphQL subscriptions, Kafka, or mempool APIs depending on your use case." },
+    {
+      q: "What BSC data does Bitquery provide?",
+      a: "DEX trades, token transfers, Four Meme, PancakeSwap, mempool streams, blocks, and smart contract calls.",
+    },
+    {
+      q: "How do I query BSC DEX trades?",
+      a: "Use EVM.DEXTrades with network bsc and filter by protocol or token contract address.",
+    },
+    {
+      q: "Can I get real-time BSC streams?",
+      a: "Yes via GraphQL subscriptions, Kafka, or mempool APIs depending on your use case.",
+    },
   ]}
 />
-
 
 ## More guides
 

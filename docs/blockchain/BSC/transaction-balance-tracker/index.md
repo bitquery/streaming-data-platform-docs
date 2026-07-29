@@ -14,6 +14,7 @@ keywords:
   - Balance Change Reason Codes
   - Real-time Balance Updates
 ---
+
 # BSC Transaction Balance Tracker API - Complete Guide
 
 ## What is Transaction Balance Tracker?
@@ -26,7 +27,7 @@ Our Transaction Balance Tracker APIs track balance changes across different scen
 
 - **Real-time Balance Updates**: Stream balance changes as they happen via GraphQL subscriptions
 - **Balance Change Reason Codes**: Understand why each balance changed (transfers, rewards, gas, self-destruct, etc.)
-- **Comprehensive Coverage**: Track native ETH, ERC-20 tokens, ERC-721, and ERC-1155 NFTs
+- **Comprehensive Coverage**: Track native BNB, BEP-20 tokens, ERC-721, and ERC-1155 NFTs
 - **Historical Data**: Access complete historical balance change data since BSC genesis
 - **USD Values**: Get balance values in USD for portfolio tracking and analytics
 - **Multiple Use Cases**: Monitor validators, miners, MEV bots, self-destruct events, and more
@@ -64,9 +65,10 @@ See examples and code snippets [here](/docs/subscriptions/websockets/) for Graph
 
 ### [BSC Transaction Balance Tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-transaction-balance-tracker)
 
-The core Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the BSC network, including detailed information about the reason for each balance change. Track native ETH, ERC-20 tokens, and NFTs with pre/post balances, USD values, and balance change reason codes.
+The core Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the BSC network, including detailed information about the reason for each balance change. Track native BNB, BEP-20 tokens, and NFTs with pre/post balances, USD values, and balance change reason codes.
 
 **Key Features:**
+
 - Subscribe to all transaction balances in real-time
 - Filter by specific addresses or tokens
 - Get balance change reason codes for native currency
@@ -78,6 +80,7 @@ The core Transaction Balance Tracker API provides real-time balance updates for 
 Track BSC validator balances, staking rewards, and withdrawals from the beacon chain. Monitor validator activity including block rewards, withdrawal events, and transaction fee rewards.
 
 **Key Features:**
+
 - Track validator staking rewards (Code 2)
 - Monitor beacon chain withdrawals (Code 3)
 - Track transaction fee rewards (Code 5)
@@ -89,6 +92,7 @@ Track BSC validator balances, staking rewards, and withdrawals from the beacon c
 Monitor BSC miner balances, mining rewards, uncle block rewards, and transaction fee rewards. Track historical and real-time mining activity across the BSC network.
 
 **Key Features:**
+
 - Track block mining rewards (Code 2)
 - Monitor uncle block rewards (Code 1)
 - Track transaction fee rewards (Code 5)
@@ -100,6 +104,7 @@ Monitor BSC miner balances, mining rewards, uncle block rewards, and transaction
 Track MEV (Maximal Extractable Value) related balance changes including transaction fee rewards, block builder rewards, and other MEV extraction activities. Monitor MEV bots and block builders in real-time.
 
 **Key Features:**
+
 - Track transaction fee rewards (Code 5)
 - Monitor block builder rewards
 - Filter by MEV bot or builder addresses
@@ -111,6 +116,7 @@ Track MEV (Maximal Extractable Value) related balance changes including transact
 Monitor contract self-destruct events, ephemeral contracts (like MEV bots), and security incidents. Track contracts that self-destruct and addresses that receive funds from self-destructed contracts.
 
 **Key Features:**
+
 - Track contract self-destruct events (Codes 12, 13, 14)
 - Monitor ephemeral MEV contracts
 - Track MEV builder payments
@@ -119,39 +125,42 @@ Monitor contract self-destruct events, ephemeral contracts (like MEV bots), and 
 
 ## Balance Change Reason Codes
 
-The Transaction Balance Tracker API uses numeric codes to indicate why a balance changed. These codes are only available for native currency (ETH) transactions, not for fungible tokens or NFTs.
+The Transaction Balance Tracker API uses numeric codes to indicate why a balance changed. These codes are only available for native currency (BNB) transactions, not for fungible tokens or NFTs.
 
-| **Code** | **Reason**                          | **Description**                                                                 |
-| -------- | ----------------------------------- | ------------------------------------------------------------------------------- |
-| 0        | BalanceChangeUnspecified            | Unspecified balance change reason                                               |
-| 1        | BalanceIncreaseRewardMineUncle      | Reward for mining an uncle block                                                |
-| 2        | BalanceIncreaseRewardMineBlock      | Reward for mining a block                                                       |
-| 3        | BalanceIncreaseWithdrawal           | ETH withdrawn from the beacon chain                                             |
-| 4        | BalanceIncreaseGenesisBalance       | ETH allocated at the genesis block                                             |
-| 5        | BalanceIncreaseRewardTransactionFee | Transaction tip increasing block builder's balance                              |
-| 6        | BalanceDecreaseGasBuy               | ETH spent to purchase gas for transaction execution                            |
-| 7        | BalanceIncreaseGasReturn            | ETH returned for unused gas at the end of execution                             |
-| 8        | BalanceIncreaseDaoContract          | ETH sent to the DAO refund contract                                             |
-| 9        | BalanceDecreaseDaoAccount           | ETH taken from a DAO account to be moved to the refund contract                 |
-| 10       | BalanceChangeTransfer               | ETH transferred via a call                                                     |
-| 11       | BalanceChangeTouchAccount           | Transfer of zero value to touch-create an account                               |
-| 12       | BalanceIncreaseSelfdestruct         | Balance added to the recipient as indicated by a self-destructing account      |
-| 13       | BalanceDecreaseSelfdestruct         | Balance deducted from a contract due to self-destruct                          |
-| 14       | BalanceDecreaseSelfdestructBurn     | ETH sent to an already self-destructed account within the same transaction     |
-| 15       | BalanceChangeRevert                 | Balance reverted back to a previous value due to call failure                   |
+| **Code** | **Reason**                          | **Description**                                                            |
+| -------- | ----------------------------------- | -------------------------------------------------------------------------- |
+| 0        | BalanceChangeUnspecified            | Unspecified balance change reason                                          |
+| 1        | BalanceIncreaseRewardMineUncle      | Reward for mining an uncle block                                           |
+| 2        | BalanceIncreaseRewardMineBlock      | Reward for mining a block                                                  |
+| 3        | BalanceIncreaseWithdrawal           | BNB withdrawn from the beacon chain                                        |
+| 4        | BalanceIncreaseGenesisBalance       | BNB allocated at the genesis block                                         |
+| 5        | BalanceIncreaseRewardTransactionFee | Transaction tip increasing block builder's balance                         |
+| 6        | BalanceDecreaseGasBuy               | BNB spent to purchase gas for transaction execution                        |
+| 7        | BalanceIncreaseGasReturn            | BNB returned for unused gas at the end of execution                        |
+| 8        | BalanceIncreaseDaoContract          | BNB sent to the DAO refund contract                                        |
+| 9        | BalanceDecreaseDaoAccount           | BNB taken from a DAO account to be moved to the refund contract            |
+| 10       | BalanceChangeTransfer               | BNB transferred via a call                                                 |
+| 11       | BalanceChangeTouchAccount           | Transfer of zero value to touch-create an account                          |
+| 12       | BalanceIncreaseSelfdestruct         | Balance added to the recipient as indicated by a self-destructing account  |
+| 13       | BalanceDecreaseSelfdestruct         | Balance deducted from a contract due to self-destruct                      |
+| 14       | BalanceDecreaseSelfdestructBurn     | BNB sent to an already self-destructed account within the same transaction |
+| 15       | BalanceChangeRevert                 | Balance reverted back to a previous value due to call failure              |
 
 ## Field Availability by Currency Type
 
 The availability of fields in the `TokenBalance` object depends on the type of currency being tracked:
 
-### Native Currency (ETH)
+### Native Currency (BNB)
+
 - **Available**: `BalanceChangeReasonCode`, `PreBalance`, `PostBalance`, `PostBalanceInUSD`
 - **Not Provided**: `TotalSupply`, `TokenOwnership`
 
-### Fungible Tokens (ERC-20)
+### Fungible Tokens (BEP-20)
+
 - **Available**: `PostBalance`, `PostBalanceInUSD`, `TotalSupply`, `TotalSupplyInUSD`
 - **Not Provided**: `PreBalance`, `BalanceChangeReasonCode`, `TokenOwnership`
 
 ### NFTs (ERC-721 / ERC-1155)
+
 - **Available**: `PostBalance`, `TokenOwnership`
 - **Not Provided**: `PreBalance`, `BalanceChangeReasonCode`, `TotalSupply`, `TotalSupplyInUSD`, `PostBalanceInUSD`

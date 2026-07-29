@@ -3,6 +3,7 @@ sidebar_position: 1
 title: "BSC Transaction Balance Tracker"
 description: "BSC Transaction Balance Tracker: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions."
 ---
+
 # BSC Transaction Balance Tracker
 
 The BSC Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the BSC blockchain, including detailed information about the reason for each balance change.
@@ -178,20 +179,19 @@ This API gives you latest balance of a specific address (here in example `0x238a
 }
 ```
 
-## Latest liquidity of EVM Pool
+## Latest liquidity of EVM Pools
 
-This API gives you latest liquidity of a BSC Pool. Try it out [here](https://ide.bitquery.io/latest-liquidity-of-a-BSC-pool).
+This API provides the latest liquidity information for multiple BSC pools in one API call. The example shows results for two pool addresses using a query updated to support multiple addresses. You can try 500 as well, just put them as a list in `where` clause. Try it out [here](https://ide.bitquery.io/latest-liquidity-of-multiple-BSC-pools).
 
 ```graphql
 {
   EVM(network: bsc) {
     TransactionBalances(
-      limit: { count: 2 }
-      limitBy: { by: TokenBalance_Currency_SmartContract, count: 1 }
+      limitBy: { by: TokenBalance_Address, count: 2 }
       orderBy: { descendingByField: "TokenBalance_PostBalanceInUSD" }
       where: {
         TokenBalance: {
-          Address: { is: "YourPoolAddress" }
+          Address: { in: ["0xYourPoolAddress1", "0xYourPoolAddress2"] }
         }
       }
     ) {
@@ -210,9 +210,9 @@ This API gives you latest liquidity of a BSC Pool. Try it out [here](https://ide
 }
 ```
 
-## Latest Supply and Marketcap of a specific token on EVM
+## Latest Supply and Marketcap of a specific token on BSC
 
-This API gives you latest Supply and Marketcap of a token on BSC. Try it out [here](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token-bsc).
+This API gives you latest Supply and Marketcap of a token on BSC (here as example we have taken a BEP-20 token `0x55d398326f99059ff775485246999027b3197955`). Try it out [here](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token-bsc).
 
 ```graphql
 {
@@ -223,7 +223,7 @@ This API gives you latest Supply and Marketcap of a token on BSC. Try it out [he
       where: {
         TokenBalance: {
           Currency: {
-            SmartContract: { is: "YourTokenAddress" }
+            SmartContract: { is: "0x55d398326f99059ff775485246999027b3197955" }
           }
         }
       }
