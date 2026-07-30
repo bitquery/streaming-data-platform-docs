@@ -8,7 +8,10 @@ This guide demonstrates how to build a DeFi Portfolio Scorer tool that analyzes 
 
 GitHub Repository: [Defi-Portfolio-Profiler](https://github.com/Akshat-cs/Defi-Portfolio-Profiler)
 
-<img src="/img/usecases/defi_portfolio_scorer.png" />
+<img
+  src="/img/usecases/defi_portfolio_scorer.png"
+  alt="Ethereum Wallet DeFi Score app with an address input and a table of recent wallets scored on transaction count, transaction types, protocols used and assets held"
+/>
 
 ## Overview
 

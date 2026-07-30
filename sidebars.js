@@ -1024,9 +1024,13 @@ const sidebars = {
           link: {
             type: "generated-index",
             slug: "/examples/polymarket-api",
-            title: "Polymarket Implementation Guide",
+            // This generated-index — not the child polymarket-api page — is what
+            // ranks (position 2, "polymarket api"). Google was discarding the old
+            // "Polymarket Implementation Guide" title and substituting the child
+            // page's, so lead with the head term here. Description was 95 chars.
+            title: "Polymarket API - Prediction Market Data",
             description:
-              "Build prediction market apps on Polymarket: Get prices, trades, markets, and oracle resolutions",
+              "Query Polymarket prediction markets with Bitquery GraphQL — outcome prices, trades, market lifecycle, oracle resolutions, and wallet activity on Polygon.",
           },
           items: [
             "examples/polymarket-api/polymarket-api",
