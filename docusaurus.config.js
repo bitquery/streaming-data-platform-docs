@@ -129,6 +129,16 @@ const config = {
         content: "Bitquery Docs",
       },
     },
+    // Docusaurus emits twitter:card and twitter:image but not twitter:site, so X
+    // could not attribute cards to the account. Handle taken from this config's
+    // own footer link (https://twitter.com/Bitquery_io), not guessed.
+    {
+      tagName: "meta",
+      attributes: {
+        name: "twitter:site",
+        content: "@Bitquery_io",
+      },
+    },
   ],
 
   scripts: [
