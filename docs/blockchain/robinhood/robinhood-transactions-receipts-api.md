@@ -1,6 +1,6 @@
 ---
-title: "Robinhood Transactions & Receipts API (eth_getBlockReceipts equivalent)"
-description: "Query Robinhood transactions and receipts with Bitquery GraphQL — block receipts, single-tx receipts, status, gas, and fees. A no-node eth_get*Receipt alternative."
+title: "Robinhood Transactions & Receipts API"
+description: "Query Robinhood transactions and receipts with Bitquery GraphQL: block receipts, single-tx receipts, status, gas and fees. No node required."
 sidebar_position: 6
 keywords:
   - Robinhood transactions API

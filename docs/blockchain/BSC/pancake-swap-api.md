@@ -1,6 +1,6 @@
 ---
 title: "BNB Chain Pancake Swap API"
-description: "BNB Chain Pancake Swap API: query and stream BNB Chain on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
+description: "Query and stream PancakeSwap trades on BNB Chain with Bitquery GraphQL: latest swaps, live subscriptions, token prices, OHLC and trader activity."
 ---
 import FAQ from "@site/src/components/FAQ";
 

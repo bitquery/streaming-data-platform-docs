@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Polygon (MATIC) Address Balance API"
-description: "Polygon (MATIC) Address Balance API: fetch current and historical Polygon balances with Bitquery GraphQL balance queries."
+description: "Query Polygon address balances with the Bitquery Balances cube: token and native POL balances, balances on a given date, and per-token lookups."
 ---
 # Polygon (MATIC) Address Balance API
 

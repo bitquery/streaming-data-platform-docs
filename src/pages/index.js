@@ -200,7 +200,7 @@ export default function Home() {
     <SearchProvider>
       <Layout
         title="Bitquery V2 API Docs"
-        description="Blockchain Streaming APIs (V2) for real-time and historical transactions, balances, transfers, NFTs, DEX trades, smart contract calls, and events across 40+ blockchains."
+        description="Blockchain Streaming APIs for real-time and historical trades, transfers, balances, NFTs, contract calls and events across 40+ chains."
       >
         <div className={homeStyles.pageShell}>
           <HomepageHero />
