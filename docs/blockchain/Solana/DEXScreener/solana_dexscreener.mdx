@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "DEXScreener API Documentation - Solana Trades, Pairs, Prices"
-description: "DEXScreener API Documentation - Solana Trades, Pairs, Prices: query and stream Solana on-chain data with Bitquery GraphQL examples for developers."
+description: "Rebuild the DEXScreener Solana dashboard with Bitquery: live pair trades, OHLC, prices, and buy/sell volume with makers, buyers and sellers per pair."
 keywords:
   - DEXScreener API
   - DEXScreener API documentation
@@ -44,7 +44,7 @@ You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-dat
 subscription MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "3B5wuUrMEi5yATD7on46hKfej3pfmd7t1RKgrsN3pump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, Dex: {ProgramAddress: {is: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"}}}, Transaction: {Result: {Success: true}}}
+      where: {Trade: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}, Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}, Market: {MarketAddress: {is: "Czfq3xZZDmsdGdUyrNLtRhGc47cXcZtLG4crryfu44zE"}}}, Transaction: {Result: {Success: true}}}
     ) {
       Block {
         Time
@@ -84,7 +84,7 @@ This query will give you the latest Price of a specified token using Trading API
 query MyQuery {
   Trading {
     Pairs(
-      where: {Token: {Id: {is: "bid:solana:8jiVXftnn2ZG6bugK7HAH5j2G3D6TpsG521gqsWwpump"}}, Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}}
+      where: {Token: {Id: {is: "bid:solana:So11111111111111111111111111111111111111112"}}, Interval: {Time: {Duration: {eq: 1}}}, Price: {IsQuotedInUsd: true}}
       limit: {count: 10}
       orderBy: {descending: Interval_Time_Start}
     ) {
@@ -125,7 +125,7 @@ You can find the query [here](https://ide.bitquery.io/ohlc-of-a-solana-token-pai
 query MyQuery {
   Trading {
     Pairs(
-      where: {Token: {Id: {is: "bid:solana:8jiVXftnn2ZG6bugK7HAH5j2G3D6TpsG521gqsWwpump"}}, QuoteToken: {Id: {is: "bid:solana:So11111111111111111111111111111111111111112"}}, Interval: {Time: {Duration: {eq: 3600}}}, Price: {IsQuotedInUsd: true}}
+      where: {Token: {Id: {is: "bid:solana:So11111111111111111111111111111111111111112"}}, QuoteToken: {Id: {is: "bid:solana:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}, Interval: {Time: {Duration: {eq: 3600}}}, Price: {IsQuotedInUsd: true}}
       limit: {count: 10}
       orderBy: {descending: Interval_Time_Start}
     ) {
@@ -162,16 +162,28 @@ query MyQuery {
 
 ```
 
-## Get Buy Volume, Sell Volume, Buys, Sells, Makers, Total Trade Volume, Buyers, Sellers of a specific Token of DEXScreener
+## Buy volume, sell volume, buys, sells, makers, buyers and sellers for a pair {#pair-stats}
 
-The below query gives you the essential stats for a token such as buy volume, sell volume, total buys, total sells, makers, total trade volume, buyers, sellers (in last 5 min, 1 hour) of a specific token.
-You can run the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair)
+This is the query behind a DEXScreener pair row: total and 5-minute buy/sell volume, trade counts, unique makers, buyers and sellers, and the price at the start of the window, five minutes ago, and now.
+
+Two things make it reliable:
+
+- **`since_relative` / `after_relative` instead of absolute timestamps.** The window is always "the last hour" and "the last 5 minutes" no matter when the query runs — a hardcoded date silently widens every day it sits in your code.
+- **`Transaction: { Result: { Success: true } }`** drops failed transactions, which otherwise inflate trade counts and volume.
 
 ```graphql
-query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $time_5min_ago: DateTime!, $time_1h_ago: DateTime!) {
+query PairStats($token: String!, $side_token: String!, $pair_address: String!) {
   Solana(dataset: realtime) {
     DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: $token}}, Side: {Currency: {MintAddress: {is: $side_token}}}, Market: {MarketAddress: {is: $pair_address}}}, Block: {Time: {since: $time_1h_ago}}}
+      where: {
+        Transaction: { Result: { Success: true } }
+        Trade: {
+          Currency: { MintAddress: { is: $token } }
+          Side: { Currency: { MintAddress: { is: $side_token } } }
+          Market: { MarketAddress: { is: $pair_address } }
+        }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+      }
     ) {
       Trade {
         Currency {
@@ -179,12 +191,12 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
           MintAddress
           Symbol
         }
-        start: PriceInUSD(minimum: Block_Time)
-        min5: PriceInUSD(
+        price_start: PriceInUSD(minimum: Block_Time)
+        price_5min_ago: PriceInUSD(
           minimum: Block_Time
-          if: {Block: {Time: {after: $time_5min_ago}}}
+          if: { Block: { Time: { after_relative: { minutes_ago: 5 } } } }
         )
-        end: PriceInUSD(maximum: Block_Time)
+        price_now: PriceInUSD(maximum: Block_Time)
         Dex {
           ProtocolName
           ProtocolFamily
@@ -204,79 +216,59 @@ query MyQuery($token: String!, $side_token: String!, $pair_address: String!, $ti
       makers: count(distinct: Transaction_Signer)
       makers_5min: count(
         distinct: Transaction_Signer
-        if: {Block: {Time: {after: $time_5min_ago}}}
+        if: { Block: { Time: { after_relative: { minutes_ago: 5 } } } }
       )
-      buyers: count(
-        distinct: Transaction_Signer
-        if: {Trade: {Side: {Type: {is: buy}}}}
-      )
-      buyers_5min: count(
-        distinct: Transaction_Signer
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
-      sellers: count(
-        distinct: Transaction_Signer
-        if: {Trade: {Side: {Type: {is: sell}}}}
-      )
-      sellers_5min: count(
-        distinct: Transaction_Signer
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
+      buyers: count(distinct: Transaction_Signer, if: { Trade: { Side: { Type: { is: buy } } } })
+      sellers: count(distinct: Transaction_Signer, if: { Trade: { Side: { Type: { is: sell } } } })
       trades: count
-      trades_5min: count(if: {Block: {Time: {after: $time_5min_ago}}})
+      trades_5min: count(if: { Block: { Time: { after_relative: { minutes_ago: 5 } } } })
       traded_volume: sum(of: Trade_Side_AmountInUSD)
       traded_volume_5min: sum(
         of: Trade_Side_AmountInUSD
-        if: {Block: {Time: {after: $time_5min_ago}}}
+        if: { Block: { Time: { after_relative: { minutes_ago: 5 } } } }
       )
-      buy_volume: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: buy}}}}
-      )
-      buy_volume_5min: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
-      sell_volume: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: sell}}}}
-      )
-      sell_volume_5min: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
-      buys: count(if: {Trade: {Side: {Type: {is: buy}}}})
-      buys_5min: count(
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
-      sells: count(if: {Trade: {Side: {Type: {is: sell}}}})
-      sells_5min: count(
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $time_5min_ago}}}
-      )
+      buy_volume: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: buy } } } })
+      sell_volume: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: sell } } } })
+      buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
     }
   }
 }
+```
+
+Variables — this example uses the **WSOL/USDC Orca Whirlpool**, a long-lived pool that will still be there when you run it:
+
+```json
 {
-  "token":"2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
-  "side_token": ""So11111111111111111111111111111111111111112",
-  "pair_address: "4AZRPNEfCJ7iw28rJu5aUyeQhYcvdcNm8cswyL51AY9i",
-  "time_5min_ago":"2024-11-06T15:13:00Z",
-  "time_1h_ago": "2024-11-06T14:18:00Z"
+  "token": "So11111111111111111111111111111111111111112",
+  "side_token": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+  "pair_address": "Czfq3xZZDmsdGdUyrNLtRhGc47cXcZtLG4crryfu44zE"
 }
 ```
 
-## Get Top Pairs on Solana on DEXScreener
+:::tip Choosing a `pair_address`
+Two traps here.
 
-The query will give the top 10 pairs on Solana network in descending order of their total trades happened in their pools in last 1 hour. This query will get you all the data you need such as total trades, total buys, total sells, total traded volume, total buy volume
-Please change the `Block: {Time: {since: "2024-08-15T04:19:00Z"}}` accordingly when you try out the query.
-Keep in mind you cannot use this as a websocket subscription becuase aggregate functions like `sum` doesn't work well in `subscription`.
+**Aggregators return an empty `MarketAddress`.** Routers such as Jupiter, dflow and Aquifer carry large volume but expose no single pool, so filtering by `Market.MarketAddress` on them yields nothing. Filter on an AMM pool — Whirlpool, Raydium, PumpSwap — instead.
+
+**Memecoin pools are short-lived.** A pump.fun graduate can do eight figures of volume in one hour and almost nothing an hour later, so a mint that looks ideal today may be dead by the time you copy the query. Use [Get Top Pairs on Solana](#top-pairs) to find a currently active pool, then substitute its address here.
+:::
+
+## Get Top Pairs on Solana on DEXScreener {#top-pairs}
+
+This returns the top 10 Solana pairs by trade count over the last hour, with total trades, buys, sells, traded volume and buy volume — the data behind a DEXScreener leaderboard. Use it to find a currently active pool to plug into the [pair stats query](#pair-stats) above.
+
+`since_relative` keeps the window rolling, so there is no date to update.
+
+Note you cannot run this as a WebSocket subscription: aggregate functions like `sum` do not work in `subscription`.
+
 You can find the query [here](https://ide.bitquery.io/Dexscreener--All-in-One-query_1)
 
 ```graphql
 query MyQuery {
   Solana {
     DEXTradeByTokens(
-      where: {Transaction: {Result: {Success: true}}, Trade: {Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Block: {Time: {since: "2024-08-15T04:19:00Z"}}}
+      where: {Transaction: {Result: {Success: true}}, Trade: {Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Block: {Time: {since_relative: {hours_ago: 1}}}}
       orderBy: {descendingByField: "total_trades"}
       limit: {count: 10}
     ) {
@@ -289,7 +281,7 @@ query MyQuery {
         start: PriceInUSD(minimum: Block_Time)
         min5: PriceInUSD(
           minimum: Block_Time
-          if: {Block: {Time: {after: "2024-08-15T05:14:00Z"}}}
+          if: {Block: {Time: {after_relative: {minutes_ago: 5}}}}
         )
         end: PriceInUSD(maximum: Block_Time)
         Dex {

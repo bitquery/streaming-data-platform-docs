@@ -514,5 +514,10 @@ query MyQuery {
 - Use date ranges and pagination for historical analyses at scale.
 - Join across entities (holders, transfers, trades) to build richer analytics.
 - For multi-chain setups, run identical queries across networks and unify downstream.
+- `Tron` and `EVM` are separate top-level selectors, so you can alias several in **one** request and compare a chain-by-chain breakdown without multiple round trips — see [USDT across chains in one request](/docs/blockchain/Tron/usdt-trc20-api#cross-chain).
+
+### Chain-specific USDT pages
+
+- [TRC20 USDT API (Tron)](/docs/blockchain/Tron/usdt-trc20-api) — Tron carries the largest share of USDT transfer activity: live transfers, whale holders, exchange deposit flows and mempool visibility.
 
 Need help crafting a query or subscription? Message us on [support](https://t.me/Bloxy_info).
