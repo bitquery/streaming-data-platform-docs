@@ -165,7 +165,7 @@ const sidebars = {
             slug: "/graphql/metrics",
             title: "Metrics",
             description:
-              "Metrics used to calculate statistics over results grouped by dimensions",
+              "Aggregate metrics for Bitquery GraphQL: sum, count, uniq, median, quantile and statistics computed over results grouped by any dimension.",
           },
           items: [
             "graphql/metrics/alias",
@@ -945,7 +945,7 @@ const sidebars = {
             slug: "/trading/crypto-price-api",
             title: "Crypto Price API",
             description:
-              "Access token and currency pricing data across chains.",
+              "Real-time and historical crypto price APIs: token and pair prices, OHLC candles, market cap and supply across 40+ chains via GraphQL and streams.",
           },
           items: [
             "trading/crypto-price-api/introduction",

@@ -1,6 +1,6 @@
 ---
 title: "Solana Phoenix API"
-description: "Solana Phoenix API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Includes filters and field selection tips."
+description: "Query the Phoenix order book on Solana with Bitquery GraphQL: real-time trades, latest and streaming token prices, and OHLC candles for any pair."
 ---
 # Phoenix DEX API
 

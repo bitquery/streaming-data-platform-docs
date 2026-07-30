@@ -1,6 +1,6 @@
 ---
-title: "Robinhood Token Holders API — Rankings, Counts & Distribution"
-description: "Query Robinhood token holders with Bitquery GraphQL: top-holder rankings, holder counts, distribution stats, whale floors, dormancy screens, and stock-token holders."
+title: "Robinhood Token Holders API — Rankings & Distribution"
+description: "Query Robinhood token holders with Bitquery GraphQL: top-holder rankings, holder counts, distribution stats, whale floors and dormancy screens."
 sidebar_position: 7
 keywords:
   - Robinhood token holders API

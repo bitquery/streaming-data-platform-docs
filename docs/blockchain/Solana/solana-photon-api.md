@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Solana Photon API"
-description: "Solana Photon API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Keep queries fast with indexed filters."
+description: "Track Photon-routed Solana trades with Bitquery GraphQL: latest trades by pair, trader-level rows with USD price, market cap and supply, plus live streams."
 ---
 import FAQ from "@site/src/components/FAQ";
 

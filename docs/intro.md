@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Bitquery API Documentation - Blockchain Data Platform"
-description: "Bitquery API Documentation - Blockchain Data Platform: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
+description: "Start here for Bitquery's blockchain data platform: GraphQL query and WebSocket subscription APIs, the IDE, Kafka streams and cloud data delivery."
 ---
 # Overview
 

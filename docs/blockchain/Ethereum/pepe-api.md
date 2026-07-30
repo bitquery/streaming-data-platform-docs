@@ -680,7 +680,7 @@ query MyQuery {
 
 <!-- ## PEPE Total Holder Count (Snapshot)
 
-Check how many unique wallets hold PEPE at a given date. Change the `snapshot` date to compare across time.
+Check how many unique wallets hold PEPE at a given date. Change the `date` argument to compare across time.
 
 [Run In IDE ➤](https://ide.bitquery.io/pepe-holder-count-snapshot)
 
@@ -688,7 +688,7 @@ Check how many unique wallets hold PEPE at a given date. Change the `snapshot` d
 {
   EVM(network: eth) {
     Holders(
-      snapshot: "2026-05-01",
+      date: "2026-05-01",
       where: { Currency: { SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" } } }
     ) {
       count(of: Holder_Address, distinct: true)

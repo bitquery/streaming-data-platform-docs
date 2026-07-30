@@ -1,6 +1,6 @@
 ---
 title: "What are Internal Transactions & How to Get Them?"
-description: "What are Internal Transactions & How to Get Them?: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
+description: "What internal transactions are, how they differ from internal transfers, and how to trace both on EVM chains using Bitquery Calls and Transfers queries."
 ---
 import FAQ from "@site/src/components/FAQ";
 

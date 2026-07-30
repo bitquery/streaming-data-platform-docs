@@ -273,9 +273,6 @@ query BaseTokenHolders($tokenAddress: String!) {
       limit: { count: 50 }
       where: { Currency: { SmartContract: { is: $tokenAddress } } }
     ) {
-      BalanceUpdate {
-        Address
-      }
       Currency {
         Name
         Symbol

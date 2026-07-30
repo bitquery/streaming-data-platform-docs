@@ -1,6 +1,6 @@
 ---
 title: "Robinhood Calls & Traces API — WebSocket Streams"
-description: "Stream Robinhood contract calls and internal traces over GraphQL WebSockets — decoded inputs, call trees, deployments, reverts. A debug_traceTransaction alternative."
+description: "Stream Robinhood contract calls and internal traces over GraphQL WebSockets: decoded inputs, call trees, deployments and reverts. No node required."
 sidebar_position: 5
 keywords:
   - Robinhood calls API

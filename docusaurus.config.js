@@ -1154,6 +1154,10 @@ const config = {
     ],
     require.resolve("./plugins/llms-txt.js"),
     require.resolve("./plugins/tech-article-jsonld.js"),
+    // Must run after any plugin that writes <title>. Drops the " | Bitquery Docs"
+    // suffix only on titles that render over 60 chars, so keyword-loaded page
+    // titles do not have to shed keywords to make room for branding.
+    require.resolve("./plugins/title-suffix-trim.js"),
   ],
   presets: [
     [

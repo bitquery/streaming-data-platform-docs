@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Solana DEX Pools API"
-description: "Solana DEX Pools API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Works with WebSocket live subscriptions."
+description: "Query Solana liquidity pools with Bitquery GraphQL: pool updates in real time, tokens above a liquidity threshold, per-token pools and latest reserves."
 ---
 import FAQ from "@site/src/components/FAQ";
 

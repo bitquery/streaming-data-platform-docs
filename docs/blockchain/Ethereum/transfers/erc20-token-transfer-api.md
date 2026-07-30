@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "ERC20 Token Transfers API"
-description: "Query and stream Ethereum ERC-20 and native transfers: filter by contract or address, aggregate volume, rank top transfers, and backfill with deterministic pagination."
+description: "Query and stream Ethereum ERC-20 and native transfers: filter by contract or address, aggregate volume, rank top transfers and backfill deterministically."
 keywords:
   - ERC20 token transfers API
   - Ethereum token transfers
