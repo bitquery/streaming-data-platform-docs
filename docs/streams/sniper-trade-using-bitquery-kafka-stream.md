@@ -50,7 +50,10 @@ In this section, we will explore the code logic behind the important functions u
 
 This is how the folder structure looks.
 
-<img src="/img/usecases/kafka-examples/evm_sniper_tutorial_folder.png" />
+<img
+  src="/img/usecases/kafka-examples/evm_sniper_tutorial_folder.png"
+  alt="EVM sniper bot project files on the main branch: .gitignore, Readme.md, executeTrade.js, index.js, package-lock.json and package.json"
+/>
 
 The code snippet below includes all the imports for the `executeTrade.js` file and setup wallet and provider for trade execution.
 

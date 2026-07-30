@@ -1,15 +1,21 @@
 ---
 sidebar_position: 2
 title: "Polygon (MATIC) DEX Trades API"
-description: "Polygon (MATIC) DEX Trades API: get Polygon DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. See examples in the Bitquery IDE."
+description: "Query Polygon DEX trades with Bitquery: live swap streams, OHLC candles, token prices, top traders, and full history through the archive dataset."
 ---
 # Polygon (MATIC) DEX Trades API
 
-:::tip Need real-time Polygon (MATIC) DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Matic`). Use this page when you need **historical Polygon (MATIC) data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+:::tip Want structured trades, OHLC and USD on every row? Start with the Trading API
+The [**Trading API**](/docs/trading/trading-data-overview) is the fastest path to clean Polygon market data. [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns **MEV-filtered swaps with USD price, market cap and supply on every row**, across **9 chains in one API** — filter with `Pair.Market.Network: Matic`. Pre-aggregated OHLC down to one second comes from [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) and [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs), so you never have to build candles yourself.
+
+Reach for the chain-level queries on this page when you need something the Trading API deliberately does not carry: **history older than the Trading window** (via `dataset: combined` or `archive`), **raw per-swap detail**, pool internals, or **call and event context**. Both are shown below, starting with the Trading API.
 :::
 
-In this section we will see how to get Matic DEX trades information using our API.
+Polygon (formerly Matic) settles DEX activity across Uniswap v2/v3, QuickSwap, Balancer, SushiSwap and the Polymarket CTF exchange. This page shows how to query and stream that activity with the Bitquery GraphQL API: live swap streams, real-time and historical token prices, OHLC candles, top tokens and traders, and full trade history through the archive dataset.
+
+:::note Token naming on Polygon
+Polygon's native asset was rebranded from MATIC to POL, so the wrapped native token reports as **`WPOL`** (contract `0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270` — unchanged from WMATIC). Bridged Tether reports as **`USDT0`** at `0xc2132d05d31c914a87c6611c10748aeb04b58e8f`. Filter by contract address rather than symbol wherever you can — addresses are stable across rebrands.
+:::
 
 ## Live DEX swap stream (Polygon) {#crypto-trades-live-stream}
 
@@ -98,11 +104,124 @@ subscription {
 
 </details>
 
-## Subscribe to Latest Matic Trades
+## OHLC candles for a Polygon token {#ohlc}
 
-This example uses the chain-specific **DEXTrades** cube via `EVM(network: matic) { DEXTrades }` (pool-side Buy/Sell; see [DEXTrades cube](/docs/cubes/dextrades)). USD can be weak on thin pools. For trader + USD swap rows, use the [stream at the top](#crypto-trades-live-stream).
+If you are building a chart, do not aggregate raw swaps yourself. [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) returns ready-made candles: set `Interval.Time.Duration` to the candle width in seconds (`60`, `300`, `3600`, `86400`) and filter the token by address.
 
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+This example returns five-minute candles for **WPOL** over the last three hours, with volume in both base units and USD.
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 36 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Token: {
+          Network: { is: "Matic" }
+          Address: { is: "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270" }
+        }
+        Interval: { Time: { Duration: { eq: 300 } } }
+        Block: { Time: { since_relative: { hours_ago: 3 } } }
+      }
+    ) {
+      Interval {
+        Time {
+          Start
+          End
+          Duration
+        }
+      }
+      Token {
+        Symbol
+        Address
+        Network
+      }
+      Currency {
+        Symbol
+      }
+      Price {
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
+      Volume {
+        Base
+        Usd
+      }
+    }
+  }
+}
+```
+
+Swap `Duration` for the candle size you need, and drop the `Block.Time` filter to walk further back. For pair-level candles — one specific pool rather than the token's aggregated price — use [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs) with a `Market.Address` filter.
+
+## Historical Polygon trades (archive dataset) {#historical}
+
+The realtime dataset covers a rolling recent window. For anything older, add **`dataset: archive`** (history only) or **`dataset: combined`** (history plus realtime) to the `EVM` selector. This is the main reason to use chain-level `DEXTrades` instead of the Trading API.
+
+The query below pulls Polygon swaps from a fixed historical day. Change the `since` / `till` bounds to any range you need.
+
+```graphql
+{
+  EVM(network: matic, dataset: archive) {
+    DEXTrades(
+      limit: { count: 25 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Block: {
+          Time: { since: "2025-01-01T00:00:00Z", till: "2025-01-02T00:00:00Z" }
+        }
+      }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Transaction {
+        Hash
+        From
+      }
+      Trade {
+        Dex {
+          ProtocolName
+          ProtocolFamily
+          SmartContract
+        }
+        Buy {
+          Amount
+          Currency {
+            Symbol
+            SmartContract
+          }
+          PriceInUSD
+          Buyer
+        }
+        Sell {
+          Amount
+          Currency {
+            Symbol
+            SmartContract
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+:::caution USD values on thin pools
+`PriceInUSD` is derived from the trade itself, so it can come back as `0` or wildly off for pools with almost no liquidity. If you need dependable USD, use the Trading API (which carries a vetted price per row) or filter on [`PriceAsymmetry`](/docs/graphql/metrics/priceAsymmetry/) as shown below.
+:::
+
+## Latest Polygon DEX trades {#latest-trades}
+
+This example uses the chain-specific **DEXTrades** cube via `EVM(network: matic) { DEXTrades }` (pool-side Buy/Sell; see [DEXTrades cube](/docs/cubes/dextrades)). For trader-oriented rows with reliable USD, use the [stream at the top](#crypto-trades-live-stream).
+
+Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to understand when to use which cube.
 You can find the query [here](https://ide.bitquery.io/Realtime-matic-dex-trades-websocket)
 
 ```graphql
@@ -150,18 +269,34 @@ subscription {
     }
   }
 }
-
 ```
 
-## Subscribe to Latest Price of a Token in Real-time
+## Real-time price of a token in terms of another {#realtime-price}
 
-This query provides real-time updates on price of AVAX `0x2C89bbc92BD86F8075d1DEcc58C7F4E0107f286b` in terms of WMATIC `0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270`, including details about the DEX, market, and order specifics. Find the query [here](https://ide.bitquery.io/Price-of-a-AVAX-in-terms-of-WMATIC-on-matic_2)
+This subscription streams the price of **WPOL** in terms of **USDC**, including the DEX, market and order details. Filtering both sides pins you to a single trading direction on a specific pair.
 
 ```graphql
 subscription {
   EVM(network: matic) {
     DEXTrades(
-      where: {Trade: {Sell: {Currency: {SmartContract: {is: "0x2C89bbc92BD86F8075d1DEcc58C7F4E0107f286b"}}}, Buy: {Currency: {SmartContract: {is: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270"}}}}}
+      where: {
+        Trade: {
+          Sell: {
+            Currency: {
+              SmartContract: {
+                is: "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"
+              }
+            }
+          }
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"
+              }
+            }
+          }
+        }
+      }
     ) {
       Block {
         Time
@@ -201,18 +336,30 @@ subscription {
     }
   }
 }
-
 ```
 
-## Latest USD Price of a Token
+To watch one pool rather than every pool for the pair, add a
+`Trade: { Dex: { SmartContract: { is: "0x..." } } }` filter.
 
-The below query retrieves the USD price of a token on Matic by setting `SmartContract: {is: "0xe06bd4f5aac8d0aa337d13ec88db6defc6eaeefe"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Latest-USD-Price-of-a-Token-on-Matic).
+## Latest USD price of a token {#usd-price}
+
+This subscription returns the USD price of a token by filtering on the buy-side contract — here **WETH** on Polygon. Read `PriceInUSD` for the USD value. `PriceAsymmetry(selectWhere: {lt: 1})` drops trades whose two legs disagree badly on value, which is the cheapest way to filter out bot noise and broken pools.
 
 ```graphql
 subscription {
   EVM(network: matic) {
     DEXTrades(
-      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0xe06bd4f5aac8d0aa337d13ec88db6defc6eaeefe"}}}}}
+      where: {
+        Trade: {
+          Buy: {
+            Currency: {
+              SmartContract: {
+                is: "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619"
+              }
+            }
+          }
+        }
+      }
     ) {
       Block {
         Number
@@ -247,100 +394,95 @@ subscription {
           Seller
           Price
         }
-        PriceAsymmetry(selectWhere: {lt: 1})
+        PriceAsymmetry(selectWhere: { lt: 1 })
       }
     }
   }
 }
-
 ```
 
-## Get Top Gainers on Matic Network
+## Top tokens on Polygon by traded volume {#top-tokens}
 
-This query retrieves information about the top-performing tokens on the Matic network based on trade volume and price appreciation in USD. It aggregates data from DEXs to provide insights into price trends over different time intervals like 10 minutes, 1 hour and 3 hours ago, and the overall trading volume.
+This query ranks Polygon tokens by USD volume over a relative window and returns the price now versus the start of the window, so you can compute a change percentage client-side.
 
-We use `any` filter ( OR condition) to exclude `$wmatic`, `$weth`, `$usdc`, `$usdt`, `$usdcpos`, the smart contract addresses for common tokens on the Matic network from top tokens list.
+Two filters matter more than they look:
 
-You can run this query [here](https://ide.bitquery.io/top-tokens-on-matic-stats)
+- **`Currency: { Fungible: true }`** — without it, results are dominated by Polymarket's ERC-1155 outcome tokens, which trade in enormous quantities on Polygon, carry empty symbols, and are almost certainly not what you are ranking. See the [Polymarket API](/docs/examples/polymarket-api/) if they *are* what you want.
+- **`SmartContract: { notIn: $quotes }`** on the trade side and **`in: $quotes`** on the counter-side — this keeps stablecoins and wrapped majors as *quote* assets instead of letting them top their own leaderboard.
+
+Using `since_relative` rather than fixed timestamps means the query stays correct whenever it is run.
 
 ```graphql
-query pairs($min_count: String, $network: evm_network, $time_10min_ago: DateTime, $time_1h_ago: DateTime, $time_3h_ago: DateTime, $time_ago: DateTime, $wmatic: String!, $weth: String!, $usdc: String!, $usdt: String!, $usdcpos: String!) {
+query topTokens($network: evm_network, $quotes: [String!], $min_usd: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
-      where: {Block: {Time: {since: $time_ago}}, any: [{Trade: {Side: {Currency: {SmartContract: {is: $usdt}}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $usdc}}}, Currency: {SmartContract: {notIn: [$usdt]}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $usdcpos}}}, Currency: {SmartContract: {notIn: [$usdt, $usdc]}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $weth}}}, Currency: {SmartContract: {notIn: [$usdc, $usdt, $usdcpos]}}}}, {Trade: {Side: {Currency: {SmartContract: {is: $wmatic}}}, Currency: {SmartContract: {notIn: [$weth, $usdc, $usdt, $usdcpos]}}}}, {Trade: {Side: {Currency: {SmartContract: {notIn: [$usdc, $usdt, $weth, $wmatic]}}}, Currency: {SmartContract: {notIn: [$usdc, $usdt, $weth, $wmatic, $usdcpos]}}}}]}
-      orderBy: {descendingByField: "usd"}
-      limit: {count: 100}
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Trade: {
+          Currency: { Fungible: true, SmartContract: { notIn: $quotes } }
+          Side: { Currency: { SmartContract: { in: $quotes } } }
+        }
+      }
+      orderBy: { descendingByField: "usd" }
+      limit: { count: 25 }
     ) {
       Trade {
         Currency {
           Symbol
           Name
           SmartContract
-          ProtocolName
         }
-        Side {
-          Currency {
-            Symbol
-            Name
-            SmartContract
-            ProtocolName
-          }
-        }
-        price_last: PriceInUSD(maximum: Block_Number)
-        price_10min_ago: PriceInUSD(
-          maximum: Block_Number
-          if: {Block: {Time: {before: $time_10min_ago}}}
-        )
-        price_1h_ago: PriceInUSD(
-          maximum: Block_Number
-          if: {Block: {Time: {before: $time_1h_ago}}}
-        )
-        price_3h_ago: PriceInUSD(
-          maximum: Block_Number
-          if: {Block: {Time: {before: $time_3h_ago}}}
-        )
+        price_now: PriceInUSD(maximum: Block_Number)
+        price_window_start: PriceInUSD(minimum: Block_Number)
       }
-      dexes: uniq(of: Trade_Dex_OwnerAddress)
-      amount: sum(of: Trade_Side_Amount)
-      usd: sum(of: Trade_Side_AmountInUSD)
-      sellers: uniq(of: Trade_Seller)
+      usd: sum(of: Trade_Side_AmountInUSD, selectWhere: { ge: $min_usd })
+      trades: count
       buyers: uniq(of: Trade_Buyer)
-      count(selectWhere: {ge: $min_count})
+      sellers: uniq(of: Trade_Seller)
+      dexes: uniq(of: Trade_Dex_OwnerAddress)
     }
   }
 }
-{
-  "network": "matic",
-  "time_10min_ago": "2024-11-13T03:49:19Z",
-  "time_1h_ago": "2024-11-13T02:59:19Z",
-  "time_3h_ago": "2024-11-13T00:59:19Z",
-  "usdc": "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
-  "usdcpos": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
-  "usdt": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
-  "weth": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
-  "wmatic": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
-  "min_count": "100"
-}
-
 ```
 
-This query is available as a heatmap on [https://dexrabbit.com/matic](https://dexrabbit.com/matic)
+Variables — the quote list is native USDC, bridged USDC.e, USDT0, DAI, WETH, WPOL and WBTC:
+
+```json
+{
+  "network": "matic",
+  "quotes": [
+    "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+    "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+    "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+    "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+    "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
+    "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6"
+  ],
+  "min_usd": "25000"
+}
+```
+
+A heatmap built on this shape of query is live at [dexrabbit.com/matic](https://dexrabbit.com/matic).
 
 ![Top Polygon tokens by volume on DEXrabbit](/img/dexrabbit/matic_toptokens.png)
 
-## Top Traders of a Token
+## Top traders of a token {#top-traders}
 
-This query retrieves data on the top traders of a specific token on the Matic network. It aggregates trade volumes and categorizes them into bought and sold amounts, along with the total trading volume in both native and USD terms.
+This query ranks traders of one token by volume, splitting bought and sold amounts and totalling volume in native and USD terms. `since_relative` keeps the window rolling.
 
 You can run the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-matic_1)
 
 ```graphql
-query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
+query topTraders($network: evm_network, $token: String) {
   EVM(network: $network) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "volumeUsd"}
-      limit: {count: 100}
-      where: {Trade: {Currency: {SmartContract: {is: $token}}}, Block: {Time: {since: $time_ago}}}
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 100 }
+      where: {
+        Trade: { Currency: { SmartContract: { is: $token } } }
+        Block: { Time: { since_relative: { days_ago: 3 } } }
+      }
     ) {
       Trade {
         Buyer
@@ -348,29 +490,29 @@ query topTraders($network: evm_network, $time_ago: DateTime, $token: String) {
           ProtocolFamily
         }
       }
-      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
-      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
   }
 }
+```
+
+```json
 {
   "network": "matic",
-  "token": "0x4dba7eb38ab96987b2b9c267f9d399da367194e0",
-  "time_ago": "2024-11-10T05:00:02Z"
+  "token": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"
 }
 ```
 
-This query is available as a chart and table on [https://dexrabbit.com/matic](https://dexrabbit.com/matic)
+This query is available as a chart and table on [dexrabbit.com/matic](https://dexrabbit.com/matic).
 
 ![Top Polygon traders on DEXrabbit](/img/dexrabbit/matic_toptraders.png)
 
 ---
 
 ## More examples
-
-Trading API query below; for a full-network swap stream see [above](#crypto-trades-live-stream).
 
 ### Top Traders by PnL for a Specific Pool (Last 30 Minutes)
 
@@ -412,5 +554,12 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 ```
 
 </details>
+
+## Related Polygon APIs
+
+- [Polygon (MATIC) Address Balance API](/docs/blockchain/Matic/matic-balance-api) — token and native balances
+- [Polygon (MATIC) Transfers API](/docs/blockchain/Matic/matic-transfers) — ERC-20 and native transfers
+- [Polymarket API](/docs/examples/polymarket-api/) — prediction market trades and outcome prices on Polygon
+- [Trading API overview](/docs/trading/trading-data-overview) — structured trades, prices and OHLC across 9 chains
 
 ---

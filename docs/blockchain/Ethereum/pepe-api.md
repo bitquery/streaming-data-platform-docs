@@ -687,9 +687,9 @@ Check how many unique wallets hold PEPE at a given date. Change the `snapshot` d
 ```graphql
 {
   EVM(network: eth) {
-    TokenHolders(
-      tokenSmartContract: "0x6982508145454ce325ddbe47a25d4ec3d2311933"
-      snapshot: "2026-05-01"
+    Holders(
+      snapshot: "2026-05-01",
+      where: { Currency: { SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" } } }
     ) {
       count(of: Holder_Address, distinct: true)
     }
@@ -708,9 +708,8 @@ Check the current PEPE balance of any specific wallet.
 ```graphql
 {
   EVM(network: eth) {
-    TokenHolders(
-      tokenSmartContract: "0x6982508145454ce325ddbe47a25d4ec3d2311933"
-      where: {
+    Holders(
+      where: { Currency: { SmartContract: { is: "0x6982508145454ce325ddbe47a25d4ec3d2311933" } },
         Holder: { Address: { is: "WALLET_ADDRESS_HERE" } }
       }
     ) {

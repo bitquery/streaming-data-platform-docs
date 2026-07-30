@@ -112,6 +112,23 @@ const config = {
         href: "/img/apple-touch-icon.png",
       },
     },
+    // Docusaurus emits og:title/description/image/url/locale but never og:type or
+    // og:site_name, so every page failed Open Graph validation (573 pages in the
+    // 2026-07-30 Ahrefs crawl). headTags is global: "website" applies site-wide.
+    {
+      tagName: "meta",
+      attributes: {
+        property: "og:type",
+        content: "website",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        property: "og:site_name",
+        content: "Bitquery Docs",
+      },
+    },
   ],
 
   scripts: [
@@ -1186,7 +1203,10 @@ const config = {
 
             const customItems = [
               {
-                url: "https://docs.bitquery.io/crypto-reward-tax-calculator/",
+                // No trailing slash: this path is served by a separate Next.js app
+                // whose trailing-slash normalization 308s /…-calculator/ to
+                // /…-calculator. The slashed form put a redirect in our sitemap.
+                url: "https://docs.bitquery.io/crypto-reward-tax-calculator",
                 changefreq: "monthly",
                 priority: 0.6,
               },

@@ -1,8 +1,23 @@
 ---
 title: "Balance Update Cube"
-description: "Balance Update Cube: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance. Great for bots, dashboards, and alerts."
+description: "How the BalanceUpdates cube models per-change balance history, what Type attribution it offers, and when to use Balances or Holders instead."
 ---
 # Balance Update Cube
+
+:::caution On EVM and Tron, use `Balances` or `Holders` for current balances
+`BalanceUpdates` is **deprecated on EVM and Tron**, superseded by the
+[**`Balances` and `Holders` cubes**](/docs/cubes/balances-cube). Those read from
+aggregate-state tables and return the current balance directly, so you no longer
+sum deltas yourself. See the [migration mapping](/docs/cubes/balances-cube#migrating-from-balanceupdates).
+
+Two things this page is still the right reference for:
+
+- **Solana.** `Solana.BalanceUpdates` and `Solana.InstructionBalanceUpdates` are the
+  **current** APIs there and are not deprecated — Solana has no `Balances` cube.
+- **Change attribution and per-change history on any chain.** `Balances` gives you the
+  resulting amount but not *why* it moved. Only `BalanceUpdates` exposes
+  `Type` (`transfer`, `fee`, `block_reward`, …) per change.
+:::
 
 Our `BalanceUpdates` cube is designed to provide historical and realtime balance updates. This cube provides multiple ways to query historical balance data.
 

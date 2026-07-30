@@ -1,24 +1,33 @@
 ---
 title: PumpFun API Documentation
-description: "PumpFun API Documentation: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams. Great for bots, dashboards, and alerts."
+description: "Index of Bitquery's Pump.fun APIs on Solana — pick the right page for trades, bonding curve and market cap, PumpSwap, or migration tracking."
 slug: /blockchain/Solana/Pumpfun/
+# Hub page: keep only navigational/orientation terms here. Product terms belong to
+# the page that answers them — Pump.fun API -> Pump-Fun-API, bonding curve and
+# market cap -> Pump-Fun-Marketcap-Bonding-Curve-API, PumpSwap -> pump-swap-api,
+# migration -> pump-fun-to-pump-swap. Five pages claiming the same head terms is
+# why nothing in this cluster ranked for them.
 keywords:
-  - PumpFun API
-  - Pump Fun Solana API
-  - PumpFun DEX API
-  - PumpFun GraphQL API
-  - PumpFun Marketcap API
-  - PumpSwap API
-  - PumpFun to PumpSwap API
-  - Solana bonding curve API
-  - Best PumpFun API
-  - PumpFun token data API
+  - PumpFun API documentation
+  - Pump.fun data on Solana
+  - Bitquery Pump.fun APIs
 ---
 # PumpFun API Documentation
 
-:::tip Need real-time Pump.fun data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Pump.fun and PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Pre-aggregated 1-second OHLC is available via [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) and [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs). Use the Pump.fun pages below when you need **historical data older than ~30 days**, bonding-curve internals, or raw on-chain detail.
+:::tip Want structured trades, OHLC and market cap? Start with the Trading API
+The [**Trading API**](/docs/trading/trading-data-overview) is the fastest path to clean Pump.fun and PumpSwap market data. [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns **MEV-filtered swaps with USD price, market cap and supply on every row**, across **9 chains in one API**. Pre-aggregated OHLC down to one second comes from [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) and [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs), so you never build candles yourself.
+
+Reach for the chain-level Pump.fun pages below when you need what the Trading API deliberately does not carry: **history older than the Trading window**, **bonding-curve internals**, or raw per-instruction detail.
 :::
+
+### Which Pump.fun page do I need?
+
+| You want | Go to |
+| --- | --- |
+| Trades, new launches, prices, OHLCV, top traders, holders | [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) |
+| Market cap, FDV, circulating supply, bonding-curve progress | [Marketcap & Bonding Curve API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-Marketcap-Bonding-Curve-API/) |
+| Detect tokens graduating from the curve to the AMM | [Pump.fun to PumpSwap migration](/docs/blockchain/Solana/Pumpfun/pump-fun-to-pump-swap/) |
+| PumpSwap AMM trades, pools and liquidity | [PumpSwap API](/docs/blockchain/Solana/Pumpfun/pump-swap-api/) |
 
 In this section, we will see how to fetch PumpFun-related data via **Bitquery APIs** and **Streams**.
 

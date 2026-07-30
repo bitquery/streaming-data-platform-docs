@@ -6,7 +6,10 @@ description: "Build Realtime Liquidity Drain Detector: a practical Bitquery tuto
 
 This guide demonstrates how to build a real-time DeFi security tool that monitors DEX pools to detect liquidity drains using Bitquery's Kafka streams. The tool provides instant alerts when significant liquidity drops are detected in DEX pools, helping protect against potential liquidity drains.
 
-<img src="/img/usecases/kafka-examples/liquidity_drain_detector.png" />
+<img
+  src="/img/usecases/kafka-examples/liquidity_drain_detector.png"
+  alt="Realtime Liquidity Drain Detection dashboard showing 6 critical alerts across 3 pools, including a rapid-drain alert for an HLS/WETH Uniswap V3 pool with its liquidity metrics"
+/>
 
 > **⚠️ Important: Proof of Concept**
 > 

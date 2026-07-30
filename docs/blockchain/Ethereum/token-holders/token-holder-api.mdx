@@ -373,7 +373,7 @@ query {
 
 ## Token Holder Statistics
 
-Distribution metrics (average, median, Gini, Nakamoto index, and more) via the legacy **`TokenHolders`** cube or aggregated **Holders** queries. See [statistics docs](/docs/graphql/metrics/statistics/) for the full metric list.
+Distribution metrics (average, median, Gini, Nakamoto index, and more) come from aggregate functions on the **`Holders`** cube. See [statistics docs](/docs/graphql/metrics/statistics/) for the full metric list, and the [Balances & Holders cubes](/docs/cubes/balances-cube) reference for how `Holders` differs from `Balances`.
 
 ### Average Balance of a Token Holder
 
@@ -385,10 +385,9 @@ Distribution metrics (average, median, Gini, Nakamoto index, and more) via the l
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
-    TokenHolders(
+    Holders(
       date: "2026-05-01"
-      tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-      where: { Balance: { Amount: { ge: "0" } } }
+      where: { Currency: { SmartContract: { is: "0xdAC17F958D2ee523a2206206994597C13D831ec7" } }, Balance: { Amount: { ge: "0" } } }
     ) {
       average(of: Balance_Amount)
     }
@@ -408,10 +407,9 @@ Distribution metrics (average, median, Gini, Nakamoto index, and more) via the l
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
-    TokenHolders(
+    Holders(
       date: "2026-05-01"
-      tokenSmartContract: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-      where: { Balance: { Amount: { ge: "0" } } }
+      where: { Currency: { SmartContract: { is: "0xdAC17F958D2ee523a2206206994597C13D831ec7" } }, Balance: { Amount: { ge: "0" } } }
     ) {
       median(of: Balance_Amount)
     }
@@ -433,10 +431,9 @@ Advanced filter: holders with balance above an upper bound or below a lower boun
 ```graphql
 {
   EVM(dataset: archive) {
-    TokenHolders(
-      tokenSmartContract: "0x0fcbd68251819928c8f6d182fc04be733fa94170"
+    Holders(
       date: "2026-05-01"
-      where: {
+      where: { Currency: { SmartContract: { is: "0x0fcbd68251819928c8f6d182fc04be733fa94170" } },
         any: [
           { Balance: { Amount: { gt: "100" } } }
           { Balance: { Amount: { lt: "20" } } }

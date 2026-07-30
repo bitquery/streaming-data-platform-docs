@@ -1,6 +1,6 @@
 ---
 title: "PumpSwap API - Solana - Tokens, Trades, Live Prices"
-description: "PumpSwap API - Solana - Tokens, Trades, Live Prices: real-time Solana memecoin and DEX data via Bitquery GraphQL APIs and Kafka streams."
+description: "Query and stream PumpSwap AMM activity on Solana: live trades, new pools, token prices and liquidity, over GraphQL, WebSocket or Kafka."
 keywords:
   - PumpSwap API
   - track PumpSwap trades in real time

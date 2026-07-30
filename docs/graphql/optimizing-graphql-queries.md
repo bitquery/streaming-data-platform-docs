@@ -28,7 +28,7 @@ Examples:
 EVM(dataset: realtime, network: eth) { DEXTrades(limit: { count: 100 }) { Trade { ... } } }
 
 # Historical holders snapshot
-EVM(dataset: archive, network: eth) { TokenHolders(date: "2024-01-01") { uniq(of: Holder_Address) } }
+EVM(dataset: archive, network: eth) { Holders(date: "2024-01-01") { uniq(of: Holder_Address) } }
 
 # One-shot view spanning history and near-real-time
 EVM(dataset: combined, network: bsc) { BalanceUpdates(limit: { count: 1000 }) { ... } }
@@ -155,14 +155,13 @@ Sorting can be done by using the `order by` argument. This argument takes a list
 ```graphql
 query ($network: evm_network, $till: String!, $token: String!, $limit: Int) {
   EVM(network: $network, dataset: archive) {
-    TokenHolders(
-      tokenSmartContract: $token
-
+    Holders(
       date: $till
 
       orderBy: { descending: Balance_Amount }
 
       limit: { count: $limit }
+      where: { Currency: { SmartContract: { is: $token } } }
     ) {
       Holder {
         Address
@@ -312,22 +311,18 @@ For instance, consider the following query. Here, we utilize a string filter to 
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
-    greater_than_50: TokenHolders(
+    greater_than_50: Holders(
       date: "2023-10-23"
 
-      tokenSmartContract: "0x23581767a106ae21c074b2276D25e5C3e136a68b"
-
-      where: { Balance: { Amount: { ge: "50" } } }
+      where: { Currency: { SmartContract: { is: "0x23581767a106ae21c074b2276D25e5C3e136a68b" } }, Balance: { Amount: { ge: "50" } } }
     ) {
       uniq(of: Holder_Address)
     }
 
-    greater_than_or_equal_to_50: TokenHolders(
+    greater_than_or_equal_to_50: Holders(
       date: "2023-10-23"
 
-      tokenSmartContract: "0x23581767a106ae21c074b2276D25e5C3e136a68b"
-
-      where: { Balance: { Amount: { gt: "50" } } }
+      where: { Currency: { SmartContract: { is: "0x23581767a106ae21c074b2276D25e5C3e136a68b" } }, Balance: { Amount: { gt: "50" } } }
     ) {
       uniq(of: Holder_Address)
     }

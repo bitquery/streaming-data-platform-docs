@@ -12,7 +12,10 @@ This guide demonstrates how to build a basic Pump.fun token analysis tool using 
 
 GitHub Repository: [pumpfun-token-sniffer](https://github.com/Akshat-cs/pumpfun-token-sniffer)
 
-<img src="/img/usecases/pump_fun_sniffer.png" />
+<img
+  src="/img/usecases/pump_fun_sniffer.png"
+  alt="Solana Scam Token Checker app with a Pump.fun token address field and a table scoring recent tokens on liquidity, insider, creator-holdings and holder checks"
+/>
 
 ## Overview
 
