@@ -12,10 +12,9 @@ The `uniq` function is used to estimate the count of unique values in a dataset.
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
-    TokenHolders(
+    Holders(
       date: "2024-03-04"
-      tokenSmartContract: "0x95AD61B0A150D79219DCF64E1E6CC01F0B64C4CE"
-      where: {Balance: {Amount: {gt: "0"}}}
+      where: { Currency: { SmartContract: { is: "0x95AD61B0A150D79219DCF64E1E6CC01F0B64C4CE" } }, Balance: {Amount: {gt: "0"}}}
     ) {
       exact: uniq(of: Holder_Address, method: exact)
       count(distinct: Holder_Address)

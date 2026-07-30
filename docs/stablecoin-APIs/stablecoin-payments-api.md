@@ -243,10 +243,9 @@ For **AML/KYC and risk monitoring**, you can analyze a payment counterparty's fu
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
-    TokenHolders(
+    Holders(
       date: "2025-08-25"
-      tokenSmartContract: "0xdac17f958d2ee523a2206206994597c13d831ec7"
-      where: {
+      where: { Currency: { SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" } },
         Holder: {
           Address: { is: "0x72187db55473b693ded367983212fe2db3768829" }
         }
@@ -289,11 +288,10 @@ Identify addresses receiving stablecoins for the **first time** on a given date 
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
-    TokenHolders(
+    Holders(
       limit: { count: 1000 }
       date: "2025-08-25"
-      tokenSmartContract: "0xdac17f958d2ee523a2206206994597c13d831ec7"
-      where: { BalanceUpdate: { FirstDate: { is: "2025-08-25" } } }
+      where: { Currency: { SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" } }, BalanceUpdate: { FirstDate: { is: "2025-08-25" } } }
     ) {
       Holder {
         Address
@@ -312,12 +310,11 @@ Identify addresses that **last received USDT** on a specific date — useful for
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
-    TokenHolders(
+    Holders(
       orderBy: { descending: Balance_Amount }
       limit: { count: 1000 }
       date: "2025-08-25"
-      tokenSmartContract: "0xdac17f958d2ee523a2206206994597c13d831ec7"
-      where: { BalanceUpdate: { LastDate: { is: "2021-01-01" } } }
+      where: { Currency: { SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" } }, BalanceUpdate: { LastDate: { is: "2021-01-01" } } }
     ) {
       Holder {
         Address
@@ -343,11 +340,11 @@ Find **top holders of USDT on Ethereum**, including inflows, outflows, and full 
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
-    TokenHolders(
+    Holders(
       orderBy: [{ descending: Balance_Amount }]
       limit: { count: 100 }
-      date: "2025-08-25"
-      tokenSmartContract: "0xdac17f958d2ee523a2206206994597c13d831ec7"
+      date: "2025-08-25",
+      where: { Currency: { SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" } } }
     ) {
       Holder {
         Address

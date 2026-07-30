@@ -20,11 +20,11 @@ You can view and execute the query for the top holders of an RWA using the follo
 ```graphql
 {
   EVM(dataset: archive, network: eth) {
-    TokenHolders(
+    Holders(
       date: "2025-04-22"
-      tokenSmartContract: "0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C"
       limit: { count: 10 }
-      orderBy: { descending: Balance_Amount }
+      orderBy: { descending: Balance_Amount },
+      where: { Currency: { SmartContract: { is: "0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C" } } }
     ) {
       BalanceUpdate {
         transactions: Count

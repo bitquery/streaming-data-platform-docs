@@ -381,6 +381,7 @@ const sidebars = {
             "cubes/dextrades-dextradebytokens-trading-trades",
             "cubes/evm-dexpool",
             "cubes/transaction-cube",
+            "cubes/balances-cube",
             "cubes/balance-updates-cube",
             "cubes/transfers-cube",
             "schema/evm/token-holders",

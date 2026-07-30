@@ -31,7 +31,7 @@ In this tutorial we will see how to visualize top token holders in a heatmap usi
 
    ```python
    payload = json.dumps({
-       "query": "{\nEVM(dataset: archive, network: eth) {\nTokenHolders(\ndate: \"2024-02-01\"\ntokenSmartContract: \"0x2af5d2ad76741191d15dfe7bf6ac92d4bd912ca3\"\nlimit: {count: 50}\norderBy: {descending: Balance_Amount}\n) {\nHolder {\nAddress\n}\nBalance {\nAmount\n}\n}\n}\n}\n",
+       "query": "{\nEVM(dataset: archive, network: eth) {\nHolders(\ndate: \"2024-02-01\"\nwhere: {Currency: {SmartContract: {is: \"0x2af5d2ad76741191d15dfe7bf6ac92d4bd912ca3\"}}}\nlimit: {count: 50}\norderBy: {descending: Balance_Amount}\n) {\nHolder {\nAddress\n}\nBalance {\nAmount\n}\n}\n}\n}\n",
        "variables": "{}"
    })
    ```
