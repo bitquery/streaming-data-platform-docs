@@ -236,7 +236,9 @@ For the full transfer schema (mint/burn detection, `Type`, dataset selection), s
 
 ## Compliance & Risk Checks
 
-For **AML/KYC and risk monitoring**, you can analyze a payment counterparty's full lifecycle on the asset — first/last activity dates, in/out counts, and current balance — in a single query.
+For **AML/KYC and risk monitoring**, you can analyze a payment counterparty's lifecycle on the asset — first and last activity dates, total change count, and current balance — in a single query.
+
+The `Holders` cube does not break activity down by direction. For separate inbound and outbound counts or amounts, aggregate the [Transfers cube](/docs/cubes/transfers-cube) by `Transfer.Sender` / `Transfer.Receiver` instead.
 
 🔗 [Example API](https://ide.bitquery.io/stats-for-an-adddress)
 
@@ -254,16 +256,10 @@ For **AML/KYC and risk monitoring**, you can analyze a payment counterparty's fu
       Holder {
         Address
       }
-      BalanceUpdate {
-        InCount
-        OutCount
-        Count
-        InAmount
-        OutAmount
-        FirstDate
-        LastDate
-      }
       Balance {
+        UpdateCount
+        FirstChangeTime
+        LastChangeTime
         Amount
       }
     }
@@ -319,11 +315,9 @@ Identify addresses that **last received USDT** on a specific date — useful for
       Holder {
         Address
       }
-      BalanceUpdate {
-        FirstDate
-        LastDate
-      }
       Balance {
+        FirstChangeTime
+        LastChangeTime
         Amount
       }
     }
@@ -333,7 +327,7 @@ Identify addresses that **last received USDT** on a specific date — useful for
 
 ### 3. Top Stablecoin Holders
 
-Find **top holders of USDT on Ethereum**, including inflows, outflows, and full activity history. The [Stablecoin Balance API](/docs/stablecoin-APIs/stablecoin-balance-api#get-top-100-holders-of-a-particular-stablecoin) covers the same pattern on Solana.
+Find **top holders of USDT on Ethereum**, with current balance and activity history (first change, last change, total change count). For directional inflow/outflow totals, aggregate the [Transfers cube](/docs/cubes/transfers-cube) by sender and receiver. The [Stablecoin Balance API](/docs/stablecoin-APIs/stablecoin-balance-api#get-top-100-holders-of-a-particular-stablecoin) covers the same pattern on Solana.
 
 🔗 [Query Example](https://ide.bitquery.io/Top-holders-of-usdt-on-specific-date)
 
@@ -349,16 +343,10 @@ Find **top holders of USDT on Ethereum**, including inflows, outflows, and full 
       Holder {
         Address
       }
-      BalanceUpdate {
-        InCount
-        OutCount
-        Count
-        InAmount
-        OutAmount
-        FirstDate
-        LastDate
-      }
       Balance {
+        UpdateCount
+        FirstChangeTime
+        LastChangeTime
         Amount
       }
     }

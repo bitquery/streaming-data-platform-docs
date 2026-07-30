@@ -26,10 +26,9 @@ You can view and execute the query for the top holders of an RWA using the follo
       orderBy: { descending: Balance_Amount },
       where: { Currency: { SmartContract: { is: "0x59D9356E565Ab3A36dD77763Fc0d87fEaf85508C" } } }
     ) {
-      BalanceUpdate {
-        transactions: Count
-      }
-      Holder {
+      Balance {
+        UpdateCount
+      }Holder {
         Address
       }
       Balance {
