@@ -1,6 +1,6 @@
 ---
-title: "Polymarket API - Trade, Prices & Market Data"
-description: "Polymarket API - Trade, Prices & Market Data: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
+title: "Polymarket API Guide - Data & Query Reference"
+description: "Which Polymarket API to use for each job: trades and prices, positions and redemptions, market lifecycle, wallet activity and real-time streams."
 # Keep explicit slug so URL stays /polymarket-api/polymarket-api/ (folder basename
 # would otherwise collapse this doc onto /examples/polymarket-api/).
 slug: /examples/polymarket-api/polymarket-api
@@ -26,7 +26,7 @@ keywords:
 ---
 import FAQ from "@site/src/components/FAQ";
 
-# Polymarket API - Trade, Prices & Market Data
+# Polymarket API Guide - Data & Query Reference
 
 The Bitquery Polymarket API provides prediction market data on Polygon via GraphQL. Use **`dataset: realtime`** on `EVM` queries for **`PredictionTrades`**, **`PredictionSettlements`**, and related prediction-market APIs—this dataset retains roughly the **last 7 days**. Use it to query trades, settlements, market metadata, and volume; filter by condition_id, outcome token, or trade size; and access data via REST, WebSocket subscriptions, or Kafka streams. Filter by Polymarket using `ProtocolName: "polymarket"` or `Marketplace.ProtocolName` in your queries.
 
