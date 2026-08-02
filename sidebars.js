@@ -688,6 +688,7 @@ const sidebars = {
             "blockchain/Solana/SolFi-api",
             "blockchain/Solana/Orbic-API",
             "blockchain/Solana/xstocks-api",
+            "blockchain/Solana/solana-rfq-api",
             "blockchain/Solana/solana-geckoterminal-api",
             "blockchain/Solana/DEXScreener/solana_dexscreener",
             "blockchain/Solana/ai-agent-solana-data",

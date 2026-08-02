@@ -8,6 +8,10 @@ description: "Solana Xstocks API: query and stream Solana on-chain data with Bit
 For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered xStocks swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical xStocks data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
+:::note Some tickers only trade via RFQ
+Several tokenized equities settle through Jupiter's RFQ order engine rather than a pool, which means they have no DEX trades at all and no price here. The [Solana RFQ API](/docs/blockchain/Solana/solana-rfq-api/) shows how to read their executed prices from the `fill` instruction.
+:::
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Tesla xStock Trades in Real-Time
