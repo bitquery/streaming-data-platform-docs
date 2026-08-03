@@ -4,19 +4,22 @@ description: "How the BalanceUpdates cube models per-change balance history, wha
 ---
 # Balance Update Cube
 
-:::caution On EVM and Tron, use `Balances` or `Holders` for current balances
-`BalanceUpdates` is **deprecated on EVM and Tron**, superseded by the
-[**`Balances` and `Holders` cubes**](/docs/cubes/balances-cube). Those read from
-aggregate-state tables and return the current balance directly, so you no longer
-sum deltas yourself. See the [migration mapping](/docs/cubes/balances-cube#migrating-from-balanceupdates).
+:::danger EVM and Tron: `BalanceUpdates` sunsets 10 August 2026
+`EVM.BalanceUpdates`, `EVM.TokenHolders` and `Tron.BalanceUpdates` **stop working on 10 August 2026**. They still return live data today, so nothing has broken yet — but every query using them needs migrating before that date. (`EVM.TokenHolders` has already gone and now returns `no table can query TokenHolder`.)
 
-Two things this page is still the right reference for:
+Move to the [**`Balances` and `Holders` cubes**](/docs/cubes/balances-cube), which read from
+aggregate-state tables and return the current balance directly, so you no longer sum deltas
+yourself. See the [migration mapping](/docs/cubes/balances-cube#migrating-from-balanceupdates).
 
-- **Solana.** `Solana.BalanceUpdates` and `Solana.InstructionBalanceUpdates` are the
-  **current** APIs there and are not deprecated — Solana has no `Balances` cube.
-- **Change attribution and per-change history on any chain.** `Balances` gives you the
-  resulting amount but not *why* it moved. Only `BalanceUpdates` exposes
-  `Type` (`transfer`, `fee`, `block_reward`, …) per change.
+**Solana is not affected.** `Solana.BalanceUpdates` and `Solana.InstructionBalanceUpdates` are the
+current APIs there and are not deprecated — Solana has no `Balances` cube. This page remains the
+right reference for Solana.
+
+**Change attribution needs a plan.** `Balances` gives you the resulting amount but not *why* it
+moved; only `BalanceUpdates` exposes `Type` (`transfer`, `fee`, `block_reward`, …) per change.
+On EVM and Tron there is no direct replacement after the sunset — derive it from
+[`Transfers`](/docs/cubes/transfers-cube) plus transaction context, or use
+`Balances.UpdateCount` where a count of changes is enough.
 :::
 
 Our `BalanceUpdates` cube is designed to provide historical and realtime balance updates. This cube provides multiple ways to query historical balance data.

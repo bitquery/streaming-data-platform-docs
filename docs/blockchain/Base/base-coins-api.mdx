@@ -7,6 +7,13 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Base Network Coins API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 In the recent times, base network has seen rise of many Memecoins and token based ecosystems.
 In this guide, we will see some queries that could provide beneficial information about these coins, for people to take informed investment decisions.
 

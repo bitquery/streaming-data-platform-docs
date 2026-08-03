@@ -192,7 +192,29 @@ If you previously summed balance deltas, the translation is mechanical:
 
 The important conceptual change: **you no longer aggregate.** `Balances` already holds the summed state, so a `sum(of: …)` over balance updates becomes a plain field read.
 
-What `Balances` does *not* carry is the **reason** for a change. `BalanceUpdates` exposes `Type` (`transfer`, `fee`, `block_reward`, …), which is why the [Balance Updates cube](/docs/cubes/balance-updates-cube) remains the right tool for attributing *why* a balance moved, and for per-change history.
+:::danger Deadline: 10 August 2026
+`EVM.BalanceUpdates`, `EVM.TokenHolders` and `Tron.BalanceUpdates` **sunset on 10 August 2026**. They still return live data today, so nothing has broken yet — but anything still calling them stops working on that date.
+
+`EVM.TokenHolders` has already been withdrawn ahead of the others and now returns `no table can query TokenHolder`.
+:::
+
+### What you lose, and what to use instead
+
+`Balances` does not carry the **reason** a balance changed. `BalanceUpdates` exposes `Type`
+(`transfer`, `fee`, `block_reward`, …), and `Balances` has no equivalent field.
+
+If you depend on change attribution or on per-change history, plan for it before the sunset:
+
+| You need | After the sunset |
+|---|---|
+| Current balance per address | `Balances` |
+| A token's holders, ranked | `Holders` |
+| When a position first or last moved | `Balances` — `FirstChangeTime`, `LastChangeTime`, `UpdateCount` |
+| The individual transfers behind a change | [`Transfers`](/docs/cubes/transfers-cube) |
+| Why a balance moved (`Type` attribution) | No direct replacement — derive it from `Transfers` plus transaction context |
+
+`Balances.UpdateCount` tells you *how many* times a balance changed, which covers some cases
+that previously needed a per-change scan.
 
 ## Related
 

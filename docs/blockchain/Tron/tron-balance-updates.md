@@ -7,10 +7,12 @@ import FAQ from "@site/src/components/FAQ";
 
 # Tron Address Balance API
 
-:::caution Deprecated API
-`Tron.BalanceUpdates` is **deprecated** in favour of **`Tron.Balances`** and **`Tron.Holders`** (this page), which read from aggregate-state tables and return the current balance directly instead of making you sum deltas.
+:::danger Sunsetting 10 August 2026 — migrate now
+`Tron.BalanceUpdates` is **scheduled to sunset on 10 August 2026**. It still returns live data today, so existing queries have not broken yet — but they will stop working on that date.
 
-It is deprecated, **not yet removed** — existing queries still return live data. Migrate when convenient rather than urgently, and use the new cubes for anything you write from now on.
+Move to **`Tron.Balances`** and **`Tron.Holders`** (documented on this page). They read from aggregate-state tables and return the current balance directly, so you no longer sum deltas yourself. The same sunset applies to `EVM.BalanceUpdates` and `EVM.TokenHolders`.
+
+See the [migration mapping](/docs/cubes/balances-cube/) for the query-by-query equivalents.
 :::
 
 The **Balances** API returns current and historical token balances for an address on Tron. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
@@ -300,7 +302,7 @@ query TopTokenHolders {
 
 ## Deprecated: BalanceUpdates Queries
 
-The examples below use the deprecated **`Tron.BalanceUpdates`** API. They still run, but **`Tron.Balances`** and **`Tron.Holders`** (sections above) are the supported way to answer the same questions and avoid summing deltas yourself.
+The examples below use **`Tron.BalanceUpdates`**, which **sunsets on 10 August 2026**. They run today and will stop working on that date. Use **`Tron.Balances`** and **`Tron.Holders`** (sections above) instead — they answer the same questions without summing deltas.
 
 ### Balance of an Address on Tron
 

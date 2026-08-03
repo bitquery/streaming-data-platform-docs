@@ -4,6 +4,13 @@ description: "Build Multi-Chain NFT Scanner: a practical Bitquery tutorial with 
 ---
 # Build Multi-Chain NFT Scanner
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 In this guide, we will use Bitquery Streaming API for scanning NFTs (Non-Fungible Tokens) across various blockchains for the given address. We'll explore how to build an NFT scanner that works with a specific wallet address using Python.
 
 ## Why Bitquery for NFT Scanning?

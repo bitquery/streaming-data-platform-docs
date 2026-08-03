@@ -6,6 +6,13 @@ description: "Ethereum Get Trading Pairs Of Token API: get Ethereum DEX swaps, p
 ---
 # Trading Pairs API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 If you want to get all trades of a token, you might want to know all its trading pairs.
 Protocols like Uniswap have pairs or pools. In this section we will see how we can get all pairs of currency for DEXs.
 

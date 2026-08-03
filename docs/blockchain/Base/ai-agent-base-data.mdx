@@ -4,6 +4,13 @@ description: "Build AI Trading Agents with Bitquery Base Chain Data: query and s
 ---
 # Build AI Trading Agents with Bitquery Base Chain Data
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 In this section, we will explore how to use Bitquery APIs and real-time streams to build AI-enabled trading agents for the Base blockchain.
 
 For **ready-made Bitquery-backed [OpenClaw](https://openclaw.ai/) skills** (installable via [ClawHub](https://clawhub.ai/)—for example real-time BTC, USD charts, Pump.fun, Polymarket, and Solana stablecoin streams), see [bitquery/openclaw-skills-master](https://github.com/bitquery/openclaw-skills-master) and the [ClawHub CLI docs](https://docs.openclaw.ai/tools/clawhub). This page focuses on a **custom** Base trading agent you build with Bitquery APIs directly.

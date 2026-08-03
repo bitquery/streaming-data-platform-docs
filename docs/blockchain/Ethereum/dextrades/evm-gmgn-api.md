@@ -22,6 +22,13 @@ import FAQ from "@site/src/components/FAQ";
 
 # GMGN API for Ethereum & EVM chains
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 Use Bitquery’s **GraphQL** and **subscription** APIs to reproduce **GMGN**-style data on **Ethereum** and other **EVM** networks: **trending / top trading pairs**, **live trades per pair**, **token price in USD**, **buy and sell volume**, **makers**, **buyers and sellers**, **OHLC** for charts, **pool liquidity** by pair address, **top traders** for a token, and **new Uniswap v3 pools**. Examples below use `EVM(network: eth, …)`; change `network` for **Base**, **BSC**, **Arbitrum**, etc.
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";

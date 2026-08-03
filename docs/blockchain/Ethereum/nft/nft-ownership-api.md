@@ -5,6 +5,13 @@ description: "Ethereum NFT Ownership API: track Ethereum NFT trades, ownership, 
 ---
 # NFT Ownership API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 The NFT Ownership API can be used to retrieve information about the ownership of a specific NFT ( Non-Fungible Token ) on the supported blockchain. For instance using this we can access the owners of an NFT including their addresses and associated metadata and also we can retrieve a list of the top holders of a particular NFT.
 
 ## Get NFT Owners

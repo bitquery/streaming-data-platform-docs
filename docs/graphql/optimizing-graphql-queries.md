@@ -5,6 +5,13 @@ description: "Optimize Bitquery GraphQL Queries in Bitquery GraphQL with clear s
 ---
 # GraphQL query optimization for APIs
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 GraphQL is an open-source query language for APIs. It allows clients to define the required data structure, and the server responds with only that data. This allows for more efficient and flexible communication between the client and server, as well as enabling better performance and easier development of APIs.
 
 GraphQL query optimization is a crucial aspect of utilizing V2 APIs to their full potential. By optimizing your queries, you can significantly reduce the amount of time and resources required to retrieve the data you need.
