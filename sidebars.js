@@ -1278,6 +1278,7 @@ const sidebars = {
             "usecases/Top-10-ethereum-tokens",
             "usecases/pumpfun-token-sniffer",
             "usecases/wallet-portfolio-api",
+            "usecases/end-of-day-balances",
             "usecases/defi_portfolio_scorer",
           ],
         },
