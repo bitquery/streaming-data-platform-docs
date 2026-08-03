@@ -4,6 +4,12 @@ description: "EVM Token Holders API: Bitquery EVM GraphQL schema reference with 
 ---
 # EVM Token Holders API
 
+:::caution Query-only
+A subscription on `Holders` is accepted but never pushes a message. Poll it on a schedule, and
+stream `Transfers` for the token to know when a refresh is worthwhile. See
+[which cubes support subscriptions](/docs/subscriptions/which-cubes-stream/).
+:::
+
 The **Holders** API returns token holder data for ERC-20 tokens: top holders, holder counts, and balance thresholds. Non-zero balances use `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
 
 | Dataset | When to use |

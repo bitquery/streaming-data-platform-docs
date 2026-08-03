@@ -121,7 +121,82 @@ Here are the additional details from your document that you may want to include 
 - **Joins can only be applied at the first query level**.
 - **Cannot filter query results using join query fields**.
 
-### 7. **Example Use Cases**
+### 7. **Why a join returns empty fields**
+
+This is the most common problem with joins, and it does not look like an error. The query
+succeeds, the row comes back, and every field from the joined cube is blank:
+
+```json
+{
+  "trades": "1",
+  "volumeUsd": "0",
+  "joinTokenSupplyUpdates": {
+    "TokenSupplyUpdate": { "PostBalance": "", "PostBalanceInUSD": "0", "Currency": { "Symbol": "" } }
+  }
+}
+```
+
+Nothing is wrong with the syntax. `left` is the default join type, and a left join with no
+match returns the main row with empty values for the joined side. It is indistinguishable from
+a real result that happens to be zero.
+
+**Diagnose it by switching to `inner`.** An inner join drops rows that do not match, so the
+row count tells you the truth immediately:
+
+- Rows come back → the join matches, and your original empty values were genuine data.
+- **Zero rows** → nothing matched, and the left join was lying to you.
+
+**The usual cause is that the joined cube has no rows in the same window.** A join cannot span
+datasets, so both sides must exist in the dataset you queried. Cubes that only write on
+specific events are the common trap:
+
+- `TokenSupplyUpdates` only writes on mint and burn. An established token may go a long time
+  without one, so joining it to recent trades to compute market cap matches nothing. The same
+  join works well for a freshly launched token, which mints constantly.
+- Low-activity cubes generally will not have a row in a short retained window.
+
+Sanity-check a join against a pair you know matches before trusting it in production, and
+prefer `inner` or `inner_any` while developing so a mismatch is visible.
+
+A join that reliably matches, because the joined side is dense — checking whether a transfer
+recipient is a smart contract:
+
+```graphql
+query IsReceiverAContract {
+  EVM(network: eth) {
+    Transfers(
+      limit: { count: 10 }
+      where: {
+        Transfer: {
+          Currency: { SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" } }
+        }
+      }
+    ) {
+      Transfer {
+        Receiver
+        Amount
+      }
+      joinCalls(Call_To: Transfer_Receiver, join: inner, limit: { count: 1 }) {
+        count
+      }
+    }
+  }
+}
+```
+
+With `join: inner`, only transfers whose receiver has been called as a contract come back. Any
+receiver that survives is a contract, and any that disappears is an externally owned account.
+Swapping to the default `left` would return every transfer with an empty `joinCalls`, which
+tells you nothing.
+
+:::note Archive and combined datasets need the matching entitlement
+`dataset: archive` and `dataset: combined` on EVM resolve to different underlying storage. If
+your plan does not include it, the query fails with a database error such as
+`Database eth does not exist` rather than a permissions message. Test the same query without
+the `dataset` argument (realtime) to confirm the shape before assuming the join is at fault.
+:::
+
+### 8. **Example Use Cases**
 
 #### Example 1 : Check if an address is a smartcontract
 

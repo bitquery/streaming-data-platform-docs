@@ -10,6 +10,16 @@ keywords:
 ---
 # Balances & Holders Cubes
 
+:::caution These cubes are query-only
+`Balances` and `Holders` are derived views that answer "what is true now", so there is no
+underlying event to push. A subscription against either is a valid document and the socket
+stays open, but **no message is ever delivered** — on EVM or Tron.
+
+For live balances, read the balance once and then keep it current from a stream that does
+fire: `EVM.TransactionBalances` or `EVM.Transfers` (and `Tron.Transfers` on Tron). See
+[which cubes support subscriptions](/docs/subscriptions/which-cubes-stream/).
+:::
+
 Two cubes answer balance questions, and picking the right one matters more than the fields you select:
 
 | Cube | Question it answers | Shape |

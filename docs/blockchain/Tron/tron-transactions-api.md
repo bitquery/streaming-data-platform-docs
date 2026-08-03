@@ -6,6 +6,67 @@ description: "Tron Transactions API: query and stream Tron on-chain data with Bi
 
 In this section we'll have a look at some examples using the Tron Transactions API.
 
+## Blocks and Super Representatives
+
+The `Blocks` cube carries the block itself plus the `Witness` that produced it, which on Tron
+is the Super Representative. That makes block production attributable without a separate
+validator dataset.
+
+```graphql
+query LatestTronBlocks {
+  Tron {
+    Blocks(limit: { count: 10 }, orderBy: { descending: Block_Number }) {
+      Block {
+        Number
+        Time
+        TransactionsCount
+        Hash
+        ParentNumber
+      }
+      Witness {
+        Address
+      }
+    }
+  }
+}
+```
+
+Group by `Witness` to see how block production and transaction load are distributed across
+Super Representatives:
+
+```graphql
+query BlocksPerSuperRepresentative {
+  Tron {
+    Blocks(limit: { count: 30 }, orderBy: { descendingByField: "blocks" }) {
+      Witness {
+        Address
+      }
+      blocks: count
+      transactions: sum(of: Block_TransactionsCount)
+    }
+  }
+}
+```
+
+`Blocks` also streams, one message per block, with no filter needed:
+
+```graphql
+subscription TronChainTip {
+  Tron {
+    Blocks {
+      Block {
+        Number
+        Time
+        TransactionsCount
+      }
+      Witness {
+        Address
+      }
+    }
+  }
+}
+```
+
 ## Monitor Real-time Transactions by Wallet
 
 The subscription query below fetches the transactions on the Tron network for the wallet address `TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf`.

@@ -4,6 +4,12 @@ description: "EVM Balance API: Bitquery EVM GraphQL schema reference with fields
 ---
 # EVM Balance API
 
+:::caution Query-only
+A subscription on `Balances` is accepted but never pushes a message. Poll it, or stream
+`TransactionBalances` / `Transfers` and apply deltas. See
+[which cubes support subscriptions](/docs/subscriptions/which-cubes-stream/).
+:::
+
 The **Balances** API returns current and historical token balances for addresses on EVM chains. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
 
 | Dataset | When to use |
