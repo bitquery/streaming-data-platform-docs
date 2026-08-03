@@ -8,7 +8,9 @@ import FAQ from "@site/src/components/FAQ";
 # Tron Address Balance API
 
 :::caution Deprecated API
-`Tron.BalanceUpdates` was deprecated as of **18 June 2026** and removed on **18 July 2026**. Use **`Tron.Balances`** (this page) instead.
+`Tron.BalanceUpdates` is **deprecated** in favour of **`Tron.Balances`** and **`Tron.Holders`** (this page), which read from aggregate-state tables and return the current balance directly instead of making you sum deltas.
+
+It is deprecated, **not yet removed** — existing queries still return live data. Migrate when convenient rather than urgently, and use the new cubes for anything you write from now on.
 :::
 
 The **Balances** API returns current and historical token balances for an address on Tron. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
@@ -298,7 +300,7 @@ query TopTokenHolders {
 
 ## Deprecated: BalanceUpdates Queries
 
-The examples below use the deprecated **`Tron.BalanceUpdates`** API. Migrate to **`Tron.Balances`** and **`Tron.Holders`** (sections above) — **`Tron.BalanceUpdates`** is no longer available.
+The examples below use the deprecated **`Tron.BalanceUpdates`** API. They still run, but **`Tron.Balances`** and **`Tron.Holders`** (sections above) are the supported way to answer the same questions and avoid summing deltas yourself.
 
 ### Balance of an Address on Tron
 
