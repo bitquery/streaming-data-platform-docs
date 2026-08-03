@@ -353,10 +353,10 @@ query PoolLiquidityAndPrice {
 - The join then pulls a `DEXTradeByTokens` row for the same token to attach a USD price.
 
 :::caution Do not use this join to read a price
-`Balances` is current-state and carries no block dimension, so `orderBy: { descending: Block_Time }`
-on the joined `DEXTradeByTokens` is rejected. With no ordering available, the joined row is an
-**arbitrary** match — successive runs of this query return different values, including
-`PriceInUSD: 0`.
+`Balances` is daily-grained: it exposes `Block.Date` but not `Block.Time`, so
+`orderBy: { descending: Block_Time }` on the joined `DEXTradeByTokens` is rejected. With no
+time ordering available, the joined row is an **arbitrary** match — successive runs of this
+query return different values, including `PriceInUSD: 0`.
 
 The join is shown here because it demonstrates matching on `Currency_SmartContract` across
 cubes. For an actual price, query `DEXTradeByTokens` directly with an explicit

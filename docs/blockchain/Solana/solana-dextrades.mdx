@@ -8,7 +8,11 @@ import FAQ from "@site/src/components/FAQ";
 # Solana DEX Trades API
 
 :::tip Need real-time Solana DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Solana`). Use this page when you need **historical Solana data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Solana`). Use this page when you need **historical Solana data older than ~30 days** (with `dataset: archive`), raw per-swap detail, or call / event context.
+
+:::caution `dataset: combined` currently fails on Solana
+Every `Solana(dataset: combined)` query tested returns a ClickHouse 500, on both the `/graphql` and `/eap` endpoints. Use `dataset: archive` for history and realtime for recent data. Several queries further down this page still use `combined` and will error until that is resolved — swap `combined` for `archive` to run them. See [data coverage & retention](/docs/graphql/data-coverage-retention/).
+:::
 :::
 
 Bitquery provides Solana DEX trade data through APIs, Streams, and Data Dumps.  
@@ -49,7 +53,7 @@ Query `Solana.DEXTrades` (or `DEXTradeByTokens`) with `where` on the wallet as *
 
 For **OHLC**, use the **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** first (`Trading.Tokens` / `Pairs` with **`Token.Network: solana`**) and [second-level OHLC](#solana-second-level-ohlc-k-line-api) on this page when you want **1-second-style** streams.
 
-For **historical OHLC** from on-chain DEX trades, use **`Solana(dataset: combined)`** or **`Solana(dataset: archive)`** with **`DEXTradeByTokens`**: filter **`Trade.Currency.MintAddress`** (and usually **`Trade.Side.Currency`** for the quote, e.g. WSOL/USDC), set **`Block.Time`** range, and bucket with **`Block { Time(interval: { count, in: minutes | hours | days }) }`**. Compute OHLC with **`PriceInUSD`** / **`Trade_Price`** minima and maxima or **`median`/`quantile`** as in [Solana OHLC API](#solana-ohlc-api).
+For **historical OHLC** from on-chain DEX trades, use **`Solana(dataset: archive)`** with **`DEXTradeByTokens`**: filter **`Trade.Currency.MintAddress`** (and usually **`Trade.Side.Currency`** for the quote, e.g. WSOL/USDC), set **`Block.Time`** range, and bucket with **`Block { Time(interval: { count, in: minutes | hours | days }) }`**. Compute OHLC with **`PriceInUSD`** / **`Trade_Price`** minima and maxima or **`median`/`quantile`** as in [Solana OHLC API](#solana-ohlc-api).
 
 :::note
 To query or stream data via GraphQL **outside the Bitquery IDE**, you need to generate an API access token.
