@@ -68,6 +68,46 @@ Bitquery's `Transfer.Amount` is already adjusted for the token's `Decimals`, so 
 
 Flap.sh emits a decoded `TokenCreated` event, so it can be tracked via **Events** (richer, with decoded arguments) as well as transfers. The other launchpads and bots on this page are tracked via the **mint-transfer** pattern.
 
+### Stream launches as they happen
+
+Launches are the case where polling is worst: a query tells you what already launched, and by the time you re-run it the opportunity has moved. The same mint-transfer filter works as a subscription, so you get each launch pushed at block time.
+
+```graphql
+subscription NewRobinhoodLaunches {
+  EVM(network: robinhood) {
+    Transfers(
+      where: {
+        Transfer: { Sender: { is: "0x0000000000000000000000000000000000000000" } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+        To
+      }
+      Transfer {
+        Receiver
+        Amount
+        Currency {
+          Name
+          Symbol
+          SmartContract
+          Decimals
+        }
+      }
+    }
+  }
+}
+```
+
+This streams **every** mint on the chain. Narrow it the same way the queries below do — add `Transaction: { To: { is: "<launchpad address>" } }` for one launchpad, and the launch-mint `Amount` if you want only the initial supply mint rather than every subsequent mint.
+
+:::note Do not add `dataset:` to a subscription
+Subscriptions always read the live stream. The `dataset: combined` tip above applies to queries reaching backwards, not to streams.
+:::
+
 :::tip Reaching older launches
 These queries default to the **realtime** dataset — a rolling window of recent blocks whose depth varies. Launchpads with sparse recent activity can return few or no rows. To reach further back, add `dataset: combined` (or `archive`) on the `EVM` root plus a time filter — e.g. `EVM(network: robinhood, dataset: combined)` with `Block: {Time: {since_relative: {days_ago: 7}}}`.
 :::
