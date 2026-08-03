@@ -184,9 +184,24 @@ for a working consumer and reconnect loop.
 
 ## Query-only cubes
 
-These accept a subscription and never emit. They are derived views rather than event streams:
-`Balances` and `Holders` answer "what is true now", which is a computed aggregate with no
-underlying event to push.
+These accept a subscription and never emit, and the reason is structural. `Balances` and
+`Holders` are backed by **aggregate-state tables** (`balances_by_address` and
+`balances_by_currency`) that hold current balances directly. They answer "what is true now",
+so there is no per-event row to push.
+
+That is also what makes them fast to query and what gives them `combined` support, so the
+trade-off is deliberate rather than a gap.
+
+:::info These are the current cubes, not legacy ones
+`Balances` and `Holders` **supersede** the deprecated `BalanceUpdates` and `TokenHolders`
+cubes. If you are migrating: `Holders` takes its currency filter through the standard `where:`
+argument instead of the old required `tokenSmartContract` / `date` arguments, and both new
+cubes support `realtime`, `archive` and `combined`.
+
+So the move to `Balances`/`Holders` trades a streamable event log for a faster current-state
+read. Where you previously streamed `BalanceUpdates`, stream `Transfers` (or
+`TransactionBalances` on EVM) instead and apply the deltas yourself.
+:::
 
 | Cube | Use instead |
 |---|---|

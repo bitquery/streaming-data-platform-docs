@@ -189,11 +189,15 @@ receiver that survives is a contract, and any that disappears is an externally o
 Swapping to the default `left` would return every transfer with an empty `joinCalls`, which
 tells you nothing.
 
-:::note Archive and combined datasets need the matching entitlement
-`dataset: archive` and `dataset: combined` on EVM resolve to different underlying storage. If
-your plan does not include it, the query fails with a database error such as
-`Database eth does not exist` rather than a permissions message. Test the same query without
-the `dataset` argument (realtime) to confirm the shape before assuming the join is at fault.
+:::note A dataset error may mean you are on a deprecated cube
+`dataset: combined` is supported by the current `Balances` and `Holders` cubes, but **not** by
+the deprecated `BalanceUpdates` / `TokenHolders` cubes they replaced. Running
+`EVM(dataset: combined) { BalanceUpdates }` on Ethereum fails with a database error such as
+`Database eth does not exist`, which looks like an outage or a permissions problem and is
+neither.
+
+If you hit that, check whether you are on a deprecated cube before debugging the join. See
+[Balances & Holders](/docs/cubes/balances-cube/).
 :::
 
 ### 8. **Example Use Cases**
@@ -265,24 +269,72 @@ query MyQuery($time_1hr: DateTime) {
 - The query finds all the trades for the particular token after a given timestamp.
 - Then the query perform aggregates functions like `sum` and `count` to get `volume` and `trades` of a token after a given time.
 - Then it checks for the latest `BalanceUpdates` for the token.
-- The `PostBalance` implies the `total supply` of a token and `PostBalanceInUSD` implies the marketcap of the token.
+
+:::warning `joinBalanceUpdates` does not give you supply or market cap
+`BalanceUpdates` records a balance change for **one account**, so the joined `PostBalance` is
+whatever account happened to update most recently, not the token's total supply.
+`PostBalanceInUSD` is that account's holding value, not market cap.
+
+Checked against BONK: this join returns a `PostBalance` of a few million tokens worth tens of
+dollars, while the token's actual supply is ~88 trillion at a market cap in the hundreds of
+millions. The two are unrelated numbers.
+
+The join happens to approximate supply only for a token whose balance updates are dominated by
+a single supply-holding account, such as a launchpad bonding curve early in its life. Do not
+rely on it in general.
+
+**For supply and market cap, query `TokenSupplyUpdates` directly** rather than joining it. A
+`joinTokenSupplyUpdates` on this query returns empty fields, because the join finds no match in
+the same window (see [why a join returns empty fields](#7-why-a-join-returns-empty-fields)):
+
+```graphql
+query TokenSupplyAndMarketCap {
+  Solana {
+    TokenSupplyUpdates(
+      where: {
+        TokenSupplyUpdate: {
+          Currency: { MintAddress: { is: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263" } }
+        }
+      }
+      orderBy: { descending: Block_Time }
+      limit: { count: 1 }
+    ) {
+      TokenSupplyUpdate {
+        PostBalance
+        PostBalanceInUSD
+        Currency { Symbol Name }
+      }
+    }
+  }
+}
+```
+
+Here `PostBalance` is the circulating supply and `PostBalanceInUSD` is the market cap.
+:::
 
 #### Example 3: Get latest price and liquidity of a token in token pair
 
 [This](https://ide.bitquery.io/get-latest-price-and-liquidity-of-a-token-in-token-pair) query is a good example of how joins could be used to get latest price and liquidity of a token in particular token pair.
 
 ```graphql
-query MyQuery {
+query PoolLiquidityAndPrice {
   EVM(dataset: combined, network: eth) {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "0x1bCd6B0E97B51D76FD1752111a1fe2b473F655eE"}}, 
-        Currency: {SmartContract: {is: "0x6b175474e89094c44da98b954eedeac495271d0f"}}}
+    Balances(
+      where: {
+        Balance: { Address: { is: "0x1bCd6B0E97B51D76FD1752111a1fe2b473F655eE" } }
+        Currency: { SmartContract: { is: "0x6b175474e89094c44da98b954eedeac495271d0f" } }
+      }
+      limit: { count: 1 }
     ) {
-      dai_liq: sum(of: BalanceUpdate_Amount)
+      Balance {
+        Amount
+      }
+      Currency {
+        Symbol
+      }
       joinDEXTradeByTokens(
         Trade_Currency_SmartContract: Currency_SmartContract
-        orderBy: {descending: Block_Time}
-        limit: {count: 1}
+        limit: { count: 1 }
       ) {
         Trade {
           PriceInUSD
@@ -295,7 +347,25 @@ query MyQuery {
 
 #### How this works
 
-- The query finds all the balance update records for the particular token and a particular token pair address.
-- Then it sums up the amount from all `Balance Updates` to get the amount of tokens currently in the pool.
-- Then it checks the latest `DEX Trades` for the mentioned token.
-- The `PriceInUSD` in joinDEXTradeByTokens shows the latest price of the token.
+- `Balances` returns the pool address's current holding of the token directly. There is no
+  summing step, because `Balances` is backed by an aggregate-state table rather than a log of
+  changes.
+- The join then pulls a `DEXTradeByTokens` row for the same token to attach a USD price.
+
+:::caution Do not use this join to read a price
+`Balances` is current-state and carries no block dimension, so `orderBy: { descending: Block_Time }`
+on the joined `DEXTradeByTokens` is rejected. With no ordering available, the joined row is an
+**arbitrary** match — successive runs of this query return different values, including
+`PriceInUSD: 0`.
+
+The join is shown here because it demonstrates matching on `Currency_SmartContract` across
+cubes. For an actual price, query `DEXTradeByTokens` directly with an explicit
+`orderBy: { descending: Block_Time }` and combine the two results client-side.
+:::
+
+:::info Migrated from the deprecated `BalanceUpdates` cube
+This example previously used `BalanceUpdates` with `sum(of: BalanceUpdate_Amount)`.
+`BalanceUpdates` is deprecated in favour of `Balances`, which exposes the current balance
+directly and supports `realtime`, `archive` and `combined`. The old cube does not support
+`combined`, so the original form of this query fails on Ethereum.
+:::
