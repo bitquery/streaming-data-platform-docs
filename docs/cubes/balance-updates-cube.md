@@ -15,11 +15,12 @@ yourself. See the [migration mapping](/docs/cubes/balances-cube#migrating-from-b
 current APIs there and are not deprecated — Solana has no `Balances` cube. This page remains the
 right reference for Solana.
 
-**Change attribution needs a plan.** `Balances` gives you the resulting amount but not *why* it
-moved; only `BalanceUpdates` exposes `Type` (`transfer`, `fee`, `block_reward`, …) per change.
-On EVM and Tron there is no direct replacement after the sunset — derive it from
-[`Transfers`](/docs/cubes/transfers-cube) plus transaction context, or use
-`Balances.UpdateCount` where a count of changes is enough.
+**Per-change becomes per-day, by design.** `Balances` carries **daily aggregates** (`Block.Date`),
+not one row per change, so balance history is a single cheap query rather than a scan you
+aggregate yourself. What does not carry over is sub-daily attribution: `BalanceUpdates` exposes
+`Type` (`transfer`, `fee`, `block_reward`, …) per change and the daily grain has no equivalent.
+If you need *why* a balance moved rather than *what it became*, reconstruct it from
+[`Transfers`](/docs/cubes/transfers-cube) plus transaction context.
 :::
 
 Our `BalanceUpdates` cube is designed to provide historical and realtime balance updates. This cube provides multiple ways to query historical balance data.

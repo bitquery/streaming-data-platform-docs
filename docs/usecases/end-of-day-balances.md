@@ -66,12 +66,45 @@ and looks like the address held nothing. Empty results here almost always mean t
 dataset rather than a zero balance.
 :::
 
-:::danger Do not filter `Balances` by block date to get a historical balance
-`Balances` is a current-state cube. Adding a `Block: { Date: ... }` filter does not give you an
-as-of snapshot — it filters the underlying balance records, so you get rows stamped with
-unrelated dates and a number that is not the balance on the date you asked for.
+### The same series from `Balances`
 
-Use `Holders(date: ...)` for point-in-time. Use `Balances` only for "right now".
+`Balances` carries **daily aggregates**, one row per address per day, exposed as `Block.Date`.
+That makes it the more natural source for a series, because a single query returns every day at
+once instead of one request per date:
+
+```graphql
+query DailyBalanceSeries {
+  EVM(network: eth, dataset: archive) {
+    Balances(
+      where: {
+        Balance: { Address: { is: "0x28c6c06298d514db089934071355e5743bf21d60" } }
+        Currency: { SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" } }
+      }
+      orderBy: { descending: Block_Date }
+      limit: { count: 30 }
+    ) {
+      Block {
+        Date
+      }
+      Balance {
+        Amount
+        AmountInUSD
+      }
+    }
+  }
+}
+```
+
+For a single past date, add `Block: { Date: { till: "2026-07-01" } }` and keep the descending
+order — the first row is that day's closing balance.
+
+:::caution Always order by `Block_Date`
+Without `orderBy: { descending: Block_Date }` you get an arbitrary day's row, not the latest or
+the one you filtered to. The query still succeeds, so the mistake is silent — it looks like a
+current balance and is not.
+
+With the ordering, `Balances` and `Holders(date: …)` agree exactly. Both return
+`819349860.876615` for the wallet and date above.
 :::
 
 ## Solana

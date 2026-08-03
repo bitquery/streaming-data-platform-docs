@@ -198,23 +198,53 @@ The important conceptual change: **you no longer aggregate.** `Balances` already
 `EVM.TokenHolders` has already been withdrawn ahead of the others and now returns `no table can query TokenHolder`.
 :::
 
-### What you lose, and what to use instead
+### Per-change history becomes daily aggregates
 
-`Balances` does not carry the **reason** a balance changed. `BalanceUpdates` exposes `Type`
-(`transfer`, `fee`, `block_reward`, …), and `Balances` has no equivalent field.
+This is the deliberate design change, not a missing feature. `BalanceUpdates` gave you **one row
+per change**. `Balances` gives you **one row per address per day**, exposed as `Block.Date`.
 
-If you depend on change attribution or on per-change history, plan for it before the sunset:
+For most balance questions the daily grain is what you actually wanted, and it is far cheaper:
+a 30-day balance history is one query returning 30 rows, rather than a scan over every change in
+that period which you then aggregate yourself.
 
-| You need | After the sunset |
+```graphql
+query DailyBalanceHistory {
+  EVM(network: eth, dataset: archive) {
+    Balances(
+      where: { Balance: { Address: { is: "0x28c6c06298d514db089934071355e5743bf21d60" } } }
+      orderBy: { descending: Block_Date }
+      limit: { count: 30 }
+    ) {
+      Block {
+        Date
+      }
+      Balance {
+        Amount
+        AmountInUSD
+      }
+      Currency {
+        Symbol
+      }
+    }
+  }
+}
+```
+
+Always order by `Block_Date`. Without it you get an arbitrary day and the query still succeeds,
+which makes the mistake silent.
+
+| You need | Use |
 |---|---|
-| Current balance per address | `Balances` |
+| Current balance per address | `Balances` (latest row) |
+| Balance on a past date, or a daily series | `Balances` with `Block.Date` — or `Holders(date: …)`, which agrees exactly |
 | A token's holders, ranked | `Holders` |
 | When a position first or last moved | `Balances` — `FirstChangeTime`, `LastChangeTime`, `UpdateCount` |
 | The individual transfers behind a change | [`Transfers`](/docs/cubes/transfers-cube) |
-| Why a balance moved (`Type` attribution) | No direct replacement — derive it from `Transfers` plus transaction context |
 
-`Balances.UpdateCount` tells you *how many* times a balance changed, which covers some cases
-that previously needed a per-change scan.
+What genuinely does not carry over is **sub-daily change attribution**. `BalanceUpdates` exposed
+`Type` (`transfer`, `fee`, `block_reward`, …) per change; the daily aggregate has no equivalent.
+If you need to know *why* a balance moved rather than *what it became*, reconstruct it from
+[`Transfers`](/docs/cubes/transfers-cube) plus transaction context.
 
 ## Related
 

@@ -186,8 +186,8 @@ for a working consumer and reconnect loop.
 
 These accept a subscription and never emit, and the reason is structural. `Balances` and
 `Holders` are backed by **aggregate-state tables** (`balances_by_address` and
-`balances_by_currency`) that hold current balances directly. They answer "what is true now",
-so there is no per-event row to push.
+`balances_by_currency`) holding **daily** balance aggregates rather than individual changes.
+A daily grain has no per-event row to push, so there is nothing for a subscription to deliver.
 
 That is also what makes them fast to query and what gives them `combined` support, so the
 trade-off is deliberate rather than a gap.
@@ -198,9 +198,11 @@ cubes. If you are migrating: `Holders` takes its currency filter through the sta
 argument instead of the old required `tokenSmartContract` / `date` arguments, and both new
 cubes support `realtime`, `archive` and `combined`.
 
-So the move to `Balances`/`Holders` trades a streamable event log for a faster current-state
-read. Where you previously streamed `BalanceUpdates`, stream `Transfers` (or
+So the move to `Balances`/`Holders` trades a streamable per-change event log for cheap daily
+aggregates. Where you previously streamed `BalanceUpdates`, stream `Transfers` (or
 `TransactionBalances` on EVM) instead and apply the deltas yourself.
+
+`EVM.BalanceUpdates`, `EVM.TokenHolders` and `Tron.BalanceUpdates` **sunset on 10 August 2026**.
 :::
 
 | Cube | Use instead |
