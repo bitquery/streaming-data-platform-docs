@@ -16,6 +16,10 @@ The GraphQL APIs and subscriptions below are examples of the real-time and histo
 
 Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
 
+:::note RFQ fills are not in this cube
+Off-chain-quoted trades (Jupiter Z, Jupiter Limit Order v2, Mayan Swift, HumidiFi, Tessera V, ZeroFi) settle without a pool, so they produce no `Trade` object and return zero rows here. Query them through the [Solana RFQ API](/docs/blockchain/Solana/solana-rfq-api/) instead.
+:::
+
 If you have questions or need custom data, reach out to [support](https://t.me/Bloxy_info).
 
 Need zero-latency Solana DEX trade data?  

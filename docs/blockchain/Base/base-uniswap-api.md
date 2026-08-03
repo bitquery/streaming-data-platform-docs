@@ -14,6 +14,51 @@ For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trad
 :::
 
 Bitquery provides Uniswap data through APIs, Streams and Data Dumps.
+
+## Stream Base Uniswap trades
+
+Every query on this page also works as a subscription: change `query` to `subscription` and drop the `orderBy`, since a stream already arrives in block order.
+
+```graphql
+subscription BaseUniswapTrades {
+  EVM(network: base) {
+    DEXTrades(
+      where: { Trade: { Dex: { ProtocolFamily: { is: "Uniswap" } } } }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Dex {
+          ProtocolName
+          SmartContract
+        }
+        Buy {
+          Amount
+          Buyer
+          Currency {
+            Symbol
+            SmartContract
+          }
+        }
+        Sell {
+          Amount
+          Seller
+          Currency {
+            Symbol
+            SmartContract
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+`ProtocolFamily: "Uniswap"` covers every Uniswap version on Base. Narrow to one with `ProtocolName` (for example `uniswap_v3`), or to a single pool with `Trade: { Dex: { SmartContract: { is: "<pool>" } } }`.
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery for Uniswap on Base.
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 

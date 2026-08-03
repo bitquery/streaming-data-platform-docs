@@ -6,6 +6,13 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Binance Meme Rush API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 Binance has launched Meme Rush, a new discovery feature inside the Binance Wallet that gives users early access to trending meme-coins from external launch platforms. Through a partnership with Four.Meme on the BNB Smart Chain, users can create and launch their own meme coins directly via Binance Wallet. Tokens launched in this way typically have contract addresses that start with `0x4444…`.
 
 Get ultra low latency Binance Meme Rush memecoin data on BNB Chain: live trades, bonding curve progress, newly created tokens, prices, OHLC, liquidity, migrations, top traders and more.
@@ -1237,6 +1244,30 @@ Using below API you can get the liquidity of a meme rush token. Subtract `200000
 <details>
   <summary>Click to expand GraphQL query</summary>
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: bsc) {
+    Balances(
+      where: {Balance: {Address: {is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b"}}, Currency: {SmartContract: {is: "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"}}}
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount }
+      Balance {
+        Address
+      }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: bsc) {
@@ -1255,5 +1286,7 @@ query MyQuery {
   }
 }
 ```
+
+</details>
 
 </details>

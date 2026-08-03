@@ -4,6 +4,13 @@ description: "Stablecoin Balance API using Bitquery stablecoin APIs for prices, 
 ---
 # Stablecoin Balance API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 The Stablecoin API by Bitquery provides you the comprehensive set of APIs which can provide you realtime transfers, realtime trades, realtime price, holder distribution of stablecoins across chains with a single API call.
 
 We are going to particularly deep-dive into how to get Stablecoin Balance data in this section.
@@ -67,6 +74,30 @@ query {
 
 Below query will give you **USDT** balance for address `TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ` on Tron. Test the query [here](https://ide.bitquery.io/Stablecoin-Balance-of-an-Address).
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  Tron(dataset: combined) {
+    Balances(
+      where: {Balance: {Address: {is: "TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ"}}, Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount(selectWhere: {gt: "0"}) }
+      Balance {
+        Address
+      }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   Tron(dataset: combined) {
@@ -84,8 +115,9 @@ query MyQuery {
     }
   }
 }
-
 ```
+
+</details>
 
 More examples on balance and balance updates on EVM chains can be found [here](/docs/blockchain/Ethereum/balances/balance-api/)
 

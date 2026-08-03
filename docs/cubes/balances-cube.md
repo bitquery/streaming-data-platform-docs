@@ -10,6 +10,16 @@ keywords:
 ---
 # Balances & Holders Cubes
 
+:::caution These cubes are query-only
+`Balances` and `Holders` are derived views that answer "what is true now", so there is no
+underlying event to push. A subscription against either is a valid document and the socket
+stays open, but **no message is ever delivered** — on EVM or Tron.
+
+For live balances, read the balance once and then keep it current from a stream that does
+fire: `EVM.TransactionBalances` or `EVM.Transfers` (and `Tron.Transfers` on Tron). See
+[which cubes support subscriptions](/docs/subscriptions/which-cubes-stream/).
+:::
+
 Two cubes answer balance questions, and picking the right one matters more than the fields you select:
 
 | Cube | Question it answers | Shape |
@@ -182,7 +192,59 @@ If you previously summed balance deltas, the translation is mechanical:
 
 The important conceptual change: **you no longer aggregate.** `Balances` already holds the summed state, so a `sum(of: …)` over balance updates becomes a plain field read.
 
-What `Balances` does *not* carry is the **reason** for a change. `BalanceUpdates` exposes `Type` (`transfer`, `fee`, `block_reward`, …), which is why the [Balance Updates cube](/docs/cubes/balance-updates-cube) remains the right tool for attributing *why* a balance moved, and for per-change history.
+:::danger Deadline: 10 August 2026
+`EVM.BalanceUpdates`, `EVM.TokenHolders` and `Tron.BalanceUpdates` **sunset on 10 August 2026**. They still return live data today, so nothing has broken yet — but anything still calling them stops working on that date.
+
+`EVM.TokenHolders` has already been withdrawn ahead of the others and now returns `no table can query TokenHolder`.
+:::
+
+### Per-change history becomes daily aggregates
+
+This is the deliberate design change, not a missing feature. `BalanceUpdates` gave you **one row
+per change**. `Balances` gives you **one row per address per day**, exposed as `Block.Date`.
+
+For most balance questions the daily grain is what you actually wanted, and it is far cheaper:
+a 30-day balance history is one query returning 30 rows, rather than a scan over every change in
+that period which you then aggregate yourself.
+
+```graphql
+query DailyBalanceHistory {
+  EVM(network: eth, dataset: archive) {
+    Balances(
+      where: { Balance: { Address: { is: "0x28c6c06298d514db089934071355e5743bf21d60" } } }
+      orderBy: { descending: Block_Date }
+      limit: { count: 30 }
+    ) {
+      Block {
+        Date
+      }
+      Balance {
+        Amount
+        AmountInUSD
+      }
+      Currency {
+        Symbol
+      }
+    }
+  }
+}
+```
+
+Always order by `Block_Date`. Without it you get an arbitrary day and the query still succeeds,
+which makes the mistake silent.
+
+| You need | Use |
+|---|---|
+| Current balance per address | `Balances` (latest row) |
+| Balance on a past date, or a daily series | `Balances` with `Block.Date` — or `Holders(date: …)`, which agrees exactly |
+| A token's holders, ranked | `Holders` |
+| When a position first or last moved | `Balances` — `FirstChangeTime`, `LastChangeTime`, `UpdateCount` |
+| The individual transfers behind a change | [`Transfers`](/docs/cubes/transfers-cube) |
+
+What genuinely does not carry over is **sub-daily change attribution**. `BalanceUpdates` exposed
+`Type` (`transfer`, `fee`, `block_reward`, …) per change; the daily aggregate has no equivalent.
+If you need to know *why* a balance moved rather than *what it became*, reconstruct it from
+[`Transfers`](/docs/cubes/transfers-cube) plus transaction context.
 
 ## Related
 

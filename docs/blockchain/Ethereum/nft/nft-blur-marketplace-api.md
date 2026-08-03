@@ -7,6 +7,50 @@ description: "NFT Blur MarketPlace API: track Ethereum NFT trades, ownership, an
 
 The NFT Blur Marketplace API provides a wide range of data related to the BLUR NFT Marketplace. With this API, We can access data on the latest traded NFTs, buy-sell activity of specific NFT tokens, top buyers of NFTs, specific buyer statistics for NFTs, NFT loan transactions, loan history, refinancing actions and much more.
 
+## Stream Blur trades in real time
+
+Every query on this page has a streaming equivalent: change `query` to `subscription` and drop the ordering, since a stream is already in block order. This one pushes each Blur trade as it settles.
+
+```graphql
+subscription BlurTradeStream {
+  EVM(network: eth) {
+    DEXTrades(
+      where: { Trade: { Dex: { ProtocolName: { is: "seaport_v1.4" } } } }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        Hash
+      }
+      Trade {
+        Dex {
+          ProtocolName
+        }
+        Buy {
+          Buyer
+          Amount
+          Currency {
+            Name
+            SmartContract
+            Fungible
+          }
+        }
+        Sell {
+          Seller
+          Amount
+          Currency {
+            Symbol
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Blur settles through Seaport, so this filter catches Blur alongside other Seaport-routed marketplaces. `Buy.Currency.Fungible` is the field that separates the NFT leg from the payment leg.
+
 ## Latest Trades on Blur
 
 The Blur Marketplace supports the [Seaport protocol](https://opensea.io/blog/articles/introducing-seaport-protocol), which can be utilize to retrieve the most recent Blur trades - [query](https://ide.bitquery.io/Latest-10-Trades-on-Blur).

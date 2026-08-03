@@ -7,8 +7,12 @@ import FAQ from "@site/src/components/FAQ";
 
 # Tron Address Balance API
 
-:::caution Deprecated API
-`Tron.BalanceUpdates` was deprecated as of **18 June 2026** and removed on **18 July 2026**. Use **`Tron.Balances`** (this page) instead.
+:::danger Sunsetting 10 August 2026 — migrate now
+`Tron.BalanceUpdates` is **scheduled to sunset on 10 August 2026**. It still returns live data today, so existing queries have not broken yet — but they will stop working on that date.
+
+Move to **`Tron.Balances`** and **`Tron.Holders`** (documented on this page). They read from aggregate-state tables and return the current balance directly, so you no longer sum deltas yourself. The same sunset applies to `EVM.BalanceUpdates` and `EVM.TokenHolders`.
+
+See the [migration mapping](/docs/cubes/balances-cube/) for the query-by-query equivalents.
 :::
 
 The **Balances** API returns current and historical token balances for an address on Tron. To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
@@ -298,11 +302,32 @@ query TopTokenHolders {
 
 ## Deprecated: BalanceUpdates Queries
 
-The examples below use the deprecated **`Tron.BalanceUpdates`** API. Migrate to **`Tron.Balances`** and **`Tron.Holders`** (sections above) — **`Tron.BalanceUpdates`** is no longer available.
+The examples below use **`Tron.BalanceUpdates`**, which **sunsets on 10 August 2026**. They run today and will stop working on that date. Use **`Tron.Balances`** and **`Tron.Holders`** (sections above) instead — they answer the same questions without summing deltas.
 
 ### Balance of an Address on Tron
 
 [Run Query ➤](https://ide.bitquery.io/balance-of-an-address-on-tron)
+
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+{
+  Tron(dataset: combined, aggregates: yes) {
+    Balances(
+      where: {Balance: {Address: {is: "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf"}}}
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount(selectWhere: {gt: "0"}) }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
 
 ```graphql
 {
@@ -318,8 +343,9 @@ The examples below use the deprecated **`Tron.BalanceUpdates`** API. Migrate to 
     }
   }
 }
-
 ```
+
+</details>
 
 ### Total Holder Count of a Tron Token
 
@@ -413,6 +439,28 @@ query TronWalletPortfolio($address: String) {
 
 This query fetches you the top 10 token holders of the token `TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT`. Check out the query [here](https://ide.bitquery.io/top-token-holders_2).
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  Tron(dataset: combined) {
+    Balances(
+      limit: {count: 10}
+      orderBy: { descending: Balance_Amount }
+      where: {Currency: {SmartContract: {is: "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"}}}
+    ) {
+      Balance { Amount(selectWhere: {gt: "0"}) }
+      Balance {
+        Address
+      }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   Tron(dataset: combined) {
@@ -428,8 +476,9 @@ query MyQuery {
     }
   }
 }
-
 ```
+
+</details>
 
 <FAQ
   items={[

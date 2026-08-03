@@ -6,6 +6,13 @@ description: "Ethereum Get Trading Pairs Of Token API: get Ethereum DEX swaps, p
 ---
 # Trading Pairs API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 If you want to get all trades of a token, you might want to know all its trading pairs.
 Protocols like Uniswap have pairs or pools. In this section we will see how we can get all pairs of currency for DEXs.
 
@@ -205,6 +212,27 @@ USDT address - `0xdAC17F958D2ee523a2206206994597C13D831ec7`
 
 USDC address - `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    Balances(
+      where: {Balance: {Address: {is: "0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf"}}, Currency: {SmartContract: {in: ["0xdAC17F958D2ee523a2206206994597C13D831ec7", "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"]}}}
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount(selectWhere: {gt: "0"}) }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
@@ -220,6 +248,8 @@ query MyQuery {
   }
 }
 ```
+
+</details>
 
 You can run this query using [this link](https://ide.bitquery.io/liquidity-of-token-pair-on-ethereum)
 

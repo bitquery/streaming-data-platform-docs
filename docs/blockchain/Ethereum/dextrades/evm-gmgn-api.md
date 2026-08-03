@@ -22,6 +22,13 @@ import FAQ from "@site/src/components/FAQ";
 
 # GMGN API for Ethereum & EVM chains
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 Use Bitquery’s **GraphQL** and **subscription** APIs to reproduce **GMGN**-style data on **Ethereum** and other **EVM** networks: **trending / top trading pairs**, **live trades per pair**, **token price in USD**, **buy and sell volume**, **makers**, **buyers and sellers**, **OHLC** for charts, **pool liquidity** by pair address, **top traders** for a token, and **new Uniswap v3 pools**. Examples below use `EVM(network: eth, …)`; change `network` for **Base**, **BSC**, **Arbitrum**, etc.
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
@@ -162,6 +169,27 @@ The below query finds the liquidity of a pool using the pool address `0xc2eaB7d3
 
 You can find the query [here](https://ide.bitquery.io/Get-liquidity-of-a-pair_1)
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: archive, network: eth) {
+    Balances(
+      where: {Balance: {Address: {is: "0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d"}}, Currency: {SmartContract: {in: ["0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"]}}}
+      orderBy: { descending: Balance_Amount }
+  ) {
+      Currency {
+        Name
+      }
+      Balance { Amount }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: archive, network: eth) {
@@ -176,8 +204,9 @@ query MyQuery {
     }
   }
 }
-
 ```
+
+</details>
 
 ## Get the Buys, Sells, Buy Volume, Sell Volume and Makers
 
@@ -550,6 +579,27 @@ query LatestTrades($network: evm_network, $market: String) {
 
 You can find the query [here](https://ide.bitquery.io/balance-of-a-wallet_1).
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: archive, network: eth) {
+    Balances(
+      where: { Balance: { Address: { is: "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6" } } }
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount(selectWhere: { gt: "0" }) }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: archive, network: eth) {
@@ -565,6 +615,8 @@ query MyQuery {
   }
 }
 ```
+
+</details>
 
 <FAQ
   items={[

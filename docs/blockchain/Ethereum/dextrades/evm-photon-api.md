@@ -5,6 +5,13 @@ description: "Ethereum EVM Photon API: get Ethereum DEX swaps, prices, and OHLC 
 ---
 # Photon EVM API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 This section will guide you through different APIs which will tell you how to get data like realtime trades, price of a token, buys, sells, sell volume, makers, top holders of a token, liquidity of a pair and many more just like how Photon shows for EVM Chains.
 
 ## Get the Top Trading Pairs
@@ -135,6 +142,27 @@ The below query finds the liquidity of a pool using the pool address `0xc2eaB7d3
 
 You can find the query [here](https://ide.bitquery.io/Get-liquidity-of-a-pair_1)
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: archive, network: eth) {
+    Balances(
+      where: {Balance: {Address: {is: "0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d"}}, Currency: {SmartContract: {in: ["0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"]}}}
+      orderBy: { descending: Balance_Amount }
+  ) {
+      Currency {
+        Name
+      }
+      Balance { Amount }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: archive, network: eth) {
@@ -149,8 +177,9 @@ query MyQuery {
     }
   }
 }
-
 ```
+
+</details>
 
 ## Get the Buys, Sells, Buy Volume, Sell Volume and Makers
 

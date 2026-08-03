@@ -5,6 +5,13 @@ description: "Watch Ethereum pending transactions before confirmation with Bitqu
 ---
 # Mempool API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 In this section we will look at some examples of how to write mempool queries to extract the necessary data from broadcasted transactions. To read more about how we offer mempool data, read the introduction [here](/docs/subscriptions/mempool-subscriptions/)
 
 ## How do I get unconfirmed/pending transactions for an address?

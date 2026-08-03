@@ -7,6 +7,13 @@ import FAQ from "@site/src/components/FAQ";
 
 # NFT API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 Non-Fungible Tokens (NFTs) are digital assets with unique identification codes that cannot be exchanged for other tokens on a one-to-one basis. NFTs have gained significant popularity in recent years, with the growth of digital art, collectables, and gaming.
 
 Bitquery's APIs help you extract and analyze NFT data from various blockchain networks.
@@ -18,6 +25,32 @@ Below are some examples of NFT queries that can be performed using Bitquery's pl
 ## NFT Holders for a project
 
 This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens associated with that smart contract, ordered by the sum of the token balances in descending order.
+
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+{
+  EVM(network: eth, dataset: combined) {
+    Balances(
+      limit: { count: 100 }
+      orderBy: { descending: Balance_Amount }
+      where: {
+        Currency: {
+          SmartContract: { is: "0xf5b0a3efb8e8e4c201e2a935f110eaaf3ffecb8d" }
+        }
+      }
+    ) {
+      Balance {
+        Address
+      }
+      Balance { Amount }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
 
 ```graphql
 {
@@ -39,6 +72,8 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
   }
 }
 ```
+
+</details>
 
 **Parameters**
 

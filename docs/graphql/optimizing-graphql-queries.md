@@ -5,6 +5,13 @@ description: "Optimize Bitquery GraphQL Queries in Bitquery GraphQL with clear s
 ---
 # GraphQL query optimization for APIs
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 GraphQL is an open-source query language for APIs. It allows clients to define the required data structure, and the server responds with only that data. This allows for more efficient and flexible communication between the client and server, as well as enabling better performance and easier development of APIs.
 
 GraphQL query optimization is a crucial aspect of utilizing V2 APIs to their full potential. By optimizing your queries, you can significantly reduce the amount of time and resources required to retrieve the data you need.
@@ -185,6 +192,32 @@ Sorting by metrics in GraphQL can be achieved by using the `order by` argument a
 
 Metric-based sorting is a powerful feature in GraphQL that allows you to sort data based on a specific metric or criteria. Let me give you some examples to help explain how this works.
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+{
+  EVM(network: bsc, dataset: combined) {
+    Balances(
+      limit: { count: 1000 }
+      orderBy: { descending: Balance_Amount }
+      where: {
+        Currency: {
+          SmartContract: { is: "0xc748673057861a797275cd8a068abb95a902e8de" }
+        }
+      }
+    ) {
+      Balance {
+        Address
+      }
+      Balance { Amount }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 {
   EVM(network: bsc, dataset: combined) {
@@ -205,6 +238,8 @@ Metric-based sorting is a powerful feature in GraphQL that allows you to sort da
   }
 }
 ```
+
+</details>
 
 In the above example, we use the SUM metric to sort the responses. We give an [alias](/docs/graphql/metrics/alias/) to the sum field (Balance) and sort the responses from highest to lowest sum.
 

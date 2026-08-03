@@ -24,6 +24,36 @@ Every GraphQL cube is served from one or more datasets, selected with the `datas
 
 **Availability differs by chain and by cube.** Selecting a dataset a chain doesn't support surfaces a ClickHouse error such as `no table can query <Cube> ... consider use realtime dataset`. That's not a bug — it means the archive/combined table for that cube isn't deployed on that chain. See the [dataset reference](/docs/graphql/dataset/realtime/) and the [Early Access Program datasets](/docs/graphql/dataset/EAP/) for details.
 
+:::caution `combined` is not available everywhere, and does not always fail cleanly
+Two cases to know about before you rely on `combined`:
+
+- **Solana** — every `Solana(dataset: combined)` cube tested returns a ClickHouse **500**, on both the `/graphql` and `/eap` endpoints. Use `realtime` for recent data and `archive` for history until this is resolved.
+- **EVM `Events` and `Calls`** — also return a 500 on `combined`, while `Transfers`, `Transactions`, `Blocks` and the DEX cubes work.
+
+Where a dataset is genuinely undeployed you get the clean `no table can query …` message above. A raw 500 is a different thing. If you hit one, re-run the same query on `archive` before treating it as an outage.
+:::
+
+:::tip Measure your own window
+Retention also depends on your plan, so confirm rather than assume. One query per cube gives you the floor:
+
+```graphql
+query RetentionFloor {
+  Solana(dataset: realtime) {
+    Transfers(limit: { count: 1 }) {
+      Block {
+        oldest: Time(minimum: Block_Time)
+        newest: Time(maximum: Block_Time)
+      }
+    }
+  }
+}
+```
+
+`Time(minimum: Block_Time)` returns the oldest row the dataset currently holds. Swap the cube, the `dataset:` and the chain root to fill in the matrix for your own account.
+
+Note that `Balances` and `Holders` have no `Block.Time`, so this query errors against them — they are current-state cubes, not time series. For a past balance use `Holders(date: …)`, see [end-of-day balances](/docs/usecases/end-of-day-balances/).
+:::
+
 Rule of thumb: reach for `realtime` for live/streaming use cases, `combined` for "recent history + now", and `archive` for pure backfills — but only where the matrix below says archive exists.
 
 ## Coverage matrix
@@ -39,19 +69,28 @@ Windows are expressed as rolling ranges, not fixed dates, so they stay correct o
 | Transactions | ✅ | ✅ full history | ✅ | |
 | Balances | ✅ | ✅ | — | Query at a block/date for point-in-time balances. |
 | Holders | ✅ | ✅ all v2 EVM chains | — | The Holders API is available on all v2 EVM chains. |
-| Calls & Events | ✅ | ~3 months (Ethereum: full history) | ✅ | ~3 months on all EVM chains **except Ethereum**, which keeps full history. Older data on any chain (including Ethereum) via S3 export. |
+| Calls & Events | ✅ **~24 h** | ~3 months (Ethereum: full history) | ✅ | ~3 months on all EVM chains **except Ethereum**, which keeps full history. Older data on any chain (including Ethereum) via S3 export. `combined` currently 500s on these two cubes — use `archive`. |
 | Mempool | ✅ (stream) | — | — | Pending-tx data is realtime only. |
 
 ### Solana
 
 | Cube | realtime | archive / combined | Kafka | Notes |
 |---|---|---|---|---|
-| DEX Trades | ✅ | ~30 days via API | ✅ | Older raw trades via a cloud/S3 export. |
+| `DEXTradeByTokens` | ✅ **~7 days** | Since mid-2024 (`archive`) | ✅ | The long-retention trade cube. Prefer it for anything beyond a few hours. |
+| `DEXTrades` | ✅ **~12 hours** | — | ✅ | Same trades as above, far shorter window. See the note below. |
 | OHLC / price aggregates | ✅ | Minute-level since October 2024 | ✅ (trading topics) | Aggregated candles go back much further than raw trades. |
-| Transfers | ✅ ~last 8h | via S3 | ✅ | The API serves roughly the last 8 hours; deep history via S3 export. |
-| Balances | ⏳ recent activity only | — | — | Balances reflect tokens active recently; dormant balances may not appear. |
-| Instructions | ⏳ recent only | — | ✅ | Deep historical instruction lookup by signature is not available via API. |
-| DEX Pools | ✅ | — | ✅ | Pool events are realtime; not in archive. |
+| `Transfers` | ✅ **~12 hours** | via S3 | ✅ | Deep history via S3 export. |
+| `Instructions` | ✅ **~12 hours** | — | ✅ | Deep historical instruction lookup by signature is not available via API. |
+| `InstructionBalanceUpdates` | ✅ **~12 hours** | — | ✅ | |
+| `BalanceUpdates` | ✅ **~7 days** | — | ✅ | Solana has no `Balances` cube; balance changes are queried here. |
+| `DEXPools` | ✅ **~7 days** | — | ✅ | Pool events are realtime; not in archive. |
+| `Transactions` / `Blocks` / `Rewards` / `DEXOrders` / `TokenSupplyUpdates` | ✅ **~12 hours** | — | ✅ | |
+
+:::warning Two Solana cubes carry the same trades with very different depth
+`DEXTrades` retains roughly **12 hours**; `DEXTradeByTokens` retains roughly **7 days** — about 15× longer, from the same underlying trades. The same split applies to `InstructionBalanceUpdates` (~12 h) versus `BalanceUpdates` (~7 days).
+
+The pattern is that aggregate-shaped cubes retain much longer than raw per-event cubes. If a Solana query "loses" older data, check whether an aggregate cube covers the same question before assuming the history is gone.
+:::
 
 ### Tron & Bitcoin
 
@@ -65,8 +104,8 @@ Windows are expressed as rolling ranges, not fixed dates, so they stay correct o
 
 | Surface | Window | Notes |
 |---|---|---|
-| Trades / Tokens / Pairs | ~30 days | For older raw trades use chain-level `DEXTradeByTokens` or an S3 export. |
-| Price / OHLC aggregates | Longer than raw trades **[confirm start]** | See the [Crypto Price API](/docs/trading/crypto-price-api/introduction/). |
+| Trades / Tokens / Pairs / Currencies | ~30 days | All four cubes measure the same floor. For older raw trades use chain-level `DEXTradeByTokens` or an S3 export. |
+| Price / OHLC aggregates | See the [Crypto Price API](/docs/trading/crypto-price-api/introduction/) | Served separately from the Trading cubes above, which are all ~30 days. |
 
 ### Robinhood chain
 

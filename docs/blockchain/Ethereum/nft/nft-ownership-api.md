@@ -5,6 +5,13 @@ description: "Ethereum NFT Ownership API: track Ethereum NFT trades, ownership, 
 ---
 # NFT Ownership API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 The NFT Ownership API can be used to retrieve information about the ownership of a specific NFT ( Non-Fungible Token ) on the supported blockchain. For instance using this we can access the owners of an NFT including their addresses and associated metadata and also we can retrieve a list of the top holders of a particular NFT.
 
 ## Get NFT Owners
@@ -63,6 +70,32 @@ You can find the graphql query [here](https://ide.bitquery.io/Who-owns-specific-
 
 Let's see an example showcasing the retrieval of the top 10 holders for a particular NFT, with their balances.
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    Balances(
+      orderBy: { descending: Balance_Amount }
+      limit: { count: 10 }
+      where: {
+        Currency: {
+          SmartContract: { is: "0x7dD4F223D9155F412790D696Fa30923489d4Ad34" }
+        }
+      }
+    ) {
+      Balance {
+        Address
+      }
+      Balance { Amount(selectWhere: { gt: "0" }) }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
@@ -83,6 +116,8 @@ query MyQuery {
   }
 }
 ```
+
+</details>
 
 In this query, you'll need to replace `0x7dD4F223D9155F412790D696Fa30923489d4Ad34` with the contract address of the NFT you'd like to retrieve top holders for.
 

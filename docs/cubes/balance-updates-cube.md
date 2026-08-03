@@ -4,19 +4,23 @@ description: "How the BalanceUpdates cube models per-change balance history, wha
 ---
 # Balance Update Cube
 
-:::caution On EVM and Tron, use `Balances` or `Holders` for current balances
-`BalanceUpdates` is **deprecated on EVM and Tron**, superseded by the
-[**`Balances` and `Holders` cubes**](/docs/cubes/balances-cube). Those read from
-aggregate-state tables and return the current balance directly, so you no longer
-sum deltas yourself. See the [migration mapping](/docs/cubes/balances-cube#migrating-from-balanceupdates).
+:::danger EVM and Tron: `BalanceUpdates` sunsets 10 August 2026
+`EVM.BalanceUpdates`, `EVM.TokenHolders` and `Tron.BalanceUpdates` **stop working on 10 August 2026**. They still return live data today, so nothing has broken yet — but every query using them needs migrating before that date. (`EVM.TokenHolders` has already gone and now returns `no table can query TokenHolder`.)
 
-Two things this page is still the right reference for:
+Move to the [**`Balances` and `Holders` cubes**](/docs/cubes/balances-cube), which read from
+aggregate-state tables and return the current balance directly, so you no longer sum deltas
+yourself. See the [migration mapping](/docs/cubes/balances-cube#migrating-from-balanceupdates).
 
-- **Solana.** `Solana.BalanceUpdates` and `Solana.InstructionBalanceUpdates` are the
-  **current** APIs there and are not deprecated — Solana has no `Balances` cube.
-- **Change attribution and per-change history on any chain.** `Balances` gives you the
-  resulting amount but not *why* it moved. Only `BalanceUpdates` exposes
-  `Type` (`transfer`, `fee`, `block_reward`, …) per change.
+**Solana is not affected.** `Solana.BalanceUpdates` and `Solana.InstructionBalanceUpdates` are the
+current APIs there and are not deprecated — Solana has no `Balances` cube. This page remains the
+right reference for Solana.
+
+**Per-change becomes per-day, by design.** `Balances` carries **daily aggregates** (`Block.Date`),
+not one row per change, so balance history is a single cheap query rather than a scan you
+aggregate yourself. What does not carry over is sub-daily attribution: `BalanceUpdates` exposes
+`Type` (`transfer`, `fee`, `block_reward`, …) per change and the daily grain has no equivalent.
+If you need *why* a balance moved rather than *what it became*, reconstruct it from
+[`Transfers`](/docs/cubes/transfers-cube) plus transaction context.
 :::
 
 Our `BalanceUpdates` cube is designed to provide historical and realtime balance updates. This cube provides multiple ways to query historical balance data.
@@ -169,6 +173,31 @@ Using aggregation, you can balance an address at any given date, time, or block 
 
 You can run following query [using this link](https://ide.bitquery.io/Balance-of-an-address_4).
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    Balances(
+      where: {
+        Balance: {
+          Address: { is: "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6" }
+        }
+      }
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount(selectWhere: { gt: "0" }) }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
@@ -188,6 +217,8 @@ query MyQuery {
   }
 }
 ```
+
+</details>
 
 In the above query, we are summing the balance update amount to get the current address balance for all tokens.
 

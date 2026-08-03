@@ -19,6 +19,33 @@ When implementing WebSocket subscriptions with auto-reconnect, follow these best
 
 2. **Use Standard WebSocket Libraries**: Instead of manually managing each step of the WebSocket lifecycle (connection, subscription, keep-alive, reconnection), use well-tested WebSocket libraries that handle the full subscription lifecycle automatically. Libraries like `graphql-ws`, `apollo-client`, or similar provide built-in reconnection logic, subscription management, and error handling, reducing the complexity and potential bugs in your implementation.
 
+## Close code 1013: consuming too slowly
+
+Not every disconnect is silent. If your client falls behind the stream, the server closes the
+socket with an explicit reason:
+
+```
+close code 1013 — client is not consuming messages fast enough
+```
+
+`1013` is "Try Again Later" in the WebSocket spec. The query is fine and the connection was
+fine; the server is shedding a consumer that stopped keeping up.
+
+Reconnecting alone will not fix this, because the new connection falls behind the same way.
+Two changes do:
+
+1. **Narrow the subscription.** High-volume cubes such as `Solana.Instructions` and
+   `Solana.BalanceUpdates` carry every instruction and balance change on the chain. Add a
+   `where` filter for the program, token or account you actually care about. The same
+   subscription that gets dropped unfiltered runs cleanly when scoped to one token.
+2. **Never process inside the read loop** (best practice 1 above). Push each message to a queue
+   and handle it in a separate worker, so a slow parse or database write cannot stall the socket.
+
+This failure is load-dependent, so an unfiltered subscription often works in development and
+drops in production. See
+[which cubes support subscriptions](/docs/subscriptions/which-cubes-stream/) for the cubes that
+require a filter and the ones that never push data at all.
+
 ## Sample Implementation in JavaScript
 
 ```js

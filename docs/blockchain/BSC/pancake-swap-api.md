@@ -8,6 +8,13 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Pancake Swap API
 
+:::danger `BalanceUpdates` sunsets 10 August 2026
+Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
+:::
+
+
 :::tip Need real-time PancakeSwap data or anything from the last ~30 days?
 For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PancakeSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical PancakeSwap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
@@ -980,6 +987,41 @@ subscription {
 <details>
   <summary>Click to expand GraphQL query</summary>
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+{
+  EVM(dataset: combined, network: bsc) {
+    Balances(
+      where: {
+        Currency: {
+          SmartContract: {
+            in: [
+              "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"
+              "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
+            ]
+          }
+        }
+        Balance: {
+          Address: { is: "0xafb2da14056725e3ba3a30dd846b6bbbd7886c56" }
+        }
+      }
+    ) {
+      Balance { Amount(selectWhere: { gt: "0" }) }
+      Currency {
+        Name
+        Symbol
+        SmartContract
+        Decimals
+      }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 {
   EVM(dataset: combined, network: bsc) {
@@ -1009,6 +1051,8 @@ subscription {
   }
 }
 ```
+
+</details>
 
 </details>
 
