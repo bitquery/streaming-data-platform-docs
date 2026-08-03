@@ -1277,6 +1277,7 @@ const sidebars = {
             "usecases/telegram-bot",
             "usecases/Top-10-ethereum-tokens",
             "usecases/pumpfun-token-sniffer",
+            "usecases/wallet-portfolio-api",
             "usecases/defi_portfolio_scorer",
           ],
         },
