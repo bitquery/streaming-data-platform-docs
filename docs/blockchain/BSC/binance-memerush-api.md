@@ -1244,6 +1244,30 @@ Using below API you can get the liquidity of a meme rush token. Subtract `200000
 <details>
   <summary>Click to expand GraphQL query</summary>
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: bsc) {
+    Balances(
+      where: {Balance: {Address: {is: "0x5c952063c7fc8610FFDB798152D69F0B9550762b"}}, Currency: {SmartContract: {is: "0x44442202ff27ee2297c128d0c1ae43a0fbb35701"}}}
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount }
+      Balance {
+        Address
+      }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: bsc) {
@@ -1262,5 +1286,7 @@ query MyQuery {
   }
 }
 ```
+
+</details>
 
 </details>

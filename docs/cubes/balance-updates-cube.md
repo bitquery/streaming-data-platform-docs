@@ -173,6 +173,31 @@ Using aggregation, you can balance an address at any given date, time, or block 
 
 You can run following query [using this link](https://ide.bitquery.io/Balance-of-an-address_4).
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    Balances(
+      where: {
+        Balance: {
+          Address: { is: "0xcf1DC766Fc2c62bef0b67A8De666c8e67aCf35f6" }
+        }
+      }
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount(selectWhere: { gt: "0" }) }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
@@ -192,6 +217,8 @@ query MyQuery {
   }
 }
 ```
+
+</details>
 
 In the above query, we are summing the balance update amount to get the current address balance for all tokens.
 

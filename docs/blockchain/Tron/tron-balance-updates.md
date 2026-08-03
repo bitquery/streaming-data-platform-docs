@@ -308,6 +308,27 @@ The examples below use **`Tron.BalanceUpdates`**, which **sunsets on 10 August 2
 
 [Run Query ➤](https://ide.bitquery.io/balance-of-an-address-on-tron)
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+{
+  Tron(dataset: combined, aggregates: yes) {
+    Balances(
+      where: {Balance: {Address: {is: "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf"}}}
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount(selectWhere: {gt: "0"}) }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 {
   Tron(dataset: combined, aggregates: yes) {
@@ -322,8 +343,9 @@ The examples below use **`Tron.BalanceUpdates`**, which **sunsets on 10 August 2
     }
   }
 }
-
 ```
+
+</details>
 
 ### Total Holder Count of a Tron Token
 
@@ -417,6 +439,28 @@ query TronWalletPortfolio($address: String) {
 
 This query fetches you the top 10 token holders of the token `TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT`. Check out the query [here](https://ide.bitquery.io/top-token-holders_2).
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  Tron(dataset: combined) {
+    Balances(
+      limit: {count: 10}
+      orderBy: { descending: Balance_Amount }
+      where: {Currency: {SmartContract: {is: "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"}}}
+    ) {
+      Balance { Amount(selectWhere: {gt: "0"}) }
+      Balance {
+        Address
+      }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   Tron(dataset: combined) {
@@ -432,8 +476,9 @@ query MyQuery {
     }
   }
 }
-
 ```
+
+</details>
 
 <FAQ
   items={[

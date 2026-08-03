@@ -26,6 +26,32 @@ Below are some examples of NFT queries that can be performed using Bitquery's pl
 
 This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens associated with that smart contract, ordered by the sum of the token balances in descending order.
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+{
+  EVM(network: eth, dataset: combined) {
+    Balances(
+      limit: { count: 100 }
+      orderBy: { descending: Balance_Amount }
+      where: {
+        Currency: {
+          SmartContract: { is: "0xf5b0a3efb8e8e4c201e2a935f110eaaf3ffecb8d" }
+        }
+      }
+    ) {
+      Balance {
+        Address
+      }
+      Balance { Amount }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 {
   EVM(network: eth, dataset: combined) {
@@ -46,6 +72,8 @@ This query retrieves the Ethereum addresses that hold Axie Infinity NFT tokens a
   }
 }
 ```
+
+</details>
 
 **Parameters**
 

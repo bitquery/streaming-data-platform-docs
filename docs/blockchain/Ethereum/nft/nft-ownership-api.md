@@ -70,6 +70,32 @@ You can find the graphql query [here](https://ide.bitquery.io/Who-owns-specific-
 
 Let's see an example showcasing the retrieval of the top 10 holders for a particular NFT, with their balances.
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: eth) {
+    Balances(
+      orderBy: { descending: Balance_Amount }
+      limit: { count: 10 }
+      where: {
+        Currency: {
+          SmartContract: { is: "0x7dD4F223D9155F412790D696Fa30923489d4Ad34" }
+        }
+      }
+    ) {
+      Balance {
+        Address
+      }
+      Balance { Amount(selectWhere: { gt: "0" }) }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: eth) {
@@ -90,6 +116,8 @@ query MyQuery {
   }
 }
 ```
+
+</details>
 
 In this query, you'll need to replace `0x7dD4F223D9155F412790D696Fa30923489d4Ad34` with the contract address of the NFT you'd like to retrieve top holders for.
 

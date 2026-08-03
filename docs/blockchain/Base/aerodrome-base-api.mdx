@@ -354,6 +354,39 @@ Query the current liquidity levels for any Aerodrome Finance pool by pool addres
 <details>
   <summary>Click to expand GraphQL query</summary>
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  EVM(dataset: combined, network: base) {
+    Balances(
+      where: {
+        Balance: {
+          Address: { is: "0x1e039aade407a94df380649b33b52cb8ad41c755" }
+        }
+        Currency: {
+          SmartContract: {
+            in: [
+              "0x4200000000000000000000000000000000000006"
+              "0xa999542c71febba77602fbc2f784ba9ba0c850f6"
+            ]
+          }
+        }
+      }
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount(selectWhere: { gt: "0" }) }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   EVM(dataset: combined, network: base) {
@@ -381,6 +414,8 @@ query MyQuery {
   }
 }
 ```
+
+</details>
 
 </details>
 

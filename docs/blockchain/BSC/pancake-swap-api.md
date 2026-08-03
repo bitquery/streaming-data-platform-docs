@@ -987,6 +987,41 @@ subscription {
 <details>
   <summary>Click to expand GraphQL query</summary>
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+{
+  EVM(dataset: combined, network: bsc) {
+    Balances(
+      where: {
+        Currency: {
+          SmartContract: {
+            in: [
+              "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"
+              "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
+            ]
+          }
+        }
+        Balance: {
+          Address: { is: "0xafb2da14056725e3ba3a30dd846b6bbbd7886c56" }
+        }
+      }
+    ) {
+      Balance { Amount(selectWhere: { gt: "0" }) }
+      Currency {
+        Name
+        Symbol
+        SmartContract
+        Decimals
+      }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 {
   EVM(dataset: combined, network: bsc) {
@@ -1016,6 +1051,8 @@ subscription {
   }
 }
 ```
+
+</details>
 
 </details>
 

@@ -192,6 +192,32 @@ Sorting by metrics in GraphQL can be achieved by using the `order by` argument a
 
 Metric-based sorting is a powerful feature in GraphQL that allows you to sort data based on a specific metric or criteria. Let me give you some examples to help explain how this works.
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+{
+  EVM(network: bsc, dataset: combined) {
+    Balances(
+      limit: { count: 1000 }
+      orderBy: { descending: Balance_Amount }
+      where: {
+        Currency: {
+          SmartContract: { is: "0xc748673057861a797275cd8a068abb95a902e8de" }
+        }
+      }
+    ) {
+      Balance {
+        Address
+      }
+      Balance { Amount }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 {
   EVM(network: bsc, dataset: combined) {
@@ -212,6 +238,8 @@ Metric-based sorting is a powerful feature in GraphQL that allows you to sort da
   }
 }
 ```
+
+</details>
 
 In the above example, we use the SUM metric to sort the responses. We give an [alias](/docs/graphql/metrics/alias/) to the sum field (Balance) and sort the responses from highest to lowest sum.
 

@@ -74,6 +74,30 @@ query {
 
 Below query will give you **USDT** balance for address `TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ` on Tron. Test the query [here](https://ide.bitquery.io/Stablecoin-Balance-of-an-Address).
 
+**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+
+```graphql
+query MyQuery {
+  Tron(dataset: combined) {
+    Balances(
+      where: {Balance: {Address: {is: "TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ"}}, Currency: {SmartContract: {is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"}}}
+      orderBy: { descending: Balance_Amount }
+    ) {
+      Currency {
+        Name
+      }
+      Balance { Amount(selectWhere: {gt: "0"}) }
+      Balance {
+        Address
+      }
+    }
+  }
+}
+```
+
+<details>
+<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+
 ```graphql
 query MyQuery {
   Tron(dataset: combined) {
@@ -91,8 +115,9 @@ query MyQuery {
     }
   }
 }
-
 ```
+
+</details>
 
 More examples on balance and balance updates on EVM chains can be found [here](/docs/blockchain/Ethereum/balances/balance-api/)
 
