@@ -3,6 +3,7 @@ sidebar_position: 1
 title: "Kafka Streaming Concepts"
 description: "Learn Bitquery Kafka stream concepts: topics, offsets, SASL auth, protobuf payloads, and when Kafka beats WebSockets for crypto data."
 ---
+
 # Bitquery Kafka Streams - Understanding Concepts
 
 Bitquery provides realtime data via Kafka as well in addition to GraphQL subscriptions. In this section, we'll see how Kafka-based streaming works and how to integrate it into your application using practical code examples. For price data streams, check out our [Crypto Price API](/docs/trading/crypto-price-api/introduction/) Kafka topic.
@@ -188,14 +189,14 @@ The **`trading`** namespace defines two Kafka topics. **Both use the same creden
 - **`*.broadcasted.dextrades.proto`** → `DexBlockMessage`
 - **`*.broadcasted.raw.proto`** → `BlockMessage`
 
-**`*.dexpools.proto`** streams are described under the [DEXPools Cube documentation](/docs/cubes/evm-dexpool).
+**`*.dexpools.proto`** → `DexPoolBlockMessage`. See the [DEXPools Cube documentation](/docs/cubes/evm-dexpool) for details.
 
 #### Ethereum (`eth`)
 
 - `eth.transactions.proto` → `ParsedAbiBlockMessage`
 - `eth.tokens.proto` → `TokenBlockMessage`
 - `eth.dextrades.proto` → `DexBlockMessage`
-- `eth.dexpools.proto` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
+- `eth.dexpools.proto` → `DexPoolBlockMessage` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
 - `eth.raw.proto` → `BlockMessage`
 - `eth.broadcasted.transactions.proto` → `ParsedAbiBlockMessage`
 - `eth.broadcasted.tokens.proto` → `TokenBlockMessage`
@@ -207,7 +208,7 @@ The **`trading`** namespace defines two Kafka topics. **Both use the same creden
 - `bsc.transactions.proto` → `ParsedAbiBlockMessage`
 - `bsc.tokens.proto` → `TokenBlockMessage`
 - `bsc.dextrades.proto` → `DexBlockMessage`
-- `bsc.dexpools.proto` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
+- `bsc.dexpools.proto` → `DexPoolBlockMessage` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
 
 Where enabled, **`bsc.broadcasted.*`** topics follow the same mapping as **`eth.broadcasted.*`**.
 
@@ -216,7 +217,7 @@ Where enabled, **`bsc.broadcasted.*`** topics follow the same mapping as **`eth.
 - `base.transactions.proto` → `ParsedAbiBlockMessage`
 - `base.tokens.proto` → `TokenBlockMessage`
 - `base.dextrades.proto` → `DexBlockMessage`
-- `base.dexpools.proto` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
+- `base.dexpools.proto` → `DexPoolBlockMessage` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
 
 Where enabled, **`base.broadcasted.*`** topics follow the same mapping as **`eth.broadcasted.*`**.
 
@@ -225,7 +226,7 @@ Where enabled, **`base.broadcasted.*`** topics follow the same mapping as **`eth
 - `matic.transactions.proto` → `ParsedAbiBlockMessage`
 - `matic.tokens.proto` → `TokenBlockMessage`
 - `matic.dextrades.proto` → `DexBlockMessage`
-- `matic.dexpools.proto` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
+- `matic.dexpools.proto` → `DexPoolBlockMessage` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
 - `matic.predictions.proto` — prediction markets; decode using [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf)
 - `matic.broadcasted.predictions.proto` — prediction markets (broadcasted)
 
@@ -245,6 +246,7 @@ Where enabled, **`optimism.broadcasted.*`** topics follow the same mapping as **
 - `robinhood.tokens.proto` → `TokenBlockMessage`
 - `robinhood.dextrades.proto` → `DexBlockMessage`
 - `robinhood.raw.proto` → `BlockMessage`
+- `robinhood.dexpools.proto` → `DexPoolBlockMessage` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
 
 ### Bitcoin
 
