@@ -183,7 +183,7 @@ query ($token: String) {
 
 ![image](https://github.com/user-attachments/assets/21882e2a-e769-4703-be56-15b7924b6318)
 
-Check data here on [DEXrabbit](https://dexrabbit.com/solana/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm#pools).
+Check data here on [DEXrabbit](https://dexrabbit.bitquery.io/solana/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm#pools).
 
 ## Get Latest Liquidity for All Pools of a Token
 

@@ -12,7 +12,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 Explore the integration of the **Arbitrum Cross Chain API** to track bridge transfers, interact with smart contracts, and fetch detailed transaction data.  
 For detailed reference, visit the [official Arbitrum documentation](https://docs.arbitrum.io/build-decentralized-apps/token-bridging/token-bridge-erc20).
 
-Additional information about migrating to the latest version of Across Protocol is available [here](https://docs.across.to/developer-docs/developers/migration-from-v2-to-v3#events).
+Additional information about migrating to the latest version of Across Protocol is available [here](https://docs.across.to/introduction/migration-guides/migration-from-v2-to-v3#event-changes).
 
 ## Tracking Across Bridge Transfers Using SpokePool Events
 

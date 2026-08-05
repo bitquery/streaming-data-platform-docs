@@ -463,7 +463,7 @@ Variables — the quote list is native USDC, bridged USDC.e, USDT0, DAI, WETH, W
 }
 ```
 
-A heatmap built on this shape of query is live at [dexrabbit.com/matic](https://dexrabbit.com/matic).
+A heatmap built on this shape of query is live at [dexrabbit.bitquery.io/matic](https://dexrabbit.bitquery.io/matic).
 
 ![Top Polygon tokens by volume on DEXrabbit](/img/dexrabbit/matic_toptokens.png)
 
@@ -506,7 +506,7 @@ query topTraders($network: evm_network, $token: String) {
 }
 ```
 
-This query is available as a chart and table on [dexrabbit.com/matic](https://dexrabbit.com/matic).
+This query is available as a chart and table on [dexrabbit.bitquery.io/matic](https://dexrabbit.bitquery.io/matic).
 
 ![Top Polygon traders on DEXrabbit](/img/dexrabbit/matic_toptraders.png)
 

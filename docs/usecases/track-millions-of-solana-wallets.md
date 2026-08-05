@@ -758,7 +758,7 @@ Traditional RPC-based balance monitoring simply can't keep up with the demands o
 - Scale to millions of wallets without performance degradation
 - Achieve 100% accuracy with no missed transactions
 
-Ready to explore how Bitquery's Kafka Streams could transform your wallet monitoring capabilities? Clone the [repository](https://github.com/bitquery/solana-wallet-tracker) for a starting point and reach out to the Bitquery team on [Telegram](https://t.me/bloxy_info) to discuss your specific requirements and get access to the streams.
+Ready to explore how Bitquery's Kafka Streams could transform your wallet monitoring capabilities? Clone the repository for a starting point and reach out to the Bitquery team on [Telegram](https://t.me/bloxy_info) to discuss your specific requirements and get access to the streams.
 
 ---
 

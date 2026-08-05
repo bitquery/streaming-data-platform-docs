@@ -53,7 +53,7 @@ query DexMarkets($network: evm_network) {
 
 ![image](https://github.com/user-attachments/assets/591eac39-2e11-4885-b297-87aa65d0a185)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/dex_market).
 
 ## Get a specific DEX statistics
 
@@ -85,7 +85,7 @@ query DexMarkets($network: evm_network, $market: String) {
 
 ![image](https://github.com/user-attachments/assets/ea23fa51-e21c-4f97-8719-905475e00769)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market/Uniswap).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/dex_market/Uniswap).
 
 ## Get All Trading Pairs on a particular DEX
 
@@ -142,7 +142,7 @@ query DexMarkets($network: evm_network, $market: String, $time_10min_ago: DateTi
 
 ![image](https://github.com/user-attachments/assets/a5d80402-54d1-49e9-a9e0-62cea1204f73)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market/Uniswap).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/dex_market/Uniswap).
 
 ## Top Traders on a DEX
 
@@ -189,7 +189,7 @@ query DexMarkets($network: evm_network, $market: String) {
 
 ![image](https://github.com/user-attachments/assets/3cf6b7bd-b04f-45a1-bcb1-d9369d1ed638)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market/Uniswap#traders).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/dex_market/Uniswap#traders).
 
 ## Latest Trades on a DEX
 
@@ -246,7 +246,7 @@ query LatestTrades($network: evm_network, $market: String) {
 
 ![image](https://github.com/user-attachments/assets/4495ec8e-ab55-4cf9-8b58-99ef264dcc1d)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/eth/dex_market/Uniswap#trades).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/dex_market/Uniswap#trades).
 
 <FAQ
   items={[

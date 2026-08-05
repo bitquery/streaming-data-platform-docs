@@ -195,7 +195,7 @@ query pairs(
 }
 ```
 
-The example of this could be seen on the [DEXRabbit](https://dexrabbit.com/optimism).
+The example of this could be seen on the [DEXRabbit](https://dexrabbit.bitquery.io/optimism).
 
 ![Trending Pairs on Optimism](/img/dexrabbit/optimism_trending_pairs.png)
 
@@ -276,7 +276,7 @@ query topTraders($network: evm_network, $time_ago: DateTime) {
 }
 ```
 
-You can checkout a completed product using this info on [DEXRabbit](https://dexrabbit.com/optimism/trader).
+You can checkout a completed product using this info on [DEXRabbit](https://dexrabbit.bitquery.io/optimism/trader).
 
 ![Top Traders on Optimism](/img/dexrabbit/optimism_top_traders.png)
 
@@ -325,7 +325,7 @@ query pairTopTraders(
 }
 ```
 
-An example for the same could be seen in the [DEXRabbit](https://dexrabbit.com/optimism/pair/0xdc6ff44d5d932cbd77b52e5612ba0529dc6226f1/0x0b2c639c533813f4aa9d7837caf62653d097ff85#pair_top_traders) as shown below.
+An example for the same could be seen in the [DEXRabbit](https://dexrabbit.bitquery.io/optimism/pair/0xdc6ff44d5d932cbd77b52e5612ba0529dc6226f1/0x0b2c639c533813f4aa9d7837caf62653d097ff85#pair_top_traders) as shown below.
 
 ![Top Traders for a Pair](/img/dexrabbit/optimism_top_pair_traders.png)
 
@@ -406,7 +406,7 @@ query topTokens($network: evm_network, $time_ago: DateTime!) {
 }
 ```
 
-An example of the utilisation of this data could be seen on [DEXRabbit](https://dexrabbit.com/optimism/token).
+An example of the utilisation of this data could be seen on [DEXRabbit](https://dexrabbit.bitquery.io/optimism/token).
 
 ![Top Tokens on Optimism](/img/dexrabbit/optimism_top_tokens.png)
 
