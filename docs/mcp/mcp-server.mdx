@@ -1,6 +1,6 @@
 ---
 title: "Bitquery MCP Server for AI Agents"
-description: "Connect Claude, Cursor, or ChatGPT to Bitquery MCP to query DEX trades, OHLC prices, and wallet analytics in plain English."
+description: "Connect Claude, Cursor, or ChatGPT to Bitquery MCP to query DEX trades, OHLC prices, wallet analytics, fund tracing, and AML forensics in plain English."
 image: "/img/mcp/charts/wsol-24h-candles.svg"
 keywords:
   - Bitquery MCP
@@ -16,18 +16,23 @@ keywords:
   - on-chain data for LLMs
   - blockchain data for AI agents
   - crypto trading MCP server
+  - blockchain forensics MCP
+  - AML compliance MCP
+  - fund flow tracing
 ---
 import FAQ from "@site/src/components/FAQ";
 
 # Bitquery MCP Server — Blockchain Data for AI Agents
 
-Connect [`https://mcp.bitquery.io`](https://mcp.bitquery.io) to Claude, Cursor, ChatGPT, Claude Code, or any other [MCP](https://modelcontextprotocol.io/)-compatible client and ask Bitquery's blockchain dataset anything in plain English. Get outlier-filtered DEX trades, transfers, OHLC candles, market cap, and wallet history across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Tron, and Robinhood. Trace the origin of funds, track cross-chain movements, and investigate wallet clusters.
+Point your AI client at [`https://mcp.bitquery.io`](https://mcp.bitquery.io) and ask Bitquery's blockchain dataset questions in plain English. Works with Claude, Cursor, ChatGPT, Claude Code, and anything else that speaks [MCP](https://modelcontextprotocol.io/).
+
+You get outlier-filtered DEX trades, transfers, OHLC candles, market cap, and wallet history across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Tron, and Robinhood Chain. Same data behind the tracing side: origin of funds, cross-chain movement, wallet clusters.
 
 |              |                                                                                                                                               |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Endpoint** | [`https://mcp.bitquery.io`](https://mcp.bitquery.io)                                                                                          |
-| **Auth**     | OAuth 2.1 — browser sign-in, no manual tokens                                                                                                 |
-| **Pricing**  | Free tier with a Bitquery account; metered against your existing plan beyond that                                                             |
+| **Auth**     | OAuth 2.1, browser sign-in, no manual tokens                                                                                                  |
+| **Pricing**  | Free tier with a Bitquery account. Beyond that it meters against your existing plan.                                                          |
 | **Support**  | [Telegram](https://t.me/Bloxy_info) · [support.bitquery.io](https://support.bitquery.io/) · [support@bitquery.io](mailto:support@bitquery.io) |
 
 import VideoPlayer from "../../src/components/videoplayer.js";
@@ -38,18 +43,19 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 ## What It Is
 
-The Bitquery MCP server is a hosted [Model Context Protocol](https://modelcontextprotocol.io/) endpoint that connects your AI client to Bitquery's production trading and transfers dataset — the same data behind Bitquery's GraphQL APIs, IDE, Kafka streams, and TradingView feeds.
+A hosted [Model Context Protocol](https://modelcontextprotocol.io/) endpoint sitting in front of Bitquery's production trading and transfers dataset. It's the same data that powers the GraphQL APIs, the IDE, the Kafka streams, and the TradingView feeds.
 
-You ask in plain English. The agent does the lookup. You get clean, structured rows back. No SQL, no schema, no rate-limit juggling.
+You ask a question. The agent does the lookup. You get structured rows back. You never write a query, sync a schema, or think about rate limits.
 
-Concretely, your agent gets:
+What your agent can actually reach:
 
-- **Billions of swap-level trade rows** across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron.
-- **Transfer-level data** to trace the origin of funds, track cross-chain movements, and investigate wallet clusters.
-- **Pre-built OHLC candles** at 1-minute, 5-minute, hourly, and daily intervals.
-- **Per-token economics** — market cap, fully diluted valuation, circulating supply — on every row.
-- **Bitquery's outlier filter** baked in — wash-traded pools and noisy pairs are deprioritised automatically.
-- **Zero infrastructure to maintain** — no ETL, no schema sync, no API client to write.
+- Billions of swap-level trade rows across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron.
+- Transfer-level data for tracing origin of funds, following money across chains, and pulling apart wallet clusters.
+- Tracing and forensics workflows: AML/KYC scoring, payment paths, phishing investigations, stablecoin and bridge monitoring, sanctions screening, forensic reports.
+- OHLC candles already built at 1-minute, 5-minute, hourly, and daily intervals.
+- Market cap, fully diluted valuation, and circulating supply attached to every row.
+- Bitquery's outlier filter, applied automatically, so wash-traded pools and noisy pairs drop down the ranking.
+- No ETL, no schema sync, no API client to write.
 
 ---
 
@@ -62,46 +68,53 @@ Concretely, your agent gets:
 └──────────────────┘                      └─────────────────────┘             └──────────────────────┘
 ```
 
-1. **Your AI client** connects to `https://mcp.bitquery.io` over the MCP transport.
-2. **OAuth 2.1 handles sign-in.** A browser window opens once; the client caches a refresh token for ~30 days and renews it silently.
-3. **The server exposes a small tool surface** — the LLM uses it to discover what's in the dataset and pull rows.
-4. **All access is read-only.** The agent cannot write, delete, or modify anything, even if you ask.
-5. **Outlier filtering is built in.** Bitquery's price-index ranking is applied automatically when you ask the agent for "clean" volume.
+1. Your client connects to `https://mcp.bitquery.io` over the MCP transport.
+2. OAuth 2.1 handles sign-in. A browser window opens once, then the client caches a refresh token for about 30 days and renews it quietly in the background.
+3. The server exposes a small set of tools. The model uses them to figure out what's in the dataset and pull rows.
+4. Access is read-only. The agent can't write, delete, or modify anything, even if you ask it to.
+5. When you ask for "clean" volume, Bitquery's price-index ranking is applied for you.
 
-Because the server speaks the standard MCP protocol, any MCP-compatible client — Claude Desktop, Claude Code, Cursor, ChatGPT, VS Code, custom agents — works out of the box.
+Because it's standard MCP, any compatible client works without special handling: Claude Desktop, Claude Code, Cursor, ChatGPT, VS Code, or something you built yourself.
 
 ---
 
 ## What Data You Get
 
-The first dataset live on the MCP is **trading data** across all nine supported chains, with two views of the same trades:
+Two datasets are live. The agent picks between them based on what you ask.
 
-1. **Per-trade rows** — every swap, with price, USD amounts, supply snapshot, trader wallet, and transaction hash.
-2. **Pre-built candles** — OHLC, volume, and price averages bucketed at 1-second, 1-minute,5-minute, hourly, and daily intervals.
+**Trading** covers all nine supported chains, with two views of the same underlying trades:
 
-The agent picks the right view based on your question. You don't have to think about it.
+1. Per-trade rows: every swap, with price, USD amounts, supply snapshot, trader wallet, and transaction hash.
+2. Pre-built candles: OHLC, volume, and price averages bucketed at 1-second, 1-minute, 5-minute, hourly, and daily intervals.
 
-Dive deeper in the **Trading** section:
+**Tracing** handles fund-flow and compliance questions:
 
-- [**Trading on the MCP — overview**](/docs/mcp/trading/overview/) — chains, DEX coverage, what's on every trade.
-- [**What you can do with it**](/docs/mcp/trading/use-cases/) — eleven conversational patterns, with prompts and best practices.
-- [**Worked examples with charts**](/docs/mcp/trading/examples/) — six trader workflows with real data and charts.
+1. AML/KYC risk scoring, plus sanctions and OFAC screening.
+2. Payment tracing from source to destination, including hops, DEX swaps, and bridges.
+3. Investigations: phishing and fraud, money-laundering patterns, CEX deposit clustering.
+4. Wallet clustering, stablecoin movement monitoring, and forensic or SAR-style reporting.
 
-Dive deeper in the **Tracing** section:
+More on trading:
 
-- [**Tracing on the MCP — overview**](/docs/mcp/Tracing/overview/) — AML, forensics, payment tracing, wallet clustering, and more.
+- [**Trading on the MCP: overview**](/docs/mcp/trading/overview/) covers chains, DEX coverage, and what lands on every trade.
+- [**What you can do with it**](/docs/mcp/trading/use-cases/) walks through eleven conversational patterns with prompts and best practices.
+- [**Worked examples with charts**](/docs/mcp/trading/examples/) shows six trader workflows against real data.
+
+More on tracing:
+
+- [**Tracing on the MCP: overview**](/docs/mcp/Tracing/overview/) covers AML, forensics, payment tracing, and wallet clustering.
 
 ---
 
 ## Under the Hood
 
-The server is built on the open-source [`mcp-clickhouse`](https://github.com/ClickHouse/mcp-clickhouse) project. Underneath, your agent's natural-language requests become read-only queries against Bitquery's production cluster — but you never see, write, or debug a query yourself.
+The server is built on the open-source [`mcp-clickhouse`](https://github.com/ClickHouse/mcp-clickhouse) project. Your agent's natural-language requests get turned into read-only queries against Bitquery's production cluster, and you never have to see, write, or debug one.
 
-Everything is sandboxed: writes, deletes, and mutations are rejected. Explore freely.
+Writes, deletes, and mutations are rejected at the server, so there's nothing you can break by poking around.
 
 ---
 
-## Install in 60 Seconds
+## Install
 
 ### Claude (Desktop & Web)
 
@@ -113,11 +126,11 @@ Everything is sandboxed: writes, deletes, and mutations are rejected. Explore fr
 
 ![Add custom connector: Name and Remote MCP server URL fields](/img/mcp/custom_connector.png)
 
-You don't need to pick tools manually in the chat UI — ask in plain language (for example, _"get me the top Solana tokens by 24h volume"_) and Claude calls Bitquery when your request fits.
+You don't need to pick tools by hand in the chat UI. Ask in plain language, for example _"get me the top Solana tokens by 24h volume"_, and Claude calls Bitquery when the request fits.
 
 ### ChatGPT
 
-1. Settings → **Connectors** (requires Plus / Pro / Business).
+1. Settings → **Connectors** (requires Plus, Pro, or Business).
 2. **Add connector → Custom connector**.
 3. URL: `https://mcp.bitquery.io`.
 4. Authenticate with your Bitquery account when prompted.
@@ -129,7 +142,7 @@ Easiest path:
 1. Settings → **MCP → Add new MCP server**.
 2. URL: `https://mcp.bitquery.io`.
 
-Or, by config file — add to `.cursor/mcp.json`:
+Or add it to `.cursor/mcp.json` directly:
 
 ```json
 {
@@ -142,7 +155,7 @@ Or, by config file — add to `.cursor/mcp.json`:
 }
 ```
 
-Restart Cursor (or reload the MCP configuration) so the server is picked up.
+Restart Cursor, or reload the MCP configuration, so the server gets picked up.
 
 ### Claude Code (terminal)
 
@@ -150,15 +163,15 @@ Restart Cursor (or reload the MCP configuration) so the server is picked up.
 claude mcp add bitquery -- npx -y mcp-remote https://mcp.bitquery.io/mcp
 ```
 
-### VS Code / any other MCP client
+### VS Code and other MCP clients
 
-Add a new MCP server with URL `https://mcp.bitquery.io`. The client handles the OAuth dance automatically.
+Add a new MCP server with the URL `https://mcp.bitquery.io`. The client handles OAuth on its own.
 
 ---
 
 ## First Connection and Permissions
 
-After configuration, **Bitquery Trading Data** appears in your client's connector list:
+Once it's configured, **Bitquery Trading Data** shows up in your client's connector list:
 
 ![Bitquery MCP listed among custom connectors](/img/mcp/mcp-connectors-bitquery-listed.png)
 
@@ -166,61 +179,66 @@ The first time a tool runs, the client asks you to **connect** and approve:
 
 ![Tool run requesting Connect for Bitquery](/img/mcp/mcp-tool-connect-prompt.png)
 
-You're prompted to **sign in** to Bitquery (free account works):
+You're prompted to **sign in** to Bitquery. A free account works:
 
 ![Bitquery sign-in to authorize the application](/img/mcp/mcp-bitquery-sign-in.png)
 
-Then **authorize** the client (Claude, Cursor, etc.) to use your account:
+Then **authorize** the client (Claude, Cursor, whatever you're using) to act on your account:
 
 ![Authorize Bitquery access for the requesting application](/img/mcp/mcp-bitquery-authorize-access.png)
 
-In Cursor (and similar), pick whether tool calls always need approval or are auto-allowed:
+In Cursor and similar clients, you choose whether tool calls always need approval or run automatically:
 
 ![Tool permission options such as Always allow](/img/mcp/mcp-tool-permissions-dropdown.png)
 
-OAuth tokens are cached for ~30 days and refreshed automatically — you'll rarely re-authenticate.
+OAuth tokens are cached for roughly 30 days and refreshed for you, so re-authenticating is rare.
 
 ---
 
 ## Authentication via query token (less secure)
 
-An alternative to OAuth is available on MCP, similar to passing a token in the URL for streaming WebSockets — see [Authenticating WebSockets](/docs/authorization/websocket/).
+There's an alternative to OAuth, similar to passing a token in the URL for streaming WebSockets. See [Authenticating WebSockets](/docs/authorization/websocket/).
 
-Append your access token to the server URL as a `token` query parameter, for example:
+Append your access token to the server URL as a `token` query parameter:
 
 `https://mcp.bitquery.io?token=ory_...`
 
-If your client uses the `/mcp` path (for example with `mcp-remote`), add the query string to that URL:
+If your client uses the `/mcp` path, as `mcp-remote` does, put the query string on that URL instead:
 
 `https://mcp.bitquery.io/mcp?token=ory_...`
 
-Generate tokens from your [Bitquery account](https://account.bitquery.io/user/api_v2/access_tokens) — same process as in [How to generate API credentials](/docs/authorization/how-to-generate/).
+Generate tokens from your [Bitquery account](https://account.bitquery.io/user/api_v2/access_tokens), the same way as in [How to generate API credentials](/docs/authorization/how-to-generate/).
 
-This method is **less secure** than the OAuth flow (the token can appear in logs, process lists, and shell history), but it is often a better fit when:
+This is **less secure** than OAuth, since the token can end up in logs, process lists, and shell history. It's still the better fit in three cases:
 
-- you run a **fully autonomous agent** with no human in the loop to complete browser sign-in;
-- you **install Claude Code (or another MCP client) on a server** where interactive OAuth is awkward; or
-- the **default ~7 day token TTL** (or OAuth refresh behavior) is not enough and you need long-lived, explicitly managed credentials.
+- You're running a fully autonomous agent with nobody around to complete a browser sign-in.
+- You've installed Claude Code, or another MCP client, on a server where interactive OAuth is awkward.
+- The default ~7 day token TTL, or the OAuth refresh behaviour, doesn't give you enough runway and you need long-lived credentials you manage yourself.
 
-Prefer OAuth in interactive environments when you can.
+If a human is in the loop, use OAuth.
 
 ---
 
 ## What You Can Ask the Agent
 
-Almost every trader question maps to one of these patterns. Just type it into the chat — the agent figures out the rest.
+Most trader and investigator questions fall into one of these shapes. Type it into the chat and let the agent work out the rest.
 
-- **Token discovery & trending** — _"Top 10 Solana tokens by USD volume in the last 24h, skip wash-traded pools."_
-- **Trader PnL & wallet analytics** — _"Pull every trade for wallet `7xKX…` in the last 7 days. Compute realised PnL per token."_
-- **OHLC charts** — _"1-minute OHLC for the WIF/USDC pool on Raydium for the last 6 hours."_
-- **Market cap & FDV monitoring** — _"Which Base tokens crossed $10M market cap in the last 24h?"_
-- **Wash-trade filtering** — _"Only clean volume"_ triggers Bitquery's outlier ranking automatically.
-- **Launchpad pulse** — _"How many new tokens launched on Pump.fun in the last hour vs the 24h average?"_
-- **Cross-chain market overview** — _"For each chain, show 24h DEX volume, trades, and unique traders."_
-- **Sniping & copy-trading research** — prototype signals before committing to a Kafka or gRPC stream.
-- **Slippage & liquidity** — derive realised slippage and effective depth from per-trade rows.
+- **Token discovery and trending:** _"Top 10 Solana tokens by USD volume in the last 24h, skip wash-traded pools."_
+- **Trader PnL and wallet analytics:** _"Pull every trade for wallet `7xKX…` in the last 7 days. Compute realised PnL per token."_
+- **OHLC charts:** _"1-minute OHLC for the WIF/USDC pool on Raydium for the last 6 hours."_
+- **Market cap and FDV monitoring:** _"Which Base tokens crossed $10M market cap in the last 24h?"_
+- **Wash-trade filtering:** saying _"only clean volume"_ is enough to trigger Bitquery's outlier ranking.
+- **Launchpad pulse:** _"How many new tokens launched on Pump.fun in the last hour vs the 24h average?"_
+- **Cross-chain market overview:** _"For each chain, show 24h DEX volume, trades, and unique traders."_
+- **Sniping and copy-trading research:** prototype a signal here before you commit to a Kafka or gRPC stream.
+- **Slippage and liquidity:** derive realised slippage and effective depth from per-trade rows.
+- **AML/KYC scoring:** _"Score wallet `0x…` for AML risk. Check wallet age, mixing signals, and compliance flags."_
+- **Payment tracing:** _"Trace $500K USDT from this hot wallet to the final destination. Show every hop."_
+- **Phishing and fraud:** _"2 ETH were stolen from this wallet. Trace where the funds went across swaps and bridges."_
+- **Wallet clustering:** _"Cluster wallets that sent to or received from `0x…` by likely control."_
+- **Sanctions and reporting:** _"Screen this wallet against OFAC and known-risk entities, then draft a forensic summary."_
 
-See the [worked examples](/docs/mcp/trading/examples/) for end-to-end versions of these — each with a chart, real numbers, and a "what this tells a trader" breakdown. For more patterns and the eight prompting habits that make the agent's answers dramatically better, see [What you can do with it](/docs/mcp/trading/use-cases/).
+For end-to-end trading workflows, see the [worked examples](/docs/mcp/trading/examples/). For tracing patterns and prompting habits, see [Tracing on the MCP](/docs/mcp/Tracing/overview/). For more trading patterns, see [What you can do with it](/docs/mcp/trading/use-cases/).
 
 ---
 
@@ -228,19 +246,23 @@ See the [worked examples](/docs/mcp/trading/examples/) for end-to-end versions o
   items={[
     {
       q: "Is the Bitquery MCP server free?",
-      a: "Yes — a free Bitquery account is enough to start. Heavy usage is metered against the same plan as the GraphQL API.",
+      a: "A free Bitquery account is enough to start. Heavy usage meters against the same plan as the GraphQL API.",
     },
     {
       q: "Do I need to write SQL to use the MCP?",
-      a: "No. You ask in plain English and the AI agent figures out the rest. The server is read-only — the agent cannot delete, insert, or modify anything.",
+      a: "No. You ask in plain English and the agent works out the rest. The server is read-only, so the agent can't delete, insert, or modify anything.",
     },
     {
       q: "Which chains and DEXs does the Bitquery MCP cover?",
-      a: "Solana (Raydium, Pump.fun, Meteora, Orca, and more), Ethereum (Uniswap, PancakeSwap, Curve), BSC (PancakeSwap, FourMeme), Base, Arbitrum, Optimism, Polygon (Polymarket), and Tron — see the chain table above for the full list.",
+      a: "Solana (Raydium, Pump.fun, Meteora, Orca and others), Ethereum (Uniswap, PancakeSwap, Curve), BSC (PancakeSwap, FourMeme), Base, Arbitrum, Optimism, Polygon (Polymarket), and Tron. The Trading overview page has the full DEX list per chain.",
+    },
+    {
+      q: "Can I use Bitquery MCP for AML, forensics, or fund tracing?",
+      a: "Yes. Tracing covers AML/KYC scoring, payment tracing, phishing investigations, wallet clustering, stablecoin and bridge monitoring, sanctions screening, and forensic reporting. Ask in plain English. The Tracing overview has example prompts.",
     },
     {
       q: "How fresh is the data on the Bitquery MCP?",
-      a: "Near real time — the dataset updates as blocks are processed across all supported chains.",
+      a: "Near real time. The dataset updates as blocks are processed across every supported chain.",
     },
     {
       q: "How do I install the Bitquery MCP in Claude, Cursor, or ChatGPT?",
@@ -248,23 +270,23 @@ See the [worked examples](/docs/mcp/trading/examples/) for end-to-end versions o
     },
     {
       q: "Can I self-host the MCP server?",
-      a: "The underlying server is open-source mcp-clickhouse. Bitquery runs the production deployment with OAuth and our data; you can run your own if you have your own database.",
+      a: "The underlying server is open-source mcp-clickhouse. Bitquery runs the production deployment with OAuth and our data. You can run your own against your own database.",
     },
     {
       q: "How far back does MCP data go?",
-      a: "Multiple years for major chains. Tell the agent the window you care about (e.g. in the last 7 days) and it bounds the lookup efficiently.",
+      a: "Multiple years for major chains. Tell the agent the window you care about, for example 'in the last 7 days', and it bounds the lookup efficiently.",
     },
   ]}
 />
 
 ## References
 
-- [Model Context Protocol spec](https://modelcontextprotocol.io/) — the standard the MCP server implements.
-- [`mcp-clickhouse`](https://github.com/ClickHouse/mcp-clickhouse) — the open-source server underneath.
-- [Crypto Price API](/docs/trading/crypto-price-api/introduction/) — GraphQL access to OHLC, market cap, and pre-aggregated token prices over the same data.
-- [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api/) — swap-level GraphQL streams (real-time + historical).
-- [Traders API](/docs/trading/crypto-trades-api/traders-api/) — wallet-centric trade analytics.
-- [Price index algorithm](/docs/trading/crypto-price-api/price-index-algorithm/) — how Bitquery's outlier filter and ranking are computed.
-- [How to filter anomaly prices](/docs/usecases/how-to-filter-anomaly-prices/) — practical guide to Bitquery's outlier ranking.
-- [How to generate Bitquery API credentials](/docs/authorization/how-to-generate/) — for non-MCP clients.
-- [Bitquery Account](https://account.bitquery.io/) — sign up / manage plan.
+- [Model Context Protocol spec](https://modelcontextprotocol.io/), the standard this server implements.
+- [`mcp-clickhouse`](https://github.com/ClickHouse/mcp-clickhouse), the open-source server underneath.
+- [Crypto Price API](/docs/trading/crypto-price-api/introduction/) for GraphQL access to OHLC, market cap, and pre-aggregated token prices over the same data.
+- [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api/) for swap-level GraphQL streams, real-time and historical.
+- [Traders API](/docs/trading/crypto-trades-api/traders-api/) for wallet-centric trade analytics.
+- [Price index algorithm](/docs/trading/crypto-price-api/price-index-algorithm/) explains how the outlier filter and ranking are computed.
+- [How to filter anomaly prices](/docs/usecases/how-to-filter-anomaly-prices/), a practical guide to the outlier ranking.
+- [How to generate Bitquery API credentials](/docs/authorization/how-to-generate/) for non-MCP clients.
+- [Bitquery Account](https://account.bitquery.io/) to sign up or manage your plan.
