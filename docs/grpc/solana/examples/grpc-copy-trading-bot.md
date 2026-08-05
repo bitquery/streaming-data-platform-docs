@@ -421,8 +421,8 @@ amountInRaw: (buyAmount / 100).toString()  // 1% of original
 
 ### External APIs
 
-- [Jupiter Swap API](https://station.jup.ag/docs/apis/swap-api)
-- [Solana Web3.js](https://solana-labs.github.io/solana-web3.js/)
+- [Jupiter Swap API](https://dev.jup.ag/docs/swap/)
+- [Solana Web3.js](https://solana-foundation.github.io/solana-web3.js/)
 - [Solana RPC](https://docs.solana.com/api/http)
 
 ### Get Started

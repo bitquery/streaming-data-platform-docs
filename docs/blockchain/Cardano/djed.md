@@ -264,5 +264,4 @@ Combine this with the "received" query above to reconstruct a wallet's complete 
 - [Cardano Inputs and Outputs API](/docs/blockchain/Cardano/inputs-outputs) — full UTXO query reference
 - [Cardano Coinpath API](/docs/blockchain/Cardano/coinpath) — multi-hop fund tracing
 - [Djed official site](https://djed.xyz)
-- [Djed app (mint / redeem UI)](https://app.djed.xyz/)
 - [Djed launch announcement on COTI Medium](https://medium.com/cotinetwork/a-new-era-for-stablecoins-begins-djed-is-live-on-mainnet-55971971f2a8)

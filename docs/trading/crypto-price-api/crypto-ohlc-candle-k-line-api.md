@@ -1125,7 +1125,7 @@ Our OHLC API supports all major blockchains:
 - **Documentation**: [Crypto Price API Docs](/docs/trading/crypto-price-api/introduction/)
 - **IDE**: [Bitquery IDE](https://ide.bitquery.io)
 - **Community**: [Discord](https://discord.gg/bitquery)
-- **Support**: [Contact Support](https://bitquery.io/contact)
+- **Support**: [Contact Support](https://support.bitquery.io)
 
 ---
 

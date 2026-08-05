@@ -14,7 +14,7 @@ Bitquery provides comprehensive real-time and historical data APIs and Streams f
 
 ## Raydium CLMM API Guide
 
-In this section we will see how to get data on Raydium CLMM trades in real-time. According to the official docs available [here](https://docs.raydium.io/raydium/liquidity-providers/providing-concentrated-liquidity-clmm/intro-on-concentrated-liquidity),
+In this section we will see how to get data on Raydium CLMM trades in real-time. According to the official docs available [here](https://docs.raydium.io/products/clmm),
 
 "Concentrated Liquidity Market Maker (CLMM) pools allow liquidity providers to select a specific price range at which liquidity is active for trades within a pool. "
 

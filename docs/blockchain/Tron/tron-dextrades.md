@@ -305,7 +305,7 @@ You can try the query [here](https://ide.bitquery.io/top-gainers_1).
 
 ![image](https://github.com/user-attachments/assets/59eae28e-bfdd-42ea-b942-fd0c9facf583)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/tron).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/tron).
 
 ## Get Top bought tokens on Tron Network
 
@@ -339,11 +339,11 @@ You can try the query [here](https://ide.bitquery.io/top-bought).
 
 </details>
 
-Arranged in the descending order of `bought - sold` on [DEXrabbit](https://dexrabbit.com/tron).
+Arranged in the descending order of `bought - sold` on [DEXrabbit](https://dexrabbit.bitquery.io/tron).
 
 ![image](https://github.com/user-attachments/assets/e3dcd6e7-7ee8-469b-a2ee-de1a3ce63e78)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/tron).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/tron).
 
 ## Get Top sold tokens on Tron Network
 
@@ -377,11 +377,11 @@ You can try the query [here](https://ide.bitquery.io/top-sold).
 
 </details>
 
-Arranged in the descending order of `sold - bought` on [DEXrabbit](https://dexrabbit.com/tron).
+Arranged in the descending order of `sold - bought` on [DEXrabbit](https://dexrabbit.bitquery.io/tron).
 
 ![image](https://github.com/user-attachments/assets/fc1e4ae8-8ef9-41c8-bf08-175000cac870)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/tron).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/tron).
 
 ## Get OHLC data of a token on Tron Network
 
@@ -421,7 +421,7 @@ query tradingViewPairs($token: String, $base: String) {
 
 ![image](https://github.com/user-attachments/assets/5ed90e34-a6ed-4c9b-a458-30d81a19d9f1)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TJ9mxWPmQSJswqMakEehFWcAntg73odiAq/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/tron/pair/TJ9mxWPmQSJswqMakEehFWcAntg73odiAq/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR).
 
 ## Get Latest Trades of a token on Tron Network
 
@@ -480,7 +480,7 @@ query LatestTrades($token: String, $base: String) {
 
 ![image](https://github.com/user-attachments/assets/af073bde-0e9e-45cf-8d27-bd9176d7bf73)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TJ9mxWPmQSJswqMakEehFWcAntg73odiAq/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR#pair_latest_trades).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/tron/pair/TJ9mxWPmQSJswqMakEehFWcAntg73odiAq/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR#pair_latest_trades).
 
 ## Get Top Traders of a token on Tron Network
 
@@ -522,7 +522,7 @@ query TopTraders($token: String, $base: String) {
 
 ![image](https://github.com/user-attachments/assets/f40658bd-aa9f-4c32-bcf3-792c098ea66e)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TSig7sWzEL2K83mkJMQtbyPpiVSbR6pZnb/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR#pair_top_traders).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/tron/pair/TSig7sWzEL2K83mkJMQtbyPpiVSbR6pZnb/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR#pair_top_traders).
 
 ## Get Top Buyers of a token on Tron Network
 
@@ -638,7 +638,7 @@ query ($token: String, $base: String, $time_10min_ago: DateTime, $time_1h_ago: D
 
 ![image](https://github.com/user-attachments/assets/cf2e2b29-8a15-41d1-bbef-41339fd41f60)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/pair/TSig7sWzEL2K83mkJMQtbyPpiVSbR6pZnb/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR#pair_dex_list).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/tron/pair/TSig7sWzEL2K83mkJMQtbyPpiVSbR6pZnb/TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR#pair_dex_list).
 
 ## Get All DEXs info on Tron network
 
@@ -669,7 +669,7 @@ query DexMarkets {
 
 ![image](https://github.com/user-attachments/assets/01287a30-53e1-4ffa-b5fc-828009282ac5)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/dex_market).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/tron/dex_market).
 
 ## Get Top Traders on Tron network
 
@@ -699,7 +699,7 @@ query DexMarkets {
 
 ![image](https://github.com/user-attachments/assets/1184d54f-47db-428f-8f71-cd0c591a310b)
 
-You can check the data here on [DEXrabbit](https://dexrabbit.com/tron/trader).
+You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/tron/trader).
 
 ## Subscribe to Latest Price of a Token in Real-time
 
