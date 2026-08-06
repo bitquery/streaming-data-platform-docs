@@ -24,13 +24,19 @@ Every GraphQL cube is served from one or more datasets, selected with the `datas
 
 **Availability differs by chain and by cube.** Selecting a dataset a chain doesn't support surfaces a ClickHouse error such as `no table can query <Cube> ... consider use realtime dataset`. That's not a bug — it means the archive/combined table for that cube isn't deployed on that chain. See the [dataset reference](/docs/graphql/dataset/realtime/) and the [Early Access Program datasets](/docs/graphql/dataset/EAP/) for details.
 
-:::caution `combined` is not available everywhere, and does not always fail cleanly
-Two cases to know about before you rely on `combined`:
+:::caution `combined` availability — re-measured 6 August 2026
+A July 2026 measurement previously reported here that EVM `Events`/`Calls` and every Solana cube returned a raw ClickHouse **500** on `dataset: combined`. Re-tested on 6 August 2026 against `streaming.bitquery.io/graphql`, that is no longer the case:
 
-- **Solana** — every `Solana(dataset: combined)` cube tested returns a ClickHouse **500**, on both the `/graphql` and `/eap` endpoints. Use `realtime` for recent data and `archive` for history until this is resolved.
-- **EVM `Events` and `Calls`** — also return a 500 on `combined`, while `Transfers`, `Transactions`, `Blocks` and the DEX cubes work.
+- **EVM `Events` and `Calls` now work on `combined`** — verified on Ethereum, BSC, Base, Arbitrum and Robinhood (all five networks returned decoded rows). `combined` also carries the realtime head that `archive` lacks: at measurement time the newest `archive` event trailed the chain head by ~45 minutes on Ethereum and ~17 minutes on Robinhood, while `combined` matched `realtime` on both.
+- **Solana `combined` works where the cube has an archive** — `DEXTradeByTokens(dataset: combined)` returned rows and stitched in the realtime head (`archive` alone trailed it by ~13 hours). Realtime-only Solana cubes (`DEXTrades`, `Transfers`, `BalanceUpdates`, …) fail on `combined` with the clean `no table can query … consider use realtime dataset` message — for deep Solana transfer history use the [v1 API](https://docs.bitquery.io/v1/) or S3 (see the matrix below). No raw 500s were observed anywhere in the re-test.
 
-Where a dataset is genuinely undeployed you get the clean `no table can query …` message above. A raw 500 is a different thing. If you hit one, re-run the same query on `archive` before treating it as an outage.
+Three gotchas, measured the same day:
+
+- **Field selection can break stitched cubes.** Selecting `Block { Slot }` on `Solana(dataset: combined) { DEXTradeByTokens }` errors with `no candidate table can serve: [Block_Slot]` — the archive side is time-grained, so select `Block { Time }` instead.
+- **Unbounded full-history aggregations can time out on `combined`.** A full-range min/max of `Block_Time` over Ethereum `Events` on `combined` hit the gateway timeout (HTTP 502 after ~180 s); the same scan completed on `archive`. Bound the range with a `Block: {Time: {since: …}}` filter.
+- **`Log.Signature.SignatureHash` filters are realtime-only on Robinhood.** The same `Events` query filtered by `SignatureHash` returns rows on `realtime`, but `archive` answers `no archive or API tables` and `combined` answers `no data available yet` — even though unfiltered `Events` works on all three datasets there. Other chains were not re-tested for this filter.
+
+Where a dataset is genuinely undeployed you get the clean `no table can query …` message above — re-run the query on `archive` or `realtime` rather than treating it as an outage.
 :::
 
 :::tip Measure your own window
@@ -69,7 +75,7 @@ Windows are expressed as rolling ranges, not fixed dates, so they stay correct o
 | Transactions | ✅ | ✅ full history | ✅ | |
 | Balances | ✅ | ✅ | — | Query at a block/date for point-in-time balances. |
 | Holders | ✅ | ✅ all v2 EVM chains | — | The Holders API is available on all v2 EVM chains. |
-| Calls & Events | ✅ **~24 h** | ~3 months (Ethereum: full history) | ✅ | ~3 months on all EVM chains **except Ethereum**, which keeps full history. Older data on any chain (including Ethereum) via S3 export. `combined` currently 500s on these two cubes — use `archive`. |
+| Calls & Events | ✅ **~24 h** | ~3 months (Ethereum: full history) | ✅ | ~3 months on all EVM chains **except Ethereum**, which keeps full history. Older data on any chain (including Ethereum) via S3 export. `combined` works on these cubes (re-verified 6 Aug 2026 on eth, bsc, base, arbitrum, robinhood) and includes the realtime head that `archive` lags behind. |
 | Mempool | ✅ (stream) | — | — | Pending-tx data is realtime only. |
 
 ### Solana
@@ -79,7 +85,7 @@ Windows are expressed as rolling ranges, not fixed dates, so they stay correct o
 | `DEXTradeByTokens` | ✅ **~7 days** | Since mid-2024 (`archive`) | ✅ | The long-retention trade cube. Prefer it for anything beyond a few hours. |
 | `DEXTrades` | ✅ **~12 hours** | — | ✅ | Same trades as above, far shorter window. See the note below. |
 | OHLC / price aggregates | ✅ | Minute-level since October 2024 | ✅ (trading topics) | Aggregated candles go back much further than raw trades. |
-| `Transfers` | ✅ **~12 hours** | via S3 | ✅ | Deep history via S3 export. |
+| `Transfers` | ✅ **~12 hours** | v1 API / S3 | ✅ | No v2 archive, but **full history is on the [v1 API](https://docs.bitquery.io/v1/)** (`graphql.bitquery.io`, `solana { transfers }`) — verified 6 Aug 2026 back to June 2020 and current through the same day. S3 export also available. |
 | `Instructions` | ✅ **~12 hours** | — | ✅ | Deep historical instruction lookup by signature is not available via API. |
 | `InstructionBalanceUpdates` | ✅ **~12 hours** | — | ✅ | |
 | `BalanceUpdates` | ✅ **~7 days** | — | ✅ | Solana has no `Balances` cube; balance changes are queried here. |
@@ -130,8 +136,8 @@ Contact [sales@bitquery.io](mailto:sales@bitquery.io) for custom export ranges.
 <FAQ
   items={[
     { q: "How far back does Solana DEX trade data go?", a: "It depends which cube you ask. Solana.DEXTrades keeps roughly the last 12 hours on realtime, while Solana.DEXTradeByTokens keeps roughly 7 days and reaches back to mid-2024 on archive — the same trades, very different depth. The cross-chain Trading.Trades cube keeps about 30 days. OHLC/price aggregates go back further still. For older raw trades, use a cloud/S3 export." },
-    { q: "Why does my query return empty results for old dates?", a: "Usually the date range is outside the retention window for that cube/dataset, or the cube isn't deployed on that chain's archive. Realtime does not error when you ask beyond its window — it silently returns fewer rows, so a chart just starts late. Check the coverage matrix above and switch to archive for history. On Solana use archive rather than combined, which currently fails." },
-    { q: "What is the difference between realtime, archive and combined datasets?", a: "realtime is the most recent data — roughly 12 hours on Solana raw cubes, about a day on EVM Events/Calls and a few days on EVM Transfers and DEX cubes, and about 2 days on Tron. archive is deep history. combined merges both, but it is not available everywhere: it currently returns a 500 on all Solana cubes and on EVM Events and Calls. Availability differs per chain and per cube." },
+    { q: "Why does my query return empty results for old dates?", a: "Usually the date range is outside the retention window for that cube/dataset, or the cube isn't deployed on that chain's archive. Realtime does not error when you ask beyond its window — it silently returns fewer rows, so a chart just starts late. Check the coverage matrix above and switch to archive for history. On Solana, combined only works for cubes that have an archive (such as DEXTradeByTokens); realtime-only cubes like Transfers error on combined with a clean no-table message — use realtime for recent data, and the v1 API (graphql.bitquery.io) or S3 for deep Solana transfer history." },
+    { q: "What is the difference between realtime, archive and combined datasets?", a: "realtime is the most recent data — roughly 12 hours on Solana raw cubes, about a day on EVM Events/Calls and a few days on EVM Transfers and DEX cubes, and about 2 days on Tron. archive is deep history. combined merges both and is fresher than archive alone. As of a 6 August 2026 re-measurement, combined works on EVM cubes including Events and Calls (verified on Ethereum, BSC, Base, Arbitrum and Robinhood) and on Solana cubes that have an archive, such as DEXTradeByTokens; Solana cubes without an archive error on combined with a clean no-table message. Availability still differs per chain and per cube." },
     { q: "Does Kafka include historical data?", a: "No. Kafka streams realtime data plus a few hours of backfill. For history, use GraphQL (within retention) or a cloud/S3 export." },
     { q: "How do I get data older than the API retention window?", a: "Use a cloud/S3 Parquet export, or an enterprise historical export. See the Cloud datasets page and contact sales for custom ranges." },
   ]}
