@@ -65,7 +65,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 
 Most launchpads (Flap.sh, Bags.fm, pump.fun-style venues) run trades through a **custom bonding-curve contract**, then emit a **graduation event** when the token migrates to a real DEX pool.
 
-**Pools.trade does not work that way.** Every launch immediately creates a **real Uniswap v4 pool** in the same transaction as the token mint. There is no separate bonding-curve AMM and no migration step.
+**Pools.trade does not work that way.** Every launch gets a **real Uniswap v4 pool** at launch — usually created in the same transaction as the token mint, occasionally in an immediate follow-up transaction on the original entry path. There is no separate bonding-curve AMM and no migration step.
 
 | Property | Value |
 | --- | --- |
@@ -73,7 +73,7 @@ Most launchpads (Flap.sh, Bags.fm, pump.fun-style venues) run trades through a *
 | AMM | **Uniswap v4** (`Protocol: uniswap_v4`) |
 | Pool quote currency | **Native ETH** (`currency0` = `0x000…000`) |
 | Pool fee | `2500` (0.25%) |
-| Tick spacing | `25` |
+| Tick spacing | `25` (current path) or `60` (original path) |
 | Hooks | **None** (`hooks` = `0x000…000`) |
 | Launch supply | `1000000000` (1 billion, decimal-normalized) |
 
@@ -88,7 +88,7 @@ The practical consequences for anyone building on this data:
 | Mode | UI label | Mechanism | Graduation target |
 | --- | --- | --- | --- |
 | **Curve launch** | *(default)* | Token + v4 pool created instantly; price discovered by trading | **$50,000 FDV** |
-| **Crowd Launch** | `Crowd Launch` | A **continuous clearing auction (CCA)** runs first in its own per-token contract, then the pool opens | ~5 ETH-denominated raise |
+| **Crowd Launch** | `Crowd Launch` | A **continuous clearing auction (CCA)** runs first in its own per-token contract, then the pool opens | ≈$5,000-equivalent raise (platform-reported); auctions routinely oversubscribe far past it |
 
 Crowd Launches run in a **fixed ~4-hour window** and can be *oversubscribed*. Each auction gets its **own contract address**. See [Crowd Launch auctions](#crowd-launch-cca-auctions).
 
@@ -101,15 +101,19 @@ Crowd Launches run in a **fixed ~4-hour window** and can be *oversubscribed*. Ea
 | **Launch entry (current)** | `0x0000ffffbe8efe702c8703ae3477ff5de3d319c0` | Live since the 5 Aug public launch |
 | **Launch entry (original)** | `0x00004c4ccc709ef590f7c81102c0689f0263d4e9` | Live since 8 Jul; minted FRONG, POOLS — **still active** |
 | **Token factory** | `0x000000e200088d55c39a11f609e5f667729ad49b` | Name, symbol, description, image |
-| **Launchpad (primary)** | `0x23f8209572b4a1c2ad88a42749e830791fb027f1` | `TokenLaunched` + v4 `PoolKey` |
-| **Launchpad (secondary)** | `0xad44d55e7f8337c3ce113fbb591486e85be104b2` | Same ABI, lower volume |
+| **Launchpad (current path)** | `0x23f8209572b4a1c2ad88a42749e830791fb027f1` | `TokenLaunched` + v4 `PoolKey`; tickSpacing 25 |
+| **Launchpad (current path, alt)** | `0xad44d55e7f8337c3ce113fbb591486e85be104b2` | Same ABI, lower volume; tickSpacing 25 |
+| **Launchpad (original path)** | `0xce57498d3474dcc244dfb6710ffbe6d4441cd2b2` | Same ABI; tickSpacing 60 |
+| **Launchpad (original path, alt)** | `0x60d73b21cdf2ea846ab3d58699bbbb8f29d72491` | Same ABI; tickSpacing 60 |
+| **CCA auction factory** | `0x000000001f26a0044baa66024e7b6599c61963f8` | Emits `AuctionCreated` per Crowd Launch |
+| **Liquidity initializer registry** | `0x05d552391067389ee44fec3924157ed33f976000` | Emits `InitializerCreated` |
 | **Uniswap v4 PoolManager** | `0x8366a39cc670b4001a1121b8f6a443a643e40951` | Shared singleton — **not** pools.trade-only |
 | **CCA auction** | one per Crowd Launch | e.g. `0xD10dc5f79F95E953e710F1eDeBddE0baD2e8fed8` |
 | **USDG** | `0x5fc5360d0400a0fd4f2af552add042d716f1d168` | Secondary quote token |
 | **WETH** | `0x0bd7d308f8e1639fab988df18a8011f41eacad73` | Secondary quote token |
 
 :::caution There are TWO entry contracts — filter on both
-pools.trade ran on `0x00004c4c…` from 8 July before `0x0000ffff…` took over at the public launch, **and the original contract still processes hundreds of launches per day**. On 5 August the split was 6,907 (new) + 4,530 (original) = **11,437 launches**. Both emit byte-identical events (`TokenCreated`, `TokenDistributed`), so every launch filter in this guide uses `in:` with both addresses. Filtering only the new one silently drops ~40% of launches — including FRONG and POOLS, the two largest tokens on the platform.
+pools.trade ran on `0x00004c4c…` from 8 July before `0x0000ffff…` took over at the public launch, **and the original contract still processes hundreds of launches per day**. On 5 August the split was 6,907 (new) + 4,530 (original) = **11,437 launches**. Both emit byte-identical events (`TokenCreated`, `TokenDistributed`), so every launch filter in this guide uses `in:` with both addresses. Filtering only the new one dropped ~40% of 5 August's launches (the split varies day to day) — and misses FRONG and POOLS, the two largest tokens on the platform.
 :::
 
 :::caution The v4 PoolManager is not a pools.trade filter
@@ -136,6 +140,9 @@ pools.trade ran on `0x00004c4c…` from 8 July before `0x0000ffff…` took over 
 | `TickInitialized` | CCA auction | ❌ Raw |
 | `NextActiveTickUpdated` | CCA auction | ❌ Raw |
 | `AuctionStepRecorded` | CCA auction | ❌ Raw |
+| `TokensReceived` | CCA auction | ❌ Raw |
+| `AuctionCreated` | CCA auction factory | ❌ Raw |
+| `InitializerCreated` | initializer registry | ❌ Raw |
 
 ### topic0 reference for the raw events
 
@@ -150,9 +157,16 @@ Pass these to `Log: {Signature: {SignatureHash: {is: "…"}}}` — **without** a
 # factory — 0x000000e200088d55c39a11f609e5f667729ad49b
 4ef8284ecf42d4cd19686572ffd87f630858c82398911e776cb831de35eddbf4  TokenCreated(address,(string,string,string,bytes))
 
-# launchpad — 0x23f8209572b4a1c2ad88a42749e830791fb027f1
+# launchpads — current path 0x23f82095…27f1 / 0xad44d55e…04b2 (tickSpacing 25)
+#              original path 0xce57498d…d2b2 / 0x60d73b21…2491 (tickSpacing 60)
 3b3d2bafdcae274a232217e1f80ee4305d3af6aa25c8b14b1681bd68d18042a4  TokenLaunched(bytes32,address,address,(address,address,uint24,int24,address))
 0afd26d7f0833a451173acef122d058906aa7708ceb6f67ea7471a649d88b44b  DistributionInitialized(address,address,uint256)
+
+# CCA auction factory — 0x000000001f26a0044baa66024e7b6599c61963f8
+7ede475fad18ccf0039f2b956c4d43a8b4ed0853de4daaa8ae25299f331ae3b9  AuctionCreated(address,address,uint256,bytes)
+
+# liquidity initializer registry — 0x05d552391067389ee44fec3924157ed33f976000
+6d759545eb439f07e70f45431d6339af7a4f1ffef06d43e8ddf47fdb0799708c  InitializerCreated(address,(address,address,uint64,uint128,address,address,(uint24,int24,address),bytes,bytes))
 
 # CCA auction — one contract per Crowd Launch
 650baad5cd8ca09b8f580be220fa04ce2ba905a041f764b6a3fe2c848eb70540  BidSubmitted(uint256,address,uint256,uint128)
@@ -161,6 +175,7 @@ f1e4b6d7d0d7c5deb6393a39862d66a2f2ecb034f3283a8a597f9bf0c36f76fa  CheckpointUpda
 7fdd20e2dbf90ff60a7d9be5ad62f1ec6d9d9cba8b36174a3839cafd059f0958  TickInitialized(uint256)
 b9a86892440ed5515518351623ecfc523d283b21e92f1505e533ef26137be5b0  NextActiveTickUpdated(uint256)
 6863f2b489f9186bf89231dc73aa0e9836f536b9ddb0f708f74260ed3160f297  AuctionStepRecorded(uint256,uint256,uint24)
+468160b6769cb8abc9324bc14fe70ee0ce87f1e92087186c6ae22a964a04c572  TokensReceived(uint128)
 ```
 
 For reference, the one **decoded** launch event is `TokenCreated(address)`, topic0 `2e2b3f61b70d2d131b2a807371103cc98d51adcaa5e9a8f9c32658ad8426e74e` — filter it by `Log.Signature.Name` instead.
@@ -295,7 +310,7 @@ subscription {
 The mint-transfer pattern only catches launches where the entry contract is the transaction target. Tokens launched **through third-party routers or inside contract-creation transactions** (a measurable share — including several top-volume tokens) have a different `Transaction.To`. The [event-based pattern above](#latest-poolstrade-launches) filters on the **emitter** (`LogHeader.Address`) and catches every launch regardless of how it was routed — treat it as the source of truth and the transfer stream as the convenient enriched feed.
 :::
 
-The same query works as a one-shot `query` with `limit` and `orderBy` for backfills.
+The same query works as a one-shot `query` with `limit` and `orderBy` for backfills — add `dataset: combined` there to reach past realtime retention.
 
 :::note Amounts are decimal-normalized
 `Transfer.Amount` is already adjusted for the token's `Decimals`, so the launch mint shows as `1000000000` — 1 billion whole tokens, not the raw on-chain integer. Add `Amount: {eq: "1000000000"}` to the filter if you want to exclude any non-launch mints.
@@ -434,7 +449,12 @@ image       ipfs://bafkreifh4km3huz6323y3tptlhsn6252q5atgd7zoqurko7kog5bcqs4
             SignatureHash: {is: "3b3d2bafdcae274a232217e1f80ee4305d3af6aa25c8b14b1681bd68d18042a4"}
           }
         }
-        LogHeader: {Address: {is: "0x23f8209572b4a1c2ad88a42749e830791fb027f1"}}
+        LogHeader: {Address: {in: [
+          "0x23f8209572b4a1c2ad88a42749e830791fb027f1",
+          "0xad44d55e7f8337c3ce113fbb591486e85be104b2",
+          "0xce57498d3474dcc244dfb6710ffbe6d4441cd2b2",
+          "0x60d73b21cdf2ea846ab3d58699bbbb8f29d72491"
+        ]}}
       }
     ) {
       Block { Time }
@@ -452,11 +472,11 @@ image       ipfs://bafkreifh4km3huz6323y3tptlhsn6252q5atgd7zoqurko7kog5bcqs4
 | 0 | `currency0` | `0x000…000` (native ETH) |
 | 1 | `currency1` | the launched token |
 | 2 | `fee` | `2500` |
-| 3 | `tickSpacing` | `25` |
+| 3 | `tickSpacing` | `25` (current path) / `60` (original path) |
 | 4 | `hooks` | `0x000…000` |
 
-:::tip Distinguishing pools.trade from other Robinhood launchpads
-Other launchpads on Robinhood emit an **identically-named `TokenLaunched`** event. They are distinguishable by `tickSpacing`: pools.trade uses **25**, while `0xce57498d3474dcc244dfb6710ffbe6d4441cd2b2` and `0x60d73b21cdf2ea846ab3d58699bbbb8f29d72491` use **60**. Always constrain `LogHeader.Address` to the pools.trade launchpad contracts.
+:::tip All four launchpad emitters are pools.trade's own
+`TokenLaunched` fires from four contracts, and **all four are pools.trade infrastructure**: `0x23f82095…`/`0xad44d55e…` serve the current entry path (tickSpacing **25**), while `0xce57498d…`/`0x60d73b21…` serve the original path (tickSpacing **60** — verified: their tokens are listed live on pools.trade, and FRONG's own pool is a tickSpacing-60 pool). Constrain `LogHeader.Address` to these four; the `tickSpacing` value tells you which launch path a token used, not whether it is pools.trade.
 :::
 
 ### Decoded pool creation (`Initialize`)
@@ -727,6 +747,33 @@ When `HasPreBalance` is `false`, `PreBalance` reads `0` — meaning "unknown", n
 A Crowd Launch runs a **continuous clearing auction** in its own contract for ~4 hours before the pool opens. Bidders submit into discrete **price ticks**; the clearing price ratchets up as the book fills, and the auction can end **oversubscribed**.
 
 All auction events are **raw**, so query them by topic0. Because each auction has its own contract, filtering on `SignatureHash` alone gives you **every auction on the network at once** — which is usually what you want.
+
+### Detect new Crowd Launch auctions
+
+Every Crowd Launch deploys its auction through the **auction factory** `0x000000001f26a0044baa66024e7b6599c61963f8`, which emits `AuctionCreated(address,address,uint256,bytes)`. Stream it to learn each new auction's contract address the moment it exists — then point the bid and clearing-price queries below at that address:
+
+```graphql
+subscription {
+  EVM(network: robinhood) {
+    Events(
+      where: {
+        LogHeader: {Address: {is: "0x000000001f26a0044baa66024e7b6599c61963f8"}}
+        Log: {
+          Signature: {
+            SignatureHash: {is: "7ede475fad18ccf0039f2b956c4d43a8b4ed0853de4daaa8ae25299f331ae3b9"}
+          }
+        }
+      }
+    ) {
+      Block { Time }
+      Transaction { Hash From }
+      LogHeader { Address Data }
+    }
+  }
+}
+```
+
+The launch transaction also contains the token's mint, the entry contract's `TokenCreated`, and the auction's first `TickInitialized` / `ClearingPriceUpdated` events, so one transaction hash links token, creator, and auction contract.
 
 ### Every bid across all live auctions
 
