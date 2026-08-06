@@ -126,27 +126,65 @@ pools.trade ran on `0x00004c4c…` from 8 July before `0x0000ffff…` took over 
 
 `Log.Signature.Name` is populated only for events Bitquery has an ABI for. On pools.trade, **one launch event is decoded and the rest are raw** — including the entire Crowd Launch auction. Raw events are still fully queryable by their `SignatureHash` (topic0).
 
-| Event | Emitter | Decoded? |
-| --- | --- | --- |
-| `TokenCreated(address)` | entry | ✅ **Yes** |
-| `Initialize` / `ModifyLiquidity` / `Swap` | v4 PoolManager | ✅ Yes |
-| `TokenDistributed` | entry | ❌ Raw |
-| `TokenCreated` *(metadata overload)* | factory | ❌ Raw |
-| `TokenLaunched` | launchpad | ❌ Raw |
-| `DistributionInitialized` | launchpad | ❌ Raw |
-| `BidSubmitted` | CCA auction | ❌ Raw |
-| `ClearingPriceUpdated` | CCA auction | ❌ Raw |
-| `CheckpointUpdated` | CCA auction | ❌ Raw |
-| `TickInitialized` | CCA auction | ❌ Raw |
-| `NextActiveTickUpdated` | CCA auction | ❌ Raw |
-| `AuctionStepRecorded` | CCA auction | ❌ Raw |
-| `TokensReceived` | CCA auction | ❌ Raw |
-| `AuctionCreated` | CCA auction factory | ❌ Raw |
-| `InitializerCreated` | initializer registry | ❌ Raw |
+| Event | Emitter | Decoded? | topic0 (`SignatureHash`) |
+| --- | --- | --- | --- |
+| `TokenCreated(address)` | entry | ✅ **Yes** — filter by `Name` | `2e2b3f61b70d2d131b2a807371103cc98d51adcaa5e9a8f9c32658ad8426e74e` |
+| `Initialize` / `ModifyLiquidity` / `Swap` | v4 PoolManager | ✅ Yes — filter by `Name` | — |
+| `TokenDistributed` | entry | ❌ Raw | `67226bacccef969dab310a9e55dc1cf821363658e433fd330344f5cc00c79ac8` |
+| `TokenCreated` *(metadata overload)* | factory | ❌ Raw | `4ef8284ecf42d4cd19686572ffd87f630858c82398911e776cb831de35eddbf4` |
+| `TokenLaunched` | launchpad | ❌ Raw | `3b3d2bafdcae274a232217e1f80ee4305d3af6aa25c8b14b1681bd68d18042a4` |
+| `DistributionInitialized` | launchpad | ❌ Raw | `0afd26d7f0833a451173acef122d058906aa7708ceb6f67ea7471a649d88b44b` |
+| `BidSubmitted` | CCA auction | ❌ Raw | `650baad5cd8ca09b8f580be220fa04ce2ba905a041f764b6a3fe2c848eb70540` |
+| `ClearingPriceUpdated` | CCA auction | ❌ Raw | `30adbe996d7a69a21fdebcc1f8a46270bf6c22d505a7d872c1ab4767aa707609` |
+| `CheckpointUpdated` | CCA auction | ❌ Raw | `f1e4b6d7d0d7c5deb6393a39862d66a2f2ecb034f3283a8a597f9bf0c36f76fa` |
+| `TickInitialized` | CCA auction | ❌ Raw | `7fdd20e2dbf90ff60a7d9be5ad62f1ec6d9d9cba8b36174a3839cafd059f0958` |
+| `NextActiveTickUpdated` | CCA auction | ❌ Raw | `b9a86892440ed5515518351623ecfc523d283b21e92f1505e533ef26137be5b0` |
+| `AuctionStepRecorded` | CCA auction | ❌ Raw | `6863f2b489f9186bf89231dc73aa0e9836f536b9ddb0f708f74260ed3160f297` |
+| `TokensReceived` | CCA auction | ❌ Raw | `468160b6769cb8abc9324bc14fe70ee0ce87f1e92087186c6ae22a964a04c572` |
+| `AuctionCreated` | CCA auction factory | ❌ Raw | `7ede475fad18ccf0039f2b956c4d43a8b4ed0853de4daaa8ae25299f331ae3b9` |
+| `InitializerCreated` | initializer registry | ❌ Raw | `6d759545eb439f07e70f45431d6339af7a4f1ffef06d43e8ddf47fdb0799708c` |
 
-### topic0 reference for the raw events
+Every topic0 above was verified two ways: keccak-256 preimage match against its signature, and live occurrence on-chain (all 15 fired within the last 24 hours as of 6 Aug 2026).
 
-Pass these to `Log: {Signature: {SignatureHash: {is: "…"}}}` — **without** a `0x` prefix. Every hash below was verified by keccak-256 preimage match against its signature.
+### Querying a raw event by topic0
+
+Raw means Bitquery has no ABI for the event yet — `Arguments` comes back empty and `Log.Signature.Name` is blank. The event is still fully indexed: filter on the topic0 from the table (no `0x` prefix, realtime dataset only — see the note below) and you get every occurrence, with the undecoded payload in `LogHeader.Data`. This example queries `TokenDistributed` — the entry contract's distribution-complete event — but the shape is identical for **any** ❌ Raw row: swap the `SignatureHash` value.
+
+```graphql
+{
+  EVM(network: robinhood) {
+    Events(
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+      where: {
+        Log: {
+          Signature: {
+            SignatureHash: {is: "67226bacccef969dab310a9e55dc1cf821363658e433fd330344f5cc00c79ac8"}
+          }
+        }
+        LogHeader: {Address: {in: [
+          "0x0000ffffbe8efe702c8703ae3477ff5de3d319c0",
+          "0x00004c4ccc709ef590f7c81102c0689f0263d4e9"
+        ]}}
+      }
+    ) {
+      Block { Time Number }
+      Transaction { Hash From }
+      LogHeader { Address Data }
+      Log { Signature { SignatureHash } }
+    }
+  }
+}
+```
+
+Two things to know when reading the result:
+
+- **Indexed arguments live in the log's topics, not in `Data`.** `TokenDistributed(address,address,uint256)` indexes both addresses, so `LogHeader.Data` is a single 32-byte word — the `uint256` amount. To recover the token and recipient, join back through `Transaction.Hash` to the decoded `TokenCreated` event or the mint transfer in the same transaction.
+- **Drop the `LogHeader.Address` filter for per-token contracts.** CCA auction events fire from a fresh contract per Crowd Launch (1,200+ live already), so for those the topic0 filter alone is the right scope — it captures every auction at once, and `LogHeader.Address` tells you which auction each row came from.
+
+### Full signatures for client-side decoding
+
+The full signatures below (with argument types) are what you need to ABI-decode `LogHeader.Data` client-side, grouped by emitter address for copy-paste.
 
 ```text
 # entry contracts — 0x0000ffffbe8efe702c8703ae3477ff5de3d319c0 (current)
@@ -177,8 +215,6 @@ b9a86892440ed5515518351623ecfc523d283b21e92f1505e533ef26137be5b0  NextActiveTick
 6863f2b489f9186bf89231dc73aa0e9836f536b9ddb0f708f74260ed3160f297  AuctionStepRecorded(uint256,uint256,uint24)
 468160b6769cb8abc9324bc14fe70ee0ce87f1e92087186c6ae22a964a04c572  TokensReceived(uint128)
 ```
-
-For reference, the one **decoded** launch event is `TokenCreated(address)`, topic0 `2e2b3f61b70d2d131b2a807371103cc98d51adcaa5e9a8f9c32658ad8426e74e` — filter it by `Log.Signature.Name` instead.
 
 :::note `SignatureHash` filters need the realtime dataset
 Filtering by `Log: {Signature: {SignatureHash: …}}` is only served by the **realtime** dataset — `dataset: archive` returns `no archive or API tables found for cube Event`, and `dataset: combined` returns `no data available yet to query dataset combined`. Use `Log.Signature.Name` (decoded events) for archive/combined queries, and omit `dataset` for raw topic0 queries.
