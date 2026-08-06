@@ -836,6 +836,17 @@ html.plugin-pages .main-wrapper a:active {
   font-size: 0.9375em;
 }
 
+/* `display: table` above opts out of Docusaurus's default
+   `display: block; overflow: auto` on tables, so a table that cannot shrink to
+   the content column overflows it and bleeds under the table of contents.
+   Long unbreakable tokens in inline code — tx hashes, contract addresses, event
+   signatures — are the usual cause. `anywhere` (unlike `break-word`) shrinks the
+   min-content width, so such tables always fit instead of overflowing. */
+.theme-doc-markdown th code,
+.theme-doc-markdown td code {
+  overflow-wrap: anywhere;
+}
+
 .theme-doc-markdown th {
   font-weight: 600;
 }
