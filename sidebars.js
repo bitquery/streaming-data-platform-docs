@@ -389,6 +389,7 @@ const sidebars = {
           ],
         },
         "cubes/solana",
+        "cubes/address-labels-api",
       ],
     },
 
