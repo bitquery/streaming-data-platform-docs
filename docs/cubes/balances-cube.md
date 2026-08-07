@@ -248,7 +248,7 @@ If you need to know *why* a balance moved rather than *what it became*, reconstr
 
 ## Related
 
-- [Address Labels API](/docs/cubes/address-labels-api) — identify which of those addresses are exchanges, contracts, or known entities
+- [Address Labels API](/docs/labels/address-labels-api) — identify which of those addresses are exchanges, contracts, or known entities
 - [Balance Updates cube](/docs/cubes/balance-updates-cube) — per-change history and change attribution
 - [Transfers cube](/docs/cubes/transfers-cube) — the transfers that drive most balance changes
 - [Token Holders API (Ethereum)](/docs/blockchain/Ethereum/token-holders/token-holder-api) — worked `EVM.Holders` examples
