@@ -177,6 +177,8 @@ Raw means Bitquery has no ABI for the event yet — `Arguments` comes back empty
 }
 ```
 
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-raw-event-by-topic0)
+
 Two things to know when reading the result:
 
 - **Indexed arguments live in the log's topics, not in `Data`.** `TokenDistributed(address,address,uint256)` indexes both addresses, so `LogHeader.Data` is a single 32-byte word — the `uint256` amount. To recover the token and recipient, join back through `Transaction.Hash` to the decoded `TokenCreated` event or the mint transfer in the same transaction.
@@ -259,6 +261,8 @@ The decoded `TokenCreated` event on the two entry contracts is the cleanest laun
 }
 ```
 
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Latest-launches)
+
 The single argument `token` is the new token's contract address. `Transaction.From` is the creator wallet, and `LogHeader.Address` tells you which entry contract handled the launch.
 
 :::note This event is intentionally thin
@@ -294,6 +298,8 @@ subscription {
   }
 }
 ```
+
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Stream-new-launches)
 
 ### Stream launches with full token detail (mint transfers)
 
@@ -342,6 +348,8 @@ subscription {
 }
 ```
 
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Stream-launches-with-token-detail)
+
 :::caution `Transaction.To` misses indirect launches
 The mint-transfer pattern only catches launches where the entry contract is the transaction target. Tokens launched **through third-party routers or inside contract-creation transactions** (a measurable share — including several top-volume tokens) have a different `Transaction.To`. The [event-based pattern above](#latest-poolstrade-launches) filters on the **emitter** (`LogHeader.Address`) and catches every launch regardless of how it was routed — treat it as the source of truth and the transfer stream as the convenient enriched feed.
 :::
@@ -376,6 +384,8 @@ Grouping by `LogHeader.Address` too shows the split between the two entry contra
 }
 ```
 
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Launches-per-day)
+
 ### Most active token creators
 
 Useful for spotting spam-bot deployers — a single wallet can mint hundreds of tokens a day.
@@ -401,6 +411,8 @@ Useful for spotting spam-bot deployers — a single wallet can mint hundreds of 
   }
 }
 ```
+
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Most-active-token-creators)
 
 ---
 
@@ -431,6 +443,8 @@ Metadata splits across two sources. **Name, symbol, decimals, and contract** are
 }
 ```
 
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Token-name-symbol-decimals)
+
 `Transaction.From` on the mint is the creator wallet and `Block.Time` is the exact launch time — this works for any pools.trade token regardless of which entry contract or router launched it.
 
 The remaining two fields — the **description** and the **IPFS image URI** that the pools.trade UI renders — exist on-chain only in the factory's `TokenCreated(address, (string,string,string,bytes))` event. Bitquery does not decode it, so read `LogHeader.Data` and ABI-decode client-side.
@@ -456,6 +470,8 @@ The remaining two fields — the **description** and the **IPFS image URI** that
   }
 }
 ```
+
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Token-description-and-image)
 
 `LogHeader.Data` is standard ABI encoding: word 0 is the token address, words 1–5 are offsets into the tuple, and the dynamic `string` sections follow. Decoding a sample yields:
 
@@ -501,6 +517,8 @@ image       ipfs://bafkreifh4km3huz6323y3tptlhsn6252q5atgd7zoqurko7kog5bcqs4
 }
 ```
 
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-PoolKey-from-TokenLaunched)
+
 `LogHeader.Data` decodes as five 32-byte words:
 
 | Word | Field | Typical value |
@@ -545,6 +563,8 @@ The v4 PoolManager's `Initialize` **is** decoded, so you can read the same `Pool
   }
 }
 ```
+
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Pool-creation-Initialize)
 
 Returns `id` (poolId), `currency0`, `currency1`, `fee`, `tickSpacing`, `hooks`, `sqrtPriceX96`, `tick`.
 
@@ -600,6 +620,8 @@ Tokens also migrate onto other venues once liquid — the same token can show `u
 }
 ```
 
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Latest-trades-for-a-token)
+
 :::caution Deduplicate before summing USD volume
 On Robinhood v4, `Trading.Trades` returns **each trade leg roughly twice**, with the two copies differing only in the last decimals of `AmountsInUsd`. In a measured 300-row sample, 138 of 162 distinct legs appeared exactly twice — a **1.9× inflation factor**.
 
@@ -629,6 +651,8 @@ Note also that one user swap can fan out into **several routed legs** across ETH
   }
 }
 ```
+
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-OHLCV-price-candles)
 
 Change `Duration` to `60`, `300`, `900`, or `86400` for other candle sizes.
 
@@ -662,6 +686,8 @@ The two-step pattern: pass a token set harvested from `TokenCreated` into the `T
   }
 }
 ```
+
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Top-tokens-by-volume)
 
 :::note Keep per-interval metrics out of aggregations
 Selecting a per-row metric such as `Supply { MarketCap }` alongside `sum(of: Volume_Usd)` adds it as a grouping key, so you get one row **per interval** instead of one row per token. Drop it to get a clean per-token total.
@@ -708,6 +734,8 @@ Three realtime cubes carry data traders usually have to compute themselves. All 
 }
 ```
 
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Live-pool-liquidity)
+
 `AmountCurrencyA` / `AmountCurrencyAInUSD` is the ETH side of the pool (e.g. `141.2` ETH ≈ `$269,852` for FRONG); `AmountCurrencyB` is the token side. The token side's USD value reads `0` for unpriced meme tokens — value the pool from the ETH leg (double it for total TVL in a balanced price range).
 
 ### Per-swap slippage
@@ -737,6 +765,8 @@ Three realtime cubes carry data traders usually have to compute themselves. All 
   }
 }
 ```
+
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Per-swap-slippage)
 
 A stream of this filtered to `SlippageBasisPoints: {gt: 100}` is a ready-made "toxic fill" alert for a token's pool.
 
@@ -771,6 +801,8 @@ A stream of this filtered to `SlippageBasisPoints: {gt: 100}` is a ready-made "t
   }
 }
 ```
+
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Per-transaction-balance-changes)
 
 :::note Check `HasPreBalance`
 When `HasPreBalance` is `false`, `PreBalance` reads `0` — meaning "unknown", not "zero". Treat the delta as reliable only when `HasPreBalance` is `true`. `PostBalanceInUSD` is `0` for unpriced launch tokens.
@@ -809,6 +841,8 @@ subscription {
 }
 ```
 
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Stream-new-Crowd-Launch-auctions)
+
 The launch transaction also contains the token's mint, the entry contract's `TokenCreated`, and the auction's first `TickInitialized` / `ClearingPriceUpdated` events, so one transaction hash links token, creator, and auction contract.
 
 ### Every bid across all live auctions
@@ -834,6 +868,8 @@ The launch transaction also contains the token's mint, the entry contract's `Tok
   }
 }
 ```
+
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Crowd-Launch-bids)
 
 `LogHeader.Address` is the auction contract; `Transaction.From` is the bidder. `BidSubmitted(uint256 auctionId, address bidder, uint256, uint128)` has its first two parameters indexed, so `LogHeader.Data` holds the two remaining numeric fields (amount and tick/quantity).
 
@@ -862,6 +898,8 @@ The launch transaction also contains the token's mint, the entry contract's `Tok
 }
 ```
 
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Crowd-Launch-clearing-price)
+
 Swap the `SignatureHash` for any row in the [event reference](#event-reference) to follow tick initialization (`TickInitialized`), the moving book edge (`NextActiveTickUpdated`), or auction checkpoints (`CheckpointUpdated`, `AuctionStepRecorded`).
 
 :::note Prices are Q96 fixed-point
@@ -889,6 +927,8 @@ Clearing, floor, and tick-size prices are **Q96** values. Divide by `2**96` to g
   }
 }
 ```
+
+[▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Token-holders-and-supply)
 
 `dataset: combined` keeps balances current to the head block — on `archive` alone the top-holder balance measured ~11 minutes stale on an actively traded token.
 
