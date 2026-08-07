@@ -1,5 +1,7 @@
 ---
 title: "Address Labels API — Identify Crypto Wallets"
+sidebar_label: "Overview"
+sidebar_position: 1
 description: "Identify wallets and contracts with the Bitquery Address Labels API: exchange hot and cold wallets, deposit addresses, token contracts and clones, any chain."
 keywords:
   - address labels API

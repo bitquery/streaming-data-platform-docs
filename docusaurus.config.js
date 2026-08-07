@@ -198,6 +198,13 @@ const config = {
             to: "/docs/blockchain/Ethereum/token-holders/token-holder-api/",
             from: "/docs/examples/balances/tokenHolders-api/",
           },
+          // Labels moved out of the cubes section into their own top-level
+          // section. The cubes URL shipped in #236 and was live, so it keeps
+          // redirecting.
+          {
+            to: "/docs/labels/address-labels-api/",
+            from: "/docs/cubes/address-labels-api/",
+          },
           {
             to: "/docs/contribution-guidelines/",
             from: "/docs/contribution_guidelines/",

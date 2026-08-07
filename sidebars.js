@@ -389,7 +389,6 @@ const sidebars = {
           ],
         },
         "cubes/solana",
-        "cubes/address-labels-api",
       ],
     },
 
@@ -1071,6 +1070,17 @@ const sidebars = {
         "stablecoin-APIs/stablecoin-transfers-api",
         "stablecoin-APIs/usdt-api",
       ],
+    },
+    {
+      type: "category",
+      label: "Address Labels API",
+      link: {
+        type: "generated-index",
+        title: "Address Labels API",
+        description:
+          "Identify the real-world entity behind any wallet or contract address — exchange wallets, deposit addresses, token contracts, and issuer-blocked lists.",
+      },
+      items: ["labels/address-labels-api"],
     },
     {
       type: "category",
