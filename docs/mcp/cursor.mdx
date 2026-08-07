@@ -45,6 +45,6 @@ More detail: [MCP server overview](/docs/mcp/mcp-server/).
   items={[
     { q: "How do I add Bitquery MCP to Cursor?", a: "Add https://mcp.bitquery.io in Cursor MCP settings, or use mcp-remote in .cursor/mcp.json as shown on this page." },
     { q: "Which chains can I query through MCP?", a: "Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, and Tron — ask in plain English, no GraphQL required." },
-    { q: "Can I use an API token instead of OAuth?", a: "Yes for headless setups — append ?token=YOUR_TOKEN to the MCP URL. OAuth is safer for daily interactive use." },
+    { q: "Can I use an API token instead of OAuth?", a: "No. The Bitquery MCP server authenticates with OAuth 2.1 — Cursor opens a browser once on the first tool call, then caches and refreshes the token for you." },
   ]}
 />

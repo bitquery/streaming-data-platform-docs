@@ -26,7 +26,7 @@ Pick your runtime:
 | Cursor | `.cursor/mcp.json` with `mcp-remote` → `https://mcp.bitquery.io/mcp` |
 | Claude Code | `claude mcp add bitquery -- npx -y mcp-remote https://mcp.bitquery.io/mcp` |
 
-Sign in with a [Bitquery account](https://account.bitquery.io/) on first tool call. For headless servers, append `?token=YOUR_TOKEN` (see [MCP overview](/docs/mcp/mcp-server/#authentication-via-query-token-less-secure)).
+Sign in with a [Bitquery account](https://account.bitquery.io/) on first tool call. The client opens a browser once for OAuth 2.1, then caches and refreshes the token for you (see [MCP overview](/docs/mcp/mcp-server/#first-connection-and-permissions)).
 
 ## Step 2 — Discovery loop
 
