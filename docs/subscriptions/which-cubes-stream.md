@@ -55,6 +55,11 @@ guarantee.
 | `DEXTradeByTokens` | Streams | Moderate |
 | `Rewards` | Streams | Moderate |
 | `DEXOrders` | Streams | Low |
+| `PerpetualOrders` | Streams | Moderate |
+| `PerpetualFills` | Streams | Low |
+| `PerpetualPositions` | Streams | Low |
+| `PerpetualPrices` | Streams | Low |
+| `PerpetualMarketSummaries` | Streams | Low |
 | `Instructions` | **Filter required** | Very high |
 | `BalanceUpdates` | **Filter required** | Very high |
 | `InstructionBalanceUpdates` | **Filter required** | Very high |
