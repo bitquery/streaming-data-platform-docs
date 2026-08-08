@@ -7,7 +7,8 @@ description: "Query the Phoenix order book on Solana with Bitquery GraphQL: real
 :::info Looking for Phoenix **Perpetuals**?
 This page covers the Phoenix **spot** order book. For perpetual futures — orders, fills,
 positions, realized PnL, liquidations, funding, mark price and open interest — see the
-[**Phoenix Perpetuals API**](/docs/perpetuals/solana/phoenix-perpetuals-api).
+[**Phoenix Perpetuals API**](/docs/perpetuals/solana/phoenix-perpetuals-api), also
+available as a [Kafka protobuf stream](/docs/streams/protobuf/chains/Solana-perpetual-protobuf).
 :::
 
 :::tip Need real-time Phoenix data or anything from the last ~30 days?

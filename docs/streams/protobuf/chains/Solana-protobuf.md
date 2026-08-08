@@ -20,6 +20,10 @@ The Solana Protobuf Streams provide three main message types for different use c
 - `TokenBlockMessage`: Focused on token transfers and currency metadata
 - `DexParsedBlockMessage`: Specialized for DEX (Decentralized Exchange) activity
 
+Perpetual futures activity has its own topic, `solana.perpetual.proto`
+(`PerpetualBlockMessage`) — documented on the
+[Solana Perpetuals Stream](/docs/streams/protobuf/chains/Solana-perpetual-protobuf) page.
+
 ### Block-Level Data
 
 Each block in the stream includes a `BlockHeader` with fields such as:

@@ -39,6 +39,7 @@ Solana. Bitquery indexes it at event level into five cubes, each available as a 
 | **Quote currency**  | `PhUsd` — mint `PhUsd11YkbjSaWjFncfAAmatntsjx3MgDR9B6g1ks3A`, 6 decimals |
 | **Markets**         | Crypto majors and memecoins, US equities, commodities, pre-IPO names |
 | **Endpoints**       | `https://streaming.bitquery.io/graphql` and `…/eap`; streams via `wss://streaming.bitquery.io/graphql` |
+| **Kafka**           | Same data as protobuf on the [`solana.perpetual.proto` topic](/docs/streams/protobuf/chains/Solana-perpetual-protobuf) |
 
 ## Reading the data model
 

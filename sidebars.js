@@ -285,6 +285,7 @@ const sidebars = {
                     "streams/protobuf/chains/Bitcoin-protobuf",
                     "streams/protobuf/chains/EVM-protobuf",
                     "streams/protobuf/chains/Solana-protobuf",
+                    "streams/protobuf/chains/Solana-perpetual-protobuf",
                     "streams/protobuf/chains/Tron-protobuf",
                   ],
                 },

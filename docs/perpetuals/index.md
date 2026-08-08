@@ -37,6 +37,7 @@ queryable over HTTP **and** streamable over WebSocket — the same query text wo
 | **Cubes**     | `PerpetualOrders`, `PerpetualFills`, `PerpetualPositions`, `PerpetualPrices`, `PerpetualMarketSummaries` |
 | **Endpoints** | `https://streaming.bitquery.io/graphql` and `https://streaming.bitquery.io/eap`        |
 | **Streaming** | `wss://streaming.bitquery.io/graphql` — see [WebSocket docs](/docs/subscriptions/websockets) |
+| **Kafka**     | `solana.perpetual.proto` protobuf topic — see the [Solana Perpetuals Kafka Stream](/docs/streams/protobuf/chains/Solana-perpetual-protobuf) |
 | **Auth**      | [OAuth token](/docs/authorization/how-to-generate) as `Authorization: Bearer <token>`  |
 
 ## The five cubes
@@ -150,7 +151,7 @@ page — it documents every cube with working queries and streams.
   items={[
     { q: "What is the Bitquery Perp DEX API?", a: "It is a set of five GraphQL cubes — PerpetualOrders, PerpetualFills, PerpetualPositions, PerpetualPrices and PerpetualMarketSummaries — that expose event-level data from onchain perpetual futures DEXs. Each cube is available as an HTTP query for history and as a WebSocket subscription for live streaming." },
     { q: "Which perpetual DEXs are supported?", a: "Phoenix Perpetuals on Solana, the onchain perpetual futures exchange built by Ellipsis Labs, is currently indexed. Coverage expands over time; you can list the indexed venues at any moment by grouping any perpetual cube by the Exchange field." },
-    { q: "Can I stream perpetual futures data in real time?", a: "Yes. All five perpetual cubes exist under the GraphQL subscription root. Change the word query to subscription, drop the pagination arguments, and connect over wss://streaming.bitquery.io/graphql to receive rows as blocks are produced." },
+    { q: "Can I stream perpetual futures data in real time?", a: "Yes, two ways. All five perpetual cubes exist under the GraphQL subscription root — change the word query to subscription and connect over wss://streaming.bitquery.io/graphql. For the lowest-latency firehose, the same data is published as protobuf messages on the solana.perpetual.proto Kafka topic." },
     { q: "Can I get liquidation data for perpetuals?", a: "Yes. PerpetualPositions rows carry Liquidation, Liquidator, LiquidatedSize and LiquidatedQuote, and PerpetualFills marks forced fills with the same Liquidation flag. Filtering either cube on Liquidation true gives a historical liquidation record or a live liquidation feed." },
     { q: "Does the API provide open interest and funding data?", a: "Yes. PerpetualMarketSummaries carries OpenInterest along with mark price and the spot index per market. Funding settlements appear in PerpetualPositions as rows where the Funding field is non-zero and the position size is unchanged." },
     { q: "Are stock and commodity perpetuals included?", a: "Yes, where the venue lists them. The currently indexed venue trades perpetuals on US equities and commodities such as gold, silver and oil alongside crypto markets, and they are queried through exactly the same cubes and fields as crypto markets." },
