@@ -1084,6 +1084,15 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "Perp DEX Data",
+      link: {
+        type: "doc",
+        id: "perpetuals/index",
+      },
+      items: ["perpetuals/solana/phoenix-perpetuals-api"],
+    },
+    {
+      type: "category",
       label: "MCP",
       link: {
         type: "doc",

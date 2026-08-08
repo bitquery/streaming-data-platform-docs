@@ -35,6 +35,12 @@ import FAQ from "@site/src/components/FAQ";
 
 # AsterDEX API Documentation - Complete Guide to BNB Smart Chain Perpetual Futures Trading
 
+:::info Perp DEX data on other chains
+This page covers AsterDEX on BNB Smart Chain via decoded contract events. For dedicated
+perpetual-futures cubes — orders, fills, positions, PnL, liquidations, funding and open
+interest — see the [**Perp DEX API**](/docs/perpetuals/) section.
+:::
+
 ## Quick Start Guide
 
 ### Prerequisites for AsterDEX API Integration
