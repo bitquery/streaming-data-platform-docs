@@ -1,7 +1,7 @@
 ---
 title: "Solana Perpetuals Kafka Stream — solana.perpetual.proto"
 sidebar_label: "Solana Perpetuals Stream"
-description: "Consume Solana perpetual futures data over Kafka: orders, fills, positions, PnL, liquidations, prices and open interest as protobuf messages on solana.perpetual.proto."
+description: "Solana perpetual futures over Kafka: orders, fills, positions, PnL, liquidations, prices and open interest as protobuf on the solana.perpetual.proto topic."
 keywords:
   - solana perpetuals kafka
   - solana.perpetual.proto

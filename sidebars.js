@@ -1090,7 +1090,10 @@ const sidebars = {
         type: "doc",
         id: "perpetuals/index",
       },
-      items: ["perpetuals/solana/phoenix-perpetuals-api"],
+      items: [
+        "perpetuals/solana/phoenix-perpetuals-api",
+        "perpetuals/solana/perps-trader-cookbook",
+      ],
     },
     {
       type: "category",

@@ -145,7 +145,10 @@ subscription {
 - **Market-maker monitoring** — follow order lifecycle and AMM-vs-book fill share
 
 Start with the [Phoenix Perpetuals API](/docs/perpetuals/solana/phoenix-perpetuals-api)
-page — it documents every cube with working queries and streams.
+page — it documents every cube with working queries and streams. Then jump to the
+[Perps Trader Cookbook](/docs/perpetuals/solana/perps-trader-cookbook) for
+workflow-shaped recipes: copy-trading a wallet, trader win-rate report cards, top
+unrealized positions, whale fills, OHLC candles, open-interest and order-flow series.
 
 <FAQ
   items={[

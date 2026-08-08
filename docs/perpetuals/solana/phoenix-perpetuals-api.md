@@ -508,6 +508,10 @@ subscription {
 
 ## Ideas to build
 
+Worked, runnable versions of the recipes below — copy-trade feeds, trader report
+cards, unrealized-PnL rankings, OHLC candles, OI/basis series, order-flow pressure —
+live in the [Perps Trader Cookbook](/docs/perpetuals/solana/perps-trader-cookbook).
+
 - **Liquidation alerts** — the subscription above, pushed to Telegram/Discord.
 - **PnL leaderboard** — aggregate `RealizedPnl` by `Trader` over `PerpetualPositions`,
   excluding `TraderIsAmm: true`.
