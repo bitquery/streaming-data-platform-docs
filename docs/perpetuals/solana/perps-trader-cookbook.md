@@ -2,9 +2,11 @@
 title: "Solana Perps Trader Cookbook — Copy Trading, PnL & Signals"
 sidebar_label: "Trader Cookbook"
 sidebar_position: 3
-description: "Ready-to-run queries for Solana perps: copy-trade a wallet, rank traders by PnL and win rate, top unrealized positions, whale fills, OHLC candles, open interest and order-flow signals."
+description: "Ready-to-run Solana perps queries: copy-trade a wallet, rank traders by PnL and win rate, unrealized positions, whale fills, OHLC, open interest, order flow."
 keywords:
   - copy trading api solana
+  - crypto copy trading
+  - copy trading bot
   - solana perps signals
   - track perp trader wallet
   - perp trader pnl api
@@ -13,12 +15,14 @@ keywords:
   - whale trades solana
   - perps ohlc candles api
   - open interest chart api
-  - order flow imbalance api
+  - order flow imbalance
   - funding payments api
   - liquidation leaderboard
   - solana trading strategy data
   - perp dex analytics queries
 ---
+
+import FAQ from "@site/src/components/FAQ";
 
 # Solana Perps Trader Cookbook
 
@@ -41,8 +45,8 @@ Two rules apply to almost every recipe:
 
 ### Follow a trader's every fill, live
 
-Stream each execution of a wallet you follow — the copy-trade signal, including the
-position it produced:
+Stream each execution of a wallet you follow — the signal feed a copy-trading bot
+subscribes to, including the position each fill produced:
 
 ```graphql
 subscription {
@@ -353,3 +357,14 @@ Every `query` above becomes a live stream by switching to `subscription` and rem
 inherently query-shaped. Run them over Kafka instead with the
 [`solana.perpetual.proto` topic](/docs/streams/protobuf/chains/Solana-perpetual-protobuf)
 when you need the full firehose.
+
+<FAQ
+  items={[
+    { q: "How do I copy-trade a Solana perps wallet with an API?", a: "Subscribe to PerpetualFills filtered to that wallet's Trader address over wss://streaming.bitquery.io/graphql. Each fill arrives with side, execution price, size and the trader's resulting position, which is the signal feed a copy-trading bot acts on. Pair it with a PerpetualPositions snapshot to know their current open book before you start mirroring." },
+    { q: "How do I find profitable perp traders to follow?", a: "Aggregate closed PerpetualPositions per trader: sum RealizedPnl for total profit, count closes, and use conditional counts for wins, losses and liquidations. Sorting by the summed PnL gives a leaderboard, and wins divided by closes gives each trader's win rate — all in a single GraphQL query." },
+    { q: "How do I calculate unrealized PnL for open positions?", a: "Take each trader's latest position state per market using limitBy on trader and asset, drop rows whose size is zero, then compute mark minus entry times signed size. Fetch fresh mark prices in the same request with a second aliased query on PerpetualPrices. The signed size makes the same formula work for longs and shorts." },
+    { q: "Can I build OHLC candles for perpetual markets?", a: "Yes. Bucket PerpetualPrices with a Block Time interval and use argMin/argMax aggregates: Mark at the earliest time is the open, Mark at the latest time is the close, and the maximum and minimum of Mark are the high and low. Intervals with no trading produce no candle because price rows are only emitted on trading activity." },
+    { q: "How do I track whale trades on Solana perps?", a: "Filter PerpetualFills on Amount Quote above your notional threshold. As a query with descending Block Time it returns recent large prints; as a subscription it becomes a live whale tape including whether each fill was a liquidation." },
+    { q: "How do I measure buy and sell pressure on a perp market?", a: "Aggregate PerpetualFills per time bucket with two conditional sums of Amount Quote, one where the taker side is bid and one where it is ask. The difference over the total is a ready order-flow-imbalance series for the market." },
+  ]}
+/>
