@@ -43,19 +43,19 @@ the [Transfers cube](/docs/blockchain/Solana/solana-transfers) and
 Endpoint, auth header, and a request you can paste into a terminal right now.
 
 ```bash
-curl -X POST https://streaming.bitquery.io/eap \
+curl -X POST https://streaming.bitquery.io/graphql \
   -H 'Content-Type: application/json' \
   -H "Authorization: Bearer $BITQUERY_TOKEN" \
   -d '{"query":"{ Solana { Instructions(limit: {count: 3} orderBy: {descending: Block_Time} where: {Transaction: {Result: {Success: true}} Instruction: {Program: {Address: {is: \"61DFfeTKM7trxYcPQCM78bJ794ddZprZpAwAnLiwTpYH\"} Method: {is: \"fill\"}}}}) { Block { Time } Transaction { Signature } Instruction { Program { Arguments { Name Value { ... on Solana_ABI_BigInt_Value_Arg { bigInteger } } } } } } } }"}'
 ```
 
 For streams, the same document works over WebSocket at
-`wss://streaming.bitquery.io/eap?token=YOUR_TOKEN` with the `graphql-ws` subprotocol.
+`wss://streaming.bitquery.io/graphql?token=YOUR_TOKEN` with the `graphql-ws` subprotocol.
 See [generating a token](/docs/authorization/how-to-generate) and
 [WebSocket authorization](/docs/authorization/websocket).
 
 :::info Query window
-These programs are indexed on the EAP endpoint. Historical depth depends on your plan, so a
+Historical depth depends on your plan, so a
 query with an old `since` date can come back empty even when the filter is correct. Test
 without a date filter first.
 :::

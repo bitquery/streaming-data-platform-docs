@@ -26,7 +26,7 @@ let lastEmittedBarTime = null;
 let lastEmittedClose = null;
 
 const BITQUERY_ENDPOINT =
-  "wss://streaming.bitquery.io/eap?token=" + config.authtoken;
+  "wss://streaming.bitquery.io/graphql?token=" + config.authtoken;
 ```
 
 ### Subscription Query

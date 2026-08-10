@@ -41,7 +41,7 @@ and Tron.
 |                |                                                                                          |
 | -------------- | ---------------------------------------------------------------------------------------- |
 | **Cube**       | `Metadata.Labels`                                                                          |
-| **Endpoints**  | `https://streaming.bitquery.io/graphql` and `https://streaming.bitquery.io/eap`             |
+| **Endpoints**  | `https://streaming.bitquery.io/graphql`             |
 | **Auth**       | [OAuth token](/docs/authorization/how-to-generate) as `Authorization: Bearer <token>`        |
 | **Required**   | An `Address` filter on every query                                                          |
 | **Batch size** | Up to **100 addresses** per query                                                           |

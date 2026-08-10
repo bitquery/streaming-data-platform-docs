@@ -60,7 +60,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "key.json"
 Configure the WebSocket URL and the query to fetch Pumpfun DEX trades. To learn how to generate a token to use with the url, go [here](/docs/authorization/how-to-generate/)
 
 ```python
-url = "wss://streaming.bitquery.io/eap?token=<YOUR_TOKEN>"
+url = "wss://streaming.bitquery.io/graphql?token=<YOUR_TOKEN>"
 query = """
 subscription MyQuery {
   Solana {

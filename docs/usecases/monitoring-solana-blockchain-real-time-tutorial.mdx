@@ -39,7 +39,7 @@ Define the asynchronous function `run_subscription` to establish and manage the 
 async def run_subscription():
     # Setup WebSocket connection
     transport = WebsocketsTransport(
-        url="wss://streaming.bitquery.io/eap?token=<YOUR TOKEN HERE>",
+        url="wss://streaming.bitquery.io/graphql?token=<YOUR TOKEN HERE>",
         headers={"Sec-WebSocket-Protocol": "graphql-ws"}
     )
 

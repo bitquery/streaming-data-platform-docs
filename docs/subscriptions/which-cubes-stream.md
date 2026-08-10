@@ -244,7 +244,7 @@ outage but is a routing mistake.
 
 ## How this was measured
 
-Every row was tested against `wss://streaming.bitquery.io/eap` with the `graphql-ws`
+Every row was tested against `wss://streaming.bitquery.io/graphql` with the `graphql-ws`
 subprotocol, one socket per cube, using a minimal selection set generated from schema
 introspection. Cubes that produced nothing in the first pass were retried on a longer window,
 because some low-frequency cubes take longer than 20 seconds to deliver their first message.

@@ -35,7 +35,7 @@ queryable over HTTP **and** streamable over WebSocket — the same query text wo
 |               |                                                                                       |
 | ------------- | ------------------------------------------------------------------------------------- |
 | **Cubes**     | `PerpetualOrders`, `PerpetualFills`, `PerpetualPositions`, `PerpetualPrices`, `PerpetualMarketSummaries` |
-| **Endpoints** | `https://streaming.bitquery.io/graphql` and `https://streaming.bitquery.io/eap`        |
+| **Endpoints** | `https://streaming.bitquery.io/graphql`        |
 | **Streaming** | `wss://streaming.bitquery.io/graphql` — see [WebSocket docs](/docs/subscriptions/websockets) |
 | **Kafka**     | `solana.perpetual.proto` protobuf topic — see the [Solana Perpetuals Kafka Stream](/docs/streams/protobuf/chains/Solana-perpetual-protobuf) |
 | **Auth**      | [OAuth token](/docs/authorization/how-to-generate) as `Authorization: Bearer <token>`  |

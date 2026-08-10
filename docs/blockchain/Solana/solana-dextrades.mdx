@@ -11,7 +11,7 @@ import FAQ from "@site/src/components/FAQ";
 For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Solana`). Use this page when you need **historical Solana data older than ~30 days** (with `dataset: archive`), raw per-swap detail, or call / event context.
 
 :::caution `dataset: combined` currently fails on Solana
-Every `Solana(dataset: combined)` query tested returns a ClickHouse 500, on both the `/graphql` and `/eap` endpoints. Use `dataset: archive` for history and realtime for recent data. Several queries further down this page still use `combined` and will error until that is resolved — swap `combined` for `archive` to run them. See [data coverage & retention](/docs/graphql/data-coverage-retention/).
+Every `Solana(dataset: combined)` query tested returns a ClickHouse 500 on the `/graphql` endpoint. Use `dataset: archive` for history and realtime for recent data. Several queries further down this page still use `combined` and will error until that is resolved — swap `combined` for `archive` to run them. See [data coverage & retention](/docs/graphql/data-coverage-retention/).
 :::
 :::
 

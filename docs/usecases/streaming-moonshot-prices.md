@@ -227,7 +227,7 @@ This file contains the main React component that uses the `useWebSocket` hook to
 - **Step 2: Define the WebSocket URL and Options**
 
   ```javascript
-  const url = "wss://streaming.bitquery.io/eap?token=YOUR_TOKEN";
+  const url = "wss://streaming.bitquery.io/graphql?token=YOUR_TOKEN";
   const options = {
     maxReconnectionDelay: 10000,
     minReconnectionDelay: 1000,

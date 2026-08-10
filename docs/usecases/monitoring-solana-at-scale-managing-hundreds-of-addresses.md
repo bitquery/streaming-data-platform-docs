@@ -87,7 +87,7 @@ The `monitor_transfers` function sets up a WebSocket connection and subscribes t
 ```python
 async def monitor_transfers():
     transport = WebsocketsTransport(
-        url=f"wss://streaming.bitquery.io/eap?token={TOKEN}",
+        url=f"wss://streaming.bitquery.io/graphql?token={TOKEN}",
         headers={"Sec-WebSocket-Protocol": "graphql-transport-ws"}
     )
 
@@ -241,7 +241,7 @@ The following function establishes a WebSocket connection and subscribes to real
 ```python
 async def monitor_dex_trades():
     transport = WebsocketsTransport(
-        url=f"wss://streaming.bitquery.io/eap?token={TOKEN}",
+        url=f"wss://streaming.bitquery.io/graphql?token={TOKEN}",
         headers={"Sec-WebSocket-Protocol": "graphql-transport-ws"},
     )
 

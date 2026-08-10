@@ -27,7 +27,7 @@ Every GraphQL cube is served from one or more datasets, selected with the `datas
 :::caution `combined` is not available everywhere, and does not always fail cleanly
 Two cases to know about before you rely on `combined`:
 
-- **Solana** — every `Solana(dataset: combined)` cube tested returns a ClickHouse **500**, on both the `/graphql` and `/eap` endpoints. Use `realtime` for recent data and `archive` for history until this is resolved.
+- **Solana** — every `Solana(dataset: combined)` cube tested returns a ClickHouse **500** on the `/graphql` endpoint. Use `realtime` for recent data and `archive` for history until this is resolved.
 - **EVM `Events` and `Calls`** — also return a 500 on `combined`, while `Transfers`, `Transactions`, `Blocks` and the DEX cubes work.
 
 Where a dataset is genuinely undeployed you get the clean `no table can query …` message above. A raw 500 is a different thing. If you hit one, re-run the same query on `archive` before treating it as an outage.

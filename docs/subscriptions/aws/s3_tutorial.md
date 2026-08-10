@@ -51,7 +51,7 @@ import json
 import websockets
 
 # Bitquery WebSocket API details
-url = "wss://streaming.bitquery.io/eap?token=your_bitquery_token"
+url = "wss://streaming.bitquery.io/graphql?token=your_bitquery_token"
 ```
 
 - Replace `your_bitquery_token` with the token generated from Bitquery ([guide](/docs/authorization/how-to-generate/)).
