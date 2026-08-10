@@ -433,6 +433,27 @@ div[class*="announcementBar"] [class*="announcementBarClose"]:hover {
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
 }
 
+.navbar__item {
+  white-space: nowrap;
+}
+
+/* Tighten item spacing so all labels fit on one line before the mobile breakpoint */
+@media (min-width: 997px) and (max-width: 1280px) {
+  .navbar__item {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .navbar .DocSearch-Button {
+    width: auto;
+  }
+
+  .navbar .DocSearch-Button-Placeholder {
+    display: none;
+  }
+}
+
 .navbar__link--active,
 .navbar__link:hover {
   color: var(--ifm-color-primary);
