@@ -124,31 +124,49 @@ pools.trade ran on `0x00004c4c…` from 8 July before `0x0000ffff…` took over 
 
 ## Event reference
 
-`Log.Signature.Name` is populated only for events Bitquery has an ABI for. On pools.trade, **one launch event is decoded and the rest are raw** — including the entire Crowd Launch auction. Raw events are still fully queryable by their `SignatureHash` (topic0).
+**Every pools.trade event is decoded.** `Log.Signature.Name` is populated and `Arguments` returns named, typed values — including the entire Crowd Launch auction, which earlier versions of this page documented as raw. Filtering by topic0 (`SignatureHash`) still works and is still the better choice in one specific case, covered below.
 
 | Event | Emitter | Decoded? | topic0 (`SignatureHash`) |
 | --- | --- | --- | --- |
-| `TokenCreated(address)` | entry | ✅ **Yes** — filter by `Name` | `2e2b3f61b70d2d131b2a807371103cc98d51adcaa5e9a8f9c32658ad8426e74e` |
-| `Initialize` / `ModifyLiquidity` / `Swap` | v4 PoolManager | ✅ Yes — filter by `Name` | — |
-| `TokenDistributed` | entry | ❌ Raw | `67226bacccef969dab310a9e55dc1cf821363658e433fd330344f5cc00c79ac8` |
-| `TokenCreated` *(metadata overload)* | factory | ❌ Raw | `4ef8284ecf42d4cd19686572ffd87f630858c82398911e776cb831de35eddbf4` |
-| `TokenLaunched` | launchpad | ❌ Raw | `3b3d2bafdcae274a232217e1f80ee4305d3af6aa25c8b14b1681bd68d18042a4` |
-| `DistributionInitialized` | launchpad | ❌ Raw | `0afd26d7f0833a451173acef122d058906aa7708ceb6f67ea7471a649d88b44b` |
-| `BidSubmitted` | CCA auction | ❌ Raw | `650baad5cd8ca09b8f580be220fa04ce2ba905a041f764b6a3fe2c848eb70540` |
-| `ClearingPriceUpdated` | CCA auction | ❌ Raw | `30adbe996d7a69a21fdebcc1f8a46270bf6c22d505a7d872c1ab4767aa707609` |
-| `CheckpointUpdated` | CCA auction | ❌ Raw | `f1e4b6d7d0d7c5deb6393a39862d66a2f2ecb034f3283a8a597f9bf0c36f76fa` |
-| `TickInitialized` | CCA auction | ❌ Raw | `7fdd20e2dbf90ff60a7d9be5ad62f1ec6d9d9cba8b36174a3839cafd059f0958` |
-| `NextActiveTickUpdated` | CCA auction | ❌ Raw | `b9a86892440ed5515518351623ecfc523d283b21e92f1505e533ef26137be5b0` |
-| `AuctionStepRecorded` | CCA auction | ❌ Raw | `6863f2b489f9186bf89231dc73aa0e9836f536b9ddb0f708f74260ed3160f297` |
-| `TokensReceived` | CCA auction | ❌ Raw | `468160b6769cb8abc9324bc14fe70ee0ce87f1e92087186c6ae22a964a04c572` |
-| `AuctionCreated` | CCA auction factory | ❌ Raw | `7ede475fad18ccf0039f2b956c4d43a8b4ed0853de4daaa8ae25299f331ae3b9` |
-| `InitializerCreated` | initializer registry | ❌ Raw | `6d759545eb439f07e70f45431d6339af7a4f1ffef06d43e8ddf47fdb0799708c` |
+| `TokenCreated(address)` | entry | ✅ Yes | `2e2b3f61b70d2d131b2a807371103cc98d51adcaa5e9a8f9c32658ad8426e74e` |
+| `Initialize` / `ModifyLiquidity` / `Swap` | v4 PoolManager | ✅ Yes | — |
+| `TokenDistributed` | entry | ✅ Yes | `67226bacccef969dab310a9e55dc1cf821363658e433fd330344f5cc00c79ac8` |
+| `TokenCreated` *(metadata overload)* | factory | ✅ Yes | `4ef8284ecf42d4cd19686572ffd87f630858c82398911e776cb831de35eddbf4` |
+| `TokenLaunched` | launchpad | ✅ Yes | `3b3d2bafdcae274a232217e1f80ee4305d3af6aa25c8b14b1681bd68d18042a4` |
+| `DistributionInitialized` | launchpad | ✅ Yes | `0afd26d7f0833a451173acef122d058906aa7708ceb6f67ea7471a649d88b44b` |
+| `BidSubmitted` | CCA auction | ✅ Yes | `650baad5cd8ca09b8f580be220fa04ce2ba905a041f764b6a3fe2c848eb70540` |
+| `ClearingPriceUpdated` | CCA auction | ✅ Yes | `30adbe996d7a69a21fdebcc1f8a46270bf6c22d505a7d872c1ab4767aa707609` |
+| `CheckpointUpdated` | CCA auction | ✅ Yes | `f1e4b6d7d0d7c5deb6393a39862d66a2f2ecb034f3283a8a597f9bf0c36f76fa` |
+| `TickInitialized` | CCA auction | ✅ Yes | `7fdd20e2dbf90ff60a7d9be5ad62f1ec6d9d9cba8b36174a3839cafd059f0958` |
+| `NextActiveTickUpdated` | CCA auction | ✅ Yes | `b9a86892440ed5515518351623ecfc523d283b21e92f1505e533ef26137be5b0` |
+| `AuctionStepRecorded` | CCA auction | ✅ Yes | `6863f2b489f9186bf89231dc73aa0e9836f536b9ddb0f708f74260ed3160f297` |
+| `TokensReceived` | CCA auction | ✅ Yes | `468160b6769cb8abc9324bc14fe70ee0ce87f1e92087186c6ae22a964a04c572` |
+| `AuctionCreated` | CCA auction factory | ✅ Yes | `7ede475fad18ccf0039f2b956c4d43a8b4ed0853de4daaa8ae25299f331ae3b9` |
+| `InitializerCreated` | initializer registry | ✅ Yes | `6d759545eb439f07e70f45431d6339af7a4f1ffef06d43e8ddf47fdb0799708c` |
 
-Every topic0 above was verified two ways: keccak-256 preimage match against its signature, and live occurrence on-chain (all 15 fired within the last 24 hours as of 6 Aug 2026).
+Both columns were verified live on 11 Aug 2026: every event above returned decoded `Arguments` from the API, and every topic0 matches its signature by keccak-256 preimage.
 
-### Querying a raw event by topic0
+### Reading decoded arguments
 
-Raw means Bitquery has no ABI for the event yet — `Arguments` comes back empty and `Log.Signature.Name` is blank. The event is still fully indexed: filter on the topic0 from the table (no `0x` prefix, realtime dataset only — see the note below) and you get every occurrence, with the undecoded payload in `LogHeader.Data`. This example queries `TokenDistributed` — the entry contract's distribution-complete event — but the shape is identical for **any** ❌ Raw row: swap the `SignatureHash` value.
+Two things about the `Arguments` shape are easy to trip over.
+
+**Tuple components are flattened, and they all share the tuple's type name.** A struct argument does not arrive as one nested value — it arrives as one row per component, each carrying the *tuple's* name rather than the field's name, distinguished only by `Index`. For the factory's `TokenCreated(address,(string,string,string,bytes))`:
+
+| `Name` | `Index` | `Type` | Meaning |
+| --- | --- | --- | --- |
+| `tokenAddress` | 0 | `address` | the new token |
+| `UERC20Metadata` | 0 | `string` | description |
+| `UERC20Metadata` | 1 | `string` | external / social URL (often empty) |
+| `UERC20Metadata` | 2 | `string` | image URI — `ipfs://…` or `https://…` |
+| `UERC20Metadata` | 3 | `bytes` | extra payload (usually empty) |
+
+`TokenLaunched` behaves the same way: `poolId`, `token` and `finalPositionRecipient` are named normally, then five `PoolKey` rows follow — index 0 `currency0`, 1 `currency1`, 2 `fee`, 3 `tickSpacing`, 4 `hooks`. `InitializerCreated` flattens its nested struct into eleven `MigratorParameters` rows.
+
+**`TokenCreated` is emitted by two different contracts with two different signatures.** The entry contract emits `TokenCreated(address)` and the factory emits the metadata overload `TokenCreated(address,(string,string,string,bytes))`. Filtering on `Name: {is: "TokenCreated"}` alone matches **both**. Disambiguate with `LogHeader.Address`, or filter by the topic0, which is unique per signature.
+
+### Filtering by topic0
+
+Topic0 filtering remains available and is the precise way to pin one exact signature — useful for the overloaded `TokenCreated` above. Supply the hash **without** a `0x` prefix; see the dataset note below for its one limitation.
 
 ```graphql
 {
@@ -181,12 +199,12 @@ Raw means Bitquery has no ABI for the event yet — `Arguments` comes back empty
 
 Two things to know when reading the result:
 
-- **Indexed arguments live in the log's topics, not in `Data`.** `TokenDistributed(address,address,uint256)` indexes both addresses, so `LogHeader.Data` is a single 32-byte word — the `uint256` amount. To recover the token and recipient, join back through `Transaction.Hash` to the decoded `TokenCreated` event or the mint transfer in the same transaction.
-- **Drop the `LogHeader.Address` filter for per-token contracts.** CCA auction events fire from a fresh contract per Crowd Launch (1,200+ live already), so for those the topic0 filter alone is the right scope — it captures every auction at once, and `LogHeader.Address` tells you which auction each row came from.
+- **You no longer need `LogHeader.Data` for this event.** `TokenDistributed` now decodes to `tokenAddress`, `strategy` and `amount`, so read `Arguments` instead of hand-parsing the payload. `Data` is still returned if you want the raw bytes.
+- **Drop the `LogHeader.Address` filter for per-token contracts.** CCA auction events fire from a fresh contract per Crowd Launch (1,200+ live already), so filtering on the event alone is the right scope — it captures every auction at once, and `LogHeader.Address` tells you which auction each row came from.
 
-### Full signatures for client-side decoding
+### Full signatures
 
-The full signatures below (with argument types) are what you need to ABI-decode `LogHeader.Data` client-side, grouped by emitter address for copy-paste.
+Now that every event is decoded you rarely need these, but the full signatures are the quickest way to see each event's argument types and tuple layout, grouped by emitter address.
 
 ```text
 # entry contracts — 0x0000ffffbe8efe702c8703ae3477ff5de3d319c0 (current)
@@ -219,7 +237,9 @@ b9a86892440ed5515518351623ecfc523d283b21e92f1505e533ef26137be5b0  NextActiveTick
 ```
 
 :::note `SignatureHash` filters need the realtime dataset
-Filtering by `Log: {Signature: {SignatureHash: …}}` is only served by the **realtime** dataset — `dataset: archive` returns `no archive or API tables found for cube Event`, and `dataset: combined` returns `no data available yet to query dataset combined`. Use `Log.Signature.Name` (decoded events) for archive/combined queries, and omit `dataset` for raw topic0 queries.
+Filtering by `Log: {Signature: {SignatureHash: …}}` is served **only** by the realtime dataset. `dataset: archive` returns `no archive or API tables found for cube Event`, and `dataset: combined` returns `no data available yet to query dataset combined`. Re-confirmed 11 Aug 2026 — decoding the ABIs did not change this.
+
+Filter by `Log.Signature.Name` instead when you need `archive` or `combined`; that path works on all three datasets. Be aware that **archive coverage of these events is still thin** — measured the same day, `TokenLaunched` and `BidSubmitted` returned thousands of realtime rows but zero on archive, while `AuctionCreated` and `TokenDistributed` returned only a handful of July rows. Treat realtime as the source of truth for launchpad and auction history until archive backfills.
 
 Note also that `SignatureHash` values are supplied **without** a `0x` prefix.
 :::
@@ -266,7 +286,7 @@ The decoded `TokenCreated` event on the two entry contracts is the cleanest laun
 The single argument `token` is the new token's contract address. `Transaction.From` is the creator wallet, and `LogHeader.Address` tells you which entry contract handled the launch.
 
 :::note This event is intentionally thin
-`TokenCreated(address)` carries **only** the token address — no name, symbol, or image. Those live in the *undecoded* factory event; see [Token metadata](#token-metadata-name-symbol-description-image).
+`TokenCreated(address)` carries **only** the token address — no name, symbol, or image. Those live in the factory's separate `TokenCreated` overload; see [Token metadata](#token-metadata-name-symbol-description-image).
 :::
 
 ### Stream new launches in real time
@@ -447,7 +467,9 @@ Metadata splits across two sources. **Name, symbol, decimals, and contract** are
 
 `Transaction.From` on the mint is the creator wallet and `Block.Time` is the exact launch time — this works for any pools.trade token regardless of which entry contract or router launched it.
 
-The remaining two fields — the **description** and the **IPFS image URI** that the pools.trade UI renders — exist on-chain only in the factory's `TokenCreated(address, (string,string,string,bytes))` event. Bitquery does not decode it, so read `LogHeader.Data` and ABI-decode client-side.
+The remaining fields — the **description**, the **external link**, and the **image URI** that the pools.trade UI renders — exist on-chain only in the factory's `TokenCreated(address,(string,string,string,bytes))` event. That event is now decoded, so you can read them straight out of `Arguments` with no client-side ABI work.
+
+The filter below pins the factory by address because the entry contract emits a *different* `TokenCreated` under the same name (see [Reading decoded arguments](#reading-decoded-arguments)).
 
 ```graphql
 {
@@ -456,16 +478,21 @@ The remaining two fields — the **description** and the **IPFS image URI** that
       limit: {count: 10}
       orderBy: {descending: Block_Time}
       where: {
-        Log: {
-          Signature: {
-            SignatureHash: {is: "4ef8284ecf42d4cd19686572ffd87f630858c82398911e776cb831de35eddbf4"}
-          }
-        }
+        Log: {Signature: {Name: {is: "TokenCreated"}}}
+        LogHeader: {Address: {is: "0x000000e200088d55c39a11f609e5f667729ad49b"}}
       }
     ) {
       Block { Time }
       Transaction { Hash }
-      LogHeader { Address Data }
+      Arguments {
+        Name
+        Index
+        Type
+        Value {
+          ... on EVM_ABI_Address_Value_Arg { address }
+          ... on EVM_ABI_String_Value_Arg { string }
+        }
+      }
     }
   }
 }
@@ -473,13 +500,17 @@ The remaining two fields — the **description** and the **IPFS image URI** that
 
 [▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Token-description-and-image)
 
-`LogHeader.Data` is standard ABI encoding: word 0 is the token address, words 1–5 are offsets into the tuple, and the dynamic `string` sections follow. Decoding a sample yields:
+The tuple arrives flattened — `tokenAddress`, then four `UERC20Metadata` rows keyed by `Index`. A live result:
 
 ```text
-token       0x7a5009db1689992cc56a863b3cbffd763f3d4144
-description "A token launched through Uniswap LiquidityLauncher on Robinhood Chain."
-image       ipfs://bafkreifh4km3huz6323y3tptlhsn6252q5atgd7zoqurko7kog5bcqs4
+tokenAddress              0x228513f0b584b38415438bd661d7cfab0dbb3077
+UERC20Metadata[0]  string "The Stock Impaler"                              # description
+UERC20Metadata[1]  string "https://stockimpaler.com/"                      # external link, often empty
+UERC20Metadata[2]  string "ipfs://bafkreibersrl3o5pi3vf57d3pk5flqq5bacn…"  # image
+UERC20Metadata[3]  bytes  ""                                               # extra, usually empty
 ```
+
+The image is not always IPFS — some launches point at an HTTPS CDN URL instead, so treat `UERC20Metadata[2]` as an opaque URI.
 
 ---
 
@@ -853,17 +884,19 @@ The launch transaction also contains the token's mint, the entry contract's `Tok
     Events(
       limit: {count: 50}
       orderBy: {descending: Block_Time}
-      where: {
-        Log: {
-          Signature: {
-            SignatureHash: {is: "650baad5cd8ca09b8f580be220fa04ce2ba905a041f764b6a3fe2c848eb70540"}
-          }
-        }
-      }
+      where: {Log: {Signature: {Name: {is: "BidSubmitted"}}}}
     ) {
       Block { Time Number }
       Transaction { Hash From }
-      LogHeader { Address Data }
+      LogHeader { Address }
+      Arguments {
+        Name
+        Type
+        Value {
+          ... on EVM_ABI_Address_Value_Arg { address }
+          ... on EVM_ABI_BigInt_Value_Arg { bigInteger }
+        }
+      }
     }
   }
 }
@@ -871,7 +904,7 @@ The launch transaction also contains the token's mint, the entry contract's `Tok
 
 [▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Crowd-Launch-bids)
 
-`LogHeader.Address` is the auction contract; `Transaction.From` is the bidder. `BidSubmitted(uint256 auctionId, address bidder, uint256, uint128)` has its first two parameters indexed, so `LogHeader.Data` holds the two remaining numeric fields (amount and tick/quantity).
+`BidSubmitted(uint256,address,uint256,uint128)` decodes to four named arguments — `id`, `owner`, `priceQ96` and `amount`. `owner` is the bidder (use it rather than `Transaction.From`, which is whatever contract or router relayed the bid), and `priceQ96` is a Q96 fixed-point price: divide by 2⁹⁶ for a human number. `LogHeader.Address` is the auction contract, which is how you tell the auctions apart — there is no filter needed to span them all.
 
 ### Clearing price updates
 
@@ -882,17 +915,17 @@ The launch transaction also contains the token's mint, the entry contract's `Tok
       limit: {count: 50}
       orderBy: {descending: Block_Time}
       where: {
-        Log: {
-          Signature: {
-            SignatureHash: {is: "30adbe996d7a69a21fdebcc1f8a46270bf6c22d505a7d872c1ab4767aa707609"}
-          }
-        }
+        Log: {Signature: {Name: {is: "ClearingPriceUpdated"}}}
         LogHeader: {Address: {is: "0xD10dc5f79F95E953e710F1eDeBddE0baD2e8fed8"}}
       }
     ) {
       Block { Time }
       Transaction { Hash }
-      LogHeader { Address Data }
+      LogHeader { Address }
+      Arguments {
+        Name
+        Value { ... on EVM_ABI_BigInt_Value_Arg { bigInteger } }
+      }
     }
   }
 }
@@ -900,7 +933,7 @@ The launch transaction also contains the token's mint, the entry contract's `Tok
 
 [▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Crowd-Launch-clearing-price)
 
-Swap the `SignatureHash` for any row in the [event reference](#event-reference) to follow tick initialization (`TickInitialized`), the moving book edge (`NextActiveTickUpdated`), or auction checkpoints (`CheckpointUpdated`, `AuctionStepRecorded`).
+`ClearingPriceUpdated` decodes to `blockNumber` and `clearingPriceQ96`. Drop the `LogHeader.Address` filter to watch every auction at once, or swap the event name for any row in the [event reference](#event-reference) to follow tick initialization (`TickInitialized` → `priceQ96`), the moving book edge (`NextActiveTickUpdated` → `priceQ96`), or auction checkpoints (`CheckpointUpdated` → `blockNumber`, `clearingPriceQ96`, `cumulativeMps`; `AuctionStepRecorded` → `startBlock`, `endBlock`, `mps`).
 
 :::note Prices are Q96 fixed-point
 Clearing, floor, and tick-size prices are **Q96** values. Divide by `2**96` to get a human-readable ratio.
@@ -999,11 +1032,11 @@ Because pools.trade tokens trade in **plain Uniswap v4 pools**, they are indexed
 
 ### How do I track Crowd Launch bids?
 
-All CCA auction events are undecoded, so filter `Log.Signature.SignatureHash` on `650baad5…` for `BidSubmitted`. Omit `dataset: archive` — `SignatureHash` filtering is realtime-only.
+Filter `Log.Signature.Name` on `BidSubmitted` and read `Arguments` — `id`, `owner`, `priceQ96` and `amount` all decode. Each Crowd Launch deploys its own auction contract, so filtering on the event alone spans every live auction at once, with `LogHeader.Address` identifying which one. Stay on realtime: archive currently holds no `BidSubmitted` rows.
 
 ### Where do I get a token's name, symbol, and image?
 
-The decoded `TokenCreated(address)` has only the address. Use the mint-transfer query for name/symbol/decimals, or ABI-decode the raw factory event for description and IPFS image — see [Token metadata](#token-metadata-name-symbol-description-image).
+The entry contract's `TokenCreated(address)` carries only the address. Use the mint-transfer query for name/symbol/decimals, and the **factory's** `TokenCreated` — now decoded — for description, external link and image; both are in [Token metadata](#token-metadata-name-symbol-description-image).
 
 ### Is there a bonding-curve contract to query?
 
