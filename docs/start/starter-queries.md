@@ -21,6 +21,8 @@ Below is a set of queries that are curated for you to get started with Bitquery.
 - [Ethereum](#ethereum)
 - [Polygon (MATIC)](#polygon-matic)
 - [Solana](#solana)
+- [Base](#base)
+- [Robinhood Chain](#robinhood-chain)
 - [BSC (Binance Smart Chain)](#bsc-binance-smart-chain)
 - [TRON](#tron)
 - [Bitcoin](#bitcoin)
@@ -883,6 +885,22 @@ This query retrieves the latest slippage data for a specific DEX pool on Base. U
 This query retrieves the latest liquidity events for a specific DEX pool on Base. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
 
 ▶️ [Latest Liquidity Changes of a Specific Pool](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_4#)
+
+## Robinhood Chain
+
+### Trades
+
+#### Latest DEX Trades on Robinhood Chain
+
+Latest DEX trades on Robinhood Chain (chain id 4663) via the Trading API, with price and USD amounts.
+▶️ [Latest DEX Trades on Robinhood Chain](https://ide.bitquery.io/Robinhood-Trades)
+
+### Uniswap v4
+
+#### Uniswap v4 Pools on Robinhood Chain
+
+New Uniswap v4 pools: decoded Initialize events on the PoolManager with currencies, fee tier, tick spacing and hooks.
+▶️ [Uniswap v4 Pools on Robinhood Chain](https://ide.bitquery.io/uniswap-v4-pools-on-robinhood-chain)
 
 ## BSC (Binance Smart Chain)
 

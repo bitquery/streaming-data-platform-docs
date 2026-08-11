@@ -12,6 +12,8 @@ Below is a set of subscriptions that are curated for you to get started with Bit
 - [Polymarket](#polymarket)
 - [Ethereum](#ethereum)
 - [Solana](#solana)
+- [Base](#base)
+- [Robinhood Chain](#robinhood-chain)
 - [BSC (Binance Smart Chain)](#bsc-binance-smart-chain)
 - [TRON](#tron)
 - [NFT Streams](#nft-streams)
@@ -522,6 +524,24 @@ Subscribe when **`Token.Id`** matches Base and **`Supply.MarketCap`** &gt; 1,000
 This stream returns the real time liquidity pools/token pairs created on Uniswap V3. You could modify the stream to monitor newly created pools on a different protocol.
 
 ▶️ [Pair Creation Stream](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3-Base)
+
+## Robinhood Chain
+
+### Trades Streams
+
+#### Real-Time DEX Trades Stream on Robinhood Chain
+
+Stream every DEX trade on Robinhood Chain (chain id 4663) in real time via the Trading API, with price and USD amounts.
+
+▶️ [Real-Time DEX Trades on Robinhood Chain](https://ide.bitquery.io/Robinhood-Trades)
+
+### Token Launch Streams
+
+#### Stream New pools.trade Token Launches
+
+Websocket subscription streaming every new pools.trade token launch on Robinhood Chain the moment it happens.
+
+▶️ [Stream New pools.trade Launches](https://ide.bitquery.io/Pools-trade-Stream-new-launches)
 
 ## BSC (Binance Smart Chain)
 
