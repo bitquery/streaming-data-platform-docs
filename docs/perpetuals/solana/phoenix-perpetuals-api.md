@@ -81,6 +81,8 @@ query {
 One row per order-book price tick: best bid, best ask, mark price, and the last trade
 price when the tick was caused by a trade.
 
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/sol_perps_bid_ask).
+
 ```graphql
 query {
   Solana {
@@ -111,6 +113,8 @@ Notes:
 
 Stream the BBO for one market live:
 
+You can run this stream [in the Bitquery IDE](https://ide.bitquery.io/solana-perpetuals-mark-price-stream).
+
 ```graphql
 subscription {
   Solana {
@@ -131,6 +135,8 @@ subscription {
 
 Market-level state updates: mark price, the spot index it tracks, open interest, and
 fee counters.
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/sol_perps_market_info).
 
 ```graphql
 query {
@@ -174,6 +180,8 @@ Notes:
 For a dashboard, grab the **latest snapshot of every market in one query** with `limitBy`
 on the asset id:
 
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/phoenix-perps-all-markets).
+
 ```graphql
 query {
   Solana {
@@ -213,6 +221,8 @@ subscription {
 ```
 
 ## Order lifecycle — `PerpetualOrders`
+
+You can run an order-lifecycle query [in the Bitquery IDE](https://ide.bitquery.io/sol_perps_orders).
 
 One row per order event. `Order.Type` is the **event**, and the nested
 `Order.Order.Type` is the **order kind**:
@@ -297,6 +307,8 @@ subscription {
 ```
 
 ## Trades — `PerpetualFills`
+
+You can run a live fills stream [in the Bitquery IDE](https://ide.bitquery.io/solana-perps-live-trades-stream), or [fills for one wallet](https://ide.bitquery.io/sol_perps_filled_orders_by_signer).
 
 One row per execution. `Side` is the taker's side (`bid` = taker bought,
 `ask` = taker sold); `Amount.Size` is signed by direction while `Amount.Filled` is the
@@ -385,6 +397,8 @@ query {
 ```
 
 ## Positions, PnL & liquidations — `PerpetualPositions`
+
+Runnable IDE examples: [top open positions](https://ide.bitquery.io/solana-perps-top-positions), [liquidations](https://ide.bitquery.io/solana-perps-liquidations), [realized PnL leaderboard](https://ide.bitquery.io/solana-perps-trader-pnl).
 
 One row per position state change: size transitions, realized PnL, funding settlements,
 and liquidations.

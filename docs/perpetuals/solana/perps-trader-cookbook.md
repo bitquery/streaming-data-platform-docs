@@ -45,6 +45,8 @@ Two rules apply to almost every recipe:
 
 ### Follow a trader's every fill, live
 
+You can run the wallet-fills version [in the Bitquery IDE](https://ide.bitquery.io/sol_perps_filled_orders_by_signer).
+
 Stream each execution of a wallet you follow — the signal feed a copy-trading bot
 subscribes to, including the position each fill produced:
 
@@ -107,6 +109,8 @@ live book, with entry prices.
 
 ### Who is worth copying — the report card
 
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/solana-perps-trader-pnl).
+
 Realized PnL, close count, win rate and liquidation count per trader, in one
 aggregation:
 
@@ -136,6 +140,8 @@ instead of all time.
 ## Positions & PnL
 
 ### Top unrealized positions and traders
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/solana-perps-top-positions).
 
 Unrealized PnL is `(mark − entry) × size` over each trader's latest open position.
 One request returns both the position snapshot and fresh marks:
@@ -218,6 +224,8 @@ Positive = received, negative = paid. Replace the field list with
 
 ### Whale fills
 
+You can run the query version [in the Bitquery IDE](https://ide.bitquery.io/solana-perps-whale-trades).
+
 Every fill above a notional threshold — as history or a live tape:
 
 ```graphql
@@ -242,6 +250,8 @@ As a `query`, add `orderBy: { descending: Block_Time }` and a `limit` for the re
 whale prints.
 
 ### OHLC candles from the mark price
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/solana-perps-ohlc-candles).
 
 Strategy builders and backtesters: bucket `PerpetualPrices` into intervals and take
 argMin/argMax aggregates —
@@ -273,6 +283,8 @@ zero-filled bars).
 
 ### Open interest, basis and fee revenue over time
 
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/solana-perps-open-interest).
+
 One query per market gives an OI series, the perp-vs-spot basis, and — because
 `TakerFees`/`MakerFees` are cumulative counters — per-bucket fee revenue as
 end-minus-start:
@@ -303,6 +315,8 @@ with a widening basis is the classic crowded-longs signal.
 
 ### Order-flow pressure — taker buys vs sells
 
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/solana-perps-taker-buy-sell-pressure).
+
 Conditional sums split taker volume by side per bucket:
 
 ```graphql
@@ -327,6 +341,8 @@ query {
 ## Risk
 
 ### Biggest liquidations
+
+You can run this query [in the Bitquery IDE](https://ide.bitquery.io/solana-perps-liquidations).
 
 Rank forced closes by what they took:
 
