@@ -116,6 +116,51 @@ Every query on this page targets **V2 only**. A "Pons launches" feed built from 
 
 ---
 
+## Datasets {#datasets}
+
+:::danger Omitting `dataset` gives you realtime — a rolling window, not history
+`EVM(network: robinhood)` with no `dataset` argument queries the **realtime** dataset, which holds only a rolling window of recent blocks. This is the single most common reason a Pons query "works" but returns nothing older than a few days, and nothing in the response says which dataset served it.
+
+If you want history, say so explicitly:
+
+| Dataset | What it covers | When to use it |
+| --- | --- | --- |
+| *(omitted)* → `realtime` | Rolling recent window | Live streams, dashboards of the last few hours |
+| `dataset: archive` | Full history from the chain's indexing start | Backfills, per-day counts, anything dated |
+| `dataset: combined` | Archive merged with the realtime tail | A continuous view from launch day to now; slower |
+
+```graphql
+EVM(network: robinhood, dataset: archive)    { ... }
+EVM(network: robinhood, dataset: combined)   { ... }
+```
+
+See [Dataset options](/docs/graphql/dataset/options), [archive](/docs/graphql/dataset/archive), [realtime](/docs/graphql/dataset/realtime), [combined](/docs/graphql/dataset/combined), and [data coverage and retention](/docs/graphql/data-coverage-retention).
+:::
+
+**Every query on this page runs on `archive` and `combined`** — Pons V2 history reaches back to the first V2 launch — with two exceptions, both verified:
+
+| Construct | realtime | archive | combined |
+| --- | --- | --- | --- |
+| `Topics: {includes: […]}` filter (incl. topic0) | ✅ | ✅ | ✅ |
+| `Call.Input` / `Call.Output`, incl. `Input: {startsWith: […]}` | ✅ | ✅ | ✅ |
+| `LogHeader.Address` / `LogHeader.Data`, `Log.Signature.Name` | ✅ | ✅ | ✅ |
+| `Transfers`, `Holders`, `DEXTrades`, `Trading` | ✅ | ✅ | ✅ |
+| **`Log.Signature.SignatureHash` / `Call.Signature.SignatureHash`** | ✅ | ❌ | ❌ |
+| **`DEXPoolEvents`, `DEXPoolSlippages`, `TransactionBalances`** | ✅ | ❌ | ❌ |
+
+:::caution `SignatureHash` breaks archive whether you filter *or* select it
+Both of these force realtime, and the second one is easy to miss because the filter looks innocent:
+
+```graphql
+where: { Log: { Signature: { SignatureHash: {is: "…"} } } }   # filtering  → realtime only
+Log { Signature { SignatureHash } }                            # selecting → realtime only
+```
+
+On `archive` either one fails with `no candidate table can serve: [Log_Signature_SignatureHash]`; on `combined` it returns `no data available yet to query dataset combined`. **`Topics: {includes: [{Hash: {is: "<topic0>"}}]}` is the drop-in replacement** and works on all three datasets — so prefer it, and keep `SignatureHash` out of your selection set. That is exactly what the queries below do.
+:::
+
+---
+
 ## Contract addresses
 
 | Role | Address | Notes |
@@ -164,7 +209,7 @@ The quote asset of any launch is `pairToken`, the first word of the `TokenLaunch
 
 ## Event reference
 
-**Bitquery has no ABI for any Pons V2 contract**, so `Log.Signature.Name` is empty on every event on this page and `Arguments` comes back empty. The events are still fully indexed: filter on `Log.Signature.SignatureHash` (topic0) and read the payload from `LogHeader.Data`.
+**Bitquery has no ABI for any Pons V2 contract**, so `Log.Signature.Name` is empty on every event on this page and `Arguments` comes back empty. The events are still fully indexed: filter on the event's **topic0** and read the payload from `LogHeader.Data`.
 
 The **Indexed** column is what makes Pons awkward — indexed arguments live in the log's topics, and Bitquery does not expose topics as an output field. An event with all its addresses indexed has a payload that tells you nothing about *which* token it concerns. Two mechanisms get around that: the [`Topics` filter](#filtering-by-an-indexed-argument) and the [`Calls` cube](#newly-launched-tokens).
 
@@ -223,7 +268,7 @@ Every topic0 above was verified two ways: keccak-256 preimage match against the 
 
 ### Querying a raw event by topic0
 
-The pattern is the same for every row above — filter on `SignatureHash`, scope with `LogHeader.Address` where the emitter is a fixed contract, and read `LogHeader.Data`:
+The pattern is the same for every row above — match the topic0 with `Topics: {includes: […]}`, scope with `LogHeader.Address` where the emitter is a fixed contract, and read `LogHeader.Data`:
 
 ```graphql
 {
@@ -233,11 +278,7 @@ The pattern is the same for every row above — filter on `SignatureHash`, scope
       orderBy: {descending: Block_Time}
       where: {
         LogHeader: {Address: {is: "0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e"}}
-        Log: {
-          Signature: {
-            SignatureHash: {is: "8d4aad4953d0ca700d468f3753aa14432d1b35b43ec6409f051fb6aa43a89607"}
-          }
-        }
+        Topics: {includes: [{Hash: {is: "8d4aad4953d0ca700d468f3753aa14432d1b35b43ec6409f051fb6aa43a89607"}}]}
       }
     ) {
       Block { Time Number }
@@ -248,7 +289,7 @@ The pattern is the same for every row above — filter on `SignatureHash`, scope
 }
 ```
 
-`SignatureHash` values are supplied **without** a `0x` prefix.
+Topic0 values work with or without the `0x` prefix. `Log: {Signature: {SignatureHash: {is: "…"}}}` is an equivalent filter, but it pins the query to the realtime dataset — see [Datasets](#datasets).
 
 :::caution Scope curve and hook events to an emitter where you can
 Bonding curves are one contract per token, so a topic0-only filter on `CurveBuy` is the right scope — it captures every curve on the network at once, and `LogHeader.Address` tells you which one.
@@ -266,11 +307,7 @@ Topics: {includes: [{Hash: {is: "0x000000000000000000000000<token address withou
 
 The `0x` prefix is optional here. `includes`, `excludes`, `startsWith`, `endsWith` and `length` are all available.
 
-:::note `SignatureHash`, `Topics`, and `Calls` are realtime-only
-Filtering by `Log.Signature.SignatureHash` or by `Topics` — and the entire `Calls` cube — is served only by the **realtime** dataset. `dataset: archive` returns `no candidate table can serve: [Log_Signature_SignatureHash]`, and `dataset: combined` returns `no data available yet to query dataset combined` for the Event cube on Robinhood.
-
-Realtime is a rolling window of recent blocks. To reach further back than that window, use the [launch-mint transfer pattern](#launch-mint-archive), which runs on `archive`.
-:::
+This is also **the archive-safe way to filter by topic0**, which is why every query on this page uses it in place of `Log.Signature.SignatureHash`. See [Datasets](#datasets).
 
 ### Full signatures for client-side decoding
 
@@ -303,7 +340,7 @@ dcacba5e347ae7abd91cb519eb877af8fa7774e347b85dd3ddcd24a2ba8cdf37  Launched(addre
 
 The **`Calls` cube solves this completely.** `Call.Output` holds the function's return data, and every Pons launch entry point returns the addresses you need:
 
-| Selector | Function | `Call.Output` |
+| Selector (`Call.Input` prefix) | Function | `Call.Output` |
 | --- | --- | --- |
 | `f85f8e41` | `launchAndBuy(...)` on the router | `(address token, address curve, uint256 tokensOut)` |
 | `f35abbcf` | `launchToken(params, launchConfigId, pairToken)` | `(address token, address curve)` |
@@ -324,14 +361,14 @@ The **`Calls` cube solves this completely.** `Call.Output` holds the function's 
             "0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e",
             "0xe33e9e479df8802cb0866d5d05258bec4cf62948"
           ]}
-          Signature: {SignatureHash: {in: ["f35abbcf", "a72101af", "d6a0eef5", "f85f8e41"]}}
+          Input: {startsWith: ["0xf35abbcf", "0xa72101af", "0xd6a0eef5", "0xf85f8e41"]}
           Success: true
         }
       }
     ) {
       Block { Time Number }
       Transaction { Hash From }
-      Call { To Value Signature { SignatureHash } Input Output }
+      Call { To Value Input Output }
     }
   }
 }
@@ -361,14 +398,14 @@ subscription {
             "0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e",
             "0xe33e9e479df8802cb0866d5d05258bec4cf62948"
           ]}
-          Signature: {SignatureHash: {in: ["f35abbcf", "a72101af", "f85f8e41"]}}
+          Input: {startsWith: ["0xf35abbcf", "0xa72101af", "0xf85f8e41"]}
           Success: true
         }
       }
     ) {
       Block { Time }
       Transaction { Hash From }
-      Call { To Value Signature { SignatureHash } Input Output }
+      Call { To Value Input Output }
     }
   }
 }
@@ -411,7 +448,7 @@ For `launchAndBuy` the outer arguments after the struct are `launchConfigId`, `p
 
 ### Full history: the launch mint on `archive` {#launch-mint-archive}
 
-Because `Calls` is realtime-only, backfills use the **launch mint transfer** instead. It works on `archive`, and it carries more than you might expect: the mint's `Receiver` **is the bonding curve**, and `Currency` gives name, symbol and decimals.
+The `Calls` feed above already runs on `archive` — just add the argument. But the **launch mint transfer** is a second, independent route to the same list, and it is often the more convenient one: it carries name, symbol and decimals directly from `Currency`, and the mint's `Receiver` **is the bonding curve**. Use it when you want token metadata without decoding calldata, or as a cross-check on the call feed.
 
 ```graphql
 {
@@ -493,16 +530,15 @@ Get the curve address from the [launch feed](#newly-launched-tokens), then filte
       orderBy: {descending: Block_Time}
       where: {
         LogHeader: {Address: {is: "0x45ee6e38b1e8c570de48baf42144cddd7bfb3cc6"}}
-        Log: {Signature: {SignatureHash: {in: [
+        Topics: {includes: [{Hash: {in: [
           "ec36bf571f136799e8dc0b0b8bea4b04d8bd3d43de838aab0d5fc21d4cbfc455",
           "8113d738abdcb6b38357e9d53a54a7157861a09031b453651f0fe7fe151f59df"
-        ]}}}
+        ]}}]}
       }
     ) {
       Block { Time }
       Transaction { Hash From }
       LogHeader { Address Data }
-      Log { Signature { SignatureHash } }
     }
   }
 }
@@ -548,7 +584,7 @@ Because `CurveBuy.fee` bundles the base fee and the snipe tax, the snipe portion
       limit: {count: 25}
       orderBy: {descending: Block_Time}
       where: {
-        Log: {Signature: {SignatureHash: {is: "3bc39a5562b28f5fe8f36cecabfbaa12bb969acf05717994709225fc412a9934"}}}
+        Topics: {includes: [{Hash: {is: "3bc39a5562b28f5fe8f36cecabfbaa12bb969acf05717994709225fc412a9934"}}]}
       }
     ) {
       Block { Time }
@@ -585,13 +621,12 @@ The `Topics` filter turns the factory's all-indexed events into a per-token time
       Block { Time Number }
       Transaction { Hash From To }
       LogHeader { Data }
-      Log { Signature { SignatureHash } }
     }
   }
 }
 ```
 
-Map `SignatureHash` against the [event reference](#factory-events) and you get the full arc:
+Add the event's topic0 as a second `includes` entry to narrow to one event type — multiple hashes are combined with **AND**. Map each row against the [event reference](#factory-events) and you get the full arc:
 
 ```text
 TokenLaunched                      →  launch
@@ -625,7 +660,7 @@ The two phases land in **separate transactions**, seconds to minutes apart. A to
       orderBy: {descending: Block_Time}
       where: {
         LogHeader: {Address: {is: "0xe5e702641ea86f4ae6cc3cdaed2b886f976be044"}}
-        Log: {Signature: {SignatureHash: {is: "01bf263a1db1652580721573296e1a1fa70b3d4c87f61d02a69c4e1109d2d573"}}}
+        Topics: {includes: [{Hash: {is: "01bf263a1db1652580721573296e1a1fa70b3d4c87f61d02a69c4e1109d2d573"}}]}
       }
     ) {
       Block { Time Number }
@@ -804,7 +839,7 @@ Selecting a per-row metric such as `Supply { MarketCap }` alongside `sum(of: Vol
 
 ## Pool liquidity, slippage, and balance changes
 
-These three cubes are **realtime-only** on Robinhood — `archive` and `combined` both error — so use them for live monitoring and persist what you need. All three key off the **`PoolId`** from `Initialize`.
+These three cubes are **realtime-only** on Robinhood — `archive` and `combined` both error on them, unlike the rest of this page (see [Datasets](#datasets)) — so use them for live monitoring and persist what you need. All three key off the **`PoolId`** from `Initialize`.
 
 ### Live pool liquidity (depth)
 
@@ -944,7 +979,7 @@ subscription {
   EVM(network: robinhood) {
     Calls(where: {Call: {
       To: {in: ["0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e", "0xe33e9e479df8802cb0866d5d05258bec4cf62948"]}
-      Signature: {SignatureHash: {in: ["f35abbcf", "a72101af", "f85f8e41"]}}
+      Input: {startsWith: ["0xf35abbcf", "0xa72101af", "0xf85f8e41"]}
       Success: true
     }}) {
       Block { Time }
@@ -959,14 +994,13 @@ subscription {
 # 2. Every bonding-curve trade on the network
 subscription {
   EVM(network: robinhood) {
-    Events(where: {Log: {Signature: {SignatureHash: {in: [
+    Events(where: {Topics: {includes: [{Hash: {in: [
       "ec36bf571f136799e8dc0b0b8bea4b04d8bd3d43de838aab0d5fc21d4cbfc455",
       "8113d738abdcb6b38357e9d53a54a7157861a09031b453651f0fe7fe151f59df"
-    ]}}}}) {
+    ]}}]}}) {
       Block { Time }
       Transaction { Hash From }
       LogHeader { Address Data }
-      Log { Signature { SignatureHash } }
     }
   }
 }
@@ -978,7 +1012,7 @@ subscription {
   EVM(network: robinhood) {
     Events(where: {
       LogHeader: {Address: {is: "0xe5e702641ea86f4ae6cc3cdaed2b886f976be044"}}
-      Log: {Signature: {SignatureHash: {is: "01bf263a1db1652580721573296e1a1fa70b3d4c87f61d02a69c4e1109d2d573"}}}
+      Topics: {includes: [{Hash: {is: "01bf263a1db1652580721573296e1a1fa70b3d4c87f61d02a69c4e1109d2d573"}}]}
     }) {
       Block { Time }
       Transaction { Hash }
@@ -1014,7 +1048,7 @@ By the `hooks` field: `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044`. There is no 
 
 ### Can I get Pons history older than the realtime window?
 
-Partly. `SignatureHash` filters, `Topics` filters and the whole `Calls` cube are realtime-only. For older launches use the [archive launch-mint pattern](#launch-mint-archive); for older prices use the `Trading` cube, which is not subject to that limit.
+Yes — add `dataset: archive` (or `combined`) to the `EVM` root. Almost every query here supports it, including the `Calls` launch feed and every topic0 filter, because they use `Topics: {includes: […]}` rather than `SignatureHash`. Only `DEXPoolEvents`, `DEXPoolSlippages` and `TransactionBalances` are realtime-only. See [Datasets](#datasets) — forgetting this is the usual reason a query looks empty.
 
 ### Does this page cover Pons V1?
 
