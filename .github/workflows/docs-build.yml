@@ -20,3 +20,12 @@ jobs:
       - run: npm run build
       - name: Check internal links
         run: node scripts/check-links.mjs
+      # nginx/default.conf ships straight into the runtime image (see Dockerfile)
+      # and was never validated anywhere in CI. A syntax error there does not fail
+      # the build — it fails `nginx -g daemon off;` at container start, i.e. the
+      # docs go down on deploy. Validate it with the same nginx the image uses.
+      - name: Validate nginx config
+        run: |
+          docker run --rm \
+            -v "$PWD/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro" \
+            nginx:stable-alpine nginx -t
