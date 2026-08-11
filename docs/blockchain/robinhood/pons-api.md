@@ -211,6 +211,10 @@ The quote asset of any launch is `pairToken`, the first word of the `TokenLaunch
 
 **Bitquery has no ABI for any Pons V2 contract**, so `Log.Signature.Name` is empty on every event on this page and `Arguments` comes back empty. The events are still fully indexed: filter on the event's **topic0** and read the payload from `LogHeader.Data`.
 
+:::tip Check before you build a decoder
+ABI coverage gets added over time — the sibling [pools.trade page](/docs/blockchain/robinhood/pools-trade-api) documented raw events until Bitquery decoded them. Run any event query below and look at `Log { Signature { Name } }` and `Arguments`: if they come back populated, skip the manual `LogHeader.Data` decoding on this page and read the arguments directly.
+:::
+
 The **Indexed** column is what makes Pons awkward — indexed arguments live in the log's topics, and Bitquery does not expose topics as an output field. An event with all its addresses indexed has a payload that tells you nothing about *which* token it concerns. Two mechanisms get around that: the [`Topics` filter](#filtering-by-an-indexed-argument) and the [`Calls` cube](#newly-launched-tokens).
 
 ### Factory events {#factory-events}
@@ -347,6 +351,8 @@ The **`Calls` cube solves this completely.** `Call.Output` holds the function's 
 | `a72101af` | `launchToken(params, launchConfigId, pairToken, snipeTaxExemptions)` | `(address token, address curve)` |
 | `d6a0eef5` | `launchTokenFor(...)` — what the router calls internally | `(address token, address curve)` |
 
+`Input: {startsWith: […]}` accepts a list, and the `0x` prefix on each selector is optional. Do **not** use `Call: {Signature: {SignatureHash: …}}` here — it is the equivalent filter but pins the query to realtime, see [Datasets](#datasets).
+
 ### The complete launch feed
 
 ```graphql
@@ -361,7 +367,7 @@ The **`Calls` cube solves this completely.** `Call.Output` holds the function's 
             "0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e",
             "0xe33e9e479df8802cb0866d5d05258bec4cf62948"
           ]}
-          Input: {startsWith: ["0xf35abbcf", "0xa72101af", "0xd6a0eef5", "0xf85f8e41"]}
+          Input: {startsWith: ["0xf35abbcf", "0xa72101af", "0xf85f8e41"]}
           Success: true
         }
       }
@@ -382,8 +388,10 @@ const token = '0x' + o.slice(24, 64);
 const curve = '0x' + o.slice(88, 128);
 ```
 
-:::caution Filter on `launchTokenFor` and `launchAndBuy`, never both
-`launchAndBuy` on the router calls `launchTokenFor` on the factory internally, so a filter matching both selectors returns **two rows for the same launch** — one for the router's outer call, one for the factory's inner call. Either drop `d6a0eef5` (router launches are then attributed to the router call, which is where `Transaction.From` is the real creator), or deduplicate on `Transaction.Hash`.
+:::caution Never match `launchTokenFor` and `launchAndBuy` together
+`launchAndBuy` on the router calls `launchTokenFor` on the factory internally, so a filter matching both selectors returns **two rows for the same launch** — one for the router's outer call, one for the factory's inner call. Measured over 200 rows, including `d6a0eef5` alongside `f85f8e41` inflates the feed **1.4×**; the three-selector filter above is exactly 1.0×.
+
+That is why `d6a0eef5` is absent from the query. Router launches are attributed to the router call, which is also where `Transaction.From` is the real creator. If you do need `launchTokenFor` — to catch a launch routed through some other contract — add it and deduplicate on `Transaction.Hash`.
 :::
 
 ### Stream new launches in real time
@@ -482,7 +490,7 @@ The `Calls` feed above already runs on `archive` — just add the argument. But 
 `Transfer.Currency.SmartContract` is the token, `Transfer.Receiver` is its curve, `Transaction.From` is the creator, and `Block.Time` is the launch time.
 
 :::caution `Transaction.To` misses indirect launches
-This pattern only catches launches where the factory or router is the transaction target. A small share of launches route through third-party contracts or arrive inside contract-creation transactions and carry a different `Transaction.To`. The [`Calls` feed](#the-complete-launch-feed) matches on `Call.To`, so it catches those too — treat it as the source of truth within the realtime window, and the transfer pattern as the archive-reachable approximation.
+This pattern only catches launches where the factory or router is the transaction target. A small share of launches route through third-party contracts or arrive inside contract-creation transactions and carry a different `Transaction.To`. The [`Calls` feed](#the-complete-launch-feed) matches on `Call.To`, so it catches those too — and it runs on `archive` as well. Treat the call feed as the source of truth, and this one as the convenient metadata-carrying view.
 :::
 
 ### Most active token creators
@@ -575,7 +583,7 @@ snipeTaxBps(elapsed) = snipeTaxStartBps >> ((elapsed * 14) / snipeTaxSeconds)
 
 with integer division, `elapsed` in seconds since the launch transaction, and zero once `elapsed >= snipeTaxSeconds`. At the factory's current settings — `snipeTaxStartBps = 9900`, `snipeTaxSeconds = 3` — that resolves to **9900 bps in the launch second, 618 bps in the next, 19 bps in the next, then zero**. Both settings are owner-mutable; read the current values with `snipeTaxStartBps()` (`0x50e25ac2`) and `snipeTaxSeconds()` (`0x6783774b`) through the `Calls` cube, taking `Call.Output`.
 
-Because `CurveBuy.fee` bundles the base fee and the snipe tax, the snipe portion is what makes an early buy's effective rate jump far above the 100 bps baseline. `SnipeTaxCharged` isolates it:
+Because `CurveBuy.fee` bundles the base fee and the snipe tax, the snipe portion is what makes an early buy's effective rate jump far above the launch's base rate. `SnipeTaxCharged` isolates it:
 
 ```graphql
 {
@@ -635,7 +643,9 @@ GraduationTokensPermanentlyLocked  →  4/49 of supply locked forever
 PoolGraduated                      →  v4 pool created and seeded
 ```
 
-Swap the factory address for the **curve address** and the same filter returns that token's `CreatorFeeRecipientUpdated` and `SnipeTaxExempted` history.
+:::caution This works on the factory, not on the curve
+The trick only works where the token address is actually one of the log's topics. Factory events index the token, so they match. The **curve's** events do not — `CreatorFeeRecipientUpdated` indexes the two recipient addresses and `SnipeTaxExempted` indexes the exempted account, so filtering a curve address by the token topic returns **zero rows**. Query curve history by the curve's own address plus the event topic0 instead.
+:::
 
 ---
 
@@ -682,7 +692,7 @@ This is the query to run first when you want a **token set** to feed into the `T
 
 ### The graduated Uniswap v4 pool
 
-The PoolManager's `Initialize` **is** decoded, so the `PoolKey` reads without manual decoding — and scoping by `Transaction.To` on the factory isolates Pons graduations:
+The PoolManager's `Initialize` **is** decoded, so the `PoolKey` reads without manual decoding. Scope it by the **`hooks` argument** — the Pons hook is what makes a pool a Pons pool:
 
 ```graphql
 {
@@ -693,7 +703,10 @@ The PoolManager's `Initialize` **is** decoded, so the `PoolKey` reads without ma
       where: {
         LogHeader: {Address: {is: "0x8366a39cc670b4001a1121b8f6a443a643e40951"}}
         Log: {Signature: {Name: {is: "Initialize"}}}
-        Transaction: {To: {is: "0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e"}}
+        Arguments: {includes: {
+          Name: {is: "hooks"}
+          Value: {Address: {is: "0xe5e702641ea86f4ae6cc3cdaed2b886f976be044"}}
+        }}
       }
     ) {
       Block { Time }
@@ -714,6 +727,10 @@ The PoolManager's `Initialize` **is** decoded, so the `PoolKey` reads without ma
 ```
 
 Returns `id` (the **PoolId** you need for [liquidity and slippage](#pool-liquidity-slippage-and-balance-changes)), `currency0`, `currency1`, `fee`, `tickSpacing`, `hooks`, `sqrtPriceX96` and `tick`. Every Pons pool comes back with `fee: 0`, `tickSpacing: 200` and `hooks: 0xe5e702641ea86f4ae6cc3cdaed2b886f976be044`.
+
+:::note Filter on the hook, not on `Transaction.To`
+Scoping this query with `Transaction: {To: {is: "<factory>"}}` looks equivalent and is not: graduation is [permissionless](#graduation), so a keeper contract can call `createGraduatedPool` and carry a different `Transaction.To`. Measured over three days, the `Transaction.To` form returned 33 of 34 graduations while the `hooks` argument filter returned all 34. The hook is on every Pons pool regardless of who triggered it.
+:::
 
 :::note Why `fee` is zero
 Trading fees on a graduated Pons pool are charged by the **hook**, not by the pool. The pool's own LP fee is `0`, and `HookFeeCollected` on `0xe5e70264…` is where the fee and the creator tax actually show up. Reading `fee` from the `PoolKey` and calling it the trading cost will understate it to zero.
