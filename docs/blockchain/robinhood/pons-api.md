@@ -72,7 +72,7 @@ Every launch mints a **fixed 1,000,000,000 supply** straight into its own **bond
 | Pre-graduation venue | **Pons bonding curve**, one contract per token |
 | Post-graduation venue | **Uniswap v4** (`Protocol: uniswap_v4`) |
 | Graduation threshold | **4.2 ETH** for native-quoted launches; a per-asset amount for ERC-20 quotes |
-| Curve trade fee | **100 bps** (1%) of the quote leg |
+| Curve trade fee | **100 bps** (1%) of the quote leg — from the launch config, not a protocol constant |
 | Creator tax | set per launch, capped by the factory (`maxCreatorTaxBps`) |
 | Launch fee | **0.0005 ETH** |
 | Graduated pool `fee` | `0` — **all fees are taken by the hook**, not by the pool |
@@ -168,7 +168,9 @@ The quote asset of any launch is `pairToken`, the first word of the `TokenLaunch
 
 The **Indexed** column is what makes Pons awkward — indexed arguments live in the log's topics, and Bitquery does not expose topics as an output field. An event with all its addresses indexed has a payload that tells you nothing about *which* token it concerns. Two mechanisms get around that: the [`Topics` filter](#filtering-by-an-indexed-argument) and the [`Calls` cube](#newly-launched-tokens).
 
-### Factory — `0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e` {#factory-events}
+### Factory events {#factory-events}
+
+Emitter: `0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e`
 
 | Event | Indexed | topic0 (`SignatureHash`) |
 | --- | --- | --- |
@@ -180,7 +182,9 @@ The **Indexed** column is what makes Pons awkward — indexed arguments live in 
 | `LaunchForceSwept(address)` *(rare)* | 1 | `52c1a28345695afc7f6b7629133124dec5d61ee745affd65e4fd2a776bc05840` |
 | `LaunchGraduationRescued(address,address,uint256,uint256)` *(rare)* | 2 | `7017304fdd491394686dce984eac721f0be1a22228346210f16694772bde44ca` |
 
-### Bonding curve — one contract per token
+### Bonding curve events {#curve-events}
+
+Emitter: one contract per token — see [Newly launched tokens](#newly-launched-tokens).
 
 | Event | Indexed | topic0 (`SignatureHash`) |
 | --- | --- | --- |
@@ -195,7 +199,9 @@ The **Indexed** column is what makes Pons awkward — indexed arguments live in 
 | `BuybackLocked(uint256,uint256)` *(rare)* | 0 | `5feba9b0d52c92ada4b9c571c2bee52390c54f2947208ab250221e6ee32f12ff` |
 | `AutoGraduationFailed(address,uint256)` *(rare)* | 1 | `e2cd2f31ebc05ec28640102987f4c8fc5f20e269e1b3aa82577f3f2f0e35c7c6` |
 
-### Meme hook — `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044`
+### Meme hook events {#hook-events}
+
+Emitter: `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044`
 
 | Event | Indexed | topic0 (`SignatureHash`) |
 | --- | --- | --- |
@@ -506,7 +512,7 @@ Drop the `LogHeader.Address` filter to get **every curve trade on the network** 
 
 ### Reading the payload
 
-Both events carry four 32-byte words. `Transaction.From` is the trader; the indexed `buyer`/`seller` and `recipient` are not readable.
+Both events carry four 32-byte words. `Transaction.From` is the trader; the indexed `buyer`/`seller` and `recipient` are not readable. The base fee rate comes from the launch's config (`curveFeeBps`) rather than a protocol constant, so derive it from the events rather than assuming 100 bps.
 
 | Word | `CurveBuy` | `CurveSell` |
 | --- | --- | --- |
