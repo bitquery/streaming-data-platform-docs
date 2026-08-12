@@ -258,6 +258,8 @@ Note the `BtoAPriceInUSD: 0` and `AmountCurrencyBInUSD: 0` — real rows carry U
 
 ### Uniswap V4 pool (by PoolId)
 
+▶️ Runnable IDE examples: [new Uniswap v4 pools](https://ide.bitquery.io/uniswap-v4-pools-on-robinhood-chain) and [v4 hooks in use](https://ide.bitquery.io/uniswap-v4-hooks-robinhood-chain)
+
 ```graphql
 {
   EVM(network: robinhood, dataset: realtime) {

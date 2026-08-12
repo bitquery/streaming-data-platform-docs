@@ -255,6 +255,8 @@ Query the most recent trades across all Robinhood tokens — the query counterpa
 
 ## Whale Trades on Robinhood
 
+▶️ [Run in IDE](https://ide.bitquery.io/largest-swaps-robinhood-chain)
+
 Fetch large trades by filtering on USD value. This example returns trades of at least `$10,000` — adjust the `AmountsInUsd.Base` threshold as needed.
 
 ```graphql
@@ -918,6 +920,8 @@ subscription{
 ---
 
 ## Top Tokens on Robinhood by Volume
+
+▶️ [Run in IDE](https://ide.bitquery.io/top-tokens-by-volume-robinhood-chain)
 
 Rank the most actively traded Robinhood tokens by USD volume over the last 24 hours, aggregated from 1-second intervals with `sum`.
 
