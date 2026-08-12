@@ -56,6 +56,8 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 
 ## All token balances of an address (portfolio)
 
+▶️ [Run in IDE](https://ide.bitquery.io/wallet-token-balances-robinhood-chain)
+
 Everything a wallet holds in one call. The `selectWhere` keeps only non-zero rows.
 
 ```graphql

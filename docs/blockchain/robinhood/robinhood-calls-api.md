@@ -294,6 +294,8 @@ subscription {
 
 ## Stream contract deployments
 
+▶️ [Run in IDE](https://ide.bitquery.io/new-contracts-deployed-robinhood-chain)
+
 **New-contract radar:** `Call: { Create: true }` matches every `CREATE`/`CREATE2` frame — top-level and factory-internal. On these rows **`Call.To` is the newly deployed contract address** and `Call.From` is the deployer (`Receipt.ContractAddress` is populated only for top-level deployment transactions). When tested live, this stream caught a launchpad factory deploying a new token contract within seconds.
 
 ```graphql

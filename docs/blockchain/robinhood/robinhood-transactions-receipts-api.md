@@ -263,6 +263,8 @@ Swap the filter to `Block: { Number: { eq: "…" } }` for every log in a block (
 
 ## Latest transactions and live stream
 
+▶️ Runnable IDE examples: [daily transaction count](https://ide.bitquery.io/robinhood-chain-daily-transactions), [daily active wallets](https://ide.bitquery.io/robinhood-chain-active-wallets), [gas usage and price](https://ide.bitquery.io/robinhood-chain-gas-fees), [blocks per day](https://ide.bitquery.io/robinhood-chain-block-time)
+
 The newest transactions with their receipts — and the block numbers to plug into the examples above.
 
 ```graphql
