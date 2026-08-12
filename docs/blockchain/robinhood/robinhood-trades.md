@@ -63,6 +63,8 @@ These are live examples — meme tokens go quiet over time, so swap in any token
 
 ## Real-Time Trades on Robinhood
 
+▶️ [Stream all Robinhood Chain trades - Run in IDE](https://ide.bitquery.io/stream-robinhood-chain-trades)
+
 Stream real-time trades on Robinhood via a GraphQL subscription on `Trading.Trades` that includes details such as Trader Address, Base and Quote Currency Details, amounts, type of trade (buy or sell), market cap and transaction details.
 
 ▶️ [Run in IDE](https://ide.bitquery.io/Robinhood-Trades)
@@ -560,6 +562,8 @@ Using this GraphQL API endpoint you can get token trades by a trader with detail
 ---
 
 ## Top Traders of a Token on Robinhood
+
+▶️ Network-wide version: [Top Traders by Volume on Robinhood Chain](https://ide.bitquery.io/top-traders-robinhood-chain)
 
 Rank the biggest traders of a specific token by total USD volume, with a buy/sell split and trade count. Aggregates `Trading.Trades` grouped by trader.
 

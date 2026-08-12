@@ -39,6 +39,8 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 
 ---
 
+▶️ [Token lookup by contract address - Run in IDE](https://ide.bitquery.io/token-lookup-by-address-robinhood-chain)
+
 ## Latest Supply of a Token
 
 Get the most recent total supply for a single token by filtering on its contract address and taking the newest balance record.

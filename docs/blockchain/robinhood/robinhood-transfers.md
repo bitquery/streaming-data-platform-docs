@@ -411,6 +411,8 @@ Track ERC-20 style movements — WETH, USDG, tokenized stocks, meme tokens — w
 
 ## Transfers for a specific token
 
+▶️ [Whale WETH transfers - Run in IDE](https://ide.bitquery.io/whale-transfers-robinhood-chain)
+
 Filter with `Transfer.Currency.SmartContract`. Example: WETH on Robinhood.
 
 ▶️ [Run in IDE](https://ide.bitquery.io/Transfers-for-a-token-on-robinhood)

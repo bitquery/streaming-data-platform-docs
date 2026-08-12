@@ -49,6 +49,8 @@ For each launch query below, open the matching **WebSocket** IDE link to run it 
 
 ---
 
+▶️ Cross-launchpad stream: [New tokens on Robinhood Chain, all launchpads](https://ide.bitquery.io/stream-new-tokens-robinhood-chain)
+
 ## How token launches are detected
 
 Most Robinhood meme launch contracts mint tokens in a create transaction. You can detect those launches in two ways:
