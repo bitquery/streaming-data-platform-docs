@@ -101,7 +101,7 @@ Pons and [pools.trade](/docs/blockchain/robinhood/pools-trade-api) are structura
 | Pool `hooks` | PonsV2MemeHook | `0x000…000` |
 | Pool `fee` / `tickSpacing` | `0` / `200` | `2500` / `25` or `60` |
 | Quote assets | ETH, USDG, tokenized stocks | Mostly native ETH |
-| Curve trades in `Trading` cube | **No** | N/A — all trades are pool trades |
+| Curve trades in trade cubes | **Yes**, as `pons_v2` (from 2026-08-14) | N/A — all trades are pool trades |
 
 :::caution Pons V1 is a different protocol and is still live
 `PonsLaunchFactory` at `0xa5aab3f0c6eeadf30ef1d3eb997108e976351feb` is the **V1** launchpad. It is **still deploying tokens**, it has **no bonding curve** (each token gets a Uniswap V3 pool at launch), and its events have **different signatures and different topic0 values** from V2:
@@ -581,7 +581,34 @@ This pattern only catches launches where the factory or router is the transactio
 
 ## Bonding-curve trades
 
-**Pre-graduation trades are not in any DEX cube.** `DEXTrades`, `DEXTradeByTokens` and `Trading.Trades` all return zero rows for a token still on its curve, because there is no pool yet. The curve's own `CurveBuy` and `CurveSell` events are the only source.
+**Curve trades are now indexed as DEX trades** under their own protocol label — `ProtocolName: "pons_v2"`, `ProtocolFamily: "Pons"` — in `DEXTrades`, `DEXTradeByTokens` **and** the `Trading` cube, with the curve contract as `Trade.Dex.SmartContract`. Like event decoding, this coverage starts **2026-08-14**; for anything earlier, the curve's `CurveBuy` / `CurveSell` events remain the only source. One caveat: `PriceInUSD` reads `0` on curve trades in `DEXTradeByTokens` — compute USD from the ETH leg yourself.
+
+```graphql
+{
+  EVM(network: robinhood) {
+    DEXTradeByTokens(
+      limit: {count: 50}
+      orderBy: {descending: Block_Time}
+      where: {
+        TransactionStatus: {Success: true}
+        Trade: {Dex: {ProtocolName: {is: "pons_v2"}}}
+      }
+    ) {
+      Block { Time }
+      Transaction { Hash }
+      Trade {
+        Amount
+        Price
+        Dex { ProtocolName SmartContract }
+        Currency { Symbol SmartContract }
+        Side { Amount Currency { Symbol } Type }
+      }
+    }
+  }
+}
+```
+
+Add `Trade: {Currency: {SmartContract: {is: "<token>"}}}` to scope to one token. The event route below is still what you want for the **fee and tax legs** (`fee`, `tax`, snipe-tax attribution), which the DEX cubes do not carry, and for pre-2026-08-14 history.
 
 ### Every trade on one token's curve
 
@@ -834,8 +861,8 @@ Once graduated, a Pons token is an ordinary Uniswap v4 market:
 | `Pair.Market.Protocol` | `uniswap_v4` |
 | `Pair.Market.Network` | `Robinhood` |
 
-:::caution There is no `Pons` protocol label
-Pons tokens **cannot be isolated by protocol filter** — `uniswap_v4` on Robinhood also covers pools created elsewhere. Scope by token address: harvest the set from `PoolRegistered`, then filter `Trading` by `Token.Address: {in: [...]}`.
+:::caution The `pons_v2` protocol label covers curve trades, not graduated pools
+The `Trading` cube does have a Pons label — `Protocol: "pons_v2"` — but it marks **bonding-curve trades only**. Once a token graduates, its pool trades are plain `uniswap_v4`, which on Robinhood also covers pools created elsewhere, so **graduated Pons tokens cannot be isolated by protocol filter**. Scope by token address: harvest the set from `PoolRegistered`, then filter `Trading` by `Token.Address: {in: [...]}`. A protocol filter on `pons_v2` plus a token filter together give you a token's full curve + pool trade history in one cube.
 
 `Pair.Pool.Address` is the v4 PoolManager singleton on every row, not a per-pool address. Use the `PoolId` from `Initialize` when you need to identify one pool.
 :::
@@ -1140,7 +1167,7 @@ Subscribe to `Events` filtered on `Log: {Signature: {Name: {is: "TokenLaunched"}
 
 ### Why do my Pons trade queries return nothing?
 
-Almost certainly because the token has not graduated. Bonding-curve trades exist only as `CurveBuy` / `CurveSell` events on the token's own curve contract — `DEXTrades` and `Trading.Trades` have no rows until the v4 pool is created. See [Bonding-curve trades](#bonding-curve-trades).
+Check the date range: curve trades appear in the DEX cubes (as `ProtocolName: "pons_v2"`) only from **2026-08-14** onward. For a token that lived and died on its curve before that, `CurveBuy` / `CurveSell` events on the curve contract are the only trade record. And a `uniswap_v4` filter never matches a pre-graduation token — there is no pool until graduation. See [Bonding-curve trades](#bonding-curve-trades).
 
 ### Where do I get a token's name, symbol, image, and socials?
 
