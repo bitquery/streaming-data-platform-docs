@@ -10,6 +10,10 @@ You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tr
 
 Remember that Solana blocks are produced with a target block time of 400ms, in practice resulting in high throughput of approximately 4,000 transactions per second while achieving a theoretical maximum of 65,000 transactions per second (TPS).
 
+:::info USD Values
+All amounts in the Solana protobuf streams now include USD equivalents — token transfer amounts, DEX trade sides, transaction fees, and balance updates each carry an `...InUSD` field (e.g. `AmountInUSD`, `FeeInUSD`, `PostBalanceInUSD`). These are populated in real time on the streams.
+:::
+
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 ## Structure of On-Chain Data
