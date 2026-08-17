@@ -63,6 +63,7 @@ The `TokenBlockMessage` stream provides detailed information about token transfe
   - `Receiver`: Destination account
   - `Authority`: Account authorizing the transfer
   - `Currency`: Detailed token information
+  - `AmountInUSD`: USD value of the transferred amount
 
 - `Currency`: Rich metadata for each token, including:
   - `Name`, `Symbol`, `Decimals`
@@ -70,6 +71,8 @@ The `TokenBlockMessage` stream provides detailed information about token transfe
   - `MetadataAddress`: Metadata program account
   - `TokenCreators`: Original creators of the token
   - NFT properties like `SellerFeeBasisPoints` and `TokenStandard`
+  - `PriceInUSD`: Current USD price of the token
+  - `TotalSupplyInUSD`: USD value of the token's total supply
 
 The `solana.tokens.proto` topic uses this message type to share details of:
 
@@ -85,6 +88,7 @@ The `solana.tokens.proto` topic uses this message type to share details of:
   - **PreBalance:** The balance of the account before the transaction.
   - **PostBalance:** The balance of the account after the transaction.
   - **Currency Details:** Information about the currency type (e.g., Solana (SOL), Wrapped Solana (WSOL)).
+  - **PreBalanceInUSD / PostBalanceInUSD:** USD value of the balance before and after the transaction.
 
 #### Balance Updates After Each Instruction
 

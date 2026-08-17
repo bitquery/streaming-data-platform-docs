@@ -10,6 +10,10 @@ You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tr
 
 EVM blockchains produce blocks at varying intervals depending on the network. Ethereum mainnet targets ~12 seconds per block, while other EVM chains may have different block times.
 
+:::info USD Values
+All amounts in the EVM protobuf streams now include USD equivalents — token transfer amounts, DEX trade sides, transaction fees, and balance updates each carry an `...InUSD` field (e.g. `AmountInUSD`, `TransactionFeeInUSD`, `PostBalanceInUSD`). These are populated in real time on the streams.
+:::
+
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 ## Structure of On-Chain Data
@@ -94,6 +98,8 @@ Each transaction includes:
   - `Address` — Wallet whose balance changed
   - `PostBalance` — Balance after the transaction
   - `TokenOwnership` — For NFTs, indicates ownership details if applicable
+  - `PreBalanceInUSD` / `PostBalanceInUSD` — USD value of the balance before and after the transaction
+  - `TotalSupplyInUSD` — USD value of the token's total supply
 
 - **`NativeBalanceUpdates`** — Native currency (e.g., ETH) balance changes detected during the transaction:
 
@@ -116,6 +122,7 @@ The `TokenBlockMessage` stream provides information about token transfers:
   - `Id`: Token ID (for non-fungible tokens)
   - `Currency`: Detailed token information
   - `Success`: Whether the transfer succeeded
+  - `AmountInUSD`: USD value of the transferred amount
 
 - `TokenInfo`: Metadata about each token:
   - `SmartContract`: Token contract address
@@ -130,10 +137,11 @@ The `DexBlockMessage` stream specializes in DEX trading activity:
 
 - `DexTrade`: Records of trades executed on DEXs
 
-  - `Buy`/`Sell`: Both sides of the trade
+  - `Buy`/`Sell`: Both sides of the trade, each with an `AmountInUSD` field giving the USD value of that side
   - `Dex`: Information about the exchange
   - `Success`: Whether the trade succeeded
   - `Fees`: Trading fees paid
+  - `TransactionFeeInUSD`: USD value of the transaction fee
 
 - `DexInfo`: Details about the exchange:
 

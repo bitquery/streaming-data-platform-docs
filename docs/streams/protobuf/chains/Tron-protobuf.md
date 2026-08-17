@@ -8,6 +8,10 @@ You can find the schema [here](https://github.com/bitquery/streaming_protobuf/tr
 
 TRON produces blocks approximately every 3 seconds, offering high throughput for transactions and smart contracts.
 
+:::info USD Values
+All amounts in the TRON protobuf streams now include USD equivalents — token transfer amounts, DEX trade sides, and transaction fees each carry an `...InUSD` field (e.g. `AmountInUSD`, `TransactionFeeInUSD`). These are populated in real time on the streams.
+:::
+
 ## Structure of On-Chain Data
 
 The TRON Protobuf Streams provide three main message types for different use cases:
@@ -91,6 +95,7 @@ The `TokenBlockMessage` stream provides information about token transfers:
   - `Amount`: Amount of tokens transferred
   - `Currency`: Detailed token information
   - `Success`: Whether the transfer succeeded
+  - `AmountInUSD`: USD value of the transferred amount
 
 TRON supports multiple token standards:
 
@@ -102,11 +107,12 @@ TRON supports multiple token standards:
 
 The `DexBlockMessage` stream is specialized for DEX trading activity:
 
-- `DexTrade`: Records of trades executed on DEXs
-  - `Buy`/`Sell`: Both sides of the trade
+- `DexTrade`: Records of trades executed on DEXs (TRON reuses the EVM `DexTrade` message)
+  - `Buy`/`Sell`: Both sides of the trade, each with an `AmountInUSD` field giving the USD value of that side
   - `Dex`: Information about the exchange
   - `Success`: Whether the trade succeeded
   - `Fees`: Trading fees paid
+  - `TransactionFeeInUSD`: USD value of the transaction fee
 
 ### TRON-Specific Features
 
