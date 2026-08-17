@@ -209,13 +209,26 @@ The quote asset of any launch is `pairToken`, the first word of the `TokenLaunch
 
 ## Event reference
 
-**Bitquery has no ABI for any Pons V2 contract**, so `Log.Signature.Name` is empty on every event on this page and `Arguments` comes back empty. The events are still fully indexed: filter on the event's **topic0** and read the payload from `LogHeader.Data`.
+**Most Pons V2 events are now ABI-decoded.** The factory, the router, every bonding curve, and the locker's `PositionLocked` all come back with `Log.Signature.Name` populated and `Arguments` fully readable — **including the indexed arguments**, which decoding lifts out of the topics for you. Filter and read them by name:
 
-:::tip Check before you build a decoder
-ABI coverage gets added over time — the sibling [pools.trade page](/docs/blockchain/robinhood/pools-trade-api) documented raw events until Bitquery decoded them. Run any event query below and look at `Log { Signature { Name } }` and `Arguments`: if they come back populated, skip the manual `LogHeader.Data` decoding on this page and read the arguments directly.
+```graphql
+where: { Log: { Signature: { Name: {is: "CurveBuy"} } } }
+```
+
+Three contracts are still undecoded, and for those the topic0 + `LogHeader.Data` patterns later on this page remain the only route:
+
+| Contract | Decoded? |
+| --- | --- |
+| Factory `0x7ed598bc…` | ✅ all events |
+| Router `0xe33e9e47…` | ✅ `Launched` |
+| Bonding curves (one per token) | ✅ all events (`CurveBuy`, `CurveSell`, `SnipeTaxCharged`, …) |
+| Locker `0x267444d0…` | ⚠️ `PositionLocked` ✅, `TokenSupplyLocked` ❌ |
+| **Meme hook `0xe5e70264…`** | ❌ `PoolRegistered`, `HookFeeCollected`, `PoolFeesSwept` |
+| **Graduation executor `0xc7819b64…`** | ❌ `GraduationDustSwept` |
+
+:::caution Decoded names only reach back to 2026-08-14 on `archive`
+Decoding was applied from **2026-08-14** onward and older archive rows have not been reprocessed: on `archive`/`combined`, rows before that date carry an **empty `Signature.Name` and no `Arguments`**, so a `Signature: {Name: …}` filter silently drops all earlier history — measured on `TokenLaunched`, the name filter returned roughly half the rows the topic0 filter did over the same window. For anything historical, keep filtering with `Topics: {includes: [{Hash: {is: "<topic0>"}}]}` (which matches decoded and undecoded rows alike) and treat `Signature.Name` / `Arguments` as fields that may be empty on old rows. If Bitquery backfills the archive later, this caveat disappears — re-run the count comparison to check.
 :::
-
-The **Indexed** column is what makes Pons awkward — indexed arguments live in the log's topics, and Bitquery does not expose topics as an output field. An event with all its addresses indexed has a payload that tells you nothing about *which* token it concerns. Two mechanisms get around that: the [`Topics` filter](#filtering-by-an-indexed-argument) and the [`Calls` cube](#newly-launched-tokens).
 
 ### Factory events {#factory-events}
 
@@ -270,9 +283,44 @@ Emitter: `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044`
 
 Every topic0 above was verified two ways: keccak-256 preimage match against the signature from the verified contract source, and live occurrence on Robinhood Chain. Rows marked *(rare)* are admin or failure paths that exist in the ABI but fire infrequently.
 
+### Querying a decoded event by name
+
+For any decoded event, filter on `Log.Signature.Name` and read `Arguments` directly — no `LogHeader.Data` decoding, and the indexed addresses are right there:
+
+```graphql
+{
+  EVM(network: robinhood) {
+    Events(
+      limit: {count: 25}
+      orderBy: {descending: Block_Time}
+      where: {
+        LogHeader: {Address: {is: "0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e"}}
+        Log: {Signature: {Name: {is: "TokenLaunched"}}}
+      }
+    ) {
+      Block { Time Number }
+      Transaction { Hash From }
+      Log { Signature { Name } }
+      Arguments {
+        Name
+        Type
+        Value {
+          ... on EVM_ABI_Address_Value_Arg { address }
+          ... on EVM_ABI_BigInt_Value_Arg { bigInteger }
+          ... on EVM_ABI_Integer_Value_Arg { integer }
+          ... on EVM_ABI_Bytes_Value_Arg { hex }
+        }
+      }
+    }
+  }
+}
+```
+
+Each row returns `token`, `curve`, `deployer`, `pairToken`, `launchConfigId` and `graduationThreshold` as named arguments — including the three indexed addresses that used to be locked away in the topics. This works on `realtime`, and on `archive`/`combined` for blocks from 2026-08-14 onward — see the [caution above](#event-reference).
+
 ### Querying a raw event by topic0
 
-The pattern is the same for every row above — match the topic0 with `Topics: {includes: […]}`, scope with `LogHeader.Address` where the emitter is a fixed contract, and read `LogHeader.Data`:
+For the undecoded hook, executor, and locker `TokenSupplyLocked` events — and for **any** event on archive rows older than 2026-08-14 — match the topic0 with `Topics: {includes: […]}`, scope with `LogHeader.Address` where the emitter is a fixed contract, and read `LogHeader.Data`:
 
 ```graphql
 {
@@ -303,7 +351,16 @@ For fixed-emitter events, **always add `LogHeader.Address`**. A signature such a
 
 ### Filtering by an indexed argument
 
-Indexed arguments are not readable, but they **are** filterable. `Topics: {includes: [{Hash: {is: "…"}}]}` matches any topic in the log, including topic0 and any indexed address padded to 32 bytes. This is what makes an all-indexed event like `TokenLaunched` usable — see [Token lifecycle](#token-lifecycle-in-one-query).
+On decoded events, indexed arguments are ordinary named arguments — filter them with `Arguments: {includes: …}`:
+
+```graphql
+Arguments: {includes: {
+  Name: {is: "token"}
+  Value: {Address: {is: "0x11ff6356504e85e792c385b3381f273a4b764cfe"}}
+}}
+```
+
+On undecoded events (the hook and executor) and on pre-2026-08-14 archive rows, the `Topics` filter is the fallback: `Topics: {includes: [{Hash: {is: "…"}}]}` matches any topic in the log, including topic0 and any indexed address padded to 32 bytes:
 
 ```graphql
 Topics: {includes: [{Hash: {is: "0x000000000000000000000000<token address without 0x>"}}]}
@@ -340,9 +397,9 @@ dcacba5e347ae7abd91cb519eb877af8fa7774e347b85dd3ddcd24a2ba8cdf37  Launched(addre
 
 ## Newly launched tokens
 
-`TokenLaunched` indexes **token, curve and deployer**, so its payload carries only `pairToken`, `launchConfigId` and `graduationThreshold`. It is a good *counter* of launches and a good *lifecycle marker*, but on its own it never tells you which token launched.
+The simplest launch feed is now the decoded `TokenLaunched` event itself — the [name-filtered query above](#querying-a-decoded-event-by-name) returns `token`, `curve`, `deployer`, `pairToken` and `graduationThreshold` as named arguments on every launch. Stream it as a subscription and you have a live launch tape with zero decoding.
 
-The **`Calls` cube solves this completely.** `Call.Output` holds the function's return data, and every Pons launch entry point returns the addresses you need:
+The **`Calls` cube is still worth knowing**, for two reasons: it is the only on-chain source of the launch **metadata** (name, symbol, image, socials — see [Token metadata](#token-metadata)), and it covers **full archive history**, whereas decoded event names only reach back to 2026-08-14. `Call.Output` holds the function's return data, and every Pons launch entry point returns the addresses you need:
 
 | Selector (`Call.Input` prefix) | Function | `Call.Output` |
 | --- | --- | --- |
@@ -528,7 +585,7 @@ This pattern only catches launches where the factory or router is the transactio
 
 ### Every trade on one token's curve
 
-Get the curve address from the [launch feed](#newly-launched-tokens), then filter on it as the emitter:
+`CurveBuy` and `CurveSell` are decoded, so filter by name and read the arguments — buyer, seller and recipient included, which used to be unreadable indexed topics. Get the curve address from the [launch feed](#newly-launched-tokens), then filter on it as the emitter:
 
 ```graphql
 {
@@ -538,15 +595,20 @@ Get the curve address from the [launch feed](#newly-launched-tokens), then filte
       orderBy: {descending: Block_Time}
       where: {
         LogHeader: {Address: {is: "0x45ee6e38b1e8c570de48baf42144cddd7bfb3cc6"}}
-        Topics: {includes: [{Hash: {in: [
-          "ec36bf571f136799e8dc0b0b8bea4b04d8bd3d43de838aab0d5fc21d4cbfc455",
-          "8113d738abdcb6b38357e9d53a54a7157861a09031b453651f0fe7fe151f59df"
-        ]}}]}
+        Log: {Signature: {Name: {in: ["CurveBuy", "CurveSell"]}}}
       }
     ) {
       Block { Time }
       Transaction { Hash From }
-      LogHeader { Address Data }
+      LogHeader { Address }
+      Log { Signature { Name } }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Address_Value_Arg { address }
+          ... on EVM_ABI_BigInt_Value_Arg { bigInteger }
+        }
+      }
     }
   }
 }
@@ -554,24 +616,25 @@ Get the curve address from the [launch feed](#newly-launched-tokens), then filte
 
 Drop the `LogHeader.Address` filter to get **every curve trade on the network** in one feed — that is the shape you want for a launch-wide tape, and `LogHeader.Address` identifies the curve on each row.
 
-### Reading the payload
+### Reading the arguments
 
-Both events carry four 32-byte words. `Transaction.From` is the trader; the indexed `buyer`/`seller` and `recipient` are not readable. The base fee rate comes from the launch's config (`curveFeeBps`) rather than a protocol constant, so derive it from the events rather than assuming 100 bps.
-
-| Word | `CurveBuy` | `CurveSell` |
+| Argument | `CurveBuy` | `CurveSell` |
 | --- | --- | --- |
-| 0 | `quoteIn` — quote asset spent | `tokensIn` — tokens sold |
-| 1 | `tokensOut` — tokens received | `quoteOut` — quote asset received |
-| 2 | `fee` — base fee **plus snipe tax** | `fee` |
-| 3 | `tax` — creator tax, paid to the creator in full | `tax` |
+| `buyer` / `seller` | wallet that traded | wallet that traded |
+| `recipient` | receiver of the tokens | receiver of the quote |
+| `quoteIn` / `tokensIn` | quote asset spent | tokens sold |
+| `tokensOut` / `quoteOut` | tokens received | quote asset received |
+| `fee` | base fee **plus snipe tax** | base fee |
+| `tax` | creator tax, paid to the creator in full | creator tax |
+
+Price is `quoteIn / tokensOut` (or `quoteOut / tokensIn` on a sell). All amounts are raw integers in their asset's own decimals — 18 for the token, and the quote asset's own for the quote leg (6 for USDG). The base fee rate comes from the launch's config (`curveFeeBps`) rather than a protocol constant, so derive it from the events rather than assuming 100 bps.
+
+For pre-2026-08-14 archive rows, `Arguments` comes back empty — fall back to the topic0 filter (`ec36bf57…` / `8113d738…` from the [event reference](#curve-events)) and decode `LogHeader.Data` yourself; it carries the four non-indexed words in the order above:
 
 ```js
 const w = i => BigInt('0x' + data.slice(i * 64, (i + 1) * 64));
 const [quoteIn, tokensOut, fee, tax] = [w(0), w(1), w(2), w(3)];
-const price = Number(quoteIn) / Number(tokensOut);   // quote per token
 ```
-
-Both legs are raw integers in their asset's own decimals — 18 for the token, and the quote asset's own for the quote leg (6 for USDG).
 
 ### Snipe tax
 
@@ -592,18 +655,25 @@ Because `CurveBuy.fee` bundles the base fee and the snipe tax, the snipe portion
       limit: {count: 25}
       orderBy: {descending: Block_Time}
       where: {
-        Topics: {includes: [{Hash: {is: "3bc39a5562b28f5fe8f36cecabfbaa12bb969acf05717994709225fc412a9934"}}]}
+        Log: {Signature: {Name: {is: "SnipeTaxCharged"}}}
       }
     ) {
       Block { Time }
       Transaction { Hash From }
-      LogHeader { Address Data }
+      LogHeader { Address }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Address_Value_Arg { address }
+          ... on EVM_ABI_BigInt_Value_Arg { bigInteger }
+        }
+      }
     }
   }
 }
 ```
 
-`LogHeader.Data` is the single `amount` word, `LogHeader.Address` is the curve, and `Transaction.From` is the wallet that paid it — which is to say, **the sniper**. Creators can pre-declare exempt wallets at launch; those emit `SnipeTaxExempted` in the launch transaction, so the exemption list for a launch is recoverable from its own transaction hash.
+`recipient` and `amount` come back as named arguments, `LogHeader.Address` is the curve, and `Transaction.From` is the wallet that paid it — which is to say, **the sniper**. Creators can pre-declare exempt wallets at launch; those emit `SnipeTaxExempted` in the launch transaction, so the exemption list for a launch is recoverable from its own transaction hash.
 
 ### Graduation progress
 
@@ -613,7 +683,7 @@ There is no on-chain progress event. Sum the net quote taken in by the curve —
 
 ## Token lifecycle in one query
 
-The `Topics` filter turns the factory's all-indexed events into a per-token timeline. Pad the token address to 32 bytes and every factory event that names it comes back in order:
+Factory events are decoded and they all name the token in a `token` argument, so one `Arguments` filter returns a per-token timeline with each event's name attached:
 
 ```graphql
 {
@@ -623,18 +693,34 @@ The `Topics` filter turns the factory's all-indexed events into a per-token time
       orderBy: {ascending: Block_Time}
       where: {
         LogHeader: {Address: {is: "0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e"}}
-        Topics: {includes: [{Hash: {is: "0x00000000000000000000000095d3bc5d467d448ac83c5b33ff90f4dcfaf4c1e4"}}]}
+        Arguments: {includes: {
+          Name: {is: "token"}
+          Value: {Address: {is: "0x95d3bc5d467d448ac83c5b33ff90f4dcfaf4c1e4"}}
+        }}
       }
     ) {
       Block { Time Number }
       Transaction { Hash From To }
-      LogHeader { Data }
+      Log { Signature { Name } }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Address_Value_Arg { address }
+          ... on EVM_ABI_BigInt_Value_Arg { bigInteger }
+        }
+      }
     }
   }
 }
 ```
 
-Add the event's topic0 as a second `includes` entry to narrow to one event type — multiple hashes are combined with **AND**. Map each row against the [event reference](#factory-events) and you get the full arc:
+For history older than 2026-08-14 the arguments are empty, so the topic-padding form still earns its keep — pad the token address to 32 bytes and filter it as a topic (indexed args live in the topics whether decoded or not):
+
+```graphql
+Topics: {includes: [{Hash: {is: "0x00000000000000000000000095d3bc5d467d448ac83c5b33ff90f4dcfaf4c1e4"}}]}
+```
+
+Add the event's topic0 as a second `includes` entry to narrow to one event type — multiple hashes are combined with **AND**. Either way you get the full arc:
 
 ```text
 TokenLaunched                      →  launch
@@ -660,7 +746,7 @@ The two phases land in **separate transactions**, seconds to minutes apart. A to
 
 ### Enumerating graduated tokens
 
-`PoolGraduated` indexes the token, so it cannot tell you *which* token graduated. The hook's **`PoolRegistered` can** — its `memecoin`, `quoteToken` and `creator` are all in the payload:
+`PoolGraduated` is decoded, so `Log: {Signature: {Name: {is: "PoolGraduated"}}}` on the factory now returns the token, position id and seeded amounts as named arguments — the quickest graduation feed for recent blocks. Two reasons to still use the hook's **`PoolRegistered`** instead: it also carries `quoteToken` and `creator`, and it works across the full archive (the hook is undecoded, so it never depended on decode coverage in the first place):
 
 ```graphql
 {
