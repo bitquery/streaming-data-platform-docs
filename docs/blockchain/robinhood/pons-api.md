@@ -1094,16 +1094,21 @@ subscription {
 ```
 
 ```graphql
-# 2. Every bonding-curve trade on the network
+# 2. Every bonding-curve trade on the network, fully decoded
 subscription {
   EVM(network: robinhood) {
-    Events(where: {Topics: {includes: [{Hash: {in: [
-      "ec36bf571f136799e8dc0b0b8bea4b04d8bd3d43de838aab0d5fc21d4cbfc455",
-      "8113d738abdcb6b38357e9d53a54a7157861a09031b453651f0fe7fe151f59df"
-    ]}}]}}) {
+    Events(where: {Log: {Signature: {Name: {in: ["CurveBuy", "CurveSell"]}}}}) {
       Block { Time }
       Transaction { Hash From }
-      LogHeader { Address Data }
+      LogHeader { Address }
+      Log { Signature { Name } }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Address_Value_Arg { address }
+          ... on EVM_ABI_BigInt_Value_Arg { bigInteger }
+        }
+      }
     }
   }
 }
@@ -1131,7 +1136,7 @@ subscription {
 
 ### How do I detect a newly launched Pons token?
 
-Subscribe to the `Calls` cube on the factory and router and read `Call.Output` for the token and curve addresses. `TokenLaunched` indexes all three of its addresses, so the event alone cannot identify the token. See [Newly launched tokens](#newly-launched-tokens).
+Subscribe to `Events` filtered on `Log: {Signature: {Name: {is: "TokenLaunched"}}}` — the event is decoded, and its `token`, `curve` and `deployer` arguments are all readable. Use the `Calls` cube instead when you also want the launch metadata (name, symbol, image, socials) or launch history older than 2026-08-14. See [Newly launched tokens](#newly-launched-tokens).
 
 ### Why do my Pons trade queries return nothing?
 
@@ -1151,7 +1156,7 @@ By the `hooks` field: `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044`. There is no 
 
 ### Can I get Pons history older than the realtime window?
 
-Yes — add `dataset: archive` (or `combined`) to the `EVM` root. Almost every query here supports it, including the `Calls` launch feed and every topic0 filter, because they use `Topics: {includes: […]}` rather than `SignatureHash`. Only `DEXPoolEvents`, `DEXPoolSlippages` and `TransactionBalances` are realtime-only. See [Datasets](#datasets) — forgetting this is the usual reason a query looks empty.
+Yes — add `dataset: archive` (or `combined`) to the `EVM` root. Almost every query here supports it, including the `Calls` launch feed and every topic0 filter, because they use `Topics: {includes: […]}` rather than `SignatureHash`. Only `DEXPoolEvents`, `DEXPoolSlippages` and `TransactionBalances` are realtime-only. Two caveats: forgetting the `dataset` argument is the usual reason a query looks empty, and **decoded `Signature.Name` / `Arguments` are only populated on archive rows from 2026-08-14 onward** — filter historical ranges by topic0, not by name. See [Datasets](#datasets) and the [event reference](#event-reference).
 
 ### Does this page cover Pons V1?
 
