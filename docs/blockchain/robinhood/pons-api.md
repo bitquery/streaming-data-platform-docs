@@ -581,34 +581,38 @@ This pattern only catches launches where the factory or router is the transactio
 
 ## Bonding-curve trades
 
-**Curve trades are now indexed as DEX trades** under their own protocol label — `ProtocolName: "pons_v2"`, `ProtocolFamily: "Pons"` — in `DEXTrades`, `DEXTradeByTokens` **and** the `Trading` cube, with the curve contract as `Trade.Dex.SmartContract`. Like event decoding, this coverage starts **2026-08-14**; for anything earlier, the curve's `CurveBuy` / `CurveSell` events remain the only source. One caveat: `PriceInUSD` reads `0` on curve trades in `DEXTradeByTokens` — compute USD from the ETH leg yourself.
+**Curve trades are now indexed as trades** under their own protocol label — `Protocol: "pons_v2"`, `ProtocolFamily: "Pons"` — and the best place to read them is the **`Trading` cube (Crypto Price API)**: one row per trade with `Side`, `Trader`, and **fully populated `PriceInUsd` / `AmountsInUsd`**, plus [OHLCV candles](#ohlcv-price-candles) that work from the token's very first curve trade. Like event decoding, this coverage starts **2026-08-14**; for anything earlier, the curve's `CurveBuy` / `CurveSell` events remain the only source.
 
 ```graphql
 {
-  EVM(network: robinhood) {
-    DEXTradeByTokens(
+  Trading {
+    Trades(
       limit: {count: 50}
       orderBy: {descending: Block_Time}
       where: {
-        TransactionStatus: {Success: true}
-        Trade: {Dex: {ProtocolName: {is: "pons_v2"}}}
+        Pair: {Market: {Protocol: {is: "pons_v2"} Network: {is: "Robinhood"}}}
       }
     ) {
       Block { Time }
-      Transaction { Hash }
-      Trade {
-        Amount
-        Price
-        Dex { ProtocolName SmartContract }
-        Currency { Symbol SmartContract }
-        Side { Amount Currency { Symbol } Type }
+      Side
+      Price
+      PriceInUsd
+      Amounts { Base Quote }
+      AmountsInUsd { Base Quote }
+      Trader { Address }
+      TransactionHeader { Hash }
+      Pair {
+        Token { Address Symbol }
+        QuoteToken { Symbol }
       }
     }
   }
 }
 ```
 
-Add `Trade: {Currency: {SmartContract: {is: "<token>"}}}` to scope to one token. The event route below is still what you want for the **fee and tax legs** (`fee`, `tax`, snipe-tax attribution), which the DEX cubes do not carry, and for pre-2026-08-14 history.
+Add `Pair: {Token: {Address: {is: "<token>"}}}` to scope to one token — and because the same cube also carries the token's post-graduation `uniswap_v4` trades, dropping the protocol filter gives a token's **entire curve-to-pool trade history in one query**. The same trades also appear in the EVM `DEXTrades` / `DEXTradeByTokens` cubes (curve contract as `Trade.Dex.SmartContract`), but `PriceInUSD` reads `0` there — prefer `Trading`.
+
+The event route below is still what you want for the **fee and tax legs** (`fee`, `tax`, snipe-tax attribution), which the trade cubes do not carry, and for pre-2026-08-14 history.
 
 ### Every trade on one token's curve
 
@@ -851,9 +855,9 @@ Trading fees on a graduated Pons pool are charged by the **hook**, not by the po
 
 ---
 
-## Trading data (post-graduation)
+## Trading data in the Trading cube (Crypto Price API)
 
-Once graduated, a Pons token is an ordinary Uniswap v4 market:
+The `Trading` cube covers a Pons token across both venues: curve trades carry `Protocol: "pons_v2"` (see [Bonding-curve trades](#bonding-curve-trades)), and once graduated the token is an ordinary Uniswap v4 market:
 
 | Field | Value |
 | --- | --- |
@@ -907,6 +911,8 @@ One user swap can still fan out into several routed legs across different quote 
 :::
 
 ### OHLCV price candles
+
+Candles are built from every `Trading` row, so they start from the token's **first bonding-curve trade** — no need to wait for graduation, and the series runs continuously across the curve-to-pool transition:
 
 ```graphql
 {
@@ -1167,7 +1173,7 @@ Subscribe to `Events` filtered on `Log: {Signature: {Name: {is: "TokenLaunched"}
 
 ### Why do my Pons trade queries return nothing?
 
-Check the date range: curve trades appear in the DEX cubes (as `ProtocolName: "pons_v2"`) only from **2026-08-14** onward. For a token that lived and died on its curve before that, `CurveBuy` / `CurveSell` events on the curve contract are the only trade record. And a `uniswap_v4` filter never matches a pre-graduation token — there is no pool until graduation. See [Bonding-curve trades](#bonding-curve-trades).
+Check the date range: curve trades appear in the trade cubes (as `Protocol: "pons_v2"`, best read via the `Trading` cube) only from **2026-08-14** onward. For a token that lived and died on its curve before that, `CurveBuy` / `CurveSell` events on the curve contract are the only trade record. And a `uniswap_v4` filter never matches a pre-graduation token — there is no pool until graduation. See [Bonding-curve trades](#bonding-curve-trades).
 
 ### Where do I get a token's name, symbol, image, and socials?
 
