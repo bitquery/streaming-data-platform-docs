@@ -25,3 +25,10 @@ Top level element of the query has 3 attributes, defining what is the source for
 For example, the dataset for subscription is always real time and not controlled.
 :::
 
+
+## What is the default dataset if I do not set one?
+
+If you omit `dataset`, the query behaves as **`dataset: realtime`** — the rolling recent window, with all
+filters available. Set `dataset: archive` or `dataset: combined` explicitly when you need history, and note
+that aggregate datasets restrict which fields can be filtered: see
+[Filter limitations on aggregate datasets](/docs/blockchain/Solana/historical-aggregate-data/#filter-limitations-on-aggregate-datasets).

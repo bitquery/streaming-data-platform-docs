@@ -17,6 +17,30 @@ However the options to use the historical data are quite limited and currently o
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
 :::
 
+## Filter limitations on aggregate datasets
+
+On `Solana` with `dataset: archive` or `dataset: combined`, `DEXTradeByTokens` is served from
+pre-aggregated tables. **USD-denominated fields and `PriceAsymmetry` cannot be used inside `where:`.**
+A query that filters on them fails outright with an error such as
+`no table can query DEXTradeByToken` or `database schema not defined for archive cube` — it does not
+silently return different numbers. The same USD fields work normally as **output measures**.
+
+| Field | As a `where:` filter | As a measure / projection |
+|---|---|---|
+| `Trade.Amount`, `Trade.Side.Amount` | works | works |
+| `Trade.Price` | works | works |
+| `Trade.Currency`, `Trade.Side.Currency` | works | works |
+| `Trade.Account.Address` | works | works |
+| `Trade.Side.Type`, `Trade.Dex`, `Block.Time` | works | works |
+| `Trade.PriceAsymmetry` | **error** | — |
+| `Trade.Side.AmountInUSD`, `Trade.AmountInUSD` | **error** | works — `sum(of: Trade_Side_AmountInUSD)` |
+| `Trade.PriceInUSD` | **error** | works — `quantile(of: Trade_PriceInUSD)` |
+| `Trade.Side.Account` | **error** | **error** |
+
+All of these filters work on `dataset: realtime`, which covers a rolling recent window (hours).
+To filter by USD amount or `PriceAsymmetry` over history, use the
+[Trading API](/docs/trading/crypto-trades-api/trades-api/), which carries USD price and supply on every row.
+
 ## Historical Trades for Solana
 
 **Historical trades for upto past 30 days could be retrieved via Trading API. Docs available [here](/docs/trading/crypto-trades-api/trades-api/).**
@@ -86,7 +110,7 @@ query MyQuery {
 
 ## Historical OHLC on Solana
 
-[This](https://ide.bitquery.io/historical-ohlc-for-solana_3) query returns the historical OHLC data for a given pair along with volume
+[This](https://ide.bitquery.io/Historical-OHLC-for-Solana-archive) query returns the historical OHLC data for a given pair along with volume
 and number of trades in the given interval.
 
 For this example the pair between the tokens listed below is considered.
@@ -107,7 +131,6 @@ For this example the pair between the tokens listed below is considered.
               MintAddress: { is: "So11111111111111111111111111111111111111112" }
             }
           }
-          PriceAsymmetry: { lt: 0.1 }
         }
       }
       limit: { count: 10 }
@@ -137,6 +160,11 @@ For this example the pair between the tokens listed below is considered.
     These would represent the _close_ of April 14 and _open_ of April 15 respectively, leaving a gap in between.
 
 - **Derived from block time**: All time-based grouping (daily, hourly, etc.) depends on block timestamps.
+
+- **No `PriceAsymmetry` filter on archive/combined**: this query cannot exclude asymmetric prints, so
+  `high` and `low` take raw extremes and may include outlier trades. For cleaner candles over the last
+  ~30 days use the [Trading API](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/), which
+  serves USD OHLC directly. See [Filter limitations](#filter-limitations-on-aggregate-datasets).
 
 **Alternative approach**: You can get all trades and calculate OHLC locally in your own system. Complete guide [here](/docs/usecases/ohlcv-complete-guide/)
 
@@ -310,7 +338,10 @@ query MyQuery {
 ## Get ATH (All-Time High) of a Token
 
 In this query we use the 95th percentile (`level: 0.95`) to find the highest price of a token.
-We also use `PriceAsymmetry` and `AmountInUSD` in combination to filter outliers as much as possible.
+The 95th percentile is itself outlier-resistant, which matters here because `PriceAsymmetry` and
+`AmountInUSD` **cannot be used as filters** on aggregate datasets — see
+[Filter limitations on aggregate datasets](#filter-limitations-on-aggregate-datasets). On
+`dataset: realtime` you can add both filters for stricter outlier control.
 
 Read more about quantiles [here](/docs/graphql/metrics/quantile/)
 You can run the query [here](https://ide.bitquery.io/Price-ATH-query)
@@ -319,7 +350,7 @@ You can run the query [here](https://ide.bitquery.io/Price-ATH-query)
 {
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      where: {Trade: {Side: {Currency: {MintAddress: {in: ["11111111111111111111111111111111", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", "So11111111111111111111111111111111111111112"]}}, AmountInUSD: {gt: "10"}}, Currency: {MintAddress: {is: "2tnA2ZmwmgUZLyYLi97zbwsFBXAqpMEcHu9Cv9JW6m26"}}, PriceAsymmetry: {lt: 0.01}}}
+      where: {Trade: {Side: {Currency: {MintAddress: {in: ["11111111111111111111111111111111", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", "So11111111111111111111111111111111111111112"]}}}, Currency: {MintAddress: {is: "2tnA2ZmwmgUZLyYLi97zbwsFBXAqpMEcHu9Cv9JW6m26"}}}}
       limit: {count: 1}
       orderBy: {descendingByField: "aATH"}
     ) {
@@ -332,13 +363,13 @@ You can run the query [here](https://ide.bitquery.io/Price-ATH-query)
 ## Get ATH Price, ATH Date, Price Change percentage in 24h, 7d, 30d
 
 Fetches a Solana token’s ATH price, ATH date, and price change percentages over the past 24h, 7d, and 30d using Bitquery Solana APIs.
-Try the [query to get ATH price, ATH date, price change](https://ide.bitquery.io/ath-with-price-delta_1).
+Try the [query to get ATH price, ATH date, price change](https://ide.bitquery.io/ATH-with-price-delta-Solana).
 
 ```graphql
 query ($token: String) {
   Solana(dataset: combined) {
     DEXTradeByTokens(
-      where: {Trade: {Side: {Currency: {MintAddress: {in: ["11111111111111111111111111111111", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", "So11111111111111111111111111111111111111112"]}}, AmountInUSD: {gt: "10"}}, Currency: {MintAddress: {is: $token}}, PriceAsymmetry: {lt: 0.01}}, Transaction: {Result: {Success: true}}}
+      where: {Trade: {Side: {Currency: {MintAddress: {in: ["11111111111111111111111111111111", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", "So11111111111111111111111111111111111111112"]}}}, Currency: {MintAddress: {is: $token}}}, Transaction: {Result: {Success: true}}}
       limit: {count: 1}
     ) {
       Trade {
@@ -410,7 +441,7 @@ query ($token: String) {
 
 ## Get ATH of Multiple Tokens
 
-You can run it [here](https://ide.bitquery.io/ATH-of-multiple-tokens-using-quantile-on-Solana)
+You can run it [here](https://ide.bitquery.io/ATH-of-multiple-tokens-quantile-Solana)
 
 ```graphql
 {
@@ -423,8 +454,6 @@ You can run it [here](https://ide.bitquery.io/ATH-of-multiple-tokens-using-quant
               in: ["token mint address-1", "token mint address-2"]
             }
           }
-          PriceAsymmetry: { lt: 0.01 }
-          AmountInUSD: { gt: "10" }
         }
       }
       limit: { count: 2 }
@@ -456,7 +485,6 @@ query GetAthMarketCap($tokens: [String!]!) {
       where: {
         Trade: {
           Currency: { MintAddress: { in: $tokens } }
-          Side: { AmountInUSD: { gt: "1" } }
         }
       }
     ) {

@@ -869,7 +869,6 @@ query GetAthMarketCap($tokens: [String!]!) {
       where: {
         Trade: {
           Currency: { MintAddress: { in: $tokens } }
-          Side: { AmountInUSD: { gt: "1" } }
         }
       }
     ) {

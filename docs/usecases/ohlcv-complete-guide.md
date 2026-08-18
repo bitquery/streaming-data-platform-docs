@@ -107,6 +107,12 @@ Bitquery also supports non-EVM chains, such as **Solana** and **Tron**, enabling
 For a detailed guide, visit:  
 [Historical OHLC on Solana](/docs/blockchain/Solana/historical-aggregate-data/#historical-ohlc-on-solana).
 
+:::note
+On `dataset: combined` / `archive`, `PriceAsymmetry` and USD amount fields cannot be used as filters —
+they return an error. The query below therefore takes raw `high`/`low` extremes. See
+[Filter limitations on aggregate datasets](/docs/blockchain/Solana/historical-aggregate-data/#filter-limitations-on-aggregate-datasets).
+:::
+
 #### **Sample Query**
 
 ```graphql
@@ -124,7 +130,6 @@ For a detailed guide, visit:
               MintAddress: { is: "So11111111111111111111111111111111111111112" }
             }
           }
-          PriceAsymmetry: { lt: 0.1 }
         }
       }
       limit: { count: 10 }
@@ -328,7 +333,7 @@ Take this query [https://ide.bitquery.io/quantile](https://ide.bitquery.io/quant
   Solana(dataset: combined) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "J3TqbUgHurQGNxWtT88UQPcMNVmrL875pToQZdrkpump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}, AmountInUSD: {gt: "10"}}}}
+      where: {Trade: {Currency: {MintAddress: {is: "J3TqbUgHurQGNxWtT88UQPcMNVmrL875pToQZdrkpump"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}, Amount: {gt: "0.05"}}}}
       limit: {count: 10}
     ) {
       Block {
