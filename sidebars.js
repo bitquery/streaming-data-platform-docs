@@ -922,6 +922,21 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Hyperliquid",
+          link: {
+            type: "doc",
+            id: "blockchain/hyperliquid/index",
+          },
+          items: [
+            "blockchain/hyperliquid/hyperliquid-trades-api",
+            "blockchain/hyperliquid/hyperliquid-orders-api",
+            "blockchain/hyperliquid/hyperliquid-prices-api",
+            "blockchain/hyperliquid/hyperliquid-perpetuals-api",
+            "blockchain/hyperliquid/hyperliquid-signed-actions-api",
+          ],
+        },
+        {
+          type: "category",
           label: "x402 Protocol",
           link: {
             type: "generated-index",
