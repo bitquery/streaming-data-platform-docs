@@ -260,7 +260,7 @@ Where enabled, **`optimism.broadcasted.*`** topics follow the same mapping as **
 
 ### Hyperliquid (`hyperliquid`)
 
-Message types are defined in [hyperliquid/hypercore.proto](https://github.com/bitquery/streaming_protobuf/blob/main/hyperliquid/hypercore.proto) and [hyperliquid/candles.proto](https://github.com/bitquery/streaming_protobuf/blob/main/hyperliquid/candles.proto). See the [Hyperliquid API documentation](/docs/blockchain/hyperliquid) for the datasets these carry.
+Message types are defined in [hyperliquid/hypercore.proto](https://github.com/bitquery/streaming_protobuf/blob/main/hyperliquid/hypercore.proto) and [hyperliquid/candles.proto](https://github.com/bitquery/streaming_protobuf/blob/main/hyperliquid/candles.proto). See the [Hyperliquid API documentation](/docs/perpetuals/hyperliquid) for the datasets these carry.
 
 - `hyperliquidcore.messages.proto` — trades, orders, book updates, liquidations, funding, TWAPs and signed actions
 - `hyperliquid.candles.proto` — OHLCV candles per market and interval

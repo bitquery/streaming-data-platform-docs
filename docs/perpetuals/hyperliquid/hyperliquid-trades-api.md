@@ -55,7 +55,7 @@ Notes on the payload:
 - `Execution.Tid` is the trade id, `Oid` the order id that got filled, `Hash` the action hash.
 - `Fees.Fee` is in `FeeToken` (usually USDC); a **negative fee is a maker rebate**.
 - `Position.SizeBefore` is the signed position size before the fill (negative = short); `RealizedPnl` is the PnL realized by this fill.
-- `IsTwap: true` marks fills produced by a TWAP order (see [TWAPs](/docs/blockchain/hyperliquid/hyperliquid-orders-api#twap-orders)).
+- `IsTwap: true` marks fills produced by a TWAP order (see [TWAPs](/docs/perpetuals/hyperliquid/hyperliquid-orders-api#twap-orders)).
 
 ### Trades of one market
 

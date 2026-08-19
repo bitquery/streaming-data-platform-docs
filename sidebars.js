@@ -922,21 +922,6 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Hyperliquid",
-          link: {
-            type: "doc",
-            id: "blockchain/hyperliquid/index",
-          },
-          items: [
-            "blockchain/hyperliquid/hyperliquid-trades-api",
-            "blockchain/hyperliquid/hyperliquid-orders-api",
-            "blockchain/hyperliquid/hyperliquid-prices-api",
-            "blockchain/hyperliquid/hyperliquid-perpetuals-api",
-            "blockchain/hyperliquid/hyperliquid-signed-actions-api",
-          ],
-        },
-        {
-          type: "category",
           label: "x402 Protocol",
           link: {
             type: "generated-index",
@@ -1107,6 +1092,21 @@ const sidebars = {
         id: "perpetuals/index",
       },
       items: [
+        {
+          type: "category",
+          label: "Hyperliquid",
+          link: {
+            type: "doc",
+            id: "perpetuals/hyperliquid/index",
+          },
+          items: [
+            "perpetuals/hyperliquid/hyperliquid-trades-api",
+            "perpetuals/hyperliquid/hyperliquid-orders-api",
+            "perpetuals/hyperliquid/hyperliquid-prices-api",
+            "perpetuals/hyperliquid/hyperliquid-perpetuals-api",
+            "perpetuals/hyperliquid/hyperliquid-signed-actions-api",
+          ],
+        },
         "perpetuals/solana/phoenix-perpetuals-api",
         "perpetuals/solana/perps-trader-cookbook",
       ],

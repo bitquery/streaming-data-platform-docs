@@ -66,4 +66,4 @@ subscription {
 
 The same shape works as a `query` with `limit`, `orderBy: {descending: Block_Time}` and a `where` filter for historical lookups.
 
-For tradeable OHLCV rather than oracle prices, use [Candles](/docs/blockchain/hyperliquid/hyperliquid-trades-api#ohlcv-candles).
+For tradeable OHLCV rather than oracle prices, use [Candles](/docs/perpetuals/hyperliquid/hyperliquid-trades-api#ohlcv-candles).

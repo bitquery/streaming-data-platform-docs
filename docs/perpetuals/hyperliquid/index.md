@@ -2,7 +2,7 @@
 title: "Hyperliquid API — Real-time Trades, Orders, Liquidations & Prices"
 description: "Query and stream Hyperliquid data with Bitquery: trades, orders, order book updates, OHLCV candles, liquidations, funding, positions, TWAPs, mark prices and signed actions over GraphQL and WebSocket."
 sidebar_position: 1
-slug: /blockchain/hyperliquid
+slug: /perpetuals/hyperliquid
 keywords:
   - Hyperliquid API
   - Hyperliquid GraphQL API
@@ -53,11 +53,11 @@ query {
 
 | Page | Cubes covered |
 | --- | --- |
-| [Trades & Candles](/docs/blockchain/hyperliquid/hyperliquid-trades-api) | `Trades`, `Candles` |
-| [Orders, Order Book & TWAPs](/docs/blockchain/hyperliquid/hyperliquid-orders-api) | `Orders`, `BookUpdates`, `Twaps` |
-| [Mark Prices & Price Updates](/docs/blockchain/hyperliquid/hyperliquid-prices-api) | `MarkPrices`, `PriceUpdates` |
-| [Liquidations, Funding, Positions & Leverage](/docs/blockchain/hyperliquid/hyperliquid-perpetuals-api) | `PerpLiquidations`, `PerpFundings`, `CurrentPositions`, `TraderLeverageUpdates` |
-| [Signed Actions](/docs/blockchain/hyperliquid/hyperliquid-signed-actions-api) | `SignedActions` |
+| [Trades & Candles](/docs/perpetuals/hyperliquid/hyperliquid-trades-api) | `Trades`, `Candles` |
+| [Orders, Order Book & TWAPs](/docs/perpetuals/hyperliquid/hyperliquid-orders-api) | `Orders`, `BookUpdates`, `Twaps` |
+| [Mark Prices & Price Updates](/docs/perpetuals/hyperliquid/hyperliquid-prices-api) | `MarkPrices`, `PriceUpdates` |
+| [Liquidations, Funding, Positions & Leverage](/docs/perpetuals/hyperliquid/hyperliquid-perpetuals-api) | `PerpLiquidations`, `PerpFundings`, `CurrentPositions`, `TraderLeverageUpdates` |
+| [Signed Actions](/docs/perpetuals/hyperliquid/hyperliquid-signed-actions-api) | `SignedActions` |
 
 ## Markets: perp, spot and HIP-3
 
