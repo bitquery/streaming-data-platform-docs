@@ -65,13 +65,13 @@ The [native Hyperliquid API](https://hyperliquid.gitbook.io/hyperliquid-docs/for
 
 | Capability | Hyperliquid native WS | Bitquery |
 | --- | --- | --- |
-| Scope of user data (orders, fills, funding, TWAPs, positions) | Your own account only (per-user subscriptions) | Every trader on the exchange |
+| Scope of user data (orders, fills, funding, TWAPs, positions) | Any single address you already know, one subscription each — no market-wide stream, no trader discovery | Every trader on the exchange in one stream, or filter to any list of addresses |
 | Order book | `l2Book`, aggregated, 5–20 levels max | L4 per-order deltas, unlimited depth, order id + trader address per level |
-| Liquidations | Only your own, via `userEvents` | All liquidations exchange-wide, with liquidated user, method, mark price, leverage |
-| Open positions | Only your own (`clearinghouseState`) | Any trader / whole market (`CurrentPositions`) |
+| Liquidations | Per-address only, via `userEvents` — no exchange-wide feed | All liquidations exchange-wide, with liquidated user, method, mark price, leverage |
+| Open positions | Per-address snapshot (`clearinghouseState`) — cannot enumerate or rank the market | Whole market queryable (`CurrentPositions`): every open position, sortable and filterable |
 | Historical data | Live + snapshot only; separate REST with pagination limits | Same GraphQL query for history and live stream |
 | Filtering | Per-coin or per-user only | Any field: market, trader, side, size, leverage, status |
-| Fill context | PnL/leverage on own fills only | Direction, fees, leverage, size-before, realized PnL on every fill, market-wide |
+| Fill context | Rich (PnL, direction) only on per-user feeds; the public `trades` feed is bare price/size/side | Direction, fees, leverage, size-before, realized PnL on every fill, market-wide |
 | Raw L1 actions | Not exposed | `SignedActions`: action type, signer vs user (agent wallets), bundle, broadcaster |
 | Delivery | WebSocket only; reconnect/gap handling yours; some feeds base64+DEFLATE encoded | GraphQL WS + Kafka (protobuf, offsets, consumer groups, no gaps) |
 | Subscription model | One subscription per coin / per user, per-connection limits | One stream can carry everything unfiltered, or a list of values on any filter field (many markets or wallets in one stream); runs 1,000+ concurrent streams at scale |
