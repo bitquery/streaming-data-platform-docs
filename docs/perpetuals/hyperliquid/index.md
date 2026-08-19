@@ -59,6 +59,24 @@ query {
 | [Liquidations, Funding, Positions & Leverage](/docs/perpetuals/hyperliquid/hyperliquid-perpetuals-api) | `PerpLiquidations`, `PerpFundings`, `CurrentPositions`, `TraderLeverageUpdates` |
 | [Signed Actions](/docs/perpetuals/hyperliquid/hyperliquid-signed-actions-api) | `SignedActions` |
 
+## Why Bitquery instead of the native Hyperliquid WebSocket API?
+
+The [native Hyperliquid API](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket/subscriptions) is built for trading your own account. Bitquery is built for seeing the whole market:
+
+| Capability | Hyperliquid native WS | Bitquery |
+| --- | --- | --- |
+| Scope of user data (orders, fills, funding, TWAPs, positions) | Your own account only (per-user subscriptions) | Every trader on the exchange |
+| Order book | `l2Book`, aggregated, 5–20 levels max | L4 per-order deltas, unlimited depth, order id + trader address per level |
+| Liquidations | Only your own, via `userEvents` | All liquidations exchange-wide, with liquidated user, method, mark price, leverage |
+| Open positions | Only your own (`clearinghouseState`) | Any trader / whole market (`CurrentPositions`) |
+| Historical data | Live + snapshot only; separate REST with pagination limits | Same GraphQL query for history and live stream |
+| Filtering | Per-coin or per-user only | Any field: market, trader, side, size, leverage, status |
+| Fill context | PnL/leverage on own fills only | Direction, fees, leverage, size-before, realized PnL on every fill, market-wide |
+| Raw L1 actions | Not exposed | `SignedActions`: action type, signer vs user (agent wallets), bundle, broadcaster |
+| Delivery | WebSocket only; reconnect/gap handling yours; some feeds base64+DEFLATE encoded | GraphQL WS + Kafka (protobuf, offsets, consumer groups, no gaps) |
+| Subscription model | One subscription per coin / per user, per-connection limits | One stream can carry everything unfiltered, or a list of values on any filter field (many markets or wallets in one stream); runs 1,000+ concurrent streams at scale |
+| Latency at market scale | Fast for a single coin/user feed, but covering the whole market means hundreds of subscriptions, client-side merging and rate limits | Lowest latency for the entire market in one pipeline — Kafka delivers every event exchange-wide, keyed by block, with no fan-out to assemble |
+
 ## Markets: perp, spot and HIP-3
 
 Every cube carries a `Market` object that identifies the instrument:
