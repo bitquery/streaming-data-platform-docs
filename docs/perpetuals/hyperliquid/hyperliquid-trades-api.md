@@ -35,7 +35,11 @@ Run it in the IDE: [Hyperliquid Latest Trades ➤](https://ide.bitquery.io/hyper
 ```graphql
 query {
   Hyperliquid {
-    Trades(limit: {count: 50}, orderBy: {descending: Block_Time}) {
+    Trades(
+      limit: {count: 50}
+      orderBy: {descending: Block_Time}
+      where: {Block: {Time: {since_relative: {minutes_ago: 10}}}}
+    ) {
       Block { Number Time }
       Trade {
         Market { Symbol CoinRaw Kind IsPerp Protocol }
