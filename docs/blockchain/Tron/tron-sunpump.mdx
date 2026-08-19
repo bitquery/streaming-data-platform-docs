@@ -4,13 +4,6 @@ description: "Tron Sunpump: real-time Tron memecoin and DEX data via Bitquery Gr
 ---
 # Sun Pump API
 
-:::danger `BalanceUpdates` sunsets 10 August 2026
-Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
-
-See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
-:::
-
-
 In this section, we will explore several examples related to Sun Pump data. These APIs can be provided through different streams including Kafka for zero latency requirements. Please contact us on telegram.
 
 For live DEX prices and volume across Tron memecoins (including Sun Pump tokens), see [DEXrabbit's Tron Meme Coins category](https://dexrabbit.bitquery.io/categories/tron-meme).
@@ -121,11 +114,14 @@ You can query the virtual liquidity pools directly by running the following quer
 
 ```graphql
 query SunPumpTokenPools {
-  Tron {
-    DexPools: BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw}}}
+  Tron(dataset: combined) {
+    DexPools: Balances(
+      where: {Balance: {Address: {is: "TTfvyrAz86hbZk5iDpKD78pqLGgi8C7AAw"}}}
+      orderBy: {descending: Balance_Amount}
     ) {
-      totalLiquidity: sum(of: BalanceUpdate_Amount)
+      totalLiquidity: Balance {
+        Amount(selectWhere: {gt: "0"})
+      }
       Currency {
         SmartContract
         Name

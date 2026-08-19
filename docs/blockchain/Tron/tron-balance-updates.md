@@ -105,34 +105,29 @@ query {
 
 ## Balance on a Specific Date
 
-Use `Block.Date.till` for a point-in-time snapshot. Use `dataset: archive` for historical dates and addresses not recently active.
+Use `Block.Date.till` as the "as of" cutoff (inclusive) — the cube returns the end-of-day balance on that date. Do **not** select `Block` fields in the output, or the result splits into one row per active day instead of a single cumulative balance.
 
-[Run in IDE](https://ide.bitquery.io/tron-historical-balance_4)
+Unlike summing Transfers, this includes mints, burns, and genesis supply. For example, the Tether treasury below shows `9.9` USDT on 2019-04-16: the 10 USDT initial supply was written in the contract constructor with no transfer record, minus a 0.1 USDT outgoing transfer the same day.
+
+[Run in IDE](https://ide.bitquery.io/tron-usdt-balance-at-date)
 
 ```graphql
-query {
-  Tron(dataset: archive) {
+query TronUSDTBalanceAtDate {
+  Tron(dataset: combined) {
     Balances(
       where: {
-        Balance: {
-          Address: { is: "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf" }
-        }
-        Block: { Date: { till: "2025-06-01" } }
+        Balance: { Address: { in: ["THPvaUhoh2Qn2y9THCZML3H815hhFhn5YC"] } }
+        Block: { Date: { till: "2019-04-16" } }
+        Currency: { SmartContract: { in: ["TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"] } }
       }
     ) {
-      Currency {
-        Name
-        Symbol
-        SmartContract
-      }
-      Balance {
-        Amount(selectWhere: { gt: "0" })
-        AmountInUSD
-      }
+      Balance { Address Amount }
     }
   }
 }
 ```
+
+Remove the `Currency` filter to get the balance of every token the address held as of that date.
 
 ## Balance for a Specific Token
 
@@ -204,43 +199,6 @@ query {
 }
 ```
 
-## Wallet Balance for a Specific Token on a Date
-
-Use `dataset: archive`, `Block.Date.till`, `orderBy: { descending: Block_Date }`, and `limit: { count: 1 }` to get the balance as of that date.
-
-[Run in IDE](https://ide.bitquery.io/historical-balance-of-a-token-on-a-date)
-
-```graphql
-query {
-  Tron(dataset: archive) {
-    Balances(
-      where: {
-        Block: { Date: { till: "2025-06-01" } }
-        Balance: {
-          Address: { is: "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf" }
-        }
-        Currency: {
-          SmartContract: { is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t" }
-        }
-      }
-      limit: { count: 1 }
-      orderBy: { descending: Block_Date }
-    ) {
-      Currency {
-        Name
-        Symbol
-        SmartContract
-      }
-      Balance {
-        Amount(selectWhere: { gt: "0" })
-        AmountInUSD
-        Address
-      }
-    }
-  }
-}
-```
-
 ## Total Holder Count of a Tron Token
 
 Count the total number of unique addresses holding a Tron TRC20 token with a positive balance. Use the **Holders** API instead of the deprecated `BalanceUpdates` aggregates.
@@ -299,186 +257,6 @@ query TopTokenHolders {
   }
 }
 ```
-
-## Deprecated: BalanceUpdates Queries
-
-The examples below use **`Tron.BalanceUpdates`**, which **sunsets on 10 August 2026**. They run today and will stop working on that date. Use **`Tron.Balances`** and **`Tron.Holders`** (sections above) instead — they answer the same questions without summing deltas.
-
-### Balance of an Address on Tron
-
-[Run Query ➤](https://ide.bitquery.io/balance-of-an-address-on-tron)
-
-**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
-
-```graphql
-{
-  Tron(dataset: combined, aggregates: yes) {
-    Balances(
-      where: {Balance: {Address: {is: "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf"}}}
-      orderBy: { descending: Balance_Amount }
-    ) {
-      Currency {
-        Name
-      }
-      Balance { Amount(selectWhere: {gt: "0"}) }
-    }
-  }
-}
-```
-
-<details>
-<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
-
-```graphql
-{
-  Tron(dataset: combined, aggregates: yes) {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf"}}}
-      orderBy: {descendingByField: "balance"}
-    ) {
-      Currency {
-        Name
-      }
-      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
-    }
-  }
-}
-```
-
-</details>
-
-### Total Holder Count of a Tron Token
-
-Count the **total number of unique addresses holding a Tron TRC20 token** with a positive balance. A foundational metric for token-health dashboards.
-
-Run the query [here](https://ide.bitquery.io/tron-token-holder-count).
-
-```graphql
-query TokenHolderCount {
-  Tron(dataset: combined, aggregates: yes) {
-    BalanceUpdates(
-      where: {
-        Currency: { SmartContract: { is: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t" } }
-      }
-    ) {
-      Currency {
-        Name
-        Symbol
-        SmartContract
-      }
-      holders: uniq(
-        of: BalanceUpdate_Address
-        selectWhere: { gt: "0" }
-      )
-    }
-  }
-}
-```
-
-### Historical Balance of a Tron Address at a Specific Time
-
-Reconstruct the **balance of a wallet as of a past block time** — useful for audits, airdrop snapshot eligibility, retroactive analytics, and tax tooling.
-
-Try the query [here](https://ide.bitquery.io/tron-historical-balance).
-
-```graphql
-query HistoricalBalanceTron($address: String, $until: DateTime) {
-  Tron(dataset: combined, aggregates: yes) {
-    BalanceUpdates(
-      where: {
-        BalanceUpdate: { Address: { is: $address } }
-        Block: { Time: { till: $until } }
-      }
-      orderBy: { descendingByField: "balance" }
-    ) {
-      Currency {
-        Name
-        Symbol
-        SmartContract
-      }
-      balance: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
-    }
-  }
-}
-{
-  "address": "TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf",
-  "until": "2025-06-01T00:00:00Z"
-}
-```
-
-### Full Multi-Token Portfolio of a Tron Wallet
-
-Return the **complete TRC10 + TRC20 portfolio** of any Tron address with USD valuation — the building block of Tron portfolio trackers and wallet UIs.
-
-Run the query [here](https://ide.bitquery.io/tron-wallet-portfolio).
-
-```graphql
-query TronWalletPortfolio($address: String) {
-  Tron(dataset: combined, aggregates: yes) {
-    BalanceUpdates(
-      where: { BalanceUpdate: { Address: { is: $address } } }
-      orderBy: { descendingByField: "balance_usd" }
-    ) {
-      Currency {
-        Name
-        Symbol
-        SmartContract
-        Native
-      }
-      balance: sum(of: BalanceUpdate_Amount, selectWhere: { gt: "0" })
-      balance_usd: sum(of: BalanceUpdate_AmountInUSD, selectWhere: { gt: "0" })
-    }
-  }
-}
-{
-  "address": "TFXttAWURRrXrd9JvFPVLEh1esJK8NHxn7"
-}
-```
-
-### Top Token Holders of a token
-
-This query fetches you the top 10 token holders of the token `TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT`. Check out the query [here](https://ide.bitquery.io/top-token-holders_2).
-
-**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
-
-```graphql
-query MyQuery {
-  Tron(dataset: combined) {
-    Balances(
-      limit: {count: 10}
-      orderBy: { descending: Balance_Amount }
-      where: {Currency: {SmartContract: {is: "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"}}}
-    ) {
-      Balance { Amount(selectWhere: {gt: "0"}) }
-      Balance {
-        Address
-      }
-    }
-  }
-}
-```
-
-<details>
-<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
-
-```graphql
-query MyQuery {
-  Tron(dataset: combined) {
-    BalanceUpdates(
-      limit: {count: 10}
-      orderBy: {descendingByField: "balance"}
-      where: {Currency: {SmartContract: {is: "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT"}}}
-    ) {
-      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
-      BalanceUpdate {
-        Address
-      }
-    }
-  }
-}
-```
-
-</details>
 
 <FAQ
   items={[
