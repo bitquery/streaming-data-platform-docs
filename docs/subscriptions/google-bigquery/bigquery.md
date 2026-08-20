@@ -2,9 +2,14 @@
 title: "Filing Data into Google BigQuery"
 description: "Filing Data into Google BigQuery using Bitquery GraphQL subscriptions over WebSocket for live multi-chain blockchain monitoring."
 ---
+
+import ProductCTA from "@site/src/components/ProductCTA";
+
 # Filing Data into Google BigQuery
 
 In this part, we'll demonstrate how to set up Google BigQuery to store data from Google Pub/Sub. The incoming data will be stored in a BigQuery table called `newtrades`. We'll go step-by-step, covering table creation, schema definition, and configuring Pub/Sub to write directly to BigQuery.
+
+For managed datasets in BigQuery and Snowflake, see the [Blockchain Data Warehouse](https://bitquery.io/products/data-warehouse) product page.
 
 ### 1. Create a Table and Define the Schema
 
@@ -113,3 +118,6 @@ python bitquery_pubsub.py
 - Use SQL queries to analyze trends in the trade data.
 - Automate data pipelines using Google Cloud Dataflow or scheduled BigQuery queries.
 
+
+
+<ProductCTA href="https://bitquery.io/products/data-warehouse" title="Blockchain Data Warehouse" />

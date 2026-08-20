@@ -4,11 +4,14 @@ title: "Solana DEX Trades API"
 description: "Stream Solana DEX swaps, prices, and OHLC for Raydium, Jupiter, and more using Bitquery GraphQL queries and live streams."
 ---
 import FAQ from "@site/src/components/FAQ";
+import ProductCTA from "@site/src/components/ProductCTA";
 
 # Solana DEX Trades API
 
 :::tip Need real-time Solana DEX data or anything from the last ~30 days?
 For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Solana`). Use this page when you need **historical Solana data older than ~30 days** (with `dataset: archive`), raw per-swap detail, or call / event context.
+
+Everything on this page is part of the [Solana DEX API](https://bitquery.io/products/solana-dex-api) — the product page summarizes venues, OHLCV, pools and streaming latency.
 
 :::caution `dataset: combined` currently fails on Solana
 Every `Solana(dataset: combined)` query tested returns a ClickHouse 500 on the `/graphql` endpoint. Use `dataset: archive` for history and realtime for recent data. Several queries further down this page still use `combined` and will error until that is resolved — swap `combined` for `archive` to run them. See [data coverage & retention](/docs/graphql/data-coverage-retention/).
@@ -29,6 +32,8 @@ If you have questions or need custom data, reach out to [support](https://t.me/B
 Need zero-latency Solana DEX trade data?  
 [Read about our Shred Streams and contact us for a trial ➤](/docs/streams/real-time-solana-data/)  
 For gRPC streaming: [Solana gRPC Streams (CoreCast) →](/docs/grpc/solana/introduction/)
+
+<ProductCTA href="https://bitquery.io/products/solana-dex-api" title="Solana DEX API" />
 
 ## 🔗 Related Solana APIs
 

@@ -4,11 +4,14 @@ title: "Solana Photon API"
 description: "Track Photon-routed Solana trades with Bitquery GraphQL: latest trades by pair, trader-level rows with USD price, market cap and supply, plus live streams."
 ---
 import FAQ from "@site/src/components/FAQ";
+import ProductCTA from "@site/src/components/ProductCTA";
 
 # Photon Solana API
 
 :::tip Need real-time Photon-style trader data or anything from the last ~30 days?
 For **real-time trader and wallet data over the last ~30 days** across **9 chains in one API**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical Photon-style trader data older than ~30 days**, raw per-swap detail, or call / event context.
+
+The queries below run on the same data that powers Photon-style terminals — the [Solana DEX API](https://bitquery.io/products/solana-dex-api) page covers venues, latency and plans.
 :::
 
 Photon is a routing aggregator on Solana that finds the best execution paths across multiple DEXs. To identify trades that were routed through Photon, we use their program address `BSfD6SHZigAfDWSjzD5Q41jw8LmKwtmjskPH9XW1mrRW` in our queries.
@@ -18,6 +21,8 @@ This program address appears in the instruction data when Photon routes a trade,
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
 :::
+
+<ProductCTA href="https://bitquery.io/products/solana-dex-api" title="Solana DEX API" />
 
 ## Latest Trades Routed via Photon
 

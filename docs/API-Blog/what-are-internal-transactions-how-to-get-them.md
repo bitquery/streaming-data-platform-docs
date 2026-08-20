@@ -3,14 +3,19 @@ title: "What are Internal Transactions & How to Get Them?"
 description: "What internal transactions are, how they differ from internal transfers, and how to trace both on EVM chains using Bitquery Calls and Transfers queries."
 ---
 import FAQ from "@site/src/components/FAQ";
+import ProductCTA from "@site/src/components/ProductCTA";
 
 # What are Internal Transactions & How to Get Them?
 
 In blockchain a transaction is the transfer of value between two participants, recorded on a digital ledger. Not all transactions involve the direct sending of funds from one wallet to another, some transactions occur within smart contracts. These transactions are known as internal transactions.
 
+Internal transactions are decoded calls — the [Smart Contract API](https://bitquery.io/products/smart-contract-api) page covers decoded events and calls with plans and trial access.
+
 Internal transactions are important in smart contract interactions, and having an understanding of how they work and how to trace them is essential for ensuring the transparency and security of smart contracts.
 
 This article will explain what internal transactions are, how to trace them using [Bitquery](https://bitquery.io/) APIs, and how to use Bitquery's tools for detailed blockchain analysis.
+
+<ProductCTA href="https://bitquery.io/products/smart-contract-api" title="Smart Contract API" />
 
 ## What are Internal Transactions?
 

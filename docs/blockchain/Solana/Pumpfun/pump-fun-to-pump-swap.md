@@ -8,10 +8,15 @@ keywords:
   - PumpSwap migration tracking
   - Solana token migration API
 ---
+
+import ProductCTA from "@site/src/components/ProductCTA";
+
 # Understanding Pump.fun: From Launchpad to PumpSwap
 
 :::tip Need real-time Pump.fun & PumpSwap data or anything from the last ~30 days?
 For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Pump.fun & PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Pump.fun & PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
+
+Post-migration AMM activity is covered end-to-end by the [PumpSwap API](https://bitquery.io/products/pumpswap-api) — the product page lists swaps, pools and OHLCV coverage with plans.
 :::
 
 Pump.fun is a Solana-based memecoin launchpad that has reshaped how tokens are created and traded. At its core is a bonding curve model that lets anyone launch a token with a fixed supply of 1 billion tokens, of which around 800 million are made available for bonding.
@@ -30,6 +35,8 @@ This helps identify tokens nearing sell-out, a common signal for tokens “about
 Once a token reaches full bonding (100%), it automatically migrates to PumpSwap, Pump.fun’s native AMM DEX. From there, it trades like any other Solana token—no manual listing is needed; the system handles everything.
 
 To help developers, traders, and analysts follow this journey, Bitquery offers a comprehensive real-time API suite that spans the entire lifecycle of a Pump.fun token. Let’s walk through it:
+
+<ProductCTA href="https://bitquery.io/products/pumpswap-api" title="PumpSwap API" />
 
 ## Track New Token Creations in Real-Time
 

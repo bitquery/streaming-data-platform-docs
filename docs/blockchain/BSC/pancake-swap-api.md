@@ -3,6 +3,7 @@ title: "BNB Chain Pancake Swap API"
 description: "Query and stream PancakeSwap trades on BNB Chain with Bitquery GraphQL: latest swaps, live subscriptions, token prices, OHLC and trader activity."
 ---
 import FAQ from "@site/src/components/FAQ";
+import ProductCTA from "@site/src/components/ProductCTA";
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
@@ -10,6 +11,8 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 :::danger `BalanceUpdates` sunsets 10 August 2026
 Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+
+For coverage, plans and streaming options on BNB Chain, see the [Binance Smart Chain API](https://bitquery.io/products/binance-smart-chain-api-post) page.
 
 See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
 :::
@@ -21,6 +24,8 @@ For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trad
 
 In this section we will use APIs from Bitquery to get the on-chain trade related data, trade metrics, trades for a token or a trader on the Pancake Swap DEX.
 To get the trade activities of the Pancake Swap exclusively we have added a filter out trades based on `Factory Contract` address, `0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865` for the case of Pancake Swap V3. To get the trades and trade related data for Pancake Swap V1 or V2 you would need their respective addresses. Create your account and get started by following the [Quickstart instructions](/docs/start/first-query/).
+
+<ProductCTA href="https://bitquery.io/products/binance-smart-chain-api-post" title="Binance Smart Chain API" />
 
 ## Bitquery DEX Data Access Options
 

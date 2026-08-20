@@ -9,6 +9,8 @@ This page covers the Phoenix **spot** order book. For perpetual futures — orde
 positions, realized PnL, liquidations, funding, mark price and open interest — see the
 [**Phoenix Perpetuals API**](/docs/perpetuals/solana/phoenix-perpetuals-api), also
 available as a [Kafka protobuf stream](/docs/streams/protobuf/chains/Solana-perpetual-protobuf).
+
+Phoenix order-book data is available as a product — see the [Phoenix Trades API](https://bitquery.io/products/phoenix-trades) page for coverage and plans.
 :::
 
 :::tip Need real-time Phoenix data or anything from the last ~30 days?
@@ -16,6 +18,9 @@ For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trad
 :::
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
+import ProductCTA from "@site/src/components/ProductCTA";
+
+<ProductCTA href="https://bitquery.io/products/phoenix-trades" title="Phoenix Trades API" />
 
 ## Phoenix Trades in Real-Time
 
