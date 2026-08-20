@@ -4,16 +4,21 @@ title: "Base Chain DEX Trades API"
 description: "Query and stream Base chain DEX trades with Bitquery GraphQL: live swap streams, real-time token prices, USD pricing and per-pair trade history."
 ---
 import FAQ from "@site/src/components/FAQ";
+import ProductCTA from "@site/src/components/ProductCTA";
 
 # Base Chain DEX Trades API
 
 :::tip Need real-time Base DEX data or anything from the last ~30 days?
 For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Base`). Use this page when you need **historical Base data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
+
+For full-chain coverage — Aerodrome and Uniswap trades, transfers, balances and bridge flows — see the [Base API](https://bitquery.io/blockchains/base-blockchain-api) page.
 :::
 
 In this section we will see how to get Base DEX trades information using our API.
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
+
+<ProductCTA href="https://bitquery.io/blockchains/base-blockchain-api" title="Base API" />
 
 ## Live DEX swap stream (Base) {#crypto-trades-live-stream}
 

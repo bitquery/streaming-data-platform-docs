@@ -3,10 +3,15 @@ sidebar_position: 1
 title: "Polygon (MATIC) Address Balance API"
 description: "Query Polygon address balances with the Bitquery Balances cube: token and native POL balances, balances on a given date, and per-token lookups."
 ---
+
+import ProductCTA from "@site/src/components/ProductCTA";
+
 # Polygon (MATIC) Address Balance API
 
 :::caution Deprecated APIs
 On EVM, **`BalanceUpdates`** and **`TokenHolders`** were deprecated as of **20 May 2026** and removed on **15 June 2026**. Use **`EVM.Balances`** (this page) and **[Token Holders API](/docs/blockchain/Ethereum/token-holders/token-holder-api)** (`EVM.Holders`) instead.
+
+Balance lookups like these are productized in the [Address & Balance API](https://bitquery.io/products/address-apis) — native and token balances, labels and history on 9 core chains.
 :::
 
 The **Balances** API returns current and historical token balances for an address on Polygon (MATIC). To return only non-zero balances, add `Amount(selectWhere: { gt: "0" })` on the `Balance` field (not in `where`). Use `dataset: combined` or `dataset: archive` as follows:
@@ -17,6 +22,8 @@ The **Balances** API returns current and historical token balances for an addres
 | **`archive`**  | Historical snapshots with `Block.Date`, and balances for **addresses not recently active**. |
 
 Examples: [All Token Balances](#balance-of-an-address) · [Native MATIC](#native-matic-balance) · [Balance on a Date](#balance-on-a-specific-date) · [Specific Token](#balance-for-a-specific-token)
+
+<ProductCTA href="https://bitquery.io/products/address-apis" title="Address & Balance API" />
 
 ## Balance of an Address
 

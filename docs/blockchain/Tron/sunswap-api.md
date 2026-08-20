@@ -2,13 +2,20 @@
 title: "Tron Sunswap API"
 description: "Query SunSwap on Tron with Bitquery GraphQL: latest trades, per-token trade history, and new Sunpump tokens plus sell events from the Tron mempool."
 ---
+
+import ProductCTA from "@site/src/components/ProductCTA";
+
 # Tron SunSwap API
 
 **[Bitquery](https://bitquery.io)** provides useful tron activity through **GraphQL** (on-demand queries and live **subscriptions**), and high-throughput Kafks streams for enterprise teams.
 
 This page documents **SunSwap**-related examples on **Tron**—events, contracts, and streams you can copy into the IDE. For general Tron DEX trade patterns, see the [Tron DEX Trades API](/docs/blockchain/Tron/tron-dextrades). If you are new here, start with [Your first query](/docs/start/first-query).
 
+SunSwap trades are part of our full [Tron blockchain API](https://bitquery.io/blockchains/tron-blockchain-api) — see the page for USDT transfers, balances and streaming coverage.
+
 If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
+
+<ProductCTA href="https://bitquery.io/blockchains/tron-blockchain-api" title="Tron blockchain API" />
 
 ## New Tokens on Sunpump and Sell event in Tron Mempool
 

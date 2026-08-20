@@ -16,11 +16,18 @@ keywords:
     "Bitquery API",
   ]
 ---
+
+import ProductCTA from "@site/src/components/ProductCTA";
+
 # USDT API
 
 USDT (Tether) powers a large share of on-chain value transfer, payments, and trading across multiple blockchains. This page curates the most useful USDT APIs—covering price, payments (transfers), trades, reserves, and balances—along with live streams you can use in production.
 
+Most USDT volume lives on Tron — the [Tron USDT API](https://bitquery.io/blockchains/tron-blockchain-api) page covers tracing and streaming every TRC-20 transfer.
+
 Use the sections below to discover key USDT datasets, with both API and streaming options. Links point to runnable examples, and code blocks are provided as placeholders for your queries.
+
+<ProductCTA href="https://bitquery.io/blockchains/tron-blockchain-api" title="Tron USDT API" />
 
 ## USDT Price API
 

@@ -17,9 +17,14 @@ keywords:
     real-time price feed,
   ]
 ---
+
+import ProductCTA from "@site/src/components/ProductCTA";
+
 # TradingView API - Real-Time Crypto OHLC Stream
 
 This guide is the **entry point** for the tutorial: how to embed [TradingView Advanced Charts](https://in.tradingview.com/advanced-charts/) in a React app and drive the chart with **Bitquery**—historical OHLC over HTTPS and **live** OHLC over a GraphQL WebSocket subscription.
+
+If you want this without building the datafeed yourself, the [TradingView DEX charts](https://bitquery.io/products/tradingview-dex) page covers our ready UDF datafeed for any token.
 
 **Complete reference implementation:** [github.com/bitquery/tradingview-subscription-realtime](https://github.com/bitquery/tradingview-subscription-realtime/tree/main)
 
@@ -28,6 +33,8 @@ This guide is the **entry point** for the tutorial: how to embed [TradingView Ad
 The chart loads history first, then extends the last candle as new OHLC arrives:
 
 <video controls loop muted playsInline width="100%" src="/img/ApplicationExamples/charting.mp4"></video>
+
+<ProductCTA href="https://bitquery.io/products/tradingview-dex" title="TradingView DEX charts" />
 
 ## If this is your first time here
 

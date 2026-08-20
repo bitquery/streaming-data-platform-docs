@@ -25,10 +25,13 @@ keywords:
   - oracle resolution API
 ---
 import FAQ from "@site/src/components/FAQ";
+import ProductCTA from "@site/src/components/ProductCTA";
 
 # Polymarket API Guide - Data & Query Reference
 
 The Bitquery Polymarket API provides prediction market data on Polygon via GraphQL. Use **`dataset: realtime`** on `EVM` queries for **`PredictionTrades`**, **`PredictionSettlements`**, and related prediction-market APIs—this dataset retains roughly the **last 7 days**. Use it to query trades, settlements, market metadata, and volume; filter by condition_id, outcome token, or trade size; and access data via REST, WebSocket subscriptions, or Kafka streams. Filter by Polymarket using `ProtocolName: "polymarket"` or `Marketplace.ProtocolName` in your queries.
+
+If you are evaluating data providers, the [Polymarket API product page](https://bitquery.io/products/polymarket-api) summarizes market, trade and position coverage with plans and real-time delivery options.
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
@@ -41,6 +44,8 @@ Polymarket prediction-market data on Polygon requires **`dataset: realtime`** (~
 :::
 
 ---
+
+<ProductCTA href="https://bitquery.io/products/polymarket-api" title="Polymarket API" />
 
 ## What Polymarket data can I get with Bitquery?
 

@@ -3,10 +3,17 @@ sidebar_position: 3
 title: "NFT Analytics Dashboard - Tutorial"
 description: "Build NFT Analytics Dashboard - Tutorial: a practical Bitquery tutorial with GraphQL examples, streams, and runnable application code."
 ---
+
+import ProductCTA from "@site/src/components/ProductCTA";
+
 # NFT Analytics Dashboard - Tutorial
 
  ### Marketplace Analysis
  Bitquery's queries can help NFT marketplace builders analyze the performance of different NFTs on various blockchain networks. By providing real-time data on  transaction volume, and other key metrics, Bitquery can help builders optimize their marketplace's offerings and improve trading conditions for users.
+
+Everything used here comes from the [NFT API](https://bitquery.io/products/nft-api) — trades, metadata, holders and floor prices across 40+ chains.
+
+<ProductCTA href="https://bitquery.io/products/nft-api" title="NFT API" />
 
 ## Tutorial 
 This is a tutorial to build a NFT Dashboard using Python code that connects to the Bitquery API and retrieves data for a particular NFT on the Ethereum network. The code then displays the data on a user-friendly interface built using Python and Streamlit.
