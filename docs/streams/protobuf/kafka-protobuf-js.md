@@ -31,7 +31,7 @@ Install all dependencies declared in **`package.json`**:
 npm install
 ```
 
-Key runtime libraries: **`kafkajs`**, **`kafkajs-lz4`** (+ **`lz4` / `lz4-asm`**), **`bitquery-protobuf-schema`**, **`dotenv`**, **`uuid`**, **`bs58`**.
+Key runtime libraries: **`kafkajs`**, **`kafkajs-lz4@^1.2.1`** (+ **`lz4` / `lz4-asm`**), **`bitquery-protobuf-schema`**, **`dotenv`**, **`uuid`**, **`bs58`**.
 
 ## 1. Kafka client initialization (non-TLS baseline)
 
