@@ -97,6 +97,10 @@ Use the same **`bid:<chain>`** convention as **`Token.Id`**.
 
 ## Quick Start {#quick-start}
 
+:::tip Pricing one specific token? Start with Pairs + rank 1
+The stream below is a **firehose** of every token on every chain, and the `Tokens` cube is the right choice for it. If instead you want the price of **one token**, query the [**Pairs** cube with `Ranking: { Position: { eq: 1 } }`](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) — it returns the price from the token's **top market** rather than a blend across all of its pools, which matters for tokens with fragmented liquidity.
+:::
+
 [Run Stream >](https://ide.bitquery.io/1-second-crypto-price-stream)
 
 > Note: A `Volume: {Usd: {gt: 5}}` filter is applied to remove extreme outliers; the price stream already pre-filters outliers—this is an additional check.
@@ -247,9 +251,9 @@ Each message contains:
 
 The Price APIs have three core data cubes:
 
-- **Tokens**: Price data for a specific token on a specific chain. Use this when you care about chain-specific prices like USDT on Solana.
+- **Tokens**: One blended price per token per chain, aggregated across every pool the token trades in. Use it for chain-wide streams and per-chain aggregates.
 - **Currencies**: An aggregated view of tokens that represent the same underlying asset. For example, tokens like cbBTC, WBTC, and other Bitcoin-wrapped tokens are all grouped under the Bitcoin currency.
-- **Pairs**: Price and volume data for token pairs on specific markets/protocols. E.g., SOL/USDC on Raydium (Solana) or ETH/USDT on Uniswap (Ethereum).
+- **Pairs**: Price and volume data for token pairs on specific markets/protocols. E.g., SOL/USDC on Raydium (Solana) or ETH/USDT on Uniswap (Ethereum). **This is also the recommended cube for a specific token's price** — filter to its top market with [`Ranking: { Position: { eq: 1 } }`](/docs/trading/crypto-price-api/pairs#most-accurate-token-price).
 
 > Note: Expressions are supported in this API.
 
@@ -325,6 +329,8 @@ It takes amounts and prices from all chains that use BTC and wrapped versions (i
 ### Tokens
 
 Let's say you don't want a chain agnostic view, but want to focus on a particular chain. How to stream or query prices for it? This is where tokens come in.
+
+> **Note:** the price below is blended across **all pools** where the token is base. For a single token, the [rank-1 Pairs query](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) prices it from its top market instead — recommended whenever you care about one specific token.
 
 > Note: We include `Volume: {Usd: {gt: 5}}` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
 
@@ -469,6 +475,8 @@ subscription {
 This is the 3rd cube in these set of APIs. The Pairs cube gives you price, volume, and market-level trading data between two tokens — a base token and a quote token.
 We will breakdown in detail how base token and Quote are chosen in the next section.
 
+> **Recommended for single-token prices:** add `Ranking: { Position: { eq: 1 } }` to a Pairs query to get a token's price from its **top market** — the pool carrying the most volume for it. See [Getting the Most Accurate Token Price](/docs/trading/crypto-price-api/pairs#most-accurate-token-price).
+
 > **Tip**: Use `TokenId` instead of `Token.Address` to fetch all variants of the same token (e.g., ETH, WETH, bridged ETH) across multiple chains.
 
 > Note: We include `Volume: {Usd: {gt: 5}}` to further remove extreme outliers; the stream already pre-filters outliers—this is an additional check.
@@ -565,24 +573,31 @@ Use `TargetVolume` to get price intervals aggregated over a volume threshold:
 
 ## When to Choose Which Cube (Token, Currency, Pair)?
 
+:::tip The short answer
+For the price of a **specific token**, use **`Pairs` with `Ranking: { Position: { eq: 1 } }`** — see [Getting the Most Accurate Token Price](/docs/trading/crypto-price-api/pairs#most-accurate-token-price). Use `Tokens` for chain-wide streams and per-chain aggregates, and `Currencies` for one cross-chain number per asset.
+:::
+
+### Use the **`Pairs`** cube when:
+
+- You want the **price of a specific token** — filter to its top market with `Ranking: { Position: { eq: 1 } }` so thin pools do not affect the number ([how and why](/docs/trading/crypto-price-api/pairs#most-accurate-token-price)).
+- You want **pair-level trading data** (e.g., SOL/USDC, ETH/DAI).
+- You’re analyzing trading activity **on a specific market or DEX** (e.g., Uniswap, PancakeSwap, Raydium).
+- You need **OHLC, volume, liquidity**, and market-specific pricing between two tokens.
+- You're exploring **price arbitrage** or spreads across chains or platforms.
+
 ### Use the **`Tokens`** cube when:
 
-- You want token price data **on a specific blockchain**.
-- You're interested in metrics like OHLC, volume, and moving averages **for one network** (e.g., USDC on Solana or ETH on Arbitrum).
-- You want to stream or query **chain-specific** price movements.
+- You want a **firehose** of price updates for every token on a chain.
+- You want **one chain-wide number per token**, blended across all of its pools, rather than the price on a single market.
+- You're interested in **aggregate volume across all of a token's pools**, or the currency-level `Supply` and `MarketCap` fields.
+
+  > For a **single token's price**, prefer `Pairs` with rank 1: the `Tokens` price is a volume-weighted blend of every pool, so thin pools can pull it away from the primary market. See [Tokens cube](/docs/trading/crypto-price-api/tokens).
 
 ### Use the **`Currencies`** cube when:
 
 - You want a **chain-agnostic view** of a token (e.g., BTC across Bitcoin, Ethereum (WBTC), Solana, etc.).
 - You need a **global price** for a currency, combining its various representations.
 - You're looking for **aggregated OHLC and average prices** for a token across chains.
-
-### Use the **`Pairs`** cube when:
-
-- You want **pair-level trading data** (e.g., SOL/USDC, ETH/DAI).
-- You’re analyzing trading activity **on a specific market or DEX** (e.g., Uniswap, PancakeSwap, Raydium).
-- You need **OHLC, volume, liquidity**, and market-specific pricing between two tokens.
-- You're exploring **price arbitrage** or spreads across chains or platforms.
 
 ## Crypto Price API for TradingView
 
@@ -602,6 +617,10 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
     {
       q: "How do I get real-time crypto prices and OHLC candles?",
       a: "Use Trading.Tokens, Trading.Pairs, or Trading.Currencies for aggregated USD prices and OHLC over the last ~30 days. For older history, build candles from DEXTradeByTokens on the chain you need.",
+    },
+    {
+      q: "Which cube gives the most accurate price for a specific token?",
+      a: "Trading.Pairs filtered with Ranking: { Position: { eq: 1 } }. That returns the price on the token's top market — the pool contributing the most volume — instead of the Tokens cube's blend across every pool, which thin pools can pull off the primary market's price. See Getting the Most Accurate Token Price on the Pairs cube page.",
     },
     {
       q: "What is the difference between Crypto Price API and Crypto Trades API?",

@@ -20,11 +20,12 @@ Get real-time and historical OHLC (Open, High, Low, Close) candle data, K-line c
 | How do I get OHLCV data for a token using Bitquery? | **Last 7 Days** [Crypto Price API](/docs/trading/crypto-price-api/introduction/) ; **historical:** [DEXTradeByTokens OHLC](/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) |
 | How do I get OHLC in a DEXTradeByTokens query? | [DEXTradeByTokens OHLC](/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) (for **historical** OHLC or DEX-level control) |
 | How do I get historical OHLCV for a Solana token? | **Main OHLC:** [Crypto Price API — Quick start](/docs/trading/crypto-price-api/introduction/#quick-start) · [Tokens cube](/docs/trading/crypto-price-api/tokens/) · **Historical / DEX:** [Historical OHLCV on Solana](/docs/blockchain/Solana/solana-dextrades/#how-do-i-get-historical-ohlcv-for-a-solana-token) · [Solana OHLC API](/docs/blockchain/Solana/solana-dextrades/#solana-ohlc-api) |
-| How do I get the current price of a token using Bitquery API? | [Quick start](/docs/trading/crypto-price-api/introduction/#quick-start) · [Tokens cube](/docs/trading/crypto-price-api/tokens/) · [Examples](/docs/trading/crypto-price-api/examples/) |
+| How do I get the current price of a token using Bitquery API? | **Recommended:** [Pairs + rank 1 (top market)](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) · [Quick start](/docs/trading/crypto-price-api/introduction/#quick-start) · [Examples](/docs/trading/crypto-price-api/examples/) |
+| Which cube gives the most accurate price for one token? | [Pairs with `Ranking: { Position: { eq: 1 } }`](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) — prices from the token's top market rather than a blend across all its pools |
 | How do I get price change percentage for a token? | [Price change](/docs/start/starter-queries/#volume-of-multiple-tokens-across-different-chains) |
 | How do I get 1-minute OHLC candles for a DEX pair? | **Main:** [Your first OHLC query](#your-first-ohlc-query) (`Duration: { eq: 60 }`) · [Pairs cube](/docs/trading/crypto-price-api/pairs/) · **Historical:** [DEX OHLC pattern](/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) |
 | How do I get the all-time high (ATH) price of a token? | [Solana ATH example](/docs/blockchain/Solana/solana-dextrades/#get-ath-market-cap-of-tokens)|
-| Is there an API to get token price in USD on Solana? | [Crypto Price API — Quick start](/docs/trading/crypto-price-api/introduction/#quick-start) · [Tokens cube](/docs/trading/crypto-price-api/tokens/) · [Latest USD (Solana DEX trades)](/docs/blockchain/Solana/solana-dextrades/#latest-usd-price-of-a-token) |
+| Is there an API to get token price in USD on Solana? | [Pairs + rank 1 (top market)](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) · [Crypto Price API — Quick start](/docs/trading/crypto-price-api/introduction/#quick-start) · [Latest USD (Solana DEX trades)](/docs/blockchain/Solana/solana-dextrades/#latest-usd-price-of-a-token) |
 | How do I use DEXTradeByTokens vs DEXTrades for OHLCV? | [OHLCV: which cube?](/docs/cubes/dextradesbyTokens/#how-do-i-use-dextradebytokens-vs-dextrades-for-ohlcv) · [DEXTrades cube](/docs/cubes/dextrades/) |
 
 ## What is OHLC Data?
@@ -202,9 +203,9 @@ Use the **Currency** cube when you want a unified price view of an asset across 
 
 [Learn more about Currency Cube ➤](/docs/trading/crypto-price-api/currency/)
 
-### **Tokens Cube** - Chain-Specific Token Data
+### **Tokens Cube** - Chain-Wide Blended Candles
 
-Use the **Tokens** cube when you need OHLC data for a specific token on a specific blockchain.
+Use the **Tokens** cube when you want one candle per token per chain, or a stream of candles for every token on a chain.
 
 **Key Features:**
 - Aggregates across all pairs for that token
@@ -212,13 +213,16 @@ Use the **Tokens** cube when you need OHLC data for a specific token on a specif
 - Can provide only USD-quoted prices
 - Can combine volume and price data from all chains
 
+> Because the candle blends every pool where the token is base, thin pools contribute to it as well. For candles on **one specific token**, prefer the Pairs cube with rank 1 (below).
+
 [Learn more about Tokens Cube ➤](/docs/trading/crypto-price-api/tokens/)
 
-### **Pairs Cube** - Trading Pair Specific Data
+### **Pairs Cube** - Top Market and Pair-Specific Candles
 
-Use the **Pairs** cube when you need OHLC data for specific trading pairs on specific DEXs.
+Use the **Pairs** cube for OHLC on a specific market — and, with the rank filter, for the most accurate candles on a specific **token**.
 
 **Key Features:**
+- **Recommended for a single token:** add `Ranking: { Position: { eq: 1 } }` to get candles from the token's top market instead of a blend across all pools ([how and why](/docs/trading/crypto-price-api/pairs#most-accurate-token-price))
 - Pair-specific OHLC data (e.g., ETH/USDC on Uniswap)
 - Can be quoted in USD or quote token
 - Market/DEX-specific data

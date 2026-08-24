@@ -83,9 +83,9 @@ It is exposed under a single `Trading` root and covers **9 chains in one API**: 
 | Cube | What it gives you | Typical use |
 |---|---|---|
 | **`Trading.Trades`** | Individual swap-level rows with **USD price**, **USD amounts**, **market cap**, **FDV**, **supply**, and pair / trader / tx context | Live trade feeds, copy-trading bots, whale alerts, per-swap analytics |
-| **`Trading.Tokens`** | Pre-aggregated OHLC, volume, supply and moving averages for a **token on a specific chain** | Token-level price charts, token screeners |
+| **`Trading.Tokens`** | Pre-aggregated OHLC, volume, supply and moving averages for a **token on a specific chain**, blended across all of its pools | Chain-wide price streams, token screeners |
 | **`Trading.Currencies`** | Pre-aggregated OHLC for a **currency aggregated across chains** (e.g. BTC across WBTC, cbBTC, native BTC, etc.) | Chain-agnostic global price for an asset |
-| **`Trading.Pairs`** | Pre-aggregated OHLC and volume **per trading pair on a specific market/DEX** | Pair-specific charts (e.g. SOL/USDC on Raydium) |
+| **`Trading.Pairs`** | Pre-aggregated OHLC and volume **per trading pair on a specific market/DEX** | Pair-specific charts (e.g. SOL/USDC on Raydium), and — with [rank 1](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) — the most accurate price for a single token |
 
 ### Characteristics
 
@@ -151,6 +151,7 @@ The first two rows answer the question for 80% of users — pick by **how far ba
 | Get **older than ~30 days** of trades or candles (historical / archive) | **`EVM.DEXTradeByTokens`** / **`Solana.DEXTradeByTokens`** (with `dataset: combined` or `archive`) |
 | Render a real-time trade tape in a trading UI | `Trading.Trades` |
 | Power a price ticker / candle chart with ready USD values | `Trading.Tokens` or `Trading.Pairs` |
+| Get the **most accurate price for one specific token** | [`Trading.Pairs` + `Ranking: { Position: { eq: 1 } }`](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) — prices from the token's top market instead of a blend across all its pools |
 | Get a chain-agnostic price for an asset (e.g. BTC across all chains) | `Trading.Currencies` |
 | Stream all swaps on 9 chains in **one** subscription | `Trading.Trades` |
 | Build OHLC at a **custom** interval (e.g. 7-second, 4-hour) | `DEXTradeByTokens` (in-query aggregation) |

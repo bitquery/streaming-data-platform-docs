@@ -82,6 +82,10 @@ The API for **Trades**, **Pairs**, and **Tokens** exposes a **Ranking** object w
 
 Use **Position** for display order or precedence; use **Weight** for how much each contributor matters in the blended price.
 
+:::tip Practical use: pricing a token from its top market
+Filtering **`Pairs`** to **`Ranking: { Position: { eq: 1 } }`** gives you a token's price on the single market contributing the most decay-weighted volume, instead of the blend across all of its pools. This is the recommended way to price a specific token — see [Getting the Most Accurate Token Price](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) for queries, streaming, and caveats.
+:::
+
 ### Example: filter by ranking position
 
 Filter pairs in **`where`** using **`Ranking.Position`** when you only want rows that are among the top contributors to the token price (for example positions **1**, **2**, and **3**). Request **`Ranking { Position Weight }`** on each pair to see both the rank and that pair’s **relative weight** in the blend. **`Weight`** is normally used as a returned field rather than as a filter.
