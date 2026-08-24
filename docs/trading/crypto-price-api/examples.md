@@ -10,6 +10,8 @@ The recommended way to price a **specific token**: query the `Pairs` cube with `
 
 Full explanation, streaming variant, and caveats: [Getting the Most Accurate Token Price](/docs/trading/crypto-price-api/pairs#most-accurate-token-price).
 
+[Run query ➤](https://ide.bitquery.io/Token-price-from-top-market--rank-1_2)
+
 ```graphql
 {
   Trading {

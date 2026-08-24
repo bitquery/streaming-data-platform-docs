@@ -29,6 +29,8 @@ Filtering `Pairs` to `Ranking.Position = 1` avoids that: you get the quote from 
 
 ### Latest price of a token from its top market
 
+[Run query ➤](https://ide.bitquery.io/Token-price-from-top-market--rank-1_2)
+
 ```graphql
 {
   Trading {
@@ -93,6 +95,8 @@ With the filter, prices are in USD even when the quote token is WSOL or another 
 
 Change `query` to `subscription` and drop `limit`/`orderBy` to receive top-market updates as they happen:
 
+[Run Stream ➤](https://ide.bitquery.io/Token-price-stream-from-top-market--rank-1)
+
 ```graphql
 subscription {
   Trading {
@@ -138,6 +142,8 @@ To stream the top market of **every** token on a chain, replace the `Token.Addre
 ### Watchlist: top-market price for several tokens
 
 Add `limitBy` to collapse the result to one current row per token:
+
+[Run query ➤](https://ide.bitquery.io/Multi-token-watchlist--rank-1-per-token)
 
 ```graphql
 {
