@@ -47,6 +47,8 @@ We write a query to get OHLC data for the Uniswap pair ETH-DAI, filtering for tr
 
 We’ll request **Solana token** prices in **1-minute intervals**, including SMA/EMA/WSMA.
 
+> Streaming every token on a chain is a good fit for the `Tokens` cube. To compute indicators for **one specific token**, swap in [`Pairs` with `Ranking: { Position: { eq: 1 } }`](/docs/trading/crypto-price-api/pairs#most-accurate-token-price): the same `Price.Average` fields (`SimpleMoving`, `ExponentialMoving`, `WeightedSimpleMoving`) are available there, computed from the token's top market rather than blended across all of its pools.
+
 ```python
 query = gql("""
 subscription {

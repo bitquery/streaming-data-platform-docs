@@ -4,6 +4,72 @@ description: "Quick Start Examples via Bitquery Trading APIs for multi-chain pri
 ---
 # Quick Start Examples
 
+## Most Accurate Price for a Token (Top Market, Rank 1) {#most-accurate-price-for-a-token}
+
+The recommended way to price a **specific token**: query the `Pairs` cube with `Ranking: { Position: { eq: 1 } }` to get the price from the token's **top market** — the pool currently carrying the most volume for it — instead of a value blended across every pool it trades in. Thin, fragmented pools therefore cannot pull the number away from the market where the token actually trades.
+
+Full explanation, streaming variant, and caveats: [Getting the Most Accurate Token Price](/docs/trading/crypto-price-api/pairs#most-accurate-token-price).
+
+[Run query ➤](https://ide.bitquery.io/Token-price-from-top-market--rank-1_2)
+
+```graphql
+{
+  Trading {
+    Pairs(
+      where: {
+        Token: {
+          Address: { is: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263" }
+          Network: { is: "Solana" }
+        }
+        Ranking: { Position: { eq: 1 } }
+        Interval: { Time: { Duration: { eq: 60 } } }
+        Price: { IsQuotedInUsd: true }
+      }
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Token {
+        Symbol
+        Address
+      }
+      QuoteToken {
+        Symbol
+      }
+      Market {
+        Protocol
+        Address
+        Network
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
+      Ranking {
+        Position
+        Weight
+      }
+      Volume {
+        Usd
+      }
+      Block {
+        Time
+      }
+    }
+  }
+}
+```
+
+`Price.Ohlc.Close` is the latest price on the top market. Keep `Price: { IsQuotedInUsd: true }` in the filter — every market also publishes rows priced in **quote token units**, so without it a WBTC/WSOL market would return the price of WBTC in SOL rather than in dollars.
+
+`Ranking.Weight` tells you how concentrated the token's liquidity is: near 1 means a single pool drives the price; a low value means it is fragmented across many pools — the case where this query differs most from the blended `Tokens` price.
+
+Change `query` to `subscription` and drop `limit`/`orderBy` to stream it live.
+
 ## Real-Time Token Prices in USD on Solana
 
 Stream live OHLC (Open, High, Low, Close) price and volume data for all tokens on Solana, quoted directly in USD. Useful for dashboards, analytics, or bots that need stable fiat-based prices.
@@ -215,6 +281,8 @@ subscription {
 ## Aggregated Token Data (Volume & Price, Last 24h)
 
 Get a snapshot of tokens with aggregated USD volume and average price over the last 24 hours. The query uses `limitBy: { count: 1, by: Token_Id }` to return one row per token, and conditional metrics (`Volume.Usd(if: ...)`, `Price.Average.Mean(..., if: ...)`) to show volume and price for the last 1h, 4h, and 24h. Useful for dashboards, top-movers lists, or comparing short-term vs daily metrics.
+
+> The `Tokens` cube is the right choice here: volume is summed across all of a token's pools. Note that its prices are blended across those pools too — to price one specific token from its top market instead, use [Pairs with rank 1](/docs/trading/crypto-price-api/pairs#most-accurate-token-price).
 
 [Run query ➤](https://ide.bitquery.io/aggregated-data-for-tokens)
 
@@ -559,6 +627,8 @@ query {
 
 Fetch the top 10 tokens by 5-minute percentage price change (USD-based), only including tokens with at least $100k trading volume. Ideal for building a "top movers" list.
 
+> Scanning every token on a chain is exactly what the `Tokens` cube is for. Once you have picked a token out of the list, price it from its top market with [Pairs + rank 1](/docs/trading/crypto-price-api/pairs#most-accurate-token-price).
+
 Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
 This stream uses [expressions](/docs/graphql/capabilities/expression/)
@@ -641,6 +711,8 @@ This stream uses [expressions](/docs/graphql/capabilities/expression/)
 
 Stream the top 10 tokens on Solana by 5-minute price change (in USD), filtered by $100k+ volume. Updates continuously.
 
+> As above, this is a chain-wide scan. For a watchlist of specific tokens, stream their top markets instead — see [Watchlist: top-market price for several tokens](/docs/trading/crypto-price-api/pairs#most-accurate-token-price).
+
 Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
 This stream uses [expressions](/docs/graphql/capabilities/expression/)
@@ -722,6 +794,8 @@ subscription{
 Calculate the percentage drawdown (price decline) for tokens of a specific currency (e.g., Bitcoin) over a 1-hour interval.
 
 This query uses [expressions](/docs/graphql/capabilities/expression/) to calculate drawdown as: `((Close - Open) / Open) * 100`.
+
+> This compares a currency's token representations against each other, so `Tokens` fits. To measure one token's drawdown on the market where it actually trades, run the same expression against [Pairs with rank 1](/docs/trading/crypto-price-api/pairs#most-accurate-token-price).
 
 > **Note:** You can use `Token: {Address: {is: "token_address"}}` filter instead of `Currency: {Id: {is: "bid:bitcoin"}}` to filter by token address. We include `Volume: { Usd: { gt: 10 } }` to filter out tokens with very low trading volume.
 
