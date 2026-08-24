@@ -21,6 +21,7 @@ Full explanation, streaming variant, and caveats: [Getting the Most Accurate Tok
         }
         Ranking: { Position: { eq: 1 } }
         Interval: { Time: { Duration: { eq: 60 } } }
+        Price: { IsQuotedInUsd: true }
       }
       limit: { count: 1 }
       orderBy: { descending: Block_Time }
@@ -61,7 +62,9 @@ Full explanation, streaming variant, and caveats: [Getting the Most Accurate Tok
 }
 ```
 
-`Price.Ohlc.Close` is the latest price on the top market, in USD (`IsQuotedInUsd: true`) even when the quote token is WSOL or another non-stable asset. `Ranking.Weight` tells you how concentrated the token's liquidity is: near 1 means a single pool drives the price; a low value means it is fragmented across many pools — the case where this query differs most from the blended `Tokens` price.
+`Price.Ohlc.Close` is the latest price on the top market. Keep `Price: { IsQuotedInUsd: true }` in the filter — every market also publishes rows priced in **quote token units**, so without it a WBTC/WSOL market would return the price of WBTC in SOL rather than in dollars.
+
+`Ranking.Weight` tells you how concentrated the token's liquidity is: near 1 means a single pool drives the price; a low value means it is fragmented across many pools — the case where this query differs most from the blended `Tokens` price.
 
 Change `query` to `subscription` and drop `limit`/`orderBy` to stream it live.
 

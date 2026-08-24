@@ -40,6 +40,7 @@ Filtering `Pairs` to `Ranking.Position = 1` avoids that: you get the quote from 
         }
         Ranking: { Position: { eq: 1 } }
         Interval: { Time: { Duration: { eq: 60 } } }
+        Price: { IsQuotedInUsd: true }
       }
       limit: { count: 1 }
       orderBy: { descending: Block_Time }
@@ -80,7 +81,13 @@ Filtering `Pairs` to `Ranking.Position = 1` avoids that: you get the quote from 
 }
 ```
 
-`Price.Ohlc.Close` is the token's latest price on its top market. Values come back in **USD** (`IsQuotedInUsd: true`) even when the quote token is WSOL or another non-stable asset, because the index normalizes the quote side — see [How Pool Prices Are Normalized](/docs/trading/crypto-price-api/price-index-algorithm#how-pool-prices-are-normalized-to-the-current-quote-token).
+`Price.Ohlc.Close` is the token's latest price on its top market.
+
+:::warning Keep `Price: { IsQuotedInUsd: true }` in the filter
+Each market publishes its rows **twice**: once priced in **USD** and once priced in **quote token units**. Without the `Price: { IsQuotedInUsd: true }` filter you will receive both, and a row such as a WBTC/WSOL market would return the price of WBTC **in SOL**, not in dollars.
+
+With the filter, prices are in USD even when the quote token is WSOL or another non-stable asset, because the index normalizes the quote side — see [How Pool Prices Are Normalized](/docs/trading/crypto-price-api/price-index-algorithm#how-pool-prices-are-normalized-to-the-current-quote-token). Set it to `false` when you deliberately want the price in quote-token terms.
+:::
 
 ### Stream the same price
 
@@ -97,6 +104,7 @@ subscription {
         }
         Ranking: { Position: { eq: 1 } }
         Interval: { Time: { Duration: { eq: 1 } } }
+        Price: { IsQuotedInUsd: true }
       }
     ) {
       Token {
@@ -148,6 +156,7 @@ Add `limitBy` to collapse the result to one current row per token:
         }
         Ranking: { Position: { eq: 1 } }
         Interval: { Time: { Duration: { eq: 60 } } }
+        Price: { IsQuotedInUsd: true }
         Block: { Time: { since_relative: { minutes_ago: 10 } } }
       }
       limit: { count: 10 }
@@ -192,6 +201,7 @@ Add `limitBy` to collapse the result to one current row per token:
 
 ### Things to know
 
+- **Rank 1 does not imply USD.** The rank filter selects the market, not the price denomination — always pair it with `Price: { IsQuotedInUsd: true }` (or read the `IsQuotedInUsd` field on each row) so you are not mixing USD and quote-token prices.
 - **The top market can change.** Ranking is recomputed as volume moves, so a token's rank-1 pool — and its quote token — may flip during a stream. Key your state on `Market.Address` from each message instead of assuming a fixed pool.
 - **Always scope the query.** A rank filter is not a substitute for a token filter: an unscoped rank-1 query across a whole chain scans very wide and can time out. Filter by `Token.Address` with `Network` (or `Market: { NetworkBid: { is: "bid:eth" } }` for lower latency), and add `Block: { Time: { since_relative: { minutes_ago: N } } }` for broad queries.
 - **Want the runner-up markets too?** Use `Ranking: { Position: { in: [1, 2, 3] } }` to compare a token's main venues — useful for spread and arbitrage checks. You can also sort by `orderBy: { descending: Ranking_Weight }`.
