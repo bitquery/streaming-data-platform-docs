@@ -266,6 +266,12 @@ subscription {
 
 ### **4. Pair-Specific Market Data**
 
+:::tip Track the deepest market instead of hardcoding one
+Pinning a limit order to a **named** pool reintroduces the single-pool risk described above — that pool can thin out or stop being where the token trades. Adding **`Ranking: { Position: { eq: 1 } }`** to a `Pairs` query instead follows the token's **top market** automatically: you get the price from the deepest pool at any moment, and thin pools cannot influence it.
+
+This is the complement to blended aggregation, not a contradiction of it. Blended [`Tokens`](/docs/trading/crypto-price-api/tokens) prices dampen spikes by mixing every pool, including thin ones; rank-1 removes the thin pools entirely and quotes the market with the most volume. Use blended prices when you want smoothing across the whole market, and rank-1 when you want the price you could actually execute against. See [Getting the Most Accurate Token Price](/docs/trading/crypto-price-api/pairs#most-accurate-token-price).
+:::
+
 **Example: SOL/USDC on Raydium**
 ```graphql
 subscription {

@@ -6,6 +6,10 @@ description: "Query currency-level crypto prices and conversions with Bitquery T
 
 The Currency Cube provides a unified, chain-agnostic price for an asset in USD, such as Bitcoin by aggregating prices and volumes from all its representations (e.g., WBTC, cbBTC, and other bridged or wrapped forms) across all supported chains. This multi-chain cryptocurrency price data approach ensures consistent pricing across different blockchain implementations.
 
+:::note Use this for cross-chain assets, not for a single token
+Currency prices aggregate **across chains and token representations**, so use this cube when you want one global number for an asset like BTC or ETH. For the price of a **specific token on a specific market**, use the [Pairs cube with `Ranking: { Position: { eq: 1 } }`](/docs/trading/crypto-price-api/pairs#most-accurate-token-price). Note that `Ranking` is **not** available on `Currencies` — it exists on `Trades`, `Pairs`, and `Tokens` only.
+:::
+
 ### How OHLC is Calculated
 
 The OHLC values (Open, High, Low, Close) are determined across all chains and token representations of an asset for the selected interval (e.g., 60 seconds):
