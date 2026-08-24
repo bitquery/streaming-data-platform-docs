@@ -31,6 +31,10 @@ const BITQUERY_ENDPOINT =
 
 ### Subscription Query
 
+:::tip Charting one specific token? Prefer Pairs + rank 1
+The subscription below uses the `Tokens` cube, whose price blends every pool where the token is base. For a chart of **one** token, subscribe to [`Pairs` with `Ranking: { Position: { eq: 1 } }`](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) instead — the same `Price.Ohlc` fields, taken from the token's top market. Note that the top market can change during a stream, so read `Market.Address` from each message rather than assuming a fixed pool.
+:::
+
 [Run Stream on IDE](https://ide.bitquery.io/1-second-crypto-price-stream)
 **We have used Solana as an example below, you can remove it and get data for all chains provided by the Price API**
 
