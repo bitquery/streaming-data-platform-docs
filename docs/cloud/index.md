@@ -128,11 +128,20 @@ Export **Bitcoin blockchain data** including transaction inputs, outputs, and OM
 
 ### [Ripple (XRP Ledger) Data Export](/docs/cloud/ripple/)
 
-Export **Ripple / XRP Ledger data** covering every value movement on the ledger:
+Export **Ripple / XRP Ledger data**, modelled around XRPL's ledger objects:
 
-- **Transfers** – Native XRP and issued-token (IOU) payments, DEX and AMM trade legs, NFT trades and mints, and the XRP burned as transaction fees
+- **Transactions** – Transaction envelope with fee, sequence, result code, memos, and signers
+- **Transfers** – Unified value movement: XRP and issued-token payments, DEX and AMM trade legs, NFT trades and mints, and fee burns
+- **Payments** – `Payment` transactions with requested, delivered, send-max, and deliver-min amounts
+- **Balances** – Account balance before and after each change, native and issued
+- **Account Roots** – Account state: XRP balance, owner count, sequence, domain, transfer rate
+- **Ripple States** – Trust line balances between two accounts for an issued currency
+- **Offers** – DEX order book offers, before and after each change
+- **NFToken Offers** – NFT buy and sell offers with the asking price
+- **Escrows** – Escrow creation, finish, and cancel with conditions and time locks
+- **Checks** – Deferred payment authorizations
 
-**Use Cases:** XRP payment flow analysis, issued-token and stablecoin tracking, XRPL DEX and AMM volume analysis, NFT marketplace activity, network fee revenue analysis.
+**Use Cases:** XRP payment flow analysis, issued-token and stablecoin tracking, XRPL DEX and AMM volume analysis, order book reconstruction, trust line and issuer exposure analysis, NFT marketplace activity, network fee revenue analysis.
 
 ### [BSC (BNB Chain) Data Export](/docs/cloud/bsc/)
 
@@ -190,7 +199,11 @@ bitquery-blockchain-dataset/
 │   ├── transfers/
 │   └── ...
 └── ripple/
-    └── transfers_tx/
+    ├── transactions_tx/
+    ├── transfers_tx/
+    ├── payments_tx/
+    ├── balances/
+    └── ...
 ```
 
 ## Sample Parquet Data
