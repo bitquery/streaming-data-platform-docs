@@ -38,20 +38,34 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::tip Related docs
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)
+- [Pons API on Robinhood](/docs/blockchain/robinhood/pons-api) — bonding-curve launchpad, graduations, Uniswap v4 pools
+- [Pools.trade API on Robinhood](/docs/blockchain/robinhood/pools-trade-api)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
 - [WebSocket subscriptions](/docs/subscriptions/websockets/)
 :::
 
 ---
 
-## Flap.sh contract
+## Flap.sh contracts
+
+Flap.sh is **not a single contract**. A router takes the user's transaction, a factory mints the token, and a separate bonding-curve engine handles every buy and sell. Each role emits a different set of events from a different address, and more than one address is live in each role.
+
+| Role | Address | Emits |
+| --- | --- | --- |
+| **Launch router** (entry point) | `0x26605f322f7ff986f381bb9a6e3f5dab0beaeb09` | Nothing but `Upgraded` — it is an upgradeable proxy. It appears as **`Transaction.To`**, not as a log address. |
+| **Token factory** | `0x78eb178d94739b8adf199543924e47e9547c4924`<br/>`0x549574ddf0d72928f2041c17daab2097dd46d815` | `TokenCreated`, `TokenCurveSetV2`, `FlapTokenTaxSet`, `TokenQuoteSet`, `TokenVersionSet`, `TokenDexPreferenceSet`, `TokenDexSupplyThreshSet`, `TokenMigratorSet` |
+| **Vanity token factory** | `0xa2fb48fefb15f777ec6ac3857164550ee93c1f25`<br/>`0x52e3eb4f18dfb8215e17d27dee5718075f6c2639` | `VanityTokenCreated`, plus the same `TokenCreated` / `TokenCurveSetV2` pair |
+| **Bonding-curve engine** | `0x87a697bf7fbe28dc1eccc4d9b4bd1cfa76885f93`<br/>`0x2a50c45b5cbb9e5c735f094c6386c39f8ffbc655` | `TokenBought`, `TokenSold`, `TaxV2OnBondingCurvePaid`, `FlapTokenProgressChanged`, `FlapTokenCirculatingSupplyChanged` |
 
 | Field | Value |
 | --- | --- |
-| **Flap.sh contract** | `0x26605f322f7ff986f381bb9a6e3f5dab0beaeb09` |
 | **Launch mint `Amount`** | `1000000000` (1 billion, decimal-normalized) |
 
-The contract address is used as the `Log`/`LogHeader` address for events, as `Transaction.To` for mint transfers, and as the `Pair.Market.Program` for trades.
+:::caution Do not filter Flap.sh events by the router address
+`0x26605f32…` is the address users transact **to**, so it is correct for `Transaction.To` filters on mint transfers. It is **not** the `Log`/`LogHeader` address of any Flap.sh event — filtering logs by it returns nothing. Launches also arrive through several vanity routers ending in `…6666`, so `Transaction.To` alone will not capture every launch either.
+
+Match Flap.sh events by **event signature name** (as every query on this page does), and scope to a token with an `Arguments` filter. Pin to the factory and curve addresses above only when you specifically need to exclude another protocol that reuses a generic event name.
+:::
 
 ---
 
@@ -299,6 +313,10 @@ The bonding-curve engine emits its own decoded trade events on the Flap.sh contr
 
 The most important lifecycle signal: a token completed its bonding curve and was **launched to a DEX**. The event returns the new `pool` address (use it with the [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades) to follow post-graduation trading), the migrated token `amount`, and the `eth` seeded into the pool.
 
+:::caution `LaunchedToDEX` is not exclusive to Flap.sh
+Other Robinhood Chain launchpads emit an event with this same name. The query below returns graduations across all of them. To keep the feed Flap.sh-only, add a `LogHeader.Address` filter for the curve engines listed in [Flap.sh contracts](#flapsh-contracts), or check the graduated `token` against a Flap.sh `TokenCreated` / `TokenCurveSetV2` pair before acting on it.
+:::
+
 ```graphql
 {
   EVM(network: robinhood) {
@@ -521,7 +539,13 @@ Use the `FlapTokenProgressChanged` event. `newProgress` is scaled by `1e18`, so 
 
 ### Why do the event queries filter by `Log.Signature.Name` instead of a contract address?
 
-Flap.sh emits the same event from several contracts (the bonding-curve engine, factories, and router). Filtering by the signature name captures the event across all of them. Add an `Arguments.includes` filter on the `token` argument to scope to one token.
+Flap.sh emits its events from several contracts — separate factories, vanity factories, and bonding-curve engines, each with more than one live address (see [Flap.sh contracts](#flapsh-contracts)). Filtering by the signature name captures the event across all of them. Add an `Arguments.includes` filter on the `token` argument to scope to one token.
+
+### Can a signature-name filter pick up other protocols?
+
+Yes, for generic names. `TokenCreated` in particular is emitted by several unrelated launchpads on Robinhood Chain, and `LaunchedToDEX` is emitted by protocols other than Flap.sh. Names carrying the `Flap` prefix — `FlapTokenProgressChanged`, `FlapTokenCirculatingSupplyChanged`, `FlapTokenTaxSet` — are unambiguous; the generic ones are not.
+
+If a feed must be Flap.sh-only, add a `LogHeader.Address` filter pinned to the factory and curve addresses in [Flap.sh contracts](#flapsh-contracts), or cross-check the token against a `TokenCurveSetV2` event, which the Flap.sh factories always emit alongside `TokenCreated`.
 
 ---
 

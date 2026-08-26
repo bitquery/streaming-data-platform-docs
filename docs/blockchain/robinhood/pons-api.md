@@ -1,5 +1,5 @@
 ---
-title: "Pons API — Bonding Curve Launchpad on Robinhood Chain"
+title: "Pons API — How to Track Pons Launches on Robinhood Chain"
 description: "Pons API: track the Pons V2 bonding-curve launchpad on Robinhood Chain with Bitquery GraphQL. Query new launches, curve trades, snipe tax, graduations, and Uniswap v4 pools."
 sidebar_position: 7
 keywords:
@@ -39,7 +39,7 @@ keywords:
   - Pons pool liquidity API
 ---
 
-# Pons API — Bonding Curve Launchpad on Robinhood Chain
+# Pons API — How to Track Pons Launches on Robinhood Chain
 
 **[Pons](https://www.ponsfamily.com/launchpad)** is a token launchpad on **Robinhood Chain**. Its **V2** contracts run a real **bonding curve** that graduates into a **Uniswap v4 pool behind a Pons-owned hook**, and they let a creator quote a launch in **native ETH, USDG, or a tokenized stock** such as TSLA or NVDA. This guide shows how to track **new Pons launches**, **bonding-curve trades**, **snipe tax**, **graduations**, and **post-graduation prices and liquidity** with Bitquery GraphQL APIs, using the `EVM(network: robinhood)` and `Trading` cubes.
 
@@ -103,15 +103,17 @@ Pons and [pools.trade](/docs/blockchain/robinhood/pools-trade-api) are structura
 | Quote assets | ETH, USDG, tokenized stocks | Mostly native ETH |
 | Curve trades in trade cubes | **Yes**, as `pons_v2` (from 2026-08-14) | N/A — all trades are pool trades |
 
-:::caution Pons V1 is a different protocol and is still live
-`PonsLaunchFactory` at `0xa5aab3f0c6eeadf30ef1d3eb997108e976351feb` is the **V1** launchpad. It is **still deploying tokens**, it has **no bonding curve** (each token gets a Uniswap V3 pool at launch), and its events have **different signatures and different topic0 values** from V2:
+:::caution Pons V1 is a different protocol with different event signatures
+`PonsLaunchFactory` at `0xa5aab3f0c6eeadf30ef1d3eb997108e976351feb` is the **V1** launchpad. It has **no bonding curve** — each token gets a Uniswap V3 pool at launch — and its events carry **different signatures and different topic0 values** from V2:
 
 ```text
 db51ea9ad51ab453a65a4cb7e60c3cb378c9501bb002609f8f97778fb6c4235a  TokenLaunched(address,address,address,address,address,uint256,uint256,uint256,uint256,uint256)
 1461370115e1c2be79cb529f8cfcbd11316e789d9c6099fc83417b0b4c48c62a  TokenDeployed(address,address,address,address,uint256,uint256)
 ```
 
-Every query on this page targets **V2 only**. A "Pons launches" feed built from V2 alone silently misses all V1 activity — add the V1 factory address and its topic0s if you need both.
+Every query on this page targets **V2 only**. A "Pons launches" feed built from V2 alone will not include V1 launches — add the V1 factory address and its topic0s if you need both.
+
+V1 deployment activity varies over time and can stop entirely. Check whether it is currently producing launches before building against it — query `EVM(network: robinhood, dataset: realtime)` for logs from `0xa5aab3f0c6eeadf30ef1d3eb997108e976351feb` and see whether anything comes back. V1 pools are created by Robinhood Chain's **chain-wide Uniswap V3 pool factory**, which serves every V3 protocol on the network — a `PoolCreated` event from it is **not** on its own a Pons signal.
 :::
 
 ---
@@ -162,6 +164,8 @@ On `archive` either one fails with `no candidate table can serve: [Log_Signature
 ---
 
 ## Contract addresses
+
+Pons V2 runs from a fixed set of contracts. The launch factory `0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e` emits every `TokenLaunched`, `LaunchSwept`, and `PoolGraduated`; the launch router `0xe33e9e479df8802cb0866d5d05258bec4cf62948` wraps launch-and-first-buy into one transaction; and the meme hook `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044` sits on every graduated Uniswap v4 pool and is the field that tells a Pons pool apart from any other v4 pool on the network. Each launched token also gets **its own bonding-curve contract**, so curve trades are matched by event signature rather than by a single address.
 
 | Role | Address | Notes |
 | --- | --- | --- |
@@ -241,6 +245,8 @@ Emitter: `0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e`
 | `PoolGraduated(address,uint256,uint256,uint256)` | 1 | `0a44ef75df69c534f43cd6c1aa3ef8983065fe5fe79ef9e79f6494e6f258c259` |
 | `GraduationTokensPermanentlyLocked(address,uint256)` | 1 | `a0a18f5bf205becee8b268d7cf69addab8548ae8ef361791464cf0e0e17c1361` |
 | `CreatorFeeRecipientUpdated(address,address,address)` | 3 | `308c390ed1ab5873392818e036cabdf408bc8ad042fbaead3108954ff75ba980` |
+| `CreatorFeeRecipientChangeProposed(address,address,address,uint256,uint256)` | 3 | `7f119e44c84a715429bee60d30ad2e14afdef6c60bb1a7eaa01290ecf6d1b2e5` |
+| `BuybackEnabledUpdated(address,bool,address)` | 2 | `bd886f85b7731f66269f57707414d435bf8df930d3357a10becc48a69377f6d5` |
 | `LaunchForceSwept(address)` *(rare)* | 1 | `52c1a28345695afc7f6b7629133124dec5d61ee745affd65e4fd2a776bc05840` |
 | `LaunchGraduationRescued(address,address,uint256,uint256)` *(rare)* | 2 | `7017304fdd491394686dce984eac721f0be1a22228346210f16694772bde44ca` |
 
