@@ -1361,6 +1361,7 @@ const sidebars = {
         "cloud/evm",
         "cloud/solana",
         "cloud/pumpfun",
+        "cloud/polymarket",
         "cloud/tron",
         "cloud/bitcoin",
         "cloud/bsc",
