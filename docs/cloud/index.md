@@ -76,6 +76,7 @@ Export blockchain data for **Ethereum, BSC, Base, Polygon/Matic, Optimism, Arbit
 - **Transactions** – Full transaction-level data with gas information
 - **Transfers** – Native token and ERC-20 token transfers
 - **Balance Updates** – Account balance changes per block
+- **Balances** – Daily end-of-day balance snapshots per account and token
 - **DEX Trades** – Decentralized exchange trading data
 - **DEX Pools** – Liquidity pool metadata and state
 - **Smart Contract Calls** – Function calls and interactions
@@ -124,6 +125,14 @@ Export **Bitcoin blockchain data** including transaction inputs, outputs, and OM
 - **OMNI Transfers** – OMNI Layer token transfers
 
 **Use Cases:** Bitcoin transaction analysis, UTXO tracking, address clustering, OMNI token analysis, blockchain forensics, historical price analysis.
+
+### [Ripple (XRP Ledger) Data Export](/docs/cloud/ripple/)
+
+Export **Ripple / XRP Ledger data** covering every value movement on the ledger:
+
+- **Transfers** – Native XRP and issued-token (IOU) payments, DEX and AMM trade legs, NFT trades and mints, and the XRP burned as transaction fees
+
+**Use Cases:** XRP payment flow analysis, issued-token and stablecoin tracking, XRPL DEX and AMM volume analysis, NFT marketplace activity, network fee revenue analysis.
 
 ### [BSC (BNB Chain) Data Export](/docs/cloud/bsc/)
 
@@ -175,11 +184,13 @@ bitquery-blockchain-dataset/
 │   ├── inputs/
 │   ├── outputs/
 │   └── ...
-└── tron/
-    ├── blocks/
-    ├── transactions/
-    ├── transfers/
-    └── ...
+├── tron/
+│   ├── blocks/
+│   ├── transactions/
+│   ├── transfers/
+│   └── ...
+└── ripple/
+    └── transfers_tx/
 ```
 
 ## Sample Parquet Data

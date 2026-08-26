@@ -74,6 +74,7 @@ For EVM chains we currently provide the following topics:
 
 - **Blocks** – [sample file](https://github.com/bitquery/blockchain-cloud-data-dump-sample/blob/main/ethereum/blocks.js)
 - **Balance Updates** – [sample file](https://github.com/bitquery/blockchain-cloud-data-dump-sample/blob/main/ethereum/balance_updates.js)
+- **Balances** – [sample file](https://github.com/bitquery/blockchain-cloud-data-dump-sample/blob/main/ethereum/balances.js), daily snapshots, see [Balances](#balances-daily-snapshots) below
 - **DEX Trades** – [sample file](https://github.com/bitquery/blockchain-cloud-data-dump-sample/blob/main/ethereum/dextrades.js)
 - **Uncle Blocks** – [sample file](https://github.com/bitquery/blockchain-cloud-data-dump-sample/blob/main/ethereum/uncle_blocks.js)
 - **Transactions** – [sample file](https://github.com/bitquery/blockchain-cloud-data-dump-sample/blob/main/ethereum/transactions.js)
@@ -93,6 +94,10 @@ The GitHub repository includes one sample file. The complete list of Parquet fil
 
 bitquery-blockchain-dataset/
 └── ethereum/
+    ├── balances/
+    │   ├── 2025-01-01.parquet
+    │   ├── 2025-01-02.parquet
+    │   └── ...
     ├── balance_updates/
     │   ├── 24053500_24053549.parquet
     │   ├── 24053550_24053599.parquet
@@ -197,6 +202,98 @@ Use these samples to:
 - **Validate your ETL / analytics pipeline** against realistic EVM data.
 - **Inspect column names and types** before connecting to full buckets.
 - **Benchmark query performance** on your preferred engines and hardware.
+
+## Balances (Daily Snapshots)
+
+The **Balances** topic is a daily snapshot of account balances, both native (ETH) and token. It differs from **Balance Updates** in two ways:
+
+- **Balance Updates** are *deltas* — one row per balance change, which you must sum to reconstruct a balance.
+- **Balances** are *levels* — one row per account/token with the balance **as of the end of that day**, already aggregated.
+
+Files are partitioned by **date**, not block range:
+
+```
+https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/ethereum/balances/<YYYY-MM-DD>.parquet
+
+```
+
+**Sample Parquet download (public S3)**
+
+- **Ethereum Balances** – [Download](https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/ethereum/balances/2025-01-01.parquet)
+
+Each daily file covers **only the accounts whose balance changed that day**, not the entire chain state. The `2025-01-01` sample holds about 954,000 rows across roughly 514,000 addresses and 13,000 currencies. To reconstruct full chain state at a date, carry forward the last known balance per account from earlier files.
+
+### Balances Schema
+
+| Column | Type | Description |
+| --- | --- | --- |
+| `Balance_Address` | string | Account holding the balance |
+| `Block_Date` | date | Snapshot date, matches the file name |
+| `Currency_SmartContract` | string | Token contract address; `0x` for native ETH |
+| `Currency_Symbol` | string | Token symbol as declared by the contract |
+| `Currency_Name` | string | Token name as declared by the contract |
+| `Currency_ProtocolName` | string | Token standard, e.g. `erc20`, `erc721`, `erc1155`, `erc404_v1` |
+| `Balance_Amount` | string | Balance at end of day, decimal string — see the precision note below |
+| `Balance_FirstChangeTime` | datetime | First balance change on this date (UTC) |
+| `Balance_LastChangeTime` | datetime | Last balance change on this date (UTC) |
+| `Balance_UpdateCount` | uint64 | Number of balance changes on this date |
+| `Balance_RowCount` | uint64 | Number of underlying aggregate rows merged into this row |
+
+### Filter on the Contract Address, Never the Symbol
+
+Token symbols are set by the contract, so anyone can deploy a token claiming any symbol. In the `2025-01-01` sample, **25 different contracts report the symbol `ETH`** and **34 report `USDT`**.
+
+Filtering `Currency_Symbol = 'ETH'` picks up impostor ERC-20s and inflates the native ETH total by several orders of magnitude. Native ETH is identified by the contract address:
+
+```sql
+-- correct: native ETH
+WHERE Currency_SmartContract = '0x'
+
+-- correct: real USDT
+WHERE Currency_SmartContract = '0xdac17f958d2ee523a2206206994597c13d831ec7'
+
+-- wrong: matches impostor tokens too
+WHERE Currency_Symbol = 'USDT'
+```
+
+Filtered correctly, the largest native ETH holders in the sample are the Beacon Deposit Contract (`0x00000000219ab540356cbb839cbe05303d7705fa`) and the WETH contract (`0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2`), which you can cross-check on any block explorer.
+
+### `Balance_Amount` Is a String
+
+Balances are stored as **decimal strings**, not floats, so that 18-decimal values survive intact. Casting to a 64-bit float silently loses precision on large balances. Parse to a decimal type instead:
+
+```python
+from decimal import Decimal
+df["amount"] = df["Balance_Amount"].map(Decimal)
+```
+
+In SQL, cast to a wide decimal — for example `CAST(Balance_Amount AS DECIMAL(38, 18))` — rather than `DOUBLE`. Note that a few scam tokens carry balances near `2^256`, which overflow even a `DECIMAL(38, 18)`; filter those out or cast to `DECIMAL(76, 18)` if your engine supports it.
+
+### Row Grain and Deduplication
+
+The grain is `(Balance_Address, Currency_SmartContract, Currency_ProtocolName)`. Hybrid tokens such as ERC-404 emit under more than one standard, so the same address and contract can appear on multiple rows — about 4,600 such pairs in the sample.
+
+These rows often repeat the **same** balance under a different `Currency_ProtocolName`, so summing across them double-counts. Pick one `Currency_ProtocolName`, or deduplicate on the address and contract before aggregating.
+
+### Reading a File in Python
+
+```python
+import pandas as pd
+from decimal import Decimal
+
+url = "https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/ethereum/balances/2025-01-01.parquet"
+df = pd.read_parquet(url)
+
+# native ETH only, identified by contract address rather than symbol
+native = df[df.Currency_SmartContract == "0x"].copy()
+native["amount"] = native.Balance_Amount.map(Decimal)
+
+print(len(native), "accounts changed ETH balance on this date")
+
+# sort_values, not nlargest: pandas cannot rank an object/Decimal column
+top = native.sort_values("amount", ascending=False).head(10)
+print(top[["Balance_Address", "amount"]])
+```
 
 ## Other Ways to Access EVM Data
 
