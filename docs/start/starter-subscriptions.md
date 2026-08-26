@@ -46,19 +46,19 @@ Every Ethereum DEX trade as it happens. Add a `where` filter to narrow to a toke
 
 #### All swap events
 
-All swap events. Uses the `Events` cube.
+Returns provides information on the latest real-time swap events on Ethereum. You can run it [here
 
 ▶️ [All swap events](https://ide.bitquery.io/all-swap-events)
 
 #### Get pair trades data just like dexcsreener
 
-Get pair trades data just like dexcsreener. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+The query will subscribe you to real-time trade transactions for a pair, providing a continuous stream of data as new trades are processed and recorded. You can find the query [here
 
 ▶️ [Get pair trades data just like dexcsreener](https://ide.bitquery.io/Get-pair-trades-data-just-like-dexcsreener)
 
 #### Get pair trades data just like geckoterminal
 
-Get pair trades data just like geckoterminal. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+The query will subscribe you to real-time trade transactions for a pair, providing a continuous stream of data as new trades are processed and recorded. You can find the query [here
 
 ▶️ [Get pair trades data just like geckoterminal](https://ide.bitquery.io/Get-pair-trades-data-just-like-geckoterminal)
 
@@ -70,7 +70,7 @@ Latest token trades subscription. Uses the `DEXTrades` cube. Change the token ad
 
 #### Pepe live trades stream
 
-Pepe live trades stream. Uses the `DEXTradeByTokens` cube.
+Every PEPE DEX trade as it is confirmed on-chain in real time using Bitquery subscription.
 
 ▶️ [Pepe live trades stream](https://ide.bitquery.io/pepe-live-trades-stream)
 
@@ -82,19 +82,19 @@ Real time trades of an ethereum address. Uses the `DEXTrades` cube. Replace the 
 
 #### Stream new position mints on Fluid DEX Vault
 
-Stream new position mints on Fluid DEX Vault. Uses the `Events` cube. Change the token address in the `where` clause to use it.
+Track new position mints on the Fluid DEX Vault Factory contract. This query monitors the `NewPositionMinted` event which is emitted when a new position is created on the vault factory.
 
 ▶️ [Stream new position mints on Fluid DEX Vault](https://ide.bitquery.io/stream-new-position-mints-on-Fluid-DEX-Vault)
 
 #### Subscribe to dex trades on ethereum mainnet
 
-Subscribe to dex trades on ethereum mainnet.
+Returns will get you the realtime DEX trades happening on Ethereum Mainnet. Open it in the GraphQL IDE using this [link
 
 ▶️ [Subscribe to dex trades on ethereum mainnet](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet_2)
 
 #### Trades of a specific trader of a specific token
 
-Trades of a specific trader of a specific token. Uses the `Trades` cube. Replace the address in the `where` clause to use it.
+Crypto Trades API: filter `Pair.Market.Network: Ethereum` and `Trader.Address`. More examples: Trades API, [trader + token (IDE)
 
 ▶️ [Trades of a specific trader of a specific token](https://ide.bitquery.io/trades-of-a-specific-trader-of-a-specific-token)
 
@@ -108,19 +108,19 @@ Live ERC-20 transfers. Change the token address to follow a different one.
 
 #### Pepe whale transfer stream
 
-Pepe whale transfer stream. Uses the `Transfers` cube.
+Subscribe to PEPE transfers above 1 billion tokens the moment they hit the chain.
 
 ▶️ [Pepe whale transfer stream](https://ide.bitquery.io/pepe-whale-transfer-stream)
 
 #### Subscribe to Latest WETH token transfers
 
-Subscribe to Latest WETH token transfers. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+Returns subscribes to WETH (Wrapped Ethereum) token transfers. The contract address is 0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.
 
 ▶️ [Subscribe to Latest WETH token transfers](https://ide.bitquery.io/Subscribe-to-Latest-WETH-token-transfers)
 
 #### Subscribe to latest Axie infinity token transfers
 
-Subscribe to latest Axie infinity token transfers. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+You can open this API on our GraphQL IDE using this [link
 
 ▶️ [Subscribe to latest Axie infinity token transfers](https://ide.bitquery.io/Subscribe-to-latest-Axie-infinity-token-transfers_1)
 
@@ -202,13 +202,13 @@ Live USD price updates as trades land.
 
 #### 1 second crypto price stream
 
-1 second crypto price stream. Uses the `Tokens` cube.
+For a live ticker, use the Crypto Price API stream.
 
 ▶️ [1 second crypto price stream](https://ide.bitquery.io/1-second-crypto-price-stream)
 
 #### Pepe-ohlcv-stream
 
-Pepe-ohlcv-stream. Uses the `Tokens` cube.
+Stream live PEPE price data with 1-minute candles, moving averages, and USD volume.
 
 ▶️ [Pepe-ohlcv-stream](https://ide.bitquery.io/pepe-ohlcv-stream)
 
@@ -234,7 +234,7 @@ Mints and burns as they change a token's supply.
 
 #### All trades on Ethereum with Price, Marketcap, supply
 
-All trades on Ethereum with Price, Marketcap, supply. Uses the `Trades` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [All trades on Ethereum with Price, Marketcap, supply](https://ide.bitquery.io/All-trades-on-Ethereum-with-Price-Marketcap-supply)
 
@@ -248,13 +248,13 @@ Slippage on every trade as it happens, across all pools.
 
 #### Realtime Liquidity Stream
 
-Realtime Liquidity Stream.
+Returns query returns real-time liquidity data for all DEX pools on Ethereum. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
 
 ▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_4)
 
 #### Realtime Liquidity Stream of a Specific Pool
 
-Realtime Liquidity Stream of a Specific Pool. Uses the `DEXPoolEvents` cube.
+Returns query monitors real-time liquidity changes for a specific DEX pool on Ethereum. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
 
 ▶️ [Realtime Liquidity Stream of a Specific Pool](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_4)
 
@@ -262,7 +262,7 @@ Realtime Liquidity Stream of a Specific Pool. Uses the `DEXPoolEvents` cube.
 
 #### Get Transaction Hash
 
-Get Transaction Hash.
+In this section we will discuss how we can build eth_getTransactionByHash alternatives using Bitquery APIs.
 
 ▶️ [Get Transaction Hash](https://ide.bitquery.io/Get-Transaction-Hash)
 
@@ -276,7 +276,7 @@ Stream pool and pair creation on ethereum. Uses the `Events` cube.
 
 #### Subscribe to the Same Event Across Multiple Contracts
 
-Subscribe to the Same Event Across Multiple Contracts. Uses the `Events` cube.
+In the below query we listen for a specific event (Approval) across multiple smart contracts on the Ethereum (ETH) network. Run the query [here
 
 ▶️ [Subscribe to the Same Event Across Multiple Contracts](https://ide.bitquery.io/Subscribe-to-the-Same-Event-Across-Multiple-Contracts)
 
@@ -284,19 +284,19 @@ Subscribe to the Same Event Across Multiple Contracts. Uses the `Events` cube.
 
 #### Binance Mempool Transactions
 
-Binance Mempool Transactions. Uses the `Transactions` cube. Replace the address in the `where` clause to use it.
+The example below retrieves mempool transactions from the specified address (Binance / BSC mempool context).
 
 ▶️ [Binance Mempool Transactions](https://ide.bitquery.io/Binance-Mempool-Transactions_1)
 
 #### Eth subscribe("logs")
 
-Eth subscribe("logs"). Uses the `Events` cube.
+You can subscribe to all incoming logs filtered by any of the fields including method signature, tx value,sender , receiver and so on. In the below example we are tracking only logs where the method name is `transfer`. You can run it [here
 
 ▶️ [Eth subscribe("logs")](https://ide.bitquery.io/eth_subscribelogs)
 
 #### Eth subscribe(“pendingTransactions”)
 
-Eth subscribe(“pendingTransactions”).
+To subscribe to incoming pending transactions, use the below subscription. You can run it [here
 
 ▶️ [Eth subscribe(“pendingTransactions”)](https://ide.bitquery.io/eth_subscribependingTransactions)
 
@@ -308,7 +308,7 @@ Gas prices being offered by pending transactions right now.
 
 #### Mempool event stream
 
-Mempool event stream.
+Returns listens to real-time mempool events on the Ethereum (ETH) blockchain. The query is designed to capture details of transactions, logs, events, and arguments from the Ethereum Virtual Machine (EVM) before they are confirmed in a block.
 
 ▶️ [Mempool event stream](https://ide.bitquery.io/Mempool-event-stream)
 
@@ -332,7 +332,7 @@ Catches pool creation at broadcast time rather than after the block.
 
 #### Vrs signature
 
-Vrs signature.
+Returns query retrieves real-time mempool transactions and includes key details such as the block time, block number, transaction hash, transaction cost, and the V, R, S components of the transaction signature. You can run it [here
 
 ▶️ [Vrs signature](https://ide.bitquery.io/vrs-signature)
 
@@ -382,19 +382,19 @@ Rewards paid to validators, block by block.
 
 #### Filter by MEV Bot or Builder Address
 
-Filter by MEV Bot or Builder Address. Uses the `TransactionBalances` cube.
+Track balance changes for specific MEV bots or block builders: Try the API [here
 
 ▶️ [Filter by MEV Bot or Builder Address](https://ide.bitquery.io/Filter-by-MEV-Bot-or-Builder-Address)
 
 #### Filter by Miner Address
 
-Filter by Miner Address. Uses the `TransactionBalances` cube.
+Track balance changes for a specific miner address: Try the API [here
 
 ▶️ [Filter by Miner Address](https://ide.bitquery.io/Filter-by-Miner-Address)
 
 #### Filter by Validator Address
 
-Filter by Validator Address. Uses the `TransactionBalances` cube.
+Track balance changes for a specific validator address: Try the API [here
 
 ▶️ [Filter by Validator Address](https://ide.bitquery.io/Filter-by-Validator-Address)
 
@@ -420,19 +420,19 @@ Live trades on Uniswap only.
 
 #### Currency pair liquidity events stream
 
-Currency pair liquidity events stream. Uses the `DEXPoolEvents` cube. Change the token address in the `where` clause to use it.
+If looking to monitor a currency pair across all virtual pools within Uniswap V4, then this subscription works the best.
 
 ▶️ [Currency pair liquidity events stream](https://ide.bitquery.io/currency-pair-liquidity-events-stream)
 
 #### Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4
 
-Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4. Uses the `DEXPoolEvents` cube.
+Returns query monitors real-time liquidity changes for all pools in a specific DEX protocol on Ethereum. Here we have taken example of Uniswap V4.
 
 ▶️ [Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4_6)
 
 #### Latest pools created Uniswap v3
 
-Latest pools created Uniswap v3. Uses the `Events` cube. Change the token address in the `where` clause to use it.
+Open this query on our GraphQL IDE using this [link
 
 ▶️ [Latest pools created Uniswap v3](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9)
 
@@ -466,37 +466,37 @@ This subscription stream uses DexTradeByTokens API to stream real-time specific 
 
 #### All Trade for Bags.fm tokens
 
-All Trade for Bags.fm tokens. Uses the `DEXTrades` cube.
+Get all trades of Bags FM tokens from Meteora and other DEXs. This Bags FM token trades WebSocket provides comprehensive trading data.
 
 ▶️ [All Trade for Bags.fm tokens](https://ide.bitquery.io/All-Trade-for-Bagsfm-tokens)
 
 #### CPMM trades
 
-CPMM trades. Uses the `DEXTrades` cube. Replace the address in the `where` clause to use it.
+Returns subscribes to real-time trades on the Raydium CPMM on the Solana blockchain by filtering using `{Program: {Address: {is: "CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C"}}}:`. You can run the query [here
 
 ▶️ [CPMM trades](https://ide.bitquery.io/CPMM-trades)
 
 #### Get Solana pair trades data
 
-Get Solana pair trades data. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded. You can find the query [here
 
 ▶️ [Get Solana pair trades data](https://ide.bitquery.io/Get-Solana-pair-trades-data)
 
 #### Get Solana pair trades data just like dexcsreener
 
-Get Solana pair trades data just like dexcsreener. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded. You can find the query [here
 
 ▶️ [Get Solana pair trades data just like dexcsreener](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-dexcsreener)
 
 #### Get Solana pair trades data just like geckoTerminal
 
-Get Solana pair trades data just like geckoTerminal. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded. You can find the query [here
 
 ▶️ [Get Solana pair trades data just like geckoTerminal](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-geckoTerminal_1)
 
 #### Latest Trades of TESLA onchain xStock
 
-Latest Trades of TESLA onchain xStock. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Returns will give you realtime trades of Tesla xStock (TESLAx). You can run the query [here
 
 ▶️ [Latest Trades of TESLA onchain xStock](https://ide.bitquery.io/Latest-Trades-of-TESLA-onchain-xStock_1)
 
@@ -510,37 +510,37 @@ This stream provides all token transfers on the Solana blockchain, including SOL
 
 #### SPL transfers websocket
 
-SPL transfers websocket. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+One of the most common types of transfers on Solana are SPL token transfers. Let's see an example to get the latest SPL token transfers using our API. Today we are taking an example of JUPITER token transfers.
 
 ▶️ [SPL transfers websocket](https://ide.bitquery.io/SPL-transfers-websocket_1)
 
 #### Solana Websocket - Subscribe to all transfers of specific addresses in realtime
 
-Solana Websocket - Subscribe to all transfers of specific addresses in realtime. Uses the `Transfers` cube.
+Websockets are priced based on their running time, not the amount of data delivered.
 
 ▶️ [Solana Websocket - Subscribe to all transfers of specific addresses in realtime](https://ide.bitquery.io/Solana-Websocket---Subscribe-to-all-transfers-of-specific-addresses-in-realtime)
 
 #### Subscribe to the all transfers on Solana
 
-Subscribe to the all transfers on Solana.
+For monitoring the balance changes that result from these transfers, see our Solana Balance Updates API.
 
 ▶️ [Subscribe to the all transfers on Solana](https://ide.bitquery.io/Subscribe-to-the-all-transfers-on-Solana)
 
 #### Transfers of All Tip Payment Accounts on Solana
 
-Transfers of All Tip Payment Accounts on Solana. Uses the `Transfers` cube.
+Jito foundation has Tip Payment Program that allows users to transfer tips to a set of static public keys (compared to signing the transaction with the next N leaders) and ensure that the incentives are distributed to the correct block leader, while enabling…
 
 ▶️ [Transfers of All Tip Payment Accounts on Solana](https://ide.bitquery.io/Transfers-of-All-Tip-Payment-Accounts-on-Solana)
 
 #### Transfers of Tip Payment Accounts on Solana
 
-Transfers of Tip Payment Accounts on Solana. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+The subscription that provides you the transfer data of one of these addresses is [writen below
 
 ▶️ [Transfers of Tip Payment Accounts on Solana](https://ide.bitquery.io/Transfers-of-Tip-Payment-Accounts-on-Solana_1)
 
 #### Transfers where sender is the specified address
 
-Transfers where sender is the specified address. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+This websocket retrieves transfers where the sender is a particular address `2g9NLWUM6bPm9xq2FBsb3MT3F3G5HDraGqZQEVzcCWTc`.
 
 ▶️ [Transfers where sender is the specified address](https://ide.bitquery.io/transfers-where-sender-is-the-specified-address_1)
 
@@ -574,31 +574,31 @@ This stream delivers real-time token prices on Solana based on the latest trades
 
 #### Byreal token live prices using trades api
 
-Byreal token live prices using trades api. Uses the `Trades` cube.
+Run the subscription [in the Bitquery IDE
 
 ▶️ [Byreal token live prices using trades api](https://ide.bitquery.io/Byreal-token-live-prices-using-trades-api)
 
 #### Get Latest Price of SOL in USD Real-time
 
-Get Latest Price of SOL in USD Real-time. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Returns retrieves the USD price of a token on Solana by setting `MintAddress: {is: "J5FAZ6bV7CCGHcU4CTXWVG6nnKHcwD9Pn4DntY93pump"}` and `Side: {Currency: {MintAddress: {is: "11111111111111111111111111111111"}}}` .
 
 ▶️ [Get Latest Price of SOL in USD Real-time](https://ide.bitquery.io/Get-Latest-Price-of-SOL-in--USD-Real-time)
 
 #### Get realtime Price of Apple xStock in USD Real-time
 
-Get realtime Price of Apple xStock in USD Real-time. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+You can use the following query to get the latest price of a Apple xStock on Solana.
 
 ▶️ [Get realtime Price of Apple xStock in USD Real-time](https://ide.bitquery.io/Get-realtime-Price-of-Apple-xStock-in--USD-Real-time)
 
 #### GoonFi Realtime OHLC, Price, Volume API - Crypto Price API
 
-GoonFi Realtime OHLC, Price, Volume API - Crypto Price API. Uses the `Pairs` cube.
+Below API will give you realtime prices, OHLC, and volume data for all GoonFi trading pairs. We have selected `1` sec as the interval for the OHLC, volume or moving average calculation.
 
 ▶️ [GoonFi Realtime OHLC, Price, Volume API - Crypto Price API](https://ide.bitquery.io/GoonFi-Realtime-OHLC-Price-Volume-API---Crypto-Price-API_1)
 
 #### Latest price for more than 1 markets on solana
 
-Latest price for more than 1 markets on solana. Uses the `DEXTrades` cube.
+You can retrieve data from multiple Solana DEX markets using our APIs or streams. The [following query
 
 ▶️ [Latest price for more than 1 markets on solana](https://ide.bitquery.io/latest-price-for-more-than-1-markets-on-solana_1)
 
@@ -610,7 +610,7 @@ Latest price for more than 1 markets on solana for specific currencies. Uses the
 
 #### Price of a moonshot token
 
-Price of a moonshot token. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Returns gets real-time price of the specified Token `A1XqfcD1vMEhUNwEKvBVRWFV48ZLDL4oheFVCPEcM3Vk` on the Moonit DEX. You can run the query [here
 
 ▶️ [Price of a moonshot token](https://ide.bitquery.io/Price-of-a-Moonshot-token)
 
@@ -624,37 +624,37 @@ Subscribe when **`Token.Id`** matches Solana and **`Supply.MarketCap`** &gt; 1,0
 
 #### All trades on Solana with Price, Marketcap, supply
 
-All trades on Solana with Price, Marketcap, supply. Uses the `Trades` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [All trades on Solana with Price, Marketcap, supply](https://ide.bitquery.io/All-trades-on-Solana-with-Price-Marketcap-supply)
 
 #### Bags.fm token creation stream using Solana token supply updates
 
-Bags.fm token creation stream using Solana token supply updates. Uses the `TokenSupplyUpdates` cube. Replace the address in the `where` clause to use it.
+Track Bags FM token creation using the Solana TokenSupply API. This endpoint provides Bags FM token data including supply information and creation timestamps. For the same API as a WebSocket stream, [try this
 
 ▶️ [Bags.fm token creation stream using Solana token supply updates](https://ide.bitquery.io/Bagsfm-token-creation-stream-using-Solana-token-supply-updates)
 
 #### Get All DEX Trades on DBC With Price, Market Cap, and Supply
 
-Get All DEX Trades on DBC With Price, Market Cap, and Supply. Uses the `Trades` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [Get All DEX Trades on DBC With Price, Market Cap, and Supply](https://ide.bitquery.io/Get-All-DEX-Trades-on-DBC-With-Price-Market-Cap-and-Supply)
 
 #### Get newly created Moonshot tokens with metadata
 
-Get newly created Moonshot tokens with metadata. Uses the `TokenSupplyUpdates` cube. Replace the address in the `where` clause to use it.
+Now you can track the newly created Moonit Tokens along with their metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here
 
 ▶️ [Get newly created Moonshot tokens with metadata](https://ide.bitquery.io/Get-newly-created-Moonshot-tokens-with-metadata)
 
 #### Newly created PF token, dev address, metadata
 
-Newly created PF token, dev address, metadata. Uses the `TokenSupplyUpdates` cube. Replace the address in the `where` clause to use it.
+Now you can track the newly created Pump Fun Tokens along with their dev address, metadata and supply. `PostBalance` will give you the current supply for the token. Check the query [here
 
 ▶️ [Newly created PF token, dev address, metadata](https://ide.bitquery.io/newly-created-PF-token-dev-address-metadata)
 
 #### Realtime heaven tokens with marketcap 10k
 
-Realtime heaven tokens with marketcap 10k. Uses the `Pairs` cube.
+Run the subscription [in the Bitquery IDE
 
 ▶️ [Realtime heaven tokens with marketcap 10k](https://ide.bitquery.io/realtime-heaven-tokens-with-marketcap-10k)
 
@@ -686,13 +686,13 @@ Liquidity for a launchpad token pair stream. Uses the `DEXPools` cube. Replace t
 
 #### Search tokens with liquidity over 1 million
 
-Search tokens with liquidity over 1 million. Uses the `DEXPools` cube.
+You can use the below query to get the tokens which are getting traded and have liquidity over 1 million USD. Try out the query [here
 
 ▶️ [Search tokens with liquidity over 1 million](https://ide.bitquery.io/Search-tokens-with-liquidity-over-1-million)
 
 #### Trends fun tokens between 95 and 100 bonding curve progress
 
-Trends fun tokens between 95 and 100 bonding curve progress. Uses the `DEXPools` cube. Replace the address in the `where` clause to use it.
+Track Trends.fun tokens that are approaching graduation with high bonding curve progress percentages. Run the query: [Trends.fun tokens between 95–100% bonding-curve progress ➤
 
 ▶️ [Trends fun tokens between 95 and 100 bonding curve progress](https://ide.bitquery.io/trends-fun-tokens-between-95-and-100-bonding-curve-progress)
 
@@ -700,7 +700,7 @@ Trends fun tokens between 95 and 100 bonding curve progress. Uses the `DEXPools`
 
 #### Realtime Solana Transactions
 
-Realtime Solana Transactions. Uses the `Transactions` cube.
+The subscription query below fetches the most recent transactions on the Solana blockchain You can find the query [here
 
 ▶️ [Realtime Solana Transactions](https://ide.bitquery.io/Realtime-Solana-Transactions)
 
@@ -708,7 +708,7 @@ Realtime Solana Transactions. Uses the `Transactions` cube.
 
 #### ConsumeEvents instruction on OpenBook V2
 
-ConsumeEvents instruction on OpenBook V2. Uses the `Instructions` cube. Replace the address in the `where` clause to use it.
+We will use this subscription to listen to `consumeEvents` transactions on OpenBook v2. This instruction processes trade events and other activities such as order cancellations.
 
 ▶️ [ConsumeEvents instruction on OpenBook V2](https://ide.bitquery.io/consumeEvents-instruction-on-OpenBook-V2_3)
 
@@ -734,19 +734,19 @@ This stream returns the real time trades on Pumpswap exchange. This stream could
 
 #### Get All DEX Trades on Pumpfun With Price, Market Cap, and Supply
 
-Get All DEX Trades on Pumpfun With Price, Market Cap, and Supply. Uses the `Trades` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [Get All DEX Trades on Pumpfun With Price, Market Cap, and Supply](https://ide.bitquery.io/Get-All-DEX-Trades-on-Pumpfun-With-Price-Market-Cap-and-Supply)
 
 #### Latest Trades for a token on Pumpswap
 
-Latest Trades for a token on Pumpswap. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Subscribe to `DEXTradeByTokens` with PumpSwap `ProgramAddress` and the token mint. Each update is a new trade involving that token on PumpSwap—use this to stream per-token activity without polling.
 
 ▶️ [Latest Trades for a token on Pumpswap](https://ide.bitquery.io/Latest-Trades-for-a-token-on-Pumpswap)
 
 #### Price of a pump fun token using price index in usd
 
-Price of a pump fun token using price index in usd. Uses the `Pairs` cube. Replace the address in the `where` clause to use it.
+Live stream of token price updates on Pump.fun
 
 ▶️ [Price of a pump fun token using price index in usd](https://ide.bitquery.io/Price-of-a-pump-fun-token-using-price-index-in-usd)
 
@@ -798,13 +798,13 @@ Returns Raydium Launchpad tokens which have more than 95% bonding curve progress
 
 #### Jup studio token migrations from Meteora DBC to Meteors DEX
 
-Jup studio token migrations from Meteora DBC to Meteors DEX. Uses the `Instructions` cube. Replace the address in the `where` clause to use it.
+We monitor Meteora DBC program address `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN` for migration instructions including `migrate_meteora_damm` and `migration_damm_v2`.
 
 ▶️ [Jup studio token migrations from Meteora DBC to Meteors DEX](https://ide.bitquery.io/jup-studio-token-migrations-from-Meteora-DBC-to-Meteors-DEX_1)
 
 #### Liquidity addition for meteora
 
-Liquidity addition for meteora. Uses the `DEXPools` cube.
+In this section, we will discover data streams that provides us with the real time events of liquidity addition and liquidity removal for the Meteora DEX, which has `Meteora` as the Protocol Family.
 
 ▶️ [Liquidity addition for meteora](https://ide.bitquery.io/liquidity-addition-for-meteora_1)
 
@@ -816,19 +816,19 @@ Liquidity removal for meteora. Uses the `DEXPools` cube.
 
 #### Meteora DBC token migrations to Meteors DEX
 
-Meteora DBC token migrations to Meteors DEX. Uses the `Instructions` cube.
+Returns will give you the latest migrated tokens Meteora DBC in realtime. You can test the query [here
 
 ▶️ [Meteora DBC token migrations to Meteors DEX](https://ide.bitquery.io/meteora-DBC-token-migrations-to-Meteors-DEX)
 
 #### Real time trades on Meteora Dynamic Bonding Curve on Solana
 
-Real time trades on Meteora Dynamic Bonding Curve on Solana. Uses the `DEXTrades` cube. Replace the address in the `where` clause to use it.
+Returns gets real-time information whenever there's a new trade on the Meteora DBC including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics. You can run the query [here
 
 ▶️ [Real time trades on Meteora Dynamic Bonding Curve on Solana](https://ide.bitquery.io/Real-time-trades-on-Meteora-Dynamic-Bonding-Curve-on-Solana)
 
 #### Real time trades on MeteoraDAMMv2 DEX on Solana
 
-Real time trades on MeteoraDAMMv2 DEX on Solana. Uses the `DEXTrades` cube. Replace the address in the `where` clause to use it.
+Returns subscribes to real-time trades on the Meteora DAMM v2 (Dynamic Automated Market Maker) on the Solana blockchain by filtering using the program address `cpamdpZCGKUy5JxQXB4dcpGPiikHawvSWAd6mEn1sGG`. You can run the query [here
 
 ▶️ [Real time trades on MeteoraDAMMv2 DEX on Solana](https://ide.bitquery.io/Real-time-trades-on-MeteoraDAMMv2-DEX-on-Solana)
 
@@ -836,37 +836,37 @@ Real time trades on MeteoraDAMMv2 DEX on Solana. Uses the `DEXTrades` cube. Repl
 
 #### Latest pool created on Orca - Websocket
 
-Latest pool created on Orca - Websocket. Uses the `Instructions` cube. Replace the address in the `where` clause to use it.
+For instance, Index 1 and 2 represent the tokens involved in the pool, while Index 4 is for the pool's address. Note that the indexing starts from 0.
 
 ▶️ [Latest pool created on Orca - Websocket](https://ide.bitquery.io/Latest-pool-created-on-Orca---Websocket_1)
 
 #### Liquidity addition for orca whirlpool
 
-Liquidity addition for orca whirlpool. Uses the `DEXPools` cube.
+In this section, we will discover data streams that provides us with the real time events of liquidity addition and liquidity removal for the Orca Whirlpool DEX, which has `whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc` as the Program Address.
 
 ▶️ [Liquidity addition for orca whirlpool](https://ide.bitquery.io/liquidity-addition-for-orca-whirlpool_1)
 
 #### Liquidity removal for orca whirlpool
 
-Liquidity removal for orca whirlpool. Uses the `DEXPools` cube.
+With Orca’s program and negative base change, stream liquidity removals from Whirlpool markets.
 
 ▶️ [Liquidity removal for orca whirlpool](https://ide.bitquery.io/liquidity-removal-for-orca-whirlpool_1)
 
 #### Orca DEX Trades Websocket
 
-Orca DEX Trades Websocket. Uses the `DEXTrades` cube. Replace the address in the `where` clause to use it.
+To access a real-time stream of trades for Solana Orca DEX, [check out this GraphQL subscription (WebSocket)
 
 ▶️ [Orca DEX Trades Websocket](https://ide.bitquery.io/Orca-DEX-Trades-Websocket)
 
 #### Orca DEX Trades for a specific currency Websocket
 
-Orca DEX Trades for a specific currency Websocket. Uses the `DEXTrades` cube. Replace the address in the `where` clause to use it.
+If you want to monitor [trades for a specific currency on Orca DEX
 
 ▶️ [Orca DEX Trades for a specific currency Websocket](https://ide.bitquery.io/Orca-DEX-Trades-for-a-specific-currency-Websocket)
 
 #### Price of a token on Orca
 
-Price of a token on Orca. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+You can use the following query to get the latest price of a token, we have used WSOL address here in the below example. We are getting realtime price of WSOL on Orca DEX on Solana in different pools.
 
 ▶️ [Price of a token on Orca](https://ide.bitquery.io/Price-of-a-token-on-Orca)
 
@@ -874,19 +874,19 @@ Price of a token on Orca. Uses the `DEXTradeByTokens` cube. Change the token add
 
 #### Latest Cancel Expired Order Transactions on Jupiter in realtime
 
-Latest Cancel Expired Order Transactions on Jupiter in realtime. Uses the `Instructions` cube. Replace the address in the `where` clause to use it.
+We track Jupiter's Limit Order program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu` for `cancelExpiredOrder` instructions. The query returns transaction signatures, account details, and program arguments for expired order cancellations.
 
 ▶️ [Latest Cancel Expired Order Transactions on Jupiter in realtime](https://ide.bitquery.io/Latest-Cancel-Expired-Order-Transactions-on-Jupiter-in-realtime_1)
 
 #### Latest Cancel Limit Order Transactions on Jupiter in realtime
 
-Latest Cancel Limit Order Transactions on Jupiter in realtime. Uses the `Instructions` cube. Replace the address in the `where` clause to use it.
+We track Jupiter's Limit Order program address `jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu` for `cancelOrder` instructions. The query returns input mint addresses, maker addresses, reserve addresses, and cancellation details.
 
 ▶️ [Latest Cancel Limit Order Transactions on Jupiter in realtime](https://ide.bitquery.io/Latest-Cancel-Limit-Order-Transactions-on-Jupiter-in-realtime)
 
 #### Tokens involved in Jupiter swap, source address, destination address, DEX involved
 
-Tokens involved in Jupiter swap, source address, destination address, DEX involved. Uses the `Instructions` cube. Replace the address in the `where` clause to use it.
+We monitor Jupiter's program address `JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4` for `sharedAccountsRoute` instructions to track swap activity. The query returns tokens involved in swaps, source and destination addresses, and routing information.
 
 ▶️ [Tokens involved in Jupiter swap, source address, destination address, DEX involved](https://ide.bitquery.io/Tokens-involved-in-Jupiter-swap-source-address-destination-address-DEX-involved_2)
 
@@ -902,13 +902,13 @@ This subscription returns the real-time trades happening on BSC Network. You can
 
 #### All BNB Trade Stream
 
-All BNB Trade Stream. Uses the `Trades` cube.
+Run this subscription [in the Bitquery IDE
 
 ▶️ [All BNB Trade Stream](https://ide.bitquery.io/All-BNB-Trade-Stream)
 
 #### Subscribe to bsc dex trades
 
-Subscribe to bsc dex trades.
+Returns uses the chain-specific DEXTrades cube via `EVM(network: bsc) { DEXTrades }` (pool-side Buy/Sell; see DEXTrades cube). USD fields can be empty on thin pools. For swap rows with trader + USD, use the stream at the top of this page.
 
 ▶️ [Subscribe to bsc dex trades](https://ide.bitquery.io/subscribe-to-bsc-dex-trades)
 
@@ -916,7 +916,7 @@ Subscribe to bsc dex trades.
 
 #### Transfers where sender is a particular address
 
-Transfers where sender is a particular address. Uses the `Transfers` cube.
+This websocket retrieves transfers where the sender is a particular address `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`.
 
 ▶️ [Transfers where sender is a particular address](https://ide.bitquery.io/Transfers-where-sender-is-a-particular-address)
 
@@ -986,13 +986,13 @@ Monitor balance and gas fee paid for an address using stream bsc. Uses the `Tran
 
 #### Realtime price of a ETH in terms of WBNB
 
-Realtime price of a ETH in terms of WBNB. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
+Returns provides real-time updates on price of ETH `0x2170Ed0880ac9A755fd29B2688956BD959F933F8` in terms of WBNB `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`, including details about the DEX, market, and order specifics. Find the query [here
 
 ▶️ [Realtime price of a ETH in terms of WBNB](https://ide.bitquery.io/realtime-price-of-a-ETH-in-terms-of-WBNB)
 
 #### Stream for latest prices for Flap.sh tokens
 
-Stream for latest prices for Flap.sh tokens. Uses the `Pairs` cube.
+Subscribe to real-time price updates for all Flap.sh tokens.
 
 ▶️ [Stream for latest prices for Flap.sh tokens](https://ide.bitquery.io/Stream-for-latest-prices-for-Flapsh-tokens)
 
@@ -1006,13 +1006,13 @@ Subscribe when **`Token.Id`** matches BSC and **`Supply.MarketCap`** &gt; 1,000,
 
 #### All trades on BSC with Price, Marketcap, supply
 
-All trades on BSC with Price, Marketcap, supply. Uses the `Trades` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [All trades on BSC with Price, Marketcap, supply](https://ide.bitquery.io/All-trades-on-BSC-with-Price-Marketcap-supply)
 
 #### Bsc token marketcap stream
 
-Bsc token marketcap stream. Uses the `Tokens` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [Bsc token marketcap stream](https://ide.bitquery.io/bsc-token-marketcap-stream)
 
@@ -1032,7 +1032,7 @@ This subscription query returns real-time slippage data for all DEX pools on BSC
 
 #### Realtime Liquidity Stream
 
-Realtime Liquidity Stream.
+Returns query returns real-time liquidity data for all DEX pools on BSC. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
 
 ▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_2)
 
@@ -1040,7 +1040,7 @@ Realtime Liquidity Stream.
 
 #### Newly Created Tokens on BSC network
 
-Newly Created Tokens on BSC network. Uses the `Calls` cube.
+Returns websocket lets you track the newly created tokens on BSC network. You will find the newly created token contract address in the response under `Receipt: ContractAddress` field. You can find the query [here
 
 ▶️ [Newly Created Tokens on BSC network](https://ide.bitquery.io/Newly-Created-Tokens-on-BSC-network_2)
 
@@ -1048,13 +1048,13 @@ Newly Created Tokens on BSC network. Uses the `Calls` cube.
 
 #### Bsc mempool txs
 
-Bsc mempool txs.
+Try it in the IDE: [BSC mempool transactions
 
 ▶️ [Bsc mempool txs](https://ide.bitquery.io/bsc-mempool-txs)
 
 #### Monitor mempool trades bsc
 
-Monitor mempool trades bsc.
+Stream all DEX trades happening in the BSC mempool in real-time. Monitor buy/sell activity, prices, volumes, and trading pairs across all DEXs before transactions are confirmed.
 
 ▶️ [Monitor mempool trades bsc](https://ide.bitquery.io/monitor-mempool-trades-bsc)
 
@@ -1074,49 +1074,49 @@ This stream monitors MEV activities and Balance Updates on BSC in real time.
 
 #### All Self-Destruct Event Balances Stream bsc
 
-All Self-Destruct Event Balances Stream bsc. Uses the `TransactionBalances` cube.
+Monitor all contract self-destruct event balances in real-time using this GraphQL subscription. [Run Stream
 
 ▶️ [All Self-Destruct Event Balances Stream bsc](https://ide.bitquery.io/All-Self-Destruct-Event-Balances-Stream-bsc)
 
 #### Filter by MEV Bot or Builder Address bsc
 
-Filter by MEV Bot or Builder Address bsc. Uses the `TransactionBalances` cube.
+Track balance changes for specific MEV bots or block builders: Try the API [here
 
 ▶️ [Filter by MEV Bot or Builder Address bsc](https://ide.bitquery.io/Filter-by-MEV-Bot-or-Builder-Address-bsc)
 
 #### Filter by Miner Address bsc
 
-Filter by Miner Address bsc. Uses the `TransactionBalances` cube.
+Track balance changes for a specific miner address: Try the API [here
 
 ▶️ [Filter by Miner Address bsc](https://ide.bitquery.io/Filter-by-Miner-Address-bsc)
 
 #### Filter by Validator Address bsc
 
-Filter by Validator Address bsc. Uses the `TransactionBalances` cube.
+Track balance changes for a specific validator address: Try the API [here
 
 ▶️ [Filter by Validator Address bsc](https://ide.bitquery.io/Filter-by-Validator-Address-bsc_1)
 
 #### Track Block Mining Rewards bsc
 
-Track Block Mining Rewards bsc. Uses the `TransactionBalances` cube.
+Track rewards received by miners for successfully mining blocks: Try the API [here
 
 ▶️ [Track Block Mining Rewards bsc](https://ide.bitquery.io/Track-Block-Mining-Rewards-bsc)
 
 #### Track Ephemeral MEV Contract Balance Changes bsc
 
-Track Ephemeral MEV Contract Balance Changes bsc. Uses the `TransactionBalances` cube.
+Monitor balance changes for short-lived contracts that are created and destroyed in the same transaction (typical pattern for MEV bots) using this subscription: Try the API [here
 
 ▶️ [Track Ephemeral MEV Contract Balance Changes bsc](https://ide.bitquery.io/Track-Ephemeral-MEV-Contract-Balance-Changes-bsc)
 
 #### Track Large MEV Transactions bsc
 
-Track Large MEV Transactions bsc. Uses the `TransactionBalances` cube.
+Monitor large transaction fee rewards that may indicate significant MEV extraction: Try the API [here
 
 ▶️ [Track Large MEV Transactions bsc](https://ide.bitquery.io/Track-Large-MEV-Transactions-bsc)
 
 #### Track Large Self-Destruct Transaction Balances bsc
 
-Track Large Self-Destruct Transaction Balances bsc. Uses the `TransactionBalances` cube.
+Monitor significant self-destruct balance changes (e.g., > $1000 USD) using this subscription: Try the API [here
 
 ▶️ [Track Large Self-Destruct Transaction Balances bsc](https://ide.bitquery.io/Track-Large-Self-Destruct-Transaction-Balances-bsc)
 
@@ -1148,13 +1148,13 @@ Real-time market cap stream with OHLC for FourMeme tokens at 1-second intervals.
 
 #### Four Meme bonding curve completion mempool
 
-Four Meme bonding curve completion mempool. Uses the `Events` cube. Replace the address in the `where` clause to use it.
+Monitor tokens that are about to complete their bonding curve (near graduation) in the mempool.
 
 ▶️ [Four Meme bonding curve completion mempool](https://ide.bitquery.io/Four-Meme-bonding-curve-completion-mempool)
 
 #### Four Meme large buys mempool
 
-Four Meme large buys mempool. Uses the `DEXTrades` cube.
+Monitor large buy orders in the mempool to detect whale activity and potential price pumps.
 
 ▶️ [Four Meme large buys mempool](https://ide.bitquery.io/Four-Meme-large-buys-mempool)
 
@@ -1174,7 +1174,7 @@ This query tracks four meme token migrations to Pancakeswap in realtime by monit
 
 #### Binance meme rush migration to pancakeswap
 
-Binance meme rush migration to pancakeswap. Uses the `Events` cube. Replace the address in the `where` clause to use it.
+Returns tracks Binance Meme Rush token migrations to Pancakeswap in realtime by monitoring transactions sent to the Four Meme factory address (`0x5c952063c7fc8610ffdb798152d69f0b9550762b`) and filtering for `PairCreated` and `PoolCreated` events.
 
 ▶️ [Binance meme rush migration to pancakeswap](https://ide.bitquery.io/binance-meme-rush-migration-to-pancakeswap)
 
@@ -1200,31 +1200,31 @@ Stream - BSC PancakeSwap v3 Trades for a token. Uses the `DEXTradeByTokens` cube
 
 #### Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4
 
-Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4. Uses the `DEXPoolEvents` cube.
+Returns query monitors real-time liquidity changes for all pools in a specific DEX protocol on BSC. Here we have taken example of Uniswap V4.
 
 ▶️ [Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4)
 
 #### Newly Created Pools on Uniswap v3 on BSC network
 
-Newly Created Pools on Uniswap v3 on BSC network. Uses the `Events` cube. Change the token address in the `where` clause to use it.
+Returns websocket lets you track the newly created pools on Uniswap V3 `0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7`.
 
 ▶️ [Newly Created Pools on Uniswap v3 on BSC network](https://ide.bitquery.io/Newly-Created-Pools-on-Uniswap-v3-on-BSC-network_3)
 
 #### Real time trades for uniswap v4 bsc
 
-Real time trades for uniswap v4 bsc. Uses the `DEXTrades` cube.
+The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on BSC.
 
 ▶️ [Real time trades for uniswap v4 bsc](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-bsc)
 
 #### Uniswap v4 pool liquidity bsc
 
-Uniswap v4 pool liquidity bsc. Uses the `DEXPoolEvents` cube.
+Stream live liquidity for all Uniswap v4 pools on BSC. [Run in the Bitquery IDE
 
 ▶️ [Uniswap v4 pool liquidity bsc](https://ide.bitquery.io/uniswap-v4-pool-liquidity-bsc)
 
 #### Uniswap v4 pool liquidity by poolid bsc
 
-Uniswap v4 pool liquidity by poolid bsc. Uses the `DEXPoolEvents` cube.
+Filter to a specific pool by `PoolId`. [Run in the Bitquery IDE
 
 ▶️ [Uniswap v4 pool liquidity by poolid bsc](https://ide.bitquery.io/uniswap-v4-pool-liquidity-by-poolid-bsc)
 
@@ -1240,19 +1240,19 @@ This stream returns all the real time DEX trades happening on Base. You can modi
 
 #### All Base Trade Stream
 
-All Base Trade Stream. Uses the `Trades` cube.
+Run this subscription [in the Bitquery IDE
 
 ▶️ [All Base Trade Stream](https://ide.bitquery.io/All-Base-Trade-Stream)
 
 #### Subscribe to dex trades on base
 
-Subscribe to dex trades on base.
+Read DEXTrades vs DEXTradeByTokens vs Trades cube to get a better understanding on when to use which cube. You can find the query [here
 
 ▶️ [Subscribe to dex trades on base](https://ide.bitquery.io/subscribe-to-dex-trades-on-base)
 
 #### Subscription for Latest Trades for AERO
 
-Subscription for Latest Trades for AERO. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+For this part, we have chosen AERO token as the token is currently trending and have high trade volume.
 
 ▶️ [Subscription for Latest Trades for AERO](https://ide.bitquery.io/Subscription-for-Latest-Trades-for-AERO_1)
 
@@ -1266,19 +1266,19 @@ This stream lets you monitor all the token transfers for a particular token. You
 
 #### Newly created zora tokens stream
 
-Newly created zora tokens stream. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+You can also stream the latest tokens created in real-time using [this subscription
 
 ▶️ [Newly created zora tokens stream](https://ide.bitquery.io/Newly-created-zora-tokens-stream)
 
 #### Sender is a particular address
 
-Sender is a particular address. Uses the `Transfers` cube.
+This websocket retrieves transfers where the sender is a particular address `0x3304E22DDaa22bCdC5fCa2269b418046aE7b566A`.
 
 ▶️ [Sender is a particular address](https://ide.bitquery.io/Sender-is-a-particular-address_3)
 
 #### Whale transfers of USDC on base
 
-Whale transfers of USDC on base. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+The subscription query below fetches the whale transactions on the Base network. We have used USDC address `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`. You can find the query [here
 
 ▶️ [Whale transfers of USDC on base](https://ide.bitquery.io/Whale-transfers-of-USDC-on-base)
 
@@ -1316,25 +1316,25 @@ Balance update from transfer for an address stream base. Uses the `TransactionBa
 
 #### Subscribe to All Transaction Balances base
 
-Subscribe to All Transaction Balances base.
+Returns provides real-time balance updates for all addresses involved in transactions on the Base network. Try the API [here
 
 ▶️ [Subscribe to All Transaction Balances base](https://ide.bitquery.io/Subscribe-to-All-Transaction-Balances-base)
 
 #### Subscribe to Transaction Balances for a Specific Address base
 
-Subscribe to Transaction Balances for a Specific Address base. Uses the `TransactionBalances` cube. Replace the address in the `where` clause to use it.
+Returns filters transaction balances for a specific address. Try the API [here
 
 ▶️ [Subscribe to Transaction Balances for a Specific Address base](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address-base)
 
 #### Track Block Builder Rewards base
 
-Track Block Builder Rewards base. Uses the `TransactionBalances` cube.
+Monitor transaction fee rewards received by block builders (MEV extractors): Try the API [here
 
 ▶️ [Track Block Builder Rewards base](https://ide.bitquery.io/Track-Block-Builder-Rewards-base)
 
 #### Track Transaction Fee Rewards base
 
-Track Transaction Fee Rewards base. Uses the `TransactionBalances` cube.
+Monitor transaction fee rewards received by miners: Try the API [here
 
 ▶️ [Track Transaction Fee Rewards base](https://ide.bitquery.io/Track-Transaction-Fee-Rewards-base)
 
@@ -1354,19 +1354,19 @@ This stream returns the real time trade price of a token against the token it is
 
 #### Aerodrome dex - realtime prices, 1-sec ohlc, trading volumes
 
-Aerodrome dex - realtime prices, 1-sec ohlc, trading volumes. Uses the `Pairs` cube.
+Below API gives you instant access to live Aerodrome market data with pre-calculated OHLC, moving averages, and trading volumes updating every second—no complex calculations needed, just plug and play for your trading bots or analytics platform.
 
 ▶️ [Aerodrome dex - realtime prices, 1-sec ohlc, trading volumes](https://ide.bitquery.io/aerodrome-dex---realtime-prices-1-sec-ohlc-trading-volumes)
 
 #### Get latest price of DAI in USD on Base
 
-Get latest price of DAI in USD on Base. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Returns retrieves the USD price of a token on Base chain by setting `SmartContract: {is: "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here
 
 ▶️ [Get latest price of DAI in USD on Base](https://ide.bitquery.io/Get-latest-price-of-DAI-in-USD-on-Base)
 
 #### Price of USDC in terms of DAI on Base network
 
-Price of USDC in terms of DAI on Base network. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
+Returns provides real-time updates on price of USDC `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` in terms of DAI `0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb`, including details about the DEX, market, and order specifics. Find the query [here
 
 ▶️ [Price of USDC in terms of DAI on Base network](https://ide.bitquery.io/Price-of-USDC-in-terms-of-DAI-on-Base-network)
 
@@ -1386,19 +1386,19 @@ Subscribe when **`Token.Id`** matches Base and **`Supply.MarketCap`** &gt; 1,000
 
 #### All trades on Base with Price, Marketcap, supply
 
-All trades on Base with Price, Marketcap, supply. Uses the `Trades` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [All trades on Base with Price, Marketcap, supply](https://ide.bitquery.io/All-trades-on-Base-with-Price-Marketcap-supply)
 
 #### Bankr token realtime marketcap OHLC stream
 
-Bankr token realtime marketcap OHLC stream. Uses the `Tokens` cube.
+Subscribe to live 1-second OHLC + market cap updates for a specific Bankr token.
 
 ▶️ [Bankr token realtime marketcap OHLC stream](https://ide.bitquery.io/Bankr-token-realtime-marketcap-OHLC-stream)
 
 #### Base tokens above 100k marketcap stream
 
-Base tokens above 100k marketcap stream. Uses the `Tokens` cube.
+Stream every Base token currently above $100k FDV. Useful as a high-mcap or "graduated by mcap" alert.
 
 ▶️ [Base tokens above 100k marketcap stream](https://ide.bitquery.io/Base-tokens-above-100k-marketcap-stream)
 
@@ -1412,13 +1412,13 @@ This subscription query returns real-time slippage data for all DEX pools on Bas
 
 #### Realtime Liquidity Stream
 
-Realtime Liquidity Stream.
+Returns query returns real-time liquidity data for all DEX pools on Base. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
 
 ▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_3)
 
 #### Realtime Liquidity Stream of a Specific Pool
 
-Realtime Liquidity Stream of a Specific Pool. Uses the `DEXPoolEvents` cube.
+Returns query monitors real-time liquidity changes for a specific DEX pool on Base. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
 
 ▶️ [Realtime Liquidity Stream of a Specific Pool](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_3)
 
@@ -1426,7 +1426,7 @@ Realtime Liquidity Stream of a Specific Pool. Uses the `DEXPoolEvents` cube.
 
 #### Realtime stream Bankr launches Base
 
-Realtime stream Bankr launches Base. Uses the `Events` cube.
+Convert the above query into a subscription to be notified of every new token the moment it lands on Base.
 
 ▶️ [Realtime stream Bankr launches Base](https://ide.bitquery.io/Realtime-stream-Bankr-launches-Base)
 
@@ -1470,25 +1470,25 @@ Track validator rewards and balance increases from staking activities in real-ti
 
 #### All Self Destruct Event Balances Stream base
 
-All Self Destruct Event Balances Stream base. Uses the `TransactionBalances` cube.
+Monitor all contract self-destruct event balances in real-time using this GraphQL subscription. [Run Stream
 
 ▶️ [All Self Destruct Event Balances Stream base](https://ide.bitquery.io/All-Self-Destruct-Event-Balances-Stream-base)
 
 #### Filter by MEV Bot or Builder Address base
 
-Filter by MEV Bot or Builder Address base. Uses the `TransactionBalances` cube. Replace the address in the `where` clause to use it.
+Track balance changes for specific MEV bots or block builders: Try the API [here
 
 ▶️ [Filter by MEV Bot or Builder Address base](https://ide.bitquery.io/Filter-by-MEV-Bot-or-Builder-Address-base)
 
 #### Filter by Miner Address base
 
-Filter by Miner Address base. Uses the `TransactionBalances` cube. Replace the address in the `where` clause to use it.
+Track balance changes for a specific miner address: Try the API [here
 
 ▶️ [Filter by Miner Address base](https://ide.bitquery.io/Filter-by-Miner-Address-base)
 
 #### Track Block Mining Rewards base
 
-Track Block Mining Rewards base. Uses the `TransactionBalances` cube.
+Track rewards received by miners for successfully mining blocks: Try the API [here
 
 ▶️ [Track Block Mining Rewards base](https://ide.bitquery.io/Track-Block-Mining-Rewards-base)
 
@@ -1508,25 +1508,25 @@ This stream returns the real time liquidity pools/token pairs created on Uniswap
 
 #### Bankr token V4 swaps realtime
 
-Bankr token V4 swaps realtime. Uses the `Trades` cube.
+Bankr trades clear on the Uniswap V4 singleton. Use the Crypto Trades API (`Trading.Trades`) to stream swap-level rows with USD price, market cap, supply, trader, and V4 pool id.
 
 ▶️ [Bankr token V4 swaps realtime](https://ide.bitquery.io/Bankr-token-V4-swaps-realtime)
 
 #### Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4
 
-Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4. Uses the `DEXPoolEvents` cube.
+Returns query monitors real-time liquidity changes for all pools in a specific DEX protocol on Base. Here we have taken example of Uniswap V4.
 
 ▶️ [Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4_5)
 
 #### Real time trades on uniswap v4 base
 
-Real time trades on uniswap v4 base. Uses the `DEXTrades` cube.
+The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Base.
 
 ▶️ [Real time trades on uniswap v4 base](https://ide.bitquery.io/Real-time-trades-on-uniswap-v4-base)
 
 #### Uniswap v4 pool liquidity base
 
-Uniswap v4 pool liquidity base. Uses the `DEXPoolEvents` cube.
+Stream live liquidity for all Uniswap v4 pools on Base. [Run in the Bitquery IDE
 
 ▶️ [Uniswap v4 pool liquidity base](https://ide.bitquery.io/uniswap-v4-pool-liquidity-base)
 
@@ -1536,7 +1536,7 @@ Uniswap v4 pool liquidity base. Uses the `DEXPoolEvents` cube.
 
 #### Arbitrum Dextrades subscription
 
-Arbitrum Dextrades subscription.
+Returns uses the chain-specific DEXTrades cube via `EVM(network: arbitrum) { DEXTrades }` (pool-side Buy/Sell; see DEXTrades cube). USD can be weak on thin pools. For trader + USD swap rows, use the stream at the top.
 
 ▶️ [Arbitrum Dextrades subscription](https://ide.bitquery.io/Arbitrum-Dextrades-subscription)
 
@@ -1544,13 +1544,13 @@ Arbitrum Dextrades subscription.
 
 #### Arbitrum token marketcap stream
 
-Arbitrum token marketcap stream. Uses the `Tokens` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [Arbitrum token marketcap stream](https://ide.bitquery.io/arbitrum-token-marketcap-stream)
 
 #### Realtime stream arbitrum tokens with marketcap above 1 million
 
-Realtime stream arbitrum tokens with marketcap above 1 million. Uses the `Tokens` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [Realtime stream arbitrum tokens with marketcap above 1 million](https://ide.bitquery.io/realtime-stream-arbitrum-tokens-with-marketcap-above-1-million)
 
@@ -1558,19 +1558,19 @@ Realtime stream arbitrum tokens with marketcap above 1 million. Uses the `Tokens
 
 #### Realtime liquidity stream
 
-Realtime liquidity stream.
+Returns query returns real-time liquidity data for all DEX pools on Arbitrum. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
 
 ▶️ [Realtime liquidity stream](https://ide.bitquery.io/realtime-liquidity-stream_1)
 
 #### Realtime liquidity stream of a specific pool
 
-Realtime liquidity stream of a specific pool. Uses the `DEXPoolEvents` cube. Change the token address in the `where` clause to use it.
+Returns query monitors real-time liquidity changes for a specific DEX pool on Arbitrum. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
 
 ▶️ [Realtime liquidity stream of a specific pool](https://ide.bitquery.io/realtime-liquidity-stream-of-a-specific-pool)
 
 #### Realtime slippage on arbitrum
 
-Realtime slippage on arbitrum.
+Returns query returns real-time slippage data for all DEX pools on Arbitrum. You can monitor price impact and liquidity depth as trades occur.
 
 ▶️ [Realtime slippage on arbitrum](https://ide.bitquery.io/realtime-slippage-on-arbitrum)
 
@@ -1578,7 +1578,7 @@ Realtime slippage on arbitrum.
 
 #### Arbitrum: Timeboost Auction Transactions in Realtime
 
-Arbitrum: Timeboost Auction Transactions in Realtime. Uses the `Events` cube. Replace the address in the `where` clause to use it.
+Use the following subscription in the Bitquery IDE to watch every TimeBoost auction interaction. The query filters on the auction contract address and surfaces both transaction context and decoded ABI arguments.
 
 ▶️ [Arbitrum: Timeboost Auction Transactions in Realtime](https://ide.bitquery.io/Arbitrum-Timeboost-Auction-Transactions-in-Realtime)
 
@@ -1586,13 +1586,13 @@ Arbitrum: Timeboost Auction Transactions in Realtime. Uses the `Events` cube. Re
 
 #### Latest liquidity changes in uniswap v4 pools
 
-Latest liquidity changes in uniswap v4 pools. Uses the `DEXPoolEvents` cube.
+Returns query monitors real-time liquidity changes for all pools in a specific DEX protocol on Arbitrum. Here we have taken example of Uniswap V4.
 
 ▶️ [Latest liquidity changes in uniswap v4 pools](https://ide.bitquery.io/latest-liquidity-changes-in-uniswap-v4-pools)
 
 #### Real time trades for uniswap v4 arbitrum
 
-Real time trades for uniswap v4 arbitrum. Uses the `DEXTrades` cube.
+The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Arbitrum.
 
 ▶️ [Real time trades for uniswap v4 arbitrum](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-arbitrum)
 
@@ -1602,13 +1602,13 @@ Real time trades for uniswap v4 arbitrum. Uses the `DEXTrades` cube.
 
 #### Real time trades for uniswap v4 optimism
 
-Real time trades for uniswap v4 optimism. Uses the `DEXTrades` cube.
+The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Optimism.
 
 ▶️ [Real time trades for uniswap v4 optimism](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-optimism)
 
 #### Realtime optimism dex trades websocket
 
-Realtime optimism dex trades websocket.
+Returns uses the chain-specific DEXTrades cube via `EVM(network: optimism) { DEXTrades }` (pool-side Buy/Sell; see DEXTrades cube). USD can be weak on thin pools. For trader + USD swap rows, use the stream at the top.
 
 ▶️ [Realtime optimism dex trades websocket](https://ide.bitquery.io/Realtime-optimism-dex-trades-websocket)
 
@@ -1616,13 +1616,13 @@ Realtime optimism dex trades websocket.
 
 #### Sender is a particular address
 
-Sender is a particular address. Uses the `Transfers` cube.
+This websocket retrieves transfers where the sender is a particular address `0xEbe80f029b1c02862B9E8a70a7e5317C06F62Cae`.
 
 ▶️ [Sender is a particular address](https://ide.bitquery.io/Sender-is-a-particular-address)
 
 #### Whale transfers of USDT on optimism
 
-Whale transfers of USDT on optimism. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+The subscription query below fetches the whale transactions on the Optimism network. We have used USDT address `0x94b008aA00579c1307B0EF2c499aD98a8ce58e58` You can find the query [here
 
 ▶️ [Whale transfers of USDT on optimism](https://ide.bitquery.io/Whale-transfers-of-USDT-on-optimism)
 
@@ -1630,13 +1630,13 @@ Whale transfers of USDT on optimism. Uses the `Transfers` cube. Change the token
 
 #### Get latest price of WBTC in USD on optimism
 
-Get latest price of WBTC in USD on optimism. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Returns retrieves the USD price of a token on Optimism by setting `SmartContract: {is: "0x68f180fcCe6836688e9084f035309E29Bf0A2095"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here
 
 ▶️ [Get latest price of WBTC in USD on optimism](https://ide.bitquery.io/Get-latest-price-of-WBTC-in-USD-on-optimism)
 
 #### Price of WETH in terms of USDC on Optimism
 
-Price of WETH in terms of USDC on Optimism. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
+Returns provides real-time updates on price of WETH `0x4200000000000000000000000000000000000006` in terms of USD Coin `0x7f5c764cbc14f9669b88837ca1490cca17c31607`, including details about the DEX, market, and order specifics. Find the query [here
 
 ▶️ [Price of WETH in terms of USDC on Optimism](https://ide.bitquery.io/Price-of-WETH-in-terms-of-USDC-on-Optimism)
 
@@ -1646,13 +1646,13 @@ Price of WETH in terms of USDC on Optimism. Uses the `DEXTrades` cube. Change th
 
 #### Real time trades for uniswap v4 matic
 
-Real time trades for uniswap v4 matic. Uses the `DEXTrades` cube.
+The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Matic.
 
 ▶️ [Real time trades for uniswap v4 matic](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-matic)
 
 #### Realtime matic dex trades websocket
 
-Realtime matic dex trades websocket.
+Read DEXTrades vs DEXTradeByTokens vs Trades cube to understand when to use which cube. You can find the query [here
 
 ▶️ [Realtime matic dex trades websocket](https://ide.bitquery.io/Realtime-matic-dex-trades-websocket)
 
@@ -1660,13 +1660,13 @@ Realtime matic dex trades websocket.
 
 #### Sender is a particular address
 
-Sender is a particular address. Uses the `Transfers` cube.
+This websocket retrieves transfers where the sender is a particular address `0x1A8f43e01B78979EB4Ef7feBEC60F32c9A72f58E`.
 
 ▶️ [Sender is a particular address](https://ide.bitquery.io/Sender-is-a-particular-address_2)
 
 #### Whale transfers of USDC on matic
 
-Whale transfers of USDC on matic. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+The subscription query below fetches the whale transactions on the MATIC network. We have used USDC address `0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359`. You can find the query [here
 
 ▶️ [Whale transfers of USDC on matic](https://ide.bitquery.io/Whale-transfers-of-USDC-on-matic)
 
@@ -1674,13 +1674,13 @@ Whale transfers of USDC on matic. Uses the `Transfers` cube. Change the token ad
 
 #### All trades on Polygon with Price, Marketcap, supply
 
-All trades on Polygon with Price, Marketcap, supply. Uses the `Trades` cube.
+Run this subscription [in the Bitquery IDE
 
 ▶️ [All trades on Polygon with Price, Marketcap, supply](https://ide.bitquery.io/All-trades-on-Polygon-with-Price-Marketcap-supply)
 
 #### Matic token marketcap stream
 
-Matic token marketcap stream. Uses the `Tokens` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [Matic token marketcap stream](https://ide.bitquery.io/matic-token-marketcap-stream)
 
@@ -1688,25 +1688,25 @@ Matic token marketcap stream. Uses the `Tokens` cube.
 
 #### Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4
 
-Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4. Uses the `DEXPoolEvents` cube.
+Returns query monitors real-time liquidity changes for all pools in a specific DEX protocol on Matic. Here we have taken example of Uniswap V4.
 
 ▶️ [Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4_7)
 
 #### Realtime Liquidity Stream
 
-Realtime Liquidity Stream.
+Returns query returns real-time liquidity data for all DEX pools on Matic. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
 
 ▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_5)
 
 #### Realtime Liquidity Stream of a Specific Pool
 
-Realtime Liquidity Stream of a Specific Pool. Uses the `DEXPoolEvents` cube.
+Returns query monitors real-time liquidity changes for a specific DEX pool on Matic. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
 
 ▶️ [Realtime Liquidity Stream of a Specific Pool](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_5)
 
 #### Realtime slippage on matic
 
-Realtime slippage on matic.
+Returns query returns real-time slippage data for all DEX pools on Matic. You can monitor price impact and liquidity depth as trades occur.
 
 ▶️ [Realtime slippage on matic](https://ide.bitquery.io/realtime-slippage-on-matic)
 
@@ -1728,13 +1728,13 @@ This stream returns all the real time DEX trades happening on the Tron network. 
 
 #### Sunpump trades
 
-Sunpump trades. Uses the `DEXTrades` cube.
+To subscribe to latest Sunpump trades you can use [the following stream
 
 ▶️ [Sunpump trades](https://ide.bitquery.io/Sunpump-trades)
 
 #### USDT TRC20 DEX Trades
 
-USDT TRC20 DEX Trades. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
+Real-time DEX trades where USDT is the bought currency on Tron — protocol, buyer and seller, amounts and order IDs.
 
 ▶️ [USDT TRC20 DEX Trades](https://ide.bitquery.io/USDT-TRC20-DEX-Trades)
 
@@ -1748,13 +1748,13 @@ This subscription streams the latest USDT (TRC20) transfers on the TRON network.
 
 #### Sender is particular address
 
-Sender is particular address. Uses the `Transfers` cube.
+This websocket retrieves transfers where the sender is a particular address `TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf`.
 
 ▶️ [Sender is particular address](https://ide.bitquery.io/Sender-is-particular-address)
 
 #### Whale transfers of USDT on Tron
 
-Whale transfers of USDT on Tron. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+The subscription query below fetches the whale transactions on the Tron network. We have used USDT address `TThzxNRLrW2Brp9DcTQU8i4Wd9udCWEdZ3`. You can find the query [here
 
 ▶️ [Whale transfers of USDT on Tron](https://ide.bitquery.io/Whale-transfers-of-USDT-on-Tron)
 
@@ -1762,7 +1762,7 @@ Whale transfers of USDT on Tron. Uses the `Transfers` cube. Change the token add
 
 #### Track price of a tron token in realtime
 
-Track price of a tron token in realtime. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Returns provides real-time updates on price of token `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t` in terms of USDT `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t`, including details about the DEX. Try the query [here
 
 ▶️ [Track price of a tron token in realtime](https://ide.bitquery.io/Track-price-of-a-tron-token-in-realtime)
 
@@ -1770,7 +1770,7 @@ Track price of a tron token in realtime. Uses the `DEXTradeByTokens` cube. Chang
 
 #### Get All DEX Trades on Tron With Price, Market Cap, and Supply
 
-Get All DEX Trades on Tron With Price, Market Cap, and Supply. Uses the `Trades` cube.
+Run this subscription [in the Bitquery IDE
 
 ▶️ [Get All DEX Trades on Tron With Price, Market Cap, and Supply](https://ide.bitquery.io/Get-All-DEX-Trades-on-Tron-With-Price-Market-Cap-and-Supply)
 
@@ -1778,7 +1778,7 @@ Get All DEX Trades on Tron With Price, Market Cap, and Supply. Uses the `Trades`
 
 #### Monitor TRX address transactions
 
-Monitor TRX address transactions. Uses the `Transactions` cube.
+The subscription query below fetches the transactions on the Tron network for the wallet address `TDqSquXBgUCLYvYC4XZgrprLK589dkhSCf`.
 
 ▶️ [Monitor TRX address transactions](https://ide.bitquery.io/monitor-TRX-address-transactions)
 
@@ -1786,25 +1786,25 @@ Monitor TRX address transactions. Uses the `Transactions` cube.
 
 #### Latest Buy on SunPump
 
-Latest Buy on SunPump. Uses the `Events` cube. Replace the address in the `where` clause to use it.
+You can use following stream to get latest buys on Sunpump. You can try [this stream on IDE
 
 ▶️ [Latest Buy on SunPump](https://ide.bitquery.io/latest-Buy-on-SunPump)
 
 #### New tokens on sunpump
 
-New tokens on sunpump. Uses the `Events` cube.
+Returns will subscribe you to the latest created sun pump tokens. You will find the newly created token address in `Log { SmartContract }`.
 
 ▶️ [New tokens on sunpump](https://ide.bitquery.io/New-tokens-on-sunpump_1)
 
 #### Sunpump sell event
 
-Sunpump sell event. Uses the `Events` cube. Replace the address in the `where` clause to use it.
+You can use following stream to get latest sells on Sunpump. You can try [this stream on IDE
 
 ▶️ [Sunpump sell event](https://ide.bitquery.io/sunpump-sell-event)
 
 #### Tron sunpump first time buy event
 
-Tron sunpump first time buy event. Uses the `Events` cube. Replace the address in the `where` clause to use it.
+You can use follow stream to get stream of first time buy event for any new token.
 
 ▶️ [Tron sunpump first time buy event](https://ide.bitquery.io/Tron-sunpump-first-time-buy-event_1)
 
@@ -1818,13 +1818,13 @@ Events with argumens. Uses the `Events` cube. Replace the address in the `where`
 
 #### Sunpump trades mempool
 
-Sunpump trades mempool. Uses the `DEXTrades` cube.
+We simulate transactions in mempool, therefore you can also get trades directly from mempool using [following stream
 
 ▶️ [Sunpump trades mempool](https://ide.bitquery.io/Sunpump-trades-mempool)
 
 #### Tron mempool transfers
 
-Tron mempool transfers.
+Returns provides real-time data on token transfers happening in the TRON mempool including the value of the transferred amount in USD.
 
 ▶️ [Tron mempool transfers](https://ide.bitquery.io/Tron-mempool-transfers)
 
@@ -1840,25 +1840,25 @@ Latest DEX trades on Robinhood Chain (chain id 4663) via the Trading API, with p
 
 #### Bags amm trade websocket
 
-Bags amm trade websocket. Uses the `Trades` cube.
+Stream every Bags trade as it is indexed via a GraphQL `subscription` on `Trading.Trades`, scoped to the Bags protocol family on Robinhood. Includes side (buy/sell), trader, base/quote amounts (native and USD), market cap, and full transaction header.
 
 ▶️ [Bags amm trade websocket](https://ide.bitquery.io/bags-amm-trade-websocket)
 
 #### Pools trade Stream new Crowd Launch auctions
 
-Pools trade Stream new Crowd Launch auctions. Uses the `Events` cube. Replace the address in the `where` clause to use it.
+Every Crowd Launch deploys its auction through the auction factory `0x000000001f26a0044baa66024e7b6599c61963f8`, which emits `AuctionCreated(address,address,uint256,bytes)`.
 
 ▶️ [Pools trade Stream new Crowd Launch auctions](https://ide.bitquery.io/Pools-trade-Stream-new-Crowd-Launch-auctions)
 
 #### Robinhood Chain API - Trades for a Token
 
-Robinhood Chain API - Trades for a Token. Uses the `Trades` cube.
+Using this GraphQL stream you can get real-time trades for a specific token (example: AssetHood, `ASSETH`) with details such as trader address, token details, marketcap, FDV and transaction hash.
 
 ▶️ [Robinhood Chain API - Trades for a Token](https://ide.bitquery.io/Robinhood-Trades-for-a-token)
 
 #### Stream Robinhood Chain Trades in Real Time
 
-Stream Robinhood Chain Trades in Real Time. Uses the `Trades` cube.
+These are live examples — meme tokens go quiet over time, so swap in any token, pool, or trader you care about.
 
 ▶️ [Stream Robinhood Chain Trades in Real Time](https://ide.bitquery.io/stream-robinhood-chain-trades)
 
@@ -1866,55 +1866,55 @@ Stream Robinhood Chain Trades in Real Time. Uses the `Trades` cube.
 
 #### Ape.store Newly created tokens - Websocket
 
-Ape.store Newly created tokens - Websocket. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+Every transfer query on this page is identical except two values: the launchpad address in `Transaction.To` and the launch-mint `Amount`.
 
 ▶️ [Ape.store Newly created tokens - Websocket](https://ide.bitquery.io/Apestore-Newly-created-tokens---Websocket)
 
 #### Bags.fm Newly created tokens - Websocket
 
-Bags.fm Newly created tokens - Websocket. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+Every transfer query on this page is identical except two values: the launchpad address in `Transaction.To` and the launch-mint `Amount`.
 
 ▶️ [Bags.fm Newly created tokens - Websocket](https://ide.bitquery.io/Bagsfm-Newly-created-tokens---Websocket)
 
 #### Bankr Bot Newly created tokens - Websocket
 
-Bankr Bot Newly created tokens - Websocket. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+Every transfer query on this page is identical except two values: the launchpad address in `Transaction.To` and the launch-mint `Amount`.
 
 ▶️ [Bankr Bot Newly created tokens - Websocket](https://ide.bitquery.io/Bankr-Bot-Newly-created-tokens---Websocket)
 
 #### Flap Sh Newly created tokens using transfer data - Websocket
 
-Flap Sh Newly created tokens using transfer data - Websocket. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+Track Flap.sh mints as transfers from the zero address with amount `1000000000` in transactions sent to the Flap.sh contract.
 
 ▶️ [Flap Sh Newly created tokens using transfer data - Websocket](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data---Websocket)
 
 #### Hoodfun newly creaed tokens Websocket
 
-Hoodfun newly creaed tokens Websocket. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+Every transfer query on this page is identical except two values: the launchpad address in `Transaction.To` and the launch-mint `Amount`.
 
 ▶️ [Hoodfun newly creaed tokens Websocket](https://ide.bitquery.io/hoodfun-newly-creaed-tokens---Websocket)
 
 #### Klik Finance Newly created tokens using transfers websocket
 
-Klik Finance Newly created tokens using transfers websocket. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+Every transfer query on this page is identical except two values: the launchpad address in `Transaction.To` and the launch-mint `Amount`.
 
 ▶️ [Klik Finance Newly created tokens using transfers websocket](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers-websocket)
 
 #### Launchpad newly creaed tokens Websocket
 
-Launchpad newly creaed tokens Websocket. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+Every transfer query on this page is identical except two values: the launchpad address in `Transaction.To` and the launch-mint `Amount`.
 
 ▶️ [Launchpad newly creaed tokens Websocket](https://ide.bitquery.io/launchpad-newly-creaed-tokens---Websocket)
 
 #### Pools trade Stream launches with token detail
 
-Pools trade Stream launches with token detail. Uses the `Transfers` cube.
+The transfer-based stream returns the token's name, symbol, decimals, and contract in the same payload — everything a sniping bot or listings feed needs, with no follow-up metadata call. It also carries the transaction's gas economics and success flag:
 
 ▶️ [Pools trade Stream launches with token detail](https://ide.bitquery.io/Pools-trade-Stream-launches-with-token-detail)
 
 #### Real time transfers on robinhood
 
-Real time transfers on robinhood.
+Stream live transfers for dashboards, bots, and alerting.
 
 ▶️ [Real time transfers on robinhood](https://ide.bitquery.io/real-time-transfers-on-robinhood)
 
@@ -1922,7 +1922,7 @@ Real time transfers on robinhood.
 
 #### Robinhood Chain OHLCV / Candlestick API for a Token Pair
 
-Robinhood Chain OHLCV / Candlestick API for a Token Pair. Uses the `Pairs` cube.
+This GraphQL stream for 1 second OHLCV streams the USD normalised OHLC/K-line data for a token pair, and also contains info such as interval start and end time, marketcap, volume and token details for both base and quote tokens.
 
 ▶️ [Robinhood Chain OHLCV / Candlestick API for a Token Pair](https://ide.bitquery.io/OHLCV-stream-for-a-token-pair-on-robinhood)
 
@@ -1938,13 +1938,13 @@ Websocket subscription streaming every new pools.trade token launch on Robinhood
 
 #### Flap sh Newly created tokens using logs (TokenCreated) - Websocket
 
-Flap sh Newly created tokens using logs (TokenCreated) - Websocket. Uses the `Events` cube. Replace the address in the `where` clause to use it.
+Filter Flap.sh `TokenCreated` events and decode argument values (token address, metadata fields, and related parameters).
 
 ▶️ [Flap sh Newly created tokens using logs (TokenCreated) - Websocket](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated---Websocket)
 
 #### Stream New Tokens on Robinhood Chain (All Launchpads)
 
-Stream New Tokens on Robinhood Chain (All Launchpads). Uses the `Events` cube.
+Follow the steps here: How to generate Bitquery API token ➤ :::
 
 ▶️ [Stream New Tokens on Robinhood Chain (All Launchpads)](https://ide.bitquery.io/stream-new-tokens-robinhood-chain)
 
@@ -1964,61 +1964,61 @@ You can stream Bitcoin price at 1-second interval using the [Crypto Price APIs](
 
 #### All chains New Trades Stream - Solana, eth, bsc ,base , arbitrum, matic
 
-All chains New Trades Stream - Solana, eth, bsc ,base , arbitrum, matic.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [All chains New Trades Stream - Solana, eth, bsc ,base , arbitrum, matic](https://ide.bitquery.io/all-chains-New-Trades-Stream---Solana-eth-bsc-base--arbitrum-matic_2)
 
 #### All trades of a trader
 
-All trades of a trader. Uses the `Trades` cube. Replace the address in the `where` clause to use it.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [All trades of a trader](https://ide.bitquery.io/All-trades-of-a-trader)
 
 #### All wsol Trade Stream
 
-All wsol Trade Stream. Uses the `Trades` cube. Replace the address in the `where` clause to use it.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [All wsol Trade Stream](https://ide.bitquery.io/All-wsol-Trade-Stream)
 
 #### How do I get a wallet's trades on a specific pair?
 
-How do I get a wallet's trades on a specific pair?. Uses the `Trades` cube. Replace the address in the `where` clause to use it.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [How do I get a wallet's trades on a specific pair?](https://ide.bitquery.io/How-do-I-get-a-wallets-trades-on-a-specific-pair)
 
 #### How do I monitor multiple wallets in one subscription?
 
-How do I monitor multiple wallets in one subscription?. Uses the `Trades` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [How do I monitor multiple wallets in one subscription?](https://ide.bitquery.io/How-do-I-monitor-multiple-wallets-in-one-subscription)
 
 #### How do I monitor multiple wallets trading a specific token?
 
-How do I monitor multiple wallets trading a specific token?. Uses the `Trades` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [How do I monitor multiple wallets trading a specific token?](https://ide.bitquery.io/How-do-I-monitor-multiple-wallets-trading-a-specific-token)
 
 #### How do I stream a wallet's trades on a specific DEX?
 
-How do I stream a wallet's trades on a specific DEX?. Uses the `Trades` cube. Replace the address in the `where` clause to use it.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [How do I stream a wallet's trades on a specific DEX?](https://ide.bitquery.io/How-do-I-stream-a-wallets-trades-on-a-specific-DEX)
 
 #### How do I stream a wallet's trades on a specific chain?
 
-How do I stream a wallet's trades on a specific chain?. Uses the `Trades` cube. Replace the address in the `where` clause to use it.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [How do I stream a wallet's trades on a specific chain?](https://ide.bitquery.io/How-do-I-stream-a-wallets-trades-on-a-specific-chain)
 
 #### How do I stream whale trades for a specific wallet?
 
-How do I stream whale trades for a specific wallet?. Uses the `Trades` cube. Replace the address in the `where` clause to use it.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [How do I stream whale trades for a specific wallet?](https://ide.bitquery.io/How-do-I-stream-whale-trades-for-a-specific-wallet)
 
 #### How do I track trades for multiple tokens in one subscription?
 
-How do I track trades for multiple tokens in one subscription?. Uses the `Trades` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [How do I track trades for multiple tokens in one subscription?](https://ide.bitquery.io/How-do-I-track-trades-for-multiple-tokens-in-one-subscription)
 
@@ -2044,31 +2044,31 @@ Monitor Raydium Launchlab token listings on Solana with 1-second OHLC and volume
 
 #### 5 minute price change api on solana
 
-5 minute price change api on solana. Uses the `Tokens` cube.
+Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
 ▶️ [5 minute price change api on solana](https://ide.bitquery.io/5-minute-price-change-api-on-solana_6)
 
 #### Bitcoin currency price stream
 
-Bitcoin currency price stream. Uses the `Currencies` cube.
+Get real-time Bitcoin OHLC data across all chains:
 
 ▶️ [Bitcoin currency price stream](https://ide.bitquery.io/bitcoin-currency-price-stream)
 
 #### Heaven DEX tokens 1 second price stream with OHLC
 
-Heaven DEX tokens 1 second price stream with OHLC. Uses the `Pairs` cube.
+Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
 ▶️ [Heaven DEX tokens 1 second price stream with OHLC](https://ide.bitquery.io/Heaven-DEX-tokens-1-second-price-stream-with-OHLC)
 
 #### Meteora DBC DEX tokens 1 second price stream with OHLC
 
-Meteora DBC DEX tokens 1 second price stream with OHLC. Uses the `Pairs` cube.
+Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
 ▶️ [Meteora DBC DEX tokens 1 second price stream with OHLC](https://ide.bitquery.io/Meteora-DBC-DEX-tokens-1-second-price-stream-with-OHLC)
 
 #### Real Time USD price on solana chain
 
-Real Time USD price on solana chain. Uses the `Pairs` cube.
+Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them denominated in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
 ▶️ [Real Time USD price on solana chain](https://ide.bitquery.io/Real-Time-USD-price-on-solana-chain_2)
 
@@ -2076,7 +2076,7 @@ Real Time USD price on solana chain. Uses the `Pairs` cube.
 
 #### All trades of a specific Ethereum token with Price, Marketcap, supply
 
-All trades of a specific Ethereum token with Price, Marketcap, supply. Uses the `Trades` cube.
+You can run this subscription [in the Bitquery IDE
 
 ▶️ [All trades of a specific Ethereum token with Price, Marketcap, supply](https://ide.bitquery.io/All-trades-of-a-specific-Ethereum-token-with-Price-Marketcap-supply_1)
 
@@ -2084,35 +2084,15 @@ All trades of a specific Ethereum token with Price, Marketcap, supply. Uses the 
 
 #### Liquidity addition for radium
 
-Liquidity addition for radium. Uses the `DEXPools` cube.
+Subscribe to `Solana.DEXPools` with Raydium’s program and positive base change to detect new liquidity deposited into Raydium pools.
 
 ▶️ [Liquidity addition for radium](https://ide.bitquery.io/liquidity-addition-for-radium_1)
 
 #### Liquidity removal for radium
 
-Liquidity removal for radium. Uses the `DEXPools` cube.
+Use the same Raydium program filter with negative `ChangeAmount` on the base side to stream liquidity withdrawals.
 
 ▶️ [Liquidity removal for radium](https://ide.bitquery.io/liquidity-removal-for-radium_1)
-
-### Pump.fun
-
-#### All Pumpswap Trade Stream
-
-All Pumpswap Trade Stream. Uses the `Trades` cube.
-
-▶️ [All Pumpswap Trade Stream](https://ide.bitquery.io/All-Pumpswap-Trade-Stream)
-
-#### All pumpfun Trade Stream
-
-All pumpfun Trade Stream. Uses the `Trades` cube.
-
-▶️ [All pumpfun Trade Stream](https://ide.bitquery.io/All-pumpfun-Trade-Stream_2)
-
-#### Pump fun token live prices using trades api
-
-Pump fun token live prices using trades api. Uses the `Trades` cube.
-
-▶️ [Pump fun token live prices using trades api](https://ide.bitquery.io/pump-fun-token-live-prices-using-trades-api_1)
 
 ### PancakeSwap
 
@@ -2128,6 +2108,26 @@ PancakeSwap v3 DEX tokens 1 second price stream with OHLC. Uses the `Pairs` cube
 
 ▶️ [PancakeSwap v3 DEX tokens 1 second price stream with OHLC](https://ide.bitquery.io/PancakeSwap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
 
+### Pump.fun
+
+#### All Pumpswap Trade Stream
+
+You can run this subscription [in the Bitquery IDE
+
+▶️ [All Pumpswap Trade Stream](https://ide.bitquery.io/All-Pumpswap-Trade-Stream)
+
+#### All pumpfun Trade Stream
+
+You can run this subscription [in the Bitquery IDE
+
+▶️ [All pumpfun Trade Stream](https://ide.bitquery.io/All-pumpfun-Trade-Stream_2)
+
+#### Pump fun token live prices using trades api
+
+You can run this subscription [in the Bitquery IDE
+
+▶️ [Pump fun token live prices using trades api](https://ide.bitquery.io/pump-fun-token-live-prices-using-trades-api_1)
+
 ### Uniswap
 
 #### 1-second price, OHLC, volume, SMA and EMA — Uniswap v3
@@ -2138,13 +2138,13 @@ One-second candles with moving averages for Uniswap v3 tokens, built for trading
 
 #### Stream all Uniswap Seconds OHLC Kline
 
-Stream all Uniswap Seconds OHLC Kline. Uses the `Pairs` cube.
+Subscribe to `Trading.Pairs` filtered by Uniswap protocols and 1s interval to power sub-minute charts and HFT analytics.
 
 ▶️ [Stream all Uniswap Seconds OHLC Kline](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline)
 
 #### Uniswap all versions trades stream
 
-Uniswap all versions trades stream. Uses the `DEXTrades` cube.
+Filter `DEXTrades` with `ProtocolName` in `uniswap_v3`, `uniswap_v2`, `uniswap_v1` to stream only Uniswap family pools on mainnet.
 
 ▶️ [Uniswap all versions trades stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream)
 
@@ -2154,37 +2154,37 @@ Uniswap all versions trades stream. Uses the `DEXTrades` cube.
 
 #### Solana trades subscription
 
-Solana trades subscription. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
+Below stream will give you realtime trades of `USDT` on Solana. Test the stream [here
 
 ▶️ [Solana trades subscription](https://ide.bitquery.io/solana-trades-subscription_10_1)
 
 #### Stablecoin Depeg tracking Stream for evm
 
-Stablecoin Depeg tracking Stream for evm. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Below stream tracks USDT on Ethereum when PriceInUSD is outside 0.95–1.05 (depeg-style band). Test the query [here
 
 ▶️ [Stablecoin Depeg tracking Stream for evm](https://ide.bitquery.io/Stablecoin-Depeg-tracking-Stream-for-evm)
 
 #### Stablecoin Depeg tracking Stream for tron
 
-Stablecoin Depeg tracking Stream for tron. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Below stream tracks USDT on Tron when PriceInUSD is outside 0.95–1.05 (depeg-style band). Test the query [here
 
 ▶️ [Stablecoin Depeg tracking Stream for tron](https://ide.bitquery.io/Stablecoin-Depeg-tracking-Stream-for-tron)
 
 #### Stablecoin depeg tracking stream for USDC
 
-Stablecoin depeg tracking stream for USDC. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Below stream will be able to track specific Stablecoin depeg. In this query example, we are tracking depeg for the stablecoin `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` which has a symbol `USDC`. Test the query [here
 
 ▶️ [Stablecoin depeg tracking stream for USDC](https://ide.bitquery.io/stablecoin-depeg-tracking-stream-for-USDC)
 
 #### Stablecoin trades for etheruem
 
-Stablecoin trades for etheruem. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
+Below stream will give you realtime USDT DEX trades on Ethereum. Test the stream [here
 
 ▶️ [Stablecoin trades for etheruem](https://ide.bitquery.io/Stablecoin-trades-for-etheruem)
 
 #### Stablecoin trades for tron
 
-Stablecoin trades for tron. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
+Below stream will give you realtime USDT DEX trades on Tron. Test the stream [here
 
 ▶️ [Stablecoin trades for tron](https://ide.bitquery.io/Stablecoin-trades-for-tron)
 
@@ -2192,61 +2192,61 @@ Stablecoin trades for tron. Uses the `DEXTrades` cube. Change the token address 
 
 #### Latest Tron USDT Transfers stream
 
-Latest Tron USDT Transfers stream. Uses the `Transfers` cube.
+Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
 
 ▶️ [Latest Tron USDT Transfers stream](https://ide.bitquery.io/Latest-Tron-USDT-Transfers-stream)
 
 #### Latest USDT/USDC Transfer Stream on BSC
 
-Latest USDT/USDC Transfer Stream on BSC. Uses the `Transfers` cube.
+Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
 
 ▶️ [Latest USDT/USDC Transfer Stream on BSC](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-Stream-on-BSC)
 
 #### Latest USDT/USDC Transfer stream on base
 
-Latest USDT/USDC Transfer stream on base. Uses the `Transfers` cube.
+Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
 
 ▶️ [Latest USDT/USDC Transfer stream on base](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-stream-on-base)
 
 #### Latest USDT/USDC Transfer stream on ethereum
 
-Latest USDT/USDC Transfer stream on ethereum. Uses the `Transfers` cube.
+Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
 
 ▶️ [Latest USDT/USDC Transfer stream on ethereum](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-stream-on-ethereum)
 
 #### Listening to All USDT and USDC Payments on Solana - stream
 
-Listening to All USDT and USDC Payments on Solana - stream. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+Returns streams USDT (`TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t`) transfers on Tron — the highest-volume stablecoin payments network globally.
 
 ▶️ [Listening to All USDT and USDC Payments on Solana - stream](https://ide.bitquery.io/Listening-to-All-USDT-and-USDC-Payments-on-Solana---stream)
 
 #### Listening to stablecoin Transfers for Specific Addresse on tron
 
-Listening to stablecoin Transfers for Specific Addresse on tron. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+Listen to USDT sent or received by address `TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ`. This is the canonical "merchant/treasury wallet monitor" pattern — fan-out one subscription per wallet and route hits to your payments backend.
 
 ▶️ [Listening to stablecoin Transfers for Specific Addresse on tron](https://ide.bitquery.io/Listening-to-stablecoin-Transfers-for-Specific-Addresse-on-tron)
 
 #### Stablecoin Realtime Payments Stream on Eth Mainnet
 
-Stablecoin Realtime Payments Stream on Eth Mainnet. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+A single-contract USDC payments stream on Ethereum mainnet. Swap the `SmartContract` for `0xdAC17F958D2ee523a2206206994597C13D831ec7` to get USDT, or extend with an `in: [...]` list to multiplex stablecoins.
 
 ▶️ [Stablecoin Realtime Payments Stream on Eth Mainnet](https://ide.bitquery.io/Stablecoin-Realtime-Payments-Stream-on-Eth-Mainnet)
 
 #### Stablecoin Realtime Transfers Stream on tron
 
-Stablecoin Realtime Transfers Stream on tron. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+Below stream will give you realtime transfers of `USDT` on Tron. Test the stream [here
 
 ▶️ [Stablecoin Realtime Transfers Stream on tron](https://ide.bitquery.io/Stablecoin-Realtime-Transfers-Stream-on-tron)
 
 #### Stablecoin transfers websocket
 
-Stablecoin transfers websocket. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+Below stream will give you realtime transfers of `USDC` on Solana. Test the stream [here
 
 ▶️ [Stablecoin transfers websocket](https://ide.bitquery.io/stablecoin-transfers-websocket)
 
 #### USDT and USDC token Transfers stream on solana
 
-USDT and USDC token Transfers stream on solana. Uses the `Transfers` cube.
+This GraphQL stream provides live USDT and USDC stablecoin transfers on Solana.
 
 ▶️ [USDT and USDC token Transfers stream on solana](https://ide.bitquery.io/USDT-and-USDC-token-Transfers-stream-on-solana)
 
@@ -2254,7 +2254,7 @@ USDT and USDC token Transfers stream on solana. Uses the `Transfers` cube.
 
 #### Real time stablecoin portfolio
 
-Real time stablecoin portfolio. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+Below stream will provide you the realtime portfolio updates for a particular address for a specific Stablecoin. In this query example, we are tracking portfolio updates for the address `3i51cKbLbaKAqvRJdCUaq9hsnvf9kqCfMujNgFj7nRKt` and for stablecoin `USDC`.
 
 ▶️ [Real time stablecoin portfolio](https://ide.bitquery.io/real-time-stablecoin-portfolio_2)
 
@@ -2268,7 +2268,7 @@ This subscription gives you 1-second OHLC, mean price, averages for all stableco
 
 #### Stablecoin price stream of USDT
 
-Stablecoin price stream of USDT. Uses the `Tokens` cube.
+Get real-time and historical USDT prices, OHLCV, and moving averages across supported networks and markets.
 
 ▶️ [Stablecoin price stream of USDT](https://ide.bitquery.io/stablecoin-price-stream-of-USDT_2)
 
@@ -2276,7 +2276,7 @@ Stablecoin price stream of USDT. Uses the `Tokens` cube.
 
 #### USDT Stablecoin reserves on Solana
 
-USDT Stablecoin reserves on Solana. Uses the `TokenSupplyUpdates` cube. Change the token address in the `where` clause to use it.
+Monitor USDT reserve or get lateast reserve value on Solana using below Stream/API.
 
 ▶️ [USDT Stablecoin reserves on Solana](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Solana)
 
@@ -2284,19 +2284,19 @@ USDT Stablecoin reserves on Solana. Uses the `TokenSupplyUpdates` cube. Change t
 
 #### Latest Tron USDT Transfers stream in Mempool
 
-Latest Tron USDT Transfers stream in Mempool. Uses the `Transfers` cube.
+Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
 
 ▶️ [Latest Tron USDT Transfers stream in Mempool](https://ide.bitquery.io/Latest-Tron-USDT-Transfers-stream-in-Mempool)
 
 #### Latest USDT/USDC Transfer Stream on BSC on Mempool
 
-Latest USDT/USDC Transfer Stream on BSC on Mempool. Uses the `Transfers` cube.
+Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
 
 ▶️ [Latest USDT/USDC Transfer Stream on BSC on Mempool](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-Stream-on-BSC-on-Mempool)
 
 #### Latest USDT/USDC Transfer stream on ethereum in Mempool
 
-Latest USDT/USDC Transfer stream on ethereum in Mempool. Uses the `Transfers` cube.
+Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
 
 ▶️ [Latest USDT/USDC Transfer stream on ethereum in Mempool](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-stream-on-ethereum-in-Mempool)
 
@@ -2306,13 +2306,13 @@ Latest USDT/USDC Transfer stream on ethereum in Mempool. Uses the `Transfers` cu
 
 #### Hyperliquid Real-time Trades Stream (WebSocket)
 
-Hyperliquid Real-time Trades Stream (WebSocket).
+Run it in the IDE: [Hyperliquid Trades Stream ➤
 
 ▶️ [Hyperliquid Real-time Trades Stream (WebSocket)](https://ide.bitquery.io/hyperliquid-trades-stream)
 
 #### Solana Perps Live Trades Stream (Phoenix Fills)
 
-Solana Perps Live Trades Stream (Phoenix Fills).
+You can run a live fills stream [in the Bitquery IDE
 
 ▶️ [Solana Perps Live Trades Stream (Phoenix Fills)](https://ide.bitquery.io/solana-perps-live-trades-stream)
 
@@ -2320,19 +2320,19 @@ Solana Perps Live Trades Stream (Phoenix Fills).
 
 #### Hyperliquid Price Updates Stream (WebSocket)
 
-Hyperliquid Price Updates Stream (WebSocket).
+Run it in the IDE: [Hyperliquid Price Updates Stream ➤
 
 ▶️ [Hyperliquid Price Updates Stream (WebSocket)](https://ide.bitquery.io/hyperliquid-price-updates-stream)
 
 #### Hyperliquid Real-time Candles Stream (WebSocket)
 
-Hyperliquid Real-time Candles Stream (WebSocket).
+Run it in the IDE: [Hyperliquid Candles Stream ➤
 
 ▶️ [Hyperliquid Real-time Candles Stream (WebSocket)](https://ide.bitquery.io/hyperliquid-candles-stream)
 
 #### Solana Perpetuals Mark Price Stream (Phoenix)
 
-Solana Perpetuals Mark Price Stream (Phoenix).
+You can run this stream [in the Bitquery IDE
 
 ▶️ [Solana Perpetuals Mark Price Stream (Phoenix)](https://ide.bitquery.io/solana-perpetuals-mark-price-stream)
 
@@ -2348,7 +2348,7 @@ This stream allows you to monitor real time NFT trades on OpenSea. It could also
 
 #### Latest Solana NFT Trades
 
-Latest Solana NFT Trades.
+The subscription query provided below fetches the most recent NFT trades on the Solana blockchain. You can find the query [here
 
 ▶️ [Latest Solana NFT Trades](https://ide.bitquery.io/Latest-Solana-NFT-Trades)
 
@@ -2362,49 +2362,49 @@ NFT transfers as they are mined, with token IDs.
 
 #### Subscription WebSocket - Latest NFT Transfers
 
-Subscription WebSocket - Latest NFT Transfers.
+Using Streaming APIs, you can subscribe to real-time changes on blockchains. We use a GraphQL subscription,which function similarly to WebSockets.
 
 ▶️ [Subscription WebSocket - Latest NFT Transfers](https://ide.bitquery.io/Subscription-WebSocket---Latest-NFT-Transfers)
 
 #### Subscribe to the latest NFT transfers on Solana
 
-Subscribe to the latest NFT transfers on Solana.
+Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following API, we will be subscribing to all NFT token transfers. You can run the query [here
 
 ▶️ [Subscribe to the latest NFT transfers on Solana](https://ide.bitquery.io/Subscribe-to-the-latest-NFT-transfers-on-Solana)
 
 #### NFT Token Transfers API
 
-NFT Token Transfers API.
+Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on Base network. You can run the query [here
 
 ▶️ [NFT Token Transfers API](https://ide.bitquery.io/NFT-Token-Transfers-API_4)
 
 #### Transfers of a particular NFT
 
-Transfers of a particular NFT.
+Returns subscribes you to the real time transfers of a specific non-fungible token (NFT) on the Base network. You can find the query [here
 
 ▶️ [Transfers of a particular NFT](https://ide.bitquery.io/Transfers-of-a-particular-NFT_1)
 
 #### Track realtime NFT Transfers of a specific NFT on BSC chain
 
-Track realtime NFT Transfers of a specific NFT on BSC chain.
+Returns subscribes you to the real time non-fungible token (NFT) transfers of a specific nft contract on the BSC network. You can find the query [here
 
 ▶️ [Track realtime NFT Transfers of a specific NFT on BSC chain](https://ide.bitquery.io/Track-realtime-NFT-Transfers-of-a-specific-NFT-on-BSC-chain)
 
 #### Track realtime NFT Transfers on BSC chain
 
-Track realtime NFT Transfers on BSC chain.
+Let's see an example of NFT token transfers using GraphQL Subscription (Webhook). In the following NFT Token Transfers API, we will be subscribing to all NFT token transfers on BSC network. You can run the query [here
 
 ▶️ [Track realtime NFT Transfers on BSC chain](https://ide.bitquery.io/Track-realtime-NFT-Transfers-on-BSC-chain)
 
 #### Websocket for tracking Transfers of a particular NFT websocket
 
-Websocket for tracking Transfers of a particular NFT websocket.
+Returns subscribes you to the real time transfers of a specific non-fungible token (NFT) on the Tron network. You can find the query [here
 
 ▶️ [Websocket for tracking Transfers of a particular NFT websocket](https://ide.bitquery.io/Websocket-for-tracking-Transfers-of-a-particular-NFT-websocket)
 
 #### Real-time-transfer-websocket-for-NFT-token on matic
 
-Real-time-transfer-websocket-for-NFT-token on matic.
+Returns subscribes you to the real time transfers of a specific non-fungible token (NFT) on the Matic network. You can find the query [here
 
 ▶️ [Real-time-transfer-websocket-for-NFT-token on matic](https://ide.bitquery.io/Real-time-transfer-websocket-for-NFT-token-on-matic)
 
@@ -2440,43 +2440,43 @@ Subscribe to trades for one market only by filtering on Question.MarketId. Repla
 
 #### Bitcoin Up or Down Trades Stream
 
-Bitcoin Up or Down Trades Stream.
+Subscribe to live Polymarket trades for markets whose question title includes "Bitcoin Up or Down".
 
 ▶️ [Bitcoin Up or Down Trades Stream](https://ide.bitquery.io/Bitcoin-Up-or-Down-Trades-Stream)
 
 #### How do I track high-value or whale trades on Polymarket?
 
-How do I track high-value or whale trades on Polymarket?.
+Use a GraphQL subscription on `PredictionTrades` filtered by `CollateralAmountInUSD: { gt: "10000" }` and `ProtocolName: "polymarket"` to monitor trades exceeding $10,000 USD in real time. Ideal for detecting whale activity and large market movements.
 
 ▶️ [How do I track high-value or whale trades on Polymarket?](https://ide.bitquery.io/How-do-I-track-high-value-or-whale-trades-on-Polymarket)
 
 #### Large trades on polymarket
 
-Large trades on polymarket.
+Start by streaming large Polymarket trades. Each event gives you a buyer address to investigate. Change `subscription` to `query` for historical results.
 
 ▶️ [Large trades on polymarket](https://ide.bitquery.io/large-trades--on-polymarket)
 
 #### Monitoring specific wallets trades in realtime for Ethereum up or down market
 
-Monitoring specific wallets trades in realtime for Ethereum up or down market.
+The same wallet-monitoring pattern works for every Polymarket Up or Down market — only the `Question.Title` filter changes. Open any of the pre-built IDE queries below to stream trades for the chain you care about:
 
 ▶️ [Monitoring specific wallets trades in realtime for Ethereum up or down market](https://ide.bitquery.io/monitoring-specific-wallets-trades-in-realtime-for-Ethereum-up-or-down-market)
 
 #### Monitoring specific wallets trades in realtime for XRP up or down market
 
-Monitoring specific wallets trades in realtime for XRP up or down market.
+The same wallet-monitoring pattern works for every Polymarket Up or Down market — only the `Question.Title` filter changes. Open any of the pre-built IDE queries below to stream trades for the chain you care about:
 
 ▶️ [Monitoring specific wallets trades in realtime for XRP up or down market](https://ide.bitquery.io/monitoring-specific-wallets-trades-in-realtime-for-XRP-up-or-down-market)
 
 #### Polymarket AI whale trades stream
 
-Polymarket AI whale trades stream.
+Streams live AI-market trades above a USD threshold (here `$5,000`). This is ideal for whale-alert bots and detecting large, conviction bets. Filter with a `Question.Title` keyword, or swap it for a single-market `MarketId`.
 
 ▶️ [Polymarket AI whale trades stream](https://ide.bitquery.io/Polymarket-AI-whale-trades-stream)
 
 #### Polymarket whale trades alert
 
-Polymarket whale trades alert.
+Stream successful Polymarket trades whose collateral exceeds $10,000 USD. Adjust the threshold string as needed.
 
 ▶️ [Polymarket whale trades alert](https://ide.bitquery.io/polymarket-whale-trades-alert_1)
 
