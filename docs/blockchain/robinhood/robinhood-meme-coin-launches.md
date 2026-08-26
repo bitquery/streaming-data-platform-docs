@@ -40,6 +40,10 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::tip Related docs
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
+- [Pons API on Robinhood](/docs/blockchain/robinhood/pons-api) — bonding-curve launchpad, graduations, Uniswap v4 pools
+- [Pools.trade API on Robinhood](/docs/blockchain/robinhood/pools-trade-api)
+- [Flap.sh API on Robinhood](/docs/blockchain/robinhood/flap-sh-api)
+- [Bags.fm API on Robinhood](/docs/blockchain/robinhood/bags-fm-api)
 - [WebSocket subscriptions](/docs/subscriptions/websockets/)
 :::
 

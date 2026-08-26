@@ -897,11 +897,8 @@ const sidebars = {
           type: "category",
           label: "Robinhood",
           link: {
-            type: "generated-index",
-            slug: "/blockchain/robinhood",
-            title: "Robinhood APIs",
-            description:
-              "APIs for accessing Robinhood trades, transfers, liquidity, slippage, events, balances, and meme coin token launches via Bitquery Trading and EVM APIs.",
+            type: "doc",
+            id: "blockchain/robinhood/index",
           },
           items: [
             "blockchain/robinhood/robinhood-trades",
