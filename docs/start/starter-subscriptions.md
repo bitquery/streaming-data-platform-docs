@@ -326,44 +326,6 @@ We will use this subscription to listen to `consumeEvents` transactions on OpenB
 
 ▶️ [ConsumeEvents instruction on OpenBook V2](https://ide.bitquery.io/consumeEvents-instruction-on-OpenBook-V2_3)
 
-### Pump.fun
-
-#### PumpFun Token Creation
-
-This subscription tracks in real-time newly created Pumpfun tokens, including their metadata and associated developer addresses.
-
-▶️ [PumpFun Token Creation](https://ide.bitquery.io/newly-created-PF-token-developer-address-metadata)
-
-#### PumpFun Trades Stream
-
-This stream returns the real time trades on Pumpfun platform. This stream could be modified to get real time trades for a particular token or trades by a particular trader.
-
-▶️ [PumpFun Trades Stream](https://ide.bitquery.io/Pumpfun-DEX-Trades_1)
-
-#### Pumpswap Trades Stream
-
-This stream returns the real time trades on Pumpswap exchange. This stream could be modified to get real time trades for a particular token or trades by a particular trader.
-
-▶️ [Pumpswap Trades Stream](https://ide.bitquery.io/pumpswap-trades)
-
-#### Get All DEX Trades on Pumpfun With Price, Market Cap, and Supply
-
-Stream all PumpFun DEX trades in real time with USD price, market cap, FDV, circulating supply, and transaction fee data. Filter by `Pair.Market.ProtocolFamily: Pumpfun` to capture every swap across Pumpfun in a single subscription.
-
-▶️ [Get All DEX Trades on Pumpfun With Price, Market Cap, and Supply](https://ide.bitquery.io/Get-All-DEX-Trades-on-Pumpfun-With-Price-Market-Cap-and-Supply)
-
-#### Latest Trades for a token on Pumpswap
-
-Subscribe to `DEXTradeByTokens` with PumpSwap `ProgramAddress` and the token mint. Each update is a new trade involving that token on PumpSwap—use this to stream per-token activity without polling.
-
-▶️ [Latest Trades for a token on Pumpswap](https://ide.bitquery.io/Latest-Trades-for-a-token-on-Pumpswap)
-
-#### Price of a pump fun token using price index in usd
-
-Live stream of token price updates on Pump.fun.
-
-▶️ [Price of a pump fun token using price index in usd](https://ide.bitquery.io/Price-of-a-pump-fun-token-using-price-index-in-usd)
-
 ### Raydium
 
 #### Latest Pools Created on Raydium
@@ -407,6 +369,44 @@ This stream gives info about the real time liquidity pool creation on Raydium ex
 Returns Raydium Launchpad tokens which have more than 95% bonding curve progress.
 
 ▶️ [Track Raydium Launchpad tokens above 95% Bonding Curve Progress in realtime](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_2)
+
+### Pump.fun
+
+#### PumpFun Token Creation
+
+This subscription tracks in real-time newly created Pumpfun tokens, including their metadata and associated developer addresses.
+
+▶️ [PumpFun Token Creation](https://ide.bitquery.io/newly-created-PF-token-developer-address-metadata)
+
+#### PumpFun Trades Stream
+
+This stream returns the real time trades on Pumpfun platform. This stream could be modified to get real time trades for a particular token or trades by a particular trader.
+
+▶️ [PumpFun Trades Stream](https://ide.bitquery.io/Pumpfun-DEX-Trades_1)
+
+#### Pumpswap Trades Stream
+
+This stream returns the real time trades on Pumpswap exchange. This stream could be modified to get real time trades for a particular token or trades by a particular trader.
+
+▶️ [Pumpswap Trades Stream](https://ide.bitquery.io/pumpswap-trades)
+
+#### Get All DEX Trades on Pumpfun With Price, Market Cap, and Supply
+
+Stream all PumpFun DEX trades in real time with USD price, market cap, FDV, circulating supply, and transaction fee data. Filter by `Pair.Market.ProtocolFamily: Pumpfun` to capture every swap across Pumpfun in a single subscription.
+
+▶️ [Get All DEX Trades on Pumpfun With Price, Market Cap, and Supply](https://ide.bitquery.io/Get-All-DEX-Trades-on-Pumpfun-With-Price-Market-Cap-and-Supply)
+
+#### Latest Trades for a token on Pumpswap
+
+Subscribe to `DEXTradeByTokens` with PumpSwap `ProgramAddress` and the token mint. Each update is a new trade involving that token on PumpSwap—use this to stream per-token activity without polling.
+
+▶️ [Latest Trades for a token on Pumpswap](https://ide.bitquery.io/Latest-Trades-for-a-token-on-Pumpswap)
+
+#### Price of a pump fun token using price index in usd
+
+Live stream of token price updates on Pump.fun.
+
+▶️ [Price of a pump fun token using price index in usd](https://ide.bitquery.io/Price-of-a-pump-fun-token-using-price-index-in-usd)
 
 ### Meteora
 
@@ -2244,26 +2244,6 @@ Use the same Raydium program filter with negative `ChangeAmount` on the base sid
 
 ▶️ [Liquidity removal for radium](https://ide.bitquery.io/liquidity-removal-for-radium_1)
 
-### Pump.fun
-
-#### All Pumpswap Trade Stream
-
-All Pumpswap Trade Stream. Uses the `Trades` cube.
-
-▶️ [All Pumpswap Trade Stream](https://ide.bitquery.io/All-Pumpswap-Trade-Stream)
-
-#### All pumpfun Trade Stream
-
-All pumpfun Trade Stream. Uses the `Trades` cube.
-
-▶️ [All pumpfun Trade Stream](https://ide.bitquery.io/All-pumpfun-Trade-Stream_2)
-
-#### Pump fun token live prices using trades api
-
-Pump fun token live prices using trades api. Uses the `Trades` cube.
-
-▶️ [Pump fun token live prices using trades api](https://ide.bitquery.io/pump-fun-token-live-prices-using-trades-api_1)
-
 ### PancakeSwap
 
 #### Real-time Trades on Pancakeswap
@@ -2297,6 +2277,26 @@ Subscribe to `Trading.Pairs` filtered by Uniswap protocols and 1s interval to po
 Filter `DEXTrades` with `ProtocolName` in `uniswap_v3`, `uniswap_v2`, `uniswap_v1` to stream only Uniswap family pools on mainnet.
 
 ▶️ [Uniswap all versions trades stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream)
+
+### Pump.fun
+
+#### All Pumpswap Trade Stream
+
+All Pumpswap Trade Stream. Uses the `Trades` cube.
+
+▶️ [All Pumpswap Trade Stream](https://ide.bitquery.io/All-Pumpswap-Trade-Stream)
+
+#### All pumpfun Trade Stream
+
+All pumpfun Trade Stream. Uses the `Trades` cube.
+
+▶️ [All pumpfun Trade Stream](https://ide.bitquery.io/All-pumpfun-Trade-Stream_2)
+
+#### Pump fun token live prices using trades api
+
+Pump fun token live prices using trades api. Uses the `Trades` cube.
+
+▶️ [Pump fun token live prices using trades api](https://ide.bitquery.io/pump-fun-token-live-prices-using-trades-api_1)
 
 ## Stablecoins
 
