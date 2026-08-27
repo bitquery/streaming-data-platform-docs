@@ -493,6 +493,12 @@ If you need to filter out the instructions from Solana logs that involve a parti
 
 ### Pump.fun
 
+#### First buyers of a token (sniper detection)
+
+The earliest buyers of a token, in time order - snipers are the first rows, buying within seconds of launch at the lowest price. Replace `token` in the Variables pane.
+
+▶️ [First buyers of a token (sniper detection)](https://ide.bitquery.io/Solana---First-buyers-of-a-Pumpfun-token-sniper-detection)
+
 #### Top 10 pump fun tokens by Marketcap change in last 5mins
 
 This query returns the top 10 pump fun tokens by Marketcap change in last 5mins. You can increase the limit to get more tokens.
@@ -528,6 +534,54 @@ To get all tokens traded on Pump.fun in the last 1 hour, use a query that filter
 To find tokens on Pump.fun that have reached a specific market capitalization threshold, you can use the following Bitquery GraphQL example.
 
 ▶️ [How do I get tokens that reached a specific market cap on Pump.fun?](https://ide.bitquery.io/How-do-I-get-tokens-that-reached-a-specific-market-cap-on-Pumpfun)
+
+#### Latest creator fee transfers on pumpfun amm
+
+Latest creator fee transfers on pumpfun amm. Uses the `InstructionBalanceUpdates` cube. Replace the address in the `where` clause to use it.
+
+▶️ [Latest creator fee transfers on pumpfun amm](https://ide.bitquery.io/latest-creator-fee-transfers-on-pumpfun-amm)
+
+#### Pumpfun transfers type v1 to pumpfun migrations
+
+Retrieve Pump.fun token migrations on a specific date. The API returns transfers to the PumpSwap migration receiver address for the given date.
+
+▶️ [Pumpfun transfers type v1 to pumpfun migrations](https://ide.bitquery.io/pumpfun-transfers-type-v1-to-pumpfun-migrations_1)
+
+#### Pumpswap latest Trades API
+
+Use `DEXTrades` with `Solana(network: solana, dataset: realtime)` and filter `Trade.Dex.ProgramAddress` to the PumpSwap AMM. This returns the most recent successful swaps on PumpSwap (snapshot query, not a live stream).
+
+▶️ [Pumpswap latest Trades API](https://ide.bitquery.io/Pumpswap-latest-Trades-API)
+
+#### Top 10 pump fun tokens by Price change in last 5min
+
+Use the below query to get top 10 Pump.fun tokens by price change in the last 5 minutes.
+
+▶️ [Top 10 pump fun tokens by Price change in last 5min](https://ide.bitquery.io/Top-10-pump-fun-tokens-by-Price-change-in-last-5min_1)
+
+#### Top 100 graduating pump fun tokens in last 5 minutes
+
+We can use below query to get top 100 About to Graduate Pump Fun Tokens. You can run and test the saved query.
+
+▶️ [Top 100 graduating pump fun tokens in last 5 minutes](https://ide.bitquery.io/Top-100-graduating-pump-fun-tokens-in-last-5-minutes_2)
+
+#### Top traders on pumpswap
+
+Aggregate `DEXTradeByTokens` by `Transaction.Signer` with `limitBy` and `orderBy` on trade count or volume (USD). Filter `Dex.ProgramAddress` to PumpSwap and optionally WSOL as the side currency to rank active wallets on the AMM.
+
+▶️ [Top traders on pumpswap](https://ide.bitquery.io/top-traders-on-pumpswap_2)
+
+#### All Pump fun tokens created by an address
+
+All Pump fun tokens created by an address. Uses the `TokenSupplyUpdates` cube. Replace the address in the `where` clause to use it.
+
+▶️ [All Pump fun tokens created by an address](https://ide.bitquery.io/all-Pump-fun-tokens-created-by-an-address_3)
+
+#### First transfers of a pump fun token
+
+Retrieves the first transfer of a token to each address, providing the timestamp when each address first received the token.
+
+▶️ [First transfers of a pump fun token](https://ide.bitquery.io/first-transfers-of-a-pump-fun-token_1)
 
 ### Meteora
 
@@ -567,6 +621,30 @@ If you want to get OHLC data for any specific currency pair on Meteora DYN, you 
 
 ▶️ [Meteora DYN OHLC API](https://ide.bitquery.io/Meteora-DYN-OHLC-API)
 
+#### Volatility of WSOL USDC Pair on AldrinAmm Dex on Solana
+
+Volatility is an important factor in trading world as it determines the fluctuation in price that implies the possibility of profit and risk of loss. Lesser volatility denotes that the pair is stable.
+
+▶️ [Volatility of WSOL USDC Pair on AldrinAmm Dex on Solana](https://ide.bitquery.io/Volatility-of-WSOL-USDC-Pair-on-AldrinAmm-Dex-on-Solana_1)
+
+#### Volatility of WSOL USDC Pair on Lifinity Dex on Solana
+
+Volatility is an important factor in trading world as it determines the fluctuation in price that implies the possibility of profit and risk of loss. Lesser volatility denotes that the pair is stable.
+
+▶️ [Volatility of WSOL USDC Pair on Lifinity Dex on Solana](https://ide.bitquery.io/Volatility-of-WSOL-USDC-Pair-on-Lifinity-Dex-on-Solana)
+
+#### Volatility of a Pair on Meteora Dynamic
+
+Volatility is an important factor in trading world as it determines the fluctuation in price that implies the possibility of profit and risk of loss. Lesser volatility denotes that the pair is stable.
+
+▶️ [Volatility of a Pair on Meteora Dynamic](https://ide.bitquery.io/Volatility-of-a-Pair-on-Meteora-Dynamic)
+
+#### Get the Top Traders of a specific Token on Meteora DBC
+
+The below query gets the Top Traders of the specified Token `4kJkgxzuk1gcjsgRSVhdeSiC15ibQLRDKTuqtf2i16Dm` on Meteora DBC.
+
+▶️ [Get the Top Traders of a specific Token on Meteora DBC](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-Token-on-Meteora-DBC)
+
 ### Raydium
 
 #### Top 100 About to Graduate Raydium Launchpad Tokens
@@ -605,6 +683,42 @@ DecreaseLiquidityV2 latest raydium clmm. Uses the `Instructions` cube. Replace t
 
 ▶️ [DecreaseLiquidityV2 latest raydium clmm](https://ide.bitquery.io/decreaseLiquidityV2-latest-raydium-clmm_1)
 
+#### IncreaseLiquidityV2 latest raydium clmm
+
+IncreaseLiquidityV2 latest raydium clmm. Uses the `Instructions` cube. Replace the address in the `where` clause to use it.
+
+▶️ [IncreaseLiquidityV2 latest raydium clmm](https://ide.bitquery.io/increaseLiquidityV2-latest-raydium-clmm)
+
+#### Live price of token on raydium - updated
+
+You can use the following query to get the latest price of a token on Raydium DEX on Solana.
+
+▶️ [Live price of token on raydium - updated](https://ide.bitquery.io/live-price-of-token-on-raydium---updated)
+
+#### Raydium CLMM Pool Creation
+
+The mint addresses for the tokens being used in the pool are listed for example `tokenMint1` could be any newly deployed token and `tokenMint0` can be WSOL , indicating which tokens the CLMM pool will support.
+
+▶️ [Raydium CLMM Pool Creation](https://ide.bitquery.io/Raydium-CLMM-Pool-Creation)
+
+#### Raydium OHLC for specific pair
+
+If you want to get OHLC data for any specific currency pair on Raydium DEX, you can use.
+
+▶️ [Raydium OHLC for specific pair](https://ide.bitquery.io/Raydium-OHLC-for-specific-pair_5)
+
+#### Top Bought Solana Tokens
+
+Will give most bought Solana Tokens on Raydium.
+
+▶️ [Top Bought Solana Tokens](https://ide.bitquery.io/Top-Bought-Solana-Tokens)
+
+#### Top sold Solana Tokens
+
+Will give most sold Solana Tokens on Raydium.
+
+▶️ [Top sold Solana Tokens](https://ide.bitquery.io/Top-sold-Solana-Tokens)
+
 ### LetsBonk.fun
 
 #### Latest Price of a LetsBonk.fun Token on Launchpad
@@ -642,6 +756,12 @@ Pool address for letsbonk.fun token. Uses the `DEXTradeByTokens` cube. Change th
 Top buyers of a letsbonk.fun token on launchpad. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
 
 ▶️ [Top buyers of a letsbonk.fun token on launchpad](https://ide.bitquery.io/top-buyers-of-a-letsbonkfun-token-on-launchpad)
+
+#### Top sellers of a letsbonk.fun token on launchpad
+
+Top sellers of a letsbonk.fun token on launchpad. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+
+▶️ [Top sellers of a letsbonk.fun token on launchpad](https://ide.bitquery.io/top-sellers-of-a-letsbonkfun-token-on-launchpad_1)
 
 ## Robinhood Chain
 
@@ -2013,6 +2133,30 @@ This API endpoint provides latest liquidity event for every Uniswap V4 pool for 
 
 ▶️ [Latest liquidity for a currency pair across all v4 pools](https://ide.bitquery.io/latest-liquidity-for-a-currency-pair-across-all-v4-pools_1)
 
+#### Latest liquidity for an individual pool on uniswap v4
+
+Returns the most recent liquidity event for a single Uniswap v4 pool. Replace `$poolId` with your target `PoolId` (from trades UI, subgraph, or a prior `DEXTradeByTokens` / `DEXPoolEvents` discovery query).
+
+▶️ [Latest liquidity for an individual pool on uniswap v4](https://ide.bitquery.io/latest-liquidity-for-an-individual-pool-on-uniswap-v4)
+
+#### Latest slippage of a pool on Uniswap v3 Ethereum
+
+Retrieves the latest slippage data for a specific DEX pool on Ethereum. Use it to calculate slippage and check Uniswap V3 price impact slippage for a particular token pair before trading.
+
+▶️ [Latest slippage of a pool on Uniswap v3 Ethereum](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3-Ethereum)
+
+#### Latest trade price of uniswap pair
+
+Here's an example of tracking Uniswap token pair trading price.
+
+▶️ [Latest trade price of uniswap pair](https://ide.bitquery.io/latest-trade-price-of-uniswap-pair)
+
+#### Latest trades for a Pool Id on uniswap v4
+
+Latest trades for a Pool Id on uniswap v4. Uses the `DEXTrades` cube.
+
+▶️ [Latest trades for a Pool Id on uniswap v4](https://ide.bitquery.io/Latest-trades-for-a-Pool-Id-on-uniswap-v4)
+
 ### PancakeSwap
 
 #### Latest Trades on PancakeSwap V3 ETH
@@ -2441,6 +2585,18 @@ Below query will get you Latest Price of a token on PancakeSwap Infinity.
 
 ▶️ [Get Latest Price of a token on PancakeSwap Infinity](https://ide.bitquery.io/Get-Latest-Price-of-a-token-on-PancakeSwap-Infinity_1)
 
+#### Get metadata for bsc pancakeswap infnity token
+
+Use the below query to get Token's metadata like `Name`, `symbol`, `SmartContract Address`, `Decimals`.
+
+▶️ [Get metadata for bsc pancakeswap infnity token](https://ide.bitquery.io/get-metadata-for-bsc-pancakeswap-infnity-token)
+
+#### Get metadata pancakeswap
+
+Use the below query to get Token's metadata like `Name`, `symbol`, `SmartContract Address`, `Decimals`.
+
+▶️ [Get metadata pancakeswap](https://ide.bitquery.io/get-metadata-pancakeswap)
+
 ### Four Meme
 
 #### Get Dev and Age of Four Meme Token
@@ -2479,6 +2635,30 @@ Below query will only show response if a the mentioned meme rush tokens have mig
 
 ▶️ [If meme rush token migrated from four meme or not](https://ide.bitquery.io/if-meme-rush-token-migrated-from-four-meme-or-not)
 
+#### If token migrated from four meme or not
+
+Below query will only show response if a the mentioned four meme tokens have migrated to Pancakeswap. Note: Please use a `Block{Date}` filter to minimize the data processing and hence the query processing time and get fast responses.
+
+▶️ [If token migrated from four meme or not](https://ide.bitquery.io/if-token-migrated-from-four-meme-or-not_4)
+
+#### Top buyers of a four meme token
+
+Top buyers of a four meme token. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it. Needs the historical data add-on — see the comment at the top of the query.
+
+▶️ [Top buyers of a four meme token](https://ide.bitquery.io/Top-buyers-of-a-four-meme-token)
+
+#### Top buyers of a meme rush token
+
+Top buyers of a meme rush token. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it. Needs the historical data add-on — see the comment at the top of the query.
+
+▶️ [Top buyers of a meme rush token](https://ide.bitquery.io/Top-buyers-of-a-meme-rush-token)
+
+#### Top tokens by launch marketcap on fourmeme
+
+Below API can be used to get top four meme tokens by launch marketcap (marketcap at the time of launching). You can get all the data through us and create a min and max marketcap filter in your application.
+
+▶️ [Top tokens by launch marketcap on fourmeme](https://ide.bitquery.io/top-tokens-by-launch-marketcap-on-fourmeme_1)
+
 ### Uniswap
 
 #### Trading Pairs on a BSC DEX
@@ -2516,6 +2696,30 @@ Will fetch the top bought tokens on uniswap v3.
 Top buyers of a currency on uniswap v4 bsc. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
 
 ▶️ [Top buyers of a currency on uniswap v4 bsc](https://ide.bitquery.io/top-buyers-of-a-currency-on-uniswap-v4-bsc)
+
+#### Top sellers of a token on uniswap v4 pool bsc
+
+Top sellers of a token on uniswap v4 pool bsc. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
+
+▶️ [Top sellers of a token on uniswap v4 pool bsc](https://ide.bitquery.io/top-sellers-of-a-token-on-uniswap-v4-pool-bsc)
+
+#### Top sold tokens on bsc uniswap v3
+
+Will fetch the top bought tokens on uniswap v3.
+
+▶️ [Top sold tokens on bsc uniswap v3](https://ide.bitquery.io/top-sold-tokens-on-bsc-uniswap-v3)
+
+#### Top traders of a token on uniswapv3 bsc
+
+Will fetch top traders of a token for the selected network.
+
+▶️ [Top traders of a token on uniswapv3 bsc](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3-bsc)
+
+#### Trade stats for a token pair on uniswap v4 bsc
+
+Trade stats for a token pair on uniswap v4 bsc. Uses the `DEXTradeByTokens` cube.
+
+▶️ [Trade stats for a token pair on uniswap v4 bsc](https://ide.bitquery.io/trade-stats-for-a-token-pair-on-uniswap-v4-bsc_1)
 
 ## Base
 
@@ -2789,12 +2993,6 @@ This query separates results by whether cbBTC is listed as the first token (`Cur
 
 ▶️ [Top liquidity pools of cbBTC](https://ide.bitquery.io/top-liquidity-pools-of-cbBTC)
 
-#### Latest liquidity of a base pool
-
-This API gives you latest liquidity of a Base Pool. Try it out.
-
-▶️ [Latest liquidity of a base pool](https://ide.bitquery.io/latest-liquidity-of-a-base-pool)
-
 ### Transactions
 
 #### Get transactions by wallet
@@ -2941,6 +3139,30 @@ Will fetch the top bought tokens on uniswap v3.
 
 ▶️ [Top sold tokens on uniswap v3](https://ide.bitquery.io/top-sold-tokens-on-uniswap-v3)
 
+#### Top traders of a token on uniswapv3
+
+Will fetch top traders of a token for the selected network.
+
+▶️ [Top traders of a token on uniswapv3](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3_4)
+
+#### Trade volume base uniswapv3
+
+Fetches the traded volume, buy volume and sell volume of a token `0x22af33fe49fd1fa80c7149773dde5890d3c76f3b`.
+
+▶️ [Trade volume base uniswapv3](https://ide.bitquery.io/trade_volume_base_uniswapv3)
+
+#### Uniswap v3 trades
+
+Below query will subscribe you to the latest DEX Trades on Uniswap v3.
+
+▶️ [Uniswap v3 trades](https://ide.bitquery.io/uniswap-v3-trades_2)
+
+#### Virtual pool addresses for a token on uniswap v4 base
+
+Virtual pool addresses for a token on uniswap v4 base. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
+
+▶️ [Virtual pool addresses for a token on uniswap v4 base](https://ide.bitquery.io/virtual-pool-addresses-for-a-token-on-uniswap-v4-base)
+
 ### PancakeSwap
 
 #### Get Latest Price of a token on PancakeSwap Infinity
@@ -2978,6 +3200,18 @@ Use the below query to get Token's metadata like `Name`, `symbol`, `SmartContrac
 Retrieves the Open, High, Low, and Close (OHLC) prices in USD for a specific token traded on PancakeSwap Infinity over a defined time period and interval.
 
 ▶️ [OHLC on BASE pancakeswap infinity](https://ide.bitquery.io/OHLC-on-BASE-pancakeswap-infinity)
+
+#### Top traders of a token on pancakeswap
+
+Will fetch top traders of a token on PancakeSwap Infinity for the selected network.
+
+▶️ [Top traders of a token on pancakeswap](https://ide.bitquery.io/top-traders-of-a-token-on-pancakeswap)
+
+#### Trade volume base pancakeswap infinity
+
+Fetches the traded volume, buy volume and sell volume of a token `0x22af33fe49fd1fa80c7149773dde5890d3c76f3b` on PancakeSwap Infinity.
+
+▶️ [Trade volume base pancakeswap infinity](https://ide.bitquery.io/trade_volume_base_pancakeswap_infinity)
 
 ### Aerodrome
 
@@ -3438,6 +3672,30 @@ Will fetch top traders of a token for the selected network.
 Fetches the traded volume, buy volume and sell volume of a token `0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270`.
 
 ▶️ [Trade volume matic uniswapv3](https://ide.bitquery.io/trade_volume_matic_uniswapv3)
+
+#### Uniswap v3 trades matic
+
+Below query will subscribe you to the latest DEX Trades on MATIC Uniswap v3.
+
+▶️ [Uniswap v3 trades matic](https://ide.bitquery.io/uniswap-v3-trades-matic)
+
+#### Latest Trades for a currency pair on matic
+
+Latest Trades for a currency pair on matic. Uses the `DEXTrades` cube.
+
+▶️ [Latest Trades for a currency pair on matic](https://ide.bitquery.io/Latest-Trades-for-a-currency-pair-on-matic_1)
+
+#### Top buyers of a currency on uniswap v4 matic
+
+Top buyers of a currency on uniswap v4 matic. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
+
+▶️ [Top buyers of a currency on uniswap v4 matic](https://ide.bitquery.io/top-buyers-of-a-currency-on-uniswap-v4-matic)
+
+#### Top sellers of a token on uniswap v4 pool matic
+
+Top sellers of a token on uniswap v4 pool matic. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
+
+▶️ [Top sellers of a token on uniswap v4 pool matic](https://ide.bitquery.io/top-sellers-of-a-token-on-uniswap-v4-pool-matic)
 
 ## Avalanche
 

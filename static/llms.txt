@@ -72,10 +72,24 @@ Contact [sales@bitquery.io](mailto:sales@bitquery.io) for custom historical expo
 ## Popular protocol APIs
 
 - [Solana DEX trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)
-- [Pump.fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
-- [Raydium DEX API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
 - [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)
 - [Token holders API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-holders/token-holder-api/)
+- [Hyperliquid perpetuals](https://docs.bitquery.io/docs/perpetuals/hyperliquid/)
+- [Phoenix perpetuals on Solana](https://docs.bitquery.io/docs/perpetuals/solana/phoenix-perpetuals-api/)
+
+## Solana launchpads and memecoins
+
+The most asked-about area. The IDE's Solana section carries ~15 Pump.fun
+queries and ~15 Pump.fun streams, plus Raydium, Meteora and LetsBonk.fun — new
+token creation, bonding curve progress, graduation to PumpSwap, ATH market cap,
+top traders, creator fees, and first-buyer/sniper detection.
+
+- [Pump.fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) — token creation, trades, migrations
+- [Pump.fun market cap & bonding curve](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-Marketcap-Bonding-Curve-API/) — graduation progress
+- [Raydium DEX API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
+- [Meteora dynamic bonding curve](https://docs.bitquery.io/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/)
+- [Four Meme on BSC](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
+- [Sniper trading with Kafka](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 
 ## MCP for AI agents
 
