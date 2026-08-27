@@ -31,6 +31,8 @@ Every query below is saved in the [Bitquery IDE](https://ide.bitquery.io) and wa
 - [Polygon](#polygon)
 - [Avalanche](#avalanche)
 - [Celo](#celo)
+- [Cronos](#cronos)
+- [Klaytn](#klaytn)
 - [Litecoin](#litecoin)
 - [Bitcoin Cash](#bitcoin-cash)
 - [Dogecoin](#dogecoin)
@@ -38,7 +40,9 @@ Every query below is saved in the [Bitquery IDE](https://ide.bitquery.io) and wa
 - [Zcash](#zcash)
 - [Cardano](#cardano)
 - [Ripple](#ripple)
+- [Stellar](#stellar)
 - [Algorand](#algorand)
+- [Filecoin](#filecoin)
 - [Trading API](#trading-api)
 - [Stablecoins](#stablecoins)
 - [NFTs](#nfts)
@@ -3461,6 +3465,12 @@ Recent token transfers on Avalanche. Add a `currency` filter to follow one token
 
 ### Balances & Holders
 
+#### Balance of an address at a past date
+
+What one Avalanche address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Avalanche-Balance-of-an-address-at-a-past-date)
+
 #### Balances of an address
 
 Native and token balances held by one Avalanche address. Replace the address to use it.
@@ -3538,6 +3548,116 @@ Decoded event logs on Celo. Filter by `smartContractAddress` to watch a single c
 The most recent blocks on Celo, with height, time, gas used and transaction count.
 
 ▶️ [Latest blocks](https://ide.bitquery.io/Celo-Latest-blocks)
+
+## Cronos
+
+### Transfers
+
+#### Latest token transfers
+
+Recent token transfers on Cronos. Add a `currency` filter to follow one token, or a sender/receiver filter to follow one wallet.
+
+▶️ [Latest token transfers](https://ide.bitquery.io/Cronos-Latest-token-transfers)
+
+### Balances & Holders
+
+#### Balance of an address at a past date
+
+What one Cronos address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Cronos-Balance-of-an-address-at-a-past-date)
+
+#### Balances of an address
+
+Native and token balances held by one Cronos address. Replace the address to use it.
+
+▶️ [Balances of an address](https://ide.bitquery.io/Cronos-Balances-of-an-address)
+
+### Transactions
+
+#### Latest transactions
+
+Recent Cronos transactions with value, gas and sender/receiver. Move `since` in the Variables pane to change the window — a wide window on a busy chain will exceed the query memory limit.
+
+▶️ [Latest transactions](https://ide.bitquery.io/Cronos-Latest-transactions)
+
+### Events & Calls
+
+#### Latest smart contract events
+
+Decoded event logs on Cronos. Filter by `smartContractAddress` to watch a single contract.
+
+▶️ [Latest smart contract events](https://ide.bitquery.io/Cronos-Latest-smart-contract-events)
+
+### Blocks & Validators
+
+#### Latest blocks
+
+The most recent Cronos blocks, with gas used and transaction count. Move `since` in the Variables pane.
+
+▶️ [Latest blocks](https://ide.bitquery.io/Cronos-Latest-blocks)
+
+## Klaytn
+
+### Trades
+
+#### Latest DEX trades
+
+The most recent DEX trades on Klaytn, with both sides of the pair, the venue and USD value. Add a `baseCurrency` filter to scope it to one token.
+
+▶️ [Latest DEX trades](https://ide.bitquery.io/Klaytn-Latest-DEX-trades)
+
+#### Top DEXs by trade count
+
+Ranks the DEXs on Klaytn by number of trades, so you can see which venues actually carry volume.
+
+▶️ [Top DEXs by trade count](https://ide.bitquery.io/Klaytn-Top-DEXs-by-trade-count)
+
+### Transfers
+
+#### Latest token transfers
+
+Recent token transfers on Klaytn. Add a `currency` filter to follow one token, or a sender/receiver filter to follow one wallet.
+
+▶️ [Latest token transfers](https://ide.bitquery.io/Klaytn-Latest-token-transfers)
+
+### Balances & Holders
+
+#### Balance of an address at a past date
+
+What one Klaytn address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Klaytn-Balance-of-an-address-at-a-past-date)
+
+#### Balances of an address
+
+Native and token balances held by one Klaytn address. Replace the address to use it.
+
+▶️ [Balances of an address](https://ide.bitquery.io/Klaytn-Balances-of-an-address)
+
+### Transactions
+
+#### Latest transactions
+
+Recent Klaytn transactions with value, gas and sender/receiver. Move `since` in the Variables pane to change the window — a wide window on a busy chain will exceed the query memory limit.
+
+▶️ [Latest transactions](https://ide.bitquery.io/Klaytn-Latest-transactions)
+
+### Events & Calls
+
+#### Latest smart contract events
+
+Decoded event logs on Klaytn. Filter by `smartContractAddress` to watch a single contract.
+
+▶️ [Latest smart contract events](https://ide.bitquery.io/Klaytn-Latest-smart-contract-events)
+
+### Blocks & Validators
+
+#### Latest blocks
+
+The most recent blocks on Klaytn, with height, time, gas used and transaction count.
+
+▶️ [Latest blocks](https://ide.bitquery.io/Klaytn-Latest-blocks)
 
 ## Litecoin
 
@@ -3865,6 +3985,62 @@ This query uses transaction hash and date range as filter to fetch tx details.
 
 ▶️ [Transaction Details using Hash](https://ide.bitquery.io/xrpl-search-tx-details)
 
+## Stellar
+
+### Trades
+
+#### Latest DEX trades
+
+Trades on the Stellar decentralised exchange, with both sides of the pair and the amounts.
+
+▶️ [Latest DEX trades](https://ide.bitquery.io/Stellar-Latest-DEX-trades)
+
+### Transfers
+
+#### Latest payments
+
+Stellar payment operations — who paid whom, in which asset, and how much.
+
+▶️ [Latest payments](https://ide.bitquery.io/Stellar-Latest-payments)
+
+### Balances & Holders
+
+#### Balance of an address at a past date
+
+What one Stellar address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Stellar-Balance-of-an-address-at-a-past-date)
+
+#### Balances of an address
+
+Every asset balance held by one Stellar account. Replace the address to use it.
+
+▶️ [Balances of an address](https://ide.bitquery.io/Stellar-Balances-of-an-address)
+
+### Liquidity & Pools
+
+#### Liquidity pool trades
+
+Swaps routed through Stellar liquidity pools, with the pool id and both legs.
+
+▶️ [Liquidity pool trades](https://ide.bitquery.io/Stellar-Liquidity-pool-trades)
+
+### Transactions
+
+#### Latest transactions
+
+Recent Stellar transactions with sender, fee and success flag. Move `since` in the Variables pane to change the window.
+
+▶️ [Latest transactions](https://ide.bitquery.io/Stellar-Latest-transactions)
+
+### Blocks & Validators
+
+#### Latest ledgers
+
+The most recent Stellar ledgers with close time, transaction count and fee pool.
+
+▶️ [Latest ledgers](https://ide.bitquery.io/Stellar-Latest-ledgers)
+
 ## Algorand
 
 ### Transfers
@@ -3908,6 +4084,46 @@ Returns the number of transactions per day over the last 10 days, ordered by dat
 Counts distinct transaction senders on a specific date.
 
 ▶️ [Daily Unique Txn Senders on algorand](https://ide.bitquery.io/Daily-Unique-Txn-Senders-on-algorand)
+
+## Filecoin
+
+### Transfers
+
+#### Latest transfers
+
+FIL value moving between addresses. Add a sender or receiver filter to follow one account.
+
+▶️ [Latest transfers](https://ide.bitquery.io/Filecoin-Latest-transfers)
+
+### Balances & Holders
+
+#### Balance of an address at a past date
+
+What one Filecoin address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Filecoin-Balance-of-an-address-at-a-past-date)
+
+#### Balance of an address
+
+The FIL balance held by one Filecoin address. Replace the address to use it.
+
+▶️ [Balance of an address](https://ide.bitquery.io/Filecoin-Balance-of-an-address)
+
+### Transactions
+
+#### Latest messages
+
+Filecoin messages — the chain's transactions — with sender, receiver, value and method.
+
+▶️ [Latest messages](https://ide.bitquery.io/Filecoin-Latest-messages)
+
+### Blocks & Validators
+
+#### Latest tipsets
+
+The most recent Filecoin tipsets with height and time.
+
+▶️ [Latest tipsets](https://ide.bitquery.io/Filecoin-Latest-tipsets)
 
 ## Trading API
 

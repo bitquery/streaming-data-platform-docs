@@ -11,7 +11,30 @@
 - [GraphQL IDE](https://ide.bitquery.io/) — run queries in the browser, no setup
 - [First query in 5 minutes](https://docs.bitquery.io/docs/start/first-query/)
 - [API keys & authentication](https://docs.bitquery.io/docs/authorization/how-to-generate/)
+- [Starter queries](https://docs.bitquery.io/docs/start/starter-queries/) — tested queries by chain and data type, the same tree the IDE shows
+- [Starter subscriptions](https://docs.bitquery.io/docs/start/starter-subscriptions/) — the real-time half of the same tree
 - [MCP Server for AI agents](https://docs.bitquery.io/docs/mcp/mcp-server/)
+
+## Endpoints, chains and datasets
+
+Two generations of the API, with different schemas. Sending a query to the wrong one is the
+most common mistake.
+
+- **V2** — `https://streaming.bitquery.io/graphql`, and `wss://` for subscriptions. Covers
+  Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Robinhood Chain, Solana, Tron and
+  Hyperliquid. Roots are capitalised: `EVM`, `Solana`, `Tron`, `Trading`.
+- **V1** — `https://graphql.bitquery.io`. Everything else: Bitcoin, Litecoin, Bitcoin Cash,
+  Dogecoin, Dash, Zcash, Cardano, Ripple, Stellar, Algorand, Filecoin, Avalanche, Celo,
+  Cronos, Klaytn, Fantom, Moonbeam. Roots are lowercase: `bitcoin(network:)`,
+  `ethereum(network:)`, `stellar(network:)`, `filecoin(network:)`.
+- Ethereum, BSC, Tron and Polygon are **migrating off V1** — query them on V2.
+- Every V2 root takes `dataset:` — `realtime` (default, recent window only), `archive` (full
+  history), `combined` (both). Archive and combined need the historical data add-on.
+
+- [Dataset options](https://docs.bitquery.io/docs/graphql/dataset/options/) — realtime vs archive vs combined
+- [Archive dataset](https://docs.bitquery.io/docs/graphql/dataset/archive/) — how to query history
+- [Data coverage & retention](https://docs.bitquery.io/docs/graphql/data-coverage-retention/) — how far back each cube goes, per chain
+- [Endpoints](https://docs.bitquery.io/docs/start/endpoints/) — regional hosts for V1 and V2
 
 ## Trading data — prices, trades & OHLCV
 
