@@ -78,7 +78,17 @@ V1 groups chains under a shared root with a `network` argument:
 - `cardano(network: cardano)`, `ripple(network: ripple)`, `stellar(network: stellar)`,
   `algorand(network: algorand)`, `solana(network: solana)`
 
-**V1 has no subscriptions.** If a chain is V1-only, it has no live stream over GraphQL.
+**Ethereum, BSC, Tron and Polygon are being migrated off V1. Always query them on V2**, even
+though the V1 schema still accepts them.
+
+**Root names carry the version.** V1 roots are lowercase — `ethereum(`, `tron(`, `solana(`,
+`bitcoin(`. V2 roots are capitalised — `EVM(`, `Tron(`, `Solana(`, `Trading`. If you see a
+lowercase root, it is a V1 document and belongs on the V1 endpoint.
+
+**Streaming is a V2 feature.** V1's schema does expose a subscription root, but only
+`ethereum(network: ...)`, and there is no documented V1 WebSocket endpoint — use V2 for
+anything live. Chains that exist only on V1 and are not in the V1 EVM family — Bitcoin and its
+relatives, Cardano, Ripple, Stellar, Algorand — have no GraphQL stream at all.
 
 ---
 
