@@ -48,6 +48,26 @@ Step 2 of the checkout is **Top Up Credits** — optional. Add-ons are billed to
 | **100k Stream-minutes**  | +100,000 streaming minutes |
 | **1 GB Stream Data**     | +1 GB of stream traffic    |
 
+### Historical data add-ons
+
+Self-serve plans query the `realtime` dataset. To run `dataset: archive` or
+`dataset: combined`, add the historical add-on for the chain you need:
+
+| Chain | Add-ons |
+| --- | --- |
+| Ethereum, BNB Chain (BSC), Base, Arbitrum, Optimism, Polygon, Tron, Robinhood | **Historical Trading Data** · **Historical Transfers + Balances + Holders** |
+| Solana | **Historical OHLCV & Token Price** · **Historical Token Transfers & Balances** |
+| Bitcoin, Bitcoin Cash, Litecoin, Dogecoin, Dash, Zcash | **Chain Data (historical included)** |
+| Polymarket | **Historical Data** |
+
+Bundles cover every EVM chain in one purchase, and all six UTXO chains in
+another. Prices are shown at checkout and on the
+[pricing page](https://bitquery.io/pricing).
+
+Cardano, Ripple, Stellar, Algorand, Filecoin, Avalanche, Celo, Cronos and
+Klaytn have no self-serve historical add-on — historical access to those is
+part of Enterprise.
+
 You can add multiple units of each add-on using the quantity selector. Prices per unit are shown in the checkout and on the [pricing page](https://bitquery.io/pricing).
 
 ## Additional Points
