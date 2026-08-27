@@ -3465,6 +3465,12 @@ Recent token transfers on Avalanche. Add a `currency` filter to follow one token
 
 ### Balances & Holders
 
+#### Balance of an address at a past date
+
+What one Avalanche address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Avalanche-Balance-of-an-address-at-a-past-date)
+
 #### Balances of an address
 
 Native and token balances held by one Avalanche address. Replace the address to use it.
@@ -3555,6 +3561,12 @@ Recent token transfers on Cronos. Add a `currency` filter to follow one token, o
 
 ### Balances & Holders
 
+#### Balance of an address at a past date
+
+What one Cronos address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Cronos-Balance-of-an-address-at-a-past-date)
+
 #### Balances of an address
 
 Native and token balances held by one Cronos address. Replace the address to use it.
@@ -3610,6 +3622,12 @@ Recent token transfers on Klaytn. Add a `currency` filter to follow one token, o
 ▶️ [Latest token transfers](https://ide.bitquery.io/Klaytn-Latest-token-transfers)
 
 ### Balances & Holders
+
+#### Balance of an address at a past date
+
+What one Klaytn address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Klaytn-Balance-of-an-address-at-a-past-date)
 
 #### Balances of an address
 
@@ -3987,6 +4005,12 @@ Stellar payment operations — who paid whom, in which asset, and how much.
 
 ### Balances & Holders
 
+#### Balance of an address at a past date
+
+What one Stellar address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Stellar-Balance-of-an-address-at-a-past-date)
+
 #### Balances of an address
 
 Every asset balance held by one Stellar account. Replace the address to use it.
@@ -4072,6 +4096,12 @@ FIL value moving between addresses. Add a sender or receiver filter to follow on
 ▶️ [Latest transfers](https://ide.bitquery.io/Filecoin-Latest-transfers)
 
 ### Balances & Holders
+
+#### Balance of an address at a past date
+
+What one Filecoin address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Filecoin-Balance-of-an-address-at-a-past-date)
 
 #### Balance of an address
 
