@@ -2244,26 +2244,6 @@ Use the same Raydium program filter with negative `ChangeAmount` on the base sid
 
 ▶️ [Liquidity removal for radium](https://ide.bitquery.io/liquidity-removal-for-radium_1)
 
-### Uniswap
-
-#### 1-second price, OHLC, volume, SMA and EMA — Uniswap v3
-
-One-second candles with moving averages for Uniswap v3 tokens, built for trading front-ends.
-
-▶️ [1-second price, OHLC, volume, SMA and EMA — Uniswap v3](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
-
-#### Stream all Uniswap Seconds OHLC Kline
-
-Subscribe to `Trading.Pairs` filtered by Uniswap protocols and 1s interval to power sub-minute charts and HFT analytics.
-
-▶️ [Stream all Uniswap Seconds OHLC Kline](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline)
-
-#### Uniswap all versions trades stream
-
-Filter `DEXTrades` with `ProtocolName` in `uniswap_v3`, `uniswap_v2`, `uniswap_v1` to stream only Uniswap family pools on mainnet.
-
-▶️ [Uniswap all versions trades stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream)
-
 ### Pump.fun
 
 #### All Pumpswap Trade Stream
@@ -2297,6 +2277,26 @@ This subscription returns the real-time trades happening on Pancakeswap. You can
 PancakeSwap v3 DEX tokens 1 second price stream with OHLC. Uses the `Pairs` cube. Replace the address in the `where` clause to use it.
 
 ▶️ [PancakeSwap v3 DEX tokens 1 second price stream with OHLC](https://ide.bitquery.io/PancakeSwap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
+
+### Uniswap
+
+#### 1-second price, OHLC, volume, SMA and EMA — Uniswap v3
+
+One-second candles with moving averages for Uniswap v3 tokens, built for trading front-ends.
+
+▶️ [1-second price, OHLC, volume, SMA and EMA — Uniswap v3](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
+
+#### Stream all Uniswap Seconds OHLC Kline
+
+Subscribe to `Trading.Pairs` filtered by Uniswap protocols and 1s interval to power sub-minute charts and HFT analytics.
+
+▶️ [Stream all Uniswap Seconds OHLC Kline](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline)
+
+#### Uniswap all versions trades stream
+
+Filter `DEXTrades` with `ProtocolName` in `uniswap_v3`, `uniswap_v2`, `uniswap_v1` to stream only Uniswap family pools on mainnet.
+
+▶️ [Uniswap all versions trades stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream)
 
 ## Stablecoins
 

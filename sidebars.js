@@ -17,6 +17,7 @@ const sidebars = {
       items: [
         "start/learning-path",
         "start/first-query",
+        "start/bitquery-for-ai",
         "start/starter-queries",
         "start/starter-subscriptions",
         "tools-directory",

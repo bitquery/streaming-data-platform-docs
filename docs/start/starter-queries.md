@@ -1199,19 +1199,17 @@ Stream every stop-loss and take-profit placement as it happens.
 
 ▶️ [Phoenix Perps Fills by Trader Wallet - Solana](https://ide.bitquery.io/sol_perps_filled_orders_by_signer)
 
-#### Whale Trades on Solana Perps (Phoenix)
-
-Positive = received, negative = paid. Replace the field list with `total: sum(of: Position_Funding)` for the net carry cost of holding their positions.
-
-▶️ [Whale Trades on Solana Perps (Phoenix)](https://ide.bitquery.io/solana-perps-whale-trades)
-
-### Other venues
-
 #### Trader Realized PnL on Solana Perps
 
 Rows with `Size: 0` are markets they've fully closed — drop them and the rest is the live book, with entry prices.
 
 ▶️ [Trader Realized PnL on Solana Perps](https://ide.bitquery.io/solana-perps-trader-pnl)
+
+#### Whale Trades on Solana Perps (Phoenix)
+
+Positive = received, negative = paid. Replace the field list with `total: sum(of: Position_Funding)` for the net carry cost of holding their positions.
+
+▶️ [Whale Trades on Solana Perps (Phoenix)](https://ide.bitquery.io/solana-perps-whale-trades)
 
 #### Solana Perps OHLC Candles from Mark Price
 
