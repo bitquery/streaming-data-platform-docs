@@ -326,80 +326,6 @@ We will use this subscription to listen to `consumeEvents` transactions on OpenB
 
 ▶️ [ConsumeEvents instruction on OpenBook V2](https://ide.bitquery.io/consumeEvents-instruction-on-OpenBook-V2_3)
 
-### Raydium
-
-#### Latest Pools Created on Raydium
-
-This query returns the latest created pools on Raydium. You can set the limit here also.
-
-▶️ [Latest Pools Created on Raydium](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_1)
-
-#### Latest Trades on Raydium
-
-This stream gives info about the real time trades on Raydium exchange. You can modify this query to monitor trades on Raydium for a particular token or by a particular trader.
-
-▶️ [Latest Trades on Raydium](https://ide.bitquery.io/Updated-Real-time-trades-on-Raydium-DEX-on-Solana_1)
-
-#### New Pool Creation on Raydium CLMM
-
-This stream gives info about the real time liquidity pool creation on Raydium CLMM.
-
-▶️ [New Pool Creation on Raydium CLMM](https://ide.bitquery.io/Raydium-CLMM-Pool-Creation-stream)
-
-#### New Pool Creation on Raydium CPMM
-
-This stream gives info about the real time liquidity pool creation on Raydium CPMM.
-
-▶️ [New Pool Creation on Raydium CPMM](https://ide.bitquery.io/CPMM-pools-creation-stream)
-
-#### New Pool Creation on Raydium Launchpad
-
-This stream gives info about the real time liquidity pool creation on Raydium Launchpad.
-
-▶️ [New Pool Creation on Raydium Launchpad](https://ide.bitquery.io/Raydium-Launchpad-pool-creations_1)
-
-#### New Pool Creation on Raydium v4
-
-This stream gives info about the real time liquidity pool creation on Raydium exchange.
-
-▶️ [New Pool Creation on Raydium v4](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_5)
-
-#### Track Raydium Launchpad tokens above 95% Bonding Curve Progress in realtime
-
-Returns Raydium Launchpad tokens which have more than 95% bonding curve progress.
-
-▶️ [Track Raydium Launchpad tokens above 95% Bonding Curve Progress in realtime](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_2)
-
-#### Newly launched token on PumpFun, Raydium Launchpad, Meteora DBC, Heaven DEX, Bags , Jupiter studio, Moonit
-
-Subscribe to newly launched tokens across multiple Solana launchpads and DEXs in a single subscription.
-
-▶️ [Newly launched token on PumpFun, Raydium Launchpad, Meteora DBC, Heaven DEX, Bags , Jupiter studio, Moonit](https://ide.bitquery.io/newly-launched-token-on-PumpFun-Raydium-Launchpad-Meteora-DBC-Heaven-DEX-Bags--Jupiter-studio-Moonit)
-
-#### Raydium CLMM DEX Trades with AccountNames
-
-In this section we will see how to get data on Raydium CLMM trades in real-time. According to the official docs available here.
-
-▶️ [Raydium CLMM DEX Trades with AccountNames](https://ide.bitquery.io/Raydium-CLMM-DEX-Trades-with-AccountNames)
-
-#### Raydium dextrades through OpenBook order book
-
-If you want to track latest Raydium DEXTrades enabled by OpenBook order book Protocol, you can use.
-
-▶️ [Raydium dextrades through OpenBook order book](https://ide.bitquery.io/Raydium-dextrades-through-OpenBook-order-book)
-
-#### Realtime stream raydium launchpad tokens with marketcap above 10k marketcap
-
-Subscribe when the token is on Solana, `Market.Protocol` is `raydium_launchpad`, `Supply.MarketCap` &gt; 10,000 (USD), and interval duration &gt; 1 second. Adjust `gt` to change the threshold.
-
-▶️ [Realtime stream raydium launchpad tokens with marketcap above 10k marketcap](https://ide.bitquery.io/realtime-stream-raydium-launchpad-tokens-with-marketcap-above-10k-marketcap)
-
-#### Track Add Liquidity Transactions on Solana Raydium DEX
-
-If you want to track latest liquidity additions in Raydium pools, you can use.
-
-▶️ [Track Add Liquidity Transactions on Solana Raydium DEX](https://ide.bitquery.io/Track-Add-Liquidity-Transactions-on-Solana-Raydium-DEX)
-
 ### Pump.fun
 
 #### PumpFun Token Creation
@@ -491,6 +417,80 @@ Subscribe to Trading `Pairs` when the token is on Solana, `Market.ProtocolFamily
 Subscribe to `InstructionBalanceUpdates` with the same `collect_coin_creator_fee` method and PumpSwap program address filter. Each event streams a new creator fee collection as it happens—use this to monitor creator revenue on PumpSwap tokens in real time.
 
 ▶️ [Track creator fee transfers on pumpfun amm](https://ide.bitquery.io/track-creator-fee-transfers-on-pumpfun-amm)
+
+### Raydium
+
+#### Latest Pools Created on Raydium
+
+This query returns the latest created pools on Raydium. You can set the limit here also.
+
+▶️ [Latest Pools Created on Raydium](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_1)
+
+#### Latest Trades on Raydium
+
+This stream gives info about the real time trades on Raydium exchange. You can modify this query to monitor trades on Raydium for a particular token or by a particular trader.
+
+▶️ [Latest Trades on Raydium](https://ide.bitquery.io/Updated-Real-time-trades-on-Raydium-DEX-on-Solana_1)
+
+#### New Pool Creation on Raydium CLMM
+
+This stream gives info about the real time liquidity pool creation on Raydium CLMM.
+
+▶️ [New Pool Creation on Raydium CLMM](https://ide.bitquery.io/Raydium-CLMM-Pool-Creation-stream)
+
+#### New Pool Creation on Raydium CPMM
+
+This stream gives info about the real time liquidity pool creation on Raydium CPMM.
+
+▶️ [New Pool Creation on Raydium CPMM](https://ide.bitquery.io/CPMM-pools-creation-stream)
+
+#### New Pool Creation on Raydium Launchpad
+
+This stream gives info about the real time liquidity pool creation on Raydium Launchpad.
+
+▶️ [New Pool Creation on Raydium Launchpad](https://ide.bitquery.io/Raydium-Launchpad-pool-creations_1)
+
+#### New Pool Creation on Raydium v4
+
+This stream gives info about the real time liquidity pool creation on Raydium exchange.
+
+▶️ [New Pool Creation on Raydium v4](https://ide.bitquery.io/Latest-Radiyum-V4-pools-created_5)
+
+#### Track Raydium Launchpad tokens above 95% Bonding Curve Progress in realtime
+
+Returns Raydium Launchpad tokens which have more than 95% bonding curve progress.
+
+▶️ [Track Raydium Launchpad tokens above 95% Bonding Curve Progress in realtime](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_2)
+
+#### Newly launched token on PumpFun, Raydium Launchpad, Meteora DBC, Heaven DEX, Bags , Jupiter studio, Moonit
+
+Subscribe to newly launched tokens across multiple Solana launchpads and DEXs in a single subscription.
+
+▶️ [Newly launched token on PumpFun, Raydium Launchpad, Meteora DBC, Heaven DEX, Bags , Jupiter studio, Moonit](https://ide.bitquery.io/newly-launched-token-on-PumpFun-Raydium-Launchpad-Meteora-DBC-Heaven-DEX-Bags--Jupiter-studio-Moonit)
+
+#### Raydium CLMM DEX Trades with AccountNames
+
+In this section we will see how to get data on Raydium CLMM trades in real-time. According to the official docs available here.
+
+▶️ [Raydium CLMM DEX Trades with AccountNames](https://ide.bitquery.io/Raydium-CLMM-DEX-Trades-with-AccountNames)
+
+#### Raydium dextrades through OpenBook order book
+
+If you want to track latest Raydium DEXTrades enabled by OpenBook order book Protocol, you can use.
+
+▶️ [Raydium dextrades through OpenBook order book](https://ide.bitquery.io/Raydium-dextrades-through-OpenBook-order-book)
+
+#### Realtime stream raydium launchpad tokens with marketcap above 10k marketcap
+
+Subscribe when the token is on Solana, `Market.Protocol` is `raydium_launchpad`, `Supply.MarketCap` &gt; 10,000 (USD), and interval duration &gt; 1 second. Adjust `gt` to change the threshold.
+
+▶️ [Realtime stream raydium launchpad tokens with marketcap above 10k marketcap](https://ide.bitquery.io/realtime-stream-raydium-launchpad-tokens-with-marketcap-above-10k-marketcap)
+
+#### Track Add Liquidity Transactions on Solana Raydium DEX
+
+If you want to track latest liquidity additions in Raydium pools, you can use.
+
+▶️ [Track Add Liquidity Transactions on Solana Raydium DEX](https://ide.bitquery.io/Track-Add-Liquidity-Transactions-on-Solana-Raydium-DEX)
 
 ### Meteora
 
@@ -853,6 +853,12 @@ Stream every stop-loss and take-profit placement as it happens.
 Solana Perpetuals Mark Price Stream (Phoenix).
 
 ▶️ [Solana Perpetuals Mark Price Stream (Phoenix)](https://ide.bitquery.io/solana-perpetuals-mark-price-stream)
+
+#### Collateral deposits and withdrawals
+
+Live collateral deposits and withdrawals on Phoenix perpetuals - the money-in and money-out feed for the venue.
+
+▶️ [Collateral deposits and withdrawals](https://ide.bitquery.io/Solana---Phoenix-collateral-deposits-and-withdrawals-live)
 
 ## TRON
 
@@ -2418,40 +2424,6 @@ Use the same Raydium program filter with negative `ChangeAmount` on the base sid
 
 ▶️ [Liquidity removal for radium](https://ide.bitquery.io/liquidity-removal-for-radium_1)
 
-### Uniswap
-
-#### 1-second price, OHLC, volume, SMA and EMA — Uniswap v3
-
-One-second candles with moving averages for Uniswap v3 tokens, built for trading front-ends.
-
-▶️ [1-second price, OHLC, volume, SMA and EMA — Uniswap v3](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
-
-#### Stream all Uniswap Seconds OHLC Kline
-
-Subscribe to `Trading.Pairs` filtered by Uniswap protocols and 1s interval to power sub-minute charts and HFT analytics.
-
-▶️ [Stream all Uniswap Seconds OHLC Kline](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline)
-
-#### Uniswap all versions trades stream
-
-Filter `DEXTrades` with `ProtocolName` in `uniswap_v3`, `uniswap_v2`, `uniswap_v1` to stream only Uniswap family pools on mainnet.
-
-▶️ [Uniswap all versions trades stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream)
-
-### PancakeSwap
-
-#### Real-time Trades on Pancakeswap
-
-This subscription returns the real-time trades happening on Pancakeswap. You can modify the stream to get real time trades for a particular token, a particular token pair, and even a particular trader.
-
-▶️ [Real-time Trades on Pancakeswap](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream)
-
-#### PancakeSwap v3 DEX tokens 1 second price stream with OHLC
-
-PancakeSwap v3 DEX tokens 1 second price stream with OHLC. Uses the `Pairs` cube. Replace the address in the `where` clause to use it.
-
-▶️ [PancakeSwap v3 DEX tokens 1 second price stream with OHLC](https://ide.bitquery.io/PancakeSwap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
-
 ### Pump.fun
 
 #### All Pumpswap Trade Stream
@@ -2471,6 +2443,40 @@ All pumpfun Trade Stream. Uses the `Trades` cube.
 Pump fun token live prices using trades api. Uses the `Trades` cube.
 
 ▶️ [Pump fun token live prices using trades api](https://ide.bitquery.io/pump-fun-token-live-prices-using-trades-api_1)
+
+### PancakeSwap
+
+#### Real-time Trades on Pancakeswap
+
+This subscription returns the real-time trades happening on Pancakeswap. You can modify the stream to get real time trades for a particular token, a particular token pair, and even a particular trader.
+
+▶️ [Real-time Trades on Pancakeswap](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream)
+
+#### PancakeSwap v3 DEX tokens 1 second price stream with OHLC
+
+PancakeSwap v3 DEX tokens 1 second price stream with OHLC. Uses the `Pairs` cube. Replace the address in the `where` clause to use it.
+
+▶️ [PancakeSwap v3 DEX tokens 1 second price stream with OHLC](https://ide.bitquery.io/PancakeSwap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
+
+### Uniswap
+
+#### 1-second price, OHLC, volume, SMA and EMA — Uniswap v3
+
+One-second candles with moving averages for Uniswap v3 tokens, built for trading front-ends.
+
+▶️ [1-second price, OHLC, volume, SMA and EMA — Uniswap v3](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
+
+#### Stream all Uniswap Seconds OHLC Kline
+
+Subscribe to `Trading.Pairs` filtered by Uniswap protocols and 1s interval to power sub-minute charts and HFT analytics.
+
+▶️ [Stream all Uniswap Seconds OHLC Kline](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline)
+
+#### Uniswap all versions trades stream
+
+Filter `DEXTrades` with `ProtocolName` in `uniswap_v3`, `uniswap_v2`, `uniswap_v1` to stream only Uniswap family pools on mainnet.
+
+▶️ [Uniswap all versions trades stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream)
 
 ## Stablecoins
 

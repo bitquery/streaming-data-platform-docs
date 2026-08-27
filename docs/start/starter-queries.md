@@ -1341,6 +1341,12 @@ As a `query`, add `orderBy: { descending: Block_Time }` and a `limit` for the re
 
 ▶️ [Solana Perps OHLC Candles from Mark Price](https://ide.bitquery.io/solana-perps-ohlc-candles)
 
+#### Collateral deposits and withdrawals
+
+Deposits and withdrawals of collateral on Phoenix perpetuals, newest first, with trader, signer and fee. Filter by Type for one side only.
+
+▶️ [Collateral deposits and withdrawals](https://ide.bitquery.io/Solana---Phoenix-collateral-deposits-and-withdrawals)
+
 ## TRON
 
 ### Trades
