@@ -370,6 +370,36 @@ Returns Raydium Launchpad tokens which have more than 95% bonding curve progress
 
 ▶️ [Track Raydium Launchpad tokens above 95% Bonding Curve Progress in realtime](https://ide.bitquery.io/LetsBonkfun-Tokens-between-95-and-100-bonding-curve-progress_2)
 
+#### Newly launched token on PumpFun, Raydium Launchpad, Meteora DBC, Heaven DEX, Bags , Jupiter studio, Moonit
+
+Subscribe to newly launched tokens across multiple Solana launchpads and DEXs in a single subscription.
+
+▶️ [Newly launched token on PumpFun, Raydium Launchpad, Meteora DBC, Heaven DEX, Bags , Jupiter studio, Moonit](https://ide.bitquery.io/newly-launched-token-on-PumpFun-Raydium-Launchpad-Meteora-DBC-Heaven-DEX-Bags--Jupiter-studio-Moonit)
+
+#### Raydium CLMM DEX Trades with AccountNames
+
+In this section we will see how to get data on Raydium CLMM trades in real-time. According to the official docs available here.
+
+▶️ [Raydium CLMM DEX Trades with AccountNames](https://ide.bitquery.io/Raydium-CLMM-DEX-Trades-with-AccountNames)
+
+#### Raydium dextrades through OpenBook order book
+
+If you want to track latest Raydium DEXTrades enabled by OpenBook order book Protocol, you can use.
+
+▶️ [Raydium dextrades through OpenBook order book](https://ide.bitquery.io/Raydium-dextrades-through-OpenBook-order-book)
+
+#### Realtime stream raydium launchpad tokens with marketcap above 10k marketcap
+
+Subscribe when the token is on Solana, `Market.Protocol` is `raydium_launchpad`, `Supply.MarketCap` &gt; 10,000 (USD), and interval duration &gt; 1 second. Adjust `gt` to change the threshold.
+
+▶️ [Realtime stream raydium launchpad tokens with marketcap above 10k marketcap](https://ide.bitquery.io/realtime-stream-raydium-launchpad-tokens-with-marketcap-above-10k-marketcap)
+
+#### Track Add Liquidity Transactions on Solana Raydium DEX
+
+If you want to track latest liquidity additions in Raydium pools, you can use.
+
+▶️ [Track Add Liquidity Transactions on Solana Raydium DEX](https://ide.bitquery.io/Track-Add-Liquidity-Transactions-on-Solana-Raydium-DEX)
+
 ### Pump.fun
 
 #### PumpFun Token Creation
@@ -408,6 +438,60 @@ Live stream of token price updates on Pump.fun.
 
 ▶️ [Price of a pump fun token using price index in usd](https://ide.bitquery.io/Price-of-a-pump-fun-token-using-price-index-in-usd)
 
+#### Pump Fun Tokens between 95% and 100% bonding curve progress
+
+We can use above Bonding Curve formulae and get the Balance of the Pool needed to get to 95% and 100% Bonding Curve Progress range. And then track liquidity changes which result in `Base{PostAmount}` to fall in this range.
+
+▶️ [Pump Fun Tokens between 95% and 100% bonding curve progress](https://ide.bitquery.io/Pump-Fun-Tokens-between-95-and-100-bonding-curve-progress_3)
+
+#### Pump fun token mcap monitoring
+
+In case PostAmountInUSD is 0 then, you need to pull price from our Crypto price API. Here is an example which gets both supply and Price.
+
+▶️ [Pump fun token mcap monitoring](https://ide.bitquery.io/pump-fun-token-mcap-monitoring)
+
+#### PumpSwap new pools Stream
+
+Subscribe to `Instructions` where the program method is `create_pool` and the program address is the PumpSwap AMM ID above. Each event reflects a new pool on PumpSwap; use account and argument fields for pair and liquidity details.
+
+▶️ [PumpSwap new pools Stream](https://ide.bitquery.io/pumpSwap-new-pools-Stream)
+
+#### Pumpfun DEX Trades stream
+
+Use Bitquery's `DEXTrades` GraphQL subscription filtered by `ProtocolName: "pump"` to stream live Pump.fun trades including buy/sell sides, amounts, accounts, and methods. For gRPC or Kafka, see Pump.fun gRPC Streams.
+
+▶️ [Pumpfun DEX Trades stream](https://ide.bitquery.io/Pumpfun-DEX-Trades-stream)
+
+#### Pumpswap latest Trade for a trader stream
+
+Use a `subscription` on `DEXTrades` with the same `Signer` and PumpSwap `ProgramAddress` filters. New trades for that wallet on PumpSwap stream as they are confirmed.
+
+▶️ [Pumpswap latest Trade for a trader stream](https://ide.bitquery.io/Pumpswap-latest-Trade-for-a-trader-stream_1)
+
+#### Realtime price of a pumpswap token
+
+Subscribe to `DEXTradeByTokens` filtered by PumpSwap `ProgramAddress` and the token `MintAddress`. Each event includes `Price` and `PriceInUSD` for the latest leg—use it as a live price feed for that token on PumpSwap.
+
+▶️ [Realtime price of a pumpswap token](https://ide.bitquery.io/realtime-price-of-a-pumpswap-token)
+
+#### Realtime stream of "King of the Hill" Pump.fun tokens (30K–35K market cap)
+
+Tokens in the $30K–$35K `Supply.MarketCap` band on Pumpfun (see Pump.fun on King of the Hill). Subscribe to Trading `Pairs` with `MarketCap` between 30,000 and 35,000 USD.
+
+▶️ [Realtime stream of "King of the Hill" Pump.fun tokens (30K–35K market cap)](https://ide.bitquery.io/realtime-stream-of-King-of-the-Hill-Pumpfun-tokens-30K35K-market-cap)
+
+#### Realtime stream pumpfun tokens with marketcap above 10k marketcap
+
+Subscribe to Trading `Pairs` when the token is on Solana, `Market.ProtocolFamily` is Pumpfun, `Supply.MarketCap` &gt; 10,000 (USD), and interval duration &gt; 1 second.
+
+▶️ [Realtime stream pumpfun tokens with marketcap above 10k marketcap](https://ide.bitquery.io/realtime-stream-pumpfun-tokens-with-marketcap-above-10k-marketcap)
+
+#### Track creator fee transfers on pumpfun amm
+
+Subscribe to `InstructionBalanceUpdates` with the same `collect_coin_creator_fee` method and PumpSwap program address filter. Each event streams a new creator fee collection as it happens—use this to monitor creator revenue on PumpSwap tokens in real time.
+
+▶️ [Track creator fee transfers on pumpfun amm](https://ide.bitquery.io/track-creator-fee-transfers-on-pumpfun-amm)
+
 ### Meteora
 
 #### Jup studio token migrations from Meteora DBC to Meteors DEX
@@ -445,6 +529,30 @@ The below query gets real-time information whenever there's a new trade on the M
 This query subscribes to real-time trades on the Meteora DAMM v2 (Dynamic Automated Market Maker) on the Solana blockchain by filtering using the program address `cpamdpZCGKUy5JxQXB4dcpGPiikHawvSWAd6mEn1sGG`.
 
 ▶️ [Real time trades on MeteoraDAMMv2 DEX on Solana](https://ide.bitquery.io/Real-time-trades-on-MeteoraDAMMv2-DEX-on-Solana)
+
+#### Real time trades on MeteoraDLMM DEX on Solana
+
+This query subscribes to real-time trades on the Meteora DLMM (Dynamic Liquidity Market Maker) on the Solana blockchain by filtering using the program address `LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo`.
+
+▶️ [Real time trades on MeteoraDLMM DEX on Solana](https://ide.bitquery.io/Real-time-trades-on-MeteoraDLMM-DEX-on-Solana)
+
+#### Real time trades on MeteoraDYN DEX on Solana
+
+The below query gets real-time information whenever there's a new trade on the Meteora DYN DEX including detailed information about the trade, including the buy and sell details, the block information, and the transaction specifics.
+
+▶️ [Real time trades on MeteoraDYN DEX on Solana](https://ide.bitquery.io/Real-time-trades-on-MeteoraDYN-DEX-on-Solana)
+
+#### Realtime Price feed of a Token on Meteora DAMM v2
+
+You can use the following subscription to get real-time price updates of a token on Meteora DAMM v2 on Solana. This provides live price data as new trades occur.
+
+▶️ [Realtime Price feed of a Token on Meteora DAMM v2](https://ide.bitquery.io/Realtime-Price-feed-of-a-Token-on-Meteora-DAMM-v2)
+
+#### Realtime Price feed of a Token on Meteora DLMM
+
+You can use the following subscription to get real-time price updates of a token on Meteora DLMM on Solana. This provides live price data as new trades occur.
+
+▶️ [Realtime Price feed of a Token on Meteora DLMM](https://ide.bitquery.io/Realtime-Price-feed-of-a-Token-on-Meteora-DLMM)
 
 ### Orca
 
@@ -1282,6 +1390,30 @@ Open this query on our GraphQL IDE using this.
 
 ▶️ [Latest pools created Uniswap v3](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9)
 
+#### Real time trades on uniswap v4 -- subscription
+
+These swaps use the chain-specific DEXTrades cube via `EVM { DEXTrades }`: `Trade.PoolId`, pool-relative Buy/Sell (DEXTrades cube). USD can be thin on small pools—use live swaps above when you want the Trading row shape.
+
+▶️ [Real time trades on uniswap v4 -- subscription](https://ide.bitquery.io/Real-time-trades-on-uniswap-v4----subscription)
+
+#### Stream all Uniswap Seconds OHLC Kline
+
+The new Price Index Stream helps you get token-level, pair-level, and market-level OHLC data for 1 sec interval( or higher), in real-time across all chains. These also includes trading metrics like SMA, EMA, VWAP, and more.
+
+▶️ [Stream all Uniswap Seconds OHLC Kline](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline_1)
+
+#### Uniswap all versions trades stream
+
+Track live trades across all Uniswap versions.
+
+▶️ [Uniswap all versions trades stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream_1)
+
+#### Uniswap v3 pairs websocket
+
+Open this query on our GraphQL IDE using this.
+
+▶️ [Uniswap v3 pairs websocket](https://ide.bitquery.io/uniswap-v3-pairs-websocket)
+
 ## BSC
 
 ### Trades
@@ -1550,6 +1682,30 @@ Monitor large buy orders in the mempool to detect whale activity and potential p
 
 ▶️ [Four Meme large buys mempool](https://ide.bitquery.io/Four-Meme-large-buys-mempool)
 
+#### Four Meme liquidity add mempool
+
+Monitor when liquidity is being added to Four Meme tokens before confirmation. Important for detecting graduation events.
+
+▶️ [Four Meme liquidity add mempool](https://ide.bitquery.io/Four-Meme-liquidity-add-mempool)
+
+#### Four Meme mempool trades
+
+Monitor Four Meme DEX trades in real-time as they appear in the mempool, before they are confirmed on-chain. This allows you to detect trading opportunities early and front-run or back-run trades.
+
+▶️ [Four Meme mempool trades](https://ide.bitquery.io/Four-Meme-mempool-trades)
+
+#### Four Meme migration mempool
+
+Track when Four Meme tokens are graduating to PancakeSwap before the migration completes. Critical for trading strategies.
+
+▶️ [Four Meme migration mempool](https://ide.bitquery.io/Four-Meme-migration-mempool)
+
+#### Four Meme rug pull detection mempool
+
+Monitor for suspicious activity like developers selling large amounts in mempool.
+
+▶️ [Four Meme rug pull detection mempool](https://ide.bitquery.io/Four-Meme-rug-pull-detection-mempool)
+
 ### PancakeSwap
 
 #### Real-time Mempool Trades on Pancakeswap
@@ -1587,6 +1743,18 @@ Mempool - Latest BSC PancakeSwap v3 dextrades - Stream. Uses the `DEXTrades` cub
 Stream - BSC PancakeSwap v3 Trades for a token. Uses the `DEXTradeByTokens` cube. Change the token address in the `where` clause to use it.
 
 ▶️ [Stream - BSC PancakeSwap v3 Trades for a token](https://ide.bitquery.io/Stream---BSC-PancakeSwap-v3-Trades-for-a-token)
+
+#### Stream - Liqiidity add for all tokens on PancakeSwap v3
+
+Liquidity addition is an important event related to any liquidity pool. Using.
+
+▶️ [Stream - Liqiidity add for all tokens on PancakeSwap v3](https://ide.bitquery.io/Stream---Liqiidity-add-for-all-tokens-on-PancakeSwap-v3)
+
+#### Stream - Liquidity remove for all tokens on PancakeSwap v3
+
+Filter `Burn` signatures on the same PancakeSwap v3 manager to track liquidity withdrawals in real time.
+
+▶️ [Stream - Liquidity remove for all tokens on PancakeSwap v3](https://ide.bitquery.io/Stream---Liquidity-remove-for-all-tokens-on-PancakeSwap-v3)
 
 ### Uniswap
 
@@ -1922,6 +2090,12 @@ Stream live liquidity for all Uniswap v4 pools on Base.
 
 ▶️ [Uniswap v4 pool liquidity base](https://ide.bitquery.io/uniswap-v4-pool-liquidity-base)
 
+#### Uniswap v4 pool liquidity by poolid base
+
+Liquidity for v4 pools is reconstructed by stepping through each price range where liquidity is concentrated , so `AmountCurrencyA` / `AmountCurrencyB` reflect the actual PoolManager balances for that `PoolId`.
+
+▶️ [Uniswap v4 pool liquidity by poolid base](https://ide.bitquery.io/uniswap-v4-pool-liquidity-by-poolid-base)
+
 ## Arbitrum
 
 ### Trades
@@ -2244,6 +2418,26 @@ Use the same Raydium program filter with negative `ChangeAmount` on the base sid
 
 ▶️ [Liquidity removal for radium](https://ide.bitquery.io/liquidity-removal-for-radium_1)
 
+### Uniswap
+
+#### 1-second price, OHLC, volume, SMA and EMA — Uniswap v3
+
+One-second candles with moving averages for Uniswap v3 tokens, built for trading front-ends.
+
+▶️ [1-second price, OHLC, volume, SMA and EMA — Uniswap v3](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
+
+#### Stream all Uniswap Seconds OHLC Kline
+
+Subscribe to `Trading.Pairs` filtered by Uniswap protocols and 1s interval to power sub-minute charts and HFT analytics.
+
+▶️ [Stream all Uniswap Seconds OHLC Kline](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline)
+
+#### Uniswap all versions trades stream
+
+Filter `DEXTrades` with `ProtocolName` in `uniswap_v3`, `uniswap_v2`, `uniswap_v1` to stream only Uniswap family pools on mainnet.
+
+▶️ [Uniswap all versions trades stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream)
+
 ### PancakeSwap
 
 #### Real-time Trades on Pancakeswap
@@ -2277,26 +2471,6 @@ All pumpfun Trade Stream. Uses the `Trades` cube.
 Pump fun token live prices using trades api. Uses the `Trades` cube.
 
 ▶️ [Pump fun token live prices using trades api](https://ide.bitquery.io/pump-fun-token-live-prices-using-trades-api_1)
-
-### Uniswap
-
-#### 1-second price, OHLC, volume, SMA and EMA — Uniswap v3
-
-One-second candles with moving averages for Uniswap v3 tokens, built for trading front-ends.
-
-▶️ [1-second price, OHLC, volume, SMA and EMA — Uniswap v3](https://ide.bitquery.io/Uniswap-v3-DEX-tokens-1-second-price-stream-with-OHLC)
-
-#### Stream all Uniswap Seconds OHLC Kline
-
-Subscribe to `Trading.Pairs` filtered by Uniswap protocols and 1s interval to power sub-minute charts and HFT analytics.
-
-▶️ [Stream all Uniswap Seconds OHLC Kline](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline)
-
-#### Uniswap all versions trades stream
-
-Filter `DEXTrades` with `ProtocolName` in `uniswap_v3`, `uniswap_v2`, `uniswap_v1` to stream only Uniswap family pools on mainnet.
-
-▶️ [Uniswap all versions trades stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream)
 
 ## Stablecoins
 
