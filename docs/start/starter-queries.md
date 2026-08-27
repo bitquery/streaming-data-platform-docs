@@ -1977,7 +1977,7 @@ Use the below query to get Token's metadata like `Name`, `symbol`, `SmartContrac
 
 #### Latest slippage of a pool on Uniswap v3
 
-Retrieves the latest slippage data for a specific DEX pool on Arbitrum. Use this to check current liquidity depth and price impact for a particular token pair.
+Latest slippage of a pool on Uniswap v3. Change the token address in the `where` clause to use it.
 
 ▶️ [Latest slippage of a pool on Uniswap v3](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3)
 
@@ -3527,7 +3527,7 @@ Tokens ranked by market cap. Uses the `Trades` cube.
 
 #### Solana USDT trades query
 
-Below example is to track USDT trading activity on Solana.
+Solana USDT trades query. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it.
 
 ▶️ [Solana USDT trades query](https://ide.bitquery.io/solana-USDT-trades-query)
 
@@ -3553,25 +3553,25 @@ Listen to stablecoin payments across all major blockchains. The Mempool option l
 
 #### Stablecoin Transfers from/to an address
 
-Below query will give you `EURC` transfers from/to `cHxJ2uC6vgcCfoFSfupkfCWbKHAkekrGfG39DXRamXT` on Solana.
+Stablecoin Transfers from/to an address. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
 
 ▶️ [Stablecoin Transfers from/to an address](https://ide.bitquery.io/stablecoin-Transfers-fromto-an-address)
 
 #### Stablecoin recieved and sent by an address
 
-Below query will give you `USDT` transfers from/to `TUTQj7VJ1QjR3t2GJByvrP25yZNFcj38VJ` on Tron.
+Stablecoin recieved and sent by an address. Uses the `Transfers` cube. Change the token address in the `where` clause to use it. Needs the historical data add-on — see the comment at the top of the query.
 
 ▶️ [Stablecoin recieved and sent by an address](https://ide.bitquery.io/Stablecoin-recieved-and-sent-by-an-address)
 
 #### USDT Stablecoin reserves on Ethereum
 
-Below API query will give you realtime reserves data of `USDT` on Ethereum.
+USDT Stablecoin reserves on Ethereum. Uses the `Transfers` cube. Change the token address in the `where` clause to use it. Needs the historical data add-on — see the comment at the top of the query.
 
 ▶️ [USDT Stablecoin reserves on Ethereum](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Ethereum)
 
 #### USDT and USDC token Transfers api on solana
 
-This GraphQL stream provides live USDT and USDC stablecoin transfers on Solana.
+USDT and USDC token Transfers api on solana. Uses the `Transfers` cube.
 
 ▶️ [USDT and USDC token Transfers api on solana](https://ide.bitquery.io/USDT-and-USDC-token-Transfers-api-on-solana)
 
@@ -3605,13 +3605,13 @@ This query compares USDT prices across different blockchain networks in real-tim
 
 #### USDC Stablecoin reserves on Solana
 
-Below API query will give you realtime reserves data of `USDC` on Solana.
+USDC Stablecoin reserves on Solana. Uses the `TokenSupplyUpdates` cube. Change the token address in the `where` clause to use it.
 
 ▶️ [USDC Stablecoin reserves on Solana](https://ide.bitquery.io/USDC-Stablecoin-reserves-on-Solana)
 
 #### USDT Stablecoin reserves on Solana query
 
-Monitor USDT reserve or get lateast reserve value on Solana using below Stream/API.
+USDT Stablecoin reserves on Solana query. Uses the `TokenSupplyUpdates` cube. Change the token address in the `where` clause to use it.
 
 ▶️ [USDT Stablecoin reserves on Solana query](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Solana--query)
 
@@ -3699,7 +3699,7 @@ Get trades of NFTs for a given wallet.
 
 #### Latest NFT Trades
 
-This query gets the latest 10 NFT trades on Ethereum mainnet. You can increase the limit to whatever you like, up to 25,000. Currently, it only retrieves data from the real-time database. To include historical data, use `dataset: combined`.
+Latest NFT Trades.
 
 ▶️ [Latest NFT Trades](https://ide.bitquery.io/Latest-NFT-trades-on-ETH)
 
@@ -3717,7 +3717,7 @@ Latests OpenSea Trades.
 
 #### Latest NFT trades on Ethereum network
 
-Retrieves the latest NFT Trades on Ethereum for Seaport v1.4 protocol. Many marketplaces utilize the Seaport protocol, we can add a Smart contract in Trade → Dex → SmartContract to get a specific marketplace for this protocol.
+Latest NFT trades on Ethereum network.
 
 ▶️ [Latest NFT trades on Ethereum network](https://ide.bitquery.io/latest-NFT-trades-on-Ethereum-network)
 
@@ -3927,7 +3927,7 @@ Fetch the most recent prediction market trades with full details, ordered by blo
 
 #### Prediction_trades
 
-Use Bitquery's `PredictionTrades` GraphQL query filtered by `ProtocolName: "polymarket"` on Polygon (`network: matic`). For live streaming, use a subscription or Kafka.
+Prediction_trades.
 
 ▶️ [Prediction_trades](https://ide.bitquery.io/prediction_trades)
 
@@ -4083,7 +4083,7 @@ Look up the buyer's earliest on-chain activity. If the wallet's first transfer i
 
 #### FundingSource for poylmarket
 
-Find where the wallet's money came from. The first inbound USDC transfer is usually the original funder, often a centralized exchange withdrawal or a parent wallet. This query uses bridged USDC.e on Polygon (`0x2791bca1f2de4661ed88a30c99a7a9449aa84174`).
+FundingSource for poylmarket. Uses the `Transfers` cube. Change the token address in the `where` clause to use it. Needs the historical data add-on — see the comment at the top of the query.
 
 ▶️ [FundingSource for poylmarket](https://ide.bitquery.io/FundingSource-for-poylmarket)
 
@@ -4199,7 +4199,7 @@ Using Bitquery's APIs you can follow specific traders on AsterDEX to check all t
 
 #### Payment Analytics for x402 Server on Solana
 
-Comprehensive payment analytics for a specific x402 server on Solana including total volume, unique users, and transaction counts.
+Payment Analytics for x402 Server on Solana. Replace the address in the `where` clause to use it.
 
 ▶️ [Payment Analytics for x402 Server on Solana](https://ide.bitquery.io/Payment-analytics-related-specific-x402-server-on-Solana)
 
@@ -4207,13 +4207,13 @@ Comprehensive payment analytics for a specific x402 server on Solana including t
 
 #### Get Latest Payments to x402 Server
 
-Retrieves the most recent payments made to a specific x402 server on Base network.
+Get Latest Payments to x402 Server. Uses the `Transfers` cube.
 
 ▶️ [Get Latest Payments to x402 Server](https://ide.bitquery.io/Latest-payment-to-specific-x402-server)
 
 #### Get Latest Payments to x402 Server on Solana
 
-Retrieves the most recent payments made to a specific x402 server on Solana network.
+Get Latest Payments to x402 Server on Solana. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
 
 ▶️ [Get Latest Payments to x402 Server on Solana](https://ide.bitquery.io/Latest-Payment-to-specific-x402-server-taking-solana-payments)
 

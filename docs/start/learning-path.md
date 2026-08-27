@@ -37,7 +37,7 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 
 ### For Traders
 
-- Start with **[Crypto Price APIs](/docs/start/starter-queries#crypto-price-change-api)**
+- Start with **[Crypto Price APIs](/docs/start/starter-queries#latest-price-of-any-token)**
 - Learn **[Real-time Price Streams](/docs/start/starter-subscriptions)**
 - Explore **[DEX Trading APIs](/docs/blockchain/Solana/solana-dextrades)**
 
