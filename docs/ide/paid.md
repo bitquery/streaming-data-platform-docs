@@ -30,7 +30,9 @@ On the **Choose plan** step you can:
 | **Scale** ⭐ (recommended) | 5,000,000       | 240            | 12                  | 1,000                | 2,000,000 min  | 50 GB     | 5         |
 | **Enterprise**             | Custom          | Custom         | Custom              | Unlimited            | Custom         | Unlimited | Custom    |
 
-All self-serve plans use the `realtime` dataset. **Enterprise** includes all datasets (Archive, Realtime, Combined), volume pricing, and dedicated support & SLA — [contact sales](https://bitquery.io/forms/api) for a quote.
+Self-serve plans query the `realtime` dataset by default. To query history — the `archive` and `combined` datasets — add the **historical data add-on** to your plan; see the [pricing page](https://bitquery.io/pricing) for the chains it covers. Without it, a query using `dataset: archive` or `dataset: combined` will be rejected. **Enterprise** includes all datasets (Archive, Realtime, Combined), volume pricing, and dedicated support & SLA — [contact sales](https://bitquery.io/forms/api) for a quote.
+
+For which cube has how much history on each chain, see [Data Coverage & Retention](/docs/graphql/data-coverage-retention/).
 
 Current pricing is always on the [pricing page](https://bitquery.io/pricing).
 
