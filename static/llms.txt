@@ -6,6 +6,7 @@
 
 ## Start here
 
+- [**Bitquery in one page**](https://docs.bitquery.io/docs/start/bitquery-for-ai/) — the whole API as one self-contained page: endpoints, chains, cubes, datasets, rules and worked queries. Written to be pasted into an AI assistant's context. Raw markdown: https://docs.bitquery.io/docs/start/bitquery-for-ai/index.md
 - [Docs home](https://docs.bitquery.io/) — platform overview and navigation
 - [GraphQL IDE](https://ide.bitquery.io/) — run queries in the browser, no setup
 - [First query in 5 minutes](https://docs.bitquery.io/docs/start/first-query/)
