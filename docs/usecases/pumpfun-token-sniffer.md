@@ -6,6 +6,8 @@ description: "Build Pump.fun Token Sniffer: a practical Bitquery tutorial with G
 
 This guide demonstrates how to build a basic Pump.fun token analysis tool using Bitquery APIs. The tool displays various on-chain metrics related to Pump.fun tokens on Solana, helping users understand token distribution, holder behavior, and transfer patterns.
 
+It is built on the [Bitquery Pump.fun API](https://bitquery.io/products/pumpfun-api) — see the product page for channels, pricing and the free trial.
+
 > **⚠️ Important: Proof of Concept**
 > 
 > This tool is a **proof of concept** that displays various metrics and data points about Pump.fun tokens. It does **not** make definitive claims about whether a token is a scam or legitimate. The metrics shown are for informational purposes only. You should conduct your own research and due diligence before making any investment decisions. This tool demonstrates how to use Bitquery APIs to build token analysis tools - you can extend this foundation to create more advanced analysis systems.

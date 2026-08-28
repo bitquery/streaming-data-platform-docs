@@ -7,6 +7,8 @@ keywords: ["solana grpc", "grpc solana", "Pump.fun gRPC", "CoreCast", "Pump.fun 
 
 Real-time streaming of Pump.fun DEX trades, orders, and transactions via CoreCast gRPC API.
 
+gRPC is the lowest-latency channel of the [Bitquery Pump.fun API](https://bitquery.io/products/pumpfun-api).
+
 ## Repository
 
 🔗 [**GitHub Repository**](https://github.com/bitquery/grpc-usecase-examples/tree/main/Solana/pumpfun-example)

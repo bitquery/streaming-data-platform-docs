@@ -29,6 +29,8 @@ sidebar_position: 6
 Bitquery provides **Pump.fun data dumps** in **Parquet format**, designed for large-scale analytics, historical backfills, and data lake integrations.
 These datasets can be hosted directly in your own cloud storage (for example, **AWS S3**) and queried using engines like **Snowflake, BigQuery, Athena, Spark, etc**.
 
+For the real-time and query-based version of this dataset (GraphQL, WebSocket, gRPC), see the [Pump.fun API product page](https://bitquery.io/products/pumpfun-api).
+
 ## Available Pump.fun Topics
 
 For Pump.fun, Bitquery currently provides the following datasets:

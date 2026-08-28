@@ -18,6 +18,8 @@ sidebar_label: "Pump.fun Launch Pulse"
 
 A single sentence to the agent gives you the answer for any launchpad on any chain. For live DEX prices across Pump.fun tokens after launch, see [DEXrabbit's Pump.fun category](https://dexrabbit.bitquery.io/categories/pump-fun).
 
+For the underlying launch/trade/graduation feed itself, see the [Pump.fun API product page](https://bitquery.io/products/pumpfun-api).
+
 ## Ask the Agent
 
 > *"Using the Bitquery MCP, count distinct new tokens that traded on Pump.fun per hour over the last 36 hours. Plot the trend."*
