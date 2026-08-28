@@ -541,56 +541,63 @@ subscription{
 
 </details>
 
-## Latest Trades of a LetsBonk.fun token on Launchpad
+## Latest Trades of LetsBonk.fun Tokens using the Trading API
 
-This query fetches the most recent trades of a LetsBonk.fun Token `token Mint Address` on the Raydium Launchpad.
-Run the query: [Latest trades of a LetsBonk.fun token ➤](https://ide.bitquery.io/Latest-Trades-of-a-letsbonkfun-token-on-Launchpad)
+This query fetches the most recent LetsBonk.fun trades from the [Trading cube](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) — by filtering on the Raydium LaunchLab program address. Every row includes the USD price and market cap of the token at the time of the trade. To narrow it down to a single token, add `Currency: { Id: { is: "token Mint Address" } }` inside the `Pair` filter.
+
+Run the query: [LetsBonk trades using Trading API ➤](https://ide.bitquery.io/Lets-bonk-using-Trading-API)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query LatestTrades {
-  Solana {
-    DEXTradeByTokens(
-      orderBy: { descending: Block_Time }
-      limit: { count: 50 }
+query LatestLetsBonkTrades {
+  Trading {
+    Trades(
       where: {
-        Trade: {
-          Dex: { ProtocolName: { is: "raydium_launchpad" } }
-          Currency: { MintAddress: { is: "token Mint Address" } }
+        Pair: {
+          Market: {
+            Network: { is: "Solana" }
+            Program: { is: "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj" }
+          }
         }
       }
+      orderBy: { descending: Block_Time }
+      limit: { count: 50 }
     ) {
+      Side
       Block {
         Time
       }
-      Transaction {
-        Signature
+      Price
+      PriceInUsd
+      Amounts {
+        Base
+        Quote
       }
-      Trade {
-        Market {
-          MarketAddress
-        }
-        Dex {
-          ProtocolName
-          ProtocolFamily
-        }
-        AmountInUSD
-        PriceInUSD
-        Amount
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Supply {
+        MarketCap
+      }
+      Trader {
+        Address
+      }
+      Pair {
         Currency {
+          Symbol
           Name
         }
-        Side {
-          Type
-          Currency {
-            Symbol
-            MintAddress
-            Name
-          }
-          AmountInUSD
-          Amount
+        QuoteCurrency {
+          Symbol
+        }
+        Market {
+          Address
+          Program
+          Network
+          Protocol
         }
       }
     }
@@ -600,7 +607,9 @@ query LatestTrades {
 
 </details>
 
-Similarly, you can subscribe to trades on launchpad in real-time using [subscription query](https://ide.bitquery.io/Subscribe-to-Trades-on-Launchpad). The same can be tracked using [Bitquery Kafka Streams](/docs/streams/kafka-streaming-concepts/)
+Note that in `Trading.Trades`, `Price` and `PriceInUsd` are plain float fields with no sub-selection.
+
+To get trades in real time, change `query` to `subscription` and remove the `orderBy` and `limit` arguments. The same can be tracked using [Bitquery Kafka Streams](/docs/streams/kafka-streaming-concepts/).
 
 ## Latest Price of a LetsBonk.fun Token on Raydium Lanchlab
 
