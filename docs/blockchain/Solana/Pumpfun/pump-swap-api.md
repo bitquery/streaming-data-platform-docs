@@ -14,6 +14,9 @@ keywords:
 For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
+For delivery channels, pricing and the free trial, see the [PumpSwap API product page](https://bitquery.io/products/pumpswap-api).
+
+
 Bitquery’s **PumpSwap API** exposes the PumpSwap AMM on Solana through GraphQL: **live and historical trades**, **prices**, **OHLC**, **volume**, **pool creation**, and **Pump.fun → PumpSwap migrations**. Use **queries** for snapshots, **subscriptions** to track PumpSwap trades in real time, and **`dataset: combined`** when you need more history than **`dataset: realtime`** (~recent window). Filter trades with **`Dex.ProgramAddress: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"`**. For live DEX prices across Pump.fun tokens, see [DEXrabbit's Pump.fun category](https://dexrabbit.bitquery.io/categories/pump-fun).
 
 For other data points, reach out to [support](https://t.me/Bloxy_info).

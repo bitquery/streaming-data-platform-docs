@@ -19,6 +19,9 @@ For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trad
 Post-migration AMM activity is covered end-to-end by the [PumpSwap API](https://bitquery.io/products/pumpswap-api) — the product page lists swaps, pools and OHLCV coverage with plans.
 :::
 
+For the productized feed of these migration events — channels, pricing, free trial — see the [Pump.fun API product page](https://bitquery.io/products/pumpfun-api).
+
+
 Pump.fun is a Solana-based memecoin launchpad that has reshaped how tokens are created and traded. At its core is a bonding curve model that lets anyone launch a token with a fixed supply of 1 billion tokens, of which around 800 million are made available for bonding.
 
 As traders buy into the curve, the price increases non-linearly—early buyers benefit the most. The bonding curve progress, a very useful metric for developers and traders, can be computed as:

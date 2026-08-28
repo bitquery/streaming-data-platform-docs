@@ -85,6 +85,7 @@ token creation, bonding curve progress, graduation to PumpSwap, ATH market cap,
 top traders, creator fees, and first-buyer/sniper detection.
 
 - [Pump.fun API](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) — token creation, trades, migrations
+- [Pump.fun API product page](https://bitquery.io/products/pumpfun-api) — delivery channels (GraphQL, WebSocket, gRPC, Kafka), latency, pricing, free trial
 - [Pump.fun market cap & bonding curve](https://docs.bitquery.io/docs/blockchain/Solana/Pumpfun/Pump-Fun-Marketcap-Bonding-Curve-API/) — graduation progress
 - [Raydium DEX API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
 - [Meteora dynamic bonding curve](https://docs.bitquery.io/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/)
