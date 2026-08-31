@@ -5,7 +5,9 @@ slug: /usecases/tradingview/tradingview
 ---
 # Tutorial to build TradingView chart with real-time blockchain data (Streaming API version)
 
-We will be building the demo in React using the [lightweight-charts library](https://tradingview.github.io/lightweight-charts/).
+We will be building the demo in React using the [lightweight-charts library](https://tradingview.github.io/lightweight-charts/). The chart is powered by the [Crypto Price API](/docs/trading/crypto-price-api/introduction/) (`Trading.Tokens`), which serves pre-aggregated, MEV-filtered OHLC with USD prices for the last ~30 days.
+
+> Building with the full **TradingView Advanced Charting library** instead? See the [advanced tutorial series](/docs/usecases/tradingview-subscription-realtime/getting-started).
 
 This is how it will look finally.
 
@@ -103,7 +105,9 @@ chart.current = createChart(chartContainerRef.current, {
 ```
 
 **Step 5: Fetch Data from the Streaming API**
-Create an `async` function named `fetchData` to fetch data from the Streaming API. You should use the `fetch` method to send a POST request to the API and retrieve the data. This query below gets 200 records of USDT-WETH OHLC data. Adjust the query and variables to suit your data requirements.
+Create an `async` function named `fetchData` to fetch data from the Streaming API. You should use the `fetch` method to send a POST request to the API and retrieve the data.
+
+The query below gets 200 hourly candles of WETH/USD OHLC from the [Crypto Price API](/docs/trading/crypto-price-api/introduction/) (`Trading.Tokens`) — **pre-aggregated OHLC with USD prices and volume built in**, MEV/outlier-filtered, so no in-query aggregation or price derivation is needed. Change `Duration` for other intervals (1, 60, 300, 900, 3600 seconds, etc.), and swap the token address/network for any other token. For candles older than the Trading API's ~30-day window, drop to [`DEXTradeByTokens` aggregation](/docs/usecases/ohlcv-complete-guide/).
 
 ```javascript
 const fetchData = async () => {
@@ -111,30 +115,26 @@ const fetchData = async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: "Bearer YOUR_ACCESS_TOKEN",
     },
     body: JSON.stringify({
       query: `
        {
-            EVM(network: eth, dataset: combined) {
-              DEXTradeByTokens(
-                orderBy: {ascending: Block_Date}
-                where: {Trade: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}, Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}}}}
-                limit: {count: 200}
-              ) {
-                Block {
-                  Date(interval: {in: days})
-                }
-                volume: sum(of: Trade_Amount)
-                Trade {
-                  high: Price(maximum: Trade_Price)
-                  low: Price(minimum: Trade_Price)
-                  open: Price(minimum: Block_Number)
-                  close: Price(maximum: Block_Number)
-                }
-                count
+          Trading {
+            Tokens(
+              where: {
+                Token: {Address: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}, Network: {is: "Ethereum"}}
+                Interval: {Time: {Duration: {eq: 3600}}}
               }
+              orderBy: {ascending: Block_Time}
+              limit: {count: 200}
+            ) {
+              Interval { Time { Start Duration } }
+              Price { Ohlc { Open High Low Close } }
+              Volume { Base Usd }
             }
           }
+        }
       `,
       variables: "{}",
     }),
@@ -152,26 +152,24 @@ Within the `fetchData` function, process and format the retrieved data according
 if (response.status === 200) {
   // Process and format the data
   const recddata = await response.json();
-  const responseData = recddata.data.EVM.DEXTradeByTokens;
+  const responseData = recddata.data.Trading.Tokens;
 
   const extractedData = [];
   const extractedvol = [];
   responseData.forEach((record) => {
-     // Extract necessary fields from Object
-    const open = record.Trade.open;
-    const high = record.Trade.high;
-    const low = record.Trade.low;
-    const close = record.Trade.close;
-    const recvol = parseFloat(record.volume);
+    // Extract necessary fields from Object
+    const { Open: open, High: high, Low: low, Close: close } = record.Price.Ohlc;
+    const recvol = parseFloat(record.Volume.Base);
 
-    const resdate = new Date(record.Block.Date);
+    // lightweight-charts expects unix seconds for intraday candles
+    const time = Math.floor(new Date(record.Interval.Time.Start).getTime() / 1000);
 
     const extractedItem = {
       open: open,
       high: high,
       low: low,
       close: close,
-      time: resdate.toISOString().split("T")[0],
+      time: time,
     };
 
     // Push the extracted object to the extractedData array
@@ -179,7 +177,7 @@ if (response.status === 200) {
 
     const extractvol = {
       value: recvol,
-      time: resdate.toISOString().split("T")[0],
+      time: time,
     };
     extractedvol.push(extractvol);
   });
@@ -214,23 +212,20 @@ if (response.status === 200) {
 }
 ```
 
-In this step, we format the data making it suitable for chart creation. The below snippet fetches open,high,low,close from each record in the response and creates a new variable `extractedItem`. The date field, which is received in the format of 'YYYY-MM-DD 00:00:00Z' is formatted to `YYYY-MM-DD`.
+In this step, we format the data making it suitable for chart creation. The snippet reads the pre-aggregated `Open`, `High`, `Low`, `Close` values straight off `Price.Ohlc` (no aggregation needed) and converts the interval start time to the unix-seconds format lightweight-charts expects for intraday candles.
 
 ```javascript
-const open = record.Trade.open;
-const high = record.Trade.high;
-const low = record.Trade.low;
-const close = record.Trade.close;
-const recvol = parseFloat(record.volume);
+const { Open: open, High: high, Low: low, Close: close } = record.Price.Ohlc;
+const recvol = parseFloat(record.Volume.Base);
 
-const resdate = new Date(record.Block.Date);
+const time = Math.floor(new Date(record.Interval.Time.Start).getTime() / 1000);
 
 const extractedItem = {
   open: open,
   high: high,
   low: low,
   close: close,
-  time: resdate.toISOString().split("T")[0],
+  time: time,
 };
 ```
 
@@ -255,4 +250,4 @@ Customize the chart appearance, colors, and layout to meet your specific needs b
 
 That's it! You now have a React component that plots a TradingView chart using the Streaming API. 
 
-You can find the complete code [here](https://github.com/bitquery/tradingview-react-v2-example)
+You can find the complete code [here](https://github.com/bitquery/tradingview-react-v2-example). Note: the repo may still show the older `DEXTradeByTokens` aggregation query — the `Trading.Tokens` query above is the current recommended data source; only the query string and the field extraction differ.
