@@ -188,7 +188,7 @@ This API serves as the foundational layer of our trading-focused data suite, des
 - **Response Format**: GraphQL JSON or Protobuf ( For Kafka)
 - **Streaming Protocol**: WebSocket (GraphQL subscriptions) or Kafka Stream in Protobuf
 - **Update Frequency**: Real-time with 1-second granularity
-- **Data Retention**: Historical data upto 1 week available for querying
+- **Data Retention**: Rolling ~30 days of historical data available for querying; older history via chain-level [`DEXTradeByTokens`](/docs/trading/trading-data-overview/)
 
 ### Supported Price Metrics
 

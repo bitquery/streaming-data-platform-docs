@@ -8,6 +8,13 @@ description: "DEXTrades vs DEXTradeByTokens vs Trades cube: Bitquery documentati
 
 Bitquery exposes **three** common ways to work with **DEX swap–level** data. They differ by **GraphQL root**, **row shape** (how each swap is represented), and **what fields are normalized for you**.
 
+:::tip Time window decides first, row shape second
+- **Real-time + last ~30 days** → **`Trading { Trades }`** (and `Tokens` / `Pairs` / `Currencies` for OHLC). USD price, market cap, and supply on every row; MEV-filtered; 9 chains in one API.
+- **Older than ~30 days** → chain-level **`DEXTrades`** / **`DEXTradeByTokens`** with `dataset: combined` / `archive` — the Trading cube is a **rolling ~30-day window** and does not reach further back.
+
+Pick the cube by row shape (below) only after the time window has narrowed the choice. See the [Trading Data Overview](/docs/trading/trading-data-overview).
+:::
+
 This page compares them so you can pick the right primitive before you write filters, subscriptions, or aggregations. For the broader “transfers vs events vs calls vs DEX” picture, see the [mental model guide](/docs/start/mental-model-transfers-events-calls).
 
 ---
@@ -17,11 +24,12 @@ This page compares them so you can pick the right primitive before you write fil
 | | **DEXTrades** | **DEXTradeByTokens** | **Trades cube** (`Trading { Trades }` — [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)) |
 |---|----------------|----------------------|---------------------------------------------|
 | **GraphQL root** | Chain APIs such as `EVM(...)`, `Solana { ... }`, `Tron { ... }` | Same chain roots | `Trading { Trades }` |
+| **Time window** | Full historical archive (`dataset: combined` / `archive`) | Full historical archive (`dataset: combined` / `archive`) | **Rolling ~30 days + real-time** — no deeper history |
 | **Focus (by chain)** | **EVM / Tron:** **Pool-focused**—`Buy`/`Sell` follow the pool’s perspective ([DEXTrades cube](/docs/cubes/dextrades)). **Solana:** **Trader-focused**—natural fit for signer, buyer/seller, and account-style filters (see [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades), [trader patterns](/docs/blockchain/Solana/solana-trader-API)). | **EVM / Tron:** Still **pool-relative** on the **`Side`** leg (e.g. `Side.Type` vs pool); rows are **token-expanded**, not “wallet-first.” **Solana:** **Trader-focused** in practice—e.g. buyers/sellers and volume by **`Transaction.Signer`** and `Side.Type` in [Solana examples](/docs/blockchain/Solana/solana-dextrades). | **Trader-focused** everywhere: first-class **`Trader.Address`**, **`Pair`**, **`Side`**, and USD fields aligned to the [Price Index](/docs/trading/crypto-price-api/price-index-algorithm). |
 | **Rows per swap** | **One** row per swap | **Multiple** rows per swap (token-centric; typically **two** for a two-token pool) | **One** row per swap |
 | **Core shape** | `Trade.Buy` / `Trade.Sell` (shape varies by chain; see above) | `Trade` (primary token) + `Trade.Side` (counter leg) | `Side`, `Pair` (market, tokens, currencies), `Amounts` / `AmountsInUsd`, `Price` / `PriceInUsd`, `Trader`, transaction header |
 | **USD / long-tail tokens** | **`PriceInUSD`** and related fields are **often missing or zero** for illiquid or meme tokens—amounts exist, but USD requires a usable valuation path ([DEXTrades cube — PriceInUSD](/docs/cubes/dextrades#video-tutorial--why-priceinusd-is-0-in-bitquery-api-response)). Same class of issue on **`DEXTradeByTokens`** when the schema cannot price the leg. | Same limitation as chain DEX rows: **not guaranteed** for every token. | **Much more usable USD for trading UIs:** **`PriceInUsd`** and **`AmountsInUsd`** are driven by the **Trading price index**, so you typically **do not hit the “no USD for meme coins” problem** that shows up on raw chain DEX cubes. |
-| **Best when you need** | **EVM:** one record per pool swap, protocol/pool analytics, multi-hop debugging. **Solana:** trades by **wallet** / signer / account, buy vs sell counts, DEX-level analytics on chain. | **EVM:** token-level OHLC from raw trades, “all pairs for this token,” portfolio-style filters (with dedupe discipline). **Solana:** token **and** trader analytics (buyers, sellers, makers) in one model. | **Real-time** (or windowed) **multi-chain** swap stream, **trader-centric** apps, **reliable USD** on each row, **supply snapshot** (market cap, FDV, circulating/total/max). |
+| **Best when you need** | **EVM:** one record per pool swap, protocol/pool analytics, multi-hop debugging. **Solana:** trades by **wallet** / signer / account, buy vs sell counts, DEX-level analytics on chain. | **EVM:** token-level OHLC from raw trades, “all pairs for this token,” portfolio-style filters (with dedupe discipline). **Solana:** token **and** trader analytics (buyers, sellers, makers) in one model. | **Real-time and anything within the last ~30 days**: **multi-chain** swap stream, **trader-centric** apps, **reliable USD** on each row, **supply snapshot** (market cap, FDV, circulating/total/max). |
 | **Watch out for** | On **EVM**, `Buy`/`Sell` are **pool**-relative—not the end-user’s intuition without reading the field docs. | **Double counting** if you sum without filtering by token or deduplicating (e.g. by transaction hash / index). | Not a substitute for **pre-aggregated OHLC** on **Tokens** / **Pairs**; for aggregated charts prefer [Crypto Price API](/docs/trading/crypto-price-api/introduction) unless you need raw swap rows |
 
 Full reference pages: [DEXTrades cube](/docs/cubes/dextrades), [DEXTradesByTokens cube](/docs/cubes/dextradesbyTokens), [Crypto Trades API — `Trades`](/docs/trading/crypto-trades-api/trades-api).
@@ -62,7 +70,7 @@ The [DEXTradesByTokens](/docs/cubes/dextradesbyTokens) / **`DEXTradeByTokens`** 
 
 The **`Trades`** field under **`Trading`** is documented as the [Crypto Trades API — real-time DEX trade streams](/docs/trading/crypto-trades-api/trades-api). It is **not** nested under `EVM` / `Solana` per chain in the same way; you use **`Trading { Trades }`** and narrow with **`Pair.Market.Network`**, token ids, and **`Trader.Address`**.
 
-**Trader-first model:** Rows are built for **who traded**—**`Trader.Address`** is a first-class filter—alongside **`Pair`**, **`Side`**, and amounts. That is the natural API for **wallet streams**, **leaderboards**, and **per-user** trade history across **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, and **Polygon** in one schema ([Trades API](/docs/trading/crypto-trades-api/trades-api)).
+**Trader-first model:** Rows are built for **who traded**—**`Trader.Address`** is a first-class filter—alongside **`Pair`**, **`Side`**, and amounts. That is the natural API for **wallet streams**, **leaderboards**, and **per-user** trade history across **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, **Optimism**, **Polygon**, **Tron**, and **Robinhood** in one schema ([Trades API](/docs/trading/crypto-trades-api/trades-api)).
 
 **USD vs chain DEX cubes:** On **`DEXTrades`** / **`DEXTradeByTokens`**, **`PriceInUSD`** is often **missing or zero** for **meme or thinly traded** tokens (see [DEXTrades cube](/docs/cubes/dextrades) pricing notes). The **`Trades`** cube is different: **`PriceInUsd`** and **`AmountsInUsd`** are tied to the **Trading price index**, so you **usually get usable USD** for the same long-tail assets where raw chain DEX USD fields fail. Details: [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm).
 
@@ -82,9 +90,9 @@ For **aggregated** token metrics across pairs, use **[Tokens](/docs/trading/cryp
 
 1. **EVM / Tron: one row per pool swap** with pool **`Buy`/`Sell`** semantics, or **Solana: trades by signer / account / buy vs sell** on chain? → **`DEXTrades`** on the right **chain root**.
 
-2. **Token-expanded rows**, OHLC **from raw DEX trades**, or **Solana** maker/buyer/seller aggregates on **`DEXTradeByTokens`**? → **`DEXTradeByTokens`**, with **strict filters** on **EVM** so counts are not doubled.
+2. **Token-expanded rows**, OHLC **from raw DEX trades older than ~30 days**, or **Solana** maker/buyer/seller aggregates on **`DEXTradeByTokens`**? → **`DEXTradeByTokens`**, with **strict filters** on **EVM** so counts are not doubled. (For OHLC within ~30 days, prefer the pre-aggregated [Crypto Price API](/docs/trading/crypto-price-api/introduction) instead.)
 
-3. **Trader-centric** product, **multi-chain** `Trading` stream, **reliable USD** (including meme / long-tail), plus **supply** on each row? → **`Trading { Trades }`** ([Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)).
+3. **Real-time or last-~30-days** trades: **trader-centric** product, **multi-chain** `Trading` stream, **reliable USD** (including meme / long-tail), plus **supply** on each row? → **`Trading { Trades }`** ([Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)). Note the **~30-day rolling window** — for a deeper backfill, drop to the chain-level cubes above.
 
 4. **Need pre-built candles / moving averages / mean price** without aggregating raw swaps yourself? → **[Crypto Price API](/docs/trading/crypto-price-api/introduction)** (**Tokens**, **Pairs**, **Currencies**)—not the same as **`Trades`**, as explained in the [mental model](/docs/start/mental-model-transfers-events-calls#trading-crypto-price-cube).
 

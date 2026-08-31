@@ -76,9 +76,9 @@ Windows are expressed as rolling ranges, not fixed dates, so they stay correct o
 
 | Cube | realtime | archive / combined | Kafka | Notes |
 |---|---|---|---|---|
-| `DEXTradeByTokens` | ✅ **~7 days** | Since mid-2024 (`archive`) | ✅ | The long-retention trade cube. Prefer it for anything beyond a few hours. |
+| `DEXTradeByTokens` | ✅ **~7 days** | Since mid-2024 (`archive`) | ✅ | The longer-retention chain-level trade cube (vs ~12 h on `DEXTrades`). For anything within ~30 days prefer the [Trading cube](/docs/trading/trading-data-overview/); use this for older history or instruction context. |
 | `DEXTrades` | ✅ **~12 hours** | — | ✅ | Same trades as above, far shorter window. See the note below. |
-| OHLC / price aggregates | ✅ | Minute-level since October 2024 | ✅ (trading topics) | Aggregated candles go back much further than raw trades. |
+| OHLC / price aggregates | ✅ | Minute-level since October 2024 | ✅ (trading topics) | Chain-level aggregated candles go back much further than raw trades. (Distinct from the `Trading` cubes' pre-aggregated OHLC, which is ~30 days.) |
 | `Transfers` | ✅ **~12 hours** | via S3 | ✅ | Deep history via S3 export. |
 | `Instructions` | ✅ **~12 hours** | — | ✅ | Deep historical instruction lookup by signature is not available via API. |
 | `InstructionBalanceUpdates` | ✅ **~12 hours** | — | ✅ | |
@@ -105,7 +105,7 @@ The pattern is that aggregate-shaped cubes retain much longer than raw per-event
 | Surface | Window | Notes |
 |---|---|---|
 | Trades / Tokens / Pairs / Currencies | ~30 days | All four cubes measure the same floor. For older raw trades use chain-level `DEXTradeByTokens` or an S3 export. |
-| Price / OHLC aggregates | See the [Crypto Price API](/docs/trading/crypto-price-api/introduction/) | Served separately from the Trading cubes above, which are all ~30 days. |
+| Price / OHLC aggregates (`Tokens` / `Pairs` / `Currencies`) | ~30 days | Pre-aggregated OHLC down to 1-second intervals, same rolling window as `Trades`. See the [Crypto Price API](/docs/trading/crypto-price-api/introduction/). |
 
 ### Robinhood chain
 

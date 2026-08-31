@@ -29,6 +29,8 @@ Our **WebSocket-based GraphQL subscriptions** provide **real-time cryptocurrency
 - **Latency**: ~1 second (network + parsing overhead)
 - **Use Cases**: **Crypto trading dashboards**, **DeFi interfaces**, **real-time portfolio monitoring**
 
+> Streaming live **token trades or prices**? Subscribe to the [Trading API](/docs/trading/trading-data-overview/) cubes (`Trading.Trades`, `Trading.Tokens`, `Trading.Pairs`) rather than raw per-chain `DEXTrades` — one stream covers 9 chains with USD prices, market cap, and MEV-filtered trades built in.
+
 ### High-Performance Kafka Blockchain Streams {#kafka-streams}  
 **Multichain Support** | **Ultra-low latency** | **High throughput**
 

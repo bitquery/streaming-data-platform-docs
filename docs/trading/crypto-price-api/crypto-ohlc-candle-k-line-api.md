@@ -17,7 +17,7 @@ Get real-time and historical OHLC (Open, High, Low, Close) candle data, K-line c
 
 | Question | Where to read / run |
 |----------|---------------------|
-| How do I get OHLCV data for a token using Bitquery? | **Last 7 Days** [Crypto Price API](/docs/trading/crypto-price-api/introduction/) ; **historical:** [DEXTradeByTokens OHLC](/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) |
+| How do I get OHLCV data for a token using Bitquery? | **Last ~30 days:** [Crypto Price API](/docs/trading/crypto-price-api/introduction/) ; **older history:** [DEXTradeByTokens OHLC](/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) |
 | How do I get OHLC in a DEXTradeByTokens query? | [DEXTradeByTokens OHLC](/docs/cubes/dextradesbyTokens/#how-do-i-get-ohlc-in-a-dextradebytokens-query) (for **historical** OHLC or DEX-level control) |
 | How do I get historical OHLCV for a Solana token? | **Main OHLC:** [Crypto Price API — Quick start](/docs/trading/crypto-price-api/introduction/#quick-start) · [Tokens cube](/docs/trading/crypto-price-api/tokens/) · **Historical / DEX:** [Historical OHLCV on Solana](/docs/blockchain/Solana/solana-dextrades/#how-do-i-get-historical-ohlcv-for-a-solana-token) · [Solana OHLC API](/docs/blockchain/Solana/solana-dextrades/#solana-ohlc-api) |
 | How do I get the current price of a token using Bitquery API? | **Recommended:** [Pairs + rank 1 (top market)](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) · [Quick start](/docs/trading/crypto-price-api/introduction/#quick-start) · [Examples](/docs/trading/crypto-price-api/examples/) |

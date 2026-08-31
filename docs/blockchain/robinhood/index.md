@@ -34,11 +34,15 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 
 ---
 
+:::tip Live trades and prices — use the Trading API
+For real-time trades, USD prices, market cap, and OHLC on Robinhood Chain (and 8 other chains in the same API), use the [Trading cubes](/docs/trading/trading-data-overview/) (`Trading.Trades` / `Tokens` / `Pairs`). Use chain-level `DEXTrades` for history older than ~30 days or when you need call/event context.
+:::
+
 ## Pick the right API
 
 | What you want | Use this | Page |
 | --- | --- | --- |
-| Swap prices, volume, OHLCV | `DEXTrades` / `Trading` cubes | [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades) |
+| Swap prices, volume, OHLCV | `Trading` cubes (real-time + last ~30 days); `DEXTrades` for older history | [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades) |
 | Who sent what to whom | `Transfers` | [Robinhood Transfers API](/docs/blockchain/robinhood/robinhood-transfers) |
 | A wallet's portfolio and history | `Balances` | [Robinhood Balances API](/docs/blockchain/robinhood/robinhood-balances-api) |
 | Holder counts and distribution | `TokenHolders` | [Robinhood Token Holders API](/docs/blockchain/robinhood/robinhood-token-holders-api) |

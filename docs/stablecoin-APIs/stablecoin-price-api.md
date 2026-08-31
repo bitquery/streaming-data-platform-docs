@@ -283,7 +283,7 @@ Get the latest price of a stablecoin across all EVM DEXs. Returns one row per DE
       limitBy: { count: 1, by: Trade_Dex_SmartContract }
       where: {
         Trade: {
-          Currency: { SmartContract: { is: "CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s" } }
+          Currency: { SmartContract: { is: "0xdac17f958d2ee523a2206206994597c13d831ec7" } }
         }
       }
     ) {
