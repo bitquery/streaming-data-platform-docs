@@ -9,6 +9,28 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 Bitquery provides PancakeSwap Infinity (BSC) data through APIs, Streams and Data Dumps.
 The below graphQL APIs and Streams are examples of data points you can get with Bitquery for PancakeSwap Infinity on Binance Smart Chain (BSC).
+
+
+## Live PancakeSwap Infinity Trades on BSC (Trading API — recommended)
+
+This subscription streams every PancakeSwap Infinity trade on BSC in real time with **USD price and USD amounts on every row**, MEV-filtered. Run it [in the IDE](https://ide.bitquery.io/Trading-API-PancakeSwap-Infinity-Trades-BSC).
+
+```graphql
+subscription {
+  Trading {
+    Trades(
+      where: {Pair: {Market: {Network: {is: "Binance Smart Chain"}, Protocol: {is: "pancakeswap_infinity"}}}}
+    ) {
+      Block { Time }
+      Price
+      PriceInUsd
+      AmountsInUsd { Base Quote }
+      Trader { Address }
+      Pair { Token { Symbol } QuoteToken { Symbol } Market { Protocol } }
+    }
+  }
+}
+```
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
 Need zero-latency Binance Smart Chain (BSC) data? [Read about our Kafka Streams and Contact us for a Trial](/docs/streams/kafka-streaming-concepts/).

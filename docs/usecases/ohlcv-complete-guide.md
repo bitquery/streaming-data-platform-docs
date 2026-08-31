@@ -6,6 +6,38 @@ description: "Learn how to build OHLCV candles from Bitquery DEX trade data, inc
 
 In this guide, we will see how to get OHLCV (Open, High, Low, Close, Volume) candlestick data—or K-Line data—across different blockchain networks using Bitquery APIs. We’ll also explore how to filter out bot trades, outliers, and abnormally high or low prices to ensure accurate OHLC calculations.
 
+## Recommended: pre-aggregated OHLC via the Crypto Price API (real-time + last ~30 days)
+
+This guide builds candles **from raw chain-level trades** (`DEXTradeByTokens`) — the right tool for **history older than ~30 days** or **custom intervals**. For anything real-time or within the last ~30 days, use the [**Crypto Price API**](/docs/trading/crypto-price-api/introduction) instead: **true pre-aggregated OHLC down to 1-second intervals** — including the real open price that in-query aggregation cannot produce — with **USD values on every candle and MEV/outlier trades already filtered**, so none of the manual filtering below is needed.
+
+The example returns 1-minute OHLC for a token from its top-volume market; swap the token address and network, and change `Duration` for other intervals. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Token-Price-Top-Market-Rank-1).
+
+```graphql
+{
+  Trading {
+    Pairs(
+      where: {
+        Token: {Address: {is: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"}, Network: {is: "Solana"}}
+        Ranking: {Position: {eq: 1}}
+        Interval: {Time: {Duration: {eq: 60}}}
+        Price: {IsQuotedInUsd: true}
+      }
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+    ) {
+      Token { Symbol Address }
+      QuoteToken { Symbol }
+      Market { Protocol Address Network }
+      Price { IsQuotedInUsd Ohlc { Open High Low Close } Average { Mean } }
+      Volume { Base Usd }
+      Block { Time }
+    }
+  }
+}
+```
+
+The rest of this guide covers the chain-level path: building candles from raw `DEXTradeByTokens` rows for deep history and custom intervals.
+
 ## **Intervals in OHLC**
 
 Bitquery’s OHLC APIs support multiple time intervals, including minutes, hours, days, weeks, and months. You can specify the desired interval in the response field, as shown in the example below:

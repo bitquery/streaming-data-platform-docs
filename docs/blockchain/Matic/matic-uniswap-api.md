@@ -11,6 +11,28 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 This section provides you with a set of queries that provides an insight about the Uniswap DEX on MATIC.
 
+
+## Live Uniswap v3 Trades on Polygon (Trading API — recommended)
+
+This subscription streams every Uniswap v3 trade on Polygon in real time with **USD price and USD amounts on every row**, MEV-filtered. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Uniswap-v3-Trades-Matic).
+
+```graphql
+subscription {
+  Trading {
+    Trades(
+      where: {Pair: {Market: {Network: {is: "Matic"}, Protocol: {is: "uniswap_v3"}}}}
+    ) {
+      Block { Time }
+      Price
+      PriceInUsd
+      AmountsInUsd { Base Quote }
+      Trader { Address }
+      Pair { Token { Symbol } QuoteToken { Symbol } Market { Protocol } }
+    }
+  }
+}
+```
+
 ## Get Latest Trades on Uniswap v3
 
 Below query will subscribe you to the latest DEX Trades on MATIC Uniswap v3. Try out the API [here](https://ide.bitquery.io/uniswap-v3-trades-matic)

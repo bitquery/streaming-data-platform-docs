@@ -5,6 +5,63 @@ description: "GeckoTerminal Solana API: query and stream Solana on-chain data wi
 ---
 # GeckoTerminal Solana API
 
+
+## Recommended: Trading API queries (real-time + last ~30 days)
+
+### Live trades with USD price, market cap and supply
+
+Streams MEV-filtered trades across all 9 chains — add `Network: {is: "Solana"}` inside `Pair.Market` to scope to one chain. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains).
+
+```graphql
+subscription {
+  Trading {
+    Trades {
+      Block { Time }
+      Price
+      PriceInUsd
+      Amounts { Base Quote }
+      AmountsInUsd { Base Quote }
+      Trader { Address }
+      Pair {
+        Token { Symbol Network }
+        QuoteToken { Symbol }
+        Market { Protocol Network }
+      }
+    }
+  }
+}
+```
+
+### Most accurate token price with 1-minute OHLC (top market)
+
+Returns the token's price from its top-volume market via `Ranking: { Position: { eq: 1 } }` — swap the token address and network for your token. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Token-Price-Top-Market-Rank-1).
+
+```graphql
+{
+  Trading {
+    Pairs(
+      where: {
+        Token: {Address: {is: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"}, Network: {is: "Solana"}}
+        Ranking: {Position: {eq: 1}}
+        Interval: {Time: {Duration: {eq: 60}}}
+        Price: {IsQuotedInUsd: true}
+      }
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+    ) {
+      Token { Symbol Address }
+      QuoteToken { Symbol }
+      Market { Protocol Address Network }
+      Price { IsQuotedInUsd Ohlc { Open High Low Close } Average { Mean } }
+      Volume { Base Usd }
+      Block { Time }
+    }
+  }
+}
+```
+
+The chain-level queries below remain the right tool for **history older than ~30 days** and per-pool detail.
+
 Everything you see on the GeckoTerminal Solana dashboard—live pairs, trades, prices, volumes, makers/buyers/sellers, and more—can be accessed via APIs/Streams with Bitquery.
 We expose the same on-chain data via GraphQL APIs, real-time WebSocket streams, and enterprise Kafka topics, with optional cloud connectors (AWS, GCP, Snowflake) for analytics pipelines.
 

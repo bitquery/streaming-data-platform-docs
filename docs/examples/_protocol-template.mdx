@@ -17,9 +17,39 @@ Bitquery's {Protocol} API returns real-time and historical trades, OHLC candles,
 
 ## Stream real-time {Protocol} trades (GraphQL subscription)
 
+For live trades, use the [Trading API](/docs/trading/trading-data-overview) — MEV-filtered swaps with USD price, market cap, and supply on every row:
+
 ```graphql
 subscription {
-  Solana {
+  Trading {
+    Trades(
+      where: { Pair: { Market: { Network: { is: "{Network}" }, Protocol: { is: "{protocol_name}" } } } }
+    ) {
+      Block { Time }
+      Price
+      PriceInUsd
+      Amounts { Base Quote }
+      AmountsInUsd { Base Quote }
+      Trader { Address }
+      Pair {
+        Token { Symbol }
+        QuoteToken { Symbol }
+        Market { Protocol Network }
+      }
+    }
+  }
+}
+```
+
+Replace `{Network}` (e.g. `Solana`, `Ethereum`) and `{protocol_name}` for your venue.
+
+## Historical {Protocol} trades (older than ~30 days, or raw chain context)
+
+The Trading cube is a rolling ~30-day window. For deeper history, or when you need call / event / instruction context, drop to the chain-level cubes with `dataset: combined` or `archive`:
+
+```graphql
+query {
+  Solana(dataset: combined) {
     DEXTrades(
       where: { Trade: { Dex: { ProtocolName: { is: "raydium" } } } }
     ) {
@@ -54,7 +84,7 @@ Replace `ProtocolName` and root type (`Solana` / `EVM`) for your venue.
   items={[
     {
       q: "How do I get real-time {Protocol} trades?",
-      a: "Open a GraphQL subscription over WebSocket, or use Kafka/gRPC for sub-100ms pipelines. Filter by ProtocolName in your query.",
+      a: "Open a Trading.Trades GraphQL subscription over WebSocket filtered by Pair.Market.Protocol — USD price, market cap, and supply come on every row. Use Kafka/gRPC for sub-100ms pipelines.",
     },
     {
       q: "Does it include new pool/pair creation?",

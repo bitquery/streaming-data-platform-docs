@@ -8,6 +8,29 @@ The Stablecoin API by Bitquery provides you the comprehensive set of APIs which 
 
 We are going to particularly deep-dive into how to get Stablecoin Trades data in this section.
 
+## Live USDT Trades Across All Chains (Trading API — recommended)
+
+For real-time trades (and anything in the last ~30 days), one [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) subscription covers **9 chains** with **USD amounts on every row**, MEV-filtered — no separate query per chain. Run it [in the IDE](https://ide.bitquery.io/Trading-API-USDT-Trades-All-Chains); swap the `Currency` symbol for USDC or any other stablecoin. The chain-level `DEXTrades` / `DEXTradeByTokens` queries below remain the right tool for **history older than ~30 days** or call/event context.
+
+```graphql
+subscription {
+  Trading {
+    Trades(where: {Pair: {Currency: {Symbol: {is: "USDT"}}}}) {
+      Block { Time }
+      Price
+      PriceInUsd
+      AmountsInUsd { Base Quote }
+      Pair {
+        Currency { Id Symbol }
+        Token { Symbol Network }
+        QuoteToken { Symbol }
+        Market { Network Protocol }
+      }
+    }
+  }
+}
+```
+
 For pre-built stablecoin dashboards (top tokens, flows, market activity), browse [DEXrabbit's Stablecoins category](https://dexrabbit.bitquery.io/categories/stablecoins).
 
 ## Ethereum

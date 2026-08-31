@@ -4,6 +4,56 @@ description: "Build AI Trading Agents with Bitquery Base Chain Data: query and s
 ---
 # Build AI Trading Agents with Bitquery Base Chain Data
 
+## Recommended: Trading API feeds for agents (real-time + last ~30 days)
+
+For live signals, point your agent at the [**Trading API**](/docs/trading/trading-data-overview) — **USD price, market cap, and supply on every row**, MEV-filtered. The chain-level queries below remain the right tool for **history older than ~30 days** or call/event context.
+
+### Trending Base tokens by USD volume
+
+Run it [in the IDE](https://ide.bitquery.io/Trading-API-Trending-Tokens-Base).
+
+```graphql
+{
+  Trading {
+    Tokens(
+      where: {
+        Interval: {Time: {Duration: {eq: 3600}}}
+        Token: {Network: {is: "Base"}}
+        Block: {Time: {since_relative: {hours_ago: 2}}}
+        Volume: {Usd: {gt: 10000}}
+      }
+      limit: {count: 10}
+      orderBy: {descending: Volume_Usd}
+    ) {
+      Token { Symbol Address Network }
+      Interval { Time { Start Duration } }
+      Volume { Base Usd }
+      Price { Ohlc { Open High Low Close } }
+      Supply { MarketCap FullyDilutedValuationUsd }
+    }
+  }
+}
+```
+
+### Live Base trade stream
+
+Run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains) — scoped here to Base; drop the `Network` filter to stream all 9 chains.
+
+```graphql
+subscription {
+  Trading {
+    Trades(where: {Pair: {Market: {Network: {is: "Base"}}}}) {
+      Block { Time }
+      Price
+      PriceInUsd
+      AmountsInUsd { Base Quote }
+      Trader { Address }
+      Pair { Token { Symbol } QuoteToken { Symbol } Market { Protocol } }
+    }
+  }
+}
+```
+
 :::danger `BalanceUpdates` sunsets 10 August 2026
 Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
 

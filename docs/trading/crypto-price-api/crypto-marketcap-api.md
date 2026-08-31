@@ -406,6 +406,29 @@ Query **`Trading.Tokens`** with a **300s** interval, filter by **minimum USD vol
 
 </details>
 
+## Recommended: stream trades via `Trading.Trades`
+
+For real-time multi-chain trades **with USD price, market cap, and supply on every row** (MEV-filtered, 9 chains in one stream), subscribe to [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) — run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains). The chain-level `DEXTrades` subscriptions below are for per-protocol/pool detail and transaction context.
+
+```graphql
+subscription {
+  Trading {
+    Trades {
+      Block { Time }
+      Price
+      PriceInUsd
+      AmountsInUsd { Base Quote }
+      Trader { Address }
+      Pair {
+        Token { Symbol Network }
+        QuoteToken { Symbol }
+        Market { Protocol Network }
+      }
+    }
+  }
+}
+```
+
 ## How do I subscribe to latest Solana DEX trades in real time? {#how-do-i-subscribe-to-latest-solana-dex-trades}
 
 Stream **`Solana { DEXTrades { … } }`** as a **subscription** to receive each swap with **buy/sell**, **price in USD**, and **DEX protocol** as trades are indexed.
