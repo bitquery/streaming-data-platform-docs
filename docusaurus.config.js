@@ -175,6 +175,21 @@ const config = {
       "@docusaurus/plugin-client-redirects",
       {
         redirects: [
+          // Pages removed 31 Aug 2026 (dead EVM.BalanceUpdates tutorials)
+          {
+            to: "/docs/usecases/wallet-portfolio-api/",
+            from: ["/docs/usecases/crypto-dashboard/", "/docs/usecases/defi_portfolio_scorer/"],
+          },
+          {
+            to: "/docs/usecases/nft-analytics/",
+            from: [
+              "/docs/usecases/nft-scanner/",
+              "/docs/usecases/nft-creator/gettingstarted/",
+              "/docs/usecases/nft-creator/pages/",
+              "/docs/usecases/nft-creator/app/",
+              "/docs/usecases/nft-creator/components/",
+            ],
+          },
           // /docs/oldDoc -> /docs/newDoc
           {
             to: "/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/",

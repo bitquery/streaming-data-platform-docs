@@ -76,7 +76,7 @@ and so on.
 
 ## **OHLC on EVM Chains**
 
-To fetch OHLC (Open, High, Low, Close) data for a specific token pair on EVM-compatible chains like Ethereum, you can use Bitquery’s `DEXTradesbyTokens`API. Supported networks include:
+To fetch OHLC (Open, High, Low, Close) data for a specific token pair on EVM-compatible chains like Ethereum, you can use Bitquery’s `DEXTradeByTokens` API. Supported networks include:
 
 - **Ethereum** → `EVM(network: eth)`
 - **BNB Chain** → `EVM(network: bsc)`
@@ -434,7 +434,7 @@ _Effect:_ The low (`min1`) is adjusted upwards, likely removing an extreme drop.
 
 ### Limitations of the OHLC API
 
-- The Solana OHLC API includes data starting from May 2024 to now only.
+- Solana chain-level OHLC coverage does not span the chain's full history — see [Data coverage & retention](/docs/graphql/data-coverage-retention/) for current windows.
 - While you can add filters as shown above to filter only valuable trades, it is not fool-proof and might not work with all tokens especially memecoins.
 
 If you prefer not to use an aggregated GraphQL query, you can fetch raw trade data and manually compute OHLC values.

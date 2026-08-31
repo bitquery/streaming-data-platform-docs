@@ -22,7 +22,7 @@ Bitquery provides powerful **real-time blockchain data streaming** capabilities 
 ### Real-time GraphQL Subscriptions (WebSocket API) {#websocket-graphql-subscriptions}
 **Multichain Support** | **Live Data** | **Beginner-friendly**
 
-Our **WebSocket-based GraphQL subscriptions** provide **real-time cryptocurrency data** with very high filtering and formatting capabilities. You can filter by wallet addresses, token contracts, transaction amounts, USD values, and much more directly in your queries. Perfect for **crypto trading applications**, **[DeFi dashboards](/docs/usecases/crypto-dashboard/)**, and **blockchain analytics platforms**.
+Our **WebSocket-based GraphQL subscriptions** provide **real-time cryptocurrency data** with very high filtering and formatting capabilities. You can filter by wallet addresses, token contracts, transaction amounts, USD values, and much more directly in your queries. Perfect for **crypto trading applications**, **DeFi dashboards**, and **blockchain analytics platforms**.
 
 - **Endpoint**: `wss://streaming.bitquery.io/graphql`
 - **Protocols**: `graphql-transport-ws`, `graphql-ws`

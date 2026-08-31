@@ -49,7 +49,7 @@ payload = json.dumps({
 })
 headers = {
    'Content-Type': 'application/json',
-    Authorization: "Bearer your_access_token_here",
+    "Authorization": "Bearer your_access_token_here",
 }
 conn.request("POST", "/graphql", payload, headers)
 res = conn.getresponse()
@@ -73,7 +73,7 @@ The title() and header() methods are used to display the title and header of the
 
 ### Adding a Table
 
-This code snippet retrieves the latest DEX trades for a specific NFT token from the Ethereum blockchain using The Graph API, and displays them in a data table using the streamlit library.
+This code snippet retrieves the latest DEX trades for a specific NFT token from the Ethereum blockchain using the Bitquery DEX Trades API, and displays them in a data table using the streamlit library.
 
 ```python
 payload_table = json.dumps({

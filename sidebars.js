@@ -1179,18 +1179,7 @@ const sidebars = {
             description: "Query NFT trades, transfers, and metadata across chains.",
           },
           items: [
-            {
-              type: "category",
-              label: "NFT Creator Portfolio",
-              items: [
-                "usecases/nft-creator/gettingstarted",
-                "usecases/nft-creator/pages",
-                "usecases/nft-creator/app",
-                "usecases/nft-creator/components",
-              ],
-            },
             "usecases/nft-analytics",
-            "usecases/nft-scanner",
             "usecases/wallet-provenance",
             "usecases/tokenholder-heatmap",
           ],
@@ -1313,7 +1302,6 @@ const sidebars = {
             description: "Build analytics apps and dashboards on Bitquery blockchain data.",
           },
           items: [
-            "usecases/crypto-dashboard",
             "usecases/discord-bot",
             "usecases/telegram-bot",
             "usecases/Top-10-ethereum-tokens",
@@ -1321,7 +1309,6 @@ const sidebars = {
             "usecases/wallet-portfolio-api",
             "usecases/end-of-day-balances",
             "usecases/wash-trading-signals",
-            "usecases/defi_portfolio_scorer",
           ],
         },
         {
