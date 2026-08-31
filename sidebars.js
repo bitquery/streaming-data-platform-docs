@@ -915,6 +915,7 @@ const sidebars = {
             "blockchain/robinhood/pools-trade-api",
             "blockchain/robinhood/pons-api",
             "blockchain/robinhood/flap-sh-api",
+            "blockchain/robinhood/trench-today-api",
             "blockchain/robinhood/bags-fm-api",
             "blockchain/robinhood/robinhood-token-supply",
           ],

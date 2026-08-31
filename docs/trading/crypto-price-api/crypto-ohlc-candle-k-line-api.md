@@ -97,11 +97,6 @@ subscription {
 
 [Run this query ➤](https://ide.bitquery.io/bitcoin-currency-price-stream)
 
-### **API Endpoints**
-
-- **GraphQL Endpoint**: `https://streaming.bitquery.io/graphql`
-- **Topic**: `trading.prices`. Please contact sales for a trial username, password.
-
 ## Why Use Our OHLC API?
 
 ### **Pre-Aggregated Data**
