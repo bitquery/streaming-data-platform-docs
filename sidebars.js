@@ -1105,6 +1105,7 @@ const sidebars = {
             "perpetuals/hyperliquid/hyperliquid-prices-api",
             "perpetuals/hyperliquid/hyperliquid-perpetuals-api",
             "perpetuals/hyperliquid/hyperliquid-signed-actions-api",
+            "perpetuals/hyperliquid/track-zec-on-hyperliquid",
           ],
         },
         "perpetuals/solana/phoenix-perpetuals-api",
