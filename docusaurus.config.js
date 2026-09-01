@@ -826,10 +826,6 @@ const config = {
             from: "/docs/blockchain/Solana/token-holders/",
             to: "/docs/blockchain/Solana/solana-token-holders/",
           },
-          {
-            from: "/docs/graphql-reference/",
-            to: "/docs/schema/schema-intro/",
-          },
 
           //crypto price api redirects
           {
