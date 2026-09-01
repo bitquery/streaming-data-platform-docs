@@ -151,20 +151,6 @@ const config = {
 
   plugins: [
     // Copy MD button is implemented in swizzled DocItem/Content (src/theme/DocItem/Content).
-    // [
-    //   "@graphql-markdown/docusaurus",
-    //   {
-    //     schema: "https://streaming.bitquery.io/graphql",
-    //     rootPath: "./docs/graphql-reference/", // docs will be generated under './docs/graphql-reference'
-    //     baseURL: ".",
-    //     linkRoot: "/docs/graphql-reference/",
-    //     homepage: "./docs/graphql-reference/intro.md",
-    //     loaders: {
-    //       UrlLoader: "@graphql-tools/url-loader",
-    //     },
-    //   },
-    // ],
-    // Temporarily disabled due to Node 18 compatibility issue
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
@@ -1209,7 +1195,6 @@ const config = {
           priority: 0.5,
           lastmod: "date",
           ignorePatterns: [
-            "/docs/graphql-reference/**",
             "/markdown-page/**",
             "/search/**",
           ],

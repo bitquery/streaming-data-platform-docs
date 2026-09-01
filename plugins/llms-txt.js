@@ -1,7 +1,7 @@
 /**
  * At build time this plugin emits, from the docs source:
  *   1. /llms-full.txt  — the full text of every doc page (one ingestible corpus
- *      for LLMs), excluding the auto-generated graphql-reference.
+ *      for LLMs).
  *   2. Raw markdown twins at /<route>index.md so agents can fetch clean markdown
  *      directly (e.g. https://docs.bitquery.io/docs/x/y/index.md).
  *
@@ -18,7 +18,6 @@ function walkDocs(dir, acc = []) {
     if (e.name.startsWith("_") || e.name.startsWith(".")) continue;
     const full = path.join(dir, e.name);
     if (e.isDirectory()) {
-      if (full.endsWith(`${path.sep}graphql-reference`)) continue;
       walkDocs(full, acc);
     } else if (/\.mdx?$/.test(e.name)) acc.push(full);
   }
