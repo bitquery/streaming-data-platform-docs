@@ -7,7 +7,7 @@ keywords: ["APE Store API", "APE Store Base", "Base blockchain API", "Bitquery B
 # APE Store API
 
 In this section we will see how we can use the [Transaction](/docs/cubes/transaction-cube/) 
-and [Calls](/docs/graphql-reference/enums/evm-call-compare-fields/) API from Bitquery to get info about trades on APE Store using one of the token address traded on the platform. For this section the token address is the following - `0xb2779752b8abe50e2a06bddd774bf0a40353f867`.
+and [Calls](/docs/schema/evm/calls/) API from Bitquery to get info about trades on APE Store using one of the token address traded on the platform. For this section the token address is the following - `0xb2779752b8abe50e2a06bddd774bf0a40353f867`.
 
 ## Get APE Store Address
 

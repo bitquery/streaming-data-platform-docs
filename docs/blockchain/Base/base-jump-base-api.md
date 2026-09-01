@@ -6,7 +6,7 @@ description: "Base Jump Base API: query and stream Base on-chain data with Bitqu
 # Base Jump API
 
 In this section we will see how we can use the [Transaction](/docs/cubes/transaction-cube/) 
-and [Calls](/docs/graphql-reference/enums/evm-call-compare-fields/) API from Bitquery to get info about trades on Base Jump using one of the token address traded on the platform. For this section the token address is the following - `0xEfC79f30b56f36bc49Bf47e8Dccf969fFF214EeD`.
+and [Calls](/docs/schema/evm/calls/) API from Bitquery to get info about trades on Base Jump using one of the token address traded on the platform. For this section the token address is the following - `0xEfC79f30b56f36bc49Bf47e8Dccf969fFF214EeD`.
 
 ## Get Base Jump Address
 
