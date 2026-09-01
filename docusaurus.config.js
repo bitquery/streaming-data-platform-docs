@@ -1421,6 +1421,14 @@ const config = {
               { label: "Streams overview", to: "/docs/streams/" },
               { label: "MCP server", to: "/docs/mcp/mcp-server/" },
               { label: "MCP in Cursor", to: "/docs/mcp/cursor/" },
+              {
+                label: "llms.txt (AI agent index)",
+                href: "https://docs.bitquery.io/llms.txt",
+              },
+              {
+                label: "llms-full.txt (full docs corpus)",
+                href: "https://docs.bitquery.io/llms-full.txt",
+              },
               { label: "Cloud datasets (Parquet)", to: "/docs/cloud/" },
               {
                 label: "Solana gRPC (CoreCast)",
