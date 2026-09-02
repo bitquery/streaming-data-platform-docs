@@ -77,7 +77,7 @@ Contact [sales@bitquery.io](mailto:sales@bitquery.io) for custom historical expo
 - [Hyperliquid perpetuals](https://docs.bitquery.io/docs/perpetuals/hyperliquid/)
 - [Phoenix perpetuals on Solana](https://docs.bitquery.io/docs/perpetuals/solana/phoenix-perpetuals-api/)
 
-## Solana launchpads and memecoins
+## Launchpads and memecoins
 
 The most asked-about area. The IDE's Solana section carries ~15 Pump.fun
 queries and ~15 Pump.fun streams, plus Raydium, Meteora and LetsBonk.fun — new
@@ -90,6 +90,8 @@ top traders, creator fees, and first-buyer/sniper detection.
 - [Raydium DEX API](https://docs.bitquery.io/docs/blockchain/Solana/Solana-Raydium-DEX-API/)
 - [Meteora dynamic bonding curve](https://docs.bitquery.io/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/)
 - [Four Meme on BSC](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
+- [Robinhood Chain API](https://docs.bitquery.io/docs/blockchain/robinhood/) — trades, launchpads and real-time streams on Robinhood Chain
+- [Pons Launchpad API](https://docs.bitquery.io/docs/blockchain/robinhood/pons-api/) — Pons V2 launches, bonding-curve trades, graduations, launch factory and locked liquidity
 - [Sniper trading with Kafka](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 
 ## MCP for AI agents
