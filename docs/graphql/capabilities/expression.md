@@ -90,3 +90,16 @@ subscription {
   }
 }
 ```
+
+:::caution In subscriptions every field reference needs a `$` prefix
+Inside a **subscription**, each field reference in an expression must carry the `$` sigil.
+A single unsigiled token makes the whole expression return `null` — silently, with no error —
+so a mixed expression such as `"$Price_Ohlc_Close - Price_Ohlc_Open"` fails just as completely
+as a fully bare one.
+
+Subscriptions also support **arithmetic operators only**. Function calls — `round()`, `floor()`,
+`abs()`, `plus()`, `greatest()` — evaluate to `null` in a stream while working normally in a
+query. Aliased results can still be referenced and chained (`$diff`).
+
+Queries are unaffected: bare field names and function calls both work there.
+:::

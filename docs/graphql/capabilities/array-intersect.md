@@ -25,7 +25,18 @@ where
 Constraints:
 
 - Applicable only to fields with a string data type.
-- The function can retrieve only addresses when returning the response; other response fields are not supported in the output.
+- Any string-typed field works, not only addresses — DEX market names and protocol families
+  intersect just as well, and `intersectWith` likewise accepts non-address strings.
+- Other response fields **are** supported in the output. Metrics (`count`, `uniq`, `sum`,
+  `median`) and dimensions (for example `Pair { Market { Name } }` or `Block { Date }`) can be
+  selected alongside the intersection and come back populated — which is what makes per-group
+  intersections useful.
+
+:::caution `where` must admit every member of `intersectWith`
+The intersection is computed over rows the `where` clause already admits. If the filter excludes
+any member of `intersectWith`, that member contributes nothing and the result silently shrinks
+rather than erroring. Make sure the `where` clause spans every element you are intersecting on.
+:::
 
 ### Example
 

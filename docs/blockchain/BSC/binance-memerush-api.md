@@ -953,7 +953,7 @@ subscription {
         Quote
         Usd
       }
-      marketcap: calculate(expression: "Price_Average_Mean * 1000000000")
+      marketcap: calculate(expression: "$Price_Average_Mean * 1000000000")
       Price {
         Average {
           Mean
@@ -1123,7 +1123,7 @@ subscription {
         Quote
         Usd
       }
-      marketcap: calculate(expression: "Price_Average_Mean * 1000000000")
+      marketcap: calculate(expression: "$Price_Average_Mean * 1000000000")
       Price {
         Average {
           Mean

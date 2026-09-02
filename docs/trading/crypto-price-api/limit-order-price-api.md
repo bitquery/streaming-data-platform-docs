@@ -189,11 +189,15 @@ subscription {
 **Production Examples**: 
 - [Real-time 1-second price stream ➤](https://ide.bitquery.io/1-second-crypto-price-stream)
 - [Multi-timeframe aggregation ➤](https://ide.bitquery.io/crypto-price-multiple-intervals)
-- [Volume-based thresholds ➤](https://ide.bitquery.io/volume-threshold-pricing)
 
 ### **2. Volume-Based Aggregation**
 
-**Available Thresholds**: `$1,000, $10,000, $100,000, $1,000,000`
+:::caution Not currently available
+Volume-based intervals are **not currently available**. Filtering on
+`Interval: { TargetVolume: ... }` or `Interval: { VolumeBased: true }` returns **zero rows**,
+with HTTP 200 and no error — the query looks like it simply found nothing.
+
+To approximate the same intent, use a time interval and filter on volume in the `where` clause:
 
 ```graphql
 subscription {
@@ -201,27 +205,19 @@ subscription {
     Tokens(
       where: {
         Token: {Symbol: {is: "USDC"}}
-        Interval: {TargetVolume: {eq: 100000}}
+        Interval: {Time: {Duration: {eq: 300}}}
+        Volume: {Usd: {gt: 100000}}
       }
     ) {
-      Price {
-        Ohlc {
-          Close
-        }
-      }
-      Volume {
-        Usd
-      }
-      Supply {
-        TotalSupply
-        FullyDilutedValuationUsd
-        MarketCap
-      }
+      Price { Ohlc { Close } }
+      Volume { Usd }
+      Supply { TotalSupply FullyDilutedValuationUsd MarketCap }
     }
   }
 }
 ```
-[Try volume-based aggregation ➤](https://ide.bitquery.io/volume-based-price-aggregation)
+:::
+
 
 **Example Results**:
 - **$100k volume threshold**: Price updates only when $100k+ traded
