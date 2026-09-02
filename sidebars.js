@@ -998,6 +998,7 @@ const sidebars = {
             "trading/query-operators/argmax-selectors",
             "trading/query-operators/filters-and-operators",
             "trading/query-operators/statistics",
+            "trading/query-operators/sweeps-and-pagination",
             "trading/query-operators/array-intersect-wallet-overlap",
           ],
         },

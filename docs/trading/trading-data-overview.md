@@ -65,7 +65,10 @@ Chain-level trades are parsed **directly from each blockchain**. Every DEX swap 
 - **Data older than ~30 days** — the Trading cube doesn't go back further; only chain-level archives do.
 - Deep historical OHLC, backfills, or archive ranges of any size.
 - Per-trade detail that includes the originating call, instruction, or event log.
-- Custom OHLC intervals not supported by the pre-aggregated cubes.
+- Custom OHLC intervals **below** the pre-aggregated grid, or bar sizes the Trading cube's
+  ten fixed durations cannot express. Note that 4-hour, daily and weekly candles *can* be
+  built on the Trading cube by rolling native candles up — see
+  [custom candles](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#custom-4-hour-daily-and-weekly-candles).
 - On-chain analytics scoped to a single chain or a specific DEX protocol.
 
 Learn more: [DEX Trades API (EVM)](/docs/schema/evm/dextrades) · [DEXTradeByTokens Cube](/docs/cubes/dextradesbyTokens) · [Crypto Price API vs DEXTradeByTokens](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#crypto-price-api-vs-dextradebytoken).
@@ -176,6 +179,26 @@ A common pattern is to use the **Trading cube** for the live + 30-day-window tab
 - **Chain-level trade docs:** [DEX Trades (EVM)](/docs/schema/evm/dextrades) · [DEXTradeByTokens cube](/docs/cubes/dextradesbyTokens) · [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)
 - **Price Index internals:** [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm) · [Supply fields reference](/docs/trading/crypto-price-api/supply-fields)
 - **API delivery comparison:** [GraphQL Query vs Subscription vs Kafka](/docs/api-comparison)
+
+## What the Trading cube cannot do
+
+Knowing the absences saves more time than knowing the features. None of the following exist on
+any of the four Trading cubes:
+
+| Not available | What to use instead |
+| --- | --- |
+| **Liquidity, reserves, TVL or pool depth** — no such field, and nothing in the filter surface | Chain-level `DEXPools` (realtime window only; for historical depth, a [cloud export](/docs/cloud/)) |
+| **A trader grain outside `Trades`** — `Trader_Address` exists only on `Trading.Trades` | Aggregate `Trading.Trades`; per-entity concentration metrics need one row per entity |
+| **Joins to chain-level cubes** — there are no `join*` fields on any Trading cube | Query both and join client-side on transaction hash |
+| **A success / failure filter** — no `Result` or `Status` branch | Chain-level `DEXTrades` with `Transaction.Result.Success` |
+| **Fees or trade-count columns** | Derive trade counts with `count`; fees come from chain-level cubes |
+| **Volume-based intervals** | [Time intervals plus a volume floor in `where`](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#volume-based-aggregation) |
+| **Candles above 3600s natively** | [Roll native candles up](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#custom-4-hour-daily-and-weekly-candles) |
+| **`selectWhere`, `if` and most statistics on streams** | [What does not survive streaming](/docs/subscriptions/what-does-not-survive-streaming/) |
+
+For what the cube *can* do beyond price and volume — server-side screening, argmax selectors,
+concentration statistics and wallet overlap — see
+[Query Operators](/docs/trading/query-operators/selectwhere-screeners/).
 
 <FAQ
   items={[
