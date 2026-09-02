@@ -65,6 +65,11 @@ query {
 | [Liquidations, Funding, Positions & Leverage](/docs/perpetuals/hyperliquid/hyperliquid-perpetuals-api) | `PerpLiquidations`, `PerpFundings`, `CurrentPositions`, `TraderLeverageUpdates` |
 | [Signed Actions](/docs/perpetuals/hyperliquid/hyperliquid-signed-actions-api) | `SignedActions` |
 
+| Guide | What it covers |
+| --- | --- |
+| [Track Order Flow by Wallet](/docs/perpetuals/hyperliquid/hyperliquid-order-flow-by-wallet) | Market-maker tracking, cancel-to-fill ratios, wallet-level order lifecycles using L3 data |
+| [Bitquery vs Hyperliquid's free data](/docs/perpetuals/hyperliquid/vs-hyperliquid-api) | What the native Info API and `s3://hyperliquid-archive` do and don't cover |
+
 ## Why Bitquery instead of the native Hyperliquid WebSocket API?
 
 The [native Hyperliquid API](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket/subscriptions) is built for trading your own account. Bitquery is built for seeing the whole market:

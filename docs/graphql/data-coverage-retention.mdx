@@ -114,6 +114,24 @@ The pattern is that aggregate-shaped cubes retain much longer than raw per-event
 | Trades | Since the chain was onboarded | Full history from onboarding forward. |
 | Transfers | Complete history | Full transfer history available. |
 
+### Hyperliquid
+
+Hyperliquid core is an L1 order-book exchange, so its cubes carry exchange events rather than EVM blocks. All `Hyperliquid` cubes share one window.
+
+| Cube | realtime / API | Archive | Kafka | Notes |
+|---|---|---|---|---|
+| `Trades`, `Candles` | ✅ **~30 days** | Full history via [Data Lake](/docs/data-lake/) | ✅ | Fills and OHLCV candles per market/interval. |
+| `Orders`, `BookUpdates`, `Twaps` | ✅ **~30 days** | Full history via Data Lake | ✅ | Order lifecycle and book deltas. |
+| `PerpLiquidations`, `PerpFundings`, `CurrentPositions`, `TraderLeverageUpdates` | ✅ **~30 days** | Full history via Data Lake | ✅ | Per-trader funding, positions and leverage. |
+| `MarkPrices`, `PriceUpdates` | ✅ **~30 days** | Full history via Data Lake | ✅ | Mark price and oracle/reference updates. |
+| `SignedActions` | ✅ **~30 days** | Full history via Data Lake | ✅ | Raw signed L1 actions. |
+
+:::note Hyperliquid history lives in the Data Lake, not the API
+The API window is a rolling **~30 days** — enough for bots, dashboards and monitoring. Backtests and multi-year research are served by the [Blockchain Data Lake](/docs/data-lake/), which holds the complete Hyperliquid archive over S3 using the **same protobuf schema** as the Kafka streams. One decoder covers both, so replay code and production code are the same code.
+
+Note this is deeper than Hyperliquid's own public archive: `s3://hyperliquid-archive` holds L2 book snapshots and asset contexts only — no trades, candles or spot — refreshed roughly monthly with no completeness guarantee. Contact [sales@bitquery.io](mailto:sales@bitquery.io) for archive access.
+:::
+
 ## Kafka is not a historical firehose
 
 Kafka (and Solana gRPC) deliver **realtime data plus a small backfill window (hours, not history)**. If you connect a fresh consumer, you get recent messages forward — not the chain from genesis. For anything older than the backfill window, use GraphQL (within the API's retention) or a cloud/S3 export. See the [Kafka Operations Cookbook](/docs/streams/kafka-operations/).
@@ -122,6 +140,7 @@ Kafka (and Solana gRPC) deliver **realtime data plus a small backfill window (ho
 
 When you need a full backfill beyond the API windows above:
 
+- **Blockchain Data Lake** — the complete archive from genesis to tip, streamed over S3 as Protobuf, using the same schema as the Kafka streams. This is the route for Hyperliquid history and for full-chain backfills. See [Data Lake](/docs/data-lake/).
 - **Cloud / S3 datasets** — Parquet exports of raw + decoded data into your own store. See [Cloud datasets](/docs/cloud/).
 - **Enterprise plans** — the self-serve plans (Personal/Pro/Scale) share a rolling window (about 30-day trades and 4–8h on-chain data); complete history requires an Enterprise plan or a historical export. See [Plans, Points & Limits](/docs/plans/how-billing-works/).
 
@@ -132,6 +151,7 @@ Contact [sales@bitquery.io](mailto:sales@bitquery.io) for custom export ranges.
     { q: "How far back does Solana DEX trade data go?", a: "It depends which cube you ask. Solana.DEXTrades keeps roughly the last 12 hours on realtime, while Solana.DEXTradeByTokens keeps roughly 7 days and reaches back to mid-2024 on archive — the same trades, very different depth. The cross-chain Trading.Trades cube keeps about 30 days. OHLC/price aggregates go back further still. For older raw trades, use a cloud/S3 export." },
     { q: "Why does my query return empty results for old dates?", a: "Usually the date range is outside the retention window for that cube/dataset, or the cube isn't deployed on that chain's archive. Realtime does not error when you ask beyond its window — it silently returns fewer rows, so a chart just starts late. Check the coverage matrix above and switch to archive for history. On Solana use archive rather than combined, which currently fails." },
     { q: "What is the difference between realtime, archive and combined datasets?", a: "realtime is the most recent data — roughly 12 hours on Solana raw cubes, about a day on EVM Events/Calls and a few days on EVM Transfers and DEX cubes, and about 2 days on Tron. archive is deep history. combined merges both, but it is not available everywhere: it currently returns a 500 on all Solana cubes and on EVM Events and Calls. Availability differs per chain and per cube." },
+    { q: "How far back does Hyperliquid data go?", a: "The Hyperliquid cubes on the API serve a rolling window of about 30 days, which covers live streaming and recent history. For anything deeper — backtests or multi-year research — use the Blockchain Data Lake, which holds the complete Hyperliquid archive over S3 with the same protobuf schema as the Kafka streams. Hyperliquid's own public s3://hyperliquid-archive bucket is not an equivalent: it carries L2 book snapshots and asset contexts only, with no trades, candles or spot data." },
     { q: "Does Kafka include historical data?", a: "No. Kafka streams realtime data plus a few hours of backfill. For history, use GraphQL (within retention) or a cloud/S3 export." },
     { q: "How do I get data older than the API retention window?", a: "Use a cloud/S3 Parquet export, or an enterprise historical export. See the Cloud datasets page and contact sales for custom ranges." },
   ]}
