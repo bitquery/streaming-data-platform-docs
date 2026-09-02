@@ -1,30 +1,50 @@
 ---
-title: "Hyperliquid Orders, Order Book & TWAP API"
-description: "Track Hyperliquid order lifecycle, real-time order book deltas and TWAP orders with Bitquery GraphQL and WebSocket: statuses, time-in-force, trigger orders, book levels and TWAP execution progress."
+title: "Hyperliquid L3 Order Book API — Market-by-Order Data with Trader Attribution"
+description: "Stream Hyperliquid's order book at L3 (market-by-order) granularity: every order delta carries its own order id and the wallet address behind it. Covers order lifecycle, book deltas and TWAPs over GraphQL and WebSocket."
 sidebar_position: 3
 keywords:
-  - Hyperliquid orders API
+  - Hyperliquid L3 order book
+  - Hyperliquid market by order data
   - Hyperliquid order book API
+  - Hyperliquid order flow by wallet
+  - Hyperliquid MBO data
   - Hyperliquid book updates
+  - Hyperliquid orders API
   - Hyperliquid order status
   - Hyperliquid limit orders
   - Hyperliquid trigger orders
   - Hyperliquid TWAP API
   - Hyperliquid order stream
-  - Hyperliquid L2 book
   - Bitquery Hyperliquid orders
 ---
 
-# Hyperliquid Orders, Order Book & TWAP API
+# Hyperliquid L3 Order Book API
 
 This page covers the `Orders`, `BookUpdates` and `Twaps` cubes: the full order lifecycle, order-book deltas you can rebuild the book from, and TWAP order execution.
+
+## L2 vs L3: what you get here
+
+Most order-book feeds — including Hyperliquid's own public `l2Book` websocket channel and the L2 snapshots in its `s3://hyperliquid-archive` bucket — are **L2**: resting size aggregated per price level. You see that 40 BTC sits at $95,000. You cannot see whether that is one order or twenty, whose it is, or which one was pulled a moment later.
+
+`BookUpdates` is **L3 (market-by-order)**. Every delta is a single order, and it carries:
+
+| | L2 (aggregated) | L3 (market-by-order) — Bitquery |
+| --- | --- | --- |
+| Grain | Total size per price level | One event per individual order |
+| Order identity | — | `Oid`, joinable to `Orders` and `Trades` |
+| Who placed it | — | `Trader { Address }` — the wallet itself |
+| Size change | Net level change only | `Size` and `SizeBefore` on that specific order |
+| Depth | Hyperliquid's `l2Book` returns 5–20 levels | Unlimited |
+
+Because Hyperliquid settles on a transparent L1, the wallet behind each order is public. That makes this L3 **with named attribution** — something that does not exist on centralised venues, where L3 feeds are anonymised by the exchange. Hyperliquid's own API only exposes order-level detail for *your own* account (`orderUpdates`, `userFills`); market-wide, it serves aggregated L2.
+
+This is what makes wallet-level analysis possible: watching a market maker quote and pull, reconstructing a trader's full order flow rather than just their fills, or spotting orders that were never intended to trade. See [Track Hyperliquid Order Flow by Wallet](/docs/perpetuals/hyperliquid/hyperliquid-order-flow-by-wallet) for worked examples.
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
 
 Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
 :::
-
 ## Order updates
 
 Every order event carries `Status` (`open`, `filled`, `canceled`, `rejected`, ...), `OrderType` (`Limit`, trigger types like Stop Market / Take Profit), time-in-force `Tif` (`Gtc`, `Ioc`, `Alo`), the limit price, the current and original size, and trigger settings for conditional orders.
@@ -94,7 +114,7 @@ subscription {
 }
 ```
 
-Unlike typical L2 feeds, each delta is attributable to an **individual order and trader address** — you can watch a specific market maker's quoting in real time by filtering on `BookUpdate: {Trader: {Address: {is: "0x..."}}}`.
+This is the L3 grain described above: unlike an aggregated L2 feed, each delta is attributable to an **individual order and trader address** — you can watch a specific market maker's quoting in real time by filtering on `BookUpdate: {Trader: {Address: {is: "0x..."}}}`.
 
 ## TWAP orders
 

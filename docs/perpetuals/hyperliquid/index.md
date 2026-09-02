@@ -22,7 +22,13 @@ keywords:
 
 # Hyperliquid API
 
-Bitquery indexes **Hyperliquid core** (the L1 order-book exchange) and exposes it through the `Hyperliquid` cube on the [streaming API](https://streaming.bitquery.io/graphql). Every dataset is available both as a **GraphQL query** (historical + latest) and as a **WebSocket subscription** (real-time stream) — change `query` to `subscription` and drop `limit`/`orderBy`.
+Bitquery indexes **Hyperliquid core** (the L1 order-book exchange) and exposes it through the `Hyperliquid` cube on the [streaming API](https://streaming.bitquery.io/graphql). Every dataset is available both as a **GraphQL query** and as a **WebSocket subscription** (real-time stream) — change `query` to `subscription` and drop `limit`/`orderBy`.
+
+:::info How far back the API goes
+The `Hyperliquid` cubes serve a **rolling ~30-day window**. That covers live streaming and recent history, which is what most bots, dashboards and monitoring need.
+
+For deeper history — backtests, multi-year research, full archive exports — use the [Blockchain Data Lake](/docs/data-lake/), which serves the complete archive over S3 using the same protobuf schema as the Kafka streams. Contact [sales@bitquery.io](mailto:sales@bitquery.io) for archive access and custom export ranges.
+:::
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
@@ -66,10 +72,10 @@ The [native Hyperliquid API](https://hyperliquid.gitbook.io/hyperliquid-docs/for
 | Capability | Hyperliquid native WS | Bitquery |
 | --- | --- | --- |
 | Scope of user data (orders, fills, funding, TWAPs, positions) | Any single address you already know, one subscription each — no market-wide stream, no trader discovery | Every trader on the exchange in one stream, or filter to any list of addresses |
-| Order book | `l2Book`, aggregated, 5–20 levels max | L4 per-order deltas, unlimited depth, order id + trader address per level |
+| Order book | `l2Book`, aggregated (L2), 5–20 levels max | **L3 (market-by-order)** deltas, unlimited depth, order id + trader address on every order |
 | Liquidations | Per-address only, via `userEvents` — no exchange-wide feed | All liquidations exchange-wide, with liquidated user, method, mark price, leverage |
 | Open positions | Per-address snapshot (`clearinghouseState`) — cannot enumerate or rank the market | Whole market queryable (`CurrentPositions`): every open position, sortable and filterable |
-| Historical data | Live + snapshot only; separate REST with pagination limits | Same GraphQL query for history and live stream |
+| Historical data | Live + snapshot only; separate REST with pagination limits. The public `s3://hyperliquid-archive` bucket holds **L2 book snapshots and asset contexts only** — no trades, candles or spot — updated roughly monthly with no completeness guarantee | Same GraphQL query for history and live stream over a rolling ~30-day window; full archive via the [Data Lake](/docs/data-lake/) |
 | Filtering | Per-coin or per-user only | Any field: market, trader, side, size, leverage, status |
 | Fill context | Rich (PnL, direction) only on per-user feeds; the public `trades` feed is bare price/size/side | Direction, fees, leverage, size-before, realized PnL on every fill, market-wide |
 | Raw L1 actions | Not exposed | `SignedActions`: action type, signer vs user (agent wallets), bundle, broadcaster |
