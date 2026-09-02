@@ -167,14 +167,105 @@ Our [Crypto Price API](/docs/trading/crypto-price-api/introduction/) OHLC API su
 | 30 minutes | 1800s |
 | 1 hour | 3600s |
 
+These **ten values are the complete set**. Any other value — 120, 7200, 86400 — is not an error:
+the query returns `[]` with HTTP 200 and **no `errors` key**, so a typo reads as "this token has
+no data" rather than "unsupported interval".
+
+:::danger The Duration filter is effectively mandatory
+The cube stores **all ten durations simultaneously**. A query without
+`Interval: { Time: { Duration: { eq: ... } } }` returns one row per duration for the same
+timestamp, so any aggregate over it is inflated roughly **ten-fold**:
+
+```graphql
+where: {
+  Interval: { Time: { Duration: { eq: 3600 } } }   # never omit this
+  ...
+}
+```
+
+Without it, a `sum(of: Volume_Usd)` over a window returns close to ten times the real figure.
+Row counts behave the same way — the unfiltered count equals the sum of the ten per-duration
+counts exactly.
+:::
+
+### Bucket arithmetic
+
+- `Interval.Time.End` == `Start + Duration - 1 second`. At Duration 1, `End == Start`.
+- Buckets are Unix-epoch aligned: `Start_epoch % Duration == 0` for every row.
+- Candles are **sparse**. A bucket with no trades is simply absent — there is no gap filling and
+  no zero-volume filler. Do not assume a contiguous series; reindex client-side if you need one.
+
+### Multiple timeframes in one request
+
+`Duration` accepts the full `OLAP_Integer` comparator set — `eq`, `ne`, `in`, `notIn`, `gt`,
+`ge`, `lt`, `le` — so you can pull several timeframes at once and split them client-side on
+`Interval.Time.Duration`:
+
+```graphql
+Interval: { Time: { Duration: { in: [60, 300, 3600] } } }
+```
+
+Combining two comparators applies AND.
+
+:::note The 1-second series under-reports totals
+Aggregate volume at Duration 1 comes in **below** every coarser bucket — by up to a few percent,
+varying by token and window. Coarser buckets agree with each other closely. Use 60s or larger
+when totals must reconcile.
+:::
+
+## Custom 4-hour, daily and weekly candles
+
+Durations above 3600s do not exist natively, but you can **roll native candles up to any
+multiple** with the `interval:` argument plus argmin/argmax selectors. The aggregation is exact:
+
+```graphql
+{
+  Trading {
+    Tokens(
+      where: {
+        Token: { Address: { is: "So11111111111111111111111111111111111111112" }, Network: { is: "Solana" } }
+        Interval: { Time: { Duration: { eq: 3600 } } }
+        Block: { Time: { since: "...", till: "..." } }
+      }
+      limit: { count: 1000 }
+    ) {
+      Block { Time(interval: { in: hours, count: 4 }) }
+      Price {
+        Ohlc {
+          Open(minimum: Interval_Time_Start)
+          High(maximum: Price_Ohlc_High)
+          Low(minimum: Price_Ohlc_Low)
+          Close(maximum: Interval_Time_Start)
+        }
+      }
+      volume: sum(of: Volume_Usd)
+      n: count
+    }
+  }
+}
+```
+
+`interval:` accepts `seconds`, `minutes`, `hours`, `days`, `weeks`, `months` and `years` with a
+`count` and an optional `offset`, so 4-hour, 12-hour, daily and weekly candles all come from the
+same pattern.
+
+:::warning Do not add `orderBy` to a roll-up query
+Any `orderBy` un-groups the aggregation and you silently get the raw source rows back instead of
+your buckets — a 21-row daily series becomes 504 hourly rows. Sort client-side.
+:::
+
 ## Volume-Based Aggregation
 
-For volume-driven analysis, we also support volume-based intervals:
+:::caution Not currently available
+Volume-based intervals are **not currently available**. `Interval.VolumeBased` is `false` and
+`Interval.TargetVolume` is `0` on every row, and filtering on either
+(`Interval: { VolumeBased: true }` or any `Interval: { TargetVolume: ... }` value) returns
+**zero rows** with HTTP 200 and no error — so a query written against them looks like a token
+with no data rather than an unsupported feature.
 
-- **$1,000 USD**
-- **$10,000 USD**  
-- **$100,000 USD**
-- **$1,000,000 USD**
+Use time-based intervals via `Interval: { Time: { Duration: { eq: <seconds> } }}` instead, and
+apply a volume threshold in the `where` clause with `Volume: { Usd: { gt: ... } }`.
+:::
 
 ## Choosing the Right Cube for OHLC Data
 

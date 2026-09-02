@@ -193,9 +193,86 @@ the date as a variable and move it as needed.
 
 **`BalanceUpdates` is being retired.** Do not write new queries against it.
 
+**Always filter `Interval.Time.Duration` on `Tokens` / `Pairs` / `Currencies`.** The cube stores
+ten bar durations simultaneously (1, 3, 5, 10, 30, 60, 300, 900, 1800, 3600 seconds). Omitting
+the filter returns one row per duration and inflates any aggregate roughly **ten-fold**. An
+unsupported value returns `[]` with HTTP 200 and no error, so a typo looks like "no data".
+
+**On `Trading.Trades`, use `AmountsInUsd.Quote` for USD, not `.Base`.** `.Base` is
+`Amounts.Base x PriceInUsd`, and `PriceInUsd` is a smoothed reference price rather than the
+executed one, so it diverges on fast-moving tokens.
+
+**`Trading.Trades` emits some exact duplicate legs.** Deduplicate on
+`(TransactionHeader.Hash, Trader.Address, Side, Amounts.Base)` before reporting exact trade
+counts or volumes. A row is a swap **leg**, not a transaction — count distinct tx hashes.
+
+**Network filters take the API's display names, case-sensitively.** Polygon is `"Matic"` and BSC
+is `"Binance Smart Chain"`. A wrong value returns zero rows and no error.
+
+**`maximum:` / `minimum:` are argmax, not max.** `Field(maximum: Key)` returns `Field`'s value on
+the row where `Key` is largest. Selectors sharing one key come from the same row; mixing keys
+silently composes a row that never existed.
+
+**The Trading cube has no liquidity, reserves or TVL.** No field, nothing in the filter surface.
+Pool depth comes from chain-level `DEXPools` (about 12 hours of history) or a cloud export.
+
 ---
 
-## 7. Worked examples
+## 7. Answering questions about a whole population
+
+The most common mistake when planning a large analysis is assuming you need one query per token
+or per wallet. You do not. `limitBy` returns **one row per entity across the entire filtered
+population** — not a top-N sample:
+
+```graphql
+{
+  Trading {
+    Tokens(
+      where: {
+        Token: { Network: { is: "Solana" } }
+        Interval: { Time: { Duration: { eq: 3600 } } }
+        Block: { Time: { since: "...", till: "..." } }
+      }
+      limit: { count: 25000, offset: 0 }
+      limitBy: { by: Token_Id, count: 1 }
+    ) {
+      Token { Id Symbol }
+      first: Price { Ohlc { Open(minimum: Block_Time) } }
+      peak:  Price { Ohlc { High(maximum: Price_Ohlc_High) } }
+      Volume { Usd }
+      Supply { MarketCap }
+    }
+  }
+}
+```
+
+One request covers every token on the chain for that hour. Page with `limit: {count: 25000,
+offset: N}` and **always supply `orderBy`** — offset paging without a sort order silently
+duplicates and drops rows.
+
+**Filter on computed aggregates server-side** with `selectWhere`, the cube's `HAVING`:
+
+```graphql
+vol: sum(of: Volume_Usd, selectWhere: { gt: "1000000" })
+```
+
+The pipeline is `where → GROUP BY → selectWhere → orderBy → limitBy → limit`. Attach
+`selectWhere` to a metric — on a bare leaf field it is a **silent no-op**.
+
+**What cannot be expressed server-side:** a window defined *relative to each row's own* event —
+"the 4th to 24th hour after each token's own first trade", for example. GraphQL filters absolute
+time ranges only. Pull per-interval rows for the whole population, then compute relative windows
+in your own store. That is a handful of requests, not one per token.
+
+Also unavailable server-side: HAVING on a ratio, `in`/`notIn` on aggregates, and anything on a
+subscription — streams drop `selectWhere`, `if` and most statistics.
+
+See [Query Operators](/docs/trading/query-operators/selectwhere-screeners/) for the full surface,
+including concentration statistics and wallet-overlap.
+
+---
+
+## 8. Worked examples
 
 Every query below was executed against the live API before being written down.
 
@@ -377,7 +454,7 @@ query ($address: String!, $asof: ISO8601DateTime) {
 
 ---
 
-## 8. Errors and what they actually mean
+## 9. Errors and what they actually mean
 
 | Message | Meaning |
 | --- | --- |
@@ -391,7 +468,7 @@ query ($address: String!, $asof: ISO8601DateTime) {
 
 ---
 
-## 9. Choosing quickly
+## 10. Choosing quickly
 
 1. Is the chain on V2? If not, use V1 and expect no subscriptions.
 2. Is the question about price? Use `Trading.Pairs` with rank 1.

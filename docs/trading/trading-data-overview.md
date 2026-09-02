@@ -38,7 +38,7 @@ Bitquery exposes DEX trading data through **two complementary product families**
 | **OHLC** | Built **on the fly** from raw trades inside your query (any interval) | **Pre-aggregated** down to **1 second** (fixed intervals) |
 | **Quality filtering** | Raw — every on-chain swap, including MEV / outliers | **MEV and low-quality trades filtered** out for cleaner feeds |
 | **Calls / events / instructions** | Yes — full transaction context available | No — trade-only schema |
-| **Chains** | Each chain has its own root (EVM, Solana, Tron, etc.) | **9 chains under one API**: Ethereum, BSC, Solana, Base, Arbitrum, Tron, Optimism, Polygon, Robinhood |
+| **Chains** | Each chain has its own root (EVM, Solana, Tron, etc.) | **9 chains under one API**: Ethereum, BSC, Solana, Base, Arbitrum, Tron, Optimism, Polygon (`Matic`), Robinhood |
 | **Best for** | **Historical analytics** (anything older than ~30 days), archive backfills, on-chain research, anything that needs call / event context | **Real-time + last ~30 days** — trading UIs, charting apps, price tickers, bots, screeners, alerts — anything that wants "ready-to-use" trade + price + supply data |
 
 > **TL;DR** — **Last 30 days + real-time → Trading cube. Older than 30 days → DEXTrades / DEXTradeByTokens.** Same trades underneath: the Trading cube reads from DEXTrades, attaches Price-Index USD + supply, drops MEV / bad trades, and ships a clean multi-chain stream — but only for the rolling 30-day window. For anything deeper into history, drop down to the chain-level archive.
@@ -65,7 +65,10 @@ Chain-level trades are parsed **directly from each blockchain**. Every DEX swap 
 - **Data older than ~30 days** — the Trading cube doesn't go back further; only chain-level archives do.
 - Deep historical OHLC, backfills, or archive ranges of any size.
 - Per-trade detail that includes the originating call, instruction, or event log.
-- Custom OHLC intervals not supported by the pre-aggregated cubes.
+- Custom OHLC intervals **below** the pre-aggregated grid, or bar sizes the Trading cube's
+  ten fixed durations cannot express. Note that 4-hour, daily and weekly candles *can* be
+  built on the Trading cube by rolling native candles up — see
+  [custom candles](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#custom-4-hour-daily-and-weekly-candles).
 - On-chain analytics scoped to a single chain or a specific DEX protocol.
 
 Learn more: [DEX Trades API (EVM)](/docs/schema/evm/dextrades) · [DEXTradeByTokens Cube](/docs/cubes/dextradesbyTokens) · [Crypto Price API vs DEXTradeByTokens](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#crypto-price-api-vs-dextradebytoken).
@@ -78,12 +81,17 @@ The Trading cube is the **product layer** built on top of chain-level trades. It
 
 It is exposed under a single `Trading` root and covers **9 chains in one API**: Ethereum, BSC, Solana, Base, Arbitrum, Tron, Optimism, Polygon, and Robinhood.
 
+:::note Network filters take the API's own names
+`Network` values are **case-sensitive display names**, and a wrong value returns 0 rows with no
+error. Polygon is `"Matic"` and BSC is `"Binance Smart Chain"` — `"Polygon"` matches nothing.
+:::
+
 ### What lives in the Trading cube?
 
 | Cube | What it gives you | Typical use |
 |---|---|---|
 | **`Trading.Trades`** | Individual swap-level rows with **USD price**, **USD amounts**, **market cap**, **FDV**, **supply**, and pair / trader / tx context | Live trade feeds, copy-trading bots, whale alerts, per-swap analytics |
-| **`Trading.Tokens`** | Pre-aggregated OHLC, volume, supply and moving averages for a **token on a specific chain**, blended across all of its pools | Chain-wide price streams, token screeners |
+| **`Trading.Tokens`** | Pre-aggregated OHLC, volume, supply and moving averages for a **token on a specific chain**, blended across all of its pools | Chain-wide price streams, [token screeners](/docs/trading/query-operators/selectwhere-screeners/) |
 | **`Trading.Currencies`** | Pre-aggregated OHLC for a **currency aggregated across chains** (e.g. BTC across WBTC, cbBTC, native BTC, etc.) | Chain-agnostic global price for an asset |
 | **`Trading.Pairs`** | Pre-aggregated OHLC and volume **per trading pair on a specific market/DEX** | Pair-specific charts (e.g. SOL/USDC on Raydium), and — with [rank 1](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) — the most accurate price for a single token |
 
@@ -98,7 +106,7 @@ It is exposed under a single `Trading` root and covers **9 chains in one API**: 
 
 ### Use the Trading cube when you need:
 
-- **Real-time data or anything within the last ~30 days** — this is the default for live trading UIs, bots, dashboards, and screeners.
+- **Real-time data or anything within the last ~30 days** — this is the default for live trading UIs, bots, dashboards, and screeners. For screeners specifically, see [chain-scale screeners with `selectWhere`](/docs/trading/query-operators/selectwhere-screeners/) — the whole filter runs server-side in one request.
 - A **multi-chain trade or price stream** without writing per-chain queries.
 - **USD pricing, market cap, and supply** ready on every row (no separate price lookups).
 - **Pre-aggregated OHLC** at 1-second or longer intervals (Tokens / Currencies / Pairs).
@@ -172,12 +180,32 @@ A common pattern is to use the **Trading cube** for the live + 30-day-window tab
 - **Price Index internals:** [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm) · [Supply fields reference](/docs/trading/crypto-price-api/supply-fields)
 - **API delivery comparison:** [GraphQL Query vs Subscription vs Kafka](/docs/api-comparison)
 
+## What the Trading cube cannot do
+
+Knowing the absences saves more time than knowing the features. None of the following exist on
+any of the four Trading cubes:
+
+| Not available | What to use instead |
+| --- | --- |
+| **Liquidity, reserves, TVL or pool depth** — no such field, and nothing in the filter surface | Chain-level `DEXPools` (realtime window only; for historical depth, a [cloud export](/docs/cloud/)) |
+| **A trader grain outside `Trades`** — `Trader_Address` exists only on `Trading.Trades` | Aggregate `Trading.Trades`; per-entity concentration metrics need one row per entity |
+| **Joins to chain-level cubes** — there are no `join*` fields on any Trading cube | Query both and join client-side on transaction hash |
+| **A success / failure filter** — no `Result` or `Status` branch | Chain-level `DEXTrades` with `Transaction.Result.Success` |
+| **Fees or trade-count columns** | Derive trade counts with `count`; fees come from chain-level cubes |
+| **Volume-based intervals** | [Time intervals plus a volume floor in `where`](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#volume-based-aggregation) |
+| **Candles above 3600s natively** | [Roll native candles up](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#custom-4-hour-daily-and-weekly-candles) |
+| **`selectWhere`, `if` and most statistics on streams** | [What does not survive streaming](/docs/subscriptions/what-does-not-survive-streaming/) |
+
+For what the cube *can* do beyond price and volume — server-side screening, argmax selectors,
+concentration statistics and wallet overlap — see
+[Query Operators](/docs/trading/query-operators/selectwhere-screeners/).
+
 <FAQ
   items={[
     { q: "When should I use Trading.Trades instead of DEXTrades?", a: "Use Trading.Trades for real-time or last ~30 days when you want clean USD prices, market cap, and MEV-filtered swaps across 9 chains in one query. Use DEXTrades when you need call/event context or raw per-chain detail." },
     { q: "How far back does the Trading cube go?", a: "Roughly the last 30 days. For older OHLC or trade history, use DEXTradeByTokens with dataset combined or archive." },
     { q: "Can I use both the Trading cube and chain-level APIs in one app?", a: "Yes — a common pattern is Trading.Trades for the live tab and DEXTradeByTokens for the historical tab of the same UI." },
     { q: "Does the Trading cube filter out bad trades?", a: "Yes. MEV, wash, and outlier trades are dropped before USD price and supply fields are joined on each row." },
-    { q: "Which chains does Trading.Trades cover?", a: "Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Tron, and Robinhood in one unified schema." },
+    { q: "Which chains does Trading.Trades cover?", a: "Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Tron, and Robinhood in one unified schema. Note the API filter values are case-sensitive display names — Polygon is 'Matic' and BSC is 'Binance Smart Chain'." },
   ]}
 />

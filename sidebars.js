@@ -236,6 +236,7 @@ const sidebars = {
             "subscriptions/websockets",
             "subscriptions/examples",
             "subscriptions/which-cubes-stream",
+            "subscriptions/what-does-not-survive-streaming",
             "subscriptions/silent-disconnect-reconnect",
             "subscriptions/example-rust",
             "subscriptions/mempool-subscriptions",
@@ -981,6 +982,25 @@ const sidebars = {
             "trading/crypto-price-api/crypto-marketcap-api",
             "trading/crypto-price-api/crypto-ohlc-candle-k-line-api",
             "trading/crypto-price-api/limit-order-price-api",
+          ],
+        },
+        {
+          type: "category",
+          label: "Query Operators",
+          link: {
+            type: "generated-index",
+            title: "Trading Query Operators",
+            description:
+              "The operator layer beneath the Trading cubes: filtering on computed metrics, wallet overlap, and other cross-cutting query capabilities.",
+          },
+          items: [
+            "trading/query-operators/selectwhere-screeners",
+            "trading/query-operators/argmax-selectors",
+            "trading/query-operators/filters-and-operators",
+            "trading/query-operators/statistics",
+            "trading/query-operators/sweeps-and-pagination",
+            "trading/query-operators/calculate-expressions",
+            "trading/query-operators/array-intersect-wallet-overlap",
           ],
         },
         {

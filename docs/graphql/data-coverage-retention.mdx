@@ -82,14 +82,14 @@ Windows are expressed as rolling ranges, not fixed dates, so they stay correct o
 | `Transfers` | ✅ **~12 hours** | via S3 | ✅ | Deep history via S3 export. |
 | `Instructions` | ✅ **~12 hours** | — | ✅ | Deep historical instruction lookup by signature is not available via API. |
 | `InstructionBalanceUpdates` | ✅ **~12 hours** | — | ✅ | |
-| `BalanceUpdates` | ✅ **~7 days** | — | ✅ | Solana has no `Balances` cube; balance changes are queried here. |
-| `DEXPools` | ✅ **~7 days** | — | ✅ | Pool events are realtime; not in archive. |
+| `BalanceUpdates` | ✅ **~12 hours** | — | ✅ | Solana has no `Balances` cube; balance changes are queried here. |
+| `DEXPools` | ✅ **~12 hours** | — | ✅ | Realtime only. The `archive` / `combined` datasets do not exist for this cube — a query against them errors with `no API tables for cube DEXPool`. For historical pool state use a [cloud export](/docs/cloud/). |
 | `Transactions` / `Blocks` / `Rewards` / `DEXOrders` / `TokenSupplyUpdates` | ✅ **~12 hours** | — | ✅ | |
 
 :::warning Two Solana cubes carry the same trades with very different depth
-`DEXTrades` retains roughly **12 hours**; `DEXTradeByTokens` retains roughly **7 days** — about 15× longer, from the same underlying trades. The same split applies to `InstructionBalanceUpdates` (~12 h) versus `BalanceUpdates` (~7 days).
+`DEXTrades` retains roughly **12 hours**; `DEXTradeByTokens` retains roughly **7 days** — about 15× longer, from the same underlying trades.
 
-The pattern is that aggregate-shaped cubes retain much longer than raw per-event cubes. If a Solana query "loses" older data, check whether an aggregate cube covers the same question before assuming the history is gone.
+That pair is the exception, not a general rule: **every other Solana realtime cube measured here holds roughly 12 hours**, including `BalanceUpdates`, `DEXPools`, `Transfers`, `Instructions` and `TokenSupplyUpdates`. If a Solana query "loses" older data, check whether `DEXTradeByTokens` or an archive dataset covers the same question before assuming the history is gone.
 :::
 
 ### Tron & Bitcoin

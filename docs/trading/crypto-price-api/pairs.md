@@ -25,7 +25,63 @@ Filtering `Pairs` to `Ranking.Position = 1` avoids that: you get the quote from 
 | The price of one specific token | **`Pairs` + `Ranking: { Position: { eq: 1 } }`** |
 | A firehose of every token on a chain, or one chain-wide number per token | [`Tokens`](/docs/trading/crypto-price-api/tokens) |
 | One number for an asset across all chains (BTC, ETH) | [`Currencies`](/docs/trading/crypto-price-api/currency) |
-| A specific pool you already know the address of | `Pairs` + `Market: { Address: ... }` |
+| A specific pool you already know the address of | `Pairs` + `Pool: { Address: ... }` — see the note below |
+
+:::caution `Market.Address` is not the pool on EVM
+`Pool.Address` is the portable pool key and is the right filter on every chain. `Market.Address`
+means different things per chain:
+
+| Chain family | `Market.Address` | `Market.Program` | `Pool.Address` |
+| --- | --- | --- | --- |
+| EVM and Tron | the protocol **factory**, and an empty string for singleton protocols (uniswap_v4, balancer_v2, curve, fluid_dex) | the pool contract | the pool |
+| Solana | the pool | the DEX program | the pool |
+
+Filtering an EVM pool by `Market: { Address: ... }` therefore matches the factory and silently
+returns a **different pool's** data.
+:::
+
+## What Pairs adds over Tokens
+
+`Pairs` is `Tokens` **plus venue and quote identity** — there are no Tokens-only field paths. If
+you do not need `Market`, `Pool` or `QuoteToken`, query `Tokens`: it is the cheaper shape for the
+same price and volume data.
+
+`Pairs` carries **no liquidity, reserve or TVL data** — there is no such field and nothing in its
+filter surface. For pool depth, use the chain-level `DEXPools` cube, or a
+[cloud export](/docs/cloud/) for historical depth.
+
+### Row fan-out
+
+One row per **(`Market.Address`, `Pool.Address`, `Pool.Id`, `QuoteToken.Id`)** per token per
+interval — not one row per market. A token quoted against two assets on the same market produces
+two rows.
+
+`Pool.Id` is empty on Solana, Tron and classic factory-per-pool AMMs. It is **populated on
+singleton-contract protocols** — Uniswap v4 and PancakeSwap Infinity — where it carries the pool
+identity that `Market.Address` cannot, because there `Market.Address` is empty and `Pool.Address`
+is the shared PoolManager.
+
+## Ranking: how `Position` and `Weight` behave
+
+`Ranking.Position` is a **competition rank** by `Ranking.Weight` descending — not a dense index:
+
+- Ties occur, and are followed by a skipped value.
+- Additional gaps appear that ties alone do not explain, so the **highest `Position` always
+  exceeds the row count**.
+- `Position` can be `0`, paired with `Weight` `0`.
+
+`Ranking.Weight` is in `[0, 1]` per row, and the per-token sum is centred on 1.0 but is **not
+guaranteed to equal it** — sums well above and below 1 both occur. **Normalise before treating
+weights as shares**; do not assume the blend is an identity.
+
+:::caution `Position: { eq: 1 }` silently drops tokens
+Filtering to rank 1 returns only tokens whose top market **traded in that interval**. A token
+whose rank-1 market was quiet is omitted entirely — a few percent of tokens per interval,
+varying by chain. For coverage, widen the interval or fall back to `Tokens`.
+:::
+
+Chain-wide rank-1 sweeps are fast — a few seconds for a short interval, longer for hour-to-day
+windows returning tens of thousands of tokens.
 
 ### Latest price of a token from its top market
 
@@ -85,10 +141,19 @@ Filtering `Pairs` to `Ranking.Position = 1` avoids that: you get the quote from 
 
 `Price.Ohlc.Close` is the token's latest price on its top market.
 
-:::warning Keep `Price: { IsQuotedInUsd: true }` in the filter
-Each market publishes its rows **twice**: once priced in **USD** and once priced in **quote token units**. Without the `Price: { IsQuotedInUsd: true }` filter you will receive both, and a row such as a WBTC/WSOL market would return the price of WBTC **in SOL**, not in dollars.
+:::note `Price.IsQuotedInUsd` selects a denomination — it does not de-duplicate
+`IsQuotedInUsd` is a **denomination mode**, not a row multiplier. Markets are **not** published
+twice: an unfiltered query returns the USD rendering only, byte-identical to
+`IsQuotedInUsd: true`. You cannot retrieve both renderings in one result set, even by asking for
+both explicitly with `any:`.
 
-With the filter, prices are in USD even when the quote token is WSOL or another non-stable asset, because the index normalizes the quote side — see [How Pool Prices Are Normalized](/docs/trading/crypto-price-api/price-index-algorithm#how-pool-prices-are-normalized-to-the-current-quote-token). Set it to `false` when you deliberately want the price in quote-token terms.
+Setting it to `false` re-renders the same markets and intervals in quote-token units: only the
+`Price.*` fields change, while `Volume`, `Ranking` and `Supply` are identical between modes.
+
+You therefore do not need this filter to avoid duplicates — there are none. Set it to `false`
+only when you deliberately want the price in quote-token terms. Prices are in USD even when the
+quote token is WSOL or another non-stable asset, because the index normalizes the quote side —
+see [How Pool Prices Are Normalized](/docs/trading/crypto-price-api/price-index-algorithm#how-pool-prices-are-normalized-to-the-current-quote-token).
 :::
 
 ### Stream the same price
@@ -143,6 +208,12 @@ To stream the top market of **every** token on a chain, replace the `Token.Addre
 
 Add `limitBy` to collapse the result to one current row per token:
 
+:::caution Group by `Token_Id`, not `Token_Address`
+Native assets carry an **empty** `Token.Address` — ETH on Ethereum, Arbitrum, Base and Optimism,
+BNB on BSC and MATIC on Matic all share `""`. Grouping by `Token_Address` silently collapses every
+one of them into a single row. `Token_Id` is unique per token per network.
+:::
+
 [Run query ➤](https://ide.bitquery.io/Multi-token-watchlist--rank-1-per-token)
 
 ```graphql
@@ -166,7 +237,7 @@ Add `limitBy` to collapse the result to one current row per token:
         Block: { Time: { since_relative: { minutes_ago: 10 } } }
       }
       limit: { count: 10 }
-      limitBy: { by: Token_Address, count: 1 }
+      limitBy: { by: Token_Id, count: 1 }
       orderBy: { descending: Block_Time }
     ) {
       Token {

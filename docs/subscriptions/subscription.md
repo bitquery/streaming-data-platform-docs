@@ -18,6 +18,8 @@ subscription {
 <video controls loop muted playsInline width="100%" src="/img/ide/ide_subscription.mp4"></video>
 
 Almost any query can be converted to a subscription just by replacing the `query` type with `subscription`.
+Trading cube queries are the main exception — see
+[What does not survive streaming](/docs/subscriptions/what-does-not-survive-streaming/).
 
 :::tip Streaming token trades or prices? Use the Trading API
 If your subscription is a `DEXTrades` / `DEXTradeByTokens` stream filtered to specific tokens just to get live trades or prices, use the **Trading API** (`Trading.Trades`, `Trading.Tokens`, `Trading.Pairs`, `Trading.Currencies`) instead. It covers 9 chains in one stream, has USD price, market cap, and supply on every row, is MEV/outlier-filtered, and ships pre-aggregated OHLC down to 1-second candles — so you stream far fewer rows for the same signal. See the [Trading Data Overview](/docs/trading/trading-data-overview/) for when to use which.

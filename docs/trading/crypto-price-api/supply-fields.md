@@ -46,7 +46,46 @@ The **maximum supply cap** for the asset. For assets **without** a fixed cap, or
 
 ### `FullyDilutedValuationUsd`
 
-**Fully diluted valuation in USD**: when **max supply** (or other inputs for a standard FDV) is known, this reflects valuation at fully diluted supply at the current USD price. When **circulating supply** is **unknown**, we set **`FullyDilutedValuationUsd` to the same value as `MarketCap`** (so both fields carry the same fallback valuation).
+**Fully diluted valuation in USD**, computed as **`TotalSupply` x the currency-level USD price**
+(`Price.Average.Estimate`). When **circulating supply** is **unknown**, we set
+**`FullyDilutedValuationUsd` to the same value as `MarketCap`** (so both fields carry the same
+fallback valuation).
+
+:::note `MaxSupply` is not used in either valuation
+`MaxSupply` is reference data only — it is **not** the multiplier for FDV, and it is `0` for the
+large majority of currencies, which is why it cannot be. Both valuations are driven by
+`TotalSupply` / `CirculatingSupply` and `Price.Average.Estimate`.
+:::
+
+## Supply is a currency-level figure, repeated on every row
+
+This is the most important thing to know about the whole block. `Supply` is **one
+currency-level reference figure**. It is byte-identical on every token representation of that
+currency, on every pool of that token, and on the `Currencies` row — it is not computed per row.
+
+Consequences:
+
+- On a **`Pairs`** row, `MarketCap` and `FullyDilutedValuationUsd` are that currency-level
+  valuation copied down verbatim. They are **not** derived from the row's own
+  `Price.Ohlc.Close`, so a pool trading away from the blended price still reports the same
+  market cap as every other pool of that token.
+- On **`Currencies`**, the figure is neither summed across chains nor taken from a top-ranked
+  chain. It is the same single number.
+
+:::danger Summing MarketCap across rows double-counts
+Because the same valuation is repeated on every token representation and every pool, a
+`sum(of: Supply_MarketCap)` across a currency's rows multiplies it by the row count. Take
+`maximum:` or read one row instead.
+:::
+
+:::caution Two ways a Supply figure can look wrong
+- The reference figure **refreshes in steps**, so rows a few seconds apart can carry slightly
+  different values. Do not treat small differences as a data error.
+- `Trading.Tokens` can return a duplicate row for the same token and bar in which
+  `Token.Symbol` is empty and **every `Supply` field is `0`** — a metadata-arrival split on
+  freshly launched tokens. Filter those out before valuing anything. See
+  [tokens.md](/docs/trading/crypto-price-api/tokens#identity-fields).
+:::
 
 ## Bitcoin (`bid:bitcoin`) and on-chain supply
 

@@ -226,7 +226,10 @@ This consistent window size ensures comparable moving average calculations acros
 
 This stream has pre-calculated OHLC data in the response which you can feed directly to your charting solution without additional calculations. Our **cryptocurrency price api** is accessible through GraphQL queries and subscriptions, making it easy to integrate into your applications. The **crypto prices api** supports **real-time streaming** and **recent OHLC history** (**rolling 30 days**); for **older** OHLC, use **`DEXTradeByTokens`** as in the [OHLC guide](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/#crypto-price-api-vs-dextradebytoken).
 
-> **Note**: All queries can be converted to a GraphQL stream (WebSocket) by changing the keyword `query` to `subscription`
+> **Note**: Most queries can be converted to a GraphQL stream (WebSocket) by changing the keyword `query` to `subscription`.
+> Trading cube queries are the exception — `selectWhere`, `if`, most statistical metrics and `interval:` do not
+> survive the conversion, and `calculate` behaves differently. See
+> [What does not survive streaming](/docs/subscriptions/what-does-not-survive-streaming/).
 
 ## Kafka Topic for Crypto Price Stream: `trading.prices`
 

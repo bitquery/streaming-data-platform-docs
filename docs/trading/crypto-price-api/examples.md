@@ -782,8 +782,8 @@ subscription{
           WeightedSimpleMoving
         }
       }
-		   diff:  calculate(expression:"Price_Ohlc_Close - Price_Ohlc_Open")
-      change: calculate(expression:"round(($diff / Price_Ohlc_Open), 3) * 100")
+		   diff:  calculate(expression:"$Price_Ohlc_Close - $Price_Ohlc_Open")
+      change: calculate(expression:"$diff / $Price_Ohlc_Open * 100")
     }
   }
 }
@@ -869,9 +869,11 @@ This query uses [expressions](/docs/graphql/capabilities/expression/) to calcula
 }
 ```
 
-## Volume-Based Bitcoin Price Stream
+## Top Solana Price Movers (5-minute, high volume)
 
-Stream Bitcoin price data (USD OHLC) with a focus on volume-based intervals, useful for detecting price action tied to trading activity rather than fixed time windows.
+Rank Solana tokens by 5-minute price change, restricted to tokens with meaningful volume. This
+is a query over 300-second candles, not a volume-based interval — see
+[Volume-Based Aggregation](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api#volume-based-aggregation).
 
 Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that any price values such as OHLC or Average indicators will be in USD. If you want them denominated in quote currency, change the filter to `Price: {IsQuotedInUsd: false}`.
 
