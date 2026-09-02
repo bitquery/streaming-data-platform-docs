@@ -31,7 +31,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 - [Robinhood Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply/)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers/) (live movement between holders)
 - [Robinhood Trades](/docs/blockchain/robinhood/robinhood-trades/) (prices to value holdings)
-- [Pons API on Robinhood](/docs/blockchain/robinhood/pons-api) (holder distribution on a bonding-curve launchpad)
+- [Pons Launchpad API on Robinhood Chain](/docs/blockchain/robinhood/pons-api) (holder distribution on a bonding-curve launchpad)
 :::
 
 **On this page:** [Concepts](#cube-concepts) · [Top holders](#top-holders-of-a-token) · [Holder count](#holder-count-of-a-token) · [Whale floors](#holders-above-a-balance-floor) · [Distribution](#holder-distribution-statistics) · [Dormant holders](#dormant-holders-diamond-hands) · [Stock tokens](#tokenized-stock-holders-nvda) · [ETH rich list](#native-eth-rich-list) · [Pagination](#paginating-full-holder-snapshots) · [FAQ](#faq)
