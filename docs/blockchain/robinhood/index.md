@@ -61,7 +61,7 @@ Robinhood Chain hosts several token launchpads. They are **not interchangeable**
 
 | Launchpad | Model | Guide |
 | --- | --- | --- |
-| **Pons** | Real bonding curve per token, graduates into a Uniswap v4 pool behind a Pons-owned hook | [Pons API on Robinhood](/docs/blockchain/robinhood/pons-api) |
+| **Pons** | Real bonding curve per token, graduates into a Uniswap v4 pool behind a Pons-owned hook | [Pons Launchpad API on Robinhood Chain](/docs/blockchain/robinhood/pons-api) |
 | **pools.trade** | Uniswap v4 pool from block one — no curve, no graduation event | [Pools.trade API on Robinhood](/docs/blockchain/robinhood/pools-trade-api) |
 | **Flap.sh** | Bonding curve with per-token tax and progress events, graduates to a DEX | [Flap.sh API on Robinhood](/docs/blockchain/robinhood/flap-sh-api) |
 | **Bags.fm** | Creator-fee launchpad | [Bags.fm API on Robinhood](/docs/blockchain/robinhood/bags-fm-api) |

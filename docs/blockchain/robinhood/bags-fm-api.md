@@ -35,7 +35,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)
 - [Flap.sh API on Robinhood](/docs/blockchain/robinhood/flap-sh-api)
-- [Pons API on Robinhood](/docs/blockchain/robinhood/pons-api) — bonding-curve launchpad, graduations, Uniswap v4 pools
+- [Pons Launchpad API on Robinhood Chain](/docs/blockchain/robinhood/pons-api) — bonding-curve launchpad, graduations, Uniswap v4 pools
 - [Pools.trade API on Robinhood](/docs/blockchain/robinhood/pools-trade-api)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
 - [WebSocket subscriptions](/docs/subscriptions/websockets/)
