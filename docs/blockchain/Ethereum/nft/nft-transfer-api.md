@@ -50,7 +50,7 @@ This query fetches the most frequently transferred NFTs on the Ethereum Blockcha
   EVM(dataset: combined network: eth){
     Transfers(
       orderBy: {descendingByField: "count"}
-      limit: {offset: 10 count: 0}
+      limit: {offset: 10 count: 100}
       where: {
         Block: {Date: {since: "2023-05-02" till: "2023-05-09" }}
         Transfer: {Currency: {Fungible: false}}}
