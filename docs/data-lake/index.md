@@ -14,6 +14,9 @@ keywords:
   - Multi-chain data lake
   - Base blockchain data
   - EVM archive data
+  - Hyperliquid historical data
+  - Hyperliquid archive
+  - Hyperliquid backtest data
   - Blockchain ETL pipeline
   - Web3 data lake
 sidebar_position: 1
@@ -49,8 +52,9 @@ The lake holds the complete, structured history of each supported chain. It cove
 - **Solana**
 - **Tron**
 - **Bitcoin**
+- **Hyperliquid** — Hyperliquid core (the L1 order-book exchange), covering trades, orders, book updates, liquidations, funding, TWAPs, signed actions and OHLCV candles
 
-Each block file also carries the block header and the lower-level data each chain exposes, such as receipts, logs, traces, instructions, and inputs/outputs. This gives you full-fidelity data rather than a summarized subset.
+On the block-structured chains, each block file also carries the block header and the lower-level data that chain exposes, such as receipts, logs, traces, instructions, and inputs/outputs. This gives you full-fidelity data rather than a summarized subset.
 
 ## Data format
 
@@ -63,9 +67,31 @@ Each block is stored as a single file in Bitquery's native streaming format. It 
 This is the same schema Bitquery uses for its Kafka streams, so one schema works for both the data lake and live streaming. Decoding is a cheap local step of decompress and then parse, which keeps end-to-end speed bounded by your network instead of by parsing.
 
 - **Schema:** [github.com/bitquery/streaming_protobuf](https://github.com/bitquery/streaming_protobuf)
-- **Python package (pb2):** [`bitquery-pb2-kafka-package`](https://pypi.org/project/bitquery-pb2-kafka-package/) — generated Python protobuf bindings from the schema (`pip install bitquery-pb2-kafka-package`; modules: `evm`, `solana`, `tron`, `utxo`, `market`)
+- **Python package (pb2):** [`bitquery-pb2-kafka-package`](https://pypi.org/project/bitquery-pb2-kafka-package/) — generated Python protobuf bindings from the schema (`pip install bitquery-pb2-kafka-package`; modules: `evm`, `solana`, `tron`, `utxo`, `market`, `hyperliquid`, `ton`, `offchain`)
 
 For scale reference, a single Base block in the tutorial below is about 3.4 MB compressed and 12.1 MB decoded. The lake is hundreds of millions of such files per chain.
+
+### Hyperliquid
+
+Hyperliquid core is an L1 order-book exchange rather than an EVM chain, so its records are exchange events, not EVM blocks. The schema lives under [`hyperliquid/`](https://github.com/bitquery/streaming_protobuf/tree/main/hyperliquid) and has three top-level entry points:
+
+| Message | Defined in | Carries |
+| --- | --- | --- |
+| `HyperliquidCoreBlockMessage` | `hyperliquid_block_message.proto` | Parsed trades, order updates, book updates, liquidations, funding, TWAPs, leverage updates and signed actions — the shape behind the [Hyperliquid cubes](/docs/perpetuals/hyperliquid) |
+| `HyperCoreBlock` / `HyperCoreBlocks` | `hypercore.proto` | Raw hypercore feed: fills, order statuses, raw book diffs, TWAP statuses, oracle updates, misc events, core writer actions |
+| `CandlesBlockMessage` | `candles.proto` | OHLCV candles per market and interval |
+
+All three are in the `hyperliquid` module of [`bitquery-pb2-kafka-package`](https://pypi.org/project/bitquery-pb2-kafka-package/), and they are the same definitions used by the `hyperliquidcore.messages.proto` and `hyperliquid.candles.proto` Kafka topics. One decoder covers both the archive and the live stream, which is the point for backtesting: the code that replays history is the code that runs in production.
+
+```python
+import lz4.frame
+from hyperliquid.hyperliquid_block_message_pb2 import HyperliquidCoreBlockMessage
+
+msg = HyperliquidCoreBlockMessage()
+msg.ParseFromString(lz4.frame.decompress(raw))
+```
+
+The [Hyperliquid API](/docs/perpetuals/hyperliquid) serves the same datasets over GraphQL and WebSocket within the API's rolling retention window. Use the data lake when you need history beyond it — see [Data Coverage & Retention](/docs/graphql/data-coverage-retention/).
 
 ## How streaming works
 
@@ -269,4 +295,6 @@ So you bring the block, our protobuf files describe it, and you parse out transa
 
 - [Data in Cloud](/docs/cloud/) covers curated, ready-to-use Parquet data dumps for analytics and warehousing.
 - [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/) covers real-time blockchain data streams that use the same protobuf schema.
+- [Hyperliquid API](/docs/perpetuals/hyperliquid/) covers the GraphQL and WebSocket interface to the same Hyperliquid datasets.
+- [Data Coverage & Retention](/docs/graphql/data-coverage-retention/) covers how far back each API goes, and when to reach for the lake instead.
 - [streaming_protobuf](https://github.com/bitquery/streaming_protobuf) is the block schema.
