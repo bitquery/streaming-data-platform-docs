@@ -60,6 +60,66 @@ The same **`NetworkBid`** pattern applies on the **[Crypto Price API](/docs/trad
 
 :::
 
+## Before you aggregate: three things about a Trades row
+
+These affect every wallet-analytics or volume figure you compute from this cube.
+
+### One row is a swap *leg*, not a transaction
+
+A single on-chain transaction can produce several rows. Unlike `DEXTradeByTokens`, rows are not
+mirrored per token, and aggregator roll-ups are not included. Count transactions with
+`count(distinct: TransactionHeader_Hash)`, not `count`.
+
+### Use `AmountsInUsd.Quote` for USD, not `.Base`
+
+`AmountsInUsd.Base` is `Amounts.Base x PriceInUsd`, and **`PriceInUsd` is a smoothed reference
+price, not the executed price**. On fast-moving tokens the two USD legs diverge — on Solana,
+roughly a quarter of rows differ by more than 1%, with outliers of several orders of magnitude
+during sharp moves.
+
+`AmountsInUsd.Quote` is the sound leg: the implied quote-token USD price is consistent to within
+a rounding error across trades in the same second.
+
+```graphql
+# prefer this for USD volume and PnL
+sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
+```
+
+:::danger The cube emits some exact duplicate rows
+A small but material share of rows — on the order of one percent on Solana — are **exact
+duplicates of the same swap leg**, inflating USD volume by a similar fraction. No field
+distinguishes the copies; the behaviour is persistent, not a transient glitch.
+
+Deduplicate on `(TransactionHeader.Hash, Trader.Address, Side, Amounts.Base)` before reporting
+exact trade counts or volumes.
+
+The rate is much higher on Matic, where Polymarket outcome tokens all share one ERC-1155
+address, so distinct markets collapse onto the same token identity.
+:::
+
+### Field meanings shift between chains
+
+| Field | Solana | EVM |
+| --- | --- | --- |
+| `Pair.Pool.Address` | the pool | the pool |
+| `Pair.Market.Address` | the pool | the protocol **factory** |
+| `Pair.Market.Program` | the DEX program | the pool |
+
+Only `Pool.Address` and `Market.Id` mean the same thing on every chain. `TransactionHeader.Sender`
+and `.To` are leg-level and their meanings differ between Solana and EVM; on Tron, `Fee`,
+`FeePayer` and `To` are absent entirely.
+
+`Token.Did` and `Token.TokenId` are empty on every row, and `Token.Address` is empty on native
+assets — group by `Token.Id`.
+
+### Scope and window
+
+`Trading.Trades` is **realtime only** — `dataset: archive` and `combined` are rejected — and holds
+roughly the last 30 days. Both `since` and `till` bounds are inclusive.
+
+It is also **not DEX-only**: it carries Seaport NFT fills and Polymarket activity, so filter by
+`Pair.Market.ProtocolFamily` if you mean DEX swaps specifically.
+
 ## How Do I Stream New DEX Trades Across All Chains in Real Time?
 
 > *Real-time* **multi-chain DEX trade stream** — subscribe to every new swap on **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, and **Polygon** in a single **GraphQL subscription**. Each event returns **price**, **USD amounts**, **market cap**, **supply**, **trader wallet**, and **transaction hash** the moment a trade is confirmed on-chain.
