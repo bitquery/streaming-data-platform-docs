@@ -99,7 +99,7 @@ query {
   Hyperliquid {
     Orders(
       limit: {count: 100}
-      orderBy: {descendingByField: "orders"}
+      orderBy: {descendingByField: "placed"}
       where: {
         Order: {Market: {Symbol: {is: "BTC"}}}
         Block: {Time: {since_relative: {hours_ago: 24}}}
@@ -107,15 +107,16 @@ query {
     ) {
       Order {
         Trader { Address }
-        Status
       }
-      orders: count
+      placed: count
+      canceled: count(if: {Order: {Status: {is: "canceled"}}})
+      filled: count(if: {Order: {Status: {is: "filled"}}})
     }
   }
 }
 ```
 
-Compare the `canceled` count against `filled` per address. A wallet with a very high cancel share, concentrated on one `Side`, placing size well away from the touch and pulling it as price approaches, is worth a closer look — pull that address back through query 1 to see the behaviour tick by tick.
+This returns one row per wallet with all three counts, so the cancel-to-fill ratio is `canceled / filled` directly. A wallet with a very high cancel share, concentrated on one `Side`, placing size well away from the touch and pulling it as price approaches, is worth a closer look — pull that address back through query 1 to see the behaviour tick by tick.
 
 :::caution Interpret with care
 A high cancel rate on its own is not evidence of manipulation. Market makers legitimately cancel the large majority of their orders as they requote. Treat this as a screen that tells you where to look, not as a conclusion.
