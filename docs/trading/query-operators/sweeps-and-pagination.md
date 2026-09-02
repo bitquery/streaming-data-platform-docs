@@ -75,9 +75,10 @@ limitBy: { by: [Token_Id, Pair_Market_Address], count: 1 }
 ## Exact distinct counts
 
 A `limitBy` sweep is **exact**, which makes it a reference for cardinality. `uniq` is exact up to
-a point and then switches to a probabilistic estimator: below roughly 35,000 distinct values the
-two agree exactly, and above that the approximate count drifts by well under a percent in
-**either** direction — it is not a systematic undercount.
+**65,536 (2^16)** distinct values and switches to a probabilistic estimator above that. In
+practice the two agree exactly well below the threshold, and the drift only becomes visible at
+high cardinality — where it is well under a percent, and in **either** direction rather than a
+systematic undercount.
 
 For an exact count without materialising the rows, use `count(distinct: <field>)`.
 

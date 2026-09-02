@@ -97,8 +97,9 @@ The array is built with `groupUniqArray`, so it is an **exact** distinct set, an
 whole in one array rather than paged.
 
 :::tip Prefer `array_intersect` over `uniq` when the two disagree
-`uniq()` switches to an approximate estimator above roughly 65,000 distinct values, so on large
-windows `uniq(of: Trader_Address)` and a single-member `array_intersect` will differ slightly.
+`uniq()` switches to an approximate estimator above **65,536 (2^16)** distinct values, so on
+large windows `uniq(of: Trader_Address)` and a single-member `array_intersect` will differ
+slightly.
 `array_intersect` is the exact side. If you need an exact distinct count on a large population,
 take the array's length.
 :::
