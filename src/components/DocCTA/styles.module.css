@@ -1,0 +1,390 @@
+/*
+ * Doc-page CTAs.
+ *  - Desktop (≥997px): sticky right rail = "Next steps" card + "On this page" + TOC.
+ *  - Mobile/tablet: "Build with Bitquery" block after the article body.
+ * Colors come from the site tokens in src/css/custom.css (berry primary, surfaces, lines).
+ */
+
+/* ---------- shared ---------- */
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.dot {
+  color: var(--ifm-color-emphasis-500);
+}
+
+/* ---------- desktop rail: card on top, then the table of contents ---------- */
+.rail {
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+  display: flex;
+  flex-direction: column;
+  /* extra 2.5rem keeps the rail fully visible at page top, under the announcement bar */
+  max-height: calc(100vh - (var(--ifm-navbar-height) + 4.5rem));
+}
+
+/* Server-rendered for every viewport (like the theme TOC); hide it below desktop
+   so phones never see it before hydration removes the column. */
+@media (max-width: 996px) {
+  .rail {
+    display: none;
+  }
+}
+
+/* The theme's TOC is sticky on its own; inside the rail it just scrolls. */
+.rail :global(.theme-doc-toc-desktop) {
+  position: static;
+  top: auto;
+  max-height: none;
+  min-height: 0;
+  flex: 0 1 auto;
+  overflow-y: auto;
+}
+
+.tocLabel {
+  margin: 0 0 0.3rem 0.5rem;
+  font-family: var(--bq-font-mono, ui-monospace, monospace);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* ---------- "Next steps" card ---------- */
+.card {
+  flex: none;
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.7rem 0.6rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  background: var(--ifm-background-surface-color);
+  font-size: 0.75rem; /* 13.5px on the site's 18px base */
+  line-height: 1.45;
+  container-type: inline-size;
+}
+
+[data-theme="dark"] .card {
+  border-color: var(--bq-line);
+}
+
+.primary {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.42rem 0.6rem;
+  border-radius: 8px;
+  background: var(--ifm-color-primary);
+  color: #fff !important;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background 0.15s ease;
+}
+
+.primary > span {
+  white-space: nowrap;
+}
+
+.primary:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+.arrow {
+  margin-left: auto;
+  opacity: 0.85;
+}
+
+.ghostRow {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.45rem;
+}
+
+.ghostBtn {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.36rem 0.4rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--ifm-font-color-base);
+  text-decoration: none !important;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.ghostBtn .icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.ghostBtn:hover {
+  border-color: var(--ifm-color-primary);
+  background: var(--bq-accent-soft);
+  color: var(--ifm-color-primary);
+}
+
+.ghostBtn:hover .icon {
+  color: inherit;
+}
+
+[data-theme="dark"] .ghostBtn {
+  border-color: rgba(190, 49, 120, 0.4);
+}
+
+.metaLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.1rem 0.4rem;
+  margin-top: 0.55rem;
+  font-size: 0.72rem; /* ~13px */
+  line-height: 1.4;
+}
+
+.metaLink {
+  color: var(--ifm-color-emphasis-700);
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none !important;
+}
+
+.metaLink:hover {
+  color: var(--ifm-color-primary);
+}
+
+.labelTiny {
+  display: none;
+}
+
+/* Narrow rails (roughly < 1300px viewports): trim type, drop the arrow */
+@container (max-width: 215px) {
+  .card {
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+  }
+
+  .primary {
+    padding: 0.38rem 0.5rem;
+    font-size: 0.74rem;
+  }
+
+  .primary .arrow {
+    display: none;
+  }
+
+  .ghostBtn {
+    gap: 0.25rem;
+    padding: 0.32rem 0.3rem;
+    font-size: 0.7rem;
+  }
+
+  .metaLine {
+    gap: 0.1rem 0.3rem;
+    font-size: 0.66rem;
+  }
+
+  .labelLong {
+    display: none;
+  }
+
+  .labelTiny {
+    display: inline;
+  }
+}
+
+/* ---------- mobile/tablet: end-of-article block ---------- */
+.end {
+  position: relative;
+  margin: 2.5rem 0 1rem;
+  padding: 1rem 1rem 1.1rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  background: var(--ifm-background-surface-color);
+  overflow: hidden;
+}
+
+.end::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--bq-gradient-brand);
+}
+
+[data-theme="dark"] .end {
+  border-color: var(--bq-line);
+}
+
+@media (min-width: 997px) {
+  .end {
+    display: none;
+  }
+}
+
+.endText {
+  max-width: 62ch;
+}
+
+.endTitle {
+  margin: 0 0 0.25rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ifm-heading-color);
+}
+
+.endLead {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.endActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-decoration: none !important;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.btnPrimary {
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: #fff !important;
+}
+
+.btnPrimary:hover {
+  background: var(--ifm-color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.btnGhost {
+  background: transparent;
+  border-color: var(--ifm-color-emphasis-300);
+  color: var(--ifm-font-color-base) !important;
+}
+
+.btnGhost .icon {
+  color: var(--ifm-color-emphasis-600);
+}
+
+.btnGhost:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary) !important;
+}
+
+.btnGhost:hover .icon {
+  color: inherit;
+}
+
+/* "Talk to the team" split group */
+.split {
+  display: inline-flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.splitLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+  background: var(--ifm-color-emphasis-100);
+}
+
+.splitLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.45rem 0.8rem;
+  border-left: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-font-color-base) !important;
+  text-decoration: none !important;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.splitLink .icon {
+  color: var(--ifm-color-emphasis-600);
+}
+
+.splitLink:hover {
+  background: var(--bq-accent-soft);
+  color: var(--ifm-color-primary) !important;
+}
+
+.splitLink:hover .icon {
+  color: inherit;
+}
+
+/* Phones: the group becomes a full-width row with an icon-only label and two equal links */
+@media (max-width: 520px) {
+  .split {
+    width: 100%;
+  }
+
+  .splitLabelText {
+    display: none;
+  }
+
+  .splitLink {
+    flex: 1 1 0;
+  }
+}
+
+/* Neither CTA belongs on paper */
+@media print {
+  .rail,
+  .end {
+    display: none;
+  }
+}

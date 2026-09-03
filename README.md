@@ -69,3 +69,5 @@ $ yarn check-links    # fails on broken internal links / dead URL schemes
 
 - `b5e8420ece5b4116b64bb3214828f286.txt` and `baidu_verify_codeva-*.html` are third-party search-engine site-verification files. Do not delete them.
 - The site is served in production by nginx (`nginx/default.conf`, `Dockerfile`), not Netlify. Redirects and 404 handling live in that nginx config.
+- Every doc page carries the same CTAs (API key, Telegram/email, pricing, MCP, newsletter): a sticky card above the table of contents on desktop and a block after the article on mobile. Links and labels live in `src/components/DocCTA/links.js`; every link has a `data-cta` attribute for GTM click tracking.
+- `src/theme/DocItem/Layout/` is an **eject** of the Docusaurus 3.10.1 `DocItem/Layout` (not a wrapper) so the right column renders on pages without headings. When upgrading Docusaurus, diff it against `node_modules/@docusaurus/theme-classic/lib/theme/DocItem/Layout/index.js` and re-apply the three annotated changes. Pages with `hide_table_of_contents: true` get no desktop card by design.
