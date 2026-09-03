@@ -28,6 +28,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [EVM Events schema](/docs/schema/evm/events/)
 - [Transfers vs Events vs Calls](/docs/start/mental-model-transfers-events-calls/)
 - [Robinhood Trades](/docs/blockchain/robinhood/robinhood-trades/)
@@ -542,7 +543,7 @@ The query counterpart of the firehose: page through recent events, newest first.
 
 ```graphql
 {
-  EVM(network: robinhood) {
+  EVM(network: robinhood, dataset: archive) {
     Events(
       orderBy: { ascending: Log_Index }
       where: {

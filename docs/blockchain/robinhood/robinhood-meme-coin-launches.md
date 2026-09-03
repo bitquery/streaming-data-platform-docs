@@ -1,6 +1,6 @@
 ---
 title: "Robinhood Meme Coin Launches API"
-description: "Robinhood Meme Coin Launches API: query and stream Robinhood on-chain data with Bitquery GraphQL examples for developers."
+description: "New token launches across every Robinhood Chain launchpad — Flap.sh, Doppler, Virtuals, Clanker, Klik, Bags.fm — via mint-transfer and TokenCreated queries."
 sidebar_position: 3
 keywords:
   - Robinhood meme coin launches API
@@ -16,7 +16,8 @@ keywords:
   - Flap.sh Robinhood API
   - Flap.sh TokenCreated event
   - Klik Finance Robinhood launches
-  - Bankr Bot Robinhood token creation
+  - Doppler Airlock Robinhood token creation
+  - Bankr Robinhood token launches
   - Ape.store Robinhood meme coins
   - Bags.fm Robinhood token launches
   - Clanker Robinhood launches API
@@ -29,7 +30,7 @@ keywords:
 ---
 # Robinhood Meme Coin Launches API
 
-Track **meme coin token launches on Robinhood** with Bitquery GraphQL APIs. This guide shows how to detect newly created tokens from popular Robinhood launchpads and bots — **hood.fun**, **LaunchHood**, **Virtuals**, **Flap.sh**, **Klik Finance**, **Bankr Bot**, **Ape.store**, **Bags.fm**, and **Clanker** — using `EVM(network: robinhood)` Events and Transfers cubes.
+Track **meme coin token launches on Robinhood** with Bitquery GraphQL APIs. This guide shows how to detect newly created tokens from popular Robinhood launchpads and bots — **hood.fun**, **LaunchHood**, **Virtuals**, **Flap.sh**, **Klik Finance**, **Doppler** (the Airlock that Bankr and other front-ends launch through), **Ape.store**, **Bags.fm**, and **Clanker** — using `EVM(network: robinhood)` Events and Transfers cubes.
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
@@ -38,11 +39,13 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
 - [Pons Launchpad API on Robinhood Chain](/docs/blockchain/robinhood/pons-api) — bonding-curve launchpad, graduations, Uniswap v4 pools
 - [Pools.trade API on Robinhood](/docs/blockchain/robinhood/pools-trade-api)
 - [Flap.sh API on Robinhood](/docs/blockchain/robinhood/flap-sh-api)
+- [trench.today API on Robinhood](/docs/blockchain/robinhood/trench-today-api)
 - [Bags.fm API on Robinhood](/docs/blockchain/robinhood/bags-fm-api)
 - [WebSocket subscriptions](/docs/subscriptions/websockets/)
 :::
@@ -70,6 +73,10 @@ The fixed `Amount` in each transfer query is the **full initial token supply min
 
 :::note Amounts are decimal-normalized
 Bitquery's `Transfer.Amount` is already adjusted for the token's `Decimals`, so `1000000000` means 1 billion whole tokens — not the raw on-chain integer you'd see on a block explorer. Compare against the normalized value, not the raw one.
+:::
+
+:::note `AmountInUSD` is `0` on launch mints
+On Robinhood, `Transfer.AmountInUSD` is populated only for native ETH transfers. A freshly minted token has no price, so every launch-mint row below shows `"AmountInUSD": "0"`; it is selected for consistency with other transfer queries, not because it carries a value here.
 :::
 
 Flap.sh emits a decoded `TokenCreated` event, so it can be tracked via **Events** (richer, with decoded arguments) as well as transfers. The other launchpads and bots on this page are tracked via the **mint-transfer** pattern.
@@ -131,10 +138,13 @@ Every transfer query on this page is **identical except two values**: the launch
 | **Virtuals** | `0xd4ccbfa37e2f35611b3042e4096ad7a3459bd007` | _any_ (no fixed supply) | [Transfers](https://ide.bitquery.io/Virtuals-Newly-created-tokens) |
 | **Flap.sh** | `0x26605f322f7ff986f381bb9a6e3f5dab0beaeb09` | `1000000000` | [Events](https://ide.bitquery.io/All-events-from-Flapsh) · [TokenCreated](https://ide.bitquery.io/Flapsh-Newly-created-tokens-using-logs-TokenCreated) ([WS](https://ide.bitquery.io/Flap-sh-Newly-created-tokens-using-logs-TokenCreated---Websocket)) · [Transfers](https://ide.bitquery.io/Flapsh-Newly-created-tokens-using-transfer-data) ([WS](https://ide.bitquery.io/Flap-Sh-Newly-created-tokens-using-transfer-data---Websocket)) |
 | **Klik Finance** | `0x16cf6788b762ee8969744586ed16fc5705140dd7` | `1000000000` | [Transfers](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers) ([WS](https://ide.bitquery.io/Klik-Finance-Newly-created-tokens-using-transfers-websocket)) |
-| **Bankr Bot** | `0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862` | `1000000000` | [Transfers](https://ide.bitquery.io/Bankr-Bot-Newly-created-tokens) ([WS](https://ide.bitquery.io/Bankr-Bot-Newly-created-tokens---Websocket)) |
+| **Doppler Airlock** (Bankr, Long.xyz and other front-ends) | `0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862` (Airlock) · `0x22e99278308b393ea1260859b181ad7e78f5eeed` (launcher most front-ends call) | `1000000000` | [Transfers](https://ide.bitquery.io/Bankr-Bot-Newly-created-tokens) ([WS](https://ide.bitquery.io/Bankr-Bot-Newly-created-tokens---Websocket)) |
 | **Ape.store** | `0x6e4910ea5a04376032f6564da9a9e4e88b7a87c1` | `1000000000` | [Transfers](https://ide.bitquery.io/Apestore-Newly-created-tokens) ([WS](https://ide.bitquery.io/Apestore-Newly-created-tokens---Websocket)) |
 | **Bags.fm** | `0xe8cc4431adf8b5a847c113ef0c6af9043219cb37` | `1000000000` | [Transfers](https://ide.bitquery.io/Bagsfm-Newly-created-tokens) ([WS](https://ide.bitquery.io/Bagsfm-Newly-created-tokens---Websocket)) |
 | **Clanker** | `0xd3f2cc1731b7fd17f28798835c2e02f0a1839a94` | `100000000000` | [Transfers](https://ide.bitquery.io/Clanker-Newly-created-tokens) ([WS](https://ide.bitquery.io/Clanker-Newly-created-tokens---Websocket)) |
+| **Pons V2** | `0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e` (factory) · `0xe33e9e479df8802cb0866d5d05258bec4cf62948` (router) | `1000000000` | [Pons Launchpad API](/docs/blockchain/robinhood/pons-api) |
+| **pools.trade** | `0x0000ffffbe8efe702c8703ae3477ff5de3d319c0` · `0x00004c4ccc709ef590f7c81102c0689f0263d4e9` (entry contracts) | `1000000000` | [Pools.trade API](/docs/blockchain/robinhood/pools-trade-api) |
+| **trench.today** | `0x77dc6f6361b7b99456fc3761ce5b7dda80d83f9d` (factory proxy) | see guide | [trench.today API](/docs/blockchain/robinhood/trench-today-api) |
 
 _WS = WebSocket subscription (real-time stream of the same query)._
 
@@ -209,7 +219,7 @@ Bucket a launchpad's mints into daily counts — a launch-rate series (example: 
 
 ## hood.fun
 
-**[hood.fun](https://hood.fun/)** is the premier fair-launch memecoin launchpad on the Robinhood network. Every token launches with a fixed **1 billion** supply on a bonding curve, so newly created tokens can be detected as mint transfers from the zero address where `Transaction.To` is the hood.fun contract.
+**[hood.fun](https://hood.fun/)** was one of the first fair-launch memecoin launchpads on the Robinhood network. Every token launches with a fixed **1 billion** supply on a bonding curve, so newly created tokens can be detected as mint transfers from the zero address where `Transaction.To` is the hood.fun contract.
 
 :::note Contract generations
 The current hood.fun launch contract is `0x5fcc1df0dc020cf454e742e9a8ae2554c37a452c`. The previous generation, `0x6a63d96ef77ae569fcb85934cf1bd1ec7fe9b33d`, still has tokens trading — swap the address in `Transaction.To` to query it. Older generations' launch history sits outside the realtime window, so query them with `dataset: combined` or `archive`.
@@ -217,11 +227,15 @@ The current hood.fun launch contract is `0x5fcc1df0dc020cf454e742e9a8ae2554c37a4
 
 ### hood.fun Newly created tokens
 
+:::caution hood.fun has stopped launching
+hood.fun has produced no launch since mid-July 2026, so on the default realtime dataset this query returns nothing. It is pinned to `dataset: archive` below to return the historical launches; re-check realtime before assuming the launchpad is gone for good.
+:::
+
 ▶️ [Run in IDE](https://ide.bitquery.io/hoodfun-newly-creaed-tokens) · [WebSocket stream](https://ide.bitquery.io/hoodfun-newly-creaed-tokens---Websocket)
 
 ```graphql
 {
-  EVM(network: robinhood) {
+  EVM(network: robinhood, dataset: archive) {
     Transfers(
       orderBy: {descending: Block_Time}
       limit: {count: 50}
@@ -273,11 +287,15 @@ The current hood.fun launch contract is `0x5fcc1df0dc020cf454e742e9a8ae2554c37a4
 
 ### LaunchHood Newly created tokens
 
+:::caution LaunchHood has stopped launching
+LaunchHood has produced no launch since mid-August 2026, so on the default realtime dataset this query returns nothing. It is pinned to `dataset: archive` below to return the historical launches.
+:::
+
 ▶️ [Run in IDE](https://ide.bitquery.io/launchpad-newly-creaed-tokens) · [WebSocket stream](https://ide.bitquery.io/launchpad-newly-creaed-tokens---Websocket)
 
 ```graphql
 {
-  EVM(network: robinhood) {
+  EVM(network: robinhood, dataset: archive) {
     Transfers(
       orderBy: {descending: Block_Time}
       limit: {count: 50}
@@ -610,11 +628,11 @@ Detect **[Klik Finance](https://klik.finance/)** token launches on Robinhood by 
 
 ---
 
-## Bankr Bot
+## Doppler Airlock
 
-Track tokens launched via **[Bankr](https://bankr.bot/)** on Robinhood using mint transfers to the Bankr bot contract.
+`0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862` is the **Doppler Airlock**, the launch contract behind **[Bankr](https://bankr.bot/)** and other front-ends on Robinhood Chain. It emits `Create` for every launch and `Migrate` when a token moves to its final pool, and it is one of the largest launch sources on the network. Most front-ends call it through a launcher contract (`0x22e99278308b393ea1260859b181ad7e78f5eeed`), so filter `Transaction.To` on **both** addresses; a filter on the Airlock alone misses most launches. Attribute a launch to a front-end by the launcher or by the `integrator` field of the decoded `Create` event, not by this page's label.
 
-### Bankr Bot Newly created tokens
+### Doppler newly created tokens
 
 ▶️ [Run in IDE](https://ide.bitquery.io/Bankr-Bot-Newly-created-tokens) · [WebSocket stream](https://ide.bitquery.io/Bankr-Bot-Newly-created-tokens---Websocket)
 
@@ -625,7 +643,7 @@ Track tokens launched via **[Bankr](https://bankr.bot/)** on Robinhood using min
       orderBy: {descending: Block_Time}
       limit: {count: 50}
       where: {
-        Transaction: {To: {is: "0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862"}}
+        Transaction: {To: {in: ["0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862", "0x22e99278308b393ea1260859b181ad7e78f5eeed"]}}
         Transfer: {
           Amount: {eq: "1000000000"}
           Sender: {is: "0x0000000000000000000000000000000000000000"}
@@ -842,7 +860,7 @@ Open any **WebSocket** link in the [contract map](#launchpad-and-bot-contract-ma
 
 ### Which launchpads and bots does this page cover?
 
-hood.fun, LaunchHood, Virtuals, Flap.sh, Klik Finance, Bankr Bot, Ape.store, Bags.fm, and Clanker on the Robinhood network. Each has its own contract address and mint amount listed in the contract map.
+Virtuals, Flap.sh, Klik Finance, the Doppler Airlock (Bankr and other front-ends), Ape.store, Bags.fm, and Clanker on the Robinhood network, plus hood.fun and LaunchHood for history. Pons, pools.trade and trench.today have their own guides. Each has its own contract address and mint amount listed in the contract map.
 
 ### How do I track a launchpad that isn't listed here?
 

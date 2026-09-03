@@ -1,5 +1,5 @@
 ---
-title: "Robinhood Trades API"
+title: "Robinhood Trades API & Streams"
 description: "Robinhood Trades API: live trades, USD prices, OHLCV candles, market cap, whale trades, buy/sell pressure, and top traders via Bitquery GraphQL & WebSockets."
 sidebar_position: 1
 keywords:
@@ -30,6 +30,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers/)
 - [Robinhood Liquidity & Slippage API](/docs/blockchain/robinhood/robinhood-liquidity/)
 - [Robinhood Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply/)
@@ -56,7 +57,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 | --- | --- |
 | ASSETH (AssetHood, example token) | `0x9077841e155faaf4e4e89470822c2187eeef7777` |
 | Example pool trading ASSETH | `0xbbaefcfcd7b92ed0df1a3eec22a21ba6beb0b52b` |
-| SOLdiers (first-buyers example) | `0xaf81aa091665c60cfa172f86a5a8d6b437a79353` |
+| MERRY (first-buyers example, a recent Bags launch) | `0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a` |
 | WETH | `0x0bd7d308f8e1639fab988df18a8011f41eacad73` |
 
 These are live examples — meme tokens go quiet over time, so swap in any token, pool, or trader you care about.
@@ -201,7 +202,7 @@ The Trading APIs cover roughly the **last 30 days** of history (for newer networ
 
 ## Latest Trades on Robinhood
 
-Query the most recent trades across all Robinhood tokens — the query counterpart to the real-time stream above — ordered by newest first.
+Query the most recent trades across all Robinhood tokens — the query counterpart to the real-time stream above — ordered by newest first. The `Block.Time` bound keeps the scan to the last hour; without it, sorting the whole rolling window by time is slow enough to hit the gateway timeout.
 
 ```graphql
 {
@@ -210,6 +211,7 @@ Query the most recent trades across all Robinhood tokens — the query counterpa
       limit: { count: 50 }
       orderBy: { descending: Block_Time }
       where: {
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
         Pair: {
           Market: {
             NetworkBid: { is: "bid:robinhood" }
@@ -258,6 +260,10 @@ Query the most recent trades across all Robinhood tokens — the query counterpa
 ---
 
 ## Whale Trades on Robinhood
+
+:::caution USD amounts on thin pools
+`AmountsInUsd` is derived from the pool price at trade time, so a thin or manipulated pool can print absurd dollar values. Sanity-check whale rows against the pool's liquidity, and rank leaderboards by trade `count` rather than USD volume when in doubt.
+:::
 
 ▶️ [Run in IDE](https://ide.bitquery.io/largest-swaps-robinhood-chain)
 
@@ -441,7 +447,7 @@ Scope trades to a single liquidity pool using `Pool.Address` — useful when a t
 
 ## First Buyers of a Token on Robinhood
 
-Get the earliest trades for a token (example: the SOLdiers meme token), ordered oldest first, to find the first buyers after launch. Filtered to buys here; remove the `Side` filter for first trades of any side.
+Get the earliest trades for a token (example: the MERRY meme token, launched within the rolling window), ordered oldest first, to find the first buyers after launch. Filtered to buys here; remove the `Side` filter for first trades of any side.
 
 ```graphql
 {
@@ -452,7 +458,7 @@ Get the earliest trades for a token (example: the SOLdiers meme token), ordered 
       where: {
         Pair: {
           Token: {
-            Address: { is: "0xaf81aa091665c60cfa172f86a5a8d6b437a79353" }
+            Address: { is: "0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a" }
           }
           Market: {
             NetworkBid: { is: "bid:robinhood" }
@@ -512,7 +518,7 @@ Using this GraphQL API endpoint you can get token trades by a trader with detail
       where: {
         Trader:{
           Address:{
-            is: "0x39d83c23dbf34fa574b9afbb0c0e364bdfd97099"
+            is: "0xf73644da46ab85da864fc4284322f489134ee82c"
           }
         }
         Pair: {
@@ -1042,7 +1048,7 @@ One latest price per token in a single call — `limitBy` on `Token_Id` keeps th
           Address: {
             in: [
               "0x9077841e155faaf4e4e89470822c2187eeef7777"
-              "0xaf81aa091665c60cfa172f86a5a8d6b437a79353"
+              "0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a"
             ]
           }
           NetworkBid: { is: "bid:robinhood" }

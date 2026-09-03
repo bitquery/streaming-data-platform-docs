@@ -1,6 +1,6 @@
 ---
 title: "Flap.sh API on Robinhood"
-description: "Flap.sh API on Robinhood: query and stream Robinhood on-chain data with Bitquery GraphQL examples for developers. Great for bots, dashboards, and alerts."
+description: "Flap.sh API on Robinhood Chain: TokenCreated launches, bonding-curve buys and sells, DEX graduations and flap_v5 trades via Bitquery GraphQL and WebSocket."
 sidebar_position: 4
 keywords:
   - Flap.sh API
@@ -36,6 +36,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)
 - [Pons Launchpad API on Robinhood Chain](/docs/blockchain/robinhood/pons-api) — bonding-curve launchpad, graduations, Uniswap v4 pools
@@ -52,19 +53,21 @@ Flap.sh is **not a single contract**. A router takes the user's transaction, a f
 
 | Role | Address | Emits |
 | --- | --- | --- |
-| **Launch router** (entry point) | `0x26605f322f7ff986f381bb9a6e3f5dab0beaeb09` | Nothing but `Upgraded` — it is an upgradeable proxy. It appears as **`Transaction.To`**, not as a log address. |
-| **Token factory** | `0x78eb178d94739b8adf199543924e47e9547c4924`<br/>`0x549574ddf0d72928f2041c17daab2097dd46d815` | `TokenCreated`, `TokenCurveSetV2`, `FlapTokenTaxSet`, `TokenQuoteSet`, `TokenVersionSet`, `TokenDexPreferenceSet`, `TokenDexSupplyThreshSet`, `TokenMigratorSet` |
-| **Vanity token factory** | `0xa2fb48fefb15f777ec6ac3857164550ee93c1f25`<br/>`0x52e3eb4f18dfb8215e17d27dee5718075f6c2639` | `VanityTokenCreated`, plus the same `TokenCreated` / `TokenCurveSetV2` pair |
-| **Bonding-curve engine** | `0x87a697bf7fbe28dc1eccc4d9b4bd1cfa76885f93`<br/>`0x2a50c45b5cbb9e5c735f094c6386c39f8ffbc655` | `TokenBought`, `TokenSold`, `TaxV2OnBondingCurvePaid`, `FlapTokenProgressChanged`, `FlapTokenCirculatingSupplyChanged` |
+| **Router proxy** (entry point and log emitter) | `0x26605f322f7ff986f381bb9a6e3f5dab0beaeb09` | **Every Flap.sh event.** `LogHeader.Address` is this proxy on `TokenCreated`, `TokenBought`, `TokenSold`, progress, supply and tax events; it is also `Transaction.To` on launch and trade transactions. |
+| **Token factory implementations** (`Log.SmartContract`, more exist) | `0x78eb178d94739b8adf199543924e47e9547c4924`<br/>`0x549574ddf0d72928f2041c17daab2097dd46d815` | `TokenCreated`, `TokenCurveSetV2`, `FlapTokenTaxSet`, `TokenQuoteSet`, `TokenVersionSet`, `TokenDexPreferenceSet`, `TokenDexSupplyThreshSet`, `TokenMigratorSet` |
+| **Vanity token factory implementations** (`Log.SmartContract`) | `0xa2fb48fefb15f777ec6ac3857164550ee93c1f25`<br/>`0x52e3eb4f18dfb8215e17d27dee5718075f6c2639` | `VanityTokenCreated`, plus the same `TokenCreated` / `TokenCurveSetV2` pair |
+| **Bonding-curve engine implementations** (`Log.SmartContract`, more exist) | `0x87a697bf7fbe28dc1eccc4d9b4bd1cfa76885f93`<br/>`0x2a50c45b5cbb9e5c735f094c6386c39f8ffbc655` | `TokenBought`, `TokenSold`, `TaxV2OnBondingCurvePaid`, `FlapTokenProgressChanged`, `FlapTokenCirculatingSupplyChanged` |
 
 | Field | Value |
 | --- | --- |
 | **Launch mint `Amount`** | `1000000000` (1 billion, decimal-normalized) |
 
-:::caution Do not filter Flap.sh events by the router address
-`0x26605f32…` is the address users transact **to**, so it is correct for `Transaction.To` filters on mint transfers. It is **not** the `Log`/`LogHeader` address of any Flap.sh event — filtering logs by it returns nothing. Launches also arrive through several vanity routers ending in `…6666`, so `Transaction.To` alone will not capture every launch either.
+:::info The router proxy is the emitter; the implementations rotate
+`0x26605f32…` is the `LogHeader.Address` of every Flap.sh event and the `Transaction.To` of every launch and trade, so it is the right address to pin queries to. The factory and curve-engine contracts are implementations behind that proxy: they show up as `Log.SmartContract`, more than one is live per role, and new ones appear when Flap.sh upgrades. Match events by `Log.Signature.Name` with `LogHeader.Address` pinned to the proxy, and read `Log.SmartContract` only when you need to know which implementation handled a row. Launches also arrive through vanity routers; pin `Transaction.To` to the router only for mint-transfer queries.
+:::
 
-Match Flap.sh events by **event signature name** (as every query on this page does), and scope to a token with an `Arguments` filter. Pin to the factory and curve addresses above only when you specifically need to exclude another protocol that reuses a generic event name.
+:::note Datasets
+Transfers, Events and Calls queries default to the realtime dataset, which holds only the most recent days on Robinhood; add `dataset: combined` or `dataset: archive` for history. Flap.sh trades also appear in the `Trading` cube as `Protocol: flap_v5`, which holds a rolling window of roughly the last 30 days.
 :::
 
 ---

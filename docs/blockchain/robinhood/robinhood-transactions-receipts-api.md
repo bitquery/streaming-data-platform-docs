@@ -27,6 +27,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Events API](/docs/blockchain/robinhood/robinhood-events-api/) (logs — receipts don't nest them here)
 - [Robinhood Calls & Traces API](/docs/blockchain/robinhood/robinhood-calls-api/)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers/)

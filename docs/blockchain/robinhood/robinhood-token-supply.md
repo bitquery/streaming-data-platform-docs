@@ -26,11 +26,16 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
 - [Robinhood Liquidity & Slippage API](/docs/blockchain/robinhood/robinhood-liquidity/)
 - [Flap.sh API on Robinhood](/docs/blockchain/robinhood/flap-sh-api)
 - [WebSocket subscriptions](/docs/subscriptions/websockets/)
+:::
+
+:::caution `TransactionBalances` is realtime-only on Robinhood
+This cube has no archive table on Robinhood: it holds only the most recent days, so a token with no transaction in that window returns no row, and `dataset: archive` errors. Keep queries bounded with a `Block.Time` filter and a `limit`.
 :::
 
 :::note Supply is decimal-normalized
@@ -212,7 +217,7 @@ Robinhood's tokenized equities are ordinary ERC-20s, so the same query returns t
 
 ## Supply Watchlist: Multiple Tokens at Once
 
-One latest supply row per token for a fixed list — `SmartContract.in` plus `limitBy` per contract. Example list: WETH, USDG, AAPL, NVDA.
+One latest supply row per token for a fixed list — `SmartContract.in` plus `limitBy` per contract, bounded to the last six hours so the `limitBy` scan stays fast (widen the bound for tokens that transact rarely). Example list: WETH, USDG, AAPL, NVDA.
 
 ```graphql
 {
@@ -221,7 +226,7 @@ One latest supply row per token for a fixed list — `SmartContract.in` plus `li
       limitBy: {by: TokenBalance_Currency_SmartContract, count: 1}
       limit: {count: 10}
       orderBy: {descending: Block_Time}
-      where: {TokenBalance: {Currency: {SmartContract: {in: [
+      where: {Block: {Time: {since_relative: {hours_ago: 6}}}, TokenBalance: {Currency: {SmartContract: {in: [
         "0x0bd7d308f8e1639fab988df18a8011f41eacad73",
         "0x5fc5360d0400a0fd4f2af552add042d716f1d168",
         "0xaf3d76f1834a1d425780943c99ea8a608f8a93f9",

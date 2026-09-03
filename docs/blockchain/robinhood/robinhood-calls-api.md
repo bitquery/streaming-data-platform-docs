@@ -28,6 +28,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Events API](/docs/blockchain/robinhood/robinhood-events-api/)
 - [Transfers vs Events vs Calls](/docs/start/mental-model-transfers-events-calls/)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers/)
@@ -296,7 +297,7 @@ subscription {
 
 ▶️ [Run in IDE](https://ide.bitquery.io/new-contracts-deployed-robinhood-chain)
 
-**New-contract radar:** `Call: { Create: true }` matches every `CREATE`/`CREATE2` frame — top-level and factory-internal. On these rows **`Call.To` is the newly deployed contract address** and `Call.From` is the deployer (`Receipt.ContractAddress` is populated only for top-level deployment transactions). When tested live, this stream caught a launchpad factory deploying a new token contract within seconds.
+**New-contract radar:** `Call: { Create: true }` matches every `CREATE`/`CREATE2` frame — top-level and factory-internal. On these rows **`Call.To` is the newly deployed contract address** and `Call.From` is the deployer (`Receipt.ContractAddress` is populated only for top-level deployment transactions).
 
 ```graphql
 subscription {
@@ -427,7 +428,7 @@ subscription {
 
 ```graphql
 {
-  EVM(network: robinhood) {
+  EVM(network: robinhood, dataset: archive) {
     Calls(
       orderBy: { ascending: Call_Index }
       where: {

@@ -60,6 +60,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)
 - [Pools.trade API on Robinhood](/docs/blockchain/robinhood/pools-trade-api)
@@ -112,7 +113,7 @@ Pons and [pools.trade](/docs/blockchain/robinhood/pools-trade-api) are structura
 | Pool `hooks` | PonsV2MemeHook | `0x000…000` |
 | Pool `fee` / `tickSpacing` | `0` / `200` | `2500` / `25` or `60` |
 | Quote assets | ETH, USDG, cbBTC, tokenized stocks and ETFs | Mostly native ETH |
-| Curve trades in trade cubes | **Yes**, as `pons_v2` (`Trading` from 2026-08-12, EVM `DEXTrades` from 2026-08-14) | N/A — all trades are pool trades |
+| Curve trades in trade cubes | **Yes**, as `pons_v2` (`Trading`, rolling ~30-day window; EVM `DEXTrades` from 2026-08-14) | N/A — all trades are pool trades |
 
 :::caution Pons V1 is a different protocol with different event signatures
 `PonsLaunchFactory` at `0xa5aab3f0c6eeadf30ef1d3eb997108e976351feb` is the **V1** launchpad. It has **no bonding curve** — each token gets a Uniswap V3 pool at launch — and its events carry **different signatures and different topic0 values** from V2:
@@ -157,9 +158,11 @@ See [Dataset options](/docs/graphql/dataset/options), [archive](/docs/graphql/da
 | `Topics: {includes: […]}` filter (incl. topic0) | ✅ | ✅ | ✅ |
 | `Call.Input` / `Call.Output`, incl. `Input: {startsWith: […]}` | ✅ | ✅ | ✅ |
 | `LogHeader.Address` / `LogHeader.Data`, `Log.Signature.Name` | ✅ | ✅ | ✅ |
-| `Transfers`, `Holders`, `DEXTrades`, `Trading` | ✅ | ✅ | ✅ |
+| `Transfers`, `Holders`, `DEXTrades` | ✅ | ✅ | ✅ |
 | `Log.Signature.SignatureHash` / `Call.Signature.SignatureHash`, filtered or selected | ✅ | ✅ | ✅ |
 | **`DEXPoolEvents`, `DEXPoolSlippages`, `TransactionBalances`** | ✅ | ❌ | ❌ |
+
+The `Trading` cube is a separate root that takes no `dataset` argument; it holds a rolling window of roughly the last 30 days, so the `pons_v2` rows it serves are always the most recent month, not a fixed history.
 
 :::note `SignatureHash` works on every dataset
 `Log.Signature.SignatureHash` and `Call.Signature.SignatureHash` work on `realtime`, `archive` and `combined`, both as a filter and in the selection set, and a `SignatureHash` filter matches the same rows as a topic0 `Topics` filter. The queries on this page use `Topics: {includes: [{Hash: {is: "<topic0>"}}]}` because it is the same filter on every dataset **and** it is the only way to match an indexed argument of an undecoded event — `Signature: {SignatureHash: …}` is an equally valid choice for topic0 alone.
@@ -459,7 +462,7 @@ dcacba5e347ae7abd91cb519eb877af8fa7774e347b85dd3ddcd24a2ba8cdf37  Launched(addre
 
 The simplest launch feed is now the decoded `TokenLaunched` event itself — the [name-filtered query above](#querying-a-decoded-event-by-name) returns `token`, `curve`, `deployer`, `pairToken` and `graduationThreshold` as named arguments on every launch. Stream it as a subscription and you have a live launch tape with zero decoding.
 
-The **`Calls` cube is still worth knowing**, for two reasons: it is the only on-chain source of the launch **metadata** (name, symbol, image, socials — see [Token metadata](#token-metadata)), and it covers **full archive history**, whereas decoded event names only reach back to 2026-08-14. `Call.Output` holds the function's return data, and every Pons launch entry point returns the addresses you need:
+The **`Calls` cube is still worth knowing**, for two reasons: it is the only on-chain source of the launch **metadata** (name, symbol, image, socials — see [Token metadata](#token-metadata)), and its archive reaches back further than decoded event names (Calls archive retention is planned to cap at roughly the last 3 months), whereas decoded event names only reach back to 2026-08-14. `Call.Output` holds the function's return data, and every Pons launch entry point returns the addresses you need:
 
 | Selector (`Call.Input` prefix) | Function | `Call.Output` |
 | --- | --- | --- |
@@ -510,7 +513,7 @@ The `Input: {startsWith: […]}` scan is the expensive part. Run unbounded again
 :::
 
 :::caution Never match `launchTokenFor` and `launchAndBuy` together
-`launchAndBuy` on the router calls `launchTokenFor` on the factory internally, so a filter matching both selectors returns **two rows for the same launch** — one for the router's outer call, one for the factory's inner call. Measured over 200 rows, including `d6a0eef5` alongside `f85f8e41` inflates the feed **1.4×**; the three-selector filter above is exactly 1.0×.
+`launchAndBuy` on the router calls `launchTokenFor` on the factory internally, so a filter matching both selectors returns **two rows for the same launch** — one for the router's outer call, one for the factory's inner call. Including `d6a0eef5` alongside `f85f8e41` double-counts every router launch; the three-selector filter above counts each launch once.
 
 That is why `d6a0eef5` is absent from the query. Router launches are attributed to the router call, which is also where `Transaction.From` is the real creator. If you do need `launchTokenFor` — to catch a launch routed through some other contract — add it and deduplicate on `Transaction.Hash`.
 :::
@@ -676,7 +679,7 @@ This pattern only catches launches where the factory or router is the transactio
 
 Add `Pair: {Token: {Address: {is: "<token>"}}}` to scope to one token — and because the same cube also carries the token's post-graduation `uniswap_v4` trades, dropping the protocol filter gives a token's **entire curve-to-pool trade history in one query**. On `pons_v2` rows `Pair.Pool.Address` is the token's **bonding-curve contract** (it matches `curve` in `TokenLaunched`), so every curve trade hands you the curve address for free. The same trades also appear in the EVM `DEXTrades` / `DEXTradeByTokens` cubes (`ProtocolFamily: "Pons"`, curve contract as `Trade.Dex.SmartContract`), but there `PriceInUSD` / `AmountInUSD` are populated only on the realtime dataset and read `0` on `archive` and `combined` — prefer `Trading`.
 
-The event route below is still what you want for the **fee and tax legs** (`fee`, `tax`, snipe-tax attribution), which the trade cubes do not carry, and for curve trades older than the trade-cube coverage (2026-08-12 in `Trading`, 2026-08-14 in the EVM `DEXTrades` cubes).
+The event route below is still what you want for the **fee and tax legs** (`fee`, `tax`, snipe-tax attribution), which the trade cubes do not carry, and for curve trades older than the trade-cube coverage (the `Trading` cube's rolling ~30-day window, 2026-08-14 in the EVM `DEXTrades` cubes).
 
 ### Every trade on one token's curve
 
@@ -998,7 +1001,7 @@ The supply lock is a balance, so the cheapest check is the locker's holding of t
 
 ```graphql
 {
-  EVM(dataset: combined, network: robinhood) {
+  EVM(dataset: archive, network: robinhood) {
     Holders(
       limit: {count: 1}
       where: {
@@ -1067,7 +1070,7 @@ On `uniswap_v4` rows `Pair.Pool.Address` is the v4 PoolManager singleton, not a 
 ```
 
 :::note Legs are not duplicated on Pons pools
-Unlike [pools.trade](/docs/blockchain/robinhood/pools-trade-api#latest-trades-for-a-poolstrade-token), Pons v4 pools return **one row per trade leg** — measured samples deduplicate to a 1.0× factor on `(TransactionHeader.Hash, Block.Time, Side, Amounts.Base, Pair.QuoteToken.Symbol, Trader.Address)`. No dedup pass is needed before summing volume.
+Unlike [pools.trade](/docs/blockchain/robinhood/pools-trade-api#latest-trades-for-a-poolstrade-token), Pons v4 pools return **one row per trade leg** — no deduplication is needed. No dedup pass is needed before summing volume.
 
 One user swap can still fan out into several routed legs across different quote pairs in the same transaction, so summing every leg overstates end-user volume. Graduated tokens commonly trade against both ETH and USDG.
 :::
@@ -1098,7 +1101,7 @@ Candles are built from every `Trading` row, so they start from the token's **fir
 
 Change `Duration` to `60`, `300`, `900` or `86400` for other candle sizes. Add `Supply { MarketCap CirculatingSupply }` for FDV.
 
-### Top graduated Pons tokens by volume
+### Top graduated Pons tokens by trade count {#top-graduated-pons-tokens-by-volume}
 
 Pass a token set harvested from [`PoolRegistered`](#enumerating-graduated-tokens):
 
@@ -1107,7 +1110,7 @@ Pass a token set harvested from [`PoolRegistered`](#enumerating-graduated-tokens
   Trading {
     Tokens(
       limit: {count: 25}
-      orderBy: {descendingByField: "vol"}
+      orderBy: {descendingByField: "trades"}
       where: {
         Token: {
           Address: {in: [
@@ -1228,7 +1231,7 @@ When `HasPreBalance` is `false`, `PreBalance` reads `0` meaning "unknown", not "
 
 ```graphql
 {
-  EVM(dataset: combined, network: robinhood) {
+  EVM(dataset: archive, network: robinhood) {
     Holders(
       limit: {count: 100}
       orderBy: {descending: Balance_Amount}
@@ -1335,7 +1338,7 @@ Subscribe to `Events` filtered on `Log: {Signature: {Name: {is: "TokenLaunched"}
 
 ### Why do my Pons trade queries return nothing?
 
-Check the date range: curve trades appear in the trade cubes (as `Protocol: "pons_v2"`, best read via the `Trading` cube) only from **2026-08-12** onward in `Trading`, and from 2026-08-14 in the EVM `DEXTrades` cubes. For a token that lived and died on its curve before that, `CurveBuy` / `CurveSell` events on the curve contract are the only trade record. And a `uniswap_v4` filter never matches a pre-graduation token — there is no pool until graduation. See [Bonding-curve trades](#bonding-curve-trades).
+Check the date range: curve trades appear in the trade cubes (as `Protocol: "pons_v2"`, best read via the `Trading` cube) only within the `Trading` cube's rolling ~30-day window, and from 2026-08-14 onward in the EVM `DEXTrades` cubes. For a token that lived and died on its curve before that, `CurveBuy` / `CurveSell` events on the curve contract are the only trade record. And a `uniswap_v4` filter never matches a pre-graduation token — there is no pool until graduation. See [Bonding-curve trades](#bonding-curve-trades).
 
 ### Where do I get a token's name, symbol, image, and socials?
 

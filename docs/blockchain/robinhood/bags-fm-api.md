@@ -1,6 +1,6 @@
 ---
 title: "Bags.fm API on Robinhood"
-description: "Bags.fm API on Robinhood: query and stream Robinhood on-chain data with Bitquery GraphQL examples for developers. Covers archive history and realtime data."
+description: "Bags.fm API on Robinhood Chain: bags_v2 trades, prices, OHLCV, market cap, whale trades, top traders and bonding-curve events via Bitquery GraphQL."
 sidebar_position: 5
 keywords:
   - Bags.fm API
@@ -32,6 +32,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)
 - [Flap.sh API on Robinhood](/docs/blockchain/robinhood/flap-sh-api)
@@ -52,8 +53,8 @@ Bags trades are indexed in the `Trading` cube under the **Bags** protocol family
 | `Pair.Market.ProtocolFamily` | `Bags` | Selects all Bags markets across tokens |
 | `Pair.Market.Protocol` | `bags_v2` | Current Bags protocol version |
 | `Network` / `NetworkBid` | `Robinhood` / `bid:robinhood` | Robinhood network |
-| **Bags AMM / bonding curve** | `0x0ed8d8116f89def7c904d6b9657657a3ccc7d5b7` | Proxy that routes Bags trades |
-| **Bags AMM logic contract** | `0x419890a21711c3d3af46b58548376420b9723275` | Implementation behind the proxy; emits `TokensBought` / `TokensSold` |
+| **Per-token Bags AMM** (beacon proxy, one per token) | `0xfa925c0589e98f564cd7456a0e7cd80722724ac5` (example: the MERRY AMM) | Each launch gets its own AMM proxy; it is the `Pair.Market.Program` of that token's `bags_v2` trades and the `LogHeader.Address` of its `TokensBought` / `TokensSold` / `FeesSplit` events. An AMM goes quiet when its token does, so look the address up from a recent trade rather than hard-coding it |
+| **Bags AMM logic contract** (beacon implementation) | `0x419890a21711c3d3af46b58548376420b9723275` | Shared implementation behind every per-token AMM; appears as `Log.SmartContract` |
 | **Bags factory (launch)** | `0xe8cc4431adf8b5a847c113ef0c6af9043219cb37` | Mints new Bags tokens — see [launches](/docs/blockchain/robinhood/robinhood-meme-coin-launches#bagsfm) |
 
 :::note Per-token `Market.Program`
@@ -194,10 +195,10 @@ subscription {
   "Supply": { "CirculatingSupply": 0, "MarketCap": 2578.51 },
   "Trader": { "Address": "0x00a60b9760a4aa1a2fd6388b5cb6295f4c90cee0" },
   "Pair": {
-    "Currency": { "Name": "Stud", "Symbol": "Stud", "Id": "bid:robinhood:0x3f62c875db9a08cfbb0f0ed7623770cf3fa5f70c" },
-    "Market": { "Program": "0x0ed8d8116f89def7c904d6b9657657a3ccc7d5b7", "Protocol": "bags_v2", "ProtocolFamily": "Bags", "Network": "Robinhood" },
+    "Currency": { "Name": "Stud", "Symbol": "Stud", "Id": "bid:robinhood:0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a" },
+    "Market": { "Program": "0xfa925c0589e98f564cd7456a0e7cd80722724ac5", "Protocol": "bags_v2", "ProtocolFamily": "Bags", "Network": "Robinhood" },
     "QuoteCurrency": { "Name": "Ethereum", "Symbol": "ETH", "Id": "bid:eth" },
-    "Token": { "Address": "0x3f62c875db9a08cfbb0f0ed7623770cf3fa5f70c", "Symbol": "Stud", "IsNative": false },
+    "Token": { "Address": "0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a", "Symbol": "Stud", "IsNative": false },
     "QuoteToken": { "Symbol": "ETH", "IsNative": true, "Id": "bid:robinhood" }
   }
 }
@@ -296,7 +297,7 @@ Every query on this page can be turned into a live stream — switch the operati
 
 ## Trades for a Specific Bags Token
 
-Scope trades to a single Bags token with `Pair.Token.Address`. This example uses the `Stud` token (`0x3f62c875db9a08cfbb0f0ed7623770cf3fa5f70c`).
+Scope trades to a single Bags token with `Pair.Token.Address`. This example uses the `MERRY` token (`0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a`).
 
 ```graphql
 {
@@ -306,7 +307,7 @@ Scope trades to a single Bags token with `Pair.Token.Address`. This example uses
       orderBy: {descending: Block_Time}
       where: {
         Pair: {
-          Token: {Address: {is: "0x3f62c875db9a08cfbb0f0ed7623770cf3fa5f70c"}}
+          Token: {Address: {is: "0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a"}}
           Market: {ProtocolFamily: {is: "Bags"}}
         }
       }
@@ -360,7 +361,7 @@ Track all Bags trades made by a specific wallet by filtering on `Trader.Address`
       limit: {count: 50}
       orderBy: {descending: Block_Time}
       where: {
-        Trader: {Address: {is: "0x80f173cff2e585d1156f9a96b6195939ac1ba643"}}
+        Trader: {Address: {is: "0x7906d5e4a10fbb07f5491018ab29df072a76eb3d"}}
         Pair: {Market: {ProtocolFamily: {is: "Bags"}}}
       }
     ) {
@@ -456,7 +457,7 @@ Get the earliest trades for a token, ordered oldest first, to find the first buy
       orderBy: {ascending: [Block_Time, TransactionHeader_Index]}
       where: {
         Pair: {
-          Token: {Address: {is: "0x3f62c875db9a08cfbb0f0ed7623770cf3fa5f70c"}}
+          Token: {Address: {is: "0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a"}}
           Market: {ProtocolFamily: {is: "Bags"}}
         }
         Side: {is: "Buy"}
@@ -498,7 +499,7 @@ Rank the biggest traders of a specific Bags token by total USD volume, with a bu
       orderBy: {descendingByField: "volume_usd"}
       where: {
         Pair: {
-          Token: {Address: {is: "0x3f62c875db9a08cfbb0f0ed7623770cf3fa5f70c"}}
+          Token: {Address: {is: "0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a"}}
           Market: {ProtocolFamily: {is: "Bags"}}
         }
       }
@@ -528,7 +529,7 @@ Get the latest USD-normalised price of a Bags token using `Trading.Tokens` with 
       limit: {count: 1}
       orderBy: {descending: Interval_Time_End}
       where: {
-        Token: {Address: {is: "0x3f62c875db9a08cfbb0f0ed7623770cf3fa5f70c"}, NetworkBid: {is: "bid:robinhood"}}
+        Token: {Address: {is: "0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a"}, NetworkBid: {is: "bid:robinhood"}}
         Interval: {Time: {Duration: {eq: 1}}}
       }
     ) {
@@ -555,7 +556,7 @@ Get the latest market cap, fully-diluted valuation, supply, price, and USD volum
       limit: {count: 1}
       orderBy: {descending: Interval_Time_Start}
       where: {
-        Token: {Address: {is: "0x3f62c875db9a08cfbb0f0ed7623770cf3fa5f70c"}, NetworkBid: {is: "bid:robinhood"}}
+        Token: {Address: {is: "0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a"}, NetworkBid: {is: "bid:robinhood"}}
         Interval: {Time: {Duration: {eq: 1}}}
       }
     ) {
@@ -588,7 +589,7 @@ Get the latest market cap, fully-diluted valuation, supply, price, and USD volum
 
 ```json
 {
-  "Token": { "Name": "Stud", "Symbol": "Stud", "Address": "0x3f62c875db9a08cfbb0f0ed7623770cf3fa5f70c" },
+  "Token": { "Name": "Stud", "Symbol": "Stud", "Address": "0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a" },
   "Price": { "Ohlc": { "Close": 2.3498699e-06 } },
   "Supply": {
     "MarketCap": 2451.49,
@@ -615,7 +616,7 @@ Token-level OHLCV candles (USD-normalised, weighted across all pools) for charti
       limit: {count: 100}
       orderBy: {descending: Interval_Time_Start}
       where: {
-        Token: {Address: {is: "0x3f62c875db9a08cfbb0f0ed7623770cf3fa5f70c"}, NetworkBid: {is: "bid:robinhood"}}
+        Token: {Address: {is: "0x66c9ba158b2b80c2a51ca75f3e4155a682676c7a"}, NetworkBid: {is: "bid:robinhood"}}
         Interval: {Time: {Duration: {eq: 60}}}
       }
     ) {
@@ -698,7 +699,7 @@ This aggregation gives volume and trade counts per token. To add the latest mark
 
 ## Raw Bonding-Curve Trades (`TokensBought` / `TokensSold`)
 
-For the lowest-level view, read Bags trades directly from the AMM's decoded logs. The Bags bonding-curve logic contract (`0x419890a21711c3d3af46b58548376420b9723275`, proxied by `0x0ed8d8116f89def7c904d6b9657657a3ccc7d5b7`) emits **`TokensBought`** and **`TokensSold`** with full fee breakdown and virtual reserves — data that isn't exposed by the higher-level `Trading.Trades` cube.
+For the lowest-level view, read Bags trades directly from the AMM's decoded logs. The Bags bonding-curve logic contract (`0x419890a21711c3d3af46b58548376420b9723275`, proxied by `0xfa925c0589e98f564cd7456a0e7cd80722724ac5`) emits **`TokensBought`** and **`TokensSold`** with full fee breakdown and virtual reserves — data that isn't exposed by the higher-level `Trading.Trades` cube.
 
 ### Bags buys (`TokensBought`)
 
@@ -781,14 +782,14 @@ Swap the signature name to stream sells. Arguments: `seller`, `recipient`, `toke
 
 ## All Bags AMM Events
 
-Enumerate the event signatures emitted through the Bags AMM proxy to discover what else you can index (fee splits, initialization, role/ownership changes).
+Enumerate the event signatures emitted through one token's Bags AMM proxy (the MERRY AMM here; swap in the `Pair.Market.Program` of any live Bags token) to discover what else you can index (fee splits, initialization, role/ownership changes).
 
 ```graphql
 {
   EVM(network: robinhood) {
     Events(
       limit: {count: 100}
-      where: {LogHeader: {Address: {is: "0x0ed8d8116f89def7c904d6b9657657a3ccc7d5b7"}}}
+      where: {LogHeader: {Address: {is: "0xfa925c0589e98f564cd7456a0e7cd80722724ac5"}}}
     ) {
       count
       Log {
