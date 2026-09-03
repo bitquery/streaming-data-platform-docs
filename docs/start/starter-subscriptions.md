@@ -56,7 +56,7 @@ This query gives you tokens which are graduated from Raydium Launchpad to Raydiu
 
 #### Solana Trades Stream
 
-This subscription streams real-time Solana trades. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+This subscription streams real-time Solana trades. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Solana Trades Stream](https://ide.bitquery.io/solana-trades-subscription_3)
 
@@ -68,19 +68,19 @@ Get all trades of Bags FM tokens from Meteora and other DEXs. This Bags FM token
 
 #### CPMM trades
 
-In this section we will see how to get data on Raydium CPMM trades in real-time. You can check out our Pump Fun docs, Raydium v4 docs and Raydium LaunchPad docs too. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+In this section we will see how to get data on Raydium CPMM trades in real-time. You can check out our Pump Fun docs, Raydium v4 docs and Raydium LaunchPad docs too. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [CPMM trades](https://ide.bitquery.io/CPMM-trades)
 
 #### Large Token Buys and Sells on Solana DEX
 
-This stream provides real-time large buy and sell on Solana DEXs. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+Streams Solana trades above $10,000, using the Trading cube's `AmountsInUsd` so the threshold is applied to a real USD value.
 
 ▶️ [Large Token Buys and Sells on Solana DEX](https://ide.bitquery.io/big-trades-on-solana)
 
 #### Specific Token Trades Stream
 
-This subscription stream uses DexTradeByTokens API to stream real-time specific token trades. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+This subscription stream uses DexTradeByTokens API to stream real-time specific token trades. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Specific Token Trades Stream](https://ide.bitquery.io/token-trades-subscription)
 
@@ -222,11 +222,11 @@ You can use the following query to get the latest price of a Apple xStock on Sol
 
 ▶️ [Get realtime Price of Apple xStock in USD Real-time](https://ide.bitquery.io/Get-realtime-Price-of-Apple-xStock-in--USD-Real-time)
 
-#### Price of a moonshot token
+#### Price of a Moonshot token
 
-The below query gets real-time price of the specified Token `A1XqfcD1vMEhUNwEKvBVRWFV48ZLDL4oheFVCPEcM3Vk` on the Moonit DEX. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+Real-time price of a Moonshot token in USD, one row per trade. Moonshot is `token_launchpad` in the Trading cube, not `moonshot`. Change the token address in the `where` clause to use it.
 
-▶️ [Price of a moonshot token](https://ide.bitquery.io/Price-of-a-Moonshot-token)
+▶️ [Price of a Moonshot token](https://ide.bitquery.io/Price-of-a-Moonshot-token)
 
 ### Supply & Market Cap
 
@@ -336,13 +336,13 @@ This subscription tracks in real-time newly created Pumpfun tokens, including th
 
 #### PumpFun Trades Stream
 
-This stream returns the real time trades on Pumpfun platform. This stream could be modified to get real time trades for a particular token or trades by a particular trader.
+This stream returns the real time trades on Pumpfun platform. This stream could be modified to get real time trades for a particular token or trades by a particular trader. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [PumpFun Trades Stream](https://ide.bitquery.io/Pumpfun-DEX-Trades_1)
 
 #### Pumpswap Trades Stream
 
-This stream returns the real time trades on Pumpswap exchange. This stream could be modified to get real time trades for a particular token or trades by a particular trader.
+This stream returns the real time trades on Pumpswap exchange. This stream could be modified to get real time trades for a particular token or trades by a particular trader. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Pumpswap Trades Stream](https://ide.bitquery.io/pumpswap-trades)
 
@@ -384,13 +384,13 @@ Subscribe to `Instructions` where the program method is `create_pool` and the pr
 
 #### Pumpfun DEX Trades stream
 
-Use Bitquery's `DEXTrades` GraphQL subscription filtered by `ProtocolName: "pump"` to stream live Pump.fun trades including buy/sell sides, amounts, accounts, and methods. For gRPC or Kafka, see Pump.fun gRPC Streams.
+Use a `Trading.Trades` subscription filtered by `ProtocolName: "pump"` to stream live Pump.fun trades including buy/sell sides, amounts, accounts, and methods. For gRPC or Kafka, see Pump.fun gRPC Streams. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Pumpfun DEX Trades stream](https://ide.bitquery.io/Pumpfun-DEX-Trades-stream)
 
 #### Pumpswap latest Trade for a trader stream
 
-Use a `subscription` on `DEXTrades` with the same `Signer` and PumpSwap `ProgramAddress` filters. New trades for that wallet on PumpSwap stream as they are confirmed.
+Subscribe to `Trading.Trades` with the same `Signer` and PumpSwap `ProgramAddress` filters. New trades for that wallet on PumpSwap stream as they are confirmed. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Pumpswap latest Trade for a trader stream](https://ide.bitquery.io/Pumpswap-latest-Trade-for-a-trader-stream_1)
 
@@ -468,17 +468,17 @@ Subscribe to newly launched tokens across multiple Solana launchpads and DEXs in
 
 ▶️ [Newly launched token on PumpFun, Raydium Launchpad, Meteora DBC, Heaven DEX, Bags , Jupiter studio, Moonit](https://ide.bitquery.io/newly-launched-token-on-PumpFun-Raydium-Launchpad-Meteora-DBC-Heaven-DEX-Bags--Jupiter-studio-Moonit)
 
-#### Raydium CLMM DEX Trades with AccountNames
+#### Raydium CLMM Trades
 
-In this section we will see how to get data on Raydium CLMM trades in real-time. According to the official docs available here.
+Streams Raydium CLMM trades from the Trading cube, with USD price and trade size on every row. The Trading cube has no `AccountNames`; for the pool account list use the Raydium CLMM query on the Queries tab.
 
-▶️ [Raydium CLMM DEX Trades with AccountNames](https://ide.bitquery.io/Raydium-CLMM-DEX-Trades-with-AccountNames)
+▶️ [Raydium CLMM Trades](https://ide.bitquery.io/Raydium-CLMM-DEX-Trades-with-AccountNames)
 
-#### Raydium dextrades through OpenBook order book
+#### Raydium AMM Trades
 
-If you want to track latest Raydium DEXTrades enabled by OpenBook order book Protocol, you can use.
+Streams Raydium AMM trades from the Trading cube, with USD price and trade size on every row. Order-book context from OpenBook is not part of the Trading cube.
 
-▶️ [Raydium dextrades through OpenBook order book](https://ide.bitquery.io/Raydium-dextrades-through-OpenBook-order-book)
+▶️ [Raydium AMM Trades](https://ide.bitquery.io/Raydium-dextrades-through-OpenBook-order-book)
 
 #### Realtime stream raydium launchpad tokens with marketcap above 10k marketcap
 
@@ -872,7 +872,7 @@ This stream returns all the real time DEX trades happening on Sunpump exchange o
 
 #### Real-time Trades on Tron
 
-This stream returns all the real time DEX trades happening on the Tron network. You can modify this stream to get DEX trades on a particular DEX or trades of a particular token or trades by a particular trader. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+This stream returns all the real time DEX trades happening on the Tron network. You can modify this stream to get DEX trades on a particular DEX or trades of a particular token or trades by a particular trader. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Real-time Trades on Tron](https://ide.bitquery.io/Latest-trades-on-Tron)
 
@@ -1036,7 +1036,7 @@ Real time trades of an ethereum address. Uses the Trading cube. Replace the addr
 
 #### Subscribe to dex trades on ethereum mainnet
 
-Will get the realtime DEX trades happening on Ethereum Mainnet. Open it in the GraphQL IDE using this. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+Will get the realtime DEX trades happening on Ethereum Mainnet. Open it in the GraphQL IDE using this. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Subscribe to dex trades on ethereum mainnet](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet_2)
 
@@ -1432,13 +1432,13 @@ Crypto Trades API: one row per swap, with USD and supply. Filter `Pair.Market.Ne
 
 #### Real-time Trades on BSC
 
-This subscription returns the real-time trades happening on BSC Network. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+This subscription returns the real-time trades happening on BSC Network. You can modify the stream to get real-time trades for a particular token, a particular token pair and even a particular trader. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Real-time Trades on BSC](https://ide.bitquery.io/subscribe-to-dex-trades-on-BNB-mainnet)
 
 #### Subscribe to bsc dex trades
 
-This example uses the chain-specific DEXTrades cube via `EVM(network: bsc) { DEXTrades }` (pool-side Buy/Sell; see DEXTrades cube). USD fields can be empty on thin pools. For swap rows with trader + USD, use the stream at the top of this page. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+This example uses the chain-specific the Trading cube via `EVM(network: bsc) { the Trading cube }` (pool-side Buy/Sell; see the Trading cube). USD fields can be empty on thin pools. For swap rows with trader + USD, use the stream at the top of this page. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Subscribe to bsc dex trades](https://ide.bitquery.io/subscribe-to-bsc-dex-trades)
 
@@ -1806,13 +1806,13 @@ Crypto Trades API: one row per swap, with USD and supply. Filter `Pair.Market.Ne
 
 #### Base DEX Trades Stream
 
-This stream returns all the real time DEX trades happening on Base. You can modify this stream to get DEX trades on a particular DEX or trades of a particular token or trades by a particular trader. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+This stream returns all the real time DEX trades happening on Base. You can modify this stream to get DEX trades on a particular DEX or trades of a particular token or trades by a particular trader. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Base DEX Trades Stream](https://ide.bitquery.io/subscribe-to-dex-trades-on-base_1)
 
 #### Subscribe to dex trades on base
 
-Read DEXTrades vs DEXTradeByTokens vs Trades cube to get a better understanding on when to use which cube. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+Read the Trading cube vs the Trading cube vs Trades cube to get a better understanding on when to use which cube. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Subscribe to dex trades on base](https://ide.bitquery.io/subscribe-to-dex-trades-on-base)
 
@@ -2108,7 +2108,7 @@ Liquidity for v4 pools is reconstructed by stepping through each price range whe
 
 #### Arbitrum Dextrades subscription
 
-This example uses the chain-specific DEXTrades cube via `EVM(network: arbitrum) { DEXTrades }` (pool-side Buy/Sell; see DEXTrades cube). USD can be weak on thin pools. For trader + USD swap rows, use the stream at the top. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+This example uses the chain-specific the Trading cube via `EVM(network: arbitrum) { the Trading cube }` (pool-side Buy/Sell; see the Trading cube). USD can be weak on thin pools. For trader + USD swap rows, use the stream at the top. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Arbitrum Dextrades subscription](https://ide.bitquery.io/Arbitrum-Dextrades-subscription)
 
@@ -2180,7 +2180,7 @@ The Uniswap v4 PoolManager contract emits all pool-related events, including poo
 
 #### Realtime optimism dex trades websocket
 
-This example uses the chain-specific DEXTrades cube via `EVM(network: optimism) { DEXTrades }` (pool-side Buy/Sell; see DEXTrades cube). USD can be weak on thin pools. For trader + USD swap rows, use the stream at the top. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+This example uses the chain-specific the Trading cube via `EVM(network: optimism) { the Trading cube }` (pool-side Buy/Sell; see the Trading cube). USD can be weak on thin pools. For trader + USD swap rows, use the stream at the top. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Realtime optimism dex trades websocket](https://ide.bitquery.io/Realtime-optimism-dex-trades-websocket)
 
@@ -2224,7 +2224,7 @@ The Uniswap v4 PoolManager contract emits all pool-related events, including poo
 
 #### Realtime matic dex trades websocket
 
-Read DEXTrades vs DEXTradeByTokens vs Trades cube to understand when to use which cube. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+Read the Trading cube vs the Trading cube vs Trades cube to understand when to use which cube. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Realtime matic dex trades websocket](https://ide.bitquery.io/Realtime-matic-dex-trades-websocket)
 
@@ -2448,7 +2448,7 @@ Pump fun token live prices using trades api. Uses the `Trades` cube.
 
 #### Real-time Trades on Pancakeswap
 
-This subscription returns the real-time trades happening on Pancakeswap. You can modify the stream to get real time trades for a particular token, a particular token pair, and even a particular trader.
+Streams PancakeSwap v3 trades on BSC from the Trading cube, with USD price and trade size on every row. The previous version streamed every BSC DEX despite its title; this one filters on `pancake_swap_v3`.
 
 ▶️ [Real-time Trades on Pancakeswap](https://ide.bitquery.io/Latest-BSC-PancakeSwap-v3-dextrades---Stream)
 
@@ -2484,7 +2484,7 @@ Filter the Trading cube with `ProtocolName` in `uniswap_v3`, `uniswap_v2`, `unis
 
 #### Solana trades subscription
 
-Solana trades subscription. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+Streams Solana trades quoted in USDT. USDT is the quote side on Solana, so it is filtered with `Pair.QuoteToken`, not `Pair.Token`.
 
 ▶️ [Solana trades subscription](https://ide.bitquery.io/solana-trades-subscription_10_1)
 
@@ -2584,7 +2584,7 @@ USDT and USDC token Transfers stream on solana. Uses the `Transfers` cube.
 
 #### Real time stablecoin portfolio
 
-Below stream will provide you the realtime portfolio updates for a particular address for a specific Stablecoin. In this query example, we are tracking portfolio updates for the address `3i51cKbLbaKAqvRJdCUaq9hsnvf9kqCfMujNgFj7nRKt` and for stablecoin `USDC`.
+Below stream will provide you the realtime portfolio updates for a particular address for a specific Stablecoin. In this query example, we are tracking portfolio updates for the address `3i51cKbLbaKAqvRJdCUaq9hsnvf9kqCfMujNgFj7nRKt` and for stablecoin `USDC`. Trading cube - MEV-filtered trades with USD prices on every row.
 
 ▶️ [Real time stablecoin portfolio](https://ide.bitquery.io/real-time-stablecoin-portfolio_2)
 
@@ -2642,7 +2642,7 @@ This stream allows you to monitor real time NFT trades on OpenSea. It could also
 
 #### Latest Solana NFT Trades
 
-The subscription query provided below fetches the most recent NFT trades on the Solana blockchain. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section.
+Streams the latest Solana NFT trades from the Trading cube, with USD price and trade size on every row.
 
 ▶️ [Latest Solana NFT Trades](https://ide.bitquery.io/Latest-Solana-NFT-Trades)
 

@@ -149,11 +149,11 @@ Get all trades related transactions (buy, sell) for a specific wallet address. T
 
 ▶️ [Get Trades by Wallet Address](https://ide.bitquery.io/Solana-dextrades-by-a-trader_2)
 
-#### Get Volume Stats for Solana Chain — historical (beyond 30 days)
+#### Get Volume Stats for Solana Chain
 
-Returns volume statistics, active wallets, and total transactions for Solana. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+Traded volume, trade count and active wallets for Solana over a stated window, from `DEXTradeByTokens`. Three things this query has to work around. `Solana.DEXTrades` keeps about 12 hours and has no archive, so it cannot answer this at all. `since_relative` does not filter this cube - 1, 2, 3 and 6 days back all return the same totals - so the window is an explicit timestamp you edit. And a `uniq` in the same selection as `sum` and `count` changes those other aggregates by roughly 10x, so active wallets is computed in its own aliased call. The volume sum also excludes single trades above $1M, which are mispriced rows; without that guard the total reads about $32 quadrillion a day instead of about $16 billion.
 
-▶️ [Get Volume Stats for Solana Chain — historical (beyond 30 days)](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets_1)
+▶️ [Get Volume Stats for Solana Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets_1)
 
 #### Get Multiple Token Analytics — historical (beyond 30 days)
 
@@ -281,7 +281,7 @@ The query below uses the InstructionBalanceUpdates API to fetch balance updates 
 
 #### Trades of wallets with balance Updates in that trades
 
-Below query will give you the trades of the wallets present in `addressList` along with the balance updates happened in those trades..
+Trades made by the wallets in `addressList`, with the balance updates from those same transactions joined on. Uses `DEXTradeByTokens` rather than `Solana.DEXTrades`: DEXTrades keeps only about 12 hours on Solana and has no archive, so the previous version returned no rows whenever the wallet had not traded in the last half day. DEXTradeByTokens keeps about 7 days and supports `archive` for older windows.
 
 ▶️ [Trades of wallets with balance Updates in that trades](https://ide.bitquery.io/Trades-of-wallets-with-balance-Updates-in-that-trades)
 
@@ -507,7 +507,7 @@ This query returns the top 10 pump fun tokens by Marketcap change in last 5mins.
 
 #### Top PumpFun Tokens by Marketcap
 
-This query returns the top 10 PumpFun tokens based on market cap. You can increase the limit to get more tokens.
+Top Pump.fun and PumpSwap tokens on Solana over the last hour, ranked by USD volume. Ranked by volume rather than market cap on purpose: Solana market caps in the cube saturate against whatever ceiling you filter on, so sorting by them surfaces tokens with broken supply figures. `Supply.MarketCap` is still returned for reference. The previous version sorted `Solana.DEXTrades` by raw buy price over a window 18 months outside that cube's ~12 hour retention and returned USDC as the top Pump.fun token.
 
 ▶️ [Top PumpFun Tokens by Marketcap](https://ide.bitquery.io/top-tokens-by-mktcap-on-pump-fun-in-last-15-min)
 
@@ -549,7 +549,7 @@ Retrieve Pump.fun token migrations on a specific date. The API returns transfers
 
 #### Pumpswap latest Trades API
 
-Use `DEXTrades` with `Solana(network: solana, dataset: realtime)` and filter `Trade.Dex.ProgramAddress` to the PumpSwap AMM. This returns the most recent successful swaps on PumpSwap (snapshot query, not a live stream).
+Latest PumpSwap trades from the Trading cube, with USD price and trade size on every row. The Trading cube reaches back about 30 days on Solana; `Solana.DEXTrades` keeps only about 12 hours.
 
 ▶️ [Pumpswap latest Trades API](https://ide.bitquery.io/Pumpswap-latest-Trades-API)
 
@@ -623,19 +623,19 @@ If you want to get OHLC data for any specific currency pair on Meteora DYN, you 
 
 #### Volatility of WSOL USDC Pair on AldrinAmm Dex on Solana
 
-Volatility is an important factor in trading world as it determines the fluctuation in price that implies the possibility of profit and risk of loss. Lesser volatility denotes that the pair is stable.
+Standard deviation of the WSOL/USDC price on AldrinAmm over the last six days. Uses `DEXTradeByTokens`, which keeps about 7 days, rather than `Solana.DEXTrades`, which keeps about 12 hours and has no archive. `trades` is returned alongside the volatility so an empty window reads as 0 trades instead of passing for zero volatility.
 
 ▶️ [Volatility of WSOL USDC Pair on AldrinAmm Dex on Solana](https://ide.bitquery.io/Volatility-of-WSOL-USDC-Pair-on-AldrinAmm-Dex-on-Solana_1)
 
 #### Volatility of WSOL USDC Pair on Lifinity Dex on Solana
 
-Volatility is an important factor in trading world as it determines the fluctuation in price that implies the possibility of profit and risk of loss. Lesser volatility denotes that the pair is stable.
+Standard deviation of the WSOL/USDC price on Lifinity over the last six days. This pair is currently inactive on Lifinity, so the query returns 0 trades - change the `ProtocolFamily` to a busier venue such as Raydium or Meteora to see a live figure. Uses `DEXTradeByTokens`, which keeps about 7 days, rather than `Solana.DEXTrades`, which keeps about 12 hours and has no archive. `trades` is returned alongside the volatility so an empty window reads as 0 trades instead of passing for zero volatility.
 
 ▶️ [Volatility of WSOL USDC Pair on Lifinity Dex on Solana](https://ide.bitquery.io/Volatility-of-WSOL-USDC-Pair-on-Lifinity-Dex-on-Solana)
 
 #### Volatility of a Pair on Meteora Dynamic
 
-Volatility is an important factor in trading world as it determines the fluctuation in price that implies the possibility of profit and risk of loss. Lesser volatility denotes that the pair is stable.
+Standard deviation of the WSOL/USDC price on Meteora over the last six days. The previous version asked `Solana.DEXTrades` for a two-hour window more than a year old and reported a volatility of 0, which meant no data rather than no movement. Uses `DEXTradeByTokens`, which keeps about 7 days, rather than `Solana.DEXTrades`, which keeps about 12 hours and has no archive. `trades` is returned alongside the volatility so an empty window reads as 0 trades instead of passing for zero volatility.
 
 ▶️ [Volatility of a Pair on Meteora Dynamic](https://ide.bitquery.io/Volatility-of-a-Pair-on-Meteora-Dynamic)
 
@@ -4499,7 +4499,7 @@ Tokens ranked by market cap. Uses the `Trades` cube.
 
 #### Solana USDT trades query
 
-Solana USDT trades query. Uses the `DEXTrades` cube. Change the token address in the `where` clause to use it. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+Solana trades quoted in USDT. USDT is the quote side on Solana, so it is filtered with `Pair.QuoteToken`, not `Pair.Token`, which would return nothing. The Trading cube reaches back about 30 days; `Solana.DEXTrades` keeps about 12 hours.
 
 ▶️ [Solana USDT trades query](https://ide.bitquery.io/solana-USDT-trades-query)
 
