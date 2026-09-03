@@ -14,9 +14,11 @@ keywords:
   - Robinhood dormant holders
   - Bitquery Robinhood Holders
 ---
-# Robinhood Token Holders API — Rankings, Counts & Distribution
+# Robinhood Token Holders API — Rankings & Distribution
 
 Query **token holders on Robinhood** with Bitquery's dedicated `EVM.Holders` cube — the token-centric view: who holds a token, ranked by balance, with per-holder change history (`FirstChangeTime`, `LastChangeTime`, `UpdateCount`) built in. One query replaces the transfer-indexing pipeline you would otherwise need, and it powers holder leaderboards, holder counts, distribution stats, whale floors, dormancy screens, and airdrop snapshots.
+
+This is the API equivalent of the block explorer's token-holders tab (Blockscout's holders endpoint) with rankings, counts, distribution stats and history that you can query in bulk or stream.
 
 For the wallet-centric view — one address's full portfolio — use the [Robinhood Balances API](/docs/blockchain/robinhood/robinhood-balances-api/) instead. Every query on this page was executed against the production endpoint before publishing.
 
@@ -27,6 +29,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Balances API](/docs/blockchain/robinhood/robinhood-balances-api/)
 - [Robinhood Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply/)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers/) (live movement between holders)
@@ -51,7 +54,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 
 ## Top holders of a token
 
-The holder leaderboard — ranked by balance, with each holder's history stats. Example: USDG. The future-dated `LastChangeTime.till` explicitly includes all holders (see [concepts](#cube-concepts)); tighten it to screen for dormancy.
+The holder leaderboard — ranked by balance, with each holder's history stats. Example: USDG. A far-future `LastChangeTime.till` (here 2099) explicitly includes all holders (see [concepts](#cube-concepts)); tighten it to screen for dormancy.
 
 ```graphql
 {
@@ -59,7 +62,7 @@ The holder leaderboard — ranked by balance, with each holder's history stats. 
     Holders(
       where: {
         Currency: { SmartContract: { is: "0x5fc5360d0400a0fd4f2af552add042d716f1d168" } }
-        Balance: { LastChangeTime: { till: "2026-07-31T11:59:59Z" } }
+        Balance: { LastChangeTime: { till: "2099-12-31T23:59:59Z" } }
       }
       limit: { count: 100 }
       orderBy: { descending: Balance_Amount }

@@ -1,6 +1,6 @@
 ---
 title: "Lighter Perp DEX on Robinhood Chain API"
-description: "Track Lighter perpetual futures on Robinhood Chain with Bitquery — USDG margin deposits and withdrawals, the ZkLighter rollup contract, batch commits, and full flow history over GraphQL APIs and WebSocket streams."
+description: "Lighter perp DEX on Robinhood Chain: USDG margin deposits and withdrawals, ZkLighter rollup contract and batch commits via Bitquery GraphQL and WebSocket."
 sidebar_position: 10
 keywords:
   - Lighter Robinhood API
@@ -21,8 +21,6 @@ keywords:
 
 What actually lives on Robinhood Chain is a full **ZkLighter rollup contract** — not just a token vault. It receives every margin deposit, queues and pays withdrawals, and records the rollup's batch lifecycle (`commit → verify → execute`) at roughly **one batch per minute**. This page shows how to query and stream all of it with Bitquery's `EVM` cubes on `network: robinhood`.
 
-Scale as of late August 2026, measured with the queries on this page: about **$33.4M USDG deposited and $7.7M withdrawn** since launch (net ≈ the contract's current $25.7M balance), with August deposits running at ~3.7× July and 1,000–3,000 deposits per day.
-
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
 
@@ -30,6 +28,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Events API](/docs/blockchain/robinhood/robinhood-events-api/)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers/)
 - [Robinhood Calls API](/docs/blockchain/robinhood/robinhood-calls-api/)
@@ -67,7 +66,7 @@ This makes the on-chain data ideal for **money-flow questions** — who is depos
 | Robinhood deposit router (sweeps in-app deposits into `deposit()`) | `0x8062df5b3220ad1f528365650a3eb3e8c7b0dad1` |
 
 :::info Filter by LogHeader.Address, not Log.SmartContract
-The ZkLighter proxy delegates to implementation modules, so `Log.SmartContract` shows the **implementation** address — and implementations rotate on upgrades (the last rotation was August 21, 2026; older module addresses you may see in results include `0x1be72833…`, `0xe470e41c…`, and `0xda2b59ff…`). The stable anchor is `LogHeader.Address` = the proxy `0x94bab969…`, combined with the event's `SignatureHash` (topic0). Every query below follows that pattern.
+The ZkLighter proxy delegates to implementation modules, so `Log.SmartContract` shows the **implementation** address — and implementations rotate on upgrades (implementations rotate over time; older module addresses you may see in results include `0x1be72833…`, `0xe470e41c…`, and `0xda2b59ff…`). The stable anchor is `LogHeader.Address` = the proxy `0x94bab969…`, combined with the event's `SignatureHash` (topic0). Every query below follows that pattern.
 :::
 
 ---
@@ -287,4 +286,4 @@ The Calls cube gives the function-call view of the same activity — useful for 
 - Robinhood in-app deposits are swept from per-user deposit addresses through the router `0x8062df5b…`, so the ERC-20 `Transfer.Sender` into the proxy is often the router while the credited wallet is `Deposit.toAddress`. Count depositors from the `Deposit` event, not from transfer senders.
 - For trade-level perps data (fills, positions, funding), use Lighter's own venue APIs — that activity never touches Robinhood Chain. On-chain data here answers flow, TVL, user-count, and liveness questions.
 
-Every query on this page was executed against the production `streaming.bitquery.io/graphql` endpoint on August 22, 2026 before publishing.
+Every query on this page was executed against the production `streaming.bitquery.io/graphql` endpoint before publishing.

@@ -1,6 +1,6 @@
 ---
 title: "trench.today API on Robinhood"
-description: "trench.today API on Robinhood: track newly launched tokens, bonding-curve buys and sells, and live reserves on the trench.today launchpad with Bitquery GraphQL examples for developers."
+description: "trench.today API on Robinhood Chain: new token launches, bonding-curve buys and sells, and live curve reserves via Bitquery GraphQL and WebSocket streams."
 sidebar_position: 4
 keywords:
   - trench.today API
@@ -31,6 +31,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)
 - [Flap.sh API on Robinhood](/docs/blockchain/robinhood/flap-sh-api) — another Robinhood launchpad
@@ -49,6 +50,37 @@ All trench.today protocol events are emitted through a single factory proxy, whi
 | --- | --- | --- |
 | **Factory / curve engine** (EIP-1967 proxy) | `0x77dc6f6361b7b99456fc3761ce5b7dda80d83f9d` | `TokenCreate`, `TokenPurchase`, `TokenSale`, `Sync` |
 | **Implementation** (behind the proxy) | `0x5d15bdd2a834c66149c38c5ae19c5f4b60cbc397` | Shown as `Log.SmartContract` in decoded events |
+
+:::caution Decoded event names exist on the realtime dataset only
+On `dataset: realtime` (the default) the four events carry decoded names and `Arguments`, and every query on this page works as written. On `dataset: archive` and `dataset: combined` the same rows are stored **undecoded**, so a `Log.Signature.Name` filter returns **zero rows** there, silently. For history, filter by topic0 instead and decode the payload client-side:
+
+| Event | topic0 (`Log.Signature.SignatureHash`) |
+| --- | --- |
+| `TokenCreate` | `e2eb7016a2fc7f0aec441cc8bc9a7ecd75d29d94478782bab1cfa9c5b0dbdf1b` |
+| `TokenPurchase` | `b284604a447841f5b5ee1495033bc7db1ab2f84c2624a7b7a3e9f014f32e8e7b` |
+| `TokenSale` | `fe41490121bfbd4555a4f9aabe1e789de1641611b7edd2a0dc1c594f684ba193` |
+| `Sync` | `27efe2fec96cb0ff68b9206e3dca402a919bb7172e2f2d12d49b633df3eabc4f` |
+
+```graphql
+{
+  EVM(network: robinhood, dataset: archive) {
+    Events(
+      limit: {count: 10}
+      orderBy: {descending: Block_Time}
+      where: {
+        LogHeader: {Address: {is: "0x77dc6f6361b7b99456fc3761ce5b7dda80d83f9d"}}
+        Log: {Signature: {SignatureHash: {is: "e2eb7016a2fc7f0aec441cc8bc9a7ecd75d29d94478782bab1cfa9c5b0dbdf1b"}}}
+      }
+    ) {
+      Block { Time }
+      Transaction { Hash }
+      LogHeader { Address Data }
+      Log { Signature { SignatureHash } }
+    }
+  }
+}
+```
+:::
 
 The four events cover the full bonding-curve lifecycle:
 

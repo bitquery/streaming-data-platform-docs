@@ -51,6 +51,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)
 - [Pons Launchpad API on Robinhood Chain](/docs/blockchain/robinhood/pons-api) — bonding-curve launchpad, graduations, Uniswap v4 pools
@@ -114,7 +115,7 @@ Crowd Launches run in a **fixed ~4-hour window** and can be *oversubscribed*. Ea
 | **WETH** | `0x0bd7d308f8e1639fab988df18a8011f41eacad73` | Secondary quote token |
 
 :::caution There are TWO entry contracts — filter on both
-pools.trade ran on `0x00004c4c…` from 8 July before `0x0000ffff…` took over at the public launch, **and the original contract still processes hundreds of launches per day**. On 5 August the split was 6,907 (new) + 4,530 (original) = **11,437 launches**. Both emit byte-identical events (`TokenCreated`, `TokenDistributed`), so every launch filter in this guide uses `in:` with both addresses. Filtering only the new one dropped ~40% of 5 August's launches (the split varies day to day) — and misses FRONG and POOLS, the two largest tokens on the platform.
+pools.trade ran on `0x00004c4c…` from 8 July before `0x0000ffff…` took over at the public launch, **and the original contract still processes launches**. Both emit byte-identical events (`TokenCreated`, `TokenDistributed`), so every launch filter in this guide uses `in:` with both addresses. Filtering only the new one dropped ~40% of 5 August's launches (the split varies day to day) — and misses FRONG and POOLS, the two largest tokens on the platform.
 :::
 
 :::caution The v4 PoolManager is not a pools.trade filter
@@ -145,7 +146,7 @@ pools.trade ran on `0x00004c4c…` from 8 July before `0x0000ffff…` took over 
 | `AuctionCreated` | CCA auction factory | ✅ Yes | `7ede475fad18ccf0039f2b956c4d43a8b4ed0853de4daaa8ae25299f331ae3b9` |
 | `InitializerCreated` | initializer registry | ✅ Yes | `6d759545eb439f07e70f45431d6339af7a4f1ffef06d43e8ddf47fdb0799708c` |
 
-Both columns were verified live on 11 Aug 2026: every event above returned decoded `Arguments` from the API, and every topic0 matches its signature by keccak-256 preimage.
+Every event above returns decoded `Arguments` from the API, and every topic0 matches its signature by keccak-256 preimage.
 
 ### Reading decoded arguments
 
@@ -238,9 +239,9 @@ b9a86892440ed5515518351623ecfc523d283b21e92f1505e533ef26137be5b0  NextActiveTick
 ```
 
 :::note `SignatureHash` filters need the realtime dataset
-Filtering by `Log: {Signature: {SignatureHash: …}}` is served **only** by the realtime dataset. `dataset: archive` returns `no archive or API tables found for cube Event`, and `dataset: combined` returns `no data available yet to query dataset combined`. Re-confirmed 11 Aug 2026 — decoding the ABIs did not change this.
+Filtering by `Log: {Signature: {SignatureHash: …}}` is served **only** by the realtime dataset. `dataset: archive` returns `no archive or API tables found for cube Event`, and `dataset: combined` returns `no data available yet to query dataset combined`. Decoding the ABIs did not change this.
 
-Filter by `Log.Signature.Name` instead when you need `archive` or `combined`; that path works on all three datasets. Be aware that **archive coverage of these events is still thin** — measured the same day, `TokenLaunched` and `BidSubmitted` returned thousands of realtime rows but zero on archive, while `AuctionCreated` and `TokenDistributed` returned only a handful of July rows. Treat realtime as the source of truth for launchpad and auction history until archive backfills.
+Filter by `Log.Signature.Name` instead when you need `archive` or `combined`; that path works on all three datasets. Be aware that **archive coverage of these events is still thin**: some events that are plentiful on realtime return little or nothing on archive. Treat realtime as the source of truth for launchpad and auction history until archive backfills.
 
 Note also that `SignatureHash` values are supplied **without** a `0x` prefix.
 :::
@@ -292,7 +293,7 @@ The single argument `token` is the new token's contract address. `Transaction.Fr
 
 ### Stream new launches in real time
 
-Launches arrive continuously — pools.trade minted **11,437 tokens on 5 August 2026** alone (6,907 through the new entry contract, 4,530 through the original). Polling will always lag; subscribe instead.
+Launches arrive continuously through both entry contracts, thousands per day at peak. Polling will always lag; subscribe instead.
 
 ```graphql
 subscription {
@@ -383,7 +384,7 @@ The same query works as a one-shot `query` with `limit` and `orderBy` for backfi
 
 ### Launches per day
 
-Grouping by `LogHeader.Address` too shows the split between the two entry contracts. `dataset: combined` merges archive history with the realtime tail — plain `archive` lags the chain head, so counts for the current day come up short (measured: 5,098 on archive vs 5,265 on combined at the same moment).
+Grouping by `LogHeader.Address` too shows the split between the two entry contracts. `dataset: combined` merges archive history with the realtime tail — plain `archive` lags the chain head, so counts for the current day come up short.
 
 ```graphql
 {
@@ -655,9 +656,9 @@ Tokens also migrate onto other venues once liquid — the same token can show `u
 [▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Latest-trades-for-a-token)
 
 :::caution Deduplicate before summing USD volume
-On Robinhood v4, `Trading.Trades` returns **each trade leg roughly twice**, with the two copies differing only in the last decimals of `AmountsInUsd`. In a measured 300-row sample, 138 of 162 distinct legs appeared exactly twice — a **1.9× inflation factor**.
+On Robinhood v4, `Trading.Trades` returns **each trade leg roughly twice**, with the two copies differing only in the last decimals of `AmountsInUsd`. Most legs appear exactly twice, so naive sums run close to **2×**.
 
-Deduplicate on `(TransactionHeader.Hash, Block.Time, Side, Amounts.Base, Pair.QuoteToken.Symbol, Trader.Address)` before aggregating. Naively summing FRONG's `Volume_Usd` over 24h gives **$61.8M**; after deduplication it is **$30.9M**, which matches the $30.8M that pools.trade itself reports.
+Deduplicate on `(TransactionHeader.Hash, Block.Time, Side, Amounts.Base, Pair.QuoteToken.Symbol, Trader.Address)` before aggregating. Naively summing a token's `Volume_Usd` over 24h roughly doubles the figure the pools.trade UI reports; after deduplication the two match.
 
 Note also that one user swap can fan out into **several routed legs** across ETH, WETH, and USDG pairs in the same transaction. Summing every leg overstates end-user volume even after deduplication.
 :::
@@ -964,10 +965,10 @@ Clearing, floor, and tick-size prices are **Q96** values. Divide by `2**96` to g
 
 [▶ Run this query in the Bitquery IDE](https://ide.bitquery.io/Pools-trade-Token-holders-and-supply)
 
-`dataset: combined` keeps balances current to the head block — on `archive` alone the top-holder balance measured ~11 minutes stale on an actively traded token.
+`dataset: combined` keeps balances current to the head block — on `archive` alone the top-holder balance can lag the chain head by minutes on an actively traded token.
 
 :::caution Exclude the PoolManager from holder analytics
-The **top holder of every pools.trade token is the Uniswap v4 PoolManager** `0x8366a39cc670b4001a1121b8f6a443a643e40951`, because the pool's liquidity is held there. For FRONG it holds ~57M tokens with 301,360 balance updates.
+The **top holder of every pools.trade token is the Uniswap v4 PoolManager** `0x8366a39cc670b4001a1121b8f6a443a643e40951`, because the pool's liquidity is held there.
 
 Filter it out before computing holder counts, concentration, or "top wallet" leaderboards, or the pool itself will dominate every result.
 :::

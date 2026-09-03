@@ -44,6 +44,7 @@ Follow: [How to generate Bitquery API token ➤](/docs/authorization/how-to-gene
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades](/docs/blockchain/robinhood/robinhood-trades/)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers/)
 - [DEXPools Cube](/docs/cubes/evm-dexpool/)

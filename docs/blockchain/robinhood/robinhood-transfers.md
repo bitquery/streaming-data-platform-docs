@@ -40,6 +40,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades](/docs/blockchain/robinhood/robinhood-trades/)
 - [Robinhood Liquidity & Slippage API](/docs/blockchain/robinhood/robinhood-liquidity/)
 - [Robinhood Token Supply API](/docs/blockchain/robinhood/robinhood-token-supply/)
@@ -651,7 +652,7 @@ Use `dataset: combined` so the full 24h window is covered regardless of the curr
 ```
 
 :::warning Ticker symbols are not unique
-Multiple contracts can share one ticker — Robinhood has **two different contracts both using the GME symbol** (`0x1b0e319c…` and `0xc2362aff…`). Always resolve and pin the `SmartContract` address (the canonical Robinhood stock tokens are named like `NVIDIA • Robinhood Token`) instead of trusting a ticker.
+Multiple contracts can share one ticker — Robinhood has **two different contracts both using the GME symbol** (`0x1b0e319c6a659f002271b69db8a7df2f911c153e` and `0xc2362aff2a2a4cc1f48cf3dab2c4e2605eb94ba3`). Always resolve and pin the `SmartContract` address (the canonical Robinhood stock tokens are named like `NVIDIA • Robinhood Token`) instead of trusting a ticker.
 :::
 
 ---
