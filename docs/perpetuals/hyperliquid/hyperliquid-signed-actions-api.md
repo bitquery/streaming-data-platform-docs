@@ -1,7 +1,7 @@
 ---
 title: "Hyperliquid Signed Actions API"
 description: "Query and stream raw signed L1 actions on Hyperliquid with Bitquery: order, cancel, modify, batchModify, updateLeverage and more, with signer, broadcaster, bundle hash and status."
-sidebar_position: 6
+sidebar_position: 9
 keywords:
   - Hyperliquid signed actions
   - Hyperliquid L1 actions

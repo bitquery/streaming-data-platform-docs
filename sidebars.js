@@ -145,7 +145,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Dataset Overview",
-            description: "Choose between realtime, archive, and combined datasets for Bitquery GraphQL queries.",
+            description:
+              "Choose between realtime, archive, and combined datasets for Bitquery GraphQL queries.",
           },
           items: [
             "graphql/dataset/archive",
@@ -228,7 +229,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Streaming via Subscriptions",
-            description: "Stream real-time blockchain data over GraphQL WebSocket subscriptions.",
+            description:
+              "Stream real-time blockchain data over GraphQL WebSocket subscriptions.",
           },
           items: [
             "subscriptions/subscription",
@@ -266,7 +268,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Data Streams Overview",
-            description: "Real-time blockchain data via Kafka, WebSocket, and gRPC streams.",
+            description:
+              "Real-time blockchain data via Kafka, WebSocket, and gRPC streams.",
           },
           items: [
             "streams/kafka-streaming-concepts",
@@ -367,7 +370,8 @@ const sidebars = {
       link: {
         type: "generated-index",
         title: "Understanding Cubes Overview",
-        description: "How Bitquery cubes model blockchain data for GraphQL queries.",
+        description:
+          "How Bitquery cubes model blockchain data for GraphQL queries.",
       },
       items: [
         {
@@ -376,7 +380,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "EVM Cube Overview",
-            description: "Cubes for querying EVM chains — trades, transfers, balances, holders, calls, and events.",
+            description:
+              "Cubes for querying EVM chains — trades, transfers, balances, holders, calls, and events.",
           },
           items: [
             "cubes/EVM",
@@ -469,7 +474,8 @@ const sidebars = {
               link: {
                 type: "generated-index",
                 title: "DEX Trades",
-                description: "Query and stream DEX trades across chains with the Bitquery GraphQL API.",
+                description:
+                  "Query and stream DEX trades across chains with the Bitquery GraphQL API.",
               },
               items: [
                 {
@@ -881,7 +887,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Cross-Chain API",
-            description: "Query blockchain data across multiple chains in a single Bitquery API.",
+            description:
+              "Query blockchain data across multiple chains in a single Bitquery API.",
           },
           items: ["examples/cross-chain/cross-chain-api"],
         },
@@ -1082,7 +1089,8 @@ const sidebars = {
       link: {
         type: "generated-index",
         title: "Stablecoin APIs",
-        description: "Track stablecoin transfers, supply, and holders across chains.",
+        description:
+          "Track stablecoin transfers, supply, and holders across chains.",
       },
       items: [
         "stablecoin-APIs/stablecoin-price-api",
@@ -1121,6 +1129,7 @@ const sidebars = {
             id: "perpetuals/hyperliquid/index",
           },
           items: [
+            "perpetuals/hyperliquid/hip3-stocks-api",
             "perpetuals/hyperliquid/hyperliquid-trades-api",
             "perpetuals/hyperliquid/hyperliquid-orders-api",
             "perpetuals/hyperliquid/hyperliquid-prices-api",
@@ -1190,7 +1199,8 @@ const sidebars = {
       link: {
         type: "generated-index",
         title: "How-To Guides Overview",
-        description: "Step-by-step recipes for building with the Bitquery blockchain data API.",
+        description:
+          "Step-by-step recipes for building with the Bitquery blockchain data API.",
       },
       items: [
         {
@@ -1199,7 +1209,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "NFT and Analytics",
-            description: "Query NFT trades, transfers, and metadata across chains.",
+            description:
+              "Query NFT trades, transfers, and metadata across chains.",
           },
           items: [
             "usecases/nft-analytics",
@@ -1213,7 +1224,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Detecting Wash Trades on Solana",
-            description: "Build a Solana wash-trading detector with Bitquery DEX data.",
+            description:
+              "Build a Solana wash-trading detector with Bitquery DEX data.",
           },
           items: [
             "usecases/wash-trading-detector/overview",
@@ -1236,7 +1248,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "TradingView Charting",
-            description: "Build TradingView charts with real-time Bitquery price data.",
+            description:
+              "Build TradingView charts with real-time Bitquery price data.",
           },
           items: [
             // {
@@ -1273,7 +1286,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Building Applications Using Kafka",
-            description: "Consume Bitquery Kafka streams to build real-time blockchain apps.",
+            description:
+              "Consume Bitquery Kafka streams to build real-time blockchain apps.",
           },
           items: [
             "usecases/binance-exchange-wallet-monitoring",
@@ -1287,7 +1301,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Blockchain Monitoring",
-            description: "Monitor wallets, tokens, and transactions in real time with Bitquery.",
+            description:
+              "Monitor wallets, tokens, and transactions in real time with Bitquery.",
           },
           items: [
             "usecases/ohlcv-complete-guide",
@@ -1322,7 +1337,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Apps and Dashboards",
-            description: "Build analytics apps and dashboards on Bitquery blockchain data.",
+            description:
+              "Build analytics apps and dashboards on Bitquery blockchain data.",
           },
           items: [
             "usecases/discord-bot",
@@ -1340,7 +1356,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Bot Building",
-            description: "Build trading and monitoring bots with the Bitquery API and streams.",
+            description:
+              "Build trading and monitoring bots with the Bitquery API and streams.",
           },
           items: [
             "usecases/polymarket-tg-alerts-bot",
@@ -1381,7 +1398,8 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Cloud Examples",
-            description: "Work with Bitquery cloud datasets (Parquet/S3) for historical blockchain data.",
+            description:
+              "Work with Bitquery cloud datasets (Parquet/S3) for historical blockchain data.",
           },
           items: [
             "cloud/examples/appsync",
@@ -1408,7 +1426,8 @@ const sidebars = {
       link: {
         type: "generated-index",
         title: "API Blog",
-        description: "Guides and updates on using the Bitquery blockchain data API.",
+        description:
+          "Guides and updates on using the Bitquery blockchain data API.",
       },
       items: [
         "API-Blog/migrate-v1-v2",
