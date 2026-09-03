@@ -50,6 +50,23 @@ clean, MEV-filtered swap data with USD price, market cap, and supply on every ro
 
 For **historical OHLC older than ~30 days**, use chain-level [`DEXTradeByTokens`](https://docs.bitquery.io/docs/cubes/dextradesbyTokens) instead of the Trading cube.
 
+### Query operators — filtering, aggregating and screening server-side
+
+The Trading cube is an analytics engine, not just a feed. These operators let you answer
+questions about a whole chain in one request instead of one query per token.
+
+- [Screeners with `selectWhere`](https://docs.bitquery.io/docs/trading/query-operators/selectwhere-screeners/) — a `HAVING` clause: filter on computed aggregates server-side
+- [Whole-population sweeps and pagination](https://docs.bitquery.io/docs/trading/query-operators/sweeps-and-pagination/) — `limitBy` returns one row per entity across the entire population
+- [Argmax selectors](https://docs.bitquery.io/docs/trading/query-operators/argmax-selectors/) — `Field(maximum: Key)` is the first/last/peak-value primitive
+- [Filters and operators reference](https://docs.bitquery.io/docs/trading/query-operators/filters-and-operators/) — operator sets per type, `any` as the only boolean combinator, per-cube branches
+- [Statistics and concentration metrics](https://docs.bitquery.io/docs/trading/query-operators/statistics/) — correlation, quantiles, Gini, Nakamoto, and which are unsafe on price columns
+- [Derived values with `calculate()`](https://docs.bitquery.io/docs/trading/query-operators/calculate-expressions/) — the `$` reference rule and the coercion traps
+- [Wallet overlap with `array_intersect`](https://docs.bitquery.io/docs/trading/query-operators/array-intersect-wallet-overlap/) — which wallets traded every token in a set
+
+A window defined **relative to each row's own event** (for example "hours 4–24 after each token's
+own first trade") cannot be expressed in GraphQL. Pull per-interval rows for the whole population
+and compute the relative window in your own store.
+
 ## Historical data & bulk uploads
 
 Need a full backfill, data lake, or warehouse load — not row-by-row GraphQL?
@@ -66,6 +83,7 @@ Contact [sales@bitquery.io](mailto:sales@bitquery.io) for custom historical expo
 
 - [GraphQL queries](https://docs.bitquery.io/docs/graphql/query/)
 - [WebSocket subscriptions](https://docs.bitquery.io/docs/subscriptions/subscription/)
+- [What does not survive streaming](https://docs.bitquery.io/docs/subscriptions/what-does-not-survive-streaming/) — `selectWhere`, `if` and most statistics are query-only, so not every query converts to a subscription
 - [Kafka streaming](https://docs.bitquery.io/docs/streams/kafka-streaming-concepts/)
 - [Solana gRPC / Protobuf](https://docs.bitquery.io/docs/streams/protobuf/chains/Solana-protobuf/)
 
