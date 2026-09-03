@@ -281,7 +281,7 @@ The query below uses the InstructionBalanceUpdates API to fetch balance updates 
 
 #### Trades of wallets with balance Updates in that trades
 
-Below query will give you the trades of the wallets present in `addressList` along with the balance updates happened in those trades..
+Trades made by the wallets in `addressList`, with the balance updates from those same transactions joined on. Uses `DEXTradeByTokens` rather than `Solana.DEXTrades`: DEXTrades keeps only about 12 hours on Solana and has no archive, so the previous version returned no rows whenever the wallet had not traded in the last half day. DEXTradeByTokens keeps about 7 days and supports `archive` for older windows.
 
 ▶️ [Trades of wallets with balance Updates in that trades](https://ide.bitquery.io/Trades-of-wallets-with-balance-Updates-in-that-trades)
 
