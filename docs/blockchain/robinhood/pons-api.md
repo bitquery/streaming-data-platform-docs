@@ -59,6 +59,25 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://www.youtube.com/watch?v=srQgiLFo_f0" />
 
+## Pons contract addresses on Robinhood Chain {#pons-contract-addresses-quick}
+
+Every Pons V2 contract, in one place. Full event lists, the quote-asset table and
+the caveats are in [Pons contract addresses](#contract-addresses) further down.
+
+| Contract | Address |
+| --- | --- |
+| Pons V2 launch factory (`PonsV2LaunchFactory`) | `0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e` |
+| Pons V2 launch locker (`PonsV2LaunchLocker`) | `0x267444d099b10fb5ed7c3cc7b7c767adca574952` |
+| Pons V2 meme hook (`PonsV2MemeHook`) | `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044` |
+| Pons V2 launch router (`PonsV2LaunchAndBuy`) | `0xe33e9e479df8802cb0866d5d05258bec4cf62948` |
+| Pons V2 graduation executor | `0xc7819b64a1daecd7ec19856d026cb14efbd89046` |
+| Pons V1 factory (superseded, no longer launching) | `0xa5aab3f0c6eeadf30ef1d3eb997108e976351feb` |
+| Uniswap v4 PoolManager (chain-wide, **not** Pons-only) | `0x8366a39cc670b4001a1121b8f6a443a643e40951` |
+
+Each launched token also gets **its own bonding-curve contract**, so there is no
+single curve address — curve trades are matched by event signature instead. The
+address that receives the launch mint is that token's curve; see
+[Newly launched tokens](#newly-launched-tokens).
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
 
