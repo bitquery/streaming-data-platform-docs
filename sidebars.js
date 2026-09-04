@@ -56,6 +56,7 @@ const sidebars = {
       },
       items: [
         "ide/account",
+        "ide/manage-subscription",
         "ide/code",
         "ide/paid",
         "ide/points",

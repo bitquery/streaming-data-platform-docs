@@ -23,12 +23,14 @@ On the **Choose plan** step you can:
 
 ### Plans available on self-serve
 
-| Plan                       | API points / mo | Requests / min | Concurrent requests | Simultaneous streams | Streaming time | Traffic   | Team size |
-| -------------------------- | --------------- | -------------- | ------------------- | -------------------- | -------------- | --------- | --------- |
-| **Personal**               | 100,000         | 30             | 3                   | —                    | —              | —         | 1         |
-| **Pro**                    | 1,000,000       | 90             | 6                   | 100                  | 100,000 min    | 5 GB      | 2         |
-| **Scale** ⭐ (recommended) | 5,000,000       | 240            | 12                  | 1,000                | 2,000,000 min  | 50 GB     | 5         |
-| **Enterprise**             | Custom          | Custom         | Custom              | Unlimited            | Custom         | Unlimited | Custom    |
+| Plan                       | Monthly | Annual (per mo) | API points / mo | Requests / min | Concurrent requests | Simultaneous streams | Streaming time | Traffic   | Team size |
+| -------------------------- | ------- | --------------- | --------------- | -------------- | ------------------- | -------------------- | -------------- | --------- | --------- |
+| **Personal**               | $49     | $39             | 100,000         | 30             | 3                   | —                    | —              | —         | 1         |
+| **Pro**                    | $99     | $79             | 1,000,000       | 90             | 6                   | 100                  | 100,000 min    | 5 GB      | 2         |
+| **Scale** ⭐ (recommended) | $299    | $239            | 5,000,000       | 240            | 12                  | 1,000                | 2,000,000 min  | 50 GB     | 5         |
+| **Enterprise**             | Custom  | Custom          | Custom          | Custom         | Custom              | Unlimited            | Custom         | Unlimited | Custom    |
+
+Streaming is **off on Personal** — it starts at Pro. Annual billing saves 20% and locks the price for 12 months.
 
 Self-serve plans query the `realtime` dataset by default. To query history — the `archive` and `combined` datasets — add the **historical data add-on** to your plan; see the [pricing page](https://bitquery.io/pricing) for the chains it covers. Without it, a query using `dataset: archive` or `dataset: combined` will be rejected. **Enterprise** includes all datasets (Archive, Realtime, Combined), volume pricing, and dedicated support & SLA — [contact sales](https://bitquery.io/forms/api) for a quote.
 
@@ -42,11 +44,16 @@ Step 2 of the checkout is **Top Up Credits** — optional. Add-ons are billed to
 
 ![Top up credits](/img/selfservice/top-up-credits.png)
 
-| Add-on                   | What you get               |
-| ------------------------ | -------------------------- |
-| **1 Million API points** | +1,000,000 API points      |
-| **100k Stream-minutes**  | +100,000 streaming minutes |
-| **1 GB Stream Data**     | +1 GB of stream traffic    |
+| Add-on              | What you get               | Monthly | Annual (per mo) |
+| ------------------- | -------------------------- | ------- | --------------- |
+| **API points**      | +1,000,000 API points      | $50     | $40             |
+| **Stream-minutes**  | +200,000 streaming minutes | $50     | $40             |
+| **Stream data**     | +5 GB of stream traffic    | $50     | $40             |
+| **MCP credits**     | Credits for MCP / AI agent requests | from $15/mo | — |
+
+Top-ups are **recurring** — they refill each billing period. A one-time, non-recurring
+top-up of 1M points is also available at $100. Volume packs lower the unit rate as you
+scale: stream-minutes and stream data drop about 40% at the mid pack and 70% at the top.
 
 ### Historical data add-ons
 

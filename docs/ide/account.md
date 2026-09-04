@@ -39,7 +39,7 @@ You are in full control of your plan. From **Billing → [Select Plan](https://a
 
 Plans on self-serve: **Personal** (100K API points/mo, 3 concurrent requests), **Pro** (1M points/mo, 100 streams), **Scale** ⭐ (5M points/mo, 1,000 streams), and **Enterprise** (custom limits, dedicated SLA & support — [contact sales](https://bitquery.io/forms/api)).
 
-See [full plans](https://bitquery.io/pricing) or the [Upgrade to Paid Plan](/docs/ide/paid/) guide. Billing questions: [support@bitquery.io](mailto:support@bitquery.io).
+See [full plans](https://bitquery.io/pricing), the [Upgrade to Paid Plan](/docs/ide/paid/) guide, or [Manage Your Subscription](/docs/ide/manage-subscription/) for video walkthroughs of paying, upgrading, downgrading and cancelling. Billing questions: [support@bitquery.io](mailto:support@bitquery.io).
 
 ## What you see on the Dashboard
 
