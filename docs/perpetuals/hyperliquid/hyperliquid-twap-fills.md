@@ -44,6 +44,7 @@ query {
             Address: { is: "0x1e6db0fdf1a0f6edb78753184eb0fe5485c2eef2" }
           }
         }
+        Block: {Time: {since_relative: {days_ago: 3}}}
       }
     ) {
       Block {
@@ -115,7 +116,7 @@ query {
     Trades(
       limit: { count: 1000 }
       orderBy: { ascending: Block_Time }
-      where: { Trade: { TwapId: { eq: "2180078" } } }
+      where: { Trade: { TwapId: { eq: "2180078" } } , Block: {Time: {since_relative: {days_ago: 3}}}}
     ) {
       Block {
         Time
@@ -159,7 +160,7 @@ Run it in the IDE: [Hyperliquid TWAP Execution Summary ➤](https://ide.bitquery
 ```graphql
 query {
   Hyperliquid {
-    Trades(where: { Trade: { TwapId: { eq: "2180078" } } }) {
+    Trades(where: { Trade: { TwapId: { eq: "2180078" } } , Block: {Time: {since_relative: {days_ago: 3}}}}) {
       Trade {
         TwapId
         Market {
@@ -197,6 +198,7 @@ query {
             Address: { is: "0x1e6db0fdf1a0f6edb78753184eb0fe5485c2eef2" }
           }
         }
+        Block: {Time: {since_relative: {days_ago: 3}}}
       }
     ) {
       Block {

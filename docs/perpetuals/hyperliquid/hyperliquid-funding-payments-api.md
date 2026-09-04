@@ -42,7 +42,7 @@ query {
     PerpFundings(
       limit: {count: 100}
       orderBy: {descending: Block_Time}
-      where: {Funding: {Trader: {Address: {is: "0x1e6db0fdf1a0f6edb78753184eb0fe5485c2eef2"}}}}
+      where: {Funding: {Trader: {Address: {is: "0x1e6db0fdf1a0f6edb78753184eb0fe5485c2eef2"}}}, Block: {Time: {since_relative: {days_ago: 3}}}}
     ) {
       Block { Time }
       Funding {
@@ -82,7 +82,7 @@ Run it in the IDE: [Hyperliquid Funding Totals By Market ➤](https://ide.bitque
 query {
   Hyperliquid {
     PerpFundings(
-      where: {Funding: {Trader: {Address: {is: "0x1e6db0fdf1a0f6edb78753184eb0fe5485c2eef2"}}}}
+      where: {Funding: {Trader: {Address: {is: "0x1e6db0fdf1a0f6edb78753184eb0fe5485c2eef2"}}}, Block: {Time: {since_relative: {days_ago: 3}}}}
     ) {
       Funding { Market { Symbol } }
       ticks: count
@@ -109,6 +109,7 @@ query {
           Trader: {Address: {is: "0x1e6db0fdf1a0f6edb78753184eb0fe5485c2eef2"}}
           Amount: {lt: "0"}
         }
+        Block: {Time: {since_relative: {days_ago: 3}}}
       }
     ) {
       Funding { Market { Symbol } }

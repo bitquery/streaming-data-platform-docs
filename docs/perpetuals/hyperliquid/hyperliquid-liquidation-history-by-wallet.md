@@ -37,7 +37,7 @@ query {
     PerpLiquidations(
       limit: {count: 100}
       orderBy: {descending: Block_Time}
-      where: {Liquidation: {LiquidatedUser: {is: "0x2b5dba3bc4cbb1b94d1e57fcbe0fbc82731ce5f2"}}}
+      where: {Liquidation: {LiquidatedUser: {is: "0x2b5dba3bc4cbb1b94d1e57fcbe0fbc82731ce5f2"}}, Block: {Time: {since_relative: {days_ago: 3}}}}
     ) {
       Block { Time }
       Liquidation {
@@ -83,7 +83,7 @@ Run it in the IDE: [Hyperliquid Wallet Liquidation Totals ➤](https://ide.bitqu
 query {
   Hyperliquid {
     PerpLiquidations(
-      where: {Liquidation: {LiquidatedUser: {is: "0x2b5dba3bc4cbb1b94d1e57fcbe0fbc82731ce5f2"}}}
+      where: {Liquidation: {LiquidatedUser: {is: "0x2b5dba3bc4cbb1b94d1e57fcbe0fbc82731ce5f2"}}, Block: {Time: {since_relative: {days_ago: 3}}}}
     ) {
       Liquidation { Market { Symbol } Method }
       events: count
@@ -142,6 +142,7 @@ query {
           LiquidatedUser: {is: "0x2b5dba3bc4cbb1b94d1e57fcbe0fbc82731ce5f2"}
           Method: {is: "backstop"}
         }
+        Block: {Time: {since_relative: {days_ago: 3}}}
       }
     ) {
       Block { Time }
