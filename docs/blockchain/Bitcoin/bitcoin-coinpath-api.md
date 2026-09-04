@@ -14,7 +14,13 @@ keywords:
 ---
 # Bitcoin Coinpath API
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 Coinpath walks Bitcoin fund flows between addresses — forward to see where funds went, backward to see where they came from. Use it for AML investigations, source-of-funds verification, exchange deposit tracing, and mapping transaction paths across wallets.
+
+## Video Tutorial | Investigate Bitcoin Address Fund flow Visually | Bitquery Coinpath API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=pEVNAhfEOJ4" />
 
 :::info Endpoint
 Bitcoin GraphQL queries are served at `https://graphql.bitquery.io`.
@@ -120,12 +126,6 @@ query ($network: BitcoinNetwork!) {
 ```
 
 Raise `limit` for more rows and add `depth: {lteq: N}` to follow multi-hop paths between the two addresses.
-
-import VideoPlayer from "../../../src/components/videoplayer.js";
-
-## Video tutorial: tracing Bitcoin fund flows
-
-<VideoPlayer url="https://www.youtube.com/watch?v=pEVNAhfEOJ4" />
 
 ## Related resources
 

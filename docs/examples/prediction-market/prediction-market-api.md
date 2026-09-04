@@ -38,6 +38,10 @@ For contract-level and event-based Polymarket data (e.g. OrderFilled, ConditionR
 
 <VideoPlayer url="https://www.youtube.com/watch?v=kb7lFJ2RnXE" />
 
+## Video Tutorial | Polymarket Whale Alerts Telegram Bot (Full Python Tutorial)
+
+<VideoPlayer url="https://www.youtube.com/watch?v=RRFVaf9_0G4" />
+
 ## PredictionManagements
 
 **PredictionManagements** returns market lifecycle events: 

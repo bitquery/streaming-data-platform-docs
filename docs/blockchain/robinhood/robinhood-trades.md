@@ -21,7 +21,13 @@ keywords:
 ---
 # Robinhood Trades API & Streams
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 Bitquery exposes **Robinhood** trade and price data through the **Trading** APIs. Use these queries and real-time GraphQL subscriptions to get **live trades, USD prices, OHLCV/K-line candles, market cap, whale trades, top traders, and token leaderboards** on Robinhood — all scoped with the `bid:robinhood` network filter.
+
+## Video Tutorial | Robinhood Chain APIs - Real-Time Trades, Transfers & Meme Launches
+
+<VideoPlayer url="https://www.youtube.com/watch?v=6Q49eNkfbAU" />
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.

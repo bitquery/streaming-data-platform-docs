@@ -23,6 +23,7 @@ keywords:
 ---
 
 import FAQ from "@site/src/components/FAQ";
+import VideoPlayer from "@site/src/components/videoplayer.js";
 
 # Phoenix Perpetuals API — Solana Perp DEX Data & Streams
 
@@ -30,6 +31,14 @@ import FAQ from "@site/src/components/FAQ";
 futures exchange built by Ellipsis Labs, the team behind the Phoenix spot order book on
 Solana. Bitquery indexes it at event level into five cubes, each available as a GraphQL
 `query` and as a WebSocket `subscription`.
+
+## Video Tutorials
+
+<VideoPlayer url="https://www.youtube.com/watch?v=gqrrJkPkfSM" />
+
+<VideoPlayer url="https://www.youtube.com/watch?v=j9YqQi0X8oY" />
+
+<VideoPlayer url="https://www.youtube.com/watch?v=4FNkiz9b0xw" />
 
 |                     |                                                        |
 | ------------------- | ------------------------------------------------------ |

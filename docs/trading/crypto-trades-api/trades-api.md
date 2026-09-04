@@ -14,6 +14,7 @@ keywords:
   - token trade filter API
 ---
 import FAQ from "@site/src/components/FAQ";
+import VideoPlayer from "@site/src/components/videoplayer.js";
 
 # Crypto Trades API — Real-Time DEX Trade Streams
 
@@ -26,6 +27,10 @@ This page covers **`Trading.Trades`** — the curated, multi-chain trade feed fo
 The **Trades** cube streams individual **swap-level** rows from the **Trading** API: each event includes **side**, **amounts** (base, quote, USD), **price**, **pair** (market, tokens, currencies), **trader**, **transaction** metadata, and a **supply** snapshot (**MarketCap**, **FDV**, circulating/total/max supply) for the token context on that row.
 
 For **aggregated** token metrics across all pairs, use the **[Tokens cube](/docs/trading/crypto-price-api/tokens)**. For **pair-level** OHLC and volume intervals, use the **[Pairs cube](/docs/trading/crypto-price-api/pairs)**. Supply field meanings are documented under **[Supply fields](/docs/trading/crypto-price-api/supply-fields)**.
+
+## Video Tutorial | How to Track DEX Trades & Trader PnL Across All Blockchain networks in a single API
+
+<VideoPlayer url="https://www.youtube.com/watch?v=-Jwh2I46XIw" />
 
 ### Key points
 

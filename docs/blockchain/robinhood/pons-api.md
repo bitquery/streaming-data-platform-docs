@@ -51,7 +51,13 @@ keywords:
 
 # Pons Launchpad API — Track Pons Launches on Robinhood Chain
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 **[Pons](https://www.ponsfamily.com/launchpad)** (Pons Family) is a **token launchpad on Robinhood Chain**. Its **V2 launch factory** gives every token a real **bonding curve** that graduates into a **Uniswap v4 pool behind a Pons-owned hook** with **permanently locked liquidity**, and it lets a creator quote a launch in **native ETH, USDG, cbBTC, or a tokenized stock or ETF** such as TSLA, NVDA or SPY. This guide shows how to track **new Pons launches**, **bonding-curve trades**, **snipe tax**, **graduations**, the **liquidity lock**, and **post-graduation prices and liquidity** with Bitquery GraphQL APIs, using the `EVM(network: robinhood)` and `Trading` cubes.
+
+## Video Tutorial | Pons Launchpad API on Robinhood Chain - Track Launches, Trades & Graduations
+
+<VideoPlayer url="https://www.youtube.com/watch?v=srQgiLFo_f0" />
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.
