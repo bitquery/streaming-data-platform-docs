@@ -44,7 +44,7 @@ Field notes:
 
 - `ActionType` — the action name as submitted: `order`, `cancel`, `cancelByCloid`, `modify`, `batchModify`, `updateLeverage`, `twapOrder`, and other Hyperliquid exchange actions.
 - `User` vs `Signer` — `User` is the account the action applies to; `Signer` is the key that signed it, which differs when an **agent / API wallet** acts for the account. `VaultAddress` is set for vault-scoped actions.
-- `Bundle` — actions arrive in broadcast bundles; `Hash` is the bundle hash (matches `Trade.Execution.Hash` on resulting fills), `Broadcaster` the node that broadcast it, `ActionIndex` the action's position in the bundle.
+- `Bundle` — actions arrive in broadcast bundles; `Hash` is the bundle hash, `Broadcaster` the node that broadcast it, `ActionIndex` the action's position in the bundle.
 - `Status` — `ok` for accepted actions, or an error status for rejected ones; `Response` (raw string field) carries the node response.
 - `Action` — the raw action payload as a JSON string, when you need parameters beyond the typed fields.
 - `Leverage { Asset Value IsCross }` is populated for `updateLeverage` actions.
