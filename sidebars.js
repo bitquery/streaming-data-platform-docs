@@ -56,7 +56,6 @@ const sidebars = {
       },
       items: [
         "ide/account",
-        "ide/manage-subscription",
         "ide/code",
         "ide/paid",
         "ide/points",
@@ -78,7 +77,11 @@ const sidebars = {
         description:
           "How Bitquery bills — points, streams, rate limits, and plan entitlements.",
       },
-      items: ["plans/how-billing-works", "plans/rate-limits"],
+      items: [
+        "plans/how-billing-works",
+        "plans/rate-limits",
+        "plans/manage-subscription",
+      ],
     },
 
     {

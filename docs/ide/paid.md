@@ -97,7 +97,7 @@ You can change your plan any time from [Account → Billing](https://account.bit
 - **Downgrades** take effect at your **next renewal**, so you keep what you have already paid for until the period ends. Nothing is charged at the time of the downgrade.
 - **Cancelling** stops the renewal. Your current period and any remaining points stay available until the period end date; no refund is issued for the current period.
 
-For a walkthrough of all three, see [Manage Your Subscription](/docs/ide/manage-subscription/).
+For a walkthrough of all three, see [Manage Your Subscription](/docs/plans/manage-subscription/).
 
 ## What will happen if I upgrade the plan in the middle of the month?
 
