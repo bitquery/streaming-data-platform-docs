@@ -49,7 +49,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 | `networks/robinhood/new_pools` | `Initialize` and `PoolCreated` events on `EVM.Events` | [New pools](#new-pools) |
 | `networks/robinhood/pools` | `Trading.Trades` grouped by `Pair.Pool.Address` | [Most active pools](#most-active-pools) |
 | `networks/robinhood/trending_pools` | `Trading.Trades` over a 24-hour bound | [Trending tokens](#trending-tokens) |
-| `dex/pairs/robinhood/{pool}` | `Trading.Trades` filtered on `Pair.Pool.Address` | [Look up a pair](#pair-lookup) |
+| `dex/pairs/robinhood/{pool}` | `Trading.Trades` filtered on `Pair.Pool.Address`, or `Pair.Pool.Id` for Uniswap v4 | [Look up a pair](#pair-lookup) |
 | `dex/search?q={text}` | `Trading.Trades` filtered on `Token.Symbol` / `Token.Name` | [Search for a token](#token-search) |
 | Pool reserves and TVL | `EVM.DEXPoolEvents` | [Liquidity API](/docs/blockchain/robinhood/robinhood-liquidity) |
 
@@ -246,7 +246,7 @@ The `Trading` cubes carry swaps with USD pricing already attached, so a trending
 
 ### Most active pools {#most-active-pools}
 
-The same aggregation keyed on the pool address answers "which pairs are hot", which is what a trending-pools endpoint returns:
+The same aggregation keyed on the pair answers "which pools are hot", which is what a trending-pools endpoint returns. Rows are grouped by the whole `Pair` selection, so Uniswap v4 pairs come back separately even though they share one `Pool.Address` — read `Pool.Id` to tell them apart:
 
 ```graphql
 {
@@ -260,7 +260,7 @@ The same aggregation keyed on the pool address answers "which pairs are hot", wh
       }
     ) {
       Pair {
-        Pool { Address }
+        Pool { Address Id }
         Token { Symbol Address }
         QuoteToken { Symbol }
         Market { Protocol }
@@ -288,20 +288,24 @@ Grouping by protocol shows how the chain's activity is split, and how many disti
       }
     ) {
       Pair { Market { Protocol ProtocolFamily } }
-      pools: uniq(of: Pair_Pool_Address)
       trades: count
+      traders: uniq(of: Trader_Address)
     }
   }
 }
 ```
 
-Uniswap v3 and v4 carry most of the trade volume, while the bonding-curve launchpads account for far more distinct pools than trades — one pool per launched token, most of them idle.
+Uniswap v3 and v4 carry most of the trades on the chain. The bonding-curve launchpads sit at the other end of the shape: they mint one pool per launched token, so they run far more pools than the AMMs while averaging a small fraction of the trades on each.
+
+:::caution Do not count pools with `uniq(of: Pair_Pool_Address)`
+No single field counts pools correctly across venues, which is why the query above does not try. Uniswap v4 keeps every pool inside one singleton contract, so **all v4 pairs report the same `Pool.Address`** and that aggregate collapses them to `1`. The reverse is true of `Pool.Id`, which only v4-style venues populate. Count pools within one protocol at a time, using `Pool.Id` for Uniswap v4 and PancakeSwap Infinity and `Pool.Address` for everything else.
+:::
 
 ---
 
 ## Look up a pair {#pair-lookup}
 
-Given a pool address, return its recent trades with both sides of the pair, the venue, and price in the quote asset and in USD:
+Given a pool address, return its recent trades with both sides of the pair, the venue, and price in the quote asset and in USD. This works for pools that have their own contract — Uniswap v2 and v3, PancakeSwap v3, and the bonding-curve launchpads. **Uniswap v4 needs `Pool.Id` instead**, covered right below.
 
 ```graphql
 {
@@ -321,6 +325,7 @@ Given a pool address, return its recent trades with both sides of the pair, the 
         Token { Symbol Name Address }
         QuoteToken { Symbol Address }
         Market { Protocol }
+        Pool { Address Id }
       }
       Price
       PriceInUsd
@@ -335,6 +340,41 @@ Given a pool address, return its recent trades with both sides of the pair, the 
 ```
 
 `Price` and `PriceInUsd` are plain numbers on this cube, not nested objects. For candles, market cap and supply on the same pair, see the [Trades API](/docs/blockchain/robinhood/robinhood-trades); for reserves and price impact, see the [Liquidity API](/docs/blockchain/robinhood/robinhood-liquidity).
+
+### Uniswap v4 pairs: look up by pool id {#v4-pool-id}
+
+Uniswap v4 has no per-pool contract. Every v4 pool lives inside the PoolManager singleton, so **`Pool.Address` is `0x8366a39cc670b4001a1121b8f6a443a643e40951` on every v4 pair** and filtering on it returns the whole venue rather than one pair. The per-pool identifier is `Pool.Id`, the 32-byte v4 pool id:
+
+```graphql
+{
+  Trading {
+    Trades(
+      limit: {count: 25}
+      orderBy: {descending: Block_Time}
+      where: {
+        Pair: {
+          Market: {NetworkBid: {is: "bid:robinhood"}}
+          Pool: {Id: {is: "0x7fb39eb653999feb9f0d3b1410848911383dfc681f3585229df4aa5b560bf0ba"}}
+        }
+      }
+    ) {
+      Block { Time }
+      Pair {
+        Token { Symbol Name Address }
+        QuoteToken { Symbol }
+        Market { Protocol }
+        Pool { Id }
+      }
+      Price
+      PriceInUsd
+      Side
+      Trader { Address }
+    }
+  }
+}
+```
+
+This is the same value the `Initialize` event carries in its `id` argument, so a pool you picked up from the [new-pool feed](#new-pools) can be handed straight to this query — add the `0x` prefix, which the event argument omits. If you only have a token address, filter on `Pair.Token.Address` instead and read `Pool.Id` off the result.
 
 ### Newly listed tokens
 
@@ -452,7 +492,7 @@ Aggregate `Trading.Trades` over a `Block.Time` bound, ranked by `count` and `uni
 
 ### How do I look up a pair by pool address?
 
-Filter `Trading.Trades` on `Pair.Pool.Address`. That returns both sides of the pair, the venue, the price in quote and USD terms, and the trader. See [Look up a pair](#pair-lookup).
+Filter `Trading.Trades` on `Pair.Pool.Address`. That returns both sides of the pair, the venue, the price in quote and USD terms, and the trader. **Uniswap v4 is the exception**: all its pools share the PoolManager address, so filter `Pair.Pool.Id` instead. See [Look up a pair](#pair-lookup) and [Uniswap v4 pairs](#v4-pool-id).
 
 ### Can I search tokens by symbol or name?
 
