@@ -97,6 +97,7 @@ Change `subscription` to `query`, add `limit: {count: 10}` and `orderBy: {descen
 | What you want | Use this | Guide |
 | --- | --- | --- |
 | Live swaps, USD prices, OHLCV, market cap, top traders | `Trading` cubes; `DEXTrades` for older history | [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades) |
+| New pools, trending tokens, pair lookup, token search | `Events` (`Initialize`, `PoolCreated`) and `Trading` cubes | [New Pools & Trending Tokens API](/docs/blockchain/robinhood/robinhood-new-pools-trending) |
 | Every new token, across all launchpads | `Transfers` (launch mints) and `Events` | [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches) |
 | Pons launches, curve trades, graduations, liquidity lock | `Events`, `Calls`, `Trading` | [Pons Launchpad API](/docs/blockchain/robinhood/pons-api) |
 | Who sent what to whom, whale alerts, wallet ledgers | `Transfers` | [Robinhood Transfers API](/docs/blockchain/robinhood/robinhood-transfers) |
@@ -235,7 +236,7 @@ No. Bitquery is an indexed data API; the public explorer is [robinhoodchain.bloc
 
 ### Can I get new pools, trending tokens and pair lookups for Robinhood Chain, like GeckoTerminal or DexScreener?
 
-Yes. New tokens and pools come from the [Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches) and the [Liquidity API](/docs/blockchain/robinhood/robinhood-liquidity); trending tokens, top traders and volume leaderboards are on the [Trades API](/docs/blockchain/robinhood/robinhood-trades); and token or pair lookups by address, with OHLCV and market cap, use the `Trading.Tokens` and `Trading.Pairs` cubes described in the [Crypto Price API](/docs/trading/crypto-price-api/introduction/).
+Yes — the [New Pools & Trending Tokens API](/docs/blockchain/robinhood/robinhood-new-pools-trending) maps each of those endpoints to a Bitquery query: new pools from the Uniswap v4 `Initialize` and v3 `PoolCreated` events, trending tokens and pools from the `Trading` cubes, plus pair lookup by pool address and token search by symbol or name. Pool reserves and TVL are on the [Liquidity API](/docs/blockchain/robinhood/robinhood-liquidity).
 
 ### How far back does Robinhood Chain data go?
 

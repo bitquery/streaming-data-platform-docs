@@ -60,6 +60,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood New Pools & Trending Tokens API](/docs/blockchain/robinhood/robinhood-new-pools-trending) — new pools, trending tokens, pair lookup and token search
 - [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches)

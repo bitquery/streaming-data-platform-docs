@@ -92,6 +92,7 @@ top traders, creator fees, and first-buyer/sniper detection.
 - [Four Meme on BSC](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api/)
 - [Robinhood Chain API](https://docs.bitquery.io/docs/blockchain/robinhood/) — trades, launchpads and real-time streams on Robinhood Chain
 - [Pons Launchpad API](https://docs.bitquery.io/docs/blockchain/robinhood/pons-api/) — Pons V2 launches, bonding-curve trades, graduations, launch factory and locked liquidity
+- [Robinhood New Pools & Trending Tokens API](https://docs.bitquery.io/docs/blockchain/robinhood/robinhood-new-pools-trending/) — new Uniswap pools, trending tokens, pair lookup and token search on Robinhood Chain
 - [Sniper trading with Kafka](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream/)
 
 ## MCP for AI agents
