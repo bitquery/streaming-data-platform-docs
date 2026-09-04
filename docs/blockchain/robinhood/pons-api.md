@@ -59,8 +59,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <VideoPlayer url="https://www.youtube.com/watch?v=srQgiLFo_f0" />
 
-## Pons contract addresses on Robinhood Chain {#pons-contract-addresses-quick}
-
+## Pons contract addresses at a glance {#pons-contract-addresses-quick}
 Every Pons V2 contract, in one place. Full event lists, the quote-asset table and
 the caveats are in [Pons contract addresses](#contract-addresses) further down.
 
