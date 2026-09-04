@@ -114,7 +114,7 @@ Run it in the IDE: [Hyperliquid TWAP Child Fills ➤](https://ide.bitquery.io/hy
 query {
   Hyperliquid {
     Trades(
-      limit: { count: 1000 }
+      limit: { count: 100 }
       orderBy: { ascending: Block_Time }
       where: {
         Trade: {TwapId: {eq: "2180078"}}
@@ -192,7 +192,7 @@ Run it in the IDE: [Hyperliquid Wallet TWAP Fills ➤](https://ide.bitquery.io/h
 query {
   Hyperliquid {
     Trades(
-      limit: { count: 1000 }
+      limit: { count: 100 }
       orderBy: { descending: Block_Time }
       where: {
         Trade: {

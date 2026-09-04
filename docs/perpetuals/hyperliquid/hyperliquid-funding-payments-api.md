@@ -130,7 +130,7 @@ Run it in the IDE: [Hyperliquid Funding By Date Range ➤](https://ide.bitquery.
 query {
   Hyperliquid {
     PerpFundings(
-      limit: {count: 1000}
+      limit: {count: 100}
       orderBy: {ascending: Block_Time}
       where: {
         Funding: {Trader: {Address: {is: "0x1e6db0fdf1a0f6edb78753184eb0fe5485c2eef2"}}}

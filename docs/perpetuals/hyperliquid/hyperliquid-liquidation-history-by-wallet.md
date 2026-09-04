@@ -104,7 +104,7 @@ Run it in the IDE: [Hyperliquid Liquidations By Date Range ➤](https://ide.bitq
 query {
   Hyperliquid {
     PerpLiquidations(
-      limit: {count: 1000}
+      limit: {count: 100}
       orderBy: {ascending: Block_Time}
       where: {
         Liquidation: {LiquidatedUser: {is: "0x2b5dba3bc4cbb1b94d1e57fcbe0fbc82731ce5f2"}}
