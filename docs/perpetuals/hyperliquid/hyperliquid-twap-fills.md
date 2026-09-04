@@ -154,6 +154,8 @@ query {
 
 `TwapId` is a big integer, so the filter operator is `eq`, not `is`.
 
+A long TWAP can produce more fills than one page holds — TWAP `2180078` has 522. Raise `limit` or page through with `offset` when you need every one of them.
+
 ## TWAP execution summary
 
 Aggregate the child fills to reconcile against the parent order's `ExecutedSize` and `ExecutedNotional`.
