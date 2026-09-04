@@ -116,7 +116,10 @@ query {
     Trades(
       limit: { count: 1000 }
       orderBy: { ascending: Block_Time }
-      where: { Trade: { TwapId: { eq: "2180078" } } , Block: {Time: {since_relative: {days_ago: 3}}}}
+      where: {
+        Trade: {TwapId: {eq: "2180078"}}
+        Block: {Time: {since_relative: {days_ago: 3}}}
+      }
     ) {
       Block {
         Time
@@ -160,13 +163,13 @@ Run it in the IDE: [Hyperliquid TWAP Execution Summary ➤](https://ide.bitquery
 ```graphql
 query {
   Hyperliquid {
-    Trades(where: { Trade: { TwapId: { eq: "2180078" } } , Block: {Time: {since_relative: {days_ago: 3}}}}) {
-      Trade {
-        TwapId
-        Market {
-          Symbol
-        }
+    Trades(
+      where: {
+        Trade: {TwapId: {eq: "2180078"}}
+        Block: {Time: {since_relative: {days_ago: 3}}}
       }
+    ) {
+      Trade { TwapId Market { Symbol } }
       fills: count
       filled: sum(of: Trade_Execution_Size)
       avgPrice: average(of: Trade_Execution_Price)
