@@ -10,7 +10,16 @@ You can run the queries and subscriptions on Postman as well. Below is the link 
 
 ![Using the Bitquery GraphQL API in Postman](/img/postman.png)
 
-You can find examples for all chains in folders. Remember that token must be passed differently for a `query` vs a `subscription`. You can read more about it [here](/docs/authorization/how-to-use/)
+The **Streaming API / v2** collection covers every supported chain — Solana, Ethereum, BSC, Base, Arbitrum, Polygon, Optimism, Tron, Bitcoin, Cardano, Algorand, Robinhood Chain — plus cross-chain Trading APIs, Perpetuals (Hyperliquid and Solana perps), Stablecoins and Prediction Markets. Examples are grouped into folders by chain and category.
+
+## Setup
+
+1. [Generate an access token](/docs/authorization/how-to-generate/).
+2. Set the collection variable `ACCESS_TOKEN` to your `ory_at_...` token.
+3. `BASE_URL` is already set to `https://streaming.bitquery.io/graphql`.
+
+Every request sends the token as `Authorization: Bearer {{ACCESS_TOKEN}}`.
+
+Remember that the token must be passed differently for a `query` vs a `subscription`. You can read more about it [here](/docs/authorization/how-to-use/)
 
 >Remember that a websocket can be opened only on desktop version of Postman
-
