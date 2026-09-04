@@ -11,7 +11,7 @@ You are now in full control of your plan. You can upgrade yourself from your acc
 
 ## Self-service upgrade
 
-Go to [Account → Billing → Select Plan](https://account.bitquery.io/user/upgrade). The checkout is a 4-step flow: **Choose plan → Top Up Credits → Review & pay → Done**.
+Go to [Account → Billing → Select Plan](https://account.bitquery.io/user/upgrade). The checkout is a 4-step flow: **Choose plan → Plan configuration → Review & pay → Done**.
 
 ![Select plan](/img/selfservice/select-plan.png)
 
@@ -40,7 +40,7 @@ Current pricing is always on the [pricing page](https://bitquery.io/pricing).
 
 ## Top up credits (add-ons)
 
-Step 2 of the checkout is **Top Up Credits** — optional. Add-ons are billed together with your plan each period; skip the step if you don't need any.
+Step 2 of the checkout is **Plan configuration** — optional. Add-ons are billed together with your plan each period; skip the step if you don't need any.
 
 ![Top up credits](/img/selfservice/top-up-credits.png)
 
@@ -60,16 +60,20 @@ scale: stream-minutes and stream data drop about 40% at the mid pack and 70% at 
 Self-serve plans query the `realtime` dataset. To run `dataset: archive` or
 `dataset: combined`, add the historical add-on for the chain you need:
 
-| Chain | Add-ons |
-| --- | --- |
-| Ethereum, BNB Chain (BSC), Base, Arbitrum, Optimism, Polygon, Tron, Robinhood | **Historical Trading Data** · **Historical Transfers + Balances + Holders** |
-| Solana | **Historical OHLCV & Token Price** · **Historical Token Transfers & Balances** |
-| Bitcoin, Bitcoin Cash, Litecoin, Dogecoin, Dash, Zcash | **Chain Data (historical included)** |
-| Polymarket | **Historical Data** |
+| Chain | Add-ons | Indicative price |
+| --- | --- | --- |
+| Ethereum, BNB Chain (BSC), Base, Arbitrum, Optimism, Polygon, Tron, Robinhood | **Historical Trading Data** · **Historical Transfers + Balances + Holders** | from $105/mo per chain, per pack |
+| Solana | **Historical OHLCV & Token Price** · **Historical Token Transfers & Balances** | $210/mo · $400/mo |
+| Bitcoin, Bitcoin Cash, Litecoin, Dogecoin, Dash, Zcash | **Chain Data (historical included)** | $200/mo per chain |
+| Polymarket | **Historical Data** (from 1 September 2025) | $120/mo |
+| All chains | **Address Label Data (multi-chain)** | $79.20/mo |
 
-Bundles cover every EVM chain in one purchase, and all six UTXO chains in
-another. Prices are shown at checkout and on the
-[pricing page](https://bitquery.io/pricing).
+Bundles cover the seven EVM chains in one purchase, and all six UTXO chains in
+another — cheaper than buying the chains individually. Tron and Solana are sold
+per chain. Use the ⓘ on any add-on in checkout to see exactly which datasets,
+cubes and time scope it unlocks. Prices above are indicative and vary by monthly
+vs yearly billing — checkout and the
+[pricing page](https://bitquery.io/pricing) are the source of truth.
 
 Cardano, Ripple, Stellar, Algorand, Filecoin, Avalanche, Celo, Cronos and
 Klaytn have no self-serve historical add-on — historical access to those is
@@ -87,7 +91,13 @@ For **Enterprise**, custom limits, or an invoice-based purchase, [contact sales]
 
 ## How to change the plan?
 
-You can change your plan any time from [Account → Billing](https://account.bitquery.io/user/billing). To switch at the end of the billing period, cancel the current plan and buy again.
+You can change your plan any time from [Account → Billing](https://account.bitquery.io/user/billing) — **Change Plan** to move tier, or **Manage Add-Ons** to add capacity or data access without changing tier.
+
+- **Upgrades** apply immediately and are charged **pro rata** — only for the days left in your current period. The full amount bills from your next renewal.
+- **Downgrades** take effect at your **next renewal**, so you keep what you have already paid for until the period ends. Nothing is charged at the time of the downgrade.
+- **Cancelling** stops the renewal. Your current period and any remaining points stay available until the period end date; no refund is issued for the current period.
+
+For a walkthrough of all three, see [Manage Your Subscription](/docs/ide/manage-subscription/).
 
 ## What will happen if I upgrade the plan in the middle of the month?
 
