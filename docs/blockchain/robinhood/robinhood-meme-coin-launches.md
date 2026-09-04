@@ -39,6 +39,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
+- [Robinhood New Pools & Trending Tokens API](/docs/blockchain/robinhood/robinhood-new-pools-trending) — new pools, trending tokens, pair lookup and token search
 - [Robinhood Chain API overview](/docs/blockchain/robinhood/) — every Robinhood Chain API, launchpad guide and stream in one place
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades)
 - [Robinhood Transfers](/docs/blockchain/robinhood/robinhood-transfers)
@@ -630,7 +631,76 @@ Detect **[Klik Finance](https://klik.finance/)** token launches on Robinhood by 
 
 ## Doppler Airlock
 
-`0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862` is the **Doppler Airlock**, the launch contract behind **[Bankr](https://bankr.bot/)** and other front-ends on Robinhood Chain. It emits `Create` for every launch and `Migrate` when a token moves to its final pool, and it is one of the largest launch sources on the network. Most front-ends call it through a launcher contract (`0x22e99278308b393ea1260859b181ad7e78f5eeed`), so filter `Transaction.To` on **both** addresses; a filter on the Airlock alone misses most launches. Attribute a launch to a front-end by the launcher or by the `integrator` field of the decoded `Create` event, not by this page's label.
+`0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862` is the **Doppler Airlock**, the launch contract behind [Bankr](https://bankr.bot/), Long.xyz and other front-ends on Robinhood Chain, and one of the largest launch sources on the network. Its source is verified on the [chain explorer](https://robinhoodchain.blockscout.com/address/0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862) under the contract name `Airlock`. It emits `Create` for every launch and `Migrate` when a token moves to its final pool.
+
+| Role | Address | Notes |
+| --- | --- | --- |
+| **Airlock** (launch contract) | `0xeb7c034704ef8dcd2d32324c1545f62fb4ad0862` | Emits `Create`, `Migrate`, `Collect` |
+| **Doppler hook / initializer** | `0x4e3468951d49f2eea976ed0d6e75ffcb44a9a544` | Verified as `DopplerHookInitializer`. It is both the initializer named in every `Create` and the `hooks` address on the resulting Uniswap v4 pool, which makes it the filter for finding those pools |
+| **LongLauncher** (front-end launcher) | `0x22e99278308b393ea1260859b181ad7e78f5eeed` | Verified as `LongLauncher`. Most launches are routed through it rather than sent to the Airlock directly |
+
+Because most launches arrive through the launcher, **filter `Transaction.To` on both the Airlock and the launcher**; a filter on the Airlock alone misses the majority. Attribute a launch to a front-end by the launcher contract it came through, not by this page's label.
+
+:::caution The `Create` event's argument **names** are wrong — read by position
+The Airlock is indexed with the wrong ABI, so `Arguments.Name` returns names from an unrelated contract. The verified source declares:
+
+```solidity
+event Create(address asset, address indexed numeraire, address initializer, address poolOrHook);
+```
+
+Until the ABI is corrected, map the arguments by **`Arguments.Index`**:
+
+| `Arguments.Index` | Name the API returns | What it actually is |
+| --- | --- | --- |
+| `0` | `caller` | **`numeraire`** — the quote asset the token launched against (USDG, GLD, NVDA and other tokenized stocks) |
+| `1` | `token0` | **`asset`** — the newly launched token |
+| `2` | `token1` | **`initializer`** — always `0x4e346895…`, the `DopplerHookInitializer` |
+| `3` | `optionPair` | **`poolOrHook`** — duplicates the asset on every launch checked (120 of 120, and `LongLauncher` reports the same pair of values in its own event). The pool's actual hook is a separate contract, below |
+
+The raw log confirms the shape: two topics (the signature plus one indexed argument) and three data words, so index `0` is the indexed `numeraire` from `topic1` and indexes `1`–`3` are the data words in order.
+
+One more trap: an `Arguments: {includes: {Value: {Address: …}}}` filter matches an address in **any** position, so on its own it cannot prove a token was launched here — it also matches when your address was merely the quote asset. Tokenized stocks are common numeraires, so a popular one shows up against hundreds of launches it did not produce.
+:::
+
+### Finding a Doppler token's Uniswap v4 pool
+
+Every Doppler launch opens a Uniswap v4 pool with a consistent shape: the **numeraire is `currency0`**, the **asset is `currency1`**, `hooks` is always the `DopplerHookInitializer`, and `fee` is `8388608` — Uniswap v4's dynamic-fee flag rather than a fixed rate. That makes the hook a clean filter for every Doppler pool on the chain:
+
+```graphql
+{
+  EVM(network: robinhood, dataset: combined) {
+    Events(
+      limit: {count: 25}
+      orderBy: {descending: Block_Time}
+      where: {
+        LogHeader: {Address: {is: "0x8366a39cc670b4001a1121b8f6a443a643e40951"}}
+        Log: {Signature: {Name: {is: "Initialize"}}}
+        Arguments: {includes: {
+          Name: {is: "hooks"}
+          Value: {Address: {is: "0x4e3468951d49f2eea976ed0d6e75ffcb44a9a544"}}
+        }}
+      }
+    ) {
+      Block { Time }
+      Transaction { Hash }
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_Address_Value_Arg { address }
+          ... on EVM_ABI_BigInt_Value_Arg { bigInteger }
+          ... on EVM_ABI_Bytes_Value_Arg { hex }
+        }
+      }
+    }
+  }
+}
+```
+
+The `id` argument is the v4 pool id, which the [New Pools & Trending Tokens API](/docs/blockchain/robinhood/robinhood-new-pools-trending#v4-pool-id) uses to look a v4 pair up — v4 pools share one contract address, so the id is the only per-pool handle.
+
+:::note `LaunchCreated` is richer, but not yet decoded
+`LongLauncher` emits `LaunchCreated(poolOrHook, asset, numeraire, poolInitializer, launcher, tickerKey, deployedAt, reservedUntil, normalizedTicker)`, which carries the ticker string the Airlock's `Create` does not. That event is **not decoded** in the index today — it appears only under its topic0 `adc6f1f726f7c710…` with no argument names. Until it is decoded, use the Airlock's `Create`, or match the topic0 and decode the payload client-side.
+:::
 
 ### Doppler newly created tokens
 

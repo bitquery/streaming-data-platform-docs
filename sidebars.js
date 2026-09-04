@@ -916,6 +916,7 @@ const sidebars = {
           },
           items: [
             "blockchain/robinhood/robinhood-trades",
+            "blockchain/robinhood/robinhood-new-pools-trending",
             "blockchain/robinhood/robinhood-transfers",
             "blockchain/robinhood/robinhood-liquidity",
             "blockchain/robinhood/robinhood-events-api",
