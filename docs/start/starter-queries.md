@@ -151,7 +151,7 @@ Get all trades related transactions (buy, sell) for a specific wallet address. T
 
 #### Get Volume Stats for Solana Chain
 
-Traded volume, trade count and active wallets for Solana over a stated window, from `DEXTradeByTokens`. Three things this query has to work around. `Solana.DEXTrades` keeps about 12 hours and has no archive, so it cannot answer this at all. `since_relative` does not filter this cube - 1, 2, 3 and 6 days back all return the same totals - so the window is an explicit timestamp you edit. And a `uniq` in the same selection as `sum` and `count` changes those other aggregates by roughly 10x, so active wallets is computed in its own aliased call. The volume sum also excludes single trades above $1M, which are mispriced rows; without that guard the total reads about $32 quadrillion a day instead of about $16 billion.
+Traded volume, trade count and active wallets for Solana over a stated window, from `DEXTradeByTokens`. Two things this query has to work around. `Solana.DEXTrades` keeps about 12 hours and has no archive, so it cannot answer this at all. And a `uniq` in the same selection as `sum` and `count` corrupts those aggregates and freezes the time filter with them - asking for 1, 3 or 6 days then returns the same totals - so active wallets is computed in its own aliased call. The volume sum also excludes single trades above $1M, which are mispriced rows; without that guard the total reads about $32 quadrillion a day instead of about $16 billion.
 
 ▶️ [Get Volume Stats for Solana Chain](https://ide.bitquery.io/Chain-stats-like-total-volume-traded-total-transactions-active-wallets_1)
 
@@ -623,19 +623,19 @@ If you want to get OHLC data for any specific currency pair on Meteora DYN, you 
 
 #### Volatility of WSOL USDC Pair on AldrinAmm Dex on Solana
 
-Standard deviation of the WSOL/USDC price on AldrinAmm over the last six days. Uses `DEXTradeByTokens`, which keeps about 7 days, rather than `Solana.DEXTrades`, which keeps about 12 hours and has no archive. `trades` is returned alongside the volatility so an empty window reads as 0 trades instead of passing for zero volatility.
+Standard deviation of the WSOL/USDC price on AldrinAmm over the last five days. Uses `DEXTradeByTokens`, which keeps about 7 days, rather than `Solana.DEXTrades`, which keeps about 12 hours and has no archive. `trades` is returned alongside the volatility so an empty window reads as 0 trades instead of passing for zero volatility.
 
 ▶️ [Volatility of WSOL USDC Pair on AldrinAmm Dex on Solana](https://ide.bitquery.io/Volatility-of-WSOL-USDC-Pair-on-AldrinAmm-Dex-on-Solana_1)
 
 #### Volatility of WSOL USDC Pair on Lifinity Dex on Solana
 
-Standard deviation of the WSOL/USDC price on Lifinity over the last six days. This pair is currently inactive on Lifinity, so the query returns 0 trades - change the `ProtocolFamily` to a busier venue such as Raydium or Meteora to see a live figure. Uses `DEXTradeByTokens`, which keeps about 7 days, rather than `Solana.DEXTrades`, which keeps about 12 hours and has no archive. `trades` is returned alongside the volatility so an empty window reads as 0 trades instead of passing for zero volatility.
+Standard deviation of the WSOL/USDC price on Lifinity over the last five days. This pair is currently inactive on Lifinity, so the query returns 0 trades - change the `ProtocolFamily` to a busier venue such as Raydium or Meteora to see a live figure. Uses `DEXTradeByTokens` rather than `Solana.DEXTrades`, which keeps about 12 hours and has no archive.
 
 ▶️ [Volatility of WSOL USDC Pair on Lifinity Dex on Solana](https://ide.bitquery.io/Volatility-of-WSOL-USDC-Pair-on-Lifinity-Dex-on-Solana)
 
 #### Volatility of a Pair on Meteora Dynamic
 
-Standard deviation of the WSOL/USDC price on Meteora over the last six days. The previous version asked `Solana.DEXTrades` for a two-hour window more than a year old and reported a volatility of 0, which meant no data rather than no movement. Uses `DEXTradeByTokens`, which keeps about 7 days, rather than `Solana.DEXTrades`, which keeps about 12 hours and has no archive. `trades` is returned alongside the volatility so an empty window reads as 0 trades instead of passing for zero volatility.
+Standard deviation of the WSOL/USDC price on Meteora over the last five days. The previous version asked `Solana.DEXTrades` for a two-hour window more than a year old and reported a volatility of 0, which meant no data rather than no movement. `trades` is returned alongside so an empty window is visible.
 
 ▶️ [Volatility of a Pair on Meteora Dynamic](https://ide.bitquery.io/Volatility-of-a-Pair-on-Meteora-Dynamic)
 
