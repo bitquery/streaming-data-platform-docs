@@ -10,6 +10,9 @@ keywords:
   - Cursor MCP blockchain
   - ChatGPT crypto MCP
   - AI agent DEX trades
+  - crypto MCP server
+  - blockchain MCP server OAuth
+  - MCP server for trading data
   - mcp.bitquery.io
   - Solana MCP
   - Ethereum MCP
@@ -22,7 +25,7 @@ keywords:
 ---
 import FAQ from "@site/src/components/FAQ";
 
-# Bitquery MCP Server — Blockchain Data for AI Agents
+# Bitquery MCP Server: Blockchain Data for AI Agents
 
 Point your AI client at [`https://mcp.bitquery.io`](https://mcp.bitquery.io) and ask Bitquery's blockchain dataset questions in plain English. Works with Claude, Cursor, ChatGPT, Claude Code, and anything else that speaks [MCP](https://modelcontextprotocol.io/).
 
@@ -34,6 +37,14 @@ You get outlier-filtered DEX trades, transfers, OHLC candles, market cap, and wa
 | **Auth**     | OAuth 2.1, browser sign-in, no manual tokens                                                                                                  |
 | **Pricing**  | Free tier with a Bitquery account. Beyond that it meters against your existing plan.                                                          |
 | **Support**  | [Telegram](https://t.me/Bloxy_info) · [support.bitquery.io](https://support.bitquery.io/) · [support@bitquery.io](mailto:support@bitquery.io) |
+
+## Install in one minute
+
+- **Claude Code:** `claude mcp add bitquery -- npx -y mcp-remote https://mcp.bitquery.io/mcp`
+- **Claude Desktop and Web, ChatGPT, VS Code, Windsurf:** add a custom connector or MCP server with the URL `https://mcp.bitquery.io`, then sign in with your Bitquery account when the first tool runs.
+- **Cursor:** Settings, MCP, Add new MCP server, URL `https://mcp.bitquery.io`; or put the `mcp-remote` command in `.cursor/mcp.json`.
+
+No API key is pasted anywhere; OAuth 2.1 handles sign-in and a free account works. Client-by-client steps with screenshots are in [Install](#install).
 
 import VideoPlayer from "../../src/components/videoplayer.js";
 
@@ -216,8 +227,21 @@ For end-to-end trading workflows, see the [worked examples](/docs/mcp/trading/ex
 
 ---
 
+## Compared with other crypto MCP servers
+
+| | CoinGecko MCP | CoinMarketCap MCP | Bitquery MCP |
+|---|---|---|---|
+| Sign-in | Keyless public endpoint with shared rate limits; API key for the Pro endpoint and the local server | API key from the developer dashboard; limits follow the API plan | OAuth 2.1 in the browser, no key to paste; free account works |
+| What the agent reads | Coin prices, market caps and volumes, exchange and trending data, plus token and pool data across DEXes | Market data, rankings, technical-analysis and on-chain metrics such as holder distribution; OHLCV on higher tiers | Per-trade rows with USD price, market cap and supply, built candles down to one second, balances, holders, transfers and fund tracing across nine chains |
+| Hosting | Remote endpoints and a local package | Remote endpoints | Hosted at mcp.bitquery.io, read-only |
+
+Both CoinGecko and CoinMarketCap answer market-level questions well. Reach for the Bitquery server when the question is about specific trades, wallets or pools, or when the token is not listed anywhere yet.
+
 <FAQ
   items={[
+    { q: "Which AI clients and engines work with the Bitquery MCP server?", a: "Any client that speaks MCP: Claude Desktop and Web, Claude Code, ChatGPT (custom connectors on Plus, Pro or Business), Cursor, VS Code, Windsurf and custom agents built on the MCP SDKs. The model behind the client does not matter; the server exposes the same tools to all of them." },
+    { q: "Do I need an API key to use the Bitquery MCP server?", a: "No. The hosted server uses OAuth 2.1: the client opens a browser window once, you sign in with your Bitquery account, and the client keeps a refresh token for about 30 days. Nothing is pasted into prompts or config files." },
+    { q: "How is it different from the CoinGecko or CoinMarketCap MCP servers?", a: "Those servers answer market-level questions from their listings: prices, market caps, rankings and trends. The Bitquery server reads on-chain activity directly, so it can return individual trades, wallet balances, holders, transfers and fund flows for any token, including ones no aggregator lists, and it signs in with OAuth instead of an API key." },
     {
       q: "Is the Bitquery MCP server free?",
       a: "A free Bitquery account is enough to start. Heavy usage meters against the same plan as the GraphQL API.",
