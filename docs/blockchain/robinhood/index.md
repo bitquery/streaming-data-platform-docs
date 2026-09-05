@@ -1,5 +1,5 @@
 ---
-title: "Robinhood Chain API — Trades, Pons Launchpad & Real-Time Streams"
+title: "Robinhood Chain API: Trades, Pons Launchpad and Real-Time Streams"
 description: "Robinhood Chain API (chain ID 4663): trades, transfers, balances, holders, liquidity, events, calls and the Pons launchpad via Bitquery GraphQL and WebSocket."
 sidebar_position: 0
 keywords:
@@ -31,7 +31,9 @@ keywords:
   - Bitquery Robinhood API
 ---
 
-# Robinhood Chain API — Trades, Pons Launchpad & Real-Time Streams
+import FAQ from "@site/src/components/FAQ";
+
+# Robinhood Chain API: Trades, Pons Launchpad and Real-Time Streams
 
 **Robinhood Chain** (`network: robinhood`, chain ID **4663**) is Robinhood's EVM Layer 2, built with the Arbitrum Orbit stack and live on mainnet since July 2026. Gas is paid in ETH, the chain carries the **USDG** stablecoin and Robinhood's **tokenized stocks and ETFs**, and it hosts a dense cluster of meme-coin launchpads, led by **Pons**. Bitquery indexes the whole chain — blocks, transactions, internal calls, decoded events, token transfers, balances, DEX trades and pool liquidity — and serves it through one GraphQL endpoint where any query can run as a live WebSocket stream.
 
@@ -210,34 +212,26 @@ Robinhood Chain queries accept a `dataset` argument that decides how far back yo
 
 Two rules of thumb. If a query works on recent data but returns nothing for older blocks, the dataset argument is almost always the reason. And a few cubes — `Transactions`, `DEXPools` and `TransactionBalances` — are realtime-only on Robinhood Chain; each guide's dataset section says what applies to it.
 
+History is sold per chain. The free trial includes complete history; paid self-service plans are real-time only and add it through the Robinhood archive add-on on the [pricing page](https://bitquery.io/pricing), which unlocks `archive` and `combined` on `DEXTrades`, `DEXTradeByTokens`, `Calls` and `Events`. A second add-on covers historical `Transfers`, `Balances` and `Holders`. The Pons guide's [historical data section](/docs/blockchain/robinhood/pons-api#historical-data) walks through it.
+
 ---
 
-## FAQ {#faq}
-
-### Is Robinhood Chain EVM-compatible, and what is its chain ID?
-
-Yes. Robinhood Chain is an EVM Layer 2 built with Arbitrum Orbit, chain ID **4663**, with gas paid in ETH. In Bitquery it is `EVM(network: robinhood)`, and `bid:robinhood` in the `Trading` cubes. Solidity ABIs, topic0 hashes and 4-byte selectors work exactly as they do on Ethereum.
-
-### Does Bitquery have a Pons API?
-
-Yes. The [Pons Launchpad API](/docs/blockchain/robinhood/pons-api) covers new launches, bonding-curve trades, snipe tax, graduations, the liquidity lock, contract addresses and the full event reference, and Pons curve trades also appear as `Protocol: pons_v2` rows in the `Trading` cube with USD prices. The [Pons section above](#pons) has the contract addresses and a live launch stream. The guide documents **Pons V2** (`PonsV2LaunchFactory`); the V1 factory (`PonsLaunchFactory`) is a different protocol with different event signatures, called out in the same guide.
-
-### How do I get every new token launched on Robinhood Chain?
-
-Use the cross-launchpad stream on the [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches) page for discovery, then the launchpad's own guide ([Pons](/docs/blockchain/robinhood/pons-api), [pools.trade](/docs/blockchain/robinhood/pools-trade-api), [Flap.sh](/docs/blockchain/robinhood/flap-sh-api), [trench.today](/docs/blockchain/robinhood/trench-today-api), [Bags.fm](/docs/blockchain/robinhood/bags-fm-api)) for curve trades, graduation and pool state.
-
-### Is this the Robinhood brokerage trading API?
-
-No. These pages document **on-chain data for Robinhood Chain**, the public blockchain. They do not place stock or crypto orders in a Robinhood account, and they do not cover Robinhood's off-chain products such as prediction markets.
-
-### Does Bitquery provide a Robinhood Chain RPC endpoint or block explorer?
-
-No. Bitquery is an indexed data API; the public explorer is [robinhoodchain.blockscout.com](https://robinhoodchain.blockscout.com). Every explorer lookup has an API equivalent here, and each is queryable in bulk and streamable: address history ([Transfers](/docs/blockchain/robinhood/robinhood-transfers), [Balances](/docs/blockchain/robinhood/robinhood-balances-api)), token holders ([Token Holders](/docs/blockchain/robinhood/robinhood-token-holders-api)), transaction receipts ([Transactions & Receipts](/docs/blockchain/robinhood/robinhood-transactions-receipts-api)), contract logs ([Events](/docs/blockchain/robinhood/robinhood-events-api)) and internal traces ([Calls](/docs/blockchain/robinhood/robinhood-calls-api)).
-
-### Can I get new pools, trending tokens and pair lookups for Robinhood Chain, like GeckoTerminal or DexScreener?
-
-Yes — the [New Pools & Trending Tokens API](/docs/blockchain/robinhood/robinhood-new-pools-trending) maps each of those endpoints to a Bitquery query: new pools from the Uniswap v4 `Initialize` and v3 `PoolCreated` events, trending tokens and pools from the `Trading` cubes, plus pair lookup by pool address and token search by symbol or name. Pool reserves and TVL are on the [Liquidity API](/docs/blockchain/robinhood/robinhood-liquidity).
-
-### How far back does Robinhood Chain data go?
-
-The `archive` dataset reaches back to when Bitquery began indexing the chain, and the `Trading` cubes hold roughly the last 30 days. The `realtime` dataset holds only the most recent days, so add `dataset: archive` or `dataset: combined` to any historical query. Details are on the [data coverage and retention](/docs/graphql/data-coverage-retention) page.
+<FAQ
+  title="FAQ"
+  items={[
+    { q: "Is Robinhood Chain EVM-compatible, and what is its chain ID?", id: "is-robinhood-chain-evm-compatible-and-what-is-its-chain-id", a: "Yes. Robinhood Chain is an EVM Layer 2 built with Arbitrum Orbit, chain ID 4663, with gas paid in ETH. In Bitquery it is EVM(network: robinhood), and bid:robinhood in the Trading cubes. Solidity ABIs, topic0 hashes and 4-byte selectors work exactly as they do on Ethereum.",
+      answer: <p>{"Yes. Robinhood Chain is an EVM Layer 2 built with Arbitrum Orbit, chain ID "}<strong>{"4663"}</strong>{", with gas paid in ETH. In Bitquery it is "}<code>{"EVM(network: robinhood)"}</code>{", and "}<code>{"bid:robinhood"}</code>{" in the "}<code>{"Trading"}</code>{" cubes. Solidity ABIs, topic0 hashes and 4-byte selectors work exactly as they do on Ethereum."}</p> },
+    { q: "Does Bitquery have a Pons API?", id: "does-bitquery-have-a-pons-api", a: "Yes. The Pons Launchpad API covers new launches, bonding-curve trades, snipe tax, graduations, the liquidity lock, contract addresses and the full event reference, and Pons curve trades also appear as Protocol: pons_v2 rows in the Trading cube with USD prices. The Pons section above has the contract addresses and a live launch stream. The guide documents Pons V2 (PonsV2LaunchFactory); the V1 factory (PonsLaunchFactory) is a different protocol with different event signatures, called out in the same guide.",
+      answer: <p>{"Yes. The "}<a href="/docs/blockchain/robinhood/pons-api">{"Pons Launchpad API"}</a>{" covers new launches, bonding-curve trades, snipe tax, graduations, the liquidity lock, contract addresses and the full event reference, and Pons curve trades also appear as "}<code>{"Protocol: pons_v2"}</code>{" rows in the "}<code>{"Trading"}</code>{" cube with USD prices. The "}<a href="#pons">{"Pons section above"}</a>{" has the contract addresses and a live launch stream. The guide documents "}<strong>{"Pons V2"}</strong>{" ("}<code>{"PonsV2LaunchFactory"}</code>{"); the V1 factory ("}<code>{"PonsLaunchFactory"}</code>{") is a different protocol with different event signatures, called out in the same guide."}</p> },
+    { q: "How do I get every new token launched on Robinhood Chain?", id: "how-do-i-get-every-new-token-launched-on-robinhood-chain", a: "Use the cross-launchpad stream on the Robinhood Meme Coin Launches API page for discovery, then the launchpad's own guide (Pons, pools.trade, Flap.sh, trench.today, Bags.fm) for curve trades, graduation and pool state.",
+      answer: <p>{"Use the cross-launchpad stream on the "}<a href="/docs/blockchain/robinhood/robinhood-meme-coin-launches">{"Robinhood Meme Coin Launches API"}</a>{" page for discovery, then the launchpad's own guide ("}<a href="/docs/blockchain/robinhood/pons-api">{"Pons"}</a>{", "}<a href="/docs/blockchain/robinhood/pools-trade-api">{"pools.trade"}</a>{", "}<a href="/docs/blockchain/robinhood/flap-sh-api">{"Flap.sh"}</a>{", "}<a href="/docs/blockchain/robinhood/trench-today-api">{"trench.today"}</a>{", "}<a href="/docs/blockchain/robinhood/bags-fm-api">{"Bags.fm"}</a>{") for curve trades, graduation and pool state."}</p> },
+    { q: "Is this the Robinhood brokerage trading API?", id: "is-this-the-robinhood-brokerage-trading-api", a: "No. These pages document on-chain data for Robinhood Chain, the public blockchain. They do not place stock or crypto orders in a Robinhood account, and they do not cover Robinhood's off-chain products such as prediction markets.",
+      answer: <p>{"No. These pages document "}<strong>{"on-chain data for Robinhood Chain"}</strong>{", the public blockchain. They do not place stock or crypto orders in a Robinhood account, and they do not cover Robinhood's off-chain products such as prediction markets."}</p> },
+    { q: "Does Bitquery provide a Robinhood Chain RPC endpoint or block explorer?", id: "does-bitquery-provide-a-robinhood-chain-rpc-endpoint-or-block-explorer", a: "No. Bitquery is an indexed data API; the public explorer is robinhoodchain.blockscout.com. Every explorer lookup has an API equivalent here, and each is queryable in bulk and streamable: address history (Transfers, Balances), token holders (Token Holders), transaction receipts (Transactions & Receipts), contract logs (Events) and internal traces (Calls).",
+      answer: <p>{"No. Bitquery is an indexed data API; the public explorer is "}<a href="https://robinhoodchain.blockscout.com">{"robinhoodchain.blockscout.com"}</a>{". Every explorer lookup has an API equivalent here, and each is queryable in bulk and streamable: address history ("}<a href="/docs/blockchain/robinhood/robinhood-transfers">{"Transfers"}</a>{", "}<a href="/docs/blockchain/robinhood/robinhood-balances-api">{"Balances"}</a>{"), token holders ("}<a href="/docs/blockchain/robinhood/robinhood-token-holders-api">{"Token Holders"}</a>{"), transaction receipts ("}<a href="/docs/blockchain/robinhood/robinhood-transactions-receipts-api">{"Transactions & Receipts"}</a>{"), contract logs ("}<a href="/docs/blockchain/robinhood/robinhood-events-api">{"Events"}</a>{") and internal traces ("}<a href="/docs/blockchain/robinhood/robinhood-calls-api">{"Calls"}</a>{")."}</p> },
+    { q: "Can I get new pools, trending tokens and pair lookups for Robinhood Chain, like GeckoTerminal or DexScreener?", id: "can-i-get-new-pools-trending-tokens-and-pair-lookups-for-robinhood-chain-like-geckoterminal-or-dexscreener", a: "Yes \u2014 the New Pools & Trending Tokens API maps each of those endpoints to a Bitquery query: new pools from the Uniswap v4 Initialize and v3 PoolCreated events, trending tokens and pools from the Trading cubes, plus pair lookup by pool address and token search by symbol or name. Pool reserves and TVL are on the Liquidity API.",
+      answer: <p>{"Yes \u2014 the "}<a href="/docs/blockchain/robinhood/robinhood-new-pools-trending">{"New Pools & Trending Tokens API"}</a>{" maps each of those endpoints to a Bitquery query: new pools from the Uniswap v4 "}<code>{"Initialize"}</code>{" and v3 "}<code>{"PoolCreated"}</code>{" events, trending tokens and pools from the "}<code>{"Trading"}</code>{" cubes, plus pair lookup by pool address and token search by symbol or name. Pool reserves and TVL are on the "}<a href="/docs/blockchain/robinhood/robinhood-liquidity">{"Liquidity API"}</a>{"."}</p> },
+    { q: "How far back does Robinhood Chain data go?", id: "how-far-back-does-robinhood-chain-data-go", a: "The archive dataset reaches back to when Bitquery began indexing the chain, and the Trading cubes hold roughly the last 30 days. The realtime dataset holds only the most recent days, so add dataset: archive or dataset: combined to any historical query. Details are on the data coverage and retention page.",
+      answer: <p>{"The "}<code>{"archive"}</code>{" dataset reaches back to when Bitquery began indexing the chain, and the "}<code>{"Trading"}</code>{" cubes hold roughly the last 30 days. The "}<code>{"realtime"}</code>{" dataset holds only the most recent days, so add "}<code>{"dataset: archive"}</code>{" or "}<code>{"dataset: combined"}</code>{" to any historical query. Details are on the "}<a href="/docs/graphql/data-coverage-retention">{"data coverage and retention"}</a>{" page."}</p> },
+  ]}
+/>

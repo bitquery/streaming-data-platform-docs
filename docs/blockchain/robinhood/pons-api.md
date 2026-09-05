@@ -1,5 +1,6 @@
 ---
-title: "Pons Launchpad API — Track Pons Launches on Robinhood Chain"
+title: "Pons Launchpad API on Robinhood Chain: Launches and Trades"
+sidebar_label: "Pons Launchpad API"
 description: "Pons launchpad API on Robinhood Chain. Track Pons V2 launches, curve trades, graduations, the launch factory and locked liquidity with Bitquery GraphQL."
 sidebar_position: 7
 keywords:
@@ -47,13 +48,20 @@ keywords:
   - track Pons launches real time
   - Pons holders API
   - Pons pool liquidity API
+  - Pons V2 docs
+  - does Pons have an API
+  - Pons historical data
+  - Pons trade history
 ---
 
-# Pons Launchpad API — Track Pons Launches on Robinhood Chain
+# Pons Launchpad API on Robinhood Chain: Launches and Trades
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
+import FAQ from "@site/src/components/FAQ";
 
 **[Pons](https://www.ponsfamily.com/launchpad)** (Pons Family) is a **token launchpad on Robinhood Chain**. Its **V2 launch factory** gives every token a real **bonding curve** that graduates into a **Uniswap v4 pool behind a Pons-owned hook** with **permanently locked liquidity**, and it lets a creator quote a launch in **native ETH, USDG, cbBTC, or a tokenized stock or ETF** such as TSLA, NVDA or SPY. This guide shows how to track **new Pons launches**, **bonding-curve trades**, **snipe tax**, **graduations**, the **liquidity lock**, and **post-graduation prices and liquidity** with Bitquery GraphQL APIs, using the `EVM(network: robinhood)` and `Trading` cubes.
+
+Pons publishes protocol and integration docs at [docs.ponsfamily.com](https://docs.ponsfamily.com/docs/v2) and states that there is no Pons API: integrators are told to index the factory and the curves themselves. That is what this page does through Bitquery, so nothing here depends on Pons infrastructure. Every query runs as written in the [Bitquery IDE](https://ide.bitquery.io) on a free account. Live data and the last month of `Trading` cube history are on every plan; history back to the first V2 launch sits on the `archive` dataset, which the trial includes and paid plans add through the Robinhood archive add-on (see [Historical Pons data](#historical-data)).
 
 ## Video Tutorial | Pons Launchpad API on Robinhood Chain - Track Launches, Trades & Graduations
 
@@ -70,6 +78,10 @@ the caveats are in [Pons contract addresses](#contract-addresses) further down.
 | Pons V2 meme hook (`PonsV2MemeHook`) | `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044` |
 | Pons V2 launch router (`PonsV2LaunchAndBuy`) | `0xe33e9e479df8802cb0866d5d05258bec4cf62948` |
 | Pons V2 graduation executor | `0xc7819b64a1daecd7ec19856d026cb14efbd89046` |
+| Pons V2 launch deployer | `0x3711cea4feade896c913c68f01eda97cb06d1a42` |
+| Pons V2 fee escrow | `0xd3afeb2a57f70ef218aa82451c51b2fb0416ac9e` |
+| Pons V2 buyback vault | `0x42df2a798f82289e177311362e8f5ccc45c1219c` |
+| Pons V2 graduation guard | `0xf5695117b99b6f6401e67d4195bd653628176c6c` |
 | Pons V1 factory (superseded, no longer launching) | `0xa5aab3f0c6eeadf30ef1d3eb997108e976351feb` |
 | Uniswap v4 PoolManager (chain-wide, **not** Pons-only) | `0x8366a39cc670b4001a1121b8f6a443a643e40951` |
 
@@ -195,6 +207,18 @@ The `Trading` cube is a separate root that takes no `dataset` argument; it holds
 
 ---
 
+## Historical Pons data and the archive add-on {#historical-data}
+
+Three windows apply to Pons data, and your plan decides which you can reach.
+
+- **Realtime** (`EVM(network: robinhood)` with no `dataset` argument): a rolling window of recent blocks. Every plan, including the trial.
+- **`Trading` cube**: roughly the last 30 days of curve and pool trades with USD prices. Every plan.
+- **`archive` and `combined`**: every launch, curve trade, graduation and lock back to the first Pons V2 launch. The free trial includes complete history. Paid self-service plans are real-time only, and history is a per-chain add-on, listed as the Robinhood archive on the [pricing page](https://bitquery.io/pricing) and switched on from your [account](https://account.bitquery.io/). It unlocks `DEXTrades`, `DEXTradeByTokens`, `Calls` and `Events` on Robinhood Chain, which is everything on this page except the realtime-only pool cubes; a second add-on covers historical `Transfers`, `Balances` and `Holders`.
+
+If `dataset: archive` fails or returns nothing on a paid plan, check the add-on first. How plans and add-ons are billed is on [how billing works](/docs/plans/how-billing-works/).
+
+---
+
 ## Pons contract addresses: launch factory, router, hook, locker {#contract-addresses}
 
 Pons V2 runs from a fixed set of contracts. The launch factory `0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e` emits every `TokenLaunched`, `LaunchSwept`, and `PoolGraduated`; the launch router `0xe33e9e479df8802cb0866d5d05258bec4cf62948` wraps launch-and-first-buy into one transaction; and the meme hook `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044` sits on every graduated Uniswap v4 pool and is the field that tells a Pons pool apart from any other v4 pool on the network. Each launched token also gets **its own bonding-curve contract**, so curve trades are matched by event signature rather than by a single address.
@@ -206,6 +230,10 @@ Pons V2 runs from a fixed set of contracts. The launch factory `0x7ed598bcef8bd9
 | **Meme hook** (`PonsV2MemeHook`) | `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044` | The v4 hook on every graduated pool; emits `PoolRegistered` and `HookFeeCollected` |
 | **Launch locker** (`PonsV2LaunchLocker`) | `0x267444d099b10fb5ed7c3cc7b7c767adca574952` | Holds the locked position NFT and the locked supply |
 | **Graduation executor** | `0xc7819b64a1daecd7ec19856d026cb14efbd89046` | Emits `GraduationDustSwept` |
+| **Launch deployer** | `0x3711cea4feade896c913c68f01eda97cb06d1a42` | Listed in the Pons V2 docs contracts table |
+| **Fee escrow** | `0xd3afeb2a57f70ef218aa82451c51b2fb0416ac9e` | Listed in the Pons V2 docs contracts table |
+| **Buyback vault** | `0x42df2a798f82289e177311362e8f5ccc45c1219c` | Emits `Locked` |
+| **Graduation guard** | `0xf5695117b99b6f6401e67d4195bd653628176c6c` | Listed in the Pons V2 docs contracts table |
 | **Bonding curve** | one per token | Address is the **receiver of the launch mint** — see [Newly launched tokens](#newly-launched-tokens) |
 | **Uniswap v4 PoolManager** | `0x8366a39cc670b4001a1121b8f6a443a643e40951` | Shared chain singleton — **not** Pons-only |
 | **Pons V1 factory** | `0xa5aab3f0c6eeadf30ef1d3eb997108e976351feb` | Separate protocol, no longer launching — see the caution above |
@@ -384,6 +412,7 @@ For any decoded event, filter on `Log.Signature.Name` and read `Arguments` direc
       where: {
         LogHeader: {Address: {is: "0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e"}}
         Log: {Signature: {Name: {is: "TokenLaunched"}}}
+        Block: {Time: {since_relative: {hours_ago: 24}}}
       }
     ) {
       Block { Time Number }
@@ -403,6 +432,8 @@ For any decoded event, filter on `Log.Signature.Name` and read `Arguments` direc
   }
 }
 ```
+
+The 24-hour window keeps the scan small; without it the request can time out. Widen the window, or add `dataset: archive` for launch history.
 
 Each row returns `token`, `curve`, `deployer`, `pairToken`, `launchConfigId` and `graduationThreshold` as named arguments — including the three indexed addresses that used to be locked away in the topics. `graduationThreshold` is a raw integer in the quote asset's own decimals: `4200000000000000000` is 4.2 ETH, `8090000000` is 8,090 USDG. This works on `realtime`, and on `archive`/`combined` for blocks from 2026-08-14 onward — see the [caution above](#event-reference).
 
@@ -683,6 +714,7 @@ This pattern only catches launches where the factory or router is the transactio
       orderBy: {descending: Block_Time}
       where: {
         Pair: {Market: {Protocol: {is: "pons_v2"} Network: {is: "Robinhood"}}}
+        Block: {Time: {since_relative: {hours_ago: 24}}}
       }
     ) {
       Block { Time }
@@ -701,6 +733,8 @@ This pattern only catches launches where the factory or router is the transactio
   }
 }
 ```
+
+The 24-hour window keeps the request inside the cube's limits; without it the request can time out. Widen it up to the cube's rolling month as needed.
 
 Add `Pair: {Token: {Address: {is: "<token>"}}}` to scope to one token — and because the same cube also carries the token's post-graduation `uniswap_v4` trades, dropping the protocol filter gives a token's **entire curve-to-pool trade history in one query**. On `pons_v2` rows `Pair.Pool.Address` is the token's **bonding-curve contract** (it matches `curve` in `TokenLaunched`), so every curve trade hands you the curve address for free. The same trades also appear in the EVM `DEXTrades` / `DEXTradeByTokens` cubes (`ProtocolFamily: "Pons"`, curve contract as `Trade.Dex.SmartContract`), but there `PriceInUSD` / `AmountInUSD` are populated only on the realtime dataset and read `0` on `archive` and `combined` — prefer `Trading`.
 
@@ -779,6 +813,7 @@ Because `CurveBuy.fee` bundles the base fee and the snipe tax, the snipe portion
       orderBy: {descending: Block_Time}
       where: {
         Log: {Signature: {Name: {is: "SnipeTaxCharged"}}}
+        Block: {Time: {since_relative: {hours_ago: 24}}}
       }
     ) {
       Block { Time }
@@ -795,6 +830,8 @@ Because `CurveBuy.fee` bundles the base fee and the snipe tax, the snipe portion
   }
 }
 ```
+
+The 24-hour window keeps the scan small; without it the request can time out. Widen it, or add `dataset: archive` for history.
 
 `recipient` and `amount` come back as named arguments, `LogHeader.Address` is the curve, and `Transaction.From` is the wallet that paid it — which is to say, **the sniper**. Creators can pre-declare exempt wallets at launch; those emit `SnipeTaxExempted` in the launch transaction, so the exemption list for a launch is recoverable from its own transaction hash.
 
@@ -911,6 +948,7 @@ The PoolManager's `Initialize` **is** decoded, so the `PoolKey` reads without ma
       orderBy: {descending: Block_Time}
       where: {
         LogHeader: {Address: {is: "0x8366a39cc670b4001a1121b8f6a443a643e40951"}}
+        Block: {Time: {since_relative: {hours_ago: 24}}}
         Log: {Signature: {Name: {is: "Initialize"}}}
         Arguments: {includes: {
           Name: {is: "hooks"}
@@ -934,6 +972,8 @@ The PoolManager's `Initialize` **is** decoded, so the `PoolKey` reads without ma
   }
 }
 ```
+
+The 24-hour window keeps the scan small; without it the request can time out. Widen it, or add `dataset: archive` for history.
 
 Returns `id` (the **PoolId** you need for [liquidity and slippage](#pool-liquidity-slippage-and-balance-changes)), `currency0`, `currency1`, `fee`, `tickSpacing`, `hooks`, `sqrtPriceX96` and `tick`. Every Pons pool comes back with `fee: 0`, `tickSpacing: 200` and `hooks: 0xe5e702641ea86f4ae6cc3cdaed2b886f976be044`.
 
@@ -1176,7 +1216,7 @@ These three cubes are **realtime-only** on Robinhood — `archive` and `combined
       limit: {count: 10}
       orderBy: {descending: Block_Time}
       where: {
-        PoolEvent: {Pool: {PoolId: {is: "0x99b36f2b55ff70f807132c497431c399c5db8301ba1a43f3e70dc1d08b908eaa"}}}
+        PoolEvent: {Pool: {PoolId: {is: "0xPOOL_ID"}}}
       }
     ) {
       Block { Time }
@@ -1191,6 +1231,8 @@ These three cubes are **realtime-only** on Robinhood — `archive` and `combined
 }
 ```
 
+`DEXPoolEvents` holds only the recent window, so pick a pool that has traded within it: take the `id` argument of the `Initialize` event from [The graduated Uniswap v4 pool](#the-graduated-uniswap-v4-pool) and put it in `PoolId`.
+
 `AmountCurrencyA` is the quote side (ETH in the example) and `AmountCurrencyB` the token side. The token side's USD value reads `0` for unpriced launch tokens — value the pool from the quote leg.
 
 ### Per-swap slippage
@@ -1202,7 +1244,7 @@ These three cubes are **realtime-only** on Robinhood — `archive` and `combined
       limit: {count: 10}
       orderBy: {descending: Block_Time}
       where: {
-        Price: {Pool: {PoolId: {is: "0x99b36f2b55ff70f807132c497431c399c5db8301ba1a43f3e70dc1d08b908eaa"}}}
+        Price: {Pool: {PoolId: {is: "0xPOOL_ID"}}}
       }
     ) {
       Block { Time }
@@ -1216,6 +1258,8 @@ These three cubes are **realtime-only** on Robinhood — `archive` and `combined
   }
 }
 ```
+
+Same rule as above: `DEXPoolSlippages` is realtime-only, so use a pool with recent swaps.
 
 Streamed with `SlippageBasisPoints: {gt: 100}`, this is a ready-made toxic-fill alert.
 
@@ -1355,43 +1399,33 @@ subscription {
 
 ---
 
-## FAQ
-
-### How do I detect a newly launched Pons token?
-
-Subscribe to `Events` filtered on `Log: {Signature: {Name: {is: "TokenLaunched"}}}` — the event is decoded, and its `token`, `curve` and `deployer` arguments are all readable. Use the `Calls` cube instead when you also want the launch metadata (name, symbol, image, socials) or launch history older than 2026-08-14. See [Newly launched tokens](#newly-launched-tokens).
-
-### Why do my Pons trade queries return nothing?
-
-Check the date range: curve trades appear in the trade cubes (as `Protocol: "pons_v2"`, best read via the `Trading` cube) only within the `Trading` cube's rolling ~30-day window, and from 2026-08-14 onward in the EVM `DEXTrades` cubes. For a token that lived and died on its curve before that, `CurveBuy` / `CurveSell` events on the curve contract are the only trade record. And a `uniswap_v4` filter never matches a pre-graduation token — there is no pool until graduation. See [Bonding-curve trades](#bonding-curve-trades).
-
-### Where do I get a token's name, symbol, image, and socials?
-
-Name, symbol and decimals come from `Transfer.Currency` on any transfer. The IPFS image, description and social links exist only in the launch call's arguments — ABI-decode `Call.Input`. See [Token metadata](#token-metadata).
-
-### Why is my effective fee far above 1%?
-
-The snipe tax. `CurveBuy.fee` bundles the 100 bps base fee with the launch-window penalty, which starts at 9,900 bps and halves down to zero within seconds. `SnipeTaxCharged` isolates the penalty. See [Snipe tax](#snipe-tax).
-
-### How do I tell a Pons pool from any other Uniswap v4 pool on Robinhood?
-
-By the `hooks` field: `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044`. The `Trading` cube's `pons_v2` label covers bonding-curve trades only — graduated pools are plain `uniswap_v4` — and the v4 PoolManager address is shared by the whole chain. See [The Pons pool of one token](#the-pons-pool-of-one-token).
-
-### Can I get Pons history older than the realtime window?
-
-Yes — add `dataset: archive` (or `combined`) to the `EVM` root. Almost every query here supports it, including the `Calls` launch feed and every topic0 filter. Only `DEXPoolEvents`, `DEXPoolSlippages` and `TransactionBalances` are realtime-only. Two caveats: forgetting the `dataset` argument is the usual reason a query looks empty, and **decoded `Signature.Name` / `Arguments` are only populated on archive rows from 2026-08-14 onward** — filter historical ranges by topic0, not by name. See [Datasets](#datasets) and the [event reference](#event-reference).
-
-### Is Pons launchpad liquidity locked?
-
-Yes, twice. The Uniswap v4 position minted at graduation is held by `PonsV2LaunchLocker` (`0x267444d099b10fb5ed7c3cc7b7c767adca574952`), and a further 4/49 of supply sits in the same contract as a locked balance; on-chain, neither has ever left the locker. Both are verifiable per token — see [Locked liquidity](#liquidity-lock).
-
-### What is the Pons launch factory contract address?
-
-`PonsV2LaunchFactory` is `0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e`. Launches that include a first buy go through the `PonsV2LaunchAndBuy` router at `0xe33e9e479df8802cb0866d5d05258bec4cf62948`, graduated pools carry the `PonsV2MemeHook` at `0xe5e702641ea86f4ae6cc3cdaed2b886f976be044`, and the locker is `0x267444d099b10fb5ed7c3cc7b7c767adca574952`. The full list is in [Pons contract addresses](#contract-addresses).
-
-### Does this page cover Pons V1?
-
-No. V1 is a separate protocol with no bonding curve and different event signatures, and it has stopped producing launches — see the [caution above](#pons-vs-poolstrade).
+<FAQ
+  title="FAQ"
+  items={[
+    { q: "Does Pons have an official API?", id: "does-pons-have-an-official-api", a: "No. The Pons docs say there is no Pons API in the trust path and tell integrators to index the factory and the curves. This page is that index, served through Bitquery: every launch, curve trade, graduation and lock, live over WebSocket and back to the first V2 launch on the archive dataset.",
+      answer: <p>{"No. The "}<a href="https://docs.ponsfamily.com/docs/v2">{"Pons docs"}</a>{" say there is no Pons API in the trust path and tell integrators to index the factory and the curves. This page is that index, served through Bitquery: every launch, curve trade, graduation and lock, live over WebSocket and back to the first V2 launch on the "}<code>{"archive"}</code>{" dataset."}</p> },
+    { q: "How do I get Pons trade history older than 30 days?", id: "how-do-i-get-pons-trade-history-older-than-30-days", a: "Add dataset: archive or combined to the EVM root. The Trading cube holds about the last 30 days; older curve trades come from DEXTrades (from 2026-08-14) or from CurveBuy and CurveSell events by topic0. The trial includes complete history; on paid plans archive access is the Robinhood archive add-on. See Historical Pons data.",
+      answer: <p>{"Add "}<code>{"dataset: archive"}</code>{" or "}<code>{"combined"}</code>{" to the "}<code>{"EVM"}</code>{" root. The "}<code>{"Trading"}</code>{" cube holds about the last 30 days; older curve trades come from "}<code>{"DEXTrades"}</code>{" (from 2026-08-14) or from "}<code>{"CurveBuy"}</code>{" and "}<code>{"CurveSell"}</code>{" events by topic0. The trial includes complete history; on paid plans archive access is the Robinhood archive add-on. See "}<a href="#historical-data">{"Historical Pons data"}</a>{"."}</p> },
+    { q: "How do I detect a newly launched Pons token?", id: "how-do-i-detect-a-newly-launched-pons-token", a: "Subscribe to Events filtered on Log: {Signature: {Name: {is: \"TokenLaunched\"}}} \u2014 the event is decoded, and its token, curve and deployer arguments are all readable. Use the Calls cube instead when you also want the launch metadata (name, symbol, image, socials) or launch history older than 2026-08-14. See Newly launched tokens.",
+      answer: <p>{"Subscribe to "}<code>{"Events"}</code>{" filtered on "}<code>{"Log: {Signature: {Name: {is: \"TokenLaunched\"}}}"}</code>{" \u2014 the event is decoded, and its "}<code>{"token"}</code>{", "}<code>{"curve"}</code>{" and "}<code>{"deployer"}</code>{" arguments are all readable. Use the "}<code>{"Calls"}</code>{" cube instead when you also want the launch metadata (name, symbol, image, socials) or launch history older than 2026-08-14. See "}<a href="#newly-launched-tokens">{"Newly launched tokens"}</a>{"."}</p> },
+    { q: "Why do my Pons trade queries return nothing?", id: "why-do-my-pons-trade-queries-return-nothing", a: "Check the date range: curve trades appear in the trade cubes (as Protocol: \"pons_v2\", best read via the Trading cube) only within the Trading cube's rolling ~30-day window, and from 2026-08-14 onward in the EVM DEXTrades cubes. For a token that lived and died on its curve before that, CurveBuy / CurveSell events on the curve contract are the only trade record. And a uniswap_v4 filter never matches a pre-graduation token \u2014 there is no pool until graduation. See Bonding-curve trades.",
+      answer: <p>{"Check the date range: curve trades appear in the trade cubes (as "}<code>{"Protocol: \"pons_v2\""}</code>{", best read via the "}<code>{"Trading"}</code>{" cube) only within the "}<code>{"Trading"}</code>{" cube's rolling ~30-day window, and from 2026-08-14 onward in the EVM "}<code>{"DEXTrades"}</code>{" cubes. For a token that lived and died on its curve before that, "}<code>{"CurveBuy"}</code>{" / "}<code>{"CurveSell"}</code>{" events on the curve contract are the only trade record. And a "}<code>{"uniswap_v4"}</code>{" filter never matches a pre-graduation token \u2014 there is no pool until graduation. See "}<a href="#bonding-curve-trades">{"Bonding-curve trades"}</a>{"."}</p> },
+    { q: "Where do I get a token's name, symbol, image, and socials?", id: "where-do-i-get-a-tokens-name-symbol-image-and-socials", a: "Name, symbol and decimals come from Transfer.Currency on any transfer. The IPFS image, description and social links exist only in the launch call's arguments \u2014 ABI-decode Call.Input. See Token metadata.",
+      answer: <p>{"Name, symbol and decimals come from "}<code>{"Transfer.Currency"}</code>{" on any transfer. The IPFS image, description and social links exist only in the launch call's arguments \u2014 ABI-decode "}<code>{"Call.Input"}</code>{". See "}<a href="#token-metadata">{"Token metadata"}</a>{"."}</p> },
+    { q: "Why is my effective fee far above 1%?", id: "why-is-my-effective-fee-far-above-1", a: "The snipe tax. CurveBuy.fee bundles the 100 bps base fee with the launch-window penalty, which starts at 9,900 bps and halves down to zero within seconds. SnipeTaxCharged isolates the penalty. See Snipe tax.",
+      answer: <p>{"The snipe tax. "}<code>{"CurveBuy.fee"}</code>{" bundles the 100 bps base fee with the launch-window penalty, which starts at 9,900 bps and halves down to zero within seconds. "}<code>{"SnipeTaxCharged"}</code>{" isolates the penalty. See "}<a href="#snipe-tax">{"Snipe tax"}</a>{"."}</p> },
+    { q: "How do I tell a Pons pool from any other Uniswap v4 pool on Robinhood?", id: "how-do-i-tell-a-pons-pool-from-any-other-uniswap-v4-pool-on-robinhood", a: "By the hooks field: 0xe5e702641ea86f4ae6cc3cdaed2b886f976be044. The Trading cube's pons_v2 label covers bonding-curve trades only \u2014 graduated pools are plain uniswap_v4 \u2014 and the v4 PoolManager address is shared by the whole chain. See The Pons pool of one token.",
+      answer: <p>{"By the "}<code>{"hooks"}</code>{" field: "}<code>{"0xe5e702641ea86f4ae6cc3cdaed2b886f976be044"}</code>{". The "}<code>{"Trading"}</code>{" cube's "}<code>{"pons_v2"}</code>{" label covers bonding-curve trades only \u2014 graduated pools are plain "}<code>{"uniswap_v4"}</code>{" \u2014 and the v4 PoolManager address is shared by the whole chain. See "}<a href="#the-pons-pool-of-one-token">{"The Pons pool of one token"}</a>{"."}</p> },
+    { q: "Can I get Pons history older than the realtime window?", id: "can-i-get-pons-history-older-than-the-realtime-window", a: "Yes \u2014 add dataset: archive (or combined) to the EVM root. Almost every query here supports it, including the Calls launch feed and every topic0 filter. Only DEXPoolEvents, DEXPoolSlippages and TransactionBalances are realtime-only. Two caveats: forgetting the dataset argument is the usual reason a query looks empty, and decoded Signature.Name / Arguments are only populated on archive rows from 2026-08-14 onward \u2014 filter historical ranges by topic0, not by name. See Datasets and the event reference.",
+      answer: <p>{"Yes \u2014 add "}<code>{"dataset: archive"}</code>{" (or "}<code>{"combined"}</code>{") to the "}<code>{"EVM"}</code>{" root. Almost every query here supports it, including the "}<code>{"Calls"}</code>{" launch feed and every topic0 filter. Only "}<code>{"DEXPoolEvents"}</code>{", "}<code>{"DEXPoolSlippages"}</code>{" and "}<code>{"TransactionBalances"}</code>{" are realtime-only. Two caveats: forgetting the "}<code>{"dataset"}</code>{" argument is the usual reason a query looks empty, and "}<strong>{"decoded `Signature.Name` / `Arguments` are only populated on archive rows from 2026-08-14 onward"}</strong>{" \u2014 filter historical ranges by topic0, not by name. See "}<a href="#datasets">{"Datasets"}</a>{" and the "}<a href="#event-reference">{"event reference"}</a>{"."}</p> },
+    { q: "Is Pons launchpad liquidity locked?", id: "is-pons-launchpad-liquidity-locked", a: "Yes, twice. The Uniswap v4 position minted at graduation is held by PonsV2LaunchLocker (0x267444d099b10fb5ed7c3cc7b7c767adca574952), and a further 4/49 of supply sits in the same contract as a locked balance; on-chain, neither has ever left the locker. Both are verifiable per token \u2014 see Locked liquidity.",
+      answer: <p>{"Yes, twice. The Uniswap v4 position minted at graduation is held by "}<code>{"PonsV2LaunchLocker"}</code>{" ("}<code>{"0x267444d099b10fb5ed7c3cc7b7c767adca574952"}</code>{"), and a further 4/49 of supply sits in the same contract as a locked balance; on-chain, neither has ever left the locker. Both are verifiable per token \u2014 see "}<a href="#liquidity-lock">{"Locked liquidity"}</a>{"."}</p> },
+    { q: "What is the Pons launch factory contract address?", id: "what-is-the-pons-launch-factory-contract-address", a: "PonsV2LaunchFactory is 0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e. Launches that include a first buy go through the PonsV2LaunchAndBuy router at 0xe33e9e479df8802cb0866d5d05258bec4cf62948, graduated pools carry the PonsV2MemeHook at 0xe5e702641ea86f4ae6cc3cdaed2b886f976be044, and the locker is 0x267444d099b10fb5ed7c3cc7b7c767adca574952. The full list is in Pons contract addresses.",
+      answer: <p><code>{"PonsV2LaunchFactory"}</code>{" is "}<code>{"0x7ed598bcef8bd9edd8c97a195c6d13f40801ec7e"}</code>{". Launches that include a first buy go through the "}<code>{"PonsV2LaunchAndBuy"}</code>{" router at "}<code>{"0xe33e9e479df8802cb0866d5d05258bec4cf62948"}</code>{", graduated pools carry the "}<code>{"PonsV2MemeHook"}</code>{" at "}<code>{"0xe5e702641ea86f4ae6cc3cdaed2b886f976be044"}</code>{", and the locker is "}<code>{"0x267444d099b10fb5ed7c3cc7b7c767adca574952"}</code>{". The full list is in "}<a href="#contract-addresses">{"Pons contract addresses"}</a>{"."}</p> },
+    { q: "Does this page cover Pons V1?", id: "does-this-page-cover-pons-v1", a: "No. V1 is a separate protocol with no bonding curve and different event signatures, and it has stopped producing launches \u2014 see the caution above.",
+      answer: <p>{"No. V1 is a separate protocol with no bonding curve and different event signatures, and it has stopped producing launches \u2014 see the "}<a href="#pons-vs-poolstrade">{"caution above"}</a>{"."}</p> },
+  ]}
+/>
 
 ---
 

@@ -2,7 +2,12 @@ import React from "react";
 import Head from "@docusaurus/Head";
 import styles from "./FAQ.module.css";
 
-export type FAQItem = { q: string; a: string; id?: string };
+/**
+ * `a` is the plain-text answer used for the FAQPage JSON-LD and, by default,
+ * for rendering. `answer` is an optional rich version (links, code) that is
+ * rendered in its place; the schema always uses `a`.
+ */
+export type FAQItem = { q: string; a: string; id?: string; answer?: React.ReactNode };
 
 type FAQProps = {
   items: FAQItem[];
@@ -29,7 +34,7 @@ export default function FAQ({ items, title = "Frequently Asked Questions" }: FAQ
       {items.map((it, i) => (
         <details key={i} id={it.id} className={styles.item}>
           <summary>{it.q}</summary>
-          <p>{it.a}</p>
+          {it.answer !== undefined ? it.answer : <p>{it.a}</p>}
         </details>
       ))}
     </section>
