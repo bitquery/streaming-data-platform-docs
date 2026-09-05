@@ -29,3 +29,11 @@ jobs:
           docker run --rm \
             -v "$PWD/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro" \
             nginx:stable-alpine nginx -t
+      # IndexNow: tell Bing (and the engines and assistants that read its index,
+      # ChatGPT search included) which pages changed, instead of waiting for a
+      # recrawl. Google ignores it; the sitemap covers Google. Runs only on
+      # merges to main; the deploy that follows this build lands minutes later.
+      - name: Submit changed URLs to IndexNow
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        continue-on-error: true
+        run: node scripts/indexnow-submit.js --since "${{ github.event.before }}"

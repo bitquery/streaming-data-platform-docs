@@ -104,4 +104,6 @@ top traders, creator fees, and first-buyer/sniper detection.
 
 ## Full index
 
+(Regenerated at build time by plugins/llms-txt.js: the topic parts of under 1.5 MB each, with page counts and sizes, then the single file.)
+
 - [All documentation pages (llms-full.txt)](https://docs.bitquery.io/llms-full.txt)
