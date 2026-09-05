@@ -1,49 +1,52 @@
 ---
 sidebar_position: 1
-title: "DEXScreener API Documentation - Solana Trades, Pairs, Prices"
-description: "Rebuild the DEXScreener Solana dashboard with Bitquery: live pair trades, OHLC, prices, and buy/sell volume with makers, buyers and sellers per pair."
+title: "DEXScreener API for Solana: Pairs, Trades, OHLC and Live Streams"
+description: "What the public DEX Screener API covers (300 requests a minute, current pair data, no candles, history or trade stream) and how to get the same Solana pair data with history, OHLC, WebSocket and Kafka streams from Bitquery."
 keywords:
   - DEXScreener API
   - DEXScreener API documentation
+  - DEXScreener API key
+  - DEXScreener API pricing
+  - DEXScreener websocket
   - DEXScreener Solana
   - Solana DEX API
   - DEX pairs API
   - real-time DEX trades
 ---
-# DEXScreener API Documentation - Solana Trades, Pairs, Prices
-
-Everything you see on the DEXScreener Solana dashboard—live pairs, trades, prices, volumes, makers/buyers/sellers, and more—can be accessed via APIs/Streams with Bitquery.
-We expose the same on-chain data via GraphQL APIs, real-time WebSocket streams, and enterprise Kafka topics, with optional cloud connectors (AWS, GCP, Snowflake) for analytics pipelines.
-
-To build a DEXScreener-style app on managed infrastructure, start from the [Solana DEX API](https://bitquery.io/products/solana-dex-api) product page.
-
-Checkout our [DEXScreener EVM API documentation](/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener/) if you are interested in getting EVM chains(Ethereum, Binance Smart Chain(BSC), Arbitrum, Base, Matic, Optimism, etc) data which DEXScreener shows.
-
-<ProductCTA href="https://bitquery.io/products/solana-dex-api" title="Solana DEX API" />
-
-## Bitquery Solana Data Access Options
-
-- **GraphQL APIs**: Query historical and real-time Solana data with flexible filtering and aggregation
-- **Real-time Streams**: Subscribe to live Solana blockchain events via WebSocket subscriptions
-- **Cloud Solutions**: Access Solana data through AWS, GCP, and Snowflake integrations
-- **Kafka Streams**: High-throughput data streaming for enterprise applications
-
-## Getting Started with Solana
-
-- **[Solana API Examples](/docs/blockchain/Solana/)** - Complete collection of Solana API examples
-- **[Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)** - Real-time DEX trading data and analytics
-- **[Solana Subscriptions](/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
-- **[IDE for Solana](https://ide.bitquery.io)** - Interactive development environment for testing Solana queries
-
-This guide shows how to retrieve the same Solana DEX data that DEXScreener displays—real-time trades, pair stats, volumes, buyers/sellers, and more—using Bitquery APIs, streams, and Kafka.
 
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 import ProductCTA from "@site/src/components/ProductCTA";
+import FAQ from "@site/src/components/FAQ";
 
-## Get Trade Transactions of DEXScreener for a particular pair in realtime
+# DEXScreener API for Solana: Pairs, Trades, OHLC and Live Streams
 
-The query will subscribe you to real-time trade transactions for a Solana pair, providing a continuous stream of data as new trades are processed and recorded.
-You can find the query [here](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-dexcsreener#)
+DEX Screener publishes a public REST API. Its reference lists pair, token and search endpoints at 300 requests a minute and profile, boost and ad endpoints at 60 a minute, all returning the current state of a pair or token. It has no candle, OHLC or historical endpoint. Its WebSocket API streams token profiles, boosts, community takeovers and ads, not pair prices or trades. If that is enough, use it.
+
+This page is for the rest: every number on the DEX Screener Solana dashboard, plus the history behind it, over Bitquery GraphQL, WebSocket subscriptions and Kafka streams. Live trades per pair, token prices, OHLC candles at any interval, buy and sell volume with makers, buyers and sellers, top pairs by activity, and trader profit and loss, across Raydium, Orca, Jupiter, PumpSwap and the other Solana DEXs. Every query below runs as written in the [Bitquery IDE](https://ide.bitquery.io) with a free trial key.
+
+<ProductCTA href="https://bitquery.io/products/solana-dex-api" title="Solana DEX API" />
+
+## What the official DEX Screener API covers
+
+| Endpoint group in the DEX Screener reference | Rate limit | Returns |
+|---|---|---|
+| Pairs by chain and pair address, token pairs, tokens by address, search | 300 requests a minute | Current price, liquidity, volume and transaction counts for a pair or token |
+| Token profiles, boosts, community takeovers, ads, metas (REST and WebSocket) | 60 requests a minute | Listing and promotion metadata |
+
+Two things are missing from that reference: candles (there is no OHLC or historical endpoint, so a chart has to be built by polling and storing snapshots yourself) and a push channel for market data (the WebSocket page lists only profile, boost, takeover and ad feeds, so live pair prices mean polling within the limit). The queries on this page fill both gaps, and add the aggregates a screener needs, such as distinct makers, buyers and sellers per window.
+
+For EVM chains (Ethereum, BNB Chain, Arbitrum, Base, Polygon, Optimism) see the [DEXScreener EVM API page](/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener/).
+
+## How the data is delivered
+
+- **GraphQL API** for historical and current data with filtering and aggregation. Start at [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades).
+- **WebSocket subscriptions** for live trades, new pools and price updates. See [Solana subscriptions](/docs/subscriptions/subscription).
+- **Kafka streams** for high-throughput pipelines. See [Kafka streaming concepts](/docs/streams/kafka-streaming-concepts/).
+- **Cloud delivery** to AWS, GCP and Snowflake for analytics workloads.
+
+## Get trade transactions of a pair in real time
+
+This subscription streams every trade on one Solana pair as it is confirmed. Open it in the IDE [here](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-dexcsreener#).
 
 ```graphql
 subscription MyQuery {
@@ -81,9 +84,9 @@ subscription MyQuery {
 
 ```
 
-## Get Price of a Token
+## Get the price of a token
 
-This query will give you the latest Price of a specified token using Trading API. Here is the [saved query link](https://ide.bitquery.io/token-usd-price-using-trading-api_1)
+This query returns the latest price of a token from the Trading API, with mean, estimate and moving-average prices alongside the OHLC of the latest one-second interval. Saved query [here](https://ide.bitquery.io/token-usd-price-using-trading-api_1).
 
 ```graphql
 query MyQuery {
@@ -120,11 +123,11 @@ query MyQuery {
 
 ```
 
-## Get OHLC Data for a Token Pair
+## Get OHLC candles for a token pair
 
-This query fetches the Open, High, Low, and Close (OHLC) price data (USD-quoted) for a given token pair across DEXs, using a specified quote token and time interval (in seconds). Specify the base token and quote token contract addresses in the `Token.Id` and `QuoteToken.Id` filters. The `Interval.Time.Duration` field allows you to define the candle interval (e.g., `3600` for 1 hour). The query returns the most recent OHLC data for up to 10 pairs sorted by their interval start time.
+This is the candle endpoint DEX Screener does not have. It fetches Open, High, Low and Close prices in USD for a token pair across DEXs, at the interval you set in seconds. Put the base and quote token addresses in the `Token.Id` and `QuoteToken.Id` filters and set `Interval.Time.Duration` to the candle size (`3600` for one hour, `60` for one minute). The query returns the most recent candles sorted by interval start. Saved query [here](https://ide.bitquery.io/ohlc-of-a-solana-token-pair-1-hour-interval).
 
-You can find the query [here](https://ide.bitquery.io/ohlc-of-a-solana-token-pair-1-hour-interval)
+For long histories and other aggregate windows, see [Historical Solana data](/docs/blockchain/Solana/historical-aggregate-data).
 
 ```graphql
 query MyQuery {
@@ -169,11 +172,11 @@ query MyQuery {
 
 ## Buy volume, sell volume, buys, sells, makers, buyers and sellers for a pair {#pair-stats}
 
-This is the query behind a DEXScreener pair row: total and 5-minute buy/sell volume, trade counts, unique makers, buyers and sellers, and the price at the start of the window, five minutes ago, and now.
+This is the query behind a DEX Screener pair row: total and 5-minute buy and sell volume, trade counts, unique makers, buyers and sellers, and the price at the start of the window, five minutes ago, and now.
 
 Two things make it reliable:
 
-- **`since_relative` / `after_relative` instead of absolute timestamps.** The window is always "the last hour" and "the last 5 minutes" no matter when the query runs — a hardcoded date silently widens every day it sits in your code.
+- **`since_relative` / `after_relative` instead of absolute timestamps.** The window is always "the last hour" and "the last 5 minutes" no matter when the query runs. A hardcoded date silently widens every day it sits in your code.
 - **`Transaction: { Result: { Success: true } }`** drops failed transactions, which otherwise inflate trade counts and volume.
 
 ```graphql
@@ -241,7 +244,7 @@ query PairStats($token: String!, $side_token: String!, $pair_address: String!) {
 }
 ```
 
-Variables — this example uses the **WSOL/USDC Orca Whirlpool**, a long-lived pool that will still be there when you run it:
+Variables. This example uses the **WSOL/USDC Orca Whirlpool**, a long-lived pool that will still be there when you run it:
 
 ```json
 {
@@ -254,14 +257,14 @@ Variables — this example uses the **WSOL/USDC Orca Whirlpool**, a long-lived p
 :::tip Choosing a `pair_address`
 Two traps here.
 
-**Aggregators return an empty `MarketAddress`.** Routers such as Jupiter, dflow and Aquifer carry large volume but expose no single pool, so filtering by `Market.MarketAddress` on them yields nothing. Filter on an AMM pool — Whirlpool, Raydium, PumpSwap — instead.
+**Aggregators return an empty `MarketAddress`.** Routers such as Jupiter, dflow and Aquifer carry large volume but expose no single pool, so filtering by `Market.MarketAddress` on them yields nothing. Filter on an AMM pool (Whirlpool, Raydium, PumpSwap) instead.
 
-**Memecoin pools are short-lived.** A pump.fun graduate can do eight figures of volume in one hour and almost nothing an hour later, so a mint that looks ideal today may be dead by the time you copy the query. Use [Get Top Pairs on Solana](#top-pairs) to find a currently active pool, then substitute its address here.
+**Memecoin pools are short-lived.** A pump.fun graduate can do eight figures of volume in one hour and almost nothing an hour later, so a mint that looks ideal today may be dead by the time you copy the query. Use [Get top pairs on Solana](#top-pairs) to find a currently active pool, then substitute its address here.
 :::
 
-## Get Top Pairs on Solana on DEXScreener {#top-pairs}
+## Get top pairs on Solana {#top-pairs}
 
-This returns the top 10 Solana pairs by trade count over the last hour, with total trades, buys, sells, traded volume and buy volume — the data behind a DEXScreener leaderboard. Use it to find a currently active pool to plug into the [pair stats query](#pair-stats) above.
+This returns the top 10 Solana pairs by trade count over the last hour, with total trades, buys, sells, traded volume and buy volume, the data behind a screener leaderboard or a "trending" list. Use it to find a currently active pool to plug into the [pair stats query](#pair-stats) above.
 
 `since_relative` keeps the window rolling, so there is no date to update.
 
@@ -323,13 +326,17 @@ query MyQuery {
 }
 ```
 
+## New pairs and new pools
+
+DEX Screener's "new pairs" tab is a stream of pool creations. On Bitquery that is the DEXPools cube, which reports every new liquidity pool with its tokens and initial liquidity, and can be subscribed to over WebSocket. The queries live on the [Solana DEX Pools API page](/docs/blockchain/Solana/Solana-DexPools-API). Launchpad tokens that have not reached a pool yet are covered by the [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/).
+
 ---
 
-## Trader-Focused Trade APIs (with USD Price, Market Cap & Supply)
+## Trader-focused trade APIs (with USD price, market cap and supply)
 
 The queries below use the **[Trades cube](/docs/trading/crypto-trades-api/trades-api/)** (`Trading { Trades }`) which is trader-focused and provides reliable USD prices including for all tokens. See [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) for when to use which.
 
-### Get All DEX Trades on Solana With Price, Market Cap, and Supply
+### Get all DEX trades on Solana with price, market cap and supply
 
 Stream **all Solana DEX trades** in real time with **USD price**, **market cap**, **FDV**, **circulating supply**, and **transaction fee** data. Filter by **`Pair.Market.Network: Solana`** to capture every swap across **Raydium**, **Orca**, **Jupiter**, **PumpSwap**, and other Solana DEXs in a single subscription.
 
@@ -416,9 +423,9 @@ subscription {
 
 </details>
 
-### Top Traders by PnL for a Specific Pool (Last 30 Minutes)
+### Top traders by PnL for a specific pool (last 30 minutes)
 
-Rank traders by **`PnL`** on one pool: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **pool-specific trader analytics**.
+Rank traders by **`PnL`** on one pool: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **pool-specific trader analytics**. The example pool is the WSOL/USDC Orca Whirlpool; swap in any active pool address from the [top pairs query](#top-pairs).
 
 You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-pair#).
 
@@ -435,7 +442,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
         Block: { Time: { since_relative: { minutes_ago: 30 } } }
         Pair: {
           Market: {
-            Address: { is: "2axyccPzS7Ei57c7ESEq7tBpo4HxtpfCR9gKxh5uNUpu" }
+            Address: { is: "Czfq3xZZDmsdGdUyrNLtRhGc47cXcZtLG4crryfu44zE" }
           }
         }
       }
@@ -459,10 +466,49 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 
 ---
 
-## Video Tutorial on How to Get Solana DEXTrades Data just like DEXScreener from Bitquery API
+## API key, trial and pricing
+
+You need a Bitquery access token to run these outside the IDE. Create one at [account.bitquery.io](https://account.bitquery.io/) and follow [how to generate a token](/docs/authorization/how-to-generate/); there is no approval step. The free trial runs for seven days and includes 1,000 API points, 100 MCP credits and two simultaneous streams. Request rate limits by plan are 30 a minute on Personal, 90 on Pro and 240 on Scale, with custom limits on Enterprise; see [rate limits](/docs/plans/rate-limits/). How points and streams are billed is on [how billing works](/docs/plans/how-billing-works/), and plan prices are on the [pricing page](https://bitquery.io/pricing).
+
+## DEX Screener API compared with Bitquery
+
+| | DEX Screener public API | Bitquery |
+|---|---|---|
+| Access | Public REST, no key listed in the reference | Access token from account.bitquery.io, free trial |
+| Rate limit | 300 requests a minute (pairs, tokens, search), 60 (profiles, boosts, ads) | 30, 90 or 240 requests a minute by plan, custom on Enterprise |
+| Data shape | Current snapshot of a pair or token | Trades, pools, balances, transfers and aggregates, current and historical |
+| Candles and history | Not in the reference | OHLC at any interval, full trade history |
+| Real-time delivery | WebSocket for profiles, boosts and ads; polling for pair data | WebSocket subscriptions for trades, pools and prices, Kafka, gRPC |
+| Screener aggregates | Volume and transaction counts per pair | Volume, trades, distinct makers, buyers and sellers per window, top pairs, trader PnL |
+| Chains | Multi-chain | Solana plus the EVM chains on the [EVM page](/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener/) |
+
+## Video tutorial on how to get Solana DEXTrades data just like DEXScreener from Bitquery API
 
 <VideoPlayer url="https://www.youtube.com/watch?v=t-qdemV4Yo0" />
 
-## Video Tutorial | How to get Buys, Sells, Buy Volume, Sell Volume, Makers & Trades for a specific Solana Token Pair
+## Video tutorial | How to get buys, sells, buy volume, sell volume, makers and trades for a specific Solana token pair
 
 <VideoPlayer url="https://www.youtube.com/watch?v=BmuE1pB9B3k" />
+
+<FAQ
+  items={[
+    { q: "Does DEX Screener have an official API?", a: "Yes. DEX Screener publishes a public REST API with endpoints for pairs, tokens, search, token profiles and boosts. Its reference lists rate limits of 300 requests a minute for pair, token and search endpoints and 60 a minute for profile, boost and ad endpoints." },
+    { q: "Is the DEX Screener API free, and do I need an API key?", a: "The reference lists no API key or paid tier for its endpoints; access is rate-limited per minute. It does not document a paid plan for higher limits." },
+    { q: "Does the DEX Screener API provide historical data or OHLC candles?", a: "No. The reference has no candle, OHLC or historical endpoint; it returns the current state of a pair or token. To get candles and history for the same pairs, use the OHLC query on this page or the Historical Solana data page." },
+    { q: "Does the DEX Screener API have a WebSocket?", a: "Yes, for token profiles, boosts, community takeovers and ads. Pair prices and trades are REST only, so live market data means polling within the rate limit. The subscription queries on this page push every trade, new pool and price change over WebSocket." },
+    { q: "How do I get a DEX Screener-style API key from Bitquery?", a: "Sign up at account.bitquery.io and generate an access token. It works immediately for GraphQL, WebSocket and gRPC, and the seven-day trial includes 1,000 API points, 100 MCP credits and two simultaneous streams." },
+    { q: "Can I stream new Solana pairs as they are created?", a: "Yes. The DEXPools cube reports every new liquidity pool with its tokens and initial liquidity and can be subscribed to over WebSocket. Launchpad tokens that have not reached a pool yet are covered by the Pump.fun API." },
+    { q: "Which Solana DEXs are covered?", a: "Raydium, Orca, Jupiter, PumpSwap and the other Solana DEXs in one schema, so a pair query works across venues without per-DEX integrations." },
+    { q: "What does Bitquery cost after the trial?", a: "Plans are priced by API points and streams; request limits are 30 a minute on Personal, 90 on Pro and 240 on Scale, with custom limits on Enterprise. Current prices are on bitquery.io/pricing." },
+  ]}
+/>
+
+## Related pages
+
+- [Solana API hub](/docs/blockchain/Solana/)
+- [Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades)
+- [Solana DEX Pools API](/docs/blockchain/Solana/Solana-DexPools-API)
+- [Historical Solana data and OHLC](/docs/blockchain/Solana/historical-aggregate-data)
+- [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
+- [DEXScreener EVM API](/docs/blockchain/Ethereum/dextrades/DEXScreener/evm_dexscreener/)
+- [How Bitquery compares with other APIs](/docs/api-comparison)
