@@ -56,6 +56,8 @@ Query `Solana.DEXTrades` (or `DEXTradeByTokens`) with `where` on the wallet as *
 
 ## How do I get historical OHLCV for a Solana token? {#how-do-i-get-historical-ohlcv-for-a-solana-token}
 
+For candles further back than the realtime window, daily history since June 2024 and a CSV export script, see [Historical Solana data and OHLCV](/docs/blockchain/Solana/historical-aggregate-data#historical-ohlc-on-solana).
+
 For **OHLC**, use the **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** first (`Trading.Tokens` / `Pairs` with **`Token.Network: solana`**) and [second-level OHLC](#solana-second-level-ohlc-k-line-api) on this page when you want **1-second-style** streams.
 
 For **historical OHLC** from on-chain DEX trades, use **`Solana(dataset: archive)`** with **`DEXTradeByTokens`**: filter **`Trade.Currency.MintAddress`** (and usually **`Trade.Side.Currency`** for the quote, e.g. WSOL/USDC), set **`Block.Time`** range, and bucket with **`Block { Time(interval: { count, in: minutes | hours | days }) }`**. Compute OHLC with **`PriceInUSD`** / **`Trade_Price`** minima and maxima or **`median`/`quantile`** as in [Solana OHLC API](#solana-ohlc-api).

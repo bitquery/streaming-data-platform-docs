@@ -1,17 +1,26 @@
 ---
-title: "Historical Solana Data API"
-description: "Historical Solana Data API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Built for traders and analytics teams."
-keywords: ["historical Solana data", "Solana OHLC API", "Solana archive data", "Solana historical volume", "DEXTradeByTokens", "Solana aggregate API"]
+title: "Solana Historical Data API: OHLCV, Trades and Archive"
+sidebar_label: "Historical Data and OHLCV"
+description: "Solana historical data: OHLCV candles by mint or pair, aggregate trade history from June 2024, 30-day trade rows, transfers to genesis, CSV and Parquet export."
+keywords: ["historical Solana data", "Solana OHLC API", "Solana OHLCV API", "Solana historical price data API", "Solana archival data", "Solana historical price export", "Solana candles by mint address", "Solana archive data", "Solana historical volume", "DEXTradeByTokens", "Solana aggregate API"]
 ---
 import VideoPlayer from "../../../src/components/videoplayer.js";
+import FAQ from "@site/src/components/FAQ";
 
-# Historical Solana Data
+# Solana Historical Data API: OHLCV, Trades and Archive
 
-Historical aggregate data for Solana is available via the v2 endpoint, providing data starting from May 2024 to now.
-However the options to use the historical data are quite limited and currently only works for the aggregate data on
-`DEXTradeByTokens`. In this section, we will see some working examples for the same.
+Solana history on Bitquery comes in four layers, and the right one depends on how far back you need to go. Aggregate trade history (OHLCV, volume, ATH, first buyers, PnL) runs on the `DEXTradeByTokens` cube with `dataset: archive` or `combined` and starts on 1 June 2024. Per-trade rows with USD prices for the last month come from the [Trading API](/docs/trading/crypto-trades-api/trades-api/). SPL transfers back to the chain's genesis are on the [V1 endpoint](https://docs.bitquery.io/v1/docs/Examples/Solana/transfers). Bulk history for backtesting ships as Parquet through [cloud datasets](/docs/cloud/solana). Every query on this page runs as written in the [Bitquery IDE](https://ide.bitquery.io) on a free account. The trial includes complete history; paid self-service plans add Solana history through the archive packs on the [pricing page](https://bitquery.io/pricing).
 
-**To get historical transfers data going back to genesis of the chain, use the V1 endpoint. Docs available [here](https://docs.bitquery.io/v1/docs/Examples/Solana/transfers).** 
+| Layer | Where | How far back | Use it for |
+|---|---|---|---|
+| Aggregate history | `Solana(dataset: archive)` or `combined`, `DEXTradeByTokens` | From 1 June 2024 | OHLCV, volume, ATH, first buyers, trader PnL |
+| Recent per-trade rows | `Trading.Trades`, with built candles in `Trading.Tokens` and `Trading.Pairs` | About the last 30 days | Trade-level rows with USD prices, candles down to one second |
+| Realtime | `Solana(dataset: realtime)` cubes | About 7 days on `DEXTradeByTokens`, hours on the other cubes | Live filters, including the USD fields the aggregate datasets reject |
+| Transfers to genesis | V1 GraphQL endpoint | Full chain history | SPL transfer history |
+| Bulk exports | Cloud datasets as Parquet on S3, GCS, Snowflake or BigQuery | Full history per dataset | Backtesting and warehouses |
+
+Retention per cube is on the [data coverage and retention](/docs/graphql/data-coverage-retention) page.
+
 
 :::note
 `Trade Side Account` field will not be available for aggregate queries in Archive and Combined Datasets
@@ -50,8 +59,9 @@ To filter by USD amount or `PriceAsymmetry` over history, use the
 query MyQuery {
   Trading {
     Trades(
-      where: {Pair: {Market: {Network: {is: "Solana"}}}, Block: {Date: {before_relative: {days_ago: 25}}}}
+      where: {Pair: {Market: {Network: {is: "Solana"}}}, Block: {Date: {before_relative: {days_ago: 25}, after_relative: {days_ago: 27}}}}
       orderBy: {ascending: Block_Date}
+      limit: {count: 100}
     ) {
       Amounts {
         Base
@@ -108,15 +118,11 @@ query MyQuery {
 }
 ```
 
-## Historical OHLC on Solana
+The example asks for a two-day slice at the far end of the window and caps the rows with `limit`. An unbounded request over the whole month can time out.
 
-[This](https://ide.bitquery.io/Historical-OHLC-for-Solana-archive) query returns the historical OHLC data for a given pair along with volume
-and number of trades in the given interval.
+## Historical OHLCV candles for a Solana token pair {#historical-ohlc-on-solana}
 
-For this example the pair between the tokens listed below is considered.
-
-1. `6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui`
-2. `So11111111111111111111111111111111111111112`
+[This](https://ide.bitquery.io/Historical-OHLC-for-Solana-archive) query returns daily open, high, low and close prices for a pair, with volume and trade count per candle. `Trade.Currency` is the token by mint address, `Trade.Side.Currency` is the quote token, and `Time(interval: ...)` sets the candle size in seconds, minutes, hours or days. The example is USDC against WSOL, a pair that will still be trading when you run it. For one token across every pair, drop the `Side` filter.
 
 ```graphql
 {
@@ -125,7 +131,7 @@ For this example the pair between the tokens listed below is considered.
       orderBy: { descendingByField: "Block_Timefield" }
       where: {
         Trade: {
-          Currency: { MintAddress: { is: "token mint address" } }
+          Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } }
           Side: {
             Currency: {
               MintAddress: { is: "So11111111111111111111111111111111111111112" }
@@ -150,6 +156,57 @@ For this example the pair between the tokens listed below is considered.
   }
 }
 ```
+
+### Export the candles to CSV
+
+The same query from a script, written to a CSV file. Only the Python standard library is used; set `BITQUERY_TOKEN` to your access token first.
+
+```python
+import csv, json, os, urllib.request
+
+TOKEN = os.environ["BITQUERY_TOKEN"]  # your Bitquery access token
+QUERY = """
+{
+  Solana(dataset: archive) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "Block_Timefield" }
+      where: {
+        Trade: {
+          Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } }
+          Side: { Currency: { MintAddress: { is: "So11111111111111111111111111111111111111112" } } }
+        }
+      }
+      limit: { count: 365 }
+    ) {
+      Block { Timefield: Time(interval: { in: days, count: 1 }) }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
+      }
+      count
+    }
+  }
+}
+"""
+req = urllib.request.Request(
+    "https://streaming.bitquery.io/eap",
+    data=json.dumps({"query": QUERY}).encode(),
+    headers={"Content-Type": "application/json", "Authorization": f"Bearer {TOKEN}"},
+)
+rows = json.load(urllib.request.urlopen(req))["data"]["Solana"]["DEXTradeByTokens"]
+with open("usdc_wsol_daily.csv", "w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["time", "open", "high", "low", "close", "volume", "trades"])
+    for r in rows:
+        t = r["Trade"]
+        w.writerow([r["Block"]["Timefield"], t["open"], t["high"], t["low"], t["close"], r["volume"], r["count"]])
+print(f"wrote {len(rows)} candles")
+```
+
+Swap the mint addresses, the interval and the `limit` for other pairs and candle sizes. For whole-history exports across many tokens, [cloud datasets](/docs/cloud/solana) deliver the same data as Parquet.
 
 :::note Important Considerations
 
@@ -288,9 +345,9 @@ query MyQuery {
 [This](https://ide.bitquery.io/liquidity-change-in-recent-month) query returns the change in `liquidity` for a particular token
 pair over the last month. For this example the parameters listed below are used.
 
-1. Primary Token - `6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui`.
-2. Secondary Token - `So11111111111111111111111111111111111111112`,
-3. Pool Address - `BSzedbEvWRqVksaF558epPWCM16avEpyhm2HgSq9WZyy`
+1. Primary Token - `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` (USDC).
+2. Secondary Token - `So11111111111111111111111111111111111111112` (WSOL),
+3. Pool Address - `Czfq3xZZDmsdGdUyrNLtRhGc47cXcZtLG4crryfu44zE` (the USDC/WSOL Orca Whirlpool)
 
 ```graphql
 query MyQuery {
@@ -298,7 +355,7 @@ query MyQuery {
     DEXTradeByTokens(
       where: {
         Trade: {
-          Currency: { MintAddress: { is: "token mint address" } }
+          Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } }
           Side: {
             Currency: {
               MintAddress: { is: "So11111111111111111111111111111111111111112" }
@@ -306,7 +363,7 @@ query MyQuery {
           }
           Market: {
             MarketAddress: {
-              is: "BSzedbEvWRqVksaF558epPWCM16avEpyhm2HgSq9WZyy"
+              is: "Czfq3xZZDmsdGdUyrNLtRhGc47cXcZtLG4crryfu44zE"
             }
           }
         }
@@ -403,6 +460,11 @@ query ($token: String) {
     }
   }
 }
+```
+
+Variables:
+
+```json
 {
   "token": "2tnA2ZmwmgUZLyYLi97zbwsFBXAqpMEcHu9Cv9JW6m26"
 }
@@ -420,7 +482,7 @@ query ($token: String) {
       limit: { count: 100 }
       limitBy: { count: 1, by: Trade_Account_Owner }
       where: {
-        Block: { Date: { since: "2025-04-01" } }
+        Block: { Date: { since: "2025-07-13", till: "2025-07-14" } }
         Trade: {
           Side: { Type: { is: sell } }
           Currency: {
@@ -438,6 +500,8 @@ query ($token: String) {
   }
 }
 ```
+
+The window is the token's launch day. Scanning from an arbitrary earlier date makes the request time out, so find the first trade date first (`Block { Time(minimum: Block_Time) }` on the same cube) and bound the window to it.
 
 ## Get ATH of Multiple Tokens
 
@@ -590,12 +654,44 @@ Get realised PnL, average buy price, buy volume, and sell volume for a token on 
 
 ## How far back does Bitquery's Solana historical data go on Solana?
 
-Bitquery **V2** **historical aggregates** on this page (for example **`Solana(dataset: archive)`** / **`combined`** with **`DEXTradeByTokens`**) are available from **May 2024** forward for the supported aggregate APIs. 
+Bitquery **V2** **historical aggregates** on this page (for example **`Solana(dataset: archive)`** / **`combined`** with **`DEXTradeByTokens`**) are available from **1 June 2024** forward for the supported aggregate APIs. 
 That is **not** full ledger genesis history. For **SPL transfers and older history**, use the **[V1 Solana examples](https://docs.bitquery.io/v1/docs/Examples/Solana/transfers)**. All other chains have complete historical data.
 
 ## What fields are available in Solana DEXTradeByTokens with dataset: combined?
 
 **`Solana(dataset: combined)`** (and **`archive`**) **`DEXTradeByTokens`** supports **aggregate-friendly** fields: **time / intervals**, **amounts**, **prices**, **trade counts**, **`Trade.Currency`**, **`Trade.Side.Currency`**, **`Dex`**, pool/market identifiers, and similar columns shown in the examples below. **Fine-grained per-account fields** on the trade side (e.g. **`Trade Side Account`**-style projections) are often **unsupported**—the API returns “columns not available.” **Add fields one at a time** in the IDE and rely on the live schema. See [combined vs realtime on Solana](/docs/graphql/dataset/combined#why-does-dataset-combined-return-fewer-fields-than-dataset-realtime-on-solana) and [Pump.fun combined note](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/#why-does-my-pumpfun-query-return-columns-not-available-in-combined-dataset).
+
+## CoinGecko OHLC compared with Bitquery
+
+| | CoinGecko coin OHLC endpoint | Bitquery |
+|---|---|---|
+| Scope | Coins listed on CoinGecko, by coin id (chart endpoints also accept a token address) | Any Solana mint or pair, listed or not |
+| Candle size | Automatic: 30 minutes for 1 to 2 days, 4 hours for 3 to 30 days, 4 days beyond; daily and hourly intervals on paid plans over fixed ranges | Any interval in seconds, minutes, hours or days |
+| History | The range you pass in the `days` parameter | Aggregates from 1 June 2024, per-trade rows for about 30 days, transfers to genesis on V1 |
+| Fields | Open, high, low, close | Open, high, low, close, volume, trade count, plus any aggregate you add (makers, buys, sells) |
+| Access | API key header | Access token; the trial includes complete history |
+
+<FAQ
+  items={[
+    { q: "How far back does Solana historical data go on Bitquery?", a: "Aggregate trade history on DEXTradeByTokens with dataset archive or combined starts on 1 June 2024. The Trading API holds about the last 30 days of per-trade rows, realtime cubes hold hours to about a week, and SPL transfers back to genesis are on the V1 endpoint." },
+    { q: "How do I get OHLCV candles for a Solana token by mint address?", a: "Filter DEXTradeByTokens by Trade.Currency.MintAddress, add Trade.Side.Currency for the quote token if you want one pair, and aggregate with Time(interval) for the candle size, as in the OHLCV section. For the last month, Trading.Tokens and Trading.Pairs return built candles down to one second." },
+    { q: "Can I export Solana historical price data to CSV?", a: "Yes. Call the GraphQL endpoint from a script and write the rows to CSV; the OHLCV section has a Python example that uses only the standard library. For bulk history, cloud datasets deliver Parquet to S3, GCS, Snowflake or BigQuery." },
+    { q: "Is Solana historical data included in the free trial, and what does it cost after?", a: "The seven-day trial includes complete history. Paid self-service plans are real-time only; Solana history is sold as archive packs, one for OHLCV and price data and one for token transfers and balances, listed on the pricing page." },
+    { q: "Why does my archive query fail with 'no table can query DEXTradeByToken'?", a: "USD-denominated fields and PriceAsymmetry cannot be used as filters on the aggregate datasets. Use them as measures, filter on native amounts, or run the query on dataset realtime or the Trading API." },
+    { q: "How do I get a Solana token's all-time high price?", a: "Query DEXTradeByTokens on dataset combined with PriceInUSD(maximum: Trade_PriceInUSD), or a 0.95 quantile for outlier resistance, as shown in the ATH sections of this page." },
+    { q: "Can I backtest a Solana trading strategy with this data?", a: "Yes. Pull candles, first-24-hours volume or first-buyer sets from the archive dataset over the API, or use Parquet exports from cloud datasets for full-history backtests in a warehouse." },
+  ]}
+/>
+
+## Related pages
+
+- [Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades)
+- [Solana OHLC API and second-level candles](/docs/blockchain/Solana/solana-dextrades#solana-ohlc-api)
+- [Trading API: crypto price and OHLC](/docs/trading/crypto-price-api/)
+- [DEXScreener-style pair data for Solana](/docs/blockchain/Solana/DEXScreener/solana_dexscreener/)
+- [Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
+- [Solana cloud datasets](/docs/cloud/solana)
+- [Data coverage and retention](/docs/graphql/data-coverage-retention)
 
 ## Video Tutorial for Querying Historical Solana Data
 
