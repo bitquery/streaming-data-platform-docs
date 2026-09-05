@@ -1,6 +1,6 @@
 ---
-title: "Pump.fun API - Live Prices, OHLCV, ATH, MarketCap"
-description: "Stream Pump.fun trades, new token launches, OHLCV, bonding curve progress and top traders on Solana over GraphQL, WebSocket, gRPC or Kafka."
+title: "Pump.fun API Documentation: Trades, Prices, OHLCV, Launches"
+description: "Pump.fun has no hosted API. Query Pump.fun trades, launches, prices, OHLCV, bonding curves and graduations on Solana over GraphQL, WebSocket, gRPC and Kafka."
 keywords:
   - Pump.fun API
   - PumpFun API
@@ -11,11 +11,17 @@ keywords:
   - Pump.fun new token launches
   - Solana memecoin API
   - Pump.fun program address
+  - Pump.fun API documentation
+  - does Pump.fun have an API
+  - Pump.fun API key
+  - Pump.fun historical data
 ---
 import VideoPlayer from "../../../../src/components/videoplayer.js";
 import FAQ from "@site/src/components/FAQ";
 
-# Pump.fun API - Live Prices, OHLCV, ATH, MarketCap
+# Pump.fun API Documentation: Trades, Prices, OHLCV, Launches
+
+Pump.fun does not run a hosted data API. It publishes program documentation and IDLs for its on-chain programs on GitHub ([pump-public-docs](https://github.com/pump-fun/pump-public-docs)), and the hosts its web app calls are undocumented, so there is no supported endpoint for trades, prices, candles or new launches. This page is the query reference for the Bitquery Pump.fun API, which reads that activity from the chain: live trades, new token launches, prices and OHLCV, bonding curve progress, graduations to PumpSwap, holders and top traders, over GraphQL, WebSocket, gRPC and Kafka, filtered by the Pump.fun program address `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`. Every query runs as written in the [Bitquery IDE](https://ide.bitquery.io) with a free trial token. Delivery options, latency and pricing are on the [Pump.fun API product page](https://bitquery.io/products/pumpfun-api).
 
 :::tip Want structured trades, OHLC and market cap? Start with the Trading API
 The [**Trading API**](/docs/trading/trading-data-overview) is the fastest path to clean Pump.fun market data. [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns **MEV-filtered swaps with USD price, market cap and supply on every row**, across **9 chains in one API**, and [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) gives pre-aggregated OHLC down to one second — so you never build candles yourself. Worked Pump.fun examples are in [Trader-Focused Trade APIs](#trader-focused-trade-apis-with-usd-price-market-cap--supply) below.
@@ -23,10 +29,9 @@ The [**Trading API**](/docs/trading/trading-data-overview) is the fastest path t
 Reach for the raw chain-level queries on this page when you need what the Trading API deliberately does not carry: **history older than the Trading window**, **bonding-curve internals**, per-instruction detail, or call / event context.
 :::
 
-New here? The [Pump.fun API product page](https://bitquery.io/products/pumpfun-api) covers delivery channels, latency, pricing and the free trial; this page is the query reference.
 
 
-The Bitquery Pump.fun API provides real-time and historical data for Pump.fun memecoin trades on Solana via GraphQL. Use the API to get live trades, new token launches, OHLCV, bonding curve progress, top traders, and tokens migrated to PumpSwap. Access it via REST, WebSocket subscriptions, gRPC streams, or Kafka, and filter by the program address `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`. For other data points, reach out to [support](https://t.me/Bloxy_info).
+For data points not covered here, ask [support](https://t.me/Bloxy_info).
 
 :::tip **Try Our PumpFun Token Sniffer**
 Want to analyze Pump.fun tokens for potential phishing risks? Check out our [**PumpFun Token Sniffer**](https://pumpfun-token-sniffer.vercel.app/) — a proof-of-concept tool that helps identify suspicious token behavior by analyzing transfers and trades.
@@ -57,6 +62,8 @@ The Pump.fun program address on Solana mainnet is `6EF8rrecthR5Dkzon8Nwu78hRvfCK
 ```
 
 Use this program ID when filtering Solana instructions or token supply updates for Pump.fun tokens. All examples below reference this program. For bonding curve data, token creation, and migration tracking, use the queries in this guide with `Program: { Address: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" } }`.
+
+Tokens that complete the bonding curve graduate to PumpSwap, pump.fun's own AMM, at program address `pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA` (see the [PumpSwap API page](/docs/blockchain/Solana/Pumpfun/pump-swap-api/)). In the trade cubes the two venues appear as `Dex.ProtocolName` `pump` for the bonding curve and `pump_amm` for PumpSwap (family `Pumpswap`). Bonding-curve tokens trade for hours, not months, so the examples on this page that need a market that will still exist when you read them use PUMP (`pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn`), pump.fun's own token, which trades on PumpSwap. For a token still on the curve, switch the filter to `pump` and take a live mint from [tokens traded in the last hour](#how-do-i-get-all-tokens-traded-on-pumpfun-in-the-last-1-hour).
 
 ## Token Creation & Metadata
 
@@ -577,7 +584,7 @@ This method reliably identifies whether a token's initial mint followed the Mayh
 
 We launched the [Price Index](/docs/trading/crypto-price-api/) in August 2025, allowing you to track price of any token trading onchain.
 
-Here's an example of tracking PumpFun token prices.
+Here's an example of tracking Pump.fun token prices. The example token is PUMP on PumpSwap; for a token still on the bonding curve, filter `Market.Program` to `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P` instead.
 
 PumpFun Token prices against SOL Stream
 [Pump.fun token latest price in USD — Query ➤](https://ide.bitquery.io/solana-token-price-using-price-api)
@@ -592,7 +599,7 @@ PumpFun Token prices against SOL Stream
       where: {
         Market: { Network: { is: "Solana" } }
         Token: {
-          Address: { is: "FXm5giasijiQEjR9isXSyW3TXiFGsR7unows3gvzpump" }
+          Address: { is: "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn" }
         }
         Interval: { Time: { Duration: { eq: 60 } } }
       }
@@ -657,12 +664,12 @@ subscription {
     Pairs(
       where: {
         Token: {
-          Address: { is: "BUWg5Fhzvwn2xm4EYoaSFGNZXFRk8ThYe9h5R5GaXipE" }
+          Address: { is: "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn" }
         }
         Price: { IsQuotedInUsd: true }
         Market: {
           Network: { is: "Solana" }
-          Program: { is: "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P" }
+          Program: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
         }
       }
     ) {
@@ -886,9 +893,9 @@ query PumpFunRecentTrades {
         Block: { Time: { since_relative: { minutes_ago: 60 } } }
         Trade: {
           Currency: {
-            MintAddress: { is: "EEaSCMNk1aZxZmT7rXTP2gNWmEeyTVq99yeCEjNfRzbz" }
+            MintAddress: { is: "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn" }
           }
-          Dex: { ProtocolName: { is: "pump" } }
+          Dex: { ProtocolName: { is: "pump_amm" } }
         }
         Transaction: { Result: { Success: true } }
       }
@@ -1008,7 +1015,7 @@ query pumpfunTokenLatestTrades($token: String) {
         Trade: {
           Currency: { MintAddress: { is: $token } }
           Price: { gt: 0 }
-          Dex: { ProtocolName: { is: "pump" } }
+          Dex: { ProtocolName: { is: "pump_amm" } }
         }
         Transaction: { Result: { Success: true } }
       }
@@ -1038,7 +1045,7 @@ query pumpfunTokenLatestTrades($token: String) {
 
 ```json
 {
-  "token": "FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93"
+  "token": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn"
 }
 ```
 
@@ -1046,7 +1053,7 @@ query pumpfunTokenLatestTrades($token: String) {
 
 ### How do I get the volume of a Pump.fun token for the last 7 days?
 
-Use Bitquery's `DEXTradeByTokens` with `sum(of: Trade_Amount)` and a `Block.Time.since` filter (e.g. 7 days ago) to aggregate trading volume. Filter by token mint address and `ProtocolName: "pump"`.
+Use Bitquery's `DEXTradeByTokens` with `sum(of: Trade_Amount)` and a `Block.Time.since` filter (e.g. 7 days ago) to aggregate trading volume. Filter by token mint address and `ProtocolName` (`pump_amm` for PumpSwap, as in the PUMP example, or `pump` for the bonding curve).
 [Trading volume of a Pump.fun token — Query ➤](https://ide.bitquery.io/trade-volume-7-days)
 
 <details>
@@ -1059,9 +1066,9 @@ query MyQuery {
       where: {
         Trade: {
           Currency: {
-            MintAddress: { is: "EEaSCMNk1aZxZmT7rXTP2gNWmEeyTVq99yeCEjNfRzbz" }
+            MintAddress: { is: "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn" }
           }
-          Dex: { ProtocolName: { is: "pump" } }
+          Dex: { ProtocolName: { is: "pump_amm" } }
         }
         Block: { Time: { since_relative: { days_ago: 7 } } }
       }
@@ -1213,19 +1220,14 @@ To find tokens on Pump.fun that have reached a specific market capitalization th
 
 ### How do I get detailed trade stats (volume, buys, sells, makers, buyers, sellers)?
 
-Includes 5-minute and 1-hour metrics for deep token analytics
+Includes 5-minute and 1-hour metrics for deep token analytics. The windows use `since_relative` and `after_relative`, so they roll forward with no date to update; the example pair is the PUMP/USDC PumpSwap pool.
 [Pump.fun token detailed trade stats — Query ➤](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-solana-token-pair_10)
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
-query MyQuery(
-  $token: String!
-  $pair_address: String!
-  $time_5min_ago: DateTime!
-  $time_1h_ago: DateTime!
-) {
+query PairStats($token: String!, $pair_address: String!) {
   Solana(dataset: realtime) {
     DEXTradeByTokens(
       where: {
@@ -1234,7 +1236,7 @@ query MyQuery(
           Currency: { MintAddress: { is: $token } }
           Market: { MarketAddress: { is: $pair_address } }
         }
-        Block: { Time: { since: $time_1h_ago } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
       }
     ) {
       Trade {
@@ -1246,7 +1248,7 @@ query MyQuery(
         start: PriceInUSD(minimum: Block_Time)
         min5: PriceInUSD(
           minimum: Block_Time
-          if: { Block: { Time: { after: $time_5min_ago } } }
+          if: { Block: { Time: { after_relative: { minutes_ago: 5 } } } }
         )
         end: PriceInUSD(maximum: Block_Time)
         Dex {
@@ -1268,7 +1270,7 @@ query MyQuery(
       makers: count(distinct: Transaction_Signer)
       makers_5min: count(
         distinct: Transaction_Signer
-        if: { Block: { Time: { after: $time_5min_ago } } }
+        if: { Block: { Time: { after_relative: { minutes_ago: 5 } } } }
       )
       buyers: count(
         distinct: Transaction_Signer
@@ -1278,7 +1280,7 @@ query MyQuery(
         distinct: Transaction_Signer
         if: {
           Trade: { Side: { Type: { is: buy } } }
-          Block: { Time: { after: $time_5min_ago } }
+          Block: { Time: { after_relative: { minutes_ago: 5 } } }
         }
       )
       sellers: count(
@@ -1289,15 +1291,15 @@ query MyQuery(
         distinct: Transaction_Signer
         if: {
           Trade: { Side: { Type: { is: sell } } }
-          Block: { Time: { after: $time_5min_ago } }
+          Block: { Time: { after_relative: { minutes_ago: 5 } } }
         }
       )
       trades: count
-      trades_5min: count(if: { Block: { Time: { after: $time_5min_ago } } })
+      trades_5min: count(if: { Block: { Time: { after_relative: { minutes_ago: 5 } } } })
       traded_volume: sum(of: Trade_Side_AmountInUSD)
       traded_volume_5min: sum(
         of: Trade_Side_AmountInUSD
-        if: { Block: { Time: { after: $time_5min_ago } } }
+        if: { Block: { Time: { after_relative: { minutes_ago: 5 } } } }
       )
       buy_volume: sum(
         of: Trade_Side_AmountInUSD
@@ -1307,7 +1309,7 @@ query MyQuery(
         of: Trade_Side_AmountInUSD
         if: {
           Trade: { Side: { Type: { is: buy } } }
-          Block: { Time: { after: $time_5min_ago } }
+          Block: { Time: { after_relative: { minutes_ago: 5 } } }
         }
       )
       sell_volume: sum(
@@ -1318,21 +1320,21 @@ query MyQuery(
         of: Trade_Side_AmountInUSD
         if: {
           Trade: { Side: { Type: { is: sell } } }
-          Block: { Time: { after: $time_5min_ago } }
+          Block: { Time: { after_relative: { minutes_ago: 5 } } }
         }
       )
       buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
       buys_5min: count(
         if: {
           Trade: { Side: { Type: { is: buy } } }
-          Block: { Time: { after: $time_5min_ago } }
+          Block: { Time: { after_relative: { minutes_ago: 5 } } }
         }
       )
       sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
       sells_5min: count(
         if: {
           Trade: { Side: { Type: { is: sell } } }
-          Block: { Time: { after: $time_5min_ago } }
+          Block: { Time: { after_relative: { minutes_ago: 5 } } }
         }
       )
     }
@@ -1342,10 +1344,8 @@ query MyQuery(
 
 ```json
 {
-  "token": "3se1Bd46JqPiobyxtnwKWaLVnQK8RaAKHVtuCq4rRiog",
-  "pair_address": "7NhN7yzHkuttbA8JBqboRXTXmMi3DkJ61MN3SgEPg5VZ",
-  "time_5min_ago": "2025-02-18T10:10:00Z",
-  "time_1h_ago": "2025-02-18T09:15:00Z"
+  "token": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+  "pair_address": "2uF4Xh61rDwxnG9woyxsVQP7zuA6kLFpb3NvnRQeoiSd"
 }
 ```
 
@@ -1353,7 +1353,7 @@ query MyQuery(
 
 ### How do I get the first 100 buyers of a Pump.fun token?
 
-Get wallet addresses of first 100 accounts who bought a token
+Get wallet addresses of the first 100 accounts that bought a token. DEXTrades on Solana keeps only the recent window, so use a token launched within it.
 [First 100 buyers of a Pump.fun token — Query ➤](https://ide.bitquery.io/get-first-100-buyers-of-a-token_1)
 
 <details>
@@ -1368,7 +1368,7 @@ query MyQuery {
           Buy: {
             Currency: {
               MintAddress: {
-                is: "2Z4FzKBcw48KBD2PaR4wtxo4sYGbS7QqTQCLoQnUpump"
+                is: "token mint address"
               }
             }
           }
@@ -1629,7 +1629,7 @@ query MyQuery($time_1h_ago: DateTime, $token: String, $pairAddress: String) {
 
 ### How do I get the last Pump.fun trade before a token graduates to PumpSwap AMM?
 
-Finds the final pool trade before a token transitions to PumpSwap
+Finds the final pool trade before a token transitions to PumpSwap. DEXPools keeps only the recent window, so the token must have graduated within it; drop the `Market` filter to list every recent graduation.
 [Last Pump.fun trade before PumpSwap — Query ➤](https://ide.bitquery.io/pump-fun-token-graduating-to-pumpswap)
 
 <details>
@@ -1646,7 +1646,7 @@ Finds the final pool trade before a token transitions to PumpSwap
           Market: {
             BaseCurrency: {
               MintAddress: {
-                is: "3Tf4ZSdJ6vvFY2ob9DDYFgFRGSgCxDm6MfBViY8ppump"
+                is: "token mint address"
               }
             }
           }
@@ -1821,7 +1821,7 @@ query TopTraders($token: String) {
 
 ```json
 {
-  "token": "FbhypAF9LL93bCZy9atRRfbdBMyJAwBarULfCK3roP93",
+  "token": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
   "pool": "5Ezr4oK1vTV4m8f7g8P1Be1uwtzczhf21AztwNxWcmwM"
 }
 ```
@@ -1884,7 +1884,7 @@ The detection method works by:
 
      Above analysis means someone else transferred the token to them which is phishy because devs often send token to famous KOLs or Influential People in crypto space to misguide traders.
 
-We are taking here example of `3Fymji2JPhhbKuCzNPKEyjdEuF9cyFuQ8HksyjRGpump` token, this may or may not be phishy as we are not running the further comparison between timestamps. Here we are just demonstrating that how you can get data from Bitquery and later run basic analysis on it.
+Pick a token launched within the recent window, since the Transfers and DEXTrades cubes on Solana keep no archive. Whether it is phishy is not decided here, as we are not running the timestamp comparison. Here we are just demonstrating that how you can get data from Bitquery and later run basic analysis on it.
 
 #### Query 1: Get First Transfers of a Token to Addresses
 
@@ -1927,8 +1927,8 @@ query MyQuery($token: String, $bonding_curve: String) {
 
 ```json
 {
-  "token": "3Fymji2JPhhbKuCzNPKEyjdEuF9cyFuQ8HksyjRGpump",
-  "bonding_curve": "6AMeqEdepfKKmTQAwcMvbrwugcaJaXtt3MsJGy7WdXpk"
+  "token": "token mint address",
+  "bonding_curve": "bonding curve address"
 }
 ```
 
@@ -1988,7 +1988,7 @@ query MyQuery($token: String!, $buyersList: [String!]) {
 
 ```json
 {
-  "token": "3Fymji2JPhhbKuCzNPKEyjdEuF9cyFuQ8HksyjRGpump",
+  "token": "token mint address",
   "buyersList": [ PASS THE ADDRESS LIST YOU GOT FROM QUERY 1 HERE ]
 }
 ```
@@ -2258,7 +2258,7 @@ subscription {
 
 ### Top Traders by PnL for a Specific PumpFun Token (Last 30 Minutes)
 
-Rank traders by **`PnL`** on one bonding curve: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **curve-specific trader analytics**.
+Rank traders by **`PnL`** on one pool: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **pool-specific trader analytics**. The example pool is the PUMP/USDC PumpSwap pool; for a bonding curve, use the curve's market address from the [latest trades query](#how-do-i-get-the-latest-trades-for-a-pumpfun-token).
 
 You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-pumpfun-token-curve).
 
@@ -2275,7 +2275,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
         Block: { Time: { since_relative: { minutes_ago: 30 } } }
         Pair: {
           Market: {
-            Address: { is: "4eFeg1mKLXQh6cssyp4kJzEcSYfCmRQnkDx1EPW8VHMw" }
+            Address: { is: "2uF4Xh61rDwxnG9woyxsVQP7zuA6kLFpb3NvnRQeoiSd" }
           }
         }
       }
@@ -2355,6 +2355,22 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/latest-crea
 
 ---
 
+## Does pump.fun have an official API?
+
+Not a hosted one. Pump.fun publishes program documentation and IDLs on GitHub for the bonding curve program, PumpSwap and its fee program, which is what you need to build and sign transactions. It publishes no data API: the hosts its web app calls have no reference, no published rate limits, no schema and no stability promise, so anything built on them can break without notice. The queries on this page read the same on-chain activity through Bitquery, with a documented schema, plan-based rate limits, and streaming over WebSocket, gRPC and Kafka.
+
+| | Pump.fun | Bitquery Pump.fun API |
+|---|---|---|
+| Documentation | Program docs and IDLs on GitHub; no data API reference | Schema, examples and IDE links on this page |
+| Trades, prices, candles, launches | Served to the pump.fun web app by undocumented hosts | GraphQL queries, WebSocket subscriptions, gRPC and Kafka streams |
+| History | None published | Historical datasets for trades and token creation, realtime window for pools and transfers |
+| Rate limits | Unpublished | 30, 90 or 240 requests a minute by plan, custom on Enterprise |
+| Access | No key or terms for third-party use | Access token, seven-day free trial |
+
+## API key, free trial and pricing
+
+Create an access token at [account.bitquery.io](https://account.bitquery.io/) and follow [how to generate a token](/docs/authorization/how-to-generate/); there is no approval step. The free trial runs for seven days and includes 1,000 API points, 100 MCP credits and two simultaneous streams. Request rate limits by plan are 30 a minute on Personal, 90 on Pro and 240 on Scale, with custom limits on Enterprise; see [rate limits](/docs/plans/rate-limits/). Points and streams are explained on [how billing works](/docs/plans/how-billing-works/), and plan prices are on the [Pump.fun API product page](https://bitquery.io/products/pumpfun-api) and the [pricing page](https://bitquery.io/pricing).
+
 ## Video Tutorials
 
 #### Pump.Fun API | Get Live Prices, Metadata, OHLCV, Trading Pair Stats, Charts
@@ -2407,6 +2423,13 @@ Fields like `Trade.Side` are only available with `dataset: realtime`. For histor
 
 <FAQ
   items={[
+    { q: "Does pump.fun have an official API?", a: "Not a hosted one. Pump.fun publishes program docs and IDLs on GitHub for building transactions, but no data API for trades, prices, candles or launches. Bitquery reads that activity from the chain and serves it over GraphQL, WebSocket, gRPC and Kafka." },
+    { q: "What is the Pump.fun program address on Solana?", a: "The bonding curve program is 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P. Graduated tokens trade on PumpSwap at pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA. In Bitquery trade data the venues appear as ProtocolName pump and pump_amm." },
+    { q: "Do I need an API key, and is there a free tier?", a: "Yes, an access token from account.bitquery.io, generated without an approval step. The seven-day trial includes 1,000 API points, 100 MCP credits and two simultaneous streams; paid plans are listed on the pricing page." },
+    { q: "Can I stream new Pump.fun token launches in real time?", a: "Yes. Subscribe to TokenSupplyUpdates or Instructions filtered by the Pump.fun program and the create methods, as shown in the new-token-launches section, or use the gRPC and Kafka streams for lower latency." },
+    { q: "How do I get Pump.fun OHLCV candles?", a: "Use Trading.Tokens or Trading.Pairs with an Interval duration in seconds for pre-built candles, or aggregate DEXTradeByTokens by time as shown in the OHLCV section. Both return open, high, low, close and volume." },
+    { q: "How do I get a Pump.fun token's all-time high price?", a: "Query DEXTradeByTokens with dataset combined and PriceInUSD(maximum: Trade_PriceInUSD) for the token since its launch, as shown in the ATH section; a 0.98 quantile alongside it filters one-off outlier prints." },
+    { q: "How do I get Pump.fun creator fee data?", a: "Query InstructionBalanceUpdates for collect_creator_fee instructions on the Pump.fun program, as shown in the creator fee section; each row carries the signer, signature and the balance changes of the fee collection." },
     { q: "How do I get the current price of a Pump.fun token?", a: "Query DEXTrades or Trading.Trades filtered by the token mint and Pump.fun program address 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P. Trading.Trades includes USD price on every row for the last ~30 days." },
     { q: "How do I track new Pump.fun token launches?", a: "Subscribe to token creation or pool events filtered by the Pump.fun program, or poll DEXPools for new pairs. Examples on this page include real-time subscription queries." },
     { q: "Does Bitquery have historical Pump.fun data?", a: "Yes. Use dataset: combined for older trades and bonding-curve history. Use dataset: realtime for the latest window only." },
