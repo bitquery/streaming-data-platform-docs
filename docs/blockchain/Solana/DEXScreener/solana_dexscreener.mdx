@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
+sidebar_label: "DEXScreener API"
 title: "DEXScreener API for Solana: Pairs, Trades, OHLC and Live Streams"
-description: "What the public DEX Screener API covers (300 requests a minute, current pair data, no candles, history or trade stream) and how to get the same Solana pair data with history, OHLC, WebSocket and Kafka streams from Bitquery."
+description: "What the public DEX Screener API covers and lacks, and how to get the same Solana pair data with history, OHLC and live streams from Bitquery."
 keywords:
   - DEXScreener API
   - DEXScreener API documentation
@@ -31,7 +32,7 @@ This page is for the rest: every number on the DEX Screener Solana dashboard, pl
 | Endpoint group in the DEX Screener reference | Rate limit | Returns |
 |---|---|---|
 | Pairs by chain and pair address, token pairs, tokens by address, search | 300 requests a minute | Current price, liquidity, volume and transaction counts for a pair or token |
-| Token profiles, boosts, community takeovers, ads, metas (REST and WebSocket) | 60 requests a minute | Listing and promotion metadata |
+| Token profiles, boosts, community takeovers and ads (REST, plus WebSocket feeds), orders and metas (REST) | 60 requests a minute | Listing and promotion metadata |
 
 Two things are missing from that reference: candles (there is no OHLC or historical endpoint, so a chart has to be built by polling and storing snapshots yourself) and a push channel for market data (the WebSocket page lists only profile, boost, takeover and ad feeds, so live pair prices mean polling within the limit). The queries on this page fill both gaps, and add the aggregates a screener needs, such as distinct makers, buyers and sellers per window.
 
@@ -42,7 +43,7 @@ For EVM chains (Ethereum, BNB Chain, Arbitrum, Base, Polygon, Optimism) see the 
 - **GraphQL API** for historical and current data with filtering and aggregation. Start at [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades).
 - **WebSocket subscriptions** for live trades, new pools and price updates. See [Solana subscriptions](/docs/subscriptions/subscription).
 - **Kafka streams** for high-throughput pipelines. See [Kafka streaming concepts](/docs/streams/kafka-streaming-concepts/).
-- **Cloud delivery** to AWS, GCP and Snowflake for analytics workloads.
+- **Cloud datasets** as Parquet exports to S3, GCS, Snowflake or BigQuery for bulk history. See [cloud datasets](/docs/cloud/).
 
 ## Get trade transactions of a pair in real time
 
