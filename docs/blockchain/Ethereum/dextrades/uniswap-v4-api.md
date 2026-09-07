@@ -1,51 +1,37 @@
 ---
-title: "Ethereum Uniswap V4 API"
-description: "Ethereum Uniswap V4 API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Works with WebSocket live subscriptions."
+title: "Ethereum Uniswap v4 API: Swaps, PoolIds, Pool Stats, Traders and Reserves"
+description: "Uniswap v4 on Ethereum with Bitquery GraphQL: swaps with trader and market cap, raw PoolManager swaps, pools by PoolId, pool stats, top traders, reserves."
 sidebar_label: Uniswap v4 Trades
+keywords:
+  - Ethereum Uniswap v4 API
+  - Uniswap v4 trades API
+  - Uniswap v4 PoolId
+  - Uniswap v4 PoolManager Ethereum
+  - Uniswap v4 liquidity API
 ---
+
 import FAQ from "@site/src/components/FAQ";
 
-# Uniswap v4 Trades API
+# Ethereum Uniswap v4 API: Swaps, PoolIds, Pool Stats, Traders and Reserves
 
-:::tip Need real-time Uniswap V4 (Ethereum) data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Uniswap V4 (Ethereum) swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Uniswap V4 (Ethereum) data older than ~30 days**, raw per-swap detail, or call / event context.
-:::
+Uniswap v4 replaced one contract per pool with one contract for all pools. On Ethereum that contract is the PoolManager at `0x000000000004444c5dc75cB358380D2e3dE08A90`; a pool is a `PoolId`, the hash of its two tokens, fee, tick spacing and hook, and swaps, deposits and withdrawals all surface as events of the PoolManager. Bitquery decodes those into the same cubes as every other DEX, with two things to know. `Trade.PoolId` is how you pick a pool, since `Dex.SmartContract` is always the PoolManager. And on raw `DEXTrades` rows the buyer and seller are both the PoolManager, because it settles both sides; the trader is `Transaction.From`, or the `Trader` field of the Trading cube. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked pool is ETH/USDC, `PoolId 0x00b9edc1583bf6ef09ff3a09f6c23ecb57fd7d0bb75625717ec81eed181e22d7`, and the worked token is USDC, `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`.
 
-Uniswap v4 introduces a major shift in protocol architecture. Instead of deploying a separate smart contract for each liquidity pool, Uniswap v4 uses a singleton PoolManager contract that manages all pools internally as structured state.
+## Live swaps with trader, USD and market cap
 
-Each pool in Uniswap v4 is uniquely identified by a `PoolId`, which is derived from the pool configuration (token pair, fee, tick spacing, and optional hooks), rather than a dedicated contract address. Using Bitquery’s Uniswap v4 APIs, you can track:
-- DEX trades across all v4 pools
-- Trades by specific traders
-- Token-level trade activity
-- Real-time trade metrics
-
-The Uniswap v4 PoolManager contract (`0x000000000004444c5dc75cB358380D2e3dE08A90`) emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity.
-
-## Live Uniswap v4 swaps on Ethereum {#live-uniswap-v4-swaps-on-ethereum}
-
-[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): filter **`Pair.Market.Network: Ethereum`** and **`Pair.Market.Protocol: uniswap_v4`**. You get pool id/address, supply fields, trader, and USD on each swap. [Chain DEXTrades vs this](/docs/cubes/dextrades-dextradebytokens-trading-trades).
-
-Run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Uniswap-v4-trades-with-pool-id-and-mcap).
+For a live feed with the trader, USD amounts and the token's supply and market cap on every row, use the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api) of the Trading cube and filter the market to Ethereum and `uniswap_v4`. `Pair.Pool.Id` is the PoolId and `Pair.Pool.Address` the PoolManager. The Trading cube keeps about 30 days; the chain cubes below reach further back. Saved stream [here](https://ide.bitquery.io/Uniswap-v4-trades-with-pool-id-and-mcap).
 
 ```graphql
 subscription {
   Trading {
     Trades(
-      where: {Pair: {Market: {Network: {is: "Ethereum"}, Protocol: {is: "uniswap_v4"}}}}
+      where: { Pair: { Market: { Network: { is: "Ethereum" }, Protocol: { is: "uniswap_v4" } } } }
     ) {
-      Side
-      Supply {
-        CirculatingSupply
-        MarketCap
+      Block {
+        Time
       }
+      Side
       Trader {
         Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
       }
       Amounts {
         Base
@@ -55,147 +41,39 @@ subscription {
         Base
         Quote
       }
-      Block {
-        Date
-        Time
-        Timestamp
+      Supply {
+        CirculatingSupply
+        MarketCap
       }
       Pair {
         Currency {
-          Id
-          Name
           Symbol
-        }
-        Market {
-          Address
-          Program
-          Network
+          Id
         }
         QuoteCurrency {
-          Id
-          Name
           Symbol
-        }
-        Token {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-        QuoteToken {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
         }
         Pool {
           Id
           Address
         }
       }
+      TransactionHeader {
+        Sender
+      }
     }
   }
 }
 ```
 
-On **Uniswap v4**, use **`Pair.Pool.Id`** as the stable **pool id** (alongside **`Pair.Pool.Address`**). Example shape:
+## Raw swaps from the PoolManager
 
-```json
-"Pool": {
-  "Address": "0x000000000004444c5dc75cb358380d2e3de08a90",
-  "Id": "0x71ad627a0586a06b24834f7af328c5c387a512d183dbd7b8c31189a866adcefa"
-}
-```
-
-## Uniswap v4 Trades using DEXTrades API
-
-These swaps use the chain-specific **DEXTrades** cube via `EVM { DEXTrades }`: **`Trade.PoolId`**, pool-relative Buy/Sell ([DEXTrades cube](/docs/cubes/dextrades)). USD can be thin on small pools—use [live swaps above](#live-uniswap-v4-swaps-on-ethereum) when you want the Trading row shape.
-
-[Run in the Bitquery IDE](https://ide.bitquery.io/Real-time-trades-on-uniswap-v4----subscription).
+The chain-specific `DEXTrades` cube gives the pool-side view of each swap: what the pool received and what it paid out, with USD on both sides. Filter on the protocol name and subscribe, or add a `PoolId`. Saved stream [here](https://ide.bitquery.io/Real-time-trades-on-uniswap-v4----subscription).
 
 ```graphql
 subscription {
-  EVM {
-    DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v4"}}}}) {
-      Block{
-        Time
-      }
-      Trade {
-        PoolId
-        Buy {
-          Currency {
-            Name
-            Symbol
-            SmartContract
-            Decimals
-          }
-          Buyer
-          Amount
-          AmountInUSD
-          Price
-          PriceInUSD
-          Seller
-        }
-        Sell {
-          Currency {
-            Name
-            Symbol
-            SmartContract
-            Decimals
-          }
-          Buyer
-          Amount
-          AmountInUSD
-          Price
-          PriceInUSD
-          Seller
-        }
-      }
-      Transaction {
-        From
-        To
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Get All Pool Ids for a Currency
-
-Using [this](https://ide.bitquery.io/All-Pool_Ids-for-currency) API we can get all the virtual pool addresses (`PoolId`) for a currency, which is USDT (`0xdac17f958d2ee523a2206206994597c13d831ec7`) in this case.
-
-```graphql
-query MyQuery {
-  EVM {
-    DEXTradeByTokens(
-      where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v4"}}, Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}}}
-    ) {
-      Trade {
-        PoolId
-      }
-      count
-    }
-  }
-}
-```
-
-## Latest Trades for a Specific Currencies Pair
-
-[This](https://ide.bitquery.io/Latest-trades-for-a-Pool-Id-on-uniswap-v4) API endpoint allows us to filter out the latest trades for a specific pair, using `PoolId` as a filter option. Here, we are getting latest trades for the `PoolId: 0x2a5bf4f7f9f6044f854ae1170113504a023dbcb347f25a1809bab471f07a7dba`
-
-```graphql
-{
-  EVM {
-    DEXTrades(
-      orderBy: {descending: Block_Time}
-      limit: {count: 100}
-      where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v4"}}, PoolId: {is: "0x2a5bf4f7f9f6044f854ae1170113504a023dbcb347f25a1809bab471f07a7dba"}}}
-    ) {
+  EVM(network: eth) {
+    DEXTrades(where: { Trade: { Dex: { ProtocolName: { is: "uniswap_v4" } } } }) {
       Block {
         Time
       }
@@ -203,34 +81,24 @@ query MyQuery {
         PoolId
         Buy {
           Currency {
-            Name
             Symbol
             SmartContract
-            Decimals
           }
           Amount
           AmountInUSD
-          Price
           PriceInUSD
-          Seller
         }
         Sell {
           Currency {
-            Name
             Symbol
             SmartContract
-            Decimals
           }
-          Buyer
           Amount
           AmountInUSD
-          Price
-          PriceInUSD
         }
       }
       Transaction {
         From
-        To
         Hash
       }
     }
@@ -238,197 +106,210 @@ query MyQuery {
 }
 ```
 
-## Uniswap V4 Pair Trade Stats
+## Every v4 pool of a token
 
-Using [this](https://ide.bitquery.io/uniswap-v4-stats---Volume-bought-and-sold) query get SWFTC/USDT v4 pool stats (volume, bought, sold)
+Group `DEXTradeByTokens` by `PoolId` with the token in `Currency`. Each row is one pool with its counter token, trade count and USD volume in the window; this is the lookup that gives you a `PoolId`. Saved query [here](https://ide.bitquery.io/All-Pool_Ids-for-currency).
 
 ```graphql
-query pairTopTraders {
-  EVM(network: eth, dataset: realtime) {
+{
+  EVM(network: eth) {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "volumeUsd" }
       where: {
-        Block:{
-          Time: {since_relative: {days_ago: 1}}
-        }
         Trade: {
-          Dex: {
-            ProtocolName: {is: "uniswap_v4"}
-          }
-          PoolId: {is: "0x2a5bf4f7f9f6044f854ae1170113504a023dbcb347f25a1809bab471f07a7dba"}
+          Dex: { ProtocolName: { is: "uniswap_v4" } }
+          Currency: { SmartContract: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" } }
         }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
+      orderBy: { descendingByField: "count" }
+      limit: { count: 20 }
     ) {
       Trade {
-        Currency{
-          Name
-          Symbol
-          SmartContract
+        PoolId
+        Side {
+          Currency {
+            Symbol
+            SmartContract
+          }
         }
       }
-      bought: sum(
-        of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: buy } } } }
-      )
-      sold: sum(
-        of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: sell } } } }
-      )
-      volume: sum(of: Trade_Amount)
+      count
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
   }
 }
 ```
 
-## Top Buyers of a Token on Uniswap V4
+## Latest swaps in one pool
 
-[This](https://ide.bitquery.io/Top-Buyers-of-a-currency-on-uniswap-v4) API returns the top buyers of a token on Uniswap V4 virtual pool, along with the amount bought in token denominations and USD.
-
-```graphql
-{
-  EVM {
-    DEXTrades(
-      orderBy: {descendingByField: "bought_in_usd"}
-      limit: {count: 100}
-      where: {
-        Trade: {
-          Dex: {ProtocolName: {is: "uniswap_v4"}}, 
-          Buy: {Currency: {SmartContract: {is: "0x0bb217e40f8a5cb79adf04e1aab60e5abd0dfc1e"}}}
-          PoolId: {is: "0x2a5bf4f7f9f6044f854ae1170113504a023dbcb347f25a1809bab471f07a7dba"}
-        }
-      }
-    ) {
-      Trade {
-        Sell {
-          Currency {
-            Name
-            Symbol
-            SmartContract
-            Decimals
-          }
-          Buyer
-        }
-      }
-      bought:sum(of: Trade_Buy_Amount)
-      bought_in_usd:sum(of: Trade_Buy_AmountInUSD)
-    }
-  }
-}
-```
-
-## Top Sellers of a Token on Uniswap V4
-
-[This](https://ide.bitquery.io/Top-Sellers-of-a-currency-on-uniswap-v4) API returns the top buyers of a token on Uniswap V4 virtual pool, along with the amount bought in token denominations and USD.
+Saved query [here](https://ide.bitquery.io/Latest-trades-for-a-Pool-Id-on-uniswap-v4).
 
 ```graphql
 {
-  EVM {
+  EVM(network: eth) {
     DEXTrades(
-      orderBy: {descendingByField: "sold_in_usd"}
-      limit: {count: 10}
       where: {
         Trade: {
-          Dex: {ProtocolName: {is: "uniswap_v4"}}, 
-          Sell: {Currency: {SmartContract: {is: "0x0bb217e40f8a5cb79adf04e1aab60e5abd0dfc1e"}}}
-          PoolId: {is: "0x2a5bf4f7f9f6044f854ae1170113504a023dbcb347f25a1809bab471f07a7dba"}
+          PoolId: { is: "0x00b9edc1583bf6ef09ff3a09f6c23ecb57fd7d0bb75625717ec81eed181e22d7" }
         }
       }
+      limit: { count: 20 }
+      orderBy: { descending: Block_Time }
     ) {
+      Block {
+        Time
+      }
       Trade {
         Buy {
           Currency {
-            Name
             Symbol
-            SmartContract
-            Decimals
           }
-          Seller
+          Amount
+          AmountInUSD
+          PriceInUSD
+        }
+        Sell {
+          Currency {
+            Symbol
+          }
+          Amount
+          AmountInUSD
         }
       }
-      sold:sum(of: Trade_Buy_Amount)
-      sold_in_usd:sum(of: Trade_Buy_AmountInUSD)
+      Transaction {
+        From
+        Hash
+      }
     }
   }
 }
 ```
 
-## Get Uniswap V4 Pool Liquidity
+## Pool stats for the last 24 hours
 
-Liquidity for v4 pools is reconstructed by stepping through each price range where liquidity is concentrated , so `AmountCurrencyA` / `AmountCurrencyB` reflect the actual PoolManager balances for that `PoolId`. See the [Ethereum Liquidity API](/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api) for the full `DEXPoolEvents` schema.
-
-Stream live liquidity for all Uniswap v4 pools on Ethereum. [Run in the Bitquery IDE](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4_6).
+Trades, distinct buyers and sellers, and USD volume split by direction for the token you name. Saved query [here](https://ide.bitquery.io/uniswap-v4-stats---Volume-bought-and-sold).
 
 ```graphql
-subscription MyQuery {
+{
   EVM(network: eth) {
-    DEXPoolEvents(
-      where: {PoolEvent: {Dex: {ProtocolName: {is: "uniswap_v4"}}}}
-    ) {
-      Block { Time Number }
-      PoolEvent {
-        AtoBPrice
-        BtoAPrice
-        Liquidity {
-          AmountCurrencyA
-          AmountCurrencyAInUSD
-          AmountCurrencyB
-          AmountCurrencyBInUSD
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          PoolId: { is: "0x00b9edc1583bf6ef09ff3a09f6c23ecb57fd7d0bb75625717ec81eed181e22d7" }
+          Currency: { SmartContract: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" } }
         }
-        Pool {
-          PoolId
-          SmartContract
-          CurrencyA { Name Symbol SmartContract }
-          CurrencyB { Name Symbol SmartContract }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Symbol
+        }
+        Side {
+          Currency {
+            Symbol
+          }
         }
       }
-      Transaction { Hash }
+      trades: count
+      buyers: uniq(of: Trade_Buyer)
+      sellers: uniq(of: Trade_Seller)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      buyVolumeUsd: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: buy } } } })
+      sellVolumeUsd: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: sell } } } })
     }
   }
 }
 ```
 
-Filter to a specific pool by `PoolId` (e.g. SWFTC/USDT v4 pool). [Run in the Bitquery IDE](https://ide.bitquery.io/uniswap-v4-pool-liquidity-by-poolid-ethereum).
+## Top traders of the pool
+
+Rank by `Transaction.From`, the account that sent the swap. `bought` sums the token the trader received and `sold` the token it paid; `Side.Type` describes the counter-side of each trade, which is why the two conditions are the other way round. Saved queries: [top buyers](https://ide.bitquery.io/Top-Buyers-of-a-currency-on-uniswap-v4), [top sellers](https://ide.bitquery.io/Top-Sellers-of-a-currency-on-uniswap-v4).
 
 ```graphql
-subscription MyQuery {
-  EVM(network: ethereum) {
+{
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          PoolId: { is: "0x00b9edc1583bf6ef09ff3a09f6c23ecb57fd7d0bb75625717ec81eed181e22d7" }
+          Currency: { SmartContract: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" } }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 20 }
+    ) {
+      Transaction {
+        From
+      }
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
+    }
+  }
+}
+```
+
+## Reserves of a v4 pool
+
+`DEXPoolEvents` rows carry the reserves the PoolManager holds for the pool after each change, rebuilt from the concentrated positions around the current price and priced in USD. Filter by `PoolId` for one pool, or keep only the protocol name to stream them all. Saved streams: [all v4 pools](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4_6), [by PoolId](https://ide.bitquery.io/uniswap-v4-pool-liquidity-by-poolid-ethereum).
+
+```graphql
+{
+  EVM(network: eth) {
     DEXPoolEvents(
       where: {
         PoolEvent: {
-          Dex: { ProtocolName: { is: "uniswap_v4" } }
-          Pool: { PoolId: { is: "0x2a5bf4f7f9f6044f854ae1170113504a023dbcb347f25a1809bab471f07a7dba" } }
+          Pool: {
+            PoolId: { is: "0x00b9edc1583bf6ef09ff3a09f6c23ecb57fd7d0bb75625717ec81eed181e22d7" }
+          }
         }
       }
+      limit: { count: 5 }
+      orderBy: { descending: Block_Time }
     ) {
-      Block { Time Number }
+      Block {
+        Time
+      }
       PoolEvent {
-        AtoBPrice
-        BtoAPrice
+        Pool {
+          PoolId
+          CurrencyA {
+            Symbol
+          }
+          CurrencyB {
+            Symbol
+          }
+        }
         Liquidity {
           AmountCurrencyA
           AmountCurrencyAInUSD
           AmountCurrencyB
           AmountCurrencyBInUSD
         }
-        Pool {
-          PoolId
-          SmartContract
-          CurrencyA { Name Symbol SmartContract }
-          CurrencyB { Name Symbol SmartContract }
-        }
+        AtoBPrice
       }
-      Transaction { Hash }
     }
   }
 }
 ```
 
-> In Uniswap v4 all pools live in the singleton PoolManager (`0x000000000004444c5dc75cB358380D2e3dE08A90`), so `Pool.SmartContract` is the same across pools — use `Pool.PoolId` to identify each pool.
-
 <FAQ
   items={[
-    { q: "How do I query Uniswap v4 trades?", a: "Use EVM DEXTrades with Uniswap v4 protocol filters — v4 pools and hooks are covered where indexed." },
-    { q: "Which chains have Uniswap v4 data?", a: "Ethereum, Base, BSC, Arbitrum, Optimism, and Polygon each have chain-specific v4 docs." },
+    { q: "How do I query Uniswap v4 trades on Ethereum?", a: "Two ways. Trading.Trades with the market filtered to Ethereum and uniswap_v4 gives swaps with trader, USD and market cap for the last month or so. EVM.DEXTrades with ProtocolName uniswap_v4 gives the raw pool-side rows with history on the archive dataset." },
+    { q: "What is the Uniswap v4 PoolManager address on Ethereum?", a: "0x000000000004444c5dc75cB358380D2e3dE08A90. Every v4 pool on Ethereum lives inside it, so Dex.SmartContract repeats and Trade.PoolId identifies the pool." },
+    { q: "How do I find a pool's PoolId?", a: "Group DEXTradeByTokens by Trade.PoolId with one token in Currency and the protocol name uniswap_v4; the rows are the pools of that token with counter token and volume. The Trading cube shows the same id as Pair.Pool.Id." },
+    { q: "Why are buyer and seller the same address on v4 swap rows?", a: "The PoolManager settles both sides, so DEXTrades shows it twice. Use Transaction.From, the Trader field of the Trading cube, or DEXTradeByTokens for trader-level data." },
+    { q: "Which chains have Uniswap v4 pages?", a: "Ethereum, Base, BNB Chain, Arbitrum, Optimism and Polygon each have a page with that chain's PoolManager address and live pools." },
   ]}
 />
+
+## Related pages
+
+- [Ethereum DEX trades API](/docs/blockchain/Ethereum/dextrades/dex-api)
+- [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)
+- [Uniswap v4 on Base](/docs/blockchain/Base/uniswap-v4-api)
+- [Uniswap v4 on Arbitrum](/docs/blockchain/Arbitrum/uniswap-v4-api)
+- [Uniswap v4 on Optimism](/docs/blockchain/Optimism/uniswap-v4-api)
