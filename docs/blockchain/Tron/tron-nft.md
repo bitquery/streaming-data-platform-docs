@@ -1,5 +1,6 @@
 ---
 title: "Tron NFT API: TRC-721 Transfers, Holders and Collections"
+sidebar_label: "Tron NFT API"
 description: "Query and stream TRC-721 NFT transfers on Tron with Bitquery GraphQL: latest transfers, one collection, mints and holders, live or from history."
 keywords:
   - Tron NFT API
