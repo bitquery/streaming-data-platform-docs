@@ -372,11 +372,9 @@ const sidebars = {
       type: "category",
       label: "Understanding Cubes",
       link: {
-        type: "generated-index",
-        title: "Understanding Cubes Overview",
-        description:
-          "How Bitquery cubes model blockchain data for GraphQL queries.",
-      },
+        type: "doc",
+            id: "cubes/index",
+          },
       items: [
         {
           type: "category",
