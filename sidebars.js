@@ -249,11 +249,9 @@ const sidebars = {
               type: "category",
               label: "Data Pipeline: Writing to Google BigQuery",
               link: {
-                type: "generated-index",
-                title: "Data Pipeline: Writing to Google BigQuery",
-                description:
-                  "Learn how to use Bitquery Subscription to Build a Data Pipeline",
-              },
+                type: "doc",
+            id: "subscriptions/google-bigquery/index",
+          },
               items: [
                 "subscriptions/google-bigquery/intro",
 
