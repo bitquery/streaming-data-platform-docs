@@ -1,5 +1,5 @@
 ---
-title: "EVM Cubes: Trades, Transfers, Balances, Calls and Events on EVM Chains"
+title: "EVM Cubes: Trades, Transfers, Balances, Calls and Events"
 description: "The cubes under EVM(network: ...) for Ethereum, BNB Chain, Base, Arbitrum, Optimism, Polygon and Robinhood Chain: what each holds, how far back, which to query."
 slug: /category/evm-cube
 sidebar_label: "EVM Cubes"
@@ -14,7 +14,7 @@ keywords:
 
 import FAQ from "@site/src/components/FAQ";
 
-# EVM Cubes: Trades, Transfers, Balances, Calls and Events on EVM Chains
+# EVM Cubes: Trades, Transfers, Balances, Calls and Events
 
 Every EVM chain Bitquery indexes is queried through one root, `EVM(network: ...)`, with the same cubes underneath: `DEXTrades`, `DEXTradeByTokens`, `DEXPools`, `Transfers`, `Balances`, `Holders`, `BalanceUpdates`, `Transactions`, `Calls`, `Events`, `Blocks` and `MinerRewards`. A query written for Ethereum runs on BNB Chain, Base, Arbitrum, Optimism, Polygon or Robinhood Chain by changing the network name. Each cube takes `where`, `orderBy` and `limit`, supports `count`, `sum`, `uniq` and the other aggregates, and streams as a subscription. This page is the map; the [EVM builder terms](/docs/cubes/EVM) page lists every field.
 
@@ -39,7 +39,7 @@ Every EVM chain Bitquery indexes is queried through one root, `EVM(network: ...)
 
 ## Datasets and depth
 
-Add `dataset: archive` or `dataset: combined` for history; without it a cube returns its realtime window only, which is hours to a few days depending on the cube. `DEXPools` and `Transactions` are realtime-only on most chains. The per-cube table is on [data coverage and retention](/docs/graphql/data-coverage-retention).
+Add `dataset: archive` or `dataset: combined` for history; without it a cube returns its realtime window only, which is hours to a few days depending on the cube. `DEXPools` is realtime-only on every chain: the archive and combined datasets do not exist for it. `Transactions` keeps full history on archive. The per-cube table is on [data coverage and retention](/docs/graphql/data-coverage-retention).
 
 ## Example: the busiest tokens on Ethereum in the last hour
 
@@ -86,7 +86,7 @@ Add `dataset: archive` or `dataset: combined` for history; without it a cube ret
     { q: "Which EVM chains share the same cubes?", a: "Ethereum, BNB Chain, Base, Arbitrum, Optimism, Polygon and Robinhood Chain. Change the network argument in EVM(network: ...) and the same query runs on another chain." },
     { q: "How do I get decoded contract events on an EVM chain?", a: "Use the Events cube with the contract address and the event name or topic0 in the filter. Arguments come back decoded by name, so it replaces eth_getLogs plus your own ABI decoding." },
     { q: "Which cube returns current token balances?", a: "Balances for what an address holds now and Holders for who holds a token. BalanceUpdates is the per-change history behind them." },
-    { q: "How far back do EVM cubes go?", a: "It depends on the cube and the dataset. Realtime holds hours to a few days; archive and combined reach the chain's indexing start for most cubes, while DEXPools and Transactions are realtime-only. The retention page lists each cube." },
+    { q: "How far back do EVM cubes go?", a: "It depends on the cube and the dataset. Realtime holds hours to a few days; archive and combined reach the chain's indexing start for most cubes, while DEXPools is realtime-only. The retention page lists each cube." },
     { q: "Can I get internal transactions on EVM chains?", a: "Yes. The Calls cube returns internal calls with depth, decoded arguments and success flags, alongside top-level method calls and contract deployments." },
   ]}
 />
