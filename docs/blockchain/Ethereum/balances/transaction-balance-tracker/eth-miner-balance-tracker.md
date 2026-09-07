@@ -1,6 +1,7 @@
 ---
 sidebar_position: 3
 title: "Ethereum Miner Balance Tracker: Block Producer Income After the Merge"
+sidebar_label: "Ethereum Miner Balance Tracker"
 description: "Ethereum has had no miners since the Merge. Track what block producers earn now with Bitquery GraphQL: priority fees per transaction, block and builder."
 keywords:
   - Ethereum miner balance tracker
