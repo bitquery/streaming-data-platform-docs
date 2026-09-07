@@ -1,5 +1,6 @@
 ---
 title: "Optimism NFT API: ERC-721 Transfers, Collections and Owners"
+sidebar_label: "Optimism NFT API"
 description: "Query and stream ERC-721 transfers on Optimism with Bitquery GraphQL: latest transfers, one collection or token id, mints, senders and receivers."
 keywords:
   - Optimism NFT API
