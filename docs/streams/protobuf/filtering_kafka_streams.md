@@ -1,5 +1,6 @@
 ---
 title: "Filtering Kafka Streams: Keep Only the Programs, Tokens and DEXs You Need"
+sidebar_label: "Filtering Kafka Streams"
 description: "Bitquery Kafka topics carry every message for a chain, so filter in the consumer. Python patterns for a Solana program, a DEX, an EVM token and an EVM pool."
 keywords:
   - filter Kafka streams
