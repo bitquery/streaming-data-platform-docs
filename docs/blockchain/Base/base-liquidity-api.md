@@ -17,9 +17,9 @@ import FAQ from "@site/src/components/FAQ";
 
 The `DEXPoolEvents` cube under `EVM(network: base)` emits one row every time a pool's reserves change, whether by a swap, a deposit or a withdrawal. Each row carries the reserves of both tokens after the change, in token units and in USD, the spot price in both directions, the pool and its protocol, and the transaction that moved it. On Base the rows come from Uniswap v2, v3 and v4 pools and from PancakeSwap v3 and Infinity pools. Aerodrome, the largest DEX on Base by volume, is not in this cube: its swaps are in the [Base DEX trades API](/docs/blockchain/Base/base-dextrades) and its pool balances in the [balance tracker](/docs/blockchain/Base/transaction-balance-tracker/base-transaction-balance-tracker). The cube holds the recent realtime window only and has no archive dataset: to keep a history, record the stream. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked pool is the Uniswap v3 WETH/USDC pool, `0xb4cb800910b228ed3d0834cf79d697127bbb00e5`.
 
-## Reserves of one pool now
+## Current reserves of a pool
 
-The newest rows for a pool. `AmountCurrencyA` and `AmountCurrencyB` are the reserves after each change, the `InUSD` twins price them, and `AtoBPrice` is how much of B one unit of A buys at the spot. Saved query [here](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_4).
+The last ten changes to the pool, newest first. Each row is the state after that change: `AmountCurrencyA` and `AmountCurrencyB` are the reserves, `AmountCurrencyAInUSD` and `AmountCurrencyBInUSD` their dollar value, and `AtoBPrice` the spot rate of A in B. Saved query [here](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_4).
 
 ```graphql
 {
@@ -69,9 +69,9 @@ The newest rows for a pool. `AmountCurrencyA` and `AmountCurrencyB` are the rese
 }
 ```
 
-## Stream one pool
+## The same pool, live
 
-The same filter as a subscription delivers a row on every reserve change, several per minute for this pool. Saved stream [here](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_3).
+As a subscription the filter yields a row per reserve change, a few per minute on this pool. Saved stream [here](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_3).
 
 ```graphql
 subscription {
@@ -158,9 +158,9 @@ subscription {
 
 Other protocol names that report on Base: `uniswap_v3`, `uniswap_v2`, `pancake_swap_v3` and `pancakeswap_infinity`.
 
-## Pools that hold a token, with their current reserves
+## Every pool of a token
 
-`limitBy` on the pool address keeps the newest row per pool, so the result is the current state of every pool that had the token as `CurrencyA` and changed inside the window. Run it a second time with the token under `CurrencyB` to catch pools that list it second. The example is cbBTC, `0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf`; sort the rows by the USD reserve in your code to rank the pools. Saved query [here](https://ide.bitquery.io/top-liquidity-pools-of-cbBTC).
+Which pools hold cbBTC, `0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf`, and how much? Ask for pools with cbBTC as `CurrencyA` in the window and keep only the newest row of each with `limitBy` on the pool address; a second run with cbBTC as `CurrencyB` covers the pools that list it second. Because Aerodrome is outside this cube, the answer covers Uniswap and PancakeSwap pools only. Rank by the USD reserve in your code. Saved query [here](https://ide.bitquery.io/top-liquidity-pools-of-cbBTC).
 
 ```graphql
 {
@@ -205,27 +205,20 @@ Other protocol names that report on Base: `uniswap_v3`, `uniswap_v2`, `pancake_s
 }
 ```
 
-## Fields on every row
+## Row anatomy
 
-| Field | Meaning |
-|---|---|
-| `PoolEvent.Liquidity.AmountCurrencyA`, `AmountCurrencyB` | Reserves of each token after the change, in token units |
-| `AmountCurrencyAInUSD`, `AmountCurrencyBInUSD` | The same reserves priced in USD |
-| `PoolEvent.AtoBPrice`, `BtoAPrice` | Spot price in each direction after the change |
-| `PoolEvent.Pool.SmartContract`, `PoolId` | Pool contract; for Uniswap v4 and PancakeSwap Infinity the manager plus the pool id |
-| `PoolEvent.Dex.ProtocolName` | `uniswap_v4`, `uniswap_v3`, `uniswap_v2`, `pancake_swap_v3` or `pancakeswap_infinity` |
-| `Transaction.Hash` | The transaction that changed the reserves |
+A row is one reserve change. `Liquidity` holds the two reserves after it, in token units and in USD; `AtoBPrice` and `BtoAPrice` hold the spot rate both ways; `Pool` names the contract, or for Uniswap v4 and PancakeSwap Infinity the manager plus a `PoolId`; `Dex.ProtocolName` is one of `uniswap_v4`, `uniswap_v3`, `uniswap_v2`, `pancake_swap_v3` and `pancakeswap_infinity`; and `Transaction.Hash` points at the swap, deposit or withdrawal behind it.
 
-## The same data over Kafka
+## Kafka and slippage
 
-The `base.dexpools.proto` topic carries the same rows as protobuf messages with lower latency and no WebSocket to keep alive. Kafka needs its own credentials, separate from the IDE token; see the [Kafka streams hub](/docs/category/kafka-streams). Slippage tables for the same pools are on the [Base slippage API](/docs/blockchain/Base/base-slippage-api) page.
+The `base.dexpools.proto` topic streams these rows as protobuf with lower latency than WebSocket and needs its own credentials; start at the [Kafka streams hub](/docs/category/kafka-streams). The [Base slippage API](/docs/blockchain/Base/base-slippage-api) turns the same pool states into how much each pool can absorb at a given tolerance.
 
 <FAQ
   items={[
-    { q: "How do I get the reserves of a pool on Base?", a: "Query DEXPoolEvents under EVM(network: base) with the pool contract in PoolEvent.Pool.SmartContract, ordered by Block_Time descending. The newest row holds both reserves in token units and USD plus the spot price." },
+    { q: "How do I get the reserves of a pool on Base?", a: "Filter DEXPoolEvents on network base by the pool contract in PoolEvent.Pool.SmartContract and take the newest row. Its Liquidity fields are the reserves in token units and USD, and AtoBPrice is the spot rate." },
     { q: "Does the Base liquidity API cover Aerodrome?", a: "No. Aerodrome pools are not in DEXPoolEvents. Aerodrome swaps are in the DEX trades cube, and a pool's token balances can be read from the transaction balance tracker." },
     { q: "How do I tell Uniswap v4 pools apart on Base?", a: "All v4 pools share the PoolManager address 0x498581ff718922c3f8e6a244956af099b2652b2b, so filter and group on PoolEvent.Pool.PoolId instead of SmartContract." },
-    { q: "How far back does liquidity data go on Base?", a: "DEXPoolEvents keeps the recent realtime window only and has no archive dataset. Record the subscription or the Kafka topic to build a history." },
+    { q: "Can I get past reserves of a Base pool?", a: "Only what is inside the realtime window; DEXPoolEvents has no archive dataset. Keep the stream or the Kafka topic if you need a history." },
     { q: "How do I rank the pools of a token by liquidity?", a: "Take the newest row per pool with limitBy on the pool address, once with the token as CurrencyA and once as CurrencyB, and sort by the USD reserve fields in your code." },
   ]}
 />
