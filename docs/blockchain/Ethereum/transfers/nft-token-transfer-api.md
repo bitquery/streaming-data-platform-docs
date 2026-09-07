@@ -15,7 +15,7 @@ import FAQ from "@site/src/components/FAQ";
 
 # NFT Token Transfers API: ERC-721 and ERC-1155 Transfers on Ethereum
 
-NFT transfers on Ethereum live in the same `Transfers` cube as token transfers, marked by `Currency.Fungible: false` and carrying the token `Id`, the collection contract, sender, receiver and, for ERC-1155, the amount. That means one cube answers the collection question, the wallet question and the mint question, and the same filter runs as a query over history or as a live subscription. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked collection is CryptoKitties, `0x06012c8cf97bead5deae237070f9587f8e7a266d`, which still changes hands every hour eight years after launch. For collection-level views such as token lists and holders see the [NFT collection API](/docs/blockchain/Ethereum/nft/nft-collection-api).
+NFT transfers on Ethereum live in the same `Transfers` cube as token transfers, marked by `Currency.Fungible: false` and carrying the token `Id`, the collection contract, sender, receiver and, for ERC-1155, the amount. That means one cube answers the collection question, the wallet question and the mint question, and the same filter runs as a query over history or as a live subscription. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked collection is CryptoKitties, `0x06012c8cf97bead5deae237070f9587f8e7a266d`, which still changes hands a few times a day, nine years after launch. For collection-level views such as token lists and holders see the [NFT collection API](/docs/blockchain/Ethereum/nft/nft-collection-api).
 
 ## Latest transfers of one collection
 
