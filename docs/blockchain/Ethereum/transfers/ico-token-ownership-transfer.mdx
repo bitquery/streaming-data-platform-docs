@@ -1,19 +1,26 @@
 ---
 sidebar_position: 1
-title: "Analyzing Token ICO with Transfers APIs"
-description: "Analyzing Token ICO with Transfers APIs: monitor Ethereum native and token transfers in real time with Bitquery GraphQL APIs."
+title: "Analyze a Token ICO with the Transfers API: Mint, Distributor, Investors"
+sidebar_label: "Token ICO Analysis"
+description: "Rebuild a token sale from Ethereum transfers with Bitquery GraphQL: find the mint, the distributor contract and every buyer, then count them."
+keywords:
+  - token ICO analysis
+  - ICO investors on-chain
+  - Ethereum transfers API
+  - token distribution contract
+  - presale buyers list
+  - Bitquery transfers
 ---
 import VideoPlayer from "../../../../src/components/videoplayer.js";
+import FAQ from "@site/src/components/FAQ";
 
-# Analyzing Token ICO with Transfers APIs
+# Analyze a Token ICO with the Transfers API: Mint, Distributor, Investors
 
-In this segment we will learn how you can analyze a project's ICO performance, to help investors in taking smart investment decisions based on that knowledge. For this tutorial, we will look up the info related to [PEPU](https://explorer.bitquery.io/ethereum/token/0x906cc2ad139eb6637e28605f908903c8adce566a) token
+A token sale leaves a clean trail in transfer data. The token is minted to a distributor contract, the contract sends tokens to each buyer as the sale's conditions are met, and the set of receivers is the investor list. Three `Transfers` queries on the `combined` dataset rebuild that trail for any ERC-20 sale: the mint from the zero address tells you where the supply went, transfers from that address list the buyers, and `count` with `uniq` size the sale. The worked example is the PEPU token, `0x906cc2ad139eb6637e28605f908903c8adce566a`, whose sale ran in 2024; put another token contract in its place for a current one. Every query runs in the [IDE](https://ide.bitquery.io) on a free account.
 
-## Decoding the ICO Process
+## Step 1: find where the supply was minted
 
-In most of the ICOs, the token is minted to a smart contract that contains various methods for distributing the token whenever the conditions set by project owners are satisfied.
-
-[Here](https://ide.bitquery.io/Get-Minted-Address-of-the-ICO-Token) is the query to find if the token in question also follows a similiar procedure, and if yes, then contract address of the distributer. 
+A mint is a transfer from the zero address. The `Receiver` of the mint is the contract that distributes the sale. Saved query [here](https://ide.bitquery.io/Get-Minted-Address-of-the-ICO-Token).
 
 ```graphql
 query MyQuery {
@@ -34,15 +41,13 @@ query MyQuery {
     }
   }
 }
-
 ```
-The ContractAddress field in Receipt section returns the distributer contract address.
 
-## More Info on Investors
+For PEPU the mint went to `0xf0163c18f8d3fc8d5b4ca15e07d0f9f75460335f`, the distributor used in the next two queries.
 
-### List of Investor Addresses
+## Step 2: list the buyers
 
-Use this [query](https://ide.bitquery.io/Get-all-Holders-Address-of-the-ICO-Token_1) for getting the list of the potential investors who invested in the project via ICO.
+Every transfer sent by the distributor is a delivery to a buyer. The `Receiver` column is the investor list, with the amount each one received. Saved query [here](https://ide.bitquery.io/Get-all-Holders-Address-of-the-ICO-Token_1).
 
 ```graphql
 query MyQuery {
@@ -64,12 +69,11 @@ query MyQuery {
     }
   }
 }
-
 ```
 
-### Number of Unique Investors in ICO 
+## Step 3: size the sale
 
-[This](https://ide.bitquery.io/Number-of-Purchasers-in-ICO#) query retrieves the number of unique investors who might have participated in the  ongoing ICO event for the PEPU token.
+The same filter with `count` and `uniq` gives the number of deliveries and the number of distinct buyers in one row. Saved query [here](https://ide.bitquery.io/Number-of-Purchasers-in-ICO#).
 
 ```graphql
 query MyQuery {
@@ -78,6 +82,7 @@ query MyQuery {
       where: {Transfer: {Amount: {gt: "0"}, Currency: {SmartContract: {is: "0x906cc2ad139eb6637e28605f908903c8adce566a"}}, Sender: {is: "0xf0163c18f8d3fc8d5b4ca15e07d0f9f75460335f"}}}
     ) {
       count
+      buyers: uniq(of: Transfer_Receiver)
       Transfer {
         Currency {
           Name
@@ -88,9 +93,30 @@ query MyQuery {
     }
   }
 }
-
 ```
 
-## Video Tutorial on How to Analyze ICO of PEPU Token
+## Where to go from here
+
+- Did buyers hold or sell? Run the [Balances and Holders cubes](/docs/cubes/balances-cube) on the buyer list, or filter `DEXTrades` on the token to see the first sells.
+- What did the sale raise? The ETH or stablecoin transfers into the distributor, or the `Calls` into it with `Value`, give the other side of each purchase.
+- Watching a live sale: change `query` to `subscription`, drop the dataset argument, and keep the distributor as `Sender` to see each delivery as it happens.
+
+## Video tutorial on analyzing the PEPU sale
 
 <VideoPlayer url="https://youtu.be/cz6SaVawUm8" />
+
+<FAQ
+  items={[
+    { q: "How do I find the addresses that bought a token in its ICO?", a: "Find the mint (a transfer from the zero address) to get the distributor contract, then list transfers sent by that contract on the combined dataset. The receivers are the buyers and the amounts are what each received." },
+    { q: "How do I count unique ICO participants?", a: "Use count and uniq(of: Transfer_Receiver) on the transfers sent by the distributor. count is deliveries, uniq is distinct buyers, since one address can buy several times." },
+    { q: "Why use dataset combined?", a: "A sale is usually weeks or months old. The realtime window holds only recent hours, while combined reaches back through the archive and includes the latest rows." },
+    { q: "Can I do this for a token on BSC or Base?", a: "Yes. Change the network name in EVM(network: ...). The Transfers cube has the same fields on every EVM chain Bitquery indexes." },
+  ]}
+/>
+
+## Related pages
+
+- [Ethereum transfers API](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api)
+- [Balances and Holders cubes](/docs/cubes/balances-cube)
+- [Transfers cube](/docs/cubes/transfers-cube)
+- [Ethereum API hub](/docs/blockchain/Ethereum/)
