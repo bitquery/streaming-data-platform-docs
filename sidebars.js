@@ -382,10 +382,8 @@ const sidebars = {
           type: "category",
           label: "EVM Cube",
           link: {
-            type: "generated-index",
-            title: "EVM Cube Overview",
-            description:
-              "Cubes for querying EVM chains — trades, transfers, balances, holders, calls, and events.",
+            type: "doc",
+            id: "cubes/evm-cubes",
           },
           items: [
             "cubes/EVM",
