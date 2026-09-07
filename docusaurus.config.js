@@ -3,6 +3,11 @@
 
 const lightCodeTheme = require("prism-react-renderer").themes.github;
 const darkCodeTheme = require("prism-react-renderer").themes.dracula;
+const { hasGitHistory } = require("./plugins/git-history");
+
+// Per-page dates come from git. A shallow clone would stamp every page with
+// the build day, so they are switched off unless the full history is present.
+const gitDates = hasGitHistory(__dirname);
 
 /**
  * Analytics scripts are often blocked locally (ad blockers, privacy tools) and
@@ -1180,8 +1185,8 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          showLastUpdateTime: true,
-          showLastUpdateAuthor: true,
+          showLastUpdateTime: gitDates,
+          showLastUpdateAuthor: gitDates,
           editUrl:
             "https://github.com/bitquery/streaming-data-platform-docs/tree/main",
         },
@@ -1189,7 +1194,7 @@ const config = {
         sitemap: {
           changefreq: "weekly",
           priority: 0.5,
-          lastmod: "date",
+          lastmod: gitDates ? "date" : null,
           ignorePatterns: [
             "/markdown-page/**",
             "/search/**",

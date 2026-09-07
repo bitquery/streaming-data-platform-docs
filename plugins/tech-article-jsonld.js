@@ -4,6 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
+const { hasGitHistory } = require("./git-history");
 
 function walkDocs(dir, acc = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -57,6 +58,8 @@ function docPermalink(siteDir, filePath) {
 }
 
 function gitDate(siteDir, filePath, first) {
+  // A shallow clone would report the build day for every file; omit instead.
+  if (!hasGitHistory(siteDir)) return undefined;
   try {
     const flag = first ? "--diff-filter=A --follow" : "";
     const iso = execSync(
