@@ -1,227 +1,179 @@
 ---
 sidebar_position: 3
-title: "Arbitrum Slippage API"
-description: "Arbitrum Slippage API: measure Arbitrum DEX price impact and slippage with Bitquery GraphQL pool metrics. Built for traders and analytics teams."
+title: "Arbitrum Slippage API: How Much a Pool Can Absorb at Each Slippage Level"
+sidebar_label: "Arbitrum Slippage API"
+description: "Slippage tables for Arbitrum pools with Bitquery GraphQL: the largest trade a pool takes at each level, the minimum output, and the deepest pool for a token."
+keywords:
+  - Arbitrum slippage API
+  - Arbitrum price impact
+  - Arbitrum pool depth
+  - DEXPoolSlippages Arbitrum
+  - Uniswap v3 Arbitrum slippage
 ---
-# Arbitrum Slippage API
 
-In this section we will see how to get Arbitrum DEX pool slippage information using our API. The slippage API helps you understand price impact and liquidity depth for token swaps on Arbitrum DEX pools.
+import FAQ from "@site/src/components/FAQ";
 
-## Understanding Slippage and Price Impact
+# Arbitrum Slippage API: How Much a Pool Can Absorb at Each Slippage Level
 
-Slippage refers to the difference between the expected price of a trade and the actual execution price. When swapping tokens in a DEX pool, larger trades can move the price due to limited liquidity, resulting in slippage.
+The `DEXPoolSlippages` cube under `EVM(network: arbitrum)` publishes a slippage table for a pool every time its reserves change. For seven slippage levels, 0, 10, 50, 100, 200, 500 and 1000 basis points, it gives the largest input the pool can take before the price moves past that level, the minimum output that trade would return, and the average execution price, in both directions. That answers the pre-trade question directly: can this pool take my size at my tolerance, and what do I get back. The tables cover the same pools as the [Arbitrum liquidity API](/docs/blockchain/Arbitrum/arbitrum-liquidity-api): Uniswap v2, v3 and v4 and PancakeSwap v3. The cube holds the recent realtime window only; record the stream for history. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked pool is the Uniswap v3 WETH/ARB pool, `0xc6f780497a95e246eb9449f5e4770916dcd6396a`.
 
-The DEXPoolSlippages API provides detailed information about:
-- Maximum input amounts that can be swapped at different slippage tolerances
-- Minimum output amounts guaranteed at each slippage level
-- Average execution prices for different trade sizes
-- Price impact calculations for both swap directions (A to B and B to A)
+## The slippage table of one pool
 
-For a comprehensive explanation of how DEX pools work, liquidity calculations, and price tables, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/).
+Seven rows per update, one per level. At 50 basis points the `AtoB.MaxAmountIn` row reads as: selling this much WETH moves the price by no more than 0.5%, and `MinAmountOut` is the ARB you get for it. The 0 basis point row carries the spot price with zero size. Saved query [here](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3).
 
-## Realtime Slippage Monitoring
+```graphql
+{
+  EVM(network: arbitrum) {
+    DEXPoolSlippages(
+      where: {
+        Price: {
+          Pool: { SmartContract: { is: "0xc6f780497a95e246eb9449f5e4770916dcd6396a" } }
+        }
+      }
+      limit: { count: 7 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Block {
+        Time
+        Number
+      }
+      Price {
+        SlippageBasisPoints
+        AtoB {
+          Price
+          MaxAmountIn
+          MinAmountOut
+        }
+        BtoA {
+          Price
+          MaxAmountIn
+          MinAmountOut
+        }
+        Pool {
+          SmartContract
+          CurrencyA {
+            Symbol
+            SmartContract
+          }
+          CurrencyB {
+            Symbol
+            SmartContract
+          }
+        }
+        Dex {
+          ProtocolName
+        }
+      }
+    }
+  }
+}
+```
 
-This subscription query returns real-time slippage data for all DEX pools on Arbitrum. You can monitor price impact and liquidity depth as trades occur.
+## One level, as a stream
 
-You can find the query [here](https://ide.bitquery.io/realtime-slippage-on-arbitrum)
+Fix `SlippageBasisPoints` to the tolerance you trade with and subscribe: each message is the pool's new capacity at that level. Saved stream [here](https://ide.bitquery.io/realtime-slippage-on-arbitrum).
 
 ```graphql
 subscription {
   EVM(network: arbitrum) {
-    DEXPoolSlippages {
-      Price {
-        BtoA {
-          Price
-          MinAmountOut
-          MaxAmountIn
+    DEXPoolSlippages(
+      where: {
+        Price: {
+          Pool: { SmartContract: { is: "0xc6f780497a95e246eb9449f5e4770916dcd6396a" } }
+          SlippageBasisPoints: { eq: 50 }
         }
-        AtoB {
-          Price
-          MinAmountOut
-          MaxAmountIn
-        }
-        Pool {
-          PoolId
-          SmartContract
-          Pair {
-            Decimals
-            SmartContract
-            Name
-          }
-          CurrencyB {
-            Symbol
-            SmartContract
-            Name
-            Decimals
-          }
-          CurrencyA {
-            Symbol
-            SmartContract
-            Name
-            Decimals
-          }
-        }
-        Dex {
-          SmartContract
-          ProtocolVersion
-          ProtocolName
-          ProtocolFamily
-        }
-        SlippageBasisPoints
       }
+    ) {
       Block {
         Time
-        Number
+      }
+      Price {
+        SlippageBasisPoints
+        AtoB {
+          Price
+          MaxAmountIn
+          MinAmountOut
+        }
+        BtoA {
+          Price
+          MaxAmountIn
+          MinAmountOut
+        }
       }
     }
   }
 }
 ```
 
-## Latest Slippage for a Specific Pool
+## The deepest pool for a token at a given tolerance
 
-This query retrieves the latest slippage data for a specific DEX pool on Arbitrum. Use this to check current liquidity depth and price impact for a particular token pair.
-
-You can find the query [here](https://ide.bitquery.io/Latest-slippage-of-a-pool-on-Uniswap-v3)
+Which pool takes the largest WETH sell within 0.5%? Keep the newest row per pool with `limitBy`, fix the level, and compare `AtoB.MaxAmountIn` across pools that list WETH first. On Arbitrum the large WETH pools against USDC and USDT0 lead. Repeat with WETH under `CurrencyB` and read `BtoA` for pools that list it second.
 
 ```graphql
-query {
+{
   EVM(network: arbitrum) {
     DEXPoolSlippages(
-      where: {Price: {Pool: {SmartContract: {is: "0x42161084d0672e1d3f26a9b53e653be2084ff19c"}}}}
-      limit: {count: 10}
-      orderBy: {descending: Block_Time}
+      where: {
+        Price: {
+          SlippageBasisPoints: { eq: 50 }
+          Pool: {
+            CurrencyA: { SmartContract: { is: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1" } }
+          }
+        }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+      }
+      limitBy: { by: Price_Pool_SmartContract, count: 1 }
+      orderBy: { descending: Block_Time }
+      limit: { count: 20 }
     ) {
       Price {
-        BtoA {
-          Price
-          MinAmountOut
-          MaxAmountIn
-        }
-        AtoB {
-          Price
-          MinAmountOut
-          MaxAmountIn
-        }
         Pool {
-          PoolId
           SmartContract
-          Pair {
-            Decimals
-            SmartContract
-            Name
-          }
           CurrencyB {
             Symbol
             SmartContract
-            Name
-            Decimals
-          }
-          CurrencyA {
-            Symbol
-            SmartContract
-            Name
-            Decimals
           }
         }
         Dex {
-          SmartContract
-          ProtocolVersion
           ProtocolName
-          ProtocolFamily
         }
-        SlippageBasisPoints
-      }
-      Block {
-        Time
-        Number
+        AtoB {
+          MaxAmountIn
+          MinAmountOut
+          Price
+        }
       }
     }
   }
 }
 ```
 
-> **Note:** This query can be converted to a subscription to monitor in real-time. Simply replace `query` with `subscription` to receive live updates whenever the pool's liquidity changes.
+## Reading the fields
 
-## Realtime Slippage Data via Kafka Streams
+| Field | Meaning |
+|---|---|
+| `Price.SlippageBasisPoints` | The level of the row: 0, 10, 50, 100, 200, 500 or 1000 (100 = 1%) |
+| `Price.AtoB.MaxAmountIn` | Largest amount of CurrencyA the pool takes within that level |
+| `Price.AtoB.MinAmountOut` | CurrencyB returned for that input |
+| `Price.AtoB.Price` | Average execution price of that trade |
+| `Price.BtoA` | The same three numbers for selling CurrencyB |
+| `Price.Pool`, `Price.Dex` | Pool contract, the two tokens, protocol name |
 
-Slippage data can also be obtained via Kafka streams for lower latency and better reliability. The Kafka topic for Arbitrum DEX pools is:
+The `arbitrum.dexpools.proto` Kafka topic carries the same tables as protobuf messages; Kafka needs its own credentials, see the [Kafka streams hub](/docs/category/kafka-streams).
 
-**`arbitrum.dexpools.proto`**
+<FAQ
+  items={[
+    { q: "How do I check price impact before a trade on Arbitrum?", a: "Query DEXPoolSlippages for the pool and read the row for your tolerance. If your size is below MaxAmountIn at that level, the trade stays within it, and MinAmountOut is the least you receive." },
+    { q: "Which slippage levels are available?", a: "Seven fixed levels per update: 0, 10, 50, 100, 200, 500 and 1000 basis points. Filter on Price.SlippageBasisPoints to keep one." },
+    { q: "How do I find the deepest pool for a token on Arbitrum?", a: "Fix the slippage level, filter the token as CurrencyA, keep the latest row per pool with limitBy, and compare AtoB.MaxAmountIn. Run it again with the token as CurrencyB and compare BtoA." },
+    { q: "Which pools have slippage tables on Arbitrum?", a: "The same set as the liquidity cube: Uniswap v2, v3 and v4 pools and PancakeSwap v3 pools. Balancer, Curve, Fluid and DODO pools have no tables here." },
+    { q: "Is there history for slippage data?", a: "No. The cube holds the recent realtime window and has no archive. Subscribe, or consume the Kafka topic, and store the rows you need." },
+  ]}
+/>
 
-Kafka streams provide the same slippage data as GraphQL subscriptions but with several advantages:
-- Lower latency due to shorter data pipeline
-- Better reliability with persistent connections
-- Ability to read from latest offset without gaps
-- Better scalability with multiple consumers
+## Related pages
 
-For detailed information on how to connect to Kafka streams, subscribe to topics, and parse messages, refer to the [Kafka Streaming Concepts documentation](/docs/streams/kafka-streaming-concepts/).
-
-> **Note:** IDE credentials will not work with Kafka Streams. You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
-
-## Understanding the Response
-
-The `DEXPoolSlippages` API response contains the following information:
-
-- **`Price`**: Price information for swaps at a specific slippage tolerance
-  - **`AtoB`**: Price data for swapping CurrencyA to CurrencyB
-    - `Price`: Average execution price for swaps at this slippage level
-    - `MinAmountOut`: Minimum output amount guaranteed at this slippage level
-    - `MaxAmountIn`: Maximum input amount that can be swapped at this slippage level
-  - **`BtoA`**: Price data for swapping CurrencyB to CurrencyA (same structure as AtoB)
-  - **`SlippageBasisPoints`**: Slippage tolerance in basis points (100 = 1%)
-  - **`Pool`**: Pool information including token pair details
-  - **`Dex`**: DEX protocol information (Uniswap V2, V3, V4, etc.)
-
-- **`Block`**: Block information when the slippage data was recorded
-  - `Time`: Timestamp of the block
-  - `Number`: Block number
-
-For more details on how slippage is calculated and when new pool records are emitted, see the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#when-is-a-new-dexpool-record-emitted-in-the-apis--streams).
-
-## Use Cases
-
-### Liquidity Depth Analysis
-
-Use the slippage API to analyze which pools can handle large trades without significant price impact. By examining `MaxAmountIn` values at different slippage levels, you can:
-
-- Identify pools with sufficient liquidity for your trade size
-- Determine optimal slippage tolerance settings
-- Estimate price impact before executing trades
-
-### Multi-Pool Price Comparison
-
-Compare execution prices across different pools and slippage scenarios to:
-
-- Find the best pool for your specific trade size
-- Understand price differences between DEX protocols
-- Optimize trade execution strategies
-
-### Trading Applications
-
-#### Live Execution Testing
-
-Use the slippage API to test and validate trade execution strategies in real-time:
-
-- **Pre-trade validation**: Check if your intended trade size can be executed within acceptable slippage bounds before submitting
-- **Execution simulation**: Calculate expected price impact and minimum output amounts for different trade sizes
-- **Strategy backtesting**: Monitor historical slippage data to validate trading algorithms and optimize entry/exit points
-- **Risk assessment**: Evaluate maximum position sizes that can be entered without exceeding your slippage tolerance
-
-#### Detecting Liquidity Shocks and Toxic Order Flow
-
-The slippage API helps identify temporary price dislocations and liquidity shocks that can be exploited or avoided:
-
-- **Flow toxicity detection**: Monitor sudden changes in `MaxAmountIn` values to detect when pools experience large outflows or inflows
-- **Price impact analysis**: Track how `MinAmountOut` changes relative to `MaxAmountIn` to identify when pools become less liquid
-- **Mean reversion opportunities**: Identify pools where large swaps have created temporary price dislocations that may revert
-- **Toxic order flow avoidance**: Use slippage data to avoid entering positions when liquidity is thin or when large trades are likely to move price against you
-
-For a practical implementation example of using slippage data for automated trading strategies, including flow toxicity detection and mean-reversion trading, see the [AMM Flow Toxicity Alpha Engine](https://github.com/Divyn/amm-flow-toxicity-alpha-engine) repository. This system demonstrates how to:
-
-- Detect large swaps that move price significantly (50-500 basis points)
-- Verify isolation from trending markets
-- Execute fade trades against temporary price impacts
-- Manage positions with dynamic stop losses and take profits based on slippage data
-
-For more advanced use cases, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#advanced-use-cases-and-processing-patterns).
+- [Arbitrum liquidity API](/docs/blockchain/Arbitrum/arbitrum-liquidity-api)
+- [Arbitrum DEX trades API](/docs/blockchain/Arbitrum/DexTrades)
+- [DEXPools cube](/docs/cubes/evm-dexpool/)
+- [Base slippage API](/docs/blockchain/Base/base-slippage-api)
