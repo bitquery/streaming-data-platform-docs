@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: "Base Transaction Balance Tracker: Balances Before and After a Transaction"
+sidebar_label: "Base Transaction Balance Tracker"
 description: "Stream and query Base balance changes with Bitquery GraphQL: every address a transaction touched, one wallet's ETH and USDC, pool reserves and token supply."
 keywords:
   - Base transaction balance tracker
