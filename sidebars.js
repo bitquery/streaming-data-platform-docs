@@ -1454,11 +1454,9 @@ const sidebars = {
       type: "category",
       label: "Glossary",
       link: {
-        type: "generated-index",
-        title: "Glossary",
-        description:
-          "Definitions of EVM and Solana terms used across the Bitquery docs.",
-      },
+        type: "doc",
+            id: "glossary/index",
+          },
       items: ["glossary/EVM", "glossary/solana"],
     },
   ],
