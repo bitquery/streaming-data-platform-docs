@@ -1,96 +1,35 @@
 ---
 sidebar_position: 4
-title: "Arbitrum Liquidity API"
-description: "Arbitrum Liquidity API: read Arbitrum pool reserves and liquidity updates via Bitquery GraphQL DEX APIs. Built for traders and analytics teams."
+title: "Arbitrum Liquidity API: Pool Reserves and Liquidity Changes in Real Time"
+sidebar_label: "Arbitrum Liquidity API"
+description: "Read Arbitrum pool reserves and spot prices with Bitquery GraphQL: one pool now or as a stream, every Uniswap v4 pool, and the pools that hold a token, in USD."
+keywords:
+  - Arbitrum liquidity API
+  - Arbitrum pool reserves
+  - Arbitrum DEX liquidity stream
+  - Uniswap v3 Arbitrum liquidity
+  - DEXPoolEvents Arbitrum
 ---
-# Arbitrum Liquidity API
 
-In this section we will see how to get Arbitrum DEX pool liquidity information using Bitquery API. The liquidity API helps you monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on Arbitrum DEX pools.
+import FAQ from "@site/src/components/FAQ";
 
-## Understanding Liquidity and Pool Reserves
+# Arbitrum Liquidity API: Pool Reserves and Liquidity Changes in Real Time
 
-Liquidity in DEX pools refers to the amount of tokens available for trading. Pool reserves (the balance of each token in the pool) determine the pool's ability to handle trades without significant price impact. Monitoring liquidity changes helps you:
+The `DEXPoolEvents` cube under `EVM(network: arbitrum)` emits one row every time a pool's reserves change, whether by a swap, a deposit or a withdrawal. Each row carries the reserves of both tokens after the change, in token units and in USD, the spot price in both directions, the pool and its protocol, and the transaction that moved it. On Arbitrum today the rows come from Uniswap v2, v3 and v4 pools and PancakeSwap v3 pools; pools of other protocols on Arbitrum, such as Camelot, are not in this cube, so check the [DEX trades API](/docs/blockchain/Arbitrum/DexTrades) for those. The cube holds the recent realtime window only and has no archive dataset: to keep a history, record the stream. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked pool is the Uniswap v3 WETH/ARB pool, `0xc6f780497a95e246eb9449f5e4770916dcd6396a`, one of the busiest on the chain.
 
-- Track when liquidity is added or removed from pools
-- Monitor pool health and depth
-- Identify liquidity events that may affect trading
-- Analyze liquidity patterns across different pools
+## Reserves of one pool now
 
-The DEXPoolEvents API provides real-time information about:
-
-- Current liquidity reserves for both tokens in the pool
-- Spot prices for both swap directions
-- Pool and token pair information
-- Transaction details for liquidity-changing events
-
-For a comprehensive explanation of how DEX pools work, liquidity calculations, and when pool events are emitted, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/).
-
-## Realtime Liquidity Stream
-
-This subscription query returns real-time liquidity data for all DEX pools on Arbitrum. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
-
-You can find the query [here](https://ide.bitquery.io/realtime-liquidity-stream_1)
+The newest rows for a pool. `AmountCurrencyA` and `AmountCurrencyB` are the reserves after each change, the `InUSD` twins price them, and `AtoBPrice` is how much of B one unit of A buys at the spot. Saved query [here](https://ide.bitquery.io/latest-liquidity-changes-of-a-specific-pool).
 
 ```graphql
-subscription MyQuery {
-  EVM(network: arbitrum) {
-    DEXPoolEvents {
-      Block {
-        Time
-        Number
-      }
-      PoolEvent {
-        AtoBPrice
-        BtoAPrice
-        Dex {
-          SmartContract
-          ProtocolName
-        }
-        Liquidity {
-          AmountCurrencyA
-          AmountCurrencyB
-        }
-        Pool {
-          CurrencyA {
-            Name
-            SmartContract
-            Symbol
-          }
-          CurrencyB {
-            Name
-            SmartContract
-            Symbol
-          }
-          PoolId
-          SmartContract
-        }
-      }
-      Transaction {
-        Gas
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Latest Liquidity Changes of a Specific Pool
-
-This query retrieves the latest liquidity events for a specific DEX pool on Arbitrum. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
-
-You can find the query [here](https://ide.bitquery.io/latest-liquidity-changes-of-a-specific-pool)
-
-```graphql
-query MyQuery {
+{
   EVM(network: arbitrum) {
     DEXPoolEvents(
       limit: { count: 10 }
       orderBy: { descending: Block_Time }
       where: {
         PoolEvent: {
-          Pool: {
-            SmartContract: { is: "0xff74c74359016e5e0deb882d6537c8271e3d1026" }
-          }
+          Pool: { SmartContract: { is: "0xc6f780497a95e246eb9449f5e4770916dcd6396a" } }
         }
       }
     ) {
@@ -101,31 +40,28 @@ query MyQuery {
       PoolEvent {
         AtoBPrice
         BtoAPrice
-        Dex {
-          SmartContract
-          ProtocolName
-        }
         Liquidity {
           AmountCurrencyA
+          AmountCurrencyAInUSD
           AmountCurrencyB
+          AmountCurrencyBInUSD
         }
         Pool {
+          SmartContract
           CurrencyA {
-            Name
-            SmartContract
             Symbol
+            SmartContract
           }
           CurrencyB {
-            Name
-            SmartContract
             Symbol
+            SmartContract
           }
-          PoolId
-          SmartContract
+        }
+        Dex {
+          ProtocolName
         }
       }
       Transaction {
-        Gas
         Hash
       }
     }
@@ -133,23 +69,17 @@ query MyQuery {
 }
 ```
 
-> **Note:** Replace `"0xff74c74359016e5e0deb882d6537c8271e3d1026"` with your target pool address. This query can be converted to a subscription to monitor in real-time. Simply replace `query` with `subscription` to receive live updates whenever the pool's liquidity changes.
+## Stream one pool
 
-## Realtime Liquidity Stream of a Specific Pool
-
-This subscription query monitors real-time liquidity changes for a specific DEX pool on Arbitrum. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
-
-You can find the query [here](https://ide.bitquery.io/realtime-liquidity-stream-of-a-specific-pool)
+The same filter as a subscription delivers a row on every reserve change, which for this pool means several per minute. Saved stream [here](https://ide.bitquery.io/realtime-liquidity-stream-of-a-specific-pool).
 
 ```graphql
-subscription MyQuery {
+subscription {
   EVM(network: arbitrum) {
     DEXPoolEvents(
       where: {
         PoolEvent: {
-          Pool: {
-            SmartContract: { is: "0xff74c74359016e5e0deb882d6537c8271e3d1026" }
-          }
+          Pool: { SmartContract: { is: "0xc6f780497a95e246eb9449f5e4770916dcd6396a" } }
         }
       }
     ) {
@@ -160,31 +90,23 @@ subscription MyQuery {
       PoolEvent {
         AtoBPrice
         BtoAPrice
-        Dex {
-          SmartContract
-          ProtocolName
-        }
         Liquidity {
           AmountCurrencyA
+          AmountCurrencyAInUSD
           AmountCurrencyB
+          AmountCurrencyBInUSD
         }
         Pool {
+          SmartContract
           CurrencyA {
-            Name
-            SmartContract
             Symbol
           }
           CurrencyB {
-            Name
-            SmartContract
             Symbol
           }
-          PoolId
-          SmartContract
         }
       }
       Transaction {
-        Gas
         Hash
       }
     }
@@ -192,50 +114,41 @@ subscription MyQuery {
 }
 ```
 
-## Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4
+## Every Uniswap v4 pool on Arbitrum
 
-This subscription query monitors real-time liquidity changes for all pools in a specific DEX protocol on Arbitrum. Here we have taken example of Uniswap V4.
-
-You can find the query [here](https://ide.bitquery.io/latest-liquidity-changes-in-uniswap-v4-pools)
+Filter on the protocol to follow a whole family of pools. Uniswap v4 keeps all pools inside one PoolManager contract, `0x360e68faccca8ca495c1b759fd9eee466db9fb32` on Arbitrum, so `Pool.SmartContract` is the same on every row and `Pool.PoolId` is the field that tells pools apart. For v2 and v3 pools `PoolId` is empty and `SmartContract` is the pool. Saved stream [here](https://ide.bitquery.io/latest-liquidity-changes-in-uniswap-v4-pools).
 
 ```graphql
-subscription MyQuery {
+subscription {
   EVM(network: arbitrum) {
     DEXPoolEvents(
       where: { PoolEvent: { Dex: { ProtocolName: { is: "uniswap_v4" } } } }
     ) {
       Block {
         Time
-        Number
       }
       PoolEvent {
-        AtoBPrice
-        BtoAPrice
-        Dex {
+        Pool {
+          PoolId
           SmartContract
-          ProtocolName
+          CurrencyA {
+            Symbol
+            SmartContract
+          }
+          CurrencyB {
+            Symbol
+            SmartContract
+          }
         }
         Liquidity {
           AmountCurrencyA
+          AmountCurrencyAInUSD
           AmountCurrencyB
+          AmountCurrencyBInUSD
         }
-        Pool {
-          CurrencyA {
-            Name
-            SmartContract
-            Symbol
-          }
-          CurrencyB {
-            Name
-            SmartContract
-            Symbol
-          }
-          PoolId
-          SmartContract
-        }
+        AtoBPrice
       }
       Transaction {
-        Gas
         Hash
       }
     }
@@ -243,90 +156,84 @@ subscription MyQuery {
 }
 ```
 
-> **Important Note:** In Uniswap V4, all pools' liquidity is stored in the PoolManager contract, so the DEX smart contract address will be the same (`0x360e68faccca8ca495c1b759fd9eee466db9fb32`) for all pairs. Use `PoolId` to differentiate between different pools. The `PoolId` field uniquely identifies each pool within the PoolManager.
+Other protocol names that report on Arbitrum: `uniswap_v3`, `uniswap_v2` and `pancake_swap_v3`.
 
-## Realtime Liquidity Data via Kafka Streams
+## Pools that hold a token, with their current reserves
 
-Liquidity data can also be obtained via Kafka streams for lower latency and better reliability. The Kafka topic for Arbitrum DEX pools is:
+`limitBy` on the pool address keeps the newest row per pool, so the result is the current state of every pool that had the token as `CurrencyA` and changed inside the window. Run it a second time with the token under `CurrencyB` to catch pools that list it second. The example is ARB, `0x912ce59144191c1204e64559fe8253a0e49e6548`; sort the rows by the USD reserve in your code to rank the pools. Saved query [here](https://ide.bitquery.io/realtime-liquidity-stream_1).
 
-**`arbitrum.dexpools.proto`**
+```graphql
+{
+  EVM(network: arbitrum) {
+    DEXPoolEvents(
+      limit: { count: 20 }
+      limitBy: { by: PoolEvent_Pool_SmartContract, count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        PoolEvent: {
+          Pool: {
+            CurrencyA: { SmartContract: { is: "0x912ce59144191c1204e64559fe8253a0e49e6548" } }
+          }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      PoolEvent {
+        Dex {
+          ProtocolName
+        }
+        Pool {
+          SmartContract
+          PoolId
+          CurrencyB {
+            Symbol
+            SmartContract
+          }
+        }
+        Liquidity {
+          AmountCurrencyA
+          AmountCurrencyAInUSD
+          AmountCurrencyB
+          AmountCurrencyBInUSD
+        }
+      }
+    }
+  }
+}
+```
 
-Kafka streams provide the same liquidity data as GraphQL subscriptions but with several advantages:
+## Fields on every row
 
-- Lower latency due to shorter data pipeline
-- Better reliability with persistent connections
-- Ability to read from latest offset without gaps
-- Better scalability with multiple consumers
+| Field | Meaning |
+|---|---|
+| `PoolEvent.Liquidity.AmountCurrencyA`, `AmountCurrencyB` | Reserves of each token after the change, in token units |
+| `AmountCurrencyAInUSD`, `AmountCurrencyBInUSD` | The same reserves priced in USD |
+| `PoolEvent.AtoBPrice`, `BtoAPrice` | Spot price in each direction after the change |
+| `PoolEvent.Pool.SmartContract`, `PoolId` | Pool contract; for Uniswap v4 the PoolManager plus the pool id |
+| `PoolEvent.Dex.ProtocolName` | `uniswap_v2`, `uniswap_v3`, `uniswap_v4` or `pancake_swap_v3` |
+| `Transaction.Hash` | The transaction that changed the reserves |
 
-For detailed information on how to connect to Kafka streams, subscribe to topics, and parse messages, refer to the [Kafka Streaming Concepts documentation](/docs/streams/kafka-streaming-concepts/).
+## The same data over Kafka
 
-> **Note:** IDE credentials will not work with Kafka Streams. You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
+The `arbitrum.dexpools.proto` topic carries the same rows as protobuf messages with lower latency and no WebSocket to keep alive. Kafka needs its own credentials, separate from the IDE token; see the [Kafka streams hub](/docs/category/kafka-streams). The slippage tables for the same pools are on the [Arbitrum slippage API](/docs/blockchain/Arbitrum/arbitrum-slippage-api) page.
 
-## Understanding the Response
+<FAQ
+  items={[
+    { q: "How do I get the reserves of a pool on Arbitrum?", a: "Query DEXPoolEvents under EVM(network: arbitrum) with the pool contract in PoolEvent.Pool.SmartContract, ordered by Block_Time descending. The newest row holds both reserves in token units and USD plus the spot price." },
+    { q: "Which DEXs does the Arbitrum liquidity cube cover?", a: "Rows come from Uniswap v2, v3 and v4 pools and PancakeSwap v3 pools. Pools of other Arbitrum protocols are not in this cube; use the DEX trades cube to see their swaps." },
+    { q: "How do I tell Uniswap v4 pools apart?", a: "All v4 pools share the PoolManager address 0x360e68faccca8ca495c1b759fd9eee466db9fb32, so filter and group on PoolEvent.Pool.PoolId instead of SmartContract." },
+    { q: "How far back does liquidity data go on Arbitrum?", a: "DEXPoolEvents keeps the recent realtime window only and has no archive dataset. Record the subscription or the Kafka topic to build a history." },
+    { q: "Does a liquidity row tell me whether it was a swap or a deposit?", a: "Not directly. Compare consecutive rows for the pool: a swap moves the two reserves in opposite directions, a deposit or withdrawal moves both the same way. The transaction hash links to the call for detail." },
+  ]}
+/>
 
-The `DEXPoolEvents` API response contains the following information:
+## Related pages
 
-- **`PoolEvent`**: Pool event information
-
-  - **`Liquidity`**: Current pool reserves
-    - `AmountCurrencyA`: Current balance of CurrencyA in the pool (in raw units)
-    - `AmountCurrencyB`: Current balance of CurrencyB in the pool (in raw units)
-  - **`AtoBPrice`**: Current spot price for swapping CurrencyA to CurrencyB
-  - **`BtoAPrice`**: Current spot price for swapping CurrencyB to CurrencyA
-  - **`Pool`**: Pool information
-    - `SmartContract`: Pool contract address
-    - `PoolId`: Unique pool identifier
-    - `CurrencyA`: First token in the pair (name, symbol, smart contract address)
-    - `CurrencyB`: Second token in the pair (name, symbol, smart contract address)
-  - **`Dex`**: DEX protocol information
-    - `SmartContract`: DEX router/factory contract address
-    - `ProtocolName`: Protocol name (e.g., Uniswap V2, Uniswap V3, Uniswap V4)
-
-- **`Block`**: Block information when the liquidity event occurred
-
-  - `Time`: Timestamp of the block
-  - `Number`: Block number
-
-- **`Transaction`**: Transaction information
-  - `Hash`: Transaction hash
-  - `Gas`: Gas used for the transaction
-
-For more details on when new pool events are emitted and how liquidity is calculated, see the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#when-is-a-new-dexpool-record-emitted-in-the-apis--streams).
-
-## Use Cases
-
-### Real-Time Liquidity Monitoring
-
-Use the liquidity API to monitor pool reserves in real-time:
-
-- Track when large amounts of liquidity are added or removed
-- Monitor pool health and detect potential liquidity issues
-- Alert on significant liquidity changes that may affect trading
-
-### Liquidity Depth Analysis
-
-Analyze which pools have sufficient liquidity for your needs:
-
-- Compare liquidity reserves across different pools
-- Identify pools with deep liquidity for large trades
-- Monitor liquidity trends over time
-
-### Trading Applications
-
-#### Pre-Trade Liquidity Checks
-
-Before executing large trades, check current pool reserves:
-
-- Verify sufficient liquidity exists for your trade size
-- Monitor liquidity changes that may affect execution
-- Identify optimal pools with best liquidity depth
-
-#### Liquidity Event Detection
-
-Track liquidity events that may create trading opportunities:
-
-- Detect when new liquidity is added to pools
-- Monitor liquidity removals that may signal pool abandonment
-- Identify pools experiencing rapid liquidity growth
-
-For more advanced use cases, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#advanced-use-cases-and-processing-patterns).
+- [Arbitrum slippage API](/docs/blockchain/Arbitrum/arbitrum-slippage-api)
+- [Arbitrum DEX trades API](/docs/blockchain/Arbitrum/DexTrades)
+- [DEXPools cube](/docs/cubes/evm-dexpool/)
+- [BNB Chain liquidity API](/docs/blockchain/BSC/bsc-liquidity-api)
+- [Base liquidity API](/docs/blockchain/Base/base-liquidity-api)
