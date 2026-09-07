@@ -1,6 +1,7 @@
 ---
 sidebar_position: 3
 title: "BSC Miner Balance Tracker: Block Producer Rewards on BNB Chain"
+sidebar_label: "BSC Miner Balance Tracker"
 description: "BNB Chain has validators, not miners, so mining codes never fire. Track block producer income with Bitquery GraphQL: fees per transaction, block and validator."
 keywords:
   - BSC miner balance tracker
@@ -88,7 +89,7 @@ Group the deposits by the validator address; `uniq` on the transaction hash coun
 
 ## Income of one validator
 
-Add the validator to `Transaction.From`. The example is one of the active validators; take any address from the query above. Saved query [here](https://ide.bitquery.io/Filter-by-Miner-Address-bsc).
+Add the validator to `Transaction.From`. The example is one of the validators with the most blocks; take any address from the query above. Validators rotate, so a quiet hour is normal for a single address and the window here is a day. Saved query [here](https://ide.bitquery.io/Filter-by-Miner-Address-bsc).
 
 ```graphql
 {
@@ -104,9 +105,9 @@ Add the validator to `Transaction.From`. The example is one of the active valida
         }
         Transaction: {
           Value: { gt: "0" }
-          From: { is: "0x1579ca96ebd49a0b173f86c372436ab1ad393380" }
+          From: { is: "0x9bb56c2b4dbe5a06d79911c9899b6f817696acfc" }
         }
-        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
       Block {
