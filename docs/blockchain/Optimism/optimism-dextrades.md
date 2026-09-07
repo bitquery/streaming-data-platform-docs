@@ -1,11 +1,11 @@
 ---
 sidebar_position: 2
-title: "Optimism DEX Trades API: Uniswap, Velodrome and Every Swap on Optimism"
+title: "Optimism DEX Trades API: Every Swap on Optimism, Pairs, Traders and Prices"
 sidebar_label: "Optimism DEX Trades API"
 description: "Optimism DEX data with Bitquery GraphQL: live swaps with trader and USD, which DEXs trade, busiest pairs, top traders, token prices and top tokens."
 keywords:
   - Optimism DEX trades API
-  - Velodrome API
+  - aerodrome_v1 Optimism
   - Uniswap Optimism trades
   - Optimism token price API
   - top traders Optimism
@@ -13,9 +13,9 @@ keywords:
 
 import FAQ from "@site/src/components/FAQ";
 
-# Optimism DEX Trades API: Uniswap, Velodrome and Every Swap on Optimism
+# Optimism DEX Trades API: Every Swap on Optimism, Pairs, Traders and Prices
 
-Optimism's DEX trading runs through Uniswap v3, which carries most of the swaps, Uniswap v4, Velodrome, whose pools report under the protocol name `aerodrome_v1` because they share that code base, v2-style pairs, and Balancer. Bitquery indexes all of them into the chain cubes, `DEXTrades` for one row per swap and `DEXTradeByTokens` for one row per swap per token, and into the Trading cube, which adds the trader, USD price, market cap and supply on every row for the last month or so. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. Two Optimism details shape the examples: native USDC is `0x0b2c639c533813f4aa9d7837caf62653d097ff85` and the bridged USDC.e is `0x7f5c764cbc14f9669b88837ca1490cca17c31607`, and a few swaps in thin pools carry absurd USD values, so every USD sum here caps a single trade with `Side: { AmountInUSD: { lt: "10000000" } }`.
+Optimism's DEX trading runs through Uniswap v3, which carries most of the swaps, Uniswap v4, the `aerodrome_v1` family, which on Optimism holds pools and vaults built on the Velodrome and Aerodrome code base, Tarot's vaults among them, v2-style pairs, and Balancer. Bitquery indexes all of them into the chain cubes, `DEXTrades` for one row per swap and `DEXTradeByTokens` for one row per swap per token, and into the Trading cube, which adds the trader, USD price, market cap and supply on every row for the last month or so. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. Two Optimism details shape the examples: native USDC is `0x0b2c639c533813f4aa9d7837caf62653d097ff85` and the bridged USDC.e is `0x7f5c764cbc14f9669b88837ca1490cca17c31607`, and a few swaps in thin pools carry absurd USD values, so every USD sum here caps a single trade with `Side: { AmountInUSD: { lt: "10000000" } }`.
 
 ## Live swaps with trader and USD
 
@@ -318,8 +318,8 @@ Tokens ranked by number of trades over the last day, with buyers, sellers, pools
 
 <FAQ
   items={[
-    { q: "Which DEXs does Bitquery index on Optimism?", a: "Uniswap v2, v3 and v4, Velodrome, which reports as aerodrome_v1, Balancer and the smaller venues. The protocol query on this page lists whatever traded in the window." },
-    { q: "How do I get Velodrome trades on Optimism?", a: "Filter Trade.Dex.ProtocolName on aerodrome_v1 in DEXTrades or DEXTradeByTokens; Velodrome and Aerodrome share a code base and the cube uses that name on both chains." },
+    { q: "Which DEXs does Bitquery index on Optimism?", a: "Uniswap v2, v3 and v4, the aerodrome_v1 family of Velodrome-style pools and vaults, Balancer and the smaller venues. The protocol query on this page lists whatever traded in the window." },
+    { q: "What is aerodrome_v1 on Optimism?", a: "The protocol name the cube gives to pools and vaults built on the Velodrome and Aerodrome code base. Filter Trade.Dex.ProtocolName on it and check Dex.SmartContract to see which contract a row came from." },
     { q: "Why cap AmountInUSD in the queries?", a: "A swap in a pool with almost no liquidity can carry a nonsense USD value that swamps any sum. Keeping single trades under ten million dollars removes those rows from rankings." },
     { q: "How do I get the price of a token on Optimism?", a: "Take the newest DEXTradeByTokens row for the token contract and read PriceInUSD, or filter the quote currency under Side for the price in that quote." },
     { q: "Where do the trader addresses come from?", a: "Transaction.From is the account that sent the swap. The Trading cube's Trader field is the same idea with USD and market cap attached." },
