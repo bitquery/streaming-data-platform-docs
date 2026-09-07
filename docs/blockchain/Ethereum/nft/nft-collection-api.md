@@ -1,6 +1,7 @@
 ---
 sidebar_position: 7
 title: "Ethereum NFT Collection API: Token List, Holders and Transfers"
+sidebar_label: "Ethereum NFT Collection API"
 description: "Token list, holders, latest transfers and mints for an Ethereum NFT collection with Bitquery GraphQL, worked on Bored Ape Yacht Club."
 keywords:
   - NFT collection API
@@ -63,13 +64,43 @@ The `Holders` cube returns current balances per address for the collection contr
 
 The older way, summing `BalanceUpdates` per address, is retired; the [Balances and Holders cubes](/docs/cubes/balances-cube) page maps each old query to its replacement.
 
-## Transfer history of the collection
+## Transfer history and mints
 
-The same `Transfers` filter without `limitBy` returns every transfer. Add `Sender: { is: "0x0000000000000000000000000000000000000000" }` to keep only mints, `Id: { is: "1234" }` for one token, or a `Block: { Time: { since: ... } }` window for a period. Change `query` to `subscription` and drop the dataset argument to stream new transfers of the collection as they happen.
+Plain rows come from the same filter without the grouping. Add the zero address as `Sender` to keep only mints, `Id` for one token, or a `Block.Time` window for a period; the example lists the first BAYC mints from the collection's launch weeks on the archive dataset. Change `query` to `subscription` and drop the dataset argument to stream new transfers of the collection as they happen.
+
+```graphql
+{
+  EVM(dataset: archive, network: eth) {
+    Transfers(
+      where: {
+        Transfer: {
+          Currency: { SmartContract: { is: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d" } }
+          Sender: { is: "0x0000000000000000000000000000000000000000" }
+        }
+        Block: { Time: { since: "2021-04-01T00:00:00Z", till: "2021-05-31T00:00:00Z" } }
+      }
+      limit: { count: 20 }
+      orderBy: { ascending: Block_Time }
+    ) {
+      Block {
+        Time
+      }
+      Transfer {
+        Id
+        Receiver
+        URI
+      }
+      Transaction {
+        Hash
+      }
+    }
+  }
+}
+```
 
 <FAQ
   items={[
-    { q: "How do I list every NFT in a collection?", a: "Query Transfers on the archive dataset filtered by the collection contract, with limitBy on Transfer_Id so each token id appears once, and page with limit and offset. URI and Data on each row give the metadata." },
+    { q: "How do I list every NFT in a collection?", a: "Group Transfers on the archive dataset by Transfer.Id with count, filtered by the collection contract, and page with limit and offset; each row is one token id. Plain transfer rows carry the URI for metadata." },
     { q: "How do I get the holders of an NFT collection on Ethereum?", a: "Query the Holders cube with the collection contract in Currency.SmartContract and sort by Balance_Amount. It returns current owners with their token counts; a date argument returns the owners on a past day." },
     { q: "Does this work for ERC-1155 collections?", a: "Yes. Transfers carry the token id and amount for ERC-1155 as well, and Holders returns per-address balances, which can be larger than one for the same id." },
     { q: "How do I get NFT metadata?", a: "The URI field on a transfer row is the token's metadata link, and Data holds on-chain metadata when the contract stores it. Fetch the URI yourself for the image and attributes." },
