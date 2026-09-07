@@ -106,10 +106,9 @@ const sidebars = {
       type: "category",
       label: "Building Queries",
       link: {
-        type: "generated-index",
-        title: "Building Queries Documentation",
-        description: "Learn how to build powerful queries",
-      },
+        type: "doc",
+            id: "graphql/building-queries",
+          },
       items: [
         "graphql/data-coverage-retention",
         {
