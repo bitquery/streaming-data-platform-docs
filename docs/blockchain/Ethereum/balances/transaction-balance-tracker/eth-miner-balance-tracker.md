@@ -18,7 +18,7 @@ import FAQ from "@site/src/components/FAQ";
 Ethereum stopped mining at the Merge in September 2022. The mining codes stay in the balance schema, 1 for an uncle reward and 2 for a block reward, but the `TransactionBalances` cube covers the recent realtime window only, so on Ethereum they never appear and a filter on them returns nothing. What a block producer earns today shows up under other codes:
 
 - **Priority fees**, reason code 5, credited to the block's fee recipient for each transaction. In practice that address is a block builder, since most blocks are built through MEV-Boost.
-- **Consensus rewards and withdrawals**, reason code 3, covered by the [validator balance tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-validator-balance-tracker).
+- **Consensus-layer rewards**, which reach validators through beacon-chain withdrawals. Withdrawals are not transactions, so this cube does not record them; reason code 3 exists in the schema for them but returns no rows in live data. The [validator balance tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-validator-balance-tracker) covers what can be tracked on the execution layer.
 - **Builder payments to the proposer**, ordinary transfers in the last transaction of a block, covered by the [MEV balance tracker](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/eth-mev-balance-tracker).
 
 This page tracks the first of these. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The example builder is Titan Builder, `0x4838b106fce9647bdf1e7877bf73ce8b0bad5f97`; the query under "Who collected fees" lists the others.
@@ -178,7 +178,7 @@ Codes 1 and 2 belong to proof-of-work blocks. The cube has no archive dataset on
     { q: "Does Ethereum still have mining rewards?", a: "No. Mining ended at the Merge in September 2022. Reason codes 1 and 2 never appear in the realtime balance data, and the cube has no archive, so the pre-Merge era cannot be queried through it." },
     { q: "Who receives reason code 5 on Ethereum?", a: "The block's fee recipient, which for most blocks is a builder such as Titan Builder. Group code 5 rows by TokenBalance.Address to list the active builders and how many transactions paid each." },
     { q: "How do I compute a builder's income for one block?", a: "Filter code 5 rows on the builder's address, group by block, and take PostBalance at the maximum transaction index minus PreBalance at the minimum transaction index. The difference is the block's fee income." },
-    { q: "Where are the proposer's earnings?", a: "Consensus-layer rewards and withdrawals appear as reason code 3 and are covered by the validator balance tracker. Builder payments to the proposer are regular transfers at the end of a block, covered by the MEV balance tracker." },
+    { q: "Where are the proposer's earnings?", a: "Builder payments to the proposer are regular transfers at the end of a block, covered by the MEV balance tracker. Consensus-layer rewards arrive as beacon-chain withdrawals, which are not transactions, so this cube does not record them and reason code 3 returns no rows." },
   ]}
 />
 
