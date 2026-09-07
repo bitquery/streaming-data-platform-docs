@@ -1,24 +1,30 @@
 ---
 sidebar_position: 2
-title: "Query Fact Records in GraphQL"
-description: "Query raw blockchain fact records with Bitquery GraphQL, including field selection, filters, limits, and result shapes. See examples in the Bitquery IDE."
+title: "Query Fact Records: Return Raw Rows from a Bitquery Cube"
+sidebar_label: "Query Fact Records"
+description: "The simplest Bitquery query returns raw rows from a cube, such as the latest transactions with cost. When it fits, how to bound it, and when to aggregate."
+keywords:
+  - Bitquery fact records
+  - raw rows GraphQL
+  - latest transactions query
+  - Bitquery query limits
+  - GraphQL filters Bitquery
 ---
-# Query Fact Records
 
-This is the simplest type of query. You just define the attributes which you need in the results,
-and you get all records directly from the database matching [limits](/docs/graphql/limits), [sorting](/docs/graphql/sorting)
-and [filters](/docs/graphql/filters).
+import FAQ from "@site/src/components/FAQ";
 
-Note that fact tables are typically long beasts, and querying the complete content of them not possible at all.
-So in reality you can query only a small portion of data, and there is no good way to get the complete
-dataset just by querying the fact tables, even using [limits](/docs/graphql/limits) and offsets.
+# Query Fact Records: Return Raw Rows from a Bitquery Cube
 
-This type of query is useful in the following cases:
+A fact record query asks a cube for rows as they are, no aggregation: name the fields you want and the cube returns matching records subject to your [filters](/docs/graphql/filters), [sorting](/docs/graphql/sorting) and [limits](/docs/graphql/limits). It is the right shape for "the last 100 transactions", "transfers of this wallet today" or "every trade of this token in the last hour". It is the wrong shape for "all transfers ever": fact tables hold billions of rows and no limit and offset walk gets you the whole set. For totals and rankings, use [aggregated metrics](/docs/graphql/capabilities/aggregated_metrics) on the same cube instead.
 
-1.  query some specific sub-set of the data, with the very well-defined filters. For example, the last token transfers of specific address for today. The more precise filter you define, the better it will run. Date or time filters are essential in this case.
-2.  define ordering and query just the last records. This type of query should also take care about date / time filtering especially if you query archive data.
+## Two rules that keep it fast
 
-[Query example ](https://ide.bitquery.io/Last-transactions-with-cost) to get the last transactions in the blockchain with the cost of them:
+1. Filter tightly. An address, a token contract and a time window let the engine read a small slice; a bare cube scan does not. Time filters matter most, and on `archive` they are close to mandatory.
+2. Order and limit. `orderBy` on an indexed field with a small `limit` returns the latest rows quickly. Sorting a huge unfiltered set is what times out.
+
+## Example: the latest transactions and what they cost
+
+The 100 newest BNB Chain transactions in block order, with the cost of each. Saved query [here](https://ide.bitquery.io/Last-transactions-with-cost).
 
 ```graphql
 query {
@@ -37,3 +43,29 @@ query {
   }
 }
 ```
+
+Sorting by block number and then transaction index gives a stable order inside a block, which plain `Block_Time` cannot, since every transaction in a block shares the same time.
+
+## Turning it into other shapes
+
+- **One wallet:** add `where: { Transaction: { From: { is: "0x..." } } }`.
+- **A window:** add `Block: { Time: { since_relative: { hours_ago: 1 } } }` inside `where`.
+- **A live feed:** change `query` to `subscription` and drop `limit` and `orderBy`; new rows arrive as they are indexed.
+- **A total:** replace the selection with `count` and `sum(of: Transaction_Cost)`; see [aggregated metrics](/docs/graphql/capabilities/aggregated_metrics).
+
+<FAQ
+  items={[
+    { q: "What is a fact record query in Bitquery?", a: "A query that returns raw rows from a cube, such as individual transactions, transfers or trades, with the fields you select. Filters, sorting and limits shape the result; nothing is aggregated." },
+    { q: "Can I download a whole cube with limit and offset?", a: "No. Fact tables hold billions of rows and offset pagination cannot cover them. Bound the query by time, address or token, or use cloud datasets for bulk history." },
+    { q: "Why does my fact query time out?", a: "Usually no time filter, an unindexed filter field, or a sort over a very wide set. Add a time window, filter on indexed fields, and keep the limit small; the indexed fields reference lists what sorts fast." },
+    { q: "How do I get the same rows in real time?", a: "Change query to subscription and remove limit and orderBy. The cube pushes each new matching row over WebSocket." },
+  ]}
+/>
+
+## Related pages
+
+- [Query filters](/docs/graphql/filters)
+- [Query limits](/docs/graphql/limits)
+- [Indexed fields reference](/docs/graphql/indexed-fields-reference)
+- [Aggregated metrics](/docs/graphql/capabilities/aggregated_metrics)
+- [GraphQL query capabilities](/docs/category/capabilities)
