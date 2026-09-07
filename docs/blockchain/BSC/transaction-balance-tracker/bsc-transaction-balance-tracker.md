@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: "BSC Transaction Balance Tracker: Balances Before and After a Transaction"
+sidebar_label: "BSC Transaction Balance Tracker"
 description: "Stream and query BNB Chain balance changes with Bitquery GraphQL: every address a transaction touched, one wallet's BNB and USDT, pool reserves and supply."
 keywords:
   - BSC transaction balance tracker
