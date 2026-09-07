@@ -1,279 +1,182 @@
 ---
 sidebar_position: 2
 sidebar_label: Pairs for a Token
-title: "Ethereum Get Trading Pairs Of Token API"
-description: "Ethereum Get Trading Pairs Of Token API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams."
+title: "Ethereum Trading Pairs API: Every Pool a Token Trades In"
+description: "Every trading pair of an Ethereum token with Bitquery GraphQL: pools across DEXs, pools on one protocol, pair stats, reserves, the tokens behind a pool."
+keywords:
+  - Ethereum trading pairs API
+  - token pairs Ethereum
+  - pools of a token
+  - pair liquidity Ethereum
+  - DEXTradeByTokens pairs
 ---
-# Trading Pairs API
 
-:::danger `BalanceUpdates` sunsets 10 August 2026
-Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
+import FAQ from "@site/src/components/FAQ";
 
-See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
-:::
+# Ethereum Trading Pairs API: Every Pool a Token Trades In
 
+A token trades in many places at once: a Uniswap v3 pool against WETH, a v2 pair, a v4 pool, maybe a Curve or Balancer pool. To follow all of its trading you first need that list, and the `DEXTradeByTokens` cube produces it in one query, because every swap is stored once per token with the other token and the pool alongside. From there a pair's stats, a pool's reserves and the two tokens behind a pool address are each one more query. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked token is BLUR, `0x5283d291dbcf85356a21ba090e6db59121208b44`, whose pools are spread across Uniswap v2, v3 and v4.
 
-If you want to get all trades of a token, you might want to know all its trading pairs.
-Protocols like Uniswap have pairs or pools. In this section we will see how we can get all pairs of currency for DEXs.
+## Every pair of a token across all DEXs
 
-## Get all Trade Metrics (trade amount, tx count) for a Pair
-
-This query can be used to get all trade metrics (trade amount, TX count) for a given pair ( in this case WETH/CaL) on a given EVM network over a particular time period.
-
-```graphql
-query ($network: evm_network, $token: String!, $token2: String!) {
-  EVM(network: $network, dataset: combined) {
-    Unique_Buyers: DEXTrades(
-      where: {Block: {Time: {since: "2023-09-27T01:00:00Z", till: "2023-09-27T02:00:00Z"}}, Trade: {Buy: {Currency: {SmartContract: {is: $token}}}, Sell: {Currency: {SmartContract: {is: $token2}}}}}
-    ) {
-      count(distinct: Trade_Buy_Buyer)
-    }
-    Unique_Sellers: DEXTrades(
-      where: {Block: {Time: {since: "2023-08-26T01:00:00Z", till: "2023-08-26T02:00:00Z"}}, Trade: {Sell: {Currency: {SmartContract: {is: $token}}}, Buy:{Currency:{SmartContract:{is: $token2}}}}}
-    ) {
-      count(distinct: Trade_Sell_Seller)
-    }
-    Total_Transactions: DEXTrades(
-      where: {Block: {Time: {since: "2023-09-27T01:00:00Z", till: "2023-09-27T02:00:00Z"}}, Trade: {Buy: {Currency: {SmartContract: {is: $token}}}, Sell: {Currency: {SmartContract: {is: $token2}}}}}
-    ) {
-      count(distinct: Transaction_Hash)
-    }
-    Total_Buy_Amount: DEXTrades(
-      where: {Block: {Time: {since: "2023-09-27T01:00:00Z", till: "2023-09-27T02:00:00Z"}}, Trade: {Buy: {Currency: {SmartContract: {is: $token}}}, Sell: {Currency: {SmartContract: {is: $token2}}}}}
-    ) {
-      sum(of:Trade_Buy_Amount)
-    }
-    Total_Sell_Amount: DEXTrades(
-      where: {Block: {Time: {since: "2023-09-27T01:00:00Z", till: "2023-09-27T02:00:00Z"}}, Trade: {Buy: {Currency: {SmartContract: {is: $token}}}, Sell: {Currency: {SmartContract: {is: $token2}}}}}
-    ) {
-      sum(of:Trade_Sell_Amount)
-    }
-  }
-}
-{
-  "network":"eth","token":"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", "token2":"0x20561172f791f915323241e885b4f7d5187c36e1"
-}
-
-```
-
-It returns:
-
-- **Unique_Buyers:** The number of unique buyers for the given pair during the specified time period.
-- **Unique_Sellers:** The number of unique sellers for the given pair during the specified time period.
-- **Total_Transactions:** The total number of transactions for the given pair during the specified time period.
-- **Total_Buy_Amount:** The total amount of the first token bought during the specified time period.
-- **Total_Sell_Amount:** The total amount of the first token sold during the specified time period.
-
-## Get all pairs of a token across different DEXs
-
-Let's get all pairs of the [BLUR token](https://explorer.bitquery.io/ethereum/token/0x5283d291dbcf85356a21ba090e6db59121208b44). In the following query, we are not defining any DEX details; therefore, we will get pairs across DEXs supported by Bitquery.
-We are just providing the BLUR token as buy currency.
+Group by the other token and the pool over a month on the `combined` dataset. Each row is one pool with its protocol, trade count and USD volume in the window. Saved query [here](https://ide.bitquery.io/Pair-tokens-for-BLUR-token-for-all-DEXs_1).
 
 ```graphql
 {
   EVM(dataset: combined, network: eth) {
-    DEXTrades(
+    DEXTradeByTokens(
       where: {
-        Trade: {
-          Buy: {
-            Currency: {
-              SmartContract: {
-                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
-              }
-            }
-          }
-        }
+        Trade: { Currency: { SmartContract: { is: "0x5283d291dbcf85356a21ba090e6db59121208b44" } } }
+        Block: { Time: { since_relative: { days_ago: 30 } } }
       }
-      limit: { count: 10 }
-      limitBy: { by: Trade_Sell_Currency_SmartContract, count: 1 }
+      orderBy: { descendingByField: "trades" }
+      limit: { count: 50 }
     ) {
       Trade {
-        Dex {
-          ProtocolName
-          OwnerAddress
-          ProtocolVersion
-          Pair {
-            SmartContract
-            Name
+        Side {
+          Currency {
             Symbol
-          }
-        }
-        Buy {
-          Currency {
-            Name
             SmartContract
           }
         }
-        Sell {
-          Currency {
-            Name
-            SmartContract
-          }
+        Dex {
+          ProtocolName
+          SmartContract
         }
       }
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
   }
 }
 ```
 
-Open the above query on GraphQL IDE using this [link](https://ide.bitquery.io/Pair-tokens-for-BLUR-token-for-all-DEXs_1)
+`Dex.SmartContract` is the pool for v2 and v3 pairs and the PoolManager for Uniswap v4, where pools are told apart by `Trade.PoolId` instead.
 
-**Parameters**
+## The pairs on one protocol
 
-- `dataset: combined`: specifies that the data should be retrieved from a combined dataset, which includes both historical and realtime data.
-- `network: eth`: specifies that the data should be retrieved from the Ethereum network.
-- `DEXTrades`: specifies that we want to retrieve information on DEX trades.
-- `where`: specifies a filter to apply to the results. In this case, we're filtering by the buy currency's smart contract address, which is set to "0x5283d291dbcf85356a21ba090e6db59121208b44".
-- `limit`: specifies the maximum number of results to return. In this case, we're limiting the results to 10.
-- `limitBy`: specifies how to limit the results. In this case, we're limiting the results by the smart contract address of the sell currency, and we're only returning 1 result per smart contract.
-
-**Returned Data**
-
-- `Trade`: represents the DEX trade, which includes information about the DEX itself (e.g. owner address, protocol version), the currency pair being traded (e.g. smart contract address, name, symbol), and the buy and sell currencies being exchanged (each represented as an object containing the currency's name and smart contract address).
-- `Dex`: represents the DEX itself, including the protocol name, owner address, and protocol version.
-- `Buy`: represents the currency being bought in the trade, including the currency's name and smart contract address.
-- `Sell`: represents the currency being sold in the trade, including the currency's name and smart contract address.
-
-## Get all pairs of a token from a specific DEX
-
-Now, let's see an example of getting all pairs of a token for a specific DEX. In this example, we will get all pairs of the [BLUR token](https://explorer.bitquery.io/ethereum/token/0x5283d291dbcf85356a21ba090e6db59121208b44) for the Uniswap v3 protocol; therefore, we will mention [Uniswap v3 factory smart contract address](https://explorer.bitquery.io/ethereum/smart_contract/0x1f98431c8ad98523631ae4a59f267346ea31f984/transactions).
+Add the protocol name to the filter. The saved query used the Uniswap v3 factory as an owner filter; the protocol name does the same with less to remember. Saved query [here](https://ide.bitquery.io/pairs-of-blur-token-new-dataset_1).
 
 ```graphql
 {
   EVM(dataset: combined, network: eth) {
-    DEXTrades(
+    DEXTradeByTokens(
       where: {
         Trade: {
-          Buy: {
-            Currency: {
-              SmartContract: {
-                is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
-              }
-            }
-          }
-          Dex: {
-            OwnerAddress: { is: "0x1f98431c8ad98523631ae4a59f267346ea31f984" }
-          }
+          Currency: { SmartContract: { is: "0x5283d291dbcf85356a21ba090e6db59121208b44" } }
+          Dex: { ProtocolName: { is: "uniswap_v3" } }
         }
+        Block: { Time: { since_relative: { days_ago: 30 } } }
       }
-      limit: { count: 10 }
-      limitBy: { by: Trade_Sell_Currency_SmartContract, count: 1 }
+      orderBy: { descendingByField: "trades" }
+      limit: { count: 20 }
     ) {
       Trade {
+        Side {
+          Currency {
+            Symbol
+            SmartContract
+          }
+        }
         Dex {
-          ProtocolName
-          OwnerAddress
-        }
-        Buy {
-          Currency {
-            Name
-            SmartContract
-          }
-        }
-        Sell {
-          Currency {
-            Name
-            SmartContract
-          }
+          SmartContract
         }
       }
+      trades: count
     }
   }
 }
 ```
 
-Open the above query on GraphQL IDE using this [link](https://ide.bitquery.io/pairs-of-blur-token-new-dataset_1)
+## Stats of one pair
 
-**Parameters**:
-
-- `dataset`: The dataset to use for the query, in this case `combined` which retrieves data from both historical and real-time sources.
-- `network`: The blockchain network to retrieve data from, in this case `eth` for Ethereum.
-- `where`: A filter object to narrow down the results to only the trades that match the specified criteria. In this case, the filter object is used to retrieve trades where the buy currency smart contract address is "0x5283d291dbcf85356a21ba090e6db59121208b44" and the DEX owner address is "0x1f98431c8ad98523631ae4a59f267346ea31f984".
-- `limit`: The maximum number of results to return, in this case set to 10.
-- `limitBy`: A grouping option to limit the number of results per group, in this case set to 1 for the smart contract address of the sell currency.
-
-**Returned Data:**
-
-The query returns an object containing a list of DEX trades, each with the following fields:
-
-- `Dex`: An object containing information about the DEX, including the protocol name and owner address.
-- `Buy`: An object containing information about the buy currency, including the name and smart contract address.
-- `Sell`: An object containing information about the sell currency, including the name and smart contract address.
-
-## Get liquidity of token pool/pair
-
-To get liquidity of token pairs you need 2 things. 1. Pair address 2. Addresses of tokens in the pair.
-
-Here is an example of USDC-USDT token pair on Uniswap v3 with.
-
-Here pair address - `0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf`
-
-USDT address - `0xdAC17F958D2ee523a2206206994597C13D831ec7`
-
-USDC address - `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
-
-**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
+Fix both tokens and a window: trades, distinct buyers and sellers, USD volume, and how much of the token was bought and sold. `Side.Type` describes the counter-side of each trade, so the token was bought where the side was sold, which is why the two conditions look reversed.
 
 ```graphql
-query MyQuery {
+{
+  EVM(network: eth, dataset: combined) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: "0x5283d291dbcf85356a21ba090e6db59121208b44" } }
+          Side: { Currency: { SmartContract: { is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" } } }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+    ) {
+      trades: count
+      buyers: uniq(of: Trade_Buyer)
+      sellers: uniq(of: Trade_Seller)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
+    }
+  }
+}
+```
+
+## Reserves of a pool
+
+A pool's reserves are its token balances. The `Balances` cube returns them for the pool address; the example is the Uniswap v3 USDC/USDT pool, `0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf`. Saved query [here](https://ide.bitquery.io/liquidity-of-token-pair-on-ethereum).
+
+```graphql
+{
   EVM(dataset: combined, network: eth) {
     Balances(
-      where: {Balance: {Address: {is: "0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf"}}, Currency: {SmartContract: {in: ["0xdAC17F958D2ee523a2206206994597C13D831ec7", "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"]}}}
+      where: {
+        Balance: { Address: { is: "0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf" } }
+        Currency: {
+          SmartContract: {
+            in: [
+              "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+              "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+            ]
+          }
+        }
+      }
       orderBy: { descending: Balance_Amount }
     ) {
       Currency {
-        Name
+        Symbol
+        SmartContract
       }
-      Balance { Amount(selectWhere: {gt: "0"}) }
+      Balance {
+        Amount
+      }
     }
   }
 }
 ```
 
-<details>
-<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
+For reserves that update on every swap with USD values and spot prices, use the [DEXPools cube](/docs/cubes/evm-dexpool/).
 
-```graphql
-query MyQuery {
-  EVM(dataset: combined, network: eth) {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf"}}, Currency: {SmartContract: {in: ["0xdAC17F958D2ee523a2206206994597C13D831ec7", "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"]}}}
-      orderBy: {descendingByField: "balance"}
-    ) {
-      Currency {
-        Name
-      }
-      balance: sum(of: BalanceUpdate_Amount, selectWhere: {gt: "0"})
-    }
-  }
-}
-```
+## The two tokens behind a pool address
 
-</details>
-
-You can run this query using [this link](https://ide.bitquery.io/liquidity-of-token-pair-on-ethereum)
-
-To know what are two tokens in a pair address, you can use [this query](https://ide.bitquery.io/tokens-in-a-given-pair-token).
+One trade from the pool names both sides. Saved query [here](https://ide.bitquery.io/tokens-in-a-given-pair-token).
 
 ```graphql
 {
-  EVM(dataset: combined) {
+  EVM(dataset: combined, network: eth) {
     DEXTrades(
-      limit: {count: 1}
-      where: {Trade: {Dex: {SmartContract: {is: "0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf"}}}}
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: { Dex: { SmartContract: { is: "0x7858E59e0C01EA06Df3aF3D20aC7B0003275D4Bf" } } }
+      }
     ) {
       Trade {
+        Dex {
+          ProtocolName
+        }
         Buy {
           Currency {
             Symbol
-            Name
             SmartContract
           }
         }
         Sell {
           Currency {
             Symbol
-            Name
             SmartContract
           }
         }
@@ -282,3 +185,20 @@ To know what are two tokens in a pair address, you can use [this query](https://
   }
 }
 ```
+
+<FAQ
+  items={[
+    { q: "How do I find all trading pairs of a token on Ethereum?", a: "Group DEXTradeByTokens by Trade.Side.Currency and Trade.Dex.SmartContract with the token in Trade.Currency over a window on the combined dataset. Each row is a pool the token trades in, with its protocol and volume." },
+    { q: "How do I limit the list to one DEX?", a: "Add Trade.Dex.ProtocolName, such as uniswap_v3 or uniswap_v2, to the filter. ProtocolFamily groups all versions of a protocol." },
+    { q: "How do I get the liquidity of a pair?", a: "Query the Balances cube for the pool address with both token contracts; the amounts are the reserves. The DEXPools cube gives the same reserves updated per swap with USD values." },
+    { q: "How do I know which tokens a pool address holds?", a: "Fetch one DEXTrades row where Trade.Dex.SmartContract is the pool; Buy.Currency and Sell.Currency are the two tokens." },
+    { q: "Does this work for Uniswap v4 pools?", a: "Yes, with one difference: v4 pools share the PoolManager address in Dex.SmartContract, so group or filter on Trade.PoolId to separate them." },
+  ]}
+/>
+
+## Related pages
+
+- [Ethereum DEX trades API](/docs/blockchain/Ethereum/dextrades/dex-api)
+- [Uniswap v4 on Ethereum](/docs/blockchain/Ethereum/dextrades/uniswap-v4-api)
+- [DEXPools cube](/docs/cubes/evm-dexpool/)
+- [Balances and Holders cubes](/docs/cubes/balances-cube)
