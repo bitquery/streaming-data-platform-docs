@@ -116,9 +116,8 @@ const sidebars = {
           type: "category",
           label: "Capabilities",
           link: {
-            type: "generated-index",
-            title: "Capabilities",
-            description: "Explore the platform's query capabilities",
+            type: "doc",
+            id: "graphql/capabilities/index",
           },
           items: [
             "graphql/datetime",
