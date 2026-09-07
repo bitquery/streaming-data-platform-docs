@@ -1,5 +1,6 @@
 ---
 title: "Fetching Solana DEX Trades for the Wash Trading Detector"
+sidebar_label: "Fetching Solana DEX Trades"
 description: "Data collection for the Solana wash trading detector: a Bitquery GraphQL query for the latest DEX trades with both sides and USD prices, wrapped in Python."
 keywords:
   - Solana DEX trades Python
