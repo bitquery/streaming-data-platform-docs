@@ -1,120 +1,131 @@
 ---
 sidebar_position: 3
-title: "BSC Miner Balance Tracker"
-description: "BSC Miner Balance Tracker: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions. Built for traders and analytics teams."
+title: "BSC Miner Balance Tracker: Block Producer Rewards on BNB Chain"
+sidebar_label: "BSC Miner Balance Tracker"
+description: "BNB Chain has validators, not miners, so mining codes never fire. Track block producer income with Bitquery GraphQL: fees per transaction, block and validator."
+keywords:
+  - BSC miner balance tracker
+  - BNB Chain validator rewards API
+  - BSC block rewards
+  - BSC transaction fee rewards
+  - balance change reason codes
 ---
-# BSC Miner Balance Tracker
 
-The BSC Miner Balance Tracker API provides real-time balance updates for BSC miners, tracking their mining rewards, uncle block rewards, and transaction fee rewards.
+import FAQ from "@site/src/components/FAQ";
 
-## Track Miner Balance Updates
+# BSC Miner Balance Tracker: Block Producer Rewards on BNB Chain
 
-Monitor balance changes for BSC miners, including block rewards, uncle block rewards, and transaction fee rewards. Try the API [here](https://ide.bitquery.io/Track-Miner-Balance-Updates-bsc).
+BNB Chain has never had miners. Blocks are produced by a fixed set of validators under the Parlia consensus, so the two mining codes in the balance schema, 1 for an uncle reward and 2 for a block reward, never appear in BNB Chain data. A filter on them returns nothing, and the last query on this page shows that. What a block producer earns instead is the gas paid by the transactions in its block, and the `TransactionBalances` cube shows that income in two places: as a code 5 credit for each transaction, and as one deposit per block into the ValidatorSet contract. Every example runs in the [IDE](https://ide.bitquery.io) on a free account; the cube covers the recent realtime window only.
+
+## How block producer income shows up
+
+1. While a block executes, each transaction's fee is credited to the fee holder `0xfffffffffffffffffffffffffffffffffffffffe` with reason code 5.
+2. At the end of the block, the validator sends the collected total to the ValidatorSet system contract `0x0000000000000000000000000000000000001000`. `Transaction.From` on that deposit is the validator and `Transaction.Value` is the block's income.
+3. Validators withdraw their share from the contract later; those withdrawals are ordinary transfers.
+
+## Fee income per block
+
+One row per block, newest first. Saved query [here](https://ide.bitquery.io/Track-Block-Mining-Rewards-bsc).
 
 ```graphql
-subscription {
+{
   EVM(network: bsc) {
     TransactionBalances(
-      where: { TokenBalance: { BalanceChangeReasonCode: { in: [1, 2, 5] } } }
+      limit: { count: 20 }
+      limitBy: { by: Transaction_Hash, count: 1 }
+      orderBy: { descending: Block_Number }
+      where: {
+        TokenBalance: {
+          Address: { is: "0x0000000000000000000000000000000000001000" }
+          Currency: { Native: true }
+        }
+        Transaction: { Value: { gt: "0" } }
+        Block: { Time: { since_relative: { minutes_ago: 10 } } }
+      }
     ) {
       Block {
-        Time
         Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
+        Time
       }
       Transaction {
         Hash
+        From
+        Value
       }
     }
   }
 }
 ```
 
-**Balance Change Reason Codes for Miners:**
+The deposit rows do not stream well as a subscription on BNB Chain because the filter has to scan every balance row on the network; poll this query, or stream the code 5 credits below, which are keyed by the fee holder and arrive at once.
 
-- **Code 1**: `BalanceIncreaseRewardMineUncle` - Reward for mining an uncle block
-- **Code 2**: `BalanceIncreaseRewardMineBlock` - Reward for mining a block
-- **Code 5**: `BalanceIncreaseRewardTransactionFee` - Transaction tip increasing block builder's balance
+## Blocks produced per validator
 
-## Track Block Mining Rewards
-
-Track rewards received by miners for successfully mining blocks:
-Try the API [here](https://ide.bitquery.io/Track-Block-Mining-Rewards-bsc).
+Group the deposits by the validator address; `uniq` on the transaction hash counts blocks. Saved query [here](https://ide.bitquery.io/Historical-Miner-Balance-Data-bsc).
 
 ```graphql
-subscription {
+{
   EVM(network: bsc) {
     TransactionBalances(
-      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 2 } } }
+      limit: { count: 50 }
+      orderBy: { descendingByField: "blocks" }
+      where: {
+        TokenBalance: {
+          Address: { is: "0x0000000000000000000000000000000000001000" }
+          Currency: { Native: true }
+        }
+        Transaction: { Value: { gt: "0" } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+      }
+    ) {
+      Transaction {
+        From
+      }
+      blocks: uniq(of: Transaction_Hash)
+    }
+  }
+}
+```
+
+## Income of one validator
+
+Add the validator to `Transaction.From`. The example is one of the validators with the most blocks; take any address from the query above. Validators rotate, so a quiet hour is normal for a single address and the window here is a day. Saved query [here](https://ide.bitquery.io/Filter-by-Miner-Address-bsc).
+
+```graphql
+{
+  EVM(network: bsc) {
+    TransactionBalances(
+      limit: { count: 20 }
+      limitBy: { by: Transaction_Hash, count: 1 }
+      orderBy: { descending: Block_Number }
+      where: {
+        TokenBalance: {
+          Address: { is: "0x0000000000000000000000000000000000001000" }
+          Currency: { Native: true }
+        }
+        Transaction: {
+          Value: { gt: "0" }
+          From: { is: "0x9bb56c2b4dbe5a06d79911c9899b6f817696acfc" }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
     ) {
       Block {
-        Time
         Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
+        Time
       }
       Transaction {
         Hash
+        Value
       }
     }
   }
 }
 ```
 
-## Track Uncle Block Rewards
+## Fee credits per transaction
 
-Monitor rewards for mining uncle blocks:
-Try the API [here](https://ide.bitquery.io/Track-Uncle-Block-Rewards-bsc).
-
-```graphql
-subscription {
-  EVM(network: bsc) {
-    TransactionBalances(
-      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 1 } } }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Track Transaction Fee Rewards
-
-Monitor transaction fee rewards received by miners:
-Try the API [here](https://ide.bitquery.io/Track-Transaction-Fee-Rewards-bsc).
+The per-transaction view is reason code 5 on the fee holder. The [BSC MEV balance tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-mev-balance-tracker) streams these with the tip computed per row and ranks the largest. Saved stream [here](https://ide.bitquery.io/Track-Transaction-Fee-Rewards-bsc).
 
 ```graphql
 subscription {
@@ -123,100 +134,54 @@ subscription {
       where: { TokenBalance: { BalanceChangeReasonCode: { eq: 5 } } }
     ) {
       Block {
-        Time
         Number
+        Time
       }
       TokenBalance {
-        Currency {
-          Symbol
-        }
+        Address
         PreBalance
         PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
       }
       Transaction {
         Hash
+        From
       }
     }
   }
 }
 ```
 
-## Filter by Miner Address
+## Why the mining codes return nothing
 
-Track balance changes for a specific miner address:
-Try the API [here](https://ide.bitquery.io/Filter-by-Miner-Address-bsc).
-
-```graphql
-subscription {
-  EVM(network: bsc) {
-    TransactionBalances(
-      where: {
-        TokenBalance: {
-          Address: { is: "0xMinerAddressHere" }
-          BalanceChangeReasonCode: { in: [1, 2, 5] }
-        }
-      }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Historical Miner Balance Data
-
-Query historical miner balance data for analysis:
-Try the API [here](https://ide.bitquery.io/Historical-Miner-Balance-Data-bsc).
+Codes 1 and 2 exist in the schema because the same cube serves chains with a proof-of-work past. On BNB Chain the count is zero in any window. Saved query [here](https://ide.bitquery.io/Track-Uncle-Block-Rewards-bsc).
 
 ```graphql
 {
-  EVM(dataset: realtime, network: bsc) {
+  EVM(network: bsc) {
     TransactionBalances(
       where: {
-        TokenBalance: {
-          Address: { is: "0xMinerAddressHere" }
-          BalanceChangeReasonCode: { in: [1, 2, 5] }
-        }
+        TokenBalance: { BalanceChangeReasonCode: { in: [1, 2] } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
-      limit: { count: 1000 }
     ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
+      count
     }
   }
 }
 ```
+
+<FAQ
+  items={[
+    { q: "Does BNB Chain have mining rewards?", a: "No. BNB Chain has used validators under the Parlia consensus since launch. Reason codes 1 and 2 never appear in its balance data; block producers earn transaction fees, visible as code 5 credits and as per-block deposits into the ValidatorSet contract." },
+    { q: "How do I get a validator's earnings per block?", a: "Query TransactionBalances rows on 0x0000000000000000000000000000000000001000 with Transaction.Value above zero and limitBy on the transaction hash. Transaction.From is the validator and Value is the block's fee income." },
+    { q: "How far back does this data go?", a: "The cube holds the recent realtime window and has no archive dataset. Stream the deposits and store them to keep a longer record." },
+    { q: "Where do I see validator withdrawals and staking?", a: "The BSC validator balance tracker covers the staking side. This page is about the fee income that a block producer collects." },
+  ]}
+/>
+
+## Related pages
+
+- [BSC MEV balance tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-mev-balance-tracker)
+- [BSC validator balance tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-validator-balance-tracker)
+- [BSC transaction balance tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-transaction-balance-tracker)
+- [Balance change reason codes](/docs/blockchain/BSC/transaction-balance-tracker/#balance-change-reason-codes)
