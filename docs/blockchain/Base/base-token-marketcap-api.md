@@ -1,122 +1,62 @@
 ---
 sidebar_position: 10
-title: "Base Token Market Cap API"
-description: "Base Token Market Cap API: stream Base market cap, FDV, supply, and price using Bitquery Trading GraphQL APIs. Includes filters and field selection tips."
----
-# Base Token Market Cap API
-
-Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens traded on **Base**. Filter Base assets with token/currency **`Id`** values such as **`base:`** plus a **lowercase** contract address.
-
-For schema details and field meanings, see the **[Tokens cube](/docs/trading/crypto-price-api/tokens)** and **[Supply fields](/docs/trading/crypto-price-api/supply-fields)**.
-
-:::note Trading API and EVM addresses
-On **Base** (EVM), the **Trading** API expects **lowercase** hex in **`Id`** values (e.g. `base:0x1f1c…`, not mixed-case checksum addresses).
-:::
-
-## Related APIs
-
-- **[Ethereum Token Market Cap API](/docs/blockchain/Ethereum/token-supply/ethereum-token-marketcap-api)** — same **`Trading.Tokens`** patterns on Ethereum (`eth:` ids)
-- **[BSC Token Market Cap API](/docs/blockchain/BSC/bsc-token-marketcap-api)** — same patterns with **`bsc:`** ids
-- **[Polygon (Matic) Token Market Cap API](/docs/blockchain/Matic/matic-token-marketcap-api)** — same patterns with **`matic:`** ids
-- **[Arbitrum Token Market Cap API](/docs/blockchain/Arbitrum/arbitrum-token-marketcap-api)** — same patterns with **`arbitrum:`** ids
-- **[Solana Token Market Cap API](/docs/blockchain/Solana/solana-token-marketcap-api)** — same patterns with **`solana:`** ids
-- **[Crypto Price API — Tokens](/docs/trading/crypto-price-api/tokens)** — full `Tokens` cube reference
-
+title: "Base Token Market Cap API: Market Cap, FDV and Supply for Tokens on Base"
+sidebar_label: "Token Market Cap API"
+description: "Market cap, FDV, supply and price for Base tokens with Bitquery GraphQL: AERO or cbBTC now, a watchlist, hourly history, a live stream and a threshold alert."
+keywords:
+  - Base token market cap API
+  - Base FDV API
+  - AERO market cap
+  - cbBTC market cap API
+  - Base token supply GraphQL
 ---
 
-## How do I stream live Base token market cap, price, and volume?
+import FAQ from "@site/src/components/FAQ";
 
-Subscribe to **`Tokens`** where **currency id** includes **`base`**, with **interval duration** greater than **1** (second). You get **token fields**, **block time**, **supply** (**MarketCap**, **FullyDilutedValuationUsd**), **price** (OHLC and mean), and **volume**.
+# Base Token Market Cap API: Market Cap, FDV and Supply for Tokens on Base
 
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/base-token-marketcap-stream).
+Base tokens trade against ETH and USDC on Aerodrome, Uniswap and the launchpads, and the `Tokens` cube of the Trading API turns those trades into candles that carry price, USD volume, circulating and total supply, market cap and fully diluted valuation, refreshed every block. Address a token by id, `bid:base:` plus its lowercase contract, and the chain by `Token.Network: "Base"`. The cube keeps about a month of candles; the [Base transaction balance tracker](/docs/blockchain/Base/transaction-balance-tracker/base-transaction-balance-tracker) gives total supply at any recent transaction if supply alone is enough. Every example runs in the [IDE](https://ide.bitquery.io) on a free account; the worked tokens are AERO, `0x940181a94a35a4569e4529a3cdfb74e38fd98631`, and cbBTC, `0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf`.
+
+## Market cap of one token now
+
+Exact id, one candle size, a short window, newest row first. The window matters: without it the query scans the whole cube and times out. Saved query [here](https://ide.bitquery.io/specific-base-token-latest-marketcap).
 
 ```graphql
-subscription MyQuery {
-  Trading {
-    Tokens(
-      where: {Currency: {Id: {includes: "base"}}, Interval: {Time: {Duration: {gt: 1}}}}
-    ) {
-      Token {
-        Name
-        Id
-        Address
-        Symbol
-      }
-      Block {
-        Time
-      }
-      Supply {
-        TotalSupply
-        FullyDilutedValuationUsd
-        MarketCap
-      }
-      Price {
-        Average {
-          Mean
-        }
-        Ohlc {
-          Open
-          Low
-          High
-          Close
-        }
-      }
-      Volume {
-        Base
-        BaseAttributedToUsd
-        Quote
-        Usd
-      }
-    }
-  }
-}
-```
-
----
-
-## How do I get the latest market cap for a specific token on Base?
-
-Use **`limit: { count: 1 }`**, **`orderBy: { descending: Block_Time }`**, and filter **`Token.Id`** with **`includesCaseInsensitive`** (e.g. **`base:`** + lowercase contract).
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/specific-base-token-latest-marketcap).
-
-```graphql
-query {
+{
   Trading {
     Tokens(
       limit: { count: 1 }
       orderBy: { descending: Block_Time }
-      where: {Token: {Id: {includesCaseInsensitive: "base:0x1f1c695f6b4a3f8b05f2492cef9474afb6d6ad69"}}, Interval: {Time: {Duration: {gt: 1}}}}
-    ) {
-      Token {
-        Name
-        Id
-        Address
-        Symbol
+      where: {
+        Token: { Id: { is: "bid:base:0x940181a94a35a4569e4529a3cdfb74e38fd98631" } }
+        Interval: { Time: { Duration: { eq: 60 } } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
       }
+    ) {
       Block {
         Time
       }
-      Supply {
-        TotalSupply
-        FullyDilutedValuationUsd
-        MarketCap
+      Token {
+        Name
+        Symbol
+        Address
+        Network
       }
       Price {
+        Ohlc {
+          Close
+        }
         Average {
           Mean
         }
-        Ohlc {
-          Open
-          Low
-          High
-          Close
-        }
+      }
+      Supply {
+        CirculatingSupply
+        TotalSupply
+        MarketCap
+        FullyDilutedValuationUsd
       }
       Volume {
-        Base
-        BaseAttributedToUsd
-        Quote
         Usd
       }
     }
@@ -124,135 +64,166 @@ query {
 }
 ```
 
-Replace the `includesCaseInsensitive` value with your token’s **`base:<contract_address>`** id (lowercase hex).
+For AERO the market cap and the FDV differ by about half, because only part of the supply is in circulation; for cbBTC they are equal, since every minted coin circulates.
 
----
+## A watchlist in one query
 
-## How do I stream Base tokens with market cap above $1 million?
-
-Subscribe when **`Token.Id`** matches **Base** (**`base`**) and **`Supply.MarketCap`** **>** **1,000,000** (USD).
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/realtime-stream-base-tokens-with-marketcap-above-1-million).
-
-```graphql
-subscription {
-  Trading {
-    Tokens(
-      where: {Token: {Id: {includesCaseInsensitive: "base"}}, Interval: {Time: {Duration: {gt: 1}}}, Supply: {MarketCap: {gt: 1000000}}}
-    ) {
-      Currency {
-        Name
-        Id
-        Symbol
-      }
-      Supply {
-        TotalSupply
-        FullyDilutedValuationUsd
-        MarketCap
-      }
-    }
-  }
-}
-```
-
-:::tip Threshold and interval
-Tune **`Supply.MarketCap`** and **`Interval.Time.Duration`** for your alerts or dashboards. See **[Tokens cube](/docs/trading/crypto-price-api/tokens)** for more filters.
-:::
-
----
-
-## How do I get top Base tokens by market cap?
-
-This query ranks **Base** tokens by **`Supply.MarketCap`**. It uses roughly the **last 24 hours** (`since_relative: { hours_ago: 24 }`), **1-second** intervals, at least **$1,000** **USD volume**, **`limitBy`** one row per **`Token_Id`**, and up to **50** tokens.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Tokens-by-Market-Cap-on-Base).
+List the ids and keep the newest row per token with `limitBy`. The example is AERO, cbBTC and WETH on Base.
 
 ```graphql
 {
   Trading {
     Tokens(
-      limit: { count: 50 }
-      limitBy: { count: 1, by: Token_Id }
-      orderBy: { descending: Supply_MarketCap }
+      limitBy: { by: Token_Id, count: 1 }
+      orderBy: { descending: Block_Time }
       where: {
-        Block: { Time: { since_relative: { hours_ago: 24 } } }
-        Interval: { Time: { Duration: { eq: 1 } } }
-        Volume: { Usd: { gt: 1000 } }
-        Token: { Network: { is: "Base" } }
+        Token: {
+          Id: {
+            in: [
+              "bid:base:0x940181a94a35a4569e4529a3cdfb74e38fd98631"
+              "bid:base:0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf"
+              "bid:base:0x4200000000000000000000000000000000000006"
+            ]
+          }
+        }
+        Interval: { Time: { Duration: { eq: 60 } } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
       }
     ) {
-      Currency {
-        Id
-        Name
+      Block {
+        Time
+      }
+      Token {
         Symbol
+        Id
       }
       Price {
-        Average {
-          Mean(maximum: Block_Time)
+        Ohlc {
+          Close
         }
-      }
-      Volume {
-        Base(maximum: Block_Time)
-        Quote(maximum: Block_Time)
-        Usd(maximum: Block_Time)
-      }
-      Token {
-        Network
-        Symbol
-        Address
-      }
-      Supply {
-        MarketCap(maximum: Block_Time)
-        FullyDilutedValuationUsd(maximum: Block_Time)
-        TotalSupply(maximum: Block_Time)
-      }
-    }
-  }
-}
-```
-
----
-
-## How do I get top Base tokens by market cap change in 1 hour?
-
-Uses a **1-hour** OHLC interval (`Duration: { eq: 3600 }`) and orders by **`change_mcap`**: **(close − open) × total supply**. **`Token.Network`** is **Base**.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/top-base-tokens-by-Market-Cap-Change-1h).
-
-```graphql
-{
-  Trading {
-    Tokens(
-      limit: { count: 50 }
-      orderBy: { descendingByField: "change_mcap" }
-      where: {
-        Interval: { Time: { Duration: { eq: 3600 } } }
-        Token: { Network: { is: "Base" } }
-      }
-    ) {
-      Currency {
-        Id
-        Name
-        Symbol
-      }
-      Token {
-        Network
-        Symbol
-        Address
       }
       Supply {
         MarketCap
         FullyDilutedValuationUsd
         CirculatingSupply
         TotalSupply
-        MaxSupply
       }
-      change_mcap: calculate(
-        expression: "($Price_Ohlc_Close-$Price_Ohlc_Open) * Supply_TotalSupply"
-      )
+      Volume {
+        Usd
+      }
+    }
+  }
+}
+```
+
+## A day of hourly market cap
+
+One-hour candles hold the market cap at each close with the hour's open, close and USD volume; the difference between the first and last row is the 24-hour change. Saved query [here](https://ide.bitquery.io/top-base-tokens-by-Market-Cap-Change-1h).
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 24 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Token: { Id: { is: "bid:base:0x940181a94a35a4569e4529a3cdfb74e38fd98631" } }
+        Interval: { Time: { Duration: { eq: 3600 } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+    ) {
+      Interval {
+        Time {
+          Start
+        }
+      }
       Price {
         Ohlc {
           Open
+          Close
+        }
+      }
+      Supply {
+        MarketCap
+      }
+      Volume {
+        Usd
+      }
+    }
+  }
+}
+```
+
+## Stream every Base token's market cap
+
+Filter on the chain prefix in `Currency.Id` and subscribe; each message is a candle closing for some Base token. `Duration` above one second leaves out the tick-level candles. Saved stream [here](https://ide.bitquery.io/base-token-marketcap-stream).
+
+```graphql
+subscription {
+  Trading {
+    Tokens(
+      where: {
+        Currency: { Id: { includes: "base" } }
+        Interval: { Time: { Duration: { gt: 1 } } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Token {
+        Symbol
+        Id
+      }
+      Interval {
+        Time {
+          Duration
+        }
+      }
+      Price {
+        Ohlc {
+          Close
+        }
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+        TotalSupply
+      }
+      Volume {
+        Usd
+      }
+    }
+  }
+}
+```
+
+## Alert on tokens above a market cap
+
+A `Supply.MarketCap` bound on the stream turns it into a screener for launches that crossed a size. Saved stream [here](https://ide.bitquery.io/realtime-stream-base-tokens-with-marketcap-above-1-million).
+
+```graphql
+subscription {
+  Trading {
+    Tokens(
+      where: {
+        Token: { Network: { is: "Base" } }
+        Interval: { Time: { Duration: { gt: 1 } } }
+        Supply: { MarketCap: { gt: 1000000 } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Token {
+        Symbol
+        Id
+      }
+      Supply {
+        MarketCap
+        TotalSupply
+      }
+      Price {
+        Ohlc {
           Close
         }
       }
@@ -260,3 +231,25 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/top-base-to
   }
 }
 ```
+
+## Why rankings need bounds
+
+Market cap here is on-chain supply times an on-chain price, and Base has thousands of launchpad tokens with enormous supplies and a few dollars of trades in one thin pool. A raw "top tokens by market cap" over the cube is led by them. Rank inside a list you trust, as the watchlist query does, or bound the ranking with `Volume: { Usd: { gt: ... } }` and `Supply: { MarketCap: { lt: ... } }`; the saved [top tokens by market cap](https://ide.bitquery.io/Top-Tokens-by-Market-Cap-on-Base) query shows the bounded form.
+
+<FAQ
+  items={[
+    { q: "How do I get the market cap of a token on Base?", a: "Query Trading.Tokens with Token.Id set to bid:base: plus the lowercase contract, a candle duration, a short time window and limit 1 ordered by Block_Time descending. Supply.MarketCap and FullyDilutedValuationUsd are on the row." },
+    { q: "Why do market cap and FDV differ?", a: "Market cap uses circulating supply and FDV uses total supply, both times the same trade-weighted price. For tokens with locked or unvested supply, such as AERO, FDV is much larger." },
+    { q: "Why does a query on the token id time out?", a: "A partial or case-insensitive match has to scan every token. Use the exact bid:base: id with is, one candle duration and a time window." },
+    { q: "How far back does the Tokens cube go on Base?", a: "About a month of candles. For older supply values use the transaction balance tracker, which records total supply on every token row." },
+    { q: "Can I get the same data for other chains?", a: "Yes. The id prefix changes: bid:eth:, bid:bsc:, bid:arbitrum:, bid:matic:, bid:solana:. Each chain has its own market cap page with that chain's examples." },
+  ]}
+/>
+
+## Related pages
+
+- [BSC token market cap API](/docs/blockchain/BSC/bsc-token-marketcap-api)
+- [Ethereum token market cap API](/docs/blockchain/Ethereum/token-supply/ethereum-token-marketcap-api)
+- [Tokens cube](/docs/trading/crypto-price-api/tokens)
+- [Supply fields](/docs/trading/crypto-price-api/supply-fields)
+- [Base transaction balance tracker](/docs/blockchain/Base/transaction-balance-tracker/base-transaction-balance-tracker)
