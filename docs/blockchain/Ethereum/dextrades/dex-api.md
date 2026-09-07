@@ -18,7 +18,7 @@ Two cubes hold Ethereum's DEX swaps. `DEXTrades` has one row per swap with both 
 
 ## Which DEXs trade on Ethereum, and how much
 
-Group by protocol over the last day. `ProtocolFamily` is the brand and `ProtocolName` the version; Uniswap v3 and v4 lead by trades, with v2 pairs, Curve, Balancer, 1inch and the rest behind them. Saved query [here](https://ide.bitquery.io/dex-markets).
+Group by protocol over the last day. `ProtocolFamily` is the brand and `ProtocolName` the version; Uniswap v3, v4 and v2 lead by trades, with PancakeSwap v3, Balancer, Curve, Fluid and the rest behind them. Saved query [here](https://ide.bitquery.io/dex-markets).
 
 ```graphql
 {
@@ -210,7 +210,7 @@ Raw rows from `DEXTrades`, newest first; change `query` to `subscription` and dr
 <FAQ
   items={[
     { q: "How do I list every DEX on Ethereum with its volume?", a: "Group DEXTradeByTokens by Trade.Dex.ProtocolFamily and ProtocolName over a window with count and a USD sum. Cap the USD of a single trade so thin-pool outliers do not swamp the totals." },
-    { q: "Which DEXs are indexed on Ethereum?", a: "Uniswap v2, v3 and v4, Curve, Balancer, 1inch, SushiSwap, PancakeSwap and many smaller ones. The first query on this page lists whatever traded in the window, so it is always current." },
+    { q: "Which DEXs are indexed on Ethereum?", a: "Uniswap v2, v3 and v4, PancakeSwap v3, Balancer, Curve, Fluid and a long tail of smaller venues. The first query on this page lists whatever traded in the window, so it is always current." },
     { q: "Why do some USD sums look impossible?", a: "A swap in a pool with almost no liquidity can be priced at a nonsense USD value. Filtering Trade.Side.AmountInUSD below a cap removes those rows; the queries here use ten million dollars per trade." },
     { q: "How do I get Uniswap trades with the trader's address?", a: "Use Transaction.From on the chain cubes, which is the account that sent the swap, or the Trader field of the Trading cube's Trades." },
     { q: "How do I build OHLC from Ethereum DEX trades?", a: "Use DEXTradeByTokens with Block.Time intervals and price aggregates, or the Crypto Price API, which serves USD candles directly for the last month." },
