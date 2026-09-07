@@ -1,5 +1,6 @@
 ---
 title: "debug_traceCall with Bitquery: Trace Internal Calls Without a Node"
+sidebar_label: "debug_traceCall"
 description: "Read decoded internal calls of executed Ethereum transactions with the Bitquery Calls cube instead of tracing them yourself, with limits stated plainly."
 keywords:
   - debug_traceCall
