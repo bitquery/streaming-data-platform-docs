@@ -1,6 +1,7 @@
 ---
 sidebar_position: 6
 title: "Private Queries in the Bitquery IDE: Who Can See a Saved Query"
+sidebar_label: "Private Queries"
 description: "Save a query privately in the Bitquery IDE so only your account can open it, what changes for sharing and search, and how it still runs from code."
 keywords:
   - Bitquery IDE private query
