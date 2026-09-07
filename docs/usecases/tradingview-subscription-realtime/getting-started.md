@@ -91,7 +91,7 @@ You are responsible for **fetching** that data; Bitquery is the backend in this 
 
 ### Bitquery: one API, two transports
 
-- **Historical:** `POST` a GraphQL query to Bitquery’s HTTP endpoint (this tutorial uses patterns aligned with the [Crypto Price API](/docs/trading/crypto-price-api/introduction/)).
+- **Historical:** `POST` a GraphQL query to Bitquery’s HTTP endpoint (this tutorial uses patterns aligned with the [Crypto Price API](/docs/trading/crypto-price-api/)).
 - **Real-time:** open a **WebSocket** connection and run a GraphQL **subscription**. Bitquery pushes new OHLC as it is finalized (for example per interval).
 
 Same schema family conceptually; different mechanics than REST polling.
@@ -182,7 +182,7 @@ Bitquery’s **Crypto Price** and related trading APIs cover many chains; the ex
 - **Solana:** Raydium, Orca, Pumpfun, PumpSwap, and other Solana DEXs where the API exposes them.
 - **Other:** Tron and additional networks as listed in the current schema.
 
-Always confirm your **network name** and **token address** format in the [IDE schema explorer](https://ide.bitquery.io) or main [Crypto Price API](/docs/trading/crypto-price-api/introduction/) documentation before shipping.
+Always confirm your **network name** and **token address** format in the [IDE schema explorer](https://ide.bitquery.io) or main [Crypto Price API](/docs/trading/crypto-price-api/) documentation before shipping.
 
 ---
 
@@ -212,7 +212,7 @@ Test these in [Bitquery IDE](https://ide.bitquery.io) **before** you paste them 
 ### Data quality notes
 
 - **Bar continuity** — optional normalization so candles meet visually ([Bar continuity](/docs/usecases/tradingview-subscription-realtime/bar-continuity/)).
-- **DEX aggregation** — Bitquery’s price products combine liquidity across venues; see the [Crypto Price API](/docs/trading/crypto-price-api/introduction/) docs for methodology and limits.
+- **DEX aggregation** — Bitquery’s price products combine liquidity across venues; see the [Crypto Price API](/docs/trading/crypto-price-api/) docs for methodology and limits.
 
 ---
 

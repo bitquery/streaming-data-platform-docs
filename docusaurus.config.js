@@ -830,7 +830,7 @@ const config = {
           //crypto price api redirects
           {
             from: "/docs/trading/price-index/introduction",
-            to: "/docs/trading/crypto-price-api/introduction",
+            to: "/docs/trading/crypto-price-api",
           },
           {
             from: "/docs/trading/price-index/in-depth",
@@ -1361,7 +1361,7 @@ const config = {
             items: [
               {
                 label: "Token prices & OHLCV",
-                to: "/docs/trading/crypto-price-api/introduction/",
+                to: "/docs/trading/crypto-price-api/",
               },
               {
                 label: "DEX trades",
@@ -1455,7 +1455,7 @@ const config = {
             items: [
               {
                 label: "Traders & desks →",
-                to: "/docs/trading/crypto-price-api/introduction/",
+                to: "/docs/trading/crypto-price-api/",
               },
               {
                 label: "Analysts & quants →",

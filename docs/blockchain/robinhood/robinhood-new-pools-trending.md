@@ -36,7 +36,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 - [Robinhood Trades API](/docs/blockchain/robinhood/robinhood-trades) — prices, OHLCV, market cap, top traders
 - [Robinhood Liquidity & Slippage API](/docs/blockchain/robinhood/robinhood-liquidity) — pool reserves, TVL and price impact
 - [Robinhood Meme Coin Launches API](/docs/blockchain/robinhood/robinhood-meme-coin-launches) — new tokens by launchpad
-- [Crypto Price API](/docs/trading/crypto-price-api/introduction/) — the `Trading` cubes in full
+- [Crypto Price API](/docs/trading/crypto-price-api/) — the `Trading` cubes in full
 - [WebSocket subscriptions](/docs/subscriptions/websockets/)
 :::
 

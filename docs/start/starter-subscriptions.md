@@ -40,7 +40,7 @@ Every subscription below is saved in the [Bitquery IDE](https://ide.bitquery.io)
 
 #### Latest Bitcoin Price
 
-You can stream Bitcoin price at 1-second interval using the [Crypto Price APIs](/docs/trading/crypto-price-api/introduction/).
+You can stream Bitcoin price at 1-second interval using the [Crypto Price APIs](/docs/trading/crypto-price-api/).
 
 ▶️ [Latest Bitcoin Price](https://ide.bitquery.io/Stream-Bitcoin-Price-Across-Chains)
 

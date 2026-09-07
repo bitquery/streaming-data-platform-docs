@@ -807,7 +807,7 @@ You can identify Flap.sh tokens by checking the last 4 characters of their contr
 - [DEX Trades API](/docs/schema/evm/dextrades) – DEX trading data documentation
 - [Events API](/docs/schema/evm/events) – Smart contract events documentation
 - [Transfers API](/docs/schema/evm/transfers) – Token transfer tracking
-- [Trading APIs](/docs/trading/crypto-price-api/introduction) – Price and OHLCV data
+- [Trading APIs](/docs/trading/crypto-price-api/) – Price and OHLCV data
 - [GraphQL Subscriptions](/docs/subscriptions/subscription) – Real-time data streaming
 
 ## Support

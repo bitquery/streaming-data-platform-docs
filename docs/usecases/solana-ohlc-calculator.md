@@ -4,7 +4,7 @@ description: "Calculate Solana OHLC candles from Bitquery DEX trades with JavaSc
 ---
 # Build OHLC Values using DEX Trades Data
 
-This script calculates **OHLC (Open, High, Low, Close)** data for a particular Token Pair Solana-based trades by leveraging percentile filtering thus removing anomaly or bot trades. It fetches trading data from the Bitquery API and processes it to compute the OHLC values for a specific trading pair. For pre-aggregated OHLC data, see our [Crypto Price API](/docs/trading/crypto-price-api/introduction/).
+This script calculates **OHLC (Open, High, Low, Close)** data for a particular Token Pair Solana-based trades by leveraging percentile filtering thus removing anomaly or bot trades. It fetches trading data from the Bitquery API and processes it to compute the OHLC values for a specific trading pair. For pre-aggregated OHLC data, see our [Crypto Price API](/docs/trading/crypto-price-api/).
 
 The sole motive of this tutorial is to guide you how an OHLC is calculated and Bot trades or anomaly trades are filtered out. We have shown one of the by using `quantile`, you can devise your own strategy to use different filters or logics to omit these anomaly trades.
 

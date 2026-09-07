@@ -129,7 +129,7 @@ Trade {
 
 ## How do I get OHLC in a DEXTradeByTokens query? {#how-do-i-get-ohlc-in-a-dextradebytokens-query}
 
-For OHLC, use the **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** (`Trading` → `Tokens` / `Pairs`) as the **main** source—pre-aggregated and simpler. **Use `DEXTradeByTokens` on this page when you need historical OHLC** or when you must derive candles from **raw DEX trades** for a specific token or pool.
+For OHLC, use the **[Crypto Price API](/docs/trading/crypto-price-api/)** (`Trading` → `Tokens` / `Pairs`) as the **main** source—pre-aggregated and simpler. **Use `DEXTradeByTokens` on this page when you need historical OHLC** or when you must derive candles from **raw DEX trades** for a specific token or pool.
 
 Aggregate trades into candles with **`Block { Time(interval: { count, in: minutes | hours | days }) }`** on **`DEXTradeByTokens`**, then derive **open / high / low / close** from **`PriceInUSD`** (or your chain’s price field)—for example **`minimum`** / **`maximum`** of **`Trade_PriceInUSD`** and **`minimum`/`maximum` of `Block_Number`** for open and close. Filter by **`Trade.Currency`** (token address or mint) and optionally **`Trade.Dex`**. The same pattern works on **`EVM`** and **`Solana`**; see also [Solana OHLC API](/docs/blockchain/Solana/solana-dextrades/#solana-ohlc-api).
 

@@ -72,7 +72,7 @@ subscription LatestTrades {
 
 ## Latest Price of xStocks using Crypto Price api
 
-You can get latest price of xStocks tokens prices using our [Crypto price api](/docs/trading/crypto-price-api/introduction/).
+You can get latest price of xStocks tokens prices using our [Crypto price api](/docs/trading/crypto-price-api/).
 
 You can run the query [here](https://ide.bitquery.io/xStocks-prices)
 

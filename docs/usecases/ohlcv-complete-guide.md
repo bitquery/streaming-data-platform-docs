@@ -8,7 +8,7 @@ In this guide, we will see how to get OHLCV (Open, High, Low, Close, Volume) can
 
 ## Recommended: pre-aggregated OHLC via the Crypto Price API (real-time + last ~30 days)
 
-This guide builds candles **from raw chain-level trades** (`DEXTradeByTokens`) — the right tool for **history older than ~30 days** or **custom intervals**. For anything real-time or within the last ~30 days, use the [**Crypto Price API**](/docs/trading/crypto-price-api/introduction) instead: **true pre-aggregated OHLC down to 1-second intervals** — including the real open price that in-query aggregation cannot produce — with **USD values on every candle and MEV/outlier trades already filtered**, so none of the manual filtering below is needed.
+This guide builds candles **from raw chain-level trades** (`DEXTradeByTokens`) — the right tool for **history older than ~30 days** or **custom intervals**. For anything real-time or within the last ~30 days, use the [**Crypto Price API**](/docs/trading/crypto-price-api/) instead: **true pre-aggregated OHLC down to 1-second intervals** — including the real open price that in-query aggregation cannot produce — with **USD values on every candle and MEV/outlier trades already filtered**, so none of the manual filtering below is needed.
 
 The example returns 1-minute OHLC for a token from its top-volume market; swap the token address and network, and change `Duration` for other intervals. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Token-Price-Top-Market-Rank-1).
 

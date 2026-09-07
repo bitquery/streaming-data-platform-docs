@@ -14,9 +14,9 @@ keywords:
 ---
 # Crypto MarketCap API and Market Data
 
-The **Crypto MarketCap API** is part of the Crypto Price APIs: you can **query** USD **market capitalization** and related **supply** fields, or **stream** them in **real time** for many chains using GraphQL **subscriptions** or the **`trading.prices`** Kafka topic described in the [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction).
+The **Crypto MarketCap API** is part of the Crypto Price APIs: you can **query** USD **market capitalization** and related **supply** fields, or **stream** them in **real time** for many chains using GraphQL **subscriptions** or the **`trading.prices`** Kafka topic described in the [Crypto Price API introduction](/docs/trading/crypto-price-api/).
 
-Those metrics are returned on the **`Supply`** object on **Currencies**, **Tokens**, and **Pairs** rows (`MarketCap`, `CirculatingSupply`, `TotalSupply`, and others). Field semantics are documented in the [Supply fields reference](/docs/trading/crypto-price-api/supply-fields). For intervals, cubes, and streaming setup, use the [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction).
+Those metrics are returned on the **`Supply`** object on **Currencies**, **Tokens**, and **Pairs** rows (`MarketCap`, `CirculatingSupply`, `TotalSupply`, and others). Field semantics are documented in the [Supply fields reference](/docs/trading/crypto-price-api/supply-fields). For intervals, cubes, and streaming setup, use the [Crypto Price API introduction](/docs/trading/crypto-price-api/).
 
 ## How do I get the USD market cap of a single token? {#how-do-i-get-usd-market-cap-of-a-single-token}
 
@@ -224,7 +224,7 @@ This section aggregates commonly used queries for market data across chains, pai
 
 Subscribe to **`Trading.Tokens`** with a **network** and **interval** to stream OHLC, volume, and **`Supply`** (including **MarketCap**) for many tokens on that chain in one feed.
 
-The following stream provide 60 second aggregated data. For information on all available time intervals, see the supported intervals documentation [here](/docs/trading/crypto-price-api/introduction/#supported-time-intervals).
+The following stream provide 60 second aggregated data. For information on all available time intervals, see the supported intervals documentation [here](/docs/trading/crypto-price-api/#supported-time-intervals).
 
 [Run Query](https://ide.bitquery.io/Aggregated-Price-of-all-tokens-in-real-time-on-one-chain_1)
 
@@ -1394,5 +1394,5 @@ Use these pages when you need **protocol-specific** filters, **bonding curves**,
 ### Ethereum & cross‑chain
 
 - [DEX API (Ethereum hub)](/docs/blockchain/Ethereum/dextrades/dex-api) — Uniswap-style DEX patterns on Ethereum
-- [Crypto Price API introduction](/docs/trading/crypto-price-api/introduction) — Tokens, Pairs, Currencies cubes and Kafka `trading.prices`
+- [Crypto Price API introduction](/docs/trading/crypto-price-api/) — Tokens, Pairs, Currencies cubes and Kafka `trading.prices`
 - [OHLC / K-line API](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api) — candlesticks and intervals for charting

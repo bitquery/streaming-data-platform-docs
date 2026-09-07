@@ -1248,7 +1248,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-pay
 
 - **[Trades API](/docs/trading/crypto-trades-api/trades-api)** — stream trades by token, pair, chain, DEX, or USD threshold (not wallet-filtered)
 - **[Crypto MarketCap API](/docs/trading/crypto-price-api/crypto-marketcap-api)** — USD market cap, FDV, and token supply data
-- **[Crypto Price API](/docs/trading/crypto-price-api/introduction)** — Tokens, Pairs, Currencies cubes and Kafka `trading.prices`
+- **[Crypto Price API](/docs/trading/crypto-price-api/)** — Tokens, Pairs, Currencies cubes and Kafka `trading.prices`
 - **[OHLC / K-line API](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api)** — candlestick and interval data for charting
 - **[Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)** — chain-level `DEXTrades` and `DEXTradeByTokens` with aggregation (top traders, PnL, first buyers)
 - **[Solana Trader API](/docs/blockchain/Solana/solana-trader-API)** — Solana-specific wallet queries with `DEXTradeByTokens` aggregation

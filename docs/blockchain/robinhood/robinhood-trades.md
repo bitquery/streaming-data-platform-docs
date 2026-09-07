@@ -46,7 +46,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 - [Pools.trade API on Robinhood](/docs/blockchain/robinhood/pools-trade-api)
 - [Trading data overview](/docs/trading/trading-data-overview/)
 - [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api/)
-- [Crypto Price API](/docs/trading/crypto-price-api/introduction/)
+- [Crypto Price API](/docs/trading/crypto-price-api/)
 :::
 
 ---

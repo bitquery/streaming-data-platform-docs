@@ -65,7 +65,7 @@ avg_cost = cost / qty if qty else 0.0
 
 ## 3. Add unrealized PnL
 
-Fetch the token's **current price** from the [Crypto Price API](/docs/trading/crypto-price-api/introduction/), then:
+Fetch the token's **current price** from the [Crypto Price API](/docs/trading/crypto-price-api/), then:
 
 ```text
 unrealized = open_quantity × (current_price − average_cost)
@@ -89,5 +89,5 @@ total_pnl  = realized + unrealized
 ## Next steps
 
 - [Trades API](/docs/trading/crypto-trades-api/trades-api/)
-- [Crypto Price API](/docs/trading/crypto-price-api/introduction/)
+- [Crypto Price API](/docs/trading/crypto-price-api/)
 - [Data Coverage & Retention](/docs/graphql/data-coverage-retention/)
