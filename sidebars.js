@@ -270,10 +270,8 @@ const sidebars = {
           type: "category",
           label: "Kafka Streams",
           link: {
-            type: "generated-index",
-            title: "Data Streams Overview",
-            description:
-              "Real-time blockchain data via Kafka, WebSocket, and gRPC streams.",
+            type: "doc",
+            id: "streams/kafka-streams",
           },
           items: [
             "streams/kafka-streaming-concepts",
