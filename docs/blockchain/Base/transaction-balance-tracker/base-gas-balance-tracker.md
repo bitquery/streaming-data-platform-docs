@@ -1,6 +1,7 @@
 ---
 sidebar_position: 6
 title: "Base Gas Balance Tracker: Fees Paid by Senders and Collected by Vaults"
+sidebar_label: "Base Gas Balance Tracker"
 description: "Track gas on Base from balance changes with Bitquery GraphQL: the three fee vaults, the largest fee credits, what one address paid, and a live fee stream."
 keywords:
   - Base gas balance tracker
@@ -51,7 +52,7 @@ So the gas a sender paid is read from its own code 0 row, and the fees the netwo
 
 ## Largest fee credits in the last ten minutes
 
-Each code 5 row is one transaction's contribution to one vault; `fee` is the balance after minus the balance before. Sort on it to find the transactions that paid most. Saved query [here](https://ide.bitquery.io/Latest-balance-and-gas-fee-paid-for-multiple-addresses-base).
+Each code 5 row is one transaction's contribution to one vault; `fee` is the balance after minus the balance before. Sort on it to find the transactions that paid most.
 
 ```graphql
 {
@@ -127,7 +128,7 @@ The sender's own code 0 row holds the balance before and after; subtracting the 
 
 ## Stream fee income live
 
-Every fee credit as it lands, with the sender that paid it. Saved stream [here](https://ide.bitquery.io/Monitor-balance-and-gas-fee-paid-for-an-address-using-stream-base).
+Every fee credit as it lands, with the sender that paid it.
 
 ```graphql
 subscription {
