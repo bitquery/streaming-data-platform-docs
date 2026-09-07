@@ -1,5 +1,5 @@
 ---
-title: "Building GraphQL Queries on Bitquery: From First Query to Aggregates"
+title: "Building GraphQL Queries on Bitquery: First Query to Aggregates"
 description: "From a first Bitquery GraphQL query to filters, datasets, metrics and the schema reference: what each guide covers and the order to read them in."
 slug: /category/building-queries
 sidebar_label: "Building Queries"
@@ -14,7 +14,7 @@ keywords:
 
 import FAQ from "@site/src/components/FAQ";
 
-# Building GraphQL Queries on Bitquery: From First Query to Aggregates
+# Building GraphQL Queries on Bitquery: First Query to Aggregates
 
 Every Bitquery query has the same shape: a root for the chain or the Trading family, a cube for the kind of fact, a `where` filter, an `orderBy`, a `limit`, and a selection of fields or metrics. Learn that shape once and it carries across every chain and cube. This section takes you from a first query to aggregates and history in four steps: query principles and filters, datasets that decide how far back you reach, metrics that turn rows into numbers, and the schema reference for field names. Everything runs in the [Bitquery IDE](https://ide.bitquery.io) on a free account.
 
