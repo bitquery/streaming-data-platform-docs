@@ -1,330 +1,100 @@
 ---
 sidebar_position: 5
-title: "Base Self-Destruct Balance Tracker"
-description: "Base Self-Destruct Balance Tracker: stream Base balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
+title: "Base Self-Destruct Balance Tracker: Why Base Shows None, and What to Watch"
+sidebar_label: "Base Self-Destruct Balance Tracker"
+description: "Self-destruct codes never fire on Base and live data shows no SELFDESTRUCT calls, because the opcode only deletes same-transaction contracts. Proof queries."
+keywords:
+  - Base self-destruct tracker
+  - selfdestruct on Base
+  - EIP-6780 Base
+  - balance change reason code 13
+  - Base contract destruction
 ---
-# Base Self-Destruct Balance Tracker
 
-The Base Self-Destruct Balance Tracker API provides real-time balance updates for contracts that self-destruct and addresses that receive funds from self-destructed contracts. This API helps you monitor contract destruction events, track ephemeral contracts (like MEV bots), and analyze security incidents.
+import FAQ from "@site/src/components/FAQ";
 
-## What is Self-Destruct?
+# Base Self-Destruct Balance Tracker: Why Base Shows None, and What to Watch
 
-The `selfdestruct` opcode allows a smart contract to permanently remove its bytecode from the blockchain and send its remaining ETH balance to a specified recipient address. Once a contract self-destructs, it can no longer execute code or receive transactions.
+The balance schema has three reason codes for `selfdestruct`: 13 for the contract whose balance empties, 12 for the address that receives it, and 14 for value sent to an account already destroyed in the same transaction. On Base none of them fire. Since the Cancun rules reached the OP Stack, `SELFDESTRUCT` only deletes a contract created in the same transaction; in every other case it just moves the balance, and Base's balance cube reports every native movement as reason code 0 or, for fees, code 5. On top of that, live Base data shows no `SELFDESTRUCT` calls at all in the `Calls` cube over a day. This page gives you the two queries that prove it, so an empty result is a fact rather than a bug, and the queries that catch the patterns people are usually looking for. Every example runs in the [IDE](https://ide.bitquery.io) on a free account.
 
-### Common Use Cases
+## Confirm it: the codes are empty
 
-- **MEV Builder Payments**: Ephemeral contracts created to pay MEV builders/block builders (e.g., `quasarbuilder.eth`) as part of the Proposer-Builder Separation (PBS) infrastructure, then immediately self-destructed
-- **Ephemeral MEV/Arbitrage Executors**: Contracts created and destroyed within the same transaction to execute atomic profit extraction
-- **Security Incidents**: Malicious actors destroying contracts
-- **Emergency Shutdowns**: Contract owners destroying contracts to reclaim funds or retire functionality
-- **Upgrade Patterns**: Destroying old contract versions during upgrades
-- **Paymasters/Relayers**: Short-lived helper contracts that clean up after sponsoring gas
-
-## Balance Change Reason Codes
-
-The API tracks self-destruct events using specific balance change reason codes:
-
-- **Code 12**: `BalanceIncreaseSelfdestruct` - Balance added to the recipient as indicated by a self-destructing account
-- **Code 13**: `BalanceDecreaseSelfdestruct` - Balance deducted from a contract due to self-destruct
-- **Code 14**: `BalanceDecreaseSelfdestructBurn` - ETH sent to an already self-destructed account within the same transaction
-
-## Track All Self-Destruct Event Balances
-
-Monitor all contract self-destruct event balances in real-time using this GraphQL subscription. [Run Stream](https://ide.bitquery.io/All-Self-Destruct-Event-Balances-Stream-base)
-
-You can also run this as a query by replacing the word `subscription` with `query`
-
-```graphql
-subscription {
-  EVM(network: base) {
-    TransactionBalances(
-      where: { TokenBalance: { BalanceChangeReasonCode: { in: [12, 13, 14] } } }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Track Contract Self-Destruct Balance Decrease
-
-Monitor contract balance decrease when contracts are self-destructing.
-[Run Query](https://ide.bitquery.io/Self-Destruct-Balance-Decrease-API-base)
+A count over the last day. Change the network to `bsc` and the same query returns a few hundred rows, which is the quickest way to see that the schema is shared and the behaviour is the chain's. Saved query [here](https://ide.bitquery.io/Aggregate-Self-Destruct-Statistics-base).
 
 ```graphql
 {
   EVM(network: base) {
     TransactionBalances(
-      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 13 } } }
-      limit: { count: 10 }
-      orderBy: { descending: Block_Time }
+      where: {
+        TokenBalance: { BalanceChangeReasonCode: { in: [12, 13, 14] } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
     ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-          SmartContract
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
+      count
     }
   }
 }
 ```
 
-## Track Recipients of Self-Destructed Fund Balances
+## Confirm it: no SELFDESTRUCT calls
 
-Monitor contract balance increase when contracts are self-destructing.
-[Run query](https://ide.bitquery.io/Self-Destruct-Balance-Increase-API-base)
+The `Calls` cube keeps the opcode of every internal call, so it would show a destruction even for a contract that held nothing. Saved query [here](https://ide.bitquery.io/Track-recent-ephemeral-contract-patterns-base).
 
 ```graphql
 {
   EVM(network: base) {
-    TransactionBalances(
-      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 12 } } }
-      limit: { count: 10 }
+    Calls(
+      where: {
+        Call: { Opcode: { Name: { is: "SELFDESTRUCT" } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+      limit: { count: 20 }
       orderBy: { descending: Block_Time }
     ) {
       Block {
         Time
-        Number
       }
-      TokenBalance {
-        Currency {
-          Symbol
-          SmartContract
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Track Self-Destruct Balance Changes for Specific Address
-
-Monitor self-destruct balance changes for a specific contract address using this GraphQL query:
-Try the API [here](https://ide.bitquery.io/Track-Self-Destruct-Balance-Changes-for-Specific-Address-base).
-
-```graphql
-subscription {
-  EVM(network: base) {
-    TransactionBalances(
-      where: {
-        TokenBalance: {
-          Address: { is: "YourContractAddress" }
-          BalanceChangeReasonCode: { in: [12, 13, 14] }
-        }
-      }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-          SmartContract
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Track Large Self-Destruct Transaction Balances
-
-Monitor significant self-destruct balance changes (e.g., > $1000 USD) using this subscription:
-Try the API [here](https://ide.bitquery.io/Track-Large-Self-Destruct-Transaction-Balances-base).
-
-```graphql
-subscription {
-  EVM(network: base) {
-    TransactionBalances(
-      where: {
-        TokenBalance: {
-          BalanceChangeReasonCode: { in: [12, 13] }
-          PostBalanceInUSD: { gt: "1000" }
-        }
-      }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-          SmartContract
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Track Ephemeral MEV Contract Balance Changes
-
-Monitor balance changes for short-lived contracts that are created and destroyed in the same transaction (typical pattern for MEV bots) using this subscription:
-Try the API [here](https://ide.bitquery.io/Track-Ephemeral-MEV-Contract-Balance-Changes-base).
-
-```graphql
-subscription {
-  EVM(network: base) {
-    TransactionBalances(
-      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 13 } } }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-          SmartContract
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
+      Call {
+        From
+        To
+        Value
       }
       Transaction {
         Hash
         From
-        To
       }
     }
   }
 }
 ```
 
-## Aggregate Self-Destruct Statistics
+Leave this one running as a subscription if you want to be told the moment a destruction does happen: drop `limit`, `orderBy` and the time filter and change `query` to `subscription`.
 
-Calculate total ETH destroyed or received from self-destructs using aggregation functions:
-Try the API [here](https://ide.bitquery.io/Aggregate-Self-Destruct-Statistics-base).
+## What people are usually looking for on Base
+
+- **Short-lived helper contracts.** On BNB Chain and Ethereum, MEV bots destroy their helpers; on Base they simply leave them. Find them with the `Calls` cube: filter `Call.Opcode.Name` on `CREATE` or `CREATE2` and group by `Transaction.From` to see who deploys contracts in bulk, then query the [transaction balance tracker](/docs/blockchain/Base/transaction-balance-tracker/base-transaction-balance-tracker) for the balances those contracts hold.
+- **A contract being emptied.** Filter `TransactionBalances` on the contract as `TokenBalance.Address` with `Currency: { Native: true }`; a code 0 row whose `PostBalance` is zero is the sweep.
+- **Fees and sequencer income.** Reason code 5 rows on the fee vaults, covered on the [Base gas balance tracker](/docs/blockchain/Base/transaction-balance-tracker/base-gas-balance-tracker).
+
+## The self-destruct queries, ready for other chains
+
+Both blocks below run unchanged on `bsc` and `eth`, where the codes do fire. Code 13 rows are the contracts that emptied, code 12 rows the recipients. Saved stream [here](https://ide.bitquery.io/All-Self-Destruct-Event-Balances-Stream-base).
 
 ```graphql
-{
-  EVM(dataset: realtime, network: base) {
+subscription {
+  EVM(network: bsc) {
     TransactionBalances(
       where: { TokenBalance: { BalanceChangeReasonCode: { in: [12, 13] } } }
     ) {
-      TokenBalance {
-        Currency {
-          Symbol
-          SmartContract
-        }
-      }
-      totalDestroyed: sum(of: TokenBalance_PostBalance)
-      destructCount: count
-    }
-  }
-}
-```
-
-## Self-Destruct Usecase Examples
-
-### 1. MEV Builder Payment (Ephemeral Executor)
-
-A common pattern in the MEV ecosystem involves **ephemeral contracts** that are created to pay MEV builders/block builders, then immediately self-destruct. This pattern is part of the **Proposer-Builder Separation (PBS)** infrastructure.
-
-Contrack Flow: Deploy → Transfer to MEV builder → Self-destruct
-
-**What's happening:**
-
-1. A searcher/bundler deploys a temporary helper contract
-2. The contract holds the exact ETH amount owed as a fee/bribe to the MEV builder
-3. The contract transfers ETH to the builder
-4. The contract immediately self-destructs, cleaning up and leaving minimal trace
-
-**Why this pattern:**
-
-- **Ephemeral by design** - avoids leaving identifiable payment trails per bundle
-- **Safety** - one-use contract prevents reuse or exploitation
-- **Gas efficiency** - minimal runtime deployment is cheaper than maintaining reusable state
-- **Privacy** - prevents tracking of bundle logic across blocks
-
-**API Subscription: Track payments to known MEV builders:**
-Try the API [here](https://ide.bitquery.io/Track-payments-to-known-MEV-builders-base).
-
-```graphql
-subscription {
-  EVM(network: base) {
-    TransactionBalances(
-      where: {
-        TokenBalance: {
-          BalanceChangeReasonCode: { eq: 12 }
-          Address: {
-            in: [
-              "YourMevAddress1"
-              # Add other known MEV builder addresses
-            ]
-          }
-        }
-      }
-    ) {
       Block {
         Time
         Number
       }
       TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
         Address
         BalanceChangeReasonCode
+        PreBalance
+        PostBalance
         PostBalanceInUSD
       }
       Transaction {
@@ -337,97 +107,20 @@ subscription {
 }
 ```
 
-### 3. Ephemeral MEV/Arbitrage Contracts
+The [BSC self-destruct balance tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-self-destruct-balance-api) walks through the full set on a chain where the pattern is live.
 
-Many MEV bots and arbitrage executors create contracts that are destroyed within the same transaction. These short-lived contracts are used for:
+<FAQ
+  items={[
+    { q: "Does Base have self-destruct balance data?", a: "The codes exist in the schema but return no rows on Base, and the Calls cube shows no SELFDESTRUCT opcode in live data. Native balance movements on Base are reported as reason code 0, fees as code 5." },
+    { q: "Why did selfdestruct stop showing up?", a: "Under the Cancun rules the OP Stack adopted, SELFDESTRUCT only deletes a contract created in the same transaction and otherwise just transfers the balance. Contracts on Base do not use it in practice." },
+    { q: "How do I check whether a contract on Base was destroyed?", a: "Query Calls with Call.Opcode.Name SELFDESTRUCT and the contract as Call.From. No row means no destruction; a contract that still answers calls was never destroyed." },
+    { q: "Where do the self-destruct examples work?", a: "On BNB Chain and Ethereum. Run the queries on this page with network bsc or eth and reason codes 12 and 13 return rows within the realtime window." },
+  ]}
+/>
 
-- Atomic multi-swap execution
-- Flash loan arbitrage
-- Obfuscation of execution patterns
-- Cleanup of bytecode footprint
+## Related pages
 
-**API Query: Track recent ephemeral contract patterns:**
-Try the API [here](https://ide.bitquery.io/Track-recent-ephemeral-contract-patterns-base).
-
-```graphql
-{
-  EVM(dataset: realtime, network: base) {
-    TransactionBalances(
-      where: { TokenBalance: { BalanceChangeReasonCode: { eq: 13 } } }
-      limit: { count: 100 }
-      orderBy: { descendingByField: "Block_Time" }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-        From
-        To
-      }
-    }
-  }
-}
-```
-
-## API Use Cases
-
-### Security Monitoring - Track Malicious Self-Destructs
-
-Track self-destruct events to identify potential security incidents or malicious contract destruction:
-Try the API [here](https://ide.bitquery.io/Track-Malicious-Self-Destructs-base).
-
-```graphql
-subscription {
-  EVM(network: base) {
-    TransactionBalances(
-      where: {
-        TokenBalance: {
-          BalanceChangeReasonCode: { eq: 13 }
-          PostBalanceInUSD: { gt: "10000" }
-        }
-      }
-    ) {
-      Block {
-        Time
-        Number
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-        From
-      }
-    }
-  }
-}
-```
-
-## Notes
-
-- **Balance Change Reason Codes 12, 13, and 14** are only available for native currency (ETH) transactions, not for fungible tokens or NFTs
-- Code 12 indicates funds **received** from a self-destructed contract
-- Code 13 indicates funds **destroyed** from a self-destructing contract
-- Code 14 indicates ETH sent to an already self-destructed account within the same transaction
-- Self-destructed contracts cannot be recovered or interacted with after destruction
-- The `PreBalance` field shows the balance before the self-destruct, and `PostBalance` shows the balance after (typically 0 for the destroyed contract)
-
+- [Base transaction balance tracker](/docs/blockchain/Base/transaction-balance-tracker/base-transaction-balance-tracker)
+- [Base gas balance tracker](/docs/blockchain/Base/transaction-balance-tracker/base-gas-balance-tracker)
+- [BSC self-destruct balance tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-self-destruct-balance-api)
+- [Balance change reason codes](/docs/blockchain/Base/transaction-balance-tracker/#balance-change-reason-codes)
