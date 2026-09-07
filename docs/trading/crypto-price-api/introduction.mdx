@@ -1,6 +1,8 @@
 ---
-title: "Crypto Price API – Real-Time Token Data, Charts & OHLC"
-description: "Crypto Price API – Real-Time Token Data, Charts & OHLC via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
+title: "Crypto Price API: Real-Time Token Prices, OHLC and Market Cap"
+slug: /trading/crypto-price-api
+sidebar_label: "Crypto Price API"
+description: "Crypto price API for any token on nine chains: live and 30-day USD prices, OHLC from one second, market cap and supply via GraphQL, WebSocket and Kafka."
 keywords:
   - "crypto price API"
   - "cryptocurrency price api"
@@ -31,7 +33,9 @@ keywords:
 import FAQ from "@site/src/components/FAQ";
 import ProductCTA from "@site/src/components/ProductCTA";
 
-# Crypto Price API – Real-Time Token Data, Charts & OHLC
+# Crypto Price API: Real-Time Token Prices, OHLC and Market Cap
+
+The Bitquery Crypto Price API returns the price of any token that trades on-chain, not only listed coins: real-time and the last 30 days for Solana, Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Tron and Robinhood Chain, in USD or against any quote token. Every row carries OHLC for intervals from one second up, mean and moving-average prices, volume, market cap and supply, over GraphQL queries, WebSocket subscriptions and Kafka. Prices are built from DEX trades with outlier filtering, and a cross-chain view aggregates the same asset across networks, so `bid:bitcoin` returns one Bitcoin price. Every query below runs as written in the [Bitquery IDE](https://ide.bitquery.io) on a free account; the trial includes complete history. For older candles, use [DEXTradeByTokens](/docs/cubes/dextradesbyTokens) or the [Solana historical page](/docs/blockchain/Solana/historical-aggregate-data/).
 
 :::tip Real-time + last ~30 days only
 The Crypto Price API cubes (`Trading.Tokens`, `Trading.Currencies`, `Trading.Pairs`) are part of the **Trading cube** family — built for **real-time and the last ~30 days**. For OHLC built from raw trades **older than ~30 days**, use chain-level [`DEXTradeByTokens`](/docs/cubes/dextradesbyTokens) instead. See the [**Trading Data Overview**](/docs/trading/trading-data-overview) for the side-by-side comparison.
@@ -617,6 +621,11 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 <FAQ
   items={[
+    { q: "Is there a free crypto price API?", a: "Yes. A free Bitquery account runs every query on this page in the IDE, and the seven-day trial includes 1,000 API points, 100 MCP credits and two simultaneous streams for use outside it. Plans after that are on the pricing page." },
+    { q: "Does the API return Bitcoin and other coin prices, or only tokens?", a: "Both. The Currencies cube aggregates an asset across chains, so Currency.Id bid:bitcoin returns one BTC price in USD; the Tokens and Pairs cubes return per-chain token and pair prices, including tokens no aggregator lists." },
+    { q: "How far back does the Crypto Price API go?", a: "The Trading cubes hold real-time data and about the last 30 days. For older OHLC, use DEXTradeByTokens on the archive dataset or cloud datasets; the Solana historical data page walks through it." },
+    { q: "Can I get market cap and fully diluted valuation with the price?", a: "Yes. The Tokens cube returns MarketCap, FullyDilutedValuationUsd and CirculatingSupply alongside every price row, and the market cap API page shows the queries." },
+    { q: "Which quote currencies are supported?", a: "USD by default, plus any on-chain quote token through the Pairs cube, which returns the price of a token against the token it trades with, such as USDC, WETH or SOL." },
     {
       q: "How do I get real-time crypto prices and OHLC candles?",
       a: "Use Trading.Tokens, Trading.Pairs, or Trading.Currencies for aggregated USD prices and OHLC over the last ~30 days. For older history, build candles from DEXTradeByTokens on the chain you need.",

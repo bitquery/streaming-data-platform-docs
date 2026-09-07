@@ -72,7 +72,7 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 
 - Building **crypto trading web applications**
 - Need **[advanced filtering capabilities](/docs/graphql/filters/)** with complex conditions and **real-time USD prices**
-- Require **[cryptocurrency price calculations](/docs/trading/crypto-price-api/introduction/)** and **DeFi token metrics**
+- Require **[cryptocurrency price calculations](/docs/trading/crypto-price-api/)** and **DeFi token metrics**
 - Want fastest development and prototyping experience for **blockchain applications**
 - Building **crypto dashboards**, **DeFi monitoring tools**, or **blockchain analytics platforms**
 - Need unified interface for both **historical blockchain data** and **real-time streams**

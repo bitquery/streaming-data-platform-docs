@@ -10,7 +10,7 @@ Bitquery's Stablecoin API provides comprehensive real-time data including transf
 
 Track minute price changes, fetch blended average prices, and identify arbitrage opportunities across different platforms with precision and ease.
 
-This is built on the extensive [Crypto Price APIs](/docs/trading/crypto-price-api/introduction/)
+This is built on the extensive [Crypto Price APIs](/docs/trading/crypto-price-api/)
 
 Need help implementing stablecoin price APIs? Contact our support team or join our community discussion on [@Bloxy_info](https://t.me/bloxy_info).
 

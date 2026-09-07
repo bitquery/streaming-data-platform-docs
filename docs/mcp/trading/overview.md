@@ -14,7 +14,7 @@ keywords:
 ---
 # Trading Data on the Bitquery MCP
 
-The [Bitquery MCP server](/docs/mcp/mcp-server/) plugs your AI agent directly into Bitquery's **trading dataset** — the same data that powers the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api/), [Crypto Price API](/docs/trading/crypto-price-api/introduction/), [TradingView feeds](/docs/usecases/tradingview-subscription-realtime/getting-started/), and our GraphQL endpoints.
+The [Bitquery MCP server](/docs/mcp/mcp-server/) plugs your AI agent directly into Bitquery's **trading dataset** — the same data that powers the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api/), [Crypto Price API](/docs/trading/crypto-price-api/), [TradingView feeds](/docs/usecases/tradingview-subscription-realtime/getting-started/), and our GraphQL endpoints.
 
 Ask in plain English, get clean rows back. No SQL required.
 

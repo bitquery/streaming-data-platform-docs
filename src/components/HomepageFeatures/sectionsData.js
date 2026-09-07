@@ -70,7 +70,7 @@ export const dataTypes = [
   {
     label: "Token prices & OHLCV",
     hint: "Real-time & historical candles, price index methodology.",
-    to: "/docs/trading/crypto-price-api/introduction/",
+    to: "/docs/trading/crypto-price-api/",
     icon: "chart",
   },
   {
@@ -211,7 +211,7 @@ export const personas = [
   {
     title: "Traders & desks",
     body: "Low-latency prices, OHLC, DEX flow, Pump.fun and the Solana tape.",
-    to: "/docs/trading/crypto-price-api/introduction/",
+    to: "/docs/trading/crypto-price-api/",
   },
   {
     title: "Analysts & quants",

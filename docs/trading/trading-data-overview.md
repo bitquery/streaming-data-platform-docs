@@ -111,9 +111,9 @@ error. Polygon is `"Matic"` and BSC is `"Binance Smart Chain"` — `"Polygon"` m
 - **USD pricing, market cap, and supply** ready on every row (no separate price lookups).
 - **Pre-aggregated OHLC** at 1-second or longer intervals (Tokens / Currencies / Pairs).
 - A **clean, MEV-filtered** feed safe to render in a trading UI or feed to a bot.
-- Sub-second latency over GraphQL subscriptions or the [`trading.prices`](/docs/trading/crypto-price-api/introduction#kafka-topic-for-crypto-price-stream-tradingprices) Kafka topic.
+- Sub-second latency over GraphQL subscriptions or the [`trading.prices`](/docs/trading/crypto-price-api/#kafka-topic-for-crypto-price-stream-tradingprices) Kafka topic.
 
-Learn more: [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api) · [Crypto Price API](/docs/trading/crypto-price-api/introduction) · [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm).
+Learn more: [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api) · [Crypto Price API](/docs/trading/crypto-price-api/) · [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm).
 
 ---
 
@@ -175,7 +175,7 @@ A common pattern is to use the **Trading cube** for the live + 30-day-window tab
 
 ## Next steps
 
-- **Trading cube docs:** [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api) · [Crypto Price API](/docs/trading/crypto-price-api/introduction) · [Tokens cube](/docs/trading/crypto-price-api/tokens) · [Currencies cube](/docs/trading/crypto-price-api/currency) · [Pairs cube](/docs/trading/crypto-price-api/pairs)
+- **Trading cube docs:** [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api) · [Crypto Price API](/docs/trading/crypto-price-api/) · [Tokens cube](/docs/trading/crypto-price-api/tokens) · [Currencies cube](/docs/trading/crypto-price-api/currency) · [Pairs cube](/docs/trading/crypto-price-api/pairs)
 - **Chain-level trade docs:** [DEX Trades (EVM)](/docs/schema/evm/dextrades) · [DEXTradeByTokens cube](/docs/cubes/dextradesbyTokens) · [Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)
 - **Price Index internals:** [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm) · [Supply fields reference](/docs/trading/crypto-price-api/supply-fields)
 - **API delivery comparison:** [GraphQL Query vs Subscription vs Kafka](/docs/api-comparison)

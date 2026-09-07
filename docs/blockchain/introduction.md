@@ -57,11 +57,11 @@ Our comprehensive V1 API supporting 40+ blockchains with historical data:
 
 ## Bitquery's Core Blockchain Data Capabilities
 
-**Popular APIs:** [Solana API](/docs/blockchain/Solana/) (DEX trades, Pump.fun, Raydium) · [Polymarket API](/docs/examples/polymarket-api/polymarket-api) · [BSC API](/docs/blockchain/BSC/) · [Base API](/docs/blockchain/Base/) · [DEX API](/docs/blockchain/Ethereum/dextrades/dex-api) · [Crypto Price API](/docs/trading/crypto-price-api/introduction/)
+**Popular APIs:** [Solana API](/docs/blockchain/Solana/) (DEX trades, Pump.fun, Raydium) · [Polymarket API](/docs/examples/polymarket-api/polymarket-api) · [BSC API](/docs/blockchain/BSC/) · [Base API](/docs/blockchain/Base/) · [DEX API](/docs/blockchain/Ethereum/dextrades/dex-api) · [Crypto Price API](/docs/trading/crypto-price-api/)
 
 ### **Crypto Price API - Real-Time Multi-Chain Price Data**
 
-Bitquery's dedicated **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** provides real-time, aggregated cryptocurrency price data with ultra-low latency across multiple blockchains. This specialized API is designed specifically for trading applications, DeFi protocols, and financial analytics.
+Bitquery's dedicated **[Crypto Price API](/docs/trading/crypto-price-api/)** provides real-time, aggregated cryptocurrency price data with ultra-low latency across multiple blockchains. This specialized API is designed specifically for trading applications, DeFi protocols, and financial analytics.
 
 **Key Features:**
 - **Real-time Streaming**: 1-second granularity via GraphQL subscriptions and Kafka streams
@@ -467,7 +467,7 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 - **Cross-chain Bridges**: Track asset movements between chains
 
 ### **Trading & Analytics**
-- **Trading Bots**: Real-time price feeds with 1-second aggregation and market data via [Crypto Price API](/docs/trading/crypto-price-api/introduction/)
+- **Trading Bots**: Real-time price feeds with 1-second aggregation and market data via [Crypto Price API](/docs/trading/crypto-price-api/)
 - **Portfolio Trackers**: Multi-chain wallet monitoring
 - **Market Analytics**: Volume, liquidity, and price analysis
 - **Arbitrage Detection**: Cross-chain and cross-DEX opportunities

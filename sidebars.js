@@ -960,15 +960,10 @@ const sidebars = {
           type: "category",
           label: "Crypto Price APIs",
           link: {
-            type: "generated-index",
-            slug: "/trading/crypto-price-api",
-            title: "Crypto Price API",
-            description:
-              "Real-time and historical crypto price APIs: token and pair prices, OHLC candles, market cap and supply across 40+ chains via GraphQL and streams.",
+            type: "doc",
+            id: "trading/crypto-price-api/introduction",
           },
           items: [
-            "trading/crypto-price-api/introduction",
-
             {
               type: "category",
               label: "Price Index Cubes",

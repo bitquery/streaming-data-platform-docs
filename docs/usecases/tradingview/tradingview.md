@@ -5,7 +5,7 @@ slug: /usecases/tradingview/tradingview
 ---
 # Tutorial to build TradingView chart with real-time blockchain data (Streaming API version)
 
-We will be building the demo in React using the [lightweight-charts library](https://tradingview.github.io/lightweight-charts/). The chart is powered by the [Crypto Price API](/docs/trading/crypto-price-api/introduction/) (`Trading.Tokens`), which serves pre-aggregated, MEV-filtered OHLC with USD prices for the last ~30 days.
+We will be building the demo in React using the [lightweight-charts library](https://tradingview.github.io/lightweight-charts/). The chart is powered by the [Crypto Price API](/docs/trading/crypto-price-api/) (`Trading.Tokens`), which serves pre-aggregated, MEV-filtered OHLC with USD prices for the last ~30 days.
 
 > Building with the full **TradingView Advanced Charting library** instead? See the [advanced tutorial series](/docs/usecases/tradingview-subscription-realtime/getting-started).
 
@@ -107,7 +107,7 @@ chart.current = createChart(chartContainerRef.current, {
 **Step 5: Fetch Data from the Streaming API**
 Create an `async` function named `fetchData` to fetch data from the Streaming API. You should use the `fetch` method to send a POST request to the API and retrieve the data.
 
-The query below gets 200 hourly candles of WETH/USD OHLC from the [Crypto Price API](/docs/trading/crypto-price-api/introduction/) (`Trading.Tokens`) — **pre-aggregated OHLC with USD prices and volume built in**, MEV/outlier-filtered, so no in-query aggregation or price derivation is needed. Change `Duration` for other intervals (1, 60, 300, 900, 3600 seconds, etc.), and swap the token address/network for any other token. For candles older than the Trading API's ~30-day window, drop to [`DEXTradeByTokens` aggregation](/docs/usecases/ohlcv-complete-guide/).
+The query below gets 200 hourly candles of WETH/USD OHLC from the [Crypto Price API](/docs/trading/crypto-price-api/) (`Trading.Tokens`) — **pre-aggregated OHLC with USD prices and volume built in**, MEV/outlier-filtered, so no in-query aggregation or price derivation is needed. Change `Duration` for other intervals (1, 60, 300, 900, 3600 seconds, etc.), and swap the token address/network for any other token. For candles older than the Trading API's ~30-day window, drop to [`DEXTradeByTokens` aggregation](/docs/usecases/ohlcv-complete-guide/).
 
 ```javascript
 const fetchData = async () => {

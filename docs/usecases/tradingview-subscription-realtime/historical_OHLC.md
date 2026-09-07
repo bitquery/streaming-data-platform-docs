@@ -21,7 +21,7 @@ import { connectBarContinuity } from "./barContinuity";
 
 ### API Endpoint and Query
 
-We are using the [Tokens Cube from the Crypto Price API](/docs/trading/crypto-price-api/introduction/) which gives you price of a token on different chains in **USD**. You can use Pairs Cube as well to get price against specific currency.
+We are using the [Tokens Cube from the Crypto Price API](/docs/trading/crypto-price-api/) which gives you price of a token on different chains in **USD**. You can use Pairs Cube as well to get price against specific currency.
 
 :::tip Charting one specific token? Prefer Pairs + rank 1
 The `Tokens` candle blends every pool where the token is base, so thin pools contribute to the bar. For a chart of **one** token, query [`Pairs` with `Ranking: { Position: { eq: 1 } }`](/docs/trading/crypto-price-api/pairs#most-accurate-token-price) instead — same `Price.Ohlc` fields, but taken from the token's top market. Keep the `Market.Address` from each row if you want to show which venue the candle came from.

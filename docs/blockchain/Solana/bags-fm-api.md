@@ -683,6 +683,6 @@ The **Bags FM token trades** endpoints aggregate data from multiple Solana DEXs:
 ## Conclusion
 
 The **Bags FM API (via Bitquery)** delivers **complete blockchain data access** for Bags FM tokens.  
-From **token creation** and **supply updates** to **real-time USD prices** through [crypto price API](/docs/trading/crypto-price-api/introduction/), **DEX trades**, and **transfers**, it provides everything you need to build apps, dashboards, and trading systems.
+From **token creation** and **supply updates** to **real-time USD prices** through [crypto price API](/docs/trading/crypto-price-api/), **DEX trades**, and **transfers**, it provides everything you need to build apps, dashboards, and trading systems.
 
 The **Bitquery Bags FM API** is your comprehensive solution for accessing **Bags FM token data**, **Bags FM token transfers**, **Bags FM token trades**, and **real-time Bags FM price API** streams on the Solana blockchain.

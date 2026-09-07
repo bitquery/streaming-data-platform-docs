@@ -6,7 +6,7 @@ description: "Learn Bitquery Kafka stream concepts: topics, offsets, SASL auth, 
 
 # Bitquery Kafka Streams - Understanding Concepts
 
-Bitquery provides realtime data via Kafka as well in addition to GraphQL subscriptions. In this section, we'll see how Kafka-based streaming works and how to integrate it into your application using practical code examples. For price data streams, check out our [Crypto Price API](/docs/trading/crypto-price-api/introduction/) Kafka topic.
+Bitquery provides realtime data via Kafka as well in addition to GraphQL subscriptions. In this section, we'll see how Kafka-based streaming works and how to integrate it into your application using practical code examples. For price data streams, check out our [Crypto Price API](/docs/trading/crypto-price-api/) Kafka topic.
 
 ## How to Get Access to these Streams?
 
@@ -170,7 +170,7 @@ All topics deliver data in **protobuf** format. JSON samples for inspection: [ka
 
 The **`trading`** namespace defines two Kafka topics. **Both use the same credentials** as your subscription:
 
-- **`trading.prices`** — Multi-chain [Price Index Streams](/docs/trading/crypto-price-api/introduction/). See the [Crypto Price API](/docs/trading/crypto-price-api/introduction) for usage.
+- **`trading.prices`** — Multi-chain [Price Index Streams](/docs/trading/crypto-price-api/). See the [Crypto Price API](/docs/trading/crypto-price-api/) for usage.
 - **`trading.trades`** — Real-time DEX trades aligned with the [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api). Message structure is defined in [`market/trades.proto`](https://github.com/bitquery/streaming_protobuf/blob/main/market/trades.proto) in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf).
 
 ### EVM chains

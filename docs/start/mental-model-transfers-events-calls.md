@@ -12,7 +12,7 @@ Understanding when to use **Transfers**, **Events**, **Calls**, or **DexTrades**
 
 Before writing a query, ask yourself:
 
-1. **Do I need DEX swap/trade data or aggregated price/OHLC data?** → For **real-time + the last ~30 days**, use the curated **`Trading`** cube — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) for swap-level rows or [`Trading.Tokens` / `Pairs` / `Currencies`](/docs/trading/crypto-price-api/introduction) for pre-aggregated OHLC. For **historical** data older than ~30 days, use chain-level **`DexTrades`** / **`DexTradesByTokens`**. See the [**Trading Data Overview**](/docs/trading/trading-data-overview) for the full decision matrix.
+1. **Do I need DEX swap/trade data or aggregated price/OHLC data?** → For **real-time + the last ~30 days**, use the curated **`Trading`** cube — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) for swap-level rows or [`Trading.Tokens` / `Pairs` / `Currencies`](/docs/trading/crypto-price-api/) for pre-aggregated OHLC. For **historical** data older than ~30 days, use chain-level **`DexTrades`** / **`DexTradesByTokens`**. See the [**Trading Data Overview**](/docs/trading/trading-data-overview) for the full decision matrix.
 2. **Do I need token movements?** → Consider `Transfers` or `Calls`
 3. **Do I need smart contract state changes?** → Consider `Events`
 4. **Do I need function execution details?** → Consider `Calls`
@@ -181,7 +181,7 @@ EVM {
 
 **Trading vs DexTrades:** Use **Trading** when you need **aggregated price/OHLC/volume** for charting or feeds. Use **DexTrades** when you need **individual swaps**, protocol/pool breakdown, or trade-level fields (buyer, seller, tx, block).
 
-Docs: [Crypto Price API (Trading)](/docs/trading/crypto-price-api/introduction), [Tokens / Currencies / Pairs](/docs/trading/crypto-price-api/tokens), [OHLC & candles](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api).
+Docs: [Crypto Price API (Trading)](/docs/trading/crypto-price-api/), [Tokens / Currencies / Pairs](/docs/trading/crypto-price-api/tokens), [OHLC & candles](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api).
 
 ---
 
@@ -441,7 +441,7 @@ Bitquery exposes **on-chain** activity (transfers, trades, calls)—not centrali
 Now that you understand the mental model:
 
 **Price / OHLC / charting (all chains):**
-1. **[Crypto Price API (Trading)](/docs/trading/crypto-price-api/introduction)** - Pre-aggregated OHLC, SMA, volume; Tokens, Currencies, Pairs cubes
+1. **[Crypto Price API (Trading)](/docs/trading/crypto-price-api/)** - Pre-aggregated OHLC, SMA, volume; Tokens, Currencies, Pairs cubes
 
 **EVM (Ethereum, BSC, Base, etc.):**
 2. **[Explore Transfers API](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api)** - Learn Transfers in detail

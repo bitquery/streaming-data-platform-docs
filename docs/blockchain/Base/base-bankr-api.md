@@ -12,7 +12,7 @@ Bankr uses Doppler's `NoOpMigrator`, which means **liquidity never migrates** �
 For the broader DEX schema, see:
 
 - [Crypto Trades API ➤](/docs/trading/crypto-trades-api/trades-api)
-- [Crypto Price API ➤](/docs/trading/crypto-price-api/introduction/)
+- [Crypto Price API ➤](/docs/trading/crypto-price-api/)
 - [Base DEX Trades API ➤](/docs/blockchain/Base/base-dextrades)
 - [Uniswap V4 API ➤](/docs/blockchain/Base/uniswap-v4-api)
 - [Base Token Market Cap API ➤](/docs/blockchain/Base/base-token-marketcap-api)

@@ -23,7 +23,7 @@ Need zero-latency BSC data via Kafka? Read about our [Kafka Streams](/docs/strea
 
 You may also be interested in:
 
-- [Crypto Price API ➤](/docs/trading/crypto-price-api/introduction/)
+- [Crypto Price API ➤](/docs/trading/crypto-price-api/)
 - [BSC Pancake Swap APIs ➤](/docs/blockchain/BSC/pancake-swap-api/)
 - [BSC DEX Trades ➤](/docs/blockchain/BSC/bsc-dextrades/)
 - [PumpFun API ➤](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)
@@ -631,7 +631,7 @@ query MyQuery($currency: String) {
 
 ## Get latest price of a Meme Rush token
 
-We launched the [Price Index](/docs/trading/crypto-price-api/introduction/) in August 2025, allowing you to track price of any token trading onchain.
+We launched the [Price Index](/docs/trading/crypto-price-api/) in August 2025, allowing you to track price of any token trading onchain.
 Here's an example of [tracking Meme Rush token prices](https://ide.bitquery.io/latest-meme-rush-token-price-on-four-meme-dex#).
 
 <details>

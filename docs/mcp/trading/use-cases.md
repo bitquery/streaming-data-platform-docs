@@ -149,6 +149,6 @@ The MCP only allows reads. The agent **cannot** delete, insert, drop, or modify 
 | Conversational analysis, ad-hoc questions, agent loops | **MCP** (this server) |
 | Application backend, predictable contract, subscriptions, mempool | [**GraphQL API**](/docs/intro/) and [WebSocket subscriptions](/docs/subscriptions/websockets/) |
 | Lowest-latency, highest-throughput streaming for production bots | [**Kafka streams**](/docs/streams/kafka-streaming-concepts/) and [**gRPC streams**](/docs/grpc/solana/introduction/) |
-| Pre-built OHLC, market cap, token metadata over GraphQL | [**Crypto Price API**](/docs/trading/crypto-price-api/introduction/) |
+| Pre-built OHLC, market cap, token metadata over GraphQL | [**Crypto Price API**](/docs/trading/crypto-price-api/) |
 
 The MCP and the GraphQL API read the **same dataset**, so anything you discover via MCP is reproducible in GraphQL or your production stream.

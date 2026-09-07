@@ -6,13 +6,13 @@ description: "Crypto Coin Ticker API: get Ethereum DEX swaps, prices, and OHLC w
 ---
 # Crypto Coin Ticker API
 
-You can build your crypto coin ticker using our [DEX APIs](https://bitquery.io/products/dex) based on the requirements of the data field. For pre-aggregated price data with OHLC, consider using our [Crypto Price API](/docs/trading/crypto-price-api/introduction/).
+You can build your crypto coin ticker using our [DEX APIs](https://bitquery.io/products/dex) based on the requirements of the data field. For pre-aggregated price data with OHLC, consider using our [Crypto Price API](/docs/trading/crypto-price-api/).
 
 For **per-swap ticks**, see the **[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)**.
 
 ## Using Crypto price API
 
-For a **live ticker**, use the **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** stream.
+For a **live ticker**, use the **[Crypto Price API](/docs/trading/crypto-price-api/)** stream.
 
 [Open the 1-second price stream in the IDE](https://ide.bitquery.io/1-second-crypto-price-stream).
 

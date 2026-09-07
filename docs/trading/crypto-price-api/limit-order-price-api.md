@@ -43,7 +43,7 @@ The same token can trade at vastly different prices (e.g., $100 on Uniswap vs $9
 
 ## The Solution: Aggregated Price Streams
 
-Bitquery's [Crypto Price API for limit orders](/docs/trading/crypto-price-api/introduction/) provides **aggregated price data** with built-in dampening mechanisms, serving as a reliable limit order price API:
+Bitquery's [Crypto Price API for limit orders](/docs/trading/crypto-price-api/) provides **aggregated price data** with built-in dampening mechanisms, serving as a reliable limit order price API:
 
 **Multi-pool aggregation** across all major DEXs  
 **Cross-chain price discovery** for market-wide pricing  
@@ -305,7 +305,7 @@ subscription {
 ## Production Resources & Documentation
 
 ### **Implementation Guides**
-- **[Crypto Price API Documentation](/docs/trading/crypto-price-api/introduction/)** - Complete API reference with live examples
+- **[Crypto Price API Documentation](/docs/trading/crypto-price-api/)** - Complete API reference with live examples
 - **[DEX Trade Filtering Guide](/docs/usecases/how-to-filter-anomaly-prices/)** - How to handle raw data anomalies
 - **[OHLC Candlestick API](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/)** - Ready-to-chart data with [live Bitcoin OHLC example ➤](https://ide.bitquery.io/bitcoin-currency-price-stream)
 - **[DEXTradeByTokens API](/docs/cubes/dextradesbyTokens/)** - Raw trade data for comparison
@@ -330,13 +330,13 @@ Based on real trading platform implementations ([see live comparison ➤](https:
 - **Real-time USD pricing**: Built-in conversion eliminating additional API calls
 - **Bad trade filtering**: Automatic removal of outliers and routing anomalies
 
-[Explore all technical features ➤](/docs/trading/crypto-price-api/introduction/#key-features-of-these-apis)
+[Explore all technical features ➤](/docs/trading/crypto-price-api/#key-features-of-these-apis)
 
 Ready to implement our crypto price API for limit orders in your trading system? 
 
 **Get Started with Our Limit Order Price API:**
 - [Try live examples in our IDE ➤](https://ide.bitquery.io/?query_name=crypto-price-examples)
-- [Read the complete API documentation ➤](/docs/trading/crypto-price-api/introduction)
+- [Read the complete API documentation ➤](/docs/trading/crypto-price-api/)
 - [Download SDKs and schemas ➤](https://github.com/bitquery/streaming_protobuf/tree/main/market)
 - [Join our community ➤](https://t.me/Bloxy_info)
 

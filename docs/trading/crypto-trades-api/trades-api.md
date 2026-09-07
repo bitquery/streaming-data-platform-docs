@@ -61,7 +61,7 @@ se the same **`bid:<chain>`** convention as **`Pair.Token.Id`**.
 | Optimism | `bid:optimism` |
 | Robinhood | `bid:robinhood` |
 
-The same **`NetworkBid`** pattern applies on the **[Crypto Price API](/docs/trading/crypto-price-api/introduction/)** for **`Token.NetworkBid`** and **`Market.NetworkBid`** on **Tokens** and **Pairs**.
+The same **`NetworkBid`** pattern applies on the **[Crypto Price API](/docs/trading/crypto-price-api/)** for **`Token.NetworkBid`** and **`Market.NetworkBid`** on **Tokens** and **Pairs**.
 
 :::
 
