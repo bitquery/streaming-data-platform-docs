@@ -1,92 +1,60 @@
 ---
 sidebar_position: 1
-title: "Base Transaction Balance Tracker"
-description: "Base Transaction Balance Tracker: stream Base balance changes with reason codes using Bitquery GraphQL subscriptions. See examples in the Bitquery IDE."
+title: "Base Transaction Balance Tracker: Balances Before and After a Transaction"
+sidebar_label: "Base Transaction Balance Tracker"
+description: "Stream and query Base balance changes with Bitquery GraphQL: every address a transaction touched, one wallet's ETH and USDC, pool reserves and token supply."
+keywords:
+  - Base transaction balance tracker
+  - Base balance changes API
+  - Base wallet balance stream
+  - Base pool reserves GraphQL
+  - Base token supply API
 ---
-# Base Transaction Balance Tracker
 
-The Base Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the Base blockchain, including detailed information about the reason for each balance change.
+import FAQ from "@site/src/components/FAQ";
 
-## Subscribe to All Transaction Balances
+# Base Transaction Balance Tracker: Balances Before and After a Transaction
 
-This subscription provides real-time balance updates for all addresses involved in transactions on the Base network.
-Try the API [here](https://ide.bitquery.io/Subscribe-to-All-Transaction-Balances-base).
+The `TransactionBalances` cube records, for each transaction on Base, every address whose balance changed and the balance before and after, in ETH, ERC-20 tokens and NFTs. A wallet tracker, a fee monitor and a pool reserve feed all come from the same rows. Native rows carry a reason code; on Base that is 0 for ordinary changes and 5 for fee credits to the fee vaults, and no other code appears. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The cube covers the recent realtime window only, so queries carry a `limit` and, for wide filters, a time window.
 
-```graphql
-subscription {
-  EVM(network: base) {
-    TransactionBalances {
-      Block {
-        Time
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-          HasURI
-          SmartContract
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        TotalSupplyInUSD
-        TotalSupply
-        TokenOwnership {
-          Owns
-          Id
-        }
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
-    }
-  }
-}
-```
+## Stream one address
 
-## Subscribe to Transaction Balances for a Specific Address
-
-This subscription filters transaction balances for a specific address. Try the API [here](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address-base).
+Base produces too many balance rows for an unfiltered stream to be practical, so subscribe with a filter: an address, as here, or a reason code, as on the [gas balance tracker](/docs/blockchain/Base/transaction-balance-tracker/base-gas-balance-tracker). The example is the Uniswap v4 PoolManager, whose token balances change on every swap, so rows arrive within seconds; a wallet streams only when it transacts. Saved stream [here](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address-base).
 
 ```graphql
 subscription {
   EVM(network: base) {
     TransactionBalances(
-      where: { TokenBalance: { Address: { is: "0xYourAddressHere" } } }
+      where: { TokenBalance: { Address: { is: "0x498581ff718922c3f8e6a244956af099b2652b2b" } } }
     ) {
       Block {
+        Number
         Time
       }
       TokenBalance {
-        Currency {
-          Symbol
-          HasURI
-          SmartContract
-        }
+        BalanceChangeReasonCode
         PreBalance
         PostBalance
-        Address
-        BalanceChangeReasonCode
-        TotalSupplyInUSD
-        TotalSupply
-        TokenOwnership {
-          Owns
-          Id
-        }
         PostBalanceInUSD
+        Currency {
+          Symbol
+          SmartContract
+          Native
+        }
       }
       Transaction {
         Hash
+        From
+        To
       }
     }
   }
 }
 ```
 
-## Latest native balance of an address
+## Latest ETH balance of an address
 
-This API gives you latest balance of a specific address (here in example `0x238a358808379702088667322f80ac48bad5e6c4`) for the native currency. Try it out [here](https://ide.bitquery.io/Latest-native-balance-of-an-address-base).
+The newest native row for the address; `PostBalance` is the balance after that transaction. Saved query [here](https://ide.bitquery.io/latest-native-balance-of-an-address-base).
 
 ```graphql
 {
@@ -105,22 +73,9 @@ This API gives you latest balance of a specific address (here in example `0x238a
         Time
       }
       TokenBalance {
-        Currency {
-          Symbol
-          HasURI
-          SmartContract
-        }
-        PreBalance
         PostBalance
-        Address
-        BalanceChangeReasonCode
-        TotalSupplyInUSD
-        TotalSupply
-        TokenOwnership {
-          Owns
-          Id
-        }
         PostBalanceInUSD
+        BalanceChangeReasonCode
       }
       Transaction {
         Hash
@@ -130,9 +85,9 @@ This API gives you latest balance of a specific address (here in example `0x238a
 }
 ```
 
-## Latest balance of an address for a specific token
+## Latest balance of an address in one token
 
-This API gives you latest balance of a specific address (here in example `0x238a358808379702088667322f80ac48bad5e6c4`) for a specific token (here we have taken example of USDC `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`). Try it out [here](https://ide.bitquery.io/Latest-balance-of-an-address-for-a-specific-token-base).
+The same query with the token contract in place of the native flag. The example is USDC on Base, `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`. Saved query [here](https://ide.bitquery.io/latest-balance-of-an-address-for-a-specific-token-base).
 
 ```graphql
 {
@@ -144,7 +99,7 @@ This API gives you latest balance of a specific address (here in example `0x238a
         TokenBalance: {
           Address: { is: "0x238a358808379702088667322f80ac48bad5e6c4" }
           Currency: {
-            SmartContract: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" }
+            SmartContract: { is: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" }
           }
         }
       }
@@ -153,22 +108,12 @@ This API gives you latest balance of a specific address (here in example `0x238a
         Time
       }
       TokenBalance {
+        PostBalance
+        PostBalanceInUSD
         Currency {
           Symbol
-          HasURI
-          SmartContract
+          Name
         }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        TotalSupplyInUSD
-        TotalSupply
-        TokenOwnership {
-          Owns
-          Id
-        }
-        PostBalanceInUSD
       }
       Transaction {
         Hash
@@ -178,9 +123,11 @@ This API gives you latest balance of a specific address (here in example `0x238a
 }
 ```
 
-## Latest liquidity of EVM Pool
+An address that has not moved the token inside the realtime window has no row here; use the [Balances cube](/docs/cubes/balances-cube) for a balance that does not depend on recent activity.
 
-This API gives you latest liquidity of a Base Pool. Try it out [here](https://ide.bitquery.io/latest-liquidity-of-a-base-pool).
+## Latest reserves of a pool
+
+A pool is an address like any other, so its token balances are its reserves. `limitBy` on the token contract keeps the newest row per token. The example is the Uniswap v3 WETH/USDC 0.05% pool. Saved query [here](https://ide.bitquery.io/latest-liquidity-of-a-base-pool).
 
 ```graphql
 {
@@ -188,31 +135,31 @@ This API gives you latest liquidity of a Base Pool. Try it out [here](https://id
     TransactionBalances(
       limit: { count: 2 }
       limitBy: { by: TokenBalance_Currency_SmartContract, count: 1 }
-      orderBy: { descendingByField: "TokenBalance_PostBalanceInUSD" }
+      orderBy: { descending: Block_Time }
       where: {
-        TokenBalance: {
-          Address: { is: "YourPoolAddress" }
-        }
+        TokenBalance: { Address: { is: "0xd0b53D9277642d899DF5C87A3966A349A798F224" } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
       }
     ) {
+      Block {
+        Time
+      }
       TokenBalance {
         Currency {
           Symbol
-          HasURI
           SmartContract
         }
-        PostBalance(maximum: Block_Time)
-        PostBalanceInUSD(maximum: Block_Time)
-        Address
+        PostBalance
+        PostBalanceInUSD
       }
     }
   }
 }
 ```
 
-## Latest Supply and Marketcap of a specific token on EVM
+## Latest supply and market cap of a token
 
-This API gives you latest Supply and Marketcap of a token on Base. Try it out [here](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token-base).
+Token rows carry `TotalSupply` and `TotalSupplyInUSD` as of that transaction, so the newest row for a token gives its supply and on-chain market cap. The example is AERO. Saved query [here](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token-base).
 
 ```graphql
 {
@@ -222,27 +169,44 @@ This API gives you latest Supply and Marketcap of a token on Base. Try it out [h
       orderBy: { descending: Block_Time }
       where: {
         TokenBalance: {
-          Currency: {
-            SmartContract: { is: "YourTokenAddress" }
-          }
+          Currency: { SmartContract: { is: "0x940181a94A35A4569E4529A3CDfB74e38FD98631" } }
         }
       }
     ) {
       Block {
         Time
-        Number
       }
       TokenBalance {
         Currency {
           Symbol
-          HasURI
-          SmartContract
+          Name
         }
-        TotalSupplyInUSD
         TotalSupply
+        TotalSupplyInUSD
       }
     }
   }
 }
 ```
 
+## Which fields each currency type carries
+
+- **ETH:** `BalanceChangeReasonCode`, `PreBalance`, `PostBalance`, `PostBalanceInUSD`.
+- **ERC-20:** `PostBalance`, `PostBalanceInUSD`, `TotalSupply`, `TotalSupplyInUSD`; no pre-balance or reason code.
+- **NFTs:** `PostBalance` and `TokenOwnership`; no USD values.
+
+<FAQ
+  items={[
+    { q: "What is the Base transaction balance tracker?", a: "A cube that records, per transaction, every address whose balance changed with the balance before and after. It covers ETH, ERC-20 tokens and NFTs and can be queried or streamed with the same filters." },
+    { q: "Which reason codes appear on Base?", a: "Only 0 and 5. Code 0 marks ordinary changes, including the sender's gas, and code 5 marks fee credits to the sequencer, base fee and L1 fee vaults. The gas codes used on Ethereum do not appear." },
+    { q: "How do I get a wallet's current balance if it has been idle?", a: "TransactionBalances only has rows for addresses that transacted inside the realtime window. Use the Balances cube for a balance that does not depend on recent activity." },
+    { q: "Can I read pool reserves from this cube?", a: "Yes. Filter on the pool address and use limitBy on the token contract to get the newest balance per token; those are the pool's reserves after its latest transaction." },
+  ]}
+/>
+
+## Related pages
+
+- [Base transaction balance tracker overview](/docs/blockchain/Base/transaction-balance-tracker/)
+- [Base gas balance tracker](/docs/blockchain/Base/transaction-balance-tracker/base-gas-balance-tracker)
+- [Base transfers API](/docs/blockchain/Base/base-transfers)
+- [Balances and Holders cubes](/docs/cubes/balances-cube)
