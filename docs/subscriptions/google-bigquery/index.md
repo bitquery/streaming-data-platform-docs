@@ -1,5 +1,5 @@
 ---
-title: "Blockchain Data Pipeline to Google BigQuery with Bitquery Subscriptions"
+title: "Blockchain Data Pipeline to Google BigQuery with Bitquery"
 description: "Land live blockchain data in Google BigQuery: a Bitquery subscription feeds Pub/Sub and a subscriber writes rows to a BigQuery table. Guides and prerequisites."
 slug: /category/data-pipeline-writing-to-google-bigquery
 sidebar_label: "Data Pipeline: Writing to Google BigQuery"
@@ -13,7 +13,7 @@ keywords:
 
 import FAQ from "@site/src/components/FAQ";
 
-# Blockchain Data Pipeline to Google BigQuery with Bitquery Subscriptions
+# Blockchain Data Pipeline to Google BigQuery with Bitquery
 
 This section builds a live pipeline in three steps: a Bitquery GraphQL subscription streams rows over WebSocket, a small process publishes each row to a Google Pub/Sub topic, and a Pub/Sub subscriber writes them into a BigQuery table. Pub/Sub sits in the middle so the Bitquery side never changes when you add consumers: BigQuery today, a Cloud Function or an alerting job tomorrow. It scales on its own, delivers each message at least once, and fans out one topic to many subscribers. You need a Google Cloud project with billing enabled (the free tier is enough) and a service account allowed to use Pub/Sub and BigQuery. For bulk history rather than a live feed, [cloud datasets](/docs/cloud/) deliver Parquet straight to BigQuery without a pipeline.
 
