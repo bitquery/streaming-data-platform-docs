@@ -17,9 +17,9 @@ import FAQ from "@site/src/components/FAQ";
 
 The `DEXPoolEvents` cube under `EVM(network: bsc)` emits one row every time a pool's reserves change, whether by a swap, a deposit or a withdrawal. Each row carries the reserves of both tokens after the change, in token units and in USD, the spot price in both directions, the pool and its protocol, and the transaction that moved it. BNB Chain is PancakeSwap territory, and the cube reports its three pool types under their own names: v2 pairs as `uniswap_v2`, the name shared by every Uniswap v2 fork, v3 pools as `pancake_swap_v3`, and Infinity pools as `pancakeswap_infinity`, alongside `uniswap_v3` and `uniswap_v4` pools. The cube holds the recent realtime window only and has no archive dataset: to keep a history, record the stream. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked pool is the PancakeSwap v3 USDT/WBNB pool, `0x172fcd41e0913e95784454622d1c3724f546f849`, the busiest pool on the chain.
 
-## Reserves of one pool now
+## What the pool holds right now
 
-The newest rows for a pool. `AmountCurrencyA` and `AmountCurrencyB` are the reserves after each change, the `InUSD` twins price them, and `AtoBPrice` is how much of B one unit of A buys at the spot. Saved query [here](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_2).
+Ten rows, newest first, each a snapshot taken after one change. Read `AmountCurrencyA` and `AmountCurrencyB` for the two reserves, their `InUSD` twins for the dollar value, and `AtoBPrice` for the spot rate of A in B at that moment. Saved query [here](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_2).
 
 ```graphql
 {
@@ -69,9 +69,9 @@ The newest rows for a pool. `AmountCurrencyA` and `AmountCurrencyB` are the rese
 }
 ```
 
-## Stream one pool
+## Follow the pool as it moves
 
-The same filter as a subscription delivers a row on every reserve change; this pool changes many times a second. Saved stream [here](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_1).
+Subscribe with the same pool filter and a row arrives on every reserve change; on this pool that is many rows a second, so batch them on your side. Saved stream [here](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_1).
 
 ```graphql
 subscription {
@@ -156,9 +156,9 @@ subscription {
 }
 ```
 
-## Pools that hold a token, with their current reserves
+## Where a token sits
 
-`limitBy` on the pool address keeps the newest row per pool, so the result is the current state of every pool that had the token as `CurrencyA` and changed inside the window. Run it a second time with the token under `CurrencyB` to catch pools that list it second. The example is CAKE, `0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82`; the PancakeSwap v2 CAKE/WBNB pair leads. Sort the rows by the USD reserve in your code to rank them. Saved query [here](https://ide.bitquery.io/Realtime-Liquidity-Stream_2).
+To see every pool that holds CAKE, `0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82`, keep the newest row per pool with `limitBy` and ask for pools that list CAKE as `CurrencyA` inside the window; a second run with CAKE under `CurrencyB` catches the pools that list it second. The PancakeSwap v2 CAKE/WBNB pair comes out on top by a wide margin. Rank the rows by the USD reserve in your code. Saved query [here](https://ide.bitquery.io/Realtime-Liquidity-Stream_2).
 
 ```graphql
 {
@@ -203,27 +203,24 @@ subscription {
 }
 ```
 
-## Fields on every row
+## How to read a row
 
-| Field | Meaning |
-|---|---|
-| `PoolEvent.Liquidity.AmountCurrencyA`, `AmountCurrencyB` | Reserves of each token after the change, in token units |
-| `AmountCurrencyAInUSD`, `AmountCurrencyBInUSD` | The same reserves priced in USD |
-| `PoolEvent.AtoBPrice`, `BtoAPrice` | Spot price in each direction after the change |
-| `PoolEvent.Pool.SmartContract`, `PoolId` | Pool contract; for Infinity and Uniswap v4 the manager plus the pool id |
-| `PoolEvent.Dex.ProtocolName` | `uniswap_v2` (v2 pairs of any fork, PancakeSwap v2 included), `pancake_swap_v3`, `pancakeswap_infinity`, `uniswap_v3`, `uniswap_v4` |
-| `Transaction.Hash` | The transaction that changed the reserves |
+- Reserves after the change: `Liquidity.AmountCurrencyA` and `AmountCurrencyB` in token units, `AmountCurrencyAInUSD` and `AmountCurrencyBInUSD` in dollars.
+- Spot rate after the change: `AtoBPrice` and `BtoAPrice`.
+- Which pool: `Pool.SmartContract` for v2 and v3 pools; for Infinity and Uniswap v4 the manager address plus `Pool.PoolId`.
+- Which protocol: `Dex.ProtocolName`, one of `uniswap_v2` (every v2 fork, PancakeSwap v2 included), `pancake_swap_v3`, `pancakeswap_infinity`, `uniswap_v3` or `uniswap_v4`.
+- Which transaction: `Transaction.Hash`.
 
-## The same data over Kafka
+## Kafka instead of WebSocket
 
-The `bsc.dexpools.proto` topic carries the same rows as protobuf messages with lower latency and no WebSocket to keep alive. Kafka needs its own credentials, separate from the IDE token; see the [Kafka streams hub](/docs/category/kafka-streams).
+The `bsc.dexpools.proto` topic delivers these rows as protobuf messages, which is the better fit for BNB Chain's volume: no socket to keep alive and consumers can be scaled out. Kafka credentials are separate from the IDE token; the [Kafka streams hub](/docs/category/kafka-streams) explains how to get them.
 
 <FAQ
   items={[
-    { q: "How do I get the reserves of a PancakeSwap pool?", a: "Query DEXPoolEvents under EVM(network: bsc) with the pool contract in PoolEvent.Pool.SmartContract, ordered by Block_Time descending. The newest row holds both reserves in token units and USD plus the spot price." },
+    { q: "How do I get the reserves of a PancakeSwap pool?", a: "Put the pool contract in PoolEvent.Pool.SmartContract on DEXPoolEvents for network bsc and take the newest row by Block_Time. It carries both reserves in token units and USD and the spot rate after the last change." },
     { q: "Why do PancakeSwap v2 pairs show ProtocolName uniswap_v2?", a: "The cube names v2-style pairs after the protocol they fork, so every Uniswap v2 fork on BNB Chain, PancakeSwap v2 included, reports as uniswap_v2. PancakeSwap v3 and Infinity pools carry their own names." },
     { q: "How do I tell PancakeSwap Infinity pools apart?", a: "Infinity pools share one manager contract in Pool.SmartContract, so filter and group on Pool.PoolId. The same applies to Uniswap v4 pools on BNB Chain." },
-    { q: "How far back does liquidity data go on BNB Chain?", a: "DEXPoolEvents keeps the recent realtime window only and has no archive dataset. Record the subscription or the Kafka topic to build a history." },
+    { q: "Is there historical liquidity data for BNB Chain pools?", a: "Not in this cube: DEXPoolEvents keeps the recent realtime window only. Write the stream or the Kafka topic to your own store if you need reserves over time." },
     { q: "Can I get pool reserves from the balance cube instead?", a: "Yes, for any pool contract: TransactionBalances rows on the pool address give its token balances. DEXPoolEvents adds spot prices, USD values and protocol names in one row." },
   ]}
 />
