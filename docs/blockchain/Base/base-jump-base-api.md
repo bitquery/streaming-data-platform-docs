@@ -1,6 +1,7 @@
 ---
 sidebar_position: 7
 title: "Base Jump API: Trace a Launchpad Token on Base from Mint to First Trades"
+sidebar_label: "Base Jump API"
 description: "Base Jump is no longer active on-chain. Its token is a worked example of tracing any Base launchpad with Bitquery GraphQL: the contract, launch trades, methods."
 keywords:
   - Base Jump API
